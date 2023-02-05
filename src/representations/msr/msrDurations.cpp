@@ -19,6 +19,8 @@
 
 #include "msrDurations.h"
 
+#include "oahEarlyOptions.h"
+
 #include "msrWae.h"
 
 
@@ -76,17 +78,17 @@ msrDurationKind msrDurationKindFromMusicXMLString (
     result = msrDurationKind::kDuration1024th;
   }
   else {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "MusicXML durationString \"" << durationString <<
       "\" is unknown";
 
     msrError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 
   return result;
@@ -188,17 +190,17 @@ msrDurationKind msrDurationKindFromString (
     result = msrDurationKind::kDuration1024th;
   }
   else {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "MSR durationString \"" << durationString <<
       "\" is unknown";
 
     msrError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 
   return result;
@@ -215,12 +217,18 @@ EXP Rational rationalFromDurationKindAndDotsNumber (
         durationKind);
 
 #ifdef MF_TRACING_IS_ENABLED
-  if (false) { // JMI
-    gLogStream <<
+  if (false) { // JMI v0.9.67
+		std::stringstream ss;
+
+    ss <<
       "=== rationalFromDurationKindAndDotsNumber()" <<
       ", (int) durationKind: " << (int) durationKind <<
       ", result: " << result <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -237,13 +245,19 @@ EXP Rational rationalFromDurationKindAndDotsNumber (
       increment *= Rational (1,2);
 
 #ifdef MF_TRACING_IS_ENABLED
-  if (false) { // JMI
-    gLogStream <<
+  if (false) { // JMI v0.9.67
+		std::stringstream ss;
+
+    ss <<
       "=== rationalFromDurationKindAndDotsNumber()" <<
       ", dots: " << dots <<
       ", result: " << result <<
       ", increment: " << increment <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -579,11 +593,17 @@ Rational msrDuration::dottedDurationAsWholeNotes (
   if (false) { // JMI
     print (gLogStream);
 
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "=== dottedDurationAsWholeNotes()" <<
       ", (int) fDurationKind: " << (int) fDurationKind <<
       ", result: " << result <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -600,13 +620,19 @@ Rational msrDuration::dottedDurationAsWholeNotes (
       increment *= Rational (1,2);
 
 #ifdef MF_TRACING_IS_ENABLED
-  if (false) { // JMI
-    gLogStream <<
+  if (false) { // JMI v0.9.67
+		std::stringstream ss;
+
+    ss <<
       "=== dottedDurationAsWholeNotes()" <<
       ", dots: " << dots <<
       ", result: " << result <<
       ", increment: " << increment <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -630,12 +656,18 @@ Rational msrDuration::dottedDurationAsWholeNotes_FOR_TEMPO (
         fDurationKind);
 
 #ifdef MF_TRACING_IS_ENABLED
-  if (false) {
-    gLogStream <<
+  if (false) { // JMI v0.9.67
+		std::stringstream ss;
+
+    ss <<
       "=== dottedDurationAsWholeNotes_FOR_TEMPO()" <<
       ", result: " << result <<
       "\"" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -648,13 +680,19 @@ Rational msrDuration::dottedDurationAsWholeNotes_FOR_TEMPO (
         Rational (3, 2);
 
 #ifdef MF_TRACING_IS_ENABLED
-  if (false) {
-    gLogStream <<
+  if (false) { // JMI v0.9.67
+		std::stringstream ss;
+
+    ss <<
       "=== dottedDurationAsWholeNotes_FOR_TEMPO()" <<
       ", dots: " << dots <<
       ", result: " << result <<
       "\"" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -667,16 +705,16 @@ Rational msrDuration::dottedDurationAsWholeNotes_FOR_TEMPO (
 
 std::string msrDuration::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
      msrDurationKindAsString (fDurationKind);
 
   for (int i = 1; i <= fDotsNumber; ++i) {
-    s << ".";
+    ss << ".";
   } // for
 
-  return s.str ();
+  return ss.str ();
 }
 
 void msrDuration::print (std::ostream& os) const
@@ -827,11 +865,17 @@ Rational msrDottedDuration::dottedDurationAsWholeNotes (
   if (false) { // JMI
     print (gLogStream);
 
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "=== dottedDurationAsWholeNotes()" <<
       ", (int) fDurationKind: " << (int) fDurationKind <<
       ", result: " << result <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -848,13 +892,19 @@ Rational msrDottedDuration::dottedDurationAsWholeNotes (
       increment *= Rational (1,2);
 
 #ifdef MF_TRACING_IS_ENABLED
-  if (false) { // JMI
-    gLogStream <<
+  if (false) { // JMI v0.9.67
+		std::stringstream ss;
+
+    ss <<
       "=== dottedDurationAsWholeNotes()" <<
       ", dots: " << dots <<
       ", result: " << result <<
       ", increment: " << increment <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -878,12 +928,18 @@ Rational msrDottedDuration::dottedDurationAsWholeNotes_FOR_TEMPO (
         fDurationKind);
 
 #ifdef MF_TRACING_IS_ENABLED
-  if (false) {
-    gLogStream <<
+  if (false) { // JMI v0.9.67
+		std::stringstream ss;
+
+    ss <<
       "=== dottedDurationAsWholeNotes_FOR_TEMPO()" <<
       ", result: " << result <<
       "\"" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -896,13 +952,19 @@ Rational msrDottedDuration::dottedDurationAsWholeNotes_FOR_TEMPO (
         Rational (3, 2);
 
 #ifdef MF_TRACING_IS_ENABLED
-  if (false) {
-    gLogStream <<
+  if (false) { // JMI v0.9.67
+		std::stringstream ss;
+
+    ss <<
       "=== dottedDurationAsWholeNotes_FOR_TEMPO()" <<
       ", dots: " << dots <<
       ", result: " << result <<
       "\"" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -915,16 +977,16 @@ Rational msrDottedDuration::dottedDurationAsWholeNotes_FOR_TEMPO (
 
 std::string msrDottedDuration::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
      msrDurationKindAsString (fDurationKind);
 
   for (int i = 1; i <= fDotsNumber; ++i) {
-    s << ".";
+    ss << ".";
   } // for
 
-  return s.str ();
+  return ss.str ();
 }
 
 void msrDottedDuration::print (std::ostream& os) const
@@ -955,11 +1017,17 @@ std::string wholeNotesAsMsrString (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceWholeNotesDetails ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "--> wholeNotesAsMsrString() 1 -------------------------------------" <<
       ", wholeNotes: " << wholeNotes <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -969,11 +1037,17 @@ std::string wholeNotesAsMsrString (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceWholeNotesDetails ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "--> numerator:   " << numerator <<
       std::endl <<
       "--> denominator: " << denominator <<
       std::endl << std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -984,18 +1058,18 @@ std::string wholeNotesAsMsrString (
   else if (numerator < 0) {
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "numerator is not positive in wholeNotesAsMsrString()" <<
       ", wholeNotes: " << wholeNotes;
 
  //   msrError ( JMI
     msrWarning (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
   //    __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
 
     return "???";
 #endif
@@ -1006,10 +1080,16 @@ std::string wholeNotesAsMsrString (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceWholeNotesDetails ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "--> integralNumberOfWholeNotes: " <<
       integralNumberOfWholeNotes <<
       std::endl << std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -1028,9 +1108,15 @@ std::string wholeNotesAsMsrString (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceWholeNotesDetails ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "--> numeratorDots " << ": " << numeratorDots <<
       std::endl << std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -1065,23 +1151,23 @@ std::string wholeNotesAsMsrString (
     std::string result;
 
     {
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         1 <<
         "*" <<
         numerator <<
         '/' <<
         denominator;
 
-      result = s.str ();
+      result = ss.str ();
     }
 
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceWholeNotesDetails ()) {
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         "denominator " << denominator <<
         " is no power of two between 1 and 128" <<
    //     " is no power of 2 between 1 and 1024" <<
@@ -1094,10 +1180,10 @@ std::string wholeNotesAsMsrString (
 
    //   msrError ( JMI
       msrWarning (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         inputLineNumber,
     //    __FILE__, __LINE__,
-        s.str ());
+        ss.str ());
     }
 #endif
 
@@ -1106,10 +1192,16 @@ std::string wholeNotesAsMsrString (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceWholeNotesDetails ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "--> denominatorDurationLog" << ": " <<
       denominatorDurationLog <<
       std::endl << std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -1120,10 +1212,16 @@ std::string wholeNotesAsMsrString (
     // 6/1 thus becomes 3 \breve, hence '\longa.'
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceWholeNotesDetails ()) {
-      gLogStream <<
+      std::stringstream ss;
+
+      ss <<
         "--> integralNumberOfWholeNotes,"
         " bringing the faction to be less that 2" <<
         std::endl;
+
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif
 
@@ -1150,7 +1248,9 @@ std::string wholeNotesAsMsrString (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceWholeNotesDetails ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "--> numerator: " <<
       numerator <<
       std::endl <<
@@ -1160,6 +1260,10 @@ std::string wholeNotesAsMsrString (
       "--> numeratorDots: " <<
       numeratorDots <<
       std::endl << std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -1170,9 +1274,15 @@ std::string wholeNotesAsMsrString (
     // take the dots into account
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceWholeNotesDetails ()) {
-      gLogStream <<
+      std::stringstream ss;
+
+      ss <<
         "--> taking the dots into account" <<
         std::endl;
+
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif
 
@@ -1180,7 +1290,9 @@ std::string wholeNotesAsMsrString (
 
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceWholeNotesDetails ()) {
-      gLogStream <<
+      std::stringstream ss;
+
+      ss <<
         "--> denominatorDurationLog" << ": " <<
         denominatorDurationLog <<
         std::endl <<
@@ -1194,9 +1306,15 @@ std::string wholeNotesAsMsrString (
     // set the multiplying factor
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceWholeNotesDetails ()) {
-      gLogStream <<
+      std::stringstream ss;
+
+      ss <<
         "--> setting the multiplying factor" <<
         std::endl;
+
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif
 
@@ -1210,7 +1328,9 @@ std::string wholeNotesAsMsrString (
 
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceWholeNotesDetails ()) {
-      gLogStream <<
+      std::stringstream ss;
+
+      ss <<
         "--> denominatorDurationLog" << ": " <<
         denominatorDurationLog <<
         std::endl <<
@@ -1244,7 +1364,9 @@ std::string wholeNotesAsMsrString (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceWholeNotesDetails ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "--> numerator " << ": " <<
       numerator <<
       std::endl <<
@@ -1257,60 +1379,70 @@ std::string wholeNotesAsMsrString (
       "--> multiplyingFactor " << ": " <<
       multiplyingFactor <<
       std::endl << std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
   // generate the code for the duration
-  std::stringstream s;
+  std::stringstream ss;
 
   switch (denominatorDurationLog) {
     case -3:
-      s << "\\maxima";
+      ss << "\\maxima";
       break;
     case -2:
-      s << "\\longa";
+      ss << "\\longa";
       break;
     case -1:
-      s << "\\breve";
+      ss << "\\breve";
       break;
 
     default:
-      s << (1 << denominatorDurationLog);
+      ss << (1 << denominatorDurationLog);
   } // switch
 
   // append the dots if any
   if (numeratorDots > 0) {
     for (int i = 0; i < numeratorDots; ++i) {
-      s << ".";
+      ss << ".";
     } // for
   }
 
   if (multiplyingFactor != 1) {
     // append the multiplying factor
-    s <<
+    ss <<
       "*" << multiplyingFactor;
 
     /* JMI
     if (integralNumberOfWholeNotes) {
-      s <<
+      ss <<
         "*" << multiplyingFactor;
     }
     else {
-      s <<
+      ss <<
         "*" << multiplyingFactor << '/' << 1; // ??? denominator;
     }
     */
   }
 
-  std::string result = s.str ();
+  std::string result = ss.str ();
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceWholeNotesDetails ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "--> wholeNotesAsMsrString() 2 -------------------------------------" <<
      ", result: \"" << result << "\"" <<
       ", numeratorDots" << ": " << numeratorDots <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -1337,7 +1469,7 @@ std::string multipleFullBarRestsWholeNotesAsMsrString (
   int             inputLineNumber, // JMI
   const Rational& wholeNotes)
 {
-  std::stringstream s;
+  std::stringstream ss;
 
   Rational
     denominatorAsFraction =
@@ -1348,17 +1480,17 @@ std::string multipleFullBarRestsWholeNotesAsMsrString (
   int numberOfWholeNotes =
     wholeNotes.getNumerator ();
 
-  s <<
+  ss <<
     wholeNotesAsMsrString ( // JMI ??? v0.9.66
       inputLineNumber,
       denominatorAsFraction);
 
   if (numberOfWholeNotes != 1) {
-    s <<
+    ss <<
       "*" << numberOfWholeNotes;
   }
 
-  return s.str ();
+  return ss.str ();
 }
 
 

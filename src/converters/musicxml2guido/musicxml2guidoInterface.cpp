@@ -68,7 +68,9 @@ static mfMusicformatsErrorKind xmlFile2guidoWithHandler (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsr ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       std::endl <<
       "<!-- ----------------------------------------------------------- -->" <<
       std::endl <<
@@ -85,6 +87,10 @@ static mfMusicformatsErrorKind xmlFile2guidoWithHandler (
     gLogStream <<
       "<!-- ----------------------------------------------------------- -->" <<
       std::endl << std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -314,7 +320,9 @@ static mfMusicformatsErrorKind xmlFile2guidoWithOptionsAndArguments (
   // ------------------------------------------------------
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       handlerOptionsAndArguments;
   }
 #endif
@@ -333,10 +341,16 @@ static mfMusicformatsErrorKind xmlFile2guidoWithOptionsAndArguments (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       serviceName << " main()" <<
       ", insiderOption: " << insiderOption <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -371,7 +385,7 @@ static mfMusicformatsErrorKind xmlFile2guidoWithOptionsAndArguments (
   // create the global run data
   // ------------------------------------------------------
 
-  gGlobalServiceRunData =
+  gGlobalCurrentServiceRunData =
     mfServiceRunData::create (
       serviceName);
 
@@ -442,7 +456,7 @@ EXP mfMusicformatsErrorKind musicxmlFile2guido (
       createSXMLFileFromFile (
         fileName,
         mfPassIDKind::kMfPassID_1,
-        gWaeHandler->createAnMXSRFromAMusicXMLFile ());
+        gWaeHandler->createAnMXSRFromAMusicXMLFileOrStdin ());
 
   if (sxmlfile) {
     return
@@ -467,7 +481,7 @@ mfMusicformatsErrorKind convertMusicxmlFile2guidoWithHandler (
       createSXMLFileFromFile (
         fileName,
         mfPassIDKind::kMfPassID_1,
-        gWaeHandler->createAnMXSRFromAMusicXMLFile ());
+        gWaeHandler->createAnMXSRFromAMusicXMLFileOrStdin ());
 
   if (sxmlfile) {
     return

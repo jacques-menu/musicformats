@@ -126,18 +126,18 @@ void mxsr2msrTranslator::visitStart ( S_barline& elt )
       fCurrentBarLineLocationKind = msrBarLineLocationKind::kBarLineLocationRight;
     }
     else {
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         "barLine location \"" << location <<
         "\" is unknown, using 'right' by default";
 
    // JMI   musicxmlError (
       musicxmlWarning (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         inputLineNumber,
    //     __FILE__, __LINE__,
-        s.str ());
+        ss.str ());
     }
   }
 
@@ -192,7 +192,7 @@ void mxsr2msrTranslator::visitEnd ( S_barline& elt )
         // ------------------------------------------------------
         if (! fCurrentBarLineEndingNumber.size ()) {
           musicxmlWarning (
-            gGlobalServiceRunData->getInputSourceName (),
+            gGlobalCurrentServiceRunData->getInputSourceName (),
             inputLineNumber,
             "mandatory ending number is missing, assuming \"1\"");
 
@@ -332,34 +332,34 @@ void mxsr2msrTranslator::visitEnd ( S_barline& elt )
         break;
 
       case msrBarLineStyleKind::kBarLineStyleNone:
-        std::stringstream s;
+        std::stringstream ss;
 
-        s <<
+        ss <<
           "barLine " <<
           barLine->asString () <<
           " has no barLine style";
 
         musicxmlWarning (
-          gGlobalServiceRunData->getInputSourceName (),
+          gGlobalCurrentServiceRunData->getInputSourceName (),
           inputLineNumber,
      //     __FILE__, __LINE__,
-          s.str ());
+          ss.str ());
         break;
     } // switch
   }
 
   // has this barLine been handled?
   if (! barLineHasBeenHandled) {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s << std::left <<
+    ss << std::left <<
       "cannot handle a barLine containing: " <<
       barLine->asString ();
 
     msrInternalWarning (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
-      s.str ());
+      ss.str ());
   }
 
   fOnGoingBarLine = false;

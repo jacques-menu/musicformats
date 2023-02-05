@@ -28,6 +28,7 @@
 #include "msrMeasureConstants.h"
 
 #include "oahOah.h"
+#include "oahEarlyOptions.h"
 
 #include "msrOah.h"
 
@@ -81,9 +82,15 @@ msrBarCheck::msrBarCheck (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasuresNumbers ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Creating a bar check without next bar number" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -103,7 +110,9 @@ msrBarCheck::msrBarCheck (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasuresNumbers ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Creating a bar check" <<
       " with next bar original number '" <<
       nextBarOriginalNumber <<
@@ -111,6 +120,10 @@ msrBarCheck::msrBarCheck (
       fNextBarPuristNumber <<
       "'" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 }
@@ -152,11 +165,17 @@ void msrBarCheck::setNextBarPuristNumber (int puristNumber)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasuresNumbers ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Setting bar check next bar number to '" <<
       puristNumber <<
       "'" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -166,9 +185,15 @@ void msrBarCheck::setNextBarPuristNumber (int puristNumber)
 void msrBarCheck::acceptIn (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrBarCheck::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrBarCheck>*
@@ -177,9 +202,15 @@ void msrBarCheck::acceptIn (basevisitor* v)
         S_msrBarCheck elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrBarCheck::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitStart (elem);
   }
@@ -188,9 +219,15 @@ void msrBarCheck::acceptIn (basevisitor* v)
 void msrBarCheck::acceptOut (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrBarCheck::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrBarCheck>*
@@ -199,9 +236,15 @@ void msrBarCheck::acceptOut (basevisitor* v)
         S_msrBarCheck elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrBarCheck::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitEnd (elem);
   }
@@ -212,16 +255,16 @@ void msrBarCheck::browseData (basevisitor* v)
 
 std::string msrBarCheck::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "[BarCheck" <<
     ", nextBarOriginalNumber = \"" << fNextBarOriginalNumber << "\"" <<
     ", nextBarPuristNumber = \"" << fNextBarPuristNumber << "\"" <<
     ", line " << fInputLineNumber <<
     ']';
 
-  return s.str ();
+  return ss.str ();
 }
 
 void msrBarCheck::print (std::ostream& os) const

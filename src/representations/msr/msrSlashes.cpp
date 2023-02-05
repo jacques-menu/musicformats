@@ -18,6 +18,8 @@
 #include "msrSlashes.h"
 
 #include "oahOah.h"
+#include "oahEarlyOptions.h"
+
 #include "msrOah.h"
 
 #include "msrWae.h"
@@ -40,17 +42,17 @@ msrUseDotsKind msrUseDotsFromString (
     result = msrUseDotsKind::kUseDotsNo;
   else {
     if (useDotsString.size ()) {
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         "use-dots \"" << useDotsString <<
         "\" is unknown";
 
       msrError (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         inputLineNumber,
         __FILE__, __LINE__,
-        s.str ());
+        ss.str ());
     }
   }
 
@@ -170,9 +172,15 @@ msrSlash::~msrSlash ()
 void msrSlash::acceptIn (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrSlash::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrSlash>*
@@ -181,9 +189,15 @@ void msrSlash::acceptIn (basevisitor* v)
         S_msrSlash elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrSlash::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitStart (elem);
   }
@@ -192,9 +206,15 @@ void msrSlash::acceptIn (basevisitor* v)
 void msrSlash::acceptOut (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrSlash::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrSlash>*
@@ -203,9 +223,15 @@ void msrSlash::acceptOut (basevisitor* v)
         S_msrSlash elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrSlash::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitEnd (elem);
   }
@@ -216,9 +242,9 @@ void msrSlash::browseData (basevisitor* v)
 
 std::string msrSlash::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "Slash" <<
     ", line " << fInputLineNumber <<
     ", slashTypeKind:" <<
@@ -231,7 +257,7 @@ std::string msrSlash::asString () const
     msrSlashUseStemsKindAsString (
       fSlashUseStemsKind);
 
-  return s.str ();
+  return ss.str ();
 }
 
 void msrSlash::print (std::ostream& os) const

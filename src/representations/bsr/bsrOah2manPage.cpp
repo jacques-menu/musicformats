@@ -15,12 +15,13 @@
 
 #include <regex>
 
-#include "bsrOah2manPage.h"
-
 #include "mfStaticSettings.h"
 
+#include "bsrOah2manPage.h"
 
 #include "oahOah.h"
+#include "oahEarlyOptions.h"
+
 
 namespace MusicFormats
 {
@@ -42,11 +43,17 @@ void bsrOah2manPage::visitStart (S_bsrFacSimileKindAtom& elt)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       std::endl <<
       ".\\\" --> Start visiting bsrFacSimileKindAtom" <<
       " \"" << elt->fetchNames () << "\"" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -71,11 +78,17 @@ void bsrOah2manPage::visitEnd (S_bsrFacSimileKindAtom& elt)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       std::endl <<
       ".\\\" --> End visiting bsrFacSimileKindAtom" <<
       " \"" << elt->fetchNames () << "\"" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 }
@@ -85,11 +98,17 @@ void bsrOah2manPage::visitStart (S_bsrTextsLanguageAtom& elt)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       std::endl <<
       ".\\\" --> Start visiting bsrTextsLanguageAtom" <<
       " \"" << elt->fetchNames () << "\"" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -114,11 +133,17 @@ void bsrOah2manPage::visitEnd (S_bsrTextsLanguageAtom& elt)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       std::endl <<
       ".\\\" --> End visiting bsrTextsLanguageAtom" <<
       " \"" << elt->fetchNames () << "\"" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 }

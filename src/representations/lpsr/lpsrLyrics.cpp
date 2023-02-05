@@ -14,6 +14,7 @@
 #include "lpsrLyrics.h"
 
 #include "oahOah.h"
+#include "oahEarlyOptions.h"
 
 #include "lpsrOah.h"
 
@@ -52,9 +53,15 @@ void lpsrNewLyricsBlock::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> lpsrNewLyricsBlock::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -65,9 +72,15 @@ void lpsrNewLyricsBlock::acceptIn (basevisitor* v)
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching lpsrNewLyricsBlock::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
         p->visitStart (elem);
@@ -78,9 +91,15 @@ void lpsrNewLyricsBlock::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> lpsrNewLyricsBlock::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -91,9 +110,15 @@ void lpsrNewLyricsBlock::acceptOut (basevisitor* v)
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching lpsrNewLyricsBlock::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
         p->visitEnd (elem);

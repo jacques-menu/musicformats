@@ -65,12 +65,12 @@ msrPartGroupElement::~msrPartGroupElement ()
 //   }
 //
 //   else {
-//     std::stringstream s;
+//     std::stringstream ss;
 //
-//     s <<
+//     ss <<
 //       "part group element is neither a part group nor a part";
 //
-//     msrInternalError (s.str ());
+//     msrInternalError (ss.str ());
 //   }
 //
 //   return result;
@@ -102,12 +102,12 @@ msrPartGroupElement::~msrPartGroupElement ()
 //   }
 //
 //   else {
-//     std::stringstream s;
+//     std::stringstream ss;
 //
-//     s <<
+//     ss <<
 //       "part group element is neither a part group nor a part";
 //
-//     msrInternalError (s.str ());
+//     msrInternalError (ss.str ());
 //   }
 // }
 

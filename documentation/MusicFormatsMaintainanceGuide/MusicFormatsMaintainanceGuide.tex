@@ -144,10 +144,16 @@ void msr2msrTranslator::visitStart (S_msrClef& elt)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "--> Start visiting msrClef" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 

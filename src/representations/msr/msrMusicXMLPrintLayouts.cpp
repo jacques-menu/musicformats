@@ -23,6 +23,8 @@
 #include "msrMeasureConstants.h"
 #include "msrMusicXMLPrintLayouts.h"
 
+#include "oahEarlyOptions.h"
+
 #include "msrOah.h"
 
 
@@ -59,9 +61,15 @@ msrMusicXMLPrintLayout::msrMusicXMLPrintLayout (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMusicXMLPrintLayouts ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Creating a print layout " <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -128,9 +136,15 @@ S_msrMeasure msrMusicXMLPrintLayout::getMusicXMLPrintLayoutUpLinkToMeasure () co
 void msrMusicXMLPrintLayout::acceptIn (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrMusicXMLPrintLayout::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrMusicXMLPrintLayout>*
@@ -139,9 +153,15 @@ void msrMusicXMLPrintLayout::acceptIn (basevisitor* v)
         S_msrMusicXMLPrintLayout elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrMusicXMLPrintLayout::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitStart (elem);
   }
@@ -150,9 +170,15 @@ void msrMusicXMLPrintLayout::acceptIn (basevisitor* v)
 void msrMusicXMLPrintLayout::acceptOut (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrMusicXMLPrintLayout::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrMusicXMLPrintLayout>*
@@ -161,9 +187,15 @@ void msrMusicXMLPrintLayout::acceptOut (basevisitor* v)
         S_msrMusicXMLPrintLayout elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrMusicXMLPrintLayout::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitEnd (elem);
   }
@@ -202,14 +234,14 @@ void msrMusicXMLPrintLayout::browseData (basevisitor* v)
 
 std::string msrMusicXMLPrintLayout::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "[MusicXMLPrintLayout" <<
     ", line " << fInputLineNumber <<
     ']';
 
-  return s.str ();
+  return ss.str ();
 }
 
 void msrMusicXMLPrintLayout::printFull (std::ostream& os) const

@@ -353,6 +353,9 @@ std::string oahEarlyOptionKindAsString (
 
 std::ostream& operator << (std::ostream& os, const oahEarlyOptionKind& elt);
 
+EXP mfIndentedStringStream& operator << (
+  mfIndentedStringStream& iss, const oahEarlyOptionKind& theChar);
+
 //_______________________________________________________________________________
 // handler used thru...?
 enum class oahHandlerUsedThruKind {
@@ -365,6 +368,9 @@ std::string oahHandlerUsedThruKindAsString (
   oahHandlerUsedThruKind handlerUsedThruKind);
 
 std::ostream& operator << (std::ostream& os, const oahHandlerUsedThruKind& elt);
+
+EXP mfIndentedStringStream& operator << (
+  mfIndentedStringStream& iss, const oahHandlerUsedThruKind& theChar);
 
 //______________________________________________________________________________
 class EXP oahPrefix : public oahFindableElement

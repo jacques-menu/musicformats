@@ -14,6 +14,7 @@
 #include "lpsrElements.h"
 
 #include "oahOah.h"
+#include "oahEarlyOptions.h"
 
 #include "lpsrOah.h"
 
@@ -44,9 +45,15 @@ void lpsrElement::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> lpsrElement::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -57,9 +64,15 @@ void lpsrElement::acceptIn (basevisitor* v)
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching lpsrElement::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
         p->visitStart (elem);
@@ -70,9 +83,15 @@ void lpsrElement::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> lpsrElement::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -83,9 +102,15 @@ void lpsrElement::acceptOut (basevisitor* v)
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching lpsrElement::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
         p->visitEnd (elem);

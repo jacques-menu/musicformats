@@ -37,17 +37,17 @@ msrJustifyKind msrJustifyKindFromString (
     result = msrJustifyKind::kJustifyRight;
   else {
     if (justifyString.size ()) {
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         "justify value " << justifyString <<
         " should be 'left', 'center' or 'right'";
 
       msrError (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         inputLineNumber,
         __FILE__, __LINE__,
-        s.str ());
+        ss.str ());
     }
   }
 
@@ -98,17 +98,17 @@ msrHorizontalAlignmentKind msrHorizontalAlignmentKindFromString (
     result = msrHorizontalAlignmentKind::kHorizontalAlignmentRight;
   else {
     if (horizontalAlignmentString.size ()) {
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         "halign value " << horizontalAlignmentString <<
         " should be 'left', 'center' or 'right'";
 
       msrError (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         inputLineNumber,
         __FILE__, __LINE__,
-        s.str ());
+        ss.str ());
     }
   }
 
@@ -159,17 +159,17 @@ msrVerticalAlignmentKind msrVerticalAlignmentKindFromString (
     result = msrVerticalAlignmentKind::kVerticalAlignmentBottom;
   else {
     if (verticalAlignmentString.size ()) {
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         "valign value " << verticalAlignmentString <<
         " should be 'top', 'middle' or 'bottom'";
 
       msrError (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         inputLineNumber,
         __FILE__, __LINE__,
-        s.str ());
+        ss.str ());
     }
   }
 

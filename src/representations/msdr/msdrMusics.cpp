@@ -15,9 +15,9 @@
 
 #include "mfStaticSettings.h"
 
-
-
 #include "msdrMusics.h"
+
+#include "oahEarlyOptions.h"
 
 #include "msrOah.h"
 
@@ -44,9 +44,15 @@ msdrMusic::msdrMusic (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceVoices ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Creating MSDR music \"" << asString () << "\"" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -73,9 +79,15 @@ void msdrMusic::addMeasureToMusic (
 void msdrMusic::acceptIn (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msdrMusic::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msdrMusic>*
@@ -84,9 +96,15 @@ void msdrMusic::acceptIn (basevisitor* v)
         S_msdrMusic elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msdrMusic::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitStart (elem);
   }
@@ -95,9 +113,15 @@ void msdrMusic::acceptIn (basevisitor* v)
 void msdrMusic::acceptOut (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msdrMusic::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msdrMusic>*
@@ -106,9 +130,15 @@ void msdrMusic::acceptOut (basevisitor* v)
         S_msdrMusic elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msdrMusic::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitEnd (elem);
   }
@@ -118,9 +148,15 @@ void msdrMusic::browseData (basevisitor* v)
 {
 /* JMI
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msdrMusic::browseData ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   // browse the voice initial elements
@@ -160,33 +196,39 @@ void msdrMusic::browseData (basevisitor* v)
   }
 
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% <== msdrMusic::browseData ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
   */
 }
 
 std::string msdrMusic::asShortString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "MSDR voice \"" << fMusicName << "\", " <<
     ", line " << fInputLineNumber;
 
-  return s.str ();
+  return ss.str ();
 }
 
 std::string msdrMusic::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "MSDR music \"" << fMusicName << "\", " <<
     ", line " << fInputLineNumber;
 
-  return s.str ();
+  return ss.str ();
 }
 
 void msdrMusic::displayMusic (

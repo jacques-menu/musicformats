@@ -66,7 +66,7 @@ EXP mfMusicformatsErrorKind convertMsdlStream2musicxmlWithHandler (
   std::ostream&       err)
 {
   // register the input source name
-  gGlobalServiceRunData->setInputSourceName (
+  gGlobalCurrentServiceRunData->setInputSourceName (
     inputSourceName);
 
   // has quiet mode been requested?
@@ -105,6 +105,10 @@ EXP mfMusicformatsErrorKind convertMsdlStream2musicxmlWithHandler (
         std::endl <<
         separator <<
         std::endl;
+
+//     gWaeHandler->waeTrace ( JMI v0.9.67
+//       __FILE__, __LINE__,
+//       ss.str ());
     }
 #endif
 
@@ -131,14 +135,14 @@ EXP mfMusicformatsErrorKind convertMsdlStream2musicxmlWithHandler (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
     if (! firstMsrScore) {
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         "Could not perform comversion of \"" <<
         inputSourceName <<
         "\" to MSR - quitting";
 
-      std::string message = s.str ();
+      std::string message = ss.str ();
 
       err <<
         message <<
@@ -291,10 +295,16 @@ EXP mfMusicformatsErrorKind convertMsdlStream2musicxmlWithOptionsAndArguments (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       serviceName << " main()" <<
       ", insiderOption: " << insiderOption <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -329,7 +339,7 @@ EXP mfMusicformatsErrorKind convertMsdlStream2musicxmlWithOptionsAndArguments (
   // create the global run data
   // ------------------------------------------------------
 
-  gGlobalServiceRunData =
+  gGlobalCurrentServiceRunData =
     mfServiceRunData::create (
       serviceName);
 
@@ -412,12 +422,12 @@ EXP mfMusicformatsErrorKind convertMsdlFile2musicxmlWithOptionsAndArguments (
       std::ifstream::in);
 
   if (! inputStream.is_open ()) {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       gWaeHandler->cannotOpenMSDLFileForReading (inputFileName);
 
-    std::string message = s.str ();
+    std::string message = ss.str ();
 
     err <<
       message <<
@@ -457,12 +467,12 @@ EXP mfMusicformatsErrorKind convertMsdlFile2musicxmlWithHandler (
       std::ifstream::in);
 
   if (! inputStream.is_open ()) {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       gWaeHandler->cannotOpenMSDLFileForReading (inputFileName);
 
-    std::string message = s.str ();
+    std::string message = ss.str ();
 
     err <<
       message <<

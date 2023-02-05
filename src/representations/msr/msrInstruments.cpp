@@ -29,6 +29,7 @@
 #include "msrInstruments.h"
 
 #include "oahOah.h"
+#include "oahEarlyOptions.h"
 
 #include "msrOah.h"
 
@@ -107,9 +108,15 @@ void msrStringTuning::setStringTuningUpLinkToMeasure (
 void msrStringTuning::acceptIn (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrStringTuning::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrStringTuning>*
@@ -118,9 +125,15 @@ void msrStringTuning::acceptIn (basevisitor* v)
         S_msrStringTuning elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrStringTuning::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitStart (elem);
   }
@@ -129,9 +142,15 @@ void msrStringTuning::acceptIn (basevisitor* v)
 void msrStringTuning::acceptOut (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrStringTuning::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrStringTuning>*
@@ -140,9 +159,15 @@ void msrStringTuning::acceptOut (basevisitor* v)
         S_msrStringTuning elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrStringTuning::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitEnd (elem);
   }
@@ -263,9 +288,15 @@ void msrScordatura::addStringTuningToScordatura (
 void msrScordatura::acceptIn (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrScordatura::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrScordatura>*
@@ -274,9 +305,15 @@ void msrScordatura::acceptIn (basevisitor* v)
         S_msrScordatura elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrScordatura::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitStart (elem);
   }
@@ -285,9 +322,15 @@ void msrScordatura::acceptIn (basevisitor* v)
 void msrScordatura::acceptOut (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrScordatura::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrScordatura>*
@@ -296,9 +339,15 @@ void msrScordatura::acceptOut (basevisitor* v)
         S_msrScordatura elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrScordatura::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitEnd (elem);
   }
@@ -434,9 +483,15 @@ void msrAccordionRegistration::setAccordionRegistrationUpLinkToMeasure (
 void msrAccordionRegistration::acceptIn (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrAccordionRegistration::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrAccordionRegistration>*
@@ -445,9 +500,15 @@ void msrAccordionRegistration::acceptIn (basevisitor* v)
         S_msrAccordionRegistration elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrAccordionRegistration::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitStart (elem);
   }
@@ -456,9 +517,15 @@ void msrAccordionRegistration::acceptIn (basevisitor* v)
 void msrAccordionRegistration::acceptOut (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrAccordionRegistration::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrAccordionRegistration>*
@@ -467,9 +534,15 @@ void msrAccordionRegistration::acceptOut (basevisitor* v)
         S_msrAccordionRegistration elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrAccordionRegistration::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitEnd (elem);
   }
@@ -480,16 +553,16 @@ void msrAccordionRegistration::browseData (basevisitor* v)
 
 std::string msrAccordionRegistration::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "AccordionRegistration" <<
     ", highDotsNumber: " << fHighDotsNumber <<
     ", middleDotsNumber: " << fMiddleDotsNumber <<
     ", lowDotsNumber: " << fLowDotsNumber <<
     ", line " << fInputLineNumber;
 
-  return s.str ();
+  return ss.str ();
 }
 
 void msrAccordionRegistration::print (std::ostream& os) const
@@ -549,10 +622,16 @@ S_msrHarpPedalsTuning msrHarpPedalsTuning::createHarpPedalsTuningNewbornClone ()
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceRepeats ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Creating a newborn clone of a " <<
       asString () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -566,10 +645,16 @@ S_msrHarpPedalsTuning msrHarpPedalsTuning::createHarpPedalsTuningDeepClone ()
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceRepeats ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Creating a newborn clone of a " <<
       asString () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -620,9 +705,9 @@ void msrHarpPedalsTuning::addPedalTuning (
       fHarpPedalsAlterationKindsMap.find (diatonicPitchKind);
 
   if (it != fHarpPedalsAlterationKindsMap.end ()) {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "pedal tuning '" <<
       msrDiatonicPitchKindAsString (
         diatonicPitchKind) <<
@@ -631,10 +716,10 @@ void msrHarpPedalsTuning::addPedalTuning (
       "' has already been specified";
 
     msrError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 
   fHarpPedalsAlterationKindsMap [diatonicPitchKind] = alterationKind;
@@ -643,9 +728,15 @@ void msrHarpPedalsTuning::addPedalTuning (
 void msrHarpPedalsTuning::acceptIn (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrHarpPedalsTuning::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrHarpPedalsTuning>*
@@ -654,9 +745,15 @@ void msrHarpPedalsTuning::acceptIn (basevisitor* v)
         S_msrHarpPedalsTuning elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrHarpPedalsTuning::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitStart (elem);
   }
@@ -665,9 +762,15 @@ void msrHarpPedalsTuning::acceptIn (basevisitor* v)
 void msrHarpPedalsTuning::acceptOut (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrHarpPedalsTuning::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrHarpPedalsTuning>*
@@ -676,9 +779,15 @@ void msrHarpPedalsTuning::acceptOut (basevisitor* v)
         S_msrHarpPedalsTuning elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrHarpPedalsTuning::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitEnd (elem);
   }
@@ -689,9 +798,9 @@ void msrHarpPedalsTuning::browseData (basevisitor* v)
 
 std::string msrHarpPedalsTuning::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "[HarpPedalsTuning" <<
     ", line " << fInputLineNumber <<
     ", ";
@@ -706,25 +815,25 @@ std::string msrHarpPedalsTuning::asString () const
 
     for ( ; ; ) {
       // print the pedal and its alteration
-      s <<
+      ss <<
         msrDiatonicPitchKindAsString (
           (*i).first) <<
         ' ' <<
         msrAlterationKindAsString (
           (*i).second);
       if (++i == iEnd) break;
-      s << ", ";
+      ss << ", ";
     } // for
 
     --gIndenter;
   }
 
   else {
-    s <<
+    ss <<
       "[EMPTY]";
   }
 
-  return s.str ();
+  return ss.str ();
 }
 
 void msrHarpPedalsTuning::print (std::ostream& os) const
@@ -863,9 +972,15 @@ void msrPedal::setPedalUpLinkToMeasure (
 void msrPedal::acceptIn (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrPedal::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrPedal>*
@@ -874,9 +989,15 @@ void msrPedal::acceptIn (basevisitor* v)
         S_msrPedal elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrPedal::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitStart (elem);
   }
@@ -885,9 +1006,15 @@ void msrPedal::acceptIn (basevisitor* v)
 void msrPedal::acceptOut (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrPedal::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrPedal>*
@@ -896,9 +1023,15 @@ void msrPedal::acceptOut (basevisitor* v)
         S_msrPedal elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrPedal::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitEnd (elem);
   }
@@ -1074,9 +1207,15 @@ void msrDamp::setDampUpLinkToMeasure (
 void msrDamp::acceptIn (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrDamp::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrDamp>*
@@ -1085,9 +1224,15 @@ void msrDamp::acceptIn (basevisitor* v)
         S_msrDamp elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrDamp::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitStart (elem);
   }
@@ -1096,9 +1241,15 @@ void msrDamp::acceptIn (basevisitor* v)
 void msrDamp::acceptOut (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrDamp::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrDamp>*
@@ -1107,9 +1258,15 @@ void msrDamp::acceptOut (basevisitor* v)
         S_msrDamp elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrDamp::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitEnd (elem);
   }
@@ -1203,9 +1360,15 @@ void msrDampAll::setDampAllUpLinkToMeasure (
 void msrDampAll::acceptIn (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrDampAll::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrDampAll>*
@@ -1214,9 +1377,15 @@ void msrDampAll::acceptIn (basevisitor* v)
         S_msrDampAll elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrDampAll::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitStart (elem);
   }
@@ -1225,9 +1394,15 @@ void msrDampAll::acceptIn (basevisitor* v)
 void msrDampAll::acceptOut (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrDampAll::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrDampAll>*
@@ -1236,9 +1411,15 @@ void msrDampAll::acceptOut (basevisitor* v)
         S_msrDampAll elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrDampAll::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitEnd (elem);
   }

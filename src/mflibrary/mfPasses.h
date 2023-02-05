@@ -21,6 +21,7 @@
 #include "smartpointer.h"
 
 #include "mfBool.h"
+#include "mfIndentedTextOutput.h"
 
 
 using namespace MusicXML2;
@@ -35,9 +36,9 @@ enum class mfPassIDKind {
 
   kMfPassID_ALL, // default value for passes tracing
 
-  kMfPassID_0, // options and arguments handling
+  kMfPassID_OptionsAndArgumentsHandling, // options and arguments handling
 
-  kMfPassID_Optional,
+  kMfPassID_OptionalPass,
 
   kMfPassID_1,
   kMfPassID_2, kMfPassID_2a, kMfPassID_2b,
@@ -50,6 +51,9 @@ std::string mfPassIDKindAsString (
   mfPassIDKind passIDKind);
 
 std::ostream& operator << (std::ostream& os, const mfPassIDKind elt);
+
+EXP mfIndentedStringStream& operator << (
+  mfIndentedStringStream& iss, const mfPassIDKind& elt);
 
 mfPassIDKind mfPassIDKindFromString (
   const std::string& theString);
@@ -70,6 +74,10 @@ class EXP mfPassDescription : public smartable
 
     // constructors/destructor
     // ------------------------------------------------------
+
+    static SMARTP<mfPassDescription> create (
+                            mfPassIDKind passIDKind,
+                            std::string  passDescription);
 
                           mfPassDescription (
                             mfPassIDKind passIDKind,

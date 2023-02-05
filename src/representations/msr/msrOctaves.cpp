@@ -212,18 +212,18 @@ msrOctaveKind msrOctaveKindFromNumber (
     case 9: result = msrOctaveKind::kOctave9; break;
     default:
       {
-        std::stringstream s;
+        std::stringstream ss;
 
-        s <<
+        ss <<
           "cannot create an octave kind from number '" <<
           octaveNumber <<
           "'";
 
         msrInternalError (
-          gGlobalServiceRunData->getInputSourceName (),
+          gGlobalCurrentServiceRunData->getInputSourceName (),
           inputLineNumber,
           __FILE__, __LINE__,
-          s.str ());
+          ss.str ());
       }
   } // switch
 
@@ -255,13 +255,13 @@ msrOctaveKind msrOctaveKindFromCommasOrQuotes (
       case ',':
         if (result > octaveKindBelowMiddleC) {
           // a '\'' has been found previously
-          std::stringstream s;
+          std::stringstream ss;
 
-          s <<
+          ss <<
             "octave indication \"" << octaveIndication <<
             "\" contains a ',' after a '\\'";
 
-          oahError (s.str ());
+          oahError (ss.str ());
         }
 
         --result;
@@ -270,13 +270,13 @@ msrOctaveKind msrOctaveKindFromCommasOrQuotes (
       case '\'':
         if (result < octaveKindBelowMiddleC) {
           // a ',' has been found previously
-          std::stringstream s;
+          std::stringstream ss;
 
-          s <<
+          ss <<
             "octave indication \"" << octaveIndication <<
             "\" contains a '\\'' after a ','";
 
-          oahError (s.str ());
+          oahError (ss.str ());
         }
 
         ++result;
@@ -284,19 +284,19 @@ msrOctaveKind msrOctaveKindFromCommasOrQuotes (
 
       default:
         {
-          std::stringstream s;
+          std::stringstream ss;
 
-          s <<
+          ss <<
             "octave indication \"" <<
             octaveIndication <<
             "\" should contain only commas and quotes" <<
             ", line: " << inputLineNumber;
 
           msrInternalError (
-            gGlobalServiceRunData->getInputSourceName (),
+            gGlobalCurrentServiceRunData->getInputSourceName (),
             inputLineNumber,
             __FILE__, __LINE__,
-            s.str ());
+            ss.str ());
         }
     } // switch
 
@@ -406,7 +406,7 @@ void initializeMsrOctaveEntryKindsMap ()
 
 std::string availableMsrOctaveEntryKinds (size_t namesListMaxLength)
 {
-  std::stringstream s;
+  std::stringstream ss;
 
   size_t
     msrOctaveEntryKindsMapSize =
@@ -432,25 +432,25 @@ std::string availableMsrOctaveEntryKinds (size_t namesListMaxLength)
 
       cumulatedLength += theString.size ();
       if (cumulatedLength >= namesListMaxLength) {
-        s << std::endl << gIndenter.getSpacer ();
+        ss << std::endl << gIndenter.getSpacer ();
         cumulatedLength = 0;
       }
 
       if (count == 1) {
-        s << gIndenter.getSpacer ();
+        ss << gIndenter.getSpacer ();
       }
-      s << theString;
+      ss << theString;
 
       if (count == nextToLast) {
-        s << " and ";
+        ss << " and ";
       }
       else if (count != msrOctaveEntryKindsMapSize) {
-        s << ", ";
+        ss << ", ";
       }
     } // for
   }
 
-  return s.str ();
+  return ss.str ();
 }
 
 // semitone pitches and absolute octave
@@ -476,9 +476,9 @@ msrSemiTonesPitchAndOctave::msrSemiTonesPitchAndOctave (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceHarmoniesDetails ()) {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "==> Creating pitch and octave '" <<
       asString () <<
       "'" <<
@@ -486,7 +486,7 @@ msrSemiTonesPitchAndOctave::msrSemiTonesPitchAndOctave (
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 #endif
 }
@@ -526,7 +526,9 @@ S_msrSemiTonesPitchAndOctave msrSemiTonesPitchAndOctave::createFromString (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "There are " << smSize << " matches" <<
       " for semitones pitch and octave string '" << theString <<
       "' with std::regex '" << regularExpression <<
@@ -552,10 +554,16 @@ S_msrSemiTonesPitchAndOctave msrSemiTonesPitchAndOctave::createFromString (
 
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-      gLogStream <<
+	  	std::stringstream ss;
+
+      ss <<
         "--> pitch = \"" << pitch << "\", " <<
         "--> octaveIndication = \"" << octaveIndication << "\"" <<
         std::endl;
+
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif
 
@@ -574,13 +582,19 @@ S_msrSemiTonesPitchAndOctave msrSemiTonesPitchAndOctave::createFromString (
 
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-      gLogStream <<
+	  	std::stringstream ss;
+
+      ss <<
         "--> semiTonesPitchKind = \"" <<
         msrSemiTonesPitchKindAsString (
           semiTonesPitchKind) << "\", " <<
         "--> octaveKind = " <<
         msrOctaveKindAsString (octaveKind) <<
         std::endl;
+
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif
 
@@ -592,18 +606,18 @@ S_msrSemiTonesPitchAndOctave msrSemiTonesPitchAndOctave::createFromString (
   }
 
   else {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "semitones pitch and octave argument '" << theString <<
       "' is ill-formed";
 
     msrError (
 //    msrWarning ( //  JMI
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 
   return result;
@@ -689,9 +703,9 @@ void msrSemiTonesPitchAndOctave::decrementOctaveKind ()
 
 std::string msrSemiTonesPitchAndOctave::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s << std::left <<
+  ss << std::left <<
     "[SemiTonesPitchAndOctave" <<
     ": " <<
     "semiTonesPitchKind: " <<
@@ -700,7 +714,7 @@ std::string msrSemiTonesPitchAndOctave::asString () const
     msrOctaveKindAsString (fOctaveKind) <<
     ']';
 
-  return s.str ();
+  return ss.str ();
 }
 
 void msrSemiTonesPitchAndOctave::print (std::ostream& os) const
@@ -762,9 +776,9 @@ msrSemiTonesPitchAndAbsoluteOctave::msrSemiTonesPitchAndAbsoluteOctave (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceHarmoniesDetails ()) {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "==> Creating harmony item '" <<
       asString () <<
       "'" <<
@@ -772,7 +786,7 @@ msrSemiTonesPitchAndAbsoluteOctave::msrSemiTonesPitchAndAbsoluteOctave (
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 #endif
 }
@@ -793,18 +807,18 @@ S_msrSemiTonesPitchAndAbsoluteOctave msrSemiTonesPitchAndAbsoluteOctave::createS
 
 std::string msrSemiTonesPitchAndAbsoluteOctave::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
   const int fieldWidth = 19;
 
-  s << std::left <<
+  ss << std::left <<
     "SemiTonesPitchAndAbsoluteOctave" <<
     ": " <<
     std::setw (fieldWidth) <<
     msrSemiTonesPitchKindAsString (fSemiTonesPitchKind) <<
     ", absoluteOctave: " << fAbsoluteOctave;
 
-  return s.str ();
+  return ss.str ();
 }
 
 void msrSemiTonesPitchAndAbsoluteOctave::print (std::ostream& os) const
@@ -864,9 +878,9 @@ msrSemiTonesPitchAndRelativeOctave::msrSemiTonesPitchAndRelativeOctave (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceHarmoniesDetails ()) {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "==> Creating harmony item '" <<
       asString () <<
       "'" <<
@@ -874,7 +888,7 @@ msrSemiTonesPitchAndRelativeOctave::msrSemiTonesPitchAndRelativeOctave (
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 #endif
 }
@@ -895,18 +909,18 @@ S_msrSemiTonesPitchAndRelativeOctave msrSemiTonesPitchAndRelativeOctave::createS
 
 std::string msrSemiTonesPitchAndRelativeOctave::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
   const int fieldWidth = 19;
 
-  s << std::left <<
+  ss << std::left <<
     "SemiTonesPitchAndRelativeOctave" <<
     ": " <<
     std::setw (fieldWidth) <<
     msrSemiTonesPitchKindAsString (fSemiTonesPitchKind) <<
     ", relativeOctave: " << fRelativeOctave;
 
-  return s.str ();
+  return ss.str ();
 }
 
 void msrSemiTonesPitchAndRelativeOctave::print (std::ostream& os) const
@@ -967,9 +981,9 @@ msrQuarterTonesPitchAndOctave::msrQuarterTonesPitchAndOctave (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceHarmoniesDetails ()) {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "==> Creating pitch and octave '" <<
       asString () <<
       "'" <<
@@ -977,7 +991,7 @@ msrQuarterTonesPitchAndOctave::msrQuarterTonesPitchAndOctave (
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 #endif
 }
@@ -1017,7 +1031,9 @@ S_msrQuarterTonesPitchAndOctave msrQuarterTonesPitchAndOctave::createFromString 
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "There are " << smSize << " matches" <<
       " for quartertones pitch and octave string '" << theString <<
       "' with std::regex '" << regularExpression <<
@@ -1043,10 +1059,16 @@ S_msrQuarterTonesPitchAndOctave msrQuarterTonesPitchAndOctave::createFromString 
 
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-      gLogStream <<
+	  	std::stringstream ss;
+
+      ss <<
         "--> pitch = \"" << pitch << "\", " <<
         "--> octaveIndication = \"" << octaveIndication << "\"" <<
         std::endl;
+
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif
 
@@ -1067,13 +1089,19 @@ S_msrQuarterTonesPitchAndOctave msrQuarterTonesPitchAndOctave::createFromString 
 
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-      gLogStream <<
+	  	std::stringstream ss;
+
+      ss <<
         "--> quarterTonesPitchKind = \"" <<
           msrQuarterTonesPitchKindAsString (
             quarterTonesPitchKind) <<
         "\", " <<
         "--> octaveKind: " << msrOctaveKindAsString (octaveKind) <<
         std::endl;
+
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif
 
@@ -1085,18 +1113,18 @@ S_msrQuarterTonesPitchAndOctave msrQuarterTonesPitchAndOctave::createFromString 
   }
 
   else {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "quartertones pitch and octave argument '" << theString <<
       "' is ill-formed";
 
     msrError (
 //    msrWarning ( //  JMI
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 
   return result;
@@ -1182,9 +1210,9 @@ void msrQuarterTonesPitchAndOctave::decrementOctaveKind ()
 
 std::string msrQuarterTonesPitchAndOctave::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s << std::left <<
+  ss << std::left <<
     "[QuarterTonesPitchAndOctave" <<
     ": " <<
     "fQuarterTonesPitchKind: " <<
@@ -1193,7 +1221,7 @@ std::string msrQuarterTonesPitchAndOctave::asString () const
     ", fOctaveKind: " << msrOctaveKindAsString (fOctaveKind) <<
     ']';
 
-  return s.str ();
+  return ss.str ();
 }
 
 void msrQuarterTonesPitchAndOctave::print (std::ostream& os) const

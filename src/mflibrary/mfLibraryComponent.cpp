@@ -60,13 +60,19 @@ S_mfcLibraryComponent createLibraryComponent ()
 
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-      gLogStream <<
+	  	std::stringstream ss;
+
+      ss <<
         "Creating the MusicFormats library component" <<
         ", " <<
         getGlobalMusicFormatsVersionNumber <<
         ", " <<
         getGlobalMusicFormatsVersionDate <<
         std::endl;
+
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif
 
@@ -332,7 +338,7 @@ S_mfcLibraryComponent createLibraryComponent ()
       appendVersionDescrToComponent (
         mfcVersionDescr::create (
           mfcVersionNumber::createFromString ("0.9.65"),
-          "Augus 24, 2022",
+          "August 24, 2022",
           std::list<std::string> {
             "Upgraded MusicXML from version 3.1 to 4.0",
             "Switched to GitHub's release management",
@@ -344,12 +350,29 @@ S_mfcLibraryComponent createLibraryComponent ()
       appendVersionDescrToComponent (
         mfcVersionDescr::create (
           mfcVersionNumber::createFromString ("0.9.66"),
-          "September 29, 2022",
+          "January 31, 2023",
           std::list<std::string> {
-            "Finalized the 'std::string existing*()' functions"
+            "Finalized the 'std::string existing*()' functions",
+            "The code base has had many internal evolutions, in particular:"
+            "  - there have been names changes;"
+            "  - some files have been renamed and moved around;"
+            "  - the various representations have been refined;"
+            "  - the OAH (Options And Help) architecture and early options handling have been finalized;"
+            "  - the way large data are passed as parameters to functions has been changed wherever relevant for more speed."
           }
       ));
- }
+
+
+    pLibraryComponent->
+      appendVersionDescrToComponent (
+        mfcVersionDescr::create (
+          mfcVersionNumber::createFromString ("0.9.67"),
+          "February 5, 2023",
+          std::list<std::string> {
+            "Switched to using gWaeHandler->waeTrace() instead of gLogStream for trace messages"
+          }
+      ));
+  }
 
   return pLibraryComponent;
 }

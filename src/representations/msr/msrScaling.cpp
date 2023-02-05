@@ -17,13 +17,13 @@
 
 #include "mfStaticSettings.h"
 
-
-
 #include "msrScaling.h"
 
 #include "oahOah.h"
+#include "oahEarlyOptions.h"
 
 #include "msrOah.h"
+
 #include "lpsrOah.h"
 
 
@@ -157,17 +157,17 @@ float msrScaling::fetchGlobalStaffSize () const
     if (result < 1.0 || result > 100.0) {
 #ifdef MF_TRACING_IS_ENABLED
       if (gGlobalTracingOahGroup->getTraceGeometry ()) {
-        std::stringstream s;
+        std::stringstream ss;
 
-        s <<
+        ss <<
           "resulting staffsize " << result <<
           " is not between 1.0 and 100.0, replaced by 20.0:" <<
           std::endl;
 
         musicxmlWarning (
-          gGlobalServiceRunData->getInputSourceName (),
+          gGlobalCurrentServiceRunData->getInputSourceName (),
           fInputLineNumber,
-          s.str ());
+          ss.str ());
       }
 #endif
 
@@ -182,9 +182,15 @@ float msrScaling::fetchGlobalStaffSize () const
 void msrScaling::acceptIn (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrScaling::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrScaling>*
@@ -193,9 +199,15 @@ void msrScaling::acceptIn (basevisitor* v)
         S_msrScaling elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrScaling::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitStart (elem);
   }
@@ -204,9 +216,15 @@ void msrScaling::acceptIn (basevisitor* v)
 void msrScaling::acceptOut (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrScaling::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrScaling>*
@@ -215,9 +233,15 @@ void msrScaling::acceptOut (basevisitor* v)
         S_msrScaling elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrScaling::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitEnd (elem);
   }
@@ -259,7 +283,7 @@ std::ostream& operator << (std::ostream& os, const S_msrScaling& elt) {
   else {
     os << "[NONE]" << std::endl;
   }
-  
+
   return os;
 }
 

@@ -106,10 +106,16 @@ int main (int argc, char* argv[])
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       serviceName << " main()" <<
       ", insiderOption: " << insiderOption <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -147,7 +153,7 @@ int main (int argc, char* argv[])
     // create the global run data
     // ------------------------------------------------------
 
-    gGlobalServiceRunData =
+    gGlobalCurrentServiceRunData =
       mfServiceRunData::create (
         serviceName);
 
@@ -236,19 +242,25 @@ int main (int argc, char* argv[])
 
   std::string
     scriptSourceName =
-      gGlobalServiceRunData->getInputSourceName ();
+      gGlobalCurrentServiceRunData->getInputSourceName ();
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     std::string separator =
       "%--------------------------------------------------------------";
 
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       serviceName << ": " <<
       "scriptSourceName = \"" << scriptSourceName << "\"" <<
       std::endl <<
       separator <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -258,16 +270,16 @@ int main (int argc, char* argv[])
       return 0; // pure help run
     }
     else {
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         "this is not a pure help run, \"" <<
         serviceName <<
         " needs an input file name. " <<
         handler->getHandlerUsage ();
 
-      oahWarning (s.str ());
-//       oahError (s.str ()); JMI
+      oahWarning (ss.str ());
+//       oahError (ss.str ()); JMI
     }
   }
 
@@ -285,7 +297,9 @@ int main (int argc, char* argv[])
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "This is " << serviceName << ' ' <<
       getGlobalMusicFormatsVersionNumberAndDate () <<
       std::endl;
@@ -304,7 +318,7 @@ int main (int argc, char* argv[])
 
     gLogStream <<
       "Time is " <<
-      gGlobalServiceRunData->getRunDateFull () <<
+      gGlobalCurrentServiceRunData->getRunDateFull () <<
       std::endl;
 
     gLogStream <<
@@ -347,9 +361,15 @@ int main (int argc, char* argv[])
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "The command line options and arguments have been analyzed" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 

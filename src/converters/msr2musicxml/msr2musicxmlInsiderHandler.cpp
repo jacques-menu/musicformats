@@ -78,11 +78,17 @@ Usage: msr2musicxml [[option]* [MusicXMLFile|-] [[option]*
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Initializing \"" <<
       fHandlerHeader <<
       "\" regular options handler" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -133,11 +139,17 @@ void msr2musicxmlInsiderHandler::createTheMsr2musicxmlPrefixes ()
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Creating the msr2musicxml prefixes in \"" <<
       fHandlerHeader <<
       "\"" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -150,11 +162,17 @@ void msr2musicxmlInsiderHandler::createTheMsr2musicxmlOptionGroups (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Creating the \"" <<
       fHandlerHeader <<
       "\" insider option groups" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -229,11 +247,17 @@ void msr2musicxmlInsiderHandler::checkOptionsAndArguments () const
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "checking options and arguments from argc/argv in \"" <<
       fHandlerHeader <<
       "\"" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -245,11 +269,17 @@ std::string msr2musicxmlInsiderHandler::fetchOutputFileNameFromTheOptions () con
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Fetching the output file name from the options in OAH handler \"" <<
       fHandlerHeader <<
       "\"" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -279,9 +309,9 @@ std::string msr2musicxmlInsiderHandler::fetchOutputFileNameFromTheOptions () con
     if (autoOutputFileNameHasBeenSet) {
       // '-o, -output-file-name' has been selected
       // '-aofn, -auto-output-file-name' has been selected
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         "options' " <<
         outputFileNameStringAtom->fetchNames () <<
         "' and '" <<
@@ -289,7 +319,7 @@ std::string msr2musicxmlInsiderHandler::fetchOutputFileNameFromTheOptions () con
         "' cannot be selected simultaneously" <<
         "\")";
 
-      oahError (s.str ());
+      oahError (ss.str ());
     }
     else {
       // '-o, -output-file-name' has been selected
@@ -306,7 +336,7 @@ std::string msr2musicxmlInsiderHandler::fetchOutputFileNameFromTheOptions () con
       // '-aofn, -auto-output-file-name' has been selected
       std::string
         inputSourceName =
-          gGlobalServiceRunData->getInputSourceName ();
+          gGlobalCurrentServiceRunData->getInputSourceName ();
 
       // determine output file base name
       if (inputSourceName == "-") {
@@ -333,11 +363,17 @@ std::string msr2musicxmlInsiderHandler::fetchOutputFileNameFromTheOptions () con
 
 #ifdef MF_TRACING_IS_ENABLED
       if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-        gLogStream <<
+        std::stringstream ss;
+
+        ss <<
           "msr2musicxmlInsiderHandler::fetchOutputFileNameFromTheOptions(): outputFileName 1 = \"" <<
           outputFileName <<
           "\"" <<
           std::endl;
+
+        gWaeHandler->waeTrace (
+          __FILE__, __LINE__,
+          ss.str ());
       }
 #endif
 
@@ -346,11 +382,17 @@ std::string msr2musicxmlInsiderHandler::fetchOutputFileNameFromTheOptions () con
 
 #ifdef MF_TRACING_IS_ENABLED
       if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-        gLogStream <<
+        std::stringstream ss;
+
+        ss <<
           "msr2musicxmlInsiderHandler::fetchOutputFileNameFromTheOptions(): outputFileName 2 = " <<
           outputFileName <<
           "\"" <<
           std::endl;
+
+        gWaeHandler->waeTrace (
+          __FILE__, __LINE__,
+          ss.str ());
       }
 #endif
     }
@@ -402,33 +444,33 @@ void msr2musicxmlInsiderOahGroup::checkGroupOptionsConsistency ()
 /* JMI
 
   if (inputSourceName.size () > 0 && inputSourceName == outputFileName) {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "\"" << inputSourceName << "\" is both the input and output file name";
 
-    oahError (s.str ());
+    oahError (ss.str ());
   }
 
 
 
 
   if (! fOutputFileName.size ()) {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "msr2musicxmlInsiderOahGroup: a MusicXML output file name must be selected with '-o, -output-file-name";
 
-    oahError (s.str ());
+    oahError (ss.str ());
   }
 
-  else if (fOutputFileName == gGlobalServiceRunData->getInputSourceName ()) {
-    std::stringstream s;
+  else if (fOutputFileName == gGlobalCurrentServiceRunData->getInputSourceName ()) {
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "\"" << fOutputFileName << "\" is both the input and output file name";
 
-    oahError (s.str ());
+    oahError (ss.str ());
   }
   */
 }
@@ -438,9 +480,15 @@ void msr2musicxmlInsiderOahGroup::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       ".\\\" ==> msr2musicxmlInsiderOahGroup::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -451,9 +499,15 @@ void msr2musicxmlInsiderOahGroup::acceptIn (basevisitor* v)
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             ".\\\" ==> Launching msr2musicxmlInsiderOahGroup::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
         p->visitStart (elem);
@@ -464,9 +518,15 @@ void msr2musicxmlInsiderOahGroup::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       ".\\\" ==> msr2musicxmlInsiderOahGroup::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -477,9 +537,15 @@ void msr2musicxmlInsiderOahGroup::acceptOut (basevisitor* v)
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             ".\\\" ==> Launching msr2musicxmlInsiderOahGroup::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
         p->visitEnd (elem);
@@ -490,9 +556,15 @@ void msr2musicxmlInsiderOahGroup::browseData (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       ".\\\" ==> msr2musicxmlInsiderOahGroup::browseData ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -631,9 +703,15 @@ S_msr2musicxmlInsiderOahGroup createGlobalMsr2musicxmlOahGroup ()
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Creating global msr2musicxml OAH group" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 

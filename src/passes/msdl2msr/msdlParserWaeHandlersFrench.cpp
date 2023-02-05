@@ -113,12 +113,12 @@ void msdlParserWaeHandlerFrench::malformedNoteDuration () const
 
 std::string msdlParserWaeHandlerFrench::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "gestionnaire WAE pour MSDL en français";
 
-  return s.str ();
+  return ss.str ();
 }
 
 void msdlParserWaeHandlerFrench::print (std::ostream& os) const

@@ -82,11 +82,17 @@ Usage: msr2braille [option]* [MusicXMLFile|-] [[option]*
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Initializing msr2braille insider options handler \"" <<
       fHandlerHeader <<
       "\"" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -143,9 +149,15 @@ void msr2brailleInsiderHandler::createTheXml2braillePrefixes ()
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Creating the msr2braille prefixes" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -158,11 +170,17 @@ void msr2brailleInsiderHandler::createTheXml2brailleOptionGroups (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Creating the msr2braille insider option groups" <<
       fHandlerHeader <<
       "\"" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -237,7 +255,9 @@ void msr2brailleInsiderHandler::createTheXml2brailleOptionGroups (
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
     // print the options handler initial state
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "msr2brailleInsiderHandler has been initialized as:" <<
       std::endl;
 
@@ -258,11 +278,17 @@ void msr2brailleInsiderHandler::checkOptionsAndArguments () const
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "checking options and arguments from argc/argv in \"" <<
       fHandlerHeader <<
       "\"" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -274,11 +300,17 @@ std::string msr2brailleInsiderHandler::fetchOutputFileNameFromTheOptions () cons
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Fetching the output file name from the options in OAH handler \"" <<
       fHandlerHeader <<
       "\"" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -308,9 +340,9 @@ std::string msr2brailleInsiderHandler::fetchOutputFileNameFromTheOptions () cons
     if (autoOutputFileNameHasBeenSet) {
       // '-o, -output-file-name' has been selected
       // '-aofn, -auto-output-file-name' has been selected
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         "options' " <<
         outputFileNameStringAtom->fetchNames () <<
         "' and '" <<
@@ -318,7 +350,7 @@ std::string msr2brailleInsiderHandler::fetchOutputFileNameFromTheOptions () cons
         "' cannot be selected simultaneously" <<
         "\")";
 
-      oahError (s.str ());
+      oahError (ss.str ());
     }
     else {
       // '-o, -output-file-name' has been selected
@@ -335,7 +367,7 @@ std::string msr2brailleInsiderHandler::fetchOutputFileNameFromTheOptions () cons
       // '-aofn, -auto-output-file-name' has been selected
       std::string
         inputSourceName =
-          gGlobalServiceRunData->getInputSourceName ();
+          gGlobalCurrentServiceRunData->getInputSourceName ();
 
       // determine output file base name
       if (inputSourceName == "-") {
@@ -362,11 +394,17 @@ std::string msr2brailleInsiderHandler::fetchOutputFileNameFromTheOptions () cons
 
 #ifdef MF_TRACING_IS_ENABLED
       if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-        gLogStream <<
+        std::stringstream ss;
+
+        ss <<
           "msr2brailleInsiderHandler::fetchOutputFileNameFromTheOptions(): outputFileName 1 = \"" <<
           outputFileName <<
           "\"" <<
           std::endl;
+
+        gWaeHandler->waeTrace (
+          __FILE__, __LINE__,
+          ss.str ());
       }
 #endif
 
@@ -422,11 +460,17 @@ std::string msr2brailleInsiderHandler::fetchOutputFileNameFromTheOptions () cons
 
 #ifdef MF_TRACING_IS_ENABLED
       if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-        gLogStream <<
+        std::stringstream ss;
+
+        ss <<
           "msr2brailleInsiderHandler::fetchOutputFileNameFromTheOptions(): outputFileName 2 = " <<
           outputFileName <<
           "\"" <<
           std::endl;
+
+        gWaeHandler->waeTrace (
+          __FILE__, __LINE__,
+          ss.str ());
       }
 #endif
 
@@ -448,11 +492,17 @@ std::string msr2brailleInsiderHandler::fetchOutputFileNameFromTheOptions () cons
 
 #ifdef MF_TRACING_IS_ENABLED
       if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-        gLogStream <<
+        std::stringstream ss;
+
+        ss <<
           "msr2brailleInsiderHandler::fetchOutputFileNameFromTheOptions(): outputFileName 3 = " <<
           outputFileName <<
           "\"" <<
           std::endl;
+
+        gWaeHandler->waeTrace (
+          __FILE__, __LINE__,
+          ss.str ());
       }
 #endif
     }
@@ -513,9 +563,15 @@ void msr2brailleInsiderOahGroup::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       ".\\\" ==> msr2brailleInsiderOahGroup::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -526,9 +582,15 @@ void msr2brailleInsiderOahGroup::acceptIn (basevisitor* v)
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             ".\\\" ==> Launching msr2brailleInsiderOahGroup::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
         p->visitStart (elem);
@@ -539,9 +601,15 @@ void msr2brailleInsiderOahGroup::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       ".\\\" ==> msr2brailleInsiderOahGroup::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -552,9 +620,15 @@ void msr2brailleInsiderOahGroup::acceptOut (basevisitor* v)
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             ".\\\" ==> Launching msr2brailleInsiderOahGroup::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
         p->visitEnd (elem);
@@ -565,9 +639,15 @@ void msr2brailleInsiderOahGroup::browseData (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       ".\\\" ==> msr2brailleInsiderOahGroup::browseData ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -667,11 +747,17 @@ void msr2brailleInsiderOahGroup::initializeXml2brailleInsiderOahGroup ()
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream << std::left <<
+    std::stringstream ss;
+
+    ss <<
       "Initializing \"" <<
       fGroupHeader <<
       "\" group" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 }
@@ -714,9 +800,15 @@ S_msr2brailleInsiderOahGroup createGlobalMrailleGenerationOahGroup (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Creating global msr2braille OAH group" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 

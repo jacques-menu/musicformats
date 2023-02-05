@@ -86,9 +86,15 @@ void msdlConverterOahGroup::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       ".\\\" ==> msdlConverterOahGroup::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -99,9 +105,15 @@ void msdlConverterOahGroup::acceptIn (basevisitor* v)
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             ".\\\" ==> Launching msdlConverterOahGroup::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
         p->visitStart (elem);
@@ -112,9 +124,15 @@ void msdlConverterOahGroup::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       ".\\\" ==> msdlConverterOahGroup::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -125,9 +143,15 @@ void msdlConverterOahGroup::acceptOut (basevisitor* v)
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             ".\\\" ==> Launching msdlConverterOahGroup::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
         p->visitEnd (elem);
@@ -138,9 +162,15 @@ void msdlConverterOahGroup::browseData (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       ".\\\" ==> msdlConverterOahGroup::browseData ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 }
@@ -174,9 +204,15 @@ S_msdlConverterOahGroup createGlobalMsdlConverterOahGroup ()
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Creating global msdlConverter OAH group" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 

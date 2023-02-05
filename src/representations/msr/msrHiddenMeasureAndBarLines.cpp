@@ -24,6 +24,7 @@
 #include "msrMeasureConstants.h"
 
 #include "oahOah.h"
+#include "oahEarlyOptions.h"
 
 #include "msrOah.h"
 
@@ -40,10 +41,16 @@ S_msrHiddenMeasureAndBarLine msrHiddenMeasureAndBarLine::create (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasures ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Creating hiddenMeasureAndBarLine" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -107,9 +114,15 @@ void msrHiddenMeasureAndBarLine::setHiddenMeasureAndBarLineUpLinkToMeasure (
 void msrHiddenMeasureAndBarLine::acceptIn (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrHiddenMeasureAndBarLine::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrHiddenMeasureAndBarLine>*
@@ -118,9 +131,15 @@ void msrHiddenMeasureAndBarLine::acceptIn (basevisitor* v)
         S_msrHiddenMeasureAndBarLine elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrHiddenMeasureAndBarLine::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitStart (elem);
   }
@@ -129,9 +148,15 @@ void msrHiddenMeasureAndBarLine::acceptIn (basevisitor* v)
 void msrHiddenMeasureAndBarLine::acceptOut (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrHiddenMeasureAndBarLine::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrHiddenMeasureAndBarLine>*
@@ -140,9 +165,15 @@ void msrHiddenMeasureAndBarLine::acceptOut (basevisitor* v)
         S_msrHiddenMeasureAndBarLine elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrHiddenMeasureAndBarLine::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitEnd (elem);
   }
@@ -153,14 +184,14 @@ void msrHiddenMeasureAndBarLine::browseData (basevisitor* v)
 
 std::string msrHiddenMeasureAndBarLine::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "HiddenMeasureAndBarLine" <<
     ", measurePosition: " << fMeasureElementMeasurePosition <<
     ", line " << fInputLineNumber;
 
-  return s.str ();
+  return ss.str ();
 }
 
 void msrHiddenMeasureAndBarLine::print (std::ostream& os) const

@@ -24,6 +24,7 @@
 #include "msrScores.h"
 
 #include "oahOah.h"
+#include "oahEarlyOptions.h"
 
 #include "msrOah.h"
 
@@ -94,9 +95,15 @@ S_msrScore msrScore::createScoreNewbornClone ()
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceScores ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Creating a newborn clone of a score" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -161,18 +168,18 @@ void msrScore::registerVoiceInScoreAllVoicesList (
 void msrScore::addPartGroupToScore (const S_msrPartGroup& partGroup)
 {
   if (fScorePartGroupsSet.count (partGroup)) {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "part group '" <<
       partGroup->getPartGroupCombinedName () <<
       "' already exists in this score";
 
     msrInternalError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       partGroup->getInputLineNumber (),
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 
   // register it in this score
@@ -185,11 +192,17 @@ void msrScore::appendCreditToScore (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceCredits ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Appending credit '" <<
       credit->asString () <<
       "' to score" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -204,7 +217,9 @@ S_msrPart msrScore::fetchPartFromScoreByItsPartID (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTracePartGroupsDetails ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "fetchPartFromScoreByItsPartID(" << partID << "), fPartGroupsList contains:" <<
       std::endl;
 
@@ -214,8 +229,10 @@ S_msrPart msrScore::fetchPartFromScoreByItsPartID (
       std::list<S_msrPartGroup>::const_iterator i = fPartGroupsList.begin ();
         i != fPartGroupsList.end ();
         ++i
-      ) {
-      gLogStream <<
+    ) {
+      std::stringstream ss;
+
+      ss <<
         (*i)->getPartGroupCombinedName () <<
         ", " <<
         (*i)->getPartGroupName () <<
@@ -224,9 +241,13 @@ S_msrPart msrScore::fetchPartFromScoreByItsPartID (
 
     --gIndenter;
 
-    gLogStream <<
+    ss <<
       "<=- fetchPartFromScoreByItsPartID(" << partID << ")" <<
       std::endl << std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -288,9 +309,15 @@ S_msrPartGroup msrScore::fetchScorePartGroup ( JMI
 void msrScore::acceptIn (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrScore::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrScore>*
@@ -299,9 +326,15 @@ void msrScore::acceptIn (basevisitor* v)
         S_msrScore elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrScore::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitStart (elem);
   }
@@ -310,9 +343,15 @@ void msrScore::acceptIn (basevisitor* v)
 void msrScore::acceptOut (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrScore::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrScore>*
@@ -321,9 +360,15 @@ void msrScore::acceptOut (basevisitor* v)
         S_msrScore elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrScore::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitEnd (elem);
   }
@@ -332,9 +377,15 @@ void msrScore::acceptOut (basevisitor* v)
 void msrScore::browseData (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrScore::browseData ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (fIdentification) {
@@ -394,9 +445,15 @@ void msrScore::browseData (basevisitor* v)
   } // for
 
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% <== msrScore::browseData ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 }
 

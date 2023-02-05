@@ -18,6 +18,7 @@
 #include "msrGlissandos.h"
 
 #include "oahOah.h"
+#include "oahEarlyOptions.h"
 
 #include "msrOah.h"
 
@@ -94,11 +95,17 @@ S_msrGlissando msrGlissando::createGlissandoNewbornClone ()
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceGlissandos ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Creating a newborn clone of glissando '" <<
       asString () <<
       "'" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -117,9 +124,15 @@ S_msrGlissando msrGlissando::createGlissandoNewbornClone ()
 void msrGlissando::acceptIn (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrGlissando::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrGlissando>*
@@ -128,9 +141,15 @@ void msrGlissando::acceptIn (basevisitor* v)
         S_msrGlissando elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrGlissando::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitStart (elem);
   }
@@ -139,9 +158,15 @@ void msrGlissando::acceptIn (basevisitor* v)
 void msrGlissando::acceptOut (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrGlissando::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrGlissando>*
@@ -150,9 +175,15 @@ void msrGlissando::acceptOut (basevisitor* v)
         S_msrGlissando elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrGlissando::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitEnd (elem);
   }
@@ -163,9 +194,9 @@ void msrGlissando::browseData (basevisitor* v)
 
 std::string msrGlissando::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "[Glissando" <<
     ", fGlissandoNumber " << fGlissandoNumber <<
     ", fGlissandoTypeKind: " << fGlissandoTypeKind <<
@@ -174,7 +205,7 @@ std::string msrGlissando::asString () const
     ", line " << fInputLineNumber <<
     ']';
 
-  return s.str ();
+  return ss.str ();
 }
 
 void msrGlissando::print (std::ostream& os) const

@@ -391,7 +391,7 @@ void mxsr2msrTranslator::initializeNoteData ()
 
 //________________________________________________________________________
 void mxsr2msrTranslator::printVoicesLastMetNoteMap (
-  int           inputLineNumber,
+  int                inputLineNumber,
   const std::string& context)
 {
   size_t
@@ -443,7 +443,7 @@ void mxsr2msrTranslator::printVoicesLastMetNoteMap (
 
 //________________________________________________________________________
 void mxsr2msrTranslator::checkStep (
-  int           inputLineNumber,
+  int                inputLineNumber,
   const std::string& stepValue,
   const std::string& markup)
 {
@@ -451,34 +451,34 @@ void mxsr2msrTranslator::checkStep (
     char firstChar = stepValue [0];
 
     if (firstChar < 'A' || firstChar > 'G') {
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         markup <<
         " value " << firstChar <<
         " is not a letter from A to G";
 
       mxsr2msrError (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         inputLineNumber,
         __FILE__, __LINE__,
-        s.str ());
+        ss.str ());
     }
   }
 
   else {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       markup <<
       " value '" << stepValue <<
       "' should be a single letter from A to G";
 
       mxsr2msrError (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         inputLineNumber,
         __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 }
 
@@ -489,12 +489,18 @@ S_msrStaff mxsr2msrTranslator::fetchStaffFromCurrentPart (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceStaves ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "Fetching staff " <<
       staffNumber <<
       " from current part" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -515,27 +521,33 @@ S_msrStaff mxsr2msrTranslator::fetchStaffFromCurrentPart (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   if (! staff) {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "staff '" << staffNumber <<
       "' not found in score skeleton's part " <<
       fCurrentPart->getPartCombinedName ();
 
     mxsr2msrInternalError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 #endif
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceStaves ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> fetchStaffFromCurrentPart returns " <<
       staff->getStaffName () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -550,7 +562,9 @@ S_msrVoice mxsr2msrTranslator::fetchVoiceFromCurrentPart (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceVoices ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "Fetching voice " <<
       voiceNumber <<
       " in staff " <<
@@ -558,6 +572,10 @@ S_msrVoice mxsr2msrTranslator::fetchVoiceFromCurrentPart (
       " from current part" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -583,25 +601,31 @@ S_msrVoice mxsr2msrTranslator::fetchVoiceFromCurrentPart (
   if (! voice) {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceVoices ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       staff <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "voice '" << voiceNumber <<
       "' not found in score skeleton's staff \"" <<
       staff->getStaffName () <<
       "\"";
 
     mxsr2msrInternalError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 #endif
 
@@ -613,10 +637,16 @@ S_msrVoice mxsr2msrTranslator::fetchVoiceFromCurrentPart (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceVoices ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> fetchVoiceFromCurrentPart() returns " <<
       voice->getVoiceName () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -631,12 +661,18 @@ S_msrVoice mxsr2msrTranslator::fetchFirstVoiceFromCurrentPart (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceVoices ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "Fetching first voice in staff " <<
       staffNumber <<
       " from current part" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -659,18 +695,18 @@ S_msrVoice mxsr2msrTranslator::fetchFirstVoiceFromCurrentPart (
   if (! voice) {
     staff->print (gLogStream); // JMI
 
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "first voice not found in score skeleton's staff \"" <<
       staff->getStaffName () <<
       "\"";
 
     mxsr2msrInternalError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 #endif
 
@@ -682,10 +718,16 @@ S_msrVoice mxsr2msrTranslator::fetchFirstVoiceFromCurrentPart (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceVoices ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> fetchVoiceFromCurrentPart() returns " <<
       voice->getVoiceName () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -697,10 +739,16 @@ void mxsr2msrTranslator::visitStart (S_millimeters& elt)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_millimeters" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -711,10 +759,16 @@ void mxsr2msrTranslator::visitStart (S_tenths& elt)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_tenths" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -728,10 +782,16 @@ void mxsr2msrTranslator::visitEnd (S_scaling& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> End visiting S_scaling" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -745,10 +805,16 @@ void mxsr2msrTranslator::visitEnd (S_scaling& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceGeometry ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "There are " << fCurrentTenths <<
       " tenths for " <<  fCurrentMillimeters <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -765,10 +831,16 @@ void mxsr2msrTranslator::visitStart (S_system_layout& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_system_layout" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -787,10 +859,16 @@ void mxsr2msrTranslator::visitEnd (S_system_layout& elt)
     elt->getInputLineNumber ();
 
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> End visiting S_system_layout" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -821,16 +899,22 @@ void mxsr2msrTranslator::visitStart (S_system_margins& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_system_margins" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
   if (! fOnGoingSystemLayout) {
     mxsr2msrError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
       "<system-margins /> is out of context");
@@ -843,10 +927,16 @@ void mxsr2msrTranslator::visitStart (S_system_distance& elt)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_system_distance" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -862,7 +952,7 @@ void mxsr2msrTranslator::visitStart (S_system_distance& elt)
 
   else {
     mxsr2msrError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       elt->getInputLineNumber (),
       __FILE__, __LINE__,
       "<system-distance /> is out of context");
@@ -876,10 +966,16 @@ void mxsr2msrTranslator::visitStart (S_top_system_distance& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_top_system_distance" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -895,7 +991,7 @@ void mxsr2msrTranslator::visitStart (S_top_system_distance& elt)
 
   else {
     mxsr2msrError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
       "<top-system-distance /> is out of context");
@@ -909,16 +1005,22 @@ void mxsr2msrTranslator::visitEnd (S_system_margins& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> End visiting S_system_margins" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
   if (! fOnGoingSystemLayout) {
     mxsr2msrError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
       "<system-margins /> is out of context");
@@ -932,24 +1034,30 @@ void mxsr2msrTranslator::visitStart (S_system_dividers& elt)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_system_dividers" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "<system-dividers /> is not supported yet by " <<
       gGlobalOahOahGroup->getOahOahGroupServiceName ();
 
 /* JMI
     mxsr2msrWarning (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       elt->getInputLineNumber (),
-     s.str ());
+     ss.str ());
      */
 }
 
@@ -960,10 +1068,16 @@ void mxsr2msrTranslator::visitStart (S_left_divider& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_left_divider" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -986,10 +1100,16 @@ void mxsr2msrTranslator::visitStart (S_right_divider& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_right_divider" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -1013,10 +1133,16 @@ void mxsr2msrTranslator::visitStart (S_notations& elt)
     elt->getInputLineNumber ();
 
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_notations" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -1030,10 +1156,16 @@ void mxsr2msrTranslator::visitStart (S_other_notation& elt)
     elt->getInputLineNumber ();
 
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_other_notation" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -1048,10 +1180,16 @@ void mxsr2msrTranslator::visitStart (S_page_layout& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_page_layout" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -1067,10 +1205,16 @@ void mxsr2msrTranslator::visitEnd (S_page_layout& elt)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> End visiting S_page_layout" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -1090,10 +1234,16 @@ void mxsr2msrTranslator::visitStart (S_page_height& elt)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_page_height" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -1108,7 +1258,7 @@ void mxsr2msrTranslator::visitStart (S_page_height& elt)
   }
   else {
     mxsr2msrError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       elt->getInputLineNumber (),
       __FILE__, __LINE__,
       "<page-height /> is out of context");
@@ -1119,10 +1269,16 @@ void mxsr2msrTranslator::visitStart (S_page_width& elt)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_page_width" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -1137,7 +1293,7 @@ void mxsr2msrTranslator::visitStart (S_page_width& elt)
   }
   else {
     mxsr2msrError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       elt->getInputLineNumber (),
       __FILE__, __LINE__,
       "<page-width /> is out of context");
@@ -1151,10 +1307,16 @@ void mxsr2msrTranslator::visitStart (S_page_margins& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_page_margins" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -1171,23 +1333,23 @@ void mxsr2msrTranslator::visitStart (S_page_margins& elt)
     else if (pageMarginsType == "both")
       fCurrentPageMarginsTypeKind = msrMarginTypeKind::kMarginBoth;
     else if (pageMarginsType. size ()) {
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         "unknown page margins type \"" <<
         pageMarginsType <<
         "\"";
 
       mxsr2msrError (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         inputLineNumber,
         __FILE__, __LINE__,
-        s.str ());
+        ss.str ());
     }
   }
   else {
     mxsr2msrError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
       "<page-margins /> is out of context");
@@ -1227,10 +1389,16 @@ void mxsr2msrTranslator::visitEnd (S_page_margins& elt)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> End visiting S_page_margins" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -1249,11 +1417,17 @@ void mxsr2msrTranslator::visitStart (S_left_margin& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_left_margin" <<
       ", " << leftMargin << " tenths" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -1283,7 +1457,7 @@ void mxsr2msrTranslator::visitStart (S_left_margin& elt)
 
   else {
     mxsr2msrError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
       "<left-margin /> is out of context");
@@ -1299,7 +1473,9 @@ void mxsr2msrTranslator::visitStart (S_right_margin& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_right_margin" <<
       ", " << rightMargin << " tenths" <<
        ", line " << inputLineNumber <<
@@ -1333,7 +1509,7 @@ void mxsr2msrTranslator::visitStart (S_right_margin& elt)
 
   else {
     mxsr2msrError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
       "<right-margin /> is out of context");
@@ -1349,11 +1525,17 @@ void mxsr2msrTranslator::visitStart (S_top_margin& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_top_margin" <<
       ", " << topMargin << " tenths" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -1370,7 +1552,7 @@ void mxsr2msrTranslator::visitStart (S_top_margin& elt)
 
   else {
     mxsr2msrError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
       "<top-margin /> is out of context");
@@ -1386,11 +1568,17 @@ void mxsr2msrTranslator::visitStart (S_bottom_margin& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_bottom_margin" <<
       ", " << bottomMargin << " tenths" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -1407,7 +1595,7 @@ void mxsr2msrTranslator::visitStart (S_bottom_margin& elt)
 
   else {
     mxsr2msrError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
       "<bottom-margin /> is out of context");
@@ -1422,10 +1610,16 @@ void mxsr2msrTranslator::visitStart (S_staff_layout& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_staff_layout" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -1469,10 +1663,16 @@ void mxsr2msrTranslator::visitEnd (S_staff_layout& elt)
     elt->getInputLineNumber ();
 
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> End visiting S_staff_layout" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -1489,10 +1689,16 @@ void mxsr2msrTranslator::visitStart (S_staff_distance& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_staff_distance" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -1508,7 +1714,7 @@ void mxsr2msrTranslator::visitStart (S_staff_distance& elt)
 
   else {
     mxsr2msrError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
       "<staff-distance /> is out of context");
@@ -1523,10 +1729,16 @@ void mxsr2msrTranslator::visitStart (S_measure_layout& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_measure_layout" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -1545,10 +1757,16 @@ void mxsr2msrTranslator::visitEnd (S_measure_layout& elt)
     elt->getInputLineNumber ();
 
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> End visiting S_measure_layout" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -1565,10 +1783,16 @@ void mxsr2msrTranslator::visitStart (S_measure_distance& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_measure_distance" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -1584,7 +1808,7 @@ void mxsr2msrTranslator::visitStart (S_measure_distance& elt)
 
   else {
     mxsr2msrError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
       "<measure-distance /> is out of context");
@@ -1599,10 +1823,16 @@ void mxsr2msrTranslator::visitStart (S_appearance& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_appearance" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -1716,10 +1946,16 @@ void mxsr2msrTranslator::visitEnd (S_appearance& elt)
     elt->getInputLineNumber ();
 
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> End visiting S_appearance" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -1736,10 +1972,16 @@ void mxsr2msrTranslator::visitStart (S_line_width& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_line_width" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -1795,18 +2037,18 @@ void mxsr2msrTranslator::visitStart (S_line_width& elt)
         lineWidthTypeKind = msrLineWidthTypeKind::kLineWidthTypeWedge;
 
       else {
-        std::stringstream s;
+        std::stringstream ss;
 
-        s <<
+        ss <<
           "<line-width /> type \"" <<
           lineWidthTypeString <<
           "\" is unknown";
 
         mxsr2msrError (
-          gGlobalServiceRunData->getInputSourceName (),
+          gGlobalCurrentServiceRunData->getInputSourceName (),
           inputLineNumber,
           __FILE__, __LINE__,
-          s.str ());
+          ss.str ());
       }
 
       // create a line width
@@ -1824,24 +2066,24 @@ void mxsr2msrTranslator::visitStart (S_line_width& elt)
         appendLineWidth (lineWidth);
     }
     else {
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         "<line-width /> type \"" <<
         lineWidthTypeString <<
         "\" is missing";
 
       mxsr2msrError (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         inputLineNumber,
         __FILE__, __LINE__,
-        s.str ());
+        ss.str ());
     }
   }
 
   else {
     mxsr2msrError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
       "<line-width /> is out of context");
@@ -1855,10 +2097,16 @@ void mxsr2msrTranslator::visitStart (S_note_size& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_note_size" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -1882,18 +2130,18 @@ void mxsr2msrTranslator::visitStart (S_note_size& elt)
         noteSizeTypeKind = msrNoteSizeTypeKind::kNoteSizeTypeLarge;
 
       else {
-        std::stringstream s;
+        std::stringstream ss;
 
-        s <<
+        ss <<
           "<note-size /> type \"" <<
           noteSizeTypeString <<
           "\" is unknown";
 
         mxsr2msrError (
-          gGlobalServiceRunData->getInputSourceName (),
+          gGlobalCurrentServiceRunData->getInputSourceName (),
           inputLineNumber,
           __FILE__, __LINE__,
-          s.str ());
+          ss.str ());
       }
 
       // create a note size
@@ -1909,24 +2157,24 @@ void mxsr2msrTranslator::visitStart (S_note_size& elt)
         appendNoteSize (noteSize);
     }
     else {
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         "<note-size /> type \"" <<
         noteSizePercentage <<
         "\" is missing";
 
       mxsr2msrError (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         inputLineNumber,
         __FILE__, __LINE__,
-        s.str ());
+        ss.str ());
     }
   }
 
   else {
     mxsr2msrError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
       "<note-size /> is out of context");
@@ -1940,10 +2188,16 @@ void mxsr2msrTranslator::visitStart (S_distance& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_distance" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -1965,18 +2219,18 @@ void mxsr2msrTranslator::visitStart (S_distance& elt)
         distanceTypeKind = msrDistanceTypeKind::kDistanceTypeBeam;
 
       else {
-        std::stringstream s;
+        std::stringstream ss;
 
-        s <<
+        ss <<
           "<distance /> type \"" <<
           distanceTypeString <<
           "\" is unknown";
 
         mxsr2msrError (
-          gGlobalServiceRunData->getInputSourceName (),
+          gGlobalCurrentServiceRunData->getInputSourceName (),
           inputLineNumber,
           __FILE__, __LINE__,
-          s.str ());
+          ss.str ());
       }
 
       // create a distance
@@ -1994,23 +2248,23 @@ void mxsr2msrTranslator::visitStart (S_distance& elt)
         appendDistance (distance);
     }
     else {
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         "<distance /> type \"" <<
         distanceTypeString <<
         "\" is missing";
 
       mxsr2msrError (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         inputLineNumber,
         __FILE__, __LINE__,
-        s.str ());
+        ss.str ());
     }
   }
   else {
     mxsr2msrError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
       "<distance /> is out of context");
@@ -2024,10 +2278,16 @@ void mxsr2msrTranslator::visitStart (S_glyph& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_glyph" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -2073,18 +2333,18 @@ void mxsr2msrTranslator::visitStart (S_glyph& elt)
         glyphTypeKind = msrGlyphTypeKind::kGlyphTypeOctaveShiftContinue22;
 
       else {
-        std::stringstream s;
+        std::stringstream ss;
 
-        s <<
+        ss <<
           "<glyph /> type \"" <<
           glyphTypeString <<
           "\" is unknown";
 
         mxsr2msrError (
-          gGlobalServiceRunData->getInputSourceName (),
+          gGlobalCurrentServiceRunData->getInputSourceName (),
           inputLineNumber,
           __FILE__, __LINE__,
-          s.str ());
+          ss.str ());
       }
 
       // create a glyph
@@ -2100,23 +2360,23 @@ void mxsr2msrTranslator::visitStart (S_glyph& elt)
         appendGlyph (glyph);
     }
     else {
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         "<glyph /> type \"" <<
         glyphTypeString <<
         "\" is missing";
 
       mxsr2msrError (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         inputLineNumber,
         __FILE__, __LINE__,
-        s.str ());
+        ss.str ());
     }
   }
   else {
     mxsr2msrError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
       "<glyph /> is out of context");
@@ -2130,10 +2390,16 @@ void mxsr2msrTranslator::visitStart (S_other_appearance& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_other_appearance" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -2142,7 +2408,7 @@ void mxsr2msrTranslator::visitStart (S_other_appearance& elt)
   }
   else {
     mxsr2msrError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
       "<other-appearance /> is out of context");
@@ -2159,10 +2425,16 @@ void mxsr2msrTranslator::visitStart (S_part& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_part" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -2174,11 +2446,17 @@ void mxsr2msrTranslator::visitStart (S_part& elt)
       ||
     gGlobalOahEarlyOptions.getEarlyTracePasses ()
   ) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       std::endl <<
       "<!--=== part \"" << partID << "\"" <<
       ", line " << inputLineNumber << " ===-->" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -2210,31 +2488,31 @@ void mxsr2msrTranslator::visitStart (S_part& elt)
         fCurrentPart->
           getPartID ();
 
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         "part 'id' is empty, using '" <<
         partID <<
         "' since it is the only part in the <part-list />";
 
       mxsr2msrWarning (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         inputLineNumber,
-        s.str ());
+        ss.str ());
     }
 
     else {
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         "part \"" << partID <<
         "\" not found in score skeleton";
 
       mxsr2msrInternalError (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         inputLineNumber,
         __FILE__, __LINE__,
-        s.str ());
+        ss.str ());
     }
   }
 #endif
@@ -2252,7 +2530,9 @@ void mxsr2msrTranslator::visitStart (S_part& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceParts ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--------------------------------------------" <<
       std::endl <<
       "Analyzing part " <<
@@ -2260,6 +2540,10 @@ void mxsr2msrTranslator::visitStart (S_part& elt)
         getPartCombinedName () <<
         " -- start" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -2307,10 +2591,16 @@ void mxsr2msrTranslator::visitEnd (S_part& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> End visiting S_part" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -2319,7 +2609,9 @@ void mxsr2msrTranslator::visitEnd (S_part& elt)
 /*
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceParts ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Analyzing part " <<
       fCurrentPart->
         getPartCombinedName () <<
@@ -2327,6 +2619,10 @@ void mxsr2msrTranslator::visitEnd (S_part& elt)
       std::endl <<
       "--------------------------------------------" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 */
@@ -2447,10 +2743,16 @@ void mxsr2msrTranslator::visitStart (S_attributes& elt)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_attributes" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 }
@@ -2462,17 +2764,23 @@ void mxsr2msrTranslator::visitEnd (S_attributes& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> End visiting S_attributes" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
   // have the divisions been defined alright?
   if (! fCurrentDivisions) {
     mxsr2msrWarning (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       "no <divisions/> markup found in MusicXML data, using 1 by default");
 
@@ -2510,10 +2818,16 @@ void mxsr2msrTranslator::visitStart (S_divisions& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_divisions" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -2525,7 +2839,7 @@ void mxsr2msrTranslator::visitStart (S_divisions& elt)
     fCurrentDivisionsPerQuarterNote > 16383
   ) {
     mxsr2msrError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
       "divisions per quarter note should be between 1 and 16383");
@@ -2534,22 +2848,28 @@ void mxsr2msrTranslator::visitStart (S_divisions& elt)
   // set current part's divisions per quarter note
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceDivisions ()) {
+		std::stringstream ss;
+
     if (fCurrentDivisionsPerQuarterNote == 1) {
-      gLogStream <<
+      ss <<
         "There is 1 division";
     }
     else {
-      gLogStream <<
+      ss <<
         "There are " <<
         fCurrentDivisionsPerQuarterNote <<
         " divisions";
     }
 
-    gLogStream <<
+    ss <<
       " per quarter note in part " <<
       fCurrentPart->getPartCombinedName() <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -2568,10 +2888,16 @@ void mxsr2msrTranslator::visitStart (S_clef& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_clef" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -2603,10 +2929,16 @@ void mxsr2msrTranslator::visitStart (S_sign& elt)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_sign" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -2617,10 +2949,16 @@ void mxsr2msrTranslator::visitStart (S_line& elt)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_line" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -2634,27 +2972,33 @@ void mxsr2msrTranslator::visitStart (S_clef_octave_change& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_clef_octave_change" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
   fCurrentClefOctaveChange = (int)(*elt);
 
   if (fCurrentClefOctaveChange < -2 || fCurrentClefOctaveChange > 2) {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "clef-octave-change \"" << fCurrentClefOctaveChange <<
       "\" is unknown";
 
     mxsr2msrError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 }
 
@@ -2665,10 +3009,16 @@ void mxsr2msrTranslator::visitEnd (S_clef& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> End visiting S_clef" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -2708,17 +3058,17 @@ void mxsr2msrTranslator::visitEnd (S_clef& elt)
       clefKind = msrClefKind::kClefTrebleLine1;
 
     else {
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         "'G' clef line \"" << fCurrentClefLine <<
         "\" is unknown";
 
       mxsr2msrError (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         inputLineNumber,
         __FILE__, __LINE__,
-        s.str ());
+        ss.str ());
     }
   }
 
@@ -2776,17 +3126,17 @@ void mxsr2msrTranslator::visitEnd (S_clef& elt)
     }
 
     else {
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         "'F' clef line \"" << fCurrentClefLine <<
         "\" is unknown";
 
       mxsr2msrError (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         inputLineNumber,
         __FILE__, __LINE__,
-        s.str ());
+        ss.str ());
     }
   }
 
@@ -2810,17 +3160,17 @@ void mxsr2msrTranslator::visitEnd (S_clef& elt)
         break;
       default:
         {
-          std::stringstream s;
+          std::stringstream ss;
 
-          s <<
+          ss <<
             "'C' clef line \"" << fCurrentClefLine <<
             "\" is unknown";
 
           mxsr2msrError (
-            gGlobalServiceRunData->getInputSourceName (),
+            gGlobalCurrentServiceRunData->getInputSourceName (),
             inputLineNumber,
             __FILE__, __LINE__,
-            s.str ());
+            ss.str ());
         }
     } // switch
   }
@@ -2842,17 +3192,17 @@ void mxsr2msrTranslator::visitEnd (S_clef& elt)
         break;
       default:
         {
-          std::stringstream s;
+          std::stringstream ss;
 
-          s <<
+          ss <<
             "tablature line \"" << fCurrentClefLine <<
             "\" is unknown";
 
           mxsr2msrError (
-            gGlobalServiceRunData->getInputSourceName (),
+            gGlobalCurrentServiceRunData->getInputSourceName (),
             inputLineNumber,
             __FILE__, __LINE__,
-            s.str ());
+            ss.str ());
         }
     } // switch
   }
@@ -2871,17 +3221,17 @@ void mxsr2msrTranslator::visitEnd (S_clef& elt)
 
   else {
     // unknown clef sign
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "clef sign \"" << fCurrentClefSign <<
       "\" is unknown";
 
     mxsr2msrError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 
   // is this clef sign in the replace clef map?
@@ -2901,13 +3251,19 @@ void mxsr2msrTranslator::visitEnd (S_clef& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceClefs ()) {
-      gLogStream <<
+			std::stringstream ss;
+
+			ss <<
         "Replace clef " <<
         msrClefKindAsString (clefKind) <<
         " by " <<
         msrClefKindAsString (newClefKind) <<
         ", line " << inputLineNumber <<
         std::endl;
+
+			gWaeHandler->waeTrace (
+				__FILE__, __LINE__,
+				ss.str ());
     }
 #endif
 
@@ -2947,10 +3303,16 @@ void mxsr2msrTranslator::visitStart (S_key& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_key" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -2988,10 +3350,16 @@ void mxsr2msrTranslator::visitStart (S_cancel& elt)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_cancel" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -3002,10 +3370,16 @@ void mxsr2msrTranslator::visitStart (S_fifths& elt)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_fifths" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -3021,10 +3395,16 @@ void mxsr2msrTranslator::visitStart (S_mode& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_mode" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -3061,16 +3441,16 @@ void mxsr2msrTranslator::visitStart (S_mode& elt)
     fCurrentModeKind = msrModeKind::kModeLocrian;
   }
   else {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "mode '" << mode << "' is unknown";
 
     mxsr2msrError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 }
 
@@ -3081,16 +3461,22 @@ void mxsr2msrTranslator::visitStart (S_key_step& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_key_step" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
   if (fCurrentHumdrumScotKeyItem) {
     mxsr2msrError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
       "Humdrum/Scot key step found while another one is being handled");
@@ -3134,16 +3520,22 @@ void mxsr2msrTranslator::visitStart (S_key_alter& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_key_alter" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
   if (! fCurrentHumdrumScotKeyItem) {
     mxsr2msrError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
       "Humdrum/Scot key alter found while no key step is being handled");
@@ -3158,17 +3550,17 @@ void mxsr2msrTranslator::visitStart (S_key_alter& elt)
         keyAlter);
 
   if (keyAlterationKind == msrAlterationKind::kAlteration_UNKNOWN) {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "key alter '" << keyAlter << "'"
       "' should be -3, -2, -1.5, -1, -0.5, 0, +0.5, +1, +1.5, +2 or +3";
 
     mxsr2msrError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 
   // complement the current Humdrum/Scot item with the alteration
@@ -3187,10 +3579,16 @@ void mxsr2msrTranslator::visitStart (S_key_octave& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_key_octave" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -3218,19 +3616,19 @@ If the cancel attribute is
     item = fCurrentHumdrumScotKeyItemsVector [number - 1];
   }
   catch (int e) {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "item " << number <<
       " not found in Humdrum/Scot key items" <<
       std::endl <<
       "An std::exception number " << e << " occurred";
 
     mxsr2msrError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 
   if (! item) { // JMI
@@ -3250,17 +3648,17 @@ If the cancel attribute is
 
     gLogStream << "----------------" << std::endl;
 
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "item " << number <<
       " not found in Humdrum/Scot key items";
 
     mxsr2msrError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 
   // complement the item with the octave
@@ -3276,10 +3674,16 @@ void mxsr2msrTranslator::visitEnd (S_key& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> End visiting S_key" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -3399,16 +3803,16 @@ S_msrKey mxsr2msrTranslator::handleTraditionalKey (
 
     default: // unknown key sign!!
       {
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         "unknown key fifths number \"" << fCurrentKeyFifths << "\"";
 
       mxsr2msrError (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         inputLineNumber,
         __FILE__, __LINE__,
-        s.str ());
+        ss.str ());
       }
   } // switch
 
@@ -3459,7 +3863,7 @@ S_msrKey mxsr2msrTranslator::handleHumdrumScotKey (
 
   else
     mxsr2msrError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
       "Humdrum/Scot key is empty");
@@ -3476,10 +3880,16 @@ void mxsr2msrTranslator::visitStart (S_time& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_time" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -3510,16 +3920,16 @@ void mxsr2msrTranslator::visitStart (S_time& elt)
 
   else {
     if (timeSignatureSymbol.size ()) {
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         "time symbol " << timeSignatureSymbol << " is unknown";
 
       mxsr2msrError (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         inputLineNumber,
         __FILE__, __LINE__,
-        s.str ());
+        ss.str ());
     }
   }
 
@@ -3532,10 +3942,16 @@ void mxsr2msrTranslator::visitStart (S_beats& elt)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_beats" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -3549,10 +3965,16 @@ void mxsr2msrTranslator::visitStart (S_beat_type& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_beat_type" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -3590,7 +4012,7 @@ void mxsr2msrTranslator::visitStart (S_beat_type& elt)
 
   else {
     mxsr2msrError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
       "beat type doesn't contain any beats numbers");
@@ -3606,10 +4028,16 @@ void mxsr2msrTranslator::visitStart (S_senza_misura& elt)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_senza_misura" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -3623,10 +4051,16 @@ void mxsr2msrTranslator::visitStart (S_interchangeable& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_interchangeable" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -3654,16 +4088,16 @@ void mxsr2msrTranslator::visitStart (S_interchangeable& elt)
 
   else {
     if (interchangeableSymbol.size ()) {
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         "interchangeable symbol " << interchangeableSymbol << " is unknown";
 
       mxsr2msrError (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         inputLineNumber,
         __FILE__, __LINE__,
-        s.str ());
+        ss.str ());
     }
   }
 
@@ -3691,16 +4125,16 @@ void mxsr2msrTranslator::visitStart (S_interchangeable& elt)
 
   else {
     if (interchangeableSymbol.size ()) {
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         "interchangeable symbol " << interchangeableSymbol << " is unknown";
 
       mxsr2msrError (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         inputLineNumber,
         __FILE__, __LINE__,
-        s.str ());
+        ss.str ());
     }
   }
 
@@ -3714,10 +4148,16 @@ void mxsr2msrTranslator::visitStart (S_time_relation& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_time_relation" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -3753,16 +4193,16 @@ void mxsr2msrTranslator::visitStart (S_time_relation& elt)
 
   else {
     if (timeSignatureRelation.size ()) {
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         "time-relation " << timeSignatureRelation << " is unknown";
 
       mxsr2msrError (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         inputLineNumber,
         __FILE__, __LINE__,
-        s.str ());
+        ss.str ());
     }
   }
 }
@@ -3774,10 +4214,16 @@ void mxsr2msrTranslator::visitEnd (S_time& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> End visiting S_time" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -3806,7 +4252,7 @@ void mxsr2msrTranslator::visitEnd (S_time& elt)
     // only a 'semza misura' time may be empty
     if (  fCurrentTimeSignatureSymbolKind != msrTimeSignatureSymbolKind::kTimeSignatureSymbolSenzaMisura) {
       mxsr2msrError (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         inputLineNumber,
         __FILE__, __LINE__,
         "time is empty");
@@ -3845,10 +4291,16 @@ void mxsr2msrTranslator::visitStart (S_score_instrument& elt)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_score_instrument" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -3905,10 +4357,16 @@ void mxsr2msrTranslator::visitStart (S_instrument_name& elt)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_instrument_name" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -3923,10 +4381,16 @@ void mxsr2msrTranslator::visitStart (S_solo& elt)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_solo" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -3941,10 +4405,16 @@ void mxsr2msrTranslator::visitStart (S_instruments& elt)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_instruments" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -3997,10 +4467,16 @@ void mxsr2msrTranslator::visitStart (S_transpose& elt)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_transpose" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -4016,10 +4492,16 @@ void mxsr2msrTranslator::visitStart (S_diatonic& elt)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_diatonic" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -4030,10 +4512,16 @@ void mxsr2msrTranslator::visitStart (S_chromatic& elt)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_chromatic" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -4044,10 +4532,16 @@ void mxsr2msrTranslator::visitStart (S_octave_change& elt)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting octave_change" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -4058,10 +4552,16 @@ void mxsr2msrTranslator::visitStart (S_double& elt)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting double" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -4082,10 +4582,16 @@ void mxsr2msrTranslator::visitEnd (S_transpose& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> End visiting S_transpose" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -4101,18 +4607,18 @@ void mxsr2msrTranslator::visitEnd (S_transpose& elt)
       ++octaveOffset;
     } // while
 
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "fTransposition: augmenting chromatic " <<
       fCurrentTransposeChromatic <<
       " to " << auxTransposeChromatic <<
       " and decrementing octave change by " << octaveOffset;
 
     mxsr2msrWarning (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
-      s.str ());
+      ss.str ());
 
     fCurrentTransposeChromatic    =  auxTransposeChromatic;
     fCurrentTransposeOctaveChange -= octaveOffset;
@@ -4129,18 +4635,18 @@ void mxsr2msrTranslator::visitEnd (S_transpose& elt)
       ++octaveOffset;
     } // while
 
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "fTransposition: diminishing  chromatic to " <<
       fCurrentTransposeChromatic <<
       " to " << auxTransposeChromatic <<
       " and incrementing octave change by " << octaveOffset;
 
     mxsr2msrWarning (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
-      s.str ());
+      ss.str ());
 
     fCurrentTransposeChromatic    =  auxTransposeChromatic;
     fCurrentTransposeOctaveChange += octaveOffset;
@@ -4180,10 +4686,16 @@ void mxsr2msrTranslator::visitStart (S_direction& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_direction" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -4212,10 +4724,16 @@ void mxsr2msrTranslator::visitEnd (S_direction& elt)
     elt->getInputLineNumber ();
 
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> End visiting S_direction" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -4230,12 +4748,18 @@ void mxsr2msrTranslator::visitEnd (S_direction& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalTracingOahGroup->getTraceWords ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "Attaching words '" <<
             words->asString () <<
             "' to metronome tempo '" <<
             fCurrentMetronomeTempo->asString () << "'" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
 
@@ -4276,16 +4800,22 @@ void mxsr2msrTranslator::visitStart (S_direction_type& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_direction_type" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
   if (! fOnGoingDirection) {
     mxsr2msrError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
       "<direction-type /> is out of context");
@@ -4298,10 +4828,16 @@ void mxsr2msrTranslator::visitEnd (S_direction_type& elt)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> End visiting S_direction_type" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -4316,10 +4852,16 @@ void mxsr2msrTranslator::visitStart (S_offset& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_offset" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -4346,17 +4888,17 @@ void mxsr2msrTranslator::visitStart (S_offset& elt)
       offsetSoundValue = false;
 
     else {
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         "offset sound value " << offsetSound <<
         " should be 'yes' or 'no'";
 
       mxsr2msrError (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         inputLineNumber,
         __FILE__, __LINE__,
-        s.str ());
+        ss.str ());
     }
   }
 
@@ -4370,9 +4912,9 @@ void mxsr2msrTranslator::visitStart (S_offset& elt)
   else if (fOnGoingHarmony) {
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
-			std::stringstream s;
+			std::stringstream ss;
 
-			s <<
+			ss <<
         "Harmony offset \"" << offsetValue << "\"" <<
         ", represents = \'" <<
        offsetWholeNotesFromDuration <<
@@ -4381,7 +4923,7 @@ void mxsr2msrTranslator::visitStart (S_offset& elt)
 
 			gWaeHandler->waeTrace (
 				__FILE__, __LINE__,
-				s.str ());
+				ss.str ());
     }
 #endif
 
@@ -4398,10 +4940,16 @@ void mxsr2msrTranslator::visitStart (S_other_direction& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_direction" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -4425,10 +4973,16 @@ void mxsr2msrTranslator::visitStart (S_sound& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_sound" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -4465,10 +5019,16 @@ void mxsr2msrTranslator::visitEnd (S_sound& elt)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> End visiting S_sound" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 }
@@ -4481,10 +5041,16 @@ void mxsr2msrTranslator::visitStart (S_octave_shift& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_octave_shift" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -4494,15 +5060,15 @@ void mxsr2msrTranslator::visitStart (S_octave_shift& elt)
   int    octaveShiftSize = 8;
 
   if (! octaveShiftSizeString.size ()) {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "octave shift size absent, assuming 8";
 
     mxsr2msrWarning (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
-      s.str ());
+      ss.str ());
   }
 
   else {
@@ -4521,19 +5087,19 @@ void mxsr2msrTranslator::visitStart (S_octave_shift& elt)
       octaveShiftSize != 27
       */
       ) {
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         "octave-shift size \"" << octaveShiftSize <<
     // JMI    "\" should be 8, 15, 22 or 27";
         "\" is wrong, should be 8 or 15, replaced by 8";
 
   // JMI    mxsr2msrError (
       mxsr2msrWarning (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         inputLineNumber,
    //     __FILE__, __LINE__,
-        s.str ());
+        ss.str ());
     }
 
     octaveShiftSize = 8;
@@ -4556,17 +5122,17 @@ void mxsr2msrTranslator::visitStart (S_octave_shift& elt)
     octaveShiftKind = msrOctaveShiftKind::kOctaveShiftContinue;
 
   else {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "octave-shift type \"" << type <<
       "\"" << "is unknown";
 
     mxsr2msrError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 
   // create an octave shift
@@ -4579,11 +5145,17 @@ void mxsr2msrTranslator::visitStart (S_octave_shift& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceOctaveShifts ()) {
-      gLogStream <<
+			std::stringstream ss;
+
+			ss <<
         "Creating octave shift " <<
         octaveShift->asString () <<
         ", line " << inputLineNumber <<
         std::endl;
+
+			gWaeHandler->waeTrace (
+				__FILE__, __LINE__,
+				ss.str ());
     }
 #endif
 
@@ -4599,10 +5171,16 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_words" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -4610,7 +5188,7 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
 
   if (! wordsValue.size ()) {
     mxsr2msrWarning (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       "words contents is empty");
   }
@@ -4653,17 +5231,17 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
     fontStyleKind = msrFontStyleKind::KFontStyleItalic;
   else {
     if (wordsFontStyleString.size ()) {
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         "font-style value " << wordsFontStyleString <<
         " should be 'normal' or 'italic'";
 
       mxsr2msrError (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         inputLineNumber,
         __FILE__, __LINE__,
-        s.str ());
+        ss.str ());
     }
   }
 
@@ -4682,17 +5260,17 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
     fontJustifyKind = msrFontStyleKind::KFontStyleItalic;
   else {
     if (wordsFontJustifyString.size ()) {
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         "justify value " << wordsFontJustifyString <<
         " should be 'normal' or 'italic'";
 
       mxsr2msrError (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         inputLineNumber,
         __FILE__, __LINE__,
-        s.str ());
+        ss.str ());
     }
   }
   */
@@ -4758,17 +5336,17 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
     fontWeightKind = msrFontWeightKind::kFontWeightBold;
   else {
     if (wordsFontWeightString.size ()) {
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         "font-weight value " << wordsFontWeightString <<
         " should be 'normal' or 'bold'";
 
       mxsr2msrError (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         inputLineNumber,
         __FILE__, __LINE__,
-        s.str ());
+        ss.str ());
     }
   }
 
@@ -4824,7 +5402,9 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
           ||
         gGlobalTracingOahGroup->getTraceTempos ()
       ) {
-        gLogStream <<
+				std::stringstream ss;
+
+				ss <<
           "Converting words \"" <<
           wordsValue <<
           "\" to an MSR tempo" <<
@@ -4832,6 +5412,10 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
           ", fPreviousMusicXMLVoiceNumber: " << fPreviousMusicXMLVoiceNumber <<
           ", line " << inputLineNumber <<
           std::endl;
+
+			gWaeHandler->waeTrace (
+				__FILE__, __LINE__,
+				ss.str ());
       }
 #endif
 
@@ -4861,7 +5445,9 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
           ||
         gGlobalTracingOahGroup->getTraceRehearsalMarks ()
       ) {
-        gLogStream <<
+				std::stringstream ss;
+
+				ss <<
           "Converting words \"" <<
           wordsValue <<
           "\" to an MSR rehearsal mark" <<
@@ -4869,6 +5455,10 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
           ", fPreviousMusicXMLVoiceNumber: " << fPreviousMusicXMLVoiceNumber <<
           ", line " << inputLineNumber <<
           std::endl;
+
+			gWaeHandler->waeTrace (
+				__FILE__, __LINE__,
+				ss.str ());
       }
 #endif
 
@@ -4896,7 +5486,9 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
           ||
         gGlobalTracingOahGroup->getTraceSegnos ()
       ) {
-        gLogStream <<
+				std::stringstream ss;
+
+				ss <<
           "Converting words \"" <<
           wordsValue <<
           "\" to an MSR segno" <<
@@ -4904,6 +5496,10 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
           ", fPreviousMusicXMLVoiceNumber: " << fPreviousMusicXMLVoiceNumber <<
           ", line " << inputLineNumber <<
           std::endl;
+
+			gWaeHandler->waeTrace (
+				__FILE__, __LINE__,
+				ss.str ());
       }
 #endif
 
@@ -4929,7 +5525,9 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
       if (gGlobalTracingOahGroup->getTraceWords ()) {
-        gLogStream <<
+				std::stringstream ss;
+
+				ss <<
           "Converting words '" <<
           wordsValue <<
           "' to an MSR dal segno '" <<
@@ -4939,6 +5537,10 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
           ", fPreviousMusicXMLVoiceNumber: " << fPreviousMusicXMLVoiceNumber <<
           ", line " << inputLineNumber <<
           std::endl;
+
+				gWaeHandler->waeTrace (
+					__FILE__, __LINE__,
+					ss.str ());
       }
 #endif
 
@@ -4967,7 +5569,9 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
           ||
         gGlobalTracingOahGroup->getTraceDalSegnos ()
       ) {
-        gLogStream <<
+				std::stringstream ss;
+
+				ss <<
           "Converting words '" <<
           wordsValue <<
           "' to an MSR dal segno '" <<
@@ -4977,6 +5581,10 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
           ", fPreviousMusicXMLVoiceNumber: " << fPreviousMusicXMLVoiceNumber <<
           ", line " << inputLineNumber <<
           std::endl;
+
+				gWaeHandler->waeTrace (
+					__FILE__, __LINE__,
+					ss.str ());
       }
 #endif
 
@@ -5001,7 +5609,9 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
       if (gGlobalTracingOahGroup->getTraceWords ()) {
-        gLogStream <<
+				std::stringstream ss;
+
+				ss <<
           "Converting words '" <<
           wordsValue <<
           "' to an MSR dal segno '" <<
@@ -5011,6 +5621,10 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
           ", fPreviousMusicXMLVoiceNumber: " << fPreviousMusicXMLVoiceNumber <<
           ", line " << inputLineNumber <<
           std::endl;
+
+				gWaeHandler->waeTrace (
+					__FILE__, __LINE__,
+					ss.str ());
       }
 #endif
 
@@ -5038,7 +5652,9 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
           ||
         gGlobalTracingOahGroup->getTraceCodas ()
       ) {
-        gLogStream <<
+				std::stringstream ss;
+
+				ss <<
           "Converting words '" <<
           wordsValue <<
           "' to an MSR coda first '" <<
@@ -5048,6 +5664,10 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
           ", fPreviousMusicXMLVoiceNumber: " << fPreviousMusicXMLVoiceNumber <<
           ", line " << inputLineNumber <<
           std::endl;
+
+				gWaeHandler->waeTrace (
+					__FILE__, __LINE__,
+					ss.str ());
       }
 #endif
 
@@ -5076,7 +5696,9 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
           ||
         gGlobalTracingOahGroup->getTraceCodas ()
       ) {
-        gLogStream <<
+				std::stringstream ss;
+
+				ss <<
           "Converting words '" <<
           wordsValue <<
           "' to an MSR coda second '" <<
@@ -5086,6 +5708,10 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
           ", fPreviousMusicXMLVoiceNumber: " << fPreviousMusicXMLVoiceNumber <<
           ", line " << inputLineNumber <<
           std::endl;
+
+				gWaeHandler->waeTrace (
+					__FILE__, __LINE__,
+					ss.str ());
       }
 #endif
 
@@ -5105,7 +5731,9 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
           ||
         gGlobalTracingOahGroup->getTraceCrescDecrescs ()
       ) {
-        gLogStream <<
+				std::stringstream ss;
+
+				ss <<
           "Converting words \"" <<
           wordsValue <<
           "\" to an MSR cresc" <<
@@ -5113,6 +5741,10 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
           ", fPreviousMusicXMLVoiceNumber: " << fPreviousMusicXMLVoiceNumber <<
           ", line " << inputLineNumber <<
           std::endl;
+
+				gWaeHandler->waeTrace (
+					__FILE__, __LINE__,
+					ss.str ());
       }
 #endif
 
@@ -5122,10 +5754,16 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
       // create an msrCrescDecresc
 #ifdef MF_TRACING_IS_ENABLED
       if (gGlobalTracingOahGroup->getTraceCrescDecrescs ()) {
-        gLogStream <<
+				std::stringstream ss;
+
+				ss <<
           "Creating an msrCrescDecresc crescendo" <<
           ", line " << inputLineNumber <<
           std::endl;
+
+				gWaeHandler->waeTrace (
+					__FILE__, __LINE__,
+					ss.str ());
       }
 #endif
 
@@ -5151,7 +5789,9 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
           ||
         gGlobalTracingOahGroup->getTraceCrescDecrescs ()
       ) {
-        gLogStream <<
+				std::stringstream ss;
+
+				ss <<
           "Converting words \"" <<
           wordsValue <<
           "\" to an MSR decresc" <<
@@ -5159,6 +5799,10 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
           ", fPreviousMusicXMLVoiceNumber: " << fPreviousMusicXMLVoiceNumber <<
           ", line " << inputLineNumber <<
           std::endl;
+
+				gWaeHandler->waeTrace (
+					__FILE__, __LINE__,
+					ss.str ());
       }
 #endif
 
@@ -5168,10 +5812,16 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
       // create an msrCrescDecresc
 #ifdef MF_TRACING_IS_ENABLED
       if (gGlobalTracingOahGroup->getTraceCrescDecrescs ()) {
-        gLogStream <<
+				std::stringstream ss;
+
+				ss <<
           "Creating an msrCrescDecresc decrescendo" <<
           ", line " << inputLineNumber <<
           std::endl;
+
+				gWaeHandler->waeTrace (
+					__FILE__, __LINE__,
+					ss.str ());
       }
 #endif
 
@@ -5192,7 +5842,9 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
       // create the words
 #ifdef MF_TRACING_IS_ENABLED
       if (gGlobalTracingOahGroup->getTraceWords ()) {
-        gLogStream <<
+				std::stringstream ss;
+
+				ss <<
           "Creating words \"" << wordsValue << "\"" <<
           ", placement = \"" <<
           msrPlacementKindAsString (
@@ -5200,6 +5852,10 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
           "\"" <<
           ", line " << inputLineNumber <<
           std::endl;
+
+				gWaeHandler->waeTrace (
+					__FILE__, __LINE__,
+					ss.str ());
       }
 #endif
 
@@ -5247,10 +5903,16 @@ void mxsr2msrTranslator::visitStart (S_accordion_registration& elt)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_accordion_registration" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -5277,10 +5939,16 @@ void mxsr2msrTranslator::visitStart (S_accordion_high& elt)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_accordion_high" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -5296,7 +5964,9 @@ void mxsr2msrTranslator::visitStart (S_accordion_middle& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_accordion_middle" <<
        ", line " << inputLineNumber <<
      std::endl;
@@ -5306,17 +5976,17 @@ void mxsr2msrTranslator::visitStart (S_accordion_middle& elt)
   fCurrentAccordionMiddle = (int)(*elt);
 
   if (fCurrentAccordionMiddle < 1 || fCurrentAccordionMiddle > 3) {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "accordion middle " <<
       fCurrentAccordionMiddle << " should be 1, 2 or 3" <<
       ", replaced by 1";
 
     mxsr2msrWarning (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
-      s.str ());
+      ss.str ());
 
     fCurrentAccordionMiddle = 1;
   }
@@ -5328,10 +5998,16 @@ void mxsr2msrTranslator::visitStart (S_accordion_low& elt)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_accordion_low" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -5347,10 +6023,16 @@ void mxsr2msrTranslator::visitEnd (S_accordion_registration& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> End visiting S_accordion_registration" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -5359,7 +6041,7 @@ void mxsr2msrTranslator::visitEnd (S_accordion_registration& elt)
 
   if (fCurrentAccordionNumbersCounter == 0) {
     mxsr2msrWarning (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       "accordion-registration has 0 child element, ignoring it");
   }
@@ -5389,10 +6071,16 @@ void mxsr2msrTranslator::visitStart (S_metronome& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_metronome" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -5408,17 +6096,17 @@ void mxsr2msrTranslator::visitStart (S_metronome& elt)
       fCurrentMetronomeParenthesedKind =
         msrTempoParenthesizedKind::kTempoParenthesizedNo;
     else {
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         "parentheses value " << parentheses <<
         " should be 'yes' or 'no'";
 
       mxsr2msrError (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         inputLineNumber,
         __FILE__, __LINE__,
-        s.str ());
+        ss.str ());
     }
   }
 
@@ -5463,10 +6151,16 @@ void mxsr2msrTranslator::visitStart (S_beat_unit& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_beat_unit" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -5488,16 +6182,16 @@ void mxsr2msrTranslator::visitStart (S_beat_unit& elt)
         0)); // dots number
   }
   else {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "there are more than 2 <beat-unit/> elements in a <metronome/> markup";
 
     mxsr2msrError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 }
 
@@ -5508,10 +6202,16 @@ void mxsr2msrTranslator::visitStart (S_beat_unit_dot& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_beat_unit_dot" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -5519,16 +6219,16 @@ void mxsr2msrTranslator::visitStart (S_beat_unit_dot& elt)
     fCurrentMetronomeBeatUnitsVector.back ().incrDotsNumber ();
   }
   else {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "beat unit dot occurs without any prior beat unit";
 
     mxsr2msrError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 }
 
@@ -5536,10 +6236,16 @@ void mxsr2msrTranslator::visitStart (S_per_minute& elt)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_per_minute" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -5550,10 +6256,16 @@ void mxsr2msrTranslator::visitStart (S_metronome_note& elt)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_metronome_note" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -5567,10 +6279,16 @@ void mxsr2msrTranslator::visitStart (S_metronome_type& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_metronome_type" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -5587,10 +6305,16 @@ void mxsr2msrTranslator::visitStart (S_metronome_dot& elt)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_metronome_dot" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -5604,7 +6328,9 @@ void mxsr2msrTranslator::visitStart (S_metronome_beam& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_metronome_beam" <<
       ", line " << inputLineNumber <<
      std::endl;
@@ -5633,17 +6359,17 @@ void mxsr2msrTranslator::visitStart (S_metronome_beam& elt)
     beamKind = msrBeamKind::kBeamBackwardHook;
   }
   else {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "metronome beam \"" << fCurrentMetronomeBeamValue <<
       "\"" << "is not known";
 
     mxsr2msrError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 
   // number
@@ -5675,10 +6401,16 @@ void mxsr2msrTranslator::attachCurrentMetronomeBeamsToMetronomeNote (
         ||
       gGlobalTracingOahGroup->getTraceBeams ()
     ) {
-      gLogStream <<
+			std::stringstream ss;
+
+			ss <<
         "Attaching current beams to tempoNote " <<
         tempoNote->asString () <<
         std::endl;
+
+			gWaeHandler->waeTrace (
+				__FILE__, __LINE__,
+				ss.str ());
     }
 #endif
 
@@ -5693,11 +6425,17 @@ void mxsr2msrTranslator::attachCurrentMetronomeBeamsToMetronomeNote (
           ||
         gGlobalTracingOahGroup->getTraceBeams ()
       ) {
-        gLogStream <<
+				std::stringstream ss;
+
+				ss <<
           "Attaching beam '" <<
           beam->asString () <<
           "' to tempoNote '" << tempoNote->asString () << "'" <<
           std::endl;
+
+				gWaeHandler->waeTrace (
+					__FILE__, __LINE__,
+					ss.str ());
       }
 #endif
 
@@ -5717,10 +6455,16 @@ void mxsr2msrTranslator::visitEnd (S_metronome_note& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> End visiting S_metronome_note" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -5808,10 +6552,16 @@ void mxsr2msrTranslator::visitStart (S_metronome_relation& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_metronome_relation" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -5823,17 +6573,17 @@ void mxsr2msrTranslator::visitStart (S_metronome_relation& elt)
     fCurrentMetrenomeRelationKind = msrTempoNotesRelationshipKind::kTempoNotesRelationshipEquals;
   }
   else {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "metronome relation \"" << metrenomeRelation <<
       "\" is unknown";
 
     mxsr2msrError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 }
 
@@ -5844,10 +6594,16 @@ void mxsr2msrTranslator::visitStart (S_metronome_tuplet& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_metronome_tuplet" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -5868,31 +6624,31 @@ void mxsr2msrTranslator::visitStart (S_metronome_tuplet& elt)
       fCurrentTempoTupletBracketKind = msrTempoTupletBracketKind::kTempoTupletBracketNo;
     else {
       if (tupletBracket.size ()) {
-        std::stringstream s;
+        std::stringstream ss;
 
-        s <<
+        ss <<
           "tuplet bracket \"" << tupletBracket <<
           "\" is unknown";
 
         mxsr2msrError (
-          gGlobalServiceRunData->getInputSourceName (),
+          gGlobalCurrentServiceRunData->getInputSourceName (),
           inputLineNumber,
           __FILE__, __LINE__,
-          s.str ());
+          ss.str ());
       }
       else {
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalTracingOahGroup->getTraceTuplets ()) {
-          std::stringstream s;
+          std::stringstream ss;
 
-          s <<
+          ss <<
             "tuplet bracket is empty: this is implementation dependent," <<
             " \"yes\" is assumed"; // option ??? JMI
 
           mxsr2msrWarning (
-            gGlobalServiceRunData->getInputSourceName (),
+            gGlobalCurrentServiceRunData->getInputSourceName (),
             inputLineNumber,
-            s.str ());
+            ss.str ());
         }
 #endif
       }
@@ -5911,17 +6667,17 @@ void mxsr2msrTranslator::visitStart (S_metronome_tuplet& elt)
     else if (tupletType == "stop")
       fCurrentTempoTupletTypeKind = msrTempoTupletTypeKind::kTempoTupletTypeStop;
     else {
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         "tuplet type \"" << tupletType <<
         "\" is unknown";
 
       mxsr2msrError (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         inputLineNumber,
         __FILE__, __LINE__,
-        s.str ());
+        ss.str ());
     }
   }
 
@@ -5945,7 +6701,7 @@ void mxsr2msrTranslator::visitStart (S_metronome_tuplet& elt)
     else {
       if (tupletShowNumber.size ()) {
         mxsr2msrError (
-          gGlobalServiceRunData->getInputSourceName (),
+          gGlobalCurrentServiceRunData->getInputSourceName (),
           inputLineNumber,
           __FILE__, __LINE__,
           "tuplet show-number \"" + tupletShowNumber + "\" is unknown");
@@ -5955,7 +6711,9 @@ void mxsr2msrTranslator::visitStart (S_metronome_tuplet& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTempos ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "fCurrentTempoTupletTypeKind: " <<
       fCurrentTempoTupletTypeKind <<
       "fCurrentTempoTupletBracketKind: " <<
@@ -5963,6 +6721,10 @@ void mxsr2msrTranslator::visitStart (S_metronome_tuplet& elt)
       "fCurrentTempoTupletShowNumberKind: " <<
       fCurrentTempoTupletShowNumberKind <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -5973,10 +6735,16 @@ void mxsr2msrTranslator::visitStart (S_normal_dot& elt)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_normal_dot" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -5990,10 +6758,16 @@ void mxsr2msrTranslator::visitEnd (S_metronome_tuplet& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> End visiting S_metronome_tuplet" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -6065,10 +6839,16 @@ void mxsr2msrTranslator::visitEnd (S_metronome& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> End visiting S_metronome" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -6093,18 +6873,18 @@ void mxsr2msrTranslator::visitEnd (S_metronome& elt)
   }
 
   if (tempoKind == msrTempoKBeatUnitsKind::kTempoBeatUnits_UNKNOWN) {
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         "ill-formed <metronome/> markup: there are " <<
         fCurrentMetronomeBeatUnitsVector.size () <<
         " beat units";
 
     mxsr2msrError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 
   // create the tempo
@@ -6161,11 +6941,17 @@ void mxsr2msrTranslator::visitEnd (S_metronome& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTempos ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "Creating tempo '" <<
       fCurrentMetronomeTempo->asString () <<
       "'" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -6187,12 +6973,18 @@ void mxsr2msrTranslator::visitEnd (S_metronome& elt)
             ||
           gGlobalTracingOahGroup->getTraceWords ()
         ) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "Attaching words '" <<
             words->asString () <<
             "' to tempo '" <<
             fCurrentMetronomeTempo->asString () << "'" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
 
@@ -6204,17 +6996,17 @@ void mxsr2msrTranslator::visitEnd (S_metronome& elt)
       } // while
 
 
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         "<direction/> contains " <<
         pendingWordsSize <<
         " <words/> markups";
 
       mxsr2msrWarning (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         inputLineNumber,
-        s.str ());
+        ss.str ());
     }
 
     while (fPendingWordsList.size ()) {
@@ -6266,10 +7058,16 @@ void mxsr2msrTranslator::visitStart (S_staves& elt)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_direction" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 }
@@ -6282,10 +7080,16 @@ void mxsr2msrTranslator::visitStart (S_staff& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_staff" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -6293,16 +7097,16 @@ void mxsr2msrTranslator::visitStart (S_staff& elt)
 
   // the staff number should be positive
   if (fCurrentMusicXMLStaffNumber <= 0) {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "staff number " << fCurrentMusicXMLStaffNumber <<
       " is not positive" <<
       ", line " << inputLineNumber;
 
       mfAssert (
         __FILE__, __LINE__,
-      false, s.str ());
+      false, ss.str ());
   }
 
   S_msrStaff
@@ -6313,13 +7117,19 @@ void mxsr2msrTranslator::visitStart (S_staff& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceStaves ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> S_staff, fCurrentMusicXMLStaffNumber: " <<
       fCurrentMusicXMLStaffNumber <<
       std::endl <<
       "--> S_staff, current staff name: " <<
       staff->getStaffName() <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -6340,18 +7150,18 @@ void mxsr2msrTranslator::visitStart (S_staff& elt)
   }
 
   else {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "<staff /> " <<
       fCurrentMusicXMLStaffNumber <<
       " is out of context";
 
     mxsr2msrError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 }
 
@@ -6363,10 +7173,16 @@ void mxsr2msrTranslator::visitStart (S_staff_details& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_staff_details" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -6397,15 +7213,15 @@ void mxsr2msrTranslator::visitStart (S_staff_details& elt)
     }
     else {
       if (showFrets.size ()) {
-        std::stringstream s;
+        std::stringstream ss;
 
-        s << "show-frets " << showFrets << " unknown";
+        ss << "show-frets " << showFrets << " unknown";
 
         mxsr2msrError (
-          gGlobalServiceRunData->getInputSourceName (),
+          gGlobalCurrentServiceRunData->getInputSourceName (),
           inputLineNumber,
           __FILE__, __LINE__,
-          s.str ());
+          ss.str ());
       }
     }
   }
@@ -6440,26 +7256,32 @@ void mxsr2msrTranslator::visitStart (S_staff_details& elt)
   }
   else {
     if (printSpacing.size ()) {
-      std::stringstream s;
+      std::stringstream ss;
 
-      s << "print-spacing " << printSpacing << " is unknown";
+      ss << "print-spacing " << printSpacing << " is unknown";
 
       mxsr2msrError (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         inputLineNumber,
         __FILE__, __LINE__,
-        s.str ());
+        ss.str ());
     }
   }
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceStaves ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "Handling staff details:" <<
       std::endl <<
       gTab << "StaffDetailsStaffNumber" << " = " <<
       fStaffDetailsStaffNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -6494,10 +7316,16 @@ void mxsr2msrTranslator::visitStart (S_staff_type& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_staff_type" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -6534,15 +7362,15 @@ void mxsr2msrTranslator::visitStart (S_staff_type& elt)
 
   }
   else {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s << "staff-type" << staffType << "unknown";
+    ss << "staff-type" << staffType << "unknown";
 
     mxsr2msrError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 }
 
@@ -6550,10 +7378,16 @@ void mxsr2msrTranslator::visitStart (S_staff_lines& elt)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_staff_lines" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -6564,10 +7398,16 @@ void mxsr2msrTranslator::visitStart (S_staff_tuning& elt)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_staff_tuning" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -6587,10 +7427,16 @@ void mxsr2msrTranslator::visitStart (S_tuning_step& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_tuning_step" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -6613,18 +7459,18 @@ void mxsr2msrTranslator::visitStart (S_tuning_step& elt)
     fCurrentAccordDiatonicPitchKind = tuningDiatonicKind;
   }
   else {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "<tuning-step /> " <<
       tuningStep <<
       " is out of context";
 
     mxsr2msrError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 }
 
@@ -6635,10 +7481,16 @@ void mxsr2msrTranslator::visitStart (S_tuning_octave& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_tuning_octave" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -6657,18 +7509,18 @@ void mxsr2msrTranslator::visitStart (S_tuning_octave& elt)
     fCurrentAccordOctaveKind = tuningOctaveKind;
   }
   else {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "<tuning-octave /> " <<
       tuningOctaveNumber <<
       " is out of context";
 
     mxsr2msrError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 }
 
@@ -6679,10 +7531,16 @@ void mxsr2msrTranslator::visitStart (S_tuning_alter& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_tuning_alter" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -6694,17 +7552,17 @@ void mxsr2msrTranslator::visitStart (S_tuning_alter& elt)
         tuningAlter);
 
   if (tuningAlterationKind == msrAlterationKind::kAlteration_UNKNOWN) {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "tuning alter '" << tuningAlter <<
       "' should be -3, -2, -1.5, -1, -0.5, 0, +0.5, +1, +1.5, +2 or +3";
 
     mxsr2msrError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 
   if (fOnGoingStaffTuning) {
@@ -6714,18 +7572,18 @@ void mxsr2msrTranslator::visitStart (S_tuning_alter& elt)
     fCurrentAccordAlterationKind = tuningAlterationKind;
   }
   else {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "<tuning-alter /> " <<
       tuningAlter <<
       " is out of context";
 
     mxsr2msrError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 }
 
@@ -6736,7 +7594,9 @@ void mxsr2msrTranslator::visitEnd (S_staff_tuning& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> End visiting S_staff_tuning" <<
        ", line " << inputLineNumber <<
      std::endl;
@@ -6760,7 +7620,9 @@ void mxsr2msrTranslator::visitEnd (S_staff_tuning& elt)
   // create the staff tuning
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceStaffDetails ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "Creating staff tuning:" <<
       std::endl;
 
@@ -6826,20 +7688,32 @@ void mxsr2msrTranslator::visitStart (S_voice& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_staff_details" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceVoices ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       std::endl <<
       "<!--=== voice \"" << "elt->getVoiceName ()" << "\"" <<
       ", line " << elt->getInputLineNumber () << " ===-->" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -6860,18 +7734,18 @@ void mxsr2msrTranslator::visitStart (S_voice& elt)
   }
 
   else {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "<voice /> " <<
       fCurrentMusicXMLVoiceNumber <<
       " is out of context";
 
     mxsr2msrError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 }
 
@@ -6883,10 +7757,16 @@ void mxsr2msrTranslator::visitStart (S_backup& elt)
     elt->getInputLineNumber ();
 
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_backup" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -6900,16 +7780,24 @@ void mxsr2msrTranslator::visitEnd (S_backup& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> End visiting S_backup" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceBackup ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "Backup by " <<
       mfSingularOrPlural (
         fCurrentBackupDivisions, "division", "divisions") <<
@@ -6918,6 +7806,10 @@ void mxsr2msrTranslator::visitEnd (S_backup& elt)
       fCurrentStaffNumberToInsertInto <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -6941,10 +7833,16 @@ void mxsr2msrTranslator::visitStart (S_forward& elt)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_forward" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -6968,16 +7866,24 @@ void mxsr2msrTranslator::visitEnd (S_forward& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> End visiting S_forward" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceForward ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "Handling 'forward <<< " << fCurrentBackupDivisions <<
       " divisions >>>" <<
       ", fCurrentForwardStaffNumber: " <<
@@ -6986,21 +7892,25 @@ void mxsr2msrTranslator::visitEnd (S_forward& elt)
       fCurrentForwardVoiceNumber <<
       "', line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
   // the staff number should be positive
   if (fCurrentForwardStaffNumber <= 0) {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "staff number " << fCurrentForwardStaffNumber <<
       " is not positive" <<
       ", line " << inputLineNumber;
 
       mfAssert (
         __FILE__, __LINE__,
-      false, s.str ());
+      false, ss.str ());
   }
 
   // fetch the voice to be forwarded
@@ -7022,10 +7932,16 @@ void mxsr2msrTranslator::visitEnd (S_forward& elt)
   // compute the forward step length
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalMxsrOahGroup->getTraceForward ()) {
-      gLogStream <<
+			std::stringstream ss;
+
+			ss <<
         "--> current forward divisions: " <<
         fCurrentForwardDivisions <<
         std::endl;
+
+			gWaeHandler->waeTrace (
+				__FILE__, __LINE__,
+				ss.str ());
     }
 #endif
 
@@ -7056,10 +7972,16 @@ void mxsr2msrTranslator::visitStart (S_tied& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_tied" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -7089,15 +8011,15 @@ void mxsr2msrTranslator::visitStart (S_tied& elt)
     // let' complain on slur notes outside of slurs
     if (! fOnGoingSlur) {
       if (tiedType.size ()) {
-        std::stringstream s;
+        std::stringstream ss;
 
-        s << "tied type '" << fCurrentSlurType << "' inside a slur is unknown";
+        ss << "tied type '" << fCurrentSlurType << "' inside a slur is unknown";
 
         mxsr2msrError (
-          gGlobalServiceRunData->getInputSourceName (),
+          gGlobalCurrentServiceRunData->getInputSourceName (),
           inputLineNumber,
           __FILE__, __LINE__,
-          s.str ());
+          ss.str ());
       }
     }
 
@@ -7105,15 +8027,15 @@ void mxsr2msrTranslator::visitStart (S_tied& elt)
     // let' complain on ligature notes outside of ligatures
     if (! fOnGoingLigature) {
       if (tiedType.size ()) {
-        std::stringstream s;
+        std::stringstream ss;
 
-        s << "tied type '" << fCurrentSlurType << "' inside a ligature is unknown";
+        ss << "tied type '" << fCurrentSlurType << "' inside a ligature is unknown";
 
         mxsr2msrError (
-          gGlobalServiceRunData->getInputSourceName (),
+          gGlobalCurrentServiceRunData->getInputSourceName (),
           inputLineNumber,
           __FILE__, __LINE__,
-          s.str ());
+          ss.str ());
       }
     }
 
@@ -7218,10 +8140,16 @@ void mxsr2msrTranslator::visitStart (S_slur& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_slur" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -7239,15 +8167,15 @@ void mxsr2msrTranslator::visitStart (S_slur& elt)
       these should be ignored
     */
     if (fCurrentNoteBelongsToAChord) {
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         "ignoring a slur in a chord member note other than the first one";
 
       mxsr2msrWarning (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         inputLineNumber,
-        s.str ());
+        ss.str ());
     }
 
     else {
@@ -7310,17 +8238,17 @@ void mxsr2msrTranslator::visitStart (S_slur& elt)
 
           default:
             {
-              std::stringstream s;
+              std::stringstream ss;
 
-              s <<
+              ss <<
                 "only one slur nesting level is meaningfull";
 
         //      mxsr2msrError ( // JMI
               mxsr2msrWarning (
-                gGlobalServiceRunData->getInputSourceName (),
+                gGlobalCurrentServiceRunData->getInputSourceName (),
                 inputLineNumber,
         //        __FILE__, __LINE__,
-                s.str ());
+                ss.str ());
             }
         } // switch
 
@@ -7349,15 +8277,15 @@ void mxsr2msrTranslator::visitStart (S_slur& elt)
         switch (slurStartsStackSize) {
           case 0:
             {
-              std::stringstream s;
+              std::stringstream ss;
 
-              s <<
+              ss <<
                 "a standalone slur 'stop' is meaningless, ignoring it";
 
               mxsr2msrWarning (
-                gGlobalServiceRunData->getInputSourceName (),
+                gGlobalCurrentServiceRunData->getInputSourceName (),
                 inputLineNumber,
-                s.str ());
+                ss.str ());
             }
             break;
 
@@ -7411,17 +8339,17 @@ void mxsr2msrTranslator::visitStart (S_slur& elt)
         // let' complain only on slur notes outside of slurs
         if (! fOnGoingSlur) {
           if (fCurrentSlurType.size ()) {
-            std::stringstream s;
+            std::stringstream ss;
 
-            s <<
+            ss <<
               "slur type \"" << fCurrentSlurType <<
               "\" is unknown";
 
             mxsr2msrError (
-              gGlobalServiceRunData->getInputSourceName (),
+              gGlobalCurrentServiceRunData->getInputSourceName (),
               inputLineNumber,
               __FILE__, __LINE__,
-              s.str ());
+              ss.str ());
           }
         }
       }
@@ -7449,7 +8377,7 @@ void mxsr2msrTranslator::visitStart (S_slur& elt)
       else {
         if (slurLineType.size ()) {
           mxsr2msrError (
-            gGlobalServiceRunData->getInputSourceName (),
+            gGlobalCurrentServiceRunData->getInputSourceName (),
             inputLineNumber,
             __FILE__, __LINE__,
             "slur line-type \"" + slurLineType + "\" is unknown");
@@ -7460,7 +8388,9 @@ void mxsr2msrTranslator::visitStart (S_slur& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
       if (gGlobalTracingOahGroup->getTraceSlurs ()) {
-        gLogStream <<
+				std::stringstream ss;
+
+				ss <<
           "visitStart (S_slur&)"
           ", slurNumber: " <<
           slurNumber <<
@@ -7471,6 +8401,10 @@ void mxsr2msrTranslator::visitStart (S_slur& elt)
           msrLineTypeKindAsString (
             slurLineTypeKind) <<
           std::endl;
+
+				gWaeHandler->waeTrace (
+					__FILE__, __LINE__,
+					ss.str ());
       }
 #endif
 
@@ -7512,10 +8446,16 @@ void mxsr2msrTranslator::visitStart (S_bracket& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_bracket" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -7548,17 +8488,17 @@ void mxsr2msrTranslator::visitStart (S_bracket& elt)
     // let's complain on ligature notes outside of ligatures
     if (! fOnGoingLigature) {
       if (ligatureType.size ()) {
-        std::stringstream s;
+        std::stringstream ss;
 
-        s <<
+        ss <<
           "ligature type \"" << ligatureType <<
           "\" is unknown";
 
         mxsr2msrError (
-          gGlobalServiceRunData->getInputSourceName (),
+          gGlobalCurrentServiceRunData->getInputSourceName (),
           inputLineNumber,
           __FILE__, __LINE__,
-          s.str ());
+          ss.str ());
       }
     }
   }
@@ -7587,17 +8527,17 @@ void mxsr2msrTranslator::visitStart (S_bracket& elt)
   }
   else {
     if (ligatureLineEndValue.size ()) {
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         "ligature line-end \"" << ligatureLineEndValue <<
         "\" is unknown";
 
       mxsr2msrError (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         inputLineNumber,
         __FILE__, __LINE__,
-        s.str ());
+        ss.str ());
     }
   }
 
@@ -7624,7 +8564,7 @@ void mxsr2msrTranslator::visitStart (S_bracket& elt)
   else {
     if (ligatureLineTypeValue.size ()) {
       mxsr2msrError (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         inputLineNumber,
         __FILE__, __LINE__,
         "ligature line-type \"" + ligatureLineTypeValue + "\" is unknown");
@@ -7655,15 +8595,15 @@ void mxsr2msrTranslator::visitStart (S_bracket& elt)
           {
 #ifdef MF_TRACING_IS_ENABLED
             if (gGlobalTracingOahGroup->getTraceLigatures ()) {
-              std::stringstream s;
+              std::stringstream ss;
 
-              s <<
+              ss <<
                 "Bracket start found with no placement, placing it above by default";
 
               mxsr2msrWarning (
-                gGlobalServiceRunData->getInputSourceName (),
+                gGlobalCurrentServiceRunData->getInputSourceName (),
                 inputLineNumber,
-                s.str ());
+                ss.str ());
             }
 #endif
 
@@ -7691,32 +8631,32 @@ void mxsr2msrTranslator::visitStart (S_bracket& elt)
           {
 #ifdef MF_TRACING_IS_ENABLED
             if (gGlobalTracingOahGroup->getTraceLigatures ()) {
-              std::stringstream s;
+              std::stringstream ss;
 
-              s <<
+              ss <<
                 "Bracket stop found with no placement, placing it above by default";
 
               mxsr2msrWarning (
-                gGlobalServiceRunData->getInputSourceName (),
+                gGlobalCurrentServiceRunData->getInputSourceName (),
                 inputLineNumber,
-                s.str ());
+                ss.str ());
             }
 #endif
 
             ligature->setLigaturePlacementKind (msrPlacementKind::kPlacementAbove);
 
             if (! fCurrentLigatureStartAbove) {
-              std::stringstream s;
+              std::stringstream ss;
 
-              s <<
+              ss <<
                 "Bracket 'stop above' found with no corresponding bracket start, ignoring it"; // JMI cannot occur
 
            // JMI   mxsr2msrError (
               mxsr2msrWarning (
-                gGlobalServiceRunData->getInputSourceName (),
+                gGlobalCurrentServiceRunData->getInputSourceName (),
                 inputLineNumber,
            //     __FILE__, __LINE__,
-                s.str ());
+                ss.str ());
             }
 
             else {
@@ -7732,17 +8672,17 @@ void mxsr2msrTranslator::visitStart (S_bracket& elt)
 
         case msrPlacementKind::kPlacementAbove:
           if (! fCurrentLigatureStartAbove) {
-            std::stringstream s;
+            std::stringstream ss;
 
-            s <<
+            ss <<
               "Bracket 'stop above' found with no corresponding bracket start, ignoring it";
 
          // JMI   mxsr2msrError (
             mxsr2msrWarning (
-              gGlobalServiceRunData->getInputSourceName (),
+              gGlobalCurrentServiceRunData->getInputSourceName (),
               inputLineNumber,
          //     __FILE__, __LINE__,
-              s.str ());
+              ss.str ());
           }
 
           else {
@@ -7757,17 +8697,17 @@ void mxsr2msrTranslator::visitStart (S_bracket& elt)
 
         case msrPlacementKind::kPlacementBelow:
           if (! fCurrentLigatureStartBelow) {
-            std::stringstream s;
+            std::stringstream ss;
 
-            s <<
+            ss <<
               "Bracket 'stop below' found with no corresponding bracket start, ignoring it";
 
          // JMI   mxsr2msrError (
             mxsr2msrWarning (
-              gGlobalServiceRunData->getInputSourceName (),
+              gGlobalCurrentServiceRunData->getInputSourceName (),
               inputLineNumber,
          //     __FILE__, __LINE__,
-              s.str ());
+              ss.str ());
           }
 
           else {
@@ -7800,10 +8740,16 @@ void mxsr2msrTranslator::visitStart (S_wedge& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_wedge" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -7824,18 +8770,18 @@ void mxsr2msrTranslator::visitStart (S_wedge& elt)
   }
   else {
     if (type.size ()) {
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         "unknown wedge type \"" +
         type +
         "\", should be 'crescendo', 'diminuendo' or 'stop'";
 
       mxsr2msrError (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         inputLineNumber,
         __FILE__, __LINE__,
-        s.str ());
+        ss.str ());
     }
   }
 
@@ -7854,17 +8800,17 @@ void mxsr2msrTranslator::visitStart (S_wedge& elt)
   }
   else {
     if (nienteString.size ()) {
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         "wedge niente \"" << nienteString <<
         "\" is unknown";
 
       mxsr2msrError (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         inputLineNumber,
         __FILE__, __LINE__,
-        s.str ());
+        ss.str ());
     }
   }
 
@@ -7891,7 +8837,7 @@ void mxsr2msrTranslator::visitStart (S_wedge& elt)
   else {
     if (wedgeLineType.size ()) {
       mxsr2msrError (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         inputLineNumber,
         __FILE__, __LINE__,
         "wedge line-type \"" + wedgeLineType + "\" is unknown");
@@ -7927,10 +8873,16 @@ void mxsr2msrTranslator::visitStart (S_lyric& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_lyric" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -7942,7 +8894,7 @@ void mxsr2msrTranslator::visitStart (S_lyric& elt)
 
     if (fCurrentStanzaNumber.size () == 0) {
       mxsr2msrWarning (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         inputLineNumber,
         "lyric number is empty, using \"1\" by default");
 
@@ -7951,11 +8903,17 @@ void mxsr2msrTranslator::visitStart (S_lyric& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceLyrics ()) {
-      gLogStream <<
+			std::stringstream ss;
+
+			ss <<
         "Setting fCurrentStanzaNumber to " <<
         fCurrentStanzaNumber <<
         ", line " << inputLineNumber <<
         std::endl;
+
+			gWaeHandler->waeTrace (
+				__FILE__, __LINE__,
+				ss.str ());
     }
 #endif
 
@@ -7975,11 +8933,17 @@ void mxsr2msrTranslator::visitStart (S_lyric& elt)
       // lyrics names are not so frequent after all...
 #ifdef MF_TRACING_IS_ENABLED
       if (gGlobalTracingOahGroup->getTraceLyrics ()) {
-        gLogStream <<
+				std::stringstream ss;
+
+				ss <<
           "Lyric name is empty, using \"" <<
           msrStanza::K_STANZA_NAME_UNKNOWN <<
           "\" by default" <<
           std::endl;
+
+				gWaeHandler->waeTrace (
+					__FILE__, __LINE__,
+					ss.str ());
       }
 #endif
 
@@ -7988,11 +8952,17 @@ void mxsr2msrTranslator::visitStart (S_lyric& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceLyrics ()) {
-      gLogStream <<
+			std::stringstream ss;
+
+			ss <<
         "Setting fCurrentStanzaName to \"" <<
         fCurrentStanzaName <<
         "\", line " << inputLineNumber <<
         std::endl;
+
+			gWaeHandler->waeTrace (
+				__FILE__, __LINE__,
+				ss.str ());
     }
 #endif
 
@@ -8031,10 +9001,16 @@ void mxsr2msrTranslator::visitStart (S_syllabic& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_syllabic" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -8055,17 +9031,17 @@ void mxsr2msrTranslator::visitStart (S_syllabic& elt)
     fCurrentSyllableKind = msrSyllableKind::kSyllableEnd;
   }
   else {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "syllabic \"" << fCurrentSyllabic <<
       "\" is unknown";
 
     mxsr2msrError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 
   // forget about any previous texts found
@@ -8079,10 +9055,16 @@ void mxsr2msrTranslator::visitStart (S_text& elt)
     elt->getInputLineNumber ();
 
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_text" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -8097,10 +9079,16 @@ void mxsr2msrTranslator::visitStart (S_text& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceLyrics ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "textValue = \"" << textValue << "\"" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -8147,10 +9135,16 @@ void mxsr2msrTranslator::visitStart (S_elision& elt)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_elision" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -8175,10 +9169,16 @@ void mxsr2msrTranslator::visitStart (S_extend& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_extend" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -8204,17 +9204,17 @@ void mxsr2msrTranslator::visitStart (S_extend& elt)
     }
     else {
       if (extendType.size ()) {
-        std::stringstream s;
+        std::stringstream ss;
 
-        s <<
+        ss <<
           "extend type \"" << extendType <<
           "\" is unknown";
 
         mxsr2msrError (
-          gGlobalServiceRunData->getInputSourceName (),
+          gGlobalCurrentServiceRunData->getInputSourceName (),
           inputLineNumber,
           __FILE__, __LINE__,
-          s.str ());
+          ss.str ());
       }
       else {
   //   JMI   fOnGoingSyllableExtend = true;
@@ -8235,10 +9235,16 @@ void mxsr2msrTranslator::visitEnd (S_lyric& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> End visiting S_lyric" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -8246,15 +9252,15 @@ void mxsr2msrTranslator::visitEnd (S_lyric& elt)
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceLyrics ()) {
       // syllabic is not mandatory, thus:
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         "<lyric /> has no <syllabic/> component, using 'single' by default";
 
       mxsr2msrWarning (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         inputLineNumber,
-        s.str ());
+        ss.str ());
     }
 #endif
 
@@ -8264,22 +9270,22 @@ void mxsr2msrTranslator::visitEnd (S_lyric& elt)
   if (fCurrentNoteIsARest) {
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceLyrics ()) {
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         "syllable ";
 
      msrSyllable::writeTextsList (
       fCurrentLyricTextsList,
-      s);
+      ss);
 
-      s <<
+      ss <<
         " is attached to a rest";
 
       mxsr2msrWarning (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         inputLineNumber,
-        s.str ());
+        ss.str ());
     }
 #endif
 
@@ -8425,7 +9431,9 @@ void mxsr2msrTranslator::visitEnd (S_lyric& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceLyrics ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "==> visitEnd (S_lyric&), fCurrentSyllableKind: " <<
       msrSyllableKindAsString (fCurrentSyllableKind) <<
       ", line: " << inputLineNumber <<
@@ -8490,7 +9498,9 @@ void mxsr2msrTranslator::visitEnd (S_lyric& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceLyrics ()) {
-      gLogStream <<
+			std::stringstream ss;
+
+			ss <<
         "Creating a syllable '" <<
         msrSyllableKindAsString (
           fCurrentSyllableKind) <<
@@ -8500,7 +9510,7 @@ void mxsr2msrTranslator::visitEnd (S_lyric& elt)
         fCurrentLyricTextsList,
         gLogStream);
 
-      gLogStream <<
+      ss <<
         "\"" <<
         ", whole notes: " <<
         fCurrentNoteSoundingWholeNotesFromDuration <<
@@ -8513,6 +9523,10 @@ void mxsr2msrTranslator::visitEnd (S_lyric& elt)
         ", in stanza " << stanza->getStanzaName () <<
         ", line " << inputLineNumber <<
         std::endl;
+
+			gWaeHandler->waeTrace (
+				__FILE__, __LINE__,
+				ss.str ());
     }
 #endif
 
@@ -8571,10 +9585,16 @@ void mxsr2msrTranslator::visitStart (S_measure& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_measure" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -8583,7 +9603,9 @@ void mxsr2msrTranslator::visitStart (S_measure& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasuresDetails ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "==> visitStart (S_measure" <<
       ", fPartMeasuresCounter = '" <<
         fPartMeasuresCounter <<
@@ -8593,6 +9615,10 @@ void mxsr2msrTranslator::visitStart (S_measure& elt)
       ", in part \"" <<
       fCurrentPart->getPartCombinedName () << "\"" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -8606,11 +9632,17 @@ void mxsr2msrTranslator::visitStart (S_measure& elt)
       ||
     gGlobalOahEarlyOptions.getEarlyTracePasses ()
   ) {
-    gLogStream <<
+			std::stringstream ss;
+
+			ss <<
       std::endl <<
       "<!--=== measure '" << fCurrentMeasureNumber << "'" <<
       ", line " << inputLineNumber << " ===-->" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -8636,9 +9668,9 @@ void mxsr2msrTranslator::visitStart (S_measure& elt)
     }
     else {
       if (fPartFirstMeasureNumber != fScoreFirstMeasureNumber) {
-        std::stringstream s;
+        std::stringstream ss;
 
-        s <<
+        ss <<
           "measure numbering inconsistency: first measure numbers '" <<
           fScoreFirstMeasureNumber <<
            "' and '" <<
@@ -8646,10 +9678,10 @@ void mxsr2msrTranslator::visitStart (S_measure& elt)
           "' found";
 
         mxsr2msrError (
-          gGlobalServiceRunData->getInputSourceName (),
+          gGlobalCurrentServiceRunData->getInputSourceName (),
           inputLineNumber,
           __FILE__, __LINE__,
-          s.str ());
+          ss.str ());
       }
     }
   }
@@ -8684,17 +9716,17 @@ void mxsr2msrTranslator::visitStart (S_measure& elt)
   }
   else {
     if (implicit.size ()) {
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         "implicit \"" << implicit <<
         "\" is unknown";
 
       mxsr2msrError (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         inputLineNumber,
         __FILE__, __LINE__,
-        s.str ());
+        ss.str ());
     }
   }
 
@@ -8727,12 +9759,12 @@ void mxsr2msrTranslator::visitStart (S_measure& elt)
   if (gGlobalTracingOahGroup->getTraceDetailed ()) {
     std::set<int>::const_iterator
       it =
-        gGlobalServiceRunData->fTraceDetailedMeasureNumbersSet.find (fMeasuresCounter);
+        gGlobalCurrentServiceRunData->fTraceDetailedMeasureNumbersSet.find (fMeasuresCounter);
 
     if (it != gGlobalTracingOahGroup->getTraceDetailedMeasureNumbersSet ().end ()) {
       // yes, activate detailed trace for it
       gGlobalMxsr2msrOahGroup = gGlobalMxsr2msrOahWithDetailedTrace;
-      gGlobalServiceRunData  = gGlobalServiceRunDataWithDetailedTrace;
+      gGlobalCurrentServiceRunData  = gGlobalCurrentServiceRunDataWithDetailedTrace;
       gGlobalMsrOahGroup      = gGlobalMsrOahWithDetailedTrace;
       gGlobalLpsrOahGroup     = gGlobalLpsrOahWithDetailedTrace;
       gGlobalLpsr2lilypondOahGroup = gGlobalLilypondOahWithDetailedTrace;
@@ -8749,10 +9781,16 @@ void mxsr2msrTranslator::visitEnd (S_measure& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> End visiting S_measure" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -8782,26 +9820,32 @@ void mxsr2msrTranslator::visitEnd (S_measure& elt)
   if (fPendingGraceNotesGroup) {
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceGraceNotes ()) {
-      gLogStream <<
+			std::stringstream ss;
+
+			ss <<
         std::endl <<
         "fCurrentGraceNotes IS NOT NULL at the end of measure '" << // JMI
         elt->getAttributeValue ("number") <<
         "'" <<
         std::endl;
 
-      gLogStream <<
+      ss <<
         "+++++++++++++++++" <<
         fCurrentPart <<
         std::endl;
+
+			gWaeHandler->waeTrace (
+				__FILE__, __LINE__,
+				ss.str ());
     }
 #endif
 
     // attach these grace notes group as an after grace notes group
     // to the last note found in its voice
     if (! noteToAttachTo) {
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         "cannot find voice to insert after grace notes group into: " <<
         "chordFirstNote is null" <<
         ", fCurrentStaffNumberToInsertInto = " <<
@@ -8811,10 +9855,10 @@ void mxsr2msrTranslator::visitEnd (S_measure& elt)
         fCurrentMusicXMLVoiceNumber;
 
       mxsr2msrInternalError (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         inputLineNumber,
         __FILE__, __LINE__,
-        s.str ());
+        ss.str ());
     }
 
     // set the pending grace notes group's kind to 'after'
@@ -8876,13 +9920,19 @@ void mxsr2msrTranslator::visitEnd (S_measure& elt)
       // fCurrentMeasureNumber is to be replicated,
 #ifdef MF_TRACING_IS_ENABLED
       if (gGlobalTracingOahGroup->getTraceMultipleFullBarRests ()) {
-        gLogStream <<
+				std::stringstream ss;
+
+				ss <<
           std::endl <<
           "Replicating meaure " <<
           fCurrentMeasureNumber <<
           " in part " <<
           fCurrentPart->getPartCombinedName () <<
           std::endl;
+
+				gWaeHandler->waeTrace (
+					__FILE__, __LINE__,
+					ss.str ());
       }
 #endif
 
@@ -8913,17 +9963,19 @@ void mxsr2msrTranslator::visitEnd (S_measure& elt)
     if (it != addEmptyMeasuresStringToIntMap.end ()) {
       // fCurrentMeasureNumber is present in the map,
       // fetch the number of empty measures to add
-      std::stringstream s;
+      std::stringstream ss;
 
-      s << (*it).second;
+      ss << (*it).second;
 
       int measuresToBeAdded;
 
-      s >> measuresToBeAdded;
+      ss >> measuresToBeAdded;
 
 #ifdef MF_TRACING_IS_ENABLED
       if (gGlobalTracingOahGroup->getTraceMultipleFullBarRests ()) {
-        gLogStream <<
+        std::stringstream ss;
+
+        ss <<
           std::endl <<
           "Adding " <<
           mfSingularOrPlural (
@@ -8931,6 +9983,10 @@ void mxsr2msrTranslator::visitEnd (S_measure& elt)
           " to part " <<
           fCurrentPart->getPartCombinedName () <<
           std::endl;
+
+				gWaeHandler->waeTrace (
+					__FILE__, __LINE__,
+					ss.str ());
       }
 #endif
 
@@ -8997,7 +10053,7 @@ void mxsr2msrTranslator::handleOnGoingMultipleFullBarRestsAtTheEndOfMeasure (
 
   if (fRemainingExpectedMultipleFullBarRests <= 0) {
     mxsr2msrInternalError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
       "remainingMultipleFullBarRestsMeasuresNumber problem");
@@ -9064,10 +10120,16 @@ void mxsr2msrTranslator::visitStart (S_print& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_print" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -9132,11 +10194,11 @@ Staff spacing between multiple staves is measured in
     elt->getAttributeValue ("staff-spacing");
 
   if (staffSpacing.size ()) {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s << staffSpacing;
+    ss << staffSpacing;
     float value;
-    s >> value;
+    ss >> value;
 
     fCurrentMusicXMLPrintLayout->setStaffSpacing (value);
   }
@@ -9152,10 +10214,16 @@ Staff spacing between multiple staves is measured in
       // create a line break
 #ifdef MF_TRACING_IS_ENABLED
       if (gGlobalTracingOahGroup->getTraceLineBreaks ()) {
-        gLogStream <<
+				std::stringstream ss;
+
+				ss <<
           "Creating a line break, " <<
           "line: " << inputLineNumber <<
           std::endl;
+
+				gWaeHandler->waeTrace (
+					__FILE__, __LINE__,
+					ss.str ());
       }
 #endif
 
@@ -9175,16 +10243,16 @@ Staff spacing between multiple staves is measured in
     }
 
     else {
-      std::stringstream s;
+      std::stringstream ss;
 
-      s << "new-system \"" << newSystem <<
+      ss << "new-system \"" << newSystem <<
       "\" is unknown in '<print />', should be 'yes', 'no' or empty";
 
       mxsr2msrError (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         inputLineNumber,
         __FILE__, __LINE__,
-        s.str ());
+        ss.str ());
     }
   }
 
@@ -9221,16 +10289,16 @@ Staff spacing between multiple staves is measured in
       }
 
       else {
-        std::stringstream s;
+        std::stringstream ss;
 
-        s << "new-page \"" << newPage <<
+        ss << "new-page \"" << newPage <<
         "\" is unknown in '<print />', should be 'yes', 'no' or empty";
 
         mxsr2msrError (
-          gGlobalServiceRunData->getInputSourceName (),
+          gGlobalCurrentServiceRunData->getInputSourceName (),
           inputLineNumber,
           __FILE__, __LINE__,
-          s.str ());
+          ss.str ());
       }
     }
   }
@@ -9263,10 +10331,16 @@ void mxsr2msrTranslator::visitEnd (S_print& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> End visiting S_print" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -9292,10 +10366,16 @@ void mxsr2msrTranslator::visitStart (S_measure_numbering& elt)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
-      "--> Start visiting S_measure_numbering" <<
-       ", line " << elt->getInputLineNumber () <<
-     std::endl;
+		std::stringstream ss;
+
+		ss <<
+			"--> Start visiting S_measure_numbering" <<
+			 ", line " << elt->getInputLineNumber () <<
+			std::endl;
+
+		gWaeHandler->waeTrace (
+			__FILE__, __LINE__,
+			ss.str ());
   }
 #endif
 
@@ -9310,10 +10390,16 @@ void mxsr2msrTranslator::visitStart (S_barline& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_barline" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -9350,18 +10436,18 @@ void mxsr2msrTranslator::visitStart (S_barline& elt)
       fCurrentBarLineLocationKind = msrBarLineLocationKind::kBarLineLocationRight;
     }
     else {
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         "barLine location \"" << location <<
         "\" is unknown, using 'right' by default";
 
    // JMI   mxsr2msrError (
       mxsr2msrWarning (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         inputLineNumber,
    //     __FILE__, __LINE__,
-        s.str ());
+        ss.str ());
     }
   }
 
@@ -9376,10 +10462,16 @@ void mxsr2msrTranslator::visitStart (S_bar_style& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_bar_style" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -9436,7 +10528,7 @@ void mxsr2msrTranslator::visitStart (S_bar_style& elt)
   }
   else {
     mxsr2msrError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
       "bar-style \"" + barStyle + "\" is unknown");
@@ -9453,10 +10545,16 @@ void mxsr2msrTranslator::visitStart (S_segno& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_segno" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -9478,15 +10576,15 @@ void mxsr2msrTranslator::visitStart (S_segno& elt)
   }
 
   else {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s << "<segno /> is out of context";
+    ss << "<segno /> is out of context";
 
     mxsr2msrError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 }
 
@@ -9497,10 +10595,16 @@ void mxsr2msrTranslator::visitStart (S_coda& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_coda" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -9519,17 +10623,17 @@ void mxsr2msrTranslator::visitStart (S_coda& elt)
         break;
       default:
         {
-          std::stringstream s;
+          std::stringstream ss;
 
-          s <<
+          ss <<
             "this is <coda /> number " << fCodasCounter <<
             ", only two are meaningful";
 
           mxsr2msrError (
-            gGlobalServiceRunData->getInputSourceName (),
+            gGlobalCurrentServiceRunData->getInputSourceName (),
             inputLineNumber,
             __FILE__, __LINE__,
-            s.str ());
+            ss.str ());
         }
     } // switch
 
@@ -9551,15 +10655,15 @@ void mxsr2msrTranslator::visitStart (S_coda& elt)
   }
 
   else {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s << "<coda /> is out of context";
+    ss << "<coda /> is out of context";
 
     mxsr2msrError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 }
 
@@ -9570,10 +10674,16 @@ void mxsr2msrTranslator::visitStart (S_eyeglasses& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_eyeglasses" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -9589,15 +10699,15 @@ void mxsr2msrTranslator::visitStart (S_eyeglasses& elt)
   }
 
   else {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s << "<eyeGlasses /> is out of context";
+    ss << "<eyeGlasses /> is out of context";
 
     mxsr2msrError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 }
 
@@ -9608,10 +10718,16 @@ void mxsr2msrTranslator::visitStart (S_pedal& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_pedal" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -9634,15 +10750,15 @@ void mxsr2msrTranslator::visitStart (S_pedal& elt)
     pedalTypeKind = msrPedalTypeKind::kPedalTypeStop;
   }
   else {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s << "pedal type '" << type << "' is unknown";
+    ss << "pedal type '" << type << "' is unknown";
 
     mxsr2msrError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 
   // line
@@ -9659,17 +10775,17 @@ void mxsr2msrTranslator::visitStart (S_pedal& elt)
   }
   else {
     if (line.size ()) {
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         "pedal line \"" << line <<
         "\" is unknown";
 
       mxsr2msrError (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         inputLineNumber,
         __FILE__, __LINE__,
-        s.str ());
+        ss.str ());
     }
   }
 
@@ -9689,17 +10805,17 @@ void mxsr2msrTranslator::visitStart (S_pedal& elt)
   }
   else {
     if (sign.size ()) {
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         "pedal sign \"" << sign <<
         "\" is unknown";
 
       mxsr2msrError (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         inputLineNumber,
         __FILE__, __LINE__,
-        s.str ());
+        ss.str ());
     }
   }
 
@@ -9717,15 +10833,15 @@ void mxsr2msrTranslator::visitStart (S_pedal& elt)
     fPendingPedalsList.push_back (pedal);
   }
   else {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s << "<pedal /> " << pedal->asShortString () << " is out of context";
+    ss << "<pedal /> " << pedal->asShortString () << " is out of context";
 
     mxsr2msrError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 }
 
@@ -9737,10 +10853,16 @@ void mxsr2msrTranslator::visitStart (S_ending& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_ending" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -9752,7 +10874,7 @@ void mxsr2msrTranslator::visitStart (S_ending& elt)
 
     if (! fCurrentBarLineEndingNumber.size ()) {
       mxsr2msrWarning (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         inputLineNumber,
         "mandatory ending number is missing, assuming \"1\"");
 
@@ -9782,17 +10904,17 @@ void mxsr2msrTranslator::visitStart (S_ending& elt)
         msrBarLineEndingTypeKind::kBarLineEndingTypeDiscontinue;
     }
     else {
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         "ending type \"" << type <<
         "\" is unknown";
 
       mxsr2msrError (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         inputLineNumber,
         __FILE__, __LINE__,
-        s.str ());
+        ss.str ());
     }
   }
 
@@ -9816,10 +10938,16 @@ void mxsr2msrTranslator::visitStart (S_repeat& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_repeat" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -9840,17 +10968,17 @@ void mxsr2msrTranslator::visitStart (S_repeat& elt)
         msrBarLineRepeatDirectionKind::kBarLineRepeatDirectionBackward;
     }
     else {
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         "repeat direction \"" << direction <<
         "\" is unknown";
 
       mxsr2msrError (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         inputLineNumber,
         __FILE__, __LINE__,
-        s.str ());
+        ss.str ());
     }
   }
 
@@ -9884,17 +11012,17 @@ void mxsr2msrTranslator::visitStart (S_repeat& elt)
           msrBarLineRepeatWingedKind::kBarLineRepeatWingedDoubleCurved;
       }
       else {
-        std::stringstream s;
+        std::stringstream ss;
 
-        s <<
+        ss <<
           "repeat winged \"" << winged <<
           "\" is unknown";
 
         mxsr2msrError (
-          gGlobalServiceRunData->getInputSourceName (),
+          gGlobalCurrentServiceRunData->getInputSourceName (),
           inputLineNumber,
           __FILE__, __LINE__,
-          s.str ());
+          ss.str ());
       }
     }
   }
@@ -9915,10 +11043,16 @@ void mxsr2msrTranslator::visitEnd (S_barline& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> End visiting S_barline" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -9948,7 +11082,9 @@ void mxsr2msrTranslator::visitEnd (S_barline& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceBarLines ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Creating barLine in part " <<
       fCurrentPart->getPartCombinedName () << ":" <<
       std::endl;
@@ -9985,7 +11121,7 @@ void mxsr2msrTranslator::visitEnd (S_barline& elt)
         // ------------------------------------------------------
         if (! fCurrentBarLineEndingNumber.size ()) {
           mxsr2msrWarning (
-            gGlobalServiceRunData->getInputSourceName (),
+            gGlobalCurrentServiceRunData->getInputSourceName (),
             inputLineNumber,
             "mandatory ending number is missing, assuming \"1\"");
 
@@ -10118,14 +11254,16 @@ void mxsr2msrTranslator::visitEnd (S_barline& elt)
         // append the bar line to the current part
   #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalTracingOahGroup->getTraceBarLines ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "Appending a standalone barLine to part " <<
             fCurrentPart->getPartCombinedName () << ":" <<
             std::endl;
 
           ++gIndenter;
 
-          gLogStream <<
+          ss <<
             barLine;
 
           --gIndenter;
@@ -10140,34 +11278,34 @@ void mxsr2msrTranslator::visitEnd (S_barline& elt)
         break;
 
       case msrBarLineStyleKind::kBarLineStyleNone:
-        std::stringstream s;
+        std::stringstream ss;
 
-        s <<
+        ss <<
           "barLine " <<
           barLine->asString () <<
           " has no barLine style";
 
         mxsr2msrWarning (
-          gGlobalServiceRunData->getInputSourceName (),
+          gGlobalCurrentServiceRunData->getInputSourceName (),
           inputLineNumber,
      //     __FILE__, __LINE__,
-          s.str ());
+          ss.str ());
         break;
     } // switch
   }
 
   // has this barLine been handled?
   if (! barLineHasBeenHandled) {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s << std::left <<
+    ss << std::left <<
       "cannot handle a barLine containing: " <<
       barLine->asString ();
 
     mxsr2msrInternalWarning (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
-      s.str ());
+      ss.str ());
   }
 
 /* JMI
@@ -10176,18 +11314,18 @@ void mxsr2msrTranslator::visitEnd (S_barline& elt)
   switch (barLine->getBarLineCategory ()) {
     case msrBarLineCategoryKind::kBarLineCategory_UNKNOWN:
       {
-        std::stringstream s;
+        std::stringstream ss;
 
-        s <<
+        ss <<
           "barLine " <<
           barLine->asString () <<
           " has no barLine category";
 
       mxsr2msrInternalError (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         inputLineNumber,
         __FILE__, __LINE__,
-        s.str ());
+        ss.str ());
       }
       break;
     case msrBarLineCategoryKind::kBarLineCategoryStandalone:
@@ -10213,10 +11351,16 @@ void mxsr2msrTranslator::visitStart (S_note& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_note" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -10402,17 +11546,17 @@ Controls whether or not spacing is left for an invisible note or object. It is u
   }
 
   if (! wellFormedColor) {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "note color \"" << noteColorAlphaRGB <<
       "\" should contain 6 or 8 upper case hexadecimal digits prededed by a '#'";
 
     mxsr2msrError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 
   fOnGoingNote = true;
@@ -10426,10 +11570,16 @@ void mxsr2msrTranslator::visitStart (S_step& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_step" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -10451,10 +11601,16 @@ void mxsr2msrTranslator::visitStart (S_alter& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_alter" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -10465,17 +11621,17 @@ void mxsr2msrTranslator::visitStart (S_alter& elt)
       alter);
 
   if (fCurrentNoteAlterationKind == msrAlterationKind::kAlteration_UNKNOWN) {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "alter '" << alter << "'"
       "' should be -3, -2, -1.5, -1, -0.5, 0, +0.5, +1, +1.5, +2 or +3";
 
     mxsr2msrError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 }
 
@@ -10486,26 +11642,32 @@ void mxsr2msrTranslator::visitStart (S_octave& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_octave" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
   int octaveNumber = (int)(*elt);
 
   if (octaveNumber < 0 || octaveNumber > 9) {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "octave number '" << octaveNumber <<
       "' is not in the 0..9 range, '0' is assumed";
 
     mxsr2msrWarning (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       elt->getInputLineNumber (),
-      s.str ());
+      ss.str ());
 
     octaveNumber = 0;
   }
@@ -10523,10 +11685,16 @@ void mxsr2msrTranslator::visitStart (S_duration& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_duration" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -10534,9 +11702,15 @@ void mxsr2msrTranslator::visitStart (S_duration& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceNotesDetails ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "Note duration: " << duration <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -10551,10 +11725,16 @@ void mxsr2msrTranslator::visitStart (S_duration& elt)
   else if (fOnGoingNote) {
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceNotesDetails ()) {
-      gLogStream <<
+			std::stringstream ss;
+
+			ss <<
         "fCurrentDivisionsPerQuarterNote: " <<
         fCurrentDivisionsPerQuarterNote <<
         std::endl;
+
+			gWaeHandler->waeTrace (
+				__FILE__, __LINE__,
+				ss.str ());
     }
 #endif
 
@@ -10566,10 +11746,16 @@ void mxsr2msrTranslator::visitStart (S_duration& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceNotesDetails ()) {
-      gLogStream <<
+			std::stringstream ss;
+
+			ss <<
         "fCurrentNoteSoundingWholeNotesFromDuration: " <<
         fCurrentNoteSoundingWholeNotesFromDuration <<
         std::endl;
+
+			gWaeHandler->waeTrace (
+				__FILE__, __LINE__,
+				ss.str ());
     }
 #endif
 
@@ -10584,10 +11770,16 @@ void mxsr2msrTranslator::visitStart (S_duration& elt)
   else if (fOnGoingFiguredBass) {
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceFiguredBasses ()) {
-      gLogStream <<
+			std::stringstream ss;
+
+			ss <<
         "fCurrentDivisionsPerQuarterNote: " <<
         fCurrentDivisionsPerQuarterNote <<
         std::endl;
+
+			gWaeHandler->waeTrace (
+				__FILE__, __LINE__,
+				ss.str ());
     }
 #endif
 
@@ -10599,10 +11791,16 @@ void mxsr2msrTranslator::visitStart (S_duration& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceFiguredBasses ()) {
-      gLogStream <<
+			std::stringstream ss;
+
+			ss <<
         "fCurrentFiguredBassSoundingWholeNotes: " <<
         fCurrentFiguredBassSoundingWholeNotes <<
         std::endl;
+
+			gWaeHandler->waeTrace (
+				__FILE__, __LINE__,
+				ss.str ());
     }
 #endif
 
@@ -10614,24 +11812,30 @@ void mxsr2msrTranslator::visitStart (S_duration& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceFiguredBasses ()) {
-      gLogStream <<
+			std::stringstream ss;
+
+			ss <<
         "fCurrentFiguredBassDisplayWholeNotes: " <<
         fCurrentFiguredBassDisplayWholeNotes <<
         std::endl;
+
+			gWaeHandler->waeTrace (
+				__FILE__, __LINE__,
+				ss.str ());
     }
 #endif
   }
 
   else {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s << "<duration /> " << duration << " is out of context";
+    ss << "<duration /> " << duration << " is out of context";
 
     mxsr2msrError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 
 //  gLogStream << "=== mxsr2msrTranslator::visitStart (S_duration& elt), fCurrentDuration: " << fCurrentDuration << std::endl; JMI
@@ -10641,10 +11845,16 @@ void mxsr2msrTranslator::visitStart (S_instrument& elt)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_instrument" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -10683,10 +11893,16 @@ void mxsr2msrTranslator::visitStart (S_dot& elt)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_dot" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -10700,10 +11916,16 @@ void mxsr2msrTranslator::visitStart (S_type& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_type" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -10735,7 +11957,7 @@ void mxsr2msrTranslator::visitStart (S_type& elt)
     else {
       if (noteTypeSize.size ()) {
         mxsr2msrError (
-          gGlobalServiceRunData->getInputSourceName (),
+          gGlobalCurrentServiceRunData->getInputSourceName (),
           inputLineNumber,
           __FILE__, __LINE__,
             "note type size \"" + noteTypeSize + "\" is unknown");
@@ -10767,10 +11989,16 @@ void mxsr2msrTranslator::visitStart (S_notehead& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_notehead" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -10830,17 +12058,17 @@ void mxsr2msrTranslator::visitStart (S_notehead& elt)
     else if (noteHead == "ti") {
       fCurrentNoteHeadKind = msrNoteHeadKind::kNoteHeadTi; }
     else {
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         "note head \"" << noteHead <<
         "\" is unknown";
 
       mxsr2msrError (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         inputLineNumber,
         __FILE__, __LINE__,
-        s.str ());
+        ss.str ());
     }
   }
 
@@ -10855,17 +12083,17 @@ void mxsr2msrTranslator::visitStart (S_notehead& elt)
       fCurrentNoteHeadFilledKind = msrNoteHeadFilledKind::kNoteHeadFilledNo;
     else {
       if (noteHeadFilled.size ()) {
-        std::stringstream s;
+        std::stringstream ss;
 
-        s <<
+        ss <<
           "note head filled \"" << noteHeadFilled <<
           "\" is unknown";
 
         mxsr2msrError (
-          gGlobalServiceRunData->getInputSourceName (),
+          gGlobalCurrentServiceRunData->getInputSourceName (),
           inputLineNumber,
           __FILE__, __LINE__,
-          s.str ());
+          ss.str ());
       }
     }
   }
@@ -10881,17 +12109,17 @@ void mxsr2msrTranslator::visitStart (S_notehead& elt)
       fCurrentNoteHeadParenthesesKind = msrNoteHeadParenthesesKind::kNoteHeadParenthesesNo;
     else {
       if (noteHeadParentheses.size ()) {
-        std::stringstream s;
+        std::stringstream ss;
 
-        s <<
+        ss <<
           "note head parentheses \"" << noteHeadParentheses <<
           "\" is unknown";
 
         mxsr2msrError (
-          gGlobalServiceRunData->getInputSourceName (),
+          gGlobalCurrentServiceRunData->getInputSourceName (),
           inputLineNumber,
           __FILE__, __LINE__,
-          s.str ());
+          ss.str ());
       }
     }
   }
@@ -10907,10 +12135,16 @@ void mxsr2msrTranslator::visitStart (S_accidental& elt) // JMI
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_accidental" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -10992,17 +12226,17 @@ void mxsr2msrTranslator::visitStart (S_accidental& elt) // JMI
       fCurrentAccidentalKind = msrAccidentalKind::kAccidentalKoron;
     else {
       if (accidentalValue.size ()) {
-        std::stringstream s;
+        std::stringstream ss;
 
-        s <<
+        ss <<
           "accidental \"" << accidentalValue <<
           "\" is unknown";
 
         mxsr2msrError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
-          s.str ());
+          ss.str ());
       }
     }
   }
@@ -11023,17 +12257,17 @@ void mxsr2msrTranslator::visitStart (S_accidental& elt) // JMI
         msrEditorialAccidentalKind::kEditorialAccidentalNo;
     else {
       if (editorialAccidental.size ()) {
-        std::stringstream s;
+        std::stringstream ss;
 
-        s <<
+        ss <<
           "editorial accidental \"" << editorialAccidental <<
           "\" is unknown";
 
         mxsr2msrError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
-          s.str ());
+          ss.str ());
       }
     }
   }
@@ -11054,17 +12288,17 @@ void mxsr2msrTranslator::visitStart (S_accidental& elt) // JMI
         msrCautionaryAccidentalKind::kCautionaryAccidentalNo;
     else {
       if (cautionaryAccidental.size ()) {
-        std::stringstream s;
+        std::stringstream ss;
 
-        s <<
+        ss <<
           "cautionary accidental \"" << cautionaryAccidental <<
           "\" is unknown";
 
         mxsr2msrError (
-          gGlobalServiceRunData->getInputSourceName (),
+          gGlobalCurrentServiceRunData->getInputSourceName (),
           inputLineNumber,
           __FILE__, __LINE__,
-          s.str ());
+          ss.str ());
       }
     }
   }
@@ -11077,10 +12311,16 @@ void mxsr2msrTranslator::visitStart (S_stem& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_stem" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -11120,17 +12360,17 @@ void mxsr2msrTranslator::visitStart (S_stem& elt)
     stemKind = msrStemKind::kStemDouble;
 
   else {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "stem \"" << stem <<
       "\" is unknown";
 
     mxsr2msrError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 
   // color JMI
@@ -11148,10 +12388,16 @@ void mxsr2msrTranslator::visitStart (S_beam& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_beam" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -11177,17 +12423,17 @@ void mxsr2msrTranslator::visitStart (S_beam& elt)
     beamKind = msrBeamKind::kBeamBackwardHook;
   }
   else {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "beam \"" << fCurrentBeamValue <<
       "\"" << "is not known";
 
     mxsr2msrError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 
   // number
@@ -11212,10 +12458,16 @@ void mxsr2msrTranslator::visitStart (S_measure_style& elt)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_measure_style" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -11229,10 +12481,16 @@ void mxsr2msrTranslator::visitStart (S_beat_repeat& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_beat_repeat" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -11276,10 +12534,16 @@ void mxsr2msrTranslator::visitStart (S_measure_repeat& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_measure_repeat" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -11314,7 +12578,9 @@ void mxsr2msrTranslator::visitStart (S_measure_repeat& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasureRepeats ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "Creating measures repeat from its first measures" <<
       "in part " <<
       fCurrentPart->getPartCombinedName () <<
@@ -11324,6 +12590,10 @@ void mxsr2msrTranslator::visitStart (S_measure_repeat& elt)
       fCurrentMeasureRepeatSlashesNumber <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -11340,12 +12610,18 @@ void mxsr2msrTranslator::visitStart (S_measure_repeat& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasureRepeats ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "Appending measures repeat " <<
       "to part " <<
       fCurrentPart->getPartCombinedName () <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -11355,17 +12631,17 @@ void mxsr2msrTranslator::visitStart (S_measure_repeat& elt)
   }
 
   else {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "measure-repeat type \"" << measureRepeatType <<
       "\" is unknown";
 
     mxsr2msrError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 }
 
@@ -11442,10 +12718,16 @@ void mxsr2msrTranslator::visitStart (S_multiple_rest& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_multiple_rest" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -11462,18 +12744,18 @@ void mxsr2msrTranslator::visitStart (S_multiple_rest& elt)
   }
   else {
     if (useSymbols.size ()) {
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         "multiple rest use symbols " <<
         useSymbols <<
         " is unknown";
 
       mxsr2msrError (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         inputLineNumber,
         __FILE__, __LINE__,
-        s.str ());
+        ss.str ());
       }
   }
 
@@ -11502,10 +12784,16 @@ void mxsr2msrTranslator::visitStart (S_slash& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_slash" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -11518,17 +12806,17 @@ void mxsr2msrTranslator::visitStart (S_slash& elt)
   else if (slashType == "stop")
     fCurrentSlashTypeKind = msrSlashTypeKind::kSlashTypeStop;
   else {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "slash type \"" << slashType <<
       "\" is unknown";
 
     mxsr2msrError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 
   // use-dots
@@ -11550,17 +12838,17 @@ void mxsr2msrTranslator::visitStart (S_slash& elt)
     fCurrentSlashUseStemsKind = msrSlashUseStemsKind::kSlashUseStemsNo;
   else {
     if (slashUseStems.size ()) {
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         "slash use-stems \"" << slashUseStems <<
         "\" is unknown";
 
       mxsr2msrError (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         inputLineNumber,
         __FILE__, __LINE__,
-        s.str ());
+        ss.str ());
     }
   }
 
@@ -11574,10 +12862,16 @@ void mxsr2msrTranslator::visitStart (S_slash_type& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_slash_type" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -11599,7 +12893,7 @@ void mxsr2msrTranslator::visitStart (S_slash_type& elt)
   else {
     if (slashTypeSize.size ()) {
       mxsr2msrError (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         inputLineNumber,
         __FILE__, __LINE__,
           "slash type size \"" + slashTypeSize + "\" is unknown");
@@ -11608,7 +12902,9 @@ void mxsr2msrTranslator::visitStart (S_slash_type& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceSlashes ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "slashType: \"" <<
       slashType <<
       "\"" <<
@@ -11617,6 +12913,10 @@ void mxsr2msrTranslator::visitStart (S_slash_type& elt)
       slashTypeSize <<
       "\"" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 }
@@ -11625,10 +12925,16 @@ void mxsr2msrTranslator::visitStart (S_slash_dot& elt)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_slash_dot" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -11642,10 +12948,16 @@ void mxsr2msrTranslator::visitEnd (S_slash& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> End visiting S_slash" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -11665,10 +12977,16 @@ void mxsr2msrTranslator::visitStart (S_articulations& elt)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_articulations" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 }
@@ -11680,10 +12998,16 @@ void mxsr2msrTranslator::visitStart (S_accent& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_accent" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -11717,10 +13041,16 @@ void mxsr2msrTranslator::visitStart (S_breath_mark& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_breath_mark" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -11754,10 +13084,16 @@ void mxsr2msrTranslator::visitStart (S_caesura& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_caesura" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -11791,10 +13127,16 @@ void mxsr2msrTranslator::visitStart (S_spiccato& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_spiccato" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -11828,10 +13170,16 @@ void mxsr2msrTranslator::visitStart (S_staccato& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_staccato" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -11865,10 +13213,16 @@ void mxsr2msrTranslator::visitStart (S_staccatissimo& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_staccatissimo" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -11902,10 +13256,16 @@ void mxsr2msrTranslator::visitStart (S_stress& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_stress" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -11939,10 +13299,16 @@ void mxsr2msrTranslator::visitStart (S_unstress& elt)
 
  #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_unstress" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -11976,10 +13342,16 @@ void mxsr2msrTranslator::visitStart (S_detached_legato& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_detached_legato" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -12013,10 +13385,16 @@ void mxsr2msrTranslator::visitStart (S_strong_accent& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_strong_accent" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -12051,10 +13429,16 @@ void mxsr2msrTranslator::visitStart (S_tenuto& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_tenuto" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -12090,10 +13474,16 @@ void mxsr2msrTranslator::visitStart (S_doit& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_doit" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -12127,10 +13517,16 @@ void mxsr2msrTranslator::visitStart (S_falloff& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_falloff" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -12164,10 +13560,16 @@ void mxsr2msrTranslator::visitStart (S_plop& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_plop" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -12201,10 +13603,16 @@ void mxsr2msrTranslator::visitStart (S_scoop& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_scoop" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -12235,10 +13643,16 @@ void mxsr2msrTranslator::visitEnd (S_articulations& elt)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> End visiting S_articulations" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -12253,10 +13667,16 @@ void mxsr2msrTranslator::visitStart (S_arpeggiate& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_arpeggiate" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -12286,16 +13706,16 @@ void mxsr2msrTranslator::visitStart (S_arpeggiate& elt)
     directionKind = msrDirectionKind::kDirectionDown;
   else {
     if (directionString.size ()) {
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         "arpeggiate direction \"" << directionString << "\"" << "is unknown";
 
       mxsr2msrError (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         inputLineNumber,
         __FILE__, __LINE__,
-        s.str ());
+        ss.str ());
     }
   }
 
@@ -12321,10 +13741,16 @@ void mxsr2msrTranslator::visitStart (S_non_arpeggiate& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_non_arpeggiate" << // JMI
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -12355,17 +13781,17 @@ void mxsr2msrTranslator::visitStart (S_non_arpeggiate& elt)
   else {
     if (typeString.size ()) {
 
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         "non-arpeggiate type \"" << typeString <<
         "\" is unknown";
 
       mxsr2msrError (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         inputLineNumber,
         __FILE__, __LINE__,
-        s.str ());
+        ss.str ());
     }
   }
 
@@ -12392,10 +13818,16 @@ void mxsr2msrTranslator::visitStart (S_technical& elt)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_technical" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -12406,10 +13838,16 @@ void mxsr2msrTranslator::visitEnd (S_technical& elt)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_technical" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -12423,10 +13861,16 @@ void mxsr2msrTranslator::visitStart (S_arrow& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_arrow" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -12455,10 +13899,16 @@ void mxsr2msrTranslator::visitStart (S_bend_alter& elt)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_bend_alter" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -12469,10 +13919,16 @@ void mxsr2msrTranslator::visitStart (S_bend& elt) // JMI
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_bend" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 }
@@ -12484,10 +13940,16 @@ void mxsr2msrTranslator::visitEnd (S_bend& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_bend" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -12521,10 +13983,16 @@ void mxsr2msrTranslator::visitStart (S_double_tongue& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_double_tongue" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -12556,10 +14024,16 @@ void mxsr2msrTranslator::visitStart (S_down_bow& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_down_bow" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -12591,10 +14065,16 @@ void mxsr2msrTranslator::visitStart (S_fingering& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_fingering" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -12629,17 +14109,17 @@ void mxsr2msrTranslator::visitStart (S_fingering& elt)
   }
 
   else {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "<fingering /> \"" << fingeringValue <<
       "\" is out of context";
 
     mxsr2msrError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 }
 
@@ -12650,10 +14130,16 @@ void mxsr2msrTranslator::visitStart (S_fingernails& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_fingernails" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -12685,10 +14171,16 @@ void mxsr2msrTranslator::visitStart (S_fret& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_fret" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -12722,17 +14214,17 @@ void mxsr2msrTranslator::visitStart (S_fret& elt)
   }
 
   else {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "<fret /> \"" << fretValue <<
       "\" is out of context";
 
     mxsr2msrError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 }
 
@@ -12743,10 +14235,16 @@ void mxsr2msrTranslator::visitStart (S_hammer_on& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_hammer_on" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -12764,17 +14262,17 @@ void mxsr2msrTranslator::visitStart (S_hammer_on& elt)
     hammerOnTechnicalTypeKind = msrTechnicalTypeKind::kTechnicalTypeStop;
   else {
     if (hammerOnType.size ()) {
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         "hammer-on type \"" << hammerOnType <<
         "\" is unknown";
 
       mxsr2msrError (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         inputLineNumber,
         __FILE__, __LINE__,
-        s.str ());
+        ss.str ());
     }
   }
 
@@ -12808,10 +14306,16 @@ void mxsr2msrTranslator::visitStart (S_handbell& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_handbell" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -12847,10 +14351,16 @@ void mxsr2msrTranslator::visitStart (S_harmonic& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_harmonic" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -12893,10 +14403,16 @@ void mxsr2msrTranslator::visitStart (S_heel& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_heel" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -12928,10 +14444,16 @@ void mxsr2msrTranslator::visitStart (S_hole& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_hole" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -12963,10 +14485,16 @@ void mxsr2msrTranslator::visitStart (S_open_string& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_open_string" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -12998,10 +14526,16 @@ void mxsr2msrTranslator::visitStart (S_other_technical& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_other_technical" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -13037,10 +14571,16 @@ void mxsr2msrTranslator::visitStart (S_pluck& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_pluck" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -13076,10 +14616,16 @@ void mxsr2msrTranslator::visitStart (S_pull_off& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_pull_off" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -13097,17 +14643,17 @@ void mxsr2msrTranslator::visitStart (S_pull_off& elt)
     pullOffTechnicalTypeKind = msrTechnicalTypeKind::kTechnicalTypeStop;
   else {
     if (pullOffType.size ()) {
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         "pull-off type \"" << pullOffType <<
         "\" is unknown";
 
       mxsr2msrError (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         inputLineNumber,
         __FILE__, __LINE__,
-        s.str ());
+        ss.str ());
     }
   }
 
@@ -13141,10 +14687,16 @@ void mxsr2msrTranslator::visitStart (S_snap_pizzicato& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_snap_pizzicato" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -13176,10 +14728,16 @@ void mxsr2msrTranslator::visitStart (S_stopped& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_stopped" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -13211,10 +14769,16 @@ void mxsr2msrTranslator::visitStart (S_string& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_string" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -13236,18 +14800,18 @@ void mxsr2msrTranslator::visitStart (S_string& elt)
   inputStream >> stringIntegerValue;
 
   if (! stringValue.size ()) {
-    std::stringstream s;
+    std::stringstream ss;
 
     stringIntegerValue = 0;
 
-    s <<
+    ss <<
       "std::string value \"" << stringValue <<
       "\" is empoty, '" << stringIntegerValue << "' is assumed";
 
     mxsr2msrWarning (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
-      s.str ());
+      ss.str ());
   }
 
   if (fOnGoingTechnical) {
@@ -13279,17 +14843,17 @@ void mxsr2msrTranslator::visitStart (S_string& elt)
   }
 
   else {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "<std::string /> \"" << stringValue <<
       "\" is out of context";
 
     mxsr2msrError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 }
 
@@ -13300,10 +14864,16 @@ void mxsr2msrTranslator::visitStart (S_tap& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_tap" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -13335,10 +14905,16 @@ void mxsr2msrTranslator::visitStart (S_thumb_position& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_thumb_position" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -13370,10 +14946,16 @@ void mxsr2msrTranslator::visitStart (S_toe& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_toe" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -13405,10 +14987,16 @@ void mxsr2msrTranslator::visitStart (S_triple_tongue& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_triple_tongue" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -13440,10 +15028,16 @@ void mxsr2msrTranslator::visitStart (S_up_bow& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_up_bow" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -13476,10 +15070,16 @@ void mxsr2msrTranslator::visitStart (S_fermata& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_fermata" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -13502,17 +15102,17 @@ void mxsr2msrTranslator::visitStart (S_fermata& elt)
 
   else {
     if (fermataTextValue.size ()) {
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         "fermata kind \"" << fermataTextValue <<
         "\" is unknown";
 
       mxsr2msrError (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         inputLineNumber,
         __FILE__, __LINE__,
-        s.str ());
+        ss.str ());
     }
   }
 
@@ -13532,17 +15132,17 @@ void mxsr2msrTranslator::visitStart (S_fermata& elt)
 
   else {
     if (fermataTypeValue.size ()) {
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         "fermata type \"" << fermataTypeValue <<
         "\" is unknown";
 
       mxsr2msrError (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         inputLineNumber,
         __FILE__, __LINE__,
-        s.str ());
+        ss.str ());
     }
   }
 
@@ -13562,10 +15162,16 @@ void mxsr2msrTranslator::visitStart (S_ornaments& elt)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_ornaments" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 }
@@ -13577,10 +15183,16 @@ void mxsr2msrTranslator::visitStart (S_tremolo& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting tremolo" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -13592,31 +15204,31 @@ void mxsr2msrTranslator::visitStart (S_tremolo& elt)
   int tremoloMarksNumber = (int)(*elt);
 
   if (! tremoloMarksNumberString.size ()) {
-    std::stringstream s;
+    std::stringstream ss;
 
     tremoloMarksNumber = 1;
 
-    s <<
+    ss <<
       "--> tremolo value is missing, '" << tremoloMarksNumber << "' assumed";
 
     mxsr2msrWarning (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
-      s.str ());
+      ss.str ());
   }
 
   if (tremoloMarksNumber < 0 || tremoloMarksNumber > 8) { // JMI what does 0 mean?
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "tremolo value \"" << tremoloMarksNumber <<
       "\" should be between 0 and 8";
 
     mxsr2msrError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 
   // type
@@ -13635,17 +15247,17 @@ void mxsr2msrTranslator::visitStart (S_tremolo& elt)
     fCurrentDoubleTremoloTypeKind = msrDoubleTremoloTypeKind::kDoubleTremoloTypeStop;
 
   else if (tremoloType.size ()) {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "tremolo type \"" << tremoloType <<
       "\" is unknown";
 
     mxsr2msrError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 
   // placement
@@ -13702,17 +15314,17 @@ void mxsr2msrTranslator::visitStart (S_tremolo& elt)
 
   else if (placementString.size ()) {
 
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "tremolo placement \"" << placementString <<
       "\" is unknown";
 
     mxsr2msrError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 
   // handle double tremolos
@@ -13726,7 +15338,9 @@ void mxsr2msrTranslator::visitStart (S_tremolo& elt)
       // in attachCurrentSingleTremoloToNote()
 #ifdef MF_TRACING_IS_ENABLED
       if (gGlobalTracingOahGroup->getTraceTremolos ()) {
-        gLogStream <<
+				std::stringstream ss;
+
+				ss <<
           "Creating a single tremolo" <<
           ", line " << inputLineNumber <<
           ", " <<
@@ -13736,6 +15350,10 @@ void mxsr2msrTranslator::visitStart (S_tremolo& elt)
           msrPlacementKindAsString (
             singleTremoloPlacementKind) <<
           std::endl;
+
+				gWaeHandler->waeTrace (
+					__FILE__, __LINE__,
+					ss.str ());
       }
 #endif
 
@@ -13760,7 +15378,9 @@ void mxsr2msrTranslator::visitStart (S_tremolo& elt)
         // create a double tremolo start
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalTracingOahGroup->getTraceTremolos ()) {
-          gLogStream <<
+					std::stringstream ss;
+
+					ss <<
             "Creating a double tremolo" <<
             ", line " << inputLineNumber <<
             ", " <<
@@ -13770,6 +15390,10 @@ void mxsr2msrTranslator::visitStart (S_tremolo& elt)
             msrPlacementKindAsString (
               doubleTremoloPlacementKind) <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
 
@@ -13784,16 +15408,16 @@ void mxsr2msrTranslator::visitStart (S_tremolo& elt)
 
 /*
       else {
-        std::stringstream s;
+        std::stringstream ss;
 
-        s <<
+        ss <<
           "<tremolo/> start when a current double tremolo is already open";
 
         mxsr2msrError (
-          gGlobalServiceRunData->getInputSourceName (),
+          gGlobalCurrentServiceRunData->getInputSourceName (),
           inputLineNumber,
           __FILE__, __LINE__,
-          s.str ());
+          ss.str ());
       }
 */
       break;
@@ -13802,10 +15426,16 @@ void mxsr2msrTranslator::visitStart (S_tremolo& elt)
       if (fCurrentDoubleTremolo) {
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalTracingOahGroup->getTraceTremolos ()) {
-          gLogStream <<
+					std::stringstream ss;
+
+					ss <<
             "Meeting a double tremolo stop" <<
             ", line " << inputLineNumber <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
 
@@ -13814,16 +15444,16 @@ void mxsr2msrTranslator::visitStart (S_tremolo& elt)
       }
 
       else {
-        std::stringstream s;
+        std::stringstream ss;
 
-        s <<
+        ss <<
           "<tremolo/> stop whit no preceeding <tremolo/> start";
 
         mxsr2msrError (
-          gGlobalServiceRunData->getInputSourceName (),
+          gGlobalCurrentServiceRunData->getInputSourceName (),
           inputLineNumber,
           __FILE__, __LINE__,
-          s.str ());
+          ss.str ());
       }
       break;
   } // switch
@@ -13836,10 +15466,16 @@ void mxsr2msrTranslator::visitStart (S_trill_mark& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_trill_mark" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -13875,10 +15511,16 @@ void mxsr2msrTranslator::visitStart (S_dashes& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_dashes" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -13902,17 +15544,17 @@ void mxsr2msrTranslator::visitStart (S_dashes& elt)
     fDashesSpannerTypeKind = msrSpannerTypeKind::kSpannerTypeStop;
   else {
     if (dashesType.size ()) {
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         "dashes type \"" << dashesType <<
         "\" is unknown";
 
       mxsr2msrError (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         inputLineNumber,
         __FILE__, __LINE__,
-        s.str ());
+        ss.str ());
     }
   }
 
@@ -13949,10 +15591,16 @@ void mxsr2msrTranslator::visitStart (S_wavy_line& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_wavy_line" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -13974,17 +15622,17 @@ void mxsr2msrTranslator::visitStart (S_wavy_line& elt)
     fWavyLineSpannerTypeKind = msrSpannerTypeKind::kSpannerTypeStop;
   else {
     if (wavyLineType.size ()) {
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         "wavy-line type \"" << wavyLineType <<
         "\" is unknown";
 
       mxsr2msrError (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         inputLineNumber,
         __FILE__, __LINE__,
-        s.str ());
+        ss.str ());
     }
   }
 
@@ -14023,15 +15671,15 @@ void mxsr2msrTranslator::visitStart (S_wavy_line& elt)
       // set spanner two-way sideLinks
       // between both ends of the wavy line spanner
       if (! fCurrentWavyLineSpannerStart) {
-        std::stringstream s;
+        std::stringstream ss;
 
-        s <<
+        ss <<
           "wavy-line stop found without corresponding start, ignoring it";
 
         mxsr2msrWarning (
-          gGlobalServiceRunData->getInputSourceName (),
+          gGlobalCurrentServiceRunData->getInputSourceName (),
           inputLineNumber,
-          s.str ());
+          ss.str ());
       }
       else {
         fCurrentSpannersList.push_back (spanner);
@@ -14061,10 +15709,16 @@ void mxsr2msrTranslator::visitStart (S_turn& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_turn" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -14098,10 +15752,16 @@ void mxsr2msrTranslator::visitStart (S_inverted_turn& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_inverted_turn" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -14135,10 +15795,16 @@ void mxsr2msrTranslator::visitStart (S_delayed_turn& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_delayed_turn" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -14172,10 +15838,16 @@ void mxsr2msrTranslator::visitStart (S_delayed_inverted_turn& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_delayed_inverted_turn" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -14209,10 +15881,16 @@ void mxsr2msrTranslator::visitStart (S_vertical_turn& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_vertical_turn" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -14246,10 +15924,16 @@ void mxsr2msrTranslator::visitStart (S_mordent& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_mordent" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -14283,10 +15967,16 @@ void mxsr2msrTranslator::visitStart (S_inverted_mordent& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_inverted_mordent" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -14320,10 +16010,16 @@ void mxsr2msrTranslator::visitStart (S_schleifer& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_schleifer" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -14357,10 +16053,16 @@ void mxsr2msrTranslator::visitStart (S_shake& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_shake" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -14394,10 +16096,16 @@ void mxsr2msrTranslator::visitStart (S_accidental_mark& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_accidental_mark" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -14560,17 +16268,17 @@ void mxsr2msrTranslator::visitStart (S_accidental_mark& elt)
     currentOrnamentAccidentalKind = msrAccidentalKind::kAccidentalOther;
 
   else if (accidentalMark.size ()) {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "accidental-mark \"" << accidentalMark <<
       "\" is unknown";
 
     mxsr2msrError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 
   // placement
@@ -14604,10 +16312,16 @@ void mxsr2msrTranslator::visitEnd (S_ornaments& elt)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> End visiting S_ornaments" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 }
@@ -14620,10 +16334,16 @@ void mxsr2msrTranslator::visitStart( S_f& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_f" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -14661,10 +16381,16 @@ void mxsr2msrTranslator::visitStart( S_ff& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_ff" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -14702,10 +16428,16 @@ void mxsr2msrTranslator::visitStart( S_fff& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_fff" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -14743,10 +16475,16 @@ void mxsr2msrTranslator::visitStart( S_ffff& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_ffff" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -14784,10 +16522,16 @@ void mxsr2msrTranslator::visitStart( S_fffff& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_fffff" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -14825,10 +16569,16 @@ void mxsr2msrTranslator::visitStart( S_ffffff& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_ffffff" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -14867,10 +16617,16 @@ void mxsr2msrTranslator::visitStart( S_p& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_p" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -14908,10 +16664,16 @@ void mxsr2msrTranslator::visitStart( S_pp& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_pp" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -14949,10 +16711,16 @@ void mxsr2msrTranslator::visitStart( S_ppp& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_ppp" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -14990,10 +16758,16 @@ void mxsr2msrTranslator::visitStart( S_pppp& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_pppp" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -15031,10 +16805,16 @@ void mxsr2msrTranslator::visitStart( S_ppppp& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_ppppp" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -15072,10 +16852,16 @@ void mxsr2msrTranslator::visitStart( S_pppppp& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_pppppp" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -15115,10 +16901,16 @@ void mxsr2msrTranslator::visitStart( S_mf& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_mf" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -15156,10 +16948,16 @@ void mxsr2msrTranslator::visitStart( S_mp& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_mp" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -15198,10 +16996,16 @@ void mxsr2msrTranslator::visitStart( S_fp& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_fp" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -15240,10 +17044,16 @@ void mxsr2msrTranslator::visitStart( S_fz& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_fz" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -15282,10 +17092,16 @@ void mxsr2msrTranslator::visitStart( S_pf& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_pf" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -15324,10 +17140,16 @@ void mxsr2msrTranslator::visitStart( S_rf& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_rf" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -15366,10 +17188,16 @@ void mxsr2msrTranslator::visitStart( S_sf& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_sf" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -15408,10 +17236,16 @@ void mxsr2msrTranslator::visitStart( S_rfz& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_rfz" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -15450,10 +17284,16 @@ void mxsr2msrTranslator::visitStart( S_sfz& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_sfz" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -15492,10 +17332,16 @@ void mxsr2msrTranslator::visitStart( S_sfp& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_sfp" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -15534,10 +17380,16 @@ void mxsr2msrTranslator::visitStart( S_sfpp& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_sfpp" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -15576,10 +17428,16 @@ void mxsr2msrTranslator::visitStart( S_sffz& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_sffz" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -15618,10 +17476,16 @@ void mxsr2msrTranslator::visitStart( S_sfzp& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_sfzp" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -15660,10 +17524,16 @@ void mxsr2msrTranslator::visitStart( S_n& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_n" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -15702,10 +17572,16 @@ void mxsr2msrTranslator::visitStart( S_other_dynamics& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_other_dynamics" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -15763,7 +17639,9 @@ void mxsr2msrTranslator::visitStart( S_damper_pedal& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_damper_pedal" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -15789,16 +17667,16 @@ void mxsr2msrTranslator::visitStart( S_damper_pedal& elt)
       fCurrentDamperPedalIntegerValue < 0
         &&
       fCurrentDamperPedalIntegerValue > 100) {
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         "damper pedal integer value \"" <<
         fCurrentDamperPedalIntegerValue <<
         "\" should be between 0 and 100";
 
       mxsr2msrError (
         inputLineNumber,
-        s.str ());
+        ss.str ());
     }
 
     fCurrentDamperPedalKind =
@@ -15831,7 +17709,9 @@ void mxsr2msrTranslator::visitStart( S_soft_pedal& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_soft_pedal" <<
        ", line " << inputLineNumber <<
      std::endl;
@@ -15868,10 +17748,16 @@ void mxsr2msrTranslator::visitStart( S_sostenuto_pedal& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_sostenuto_pedal" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -15904,10 +17790,16 @@ void mxsr2msrTranslator::visitStart (S_cue& elt)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_cue" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -15922,10 +17814,16 @@ void mxsr2msrTranslator::visitStart (S_grace& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_grace" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -15947,7 +17845,7 @@ void mxsr2msrTranslator::visitStart (S_grace& elt)
   else {
     if (slash.size ()) {
       mxsr2msrError (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         inputLineNumber,
         __FILE__, __LINE__,
         "grace slash \"" + slash + "\" unknown, should be 'yes' or 'no'");
@@ -15979,10 +17877,16 @@ void mxsr2msrTranslator::visitStart (S_chord& elt)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_chord" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -16000,10 +17904,16 @@ void mxsr2msrTranslator::visitStart (S_time_modification& elt)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_time_modification" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -16020,10 +17930,16 @@ void mxsr2msrTranslator::visitStart (S_actual_notes& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_actual_notes" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -16034,10 +17950,16 @@ void mxsr2msrTranslator::visitStart (S_actual_notes& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceTuplets ()) {
-      gLogStream <<
+			std::stringstream ss;
+
+			ss <<
         "fCurrentNoteActualNotes: " <<
         fCurrentNoteActualNotes <<
         std::endl;
+
+			gWaeHandler->waeTrace (
+				__FILE__, __LINE__,
+				ss.str ());
     }
 #endif
 
@@ -16057,26 +17979,32 @@ void mxsr2msrTranslator::visitStart (S_actual_notes& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceTempos ()) {
-      gLogStream <<
+			std::stringstream ss;
+
+			ss <<
         "fCurrentMetronomeNoteActualNotes: " <<
         fCurrentMetronomeNoteActualNotes <<
         std::endl;
+
+			gWaeHandler->waeTrace (
+				__FILE__, __LINE__,
+				ss.str ());
     }
 #endif
   }
 
   else {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "<actual-notes /> \"" << actualNotes <<
       "\" is out of context";
 
     mxsr2msrError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 }
 
@@ -16087,10 +18015,16 @@ void mxsr2msrTranslator::visitStart (S_normal_notes& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_normal_notes" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -16101,10 +18035,16 @@ void mxsr2msrTranslator::visitStart (S_normal_notes& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceTuplets ()) {
-      gLogStream <<
+			std::stringstream ss;
+
+			ss <<
         "fCurrentNoteNormalNotes: " <<
         fCurrentNoteNormalNotes <<
         std::endl;
+
+			gWaeHandler->waeTrace (
+				__FILE__, __LINE__,
+				ss.str ());
     }
 #endif
 
@@ -16124,26 +18064,32 @@ void mxsr2msrTranslator::visitStart (S_normal_notes& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceTempos ()) {
-      gLogStream <<
+			std::stringstream ss;
+
+			ss <<
         "fCurrentMetronomeNoteNormalNotes: " <<
         fCurrentMetronomeNoteNormalNotes <<
         std::endl;
+
+			gWaeHandler->waeTrace (
+				__FILE__, __LINE__,
+				ss.str ());
     }
 #endif
   }
 
   else {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "<normal-notes /> \"" << normalNotes <<
       "\" is out of context";
 
     mxsr2msrError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 }
 
@@ -16154,10 +18100,16 @@ void mxsr2msrTranslator::visitStart (S_normal_type& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_normal_type" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -16166,10 +18118,16 @@ void mxsr2msrTranslator::visitStart (S_normal_type& elt)
   if (fOnGoingNote) {
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceTuplets ()) {
-      gLogStream <<
+			std::stringstream ss;
+
+			ss <<
         "normalTypeString: " <<
         normalTypeString <<
         std::endl;
+
+			gWaeHandler->waeTrace (
+				__FILE__, __LINE__,
+				ss.str ());
     }
 #endif
 
@@ -16194,27 +18152,33 @@ void mxsr2msrTranslator::visitStart (S_normal_type& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceTempos ()) {
-      gLogStream <<
+			std::stringstream ss;
+
+			ss <<
         "fCurrentMetronomeNoteNormalType: " <<
         fCurrentMetronomeNoteNormalType <<
         std::endl;
+
+			gWaeHandler->waeTrace (
+				__FILE__, __LINE__,
+				ss.str ());
     }
 #endif
 
   }
 
   else {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "<normal-type /> \"" << normalTypeString <<
       "\" is out of context";
 
     mxsr2msrError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 }
 
@@ -16226,10 +18190,16 @@ void mxsr2msrTranslator::visitStart (S_tuplet& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_tuplet" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -16252,31 +18222,31 @@ void mxsr2msrTranslator::visitStart (S_tuplet& elt)
       fCurrentTupletBracketKind = msrTupletBracketKind::kTupletBracketNo;
     else {
       if (tupletBracket.size ()) {
-        std::stringstream s;
+        std::stringstream ss;
 
-        s <<
+        ss <<
           "tuplet bracket \"" << tupletBracket <<
           "\" is unknown";
 
         mxsr2msrError (
-          gGlobalServiceRunData->getInputSourceName (),
+          gGlobalCurrentServiceRunData->getInputSourceName (),
           inputLineNumber,
           __FILE__, __LINE__,
-          s.str ());
+          ss.str ());
       }
       else {
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalTracingOahGroup->getTraceTuplets ()) {
-          std::stringstream s;
+          std::stringstream ss;
 
-          s <<
+          ss <<
             "tuplet bracket is empty: this is implementation dependent," <<
             " \"yes\" is assumed"; // option ??? JMI
 
           mxsr2msrWarning (
-            gGlobalServiceRunData->getInputSourceName (),
+            gGlobalCurrentServiceRunData->getInputSourceName (),
             inputLineNumber,
-            s.str ());
+            ss.str ());
         }
 #endif
       }
@@ -16297,17 +18267,17 @@ void mxsr2msrTranslator::visitStart (S_tuplet& elt)
       fCurrentTupletLineShapeKind = msrTupletLineShapeKind::kTupletLineShapeCurved;
     else {
       if (tupletLineShape.size ()) {
-        std::stringstream s;
+        std::stringstream ss;
 
-        s <<
+        ss <<
           "tuplet line-shape \"" << tupletLineShape <<
           "\" is unknown";
 
         mxsr2msrError (
-          gGlobalServiceRunData->getInputSourceName (),
+          gGlobalCurrentServiceRunData->getInputSourceName (),
           inputLineNumber,
           __FILE__, __LINE__,
-          s.str ());
+          ss.str ());
       }
     }
   }
@@ -16325,10 +18295,16 @@ void mxsr2msrTranslator::visitStart (S_tuplet& elt)
     if      (tupletType == "start") {
 #ifdef MF_TRACING_IS_ENABLED
       if (gGlobalTracingOahGroup->getTraceTuplets ()) {
-        gLogStream <<
+				std::stringstream ss;
+
+				ss <<
           "--> There is a tuplet start (kTupletTypeStart)" <<
           ", line " << inputLineNumber <<
           std::endl;
+
+				gWaeHandler->waeTrace (
+					__FILE__, __LINE__,
+					ss.str ());
       }
 #endif
 
@@ -16337,10 +18313,16 @@ void mxsr2msrTranslator::visitStart (S_tuplet& elt)
     else if (tupletType == "continue") {
 #ifdef MF_TRACING_IS_ENABLED
       if (gGlobalTracingOahGroup->getTraceTuplets ()) {
-        gLogStream <<
+				std::stringstream ss;
+
+				ss <<
           "--> There is a tuplet continue (kTupletTypeContinue)" <<
           ", line " << inputLineNumber <<
           std::endl;
+
+				gWaeHandler->waeTrace (
+					__FILE__, __LINE__,
+					ss.str ());
       }
 #endif
 
@@ -16361,11 +18343,17 @@ void mxsr2msrTranslator::visitStart (S_tuplet& elt)
         // possible if the note is a tremolo
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalTracingOahGroup->getTraceTuplets ()) {
-          gLogStream <<
+					std::stringstream ss;
+
+					ss <<
             "--> There is a tuplet stop right after a tuplet start for tuplet nummber " << fCurrentTupletNumber <<
             " (kTupletTypeStartAndStopInARow)" <<
             ", line " << inputLineNumber <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
 
@@ -16375,10 +18363,16 @@ void mxsr2msrTranslator::visitStart (S_tuplet& elt)
         // this is a 'regular' tuplet stop
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalTracingOahGroup->getTraceTuplets ()) {
-          gLogStream <<
+					std::stringstream ss;
+
+					ss <<
             "--> There is a tuplet stop (kTupletTypeStop)" <<
             ", line " << inputLineNumber <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
 
@@ -16386,17 +18380,17 @@ void mxsr2msrTranslator::visitStart (S_tuplet& elt)
       }
     }
     else {
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         "tuplet type \"" << tupletType <<
         "\" is unknown";
 
       mxsr2msrError (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         inputLineNumber,
         __FILE__, __LINE__,
-        s.str ());
+        ss.str ());
     }
   }
 
@@ -16420,7 +18414,7 @@ void mxsr2msrTranslator::visitStart (S_tuplet& elt)
     else {
       if (tupletShowNumber.size ()) {
         mxsr2msrError (
-          gGlobalServiceRunData->getInputSourceName (),
+          gGlobalCurrentServiceRunData->getInputSourceName (),
           inputLineNumber,
           __FILE__, __LINE__,
           "tuplet show-number \"" + tupletShowNumber + "\" is unknown");
@@ -16447,7 +18441,7 @@ void mxsr2msrTranslator::visitStart (S_tuplet& elt)
     else {
       if (tupletShowType.size ()) {
         mxsr2msrError (
-          gGlobalServiceRunData->getInputSourceName (),
+          gGlobalCurrentServiceRunData->getInputSourceName (),
           inputLineNumber,
           __FILE__, __LINE__,
           "tuplet show-type \"" + tupletShowType + "\" is unknown");
@@ -16457,7 +18451,9 @@ void mxsr2msrTranslator::visitStart (S_tuplet& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTuplets ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "fCurrentTupletNumber: " <<
       fCurrentTupletNumber <<
       ", fCurrentTupletTypeKind: " <<
@@ -16473,6 +18469,10 @@ void mxsr2msrTranslator::visitStart (S_tuplet& elt)
       msrTupletShowTypeKindAsString (
         fCurrentTupletShowTypeKind) <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -16483,10 +18483,16 @@ void mxsr2msrTranslator::visitStart (S_tuplet_actual& elt)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_tuplet_actual" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -16497,10 +18503,16 @@ void mxsr2msrTranslator::visitEnd (S_tuplet_actual& elt)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> End visiting S_tuplet_actual" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -16511,10 +18523,16 @@ void mxsr2msrTranslator::visitStart (S_tuplet_normal& elt)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_tuplet_normal" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -16525,10 +18543,16 @@ void mxsr2msrTranslator::visitEnd (S_tuplet_normal& elt)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> End visiting S_tuplet_normal" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -16542,10 +18566,16 @@ void mxsr2msrTranslator::visitStart (S_tuplet_number& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_tuplet_number" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -16560,7 +18590,7 @@ void mxsr2msrTranslator::visitStart (S_tuplet_number& elt)
   }
   else {
     mxsr2msrError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
       "<tuplet-number /> out of context");
@@ -16570,10 +18600,16 @@ void mxsr2msrTranslator::visitStart (S_tuplet_number& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTuplets ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "tuplet number (not handled): " <<
       tupletNumberValue <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 }
@@ -16585,10 +18621,16 @@ void mxsr2msrTranslator::visitStart (S_tuplet_type& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_tuplet_type" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -16603,7 +18645,7 @@ void mxsr2msrTranslator::visitStart (S_tuplet_type& elt)
   }
   else {
     mxsr2msrError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
       "<tuplet-type /> out of context");
@@ -16613,10 +18655,16 @@ void mxsr2msrTranslator::visitStart (S_tuplet_type& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTuplets ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "tuplet type (not handled): " <<
       tupletTypeValue <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 }
@@ -16628,10 +18676,16 @@ void mxsr2msrTranslator::visitStart (S_tuplet_dot& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_tuplet_dot" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -16643,7 +18697,7 @@ void mxsr2msrTranslator::visitStart (S_tuplet_dot& elt)
   }
   else {
     mxsr2msrError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
       "<tuplet-dot /> out of context");
@@ -16660,10 +18714,16 @@ void mxsr2msrTranslator::visitStart (S_glissando& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_glissando" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -16686,17 +18746,17 @@ void mxsr2msrTranslator::visitStart (S_glissando& elt)
   else if (glissandoType == "stop")
     glissandoTypeKind = msrGlissandoTypeKind::kGlissandoTypeStop;
   else {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "glissando type \"" << glissandoType <<
       "\" is unknown";
 
     mxsr2msrError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 
   // line-type
@@ -16722,7 +18782,7 @@ void mxsr2msrTranslator::visitStart (S_glissando& elt)
   else {
     if (glissandoLineType.size ()) {
       mxsr2msrError (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         inputLineNumber,
         __FILE__, __LINE__,
         "glissando line-type \"" + glissandoLineType + "\" is unknown");
@@ -16731,12 +18791,18 @@ void mxsr2msrTranslator::visitStart (S_glissando& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceGlissandos ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "glissandoNumber: " <<  glissandoNumber <<
       "glissandoType: " << glissandoTypeKind <<
       "glissandoLineType: " << glissandoLineTypeKind <<
       "glissandoTextValue: " << glissandoTextValue <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -16753,11 +18819,17 @@ void mxsr2msrTranslator::visitStart (S_glissando& elt)
   // register glissando in this visitor
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceGlissandos ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "Appending glissando '" <<
       glissando->asString () <<
       "' to the glissandos pending list" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -16772,10 +18844,16 @@ void mxsr2msrTranslator::visitStart (S_slide& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_slide" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -16798,17 +18876,17 @@ void mxsr2msrTranslator::visitStart (S_slide& elt)
   else if (slideType == "stop")
     slideTypeKind = msrSlideTypeKind::kSlideTypeStop;
   else {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "slide type \"" << slideType <<
       "\" is unknown";
 
     mxsr2msrError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 
   // line-type
@@ -16834,7 +18912,7 @@ void mxsr2msrTranslator::visitStart (S_slide& elt)
   else {
     if (slideLineType.size ()) {
       mxsr2msrError (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         inputLineNumber,
         __FILE__, __LINE__,
         "slide line-type \"" + slideLineType + "\" is unknown");
@@ -16843,7 +18921,9 @@ void mxsr2msrTranslator::visitStart (S_slide& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceSlides ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "slideNumber: " <<
       slideNumber <<
       "slideType: " <<
@@ -16851,6 +18931,10 @@ void mxsr2msrTranslator::visitStart (S_slide& elt)
       "slideLineType: " <<
       slideLineTypeKind <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -16867,11 +18951,17 @@ void mxsr2msrTranslator::visitStart (S_slide& elt)
   // register glissando in this visitor
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceSlides ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "Appending slide '" <<
       slide->asString () <<
       "' to the slides pending list" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -16886,10 +18976,16 @@ void mxsr2msrTranslator::visitStart (S_rest& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_rest" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -16943,7 +19039,7 @@ void mxsr2msrTranslator::visitStart (S_rest& elt)
   else {
     if (restMeasure.size ()) {
       mxsr2msrError (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         inputLineNumber,
         __FILE__, __LINE__,
         "rest measure \"" + restMeasure + "\" is unknown");
@@ -16959,10 +19055,16 @@ void mxsr2msrTranslator::visitStart (S_display_step& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_display_step" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -16989,26 +19091,32 @@ void mxsr2msrTranslator::visitStart (S_display_octave& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_display_octave" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
   int displayOctaveNumber = (int)(*elt);
 
   if (displayOctaveNumber < 0 || displayOctaveNumber > 9) {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "display octave number '" << displayOctaveNumber <<
       "' is not in the 0..9 range, '0' is assumed";
 
     mxsr2msrWarning (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
-      s.str ());
+      ss.str ());
 
     displayOctaveNumber = 0;
   }
@@ -17023,10 +19131,16 @@ void mxsr2msrTranslator::visitEnd (S_unpitched& elt)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> End visiting S_unpitched" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -17048,12 +19162,18 @@ S_msrChord mxsr2msrTranslator::createChordFromItsFirstNote (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceChords ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> creating a chord from its first note '" <<
       chordFirstNote->asShortString () <<
       ", in voice \"" << voice->getVoiceName () << "\"" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -17072,13 +19192,19 @@ S_msrChord mxsr2msrTranslator::createChordFromItsFirstNote (
   // register note as first member of chord
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceChords ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "Adding first note " <<
       chordFirstNote->
         asShortString () <<
       ", line " << inputLineNumber <<
       ", to new chord" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -17146,7 +19272,9 @@ void mxsr2msrTranslator::registerVoiceCurrentChordInMap (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceChords ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Registering chord '" <<
       chord->asString () <<
       "'" <<
@@ -17154,6 +19282,10 @@ void mxsr2msrTranslator::registerVoiceCurrentChordInMap (
       voice->getVoiceName () <<
       "\", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -17241,13 +19373,19 @@ void mxsr2msrTranslator::finalizeCurrentChord (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceChords ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "Finalizing current chord START:" <<
       std::endl <<
       fCurrentChord <<
       std::endl <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -17257,13 +19395,19 @@ void mxsr2msrTranslator::finalizeCurrentChord (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceChords ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "Finalizing current chord END: " <<
       std::endl <<
       fCurrentChord <<
       std::endl <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -17317,12 +19461,18 @@ void mxsr2msrTranslator::copyNoteArticulationsToChord (
   for (const S_msrArticulation& articulation : noteArticulations) {
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceArticulations ()) {
-      gLogStream <<
+			std::stringstream ss;
+
+			ss <<
         "Copying articulation '" <<
         articulation->getArticulationKind () <<
         "' from note " << note->asString () <<
         " to chord" <<
         std::endl;
+
+			gWaeHandler->waeTrace (
+				__FILE__, __LINE__,
+				ss.str ());
     }
 #endif
 
@@ -17345,7 +19495,9 @@ void mxsr2msrTranslator::copyNoteTechnicalsToChord (
   for (S_msrTechnical technical : noteTechnicals) {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTechnicals ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Copying technical '" <<
       technical->getTechnicalKind () <<
       "' from note " << note->asString () <<
@@ -17401,12 +19553,18 @@ void mxsr2msrTranslator::copyNoteTechnicalWithFloatsToChord (
   for (S_msrTechnicalWithFloat technicalWithFloat : noteTechnicalWithFloats) {
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceTechnicals ()) {
-      gLogStream <<
+			std::stringstream ss;
+
+			ss <<
         "Copying technical '" <<
         technicalWithFloat->getTechnicalWithFloatKind () <<
         "' from note " << note->asString () <<
         " to chord" <<
         std::endl;
+
+			gWaeHandler->waeTrace (
+				__FILE__, __LINE__,
+				ss.str ());
     }
 #endif
 
@@ -17429,12 +19587,18 @@ void mxsr2msrTranslator::copyNoteTechnicalWithStringsToChord (
   for (S_msrTechnicalWithString technicalWithString : noteTechnicalWithStrings) {
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceTechnicals ()) {
-      gLogStream <<
+			std::stringstream ss;
+
+			ss <<
         "Copying technical '" <<
         technicalWithString->getTechnicalWithStringKind () <<
         "' from note " << note->asString () <<
         " to chord" <<
         std::endl;
+
+			gWaeHandler->waeTrace (
+				__FILE__, __LINE__,
+				ss.str ());
     }
 #endif
 
@@ -17457,12 +19621,18 @@ void mxsr2msrTranslator::copyNoteOrnamentsToChord (
   for (S_msrOrnament ornament : noteOrnaments) {
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceOrnaments ()) {
-      gLogStream <<
+			std::stringstream ss;
+
+			ss <<
         "Copying ornament '" <<
         msrOrnamentKindAsString (ornament->getOrnamentKind ()) <<
         "' from note " << note->asString () <<
         " to chord" <<
         std::endl;
+
+			gWaeHandler->waeTrace (
+				__FILE__, __LINE__,
+				ss.str ());
     }
 #endif
 
@@ -17486,12 +19656,18 @@ void mxsr2msrTranslator::copyNoteSpannersToChord (
   for (S_msrSpanner spanner : noteSpanners) {
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceSpanners ()) {
-      gLogStream <<
+			std::stringstream ss;
+
+			ss <<
         "Copying spanner '" <<
         spanner->getSpannerKind () <<
         "' from note " << note->asString () <<
         " to chord" <<
         std::endl;
+
+			gWaeHandler->waeTrace (
+				__FILE__, __LINE__,
+				ss.str ());
     }
 #endif
 
@@ -17515,12 +19691,18 @@ void mxsr2msrTranslator::copyNoteSingleTremoloToChord (
   if (noteSingleTremolo) {
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceTremolos ()) {
-      gLogStream <<
+			std::stringstream ss;
+
+			ss <<
         "Copying singleTremolo '" <<
         noteSingleTremolo->asString () <<
         "' from note " << note->asString () <<
         " to chord" <<
         std::endl;
+
+			gWaeHandler->waeTrace (
+				__FILE__, __LINE__,
+				ss.str ());
     }
 #endif
 
@@ -17550,12 +19732,18 @@ void mxsr2msrTranslator::copyNoteDynamicsToChord (
 
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceDynamics ()) {
-      gLogStream <<
+			std::stringstream ss;
+
+			ss <<
         "Copying dynamics '" <<
         msrDynamicKindAsString ((*i)->getDynamicKind ()) <<
         "' from note " << note->asString () <<
         " to chord" <<
         std::endl;
+
+			gWaeHandler->waeTrace (
+				__FILE__, __LINE__,
+				ss.str ());
     }
 #endif
 
@@ -17585,12 +19773,18 @@ void mxsr2msrTranslator::copyNoteOtherDynamicsToChord (
 
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceDynamics ()) {
-      gLogStream <<
+			std::stringstream ss;
+
+			ss <<
         "Copying other dynamics '" <<
         (*i)->asString () <<
         "' from note " << note->asString () <<
         " to chord" <<
         std::endl;
+
+			gWaeHandler->waeTrace (
+				__FILE__, __LINE__,
+				ss.str ());
     }
 #endif
 
@@ -17620,12 +19814,18 @@ void mxsr2msrTranslator::copyNoteWordsToChord (
 
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceWords ()) {
-      gLogStream <<
+			std::stringstream ss;
+
+			ss <<
         "Copying words '" <<
         (*i)->asString () <<
         "' from note " << note->asString () <<
         " to chord" <<
         std::endl;
+
+			gWaeHandler->waeTrace (
+				__FILE__, __LINE__,
+				ss.str ());
     }
 #endif
 
@@ -17649,12 +19849,18 @@ void mxsr2msrTranslator::copyNoteStemToChord (
   if (noteStem) {
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceStems ()) {
-      gLogStream <<
+			std::stringstream ss;
+
+			ss <<
         "Copying stem '" <<
         noteStem->asString () <<
         "' from note " << note->asString () <<
         " to chord" <<
         std::endl;
+
+			gWaeHandler->waeTrace (
+				__FILE__, __LINE__,
+				ss.str ());
     }
 #endif
 
@@ -17691,6 +19897,10 @@ void mxsr2msrTranslator::copyNoteBeamsToChord (
         "' from note " << note->asString () <<
         " to chord" <<
         std::endl;
+
+			gWaeHandler->waeTrace (
+				__FILE__, __LINE__,
+				ss.str ());
     }
 #endif
 
@@ -17700,7 +19910,9 @@ void mxsr2msrTranslator::copyNoteBeamsToChord (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceBeams ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "==> AFTER copying beams to chord:" <<
       std::endl;
 
@@ -17737,12 +19949,18 @@ void mxsr2msrTranslator::appendNoteBeamsLinksToChord (
 
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceBeams ()) {
-      gLogStream <<
+			std::stringstream ss;
+
+			ss <<
         "Adding beam link of '" <<
         beam->asString () <<
         "' from note " << note->asString () <<
         " to chord" <<
         std::endl;
+
+			gWaeHandler->waeTrace (
+				__FILE__, __LINE__,
+				ss.str ());
     }
 #endif
 
@@ -17761,7 +19979,9 @@ void mxsr2msrTranslator::appendNoteBeamsLinksToChord (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceBeams ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "==> AFTER appending note's beams links to chord:" <<
       std::endl;
 
@@ -17791,12 +20011,18 @@ void mxsr2msrTranslator::copyNoteTieToChord (
   if (noteTie) {
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceTies ()) {
-      gLogStream <<
+			std::stringstream ss;
+
+			ss <<
         "Appending tie '" <<
         noteTie->asString () <<
         "' from note " << note->asString () <<
         " to chord" <<
         std::endl;
+
+			gWaeHandler->waeTrace (
+				__FILE__, __LINE__,
+				ss.str ());
     }
 #endif
 
@@ -17805,18 +20031,24 @@ void mxsr2msrTranslator::copyNoteTieToChord (
   }
 
 #ifdef MF_TRACING_IS_ENABLED
-    if (gGlobalTracingOahGroup->getTraceTies ()) {
-    gLogStream <<
+	if (gGlobalTracingOahGroup->getTraceTies ()) {
+		std::stringstream ss;
+
+		ss <<
       "==> AFTER appending tie to chord:" <<
       std::endl;
 
     ++gIndenter;
 
-    gLogStream <<
+    ss <<
       chord <<
       std::endl;
 
     --gIndenter;
+
+		gWaeHandler->waeTrace (
+			__FILE__, __LINE__,
+			ss.str ());
   }
 #endif
 }
@@ -17849,6 +20081,10 @@ void mxsr2msrTranslator::copyNoteSlursToChord (
         "' from note " << note->asString () <<
         " to chord" <<
         std::endl;
+
+			gWaeHandler->waeTrace (
+				__FILE__, __LINE__,
+				ss.str ());
     }
 #endif
 
@@ -17880,12 +20116,18 @@ void mxsr2msrTranslator::appendNoteSlursLinksToChord (
 
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceSlurs ()) {
-      gLogStream <<
+			std::stringstream ss;
+
+			ss <<
         "Adding slur link of '" <<
         slur->asString () <<
         "' from note " << note->asString () <<
         " to chord" <<
         std::endl;
+
+			gWaeHandler->waeTrace (
+				__FILE__, __LINE__,
+				ss.str ());
     }
 #endif
 
@@ -17904,7 +20146,9 @@ void mxsr2msrTranslator::appendNoteSlursLinksToChord (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceSlurs ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "==> AFTER appending note's slurs links to chord:" <<
       std::endl;
 
@@ -17934,12 +20178,18 @@ void mxsr2msrTranslator::copyNoteLigaturesToChord (
   for (S_msrLigature ligature : noteLigatures) {
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceLigatures ()) {
-      gLogStream <<
+			std::stringstream ss;
+
+			ss <<
         "Copying ligature '" <<
         ligature->getLigatureKind () <<
         "' from note " << note->asString () <<
         " to chord" <<
         std::endl;
+
+			gWaeHandler->waeTrace (
+				__FILE__, __LINE__,
+				ss.str ());
     }
 #endif
 
@@ -17964,12 +20214,18 @@ void mxsr2msrTranslator::copyNotePedalsToChord (
   for (S_msrPedal pedal : notePedals) {
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTracePedals ()) {
-      gLogStream <<
+			std::stringstream ss;
+
+			ss <<
         "Copying pedal '" <<
         pedal->asString () <<
         "' from note " << note->asString () <<
         " to chord" << chord->asString () <<
         std::endl;
+
+			gWaeHandler->waeTrace (
+				__FILE__, __LINE__,
+				ss.str ());
     }
 #endif
 
@@ -17999,12 +20255,18 @@ void mxsr2msrTranslator::copyNoteSlashesToChord (
 
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceSlashes ()) {
-      gLogStream <<
+			std::stringstream ss;
+
+			ss <<
         "Copying slash '" <<
         (*i)->asString () <<
         "' from note " << note->asString () <<
         " to chord" <<
         std::endl;
+
+			gWaeHandler->waeTrace (
+				__FILE__, __LINE__,
+				ss.str ());
     }
 #endif
 
@@ -18035,12 +20297,18 @@ void mxsr2msrTranslator::copyNoteWedgesToChord (
 
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceWedges ()) {
-      gLogStream <<
+			std::stringstream ss;
+
+			ss <<
         "Copying wedges '" <<
         msrWedgeKindAsString (wedge->getWedgeKind ()) <<
         "' from note " << note->asString () <<
         " to chord" <<
         std::endl;
+
+			gWaeHandler->waeTrace (
+				__FILE__, __LINE__,
+				ss.str ());
     }
 #endif
 
@@ -18070,12 +20338,18 @@ void mxsr2msrTranslator::copyNoteSegnosToChord (
 
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceSegnos ()) {
-      gLogStream <<
+			std::stringstream ss;
+
+			ss <<
         "Copying segno '" <<
         (*i)->asShortString () <<
         "' from note " << note->asString () <<
         " to chord" <<
         std::endl;
+
+			gWaeHandler->waeTrace (
+				__FILE__, __LINE__,
+				ss.str ());
     }
 #endif
 
@@ -18105,12 +20379,18 @@ void mxsr2msrTranslator::copyNoteDalSegnosToChord (
 
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceDalSegnos ()) {
-      gLogStream <<
+			std::stringstream ss;
+
+			ss <<
         "Copying dal degno '" <<
         (*i)->asShortString () <<
         "' from note " << note->asString () <<
         " to chord" <<
         std::endl;
+
+			gWaeHandler->waeTrace (
+				__FILE__, __LINE__,
+				ss.str ());
     }
 #endif
 
@@ -18140,12 +20420,18 @@ void mxsr2msrTranslator::copyNoteCodasToChord (
 
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceCodas ()) {
-      gLogStream <<
+			std::stringstream ss;
+
+			ss <<
         "Copying coda '" <<
         (*i)->asShortString () <<
         "' from note " << note->asString () <<
         " to chord" <<
         std::endl;
+
+			gWaeHandler->waeTrace (
+				__FILE__, __LINE__,
+				ss.str ());
     }
 #endif
 
@@ -18169,12 +20455,18 @@ void mxsr2msrTranslator::copyNoteOctaveShiftToChord (
   if (noteOctaveShift) {
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceOctaveShifts ()) {
-      gLogStream <<
+			std::stringstream ss;
+
+			ss <<
         "Copying octave shift '" <<
         noteOctaveShift->asString () <<
         "' from note " << note->asString () <<
         " to chord" <<
         std::endl;
+
+			gWaeHandler->waeTrace (
+				__FILE__, __LINE__,
+				ss.str ());
     }
 #endif
 
@@ -18197,13 +20489,19 @@ void mxsr2msrTranslator::copyNoteGraceNotesGroupsToChord (
   if (graceNotesGroupBefore) {
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceGraceNotes ()) {
-      gLogStream <<
+	  	std::stringstream ss;
+
+      ss <<
         "Copying grace notes group before '" <<
         graceNotesGroupBefore->asShortString () <<
         "' from note " << note->asString () <<
         " to chord '" << chord->asString () <<
         "'" <<
         std::endl;
+
+			gWaeHandler->waeTrace (
+				__FILE__, __LINE__,
+				ss.str ());
     }
 #endif
 
@@ -18219,13 +20517,19 @@ void mxsr2msrTranslator::copyNoteGraceNotesGroupsToChord (
   if (graceNotesGroupAfter) {
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceGraceNotes ()) {
-      gLogStream <<
+	  	std::stringstream ss;
+
+      ss <<
         "Copying grace notes group after '" <<
         graceNotesGroupAfter->asShortString () <<
         "' from note " << note->asString () <<
         " to chord '" << chord->asString () <<
         "'" <<
         std::endl;
+
+			gWaeHandler->waeTrace (
+				__FILE__, __LINE__,
+				ss.str ());
     }
 #endif
 
@@ -18250,13 +20554,19 @@ void mxsr2msrTranslator::addNoteGraceNotesGroupsLinksToChord (
   if (graceNotesGroupBefore) {
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceGraceNotes ()) {
-      gLogStream <<
+			std::stringstream ss;
+
+			ss <<
         "Adding grace notes group link before '" <<
         graceNotesGroupBefore->asShortString () <<
         "' from note " << note->asString () <<
         " to chord '" << chord->asString () <<
         "'" <<
         std::endl;
+
+			gWaeHandler->waeTrace (
+				__FILE__, __LINE__,
+				ss.str ());
     }
 #endif
 
@@ -18283,13 +20593,19 @@ void mxsr2msrTranslator::addNoteGraceNotesGroupsLinksToChord (
   if (graceNotesGroupAfter) {
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceGraceNotes ()) {
-      gLogStream <<
+			std::stringstream ss;
+
+			ss <<
         "Adding grace notes group link after '" <<
         graceNotesGroupAfter->asShortString () <<
         "' from note " << note->asString () <<
         " to chord '" << chord->asString () <<
         "'" <<
         std::endl;
+
+			gWaeHandler->waeTrace (
+				__FILE__, __LINE__,
+				ss.str ());
     }
 #endif
 
@@ -18463,7 +20779,9 @@ void mxsr2msrTranslator::createAndPushTupletUponItsFirstNote (
   // create a tuplet
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTuplets ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "Creating a '" <<
       fCurrentNoteActualNotes <<
       '/' <<
@@ -18472,6 +20790,10 @@ void mxsr2msrTranslator::createAndPushTupletUponItsFirstNote (
       firstNote->
         asShortString () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -18517,13 +20839,19 @@ void mxsr2msrTranslator::createAndPushTupletUponItsFirstNote (
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTuplets ()) {
     // only after appendNoteToTuplet() has set the note's uplink to tuplet
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "Adding first note " <<
       firstNote->
         asShortString () <<
       " to tuplet " <<
       tuplet->asString () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -18537,11 +20865,17 @@ void mxsr2msrTranslator::createAndPushTupletUponItsFirstNote (
   // register tuplet in this visitor
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTuplets ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "++> pushing tuplet '" <<
       tuplet->asString () <<
       "' to tuplets stack" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -18591,10 +20925,16 @@ void mxsr2msrTranslator::finalizeTupletAndPopItFromTupletsStack (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTuplets ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "mxsr2msrTranslator::finalizeTupletAndPopItFromTupletsStack(), " <<
       "line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -18629,11 +20969,17 @@ void mxsr2msrTranslator::finalizeTupletAndPopItFromTupletsStack (
   // add lastNote to the tuplet
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTuplets ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "==> adding last note " << lastNote->asString () <<
       " to tuplets stack top " <<
       fTupletsStack.front ()->asString () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -18643,17 +20989,23 @@ void mxsr2msrTranslator::finalizeTupletAndPopItFromTupletsStack (
   // pop from the tuplets stack
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTuplets ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "Popping tuplet:" <<
       std::endl;
     ++gIndenter;
-    gLogStream <<
+    ss <<
       tuplet;
     --gIndenter;
-    gLogStream <<
+    ss <<
       " from tuplets stack" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -18724,10 +21076,16 @@ void mxsr2msrTranslator::attachCurrentArticulationsToNote (
 
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceArticulations ()) {
-      gLogStream <<
+			std::stringstream ss;
+
+			ss <<
         "Attaching current articulations to note " <<
         note->asString () <<
         std::endl;
+
+			gWaeHandler->waeTrace (
+				__FILE__, __LINE__,
+				ss.str ());
     }
 #endif
 
@@ -18738,11 +21096,17 @@ void mxsr2msrTranslator::attachCurrentArticulationsToNote (
 
 #ifdef MF_TRACING_IS_ENABLED
       if (gGlobalTracingOahGroup->getTraceNotes ()) {
-        gLogStream <<
+				std::stringstream ss;
+
+				ss <<
           "Attaching articulation '" <<
           art->getArticulationKind () <<
           "' to note " << note->asString () <<
           std::endl;
+
+				gWaeHandler->waeTrace (
+					__FILE__, __LINE__,
+					ss.str ());
       }
 #endif
 
@@ -18764,10 +21128,16 @@ void mxsr2msrTranslator::attachCurrentTechnicalsToNote (
 
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceTechnicals ()) {
-      gLogStream <<
+			std::stringstream ss;
+
+			ss <<
         "Attaching current technicals to note " <<
         note->asString () <<
         std::endl;
+
+			gWaeHandler->waeTrace (
+				__FILE__, __LINE__,
+				ss.str ());
     }
 #endif
 
@@ -18778,11 +21148,17 @@ void mxsr2msrTranslator::attachCurrentTechnicalsToNote (
 
 #ifdef MF_TRACING_IS_ENABLED
       if (gGlobalTracingOahGroup->getTraceTechnicals ()) {
-        gLogStream <<
+				std::stringstream ss;
+
+				ss <<
           "Attaching technical '" <<
           tech->asString () <<
           "' to note " << note->asString () <<
           std::endl;
+
+				gWaeHandler->waeTrace (
+					__FILE__, __LINE__,
+					ss.str ());
       }
 #endif
 
@@ -18804,10 +21180,16 @@ void mxsr2msrTranslator::attachCurrentTechnicalWithIntegersToNote (
 
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceTechnicals ()) {
-      gLogStream <<
+			std::stringstream ss;
+
+			ss <<
         "Attaching current technical with integers to note " <<
         note->asString () <<
         std::endl;
+
+			gWaeHandler->waeTrace (
+				__FILE__, __LINE__,
+				ss.str ());
     }
 #endif
 
@@ -18818,11 +21200,17 @@ void mxsr2msrTranslator::attachCurrentTechnicalWithIntegersToNote (
 
 #ifdef MF_TRACING_IS_ENABLED
       if (gGlobalTracingOahGroup->getTraceTechnicals ()) {
-        gLogStream <<
+				std::stringstream ss;
+
+				ss <<
           "Attaching technical with integer '" <<
           tech->asString () <<
           "' to note " << note->asString () <<
           std::endl;
+
+				gWaeHandler->waeTrace (
+					__FILE__, __LINE__,
+					ss.str ());
       }
 #endif
 
@@ -18844,10 +21232,16 @@ void mxsr2msrTranslator::attachCurrentTechnicalWithFloatsToNote (
 
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceTechnicals ()) {
-      gLogStream <<
+			std::stringstream ss;
+
+			ss <<
         "Attaching current technical with floats to note " <<
         note->asString () <<
         std::endl;
+
+			gWaeHandler->waeTrace (
+				__FILE__, __LINE__,
+				ss.str ());
     }
 #endif
 
@@ -18858,11 +21252,17 @@ void mxsr2msrTranslator::attachCurrentTechnicalWithFloatsToNote (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTechnicals ()) {
-        gLogStream <<
+				std::stringstream ss;
+
+				ss <<
           "Attaching technical with integer '" <<
           tech->asString () <<
           "' to note " << note->asString () <<
           std::endl;
+
+				gWaeHandler->waeTrace (
+					__FILE__, __LINE__,
+					ss.str ());
       }
 #endif
 
@@ -18884,10 +21284,16 @@ void mxsr2msrTranslator::attachCurrentTechnicalWithStringsToNote (
 
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceTechnicals ()) {
-      gLogStream <<
+			std::stringstream ss;
+
+			ss <<
         "Attaching current technical with strings to note " <<
         note->asString () <<
         std::endl;
+
+			gWaeHandler->waeTrace (
+				__FILE__, __LINE__,
+				ss.str ());
     }
 #endif
 
@@ -18898,11 +21304,17 @@ void mxsr2msrTranslator::attachCurrentTechnicalWithStringsToNote (
 
 #ifdef MF_TRACING_IS_ENABLED
       if (gGlobalTracingOahGroup->getTraceTechnicals ()) {
-        gLogStream <<
+				std::stringstream ss;
+
+				ss <<
           "Attaching technical with std::string '" <<
           tech->asString () <<
           "' to note " << note->asString () <<
           std::endl;
+
+				gWaeHandler->waeTrace (
+					__FILE__, __LINE__,
+					ss.str ());
       }
 #endif
 
@@ -18924,10 +21336,16 @@ void mxsr2msrTranslator::attachCurrentOrnamentsToNote (
 
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceOrnaments ()) {
-      gLogStream <<
+			std::stringstream ss;
+
+			ss <<
         "Attaching current ornaments to note " <<
         note->asString () <<
         std::endl;
+
+			gWaeHandler->waeTrace (
+				__FILE__, __LINE__,
+				ss.str ());
     }
 #endif
 
@@ -18938,11 +21356,17 @@ void mxsr2msrTranslator::attachCurrentOrnamentsToNote (
 
 #ifdef MF_TRACING_IS_ENABLED
       if (gGlobalTracingOahGroup->getTraceNotes ()) {
-        gLogStream <<
+				std::stringstream ss;
+
+				ss <<
           "Attaching ornament '" <<
           msrOrnamentKindAsString (ornament->getOrnamentKind ()) <<
           "' to note " << note->asString () <<
           std::endl;
+
+			gWaeHandler->waeTrace (
+				__FILE__, __LINE__,
+				ss.str ());
       }
 #endif
 
@@ -18964,10 +21388,16 @@ void mxsr2msrTranslator::attachCurrentSpannersToNote (
 
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceSpanners ()) {
-      gLogStream <<
+		std::stringstream ss;
+
+		ss <<
         "Attaching current spanners to note " <<
         note->asString () <<
         std::endl;
+
+			gWaeHandler->waeTrace (
+				__FILE__, __LINE__,
+				ss.str ());
     }
 #endif
 
@@ -19020,11 +21450,17 @@ void mxsr2msrTranslator::attachCurrentSpannersToNote (
       if (doHandleSpanner) {
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalTracingOahGroup->getTraceSpanners ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "Attaching spanner '" <<
             spanner->asShortString () <<
             "' to note " << note->asString () <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
 
@@ -19042,11 +21478,17 @@ void mxsr2msrTranslator::attachCurrentSpannersToNote (
       else { // check it is the same spanner kind JMI
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalTracingOahGroup->getTraceSpanners ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "Spanner start amd stop on one and the same note' to note " <<
             note->asString () <<
             ", delaying 'stop' until next note" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
 
@@ -19075,10 +21517,16 @@ void mxsr2msrTranslator::attachCurrentSingleTremoloToNote (
 
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceNotes ()) {
-      gLogStream <<
+			std::stringstream ss;
+
+			ss <<
         "Attaching current singleTremolo to note " <<
         note->asString () <<
         std::endl;
+
+			gWaeHandler->waeTrace (
+				__FILE__, __LINE__,
+				ss.str ());
     }
 #endif
 
@@ -19109,6 +21557,10 @@ void mxsr2msrTranslator::attachCurrentArticulationsToChord ( // JMI
         "Attaching current articulations to chord " <<
         chord->asString () <<
         std::endl;
+
+			gWaeHandler->waeTrace (
+				__FILE__, __LINE__,
+				ss.str ());
     }
 #endif
 
@@ -19124,6 +21576,10 @@ void mxsr2msrTranslator::attachCurrentArticulationsToChord ( // JMI
           "Attaching articulation " <<  (*i) <<
           " to chord " << chord <<
           std::endl;
+
+			gWaeHandler->waeTrace (
+				__FILE__, __LINE__,
+				ss.str ());
       }
 #endif
 
@@ -19147,6 +21603,10 @@ void mxsr2msrTranslator::attachCurrentOrnamentsToChord ( // JMI
         "Attaching current ornaments to chord " <<
         chord->asString () <<
         std::endl;
+
+			gWaeHandler->waeTrace (
+				__FILE__, __LINE__,
+				ss.str ());
     }
 #endif
 
@@ -19162,6 +21622,10 @@ void mxsr2msrTranslator::attachCurrentOrnamentsToChord ( // JMI
           "Attaching ornament " <<  (*i) << " to chord " <<
           chord <<
           std::endl;
+
+			gWaeHandler->waeTrace (
+				__FILE__, __LINE__,
+				ss.str ());
       }
 #endif
 
@@ -19180,11 +21644,17 @@ void mxsr2msrTranslator::attachPendingTemposToVoice (
   if (fPendingTemposList.size ()) {
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceTempos ()) {
-      gLogStream <<
+			std::stringstream ss;
+
+			ss <<
         "Attaching pending tempos to voice \""  <<
         voice->getVoiceName () <<
         "\"" <<
         std::endl;
+
+			gWaeHandler->waeTrace (
+				__FILE__, __LINE__,
+				ss.str ());
     }
 #endif
 
@@ -19208,11 +21678,17 @@ void mxsr2msrTranslator::attachPendingTemposToPart (
   if (fPendingTemposList.size ()) {
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceTempos ()) {
-      gLogStream <<
+			std::stringstream ss;
+
+			ss <<
         "Attaching pending tempos to part \""  <<
         part->getPartName () <<
         "\"" <<
         std::endl;
+
+			gWaeHandler->waeTrace (
+				__FILE__, __LINE__,
+				ss.str ());
     }
 #endif
 
@@ -19236,11 +21712,17 @@ void mxsr2msrTranslator::attachPendingBarLinesToVoice (
   if (fPendingBarLinesList.size ()) {
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceBarLines ()) {
-      gLogStream <<
+			std::stringstream ss;
+
+			ss <<
         "Attaching pending barlines to voice \""  <<
         voice->getVoiceName () <<
         "\"" <<
         std::endl;
+
+			gWaeHandler->waeTrace (
+				__FILE__, __LINE__,
+				ss.str ());
     }
 #endif
 
@@ -19267,11 +21749,17 @@ void mxsr2msrTranslator::attachPendingBarLinesToPart (
   if (fPendingBarLinesList.size ()) {
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceBarLines ()) {
-      gLogStream <<
+			std::stringstream ss;
+
+			ss <<
         "Attaching pending barlines to part \""  <<
         part->getPartName () <<
         "\"" <<
         std::endl;
+
+			gWaeHandler->waeTrace (
+				__FILE__, __LINE__,
+				ss.str ());
     }
 #endif
 
@@ -19298,11 +21786,17 @@ void mxsr2msrTranslator::attachPendingRehearsalMarksToVoice (
   if (fPendingRehearsalMarksList.size ()) {
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceRehearsalMarks ()) {
-      gLogStream <<
+			std::stringstream ss;
+
+			ss <<
         "Attaching pending rehearsals to voice \""  <<
         voice->getVoiceName () <<
         "\"" <<
         std::endl;
+
+			gWaeHandler->waeTrace (
+				__FILE__, __LINE__,
+				ss.str ());
     }
 #endif
 
@@ -19326,11 +21820,17 @@ void mxsr2msrTranslator::attachPendingRehearsalMarksToPart (
   if (fPendingRehearsalMarksList.size ()) {
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceRehearsalMarks ()) {
-      gLogStream <<
+			std::stringstream ss;
+
+			ss <<
         "Attaching pending rehearsals to part \""  <<
         part->getPartName () <<
         "\"" <<
         std::endl;
+
+			gWaeHandler->waeTrace (
+				__FILE__, __LINE__,
+				ss.str ());
     }
 #endif
 
@@ -19354,11 +21854,17 @@ void mxsr2msrTranslator::attachLineBreaksToVoice (
   if (fPendingLineBreaksList.size ()) {
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceLineBreaks ()) {
-      gLogStream <<
+			std::stringstream ss;
+
+			ss <<
         "Attaching pending line breaks to voice \""  <<
         voice->getVoiceName () <<
         "\"" <<
         std::endl;
+
+			gWaeHandler->waeTrace (
+				__FILE__, __LINE__,
+				ss.str ());
     }
 #endif
 
@@ -19384,11 +21890,17 @@ void mxsr2msrTranslator::attachLineBreaksToPart (
   if (fPendingLineBreaksList.size ()) {
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceLineBreaks ()) {
-      gLogStream <<
+			std::stringstream ss;
+
+			ss <<
         "Attaching pending line breaks to part \""  <<
         part->getPartName () <<
         "\"" <<
         std::endl;
+
+			gWaeHandler->waeTrace (
+				__FILE__, __LINE__,
+				ss.str ());
     }
 #endif
 
@@ -19414,11 +21926,17 @@ void mxsr2msrTranslator::attachPageBreaksToVoice (
   if (fPendingPageBreaksList.size ()) {
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTracePageBreaks ()) {
-      gLogStream <<
+			std::stringstream ss;
+
+			ss <<
         "Attaching pending page breaks to voice \""  <<
         voice->getVoiceName () <<
         "\"" <<
         std::endl;
+
+			gWaeHandler->waeTrace (
+				__FILE__, __LINE__,
+				ss.str ());
     }
 #endif
 
@@ -19444,11 +21962,17 @@ void mxsr2msrTranslator::attachPageBreaksToPart (
   if (fPendingPageBreaksList.size ()) {
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTracePageBreaks ()) {
-      gLogStream <<
+			std::stringstream ss;
+
+			ss <<
         "Attaching pending page breaks to part \""  <<
         part->getPartName () <<
         "\"" <<
         std::endl;
+
+			gWaeHandler->waeTrace (
+				__FILE__, __LINE__,
+				ss.str ());
     }
 #endif
 
@@ -19475,10 +21999,16 @@ void mxsr2msrTranslator::attachPendingSegnosToNote (
   if (fPendingSegnosList.size ()) {
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceSegnos ()) {
-      gLogStream <<
+			std::stringstream ss;
+
+			ss <<
         "Attaching pending segno to note " <<
         note->asString () <<
         std::endl;
+
+			gWaeHandler->waeTrace (
+				__FILE__, __LINE__,
+				ss.str ());
     }
 #endif
 
@@ -19503,10 +22033,16 @@ void mxsr2msrTranslator::attachPendingDalSegnosToNote (
   if (fPendingDalSegnosList.size ()) {
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceDalSegnos ()) {
-      gLogStream <<
+			std::stringstream ss;
+
+			ss <<
         "Attaching pending dal segno to note " <<
         note->asString () <<
         std::endl;
+
+			gWaeHandler->waeTrace (
+				__FILE__, __LINE__,
+				ss.str ());
     }
 #endif
 
@@ -19530,10 +22066,16 @@ void mxsr2msrTranslator::attachPendingDalSegnosToChord (
   if (fPendingDalSegnosList.size ()) {
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceDalSegnos ()) {
-      gLogStream <<
+			std::stringstream ss;
+
+			ss <<
         "Attaching pending dal segno to chord " <<
         chord->asString () <<
         std::endl;
+
+			gWaeHandler->waeTrace (
+				__FILE__, __LINE__,
+				ss.str ());
     }
 #endif
 
@@ -19558,10 +22100,16 @@ void mxsr2msrTranslator::attachPendingCodasToNote (
   if (fPendingCodasList.size ()) {
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceCodas ()) {
-      gLogStream <<
+			std::stringstream ss;
+
+			ss <<
         "Attaching pending codas to note " <<
         note->asString () <<
         std::endl;
+
+			gWaeHandler->waeTrace (
+				__FILE__, __LINE__,
+				ss.str ());
     }
 #endif
 
@@ -19586,10 +22134,16 @@ void mxsr2msrTranslator::attachPendingCrescDecrescsToNote (
   if (fPendinCrescDecrescsList.size ()) {
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceCrescDecrescs ()) {
-      gLogStream <<
+			std::stringstream ss;
+
+			ss <<
         "Attaching pending crescDecresc to note " <<
         note->asString () <<
         std::endl;
+
+			gWaeHandler->waeTrace (
+				__FILE__, __LINE__,
+				ss.str ());
     }
 #endif
 
@@ -19614,10 +22168,16 @@ void mxsr2msrTranslator::attachPendingEyeGlassesToNote (
   if (fPendingEyeGlassesList.size ()) {
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceEyeGlasses ()) {
-      gLogStream <<
+			std::stringstream ss;
+
+			ss <<
         "Attaching pending eyeglasses to note " <<
         note->asString () <<
         std::endl;
+
+			gWaeHandler->waeTrace (
+				__FILE__, __LINE__,
+				ss.str ());
     }
 #endif
 
@@ -19642,10 +22202,16 @@ void mxsr2msrTranslator::attachPendingDampsToNote (
   if (fPendingDampsList.size ()) {
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceDamps ()) {
-      gLogStream <<
+			std::stringstream ss;
+
+			ss <<
         "Attaching pending damps to note " <<
         note->asString () <<
         std::endl;
+
+			gWaeHandler->waeTrace (
+				__FILE__, __LINE__,
+				ss.str ());
     }
 #endif
 
@@ -19670,10 +22236,16 @@ void mxsr2msrTranslator::attachPendingDampAllsToNote (
   if (fPendingDampAllsList.size ()) {
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceDampAlls ()) {
-      gLogStream <<
+			std::stringstream ss;
+
+			ss <<
         "Attaching pending damp alls to note " <<
         note->asString () <<
         std::endl;
+
+			gWaeHandler->waeTrace (
+				__FILE__, __LINE__,
+				ss.str ());
     }
 #endif
 
@@ -19698,10 +22270,16 @@ void mxsr2msrTranslator::attachPendingOctaveShiftsToNote (
   if (fPendingOctaveShiftsList.size ()) {
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceOctaveShifts ()) {
-      gLogStream <<
+			std::stringstream ss;
+
+			ss <<
         "Attaching pending octave shifts to note " <<
         note->asString () <<
         std::endl;
+
+			gWaeHandler->waeTrace (
+				__FILE__, __LINE__,
+				ss.str ());
     }
 #endif
 
@@ -19736,10 +22314,16 @@ void mxsr2msrTranslator::attachPendingScordaturasToNote (
   if (fPendingScordaturasList.size ()) {
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceScordaturas ()) {
-      gLogStream <<
+			std::stringstream ss;
+
+			ss <<
         "Attaching pending scordaturas to note " <<
         note->asString () <<
         std::endl;
+
+			gWaeHandler->waeTrace (
+				__FILE__, __LINE__,
+				ss.str ());
     }
 #endif
 
@@ -19766,10 +22350,16 @@ void mxsr2msrTranslator::attachPendingDynamicsToNote (
 
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceDynamics ()) {
-      gLogStream <<
+			std::stringstream ss;
+
+			ss <<
         "Attaching pending dynamics to note " <<
         note->asString () <<
         std::endl;
+
+			gWaeHandler->waeTrace (
+				__FILE__, __LINE__,
+				ss.str ());
     }
 #endif
 
@@ -19785,25 +22375,25 @@ void mxsr2msrTranslator::attachPendingDynamicsToNote (
       else {
 #ifdef MF_TRACING_IS_ENABLED
        if (gGlobalTracingOahGroup->getTraceLyrics ()) {
-          std::stringstream s;
+          std::stringstream ss;
 
           int numberOfDynamics = fPendingDynamicxList.size ();
 
           if (numberOfDynamics > 1) {
-            s <<
+            ss <<
               "there are " << numberOfDynamics << " dynamics";
           }
           else {
-            s <<
+            ss <<
               "there is 1 dynamics";
           }
-          s <<
+          ss <<
             " attached to a rest";
 
           mxsr2msrWarning (
-            gGlobalServiceRunData->getInputSourceName (),
+            gGlobalCurrentServiceRunData->getInputSourceName (),
             note->getInputLineNumber (),
-            s.str ());
+            ss.str ());
         }
 #endif
       }
@@ -19832,10 +22422,16 @@ void mxsr2msrTranslator::attachPendingOtherDynamicsToNote (
 
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceDynamics ()) {
-      gLogStream <<
+			std::stringstream ss;
+
+			ss <<
         "Attaching pending other dynamics to note " <<
         note->asString () <<
         std::endl;
+
+			gWaeHandler->waeTrace (
+				__FILE__, __LINE__,
+				ss.str ());
     }
 #endif
 
@@ -19851,25 +22447,25 @@ void mxsr2msrTranslator::attachPendingOtherDynamicsToNote (
       else {
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalTracingOahGroup->getTraceDynamics ()) {
-          std::stringstream s;
+          std::stringstream ss;
 
           int numberOfOtherDynamics = fPendingOtherDynamicxList.size ();
 
           if (numberOfOtherDynamics > 1) {
-            s <<
+            ss <<
               "there are " << numberOfOtherDynamics << " other dynamics";
           }
           else {
-            s <<
+            ss <<
               "there is 1 other dynamics";
           }
-          s <<
+          ss <<
             " attached to a rest";
 
           mxsr2msrWarning (
-            gGlobalServiceRunData->getInputSourceName (),
+            gGlobalCurrentServiceRunData->getInputSourceName (),
             note->getInputLineNumber (),
-            s.str ());
+            ss.str ());
         }
 #endif
       }
@@ -19898,10 +22494,16 @@ void mxsr2msrTranslator::attachPendingWordsToNote (
 
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceWords ()) {
-      gLogStream <<
+			std::stringstream ss;
+
+			ss <<
         "Attaching pending words to note " <<
         note->asString () <<
         std::endl;
+
+			gWaeHandler->waeTrace (
+				__FILE__, __LINE__,
+				ss.str ());
     }
 #endif
 
@@ -19917,11 +22519,11 @@ void mxsr2msrTranslator::attachPendingWordsToNote (
       else {
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalTracingOahGroup->getTraceWords ()) {
-          std::stringstream s;
+          std::stringstream ss;
 
           int numberOfWords = fPendingWordsList.size ();
 
-          s <<
+          ss <<
             mfSingularOrPluralWithoutNumber (
               numberOfWords, "There is", "There are") <<
             ' ' <<
@@ -19932,9 +22534,9 @@ void mxsr2msrTranslator::attachPendingWordsToNote (
             " attached to a rest";
 
           mxsr2msrWarning (
-            gGlobalServiceRunData->getInputSourceName (),
+            gGlobalCurrentServiceRunData->getInputSourceName (),
             note->getInputLineNumber (),
-            s.str ());
+            ss.str ());
         }
 #endif
       }
@@ -19964,10 +22566,16 @@ void mxsr2msrTranslator::attachPendingBeamsToNote (
 
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceBeams ()) {
-      gLogStream <<
+			std::stringstream ss;
+
+			ss <<
         "Attaching pending beams to note " <<
         note->asString () <<
         std::endl;
+
+			gWaeHandler->waeTrace (
+				__FILE__, __LINE__,
+				ss.str ());
     }
 #endif
 
@@ -19983,25 +22591,25 @@ void mxsr2msrTranslator::attachPendingBeamsToNote (
       else {
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalTracingOahGroup->getTraceBeams ()) {
-          std::stringstream s;
+          std::stringstream ss;
 
           int numberOfBeams = fPendingBeamsList.size ();
 
           if (numberOfBeams > 1) {
-            s <<
+            ss <<
               "there are " << numberOfBeams << " beams";
           }
           else {
-            s <<
+            ss <<
               "there is 1 beam";
           }
-          s <<
+          ss <<
             " attached to a rest";
 
           mxsr2msrWarning (
-            gGlobalServiceRunData->getInputSourceName (),
+            gGlobalCurrentServiceRunData->getInputSourceName (),
             note->getInputLineNumber (),
-            s.str ());
+            ss.str ());
         }
 #endif
       }
@@ -20030,10 +22638,16 @@ void mxsr2msrTranslator::attachPendingSlursToNote (
 
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceSlurs ()) {
-      gLogStream <<
+			std::stringstream ss;
+
+			ss <<
         "Attaching pending slurs to note " <<
         note->asString () <<
         std::endl;
+
+			gWaeHandler->waeTrace (
+				__FILE__, __LINE__,
+				ss.str ());
     }
 #endif
 
@@ -20047,25 +22661,25 @@ void mxsr2msrTranslator::attachPendingSlursToNote (
       }
 
       else {
-        std::stringstream s;
+        std::stringstream ss;
 
         int numberOfSlurs = fPendingSlursList.size ();
 
         if (numberOfSlurs > 1) {
-          s <<
+          ss <<
             "there are " << numberOfSlurs << " slurs";
         }
         else {
-          s <<
+          ss <<
             "there is 1 slur";
         }
-        s <<
+        ss <<
           " attached to a rest";
 
         mxsr2msrWarning (
-          gGlobalServiceRunData->getInputSourceName (),
+          gGlobalCurrentServiceRunData->getInputSourceName (),
           note->getInputLineNumber (),
-          s.str ());
+          ss.str ());
       }
     }
 
@@ -20093,7 +22707,9 @@ void mxsr2msrTranslator::attachPendingLigaturesToNote (
   if (numberOfLigatures) {
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceLigatures ()) {
-      gLogStream <<
+			std::stringstream ss;
+
+			ss <<
         "Attaching " <<
         mfSingularOrPlural (
           numberOfLigatures,
@@ -20101,6 +22717,10 @@ void mxsr2msrTranslator::attachPendingLigaturesToNote (
         " to note " <<
         note->asString () <<
         std::endl;
+
+			gWaeHandler->waeTrace (
+				__FILE__, __LINE__,
+				ss.str ());
     }
 #endif
 
@@ -20118,9 +22738,9 @@ void mxsr2msrTranslator::attachPendingLigaturesToNote (
       else {
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalTracingOahGroup->getTraceLigatures ()) {
-          std::stringstream s;
+          std::stringstream ss;
 
-          s <<
+          ss <<
             mfSingularOrPluralWithoutNumber (
               numberOfLigatures,
               "there is", "there are") <<
@@ -20134,9 +22754,9 @@ void mxsr2msrTranslator::attachPendingLigaturesToNote (
             note->asShortString ();
 
           mxsr2msrWarning (
-            gGlobalServiceRunData->getInputSourceName (),
+            gGlobalCurrentServiceRunData->getInputSourceName (),
             note->getInputLineNumber (),
-            s.str ());
+            ss.str ());
         }
 #endif
       }
@@ -20145,9 +22765,9 @@ void mxsr2msrTranslator::attachPendingLigaturesToNote (
     if (! delayAttachment) {
 #ifdef MF_TRACING_IS_ENABLED
       if (gGlobalTracingOahGroup->getTraceLigatures ()) {
-          std::stringstream s;
+          std::stringstream ss;
 
-          s <<
+          ss <<
             mfSingularOrPluralWithoutNumber (
               numberOfLigatures,
               "there is", "there are") <<
@@ -20162,9 +22782,9 @@ void mxsr2msrTranslator::attachPendingLigaturesToNote (
             note->asShortString ();
 
           mxsr2msrWarning (
-            gGlobalServiceRunData->getInputSourceName (),
+            gGlobalCurrentServiceRunData->getInputSourceName (),
             note->getInputLineNumber (),
-            s.str ());
+            ss.str ());
       }
 #endif
 
@@ -20181,10 +22801,16 @@ void mxsr2msrTranslator::attachPendingLigaturesToNote (
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalTracingOahGroup->getTraceLigatures ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "--> ligature: " <<
             ligature->asString () <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
 
@@ -20281,10 +22907,16 @@ void mxsr2msrTranslator::attachPendingPedalsToNote (
 
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTracePedals ()) {
-      gLogStream <<
+			std::stringstream ss;
+
+			ss <<
         "Attaching pending pedals to note " <<
         note->asString () <<
         std::endl;
+
+			gWaeHandler->waeTrace (
+				__FILE__, __LINE__,
+				ss.str ());
     }
 #endif
 
@@ -20298,25 +22930,25 @@ void mxsr2msrTranslator::attachPendingPedalsToNote (
       }
 
       else {
-        std::stringstream s;
+        std::stringstream ss;
 
         int numberOfPedals = fPendingPedalsList.size ();
 
         if (numberOfPedals > 1) {
-          s <<
+          ss <<
             "there are " << numberOfPedals << " pedals";
         }
         else {
-          s <<
+          ss <<
             "there is 1 pedal";
         }
-        s <<
+        ss <<
           " attached to a rest";
 
         mxsr2msrWarning (
-          gGlobalServiceRunData->getInputSourceName (),
+          gGlobalCurrentServiceRunData->getInputSourceName (),
           note->getInputLineNumber (),
-          s.str ());
+          ss.str ());
       }
     }
 
@@ -20343,10 +22975,16 @@ void mxsr2msrTranslator::attachPendingSlashesToNote (
 
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceSlashes ()) {
-      gLogStream <<
+			std::stringstream ss;
+
+			ss <<
         "Attaching pending slashes to note " <<
         note->asString () <<
         std::endl;
+
+			gWaeHandler->waeTrace (
+				__FILE__, __LINE__,
+				ss.str ());
     }
 #endif
 
@@ -20360,25 +22998,25 @@ void mxsr2msrTranslator::attachPendingSlashesToNote (
       }
 
       else {
-        std::stringstream s;
+        std::stringstream ss;
 
         int numberOfSlashes = fPendingSlashesList.size ();
 
         if (numberOfSlashes > 1) {
-          s <<
+          ss <<
             "there are " << numberOfSlashes << " slashes";
         }
         else {
-          s <<
+          ss <<
             "there is 1 slash";
         }
-        s <<
+        ss <<
           " attached to a rest";
 
         mxsr2msrWarning (
-          gGlobalServiceRunData->getInputSourceName (),
+          gGlobalCurrentServiceRunData->getInputSourceName (),
           note->getInputLineNumber (),
-          s.str ());
+          ss.str ());
       }
     }
 
@@ -20405,10 +23043,16 @@ void mxsr2msrTranslator::attachPendingWedgesToNote (
 
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceWedges ()) {
-      gLogStream <<
+			std::stringstream ss;
+
+			ss <<
         "Attaching pending wedges to note " <<
         note->asString () <<
         std::endl;
+
+			gWaeHandler->waeTrace (
+				__FILE__, __LINE__,
+				ss.str ());
     }
 #endif
 
@@ -20424,25 +23068,25 @@ void mxsr2msrTranslator::attachPendingWedgesToNote (
       else {
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalTracingOahGroup->getTraceWedges ()) {
-          std::stringstream s;
+          std::stringstream ss;
 
           int numberOfWedges = fPendingWedgesList.size ();
 
           if (numberOfWedges > 1) {
-            s <<
+            ss <<
               "there are " << numberOfWedges << " wedges";
           }
           else {
-            s <<
+            ss <<
               "there is 1 wedge";
           }
-          s <<
+          ss <<
             " attached to a rest";
 
           mxsr2msrWarning (
-            gGlobalServiceRunData->getInputSourceName (),
+            gGlobalCurrentServiceRunData->getInputSourceName (),
             note->getInputLineNumber (),
-            s.str ());
+            ss.str ());
         }
 #endif
       }
@@ -20469,10 +23113,16 @@ void mxsr2msrTranslator::attachPendingGlissandosToNote (
   if (fPendingGlissandosList.size ()) {
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceGlissandos ()) {
-      gLogStream <<
+			std::stringstream ss;
+
+			ss <<
         "Attaching pending glissandos to note " <<
         note->asString () <<
         std::endl;
+
+			gWaeHandler->waeTrace (
+				__FILE__, __LINE__,
+				ss.str ());
     }
 #endif
 
@@ -20584,10 +23234,16 @@ void mxsr2msrTranslator::attachPendingSlidesToNote (
   if (fPendingSlidesList.size ()) {
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceSlides ()) {
-      gLogStream <<
+			std::stringstream ss;
+
+			ss <<
         "Attaching pending slides to note " <<
         note->asString () <<
         std::endl;
+
+			gWaeHandler->waeTrace (
+				__FILE__, __LINE__,
+				ss.str ());
     }
 #endif
 
@@ -20931,7 +23587,9 @@ S_msrNote mxsr2msrTranslator::createNote (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceNotes ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Gathered note informations:" <<
       std::endl;
 
@@ -21027,16 +23685,16 @@ S_msrNote mxsr2msrTranslator::createNote (
   ) {
     // double tremolo note
     if (fCurrentNoteGraphicDurationKind == msrDurationKind::kDuration_UNKNOWN) {
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         "double tremolo note lacks a <type/>"; // JMI a completer
 
       mxsr2msrError (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         inputLineNumber,
         __FILE__, __LINE__,
-        s.str ());
+        ss.str ());
     }
 
     // set current double tremolo note display whole notes
@@ -21140,7 +23798,9 @@ S_msrNote mxsr2msrTranslator::createNote (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceNotesDetails ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Creating note:" <<
       std::endl;
 
@@ -21213,9 +23873,9 @@ void mxsr2msrTranslator::populateNoteBeforeNoteItselfIsHandled (
       case msrNoteKind::kNoteRegularInMeasure:
       case msrNoteKind::kNoteRegularInChord:
         if (! fCurrentNoteIsAGraceNote) {
-          std::stringstream s;
+          std::stringstream ss;
 
-          s <<
+          ss <<
             "note duration inconsistency: divisions indicates " <<
             fCurrentNoteSoundingWholeNotesFromDuration <<
             " while type indicates " <<
@@ -21223,9 +23883,9 @@ void mxsr2msrTranslator::populateNoteBeforeNoteItselfIsHandled (
             ", using the latter";
 
           mxsr2msrWarning (
-            gGlobalServiceRunData->getInputSourceName (),
+            gGlobalCurrentServiceRunData->getInputSourceName (),
             inputLineNumber,
-            s.str ());
+            ss.str ());
         }
 
         newNote->
@@ -21401,7 +24061,9 @@ void mxsr2msrTranslator::createAStaffChangeIfNecessary (
 
 #ifdef MF_TRACING_IS_ENABLED
       if (gGlobalTracingOahGroup->getTraceStaffChanges ()) {
-        gLogStream <<
+				std::stringstream ss;
+
+				ss <<
           "*** There is staff change for chord member note '" <<
           newNote->asShortString () <<
           "' in voice \"" <<
@@ -21412,6 +24074,10 @@ void mxsr2msrTranslator::createAStaffChangeIfNecessary (
           ", \"" << staffToChangeTo->getStaffName () << "\"" <<
           ", line " << inputLineNumber <<
           std::endl;
+
+			gWaeHandler->waeTrace (
+				__FILE__, __LINE__,
+				ss.str ());
       }
 #endif
 
@@ -21430,7 +24096,9 @@ void mxsr2msrTranslator::createAStaffChangeIfNecessary (
 
 #ifdef MF_TRACING_IS_ENABLED
       if (gGlobalTracingOahGroup->getTraceStaffChanges ()) {
-        gLogStream <<
+				std::stringstream ss;
+
+				ss <<
           "*** There is staff change for note '" <<
           newNote->asShortString () <<
           "' in voice \"" <<
@@ -21441,6 +24109,10 @@ void mxsr2msrTranslator::createAStaffChangeIfNecessary (
           ", \"" << staffToChangeTo->getStaffName () << "\"" <<
           ", line " << inputLineNumber <<
           std::endl;
+
+			gWaeHandler->waeTrace (
+				__FILE__, __LINE__,
+				ss.str ());
       }
 #endif
 
@@ -21526,13 +24198,19 @@ void mxsr2msrTranslator::handleNoteItself (
   // finalizing current chord if relevant
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceChords ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> fCurrentNoteBelongsToAChord: " <<
       fCurrentNoteBelongsToAChord <<
       "--> fOnGoingChord: " <<
       fOnGoingChord <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -21612,7 +24290,9 @@ void mxsr2msrTranslator::attachPendingGraceNotesGroupToNoteIfRelevant (
     }
 
     if (gGlobalTracingOahGroup->getTraceGraceNotes ()) {
-      gLogStream <<
+	  	std::stringstream ss;
+
+      ss <<
         std::endl <<
         "fCurrentGraceNotes IS NOT NULL upon <backup/>" << // JMI
         ", line " << inputLineNumber <<
@@ -21673,9 +24353,9 @@ void mxsr2msrTranslator::attachPendingGraceNotesGroupToNoteIfRelevant (
     }
 
     else {
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         "cannot find voice to insert after grace notes group into: " <<
         "chordFirstNote is null" <<
         ", fCurrentStaffNumberToInsertInto = " <<
@@ -21685,10 +24365,10 @@ void mxsr2msrTranslator::attachPendingGraceNotesGroupToNoteIfRelevant (
         fCurrentMusicXMLVoiceNumber;
 
       mxsr2msrInternalError (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         inputLineNumber,
         __FILE__, __LINE__,
-        s.str ());
+        ss.str ());
     }
 
     // forget about this grace notes group
@@ -21702,20 +24382,28 @@ void mxsr2msrTranslator::handleBackup (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceBackup ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "Handling pending backup" <<
       ", fCurrentBackupDivisions: " <<
       fCurrentBackupDivisions <<
       ", fCurrentNonGraceNote: " <<
       fCurrentNonGraceNote->asShortString () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
   // fetch current voice
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceOctaveShifts ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> handleBackup()" <<
       ", fCurrentStaffNumberToInsertInto: " <<
       fCurrentStaffNumberToInsertInto <<
@@ -21723,6 +24411,10 @@ void mxsr2msrTranslator::handleBackup (
       fCurrentMusicXMLVoiceNumber <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -21763,10 +24455,16 @@ void mxsr2msrTranslator::visitEnd (S_note& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> End visiting S_note" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -21866,7 +24564,9 @@ void mxsr2msrTranslator::visitEnd (S_note& elt)
   if (fCurrentStaffNumberToInsertInto == msrStaff::K_STAFF_NUMBER_UNKNOWN) {
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceNotes () || gGlobalTracingOahGroup->getTraceStaffChanges ()) {
-      gLogStream <<
+			std::stringstream ss;
+
+			ss <<
         "==> setting fCurrentStaffNumberToInsertInto to " <<
         fCurrentMusicXMLStaffNumber <<
         ", in voice \"" <<
@@ -21874,6 +24574,10 @@ void mxsr2msrTranslator::visitEnd (S_note& elt)
         "\"" <<
         ", line " << inputLineNumber <<
         std::endl;
+
+			gWaeHandler->waeTrace (
+				__FILE__, __LINE__,
+				ss.str ());
     }
 #endif
 
@@ -21882,7 +24586,9 @@ void mxsr2msrTranslator::visitEnd (S_note& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceNotes () || gGlobalTracingOahGroup->getTraceStaffChanges ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "==> fetching voice to insert note into" <<
       ", fCurrentStaffNumberToInsertInto: " <<
       fCurrentStaffNumberToInsertInto <<
@@ -21894,6 +24600,10 @@ void mxsr2msrTranslator::visitEnd (S_note& elt)
       fCurrentMusicXMLVoiceNumber <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -21915,7 +24625,9 @@ void mxsr2msrTranslator::visitEnd (S_note& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceNotes () || gGlobalTracingOahGroup->getTraceStaffChanges ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "==> is there a staff change?" <<
       " fCurrentStaffNumberToInsertInto: " <<
       fCurrentStaffNumberToInsertInto <<
@@ -21934,6 +24646,10 @@ void mxsr2msrTranslator::visitEnd (S_note& elt)
       */
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -21950,7 +24666,9 @@ void mxsr2msrTranslator::visitEnd (S_note& elt)
   // tuplets or chords to be appended to the voice
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceNotes () || gGlobalTracingOahGroup->getTraceStaffChanges ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "==> fetching voice to insert harmonies, figured bass elements and/or frames into" <<
       ", fCurrentStaffNumberToInsertInto: " <<
       fCurrentStaffNumberToInsertInto <<
@@ -21962,6 +24680,10 @@ void mxsr2msrTranslator::visitEnd (S_note& elt)
       fCurrentMusicXMLVoiceNumber <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -22035,9 +24757,9 @@ void mxsr2msrTranslator::handlePendingHarmonies (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceHarmoniesDetails ()) {
-		std::stringstream s;
+		std::stringstream ss;
 
-		s <<
+		ss <<
 			"handlePendingHarmonies(), newNote: " <<
       std::endl;
     ++gIndenter;
@@ -22048,7 +24770,7 @@ void mxsr2msrTranslator::handlePendingHarmonies (
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 #endif
 
@@ -22272,10 +24994,16 @@ void mxsr2msrTranslator::handleNonChordNorTupletNoteOrRest (
 
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceNotes ()) { // JMI
-      gLogStream <<
+			std::stringstream ss;
+
+			ss <<
         "handleNonChordNorTupletNoteOrRest(), fCurrentNonGraceNote: " <<
         fCurrentNonGraceNote->asShortString () <<
         std::endl;
+
+			gWaeHandler->waeTrace (
+				__FILE__, __LINE__,
+				ss.str ());
     }
 #endif
 
@@ -22333,7 +25061,9 @@ void mxsr2msrTranslator::handleNonChordNorTupletNoteOrRest (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceNotes ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Handling non-chord, non-tuplet note or rest " <<
        newNote->asShortString () << // NO, would lead to infinite recursion ??? JMI
       ", currentVoice = \"" <<
@@ -22362,7 +25092,9 @@ void mxsr2msrTranslator::handleNonChordNorTupletNoteOrRest (
       std::endl;
 
     if (gGlobalTracingOahGroup->getTraceNotesDetails ()) {
-      gLogStream <<
+	  	std::stringstream ss;
+
+      ss <<
         std::setw (fieldWidth) << "fPendingGraceNotesGroup" << ": " <<
         std::endl <<
         "======================= handleNonChordNorTupletNoteOrRest()" <<
@@ -22405,12 +25137,18 @@ void mxsr2msrTranslator::handleNonChordNorTupletNoteOrRest (
 
 #ifdef MF_TRACING_IS_ENABLED
       if (gGlobalTracingOahGroup->getTraceGraceNotes ()) {
-        gLogStream <<
+				std::stringstream ss;
+
+				ss <<
           "Creating grace notes for note '" <<
           newNote->asString () <<
           "' in voice \"" <<
           currentVoice->getVoiceName () << "\"" <<
           std::endl;
+
+				gWaeHandler->waeTrace (
+					__FILE__, __LINE__,
+					ss.str ());
       }
 #endif
 
@@ -22464,13 +25202,19 @@ void mxsr2msrTranslator::handleNonChordNorTupletNoteOrRest (
     // append newNote to the current grace notes
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceGraceNotes ()) {
-      gLogStream <<
+			std::stringstream ss;
+
+			ss <<
         "Appending note " <<
         newNote->asString () <<
         " to grace notes in voice \"" <<
         currentVoice->getVoiceName () <<
         "\", line " << inputLineNumber <<
         std::endl;
+
+			gWaeHandler->waeTrace (
+				__FILE__, __LINE__,
+				ss.str ());
     }
 #endif
 
@@ -22491,7 +25235,9 @@ void mxsr2msrTranslator::handleNonChordNorTupletNoteOrRest (
         // append newNote to the current voice
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalTracingOahGroup->getTraceNotes ()) {
-          gLogStream <<
+					std::stringstream ss;
+
+					ss <<
             "Appending single tremolo " <<
             newNote->asString () <<
             ", line " << newNote->getInputLineNumber () <<
@@ -22499,6 +25245,10 @@ void mxsr2msrTranslator::handleNonChordNorTupletNoteOrRest (
             currentVoice->getVoiceName () <<
             "\"" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
 
@@ -22513,7 +25263,9 @@ void mxsr2msrTranslator::handleNonChordNorTupletNoteOrRest (
         // register newNote as first element of the current double tremolo
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalTracingOahGroup->getTraceNotes ()) {
-          gLogStream <<
+					std::stringstream ss;
+
+					ss <<
             "Setting regular note '" <<
             newNote->asString () <<
             "', line " << newNote->getInputLineNumber () <<
@@ -22522,6 +25274,10 @@ void mxsr2msrTranslator::handleNonChordNorTupletNoteOrRest (
             currentVoice->getVoiceName () <<
             "\"" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
 
@@ -22534,7 +25290,9 @@ void mxsr2msrTranslator::handleNonChordNorTupletNoteOrRest (
         // register newNote as second element of the current double tremolo
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalTracingOahGroup->getTraceNotes ()) {
-          gLogStream <<
+					std::stringstream ss;
+
+					ss <<
             "Setting regular note '" <<
             newNote->asString () <<
             "', line " << newNote->getInputLineNumber () <<
@@ -22543,6 +25301,10 @@ void mxsr2msrTranslator::handleNonChordNorTupletNoteOrRest (
             currentVoice->getVoiceName () <<
             "\"" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
 
@@ -22567,7 +25329,9 @@ void mxsr2msrTranslator::handleNonChordNorTupletNoteOrRest (
     // append newNote to the current voice
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceNotes ()) {
-      gLogStream <<
+			std::stringstream ss;
+
+			ss <<
         "Appending regular note or rest " <<
         newNote->asString () <<
         ", line " << newNote->getInputLineNumber () <<
@@ -22575,6 +25339,10 @@ void mxsr2msrTranslator::handleNonChordNorTupletNoteOrRest (
         currentVoice->getVoiceName () <<
         "\"" <<
         std::endl;
+
+			gWaeHandler->waeTrace (
+				__FILE__, __LINE__,
+				ss.str ());
     }
 #endif
 
@@ -22643,7 +25411,9 @@ void mxsr2msrTranslator::handleLyricsForNoteAfterNoteItselfIsHandled (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceLyrics ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Handling lyrics for note '" <<
       newNote->asShortString () <<
       "', line " << inputLineNumber <<
@@ -22706,11 +25476,17 @@ void mxsr2msrTranslator::handleLyricsForNoteAfterNoteItselfIsHandled (
     // newNote has lyrics attached to it
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceLyricsDetails ()) {
-      gLogStream <<
+			std::stringstream ss;
+
+			ss <<
         "Note '" <<
         newNote->asShortString () <<
         "' has lyrics attached to it" << " ***" <<
         std::endl;
+
+			gWaeHandler->waeTrace (
+				__FILE__, __LINE__,
+				ss.str ());
     }
 #endif
 
@@ -22852,7 +25628,9 @@ void mxsr2msrTranslator::handleNoteBelongingToAChord (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceChords ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Handling a note belonging to a chord" <<
       ", newChordNote:" <<
       std::endl;
@@ -22868,7 +25646,7 @@ void mxsr2msrTranslator::handleNoteBelongingToAChord (
 
   if (fCurrentNoteIsARest) {
     mxsr2msrError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
       "a rest cannot belong to a chord");
@@ -22904,7 +25682,9 @@ void mxsr2msrTranslator::handleNoteBelongingToAChord (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceChords ()) {
-    gLogStream << // JMI
+		std::stringstream ss;
+
+		ss <<
       std::endl <<
       "***==> fCurrentStaffNumberToInsertInto: " <<
       fCurrentStaffNumberToInsertInto <<
@@ -22918,6 +25698,10 @@ void mxsr2msrTranslator::handleNoteBelongingToAChord (
       staffNumberToUse <<
       "', line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -22938,7 +25722,9 @@ void mxsr2msrTranslator::handleNoteBelongingToAChord (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceChords ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "Handling a chord member note" <<
       ", currentVoice = \"" <<
       currentVoice->getVoiceName () <<
@@ -22946,6 +25732,10 @@ void mxsr2msrTranslator::handleNoteBelongingToAChord (
       fOnGoingChord <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -23005,9 +25795,9 @@ void mxsr2msrTranslator::handleNoteBelongingToAChord (
           */
 
     if (! chordFirstNote) {
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         "handleNoteBelongingToAChord():" <<
         std::endl <<
         "chordFirstNote is null on " <<
@@ -23018,10 +25808,10 @@ void mxsr2msrTranslator::handleNoteBelongingToAChord (
         "fCurrentMusicXMLVoiceNumber: " << fCurrentMusicXMLVoiceNumber;
 
       mxsr2msrInternalError (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         inputLineNumber,
         __FILE__, __LINE__,
-        s.str ());
+        ss.str ());
     }
 
 #ifdef MF_TRACING_IS_ENABLED
@@ -23088,13 +25878,19 @@ void mxsr2msrTranslator::handleNoteBelongingToAChord (
         // remove last handled (previous current) note from the current voice
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalTracingOahGroup->getTraceChords ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "Removing chord first note " <<
             chordFirstNote->asShortString () <<
             ", line " << inputLineNumber <<
             ", from voice \"" << currentVoice->getVoiceName () << "\"" <<
             ", line " << inputLineNumber <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
 
@@ -23111,7 +25907,9 @@ void mxsr2msrTranslator::handleNoteBelongingToAChord (
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalTracingOahGroup->getTraceStaffChanges ()) {
-          gLogStream << // JMI
+          std::stringstream ss;
+
+          ss <<
             std::endl <<
             "***==> fCurrentStaffNumberToInsertInto: " <<
             fCurrentStaffNumberToInsertInto <<
@@ -23121,6 +25919,10 @@ void mxsr2msrTranslator::handleNoteBelongingToAChord (
             fCurrentMusicXMLStaffNumber <<
             "', line " << inputLineNumber <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
 
@@ -23132,12 +25934,18 @@ void mxsr2msrTranslator::handleNoteBelongingToAChord (
         // add chord to the voice instead
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalTracingOahGroup->getTraceChords ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "Appending chord " << fCurrentChord->asString () <<
             " to voice \"" <<
             currentVoice->getVoiceName () <<
             "\"" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
 
@@ -23191,18 +25999,18 @@ void mxsr2msrTranslator::handleNoteBelongingToAChord (
           }
 
           else {
-            std::stringstream s;
+            std::stringstream ss;
 
-            s <<
+            ss <<
               "chord first note '" <<
               chordFirstNote->asShortString () <<
               "' belongs to a double tremolo, but is not marked as such";
 
             mxsr2msrInternalError (
-              gGlobalServiceRunData->getInputSourceName (),
+              gGlobalCurrentServiceRunData->getInputSourceName (),
               inputLineNumber,
               __FILE__, __LINE__,
-              s.str ());
+              ss.str ());
           }
         }
         break;
@@ -23214,13 +26022,19 @@ void mxsr2msrTranslator::handleNoteBelongingToAChord (
         // remove last handled (previous current) note from the current voice
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalTracingOahGroup->getTraceChords ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "Removing chord first note " <<
             chordFirstNote->asShortString () <<
             ", line " << inputLineNumber <<
             ", from voice \"" << currentVoice->getVoiceName () << "\"" <<
             ", line " << inputLineNumber <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
 
@@ -23270,13 +26084,19 @@ void mxsr2msrTranslator::handleNoteBelongingToAChord (
   // register newChordNote as another member of chord
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceChords ()) {
-      gLogStream <<
+			std::stringstream ss;
+
+			ss <<
         "Adding another note " <<
         newChordNote->asString() <<
         ", line " << inputLineNumber <<
         " to current chord in voice " <<
         currentVoice->getVoiceName () <<
         std::endl;
+
+			gWaeHandler->waeTrace (
+				__FILE__, __LINE__,
+				ss.str ());
     }
 #endif
   }
@@ -23307,12 +26127,18 @@ void mxsr2msrTranslator::handlePendingTupletStopIfAny (
     // in case the last element is a chord
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceTuplets ()) {
-      gLogStream <<
+			std::stringstream ss;
+
+			ss <<
         "--> kTupletTypeStart: handling pending tuplet stop, note '" <<
         note->
           asShortString () <<
         "', line " << inputLineNumber <<
         std::endl;
+
+			gWaeHandler->waeTrace (
+				__FILE__, __LINE__,
+				ss.str ());
     }
 #endif
 
@@ -23355,13 +26181,19 @@ void mxsr2msrTranslator::handleNoteBelongingToATuplet (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTuplets ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "Handling a note belonging to a tuplet" <<
       ", note: " <<
       note->
         asShortString () <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -23376,12 +26208,18 @@ void mxsr2msrTranslator::handleNoteBelongingToATuplet (
       {
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalTracingOahGroup->getTraceTuplets ()) {
-          gLogStream <<
+					std::stringstream ss;
+
+					ss <<
             "--> kTupletTypeStart: note = '" <<
             note->
               asShortString () <<
             "', line " << inputLineNumber <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
 
@@ -23474,9 +26312,9 @@ void mxsr2msrTranslator::handleNoteBelongingToATuplet (
         }
 
         else {
-          std::stringstream s;
+          std::stringstream ss;
 
-          s <<
+          ss <<
             "handleNoteBelongingToATuplet():" <<
             std::endl <<
             "tuplet member note " <<
@@ -23485,10 +26323,10 @@ void mxsr2msrTranslator::handleNoteBelongingToATuplet (
             " cannot be added, tuplets stack is empty";
 
           mxsr2msrInternalError (
-            gGlobalServiceRunData->getInputSourceName (),
+            gGlobalCurrentServiceRunData->getInputSourceName (),
             inputLineNumber,
             __FILE__, __LINE__,
-            s.str ());
+            ss.str ());
         }
       }
       break;
@@ -23498,9 +26336,9 @@ void mxsr2msrTranslator::handleNoteBelongingToATuplet (
         switch (fTupletsStack.size ()) {
           case 0:
             {
-              std::stringstream s;
+              std::stringstream ss;
 
-              s <<
+              ss <<
                 "handleNoteBelongingToATuplet():" <<
                 std::endl <<
                 "tuplet member note " <<
@@ -23509,10 +26347,10 @@ void mxsr2msrTranslator::handleNoteBelongingToATuplet (
                 " cannot be added, tuplets stack is empty";
 
               mxsr2msrInternalError (
-                gGlobalServiceRunData->getInputSourceName (),
+                gGlobalCurrentServiceRunData->getInputSourceName (),
                 inputLineNumber,
                 __FILE__, __LINE__,
-                s.str ());
+                ss.str ());
             }
             break;
 
@@ -23687,12 +26525,18 @@ void mxsr2msrTranslator::handleNoteBelongingToATuplet (
       {
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalTracingOahGroup->getTraceTuplets ()) {
-          gLogStream <<
+					std::stringstream ss;
+
+					ss <<
             "--> kTupletTypeStartAndStopInARow: note = '" <<
             note->
               asShortString () <<
             "', line " << inputLineNumber <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
 
@@ -23700,17 +26544,17 @@ void mxsr2msrTranslator::handleNoteBelongingToATuplet (
           fCurrentTupletTypeKind = msrTupletTypeKind::kTupletTypeStartAndStopInARow;
         }
         else {
-          std::stringstream s;
+          std::stringstream ss;
 
-          s <<
+          ss <<
             "one-note tuplet with a non single tremolo contents found";
 
      // JMI     mxsr2msrError (
           mxsr2msrWarning (
-            gGlobalServiceRunData->getInputSourceName (),
+            gGlobalCurrentServiceRunData->getInputSourceName (),
             inputLineNumber,
        //     __FILE__, __LINE__,
-            s.str ());
+            ss.str ());
         }
 
         // create the tuplet
@@ -23769,18 +26613,24 @@ void mxsr2msrTranslator::handleNoteBelongingToAChordInATuplet (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTuplets ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "Handling a note belonging to a chord in a tuplet" <<
       ", newChordNote: " <<
       newChordNote->
         asShortString () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
   if (fCurrentNoteIsARest) {
     mxsr2msrError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
       "a rest cannot belong to a chord in a tuplet");
@@ -23807,19 +26657,19 @@ void mxsr2msrTranslator::handleNoteBelongingToAChordInATuplet (
         fTupletsStack.front ();
     }
     else {
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         "handleNoteBelongingToAChordInATuplet():" <<
         std::endl <<
         " a tuplet member chord " <<
         "cannot be added, tuplets stack is empty";
 
       mxsr2msrInternalError (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         inputLineNumber,
         __FILE__, __LINE__,
-        s.str ());
+        ss.str ());
     }
     */
 
@@ -23868,25 +26718,37 @@ void mxsr2msrTranslator::handleNoteBelongingToAChordInATuplet (
         msrNoteKind::kNoteRegularInChord);
 
     if (false) { // JMI
-      gLogStream <<
+	  	std::stringstream ss;
+
+      ss <<
         "&&&&&&&&&&&&&&&&&& currentVoice (" <<
         currentVoice->getVoiceName () <<
         ") contents &&&&&&&&&&&&&&&&&&" <<
         std::endl <<
         currentVoice <<
         std::endl;
+
+			gWaeHandler->waeTrace (
+				__FILE__, __LINE__,
+				ss.str ());
     }
 
     // add chord to the current tuplet instead of tupletLastNote
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceChords () || gGlobalTracingOahGroup->getTraceTuplets ()) {
-      gLogStream <<
+			std::stringstream ss;
+
+			ss <<
         "Adding chord '" <<
         fCurrentChord->asString () <<
         "' to stack top tuplet '" <<
         currentTuplet->asString () <<
         "', line " << inputLineNumber <<
         std::endl;
+
+			gWaeHandler->waeTrace (
+				__FILE__, __LINE__,
+				ss.str ());
     }
 #endif
 
@@ -23909,7 +26771,9 @@ void mxsr2msrTranslator::handleNoteBelongingToAChordInATuplet (
   // register note as another member of chord
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceChords ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "Adding another note " <<
       newChordNote->
         asShortString () <<
@@ -23917,6 +26781,10 @@ void mxsr2msrTranslator::handleNoteBelongingToAChordInATuplet (
       " to current chord in voice " <<
       currentVoice->getVoiceName () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -23957,19 +26825,25 @@ void mxsr2msrTranslator::handleNoteBelongingToAChordInAGraceNotesGroup (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceChords () || gGlobalTracingOahGroup->getTraceGraceNotes ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "Handling a note belonging to a chord in grace notes" <<
       ", newChordNote is '" <<
       newChordNote->
         asShortString () <<
       "'" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
   if (fCurrentNoteIsARest) {
     mxsr2msrError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
       "a rest cannot belong to a chord in a grace notes group");
@@ -24007,30 +26881,36 @@ void mxsr2msrTranslator::handleNoteBelongingToAChordInAGraceNotesGroup (
           getVoiceLastAppendedNote ();
 
       if (! chordFirstNote) {
-        std::stringstream s;
+        std::stringstream ss;
 
-        s <<
+        ss <<
           "handleNoteBelongingToAChordInGraceNotes():" <<
           std::endl <<
           "chordFirstNote is null on " <<
           newChordNote->asString ();
 
         mxsr2msrInternalError (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         inputLineNumber,
         __FILE__, __LINE__,
-          s.str ());
+          ss.str ());
       }
     }
 
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceChords () || gGlobalTracingOahGroup->getTraceGraceNotes ()) {
-      gLogStream <<
+			std::stringstream ss;
+
+			ss <<
         "The grace notes chord's first note is '" <<
         chordFirstNote->
           asShortString () <<
         "'" <<
         std::endl;
+
+			gWaeHandler->waeTrace (
+				__FILE__, __LINE__,
+				ss.str ());
     }
 #endif
 
@@ -24073,19 +26953,19 @@ void mxsr2msrTranslator::handleNoteBelongingToAChordInAGraceNotesGroup (
 
     /* JMI
     else {
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         "handleNoteBelongingToAChordInGraceNotes():" <<
         std::endl <<
         "tuplet member chord " << chord->asString () <<
         "cannot be added, tuplets stack is empty";
 
       mxsr2msrInternalError (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         inputLineNumber,
         __FILE__, __LINE__,
-        s.str ());
+        ss.str ());
     }
     */
 
@@ -24096,7 +26976,9 @@ void mxsr2msrTranslator::handleNoteBelongingToAChordInAGraceNotesGroup (
   // register note as another member of chord
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceChords ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "Adding another note " <<
       newChordNote->
         asShortString () <<
@@ -24104,6 +26986,10 @@ void mxsr2msrTranslator::handleNoteBelongingToAChordInAGraceNotesGroup (
       " to current chord in voice " <<
       currentVoice->getVoiceName () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -24128,7 +27014,9 @@ void mxsr2msrTranslator::handleTupletsPendingOnTupletsStack (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTuplets ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Handling tuplets pending on tuplet stack" <<
       ", fCurrentStaffNumberToInsertInto: " <<
       fCurrentStaffNumberToInsertInto <<
@@ -24224,7 +27112,9 @@ void mxsr2msrTranslator::handleRepeatStart (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceRepeats ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "Handling repeat start" <<
     /* JMI
       ", measure '" <<
@@ -24234,6 +27124,10 @@ void mxsr2msrTranslator::handleRepeatStart (
       */
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -24266,7 +27160,9 @@ void mxsr2msrTranslator::handleRepeatEnd (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceRepeats ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "Handling a repeat end in part " <<
       fCurrentPart->getPartCombinedName () <<
       ", fCurrentMeasureNumber: \"" << fCurrentMeasureNumber <<
@@ -24274,6 +27170,10 @@ void mxsr2msrTranslator::handleRepeatEnd (
       "\", repeatStartMeasureNumber: \"" << repeatStartMeasureNumber <<
       "\", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -24302,34 +27202,52 @@ void mxsr2msrTranslator::handleRepeatEndingStart (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceRepeats ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "Handling a repeat ending start in part " <<
       fCurrentPart->getPartCombinedName () <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceRepeatsDetails ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       std::endl << std::endl <<
       "****************** handleRepeatEndingStart()" <<
       ", line " << inputLineNumber <<
       std::endl <<
       fCurrentPart <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
   // handle the repeat ending
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceRepeats ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "Handling a repeat ending upon its start in part " <<
       fCurrentPart->getPartCombinedName () <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -24352,23 +27270,35 @@ void mxsr2msrTranslator::handleRepeatHookedEndingEnd (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceRepeats ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "Handling a repeat hooked ending end in part " <<
       fCurrentPart->getPartCombinedName () <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceRepeatsDetails ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       std::endl << std::endl <<
       "****************** handleRepeatHookedEndingEnd()" <<
       ", line " << inputLineNumber <<
       std::endl <<
       fCurrentPart <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -24379,11 +27309,17 @@ void mxsr2msrTranslator::handleRepeatHookedEndingEnd (
   // create a hooked repeat ending from the current segment
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceRepeats ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "Handling a hooked repeat ending in part " <<
       fCurrentPart->getPartCombinedName () <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -24413,23 +27349,35 @@ void mxsr2msrTranslator::handleRepeatHooklessEndingEnd (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceRepeats ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "Handling a repeat hookless ending end in part " <<
       fCurrentPart->getPartCombinedName () <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceRepeatsDetails ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       std::endl << std::endl <<
       "****************** handleRepeatHooklessEndingEnd()" <<
       ", line " << inputLineNumber <<
       std::endl <<
       fCurrentPart <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -24440,11 +27388,17 @@ void mxsr2msrTranslator::handleRepeatHooklessEndingEnd (
   // create a hookless repeat ending from the current segment
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceRepeats ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "Handling a hookless repeat ending in part " <<
       fCurrentPart->getPartCombinedName () <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -24463,10 +27417,16 @@ void mxsr2msrTranslator::visitStart (S_rehearsal& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_rehearsal" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -24502,27 +27462,33 @@ void mxsr2msrTranslator::visitStart (S_rehearsal& elt)
   }
   else {
     if (rehearsalEnclosure.size ()) {
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         "rehearsalMark enclosure \"" << rehearsalEnclosure <<
         "\"" << " is not handled, ignored";
 
       mxsr2msrWarning (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         inputLineNumber,
-        s.str ());
+        ss.str ());
     }
   }
 
   // create a rehearsalMark
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceRehearsalMarks ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "Creating rehearsalMark \"" << rehearsalValue << "\"" <<
       " in part " <<
       fCurrentPart->getPartCombinedName () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -24546,10 +27512,16 @@ void mxsr2msrTranslator::visitStart (S_harmony& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_harmony" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -24590,10 +27562,16 @@ void mxsr2msrTranslator::visitStart (S_root& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_root" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -24616,10 +27594,16 @@ void mxsr2msrTranslator::visitStart (S_root_step& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_root_step" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -24642,10 +27626,16 @@ void mxsr2msrTranslator::visitStart (S_root_alter& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_root_alter" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -24656,17 +27646,17 @@ void mxsr2msrTranslator::visitStart (S_root_alter& elt)
       rootAlter);
 
   if (fCurrentHarmonyRootAlterationKind == msrAlterationKind::kAlteration_UNKNOWN) {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "root alter '" << rootAlter << "'"
       "' should be -3, -2, -1.5, -1, -0.5, 0, +0.5, +1, +1.5, +2 or +3";
 
     mxsr2msrError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 }
 
@@ -24677,10 +27667,16 @@ void mxsr2msrTranslator::visitStart (S_kind& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_kind" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -24773,14 +27769,14 @@ void mxsr2msrTranslator::visitStart (S_kind& elt)
   else {
     if (kind.size ()) {
       mxsr2msrError (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         inputLineNumber,
         __FILE__, __LINE__,
         "harmony kind \"" + kind + "\" os unknown");
     }
     else {
       mxsr2msrWarning (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         inputLineNumber,
         "empty harmony kind, replaced by 'major'");
 
@@ -24800,17 +27796,17 @@ void mxsr2msrTranslator::visitStart (S_kind& elt)
     fCurrentTupletTypeKind = msrTuplet::kStopTuplet;
   else {
     if (kindUseSymbols.size ()) {
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         "kind use-symbols \"" << kindUseSymbols <<
         "\" is unknown";
 
       mxsr2msrError (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         inputLineNumber,
         __FILE__, __LINE__,
-        s.str ());
+        ss.str ());
       }
   }
 */
@@ -24827,17 +27823,17 @@ void mxsr2msrTranslator::visitStart (S_kind& elt)
     fCurrentTupletTypeKind = msrTuplet::kStopTuplet;
   else {
     if (kindStackDegrees.size ()) {
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         "kind stack-degrees " << kindStackDegrees <<
         "\" is unknown";
 
       mxsr2msrError (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         inputLineNumber,
         __FILE__, __LINE__,
-        s.str ());
+        ss.str ());
       }
   }
   */
@@ -24854,17 +27850,17 @@ void mxsr2msrTranslator::visitStart (S_kind& elt)
     fCurrentTupletTypeKind = msrTuplet::kStopTuplet;
   else {
     if (kindParenthesesDegrees.size ()) {
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         "kind parentheses-degrees \"" << kindParenthesesDegrees <<
         "\" is unknown";
 
       mxsr2msrError (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         inputLineNumber,
         __FILE__, __LINE__,
-        s.str ());
+        ss.str ());
       }
   }
   */
@@ -24881,17 +27877,17 @@ void mxsr2msrTranslator::visitStart (S_kind& elt)
     fCurrentTupletTypeKind = msrTuplet::kStopTuplet;
   else {
     if (kindBracketDegrees.size ()) {
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         "kind bracket-degrees \"" << kindBracketDegrees <<
         "\" is unknown";
 
       mxsr2msrError (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         inputLineNumber,
         __FILE__, __LINE__,
-        s.str ());
+        ss.str ());
       }
   }
   */
@@ -24901,10 +27897,16 @@ void mxsr2msrTranslator::visitStart (S_inversion& elt)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_inversion" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -24923,10 +27925,16 @@ void mxsr2msrTranslator::visitStart (S_bass& elt)
     elt->getInputLineNumber ();
 
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_bass" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 }
@@ -24938,10 +27946,16 @@ void mxsr2msrTranslator::visitStart (S_bass_step& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_bass_step" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -24964,10 +27978,16 @@ void mxsr2msrTranslator::visitStart (S_bass_alter& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_bass_alter" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -24978,17 +27998,17 @@ void mxsr2msrTranslator::visitStart (S_bass_alter& elt)
       bassAlter);
 
   if (fCurrentHarmonyBassAlterationKind == msrAlterationKind::kAlteration_UNKNOWN) {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "bass alter '" << bassAlter << "'"
       "' should be -3, -2, -1.5, -1, -0.5, 0, +0.5, +1, +1.5, +2 or +3";
 
     mxsr2msrError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 }
 
@@ -24999,10 +28019,16 @@ void mxsr2msrTranslator::visitStart (S_degree& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_degree" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -25022,10 +28048,16 @@ void mxsr2msrTranslator::visitStart (S_degree_value& elt)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_degree_value" <<
-       ", line " << elt->getInputLineNumber () <<
-     std::endl;
+			 ", line " << elt->getInputLineNumber () <<
+			std::endl;
+
+		gWaeHandler->waeTrace (
+			__FILE__, __LINE__,
+			ss.str ());
   }
 #endif
 
@@ -25039,10 +28071,16 @@ void mxsr2msrTranslator::visitStart (S_degree_alter& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_degree_alter" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -25053,17 +28091,17 @@ void mxsr2msrTranslator::visitStart (S_degree_alter& elt)
       degreeAlter);
 
   if (fCurrentHarmonyDegreeAlterationKind == msrAlterationKind::kAlteration_UNKNOWN) {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "degree alter '" << degreeAlter << "'"
       "' should be -3, -2, -1.5, -1, -0.5, 0, +0.5, +1, +1.5, +2 or +3";
 
     mxsr2msrError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 }
 
@@ -25074,10 +28112,16 @@ void mxsr2msrTranslator::visitStart (S_degree_type& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_degree_type" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -25098,7 +28142,7 @@ void mxsr2msrTranslator::visitStart (S_degree_type& elt)
 
   else {
       mxsr2msrError (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         inputLineNumber,
         __FILE__, __LINE__,
         "harmony degree-type \"" + degreeType + "\" is unknown");
@@ -25112,10 +28156,16 @@ void mxsr2msrTranslator::visitEnd (S_degree& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> End visiting S_degree" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -25140,10 +28190,16 @@ void mxsr2msrTranslator::visitEnd (S_harmony& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> End visiting S_harmony" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -25168,7 +28224,7 @@ void mxsr2msrTranslator::visitEnd (S_harmony& elt)
     fCurrentHarmonyDegreesList.size () == 0
   ) {
     mxsr2msrWarning (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       "harmony kind is 'other' but there are no harmony degrees, this is strange...");
   }
@@ -25177,9 +28233,9 @@ void mxsr2msrTranslator::visitEnd (S_harmony& elt)
     fCurrentHarmonyRootQuarterTonesPitchKind
       ==
     fCurrentHarmonyBassQuarterTonesPitchKind) {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "harmony root and bass notes are both equal to '" <<
       msrDiatonicPitchKindAsStringInLanguage (
         gGlobalMsrOahGroup->getMsrQuarterTonesPitchesLanguageKind (),
@@ -25189,9 +28245,9 @@ void mxsr2msrTranslator::visitEnd (S_harmony& elt)
       "', ignoring the latter";
 
     mxsr2msrWarning (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
-      s.str ());
+      ss.str ());
 
     fCurrentHarmonyBassQuarterTonesPitchKind =
       msrQuarterTonesPitchKind::kQTP_UNKNOWN;
@@ -25200,9 +28256,9 @@ void mxsr2msrTranslator::visitEnd (S_harmony& elt)
   if (gGlobalMxsr2msrOahGroup->getIgnoreHarmonies ()) {
  #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
-			std::stringstream s;
+			std::stringstream ss;
 
-			s <<
+			ss <<
         "Ignoring harmony" <<
         ", line " <<
         inputLineNumber <<
@@ -25210,7 +28266,7 @@ void mxsr2msrTranslator::visitEnd (S_harmony& elt)
 
 			gWaeHandler->waeTrace (
 				__FILE__, __LINE__,
-				s.str ());
+				ss.str ());
     }
 #endif
   }
@@ -25218,9 +28274,9 @@ void mxsr2msrTranslator::visitEnd (S_harmony& elt)
    // create the harmony
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceHarmoniesDetails ()) {
-			std::stringstream s;
+			std::stringstream ss;
 
-			s <<
+			ss <<
         "Creating a harmony" <<
         ", line " << inputLineNumber << ":" <<
         std::endl;
@@ -25288,7 +28344,7 @@ void mxsr2msrTranslator::visitEnd (S_harmony& elt)
 
 			gWaeHandler->waeTrace (
 				__FILE__, __LINE__,
-				s.str ());
+				ss.str ());
     }
 #endif
 
@@ -25320,7 +28376,7 @@ void mxsr2msrTranslator::visitEnd (S_harmony& elt)
 #ifdef MF_TRACING_IS_ENABLED
       if (gGlobalTracingOahGroup->getTraceHarmoniesDetails ()) {
         mxsr2msrWarning (
-          gGlobalServiceRunData->getInputSourceName (),
+          gGlobalCurrentServiceRunData->getInputSourceName (),
           inputLineNumber,
           "harmony has no degrees contents");
       }
@@ -25369,23 +28425,29 @@ void mxsr2msrTranslator::visitStart (S_frame& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_frame" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
   if (! fOnGoingHarmony) {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s << "<frame /> out of context, not handled";
+    ss << "<frame /> out of context, not handled";
 
     mxsr2msrError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 
 /*
@@ -25434,17 +28496,17 @@ void mxsr2msrTranslator::visitStart (S_frame& elt)
       degreeAlter);
 
   if (fCurrentHarmonyDegreeAlterationKind == msrAlterationKind::kAlteration_UNKNOWN) {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "degree alter '" << degreeAlter << "'"
       "' should be -3, -2, -1.5, -1, -0.5, 0, +0.5, +1, +1.5, +2 or +3";
 
     mxsr2msrError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 
   // color JMI
@@ -25456,10 +28518,16 @@ void mxsr2msrTranslator::visitStart (S_frame_strings& elt)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_frame_strings" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -25470,10 +28538,16 @@ void mxsr2msrTranslator::visitStart (S_frame_frets& elt)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_frame_frets" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -25484,10 +28558,16 @@ void mxsr2msrTranslator::visitStart (S_first_fret& elt)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_first_fret" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -25506,10 +28586,16 @@ void mxsr2msrTranslator::visitStart (S_frame_note& elt)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_frame_note" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -25528,10 +28614,16 @@ void mxsr2msrTranslator::visitStart (S_barre& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_barre" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -25546,17 +28638,17 @@ void mxsr2msrTranslator::visitStart (S_barre& elt)
   else if (barreType == "stop")
     fCurrentFrameNoteBarreTypeKind = msrBarreTypeKind::kBarreTypeStop;
   else {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "barre type \"" << barreType <<
       "\" is unknown";
 
     mxsr2msrError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 
   // color JMI
@@ -25569,10 +28661,16 @@ void mxsr2msrTranslator::visitEnd (S_frame_note& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_frame_note" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -25599,10 +28697,16 @@ void mxsr2msrTranslator::visitEnd (S_frame& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> End visiting S_frame" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -25642,10 +28746,16 @@ void mxsr2msrTranslator::visitStart (S_figured_bass& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_figured_bass" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -25666,17 +28776,17 @@ void mxsr2msrTranslator::visitStart (S_figured_bass& elt)
         msrFiguredBassParenthesesKind::kFiguredBassParenthesesNo;
 
     else {
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         "parentheses value " << parentheses <<
         " should be 'yes' or 'no'";
 
       mxsr2msrError (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         inputLineNumber,
         __FILE__, __LINE__,
-        s.str ());
+        ss.str ());
     }
   }
 
@@ -25697,10 +28807,16 @@ void mxsr2msrTranslator::visitStart (S_figure& elt)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_figure" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 }
@@ -25712,10 +28828,16 @@ void mxsr2msrTranslator::visitStart (S_prefix& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_prefix" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -25746,17 +28868,17 @@ void mxsr2msrTranslator::visitStart (S_prefix& elt)
     fCurrentFigurePrefixKind = msrBassFigurePrefixKind::kBassFigurePrefixDoubleSharp;
 
   else if (prefix.size ()) {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "prefix \"" << prefix <<
       "\" is unknown";
 
     mxsr2msrError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 
 }
@@ -25768,26 +28890,32 @@ void mxsr2msrTranslator::visitStart (S_figure_number& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_figure_number" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
   fCurrentFigureNumber = (int)(*elt);
 
   if (fCurrentFigureNumber > 13) {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "figure-number '" << fCurrentFigureNumber <<
       "' is greater that 13, that's strange...";
 
     mxsr2msrWarning (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
-      s.str ());
+      ss.str ());
   }
 }
 
@@ -25798,10 +28926,16 @@ void mxsr2msrTranslator::visitStart (S_suffix& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_suffix" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -25835,17 +28969,17 @@ void mxsr2msrTranslator::visitStart (S_suffix& elt)
     fCurrentFigureSuffixKind = msrBassFigureSuffixKind::kBassFigureSuffixSlash;
 
   else if (suffix.size ()) {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "suffix \"" << suffix <<
       "\" is unknown";
 
     mxsr2msrError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 }
 
@@ -25856,10 +28990,16 @@ void mxsr2msrTranslator::visitEnd (S_figure& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> End visiting S_figure" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -25885,20 +29025,32 @@ void mxsr2msrTranslator::visitEnd (S_figured_bass& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> End visiting S_figured_bass" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
   // create the figured bass element
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceFiguredBasses ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "Creating a figured bass" <<
       ", line " << inputLineNumber << ":" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -25918,7 +29070,7 @@ void mxsr2msrTranslator::visitEnd (S_figured_bass& elt)
   // attach pending figures to the figured bass
   if (! fPendingFiguredBassFiguresList.size ()) {
     mxsr2msrWarning (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       "figured-bass has no figures contents, ignoring it");
   }
@@ -25947,10 +29099,16 @@ void mxsr2msrTranslator::visitStart (S_harp_pedals& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_harp_pedals" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -26019,9 +29177,15 @@ void mxsr2msrTranslator::visitStart (S_harp_pedals& elt)
   // create the harp pedals tuning
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceHarpPedalsTunings ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "Creating harp pedals tuning:" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -26039,10 +29203,16 @@ void mxsr2msrTranslator::visitStart (S_pedal_tuning& elt)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_pedal_tuning" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 }
@@ -26054,10 +29224,16 @@ void mxsr2msrTranslator::visitStart (S_pedal_step& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_pedal_step" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -26080,10 +29256,16 @@ void mxsr2msrTranslator::visitStart (S_pedal_alter& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_pedal_alter" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -26094,17 +29276,17 @@ void mxsr2msrTranslator::visitStart (S_pedal_alter& elt)
       pedalAlter);
 
   if (fCurrentHarpPedalAlterationKind == msrAlterationKind::kAlteration_UNKNOWN) {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "pedal alter '" << pedalAlter << "'"
       "' should be -3, -2, -1.5, -1, -0.5, 0, +0.5, +1, +1.5, +2 or +3";
 
     mxsr2msrError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 }
 
@@ -26115,10 +29297,16 @@ void mxsr2msrTranslator::visitEnd (S_pedal_tuning& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> End visiting S_pedal_tuning" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -26164,10 +29352,16 @@ void mxsr2msrTranslator::visitStart( S_damp& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_damp" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -26198,10 +29392,16 @@ void mxsr2msrTranslator::visitStart( S_damp_all& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_damp_all" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -26230,10 +29430,16 @@ void mxsr2msrTranslator::visitStart (S_capo& elt)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_capo" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -26244,10 +29450,16 @@ void mxsr2msrTranslator::visitStart (S_staff_size& elt)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_staff_size" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -26262,18 +29474,26 @@ void mxsr2msrTranslator::visitEnd (S_staff_details& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> End visiting S_staff_details" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceStaves ()) {
+		std::stringstream ss;
+
     const int fieldWidth = 29;
 
-    gLogStream << std::left <<
+    ss << std::left <<
       std::setw (fieldWidth) <<
       "fCurrentStaffLinesNumber" << " = " <<
       fCurrentStaffLinesNumber <<
@@ -26290,6 +29510,10 @@ void mxsr2msrTranslator::visitEnd (S_staff_details& elt)
       "fCurrentStaffDetailsStaffSize" << " = " <<
       fCurrentStaffDetailsStaffSize <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -26330,10 +29554,16 @@ void mxsr2msrTranslator::visitStart (S_scordatura& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_scordatura" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -26370,10 +29600,16 @@ void mxsr2msrTranslator::visitStart (S_accord& elt)
     elt->getInputLineNumber ();
 
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_accord" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -26405,10 +29641,16 @@ void mxsr2msrTranslator::visitEnd (S_accord& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> End visiting S_accord" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -26435,10 +29677,16 @@ void mxsr2msrTranslator::visitEnd (S_scordatura& elt)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> End visiting S_scordatura" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -26454,10 +29702,16 @@ void mxsr2msrTranslator::visitStart (S_instrument_sound& elt)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_instrument_sound" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 }
@@ -26467,10 +29721,16 @@ void mxsr2msrTranslator::visitStart (S_virtual_instrument& elt)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_virtual_instrument" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 }
@@ -26480,10 +29740,16 @@ void mxsr2msrTranslator::visitStart (S_midi_device& elt)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_midi_device" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -26497,10 +29763,16 @@ void mxsr2msrTranslator::visitStart (S_midi_instrument& elt)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_midi_instrument" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -26616,6 +29888,10 @@ part-symbol
       std::endl <<
       "<==" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 */

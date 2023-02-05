@@ -32,12 +32,12 @@ mfWaeHandlerFrench::~mfWaeHandlerFrench ()
 
 std::string mfWaeHandlerFrench::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "Gestionnaire d'avertissements et d'erreurs de MusicFormats pour le français";
 
-  return s.str ();
+  return ss.str ();
 }
 
 void mfWaeHandlerFrench::print (std::ostream& os) const
@@ -75,12 +75,12 @@ std::string mfWaeHandlerFrench::passIDKindAsString (mfPassIDKind passIDKind) con
       result = "*Passe kMfPassID_ALL*";
       break;
 
-    case mfPassIDKind::kMfPassID_0:
-      result = "Passe 0";
+    case mfPassIDKind::kMfPassID_OptionsAndArgumentsHandling:
+      result = "Opts & Args";
       break;
 
-    case mfPassIDKind::kMfPassID_Optional:
-      result = "opt";
+    case mfPassIDKind::kMfPassID_OptionalPass:
+      result = "Optional";
       break;
 
     case mfPassIDKind::kMfPassID_1:
@@ -125,11 +125,6 @@ std::string mfWaeHandlerFrench::passIDKindAsString (mfPassIDKind passIDKind) con
   return result;
 }
 
-// std::string mfWaeHandlerFrench::passName (mfPassIDKind passIDKind) const
-// {
-//   return "Passe 1";
-// }
-
 std::string mfWaeHandlerFrench::passOptional () const
 {
   return "Passe (optionelle)";
@@ -156,14 +151,14 @@ std::string mfWaeHandlerFrench::slices () const
 // quitting after passes
 std::string mfWaeHandlerFrench::quittingAfterPass (mfPassIDKind passIDKind) const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "On sort après la passe " <<
     passIDKindAsString (passIDKind) <<
     " comme demandé";
 
-  return s.str ();
+  return ss.str ();
 }
 
 //_______________________________________________________________________________
@@ -177,9 +172,16 @@ std::string mfWaeHandlerFrench::handleOptionsAndArgumentsFromArgcArgv () const
 //_______________________________________________________________________________
 // passes
 
-std::string mfWaeHandlerFrench::createAnMXSRFromAMusicXMLFile () const
+std::string mfWaeHandlerFrench::createAnMXSRFromAMusicXMLFileOrStdin () const
 {
-  return "Création d'un MXSR à partir d'un fichier MusicXML";
+  std::stringstream ss;
+
+  ss <<
+    "Lit le contenu d'un fichier MusicXML file ou de l'entrée standard stdin ('-')" <<
+    std::endl <<
+    "et le convertit en un MXSR (arbre MusicXML);";
+
+  return ss.str ();
 }
 std::string mfWaeHandlerFrench::createAnMXSRFromAMusicXMLDescriptor () const
 {

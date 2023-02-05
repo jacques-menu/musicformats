@@ -12,6 +12,8 @@
 #ifndef ___lpsrHeaders___
 #define ___lpsrHeaders___
 
+#include "mfIndentedTextOutput.h"
+
 #include "lpsrElements.h"
 
 #include "msrIdentification.h"
@@ -191,6 +193,8 @@ class EXP lpsrHeader : public lpsrElement
 };
 typedef SMARTP<lpsrHeader> S_lpsrHeader;
 EXP std::ostream& operator << (std::ostream& os, const S_lpsrHeader& elt);
+EXP mfIndentedStringStream& operator << (
+  mfIndentedStringStream& os, const S_lpsrHeader& elt);
 
 
 }

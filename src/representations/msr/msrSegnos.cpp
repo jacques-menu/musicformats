@@ -24,6 +24,7 @@
 #include "msrMeasureConstants.h"
 
 #include "oahOah.h"
+#include "oahEarlyOptions.h"
 
 #include "msrOah.h"
 
@@ -135,9 +136,15 @@ void msrSegno::setSegnoUpLinkToMeasure (
 void msrSegno::acceptIn (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrSegno::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrSegno>*
@@ -146,9 +153,15 @@ void msrSegno::acceptIn (basevisitor* v)
         S_msrSegno elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrSegno::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitStart (elem);
   }
@@ -157,9 +170,15 @@ void msrSegno::acceptIn (basevisitor* v)
 void msrSegno::acceptOut (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrSegno::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrSegno>*
@@ -168,9 +187,15 @@ void msrSegno::acceptOut (basevisitor* v)
         S_msrSegno elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrSegno::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitEnd (elem);
   }
@@ -181,14 +206,14 @@ void msrSegno::browseData (basevisitor* v)
 
 std::string msrSegno::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "Segno" <<
     ", staffNumber :" << fStaffNumber <<
     ", line " << fInputLineNumber;
 
-  return s.str ();
+  return ss.str ();
 }
 
 void msrSegno::print (std::ostream& os) const
@@ -294,9 +319,15 @@ void msrDalSegno::setDalSegnoUpLinkToMeasure (
 void msrDalSegno::acceptIn (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrDalSegno::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrDalSegno>*
@@ -305,9 +336,15 @@ void msrDalSegno::acceptIn (basevisitor* v)
         S_msrDalSegno elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrDalSegno::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitStart (elem);
   }
@@ -316,9 +353,15 @@ void msrDalSegno::acceptIn (basevisitor* v)
 void msrDalSegno::acceptOut (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrDalSegno::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrDalSegno>*
@@ -327,9 +370,15 @@ void msrDalSegno::acceptOut (basevisitor* v)
         S_msrDalSegno elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrDalSegno::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitEnd (elem);
   }
@@ -340,9 +389,9 @@ void msrDalSegno::browseData (basevisitor* v)
 
 std::string msrDalSegno::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "[DalSegno" <<
     ", dalSegnoKind: " << msrDalSegnoKindAsString (fDalSegnoKind) <<
     ", dalSegnoString: \"" << fDalSegnoString << "\"" <<
@@ -351,7 +400,7 @@ std::string msrDalSegno::asString () const
     ", line " << fInputLineNumber <<
     ']';
 
-  return s.str ();
+  return ss.str ();
 }
 
 void msrDalSegno::print (std::ostream& os) const

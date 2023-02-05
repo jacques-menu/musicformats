@@ -126,9 +126,15 @@ void msrGeneratorsOahGroup::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       ".\\\" ==> msrGeneratorsOahGroup::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -139,9 +145,15 @@ void msrGeneratorsOahGroup::acceptIn (basevisitor* v)
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             ".\\\" ==> Launching msrGeneratorsOahGroup::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
         p->visitStart (elem);
@@ -152,9 +164,15 @@ void msrGeneratorsOahGroup::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       ".\\\" ==> msrGeneratorsOahGroup::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -165,9 +183,15 @@ void msrGeneratorsOahGroup::acceptOut (basevisitor* v)
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             ".\\\" ==> Launching msrGeneratorsOahGroup::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
         p->visitEnd (elem);
@@ -178,9 +202,15 @@ void msrGeneratorsOahGroup::browseData (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       ".\\\" ==> msrGeneratorsOahGroup::browseData ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 }
@@ -231,9 +261,15 @@ S_msrGeneratorsOahGroup createGlobalMsrGeneratorsOahGroup ()
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Creating global msrGenerators OAH group" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 

@@ -111,11 +111,17 @@ R"(
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Initializing \"" <<
       fHandlerHeader <<
       "\" regular options handler" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -143,27 +149,27 @@ void Mikrokosmos3WanderingInsiderHandler::initializeHandlerMultiComponent ()
 std::string Mikrokosmos3WanderingInsiderHandler::usageInformation (
   mfMultiGenerationOutputKind multiGenerationOutputKind)
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
 R"(Usage: Mikrokosmos3Wandering [option]*
 )" <<
     std::endl;
 
   switch (multiGenerationOutputKind) {
     case mfMultiGenerationOutputKind::kGeneration_UNKNOWN:
-      s <<
+      ss <<
         "The help below is available whichever output is produced";
       break;
 
     default:
-      s <<
+      ss <<
         "The help below is available when generating " <<
         mfMultiGenerationOutputKindAsString (multiGenerationOutputKind) <<
         " output";
   } // switch
 
-  return s.str ();
+  return ss.str ();
 }
 
 std::string Mikrokosmos3WanderingInsiderHandler::handlerServiceAboutInformation () const
@@ -315,11 +321,17 @@ void Mikrokosmos3WanderingInsiderHandler::createTheMikrokosmos3WanderingPrefixes
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Creating the Mikrokosmos3Wandering prefixes in \"" <<
       fHandlerHeader <<
       "\"" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -333,11 +345,17 @@ void Mikrokosmos3WanderingInsiderHandler::createTheMikrokosmos3WanderingOptionGr
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Creating the \"" <<
       fHandlerHeader <<
       "\" insider option groups" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -491,11 +509,17 @@ void Mikrokosmos3WanderingInsiderHandler::checkOptionsAndArguments () const
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "checking options and arguments from argc/argv in \"" <<
       fHandlerHeader <<
       "\"" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -507,11 +531,17 @@ std::string Mikrokosmos3WanderingInsiderHandler::fetchOutputFileNameFromTheOptio
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Fetching the output file name from the options in OAH handler \"" <<
       fHandlerHeader <<
       "\"" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -537,13 +567,19 @@ std::string Mikrokosmos3WanderingInsiderHandler::fetchOutputFileNameFromTheOptio
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Mikrokosmos3WanderingInsiderHandler::fetchOutputFileNameFromTheOptions()" <<
       " outputFileNameHasBeenSet: " <<
       outputFileNameHasBeenSet <<
       " autoOutputFileNameHasBeenSet: " <<
       autoOutputFileNameHasBeenSet <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -656,10 +692,16 @@ std::string Mikrokosmos3WanderingInsiderHandler::fetchOutputFileNameFromTheOptio
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "outputFileName: " <<
       outputFileName <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -706,33 +748,33 @@ void Mikrokosmos3WanderingInsiderOahGroup::checkGroupOptionsConsistency ()
 /* JMI
 
   if (inputSourceName.size () > 0 && inputSourceName == outputFileName) {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "\"" << inputSourceName << "\" is both the input and output file name";
 
-    oahError (s.str ());
+    oahError (ss.str ());
   }
 
 
 
 
   if (! fOutputFileName.size ()) {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "Mikrokosmos3WanderingInsiderOahGroup: a MusicXML output file name must be selected with '-o, -output-file-name";
 
-    oahError (s.str ());
+    oahError (ss.str ());
   }
 
-  else if (fOutputFileName == gGlobalServiceRunData->getInputSourceName ()) {
-    std::stringstream s;
+  else if (fOutputFileName == gGlobalCurrentServiceRunData->getInputSourceName ()) {
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "\"" << fOutputFileName << "\" is both the input and output file name";
 
-    oahError (s.str ());
+    oahError (ss.str ());
   }
   */
 }
@@ -742,9 +784,15 @@ void Mikrokosmos3WanderingInsiderOahGroup::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       ".\\\" ==> Mikrokosmos3WanderingInsiderOahGroup::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -755,9 +803,15 @@ void Mikrokosmos3WanderingInsiderOahGroup::acceptIn (basevisitor* v)
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             ".\\\" ==> Launching Mikrokosmos3WanderingInsiderOahGroup::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
         p->visitStart (elem);
@@ -768,9 +822,15 @@ void Mikrokosmos3WanderingInsiderOahGroup::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       ".\\\" ==> Mikrokosmos3WanderingInsiderOahGroup::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -781,9 +841,15 @@ void Mikrokosmos3WanderingInsiderOahGroup::acceptOut (basevisitor* v)
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             ".\\\" ==> Launching Mikrokosmos3WanderingInsiderOahGroup::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
         p->visitEnd (elem);
@@ -794,9 +860,15 @@ void Mikrokosmos3WanderingInsiderOahGroup::browseData (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       ".\\\" ==> Mikrokosmos3WanderingInsiderOahGroup::browseData ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -893,11 +965,17 @@ void Mikrokosmos3WanderingInsiderOahGroup::initializeMikrokosmos3WanderingInside
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream << std::left <<
+    std::stringstream ss;
+
+    ss <<
       "Initializing \"" <<
       fGroupHeader <<
       "\" group" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -954,9 +1032,15 @@ S_Mikrokosmos3WanderingInsiderOahGroup createGlobalMikrokosmos3WanderingInsiderO
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Creating global Mikrokosmos3Wandering insider OAH group" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 

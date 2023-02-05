@@ -16,9 +16,15 @@ Parts are presented at \sectionRef{Parts}.
 void msrPart::browseData (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrPart::browseData ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
 #ifdef MF_TRACING_IS_ENABLED // JMI

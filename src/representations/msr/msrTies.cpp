@@ -17,6 +17,7 @@
 #include "msrTies.h"
 
 #include "oahOah.h"
+#include "oahEarlyOptions.h"
 
 #include "msrOah.h"
 
@@ -30,24 +31,24 @@ namespace MusicFormats
 // ------------------------------------------------------
 std::string msrTieKindAsString (msrTieKind tieKind)
 {
-  std::stringstream s;
+  std::stringstream ss;
 
   switch (tieKind) {
     case msrTieKind::kTieNone:
-      s << "kTieNone***";
+      ss << "kTieNone***";
       break;
     case msrTieKind::kTieStart:
-      s << "kTieStart";
+      ss << "kTieStart";
       break;
     case msrTieKind::kTieContinue:
-      s << "kTieContinue";
+      ss << "kTieContinue";
       break;
     case msrTieKind::kTieStop:
-      s << "kTieStop";
+      ss << "kTieStop";
       break;
   } // switch
 
-  return s.str ();
+  return ss.str ();
 }
 
 std::ostream& operator << (std::ostream& os, const msrTieKind& elt)
@@ -99,9 +100,15 @@ msrTie::~msrTie ()
 void msrTie::acceptIn (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrTie::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrTie>*
@@ -110,9 +117,15 @@ void msrTie::acceptIn (basevisitor* v)
         S_msrTie elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrTie::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitStart (elem);
   }
@@ -121,9 +134,15 @@ void msrTie::acceptIn (basevisitor* v)
 void msrTie::acceptOut (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrTie::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrTie>*
@@ -132,9 +151,15 @@ void msrTie::acceptOut (basevisitor* v)
         S_msrTie elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrTie::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitEnd (elem);
   }
@@ -145,13 +170,13 @@ void msrTie::browseData (basevisitor* v)
 
 std::string msrTie::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "Tie" << ' ' << msrTieKindAsString (fTieKind) <<
     ", line " << fInputLineNumber;
 
-  return s.str ();
+  return ss.str ();
 }
 
 void msrTie::print (std::ostream& os) const

@@ -87,14 +87,16 @@ void msr2summaryVisitor::printSummaryFromMsrScore (
 void msr2summaryVisitor::visitStart (S_msrScore& elt)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "--> Start visiting msrScore" <<
       std::endl;
   }
 
   gLogStream <<
     "MSR contents summary of \"" <<
-    gGlobalServiceRunData->getInputSourceName () <<
+    gGlobalCurrentServiceRunData->getInputSourceName () <<
     "\":" <<
     std::endl << std::endl;
 
@@ -106,7 +108,9 @@ void msr2summaryVisitor::visitEnd (S_msrScore& elt)
   --gIndenter;
 
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "--> End visiting msrScore" <<
       std::endl;
   }
@@ -247,7 +251,9 @@ void msr2summaryVisitor::visitEnd (S_msrScore& elt)
 void msr2summaryVisitor::visitStart (S_msrPartGroup& elt)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "--> Start visiting msrPartGroup" <<
       std::endl;
   }
@@ -324,7 +330,9 @@ void msr2summaryVisitor::visitEnd (S_msrPartGroup& elt)
   --gIndenter;
 
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "--> End visiting msrPartGroup" <<
       std::endl;
   }
@@ -334,7 +342,9 @@ void msr2summaryVisitor::visitEnd (S_msrPartGroup& elt)
 void msr2summaryVisitor::visitStart (S_msrPart& elt)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "--> Start visiting msrPart" <<
       std::endl;
   }
@@ -397,7 +407,9 @@ void msr2summaryVisitor::visitEnd (S_msrPart& elt)
   --gIndenter;
 
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "--> End visiting msrPart" <<
       std::endl;
   }
@@ -407,7 +419,9 @@ void msr2summaryVisitor::visitEnd (S_msrPart& elt)
 void msr2summaryVisitor::visitStart (S_msrStaff& elt)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "--> Start visiting msrStaff" <<
       std::endl;
   }
@@ -457,7 +471,9 @@ void msr2summaryVisitor::visitEnd (S_msrStaff& elt)
   --gIndenter;
 
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "--> End visiting msrStaff" <<
       std::endl;
   }
@@ -469,7 +485,9 @@ void msr2summaryVisitor::visitEnd (S_msrStaff& elt)
 void msr2summaryVisitor::visitStart (S_msrVoice& elt)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "--> Start visiting msrVoice" <<
       std::endl;
   }
@@ -522,7 +540,9 @@ void msr2summaryVisitor::visitEnd (S_msrVoice& elt)
   --gIndenter;
 
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "--> End visiting msrVoice" <<
       std::endl;
   }
@@ -532,7 +552,9 @@ void msr2summaryVisitor::visitEnd (S_msrVoice& elt)
 void msr2summaryVisitor::visitStart (S_msrStanza& elt)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "--> Start visiting msrStanza" <<
       std::endl;
   }
@@ -560,7 +582,9 @@ void msr2summaryVisitor::visitStart (S_msrStanza& elt)
 void msr2summaryVisitor::visitEnd (S_msrStanza& elt)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "--> End visiting msrStanza" <<
       std::endl;
   }
@@ -570,7 +594,9 @@ void msr2summaryVisitor::visitEnd (S_msrStanza& elt)
 void msr2summaryVisitor::visitStart (S_msrSyllable& elt)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "--> Start visiting msrSyllable" <<
       std::endl;
   }
@@ -579,7 +605,9 @@ void msr2summaryVisitor::visitStart (S_msrSyllable& elt)
 void msr2summaryVisitor::visitEnd (S_msrSyllable& elt)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "--> End visiting msrSyllable" <<
       std::endl;
   }
@@ -589,7 +617,9 @@ void msr2summaryVisitor::visitEnd (S_msrSyllable& elt)
 void msr2summaryVisitor::visitStart (S_msrClef& elt)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "--> Start visiting msrClef" <<
       std::endl;
   }
@@ -604,7 +634,9 @@ void msr2summaryVisitor::visitStart (S_msrClef& elt)
 void msr2summaryVisitor::visitEnd (S_msrClef& elt)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "--> End visiting msrClef" <<
       std::endl;
   }
@@ -614,7 +646,9 @@ void msr2summaryVisitor::visitEnd (S_msrClef& elt)
 void msr2summaryVisitor::visitStart (S_msrKey& elt)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "--> Start visiting msrKey" <<
       std::endl;
   }
@@ -629,7 +663,9 @@ void msr2summaryVisitor::visitStart (S_msrKey& elt)
 void msr2summaryVisitor::visitEnd (S_msrKey& elt)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "--> End visiting msrKey" <<
       std::endl;
   }
@@ -639,7 +675,9 @@ void msr2summaryVisitor::visitEnd (S_msrKey& elt)
 void msr2summaryVisitor::visitStart (S_msrTimeSignature& elt)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "--> Start visiting msrTimeSignature" <<
       std::endl;
   }
@@ -654,7 +692,9 @@ void msr2summaryVisitor::visitStart (S_msrTimeSignature& elt)
 void msr2summaryVisitor::visitEnd (S_msrTimeSignature& elt)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "--> End visiting msrTimeSignature" <<
     std::endl;
   }
@@ -664,7 +704,9 @@ void msr2summaryVisitor::visitEnd (S_msrTimeSignature& elt)
 void msr2summaryVisitor::visitStart (S_msrTempo& elt)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "--> Start visiting msrTempo" <<
        std::endl;
   }
@@ -678,7 +720,9 @@ void msr2summaryVisitor::visitStart (S_msrTempo& elt)
 void msr2summaryVisitor::visitEnd (S_msrTempo& elt)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "--> End visiting msrTempo" <<
     std::endl;
   }
@@ -688,7 +732,9 @@ void msr2summaryVisitor::visitEnd (S_msrTempo& elt)
 void msr2summaryVisitor::visitStart (S_msrSegment& elt)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "--> Start visiting msrSegment" <<
       std::endl;
   }
@@ -697,7 +743,9 @@ void msr2summaryVisitor::visitStart (S_msrSegment& elt)
 void msr2summaryVisitor::visitEnd (S_msrSegment& elt)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "--> End visiting msrSegment" <<
       std::endl;
   }
@@ -707,7 +755,9 @@ void msr2summaryVisitor::visitEnd (S_msrSegment& elt)
 void msr2summaryVisitor::visitStart (S_msrArticulation& elt)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "--> Start visiting msrArticulation" <<
       std::endl;
   }
@@ -716,7 +766,9 @@ void msr2summaryVisitor::visitStart (S_msrArticulation& elt)
 void msr2summaryVisitor::visitEnd (S_msrArticulation& elt)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "--> End visiting msrArticulation" <<
       std::endl;
   }
@@ -726,7 +778,9 @@ void msr2summaryVisitor::visitEnd (S_msrArticulation& elt)
 void msr2summaryVisitor::visitStart (S_msrDynamic& elt)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "--> Start visiting msrDynamic" <<
       std::endl;
   }
@@ -735,7 +789,9 @@ void msr2summaryVisitor::visitStart (S_msrDynamic& elt)
 void msr2summaryVisitor::visitEnd (S_msrDynamic& elt)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "--> End visiting msrDynamic" <<
       std::endl;
   }
@@ -745,7 +801,9 @@ void msr2summaryVisitor::visitEnd (S_msrDynamic& elt)
 void msr2summaryVisitor::visitStart (S_msrCrescDecresc& elt)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "--> Start visiting msrCrescDecresc" << std::endl;
   }
 }
@@ -753,7 +811,9 @@ void msr2summaryVisitor::visitStart (S_msrCrescDecresc& elt)
 void msr2summaryVisitor::visitEnd (S_msrCrescDecresc& elt)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "--> End visiting msrCrescDecresc" << std::endl;
   }
 }
@@ -762,7 +822,9 @@ void msr2summaryVisitor::visitEnd (S_msrCrescDecresc& elt)
 void msr2summaryVisitor::visitStart (S_msrWedge& elt)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "--> Start visiting msrWedge" << std::endl;
   }
 }
@@ -770,7 +832,9 @@ void msr2summaryVisitor::visitStart (S_msrWedge& elt)
 void msr2summaryVisitor::visitEnd (S_msrWedge& elt)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "--> End visiting msrWedge" << std::endl;
   }
 }
@@ -779,7 +843,9 @@ void msr2summaryVisitor::visitEnd (S_msrWedge& elt)
 void msr2summaryVisitor::visitStart (S_msrGraceNotesGroup& elt)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "--> Start visiting msrGraceNotesGroup" << std::endl;
   }
 }
@@ -787,7 +853,9 @@ void msr2summaryVisitor::visitStart (S_msrGraceNotesGroup& elt)
 void msr2summaryVisitor::visitEnd (S_msrGraceNotesGroup& elt)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "--> End visiting msrGraceNotesGroup" << std::endl;
   }
 }
@@ -796,7 +864,9 @@ void msr2summaryVisitor::visitEnd (S_msrGraceNotesGroup& elt)
 void msr2summaryVisitor::visitStart (S_msrNote& elt)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "--> Start visiting " <<
       msrNoteKindAsString (
         elt->getNoteKind ()) <<
@@ -842,7 +912,9 @@ void msr2summaryVisitor::visitStart (S_msrNote& elt)
 void msr2summaryVisitor::visitEnd (S_msrNote& elt)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "--> End visiting " <<
       msrNoteKindAsString (
         elt->getNoteKind ()) <<
@@ -881,7 +953,9 @@ void msr2summaryVisitor::visitEnd (S_msrNote& elt)
 void msr2summaryVisitor::visitStart (S_msrStem& elt)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "--> Start visiting msrStem" << std::endl;
   }
 }
@@ -889,7 +963,9 @@ void msr2summaryVisitor::visitStart (S_msrStem& elt)
 void msr2summaryVisitor::visitEnd (S_msrStem& elt)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "--> End visiting msrStem" <<
       std::endl;
   }
@@ -899,7 +975,9 @@ void msr2summaryVisitor::visitEnd (S_msrStem& elt)
 void msr2summaryVisitor::visitStart (S_msrBeam& elt)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "--> Start visiting msrBeam" << std::endl;
   }
 }
@@ -907,7 +985,9 @@ void msr2summaryVisitor::visitStart (S_msrBeam& elt)
 void msr2summaryVisitor::visitEnd (S_msrBeam& elt)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "--> End visiting msrBeam" <<
       std::endl;
   }
@@ -917,7 +997,9 @@ void msr2summaryVisitor::visitEnd (S_msrBeam& elt)
 void msr2summaryVisitor::visitStart (S_msrChord& elt)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "--> Start visiting msrChord" <<
       std::endl;
   }
@@ -928,7 +1010,9 @@ void msr2summaryVisitor::visitStart (S_msrChord& elt)
 void msr2summaryVisitor::visitEnd (S_msrChord& elt)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "--> End visiting msrChord" <<
       std::endl;
   }
@@ -938,7 +1022,9 @@ void msr2summaryVisitor::visitEnd (S_msrChord& elt)
 void msr2summaryVisitor::visitStart (S_msrTuplet& elt)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "--> Start visiting msrTuplet" <<
       std::endl;
   }
@@ -949,7 +1035,9 @@ void msr2summaryVisitor::visitStart (S_msrTuplet& elt)
 void msr2summaryVisitor::visitEnd (S_msrTuplet& elt)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "--> End visiting msrTuplet" <<
       std::endl;
   }
@@ -959,7 +1047,9 @@ void msr2summaryVisitor::visitEnd (S_msrTuplet& elt)
 void msr2summaryVisitor::visitStart (S_msrSlur& elt)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "--> Start visiting msrSlur" <<
       std::endl;
   }
@@ -968,7 +1058,9 @@ void msr2summaryVisitor::visitStart (S_msrSlur& elt)
 void msr2summaryVisitor::visitEnd (S_msrSlur& elt)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "--> End visiting msrSlur" <<
       std::endl;
   }
@@ -978,7 +1070,9 @@ void msr2summaryVisitor::visitEnd (S_msrSlur& elt)
 void msr2summaryVisitor::visitStart (S_msrBarLine& elt)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "--> Start visiting msrBarLine" <<
       std::endl;
   }
@@ -987,7 +1081,9 @@ void msr2summaryVisitor::visitStart (S_msrBarLine& elt)
 void msr2summaryVisitor::visitEnd (S_msrBarLine& elt)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "--> End visiting msrBarLine" <<
       std::endl;
   }
@@ -997,7 +1093,9 @@ void msr2summaryVisitor::visitEnd (S_msrBarLine& elt)
 void msr2summaryVisitor::visitStart (S_msrBarNumberCheck& elt)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "--> Start visiting msrBarNumberCheck" <<
       std::endl;
   }
@@ -1006,7 +1104,9 @@ void msr2summaryVisitor::visitStart (S_msrBarNumberCheck& elt)
 void msr2summaryVisitor::visitEnd (S_msrBarNumberCheck& elt)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "--> End visiting msrBarNumberCheck" <<
       std::endl;
   }
@@ -1016,7 +1116,9 @@ void msr2summaryVisitor::visitEnd (S_msrBarNumberCheck& elt)
 void msr2summaryVisitor::visitStart (S_msrLineBreak& elt)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "--> Start visiting msrLineBreak" <<
       std::endl;
   }
@@ -1025,7 +1127,9 @@ void msr2summaryVisitor::visitStart (S_msrLineBreak& elt)
 void msr2summaryVisitor::visitEnd (S_msrLineBreak& elt)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "--> End visiting msrLineBreak" <<
       std::endl;
   }
@@ -1035,7 +1139,9 @@ void msr2summaryVisitor::visitEnd (S_msrLineBreak& elt)
 void msr2summaryVisitor::visitStart (S_msrRepeat& elt)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "--> Start visiting msrRepeat" <<
       std::endl;
   }
@@ -1044,7 +1150,9 @@ void msr2summaryVisitor::visitStart (S_msrRepeat& elt)
 void msr2summaryVisitor::visitEnd (S_msrRepeat& elt)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "--> End visiting msrRepeat" <<
       std::endl;
   }
@@ -1054,7 +1162,9 @@ void msr2summaryVisitor::visitEnd (S_msrRepeat& elt)
 void msr2summaryVisitor::visitStart (S_msrScaling& elt)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "--> Start visiting msrScaling" <<
       std::endl;
   }
@@ -1066,7 +1176,9 @@ void msr2summaryVisitor::visitStart (S_msrScaling& elt)
 void msr2summaryVisitor::visitEnd (S_msrScaling& elt)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "--> End visiting msrScaling" <<
       std::endl;
   }
@@ -1076,7 +1188,9 @@ void msr2summaryVisitor::visitEnd (S_msrScaling& elt)
 void msr2summaryVisitor::visitStart (S_msrPageLayout& elt)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "--> Start visiting msrPageLayout" <<
       std::endl;
   }
@@ -1087,7 +1201,9 @@ void msr2summaryVisitor::visitStart (S_msrPageLayout& elt)
 void msr2summaryVisitor::visitEnd (S_msrPageLayout& elt)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "--> End visiting msrPageLayout" <<
       std::endl;
   }
@@ -1097,7 +1213,9 @@ void msr2summaryVisitor::visitEnd (S_msrPageLayout& elt)
 void msr2summaryVisitor::visitStart (S_msrMidiTempo& elt)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "--> Start visiting msrMidiTempo" <<
       std::endl;
   }
@@ -1106,7 +1224,9 @@ void msr2summaryVisitor::visitStart (S_msrMidiTempo& elt)
 void msr2summaryVisitor::visitEnd (S_msrMidiTempo& elt)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "--> End visiting msrMidiTempo" <<
       std::endl;
   }

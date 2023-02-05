@@ -17,6 +17,7 @@
 #include "bsrTranscriptionNotes.h"
 
 #include "oahOah.h"
+#include "oahEarlyOptions.h"
 
 #include "bsrOah.h"
 #include "brailleGenerationOah.h"
@@ -63,9 +64,16 @@ void bsrTranscriptionNotesElement::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
+      "% --> End visiting bsrTranscriptionNotesElement" <<
       "% ==> bsrTranscriptionNotesElement::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -76,9 +84,15 @@ void bsrTranscriptionNotesElement::acceptIn (basevisitor* v)
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching bsrTranscriptionNotesElement::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
         p->visitStart (elem);
@@ -89,9 +103,16 @@ void bsrTranscriptionNotesElement::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
+      "% --> End visiting bsrTranscriptionNotesElement" <<
       "% ==> bsrTranscriptionNotesElement::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -102,9 +123,15 @@ void bsrTranscriptionNotesElement::acceptOut (basevisitor* v)
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching bsrTranscriptionNotesElement::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
         p->visitEnd (elem);
@@ -116,15 +143,15 @@ void bsrTranscriptionNotesElement::browseData (basevisitor* v)
 
 std::string bsrTranscriptionNotesElement::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "TranscriptionNotesElement" <<
     // JMI ", fTranscriptionNoteText: " <<
     ", \"" << fTranscriptionNoteText << "\"" <<
     ", line " << fInputLineNumber;
 
-  return s.str ();
+  return ss.str ();
 }
 
 void bsrTranscriptionNotesElement::print (std::ostream& os) const
@@ -151,7 +178,7 @@ std::ostream& operator << (std::ostream& os, const S_bsrTranscriptionNotesElemen
   else {
     os << "[NONE]" << std::endl;
   }
-  
+
   return os;
 }
 
@@ -181,9 +208,16 @@ void bsrTranscriptionNotes::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
+      "% --> End visiting bsrTranscriptionNotesElement" <<
       "% ==> bsrTranscriptionNotes::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -194,9 +228,15 @@ void bsrTranscriptionNotes::acceptIn (basevisitor* v)
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching bsrTranscriptionNotes::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
         p->visitStart (elem);
@@ -207,9 +247,16 @@ void bsrTranscriptionNotes::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
+      "% --> End visiting bsrTranscriptionNotesElement" <<
       "% ==> bsrTranscriptionNotes::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -220,9 +267,15 @@ void bsrTranscriptionNotes::acceptOut (basevisitor* v)
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching bsrTranscriptionNotes::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
         p->visitEnd (elem);
@@ -297,7 +350,7 @@ std::ostream& operator << (std::ostream& os, const S_bsrTranscriptionNotes& elt)
   else {
     os << "[NONE]" << std::endl;
   }
-  
+
   return os;
 }
 

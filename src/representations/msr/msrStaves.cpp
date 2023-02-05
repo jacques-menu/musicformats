@@ -32,6 +32,8 @@
 #include "oahOah.h"
 
 #include "oahOah.h"
+#include "oahEarlyOptions.h"
+
 #include "msrOah.h"
 #include "mxsr2msrOah.h"
 #include "msr2msrOah.h"
@@ -95,11 +97,17 @@ msrStaff::msrStaff (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceStaves ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Creating staff \"" << asString () <<
       "\" in part " <<
       fStaffUpLinkToPart->getPartCombinedName () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 }
@@ -156,16 +164,16 @@ void msrStaff::initializeStaff ()
     case msrStaffKind::kStaffKindRegular:
       // the staff number should not be negative
       if (fStaffNumber < 0) {
-        std::stringstream s;
+        std::stringstream ss;
 
-        s <<
+        ss <<
           "regular staff number " << fStaffNumber <<
           " is not positive";
 
         mfAssert (
           __FILE__, __LINE__,
           false,
-          s.str ());
+          ss.str ());
       }
       break;
 
@@ -178,17 +186,17 @@ void msrStaff::initializeStaff ()
     case msrStaffKind::kStaffKindFiguredBass:
     /* JMI
       if (fStaffNumber != msrPart::K_PART_FIGURED_BASS_STAFF_NUMBER) {
-        std::stringstream s;
+        std::stringstream ss;
 
-        s <<
+        ss <<
           "figured bass staff number " << fStaffNumber <<
           " is not equal to " << msrPart::K_PART_FIGURED_BASS_STAFF_NUMBER;
 
         msrInternalError (
-          gGlobalServiceRunData->getInputSourceName (),
+          gGlobalCurrentServiceRunData->getInputSourceName (),
           fInputLineNumber,
           __FILE__, __LINE__,
-          s.str ());
+          ss.str ());
       }
       */
       break;
@@ -227,13 +235,19 @@ void msrStaff::initializeStaff ()
     if (clef) {
 #ifdef MF_TRACING_IS_ENABLED
       if (gGlobalTracingOahGroup->getTraceClefs ()) {
-        gLogStream <<
+        std::stringstream ss;
+
+        ss <<
           "Appending part clef '" << clef->asString () <<
           "' as initial clef to staff \"" <<
           fStaffName <<
           "\" in part " <<
           fStaffUpLinkToPart->getPartCombinedName () <<
           std::endl;
+
+        gWaeHandler->waeTrace (
+          __FILE__, __LINE__,
+          ss.str ());
       }
 #endif
 
@@ -252,13 +266,19 @@ void msrStaff::initializeStaff ()
     if (key) {
 #ifdef MF_TRACING_IS_ENABLED
       if (gGlobalTracingOahGroup->getTraceKeys ()) {
-        gLogStream <<
+        std::stringstream ss;
+
+        ss <<
           "Appending part key '" << key->asString () <<
           "' as initial key to staff \"" <<
           fStaffName <<
           "\" in part " <<
           fStaffUpLinkToPart->getPartCombinedName () <<
           std::endl;
+
+        gWaeHandler->waeTrace (
+          __FILE__, __LINE__,
+          ss.str ());
       }
 #endif
 
@@ -276,13 +296,19 @@ void msrStaff::initializeStaff ()
     if (transposition) {
 #ifdef MF_TRACING_IS_ENABLED
       if ( gGlobalTracingOahGroup->getTraceTranspositions ()) {
-        gLogStream <<
+        std::stringstream ss;
+
+        ss <<
           "Appending part transposition '" << transposition->asString () <<
           "' as initial transposition to staff \"" <<
           fStaffName <<
           "\" in part " <<
           fStaffUpLinkToPart->getPartCombinedName () <<
           std::endl;
+
+        gWaeHandler->waeTrace (
+          __FILE__, __LINE__,
+          ss.str ());
       }
 #endif
 
@@ -314,11 +340,17 @@ S_msrStaff msrStaff::createStaffNewbornClone (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceStaves ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Creating a newborn clone of staff \"" <<
       fStaffName <<
       "\"" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -419,10 +451,16 @@ void msrStaff::registerShortestNoteInStaffIfRelevant (const S_msrNote& note)
 
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceNotes ()) {
-      gLogStream <<
+	  	std::stringstream ss;
+
+      ss <<
         "The new shortest note in staff \"" << fStaffName << "\"" <<
         " becomes " << note->asString () <<
         std::endl;
+
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif
   }
@@ -507,12 +545,18 @@ void msrStaff::createAMeasureAndAppendItToStaff (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasures ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Creating measure '" <<
       measureNumber <<
       "' and appending it to staff \"" << fStaffName << "\"" <<
       "', line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -541,12 +585,18 @@ void msrStaff::setNextMeasureNumberInStaff (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasures ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Setting next measure number to '" <<
       nextMeasureNumber <<
       ", in staff \"" << fStaffName << "\"" <<
       "', line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -564,12 +614,18 @@ void msrStaff::setNextMeasureNumberInStaff (
 
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceMeasures ()) {
-      gLogStream <<
+      std::stringstream ss;
+
+      ss <<
         "Propagating the setting of next measure number '" <<
         nextMeasureNumber <<
         "', line " << inputLineNumber <<
         ", in voice \"" << voice->getVoiceName () << "\"" <<
         std::endl;
+
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif
 
@@ -591,7 +647,9 @@ S_msrVoice msrStaff::createRegularVoiceInStaffByItsNumber (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceVoices ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Creating regular voice with number '" <<
       voiceNumber <<
       "' as regular voice number '" <<
@@ -602,14 +660,18 @@ S_msrVoice msrStaff::createRegularVoiceInStaffByItsNumber (
       currentMeasureNumber <<
  // JMI     " in part " << fStaffUpLinkToPart->getPartCombinedName () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
   // are there too many regular voices in this staff?
   if (fStaffRegularVoicesCounter > msrStaff::gStaffMaxRegularVoices) {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "staff \"" << fStaffName <<
       "\" is already filled up with " <<
       msrStaff::gStaffMaxRegularVoices << " regular voices" <<
@@ -627,10 +689,10 @@ S_msrVoice msrStaff::createRegularVoiceInStaffByItsNumber (
       /* JMI ???
     musicxmlError (
 // JMI    musicxmlWarning ( JMI
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
       */
   }
 
@@ -644,9 +706,9 @@ S_msrVoice msrStaff::createRegularVoiceInStaffByItsNumber (
     S_msrVoice
       olderVoice = (*it).second;
 
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "attempting to create a voice anew by number" <<
       ", voiceNumber: " << voiceNumber <<
       ", currentMeasureNumber: " << currentMeasureNumber <<
@@ -658,10 +720,10 @@ S_msrVoice msrStaff::createRegularVoiceInStaffByItsNumber (
       ", line " << inputLineNumber;
 
     msrInternalError ( // JMI ???
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 
   // create the voice
@@ -687,7 +749,9 @@ S_msrVoice msrStaff::createRegularVoiceInStaffByItsNumber (
     case msrVoiceKind::kVoiceKindHarmonies:
 #ifdef MF_TRACING_IS_ENABLED
       if (gGlobalTracingOahGroup->getTraceVoices ()) {
-        gLogStream <<
+        std::stringstream ss;
+
+        ss <<
           "Creating harmonies voice number '" <<
           voiceNumber <<
           "', voiceKind '" <<
@@ -698,6 +762,10 @@ S_msrVoice msrStaff::createRegularVoiceInStaffByItsNumber (
           currentMeasureNumber <<
      // JMI     " in part " << fStaffUpLinkToPart->getPartCombinedName () <<
           std::endl;
+
+        gWaeHandler->waeTrace (
+          __FILE__, __LINE__,
+          ss.str ());
       }
 #endif
       break;
@@ -705,7 +773,9 @@ S_msrVoice msrStaff::createRegularVoiceInStaffByItsNumber (
     case msrVoiceKind::kVoiceKindFiguredBass:
 #ifdef MF_TRACING_IS_ENABLED
       if (gGlobalTracingOahGroup->getTraceVoices ()) {
-        gLogStream <<
+        std::stringstream ss;
+
+        ss <<
           "Creating figured bass voice number '" <<
           voiceNumber <<
           "', voiceKind '" <<
@@ -716,6 +786,10 @@ S_msrVoice msrStaff::createRegularVoiceInStaffByItsNumber (
           currentMeasureNumber <<
      // JMI     " in part " << fStaffUpLinkToPart->getPartCombinedName () <<
           std::endl;
+
+        gWaeHandler->waeTrace (
+          __FILE__, __LINE__,
+          ss.str ());
       }
 #endif
       break;
@@ -759,12 +833,18 @@ void msrStaff::setStaffShortestNoteDuration (
 {
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceNotes ()) {
-      gLogStream <<
+	  	std::stringstream ss;
+
+      ss <<
         "The new shortest note duration in staff \"" <<
         fStaffName <<
         "\" becomes " <<
         duration <<
         std::endl;
+
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif
 
@@ -776,12 +856,18 @@ void msrStaff::setStaffShortestNoteTupletFactor (
 {
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceNotes ()) {
-      gLogStream <<
+	  	std::stringstream ss;
+
+      ss <<
         "The new shortest note tuplet factor in part \"" <<
         fStaffName <<
         "\" becomes " <<
         noteTupletFactor <<
         std::endl;
+
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif
 
@@ -793,10 +879,16 @@ void msrStaff::registerVoiceInStaffAllVoicesList (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceVoices ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Registering voice \"" << voice->getVoiceName () <<
       "\" in all voices list of staff " << fStaffName <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -807,9 +899,9 @@ void msrStaff::registerVoiceInStaffAllVoicesList (
   if (fStaffAllVoicesList.size ()) {
     for (S_msrVoice knownVoice : fStaffAllVoicesList) {
       if (voice == knownVoice) {
-        std::stringstream s;
+        std::stringstream ss;
 
-        s <<
+        ss <<
           "Voice \"" <<
           knownVoice->getVoiceName () <<
           "\" is already present in the staff's all voices list";
@@ -826,16 +918,16 @@ void msrStaff::registerVoiceInStaffAllVoicesList (
         --gIndenter;
 
         msrInternalError ( // JMI ???
-          gGlobalServiceRunData->getInputSourceName (),
+          gGlobalCurrentServiceRunData->getInputSourceName (),
           voice->getInputLineNumber (),
           __FILE__, __LINE__,
-          s.str ());
+          ss.str ());
       }
 
       if (voice->getVoiceName () == knownVoice->getVoiceName ()) {
-        std::stringstream s;
+        std::stringstream ss;
 
-        s <<
+        ss <<
           "A voice with the same name as \"" <<
           knownVoice->getVoiceName () <<
           "\" is already present in the staff's all voices list";
@@ -852,10 +944,10 @@ void msrStaff::registerVoiceInStaffAllVoicesList (
         --gIndenter;
 
         msrInternalError ( // JMI ???
-          gGlobalServiceRunData->getInputSourceName (),
+          gGlobalCurrentServiceRunData->getInputSourceName (),
           voice->getInputLineNumber (),
           __FILE__, __LINE__,
-          s.str ());
+          ss.str ());
       }
     } // for
   }
@@ -879,13 +971,19 @@ void msrStaff::registerVoiceByItsNumber (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceVoices ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Registering voice named \"" << voice->getVoiceName () <<
       "\", " <<
       voice->asShortString () <<
       ", by its number '" << voiceNumber <<
       "\" in staff " << fStaffName <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -918,11 +1016,17 @@ void msrStaff::registerVoiceByItsNumber (
     case msrVoiceKind::kVoiceKindHarmonies:
 #ifdef MF_TRACING_IS_ENABLED
       if (gGlobalTracingOahGroup->getTraceVoices ()) {
-        gLogStream <<
+        std::stringstream ss;
+
+        ss <<
           "Sorting the voices in staff \"" <<
           fStaffName << "\"" <<
           ", line " << inputLineNumber <<
           std::endl;
+
+        gWaeHandler->waeTrace (
+          __FILE__, __LINE__,
+          ss.str ());
       }
 #endif
 
@@ -937,11 +1041,17 @@ void msrStaff::registerVoiceByItsNumber (
     case msrVoiceKind::kVoiceKindFiguredBass:
 #ifdef MF_TRACING_IS_ENABLED
       if (gGlobalTracingOahGroup->getTraceVoices ()) {
-        gLogStream <<
+        std::stringstream ss;
+
+        ss <<
           "Sorting the voices in staff \"" <<
           fStaffName << "\"" <<
           ", line " << inputLineNumber <<
           std::endl;
+
+        gWaeHandler->waeTrace (
+          __FILE__, __LINE__,
+          ss.str ());
       }
 #endif
 
@@ -964,7 +1074,9 @@ void msrStaff::registerRegularVoiceByItsNumber (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceVoices ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Registering regular voice " <<
       regularVoice->asShortString () <<
       " by it's number '" << voiceNumber <<
@@ -973,6 +1085,10 @@ void msrStaff::registerRegularVoiceByItsNumber (
       fStaffRegularVoicesCounter <<
       "'" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -981,9 +1097,9 @@ void msrStaff::registerRegularVoiceByItsNumber (
   if (fStaffAllVoicesList.size ()) {
     for (S_msrVoice knownVoice : fStaffAllVoicesList) {
       if (regularVoice == knownVoice) {
-        std::stringstream s;
+        std::stringstream ss;
 
-        s <<
+        ss <<
           "Voice \"" <<
           knownVoice->getVoiceName () <<
           "\" is already present in the staff's all voices list";
@@ -1000,16 +1116,16 @@ void msrStaff::registerRegularVoiceByItsNumber (
         --gIndenter;
 
         msrInternalError ( // JMI ???
-          gGlobalServiceRunData->getInputSourceName (),
+          gGlobalCurrentServiceRunData->getInputSourceName (),
           regularVoice->getInputLineNumber (),
           __FILE__, __LINE__,
-          s.str ());
+          ss.str ());
       }
 
       if (regularVoice->getVoiceName () == knownVoice->getVoiceName ()) {
-        std::stringstream s;
+        std::stringstream ss;
 
-        s <<
+        ss <<
           "A voice with the same name as \"" <<
           knownVoice->getVoiceName () <<
           "\" is already present in the staff's all voices list";
@@ -1026,10 +1142,10 @@ void msrStaff::registerRegularVoiceByItsNumber (
         --gIndenter;
 
         msrInternalError ( // JMI ???
-          gGlobalServiceRunData->getInputSourceName (),
+          gGlobalCurrentServiceRunData->getInputSourceName (),
           regularVoice->getInputLineNumber (),
           __FILE__, __LINE__,
-          s.str ());
+          ss.str ());
       }
     } // for
   }
@@ -1050,7 +1166,9 @@ void msrStaff::registerHarmoniesVoiceByItsNumber (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceVoices ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Registering harmonies voice " <<
       voice->asString () <<
      " by its number in staff \"" << fStaffName <<
@@ -1058,6 +1176,10 @@ void msrStaff::registerHarmoniesVoiceByItsNumber (
       fStaffUpLinkToPart->getPartCombinedName () <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -1073,7 +1195,9 @@ void msrStaff::registerFiguredBassVoiceByItsNumber (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceVoices ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Registering figured bass voice " <<
       voice->asString () <<
      " by its number in staff \"" << fStaffName <<
@@ -1081,6 +1205,10 @@ void msrStaff::registerFiguredBassVoiceByItsNumber (
       fStaffUpLinkToPart->getPartCombinedName () <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -1098,7 +1226,9 @@ S_msrVoice msrStaff::fetchRegularVoiceFromStaffByItsNumber (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceVoices ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Fetching voice number '" <<
       voiceNumber <<
      "' in staff \"" << fStaffName <<
@@ -1106,6 +1236,10 @@ S_msrVoice msrStaff::fetchRegularVoiceFromStaffByItsNumber (
       fStaffUpLinkToPart->getPartCombinedName () <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -1123,12 +1257,18 @@ S_msrVoice msrStaff::fetchRegularVoiceFromStaffByItsNumber (
     ) {
 #ifdef MF_TRACING_IS_ENABLED
       if (gGlobalTracingOahGroup->getTraceVoices ()) {
-        gLogStream <<
+        std::stringstream ss;
+
+        ss <<
           "Voice number '" << voiceNumber <<
           "' in staff \"" << fStaffName << "\"" <<
           " has staff relative number '" << number <<
           "'" <<
           std::endl;
+
+        gWaeHandler->waeTrace (
+          __FILE__, __LINE__,
+          ss.str ());
       }
 #endif
 
@@ -1145,12 +1285,18 @@ void msrStaff::assignSequentialNumbersToRegularVoicesInStaff (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceVoices ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Assigning sequential numbers to the regular voices in staff \"" <<
       fStaffName <<
       "\"" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -1184,7 +1330,9 @@ void msrStaff::assignSequentialNumbersToRegularVoicesInStaff (
 
 #ifdef MF_TRACING_IS_ENABLED
       if (gGlobalTracingOahGroup->getTraceVoices ()) {
-        gLogStream <<
+        std::stringstream ss;
+
+        ss <<
           "Voice \"" <<
           voice->getVoiceName () <<
           "\" gets sequential number " <<
@@ -1193,6 +1341,10 @@ void msrStaff::assignSequentialNumbersToRegularVoicesInStaff (
           fStaffName <<
           "\"" <<
           std::endl;
+
+        gWaeHandler->waeTrace (
+          __FILE__, __LINE__,
+          ss.str ());
       }
 #endif
 
@@ -1212,20 +1364,26 @@ S_msrVoice msrStaff::fetchFirstRegularVoiceFromStaff (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceVoices ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Fetching first regular voice in staff \"" <<
       fStaffName <<
       "\" in part " <<
       fStaffUpLinkToPart->getPartCombinedName () <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
   if (! fStaffRegularVoicesList.size ()) {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "staff " << fStaffNumber <<
       " in part " <<
       fStaffUpLinkToPart->getPartCombinedName () <<
@@ -1233,10 +1391,10 @@ S_msrVoice msrStaff::fetchFirstRegularVoiceFromStaff (
       ", line " << inputLineNumber;
 
     msrInternalError ( // JMI ???
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 
   else {
@@ -1252,23 +1410,35 @@ S_msrVoice msrStaff::fetchFirstRegularVoiceFromStaff (
 
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceVoices ()) {
-      gLogStream <<
+      std::stringstream ss;
+
+      ss <<
         "The first regular voice in staff \"" <<
         fStaffName <<
         "\" is " <<
         result->asShortString () <<
         std::endl;
+
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif
   }
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceVoices ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "--> result = \"" <<
       result->getVoiceName () <<
       "\"" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -1289,7 +1459,9 @@ void msrStaff::registerVoiceInStaff (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceVoices ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Registering voice \"" << voice->getVoiceName () <<
       "\" as relative voice " <<
       fStaffRegularVoicesCounter <<
@@ -1297,6 +1469,10 @@ void msrStaff::registerVoiceInStaff (
       "\", line " << inputLineNumber <<
 // JMI       " in part " << fStaffUpLinkToPart->getPartCombinedName () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -1314,9 +1490,9 @@ void msrStaff::registerVoiceInStaff (
 
       // are there too many voices in this staff?
       if (fStaffRegularVoicesCounter > msrStaff::gStaffMaxRegularVoices) {
-        std::stringstream s;
+        std::stringstream ss;
 
-        s <<
+        ss <<
           "staff \"" << fStaffName <<
           "\" is already filled up with " <<
           msrStaff::gStaffMaxRegularVoices << " regular voices," <<
@@ -1332,10 +1508,10 @@ void msrStaff::registerVoiceInStaff (
           /* JMI ???
         musicxmlError (
     // JMI    musicxmlWarning ( JMI
-          gGlobalServiceRunData->getInputSourceName (),
+          gGlobalCurrentServiceRunData->getInputSourceName (),
           inputLineNumber,
           __FILE__, __LINE__,
-          s.str ());
+          ss.str ());
           */
       }
       break;
@@ -1415,9 +1591,9 @@ void msrStaff::registerPartLevelVoiceInStaff (
 
       // are there too many voices in this staff?
       if (fStaffRegularVoicesCounter > msrStaff::gStaffMaxRegularVoices) {
-        std::stringstream s;
+        std::stringstream ss;
 
-        s <<
+        ss <<
           "staff \"" << fStaffName <<
           "\" is already filled up with " <<
           msrStaff::gStaffMaxRegularVoices << " regular voices," <<
@@ -1433,10 +1609,10 @@ void msrStaff::registerPartLevelVoiceInStaff (
           /* JMI ???
         musicxmlError (
     // JMI    musicxmlWarning ( JMI
-          gGlobalServiceRunData->getInputSourceName (),
+          gGlobalCurrentServiceRunData->getInputSourceName (),
           inputLineNumber,
           __FILE__, __LINE__,
-          s.str ());
+          ss.str ());
           */
       }
       break;
@@ -1445,7 +1621,9 @@ void msrStaff::registerPartLevelVoiceInStaff (
   // register voice in this staff
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceVoices ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Registering voice \"" << voice->getVoiceName () <<
       "\" as part level voice " <<
       fStaffRegularVoicesCounter <<
@@ -1453,6 +1631,10 @@ void msrStaff::registerPartLevelVoiceInStaff (
       "\", line " << inputLineNumber <<
 // JMI       " in part " << fStaffUpLinkToPart->getPartCombinedName () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -1516,7 +1698,9 @@ void msrStaff::registerVoiceInStaffClone (
   // register voice in this staff
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceVoices ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Registering voice \"" << voice->getVoiceName () <<
       "\" as relative voice " <<
       fStaffRegularVoicesCounter <<
@@ -1524,6 +1708,10 @@ void msrStaff::registerVoiceInStaffClone (
       "\", line " << inputLineNumber <<
 // JMI       " in part " << fStaffUpLinkToPart->getPartCombinedName () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -1537,9 +1725,9 @@ void msrStaff::registerVoiceInStaffClone (
 
       // are there too many voices in this staff?
       if (fStaffRegularVoicesCounter > msrStaff::gStaffMaxRegularVoices) {
-        std::stringstream s;
+        std::stringstream ss;
 
-        s <<
+        ss <<
           "staff clone \"" << fStaffName <<
           "\" is already filled up with " <<
           msrStaff::gStaffMaxRegularVoices << " regular voices," <<
@@ -1555,10 +1743,10 @@ void msrStaff::registerVoiceInStaffClone (
           /* JMI ???
         musicxmlError (
     // JMI    musicxmlWarning ( JMI
-          gGlobalServiceRunData->getInputSourceName (),
+          gGlobalCurrentServiceRunData->getInputSourceName (),
           inputLineNumber,
           __FILE__, __LINE__,
-          s.str ());
+          ss.str ());
           */
       }
 
@@ -1595,13 +1783,19 @@ void msrStaff::appendClefToStaff  (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceClefs ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Appending clef '" << clef->asString () <<
       "' to staff \"" <<
       fStaffName <<
       "\" in part " <<
       fStaffUpLinkToPart->getPartCombinedName () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -1636,7 +1830,9 @@ void msrStaff::appendClefToStaff  (
   else {
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceClefs ()) {
-      gLogStream <<
+	  	std::stringstream ss;
+
+      ss <<
         "Clef '" <<
         clef->asString () <<
         "' ignored because it is already present in staff " <<
@@ -1644,6 +1840,10 @@ void msrStaff::appendClefToStaff  (
         "\" in part " <<
         fStaffUpLinkToPart->getPartCombinedName () <<
         std::endl;
+
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif
   }
@@ -1655,13 +1855,19 @@ void msrStaff::appendKeyToStaff (S_msrKey  key)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceKeys ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Appending key " << key->asString () <<
       " to staff \"" <<
       fStaffName <<
       "\" in part " <<
       fStaffUpLinkToPart->getPartCombinedName () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -1683,7 +1889,9 @@ void msrStaff::appendKeyToStaff (S_msrKey  key)
       if (key->isEqualTo (fStaffCurrentKey)) {
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalTracingOahGroup->getTraceKeys ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "Key '" <<
             key->asString () <<
             "' ignored because it is already present in staff " <<
@@ -1691,6 +1899,10 @@ void msrStaff::appendKeyToStaff (S_msrKey  key)
             "\" in part " <<
             fStaffUpLinkToPart->getPartCombinedName () <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
 
@@ -1717,12 +1929,18 @@ void msrStaff::appendTimeSignatureToStaff (
   const S_msrTimeSignature& timeSignature){
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTimeSignatures ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Appending time '" << timeSignature->asString () <<
       "' to staff \"" <<
       fStaffName <<
       "\"" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -1744,7 +1962,9 @@ void msrStaff::appendTimeSignatureToStaff (
       if (timeSignature->isEqualTo (fStaffCurrentTimeSignature)) {
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalTracingOahGroup->getTraceTimeSignatures ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "Time '" <<
             timeSignature->asString () <<
             "' ignored because it is already present in staff " <<
@@ -1752,6 +1972,10 @@ void msrStaff::appendTimeSignatureToStaff (
             "\" in part " <<
             fStaffUpLinkToPart->getPartCombinedName () <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
 
@@ -1778,13 +2002,19 @@ void msrStaff::appendTimeSignatureToStaffClone (
   const S_msrTimeSignature& timeSignature){
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTimeSignatures ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Appending time '" << timeSignature->asString () <<
       "' to staff clone \"" <<
       fStaffName <<
       "\" in part " <<
       fStaffUpLinkToPart->getPartCombinedName () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -1807,11 +2037,17 @@ void msrStaff::appendTempoToStaff (
 {
  #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTempos ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Appending tempo " << tempo->asString () <<
       " to staff " <<
       fStaffName <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -1827,11 +2063,17 @@ void msrStaff::appendRehearsalMarkToStaff (
 {
  #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceRehearsalMarks ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Appending rehearsal mark " << rehearsalMark->asString () <<
       " to staff " <<
       fStaffName <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -1847,11 +2089,17 @@ void msrStaff::appendLineBreakToStaff  (
 {
  #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceLineBreaks ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Appending line break " << lineBreak->asString () <<
       " to staff " <<
       fStaffName <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -1867,11 +2115,17 @@ void msrStaff::appendPageBreakToStaff (
 {
  #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTracePageBreaks ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Appending page break " << pageBreak->asString () <<
       " to staff " <<
       fStaffName <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -1888,7 +2142,9 @@ void msrStaff::insertHiddenMeasureAndBarLineInStaffClone (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasures ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Inserting hidden measure and barLine at position " <<
       measurePosition <<
       "' in staff clone \"" <<
@@ -1897,6 +2153,10 @@ void msrStaff::insertHiddenMeasureAndBarLineInStaffClone (
       fStaffUpLinkToPart->getPartCombinedName () <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -1919,12 +2179,18 @@ void msrStaff::nestContentsIntoNewRepeatInStaff (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceRepeats ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Nesting contents into new repeat in staff \"" <<
       fStaffName <<
       "\" in part " <<
       fStaffUpLinkToPart->getPartCombinedName () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -1941,13 +2207,19 @@ void msrStaff::handleRepeatStartInStaff (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceRepeats ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Handling repeat start in staff \"" <<
       fStaffName <<
       "\" in part " <<
       fStaffUpLinkToPart->getPartCombinedName () <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -1969,13 +2241,19 @@ void msrStaff::handleRepeatEndInStaff (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceRepeats ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Handling a repeat end in staff \"" <<
       fStaffName <<
       "\" in part " <<
       fStaffUpLinkToPart->getPartCombinedName () <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -1997,13 +2275,19 @@ void msrStaff::handleRepeatEndingStartInStaff (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceRepeats ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Handling a repeat ending start in staff \"" <<
       fStaffName <<
       "\" in part " <<
       fStaffUpLinkToPart->getPartCombinedName () <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -2026,7 +2310,9 @@ void msrStaff::handleRepeatEndingEndInStaff (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceRepeats ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Handling a " <<
       msrRepeatEndingKindAsString (
         repeatEndingKind) <<
@@ -2036,6 +2322,10 @@ void msrStaff::handleRepeatEndingEndInStaff (
       fStaffUpLinkToPart->getPartCombinedName () <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -2060,13 +2350,19 @@ void msrStaff::finalizeRepeatEndInStaff (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceRepeats ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Finalizing a repeat upon its end in staff \"" <<
       fStaffName <<
       "\" in part " <<
       fStaffUpLinkToPart->getPartCombinedName () <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -2091,12 +2387,18 @@ void msrStaff::createMeasureRepeatFromItsFirstMeasuresInStaff (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceRepeats ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Creating a measures repeat from it's first measure in staff \"" <<
       fStaffName <<
       "\" in part " <<
       fStaffUpLinkToPart->getPartCombinedName () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -2114,12 +2416,18 @@ void msrStaff::appendPendingMeasureRepeatToStaff (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceRepeats ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Appending the pending measures repeat to staff \"" <<
       fStaffName <<
       "\" in part " <<
       fStaffUpLinkToPart->getPartCombinedName () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -2136,7 +2444,9 @@ void msrStaff::appendMultipleFullBarRestsToStaff (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMultipleFullBarRests ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Appending a multiple full-bar rest for " <<
       mfSingularOrPlural (
         multipleFullBarRestsMeasuresNumber, "measure", "measures") <<
@@ -2146,6 +2456,10 @@ void msrStaff::appendMultipleFullBarRestsToStaff (
       fStaffUpLinkToPart->getPartCombinedName () <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -2165,11 +2479,17 @@ void msrStaff::replicateLastAppendedMeasureInStaff (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMultipleFullBarRests ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Replicating last appended measure in staff \"" <<
       fStaffName <<
       "\"" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -2189,7 +2509,9 @@ void msrStaff::addEmptyMeasuresToStaff (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMultipleFullBarRests ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Adding " <<
       mfSingularOrPlural (
         emptyMeasuresNumber,
@@ -2200,6 +2522,10 @@ void msrStaff::addEmptyMeasuresToStaff (
       fStaffUpLinkToPart->getPartCombinedName () <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -2219,12 +2545,18 @@ void msrStaff::appendPendingMultipleFullBarRestsToStaff (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMultipleFullBarRests ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Appending the pending multiple rest to staff \"" <<
       fStaffName <<
       "\" in part " <<
       fStaffUpLinkToPart->getPartCombinedName () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -2241,13 +2573,19 @@ void msrStaff::appendMultipleFullBarRestsCloneToStaff (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMultipleFullBarRests ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Appending multiple rest '" <<
       multipleFullBarRests->asString () <<
       "' to staff clone \"" <<
       fStaffName <<
       "\"" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -2265,12 +2603,18 @@ void msrStaff::appendRepeatCloneToStaff (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceRepeats ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Appending repeat clone to staff \"" <<
       fStaffName <<
       "\" in part " <<
       fStaffUpLinkToPart->getPartCombinedName () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -2286,13 +2630,19 @@ void msrStaff::appendRepeatEndingCloneToStaff (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceRepeats ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Appending a repeat ending clone to staff \"" <<
       fStaffName <<
       "\" in part " <<
       fStaffUpLinkToPart->getPartCombinedName () <<
       ", line " << repeatEndingClone->getInputLineNumber () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -2312,13 +2662,19 @@ void msrStaff::appendBarLineToStaff (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceBarLines ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Appending barLine " << barLine->asString () <<
       " to staff " <<
       fStaffName <<
       "\" in part " <<
       fStaffUpLinkToPart->getPartCombinedName () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -2337,7 +2693,9 @@ void msrStaff::appendTranspositionToStaff (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTranspositions ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Setting transposition '" <<
       transposition->asString () <<
       "' in staff " <<
@@ -2345,6 +2703,10 @@ void msrStaff::appendTranspositionToStaff (
       "\" in part " <<
       fStaffUpLinkToPart->getPartCombinedName () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -2359,7 +2721,9 @@ void msrStaff::appendTranspositionToStaff (
     if (transposition->isEqualTo (fStaffCurrentTransposition)) {
 #ifdef MF_TRACING_IS_ENABLED
       if (gGlobalTracingOahGroup->getTraceTranspositions ()) {
-        gLogStream <<
+        std::stringstream ss;
+
+        ss <<
           "Transpose '" <<
           transposition->asString () <<
           "' ignored because it is already present in staff " <<
@@ -2367,6 +2731,10 @@ void msrStaff::appendTranspositionToStaff (
           "\" in part " <<
           fStaffUpLinkToPart->getPartCombinedName () <<
           std::endl;
+
+        gWaeHandler->waeTrace (
+          __FILE__, __LINE__,
+          ss.str ());
       }
 #endif
 
@@ -2388,7 +2756,9 @@ void msrStaff::appendStaffDetailsToStaff (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceStaffDetails ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Appending staff details '" <<
       staffDetails->asShortString () <<
       "' to staff \"" <<
@@ -2396,6 +2766,10 @@ void msrStaff::appendStaffDetailsToStaff (
       "\" in part " <<
       fStaffUpLinkToPart->getPartCombinedName () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -2426,7 +2800,9 @@ void msrStaff::appendStaffDetailsToStaff (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceStaves ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Setting staff kind to '" <<
       msrStaffKindAsString (fStaffKind) <<
       "' in staff \"" <<
@@ -2434,6 +2810,10 @@ void msrStaff::appendStaffDetailsToStaff (
       "\" in part " <<
       fStaffUpLinkToPart->getPartCombinedName () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -2488,11 +2868,17 @@ void msrStaff::finalizeLastAppendedMeasureInStaff (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasures ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Finalizing last appended measure in staff \"" <<
       fStaffName <<
       "\", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -2668,11 +3054,17 @@ void msrStaff::finalizeStaff (int inputLineNumber)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceStaves ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Finalizing staff \"" <<
       fStaffName << "\"" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -2681,11 +3073,17 @@ void msrStaff::finalizeStaff (int inputLineNumber)
   // finalize the voices
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceVoices ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Finalizing the voices in staff \"" <<
       fStaffName << "\"" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -2708,12 +3106,18 @@ void msrStaff::collectStaffMeasuresIntoFlatListsVector (
   // collect measures from the staff voices
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceVoices ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Collecting measures from the staff voices into staff \"" <<
       fStaffName <<
       "'s measures flat list vector" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -2731,7 +3135,9 @@ void msrStaff::collectStaffMeasuresSlices (
       staffVoiceNumbersToAllVoicesMapSize =
         fStaffVoiceNumbersToAllVoicesMap.size ();
 
-    gLogStream <<
+    std::stringstream ss;
+
+    ss <<
       "Collecting the measures slices of staff \"" <<
       fStaffName <<
       "\", " <<
@@ -2742,6 +3148,10 @@ void msrStaff::collectStaffMeasuresSlices (
         staffVoiceNumbersToAllVoicesMapSize, "voice", "voices") <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -2764,11 +3174,17 @@ void msrStaff::collectStaffMeasuresSlices (
   for (const S_msrVoice& voice : fStaffAllVoicesList) {
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceMeasuresSlices ()) {
-      gLogStream <<
+	  	std::stringstream ss;
+
+      ss <<
         "---> voice \"" <<
         voice->getVoiceName () <<
         "\":" <<
         std::endl;
+
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif
 
@@ -2782,7 +3198,9 @@ void msrStaff::collectStaffMeasuresSlices (
 
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceMeasuresSlices ()) {
-      gLogStream <<
+	  	std::stringstream ss;
+
+      ss <<
         "---> voiceMeasuresSlicesSequence";
 
       if (voiceMeasuresSlicesSequence) {
@@ -2818,7 +3236,9 @@ void msrStaff::collectStaffMeasuresSlices (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasuresSlices ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "---> staffMeasuresSlicesSequence:" <<
       std::endl;
 
@@ -2835,9 +3255,15 @@ void msrStaff::collectStaffMeasuresSlices (
 void msrStaff::acceptIn (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrStaff::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrStaff>*
@@ -2846,9 +3272,15 @@ void msrStaff::acceptIn (basevisitor* v)
         S_msrStaff elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrStaff::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitStart (elem);
   }
@@ -2857,9 +3289,15 @@ void msrStaff::acceptIn (basevisitor* v)
 void msrStaff::acceptOut (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrStaff::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrStaff>*
@@ -2868,9 +3306,15 @@ void msrStaff::acceptOut (basevisitor* v)
         S_msrStaff elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrStaff::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitEnd (elem);
   }
@@ -2879,9 +3323,15 @@ void msrStaff::acceptOut (basevisitor* v)
 void msrStaff::browseData (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrStaff::browseData ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
 /*
@@ -2953,9 +3403,9 @@ void msrStaff::browseData (basevisitor* v)
 
       // JMI this should be done in mxsr2msrOahGroup::checkGroupOptionsConsistency () v0.9.62
       if (ignoreMsrVoicesSetIsASelected && keepMsrVoicesSetIsASelected) {
-        std::stringstream s;
+        std::stringstream ss;
 
-        s <<
+        ss <<
           "Options " <<
           ignoreMsrVoicesSetAtom->fetchNamesBetweenQuotes () <<
           " and " <<
@@ -2964,10 +3414,10 @@ void msrStaff::browseData (basevisitor* v)
           std::endl;
 
         msrError (
-          gGlobalServiceRunData->getInputSourceName (),
+          gGlobalCurrentServiceRunData->getInputSourceName (),
           voice->getInputLineNumber (),
           __FILE__, __LINE__,
-          s.str ());
+          ss.str ());
       }
 
       const std::set<std::string>&
@@ -3038,11 +3488,17 @@ void msrStaff::browseData (basevisitor* v)
       else {
 #ifdef MF_TRACING_IS_ENABLED // JMI
         if (gGlobalTracingOahGroup->getTraceVoices ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "Ignoring voice \"" <<
             voiceName <<
             "\"" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
       }
@@ -3050,17 +3506,23 @@ void msrStaff::browseData (basevisitor* v)
   }
 
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% <== msrStaff::browseData ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 }
 
 std::string msrStaff::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "[Staff \"" << fStaffName <<
     "\", fStaffKind: " <<
     msrStaffKindAsStringForPrint (fStaffKind) <<
@@ -3071,7 +3533,7 @@ std::string msrStaff::asString () const
     ']' <<
     std::endl;
 
-  return s.str ();
+  return ss.str ();
 }
 
 void msrStaff::printFull (std::ostream& os) const

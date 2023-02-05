@@ -58,16 +58,16 @@ class EXP msrDynamic : public msrElement
 
     static SMARTP<msrDynamic> create (
                             int              inputLineNumber,
-                            msrDynamicKind  dynamicKind,
+                            msrDynamicKind   dynamicKind,
                             msrPlacementKind dynamicPlacementKind);
 
     // creation from the applications
     // ------------------------------------------------------
 
     static SMARTP<msrDynamic> createDynamicFromString (
-                            int              inputLineNumber,
-                            const std::string&         dynamicsString,
-                            msrPlacementKind dynamicPlacementKind);
+                            int                inputLineNumber,
+                            const std::string& dynamicsString,
+                            msrPlacementKind   dynamicPlacementKind);
 
   protected:
 
@@ -76,7 +76,7 @@ class EXP msrDynamic : public msrElement
 
                           msrDynamic (
                             int              inputLineNumber,
-                            msrDynamicKind  dynamicKind,
+                            msrDynamicKind   dynamicKind,
                             msrPlacementKind dynamicPlacementKind);
 
     virtual               ~msrDynamic ();
@@ -86,7 +86,7 @@ class EXP msrDynamic : public msrElement
     // set and get
     // ------------------------------------------------------
 
-    msrDynamicKind       getDynamicKind () const
+    msrDynamicKind        getDynamicKind () const
                               { return fDynamicKind; }
 
     msrPlacementKind      getDynamicPlacementKind () const
@@ -135,9 +135,9 @@ class EXP msrOtherDynamic : public msrElement
     // ------------------------------------------------------
 
     static SMARTP<msrOtherDynamic> create (
-                            int              inputLineNumber,
-                            const std::string&         otherDynamicString,
-                            msrPlacementKind otherDynamicPlacementKind);
+                            int                inputLineNumber,
+                            const std::string& otherDynamicString,
+                            msrPlacementKind   otherDynamicPlacementKind);
 
   protected:
 
@@ -145,9 +145,9 @@ class EXP msrOtherDynamic : public msrElement
     // ------------------------------------------------------
 
                           msrOtherDynamic (
-                            int              inputLineNumber,
-                            const std::string&         otherDynamicString,
-                            msrPlacementKind otherDynamicPlacementKind);
+                            int                inputLineNumber,
+                            const std::string& otherDynamicString,
+                            msrPlacementKind   otherDynamicPlacementKind);
 
     virtual               ~msrOtherDynamic ();
 

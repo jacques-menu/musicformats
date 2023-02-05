@@ -127,7 +127,7 @@ void initializeMultiGenerationOutputKindsMap ()
 
 std::string availableMultiGenerationOutputKinds (size_t namesListMaxLength)
 {
-  std::stringstream s;
+  std::stringstream ss;
 
   size_t brailleOutputKindsMapSize =
     gGlobalMultiGenerationOutputKindsMap.size ();
@@ -151,25 +151,25 @@ std::string availableMultiGenerationOutputKinds (size_t namesListMaxLength)
 
       cumulatedLength += theString.size ();
       if (cumulatedLength >= namesListMaxLength) {
-        s << std::endl << gIndenter.getSpacer ();
+        ss << std::endl << gIndenter.getSpacer ();
         cumulatedLength = 0;
       }
 
       if (count == 1) {
-        s << gIndenter.getSpacer ();
+        ss << gIndenter.getSpacer ();
       }
-      s << theString;
+      ss << theString;
 
       if (count == nextToLast) {
-        s << " and ";
+        ss << " and ";
       }
       else if (count != brailleOutputKindsMapSize) {
-        s << ", ";
+        ss << ", ";
       }
     } // for
   }
 
-  return s.str ();
+  return ss.str ();
 }
 
 //______________________________________________________________________________
@@ -182,7 +182,7 @@ EXP mfMultiGenerationOutputKind fetchGeneratedOutputKindFromRunData ()
 //   // analyze the options
 //   const std::vector<oahOption>&
 //     optionsVector =
-//       gGlobalServiceRunData->
+//       gGlobalCurrentServiceRunData->
 //         getOptionsAndArguments ().getOptionsVector ();
 //
 //   if (optionsVector.size ()) {
@@ -209,13 +209,13 @@ EXP mfMultiGenerationOutputKind fetchGeneratedOutputKindFromRunData ()
 //       if (newMultiGenerationOutputKind != mfMultiGenerationOutputKind::kGeneration_UNKNOWN) {
 //         // yes, optionNameWithoutDash is a multi generators output kind
 //         if (result != mfMultiGenerationOutputKind::kGeneration_UNKNOWN) {
-//           std::stringstream s;
+//           std::stringstream ss;
 //
-//           s <<
+//           ss <<
 //             "mfMultiGenerationOutputKindAtom generated output kind specified more that once" <<
 //             std::endl;
 //
-//           oahError (s.str ());
+//           oahError (ss.str ());
 //         }
 //         else {
 //           result = newMultiGenerationOutputKind;
@@ -289,23 +289,29 @@ void mfMultiGenerationOutputKindAtom::setImplicitVariable (std::ostream& os)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "==> handling atom '" <<
       fetchNames () <<
       "; which is of type 'mfMultiGenerationOutputKindAtom'" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
   if (fSelected) {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "mfMultiGenerationOutputKindAtom generated output kind" << // JMI ???
       " set more than once" <<
       std::endl;
 
-    oahError (s.str ());
+    oahError (ss.str ());
   }
   else {
     fMultiGenerationOutputKindVariable = fMultiGenerationOutputKindValue;
@@ -318,9 +324,15 @@ void mfMultiGenerationOutputKindAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       ".\\\" ==> mfMultiGenerationOutputKindAtom::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -331,9 +343,15 @@ void mfMultiGenerationOutputKindAtom::acceptIn (basevisitor* v)
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             ".\\\" ==> Launching mfMultiGenerationOutputKindAtom::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
         p->visitStart (elem);
@@ -344,9 +362,15 @@ void mfMultiGenerationOutputKindAtom::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       ".\\\" ==> mfMultiGenerationOutputKindAtom::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -357,9 +381,15 @@ void mfMultiGenerationOutputKindAtom::acceptOut (basevisitor* v)
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             ".\\\" ==> Launching mfMultiGenerationOutputKindAtom::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
         p->visitEnd (elem);
@@ -370,35 +400,41 @@ void mfMultiGenerationOutputKindAtom::browseData (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       ".\\\" ==> mfMultiGenerationOutputKindAtom::browseData ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 }
 
 std::string mfMultiGenerationOutputKindAtom::asShortNamedOptionString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     '-' << fShortName << ' ' <<
     mfMultiGenerationOutputKindAsString (
       fMultiGenerationOutputKindVariable);
 
-  return s.str ();
+  return ss.str ();
 }
 
 std::string mfMultiGenerationOutputKindAtom::asActualLongNamedOptionString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     '-' << fLongName << ' ' <<
     mfMultiGenerationOutputKindAsString (
       fMultiGenerationOutputKindVariable);
 
-  return s.str ();
+  return ss.str ();
 }
 
 void mfMultiGenerationOutputKindAtom::print (std::ostream& os) const
@@ -442,6 +478,14 @@ void mfMultiGenerationOutputKindAtom::displayAtomWithVariableOptionsValues (
     fVariableName <<
     ": " <<
     fMultiGenerationOutputKindVariable;
+  switch (fEarlyOptionKind) {
+    case oahEarlyOptionKind::kEarlyOptionNo:
+      break;
+    case oahEarlyOptionKind::kEarlyOptionYes:
+			os <<
+				", early";
+      break;
+  } // switch
   if (fSelected) {
     os << ", selected";
   }
@@ -579,9 +623,15 @@ void mfMultiGenerationOahGroup::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       ".\\\" ==> mfMultiGenerationOahGroup::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -592,9 +642,15 @@ void mfMultiGenerationOahGroup::acceptIn (basevisitor* v)
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             ".\\\" ==> Launching mfMultiGenerationOahGroup::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
         p->visitStart (elem);
@@ -605,9 +661,15 @@ void mfMultiGenerationOahGroup::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       ".\\\" ==> mfMultiGenerationOahGroup::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -618,9 +680,15 @@ void mfMultiGenerationOahGroup::acceptOut (basevisitor* v)
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             ".\\\" ==> Launching mfMultiGenerationOahGroup::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
         p->visitEnd (elem);
@@ -631,9 +699,15 @@ void mfMultiGenerationOahGroup::browseData (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       ".\\\" ==> mfMultiGenerationOahGroup::browseData ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 }
@@ -684,9 +758,15 @@ S_multiGenerationOahGroup createGlobalMultiGenerationOahGroup ()
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Creating multi generator OAH group" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 

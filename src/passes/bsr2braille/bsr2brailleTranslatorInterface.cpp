@@ -57,9 +57,9 @@ void translateBsrToBraille (
     std::string separator =
       "%--------------------------------------------------------------";
 
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       std::endl <<
       separator <<
       std::endl <<
@@ -71,7 +71,7 @@ void translateBsrToBraille (
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 #endif
 

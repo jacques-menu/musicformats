@@ -134,11 +134,17 @@ R"(
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Initializing \"" <<
       fHandlerHeader <<
       "\" regular options handler" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -167,27 +173,27 @@ void msdlConverterInsiderHandler::initializeHandlerMultiComponent ()
 std::string msdlConverterInsiderHandler::usageInformation (
   mfMultiGenerationOutputKind multiGenerationOutputKind)
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
 R"(Usage: msdl [option]*
 )" <<
     std::endl;
 
   switch (multiGenerationOutputKind) {
     case mfMultiGenerationOutputKind::kGeneration_UNKNOWN:
-      s <<
+      ss <<
         "The help below is available whichever output is produced";
       break;
 
     default:
-      s <<
+      ss <<
         "The help below is available when generating " <<
         mfMultiGenerationOutputKindAsString (multiGenerationOutputKind) <<
         " output";
   } // switch
 
-  return s.str ();
+  return ss.str ();
 }
 
 std::string msdlConverterInsiderHandler::handlerServiceAboutInformation () const
@@ -340,11 +346,17 @@ void msdlConverterInsiderHandler::createTheMsdlConverterPrefixes ()
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Creating the msdlConverter prefixes in \"" <<
       fHandlerHeader <<
       "\"" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -358,11 +370,17 @@ void msdlConverterInsiderHandler::createTheMsdlConverterOptionGroups (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Creating the \"" <<
       fHandlerHeader <<
       "\" insider option groups" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -548,11 +566,17 @@ void msdlConverterInsiderHandler::checkOptionsAndArguments () const
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "checking options and arguments from argc/argv in \"" <<
       fHandlerHeader <<
       "\"" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -573,11 +597,17 @@ std::string msdlConverterInsiderHandler::fetchOutputFileNameFromTheOptions () co
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Fetching the output file name from the options in OAH handler \"" <<
       fHandlerHeader <<
       "\"" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -603,19 +633,25 @@ std::string msdlConverterInsiderHandler::fetchOutputFileNameFromTheOptions () co
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "msdlConverterInsiderHandler::fetchOutputFileNameFromTheOptions()" <<
       " outputFileNameHasBeenSet: " <<
       outputFileNameHasBeenSet <<
       " autoOutputFileNameHasBeenSet: " <<
       autoOutputFileNameHasBeenSet <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
   std::string
     inputSourceName =
-      gGlobalServiceRunData->getInputSourceName ();
+      gGlobalCurrentServiceRunData->getInputSourceName ();
 
   std::string outputFileName;
 
@@ -623,9 +659,9 @@ std::string msdlConverterInsiderHandler::fetchOutputFileNameFromTheOptions () co
     if (autoOutputFileNameHasBeenSet) {
       // '-o, -output-file-name' has been selected
       // '-aofn, -auto-output-file-name' has been selected
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         "options' " <<
         outputFileNameStringAtom->fetchNames () <<
         "' and '" <<
@@ -633,7 +669,7 @@ std::string msdlConverterInsiderHandler::fetchOutputFileNameFromTheOptions () co
         "' cannot be selected simultaneously" <<
         "\")";
 
-      oahError (s.str ());
+      oahError (ss.str ());
     }
     else {
       // '-o, -output-file-name' has been selected
@@ -673,21 +709,33 @@ std::string msdlConverterInsiderHandler::fetchOutputFileNameFromTheOptions () co
 
 #ifdef MF_TRACING_IS_ENABLED
       if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-        gLogStream <<
+        std::stringstream ss;
+
+        ss <<
           "msdlConverterInsiderHandler::fetchOutputFileNameFromTheOptions(): outputFileName 1 = \"" <<
           outputFileName <<
           "\"" <<
           std::endl;
+
+        gWaeHandler->waeTrace (
+          __FILE__, __LINE__,
+          ss.str ());
       }
 #endif
 
 #ifdef MF_TRACING_IS_ENABLED
       if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-        gLogStream <<
+        std::stringstream ss;
+
+        ss <<
           "msdlConverterInsiderHandler::fetchOutputFileNameFromTheOptions(): outputFileName 2 = " <<
           outputFileName <<
           "\"" <<
           std::endl;
+
+        gWaeHandler->waeTrace (
+          __FILE__, __LINE__,
+          ss.str ());
       }
 #endif
     }
@@ -789,10 +837,16 @@ std::string msdlConverterInsiderHandler::fetchOutputFileNameFromTheOptions () co
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "outputFileName: " <<
       outputFileName <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -836,33 +890,33 @@ void msdlConverterInsiderOahGroup::checkGroupOptionsConsistency ()
 /* JMI
 
   if (inputSourceName.size () > 0 && inputSourceName == outputFileName) {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "\"" << inputSourceName << "\" is both the input and output file name";
 
-    oahError (s.str ());
+    oahError (ss.str ());
   }
 
 
 
 
   if (! fOutputFileName.size ()) {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "msdlConverterInsiderOahGroup: a MusicXML output file name must be selected with '-o, -output-file-name";
 
-    oahError (s.str ());
+    oahError (ss.str ());
   }
 
-  else if (fOutputFileName == gGlobalServiceRunData->getInputSourceName ()) {
-    std::stringstream s;
+  else if (fOutputFileName == gGlobalCurrentServiceRunData->getInputSourceName ()) {
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "\"" << fOutputFileName << "\" is both the input and output file name";
 
-    oahError (s.str ());
+    oahError (ss.str ());
   }
   */
 }
@@ -872,9 +926,15 @@ void msdlConverterInsiderOahGroup::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       ".\\\" ==> msdlConverterInsiderOahGroup::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -885,9 +945,15 @@ void msdlConverterInsiderOahGroup::acceptIn (basevisitor* v)
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             ".\\\" ==> Launching msdlConverterInsiderOahGroup::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
         p->visitStart (elem);
@@ -898,9 +964,15 @@ void msdlConverterInsiderOahGroup::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       ".\\\" ==> msdlConverterInsiderOahGroup::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -911,9 +983,15 @@ void msdlConverterInsiderOahGroup::acceptOut (basevisitor* v)
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             ".\\\" ==> Launching msdlConverterInsiderOahGroup::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
         p->visitEnd (elem);
@@ -924,9 +1002,15 @@ void msdlConverterInsiderOahGroup::browseData (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       ".\\\" ==> msdlConverterInsiderOahGroup::browseData ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -1021,11 +1105,17 @@ void msdlConverterInsiderOahGroup::initializemsdlConverterInsiderOahGroup ()
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream << std::left <<
+    std::stringstream ss;
+
+    ss <<
       "Initializing \"" <<
       fGroupHeader <<
       "\" group" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -1066,9 +1156,15 @@ S_msdlConverterInsiderOahGroup createGlobalmsdlConverterInsiderOahGroup ()
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Creating global msdlConverter insider OAH group" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 

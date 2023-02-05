@@ -17,6 +17,8 @@
 #include "mfExceptions.h"
 #include "mfStringsHandling.h"
 
+#include "oahEarlyOptions.h"
+
 #include "waeInterface.h"
 
 #include "mfStaticSettings.h"
@@ -168,9 +170,15 @@ void msdlScanner::populateInputString (std::istream& inputStream)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (fTraceTokensDetails) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Populating the input std::string" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -192,13 +200,19 @@ void msdlScanner::populateInputString (std::istream& inputStream)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (fTraceTokensDetails) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "inputStringSize: " << fInputStringSize <<
       std::endl <<
       "inputString: \"" <<
       fInputString <<
       "\"" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 }
@@ -209,16 +223,16 @@ void msdlScanner::populateInputString (std::istream& inputStream)
 
 std::string msdlScanner::currentCharacterAsString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
   if (fCurrentCharacter == EOF) {
-    s << "EOF";
+    ss << "EOF";
   }
   else {
-    s << "'" << fCurrentCharacter << "'";
+    ss << "'" << fCurrentCharacter << "'";
   }
 
-  return s.str ();
+  return ss.str ();
 }
 
 // --------------------------------------------------------------------------
@@ -229,7 +243,9 @@ char msdlScanner::fetchNextCharacter ()
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (fTraceTokensDetails) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "--> fetchNextCharacter()" <<
       ", fCurrentLineNumber: " <<
       fCurrentLineNumber <<
@@ -244,6 +260,10 @@ char msdlScanner::fetchNextCharacter ()
       ", fCurrentPositionInLine: " <<
       fCurrentPositionInLine <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -265,10 +285,16 @@ char msdlScanner::fetchNextCharacter ()
 
 #ifdef MF_TRACING_IS_ENABLED
   if (fTraceTokensDetails) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "<-- fetchNextCharacter() returns: " <<
       currentCharacterAsString () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -283,13 +309,19 @@ void msdlScanner::handleEndOfLine (const std::string& context)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (fTraceTokensDetails) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "--> handleEndOfLine(): " <<
       ", context: " << context <<
       ", fCurrentLineNumber: " << fCurrentLineNumber <<
       ", fCurrentLinePositionInInput: " << fCurrentLinePositionInInput <<
       ", fCurrentPositionInLine: " << fCurrentPositionInLine <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -300,13 +332,19 @@ void msdlScanner::handleEndOfLine (const std::string& context)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (fTraceTokensDetails) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "<-- handleEndOfLine(): " <<
       ", context: " << context <<
       ", fCurrentLineNumber: " << fCurrentLineNumber <<
       ", fCurrentLinePositionInInput: " << fCurrentLinePositionInInput <<
       ", fCurrentPositionInLine: " << fCurrentPositionInLine <<
       std::endl << std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 }
@@ -323,7 +361,9 @@ msdlTokenKind msdlScanner::fetchNextToken (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (fTraceTokens) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       std::endl <<
       fTokensCounter << " ==> fetchNextToken()" <<
       ", ignoreSeparatorTokens: " <<
@@ -570,12 +610,12 @@ msdlTokenKind msdlScanner::fetchNextToken (
           fScannerWaeHandler->illegalCharacter (fCurrentCharacter);
           fSourceIsLexicallyCorrect = false;
 
-          std::stringstream s;
+          std::stringstream ss;
 
-          s << fCurrentCharacter;
+          ss << fCurrentCharacter;
 
           fCurrentTokenKind = msdlTokenKind::k_TokenMalformed;
-          fCurrentTokenDescription.setString (s.str ());
+          fCurrentTokenDescription.setString (ss.str ());
 
           fNextCharacterIsAvailable = false;
         }
@@ -583,9 +623,15 @@ msdlTokenKind msdlScanner::fetchNextToken (
 
 #ifdef MF_TRACING_IS_ENABLED
     if (fTraceTokensDetails) {
-      gLogStream <<
+      std::stringstream ss;
+
+      ss <<
         fCurrentToken.asString () <<
         std::endl;
+
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif
 
@@ -625,9 +671,15 @@ msdlTokenKind msdlScanner::fetchNextToken (
 
 #ifdef MF_TRACING_IS_ENABLED
     if (fTraceTokensDetails) {
-      gLogStream <<
+      std::stringstream ss;
+
+      ss <<
         "--- fetchNextToken(): onceMore: " << onceMore <<
         std::endl;
+
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif
 
@@ -654,7 +706,9 @@ msdlTokenKind msdlScanner::fetchNextToken (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (fTraceTokens) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       std::endl <<
       "#" << fTokensCounter << " <== fetchNextToken()" <<
       std::endl;
@@ -739,13 +793,19 @@ void msdlScanner::handlePercent ()
 
 #ifdef MF_TRACING_IS_ENABLED
         if (fTraceTokensDetails) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "percentParenthesizedCommentStartPositionInInput: " <<
             percentParenthesizedCommentStartPositionInInput <<
             std::endl <<
             "fCurrentPositionInInput: " <<
             fCurrentPositionInInput <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
 
@@ -823,12 +883,18 @@ void msdlScanner::handleSlash ()
 
 #ifdef MF_TRACING_IS_ENABLED
         if (fTraceTokensDetails) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "slashParenthesizedCommentStartPositionInInput: " <<
             slashParenthesizedCommentStartPositionInInput << std::endl <<
             "fCurrentPositionInInput: " <<
             fCurrentPositionInInput <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
 
@@ -897,11 +963,17 @@ void msdlScanner::acceptAName ()
 
 #ifdef MF_TRACING_IS_ENABLED
   if (fTraceTokensDetails) {
-    gLogStream << std::left <<
+		std::stringstream ss;
+
+    ss <<
       "Accepting a name" <<
       ", nameStartPositionInInput: " <<
       nameStartPositionInInput <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -937,10 +1009,16 @@ void msdlScanner::acceptAName ()
 
 #ifdef MF_TRACING_IS_ENABLED
   if (fTraceTokensDetails) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "--- acceptAName()" <<
       ", nameString: \"" << nameString << "\"" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
   // is nameString the name of a keyword?
@@ -952,11 +1030,17 @@ void msdlScanner::acceptAName ()
 
 #ifdef MF_TRACING_IS_ENABLED
   if (fTraceTokensDetails) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "--- acceptAName()" <<
       ", nameString: \"" << nameString << "\"" <<
       ", keyWordKind: \"" << msdlKeywordKindAsString (keyWordKind) << "\"" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -1052,9 +1136,15 @@ void msdlScanner::acceptAName ()
 
 #ifdef MF_TRACING_IS_ENABLED
   if (fTraceTokensDetails) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Accepting a name, found: \"" << nameString << "\"" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 }
@@ -1073,11 +1163,17 @@ void msdlScanner::acceptAnInteger ()
 
 #ifdef MF_TRACING_IS_ENABLED
   if (fTraceTokensDetails) {
-    gLogStream << std::left <<
+		std::stringstream ss;
+
+    ss <<
       "Accepting an integer" <<
       ", integerStartPositionInInput: " <<
       integerStartPositionInInput <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -1125,9 +1221,15 @@ void msdlScanner::acceptAnInteger ()
 
 #ifdef MF_TRACING_IS_ENABLED
   if (fTraceTokensDetails) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Accepting an integer, found: \"" << integerString << "\"" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 }
@@ -1146,11 +1248,17 @@ void msdlScanner::acceptAString ()
 
 #ifdef MF_TRACING_IS_ENABLED
   if (fTraceTokensDetails) {
-    gLogStream << std::left <<
+		std::stringstream ss;
+
+    ss <<
       std::endl <<
       "Accepting a std::string" <<
       ", stringStartPositionInInput: " << stringStartPositionInInput <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -1170,7 +1278,9 @@ void msdlScanner::acceptAString ()
   while (! endOfStringHasBeenReached) {
 #ifdef MF_TRACING_IS_ENABLED
   if (fTraceTokensDetails) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "--- acceptAString()" <<
       ", fCurrentCharacter: " <<
       currentCharacterAsString () <<
@@ -1183,6 +1293,10 @@ void msdlScanner::acceptAString ()
       ", fCurrentPositionInLine: " <<
       fCurrentPositionInLine <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -1324,10 +1438,16 @@ void msdlScanner::acceptAString ()
 
 #ifdef MF_TRACING_IS_ENABLED
   if (fTraceTokensDetails) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       std::endl <<
       "Accepting a std::string, found: \"" << theString << "\"" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 }
@@ -1341,14 +1461,18 @@ std::string msdlScanner::currentLocationAsString () const
   std::string separateur = // JMI
           "-----------------------------------------------------";
 
-  std::stringstream s;
+  std::stringstream ss;
 
 #ifdef MF_TRACING_IS_ENABLED
   if (fTraceTokens) {
-    s <<
+    ss <<
       "==> fCurrentTokenPositionInInput:" << fCurrentTokenPositionInInput <<
       ", fCurrentPositionInInput:" << fCurrentPositionInInput <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -1356,12 +1480,12 @@ std::string msdlScanner::currentLocationAsString () const
   std::string lineIndication;
 
   {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
-      gGlobalServiceRunData->getInputSourceName () << ":" << fCurrentLineNumber << ' ';
+    ss <<
+      gGlobalCurrentServiceRunData->getInputSourceName () << ":" << fCurrentLineNumber << ' ';
 
-    lineIndication = s.str ();
+    lineIndication = ss.str ();
   }
 
   // the line beginning
@@ -1379,7 +1503,7 @@ std::string msdlScanner::currentLocationAsString () const
 
 #ifdef MF_TRACING_IS_ENABLED
   if (fTraceTokens) {
-    s <<
+    ss <<
       "==> lineBeginningLength:" << lineBeginningLength <<
       std::endl <<
       "==> lineBeginning:" <<
@@ -1388,19 +1512,23 @@ std::string msdlScanner::currentLocationAsString () const
       lineBeginning <<
       "|" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
-  s <<
+  ss <<
     lineIndication <<
     lineBeginning <<
     std::endl <<
-    mfReplicateString (" ", lineIndication.size ()) <<
-    mfReplicateString (" ", lineBeginning.size ()) <<
+    mfReplicateChar (' ', lineIndication.size ()) <<
+    mfReplicateChar (' ', lineBeginning.size ()) <<
     "^" <<
     std::endl;
 
-  return s.str ();
+  return ss.str ();
 }
 
 // --------------------------------------------------------------------------
@@ -1413,12 +1541,16 @@ void msdlScanner::scanAllTheInputAtOnce (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (fTraceTokensDetails) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "==> scanAllTheInputAtOnce()";
   }
 
   if (fTraceTokensDetails) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       ", ignoreSeparatorTokens: " <<
       msdlIgnoreSeparatorTokensKindAsString (ignoreSeparatorTokens) <<
       std::endl;
@@ -1510,10 +1642,16 @@ void msdlScanner::scanAllTheInputAtOnce (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (fTraceTokensDetails) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       std::endl <<
       "<== scanAllTheInputAtOnce()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 }
@@ -1528,11 +1666,17 @@ void msdlScanner::translateAllTheInputToKeywordsLanguage (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (fTraceTokens) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "==> translateAllTheInputToKeywordsLanguage()" <<
       ", keywordsConversionLanguage: " <<
       msdlKeywordsLanguageKindAsString (keywordsConversionLanguage) <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -1633,10 +1777,16 @@ void msdlScanner::translateAllTheInputToKeywordsLanguage (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (fTraceTokens) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       std::endl <<
       "<== translateAllTheInputToKeywordsLanguage()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 }
@@ -1649,9 +1799,15 @@ void msdlScanner::scanWholeInputAtOnce ()
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (fTraceTokensDetails) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "==> scanWholeInputAtOnce()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 

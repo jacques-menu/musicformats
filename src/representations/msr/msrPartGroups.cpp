@@ -28,6 +28,7 @@
 #include "msrParts.h"
 
 #include "oahOah.h"
+#include "oahEarlyOptions.h"
 
 #include "msrOah.h"
 
@@ -194,13 +195,19 @@ msrPartGroup::msrPartGroup (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTracePartGroups ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "--------------------------------------------" <<
       std::endl <<
       "Creating part group '" << fPartGroupNumber << "'" <<
       ", partGroupAbsoluteNumber: " << fPartGroupAbsoluteNumber <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 }
@@ -267,13 +274,19 @@ msrPartGroup::msrPartGroup (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTracePartGroups ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "--------------------------------------------" <<
       std::endl <<
       "Creating part group '" << fPartGroupNumber << "'" <<
       ", partGroupAbsoluteNumber: " << fPartGroupAbsoluteNumber <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 }
@@ -287,12 +300,18 @@ S_msrPartGroup msrPartGroup::createPartGroupNewbornClone (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTracePartGroups ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "--------------------------------------------" <<
       std::endl <<
       "Creating a newborn clone part group " <<
       getPartGroupCombinedName () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -341,14 +360,14 @@ S_msrPartGroup msrPartGroup::createPartGroupNewbornClone (
 
 std::string msrPartGroup::getPartGroupCombinedName () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "PartGroup_" << fPartGroupAbsoluteNumber <<
     " ('" << fPartGroupNumber <<
     "', fPartGroupName \"" << fPartGroupName << "\")";
 
-  return s.str ();
+  return ss.str ();
 }
 
 std::string msrPartGroup::getPartGroupCombinedNameWithoutEndOfLines () const
@@ -359,9 +378,9 @@ std::string msrPartGroup::getPartGroupCombinedNameWithoutEndOfLines () const
     fPartGroupName,
     chunksList);
 
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "PartGroup_" << fPartGroupAbsoluteNumber <<
     " ('" << fPartGroupNumber <<
     "', partGroupName \"";
@@ -374,19 +393,19 @@ std::string msrPartGroup::getPartGroupCombinedNameWithoutEndOfLines () const
       i      = iBegin;
 
     for ( ; ; ) {
-      s <<(*i);
+      ss <<(*i);
       if (++i == iEnd) break;
-      s << ' ';
+      ss << ' ';
     } // for
   }
 
-  s <<
+  ss <<
     "\"" <<
     ", fPartGroupImplicitKind: " <<
     msrPartGroupImplicitKindAsString (
       fPartGroupImplicitKind);
 
-  return s.str ();
+  return ss.str ();
 }
 
 void msrPartGroup::setPartGroupInstrumentName (
@@ -424,18 +443,18 @@ void msrPartGroup::checkPartGroupElement (
       ||
     ((void*) partGroupElement) == (void*) 0x0000000000000011
   ) {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "###### partGroupElement is " <<
       (void*) partGroupElement <<
       " ######"; // JMI v0.9.63
 
     msrInternalError(
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       fInputLineNumber, // inputLineNumber // TEMP JMI v0.9.63
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 #endif
 }
@@ -454,17 +473,17 @@ S_msrPart msrPartGroup::appendPartToPartGroupByItsPartID (
 
   // has this partID already been added to this part?
   if (fPartGroupPartsMap.count (partID)) {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "partID \"" << partID <<
       "\" already exists in part group " <<
       getPartGroupCombinedName ();
 
     msrWarning ( // JMI
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
-      s.str ());
+      ss.str ());
 
     return fPartGroupPartsMap [partID];
   }
@@ -480,7 +499,9 @@ S_msrPart msrPartGroup::appendPartToPartGroupByItsPartID (
   // register it in this part group
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTracePartGroups ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Appending part " <<
       part->getPartCombinedName () <<
       " to part group '" <<
@@ -504,7 +525,9 @@ S_msrPart msrPartGroup::appendPartToPartGroupByItsPartID (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTracePartGroupsDetails ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       std::endl <<
       "After appendPartToPartGroupByItsID, fPartGroupPartsMap contains:" <<
       std::endl;
@@ -512,11 +535,13 @@ S_msrPart msrPartGroup::appendPartToPartGroupByItsPartID (
     ++gIndenter;
 
     for (
-        std::map<std::string, S_msrPart>::const_iterator i = fPartGroupPartsMap.begin ();
-        i != fPartGroupPartsMap.end ();
-        ++i
-      ) {
-      gLogStream <<
+      std::map<std::string, S_msrPart>::const_iterator i = fPartGroupPartsMap.begin ();
+      i != fPartGroupPartsMap.end ();
+      ++i
+    ) {
+      std::stringstream ss;
+
+      ss <<
         "\"" << (*i).first << "\" --% --> " <<
         (*i).second->
           getPartCombinedName () <<
@@ -525,7 +550,7 @@ S_msrPart msrPartGroup::appendPartToPartGroupByItsPartID (
 
     --gIndenter;
 
-    gLogStream <<
+    ss <<
       "After appendPartToPartGroupByItsID, fPartGroupElementsList contains:" <<
       std::endl;
 
@@ -538,7 +563,7 @@ S_msrPart msrPartGroup::appendPartToPartGroupByItsPartID (
         i      = iBegin;
 
       for ( ; ; ) {
-        gLogStream <<
+        ss <<
           (*i);
         if (++i == iEnd) break;
         gLogStream << std::endl;
@@ -546,6 +571,10 @@ S_msrPart msrPartGroup::appendPartToPartGroupByItsPartID (
     }
 
     --gIndenter;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -558,7 +587,9 @@ void msrPartGroup::appendPartToPartGroup (S_msrPart part)
   // register part in this part group
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTracePartGroups ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Adding part " <<
       part->getPartCombinedName () <<
       " to part group " << asString () <<
@@ -590,7 +621,9 @@ void msrPartGroup::removePartFromPartGroup (
   // register part in this part group
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTracePartGroups ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Removing part " <<
       partToBeRemoved->getPartCombinedName () <<
       " from part group " << asString () <<
@@ -632,18 +665,18 @@ void msrPartGroup::removePartFromPartGroup (
     }
 
     else {
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         "an element of partgroup " <<
         getPartGroupCombinedName () <<
         " is not a part group nor a part";
 
       msrInternalError (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         inputLineNumber,
         __FILE__, __LINE__,
-        s.str ());
+        ss.str ());
     }
   } // for
 
@@ -655,7 +688,9 @@ void msrPartGroup::prependSubPartGroupToPartGroup (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTracePartGroups ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Prepending (sub-)part group " << partGroup->getPartGroupNumber () <<
       " to part group " << getPartGroupNumber ()  << std::endl;
 
@@ -679,7 +714,9 @@ void msrPartGroup::appendSubPartGroupToPartGroup (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTracePartGroups ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Appending (sub-)part group " << partGroup->getPartGroupNumber () <<
       " to part group " << getPartGroupNumber ()  << std::endl;
 
@@ -753,18 +790,18 @@ void msrPartGroup::printPartGroupElementsListFull (
       }
 
       else {
-        std::stringstream s;
+        std::stringstream ss;
 
-        s <<
+        ss <<
           "an element of partgroup " <<
           getPartGroupCombinedName () <<
           " is not a part group nor a part";
 
         msrInternalError (
-          gGlobalServiceRunData->getInputSourceName (),
+          gGlobalCurrentServiceRunData->getInputSourceName (),
           inputLineNumber,
           __FILE__, __LINE__,
-          s.str ());
+          ss.str ());
       }
 
       if (++i == iEnd) break;
@@ -828,18 +865,18 @@ void msrPartGroup::printPartGroupElementsList (
       }
 
       else {
-        std::stringstream s;
+        std::stringstream ss;
 
-        s <<
+        ss <<
           "an element of partgroup " <<
           getPartGroupCombinedName () <<
           " is not a part group nor a part";
 
         msrInternalError (
-          gGlobalServiceRunData->getInputSourceName (),
+          gGlobalCurrentServiceRunData->getInputSourceName (),
           inputLineNumber,
           __FILE__, __LINE__,
-          s.str ());
+          ss.str ());
       }
 
       if (++i == iEnd) break;
@@ -860,7 +897,9 @@ S_msrPart msrPartGroup::fetchPartFromPartGroupByItsPartID (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTracePartGroupsDetails ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "fetchPartFromPartGroupByItsPartID(" << partID <<
       "), fPartGroupElementsList contains:" <<
       std::endl;
@@ -870,13 +909,17 @@ S_msrPart msrPartGroup::fetchPartFromPartGroupByItsPartID (
 //     printPartGroupElementsList ( JMI v0.9.66
     printPartGroupElementsList (
       inputLineNumber,
-      gLogStream);
+      ss);
 
     --gIndenter;
 
-    gLogStream <<
+    ss <<
       "<=- fetchPartFromPartGroupByItsPartID(" << partID << ")" <<
       std::endl << std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -921,18 +964,18 @@ S_msrPart msrPartGroup::fetchPartFromPartGroupByItsPartID (
     }
 
     else {
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         "an element of partgroup " <<
         getPartGroupCombinedName () <<
         " is not a part group nor a part";
 
       msrInternalError (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         inputLineNumber,
         __FILE__, __LINE__,
-        s.str ());
+        ss.str ());
     }
   } // for
 
@@ -980,18 +1023,18 @@ void msrPartGroup::collectPartGroupPartsList (
     }
 
     else {
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         "an element of partgroup " <<
         getPartGroupCombinedName () <<
         " is not a part group nor a part";
 
       msrInternalError (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         inputLineNumber,
         __FILE__, __LINE__,
-        s.str ());
+        ss.str ());
     }
   } // for
 }
@@ -1010,9 +1053,15 @@ void msrPartGroup::registerVoiceInPartGroupAllVoicesList (
 void msrPartGroup::acceptIn (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrPartGroup::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrPartGroup>*
@@ -1021,9 +1070,15 @@ void msrPartGroup::acceptIn (basevisitor* v)
         S_msrPartGroup elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrPartGroup::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitStart (elem);
   }
@@ -1032,9 +1087,15 @@ void msrPartGroup::acceptIn (basevisitor* v)
 void msrPartGroup::acceptOut (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrPartGroup::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrPartGroup>*
@@ -1043,9 +1104,15 @@ void msrPartGroup::acceptOut (basevisitor* v)
         S_msrPartGroup elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrPartGroup::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitEnd (elem);
   }
@@ -1054,9 +1121,15 @@ void msrPartGroup::acceptOut (basevisitor* v)
 void msrPartGroup::browseData (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrPartGroup::browseData ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   for (S_msrPartGroupElement partGroupElement : fPartGroupElementsList) {
@@ -1066,9 +1139,15 @@ void msrPartGroup::browseData (basevisitor* v)
   } // for
 
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% <== msrPartGroup::browseData ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 }
 
@@ -1178,14 +1257,14 @@ std::ostream& operator << (std::ostream& os, const msrPartGroupBarLineKind& elt)
 
 std::string msrPartGroup::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "PartGroup \"" <<
     getPartGroupCombinedName () <<
     "\", line " << fInputLineNumber;
 
-  return s.str ();
+  return ss.str ();
 }
 
 void msrPartGroup::printFull (std::ostream& os) const

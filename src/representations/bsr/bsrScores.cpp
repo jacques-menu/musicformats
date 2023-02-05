@@ -19,6 +19,7 @@
 #include "bsrScores.h"
 
 #include "oahOah.h"
+#include "oahEarlyOptions.h"
 
 #include "brailleGenerationOah.h"
 
@@ -62,9 +63,16 @@ void bsrScore::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
+      "% --> End visiting bsrTranscriptionNotesElement" <<
       "% ==> bsrScore::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -75,9 +83,15 @@ void bsrScore::acceptIn (basevisitor* v)
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching bsrScore::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
         p->visitStart (elem);
@@ -88,9 +102,16 @@ void bsrScore::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
+      "% --> End visiting bsrTranscriptionNotesElement" <<
       "% ==> bsrScore::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -101,9 +122,15 @@ void bsrScore::acceptOut (basevisitor* v)
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching bsrScore::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
         p->visitEnd (elem);
@@ -114,9 +141,16 @@ void bsrScore::browseData (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
+      "% --> End visiting bsrTranscriptionNotesElement" <<
       "% ==> bsrScore::browseData ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -139,9 +173,16 @@ void bsrScore::browseData (basevisitor* v)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
+      "% --> End visiting bsrTranscriptionNotesElement" <<
       "% <== bsrScore::browseData ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 }

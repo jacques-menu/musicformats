@@ -66,11 +66,17 @@ EXP mfMusicformatsErrorKind msrScore2musicxmlWithHandler (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Translating an MSR score to MusicXML in \"" <<
       handler->getHandlerHeader () <<
       "\"" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -131,7 +137,9 @@ EXP mfMusicformatsErrorKind msrScore2musicxmlWithHandler (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsr ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       std::endl <<
       "<!-- ----------------------------------------------------------- -->" <<
       std::endl <<
@@ -150,6 +158,10 @@ EXP mfMusicformatsErrorKind msrScore2musicxmlWithHandler (
     gLogStream <<
       "<!-- ----------------------------------------------------------- -->" <<
       std::endl << std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 

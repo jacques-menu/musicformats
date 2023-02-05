@@ -60,11 +60,17 @@ EXP mfMusicformatsErrorKind msrScore2lilypondWithHandler (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Translating an MSR score to LilyPond in \"" <<
       handler->getHandlerHeader () <<
       "\"" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -120,6 +126,10 @@ EXP mfMusicformatsErrorKind msrScore2lilypondWithHandler (
         outputFileName <<
         "\"" <<
         std::endl;
+
+//     gWaeHandler->waeTrace ( JMI v0.9.67
+//       __FILE__, __LINE__,
+//       ss.str ());
     }
 #endif
 
@@ -129,6 +139,10 @@ EXP mfMusicformatsErrorKind msrScore2lilypondWithHandler (
         err <<
           "xmlFile2lilypond() output goes to standard output" <<
           std::endl;
+
+//     gWaeHandler->waeTrace ( JMI v0.9.67
+//       __FILE__, __LINE__,
+//       ss.str ());
       }
 #endif
 
@@ -167,6 +181,10 @@ EXP mfMusicformatsErrorKind msrScore2lilypondWithHandler (
           outputFileName <<
           "\"" <<
           std::endl;
+
+//     gWaeHandler->waeTrace ( JMI v0.9.67
+//       __FILE__, __LINE__,
+//       ss.str ());
       }
 #endif
 
@@ -177,6 +195,10 @@ EXP mfMusicformatsErrorKind msrScore2lilypondWithHandler (
           std::endl <<
           gWaeHandler->openingLilypondFileForWriting (outputFileName) <<
           std::endl;
+
+//     gWaeHandler->waeTrace ( JMI v0.9.67
+//       __FILE__, __LINE__,
+//       ss.str ());
       }
 #endif
 
@@ -186,12 +208,12 @@ EXP mfMusicformatsErrorKind msrScore2lilypondWithHandler (
           std::ofstream::out);
 
       if (! outputFileStream.is_open ()) {
-        std::stringstream s;
+        std::stringstream ss;
 
-        s <<
+        ss <<
           gWaeHandler->cannotOpenLilypondFileForWriting (outputFileName);
 
-        std::string message = s.str ();
+        std::string message = ss.str ();
 
         err <<
           message <<
@@ -229,10 +251,16 @@ EXP mfMusicformatsErrorKind msrScore2lilypondWithHandler (
       // close output file
 #ifdef TRACE_OAH
       if (gtracingOah->fTracePasses) {
-        gLogStream <<
+        std::stringstream ss;
+
+        ss <<
           std::endl <<
           gWaeHandler->closingLilypondFile (outputFileName) <<
           std::endl;
+
+//     gWaeHandler->waeTrace ( JMI v0.9.67
+//       __FILE__, __LINE__,
+//       ss.str ());
       }
 #endif
 

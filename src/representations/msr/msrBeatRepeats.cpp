@@ -27,6 +27,7 @@
 #include "oahOah.h"
 
 #include "msrOah.h"
+#include "oahEarlyOptions.h"
 
 #include "msrBrowsers.h"
 
@@ -74,12 +75,18 @@ void msrBeatRepeatElement::appendSegmentToBeatRepeatElementsList ( // JMI ???
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceVoices ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Appending segment '" << segment <<
       "' to beatRepeat element elements list '" << asString () <<
       "' (" << context << ")" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -101,12 +108,18 @@ void msrBeatRepeatElement::appendBeatRepeatToBeatRepeatElementsList (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceVoices ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Appending beatRepeat '" << beatRepeat <<
       "' to beatRepeat element elements list '" << asString () <<
       "' (" << context << ")" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -128,12 +141,18 @@ void msrBeatRepeatElement::appendVoiceElementToBeatRepeatElementsList (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceVoices ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Appending voice element '" << voiceElement <<
       "' to beatRepeat element elements list '" << asString () <<
       "' (" << context << ")" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -208,18 +227,18 @@ S_msrNote msrBeatRepeatElement::fetchBeatRepeatElementFirstNonGraceNote () const
       }
 
       else {
-        std::stringstream s;
+        std::stringstream ss;
 
-        s <<
+        ss <<
           "tuplet first element should be a note, a chord or another tuplet, found instead '" <<
           element->asShortString () <<
           "'";
 
         msrInternalError (
-          gGlobalServiceRunData->getInputSourceName (),
+          gGlobalCurrentServiceRunData->getInputSourceName (),
           fInputLineNumber,
           __FILE__, __LINE__,
-          s.str ());
+          ss.str ());
       }
 
       if (++i == iEnd) break;
@@ -232,9 +251,15 @@ S_msrNote msrBeatRepeatElement::fetchBeatRepeatElementFirstNonGraceNote () const
 void msrBeatRepeatElement::acceptIn (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrBeatRepeatElement::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrBeatRepeatElement>*
@@ -243,9 +268,15 @@ void msrBeatRepeatElement::acceptIn (basevisitor* v)
         S_msrBeatRepeatElement elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrBeatRepeatElement::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitStart (elem);
   }
@@ -254,9 +285,15 @@ void msrBeatRepeatElement::acceptIn (basevisitor* v)
 void msrBeatRepeatElement::acceptOut (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrBeatRepeatElement::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrBeatRepeatElement>*
@@ -265,9 +302,15 @@ void msrBeatRepeatElement::acceptOut (basevisitor* v)
         S_msrBeatRepeatElement elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrBeatRepeatElement::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitEnd (elem);
   }
@@ -291,9 +334,9 @@ void msrBeatRepeatElement::browseData (basevisitor* v)
 
 std::string msrBeatRepeatElement::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "BeatRepeatElement" <<
     ", beatRepeat upLink: '" <<
     fBeatRepeatElementUpLinkToBeatRepeat->
@@ -301,7 +344,7 @@ std::string msrBeatRepeatElement::asString () const
     "', line " << fInputLineNumber <<
     std::endl;
 
-  return s.str ();
+  return ss.str ();
 }
 
 void msrBeatRepeatElement::printFull (std::ostream& os) const
@@ -470,13 +513,19 @@ void msrBeatRepeatPattern::setBeatRepeatPatternSegment (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceBeatRepeats ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Setting measures repeat pattern segment containing " <<
       mfSingularOrPlural (
         fetchMeasuresNumber (),
         "measure",
         "measures") <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -511,9 +560,15 @@ int msrBeatRepeatPattern::fetchMeasuresNumber () const
 void msrBeatRepeatPattern::acceptIn (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrBeatRepeatPattern::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrBeatRepeatPattern>*
@@ -522,9 +577,15 @@ void msrBeatRepeatPattern::acceptIn (basevisitor* v)
         S_msrBeatRepeatPattern elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrBeatRepeatPattern::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitStart (elem);
   }
@@ -533,9 +594,15 @@ void msrBeatRepeatPattern::acceptIn (basevisitor* v)
 void msrBeatRepeatPattern::acceptOut (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrBeatRepeatPattern::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrBeatRepeatPattern>*
@@ -544,9 +611,15 @@ void msrBeatRepeatPattern::acceptOut (basevisitor* v)
         S_msrBeatRepeatPattern elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrBeatRepeatPattern::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitEnd (elem);
   }
@@ -555,9 +628,15 @@ void msrBeatRepeatPattern::acceptOut (basevisitor* v)
 void msrBeatRepeatPattern::browseData (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrBeatRepeatPattern::browseData ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (fBeatRepeatPatternSegment) {
@@ -569,9 +648,9 @@ void msrBeatRepeatPattern::browseData (basevisitor* v)
 
 std::string msrBeatRepeatPattern::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
 
     "BeatRepeatPattern" <<
     ", line " << fInputLineNumber <<
@@ -582,7 +661,7 @@ std::string msrBeatRepeatPattern::asString () const
       "repeated measures") <<
     ")";
 
-  return s.str ();
+  return ss.str ();
 }
 
 void msrBeatRepeatPattern::print (std::ostream& os) const
@@ -669,13 +748,19 @@ void msrBeatRepeatReplicas::setBeatRepeatReplicasSegment (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceBeatRepeats ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Setting measures repeat replicas segment containing " <<
       mfSingularOrPlural (
         fetchMeasuresNumber (),
         "measure",
         "measures") <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -710,9 +795,15 @@ int msrBeatRepeatReplicas::fetchMeasuresNumber () const
 void msrBeatRepeatReplicas::acceptIn (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrBeatRepeatReplicas::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrBeatRepeatReplicas>*
@@ -721,9 +812,15 @@ void msrBeatRepeatReplicas::acceptIn (basevisitor* v)
         S_msrBeatRepeatReplicas elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrBeatRepeatReplicas::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitStart (elem);
   }
@@ -732,9 +829,15 @@ void msrBeatRepeatReplicas::acceptIn (basevisitor* v)
 void msrBeatRepeatReplicas::acceptOut (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrBeatRepeatReplicas::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrBeatRepeatReplicas>*
@@ -743,9 +846,15 @@ void msrBeatRepeatReplicas::acceptOut (basevisitor* v)
         S_msrBeatRepeatReplicas elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrBeatRepeatReplicas::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitEnd (elem);
   }
@@ -754,9 +863,15 @@ void msrBeatRepeatReplicas::acceptOut (basevisitor* v)
 void msrBeatRepeatReplicas::browseData (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrBeatRepeatReplicas::browseData ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (fBeatRepeatReplicasSegment) {
@@ -768,9 +883,9 @@ void msrBeatRepeatReplicas::browseData (basevisitor* v)
 
 std::string msrBeatRepeatReplicas::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
 
     "BeatRepeatReplicas" <<
     ", line " << fInputLineNumber <<
@@ -781,7 +896,7 @@ std::string msrBeatRepeatReplicas::asString () const
       "replicas measures") <<
     ")";
 
-  return s.str ();
+  return ss.str ();
 }
 
 void msrBeatRepeatReplicas::print (std::ostream& os) const
@@ -890,11 +1005,17 @@ S_msrBeatRepeat msrBeatRepeat::createBeatRepeatNewbornClone (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceBeatRepeats ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Creating a newborn clone of measures repeat '" <<
       asString () <<
       "'" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -922,7 +1043,9 @@ void msrBeatRepeat::setBeatRepeatPattern (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceBeatRepeats ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Setting measures repeat pattern containing " <<
       mfSingularOrPlural (
         beatRepeatPattern->
@@ -930,6 +1053,10 @@ void msrBeatRepeat::setBeatRepeatPattern (
         "measure",
         "measures") <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -953,7 +1080,9 @@ void msrBeatRepeat::setBeatRepeatReplicas (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceBeatRepeats ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Setting measures repeat replicas containing " <<
       mfSingularOrPlural (
         beatRepeatReplicas->
@@ -961,6 +1090,10 @@ void msrBeatRepeat::setBeatRepeatReplicas (
         "measure",
         "measures") <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -1031,9 +1164,15 @@ int msrBeatRepeat::fetchBeatRepeatReplicasMeasuresNumber () const
 void msrBeatRepeat::acceptIn (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrBeatRepeat::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrBeatRepeat>*
@@ -1042,9 +1181,15 @@ void msrBeatRepeat::acceptIn (basevisitor* v)
         S_msrBeatRepeat elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrBeatRepeat::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitStart (elem);
   }
@@ -1053,9 +1198,15 @@ void msrBeatRepeat::acceptIn (basevisitor* v)
 void msrBeatRepeat::acceptOut (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrBeatRepeat::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrBeatRepeat>*
@@ -1064,9 +1215,15 @@ void msrBeatRepeat::acceptOut (basevisitor* v)
         S_msrBeatRepeat elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrBeatRepeat::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitEnd (elem);
   }
@@ -1075,9 +1232,15 @@ void msrBeatRepeat::acceptOut (basevisitor* v)
 void msrBeatRepeat::browseData (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrBeatRepeat::browseData ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (fBeatRepeatPattern) {
@@ -1102,6 +1265,10 @@ void msrBeatRepeat::browseData (basevisitor* v)
       gLogStream <<
         "% ==> visiting measures repeat replicas is inhibited" <<
         std::endl;
+
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif
   }
@@ -1119,19 +1286,19 @@ void msrBeatRepeat::browseData (basevisitor* v)
 void msrBeatRepeat:: appendMeasureElementToSegmentElement (
   const S_msrMeasureElement& elem)
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "cannot append measure element " <<
     elem->asShortString () <<
     " to beat repeat " <<
     asShortString ();
 
   msrInternalError (
-    gGlobalServiceRunData->getInputSourceName (),
+    gGlobalCurrentServiceRunData->getInputSourceName (),
     fInputLineNumber,
     __FILE__, __LINE__,
-    s.str ());
+    ss.str ());
 }
 
 std::string msrBeatRepeatKindAsString (
@@ -1191,9 +1358,9 @@ std::ostream& operator << (std::ostream& os, const msrBeatRepeatBuildPhaseKind& 
 
 std::string msrBeatRepeat::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
 
     "[BeatRepeat" <<
     ", line " << fInputLineNumber <<
@@ -1212,7 +1379,7 @@ std::string msrBeatRepeat::asString () const
     ")" <<
     ']';
 
-  return s.str ();
+  return ss.str ();
 }
 
 void msrBeatRepeat::displayBeatRepeat (

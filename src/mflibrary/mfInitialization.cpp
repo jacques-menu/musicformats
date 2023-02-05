@@ -33,9 +33,15 @@ void initializeMusicFormats ()
         &&
       ! gGlobalOahEarlyOptions.getEarlyQuietOption ()
     ) {
-      gLogStream <<
+	  	std::stringstream ss;
+
+      ss <<
         "Initializing MusicFormats" <<
         std::endl;
+
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif
 

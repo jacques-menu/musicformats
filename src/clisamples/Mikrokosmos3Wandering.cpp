@@ -217,10 +217,16 @@ int main (int argc, char*  argv[])
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       serviceName << " main()" <<
       ", insiderOption: " << insiderOption <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -237,10 +243,16 @@ int main (int argc, char*  argv[])
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "==> multiGenerationOutputKind: " <<
       mfMultiGenerationOutputKindAsString (multiGenerationOutputKind) <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -305,7 +317,7 @@ int main (int argc, char*  argv[])
   // create the global run data
   // ------------------------------------------------------
 
-  gGlobalServiceRunData =
+  gGlobalCurrentServiceRunData =
     mfServiceRunData::create (
       serviceName);
 
@@ -345,9 +357,9 @@ int main (int argc, char*  argv[])
   switch (multiGenerationOutputKind) {
     case mfMultiGenerationOutputKind::kGeneration_UNKNOWN:
       {
-        std::stringstream s;
+        std::stringstream ss;
 
-        s <<
+        ss <<
           serviceName <<
           " needs the output kind to be suplied thru one of the options" <<
           " '-" << K_GENERATED_OUTPUT_KIND_GUIDO_NAME << "'" <<
@@ -357,7 +369,7 @@ int main (int argc, char*  argv[])
           " or '-" << K_GENERATED_OUTPUT_KIND_MIDI_NAME << "'" <<
           ", otherwise the run is a pure help one";
 
-        oahWarning (s.str ());
+        oahWarning (ss.str ());
       }
       break;
 
@@ -420,7 +432,7 @@ int main (int argc, char*  argv[])
 
   gLogStream <<
     "Time is " <<
-    gGlobalServiceRunData->getRunDateFull () <<
+    gGlobalCurrentServiceRunData->getRunDateFull () <<
     std::endl;
 
   gLogStream <<
@@ -466,10 +478,16 @@ int main (int argc, char*  argv[])
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "==> generationAPIKind: " <<
       msrGenerationAPIKindAsString (theGenerationAPIKind) <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -483,7 +501,10 @@ int main (int argc, char*  argv[])
   if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
     std::string separator =
       "%--------------------------------------------------------------";
-    gLogStream <<
+
+		std::stringstream ss;
+
+    ss <<
       std::endl <<
       separator <<
       std::endl <<
@@ -495,6 +516,10 @@ int main (int argc, char*  argv[])
       std::endl <<
       separator <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 

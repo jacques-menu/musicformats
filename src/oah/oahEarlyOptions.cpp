@@ -82,10 +82,16 @@ void oahEarlyOptions::setEarlyLanguageKind (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (fTraceEarlyOptions) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Setting fEarlyLanguageKind to " <<
       languageKind <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -94,13 +100,13 @@ void oahEarlyOptions::setEarlyLanguageKind (
   switch (fEarlyLanguageKind) {
     case mfLanguageKind::kMusicFormatsLanguage_UNKNOWN:
       {
-        std::stringstream s;
+        std::stringstream ss;
 
-        s <<
+        ss <<
           "Attempt at setting fEarlyLanguageKind to kMusicFormatsLanguage_UNKNOWN" <<
           std::endl;
 
-        oahError (s.str ());
+        oahError (ss.str ());
       }
       break;
     case mfLanguageKind::kMusicFormatsLanguageEnglish: // default value
@@ -132,9 +138,15 @@ void oahEarlyOptions::setEarlyInsiderOption ()
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (fTraceEarlyOptions) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Setting fEarlyInsiderOption" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -170,9 +182,15 @@ void oahEarlyOptions::setEarlyQuietOption ()
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (fTraceEarlyOptions) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Setting fEarlyQuietOption" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -185,9 +203,15 @@ void oahEarlyOptions::setEarlyMultiGenerationOutputKind (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (fTraceEarlyOptions) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Setting fEarlyMultiGenerationOutputKind" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -202,11 +226,17 @@ void oahEarlyOptions::appendEarlyIncludeFileName (std::string includeFileName)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (fTraceEarlyOptions) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Appending fEarlyIncludeFileName [" <<
       includeFileName <<
       ']' <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -238,9 +268,15 @@ void oahEarlyOptions::setEarlyOahVerboseMode ()
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (fTraceEarlyOptions) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Setting fEarlyOahVerboseMode" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -255,9 +291,15 @@ void oahEarlyOptions::setEarlyTracingOah ()
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (fTraceEarlyOptions) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Setting fEarlyTracingOah" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -272,9 +314,15 @@ void oahEarlyOptions::setEarlyTracingOahDetails ()
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (fTraceEarlyOptions) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Setting fEarlyTracingOahDetails" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -289,9 +337,15 @@ void oahEarlyOptions::setEarlyTraceComponents ()
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (fTraceEarlyOptions) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Setting fEarlyTraceComponents" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -305,7 +359,9 @@ const std::string K_TRACE_PASSES_OPTION_SHORT_NAME = "tpasses";
 void oahEarlyOptions::setEarlyTracePasses ()
 {
   if (fTraceEarlyOptions) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Setting fEarlyTracePasses" <<
       std::endl;
   }
@@ -319,7 +375,9 @@ const std::string K_TRACE_ONLY_PASS_OPTION_SHORT_NAME = "topass";
 void oahEarlyOptions::setEarlyTraceOnlyPass (mfPassIDKind passIDKind)
 {
   if (fTraceEarlyOptions) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Setting fEarlyTraceOnlyPass to " << passIDKind <<
       std::endl;
   }
@@ -347,11 +405,17 @@ Bool oahEarlyOptions::isEarlyOptionRecognized (
   if (theString == optionName) {
 #ifdef MF_TRACING_IS_ENABLED
     if (fTraceEarlyOptions) {
-      gLogStream <<
+      std::stringstream ss;
+
+      ss <<
         "Option '-" <<
         optionName <<
         "' has been recognized early" <<
         std::endl;
+
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif
 
@@ -553,12 +617,18 @@ void oahEarlyOptions::applyEarlyOptionsIfPresentInArgcArgv (
     if (argumentIsAnOption) {
 #ifdef MF_TRACING_IS_ENABLED
       if (getTraceEarlyOptions ()) {
-          gLogStream <<
-            "argumentIsAnOption, " <<
-            serviceName << " main()" <<
-            ", argumentWithoutDash: '" << argumentWithoutDash <<
-            "'" <<
-            std::endl;
+        std::stringstream ss;
+
+        ss <<
+          "argumentIsAnOption, " <<
+          serviceName << " main()" <<
+          ", argumentWithoutDash: '" << argumentWithoutDash <<
+          "'" <<
+          std::endl;
+
+        gWaeHandler->waeTrace (
+          __FILE__, __LINE__,
+          ss.str ());
       }
 #endif
 
@@ -593,7 +663,9 @@ void oahEarlyOptions::applyEarlyOptionsIfPresentInArgcArgv (
 
 #ifdef MF_TRACING_IS_ENABLED
       if (getTraceEarlyOptions ()) {
-        gLogStream <<
+        std::stringstream ss;
+
+        ss <<
           serviceName <<
           " applyEarlyOptionsIfPresentInArgcArgv()" <<
           ", argumentWithoutDash: '" <<
@@ -604,6 +676,10 @@ void oahEarlyOptions::applyEarlyOptionsIfPresentInArgcArgv (
           argumentWithoutDashToBeUsed <<
           "'" <<
           std::endl;
+
+        gWaeHandler->waeTrace (
+          __FILE__, __LINE__,
+          ss.str ());
       }
 #endif
 
@@ -650,7 +726,7 @@ void oahEarlyOptions::applyEarlyOptionsIfPresentInOptionsAndArguments (
         mfSingularOrPluralWithoutNumber (
           argumentsNumber, "argument", "arguments") <<
         " in handler arguments vector for " <<
-        gGlobalServiceRunData->getServiceName () <<
+        gGlobalCurrentServiceRunData->getServiceName () <<
         ":" <<
         std::endl;
 
@@ -696,12 +772,18 @@ void oahEarlyOptions::applyEarlyOptionsIfPresentInOptionsAndArguments (
     if (argumentIsAnOption) {
 #ifdef MF_TRACING_IS_ENABLED
       if (getTraceEarlyOptions ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "argumentIsAnOption, " <<
             "??? serviceName" << " main()" <<
             ", argumentWithoutDash: '" << argumentWithoutDash <<
             "'" <<
             std::endl;
+
+        gWaeHandler->waeTrace (
+          __FILE__, __LINE__,
+          ss.str ());
       }
 #endif
 
@@ -736,7 +818,9 @@ void oahEarlyOptions::applyEarlyOptionsIfPresentInOptionsAndArguments (
 
 #ifdef MF_TRACING_IS_ENABLED
       if (getTraceEarlyOptions ()) {
-        gLogStream <<
+        std::stringstream ss;
+
+        ss <<
           "??? serviceName" <<
           " applyEarlyOptionsIfPresentInArgcArgv()" <<
           ", argumentWithoutDash: '" <<
@@ -747,6 +831,10 @@ void oahEarlyOptions::applyEarlyOptionsIfPresentInOptionsAndArguments (
           argumentWithoutDashToBeUsed <<
           "'" <<
           std::endl;
+
+        gWaeHandler->waeTrace (
+          __FILE__, __LINE__,
+          ss.str ());
       }
 #endif
 

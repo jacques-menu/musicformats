@@ -22,6 +22,7 @@
 #include "mfAssert.h"
 
 #include "oahOah.h"
+#include "oahEarlyOptions.h"
 
 #include "msrOah.h"
 
@@ -88,11 +89,17 @@ msrTransposition::msrTransposition (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTranspositions ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Creating transpose '" <<
       asString () <<
       "'" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 }
@@ -154,9 +161,15 @@ Bool msrTransposition::isEqualTo (
 void msrTransposition::acceptIn (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrTransposition::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrTransposition>*
@@ -165,9 +178,15 @@ void msrTransposition::acceptIn (basevisitor* v)
         S_msrTransposition elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrTransposition::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitStart (elem);
   }
@@ -176,9 +195,15 @@ void msrTransposition::acceptIn (basevisitor* v)
 void msrTransposition::acceptOut (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrTransposition::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrTransposition>*
@@ -187,9 +212,15 @@ void msrTransposition::acceptOut (basevisitor* v)
         S_msrTransposition elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrTransposition::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitEnd (elem);
   }
@@ -200,9 +231,9 @@ void msrTransposition::browseData (basevisitor* v)
 
 std::string msrTransposition::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "[Transpose" <<
     ", fTranspositionDiatonic: " << fTranspositionDiatonic <<
     ", fTranspositionChromatic: " << fTranspositionChromatic <<
@@ -211,7 +242,7 @@ std::string msrTransposition::asString () const
     ", line " << fInputLineNumber <<
     ']';
 
-  return s.str ();
+  return ss.str ();
 }
 
 void msrTransposition::print (std::ostream& os) const

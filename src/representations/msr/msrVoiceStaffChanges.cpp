@@ -22,6 +22,7 @@
 #include "msrVoiceStaffChanges.h"
 
 #include "oahOah.h"
+#include "oahEarlyOptions.h"
 
 #include "msrOah.h"
 
@@ -72,11 +73,17 @@ S_msrVoiceStaffChange msrVoiceStaffChange::createStaffChangeNewbornClone ()
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceStaffChanges ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Creating a newborn clone of voice staff change '" <<
       asString () <<
       "'" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -123,9 +130,15 @@ void msrVoiceStaffChange::setVoiceStaffChangeUpLinkToMeasure (
 void msrVoiceStaffChange::acceptIn (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrVoiceStaffChange::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrVoiceStaffChange>*
@@ -134,9 +147,15 @@ void msrVoiceStaffChange::acceptIn (basevisitor* v)
         S_msrVoiceStaffChange elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrVoiceStaffChange::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitStart (elem);
   }
@@ -145,9 +164,15 @@ void msrVoiceStaffChange::acceptIn (basevisitor* v)
 void msrVoiceStaffChange::acceptOut (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrVoiceStaffChange::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrVoiceStaffChange>*
@@ -156,9 +181,15 @@ void msrVoiceStaffChange::acceptOut (basevisitor* v)
         S_msrVoiceStaffChange elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrVoiceStaffChange::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitEnd (elem);
   }
@@ -169,15 +200,15 @@ void msrVoiceStaffChange::browseData (basevisitor* v)
 
 std::string msrVoiceStaffChange::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "VoiceStaffChange" <<
     ", line " << fInputLineNumber <<
     ", " <<
     "staffToChangeTo: \"" << fStaffToChangeTo->getStaffName () << "\"";
 
-  return s.str ();
+  return ss.str ();
 }
 
 void msrVoiceStaffChange::print (std::ostream& os) const

@@ -80,9 +80,15 @@ void msrIgnorePartAtom::applyAtomWithValue (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "==> oahAtom is of type 'msrIgnorePartAtom'" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -92,9 +98,15 @@ void msrIgnorePartAtom::applyAtomWithValue (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "--> partName = \"" << partName << "\", " <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -105,15 +117,15 @@ void msrIgnorePartAtom::applyAtomWithValue (
 
   if (it != fStringSetVariable.end ()) {
     // yes, issue error message
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "Part \"" << partName << "\" occurs more that once" <<
       " in the " <<
       fetchNamesBetweenQuotes () <<
       " option";
 
-    oahError (s.str ());
+    oahError (ss.str ());
   }
 
   else {
@@ -127,9 +139,15 @@ void msrIgnorePartAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       ".\\\" ==> msrIgnorePartAtom::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -140,9 +158,15 @@ void msrIgnorePartAtom::acceptIn (basevisitor* v)
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             ".\\\" ==> Launching msrIgnorePartAtom::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
         p->visitStart (elem);
@@ -153,9 +177,15 @@ void msrIgnorePartAtom::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       ".\\\" ==> msrIgnorePartAtom::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -166,9 +196,15 @@ void msrIgnorePartAtom::acceptOut (basevisitor* v)
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             ".\\\" ==> Launching msrIgnorePartAtom::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
         p->visitEnd (elem);
@@ -179,22 +215,28 @@ void msrIgnorePartAtom::browseData (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       ".\\\" ==> msrIgnorePartAtom::browseData ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 }
 
 std::string msrIgnorePartAtom::asShortNamedOptionString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     '-' << fShortName << ' ';
 
   if (! fStringSetVariable.size ()) {
-    s << "[EMPTY]";
+    ss << "[EMPTY]";
   }
   else {
     std::set<std::string>::const_iterator
@@ -202,24 +244,24 @@ std::string msrIgnorePartAtom::asShortNamedOptionString () const
       iEnd   = fStringSetVariable.end (),
       i      = iBegin;
     for ( ; ; ) {
-      s << (*i);
+      ss << (*i);
       if (++i == iEnd) break;
-      s << ",";
+      ss << ",";
     } // for
   }
 
-  return s.str ();
+  return ss.str ();
 }
 
 std::string msrIgnorePartAtom::asActualLongNamedOptionString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     '-' << fLongName << ' ';
 
   if (! fStringSetVariable.size ()) {
-    s << "[EMPTY]";
+    ss << "[EMPTY]";
   }
   else {
     std::set<std::string>::const_iterator
@@ -227,13 +269,13 @@ std::string msrIgnorePartAtom::asActualLongNamedOptionString () const
       iEnd   = fStringSetVariable.end (),
       i      = iBegin;
     for ( ; ; ) {
-      s << (*i);
+      ss << (*i);
       if (++i == iEnd) break;
-      s << ",";
+      ss << ",";
     } // for
   }
 
-  return s.str ();
+  return ss.str ();
 }
 
 void msrIgnorePartAtom::print (std::ostream& os) const
@@ -375,9 +417,15 @@ void msrKeepPartAtom::applyAtomWithValue (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "==> oahAtom is of type 'msrKeepPartAtom'" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -387,9 +435,15 @@ void msrKeepPartAtom::applyAtomWithValue (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "--> partName = \"" << partName << "\", " <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -400,15 +454,15 @@ void msrKeepPartAtom::applyAtomWithValue (
 
   if (it != fStringSetVariable.end ()) {
     // yes, issue error message
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "Part \"" << partName << "\" occurs more that once" <<
       " in the " <<
       fetchNamesBetweenQuotes () <<
       " option";
 
-    oahError (s.str ());
+    oahError (ss.str ());
   }
 
   else {
@@ -422,9 +476,15 @@ void msrKeepPartAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       ".\\\" ==> msrKeepPartAtom::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -435,9 +495,15 @@ void msrKeepPartAtom::acceptIn (basevisitor* v)
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             ".\\\" ==> Launching msrKeepPartAtom::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
         p->visitStart (elem);
@@ -448,9 +514,15 @@ void msrKeepPartAtom::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       ".\\\" ==> msrKeepPartAtom::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -461,9 +533,15 @@ void msrKeepPartAtom::acceptOut (basevisitor* v)
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             ".\\\" ==> Launching msrKeepPartAtom::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
         p->visitEnd (elem);
@@ -474,22 +552,28 @@ void msrKeepPartAtom::browseData (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       ".\\\" ==> msrKeepPartAtom::browseData ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 }
 
 std::string msrKeepPartAtom::asShortNamedOptionString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     '-' << fShortName << ' ';
 
   if (! fStringSetVariable.size ()) {
-    s << "[EMPTY]";
+    ss << "[EMPTY]";
   }
   else {
     std::set<std::string>::const_iterator
@@ -497,24 +581,24 @@ std::string msrKeepPartAtom::asShortNamedOptionString () const
       iEnd   = fStringSetVariable.end (),
       i      = iBegin;
     for ( ; ; ) {
-      s << (*i);
+      ss << (*i);
       if (++i == iEnd) break;
-      s << ",";
+      ss << ",";
     } // for
   }
 
-  return s.str ();
+  return ss.str ();
 }
 
 std::string msrKeepPartAtom::asActualLongNamedOptionString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     '-' << fLongName << ' ';
 
   if (! fStringSetVariable.size ()) {
-    s << "[EMPTY]";
+    ss << "[EMPTY]";
   }
   else {
     std::set<std::string>::const_iterator
@@ -522,13 +606,13 @@ std::string msrKeepPartAtom::asActualLongNamedOptionString () const
       iEnd   = fStringSetVariable.end (),
       i      = iBegin;
     for ( ; ; ) {
-      s << (*i);
+      ss << (*i);
       if (++i == iEnd) break;
-      s << ",";
+      ss << ",";
     } // for
   }
 
-  return s.str ();
+  return ss.str ();
 }
 
 void msrKeepPartAtom::print (std::ostream& os) const
@@ -982,9 +1066,15 @@ void msr2msrOahGroup::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       ".\\\" ==> msr2msrOahGroup::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -995,9 +1085,15 @@ void msr2msrOahGroup::acceptIn (basevisitor* v)
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             ".\\\" ==> Launching msr2msrOahGroup::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
         p->visitStart (elem);
@@ -1008,9 +1104,15 @@ void msr2msrOahGroup::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       ".\\\" ==> msr2msrOahGroup::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -1021,9 +1123,15 @@ void msr2msrOahGroup::acceptOut (basevisitor* v)
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             ".\\\" ==> Launching msr2msrOahGroup::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
         p->visitEnd (elem);
@@ -1034,9 +1142,15 @@ void msr2msrOahGroup::browseData (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       ".\\\" ==> msr2msrOahGroup::browseData ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 }
@@ -1191,9 +1305,15 @@ S_msr2msrOahGroup createGlobalMsr2msrOahGroup ()
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Creating global msr2msr OAH group" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 

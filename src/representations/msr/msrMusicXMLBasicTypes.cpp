@@ -24,6 +24,9 @@
 #include "msrBrowsers.h"
 #include "msrMeasureConstants.h"
 #include "msrMusicXMLBasicTypes.h"
+
+#include "oahEarlyOptions.h"
+
 #include "msrOah.h"
 
 
@@ -53,17 +56,17 @@ msrXMLLangKind msrXMLLangKindFromString (
     result = msrXMLLangKind::kXMLLangLa;
   else {
     if (XMLLangString.size ()) {
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         "xml:lang value '" << XMLLangString <<
         "' should be 'it', 'en', 'de' or 'fr'";
 
       msrError (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         inputLineNumber,
         __FILE__, __LINE__,
-        s.str ());
+        ss.str ());
     }
   }
 
@@ -343,17 +346,17 @@ void msrPageLayout::setOddMarginsGroup (
   const S_msrMarginsGroup& val)
 {
   if (fBothMarginsGroup) {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "setting an odd margins group when there is already a both margins group in " <<
       this->asString ();
 
     msrError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 
   fOddMarginsGroup = val;
@@ -364,17 +367,17 @@ void msrPageLayout::setEvenMarginsGroup (
   const S_msrMarginsGroup& val)
 {
   if (fBothMarginsGroup) {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "setting an even margins group when there is already a both margins group in " <<
       this->asString ();
 
     msrError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 
   fEvenMarginsGroup = val;
@@ -385,17 +388,17 @@ void msrPageLayout::setBothMarginsGroup (
   const S_msrMarginsGroup& val)
 {
   if (fOddMarginsGroup || fEvenMarginsGroup) {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "setting a both margins group when there is already an odd or even margins group in " <<
       this->asString ();
 
     msrError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 
   fBothMarginsGroup = val;
@@ -477,9 +480,15 @@ S_msrMargin msrPageLayout::getSingleBottomMargin () const
 void msrPageLayout::acceptIn (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrPageLayout::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrPageLayout>*
@@ -488,9 +497,15 @@ void msrPageLayout::acceptIn (basevisitor* v)
         S_msrPageLayout elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrPageLayout::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitStart (elem);
   }
@@ -499,9 +514,15 @@ void msrPageLayout::acceptIn (basevisitor* v)
 void msrPageLayout::acceptOut (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrPageLayout::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrPageLayout>*
@@ -510,9 +531,15 @@ void msrPageLayout::acceptOut (basevisitor* v)
         S_msrPageLayout elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrPageLayout::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitEnd (elem);
   }
@@ -543,14 +570,14 @@ void msrPageLayout::browseData (basevisitor* v)
 
 std::string msrPageLayout::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "[PageLayout" <<
     ", line " << fInputLineNumber <<
     ']';
 
-  return s.str ();
+  return ss.str ();
 }
 
 void msrPageLayout::print (std::ostream& os) const
@@ -654,9 +681,15 @@ msrSystemLayout::~msrSystemLayout ()
 void msrSystemLayout::acceptIn (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrSystemLayout::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrSystemLayout>*
@@ -665,9 +698,15 @@ void msrSystemLayout::acceptIn (basevisitor* v)
         S_msrSystemLayout elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrSystemLayout::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitStart (elem);
   }
@@ -676,9 +715,15 @@ void msrSystemLayout::acceptIn (basevisitor* v)
 void msrSystemLayout::acceptOut (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrSystemLayout::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrSystemLayout>*
@@ -687,9 +732,15 @@ void msrSystemLayout::acceptOut (basevisitor* v)
         S_msrSystemLayout elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrSystemLayout::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitEnd (elem);
   }
@@ -710,14 +761,14 @@ void msrSystemLayout::browseData (basevisitor* v)
 
 std::string msrSystemLayout::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "[SystemLayout" <<
     ", line " << fInputLineNumber <<
     ']';
 
-  return s.str ();
+  return ss.str ();
 }
 
 void msrSystemLayout::print (std::ostream& os) const
@@ -816,9 +867,15 @@ msrSystemDividers::~msrSystemDividers ()
 void msrSystemDividers::acceptIn (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrSystemDividers::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrSystemDividers>*
@@ -827,9 +884,15 @@ void msrSystemDividers::acceptIn (basevisitor* v)
         S_msrSystemDividers elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrSystemDividers::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitStart (elem);
   }
@@ -838,9 +901,15 @@ void msrSystemDividers::acceptIn (basevisitor* v)
 void msrSystemDividers::acceptOut (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrSystemDividers::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrSystemDividers>*
@@ -849,9 +918,15 @@ void msrSystemDividers::acceptOut (basevisitor* v)
         S_msrSystemDividers elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrSystemDividers::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitEnd (elem);
   }
@@ -862,14 +937,14 @@ void msrSystemDividers::browseData (basevisitor* v)
 
 std::string msrSystemDividers::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "[SystemDividers" <<
     ", line " << fInputLineNumber <<
     ']';
 
-  return s.str ();
+  return ss.str ();
 }
 
 void msrSystemDividers::print (std::ostream& os) const
@@ -932,9 +1007,15 @@ msrStaffLayout::~msrStaffLayout ()
 void msrStaffLayout::acceptIn (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrStaffLayout::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrStaffLayout>*
@@ -943,9 +1024,15 @@ void msrStaffLayout::acceptIn (basevisitor* v)
         S_msrStaffLayout elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrStaffLayout::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitStart (elem);
   }
@@ -954,9 +1041,15 @@ void msrStaffLayout::acceptIn (basevisitor* v)
 void msrStaffLayout::acceptOut (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrStaffLayout::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrStaffLayout>*
@@ -965,9 +1058,15 @@ void msrStaffLayout::acceptOut (basevisitor* v)
         S_msrStaffLayout elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrStaffLayout::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitEnd (elem);
   }
@@ -978,15 +1077,15 @@ void msrStaffLayout::browseData (basevisitor* v)
 
 std::string msrStaffLayout::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "[StaffLayout" <<
     ", fStaffDistance: " << fStaffDistance <<
     ", line " << fInputLineNumber <<
     ']';
 
-  return s.str ();
+  return ss.str ();
 }
 
 void msrStaffLayout::print (std::ostream& os) const
@@ -1051,9 +1150,15 @@ msrMeasureLayout::~msrMeasureLayout ()
 void msrMeasureLayout::acceptIn (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrMeasureLayout::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrMeasureLayout>*
@@ -1062,9 +1167,15 @@ void msrMeasureLayout::acceptIn (basevisitor* v)
         S_msrMeasureLayout elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrMeasureLayout::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitStart (elem);
   }
@@ -1073,9 +1184,15 @@ void msrMeasureLayout::acceptIn (basevisitor* v)
 void msrMeasureLayout::acceptOut (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrMeasureLayout::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrMeasureLayout>*
@@ -1084,9 +1201,15 @@ void msrMeasureLayout::acceptOut (basevisitor* v)
         S_msrMeasureLayout elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrMeasureLayout::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitEnd (elem);
   }
@@ -1097,15 +1220,15 @@ void msrMeasureLayout::browseData (basevisitor* v)
 
 std::string msrMeasureLayout::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "[MeasureLayout" <<
     ", fMeasureDistance: " << fMeasureDistance <<
     ", line " << fInputLineNumber <<
     ']';
 
-  return s.str ();
+  return ss.str ();
 }
 
 void msrMeasureLayout::print (std::ostream& os) const
@@ -1162,9 +1285,15 @@ msrLineWidth::msrLineWidth (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMusicXMLPrintLayouts ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Creating a print layout " <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -1178,9 +1307,15 @@ msrLineWidth::~msrLineWidth ()
 void msrLineWidth::acceptIn (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrLineWidth::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrLineWidth>*
@@ -1189,9 +1324,15 @@ void msrLineWidth::acceptIn (basevisitor* v)
         S_msrLineWidth elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrLineWidth::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitStart (elem);
   }
@@ -1200,9 +1341,15 @@ void msrLineWidth::acceptIn (basevisitor* v)
 void msrLineWidth::acceptOut (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrLineWidth::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrLineWidth>*
@@ -1211,9 +1358,15 @@ void msrLineWidth::acceptOut (basevisitor* v)
         S_msrLineWidth elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrLineWidth::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitEnd (elem);
   }
@@ -1224,23 +1377,23 @@ void msrLineWidth::browseData (basevisitor* v)
 
 std::string msrLineWidth::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "[LineWidth" <<
     ", fLineWidthTypeKind: " << fLineWidthTypeKind <<
      ", lineWidthValue: ";
     if (fLineWidthValue) {
-      s << fLineWidthValue->asString();
+      ss << fLineWidthValue->asString();
     }
     else {
-      s << "[NONE]";
+      ss << "[NONE]";
     }
-  s <<
+  ss <<
     ", line " << fInputLineNumber <<
     ']';
 
-  return s.str ();
+  return ss.str ();
 }
 
 void msrLineWidth::print (std::ostream& os) const
@@ -1309,9 +1462,15 @@ msrNoteSize::msrNoteSize (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMusicXMLPrintLayouts ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Creating a print layout " <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -1325,9 +1484,15 @@ msrNoteSize::~msrNoteSize ()
 void msrNoteSize::acceptIn (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrNoteSize::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrNoteSize>*
@@ -1336,9 +1501,15 @@ void msrNoteSize::acceptIn (basevisitor* v)
         S_msrNoteSize elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrNoteSize::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitStart (elem);
   }
@@ -1347,9 +1518,15 @@ void msrNoteSize::acceptIn (basevisitor* v)
 void msrNoteSize::acceptOut (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrNoteSize::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrNoteSize>*
@@ -1358,9 +1535,15 @@ void msrNoteSize::acceptOut (basevisitor* v)
         S_msrNoteSize elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrNoteSize::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitEnd (elem);
   }
@@ -1371,16 +1554,16 @@ void msrNoteSize::browseData (basevisitor* v)
 
 std::string msrNoteSize::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "[NoteSize" <<
     ", fNoteSizeTypeKind: " << fNoteSizeTypeKind <<
     ", fNoteSizeValue: " << fNoteSizeValue <<
     ", line " << fInputLineNumber <<
     ']';
 
-  return s.str ();
+  return ss.str ();
 }
 
 void msrNoteSize::print (std::ostream& os) const
@@ -1443,9 +1626,15 @@ msrDistance::msrDistance (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMusicXMLPrintLayouts ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Creating a print layout " <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -1459,9 +1648,15 @@ msrDistance::~msrDistance ()
 void msrDistance::acceptIn (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrDistance::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrDistance>*
@@ -1470,9 +1665,15 @@ void msrDistance::acceptIn (basevisitor* v)
         S_msrDistance elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrDistance::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitStart (elem);
   }
@@ -1481,9 +1682,15 @@ void msrDistance::acceptIn (basevisitor* v)
 void msrDistance::acceptOut (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrDistance::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrDistance>*
@@ -1492,9 +1699,15 @@ void msrDistance::acceptOut (basevisitor* v)
         S_msrDistance elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrDistance::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitEnd (elem);
   }
@@ -1505,16 +1718,16 @@ void msrDistance::browseData (basevisitor* v)
 
 std::string msrDistance::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "[Distance" <<
     ", fDistanceTypeKind: " << fDistanceTypeKind <<
     ", fDistanceValue: " << fDistanceValue <<
     ", line " << fInputLineNumber <<
     ']';
 
-  return s.str ();
+  return ss.str ();
 }
 
 void msrDistance::print (std::ostream& os) const
@@ -1577,9 +1790,15 @@ msrGlyph::msrGlyph (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMusicXMLPrintLayouts ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Creating a print layout " <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -1593,9 +1812,15 @@ msrGlyph::~msrGlyph ()
 void msrGlyph::acceptIn (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrGlyph::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrGlyph>*
@@ -1604,9 +1829,15 @@ void msrGlyph::acceptIn (basevisitor* v)
         S_msrGlyph elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrGlyph::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitStart (elem);
   }
@@ -1615,9 +1846,15 @@ void msrGlyph::acceptIn (basevisitor* v)
 void msrGlyph::acceptOut (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrGlyph::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrGlyph>*
@@ -1626,9 +1863,15 @@ void msrGlyph::acceptOut (basevisitor* v)
         S_msrGlyph elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrGlyph::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitEnd (elem);
   }
@@ -1639,16 +1882,16 @@ void msrGlyph::browseData (basevisitor* v)
 
 std::string msrGlyph::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "[Glyph" <<
     ", fGlyphTypeKind: " << fGlyphTypeKind <<
      ", fGlyphValue: " << fGlyphValue <<
     ", line " << fInputLineNumber <<
     ']';
 
-  return s.str ();
+  return ss.str ();
 }
 
 void msrGlyph::print (std::ostream& os) const
@@ -1711,9 +1954,15 @@ msrOtherAppearance::msrOtherAppearance (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMusicXMLPrintLayouts ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Creating a print layout " <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -1727,9 +1976,15 @@ msrOtherAppearance::~msrOtherAppearance ()
 void msrOtherAppearance::acceptIn (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrOtherAppearance::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrOtherAppearance>*
@@ -1738,9 +1993,15 @@ void msrOtherAppearance::acceptIn (basevisitor* v)
         S_msrOtherAppearance elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrOtherAppearance::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitStart (elem);
   }
@@ -1749,9 +2010,15 @@ void msrOtherAppearance::acceptIn (basevisitor* v)
 void msrOtherAppearance::acceptOut (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrOtherAppearance::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrOtherAppearance>*
@@ -1760,9 +2027,15 @@ void msrOtherAppearance::acceptOut (basevisitor* v)
         S_msrOtherAppearance elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrOtherAppearance::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitEnd (elem);
   }
@@ -1773,16 +2046,16 @@ void msrOtherAppearance::browseData (basevisitor* v)
 
 std::string msrOtherAppearance::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "[OtherAppearance" <<
     ", otherAppearanceTypeKind: " << fOtherAppearanceTypeKind <<
     ", fOtherAppearanceValue: " << fOtherAppearanceValue <<
     ", line " << fInputLineNumber <<
     ']';
 
-  return s.str ();
+  return ss.str ();
 }
 
 void msrOtherAppearance::print (std::ostream& os) const
@@ -1839,9 +2112,15 @@ msrAppearance::msrAppearance (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMusicXMLPrintLayouts ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Creating an appearance" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 }
@@ -1852,9 +2131,15 @@ msrAppearance::~msrAppearance ()
 void msrAppearance::acceptIn (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrAppearance::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrAppearance>*
@@ -1863,9 +2148,15 @@ void msrAppearance::acceptIn (basevisitor* v)
         S_msrAppearance elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrAppearance::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitStart (elem);
   }
@@ -1874,9 +2165,15 @@ void msrAppearance::acceptIn (basevisitor* v)
 void msrAppearance::acceptOut (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrAppearance::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrAppearance>*
@@ -1885,9 +2182,15 @@ void msrAppearance::acceptOut (basevisitor* v)
         S_msrAppearance elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrAppearance::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitEnd (elem);
   }
@@ -1930,9 +2233,9 @@ void msrAppearance::browseData (basevisitor* v)
 
 std::string msrAppearance::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "[Appearance" <<
     /*
     ", otherAppearanceTypeKind: " <<
@@ -1942,7 +2245,7 @@ std::string msrAppearance::asString () const
     ", line " << fInputLineNumber <<
     ']';
 
-  return s.str ();
+  return ss.str ();
 }
 
 void msrAppearance::print (std::ostream& os) const

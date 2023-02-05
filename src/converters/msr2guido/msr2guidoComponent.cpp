@@ -53,9 +53,15 @@ S_mfcConverterComponent createMsr2guidoConverterComponent ()
 
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {
-      gLogStream <<
+	  	std::stringstream ss;
+
+      ss <<
         "Creating the Msr2guido component" <<
         std::endl;
+
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif
 

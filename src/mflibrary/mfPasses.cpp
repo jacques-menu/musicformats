@@ -43,11 +43,11 @@ std::string mfPassIDKindAsString (
       result = "*kMfPassID_ALL*";
       break;
 
-    case mfPassIDKind::kMfPassID_0:
-      result = "0";
+    case mfPassIDKind::kMfPassID_OptionsAndArgumentsHandling:
+      result = "opts & args";
       break;
 
-    case mfPassIDKind::kMfPassID_Optional:
+    case mfPassIDKind::kMfPassID_OptionalPass:
       result = "opt";
       break;
 
@@ -99,6 +99,13 @@ std::ostream& operator << (std::ostream& os, const mfPassIDKind elt)
   return os;
 }
 
+EXP mfIndentedStringStream& operator << (
+  mfIndentedStringStream& iss, const mfPassIDKind& elt)
+{
+  iss << mfPassIDKindAsString (elt);
+  return iss;
+}
+
 mfPassIDKind mfPassIDKindFromString (const std::string& theString)
 {
   mfPassIDKind result =
@@ -111,9 +118,9 @@ mfPassIDKind mfPassIDKindFromString (const std::string& theString)
 
   if (it == gGlobalMusicFormatsPassIDKindsMap.end ()) {
     // no, keywords passID kind is unknown in the map
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "MusicFormats passID kind '" << theString <<
       "' is unknown" <<
       std::endl <<
@@ -124,12 +131,12 @@ mfPassIDKind mfPassIDKindFromString (const std::string& theString)
 
     ++gIndenter;
 
-    s <<
+    ss <<
       availableMusicFormatsPassIDKinds (K_MF_NAMES_LIST_MAX_LENGTH);
 
     --gIndenter;
 
-    oahError (s.str ());
+    oahError (ss.str ());
   }
 
   result = (*it).second;
@@ -139,7 +146,7 @@ mfPassIDKind mfPassIDKindFromString (const std::string& theString)
 
 std::string availableMusicFormatsPassIDKinds (size_t namesListMaxLength)
 {
-  std::stringstream s;
+  std::stringstream ss;
 
   size_t
     mfPassIDKindsMapSize =
@@ -163,26 +170,26 @@ std::string availableMusicFormatsPassIDKinds (size_t namesListMaxLength)
 
       cumulatedLength += theString.size ();
       if (cumulatedLength >= namesListMaxLength) {
-        s << std::endl << gIndenter.getSpacer ();
+        ss << std::endl << gIndenter.getSpacer ();
         cumulatedLength = 0;
         break;
       }
 
       if (count == 1) {
-        s << gIndenter.getSpacer ();
+        ss << gIndenter.getSpacer ();
       }
-      s << theString;
+      ss << theString;
 
       if (count == nextToLast) {
-        s << " and ";
+        ss << " and ";
       }
       else if (count != mfPassIDKindsMapSize) {
-        s << ", ";
+        ss << ", ";
       }
     } // for
   }
 
-  return s.str ();
+  return ss.str ();
 }
 
 
@@ -193,10 +200,10 @@ void initializeMusicFormatsPassIDKindsMap ()
 
   if (! pPrivateThisMethodHasBeenRun) {
     gGlobalMusicFormatsPassIDKindsMap ["0"]   =
-      mfPassIDKind::kMfPassID_0;
+      mfPassIDKind::kMfPassID_OptionsAndArgumentsHandling;
 
     gGlobalMusicFormatsPassIDKindsMap ["opt"]   =
-      mfPassIDKind::kMfPassID_Optional;
+      mfPassIDKind::kMfPassID_OptionalPass;
 
     gGlobalMusicFormatsPassIDKindsMap ["1"]   =
       mfPassIDKind::kMfPassID_1;
@@ -240,10 +247,16 @@ void initializeMusicFormatsPassIDs ()
       gGlobalOahEarlyOptions.getEarlyTracingOah ()
         &&
       ! gGlobalOahEarlyOptions.getEarlyQuietOption ()
-      ) {
-      gLogStream <<
+    ) {
+	  	std::stringstream ss;
+
+      ss <<
         "Initializing MusicFormats passIDs" <<
         std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -257,6 +270,18 @@ void initializeMusicFormatsPassIDs ()
 }
 
 //______________________________________________________________________________
+S_mfPassDescription mfPassDescription::create (
+  mfPassIDKind passIDKind,
+  std::string  passDescription)
+{
+  mfPassDescription* o =
+    new mfPassDescription (
+      passIDKind,
+      passDescription);
+  assert (o != nullptr);
+  return o;
+}
+
 mfPassDescription::mfPassDescription (
   mfPassIDKind passIDKind,
   std::string  passDescription)
@@ -270,13 +295,13 @@ mfPassDescription::~mfPassDescription ()
 
 std::string mfPassDescription::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "fPassIDKind: " << fPassIDKind <<
     ", fPassDescription: " << fPassDescription;
 
-  return s.str ();
+  return ss.str ();
 }
 
 void mfPassDescription::print (std::ostream& os) const

@@ -62,9 +62,9 @@ void translateLpsrToLilypond (
     std::string separator =
       "%--------------------------------------------------------------";
 
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       std::endl <<
       separator <<
       std::endl <<
@@ -76,7 +76,7 @@ void translateLpsrToLilypond (
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 #endif
 
@@ -135,6 +135,10 @@ EXP void translateLpsrToLilypondWithHandler (
       outputFileName <<
       "\"" <<
       std::endl;
+
+//     gWaeHandler->waeTrace ( JMI v0.9.67
+//       __FILE__, __LINE__,
+//       ss.str ());
   }
 #endif
 
@@ -144,6 +148,10 @@ EXP void translateLpsrToLilypondWithHandler (
       err <<
         "xmlFile2lilypond() output goes to standard output" <<
         std::endl;
+
+//     gWaeHandler->waeTrace ( JMI v0.9.67
+//       __FILE__, __LINE__,
+//       ss.str ());
     }
 #endif
 
@@ -182,6 +190,10 @@ EXP void translateLpsrToLilypondWithHandler (
         outputFileName <<
         "\"" <<
         std::endl;
+
+//     gWaeHandler->waeTrace ( JMI v0.9.67
+//       __FILE__, __LINE__,
+//       ss.str ());
     }
 #endif
 
@@ -202,12 +214,12 @@ EXP void translateLpsrToLilypondWithHandler (
         std::ofstream::out);
 
     if (! outputFileStream.is_open ()) {
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         gWaeHandler->cannotOpenLilypondFileForWriting (outputFileName);
 
-      std::string message = s.str ();
+      std::string message = ss.str ();
 
       err <<
         message <<
@@ -245,10 +257,16 @@ EXP void translateLpsrToLilypondWithHandler (
     // close output file
 #ifdef TRACE_OAH
     if (gtracingOah->fTracePasses) {
-      gLogStream <<
+      std::stringstream ss;
+
+      ss <<
         std::endl <<
         gWaeHandler->closingLilypondFile (outputFileName) <<
         std::endl;
+
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif
 

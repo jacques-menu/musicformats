@@ -25,6 +25,7 @@
 #include "bsrWae.h"
 
 #include "oahOah.h"
+#include "oahEarlyOptions.h"
 
 #include "bsrOah.h"
 
@@ -90,30 +91,36 @@ bsrKey::bsrKey (
       &&
     fNumberOfAlterations != 0
   ) {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "BSR key inconsistency:" <<
       "keyKind: " << bsrKeyKindAsString (fKeyKind) <<
       "numberOfAlterations: " << fNumberOfAlterations;
 
     bsrInternalError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 
   fKeyCellsList = buildCellsList ();
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceKeys ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Creating bsrKey '" <<
       asString () <<
       "', line " <<
       fInputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 }
@@ -204,9 +211,16 @@ void bsrKey::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
+      "% --> End visiting bsrTranscriptionNotesElement" <<
       "% ==> bsrKey::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -217,9 +231,15 @@ void bsrKey::acceptIn (basevisitor* v)
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching bsrKey::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
         p->visitStart (elem);
@@ -230,9 +250,16 @@ void bsrKey::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
+      "% --> End visiting bsrTranscriptionNotesElement" <<
       "% ==> bsrKey::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -243,9 +270,15 @@ void bsrKey::acceptOut (basevisitor* v)
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching bsrKey::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
         p->visitEnd (elem);
@@ -257,9 +290,9 @@ void bsrKey::browseData (basevisitor* v)
 
 std::string bsrKey::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "Key" <<
     ", " << bsrKeyKindAsString (fKeyKind) <<
     ", numberOfAlterations: " << fNumberOfAlterations <<
@@ -267,14 +300,14 @@ std::string bsrKey::asString () const
     ", spacesBefore: " << fSpacesBefore <<
     ", line " << fInputLineNumber;
 
-  return s.str ();
+  return ss.str ();
 }
 
 std::string bsrKey::asDebugString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s << "[KEY ";
+  ss << "[KEY ";
 
   if (fNumberOfAlterations > 0) {
     switch (fKeyKind) {
@@ -284,25 +317,25 @@ std::string bsrKey::asDebugString () const
       case bsrKeyKind::kKeyKindFlats:
         switch (fNumberOfAlterations) {
           case 1:
-            s << "F major";
+            ss << "F major";
             break;
           case 2:
-            s << "Bb major";
+            ss << "Bb major";
             break;
           case 3:
-            s << "Eb major";
+            ss << "Eb major";
             break;
           case 4:
-            s << "Ab major";
+            ss << "Ab major";
             break;
           case 5:
-            s << "Db major";
+            ss << "Db major";
             break;
           case 6:
-            s << "Gb major";
+            ss << "Gb major";
             break;
           case 7:
-            s << "Cb major";
+            ss << "Cb major";
             break;
         } // switch
         break;
@@ -313,37 +346,37 @@ std::string bsrKey::asDebugString () const
       case bsrKeyKind::kKeyKindSharps:
         switch (fNumberOfAlterations) {
           case 1:
-            s << "G major";
+            ss << "G major";
             break;
           case 2:
-            s << "D major";
+            ss << "D major";
             break;
           case 3:
-            s << "A major";
+            ss << "A major";
             break;
           case 4:
-            s << "E major";
+            ss << "E major";
             break;
           case 5:
-            s << "B major";
+            ss << "B major";
             break;
           case 6:
-            s << "F# major";
+            ss << "F# major";
             break;
           case 7:
-            s << "C# major";
+            ss << "C# major";
             break;
         } // switch
         break;
     } // switch
   }
   else {
-    s << "C major";
+    ss << "C major";
   }
 
-  s << ']';
+  ss << ']';
 
-  return s.str ();
+  return ss.str ();
 }
 
 void bsrKey::print (std::ostream& os) const
@@ -382,7 +415,7 @@ std::ostream& operator << (std::ostream& os, const S_bsrKey& elt)
   else {
     os << "[NONE]" << std::endl;
   }
-  
+
   return os;
 }
 

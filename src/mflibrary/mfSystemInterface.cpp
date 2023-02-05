@@ -11,11 +11,6 @@
 
 // https://stackoverflow.com/questions/5919996/how-to-detect-reliably-mac-os-x-ios-linux-windows-in-c-preprocessor
 
-// #include <errno.h>
-// #include <string.h>
-// #include <stdio.h>
-// #include <stdlib.h> // system()
-
 #ifdef __APPLE__
   // nothing specific needed here
 #endif

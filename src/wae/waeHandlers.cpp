@@ -288,7 +288,7 @@ void waeHandler::waeTrace (
     case mfPassIDKind::kMfPassID_UNKNOWN:
       os <<
         "waeHandler::waeTrace: " <<
-        "earlyTraceOnlyPass = " << earlyTraceOnlyPass <<
+        "fEarlyTraceOnlyPass = " << earlyTraceOnlyPass <<
         std::endl;
       break;
 
@@ -296,7 +296,7 @@ void waeHandler::waeTrace (
       doTrace = true;
       break;
 
-//     case mfPassIDKind::kMfPassID_0:
+//     case mfPassIDKind::kMfPassID_OptionsAndArgumentsHandling:
 //       break;
 //
 //     case mfPassIDKind::kMfPassID_1:
@@ -428,12 +428,12 @@ void waeHandler::displayWarningsAndErrorsInputLineNumbers ()
 
 std::string waeHandler::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "WAE handler";
 
-  return s.str ();
+  return ss.str ();
 }
 
 void waeHandler::print (std::ostream& os) const

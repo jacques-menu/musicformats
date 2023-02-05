@@ -35,17 +35,17 @@ msrPlacementKind msrPlacementKindFromString (
     result = msrPlacementKind::kPlacementBelow;
   else {
     if (placementString.size ()) {
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         "placement \"" << placementString <<
         "\" should be 'above' or 'below'";
 
       msrError (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         inputLineNumber,
         __FILE__, __LINE__,
-        s.str ());
+        ss.str ());
     }
   }
 

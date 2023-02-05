@@ -115,10 +115,16 @@ void msr2lpsrTranslator::visitStart (S_msrBarLine& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "--> Start visiting msrBarLine" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -138,10 +144,16 @@ S_msrTuplet msrTuplet::createTupletNewbornClone ()
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTuplets ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Creating a newborn clone of tuplet " <<
       asString () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -169,10 +181,16 @@ void msr2lpsrTranslator::visitStart (S_msrTuplet& elt)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "--> Start visiting msrTuplet" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -184,11 +202,17 @@ void msr2lpsrTranslator::visitStart (S_msrTuplet& elt)
   // register it in this visitor
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTuplets ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "++> pushing tuplet '" <<
       tupletClone->asString () <<
       "' to tuplets stack" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -381,10 +405,16 @@ void msr2msrTranslator::visitStart (S_msrIdentification& elt)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "--> Start visiting msrIdentification" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -411,10 +441,16 @@ void msr2msrTranslator::visitEnd (S_msrIdentification& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "--> End visiting msrIdentification" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 }

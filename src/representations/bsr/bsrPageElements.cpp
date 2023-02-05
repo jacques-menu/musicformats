@@ -16,6 +16,7 @@
 #include "bsrPageElements.h"
 
 #include "oahOah.h"
+#include "oahEarlyOptions.h"
 
 #include "bsrOah.h"
 
@@ -71,9 +72,16 @@ void bsrPageElement::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
+      "% --> End visiting bsrTranscriptionNotesElement" <<
       "% ==> bsrPageElement::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -84,9 +92,15 @@ void bsrPageElement::acceptIn (basevisitor* v)
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching bsrPageElement::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
         p->visitStart (elem);
@@ -97,9 +111,16 @@ void bsrPageElement::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
+      "% --> End visiting bsrTranscriptionNotesElement" <<
       "% ==> bsrPageElement::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -110,9 +131,15 @@ void bsrPageElement::acceptOut (basevisitor* v)
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching bsrPageElement::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
         p->visitEnd (elem);

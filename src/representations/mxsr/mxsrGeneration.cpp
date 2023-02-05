@@ -9,10 +9,6 @@
   https://github.com/jacques-menu/musicformats
 */
 
-//#include <iomanip>      // std::setw, std::setprecision, ...
-//#include <cmath>
-//#include <string>
-
 #include <sstream>
 
 #include "mxsrGeneration.h"
@@ -36,16 +32,16 @@ std::string mxmlelementAsString (Sxmlelement elem)
   const std::vector<Sxmlattribute>& elemAttributes =
     elem->attributes();
 
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "[mxmlelement " <<
     ", elemType: " << elemType <<
     ", elemName: " << elemName <<
     ", elemAttributes.size ():" << elemAttributes.size () <<
     ']';
 
-  return s.str ();
+  return ss.str ();
 }
 
 void printMxsr (const Sxmlelement theMxsr, std::ostream& os)

@@ -4410,9 +4410,9 @@ msrSemiTonesPitchKind noteAtIntervalFromSemiTonesPitch (
       {
         // computing intervals on double or triple flats/sharps
         // is not considered useful, hence not supported
-        std::stringstream s;
+        std::stringstream ss;
 
-        s <<
+        ss <<
           "Sorry, computing intervals from semitones pitch '" <<
           msrSemiTonesPitchKindAsString (semiTonesPitchKind) <<
           '(' << msrSemiTonesPitchKindAsString (semiTonesPitchKind) << ")" <<
@@ -4420,10 +4420,10 @@ msrSemiTonesPitchKind noteAtIntervalFromSemiTonesPitch (
           ", line: " << inputLineNumber;
 
         msrUnsupported (
-          gGlobalServiceRunData->getInputSourceName (),
+          gGlobalCurrentServiceRunData->getInputSourceName (),
           inputLineNumber,
           __FILE__, __LINE__,
-          s.str ());
+          ss.str ());
       }
   } // switch
 
@@ -7299,9 +7299,9 @@ msrQuarterTonesPitchKind noteAtIntervalFromQuarterTonesPitch (
       {
         // computing intervals on double or triple flats/sharps
         // is not considered useful, hence not supported
-        std::stringstream s;
+        std::stringstream ss;
 
-        s <<
+        ss <<
           "Sorry, computing intervals from quartertones pitch '" <<
           msrQuarterTonesPitchKindAsStringInLanguage (
             quarterTonesPitchKind,
@@ -7312,10 +7312,10 @@ msrQuarterTonesPitchKind noteAtIntervalFromQuarterTonesPitch (
           ", line: " << inputLineNumber;
 
         msrUnsupported (
-          gGlobalServiceRunData->getInputSourceName (),
+          gGlobalCurrentServiceRunData->getInputSourceName (),
           inputLineNumber,
           __FILE__, __LINE__,
-          s.str ());
+          ss.str ());
       }
   } // switch
 

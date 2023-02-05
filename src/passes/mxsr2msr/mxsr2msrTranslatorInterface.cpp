@@ -70,9 +70,9 @@ void populateMsrSkeletonFromMxsr (
     std::string separator =
       "%--------------------------------------------------------------";
 
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       std::endl <<
       separator <<
       std::endl <<
@@ -84,7 +84,7 @@ void populateMsrSkeletonFromMxsr (
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 #endif
 

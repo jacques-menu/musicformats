@@ -104,7 +104,9 @@ void msrMeasure::initializeMeasure ()
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasures ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Initializing measure '" <<
       fMeasureNumber <<
       ", measureDebugNumber: '" <<
@@ -116,6 +118,10 @@ void msrMeasure::initializeMeasure ()
       "\"" <<
       ", line " << fInputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -271,7 +277,9 @@ S_msrMeasure msrMeasure::createMeasureNewbornClone (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasures ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Creating a newborn clone of measure " <<
       this->asShortString () <<
       fMeasureDebugNumber <<
@@ -281,6 +289,10 @@ S_msrMeasure msrMeasure::createMeasureNewbornClone (
       containingSegmentUpLinkToVoice->getVoiceName () <<
       "\"" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -357,7 +369,9 @@ S_msrMeasure msrMeasure::createMeasureDeepClone (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasures ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Creating a deep clone of measure " <<
       this->asShortString () <<
       " in segment " <<
@@ -366,6 +380,10 @@ S_msrMeasure msrMeasure::createMeasureDeepClone (
       containingSegmentUpLinkToVoice->getVoiceName () <<
       "\"" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -437,7 +455,9 @@ S_msrMeasure msrMeasure::createMeasureDeepClone (
   if (numberOfMeasureElements) {
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceMeasures ()) {
-      gLogStream <<
+		std::stringstream ss;
+
+    ss <<
         mfSingularOrPluralWithoutNumber (
           numberOfMeasureElements, "There is", "There are") <<
         ' ' <<
@@ -453,6 +473,10 @@ S_msrMeasure msrMeasure::createMeasureDeepClone (
               getVoiceName () <<
         "\"" <<
         std::endl;
+
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif
 
@@ -486,8 +510,10 @@ S_msrMeasure msrMeasure::createMeasureDeepClone (
         S_msrTimeSignature timeSignature = dynamic_cast<msrTimeSignature*>(&(*element))
         ) {
 #ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceTimeSignatures ()) {
-          gLogStream <<
+        if (gGlobalTracingOahGroup->getTraceTimeSignatures ()) {
+          std::stringstream ss;
+
+          ss <<
             "Sharing time " <<
             timeSignature->asShortString () <<
             " in measure " <<
@@ -495,6 +521,10 @@ S_msrMeasure msrMeasure::createMeasureDeepClone (
             "deep clone" <<
             ", line " << fInputLineNumber <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
 
@@ -517,7 +547,9 @@ S_msrMeasure msrMeasure::createMeasureDeepClone (
   else {
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceMeasures ()) {
-      gLogStream <<
+      std::stringstream ss;
+
+      ss <<
         "There are no elements in measure to be deep copied" <<
         " in segment " <<
         containingSegment->asString () <<
@@ -527,6 +559,10 @@ S_msrMeasure msrMeasure::createMeasureDeepClone (
             getVoiceName () <<
         "\"" <<
         std::endl;
+
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif
   }
@@ -549,7 +585,9 @@ S_msrMeasure msrMeasure::createMeasureCopyWithNotesOnly (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasures ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Creating a copy with notes only of measure " <<
       this->asShortString () <<
       " in segment " <<
@@ -558,6 +596,10 @@ S_msrMeasure msrMeasure::createMeasureCopyWithNotesOnly (
       containingSegmentUpLinkToVoice->getVoiceName () <<
       "\"" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -612,7 +654,9 @@ S_msrMeasure msrMeasure::createMeasureCopyWithNotesOnly (
   if (numberOfMeasureElements) {
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceMeasures ()) {
-      gLogStream <<
+      std::stringstream ss;
+
+      ss <<
         mfSingularOrPluralWithoutNumber (
           numberOfMeasureElements, "There is", "There are") <<
         ' ' <<
@@ -628,6 +672,10 @@ S_msrMeasure msrMeasure::createMeasureCopyWithNotesOnly (
               getVoiceName () <<
         "\"" <<
         std::endl;
+
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif
 
@@ -665,7 +713,9 @@ S_msrMeasure msrMeasure::createMeasureCopyWithNotesOnly (
         ) {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTimeSignatures ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "Sharing time " <<
             timeSignature->asShortString () <<
             " in measure " <<
@@ -673,6 +723,10 @@ S_msrMeasure msrMeasure::createMeasureCopyWithNotesOnly (
             "deep clone" <<
             ", line " << fInputLineNumber <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
 
@@ -697,7 +751,9 @@ S_msrMeasure msrMeasure::createMeasureCopyWithNotesOnly (
   else {
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceMeasures ()) {
-      gLogStream <<
+      std::stringstream ss;
+
+      ss <<
         "There are no elements in measure to be deep copied" <<
         " in segment " <<
         containingSegment->asString () <<
@@ -707,6 +763,10 @@ S_msrMeasure msrMeasure::createMeasureCopyWithNotesOnly (
             getVoiceName () <<
         "\"" <<
         std::endl;
+
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif
   }
@@ -724,12 +784,18 @@ void msrMeasure::setMeasureShortestNoteDuration (
       ||
     gGlobalMsrOahGroup->getTraceMsrDurations ()
   ) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Setting the shortest note duration of measure " <<
       fMeasureNumber <<
       " to " <<
       duration <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -745,12 +811,18 @@ void msrMeasure::setMeasureShortestNoteTupletFactor (
       ||
     gGlobalMsrOahGroup->getTraceMsrDurations ()
   ) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Setting the shortest note tuplet factor of measure " <<
       fMeasureNumber <<
       " to " <<
       noteTupletFactor <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -763,7 +835,9 @@ void msrMeasure::setMeasureEndRegularKind (
 {
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceMeasures ()) {
-      gLogStream <<
+      std::stringstream ss;
+
+      ss <<
         "Setting regular kind of measure '" <<
         fMeasureNumber <<
         "' to '" <<
@@ -777,6 +851,10 @@ void msrMeasure::setMeasureEndRegularKind (
         "\"" <<
         ", line " << fInputLineNumber <<
         std::endl;
+
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif
 
@@ -788,7 +866,9 @@ void msrMeasure::setMeasureRepeatContextKind (
 {
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceMeasures ()) {
-      gLogStream <<
+      std::stringstream ss;
+
+      ss <<
         "Setting repeat context kind of measure '" <<
         fMeasureNumber <<
         "' to '" <<
@@ -802,6 +882,10 @@ void msrMeasure::setMeasureRepeatContextKind (
         "\"" <<
         ", line " << fInputLineNumber <<
         std::endl;
+
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif
 
@@ -813,7 +897,9 @@ void msrMeasure::setMeasureNumber (
 {
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceMeasures ()) {
-      gLogStream <<
+      std::stringstream ss;
+
+      ss <<
         "Setting measure element measure number of measure '" <<
         fMeasureNumber <<
         "' to '" <<
@@ -827,6 +913,10 @@ void msrMeasure::setMeasureNumber (
         "\"" <<
         ", line " << fInputLineNumber <<
         std::endl;
+
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif
 
@@ -838,7 +928,9 @@ void msrMeasure::setMeasureOrdinalNumberInVoice (
 {
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceMeasures ()) {
-      gLogStream <<
+      std::stringstream ss;
+
+      ss <<
         "Setting ordinal number of measure '" <<
         fMeasureNumber <<
         "' to '" <<
@@ -852,6 +944,10 @@ void msrMeasure::setMeasureOrdinalNumberInVoice (
         "\"" <<
         ", line " << fInputLineNumber <<
         std::endl;
+
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif
 
@@ -863,7 +959,9 @@ void msrMeasure::setMeasurePuristNumber (
 {
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceMeasures ()) {
-      gLogStream <<
+      std::stringstream ss;
+
+      ss <<
         "Setting purist number of measure '" <<
         fMeasureNumber <<
         "' to '" <<
@@ -877,6 +975,10 @@ void msrMeasure::setMeasurePuristNumber (
         "\"" <<
         ", line " << fInputLineNumber <<
         std::endl;
+
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif
 
@@ -888,9 +990,9 @@ void msrMeasure::setMeasurePuristNumber (
 // {
 // #ifdef MF_TRACING_IS_ENABLED
 //     if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
-//       std::stringstream s;
+//       std::stringstream ss;
 //
-//       s <<
+//       ss <<
 //         "Incrementing the measure voice position " <<
 //         this->asShortString () <<
 //         " by " <<
@@ -902,7 +1004,7 @@ void msrMeasure::setMeasurePuristNumber (
 //
 // 			 gWaeHandler->waeTrace (
 // 		  	 __FILE__, __LINE__,
-// 			   s.str ());
+// 			   ss.str ());
 //      }
 // #endif
 //
@@ -925,7 +1027,9 @@ void msrMeasure::appendMeasureElementToMeasure (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasures ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Appending element " <<
       elem->asShortString () <<
       " to measure " <<
@@ -938,6 +1042,10 @@ void msrMeasure::appendMeasureElementToMeasure (
       fMeasureWholeNotesDuration <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -976,7 +1084,9 @@ void msrMeasure::insertElementInMeasureBeforeIterator (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasures ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Inserting element " <<
       elem->asShortString () <<
       " before iterator " <<
@@ -991,6 +1101,10 @@ void msrMeasure::insertElementInMeasureBeforeIterator (
       fMeasureWholeNotesDuration <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -1038,11 +1152,14 @@ void msrMeasure::appendElementAtTheEndOfMeasure (
     elem->getInputLineNumber ();
 
 #ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasures ()
+  if (
+    gGlobalTracingOahGroup->getTraceMeasures ()
       ||
     gGlobalTracingOahGroup->getTraceBarLines ()
   ) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Appending element " <<
       elem->asString () <<
       " at the end of measure " <<
@@ -1057,13 +1174,19 @@ void msrMeasure::appendElementAtTheEndOfMeasure (
       fMeasureWholeNotesDuration <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (gGlobalTracingOahGroup->getTraceMeasuresDetails ()) {
     // JMI ??? v0.9.63
     typedef std::list<S_msrMeasureElement>::iterator iter_type;
 
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       std::endl <<
       "==> appendPaddingNoteAtTheEndOfMeasure(), fMeasureElementsList:" <<
       std::endl;
@@ -1073,10 +1196,14 @@ void msrMeasure::appendElementAtTheEndOfMeasure (
       it != fMeasureElementsList.end ();
       ++it
     ) {
-      gLogStream << ' ' << *it << std::endl;
+      ss << ' ' << *it << std::endl;
     } // for
-    gLogStream << std::endl;
+    ss << std::endl;
     --gIndenter;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
 
     displayMeasure (
       inputLineNumber,
@@ -1087,10 +1214,16 @@ void msrMeasure::appendElementAtTheEndOfMeasure (
   if (! fMeasureElementsList.size ()) {
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceMeasures ()) {
-      gLogStream <<
+      std::stringstream ss;
+
+      ss <<
         "fMeasureElementsList is empty " <<
         ", inserting elem at the end" <<
         std::endl;
+
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif
 
@@ -1111,11 +1244,17 @@ void msrMeasure::appendElementAtTheEndOfMeasure (
 
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceMeasures ()) {
-      gLogStream <<
+      std::stringstream ss;
+
+      ss <<
         "fMeasureElementsList is NOT empty " <<
         ", lastMeasureElement: " <<
         lastMeasureElement <<
         std::endl;
+
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif
 
@@ -1132,11 +1271,17 @@ void msrMeasure::appendElementAtTheEndOfMeasure (
             ||
           gGlobalTracingOahGroup->getTraceBarLines ()
         ) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "last measure element " <<
             lastMeasureElement->asString () <<
             " is a final barLine, inserting elem before it" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
 
@@ -1165,11 +1310,17 @@ void msrMeasure::appendElementAtTheEndOfMeasure (
             ||
           gGlobalTracingOahGroup->getTraceBarLines ()
         ) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "last measure element " <<
             lastMeasureElement->asString () <<
             " is a barLine, but not a final one, inserting elem after it" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
 
@@ -1184,11 +1335,17 @@ void msrMeasure::appendElementAtTheEndOfMeasure (
           ||
         gGlobalTracingOahGroup->getTraceBarLines ()
       ) {
-        gLogStream <<
+        std::stringstream ss;
+
+        ss <<
           "last measure element " <<
           lastMeasureElement->asString () <<
           " is no barLine, inserting elem after it" <<
           std::endl;
+
+        gWaeHandler->waeTrace (
+          __FILE__, __LINE__,
+          ss.str ());
       }
 #endif
 
@@ -1200,7 +1357,9 @@ void msrMeasure::appendElementAtTheEndOfMeasure (
   if (gGlobalTracingOahGroup->getTraceMeasuresDetails ()) {
     typedef std::list<S_msrMeasureElement>::iterator iter_type;
 
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       std::endl <<
       "<== appendPaddingNoteAtTheEndOfMeasure(), fMeasureElementsList:" <<
       std::endl;
@@ -1210,9 +1369,9 @@ void msrMeasure::appendElementAtTheEndOfMeasure (
       it != fMeasureElementsList.end ();
       ++it
     ) {
-      gLogStream << ' ' << *it << std::endl;
+      ss << ' ' << *it << std::endl;
     } // for
-    gLogStream << std::endl;
+    ss << std::endl;
     --gIndenter;
 
     displayMeasure (
@@ -1229,7 +1388,9 @@ void msrMeasure::insertElementAtMeasurePosition (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Inserting element " <<
       elem->asShortString () <<
       " at position " <<
@@ -1244,6 +1405,10 @@ void msrMeasure::insertElementAtMeasurePosition (
       fMeasureWholeNotesDuration <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -1270,9 +1435,9 @@ void msrMeasure::insertElementAtMeasurePosition (
           i, elem);
       }
       else if (measurePosition >= currentMeasurePosition) {
-        std::stringstream s;
+        std::stringstream ss;
 
-        s <<
+        ss <<
           "cannot insert element " <<
           elem->asShortString () <<
           " at position " <<
@@ -1289,10 +1454,10 @@ void msrMeasure::insertElementAtMeasurePosition (
           ", line " << inputLineNumber;
 
         msrInternalError (
-          gGlobalServiceRunData->getInputSourceName (),
+          gGlobalCurrentServiceRunData->getInputSourceName (),
           inputLineNumber,
           __FILE__, __LINE__,
-          s.str ());
+          ss.str ());
       }
 
       if (++i == iEnd) break;
@@ -1300,9 +1465,9 @@ void msrMeasure::insertElementAtMeasurePosition (
   }
 
   else {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "cannot insert element " <<
       elem->asShortString () <<
       " at position " <<
@@ -1319,10 +1484,10 @@ void msrMeasure::insertElementAtMeasurePosition (
       ", line " << inputLineNumber;
 
     msrInternalError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 
 //   // set elem's measure number
@@ -1354,7 +1519,9 @@ void msrMeasure::setNextMeasureNumber (const std::string& nextMeasureNumber)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasures ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Setting next measure number to '" <<
       nextMeasureNumber <<
       "' in measure " <<
@@ -1368,6 +1535,10 @@ void msrMeasure::setNextMeasureNumber (const std::string& nextMeasureNumber)
       */
       ", line " << fInputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -1378,7 +1549,9 @@ void msrMeasure::setMeasureIsFirstInVoice ()
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasures ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Setting measure " <<
       this->asShortString () <<
       " as first measure in voice \"" <<
@@ -1390,6 +1563,10 @@ void msrMeasure::setMeasureIsFirstInVoice ()
       fMeasureUpLinkToSegment-> asString () <<
       ", line " << fInputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -1409,13 +1586,19 @@ void msrMeasure::setFullMeasureWholeNotesDuration (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Setting full whole notes duration of measure " <<
       this->asShortString () <<
       " to '"  <<
       wholeNotes <<
       "'" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -1428,7 +1611,9 @@ void msrMeasure::setMeasureWholeNotesDuration (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Setting measure whole notes duration of  " <<
       this->asShortString () <<
       " to "  <<
@@ -1440,6 +1625,10 @@ void msrMeasure::setMeasureWholeNotesDuration (
       "\"" <<
       "', line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -1468,7 +1657,9 @@ void msrMeasure::incrementMeasureWholeNotesDuration (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Incrementing whole notes duration of measure " <<
       this->asShortString ()<<
       " from '"  <<
@@ -1484,6 +1675,10 @@ void msrMeasure::incrementMeasureWholeNotesDuration (
       "\"" <<
       "', line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -1505,22 +1700,28 @@ void msrMeasure::setMeasureKind (
   msrMeasureKind measureKind)
 {
 #ifdef MF_TRACING_IS_ENABLED
-    if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
-      gLogStream <<
-        "Setting measure kind of measure " <<
-        this->asShortString ()<<
-        " to '" <<
-        measureKind <<
-        "' in segment " <<
-        fMeasureUpLinkToSegment->asString () <<
-        " in voice \"" <<
-        fMeasureUpLinkToSegment->
-          getSegmentUpLinkToVoice ()->
-            getVoiceName () <<
-        "\"" <<
-        ", line " << fInputLineNumber <<
-        std::endl;
-    }
+  if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
+		std::stringstream ss;
+
+    ss <<
+      "Setting measure kind of measure " <<
+      this->asShortString ()<<
+      " to '" <<
+      measureKind <<
+      "' in segment " <<
+      fMeasureUpLinkToSegment->asString () <<
+      " in voice \"" <<
+      fMeasureUpLinkToSegment->
+        getSegmentUpLinkToVoice ()->
+          getVoiceName () <<
+      "\"" <<
+      ", line " << fInputLineNumber <<
+      std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
 #endif
 
   switch (measureKind) {
@@ -1618,7 +1819,9 @@ void msrMeasure::appendMusicXMLPrintLayoutToMeasure (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMusicXMLPrintLayouts ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Appending print layout " << musicXMLPrintLayout->asString () <<
       " to measure " <<
       this->asShortString () <<
@@ -1627,6 +1830,10 @@ void msrMeasure::appendMusicXMLPrintLayoutToMeasure (
         getVoiceName () <<
       "\"" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -1642,7 +1849,9 @@ void msrMeasure::appendClefToMeasure (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceClefs ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Appending clef " << clef->asString () <<
       " to measure " <<
       this->asShortString () <<
@@ -1651,6 +1860,10 @@ void msrMeasure::appendClefToMeasure (
         getVoiceName () <<
       "\"" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -1663,7 +1876,9 @@ void msrMeasure::appendKeyToMeasure (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceKeys ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Appending key " << key->asString () <<
       " to measure " <<
       this->asShortString () <<
@@ -1672,6 +1887,10 @@ void msrMeasure::appendKeyToMeasure (
         getVoiceName () <<
       "\"" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -1692,7 +1911,9 @@ void msrMeasure::appendTimeSignatureToMeasure (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTimeSignatures ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Appending time signature '" <<
       std::endl;
 
@@ -1712,6 +1933,10 @@ void msrMeasure::appendTimeSignatureToMeasure (
           getVoiceName () <<
       "\"" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -1740,7 +1965,9 @@ void msrMeasure::appendTimeSignatureToMeasureClone (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTimeSignatures ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Appending time signature:" <<
       std::endl;
 
@@ -1765,6 +1992,10 @@ void msrMeasure::appendTimeSignatureToMeasureClone (
       upLinkToVoice->getVoiceName () <<
       "\"" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -1778,7 +2009,9 @@ void msrMeasure::insertHiddenMeasureAndBarLineInMeasureClone (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasures ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Inserting hidden measure and barLine at position " <<
       measurePosition <<
       "' in measure clone \"" <<
@@ -1790,6 +2023,10 @@ void msrMeasure::insertHiddenMeasureAndBarLineInMeasureClone (
 //      "\"" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -1826,18 +2063,20 @@ void msrMeasure::setFullMeasureWholeNotesDurationFromTime (
       ||
     gGlobalTracingOahGroup->getTraceTimeSignatures ()
   ) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Setting measure full measure whole notes from time signature:" <<
       std::endl;
 
     ++gIndenter;
 
-    gLogStream <<
+    ss <<
       timeSignature;
 
     --gIndenter;
 
-    gLogStream <<
+    ss <<
       "for measure " <<
       this->asShortString ()<<
       " in voice \"" <<
@@ -1847,6 +2086,10 @@ void msrMeasure::setFullMeasureWholeNotesDurationFromTime (
       "\"" <<
       ", line " << fInputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -1869,7 +2112,9 @@ void msrMeasure::setFullMeasureWholeNotesDurationFromTime (
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalTracingOahGroup->getTraceTimeSignatures ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "There are " <<
             wholeNotesPerMeasure <<
             " whole note(s) per measure in time signature:" <<
@@ -1877,12 +2122,12 @@ void msrMeasure::setFullMeasureWholeNotesDurationFromTime (
 
           ++gIndenter;
 
-          gLogStream <<
+          ss <<
             timeSignature;
 
           --gIndenter;
 
-          gLogStream <<
+          ss <<
             "in measure " <<
             this->asShortString () <<
             " in voice \"" <<
@@ -1892,6 +2137,10 @@ void msrMeasure::setFullMeasureWholeNotesDurationFromTime (
             "\"" <<
             ", line " << fInputLineNumber <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
 
@@ -1901,7 +2150,9 @@ void msrMeasure::setFullMeasureWholeNotesDurationFromTime (
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalTracingOahGroup->getTraceTimeSignatures ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "Measure " <<
             this->asShortString () <<
             "'in voice \"" <<
@@ -1913,6 +2164,10 @@ void msrMeasure::setFullMeasureWholeNotesDurationFromTime (
             fFullMeasureWholeNotesDuration <<
             " full measure whole notes " <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
       }
@@ -1924,7 +2179,9 @@ void msrMeasure::setFullMeasureWholeNotesDurationFromTime (
 
 #ifdef MF_TRACING_IS_ENABLED
       if (gGlobalTracingOahGroup->getTraceTimeSignatures ()) {
-        gLogStream <<
+        std::stringstream ss;
+
+        ss <<
           "Measure " <<
           this->asShortString () <<
            " in voice \"" <<
@@ -1934,6 +2191,10 @@ void msrMeasure::setFullMeasureWholeNotesDurationFromTime (
           "\"" <<
           " is senza misura" <<
           std::endl;
+
+        gWaeHandler->waeTrace (
+          __FILE__, __LINE__,
+          ss.str ());
       }
 #endif
 
@@ -1958,7 +2219,9 @@ void msrMeasure::appendTranspositionToMeasure (
         fMeasureUpLinkToSegment->
           getSegmentUpLinkToVoice ();
 
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Appending transposition " <<
       transposition->asShortString () <<
       " to measure " <<
@@ -1967,6 +2230,10 @@ void msrMeasure::appendTranspositionToMeasure (
       voice->getVoiceName () <<
       "\"" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -2018,7 +2285,9 @@ void msrMeasure::appendBarLineToMeasure (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceBarLines ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Appending barLine " <<
       barLine->asShortString () <<
       " to measure " <<
@@ -2027,6 +2296,10 @@ void msrMeasure::appendBarLineToMeasure (
       voice->getVoiceName () <<
       "\"" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -2111,7 +2384,9 @@ void msrMeasure::appendNoteToMeasure (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceNotes ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Appending note " << note->asShortString () <<
       " to measure " <<
       this->asShortString () <<
@@ -2128,6 +2403,10 @@ void msrMeasure::appendNoteToMeasure (
       positionsDelta <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -2163,9 +2442,9 @@ void msrMeasure::appendNoteToMeasure (
   }
 
   else if (positionsDelta.getNumerator () < 0) {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "partMeasurePosition " <<
       partMeasurePosition <<
       " is smaller than fMeasureWholeNotesDuration " <<
@@ -2186,10 +2465,10 @@ void msrMeasure::appendNoteToMeasure (
 
 //  msrInternalError ( // JMI v0.9.66
     msrInternalWarning (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
   //    __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 
   else {
@@ -2255,7 +2534,9 @@ void msrMeasure::appendNoteOrPaddingToMeasure (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceNotes ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Appending note or padding '" << note->asShortString () <<
       "' to measure " <<
       this->asShortString () <<
@@ -2267,6 +2548,10 @@ void msrMeasure::appendNoteOrPaddingToMeasure (
       ", noteSoundingWholeNotes: " << noteSoundingWholeNotes <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -2332,7 +2617,9 @@ void msrMeasure::accountForTupletMemberNoteDurationInMeasure ( // JMI v0.9.66 RE
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Accounting for the duration of tuplet member note " <<
       note->asShortString () <<
       " in measure " <<
@@ -2343,6 +2630,10 @@ void msrMeasure::accountForTupletMemberNoteDurationInMeasure ( // JMI v0.9.66 RE
           getVoiceName () <<
       "\"" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -2374,7 +2665,9 @@ void msrMeasure::appendPaddingNoteAtTheEndOfMeasure (const S_msrNote& note)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Appending padding note " << note->asString () <<
       " at the end of measure " <<
       this->asString () <<
@@ -2385,6 +2678,10 @@ void msrMeasure::appendPaddingNoteAtTheEndOfMeasure (const S_msrNote& note)
       "\"" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -2437,7 +2734,9 @@ void msrMeasure::appendNoteToMeasureClone (const S_msrNote& note)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceNotes ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Appending note '" << note->asShortString () <<
       "' to measure clone " <<
       this->asShortString () <<
@@ -2449,6 +2748,10 @@ void msrMeasure::appendNoteToMeasureClone (const S_msrNote& note)
           getVoiceName () <<
       "\"" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -2506,7 +2809,9 @@ void msrMeasure::appendDoubleTremoloToMeasure (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTremolos ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Appending double tremolo '" <<
       doubleTremolo->asShortString () <<
       "' to measure " <<
@@ -2517,6 +2822,10 @@ void msrMeasure::appendDoubleTremoloToMeasure (
           getVoiceName () <<
       "\"" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -2540,7 +2849,9 @@ void msrMeasure::appendChordToMeasure (const S_msrChord& chord)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceChords ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Appending chord '" << chord->asString () <<
       "' to measure " <<
       this->asShortString () <<
@@ -2550,6 +2861,10 @@ void msrMeasure::appendChordToMeasure (const S_msrChord& chord)
           getVoiceName () <<
       "\"" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -2587,7 +2902,9 @@ void msrMeasure::appendTupletToMeasure (const S_msrTuplet& tuplet)
     tuplet->getInputLineNumber ();
 
   if (gGlobalTracingOahGroup->getTraceTuplets ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Appending tuplet " << tuplet->asString () <<
       " to measure " <<
       this->asShortString () <<
@@ -2598,6 +2915,10 @@ void msrMeasure::appendTupletToMeasure (const S_msrTuplet& tuplet)
       "\"" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -2660,7 +2981,7 @@ void msrMeasure::appendHarmonyToMeasure (const S_msrHarmony& harmony)
 
   ++gIndenter;
 
-  // DON't add a paddingNote now, this will be done in ()
+  // DON't add a paddingNote now, this will be done in () JMI v0.9.67
 
   // append harmony to the measure elements list
   appendMeasureElementToMeasure (harmony);
@@ -2721,7 +3042,9 @@ void msrMeasure::appendFiguredBassToMeasure (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceFiguredBasses ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Appending figured bass " << figuredBass->asString () <<
       " to measure " <<
       this->asShortString () <<
@@ -2733,6 +3056,10 @@ void msrMeasure::appendFiguredBassToMeasure (
       fMeasureWholeNotesDuration <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -2767,7 +3094,9 @@ void msrMeasure::appendFiguredBassToMeasureClone (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceFiguredBasses ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Appending figured bass " << figuredBass->asString () <<
       " to measure clone " <<
       this->asShortString () <<
@@ -2781,6 +3110,10 @@ void msrMeasure::appendFiguredBassToMeasureClone (
       fMeasureWholeNotesDuration <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -2806,7 +3139,9 @@ S_msrNote msrMeasure::createPaddingSkipNoteForVoice (
       ||
     gGlobalTracingOahGroup->getTraceVoices ()
   ) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Creating a padding note for voice \"" <<
       voice->getVoiceName () <<
       "', duration = '" <<
@@ -2815,6 +3150,10 @@ S_msrNote msrMeasure::createPaddingSkipNoteForVoice (
       this->asShortString () <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -2852,7 +3191,9 @@ S_msrNote msrMeasure::createPaddingSkipNoteForVoice (
 //   if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
 //     this->print (gLogStream);
 //
-//     gLogStream <<
+// 	 	 std::stringstream ss;
+//
+//     ss <<
 //       "Padding from measure whole notes '" <<
 //       fMeasureWholeNotesDuration <<
 //       "' to '" << measurePositionToPadUpTo <<
@@ -2893,7 +3234,9 @@ S_msrNote msrMeasure::createPaddingSkipNoteForVoice (
 //
 // #ifdef MF_TRACING_IS_ENABLED
 //     if (gGlobalTracingOahGroup->getTraceNotes ()) {
-//       gLogStream <<
+//     std::stringstream ss;
+//
+//     ss <<
 //         "Appending skip " << paddingNote->asString () <<
 //         " (missingDuration " << missingDuration <<
 //         " whole notes) to skip from length '" <<
@@ -2926,7 +3269,9 @@ S_msrNote msrMeasure::createPaddingSkipNoteForVoice (
 //   else if (fMeasureWholeNotesDuration == measurePositionToPadUpTo) {
 // #ifdef MF_TRACING_IS_ENABLED
 //     if (gGlobalTracingOahGroup->getTraceNotes ()) {
-//       gLogStream <<
+// 		std::stringstream ss;
+//
+//     ss <<
 //         "No need to pad from measure whole notes '" <<
 //         fMeasureWholeNotesDuration <<
 //         "' to '" <<
@@ -2947,9 +3292,9 @@ S_msrNote msrMeasure::createPaddingSkipNoteForVoice (
 //     measureVoice->print (gLogStream); // JMI
 //     this->print (gLogStream);
 //
-//     std::stringstream s;
+//     std::stringstream ss;
 //
-//     s <<
+//     ss <<
 //         "Cannot pad from measure whole notes '" <<
 //         fMeasureWholeNotesDuration <<
 //         "' to '" <<
@@ -2964,10 +3309,10 @@ S_msrNote msrMeasure::createPaddingSkipNoteForVoice (
 //
 // //    msrError ( JMI
 //     msrWarning (
-//       gGlobalServiceRunData->getInputSourceName (),
+//       gGlobalCurrentServiceRunData->getInputSourceName (),
 //       inputLineNumber,
 //  //     __FILE__, __LINE__,
-//       s.str ());
+//       ss.str ());
 //   }
 // }
 //
@@ -2983,7 +3328,9 @@ void msrMeasure::padUpToMeasurePositionInMeasure (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Padding up to position '" <<
       measurePositionToPadUpTo <<
       "' in measure " <<
@@ -2994,6 +3341,10 @@ void msrMeasure::padUpToMeasurePositionInMeasure (
       measureVoice->getVoiceName () <<
       "\", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -3015,16 +3366,22 @@ void msrMeasure::padUpToMeasurePositionInMeasure (
 
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
-      gLogStream <<
-       "Creating a padding note for measure debug number " <<
-       fMeasureDebugNumber <<
-       ", missingDuration: " << missingDuration <<
-       " in voice \"" << measureVoice->getVoiceName () <<
-       "\", measure: " <<
+      std::stringstream ss;
+
+      ss <<
+        "Creating a padding note for measure debug number " <<
+        fMeasureDebugNumber <<
+        ", missingDuration: " << missingDuration <<
+        " in voice \"" << measureVoice->getVoiceName () <<
+        "\", measure: " <<
         this->asShortString () <<
-       ", measureWholeNotesDuration: " <<
-       fMeasureWholeNotesDuration <<
-       std::endl;
+        ", measureWholeNotesDuration: " <<
+        fMeasureWholeNotesDuration <<
+        std::endl;
+
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
    }
 #endif
 
@@ -3038,15 +3395,21 @@ void msrMeasure::padUpToMeasurePositionInMeasure (
 
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
-      gLogStream <<
-       "Appending padding note " << paddingNote->asString () <<
-       " (" << missingDuration << " whole notes)" <<
-       " to finalize \"" << measureVoice->getVoiceName () <<
-       "\" measure: " <<
-       this->asShortString () <<
-       ", measureWholeNotesDuration: " <<
-       fMeasureWholeNotesDuration <<
-       std::endl;
+      std::stringstream ss;
+
+      ss <<
+        "Appending padding note " << paddingNote->asString () <<
+        " (" << missingDuration << " whole notes)" <<
+        " to finalize \"" << measureVoice->getVoiceName () <<
+        "\" measure: " <<
+        this->asShortString () <<
+        ", measureWholeNotesDuration: " <<
+        fMeasureWholeNotesDuration <<
+        std::endl;
+
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
    }
 #endif
 
@@ -3080,7 +3443,9 @@ void msrMeasure::padUpToPositionAtTheEndOfTheMeasure (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Padding up from position " <<
       fMeasureWholeNotesDuration <<
       " to position '" <<
@@ -3093,6 +3458,10 @@ void msrMeasure::padUpToPositionAtTheEndOfTheMeasure (
       measureVoice->getVoiceName () <<
       "\", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -3114,7 +3483,9 @@ void msrMeasure::padUpToPositionAtTheEndOfTheMeasure (
 
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
-      gLogStream <<
+      std::stringstream ss;
+
+      ss <<
         "Creating a padding note" <<
         ", missingDuration: " << missingDuration <<
         " at the end of measure " <<
@@ -3124,6 +3495,10 @@ void msrMeasure::padUpToPositionAtTheEndOfTheMeasure (
         fMeasureWholeNotesDuration <<
         ", line " << inputLineNumber <<
         std::endl;
+
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
    }
 #endif
 
@@ -3148,21 +3523,27 @@ void msrMeasure::padUpToPositionAtTheEndOfTheMeasure (
 
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
-      gLogStream <<
-       "Appending padding note " << paddingNote->asString () <<
-       " (" << missingDuration << " whole notes)" <<
-       " to finalize \"" << measureVoice->getVoiceName () <<
-       "\" measure: " <<
-       this->asShortString () <<
-       " measureWholeNotesDuration: " <<
-       fMeasureWholeNotesDuration <<
-       std::endl;
+	  	std::stringstream ss;
+
+      ss <<
+        "Appending padding note " << paddingNote->asString () <<
+        " (" << missingDuration << " whole notes)" <<
+        " to finalize \"" << measureVoice->getVoiceName () <<
+        "\" measure: " <<
+        this->asShortString () <<
+        " measureWholeNotesDuration: " <<
+        fMeasureWholeNotesDuration <<
+        std::endl;
+
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
    }
 #endif
 
     // append the rest to the measure elements list
     // only now to make it possible to remove it afterwards
-    // if it happens to be the first note of a chord JMI
+    // if it happens to be the first note of a chord JMI v0.9.67
     appendPaddingNoteAtTheEndOfMeasure (paddingNote);
 
     // this measure contains music
@@ -3206,7 +3587,9 @@ void msrMeasure::backupByWholeNotesStepLengthInMeasure ( // JMI USELESS ??? v0.9
   ) {
     this->print (gLogStream);
 
-    gLogStream <<
+    std::stringstream ss;
+
+    ss <<
       "Backup by a '" <<
       backupTargetMeasureElementMeasurePosition <<
       "' whole notes step length in measure " <<
@@ -3221,6 +3604,10 @@ void msrMeasure::backupByWholeNotesStepLengthInMeasure ( // JMI USELESS ??? v0.9
       measureVoice->getVoiceName () <<
       "\", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -3241,7 +3628,9 @@ void msrMeasure::appendPaddingSkipNoteToMeasure (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Appending padding skip note" <<
       ", forwardStepLength: " <<
       forwardStepLength <<
@@ -3251,6 +3640,10 @@ void msrMeasure::appendPaddingSkipNoteToMeasure (
       fMeasureUpLinkToSegment->getSegmentAbsoluteNumber () <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -3332,7 +3725,9 @@ void msrMeasure::appendStaffDetailsToMeasure (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceStaves ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Appending staff details '" << staffDetails->asShortString () <<
       "' to measure " <<
       this->asShortString () <<
@@ -3342,6 +3737,10 @@ void msrMeasure::appendStaffDetailsToMeasure (
           getVoiceName () <<
       "\"" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -3378,7 +3777,9 @@ void msrMeasure::removeNoteFromMeasure (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceNotes ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Removing note '" <<
       note->asShortString () <<
       "' from measure " <<
@@ -3392,6 +3793,10 @@ void msrMeasure::removeNoteFromMeasure (
       std::endl <<
       fMeasureLastHandledNote->asShortString () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -3427,7 +3832,9 @@ void msrMeasure::removeNoteFromMeasure (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceNotes ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       std::endl << std::endl <<
       "@@@@@@@@@@@@@@@@@ segmentVoicePart" <<
       std::endl <<
@@ -3436,7 +3843,7 @@ void msrMeasure::removeNoteFromMeasure (
       "@@@@@@@@@@@@@@@@@" <<
       std::endl << std::endl;
 
-    gLogStream <<
+    ss <<
       std::endl << std::endl <<
       "@@@@@@@@@@@@@@@@@ segmentUpLinkToVoice" <<
       std::endl <<
@@ -3444,12 +3851,16 @@ void msrMeasure::removeNoteFromMeasure (
       std::endl <<
       "@@@@@@@@@@@@@@@@@" <<
       std::endl << std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "cannot remove note " <<
     note <<
     " from measure " <<
@@ -3460,10 +3871,10 @@ void msrMeasure::removeNoteFromMeasure (
     " since this note has not been found in fMeasureElementsList";
 
   msrInternalError (
-    gGlobalServiceRunData->getInputSourceName (),
+    gGlobalCurrentServiceRunData->getInputSourceName (),
     inputLineNumber,
     __FILE__, __LINE__,
-    s.str ());
+    ss.str ());
 }
 
 void msrMeasure::removeElementFromMeasure (
@@ -3472,16 +3883,18 @@ void msrMeasure::removeElementFromMeasure (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasures ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Removing element:" <<
       std::endl;
 
     ++gIndenter;
-    gLogStream <<
+    ss <<
       " JMI ??? element->elementAsString ()" << std::endl;
     --gIndenter;
 
-    gLogStream <<
+    ss <<
       std::endl <<
       " from measure " <<
       this->asShortString () <<
@@ -3493,7 +3906,7 @@ void msrMeasure::removeElementFromMeasure (
       std::endl;
 
     ++gIndenter;
-    gLogStream <<
+    ss <<
       "fMeasureLastHandledNote:" <<
       std::endl <<
       fMeasureLastHandledNote <<
@@ -3523,9 +3936,9 @@ void msrMeasure::removeElementFromMeasure (
     }
   } // for
 
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "cannot remove element " <<
     element->asString () <<
     " from measure " <<
@@ -3538,10 +3951,10 @@ void msrMeasure::removeElementFromMeasure (
     " since this element has not been found in fMeasureElementsList";
 
   msrInternalError (
-    gGlobalServiceRunData->getInputSourceName (),
+    gGlobalCurrentServiceRunData->getInputSourceName (),
     inputLineNumber,
     __FILE__, __LINE__,
-    s.str ());
+    ss.str ());
 }
 
 void msrMeasure::appendNoteToMeasureNotesFlatList (
@@ -3549,12 +3962,18 @@ void msrMeasure::appendNoteToMeasureNotesFlatList (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasuresSlices ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Appending note " <<
       note->asShortStringForMeasuresSlices () <<
       " to the notes flat list of measure " <<
       this->asShortString () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -3567,26 +3986,26 @@ void msrMeasure::determineMeasureKindAndPuristNumber (
           measureRepeatContextKind)
 {
   if (fMeasureKindAndPuristNumberHaveBeenDetermined) {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "Attempting to determine kind and purist number for measure \"" <<
       asShortString () <<
       "\" more than once";
 
     msrInternalError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       fInputLineNumber,
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
 
 /*
  // JMI   msrInternalError (
     msrInternalWarning (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       fInputLineNumber,
   //    __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
 
     return;
     */
@@ -3622,7 +4041,9 @@ void msrMeasure::determineMeasureKindAndPuristNumber (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasures ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Determining the measure kind and purist number of measure " <<
       this->asShortString () <<
       ", fullMeasureWholeNotesDuration: " << fFullMeasureWholeNotesDuration <<
@@ -3652,7 +4073,9 @@ void msrMeasure::determineMeasureKindAndPuristNumber (
   // determine the measure kind
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceMeasures ()) {
-      gLogStream <<
+      std::stringstream ss;
+
+      ss <<
         "--> determineMeasureKindAndPuristNumber() 2" <<
         ", fMeasureWholeNotesDuration: " <<
         fMeasureWholeNotesDuration <<
@@ -3661,6 +4084,10 @@ void msrMeasure::determineMeasureKindAndPuristNumber (
         ", fMeasureEndRegularKind: " <<
         fMeasureEndRegularKind <<
         std::endl;
+
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif
 
@@ -3740,10 +4167,16 @@ void msrMeasure::handleEmptyMeasure (
 {
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceMeasures ()) {
-      gLogStream <<
+      std::stringstream ss;
+
+      ss <<
         "--> handleEmptyMeasure()" <<
         ", fMeasureEndRegularKind: " << fMeasureEndRegularKind <<
         std::endl;
+
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif
 
@@ -3754,9 +4187,9 @@ void msrMeasure::handleEmptyMeasure (
         inputLineNumber,
         "handleEmptyMeasure 2 measure has 0 measure whole notes");
 
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "measure " <<
       this->asShortString () <<
       " has 0 measure whole notes" <<
@@ -3766,15 +4199,15 @@ void msrMeasure::handleEmptyMeasure (
 
     if (false) // JMI v0.9.66
       msrInternalError (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         inputLineNumber,
         __FILE__, __LINE__,
-        s.str ());
+        ss.str ());
     else
       msrInternalWarning (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         inputLineNumber,
-        s.str ());
+        ss.str ());
   }
 #endif
 
@@ -3799,12 +4232,18 @@ void msrMeasure::handleRegularMeasure (
   const S_msrVoice& voice)
 {
 #ifdef MF_TRACING_IS_ENABLED
-    if (gGlobalTracingOahGroup->getTraceMeasures ()) {
-      gLogStream <<
-        "--> handleRegularMeasure()" <<
-        ", fMeasureEndRegularKind: " << fMeasureEndRegularKind <<
-        std::endl;
-    }
+  if (gGlobalTracingOahGroup->getTraceMeasures ()) {
+    std::stringstream ss;
+
+    ss <<
+      "--> handleRegularMeasure()" <<
+      ", fMeasureEndRegularKind: " << fMeasureEndRegularKind <<
+      std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
 #endif
 
   // this is a regular measure end
@@ -3838,10 +4277,16 @@ void msrMeasure::handleIncompleteMeasure (
 {
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceMeasures ()) {
-      gLogStream <<
+      std::stringstream ss;
+
+      ss <<
         "--> handleIncompleteMeasure()" <<
         ", fMeasureEndRegularKind: " << fMeasureEndRegularKind <<
         std::endl;
+
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif
 
@@ -3890,7 +4335,7 @@ void msrMeasure::handleIncompleteMeasure (
     switch (measureRepeatContextKind) {
       case msrMeasureRepeatContextKind::kMeasureRepeatContext_UNKNOWN: // JMI ???
         {
-          std::stringstream s;
+          std::stringstream ss;
 
 #ifdef MF_TRACING_IS_ENABLED
           if (gGlobalTracingOahGroup->getTraceMeasuresDetails ()) {
@@ -3900,7 +4345,7 @@ void msrMeasure::handleIncompleteMeasure (
           }
 #endif
 
-          s <<
+          ss <<
             "measure " <<
             this->asShortString () <<
             " is kMeasureRepeatContext_UNKNOWN " << // JMI v0.9.66
@@ -3909,10 +4354,10 @@ void msrMeasure::handleIncompleteMeasure (
 
     // JMI      msrInternalError (
           msrInternalWarning (
-            gGlobalServiceRunData->getInputSourceName (),
+            gGlobalCurrentServiceRunData->getInputSourceName (),
             inputLineNumber,
      //       __FILE__, __LINE__,
-            s.str ());
+            ss.str ());
         }
 
         // set it's measure kind
@@ -3978,12 +4423,18 @@ void msrMeasure::handleOverFullMeasure (
   const S_msrVoice& voice)
 {
 #ifdef MF_TRACING_IS_ENABLED
-    if (gGlobalTracingOahGroup->getTraceMeasures ()) {
-      gLogStream <<
-        "--> handleOverFullMeasure()" <<
-        ", fMeasureEndRegularKind: " << fMeasureEndRegularKind <<
-        std::endl;
-    }
+  if (gGlobalTracingOahGroup->getTraceMeasures ()) {
+    std::stringstream ss;
+
+    ss <<
+      "--> handleOverFullMeasure()" <<
+      ", fMeasureEndRegularKind: " << fMeasureEndRegularKind <<
+      std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
 #endif
 
   // set it's measure kind
@@ -4042,7 +4493,9 @@ void msrMeasure::finalizeRegularMeasure (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasures ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Finalizing regular measure " <<
       this->asShortString () <<
       " in segment '" <<
@@ -4054,6 +4507,10 @@ void msrMeasure::finalizeRegularMeasure (
       fMeasureOrdinalNumberInVoice <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -4067,10 +4524,16 @@ void msrMeasure::finalizeRegularMeasure (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasures ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "===> measureWholeNotesDurationFromPartMeasuresVector: " <<
       measureWholeNotesDurationFromPartMeasuresVector <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 //*/
@@ -4145,7 +4608,9 @@ void msrMeasure::finalizeRegularMeasure (
     ) {
 #ifdef MF_TRACING_IS_ENABLED
       if (gGlobalTracingOahGroup->getTraceMeasures ()) {
-        gLogStream <<
+        std::stringstream ss;
+
+        ss <<
           "Note '" <<
           fMeasureLongestNote->asShortString () <<
           "' occupies measure " <<
@@ -4156,6 +4621,10 @@ void msrMeasure::finalizeRegularMeasure (
           voice->getVoiceName () <<
           "\", line " << inputLineNumber <<
           std::endl;
+
+        gWaeHandler->waeTrace (
+          __FILE__, __LINE__,
+          ss.str ());
       }
 #endif
 
@@ -4617,9 +5086,9 @@ void msrMeasure::postHandleCurrentHarmonyInHarmoniesMeasure (
       // take wholeNotesDelta into account in measure whole notes duration
   #ifdef MF_TRACING_IS_ENABLED
       if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
-        std::stringstream s;
+        std::stringstream ss;
 
-        s <<
+        ss <<
           "Incrementing the sounding whole notes of measure " <<
           this->asShortString () <<
           " by " <<
@@ -4631,7 +5100,7 @@ void msrMeasure::postHandleCurrentHarmonyInHarmoniesMeasure (
 
         gWaeHandler->waeTrace (
           __FILE__, __LINE__,
-          s.str ());
+          ss.str ());
       }
   #endif
 
@@ -4643,18 +5112,18 @@ void msrMeasure::postHandleCurrentHarmonyInHarmoniesMeasure (
 
   else if (measureOverflowWholeNotes.getNumerator () > 0) {
     // the currentHarmony's duration is too large
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "The current harmony " <<
       currentHarmony->asString () <<
       " overflows the current measure " <<
       asString ();
 
     msrInternalWarning (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
-      s.str ());
+      ss.str ());
 
     // compute currentHarmony's future sounding whole notes
     Rational
@@ -4694,7 +5163,7 @@ void msrMeasure::postHandleCurrentHarmonyInHarmoniesMeasure (
         " to 0 : leaving it as it is";
 
       msrInternalWarning (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         inputLineNumber,
 //  JMI             __FILE__, __LINE__,
         ss.str ());
@@ -4749,9 +5218,9 @@ void msrMeasure::finalizeTheHarmoniesInHarmoniesMeasure (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "Finalizing harmonies in harmonies measure " <<
       this->asShortString () <<
       " in segment '" <<
@@ -4764,7 +5233,7 @@ void msrMeasure::finalizeTheHarmoniesInHarmoniesMeasure (
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 #endif
 
@@ -4853,18 +5322,18 @@ void msrMeasure::finalizeTheHarmoniesInHarmoniesMeasure (
           note =
             dynamic_cast<msrNote*>(&(*measureElement))
       ) {
-        std::stringstream s;
+        std::stringstream ss;
 
-        s <<
+        ss <<
           "Finalizing a harmony voice measure containing note " <<
           note->asShortString () <<
           std::endl;
 
         msrInternalError (
-          gGlobalServiceRunData->getInputSourceName (),
+          gGlobalCurrentServiceRunData->getInputSourceName (),
           inputLineNumber,
           __FILE__, __LINE__,
-          s.str ());
+          ss.str ());
       }
     } // for
 
@@ -4903,9 +5372,9 @@ void msrMeasure::finalizeHarmonyInHarmoniesMeasure (
   // handle the currentHarmony
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "Finalizing harmony " <<
       currentHarmony->asString () <<
       " while finalizing harmonies measure " <<
@@ -4920,7 +5389,7 @@ void msrMeasure::finalizeHarmonyInHarmoniesMeasure (
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 #endif
 
@@ -4945,28 +5414,28 @@ void msrMeasure::finalizeHarmonyInHarmoniesMeasure (
         getMeasureElementMeasurePosition ();
 
   if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "--> finalizeHarmonyInHarmoniesMeasure() 2" <<
       ", previousHarmony: ";
 
     if (previousHarmony) {
-      s <<
+      ss <<
         previousHarmony->asString ();
     }
     else {
-      s << "[NONE]";
+      ss << "[NONE]";
     }
 
-    s <<
+    ss <<
       ", currentUpLinkToHarmonyToNoteMeasurePosition: " <<
       currentUpLinkToHarmonyToNoteMeasurePosition <<
       std::endl;
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 #endif
 
@@ -5018,9 +5487,9 @@ void msrMeasure::handleFirstFiguredBassInFiguredBassMeasure (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "handleFirstFiguredBassInFiguredBassMeasure() 5" <<
       ", previousFiguredBass is null, measurePositionToPadUpTo: " <<
       measurePositionToPadUpTo <<
@@ -5028,7 +5497,7 @@ void msrMeasure::handleFirstFiguredBassInFiguredBassMeasure (
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 #endif
 
@@ -5117,21 +5586,21 @@ void msrMeasure::handleSubsequentFiguredBassInFiguredBassMeasure (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "handleSubsequentFiguredBassInFiguredBassMeasure() 7" <<
       ", previousFiguredBass: ";
 
     if (previousFiguredBass) {
-      s <<
+      ss <<
         previousFiguredBass->asString ();
     }
     else {
-      s << "[NONE]";
+      ss << "[NONE]";
     }
 
-    s <<
+    ss <<
       ", currentFiguredBass: " <<
       currentFiguredBass->asString () <<
       ", previousFiguredBassMeasurePosition: " <<
@@ -5146,7 +5615,7 @@ void msrMeasure::handleSubsequentFiguredBassInFiguredBassMeasure (
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 #endif
 
@@ -5197,18 +5666,18 @@ void msrMeasure::handleSubsequentFiguredBassInFiguredBassMeasure (
 
   else if (measurePositionsDelta.getNumerator () < 0) {
     // the two harmonies overlap in time
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "Previous figured bass " <<
       previousFiguredBass->asString () <<
       " overlaps current figured bass " <<
       currentFiguredBass->asString ();
 
     msrInternalWarning (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
-      s.str ());
+      ss.str ());
 
     // compute previousFiguredBass's future sounding whole notes
     Rational
@@ -5248,7 +5717,7 @@ void msrMeasure::handleSubsequentFiguredBassInFiguredBassMeasure (
         " to 0 : leaving it as it is";
 
       msrInternalWarning (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         inputLineNumber,
 //  JMI             __FILE__, __LINE__,
         ss.str ());
@@ -5296,9 +5765,9 @@ void msrMeasure::postHandleCurrentFiguredBassInFiguredBassMeasure (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceHarmoniesDetails ()) {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "postHandleCurrentFiguredBassInFiguredBassMeasure() 1" <<
       ", currentFiguredBassUpLinkToNote:" <<
       std::endl;
@@ -5310,7 +5779,7 @@ void msrMeasure::postHandleCurrentFiguredBassInFiguredBassMeasure (
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 #endif
 
@@ -5323,21 +5792,21 @@ void msrMeasure::postHandleCurrentFiguredBassInFiguredBassMeasure (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "postHandleCurrentFiguredBassInFiguredBassMeasure() 2" <<
       ", currentFiguredBass: ";
 
     if (currentFiguredBass) {
-      s <<
+      ss <<
         currentFiguredBass->asString ();
     }
     else {
-      s << "[NONE]";
+      ss << "[NONE]";
     }
 
-    s <<
+    ss <<
       ", currentFiguredBassMeasurePosition: " <<
       currentFiguredBassMeasurePosition <<
       ", currentFiguredBassSoundingWholeNotes: " <<
@@ -5360,24 +5829,24 @@ void msrMeasure::postHandleCurrentFiguredBassInFiguredBassMeasure (
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 #endif
 
   if (measureOverflowWholeNotes.getNumerator () > 0) {
     // the currentFiguredBass's duration is too large
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "The current figured bass " <<
       currentFiguredBass->asString () <<
       " overflows the current measure " <<
       asString ();
 
     msrInternalWarning (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
-      s.str ());
+      ss.str ());
 
     // compute currentFiguredBass's future sounding whole notes
     Rational
@@ -5417,7 +5886,7 @@ void msrMeasure::postHandleCurrentFiguredBassInFiguredBassMeasure (
         " to 0 : leaving it as it is";
 
       msrInternalWarning (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         inputLineNumber,
 //  JMI             __FILE__, __LINE__,
         ss.str ());
@@ -5447,9 +5916,9 @@ void msrMeasure::finalizeFiguredBassesInFiguredBassMeasure (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "Finalizing harmonies in figured bass measure " <<
       this->asShortString () <<
       " in segment '" <<
@@ -5462,7 +5931,7 @@ void msrMeasure::finalizeFiguredBassesInFiguredBassMeasure (
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 #endif
 
@@ -5481,9 +5950,9 @@ void msrMeasure::finalizeFiguredBassesInFiguredBassMeasure (
     // taking their offset into account
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "Sorting the elements in figured bass measure " <<
       this->asShortString () <<
       " in segment '" <<
@@ -5496,7 +5965,7 @@ void msrMeasure::finalizeFiguredBassesInFiguredBassMeasure (
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 #endif
 
@@ -5544,20 +6013,20 @@ void msrMeasure::finalizeFiguredBassesInFiguredBassMeasure (
         // handle the currentFiguredBass
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
-          std::stringstream s;
+          std::stringstream ss;
 
-          s <<
+          ss <<
             "finalizeFiguredBassesInFiguredBassMeasure() 3" <<
             ", currentFiguredBass: ";
             ++gIndenter;
-            s <<
+            ss <<
               currentFiguredBass->asString () <<
               std::endl;
             --gIndenter;
 
           gWaeHandler->waeTrace (
             __FILE__, __LINE__,
-            s.str ());
+            ss.str ());
         }
 #endif
 
@@ -5581,21 +6050,21 @@ void msrMeasure::finalizeFiguredBassesInFiguredBassMeasure (
               getMeasureElementMeasurePosition ();
 
         if (gGlobalTracingOahGroup->getTraceHarmonies () ) {
-          std::stringstream s;
+          std::stringstream ss;
 
-          s <<
+          ss <<
             "finalizeFiguredBassesInFiguredBassMeasure() 4" <<
             ", previousFiguredBass: ";
 
           if (previousFiguredBass) {
-            s <<
+            ss <<
               previousFiguredBass->asString ();
           }
           else {
-            s << "[NONE]";
+            ss << "[NONE]";
           }
 
-          s <<
+          ss <<
             ", currentFiguredBassMeasurePosition: " <<
             currentFiguredBassMeasurePosition <<
             ", currentFiguredBassUpLinkToNoteMeasurePosition: " <<
@@ -5604,7 +6073,7 @@ void msrMeasure::finalizeFiguredBassesInFiguredBassMeasure (
 
           gWaeHandler->waeTrace (
             __FILE__, __LINE__,
-            s.str ());
+            ss.str ());
         }
 #endif
 
@@ -5682,9 +6151,9 @@ void msrMeasure::finalizeHarmonyMeasure (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "Finalizing harmonies measure " <<
       this->asShortString () <<
       " in segment '" <<
@@ -5697,7 +6166,7 @@ void msrMeasure::finalizeHarmonyMeasure (
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 #endif
 
@@ -5719,9 +6188,9 @@ void msrMeasure::finalizeHarmonyMeasure (
         getPartNumberOfMeasures ();
 
   if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "--> fMeasureOrdinalNumberInVoice: " <<
       fMeasureOrdinalNumberInVoice <<
       ", harmoniesPartNumberOfMeasures: " <<
@@ -5730,7 +6199,7 @@ void msrMeasure::finalizeHarmonyMeasure (
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 #endif
 
@@ -5749,9 +6218,10 @@ void msrMeasure::finalizeHarmonyMeasure (
           inputLineNumber,
           fMeasureOrdinalNumberInVoice - 1);
 
-  // DO NOT pad the measure up to measureWholeNotesDurationFromPartMeasuresVector,
-  // since the last harmony in the measure have been extended to the end of the measure
-  padUpToPositionAtTheEndOfTheMeasure ( // JMI ??? v0.9.66
+  // pad the measure up to measureWholeNotesDurationFromPartMeasuresVector
+  // only if the measure doesn't contain any non-rest note,
+  // otherwise the last harmony in the measure has already been extended to the end of the measure
+  padUpToPositionAtTheEndOfTheMeasure ( // JMI ??? v0.9.67
     inputLineNumber,
     measureWholeNotesDurationFromPartMeasuresVector);
 
@@ -5795,7 +6265,9 @@ void msrMeasure::finalizeFiguredBassMeasure (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceFiguredBasses ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Finalizing figured bass measure " <<
       this->asShortString () <<
       " in segment '" <<
@@ -5805,6 +6277,10 @@ void msrMeasure::finalizeFiguredBassMeasure (
       "\" (" << context << ")" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -5826,9 +6302,9 @@ void msrMeasure::finalizeFiguredBassMeasure (
         getPartNumberOfMeasures ();
 
   if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "fMeasureOrdinalNumberInVoice: " <<
       fMeasureOrdinalNumberInVoice <<
       ", figuredBassPartNumberOfMeasures = " <<
@@ -5837,7 +6313,7 @@ void msrMeasure::finalizeFiguredBassMeasure (
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 #endif
 
@@ -5856,8 +6332,10 @@ void msrMeasure::finalizeFiguredBassMeasure (
           inputLineNumber,
           fMeasureOrdinalNumberInVoice - 1);
 
-  // pad the measure up to fFullMeasureWholeNotesDuration // JMI ??? v0.9.66
-  padUpToPositionAtTheEndOfTheMeasure (
+  // pad the measure up to measureWholeNotesDurationFromPartMeasuresVector
+  // only if the measure doesn't contain any non-rest note,
+  // otherwise the last figured bass element in the measure has already been extended to the end of the measure
+  padUpToPositionAtTheEndOfTheMeasure ( // JMI ??? v0.9.67
     inputLineNumber,
     measureWholeNotesDurationFromPartMeasuresVector);
 
@@ -5883,9 +6361,9 @@ void msrMeasure::finalizeMeasure (
   const std::string&     context)
 {
   if (fMeasureHasBeenFinalized) {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "Attempting to finalize measure " <<
       this->asShortString () <<
       " more than once in segment '" <<
@@ -5901,9 +6379,11 @@ void msrMeasure::finalizeMeasure (
 
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceMeasuresDetails ()) {
-      gLogStream <<
+      std::stringstream ss;
+
+      ss <<
         std::endl <<
-        s.str () <<
+        ss.str () <<
         std::endl << std::endl;
 
       S_msrStaff
@@ -5917,13 +6397,17 @@ void msrMeasure::finalizeMeasure (
       gLogStream << staff;
       gLogStream << std::endl;
       --gIndenter;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
     }
 #endif
 
     msrInternalWarning (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       fInputLineNumber,
-      s.str ());
+      ss.str ());
   }
 
   else {
@@ -5934,7 +6418,9 @@ void msrMeasure::finalizeMeasure (
 
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceMeasures ()) {
-      gLogStream <<
+      std::stringstream ss;
+
+      ss <<
         "Finalizing measure " <<
         this->asString () <<
         " in segment '" <<
@@ -5946,6 +6432,10 @@ void msrMeasure::finalizeMeasure (
         "\" (" << context << ")" <<
         ", lines " << inputLineNumber << " .. " << fMeasureEndInputLineNumber << // JMI
         std::endl;
+
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif
 
@@ -5966,7 +6456,7 @@ void msrMeasure::finalizeMeasure (
         std::endl;
 
       msrWarning (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         inputLineNumber,
         ss.str ());
     }
@@ -6041,7 +6531,9 @@ void msrMeasure::finalizeMeasureClone (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasures ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Finalizing measure clone " <<
       this->asString () <<
       " in segment '" <<
@@ -6051,6 +6543,10 @@ void msrMeasure::finalizeMeasureClone (
       voiceClone->getVoiceName () <<
         ", lines " << inputLineNumber << " .. " << fMeasureEndInputLineNumber << // JMI
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -6071,7 +6567,7 @@ void msrMeasure::finalizeMeasureClone (
         std::endl;
 
       msrWarning (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         inputLineNumber,
         ss.str ());
     }
@@ -6087,18 +6583,18 @@ void msrMeasure::finalizeMeasureClone (
 #endif
 
   if (fMeasureHasBeenFinalized) {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "Attempting to finalize measure clone \"" <<
       asShortString () <<
       "\" more than once";
 
     msrInternalError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 
   ++gIndenter;
@@ -6188,7 +6684,7 @@ void msrMeasure::finalizeMeasureClone (
 
    //   msrInternalError ( // JMI
       msrInternalWarning (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         inputLineNumber,
    //      __FILE__, __LINE__,
         ss.str ());
@@ -6204,7 +6700,7 @@ void msrMeasure::finalizeMeasureClone (
 
      //   msrInternalError ( // JMI
         msrInternalWarning (
-          gGlobalServiceRunData->getInputSourceName (),
+          gGlobalCurrentServiceRunData->getInputSourceName (),
           inputLineNumber,
      //      __FILE__, __LINE__,
           ss.str ());
@@ -6283,9 +6779,15 @@ void msrMeasure::finalizeMeasureClone (
 void msrMeasure::acceptIn (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrMeasure::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrMeasure>*
@@ -6294,9 +6796,15 @@ void msrMeasure::acceptIn (basevisitor* v)
         S_msrMeasure elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrMeasure::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitStart (elem);
   }
@@ -6305,9 +6813,15 @@ void msrMeasure::acceptIn (basevisitor* v)
 void msrMeasure::acceptOut (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrMeasure::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrMeasure>*
@@ -6316,9 +6830,15 @@ void msrMeasure::acceptOut (basevisitor* v)
         S_msrMeasure elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrMeasure::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitEnd (elem);
   }
@@ -6327,9 +6847,15 @@ void msrMeasure::acceptOut (basevisitor* v)
 void msrMeasure::browseData (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrMeasure::browseData ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   for (
@@ -6343,9 +6869,15 @@ void msrMeasure::browseData (basevisitor* v)
   } // for
 
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% <== msrMeasure::browseData ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 }
 
@@ -6432,9 +6964,9 @@ std::string msrMeasure::asShortString () const
       fMeasureUpLinkToSegment->
         getSegmentUpLinkToVoice ();
 
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "[Measure " <<
     fMeasureNumber <<
 // JMI    ", fMeasureKind: " <<
@@ -6463,7 +6995,7 @@ std::string msrMeasure::asShortString () const
     ", line " << fInputLineNumber <<
     ']';
 
-  return s.str ();
+  return ss.str ();
 }
 
 std::string msrMeasure::asShortStringForMeasuresSlices () const
@@ -6474,9 +7006,9 @@ std::string msrMeasure::asShortStringForMeasuresSlices () const
       fMeasureUpLinkToSegment->
         getSegmentUpLinkToVoice ();
 
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     fMeasureNumber <<
     ": " << voice->getVoiceName () <<
     " [";
@@ -6509,7 +7041,7 @@ std::string msrMeasure::asShortStringForMeasuresSlices () const
       fMeasureElementsList.size ();
 
 /* JMI JMI
-  s <<
+  ss <<
     "fMeasureElementsList: " <<
     mfSingularOrPlural (
       measureElementsListSize, "element", "elements") <<
@@ -6517,7 +7049,7 @@ std::string msrMeasure::asShortStringForMeasuresSlices () const
 */
 
   if (measureElementsListSize) {
-// JMI    s << std::endl;
+// JMI    ss << std::endl;
 
     ++gIndenter;
 
@@ -6528,18 +7060,18 @@ std::string msrMeasure::asShortStringForMeasuresSlices () const
     for ( ; ; ) {
       S_msrMeasureElement measureElement = (*i);
 
-      s <<
+      ss <<
         measureElement->asShortStringForMeasuresSlices ();
       if (++i == iEnd) break;
-      s << ", ";
+      ss << ", ";
     } // for
 
     --gIndenter;
   }
 
-  s << ']';
+  ss << ']';
 
-  return s.str ();
+  return ss.str ();
 }
 
 std::string msrMeasure::asString () const
@@ -6550,9 +7082,9 @@ std::string msrMeasure::asString () const
       fMeasureUpLinkToSegment->
         getSegmentUpLinkToVoice ();
 
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "[Measure '" <<
     fMeasureNumber <<
     "', fMeasureKind: " <<
@@ -6575,7 +7107,7 @@ std::string msrMeasure::asString () const
     ", line " << fInputLineNumber <<
     ']';
 
-  return s.str ();
+  return ss.str ();
 }
 
 void msrMeasure::displayMeasure (
@@ -7006,9 +7538,9 @@ std::ostream& operator << (std::ostream& os, const S_msrMeasure& elt)
 //     // insert skipNote before currentHarmony in the measure's elements list
 // #ifdef MF_TRACING_IS_ENABLED
 //     if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
-//       std::stringstream s;
+//       std::stringstream ss;
 //
-//       s <<
+//       ss <<
 //         "Inserting subsequent padding note " <<
 //         skipNote->asString () <<
 //         " before currentHarmony " <<
@@ -7020,7 +7552,7 @@ std::ostream& operator << (std::ostream& os, const S_msrMeasure& elt)
 //
 //       gWaeHandler->waeTrace (
 //         __FILE__, __LINE__,
-//         s.str ());
+//         ss.str ());
 //     }
 // #endif
 //
@@ -7033,18 +7565,18 @@ std::ostream& operator << (std::ostream& os, const S_msrMeasure& elt)
 //
 //   else if (measurePositionsDelta.getNumerator () < 0) {
 //     // the two harmonies overlap in time
-//     std::stringstream s;
+//     std::stringstream ss;
 //
-//     s <<
+//     ss <<
 //       "Previous harmony " <<
 //       previousHarmony->asString () <<
 //       " overlaps current harmony " <<
 //       currentHarmony->asString ();
 //
 //     msrInternalWarning (
-//       gGlobalServiceRunData->getInputSourceName (),
+//       gGlobalCurrentServiceRunData->getInputSourceName (),
 //       inputLineNumber,
-//       s.str ());
+//       ss.str ());
 //
 //     // compute previousHarmony's future sounding whole notes
 //     Rational
@@ -7055,9 +7587,9 @@ std::ostream& operator << (std::ostream& os, const S_msrMeasure& elt)
 //
 // #ifdef MF_TRACING_IS_ENABLED
 //     if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
-//       std::stringstream s;
+//       std::stringstream ss;
 //
-//       s <<
+//       ss <<
 //         "Reducing the sounding whole notes of harmony " <<
 //         previousHarmony->asString () <<
 //         " from " <<
@@ -7071,23 +7603,23 @@ std::ostream& operator << (std::ostream& os, const S_msrMeasure& elt)
 //
 //       gWaeHandler->waeTrace (
 //         __FILE__, __LINE__,
-//         s.str ());
+//         ss.str ());
 //     }
 // #endif
 //
 //     if (reducedSoundingWholeNotes.getNumerator () == 0) {
-//       std::stringstream s;
+//       std::stringstream ss;
 //
-//       s <<
+//       ss <<
 //         "Cannot reduce the duration of harmony " <<
 //         previousHarmony->asShortString () <<
 //         " to 0 : leaving it as it is";
 //
 //       msrInternalWarning (
-//         gGlobalServiceRunData->getInputSourceName (),
+//         gGlobalCurrentServiceRunData->getInputSourceName (),
 //         inputLineNumber,
 // //  JMI             __FILE__, __LINE__,
-//         s.str ());
+//         ss.str ());
 //     }
 //     else {
 //       // set previousHarmony's duration to the reduced value

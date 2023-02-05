@@ -19,6 +19,7 @@
 #include "msrSlurs.h"
 
 #include "oahOah.h"
+#include "oahEarlyOptions.h"
 
 #include "msrOah.h"
 
@@ -31,35 +32,35 @@ namespace MusicFormats
 std::string msrSlurTypeKindAsString (
   msrSlurTypeKind slurTypeKind)
 {
-  std::stringstream s;
+  std::stringstream ss;
 
   switch (slurTypeKind) {
     case msrSlurTypeKind::kSlurType_UNKNOWN:
-      s << "kSlurType_UNKNOWN";
+      ss << "kSlurType_UNKNOWN";
       break;
 
     case msrSlurTypeKind::kSlurTypeRegularStart:
-      s << "kSlurTypeRegularStart";
+      ss << "kSlurTypeRegularStart";
       break;
     case msrSlurTypeKind::kSlurTypeRegularContinue:
-      s << "kSlurTypeRegularContinue";
+      ss << "kSlurTypeRegularContinue";
       break;
     case msrSlurTypeKind::kSlurTypeRegularStop:
-      s << "kSlurTypeRegularStop";
+      ss << "kSlurTypeRegularStop";
       break;
 
     case msrSlurTypeKind::kSlurTypePhrasingStart:
-      s << "kSlurTypePhrasingStart";
+      ss << "kSlurTypePhrasingStart";
       break;
     case msrSlurTypeKind::kSlurTypePhrasingContinue:
-      s << "kSlurTypePhrasingContinue";
+      ss << "kSlurTypePhrasingContinue";
       break;
     case msrSlurTypeKind::kSlurTypePhrasingStop:
-      s << "kSlurTypePhrasingStop";
+      ss << "kSlurTypePhrasingStop";
       break;
   } // switch
 
-  return s.str ();
+  return ss.str ();
 }
 
 std::ostream& operator << (std::ostream& os, const msrSlurTypeKind& elt)
@@ -122,9 +123,15 @@ msrSlur::~msrSlur ()
 void msrSlur::acceptIn (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrSlur::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrSlur>*
@@ -133,9 +140,15 @@ void msrSlur::acceptIn (basevisitor* v)
         S_msrSlur elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrSlur::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitStart (elem);
   }
@@ -144,9 +157,15 @@ void msrSlur::acceptIn (basevisitor* v)
 void msrSlur::acceptOut (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrSlur::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrSlur>*
@@ -155,9 +174,15 @@ void msrSlur::acceptOut (basevisitor* v)
         S_msrSlur elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrSlur::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitEnd (elem);
   }
@@ -169,9 +194,9 @@ void msrSlur::browseData (basevisitor* v)
 
 std::string msrSlur::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "[Slur" <<
     ", slurNumber: " <<
     fSlurNumber <<
@@ -191,7 +216,7 @@ std::string msrSlur::asString () const
     ", line " << fInputLineNumber <<
     ']';
 
-  return s.str ();
+  return ss.str ();
 }
 
 void msrSlur::print (std::ostream& os) const

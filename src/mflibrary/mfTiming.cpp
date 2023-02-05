@@ -22,11 +22,11 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 std::string mfTimingItemKindAsString (
-  mfTimingItemKind imingItemKind)
+  mfTimingItemKind timingItemKind)
 {
   std::string result;
 
-  switch (imingItemKind) {
+  switch (timingItemKind) {
     case mfTimingItemKind::kMandatory:
       result = "kMandatory";
       break;
@@ -50,14 +50,14 @@ mfTimingItemsList mfTimingItemsList::gGlobalTimingItemsList;
 S_mfTimingItem mfTimingItem::createTimingItem (
   const std::string& activity,
   const std::string& description,
-  mfTimingItemKind   kind,
+  mfTimingItemKind   timingItemKind,
   clock_t            startClock,
   clock_t            endClock)
 {
   mfTimingItem* o = new mfTimingItem (
     activity,
     description,
-    kind,
+    timingItemKind,
     startClock,
     endClock);
   assert (o != nullptr);
@@ -67,15 +67,15 @@ S_mfTimingItem mfTimingItem::createTimingItem (
 mfTimingItem::mfTimingItem (
   const std::string& activity,
   const std::string& description,
-  mfTimingItemKind   kind,
+  mfTimingItemKind   timingItemKind,
   clock_t            startClock,
   clock_t            endClock)
 {
-  fActivity    = activity;
-  fDescription = description;
-  fKind        = kind;
-  fStartClock  = startClock;
-  fEndClock    = endClock;
+  fActivity       = activity;
+  fDescription    = description;
+  fTimingItemKind = timingItemKind;
+  fStartClock     = startClock;
+  fEndClock       = endClock;
 }
 
 mfTimingItemsList::mfTimingItemsList ()
@@ -87,7 +87,7 @@ mfTimingItemsList::~mfTimingItemsList ()
 void mfTimingItemsList::appendTimingItem (
   mfPassIDKind       passIDKind,
   const std::string& description,
-  mfTimingItemKind   kind,
+  mfTimingItemKind   timingItemKind,
   clock_t            startClock,
   clock_t            endClock)
 {
@@ -96,7 +96,7 @@ void mfTimingItemsList::appendTimingItem (
       mfTimingItem::createTimingItem (
         gWaeHandler->passIDKindAsString (passIDKind),
         description,
-        kind,
+        timingItemKind,
         startClock,
         endClock);
 
@@ -113,6 +113,7 @@ void mfTimingItemsList::doPrint (std::ostream& os) const
     secondsWidth     = 1,
     secondsPrecision = 1;
 
+  // set the timing items columns widths
   switch (gGlobalOahEarlyOptions.getEarlyLanguageKind ()) {
     case mfLanguageKind::kMusicFormatsLanguage_UNKNOWN:
       break;
@@ -159,30 +160,30 @@ void mfTimingItemsList::doPrint (std::ostream& os) const
 //   gLogStream << "secondsWidth: " << secondsWidth << std::endl;
 //   gLogStream << "secondsPrecision: " << secondsPrecision << std::endl;
 
-//   os << std::right <<
+  //  print the timing items columns headers and separators
   os << std::left <<
     std::setw (activityWidth) <<
     gWaeHandler->activity () <<
-    "  " <<
+    ' ' <<
     std::setw (descriptionWidth) <<
     gWaeHandler->description () <<
-    "  " <<
+    ' ' <<
     std::setw (kindWidth)     <<
     gWaeHandler->kind () <<
-    "  " <<
+    ' ' <<
     std::setw (secondsWidth)  <<
     gWaeHandler->CPUSeconds () <<
     std::endl <<
 
     std::setw (activityWidth) <<
     mfReplicateString ("-", activityWidth) <<
-    "  " <<
+    ' ' <<
     std::setw (descriptionWidth) <<
     mfReplicateString ("-", descriptionWidth) <<
-    "  " <<
+    ' ' <<
     std::setw (kindWidth) <<
     mfReplicateString ("-", kindWidth) <<
-    "  " <<
+    ' ' <<
     std::setw (secondsWidth) <<
     mfReplicateString ("-", secondsWidth) <<
     std::endl << std::endl;
@@ -192,19 +193,36 @@ void mfTimingItemsList::doPrint (std::ostream& os) const
     totalMandatoryClock = 0,
     totalOptionalClock  = 0;
 
+  // print the timing items
   for (S_mfTimingItem theTimingItem : fTimingItemsList) {
     clock_t timingItemClock =
       theTimingItem->getEndClock () - theTimingItem->getStartClock ();
     totalClock += timingItemClock;
 
-    os << std::left <<
-      std::setw (activityWidth) <<
-      theTimingItem->getActivity () <<
-      "  ";
+    // do not print optional passes as activity
+    switch (theTimingItem->getTimingItemKind ()) {
+      case mfTimingItemKind::kMandatory:
+        os << std::left <<
+          std::setw (activityWidth) <<
+          theTimingItem->getActivity () <<
+          ' ';
+        break;
+      case mfTimingItemKind::kOptional:
+        os << std::left <<
+          ' ';
+        break;
+    } // switch
 
+    // take care of multi-line descriptions
     std::string
       description =
         theTimingItem->getDescription ();
+
+    gIndenter.printMultiLineStringInATable (
+      description,
+      activityWidth + 1,
+      descriptionWidth,
+      os);
 
     os << std::left <<
       std::setw (descriptionWidth) <<
@@ -212,26 +230,23 @@ void mfTimingItemsList::doPrint (std::ostream& os) const
 
     // if description contains non-diacritic characters (UTF-8),
     // that fouls std::setw() which accounts two characters for them
-
     int
       twoBytesWideCharactersInString =
         countTwoBytesWideCharactersInString (description);
 
 //     gLogStream << "twoBytesWideCharactersInString: " << twoBytesWideCharactersInString << std::endl;
 
-
     if (twoBytesWideCharactersInString > 0) {
       os <<
-        mfReplicateString (" ", twoBytesWideCharactersInString);
+        mfReplicateChar (' ', twoBytesWideCharactersInString);
     }
-
     os <<
-      "  ";
+      ' ';
 
     os <<
       std::left <<
       std::setw (kindWidth);
-    switch (theTimingItem->getKind ()) {
+    switch (theTimingItem->getTimingItemKind ()) {
       case mfTimingItemKind::kMandatory:
         totalMandatoryClock += timingItemClock;
         os <<
@@ -248,7 +263,7 @@ void mfTimingItemsList::doPrint (std::ostream& os) const
         break;
     } // switch
 
-    os << "  " <<
+    os << ' ' <<
       std::left <<
       std::fixed <<
       std::setprecision (secondsPrecision) <<
@@ -258,7 +273,7 @@ void mfTimingItemsList::doPrint (std::ostream& os) const
   } // for
   os << std::endl;
 
-  // printing the totals
+  // set the total spent times columns widths
   int
     totalClockWidth          = 1,
     totalMandatoryClockWidth = 1,
@@ -300,23 +315,24 @@ void mfTimingItemsList::doPrint (std::ostream& os) const
       break;
   } // switch
 
+  // print the total spent times
   os << std::left <<
     std::setw (totalClockWidth) <<
     gWaeHandler->totalSeconds () <<
-    "  " <<
+    ' ' <<
     std::setw (totalMandatoryClockWidth) <<
     gWaeHandler->mandatory () <<
-    "  " <<
+    ' ' <<
     std::setw (totalOptionalClockWidth) <<
     gWaeHandler->optional () <<
     std::endl <<
 
     std::setw (totalClockWidth) <<
     mfReplicateString ("-", totalClockWidth) <<
-    "  " <<
+    ' ' <<
     std::setw (totalMandatoryClockWidth) <<
     mfReplicateString ("-", totalMandatoryClockWidth) <<
-    "  " <<
+    ' ' <<
     std::setw (totalOptionalClockWidth) <<
     mfReplicateString ("-", totalOptionalClockWidth) <<
     std::endl <<
@@ -326,10 +342,10 @@ void mfTimingItemsList::doPrint (std::ostream& os) const
 
     std::setw (totalClockWidth) <<
     float (totalClock) / CLOCKS_PER_SEC <<
-    "  " <<
+    ' ' <<
     std::setw (totalMandatoryClockWidth) <<
     float(totalMandatoryClock) / CLOCKS_PER_SEC <<
-    "  " <<
+    ' ' <<
     std::setw (totalOptionalClockWidth) <<
     float (totalOptionalClock) / CLOCKS_PER_SEC <<
     std::endl;

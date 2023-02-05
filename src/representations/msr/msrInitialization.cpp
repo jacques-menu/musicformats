@@ -36,9 +36,15 @@ void initializeMSR ()
         &&
       ! gGlobalOahEarlyOptions.getEarlyQuietOption ()
     ) {
-      gLogStream <<
+      std::stringstream ss;
+
+      ss <<
         "Initializing MSR" <<
         std::endl;
+
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif
 

@@ -68,7 +68,7 @@ mfMusicformatsErrorKind convertMsdlStream2brailleWithHandler (
   std::ostream&       err)
 {
   // register the input source name
-  gGlobalServiceRunData->setInputSourceName (
+  gGlobalCurrentServiceRunData->setInputSourceName (
     inputSourceName);
 
   // has quiet mode been requested?
@@ -107,6 +107,10 @@ mfMusicformatsErrorKind convertMsdlStream2brailleWithHandler (
         std::endl <<
         separator <<
         std::endl;
+
+//       gWaeHandler->waeTrace ( // JMI v0.9.67
+//         __FILE__, __LINE__,
+//         ss.str ());
     }
 #endif
 
@@ -133,14 +137,14 @@ mfMusicformatsErrorKind convertMsdlStream2brailleWithHandler (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
     if (! firstMsrScore) {
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         "Could not perform comversion of \"" <<
         inputSourceName <<
         "\" to MSR - quitting";
 
-      std::string message = s.str ();
+      std::string message = ss.str ();
 
       err <<
         message <<
@@ -347,6 +351,10 @@ mfMusicformatsErrorKind convertMsdlStream2brailleWithHandler (
           outputFileName <<
           "\"" <<
           std::endl;
+
+//         gWaeHandler->waeTrace ( // JMI v0.9.67
+//           __FILE__, __LINE__,
+//           ss.str ());
       }
 #endif
 
@@ -356,6 +364,10 @@ mfMusicformatsErrorKind convertMsdlStream2brailleWithHandler (
         err <<
           "convertMsdlStream2brailleWithHandler() output goes to standard output" <<
           std::endl;
+
+//         gWaeHandler->waeTrace ( // JMI v0.9.67
+//           __FILE__, __LINE__,
+//           ss.str ());
       }
 #endif
 
@@ -386,6 +398,10 @@ mfMusicformatsErrorKind convertMsdlStream2brailleWithHandler (
           outputFileName <<
           "\"" <<
           std::endl;
+
+//         gWaeHandler->waeTrace ( // JMI v0.9.67
+//           __FILE__, __LINE__,
+//           ss.str ());
       }
 #endif
 
@@ -405,12 +421,12 @@ mfMusicformatsErrorKind convertMsdlStream2brailleWithHandler (
           std::ofstream::out);
 
       if (! brailleCodeFileOutputStream.is_open ()) {
-        std::stringstream s;
+        std::stringstream ss;
 
-        s <<
+        ss <<
           gWaeHandler->cannotOpenBrailleMusicFileForWriting (outputFileName);
 
-        std::string message = s.str ();
+        std::string message = ss.str ();
 
         err <<
           message <<
@@ -440,10 +456,16 @@ mfMusicformatsErrorKind convertMsdlStream2brailleWithHandler (
       // close output file
 #ifdef TRACE_OAH
       if (gtracingOah->fTracePasses) {
-        gLogStream <<
+        std::stringstream ss;
+
+        ss <<
           std::endl <<
           gWaeHandler->openingMusicXMLFileForWriting (outputFileName) <<
           std::endl;
+
+        gWaeHandler->waeTrace (
+          __FILE__, __LINE__,
+          ss.str ());
       }
 #endif
 
@@ -481,7 +503,9 @@ mfMusicformatsErrorKind convertMsdlStream2brailleWithOptionsAndArguments (
   // ------------------------------------------------------
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       handlerOptionsAndArguments;
   }
 #endif
@@ -500,10 +524,16 @@ mfMusicformatsErrorKind convertMsdlStream2brailleWithOptionsAndArguments (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       serviceName << " main()" <<
       ", insiderOption: " << insiderOption <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -538,7 +568,7 @@ mfMusicformatsErrorKind convertMsdlStream2brailleWithOptionsAndArguments (
   // create the global run data
   // ------------------------------------------------------
 
-  gGlobalServiceRunData =
+  gGlobalCurrentServiceRunData =
     mfServiceRunData::create (
       serviceName);
 
@@ -621,12 +651,12 @@ EXP mfMusicformatsErrorKind convertMsdlFile2brailleWithOptionsAndArguments (
       std::ifstream::in);
 
   if (! inputStream.is_open ()) {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       gWaeHandler->cannotOpenMSDLFileForReading (inputFileName);
 
-    std::string message = s.str ();
+    std::string message = ss.str ();
 
     err <<
       message <<
@@ -666,12 +696,12 @@ mfMusicformatsErrorKind convertMsdlFile2brailleWithHandler (
       std::ifstream::in);
 
   if (! inputStream.is_open ()) {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       gWaeHandler->cannotOpenBrailleMusicFileForWriting (inputFileName);
 
-    std::string message = s.str ();
+    std::string message = ss.str ();
 
     err <<
       message <<

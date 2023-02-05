@@ -113,12 +113,12 @@ void msdlParserWaeHandlerGerman::malformedNoteDuration () const
 
 std::string msdlParserWaeHandlerGerman::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "MSDL lexical english WAE handler";
 
-  return s.str ();
+  return ss.str ();
 }
 
 void msdlParserWaeHandlerGerman::print (std::ostream& os) const

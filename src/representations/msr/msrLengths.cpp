@@ -68,7 +68,7 @@ void initializeMsrLengthUnitKindsMap ()
 
 std::string availableMsrLengthUnitKinds (size_t namesListMaxLength)
 {
-  std::stringstream s;
+  std::stringstream ss;
 
   size_t msrLengthUnitKindsMapSize =
     gGlobalMsrLengthUnitKindsMap.size ();
@@ -92,25 +92,25 @@ std::string availableMsrLengthUnitKinds (size_t namesListMaxLength)
 
       cumulatedLength += theString.size ();
       if (cumulatedLength >= namesListMaxLength) {
-        s << std::endl << gIndenter.getSpacer ();
+        ss << std::endl << gIndenter.getSpacer ();
         cumulatedLength = 0;
       }
 
       if (count == 1) {
-        s << gIndenter.getSpacer ();
+        ss << gIndenter.getSpacer ();
       }
-      s << theString;
+      ss << theString;
 
       if (count == nextToLast) {
-        s << " and ";
+        ss << " and ";
       }
       else if (count != msrLengthUnitKindsMapSize) {
-        s << ", ";
+        ss << ", ";
       }
     } // for
   }
 
-  return s.str ();
+  return ss.str ();
 }
 
 // lengths
@@ -195,9 +195,9 @@ void msrLength::convertToLengthUnit (
 
 std::string msrLength::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "[Length " <<
     std::setprecision (4) <<
     fLengthValue <<
@@ -205,7 +205,7 @@ std::string msrLength::asString () const
     msrLengthUnitKindAsString (fLengthUnitKind) <<
     ']';
 
-  return s.str ();
+  return ss.str ();
 }
 
 void msrLength::print (std::ostream& os) const

@@ -109,9 +109,15 @@ void lilypondScoreOutputKindAtom::applyAtomWithValue (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "==> oahAtom is of type 'lilypondScoreOutputKindAtom'" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -122,9 +128,15 @@ void lilypondScoreOutputKindAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       ".\\\" ==> lilypondScoreOutputKindAtom::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -135,9 +147,15 @@ void lilypondScoreOutputKindAtom::acceptIn (basevisitor* v)
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             ".\\\" ==> Launching lilypondScoreOutputKindAtom::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
         p->visitStart (elem);
@@ -148,9 +166,15 @@ void lilypondScoreOutputKindAtom::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       ".\\\" ==> lilypondScoreOutputKindAtom::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -161,9 +185,15 @@ void lilypondScoreOutputKindAtom::acceptOut (basevisitor* v)
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             ".\\\" ==> Launching lilypondScoreOutputKindAtom::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
         p->visitEnd (elem);
@@ -174,33 +204,39 @@ void lilypondScoreOutputKindAtom::browseData (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       ".\\\" ==> lilypondScoreOutputKindAtom::browseData ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 }
 
 std::string lilypondScoreOutputKindAtom::asShortNamedOptionString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     '-' << fShortName << ' ' <<
     lpsrScoreOutputKindAsString (fLpsrScoreOutputKindVariable);
 
-  return s.str ();
+  return ss.str ();
 }
 
 std::string lilypondScoreOutputKindAtom::asActualLongNamedOptionString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     '-' << fLongName << ' ' <<
     lpsrScoreOutputKindAsString (fLpsrScoreOutputKindVariable);
 
-  return s.str ();
+  return ss.str ();
 }
 
 void lilypondScoreOutputKindAtom::print (std::ostream& os) const
@@ -243,6 +279,14 @@ void lilypondScoreOutputKindAtom::displayAtomWithVariableOptionsValues (
       fLpsrScoreOutputKindVariable) <<
     "\"";
 
+  switch (fEarlyOptionKind) {
+    case oahEarlyOptionKind::kEarlyOptionNo:
+      break;
+    case oahEarlyOptionKind::kEarlyOptionYes:
+			os <<
+				", early";
+      break;
+  } // switch
   if (fSelected) {
     os << ", selected";
   }
@@ -310,9 +354,15 @@ void lilypondTransposePartNameAtom::applyAtomWithValue (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "==> oahAtom is of type 'lilypondTransposePartNameAtom'" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -337,12 +387,18 @@ void lilypondTransposePartNameAtom::applyAtomWithValue (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "There are " << smSize << " matches" <<
       " for part transpose string '" << theString <<
       "' with std::regex '" << regularExpression <<
       "'" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -359,13 +415,13 @@ void lilypondTransposePartNameAtom::applyAtomWithValue (
   }
 
   else {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "-lilypond-transpose-part-name argument '" << theString <<
       "' is ill-formed";
 
-    oahError (s.str ());
+    oahError (ss.str ());
   }
 
   std::string
@@ -374,10 +430,16 @@ void lilypondTransposePartNameAtom::applyAtomWithValue (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "--> partName = \"" << partName << "\", " <<
       "--> destinationPitchName = \"" << destinationPitchName << "\"" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -388,14 +450,14 @@ void lilypondTransposePartNameAtom::applyAtomWithValue (
 
   if (it != fStringToMsrSemiTonesPitchAndOctaveMapVariable.end ()) {
     // yes, issue error message
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "Part name \"" << partName << "\" occurs more that once in the " <<
       fetchNamesBetweenQuotes () <<
       " option";
 
-    oahError (s.str ());
+    oahError (ss.str ());
   }
 
   else {
@@ -412,9 +474,15 @@ void lilypondTransposePartNameAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       ".\\\" ==> lilypondTransposePartNameAtom::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -425,9 +493,15 @@ void lilypondTransposePartNameAtom::acceptIn (basevisitor* v)
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             ".\\\" ==> Launching lilypondTransposePartNameAtom::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
         p->visitStart (elem);
@@ -438,9 +512,15 @@ void lilypondTransposePartNameAtom::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       ".\\\" ==> lilypondTransposePartNameAtom::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -451,9 +531,15 @@ void lilypondTransposePartNameAtom::acceptOut (basevisitor* v)
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             ".\\\" ==> Launching lilypondTransposePartNameAtom::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
         p->visitEnd (elem);
@@ -464,19 +550,25 @@ void lilypondTransposePartNameAtom::browseData (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       ".\\\" ==> lilypondTransposePartNameAtom::browseData ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 }
 
 std::string lilypondTransposePartNameAtom::asShortNamedOptionString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
   if (fStringToMsrSemiTonesPitchAndOctaveMapVariable.size ()) {
-    s <<
+    ss <<
       '-' << fShortName << " \"";
 
     std::map<std::string, S_msrSemiTonesPitchAndOctave>::const_iterator
@@ -484,7 +576,7 @@ std::string lilypondTransposePartNameAtom::asShortNamedOptionString () const
       iEnd   = fStringToMsrSemiTonesPitchAndOctaveMapVariable.end (),
       i      = iBegin;
     for ( ; ; ) {
-      s <<
+      ss <<
         (*i).first << "=" <<
         msrSemiTonesPitchAndOctaveAsLilypondString (
           gGlobalMsrOahGroup->getMsrQuarterTonesPitchesLanguageKind (),
@@ -492,18 +584,18 @@ std::string lilypondTransposePartNameAtom::asShortNamedOptionString () const
       if (++i == iEnd) break;
     } // for
 
-    s << "\"";
+    ss << "\"";
   }
 
-  return s.str ();
+  return ss.str ();
 }
 
 std::string lilypondTransposePartNameAtom::asActualLongNamedOptionString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
   if (fStringToMsrSemiTonesPitchAndOctaveMapVariable.size ()) {
-    s <<
+    ss <<
       '-' << fShortName << " \"";
 
     std::map<std::string, S_msrSemiTonesPitchAndOctave>::const_iterator
@@ -511,7 +603,7 @@ std::string lilypondTransposePartNameAtom::asActualLongNamedOptionString () cons
       iEnd   = fStringToMsrSemiTonesPitchAndOctaveMapVariable.end (),
       i      = iBegin;
     for ( ; ; ) {
-      s <<
+      ss <<
         (*i).first << "=" <<
         msrSemiTonesPitchAndOctaveAsLilypondString (
           gGlobalMsrOahGroup->getMsrQuarterTonesPitchesLanguageKind (),
@@ -519,10 +611,10 @@ std::string lilypondTransposePartNameAtom::asActualLongNamedOptionString () cons
       if (++i == iEnd) break;
     } // for
 
-    s << "\"";
+    ss << "\"";
   }
 
-  return s.str ();
+  return ss.str ();
 }
 
 void lilypondTransposePartNameAtom::print (std::ostream& os) const
@@ -574,6 +666,14 @@ void lilypondTransposePartNameAtom::displayAtomWithVariableOptionsValues (
     fVariableName <<
     ": ";
 
+  switch (fEarlyOptionKind) {
+    case oahEarlyOptionKind::kEarlyOptionNo:
+      break;
+    case oahEarlyOptionKind::kEarlyOptionYes:
+			os <<
+				", early";
+      break;
+  } // switch
   if (fSelected) {
     os << ", selected";
   }
@@ -667,9 +767,15 @@ void lilypondTransposePartIDAtom::applyAtomWithValue (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "==> oahAtom is of type 'lilypondTransposePartIDAtom'" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -691,12 +797,18 @@ void lilypondTransposePartIDAtom::applyAtomWithValue (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "There are " << smSize << " matches" <<
       " for part transpose string '" << theString <<
       "' with std::regex '" << regularExpression <<
       "'" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -713,13 +825,13 @@ void lilypondTransposePartIDAtom::applyAtomWithValue (
   }
 
   else {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "-lilypond-transpose-part-id argument '" << theString <<
       "' is ill-formed";
 
-    oahError (s.str ());
+    oahError (ss.str ());
   }
 
   std::string
@@ -728,10 +840,16 @@ void lilypondTransposePartIDAtom::applyAtomWithValue (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "--> partID = \"" << partID << "\", " <<
       "--> destinationPitchName = \"" << destinationPitchName << "\"" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -742,14 +860,14 @@ void lilypondTransposePartIDAtom::applyAtomWithValue (
 
   if (it != fStringToMsrSemiTonesPitchAndOctaveMapVariable.end ()) {
     // yes, issue error message
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "Part ID \"" << partID << "\" occurs more that once in the " <<
       fetchNamesBetweenQuotes () <<
       " option";
 
-    oahError (s.str ());
+    oahError (ss.str ());
   }
 
   else {
@@ -766,9 +884,15 @@ void lilypondTransposePartIDAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       ".\\\" ==> lilypondTransposePartIDAtom::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -779,9 +903,15 @@ void lilypondTransposePartIDAtom::acceptIn (basevisitor* v)
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             ".\\\" ==> Launching lilypondTransposePartIDAtom::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
         p->visitStart (elem);
@@ -792,9 +922,15 @@ void lilypondTransposePartIDAtom::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       ".\\\" ==> lilypondTransposePartIDAtom::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -805,9 +941,15 @@ void lilypondTransposePartIDAtom::acceptOut (basevisitor* v)
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             ".\\\" ==> Launching lilypondTransposePartIDAtom::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
         p->visitEnd (elem);
@@ -818,19 +960,25 @@ void lilypondTransposePartIDAtom::browseData (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       ".\\\" ==> lilypondTransposePartIDAtom::browseData ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 }
 
 std::string lilypondTransposePartIDAtom::asShortNamedOptionString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
   if (fStringToMsrSemiTonesPitchAndOctaveMapVariable.size ()) {
-    s <<
+    ss <<
       '-' << fShortName << " \"";
 
     std::map<std::string, S_msrSemiTonesPitchAndOctave>::const_iterator
@@ -838,7 +986,7 @@ std::string lilypondTransposePartIDAtom::asShortNamedOptionString () const
       iEnd   = fStringToMsrSemiTonesPitchAndOctaveMapVariable.end (),
       i      = iBegin;
     for ( ; ; ) {
-      s <<
+      ss <<
         (*i).first << "=" <<
         msrSemiTonesPitchAndOctaveAsLilypondString (
           gGlobalMsrOahGroup->getMsrQuarterTonesPitchesLanguageKind (),
@@ -846,18 +994,18 @@ std::string lilypondTransposePartIDAtom::asShortNamedOptionString () const
       if (++i == iEnd) break;
     } // for
 
-    s << "\"";
+    ss << "\"";
   }
 
-  return s.str ();
+  return ss.str ();
 }
 
 std::string lilypondTransposePartIDAtom::asActualLongNamedOptionString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
   if (fStringToMsrSemiTonesPitchAndOctaveMapVariable.size ()) {
-    s <<
+    ss <<
       '-' << fShortName << " \"";
 
     std::map<std::string, S_msrSemiTonesPitchAndOctave>::const_iterator
@@ -865,7 +1013,7 @@ std::string lilypondTransposePartIDAtom::asActualLongNamedOptionString () const
       iEnd   = fStringToMsrSemiTonesPitchAndOctaveMapVariable.end (),
       i      = iBegin;
     for ( ; ; ) {
-      s <<
+      ss <<
         (*i).first << "=" <<
         msrSemiTonesPitchAndOctaveAsLilypondString (
           gGlobalMsrOahGroup->getMsrQuarterTonesPitchesLanguageKind (),
@@ -873,10 +1021,10 @@ std::string lilypondTransposePartIDAtom::asActualLongNamedOptionString () const
       if (++i == iEnd) break;
     } // for
 
-    s << "\"";
+    ss << "\"";
   }
 
-  return s.str ();
+  return ss.str ();
 }
 
 void lilypondTransposePartIDAtom::print (std::ostream& os) const
@@ -928,6 +1076,14 @@ void lilypondTransposePartIDAtom::displayAtomWithVariableOptionsValues (
     fVariableName <<
     ": ";
 
+  switch (fEarlyOptionKind) {
+    case oahEarlyOptionKind::kEarlyOptionNo:
+      break;
+    case oahEarlyOptionKind::kEarlyOptionYes:
+			os <<
+				", early";
+      break;
+  } // switch
   if (fSelected) {
     os << ", selected";
   }
@@ -1095,10 +1251,16 @@ void lilypondAbsoluteOctaveEntryAtom::applyValueLessAtom (std::ostream& os)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "==> option '" << fetchNames () <<
       "' is a lilypondAbsoluteOctaveEntryAtom" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -1113,9 +1275,15 @@ void lilypondAbsoluteOctaveEntryAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       ".\\\" ==> lilypondAbsoluteOctaveEntryAtom::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -1126,9 +1294,15 @@ void lilypondAbsoluteOctaveEntryAtom::acceptIn (basevisitor* v)
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             ".\\\" ==> Launching lilypondAbsoluteOctaveEntryAtom::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
         p->visitStart (elem);
@@ -1139,9 +1313,15 @@ void lilypondAbsoluteOctaveEntryAtom::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       ".\\\" ==> lilypondAbsoluteOctaveEntryAtom::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -1152,9 +1332,15 @@ void lilypondAbsoluteOctaveEntryAtom::acceptOut (basevisitor* v)
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             ".\\\" ==> Launching lilypondAbsoluteOctaveEntryAtom::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
         p->visitEnd (elem);
@@ -1165,9 +1351,15 @@ void lilypondAbsoluteOctaveEntryAtom::browseData (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       ".\\\" ==> lilypondAbsoluteOctaveEntryAtom::browseData ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 }
@@ -1176,13 +1368,13 @@ void lilypondAbsoluteOctaveEntryAtom::applyAtomWithValue (
   const std::string& theString,
   std::ostream&      os)
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "applying absolute octave entry option \"" << fetchNames () <<
     "\" with a value";
 
-  oahInternalError (s.str ());
+  oahInternalError (ss.str ());
 }
 
 void lilypondAbsoluteOctaveEntryAtom::print (std::ostream& os) const
@@ -1276,9 +1468,15 @@ void lilypondRelativeOctaveEntryAtom::applyAtomWithValue (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "==> oahAtom is of type 'lilypondRelativeOctaveEntryAtom'" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -1297,9 +1495,9 @@ void lilypondRelativeOctaveEntryAtom::applyAtomWithValue (
 
     printOptionsSummary (gLogStream);
 
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "octave entry kind '" << theString <<
       "' is unknown" <<
       std::endl <<
@@ -1310,12 +1508,12 @@ void lilypondRelativeOctaveEntryAtom::applyAtomWithValue (
 
     ++gIndenter;
 
-    s <<
+    ss <<
       availableMsrOctaveEntryKinds ();
 
     --gIndenter;
 
-    oahError (s.str ());
+    oahError (ss.str ());
   }
 
   if (! theString.size ()) {
@@ -1340,9 +1538,15 @@ void lilypondRelativeOctaveEntryAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       ".\\\" ==> lilypondRelativeOctaveEntryAtom::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -1353,9 +1557,15 @@ void lilypondRelativeOctaveEntryAtom::acceptIn (basevisitor* v)
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             ".\\\" ==> Launching lilypondRelativeOctaveEntryAtom::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
         p->visitStart (elem);
@@ -1366,9 +1576,15 @@ void lilypondRelativeOctaveEntryAtom::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       ".\\\" ==> lilypondRelativeOctaveEntryAtom::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -1379,9 +1595,15 @@ void lilypondRelativeOctaveEntryAtom::acceptOut (basevisitor* v)
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             ".\\\" ==> Launching lilypondRelativeOctaveEntryAtom::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
         p->visitEnd (elem);
@@ -1392,33 +1614,39 @@ void lilypondRelativeOctaveEntryAtom::browseData (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       ".\\\" ==> lilypondRelativeOctaveEntryAtom::browseData ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 }
 
 std::string lilypondRelativeOctaveEntryAtom::asShortNamedOptionString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     '-' << fShortName << ' ' <<
     fSemiTonesPitchAndOctaveVariable->asString ();
 
-  return s.str ();
+  return ss.str ();
 }
 
 std::string lilypondRelativeOctaveEntryAtom::asActualLongNamedOptionString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     '-' << fLongName << ' ' <<
     fSemiTonesPitchAndOctaveVariable->asString ();
 
-  return s.str ();
+  return ss.str ();
 }
 
 void lilypondRelativeOctaveEntryAtom::print (std::ostream& os) const
@@ -1534,9 +1762,15 @@ void lilypondFixedOctaveEntryAtom::applyAtomWithValue (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "==> oahAtom is of type 'lilypondFixedOctaveEntryAtom'" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -1559,9 +1793,15 @@ void lilypondFixedOctaveEntryAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       ".\\\" ==> lilypondFixedOctaveEntryAtom::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -1572,9 +1812,15 @@ void lilypondFixedOctaveEntryAtom::acceptIn (basevisitor* v)
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             ".\\\" ==> Launching lilypondFixedOctaveEntryAtom::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
         p->visitStart (elem);
@@ -1585,9 +1831,15 @@ void lilypondFixedOctaveEntryAtom::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       ".\\\" ==> lilypondFixedOctaveEntryAtom::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -1598,9 +1850,15 @@ void lilypondFixedOctaveEntryAtom::acceptOut (basevisitor* v)
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             ".\\\" ==> Launching lilypondFixedOctaveEntryAtom::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
         p->visitEnd (elem);
@@ -1611,33 +1869,39 @@ void lilypondFixedOctaveEntryAtom::browseData (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       ".\\\" ==> lilypondFixedOctaveEntryAtom::browseData ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 }
 
 std::string lilypondFixedOctaveEntryAtom::asShortNamedOptionString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     '-' << fShortName << ' ' <<
     fSemiTonesPitchAndOctaveVariable->asString ();
 
-  return s.str ();
+  return ss.str ();
 }
 
 std::string lilypondFixedOctaveEntryAtom::asActualLongNamedOptionString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     '-' << fLongName << ' ' <<
     fSemiTonesPitchAndOctaveVariable->asString ();
 
-  return s.str ();
+  return ss.str ();
 }
 
 void lilypondFixedOctaveEntryAtom::print (std::ostream& os) const
@@ -1746,9 +2010,15 @@ void lilypondAccidentalStyleKindAtom::applyAtomWithValue (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "==> oahAtom is of type 'lilypondAccidentalStyleKindAtom'" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -1757,9 +2027,15 @@ void lilypondAccidentalStyleKindAtom::applyAtomWithValue (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "==> oahAtom is of type 'lilypondAccidentalStyleKindAtom'" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -1770,9 +2046,9 @@ void lilypondAccidentalStyleKindAtom::applyAtomWithValue (
 
   if (it == gGlobalLpsrAccidentalStyleKindsMap.end ()) {
     // no, accidental style is unknown in the map
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "LPSR accidental style '" << theString <<
       "' is unknown" <<
       std::endl <<
@@ -1783,12 +2059,12 @@ void lilypondAccidentalStyleKindAtom::applyAtomWithValue (
 
     ++gIndenter;
 
-    s <<
+    ss <<
       availableLpsrAccidentalStyleKinds (K_MF_NAMES_LIST_MAX_LENGTH);
 
     --gIndenter;
 
-    oahError (s.str ());
+    oahError (ss.str ());
   }
 
   setLpsrAccidentalStyleKindVariable (
@@ -1801,9 +2077,15 @@ void lilypondAccidentalStyleKindAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       ".\\\" ==> lilypondAccidentalStyleKindAtom::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -1814,9 +2096,15 @@ void lilypondAccidentalStyleKindAtom::acceptIn (basevisitor* v)
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             ".\\\" ==> Launching lilypondAccidentalStyleKindAtom::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
         p->visitStart (elem);
@@ -1827,9 +2115,15 @@ void lilypondAccidentalStyleKindAtom::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       ".\\\" ==> lilypondAccidentalStyleKindAtom::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -1840,9 +2134,15 @@ void lilypondAccidentalStyleKindAtom::acceptOut (basevisitor* v)
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             ".\\\" ==> Launching lilypondAccidentalStyleKindAtom::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
         p->visitEnd (elem);
@@ -1853,33 +2153,39 @@ void lilypondAccidentalStyleKindAtom::browseData (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       ".\\\" ==> lilypondAccidentalStyleKindAtom::browseData ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 }
 
 std::string lilypondAccidentalStyleKindAtom::asShortNamedOptionString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     '-' << fShortName << ' ' <<
     lpsrAccidentalStyleKindAsString (fLpsrAccidentalStyleKindVariable);
 
-  return s.str ();
+  return ss.str ();
 }
 
 std::string lilypondAccidentalStyleKindAtom::asActualLongNamedOptionString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     '-' << fLongName << ' ' <<
     lpsrAccidentalStyleKindAsString (fLpsrAccidentalStyleKindVariable);
 
-  return s.str ();
+  return ss.str ();
 }
 
 void lilypondAccidentalStyleKindAtom::print (std::ostream& os) const
@@ -1921,6 +2227,14 @@ void lilypondAccidentalStyleKindAtom::displayAtomWithVariableOptionsValues (
     lpsrAccidentalStyleKindAsString (
       fLpsrAccidentalStyleKindVariable);
 
+  switch (fEarlyOptionKind) {
+    case oahEarlyOptionKind::kEarlyOptionNo:
+      break;
+    case oahEarlyOptionKind::kEarlyOptionYes:
+			os <<
+				", early";
+      break;
+  } // switch
   if (fSelected) {
     os << ", selected";
   }
@@ -1988,9 +2302,15 @@ void lilypondChordsDisplayAtom::applyAtomWithValue (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "==> oahAtom is of type 'lilypondChordsDisplayAtom'" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -2034,9 +2354,15 @@ void lilypondChordsDisplayAtom::applyAtomWithValue (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "==> oahAtom is of type 'lilypondChordsDisplayAtom'" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -2055,7 +2381,9 @@ void lilypondChordsDisplayAtom::applyAtomWithValue (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "There are " << smSize << " matches" <<
       " for chords display string '" << theString <<
       "' with std::regex '" << regularExpression <<
@@ -2076,13 +2404,13 @@ void lilypondChordsDisplayAtom::applyAtomWithValue (
 #endif
 
   if (smSize != 3) {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "-chords-display argument '" << theString <<
       "' is ill-formed";
 
-    oahError (s.str ());
+    oahError (ss.str ());
   }
 
   std::string chordContents     = sm [1];
@@ -2090,7 +2418,9 @@ void lilypondChordsDisplayAtom::applyAtomWithValue (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "FAA chordContents  = " <<
       chordContents <<
       std::endl <<
@@ -2111,9 +2441,15 @@ void lilypondChordsDisplayAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       ".\\\" ==> lilypondChordsDisplayAtom::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -2124,9 +2460,15 @@ void lilypondChordsDisplayAtom::acceptIn (basevisitor* v)
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             ".\\\" ==> Launching lilypondChordsDisplayAtom::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
         p->visitStart (elem);
@@ -2137,9 +2479,15 @@ void lilypondChordsDisplayAtom::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       ".\\\" ==> lilypondChordsDisplayAtom::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -2150,9 +2498,15 @@ void lilypondChordsDisplayAtom::acceptOut (basevisitor* v)
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             ".\\\" ==> Launching lilypondChordsDisplayAtom::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
         p->visitEnd (elem);
@@ -2163,18 +2517,24 @@ void lilypondChordsDisplayAtom::browseData (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       ".\\\" ==> lilypondChordsDisplayAtom::browseData ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 }
 
 std::string lilypondChordsDisplayAtom::asShortNamedOptionString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     '-' << fShortName << ' ';
 
   if (fStringsPairListVariable.size ()) { // JMI superflous???
@@ -2183,22 +2543,22 @@ std::string lilypondChordsDisplayAtom::asShortNamedOptionString () const
       iEnd   = fStringsPairListVariable.end (),
       i      = iBegin;
     for ( ; ; ) {
-      s <<
+      ss <<
         (*i).first << " --> " << (*i).second <<
         std::endl;
       if (++i == iEnd) break;
-      s << ","; // JMI
+      ss << ","; // JMI
     } // for
   }
 
-  return s.str ();
+  return ss.str ();
 }
 
 std::string lilypondChordsDisplayAtom::asActualLongNamedOptionString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     '-' << fLongName << ' ';
 
   if (fStringsPairListVariable.size ()) { // JMI superflous???
@@ -2207,15 +2567,15 @@ std::string lilypondChordsDisplayAtom::asActualLongNamedOptionString () const
       iEnd   = fStringsPairListVariable.end (),
       i      = iBegin;
     for ( ; ; ) {
-      s <<
+      ss <<
         (*i).first << " --> " << (*i).second <<
         std::endl;
       if (++i == iEnd) break;
-      s << ","; // JMI
+      ss << ","; // JMI
     } // for
   }
 
-  return s.str ();
+  return ss.str ();
 }
 
 void lilypondChordsDisplayAtom::print (std::ostream& os) const
@@ -2282,6 +2642,17 @@ void lilypondChordsDisplayAtom::displayAtomWithVariableOptionsValues (
       if (++i == iEnd) break;
       os << std::endl;
     } // for
+
+    switch (fEarlyOptionKind) {
+      case oahEarlyOptionKind::kEarlyOptionNo:
+        break;
+      case oahEarlyOptionKind::kEarlyOptionYes:
+        os <<
+          "fEarlyOptionKind: " <<
+          fEarlyOptionKind <<
+          std::endl;
+        break;
+    } // switch
 
     if (fSelected) {
       os <<
@@ -2359,9 +2730,15 @@ void lilypondLyricsDurationsKindAtom::applyAtomWithValue (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "==> oahAtom is of type 'lilypondLyricsDurationsKindAtom'" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -2370,9 +2747,15 @@ void lilypondLyricsDurationsKindAtom::applyAtomWithValue (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "==> oahAtom is of type 'lilypondLyricsDurationsKindAtom'" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -2383,9 +2766,9 @@ void lilypondLyricsDurationsKindAtom::applyAtomWithValue (
 
   if (it == gGlobalLpsrLyricsDurationsKindsMap.end ()) {
     // no, lyrics alignment kind is unknown in the map
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "LPSR lyrics alignment kind '" << theString <<
       "' is unknown" <<
       std::endl <<
@@ -2396,12 +2779,12 @@ void lilypondLyricsDurationsKindAtom::applyAtomWithValue (
 
     ++gIndenter;
 
-    s <<
+    ss <<
       availableLpsrLyricsDurationsKinds (K_MF_NAMES_LIST_MAX_LENGTH);
 
     --gIndenter;
 
-    oahError (s.str ());
+    oahError (ss.str ());
   }
 
   setLpsrLyricsDurationsKindVariable (
@@ -2414,9 +2797,15 @@ void lilypondLyricsDurationsKindAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       ".\\\" ==> lilypondLyricsDurationsKindAtom::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -2427,9 +2816,15 @@ void lilypondLyricsDurationsKindAtom::acceptIn (basevisitor* v)
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             ".\\\" ==> Launching lilypondLyricsDurationsKindAtom::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
         p->visitStart (elem);
@@ -2440,9 +2835,15 @@ void lilypondLyricsDurationsKindAtom::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       ".\\\" ==> lilypondLyricsDurationsKindAtom::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -2453,9 +2854,15 @@ void lilypondLyricsDurationsKindAtom::acceptOut (basevisitor* v)
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             ".\\\" ==> Launching lilypondLyricsDurationsKindAtom::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
         p->visitEnd (elem);
@@ -2466,35 +2873,41 @@ void lilypondLyricsDurationsKindAtom::browseData (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       ".\\\" ==> lilypondLyricsDurationsKindAtom::browseData ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 }
 
 std::string lilypondLyricsDurationsKindAtom::asShortNamedOptionString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     '-' << fShortName << ' ' <<
     lpsrLyricsDurationsKindAsString (
       fLpsrLyricsDurationsKindVariable);
 
-  return s.str ();
+  return ss.str ();
 }
 
 std::string lilypondLyricsDurationsKindAtom::asActualLongNamedOptionString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     '-' << fLongName << ' ' <<
     lpsrLyricsDurationsKindAsString (
       fLpsrLyricsDurationsKindVariable);
 
-  return s.str ();
+  return ss.str ();
 }
 
 void lilypondLyricsDurationsKindAtom::print (std::ostream& os) const
@@ -2535,6 +2948,14 @@ void lilypondLyricsDurationsKindAtom::displayAtomWithVariableOptionsValues (
     lpsrLyricsDurationsKindAsString (
       fLpsrLyricsDurationsKindVariable);
 
+  switch (fEarlyOptionKind) {
+    case oahEarlyOptionKind::kEarlyOptionNo:
+      break;
+    case oahEarlyOptionKind::kEarlyOptionYes:
+			os <<
+				", early";
+      break;
+  } // switch
   if (fSelected) {
     os <<
       ", selected";
@@ -2604,9 +3025,15 @@ void lilypondDynamicsTextSpannersStyleKindAtom::applyAtomWithValue (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "==> oahAtom is of type 'lilypondDynamicsTextSpannersStyleKindAtom'" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -2615,9 +3042,15 @@ void lilypondDynamicsTextSpannersStyleKindAtom::applyAtomWithValue (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "==> oahAtom is of type 'lilypondDynamicsTextSpannersStyleKindAtom'" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -2628,9 +3061,9 @@ void lilypondDynamicsTextSpannersStyleKindAtom::applyAtomWithValue (
 
   if (it == getLpsrDynamicsTextSpannersStyleKindsMap ().end ()) {
     // no, dynamics text spanners style kind is unknown in the map
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "dynamics text spanners style kind '" << theString <<
       "' is unknown" <<
       std::endl <<
@@ -2641,12 +3074,12 @@ void lilypondDynamicsTextSpannersStyleKindAtom::applyAtomWithValue (
 
     ++gIndenter;
 
-    s <<
+    ss <<
       availableLpsrDynamicsTextSpannersStyleKinds (K_MF_NAMES_LIST_MAX_LENGTH);
 
     --gIndenter;
 
-    oahError (s.str ());
+    oahError (ss.str ());
   }
 
   setLpsrdDynamicsTextSpannersStyleKindVariable (
@@ -2659,9 +3092,15 @@ void lilypondDynamicsTextSpannersStyleKindAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       ".\\\" ==> lilypondDynamicsTextSpannersStyleKindAtom::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -2672,9 +3111,15 @@ void lilypondDynamicsTextSpannersStyleKindAtom::acceptIn (basevisitor* v)
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             ".\\\" ==> Launching lilypondDynamicsTextSpannersStyleKindAtom::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
         p->visitStart (elem);
@@ -2685,9 +3130,15 @@ void lilypondDynamicsTextSpannersStyleKindAtom::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       ".\\\" ==> lilypondDynamicsTextSpannersStyleKindAtom::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -2698,9 +3149,15 @@ void lilypondDynamicsTextSpannersStyleKindAtom::acceptOut (basevisitor* v)
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             ".\\\" ==> Launching lilypondDynamicsTextSpannersStyleKindAtom::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
         p->visitEnd (elem);
@@ -2711,33 +3168,39 @@ void lilypondDynamicsTextSpannersStyleKindAtom::browseData (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       ".\\\" ==> lilypondDynamicsTextSpannersStyleKindAtom::browseData ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 }
 
 std::string lilypondDynamicsTextSpannersStyleKindAtom::asShortNamedOptionString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     '-' << fShortName << ' ' <<
     lpsrDynamicsTextSpannersStyleKindAsString (fLpsrdDynamicsTextSpannersStyleKindVariable);
 
-  return s.str ();
+  return ss.str ();
 }
 
 std::string lilypondDynamicsTextSpannersStyleKindAtom::asActualLongNamedOptionString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     '-' << fLongName << ' ' <<
     lpsrDynamicsTextSpannersStyleKindAsString (fLpsrdDynamicsTextSpannersStyleKindVariable);
 
-  return s.str ();
+  return ss.str ();
 }
 
 void lilypondDynamicsTextSpannersStyleKindAtom::print (std::ostream& os) const
@@ -4928,9 +5391,15 @@ void lpsr2lilypondOahGroup::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       ".\\\" ==> lpsr2lilypondOahGroup::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -4941,9 +5410,15 @@ void lpsr2lilypondOahGroup::acceptIn (basevisitor* v)
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             ".\\\" ==> Launching lpsr2lilypondOahGroup::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
         p->visitStart (elem);
@@ -4954,9 +5429,15 @@ void lpsr2lilypondOahGroup::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       ".\\\" ==> lpsr2lilypondOahGroup::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -4967,9 +5448,15 @@ void lpsr2lilypondOahGroup::acceptOut (basevisitor* v)
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             ".\\\" ==> Launching lpsr2lilypondOahGroup::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
         p->visitEnd (elem);
@@ -4980,9 +5467,15 @@ void lpsr2lilypondOahGroup::browseData (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       ".\\\" ==> lpsr2lilypondOahGroup::browseData ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 }
@@ -5091,48 +5584,64 @@ void lpsr2lilypondOahGroup::displayAtomWithVariableOptionsValues (
 
   // part names transposition
 
-  gLogStream << std::left <<
-    std::setw (valueFieldWidth) << "part names transposition" << ": ";
+  {
+    std::stringstream ss;
 
-  if (! fPartNamesTranspositionMap.size ()) {
-    gLogStream << "[NONE]";
-  }
-  else {
-    for (
-      std::map<std::string, S_msrSemiTonesPitchAndOctave>::const_iterator i =
-        fPartNamesTranspositionMap.begin ();
-      i != fPartNamesTranspositionMap.end ();
-      ++i
-    ) {
-      gLogStream <<
-        "Part name \"" << ((*i).first) <<
-        "\" = " <<
-        ((*i).second->asString ()) <<
-        "\" ";
-    } // for
+    ss << std::left <<
+      std::setw (valueFieldWidth) << "part names transposition" << ": ";
+
+    if (! fPartNamesTranspositionMap.size ()) {
+      ss << "[NONE]";
+    }
+    else {
+      for (
+        std::map<std::string, S_msrSemiTonesPitchAndOctave>::const_iterator i =
+          fPartNamesTranspositionMap.begin ();
+        i != fPartNamesTranspositionMap.end ();
+        ++i
+      ) {
+        ss <<
+          "Part name \"" << ((*i).first) <<
+          "\" = " <<
+          ((*i).second->asString ()) <<
+          "\" ";
+      } // for
+
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
+    }
   }
 
   // part IDs transposition
 
-  gLogStream << std::left <<
-    std::setw (valueFieldWidth) << "fPartIDsTranspositionMap" << ": ";
+  {
+    std::stringstream ss;
 
-  if (! fPartIDsTranspositionMap.size ()) {
-    gLogStream << "[EMPTY]";
-  }
-  else {
-    for (
-      std::map<std::string, S_msrSemiTonesPitchAndOctave>::const_iterator i =
-        fPartIDsTranspositionMap.begin ();
-      i != fPartIDsTranspositionMap.end ();
-      ++i
-    ) {
-      gLogStream <<
-        "Part ID \"" << ((*i).first) <<
-        "\" = " <<
-        ((*i).second->asString ()) <<
-        "\" ";
-    } // for
+    ss << std::left <<
+      std::setw (valueFieldWidth) << "fPartIDsTranspositionMap" << ": ";
+
+    if (! fPartIDsTranspositionMap.size ()) {
+      ss << "[EMPTY]";
+    }
+    else {
+      for (
+        std::map<std::string, S_msrSemiTonesPitchAndOctave>::const_iterator i =
+          fPartIDsTranspositionMap.begin ();
+        i != fPartIDsTranspositionMap.end ();
+        ++i
+      ) {
+        ss <<
+          "Part ID \"" << ((*i).first) <<
+          "\" = " <<
+          ((*i).second->asString ()) <<
+          "\" ";
+      } // for
+
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
+    }
   }
 
   // engravers
@@ -5227,6 +5736,17 @@ void lpsr2lilypondOahGroup::displayAtomWithVariableOptionsValues (
           std::setw (valueFieldWidth) <<
           "relativeOctaveEntrySemiTonesPitchAndOctave" << ": ";
 /* JMI
+        switch (fEarlyOptionKind) {
+          case oahEarlyOptionKind::kEarlyOptionNo:
+            break;
+          case oahEarlyOptionKind::kEarlyOptionYes:
+            os <<
+              "fEarlyOptionKind: " <<
+              fEarlyOptionKind <<
+              std::endl;
+            break;
+        } // switch
+
         if (fSelected) {
           os <<
             ", fSelected: " <<
@@ -5246,6 +5766,17 @@ void lpsr2lilypondOahGroup::displayAtomWithVariableOptionsValues (
           std::setw (valueFieldWidth) <<
           "fixedOctaveEntrySemiTonesPitchAndOctave" << ": ";
 /* JMI
+        switch (fEarlyOptionKind) {
+          case oahEarlyOptionKind::kEarlyOptionNo:
+            break;
+          case oahEarlyOptionKind::kEarlyOptionYes:
+            os <<
+              "fEarlyOptionKind: " <<
+              fEarlyOptionKind <<
+              std::endl;
+            break;
+        } // switch
+
         if (fSelected) {
           os <<
             ", fSelected: " <<
@@ -6301,9 +6832,15 @@ S_lpsr2lilypondOahGroup createGlobalLpsr2lilypondOahGroup ()
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah () && ! gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Initializing LilyPond OAH handling" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -6371,9 +6908,15 @@ void lilypondBreakPageAfterMeasureNumberAtom::applyAtomWithValue (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "==> oahAtom is of type 'lilypondBreakPageAfterMeasureNumberAtom'" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -6382,9 +6925,15 @@ void lilypondBreakPageAfterMeasureNumberAtom::applyAtomWithValue (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "==> oahAtom is of type 'lilypondBreakPageAfterMeasureNumberAtom'" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -6407,7 +6956,9 @@ void lilypondBreakPageAfterMeasureNumberAtom::applyAtomWithValue (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "There are " << smSize << " matches" <<
       " for reset measure number string '" << theString <<
       "' with std::regex '" << regularExpression <<
@@ -6428,22 +6979,22 @@ void lilypondBreakPageAfterMeasureNumberAtom::applyAtomWithValue (
 #endif
 
   if (smSize != 3) {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "-breakPageAfterMeasureNumber argument '" << theString <<
       "' is ill-formed";
 
-    oahError (s.str ());
+    oahError (ss.str ());
   }
 
   std::string musicxmlMeasureNumber = sm [1];
 
   int lilypondMeasureNumber;
   {
-    std::stringstream s;
-    s << sm [2];
-    s >> lilypondMeasureNumber;
+    std::stringstream ss;
+    ss << sm [2];
+    ss >> lilypondMeasureNumber;
   }
 
 #ifdef MF_TRACING_IS_ENABLED

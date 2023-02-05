@@ -22,6 +22,7 @@
 #include "mfAssert.h"
 
 #include "oahOah.h"
+#include "oahEarlyOptions.h"
 
 #include "msrOah.h"
 
@@ -112,9 +113,15 @@ void msrOctaveShift::setOctaveShiftUpLinkToMeasure (
 void msrOctaveShift::acceptIn (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrOctaveShift::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrOctaveShift>*
@@ -123,9 +130,15 @@ void msrOctaveShift::acceptIn (basevisitor* v)
         S_msrOctaveShift elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrOctaveShift::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitStart (elem);
   }
@@ -134,9 +147,15 @@ void msrOctaveShift::acceptIn (basevisitor* v)
 void msrOctaveShift::acceptOut (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrOctaveShift::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrOctaveShift>*
@@ -145,9 +164,15 @@ void msrOctaveShift::acceptOut (basevisitor* v)
         S_msrOctaveShift elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrOctaveShift::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitEnd (elem);
   }
@@ -190,16 +215,16 @@ std::ostream& operator << (std::ostream& os, const msrOctaveShiftKind& elt)
 
 std::string msrOctaveShift::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "[OctaveShift" <<
     ", fOctaveShiftKind: " << fOctaveShiftKind <<
     ", fOctaveShiftSize: " << fOctaveShiftSize <<
     ", line " << fInputLineNumber <<
     ']';
 
-  return s.str ();
+  return ss.str ();
 }
 
 void msrOctaveShift::print (std::ostream& os) const

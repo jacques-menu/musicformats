@@ -217,20 +217,20 @@ Bool msrPathToVoice::pathContainsVoice (const S_msrVoice& voice)
 //
 // std::string msrPathToVoice::asString () const
 // {
-//   std::stringstream s;
+//   std::stringstream ss;
 //
-//   s <<
+//   ss <<
 //     "Tie" << ' ' << msrPathToVoiceKindAsString (fTieKind) <<
 //     ", line " << fInputLineNumber;
 //
-//   return s.str ();
+//   return ss.str ();
 // }
 
 std::string msrPathToVoice::asString() const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "fBook->getBookName ()" << // JMI
     " => " <<
     fScore->getScoreName () <<
@@ -238,19 +238,19 @@ std::string msrPathToVoice::asString() const
 
   // part groups can be nested
   for (S_msrPartGroup currentPartGroup : fPartGroupsList) {
-    s <<
+    ss <<
       currentPartGroup->getPartGroupName () <<
       " => ";
   } // for
 
-  s <<
+  ss <<
     fPart->getPartName () <<
     " => " <<
     fStaff->getStaffName () <<
     " => " <<
     fVoice->getVoiceName ();
 
-  return s.str ();
+  return ss.str ();
 }
 
 void msrPathToVoice::print (std::ostream& os) const

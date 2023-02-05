@@ -272,9 +272,9 @@ All \methodName{asString} methods produce an output of the form {\tt [...]}, in 
 \begin{lstlisting}[language=CPlusPlus]
 std::string msrTransposition::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "[Transposition" <<
     ", fTranspositionDiatonic = " << fTranspositionDiatonic <<
     ", fTranspositionChromatic = " << fTranspositionChromatic <<
@@ -283,7 +283,7 @@ std::string msrTransposition::asString () const
     ", line " << fInputLineNumber <<
     ']';
 
-  return s.str ();
+  return ss.str ();
 }
 \end{lstlisting}
 

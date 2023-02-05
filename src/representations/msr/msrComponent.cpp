@@ -27,9 +27,15 @@ S_mfcRepresentationComponent createMsrRepresentationComponent ()
 
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {
-      gLogStream <<
+	  	std::stringstream ss;
+
+      ss <<
         "Initializing MSR format component" <<
         std::endl;
+
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif
 

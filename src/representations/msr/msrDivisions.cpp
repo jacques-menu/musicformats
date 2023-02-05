@@ -22,6 +22,9 @@
 #include "msrDivisions.h"
 
 #include "oahOah.h"
+#include "oahEarlyOptions.h"
+
+#include "mxsrOah.h"
 
 #include "msrOah.h"
 
@@ -45,11 +48,17 @@ S_msrDivisions msrDivisions::createDivisionsNewbornClone ()
 {
 #ifdef MF_TRACING_IS_ENABLED
  if (gGlobalMxsrOahGroup->getTraceDivisions ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Creating a newborn clone of divisions '" <<
       asString () <<
       "'" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -80,12 +89,22 @@ msrDivisions::~msrDivisions ()
 void msrDivisions::initializeDivisions ()
 {
 #ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceDivisions () && ! gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
-    gLogStream <<
+  if (
+    gGlobalMxsrOahGroup->getTraceDivisions ()
+      &&
+   ! gGlobalOahEarlyOptions.getEarlyQuietOption ()
+  ) {
+		std::stringstream ss;
+
+    ss <<
       "Initializing divisions" <<
       ", divisionsPerQuarterNote: " << fDivisionsPerQuarterNote <<
       ", line " << fInputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -166,21 +185,21 @@ int msrDivisions::durationKindAsDivisions (
         (*i).second;
   } // for
 
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "duration " << msrDurationKindAsString (durationKind) <<
     " cannot be converted to divisions with " <<
     fDivisionsPerQuarterNote << " divisions per quarter note" <<
     std::endl;
 
-  printDurationKindsDivisions (s);
+  printDurationKindsDivisions (ss);
 
   msrInternalError (
-    gGlobalServiceRunData->getInputSourceName (),
+    gGlobalCurrentServiceRunData->getInputSourceName (),
     inputLineNumber,
     __FILE__, __LINE__,
-    s.str ());
+    ss.str ());
 
   return -1; // never reached
 }
@@ -257,7 +276,9 @@ std::string msrDivisions::divisionsAsMsrString (
   if (gGlobalMxsrOahGroup->getTraceDivisions ()) {
     const int fieldWidth = 16;
 
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
      "--> divisionsAsMsrString ():" <<
       std::endl <<
       gTab << std::setw (fieldWidth) <<
@@ -266,6 +287,10 @@ std::string msrDivisions::divisionsAsMsrString (
       gTab << std::setw (fieldWidth) <<
       "divisions" << ": " << divisions <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -280,9 +305,9 @@ std::string msrDivisions::divisionsAsMsrString (
 
   for ( ; ; ) {
     if (i == iEnd) {
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         "divisions " << divisions <<
         " could not be handled by divisionsAsMsrString () with:" <<
         std::endl;
@@ -290,10 +315,10 @@ std::string msrDivisions::divisionsAsMsrString (
       printDurationKindsDivisions (gLogStream);
 
       msrInternalError (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         inputLineNumber,
         __FILE__, __LINE__,
-        s.str ());
+        ss.str ());
       break;
     }
 
@@ -458,9 +483,15 @@ std::string msrDivisions::divisionsAsMsrString (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceDivisions ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "<-- divisionsAsMsrString (): returns " << result <<
       std::endl << std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -509,9 +540,15 @@ std::string tupletWholeNotesAsMsrString (
 void msrDivisions::acceptIn (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrDivisions::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrDivisions>*
@@ -520,9 +557,15 @@ void msrDivisions::acceptIn (basevisitor* v)
         S_msrDivisions elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrDivisions::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitStart (elem);
   }
@@ -531,9 +574,15 @@ void msrDivisions::acceptIn (basevisitor* v)
 void msrDivisions::acceptOut (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrDivisions::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrDivisions>*
@@ -542,9 +591,15 @@ void msrDivisions::acceptOut (basevisitor* v)
         S_msrDivisions elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrDivisions::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitEnd (elem);
   }
@@ -555,14 +610,14 @@ void msrDivisions::browseData (basevisitor* v)
 
 std::string msrDivisions::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "Divisions" <<
     ", " << fDivisionsPerQuarterNote <<
     " per quarter note";
 
-  return s.str ();
+  return ss.str ();
 }
 
 void msrDivisions::print (std::ostream& os) const

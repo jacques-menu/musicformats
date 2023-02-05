@@ -17,6 +17,8 @@
 #include "bsrFootNotesElements.h"
 
 #include "oahOah.h"
+#include "oahEarlyOptions.h"
+
 #include "bsrOah.h"
 #include "brailleGenerationOah.h"
 
@@ -54,9 +56,16 @@ void bsrFootNotesElement::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
+      "% --> End visiting bsrTranscriptionNotesElement" <<
       "% ==> bsrFootNotesElement::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -67,9 +76,15 @@ void bsrFootNotesElement::acceptIn (basevisitor* v)
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching bsrFootNotesElement::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
         p->visitStart (elem);
@@ -80,9 +95,16 @@ void bsrFootNotesElement::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
+      "% --> End visiting bsrTranscriptionNotesElement" <<
       "% ==> bsrFootNotesElement::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -93,9 +115,15 @@ void bsrFootNotesElement::acceptOut (basevisitor* v)
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching bsrFootNotesElement::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
         p->visitEnd (elem);
@@ -107,15 +135,15 @@ void bsrFootNotesElement::browseData (basevisitor* v)
 
 std::string bsrFootNotesElement::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "FootNotesElement" <<
     // JMI ", fFootNoteText: " <<
     ", \"" << fFootNoteText << "\"" <<
     ", line " << fInputLineNumber;
 
-  return s.str ();
+  return ss.str ();
 }
 
 void bsrFootNotesElement::print (std::ostream& os) const
@@ -142,7 +170,7 @@ std::ostream& operator << (std::ostream& os, const S_bsrFootNotesElement& elt)
   else {
     os << "[NONE]" << std::endl;
   }
-  
+
   return os;
 }
 

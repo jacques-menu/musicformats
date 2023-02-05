@@ -72,11 +72,17 @@ R"(
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Initializing \"" <<
       fHandlerHeader <<
       "\" regular options handler" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -103,14 +109,14 @@ void ischemeInterpreterInsiderHandler::initializeHandlerMultiComponent ()
 
 std::string ischemeInterpreterInsiderHandler::usageInformation ()
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
 R"(Usage: ischeme [option]*
 )" <<
     std::endl;
 
-  return s.str ();
+  return ss.str ();
 }
 
 std::string ischemeInterpreterInsiderHandler::handlerServiceAboutInformation () const
@@ -143,11 +149,17 @@ void ischemeInterpreterInsiderHandler::createTheIschemeInterpreterPrefixes ()
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Creating the ischeme prefixes in \"" <<
       fHandlerHeader <<
       "\"" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -160,11 +172,17 @@ void ischemeInterpreterInsiderHandler::createTheIschemeInterpreterOptionGroups (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Creating the \"" <<
       fHandlerHeader <<
       "\" insider option groups" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -213,11 +231,17 @@ void ischemeInterpreterInsiderHandler::checkOptionsAndArguments () const
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "checking options and arguments from argc/argv in \"" <<
       fHandlerHeader <<
       "\"" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -259,33 +283,33 @@ void ischemeInterpreterInsiderOahGroup::checkGroupOptionsConsistency ()
 /* JMI
 
   if (inputSourceName.size () > 0 && inputSourceName == outputFileName) {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "\"" << inputSourceName << "\" is both the input and output file name";
 
-    oahError (s.str ());
+    oahError (ss.str ());
   }
 
 
 
 
   if (! fOutputFileName.size ()) {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "ischemeInterpreterInsiderOahGroup: a MusicXML output file name must be selected with '-o, -output-file-name";
 
-    oahError (s.str ());
+    oahError (ss.str ());
   }
 
-  else if (fOutputFileName == gGlobalServiceRunData->getInputSourceName ()) {
-    std::stringstream s;
+  else if (fOutputFileName == gGlobalCurrentServiceRunData->getInputSourceName ()) {
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "\"" << fOutputFileName << "\" is both the input and output file name";
 
-    oahError (s.str ());
+    oahError (ss.str ());
   }
   */
 }
@@ -295,9 +319,15 @@ void ischemeInterpreterInsiderOahGroup::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       ".\\\" ==> ischemeInterpreterInsiderOahGroup::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -308,9 +338,15 @@ void ischemeInterpreterInsiderOahGroup::acceptIn (basevisitor* v)
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             ".\\\" ==> Launching ischemeInterpreterInsiderOahGroup::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
         p->visitStart (elem);
@@ -321,9 +357,15 @@ void ischemeInterpreterInsiderOahGroup::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       ".\\\" ==> ischemeInterpreterInsiderOahGroup::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -334,9 +376,15 @@ void ischemeInterpreterInsiderOahGroup::acceptOut (basevisitor* v)
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             ".\\\" ==> Launching ischemeInterpreterInsiderOahGroup::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
         p->visitEnd (elem);
@@ -347,9 +395,15 @@ void ischemeInterpreterInsiderOahGroup::browseData (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       ".\\\" ==> ischemeInterpreterInsiderOahGroup::browseData ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -443,11 +497,17 @@ void ischemeInterpreterInsiderOahGroup::initializeIschemeInterpreterInsiderOahGr
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream << std::left <<
+    std::stringstream ss;
+
+    ss <<
       "Initializing \"" <<
       fGroupHeader <<
       "\" group" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -471,9 +531,15 @@ S_ischemeInterpreterInsiderOahGroup createGlobalIschemeInterpreterInsiderOahGrou
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Creating global ischeme insider OAH group" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 

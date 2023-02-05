@@ -56,11 +56,17 @@ oahInsiderHandler::oahInsiderHandler (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Initializing \"" <<
       fHandlerHeader <<
       "\" insider handler" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 }
@@ -70,12 +76,12 @@ oahInsiderHandler::~oahInsiderHandler ()
 
 std::string oahInsiderHandler::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "oahInsiderHandler \"" << fHandlerHeader; // JMI v0.9.65
 
-  return s.str ();
+  return ss.str ();
 }
 
 void oahInsiderHandler::print (std::ostream& os) const

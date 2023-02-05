@@ -18,6 +18,7 @@
 #include "msrMidi.h"
 
 #include "oahOah.h"
+#include "oahEarlyOptions.h"
 
 #include "msrOah.h"
 
@@ -75,9 +76,15 @@ S_msrMidiTempo msrMidiTempo::createMsrMidiTempoNewbornClone ()
 void msrMidiTempo::acceptIn (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrMidiTempo::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrMidiTempo>*
@@ -86,9 +93,15 @@ void msrMidiTempo::acceptIn (basevisitor* v)
         S_msrMidiTempo elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrMidiTempo::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitStart (elem);
   }
@@ -97,9 +110,15 @@ void msrMidiTempo::acceptIn (basevisitor* v)
 void msrMidiTempo::acceptOut (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrMidiTempo::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrMidiTempo>*
@@ -108,9 +127,15 @@ void msrMidiTempo::acceptOut (basevisitor* v)
         S_msrMidiTempo elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrMidiTempo::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitEnd (elem);
   }
@@ -121,16 +146,16 @@ void msrMidiTempo::browseData (basevisitor* v)
 
 std::string msrMidiTempo::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "[MidiTempo" <<
     ", midiTempoDuration = \"" << fMidiTempoDuration << "\"" <<
     ", midiTempoPerSecond: " << fMidiTempoPerSecond <<
     ", line " << fInputLineNumber <<
     ']';
 
-  return s.str ();
+  return ss.str ();
 }
 
 void msrMidiTempo::print (std::ostream& os) const
@@ -162,7 +187,7 @@ std::ostream& operator << (std::ostream& os, const S_msrMidiTempo& elt)
   else {
     os << "[NONE]" << std::endl;
   }
-  
+
   return os;
 }
 

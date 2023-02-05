@@ -20,6 +20,7 @@
 #include "bsrNotes.h"
 
 #include "oahOah.h"
+#include "oahEarlyOptions.h"
 
 #include "bsrOah.h"
 
@@ -866,9 +867,16 @@ void bsrNote::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
+      "% --> End visiting bsrTranscriptionNotesElement" <<
       "% ==> bsrNote::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -879,9 +887,15 @@ void bsrNote::acceptIn (basevisitor* v)
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching bsrNote::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
         p->visitStart (elem);
@@ -892,9 +906,16 @@ void bsrNote::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
+      "% --> End visiting bsrTranscriptionNotesElement" <<
       "% ==> bsrNote::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -905,9 +926,15 @@ void bsrNote::acceptOut (basevisitor* v)
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching bsrNote::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
         p->visitEnd (elem);
@@ -1272,9 +1299,9 @@ std::ostream& operator << (std::ostream& os, const bsrAccidentalKind& elt)
 
 std::string bsrNote::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "Note" <<
     ", fNoteValueKind: " << fNoteValueKind <<
     ", fNoteDotsNumber: " << fNoteDotsNumber <<
@@ -1287,14 +1314,14 @@ std::string bsrNote::asString () const
     ", fSpacesBefore: " << fSpacesBefore <<
     ", line " << fInputLineNumber;
 
-  return s.str ();
+  return ss.str ();
 }
 
 std::string bsrNote::asShortString () const // finalize this JMI
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "Note" <<
     ", fNoteValueKind: " << fNoteValueKind <<
     ", fNoteDotsNumber: " << fNoteDotsNumber <<
@@ -1307,31 +1334,31 @@ std::string bsrNote::asShortString () const // finalize this JMI
     ", fSpacesBefore: " << fSpacesBefore <<
     ", line " << fInputLineNumber;
 
-  return s.str ();
+  return ss.str ();
 }
 
 std::string bsrNote::asDebugString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
   switch (fNoteOctaveIsNeeded) {
     case bsrNoteOctaveIsNeeded::kNoteOctaveIsNeededYes:
-      s <<
+      ss <<
         bsrNoteOctaveKindAsDebugString (fNoteOctaveKind);
       break;
     case bsrNoteOctaveIsNeeded::kNoteOctaveIsNeededNo:
       break;
   } // switch
 
-  s <<
+  ss <<
     bsrNoteValueKindAsDebugString (fNoteValueKind) <<
     bsrAccidentalKindAsDebugString (fAccidentalKind);
 
   for (int i = 1; i <= fNoteDotsNumber; ++i) {
-    s << ".";
+    ss << ".";
   } // for
 
-  return s.str ();
+  return ss.str ();
 }
 
 void bsrNote::print (std::ostream& os) const

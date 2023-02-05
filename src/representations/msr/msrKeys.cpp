@@ -85,10 +85,16 @@ msrHumdrumScotKeyItem::msrHumdrumScotKeyItem (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceKeys ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Creating Humdrum/Scot key item" <<
       ", line: " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -121,11 +127,17 @@ void msrHumdrumScotKeyItem::setKeyItemDiatonicPitchKind (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceKeys ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Setting Humdrum/Scot key item diatonic pitch to '" <<
       msrDiatonicPitchKindAsString (diatonicPitchKind) <<
       "'" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -137,11 +149,17 @@ void msrHumdrumScotKeyItem::setKeyItemAlterationKind (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceKeys ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Setting Humdrum/Scot key item alteration to '" <<
       msrAlterationKindAsString (alterationKind) <<
       "'" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -152,11 +170,17 @@ void msrHumdrumScotKeyItem::setKeyItemOctaveKind (msrOctaveKind keyOctaveKind)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceKeys ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Setting Humdrum/Scot key item octave to '" <<
       msrOctaveKindAsString (keyOctaveKind) <<
       "'" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -166,9 +190,15 @@ void msrHumdrumScotKeyItem::setKeyItemOctaveKind (msrOctaveKind keyOctaveKind)
 void msrHumdrumScotKeyItem::acceptIn (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrHumdrumScotKeyItem::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrHumdrumScotKeyItem>*
@@ -177,9 +207,15 @@ void msrHumdrumScotKeyItem::acceptIn (basevisitor* v)
         S_msrHumdrumScotKeyItem elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrHumdrumScotKeyItem::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitStart (elem);
   }
@@ -188,9 +224,15 @@ void msrHumdrumScotKeyItem::acceptIn (basevisitor* v)
 void msrHumdrumScotKeyItem::acceptOut (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrHumdrumScotKeyItem::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrHumdrumScotKeyItem>*
@@ -199,9 +241,15 @@ void msrHumdrumScotKeyItem::acceptOut (basevisitor* v)
         S_msrHumdrumScotKeyItem elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrHumdrumScotKeyItem::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitEnd (elem);
   }
@@ -212,9 +260,9 @@ void msrHumdrumScotKeyItem::browseData (basevisitor* v)
 
 std::string msrHumdrumScotKeyItem::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "[HumdrumScotKeyItem" <<
     ", keyDiatonicPitch" << ": " <<
     msrDiatonicPitchKindAsString (fKeyDiatonicPitchKind) <<
@@ -225,14 +273,14 @@ std::string msrHumdrumScotKeyItem::asString () const
     ", line " << fInputLineNumber <<
     ']';
 
-  return s.str ();
+  return ss.str ();
 }
 
 std::string msrHumdrumScotKeyItem::asShortStringForMeasuresSlices () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "HumdrumScotKeyItem" <<
     ", keyDiatonicPitch" << ": " <<
     msrDiatonicPitchKindAsString (fKeyDiatonicPitchKind) <<
@@ -242,7 +290,7 @@ std::string msrHumdrumScotKeyItem::asShortStringForMeasuresSlices () const
     msrOctaveKindAsString (fKeyOctaveKind) <<
     ", line " << fInputLineNumber;
 
-  return s.str ();
+  return ss.str ();
 }
 
 void msrHumdrumScotKeyItem::print (std::ostream& os) const
@@ -376,7 +424,9 @@ msrKey::msrKey ( // for traditional keys
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceKeys ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Creating traditional key '" <<
       this->asString () <<
       "'" <<
@@ -399,7 +449,9 @@ msrKey::msrKey ( // for Humdrum/Scot keys
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceKeys ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Creating Humdrum/Scot key '" <<
       this->asString () <<
       "'" <<
@@ -504,7 +556,9 @@ void msrKey::appendHumdrumScotKeyItem (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceKeys ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Append item '" <<
       item->asString () <<
       "' to key '" <<
@@ -536,11 +590,17 @@ S_msrKey msrKey::createTraditionalKeyFromString (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceNotes ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Creating traditional key from string \"" <<
       keyString <<
       "', line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -554,10 +614,16 @@ S_msrKey msrKey::createTraditionalKeyFromString (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "regularExpression = " <<
       regularExpression <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -570,7 +636,9 @@ S_msrKey msrKey::createTraditionalKeyFromString (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "There are " << smSize << " matches" <<
       " for traditional key string \"" << keyString <<
       "\" with std::regex \"" << regularExpression <<
@@ -593,17 +661,17 @@ S_msrKey msrKey::createTraditionalKeyFromString (
   //  Handles keyString à la LilyPond, such as c [major] or bes minor
 
   if (smSize != 3) {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "traditional key string \"" << keyString <<
       "\" is ill-formed";
 
     msrError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 
   std::string
@@ -627,7 +695,9 @@ S_msrKey msrKey::createTraditionalKeyFromString (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "keyTonic = \"" <<
       keyTonic <<
       "\"" <<
@@ -644,6 +714,10 @@ S_msrKey msrKey::createTraditionalKeyFromString (
       keyModeKind <<
       "\"" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -662,9 +736,15 @@ S_msrKey msrKey::createTraditionalKeyFromString (
 void msrKey::acceptIn (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrKey::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrKey>*
@@ -673,9 +753,15 @@ void msrKey::acceptIn (basevisitor* v)
         S_msrKey elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrKey::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitStart (elem);
   }
@@ -684,9 +770,15 @@ void msrKey::acceptIn (basevisitor* v)
 void msrKey::acceptOut (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrKey::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrKey>*
@@ -695,9 +787,15 @@ void msrKey::acceptOut (basevisitor* v)
         S_msrKey elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrKey::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitEnd (elem);
   }
@@ -708,16 +806,16 @@ void msrKey::browseData (basevisitor* v)
 
 std::string msrKey::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "[Key" <<
     ", fKeyKind: " << fKeyKind <<
     ", ";
 
   switch (fKeyKind) {
     case msrKeyKind::kKeyTraditional:
-      s <<
+      ss <<
         msrQuarterTonesPitchKindAsStringInLanguage (
           fKeyTonicQuarterTonesPitchKind,
           gGlobalMsrOahGroup->
@@ -727,30 +825,30 @@ std::string msrKey::asString () const
       break;
 
     case msrKeyKind::kKeyHumdrumScot:
-      s <<
+      ss <<
         fHumdrumScotKeyItemsVector.size () << "items" <<
         ", keyItemsOctavesAreSpecified: " <<
         fKeyItemsOctavesAreSpecified;
       break;
   } // switch
 
-  s <<
+  ss <<
     ", line " << fInputLineNumber <<
     ']';
 
-  return s.str ();
+  return ss.str ();
 }
 
 std::string msrKey::asShortStringForMeasuresSlices () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     '[';
 
   switch (fKeyKind) {
     case msrKeyKind::kKeyTraditional:
-      s <<
+      ss <<
         msrQuarterTonesPitchKindAsStringInLanguage (
           fKeyTonicQuarterTonesPitchKind,
           gGlobalMsrOahGroup->
@@ -760,18 +858,18 @@ std::string msrKey::asShortStringForMeasuresSlices () const
       break;
 
     case msrKeyKind::kKeyHumdrumScot:
-      s <<
+      ss <<
         fHumdrumScotKeyItemsVector.size () << "items" <<
         ", keyItemsOctavesAreSpecified: " <<
         fKeyItemsOctavesAreSpecified;
       break;
   } // switch
 
-  s <<
+  ss <<
 // JMI    ", line " << fInputLineNumber <<
     ']';
 
-  return s.str ();
+  return ss.str ();
 }
 
 void msrKey::print (std::ostream& os) const

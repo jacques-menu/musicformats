@@ -71,19 +71,19 @@ void mfslOptionsBlock::registerOptionsInOptionsBlock (
 
 std::string mfslOptionsBlock::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "mfslOptionsBlock [" <<
     "fOptionsBlockName: " << fOptionsBlockName <<
     ']';
 
-  return s.str ();
+  return ss.str ();
 }
 
 std::string mfslOptionsBlock::asOptionsString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
   if (fOptionsBlockOptionsVector.size ()) {
     std::vector<S_oahOption>::const_iterator
@@ -94,16 +94,16 @@ std::string mfslOptionsBlock::asOptionsString () const
     for ( ; ; ) {
       S_oahOption option = (*i);
 
-      s <<
+      ss <<
         option->
           asStringForCommandLine ();
 
       if (++i == iEnd) break;
-      s << ' ';
+      ss << ' ';
     } // for
   }
 
-  return s.str ();
+  return ss.str ();
 }
 
 void mfslOptionsBlock::print (std::ostream& os) const
@@ -241,9 +241,9 @@ void mfslInput::selectInputName (
 
   if (it == fNamesSet.end ()) {
     // no, issue error message
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "input \"" <<
       fInputName <<
       "\" cannot be set to name \"" <<
@@ -252,7 +252,7 @@ void mfslInput::selectInputName (
       namesSetAsString ();
 
     mfslError (
-      s.str (),
+      ss.str (),
       drv.getScannerLocation ());
   }
 
@@ -309,9 +309,9 @@ void mfslInput::selectInputName (
 //     case mfslInputNameKind::kInputNameOptionSupplied:
 //       {
 //         // ignore this name, and keep name supplied to the script
-//         std::stringstream s;
+//         std::stringstream ss;
 //
-//         s <<
+//         ss <<
 //           "input \"" <<
 //           fInputName <<
 //           " already got name \"" <<
@@ -322,7 +322,7 @@ void mfslInput::selectInputName (
 //           "\"";
 //
 //         mfslWarning (
-//           s.str (),
+//           ss.str (),
 //           drv.getScannerLocation ());
 //       }
 //       break;
@@ -330,9 +330,9 @@ void mfslInput::selectInputName (
 //     case mfslInputNameKind::kInputNameSetInScript:
 //       {
 //         // set in script multiple times
-//         std::stringstream s;
+//         std::stringstream ss;
 //
-//         s <<
+//         ss <<
 //           "input \"" <<
 //           fInputName <<
 //           "\"" <<
@@ -341,7 +341,7 @@ void mfslInput::selectInputName (
 //           "\" supplied to the script";
 //
 //         mfslError (
-//           s.str (),
+//           ss.str (),
 //           drv.getScannerLocation ());
 //       }
 //       break;
@@ -353,15 +353,15 @@ std::string mfslInput::getInputName (mfslDriver& drv) const
   switch (fInputNameKind) {
     case mfslInputNameKind::kInputNameNone:
       {
-        std::stringstream s;
+        std::stringstream ss;
 
-        s <<
+        ss <<
           "input \"" <<
           fInputName <<
           "\" has not got any name";
 
         mfslError (
-          s.str (),
+          ss.str (),
           drv.getScannerLocation ());
       }
       break;
@@ -403,15 +403,15 @@ std::string mfslInput::getInputNameWithoutTrace (mfslDriver& drv) const
   switch (fInputNameKind) {
     case mfslInputNameKind::kInputNameNone:
       {
-        std::stringstream s;
+        std::stringstream ss;
 
-        s <<
+        ss <<
           "input \"" <<
           fInputName <<
           "\" has not got any name";
 
         mfslError (
-          s.str (),
+          ss.str (),
           drv.getScannerLocation ());
       }
       break;
@@ -449,9 +449,9 @@ S_mfslOptionsBlock mfslInput::getInputOptionsBlockForName (
     result = (*it).second;
   }
   else {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "name \"" <<
       name <<
       "\" is not known to input \"" <<
@@ -459,7 +459,7 @@ S_mfslOptionsBlock mfslInput::getInputOptionsBlockForName (
       "\", line " << drv.getScannerLocation ();
 
     mfslError (
-      s.str (),
+      ss.str (),
       drv.getScannerLocation ());
   }
 
@@ -485,9 +485,9 @@ void mfslInput::addName (
 
   if (it != fNamesSet.end ()) {
     // yes, issue error message
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "input name \"" <<
       name <<
       "\" occurs more that once in input \"" <<
@@ -495,7 +495,7 @@ void mfslInput::addName (
       "\", line " << drv.getScannerLocation ();
 
     mfslError (
-      s.str (),
+      ss.str (),
       drv.getScannerLocation ());
   }
 
@@ -576,7 +576,7 @@ void mfslInput::enrichNameOptionsBlock (
 
 std::string mfslInput::namesSetAsString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
   size_t namesSetSize =
     fNamesSet.size ();
@@ -602,29 +602,29 @@ std::string mfslInput::namesSetAsString () const
 
       cumulatedLength += theString.size ();
       if (cumulatedLength >= namesListMaxLength) {
-        s << "\n";
+        ss << "\n";
         cumulatedLength = 0;
       }
 
-      s << theString;
+      ss << theString;
 
       if (count == nextToLast) {
-        s << " and ";
+        ss << " and ";
       }
       else if (count != namesSetSize) {
-        s << ", ";
+        ss << ", ";
       }
     } // for
   }
 
-  return s.str ();
+  return ss.str ();
 }
 
 std::string mfslInput::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "mfslInput [" <<
     "fInputName: " << fInputName <<
     ", " <<
@@ -632,7 +632,7 @@ std::string mfslInput::asString () const
     "fInputName: [" << fInputName << ']' <<
     ']';
 
-  return s.str ();
+  return ss.str ();
 }
 
 void mfslInput::displayInputNamesToOptionsBlocksMap (std::ostream& os) const
@@ -798,15 +798,15 @@ void mfslInputsTable::addInput (
         inputName);
 
   if (it != fInputsMap.end ()) {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "input \"" <<
       inputName <<
       "\" occurs more that once in the inputs table";
 
     mfslError (
-      s.str (),
+      ss.str (),
       drv.getScannerLocation ());
   }
 
@@ -855,14 +855,14 @@ S_mfslInput mfslInputsTable::fetchInputByName (
   }
 
   else {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "input \"" << name <<
       "\" is unknown in inputs table";
 
     mfslError (
-      s.str (),
+      ss.str (),
       drv.getScannerLocation ());
   }
 
@@ -894,14 +894,14 @@ S_mfslInput mfslInputsTable::fetchInputByNameNonConst (
   }
 
   else {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "input \"" << name <<
       "\" is unknown in inputs table (non-const)";
 
     mfslError (
-      s.str (),
+      ss.str (),
       drv.getScannerLocation ());
   }
 
@@ -910,13 +910,13 @@ S_mfslInput mfslInputsTable::fetchInputByNameNonConst (
 
 std::string mfslInputsTable::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "mfslInputsTable [" <<
     ']';
 
-  return s.str ();
+  return ss.str ();
 }
 
 void mfslInputsTable::displayInputsMap (std::ostream& os) const // useless ??? JMI
@@ -1064,9 +1064,9 @@ void mfslChoice::selectChoiceLabel (
 
   if (it == fLabelsSet.end ()) {
     // no, issue error message
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "choice \"" <<
       fChoiceName <<
       "\" cannot be set to label \"" <<
@@ -1075,7 +1075,7 @@ void mfslChoice::selectChoiceLabel (
       labelsSetAsString ();
 
     mfslError (
-      s.str (),
+      ss.str (),
       drv.getScannerLocation ());
   }
 
@@ -1132,9 +1132,9 @@ void mfslChoice::selectChoiceLabel (
     case mfslChoiceLabelKind::kChoiceLabelOptionSupplied:
       {
         // ignore this label, and keep label supplied to the script
-        std::stringstream s;
+        std::stringstream ss;
 
-        s <<
+        ss <<
           "choice \"" <<
           fChoiceName <<
           " already got label \"" <<
@@ -1145,7 +1145,7 @@ void mfslChoice::selectChoiceLabel (
           "\"";
 
         mfslWarning (
-          s.str (),
+          ss.str (),
           drv.getScannerLocation ());
       }
       break;
@@ -1153,9 +1153,9 @@ void mfslChoice::selectChoiceLabel (
     case mfslChoiceLabelKind::kChoiceLabelSetInScript:
       {
         // set in script multiple times
-        std::stringstream s;
+        std::stringstream ss;
 
-        s <<
+        ss <<
           "choice \"" <<
           fChoiceName <<
           "\"" <<
@@ -1164,7 +1164,7 @@ void mfslChoice::selectChoiceLabel (
           "\" supplied to the script";
 
         mfslError (
-          s.str (),
+          ss.str (),
           drv.getScannerLocation ());
       }
       break;
@@ -1176,15 +1176,15 @@ std::string mfslChoice::getChoiceLabel (mfslDriver& drv) const
   switch (fChoiceLabelKind) {
     case mfslChoiceLabelKind::kChoiceLabelNone:
       {
-        std::stringstream s;
+        std::stringstream ss;
 
-        s <<
+        ss <<
           "choice \"" <<
           fChoiceName <<
           "\" has not got any label";
 
         mfslError (
-          s.str (),
+          ss.str (),
           drv.getScannerLocation ());
       }
       break;
@@ -1226,15 +1226,15 @@ std::string mfslChoice::getChoiceLabelWithoutTrace (mfslDriver& drv) const
   switch (fChoiceLabelKind) {
     case mfslChoiceLabelKind::kChoiceLabelNone:
       {
-        std::stringstream s;
+        std::stringstream ss;
 
-        s <<
+        ss <<
           "choice \"" <<
           fChoiceName <<
           "\" has not got any label";
 
         mfslError (
-          s.str (),
+          ss.str (),
           drv.getScannerLocation ());
       }
       break;
@@ -1272,9 +1272,9 @@ S_mfslOptionsBlock mfslChoice::getChoiceOptionsBlockForLabel (
     result = (*it).second;
   }
   else {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "label \"" <<
       label <<
       "\" is not known to choice \"" <<
@@ -1282,7 +1282,7 @@ S_mfslOptionsBlock mfslChoice::getChoiceOptionsBlockForLabel (
       "\", line " << drv.getScannerLocation ();
 
     mfslError (
-      s.str (),
+      ss.str (),
       drv.getScannerLocation ());
   }
 
@@ -1308,9 +1308,9 @@ void mfslChoice::addLabel (
 
   if (it != fLabelsSet.end ()) {
     // yes, issue error message
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "choice label \"" <<
       label <<
       "\" occurs more that once in choice \"" <<
@@ -1318,7 +1318,7 @@ void mfslChoice::addLabel (
       "\", line " << drv.getScannerLocation ();
 
     mfslError (
-      s.str (),
+      ss.str (),
       drv.getScannerLocation ());
   }
 
@@ -1402,9 +1402,9 @@ void mfslChoice::registerChoiceDefaultLabel (
   mfslDriver&   drv)
 {
   if (! mfStringIsInStringSet (label, fLabelsSet)) {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "choice label \"" <<
       label <<
       "\" is not present in choice \"" <<
@@ -1412,14 +1412,14 @@ void mfslChoice::registerChoiceDefaultLabel (
       "\"";
 
     mfslError (
-      s.str (),
+      ss.str (),
       drv.getScannerLocation ());
   }
 
 //   if (fChoiceDefaultLabel.size ()) { // JMI
-//     std::stringstream s;
+//     std::stringstream ss;
 //
-//     s <<
+//     ss <<
 //       "choice label \"" <<
 //       label <<
 //       "\" is not present in choice \"" <<
@@ -1427,7 +1427,7 @@ void mfslChoice::registerChoiceDefaultLabel (
 //       "\"";
 //
 //     mfslInternalError (
-//       s.str (),
+//       ss.str (),
 //       drv.getScannerLocation ());
 //   }
 
@@ -1436,7 +1436,7 @@ void mfslChoice::registerChoiceDefaultLabel (
 
 std::string mfslChoice::labelsSetAsString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
   size_t labelsSetSize =
     fLabelsSet.size ();
@@ -1462,29 +1462,29 @@ std::string mfslChoice::labelsSetAsString () const
 
       cumulatedLength += theString.size ();
       if (cumulatedLength >= namesListMaxLength) {
-        s << "\n";
+        ss << "\n";
         cumulatedLength = 0;
       }
 
-      s << theString;
+      ss << theString;
 
       if (count == nextToLast) {
-        s << " and ";
+        ss << " and ";
       }
       else if (count != labelsSetSize) {
-        s << ", ";
+        ss << ", ";
       }
     } // for
   }
 
-  return s.str ();
+  return ss.str ();
 }
 
 std::string mfslChoice::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "mfslChoice [" <<
     "fChoiceName: " << fChoiceName <<
     ", " <<
@@ -1492,7 +1492,7 @@ std::string mfslChoice::asString () const
     "fChoiceLabel: [" << fChoiceLabel << ']' <<
     ']';
 
-  return s.str ();
+  return ss.str ();
 }
 
 void mfslChoice::displayChoiceLabelsToOptionsBlocksMap (std::ostream& os) const
@@ -1663,15 +1663,15 @@ void mfslChoicesTable::addChoice (
         choiceName);
 
   if (it != fChoicesMap.end ()) {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "choice \"" <<
       choiceName <<
       "\" occurs more that once in the choices table";
 
     mfslError (
-      s.str (),
+      ss.str (),
       drv.getScannerLocation ());
   }
 
@@ -1720,14 +1720,14 @@ S_mfslChoice mfslChoicesTable::fetchChoiceByName (
   }
 
   else {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "choice \"" << name <<
       "\" is unknown in choices table";
 
     mfslError (
-      s.str (),
+      ss.str (),
       drv.getScannerLocation ());
   }
 
@@ -1759,14 +1759,14 @@ S_mfslChoice mfslChoicesTable::fetchChoiceByNameNonConst (
   }
 
   else {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "choice \"" << name <<
       "\" is unknown in choices table (non-const)";
 
     mfslError (
-      s.str (),
+      ss.str (),
       drv.getScannerLocation ());
   }
 
@@ -1775,13 +1775,13 @@ S_mfslChoice mfslChoicesTable::fetchChoiceByNameNonConst (
 
 std::string mfslChoicesTable::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "mfslChoicesTable [" <<
     ']';
 
-  return s.str ();
+  return ss.str ();
 }
 
 void mfslChoicesTable::displayChoicesMap (std::ostream& os) const // useless ??? JMI
@@ -1907,9 +1907,9 @@ void mfslCaseChoiceStatement::registerCaseChoiceLabel (
 
   if (! mfStringIsInStringSet (label, choiceLabelSet)) {
     // this label has already been registered in this choice
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "label '" <<
       label <<
       "' is not known in choice \"" <<
@@ -1919,15 +1919,15 @@ void mfslCaseChoiceStatement::registerCaseChoiceLabel (
       ", line " << drv.getScannerLocation ();
 
     mfslError (
-      s.str (),
+      ss.str (),
       drv.getScannerLocation ());
   }
 
   if (mfStringIsInStringSet (label, fCaseLabelsSet)) {
     // this label has already been registered
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "choice label \"" <<
       label <<
       "\" occurs more that once in this case \"" <<
@@ -1935,7 +1935,7 @@ void mfslCaseChoiceStatement::registerCaseChoiceLabel (
       "\" statement";
 
     mfslError (
-      s.str (),
+      ss.str (),
       drv.getScannerLocation ());
   }
 
@@ -1955,45 +1955,45 @@ void mfslCaseChoiceStatement::checkThatAllLabelsHaveBeenUsed (
   mfslDriver& drv)
 {
   if (fCaseUnusedLabels.size ()) {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "The following labels for choice \"" <<
       fCaseChoice->getChoiceName () <<
       "\" have not been used in this case statement: " <<
       mfStringSetAsString (fCaseUnusedLabels);
 
     mfslError (
-      s.str (),
+      ss.str (),
       drv.getScannerLocation ());
   }
 }
 
 std::string mfslCaseChoiceStatement::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "mfslCaseChoiceStatement [" <<
     fCaseChoice->asString () <<
     ']';
 
-  return s.str ();
+  return ss.str ();
 }
 
 std::string mfslCaseChoiceStatement::currentLabelsListAsString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s << "[Labels:";
+  ss << "[Labels:";
 
   for (std::string label : fCaseCurrentLabelsList ) {
-    s << ' ' << label;
+    ss << ' ' << label;
   } // for
 
-  s << ']';
+  ss << ']';
 
-  return s.str ();
+  return ss.str ();
 }
 
 void mfslCaseChoiceStatement::print (std::ostream& os) const
@@ -2112,9 +2112,9 @@ void mfslCaseInputStatement::registerCaseInputName (
 
   if (! mfStringIsInStringSet (name, choiceNameSet)) {
     // this name has already been registered in this choice
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "name '" <<
       name <<
       "' is not known in input \"" <<
@@ -2124,15 +2124,15 @@ void mfslCaseInputStatement::registerCaseInputName (
       ", line " << drv.getScannerLocation ();
 
     mfslError (
-      s.str (),
+      ss.str (),
       drv.getScannerLocation ());
   }
 
   if (mfStringIsInStringSet (name, fCaseInputNamesSet)) {
     // this name has already been registered
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "input name \"" <<
       name <<
       "\" occurs more that once in this case \"" <<
@@ -2140,7 +2140,7 @@ void mfslCaseInputStatement::registerCaseInputName (
       "\" statement";
 
     mfslError (
-      s.str (),
+      ss.str (),
       drv.getScannerLocation ());
   }
 
@@ -2160,45 +2160,45 @@ void mfslCaseInputStatement::checkThatAllNamesHaveBeenUsed (
   mfslDriver& drv)
 {
   if (fCaseInputUnusedNames.size ()) {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "The following names for input \"" <<
       fCaseInputInput->getInputName () <<
       "\" have not been used in this case statement: " <<
       mfStringSetAsString (fCaseInputUnusedNames);
 
     mfslError (
-      s.str (),
+      ss.str (),
       drv.getScannerLocation ());
   }
 }
 
 std::string mfslCaseInputStatement::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "mfslCaseInputStatement [" <<
     fCaseInputInput->asString () <<
     ']';
 
-  return s.str ();
+  return ss.str ();
 }
 
 std::string mfslCaseInputStatement::currentNamesListAsString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s << "[Inputs:";
+  ss << "[Inputs:";
 
   for (std::string name : fCaseInputCurrentNamesList ) {
-    s << ' ' << name;
+    ss << ' ' << name;
   } // for
 
-  s << ']';
+  ss << ']';
 
-  return s.str ();
+  return ss.str ();
 }
 
 void mfslCaseInputStatement::print (std::ostream& os) const

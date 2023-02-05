@@ -32,12 +32,12 @@ mfWaeHandlerGerman::~mfWaeHandlerGerman ()
 
 std::string mfWaeHandlerGerman::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "MusicFormats warning and error handler for german";
 
-  return s.str ();
+  return ss.str ();
 }
 
 void mfWaeHandlerGerman::print (std::ostream& os) const
@@ -76,12 +76,12 @@ std::string mfWaeHandlerGerman::passIDKindAsString (mfPassIDKind passIDKind) con
       result = "*Pass kMfPassID_ALL*";
       break;
 
-    case mfPassIDKind::kMfPassID_0:
-      result = "Pass 0";
+    case mfPassIDKind::kMfPassID_OptionsAndArgumentsHandling:
+      result = "Opts & Args";
       break;
 
-    case mfPassIDKind::kMfPassID_Optional:
-      result = "opt";
+    case mfPassIDKind::kMfPassID_OptionalPass:
+      result = "Optional";
       break;
 
     case mfPassIDKind::kMfPassID_1:
@@ -126,11 +126,6 @@ std::string mfWaeHandlerGerman::passIDKindAsString (mfPassIDKind passIDKind) con
   return result;
 }
 
-// std::string mfWaeHandlerGerman::passName (mfPassIDKind passIDKind) const
-// {
-//   return "Pass 1";
-// }
-
 std::string mfWaeHandlerGerman::passOptional () const
 {
   return "Pass (optional)";
@@ -157,14 +152,14 @@ std::string mfWaeHandlerGerman::slices () const
 // quitting after passes
 std::string mfWaeHandlerGerman::quittingAfterPass (mfPassIDKind passIDKind) const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "Quitting after pass " <<
     passIDKindAsString (passIDKind) <<
     " as requested";
 
-  return s.str ();
+  return ss.str ();
 }
 
 //_______________________________________________________________________________
@@ -178,7 +173,7 @@ std::string mfWaeHandlerGerman::handleOptionsAndArgumentsFromArgcArgv () const
 //_______________________________________________________________________________
 // passes
 
-std::string mfWaeHandlerGerman::createAnMXSRFromAMusicXMLFile () const
+std::string mfWaeHandlerGerman::createAnMXSRFromAMusicXMLFileOrStdin () const
 {
   return "Create an MXSR from a MusicXML file";
 }
@@ -296,52 +291,52 @@ std::string mfWaeHandlerGerman::totalSeconds () const
 std::string mfWaeHandlerGerman::openingOptionsFileForReading (
   const std::string& optionsFileName) const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "Opening options file " <<
     "\"" << optionsFileName << "\"" <<
     " for reading";
 
-  return s.str ();
+  return ss.str ();
 }
 
 std::string mfWaeHandlerGerman::openingIncludeFileForReading (
   const std::string& includeFileName) const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "Opening include file " <<
     "\"" << includeFileName << "\"" <<
     " for reading";
 
-  return s.str ();
+  return ss.str ();
 }
 
 std::string mfWaeHandlerGerman::cannotOpenOptionsFileForReading (
   const std::string& optionsFileName) const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "Cannot open LilyPond file " <<
     "\"" << optionsFileName << "\"" <<
     " for reading - quitting";
 
-  return s.str ();
+  return ss.str ();
 }
 
 std::string mfWaeHandlerGerman::closingOptionsFile (
   const std::string& optionsFileName) const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "Closing options file " <<
     "\"" << optionsFileName << "\"";
 
-  return s.str ();
+  return ss.str ();
 }
 
 //_______________________________________________________________________________
@@ -350,155 +345,155 @@ std::string mfWaeHandlerGerman::closingOptionsFile (
 std::string mfWaeHandlerGerman::openingLilypondFileForWriting (
   const std::string& inputFileName) const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "Opening LilyPond file " <<
     "\"" << inputFileName << "\"" <<
     " for writing";
 
-  return s.str ();
+  return ss.str ();
 }
 
 std::string mfWaeHandlerGerman::openingBrailleMusicFileForWriting (
   const std::string& inputFileName) const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "Opening Braille music file " <<
     "\"" << inputFileName << "\"" <<
     " for writing";
 
-  return s.str ();
+  return ss.str ();
 }
 
 std::string mfWaeHandlerGerman::openingMusicXMLFileForWriting (
   const std::string& inputFileName) const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "Opening MusicXML file " <<
     "\"" << inputFileName << "\"" <<
     " for writing";
 
-  return s.str ();
+  return ss.str ();
 }
 
 std::string mfWaeHandlerGerman::openingGuidoFileForWriting (
   const std::string& inputFileName) const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "Opening Guido file " <<
     "\"" << inputFileName << "\"" <<
     " for writing";
 
-  return s.str ();
+  return ss.str ();
 }
 
 
 std::string mfWaeHandlerGerman::cannotOpenLilypondFileForWriting (
   const std::string& outputFileName) const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "Cannot open LilyPond file " <<
     "\"" << outputFileName << "\"" <<
     " for writing - quitting";
 
-  return s.str ();
+  return ss.str ();
 }
 
 std::string mfWaeHandlerGerman::cannotOpenBrailleMusicFileForWriting (
   const std::string& outputFileName) const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "Cannot open Braille music file " <<
     "\"" << outputFileName << "\"" <<
     " for writing - quitting";
 
-  return s.str ();
+  return ss.str ();
 }
 
 std::string mfWaeHandlerGerman::cannotOpenMusicXMLFileForWriting (
   const std::string& outputFileName) const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "Cannot open MusicXML file " <<
     "\"" << outputFileName << "\"" <<
     " for writing - quitting";
 
-  return s.str ();
+  return ss.str ();
 }
 
 std::string mfWaeHandlerGerman::cannotOpenGuidoFileForWriting (
   const std::string& outputFileName) const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "Cannot open Guido file " <<
     "\"" << outputFileName << "\"" <<
     " for writing - quitting";
 
-  return s.str ();
+  return ss.str ();
 }
 
 
 std::string mfWaeHandlerGerman::closingLilypondFile (
   const std::string& outputFileName) const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "Closing LilyPond file " <<
     "\"" << outputFileName << "\"";
 
-  return s.str ();
+  return ss.str ();
 }
 
 std::string mfWaeHandlerGerman::closingBrailleMusicFile (
   const std::string& outputFileName) const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "Closing Braille music file " <<
     "\"" << outputFileName << "\"";
 
-  return s.str ();
+  return ss.str ();
 }
 
 std::string mfWaeHandlerGerman::closingMusicXMLFile (
   const std::string& outputFileName) const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "Closing MusicXML file " <<
     "\"" << outputFileName << "\"";
 
-  return s.str ();
+  return ss.str ();
 }
 
 std::string mfWaeHandlerGerman::closingGuidoFile (
   const std::string& outputFileName) const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "Closing Guido file " <<
     "\"" << outputFileName << "\"";
 
-  return s.str ();
+  return ss.str ();
 }
 
 //_______________________________________________________________________________
@@ -507,13 +502,13 @@ std::string mfWaeHandlerGerman::closingGuidoFile (
 std::string mfWaeHandlerGerman::cannotOpenIncludeFileForReading (
   const std::string& includeFileName) const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "Cannot open include file " <<
     "\"" << includeFileName << "\"";
 
-  return s.str ();
+  return ss.str ();
 }
 
 
@@ -523,13 +518,13 @@ std::string mfWaeHandlerGerman::cannotOpenIncludeFileForReading (
 std::string mfWaeHandlerGerman::cannotOpenScriptForWriting (
   const std::string& scriptName) const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "Cannot open script " <<
     "\"" << scriptName << "\"";
 
-  return s.str ();
+  return ss.str ();
 }
 
 
@@ -539,14 +534,14 @@ std::string mfWaeHandlerGerman::cannotOpenScriptForWriting (
 std::string mfWaeHandlerGerman::cannotOpenMSDLFileForReading (
   const std::string& inputFileName) const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "Cannot open MSDL file " <<
     "\"" << inputFileName << "\"" <<
     " for writing - quitting";
 
-  return s.str ();
+  return ss.str ();
 }
 
 

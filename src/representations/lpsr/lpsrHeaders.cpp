@@ -18,6 +18,7 @@
 #include "lpsrHeaders.h"
 
 #include "oahOah.h"
+#include "oahEarlyOptions.h"
 
 #include "lpsrOah.h"
 #include "lpsr2lilypondOah.h"
@@ -98,9 +99,15 @@ void lpsrHeader::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> lpsrHeader::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -111,9 +118,15 @@ void lpsrHeader::acceptIn (basevisitor* v)
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching lpsrHeader::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
         p->visitStart (elem);
@@ -124,9 +137,15 @@ void lpsrHeader::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> lpsrHeader::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -137,9 +156,15 @@ void lpsrHeader::acceptOut (basevisitor* v)
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching lpsrHeader::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
         p->visitEnd (elem);
@@ -151,9 +176,9 @@ void lpsrHeader::browseData (basevisitor* v)
 
 std::string lpsrHeader::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "[LpsrHeader" <<
     ", lilypondTitle: \" " <<  fLilypondTitle << "\"" <<
 //    ", workNumber: \" " <<  fWorkNumber << "\"" <<
@@ -164,7 +189,7 @@ std::string lpsrHeader::asString () const
     ", ..." <<
     ']';
 
-  return s.str ();
+  return ss.str ();
 }
 
 void lpsrHeader::print (std::ostream& os) const
@@ -318,6 +343,23 @@ std::ostream& operator << (std::ostream& os, const S_lpsrHeader& elt)
   return os;
 }
 
+EXP mfIndentedStringStream& operator << (
+  mfIndentedStringStream& iss, const S_lpsrHeader& elt)
+{
+//   iss.getStringstream () <<
+//     gIndenter.indentMultiLineStringWithCurrentOffset (
+//       S_lpsrHeader.asString ());
+
+  if (elt) {
+    elt->print (iss.getStringstream ());
+  }
+  else {
+    iss.getStringstream () << "[NONE]" << '\n';
+  }
+
+  return iss;
+}
+
 
 }
 
@@ -328,12 +370,18 @@ void lpsrHeader::appendRight (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceIdentification ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Appending right \"" <<
       value <<
       "\" to lpsrHeader" <<
       ", line " << fInputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -346,12 +394,18 @@ void lpsrHeader::appendComposer (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceIdentification ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Appending composer \"" <<
       value <<
       "\" to lpsrHeader" <<
       ", line " << fInputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -364,12 +418,18 @@ void lpsrHeader::appendArranger (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceIdentification ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Appending arranger \"" <<
       value <<
       "\" to lpsrHeader" <<
       ", line " << fInputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -382,12 +442,18 @@ void lpsrHeader::appendLyricist (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceIdentification ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Appending lyricist \"" <<
       value <<
       "\" to lpsrHeader" <<
       ", line " << fInputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -400,12 +466,18 @@ void lpsrHeader::appendPoet (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceIdentification ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Appending poet \"" <<
       value <<
       "\" to lpsrHeader" <<
       ", line " << fInputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -417,10 +489,16 @@ void lpsrHeader::removeAllPoets (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceIdentification ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Removing all poets from lpsrHeader" <<
       ", line " << fInputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -433,12 +511,18 @@ void lpsrHeader::appendTranslator (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceIdentification ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Appending translator \"" <<
       value <<
       "\" to lpsrHeader" <<
       ", line " << fInputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -451,12 +535,18 @@ void lpsrHeader::appendArtist (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceIdentification ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Appending artist \"" <<
       value <<
       "\" to lpsrHeader" <<
       ", line " << fInputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -469,12 +559,18 @@ void lpsrHeader::appendSoftware (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceIdentification ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Appending software \"" <<
       value <<
       "\" to lpsrHeader" <<
       ", line " << fInputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 

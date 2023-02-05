@@ -11,6 +11,8 @@
 
 #include "msrVoiceElements.h"
 
+#include "oahEarlyOptions.h"
+
 
 namespace MusicFormats
 {
@@ -32,7 +34,7 @@ std::ostream& operator << (std::ostream& os, const S_msrVoiceElement& elt)
   else {
     os << "[NONE]" << std::endl;
   }
-  
+
   return os;
 }
 

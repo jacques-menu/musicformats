@@ -86,9 +86,15 @@ void lpsrPitchesLanguageAtom::applyAtomWithValue (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "==> oahAtom is of type 'lpsrPitchesLanguageAtom'" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -97,9 +103,15 @@ void lpsrPitchesLanguageAtom::applyAtomWithValue (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "==> oahAtom is of type 'lpsrPitchesLanguageAtom'" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -111,9 +123,9 @@ void lpsrPitchesLanguageAtom::applyAtomWithValue (
   if (it == getQuarterTonesPitchesLanguageKindsMap ().end ()) {
     // no, language is unknown in the map
 
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "LPSR pitches language '" << theString <<
       "' is unknown" <<
       std::endl <<
@@ -124,12 +136,12 @@ void lpsrPitchesLanguageAtom::applyAtomWithValue (
 
     ++gIndenter;
 
-    s <<
+    ss <<
       availableQuarterTonesPitchesLanguageKinds (K_MF_NAMES_LIST_MAX_LENGTH);
 
     --gIndenter;
 
-    oahError (s.str ());
+    oahError (ss.str ());
   }
 
   setMsrQuarterTonesPitchesLanguageKindVariable (
@@ -142,9 +154,15 @@ void lpsrPitchesLanguageAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       ".\\\" ==> lpsrPitchesLanguageAtom::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -155,9 +173,15 @@ void lpsrPitchesLanguageAtom::acceptIn (basevisitor* v)
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             ".\\\" ==> Launching lpsrPitchesLanguageAtom::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
         p->visitStart (elem);
@@ -168,9 +192,15 @@ void lpsrPitchesLanguageAtom::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       ".\\\" ==> lpsrPitchesLanguageAtom::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -181,9 +211,15 @@ void lpsrPitchesLanguageAtom::acceptOut (basevisitor* v)
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             ".\\\" ==> Launching lpsrPitchesLanguageAtom::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
         p->visitEnd (elem);
@@ -194,35 +230,41 @@ void lpsrPitchesLanguageAtom::browseData (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       ".\\\" ==> lpsrPitchesLanguageAtom::browseData ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 }
 
 std::string lpsrPitchesLanguageAtom::asShortNamedOptionString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     '-' << fShortName << ' ' <<
     msrQuarterTonesPitchesLanguageKindAsString (
       fMsrQuarterTonesPitchesLanguageKindVariable);
 
-  return s.str ();
+  return ss.str ();
 }
 
 std::string lpsrPitchesLanguageAtom::asActualLongNamedOptionString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     '-' << fLongName << ' ' <<
     msrQuarterTonesPitchesLanguageKindAsString (
       fMsrQuarterTonesPitchesLanguageKindVariable);
 
-  return s.str ();
+  return ss.str ();
 }
 
 void lpsrPitchesLanguageAtom::print (std::ostream& os) const
@@ -262,6 +304,14 @@ void lpsrPitchesLanguageAtom::displayAtomWithVariableOptionsValues (
     ": " <<
     msrQuarterTonesPitchesLanguageKindAsString (
       fMsrQuarterTonesPitchesLanguageKindVariable);
+  switch (fEarlyOptionKind) {
+    case oahEarlyOptionKind::kEarlyOptionNo:
+      break;
+    case oahEarlyOptionKind::kEarlyOptionYes:
+			os <<
+				", early";
+      break;
+  } // switch
   if (fSelected) {
     os << ", selected";
   }
@@ -329,9 +379,15 @@ void lpsrChordsLanguageAtom::applyAtomWithValue (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "==> oahAtom is of type 'lpsrChordsLanguageAtom'" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -340,9 +396,15 @@ void lpsrChordsLanguageAtom::applyAtomWithValue (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "==> oahAtom is of type 'lpsrChordsLanguageAtom'" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -352,9 +414,9 @@ void lpsrChordsLanguageAtom::applyAtomWithValue (
 
   if (it == gGlobalLpsrChordsLanguageKindsMap.end ()) {
     // no, language is unknown in the map
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "LPSR chords language '" << theString <<
       "' is unknown" <<
       std::endl <<
@@ -365,12 +427,12 @@ void lpsrChordsLanguageAtom::applyAtomWithValue (
 
     ++gIndenter;
 
-    s <<
+    ss <<
       availableLpsrChordsLanguageKinds (K_MF_NAMES_LIST_MAX_LENGTH);
 
     --gIndenter;
 
-    oahError (s.str ());
+    oahError (ss.str ());
   }
 
   setLpsrChordsLanguageKindVariable (
@@ -383,9 +445,15 @@ void lpsrChordsLanguageAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       ".\\\" ==> lpsrChordsLanguageAtom::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -396,9 +464,15 @@ void lpsrChordsLanguageAtom::acceptIn (basevisitor* v)
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             ".\\\" ==> Launching lpsrChordsLanguageAtom::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
         p->visitStart (elem);
@@ -409,9 +483,15 @@ void lpsrChordsLanguageAtom::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       ".\\\" ==> lpsrChordsLanguageAtom::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -422,9 +502,15 @@ void lpsrChordsLanguageAtom::acceptOut (basevisitor* v)
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             ".\\\" ==> Launching lpsrChordsLanguageAtom::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
         p->visitEnd (elem);
@@ -435,33 +521,39 @@ void lpsrChordsLanguageAtom::browseData (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       ".\\\" ==> lpsrChordsLanguageAtom::browseData ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 }
 
 std::string lpsrChordsLanguageAtom::asShortNamedOptionString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     '-' << fShortName << ' ' <<
     lpsrChordsLanguageKindAsString (fLpsrChordsLanguageKindVariable);
 
-  return s.str ();
+  return ss.str ();
 }
 
 std::string lpsrChordsLanguageAtom::asActualLongNamedOptionString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     '-' << fLongName << ' ' <<
     lpsrChordsLanguageKindAsString (fLpsrChordsLanguageKindVariable);
 
-  return s.str ();
+  return ss.str ();
 }
 
 void lpsrChordsLanguageAtom::print (std::ostream& os) const
@@ -500,6 +592,14 @@ void lpsrChordsLanguageAtom::displayAtomWithVariableOptionsValues (
     ": " <<
     lpsrChordsLanguageKindAsString (
       fLpsrChordsLanguageKindVariable);
+  switch (fEarlyOptionKind) {
+    case oahEarlyOptionKind::kEarlyOptionNo:
+      break;
+    case oahEarlyOptionKind::kEarlyOptionYes:
+			os <<
+				", early";
+      break;
+  } // switch
   if (fSelected) {
     os << ", selected";
   }
@@ -567,9 +667,15 @@ void lpsrStaffInstrumentNameAtom::applyAtomWithValue (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "==> oahAtom is of type 'lpsrStaffInstrumentNameAtom'" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -578,9 +684,15 @@ void lpsrStaffInstrumentNameAtom::applyAtomWithValue (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "==> oahAtom is of type 'lpsrStaffInstrumentNameAtom'" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -599,12 +711,18 @@ void lpsrStaffInstrumentNameAtom::applyAtomWithValue (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "There are " << smSize << " matches" <<
       " for part rename string '" << theString <<
       "' with std::regex '" << regularExpression <<
       "'" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -621,13 +739,13 @@ void lpsrStaffInstrumentNameAtom::applyAtomWithValue (
   }
 
   else {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "-lpsr-staff-instrument-name argument '" << theString <<
       "' is ill-formed";
 
-    oahError (s.str ());
+    oahError (ss.str ());
   }
 
   std::string
@@ -639,10 +757,16 @@ void lpsrStaffInstrumentNameAtom::applyAtomWithValue (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "--> partName = \"" << partName << "\", " <<
       "--> partInstrumentName = \"" << partInstrumentName << "\"" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -653,14 +777,14 @@ void lpsrStaffInstrumentNameAtom::applyAtomWithValue (
 
   if (it != fStringToStringMapVariable.end ()) {
     // yes, issue error message
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "Part \"" << partName << "\" occurs more that once in the " <<
       fetchNamesBetweenQuotes () <<
       " option";
 
-    oahError (s.str ());
+    oahError (ss.str ());
   }
 
   else {
@@ -674,9 +798,15 @@ void lpsrStaffInstrumentNameAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       ".\\\" ==> lpsrStaffInstrumentNameAtom::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -687,9 +817,15 @@ void lpsrStaffInstrumentNameAtom::acceptIn (basevisitor* v)
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             ".\\\" ==> Launching lpsrStaffInstrumentNameAtom::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
         p->visitStart (elem);
@@ -700,9 +836,15 @@ void lpsrStaffInstrumentNameAtom::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       ".\\\" ==> lpsrStaffInstrumentNameAtom::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -713,9 +855,15 @@ void lpsrStaffInstrumentNameAtom::acceptOut (basevisitor* v)
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             ".\\\" ==> Launching lpsrStaffInstrumentNameAtom::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
         p->visitEnd (elem);
@@ -726,22 +874,28 @@ void lpsrStaffInstrumentNameAtom::browseData (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       ".\\\" ==> lpsrStaffInstrumentNameAtom::browseData ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 }
 
 std::string lpsrStaffInstrumentNameAtom::asShortNamedOptionString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     '-' << fShortName << ' ';
 
   if (! fStringToStringMapVariable.size ()) {
-    s << "[EMPTY]";
+    ss << "[EMPTY]";
   }
   else {
     std::map<std::string, std::string>::const_iterator
@@ -749,24 +903,24 @@ std::string lpsrStaffInstrumentNameAtom::asShortNamedOptionString () const
       iEnd   = fStringToStringMapVariable.end (),
       i      = iBegin;
     for ( ; ; ) {
-      s << (*i).first << "=" << (*i).second;
+      ss << (*i).first << "=" << (*i).second;
       if (++i == iEnd) break;
-      s << ",";
+      ss << ",";
     } // for
   }
 
-  return s.str ();
+  return ss.str ();
 }
 
 std::string lpsrStaffInstrumentNameAtom::asActualLongNamedOptionString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     '-' << fLongName << ' ';
 
   if (! fStringToStringMapVariable.size ()) {
-    s << "[EMPTY]";
+    ss << "[EMPTY]";
   }
   else {
     std::map<std::string, std::string>::const_iterator
@@ -774,13 +928,13 @@ std::string lpsrStaffInstrumentNameAtom::asActualLongNamedOptionString () const
       iEnd   = fStringToStringMapVariable.end (),
       i      = iBegin;
     for ( ; ; ) {
-      s << (*i).first << "=" << (*i).second;
+      ss << (*i).first << "=" << (*i).second;
       if (++i == iEnd) break;
-      s << ",";
+      ss << ",";
     } // for
   }
 
-  return s.str ();
+  return ss.str ();
 }
 
 void lpsrStaffInstrumentNameAtom::print (std::ostream& os) const
@@ -939,9 +1093,15 @@ void lpsrTransposeAtom::applyAtomWithValue (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "==> oahAtom is of type 'lpsrTransposeAtom'" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -950,9 +1110,15 @@ void lpsrTransposeAtom::applyAtomWithValue (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "==> oahAtom is of type 'lpsrTransposeAtom'" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -974,9 +1140,15 @@ void lpsrTransposeAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       ".\\\" ==> lpsrTransposeAtom::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -987,9 +1159,15 @@ void lpsrTransposeAtom::acceptIn (basevisitor* v)
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             ".\\\" ==> Launching lpsrTransposeAtom::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
         p->visitStart (elem);
@@ -1000,9 +1178,15 @@ void lpsrTransposeAtom::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       ".\\\" ==> lpsrTransposeAtom::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -1013,9 +1197,15 @@ void lpsrTransposeAtom::acceptOut (basevisitor* v)
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             ".\\\" ==> Launching lpsrTransposeAtom::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
         p->visitEnd (elem);
@@ -1026,33 +1216,39 @@ void lpsrTransposeAtom::browseData (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       ".\\\" ==> lpsrTransposeAtom::browseData ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 }
 
 std::string lpsrTransposeAtom::asShortNamedOptionString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     '-' << fShortName << ' ' <<
     fSemiTonesPitchAndOctaveVariable->asString ();
 
-  return s.str ();
+  return ss.str ();
 }
 
 std::string lpsrTransposeAtom::asActualLongNamedOptionString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     '-' << fLongName << ' ' <<
     fSemiTonesPitchAndOctaveVariable->asString ();
 
-  return s.str ();
+  return ss.str ();
 }
 
 void lpsrTransposeAtom::print (std::ostream& os) const
@@ -1084,8 +1280,17 @@ void lpsrTransposeAtom::displayAtomWithVariableOptionsValues (
     ++gIndenter;
     os <<
       fSemiTonesPitchAndOctaveVariable;
+    switch (fEarlyOptionKind) {
+      case oahEarlyOptionKind::kEarlyOptionNo:
+        break;
+      case oahEarlyOptionKind::kEarlyOptionYes:
+        os <<
+          ", early";
+        break;
+    } // switch
     if (fSelected) {
-      os << ", selected";
+      os <<
+        ", selected";
     }
     os << std::endl;
     --gIndenter;
@@ -1784,9 +1989,9 @@ R"()",
   if (
     ! setLpsrQuarterTonesPitchesLanguage ("nederlands")
   ) {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "INTERNAL INITIALIZATION ERROR: "
       "LPSR pitches language 'nederlands' is unknown" <<
       std::endl <<
@@ -1797,12 +2002,12 @@ R"()",
 
     ++gIndenter;
 
-    s <<
+    ss <<
       availableQuarterTonesPitchesLanguageKinds (K_MF_NAMES_LIST_MAX_LENGTH);
 
     --gIndenter;
 
-    oahError (s.str ());
+    oahError (ss.str ());
   }
 
   const msrQuarterTonesPitchesLanguageKind
@@ -2007,9 +2212,15 @@ void lpsrOahGroup::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       ".\\\" ==> lpsrOahGroup::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -2020,9 +2231,15 @@ void lpsrOahGroup::acceptIn (basevisitor* v)
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             ".\\\" ==> Launching lpsrOahGroup::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
         p->visitStart (elem);
@@ -2033,9 +2250,15 @@ void lpsrOahGroup::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       ".\\\" ==> lpsrOahGroup::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -2046,9 +2269,15 @@ void lpsrOahGroup::acceptOut (basevisitor* v)
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             ".\\\" ==> Launching lpsrOahGroup::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
         p->visitEnd (elem);
@@ -2059,9 +2288,15 @@ void lpsrOahGroup::browseData (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       ".\\\" ==> lpsrOahGroup::browseData ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 }
@@ -2339,9 +2574,15 @@ S_lpsrOahGroup createGlobalLpsrOahGroup ()
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Creating global LPSR OAH group" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 

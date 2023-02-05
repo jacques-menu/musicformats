@@ -69,9 +69,9 @@ S_msrScore translateMxsrToMsrSkeleton (
     std::string separator =
       "%--------------------------------------------------------------";
 
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       std::endl <<
       separator <<
       std::endl <<
@@ -83,7 +83,7 @@ S_msrScore translateMxsrToMsrSkeleton (
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 #endif
 
@@ -121,16 +121,16 @@ S_msrScore translateMxsrToMsrSkeleton (
   // check indentation
   if (gIndenter != 0) {
     if (! gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         "gIndenter value after " << passIDKind << ": " <<
         gIndenter.getIndentation ();
 
       mxsr2msrWarning (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         1, // JMI inputLineNumber,
-        s.str ());
+        ss.str ());
     }
 
     gIndenter.resetToZero ();
@@ -169,7 +169,7 @@ S_msrScore translateMxsrToMsrSkeleton (
 //   // start the clock
 //   clock_t startClock = clock ();
 //
-//   setGlobalCurrentPassIDKind (mfPassIDKind::kMfPassID_Optional);
+//   setGlobalCurrentPassIDKind (mfPassIDKind::kMfPassID_OptionalPass);
 //
 //   std::string separator =
 //     "%--------------------------------------------------------------";
@@ -189,7 +189,7 @@ S_msrScore translateMxsrToMsrSkeleton (
 //   clock_t endClock = clock ();
 //
 //   mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
-// 		 mfPassIDKind::kMfPassID_0,
+// 		 mfPassIDKind::kMfPassID_OptionsAndArgumentsHandling,
 //     gWaeHandler->displayTheFirstMSRSkeletonAsText (), // JMI ??? v0.9.66
 //     mfTimingItemKind::kOptional,
 //     startClock,

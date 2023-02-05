@@ -176,21 +176,21 @@ void Mikrokosmos3WanderingOahGroup::checkGroupOptionsConsistency ()
   switch (fMultiGenerationOutputKind) {
     case mfMultiGenerationOutputKind::kGeneration_UNKNOWN:
       {
-        std::stringstream s;
+        std::stringstream ss;
 
-        s <<
+        ss <<
           fUpLinkToHandler->getHandlerServiceName () <<
           " needs an generate code option selected among:" <<
           std::endl;
 
         ++gIndenter;
 
-        s <<
+        ss <<
           availableMultiGenerationOutputKinds (K_MF_NAMES_LIST_MAX_LENGTH);
 
         --gIndenter;
 
-        oahError (s.str ());
+        oahError (ss.str ());
       }
       break;
     default:
@@ -202,9 +202,15 @@ void Mikrokosmos3WanderingOahGroup::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       ".\\\" ==> Mikrokosmos3WanderingOahGroup::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -215,9 +221,15 @@ void Mikrokosmos3WanderingOahGroup::acceptIn (basevisitor* v)
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             ".\\\" ==> Launching Mikrokosmos3WanderingOahGroup::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
         p->visitStart (elem);
@@ -228,9 +240,15 @@ void Mikrokosmos3WanderingOahGroup::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       ".\\\" ==> Mikrokosmos3WanderingOahGroup::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -241,9 +259,15 @@ void Mikrokosmos3WanderingOahGroup::acceptOut (basevisitor* v)
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             ".\\\" ==> Launching Mikrokosmos3WanderingOahGroup::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
         p->visitEnd (elem);
@@ -254,9 +278,15 @@ void Mikrokosmos3WanderingOahGroup::browseData (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       ".\\\" ==> Mikrokosmos3WanderingOahGroup::browseData ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 }
@@ -322,9 +352,15 @@ S_Mikrokosmos3WanderingOahGroup createGlobalMikrokosmos3WanderingOahGroup ()
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Creating global Mikrokosmos3Wandering OAH group" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 

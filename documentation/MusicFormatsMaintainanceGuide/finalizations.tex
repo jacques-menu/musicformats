@@ -134,21 +134,33 @@ void msrPart::finalizePartAndAllItsMeasures (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceParts ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Finalizing part clone " <<
       getPartCombinedName () <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceVoices ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Finalizing all the measures of part \"" <<
       getPartCombinedName () <<
       "\", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -182,28 +194,34 @@ void msrPart::finalizePart (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceParts ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Finalizing part " <<
       getPartCombinedName () <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
   ++gIndenter;
 
   if (! getPartStaveNumbersToStavesMap.size ()) {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "Part " <<
       getPartCombinedName () <<
       " appears in the part list, but doesn't contain any stave";
 
     musicxmlWarning (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
-      s.str ());
+      ss.str ());
   }
 
   else {
@@ -249,11 +267,17 @@ void msrStaff::finalizeStaff (int inputLineNumber)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceStaves ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Finalizing staff \"" <<
       getStaffName () << "\"" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -262,11 +286,17 @@ void msrStaff::finalizeStaff (int inputLineNumber)
   // finalize the voices
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceVoices ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Finalizing the voices in staff \"" <<
       getStaffName () << "\"" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -305,18 +335,18 @@ void msrVoice::finalizeVoice (
 	// ... ... ...
 
   if (fVoiceHasBeenFinalized) {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "Attempting to finalize  voice \"" <<
       asShortString () <<
       "\" more than once";
 
     msrInternalError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       fInputLineNumber,
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 
   // set part shortest note duration if relevant
@@ -349,18 +379,18 @@ void msrVoice::finalizeVoice (
       &&
     fVoiceLastSegment->getSegmentElementsList ().size () == 0
   ) {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "Voice \"" <<
       getVoiceName () <<
       "\" is totally empty, no contents ever specified for it" <<
       std::endl;
 
     musicxmlWarning (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
-      s.str ());
+      ss.str ());
   }
 
   // are there pending repeats in the voice repeats stack???
@@ -397,9 +427,9 @@ void msrMeasure::finalizeMeasure (
   std::string        context)
 {
   if (fMeasureHasBeenFinalized) {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "Attempting to finalize measure " <<
       this->asShortString () <<
       " more than once in segment '" <<
@@ -416,9 +446,9 @@ void msrMeasure::finalizeMeasure (
 		// ... ... ...
 
     msrInternalWarning (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       fInputLineNumber,
-      s.str ());
+      ss.str ());
   }
 
   else {
@@ -531,7 +561,9 @@ void msrMeasure::finalizeRegularMeasure (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasures ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Finalizing regular measure " <<
       this->asShortString () <<
       " in segment '" <<
@@ -543,6 +575,10 @@ void msrMeasure::finalizeRegularMeasure (
       measureWholeNotesDurationFromPartMeasuresVector <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -625,6 +661,10 @@ void msrMeasure::finalizeRegularMeasure (
           voice->getVoiceName () <<
           "\", line " << inputLineNumber <<
           std::endl;
+
+        gWaeHandler->waeTrace (
+          __FILE__, __LINE__,
+          ss.str ());
       }
 #endif
 
@@ -675,9 +715,9 @@ void msrMeasure::finalizeHarmonyMeasure (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "Finalizing harmonies measure " <<
       this->asShortString () <<
       " in segment '" <<
@@ -687,6 +727,10 @@ void msrMeasure::finalizeHarmonyMeasure (
       "\" (" << context << ")" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -708,14 +752,18 @@ void msrMeasure::finalizeHarmonyMeasure (
         getPartNumberOfMeasures ();
 
   if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "fMeasureOrdinalNumberInVoice = " <<
       fMeasureOrdinalNumberInVoice <<
       ", harmoniesPartNumberOfMeasures = " <<
       harmoniesPartNumberOfMeasures <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -783,7 +831,9 @@ void msrMeasure::finalizeFiguredBassMeasure (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceFiguredBasses ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Finalizing figured bass measure " <<
       this->asShortString () <<
       " in segment '" <<
@@ -793,6 +843,10 @@ void msrMeasure::finalizeFiguredBassMeasure (
       "\" (" << context << ")" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -814,14 +868,18 @@ void msrMeasure::finalizeFiguredBassMeasure (
         getPartNumberOfMeasures ();
 
   if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "fMeasureOrdinalNumberInVoice = " <<
       fMeasureOrdinalNumberInVoice <<
       ", figuredBassPartNumberOfMeasures = " <<
       figuredBassPartNumberOfMeasures <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 

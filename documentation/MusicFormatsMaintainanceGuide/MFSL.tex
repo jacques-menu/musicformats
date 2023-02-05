@@ -403,14 +403,14 @@ void mfslDriver::scanBegin ()
 
   else if (!(yyin = fopen (fScriptName.c_str (), "r")))
     {
-      std::stringstream s;
+      std::stringstream ss;
 
       char*
         errorCString =
           mfStrErrorCString ();
 
       if (errorString != nullptr) {
-        s <<
+        ss <<
           gWaeHandler->cannotOpenScriptForWriting (fScriptName) <<
           ": " <<
           errorString <<
@@ -418,7 +418,7 @@ void mfslDriver::scanBegin ()
 
         mfslFileError (
           fScriptName,
-          s.str ());
+          ss.str ());
       }
     }
 }

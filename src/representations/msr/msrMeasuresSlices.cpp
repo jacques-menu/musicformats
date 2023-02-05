@@ -26,6 +26,7 @@
 #include "msrMeasuresSlices.h"
 
 #include "oahOah.h"
+#include "oahEarlyOptions.h"
 
 #include "msrOah.h"
 
@@ -151,9 +152,9 @@ bool msrNoteEvent::compareNotesEventsByIncreasingMeasurePosition (
 
 std::string msrNoteEvent::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "[NoteEvent" <<
     " @:" << fNoteEventMeasurePosition <<
     ' ' <<
@@ -162,10 +163,10 @@ std::string msrNoteEvent::asString () const
 
   switch (fNoteEventKind) {
     case msrNoteEventKind::kNoteEventStart:
-      s << "starts";
+      ss << "starts";
       break;
     case msrNoteEventKind::kNoteEventStop:
-      s << "stops";
+      ss << "stops";
       break;
   } // switch
 
@@ -181,9 +182,9 @@ std::string msrNoteEvent::asString () const
       "\"";
   }
 
-  s << ']';
+  ss << ']';
 
-  return s.str ();
+  return ss.str ();
 }
 
 void msrNoteEvent::print (std::ostream& os) const
@@ -237,12 +238,12 @@ bool msrSimultaneousNotesChunk::compareSimultaneousNotesChunksByIncreasingMeasur
 
 std::string msrSimultaneousNotesChunk::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
   size_t chunkNotesListSize =
     fChunkNotesList.size ();
 
-  s <<
+  ss <<
     "[msrSimultaneousNotesChunk" <<
     " @:" << fChunkMeasurePosition <<
     ", " <<
@@ -261,17 +262,17 @@ std::string msrSimultaneousNotesChunk::asString () const
         note = (*i);
 
       // print the measure
-      s <<
+      ss <<
         note->asShortStringForTimeView ();
 
       if (++i == iEnd) break;
-      s << ", ";
+      ss << ", ";
     } // for
   }
 
-  s << ']';
+  ss << ']';
 
-  return s.str ();
+  return ss.str ();
 }
 
 void msrSimultaneousNotesChunk::print (std::ostream& os) const
@@ -320,10 +321,16 @@ S_msrMeasuresSlice msrMeasuresSlice::createMeasuresSliceShallowCopy ()
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasuresSlices ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Creating a shallow copy of measures slice " <<
       this->asShortString () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -355,12 +362,18 @@ void msrMeasuresSlice::appendMeasureToMeasureSlice (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasuresSlices ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Appending measure " <<
       measure->asShortStringForMeasuresSlices () <<
       " to measures slice " <<
       asShortStringForMeasuresSlices () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -373,12 +386,18 @@ void msrMeasuresSlice::appendSliceMeasuresFrom (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasuresSlices ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Appending measures from measures slice " <<
       otherSlice->asShortStringForMeasuresSlices () <<
       " to measures slice " <<
       asShortStringForMeasuresSlices () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -389,9 +408,9 @@ void msrMeasuresSlice::appendSliceMeasuresFrom (
       !=
     fSliceMeasureNumber
   ) {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "cannot append measures slices " <<
       otherSlice->asShortString () <<
       " to " <<
@@ -400,10 +419,10 @@ void msrMeasuresSlice::appendSliceMeasuresFrom (
 
 if (true) // JMI
     msrInternalError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 #endif
 
@@ -430,10 +449,16 @@ void msrMeasuresSlice::collectNonSkipNotesFromMeasuresSliceMeasures ()
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasuresSlices ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Collecting the notes from the measures slices in " <<
       asShortStringForMeasuresSlices () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -463,10 +488,16 @@ void msrMeasuresSlice::collectNonSkipNotesFromMeasuresSliceMeasures ()
 
 #ifdef MF_TRACING_IS_ENABLED
       if (gGlobalTracingOahGroup->getTraceMeasuresSlices ()) {
-        gLogStream <<
+        std::stringstream ss;
+
+        ss <<
           "--> note: " <<
           note->asShortString () <<
           std::endl;
+
+        gWaeHandler->waeTrace (
+          __FILE__, __LINE__,
+          ss.str ());
       }
 #endif
 
@@ -543,10 +574,16 @@ void msrMeasuresSlice::buildTheSimutaneousNotesChunksList ()
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasuresSlices ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Building the simultaneous notes chunks list in " <<
       asShortStringForMeasuresSlices () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -610,10 +647,16 @@ void msrMeasuresSlice::identifySoloNotesAndRestsInMeasuresSlice ()
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasuresSlices ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Identifying solo notes and rests in measures slice " <<
       asShortStringForMeasuresSlices () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -802,9 +845,9 @@ void msrMeasuresSlice::identifySoloNotesAndRestsInMeasuresSlice ()
 
 std::string msrMeasuresSlice::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "[MeasuresSlice" <<
     ", sliceMeasureNumber: " << fSliceMeasureNumber <<
     ", " <<
@@ -812,17 +855,17 @@ std::string msrMeasuresSlice::asString () const
       fSliceMeasuresVector.size (), "measure", "measures") <<
     ']';
 
-  return s.str ();
+  return ss.str ();
 }
 
 std::string msrMeasuresSlice::asShortString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
   size_t sliceMeasuresVectorSize =
     fSliceMeasuresVector.size ();
 
-  s <<
+  ss <<
     "[MeasuresSlice" <<
     ", sliceMeasureNumber: " << fSliceMeasureNumber <<
     ", " <<
@@ -840,28 +883,28 @@ std::string msrMeasuresSlice::asShortString () const
         measure = (*i);
 
       // print the measure
-      s <<
+      ss <<
         measure->asShortStringForMeasuresSlices ();
 
       if (++i == iEnd) break;
-      s << ", ";
+      ss << ", ";
     } // for
   }
 
-  s <<
+  ss <<
     ']';
 
-  return s.str ();
+  return ss.str ();
 }
 
 std::string msrMeasuresSlice::asShortStringForMeasuresSlices () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
   size_t sliceMeasuresVectorSize =
     fSliceMeasuresVector.size ();
 
-  s <<
+  ss <<
     "[MeasuresSlice" <<
     ", sliceMeasureNumber: " << fSliceMeasureNumber <<
     ", " <<
@@ -880,18 +923,18 @@ std::string msrMeasuresSlice::asShortStringForMeasuresSlices () const
         measure = (*i);
 
       // print the measure
-      s <<
+      ss <<
         measure->asShortStringForMeasuresSlices ();
 
       if (++i == iEnd) break;
-      s << ", ";
+      ss << ", ";
     } // for
   }
 
-  s <<
+  ss <<
     ']';
 
-  return s.str ();
+  return ss.str ();
 }
 
 void msrMeasuresSlice::print (std::ostream& os) const
@@ -1109,10 +1152,16 @@ S_msrMeasuresSlicesSequence msrMeasuresSlicesSequence::createMeasuresSlicesSeque
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasuresSlices ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Creating a shallow copy of measures slices sequence " <<
       this->asShortString () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -1145,12 +1194,18 @@ void msrMeasuresSlicesSequence::appendMeasuresSliceToSequence (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasuresSlices ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Appending measures slice " <<
       measuresSlice->asShortStringForMeasuresSlices () <<
       " to measures slices sequence " <<
       asShortStringForMeasuresSlices () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -1168,12 +1223,18 @@ S_msrMeasuresSlicesSequence msrMeasuresSlicesSequence::mergeWithMeasuresSlicesSe
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasuresSlices ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Merging measures slices sequence " <<
       asShortStringForMeasuresSlices () <<
       " with " <<
       otherMeasuresSlicesSequence->asShortStringForMeasuresSlices () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -1182,10 +1243,16 @@ S_msrMeasuresSlicesSequence msrMeasuresSlicesSequence::mergeWithMeasuresSlicesSe
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasuresSlices ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "---> sequenceSize: " <<
       sequenceSize <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -1214,20 +1281,26 @@ S_msrMeasuresSlicesSequence msrMeasuresSlicesSequence::mergeWithMeasuresSlicesSe
 
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceMeasuresSlices ()) {
-      gLogStream <<
+	  	std::stringstream ss;
+
+      ss <<
         "mergeWithMeasuresSlicesSequence()" <<
         ", otherSequenceSize: " <<
         otherSequenceSize <<
         std::endl;
+
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
     if (otherSequenceSize != sequenceSize) {
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         "cannot enrich measures slices sequence " <<
         asShortString () <<
         " with " <<
@@ -1242,10 +1315,10 @@ S_msrMeasuresSlicesSequence msrMeasuresSlicesSequence::mergeWithMeasuresSlicesSe
         std::endl;
 
       msrInternalError (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         inputLineNumber,
         __FILE__, __LINE__,
-        s.str ());
+        ss.str ());
     }
 
     else {
@@ -1297,7 +1370,9 @@ S_msrMeasuresSlicesSequence msrMeasuresSlicesSequence::mergeWithMeasuresSlicesSe
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasuresSlices ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "---> mergeWithMeasuresSlicesSequence()" <<
       ", result: " <<
       std::endl;
@@ -1316,7 +1391,9 @@ void msrMeasuresSlicesSequence::identifySoloNotesAndRests ()
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasuresSlices ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Identifying solo notes and rests in measures slices sequence " <<
       asShortStringForMeasuresSlices () <<
       ":" <<
@@ -1344,9 +1421,9 @@ void msrMeasuresSlicesSequence::identifySoloNotesAndRests ()
 
 std::string msrMeasuresSlicesSequence::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "[MeasuresSlicesSequence" <<
     ", measuresOrigin: " << fMeasuresOrigin <<
     ", " <<
@@ -1354,7 +1431,7 @@ std::string msrMeasuresSlicesSequence::asString () const
       fMeasuresSlicesVector.size (), "measure slice", "measures slices") <<
     ']';
 
-  return s.str ();
+  return ss.str ();
 }
 
 std::string msrMeasuresSlicesSequence::asShortString () const

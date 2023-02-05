@@ -69,7 +69,7 @@ void initializeMsrMarginTypeKindsMap ()
 
 std::string availableMsrMarginTypeKinds (size_t namesListMaxLength)
 {
-  std::stringstream s;
+  std::stringstream ss;
 
   size_t msrMarginTypeKindsMapSize =
     gGlobalMsrMarginTypeKindsMap.size ();
@@ -93,25 +93,25 @@ std::string availableMsrMarginTypeKinds (size_t namesListMaxLength)
 
       cumulatedLength += theString.size ();
       if (cumulatedLength >= namesListMaxLength) {
-        s << std::endl << gIndenter.getSpacer ();
+        ss << std::endl << gIndenter.getSpacer ();
         cumulatedLength = 0;
       }
 
       if (count == 1) {
-        s << gIndenter.getSpacer ();
+        ss << gIndenter.getSpacer ();
       }
-      s << theString;
+      ss << theString;
 
       if (count == nextToLast) {
-        s << " and ";
+        ss << " and ";
       }
       else if (count != msrMarginTypeKindsMapSize) {
-        s << ", ";
+        ss << ", ";
       }
     } // for
   }
 
-  return s.str ();
+  return ss.str ();
 }
 
 // margins
@@ -141,9 +141,9 @@ msrMargin::~msrMargin ()
 
 std::string msrMargin::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "[Margin, " <<
     std::setprecision (4) <<
     fMarginLength.asString () <<
@@ -151,7 +151,7 @@ std::string msrMargin::asString () const
     msrMarginTypeKindAsString (fMarginTypeKind) <<
     ']';
 
-  return s.str ();
+  return ss.str ();
 }
 
 void msrMargin::print (std::ostream& os) const
@@ -202,9 +202,9 @@ void msrMarginsGroup::setLeftMargin (
       val->getMarginTypeKind ();
 
   if (marginTypeKind != fMarginsGroupTypeKind) {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "setting a " <<
       msrMarginTypeKindAsString (marginTypeKind) <<
       " left margin in a " <<
@@ -212,10 +212,10 @@ void msrMarginsGroup::setLeftMargin (
       " margins group";
 
     msrInternalError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 
   fLeftMargin = val;
@@ -230,9 +230,9 @@ void msrMarginsGroup::setRightMargin (
       val->getMarginTypeKind ();
 
   if (marginTypeKind != fMarginsGroupTypeKind) {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "setting a " <<
       msrMarginTypeKindAsString (marginTypeKind) <<
       " right margin in a " <<
@@ -240,10 +240,10 @@ void msrMarginsGroup::setRightMargin (
       " margins group";
 
     msrInternalError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 
   fRightMargin = val;
@@ -258,9 +258,9 @@ void msrMarginsGroup::setTopMargin (
       val->getMarginTypeKind ();
 
   if (marginTypeKind != fMarginsGroupTypeKind) {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "setting a " <<
       msrMarginTypeKindAsString (marginTypeKind) <<
       " top margin in a " <<
@@ -268,10 +268,10 @@ void msrMarginsGroup::setTopMargin (
       " margins group";
 
     msrInternalError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 
   fTopMargin = val;
@@ -286,9 +286,9 @@ void msrMarginsGroup::setBottomMargin (
       val->getMarginTypeKind ();
 
   if (marginTypeKind != fMarginsGroupTypeKind) {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "setting a " <<
       msrMarginTypeKindAsString (marginTypeKind) <<
       " bottom margin in a " <<
@@ -296,10 +296,10 @@ void msrMarginsGroup::setBottomMargin (
       " margins group";
 
     msrInternalError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 
   fBottomMargin = val;
@@ -308,9 +308,15 @@ void msrMarginsGroup::setBottomMargin (
 /* JMI
 void msrMarginsGroup::acceptIn (basevisitor* v) {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrMarginsGroup::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrMarginsGroup>*
@@ -319,7 +325,9 @@ void msrMarginsGroup::acceptIn (basevisitor* v) {
         S_msrMarginsGroup elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrMarginsGroup::visitStart ()" <<
              std::endl;
         p->visitStart (elem);
@@ -328,9 +336,15 @@ void msrMarginsGroup::acceptIn (basevisitor* v) {
 
 void msrMarginsGroup::acceptOut (basevisitor* v) {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrMarginsGroup::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrMarginsGroup>*
@@ -339,7 +353,9 @@ void msrMarginsGroup::acceptOut (basevisitor* v) {
         S_msrMarginsGroup elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrMarginsGroup::visitEnd ()" <<
             std::endl;
         p->visitEnd (elem);
@@ -352,9 +368,9 @@ void msrMarginsGroup::browseData (basevisitor* v)
 
 std::string msrMarginsGroup::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "[MarginsGroup, " <<
     msrMarginTypeKindAsString (fMarginsGroupTypeKind) <<
     ", leftMargin: " << fLeftMargin->asString () <<
@@ -363,7 +379,7 @@ std::string msrMarginsGroup::asString () const
     ", bottomMargin: " << fBottomMargin->asString () <<
     ']';
 
-  return s.str ();
+  return ss.str ();
 }
 
 void msrMarginsGroup::print (std::ostream& os) const

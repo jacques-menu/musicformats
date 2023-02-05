@@ -105,11 +105,17 @@ void msrPart::initializePart ()
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceParts ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Creating part \"" << asString () << "\"" <<
       std::endl;
 
     gGlobalMsrOahGroup->displayMsrOahValues (40); // JMI
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -122,9 +128,9 @@ void msrPart::initializePart ()
     // yes, rename the part accordinglingly
     std::string newMsrPartName = (*it).second;
 
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "Renaming MSR part " <<
       getPartCombinedName () <<
       " to \"" <<
@@ -132,9 +138,9 @@ void msrPart::initializePart ()
       "\"";
 
     msrWarning (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       fInputLineNumber,
-      s.str ());
+      ss.str ());
 
     fPartMsrName = newMsrPartName;
   }
@@ -161,9 +167,15 @@ void msrPart::initializePart ()
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceParts ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Creating part \"" << asString () << "\"" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 }
@@ -188,10 +200,16 @@ S_msrPart msrPart::createPartNewbornClone (const S_msrPartGroup& partGroupClone)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceParts ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Creating a newborn clone of part " <<
       getPartCombinedName () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -250,7 +268,9 @@ void msrPart::registerStaffInPart (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceStaves ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Registering staff \"" <<
       staff->getStaffName () <<
       ", \"" <<
@@ -260,6 +280,10 @@ void msrPart::registerStaffInPart (
       " in part " <<
       getPartCombinedName () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -291,18 +315,18 @@ void msrPart::registerStaffInPart (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
       // sanity check
       if (fPartHarmoniesStaff) {
-        std::stringstream s;
+        std::stringstream ss;
 
-        s <<
+        ss <<
           "a harmonies staff already exists in part " <<
           getPartCombinedName () <<
           ", line " << inputLineNumber;
 
         msrInternalError ( // JMI ???
-          gGlobalServiceRunData->getInputSourceName (),
+          gGlobalCurrentServiceRunData->getInputSourceName (),
           inputLineNumber,
           __FILE__, __LINE__,
-          s.str ());
+          ss.str ());
       }
 #endif
 
@@ -314,18 +338,18 @@ void msrPart::registerStaffInPart (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
       // sanity check
       if (fPartFiguredBassStaff) {
-        std::stringstream s;
+        std::stringstream ss;
 
-        s <<
+        ss <<
           "a figured bass staff already exists in part " <<
           getPartCombinedName () <<
           ", line " << inputLineNumber;
 
         msrInternalError ( // JMI ???
-          gGlobalServiceRunData->getInputSourceName (),
+          gGlobalCurrentServiceRunData->getInputSourceName (),
           inputLineNumber,
           __FILE__, __LINE__,
-          s.str ());
+          ss.str ());
       }
 #endif
 
@@ -341,19 +365,25 @@ void msrPart::setPartMeasurePosition (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Setting part current measure position to " <<
       measurePosition <<
       " in part " <<
       getPartCombinedName () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
   if (measurePosition.getNumerator () < 0) {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "cannot set part current measure position to " <<
       measurePosition <<
       " in part " <<
@@ -361,10 +391,10 @@ void msrPart::setPartMeasurePosition (
       " since it is negative";
 
     msrInternalError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 
   fPartMeasurePosition =
@@ -379,7 +409,9 @@ void msrPart::incrementPartMeasurePosition (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Incrementing part current measure position by " <<
       duration <<
       " in part " <<
@@ -387,6 +419,10 @@ void msrPart::incrementPartMeasurePosition (
       ", thus setting it to " <<
       fPartMeasurePosition <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 }
@@ -397,21 +433,27 @@ void msrPart::decrementPartMeasurePosition (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Decrementing part current measure position by " <<
       duration <<
       " in part " <<
       getPartCombinedName () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
   fPartMeasurePosition -= duration;
 
   if (fPartMeasurePosition.getNumerator () < 0) {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "cannot decrement part current measure position by " <<
       duration <<
       " in part " <<
@@ -421,20 +463,26 @@ void msrPart::decrementPartMeasurePosition (
       ", which is negative ";
 
     msrInternalError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "The new part current measure position is " <<
       fPartMeasurePosition <<
       " in part " <<
       getPartCombinedName () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 }
@@ -448,12 +496,18 @@ void msrPart::setPartShortestNoteDuration (
       ||
     gGlobalMsrOahGroup->getTraceMsrDurations ()
   ) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Setting the shortest note duration of part \"" <<
       fPartName <<
       "\" to " <<
       duration <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -469,12 +523,18 @@ void msrPart::setPartShortestNoteTupletFactor (
       ||
     gGlobalMsrOahGroup->getTraceMsrDurations ()
   ) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Setting the shortest note tuplet factor of part " <<
       fPartName <<
       " to " <<
       noteTupletFactor <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -486,7 +546,9 @@ void msrPart::assignSequentialNumbersToRegularVoicesInPart (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceParts () || gGlobalTracingOahGroup->getTraceVoices ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Assigning sequential numbers to the staves in part \"" <<
       fPartID <<
       ", " <<
@@ -494,6 +556,10 @@ void msrPart::assignSequentialNumbersToRegularVoicesInPart (
       "\"" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -517,10 +583,16 @@ void msrPart::setPartMsrName (const std::string& partMsrName)
 
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceParts ()) {
-      gLogStream <<
+  		std::stringstream ss;
+
+        ss <<
         "Setting part name of " << getPartCombinedName () <<
         " to \"" << fPartMsrName << "\"" <<
          std::endl;
+
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif
   }
@@ -530,7 +602,9 @@ void msrPart::setPartMsrName (const std::string& partMsrName)
 
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceParts ()) {
-      gLogStream <<
+  		std::stringstream ss;
+
+        ss <<
         "Keeping partID \"" << partMsrName <<
         "\" as part name  for " << getPartCombinedName () <<
       std::endl;
@@ -541,32 +615,32 @@ void msrPart::setPartMsrName (const std::string& partMsrName)
 
 std::string msrPart::getPartCombinedName () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
   if (! fPartMsrName.size ()) {
-    s <<
+    ss <<
       "[empty name]";
   }
   else {
-    s <<
+    ss <<
      // JMI "\"" <<
       fPartMsrName
      // JMI << "\""
       ;
   }
 
-  s <<
+  ss <<
     " (partID \"" << fPartID << "\"";
 
   if (fPartName.size ()) {
-    s <<
+    ss <<
       ", partName \"" << fPartName << "\"";
   }
 
-  s <<
+  ss <<
     ")";
 
-  return s.str ();
+  return ss.str ();
 }
 
 void msrPart::createAMeasureAndAppendItToPart (
@@ -578,13 +652,19 @@ void msrPart::createAMeasureAndAppendItToPart (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasures ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Creating measure '" <<
       measureNumber <<
       "' and appending it to part " <<
       getPartCombinedName () <<
       "', line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -612,13 +692,19 @@ void msrPart::setNextMeasureNumberInPart (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasures ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Setting next measure number to '" <<
       nextMeasureNumber <<
       "' in part " <<
       getPartCombinedName () <<
       "', line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -647,7 +733,9 @@ Rational msrPart::fetchPartMeasuresWholeNotesDurationsVectorAt (
 
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
-      gLogStream <<
+  		std::stringstream ss;
+
+        ss <<
         "fetchPartMeasuresWholeNotesDurationsVectorAt() in part \"" <<
         getPartCombinedName () <<
         "\"" <<
@@ -655,6 +743,10 @@ Rational msrPart::fetchPartMeasuresWholeNotesDurationsVectorAt (
         partMeasuresWholeNotesDurationsVectorSize <<
         ", indexValue: " << indexValue <<
         std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
     }
 #endif
 
@@ -671,9 +763,9 @@ Rational msrPart::fetchPartMeasuresWholeNotesDurationsVectorAt (
   catch (const std::out_of_range& e) {
     // no
 
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "fetchPartMeasuresWholeNotesDurationsVectorAt() in part \"" <<
       getPartCombinedName () <<
       "\"" <<
@@ -684,10 +776,10 @@ Rational msrPart::fetchPartMeasuresWholeNotesDurationsVectorAt (
 
 //     msrInternalWarning (
      msrInternalError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
 
       result = Rational (15, 8); // TEMP JMI v0.9.61
   }
@@ -729,10 +821,16 @@ void msrPart::registerShortestNoteInPartIfRelevant (const S_msrNote& note)
 
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceNotes ()) {
-      gLogStream <<
+  		std::stringstream ss;
+
+        ss <<
         "The new shortest note in part \"" << getPartCombinedName () << "\"" <<
         " becomes " << note->asString () <<
         std::endl;
+
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif
   }
@@ -748,7 +846,9 @@ void msrPart::setPartNumberOfMeasures (size_t partNumberOfMeasures)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasures ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Setting the number of measures in part " <<
       getPartCombinedName () <<
       " to " <<
@@ -766,7 +866,9 @@ void msrPart::setPartNumberOfMeasures (size_t partNumberOfMeasures)
   if (partNumberOfMeasures > fPartMeasuresWholeNotesDurationsVectorSize) {
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceMeasures ()) {
-      gLogStream <<
+  		std::stringstream ss;
+
+      ss <<
         "Resizing fPartMeasuresWholeNotesDurationsVector in part " << // JMI ???
         getPartCombinedName () <<
         " from " <<
@@ -775,6 +877,10 @@ void msrPart::setPartNumberOfMeasures (size_t partNumberOfMeasures)
         partNumberOfMeasures <<
         " measures" <<
         std::endl;
+
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif
 
@@ -792,7 +898,9 @@ void msrPart::registerOrdinalMeasureNumberWholeNotesDuration (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasures ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Registering the whole notes duration of the measure with ordinal number '" <<
       measureOrdinalNumber <<
       "' as " <<
@@ -801,24 +909,37 @@ void msrPart::registerOrdinalMeasureNumberWholeNotesDuration (
       ", measureOrdinalNumber: " << measureOrdinalNumber <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasures ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "===> fPartMeasuresWholeNotesDurationsVector contents: " <<
       std::endl;
     for (Rational rat : fPartMeasuresWholeNotesDurationsVector) {
       ++gIndenter;
-      gLogStream <<
+  		std::stringstream ss;
+
+    ss <<
         rat <<
         std::endl;
       --gIndenter;
     } // for
-    gLogStream <<
+
+    ss <<
       "<==== end of fPartMeasuresWholeNotesDurationsVector contents " <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -835,7 +956,9 @@ void msrPart::registerOrdinalMeasureNumberWholeNotesDuration (
     // allow for polymetrics in non-MusicXML contexts? JMI
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceMeasures ()) {
-      gLogStream <<
+  		std::stringstream ss;
+
+      ss <<
         "The measure with ordinal number " <<
         measureOrdinalNumber <<
         " was known with a whole notes duration of " <<
@@ -844,6 +967,10 @@ void msrPart::registerOrdinalMeasureNumberWholeNotesDuration (
         wholeNotesDuration <<
         " in part " << getPartCombinedName () <<
         std::endl;
+
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif
   }
@@ -856,7 +983,9 @@ void msrPart::registerOrdinalMeasureNumberWholeNotesDuration (
 
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceMeasures ()) {
-      gLogStream <<
+  		std::stringstream ss;
+
+        ss <<
         "The measure with ordinal number " <<
         measureOrdinalNumber <<
         " is now registered with a duration of " <<
@@ -865,6 +994,10 @@ void msrPart::registerOrdinalMeasureNumberWholeNotesDuration (
         ", fPartMeasuresWholeNotesDurationsVector.size () = " <<
         fPartMeasuresWholeNotesDurationsVector.size () <<
         std::endl;
+
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif
   }
@@ -875,7 +1008,9 @@ void msrPart::appendStaffDetailsToPart (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceStaffDetails ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Appending staff details\"" <<
       staffDetails->asShortString () <<
       "\" to part " << getPartCombinedName () <<
@@ -899,7 +1034,9 @@ void msrPart::appendClefToPart (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceClefs ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Appending clef '" <<
       clef->asString () <<
       "' to part " << getPartCombinedName () <<
@@ -933,11 +1070,17 @@ void msrPart::appendKeyToPart (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceKeys ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Appending key " <<
       key->asString () <<
       " to part " << getPartCombinedName () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -970,11 +1113,17 @@ void msrPart::appendTimeSignatureToPart (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTimeSignatures ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Appending time signature '" <<
       timeSignature->asString () <<
       "' to part " << getPartCombinedName () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -1007,11 +1156,17 @@ void msrPart::appendTimeSignatureToPartClone (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTimeSignatures ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Appending time signature '" <<
       timeSignature->asString () <<
       "' to part clone " << getPartCombinedName () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -1034,11 +1189,17 @@ void msrPart::appendTempoToPart (
 {
  #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTempos ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Appending tempo " << tempo->asString () <<
       " to part " <<
       getPartCombinedName () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -1054,11 +1215,17 @@ void msrPart::appendRehearsalMarkToPart (
 {
  #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceRehearsalMarks ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Appending rehearsal mark " << rehearsalMark->asString () <<
       " to part " <<
       getPartCombinedName () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -1075,11 +1242,17 @@ void msrPart::appendLineBreakToPart (
 {
  #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceLineBreaks ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Appending line break " << lineBreak->asString () <<
       " to part " <<
       getPartCombinedName () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -1095,11 +1268,17 @@ void msrPart::appendPageBreakToPart (
 {
  #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTracePageBreaks ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Appending page break " << pageBreak->asString () <<
       " to part " <<
       getPartCombinedName () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -1116,12 +1295,18 @@ void msrPart::insertHiddenMeasureAndBarLineInPartClone (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasures ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Inserting hidden measure and barLine at position " <<
       measurePosition <<
       "' in part clone " << getPartCombinedName () <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -1143,7 +1328,9 @@ void msrPart::appendTranspositionToPart (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTranspositions ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Appending transposition \"" <<
       transposition->asString () <<
       "\" to part " << getPartCombinedName () <<
@@ -1178,11 +1365,17 @@ void msrPart::handleRepeatStartInPart (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceRepeats ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Handling a repeat start in part \"" <<
       getPartCombinedName () <<
       "\", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -1205,12 +1398,18 @@ void msrPart::handleRepeatEndInPart (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceRepeats ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Handling a repeat end in part \"" <<
       getPartCombinedName () <<
       "\"" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -1233,12 +1432,18 @@ void msrPart::handleRepeatEndingStartInPart (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceRepeats ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Handling a repeat ending start in part \"" <<
       getPartCombinedName () <<
       "\"" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -1261,7 +1466,9 @@ void msrPart::handleRepeatEndingEndInPart (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceRepeats ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Handling a " <<
       msrRepeatEndingKindAsString (
         repeatEndingKind) <<
@@ -1270,6 +1477,10 @@ void msrPart::handleRepeatEndingEndInPart (
       "\"" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -1295,12 +1506,18 @@ void msrPart::finalizeRepeatEndInPart (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceRepeats ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Finalizing a repeat upon its end in part \"" <<
       getPartCombinedName () <<
       "\"" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -1393,7 +1610,9 @@ void msrPart::appendMultipleFullBarRestsToPart (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMultipleFullBarRests ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Appending a multiple full-bar rest for " <<
       mfSingularOrPlural (
         multipleFullBarRestsMeasuresNumber, "measure", "measures") <<
@@ -1401,6 +1620,10 @@ void msrPart::appendMultipleFullBarRestsToPart (
       getPartCombinedName () <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -1421,10 +1644,16 @@ void msrPart::replicateLastAppendedMeasureInPart (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMultipleFullBarRests ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Replicating last appended measure in part " <<
       getPartCombinedName () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -1444,7 +1673,9 @@ void msrPart::addEmptyMeasuresToPart (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMultipleFullBarRests ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Adding " <<
       mfSingularOrPlural (
         multipleFullBarRestsNumber, "multiple full-bar rest", "multiple full-bar rests") <<
@@ -1452,6 +1683,10 @@ void msrPart::addEmptyMeasuresToPart (
       getPartCombinedName () <<
       ", " <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -1472,10 +1707,16 @@ void msrPart::appendPendingMultipleFullBarRestsToPart (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMultipleFullBarRests ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Appending the pending multiple rest to part " <<
       getPartCombinedName () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -1493,12 +1734,18 @@ void msrPart::appendMultipleFullBarRestsCloneToPart (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMultipleFullBarRests ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Appending multiple rest '" <<
       multipleFullBarRests->asString () <<
       "' to part clone " <<
       getPartCombinedName () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -1515,11 +1762,17 @@ void msrPart::appendBarLineToPart (
 {
  #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceBarLines ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Appending barLine " << barLine->asString () <<
       " to part " <<
       getPartCombinedName () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -1536,31 +1789,37 @@ S_msrStaff msrPart::addStaffToPartByItsNumber (
   int          staffNumber)
 {
   if (fPartStaveNumbersToStavesMap.count (staffNumber)) {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "staffNumber " << staffNumber <<
       " already exists in part " << getPartCombinedName () <<
       ", line " << inputLineNumber;
 
     msrInternalError ( // JMI ???
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
 
     return fPartStaveNumbersToStavesMap [staffNumber];
   }
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceStaves ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Adding " <<
       msrStaffKindAsString (staffKind) <<
       " staff " << staffNumber <<
       " to part " << getPartCombinedName () <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -1598,11 +1857,17 @@ S_msrStaff msrPart::addHarmoniesStaffToPart (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceStaves ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Adding harmonies staff " <<
       " to part " << getPartCombinedName () <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -1645,11 +1910,17 @@ S_msrStaff msrPart::addHFiguredBassStaffToPart (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceStaves ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Adding figured bass staff " <<
       " to part " << getPartCombinedName () <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -1691,10 +1962,16 @@ void msrPart::addStaffToPartCloneByItsNumber (const S_msrStaff& staff)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceStaves ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Adding staff \"" << staff->getStaffName () <<
       "\" to part clone " << getPartCombinedName () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -1732,18 +2009,18 @@ S_msrVoice msrPart::createPartHarmoniesVoice (
   const std::string& currentMeasureNumber)
 {
   if (fPartHarmoniesVoice) {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "Part \"" <<
       getPartCombinedName () <<
       "\" already has a harmonies voice";
 
     msrInternalError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 
   // create the part harmonies staff
@@ -1752,9 +2029,9 @@ S_msrVoice msrPart::createPartHarmoniesVoice (
     msrPart::K_PART_HARMONIES_STAFF_NUMBER;
 
   if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "Creating harmonies staff for part \"" <<
       getPartCombinedName () <<
       "\" with staff number " <<
@@ -1764,7 +2041,7 @@ S_msrVoice msrPart::createPartHarmoniesVoice (
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 #endif
 
@@ -1778,9 +2055,9 @@ S_msrVoice msrPart::createPartHarmoniesVoice (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "Creating harmonies voice for part \"" <<
       getPartCombinedName () <<
       "\" with voice number " <<
@@ -1790,7 +2067,7 @@ S_msrVoice msrPart::createPartHarmoniesVoice (
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 #endif
 
@@ -1822,18 +2099,18 @@ S_msrVoice msrPart::createPartFiguredBassVoice (
   const std::string& currentMeasureNumber)
 {
   if (fPartFiguredBassVoice) {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "Part \"" <<
       getPartCombinedName () <<
       "\" already has a figured bass voice";
 
     msrInternalError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 
   // create the part figured bass staff
@@ -1842,13 +2119,19 @@ S_msrVoice msrPart::createPartFiguredBassVoice (
     msrPart::K_PART_FIGURED_BASS_STAFF_NUMBER;
 
   if (gGlobalTracingOahGroup->getTraceFiguredBasses ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Creating figured bass staff for part \"" <<
       getPartCombinedName () <<
       "\" with staff number " <<
       partFiguredBassStaffNumber <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -1862,13 +2145,19 @@ S_msrVoice msrPart::createPartFiguredBassVoice (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceFiguredBasses ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Creating figured bass voice for part \"" <<
       getPartCombinedName () <<
       "\" with voice number " <<
       partFiguredBassVoiceNumber <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -1909,13 +2198,19 @@ void msrPart::appendFiguredBassToPart (
       // append the figured bass to the part figured bass voice
 #ifdef MF_TRACING_IS_ENABLED
       if (gGlobalTracingOahGroup->getTraceFiguredBasses ()) {
-        gLogStream <<
+    		std::stringstream ss;
+
+    ss <<
           "Appending figured bass " <<
           figuredBass->asString () <<
           " to part " <<
           getPartCombinedName () <<
           ", line " << inputLineNumber <<
           std::endl;
+
+        gWaeHandler->waeTrace (
+          __FILE__, __LINE__,
+          ss.str ());
       }
 #endif
 
@@ -1929,9 +2224,9 @@ void msrPart::appendFiguredBassToPart (
     case msrVoiceKind::kVoiceKindHarmonies:
     case msrVoiceKind::kVoiceKindFiguredBass:
       {
-        std::stringstream s;
+        std::stringstream ss;
 
-        s <<
+        ss <<
           "figured bass cannot by appended to part by " <<
           msrVoiceKindAsString (
             figuredBassSupplierVoice->getVoiceKind ()) <<
@@ -1940,10 +2235,10 @@ void msrPart::appendFiguredBassToPart (
           "\"";
 
         msrInternalError (
-          gGlobalServiceRunData->getInputSourceName (),
+          gGlobalCurrentServiceRunData->getInputSourceName (),
           inputLineNumber,
           __FILE__, __LINE__,
-          s.str ());
+          ss.str ());
       }
       break;
   } // switch
@@ -1965,13 +2260,19 @@ void msrPart::appendFiguredBassToPartClone (
       // append the figured bass to the part figured bass voice
 #ifdef MF_TRACING_IS_ENABLED
       if (gGlobalTracingOahGroup->getTraceFiguredBasses ()) {
-        gLogStream <<
+    		std::stringstream ss;
+
+    ss <<
           "Appending figured bass " <<
           figuredBass->asString () <<
           " to part clone " <<
           getPartCombinedName () <<
           ", line " << inputLineNumber <<
           std::endl;
+
+        gWaeHandler->waeTrace (
+          __FILE__, __LINE__,
+          ss.str ());
       }
 #endif
 
@@ -1985,9 +2286,9 @@ void msrPart::appendFiguredBassToPartClone (
     case msrVoiceKind::kVoiceKindRegular:
     case msrVoiceKind::kVoiceKindHarmonies:
       {
-        std::stringstream s;
+        std::stringstream ss;
 
-        s <<
+        ss <<
           "figured bass cannot by appended to part clone by " <<
           msrVoiceKindAsString (
             figuredBassSupplierVoice->getVoiceKind ()) <<
@@ -1996,10 +2297,10 @@ void msrPart::appendFiguredBassToPartClone (
           "\"";
 
         msrInternalError (
-          gGlobalServiceRunData->getInputSourceName (),
+          gGlobalCurrentServiceRunData->getInputSourceName (),
           inputLineNumber,
           __FILE__, __LINE__,
-          s.str ());
+          ss.str ());
       }
       break;
   } // switch
@@ -2012,12 +2313,18 @@ void msrPart::appendScordaturaToPart (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceParts ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Appending scordatura '" <<
       scordatura->asString () <<
       "' to part " <<
       getPartCombinedName () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -2034,12 +2341,18 @@ void msrPart::appendAccordionRegistrationToPart (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceParts ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Appending accordion registration '" <<
       accordionRegistration->asString () <<
       "' to part " <<
       getPartCombinedName () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -2056,12 +2369,18 @@ void msrPart::appendHarpPedalsTuningToPart (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceParts ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Appending harp pedals tuning '" <<
       harpPedalsTuning->asString () <<
       "' to part " <<
       getPartCombinedName () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -2089,11 +2408,17 @@ void msrPart::addSkipGraceNotesGroupAheadOfVoicesClonesIfNeeded (
       ||
     gGlobalTracingOahGroup->getTraceParts ()
     ) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "addSkipGraceNotesGroupAheadOfVoicesClonesIfNeeded () in " <<
       getPartCombinedName () <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -2131,11 +2456,17 @@ void msrPart::finalizeLastAppendedMeasureInPart (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasures ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Finalizing last appended measure in part " <<
       getPartCombinedName () <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -2216,28 +2547,34 @@ void msrPart::finalizePart (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceParts ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Finalizing part " <<
       getPartCombinedName () <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
   ++gIndenter;
 
   if (! fPartAllStavesList.size ()) {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "Part " <<
       getPartCombinedName () <<
       " appears in the part list, but doesn't contain any stave";
 
     msrWarning (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
-      s.str ());
+      ss.str ());
   }
 
   else {
@@ -2269,11 +2606,17 @@ void msrPart::finalizePartClone (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceParts ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Finalizing part clone " <<
       getPartCombinedName () <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -2304,11 +2647,17 @@ void msrPart::finalizePartAndAllItsMeasures (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceParts ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Finalizing all the measures of part \"" <<
       getPartCombinedName () <<
       "\", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -2332,7 +2681,9 @@ void msrPart::collectPartMeasuresSlices (
       partAllStavesListSize =
         fPartAllStavesList.size ();
 
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Collecting the measures slices of part \"" <<
       getPartCombinedName () <<
       "\", " <<
@@ -2343,6 +2694,10 @@ void msrPart::collectPartMeasuresSlices (
         partAllStavesListSize, "voice", "voices") <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -2365,11 +2720,17 @@ void msrPart::collectPartMeasuresSlices (
   for (S_msrStaff staff : fPartAllStavesList) {
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceMeasuresSlices ()) {
-      gLogStream <<
+  		std::stringstream ss;
+
+        ss <<
         "---> staff \"" <<
         staff->getStaffName () <<
         "\":" <<
         std::endl;
+
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif
 
@@ -2381,17 +2742,17 @@ void msrPart::collectPartMeasuresSlices (
           getStaffMeasuresSlicesSequence ();
 
     if (! staffMeasuresSlicesSequence) {
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+        ss <<
         "The staffMeasuresSlicesSequence of staff \"" <<
         staff->getStaffName () <<
         "\" is null";
 
       msrWarning (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         inputLineNumber,
-        s.str ());
+        ss.str ());
     }
     else {
       fPartMeasuresSlicesSequence->
@@ -2406,12 +2767,14 @@ void msrPart::collectPartMeasuresSlices (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasuresSlices ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "fPartMeasuresSlicesSequence:" <<
       std::endl;
 
     ++gIndenter;
-    gLogStream <<
+    ss <<
       fPartMeasuresSlicesSequence;
     --gIndenter;
   }
@@ -2423,9 +2786,15 @@ void msrPart::collectPartMeasuresSlices (
 void msrPart::acceptIn (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrPart::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrPart>*
@@ -2434,9 +2803,15 @@ void msrPart::acceptIn (basevisitor* v)
         S_msrPart elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+      		std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrPart::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitStart (elem);
   }
@@ -2445,9 +2820,15 @@ void msrPart::acceptIn (basevisitor* v)
 void msrPart::acceptOut (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrPart::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrPart>*
@@ -2456,10 +2837,16 @@ void msrPart::acceptOut (basevisitor* v)
         S_msrPart elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+      		std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrPart::visitEnd ()" <<
             std::endl;
-        }
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
+       }
         p->visitEnd (elem);
   }
 }
@@ -2467,21 +2854,31 @@ void msrPart::acceptOut (basevisitor* v)
 void msrPart::browseData (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrPart::browseData ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
 #ifdef MF_TRACING_IS_ENABLED // JMI
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) { // JMI TEMP
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "++++++++ fPartAllStavesList.size(): " <<
       fPartAllStavesList.size () <<
       std::endl;
 
     if (fPartAllStavesList.size ()) {
       for (S_msrStaff staff : fPartAllStavesList) {
-        gLogStream <<
+    		std::stringstream ss;
+
+        ss <<
           std::endl <<
           "+++++++++ staff: ++++++++" <<
           " \"" << staff->getStaffName () << "\"" <<
@@ -2489,14 +2886,16 @@ void msrPart::browseData (basevisitor* v)
       } // for
     }
 
-    gLogStream <<
+    ss <<
       "++++++++ fPartNonHarmoniesNorFiguredBassStavesList.size(): " <<
       fPartNonHarmoniesNorFiguredBassStavesList.size () <<
       std::endl;
 
     if (fPartNonHarmoniesNorFiguredBassStavesList.size ()) {
       for (S_msrStaff staff : fPartNonHarmoniesNorFiguredBassStavesList) {
-        gLogStream <<
+    		std::stringstream ss;
+
+        ss <<
           std::endl <<
           "+++++++++ staff: ++++++++" <<
           " \"" << staff->getStaffName () << "\"" <<
@@ -2541,9 +2940,9 @@ void msrPart::browseData (basevisitor* v)
 
 std::string msrPart::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "Part" <<
     ", partID = \"" <<
     fPartID <<
@@ -2554,7 +2953,7 @@ std::string msrPart::asString () const
     "\", partStaves: " << fPartAllStavesList.size () <<
     ", line " << fInputLineNumber;
 
-  return s.str ();
+  return ss.str ();
 }
 
 void msrPart::printPartMeasuresWholeNotesDurationsVector (

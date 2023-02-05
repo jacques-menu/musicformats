@@ -20,6 +20,7 @@
 #include "bsrNumbers.h"
 
 #include "oahOah.h"
+#include "oahEarlyOptions.h"
 
 #include "bsrOah.h"
 
@@ -107,9 +108,16 @@ void bsrPagination::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
+      "% --> End visiting bsrTranscriptionNotesElement" <<
       "% ==> bsrPagination::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -120,9 +128,15 @@ void bsrPagination::acceptIn (basevisitor* v)
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching bsrPagination::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
         p->visitStart (elem);
@@ -133,9 +147,16 @@ void bsrPagination::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
+      "% --> End visiting bsrTranscriptionNotesElement" <<
       "% ==> bsrPagination::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -146,9 +167,15 @@ void bsrPagination::acceptOut (basevisitor* v)
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching bsrPagination::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
         p->visitEnd (elem);
@@ -160,28 +187,28 @@ void bsrPagination::browseData (basevisitor* v)
 
 std::string bsrPagination::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "Pagination" <<
     ", printPageNumber: " << fPrintPageNumber <<
     ", braillePageNumber: " << fBraillePageNumber <<
     ", spacesCellsList: " << fPaginationCellsList <<
     ", line " << fInputLineNumber;
 
-  return s.str ();
+  return ss.str ();
 }
 
 std::string bsrPagination::asDebugString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "PGNT" <<
     ", printPageNumber: " << fPrintPageNumber <<
     ", braillePageNumber: " << fBraillePageNumber;
 
-  return s.str ();
+  return ss.str ();
 }
 
 void bsrPagination::print (std::ostream& os) const
@@ -217,7 +244,7 @@ std::ostream& operator << (std::ostream& os, const S_bsrPagination& elt)
   else {
     os << "[NONE]" << std::endl;
   }
-  
+
   return os;
 }
 

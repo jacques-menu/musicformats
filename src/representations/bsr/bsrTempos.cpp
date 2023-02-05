@@ -257,14 +257,14 @@ S_bsrCellsList bsrTempo::buildCellsList () const
 
           if (smSize == 3) {
             {
-              std::stringstream s;
-              s << sm [1];
-              s >> perMinuteMin;
+              std::stringstream ss;
+              ss << sm [1];
+              ss >> perMinuteMin;
             }
             {
-              std::stringstream s;
-              s << sm [2];
-              s >> perMinuteMax;
+              std::stringstream ss;
+              ss << sm [2];
+              ss >> perMinuteMax;
             }
           }
 
@@ -300,25 +300,25 @@ S_bsrCellsList bsrTempo::buildCellsList () const
 #endif
 
             if (smSize == 2) {
-              std::stringstream s;
-              s << sm [1];
-              s >> perMinuteMin;
+              std::stringstream ss;
+              ss << sm [1];
+              ss >> perMinuteMin;
             }
 
             else {
-              std::stringstream s;
+              std::stringstream ss;
 
-              s <<
+              ss <<
                 "tempoPerMinuteString '" <<
                 tempoPerMinuteString <<
                 "' is ill-formed" <<
                 ", line " << fInputLineNumber;
 
               bsrInternalError (
-                gGlobalServiceRunData->getInputSourceName (),
+                gGlobalCurrentServiceRunData->getInputSourceName (),
                 fInputLineNumber,
                 __FILE__, __LINE__,
-                s.str ());
+                ss.str ());
             }
           }
 
@@ -386,9 +386,16 @@ void bsrTempo::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
+      "% --> End visiting bsrTranscriptionNotesElement" <<
       "% ==> bsrTempo::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -399,9 +406,15 @@ void bsrTempo::acceptIn (basevisitor* v)
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching bsrTempo::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
         p->visitStart (elem);
@@ -412,9 +425,16 @@ void bsrTempo::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
+      "% --> End visiting bsrTranscriptionNotesElement" <<
       "% ==> bsrTempo::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -425,9 +445,15 @@ void bsrTempo::acceptOut (basevisitor* v)
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching bsrTempo::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
         p->visitEnd (elem);
@@ -439,9 +465,9 @@ void bsrTempo::browseData (basevisitor* v)
 
 std::string bsrTempo::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "Tempo" <<
     ", tempoKind: " <<
     msrTempoBeatUnitsKindAsString (fMsrTempo->getTempoKind ()) <<
@@ -450,22 +476,22 @@ std::string bsrTempo::asString () const
     ", spacesBefore: " << fSpacesBefore <<
     ", line " << fInputLineNumber;
 
-  return s.str ();
+  return ss.str ();
 }
 
 std::string bsrTempo::asDebugString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "[TEMPO ";
 
   switch (fMsrTempo->getTempoKind ()) {
     case msrTempoKBeatUnitsKind::kTempoBeatUnits_UNKNOWN:
-      s << "_";
+      ss << "_";
       break;
     case msrTempoKBeatUnitsKind::kTempoBeatUnitsWordsOnly:
-      s << "WordsOnly";
+      ss << "WordsOnly";
       break;
     case msrTempoKBeatUnitsKind::kTempoBeatUnitsPerMinute:
       {
@@ -473,7 +499,7 @@ std::string bsrTempo::asDebugString () const
           tempoBeatUnit =
             fMsrTempo->getTempoBeatUnit ();
 
-        s <<
+        ss <<
           tempoBeatUnit.asString () <<
           " = " <<
           fMsrTempo->getTempoPerMinute () <<
@@ -481,16 +507,16 @@ std::string bsrTempo::asDebugString () const
       }
       break;
     case msrTempoKBeatUnitsKind::kTempoBeatUnitsEquivalence:
-      s << "Equivalence";
+      ss << "Equivalence";
       break;
     case msrTempoKBeatUnitsKind::kTempoNotesRelationship:
-      s << "NotesRelationShip";
+      ss << "NotesRelationShip";
       break;
   } // switch
 
-  s << ']';
+  ss << ']';
 
-  return s.str ();
+  return ss.str ();
 }
 
 void bsrTempo::print (std::ostream& os) const

@@ -285,9 +285,9 @@ std::ostream& operator << (std::ostream& os, const msrMeasureEndRegularKind& elt
 //     // insert skipNote before currentHarmony in the measure's elements list
 // #ifdef MF_TRACING_IS_ENABLED
 //     if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
-//       std::stringstream s;
+//       std::stringstream ss;
 //
-//       s <<
+//       ss <<
 //         "Inserting subsequent padding note " <<
 //         skipNote->asString () <<
 //         " before currentHarmony " <<
@@ -299,7 +299,7 @@ std::ostream& operator << (std::ostream& os, const msrMeasureEndRegularKind& elt
 //
 //       gWaeHandler->waeTrace (
 //         __FILE__, __LINE__,
-//         s.str ());
+//         ss.str ());
 //     }
 // #endif
 //
@@ -312,18 +312,18 @@ std::ostream& operator << (std::ostream& os, const msrMeasureEndRegularKind& elt
 //
 //   else if (measurePositionsDelta.getNumerator () < 0) {
 //     // the two harmonies overlap in time
-//     std::stringstream s;
+//     std::stringstream ss;
 //
-//     s <<
+//     ss <<
 //       "Previous harmony " <<
 //       previousHarmony->asString () <<
 //       " overlaps current harmony " <<
 //       currentHarmony->asString ();
 //
 //     msrInternalWarning (
-//       gGlobalServiceRunData->getInputSourceName (),
+//       gGlobalCurrentServiceRunData->getInputSourceName (),
 //       inputLineNumber,
-//       s.str ());
+//       ss.str ());
 //
 //     // compute previousHarmony's future sounding whole notes
 //     Rational
@@ -334,9 +334,9 @@ std::ostream& operator << (std::ostream& os, const msrMeasureEndRegularKind& elt
 //
 // #ifdef MF_TRACING_IS_ENABLED
 //     if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
-//       std::stringstream s;
+//       std::stringstream ss;
 //
-//       s <<
+//       ss <<
 //         "Reducing the sounding whole notes of harmony " <<
 //         previousHarmony->asString () <<
 //         " from " <<
@@ -350,23 +350,23 @@ std::ostream& operator << (std::ostream& os, const msrMeasureEndRegularKind& elt
 //
 //       gWaeHandler->waeTrace (
 //         __FILE__, __LINE__,
-//         s.str ());
+//         ss.str ());
 //     }
 // #endif
 //
 //     if (reducedSoundingWholeNotes.getNumerator () == 0) {
-//       std::stringstream s;
+//       std::stringstream ss;
 //
-//       s <<
+//       ss <<
 //         "Cannot reduce the duration of harmony " <<
 //         previousHarmony->asShortString () <<
 //         " to 0 : leaving it as it is";
 //
 //       msrInternalWarning (
-//         gGlobalServiceRunData->getInputSourceName (),
+//         gGlobalCurrentServiceRunData->getInputSourceName (),
 //         inputLineNumber,
 // //  JMI             __FILE__, __LINE__,
-//         s.str ());
+//         ss.str ());
 //     }
 //     else {
 //       // set previousHarmony's duration to the reduced value

@@ -51,8 +51,6 @@ class EXP mfWaeHandlerGerman : public mfWaeHandler
 
     virtual std::string   passIDKindAsString (mfPassIDKind passIDKind) const override;
 
-//     virtual std::string   passName (mfPassIDKind passIDKind) const override;
-
     virtual std::string   passOptional () const override;
 
     virtual std::string   fullVersion () const override;
@@ -70,7 +68,7 @@ class EXP mfWaeHandlerGerman : public mfWaeHandler
 
     // passes
 
-    virtual std::string   createAnMXSRFromAMusicXMLFile () const override;
+    virtual std::string   createAnMXSRFromAMusicXMLFileOrStdin () const override;
     virtual std::string   createAnMXSRFromAMusicXMLDescriptor () const override;
     virtual std::string   createAnMXSRFromAMusicXMLBuffer () const override;
 

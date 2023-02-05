@@ -28,6 +28,7 @@
 #include "msrStavesDetails.h"
 
 #include "oahOah.h"
+#include "oahEarlyOptions.h"
 
 #include "msrOah.h"
 
@@ -152,11 +153,17 @@ S_msrStaffTuning msrStaffTuning::createStaffTuningNewbornClone ()
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceStaffDetails ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Creating a newborn clone of staff tuning '" <<
       asString () <<
       "'" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -174,9 +181,15 @@ S_msrStaffTuning msrStaffTuning::createStaffTuningNewbornClone ()
 void msrStaffTuning::acceptIn (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrStaffTuning::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrStaffTuning>*
@@ -185,9 +198,15 @@ void msrStaffTuning::acceptIn (basevisitor* v)
         S_msrStaffTuning elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrStaffTuning::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitStart (elem);
   }
@@ -196,9 +215,15 @@ void msrStaffTuning::acceptIn (basevisitor* v)
 void msrStaffTuning::acceptOut (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrStaffTuning::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrStaffTuning>*
@@ -207,9 +232,15 @@ void msrStaffTuning::acceptOut (basevisitor* v)
         S_msrStaffTuning elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrStaffTuning::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitEnd (elem);
   }
@@ -220,9 +251,9 @@ void msrStaffTuning::browseData (basevisitor* v)
 
 std::string msrStaffTuning::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "[StaffTuning" <<
     ", fStaffTuningQuarterTonesPitchKind: " <<
     msrQuarterTonesPitchKindAsStringInLanguage (
@@ -234,7 +265,7 @@ std::string msrStaffTuning::asString () const
     ", line " << fStaffTuningLineNumber <<
     ']';
 
-  return s.str ();
+  return ss.str ();
 }
 
 void msrStaffTuning::print (std::ostream& os) const
@@ -376,9 +407,15 @@ void msrStaffDetails::setStaffDetailsUpLinkToMeasure (
 void msrStaffDetails::acceptIn (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrStaffDetails::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrStaffDetails>*
@@ -387,9 +424,15 @@ void msrStaffDetails::acceptIn (basevisitor* v)
         S_msrStaffDetails elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrStaffDetails::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitStart (elem);
   }
@@ -398,9 +441,15 @@ void msrStaffDetails::acceptIn (basevisitor* v)
 void msrStaffDetails::acceptOut (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrStaffDetails::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrStaffDetails>*
@@ -409,9 +458,15 @@ void msrStaffDetails::acceptOut (basevisitor* v)
         S_msrStaffDetails elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrStaffDetails::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitEnd (elem);
   }
@@ -434,28 +489,28 @@ void msrStaffDetails::browseData (basevisitor* v)
 
 std::string msrStaffDetails::asShortString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "[StaffDetails" <<
     ", fStaffTypeKind: " <<
     fStaffTypeKind <<
     ", line " << fInputLineNumber;
 
   // print the staff lines number
-  s << ", fStaffLinesNumber: " << fStaffLinesNumber;
+  ss << ", fStaffLinesNumber: " << fStaffLinesNumber;
 
   // print the staff tunings if any
-  s <<
+  ss <<
     ", fStaffTuningsList: " << fStaffTuningsList.size ();
 
-  s <<
+  ss <<
     ", fShowFretsKind: " << fShowFretsKind <<
     ", fPrintObjectKind: " << fPrintObjectKind <<
     ", fPrintSpacingKind: " << fPrintSpacingKind <<
     ']';
 
-  return s.str ();
+  return ss.str ();
 }
 
 void msrStaffDetails::print (std::ostream& os) const

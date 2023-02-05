@@ -26,6 +26,7 @@
 #include "msrMeasureConstants.h"
 
 #include "oahOah.h"
+#include "oahEarlyOptions.h"
 
 #include "msrOah.h"
 
@@ -76,7 +77,9 @@ msrBarNumberCheck::msrBarNumberCheck (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasuresNumbers ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Creating a bar number check" <<
       " with next bar original number '" <<
       nextBarOriginalNumber <<
@@ -84,6 +87,10 @@ msrBarNumberCheck::msrBarNumberCheck (
       fNextBarPuristNumber <<
       "'" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 }
@@ -124,9 +131,15 @@ void msrBarNumberCheck::setBarNumberCheckUpLinkToMeasure (
 void msrBarNumberCheck::acceptIn (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrBarNumberCheck::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrBarNumberCheck>*
@@ -135,9 +148,15 @@ void msrBarNumberCheck::acceptIn (basevisitor* v)
         S_msrBarNumberCheck elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrBarNumberCheck::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitStart (elem);
   }
@@ -146,9 +165,15 @@ void msrBarNumberCheck::acceptIn (basevisitor* v)
 void msrBarNumberCheck::acceptOut (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrBarNumberCheck::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrBarNumberCheck>*
@@ -157,9 +182,15 @@ void msrBarNumberCheck::acceptOut (basevisitor* v)
         S_msrBarNumberCheck elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrBarNumberCheck::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitEnd (elem);
   }
@@ -170,16 +201,16 @@ void msrBarNumberCheck::browseData (basevisitor* v)
 
 std::string msrBarNumberCheck::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "[BarNumberCheck" <<
     ", nextBarOriginalNumber = \"" << fNextBarOriginalNumber << "\"" <<
     ", nextBarPuristNumber = \"" << fNextBarPuristNumber << "\"" <<
     ", line " << fInputLineNumber <<
     ']';
 
-  return s.str ();
+  return ss.str ();
 }
 
 void msrBarNumberCheck::print (std::ostream& os) const

@@ -1687,9 +1687,9 @@ msrQuarterTonesPitchesLanguageKind msrQuarterTonesPitchesLanguageKindFromString 
 
   if (it == pQuarterTonesPitchesLanguageKindsMap.end ()) {
     // no, Pitches language kind is unknown in the map
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "MSDL language kind '" << theString <<
       "' is unknown" <<
       std::endl <<
@@ -1700,13 +1700,13 @@ msrQuarterTonesPitchesLanguageKind msrQuarterTonesPitchesLanguageKindFromString 
 
     ++gIndenter;
 
-    s <<
+    ss <<
       availableMsrQuarterTonesPitchesLanguageKinds (
         K_MF_NAMES_LIST_MAX_LENGTH);
 
     --gIndenter;
 
-// JMI    oahError (s.str ());
+// JMI    oahError (ss.str ());
   }
 
   result = (*it).second;

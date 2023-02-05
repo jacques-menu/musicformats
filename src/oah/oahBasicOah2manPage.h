@@ -12,6 +12,8 @@
 #ifndef ___basicOah2manPage___
 #define ___basicOah2manPage___
 
+#include "oahEarlyOptions.h"
+
 #include "oahAtomsCollection.h"
 
 #include "oah2manPage.h"

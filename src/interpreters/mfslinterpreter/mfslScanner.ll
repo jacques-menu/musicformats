@@ -17,7 +17,6 @@
 /* ---------------------------------------------------------------------- */
 
 #include <sstream>
-// #include <string.h>     // strerror_r
 
 #include "mfStringsHandling.h"
 
@@ -556,14 +555,14 @@ void mfslDriver::scanBegin ()
 
   else if (!(yyin = fopen (fScriptName.c_str (), "r")))
     {
-      std::stringstream s;
+      std::stringstream ss;
 
       char*
         errorCString =
           mfStrErrorCString ();
 
       if (errorCString != nullptr) {
-        s <<
+        ss <<
           gWaeHandler->cannotOpenScriptForWriting (fScriptName) <<
           ": " <<
           errorCString <<
@@ -571,7 +570,7 @@ void mfslDriver::scanBegin ()
 
         mfslFileError (
           fScriptName,
-          s.str ());
+          ss.str ());
       }
     }
 }

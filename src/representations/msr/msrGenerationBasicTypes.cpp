@@ -54,16 +54,16 @@ EXP msrGenerationAPIKind msrGenerationAPIKindFromString (
     result = msrGenerationAPIKind::kMsrStringsAPIKind;
   }
   else {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "the string \"" <<
       theString <<
       "\" is no valid generation API kind";
 
       mfAssert (
         __FILE__, __LINE__,
-      false, s.str ());
+      false, ss.str ());
   }
 
   return result;
@@ -81,7 +81,7 @@ void initializeGenerationAPIKindsMap ()
 std::string availableGenerationAPIKinds (
   size_t namesListMaxLength)
 {
-  std::stringstream s;
+  std::stringstream ss;
 
   size_t brailleOutputKindsMapSize =
     gGlobalGenerationAPIKindsMap.size ();
@@ -105,25 +105,25 @@ std::string availableGenerationAPIKinds (
 
       cumulatedLength += theString.size ();
       if (cumulatedLength >= namesListMaxLength) {
-        s << std::endl << gIndenter.getSpacer ();
+        ss << std::endl << gIndenter.getSpacer ();
         cumulatedLength = 0;
       }
 
       if (count == 1) {
-        s << gIndenter.getSpacer ();
+        ss << gIndenter.getSpacer ();
       }
-      s << theString;
+      ss << theString;
 
       if (count == nextToLast) {
-        s << " and ";
+        ss << " and ";
       }
       else if (count != brailleOutputKindsMapSize) {
-        s << ", ";
+        ss << ", ";
       }
     } // for
   }
 
-  return s.str ();
+  return ss.str ();
 }
 
 //______________________________________________________________________________
@@ -176,10 +176,16 @@ void msrGenerationAPIKindAtom::applyAtomWithValue (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "==> handling atom '" << fetchNames () << "; which is of type 'msrGenerationAPIKindAtom'" <<
       " with value \"" << theString << "\"" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -190,9 +196,9 @@ void msrGenerationAPIKindAtom::applyAtomWithValue (
 
   if (it == gGlobalGenerationAPIKindsMap.end ()) {
     // no, optional values style kind is unknown in the map
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "generation API kind '" << theString <<
       "' is unknown" <<
       std::endl <<
@@ -203,12 +209,12 @@ void msrGenerationAPIKindAtom::applyAtomWithValue (
 
     ++gIndenter;
 
-    s <<
+    ss <<
       availableGenerationAPIKinds (K_MF_NAMES_LIST_MAX_LENGTH);
 
     --gIndenter;
 
-    oahError (s.str ());
+    oahError (ss.str ());
   }
 
   fGenerationAPIKindVariable =
@@ -221,9 +227,15 @@ void msrGenerationAPIKindAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       ".\\\" ==> msrGenerationAPIKindAtom::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -234,9 +246,15 @@ void msrGenerationAPIKindAtom::acceptIn (basevisitor* v)
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             ".\\\" ==> Launching msrGenerationAPIKindAtom::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
         p->visitStart (elem);
@@ -247,9 +265,15 @@ void msrGenerationAPIKindAtom::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       ".\\\" ==> msrGenerationAPIKindAtom::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -260,9 +284,15 @@ void msrGenerationAPIKindAtom::acceptOut (basevisitor* v)
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             ".\\\" ==> Launching msrGenerationAPIKindAtom::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
         p->visitEnd (elem);
@@ -273,33 +303,39 @@ void msrGenerationAPIKindAtom::browseData (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       ".\\\" ==> msrGenerationAPIKindAtom::browseData ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 }
 
 std::string msrGenerationAPIKindAtom::asShortNamedOptionString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     '-' << fShortName << ' ' <<
     msrGenerationAPIKindAsString (fGenerationAPIKindVariable);
 
-  return s.str ();
+  return ss.str ();
 }
 
 std::string msrGenerationAPIKindAtom::asActualLongNamedOptionString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     '-' << fLongName << ' ' <<
     msrGenerationAPIKindAsString (fGenerationAPIKindVariable);
 
-  return s.str ();
+  return ss.str ();
 }
 
 void msrGenerationAPIKindAtom::print (std::ostream& os) const
@@ -338,6 +374,14 @@ void msrGenerationAPIKindAtom::displayAtomWithVariableOptionsValues (
     fVariableName << ": " <<
     msrGenerationAPIKindAsString (
       fGenerationAPIKindVariable);
+  switch (fEarlyOptionKind) {
+    case oahEarlyOptionKind::kEarlyOptionNo:
+      break;
+    case oahEarlyOptionKind::kEarlyOptionYes:
+			os <<
+				", early";
+      break;
+  } // switch
   if (fSelected) {
     os << ", selected";
   }

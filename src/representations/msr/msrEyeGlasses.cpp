@@ -22,6 +22,7 @@
 #include "mfAssert.h"
 
 #include "oahOah.h"
+#include "oahEarlyOptions.h"
 
 #include "msrOah.h"
 
@@ -161,9 +162,15 @@ void msrEyeGlasses::setEyeGlassesUpLinkToMeasure (
 void msrEyeGlasses::acceptIn (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrEyeGlasses::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrEyeGlasses>*
@@ -172,9 +179,15 @@ void msrEyeGlasses::acceptIn (basevisitor* v)
         S_msrEyeGlasses elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrEyeGlasses::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitStart (elem);
   }
@@ -183,9 +196,15 @@ void msrEyeGlasses::acceptIn (basevisitor* v)
 void msrEyeGlasses::acceptOut (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrEyeGlasses::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrEyeGlasses>*
@@ -194,9 +213,15 @@ void msrEyeGlasses::acceptOut (basevisitor* v)
         S_msrEyeGlasses elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrEyeGlasses::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitEnd (elem);
   }
@@ -207,13 +232,13 @@ void msrEyeGlasses::browseData (basevisitor* v)
 
 std::string msrEyeGlasses::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "EyeGlasses" <<
     ", line " << fInputLineNumber;
 
-  return s.str ();
+  return ss.str ();
 }
 
 void msrEyeGlasses::print (std::ostream& os) const

@@ -72,9 +72,9 @@ msrFrameNote::msrFrameNote (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "Creating frame note '" <<
       asString () <<
       "'" <<
@@ -82,7 +82,7 @@ msrFrameNote::msrFrameNote (
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 #endif
 }
@@ -118,9 +118,9 @@ std::ostream& operator << (std::ostream& os, const msrBarreTypeKind& elt)
 
 std::string msrFrameNote::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "[FrameNote" <<
     ", fFrameNoteStringNumber: " << fFrameNoteStringNumber <<
     ", fFrameNoteFretNumber: " << fFrameNoteFretNumber <<
@@ -129,15 +129,21 @@ std::string msrFrameNote::asString () const
     ", line: " << fInputLineNumber <<
     ']';
 
-  return s.str ();
+  return ss.str ();
 }
 
 void msrFrameNote::acceptIn (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrFrameNote::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrFrameNote>*
@@ -146,9 +152,15 @@ void msrFrameNote::acceptIn (basevisitor* v)
         S_msrFrameNote elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrFrameNote::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitStart (elem);
   }
@@ -157,9 +169,15 @@ void msrFrameNote::acceptIn (basevisitor* v)
 void msrFrameNote::acceptOut (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrFrameNote::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrFrameNote>*
@@ -168,9 +186,15 @@ void msrFrameNote::acceptOut (basevisitor* v)
         S_msrFrameNote elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrFrameNote::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitEnd (elem);
   }
@@ -253,9 +277,9 @@ msrFrame::msrFrame (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "Creating frame '" <<
       asString () <<
       "'" <<
@@ -263,7 +287,7 @@ msrFrame::msrFrame (
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 #endif
 }
@@ -293,17 +317,17 @@ void msrFrame::appendFrameNoteToFrame (
     case msrBarreTypeKind::kBarreTypeStop:
       {
         if (! fPendingBarreStartFrameNotes.size ()) {
-          std::stringstream s;
+          std::stringstream ss;
 
-          s <<
+          ss <<
             "frame note  with barre stop has no maching barre start" <<
             frameNote;
 
           msrError (
-            gGlobalServiceRunData->getInputSourceName (),
+            gGlobalCurrentServiceRunData->getInputSourceName (),
             inputLineNumber,
             __FILE__, __LINE__,
-            s.str ());
+            ss.str ());
         }
 
         else {
@@ -320,19 +344,19 @@ void msrFrame::appendFrameNoteToFrame (
                 getFrameNoteFretNumber ();
 
           if (barreStartFretNumber != barreStopFretNumber) {
-            std::stringstream s;
+            std::stringstream ss;
 
-            s <<
+            ss <<
               "frame note with barre stop has is at fret" <<
               barreStopFretNumber <<
               "while the matching barre start is at fret" <<
               barreStartFretNumber;
 
             msrError                                                   (
-              gGlobalServiceRunData->getInputSourceName (),
+              gGlobalCurrentServiceRunData->getInputSourceName (),
               inputLineNumber,
               __FILE__, __LINE__,
-              s.str ());
+              ss.str ());
           }
 
           fFrameBarresList.push_back (
@@ -357,9 +381,9 @@ void msrFrame::appendFrameNoteToFrame (
 
 std::string msrFrame::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "Frame" <<
     ", fFrameStringsNumber: " << fFrameStringsNumber <<
     ", fFrameFretsNumber: " << fFrameFretsNumber <<
@@ -370,15 +394,21 @@ std::string msrFrame::asString () const
       fFrameBarresList.size (), "barre", "barres") <<
     ", fFrameContainsFingerings: " << fFrameContainsFingerings;
 
-  return s.str ();
+  return ss.str ();
 }
 
 void msrFrame::acceptIn (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrFrame::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrFrame>*
@@ -387,9 +417,15 @@ void msrFrame::acceptIn (basevisitor* v)
         S_msrFrame elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrFrame::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitStart (elem);
   }
@@ -398,9 +434,15 @@ void msrFrame::acceptIn (basevisitor* v)
 void msrFrame::acceptOut (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrFrame::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrFrame>*
@@ -409,9 +451,15 @@ void msrFrame::acceptOut (basevisitor* v)
         S_msrFrame elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrFrame::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitEnd (elem);
   }

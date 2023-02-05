@@ -110,7 +110,7 @@ void displayMsrScore (
   // start the clock
   clock_t startClock =  clock ();
 
-  setGlobalCurrentPassIDKind (mfPassIDKind::kMfPassID_Optional);
+  setGlobalCurrentPassIDKind (mfPassIDKind::kMfPassID_OptionalPass);
 
   std::string separator =
     "%--------------------------------------------------------------";
@@ -130,7 +130,7 @@ void displayMsrScore (
   clock_t endClock = clock ();
 
   mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
-		mfPassIDKind::kMfPassID_0,
+		mfPassIDKind::kMfPassID_OptionalPass,
     passDescription,
     mfTimingItemKind::kOptional,
     startClock,
@@ -138,16 +138,16 @@ void displayMsrScore (
 
   if (gIndenter != 0) {
     if (! gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         "gIndenter value after " << passDescription << ": " <<
         gIndenter.getIndentation ();
 
       msrWarning (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         1, // JMI inputLineNumber,
-        s.str ());
+        ss.str ());
     }
 
     gIndenter.resetToZero ();
@@ -170,7 +170,7 @@ void displayMsrScoreFull (
   // start the clock
   clock_t startClock = clock ();
 
-  setGlobalCurrentPassIDKind (mfPassIDKind::kMfPassID_Optional);
+  setGlobalCurrentPassIDKind (mfPassIDKind::kMfPassID_OptionalPass);
 
   std::string separator =
     "%--------------------------------------------------------------";
@@ -193,7 +193,7 @@ void displayMsrScoreFull (
   clock_t endClock = clock ();
 
   mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
-		mfPassIDKind::kMfPassID_0,
+		mfPassIDKind::kMfPassID_OptionalPass,
     passDescription,
     mfTimingItemKind::kOptional,
     startClock,
@@ -201,16 +201,16 @@ void displayMsrScoreFull (
 
   if (gIndenter != 0) {
     if (! gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         "gIndenter value after " << passDescription << ": " <<
         gIndenter.getIndentation ();
 
       msrWarning (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         1, // JMI inputLineNumber,
-        s.str ());
+        ss.str ());
     }
 
     gIndenter.resetToZero ();
@@ -234,16 +234,16 @@ void displayMsrScoreSummary (
   // start the clock
   clock_t startClock = clock ();
 
-  setGlobalCurrentPassIDKind (mfPassIDKind::kMfPassID_Optional);
+  setGlobalCurrentPassIDKind (mfPassIDKind::kMfPassID_OptionalPass);
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
     std::string separator =
       "%--------------------------------------------------------------";
 
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       std::endl <<
       separator <<
       std::endl <<
@@ -255,6 +255,10 @@ void displayMsrScoreSummary (
       std::endl <<
       separator <<
       std::endl << std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -270,7 +274,7 @@ void displayMsrScoreSummary (
   clock_t endClock = clock ();
 
   mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
-		mfPassIDKind::kMfPassID_0,
+		mfPassIDKind::kMfPassID_OptionalPass,
     passDescription,
     mfTimingItemKind::kOptional,
     startClock,
@@ -294,16 +298,16 @@ void displayMsrScoreNames (
   // start the clock
   clock_t startClock = clock ();
 
-  setGlobalCurrentPassIDKind (mfPassIDKind::kMfPassID_Optional);
+  setGlobalCurrentPassIDKind (mfPassIDKind::kMfPassID_OptionalPass);
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
     std::string separator =
       "%--------------------------------------------------------------";
 
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       std::endl <<
       separator <<
       std::endl <<
@@ -314,6 +318,10 @@ void displayMsrScoreNames (
       std::endl <<
       separator <<
       std::endl << std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -329,7 +337,7 @@ void displayMsrScoreNames (
   clock_t endClock = clock ();
 
   mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
-		mfPassIDKind::kMfPassID_0,
+		mfPassIDKind::kMfPassID_OptionalPass,
     passDescription,
     mfTimingItemKind::kOptional,
     startClock,
@@ -352,7 +360,7 @@ void displayMsrScoreSlices (
   // start the clock
   clock_t startClock = clock ();
 
-  setGlobalCurrentPassIDKind (mfPassIDKind::kMfPassID_Optional);
+  setGlobalCurrentPassIDKind (mfPassIDKind::kMfPassID_OptionalPass);
 
   std::string separator =
     "%--------------------------------------------------------------";
@@ -375,7 +383,7 @@ void displayMsrScoreSlices (
   clock_t endClock = clock ();
 
   mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
-		mfPassIDKind::kMfPassID_0,
+		mfPassIDKind::kMfPassID_OptionalPass,
     passDescription,
     mfTimingItemKind::kOptional,
     startClock,
@@ -383,16 +391,16 @@ void displayMsrScoreSlices (
 
   if (gIndenter != 0) {
     if (! gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         "gIndenter value after " << passDescription << ": " <<
         gIndenter.getIndentation ();
 
       msrWarning (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         1, // JMI inputLineNumber,
-        s.str ());
+        ss.str ());
     }
 
     gIndenter.resetToZero ();

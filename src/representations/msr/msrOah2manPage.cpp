@@ -13,12 +13,12 @@
 #include <cmath>
 #include <string>
 
-#include "msrOah2manPage.h"
-
 #include "mfStaticSettings.h"
 
+#include "msrOah2manPage.h"
 
 #include "oahOah.h"
+#include "oahEarlyOptions.h"
 
 
 namespace MusicFormats
@@ -41,11 +41,17 @@ void msrOah2manPage::visitStart (S_msrRenamePartAtom& elt)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       std::endl <<
       ".\\\" --> Start visiting msrRenamePartAtom" <<
       " \"" << elt->fetchNames () << "\"" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 /*
@@ -71,11 +77,17 @@ void msrOah2manPage::visitEnd (S_msrRenamePartAtom& elt)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       std::endl <<
       ".\\\" --> End visiting msrRenamePartAtom" <<
       " \"" << elt->fetchNames () << "\"" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 }
@@ -85,11 +97,17 @@ void msrOah2manPage::visitStart (S_msrIgnorePartAtom& elt)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       std::endl <<
       ".\\\" --> Start visiting msrIgnorePartAtom" <<
       " \"" << elt->fetchNames () << "\"" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 /*
@@ -115,11 +133,17 @@ void msrOah2manPage::visitEnd (S_msrIgnorePartAtom& elt)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       std::endl <<
       ".\\\" --> End visiting msrIgnorePartAtom" <<
       " \"" << elt->fetchNames () << "\"" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 }
@@ -129,11 +153,17 @@ void msrOah2manPage::visitStart (S_msrKeepPartAtom& elt)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       std::endl <<
       ".\\\" --> Start visiting msrKeepPartAtom" <<
       " \"" << elt->fetchNames () << "\"" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 /*
@@ -159,11 +189,17 @@ void msrOah2manPage::visitEnd (S_msrKeepPartAtom& elt)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       std::endl <<
       ".\\\" --> End visiting msrKeepPartAtom" <<
       " \"" << elt->fetchNames () << "\"" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 }
@@ -173,11 +209,17 @@ void msrOah2manPage::visitStart (S_msrPitchesLanguageAtom& elt)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       std::endl <<
       ".\\\" --> Start visiting msrPitchesLanguageAtom" <<
       " \"" << elt->fetchNames () << "\"" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 /*
@@ -203,11 +245,17 @@ void msrOah2manPage::visitEnd (S_msrPitchesLanguageAtom& elt)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       std::endl <<
       ".\\\" --> End visiting msrPitchesLanguageAtom" <<
       " \"" << elt->fetchNames () << "\"" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 }

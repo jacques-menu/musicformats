@@ -47,10 +47,42 @@ mfService::mfService (
 mfService::~mfService ()
 {}
 
+void mfService::fetchPassIDKindList (
+  std::list<mfPassIDKind>& passIDKindList) const
+{
+  for (S_mfPassDescription passDescription : fServicePassDescriptionsList) {
+    passIDKindList.push_back (
+      passDescription-> getPassIDKind());
+  } // for
+}
+
+size_t mfService::fetchMaxPassIDKindAsStringLength () const
+{
+  size_t result = 0;
+
+  for (S_mfPassDescription passDescription : fServicePassDescriptionsList) {
+    std::string
+      passIDKindAsString =
+        mfPassIDKindAsString (
+          passDescription->getPassIDKind ());
+
+    size_t
+      passIDKindAsStringSize =
+        passIDKindAsString.size ();
+
+    if (passIDKindAsStringSize > result) {
+      result = passIDKindAsStringSize;
+    }
+  } // for
+
+  return result;
+}
+
 void mfService::print (std::ostream& os) const
 {
   os <<
-    "[Service \"" << fServiceName << " \":" <<
+    "[mfService" <<
+    ", fServiceName: " << fServiceName << ":" <<
     std::endl;
 
   ++gIndenter;
@@ -58,14 +90,33 @@ void mfService::print (std::ostream& os) const
   // service passIDs
   // --------------------------------------
 
-  const int fieldWidth = 21;
+  const int fieldWidth = fetchMaxPassIDKindAsStringLength ();
 
   for (S_mfPassDescription passDescription : fServicePassDescriptionsList) {
     os << std::left <<
       std::setw (fieldWidth) <<
-      "passDescription " << ": " <<
-      passDescription->asString () <<
+      "passIDKind:" <<
       std::endl;
+
+    ++gIndenter;
+    os <<
+      gWaeHandler->
+        passIDKindAsString (
+          passDescription->getPassIDKind ()) <<
+          std::endl;
+    --gIndenter;
+
+    os <<
+      std::setw (fieldWidth) <<
+      "passDescription " << ": " <<
+      std::endl;
+
+    ++gIndenter;
+    os <<
+      gIndenter.indentMultiLineStringWithCurrentOffset (
+        passDescription->getPassDescription ()) <<
+      std::endl;
+    --gIndenter;
   } // for
 
   --gIndenter;
@@ -73,14 +124,112 @@ void mfService::print (std::ostream& os) const
   os << "]" << std::endl;
 }
 
-std::ostream& operator << (std::ostream& os, const mfService& elt)
+std::ostream& operator << (std::ostream& os, const S_mfService& elt)
 {
-  elt.print (os);
+  elt->print (os);
   return os;
 }
 
+std::string mfService::fetchServicePassDescriptionsAsString () const
+{
+  mfIndentedStringStream iss;
+
+  iss <<
+    "What " << fServiceName << " does:" <<
+    "\n\n";
+
+  ++gIndenter;
+
+  iss <<
+    "This multi-pass converter basically performs " <<
+    fServicePassDescriptionsList.size () <<
+    " passes:" <<
+    '\n';
+
+  ++gIndenter;
+
+//   const int fieldWidth = 10;
+
+  for (S_mfPassDescription passDescription : fServicePassDescriptionsList) {
+    iss << // JMI std::left <<
+//       std::setw (fieldWidth) <<
+      passDescription->getPassIDKind () << ": " <<
+      passDescription->getPassDescription () <<
+      '\n';
+  } // for
+
+  --gIndenter;
+
+  iss <<
+    "Other passes are performed according to the options, such as" <<
+    '\n' <<
+    "displaying views of the internal data or printing a summary of the score."
+    "\n\n" <<
+
+    "The activity log and warning/error messages go to standard error." <<
+    '\n';
+
+  --gIndenter;
+
+  return iss.str ();
+}
+
+void mfService::printServiceForAboutOption (std::ostream& os) const
+{
+  os <<
+    "What " << fServiceName << " does:" <<
+    std::endl << std::endl;
+
+  ++gIndenter;
+
+  os <<
+    "This multi-pass converter basically performs " <<
+    mfSingularOrPlural (
+      fServicePassDescriptionsList.size (),
+      "pass", "passes") <<
+    ':' <<
+    std::endl;
+
+  ++gIndenter;
+
+//   const int fieldWidth = 21;
+
+  for (S_mfPassDescription passDescription : fServicePassDescriptionsList) {
+    os << // std::left <<
+//       std::setw (fieldWidth) <<
+      gWaeHandler->
+        passIDKindAsString (
+          passDescription->getPassIDKind ()) <<
+      ":" <<
+      std::endl;
+
+//       ++gIndenter;
+      os <<
+//         gIndenter.indentMultiLineStringWithCurrentOffset (
+//           passDescription->getPassDescription ()) <<
+        passDescription->getPassDescription () <<
+        std::endl;
+//       --gIndenter;
+  } // for
+
+  --gIndenter;
+
+  os <<
+    std::endl <<
+    "Other passes are performed according to the options, such as" <<
+    std::endl <<
+    "displaying views of the internal data or printing a summary of the score." <<
+    std::endl << std::endl <<
+
+    "The activity log and warning/error messages go to standard error." <<
+    std::endl;
+
+  --gIndenter;
+}
+
 //_______________________________________________________________________________
-S_mfServiceRunData gGlobalServiceRunData;
+S_mfServiceRunData gGlobalCurrentServiceRunData;
+S_mfService gGlobalCurrentService;
 
 S_mfServiceRunData mfServiceRunData::create (
   const std::string& serviceName)

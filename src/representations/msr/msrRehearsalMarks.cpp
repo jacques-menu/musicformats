@@ -23,6 +23,7 @@
 #include "msrRehearsalMarks.h"
 
 #include "oahOah.h"
+#include "oahEarlyOptions.h"
 
 #include "msrOah.h"
 
@@ -116,9 +117,15 @@ void msrRehearsalMark::setRehearsalMarkUpLinkToMeasure (
 void msrRehearsalMark::acceptIn (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrRehearsalMark::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrRehearsalMark>*
@@ -127,9 +134,15 @@ void msrRehearsalMark::acceptIn (basevisitor* v)
         S_msrRehearsalMark elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrRehearsalMark::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitStart (elem);
   }
@@ -138,9 +151,15 @@ void msrRehearsalMark::acceptIn (basevisitor* v)
 void msrRehearsalMark::acceptOut (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrRehearsalMark::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrRehearsalMark>*
@@ -149,9 +168,15 @@ void msrRehearsalMark::acceptOut (basevisitor* v)
         S_msrRehearsalMark elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrRehearsalMark::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitEnd (elem);
   }
@@ -200,16 +225,16 @@ std::ostream& operator << (std::ostream& os, const msrRehearsalMarkKind& elt)
 
 std::string msrRehearsalMark::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "[RehearsalMark" <<
     ", fRehearsalMarkText:" << fRehearsalMarkText <<
     " fRehearsalMarkKind: " << fRehearsalMarkKind <<
     " rehearsalPlacementKind: " << fRehearsalMarkPlacementKind <<
     ']';
 
-  return s.str ();
+  return ss.str ();
 }
 
 void msrRehearsalMark::print (std::ostream& os) const

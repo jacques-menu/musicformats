@@ -146,12 +146,18 @@ oahFindStringMatch::oahFindStringMatch (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Creating oahFindStringMatch" <<
       ", fFoundString: " << fFoundString <<
       ", fContainingFindableElementInfo: " <<
       fContainingFindableElementInfo <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 }
@@ -337,7 +343,7 @@ std::string oahElement::getShortNameOrLongNameIfEmpty () const
 
 std::string oahElement::fetchNames () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
   if (
     fLongName.size ()
@@ -345,13 +351,13 @@ std::string oahElement::fetchNames () const
     fShortName.size ()
   ) {
     if (gGlobalOahOahGroup->getReverseNamesDisplayOrder ()) {
-      s <<
+      ss <<
         '-' << fShortName <<
         ", " <<
         '-' << fLongName;
     }
     else {
-      s <<
+      ss <<
         '-' << fLongName <<
         ", " <<
         '-' << fShortName;
@@ -360,22 +366,22 @@ std::string oahElement::fetchNames () const
 
   else {
     if (fLongName.size ()) {
-      s <<
+      ss <<
         '-' << fLongName;
     }
     if (fShortName.size ()) {
-      s <<
+      ss <<
       '-' << fShortName;
     }
   }
 
-  return s.str ();
+  return ss.str ();
 }
 
 std::string oahElement::fetchNamesInColumns (
   int subGroupsShortNameFieldWidth) const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
   if (
     fShortName.size ()
@@ -383,14 +389,14 @@ std::string oahElement::fetchNamesInColumns (
     fLongName.size ()
     ) {
       if (gGlobalOahOahGroup->getReverseNamesDisplayOrder ()) {
-        s << std::left <<
+        ss << std::left <<
           std::setw (subGroupsShortNameFieldWidth) <<
           '-' << fLongName <<
           ", " <<
           '-' << fShortName;
       }
       else {
-        s << std::left <<
+        ss << std::left <<
           std::setw (subGroupsShortNameFieldWidth) <<
           '-' << fLongName <<
           ", " <<
@@ -399,58 +405,58 @@ std::string oahElement::fetchNamesInColumns (
   }
 
   else {
-    s <<
+    ss <<
       std::setw (subGroupsShortNameFieldWidth);
 
     if (fLongName.size ()) {
-      s <<
+      ss <<
         '-' << fLongName;
     }
     if (fShortName.size ()) {
-      s << std::left <<
+      ss << std::left <<
          '-' << fShortName;
     }
   }
 
-  return s.str ();
+  return ss.str ();
 }
 
 std::string oahElement::fetchNamesBetweenQuotes () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "'" <<
     fetchNames () <<
     "'";
 
-  return s.str ();
+  return ss.str ();
 }
 
 std::string oahElement::fetchNamesBetweenParentheses () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     '(' <<
     fetchNames () <<
     ")";
 
-  return s.str ();
+  return ss.str ();
 }
 
 std::string oahElement::fetchNamesInColumnsBetweenParentheses (
   int subGroupsShortNameFieldWidth) const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     '(' <<
     fetchNamesInColumns (
       subGroupsShortNameFieldWidth) <<
     ")";
 
-  return s.str ();
+  return ss.str ();
 }
 
 // void oahElement::acceptIn (basevisitor* v)
@@ -568,36 +574,36 @@ std::string oahElement::asLongNamedOptionString () const
 
 std::string oahElement::asShortString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s << "'-" << fLongName;
+  ss << "'-" << fLongName;
 
   if (fShortName.size ()) {
-    s << ", " << fShortName;
+    ss << ", " << fShortName;
   }
 
-  s << "'" ;
+  ss << "'" ;
 
-  return s.str ();
+  return ss.str ();
 }
 
 std::string oahElement::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "'-" << fLongName;
 
   if (fShortName.size ()) {
-    s <<
+    ss <<
       ", fShortName";
   }
 
-  s <<
+  ss <<
     "': " <<
     fDescription;
 
-  return s.str ();
+  return ss.str ();
 }
 
 void oahElement::printOptionHeader (std::ostream& os) const
@@ -706,13 +712,13 @@ void oahElement::printHelp (std::ostream& os) const
 
 const std::string oahElement::containingFindableElementAsString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     fetchNames () << ": " <<
     fDescription;
 
-  return s.str ();
+  return ss.str ();
 }
 
 std::ostream& operator << (std::ostream& os, const S_oahElement& elt)
@@ -796,9 +802,9 @@ oahElementUse::~oahElementUse ()
 
 std::string oahElementUse::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "Element use" <<
     ": " << fElementUsed->fetchNamesBetweenQuotes () <<
     ", fNameUsed: \"" << fNameUsed << "\"" <<
@@ -812,7 +818,7 @@ std::string oahElementUse::asString () const
     ", multipleOccurrencesAllowed: " <<
     fElementUsed->getMultipleOccurrencesAllowed ();
 
-  return s.str ();
+  return ss.str ();
 }
 
 void oahElementUse::print (std::ostream& os) const

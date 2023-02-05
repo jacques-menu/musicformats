@@ -232,13 +232,19 @@ void msrSegment::appendKeyToSegment (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceKeys ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Appending key " << key->asString () <<
       " to segment " << asString () <<
     ", in voice \"" <<
     fSegmentUpLinkToVoice->getVoiceName () <<
     "\"" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 

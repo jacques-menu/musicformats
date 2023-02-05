@@ -103,6 +103,70 @@ EXP int xml2ly (
   // ------------------------------------------------------
   initializeMusicFormats ();
 
+
+#include "mfServices.h"
+
+  S_mfService xml2lyService =
+    mfService::create (serviceName);
+
+//     This multi-pass converter basically performs 5 passes:
+//         Pass 1:  reads the contents of MusicXMLFile or stdin ('-')
+//                  and converts it to a MusicXML tree;
+//         Pass 2a: converts that MusicXML tree into
+//                  a first Music Score Representation (MSR) skeleton;
+//         Pass 2b: populates the first MSR skeleton from the MusicXML tree
+//                  to get a full MSR;
+//         Pass 3:  converts the first MSR into a second MSR to apply options
+//         Pass 4:  converts the second MSR into a
+//                  LilyPond Score Representation (LPSR);
+//         Pass 5:  converts the LPSR to LilyPond code
+//                  and writes it to standard output.
+
+  xml2lyService->
+    appendPassToService (
+      mfPassDescription::create (
+        mfPassIDKind::kMfPassID_1,
+        gWaeHandler->createAnMXSRFromAMusicXMLFileOrStdin ()));
+
+//   gLogStream << "--------------" << std::endl;
+//
+//   gLogStream <<
+//     "xml2lyService::print ()" <<
+//     std::endl;
+//
+//   ++gIndenter;
+//   gLogStream <<
+//     xml2lyService <<
+//     std::endl;
+//   --gIndenter;
+//
+//   gLogStream << "--------------" << std::endl;
+//
+//   gLogStream <<
+//     "xml2lyService::printServiceForAboutOption ()" <<
+//     std::endl;
+//
+//   ++gIndenter;
+//   xml2lyService-> printServiceForAboutOption (gLogStream);
+//   --gIndenter;
+//
+//   gLogStream << "--------------" << std::endl;
+//
+//   gLogStream <<
+//     "xml2lyService::fetchServicePassDescriptionsAsString ()" <<
+//     std::endl;
+//
+//   ++gIndenter;
+//   gLogStream <<
+//     xml2lyService-> fetchServicePassDescriptionsAsString () <<
+//     std::endl;
+//   --gIndenter;
+//
+//   gLogStream << "--------------" << std::endl;
+
+  // register xml2ly as current service
+  gGlobalCurrentService = xml2lyService;
+
   // apply early options if any
   // ------------------------------------------------------
 
@@ -118,10 +182,16 @@ EXP int xml2ly (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       serviceName << " xml2ly()" <<
       ", insiderOption: " << insiderOption <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -163,7 +233,7 @@ EXP int xml2ly (
     // create the global run data
     // ------------------------------------------------------
 
-    gGlobalServiceRunData =
+    gGlobalCurrentServiceRunData =
       mfServiceRunData::create (
         serviceName);
 
@@ -217,7 +287,7 @@ EXP int xml2ly (
 
   std::string
     inputSourceName =
-      gGlobalServiceRunData->getInputSourceName ();
+      gGlobalCurrentServiceRunData->getInputSourceName ();
 
   std::string
     outputFileName =
@@ -229,13 +299,19 @@ EXP int xml2ly (
     std::string separator =
       "%--------------------------------------------------------------";
 
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       serviceName << ": " <<
       "inputSourceName = \"" << inputSourceName << "\"" <<
       ", outputFileName = \"" << outputFileName << "\"" <<
       std::endl <<
       separator <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -245,16 +321,16 @@ EXP int xml2ly (
       return 0; // pure help run
     }
     else {
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         "this is not a pure help run, \"" <<
         serviceName <<
         " needs an input file name. " <<
         handler->getHandlerUsage ();
 
-      oahWarning (s.str ());
-//       oahError (s.str ()); JMI
+      oahWarning (ss.str ());
+//       oahError (ss.str ()); JMI
     }
   }
 
@@ -299,7 +375,7 @@ EXP int xml2ly (
 
     gLogStream <<
       "Time is " <<
-      gGlobalServiceRunData->getRunDateFull () <<
+      gGlobalCurrentServiceRunData->getRunDateFull () <<
       std::endl;
 
     gLogStream <<
@@ -354,9 +430,15 @@ EXP int xml2ly (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "The command line options and arguments have been analyzed" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -386,11 +468,17 @@ EXP int xml2ly (
       // MusicXML data comes from a file
 #ifdef MF_TRACING_IS_ENABLED
       if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-        gLogStream <<
+        std::stringstream ss;
+
+        ss <<
           "Reading file \"" <<
           inputSourceName <<
           "\"" <<
           std::endl;
+
+        gWaeHandler->waeTrace (
+          __FILE__, __LINE__,
+          ss.str ());
       }
 #endif
 

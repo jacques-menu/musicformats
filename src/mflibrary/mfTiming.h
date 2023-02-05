@@ -35,7 +35,7 @@ enum mfTimingItemKind {
 };
 
 std::string mfTimingItemKindAsString (
-  mfTimingItemKind imingItemKind);
+  mfTimingItemKind timingItemKind);
 
 std::ostream& operator << (std::ostream& os, const mfTimingItemKind& elt);
 
@@ -49,14 +49,14 @@ class EXP mfTimingItem : public smartable
     static SMARTP<mfTimingItem> createTimingItem (
                           const std::string& activity,
                           const std::string& description,
-                          mfTimingItemKind   kind,
+                          mfTimingItemKind   timingItemKind,
                           clock_t            startClock,
                           clock_t            endClock);
 
                         mfTimingItem (
                           const std::string& activity,
                           const std::string& description,
-                          mfTimingItemKind   kind,
+                          mfTimingItemKind   timingItemKind,
                           clock_t            startClock,
                           clock_t            endClock);
 
@@ -65,8 +65,8 @@ class EXP mfTimingItem : public smartable
     // set and get
     // ------------------------------------------------------
 
-    mfTimingItemKind      getKind () const
-                              { return fKind; }
+    mfTimingItemKind      getTimingItemKind () const
+                              { return fTimingItemKind; }
 
     std::string           getActivity () const
                               { return fActivity; }
@@ -83,7 +83,7 @@ class EXP mfTimingItem : public smartable
     // private fields
     // ------------------------------------------------------
 
-    mfTimingItemKind      fKind;
+    mfTimingItemKind      fTimingItemKind;
 
     std::string           fActivity;
     std::string           fDescription;
@@ -121,7 +121,7 @@ class EXP mfTimingItemsList {
     void                  appendTimingItem (
                             mfPassIDKind       passIDKind,
                             const std::string& description,
-                            mfTimingItemKind   kind,
+                            mfTimingItemKind   timingItemKind,
                             clock_t            startClock,
                             clock_t            endClock);
 

@@ -18,6 +18,7 @@
 #include "msrWords.h"
 
 #include "oahOah.h"
+#include "oahEarlyOptions.h"
 
 #include "msrOah.h"
 
@@ -94,9 +95,15 @@ msrWords::~msrWords ()
 void msrWords::acceptIn (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrWords::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrWords>*
@@ -105,9 +112,15 @@ void msrWords::acceptIn (basevisitor* v)
         S_msrWords elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrWords::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitStart (elem);
   }
@@ -116,9 +129,15 @@ void msrWords::acceptIn (basevisitor* v)
 void msrWords::acceptOut (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrWords::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrWords>*
@@ -127,9 +146,15 @@ void msrWords::acceptOut (basevisitor* v)
         S_msrWords elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrWords::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitEnd (elem);
   }
@@ -181,16 +206,16 @@ std::string msrWords::wordsFontWeightKindAsString () const
 
 std::string msrWords::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "Words" <<
     ", line " << fInputLineNumber <<
     ' ' <<
     fWordsContents << ", placement = " <<
     msrPlacementKindAsString (fWordsPlacementKind);
 
-  return s.str ();
+  return ss.str ();
 }
 
 void msrWords::print (std::ostream& os) const
