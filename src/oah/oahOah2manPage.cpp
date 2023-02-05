@@ -41,11 +41,17 @@ void oahOah2manPage::visitStart (S_oahOptionalValuesStyleKindAtom& elt)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       std::endl <<
       ".\\\" --> Start visiting oahOptionalValuesStyleKindAtom" <<
       " \"" << elt->fetchNames () << "\"" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 / *
@@ -71,11 +77,17 @@ void oahOah2manPage::visitEnd (S_oahOptionalValuesStyleKindAtom& elt)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       std::endl <<
       ".\\\" --> End visiting oahOptionalValuesStyleKindAtom" <<
       " \"" << elt->fetchNames () << "\"" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 }

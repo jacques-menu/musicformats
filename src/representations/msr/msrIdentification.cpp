@@ -20,6 +20,7 @@
 #include "msrIdentification.h"
 
 #include "oahOah.h"
+#include "oahEarlyOptions.h"
 
 #include "msrOah.h"
 
@@ -52,9 +53,15 @@ void msrIdentification::setIdentificationWorkNumber (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceIdentification ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Setting workNumber to \"" << val << "\"" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -67,9 +74,15 @@ void msrIdentification::setIdentificationWorkCreditTypeTitle (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceIdentification ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Setting workCreditTypeTitle to \"" << val << "\"" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -82,9 +95,15 @@ void msrIdentification::setIdentificationOpus (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceIdentification ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Setting opus to \"" << val << "\"" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -97,9 +116,15 @@ void msrIdentification::setIdentificationMovementNumber (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceIdentification ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Setting movementNumber to \"" << val << "\"" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -112,9 +137,15 @@ void msrIdentification::setIdentificationMovementTitle (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceIdentification ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Setting movementTitle to \"" << val << "\"" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -127,9 +158,15 @@ void msrIdentification::setIdentificationEncodingDate (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceIdentification ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Setting encodingDate to \"" << val << "\"" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -142,9 +179,15 @@ void msrIdentification::setIdentificationMiscellaneousField (
 {
  #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceIdentification ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Setting miscellaneousField to \"" << val << "\"" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -157,9 +200,15 @@ void msrIdentification::setIdentificationScoreInstrument (
 {
  #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceIdentification ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Setting scoreInstrument to \"" << val << "\"" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -172,9 +221,15 @@ void msrIdentification::appendComposer (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceIdentification ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Appending composer \"" << value << "\"" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -187,9 +242,15 @@ void msrIdentification::appendLyricist (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceIdentification ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Appending lyricist \"" << value << "\"" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -202,9 +263,15 @@ void msrIdentification::appendArranger (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceIdentification ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Appending arranger \"" << value << "\"" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -217,9 +284,15 @@ void msrIdentification::appendPoet (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceIdentification ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Appending poet \"" << value << "\"" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -232,9 +305,15 @@ void msrIdentification::appendTranslator (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceIdentification ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Appending translator \"" << value << "\"" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -247,9 +326,15 @@ void msrIdentification::appendArtist (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceIdentification ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Appending artist \"" << value << "\"" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -262,9 +347,15 @@ void msrIdentification::appendSoftware (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceIdentification ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Appending software \"" << value << "\"" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -277,9 +368,15 @@ void msrIdentification::appendRight (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceIdentification ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Appending right \"" << value << "\"" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -292,9 +389,15 @@ void msrIdentification::appendSource (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceIdentification ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Appendings source \"" << value << "\"" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -307,9 +410,15 @@ void msrIdentification::appendRelation (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceIdentification ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Appending relation \"" << value << "\"" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -468,9 +577,15 @@ size_t msrIdentification::maxIdentificationNamesLength ()
 void msrIdentification::acceptIn (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrIdentification::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrIdentification>*
@@ -479,9 +594,15 @@ void msrIdentification::acceptIn (basevisitor* v)
         S_msrIdentification elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrIdentification::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitStart (elem);
   }
@@ -490,9 +611,15 @@ void msrIdentification::acceptIn (basevisitor* v)
 void msrIdentification::acceptOut (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrIdentification::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrIdentification>*
@@ -501,9 +628,15 @@ void msrIdentification::acceptOut (basevisitor* v)
         S_msrIdentification elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrIdentification::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitEnd (elem);
   }
@@ -514,9 +647,9 @@ void msrIdentification::browseData (basevisitor* v)
 
 std::string msrIdentification::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "[ Identification" <<
     ", workNumber: \" " <<  fIdentificationWorkNumber << "\"" <<
     ", workCreditTypeTitle: \" " <<  fIdentificationWorkCreditTypeTitle << "\"" <<
@@ -526,7 +659,7 @@ std::string msrIdentification::asString () const
     ", ..." <<
     ']';
 
-  return s.str ();
+  return ss.str ();
 }
 
 void msrIdentification::print (std::ostream& os) const
@@ -808,7 +941,7 @@ std::ostream& operator << (std::ostream& os, const S_msrIdentification& elt)
   else {
     os << "[NONE]" << std::endl;
   }
-  
+
   return os;
 }
 

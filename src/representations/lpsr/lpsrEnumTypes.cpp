@@ -128,12 +128,18 @@ std::string wholeNotesAsLilypondString (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "--> wholeNotesAsLilypondString() 1 -------------------------------------" <<
       ", wholeNotes: " << wholeNotes <<
       ", dotsNumber: " << dotsNumber <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -143,26 +149,32 @@ std::string wholeNotesAsLilypondString (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "--> numerator:   " << numerator <<
       std::endl <<
       "--> denominator: " << denominator <<
       std::endl << std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
 /* JMI
   if (false && numerator <= 0) { // JMI
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
      "%{ZERO_LENGTH: " <<
      wholeNotes << // JMI
      ", line " <<
      inputLineNumber <<
      " %}";
 
-    return s.str ();
+    return ss.str ();
   }
 */
 
@@ -179,7 +191,7 @@ std::string wholeNotesAsLilypondString (
 
  //   lpsrError ( JMI
     lpsrWarning (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
   //    __FILE__, __LINE__,
       message);
@@ -201,13 +213,19 @@ std::string wholeNotesAsLilypondString (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceWholeNotesDetails ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
 //       "--> rationalHasBeenSimplified: " <<
 //      rationalHasBeenSimplified <<
 //       std::endl <<
       "--> integralNumberOfWholeNotes: " <<
       integralNumberOfWholeNotes <<
       std::endl << std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -226,9 +244,15 @@ std::string wholeNotesAsLilypondString (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceWholeNotesDetails ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "--> numeratorDots " << ": " << numeratorDots <<
       std::endl << std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -240,9 +264,9 @@ std::string wholeNotesAsLilypondString (
       else {
         // there can be integral numbers of whole notes up to 15,
         // corresponding to a \maxima...
-          std::stringstream s;
+          std::stringstream ss;
 
-          s <<
+          ss <<
             "numerator " << numerator <<
             " is not one of 1, 3, 7, 15, 31, 63 or 127" <<
        //     " is not one of 1, 3, 7, 15, 31, 63, 127, 255, 511 or 1023" <<
@@ -250,18 +274,18 @@ std::string wholeNotesAsLilypondString (
             numerator << '/' << denominator;
 
           if (rationalHasBeenSimplified) {
-            s <<
+            ss <<
               " (" << numerator << '/' << denominator << ")" <<
             std::endl;
           }
 
-          s <<
+          ss <<
             " it will be represented using a multiplying factor";
 
           lpsrWarning (
-            gGlobalServiceRunData->getInputSourceName (),
+            gGlobalCurrentServiceRunData->getInputSourceName (),
             inputLineNumber,
-            s.str ());
+            ss.str ());
 
   //      multiplyingFactorIsToBeUsed = true;
       }
@@ -299,23 +323,23 @@ std::string wholeNotesAsLilypondString (
     std::string result;
 
     {
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         1 <<
         "*" <<
         numerator <<
         '/' <<
         denominator;
 
-      result = s.str ();
+      result = ss.str ();
     }
 
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceWholeNotesDetails ()) {
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         "denominator " << denominator <<
         " is no power of two between 1 and 128" <<
    //     " is no power of 2 between 1 and 1024" <<
@@ -323,12 +347,12 @@ std::string wholeNotesAsLilypondString (
         numerator << '/' << denominator;
 
 //       if (rationalHasBeenSimplified) {
-//         s <<
+//         ss <<
 //           " (" << numerator << '/' << denominator << ")" <<
 //         std::endl;
 //       }
 
-      s <<
+      ss <<
         " cannot be represented as a dotted power of 2" <<
         ", " <<
         result <<
@@ -336,10 +360,10 @@ std::string wholeNotesAsLilypondString (
 
    //   lpsrError ( JMI
       lpsrWarning (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         inputLineNumber,
     //    __FILE__, __LINE__,
-        s.str ());
+        ss.str ());
     }
 #endif
 
@@ -348,10 +372,16 @@ std::string wholeNotesAsLilypondString (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceWholeNotesDetails ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "--> denominatorDurationLog" << ": " <<
       denominatorDurationLog <<
       std::endl << std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -362,10 +392,16 @@ std::string wholeNotesAsLilypondString (
     // 6/1 thus becomes 3\breve, hence \longa.
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceWholeNotesDetails ()) {
-      gLogStream <<
+      std::stringstream ss;
+
+      ss <<
         "--> integralNumberOfWholeNotes,"
         " bringing the faction to be less that 2" <<
         std::endl;
+
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif
 
@@ -392,7 +428,9 @@ std::string wholeNotesAsLilypondString (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceWholeNotesDetails ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "--> numerator" << ": " <<
       numerator <<
       std::endl <<
@@ -402,6 +440,10 @@ std::string wholeNotesAsLilypondString (
       "--> numeratorDots " << ": " <<
       numeratorDots <<
       std::endl << std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -414,7 +456,9 @@ std::string wholeNotesAsLilypondString (
 
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceWholeNotesDetails ()) {
-      gLogStream <<
+      std::stringstream ss;
+
+      ss <<
         "--> denominatorDurationLog" << ": " <<
         denominatorDurationLog <<
         std::endl <<
@@ -428,9 +472,15 @@ std::string wholeNotesAsLilypondString (
     // set the multiplying factor
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceWholeNotesDetails ()) {
-      gLogStream <<
+      std::stringstream ss;
+
+      ss <<
         "--> setting the multiplying factor" <<
         std::endl;
+
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif
 
@@ -444,7 +494,9 @@ std::string wholeNotesAsLilypondString (
 
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceWholeNotesDetails ()) {
-      gLogStream <<
+      std::stringstream ss;
+
+      ss <<
         "--> denominatorDurationLog" << ": " <<
         denominatorDurationLog <<
         std::endl <<
@@ -478,7 +530,9 @@ std::string wholeNotesAsLilypondString (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "--> numerator " << ": " <<
       numerator <<
       std::endl <<
@@ -491,60 +545,70 @@ std::string wholeNotesAsLilypondString (
       "--> multiplyingFactor " << ": " <<
       multiplyingFactor <<
       std::endl << std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
   // generate the code for the duration
-  std::stringstream s;
+  std::stringstream ss;
 
   switch (denominatorDurationLog) {
     case -3:
-      s << "\\maxima";
+      ss << "\\maxima";
       break;
     case -2:
-      s << "\\longa";
+      ss << "\\longa";
       break;
     case -1:
-      s << "\\breve";
+      ss << "\\breve";
       break;
 
     default:
-      s << (1 << denominatorDurationLog);
+      ss << (1 << denominatorDurationLog);
   } // switch
 
   // append the dots if any
   if (numeratorDots > 0) {
     for (int i = 0; i < numeratorDots; ++i) {
-      s << ".";
+      ss << ".";
     } // for
   }
 
   if (multiplyingFactor != 1) {
     // append the multiplying factor
-    s <<
+    ss <<
       "*" << multiplyingFactor;
 
     /* JMI
     if (integralNumberOfWholeNotes) {
-      s <<
+      ss <<
         "*" << multiplyingFactor;
     }
     else {
-      s <<
+      ss <<
         "*" << multiplyingFactor << '/' << 1; // ??? denominator;
     }
     */
   }
 
-  std::string result = s.str ();
+  std::string result = ss.str ();
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceWholeNotesDetails ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "--> wholeNotesAsLilypondString() 2 -------------------------------------" <<
      ", result: \"" << result << "\"" <<
       ", numeratorDots" << ": " << numeratorDots <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -601,7 +665,7 @@ std::string multipleFullBarRestsWholeNoteAsLilypondString (
   int             inputLineNumber,
   const Rational& wholeNotes)
 {
-  std::stringstream s;
+  std::stringstream ss;
 
   Rational
     denominatorAsFraction =
@@ -612,17 +676,17 @@ std::string multipleFullBarRestsWholeNoteAsLilypondString (
   int numberOfWholeNotes =
     wholeNotes.getNumerator ();
 
-  s <<
+  ss <<
     wholeNotesAsLilypondString (
       inputLineNumber,
       denominatorAsFraction);
 
   if (numberOfWholeNotes != 1) {
-    s <<
+    ss <<
       "*" << numberOfWholeNotes;
   }
 
-  return s.str ();
+  return ss.str ();
 }
 
 //_______________________________________________________________________________
@@ -725,7 +789,7 @@ void initializeLpsrScoreOutputKindsMap ()
 
 std::string availableLpsrScoreOutputKinds (size_t namesListMaxLength)
 {
-  std::stringstream s;
+  std::stringstream ss;
 
   size_t
     lpsrScoreOutputKindsMapSize =
@@ -751,25 +815,25 @@ std::string availableLpsrScoreOutputKinds (size_t namesListMaxLength)
 
       cumulatedLength += theString.size ();
       if (cumulatedLength >= namesListMaxLength) {
-        s << std::endl << gIndenter.getSpacer ();
+        ss << std::endl << gIndenter.getSpacer ();
         cumulatedLength = 0;
       }
 
       if (count == 1) {
-        s << gIndenter.getSpacer ();
+        ss << gIndenter.getSpacer ();
       }
-      s << theString;
+      ss << theString;
 
       if (count == nextToLast) {
-        s << " and ";
+        ss << " and ";
       }
       else if (count != lpsrScoreOutputKindsMapSize) {
-        s << ", ";
+        ss << ", ";
       }
     } // for
   }
 
-  return s.str ();
+  return ss.str ();
 }
 
 // accidental styles
@@ -959,7 +1023,7 @@ void initializeLpsrAccidentalStyleKindsMap ()
 
 std::string availableLpsrAccidentalStyleKinds (size_t namesListMaxLength)
 {
-  std::stringstream s;
+  std::stringstream ss;
 
   size_t
     accidentalStyleKindsMapSize =
@@ -985,25 +1049,25 @@ std::string availableLpsrAccidentalStyleKinds (size_t namesListMaxLength)
 
       cumulatedLength += theString.size ();
       if (cumulatedLength >= namesListMaxLength) {
-        s << std::endl << gIndenter.getSpacer ();
+        ss << std::endl << gIndenter.getSpacer ();
         cumulatedLength = 0;
       }
 
       if (count == 1) {
-        s << gIndenter.getSpacer ();
+        ss << gIndenter.getSpacer ();
       }
-      s << theString;
+      ss << theString;
 
       if (count == nextToLast) {
-        s << " and ";
+        ss << " and ";
       }
       else if (count != accidentalStyleKindsMapSize) {
-        s << ", ";
+        ss << ", ";
       }
     } // for
   }
 
-  return s.str ();
+  return ss.str ();
 }
 
 // chords languages
@@ -1060,7 +1124,7 @@ std::ostream& operator << (std::ostream& os, const lpsrChordsLanguageKind& elt)
 
 std::string availableLpsrChordsLanguageKinds (size_t namesListMaxLength)
 {
-  std::stringstream s;
+  std::stringstream ss;
 
   size_t
     lpsrChordsLanguageKindsMapSize =
@@ -1085,26 +1149,26 @@ std::string availableLpsrChordsLanguageKinds (size_t namesListMaxLength)
 
       cumulatedLength += theString.size ();
       if (cumulatedLength >= namesListMaxLength) {
-        s << std::endl << gIndenter.getSpacer ();
+        ss << std::endl << gIndenter.getSpacer ();
         cumulatedLength = 0;
         break;
       }
 
       if (count == 1) {
-        s << gIndenter.getSpacer ();
+        ss << gIndenter.getSpacer ();
       }
-      s << theString;
+      ss << theString;
 
       if (count == nextToLast) {
-        s << " and ";
+        ss << " and ";
       }
       else if (count != lpsrChordsLanguageKindsMapSize) {
-        s << ", ";
+        ss << ", ";
       }
     } // for
   }
 
-  return s.str ();
+  return ss.str ();
 }
 
 //______________________________________________________________________________
@@ -1112,7 +1176,7 @@ std::string msrSemiTonesPitchAndOctaveAsLilypondString (
   msrQuarterTonesPitchesLanguageKind languageKind,
   S_msrSemiTonesPitchAndOctave       semiTonesPitchAndOctave)
 {
-  std::stringstream s;
+  std::stringstream ss;
 
   msrQuarterTonesPitchKind
     quarterTonesPitchKind =
@@ -1167,54 +1231,54 @@ std::string msrSemiTonesPitchAndOctaveAsLilypondString (
       break;
   } // switch
 
-  s << (*pitchesNamesMapPTR) [quarterTonesPitchKind];
+  ss << (*pitchesNamesMapPTR) [quarterTonesPitchKind];
 
   switch (semiTonesPitchAndOctave->getOctaveKind ()) {
     case msrOctaveKind::kOctave_UNKNOWN:
-      s << "*** noOctave ***";
+      ss << "*** noOctave ***";
       break;
     case msrOctaveKind::kOctave0:
-      s << ",,";
+      ss << ",,";
       break;
     case msrOctaveKind::kOctave1:
-      s << ",";
+      ss << ",";
       break;
     case msrOctaveKind::kOctave2:
-      s << ",";
+      ss << ",";
       break;
     case msrOctaveKind::kOctave3:
-      s << "";
+      ss << "";
       break;
     case msrOctaveKind::kOctave4:
-      s << "'";
+      ss << "'";
       break;
     case msrOctaveKind::kOctave5:
-      s << "''";
+      ss << "''";
       break;
     case msrOctaveKind::kOctave6:
-      s << "'''";
+      ss << "'''";
       break;
     case msrOctaveKind::kOctave7:
-      s << "''''";
+      ss << "''''";
       break;
     case msrOctaveKind::kOctave8:
-      s << "'''''";
+      ss << "'''''";
       break;
     case msrOctaveKind::kOctave9:
-      s << "''''''";
+      ss << "''''''";
       break;
   } // switch
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceNotesOctaveEntry ()) {
-    s <<
+    ss <<
       " %{ " <<
       semiTonesPitchAndOctave->asString () <<
       " %}";
   }
 #endif
 
-  return s.str ();
+  return ss.str ();
 }
 
 /* JMI
@@ -1298,19 +1362,19 @@ lpsrDynamicsTextSpannersStyleKind lpsrDynamicsTextSpannersStyleKindFromString (
     result =
       lpsrDynamicsTextSpannersStyleKind::kDynamicsTextSpannersStyleTrill;
   else {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "dynamics text spanners style string \"" <<
       dynamicsTextSpannersStyleKindString <<
       "\" is unknown" <<
       ", line: " << inputLineNumber;
 
     lpsrError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 
   return result;
@@ -1336,7 +1400,7 @@ void initializeLpsrDynamicsTextSpannersStyleKindsMap ()
 std::string availableLpsrDynamicsTextSpannersStyleKinds (
   size_t namesListMaxLength)
 {
-  std::stringstream s;
+  std::stringstream ss;
 
   size_t
     lpsrDynamicsTextSpannersStyleKindsMapSize =
@@ -1362,26 +1426,26 @@ std::string availableLpsrDynamicsTextSpannersStyleKinds (
 
       cumulatedLength += theString.size ();
       if (cumulatedLength >= namesListMaxLength) {
-        s << std::endl << gIndenter.getSpacer ();
+        ss << std::endl << gIndenter.getSpacer ();
         cumulatedLength = 0;
         break;
       }
 
       if (count == 1) {
-        s << gIndenter.getSpacer ();
+        ss << gIndenter.getSpacer ();
       }
-      s << theString;
+      ss << theString;
 
       if (count == nextToLast) {
-        s << " and ";
+        ss << " and ";
       }
       else if (count != lpsrDynamicsTextSpannersStyleKindsMapSize) {
-        s << ", ";
+        ss << ", ";
       }
     } // for
   }
 
-  return s.str ();
+  return ss.str ();
 }
 
 // lyrics durations
@@ -1430,7 +1494,7 @@ void initializeLpsrLyricsDurationsKindsMap ()
 
 std::string availableLpsrLyricsDurationsKinds (size_t namesListMaxLength)
 {
-  std::stringstream s;
+  std::stringstream ss;
 
   size_t
     lpsrLyricsDurationsKindsMapSize =
@@ -1456,26 +1520,26 @@ std::string availableLpsrLyricsDurationsKinds (size_t namesListMaxLength)
 
       cumulatedLength += theString.size ();
       if (cumulatedLength >= namesListMaxLength) {
-        s << std::endl << gIndenter.getSpacer ();
+        ss << std::endl << gIndenter.getSpacer ();
         cumulatedLength = 0;
         break;
       }
 
       if (count == 1) {
-        s << gIndenter.getSpacer ();
+        ss << gIndenter.getSpacer ();
       }
-      s << theString;
+      ss << theString;
 
       if (count == nextToLast) {
-        s << " and ";
+        ss << " and ";
       }
       else if (count != lpsrLyricsDurationsKindsMapSize) {
-        s << ", ";
+        ss << ", ";
       }
     } // for
   }
 
-  return s.str ();
+  return ss.str ();
 }
 
 

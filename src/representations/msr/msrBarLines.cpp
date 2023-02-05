@@ -28,6 +28,7 @@
 #include "msrMeasureConstants.h"
 
 #include "oahOah.h"
+#include "oahEarlyOptions.h"
 
 #include "msrOah.h"
 
@@ -215,15 +216,21 @@ void msrBarLine::setBarLineCategory (
   msrBarLineCategoryKind barLineCategoryKind)
 {
 #ifdef MF_TRACING_IS_ENABLED
-        if (gGlobalTracingOahGroup->getTraceBarLines ()) {
-          gLogStream <<
-            "Setting barLine category of " <<
-            this->asString () <<
-            " to '" <<
-            msrBarLineCategoryKindAsString (barLineCategoryKind) <<
-            "'" <<
-            std::endl;
-        }
+  if (gGlobalTracingOahGroup->getTraceBarLines ()) {
+		std::stringstream ss;
+
+    ss <<
+      "Setting barLine category of " <<
+      this->asString () <<
+      " to '" <<
+      msrBarLineCategoryKindAsString (barLineCategoryKind) <<
+      "'" <<
+      std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
 #endif
 
   fBarLineCategoryKind = barLineCategoryKind;
@@ -260,9 +267,15 @@ Bool msrBarLine::barLineIsADoubleBar () const
 void msrBarLine::acceptIn (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrBarLine::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrBarLine>*
@@ -271,9 +284,15 @@ void msrBarLine::acceptIn (basevisitor* v)
         S_msrBarLine elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrBarLine::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitStart (elem);
   }
@@ -282,9 +301,15 @@ void msrBarLine::acceptIn (basevisitor* v)
 void msrBarLine::acceptOut (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrBarLine::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrBarLine>*
@@ -293,9 +318,15 @@ void msrBarLine::acceptOut (basevisitor* v)
         S_msrBarLine elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrBarLine::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitEnd (elem);
   }
@@ -559,7 +590,7 @@ std::ostream& operator << (std::ostream& os, const msrBarLineRepeatWingedKind& e
 
 std::string msrBarLine::endingNumbersListAsString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
   if (fEndingNumbersList.size ()) {
     std::list<int>::const_iterator
@@ -567,20 +598,20 @@ std::string msrBarLine::endingNumbersListAsString () const
       iEnd   = fEndingNumbersList.end (),
       i      = iBegin;
     for ( ; ; ) {
-      s << (*i);
+      ss << (*i);
       if (++i == iEnd) break;
-      s << ' ';
+      ss << ' ';
     } // for
   }
 
-  return s.str ();
+  return ss.str ();
 }
 
 std::string msrBarLine::asShortString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "[BarLine " <<
     msrBarLineCategoryKindAsString (fBarLineCategoryKind) <<
     ", measureNumber: " <<
@@ -615,14 +646,14 @@ std::string msrBarLine::asShortString () const
     ", line " << fInputLineNumber <<
     ']';
 
-  return s.str ();
+  return ss.str ();
 }
 
 std::string msrBarLine::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "[BarLine " <<
     msrBarLineCategoryKindAsString (fBarLineCategoryKind) <<
     ", measureElementMeasureNumber: " << fBarLineUpLinkToMeasure->getMeasureNumber () <<
@@ -657,7 +688,7 @@ std::string msrBarLine::asString () const
     ", line " << fInputLineNumber <<
     ']';
 
-  return s.str ();
+  return ss.str ();
 }
 
 void msrBarLine::printFull (std::ostream& os) const

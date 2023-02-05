@@ -85,7 +85,7 @@ alias lxmlsamp="cd ${LXML_SAMPLES_DIR}"
 alias serv="cd ${SERVICES_DIR}"
 
 
-# choosing the MacOS version
+# choosing the xml2ly MacOS version
 #----------------------------------------------
 
 alias useversion='export PATH=~/MusicFormatsForMacOS/bin:$PATH ; type xml2ly'
@@ -149,12 +149,21 @@ alias msdm="cd ${SRC_DIR}/translators/msdl2msr"
 # soundnotation
 #----------------------------------------------
 
-alias sound='cd ${HOME}/Documents/PartitionsLilypond/soundnotation'
+alias snd='cd ${HOME}/JMI_Developpement/soundnotation'
+
+
+# EJMA
+#----------------------------------------------
+
+alias jazztrad='cd ${HOME}/JMI_Musique/JazzTrad_EJMA_2022_2023'
+alias bigband='cd ${HOME}/JMI_Musique/Big-band_EJMA_2022_2023'
+
 
 # MSDL
 #----------------------------------------------
 
 alias msdlc='cd ${SRC_DIR}/converters/msdlconverter'
+
 
 # MSDR
 #----------------------------------------------
@@ -178,8 +187,6 @@ iscmd="cd ${ISCM_DIR}"
 
 # musicxml2ly
 #----------------------------------------------
-
-alias musicxml2ly=/Applications/JMI_Applications/LilyPond/lilypond-2.23.10/bin/musicxml2ly
 
 function m2lf ()
 {

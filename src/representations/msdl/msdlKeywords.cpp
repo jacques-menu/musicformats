@@ -50,9 +50,9 @@ msdlKeywordsLanguageKind msdlKeywordsLanguageKindFromString (const std::string& 
 
   if (it == gGlobalMsdlKeywordsLanguageKindsMap.end ()) {
     // no, keywords language kind is unknown in the map
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "MSDL language kind '" << theString <<
       "' is unknown" <<
       std::endl <<
@@ -63,12 +63,12 @@ msdlKeywordsLanguageKind msdlKeywordsLanguageKindFromString (const std::string& 
 
     ++gIndenter;
 
-    s <<
+    ss <<
       availableMsdlKeywordsLanguageKinds (K_MF_NAMES_LIST_MAX_LENGTH);
 
     --gIndenter;
 
-// JMI    oahError (s.str ());
+// JMI    oahError (ss.str ());
   }
 
   result = (*it).second;
@@ -146,7 +146,7 @@ std::string msdlKeywordsLanguageKindAsString (
 
 std::string availableMsdlKeywordsLanguageKinds (size_t namesListMaxLength)
 {
-  std::stringstream s;
+  std::stringstream ss;
 
   size_t
     msdlKeywordsLanguageKindsMapSize =
@@ -171,26 +171,26 @@ std::string availableMsdlKeywordsLanguageKinds (size_t namesListMaxLength)
 
       cumulatedLength += theString.size ();
       if (cumulatedLength >= namesListMaxLength) {
-        s << std::endl << gIndenter.getSpacer ();
+        ss << std::endl << gIndenter.getSpacer ();
         cumulatedLength = 0;
         break;
       }
 
       if (count == 1) {
-        s << gIndenter.getSpacer ();
+        ss << gIndenter.getSpacer ();
       }
-      s << theString;
+      ss << theString;
 
       if (count == nextToLast) {
-        s << " and ";
+        ss << " and ";
       }
       else if (count != msdlKeywordsLanguageKindsMapSize) {
-        s << ", ";
+        ss << ", ";
       }
     } // for
   }
 
-  return s.str ();
+  return ss.str ();
 }
 
 // the MSDL keywords
@@ -490,11 +490,17 @@ std::string msdlKeywordKindAsMsdlString (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsdl2msrOahGroup->getTraceTokensDetails ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "--> msdlKeywordKindAsMsdlString()" <<
       ", languageKind: " << msdlKeywordsLanguageKindAsString (languageKind) <<
       ", keywordKind: \"" << msdlKeywordKindAsString (keywordKind) << "\"" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -548,10 +554,16 @@ std::string msdlKeywordKindAsMsdlString (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsdl2msrOahGroup->getTraceTokensDetails ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "<-- msdlKeywordKindAsMsdlString()" <<
       ", result: \"" << result << "\"" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -653,11 +665,17 @@ msdlKeywordKind msdlKeywordKindFromString (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsdl2msrOahGroup->getTraceTokensDetails ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "--> msdlKeywordKindFromString()" <<
       ", languageKind: " << msdlKeywordsLanguageKindAsString (languageKind) <<
       ", theString: \"" << theString << "\"" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -711,11 +729,17 @@ msdlKeywordKind msdlKeywordKindFromString (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsdl2msrOahGroup->getTraceTokensDetails ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "<-- msdlKeywordKindFromString()" <<
       ", languageKind: " << msdlKeywordsLanguageKindAsString (languageKind) <<
       ", result: \"" << msdlKeywordKindAsString (result) << "\"" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -726,7 +750,7 @@ std::string availableKeywordsInLanguage (
   msdlKeywordsLanguageKind keywordsLanguageKind,
   size_t                   namesListMaxLength)
 {
-  std::stringstream s;
+  std::stringstream ss;
 
   std::map<msdlKeywordKind, std::string> *keywordsNamesMapPTR = nullptr;
 
@@ -780,25 +804,25 @@ std::string availableKeywordsInLanguage (
 
       cumulatedLength += theString.size ();
       if (cumulatedLength >= namesListMaxLength) {
-        s << std::endl << gIndenter.getSpacer ();
+        ss << std::endl << gIndenter.getSpacer ();
         cumulatedLength = 0;
       }
 
       if (count == 1) {
-        s << gIndenter.getSpacer ();
+        ss << gIndenter.getSpacer ();
       }
-      s << theString;
+      ss << theString;
 
       if (count == nextToLast) {
-        s << ' ';
+        ss << ' ';
       }
       else if (count != keywordsNameMapSize) {
-        s << ' ';
+        ss << ' ';
       }
     } // for
   }
 
-  return s.str ();
+  return ss.str ();
 }
 
 //______________________________________________________________________________
@@ -809,11 +833,21 @@ void initializeMSDLKeywords ()
 
   if (! pPrivateThisMethodHasBeenRun) {
 #ifdef MF_TRACING_IS_ENABLED
-    if (gGlobalOahEarlyOptions.getEarlyTracingOah () && ! gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
-      gLogStream <<
+    if (
+      gGlobalOahEarlyOptions.getEarlyTracingOah ()
+        &&
+     ! gGlobalOahEarlyOptions.getEarlyQuietOption ()
+    ) {
+	  	std::stringstream ss;
+
+      ss <<
         "Initializing MSDL keywords" <<
         std::endl;
-  }
+
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
+    }
 #endif
 
     // keywords languages handling

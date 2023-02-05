@@ -9,9 +9,6 @@
   https://github.com/jacques-menu/musicformats
 */
 
-//#include <iomanip>      // std::setw, std::setprecision, ...
-//#include <cmath>
-//#include <string>
 #include <regex>
 
 #include "msdl2lilypondOah2manPage.h"

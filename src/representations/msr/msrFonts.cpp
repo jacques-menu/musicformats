@@ -82,17 +82,17 @@ msrFontStyleKind msrFontStyleKindFromString (
     result = msrFontStyleKind::KFontStyleItalic;
   else {
     if (fontStyleString.size ()) {
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         "style value " << fontStyleString <<
         " should be 'normal' or 'italic'";
 
       msrError (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         inputLineNumber,
         __FILE__, __LINE__,
-        s.str ());
+        ss.str ());
     }
   }
 
@@ -139,17 +139,17 @@ msrFontWeightKind msrFontWeightKindFromString (
     result = msrFontWeightKind::kFontWeightBold;
   else {
     if (fontWeightString.size ()) {
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         "font weight value " << fontWeightString <<
         " should be 'normal' or 'bold'";
 
       msrError (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         inputLineNumber,
         __FILE__, __LINE__,
-        s.str ());
+        ss.str ());
     }
   }
 
@@ -258,17 +258,17 @@ float msrFontSize::getFontNumericSize () const
     case msrFontSizeKind::kFontSizeXLarge:
     case msrFontSizeKind::kFontSizeXXLarge:
       {
-        std::stringstream s;
+        std::stringstream ss;
 
-        s <<
+        ss <<
           "attempting to get font numeric size for a " <<
           msrFontSizeKindAsString (fFontSizeKind);
 
         msrInternalError (
-          gGlobalServiceRunData->getInputSourceName (),
+          gGlobalCurrentServiceRunData->getInputSourceName (),
           K_MF_INPUT_LINE_UNKNOWN, // JMI
           __FILE__, __LINE__,
-          s.str ());
+          ss.str ());
       }
       break;
 

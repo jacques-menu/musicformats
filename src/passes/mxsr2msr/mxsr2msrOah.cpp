@@ -82,9 +82,15 @@ void msrReplaceClefAtom::applyAtomWithValue (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "==> oahAtom is of type 'msrReplaceClefAtom'" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -93,9 +99,15 @@ void msrReplaceClefAtom::applyAtomWithValue (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "--> theString = \"" << theString << "\", " <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -114,12 +126,18 @@ void msrReplaceClefAtom::applyAtomWithValue (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "There are " << smSize << " matches" <<
       " for part transpose string '" << theString <<
       "' with std::regex '" << regularExpression <<
       "'" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -136,13 +154,13 @@ void msrReplaceClefAtom::applyAtomWithValue (
   }
 
   else {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "-marTransposePart argument '" << theString <<
       "' is ill-formed";
 
-    oahError (s.str ());
+    oahError (ss.str ());
   }
 
   std::string
@@ -151,10 +169,16 @@ void msrReplaceClefAtom::applyAtomWithValue (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "--> originalClefName = \"" << originalClefName << "\", " <<
       "--> destinationClefName = \"" << destinationClefName << "\"" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -171,15 +195,15 @@ void msrReplaceClefAtom::applyAtomWithValue (
 
   if (it != fClefKindToClefKindMapVariable.end ()) {
     // yes, issue error message
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "Replace clef value \"" << theString << "\" occurs more that once" <<
       "in  a " <<
       fetchNamesBetweenQuotes () <<
       " option";
 
-    oahError (s.str ());
+    oahError (ss.str ());
   }
 
   else {
@@ -200,9 +224,15 @@ void msrReplaceClefAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       ".\\\" ==> msrReplaceClefAtom::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -213,9 +243,15 @@ void msrReplaceClefAtom::acceptIn (basevisitor* v)
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             ".\\\" ==> Launching msrReplaceClefAtom::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
         p->visitStart (elem);
@@ -226,9 +262,15 @@ void msrReplaceClefAtom::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       ".\\\" ==> msrReplaceClefAtom::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -239,9 +281,15 @@ void msrReplaceClefAtom::acceptOut (basevisitor* v)
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             ".\\\" ==> Launching msrReplaceClefAtom::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
         p->visitEnd (elem);
@@ -252,22 +300,28 @@ void msrReplaceClefAtom::browseData (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       ".\\\" ==> msrReplaceClefAtom::browseData ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 }
 
 std::string msrReplaceClefAtom::asShortNamedOptionString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     '-' << fShortName << ' ';
 
   if (! fClefKindToClefKindMapVariable.size ()) {
-    s << "[EMPTY]";
+    ss << "[EMPTY]";
   }
   else {
     std::map<msrClefKind, msrClefKind>::const_iterator
@@ -275,27 +329,27 @@ std::string msrReplaceClefAtom::asShortNamedOptionString () const
       iEnd   = fClefKindToClefKindMapVariable.end (),
       i      = iBegin;
     for ( ; ; ) {
-      s <<
+      ss <<
         msrClefKindAsString ((*i).first) <<
         "=" <<
         msrClefKindAsString ((*i).second);
       if (++i == iEnd) break;
-      s << ",";
+      ss << ",";
     } // for
   }
 
-  return s.str ();
+  return ss.str ();
 }
 
 std::string msrReplaceClefAtom::asActualLongNamedOptionString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     '-' << fLongName << ' ';
 
   if (! fClefKindToClefKindMapVariable.size ()) {
-    s << "[EMPTY]";
+    ss << "[EMPTY]";
   }
   else {
     std::map<msrClefKind, msrClefKind>::const_iterator
@@ -303,16 +357,16 @@ std::string msrReplaceClefAtom::asActualLongNamedOptionString () const
       iEnd   = fClefKindToClefKindMapVariable.end (),
       i      = iBegin;
     for ( ; ; ) {
-      s <<
+      ss <<
         msrClefKindAsString ((*i).first) <<
         "=" <<
         msrClefKindAsString ((*i).second);
       if (++i == iEnd) break;
-      s << ",";
+      ss << ",";
     } // for
   }
 
-  return s.str ();
+  return ss.str ();
 }
 
 void msrReplaceClefAtom::print (std::ostream& os) const
@@ -1585,40 +1639,46 @@ void mxsr2msrOahGroup::checkGroupOptionsConsistency ()
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Checking the consistency of mxsr2msrOahGroup group \"" <<
       fGroupHeader <<
       "\"" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
   // JMI and if mixed ID and name options are used?
 
   if (fPartsIgnoreIDSet.size () > 0 && fMusicXMLPartsKeepIDSet.size () > 0) {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "options '" <<
       fIgnoreMusicXMLPartIDAtom->fetchNames () <<
       "' and '" <<
       fKeepMusicXMLPartIDAtom->fetchNames () <<
       "' are incompatible";
 
-    oahError (s.str ());
+    oahError (ss.str ());
   }
 
   if (fMusicXMLPartsIgnoreNameSet.size () > 0 && fMusicXMLPartsKeepNameSet.size () > 0) {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "options '" <<
       fIgnoreMusicXMLPartNameAtom->fetchNames () <<
       "' and '" <<
       fKeepMusicXMLPartNameAtom->fetchNames () <<
       "' are incompatible";
 
-    oahError (s.str ());
+    oahError (ss.str ());
   }
 }
 
@@ -1937,9 +1997,15 @@ void mxsr2msrOahGroup::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       ".\\\" ==> mxsr2msrOahGroup::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -1950,9 +2016,15 @@ void mxsr2msrOahGroup::acceptIn (basevisitor* v)
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             ".\\\" ==> Launching mxsr2msrOahGroup::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
         p->visitStart (elem);
@@ -1963,9 +2035,15 @@ void mxsr2msrOahGroup::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       ".\\\" ==> mxsr2msrOahGroup::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -1976,9 +2054,15 @@ void mxsr2msrOahGroup::acceptOut (basevisitor* v)
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             ".\\\" ==> Launching mxsr2msrOahGroup::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
         p->visitEnd (elem);
@@ -1989,9 +2073,15 @@ void mxsr2msrOahGroup::browseData (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       ".\\\" ==> mxsr2msrOahGroup::browseData ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 }
@@ -2472,9 +2562,15 @@ S_mxsr2msrOahGroup createGlobalMxsr2msrOahGroup (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Creating global mxsr2msr OAH group" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 

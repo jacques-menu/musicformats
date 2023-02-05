@@ -22,6 +22,7 @@
 #include "msrLigatures.h"
 
 #include "oahOah.h"
+#include "oahEarlyOptions.h"
 
 #include "msrOah.h"
 
@@ -91,9 +92,15 @@ void msrLigature::setLigatureSideLinkToOtherEnd (
 void msrLigature::acceptIn (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrLigature::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrLigature>*
@@ -102,9 +109,15 @@ void msrLigature::acceptIn (basevisitor* v)
         S_msrLigature elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrLigature::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitStart (elem);
   }
@@ -113,9 +126,15 @@ void msrLigature::acceptIn (basevisitor* v)
 void msrLigature::acceptOut (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrLigature::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrLigature>*
@@ -124,9 +143,15 @@ void msrLigature::acceptOut (basevisitor* v)
         S_msrLigature elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrLigature::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitEnd (elem);
   }
@@ -167,27 +192,27 @@ std::ostream& operator << (std::ostream& os, const msrLigatureKind& elt)
 std::string msrLigatureLineEndKindAsString (
   msrLigatureLineEndKind ligatureLineEndKind)
 {
-  std::stringstream s;
+  std::stringstream ss;
 
   switch (ligatureLineEndKind) {
     case msrLigatureLineEndKind::kLigatureLineEndUp:
-      s << "ligatureLineEndUp";
+      ss << "ligatureLineEndUp";
       break;
     case msrLigatureLineEndKind::kLigatureLineEndDown:
-      s << "ligatureLineEndDown";
+      ss << "ligatureLineEndDown";
       break;
     case msrLigatureLineEndKind::kLigatureLineEndBoth:
-      s << "ligatureLineEndBoth";
+      ss << "ligatureLineEndBoth";
       break;
     case msrLigatureLineEndKind::kLigatureLineEndArrow:
-      s << "ligatureLineEndArrow";
+      ss << "ligatureLineEndArrow";
       break;
     case msrLigatureLineEndKind::kLigatureLineEndNone:
-      s << "ligatureLineEndNone";
+      ss << "ligatureLineEndNone";
       break;
   } // switch
 
-  return s.str ();
+  return ss.str ();
 }
 
 std::ostream& operator << (std::ostream& os, const msrLigatureLineEndKind& elt)
@@ -198,9 +223,9 @@ std::ostream& operator << (std::ostream& os, const msrLigatureLineEndKind& elt)
 
 std::string msrLigature::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "[Ligature" <<
     ", fLigatureKind: " << fLigatureKind <<
     ", fLigatureLineEndKind" << ": " << fLigatureLineEndKind <<
@@ -209,7 +234,7 @@ std::string msrLigature::asString () const
     ", line " << fInputLineNumber <<
     ']';
 
-  return s.str ();
+  return ss.str ();
 }
 
 void msrLigature::print (std::ostream& os) const

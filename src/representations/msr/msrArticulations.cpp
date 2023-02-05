@@ -17,6 +17,7 @@
 #include "msrArticulations.h"
 
 #include "oahOah.h"
+#include "oahEarlyOptions.h"
 
 #include "msrOah.h"
 
@@ -131,9 +132,15 @@ std::ostream& operator << (std::ostream& os, const msrArticulationKind& elt)
 void msrArticulation::acceptIn (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrArticulation::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrArticulation>*
@@ -142,9 +149,15 @@ void msrArticulation::acceptIn (basevisitor* v)
         S_msrArticulation elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrArticulation::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitStart (elem);
   }
@@ -153,9 +166,15 @@ void msrArticulation::acceptIn (basevisitor* v)
 void msrArticulation::acceptOut (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrArticulation::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrArticulation>*
@@ -164,9 +183,15 @@ void msrArticulation::acceptOut (basevisitor* v)
         S_msrArticulation elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrArticulation::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitEnd (elem);
   }
@@ -177,16 +202,16 @@ void msrArticulation::browseData (basevisitor* v)
 
 std::string msrArticulation::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "[Articulation " <<
     ", fArticulationKind: " << fArticulationKind <<
     ", fArticulationPlacementKind: " << fArticulationPlacementKind <<
     ", line " << fInputLineNumber <<
     ']';
 
-  return s.str ();
+  return ss.str ();
 }
 
 void msrArticulation::print (std::ostream& os) const
@@ -240,9 +265,15 @@ msrFermata::~msrFermata ()
 void msrFermata::acceptIn (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrFermata::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrFermata>*
@@ -251,9 +282,15 @@ void msrFermata::acceptIn (basevisitor* v)
         S_msrFermata elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrFermata::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitStart (elem);
   }
@@ -262,9 +299,15 @@ void msrFermata::acceptIn (basevisitor* v)
 void msrFermata::acceptOut (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrFermata::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrFermata>*
@@ -273,9 +316,15 @@ void msrFermata::acceptOut (basevisitor* v)
         S_msrFermata elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrFermata::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitEnd (elem);
   }
@@ -338,16 +387,16 @@ std::ostream& operator << (std::ostream& os, const msrArticulationFermataType& e
 
 std::string msrFermata::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "[Fermata" <<
     ", fFermataShapeKind: " << fFermataShapeKind <<
     ", fFermataTypeKind: " << fFermataTypeKind <<
     ", line " << fInputLineNumber <<
     ']';
 
-  return s.str ();
+  return ss.str ();
 }
 
 void msrFermata::print (std::ostream& os) const
@@ -411,9 +460,15 @@ std::string msrArpeggiato::arpeggiatoDirectionKindAsString () const
 void msrArpeggiato::acceptIn (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrArpeggiato::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrArpeggiato>*
@@ -422,9 +477,15 @@ void msrArpeggiato::acceptIn (basevisitor* v)
         S_msrArpeggiato elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrArpeggiato::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitStart (elem);
   }
@@ -433,9 +494,15 @@ void msrArpeggiato::acceptIn (basevisitor* v)
 void msrArpeggiato::acceptOut (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrArpeggiato::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrArpeggiato>*
@@ -444,9 +511,15 @@ void msrArpeggiato::acceptOut (basevisitor* v)
         S_msrArpeggiato elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrArpeggiato::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitEnd (elem);
   }
@@ -457,9 +530,9 @@ void msrArpeggiato::browseData (basevisitor* v)
 
 std::string msrArpeggiato::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "[Arpeggiato " <<
     ", fArticulationPlacementKind: " << fArticulationPlacementKind <<
     ", " << arpeggiatoDirectionKindAsString () <<
@@ -467,7 +540,7 @@ std::string msrArpeggiato::asString () const
     ", line " << fInputLineNumber <<
     ']';
 
-  return s.str ();
+  return ss.str ();
 }
 
 void msrArpeggiato::print (std::ostream& os) const
@@ -551,9 +624,15 @@ std::ostream& operator << (std::ostream& os, const msrNonArpeggiatoTypeKind& elt
 void msrNonArpeggiato::acceptIn (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrNonArpeggiato::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrNonArpeggiato>*
@@ -562,9 +641,15 @@ void msrNonArpeggiato::acceptIn (basevisitor* v)
         S_msrNonArpeggiato elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrNonArpeggiato::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitStart (elem);
   }
@@ -573,9 +658,15 @@ void msrNonArpeggiato::acceptIn (basevisitor* v)
 void msrNonArpeggiato::acceptOut (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrNonArpeggiato::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrNonArpeggiato>*
@@ -584,9 +675,15 @@ void msrNonArpeggiato::acceptOut (basevisitor* v)
         S_msrNonArpeggiato elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrNonArpeggiato::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitEnd (elem);
   }
@@ -597,9 +694,9 @@ void msrNonArpeggiato::browseData (basevisitor* v)
 
 std::string msrNonArpeggiato::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "[NonArpeggiato " <<
     ", fArticulationPlacementKind: " << fArticulationPlacementKind <<
     ", fNonArpeggiatoTypeKind: " << fNonArpeggiatoTypeKind <<
@@ -607,7 +704,7 @@ std::string msrNonArpeggiato::asString () const
     ", line " << fInputLineNumber <<
     ']';
 
-  return s.str ();
+  return ss.str ();
 }
 
 void msrNonArpeggiato::print (std::ostream& os) const

@@ -9,6 +9,8 @@
   https://github.com/jacques-menu/musicformats
 */
 
+#include <iomanip>      // std::setw, std::setprecision, ...
+
 #include "mfAssert.h"
 
 #include "mfStringsHandling.h"
@@ -90,6 +92,10 @@ mfOutputIndenter& mfOutputIndenter::operator-- ()
     gLogStream <<
       "% INDENTER: " << fIndentation <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -134,6 +140,10 @@ mfOutputIndenter mfOutputIndenter::mfOutputIndenter::operator-- (int)
     gLogStream <<
       "% INDENTER: " << fIndentation <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -163,6 +173,10 @@ mfOutputIndenter& mfOutputIndenter::increment (int value)
     gLogStream <<
       "% INDENTER: " << fIndentation <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -192,6 +206,10 @@ mfOutputIndenter& mfOutputIndenter::decrement (int value)
     gLogStream <<
       "% INDENTER: " << fIndentation <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -227,7 +245,7 @@ std::string mfOutputIndenter::indentMultiLineStringWithCurrentOffset (
 {
   // add indentation ahead of all lines of theString
 
-  std::stringstream s;
+  std::stringstream ss;
 
   // the std::istringstream to read lines from theString
   std::istringstream inputStream (theString);
@@ -235,10 +253,34 @@ std::string mfOutputIndenter::indentMultiLineStringWithCurrentOffset (
 
   // append theString line by line
   while (getline (inputStream, line)) {
-    s << fetchCurrentOffset () << line; // << std::endl;
+    ss << fetchCurrentOffset () << line;
   } // while
 
-  return s.str ();
+  return ss.str ();
+}
+
+void mfOutputIndenter::printMultiLineStringInATable (
+  const std::string& theString,
+  const int          columnStart,
+  const int          columnWidth,
+  std::ostream&      os)
+{
+  // the std::istringstream to read lines from theString
+  std::istringstream inputStream (theString);
+  std::string        line;
+
+  // print theString line by line
+  int counter = 0;
+
+  while (getline (inputStream, line)) {
+    ++ counter;
+    if (counter > 1) {
+      os << std::left <<
+        std::setw (columnWidth) <<
+        mfReplicateChar (' ', columnStart);
+    }
+    os << line;
+  } // while
 }
 
 void mfOutputIndenter::printSpacers (std::ostream& os) const
@@ -324,6 +366,33 @@ EXP mfIndentedStringStream& operator << (
 
 EXP mfIndentedStringStream& operator << (
   mfIndentedStringStream& iss, const int& elt)
+{
+  iss.getStringstream () <<
+    elt;
+
+  return iss;
+}
+
+EXP mfIndentedStringStream& operator << (
+  mfIndentedStringStream& iss, const unsigned int& elt)
+{
+  iss.getStringstream () <<
+    elt;
+
+  return iss;
+}
+
+EXP mfIndentedStringStream& operator << (
+  mfIndentedStringStream& iss, const long int& elt)
+{
+  iss.getStringstream () <<
+    elt;
+
+  return iss;
+}
+
+EXP mfIndentedStringStream& operator << (
+  mfIndentedStringStream& iss, const unsigned long int& elt)
 {
   iss.getStringstream () <<
     elt;

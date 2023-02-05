@@ -109,7 +109,9 @@ void msrMeasure::appendElementToMeasure (const S_msrMeasureElement& elem)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasures ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Appending element " <<
       elem->asShortString () <<
       " to measure " <<
@@ -121,6 +123,10 @@ void msrMeasure::appendElementToMeasure (const S_msrMeasureElement& elem)
       fCurrentMeasureWholeNotesDuration <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -170,6 +176,10 @@ void msrMeasure::appendHarmonyToMeasure (const S_msrHarmony& harmony)
       fCurrentMeasureWholeNotesDuration <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -223,6 +233,10 @@ void msrMeasure::appendHarmonyToMeasureClone (const S_msrHarmony& harmony)
       fCurrentMeasureWholeNotesDuration <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -274,7 +288,9 @@ void msrSegment::appendMeasureToSegment (const S_msrMeasure& measure)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasures ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Appending measure '" << measureNumber <<
       "' to segment " << asString ();
 
@@ -291,13 +307,17 @@ void msrSegment::appendMeasureToSegment (const S_msrMeasure& measure)
       "\"" <<
       ", line " << measure->getInputLineNumber () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
   if (measureNumber == currentMeasureNumber) {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "appending measure number '" << measureNumber <<
       "' occurs twice in a row in segment " <<
       asString () <<
@@ -307,10 +327,10 @@ void msrSegment::appendMeasureToSegment (const S_msrMeasure& measure)
 
 //    msrInternalWarning ( // JMI
     msrInternalError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 
   // is measure the first one this segment?
@@ -397,12 +417,18 @@ S_msrMeasure msrVoice::createAMeasureAndAppendItToVoice (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasures ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Creating measure '" <<
       measureNumber <<
       "' and appending it to voice \"" << getVoiceName () << "\"" <<
       "', line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -520,17 +546,17 @@ void mxsr2msrTranslator::visitStart (S_measure& elt)
   }
   else {
     if (implicit.size ()) {
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         "implicit \"" << implicit <<
         "\" is unknown";
 
       musicxmlError (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         inputLineNumber,
         __FILE__, __LINE__,
-        s.str ());
+        ss.str ());
     }
   }
 

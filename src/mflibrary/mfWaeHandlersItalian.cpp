@@ -32,12 +32,12 @@ mfWaeHandlerItalian::~mfWaeHandlerItalian ()
 
 std::string mfWaeHandlerItalian::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "MusicFormats warning and error handler for italian";
 
-  return s.str ();
+  return ss.str ();
 }
 
 void mfWaeHandlerItalian::print (std::ostream& os) const

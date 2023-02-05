@@ -168,17 +168,17 @@ void bsrAsciiBrailleGenerator::generateCodeForBrailleCell (
   switch (cellKind) {
     case bsrCellKind::kCellUnknown:
       {
-        std::stringstream s;
+        std::stringstream ss;
 
-        s <<
+        ss <<
           "cannot generate code for braille cell '" <<
           bsrCellKindAsString (cellKind) <<
           "'";
         msrInternalError (
-          gGlobalServiceRunData->getInputSourceName (),
+          gGlobalCurrentServiceRunData->getInputSourceName (),
           -999, // inputLineNumber, TICINO JMI
           __FILE__, __LINE__,
-          s.str ());
+          ss.str ());
       }
       break;
 

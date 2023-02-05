@@ -61,7 +61,9 @@ S_bsrScore translateBsrToFinalizedBsr (
 
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
-      gLogStream <<
+      std::stringstream ss;
+
+      ss <<
         std::endl <<
         separator <<
         std::endl <<
@@ -70,6 +72,10 @@ S_bsrScore translateBsrToFinalizedBsr (
         std::endl <<
         separator <<
         std::endl;
+
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif
 
@@ -100,16 +106,16 @@ S_bsrScore translateBsrToFinalizedBsr (
 
   if (gIndenter != 0) {
     if (! gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         "gIndenter value after " << passIDKind << ": " <<
         gIndenter.getIndentation ();
 
       bsr2bsrWarning (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         1, // JMI inputLineNumber,
-        s.str ());
+        ss.str ());
     }
 
     gIndenter.resetToZero ();

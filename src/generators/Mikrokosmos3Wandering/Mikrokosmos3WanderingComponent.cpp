@@ -81,9 +81,15 @@ S_mfcGeneratorComponent createMikrokosmos3WanderingGeneratorComponent ()
 
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-      gLogStream <<
+	  	std::stringstream ss;
+
+      ss <<
         "Crerating the Mikrokosmos3Wandering component" <<
         std::endl;
+
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif
 

@@ -21,11 +21,11 @@
 #include "msdlEnumTypes.h"
 
 #include "oahOah.h"
+#include "oahEarlyOptions.h"
+
 #include "waeOah.h"
 
 #include "msdlInputOah.h"
-
-#include "oahEarlyOptions.h"
 
 
 namespace MusicFormats
@@ -86,9 +86,9 @@ msdlUserLanguageKind msdlUserLanguageKindFromString (const std::string& theStrin
 
   if (it == gGlobalMsdlUserLanguageKindsMap.end ()) {
     // no, User language kind is unknown in the map
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "MSDL language kind '" << theString <<
       "' is unknown" <<
       std::endl <<
@@ -99,12 +99,12 @@ msdlUserLanguageKind msdlUserLanguageKindFromString (const std::string& theStrin
 
     ++gIndenter;
 
-    s <<
+    ss <<
       availableMsdlUserLanguageKinds (K_MF_NAMES_LIST_MAX_LENGTH);
 
     --gIndenter;
 
-// JMI    oahError (s.str ());
+// JMI    oahError (ss.str ());
   }
 
   result = (*it).second;
@@ -114,7 +114,7 @@ msdlUserLanguageKind msdlUserLanguageKindFromString (const std::string& theStrin
 
 std::string availableMsdlUserLanguageKinds (size_t namesListMaxLength)
 {
-  std::stringstream s;
+  std::stringstream ss;
 
   size_t
     msdlUserLanguageKindsMapSize =
@@ -139,26 +139,26 @@ std::string availableMsdlUserLanguageKinds (size_t namesListMaxLength)
 
       cumulatedLength += theString.size ();
       if (cumulatedLength >= namesListMaxLength) {
-        s << std::endl << gIndenter.getSpacer ();
+        ss << std::endl << gIndenter.getSpacer ();
         cumulatedLength = 0;
         break;
       }
 
       if (count == 1) {
-        s << gIndenter.getSpacer ();
+        ss << gIndenter.getSpacer ();
       }
-      s << theString;
+      ss << theString;
 
       if (count == nextToLast) {
-        s << " and ";
+        ss << " and ";
       }
       else if (count != msdlUserLanguageKindsMapSize) {
-        s << ", ";
+        ss << ", ";
       }
     } // for
   }
 
-  return s.str ();
+  return ss.str ();
 }
 
 // comments types
@@ -178,9 +178,9 @@ msdlCommentsTypeKind msdlCommentsTypeKindFromString (const std::string& theStrin
 
   if (it == gGlobalMsdlCommentsTypeKindsMap.end ()) {
     // no, keywords language kind is unknown in the map
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "MSDL language kind '" << theString <<
       "' is unknown" <<
       std::endl <<
@@ -191,12 +191,12 @@ msdlCommentsTypeKind msdlCommentsTypeKindFromString (const std::string& theStrin
 
     ++gIndenter;
 
-    s <<
+    ss <<
       availableMsdlCommentsTypeKinds (K_MF_NAMES_LIST_MAX_LENGTH);
 
     --gIndenter;
 
-// JMI    oahError (s.str ());
+// JMI    oahError (ss.str ());
   }
 
   result = (*it).second;
@@ -236,7 +236,7 @@ std::string msdlCommentsTypeKindAsString (
 
 std::string availableMsdlCommentsTypeKinds (size_t namesListMaxLength)
 {
-  std::stringstream s;
+  std::stringstream ss;
 
   size_t
     msdlCommentsTypeKindsMapSize =
@@ -261,26 +261,26 @@ std::string availableMsdlCommentsTypeKinds (size_t namesListMaxLength)
 
       cumulatedLength += theString.size ();
       if (cumulatedLength >= namesListMaxLength) {
-        s << std::endl << gIndenter.getSpacer ();
+        ss << std::endl << gIndenter.getSpacer ();
         cumulatedLength = 0;
         break;
       }
 
       if (count == 1) {
-        s << gIndenter.getSpacer ();
+        ss << gIndenter.getSpacer ();
       }
-      s << theString;
+      ss << theString;
 
       if (count == nextToLast) {
-        s << " and ";
+        ss << " and ";
       }
       else if (count != msdlCommentsTypeKindsMapSize) {
-        s << ", ";
+        ss << ", ";
       }
     } // for
   }
 
-  return s.str ();
+  return ss.str ();
 }
 
 //______________________________________________________________________________
@@ -291,10 +291,20 @@ void initializeMSDLBasicTypes ()
 
   if (! pPrivateThisMethodHasBeenRun) {
 #ifdef MF_TRACING_IS_ENABLED
-    if (gGlobalOahEarlyOptions.getEarlyTracingOah () && ! gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
-      gLogStream <<
+    if (
+      gGlobalOahEarlyOptions.getEarlyTracingOah ()
+        &&
+     ! gGlobalOahEarlyOptions.getEarlyQuietOption ()
+    ) {
+	  	std::stringstream ss;
+
+      ss <<
         "Initializing MSDL basic types handling" <<
         std::endl;
+
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif
 

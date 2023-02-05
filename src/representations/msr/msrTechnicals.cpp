@@ -21,6 +21,8 @@
 #include "msrTechnicals.h"
 
 #include "oahOah.h"
+#include "oahEarlyOptions.h"
+
 #include "msrOah.h"
 
 
@@ -226,9 +228,15 @@ msrTechnical::~msrTechnical ()
 void msrTechnical::acceptIn (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrTechnical::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrTechnical>*
@@ -237,9 +245,15 @@ void msrTechnical::acceptIn (basevisitor* v)
         S_msrTechnical elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrTechnical::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitStart (elem);
   }
@@ -248,9 +262,15 @@ void msrTechnical::acceptIn (basevisitor* v)
 void msrTechnical::acceptOut (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrTechnical::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrTechnical>*
@@ -259,9 +279,15 @@ void msrTechnical::acceptOut (basevisitor* v)
         S_msrTechnical elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrTechnical::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitEnd (elem);
   }
@@ -336,9 +362,15 @@ msrTechnicalWithInteger::~msrTechnicalWithInteger ()
 void msrTechnicalWithInteger::acceptIn (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrTechnicalWithInteger::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrTechnicalWithInteger>*
@@ -347,9 +379,15 @@ void msrTechnicalWithInteger::acceptIn (basevisitor* v)
         S_msrTechnicalWithInteger elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrTechnicalWithInteger::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitStart (elem);
   }
@@ -358,9 +396,15 @@ void msrTechnicalWithInteger::acceptIn (basevisitor* v)
 void msrTechnicalWithInteger::acceptOut (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrTechnicalWithInteger::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrTechnicalWithInteger>*
@@ -369,9 +413,15 @@ void msrTechnicalWithInteger::acceptOut (basevisitor* v)
         S_msrTechnicalWithInteger elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrTechnicalWithInteger::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitEnd (elem);
   }
@@ -382,16 +432,16 @@ void msrTechnicalWithInteger::browseData (basevisitor* v)
 
 std::string msrTechnicalWithInteger::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "[TechnicalWithInteger"
     ", fTechnicalWithIntegerKind: " << fTechnicalWithIntegerKind <<
     ", fTechnicalWithIntegerValue: " <<  fTechnicalWithIntegerValue <<
     ", fTechnicalWithIntegerPlacementKind: " << fTechnicalWithIntegerPlacementKind <<
     ']';
 
-  return s.str ();
+  return ss.str ();
 }
 
 void msrTechnicalWithInteger::print (std::ostream& os) const
@@ -469,9 +519,15 @@ msrTechnicalWithFloat::~msrTechnicalWithFloat ()
 void msrTechnicalWithFloat::acceptIn (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrTechnicalWithFloat::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrTechnicalWithFloat>*
@@ -480,9 +536,15 @@ void msrTechnicalWithFloat::acceptIn (basevisitor* v)
         S_msrTechnicalWithFloat elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrTechnicalWithFloat::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitStart (elem);
   }
@@ -491,9 +553,15 @@ void msrTechnicalWithFloat::acceptIn (basevisitor* v)
 void msrTechnicalWithFloat::acceptOut (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrTechnicalWithFloat::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrTechnicalWithFloat>*
@@ -502,9 +570,15 @@ void msrTechnicalWithFloat::acceptOut (basevisitor* v)
         S_msrTechnicalWithFloat elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrTechnicalWithFloat::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitEnd (elem);
   }
@@ -515,16 +589,16 @@ void msrTechnicalWithFloat::browseData (basevisitor* v)
 
 std::string msrTechnicalWithFloat::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "TechnicalWithFloat" <<
     ", fTechnicalWithFloatKind: " << fTechnicalWithFloatKind <<
     ", fTechnicalWithFloatValue :'" << fTechnicalWithFloatValue << '\'' <<
     ", fTechnicalWithFloatPlacementKind: " << fTechnicalWithFloatPlacementKind <<
     ']';
 
-  return s.str ();
+  return ss.str ();
 }
 
 void msrTechnicalWithFloat::print (std::ostream& os) const
@@ -608,9 +682,15 @@ msrTechnicalWithString::~msrTechnicalWithString ()
 void msrTechnicalWithString::acceptIn (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrTechnicalWithString::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrTechnicalWithString>*
@@ -619,9 +699,15 @@ void msrTechnicalWithString::acceptIn (basevisitor* v)
         S_msrTechnicalWithString elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrTechnicalWithString::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitStart (elem);
   }
@@ -630,9 +716,15 @@ void msrTechnicalWithString::acceptIn (basevisitor* v)
 void msrTechnicalWithString::acceptOut (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrTechnicalWithString::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrTechnicalWithString>*
@@ -641,9 +733,15 @@ void msrTechnicalWithString::acceptOut (basevisitor* v)
         S_msrTechnicalWithString elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrTechnicalWithString::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitEnd (elem);
   }
@@ -654,9 +752,9 @@ void msrTechnicalWithString::browseData (basevisitor* v)
 
 std::string msrTechnicalWithString::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "[TechnicalWithString" <<
     ", fTechnicalWithStringKind: " << fTechnicalWithStringKind <<
     ", fTechnicalWithStringTypeKind: " << fTechnicalWithStringTypeKind <<
@@ -665,7 +763,7 @@ std::string msrTechnicalWithString::asString () const
     ", line " << fInputLineNumber <<
     ']';
 
-  return s.str ();
+  return ss.str ();
 }
 
 void msrTechnicalWithString::print (std::ostream& os) const

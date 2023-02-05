@@ -17,8 +17,6 @@
 
 #include "mfBool.h"
 
-#include "oahEarlyOptions.h"
-
 #include "mfLanguages.h"
 
 #include "mfWaeHandlersDutch.h"
@@ -27,6 +25,8 @@
 #include "mfWaeHandlersGerman.h"
 #include "mfWaeHandlersItalian.h"
 #include "mfWaeHandlersSpanish.h"
+
+#include "oahEarlyOptions.h"
 
 #include "oahWae.h"
 
@@ -52,9 +52,9 @@ mfLanguageKind mfLanguageKindFromString (const std::string& theString)
 
   if (it == gGlobalMusicFormatsLanguageKindsMap.end ()) {
     // no, keywords language kind is unknown in the map
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "MusicFormats language kind '" << theString <<
       "' is unknown" <<
       std::endl <<
@@ -65,12 +65,12 @@ mfLanguageKind mfLanguageKindFromString (const std::string& theString)
 
     ++gIndenter;
 
-    s <<
+    ss <<
       availableMusicFormatsLanguageKinds (K_MF_NAMES_LIST_MAX_LENGTH);
 
     --gIndenter;
 
-    oahError (s.str ());
+    oahError (ss.str ());
   }
 
   result = (*it).second;
@@ -146,7 +146,7 @@ std::ostream& operator << (std::ostream& os, const mfLanguageKind& elt)
 
 std::string availableMusicFormatsLanguageKinds (size_t namesListMaxLength)
 {
-  std::stringstream s;
+  std::stringstream ss;
 
   size_t
     mfLanguageKindsMapSize =
@@ -170,26 +170,26 @@ std::string availableMusicFormatsLanguageKinds (size_t namesListMaxLength)
 
       cumulatedLength += theString.size ();
       if (cumulatedLength >= namesListMaxLength) {
-        s << std::endl << gIndenter.getSpacer ();
+        ss << std::endl << gIndenter.getSpacer ();
         cumulatedLength = 0;
         break;
       }
 
       if (count == 1) {
-        s << gIndenter.getSpacer ();
+        ss << gIndenter.getSpacer ();
       }
-      s << theString;
+      ss << theString;
 
       if (count == nextToLast) {
-        s << " and ";
+        ss << " and ";
       }
       else if (count != mfLanguageKindsMapSize) {
-        s << ", ";
+        ss << ", ";
       }
     } // for
   }
 
-  return s.str ();
+  return ss.str ();
 }
 
 //______________________________________________________________________________
@@ -269,11 +269,17 @@ void initializeMusicFormatsLanguages ()
       gGlobalOahEarlyOptions.getEarlyTracingOah ()
         &&
       ! gGlobalOahEarlyOptions.getEarlyQuietOption ()
-      ) {
-      gLogStream <<
+    ) {
+	  	std::stringstream ss;
+
+      ss <<
         "Initializing MusicFormats languages" <<
         std::endl;
-  }
+
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
+    }
 #endif
 
     // keywords languages handling

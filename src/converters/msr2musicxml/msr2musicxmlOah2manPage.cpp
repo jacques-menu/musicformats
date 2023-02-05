@@ -9,10 +9,6 @@
   https://github.com/jacques-menu/musicformats
 */
 
-//#include <iomanip>      // std::setw, std::setprecision, ...
-//#include <cmath>
-//#include <string>
-
 #include <regex>
 
 #include "msr2musicxmlOah2manPage.h"

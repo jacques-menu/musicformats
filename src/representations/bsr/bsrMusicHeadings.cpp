@@ -16,6 +16,7 @@
 #include "bsrMusicHeadings.h"
 
 #include "oahOah.h"
+#include "oahEarlyOptions.h"
 
 #include "bsrOah.h"
 #include "brailleGenerationOah.h"
@@ -87,9 +88,16 @@ void bsrMusicHeading::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
+      "% --> End visiting bsrTranscriptionNotesElement" <<
       "% ==> bsrMusicHeading::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -100,9 +108,15 @@ void bsrMusicHeading::acceptIn (basevisitor* v)
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching bsrMusicHeading::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
         p->visitStart (elem);
@@ -113,9 +127,16 @@ void bsrMusicHeading::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
+      "% --> End visiting bsrTranscriptionNotesElement" <<
       "% ==> bsrMusicHeading::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -126,9 +147,15 @@ void bsrMusicHeading::acceptOut (basevisitor* v)
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching bsrMusicHeading::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
         p->visitEnd (elem);
@@ -139,9 +166,16 @@ void bsrMusicHeading::browseData (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
+      "% --> End visiting bsrTranscriptionNotesElement" <<
       "% ==> bsrScore::browseData ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -165,80 +199,87 @@ void bsrMusicHeading::browseData (basevisitor* v)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
+      "% --> End visiting bsrTranscriptionNotesElement" <<
       "% <== bsrScore::browseData ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 }
 
 std::string bsrMusicHeading::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "MusicHeading" <<
     ", fMusicHeadingTempo: ";
 
   if (fMusicHeadingTempo) {
-    s <<
+    ss <<
       fMusicHeadingTempo->asShortString ();
   }
   else {
-    s <<
+    ss <<
       "[NONE]";
   }
 
-  s <<
+  ss <<
       ", fMusicHeadingTempo: ";
 
   if (fMusicHeadingTempo) {
-    s <<
+    ss <<
       fMusicHeadingTempo->asShortString ();
   }
   else {
-    s <<
+    ss <<
       "[NONE]";
   }
 
-  s <<
+  ss <<
       ", fMusicHeadingTimeSignatureSignature: ";
 
   if (fMusicHeadingTimeSignatureSignature) {
-    s <<
+    ss <<
       fMusicHeadingTimeSignatureSignature->asShortString ();
   }
   else {
-    s <<
+    ss <<
       "[NONE]";
   }
 
-  s <<
+  ss <<
     ", line " << fInputLineNumber;
 
-  return s.str ();
+  return ss.str ();
 }
 
 std::string bsrMusicHeading::asDebugString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
   if (fMusicHeadingTempo) {
-    s <<
+    ss <<
       fMusicHeadingTempo->asDebugString ();
   }
 
   if (fMusicHeadingTempo) {
-    s <<
+    ss <<
       fMusicHeadingTempo->asDebugString ();
   }
 
   if (fMusicHeadingTimeSignatureSignature) {
-    s <<
+    ss <<
       fMusicHeadingTimeSignatureSignature->asDebugString ();
   }
 
-  return s.str ();
+  return ss.str ();
 }
 
 void bsrMusicHeading::print (std::ostream& os) const
@@ -326,7 +367,7 @@ std::ostream& operator << (std::ostream& os, const S_bsrMusicHeading& elt)
   else {
     os << "[NONE]" << std::endl;
   }
-  
+
   return os;
 }
 

@@ -50,9 +50,15 @@ S_mfcConverterComponent createMsdl2musicxmlConverterComponent ()
 
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {
-      gLogStream <<
+	  	std::stringstream ss;
+
+      ss <<
         "Creating the msdl2musicxml component" <<
         std::endl;
+
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif
 

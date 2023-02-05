@@ -95,13 +95,21 @@ class EXP mfOutputIndenter
     // current offset
     std::string           fetchCurrentOffset ();
 
-    // indent a multiline 'R"(...)"' std::string
+    // indent a multi-line 'R"(...)"' std::string
     void                  indentMultiLineString (
                             const std::string& theString,
                             std::ostream&      os);
 
     std::string           indentMultiLineStringWithCurrentOffset (
                             const std::string& theString);
+
+    // print a multi-line string in a table with leading spaces
+    // from the second line on
+    void                  printMultiLineStringInATable (
+                            const std::string& theString,
+                            const int          columnStart,
+                            const int          columnWidth,
+                            std::ostream&      os);
 
     // global variables for general use
     static mfOutputIndenter
@@ -333,6 +341,15 @@ EXP mfIndentedStringStream& operator << (
 
 EXP mfIndentedStringStream& operator << (
   mfIndentedStringStream& iss, const int& elt);
+
+EXP mfIndentedStringStream& operator << (
+  mfIndentedStringStream& iss, const unsigned int& elt);
+
+EXP mfIndentedStringStream& operator << (
+  mfIndentedStringStream& iss, const long int& elt);
+
+EXP mfIndentedStringStream& operator << (
+  mfIndentedStringStream& iss, const unsigned long int& elt);
 
 EXP mfIndentedStringStream& operator << (
   mfIndentedStringStream& iss, const float& elt);

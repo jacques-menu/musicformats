@@ -172,10 +172,16 @@ msrTimeSignatureItem::msrTimeSignatureItem (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTimeSignatures ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Creating time signature item" <<
       ", line: " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 }
@@ -221,7 +227,9 @@ void msrTimeSignatureItem::appendBeatsNumber (int beatsNumber)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTimeSignatures ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Appending beat number '" <<
       beatsNumber <<
       "' to time signature item '" <<
@@ -240,7 +248,9 @@ void msrTimeSignatureItem::setTimeSignatureBeatValue (int timeSignatureBeatValue
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTimeSignatures ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Setting beat value to '" <<
       timeSignatureBeatValue <<
       "' in time signature item '" <<
@@ -268,9 +278,15 @@ int msrTimeSignatureItem::getTimeSignatureBeatsNumber () const
 void msrTimeSignatureItem::acceptIn (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrTimeSignatureItem::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrTimeSignatureItem>*
@@ -279,9 +295,15 @@ void msrTimeSignatureItem::acceptIn (basevisitor* v)
         S_msrTimeSignatureItem elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrTimeSignatureItem::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitStart (elem);
   }
@@ -290,9 +312,15 @@ void msrTimeSignatureItem::acceptIn (basevisitor* v)
 void msrTimeSignatureItem::acceptOut (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrTimeSignatureItem::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrTimeSignatureItem>*
@@ -301,9 +329,15 @@ void msrTimeSignatureItem::acceptOut (basevisitor* v)
         S_msrTimeSignatureItem elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrTimeSignatureItem::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitEnd (elem);
   }
@@ -314,9 +348,9 @@ void msrTimeSignatureItem::browseData (basevisitor* v)
 
 std::string msrTimeSignatureItem::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "[TimeSignatureItem ";
 
   size_t vectorSize =
@@ -326,50 +360,50 @@ std::string msrTimeSignatureItem::asString () const
     case 0:
     /* JMI
       msrInternalError (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         fInputLineNumber,
         __FILE__, __LINE__,
         "time signature item beats numbers vector is empty");
         */
-      s <<
+      ss <<
         "beats numbers: [NONE]";
       break;
 
     case 1:
-      s <<
+      ss <<
         fTimeSignatureBeatsNumbersVector [0] << '/' << fTimeSignatureBeatValue;
       break;
 
     default:
-      s <<
+      ss <<
         "beats numbers: ";
 
       for (size_t i = 0; i < vectorSize; ++i) {
-        s <<
+        ss <<
           fTimeSignatureBeatsNumbersVector [i];
 
         if (i != vectorSize - 1) {
-          s <<
+          ss <<
             ' ';
         }
       } // for
 
-      s <<
+      ss <<
         ", beat value: " << fTimeSignatureBeatValue;
   } // switch
 
-  s <<
+  ss <<
     ", line " << fInputLineNumber <<
     ']';
 
-  return s.str ();
+  return ss.str ();
 }
 
 std::string msrTimeSignatureItem::asShortStringForMeasuresSlices () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-//   s <<
+//   ss <<
 //     "TimeSignatureItem ";
 
   size_t vectorSize =
@@ -379,44 +413,44 @@ std::string msrTimeSignatureItem::asShortStringForMeasuresSlices () const
     case 0:
     /* JMI
       msrInternalError (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         fInputLineNumber,
         __FILE__, __LINE__,
         "time signature item beats numbers vector is empty");
         */
-      s <<
+      ss <<
         "beats numbers: [NONE]";
       break;
 
     case 1:
-      s <<
+      ss <<
         fTimeSignatureBeatsNumbersVector [0] << '/' << fTimeSignatureBeatValue;
       break;
 
     default:
-      s <<
+      ss <<
         "beats numbers: ";
 
       for (size_t i = 0; i < vectorSize; ++i) {
-        s <<
+        ss <<
           fTimeSignatureBeatsNumbersVector [i];
 
         if (i != vectorSize - 1) {
-          s <<
+          ss <<
             ' ';
         }
       } // for
 
-      s <<
+      ss <<
         ", beat value: " << fTimeSignatureBeatValue;
   } // switch
 
 /* JMI
-  s <<
+  ss <<
     ", line " << fInputLineNumber;
 */
 
-  return s.str ();
+  return ss.str ();
 }
 
 void msrTimeSignatureItem::print (std::ostream& os) const
@@ -824,11 +858,17 @@ S_msrTimeSignature msrTimeSignature::createTimeFromString (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceNotes ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Creating time from string \"" <<
       timeString <<
       "', line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -844,10 +884,16 @@ S_msrTimeSignature msrTimeSignature::createTimeFromString (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "regularExpression = " <<
       regularExpression <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -860,7 +906,9 @@ S_msrTimeSignature msrTimeSignature::createTimeFromString (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "There are " << smSize << " matches" <<
       " for time string \"" << timeString <<
       "\" with std::regex \"" << regularExpression <<
@@ -883,13 +931,13 @@ S_msrTimeSignature msrTimeSignature::createTimeFromString (
   // handling timeString à la LilyPond, such as "3/4"
 
   if (smSize != 3) {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "timeString \"" << timeString <<
       "\" is ill-formed";
 
-    oahError (s.str ());
+    oahError (ss.str ());
   }
 
   std::string
@@ -898,7 +946,9 @@ S_msrTimeSignature msrTimeSignature::createTimeFromString (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "beatsNumber = \"" <<
       beatsNumber <<
       "\"" <<
@@ -908,32 +958,42 @@ S_msrTimeSignature msrTimeSignature::createTimeFromString (
       beatsDuration <<
       "\"" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
     int integerBeatsNumber;
     {
-      std::stringstream s;
-      s << beatsNumber;
-      s >> integerBeatsNumber;
+      std::stringstream ss;
+      ss << beatsNumber;
+      ss >> integerBeatsNumber;
     }
 
     int integerValue;
     {
-      std::stringstream s;
-      s << beatsDuration;
-      s >> integerValue;
+      std::stringstream ss;
+      ss << beatsDuration;
+      ss >> integerValue;
     }
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "integerBeatsNumber = " <<
       integerBeatsNumber <<
       std::endl <<
       "integerValue = " <<
       integerValue <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -1000,7 +1060,9 @@ void msrTimeSignature::appendTimeSignatureItem (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTimeSignatures ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Append item '" <<
       timeSignatureItem->asString () <<
       "' to time '" <<
@@ -1079,7 +1141,7 @@ Rational msrTimeSignature::wholeNotesDurationPerMeasure () const
 
   else {
     msrInternalError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       fInputLineNumber,
       __FILE__, __LINE__,
       "time signature items vector is empty");
@@ -1092,9 +1154,15 @@ Rational msrTimeSignature::wholeNotesDurationPerMeasure () const
 void msrTimeSignature::acceptIn (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrTimeSignature::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrTimeSignature>*
@@ -1103,9 +1171,15 @@ void msrTimeSignature::acceptIn (basevisitor* v)
         S_msrTimeSignature elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrTimeSignature::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitStart (elem);
   }
@@ -1114,9 +1188,15 @@ void msrTimeSignature::acceptIn (basevisitor* v)
 void msrTimeSignature::acceptOut (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrTimeSignature::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrTimeSignature>*
@@ -1125,9 +1205,15 @@ void msrTimeSignature::acceptOut (basevisitor* v)
         S_msrTimeSignature elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrTimeSignature::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitEnd (elem);
   }
@@ -1138,9 +1224,9 @@ void msrTimeSignature::browseData (basevisitor* v)
 
 std::string msrTimeSignature::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "[Time" <<
     ", timeSignatureSymbolKind: " <<
     msrTimeSignatureSymbolKindAsString (fTimeSignatureSymbolKind) <<
@@ -1154,7 +1240,7 @@ std::string msrTimeSignature::asString () const
     ", line " << fInputLineNumber;
 
   if (fTimeSignatureItemsVector.size ()) {
-    s <<
+    ss <<
       ", ";
 
     std::vector<S_msrTimeSignatureItem>::const_iterator
@@ -1163,32 +1249,32 @@ std::string msrTimeSignature::asString () const
       i      = iBegin;
 
     for ( ; ; ) {
-      s << (*i)->asString ();
+      ss << (*i)->asString ();
       if (++i == iEnd) break;
-      s << ", ";
+      ss << ", ";
     } // for
   }
   else {
     if (fTimeSignatureSymbolKind != msrTimeSignatureSymbolKind::kTimeSignatureSymbolSenzaMisura) {
       msrInternalError (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         fInputLineNumber,
         __FILE__, __LINE__,
         "time  items vector is empty");
     }
   }
 
-  s << ']';
+  ss << ']';
 
-  return s.str ();
+  return ss.str ();
 }
 
 std::string msrTimeSignature::asShortString () const
 {
   /* JMI
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "TimeSignature, " <<
     ", timeSignatureSymbolKind: " <<
     msrTimeSignatureSymbolKindAsString (fTimeSignatureSymbolKind) <<
@@ -1199,7 +1285,7 @@ std::string msrTimeSignature::asShortString () const
       fTimeSignatureItemsVector.size (), "item", "items") <<
     ", line " << fInputLineNumber;
 
-  return s.str ();
+  return ss.str ();
   */
 
   return asString ();
@@ -1207,9 +1293,9 @@ std::string msrTimeSignature::asShortString () const
 
 std::string msrTimeSignature::asShortStringForMeasuresSlices () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     '[';
 
 /* JMI
@@ -1226,7 +1312,7 @@ std::string msrTimeSignature::asShortStringForMeasuresSlices () const
 */
 
   if (fTimeSignatureItemsVector.size ()) {
-//     s <<
+//     ss <<
 //       ", ";
 
     std::vector<S_msrTimeSignatureItem>::const_iterator
@@ -1237,24 +1323,24 @@ std::string msrTimeSignature::asShortStringForMeasuresSlices () const
     for ( ; ; ) {
       S_msrTimeSignatureItem timeSignatureItem = (*i);
 
-      s << timeSignatureItem->asShortStringForMeasuresSlices ();
+      ss << timeSignatureItem->asShortStringForMeasuresSlices ();
       if (++i == iEnd) break;
-      s << ", ";
+      ss << ", ";
     } // for
   }
   else {
     if (fTimeSignatureSymbolKind != msrTimeSignatureSymbolKind::kTimeSignatureSymbolSenzaMisura) {
       msrInternalError (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         fInputLineNumber,
         __FILE__, __LINE__,
         "time  items vector is empty");
     }
   }
 
-  s << ']';
+  ss << ']';
 
-  return s.str ();
+  return ss.str ();
 }
 
 void msrTimeSignature::print (std::ostream& os) const

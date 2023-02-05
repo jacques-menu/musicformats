@@ -17,10 +17,10 @@
 #include "mfStaticSettings.h"
 
 #include "mfAssert.h"
-
 #include "mfRational.h"
-
 #include "mfServices.h"
+
+#include "oahEarlyOptions.h"
 
 #include "msrWae.h"
 
@@ -79,25 +79,31 @@ Rational::Rational (const std::string &theString)
 
 #ifdef MF_TRACING_IS_ENABLED
     if (false) {
-      gLogStream <<
+	  	std::stringstream ss;
+
+      ss <<
         "--> numerator = \"" << numerator << "\", " <<
         "--> denominator = \"" << denominator << "\"" <<
         std::endl;
+
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif
 
     // extract the numerator
     {
-      std::stringstream s;
-      s << numerator;
-      s >> fNumerator;
+      std::stringstream ss;
+      ss << numerator;
+      ss >> fNumerator;
     }
 
     // extract the denominator
     {
-      std::stringstream s;
-      s << denominator;
-      s >> fDenominator;
+      std::stringstream ss;
+      ss << denominator;
+      ss >> fDenominator;
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
@@ -110,18 +116,18 @@ Rational::Rational (const std::string &theString)
   }
 
   else {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "Rational std::string '" << theString <<
       "' is ill-formed";
 
     msrError (
 //    msrWarning ( //  JMI
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       0, // JMI inputLineNumber, ??? v0.9.66
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 
   rationalise ();
@@ -393,20 +399,20 @@ Rational::operator int () const
 
 std::string Rational::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s << '[' << fNumerator << '/' << fDenominator << ']';
+  ss << '[' << fNumerator << '/' << fDenominator << ']';
 
-  return s.str ();
+  return ss.str ();
 }
 
 std::string Rational::asFractionString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s << fNumerator << '/' << fDenominator;
+  ss << fNumerator << '/' << fDenominator;
 
-  return s.str ();
+  return ss.str ();
 }
 
 void Rational::print (std::ostream& os) const

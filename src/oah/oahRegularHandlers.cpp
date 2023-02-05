@@ -63,11 +63,17 @@ oahRegularHandler::oahRegularHandler (
   // create the insider handler
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Creating the insider handler for \"" <<
       fHandlerHeader <<
       "\"" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -85,11 +91,17 @@ void oahRegularHandler::initializeOahRegularHandler ()
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Initializing the regular handler \"" <<
       fHandlerHeader <<
       "\"" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -136,13 +148,19 @@ void oahRegularHandler::appendGroupToRegulalHandler (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Appending group \"" <<
       group->getGroupHeader () <<
       "\" to regular handler \"" <<
       fHandlerHeader <<
       "\"" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -175,13 +193,19 @@ void oahRegularHandler::prependGroupToRegularHandler (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Prepending group \"" <<
       group->getGroupHeader () <<
       "\" to regular handler \"" <<
       fHandlerHeader <<
       "\"" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -213,8 +237,11 @@ void oahRegularHandler::registerAtomInRegularSubgroup (
 
   if (insiderElement) {
     // atomName is the name of an option
+#ifdef MF_TRACING_IS_ENABLED
     if (false) { // JMI
-      gLogStream <<
+			std::stringstream ss;
+
+			ss <<
         "===> insiderElement:" <<
         std::endl;
       ++gIndenter;
@@ -222,14 +249,19 @@ void oahRegularHandler::registerAtomInRegularSubgroup (
         insiderElement <<
         std::endl;
       --gIndenter;
-    }
+
+			gWaeHandler->waeTrace (
+				__FILE__, __LINE__,
+				ss.str ());
+		}
+#endif
 
     if (
       // atom?
       S_oahAtom
         atom =
           dynamic_cast<oahAtom*>(&(*insiderElement))
-      ) {
+		) {
         // append atom to subgroup, thus modify its fUpLinkToSubGroup
         // that previous linked it to an insider handler subgroup
         subGroup->
@@ -244,9 +276,9 @@ void oahRegularHandler::registerAtomInRegularSubgroup (
   }
 
   else {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "atom name \"" << atomName <<
       "\" cannot be registered in OAH regular handler \"" <<
       fHandlerHeader <<
@@ -254,20 +286,20 @@ void oahRegularHandler::registerAtomInRegularSubgroup (
       fInsiderHandler->getHandlerHeader ()<<
       "\"";
 
- // JMI   oahError (s.str ());
-//     oahWarning (s.str ()); // JMI TEMP v0.9.65
+ // JMI   oahError (ss.str ());
+//     oahWarning (ss.str ()); // JMI TEMP v0.9.65
   }
 }
 
 //______________________________________________________________________________
 std::string oahRegularHandler::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "oahRegularHandler \"" << fHandlerHeader; // JMI v0.9.65
 
-  return s.str ();
+  return ss.str ();
 }
 
 void oahRegularHandler::print (std::ostream& os) const
@@ -379,7 +411,7 @@ void initializeOahOptionalValuesStyleKindsMap ()
 
 std::string availableOahOptionalValuesStyleKinds (size_t namesListMaxLength)
 {
-  std::stringstream s;
+  std::stringstream ss;
 
   size_t
     optionalValuesStyleKindsMapSize =
@@ -405,24 +437,24 @@ std::string availableOahOptionalValuesStyleKinds (size_t namesListMaxLength)
 
       cumulatedLength += theString.size ();
       if (cumulatedLength >= namesListMaxLength) {
-        s << std::endl << gIndenter.getSpacer ();
+        ss << std::endl << gIndenter.getSpacer ();
         cumulatedLength = 0;
       }
 
       if (count == 1) {
-        s << gIndenter.getSpacer ();
+        ss << gIndenter.getSpacer ();
       }
-      s << theString;
+      ss << theString;
 
       if (count == nextToLast) {
-        s << " and ";
+        ss << " and ";
       }
       else if (count != optionalValuesStyleKindsMapSize) {
-        s << ", ";
+        ss << ", ";
       }
     } // for
   }
 
-  return s.str ();
+  return ss.str ();
 }
 */

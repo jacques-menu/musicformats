@@ -28,6 +28,7 @@
 #include "msrGraceNotesGroups.h"
 
 #include "oahOah.h"
+#include "oahEarlyOptions.h"
 
 #include "msrOah.h"
 
@@ -86,11 +87,17 @@ S_msrGraceNotesGroup msrGraceNotesGroup::createGraceNotesGroupNewbornClone ()
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceGraceNotes ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Creating a newborn clone of grace notes group '" <<
       asShortString () <<
       "'" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -163,11 +170,17 @@ S_msrGraceNotesGroup msrGraceNotesGroup::createSkipGraceNotesGroupClone ()
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceGraceNotes ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Creating a skip clone of grace notes group '" <<
       asShortString () <<
       "'" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -199,11 +212,17 @@ S_msrGraceNotesGroup msrGraceNotesGroup::createSkipGraceNotesGroupClone ()
       // create grace skip note with same duration as note
 #ifdef MF_TRACING_IS_ENABLED
       if (gGlobalTracingOahGroup->getTraceGraceNotes ()) {
-        gLogStream <<
+        std::stringstream ss;
+
+        ss <<
           "Creating a skip grace note" <<
           ", soundingWholeNotes: " << note->getMeasureElementSoundingWholeNotes () <<
           ", displayWholeNotes: " << note->getNoteDisplayWholeNotes () <<
           std::endl;
+
+        gWaeHandler->waeTrace (
+          __FILE__, __LINE__,
+          ss.str ());
       }
 #endif
 
@@ -246,7 +265,7 @@ S_msrGraceNotesGroup msrGraceNotesGroup::createSkipGraceNotesGroupClone ()
 
     else {
       msrInternalError (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         fInputLineNumber,
         __FILE__, __LINE__,
         "grace notes element should be a note or a chord");
@@ -260,7 +279,9 @@ void msrGraceNotesGroup::appendNoteToGraceNotesGroup (const S_msrNote& note)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceGraceNotes ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Appending note " <<
       note->asShortString () <<
       " to grace notes group" <<
@@ -269,6 +290,10 @@ void msrGraceNotesGroup::appendNoteToGraceNotesGroup (const S_msrNote& note)
 //      fGraceNotesGroupUpLinkToVoice->getVoiceName () <<
 //      "\"" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -288,7 +313,9 @@ void msrGraceNotesGroup::appendChordToGraceNotesGroup (const S_msrChord& chord)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceGraceNotes ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Appending chord " <<
       chord->asShortString () <<
       " to grace notes group '" <<
@@ -297,6 +324,10 @@ void msrGraceNotesGroup::appendChordToGraceNotesGroup (const S_msrChord& chord)
 //      fGraceNotesGroupUpLinkToVoice->getVoiceName () <<
 //      "\"" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -311,13 +342,19 @@ S_msrNote msrGraceNotesGroup::removeLastNoteFromGraceNotesGroup (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceGraceNotes ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Removing last note from grace notes group " <<
       asShortString () <<
 //      " in voice \"" <<
 //      fGraceNotesGroupUpLinkToVoice->getVoiceName () <<
 //      "\"" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -331,11 +368,17 @@ S_msrNote msrGraceNotesGroup::removeLastNoteFromGraceNotesGroup (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceGraceNotes ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Removing last note from grace notes '" <<
       asString () <<
       "'" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -349,7 +392,7 @@ S_msrNote msrGraceNotesGroup::removeLastNoteFromGraceNotesGroup (
 
   else {
     msrInternalError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       fInputLineNumber,
       __FILE__, __LINE__,
       "removeLastNoteFromGraceNotesGroup (): grace notes group element should be a note");
@@ -357,13 +400,19 @@ S_msrNote msrGraceNotesGroup::removeLastNoteFromGraceNotesGroup (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceGraceNotes ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "This last note from grace notes '" <<
       asString () <<
       "' turns out to be '" <<
       result->asShortString () <<
       "'" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -378,12 +427,18 @@ void msrGraceNotesGroup::setGraceNotesGroupElementsMeasurePositions (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Setting grace notes group elements' measure positions of " << asString () <<
       " to '" <<
       measurePosition <<
       "'" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -462,9 +517,15 @@ void msrGraceNotesGroup::setGraceNotesGroupElementsMeasurePositions (
 void msrGraceNotesGroup::acceptIn (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrGraceNotesGroup::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrGraceNotesGroup>*
@@ -473,9 +534,15 @@ void msrGraceNotesGroup::acceptIn (basevisitor* v)
         S_msrGraceNotesGroup elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrGraceNotesGroup::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitStart (elem);
   }
@@ -484,9 +551,15 @@ void msrGraceNotesGroup::acceptIn (basevisitor* v)
 void msrGraceNotesGroup::acceptOut (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrGraceNotesGroup::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrGraceNotesGroup>*
@@ -495,9 +568,15 @@ void msrGraceNotesGroup::acceptOut (basevisitor* v)
         S_msrGraceNotesGroup elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrGraceNotesGroup::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitEnd (elem);
   }
@@ -520,9 +599,9 @@ void msrGraceNotesGroup::browseData (basevisitor* v)
 
 std::string msrGraceNotesGroup::asShortString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "[GraceNotesGroup" <<
     ", graceNotesGroupKind: " <<
     msrGraceNotesGroupKindAsString (fGraceNotesGroupKind) <<
@@ -535,24 +614,24 @@ std::string msrGraceNotesGroup::asShortString () const
       iEnd   = fGraceNotesGroupElementsList.end (),
       i      = iBegin;
     for ( ; ; ) {
-      s << (*i)->asShortString ();
+      ss << (*i)->asShortString ();
       if (++i == iEnd) break;
-      s << ", ";
+      ss << ", ";
     } // for
   }
 
-  s <<
+  ss <<
     ", line " << fInputLineNumber <<
     ']';
 
-  return s.str ();
+  return ss.str ();
 }
 
 std::string msrGraceNotesGroup::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "[GraceNotesGroup" <<
     ", graceNotesGroupKind: " <<
     msrGraceNotesGroupKindAsString (fGraceNotesGroupKind) <<
@@ -566,15 +645,15 @@ std::string msrGraceNotesGroup::asString () const
       iEnd   = fGraceNotesGroupElementsList.end (),
       i      = iBegin;
     for ( ; ; ) {
-      s << (*i)->asString ();
+      ss << (*i)->asString ();
       if (++i == iEnd) break;
-      s << ", ";
+      ss << ", ";
     } // for
   }
 
-  s << ']';
+  ss << ']';
 
-  return s.str ();
+  return ss.str ();
 }
 
 void msrGraceNotesGroup::printFull (std::ostream& os) const

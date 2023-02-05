@@ -86,9 +86,9 @@ EXP void mfslOptionsIncompatibilityError (
   const S_oahAtom atom1,
   const S_oahAtom atom2)
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "### MFSL options incompatibility: " <<
     atom1->fetchNamesBetweenQuotes () <<
     " and " <<
@@ -96,7 +96,7 @@ EXP void mfslOptionsIncompatibilityError (
     " are incompatible" <<
     std::endl;
 
-  std::string message = s.str ();
+  std::string message = ss.str ();
 
   if (! gGlobalWaeOahGroup->getDontShowErrors ()) { // JMI
     throw mfslException (message);

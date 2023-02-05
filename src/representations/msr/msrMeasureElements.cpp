@@ -21,8 +21,8 @@
 
 /*
   CAUTION: // JMI v0.9.66
-    if might be necessary for the the following two to be strictly in this order
-    depending on the C++ compiler
+    if might be necessary for the the following two included
+    to be strictly in this order depending on the C++ compiler
 */
 #include "msrMeasureElements.h"
 #include "msrMeasures.h"
@@ -32,6 +32,7 @@
 #include "msrMoments.h"
 
 #include "oahOah.h"
+#include "oahEarlyOptions.h"
 
 #include "msrOah.h"
 
@@ -117,7 +118,9 @@ void msrMeasureElement::setMeasureElementMeasurePosition (
     getMeasureElementUpLinkToMeasure (
       upLinkToMeasure);
 
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Setting measure position of " <<
       asString () <<
       " to '" << measurePosition <<
@@ -131,6 +134,10 @@ void msrMeasureElement::setMeasureElementMeasurePosition (
       context <<
       "\"" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -195,7 +202,9 @@ void msrMeasureElement::setMeasureElementVoicePosition (
     getMeasureElementUpLinkToMeasure (
       upLinkToMeasure);
 
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Setting voice position of " <<
       asString () <<
       " to '" << voicePosition <<
@@ -205,6 +214,10 @@ void msrMeasureElement::setMeasureElementVoicePosition (
       context <<
       "\"" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -224,7 +237,9 @@ void msrMeasureElement::setMeasureElementVoicePosition (
     getMeasureElementUpLinkToMeasure (
       upLinkToMeasure);
 
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Setting measure element voice position of " <<
       asString () <<
       " to '" << voicePosition <<
@@ -234,6 +249,10 @@ void msrMeasureElement::setMeasureElementVoicePosition (
       context <<
       "\"" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -301,9 +320,15 @@ void msrMeasureElement::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrMeasureElement::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -314,9 +339,15 @@ void msrMeasureElement::acceptIn (basevisitor* v)
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrMeasureElement::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
         p->visitStart (elem);
@@ -327,9 +358,15 @@ void msrMeasureElement::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrMeasureElement::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -340,9 +377,15 @@ void msrMeasureElement::acceptOut (basevisitor* v)
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrMeasureElement::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
         p->visitEnd (elem);

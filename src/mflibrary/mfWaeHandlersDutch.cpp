@@ -32,12 +32,12 @@ mfWaeHandlerDutch::~mfWaeHandlerDutch ()
 
 std::string mfWaeHandlerDutch::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "MusicFormats warning and error handler for dutch";
 
-  return s.str ();
+  return ss.str ();
 }
 
 void mfWaeHandlerDutch::print (std::ostream& os) const

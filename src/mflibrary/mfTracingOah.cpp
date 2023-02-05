@@ -65,7 +65,9 @@ tracingOahGroup::~tracingOahGroup ()
 void tracingOahGroup::createTheTracePrefixes (const S_oahHandler& handler)
 {
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Creating the OAH trace prefixes" <<
       std::endl;
   }
@@ -178,7 +180,7 @@ R"()",
       oahBooleanAtom::create (
         K_TRACE_COMPONENTS_OPTION_LONG_NAME, K_TRACE_COMPONENTS_OPTION_SHORT_NAME,
 R"(Write a trace of components handling to standard error.)",
-        "earlyTraceComponentsRef",
+        "fEarlyTraceComponentsRef",
         gGlobalOahEarlyOptions.getEarlyTraceComponentsRef ()));
 
   // passes
@@ -187,7 +189,7 @@ R"(Write a trace of components handling to standard error.)",
     oahBooleanAtom::create (
       K_TRACE_PASSES_OPTION_LONG_NAME, K_TRACE_PASSES_OPTION_SHORT_NAME,
 R"(Write a trace of the passes to standard error.)",
-      "earlyTracePassesRef",
+      "fEarlyTracePassesRef",
       gGlobalOahEarlyOptions.getEarlyTracePassesRef ());
 
   subGroup->
@@ -220,7 +222,7 @@ The default is 'DEFAULT_VALUE'.)",
       mfPassIDKindAsString (
         mfPassIDKindDefaultValue)),
     "PASSID",
-    "earlyTraceOnlyPassRef",
+    "fEarlyTraceOnlyPassRef",
     gGlobalOahEarlyOptions.getEarlyTraceOnlyPassRef ());
 
   subGroup->
@@ -2626,9 +2628,15 @@ void tracingOahGroup::checkGroupOptionsConsistency ()
 void tracingOahGroup::acceptIn (basevisitor* v)
 {
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       ".\\\" ==> tracingOahGroup::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_tracingOahGroup>*
@@ -2637,9 +2645,15 @@ void tracingOahGroup::acceptIn (basevisitor* v)
         S_tracingOahGroup elem = this;
 
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             ".\\\" ==> Launching tracingOahGroup::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitStart (elem);
   }
@@ -2648,9 +2662,15 @@ void tracingOahGroup::acceptIn (basevisitor* v)
 void tracingOahGroup::acceptOut (basevisitor* v)
 {
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       ".\\\" ==> tracingOahGroup::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_tracingOahGroup>*
@@ -2659,9 +2679,15 @@ void tracingOahGroup::acceptOut (basevisitor* v)
         S_tracingOahGroup elem = this;
 
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             ".\\\" ==> Launching tracingOahGroup::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitEnd (elem);
   }
@@ -2670,9 +2696,15 @@ void tracingOahGroup::acceptOut (basevisitor* v)
 void tracingOahGroup::browseData (basevisitor* v)
 {
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       ".\\\" ==> tracingOahGroup::browseData ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   oahGroup::browseData (v);
@@ -3194,7 +3226,9 @@ S_tracingOahGroup createGlobalTracingOahGroup (
   const S_oahHandler& handler)
 {
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Creating global trace OAH group" <<
       std::endl;
   }

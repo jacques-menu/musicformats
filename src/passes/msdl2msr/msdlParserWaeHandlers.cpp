@@ -44,12 +44,12 @@ msdlParserWaeHandler::~msdlParserWaeHandler ()
 
 std::string msdlParserWaeHandler::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "MSDL WAE lexical handler";
 
-  return s.str ();
+  return ss.str ();
 }
 
 void msdlParserWaeHandler::print (std::ostream& os) const

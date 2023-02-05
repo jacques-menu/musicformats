@@ -18,6 +18,8 @@
 #include "msrSpanners.h"
 
 #include "oahOah.h"
+#include "oahEarlyOptions.h"
+
 #include "msrOah.h"
 
 
@@ -120,9 +122,15 @@ void msrSpanner::setSpannerSideLinkToOtherEnd (
 void msrSpanner::acceptIn (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrSpanner::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrSpanner>*
@@ -131,9 +139,15 @@ void msrSpanner::acceptIn (basevisitor* v)
         S_msrSpanner elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrSpanner::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitStart (elem);
   }
@@ -142,9 +156,15 @@ void msrSpanner::acceptIn (basevisitor* v)
 void msrSpanner::acceptOut (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrSpanner::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrSpanner>*
@@ -153,9 +173,15 @@ void msrSpanner::acceptOut (basevisitor* v)
         S_msrSpanner elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrSpanner::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitEnd (elem);
   }
@@ -189,9 +215,9 @@ std::ostream& operator << (std::ostream& os, const msrSpannerKind& elt)
 
 std::string msrSpanner::asShortString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "[Spanner" <<
     ", fSpannerNumber: " << fSpannerNumber <<
     ", fSpannerKind: " << fSpannerKind <<
@@ -200,7 +226,7 @@ std::string msrSpanner::asShortString () const
     ", line " << fInputLineNumber <<
     ']';
 
-  return s.str ();
+  return ss.str ();
 }
 
 void msrSpanner::print (std::ostream& os) const

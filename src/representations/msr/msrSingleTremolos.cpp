@@ -17,6 +17,7 @@
 #include "msrSingleTremolos.h"
 
 #include "oahOah.h"
+#include "oahEarlyOptions.h"
 
 #include "msrOah.h"
 
@@ -61,9 +62,15 @@ std::string msrSingleTremolo::singleTremoloPlacementKindAsString () const
 void msrSingleTremolo::acceptIn (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrSingleTremolo::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrSingleTremolo>*
@@ -72,9 +79,15 @@ void msrSingleTremolo::acceptIn (basevisitor* v)
         S_msrSingleTremolo elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrSingleTremolo::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitStart (elem);
   }
@@ -83,9 +96,15 @@ void msrSingleTremolo::acceptIn (basevisitor* v)
 void msrSingleTremolo::acceptOut (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrSingleTremolo::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrSingleTremolo>*
@@ -94,9 +113,15 @@ void msrSingleTremolo::acceptOut (basevisitor* v)
         S_msrSingleTremolo elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrSingleTremolo::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitEnd (elem);
   }
@@ -107,15 +132,15 @@ void msrSingleTremolo::browseData (basevisitor* v)
 
 std::string msrSingleTremolo::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "SingleTremolo" <<
     ", line " << fInputLineNumber <<
     ", " << fSingleTremoloMarksNumber << " marks" <<
     ", placement" << ": " << singleTremoloPlacementKindAsString ();
 
-  return s.str ();
+  return ss.str ();
 }
 
 void msrSingleTremolo::print (std::ostream& os) const

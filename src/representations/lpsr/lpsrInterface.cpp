@@ -51,7 +51,7 @@ void displayLpsrScore (
   // start the clock
   clock_t startClock = clock ();
 
-  setGlobalCurrentPassIDKind (mfPassIDKind::kMfPassID_Optional);
+  setGlobalCurrentPassIDKind (mfPassIDKind::kMfPassID_OptionalPass);
 
   std::string separator =
     "%--------------------------------------------------------------";
@@ -75,7 +75,7 @@ void displayLpsrScore (
   clock_t endClock = clock ();
 
   mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
-		mfPassIDKind::kMfPassID_0,
+		mfPassIDKind::kMfPassID_OptionalPass,
     gWaeHandler->displayTheLPSRAsText (),
     mfTimingItemKind::kOptional,
     startClock,
@@ -100,7 +100,7 @@ void displayLpsrScoreFull (
   // start the clock
   clock_t startClock = clock ();
 
-  setGlobalCurrentPassIDKind (mfPassIDKind::kMfPassID_Optional);
+  setGlobalCurrentPassIDKind (mfPassIDKind::kMfPassID_OptionalPass);
 
   std::string separator =
     "%--------------------------------------------------------------";
@@ -126,7 +126,7 @@ void displayLpsrScoreFull (
   clock_t endClock = clock ();
 
   mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
-		mfPassIDKind::kMfPassID_0,
+		mfPassIDKind::kMfPassID_OptionalPass,
     gWaeHandler->displayTheLPSRAsText ()
       + ", " +
     gWaeHandler->fullVersion (),
@@ -140,16 +140,16 @@ void displayLpsrScoreFull (
 
 //   if (gIndenter != 0) {
 //     if (! gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
-//       std::stringstream s;
+//       std::stringstream ss;
 //
-//       s <<
+//       ss <<
 //         "gIndenter value after LPSR score display: " <<
 //         gIndenter.getIndentation ();
 //
 //      lpsrWarning (
-//         gGlobalServiceRunData->getInputSourceName (),
+//         gGlobalCurrentServiceRunData->getInputSourceName (),
 //         1, // JMI inputLineNumber,
-//         s.str ());
+//         ss.str ());
 //     }
 //
 //     gIndenter.resetToZero ();

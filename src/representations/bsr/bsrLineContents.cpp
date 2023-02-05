@@ -22,7 +22,8 @@
 
 #include "bsrLineContents.h"
 
-/* the following due to:
+/* JMI v0.9.67
+the following due to:
 /Users/menu/libmusicxml-git/src/lib/smartpointer.h:75:40: error: member access into incomplete type 'bsrLine'
 /Users/menu/libmusicxml-git/src/formats/bsr/bsrLineContents.cpp:51:18: note: in instantiation of member function 'SMARTP<bsrLine>::~SMARTP' requested here
 1 error generated.
@@ -30,6 +31,7 @@
 #include "bsrLineContents.h"
 
 #include "oahOah.h"
+#include "oahEarlyOptions.h"
 
 #include "bsrOah.h"
 #include "msr2bsrOah.h"
@@ -68,10 +70,16 @@ S_bsrLineContents bsrLineContents::createLineNewbornClone ()
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceLines ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Creating a newborn clone of line " <<
       asString () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -115,7 +123,9 @@ void bsrLineContents::insertLineElementBeforeLastElementOfLineContents (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasures ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Inserting line element '" <<
       lineElement->asShortString () <<
       "' before the last element of line contents '" <<
@@ -139,18 +149,18 @@ void bsrLineContents::insertLineElementBeforeLastElementOfLineContents (
       it, lineElement);
   }
   else {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "line contents elementslist is empty, cannot insert '" <<
       lineElement->asShortString () <<
       "' before its last element";
 
     bsrInternalError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       lineElement->getInputLineNumber (),
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 }
 
@@ -199,9 +209,16 @@ void bsrLineContents::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
+      "% --> End visiting bsrTranscriptionNotesElement" <<
       "% ==> bsrLineContents::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -212,9 +229,15 @@ void bsrLineContents::acceptIn (basevisitor* v)
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching bsrLineContents::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
         p->visitStart (elem);
@@ -225,9 +248,16 @@ void bsrLineContents::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
+      "% --> End visiting bsrTranscriptionNotesElement" <<
       "% ==> bsrLineContents::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -238,9 +268,15 @@ void bsrLineContents::acceptOut (basevisitor* v)
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching bsrLineContents::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
         p->visitEnd (elem);
@@ -290,9 +326,9 @@ std::string bsrLineContents::asShortString () const
   return "??? bsrLineContents::asString () ???";
   */
 
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
    "LineContents" <<
     ", lineContentsKind: " <<
     bsrLineContentsKindAsString (fLineContentsKind) <<
@@ -300,7 +336,7 @@ std::string bsrLineContents::asShortString () const
     mfSingularOrPlural (
       fLineContentsLineElementsList.size (), "lineElement", "lineElements");
 
-  return s.str ();
+  return ss.str ();
 }
 
 std::string bsrLineContents::asString () const
@@ -370,7 +406,7 @@ void bsrLineContents::print (std::ostream& os) const
 
 std::string bsrLineContents::asDebugString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
   size_t lineElementsListSize =
     fLineContentsLineElementsList.size ();
@@ -382,13 +418,13 @@ std::string bsrLineContents::asDebugString () const
       iEnd   = fLineContentsLineElementsList.end (),
       i      = iBegin;
     for ( ; ; ) {
-      s << (*i)->asDebugString ();
+      ss << (*i)->asDebugString ();
       if (++i == iEnd) break;
- // JMI     s << ' ';
+ // JMI     ss << ' ';
     } // for
   }
 
-  return s.str ();
+  return ss.str ();
 }
 
 std::ostream& operator << (std::ostream& os, const S_bsrLineContents& elt)

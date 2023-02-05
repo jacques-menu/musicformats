@@ -18,6 +18,7 @@
 #include "bsrDynamics.h"
 
 #include "oahOah.h"
+#include "oahEarlyOptions.h"
 
 #include "bsrOah.h"
 
@@ -234,9 +235,16 @@ void bsrDynamic::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
+      "% --> End visiting bsrTranscriptionNotesElement" <<
       "% ==> bsrDynamic::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -247,9 +255,15 @@ void bsrDynamic::acceptIn (basevisitor* v)
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching bsrDynamic::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
         p->visitStart (elem);
@@ -260,9 +274,16 @@ void bsrDynamic::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
+      "% --> End visiting bsrTranscriptionNotesElement" <<
       "% ==> bsrDynamic::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -273,9 +294,15 @@ void bsrDynamic::acceptOut (basevisitor* v)
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching bsrDynamic::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
         p->visitEnd (elem);
@@ -287,9 +314,9 @@ void bsrDynamic::browseData (basevisitor* v)
 
 std::string bsrDynamic::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "Dynamics" <<
     ", dynamicKind: " <<
     msrDynamicKindAsString (fDynamicKind) <<
@@ -298,14 +325,14 @@ std::string bsrDynamic::asString () const
     ", spacesBefore: " << fSpacesBefore <<
     ", line " << fInputLineNumber;
 
-  return s.str ();
+  return ss.str ();
 }
 
 std::string bsrDynamic::asDebugString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "Dyn" <<
     ", dynamicKind: " <<
     msrDynamicKindAsString (fDynamicKind) <<
@@ -314,7 +341,7 @@ std::string bsrDynamic::asDebugString () const
     ", spacesBefore: " << fSpacesBefore <<
     ", line " << fInputLineNumber;
 
-  return s.str ();
+  return ss.str ();
 }
 
 void bsrDynamic::print (std::ostream& os) const
@@ -352,7 +379,7 @@ std::ostream& operator << (std::ostream& os, const S_bsrDynamic& elt)
   else {
     os << "[NONE]" << std::endl;
   }
-  
+
   return os;
 }
 

@@ -621,14 +621,14 @@ Examples are:
 \begin{lstlisting}[language=CPlusPlus]
 void oahValueFittedAtom::applyValueLessAtom (std::ostream& os)
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "Applying value-fitted atom '" <<
     fetchNames () <<
     "' without a value";
 
-  oahInternalError (s.str ());
+  oahInternalError (ss.str ());
 }
 
 	fSelected = true;
@@ -640,18 +640,18 @@ and:
       {
         // should not occur
 
-        std::stringstream s;
+        std::stringstream ss;
 
-        s <<
+        ss <<
           "msrPedal '" <<
           elt->asShortString () <<
           "' has no pedal type";
 
         msrInternalError (
-          gGlobalServiceRunData->getInputSourceName (),
+          gGlobalCurrentServiceRunData->getInputSourceName (),
           inputLineNumber,
           __FILE__, __LINE__,
-          s.str ());
+          ss.str ());
       }
       break;
 \end{lstlisting}
@@ -665,10 +665,16 @@ void mxsr2msrTranslator::visitEnd ( S_accordion_registration& elt )
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> End visiting S_accordion_registration" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -677,7 +683,7 @@ void mxsr2msrTranslator::visitEnd ( S_accordion_registration& elt )
 
   if (fCurrentAccordionNumbersCounter == 0) {
     musicxmlWarning (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       "accordion-registration has 0 child element, ignoring it");
   }
@@ -891,6 +897,10 @@ void initializeBSR ()
       gLogStream <<
         "Initializing BSR basic types handling" <<
         std::endl;
+
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif
 
@@ -976,17 +986,17 @@ void mxsr2msrTranslator::visitStart ( S_repeat& elt )
           msrBarLineRepeatWingedKind::kBarLineRepeatWingedDoubleCurved;
       }
       else {
-        std::stringstream s;
+        std::stringstream ss;
 
-        s <<
+        ss <<
           "repeat winged \"" << winged <<
           "\" is unknown";
 
         musicxmlError (
-          gGlobalServiceRunData->getInputSourceName (),
+          gGlobalCurrentServiceRunData->getInputSourceName (),
           inputLineNumber,
           __FILE__, __LINE__,
-          s.str ());
+          ss.str ());
       }
     }
 
@@ -1573,17 +1583,17 @@ msrPlacementKind msrPlacementKindFromString (
     result = msrPlacementKind::kPlacementBelow;
   else {
     if (placementString.size ()) {
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         "placement \"" << placementString <<
         "\" should be 'above' or 'below'";
 
       musicxmlError (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         inputLineNumber,
         __FILE__, __LINE__,
-        s.str ());
+        ss.str ());
     }
   }
 
@@ -1825,6 +1835,8 @@ bool msrPart::compareStavesToHaveFiguredBassesBelowCorrespondingPart (
 
 %/Users/jacquesmenu/musicformats-git-dev/src/passes/msr2lpsr/msr2lpsrTranslator.cpp:3374:23: error: member access into incomplete type 'MusicFormats::msrTempo'
 %      ", line " << elt->getInputLineNumber () <<
+      std::endl;
+
 %                      ^
 %/Users/jacquesmenu/musicformats-git-dev/src/representations/msr/msrTypesForwardDeclarations.h:307:9: note: forward declaration of 'MusicFormats::msrTempo'
 %class   msrTempo;

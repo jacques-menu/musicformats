@@ -16,6 +16,7 @@
 #include "msrOrnaments.h"
 
 #include "oahOah.h"
+#include "oahEarlyOptions.h"
 
 #include "msrOah.h"
 
@@ -55,9 +56,15 @@ msrOrnament::~msrOrnament ()
 void msrOrnament::acceptIn (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrOrnament::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrOrnament>*
@@ -66,9 +73,15 @@ void msrOrnament::acceptIn (basevisitor* v)
         S_msrOrnament elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrOrnament::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitStart (elem);
   }
@@ -77,9 +90,15 @@ void msrOrnament::acceptIn (basevisitor* v)
 void msrOrnament::acceptOut (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrOrnament::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrOrnament>*
@@ -88,9 +107,15 @@ void msrOrnament::acceptOut (basevisitor* v)
         S_msrOrnament elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrOrnament::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitEnd (elem);
   }
@@ -156,9 +181,9 @@ std::ostream& operator << (std::ostream& os, const msrOrnamentKind& elt)
 
 std::string msrOrnament::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "[Ornament" <<
     ", fOrnamentPlacementKind: " << msrPlacementKindAsString (fOrnamentPlacementKind)  <<
     ", fOrnamentPlacementKind: " <<
@@ -167,7 +192,7 @@ std::string msrOrnament::asString () const
     msrAccidentalKindAsString (fOrnamentAccidentalKind) <<
     ']';
 
-  return s.str ();
+  return ss.str ();
 }
 
 

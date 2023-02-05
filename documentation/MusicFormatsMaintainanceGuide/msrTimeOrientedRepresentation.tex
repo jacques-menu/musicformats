@@ -158,17 +158,17 @@ void msrPart::collectPartMeasuresSlices (
           getStaffMeasuresSlicesSequence ();
 
     if (! staffMeasuresSlicesSequence) {
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         "The staffMeasuresSlicesSequence of staff \"" <<
         staff->getStaffName () <<
         "\" is null";
 
       musicxmlWarning (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         inputLineNumber,
-        s.str ());
+        ss.str ());
     }
     else {
       fPartMeasuresSlicesSequence->

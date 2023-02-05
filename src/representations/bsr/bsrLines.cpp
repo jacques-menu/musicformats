@@ -14,14 +14,12 @@
 #include "visitor.h"
 
 #include "mfStaticSettings.h"
-
 #include "mfStringsHandling.h"
-
-
 
 #include "bsrLines.h"
 
 #include "oahOah.h"
+#include "oahEarlyOptions.h"
 
 #include "bsrOah.h"
 #include "msr2bsrOah.h"
@@ -62,12 +60,18 @@ bsrLine::bsrLine (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceLines ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Creating bsrLine '" <<
       asString () <<
       "', line " <<
       fInputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 }
@@ -79,10 +83,16 @@ S_bsrLine bsrLine::createLineNewbornClone ()
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceLines ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Creating a newborn clone of line " <<
       asString () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -192,7 +202,9 @@ void bsrLine::appendKeyToLine (S_bsrKey key)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceKeys ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Appending key " <<
       key->asShortString () <<
       "' to line '" <<
@@ -209,7 +221,9 @@ void bsrLine::appendTimeSignatureToLine (S_bsrTimeSignature timeSignature)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTimeSignatures ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Appending time signature '" <<
       timeSignature->asShortString () <<
       "' to line '" <<
@@ -227,7 +241,9 @@ void bsrLine::insertTimeBeforeLastElementOfLine (S_bsrTimeSignature timeSignatur
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTimeSignatures ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Inserting time signature '" <<
       timeSignature->asShortString () <<
       "' before the last element of line '" <<
@@ -245,7 +261,9 @@ void bsrLine::appendTempoToLine (S_bsrTempo tempo)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTempos ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Appending tempo " <<
       tempo->asShortString () <<
       " to BSR line " <<
@@ -327,7 +345,9 @@ void bsrLine::appendNoteToLine (S_bsrNote note)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceNotes ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Appending note '" <<
       note->asShortString () <<
       "' to line '" <<
@@ -399,9 +419,16 @@ void bsrLine::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
+      "% --> End visiting bsrTranscriptionNotesElement" <<
       "% ==> bsrLine::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -412,9 +439,15 @@ void bsrLine::acceptIn (basevisitor* v)
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching bsrLine::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
         p->visitStart (elem);
@@ -425,9 +458,16 @@ void bsrLine::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
+      "% --> End visiting bsrTranscriptionNotesElement" <<
       "% ==> bsrLine::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -438,9 +478,15 @@ void bsrLine::acceptOut (basevisitor* v)
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching bsrLine::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
         p->visitEnd (elem);
@@ -461,9 +507,9 @@ void bsrLine::browseData (basevisitor* v)
 
 std::string bsrLine::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "Line" <<
     ", printLineNumber" << ": " << fPrintLineNumber <<
     ", brailleLineNumber" << ": " << fBrailleLineNumber <<
@@ -472,14 +518,14 @@ std::string bsrLine::asString () const
     ", cellsNumber" << ": " << fetchCellsNumber () <<
     ", line " << fInputLineNumber;
 
-  return s.str ();
+  return ss.str ();
 }
 
 std::string bsrLine::asDebugString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "L" <<
     ", printLineNumber" << ": " << fPrintLineNumber <<
     ", brailleLineNumber" << ": " << fBrailleLineNumber <<
@@ -487,7 +533,7 @@ std::string bsrLine::asDebugString () const
     ", lineContents: " << fLineContentsList.size () <<
     ", cellsNumber" << ": " << fetchCellsNumber ();
 
-  return s.str ();
+  return ss.str ();
 }
 
 void bsrLine::print (std::ostream& os) const

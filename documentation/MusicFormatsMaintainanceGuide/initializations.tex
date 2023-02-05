@@ -13,9 +13,9 @@ Some \initialization\ activities in \mf\ use the \oahRepr\ facility. \oahRepr\ s
 
 There is no \initialization\  of the \oahRepr\ architecture as such, but there are \functionName{create*OahGroup} functions to create the various \oahRepr\ groups.
 
-For example, \globalVariable{gGlobalServiceRunData} is supplied by \mflibraryBoth{mfServiceRunData}: %%%JMI
+For example, \globalVariable{gGlobalCurrentServiceRunData} is supplied by \mflibraryBoth{mfServiceRunData}: %%%JMI
 \begin{lstlisting}[language=CPlusPlus]
-EXP extern S_generalOahGroup gGlobalServiceRunData;
+EXP extern S_generalOahGroup gGlobalCurrentServiceRunData;
 
 //______________________________________________________________________________
 EXP S_generalOahGroup createGlobalGeneralOahGroup ();
@@ -26,22 +26,28 @@ S_generalOahGroup createGlobalGeneralOahGroup ()
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Creating global general OAH group" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
   // protect library against multiple initializations
-  if (! gGlobalServiceRunData) {
+  if (! gGlobalCurrentServiceRunData) {
     // create the global general options group
-    gGlobalServiceRunData =
+    gGlobalCurrentServiceRunData =
       generalOahGroup::create ();
-    assert (gGlobalServiceRunData != 0);
+    assert (gGlobalCurrentServiceRunData != 0);
   }
 
   // return the global OAH group
-  return gGlobalServiceRunData;
+  return gGlobalCurrentServiceRunData;
 }
 \end{lstlisting}
 
@@ -114,6 +120,10 @@ void initializeMsrBasicTypes ()
       gLogStream <<
         "Initializing MSR basic types handling" <<
         std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 

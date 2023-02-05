@@ -147,6 +147,18 @@ namespace MusicFormats
 // }
 
 //______________________________________________________________________________
+std::string mfReplicateChar (
+  char theChar,
+  int  times)
+{
+  std::string result;
+
+  for (int i = 0; i < times; ++i)
+    result += theChar;
+
+  return result;
+}
+
 std::string mfReplicateString (
   std::string theString,
   int         times)
@@ -247,9 +259,9 @@ char* mfCharStarCat (
       strlen (source) >= destinationSize - strlen (destination) - 1;
 
   if (destinationOverflow) {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "mfCharStarCat(): attempt at destination overflow" <<
       ", destinationSize: [" << destinationSize <<
       "], destination: [" << destination <<
@@ -263,7 +275,7 @@ char* mfCharStarCat (
     mfAssert (
       __FILE__, __LINE__,
       false,
-      s.str ());
+      ss.str ());
 #endif
   }
 
@@ -281,10 +293,10 @@ std::string mfInt2EnglishWord (int n)
     assert (false); // JMI
   }
 
-  std::stringstream s;
+  std::stringstream ss;
 
   if (n < 0) {
-    s << "Minus_";
+    ss << "Minus_";
     n = -n;
   }
 
@@ -312,64 +324,64 @@ std::string mfInt2EnglishWord (int n)
   else {
     switch (n) {
       case 0:
-        s << "Zero";
+        ss << "Zero";
         break;
       case 1:
-        s << "One";
+        ss << "One";
         break;
       case 2:
-        s << "Two";
+        ss << "Two";
         break;
       case 3:
-        s << "Three";
+        ss << "Three";
         break;
       case 4:
-        s << "Four";
+        ss << "Four";
         break;
       case 5:
-        s << "Five";
+        ss << "Five";
         break;
       case 6:
-        s << "Six";
+        ss << "Six";
         break;
       case 7:
-        s << "Seven";
+        ss << "Seven";
         break;
       case 8:
-        s << "Eight";
+        ss << "Eight";
         break;
       case 9:
-        s << "Nine";
+        ss << "Nine";
         break;
      case 10:
-        s << "Ten";
+        ss << "Ten";
         break;
       case 11:
-        s << "Eleven";
+        ss << "Eleven";
         break;
       case 12:
-        s << "Twelve";
+        ss << "Twelve";
         break;
       case 13:
-        s << "Thirteen";
+        ss << "Thirteen";
         break;
       case 14:
-        s << "Fourteen";
+        ss << "Fourteen";
         break;
       case 15:
-        s << "Fifteen";
+        ss << "Fifteen";
         break;
       case 16:
-        s << "Sixteen";
+        ss << "Sixteen";
         break;
       case 17:
-        s << "Seventeen";
+        ss << "Seventeen";
         break;
       case 18:
-        s << "Eighteen";
+        ss << "Eighteen";
         break;
       case 19:
-        s << "Nineteen";
+        ss << "Nineteen";
         break;
 
       default: {
@@ -379,36 +391,36 @@ std::string mfInt2EnglishWord (int n)
 
         switch (nDiv10) {
           case 2:
-            s << "Twenty";
+            ss << "Twenty";
             break;
           case 3:
-            s << "Thirty";
+            ss << "Thirty";
             break;
           case 4:
-            s << "Fourty";
+            ss << "Fourty";
             break;
           case 5:
-            s << "Fifty";
+            ss << "Fifty";
             break;
           case 6:
-            s << "Sixty";
+            ss << "Sixty";
             break;
           case 7:
-            s << "Seventy";
+            ss << "Seventy";
             break;
           case 8:
-            s << "Eighty";
+            ss << "Eighty";
             break;
           case 9:
-            s << "Ninety";
+            ss << "Ninety";
             break;
         } // switch
-        s << mfInt2EnglishWord (nModulo10);
+        ss << mfInt2EnglishWord (nModulo10);
       } // default
     } // switch
   }
 
-  return s.str ();
+  return ss.str ();
 }
 
 //______________________________________________________________________________
@@ -1149,21 +1161,21 @@ std::string mfSingularOrPlural (
   std::string singularName,
   std::string pluralName)
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     number << ' ';
 
   if (number <= 1) {
-    s <<
+    ss <<
       singularName;
   }
   else {
-    s <<
+    ss <<
       pluralName;
   }
 
-  return s.str ();
+  return ss.str ();
 }
 
 std::string mfSingularOrPluralWithoutNumber (
@@ -1171,18 +1183,18 @@ std::string mfSingularOrPluralWithoutNumber (
   std::string singularName,
   std::string pluralName)
 {
-  std::stringstream s;
+  std::stringstream ss;
 
   if (number <= 1) {
-    s <<
+    ss <<
       singularName;
   }
   else {
-    s <<
+    ss <<
       pluralName;
   }
 
-  return s.str ();
+  return ss.str ();
 }
 
 //______________________________________________________________________________
@@ -1678,9 +1690,9 @@ void mfStringSetMinusEquals (
 std::string mfStringSetAsString (
   const std::set<std::string>& stringSet)
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s << '[';
+  ss << '[';
 
   // append the set elements if any
   size_t stringSetSize =
@@ -1703,21 +1715,21 @@ std::string mfStringSetAsString (
 
       ++count;
 
-      s << "\"" << theString << "\"";
+      ss << "\"" << theString << "\"";
       if (++i == iEnd) break;
 
       if (count == nextToLast) {
-        s << " and ";
+        ss << " and ";
       }
       else if (count != stringSetSize) {
-        s << ", ";
+        ss << ", ";
       }
     } // for
   }
 
-  s << ']';
+  ss << ']';
 
-  return s.str ();
+  return ss.str ();
 }
 
 void mfDisplayStringSet (
@@ -1799,9 +1811,9 @@ Bool mfFetchValueFromStringToStringMap (
 std::string mfStringToStringMapAsString (
   const std::map<std::string, std::string>& stringToStringMap)
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s << '[';
+  ss << '[';
 
   // append the set elements if any
   size_t stringToStringMapSize =
@@ -1828,22 +1840,22 @@ std::string mfStringToStringMapAsString (
 
       ++count;
 
-      s << "\"" << key << "\": \"" << value << "\"";
+      ss << "\"" << key << "\": \"" << value << "\"";
 
       if (++i == iEnd) break;
 
       if (count == nextToLast) {
-        s << " and ";
+        ss << " and ";
       }
       else if (count != stringToStringMapSize) {
-        s << ", ";
+        ss << ", ";
       }
     } // for
   }
 
-  s << ']';
+  ss << ']';
 
-  return s.str ();
+  return ss.str ();
 }
 
 void mfDisplayStringToStringMap (
@@ -1954,9 +1966,9 @@ Bool mfKeyValuePairIsInStringToStringMultiMap (
 std::string mfStringToStringMultiMapAsString (
   const std::multimap<std::string, std::string>& stringToStringMultiMap)
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s << '[';
+  ss << '[';
 
   // append the set elements if any
   size_t stringToStringMultiMapSize =
@@ -1983,22 +1995,22 @@ std::string mfStringToStringMultiMapAsString (
 
       ++count;
 
-      s << "\"" << key << "\": \"" << value << "\"";
+      ss << "\"" << key << "\": \"" << value << "\"";
 
       if (++i == iEnd) break;
 
       if (count == nextToLast) {
-        s << " and ";
+        ss << " and ";
       }
       else if (count != stringToStringMultiMapSize) {
-        s << ", ";
+        ss << ", ";
       }
     } // for
   }
 
-  s << ']';
+  ss << ']';
 
-  return s.str ();
+  return ss.str ();
 }
 
 void mfDisplayStringToStringMultiMap (

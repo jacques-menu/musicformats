@@ -18,6 +18,7 @@
 #include "msrCredits.h"
 
 #include "oahOah.h"
+#include "oahEarlyOptions.h"
 
 #include "msrOah.h"
 
@@ -147,9 +148,15 @@ msrCreditWords::~msrCreditWords ()
 void msrCreditWords::acceptIn (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrCreditWords::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrCreditWords>*
@@ -158,9 +165,15 @@ void msrCreditWords::acceptIn (basevisitor* v)
         S_msrCreditWords elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrCreditWords::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitStart (elem);
   }
@@ -169,9 +182,15 @@ void msrCreditWords::acceptIn (basevisitor* v)
 void msrCreditWords::acceptOut (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrCreditWords::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrCreditWords>*
@@ -180,9 +199,15 @@ void msrCreditWords::acceptOut (basevisitor* v)
         S_msrCreditWords elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrCreditWords::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitEnd (elem);
   }
@@ -309,9 +334,15 @@ void msrCredit::appendCreditWordsToCredit (
 void msrCredit::acceptIn (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrCredit::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrCredit>*
@@ -320,9 +351,15 @@ void msrCredit::acceptIn (basevisitor* v)
         S_msrCredit elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrCredit::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitStart (elem);
   }
@@ -331,9 +368,15 @@ void msrCredit::acceptIn (basevisitor* v)
 void msrCredit::acceptOut (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrCredit::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrCredit>*
@@ -342,9 +385,15 @@ void msrCredit::acceptOut (basevisitor* v)
         S_msrCredit elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrCredit::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitEnd (elem);
   }
@@ -363,9 +412,9 @@ void msrCredit::browseData (basevisitor* v)
 
 std::string msrCredit::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "Credit" <<
     ", fCreditPageNumber: " <<
     fCreditPageNumber <<
@@ -373,7 +422,7 @@ std::string msrCredit::asString () const
     fCreditTypeKind;
 
   if (fCreditWordsList.size ()) {
-    s << " [";
+    ss << " [";
 
     std::vector<S_msrCreditWords>::const_iterator
       iBegin = fCreditWordsList.begin (),
@@ -381,18 +430,18 @@ std::string msrCredit::asString () const
       i      = iBegin;
 
     for ( ; ; ) {
-      s << "\"" << (*i)->getCreditWordsContents () << "\"";
+      ss << "\"" << (*i)->getCreditWordsContents () << "\"";
       if (++i == iEnd) break;
-      s << ", ";
+      ss << ", ";
     } // for
 
-    s << ']';
+    ss << ']';
   }
 
   else
-    s << "no credit words";
+    ss << "no credit words";
 
-  return s.str ();
+  return ss.str ();
 }
 
 void msrCredit::print (std::ostream& os) const

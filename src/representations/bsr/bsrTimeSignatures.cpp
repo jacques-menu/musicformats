@@ -28,6 +28,7 @@
 #include "bsrNumbers.h"
 
 #include "oahOah.h"
+#include "oahEarlyOptions.h"
 
 #include "bsrOah.h"
 
@@ -133,10 +134,16 @@ bsrTimeSignatureItem::bsrTimeSignatureItem (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTimeSignatures ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Creating time signature item" <<
       ", line: " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 }
@@ -181,7 +188,9 @@ void bsrTimeSignatureItem::appendBeatsNumber (int beatsNumber)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTimeSignatures ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Appending beat number '" <<
       beatsNumber <<
       "' to time signature item '" <<
@@ -200,7 +209,9 @@ void bsrTimeSignatureItem::setTimeSignatureBeatValue (int timeSignatureBeatValue
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTimeSignatures ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Setting beat value to '" <<
       timeSignatureBeatValue <<
       "' in time signature item '" <<
@@ -229,9 +240,16 @@ void bsrTimeSignatureItem::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
+      "% --> End visiting bsrTranscriptionNotesElement" <<
       "% ==> bsrTimeSignatureItem::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -242,9 +260,15 @@ void bsrTimeSignatureItem::acceptIn (basevisitor* v)
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching bsrTimeSignatureItem::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
         p->visitStart (elem);
@@ -255,9 +279,16 @@ void bsrTimeSignatureItem::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
+      "% --> End visiting bsrTranscriptionNotesElement" <<
       "% ==> bsrTimeSignatureItem::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -268,9 +299,15 @@ void bsrTimeSignatureItem::acceptOut (basevisitor* v)
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching bsrTimeSignatureItem::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
         p->visitEnd (elem);
@@ -282,12 +319,12 @@ void bsrTimeSignatureItem::browseData (basevisitor* v)
 
 std::string bsrTimeSignatureItem::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
   size_t timeSignatureBeatsNumbersVectorSize =
     fTimeSignatureBeatsNumbersVector.size ();
 
-  s <<
+  ss <<
     "[TimeSignatureItem " <<
     ", " <<
     mfSingularOrPlural (
@@ -297,7 +334,7 @@ std::string bsrTimeSignatureItem::asString () const
     case 0:
     /* JMI
       msrInternalError (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         fInputLineNumber,
         __FILE__, __LINE__,
         "time signature item beats numbers vector is empty");
@@ -305,34 +342,34 @@ std::string bsrTimeSignatureItem::asString () const
       break;
 
     case 1:
-      s <<
+      ss <<
         ", " <<
         fTimeSignatureBeatsNumbersVector [0] << '/' << fTimeSignatureBeatValue;
       break;
 
     default:
-      s <<
+      ss <<
         ", beats numbers: ";
 
       for (size_t i = 0; i < timeSignatureBeatsNumbersVectorSize; ++i) {
-        s <<
+        ss <<
           fTimeSignatureBeatsNumbersVector [i];
 
         if (i != timeSignatureBeatsNumbersVectorSize - 1) {
-          s <<
+          ss <<
             ' ';
         }
       } // for
 
-      s <<
+      ss <<
         ", beat value: " << fTimeSignatureBeatValue;
   } // switch
 
-  s <<
+  ss <<
     ", line " << fInputLineNumber <<
     ']';
 
-  return s.str ();
+  return ss.str ();
 }
 
 void bsrTimeSignatureItem::print (std::ostream& os) const
@@ -374,12 +411,18 @@ bsrTimeSignature::bsrTimeSignature (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTimeSignatures ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Creating bsrTimeSignatures '" <<
       asString () <<
       "', line " <<
       fInputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 }
@@ -391,7 +434,9 @@ void bsrTimeSignature::appendTimeSignatureItem (S_bsrTimeSignatureItem timeSigna
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTimeSignatures ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Appending time signature item '" <<
       timeSignatureItem->asString () <<
       "' to time '" <<
@@ -399,6 +444,10 @@ void bsrTimeSignature::appendTimeSignatureItem (S_bsrTimeSignatureItem timeSigna
       "', line " <<
       fInputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -453,7 +502,7 @@ S_bsrCellsList bsrTimeSignature::buildCellsList () const
             case 0:
             /* JMI
               msrInternalError (
-                gGlobalServiceRunData->getInputSourceName (),
+                gGlobalCurrentServiceRunData->getInputSourceName (),
                 fInputLineNumber,
                 __FILE__, __LINE__,
                 "time signature item beats numbers vector is empty");
@@ -569,17 +618,17 @@ S_bsrCellsList bsrTimeSignature::buildCellsList () const
                     break;
                   default:
                     {
-                      std::stringstream s;
+                      std::stringstream ss;
 
-                      s <<
+                      ss <<
                         "MSR time beat value '" <<
                         theBsrTimeSignatureBeatValue <<
                         "' is not supported in Braille";
 
                       bsrWarning (
-                        gGlobalServiceRunData->getInputSourceName (),
+                        gGlobalCurrentServiceRunData->getInputSourceName (),
                         fInputLineNumber,
-                        s.str ());
+                        ss.str ());
                     }
                 } // switch
 
@@ -600,20 +649,20 @@ S_bsrCellsList bsrTimeSignature::buildCellsList () const
             default:
               ;
             /*
-              s <<
+              ss <<
                 "beats numbers: ";
 
               for (int i = 0; i < vectorSize; ++i) {
-                s <<
+                ss <<
                   timeSignatureBeatsNumbersVector [i];
 
                 if (i != vectorSize - 1) {
-                  s <<
+                  ss <<
                     ' ';
                 }
               } // for
 
-              s <<
+              ss <<
                 ", beat value: " << fTimeSignatureBeatValue;
                 */
           } // switch
@@ -645,7 +694,7 @@ S_bsrCellsList bsrTimeSignature::buildCellsList () const
             case 0:
             /* JMI
               msrInternalError (
-                gGlobalServiceRunData->getInputSourceName (),
+                gGlobalCurrentServiceRunData->getInputSourceName (),
                 fInputLineNumber,
                 __FILE__, __LINE__,
                 "time signature item beats numbers vector is empty");
@@ -698,17 +747,17 @@ S_bsrCellsList bsrTimeSignature::buildCellsList () const
                     break;
                   default:
                     {
-                      std::stringstream s;
+                      std::stringstream ss;
 
-                      s <<
+                      ss <<
                         "MSR time beat value '" <<
                         theBsrTimeSignatureBeatValue <<
                         "' is not supported in Braille";
 
                       bsrWarning (
-                        gGlobalServiceRunData->getInputSourceName (),
+                        gGlobalCurrentServiceRunData->getInputSourceName (),
                         fInputLineNumber,
-                        s.str ());
+                        ss.str ());
                     }
                 } // switch
               }
@@ -717,20 +766,20 @@ S_bsrCellsList bsrTimeSignature::buildCellsList () const
             default:
               ;
             /*
-              s <<
+              ss <<
                 "beats numbers: ";
 
               for (int i = 0; i < vectorSize; ++i) {
-                s <<
+                ss <<
                   timeSignatureBeatsNumbersVector [i];
 
                 if (i != vectorSize - 1) {
-                  s <<
+                  ss <<
                     ' ';
                 }
               } // for
 
-              s <<
+              ss <<
                 ", beat value: " << fTimeSignatureBeatValue;
                 */
           } // switch
@@ -755,9 +804,16 @@ void bsrTimeSignature::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
+      "% --> End visiting bsrTranscriptionNotesElement" <<
       "% ==> bsrTimeSignature::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -768,9 +824,15 @@ void bsrTimeSignature::acceptIn (basevisitor* v)
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching bsrTimeSignature::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
         p->visitStart (elem);
@@ -781,9 +843,16 @@ void bsrTimeSignature::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
+      "% --> End visiting bsrTranscriptionNotesElement" <<
       "% ==> bsrTimeSignature::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -794,9 +863,15 @@ void bsrTimeSignature::acceptOut (basevisitor* v)
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching bsrTimeSignature::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
         p->visitEnd (elem);
@@ -808,9 +883,9 @@ void bsrTimeSignature::browseData (basevisitor* v)
 
 std::string bsrTimeSignature::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "Time" <<
     ", timeKind " << ": " <<
     bsrTimeSignatureKindAsString (fTimeKind) <<
@@ -818,19 +893,19 @@ std::string bsrTimeSignature::asString () const
     ", spacesBefore: " << fSpacesBefore <<
     ", line " << fInputLineNumber;
 
-  return s.str ();
+  return ss.str ();
 }
 
 std::string bsrTimeSignature::asDebugString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "[TIME " <<
     fTimeKind <<
     ']';
 
-  return s.str ();
+  return ss.str ();
 }
 
 void bsrTimeSignature::print (std::ostream& os) const

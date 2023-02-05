@@ -42,17 +42,17 @@ msrPrintObjectKind msrPrintObjectKindFromString (
     result = msrPrintObjectKind::kPrintObjectNo;
   else {
     if (printObjectString.size ()) {
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         "printObject \"" << printObjectString <<
         "\" should be 'yes' or 'no'";
 
       msrError (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         inputLineNumber,
         __FILE__, __LINE__,
-        s.str ());
+        ss.str ());
     }
   }
 

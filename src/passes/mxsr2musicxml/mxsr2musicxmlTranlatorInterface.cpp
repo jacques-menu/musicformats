@@ -57,9 +57,9 @@ EXP void translateMxsrToMusicXML (
     std::string separator =
       "%--------------------------------------------------------------";
 
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       separator <<
       std::endl <<
       gTab <<
@@ -71,7 +71,7 @@ EXP void translateMxsrToMusicXML (
     gWaeHandler->waeTrace (
       err,
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 #endif
 
@@ -82,6 +82,10 @@ EXP void translateMxsrToMusicXML (
       outputFileName <<
       "\"" <<
       std::endl;
+
+//     gWaeHandler->waeTrace ( JMI v0.9.67
+//       __FILE__, __LINE__,
+//       ss.str ());
   }
 #endif
 
@@ -98,6 +102,10 @@ EXP void translateMxsrToMusicXML (
       outputFileName <<
       "\"" <<
       std::endl;
+
+//     gWaeHandler->waeTrace ( JMI v0.9.67
+//       __FILE__, __LINE__,
+//       ss.str ());
   }
 #endif
 
@@ -107,6 +115,10 @@ EXP void translateMxsrToMusicXML (
       err <<
         "xmlFile2musicxml() output goes to standard output" <<
         std::endl;
+
+//     gWaeHandler->waeTrace ( JMI v0.9.67
+//       __FILE__, __LINE__,
+//       ss.str ());
     }
 #endif
 
@@ -123,6 +135,10 @@ EXP void translateMxsrToMusicXML (
         outputFileName <<
         "\"" <<
         std::endl;
+
+//     gWaeHandler->waeTrace ( JMI v0.9.67
+//       __FILE__, __LINE__,
+//       ss.str ());
     }
 #endif
 
@@ -135,6 +151,10 @@ EXP void translateMxsrToMusicXML (
         std::endl <<
         gWaeHandler->openingMusicXMLFileForWriting (outputFileName) <<
         std::endl;
+
+//     gWaeHandler->waeTrace ( JMI v0.9.67
+//       __FILE__, __LINE__,
+//       ss.str ());
     }
 #endif
 
@@ -144,12 +164,12 @@ EXP void translateMxsrToMusicXML (
         std::ofstream::out);
 
     if (! musicxmlFileOutputStream.is_open ()) {
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         gWaeHandler->cannotOpenMusicXMLFileForWriting (outputFileName);
 
-      std::string message = s.str ();
+      std::string message = ss.str ();
 
       err <<
         message <<
@@ -174,6 +194,10 @@ EXP void translateMxsrToMusicXML (
         std::endl <<
         gWaeHandler->closingMusicXMLFile (outputFileName) <<
         std::endl;
+
+//     gWaeHandler->waeTrace ( JMI v0.9.67
+//       __FILE__, __LINE__,
+//       ss.str ());
     }
 #endif
 

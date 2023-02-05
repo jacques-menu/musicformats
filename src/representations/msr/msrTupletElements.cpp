@@ -11,8 +11,6 @@
 
 #include <climits>      // INT_MIN, INT_MAX
 
-// #include "mfEnableSanityChecksSetting.h" JMI
-
 #include "mfAssert.h"
 
 #include "msrTupletElements.h"

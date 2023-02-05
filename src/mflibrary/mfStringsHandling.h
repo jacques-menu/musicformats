@@ -203,6 +203,10 @@ struct mfStringSpaceReplacer
 };
 
 //______________________________________________________________________________
+std::string mfReplicateChar (
+  char theChar,
+  int  times);
+
 std::string mfReplicateString (
   std::string theString,
   int         times);

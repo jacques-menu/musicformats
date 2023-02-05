@@ -22,6 +22,7 @@
 #include "msrRepeatCodas.h"
 
 #include "oahOah.h"
+#include "oahEarlyOptions.h"
 
 #include "msrOah.h"
 
@@ -81,10 +82,16 @@ S_msrRepeatCoda msrRepeatCoda::createRepeatCodaNewbornClone (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceRepeats ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Creating a newborn clone of a " <<
       asString () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -119,10 +126,16 @@ S_msrRepeatCoda msrRepeatCoda::createRepeatCodaDeepClone (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceRepeats ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Creating a newborn clone of a " <<
       asString () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -171,9 +184,15 @@ void msrRepeatCoda::appendElementToRepeatCoda (
 void msrRepeatCoda::acceptIn (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrRepeatCoda::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrRepeatCoda>*
@@ -182,9 +201,15 @@ void msrRepeatCoda::acceptIn (basevisitor* v)
         S_msrRepeatCoda elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrRepeatCoda::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitStart (elem);
   }
@@ -193,9 +218,15 @@ void msrRepeatCoda::acceptIn (basevisitor* v)
 void msrRepeatCoda::acceptOut (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrRepeatCoda::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrRepeatCoda>*
@@ -204,9 +235,15 @@ void msrRepeatCoda::acceptOut (basevisitor* v)
         S_msrRepeatCoda elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrRepeatCoda::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitEnd (elem);
   }
@@ -221,14 +258,14 @@ void msrRepeatCoda::browseData (basevisitor* v)
 
 std::string msrRepeatCoda::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "RepeatCoda" <<
     ", line " << fInputLineNumber <<
     std::endl;
 
-  return s.str ();
+  return ss.str ();
 }
 
 void msrRepeatCoda::print (std::ostream& os) const

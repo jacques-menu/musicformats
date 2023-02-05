@@ -103,9 +103,9 @@ Bool msrMoment::operator> (const msrMoment& other) const
 
 std::string msrMoment::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "[Moment" <<
     " writtenPositionInMeseasure: " <<
     fWrittenPositionInMeseasure <<
@@ -113,7 +113,7 @@ std::string msrMoment::asString () const
     fSoundingRelativeOffset <<
     ']';
 
-  return s.str ();
+  return ss.str ();
 }
 
 void msrMoment::print (std::ostream& os) const

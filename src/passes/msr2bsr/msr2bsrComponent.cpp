@@ -22,9 +22,15 @@ S_mfcPassComponent createMsr2bsrComponent ()
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Creating the msr2bsr pass component" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 

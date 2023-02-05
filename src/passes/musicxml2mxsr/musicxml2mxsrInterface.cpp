@@ -157,18 +157,18 @@ std::string uncompressMXLFile (
         "r");
 
     if (inputStream == nullptr) {
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         "Cannot list the contents of compressed file '" <<
         mxlFileName <<
         "' with 'popen ()'";
 
       musicxml2mxsrInternalError (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         0, // inputLineNumber
         __FILE__, __LINE__,
-        s.str ());
+        ss.str ());
     }
 
     else {
@@ -193,7 +193,7 @@ std::string uncompressMXLFile (
       // close the stream
       if (pclose (inputStream) < 0) {
         musicxml2mxsrInternalError (
-          gGlobalServiceRunData->getInputSourceName (),
+          gGlobalCurrentServiceRunData->getInputSourceName (),
           0, // inputLineNumber
           __FILE__, __LINE__,
           "Cannot close the input stream after 'popen ()'");
@@ -309,19 +309,19 @@ std::string uncompressMXLFile (
               // no, this is an actual MusicXML file
 
               if (uncompressedFileName.size ()) {
-                std::stringstream s;
+                std::stringstream ss;
 
-                s <<
+                ss <<
                   "Compressed file '" << mxlFileName <<
                   "' contains multiple MusicMXL files" <<
                   ", found '" << uncompressedFileName <<
                   "' and then '" << stringFromLine << "'";
 
                 musicxml2mxsrInternalError (
-                  gGlobalServiceRunData->getInputSourceName (),
+                  gGlobalCurrentServiceRunData->getInputSourceName (),
                   0, // inputLineNumber
                   __FILE__, __LINE__,
-                  s.str ());
+                  ss.str ());
               }
 
               else {
@@ -376,18 +376,18 @@ std::string uncompressMXLFile (
         "r");
 
     if (inputStream == nullptr) {
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         "Cannot uncompress the file '" <<
         mxlFileName <<
         "' with 'popen ()'";
 
       musicxml2mxsrInternalError (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         0, // inputLineNumber
         __FILE__, __LINE__,
-        s.str ());
+        ss.str ());
     }
   }
 #endif
@@ -402,23 +402,23 @@ void checkDesiredEncoding (
 {
   if (encoding != desiredEncoding) {
     if (encoding.size () == 0) {
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         "MusicXML data in this file" <<
         " doesn't contain any encoding specification; assuming it is " <<
         desiredEncoding;
 
       musicxml2mxsrWarning (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         1, // inputLineNumber,
-        s.str ());
+        ss.str ());
     }
 
     else {
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         "this file is encoded in " <<
         encoding <<
         ", you should convert it to " <<
@@ -433,9 +433,9 @@ void checkDesiredEncoding (
         " - handling it as is";
 
       musicxml2mxsrWarning (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         1, // inputLineNumber,
-        s.str ());
+        ss.str ());
     }
   }
 }
@@ -497,11 +497,17 @@ void checkSXMLFile (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceEncoding ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% MusicXML data uses " <<
       encoding <<
       " encoding" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -530,9 +536,9 @@ SXMLFile createSXMLFileFromFile (
     std::string separator =
       "%--------------------------------------------------------------";
 
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       std::endl <<
       separator <<
       std::endl <<
@@ -543,17 +549,23 @@ SXMLFile createSXMLFileFromFile (
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 #endif
 
   // read the input MusicXML data from the file
 #ifdef TRACE_OAH
       if (gtracingOah->fTracePasses) {
-        gLogStream <<
+        std::stringstream ss;
+
+        ss <<
           std::endl <<
           "Reading MusicXML data from file \"" << outputFileName << "\"" <<
           std::endl;
+
+        gWaeHandler->waeTrace (
+          __FILE__, __LINE__,
+          ss.str ());
       }
 #endif
 
@@ -603,9 +615,9 @@ SXMLFile createSXMLFileFromFd (
     std::string separator =
       "%--------------------------------------------------------------";
 
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       std::endl <<
       separator <<
       std::endl <<
@@ -617,17 +629,23 @@ SXMLFile createSXMLFileFromFd (
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 #endif
 
   // read the input MusicXML data from the file descriptor
 #ifdef TRACE_OAH
       if (gtracingOah->fTracePasses) {
-        gLogStream <<
+        std::stringstream ss;
+
+        ss <<
           std::endl <<
           "Reading MusicXML data from file descriptor \"" << fd << "\"" <<
           std::endl;
+
+        gWaeHandler->waeTrace (
+          __FILE__, __LINE__,
+          ss.str ());
       }
 #endif
 
@@ -675,10 +693,16 @@ SXMLFile createSXMLFileFromString (
   if (buffer [0] != '\0') { // superflous ??? JMI
 #ifdef TRACE_OAH
     if (gtracingOah->fTracePasses) {
-      gLogStream <<
+      std::stringstream ss;
+
+      ss <<
         std::endl <<
         "Reading MusicXML data from a string " << buffer.size () << " characters long" <<
         std::endl;
+
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif
 
@@ -730,9 +754,9 @@ EXP Sxmlelement musicxmlFile2mxsr (
     std::string separator =
       "%--------------------------------------------------------------";
 
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       std::endl <<
       separator <<
       std::endl <<
@@ -744,7 +768,7 @@ EXP Sxmlelement musicxmlFile2mxsr (
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 #endif
 
@@ -767,17 +791,17 @@ EXP Sxmlelement musicxmlFile2mxsr (
     fileName = uncompressedFileName.c_str ();
     */
 
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "you should uncompress file " <<
       fileNameAsString <<
       " prior to running xml2ly";
 
-    std::string message = s.str ();
+    std::string message = ss.str ();
 
     musicxml2mxsrError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       1, // inputLineNumber,
       __FILE__, __LINE__,
       message);
@@ -840,9 +864,9 @@ EXP Sxmlelement musicxmlFd2mxsr (
     std::string separator =
       "%--------------------------------------------------------------";
 
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       std::endl <<
       separator <<
       std::endl <<
@@ -854,7 +878,7 @@ EXP Sxmlelement musicxmlFd2mxsr (
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 #endif
 
@@ -923,18 +947,18 @@ EXP Sxmlelement musicxmlFd2mxsr (
 // #endif
 //
 //   if (encoding != desiredEncoding) {
-//      std::stringstream s;
+//      std::stringstream ss;
 //
-//     s <<
+//     ss <<
 //       "you should convert this stream to " <<
 //       desiredEncoding <<
 //       "\" encoding prior to running xml2ly" <<
 //       ", for example with iconv or using a text editor - handling it as is";
 //
 //     musicxml2mxsrWarning (
-//       gGlobalServiceRunData->getInputSourceName (),
+//       gGlobalCurrentServiceRunData->getInputSourceName (),
 //       1, // inputLineNumber,
-//       s.str ());
+//       ss.str ());
 //   }
 
   // register time spent
@@ -971,9 +995,9 @@ EXP Sxmlelement musicxmlString2mxsr ( // JMI UNUSED SAX ???
     std::string separator =
       "%--------------------------------------------------------------";
 
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       std::endl <<
       separator <<
       std::endl <<
@@ -985,7 +1009,7 @@ EXP Sxmlelement musicxmlString2mxsr ( // JMI UNUSED SAX ???
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 #endif
 
@@ -1031,18 +1055,24 @@ Sxmlelement convertMusicXMLToMxsr ( // JMI UNUSED SAX ???
     std::string separator =
       "%--------------------------------------------------------------";
 
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "convertMusicXMLToMxsr(): " <<
       "inputSourceName: \"" << inputSourceName << "\"" <<
       ", passIDKind: \"" << passIDKind << "\"" <<
       std::endl <<
       separator <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
   // register the input source name
-  gGlobalServiceRunData->setInputSourceName (
+  gGlobalCurrentServiceRunData->setInputSourceName (
     inputSourceName);
 
   // create the MXSR
@@ -1067,16 +1097,16 @@ Sxmlelement convertMusicXMLToMxsr ( // JMI UNUSED SAX ???
         inputSourceName.rfind (".mxl");
 
     if (posInString == inputSourceName.size () - 4) {
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         "compressed MusicXML files are not handled by xml2ly currently - quitting";
 
       musicxml2mxsrError (
         inputSourceName,
         0, // inputLineNumber
         __FILE__, __LINE__,
-        s.str ());
+        ss.str ());
     }
 
     // OK, let's go ahead

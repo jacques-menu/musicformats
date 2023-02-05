@@ -24,6 +24,8 @@
 #include "msrMeasureConstants.h"
 
 #include "oahOah.h"
+#include "oahEarlyOptions.h"
+
 #include "msrOah.h"
 
 #include "msrBrowsers.h"
@@ -129,7 +131,9 @@ msrTuplet::msrTuplet (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTuplets ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Creating tuplet:" <<
       std::endl;
 
@@ -138,6 +142,10 @@ msrTuplet::msrTuplet (
     this->print (gLogStream);
 
     --gIndenter;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 }
@@ -149,10 +157,16 @@ S_msrTuplet msrTuplet::createTupletNewbornClone ()
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTuplets ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Creating a newborn clone of tuplet " <<
       asString () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -258,7 +272,9 @@ void msrTuplet::setTupletUpLinkToMeasure (
   if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
     ++gIndenter;
 
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "==> Setting the uplink to measure of tuplet " <<
       asString () <<
       " to measure " << measure->asString () <<
@@ -267,6 +283,10 @@ void msrTuplet::setTupletUpLinkToMeasure (
       std::endl;
 
     --gIndenter;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -285,13 +305,19 @@ void msrTuplet::appendNoteToTuplet (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTuplets ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Appending note " <<
       note->asShortString () <<
       // the information is missing to display it the normal way
       " to tuplet " <<
       asString () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -347,12 +373,18 @@ void msrTuplet::appendChordToTuplet (const S_msrChord& chord)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTuplets ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Appending chord " <<
       chord->asString () <<
       " to tuplet " <<
       asString () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -387,12 +419,18 @@ void msrTuplet::appendTupletToTuplet (const S_msrTuplet& tuplet)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTuplets ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Appending tuplet " <<
       tuplet->asString () <<
       " to tuplet " <<
       asString () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -427,12 +465,18 @@ void msrTuplet::appendTupletToTupletClone (const S_msrTuplet& tuplet)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTuplets ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Appending tuplet " <<
       tuplet->asString () <<
       " to tuplet clone " <<
       asString () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -480,7 +524,7 @@ S_msrNote msrTuplet::fetchTupletFirstNonGraceNote () const
 
   else {
     msrInternalError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       fInputLineNumber,
       __FILE__, __LINE__,
       "cannot access the first note of an empty tuplet");
@@ -496,10 +540,16 @@ S_msrNote msrTuplet::removeFirstNoteFromTuplet (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTuplets ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Removing first note from tuplet " <<
       asString () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -521,7 +571,7 @@ S_msrNote msrTuplet::removeFirstNoteFromTuplet (
       }
 
       msrInternalError (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         fInputLineNumber,
         __FILE__, __LINE__,
         "removeFirstNoteFromTuplet () expects a note as the first tuplet element");
@@ -552,9 +602,9 @@ S_msrNote msrTuplet::removeFirstNoteFromTuplet (
       }
     } // for
 
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "cannot remove note " <<
       note <<
       " from tuplet " << asString () <<
@@ -566,17 +616,17 @@ S_msrNote msrTuplet::removeFirstNoteFromTuplet (
       " since this note has not been found in fTupletElementsList";
 
     msrInternalError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   */
   }
 
   else {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "cannot remove the first note of an empty tuplet " <<
       " in voice \"" <<
       fTupletUpLinkToMeasure->
@@ -585,10 +635,10 @@ S_msrNote msrTuplet::removeFirstNoteFromTuplet (
       "\"";
 
     msrInternalError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 
   return result;
@@ -601,10 +651,16 @@ S_msrNote msrTuplet::removeLastNoteFromTuplet (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTuplets ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Removing last note from tuplet " <<
       asString () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -634,7 +690,7 @@ S_msrNote msrTuplet::removeLastNoteFromTuplet (
       }
 
       msrInternalError (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         fInputLineNumber,
         __FILE__, __LINE__,
         "removeLastNoteFromTuplet () expects a note as the last tuplet element");
@@ -642,9 +698,9 @@ S_msrNote msrTuplet::removeLastNoteFromTuplet (
   }
 
   else {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "cannot remove the last note of an empty tuplet " <<
       " in voice \"" <<
       fTupletUpLinkToMeasure->
@@ -653,20 +709,26 @@ S_msrNote msrTuplet::removeLastNoteFromTuplet (
       "\"";
 
     msrInternalError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTuplets ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "This last note from tuplet " <<
       asString () <<
       " turns out to be " <<
       result->asShortString () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -685,7 +747,9 @@ void msrTuplet::setMeasureElementMeasurePosition (
     getMeasureElementUpLinkToMeasure (
       upLinkToMeasure);
 
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Setting measure position of " <<
       asString () <<
       " to '" << measurePosition <<
@@ -699,6 +763,10 @@ void msrTuplet::setMeasureElementMeasurePosition (
       context <<
       "\"" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -720,12 +788,18 @@ void msrTuplet::setTupletMembersMeasurePositions (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Setting tuplet members measure positions of " << asString () <<
       " to '" <<
       measurePosition <<
       "'" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -804,7 +878,7 @@ void msrTuplet::setTupletMembersMeasurePositions (
 
     else {
       msrInternalError (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         fInputLineNumber,
         __FILE__, __LINE__,
         "tuplet member should be a note, a chord or another tuplet");
@@ -821,7 +895,9 @@ void msrTuplet::unapplySoundingFactorToTupletMembers (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTuplets ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "unapplySoundingFactorToTupletMembers ()" <<
       std::endl;
 
@@ -834,6 +910,10 @@ void msrTuplet::unapplySoundingFactorToTupletMembers (
       std::endl;
 
     --gIndenter;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -860,11 +940,17 @@ void msrTuplet::finalizeTuplet (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTuplets ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Finalizing tuplet " <<
       asString () <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -879,9 +965,15 @@ void msrTuplet::finalizeTuplet (
 void msrTuplet::acceptIn (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrTuplet::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrTuplet>*
@@ -890,9 +982,15 @@ void msrTuplet::acceptIn (basevisitor* v)
         S_msrTuplet elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrTuplet::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitStart (elem);
   }
@@ -901,9 +999,15 @@ void msrTuplet::acceptIn (basevisitor* v)
 void msrTuplet::acceptOut (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+      std::stringstream ss;
+
+      ss <<
       "% ==> msrTuplet::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrTuplet>*
@@ -912,9 +1016,15 @@ void msrTuplet::acceptOut (basevisitor* v)
         S_msrTuplet elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrTuplet::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitEnd (elem);
   }
@@ -935,9 +1045,9 @@ void msrTuplet::browseData (basevisitor* v)
 
 std::string msrTuplet::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "[Tuplet" <<
     ", tupletKind: " << fTupletKind <<
     fTupletFactor.asString () <<
@@ -945,26 +1055,26 @@ std::string msrTuplet::asString () const
     ", measure ' " <<
     ", line " << fInputLineNumber;
 
-  s <<
+  ss <<
     ", getMeasureNumber: ";
   if (fTupletUpLinkToMeasure) {
-    s <<
+    ss <<
       fTupletUpLinkToMeasure->getMeasureNumber ();
   }
   else {
-    s << "[UNKNOWN]";
+    ss << "[UNKNOWN]";
   }
 
-  s <<
+  ss <<
     ", fMeasureElementMeasurePosition: ";
   if (fMeasureElementMeasurePosition.getNumerator () < 0) {
-    s << "???";
+    ss << "???";
   }
   else {
-    s << fMeasureElementMeasurePosition;
+    ss << fMeasureElementMeasurePosition;
   }
 
-  s << '[';
+  ss << '[';
 
   if (fTupletElementsList.size ()) {
     std::list<S_msrTupletElement>::const_iterator
@@ -976,41 +1086,41 @@ std::string msrTuplet::asString () const
       if (
         S_msrNote note = dynamic_cast<msrNote*>(&(*(*i)))
         ) {
-        s <<
+        ss <<
           note->asShortString ();
       }
 
       else if (
         S_msrChord chord = dynamic_cast<msrChord*>(&(*(*i)))
         ) {
-        s <<
+        ss <<
           chord->asString ();
       }
 
       else if (
         S_msrTuplet tuplet = dynamic_cast<msrTuplet*>(&(*(*i)))
         ) {
-        s <<
+        ss <<
           tuplet->asString ();
       }
 
       else {
         msrInternalError (
-          gGlobalServiceRunData->getInputSourceName (),
+          gGlobalCurrentServiceRunData->getInputSourceName (),
           fInputLineNumber,
           __FILE__, __LINE__,
           "tuplet member should be a note, a chord or another tuplet");
       }
 
       if (++i == iEnd) break;
-      s << ' ';
+      ss << ' ';
 
     } // for
   }
 
-  s << ']' << ']';
+  ss << ']' << ']';
 
-  return s.str ();
+  return ss.str ();
 }
 
 void msrTuplet::printFull (std::ostream& os) const

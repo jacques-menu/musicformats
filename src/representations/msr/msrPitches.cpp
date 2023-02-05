@@ -1485,7 +1485,7 @@ void fetchDiatonicPitchKindAndAlterationKindFromQuarterTonesPitchKind (
 
 std::string availableQuarterTonesPitchesLanguageKinds (size_t namesListMaxLength)
 {
-  std::stringstream s;
+  std::stringstream ss;
 
   size_t
     quarterTonesPitchesLanguageKindsMapSize =
@@ -1511,25 +1511,25 @@ std::string availableQuarterTonesPitchesLanguageKinds (size_t namesListMaxLength
 
       cumulatedLength += theString.size ();
       if (cumulatedLength >= namesListMaxLength) {
-        s << std::endl << gIndenter.getSpacer ();
+        ss << std::endl << gIndenter.getSpacer ();
         cumulatedLength = 0;
       }
 
       if (count == 1) {
-        s << gIndenter.getSpacer ();
+        ss << gIndenter.getSpacer ();
       }
-      s << theString;
+      ss << theString;
 
       if (count == nextToLast) {
-        s << " and ";
+        ss << " and ";
       }
       else if (count != quarterTonesPitchesLanguageKindsMapSize) {
-        s << ", ";
+        ss << ", ";
       }
     } // for
   }
 
-  return s.str ();
+  return ss.str ();
 }
 
 // quarter tones pitches
@@ -1548,17 +1548,17 @@ msrQuarterTonesPitchKind quarterTonesPitchKindFromDiatonicPitchAndAlteration (
       {
         result = msrQuarterTonesPitchKind::kQTP_UNKNOWN;
         /* JMI
-        std::stringstream s;
+        std::stringstream ss;
 
-        s <<
+        ss <<
           "cannot convert msrDiatonicPitchKind::kDiatonicPitch_UNKNOWN to a quarter tones pitch"
           ", line: " << inputLineNumber;
 
         msrInternalError (
-          gGlobalServiceRunData->getInputSourceName (),
+          gGlobalCurrentServiceRunData->getInputSourceName (),
           inputLineNumber,
           __FILE__, __LINE__,
-          s.str ());
+          ss.str ());
           */
       }
       break;
@@ -1600,17 +1600,17 @@ msrQuarterTonesPitchKind quarterTonesPitchKindFromDiatonicPitchAndAlteration (
           break;
         case msrAlterationKind::kAlteration_UNKNOWN:
           {
-            std::stringstream s;
+            std::stringstream ss;
 
-            s <<
+            ss <<
               "'A' alteration has not been set"
               ", line: " << inputLineNumber;
 
             msrInternalError (
-              gGlobalServiceRunData->getInputSourceName (),
+              gGlobalCurrentServiceRunData->getInputSourceName (),
               inputLineNumber,
               __FILE__, __LINE__,
-              s.str ());
+              ss.str ());
           }
           break;
       } // switch
@@ -1653,17 +1653,17 @@ msrQuarterTonesPitchKind quarterTonesPitchKindFromDiatonicPitchAndAlteration (
           break;
         case msrAlterationKind::kAlteration_UNKNOWN:
           {
-            std::stringstream s;
+            std::stringstream ss;
 
-            s <<
+            ss <<
               "'B' alteration has not been set"
               ", line: " << inputLineNumber;
 
             msrInternalError (
-              gGlobalServiceRunData->getInputSourceName (),
+              gGlobalCurrentServiceRunData->getInputSourceName (),
               inputLineNumber,
               __FILE__, __LINE__,
-              s.str ());
+              ss.str ());
           }
           break;
       } // switch
@@ -1708,17 +1708,17 @@ msrQuarterTonesPitchKind quarterTonesPitchKindFromDiatonicPitchAndAlteration (
           break;
         case msrAlterationKind::kAlteration_UNKNOWN:
           {
-            std::stringstream s;
+            std::stringstream ss;
 
-            s <<
+            ss <<
               "'C' alteration has not been set"
               ", line: " << inputLineNumber;
 
             msrInternalError (
-              gGlobalServiceRunData->getInputSourceName (),
+              gGlobalCurrentServiceRunData->getInputSourceName (),
               inputLineNumber,
               __FILE__, __LINE__,
-              s.str ());
+              ss.str ());
           }
           break;
       } // switch
@@ -1761,17 +1761,17 @@ msrQuarterTonesPitchKind quarterTonesPitchKindFromDiatonicPitchAndAlteration (
           break;
         case msrAlterationKind::kAlteration_UNKNOWN:
           {
-            std::stringstream s;
+            std::stringstream ss;
 
-            s <<
+            ss <<
               "'D' alteration has not been set"
               ", line: " << inputLineNumber;
 
             msrInternalError (
-              gGlobalServiceRunData->getInputSourceName (),
+              gGlobalCurrentServiceRunData->getInputSourceName (),
               inputLineNumber,
               __FILE__, __LINE__,
-              s.str ());
+              ss.str ());
           }
           break;
       } // switch
@@ -1814,17 +1814,17 @@ msrQuarterTonesPitchKind quarterTonesPitchKindFromDiatonicPitchAndAlteration (
           break;
         case msrAlterationKind::kAlteration_UNKNOWN:
           {
-            std::stringstream s;
+            std::stringstream ss;
 
-            s <<
+            ss <<
               "'E' alteration has not been set"
               ", line: " << inputLineNumber;
 
             msrInternalError (
-              gGlobalServiceRunData->getInputSourceName (),
+              gGlobalCurrentServiceRunData->getInputSourceName (),
               inputLineNumber,
               __FILE__, __LINE__,
-              s.str ());
+              ss.str ());
           }
           break;
       } // switch
@@ -1867,17 +1867,17 @@ msrQuarterTonesPitchKind quarterTonesPitchKindFromDiatonicPitchAndAlteration (
           break;
         case msrAlterationKind::kAlteration_UNKNOWN:
           {
-            std::stringstream s;
+            std::stringstream ss;
 
-            s <<
+            ss <<
               "'F' alteration has not been set"
               ", line: " << inputLineNumber;
 
             msrInternalError (
-              gGlobalServiceRunData->getInputSourceName (),
+              gGlobalCurrentServiceRunData->getInputSourceName (),
               inputLineNumber,
               __FILE__, __LINE__,
-              s.str ());
+              ss.str ());
           }
           break;
       } // switch
@@ -1920,17 +1920,17 @@ msrQuarterTonesPitchKind quarterTonesPitchKindFromDiatonicPitchAndAlteration (
           break;
         case msrAlterationKind::kAlteration_UNKNOWN:
           {
-            std::stringstream s;
+            std::stringstream ss;
 
-            s <<
+            ss <<
               "'G' alteration has not been set"
               ", line: " << inputLineNumber;
 
             msrInternalError (
-              gGlobalServiceRunData->getInputSourceName (),
+              gGlobalCurrentServiceRunData->getInputSourceName (),
               inputLineNumber,
               __FILE__, __LINE__,
-              s.str ());
+              ss.str ());
           }
           break;
       } // switch
@@ -2047,32 +2047,32 @@ msrDiatonicPitchKind diatonicPitchKindFromQuarterTonesPitchKind (
 
     case msrQuarterTonesPitchKind::kQTP_Rest:
       {
-        std::stringstream s;
+        std::stringstream ss;
 
-        s <<
+        ss <<
           "cannot get the diatonic pitch of a rest"
           ", line: " << inputLineNumber;
 
         msrInternalError (
-          gGlobalServiceRunData->getInputSourceName (),
+          gGlobalCurrentServiceRunData->getInputSourceName (),
           inputLineNumber,
           __FILE__, __LINE__,
-          s.str ());
+          ss.str ());
       }
 
     case msrQuarterTonesPitchKind::kQTP_Skip:
       {
-        std::stringstream s;
+        std::stringstream ss;
 
-        s <<
+        ss <<
           "cannot get the diatonic pitch of a skip"
           ", line: " << inputLineNumber;
 
         msrInternalError (
-          gGlobalServiceRunData->getInputSourceName (),
+          gGlobalCurrentServiceRunData->getInputSourceName (),
           inputLineNumber,
           __FILE__, __LINE__,
-          s.str ());
+          ss.str ());
       }
 
     case msrQuarterTonesPitchKind::kQTP_UNKNOWN:
@@ -2080,17 +2080,17 @@ msrDiatonicPitchKind diatonicPitchKindFromQuarterTonesPitchKind (
         result = msrDiatonicPitchKind::kDiatonicPitch_UNKNOWN;
 
         /* JMI
-        std::stringstream s;
+        std::stringstream ss;
 
-        s <<
+        ss <<
           "cannot get the diatonic pitch of a msrQuarterTonesPitchKind::kQTP_UNKNOWN"
           ", line: " << inputLineNumber;
 
         msrInternalError (
-          gGlobalServiceRunData->getInputSourceName (),
+          gGlobalCurrentServiceRunData->getInputSourceName (),
           inputLineNumber,
           __FILE__, __LINE__,
-          s.str ());
+          ss.str ());
           */
       }
   } // switch
@@ -2217,32 +2217,32 @@ msrAlterationKind alterationKindFromQuarterTonesPitchKind (
 
     case msrQuarterTonesPitchKind::kQTP_Rest:
       {
-        std::stringstream s;
+        std::stringstream ss;
 
-        s <<
+        ss <<
           "cannot get the alteration kind of a rest"
           ", line: " << inputLineNumber;
 
         msrInternalError (
-          gGlobalServiceRunData->getInputSourceName (),
+          gGlobalCurrentServiceRunData->getInputSourceName (),
           inputLineNumber,
           __FILE__, __LINE__,
-          s.str ());
+          ss.str ());
       }
 
     case msrQuarterTonesPitchKind::kQTP_Skip:
       {
-        std::stringstream s;
+        std::stringstream ss;
 
-        s <<
+        ss <<
           "cannot get the alteration kind of a skip"
           ", line: " << inputLineNumber;
 
         msrInternalError (
-          gGlobalServiceRunData->getInputSourceName (),
+          gGlobalCurrentServiceRunData->getInputSourceName (),
           inputLineNumber,
           __FILE__, __LINE__,
-          s.str ());
+          ss.str ());
       }
 
     case msrQuarterTonesPitchKind::kQTP_UNKNOWN:
@@ -2250,17 +2250,17 @@ msrAlterationKind alterationKindFromQuarterTonesPitchKind (
         result = msrAlterationKind::kAlteration_UNKNOWN;
 
         /* JMI
-        std::stringstream s;
+        std::stringstream ss;
 
-        s <<
+        ss <<
           "cannot get the diatonic pitch of a msrQuarterTonesPitchKind::kQTP_UNKNOWN"
           ", line: " << inputLineNumber;
 
         msrInternalError (
-          gGlobalServiceRunData->getInputSourceName (),
+          gGlobalCurrentServiceRunData->getInputSourceName (),
           inputLineNumber,
           __FILE__, __LINE__,
-          s.str ());
+          ss.str ());
           */
       }
   } // switch
@@ -2528,7 +2528,7 @@ msrSemiTonesPitchKind semiTonesPitchKindFromQuarterTonesPitchKind (
 std::string availableMsrQuarterTonesPitchesLanguageKinds (
   size_t namesListMaxLength)
 {
-  std::stringstream s;
+  std::stringstream ss;
 
   size_t
     quarterTonesPitchesLanguageKindsMapSize =
@@ -2553,26 +2553,26 @@ std::string availableMsrQuarterTonesPitchesLanguageKinds (
 
       cumulatedLength += theString.size ();
       if (cumulatedLength >= namesListMaxLength) {
-        s << std::endl << gIndenter.getSpacer ();
+        ss << std::endl << gIndenter.getSpacer ();
         cumulatedLength = 0;
         break;
       }
 
       if (count == 1) {
-        s << gIndenter.getSpacer ();
+        ss << gIndenter.getSpacer ();
       }
-      s << theString;
+      ss << theString;
 
       if (count == nextToLast) {
-        s << " and ";
+        ss << " and ";
       }
       else if (count != quarterTonesPitchesLanguageKindsMapSize) {
-        s << ", ";
+        ss << ", ";
       }
     } // for
   }
 
-  return s.str ();
+  return ss.str ();
 }
 
 // enharmonies

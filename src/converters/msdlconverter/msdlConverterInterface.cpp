@@ -364,12 +364,12 @@ namespace MusicFormats
 //           std::ofstream::out);
 //
 //       if (! outputFileStream.is_open ()) {
-//         std::stringstream s;
+//         std::stringstream ss;
 //
-//         s <<
+//         ss <<
 //           gWaeHandler->cannotOpenLilypondFileForWriting (outputFileName);
 //
-//         std::string message = s.str ();
+//         std::string message = ss.str ();
 //
 //         err <<
 //           message <<
@@ -529,7 +529,7 @@ namespace MusicFormats
 //   // create the global run data
 //   // ------------------------------------------------------
 //
-//   gGlobalServiceRunData =
+//   gGlobalCurrentServiceRunData =
 //     mfServiceRunData::create (
 //       serviceName);
 //
@@ -600,7 +600,7 @@ EXP mfMusicformatsErrorKind msdlFile2lilypond (
 //       createSXMLFileFromFile (
 //         fileName,
 		//     mfPassIDKind::kMfPassID_1,
-//         gWaeHandler->createAnMXSRFromAMusicXMLFile ());
+//         gWaeHandler->createAnMXSRFromAMusicXMLFileOrStdin ());
 //
 //   if (sxmlfile) {
 //     return
@@ -625,7 +625,7 @@ mfMusicformatsErrorKind convertMsdlFile2lilypondWithHandler ( // JMI ??? v0.9.66
 //       createSXMLFileFromFile (
 //         fileName,
 		//     mfPassIDKind::kMfPassID_1,
-//         gWaeHandler->createAnMXSRFromAMusicXMLFile ());
+//         gWaeHandler->createAnMXSRFromAMusicXMLFileOrStdin ());
 //
 //   if (sxmlfile) {
 //     return

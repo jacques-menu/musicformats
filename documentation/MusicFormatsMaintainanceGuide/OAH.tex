@@ -310,9 +310,15 @@ void lilypondFixedOctaveEntryAtom::applyAtomWithValue (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "==> oahAtom is of type 'lilypondFixedOctaveEntryAtom'" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -384,13 +390,19 @@ void oahIntegerAtom::setIntegerVariable (int value)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Setting option '" <<
       fetchNames () <<
       "' integer variable to '" <<
       value <<
       "'" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -1106,7 +1118,7 @@ int main (int argc, char*  argv[])
   // create the global run data
   // ------------------------------------------------------
 
-  gGlobalServiceRunData =
+  gGlobalCurrentServiceRunData =
     mfServiceRunData::create (serviceName);
 
   // ... ... ...
@@ -1233,14 +1245,14 @@ oahElementHelpOnlyKind oahHandler::applyOptionsFromElementUsesList ()
             switch (atomValueKind) {
               case oahElementValueKind::kElementValueLess:
                 {
-                  std::stringstream s;
+                  std::stringstream ss;
 
-                  s <<
+                  ss <<
                     "Atom with value " <<
                     valueFittedAtom->fetchNamesBetweenQuotes () <<
                     " has been registered as without value";
 
-                  oahInternalError (s.str ());
+                  oahInternalError (ss.str ());
                 }
                 break;
 
@@ -1258,14 +1270,14 @@ oahElementHelpOnlyKind oahHandler::applyOptionsFromElementUsesList ()
                       gOutputStream);
                 }
                 else {
-                  std::stringstream s;
+                  std::stringstream ss;
 
-                  s <<
+                  ss <<
                     "Value-fitted atom " <<
                     valueFittedAtom->fetchNamesBetweenQuotes () <<
                     " needs a non-empty value";
 
-                  oahInternalError (s.str ());
+                  oahInternalError (ss.str ());
                 }
                 break;
 
@@ -1323,14 +1335,14 @@ oahElementHelpOnlyKind oahHandler::applyOptionsFromElementUsesList ()
       }
 
       else {
-        std::stringstream s;
+        std::stringstream ss;
 
-        s <<
+        ss <<
           "Element from the from the atom uses list for \"" <<
           nameUsed <<
           "\" is null";
 
-        oahInternalError (s.str ());
+        oahInternalError (ss.str ());
 
   // ... ... ...
 }
@@ -1395,7 +1407,9 @@ const std::string K_INSIDER_OPTION_SHORT_NAME = "ins";
 void oahEarlyOptions::setEarlyInsiderOption ()
 {
   if (fTraceEarlyOptions) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Setting fEarlyInsiderOption" <<
       std::endl;
   }
@@ -1517,9 +1531,9 @@ Bool oahHandler::findStringInFindableElement (
     mfStringToLowerCase (fHandlerUsage).find (lowerCaseString) != std::string::npos;
 
   if (headerMatches || descriptionMatches || usageMatches) {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       fHandlerHeader <<
       ' ' <<
       fHandlerDescription <<
@@ -1529,7 +1543,7 @@ Bool oahHandler::findStringInFindableElement (
     // append the match to foundStringsList
     foundMatchesList.push_back (
       oahFindStringMatch::create (
-        s.str (),
+        ss.str (),
         containingFindableElementAsString ()));
 
     result = true;
@@ -1709,7 +1723,7 @@ void oahOahGroup::printOahOahValues (int valueFieldWidth)
 \begin{lstlisting}[language=CPlusPlus]
 std::string oahElement::fetchNames () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
   if (
     fShortName.size ()
@@ -1717,13 +1731,13 @@ std::string oahElement::fetchNames () const
     fLongName.size ()
   ) {
     if (gGlobalOahOahGroup->getReverseNamesDisplayOrder ()) {
-      s <<
+      ss <<
         '-' << fShortName <<
         ", " <<
         '-' << fLongName;
     }
     else {
-      s <<
+      ss <<
         '-' << fLongName <<
         ", " <<
         '-' << fShortName;
@@ -1732,16 +1746,16 @@ std::string oahElement::fetchNames () const
 
   else {
     if (fShortName.size ()) {
-      s <<
+      ss <<
       '-' << fShortName;
     }
     if (fLongName.size ()) {
-      s <<
+      ss <<
         '-' << fLongName;
     }
   }
 
-  return s.str ();
+  return ss.str ();
 }
 \end{lstlisting}
 
@@ -1825,9 +1839,15 @@ void oahHistoryAtom::applyValueLessAtom (std::ostream& os)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "==> option '" << fetchNames () << "' is a oahHistoryAtom" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -2015,10 +2035,10 @@ void oahLengthAtom::applyAtomWithValue (
     // leave the low level details to the STL...
     float floatValue;
     {
-      std::stringstream s;
+      std::stringstream ss;
       // concatenate the integer and decimal parts
-      s << sm [ 1 ] << sm [ 2 ];
-      s >> floatValue;
+      ss << sm [ 1 ] << sm [ 2 ];
+      ss >> floatValue;
     }
 
     std::string lengthUnitName = sm [ 3 ];
@@ -2032,9 +2052,9 @@ void oahLengthAtom::applyAtomWithValue (
     if (it == gGlobalMsrLengthUnitKindsMap.end ()) {
       // no, length unit name is unknown in the map
 
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         "length unit name \"" << lengthUnitName <<
         "\" is unknown" <<
         std::endl <<
@@ -2045,12 +2065,12 @@ void oahLengthAtom::applyAtomWithValue (
 
       ++gIndenter;
 
-      s <<
+      ss <<
         availableMsrLengthUnitKinds (K_MF_NAMES_LIST_MAX_LENGTH);
 
       --gIndenter;
 
-      oahError (s.str ());
+      oahError (ss.str ());
     }
 
     setLengthVariable (
@@ -2060,14 +2080,14 @@ void oahLengthAtom::applyAtomWithValue (
   }
 
   else {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "length value \"" << theString <<
       "\" for option '" << fetchNames () <<
       "' is ill-formed";
 
-    oahError (s.str ());
+    oahError (ss.str ());
   }
 
 	fSelected = true;
@@ -2085,6 +2105,14 @@ void oahLengthAtom::displayAtomWithVariableOptionsValues (
     fVariableName <<
     " : " <<
     fLengthVariable.asString ();
+  switch (fEarlyOptionKind) {
+    case oahEarlyOptionKind::kEarlyOptionNo:
+      break;
+    case oahEarlyOptionKind::kEarlyOptionYes:
+			os <<
+				", early";
+      break;
+  } // switch
   if (fSelected) {
     os << ", selected";
   }

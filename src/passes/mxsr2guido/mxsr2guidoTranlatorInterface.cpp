@@ -63,9 +63,9 @@ void translateMxsrToGuido (
     std::string separator =
       "%--------------------------------------------------------------";
 
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       separator <<
       std::endl <<
       gTab <<
@@ -77,7 +77,7 @@ void translateMxsrToGuido (
     gWaeHandler->waeTrace (
       err,
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 #endif
 
@@ -101,6 +101,10 @@ void translateMxsrToGuido (
       outputFileName <<
       "\"" <<
       std::endl;
+
+//     gWaeHandler->waeTrace ( JMI v0.9.67
+//       __FILE__, __LINE__,
+//       ss.str ());
   }
 #endif
 
@@ -110,6 +114,10 @@ void translateMxsrToGuido (
       err <<
         "xmlFile2gmn() output goes to standard output" <<
         std::endl;
+
+//     gWaeHandler->waeTrace ( JMI v0.9.67
+//       __FILE__, __LINE__,
+//       ss.str ());
     }
 #endif
 
@@ -127,6 +135,10 @@ void translateMxsrToGuido (
         outputFileName <<
         "\"" <<
         std::endl;
+
+//     gWaeHandler->waeTrace ( JMI v0.9.67
+//       __FILE__, __LINE__,
+//       ss.str ());
     }
 #endif
 
@@ -139,6 +151,10 @@ void translateMxsrToGuido (
         std::endl <<
         gWaeHandler->openingGuidoFileForWriting (outputFileName) <<
         std::endl;
+
+//     gWaeHandler->waeTrace ( JMI v0.9.67
+//       __FILE__, __LINE__,
+//       ss.str ());
     }
 #endif
 
@@ -148,12 +164,12 @@ void translateMxsrToGuido (
         std::ofstream::out);
 
     if (! guidoFileOutputStream.is_open ()) {
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         gWaeHandler->cannotOpenGuidoFileForWriting (outputFileName);
 
-      std::string message = s.str ();
+      std::string message = ss.str ();
 
       err <<
         message <<
@@ -174,6 +190,10 @@ void translateMxsrToGuido (
         std::endl <<
         gWaeHandler->closingGuidoFile (outputFileName) <<
         std::endl;
+
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif
 

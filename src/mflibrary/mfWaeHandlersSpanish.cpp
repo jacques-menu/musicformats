@@ -32,12 +32,12 @@ mfWaeHandlerSpanish::~mfWaeHandlerSpanish ()
 
 std::string mfWaeHandlerSpanish::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "MusicFormats warning and error handler for spanish";
 
-  return s.str ();
+  return ss.str ();
 }
 
 void mfWaeHandlerSpanish::print (std::ostream& os) const

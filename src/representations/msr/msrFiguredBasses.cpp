@@ -24,6 +24,7 @@
 #include "msrFiguredBasses.h"
 
 #include "oahOah.h"
+#include "oahEarlyOptions.h"
 
 #include "msrOah.h"
 
@@ -187,10 +188,16 @@ msrBassFigure::msrBassFigure (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceFiguredBasses ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Creating bass figure " <<
       asString () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 }
@@ -203,10 +210,16 @@ S_msrBassFigure msrBassFigure::createFigureNewbornClone (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceFiguredBasses ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Creating a newborn clone of bass figure " <<
       asString () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -235,10 +248,16 @@ S_msrBassFigure msrBassFigure::createFigureDeepClone (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceFiguredBasses ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Creating a deep clone of bass figure " <<
       asString () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -265,9 +284,15 @@ S_msrBassFigure msrBassFigure::createFigureDeepClone (
 void msrBassFigure::acceptIn (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrBassFigure::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrBassFigure>*
@@ -276,9 +301,15 @@ void msrBassFigure::acceptIn (basevisitor* v)
         S_msrBassFigure elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrBassFigure::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitStart (elem);
   }
@@ -287,9 +318,15 @@ void msrBassFigure::acceptIn (basevisitor* v)
 void msrBassFigure::acceptOut (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrBassFigure::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrBassFigure>*
@@ -298,9 +335,15 @@ void msrBassFigure::acceptOut (basevisitor* v)
         S_msrBassFigure elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrBassFigure::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitEnd (elem);
   }
@@ -311,9 +354,9 @@ void msrBassFigure::browseData (basevisitor* v)
 
 std::string msrBassFigure::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "[BassFigure" <<
     " '" << fFigureNumber <<
     "', prefix: " <<
@@ -323,7 +366,7 @@ std::string msrBassFigure::asString () const
     ", line " << fInputLineNumber <<
     ']';
 
-  return s.str ();
+  return ss.str ();
 }
 
 void msrBassFigure::print (std::ostream& os) const
@@ -332,7 +375,7 @@ void msrBassFigure::print (std::ostream& os) const
 
 /* JMI
   if (fFigureUpLinkToPart) { // JMI ???
-    s <<
+    ss <<
       ":" <<
       wholeNotesAsMsrString (
         fInputLineNumber,
@@ -461,10 +504,16 @@ msrFiguredBass::msrFiguredBass (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceFiguredBasses ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Creating figuredBass " <<
       asString () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 }
@@ -477,11 +526,17 @@ S_msrFiguredBass msrFiguredBass::createFiguredBassNewbornClone (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceFiguredBasses ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Creating a newborn clone of figured bass " <<
       asShortString () <<
       ", line " << fInputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -514,11 +569,17 @@ S_msrFiguredBass msrFiguredBass::createFiguredBassDeepClone ()
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceFiguredBasses ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Creating a deep clone of figuredBass " <<
       asString () <<
       ", line " << fInputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -551,11 +612,17 @@ void msrFiguredBass::setFiguredBassUpLinkToNote (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceFiguredBasses ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "==> Setting the uplink to note of figured bass " <<
       asString () <<
       " to note " << note->asString () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -605,12 +672,18 @@ void msrFiguredBass::appendFigureToFiguredBass (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceFiguredBasses ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Appending bass figure " << bassFigure->asString () <<
       " to figured-bass element '" <<
       asString () <<
       "'" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -620,9 +693,15 @@ void msrFiguredBass::appendFigureToFiguredBass (
 void msrFiguredBass::acceptIn (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrFiguredBass::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrFiguredBass>*
@@ -631,9 +710,15 @@ void msrFiguredBass::acceptIn (basevisitor* v)
         S_msrFiguredBass elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrFiguredBass::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitStart (elem);
   }
@@ -642,9 +727,15 @@ void msrFiguredBass::acceptIn (basevisitor* v)
 void msrFiguredBass::acceptOut (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrFiguredBass::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrFiguredBass>*
@@ -653,9 +744,15 @@ void msrFiguredBass::acceptOut (basevisitor* v)
         S_msrFiguredBass elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrFiguredBass::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitEnd (elem);
   }
@@ -672,9 +769,9 @@ void msrFiguredBass::browseData (basevisitor* v)
 
 std::string msrFiguredBass::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "[FiguredBass" <<
     ", " << std::hex << std::showbase << this << std::dec <<
     ", fMeasureElementMeasurePosition: " <<
@@ -688,37 +785,37 @@ std::string msrFiguredBass::asString () const
       fInputLineNumber,
       fFiguredBassDisplayWholeNotes);
 
-  s <<
+  ss <<
     ", fFiguredBassUpLinkToNote: ";
     if (fFiguredBassUpLinkToNote) {
-      s <<
+      ss <<
         fFiguredBassUpLinkToNote->asString ();
     }
     else {
-      s << "[NONE]";
+      ss << "[NONE]";
     }
 
-  s <<
+  ss <<
     ", fFiguredBassUpLinkToMeasure: ";
     if (fFiguredBassUpLinkToMeasure) {
-      s <<
+      ss <<
         fFiguredBassUpLinkToMeasure->getMeasureNumber ();
     }
     else {
-      s << "[NONE]";
+      ss << "[NONE]";
     }
 
-  s <<
+  ss <<
     ", fFiguredBassUpLinkToVoice" << ": ";
   if (fFiguredBassUpLinkToVoice) {
-    s << fFiguredBassUpLinkToVoice->asString ();
+    ss << fFiguredBassUpLinkToVoice->asString ();
   }
   else {
-    s << "[NONE]";
+    ss << "[NONE]";
   }
-  s << std::endl;
+  ss << std::endl;
 
-  s <<
+  ss <<
     ", fFiguredBassParenthesesKind: " <<
     fFiguredBassParenthesesKind <<
 
@@ -726,7 +823,7 @@ std::string msrFiguredBass::asString () const
     fFiguredBassTupletFactor.asString ();
 
   if (fFiguredBassFiguresList.size ()) {
-    s << ", fFiguredBassFiguresList: [";
+    ss << ", fFiguredBassFiguresList: [";
 
     std::list<S_msrBassFigure>::const_iterator
       iBegin = fFiguredBassFiguresList.begin (),
@@ -734,20 +831,20 @@ std::string msrFiguredBass::asString () const
       i      = iBegin;
 
     for ( ; ; ) {
-      s << (*i)->asString ();
+      ss << (*i)->asString ();
       if (++i == iEnd) break;
-      s << ' ';
+      ss << ' ';
     } // for
-  s << ']';
+  ss << ']';
   }
 
   // print the figured bass measure position
-  s <<
+  ss <<
     ", measurePosition: " << fMeasureElementMeasurePosition;
 
 /* JMI
   if (fFiguredBassUpLinkToPart) { // JMI ???
-    s <<
+    ss <<
       ":" <<
       wholeNotesAsMsrString (
         fInputLineNumber,
@@ -756,14 +853,14 @@ std::string msrFiguredBass::asString () const
 */
 
   // print the figured bass voice position
-//   s <<
+//   ss <<
 //     ", voicePosition: " << fMeasureElementVoicePosition;
 
-  s <<
+  ss <<
     ", line " << fInputLineNumber <<
     ']';
 
-  return s.str ();
+  return ss.str ();
 }
 
 void msrFiguredBass::print (std::ostream& os) const

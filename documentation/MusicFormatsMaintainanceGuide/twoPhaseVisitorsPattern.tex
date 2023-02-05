@@ -46,9 +46,15 @@ It is used as the base class   of all visitors in \methodName{browsedata} method
 void msrWords::acceptIn (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrWords::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrWords>*
@@ -57,9 +63,15 @@ void msrWords::acceptIn (basevisitor* v)
         S_msrWords elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrWords::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitStart (elem);
   }
@@ -167,10 +179,16 @@ void mxsr2msrTranslator::visitStart ( S_millimeters& elt )
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_millimeters" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -181,10 +199,16 @@ void mxsr2msrTranslator::visitStart ( S_tenths& elt )
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_tenths" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -198,10 +222,16 @@ void mxsr2msrTranslator::visitEnd ( S_scaling& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> End visiting S_scaling" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -219,6 +249,10 @@ void mxsr2msrTranslator::visitEnd ( S_scaling& elt)
       "There are " << fCurrentTenths <<
       " tenths for " <<  fCurrentMillimeters <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -385,9 +419,15 @@ void msrNote::browseData (basevisitor* v)
             ||
           gGlobalTracingOahGroup->getTraceGraceNotes ()
         ) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> visiting grace notes groups before is inhibited" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
       }
@@ -440,11 +480,17 @@ void msrStaff::browseData (basevisitor* v)
       if (ignoreVoice) {
 #ifdef MF_TRACING_IS_ENABLED // JMI
         if (gGlobalTracingOahGroup->getTraceVoices ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "Ignoring voice \"" <<
             voiceName <<
             "\"" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
       }

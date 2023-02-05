@@ -256,11 +256,17 @@ void mxsr2msrSkeletonBuilder::visitStart ( S_figured_bass& elt )
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_figured_bass" <<
       ", figuredBassVoicesCounter = " << fFiguredBassVoicesCounter <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -292,6 +298,10 @@ void mxsr2msrSkeletonBuilder::visitEnd ( S_note& elt )
           ", line " <<
           inputLineNumber <<
           std::endl;
+
+        gWaeHandler->waeTrace (
+          __FILE__, __LINE__,
+          ss.str ());
       }
 #endif
     }
@@ -349,10 +359,16 @@ void mxsr2msrTranslator::visitStart ( S_figured_bass& elt )
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> Start visiting S_figured_bass" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -373,17 +389,17 @@ void mxsr2msrTranslator::visitStart ( S_figured_bass& elt )
         msrFiguredBassParenthesesKind::kFiguredBassParenthesesNo;
 
     else {
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         "parentheses value " << parentheses <<
         " should be 'yes' or 'no'";
 
       musicxmlError (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         inputLineNumber,
         __FILE__, __LINE__,
-        s.str ());
+        ss.str ());
     }
   }
 
@@ -415,20 +431,32 @@ void mxsr2msrTranslator::visitEnd ( S_figured_bass& elt )
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+		ss <<
       "--> End visiting S_figured_bass" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
   // create the figured bass element
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceFiguredBasses ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Creating a figured bass" <<
       ", line " << inputLineNumber << ":" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -448,7 +476,7 @@ void mxsr2msrTranslator::visitEnd ( S_figured_bass& elt )
   // attach pending figures to the figured bass element
   if (! fPendingFiguredBassFiguresList.size ()) {
     musicxmlWarning (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       inputLineNumber,
       "figured-bass has no figures contents, ignoring it");
   }
@@ -615,9 +643,9 @@ void mxsr2msrTranslator::handlePendingFiguredBasses (
 %
 %#ifdef MF_TRACING_IS_ENABLED
 %      if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
-%        std::stringstream s;
+%        std::stringstream ss;
 %
-%        s <<
+%        ss <<
 %          "Copying harmony '" <<
 %          harmony->asString () <<
 %          "' from note " << note->asString () <<
@@ -627,7 +655,7 @@ void mxsr2msrTranslator::handlePendingFiguredBasses (
 %
 %      gWaeHandler->waeTrace (
 %        __FILE__, __LINE__,
-%        s.str ());
+%        ss.str ());
 %      }
 %#endif
 %
@@ -684,13 +712,19 @@ void msr2msrTranslator::visitStart (S_msrFiguredBass& elt)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "--> Start visiting msrFiguredBass '" <<
       elt->asString () <<
       "'" <<
       ", fOnGoingFiguredBassVoice = " << fOnGoingFiguredBassVoice <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -733,17 +767,17 @@ void msr2msrTranslator::visitStart (S_msrFiguredBass& elt)
   }
 
   else {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "figured bass is out of context, cannot be handled: " <<
       elt->asShortString ();
 
     msrInternalError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       elt->getInputLineNumber (),
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 }
 \end{lstlisting}
@@ -754,12 +788,18 @@ void msr2msrTranslator::visitEnd (S_msrFiguredBass& elt)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "--> End visiting msrFiguredBass '" <<
       elt->asString () <<
       "'" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -778,13 +818,19 @@ void msr2lpsrTranslator::visitStart (S_msrFiguredBass& elt)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "--> Start visiting msrFiguredBass '" <<
       elt->asString () <<
       "'" <<
       ", fOnGoingFiguredBassVoice = " << fOnGoingFiguredBassVoice <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -827,17 +873,17 @@ void msr2lpsrTranslator::visitStart (S_msrFiguredBass& elt)
   }
 
   else {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "figured bass is out of context, cannot be handled: " <<
       elt->asShortString ();
 
     msrInternalError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       elt->getInputLineNumber (),
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 }
 \end{lstlisting}
@@ -848,12 +894,18 @@ void msr2lpsrTranslator::visitEnd (S_msrFiguredBass& elt)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "--> End visiting msrFiguredBass '" <<
       elt->asString () <<
       "'" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -877,13 +929,19 @@ void msr2lpsrTranslator::visitStart (S_msrFiguredBass& elt)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "--> Start visiting msrFiguredBass '" <<
       elt->asString () <<
       "'" <<
       ", fOnGoingFiguredBassVoice = " << fOnGoingFiguredBassVoice <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -926,17 +984,17 @@ void msr2lpsrTranslator::visitStart (S_msrFiguredBass& elt)
   }
 
   else {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "figured bass is out of context, cannot be handled: " <<
       elt->asShortString ();
 
     msrInternalError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       elt->getInputLineNumber (),
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 }
 \end{lstlisting}

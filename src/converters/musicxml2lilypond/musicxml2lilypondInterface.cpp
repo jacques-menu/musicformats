@@ -74,7 +74,9 @@ static mfMusicformatsErrorKind sxmlFile2lilypondWithHandler (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsr ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       std::endl <<
       "<!-- ----------------------------------------------------------- -->" <<
       std::endl <<
@@ -84,13 +86,17 @@ static mfMusicformatsErrorKind sxmlFile2lilypondWithHandler (
     ++gIndenter;
 
     sxmlfile->print (gLogStream);
-    gLogStream << std::endl << std::endl;
+    ss << std::endl << std::endl;
 
     --gIndenter;
 
-    gLogStream <<
+    ss <<
       "<!-- ----------------------------------------------------------- -->" <<
       std::endl << std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -284,6 +290,10 @@ else {
       outputFileName <<
       "\"" <<
       std::endl;
+
+//     gWaeHandler->waeTrace ( JMI v0.9.67
+//       __FILE__, __LINE__,
+//       ss.str ());
   }
 #endif
 
@@ -293,6 +303,10 @@ else {
       err <<
         "xmlFile2lilypond() output goes to standard output" <<
         std::endl;
+
+//     gWaeHandler->waeTrace ( JMI v0.9.67
+//       __FILE__, __LINE__,
+//       ss.str ());
     }
 #endif
 
@@ -331,6 +345,10 @@ else {
         outputFileName <<
         "\"" <<
         std::endl;
+
+//     gWaeHandler->waeTrace ( JMI v0.9.67
+//       __FILE__, __LINE__,
+//       ss.str ());
     }
 #endif
 
@@ -341,6 +359,10 @@ else {
         std::endl <<
         gWaeHandler->openingLilypondFileForWriting (outputFileName) <<
         std::endl;
+
+//     gWaeHandler->waeTrace ( JMI v0.9.67
+//       __FILE__, __LINE__,
+//       ss.str ());
     }
 #endif
 
@@ -350,12 +372,12 @@ else {
         std::ofstream::out);
 
     if (! outputFileStream.is_open ()) {
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         gWaeHandler->cannotOpenLilypondFileForWriting (outputFileName);
 
-      std::string message = s.str ();
+      std::string message = ss.str ();
 
       err <<
         message <<
@@ -393,10 +415,16 @@ else {
     // close output file
 #ifdef TRACE_OAH
     if (gtracingOah->fTracePasses) {
-      gLogStream <<
+      std::stringstream ss;
+
+      ss <<
         std::endl <<
         gWaeHandler->closingLilypondFile (outputFileName) <<
         std::endl;
+
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif
 
@@ -455,7 +483,9 @@ static mfMusicformatsErrorKind xmlFile2lilypondWithOptionsAndArguments (
   // ------------------------------------------------------
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       handlerOptionsAndArguments;
   }
 #endif
@@ -474,10 +504,16 @@ static mfMusicformatsErrorKind xmlFile2lilypondWithOptionsAndArguments (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       serviceName << " main()" <<
       ", insiderOption: " << insiderOption <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -513,7 +549,7 @@ static mfMusicformatsErrorKind xmlFile2lilypondWithOptionsAndArguments (
   // create the global run data
   // ------------------------------------------------------
 
-  gGlobalServiceRunData =
+  gGlobalCurrentServiceRunData =
     mfServiceRunData::create (
       serviceName);
 
@@ -584,7 +620,7 @@ EXP mfMusicformatsErrorKind musicxmlFile2lilypond (
       createSXMLFileFromFile (
         fileName,
         mfPassIDKind::kMfPassID_1,
-        gWaeHandler->createAnMXSRFromAMusicXMLFile ());
+        gWaeHandler->createAnMXSRFromAMusicXMLFileOrStdin ());
 
   if (sxmlfile) {
     return
@@ -609,7 +645,7 @@ mfMusicformatsErrorKind convertMusicxmlFile2lilypondWithHandler (
       createSXMLFileFromFile (
         fileName,
         mfPassIDKind::kMfPassID_1,
-        gWaeHandler->createAnMXSRFromAMusicXMLFile ());
+        gWaeHandler->createAnMXSRFromAMusicXMLFileOrStdin ());
 
   if (sxmlfile) {
     return

@@ -66,11 +66,17 @@ EXP mfMusicformatsErrorKind msrScore2brailleWithHandler (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Translating an MSR score to braille in \"" <<
       handler->getHandlerHeader () <<
       "\"" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
   // has quiet mode been requested?
@@ -187,6 +193,10 @@ EXP mfMusicformatsErrorKind msrScore2brailleWithHandler (
           outputFileName <<
           "\"" <<
           std::endl;
+
+//     gWaeHandler->waeTrace ( JMI v0.9.67
+//       __FILE__, __LINE__,
+//       ss.str ());
       }
 #endif
 
@@ -196,6 +206,10 @@ EXP mfMusicformatsErrorKind msrScore2brailleWithHandler (
         err <<
           "xmlFile2braille() output goes to standard output" <<
           std::endl;
+
+//     gWaeHandler->waeTrace ( JMI v0.9.67
+//       __FILE__, __LINE__,
+//       ss.str ());
       }
 #endif
 
@@ -226,6 +240,10 @@ EXP mfMusicformatsErrorKind msrScore2brailleWithHandler (
           outputFileName <<
           "\"" <<
           std::endl;
+
+//     gWaeHandler->waeTrace ( JMI v0.9.67
+//       __FILE__, __LINE__,
+//       ss.str ());
       }
 #endif
 
@@ -236,6 +254,10 @@ EXP mfMusicformatsErrorKind msrScore2brailleWithHandler (
           std::endl <<
           gWaeHandler->openingBrailleMusicFileForWriting (outputFileName) <<
           std::endl;
+
+//     gWaeHandler->waeTrace ( JMI v0.9.67
+//       __FILE__, __LINE__,
+//       ss.str ());
       }
 #endif
 
@@ -245,12 +267,12 @@ EXP mfMusicformatsErrorKind msrScore2brailleWithHandler (
           std::ofstream::out);
 
       if (! brailleCodeFileOutputStream.is_open ()) {
-        std::stringstream s;
+        std::stringstream ss;
 
-        s <<
+        ss <<
           gWaeHandler->cannotOpenBrailleMusicFileForWriting (outputFileName);
 
-        std::string message = s.str ();
+        std::string message = ss.str ();
 
         err <<
           message <<
@@ -280,10 +302,16 @@ EXP mfMusicformatsErrorKind msrScore2brailleWithHandler (
       // close output file
 #ifdef TRACE_OAH
       if (gtracingOah->fTracePasses) {
-        gLogStream <<
+        std::stringstream ss;
+
+        ss <<
           std::endl <<
           gWaeHandler->closingBrailleMusicFile (outputFileName) <<
           std::endl;
+
+        gWaeHandler->waeTrace (
+          __FILE__, __LINE__,
+          ss.str ());
       }
 #endif
 

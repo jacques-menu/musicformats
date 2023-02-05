@@ -26,17 +26,17 @@
 %
 %#ifdef MF_TRACING_IS_ENABLED
 %  if (gGlobalTracingOahGroup->getTraceNotes ()) {
-%    std::stringstream s;
+%    std::stringstream ss;
 %
-%    s <<
+%    ss <<
 %      std::endl <<
 %      "% --> generating code for noteRegularInMeasure " <<
 %      note->asString () <<
 %      ", line " << inputLineNumber <<
 %      std::endl;
 %
-%    gLogStream          << s.str ();
-%    fLilypondCodeStream << s.str ();
+%    gLogStream          << ss.str ();
+%    fLilypondCodeStream << ss.str ();
 %  }
 %#endif
 %

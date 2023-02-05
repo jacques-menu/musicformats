@@ -18,6 +18,7 @@
 #include "msrDynamics.h"
 
 #include "oahOah.h"
+#include "oahEarlyOptions.h"
 
 #include "msrOah.h"
 
@@ -220,7 +221,7 @@ msrDynamicKind dynamicFromString (const std::string& theString)
 //______________________________________________________________________________
 S_msrDynamic msrDynamic::create (
   int              inputLineNumber,
-  msrDynamicKind  dynamicKind,
+  msrDynamicKind   dynamicKind,
   msrPlacementKind dynamicPlacementKind)
 {
   msrDynamic* o =
@@ -233,18 +234,24 @@ S_msrDynamic msrDynamic::create (
 }
 
 S_msrDynamic msrDynamic::createDynamicFromString (
-  int              inputLineNumber,
-  const std::string&    dynamicsString,
-  msrPlacementKind dynamicPlacementKind)
+  int                inputLineNumber,
+  const std::string& dynamicsString,
+  msrPlacementKind   dynamicPlacementKind)
 {
 #ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceDynamicss ()) {
-    gLogStream <<
+  if (gGlobalTracingOahGroup->getTraceDynamics ()) {
+		std::stringstream ss;
+
+    ss <<
       "Creating dynamic from string \"" <<
       dynamicsString <<
-      "\", dynamicsMeasureNumber: '" << dynamicsMeasureNumber <<
+//       "\", dynamicsMeasureNumber: '" << dynamicsMeasureNumber << JMI v0.9.67
       "', line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -257,7 +264,7 @@ S_msrDynamic msrDynamic::createDynamicFromString (
 
 msrDynamic::msrDynamic (
   int              inputLineNumber,
-  msrDynamicKind  dynamicKind,
+  msrDynamicKind   dynamicKind,
   msrPlacementKind dynamicPlacementKind)
     : msrElement (inputLineNumber)
 {
@@ -272,9 +279,15 @@ msrDynamic::~msrDynamic ()
 void msrDynamic::acceptIn (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrDynamic::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrDynamic>*
@@ -283,9 +296,15 @@ void msrDynamic::acceptIn (basevisitor* v)
         S_msrDynamic elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrDynamic::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitStart (elem);
   }
@@ -294,9 +313,15 @@ void msrDynamic::acceptIn (basevisitor* v)
 void msrDynamic::acceptOut (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrDynamic::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrDynamic>*
@@ -305,9 +330,15 @@ void msrDynamic::acceptOut (basevisitor* v)
         S_msrDynamic elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrDynamic::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitEnd (elem);
   }
@@ -342,9 +373,9 @@ std::ostream& operator << (std::ostream& os, const S_msrDynamic& elt)
 
 //______________________________________________________________________________
 S_msrOtherDynamic msrOtherDynamic::create (
-  int              inputLineNumber,
-  const std::string&    otherDynamicString,
-  msrPlacementKind otherDynamicPlacementKind)
+  int                inputLineNumber,
+  const std::string& otherDynamicString,
+  msrPlacementKind   otherDynamicPlacementKind)
 {
   msrOtherDynamic* o =
     new msrOtherDynamic (
@@ -356,9 +387,9 @@ S_msrOtherDynamic msrOtherDynamic::create (
 }
 
 msrOtherDynamic::msrOtherDynamic (
-  int              inputLineNumber,
-  const std::string&    otherDynamicString,
-  msrPlacementKind otherDynamicPlacementKind)
+  int                inputLineNumber,
+  const std::string& otherDynamicString,
+  msrPlacementKind   otherDynamicPlacementKind)
     : msrElement (inputLineNumber)
 {
   fOtherDynamicsString = otherDynamicString;
@@ -372,9 +403,15 @@ msrOtherDynamic::~msrOtherDynamic ()
 void msrOtherDynamic::acceptIn (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrOtherDynamic::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrOtherDynamic>*
@@ -383,9 +420,15 @@ void msrOtherDynamic::acceptIn (basevisitor* v)
         S_msrOtherDynamic elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrOtherDynamic::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitStart (elem);
   }
@@ -394,9 +437,15 @@ void msrOtherDynamic::acceptIn (basevisitor* v)
 void msrOtherDynamic::acceptOut (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrOtherDynamic::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrOtherDynamic>*
@@ -405,9 +454,15 @@ void msrOtherDynamic::acceptOut (basevisitor* v)
         S_msrOtherDynamic elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrOtherDynamic::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitEnd (elem);
   }
@@ -419,9 +474,9 @@ void msrOtherDynamic::browseData (basevisitor* v)
 
 std::string msrOtherDynamic::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "OtherDynamics '" <<
     ", otherDynamicString: " <<
     fOtherDynamicsString <<
@@ -429,7 +484,7 @@ std::string msrOtherDynamic::asString () const
     msrPlacementKindAsString (fOtherDynamicPlacementKind) <<
     "', line " << fInputLineNumber;
 
-  return s.str ();
+  return ss.str ();
 }
 
 void msrOtherDynamic::print (std::ostream& os) const
@@ -500,9 +555,15 @@ msrCrescDecresc::~msrCrescDecresc ()
 void msrCrescDecresc::acceptIn (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrCrescDecresc::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrCrescDecresc>*
@@ -511,9 +572,15 @@ void msrCrescDecresc::acceptIn (basevisitor* v)
         S_msrCrescDecresc elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrCrescDecresc::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitStart (elem);
   }
@@ -522,9 +589,15 @@ void msrCrescDecresc::acceptIn (basevisitor* v)
 void msrCrescDecresc::acceptOut (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrCrescDecresc::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrCrescDecresc>*
@@ -533,9 +606,15 @@ void msrCrescDecresc::acceptOut (basevisitor* v)
         S_msrCrescDecresc elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrCrescDecresc::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitEnd (elem);
   }
@@ -658,9 +737,15 @@ msrWedge::~msrWedge ()
 void msrWedge::acceptIn (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrWedge::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrWedge>*
@@ -669,9 +754,15 @@ void msrWedge::acceptIn (basevisitor* v)
         S_msrWedge elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrWedge::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitStart (elem);
   }
@@ -680,9 +771,15 @@ void msrWedge::acceptIn (basevisitor* v)
 void msrWedge::acceptOut (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrWedge::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrWedge>*
@@ -691,9 +788,15 @@ void msrWedge::acceptOut (basevisitor* v)
         S_msrWedge elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrWedge::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitEnd (elem);
   }

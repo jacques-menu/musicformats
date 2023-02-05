@@ -63,12 +63,18 @@ msrColorRGB::msrColorRGB (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "There are " << smSize << " matches" <<
       " for RGB color string '" << theString <<
       "' with std::regex '" << regularExpression <<
       "'" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -85,13 +91,13 @@ msrColorRGB::msrColorRGB (
   }
 
   else {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "msrColorRGB string '" << theString <<
       "' is ill-formed";
 
-    oahError (s.str ());
+    oahError (ss.str ());
   }
 
   std::string
@@ -101,20 +107,26 @@ msrColorRGB::msrColorRGB (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "--> RString = \"" << RString << "\", " <<
       "--> GString = \"" << GString << "\"" <<
       "--> BString = \"" << BString << "\"" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
   // are these strings alright?
   {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s << RString;
-    s >> fR;
+    ss << RString;
+    ss >> fR;
 
     if (fR < 0.0 || fR > 1.0) {
       gLogStream <<
@@ -124,10 +136,10 @@ msrColorRGB::msrColorRGB (
     }
   }
   {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s << GString;
-    s >> fG;
+    ss << GString;
+    ss >> fG;
 
     if (fG < 0.0 || fG > 1.0) {
       gLogStream <<
@@ -137,10 +149,10 @@ msrColorRGB::msrColorRGB (
     }
   }
   {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s << BString;
-    s >> fB;
+    ss << BString;
+    ss >> fB;
 
     if (fB < 0.0 || fB > 1.0) {
       gLogStream <<
@@ -154,9 +166,9 @@ msrColorRGB::msrColorRGB (
 
 std::string msrColorRGB::asString (int precision) const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "[ColorRGB " <<
     std::setprecision (precision) <<
     '[' <<
@@ -167,14 +179,14 @@ std::string msrColorRGB::asString (int precision) const
     fB <<
     "]]";
 
-  return s.str ();
+  return ss.str ();
 }
 
 std::string msrColorRGB::asSpaceSeparatedString (int precision) const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     std::setprecision (precision) <<
     fR <<
     ' ' <<
@@ -182,7 +194,7 @@ std::string msrColorRGB::asSpaceSeparatedString (int precision) const
     ' ' <<
     fB;
 
-  return s.str ();
+  return ss.str ();
 }
 
 void msrColorRGB::print (std::ostream& os) const
@@ -218,15 +230,15 @@ msrColorAlphaRGB::~msrColorAlphaRGB ()
 
 std::string msrColorAlphaRGB::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "[ColorAlphaRGB" <<
     ", fColorRGB: \"" << fColorRGB <<
     "\", fColorAlpha: \"" << fColorAlpha <<
     "\"]";
 
-  return s.str ();
+  return ss.str ();
 }
 
 void msrColorAlphaRGB::print (std::ostream& os) const

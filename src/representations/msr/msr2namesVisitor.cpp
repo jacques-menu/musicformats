@@ -66,14 +66,16 @@ void msr2namesVisitor::printNamesFromMsrScore (
 void msr2namesVisitor::visitStart (S_msrScore& elt)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "--> Start visiting msrScore" <<
       std::endl;
   }
 
   gLogStream <<
     "MSR names in \"" <<
-    gGlobalServiceRunData->getInputSourceName () <<
+    gGlobalCurrentServiceRunData->getInputSourceName () <<
     "\":" <<
     std::endl << std::endl;
 
@@ -85,7 +87,9 @@ void msr2namesVisitor::visitEnd (S_msrScore& elt)
   --gIndenter;
 
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "--> End visiting msrScore" <<
       std::endl;
   }
@@ -134,7 +138,9 @@ void msr2namesVisitor::visitEnd (S_msrScore& elt)
 void msr2namesVisitor::visitStart (S_msrPartGroup& elt)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "--> Start visiting msrPartGroup" <<
       std::endl;
   }
@@ -185,7 +191,9 @@ void msr2namesVisitor::visitEnd (S_msrPartGroup& elt)
   --gIndenter;
 
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "--> End visiting msrPartGroup" <<
       std::endl;
   }
@@ -195,7 +203,9 @@ void msr2namesVisitor::visitEnd (S_msrPartGroup& elt)
 void msr2namesVisitor::visitStart (S_msrPart& elt)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "--> Start visiting msrPart" <<
       std::endl;
   }
@@ -252,7 +262,9 @@ void msr2namesVisitor::visitEnd (S_msrPart& elt)
   --gIndenter;
 
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "--> End visiting msrPart" <<
       std::endl;
   }
@@ -262,7 +274,9 @@ void msr2namesVisitor::visitEnd (S_msrPart& elt)
 void msr2namesVisitor::visitStart (S_msrStaff& elt)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "--> Start visiting msrStaff" <<
       std::endl;
   }
@@ -312,7 +326,9 @@ void msr2namesVisitor::visitEnd (S_msrStaff& elt)
   --gIndenter;
 
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "--> End visiting msrStaff" <<
       std::endl;
   }
@@ -324,7 +340,9 @@ void msr2namesVisitor::visitEnd (S_msrStaff& elt)
 void msr2namesVisitor::visitStart (S_msrVoice& elt)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "--> Start visiting msrVoice" <<
       std::endl;
   }
@@ -363,7 +381,9 @@ void msr2namesVisitor::visitEnd (S_msrVoice& elt)
   --gIndenter;
 
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "--> End visiting msrVoice" <<
       std::endl;
   }

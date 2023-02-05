@@ -32,9 +32,15 @@ void initializeBSR ()
         &&
       ! gGlobalOahEarlyOptions.getEarlyQuietOption ()
     ) {
-      gLogStream <<
+      std::stringstream ss;
+
+      ss <<
         "Initializing BSR" <<
         std::endl;
+
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif
 

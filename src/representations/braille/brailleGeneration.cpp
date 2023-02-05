@@ -144,7 +144,7 @@ void bsrBrailleGenerator::generateCodeForCellsList (
     for ( ; ; ) {
       generateCodeForBrailleCell ((*i));
       if (++i == iEnd) break;
-      // JMI s << ' ';
+      // JMI ss << ' ';
     } // for
   }
 }
@@ -169,12 +169,12 @@ void bsrBrailleGenerator::generateCodeForLineContents (
 
 std::string bsrBrailleGenerator::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "BrailleGenerator";
 
-  return s.str ();
+  return ss.str ();
 }
 
 void bsrBrailleGenerator::print (std::ostream& os) const
@@ -224,17 +224,17 @@ void bsrAsciiBrailleGenerator::generateCodeForBrailleCell (
   switch (cellKind) {
     case bsrCellKind::kCellUnknown:
       {
-        std::stringstream s;
+        std::stringstream ss;
 
-        s <<
+        ss <<
           "cannot generate code for braille cell '" <<
           bsrCellKindAsString (cellKind) <<
           "'";
         bsr2brailleInternalError (
-          gGlobalServiceRunData->getInputSourceName (),
+          gGlobalCurrentServiceRunData->getInputSourceName (),
           -999, // inputLineNumber, TICINO JMI
           __FILE__, __LINE__,
-          s.str ());
+          ss.str ());
       }
       break;
 
@@ -337,12 +337,12 @@ void bsrAsciiBrailleGenerator::writeTestData (std::ostream& os)
 
 std::string bsrAsciiBrailleGenerator::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "AsciiBrailleGenerator";
 
-  return s.str ();
+  return ss.str ();
 }
 
 void bsrAsciiBrailleGenerator::print (std::ostream& os) const
@@ -410,17 +410,17 @@ void bsrUTF8BrailleGenerator::generateCodeForBrailleCell (
   switch (cellKind) {
     case bsrCellKind::kCellUnknown:
       {
-        std::stringstream s;
+        std::stringstream ss;
 
-        s <<
+        ss <<
           "cannot generate code for braille cell '" <<
           bsrCellKindAsString (cellKind) <<
           "'";
         bsr2brailleInternalError (
-          gGlobalServiceRunData->getInputSourceName (),
+          gGlobalCurrentServiceRunData->getInputSourceName (),
           -999, // TICINO inputLineNumber,
           __FILE__, __LINE__,
-          s.str ());
+          ss.str ());
       }
       break;
 
@@ -532,15 +532,15 @@ void bsrUTF8BrailleGenerator::writeTestData (std::ostream& os)
 
 std::string bsrUTF8BrailleGenerator::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "UTF8BrailleGenerator" <<
     ", byteOrderingKind: " <<
     bsrByteOrderingKindAsString (
       fByteOrderingKind);
 
-  return s.str ();
+  return ss.str ();
 }
 
 void bsrUTF8BrailleGenerator::print (std::ostream& os) const
@@ -603,15 +603,15 @@ bsrUTF8DebugBrailleGenerator::~bsrUTF8DebugBrailleGenerator ()
 
 std::string bsrUTF8DebugBrailleGenerator::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "UTF8DebugBrailleGenerator" <<
     ", byteOrderingKind: " <<
     bsrByteOrderingKindAsString (
       fByteOrderingKind);
 
-  return s.str ();
+  return ss.str ();
 }
 
 void bsrUTF8DebugBrailleGenerator::generateCodeForMusicHeading (
@@ -754,17 +754,17 @@ Octal Escape Sequence  \342\240\203*/
   switch (cellKind) {
     case bsrCellKind::kCellUnknown:
       {
-        std::stringstream s;
+        std::stringstream ss;
 
-        s <<
+        ss <<
           "cannot generate code for braille cell '" <<
           bsrCellKindAsString (cellKind) <<
           "'";
         bsr2brailleInternalError (
-          gGlobalServiceRunData->getInputSourceName (),
+          gGlobalCurrentServiceRunData->getInputSourceName (),
           -999, // TICINO inputLineNumber,
           __FILE__, __LINE__,
-          s.str ());
+          ss.str ());
       }
       break;
 
@@ -876,15 +876,15 @@ void bsrUTF16BigEndianBrailleGenerator::writeTestData (std::ostream& os)
 
 std::string bsrUTF16BigEndianBrailleGenerator::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "UTF16BigEndianBrailleGenerator" <<
     ", byteOrderingKind: " <<
     bsrByteOrderingKindAsString (
       fByteOrderingKind);
 
-  return s.str ();
+  return ss.str ();
 }
 
 void bsrUTF16BigEndianBrailleGenerator::print (std::ostream& os) const
@@ -977,17 +977,17 @@ Octal Escape Sequence  \342\240\203
   switch (cellKind) {
     case bsrCellKind::kCellUnknown:
       {
-        std::stringstream s;
+        std::stringstream ss;
 
-        s <<
+        ss <<
           "cannot generate code for braille cell '" <<
           bsrCellKindAsString (cellKind) <<
           "'";
         bsr2brailleInternalError (
-          gGlobalServiceRunData->getInputSourceName (),
+          gGlobalCurrentServiceRunData->getInputSourceName (),
           -999, // TICINO inputLineNumber,
           __FILE__, __LINE__,
-          s.str ());
+          ss.str ());
       }
       break;
 
@@ -1099,15 +1099,15 @@ void bsrUTF16SmallEndianBrailleGenerator::writeTestData (std::ostream& os)
 
 std::string bsrUTF16SmallEndianBrailleGenerator::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "UTF16SmallEndianBrailleGenerator" <<
     ", byteOrderingKind: " <<
     bsrByteOrderingKindAsString (
       fByteOrderingKind);
 
-  return s.str ();
+  return ss.str ();
 }
 
 void bsrUTF16SmallEndianBrailleGenerator::print (std::ostream& os) const

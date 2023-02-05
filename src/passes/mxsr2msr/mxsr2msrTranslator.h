@@ -1848,11 +1848,11 @@ class EXP mxsr2msrTranslator :
                               fVoicesLastMetNoteMap;
 
     void                      printVoicesLastMetNoteMap (
-                                int           inputLineNumber,
+                                int                inputLineNumber,
                                 const std::string& context);
 
     void                      checkStep (
-                                int           inputLineNumber,
+                                int                inputLineNumber,
                                 const std::string& stepValue,
                                 const std::string& markup);
 

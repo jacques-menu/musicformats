@@ -72,6 +72,12 @@ class EXP mfService : public smartable
                                   passDescription);
                               }
 
+
+    void                  fetchPassIDKindList (
+                            std::list<mfPassIDKind>& passIDKindList) const;
+
+    std::string           fetchServicePassDescriptionsAsString () const;
+
   public:
 
     // print
@@ -79,10 +85,14 @@ class EXP mfService : public smartable
 
     void                  print (std::ostream& os) const;
 
+    void                  printServiceForAboutOption (std::ostream& os) const;
+
   private:
 
     // private services
     // ------------------------------------------------------
+
+    size_t                fetchMaxPassIDKindAsStringLength () const;
 
   private:
 
@@ -194,7 +204,7 @@ class EXP mfServiceRunData : public smartable
     std::string           fServiceName;
 
 //     // OAH handler
-//     S_oahHandler          fRunOahHandler;
+//     S_oahHandler          fRunOahHandler; JMI v0.9.67
 
     // input source name
     std::string           fInputSourceName;
@@ -208,13 +218,14 @@ class EXP mfServiceRunData : public smartable
     // private work fields
     // ------------------------------------------------------
 
-  // JMIJMIJMI
+  // JMIJMIJMI v0.9.67
 };
 typedef SMARTP<mfServiceRunData> S_mfServiceRunData;
 EXP std::ostream& operator << (std::ostream& os, const S_mfServiceRunData& elt);
 
-EXP extern S_mfServiceRunData gGlobalServiceRunData;
+EXP extern S_mfServiceRunData gGlobalCurrentServiceRunData;
 
+EXP extern S_mfService gGlobalCurrentService;
 
 }
 

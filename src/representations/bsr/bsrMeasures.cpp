@@ -20,6 +20,7 @@
 #include "bsrMeasures.h"
 
 #include "oahOah.h"
+#include "oahEarlyOptions.h"
 
 #include "bsrOah.h"
 
@@ -53,12 +54,18 @@ bsrMeasure::bsrMeasure (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasures ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Creating bsrMeasure '" <<
       asString () <<
       "', line " <<
       fInputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 }
@@ -70,10 +77,16 @@ S_bsrMeasure bsrMeasure::createMeasureNewbornClone ()
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasures ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Creating a newborn clone of measure " <<
       asString () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -100,7 +113,9 @@ void bsrMeasure::appendClefToMeasure (S_bsrClef clef)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceClefs ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Appending clef '" <<
       clef->asShortString () <<
       "' to measure '" <<
@@ -117,7 +132,9 @@ void bsrMeasure::appendBarLineToMeasure (S_bsrBarLine barLine)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceBarLines ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Appending barLine " <<
       barLine->asShortString () <<
       " to measure '" <<
@@ -168,7 +185,9 @@ void bsrMeasure::appendNoteToMeasure (S_bsrNote note)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceNotes ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Appending note '" <<
       note->asShortString () <<
       "' to measure '" <<
@@ -185,7 +204,9 @@ void bsrMeasure::appendDynamicToMeasure (S_bsrDynamic dynamic)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceDynamics ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Appending dynamic '" <<
       dynamic->asShortString () <<
       "' to measure '" <<
@@ -226,9 +247,16 @@ void bsrMeasure::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
+      "% --> End visiting bsrTranscriptionNotesElement" <<
       "% ==> bsrMeasure::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -239,9 +267,15 @@ void bsrMeasure::acceptIn (basevisitor* v)
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching bsrMeasure::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
         p->visitStart (elem);
@@ -252,9 +286,16 @@ void bsrMeasure::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
+      "% --> End visiting bsrTranscriptionNotesElement" <<
       "% ==> bsrMeasure::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -265,9 +306,15 @@ void bsrMeasure::acceptOut (basevisitor* v)
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching bsrMeasure::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
         p->visitEnd (elem);
@@ -288,9 +335,9 @@ void bsrMeasure::browseData (basevisitor* v)
 
 std::string bsrMeasure::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "Measure" <<
     ", printMeasureNumber: " << fPrintMeasureNumber <<
     ", printMeasureNumber: " << fPrintMeasureNumber <<
@@ -299,14 +346,14 @@ std::string bsrMeasure::asString () const
     ", spacesBefore: " << fSpacesBefore <<
     ", line " << fInputLineNumber;
 
-  return s.str ();
+  return ss.str ();
 }
 
 std::string bsrMeasure::asDebugString () const // JMI
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s << "{";
+  ss << "{";
 
   size_t measureElementsListSize = fMeasureLineElementsList.size ();
 
@@ -316,15 +363,15 @@ std::string bsrMeasure::asDebugString () const // JMI
       iEnd   = fMeasureLineElementsList.end (),
       i      = iBegin;
     for ( ; ; ) {
-      s << (*i)->asDebugString ();
+      ss << (*i)->asDebugString ();
       if (++i == iEnd) break;
-      s << "|";
+      ss << "|";
     } // for
   }
 
-  s << '}';
+  ss << '}';
 
-  return s.str ();
+  return ss.str ();
 }
 
 void bsrMeasure::print (std::ostream& os) const
@@ -407,7 +454,7 @@ std::ostream& operator << (std::ostream& os, const S_bsrMeasure& elt)
   else {
     os << "[NONE]" << std::endl;
   }
-  
+
   return os;
 }
 

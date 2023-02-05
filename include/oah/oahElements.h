@@ -131,6 +131,11 @@ class oahFindStringMatch : public smartable
     // protected fields
     // ------------------------------------------------------
 
+  protected:
+
+    // protected work fields
+    // ------------------------------------------------------
+
     std::string           fElementName;
 
     std::string           fFoundString;

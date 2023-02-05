@@ -21,6 +21,7 @@
 #include "mfStaticSettings.h"
 
 #include "oahOah.h"
+#include "oahEarlyOptions.h"
 
 #include "msrOah.h"
 
@@ -87,9 +88,15 @@ S_msrBook msrBook::createBookNewbornClone ()
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceBooks ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Creating a newborn clone of a score" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -155,18 +162,18 @@ void msrBook::addBookElementToBook (
   const S_msrBookElement& bookElement)
 {
   if (fBookElementsSet.count (bookElement)) {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "part group '" <<
       bookElement <<
       "' already exists in this score";
 
     msrInternalError (
-      gGlobalServiceRunData->getInputSourceName (),
+      gGlobalCurrentServiceRunData->getInputSourceName (),
       bookElement->getInputLineNumber (),
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 
   // register it in this score
@@ -189,11 +196,17 @@ void msrBook::appendCreditToBook (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceCredits ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Appending credit '" <<
       credit->asString () <<
       "' to score" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -211,7 +224,7 @@ void msrBook::fetchIdentificationFromCreditsIfAny ( // THROW AWAY JMI ??? v0.9.6
   ) {
     std::string
       inputSourceName =
-        gGlobalServiceRunData->getInputSourceName ();
+        gGlobalCurrentServiceRunData->getInputSourceName ();
 
     if (inputSourceName == "-") {
       inputSourceName = "Standard_input";
@@ -361,7 +374,7 @@ void msrBook::fetchIdentificationFromCreditsIfAny ( // THROW AWAY JMI ??? v0.9.6
       }
 
       if (++i == iEnd) break;
-//      s << ", ";
+//      ss << ", ";
     } // for
   }
 }
@@ -383,9 +396,15 @@ S_msrBookElement msrBook::fetchBookElement (
 void msrBook::acceptIn (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrBook::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrBook>*
@@ -394,9 +413,15 @@ void msrBook::acceptIn (basevisitor* v)
         S_msrBook elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrBook::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitStart (elem);
   }
@@ -405,9 +430,15 @@ void msrBook::acceptIn (basevisitor* v)
 void msrBook::acceptOut (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrBook::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrBook>*
@@ -416,9 +447,15 @@ void msrBook::acceptOut (basevisitor* v)
         S_msrBook elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrBook::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitEnd (elem);
   }
@@ -427,9 +464,15 @@ void msrBook::acceptOut (basevisitor* v)
 void msrBook::browseData (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrBook::browseData ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (fIdentification) {
@@ -489,9 +532,15 @@ void msrBook::browseData (basevisitor* v)
   } // for
 
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% <== msrBook::browseData ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 }
 

@@ -56,24 +56,24 @@ msrTupletFactor msrTupletFactor::inverse () const
 
 std::string msrTupletFactor::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "[TupletFactor" <<
     ", tupletActualNotes: " << fTupletActualNotes <<
     ", tupletNormalNotes: " << fTupletNormalNotes <<
     ']';
 
-  return s.str ();
+  return ss.str ();
 }
 
 std::string msrTupletFactor::asFractionString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s << fTupletActualNotes << '/' << fTupletNormalNotes;
+  ss << fTupletActualNotes << '/' << fTupletNormalNotes;
 
-  return s.str ();
+  return ss.str ();
 }
 
 void msrTupletFactor::print (std::ostream& os) const

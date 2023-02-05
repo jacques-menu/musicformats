@@ -15,12 +15,12 @@
 
 #include <regex>
 
-#include "brailleGenerationOah2manPage.h"
-
 #include "mfStaticSettings.h"
 
-
 #include "oahOah.h"
+#include "oahEarlyOptions.h"
+
+#include "brailleGenerationOah2manPage.h"
 
 
 namespace MusicFormats
@@ -43,11 +43,17 @@ void brailleGenerationOah2manPage::visitStart (S_brailleOutputKindAtom& elt)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       std::endl <<
       ".\\\" --> Start visiting brailleOutputKindAtom" <<
       " \"" << elt->fetchNames () << "\"" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -72,11 +78,17 @@ void brailleGenerationOah2manPage::visitEnd (S_brailleOutputKindAtom& elt)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       std::endl <<
       ".\\\" --> End visiting brailleOutputKindAtom" <<
       " \"" << elt->fetchNames () << "\"" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 }
@@ -86,11 +98,17 @@ void brailleGenerationOah2manPage::visitStart (S_brailleUTFKindAtom& elt)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       std::endl <<
       ".\\\" --> Start visiting brailleUTFKindAtom" <<
       " \"" << elt->fetchNames () << "\"" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -115,11 +133,17 @@ void brailleGenerationOah2manPage::visitEnd (S_brailleUTFKindAtom& elt)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       std::endl <<
       ".\\\" --> End visiting brailleUTFKindAtom" <<
       " \"" << elt->fetchNames () << "\"" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 }
@@ -129,11 +153,17 @@ void brailleGenerationOah2manPage::visitStart (S_brailleByteOrderingKindAtom& el
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       std::endl <<
       ".\\\" --> Start visiting brailleByteOrderingKindAtom" <<
       " \"" << elt->fetchNames () << "\"" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -158,11 +188,17 @@ void brailleGenerationOah2manPage::visitEnd (S_brailleByteOrderingKindAtom& elt)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       std::endl <<
       ".\\\" --> End visiting brailleByteOrderingKindAtom" <<
       " \"" << elt->fetchNames () << "\"" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 }

@@ -12,8 +12,6 @@
 #ifndef ___waeInterface___
 #define ___waeInterface___
 
-// #include <string>
-
 #include "exports.h"
 
 #include "mfExceptions.h"

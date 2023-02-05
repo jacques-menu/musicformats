@@ -100,10 +100,16 @@ EXP int xml2brl (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       serviceName << " xml2brl()" <<
       ", insiderOption: " << insiderOption <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -141,7 +147,7 @@ EXP int xml2brl (
     // create the global run data
     // ------------------------------------------------------
 
-    gGlobalServiceRunData =
+    gGlobalCurrentServiceRunData =
       mfServiceRunData::create (
         serviceName);
 
@@ -193,7 +199,7 @@ EXP int xml2brl (
 
   std::string
     inputSourceName =
-      gGlobalServiceRunData->getInputSourceName ();
+      gGlobalCurrentServiceRunData->getInputSourceName ();
 
   std::string
     outputFileName =
@@ -205,13 +211,19 @@ EXP int xml2brl (
     std::string separator =
       "%--------------------------------------------------------------";
 
-    gLogStream <<
+    std::stringstream ss;
+
+    ss <<
       serviceName << ": " <<
       "inputSourceName = \"" << inputSourceName << "\"" <<
       ", outputFileName = \"" << outputFileName << "\"" <<
       std::endl <<
       separator <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -221,15 +233,15 @@ EXP int xml2brl (
       return 0; // pure help run
     }
     else {
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         "this is not a pure help run, \"" <<
         serviceName <<
         " needs an input file name. " <<
         handler->getHandlerUsage ();
 
-      oahError (s.str ());
+      oahError (ss.str ());
     }
   }
 
@@ -274,7 +286,7 @@ EXP int xml2brl (
 
     gLogStream <<
       "Time is " <<
-      gGlobalServiceRunData->getRunDateFull () <<
+      gGlobalCurrentServiceRunData->getRunDateFull () <<
       std::endl;
 
     gLogStream <<
@@ -329,9 +341,15 @@ EXP int xml2brl (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "The command line options and arguments have been analyzed" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -360,11 +378,17 @@ EXP int xml2brl (
       // MusicXML data comes from a file
 #ifdef MF_TRACING_IS_ENABLED
       if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-          gLogStream <<
-            "Reading file \"" <<
-            inputSourceName <<
-            "\"" <<
-            std::endl;
+        std::stringstream ss;
+
+        ss <<
+          "Reading file \"" <<
+          inputSourceName <<
+          "\"" <<
+          std::endl;
+
+        gWaeHandler->waeTrace (
+          __FILE__, __LINE__,
+          ss.str ());
       }
 #endif
 

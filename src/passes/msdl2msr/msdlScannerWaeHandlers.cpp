@@ -46,12 +46,12 @@ msdlScannerWaeHandler::~msdlScannerWaeHandler ()
 
 std::string msdlScannerWaeHandler::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "MSDL WAE lexical handler";
 
-  return s.str ();
+  return ss.str ();
 }
 
 void msdlScannerWaeHandler::print (std::ostream& os) const
@@ -159,12 +159,12 @@ void msdlScannerWaeHandlerEnglish::inputIsAlreadyInMsdlKeywordsLanguage (
 
 std::string msdlScannerWaeHandlerEnglish::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "MSDL lexical english WAE handler";
 
-  return s.str ();
+  return ss.str ();
 }
 
 void msdlScannerWaeHandlerEnglish::print (std::ostream& os) const
@@ -272,12 +272,12 @@ void msdlScannerWaeHandlerFrench::inputIsAlreadyInMsdlKeywordsLanguage (
 
 std::string msdlScannerWaeHandlerFrench::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "gestionnaire WAE pour MSDL en français";
 
-  return s.str ();
+  return ss.str ();
 }
 
 void msdlScannerWaeHandlerFrench::print (std::ostream& os) const
@@ -385,12 +385,12 @@ void msdlScannerWaeHandlerItalian::inputIsAlreadyInMsdlKeywordsLanguage (
 
 std::string msdlScannerWaeHandlerItalian::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "MSDL lexical english WAE handler";
 
-  return s.str ();
+  return ss.str ();
 }
 
 void msdlScannerWaeHandlerItalian::print (std::ostream& os) const
@@ -499,12 +499,12 @@ void msdlScannerWaeHandlerGerman::inputIsAlreadyInMsdlKeywordsLanguage (
 
 std::string msdlScannerWaeHandlerGerman::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "MSDL lexical english WAE handler";
 
-  return s.str ();
+  return ss.str ();
 }
 
 void msdlScannerWaeHandlerGerman::print (std::ostream& os) const
@@ -613,12 +613,12 @@ void msdlScannerWaeHandlerSpanish::inputIsAlreadyInMsdlKeywordsLanguage (
 
 std::string msdlScannerWaeHandlerSpanish::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "MSDL lexical english WAE handler";
 
-  return s.str ();
+  return ss.str ();
 }
 
 void msdlScannerWaeHandlerSpanish::print (std::ostream& os) const
@@ -727,12 +727,12 @@ void msdlScannerWaeHandlerDutch::inputIsAlreadyInMsdlKeywordsLanguage (
 
 std::string msdlScannerWaeHandlerDutch::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "MSDL lexical english WAE handler";
 
-  return s.str ();
+  return ss.str ();
 }
 
 void msdlScannerWaeHandlerDutch::print (std::ostream& os) const

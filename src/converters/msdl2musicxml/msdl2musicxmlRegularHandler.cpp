@@ -66,7 +66,9 @@ msdl2musicxmlRegularHandler::msdl2musicxmlRegularHandler (
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
     // print the options handler initial state
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "msdl2musicxmlRegularHandler \"" <<
       fHandlerHeader <<
       "\" has been initialized as:" <<
@@ -91,11 +93,17 @@ void msdl2musicxmlRegularHandler::createRegularHandlerGroups ()
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Creating the regular handler groups for \"" <<
       fHandlerHeader <<
       "\"" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -153,11 +161,17 @@ void msdl2musicxmlRegularHandler::createRegularHandlerGroups ()
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "All the regular handler groups for \"" <<
       fHandlerHeader <<
       "\" have been created" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 }
@@ -1224,11 +1238,17 @@ void msdl2musicxmlRegularHandler::checkOptionsAndArguments () const
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "checking options and arguments from argc/argv in \"" <<
       fHandlerHeader <<
       "\"" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 

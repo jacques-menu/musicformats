@@ -25,6 +25,7 @@
 #include "msrMeasureConstants.h"
 
 #include "oahOah.h"
+#include "oahEarlyOptions.h"
 
 #include "msrOah.h"
 
@@ -97,13 +98,19 @@ msrLineBreak::msrLineBreak (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceLineBreaks ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Constructing a break before measure " << fNextBarNumber <<
       ", fUserSelectedLineBreakKind: " <<
       msrUserSelectedLineBreakKindAsString (
         fUserSelectedLineBreakKind) <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 }
@@ -144,9 +151,15 @@ void msrLineBreak::setLineBreakUpLinkToMeasure (
 void msrLineBreak::acceptIn (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrLineBreak::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrLineBreak>*
@@ -155,9 +168,15 @@ void msrLineBreak::acceptIn (basevisitor* v)
         S_msrLineBreak elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrLineBreak::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitStart (elem);
   }
@@ -166,9 +185,15 @@ void msrLineBreak::acceptIn (basevisitor* v)
 void msrLineBreak::acceptOut (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrLineBreak::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrLineBreak>*
@@ -177,9 +202,15 @@ void msrLineBreak::acceptOut (basevisitor* v)
         S_msrLineBreak elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrLineBreak::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitEnd (elem);
   }
@@ -190,9 +221,9 @@ void msrLineBreak::browseData (basevisitor* v)
 
 std::string msrLineBreak::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "LineBreak" <<
     ", nextBarNumber = \"" << fNextBarNumber << "\"" <<
     ", fUserSelectedLineBreakKind: " <<
@@ -200,7 +231,7 @@ std::string msrLineBreak::asString () const
       fUserSelectedLineBreakKind) <<
     ", line " << fInputLineNumber;
 
-  return s.str ();
+  return ss.str ();
 }
 
 void msrLineBreak::print (std::ostream& os) const
@@ -276,13 +307,19 @@ msrPageBreak::msrPageBreak (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTracePageBreaks ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "Constructing a page break" <<
       ", fUserSelectedPageBreakKind: " <<
       msrUserSelectedPageBreakKindAsString (
         fUserSelectedPageBreakKind) <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -325,9 +362,15 @@ void msrPageBreak::setPageBreakUpLinkToMeasure (
 void msrPageBreak::acceptIn (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrPageBreak::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrPageBreak>*
@@ -336,9 +379,15 @@ void msrPageBreak::acceptIn (basevisitor* v)
         S_msrPageBreak elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrPageBreak::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitStart (elem);
   }
@@ -347,9 +396,15 @@ void msrPageBreak::acceptIn (basevisitor* v)
 void msrPageBreak::acceptOut (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "% ==> msrPageBreak::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (visitor<S_msrPageBreak>*
@@ -358,9 +413,15 @@ void msrPageBreak::acceptOut (basevisitor* v)
         S_msrPageBreak elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching msrPageBreak::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
         p->visitEnd (elem);
   }
@@ -371,16 +432,16 @@ void msrPageBreak::browseData (basevisitor* v)
 
 std::string msrPageBreak::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "PageBreak" <<
     ", fUserSelectedPageBreakKind: " <<
     msrUserSelectedPageBreakKindAsString (
       fUserSelectedPageBreakKind) <<
     ", line " << fInputLineNumber;
 
-  return s.str ();
+  return ss.str ();
 }
 
 void msrPageBreak::print (std::ostream& os) const

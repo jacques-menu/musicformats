@@ -69,9 +69,9 @@ S_bsrScore translateMsrToBsr (
     std::string separator =
       "%--------------------------------------------------------------";
 
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       std::endl <<
       separator <<
       std::endl <<
@@ -83,7 +83,7 @@ S_bsrScore translateMsrToBsr (
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 #endif
 
@@ -109,16 +109,16 @@ S_bsrScore translateMsrToBsr (
 
   if (gIndenter != 0) {
     if (! gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         "gIndenter value after pass 3a: " <<
         gIndenter.getIndentation ();
 
       msr2bsrWarning (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         1, // JMI inputLineNumber,
-        s.str ());
+        ss.str ());
     }
 
     gIndenter.resetToZero ();

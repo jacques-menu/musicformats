@@ -79,9 +79,9 @@ S_lpsrScore translateMsrToLpsr (
     std::string separator =
       "%--------------------------------------------------------------";
 
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       std::endl <<
       separator <<
       std::endl <<
@@ -93,7 +93,7 @@ S_lpsrScore translateMsrToLpsr (
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 #endif
 
@@ -120,16 +120,16 @@ S_lpsrScore translateMsrToLpsr (
 
   if (gIndenter != 0) {
     if (! gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         "gIndenter value after pass 3: " <<
         gIndenter.getIndentation ();
 
       msr2lpsrWarning (
-        gGlobalServiceRunData->getInputSourceName (),
+        gGlobalCurrentServiceRunData->getInputSourceName (),
         1, // JMI inputLineNumber,
-        s.str ());
+        ss.str ());
     }
 
     gIndenter.resetToZero ();

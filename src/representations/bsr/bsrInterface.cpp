@@ -49,7 +49,7 @@ void displayBsrScore (
   // start the clock
   clock_t startClock = clock ();
 
-  setGlobalCurrentPassIDKind (mfPassIDKind::kMfPassID_Optional);
+  setGlobalCurrentPassIDKind (mfPassIDKind::kMfPassID_OptionalPass);
 
   std::string separator =
     "%--------------------------------------------------------------";
@@ -70,7 +70,7 @@ void displayBsrScore (
   clock_t endClock = clock ();
 
   mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
-		mfPassIDKind::kMfPassID_0,
+		mfPassIDKind::kMfPassID_OptionalPass,
     gWaeHandler->displayTheBSRAsText (), // JMI ??? v0.9.66
     mfTimingItemKind::kOptional,
     startClock,
@@ -95,7 +95,7 @@ void displayBsrScoreFull (
   // start the clock
   clock_t startClock = clock ();
 
-  setGlobalCurrentPassIDKind (mfPassIDKind::kMfPassID_Optional);
+  setGlobalCurrentPassIDKind (mfPassIDKind::kMfPassID_OptionalPass);
 
   std::string separator =
     "%--------------------------------------------------------------";
@@ -121,7 +121,7 @@ void displayBsrScoreFull (
   clock_t endClock = clock ();
 
   mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
-		mfPassIDKind::kMfPassID_0,
+		mfPassIDKind::kMfPassID_OptionalPass,
     gWaeHandler->displayTheBSRAsText ()
       + ", " +
     gWaeHandler->fullVersion (),
@@ -135,16 +135,16 @@ void displayBsrScoreFull (
 
 //   if (gIndenter != 0) {
 //     if (! gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
-//       std::stringstream s;
+//       std::stringstream ss;
 //
-//       s <<
+//       ss <<
 //         "gIndenter value after BSR score short display: " <<
 //         gIndenter.getIndentation ();
 //
 //       bsrWarning (
-//         gGlobalServiceRunData->getInputSourceName (),
+//         gGlobalCurrentServiceRunData->getInputSourceName (),
 //         1, // JMI inputLineNumber,
-//         s.str ());
+//         ss.str ());
 //     }
 //
 //     gIndenter.resetToZero ();

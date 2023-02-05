@@ -14,6 +14,7 @@
 #include "mfStringsHandling.h"
 
 #include "oahOah.h"
+#include "oahEarlyOptions.h"
 
 #include "msdl2msrOah.h"
 
@@ -33,231 +34,231 @@ namespace MusicFormats
 std::string msdlTokenKindAsString (
   msdlTokenKind tokenKind)
 {
-  std::stringstream s;
+  std::stringstream ss;
 
   switch (tokenKind) {
     case msdlTokenKind::kToken_UNKNOWN:
-      s << "*noToken*";
+      ss << "*noToken*";
       break;
 
     case msdlTokenKind::k_TokenEOF:
-      s << "tokenEOF";
+      ss << "tokenEOF";
       break;
 
     case msdlTokenKind::k_TokenMalformed:
-      s << "*malformedToken*";
+      ss << "*malformedToken*";
       break;
 
     // separators, for use by MSDL whole input translation
     // ------------------------------------
 
     case msdlTokenKind::kTokenSpace:
-      s << "tokenSpace";
+      ss << "tokenSpace";
       break;
     case msdlTokenKind::kTokenTabSeparator:
-      s << "tokenTab";
+      ss << "tokenTab";
       break;
     case msdlTokenKind::kTokenCarriageReturn:
-      s << "tokenCarriageReturn";
+      ss << "tokenCarriageReturn";
       break;
 
     case msdlTokenKind::kTokenEndOfLine:
-      s << "tokenEndOfLine";
+      ss << "tokenEndOfLine";
       break;
 
     case msdlTokenKind::kTokenParenthesizedComment:
-      s << "tokenParenthesizedComment";
+      ss << "tokenParenthesizedComment";
       break;
 
     case msdlTokenKind::kTokenCommentToEndOfLine:
-      s << "tokenCommentToEndOfLine";
+      ss << "tokenCommentToEndOfLine";
       break;
 
     // language-independent tokens
     // ------------------------------------
 
     case msdlTokenKind::kTokenEqualSign:
-      s << "tokenEqualSign";
+      ss << "tokenEqualSign";
       break;
 
     case msdlTokenKind::kTokenComma:
-      s << "tokenComma";
+      ss << "tokenComma";
       break;
     case msdlTokenKind::kTokenColon:
-      s << "tokenColon";
+      ss << "tokenColon";
       break;
     case msdlTokenKind::kTokenSemiColon:
-      s << "tokenSemiColon";
+      ss << "tokenSemiColon";
       break;
 
     case msdlTokenKind::kTokenPlus:
-      s << "tokenPlus";
+      ss << "tokenPlus";
       break;
     case msdlTokenKind::kTokenMinus:
-      s << "tokenMinus";
+      ss << "tokenMinus";
       break;
     case msdlTokenKind::kTokenStar:
-      s << "tokenStar";
+      ss << "tokenStar";
       break;
     case msdlTokenKind::kTokenSlash:
-      s << "tokenSlash";
+      ss << "tokenSlash";
       break;
     case msdlTokenKind::kTokenPercent:
-      s << "tokenPercent";
+      ss << "tokenPercent";
       break;
 
     case msdlTokenKind::kTokenConcat:
-      s << "tokenConcat";
+      ss << "tokenConcat";
       break;
 
     case msdlTokenKind::kTokenQuestionMark:
-      s << "tokenQuestionMark";
+      ss << "tokenQuestionMark";
       break;
 
     case msdlTokenKind::kTokenTilda:
-      s << "tokenTilda";
+      ss << "tokenTilda";
       break;
     case msdlTokenKind::kTokenLeftAngle:
-      s << "tokenLeftAngle";
+      ss << "tokenLeftAngle";
       break;
     case msdlTokenKind::kTokenRightAngle:
-      s << "tokenRightAngle";
+      ss << "tokenRightAngle";
       break;
 
     case msdlTokenKind::kTokenLeftParenthesis:
-      s << "tokenLeftParenthesis";
+      ss << "tokenLeftParenthesis";
       break;
     case msdlTokenKind::kTokenRightParenthesis:
-      s << "tokenRightParenthesis";
+      ss << "tokenRightParenthesis";
       break;
 
     case msdlTokenKind::kTokenLeftBracket:
-      s << "tokenLeftBracket";
+      ss << "tokenLeftBracket";
       break;
     case msdlTokenKind::kTokenRightBracket:
-      s << "tokenRightBracket";
+      ss << "tokenRightBracket";
       break;
 
     case msdlTokenKind::kTokenQuote:
-      s << "tokenQuote";
+      ss << "tokenQuote";
       break;
     case msdlTokenKind::kTokenDot:
-      s << "tokenDot";
+      ss << "tokenDot";
       break;
 
     case msdlTokenKind::kTokenMeasure:
-      s << "tokenMeasure";
+      ss << "tokenMeasure";
       break;
     case msdlTokenKind::kTokenDoubleBar:
-      s << "tokenDoubleBar";
+      ss << "tokenDoubleBar";
       break;
     case msdlTokenKind::kTokenFinalBar:
-      s << "tokenFinalBar";
+      ss << "tokenFinalBar";
       break;
 
     case msdlTokenKind::kTokenRepeatStart:
-      s << "tokenRepeatStart";
+      ss << "tokenRepeatStart";
       break;
     case msdlTokenKind::kTokenRepeatEnd:
-      s << "tokenRepeatEnd";
+      ss << "tokenRepeatEnd";
       break;
 
     case msdlTokenKind::kTokenInteger:
-      s << "tokenInteger";
+      ss << "tokenInteger";
       break;
 //    case msdlTokenKind::kTokenDouble:
-//      s << "tokenDouble";
+//      ss << "tokenDouble";
 //      break;
 
     case msdlTokenKind::kTokenString:
-      s << "tokenString";
+      ss << "tokenString";
       break;
 
     case msdlTokenKind::kTokenName:
-      s << "tokenName";
+      ss << "tokenName";
       break;
     case msdlTokenKind::kTokenIdentifier:
-      s << "tokeIdentifier";
+      ss << "tokeIdentifier";
       break;
 
     // language-dependent keywords
     // ------------------------------------
 
     case msdlTokenKind::kTokenTitle:
-      s << "tokenTitle";
+      ss << "tokenTitle";
       break;
     case msdlTokenKind::kTokenComposer:
-      s << "tokenComposer";
+      ss << "tokenComposer";
       break;
     case msdlTokenKind::kTokenOpus:
-      s << "tokenOpus";
+      ss << "tokenOpus";
       break;
 
     case msdlTokenKind::kTokenPitches:
-      s << "tokenPitches";
+      ss << "tokenPitches";
       break;
     case msdlTokenKind::kTokenOctaves:
-      s << "tokenOctaves";
+      ss << "tokenOctaves";
       break;
 
     case msdlTokenKind::kTokenAnacrusis:
-      s << "tokenAnacrusis";
+      ss << "tokenAnacrusis";
       break;
 
     case msdlTokenKind::kTokenBook:
-      s << "tokenBook";
+      ss << "tokenBook";
       break;
     case msdlTokenKind::kTokenScore:
-      s << "tokenScore";
+      ss << "tokenScore";
       break;
     case msdlTokenKind::kTokenPartGroup:
-      s << "tokenPartGroup";
+      ss << "tokenPartGroup";
       break;
     case msdlTokenKind::kTokenPart:
-      s << "tokenPart";
+      ss << "tokenPart";
       break;
     case msdlTokenKind::kTokenMusic:
-      s << "tokenMusic";
+      ss << "tokenMusic";
       break;
     case msdlTokenKind::kTokenFragment:
-      s << "tokenFragment";
+      ss << "tokenFragment";
       break;
 
     case msdlTokenKind::kTokenClef:
-      s << "tokenClef";
+      ss << "tokenClef";
       break;
 
     case msdlTokenKind::kTokenKey:
-      s << "tokenKey";
+      ss << "tokenKey";
       break;
     case msdlTokenKind::kTokenTreble:
-      s << "tokenTreble";
+      ss << "tokenTreble";
       break;
     case msdlTokenKind::kTokenSoprano:
-      s << "tokenSoprano";
+      ss << "tokenSoprano";
       break;
     case msdlTokenKind::kTokenAlto:
-      s << "tokenAlto";
+      ss << "tokenAlto";
       break;
     case msdlTokenKind::kTokenTenor:
-      s << "tokenTenor";
+      ss << "tokenTenor";
       break;
     case msdlTokenKind::kTokenBaryton:
-      s << "tokenBaryton";
+      ss << "tokenBaryton";
       break;
     case msdlTokenKind::kTokenBass:
-      s << "tokenBass";
+      ss << "tokenBass";
       break;
     case msdlTokenKind::kTokenTab:
-      s << "tokenTab";
+      ss << "tokenTab";
       break;
 
     case msdlTokenKind::kTokenTime:
-      s << "tokenTime";
+      ss << "tokenTime";
       break;
   } // switch
 
-  return s.str ();
+  return ss.str ();
 }
 
 std::string msdlTokenDescriptionKindAsString (
@@ -297,11 +298,17 @@ std::string msdlTokenKindAsMsdlString (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsdl2msrOahGroup->getTraceTokens ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "==> msdlTokenKindAsMsdlString()" <<
       ", tokenKind" << ": " << msdlTokenKindAsString (tokenKind) <<
       ", languageKind: " << msdlKeywordsLanguageKindAsString (languageKind) <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -606,7 +613,7 @@ std::string existingTokensInLanguage (
     size_t count = 0;
     size_t cumulatedLength = 0;
 
-    std::stringstream s;
+    std::stringstream ss;
 
     for (auto e : EnumNonSeparators<msdlTokenKind> ()) {
       std::string
@@ -625,29 +632,29 @@ std::string existingTokensInLanguage (
           ||
         e == msdlTokenKind::LanguageDependentFirst
       ) {
-        s << std::endl << gIndenter.getSpacer ();
+        ss << std::endl << gIndenter.getSpacer ();
         cumulatedLength = 0;
       }
 
       if (count == 1) {
-        s << gIndenter.getSpacer ();
+        ss << gIndenter.getSpacer ();
       }
-      s << nonSeparatorTokenAsMsdlString;
+      ss << nonSeparatorTokenAsMsdlString;
 
       if (count <= nextToLast) {
-        s << ' ';
+        ss << ' ';
       }
 /*
       if ((int) i < (int) msdlTokenKind::LastIterable - 2) { JMI KEEP
-        s << ", ";
+        ss << ", ";
       }
       else {
-        s << " and ";
+        ss << " and ";
       }
 */
     } // for
 
-    result = s.str ();
+    result = ss.str ();
   }
 
   return result;
@@ -704,10 +711,16 @@ S_msdlTokenKindsSet msdlTokenKindsSet::createClone ()
 
 #ifdef MF_TRACING_IS_ENABLED
   if (false && gGlobalMsdl2msrOahGroup->getTraceTokens ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "<== createClone()" <<
       ", result:" << result->asString () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -767,9 +780,9 @@ void msdlTokenKindsSet::removeElementsFrom (S_msdlTokenKindsSet tokenKindsSet)
 
 std::string msdlTokenKindsSet::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s << '[';
+  ss << '[';
 
   if (fTokenKindsSet.size ()) {
     std::set<msdlTokenKind>::const_iterator
@@ -778,7 +791,7 @@ std::string msdlTokenKindsSet::asString () const
       i      = iBegin;
 
     for ( ; ; ) {
-      s <<
+      ss <<
         msdlTokenKindAsString ((*i));
         /*
         .asMsdlString (
@@ -788,13 +801,13 @@ std::string msdlTokenKindsSet::asString () const
 
       if (++i == iEnd) break;
 
-      s << ", ";
+      ss << ", ";
     } // for
   }
 
-  s << ']';
+  ss << ']';
 
-  return s.str ();
+  return ss.str ();
 }
 
 void msdlTokenKindsSet::print (std::ostream& os) const
@@ -897,10 +910,16 @@ EXP S_msdlTokenKindsSet operator+ (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (false && gGlobalMsdl2msrOahGroup->getTraceTokens ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "<== S_msdlTokenKindsSet operator+()" <<
       ", result:" << result->asString () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -919,10 +938,16 @@ EXP S_msdlTokenKindsSet operator+ (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (false && gGlobalMsdl2msrOahGroup->getTraceTokens ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "<== S_msdlTokenKindsSet operator+()" <<
       ", result:" << result->asString () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -1290,9 +1315,9 @@ std::string msdlTokenDescription::getString () const
 
 std::string msdlTokenDescription::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "[MSDL tokenDescription" <<
     ", tokenDescriptionKind = " <<
     fTokenDescriptionKind <<
@@ -1300,29 +1325,29 @@ std::string msdlTokenDescription::asString () const
 
   switch (fTokenDescriptionKind) {
     case msdlTokenDescriptionKind::kTokenKeyword:
-      s << msdlKeywordKindAsString (fKeywordKind);
+      ss << msdlKeywordKindAsString (fKeywordKind);
       break;
 
     case msdlTokenDescriptionKind::kTokenInteger:
-      s << fInteger;
+      ss << fInteger;
       break;
 
     case msdlTokenDescriptionKind::kTokenDouble:
-      s << fDouble;
+      ss << fDouble;
       break;
 
     case msdlTokenDescriptionKind::kTokenCharacter:
-      s << "'" << fString << "'";
+      ss << "'" << fString << "'";
       break;
 
     case msdlTokenDescriptionKind::kTokenString:
-      s << "\"" << fString << "\"";
+      ss << "\"" << fString << "\"";
       break;
   } // switch
 
-  s << ']';
+  ss << ']';
 
-  return s.str ();
+  return ss.str ();
 }
 
 void msdlTokenDescription::print (std::ostream& os) const
@@ -1427,9 +1452,9 @@ void msdlToken::initializeToken ()
 
 std::string msdlToken::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s << std::left <<
+  ss << std::left <<
     "[ " <<
     "@" << fTokenLineNumber <<
     ":" << fTokenPositionInLine <<
@@ -1443,157 +1468,157 @@ std::string msdlToken::asString () const
       break;
 
     case msdlTokenKind::k_TokenEOF:
-      s << "END_OF_FILE";
+      ss << "END_OF_FILE";
       break;
 
     case msdlTokenKind::k_TokenMalformed:
-      s << "\"" << fTokenDescription.getString () << "\"";
+      ss << "\"" << fTokenDescription.getString () << "\"";
       break;
 
     // separators, for use by MSDL whole input translation
     // ------------------------------------
 
     case msdlTokenKind::kTokenSpace:
-      s << "SPACE";
+      ss << "SPACE";
       break;
     case msdlTokenKind::kTokenTabSeparator:
-      s << "TAB";
+      ss << "TAB";
       break;
     case msdlTokenKind::kTokenCarriageReturn:
-      s << "CARRIAGE_RETURN";
+      ss << "CARRIAGE_RETURN";
       break;
 
     case msdlTokenKind::kTokenEndOfLine:
-      s << "END_OF_LINE";
+      ss << "END_OF_LINE";
       break;
 
     case msdlTokenKind::kTokenParenthesizedComment:
-      s << "\"" << fTokenDescription.getString () << "\"";
+      ss << "\"" << fTokenDescription.getString () << "\"";
       break;
 
     case msdlTokenKind::kTokenCommentToEndOfLine:
-      s << "\"" << fTokenDescription.getString () << "\"";
+      ss << "\"" << fTokenDescription.getString () << "\"";
       break;
 
     // language-independent tokens
     // ------------------------------------
 
     case msdlTokenKind::kTokenEqualSign:
-      s << "=";
+      ss << "=";
       break;
 
     case msdlTokenKind::kTokenComma:
-      s << ",";
+      ss << ",";
       break;
     case msdlTokenKind::kTokenColon:
-      s << ":";
+      ss << ":";
       break;
     case msdlTokenKind::kTokenSemiColon:
-      s << ";";
+      ss << ";";
       break;
 
     case msdlTokenKind::kTokenPlus:
-      s << "+";
+      ss << "+";
       break;
     case msdlTokenKind::kTokenMinus:
-      s << "-";
+      ss << "-";
       break;
     case msdlTokenKind::kTokenStar:
-      s << "*";
+      ss << "*";
       break;
     case msdlTokenKind::kTokenSlash:
-      s << '/';
+      ss << '/';
       break;
     case msdlTokenKind::kTokenPercent:
-      s << "%";
+      ss << "%";
       break;
 
     case msdlTokenKind::kTokenConcat:
-      s << "!!";
+      ss << "!!";
       break;
 
     case msdlTokenKind::kTokenQuestionMark:
-      s << "?";
+      ss << "?";
       break;
 
     case msdlTokenKind::kTokenTilda:
-      s << "~";
+      ss << "~";
       break;
 
     case msdlTokenKind::kTokenLeftAngle:
-      s << "<";
+      ss << "<";
       break;
     case msdlTokenKind::kTokenRightAngle:
-      s << ">";
+      ss << ">";
       break;
 
     case msdlTokenKind::kTokenLeftParenthesis:
-      s << "(";
+      ss << "(";
       break;
     case msdlTokenKind::kTokenRightParenthesis:
-      s << ")";
+      ss << ")";
       break;
 
     case msdlTokenKind::kTokenLeftBracket:
-      s << '{';
+      ss << '{';
       break;
     case msdlTokenKind::kTokenRightBracket:
-      s << '}';
+      ss << '}';
       break;
 
     case msdlTokenKind::kTokenQuote:
-      s << "'";
+      ss << "'";
       break;
     case msdlTokenKind::kTokenDot:
-      s << ".";
+      ss << ".";
       break;
 
     case msdlTokenKind::kTokenMeasure:
-      s << "|";
+      ss << "|";
       break;
     case msdlTokenKind::kTokenDoubleBar:
-      s << "||";
+      ss << "||";
       break;
     case msdlTokenKind::kTokenFinalBar:
-      s << "|||";
+      ss << "|||";
       break;
 
     case msdlTokenKind::kTokenRepeatStart:
-      s << "|||:";
+      ss << "|||:";
       break;
     case msdlTokenKind::kTokenRepeatEnd:
-      s << ":|||";
+      ss << ":|||";
       break;
 
     case msdlTokenKind::kTokenInteger:
-      s << fTokenDescription.getInteger ();
+      ss << fTokenDescription.getInteger ();
       break;
 //    case msdlTokenKind::kTokenDouble:
-//      s << fTokenDescription.getDouble ();
+//      ss << fTokenDescription.getDouble ();
 //      break;
 
     case msdlTokenKind::kTokenString:
-      s << "\"" << fTokenDescription.getString () << "\"";
+      ss << "\"" << fTokenDescription.getString () << "\"";
       break;
 
     case msdlTokenKind::kTokenName:
-      s << "\"" << fTokenDescription.getString () << "\"";
+      ss << "\"" << fTokenDescription.getString () << "\"";
       break;
     case msdlTokenKind::kTokenIdentifier:
-      s << "\"" << fTokenDescription.getString () << "\"";
+      ss << "\"" << fTokenDescription.getString () << "\"";
       break;
 
     // language-dependent keywords
     // ------------------------------------
 
     default:
-      s <<
+      ss <<
         msdlKeywordKindAsString (fTokenDescription.getKeywordKind ());
   } // switch
 
-  s << " ]";
+  ss << " ]";
 
-  return s.str ();
+  return ss.str ();
 }
 
 std::string msdlToken::asMsdlString (
@@ -1602,15 +1627,21 @@ std::string msdlToken::asMsdlString (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsdl2msrOahGroup->getTraceTokens ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
       "==> asMsdlString()" <<
       ", tokenKind" << ": " << msdlTokenKindAsString (fTokenKind) <<
       ", languageKind: " << msdlKeywordsLanguageKindAsString (languageKind) <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
-  std::stringstream s;
+  std::stringstream ss;
 
   switch (fTokenKind) {
     case msdlTokenKind::kToken_UNKNOWN:
@@ -1618,37 +1649,37 @@ std::string msdlToken::asMsdlString (
       break;
 
     case msdlTokenKind::k_TokenEOF:
-      s << "TokenEOF";
+      ss << "TokenEOF";
       break;
 
     case msdlTokenKind::k_TokenMalformed:
-      s << "*TokenMalformed*";
+      ss << "*TokenMalformed*";
       break;
 
     // separators, for use by MSDL whole input translation
     // ------------------------------------
 
     case msdlTokenKind::kTokenSpace:
-      s << ' ';
+      ss << ' ';
       break;
     case msdlTokenKind::kTokenTabSeparator:
-      s << "TokenTab";
+      ss << "TokenTab";
       break;
     case msdlTokenKind::kTokenCarriageReturn:
-      s << "TokenCarriageReturn";
+      ss << "TokenCarriageReturn";
       break;
 
     case msdlTokenKind::kTokenEndOfLine:
-      s << std::endl;
+      ss << std::endl;
       break;
 
     case msdlTokenKind::kTokenParenthesizedComment:
       switch (commentsTypeKind) {
         case msdlCommentsTypeKind::kCommentsTypePercent:
-          s << "%{" << fTokenDescription.getString () << "%}";
+          ss << "%{" << fTokenDescription.getString () << "%}";
           break;
         case msdlCommentsTypeKind::kCommentsTypeStar:
-          s << "/*" << fTokenDescription.getString () << "*/";
+          ss << "/*" << fTokenDescription.getString () << "*/";
           break;
       } // switch
       break;
@@ -1656,10 +1687,10 @@ std::string msdlToken::asMsdlString (
     case msdlTokenKind::kTokenCommentToEndOfLine:
       switch (commentsTypeKind) {
         case msdlCommentsTypeKind::kCommentsTypePercent:
-          s << "%" << fTokenDescription.getString ();
+          ss << "%" << fTokenDescription.getString ();
           break;
         case msdlCommentsTypeKind::kCommentsTypeStar:
-          s << "//" << fTokenDescription.getString ();
+          ss << "//" << fTokenDescription.getString ();
           break;
       } // switch
       break;
@@ -1668,121 +1699,121 @@ std::string msdlToken::asMsdlString (
     // ------------------------------------
 
     case msdlTokenKind::kTokenEqualSign:
-      s << "=";
+      ss << "=";
       break;
 
     case msdlTokenKind::kTokenComma:
-      s << ",";
+      ss << ",";
       break;
     case msdlTokenKind::kTokenColon:
-      s << ":";
+      ss << ":";
       break;
     case msdlTokenKind::kTokenSemiColon:
-      s << ";";
+      ss << ";";
       break;
 
     case msdlTokenKind::kTokenPlus:
-      s << "+";
+      ss << "+";
       break;
     case msdlTokenKind::kTokenMinus:
-      s << "-";
+      ss << "-";
       break;
     case msdlTokenKind::kTokenStar:
-      s << "*";
+      ss << "*";
       break;
     case msdlTokenKind::kTokenSlash:
-      s << '/';
+      ss << '/';
       break;
     case msdlTokenKind::kTokenPercent:
-      s << "%";
+      ss << "%";
       break;
 
     case msdlTokenKind::kTokenConcat:
-      s << "!!";
+      ss << "!!";
       break;
 
     case msdlTokenKind::kTokenQuestionMark:
-      s << "?";
+      ss << "?";
       break;
 
     case msdlTokenKind::kTokenTilda:
-      s << "~";
+      ss << "~";
       break;
 
     case msdlTokenKind::kTokenLeftAngle:
-      s << "<";
+      ss << "<";
       break;
     case msdlTokenKind::kTokenRightAngle:
-      s << ">";
+      ss << ">";
       break;
 
     case msdlTokenKind::kTokenLeftParenthesis:
-      s << "(";
+      ss << "(";
       break;
     case msdlTokenKind::kTokenRightParenthesis:
-      s << ")";
+      ss << ")";
       break;
 
     case msdlTokenKind::kTokenLeftBracket:
-      s << "{";
+      ss << "{";
       break;
     case msdlTokenKind::kTokenRightBracket:
-      s << "}";
+      ss << "}";
       break;
 
     case msdlTokenKind::kTokenQuote:
-      s << "'";
+      ss << "'";
       break;
     case msdlTokenKind::kTokenDot:
-      s << ".";
+      ss << ".";
       break;
 
     case msdlTokenKind::kTokenMeasure:
-      s << "|";
+      ss << "|";
       break;
     case msdlTokenKind::kTokenDoubleBar:
-      s << "||";
+      ss << "||";
       break;
     case msdlTokenKind::kTokenFinalBar:
-      s << "|||";
+      ss << "|||";
       break;
 
     case msdlTokenKind::kTokenRepeatStart:
-      s << "|||:";
+      ss << "|||:";
       break;
     case msdlTokenKind::kTokenRepeatEnd:
-      s << ":|||";
+      ss << ":|||";
       break;
 
     case msdlTokenKind::kTokenInteger:
-      s << fTokenDescription.getInteger ();
+      ss << fTokenDescription.getInteger ();
       break;
 //    case msdlTokenKind::kTokenDouble:
-//      s << fTokenDescription.getDouble ();
+//      ss << fTokenDescription.getDouble ();
 //      break;
 
     case msdlTokenKind::kTokenString:
-      s << "\"" << fTokenDescription.getString () << "\"";
+      ss << "\"" << fTokenDescription.getString () << "\"";
       break;
 
     case msdlTokenKind::kTokenName:
-      s << fTokenDescription.getString ();
+      ss << fTokenDescription.getString ();
       break;
     case msdlTokenKind::kTokenIdentifier:
-      s << fTokenDescription.getString ();
+      ss << fTokenDescription.getString ();
       break;
 
     // language-dependent keywords
     // ------------------------------------
 
     default:
-      s <<
+      ss <<
         msdlKeywordKindAsMsdlString (
           languageKind,
           fTokenDescription.getKeywordKind ());
   } // switch
 
-  return s.str ();
+  return ss.str ();
 }
 
 void msdlToken::print (std::ostream& os) const
@@ -1979,14 +2010,14 @@ void msdlTokensList::appendTokenToTokensList (
 
 std::string msdlTokensList::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "MSDL tokens list" <<
     mfSingularOrPluralWithoutNumber (
       fTokensList.size (), "element", "elements");
 
-  return s.str ();
+  return ss.str ();
 }
 
 void msdlTokensList::print (std::ostream& os) const

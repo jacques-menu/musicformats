@@ -16,6 +16,7 @@
 #include "bsrCellsLists.h"
 
 #include "oahOah.h"
+#include "oahEarlyOptions.h"
 
 #include "bsrOah.h"
 
@@ -265,9 +266,16 @@ void bsrCellsList::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
+      "% --> End visiting bsrTranscriptionNotesElement" <<
       "% ==> bsrCellsList::acceptIn ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -278,9 +286,15 @@ void bsrCellsList::acceptIn (basevisitor* v)
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching bsrCellsList::visitStart ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
         p->visitStart (elem);
@@ -291,9 +305,16 @@ void bsrCellsList::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
-    gLogStream <<
+		std::stringstream ss;
+
+    ss <<
+      "% --> End visiting bsrTranscriptionNotesElement" <<
       "% ==> bsrCellsList::acceptOut ()" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif
 
@@ -304,9 +325,15 @@ void bsrCellsList::acceptOut (basevisitor* v)
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
-          gLogStream <<
+          std::stringstream ss;
+
+          ss <<
             "% ==> Launching bsrCellsList::visitEnd ()" <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
         }
 #endif
         p->visitEnd (elem);
@@ -319,9 +346,9 @@ void bsrCellsList::browseData (basevisitor* v)
 
 std::string bsrCellsList::asString () const
 {
-  std::stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "cellsListElements [";
 
   if (fCellsListElements.size ()) {
@@ -330,17 +357,17 @@ std::string bsrCellsList::asString () const
       iEnd   = fCellsListElements.end (),
       i      = iBegin;
     for ( ; ; ) {
-      s <<
+      ss <<
         bsrCellKindAsShortString ((*i));
       if (++i == iEnd) break;
-       s << ' ';
+       ss << ' ';
     } // for
   }
 
-  s <<
+  ss <<
     ']';
 
-  return s.str ();
+  return ss.str ();
 }
 
 std::string bsrCellsList::asShortString () const
