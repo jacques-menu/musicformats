@@ -362,8 +362,8 @@ EXP S_indentedOstream& getGlobalOutputIndentedOstream ();
 EXP S_indentedOstream& getGlobalLogIndentedOstream ();
 
 // useful shortcut macros
-#define gOutput getGlobalOutputIndentedOstream ()
-#define gLog    getGlobalLogIndentedOstream ()
+#define gOutput *(getGlobalOutputIndentedOstream ())
+#define gLog    *(getGlobalLogIndentedOstream ())
 
 //______________________________________________________________________________
 EXP extern void createTheGlobalIndentedOstreams (
