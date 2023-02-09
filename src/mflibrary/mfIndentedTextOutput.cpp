@@ -454,12 +454,13 @@ EXP mfOutputIndenter& getGlobalOutputIndenter ()
 
 // the hidden global log and output indented streams
 S_indentedOstream pGlobalOutputIndentedOstream;
-S_indentedOstream pGlobalLogIndentedOstream;
 
 EXP S_indentedOstream& getGlobalOutputIndentedOstream ()
 {
   return pGlobalOutputIndentedOstream;
 }
+
+S_indentedOstream pGlobalLogIndentedOstream;
 
 EXP S_indentedOstream& getGlobalLogIndentedOstream ()
 {
@@ -474,12 +475,12 @@ void createTheGlobalIndentedOstreams (
   pGlobalOutputIndentedOstream =
     mfIndentedOstream::create (
       theOutputStream,
-      theOutputStream);
+      gIndenter);
 
   pGlobalLogIndentedOstream =
     mfIndentedOstream::create (
       theLogStream,
-      theLogStream);
+      gIndenter);
 }
 
 
