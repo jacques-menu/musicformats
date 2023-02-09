@@ -444,7 +444,7 @@ std::ostream cnull  (& cnull_obj);
 //wostream wcnull (& wcnull_obj);
 
 //______________________________________________________________________________
-// the global output indenter for general use
+// the global hidden indenter for general use
 EXP mfOutputIndenter pGlobalOutputIndenter;
 
 EXP mfOutputIndenter& getGlobalOutputIndenter ()
@@ -452,10 +452,19 @@ EXP mfOutputIndenter& getGlobalOutputIndenter ()
   return pGlobalOutputIndenter;
 }
 
-//______________________________________________________________________________
-// the global log and output indented streams
+// the hidden global log and output indented streams
 S_indentedOstream pGlobalOutputIndentedOstream;
 S_indentedOstream pGlobalLogIndentedOstream;
+
+EXP S_indentedOstream& getGlobalOutputIndentedOstream ()
+{
+  return pGlobalOutputIndentedOstream;
+}
+
+EXP S_indentedOstream& getGlobalLogIndentedOstream ()
+{
+  return pGlobalLogIndentedOstream;
+}
 
 //______________________________________________________________________________
 void createTheGlobalIndentedOstreams (
@@ -465,12 +474,12 @@ void createTheGlobalIndentedOstreams (
   pGlobalOutputIndentedOstream =
     mfIndentedOstream::create (
       theOutputStream,
-      pGlobalOutputIndenter);
+      theOutputStream);
 
   pGlobalLogIndentedOstream =
     mfIndentedOstream::create (
       theLogStream,
-      pGlobalOutputIndenter);
+      theLogStream);
 }
 
 
