@@ -20,7 +20,8 @@
 #include "bsrOah2manPage.h"
 
 #include "oahOah.h"
-#include "oahEarlyOptions.h"
+
+#include "waeHandlers.h"
 
 
 namespace MusicFormats
@@ -41,8 +42,8 @@ bsrOah2manPage::~bsrOah2manPage ()
 //________________________________________________________________________
 void bsrOah2manPage::visitStart (S_bsrFacSimileKindAtom& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -76,8 +77,8 @@ void bsrOah2manPage::visitStart (S_bsrFacSimileKindAtom& elt)
 
 void bsrOah2manPage::visitEnd (S_bsrFacSimileKindAtom& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -96,8 +97,8 @@ void bsrOah2manPage::visitEnd (S_bsrFacSimileKindAtom& elt)
 //________________________________________________________________________
 void bsrOah2manPage::visitStart (S_bsrTextsLanguageAtom& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -131,8 +132,8 @@ void bsrOah2manPage::visitStart (S_bsrTextsLanguageAtom& elt)
 
 void bsrOah2manPage::visitEnd (S_bsrTextsLanguageAtom& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<

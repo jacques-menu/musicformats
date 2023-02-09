@@ -32,28 +32,28 @@ msdlParserWaeHandlerEnglish::~msdlParserWaeHandlerEnglish ()
 
 void msdlParserWaeHandlerEnglish::multipleIdentifications () const
 {
-  gLogStream <<
+  gLog <<
     "### only one identification section is possible, ahead of the specfication ###" <<
     std::endl;
 }
 
 void msdlParserWaeHandlerEnglish::stringExpectedAsTitle () const
 {
-  gLogStream <<
+  gLog <<
     "### a string is expected as title ###" <<
     std::endl;
 }
 
 void msdlParserWaeHandlerEnglish::stringExpectedAsComposer () const
 {
-  gLogStream <<
+  gLog <<
     "### a string is expected as composer ###" <<
     std::endl;
 }
 
 void msdlParserWaeHandlerEnglish::stringExpectedAsOpus () const
 {
-  gLogStream <<
+  gLog <<
     "### a string is expected as opus ###" <<
     std::endl;
 }
@@ -62,7 +62,7 @@ void msdlParserWaeHandlerEnglish::unexpectedToken (
   const msdlToken&   theToken,
   const std::string& context) const
 {
-  gLogStream <<
+  gLog <<
     "### " << context << ": " <<
     "unexpected token: " <<
     "'" << theToken.asString () <<  "'" <<
@@ -74,7 +74,7 @@ void msdlParserWaeHandlerEnglish::ignoringToken (
   const msdlToken&   theToken,
   const std::string& context) const
 {
-  gLogStream <<
+  gLog <<
     "### " << context << ": " <<
     "ignoring token: " <<
     "'" << theToken.asString () <<  "'" <<
@@ -84,28 +84,28 @@ void msdlParserWaeHandlerEnglish::ignoringToken (
 
 void msdlParserWaeHandlerEnglish::inputIsSyntacticallyCorrect () const
 {
-  gLogStream <<
+  gLog <<
     "The MSDL input is syntactically correct" <<
     std::endl;
 }
 
 void msdlParserWaeHandlerEnglish::inputIsSyntacticallyIncorrect () const
 {
-  gLogStream <<
+  gLog <<
     "### The MSDL input is syntactically incorrect ###" <<
     std::endl;
 }
 
 void msdlParserWaeHandlerEnglish::mixedCommasAndQuotesInOctaveIndication () const
 {
-  gLogStream <<
+  gLog <<
     "### Commas and quotes cannot be mixed in octave inditations ###" <<
     std::endl;
 }
 
 void msdlParserWaeHandlerEnglish::malformedNoteDuration () const
 {
-  gLogStream <<
+  gLog <<
     "### Malformed note duration ###" <<
     std::endl;
 }

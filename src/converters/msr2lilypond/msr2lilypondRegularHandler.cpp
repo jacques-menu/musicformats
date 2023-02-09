@@ -15,7 +15,6 @@
 
 #include "mfStringsHandling.h"
 
-
 #include "oahOah.h"
 
 #include "msrOah.h"
@@ -26,6 +25,8 @@
 #include "oahEarlyOptions.h"
 
 #include "msr2lilypondRegularHandler.h"
+
+#include "waeHandlers.h"
 
 
 namespace MusicFormats
@@ -66,10 +67,10 @@ msr2lilypondRegularHandler::msr2lilypondRegularHandler (
   // create the regular handler groups
   createRegularHandlerGroups ();
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOahDetails ()) {
   // print the options handler initial state
-  gLogStream <<
+  gLog <<
     "msr2lilypondRegularHandler \"" <<
     fHandlerHeader <<
     "\" has been initialized as:" <<
@@ -83,8 +84,8 @@ msr2lilypondRegularHandler::~msr2lilypondRegularHandler ()
 
 void msr2lilypondRegularHandler::createRegularHandlerGroups ()
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<
@@ -162,8 +163,8 @@ void msr2lilypondRegularHandler::createRegularHandlerGroups ()
 
   createMidiRegularGroup ();
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<
@@ -212,7 +213,7 @@ void msr2lilypondRegularHandler::createOahRegularGroup ()
   registerAtomInRegularSubgroup (K_INSIDER_OPTION_LONG_NAME, subGroup);
 //  registerAtomInRegularSubgroup (K_REGULAR_OPTION_LONG_NAME, subGroup);
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   registerAtomInRegularSubgroup (K_TRACE_EARLY_OPTIONS_OPTION_LONG_NAME, subGroup);
   registerAtomInRegularSubgroup (K_OAH_VERBOSE_MODE_OPTION_LONG_NAME, subGroup);
 #endif
@@ -260,7 +261,7 @@ void msr2lilypondRegularHandler::createOahRegularGroup ()
   registerAtomInRegularSubgroup ("display-lpsr", subGroup);
   registerAtomInRegularSubgroup ("display-lpsr-full", subGroup);
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   registerAtomInRegularSubgroup (K_TRACE_OAH_OPTION_LONG_NAME, subGroup);
   registerAtomInRegularSubgroup (K_TRACE_OAH_DETAILS_OPTION_LONG_NAME, subGroup);
 
@@ -1002,7 +1003,7 @@ void msr2lilypondRegularHandler::createChordsRegularGroup ()
 
   // atoms
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   registerAtomInRegularSubgroup ("trace-chords", subGroup);
 #endif
 
@@ -1678,8 +1679,8 @@ void msr2lilypondRegularHandler::createMidiRegularGroup ()
 //______________________________________________________________________________
 void msr2lilypondRegularHandler::checkOptionsAndArguments () const
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<

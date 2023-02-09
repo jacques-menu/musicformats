@@ -14,7 +14,6 @@
 #include "mfStringsHandling.h"
 
 #include "oahOah.h"
-#include "oahEarlyOptions.h"
 
 #include "msdl2msrOah.h"
 
@@ -25,6 +24,8 @@
 
 #include "msdlKeywords.h"
 #include "msdlTokens.h"
+
+#include "waeHandlers.h"
 
 
 namespace MusicFormats
@@ -296,7 +297,7 @@ std::string msdlTokenKindAsMsdlString (
   msdlTokenKind            tokenKind,
   msdlKeywordsLanguageKind languageKind)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsdl2msrOahGroup->getTraceTokens ()) {
 		std::stringstream ss;
 
@@ -709,7 +710,7 @@ S_msdlTokenKindsSet msdlTokenKindsSet::createClone ()
     } // for
   }
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (false && gGlobalMsdl2msrOahGroup->getTraceTokens ()) {
 		std::stringstream ss;
 
@@ -908,7 +909,7 @@ EXP S_msdlTokenKindsSet operator+ (
     addTokenKind (
       aTokenKind);
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (false && gGlobalMsdl2msrOahGroup->getTraceTokens ()) {
 		std::stringstream ss;
 
@@ -936,7 +937,7 @@ EXP S_msdlTokenKindsSet operator+ (
 
   result += anotherTokenKindsSet;
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (false && gGlobalMsdl2msrOahGroup->getTraceTokens ()) {
 		std::stringstream ss;
 
@@ -1011,7 +1012,7 @@ msdlKeywordKind msdlTokenDescription::getKeywordKind () const
         std::string message =
           "MSDL token desr contains an integer, not a keyword";
 
-        gLogStream <<
+        gLog <<
           message <<
           std::endl;
 
@@ -1024,7 +1025,7 @@ msdlKeywordKind msdlTokenDescription::getKeywordKind () const
         std::string message =
           "MSDL token desr contains a double, not an keyword";
 
-        gLogStream <<
+        gLog <<
           message <<
           std::endl;
 
@@ -1037,7 +1038,7 @@ msdlKeywordKind msdlTokenDescription::getKeywordKind () const
         std::string message =
           "MSDL token desr contains a character, not an keyword";
 
-        gLogStream <<
+        gLog <<
           message <<
           std::endl;
 
@@ -1050,7 +1051,7 @@ msdlKeywordKind msdlTokenDescription::getKeywordKind () const
         std::string message =
           "MSDL token desr contains a std::string, not an keyword";
 
-        gLogStream <<
+        gLog <<
           message <<
           std::endl;
 
@@ -1072,7 +1073,7 @@ int msdlTokenDescription::getInteger () const
         std::string message =
           "MSDL token desr contains a keyword, not an integer";
 
-        gLogStream <<
+        gLog <<
           message <<
           std::endl;
 
@@ -1089,7 +1090,7 @@ int msdlTokenDescription::getInteger () const
         std::string message =
           "MSDL token desr contains a double, not an integer";
 
-        gLogStream <<
+        gLog <<
           message <<
           std::endl;
 
@@ -1102,7 +1103,7 @@ int msdlTokenDescription::getInteger () const
         std::string message =
           "MSDL token desr contains a character, not an integer";
 
-        gLogStream <<
+        gLog <<
           message <<
           std::endl;
 
@@ -1115,7 +1116,7 @@ int msdlTokenDescription::getInteger () const
         std::string message =
           "MSDL token desr contains a std::string, not an integer";
 
-        gLogStream <<
+        gLog <<
           message <<
           std::endl;
 
@@ -1137,7 +1138,7 @@ double msdlTokenDescription::getDouble () const
         std::string message =
           "MSDL token desr contains a keyword, not a double";
 
-        gLogStream <<
+        gLog <<
           message <<
           std::endl;
 
@@ -1150,7 +1151,7 @@ double msdlTokenDescription::getDouble () const
         std::string message =
           "MSDL token desr contains an integer, not a double";
 
-        gLogStream <<
+        gLog <<
           message <<
           std::endl;
 
@@ -1167,7 +1168,7 @@ double msdlTokenDescription::getDouble () const
         std::string message =
           "MSDL token desr contains a character, not a double";
 
-        gLogStream <<
+        gLog <<
           message <<
           std::endl;
 
@@ -1180,7 +1181,7 @@ double msdlTokenDescription::getDouble () const
         std::string message =
           "MSDL token desr contains a std::string, not a double";
 
-        gLogStream <<
+        gLog <<
           message <<
           std::endl;
 
@@ -1203,7 +1204,7 @@ char msdlTokenDescription::getCharacter () const
         std::string message =
           "MSDL token desr contains a keyword, not a character";
 
-        gLogStream <<
+        gLog <<
           message <<
           std::endl;
 
@@ -1216,7 +1217,7 @@ char msdlTokenDescription::getCharacter () const
         std::string message =
           "MSDL token desr contains an integer, not a character";
 
-        gLogStream <<
+        gLog <<
           message <<
           std::endl;
 
@@ -1229,7 +1230,7 @@ char msdlTokenDescription::getCharacter () const
         std::string message =
           "MSDL token desr contains a double, not a character";
 
-        gLogStream <<
+        gLog <<
           message <<
           std::endl;
 
@@ -1246,7 +1247,7 @@ char msdlTokenDescription::getCharacter () const
         std::string message =
           "MSDL token desr contains a double, not a character";
 
-        gLogStream <<
+        gLog <<
           message <<
           std::endl;
 
@@ -1267,7 +1268,7 @@ std::string msdlTokenDescription::getString () const
         std::string message =
           "MSDL token desr contains a keyword, not a std::string";
 
-        gLogStream <<
+        gLog <<
           message <<
           std::endl;
 
@@ -1280,7 +1281,7 @@ std::string msdlTokenDescription::getString () const
         std::string message =
           "MSDL token desr contains an integer, not a std::string";
 
-        gLogStream <<
+        gLog <<
           message <<
           std::endl;
 
@@ -1293,7 +1294,7 @@ std::string msdlTokenDescription::getString () const
         std::string message =
           "MSDL token desr contains a double, not a std::string";
 
-        gLogStream <<
+        gLog <<
           message <<
           std::endl;
 
@@ -1625,7 +1626,7 @@ std::string msdlToken::asMsdlString (
   msdlKeywordsLanguageKind languageKind,
   msdlCommentsTypeKind     commentsTypeKind) const
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsdl2msrOahGroup->getTraceTokens ()) {
 		std::stringstream ss;
 

@@ -45,12 +45,12 @@ void waeHandler::waeWarning (
   int                inputLineNumber,
   const std::string& message)
 {
-  if (! gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
+  if (! gEarlyOptions.getEarlyQuietOption ()) {
     int saveIndent = gIndenter.getIndentation ();
 
     gIndenter.resetToZero ();
 
-    gLogStream <<
+    gLog <<
       "*** " << context << " warning *** " <<
       inputSourceName << ":" << inputLineNumber << ": " << message <<
       std::endl;
@@ -67,12 +67,12 @@ void waeHandler::waeInternalWarning (
   int                inputLineNumber,
   const std::string& message)
 {
-  if (! gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
+  if (! gEarlyOptions.getEarlyQuietOption ()) {
     int saveIndent = gIndenter.getIndentation ();
 
     gIndenter.resetToZero ();
 
-    gLogStream <<
+    gLog <<
       "*** " << context << " INTERNAL warning *** " <<
       inputSourceName << ":" << inputLineNumber << ": " << message <<
       std::endl;
@@ -91,9 +91,9 @@ void waeHandler::waeErrorWithoutException (
   int                sourceCodeLineNumber,
   const std::string& message)
 {
-  if (! gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
+  if (! gEarlyOptions.getEarlyQuietOption ()) {
     if (gGlobalOahOahGroup->getDisplaySourceCodePositions ()) {
-      gLogStream <<
+      gLog <<
         mfBaseName (sourceCodeFileName) << ":" << sourceCodeLineNumber <<
         ' ';
     }
@@ -103,7 +103,7 @@ void waeHandler::waeErrorWithoutException (
 
       gIndenter.resetToZero ();
 
-      gLogStream <<
+      gLog <<
         "### " << context << " ERROR ### " <<
         message <<
         std::endl;
@@ -121,9 +121,9 @@ void waeHandler::waeErrorWithoutException (
   int                sourceCodeLineNumber,
   const std::string& message)
 {
-  if (! gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
+  if (! gEarlyOptions.getEarlyQuietOption ()) {
     if (gGlobalOahOahGroup->getDisplaySourceCodePositions ()) {
-      gLogStream <<
+      gLog <<
         mfBaseName (sourceCodeFileName) << ":" << sourceCodeLineNumber <<
         ' ';
     }
@@ -133,7 +133,7 @@ void waeHandler::waeErrorWithoutException (
 
       gIndenter.resetToZero ();
 
-      gLogStream <<
+      gLog <<
         "### " << context << " ERROR ### " <<
         inputSourceName << ":" << inputLineNumber << ": " << message <<
         std::endl;
@@ -261,7 +261,7 @@ void waeHandler::waeInternalErrorWithException (
 }
 
 //______________________________________________________________________________
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
 
 void waeHandler::waeTrace (
 //   const std::string& context,
@@ -272,7 +272,7 @@ void waeHandler::waeTrace (
 {
   mfPassIDKind
     earlyTraceOnlyPass =
-      gGlobalOahEarlyOptions.getEarlyTraceOnlyPass (),
+      gEarlyOptions.getEarlyTraceOnlyPass (),
     globalCurrentPassIDKind =
       getGlobalCurrentPassIDKind ();
 
@@ -355,7 +355,7 @@ void waeHandler::waeTrace (
   const std::string& message)
 {
   waeTrace (
-    gLogStream,
+    gLog,
     inputSourceName,
     inputLineNumber,
     message);
@@ -375,9 +375,9 @@ void waeHandler::displayWarningsAndErrorsInputLineNumbers ()
   if (
     warningsInputLineNumbersSize
       &&
-    ! gGlobalOahEarlyOptions.getEarlyQuietOption ()
+    ! gEarlyOptions.getEarlyQuietOption ()
   ) {
-    gLogStream <<
+    gLog <<
       std::endl <<
       mfSingularOrPluralWithoutNumber (
         warningsInputLineNumbersSize, "A warning message has", "Warning messages have") <<
@@ -391,19 +391,19 @@ void waeHandler::displayWarningsAndErrorsInputLineNumbers ()
       iEnd   = fWarningsInputLineNumbers.end (),
       i      = iBegin;
     for ( ; ; ) {
-      gLogStream << (*i);
+      gLog << (*i);
       if (++i == iEnd) break;
-      gLogStream << ", ";
+      gLog << ", ";
     } // for
 
-    gLogStream << std::endl;
+    gLog << std::endl;
   }
 
   size_t errorsInputLineNumbersSize =
     fErrorsInputLineNumbers.size ();
 
   if (errorsInputLineNumbersSize) {
-    gLogStream <<
+    gLog <<
       std::endl <<
       mfSingularOrPluralWithoutNumber (
         errorsInputLineNumbersSize, "An error message has", "Error messages have") <<
@@ -417,12 +417,12 @@ void waeHandler::displayWarningsAndErrorsInputLineNumbers ()
       iEnd   = fErrorsInputLineNumbers.end (),
       i      = iBegin;
     for ( ; ; ) {
-      gLogStream << (*i);
+      gLog << (*i);
       if (++i == iEnd) break;
-      gLogStream << ", ";
+      gLog << ", ";
     } // for
 
-    gLogStream << std::endl;
+    gLog << std::endl;
   }
 }
 
@@ -456,11 +456,23 @@ std::ostream& operator << (std::ostream& os, const S_waeHandler& elt)
 }
 
 //________________________________________________________________________
-EXP S_waeHandler gGlobalWaeHandler;
+// hidden global WAE handler variable
+S_waeHandler pGlobalWaeHandler;
 
+EXP void setGlobalWaeHandler (S_waeHandler handler)
+{
+  pGlobalWaeHandler = handler;
+}
+
+EXP S_waeHandler getGlobalWaeHandler ()
+{
+  return pGlobalWaeHandler;
+}
+
+//________________________________________________________________________
 EXP void initializeWAE ()
 {
-  gGlobalWaeHandler = waeHandler::create ();
+  pGlobalWaeHandler = waeHandler::create ();
 }
 
 

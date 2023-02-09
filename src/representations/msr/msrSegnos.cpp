@@ -24,11 +24,12 @@
 #include "msrMeasureConstants.h"
 
 #include "oahOah.h"
-#include "oahEarlyOptions.h"
 
 #include "msrOah.h"
 
 #include "msrSegnos.h"
+
+#include "waeHandlers.h"
 
 
 namespace MusicFormats
@@ -86,7 +87,7 @@ S_msrSegno msrSegno::create (
   return
     msrSegno::create (
       inputLineNumber,
-      gGlobalNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
+      gNullMeasure, // set later in setMeasureElementUpLinkToMeasure()
       staffNumber);
 }
 
@@ -114,11 +115,11 @@ void msrSegno::setSegnoUpLinkToMeasure (
     "measure is null");
 #endif
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceWholeNotes ()) {
     ++gIndenter;
 
-    gLogStream <<
+    gLog <<
       "==> Setting the uplink to measure of segno " <<
       asString () <<
       " to measure " << measure->asString () <<
@@ -135,8 +136,9 @@ void msrSegno::setSegnoUpLinkToMeasure (
 
 void msrSegno::acceptIn (basevisitor* v)
 {
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "% ==> msrSegno::acceptIn ()" <<
@@ -146,12 +148,14 @@ void msrSegno::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
+#endif
 
   if (visitor<S_msrSegno>*
     p =
       dynamic_cast<visitor<S_msrSegno>*> (v)) {
         S_msrSegno elem = this;
 
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
@@ -163,14 +167,16 @@ void msrSegno::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
+#endif
         p->visitStart (elem);
   }
 }
 
 void msrSegno::acceptOut (basevisitor* v)
 {
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "% ==> msrSegno::acceptOut ()" <<
@@ -180,12 +186,14 @@ void msrSegno::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
+#endif
 
   if (visitor<S_msrSegno>*
     p =
       dynamic_cast<visitor<S_msrSegno>*> (v)) {
         S_msrSegno elem = this;
 
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
@@ -197,6 +205,7 @@ void msrSegno::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
+#endif        
         p->visitEnd (elem);
   }
 }
@@ -261,7 +270,7 @@ S_msrDalSegno msrDalSegno::create (
   return
     msrDalSegno::create (
       inputLineNumber,
-      gGlobalNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
+      gNullMeasure, // set later in setMeasureElementUpLinkToMeasure()
       dalSegnoKind,
       dalSegnoString,
       staffNumber);
@@ -297,11 +306,11 @@ void msrDalSegno::setDalSegnoUpLinkToMeasure (
     "measure is null");
 #endif
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceWholeNotes ()) {
     ++gIndenter;
 
-    gLogStream <<
+    gLog <<
       "==> Setting the uplink to measure of dal segno " <<
       asString () <<
       " to measure " << measure->asString () <<
@@ -318,8 +327,9 @@ void msrDalSegno::setDalSegnoUpLinkToMeasure (
 
 void msrDalSegno::acceptIn (basevisitor* v)
 {
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "% ==> msrDalSegno::acceptIn ()" <<
@@ -329,12 +339,14 @@ void msrDalSegno::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
+#endif
 
   if (visitor<S_msrDalSegno>*
     p =
       dynamic_cast<visitor<S_msrDalSegno>*> (v)) {
         S_msrDalSegno elem = this;
 
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
@@ -346,14 +358,16 @@ void msrDalSegno::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
+#endif
         p->visitStart (elem);
   }
 }
 
 void msrDalSegno::acceptOut (basevisitor* v)
 {
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "% ==> msrDalSegno::acceptOut ()" <<
@@ -363,12 +377,14 @@ void msrDalSegno::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
+#endif
 
   if (visitor<S_msrDalSegno>*
     p =
       dynamic_cast<visitor<S_msrDalSegno>*> (v)) {
         S_msrDalSegno elem = this;
 
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
@@ -380,6 +396,7 @@ void msrDalSegno::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
+#endif        
         p->visitEnd (elem);
   }
 }

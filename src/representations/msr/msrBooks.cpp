@@ -21,11 +21,12 @@
 #include "mfStaticSettings.h"
 
 #include "oahOah.h"
-#include "oahEarlyOptions.h"
 
 #include "msrOah.h"
 
 #include "msrBrowsers.h"
+
+#include "waeHandlers.h"
 
 
 namespace MusicFormats
@@ -86,8 +87,8 @@ msrBook::~msrBook ()
 
 S_msrBook msrBook::createBookNewbornClone ()
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceBooks ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceBooks ()) {
 		std::stringstream ss;
 
     ss <<
@@ -170,7 +171,7 @@ void msrBook::addBookElementToBook (
       "' already exists in this score";
 
     msrInternalError (
-      gGlobalCurrentServiceRunData->getInputSourceName (),
+      gServiceRunData->getInputSourceName (),
       bookElement->getInputLineNumber (),
       __FILE__, __LINE__,
       ss.str ());
@@ -194,8 +195,8 @@ void msrBook::addBookElementToBook (
 void msrBook::appendCreditToBook (
   const S_msrCredit& credit)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceCredits ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceCredits ()) {
 		std::stringstream ss;
 
     ss <<
@@ -224,7 +225,7 @@ void msrBook::fetchIdentificationFromCreditsIfAny ( // THROW AWAY JMI ??? v0.9.6
   ) {
     std::string
       inputSourceName =
-        gGlobalCurrentServiceRunData->getInputSourceName ();
+        gServiceRunData->getInputSourceName ();
 
     if (inputSourceName == "-") {
       inputSourceName = "Standard_input";
@@ -286,9 +287,9 @@ void msrBook::fetchIdentificationFromCreditsIfAny ( // THROW AWAY JMI ??? v0.9.6
 
               switch (topCreditsCounter) {
                 case 1:
-#ifdef MF_TRACING_IS_ENABLED
-                  if (gGlobalTracingOahGroup->getTraceCredits ()) {
-                    gLogStream <<
+#ifdef MF_TRACE_IS_ENABLED
+                  if (gGlobalTraceOahGroup->getTraceCredits ()) {
+                    gLog <<
                       "Using credit words '" <<
                       creditWordsContents <<
                       "' as score title" <<
@@ -303,9 +304,9 @@ void msrBook::fetchIdentificationFromCreditsIfAny ( // THROW AWAY JMI ??? v0.9.6
                   break;
 
                 case 2:
-#ifdef MF_TRACING_IS_ENABLED
-                  if (gGlobalTracingOahGroup->getTraceCredits ()) {
-                    gLogStream <<
+#ifdef MF_TRACE_IS_ENABLED
+                  if (gGlobalTraceOahGroup->getTraceCredits ()) {
+                    gLog <<
                       "Using credit words '" <<
                       creditWordsContents <<
                       "' as movement title" <<
@@ -332,9 +333,9 @@ void msrBook::fetchIdentificationFromCreditsIfAny ( // THROW AWAY JMI ??? v0.9.6
 
               switch (bottomCreditsCounter) {
                 case 1:
-#ifdef MF_TRACING_IS_ENABLED
-                  if (gGlobalTracingOahGroup->getTraceCredits ()) {
-                    gLogStream <<
+#ifdef MF_TRACE_IS_ENABLED
+                  if (gGlobalTraceOahGroup->getTraceCredits ()) {
+                    gLog <<
                       "Using credit words '" <<
                       creditWordsContents <<
                       "' as composer" <<
@@ -349,9 +350,9 @@ void msrBook::fetchIdentificationFromCreditsIfAny ( // THROW AWAY JMI ??? v0.9.6
                   break;
 
                 case 2:
-#ifdef MF_TRACING_IS_ENABLED
-                  if (gGlobalTracingOahGroup->getTraceCredits ()) {
-                    gLogStream <<
+#ifdef MF_TRACE_IS_ENABLED
+                  if (gGlobalTraceOahGroup->getTraceCredits ()) {
+                    gLog <<
                       "Using credit words '" <<
                       creditWordsContents <<
                       "' as poet" <<
@@ -395,8 +396,9 @@ S_msrBookElement msrBook::fetchBookElement (
 
 void msrBook::acceptIn (basevisitor* v)
 {
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "% ==> msrBook::acceptIn ()" <<
@@ -406,12 +408,14 @@ void msrBook::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
+#endif
 
   if (visitor<S_msrBook>*
     p =
       dynamic_cast<visitor<S_msrBook>*> (v)) {
         S_msrBook elem = this;
 
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
@@ -423,14 +427,16 @@ void msrBook::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
+#endif
         p->visitStart (elem);
   }
 }
 
 void msrBook::acceptOut (basevisitor* v)
 {
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "% ==> msrBook::acceptOut ()" <<
@@ -440,12 +446,14 @@ void msrBook::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
+#endif
 
   if (visitor<S_msrBook>*
     p =
       dynamic_cast<visitor<S_msrBook>*> (v)) {
         S_msrBook elem = this;
 
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
@@ -457,14 +465,16 @@ void msrBook::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
+#endif
         p->visitEnd (elem);
   }
 }
 
 void msrBook::browseData (basevisitor* v)
 {
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "% ==> msrBook::browseData ()" <<
@@ -474,6 +484,7 @@ void msrBook::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
+#endif
 
   if (fIdentification) {
     // browse identification
@@ -531,6 +542,7 @@ void msrBook::browseData (basevisitor* v)
     browser.browse (*(*i));
   } // for
 
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
 		std::stringstream ss;
 
@@ -542,6 +554,7 @@ void msrBook::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
+#endif
 }
 
 void msrBook::printFull (std::ostream& os) const

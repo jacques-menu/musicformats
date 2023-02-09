@@ -11,6 +11,8 @@
 
 #include "mfcComponents.h"
 
+#include "waeHandlers.h"
+
 #include "LilyPondIssue34Component.h"
 
 
@@ -81,8 +83,8 @@ S_mfcGeneratorComponent createLilyPondIssue34GeneratorComponent ()
   // protect library against multiple initializations
   if (! pGeneratorComponent) {
 
-#ifdef MF_TRACING_IS_ENABLED
-    if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+    if (gEarlyOptions.getEarlyTraceOah ()) {
 	  	std::stringstream ss;
 
       ss <<

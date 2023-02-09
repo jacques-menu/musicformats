@@ -16,10 +16,11 @@
 
 #include "mfStaticSettings.h"
 
-
 #include "oahEarlyOptions.h"
 
 #include "msdl2lilypondManPageOah.h"
+
+#include "waeHandlers.h"
 
 
 namespace MusicFormats
@@ -60,8 +61,8 @@ msdl2lilypondManPageGenerateAtom::~msdl2lilypondManPageGenerateAtom ()
 
 void msdl2lilypondManPageGenerateAtom::applyValueLessAtom (std::ostream& os)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<
@@ -79,8 +80,8 @@ void msdl2lilypondManPageGenerateAtom::applyValueLessAtom (std::ostream& os)
 
 void msdl2lilypondManPageGenerateAtom::acceptIn (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -98,8 +99,8 @@ void msdl2lilypondManPageGenerateAtom::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_msdl2lilypondManPageGenerateAtom>*> (v)) {
         S_msdl2lilypondManPageGenerateAtom elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
-        if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -117,8 +118,8 @@ void msdl2lilypondManPageGenerateAtom::acceptIn (basevisitor* v)
 
 void msdl2lilypondManPageGenerateAtom::acceptOut (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -136,8 +137,8 @@ void msdl2lilypondManPageGenerateAtom::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_msdl2lilypondManPageGenerateAtom>*> (v)) {
         S_msdl2lilypondManPageGenerateAtom elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
-        if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -155,8 +156,8 @@ void msdl2lilypondManPageGenerateAtom::acceptOut (basevisitor* v)
 
 void msdl2lilypondManPageGenerateAtom::browseData (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -285,8 +286,8 @@ R"(Write man page data for EXECUTABLE to standard output.)",
         fOahVisitor));
 }
 
-#ifdef MF_TRACING_IS_ENABLED
-void msdl2lilypondManPageOahGroup::initializeManPagetracingOah ()
+#ifdef MF_TRACE_IS_ENABLED
+void msdl2lilypondManPageOahGroup::initializeManPageTraceOah ()
 {
   S_oahSubGroup
     subGroup =
@@ -312,10 +313,10 @@ void msdl2lilypondManPageOahGroup::initializeMsdl2lyManPageOahGroup (
   initializeManPageGenerateOptions (
     theOah2manPage);
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   // trace
   // --------------------------------------
-  initializeManPagetracingOah ();
+  initializeManPageTraceOah ();
 #endif
 }
 
@@ -334,8 +335,8 @@ void msdl2lilypondManPageOahGroup::checkGroupOptionsConsistency ()
 //______________________________________________________________________________
 void msdl2lilypondManPageOahGroup::acceptIn (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -353,8 +354,8 @@ void msdl2lilypondManPageOahGroup::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_msdl2lilypondManPageOahGroup>*> (v)) {
         S_msdl2lilypondManPageOahGroup elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
-        if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -372,8 +373,8 @@ void msdl2lilypondManPageOahGroup::acceptIn (basevisitor* v)
 
 void msdl2lilypondManPageOahGroup::acceptOut (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -391,8 +392,8 @@ void msdl2lilypondManPageOahGroup::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_msdl2lilypondManPageOahGroup>*> (v)) {
         S_msdl2lilypondManPageOahGroup elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
-        if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -410,8 +411,8 @@ void msdl2lilypondManPageOahGroup::acceptOut (basevisitor* v)
 
 void msdl2lilypondManPageOahGroup::browseData (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -428,7 +429,7 @@ void msdl2lilypondManPageOahGroup::browseData (basevisitor* v)
 //______________________________________________________________________________
 void msdl2lilypondManPageOahGroup::printManPageOahValues (int fieldWidth)
 {
-  gLogStream <<
+  gLog <<
     "The OAH options are:" <<
     std::endl;
 
@@ -455,8 +456,8 @@ std::ostream& operator << (std::ostream& os, const S_msdl2lilypondManPageOahGrou
 S_msdl2lilypondManPageOahGroup createGlobalMsdl2lyManPageOahGroup (
   const S_oahVisitor& theOah2manPage)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<

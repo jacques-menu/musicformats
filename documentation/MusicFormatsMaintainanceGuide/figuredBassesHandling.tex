@@ -88,7 +88,7 @@ They are handled this way:
 In \class{msrNote}, there is:
 \begin{lstlisting}[language=CPlusPlus]
     // figured bass
-    void                  appendFiguredBassToNoteFiguredBassesList (
+    void                  appendFiguredBassToNote (
                             const S_msrFiguredBass& figuredBass);
 
     const std::list<S_msrFiguredBass>&
@@ -254,7 +254,7 @@ Field{mxsr2msrSkeletonBuilder}{fThereAreFiguredBassToBeAttachedToCurrentNote} it
 \begin{lstlisting}[language=CPlusPlus]
 void mxsr2msrSkeletonBuilder::visitStart ( S_figured_bass& elt )
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
 		std::stringstream ss;
 
@@ -291,9 +291,9 @@ void mxsr2msrSkeletonBuilder::visitEnd ( S_note& elt )
   // are there figured bass attached to the current note?
   if (fThereAreFiguredBassToBeAttachedToCurrentNote) {
     if (gGlobalMxsr2msrOahGroup->getIgnoreFiguredBasses ()) {
-#ifdef MF_TRACING_IS_ENABLED
-      if (gGlobalTracingOahGroup->getTraceFiguredBasses ()) {
-        gLogStream <<
+#ifdef MF_TRACE_IS_ENABLED
+      if (gGlobalTraceOahGroup->getTraceFiguredBasses ()) {
+        gLog <<
           "Ignoring the figured bass elements" <<
           ", line " <<
           inputLineNumber <<
@@ -357,7 +357,7 @@ void mxsr2msrTranslator::visitStart ( S_figured_bass& elt )
   int inputLineNumber =
     elt->getInputLineNumber ();
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
 		std::stringstream ss;
 
@@ -396,7 +396,7 @@ void mxsr2msrTranslator::visitStart ( S_figured_bass& elt )
         " should be 'yes' or 'no'";
 
       musicxmlError (
-        gGlobalCurrentServiceRunData->getInputSourceName (),
+        gServiceRunData->getInputSourceName (),
         inputLineNumber,
         __FILE__, __LINE__,
         ss.str ());
@@ -429,7 +429,7 @@ void mxsr2msrTranslator::visitEnd ( S_figured_bass& elt )
   int inputLineNumber =
     elt->getInputLineNumber ();
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
 		std::stringstream ss;
 
@@ -445,8 +445,8 @@ void mxsr2msrTranslator::visitEnd ( S_figured_bass& elt )
 #endif
 
   // create the figured bass element
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceFiguredBasses ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceFiguredBasses ()) {
 		std::stringstream ss;
 
     ss <<
@@ -476,7 +476,7 @@ void mxsr2msrTranslator::visitEnd ( S_figured_bass& elt )
   // attach pending figures to the figured bass element
   if (! fPendingFiguredBassFiguresList.size ()) {
     musicxmlWarning (
-      gGlobalCurrentServiceRunData->getInputSourceName (),
+      gServiceRunData->getInputSourceName (),
       inputLineNumber,
       "figured-bass has no figures contents, ignoring it");
   }
@@ -585,7 +585,7 @@ void mxsr2msrTranslator::handlePendingFiguredBasses (
 
     // append the figured bass to newNote
     newNote->
-      appendFiguredBassToNoteFiguredBassesList (
+      appendFiguredBassToNote (
         figuredBass);
 
 /* JMI
@@ -641,8 +641,8 @@ void mxsr2msrTranslator::handlePendingFiguredBasses (
 %    for (i=noteHarmoniesList.begin (); i!=noteHarmoniesList.end (); ++i) {
 %      S_msrHarmony harmony = (*i);
 %
-%#ifdef MF_TRACING_IS_ENABLED
-%      if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
+%#ifdef MF_TRACE_IS_ENABLED
+%      if (gGlobalTraceOahGroup->getTraceHarmonies ()) {
 %        std::stringstream ss;
 %
 %        ss <<
@@ -710,7 +710,7 @@ In \msrToMsr{msr2msrTranslator.cpp}, a newborn clone of the figured bass element
 \begin{lstlisting}[language=CPlusPlus]
 void msr2msrTranslator::visitStart (S_msrFiguredBass& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
 		std::stringstream ss;
 
@@ -737,7 +737,7 @@ void msr2msrTranslator::visitStart (S_msrFiguredBass& elt)
   if (fOnGoingNonGraceNote) {
     // append the figured bass to the current non-grace note clone
     fCurrentNonGraceNoteClone->
-      appendFiguredBassToNoteFiguredBassesList (
+      appendFiguredBassToNote (
       	fCurrentFiguredBassClone);
 
     // don't append the figured bass to the part figured bass,  JMI ???
@@ -774,7 +774,7 @@ void msr2msrTranslator::visitStart (S_msrFiguredBass& elt)
       elt->asShortString ();
 
     msrInternalError (
-      gGlobalCurrentServiceRunData->getInputSourceName (),
+      gServiceRunData->getInputSourceName (),
       elt->getInputLineNumber (),
       __FILE__, __LINE__,
       ss.str ());
@@ -786,7 +786,7 @@ There are only fields updates upon the second visit:
 \begin{lstlisting}[language=CPlusPlus]
 void msr2msrTranslator::visitEnd (S_msrFiguredBass& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
 		std::stringstream ss;
 
@@ -816,7 +816,7 @@ The same occurs in \msrToLpsr{msr2lpsrTranslator.cpp}: a newborn clone of the fi
 \begin{lstlisting}[language=CPlusPlus]
 void msr2lpsrTranslator::visitStart (S_msrFiguredBass& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
 		std::stringstream ss;
 
@@ -843,7 +843,7 @@ void msr2lpsrTranslator::visitStart (S_msrFiguredBass& elt)
   if (fOnGoingNonGraceNote) {
     // append the figured bass to the current non-grace note clone
     fCurrentNonGraceNoteClone->
-      appendFiguredBassToNoteFiguredBassesList (
+      appendFiguredBassToNote (
       	fCurrentFiguredBassClone);
 
     // don't append the figured bass to the part figured bass,  JMI ???
@@ -880,7 +880,7 @@ void msr2lpsrTranslator::visitStart (S_msrFiguredBass& elt)
       elt->asShortString ();
 
     msrInternalError (
-      gGlobalCurrentServiceRunData->getInputSourceName (),
+      gServiceRunData->getInputSourceName (),
       elt->getInputLineNumber (),
       __FILE__, __LINE__,
       ss.str ());
@@ -892,7 +892,7 @@ Here too, there are only fields updates upon the second visit of \smartPointerTy
 \begin{lstlisting}[language=CPlusPlus]
 void msr2lpsrTranslator::visitEnd (S_msrFiguredBass& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
 		std::stringstream ss;
 
@@ -927,7 +927,7 @@ The \lily\ code is generated only if the figured bass element belongs to a figur
 \begin{lstlisting}[language=CPlusPlus]
 void msr2lpsrTranslator::visitStart (S_msrFiguredBass& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
 		std::stringstream ss;
 
@@ -954,7 +954,7 @@ void msr2lpsrTranslator::visitStart (S_msrFiguredBass& elt)
   if (fOnGoingNonGraceNote) {
     // append the figured bass to the current non-grace note clone
     fCurrentNonGraceNoteClone->
-      appendFiguredBassToNoteFiguredBassesList (
+      appendFiguredBassToNote (
       	fCurrentFiguredBassClone);
 
     // don't append the figured bass to the part figured bass,  JMI ???
@@ -991,7 +991,7 @@ void msr2lpsrTranslator::visitStart (S_msrFiguredBass& elt)
       elt->asShortString ();
 
     msrInternalError (
-      gGlobalCurrentServiceRunData->getInputSourceName (),
+      gServiceRunData->getInputSourceName (),
       elt->getInputLineNumber (),
       __FILE__, __LINE__,
       ss.str ());

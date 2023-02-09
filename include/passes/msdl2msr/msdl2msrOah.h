@@ -56,7 +56,7 @@ class EXP msdl2msrOahGroup : public oahGroup
     // set and get
     // ------------------------------------------------------
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
     Bool                  getTraceTokens () const
                               { return fTraceTokens; }
     Bool                  getTraceTokensDetails () const
@@ -124,8 +124,8 @@ class EXP msdl2msrOahGroup : public oahGroup
     // private services
     // ------------------------------------------------------
 
-#ifdef MF_TRACING_IS_ENABLED
-    void                  initializeMsdl2msrtracingOah ();
+#ifdef MF_TRACE_IS_ENABLED
+    void                  initializeMsdl2msrTraceOah ();
 #endif
 
     void                  initializeMsdlLanguagesOptions ();
@@ -157,7 +157,7 @@ class EXP msdl2msrOahGroup : public oahGroup
     // ------------------------------------------------------
 
     // trace
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
     // MSDL tokens and syntax
     Bool                  fTraceTokens;
     Bool                  fTraceTokensDetails;

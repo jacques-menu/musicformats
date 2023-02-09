@@ -30,6 +30,8 @@
 #include "oahComponent.h"
 #include "oahWae.h"
 
+#include "waeHandlers.h"
+
 
 namespace MusicFormats
 {
@@ -59,8 +61,8 @@ void crackVersionNumber ( // JMI ??? v0.9.66
 
   size_t smSize = sm.size ();
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceComponents ()) {
 		std::stringstream ss;
 
     ss <<
@@ -72,11 +74,11 @@ void crackVersionNumber ( // JMI ??? v0.9.66
       smSize << " elements: ";
 
       for (unsigned i = 0; i < smSize; ++i) {
-        gLogStream <<
+        gLog <<
           '[' << sm [i] << "] ";
       } // for
 
-      gLogStream << std::endl;
+      gLog << std::endl;
     }
 #endif
 
@@ -87,8 +89,8 @@ void crackVersionNumber ( // JMI ??? v0.9.66
       majorNumberValue      = sm [2],
       minorNumberValue      = sm [3];
 
-#ifdef MF_TRACING_IS_ENABLED
-    if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {
+#ifdef MF_TRACE_IS_ENABLED
+    if (gEarlyOptions.getEarlyTraceComponents ()) {
 	  	std::stringstream ss;
 
       ss <<
@@ -123,8 +125,8 @@ void crackVersionNumber ( // JMI ??? v0.9.66
 
     size_t smSize = sm.size ();
 
-#ifdef MF_TRACING_IS_ENABLED
-    if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {
+#ifdef MF_TRACE_IS_ENABLED
+    if (gEarlyOptions.getEarlyTraceComponents ()) {
 	  	std::stringstream ss;
 
       ss <<
@@ -155,8 +157,8 @@ void crackVersionNumber ( // JMI ??? v0.9.66
         generationNumberValue = sm [1],
         majorNumberValue      = sm [2];
 
-#ifdef MF_TRACING_IS_ENABLED
-      if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {
+#ifdef MF_TRACE_IS_ENABLED
+      if (gEarlyOptions.getEarlyTraceComponents ()) {
         std::stringstream ss;
 
         ss <<
@@ -219,7 +221,7 @@ Bool versionNumberGreaterThanOrEqualTo (
   Bool doTrace (false); // JMI
 
   if (doTrace) {
-    gLogStream <<
+    gLog <<
       "versionNumber: " << versionNumber <<
       ", versionGenerationNumber:" << versionGenerationNumber <<
       ", versionMajorNumber:" << versionMajorNumber <<
@@ -228,7 +230,7 @@ Bool versionNumberGreaterThanOrEqualTo (
   }
 
   if (doTrace) {
-    gLogStream <<
+    gLog <<
       "otherVersionNumber: " << otherVersionNumber <<
       ", otherVersionNumbeGenerationNumber:" << otherVersionNumbeGenerationNumber <<
       ", otherVersionNumbeMajorNumber:" << otherVersionNumbeMajorNumber <<
@@ -237,7 +239,7 @@ Bool versionNumberGreaterThanOrEqualTo (
   }
 
   if (otherVersionNumbeGenerationNumber != 2) {
-    gLogStream <<
+    gLog <<
       "Using verstion \"" <<
       otherVersionNumbeGenerationNumber << ".x.y\" " <<
       "is probably not such a good idea" <<
@@ -245,7 +247,7 @@ Bool versionNumberGreaterThanOrEqualTo (
   }
 
   if (otherVersionNumbeMajorNumber < 19) {
-    gLogStream <<
+    gLog <<
       "Using a verstion older than \"" <<
       otherVersionNumbeGenerationNumber << ".19.y\" " <<
       "is not a good idea: the generated LilyPond code uses features introduced in the latter" <<
@@ -275,7 +277,7 @@ Bool versionNumberGreaterThanOrEqualTo (
 
 
   if (doTrace) {
-    gLogStream <<
+    gLog <<
       "----> versionNumberGreaterThanOrEqualTo =====> " <<
       result <<
       std::endl;
@@ -355,8 +357,8 @@ mfcVersionNumber::mfcVersionNumber (
   int                patchNumber,
   const std::string& preRelease)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceComponents ()) {
 		std::stringstream ss;
 
     ss <<
@@ -410,8 +412,8 @@ S_mfcVersionNumber mfcVersionNumber::createFromString (
 
   size_t smSize = sm.size ();
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceComponents ()) {
 		std::stringstream ss;
 
     ss <<
@@ -452,8 +454,8 @@ S_mfcVersionNumber mfcVersionNumber::createFromString (
 
     preReleaseValue         = sm [4];
 
-#ifdef MF_TRACING_IS_ENABLED
-    if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {
+#ifdef MF_TRACE_IS_ENABLED
+    if (gEarlyOptions.getEarlyTraceComponents ()) {
 	  	std::stringstream ss;
 
       ss <<
@@ -513,7 +515,7 @@ Bool mfcVersionNumber::operator== (const mfcVersionNumber& other) const
   Bool doTrace (false); // JMI
 
   if (doTrace) {
-    gLogStream <<
+    gLog <<
       ", fMajorNumber:" << fMajorNumber <<
       ", fMinorNumber:" << fMinorNumber <<
       ", fPatchNumber:" << fPatchNumber <<
@@ -565,7 +567,7 @@ Bool mfcVersionNumber::operator>= (const mfcVersionNumber& other) const
   Bool doTrace (false); // JMI
 
   if (doTrace) {
-    gLogStream <<
+    gLog <<
       ", fMajorNumber:" << fMajorNumber <<
       ", fMinorNumber:" << fMinorNumber <<
       ", fPatchNumber:" << fPatchNumber <<
@@ -612,7 +614,7 @@ Bool mfcVersionNumber::operator>= (const mfcVersionNumber& other) const
   }
 
   if (doTrace) {
-    gLogStream <<
+    gLog <<
       "----> mfcVersionNumber::operator>= =====> " <<
       result <<
       std::endl;
@@ -645,7 +647,7 @@ Bool mfcVersionNumber::operator<= (const mfcVersionNumber& other) const
   Bool doTrace (false); // JMI
 
   if (doTrace) {
-    gLogStream <<
+    gLog <<
       ", fMajorNumber:" << fMajorNumber <<
       ", fMinorNumber:" << fMinorNumber <<
       ", fPatchNumber:" << fPatchNumber <<
@@ -692,7 +694,7 @@ Bool mfcVersionNumber::operator<= (const mfcVersionNumber& other) const
   }
 
   if (doTrace) {
-    gLogStream <<
+    gLog <<
       "----> mfcVersionNumber::operator<= =====> " <<
       result <<
       std::endl;
@@ -757,8 +759,8 @@ mfcVersionDescr::mfcVersionDescr (
   const std::string&            versionDate,
   const std::list<std::string>& versionDescriptionItems)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceComponents ()) {
 		std::stringstream ss;
 
     ss <<
@@ -770,7 +772,7 @@ mfcVersionDescr::mfcVersionDescr (
 
     ++gIndenter;
     for (std::string const& item : versionDescriptionItems) {
-      gLogStream << item << std::endl;
+      gLog << item << std::endl;
     } // for
     --gIndenter;
   }
@@ -806,7 +808,7 @@ void mfcVersionDescr::print (std::ostream& os) const
   ++gIndenter;
 
   for (std::string const& item : fVersionDescriptionItems) {
-    gLogStream << item << std::endl;
+    gLog << item << std::endl;
   } // for
 
   --gIndenter;
@@ -827,8 +829,8 @@ std::ostream& operator << (std::ostream& os, const S_mfcVersionDescr& elt)
 //______________________________________________________________________________
 S_mfcVersionsHistory mfcVersionsHistory::create ()
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceComponents ()) {
 		std::stringstream ss;
 
     ss <<
@@ -850,8 +852,8 @@ S_mfcVersionsHistory mfcVersionsHistory::create ()
 mfcVersionsHistory::mfcVersionsHistory ()
 {
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceComponents ()) {
 		std::stringstream ss;
 
     ss <<
@@ -871,8 +873,8 @@ mfcVersionsHistory::~mfcVersionsHistory ()
 void mfcVersionsHistory::appendVersionDescrToHistory (
   const S_mfcVersionDescr& versionDescr)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceComponents ()) {
 		std::stringstream ss;
 
     ss <<
@@ -964,8 +966,8 @@ S_mfcComponent mfcComponent::create (
   const std::string& componentName,
   mfcComponentKind   componentKind)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceComponents ()) {
 		std::stringstream ss;
 
     ss <<
@@ -992,8 +994,8 @@ mfcComponent::mfcComponent (
   const std::string& componentName,
   mfcComponentKind   componentKind)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceComponents ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1021,8 +1023,8 @@ mfcComponent::~mfcComponent ()
 void mfcComponent::appendVersionDescrToComponent (
   const S_mfcVersionDescr& versionDescr)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceComponents ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1142,8 +1144,8 @@ std::ostream& operator << (std::ostream& os, const S_mfcComponent& elt)
 S_mfcOahComponent mfcOahComponent::create (
   const std::string& formatName)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceComponents ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1170,8 +1172,8 @@ mfcOahComponent::mfcOahComponent (
       formatName,
       mfcComponentKind::kComponentRepresentation)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceComponents ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1206,8 +1208,8 @@ std::ostream& operator << (std::ostream& os, const S_mfcOahComponent& elt)
 S_mfcRepresentationComponent mfcRepresentationComponent::create (
   const std::string& formatName)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceComponents ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1234,8 +1236,8 @@ mfcRepresentationComponent::mfcRepresentationComponent (
       formatName,
       mfcComponentKind::kComponentRepresentation)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceComponents ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1270,8 +1272,8 @@ std::ostream& operator << (std::ostream& os, const S_mfcRepresentationComponent&
 S_mfcPassComponent mfcPassComponent::create (
   const std::string& passName)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceComponents ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1298,8 +1300,8 @@ mfcPassComponent::mfcPassComponent (
       passName,
       mfcComponentKind::kComponentPass)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceComponents ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1375,8 +1377,8 @@ S_mfcMultiComponent mfcMultiComponent::create (
   mfcMultiComponentUsedFromTheCLIKind
                      componentUsedFromTheCLIKind)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceComponents ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1412,8 +1414,8 @@ mfcMultiComponent::mfcMultiComponent (
       multiComponentName,
       componentKind)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceComponents ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1444,8 +1446,8 @@ mfcMultiComponent::~mfcMultiComponent ()
 void mfcMultiComponent::appendRepresentationToMultiComponent (
   const S_mfcRepresentationComponent& format)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceComponents ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1518,8 +1520,8 @@ void mfcMultiComponent::appendRepresentationToMultiComponent (
 void mfcMultiComponent::appendPassToMultiComponent (
   const S_mfcPassComponent& pass)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceComponents ()) {
 		std::stringstream ss;
 
     ss <<
@@ -2020,8 +2022,8 @@ S_mfcGeneratorComponent mfcGeneratorComponent::create (
   mfcMultiComponentUsedFromTheCLIKind
                      componentUsedFromTheCLIKind)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceComponents ()) {
 		std::stringstream ss;
 
     ss <<
@@ -2056,8 +2058,8 @@ mfcGeneratorComponent::mfcGeneratorComponent (
       componentEntropicityKind,
       componentUsedFromTheCLIKind)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceComponents ()) {
 		std::stringstream ss;
 
     ss <<
@@ -2096,8 +2098,8 @@ S_mfcConverterComponent mfcConverterComponent::create (
   mfcMultiComponentUsedFromTheCLIKind
                   componentUsedFromTheCLIKind)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceComponents ()) {
 		std::stringstream ss;
 
     ss <<
@@ -2132,8 +2134,8 @@ mfcConverterComponent::mfcConverterComponent (
       componentEntropicityKind,
       componentUsedFromTheCLIKind)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceComponents ()) {
 		std::stringstream ss;
 
     ss <<
@@ -2172,8 +2174,8 @@ S_mfcLibraryComponent mfcLibraryComponent::create (
   mfcMultiComponentUsedFromTheCLIKind
                      componentUsedFromTheCLIKind)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceComponents ()) {
 		std::stringstream ss;
 
     ss <<
@@ -2208,8 +2210,8 @@ mfcLibraryComponent::mfcLibraryComponent (
       componentEntropicityKind,
       componentUsedFromTheCLIKind)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceComponents ()) {
 		std::stringstream ss;
 
     ss <<
@@ -2231,8 +2233,8 @@ mfcLibraryComponent::~mfcLibraryComponent ()
 void mfcLibraryComponent::appendConverterToMultiComponent (
   const S_mfcConverterComponent& converter)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceComponents ()) {
 		std::stringstream ss;
 
     ss <<

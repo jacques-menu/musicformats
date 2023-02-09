@@ -32,6 +32,8 @@
 
 #include "msrOah.h"
 
+#include "waeHandlers.h"
+
 
 namespace MusicFormats
 {
@@ -195,7 +197,7 @@ msrClefKind msrClefKindFromString (
       ", line: " << inputLineNumber;
 
     msrError (
-      gGlobalCurrentServiceRunData->getInputSourceName (),
+      gServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
       ss.str ());
@@ -382,7 +384,7 @@ S_msrClef msrClef::create (
   return
     msrClef::create (
       inputLineNumber,
-      gGlobalNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
+      gNullMeasure, // set later in setMeasureElementUpLinkToMeasure()
       clefKind,
       clefStaffNumber);
 }
@@ -414,8 +416,8 @@ S_msrClef msrClef::createClefFromString (
 
   S_msrClef result;
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceNotes ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceNotes ()) {
 		std::stringstream ss;
 
     ss <<
@@ -436,8 +438,8 @@ S_msrClef msrClef::createClefFromString (
     "[[:space:]]*"
     );
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<
@@ -458,8 +460,8 @@ S_msrClef msrClef::createClefFromString (
 
   size_t smSize = sm.size ();
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<
@@ -472,11 +474,11 @@ S_msrClef msrClef::createClefFromString (
     ++gIndenter;
 
     for (unsigned i = 0; i < smSize; ++i) {
-      gLogStream <<
+      gLog <<
         i << ": " << "\"" << sm [i] << "\"" <<
         std::endl;
     } // for
-    gLogStream << std::endl;
+    gLog << std::endl;
 
     --gIndenter;
   }
@@ -492,7 +494,7 @@ S_msrClef msrClef::createClefFromString (
       "\" is ill-formed";
 
     msrError (
-      gGlobalCurrentServiceRunData->getInputSourceName (),
+      gServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
       ss.str ());
@@ -507,8 +509,8 @@ S_msrClef msrClef::createClefFromString (
         inputLineNumber,
         clefName);
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<
@@ -545,11 +547,11 @@ void msrClef::setClefUpLinkToMeasure (
     "measure is null");
 #endif
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceWholeNotes ()) {
     ++gIndenter;
 
-    gLogStream <<
+    gLog <<
       "==> Setting the uplink to measure of clef " <<
       asString () <<
       " to measure " << measure->asString () <<
@@ -603,8 +605,9 @@ Bool msrClef::isEqualTo (S_msrClef otherClef) const
 
 void msrClef::acceptIn (basevisitor* v)
 {
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "% ==> msrClef::acceptIn ()" <<
@@ -614,12 +617,14 @@ void msrClef::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
+#endif
 
   if (visitor<S_msrClef>*
     p =
       dynamic_cast<visitor<S_msrClef>*> (v)) {
         S_msrClef elem = this;
 
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
@@ -631,14 +636,16 @@ void msrClef::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
+#endif
         p->visitStart (elem);
   }
 }
 
 void msrClef::acceptOut (basevisitor* v)
 {
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "% ==> msrClef::acceptOut ()" <<
@@ -648,12 +655,14 @@ void msrClef::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
+#endif
 
   if (visitor<S_msrClef>*
     p =
       dynamic_cast<visitor<S_msrClef>*> (v)) {
         S_msrClef elem = this;
 
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
@@ -665,6 +674,7 @@ void msrClef::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
+#endif        
         p->visitEnd (elem);
   }
 }

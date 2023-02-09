@@ -25,7 +25,7 @@ EXP void ischemeWarning (
   const std::string&       message,
   const iscm::location& loc)
 {
-  gLogStream <<
+  gLog <<
     "### [iScheme] WARNING " <<
     loc << ": " << message <<
     std::endl;
@@ -37,7 +37,7 @@ EXP void ischemeError (
 {
   gIndenter.resetToZero ();
 
-  gLogStream <<
+  gLog <<
     "### [iScheme] ERROR " <<
     loc << ": " << message <<
     std::endl;
@@ -55,7 +55,7 @@ EXP void ischemeInternalError (
 {
   gIndenter.resetToZero ();
 
-  gLogStream <<
+  gLog <<
     "### [iScheme] INNTERNAL ERROR " <<
     loc << ": " << message <<
     std::endl;
@@ -71,7 +71,7 @@ EXP void ischemeFileError (
   const std::string& inputSourceName,
   const std::string& message)
 {
-  gLogStream <<
+  gLog <<
     "### iScheme file error: " << message <<
     std::endl;
 

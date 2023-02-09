@@ -20,11 +20,12 @@
 #include "bsrMeasures.h"
 
 #include "oahOah.h"
-#include "oahEarlyOptions.h"
 
 #include "bsrOah.h"
 
 #include "bsrBrowsers.h"
+
+#include "waeHandlers.h"
 
 
 namespace MusicFormats
@@ -52,8 +53,8 @@ bsrMeasure::bsrMeasure (
   // initially, fBrailleMeasureNumber is the same as fPrintMeasureNumber
   fBrailleMeasureNumber = fPrintMeasureNumber;
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasures ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMeasures ()) {
 		std::stringstream ss;
 
     ss <<
@@ -75,8 +76,8 @@ bsrMeasure::~bsrMeasure ()
 
 S_bsrMeasure bsrMeasure::createMeasureNewbornClone ()
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasures ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMeasures ()) {
 		std::stringstream ss;
 
     ss <<
@@ -111,8 +112,8 @@ void bsrMeasure::appendLineElementToMeasure (
 
 void bsrMeasure::appendClefToMeasure (S_bsrClef clef)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceClefs ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceClefs ()) {
 		std::stringstream ss;
 
     ss <<
@@ -130,8 +131,8 @@ void bsrMeasure::appendClefToMeasure (S_bsrClef clef)
 
 void bsrMeasure::appendBarLineToMeasure (S_bsrBarLine barLine)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceBarLines ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceBarLines ()) {
 		std::stringstream ss;
 
     ss <<
@@ -149,9 +150,9 @@ void bsrMeasure::appendBarLineToMeasure (S_bsrBarLine barLine)
 
 void bsrMeasure::appendNumberToMeasure (S_bsrNumber number)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceNumbers ()) {
-    gLogStream <<
+    gLog <<
       "Appending number '" <<
       number->asShortString () <<
       "' to measure '" <<
@@ -166,9 +167,9 @@ void bsrMeasure::appendNumberToMeasure (S_bsrNumber number)
 
 void bsrMeasure::appendWordsToMeasure (S_bsrWords words)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceNumbers ()) {
-    gLogStream <<
+    gLog <<
       "Appending words '" <<
       words->asShortString () <<
       "' to measure '" <<
@@ -183,8 +184,8 @@ void bsrMeasure::appendWordsToMeasure (S_bsrWords words)
 
 void bsrMeasure::appendNoteToMeasure (S_bsrNote note)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceNotes ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceNotes ()) {
 		std::stringstream ss;
 
     ss <<
@@ -202,8 +203,8 @@ void bsrMeasure::appendNoteToMeasure (S_bsrNote note)
 
 void bsrMeasure::appendDynamicToMeasure (S_bsrDynamic dynamic)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceDynamics ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceDynamics ()) {
 		std::stringstream ss;
 
     ss <<
@@ -245,7 +246,7 @@ int bsrMeasure::fetchCellsNumber () const
 
 void bsrMeasure::acceptIn (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
 		std::stringstream ss;
 
@@ -265,7 +266,7 @@ void bsrMeasure::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_bsrMeasure>*> (v)) {
         S_bsrMeasure elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           std::stringstream ss;
 
@@ -284,7 +285,7 @@ void bsrMeasure::acceptIn (basevisitor* v)
 
 void bsrMeasure::acceptOut (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
 		std::stringstream ss;
 
@@ -304,7 +305,7 @@ void bsrMeasure::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_bsrMeasure>*> (v)) {
         S_bsrMeasure elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           std::stringstream ss;
 

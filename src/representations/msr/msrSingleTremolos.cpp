@@ -17,9 +17,10 @@
 #include "msrSingleTremolos.h"
 
 #include "oahOah.h"
-#include "oahEarlyOptions.h"
 
 #include "msrOah.h"
+
+#include "waeHandlers.h"
 
 
 namespace MusicFormats
@@ -61,8 +62,9 @@ std::string msrSingleTremolo::singleTremoloPlacementKindAsString () const
 
 void msrSingleTremolo::acceptIn (basevisitor* v)
 {
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "% ==> msrSingleTremolo::acceptIn ()" <<
@@ -72,12 +74,14 @@ void msrSingleTremolo::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
+#endif
 
   if (visitor<S_msrSingleTremolo>*
     p =
       dynamic_cast<visitor<S_msrSingleTremolo>*> (v)) {
         S_msrSingleTremolo elem = this;
 
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
@@ -89,14 +93,16 @@ void msrSingleTremolo::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
+#endif
         p->visitStart (elem);
   }
 }
 
 void msrSingleTremolo::acceptOut (basevisitor* v)
 {
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "% ==> msrSingleTremolo::acceptOut ()" <<
@@ -106,12 +112,14 @@ void msrSingleTremolo::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
+#endif
 
   if (visitor<S_msrSingleTremolo>*
     p =
       dynamic_cast<visitor<S_msrSingleTremolo>*> (v)) {
         S_msrSingleTremolo elem = this;
 
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
@@ -123,6 +131,7 @@ void msrSingleTremolo::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
+#endif        
         p->visitEnd (elem);
   }
 }

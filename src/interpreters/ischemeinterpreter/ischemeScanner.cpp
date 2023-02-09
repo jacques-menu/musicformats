@@ -1438,7 +1438,7 @@ YY_RULE_SETUP
 #line 191 "ischemeScanner.ll"
 {
   if (drv.getDisplayTokens ()) {
-    gLogStream <<
+    gLog <<
       "--> " << drv.getScannerLocation () <<
       ": single quoted std::string [" << pStringBuffer << ']' <<
       std::endl;
@@ -1508,7 +1508,7 @@ YY_RULE_SETUP
 #line 237 "ischemeScanner.ll"
 {
   if (drv.getDisplayTokens ()) {
-    gLogStream <<
+    gLog <<
       "--> " << drv.getScannerLocation () <<
       ": double quoted std::string [" << pStringBuffer << ']' <<
       std::endl;
@@ -1572,7 +1572,7 @@ YY_RULE_SETUP
 #line 280 "ischemeScanner.ll"
 {
   if (drv.getDisplayTokens ()) {
-    gLogStream << "--> " << drv.getScannerLocation () <<
+    gLog << "--> " << drv.getScannerLocation () <<
     " double: " << yytext <<
     std::endl;
   }
@@ -1589,7 +1589,7 @@ YY_RULE_SETUP
 #line 294 "ischemeScanner.ll"
 {
   if (drv.getDisplayTokens ()) {
-    gLogStream << "--> " << drv.getScannerLocation () <<
+    gLog << "--> " << drv.getScannerLocation () <<
     " integer: " << yytext <<
     std::endl;
   }
@@ -1606,7 +1606,7 @@ YY_RULE_SETUP
 #line 311 "ischemeScanner.ll"
 {
   if (drv.getDisplayTokens ()) {
-    gLogStream << "--> " << drv.getScannerLocation () <<
+    gLog << "--> " << drv.getScannerLocation () <<
     ": " << yytext <<
     std::endl;
   }
@@ -1623,7 +1623,7 @@ YY_RULE_SETUP
 #line 325 "ischemeScanner.ll"
 {
   if (drv.getDisplayTokens ()) {
-    gLogStream << "--> " << drv.getScannerLocation () <<
+    gLog << "--> " << drv.getScannerLocation () <<
     ": " << yytext <<
     std::endl;
   }
@@ -1640,7 +1640,7 @@ YY_RULE_SETUP
 #line 339 "ischemeScanner.ll"
 {
   if (drv.getDisplayTokens ()) {
-    gLogStream << "--> " << drv.getScannerLocation () <<
+    gLog << "--> " << drv.getScannerLocation () <<
     ": " << yytext <<
     std::endl;
   }
@@ -1657,7 +1657,7 @@ YY_RULE_SETUP
 #line 353 "ischemeScanner.ll"
 {
   if (drv.getDisplayTokens ()) {
-    gLogStream << "--> " << drv.getScannerLocation () <<
+    gLog << "--> " << drv.getScannerLocation () <<
     ": " << yytext <<
     std::endl;
   }
@@ -1674,7 +1674,7 @@ YY_RULE_SETUP
 #line 367 "ischemeScanner.ll"
 {
   if (drv.getDisplayTokens ()) {
-    gLogStream << "--> " << drv.getScannerLocation () <<
+    gLog << "--> " << drv.getScannerLocation () <<
     ": " << yytext <<
     std::endl;
   }
@@ -1691,7 +1691,7 @@ YY_RULE_SETUP
 #line 381 "ischemeScanner.ll"
 {
   if (drv.getDisplayTokens ()) {
-    gLogStream << "--> " << drv.getScannerLocation () <<
+    gLog << "--> " << drv.getScannerLocation () <<
     ": " << yytext <<
     std::endl;
   }
@@ -1708,7 +1708,7 @@ YY_RULE_SETUP
 #line 395 "ischemeScanner.ll"
 {
   if (drv.getDisplayTokens ()) {
-    gLogStream << "--> " << drv.getScannerLocation () <<
+    gLog << "--> " << drv.getScannerLocation () <<
     ": " << yytext <<
     std::endl;
   }
@@ -1725,7 +1725,7 @@ YY_RULE_SETUP
 #line 411 "ischemeScanner.ll"
 {
   if (drv.getDisplayTokens ()) {
-    gLogStream << "--> " << drv.getScannerLocation () <<
+    gLog << "--> " << drv.getScannerLocation () <<
     ": name [" << yytext << ']' <<
     std::endl;
   }
@@ -1744,7 +1744,7 @@ YY_RULE_SETUP
 #line 428 "ischemeScanner.ll"
 {
   if (drv.getDisplayTokens ()) {
-    gLogStream << "--> " << drv.getScannerLocation () <<
+    gLog << "--> " << drv.getScannerLocation () <<
     ": option [" << yytext << ']' <<
     std::endl;
   }
@@ -1760,7 +1760,7 @@ YY_RULE_SETUP
 #line 443 "ischemeScanner.ll"
 {
   if (drv.getDisplayTokens ()) {
-    gLogStream << "--> " << drv.getScannerLocation () <<
+    gLog << "--> " << drv.getScannerLocation () <<
     ": '" << yytext << '\'' <<
     std::endl;
   }
@@ -1777,7 +1777,7 @@ YY_RULE_SETUP
 #line 457 "ischemeScanner.ll"
 {
   if (drv.getDisplayTokens ()) {
-    gLogStream << "--> " << drv.getScannerLocation () <<
+    gLog << "--> " << drv.getScannerLocation () <<
     ": '" << yytext << '\'' <<
     std::endl;
   }
@@ -1794,7 +1794,7 @@ YY_RULE_SETUP
 #line 471 "ischemeScanner.ll"
 {
   if (drv.getDisplayTokens ()) {
-    gLogStream << "--> " << drv.getScannerLocation () <<
+    gLog << "--> " << drv.getScannerLocation () <<
     ": '" << yytext << '\'' <<
     std::endl;
   }
@@ -1811,7 +1811,7 @@ YY_RULE_SETUP
 #line 485 "ischemeScanner.ll"
 {
   if (drv.getDisplayTokens ()) {
-    gLogStream << "--> " << drv.getScannerLocation () <<
+    gLog << "--> " << drv.getScannerLocation () <<
     ": '" << yytext << '\'' <<
     std::endl;
   }
@@ -1828,7 +1828,7 @@ YY_RULE_SETUP
 #line 499 "ischemeScanner.ll"
 {
   if (drv.getDisplayTokens ()) {
-    gLogStream << "--> " << drv.getScannerLocation () <<
+    gLog << "--> " << drv.getScannerLocation () <<
     ": '" << yytext << '\'' <<
     std::endl;
   }
@@ -1845,7 +1845,7 @@ YY_RULE_SETUP
 #line 513 "ischemeScanner.ll"
 {
   if (drv.getDisplayTokens ()) {
-    gLogStream << "--> " << drv.getScannerLocation () <<
+    gLog << "--> " << drv.getScannerLocation () <<
     ": '" << yytext << '\'' <<
     std::endl;
   }
@@ -3020,7 +3020,7 @@ void ischemeDriver::scanBegin ()
 
       if (errorCString != nullptr) {
         ss <<
-          gWaeHandler->cannotOpenScriptForWriting (fScriptName) <<
+          gLanguage->cannotOpenScriptForWriting (fScriptName) <<
           ": " <<
           errorCString <<
           std::endl;

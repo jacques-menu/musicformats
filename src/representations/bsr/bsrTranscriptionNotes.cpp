@@ -17,12 +17,15 @@
 #include "bsrTranscriptionNotes.h"
 
 #include "oahOah.h"
-#include "oahEarlyOptions.h"
 
 #include "bsrOah.h"
 #include "brailleGenerationOah.h"
 
 #include "bsrBrowsers.h"
+
+#include "waeHandlers.h"
+
+#include "waeHandlers.h"
 
 
 namespace MusicFormats
@@ -62,7 +65,7 @@ S_bsrCellsList bsrTranscriptionNotesElement::buildCellsList () const
 
 void bsrTranscriptionNotesElement::acceptIn (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
 		std::stringstream ss;
 
@@ -82,7 +85,7 @@ void bsrTranscriptionNotesElement::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_bsrTranscriptionNotesElement>*> (v)) {
         S_bsrTranscriptionNotesElement elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           std::stringstream ss;
 
@@ -101,7 +104,7 @@ void bsrTranscriptionNotesElement::acceptIn (basevisitor* v)
 
 void bsrTranscriptionNotesElement::acceptOut (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
 		std::stringstream ss;
 
@@ -121,7 +124,7 @@ void bsrTranscriptionNotesElement::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_bsrTranscriptionNotesElement>*> (v)) {
         S_bsrTranscriptionNotesElement elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           std::stringstream ss;
 
@@ -206,7 +209,7 @@ bsrTranscriptionNotes::~bsrTranscriptionNotes ()
 
 void bsrTranscriptionNotes::acceptIn (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
 		std::stringstream ss;
 
@@ -226,7 +229,7 @@ void bsrTranscriptionNotes::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_bsrTranscriptionNotes>*> (v)) {
         S_bsrTranscriptionNotes elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           std::stringstream ss;
 
@@ -245,7 +248,7 @@ void bsrTranscriptionNotes::acceptIn (basevisitor* v)
 
 void bsrTranscriptionNotes::acceptOut (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
 		std::stringstream ss;
 
@@ -265,7 +268,7 @@ void bsrTranscriptionNotes::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_bsrTranscriptionNotes>*> (v)) {
         S_bsrTranscriptionNotes elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           std::stringstream ss;
 

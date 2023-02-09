@@ -21,6 +21,8 @@
 
 #include "msdl2guidoManPageOah.h"
 
+#include "waeHandlers.h"
+
 
 namespace MusicFormats
 {
@@ -60,8 +62,8 @@ msdl2guidoManPageGenerateAtom::~msdl2guidoManPageGenerateAtom ()
 
 void msdl2guidoManPageGenerateAtom::applyValueLessAtom (std::ostream& os)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<
@@ -79,8 +81,8 @@ void msdl2guidoManPageGenerateAtom::applyValueLessAtom (std::ostream& os)
 
 void msdl2guidoManPageGenerateAtom::acceptIn (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -98,8 +100,8 @@ void msdl2guidoManPageGenerateAtom::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_msdl2guidoManPageGenerateAtom>*> (v)) {
         S_msdl2guidoManPageGenerateAtom elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
-        if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -117,8 +119,8 @@ void msdl2guidoManPageGenerateAtom::acceptIn (basevisitor* v)
 
 void msdl2guidoManPageGenerateAtom::acceptOut (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -136,8 +138,8 @@ void msdl2guidoManPageGenerateAtom::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_msdl2guidoManPageGenerateAtom>*> (v)) {
         S_msdl2guidoManPageGenerateAtom elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
-        if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -155,8 +157,8 @@ void msdl2guidoManPageGenerateAtom::acceptOut (basevisitor* v)
 
 void msdl2guidoManPageGenerateAtom::browseData (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -285,8 +287,8 @@ R"(Write man page data for EXECUTABLE to standard output.)",
         fOahVisitor));
 }
 
-#ifdef MF_TRACING_IS_ENABLED
-void msdl2guidoManPageOahGroup::initializeManPagetracingOah ()
+#ifdef MF_TRACE_IS_ENABLED
+void msdl2guidoManPageOahGroup::initializeManPageTraceOah ()
 {
   S_oahSubGroup
     subGroup =
@@ -312,10 +314,10 @@ void msdl2guidoManPageOahGroup::initializeMsdl2gmnManPageOahGroup (
   initializeManPageGenerateOptions (
     theOah2manPage);
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   // trace
   // --------------------------------------
-  initializeManPagetracingOah ();
+  initializeManPageTraceOah ();
 #endif
 }
 
@@ -334,8 +336,8 @@ void msdl2guidoManPageOahGroup::checkGroupOptionsConsistency ()
 //______________________________________________________________________________
 void msdl2guidoManPageOahGroup::acceptIn (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -353,8 +355,8 @@ void msdl2guidoManPageOahGroup::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_msdl2guidoManPageOahGroup>*> (v)) {
         S_msdl2guidoManPageOahGroup elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
-        if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -372,8 +374,8 @@ void msdl2guidoManPageOahGroup::acceptIn (basevisitor* v)
 
 void msdl2guidoManPageOahGroup::acceptOut (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -391,8 +393,8 @@ void msdl2guidoManPageOahGroup::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_msdl2guidoManPageOahGroup>*> (v)) {
         S_msdl2guidoManPageOahGroup elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
-        if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -410,8 +412,8 @@ void msdl2guidoManPageOahGroup::acceptOut (basevisitor* v)
 
 void msdl2guidoManPageOahGroup::browseData (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -428,7 +430,7 @@ void msdl2guidoManPageOahGroup::browseData (basevisitor* v)
 //______________________________________________________________________________
 void msdl2guidoManPageOahGroup::printManPageOahValues (int fieldWidth)
 {
-  gLogStream <<
+  gLog <<
     "The OAH options are:" <<
     std::endl;
 
@@ -455,8 +457,8 @@ std::ostream& operator << (std::ostream& os, const S_msdl2guidoManPageOahGroup& 
 S_msdl2guidoManPageOahGroup createGlobalMsdl2gmnManPageOahGroupHandler (
   const S_oahVisitor& theOah2manPage)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<

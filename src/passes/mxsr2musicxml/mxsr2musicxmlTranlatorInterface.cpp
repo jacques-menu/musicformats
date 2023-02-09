@@ -31,6 +31,9 @@
 
 #include "mxsr2musicxmlTranlatorInterface.h"
 
+#include "waeHandlers.h"
+
+
 namespace MusicFormats
 {
 //_______________________________________________________________________________
@@ -52,8 +55,8 @@ EXP void translateMxsrToMusicXML (
   // start the clock
   clock_t startClock = clock ();
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTracePasses ()) {
     std::string separator =
       "%--------------------------------------------------------------";
 
@@ -63,7 +66,7 @@ EXP void translateMxsrToMusicXML (
       separator <<
       std::endl <<
       gTab <<
-      gWaeHandler->passIDKindAsString (passIDKind) << ": " << passDescription <<
+      gLanguage->passIDKindAsString (passIDKind) << ": " << passDescription <<
       std::endl <<
       separator <<
       std::endl;
@@ -75,8 +78,8 @@ EXP void translateMxsrToMusicXML (
   }
 #endif
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
     err <<
       "translateMxsrToMusicXML() outputFileName = \"" <<
       outputFileName <<
@@ -95,8 +98,8 @@ EXP void translateMxsrToMusicXML (
   // insert the MXSR into it
   sxmlfile->set (theMxsr);
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
     err <<
       "xmlFile2musicxml() outputFileName = \"" <<
       outputFileName <<
@@ -110,8 +113,8 @@ EXP void translateMxsrToMusicXML (
 #endif
 
   if (! outputFileName.size ()) {
-#ifdef MF_TRACING_IS_ENABLED
-    if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+    if (gEarlyOptions.getEarlyTraceOah ()) {
       err <<
         "xmlFile2musicxml() output goes to standard output" <<
         std::endl;
@@ -123,13 +126,13 @@ EXP void translateMxsrToMusicXML (
 #endif
 
     // write the MusicXML data to the output file stream
-    sxmlfile->print (gOutputStream);
-    gOutputStream << std::endl;
+    sxmlfile->print (gOutput);
+    gOutput << std::endl;
   }
 
   else {
-#ifdef MF_TRACING_IS_ENABLED
-    if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+    if (gEarlyOptions.getEarlyTraceOah ()) {
       err <<
         "xmlFile2musicxml() output goes to file \"" <<
         outputFileName <<
@@ -145,11 +148,11 @@ EXP void translateMxsrToMusicXML (
     // open output file
     std::ofstream outputFileStream;
 
-#ifdef MF_TRACING_IS_ENABLED
-    if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
+#ifdef MF_TRACE_IS_ENABLED
+    if (gEarlyOptions.getEarlyTracePasses ()) {
       err <<
         std::endl <<
-        gWaeHandler->openingMusicXMLFileForWriting (outputFileName) <<
+        gLanguage->openingMusicXMLFileForWriting (outputFileName) <<
         std::endl;
 
 //     gWaeHandler->waeTrace ( JMI v0.9.67
@@ -167,7 +170,7 @@ EXP void translateMxsrToMusicXML (
       std::stringstream ss;
 
       ss <<
-        gWaeHandler->cannotOpenMusicXMLFileForWriting (outputFileName);
+        gLanguage->cannotOpenMusicXMLFileForWriting (outputFileName);
 
       std::string message = ss.str ();
 
@@ -189,10 +192,10 @@ EXP void translateMxsrToMusicXML (
 
     // close output file
 #ifdef TRACE_OAH
-    if (gtracingOah->fTracePasses) {
+    if (gTraceOah->fTracePasses) {
       err <<
         std::endl <<
-        gWaeHandler->closingMusicXMLFile (outputFileName) <<
+        gLanguage->closingMusicXMLFile (outputFileName) <<
         std::endl;
 
 //     gWaeHandler->waeTrace ( JMI v0.9.67
@@ -207,7 +210,7 @@ EXP void translateMxsrToMusicXML (
   // register time spent
   clock_t endClock = clock ();
 
-  mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
+  gGlobalTimingItemsList.appendTimingItem (
     passIDKind,
     passDescription,
     mfTimingItemKind::kMandatory,

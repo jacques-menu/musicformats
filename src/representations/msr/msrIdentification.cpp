@@ -20,9 +20,10 @@
 #include "msrIdentification.h"
 
 #include "oahOah.h"
-#include "oahEarlyOptions.h"
 
 #include "msrOah.h"
+
+#include "waeHandlers.h"
 
 
 namespace MusicFormats
@@ -51,8 +52,8 @@ void msrIdentification::setIdentificationWorkNumber (
   int           inputLineNumber,
   const std::string& val)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceIdentification ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceIdentification ()) {
 		std::stringstream ss;
 
     ss <<
@@ -72,8 +73,8 @@ void msrIdentification::setIdentificationWorkCreditTypeTitle (
   int           inputLineNumber,
   const std::string& val)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceIdentification ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceIdentification ()) {
 		std::stringstream ss;
 
     ss <<
@@ -93,8 +94,8 @@ void msrIdentification::setIdentificationOpus (
   int           inputLineNumber,
   const std::string& val)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceIdentification ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceIdentification ()) {
 		std::stringstream ss;
 
     ss <<
@@ -114,8 +115,8 @@ void msrIdentification::setIdentificationMovementNumber (
   int           inputLineNumber,
   const std::string& val)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceIdentification ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceIdentification ()) {
 		std::stringstream ss;
 
     ss <<
@@ -135,8 +136,8 @@ void msrIdentification::setIdentificationMovementTitle (
   int           inputLineNumber,
   const std::string& val)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceIdentification ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceIdentification ()) {
 		std::stringstream ss;
 
     ss <<
@@ -156,8 +157,8 @@ void msrIdentification::setIdentificationEncodingDate (
   int           inputLineNumber,
   const std::string& val)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceIdentification ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceIdentification ()) {
 		std::stringstream ss;
 
     ss <<
@@ -177,8 +178,8 @@ void msrIdentification::setIdentificationMiscellaneousField (
   int           inputLineNumber,
   const std::string& val)
 {
- #ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceIdentification ()) {
+ #ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceIdentification ()) {
 		std::stringstream ss;
 
     ss <<
@@ -198,8 +199,8 @@ void msrIdentification::setIdentificationScoreInstrument (
   int           inputLineNumber,
   const std::string& val)
 {
- #ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceIdentification ()) {
+ #ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceIdentification ()) {
 		std::stringstream ss;
 
     ss <<
@@ -219,8 +220,8 @@ void msrIdentification::appendComposer (
   int           inputLineNumber,
   const std::string& value)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceIdentification ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceIdentification ()) {
 		std::stringstream ss;
 
     ss <<
@@ -240,8 +241,8 @@ void msrIdentification::appendLyricist (
   int           inputLineNumber,
   const std::string& value)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceIdentification ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceIdentification ()) {
 		std::stringstream ss;
 
     ss <<
@@ -261,8 +262,8 @@ void msrIdentification::appendArranger (
   int           inputLineNumber,
   const std::string& value)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceIdentification ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceIdentification ()) {
 		std::stringstream ss;
 
     ss <<
@@ -282,8 +283,8 @@ void msrIdentification::appendPoet (
   int           inputLineNumber,
   const std::string& value)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceIdentification ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceIdentification ()) {
 		std::stringstream ss;
 
     ss <<
@@ -303,8 +304,8 @@ void msrIdentification::appendTranslator (
   int           inputLineNumber,
   const std::string& value)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceIdentification ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceIdentification ()) {
 		std::stringstream ss;
 
     ss <<
@@ -324,8 +325,8 @@ void msrIdentification::appendArtist (
   int           inputLineNumber,
   const std::string& value)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceIdentification ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceIdentification ()) {
 		std::stringstream ss;
 
     ss <<
@@ -345,8 +346,8 @@ void msrIdentification::appendSoftware (
   int           inputLineNumber,
   const std::string& value)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceIdentification ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceIdentification ()) {
 		std::stringstream ss;
 
     ss <<
@@ -366,8 +367,8 @@ void msrIdentification::appendRight (
   int           inputLineNumber,
   const std::string& value)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceIdentification ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceIdentification ()) {
 		std::stringstream ss;
 
     ss <<
@@ -387,8 +388,8 @@ void msrIdentification::appendSource (
   int           inputLineNumber,
   const std::string& value)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceIdentification ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceIdentification ()) {
 		std::stringstream ss;
 
     ss <<
@@ -408,8 +409,8 @@ void msrIdentification::appendRelation (
   int           inputLineNumber,
   const std::string& value)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceIdentification ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceIdentification ()) {
 		std::stringstream ss;
 
     ss <<
@@ -576,8 +577,9 @@ size_t msrIdentification::maxIdentificationNamesLength ()
 
 void msrIdentification::acceptIn (basevisitor* v)
 {
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "% ==> msrIdentification::acceptIn ()" <<
@@ -587,12 +589,14 @@ void msrIdentification::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
+#endif
 
   if (visitor<S_msrIdentification>*
     p =
       dynamic_cast<visitor<S_msrIdentification>*> (v)) {
         S_msrIdentification elem = this;
 
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
@@ -604,14 +608,16 @@ void msrIdentification::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
+#endif
         p->visitStart (elem);
   }
 }
 
 void msrIdentification::acceptOut (basevisitor* v)
 {
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "% ==> msrIdentification::acceptOut ()" <<
@@ -621,12 +627,14 @@ void msrIdentification::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
+#endif
 
   if (visitor<S_msrIdentification>*
     p =
       dynamic_cast<visitor<S_msrIdentification>*> (v)) {
         S_msrIdentification elem = this;
 
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
@@ -638,6 +646,7 @@ void msrIdentification::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
+#endif        
         p->visitEnd (elem);
   }
 }

@@ -36,6 +36,9 @@
 #include "msr2summaryVisitor.h"
 #include "msr2namesVisitor.h"
 
+#include "waeHandlers.h"
+
+
 namespace MusicFormats
 {
 
@@ -65,8 +68,8 @@ void populateMsrSkeletonFromMxsr (
   // set the global current passID
   setGlobalCurrentPassIDKind (passIDKind);
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTracePasses ()) {
     std::string separator =
       "%--------------------------------------------------------------";
 
@@ -77,7 +80,7 @@ void populateMsrSkeletonFromMxsr (
       separator <<
       std::endl <<
       gTab <<
-      gWaeHandler->passIDKindAsString (passIDKind) << ": " << passDescription <<
+      gLanguage->passIDKindAsString (passIDKind) << ": " << passDescription <<
       std::endl <<
       separator <<
       std::endl;
@@ -100,7 +103,7 @@ void populateMsrSkeletonFromMxsr (
   // register time spent
   clock_t endClock = clock ();
 
-  mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
+  gGlobalTimingItemsList.appendTimingItem (
     passIDKind,
     passDescription,
     mfTimingItemKind::kMandatory,
@@ -109,7 +112,7 @@ void populateMsrSkeletonFromMxsr (
 
   // check indentation
   if (gIndenter != 0) {
-    gLogStream <<
+    gLog <<
       "### populateMsrSkeletonFromMxsr gIndenter final value: " <<
       gIndenter.getIndentation () <<
       " ###" <<
@@ -124,17 +127,17 @@ void populateMsrSkeletonFromMxsr (
   if (gGlobalMsrOahGroup->getDisplayFirstMsr ()) {
     displayMsrScore (
       scoreSkeletonToBePopulated,
-      gWaeHandler->displayTheFirstMSRAsText ());
+      gLanguage->displayTheFirstMSRAsText ());
   }
 
   if (gGlobalMsrOahGroup->getDisplayFirstMsrFull ()) {
     displayMsrScoreFull (
       scoreSkeletonToBePopulated,
-      gWaeHandler->displayTheFirstMSRAsText ()
+      gLanguage->displayTheFirstMSRAsText ()
       	+
       ", "
         +
-      gWaeHandler->fullVersion () );
+      gLanguage->fullVersion () );
   }
 
   // display the populated MSR score summary if requested
@@ -145,7 +148,7 @@ void populateMsrSkeletonFromMxsr (
     displayMsrScoreSummary (
       scoreSkeletonToBePopulated,
       gGlobalMsrOahGroup,
-      gWaeHandler->displayASummaryOfTheFirstMSR ());
+      gLanguage->displayASummaryOfTheFirstMSR ());
   }
 
   // display the populated MSR score names if requested
@@ -156,7 +159,7 @@ void populateMsrSkeletonFromMxsr (
     displayMsrScoreNames (
       scoreSkeletonToBePopulated,
       gGlobalMsrOahGroup,
-      gWaeHandler->displayTheNamesInTheFirstMSR ());
+      gLanguage->displayTheNamesInTheFirstMSR ());
   }
 }
 

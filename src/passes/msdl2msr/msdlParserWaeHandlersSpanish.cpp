@@ -32,28 +32,28 @@ msdlParserWaeHandlerSpanish::~msdlParserWaeHandlerSpanish ()
 
 void msdlParserWaeHandlerSpanish::multipleIdentifications () const
 {
-  gLogStream <<
+  gLog <<
     "### only one identification section is possible, ahead of the specfication ###" <<
     std::endl;
 }
 
 void msdlParserWaeHandlerSpanish::stringExpectedAsTitle () const
 {
-  gLogStream <<
+  gLog <<
     "### a string is expected as title ###" <<
     std::endl;
 }
 
 void msdlParserWaeHandlerSpanish::stringExpectedAsComposer () const
 {
-  gLogStream <<
+  gLog <<
     "### a string is expected as composer ###" <<
     std::endl;
 }
 
 void msdlParserWaeHandlerSpanish::stringExpectedAsOpus () const
 {
-  gLogStream <<
+  gLog <<
     "### a string is expected as opus ###" <<
     std::endl;
 }
@@ -62,7 +62,7 @@ void msdlParserWaeHandlerSpanish::unexpectedToken (
   const msdlToken&   theToken,
   const std::string& context) const
 {
-  gLogStream <<
+  gLog <<
     "### " << context << ": " <<
     "unexpected token: " <<
     "'" << theToken.asString () <<  "'" <<
@@ -74,7 +74,7 @@ void msdlParserWaeHandlerSpanish::ignoringToken (
   const msdlToken&   theToken,
   const std::string& context) const
 {
-  gLogStream <<
+  gLog <<
     "### " << context << ": " <<
     "ignoring token: " <<
     "'" << theToken.asString () <<  "'" <<
@@ -84,7 +84,7 @@ void msdlParserWaeHandlerSpanish::ignoringToken (
 
 void msdlParserWaeHandlerSpanish::inputIsSyntacticallyCorrect () const
 {
-  gLogStream <<
+  gLog <<
     "The MSDL input is syntactically correct" <<
     " tokens" <<
     std::endl;
@@ -92,21 +92,21 @@ void msdlParserWaeHandlerSpanish::inputIsSyntacticallyCorrect () const
 
 void msdlParserWaeHandlerSpanish::inputIsSyntacticallyIncorrect () const
 {
-  gLogStream <<
+  gLog <<
     "### The MSDL input is syntactically incorrect ###" <<
     std::endl;
 }
 
 void msdlParserWaeHandlerSpanish::mixedCommasAndQuotesInOctaveIndication () const
 {
-  gLogStream <<
+  gLog <<
     "### Commas and quotes cannot be mixed in octave inditations ###" <<
     std::endl;
 }
 
 void msdlParserWaeHandlerSpanish::malformedNoteDuration () const
 {
-  gLogStream <<
+  gLog <<
     "### Malformed note duration ###" <<
     std::endl;
 }

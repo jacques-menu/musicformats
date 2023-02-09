@@ -24,6 +24,8 @@
 
 #include "msrWae.h"
 
+#include "waeHandlers.h"
+
 
 namespace MusicFormats
 {
@@ -77,7 +79,7 @@ Rational::Rational (const std::string &theString)
       numerator   = sm [1],
       denominator = sm [2];
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
     if (false) {
 	  	std::stringstream ss;
 
@@ -124,7 +126,7 @@ Rational::Rational (const std::string &theString)
 
     msrError (
 //    msrWarning ( //  JMI
-      gGlobalCurrentServiceRunData->getInputSourceName (),
+      gServiceRunData->getInputSourceName (),
       0, // JMI inputLineNumber, ??? v0.9.66
       __FILE__, __LINE__,
       ss.str ());

@@ -45,8 +45,6 @@ std::ostream& operator << (std::ostream& os, const mfTimingItemKind& elt)
 }
 
 //______________________________________________________________________________
-mfTimingItemsList mfTimingItemsList::gGlobalTimingItemsList;
-
 S_mfTimingItem mfTimingItem::createTimingItem (
   const std::string& activity,
   const std::string& description,
@@ -94,7 +92,7 @@ void mfTimingItemsList::appendTimingItem (
   S_mfTimingItem
     mfTimingItem =
       mfTimingItem::createTimingItem (
-        gWaeHandler->passIDKindAsString (passIDKind),
+        gLanguage->passIDKindAsString (passIDKind),
         description,
         timingItemKind,
         startClock,
@@ -114,7 +112,7 @@ void mfTimingItemsList::doPrint (std::ostream& os) const
     secondsPrecision = 1;
 
   // set the timing items columns widths
-  switch (gGlobalOahEarlyOptions.getEarlyLanguageKind ()) {
+  switch (gEarlyOptions.getEarlyLanguageKind ()) {
     case mfLanguageKind::kMusicFormatsLanguage_UNKNOWN:
       break;
     case mfLanguageKind::kMusicFormatsLanguageEnglish:
@@ -156,23 +154,23 @@ void mfTimingItemsList::doPrint (std::ostream& os) const
   } // switch
   secondsPrecision = secondsWidth - 4; // to leave room for large numbers
 
-//   gLogStream << "descriptionWidth: " << descriptionWidth << std::endl;
-//   gLogStream << "secondsWidth: " << secondsWidth << std::endl;
-//   gLogStream << "secondsPrecision: " << secondsPrecision << std::endl;
+//   gLog << "descriptionWidth: " << descriptionWidth << std::endl;
+//   gLog << "secondsWidth: " << secondsWidth << std::endl;
+//   gLog << "secondsPrecision: " << secondsPrecision << std::endl;
 
   //  print the timing items columns headers and separators
   os << std::left <<
     std::setw (activityWidth) <<
-    gWaeHandler->activity () <<
+    gLanguage->activity () <<
     ' ' <<
     std::setw (descriptionWidth) <<
-    gWaeHandler->description () <<
+    gLanguage->description () <<
     ' ' <<
     std::setw (kindWidth)     <<
-    gWaeHandler->kind () <<
+    gLanguage->kind () <<
     ' ' <<
     std::setw (secondsWidth)  <<
-    gWaeHandler->CPUSeconds () <<
+    gLanguage->CPUSeconds () <<
     std::endl <<
 
     std::setw (activityWidth) <<
@@ -234,7 +232,7 @@ void mfTimingItemsList::doPrint (std::ostream& os) const
       twoBytesWideCharactersInString =
         countTwoBytesWideCharactersInString (description);
 
-//     gLogStream << "twoBytesWideCharactersInString: " << twoBytesWideCharactersInString << std::endl;
+//     gLog << "twoBytesWideCharactersInString: " << twoBytesWideCharactersInString << std::endl;
 
     if (twoBytesWideCharactersInString > 0) {
       os <<
@@ -252,14 +250,14 @@ void mfTimingItemsList::doPrint (std::ostream& os) const
         os <<
 //           std::left <<
 //           std::setw (kindWidth) <<
-          gWaeHandler->mandatory ();
+          gLanguage->mandatory ();
         break;
       case mfTimingItemKind::kOptional:
         totalOptionalClock += timingItemClock;
         os <<
 //           std::left <<
 //           std::setw (kindWidth) <<
-          gWaeHandler->optional ();
+          gLanguage->optional ();
         break;
     } // switch
 
@@ -280,7 +278,7 @@ void mfTimingItemsList::doPrint (std::ostream& os) const
     totalOptionalClockWidth  = 1,
     totalsPrecision          = secondsPrecision;
 
-  switch (gGlobalOahEarlyOptions.getEarlyLanguageKind ()) {
+  switch (gEarlyOptions.getEarlyLanguageKind ()) {
     case mfLanguageKind::kMusicFormatsLanguage_UNKNOWN:
       break;
     case mfLanguageKind::kMusicFormatsLanguageEnglish:
@@ -318,13 +316,13 @@ void mfTimingItemsList::doPrint (std::ostream& os) const
   // print the total spent times
   os << std::left <<
     std::setw (totalClockWidth) <<
-    gWaeHandler->totalSeconds () <<
+    gLanguage->totalSeconds () <<
     ' ' <<
     std::setw (totalMandatoryClockWidth) <<
-    gWaeHandler->mandatory () <<
+    gLanguage->mandatory () <<
     ' ' <<
     std::setw (totalOptionalClockWidth) <<
-    gWaeHandler->optional () <<
+    gLanguage->optional () <<
     std::endl <<
 
     std::setw (totalClockWidth) <<
@@ -367,7 +365,7 @@ void mfTimingItemsList::printWithContext (
 void mfTimingItemsList::print (std::ostream& os) const
 {
   os << std::left <<
-    gWaeHandler->timingInformation () <<
+    gLanguage->timingInformation () <<
     ":" <<
     std::endl << std::endl;
 
@@ -377,6 +375,15 @@ void mfTimingItemsList::print (std::ostream& os) const
 std::ostream& operator << (std::ostream& os, const mfTimingItemsList& tim) {
   tim.print(os);
   return os;
+}
+
+//________________________________________________________________________
+// hidden global timing items list variable
+EXP mfTimingItemsList pGlobalTimingItemsList;
+
+EXP mfTimingItemsList& getGlobalTimingItemsList ()
+{
+  return pGlobalTimingItemsList;
 }
 
 

@@ -18,9 +18,10 @@
 #include "msrMidi.h"
 
 #include "oahOah.h"
-#include "oahEarlyOptions.h"
 
 #include "msrOah.h"
+
+#include "waeHandlers.h"
 
 
 namespace MusicFormats
@@ -75,8 +76,9 @@ S_msrMidiTempo msrMidiTempo::createMsrMidiTempoNewbornClone ()
 
 void msrMidiTempo::acceptIn (basevisitor* v)
 {
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "% ==> msrMidiTempo::acceptIn ()" <<
@@ -86,12 +88,14 @@ void msrMidiTempo::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
+#endif
 
   if (visitor<S_msrMidiTempo>*
     p =
       dynamic_cast<visitor<S_msrMidiTempo>*> (v)) {
         S_msrMidiTempo elem = this;
 
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
@@ -103,14 +107,16 @@ void msrMidiTempo::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
+#endif
         p->visitStart (elem);
   }
 }
 
 void msrMidiTempo::acceptOut (basevisitor* v)
 {
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "% ==> msrMidiTempo::acceptOut ()" <<
@@ -120,12 +126,14 @@ void msrMidiTempo::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
+#endif
 
   if (visitor<S_msrMidiTempo>*
     p =
       dynamic_cast<visitor<S_msrMidiTempo>*> (v)) {
         S_msrMidiTempo elem = this;
 
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
@@ -137,6 +145,7 @@ void msrMidiTempo::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
+#endif        
         p->visitEnd (elem);
   }
 }

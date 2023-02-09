@@ -16,9 +16,10 @@
 #include "lpsrVoices.h"
 
 #include "oahOah.h"
-#include "oahEarlyOptions.h"
 
 #include "lpsrOah.h"
+
+#include "waeHandlers.h"
 
 
 namespace MusicFormats
@@ -50,7 +51,7 @@ lpsrUseVoiceCommand::~lpsrUseVoiceCommand ()
 
 void lpsrUseVoiceCommand::acceptIn (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
 		std::stringstream ss;
 
@@ -69,7 +70,7 @@ void lpsrUseVoiceCommand::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_lpsrUseVoiceCommand>*> (v)) {
         S_lpsrUseVoiceCommand elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           std::stringstream ss;
 
@@ -88,7 +89,7 @@ void lpsrUseVoiceCommand::acceptIn (basevisitor* v)
 
 void lpsrUseVoiceCommand::acceptOut (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
 		std::stringstream ss;
 
@@ -107,7 +108,7 @@ void lpsrUseVoiceCommand::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_lpsrUseVoiceCommand>*> (v)) {
         S_lpsrUseVoiceCommand elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           std::stringstream ss;
 

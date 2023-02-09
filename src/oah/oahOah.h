@@ -14,7 +14,7 @@
 
 #include "exports.h"
 
-#include "mfLanguages.h"
+#include "languages.h"
 
 #include "oahAtomsCollection.h"
 
@@ -378,11 +378,11 @@ class EXP oahOahGroup : public oahGroup
     Bool                  getDisplaySourceCodePositions () const
                               { return fDisplaySourceCodePositions;  }
 
-    // tracing
-    void                  setTracingOahVisitors ()
-                              { fTracingOahVisitors = true; }
-    Bool                  getTracingOahVisitors () const
-                              { return fTracingOahVisitors; }
+    // trace
+    void                  setTraceOahVisitors ()
+                              { fTraceOahVisitors = true; }
+    Bool                  getTraceOahVisitors () const
+                              { return fTraceOahVisitors; }
 
   public:
 
@@ -405,8 +405,8 @@ class EXP oahOahGroup : public oahGroup
 
     void                  initializeOahOahAndArgumentsOptions ();
 
-#ifdef MF_TRACING_IS_ENABLED
-    void                  initializeOahtracingOah ();
+#ifdef MF_TRACE_IS_ENABLED
+    void                  initializeOahTraceOah ();
 #endif
 
   public:
@@ -483,8 +483,8 @@ class EXP oahOahGroup : public oahGroup
     // messages positions
     Bool                  fDisplaySourceCodePositions;
 
-    // tracing
-    Bool                  fTracingOahVisitors;
+    // trace
+    Bool                  fTraceOahVisitors;
 };
 typedef SMARTP<oahOahGroup> S_oahOahGroup;
 EXP std::ostream& operator << (std::ostream& os, const S_oahOahGroup& elt);

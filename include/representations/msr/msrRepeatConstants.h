@@ -19,7 +19,14 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-extern S_msrRepeat gGlobalNullRepeatSmartPointer;
+// hidden global null repeat variable
+extern S_msrRepeat pGlobalNullRepeat;
+
+// extern EXP S_msrRepeat getGlobalNullRepeat ();
+
+// a handy shortcut
+// #define gNullRepeat getGlobalNullRepeat ()
+#define gNullRepeat pGlobalNullRepeat
 
 
 }

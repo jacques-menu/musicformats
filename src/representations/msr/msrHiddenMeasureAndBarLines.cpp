@@ -24,11 +24,12 @@
 #include "msrMeasureConstants.h"
 
 #include "oahOah.h"
-#include "oahEarlyOptions.h"
 
 #include "msrOah.h"
 
 #include "msrHiddenMeasureAndBarLines.h"
+
+#include "waeHandlers.h"
 
 
 namespace MusicFormats
@@ -39,8 +40,8 @@ S_msrHiddenMeasureAndBarLine msrHiddenMeasureAndBarLine::create (
   int                 inputLineNumber,
   const S_msrMeasure& upLinkToMeasure)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasures ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMeasures ()) {
 		std::stringstream ss;
 
     ss <<
@@ -68,7 +69,7 @@ S_msrHiddenMeasureAndBarLine msrHiddenMeasureAndBarLine::create (
   return
     msrHiddenMeasureAndBarLine::create (
       inputLineNumber,
-      gGlobalNullMeasureSmartPointer); // set later in setMeasureElementUpLinkToMeasure()
+      gNullMeasure); // set later in setMeasureElementUpLinkToMeasure()
 }
 
 msrHiddenMeasureAndBarLine::msrHiddenMeasureAndBarLine (
@@ -92,11 +93,11 @@ void msrHiddenMeasureAndBarLine::setHiddenMeasureAndBarLineUpLinkToMeasure (
     "measure is null");
 #endif
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceWholeNotes ()) {
     ++gIndenter;
 
-    gLogStream <<
+    gLog <<
       "==> Setting the uplink to measure of hidden measure and bar line " <<
       asString () <<
       " to measure " << measure->asString () <<
@@ -113,8 +114,9 @@ void msrHiddenMeasureAndBarLine::setHiddenMeasureAndBarLineUpLinkToMeasure (
 
 void msrHiddenMeasureAndBarLine::acceptIn (basevisitor* v)
 {
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "% ==> msrHiddenMeasureAndBarLine::acceptIn ()" <<
@@ -124,12 +126,14 @@ void msrHiddenMeasureAndBarLine::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
+#endif
 
   if (visitor<S_msrHiddenMeasureAndBarLine>*
     p =
       dynamic_cast<visitor<S_msrHiddenMeasureAndBarLine>*> (v)) {
         S_msrHiddenMeasureAndBarLine elem = this;
 
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
@@ -141,14 +145,16 @@ void msrHiddenMeasureAndBarLine::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
+#endif
         p->visitStart (elem);
   }
 }
 
 void msrHiddenMeasureAndBarLine::acceptOut (basevisitor* v)
 {
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "% ==> msrHiddenMeasureAndBarLine::acceptOut ()" <<
@@ -158,12 +164,14 @@ void msrHiddenMeasureAndBarLine::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
+#endif
 
   if (visitor<S_msrHiddenMeasureAndBarLine>*
     p =
       dynamic_cast<visitor<S_msrHiddenMeasureAndBarLine>*> (v)) {
         S_msrHiddenMeasureAndBarLine elem = this;
 
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
@@ -175,6 +183,7 @@ void msrHiddenMeasureAndBarLine::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
+#endif        
         p->visitEnd (elem);
   }
 }

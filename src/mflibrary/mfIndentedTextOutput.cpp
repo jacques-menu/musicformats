@@ -25,8 +25,6 @@ namespace MusicFormats
 // #define DEBUG_INDENTER
 
 //______________________________________________________________________________
-mfOutputIndenter mfOutputIndenter::gGlobalOStreamIndenter;
-
 mfOutputIndenter::mfOutputIndenter (std::string spacer)
 {
   fIndentation = 0;
@@ -46,7 +44,7 @@ mfOutputIndenter::~mfOutputIndenter ()
 mfOutputIndenter& mfOutputIndenter::operator++ ()
 {
 #ifdef DEBUG_INDENTER
-  gLogStream <<
+  gLog <<
     "% Incrementing INDENTER: " << fIndentation <<
     std::endl;
 #endif
@@ -54,7 +52,7 @@ mfOutputIndenter& mfOutputIndenter::operator++ ()
   ++fIndentation;
 
 #ifdef DEBUG_INDENTER
-  gLogStream <<
+  gLog <<
     "% INDENTER: " << fIndentation <<
     std::endl;
 #endif
@@ -66,7 +64,7 @@ mfOutputIndenter& mfOutputIndenter::operator++ ()
 mfOutputIndenter& mfOutputIndenter::operator-- ()
 {
 #ifdef DEBUG_INDENTER
-  gLogStream <<
+  gLog <<
     "% Decrementing INDENTER: " << fIndentation <<
     std::endl;
 #endif
@@ -74,7 +72,7 @@ mfOutputIndenter& mfOutputIndenter::operator-- ()
   --fIndentation;
 
   if (fIndentation < 0) {
-    gLogStream <<
+    gLog <<
       std::endl <<
       "% ### Indentation has become negative: " <<  fIndentation <<
       std::endl << std::endl;
@@ -89,7 +87,7 @@ mfOutputIndenter& mfOutputIndenter::operator-- ()
 
 #ifdef DEBUG_INDENTER
   else {
-    gLogStream <<
+    gLog <<
       "% INDENTER: " << fIndentation <<
       std::endl;
 
@@ -108,7 +106,7 @@ mfOutputIndenter mfOutputIndenter::mfOutputIndenter::operator++ (int)
   ++fIndentation;
 
 #ifdef DEBUG_INDENTER
-  gLogStream <<
+  gLog <<
     "% INDENTER: " << fIndentation <<
     std::endl;
 #endif
@@ -122,7 +120,7 @@ mfOutputIndenter mfOutputIndenter::mfOutputIndenter::operator-- (int)
   --fIndentation;
 
   if (fIndentation < 0) {
-    gLogStream <<
+    gLog <<
       std::endl <<
       "% ### Indentation has become negative: " <<  fIndentation <<
       std::endl << std::endl;
@@ -137,7 +135,7 @@ mfOutputIndenter mfOutputIndenter::mfOutputIndenter::operator-- (int)
 
 #ifdef DEBUG_INDENTER
   else {
-    gLogStream <<
+    gLog <<
       "% INDENTER: " << fIndentation <<
       std::endl;
 
@@ -155,7 +153,7 @@ mfOutputIndenter& mfOutputIndenter::increment (int value)
   fIndentation += value;
 
   if (fIndentation < 0) {
-    gLogStream <<
+    gLog <<
       std::endl <<
       "% ### Indentation has become negative: " <<  fIndentation <<
       std::endl << std::endl;
@@ -170,7 +168,7 @@ mfOutputIndenter& mfOutputIndenter::increment (int value)
 
 #ifdef DEBUG_INDENTER
   else {
-    gLogStream <<
+    gLog <<
       "% INDENTER: " << fIndentation <<
       std::endl;
 
@@ -188,7 +186,7 @@ mfOutputIndenter& mfOutputIndenter::decrement (int value)
   fIndentation -= value;
 
   if (fIndentation < 0) {
-    gLogStream <<
+    gLog <<
       std::endl <<
       "% ### Indentation has become negative: " <<  fIndentation <<
       std::endl << std::endl;
@@ -203,7 +201,7 @@ mfOutputIndenter& mfOutputIndenter::decrement (int value)
 
 #ifdef DEBUG_INDENTER
   else {
-    gLogStream <<
+    gLog <<
       "% INDENTER: " << fIndentation <<
       std::endl;
 
@@ -420,26 +418,6 @@ EXP mfIndentedStringStream& operator << (
 }
 
 //______________________________________________________________________________
-// the global indented streams
-S_indentedOstream gGlobalOutputIndentedOstream;
-S_indentedOstream gGlobalLogIndentedOstream;
-
-void createTheGlobalIndentedOstreams (
-  std::ostream& theOutputStream,
-  std::ostream& theLogStream)
-{
-  gGlobalOutputIndentedOstream =
-    mfIndentedOstream::create (
-      theOutputStream,
-      mfOutputIndenter::gGlobalOStreamIndenter);
-
-  gGlobalLogIndentedOstream =
-    mfIndentedOstream::create (
-      theLogStream,
-      mfOutputIndenter::gGlobalOStreamIndenter);
-}
-
-//______________________________________________________________________________
 // code taken from:
 // http://comp.lang.cpp.moderated.narkive.com/fylLGJgp/redirect-output-to-dev-null
 template<typename Ch, typename Traits = std::char_traits<Ch> >
@@ -465,6 +443,105 @@ nullbuf cnull_obj;
 std::ostream cnull  (& cnull_obj);
 //wostream wcnull (& wcnull_obj);
 
+//______________________________________________________________________________
+// the global output indenter for general use
+EXP mfOutputIndenter pGlobalOutputIndenter;
+
+EXP mfOutputIndenter& getGlobalOutputIndenter ()
+{
+  return pGlobalOutputIndenter;
+}
+
+//______________________________________________________________________________
+// the global log and output indented streams
+S_indentedOstream pGlobalOutputIndentedOstream;
+S_indentedOstream pGlobalLogIndentedOstream;
+
+//______________________________________________________________________________
+void createTheGlobalIndentedOstreams (
+  std::ostream& theOutputStream,
+  std::ostream& theLogStream)
+{
+  pGlobalOutputIndentedOstream =
+    mfIndentedOstream::create (
+      theOutputStream,
+      pGlobalOutputIndenter);
+
+  pGlobalLogIndentedOstream =
+    mfIndentedOstream::create (
+      theLogStream,
+      pGlobalOutputIndenter);
+}
+
 
 }
 
+
+/*
+//______________________________________________________________________________
+  testMfIndentedStringstream (); // JMI v0.9.66
+
+
+void testMfIndentedStringstream ()
+{
+  mfIndentedStringStream iss;
+
+  // populate the mfIndentedStringStream
+  iss <<
+    "iss 1" <<
+    std::endl;
+
+  ++gIndenter;
+  iss <<
+    "iss 1.1" <<
+    std::endl <<
+    "iss 1.2" <<
+    std::endl;
+  --gIndenter;
+
+  iss <<
+    "iss 2" <<
+    std::endl;
+
+  ++gIndenter;
+  iss <<
+    "iss 2.1" <<
+    std::endl;
+
+  iss <<
+    "iss 2.2" <<
+    std::endl;
+  {
+    ++gIndenter;
+    iss <<
+      "iss 2.2.1" <<
+      std::endl <<
+      "iss 2.2.2" <<
+      std::endl;
+    --gIndenter;
+  }
+
+  iss <<
+    "iss 2.3" <<
+    std::endl;
+
+  --gIndenter;
+
+  iss <<
+    "iss 3" <<
+    std::endl;
+
+
+  // display the mfIndentedStringStream contents
+//   gLog <<
+//     "iss.str ():" <<
+//     std::endl;
+//
+//   ++gIndenter;
+  gLog <<
+    iss.str () <<
+    std::endl;
+//   --gIndenter;
+}
+
+*/

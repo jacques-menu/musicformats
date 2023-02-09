@@ -24,6 +24,8 @@
 
 #include "msdl2musicxmlRegularHandler.h"
 
+#include "waeHandlers.h"
+
 
 namespace MusicFormats
 {
@@ -63,8 +65,8 @@ msdl2musicxmlRegularHandler::msdl2musicxmlRegularHandler (
   // create the regular handler groups
   createRegularHandlerGroups ();
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOahDetails ()) {
     // print the options handler initial state
 		std::stringstream ss;
 
@@ -76,10 +78,10 @@ msdl2musicxmlRegularHandler::msdl2musicxmlRegularHandler (
 
     ++gIndenter;
 
-    gLogStream <<
+    gLog <<
       "===> printHelp():" <<
       std::endl;
-    this->printHelp (gOutputStream); // JMI
+    this->printHelp (gOutput); // JMI
 
     --gIndenter;
   }
@@ -91,8 +93,8 @@ msdl2musicxmlRegularHandler::~msdl2musicxmlRegularHandler ()
 
 void msdl2musicxmlRegularHandler::createRegularHandlerGroups ()
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<
@@ -159,8 +161,8 @@ void msdl2musicxmlRegularHandler::createRegularHandlerGroups ()
 
   createOutputRegularGroup ();
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<
@@ -314,7 +316,7 @@ void msdl2musicxmlRegularHandler::createOahRegularGroup ()
   registerAtomInRegularSubgroup (K_INSIDER_OPTION_LONG_NAME, subGroup);
 //  registerAtomInRegularSubgroup (K_REGULAR_OPTION_LONG_NAME, subGroup);
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   registerAtomInRegularSubgroup (K_TRACE_EARLY_OPTIONS_OPTION_LONG_NAME, subGroup);
   registerAtomInRegularSubgroup (K_OAH_VERBOSE_MODE_OPTION_LONG_NAME, subGroup);
 #endif
@@ -358,7 +360,7 @@ void msdl2musicxmlRegularHandler::createOahRegularGroup ()
   registerAtomInRegularSubgroup ("display-msr1-summary", subGroup);
   registerAtomInRegularSubgroup ("display-msr2-summary", subGroup);
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   registerAtomInRegularSubgroup (K_TRACE_OAH_OPTION_LONG_NAME, subGroup);
   registerAtomInRegularSubgroup (K_TRACE_OAH_DETAILS_OPTION_LONG_NAME, subGroup);
 
@@ -899,7 +901,7 @@ void msdl2musicxmlRegularHandler::createChordsRegularGroup ()
 
   // atoms
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   registerAtomInRegularSubgroup ("trace-chords", subGroup);
 #endif
 }
@@ -1097,7 +1099,7 @@ void msdl2musicxmlRegularHandler::createTupletsRegularGroup ()
 
   // atoms
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   registerAtomInRegularSubgroup ("trace-tuplets", subGroup);
 #endif
 
@@ -1236,8 +1238,8 @@ void msdl2musicxmlRegularHandler::createOutputRegularGroup ()
 //______________________________________________________________________________
 void msdl2musicxmlRegularHandler::checkOptionsAndArguments () const
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<

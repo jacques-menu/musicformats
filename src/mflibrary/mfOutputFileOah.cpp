@@ -26,6 +26,8 @@
 
 #include "oahAtomsCollection.h"
 
+#include "waeHandlers.h"
+
 
 namespace MusicFormats
 {
@@ -62,9 +64,9 @@ void outputFileOahGroup::initializeOutputFileOah ()
 
 void outputFileOahGroup::initializeOutputFileNameOptions ()
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-  gLogStream << std::left <<
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
+  gLog << std::left <<
     "Creating insider output file subgroup in \"" <<
     fGroupHeader <<
     "\"" <<
@@ -128,8 +130,8 @@ void outputFileOahGroup::checkGroupOptionsConsistency ()
 //______________________________________________________________________________
 void outputFileOahGroup::acceptIn (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -147,8 +149,8 @@ void outputFileOahGroup::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_outputFileOahGroup>*> (v)) {
         S_outputFileOahGroup elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
-        if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -166,8 +168,8 @@ void outputFileOahGroup::acceptIn (basevisitor* v)
 
 void outputFileOahGroup::acceptOut (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -185,8 +187,8 @@ void outputFileOahGroup::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_outputFileOahGroup>*> (v)) {
         S_outputFileOahGroup elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
-        if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -204,8 +206,8 @@ void outputFileOahGroup::acceptOut (basevisitor* v)
 
 void outputFileOahGroup::browseData (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -222,7 +224,7 @@ void outputFileOahGroup::browseData (basevisitor* v)
 //______________________________________________________________________________
 void outputFileOahGroup::displayOutputFileOahValues (int fieldWidth)
 {
-  gLogStream <<
+  gLog <<
     "The outputFile options are:" <<
     std::endl;
 
@@ -231,13 +233,13 @@ void outputFileOahGroup::displayOutputFileOahValues (int fieldWidth)
   // output file
   // --------------------------------------
 
-  gLogStream << std::left <<
+  gLog << std::left <<
     std::setw (fieldWidth) << "Output file:" <<
     std::endl;
 
   ++gIndenter;
 
-  gLogStream << std::left <<
+  gLog << std::left <<
     std::setw (fieldWidth) << "fOutputFileName" << ": \"" <<
     fOutputFileName <<
     "\"" <<
@@ -267,8 +269,8 @@ std::ostream& operator << (std::ostream& os, const S_outputFileOahGroup& elt)
 //______________________________________________________________________________
 S_outputFileOahGroup createGlobalOutputFileOahGroup ()
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<

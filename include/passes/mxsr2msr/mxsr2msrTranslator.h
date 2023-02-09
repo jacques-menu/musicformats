@@ -1319,32 +1319,32 @@ class EXP mxsr2msrTranslator :
     // harmonies and figured bass elements are pending
     // until the note itself is found in the MusicXML data
     // ------------------------------------------------------
-    void                      attachPendingHarmoniesToNote (
-                                int        inputLineNumber,
-                                const S_msrNote&  newNote,
-                                const S_msrVoice& voiceToInsertInto);
+//     void                      attachPendingHarmoniesToNote ( // JMI v0.9.67
+//                                 int               inputLineNumber,
+//                                 const S_msrNote&  newNote,
+//                                 const S_msrVoice& voiceToInsertInto);
 
-    void                      attachPendingFiguredBassesToNote (
-                                int        inputLineNumber,
-                                const S_msrNote&  newNote,
-                                const S_msrVoice& voiceToInsertInto);
+//     void                      attachPendingFiguredBassesToNote ( // JMI v0.9.67
+//                                 int               inputLineNumber,
+//                                 const S_msrNote&  newNote,
+//                                 const S_msrVoice& voiceToInsertInto);
 
     S_msrNote                 createNote (
                                 int inputLineNumber);
 
     void                      populateNoteBeforeNoteItselfIsHandled (
-                                int       inputLineNumber,
+                                int              inputLineNumber,
                                 const S_msrNote& newNote);
 
     // harmonies and figured bass elements need
     // the position of the note  in its measure
     // to be known when they are inserted in their own measure
     void                      populateNoteAfterNoteItselfIsHandled (
-                                int       inputLineNumber,
+                                int              inputLineNumber,
                                 const S_msrNote& newNote);
 
     void                      createAStaffChangeIfNecessary (
-                                int        inputLineNumber,
+                                int               inputLineNumber,
                                 const S_msrNote&  newNote,
                                 const S_msrVoice& voiceToInsertInto);
 
@@ -1395,7 +1395,7 @@ class EXP mxsr2msrTranslator :
                                 const S_msrPart& part);
 
 //     void                      convertWordsToRehearsalMark (
-//                                 int           inputLineNumber,
+//                                 int                inputLineNumber,
 //                                 const std::string& wordsValuee);
 
 
@@ -1410,7 +1410,7 @@ class EXP mxsr2msrTranslator :
                                 const S_msrNote& note);
 
 //     void                      convertWordsToSegno (
-//                                 int           inputLineNumber,
+//                                 int                inputLineNumber,
 //                                 const std::string& wordsValuee);
 
 
@@ -1482,7 +1482,8 @@ class EXP mxsr2msrTranslator :
     // eyeglasses remain pending until the next note:
     // in MusicXML, they precede the note and
     // may occur when no current voice exists
-    std::list<S_msrEyeGlasses>     fPendingEyeGlassesList;
+    std::list<S_msrEyeGlasses>
+    	    										fPendingEyeGlassesList;
 
     void                      attachPendingEyeGlassesToNote (
                                 const S_msrNote& note);
@@ -1493,7 +1494,7 @@ class EXP mxsr2msrTranslator :
     // damps remain pending until the next note:
     // in MusicXML, they precede the note and
     // may occur when no current voice exists
-    std::list<S_msrDamp>           fPendingDampsList;
+    std::list<S_msrDamp>      fPendingDampsList;
 
     void                      attachPendingDampsToNote (
                                 const S_msrNote& note);
@@ -1504,7 +1505,7 @@ class EXP mxsr2msrTranslator :
     // damp alls remain pending until the next note:
     // in MusicXML, they precede the note and
     // may occur when no current voice exists
-    std::list<S_msrDampAll>        fPendingDampAllsList;
+    std::list<S_msrDampAll>   fPendingDampAllsList;
 
     void                      attachPendingDampAllsToNote (
                                 const S_msrNote& note);
@@ -1565,7 +1566,7 @@ class EXP mxsr2msrTranslator :
     // tempos remain pending until the next note:
     // in MusicXML, they precede the note and
     // may occur when no current voice exists
-    std::list<S_msrTempo>          fPendingTemposList;
+    std::list<S_msrTempo>     fPendingTemposList;
 
     void                      attachPendingTemposToVoice (
                                 const S_msrVoice& voice);
@@ -1581,7 +1582,7 @@ class EXP mxsr2msrTranslator :
     // line breaks handling
     // ------------------------------------------------------
 
-    std::list<S_msrLineBreak>      fPendingLineBreaksList;
+    std::list<S_msrLineBreak> fPendingLineBreaksList;
 
     void                      attachLineBreaksToVoice (
                                 const S_msrVoice& voice);
@@ -1593,7 +1594,7 @@ class EXP mxsr2msrTranslator :
     // page and line breaks handling
     // ------------------------------------------------------
 
-    std::list<S_msrPageBreak>      fPendingPageBreaksList;
+    std::list<S_msrPageBreak> fPendingPageBreaksList;
 
     void                      attachPageBreaksToVoice (
                                 const S_msrVoice& voice);
@@ -1608,7 +1609,8 @@ class EXP mxsr2msrTranslator :
     // octave shifts remain pending until the next note
     // (they precede the note in MusicXML and
     // may occur when no current voice exists)
-    std::list<S_msrOctaveShift>    fPendingOctaveShiftsList;
+    std::list<S_msrOctaveShift>
+    											    fPendingOctaveShiftsList;
     void                      attachPendingOctaveShiftsToNote (
                                 const S_msrNote& note);
 
@@ -1621,7 +1623,8 @@ class EXP mxsr2msrTranslator :
     // scordaturas remain pending until the next note:
     // in MusicXML, they precede the note and
     // may occur when no current voice exists
-    std::list<S_msrScordatura>     fPendingScordaturasList;
+    std::list<S_msrScordatura>
+    										      fPendingScordaturasList;
 
     void                      attachPendingScordaturasToNote (
                                 const S_msrNote& note);
@@ -1775,7 +1778,7 @@ class EXP mxsr2msrTranslator :
 
     Bool                      fOnGoingFrameNote;
 
-    std::list<S_msrFrameNote>      fPendingFramesNotesList;
+    std::list<S_msrFrameNote> fPendingFramesNotesList;
 
     // bar lines handling
     // ------------------------------------------------------
@@ -1801,7 +1804,7 @@ class EXP mxsr2msrTranslator :
     // bar lines remain pending until the next note:
     // in MusicXML, they precede the note and
     // may occur when no current voice exists
-    std::list<S_msrBarLine>        fPendingBarLinesList;
+    std::list<S_msrBarLine>   fPendingBarLinesList;
 
     void                      attachPendingBarLinesToVoice (
                                 const S_msrVoice& voice);
@@ -1869,7 +1872,7 @@ class EXP mxsr2msrTranslator :
     msrPrintObjectKind        fCurrentNotePrintObjectKind;
 
     // note heads
-    msrNoteHeadKind            fCurrentNoteHeadKind;
+    msrNoteHeadKind           fCurrentNoteHeadKind;
     msrNoteHeadFilledKind     fCurrentNoteHeadFilledKind;
     msrNoteHeadParenthesesKind
                               fCurrentNoteHeadParenthesesKind;
@@ -1943,7 +1946,7 @@ class EXP mxsr2msrTranslator :
     int                       fCurrentChordStaffNumber;
     Bool                      fCurrentNoteIsCrossStaves;
 
-    msrStaffChangeKind           fCurrentStaffChangeKind;
+    msrStaffChangeKind        fCurrentStaffChangeKind;
 
     // elements attached to the note
     S_msrStem                 fCurrentStem;
@@ -1956,7 +1959,7 @@ class EXP mxsr2msrTranslator :
 
     // notes
     void                      handleNoteItself (
-                                int        inputLineNumber,
+                                int               inputLineNumber,
                                 const S_msrNote&  newNote);
 
     // detailed notes handling
@@ -1986,7 +1989,8 @@ class EXP mxsr2msrTranslator :
     // articulations handling
     // ------------------------------------------------------
 
-    std::list<S_msrArticulation>   fCurrentArticulations;
+    std::list<S_msrArticulation>
+    											    fCurrentArticulations;
 
     void                      attachCurrentArticulationsToNote (
                                 const S_msrNote& note);
@@ -2005,10 +2009,11 @@ class EXP mxsr2msrTranslator :
     // ------------------------------------------------------
 
     std::list<S_msrDynamic>
-                                fPendingDynamicxList;
-    std::list<S_msrOtherDynamic>   fPendingOtherDynamicxList;
+                            	fPendingDynamicxList;
+    std::list<S_msrOtherDynamic>
+    												  fPendingOtherDynamicxList;
     std::list<S_msrWords>     fPendingWordsList;
-    std::list<S_msrSlur>           fPendingSlursList;
+    std::list<S_msrSlur>      fPendingSlursList;
     std::list<S_msrLigature>
                               fPendingLigaturesList;
     std::list<S_msrWedge>     fPendingWedgesList;

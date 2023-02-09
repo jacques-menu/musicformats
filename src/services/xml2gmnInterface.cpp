@@ -34,6 +34,8 @@
 
 #include "xml2gmnInterface.h"
 
+#include "waeHandlers.h"
+
 
 namespace MusicFormats
 {
@@ -90,7 +92,7 @@ EXP int xml2gmn (
   // apply early options if any
   // ------------------------------------------------------
 
-  gGlobalOahEarlyOptions.applyEarlyOptionsIfPresentInArgcArgv (
+  gEarlyOptions.applyEarlyOptionsIfPresentInArgcArgv (
     argc,
     argv);
 
@@ -98,10 +100,10 @@ EXP int xml2gmn (
   // ------------------------------------------------------
 
   Bool insiderOption =
-    gGlobalOahEarlyOptions.getEarlyInsiderOption ();
+    gEarlyOptions.getEarlyInsiderOption ();
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<
@@ -149,9 +151,9 @@ EXP int xml2gmn (
     // create the global run data
     // ------------------------------------------------------
 
-    gGlobalCurrentServiceRunData =
+    setGlobalServiceRunData (
       mfServiceRunData::create (
-        serviceName);
+        serviceName));
 
     // handle the command line options and arguments
     // ------------------------------------------------------
@@ -175,17 +177,17 @@ EXP int xml2gmn (
     } // switch
   }
   catch (mfOahException& e) {
-    mfDisplayException (e, gOutputStream);
+    mfDisplayException (e, gOutput);
     return (int) mfMusicformatsErrorKind::kMusicformatsErrorInvalidOption;
   }
   catch (std::exception& e) {
-    mfDisplayException (e, gOutputStream);
+    mfDisplayException (e, gOutput);
     return (int) mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
 
   // check indentation
   if (gIndenter != 0) {
-    gLogStream <<
+    gLog <<
       "### " <<
       serviceName <<
       " gIndenter value after options ands arguments checking: " <<
@@ -201,15 +203,15 @@ EXP int xml2gmn (
 
   std::string
     inputSourceName =
-      gGlobalCurrentServiceRunData->getInputSourceName ();
+      gServiceRunData->getInputSourceName ();
 
   std::string
     outputFileName =
       handler->
         fetchOutputFileNameFromTheOptions ();
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
     std::string separator =
       "%--------------------------------------------------------------";
 
@@ -250,7 +252,7 @@ EXP int xml2gmn (
   // has quiet mode been requested?
   // ------------------------------------------------------
 
-  if (gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
+  if (gEarlyOptions.getEarlyQuietOption ()) {
     // disable all trace and display options
     handler->
       enforceHandlerQuietness ();
@@ -259,90 +261,90 @@ EXP int xml2gmn (
   // welcome message
   // ------------------------------------------------------
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTracePasses ()) {
     int
       outputFileNameSize =
         outputFileName.size ();
 
-    gLogStream <<
+    gLog <<
       "This is " << serviceName << ' ' <<
       getGlobalMusicFormatsVersionNumberAndDate () <<
       std::endl;
 
-    gLogStream <<
+    gLog <<
       "Launching the conversion of ";
 
     if (inputSourceName == "-") {
-      gLogStream <<
+      gLog <<
         "standard input";
     }
     else {
-      gLogStream <<
+      gLog <<
         "\"" << inputSourceName << "\"";
     }
 
-    gLogStream <<
+    gLog <<
       " to Guido music notation" <<
       std::endl;
 
-    gLogStream <<
+    gLog <<
       "Time is " <<
-      gGlobalCurrentServiceRunData->getRunDateFull () <<
+      gServiceRunData->getRunDateFull () <<
       std::endl;
 
-    gLogStream <<
+    gLog <<
       "The command line is:" <<
       std::endl;
 
     ++gIndenter;
-    gLogStream <<
+    gLog <<
       handler->
         getLaunchCommandAsSupplied () <<
       std::endl;
     --gIndenter;
 
-    gLogStream <<
+    gLog <<
       "or with options long names:" <<
       std::endl;
 
     ++gIndenter;
-    gLogStream <<
+    gLog <<
       handler->
         getLaunchCommandWithLongOptionsNames () <<
       std::endl;
     --gIndenter;
 
-    gLogStream <<
+    gLog <<
       "or with options short names:" <<
       std::endl;
 
     ++gIndenter;
-    gLogStream <<
+    gLog <<
       handler->
         getLaunchCommandWithShortOptionsNames () <<
       std::endl;
     --gIndenter;
 
-    gLogStream <<
+    gLog <<
       "Guido code will be written to ";
     if (outputFileNameSize) {
-      gLogStream <<
+      gLog <<
         outputFileName;
     }
     else {
-      gLogStream <<
+      gLog <<
         "standard output";
     }
-    gLogStream << std::endl;
+    gLog << std::endl;
   }
 #endif
 
   // acknoledge end of command line analysis
   // ------------------------------------------------------
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTracePasses ()) {
 		std::stringstream ss;
 
     ss <<
@@ -375,42 +377,42 @@ EXP int xml2gmn (
   try {
     if (inputSourceName == "-") {
       // MusicXML data comes from standard input
-#ifdef MF_TRACING_IS_ENABLED
-      if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
-        gLogStream << "Reading standard input" << std::endl;
+#ifdef MF_TRACE_IS_ENABLED
+      if (gEarlyOptions.getEarlyTracePasses ()) {
+        gLog << "Reading standard input" << std::endl;
       }
 #endif
 
       err =
         convertMusicxmlFd2guidoWithHandler (
           stdin,
-          gOutputStream,
-          gLogStream,
+          gOutput,
+          gLog,
           handler);
     }
 
     else {
       // MusicXML data comes from a file
-#ifdef MF_TRACING_IS_ENABLED
-      if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
-        gLogStream << "Reading file \"" << inputSourceName << "\"" << std::endl;
+#ifdef MF_TRACE_IS_ENABLED
+      if (gEarlyOptions.getEarlyTracePasses ()) {
+        gLog << "Reading file \"" << inputSourceName << "\"" << std::endl;
       }
 #endif
 
       err =
         convertMusicxmlFile2guidoWithHandler (
           inputSourceName.c_str(),
-          gOutputStream,
-          gLogStream,
+          gOutput,
+          gLog,
           handler);
     }
   }
   catch (mfException& e) {
-    mfDisplayException (e, gOutputStream);
+    mfDisplayException (e, gOutput);
     return (int) mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
   catch (std::exception& e) {
-    mfDisplayException (e, gOutputStream);
+    mfDisplayException (e, gOutput);
     return (int) mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
 
@@ -423,15 +425,15 @@ EXP int xml2gmn (
   // ------------------------------------------------------
 
   if (gGlobalDisplayOahGroup->getDisplayCPUusage ()) {
-    gLogStream <<
-      mfTimingItemsList::gGlobalTimingItemsList;
+    gLog <<
+      gGlobalTimingItemsList;
   }
 
   // check indentation
   // ------------------------------------------------------
 
   if (gIndenter != 0) {
-    gLogStream <<
+    gLog <<
       "### " << serviceName << " gIndenter final value: " <<
       gIndenter.getIndentation () <<
       " ###" <<
@@ -444,7 +446,7 @@ EXP int xml2gmn (
   // ------------------------------------------------------
 
   if (err != mfMusicformatsErrorKind::kMusicformatsError_NONE) {
-    gLogStream <<
+    gLog <<
       "### Conversion from MusicXML to Guido failed ###" <<
       std::endl;
 

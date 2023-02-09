@@ -17,7 +17,6 @@
 
 #include "tree_browser.h"
 
-
 #include "musicxmlWae.h"
 #include "mxsr2msrWae.h"
 
@@ -40,6 +39,8 @@
 #include "oahEarlyOptions.h"
 
 #include "mxsr2msrSkeletonBuilder.h"
+
+#include "waeHandlers.h"
 
 
 namespace MusicFormats
@@ -91,8 +92,8 @@ std::string mxmlPartGroupDescr::partGroupDescrAsString () const
     "' -=> " <<
     fPartGroup->getPartGroupCombinedName ();
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTracePartGroups ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTracePartGroups ()) {
     ss <<
       ", positions " <<
       fStartPosition << ".." << fStopPosition;
@@ -245,7 +246,7 @@ S_mxmlPartGroupDescr mxsr2msrSkeletonBuilder::fetchStartedPartGroupDescr (
 void mxsr2msrSkeletonBuilder::showAllPartGroupDescrsMap (
   int inputLineNumber)
 {
-  gLogStream <<
+  gLog <<
     "AllPartGroupDescrsMap:" <<
     std::endl;
 
@@ -265,7 +266,7 @@ void mxsr2msrSkeletonBuilder::showAllPartGroupDescrsMap (
         partGroup =
           partGroupDescr->getPartGroup ();
 
-      gLogStream <<
+      gLog <<
         partGroupDescr->partGroupDescrAsString () <<
         std::endl;
 
@@ -274,7 +275,7 @@ void mxsr2msrSkeletonBuilder::showAllPartGroupDescrsMap (
         partGroup->
           printPartGroupElementsList (
             inputLineNumber,
-            gLogStream);
+            gLog);
 
         --gIndenter;
 
@@ -286,12 +287,12 @@ void mxsr2msrSkeletonBuilder::showAllPartGroupDescrsMap (
   }
 
   else {
-    gLogStream <<
+    gLog <<
       gTab << "empty map" <<
       std::endl;
   }
 
-  gLogStream <<
+  gLog <<
     "------------------" <<
     std::endl;
 }
@@ -300,7 +301,7 @@ void mxsr2msrSkeletonBuilder::showAllPartGroupDescrsMap (
 void mxsr2msrSkeletonBuilder::showStartedPartGroupDescrsMap (
   int inputLineNumber)
 {
-  gLogStream <<
+  gLog <<
     "StartedPartGroupDescrsMap:" <<
     std::endl;
 
@@ -320,7 +321,7 @@ void mxsr2msrSkeletonBuilder::showStartedPartGroupDescrsMap (
         partGroup =
           partGroupDescr->getPartGroup ();
 
-      gLogStream <<
+      gLog <<
         partGroupDescr->partGroupDescrAsString () <<
         std::endl;
 
@@ -329,7 +330,7 @@ void mxsr2msrSkeletonBuilder::showStartedPartGroupDescrsMap (
         partGroup->
           printPartGroupElementsList (
             inputLineNumber,
-            gLogStream);
+            gLog);
 
         --gIndenter;
 
@@ -341,12 +342,12 @@ void mxsr2msrSkeletonBuilder::showStartedPartGroupDescrsMap (
   }
 
   else {
-    gLogStream <<
+    gLog <<
       gTab << "empty map" <<
       std::endl;
   }
 
-  gLogStream <<
+  gLog <<
     "------------------" <<
     std::endl;
 }
@@ -355,7 +356,7 @@ void mxsr2msrSkeletonBuilder::showStartedPartGroupDescrsMap (
 void mxsr2msrSkeletonBuilder::showPartGroupsStack (
   int inputLineNumber)
 {
-  gLogStream <<
+  gLog <<
     "PartGroupsDescrStack:" <<
     std::endl;
 
@@ -368,7 +369,7 @@ void mxsr2msrSkeletonBuilder::showPartGroupsStack (
       i      = iBegin;
 
     for ( ; ; ) {
-      gLogStream <<
+      gLog <<
         "v " <<
         (*i)->partGroupDescrAsString () <<
         std::endl;
@@ -380,12 +381,12 @@ void mxsr2msrSkeletonBuilder::showPartGroupsStack (
   }
 
   else {
-    gLogStream <<
+    gLog <<
       gTab << "empty stack" <<
       std::endl;
   }
 
-  gLogStream <<
+  gLog <<
     "------------------" <<
     std::endl;
 }
@@ -394,7 +395,7 @@ void mxsr2msrSkeletonBuilder::showPartGroupsStack (
 void mxsr2msrSkeletonBuilder::showPartGroupDescrsVector (
   int inputLineNumber)
 {
-  gLogStream <<
+  gLog <<
     "PartGroupDescrsVector:" <<
     std::endl;
 
@@ -408,14 +409,14 @@ void mxsr2msrSkeletonBuilder::showPartGroupDescrsVector (
       partGroup =
         partGroupDescr->getPartGroup ();
 
-    gLogStream <<
+    gLog <<
       i + 1 << ": " <<
         partGroupDescr->partGroupDescrAsString () <<
       ", line " << inputLineNumber <<
       std::endl;
   } // for
 
-  gLogStream <<
+  gLog <<
     "------------------" <<
     std::endl;
 
@@ -426,7 +427,7 @@ void mxsr2msrSkeletonBuilder::showPartGroupDescrsVector (
 void mxsr2msrSkeletonBuilder::showPositionStartingPartGroupDescrsVector (
   int inputLineNumber)
 {
-  gLogStream <<
+  gLog <<
     "PositionStartingPartGroupDescrsVector:" <<
     std::endl;
 
@@ -434,7 +435,7 @@ void mxsr2msrSkeletonBuilder::showPositionStartingPartGroupDescrsVector (
     ++gIndenter;
 
     for (size_t k = 0; k < fPositionStartingPartGroupDescrsVector.size (); ++k) {
-      gLogStream <<
+      gLog <<
         k << ": " <<
         std::endl;
 
@@ -458,7 +459,7 @@ void mxsr2msrSkeletonBuilder::showPositionStartingPartGroupDescrsVector (
             partGroup =
               partGroupDescr->getPartGroup ();
 
-          gLogStream <<
+          gLog <<
               partGroupDescr->partGroupDescrAsString () <<
             ", line " << inputLineNumber <<
             std::endl;
@@ -471,7 +472,7 @@ void mxsr2msrSkeletonBuilder::showPositionStartingPartGroupDescrsVector (
       }
 
       else {
-        gLogStream <<
+        gLog <<
           gTab << "empty list" <<
           std::endl;
       }
@@ -480,7 +481,7 @@ void mxsr2msrSkeletonBuilder::showPositionStartingPartGroupDescrsVector (
     --gIndenter;
   }
 
-  gLogStream <<
+  gLog <<
     "------------------" <<
     std::endl;
 }
@@ -489,7 +490,7 @@ void mxsr2msrSkeletonBuilder::showPositionStartingPartGroupDescrsVector (
 void mxsr2msrSkeletonBuilder::showPositionStoppingPartGroupDescrsVector (
   int inputLineNumber)
 {
-  gLogStream <<
+  gLog <<
     "PositionStoppingPartGroupDescrsVector:" <<
     std::endl;
 
@@ -497,7 +498,7 @@ void mxsr2msrSkeletonBuilder::showPositionStoppingPartGroupDescrsVector (
     ++gIndenter;
 
     for (size_t k = 0; k < fPositionStoppingPartGroupDescrsVector.size (); ++k) {
-      gLogStream <<
+      gLog <<
         k << ": " <<
         std::endl;
 
@@ -521,7 +522,7 @@ void mxsr2msrSkeletonBuilder::showPositionStoppingPartGroupDescrsVector (
             partGroup =
               partGroupDescr->getPartGroup ();
 
-          gLogStream <<
+          gLog <<
               partGroupDescr->partGroupDescrAsString () <<
             ", line " << inputLineNumber <<
             std::endl;
@@ -534,7 +535,7 @@ void mxsr2msrSkeletonBuilder::showPositionStoppingPartGroupDescrsVector (
       }
 
       else {
-        gLogStream <<
+        gLog <<
           gTab << "empty list" <<
           std::endl;
       }
@@ -543,7 +544,7 @@ void mxsr2msrSkeletonBuilder::showPositionStoppingPartGroupDescrsVector (
     --gIndenter;
   }
 
-  gLogStream <<
+  gLog <<
     "------------------" <<
     std::endl;
 }
@@ -552,7 +553,7 @@ void mxsr2msrSkeletonBuilder::showPositionStoppingPartGroupDescrsVector (
 void mxsr2msrSkeletonBuilder::showPartsVector (
   int inputLineNumber)
 {
-  gLogStream <<
+  gLog <<
     "PartsVector:" <<
     std::endl;
 
@@ -563,7 +564,7 @@ void mxsr2msrSkeletonBuilder::showPartsVector (
       S_msrPart
         part = fPartsVector [i];
 
-      gLogStream <<
+      gLog <<
         i + 1 << ": " <<
         part->getPartCombinedName () <<
         ", upLink to: ";
@@ -574,16 +575,16 @@ void mxsr2msrSkeletonBuilder::showPartsVector (
             getPartUpLinkToPartGroup ();
 
       if (partUpLinkToPartGroup) {
-        gLogStream <<
+        gLog <<
           partUpLinkToPartGroup->
             getPartGroupCombinedName ();
       }
       else {
-        gLogStream <<
+        gLog <<
           "not yet established";
       }
 
-      gLogStream <<
+      gLog <<
         ", line " << inputLineNumber <<
         std::endl;
     } // for
@@ -592,12 +593,12 @@ void mxsr2msrSkeletonBuilder::showPartsVector (
   }
 
   else {
-    gLogStream <<
+    gLog <<
       gTab << "empty vector" <<
       std::endl;
   }
 
-  gLogStream <<
+  gLog <<
     "------------------" <<
     std::endl;
 }
@@ -607,7 +608,7 @@ void mxsr2msrSkeletonBuilder::showPartGroupsData (
   int           inputLineNumber,
   const std::string& context)
 {
-  gLogStream <<
+  gLog <<
     std::endl <<
     context <<
     ", fCurrentPartsPosition: " << fCurrentPartsPosition <<
@@ -619,33 +620,33 @@ void mxsr2msrSkeletonBuilder::showPartGroupsData (
 
   showAllPartGroupDescrsMap (
     inputLineNumber);
-  gLogStream << std::endl;
+  gLog << std::endl;
 
   showStartedPartGroupDescrsMap (
     inputLineNumber);
-  gLogStream << std::endl;
+  gLog << std::endl;
 
   showPartGroupDescrsVector (
     inputLineNumber);
-  gLogStream << std::endl;
+  gLog << std::endl;
 
   showPositionStartingPartGroupDescrsVector (
     inputLineNumber);
-  gLogStream << std::endl;
+  gLog << std::endl;
 
   showPositionStoppingPartGroupDescrsVector (
     inputLineNumber);
-  gLogStream << std::endl;
+  gLog << std::endl;
 
   showPartsVector (
     inputLineNumber);
-  gLogStream << std::endl;
+  gLog << std::endl;
 
   showPartGroupsStack (
     inputLineNumber);
-  gLogStream << std::endl;
+  gLog << std::endl;
 
-  gLogStream <<
+  gLog <<
     " <<< ================================================" <<
     std::endl << std::endl;
 }
@@ -670,8 +671,8 @@ void mxsr2msrSkeletonBuilder::registerPartGroupDescrAsStarted (
   int                  inputLineNumber,
   const S_mxmlPartGroupDescr& partGroupDescr)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTracePartGroups ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTracePartGroups ()) {
 		std::stringstream ss;
 
 		ss <<
@@ -686,7 +687,7 @@ void mxsr2msrSkeletonBuilder::registerPartGroupDescrAsStarted (
 			ss.str ());
   }
 
-  if (gGlobalTracingOahGroup->getTracePartGroupsDetails ()) {
+  if (gGlobalTraceOahGroup->getTracePartGroupsDetails ()) {
     showPartGroupsData (
       inputLineNumber,
       "BEFORE registering part group " +
@@ -715,8 +716,8 @@ void mxsr2msrSkeletonBuilder::registerPartGroupDescrAsStarted (
   fStartedPartGroupDescrsMap [partGroupNumber] =
     partGroupDescr;
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTracePartGroupsDetails ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTracePartGroupsDetails ()) {
     showPartGroupsData (
       inputLineNumber,
       "AFTER registering part group " +
@@ -744,8 +745,8 @@ void mxsr2msrSkeletonBuilder::insertPartGroupDescInStartingList (
   while (true) {
     if (i == iEnd) {
       // append partGroupDescr to the list
-#ifdef MF_TRACING_IS_ENABLED
-      if (gGlobalTracingOahGroup->getTracePartGroups ()) {
+#ifdef MF_TRACE_IS_ENABLED
+      if (gGlobalTraceOahGroup->getTracePartGroups ()) {
 				std::stringstream ss;
 
 				ss <<
@@ -773,7 +774,7 @@ void mxsr2msrSkeletonBuilder::insertPartGroupDescInStartingList (
         " could not be inserted in part groups to be stopped list";
 
       msrInternalError (
-        gGlobalCurrentServiceRunData->getInputSourceName (),
+        gServiceRunData->getInputSourceName (),
         inputLineNumber,
         __FILE__, __LINE__,
         ss.str ());
@@ -791,8 +792,8 @@ void mxsr2msrSkeletonBuilder::insertPartGroupDescInStartingList (
       currentPartGroupDescr->getStopPosition ()
     ) {
       // insert partGroupDescr before currentPartGroupDescr
-#ifdef MF_TRACING_IS_ENABLED
-      if (gGlobalTracingOahGroup->getTracePartGroups ()) {
+#ifdef MF_TRACE_IS_ENABLED
+      if (gGlobalTraceOahGroup->getTracePartGroups ()) {
 				std::stringstream ss;
 
 				ss <<
@@ -837,8 +838,8 @@ void mxsr2msrSkeletonBuilder::insertPartGroupDescInStoppingList (
   while (true) {
     if (i == iEnd) {
       // append partGroupDescr to the list
-#ifdef MF_TRACING_IS_ENABLED
-      if (gGlobalTracingOahGroup->getTracePartGroups ()) {
+#ifdef MF_TRACE_IS_ENABLED
+      if (gGlobalTraceOahGroup->getTracePartGroups ()) {
 				std::stringstream ss;
 
 				ss <<
@@ -866,7 +867,7 @@ void mxsr2msrSkeletonBuilder::insertPartGroupDescInStoppingList (
         " could not be inserted in part groups to be stopped list";
 
       msrInternalError (
-        gGlobalCurrentServiceRunData->getInputSourceName (),
+        gServiceRunData->getInputSourceName (),
         inputLineNumber,
         __FILE__, __LINE__,
         ss.str ());
@@ -884,8 +885,8 @@ void mxsr2msrSkeletonBuilder::insertPartGroupDescInStoppingList (
       currentPartGroupDescr->getStartPosition ()
     ) {
       // insert partGroupDescr before currentPartGroupDescr
-#ifdef MF_TRACING_IS_ENABLED
-      if (gGlobalTracingOahGroup->getTracePartGroups ()) {
+#ifdef MF_TRACE_IS_ENABLED
+      if (gGlobalTraceOahGroup->getTracePartGroups ()) {
 				std::stringstream ss;
 
 				ss <<
@@ -967,8 +968,8 @@ void mxsr2msrSkeletonBuilder::registerPartGroupDescrAsStopped (
   int                  inputLineNumber,
   const S_mxmlPartGroupDescr& partGroupDescr)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTracePartGroups ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTracePartGroups ()) {
 		std::stringstream ss;
 
 		ss <<
@@ -996,8 +997,8 @@ void mxsr2msrSkeletonBuilder::registerPartGroupDescrAsStopped (
       getPartGroup ()->
         getPartGroupNumber ());
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTracePartGroupsDetails ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTracePartGroupsDetails ()) {
     showPartGroupsData (
       inputLineNumber,
       "AFTER forgetting part group descr " +
@@ -1012,8 +1013,8 @@ void mxsr2msrSkeletonBuilder::registerPartGroupDescrAsStopped (
 void mxsr2msrSkeletonBuilder::handlePartGroupStart (
   int inputLineNumber)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTracePartGroups ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTracePartGroups ()) {
 		std::stringstream ss;
 
 		ss <<
@@ -1062,8 +1063,8 @@ void mxsr2msrSkeletonBuilder::handlePartGroupStart (
         fCurrentPartsPosition) ;
 
   // register it in the part groups data
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTracePartGroups ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTracePartGroups ()) {
 		std::stringstream ss;
 
 		ss <<
@@ -1083,8 +1084,8 @@ void mxsr2msrSkeletonBuilder::handlePartGroupStart (
     inputLineNumber,
     partGroupDescr);
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTracePartGroupsDetails ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTracePartGroupsDetails ()) {
     showPartGroupsData (
       inputLineNumber,
       "AFTER handlePartGroupStart()");
@@ -1112,7 +1113,7 @@ void mxsr2msrSkeletonBuilder::handlePartGroupStop (
 
  // JMI   musicxmlError (
     musicxmlWarning (
-      gGlobalCurrentServiceRunData->getInputSourceName (),
+      gServiceRunData->getInputSourceName (),
       inputLineNumber,
   //    __FILE__, __LINE__,
       ss.str ());
@@ -1131,8 +1132,8 @@ void mxsr2msrSkeletonBuilder::handlePartGroupStop (
       partGroupDescrToBeStopped);
   }
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTracePartGroupsDetails ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTracePartGroupsDetails ()) {
     showPartGroupsData (
       inputLineNumber,
       "AFTER handlePartGroupStop()");
@@ -1156,8 +1157,8 @@ void mxsr2msrSkeletonBuilder::doNestPartGroupDescrInItsContainer (
         getPartGroup ();
 
   // set currentPartGroup's upLink to containingPartGroupDescr
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTracePartGroups ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTracePartGroups ()) {
 		std::stringstream ss;
 
 		ss <<
@@ -1181,8 +1182,8 @@ void mxsr2msrSkeletonBuilder::doNestPartGroupDescrInItsContainer (
       containingPartGroup);
 
   // appending currentPartGroup to containingPartGroupDescr
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTracePartGroups ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTracePartGroups ()) {
 		std::stringstream ss;
 
 		ss <<
@@ -1226,8 +1227,8 @@ void mxsr2msrSkeletonBuilder::createImplicitPartGroup ()
   // create an implicit part group
   fCurrentPartGroupNumber = 0;
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTracePartGroups ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTracePartGroups ()) {
 		std::stringstream ss;
 
 		ss <<
@@ -1256,8 +1257,8 @@ void mxsr2msrSkeletonBuilder::createImplicitPartGroup ()
       fMsrScore);
 
   // append it to the MSR score
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTracePartGroups ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTracePartGroups ()) {
 		std::stringstream ss;
 
 		ss <<
@@ -1287,8 +1288,8 @@ void mxsr2msrSkeletonBuilder::createImplicitPartGroup ()
       fCurrentPartsPosition);
 
   // register it in the part groups data
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTracePartGroups ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTracePartGroups ()) {
 		std::stringstream ss;
 
 		ss <<
@@ -1309,8 +1310,8 @@ void mxsr2msrSkeletonBuilder::createImplicitPartGroup ()
     inputLineNumber,
     fImplicitPartGroupDescr);
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTracePartGroupsDetails ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTracePartGroupsDetails ()) {
     showPartGroupsData (
       inputLineNumber,
       "AFTER creating fImplicitPartGroup");
@@ -1322,8 +1323,8 @@ void mxsr2msrSkeletonBuilder::createImplicitPartGroup ()
 void mxsr2msrSkeletonBuilder::doPartGroupsNestingAndPartsAllocation (
   int inputLineNumber)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTracePartGroups ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTracePartGroups ()) {
 		std::stringstream ss;
 
 		ss <<
@@ -1340,8 +1341,8 @@ void mxsr2msrSkeletonBuilder::doPartGroupsNestingAndPartsAllocation (
   // since we run through the contents of <part-list />,
   // stored in the data we've built, a second time
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTracePartGroupsDetails ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTracePartGroupsDetails ()) {
     showPartGroupsData (
       inputLineNumber,
       "BEFORE doPartGroupsNestingAndPartsAllocation");
@@ -1374,7 +1375,7 @@ void mxsr2msrSkeletonBuilder::doPartGroupsNestingAndPartsAllocation (
           ", since the stack is empty";
 
         musicxmlError (
-          gGlobalCurrentServiceRunData->getInputSourceName (),
+          gServiceRunData->getInputSourceName (),
           inputLineNumber,
           __FILE__, __LINE__,
           ss.str ());
@@ -1431,7 +1432,7 @@ void mxsr2msrSkeletonBuilder::doPartGroupsNestingAndPartsAllocation (
               ", since the stack is empty";
 
             musicxmlError (
-              gGlobalCurrentServiceRunData->getInputSourceName (),
+              gServiceRunData->getInputSourceName (),
               stopInputLineNumber,
               __FILE__, __LINE__,
               ss.str ());
@@ -1443,8 +1444,8 @@ void mxsr2msrSkeletonBuilder::doPartGroupsNestingAndPartsAllocation (
               partGroupsDescrStackTop =
                 fPartGroupsDescrStack.front ();
 
-#ifdef MF_TRACING_IS_ENABLED
-            if (gGlobalTracingOahGroup->getTracePartGroups ()) {
+#ifdef MF_TRACE_IS_ENABLED
+            if (gGlobalTraceOahGroup->getTracePartGroups ()) {
 							std::stringstream ss;
 
 							ss <<
@@ -1480,7 +1481,7 @@ void mxsr2msrSkeletonBuilder::doPartGroupsNestingAndPartsAllocation (
                   " into";
 
                 mxsr2msrInternalError (
-                  gGlobalCurrentServiceRunData->getInputSourceName (),
+                  gServiceRunData->getInputSourceName (),
                   stopInputLineNumber,
                   __FILE__, __LINE__,
                   ss.str ());
@@ -1496,8 +1497,8 @@ void mxsr2msrSkeletonBuilder::doPartGroupsNestingAndPartsAllocation (
           }
 
           else {
-#ifdef MF_TRACING_IS_ENABLED
-            if (gGlobalTracingOahGroup->getTracePartGroups ()) {
+#ifdef MF_TRACE_IS_ENABLED
+            if (gGlobalTraceOahGroup->getTracePartGroups ()) {
               showPartGroupsData (
                 stopInputLineNumber,
                 "UPON overlapping part groups");
@@ -1574,7 +1575,7 @@ R"(Please contact the maintainers of MusicFormats (see option '-c, -contact'):
               gGlobalOahOahGroup->getOahOahGroupServiceName ());
 
             musicxmlError (
-              gGlobalCurrentServiceRunData->getInputSourceName (),
+              gServiceRunData->getInputSourceName (),
               stopInputLineNumber,
               __FILE__, __LINE__,
               ss.str ());
@@ -1611,8 +1612,8 @@ R"(Please contact the maintainers of MusicFormats (see option '-c, -contact'):
               partGroupDescr->getPartGroup ();
 
           // make it the new current part group
-#ifdef MF_TRACING_IS_ENABLED
-          if (gGlobalTracingOahGroup->getTracePartGroups ()) {
+#ifdef MF_TRACE_IS_ENABLED
+          if (gGlobalTraceOahGroup->getTracePartGroups ()) {
 						std::stringstream ss;
 
 						ss <<
@@ -1639,8 +1640,8 @@ R"(Please contact the maintainers of MusicFormats (see option '-c, -contact'):
       }
     }
 
-#ifdef MF_TRACING_IS_ENABLED
-    if (gGlobalTracingOahGroup->getTracePartGroupsDetails ()) {
+#ifdef MF_TRACE_IS_ENABLED
+    if (gGlobalTraceOahGroup->getTracePartGroupsDetails ()) {
       std::stringstream ss;
 
       ss <<
@@ -1654,8 +1655,8 @@ R"(Please contact the maintainers of MusicFormats (see option '-c, -contact'):
 
   } // for
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTracePartGroupsDetails ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTracePartGroupsDetails ()) {
     showPartGroupsData (
       inputLineNumber,
       "AFTER doPartGroupsNestingAndPartsAllocation");
@@ -1817,7 +1818,7 @@ S_msrVoice mxsr2msrSkeletonBuilder::createPartFiguredBassVoiceIfNotYetDone (
 //________________________________________________________________________
 void mxsr2msrSkeletonBuilder::visitStart (S_score_partwise& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
 		std::stringstream ss;
 
@@ -1832,8 +1833,8 @@ void mxsr2msrSkeletonBuilder::visitStart (S_score_partwise& elt)
   }
 #endif
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceParts ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceParts ()) {
 		std::stringstream ss;
 
 		ss <<
@@ -1851,7 +1852,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_score_partwise& elt)
 
 void mxsr2msrSkeletonBuilder::visitEnd (S_score_partwise& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   int inputLineNumber =
     elt->getInputLineNumber ();
 
@@ -1893,7 +1894,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_work_number& elt)
   int inputLineNumber =
     elt->getInputLineNumber ();
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
 		std::stringstream ss;
 
@@ -1919,7 +1920,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_work_title& elt)
   int inputLineNumber =
     elt->getInputLineNumber ();
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
 		std::stringstream ss;
 
@@ -1947,7 +1948,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_opus& elt)
   int inputLineNumber =
     elt->getInputLineNumber ();
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
 		std::stringstream ss;
 
@@ -1975,7 +1976,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_movement_number& elt)
   int inputLineNumber =
     elt->getInputLineNumber ();
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
 		std::stringstream ss;
 
@@ -2001,7 +2002,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_movement_title& elt)
   int inputLineNumber =
     elt->getInputLineNumber ();
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
 		std::stringstream ss;
 
@@ -2033,7 +2034,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_movement_title& elt)
 //________________________________________________________________________
 void mxsr2msrSkeletonBuilder::visitStart (S_identification& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   int inputLineNumber =
     elt->getInputLineNumber ();
 
@@ -2054,7 +2055,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_identification& elt)
 
 void mxsr2msrSkeletonBuilder::visitEnd (S_identification& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   int inputLineNumber =
     elt->getInputLineNumber ();
 
@@ -2078,7 +2079,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_creator& elt)
   int inputLineNumber =
     elt->getInputLineNumber ();
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
 		std::stringstream ss;
 
@@ -2155,7 +2156,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_creator& elt)
 
 // JMI    musicxmlError (
     musicxmlWarning (
-      gGlobalCurrentServiceRunData->getInputSourceName (),
+      gServiceRunData->getInputSourceName (),
       inputLineNumber,
 //      __FILE__, __LINE__,
       ss.str ());
@@ -2167,7 +2168,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_rights& elt)
   int inputLineNumber =
     elt->getInputLineNumber ();
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
 		std::stringstream ss;
 
@@ -2194,7 +2195,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_rights& elt)
 
 void mxsr2msrSkeletonBuilder::visitStart (S_source& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   int inputLineNumber =
     elt->getInputLineNumber ();
 
@@ -2226,7 +2227,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_source& elt)
 
 void mxsr2msrSkeletonBuilder::visitStart (S_relation& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   int inputLineNumber =
     elt->getInputLineNumber ();
 
@@ -2259,7 +2260,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_relation& elt)
 //________________________________________________________________________
 void mxsr2msrSkeletonBuilder::visitStart (S_encoding& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
 		std::stringstream ss;
 
@@ -2274,8 +2275,8 @@ void mxsr2msrSkeletonBuilder::visitStart (S_encoding& elt)
   }
 #endif
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceParts ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceParts ()) {
 		std::stringstream ss;
 
 		ss <<
@@ -2294,7 +2295,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_encoding& elt)
 
 void mxsr2msrSkeletonBuilder::visitEnd (S_encoding& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   int inputLineNumber =
     elt->getInputLineNumber ();
 
@@ -2318,7 +2319,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_encoding_date& elt)
   int inputLineNumber =
     elt->getInputLineNumber ();
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
 		std::stringstream ss;
 
@@ -2341,7 +2342,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_encoding_date& elt)
 
 void mxsr2msrSkeletonBuilder::visitStart (S_encoder& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   int inputLineNumber =
     elt->getInputLineNumber ();
 
@@ -2372,7 +2373,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_software& elt)
   int inputLineNumber =
     elt->getInputLineNumber ();
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
 		std::stringstream ss;
 
@@ -2394,7 +2395,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_software& elt)
 
   if (softwareValueToLower.find ("cubase") != std::string::npos) {
     musicxmlWarning (
-      gGlobalCurrentServiceRunData->getInputSourceName (),
+      gServiceRunData->getInputSourceName (),
       inputLineNumber,
       "<software /> contains 'Cubase'");
 
@@ -2413,8 +2414,8 @@ void mxsr2msrSkeletonBuilder::visitStart (S_software& elt)
             dynamic_cast<oahCombinedBooleansAtom*>(&(*cubaseOption))
       ) {
         // handle it at once
-#ifdef MF_TRACING_IS_ENABLED
-        if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+        if (gEarlyOptions.getEarlyTraceOah ()) {
 					std::stringstream ss;
 
 					ss <<
@@ -2443,7 +2444,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_software& elt)
 
 void mxsr2msrSkeletonBuilder::visitStart (S_encoding_description& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   int inputLineNumber =
     elt->getInputLineNumber ();
 
@@ -2471,7 +2472,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_encoding_description& elt)
 
 void mxsr2msrSkeletonBuilder::visitStart (S_supports& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   int inputLineNumber =
     elt->getInputLineNumber ();
 
@@ -2500,7 +2501,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_supports& elt)
 //________________________________________________________________________
 void mxsr2msrSkeletonBuilder::visitStart (S_miscellaneous& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   int inputLineNumber =
     elt->getInputLineNumber ();
 
@@ -2534,7 +2535,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_miscellaneous& elt)
 //________________________________________________________________________
 void mxsr2msrSkeletonBuilder::visitEnd (S_miscellaneous& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   int inputLineNumber =
     elt->getInputLineNumber ();
 
@@ -2559,7 +2560,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_miscellaneous_field& elt)
   int inputLineNumber =
     elt->getInputLineNumber ();
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
 		std::stringstream ss;
 
@@ -2663,7 +2664,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_credit& elt)
   int inputLineNumber =
     elt->getInputLineNumber ();
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
 		std::stringstream ss;
 
@@ -2697,7 +2698,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_credit_type& elt)
   int inputLineNumber =
     elt->getInputLineNumber ();
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
 		std::stringstream ss;
 
@@ -2748,7 +2749,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_credit_symbol& elt)
   int inputLineNumber =
     elt->getInputLineNumber ();
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
 		std::stringstream ss;
 
@@ -2769,7 +2770,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_credit_image& elt)
   int inputLineNumber =
     elt->getInputLineNumber ();
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
 		std::stringstream ss;
 
@@ -2790,7 +2791,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_credit_words& elt)
   int inputLineNumber =
     elt->getInputLineNumber ();
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
 		std::stringstream ss;
 
@@ -2925,7 +2926,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_credit& elt)
   int inputLineNumber =
     elt->getInputLineNumber ();
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
 		std::stringstream ss;
 
@@ -2947,7 +2948,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_credit& elt)
 //________________________________________________________________________
 void mxsr2msrSkeletonBuilder::visitStart (S_part_list& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
 		std::stringstream ss;
 
@@ -2962,8 +2963,8 @@ void mxsr2msrSkeletonBuilder::visitStart (S_part_list& elt)
   }
 #endif
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceParts ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceParts ()) {
 		std::stringstream ss;
 
 		ss <<
@@ -2984,7 +2985,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_part_list& elt)
   int inputLineNumber =
     elt->getInputLineNumber ();
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
 		std::stringstream ss;
 
@@ -3016,8 +3017,8 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_part_list& elt)
   doPartGroupsNestingAndPartsAllocation (
     inputLineNumber);
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTracePartGroups ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTracePartGroups ()) {
     showPartGroupsData (
       inputLineNumber,
       "Part groups data gathered for score skeleton");
@@ -3025,7 +3026,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_part_list& elt)
 #endif
 
   if (gGlobalMsrOahGroup->getDisplayPartGroups ()) {
-    gLogStream <<
+    gLog <<
       std::endl <<
       "The implicit part group contains:" <<
       std::endl;
@@ -3035,11 +3036,11 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_part_list& elt)
     fImplicitPartGroup->
       printPartGroupElementsList (
         inputLineNumber,
-        gLogStream);
+        gLog);
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
     if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-      gLogStream << std::endl; // JMI v0.9.67
+      gLog << std::endl; // JMI v0.9.67
     }
 #endif
 
@@ -3053,7 +3054,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_part_group& elt)
   int inputLineNumber =
     elt->getInputLineNumber ();
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
 		std::stringstream ss;
 
@@ -3092,7 +3093,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_part_group& elt)
       "\"";
 
     musicxmlError (
-      gGlobalCurrentServiceRunData->getInputSourceName (),
+      gServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
       ss.str ());
@@ -3130,7 +3131,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_part_group& elt)
 
 void mxsr2msrSkeletonBuilder::visitStart (S_group_name& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
 		std::stringstream ss;
 
@@ -3153,7 +3154,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_group_name_display& elt)
   int inputLineNumber =
     elt->getInputLineNumber ();
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
 		std::stringstream ss;
 
@@ -3184,7 +3185,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_group_name_display& elt)
 
 void mxsr2msrSkeletonBuilder::visitEnd (S_group_name_display& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
 		std::stringstream ss;
 
@@ -3207,7 +3208,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_display_text& elt)
   int inputLineNumber =
     elt->getInputLineNumber ();
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
 		std::stringstream ss;
 
@@ -3236,7 +3237,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_display_text& elt)
   }
   else {
     musicxmlError (
-      gGlobalCurrentServiceRunData->getInputSourceName (),
+      gServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
       "<display-text /> is out of context");
@@ -3245,7 +3246,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_display_text& elt)
 
 void mxsr2msrSkeletonBuilder::visitStart (S_accidental_text& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
 		std::stringstream ss;
 
@@ -3265,7 +3266,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_accidental_text& elt)
 
 void mxsr2msrSkeletonBuilder::visitStart (S_group_abbreviation& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
 		std::stringstream ss;
 
@@ -3288,7 +3289,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_group_symbol& elt)
   int inputLineNumber =
     elt->getInputLineNumber ();
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
 		std::stringstream ss;
 
@@ -3332,7 +3333,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_group_symbol& elt)
         "unknown part group symbol \"" + groupSymbol + "\"";
 
       musicxmlError (
-        gGlobalCurrentServiceRunData->getInputSourceName (),
+        gServiceRunData->getInputSourceName (),
         inputLineNumber,
         __FILE__, __LINE__,
         ss.str ());
@@ -3348,7 +3349,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_group_barline& elt)
   int inputLineNumber =
     elt->getInputLineNumber ();
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
 		std::stringstream ss;
 
@@ -3377,7 +3378,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_group_barline& elt)
       "unknown part group barLine \"" + groupBarLine + "\"";
 
     musicxmlError (
-      gGlobalCurrentServiceRunData->getInputSourceName (),
+      gServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
       ss.str ());
@@ -3390,7 +3391,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_part_group& elt)
   int inputLineNumber =
     elt->getInputLineNumber ();
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
 		std::stringstream ss;
 
@@ -3405,8 +3406,8 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_part_group& elt)
   }
 #endif
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTracePartGroups ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTracePartGroups ()) {
 		std::stringstream ss;
 
 		ss <<
@@ -3456,7 +3457,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_score_part& elt)
   int inputLineNumber =
     elt->getInputLineNumber ();
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
 		std::stringstream ss;
 
@@ -3473,8 +3474,8 @@ void mxsr2msrSkeletonBuilder::visitStart (S_score_part& elt)
 
   fCurrentPartID = elt->getAttributeValue ("id");
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceParts ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceParts ()) {
 		std::stringstream ss;
 
 		ss <<
@@ -3510,7 +3511,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_score_part& elt)
       ", line " << inputLineNumber;
 
     musicxmlWarning (
-      gGlobalCurrentServiceRunData->getInputSourceName (),
+      gServiceRunData->getInputSourceName (),
       inputLineNumber,
       ss.str ());
   }
@@ -3532,7 +3533,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_part_name& elt)
   int inputLineNumber =
     elt->getInputLineNumber ();
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
 		std::stringstream ss;
 
@@ -3570,7 +3571,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_part_name& elt)
 
 void mxsr2msrSkeletonBuilder::visitStart (S_part_name_display& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
 		std::stringstream ss;
 
@@ -3590,7 +3591,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_part_name_display& elt)
 
 void mxsr2msrSkeletonBuilder::visitEnd (S_part_name_display& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
 		std::stringstream ss;
 
@@ -3613,7 +3614,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_part_abbreviation& elt)
   int inputLineNumber =
     elt->getInputLineNumber ();
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
 		std::stringstream ss;
 
@@ -3644,7 +3645,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_part_abbreviation& elt)
 
 void mxsr2msrSkeletonBuilder::visitStart (S_part_abbreviation_display& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
 		std::stringstream ss;
 
@@ -3664,7 +3665,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_part_abbreviation_display& elt)
 
 void mxsr2msrSkeletonBuilder::visitEnd (S_part_abbreviation_display& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
 		std::stringstream ss;
 
@@ -3684,7 +3685,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_part_abbreviation_display& elt)
 
 void mxsr2msrSkeletonBuilder::visitStart (S_instrument_name& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
 		std::stringstream ss;
 
@@ -3704,7 +3705,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_instrument_name& elt)
 
 void mxsr2msrSkeletonBuilder::visitStart (S_instrument_abbreviation& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
 		std::stringstream ss;
 
@@ -3727,7 +3728,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_score_part& elt)
   int inputLineNumber =
     elt->getInputLineNumber ();
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
 		std::stringstream ss;
 
@@ -3746,8 +3747,8 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_score_part& elt)
 
   std::string partID = elt->getAttributeValue ("id");
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceParts ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceParts ()) {
 	std::stringstream ss;
 
 	ss <<
@@ -3767,8 +3768,8 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_score_part& elt)
   ++gIndenter;
 
   // create the part
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceParts ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceParts ()) {
 		std::stringstream ss;
 
 		ss <<
@@ -3819,8 +3820,8 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_score_part& elt)
     fCurrentPartsPosition,
     part);
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTracePartGroupsDetails ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTracePartGroupsDetails ()) {
     showPartGroupsData (
       inputLineNumber,
       "AFTER handling score part \"" + partID + "\"");
@@ -3836,8 +3837,8 @@ void mxsr2msrSkeletonBuilder::registerPart (
   int       partPosition,
   const S_msrPart& part)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTracePartGroups ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTracePartGroups ()) {
 		std::stringstream ss;
 
 		ss <<
@@ -3875,7 +3876,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_part& elt)
   int inputLineNumber =
     elt->getInputLineNumber ();
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
 		std::stringstream ss;
 
@@ -3893,11 +3894,11 @@ void mxsr2msrSkeletonBuilder::visitStart (S_part& elt)
   // fCurrentPartID is used throughout
   fCurrentPartID = elt->getAttributeValue ("id");
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (
-    gGlobalTracingOahGroup->getTraceParts ()
+    gGlobalTraceOahGroup->getTraceParts ()
       ||
-    gGlobalOahEarlyOptions.getEarlyTracePasses ()
+    gEarlyOptions.getEarlyTracePasses ()
   ) {
 		std::stringstream ss;
 
@@ -3929,7 +3930,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_part& elt)
         "' since it is the only part in the <part-list />";
 
       musicxmlWarning (
-        gGlobalCurrentServiceRunData->getInputSourceName (),
+        gServiceRunData->getInputSourceName (),
         inputLineNumber,
         ss.str ());
     }
@@ -3945,7 +3946,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_part& elt)
       ss >> fCurrentPartID;
 
       musicxmlWarning (
-        gGlobalCurrentServiceRunData->getInputSourceName (),
+        gServiceRunData->getInputSourceName (),
         inputLineNumber,
         "part 'id' is empty, creating one as '" + fCurrentPartID + "'");
     }
@@ -3966,7 +3967,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_part& elt)
       "\" is not known in the <part-list />";
 
     musicxmlError (
-      gGlobalCurrentServiceRunData->getInputSourceName (),
+      gServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
       ss.str ());
@@ -3974,8 +3975,8 @@ void mxsr2msrSkeletonBuilder::visitStart (S_part& elt)
 
   ++gIndenter;
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceParts ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceParts ()) {
 		std::stringstream ss;
 
 		ss <<
@@ -4004,7 +4005,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_part& elt)
   int inputLineNumber =
     elt->getInputLineNumber ();
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
 		std::stringstream ss;
 
@@ -4019,8 +4020,8 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_part& elt)
   }
 #endif
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceParts ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceParts ()) {
 		std::stringstream ss;
 
 		ss <<
@@ -4053,7 +4054,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_part& elt)
         " measures while the other ones have " << fScoreNumberOfMeasures;
 
       musicxmlError (
-        gGlobalCurrentServiceRunData->getInputSourceName (),
+        gServiceRunData->getInputSourceName (),
         inputLineNumber,
       __FILE__, __LINE__,
         ss.str ());
@@ -4084,7 +4085,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_staves& elt)
   int inputLineNumber =
     elt->getInputLineNumber ();
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
 		std::stringstream ss;
 
@@ -4101,8 +4102,8 @@ void mxsr2msrSkeletonBuilder::visitStart (S_staves& elt)
 
   int stavesNumber = int(*elt);
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceStaves ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceStaves ()) {
 		std::stringstream ss;
 
     switch (stavesNumber) {
@@ -4160,7 +4161,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_staff& elt)
   int inputLineNumber =
     elt->getInputLineNumber ();
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
 		std::stringstream ss;
 
@@ -4202,7 +4203,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_staff& elt)
 //________________________________________________________________________
 void mxsr2msrSkeletonBuilder::visitStart (S_voice& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
 		std::stringstream ss;
 
@@ -4217,8 +4218,8 @@ void mxsr2msrSkeletonBuilder::visitStart (S_voice& elt)
   }
 #endif
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceVoices ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceVoices ()) {
 		std::stringstream ss;
 
 		ss <<
@@ -4250,7 +4251,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_voice& elt)
 //________________________________________________________________________
 void mxsr2msrSkeletonBuilder::visitStart (S_measure& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   int inputLineNumber =
     elt->getInputLineNumber ();
 
@@ -4276,11 +4277,11 @@ void mxsr2msrSkeletonBuilder::visitStart (S_measure& elt)
   fCurrentMeasureNumber = // JMI local variable???
     elt->getAttributeValue ("number");
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (
-    gGlobalTracingOahGroup->getTraceMeasures ()
+    gGlobalTraceOahGroup->getTraceMeasures ()
       ||
-    gGlobalOahEarlyOptions.getEarlyTracePasses ()
+    gEarlyOptions.getEarlyTracePasses ()
   ) {
 		std::stringstream ss;
 
@@ -4304,7 +4305,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_measure& elt)
 
 void mxsr2msrSkeletonBuilder::visitEnd (S_measure& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
 		std::stringstream ss;
 
@@ -4325,7 +4326,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_measure& elt)
 //________________________________________________________________________
 void mxsr2msrSkeletonBuilder::visitStart (S_print& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   int inputLineNumber =
     elt->getInputLineNumber ();
 
@@ -4348,7 +4349,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_print& elt)
 
 void mxsr2msrSkeletonBuilder::visitEnd (S_print& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
 		std::stringstream ss;
 
@@ -4369,7 +4370,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_print& elt)
 //______________________________________________________________________________
 void mxsr2msrSkeletonBuilder::visitStart (S_note& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
 		std::stringstream ss;
 
@@ -4402,7 +4403,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_note& elt)
   int inputLineNumber =
     elt->getInputLineNumber ();
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
 		std::stringstream ss;
 
@@ -4432,8 +4433,8 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_note& elt)
         fCurrentStaffMusicXMLNumber,
         fCurrentVoiceMusicXMLNumber);
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceNotesDetails ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceNotesDetails ()) {
 		std::stringstream ss;
 
 		ss <<
@@ -4459,8 +4460,8 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_note& elt)
   // are there harmonies attached to the current note?
   if (fThereAreHarmoniesToBeAttachedToCurrentNote) {
     if (gGlobalMxsr2msrOahGroup->getIgnoreHarmonies ()) {
-#ifdef MF_TRACING_IS_ENABLED
-      if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
+#ifdef MF_TRACE_IS_ENABLED
+      if (gGlobalTraceOahGroup->getTraceHarmonies ()) {
 				std::stringstream ss;
 
 				ss <<
@@ -4490,8 +4491,8 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_note& elt)
   // are there figured bass attached to the current note?
   if (fThereAreFiguredBassToBeAttachedToCurrentNote) {
     if (gGlobalMxsr2msrOahGroup->getIgnoreFiguredBasses ()) {
-#ifdef MF_TRACING_IS_ENABLED
-      if (gGlobalTracingOahGroup->getTraceFiguredBasses ()) {
+#ifdef MF_TRACE_IS_ENABLED
+      if (gGlobalTraceOahGroup->getTraceFiguredBasses ()) {
 				std::stringstream ss;
 
 				ss <<
@@ -4527,7 +4528,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_lyric& elt)
   int inputLineNumber =
     elt->getInputLineNumber ();
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
 		std::stringstream ss;
 
@@ -4550,7 +4551,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_lyric& elt)
 
     if (fCurrentStanzaNumber.size () == 0) {
       musicxmlWarning (
-        gGlobalCurrentServiceRunData->getInputSourceName (),
+        gServiceRunData->getInputSourceName (),
         inputLineNumber,
         "lyric number is empty, using \"1\" by default");
 
@@ -4558,8 +4559,8 @@ void mxsr2msrSkeletonBuilder::visitStart (S_lyric& elt)
     }
 
     else {
-#ifdef MF_TRACING_IS_ENABLED
-      if (gGlobalTracingOahGroup->getTraceLyrics ()) {
+#ifdef MF_TRACE_IS_ENABLED
+      if (gGlobalTraceOahGroup->getTraceLyrics ()) {
 				std::stringstream ss;
 
 				ss <<
@@ -4588,8 +4589,8 @@ void mxsr2msrSkeletonBuilder::visitStart (S_lyric& elt)
       elt->getAttributeValue ("name");
 
     if (fCurrentStanzaName.size () == 0) {
-#ifdef MF_TRACING_IS_ENABLED
-      if (gGlobalTracingOahGroup->getTraceLyrics ()) {
+#ifdef MF_TRACE_IS_ENABLED
+      if (gGlobalTraceOahGroup->getTraceLyrics ()) {
         // lyrics names are not so frequent after all...
         std::stringstream ss;
 
@@ -4599,7 +4600,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_lyric& elt)
           "\" by default";
 
         musicxmlWarning (
-          gGlobalCurrentServiceRunData->getInputSourceName (),
+          gServiceRunData->getInputSourceName (),
           inputLineNumber,
           ss.str ());
       }
@@ -4609,8 +4610,8 @@ void mxsr2msrSkeletonBuilder::visitStart (S_lyric& elt)
     }
 
     else {
-#ifdef MF_TRACING_IS_ENABLED
-      if (gGlobalTracingOahGroup->getTraceLyrics ()) {
+#ifdef MF_TRACE_IS_ENABLED
+      if (gGlobalTraceOahGroup->getTraceLyrics ()) {
 				std::stringstream ss;
 
 				ss <<
@@ -4638,7 +4639,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_lyric& elt)
   int inputLineNumber =
     elt->getInputLineNumber ();
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
 		std::stringstream ss;
 
@@ -4653,8 +4654,8 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_lyric& elt)
   }
 #endif
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceLyrics ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceLyrics ()) {
 		std::stringstream ss;
 
 		ss <<
@@ -4714,7 +4715,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_lyric& elt)
 //______________________________________________________________________________
 void mxsr2msrSkeletonBuilder::visitStart (S_harmony& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
 		std::stringstream ss;
 
@@ -4744,7 +4745,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_harmony& elt)
 //______________________________________________________________________________
 void mxsr2msrSkeletonBuilder::visitStart (S_figured_bass& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
 		std::stringstream ss;
 

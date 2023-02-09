@@ -189,7 +189,7 @@ loc.step ();
 
 <SINGLE_QUOTED_STRING_MODE>{singleleQuote} {
   if (drv.getDisplayTokens ()) {
-    gLogStream <<
+    gLog <<
       "--> " << drv.getScannerLocation () <<
       ": single quoted std::string [" << pStringBuffer << ']' <<
       std::endl;
@@ -235,7 +235,7 @@ loc.step ();
 
 <DOUBLE_QUOTED_STRING_MODE>{doubleQuote} {
   if (drv.getDisplayTokens ()) {
-    gLogStream <<
+    gLog <<
       "--> " << drv.getScannerLocation () <<
       ": double quoted std::string [" << pStringBuffer << ']' <<
       std::endl;
@@ -278,7 +278,7 @@ loc.step ();
 {integer}"."{integer}({exponent})? |
 {integer}{exponent} {
   if (drv.getDisplayTokens ()) {
-    gLogStream << "--> " << drv.getScannerLocation () <<
+    gLog << "--> " << drv.getScannerLocation () <<
     " double: " << yytext <<
     std::endl;
   }
@@ -292,7 +292,7 @@ loc.step ();
 
 {integer} {
   if (drv.getDisplayTokens ()) {
-    gLogStream << "--> " << drv.getScannerLocation () <<
+    gLog << "--> " << drv.getScannerLocation () <<
     " integer: " << yytext <<
     std::endl;
   }
@@ -309,7 +309,7 @@ loc.step ();
 
 "tool" {
   if (drv.getDisplayTokens ()) {
-    gLogStream << "--> " << drv.getScannerLocation () <<
+    gLog << "--> " << drv.getScannerLocation () <<
     ": " << yytext <<
     std::endl;
   }
@@ -323,7 +323,7 @@ loc.step ();
 
 "input" {
   if (drv.getDisplayTokens ()) {
-    gLogStream << "--> " << drv.getScannerLocation () <<
+    gLog << "--> " << drv.getScannerLocation () <<
     ": " << yytext <<
     std::endl;
   }
@@ -337,7 +337,7 @@ loc.step ();
 
 "choice" {
   if (drv.getDisplayTokens ()) {
-    gLogStream << "--> " << drv.getScannerLocation () <<
+    gLog << "--> " << drv.getScannerLocation () <<
     ": " << yytext <<
     std::endl;
   }
@@ -351,7 +351,7 @@ loc.step ();
 
 "default" {
   if (drv.getDisplayTokens ()) {
-    gLogStream << "--> " << drv.getScannerLocation () <<
+    gLog << "--> " << drv.getScannerLocation () <<
     ": " << yytext <<
     std::endl;
   }
@@ -365,7 +365,7 @@ loc.step ();
 
 "case" {
   if (drv.getDisplayTokens ()) {
-    gLogStream << "--> " << drv.getScannerLocation () <<
+    gLog << "--> " << drv.getScannerLocation () <<
     ": " << yytext <<
     std::endl;
   }
@@ -379,7 +379,7 @@ loc.step ();
 
 "select" {
   if (drv.getDisplayTokens ()) {
-    gLogStream << "--> " << drv.getScannerLocation () <<
+    gLog << "--> " << drv.getScannerLocation () <<
     ": " << yytext <<
     std::endl;
   }
@@ -393,7 +393,7 @@ loc.step ();
 
 "all" {
   if (drv.getDisplayTokens ()) {
-    gLogStream << "--> " << drv.getScannerLocation () <<
+    gLog << "--> " << drv.getScannerLocation () <<
     ": " << yytext <<
     std::endl;
   }
@@ -409,7 +409,7 @@ loc.step ();
 
 {name} {
   if (drv.getDisplayTokens ()) {
-    gLogStream << "--> " << drv.getScannerLocation () <<
+    gLog << "--> " << drv.getScannerLocation () <<
     ": name [" << yytext << ']' <<
     std::endl;
   }
@@ -426,7 +426,7 @@ loc.step ();
 "--"{name} |
 "-"{name} {
   if (drv.getDisplayTokens ()) {
-    gLogStream << "--> " << drv.getScannerLocation () <<
+    gLog << "--> " << drv.getScannerLocation () <<
     ": option [" << yytext << ']' <<
     std::endl;
   }
@@ -441,7 +441,7 @@ loc.step ();
 
 "," {
   if (drv.getDisplayTokens ()) {
-    gLogStream << "--> " << drv.getScannerLocation () <<
+    gLog << "--> " << drv.getScannerLocation () <<
     ": '" << yytext << '\'' <<
     std::endl;
   }
@@ -455,7 +455,7 @@ loc.step ();
 
 ":" {
   if (drv.getDisplayTokens ()) {
-    gLogStream << "--> " << drv.getScannerLocation () <<
+    gLog << "--> " << drv.getScannerLocation () <<
     ": '" << yytext << '\'' <<
     std::endl;
   }
@@ -469,7 +469,7 @@ loc.step ();
 
 ";" {
   if (drv.getDisplayTokens ()) {
-    gLogStream << "--> " << drv.getScannerLocation () <<
+    gLog << "--> " << drv.getScannerLocation () <<
     ": '" << yytext << '\'' <<
     std::endl;
   }
@@ -483,7 +483,7 @@ loc.step ();
 
 "|" {
   if (drv.getDisplayTokens ()) {
-    gLogStream << "--> " << drv.getScannerLocation () <<
+    gLog << "--> " << drv.getScannerLocation () <<
     ": '" << yytext << '\'' <<
     std::endl;
   }
@@ -497,7 +497,7 @@ loc.step ();
 
 "&" {
   if (drv.getDisplayTokens ()) {
-    gLogStream << "--> " << drv.getScannerLocation () <<
+    gLog << "--> " << drv.getScannerLocation () <<
     ": '" << yytext << '\'' <<
     std::endl;
   }
@@ -511,7 +511,7 @@ loc.step ();
 
 "=" {
   if (drv.getDisplayTokens ()) {
-    gLogStream << "--> " << drv.getScannerLocation () <<
+    gLog << "--> " << drv.getScannerLocation () <<
     ": '" << yytext << '\'' <<
     std::endl;
   }
@@ -565,7 +565,7 @@ void ischemeDriver::scanBegin ()
 
       if (errorCString != nullptr) {
         ss <<
-          gWaeHandler->cannotOpenScriptForWriting (fScriptName) <<
+          gLanguage->cannotOpenScriptForWriting (fScriptName) <<
           ": " <<
           errorCString <<
           std::endl;

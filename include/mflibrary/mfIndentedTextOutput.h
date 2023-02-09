@@ -30,7 +30,7 @@ namespace MusicFormats
 //______________________________________________________________________________
 class EXP mfOutputIndenter
 {
-  protected:
+  public:
 
     // constructors/destructor
     // ------------------------------------------------------
@@ -111,10 +111,6 @@ class EXP mfOutputIndenter
                             const int          columnWidth,
                             std::ostream&      os);
 
-    // global variables for general use
-    static mfOutputIndenter
-                          gGlobalOStreamIndenter;
-
   private:
 
     // private fields
@@ -125,10 +121,6 @@ class EXP mfOutputIndenter
 };
 
 EXP std::ostream& operator << (std::ostream& os, const mfOutputIndenter& theIndenter);
-
-// useful shortcut macros
-#define gIndenter mfOutputIndenter::gGlobalOStreamIndenter
-#define gTab      mfOutputIndenter::gGlobalOStreamIndenter.getSpacer ()
 
 //______________________________________________________________________________
 // a stream buffer that prefixes each line
@@ -358,13 +350,21 @@ EXP mfIndentedStringStream& operator << (
   mfIndentedStringStream& iss, const Rational& rat);
 
 //______________________________________________________________________________
-// the global log indented stream
+// the global output indenter for general use
+EXP mfOutputIndenter& getGlobalOutputIndenter ();
+
+// useful shortcut macros
+#define gIndenter getGlobalOutputIndenter ()
+#define gTab      getGlobalOutputIndenter ().getSpacer ()
+
+// the global log and output indented streams
 EXP extern S_indentedOstream gGlobalOutputIndentedOstream;
 EXP extern S_indentedOstream gGlobalLogIndentedOstream;
 
-#define gOutputStream *gGlobalOutputIndentedOstream
-#define gLogStream    *gGlobalLogIndentedOstream
+#define gOutput *gGlobalOutputIndentedOstream
+#define gLog    *gGlobalLogIndentedOstream
 
+//______________________________________________________________________________
 EXP extern void createTheGlobalIndentedOstreams (
   std::ostream& theOutputStream,
   std::ostream& theLogStream);

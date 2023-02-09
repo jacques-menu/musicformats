@@ -27,6 +27,8 @@
 
 #include "oahEarlyOptions.h"
 
+#include "waeHandlers.h"
+
 
 namespace MusicFormats
 {
@@ -78,8 +80,8 @@ void msrIgnorePartAtom::applyAtomWithValue (
   const std::string& theString,
   std::ostream&      os)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<
@@ -96,8 +98,8 @@ void msrIgnorePartAtom::applyAtomWithValue (
 
   std::string partName = theString;
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<
@@ -137,8 +139,8 @@ void msrIgnorePartAtom::applyAtomWithValue (
 
 void msrIgnorePartAtom::acceptIn (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -156,8 +158,8 @@ void msrIgnorePartAtom::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_msrIgnorePartAtom>*> (v)) {
         S_msrIgnorePartAtom elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
-        if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -175,8 +177,8 @@ void msrIgnorePartAtom::acceptIn (basevisitor* v)
 
 void msrIgnorePartAtom::acceptOut (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -194,8 +196,8 @@ void msrIgnorePartAtom::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_msrIgnorePartAtom>*> (v)) {
         S_msrIgnorePartAtom elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
-        if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -213,8 +215,8 @@ void msrIgnorePartAtom::acceptOut (basevisitor* v)
 
 void msrIgnorePartAtom::browseData (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -415,8 +417,8 @@ void msrKeepPartAtom::applyAtomWithValue (
   const std::string& theString,
   std::ostream&      os)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<
@@ -433,8 +435,8 @@ void msrKeepPartAtom::applyAtomWithValue (
 
   std::string partName = theString;
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<
@@ -474,8 +476,8 @@ void msrKeepPartAtom::applyAtomWithValue (
 
 void msrKeepPartAtom::acceptIn (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -493,8 +495,8 @@ void msrKeepPartAtom::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_msrKeepPartAtom>*> (v)) {
         S_msrKeepPartAtom elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
-        if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -512,8 +514,8 @@ void msrKeepPartAtom::acceptIn (basevisitor* v)
 
 void msrKeepPartAtom::acceptOut (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -531,8 +533,8 @@ void msrKeepPartAtom::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_msrKeepPartAtom>*> (v)) {
         S_msrKeepPartAtom elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
-        if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -550,8 +552,8 @@ void msrKeepPartAtom::acceptOut (basevisitor* v)
 
 void msrKeepPartAtom::browseData (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -729,7 +731,7 @@ R"(These options control the way MSR data is translated to another MSR.)",
 msr2msrOahGroup::~msr2msrOahGroup ()
 {}
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
 void msr2msrOahGroup::initializMsr2msrTraceOptions ()
 {
   // JMI
@@ -1017,7 +1019,7 @@ R"()",
 
 void msr2msrOahGroup::initializeMsr2msrOahGroup ()
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   // trace
   // --------------------------------------
   initializMsr2msrTraceOptions ();
@@ -1064,8 +1066,8 @@ void msr2msrOahGroup::checkGroupOptionsConsistency ()
 //______________________________________________________________________________
 void msr2msrOahGroup::acceptIn (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1083,8 +1085,8 @@ void msr2msrOahGroup::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_msr2msrOahGroup>*> (v)) {
         S_msr2msrOahGroup elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
-        if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -1102,8 +1104,8 @@ void msr2msrOahGroup::acceptIn (basevisitor* v)
 
 void msr2msrOahGroup::acceptOut (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1121,8 +1123,8 @@ void msr2msrOahGroup::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_msr2msrOahGroup>*> (v)) {
         S_msr2msrOahGroup elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
-        if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -1140,8 +1142,8 @@ void msr2msrOahGroup::acceptOut (basevisitor* v)
 
 void msr2msrOahGroup::browseData (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1158,7 +1160,7 @@ void msr2msrOahGroup::browseData (basevisitor* v)
 //______________________________________________________________________________
 void msr2msrOahGroup::displayMsr2msrOahValues (int valueFieldWidth)
 {
-  gLogStream <<
+  gLog <<
     "The MusicXML options are:" <<
     std::endl;
 
@@ -1167,13 +1169,13 @@ void msr2msrOahGroup::displayMsr2msrOahValues (int valueFieldWidth)
   // avoid msr2msr? (for TESTS)
   // --------------------------------------
 
-  gLogStream <<
+  gLog <<
     "avoid msr2msr? (for TESTS):" <<
     std::endl;
 
   ++gIndenter;
 
-  gLogStream << std::left <<
+  gLog << std::left <<
     std::setw (valueFieldWidth) <<
     "fAvoidMsr2msr" << ": " <<
     fAvoidMsr2msr <<
@@ -1185,13 +1187,13 @@ void msr2msrOahGroup::displayMsr2msrOahValues (int valueFieldWidth)
   // book
   // --------------------------------------
 
-  gLogStream <<
+  gLog <<
     "Book:" <<
     std::endl;
 
   ++gIndenter;
 
-  gLogStream << std::left <<
+  gLog << std::left <<
     std::setw (valueFieldWidth) <<
     "fExpandToHarmonyBandBook" << ": " <<
     fExpandToHarmonyBandBook <<
@@ -1203,7 +1205,7 @@ void msr2msrOahGroup::displayMsr2msrOahValues (int valueFieldWidth)
   // voices
   // --------------------------------------
 
-  gLogStream <<
+  gLog <<
     "Voices:" <<
     std::endl;
 
@@ -1212,12 +1214,12 @@ void msr2msrOahGroup::displayMsr2msrOahValues (int valueFieldWidth)
   mfDisplayStringSet (
     "fIgnoreMsrVoicesSet",
     fIgnoreMsrVoicesSet,
-    gLogStream);
+    gLog);
 
   mfDisplayStringSet (
     "fKeepMsrVoicesSet",
     fKeepMsrVoicesSet,
-    gLogStream);
+    gLog);
 
   --gIndenter;
 
@@ -1225,7 +1227,7 @@ void msr2msrOahGroup::displayMsr2msrOahValues (int valueFieldWidth)
   // breaks
   // --------------------------------------
 
-  gLogStream <<
+  gLog <<
     "Breaks:" <<
     std::endl;
 
@@ -1234,12 +1236,12 @@ void msr2msrOahGroup::displayMsr2msrOahValues (int valueFieldWidth)
   mfDisplayStringSet (
     "fInserPageBreakAfterMeasureSet",
     fInserPageBreakAfterMeasureSet,
-    gLogStream);
+    gLog);
 
   mfDisplayStringSet (
     "fInserLineBreakAfterMeasureSet",
     fInserLineBreakAfterMeasureSet,
-    gLogStream);
+    gLog);
 
   --gIndenter;
 
@@ -1247,13 +1249,13 @@ void msr2msrOahGroup::displayMsr2msrOahValues (int valueFieldWidth)
   // compress
   // --------------------------------------
 
-  gLogStream <<
+  gLog <<
     "Compress" <<
     std::endl;
 
   ++gIndenter;
 
-  gLogStream << std::left <<
+  gLog << std::left <<
     std::setw (valueFieldWidth) <<
     "fCoalesceEmptyMeasures" << ": " <<
     fCoalesceEmptyMeasures <<
@@ -1270,13 +1272,13 @@ void msr2msrOahGroup::displayMsr2msrOahValues (int valueFieldWidth)
   // repeats
   // --------------------------------------
 
-  gLogStream <<
+  gLog <<
     "Repeats:" <<
     std::endl;
 
   ++gIndenter;
 
-  gLogStream << std::left <<
+  gLog << std::left <<
     std::setw (valueFieldWidth) <<
     "fCreateImplicitInitialRepeatBarLine" << ": " <<
     fCreateImplicitInitialRepeatBarLine <<
@@ -1303,8 +1305,8 @@ std::ostream& operator << (std::ostream& os, const S_msr2msrOahGroup& elt)
 //______________________________________________________________________________
 S_msr2msrOahGroup createGlobalMsr2msrOahGroup ()
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<

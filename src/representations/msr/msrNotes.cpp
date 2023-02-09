@@ -39,6 +39,8 @@
 
 #include "msrOah.h"
 
+#include "waeHandlers.h"
+
 
 namespace MusicFormats
 {
@@ -211,8 +213,8 @@ void msrNote::initializeNote ()
   // note lyrics
   // ------------------------------------------------------
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceNotesDetails ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceNotesDetails ()) {
 		std::stringstream ss;
 
     ss <<
@@ -396,8 +398,8 @@ void msrNote::setNoteUpLinkToMeasure (
     "measure is null");
 #endif
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceWholeNotes ()) {
     ++gIndenter;
 
 		std::stringstream ss;
@@ -555,8 +557,8 @@ S_msrVoice msrNote::fetchNoteUpLinkToVoice () const
 {
   S_msrVoice result;
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceNotes ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceNotes ()) {
 		std::stringstream ss;
 
     ss <<
@@ -694,8 +696,8 @@ S_msrScore msrNote::fetchUpLinkToNoteToScore () const
 
 void msrNote::setNoteKind (msrNoteKind noteKind)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceNotes ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceNotes ()) {
 		std::stringstream ss;
 
     ss <<
@@ -725,8 +727,8 @@ void msrNote::setNoteColorAlphaRGB (
 S_msrNote msrNote::createNoteNewbornClone (
   const S_msrPart& containingPart)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceNotes ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceNotes ()) {
 		std::stringstream ss;
 
     ss <<
@@ -755,7 +757,7 @@ S_msrNote msrNote::createNoteNewbornClone (
     newbornClone =
       msrNote::create (
         fInputLineNumber,
-        gGlobalNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
+        gNullMeasure, // set later in setMeasureElementUpLinkToMeasure()
 
 //         fNoteUpLinkToMeasure->getMeasureNumber (), // JMI v0.9.66
 
@@ -933,8 +935,8 @@ S_msrNote msrNote::createNoteNewbornClone (
 S_msrNote msrNote::createNoteDeepClone (
   const S_msrVoice& containingVoice)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceNotes ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceNotes ()) {
 		std::stringstream ss;
 
     ss <<
@@ -967,7 +969,7 @@ S_msrNote msrNote::createNoteDeepClone (
     deepClone =
       msrNote::create (
         fInputLineNumber,
-        gGlobalNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
+        gNullMeasure, // set later in setMeasureElementUpLinkToMeasure()
 
 //         fNoteUpLinkToMeasure->getMeasureNumber (), // v0.9.66
 
@@ -1454,7 +1456,7 @@ S_msrNote msrNote::createRestNote (
   msrNote * o =
     new msrNote (
       inputLineNumber,
-      gGlobalNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
+      gNullMeasure, // set later in setMeasureElementUpLinkToMeasure()
 
 //       noteMeasureNumber, // JMI v0.9.66
 
@@ -1482,8 +1484,8 @@ S_msrNote msrNote::createRestNote (
       msrNoteHeadParenthesesKind::kNoteHeadParenthesesNo); // JMI
   assert (o != nullptr);
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceRestNotes ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceRestNotes ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1511,7 +1513,7 @@ S_msrNote msrNote::createSkipNote (
   msrNote * o =
     new msrNote (
       inputLineNumber,
-      gGlobalNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
+      gNullMeasure, // set later in setMeasureElementUpLinkToMeasure()
 
       // noteMeasureNumber, // JMI v0.9.66
 
@@ -1539,8 +1541,8 @@ S_msrNote msrNote::createSkipNote (
       msrNoteHeadParenthesesKind::kNoteHeadParenthesesNo); // JMI
   assert (o != nullptr);
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceSkipNotes ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceSkipNotes ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1568,7 +1570,7 @@ S_msrNote msrNote::createGraceSkipNote (
   msrNote * o =
     new msrNote (
       inputLineNumber,
-      gGlobalNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
+      gNullMeasure, // set later in setMeasureElementUpLinkToMeasure()
 
 //       noteMeasureNumber, // JMI v0.9.66
 
@@ -1596,8 +1598,8 @@ S_msrNote msrNote::createGraceSkipNote (
       msrNoteHeadParenthesesKind::kNoteHeadParenthesesNo); // JMI
   assert (o != nullptr);
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceSkipNotes ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceSkipNotes ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1627,7 +1629,7 @@ S_msrNote msrNote::createRestNoteWithOctave (
   msrNote * o =
     new msrNote (
       inputLineNumber,
-      gGlobalNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
+      gNullMeasure, // set later in setMeasureElementUpLinkToMeasure()
 
 //       noteMeasureNumber, // JMI v0.9.66
 
@@ -1655,8 +1657,8 @@ S_msrNote msrNote::createRestNoteWithOctave (
       msrNoteHeadParenthesesKind::kNoteHeadParenthesesNo); // JMI
   assert (o != nullptr);
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceRestNotes ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceRestNotes ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1686,7 +1688,7 @@ S_msrNote msrNote::createSkipNoteWithOctave (
   msrNote * o =
     new msrNote (
       inputLineNumber,
-      gGlobalNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
+      gNullMeasure, // set later in setMeasureElementUpLinkToMeasure()
 
 //       noteMeasureNumber, // JMI v0.9.66
 
@@ -1714,8 +1716,8 @@ S_msrNote msrNote::createSkipNoteWithOctave (
       msrNoteHeadParenthesesKind::kNoteHeadParenthesesNo); // JMI
   assert (o != nullptr);
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceSkipNotes ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceSkipNotes ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1746,7 +1748,7 @@ S_msrNote msrNote::createRegularNote (
   msrNote * o =
     new msrNote (
       inputLineNumber,
-      gGlobalNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
+      gNullMeasure, // set later in setMeasureElementUpLinkToMeasure()
 
 //       noteMeasureNumber, // JMI v0.9.66
 
@@ -1774,8 +1776,8 @@ S_msrNote msrNote::createRegularNote (
       msrNoteHeadParenthesesKind::kNoteHeadParenthesesNo); // JMI
   assert (o != nullptr);
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceNotes ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceNotes ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1803,8 +1805,8 @@ S_msrNote msrNote::createRestFromString (
 
   S_msrNote result;
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceNotes ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceNotes ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1831,8 +1833,8 @@ S_msrNote msrNote::createRestFromString (
     "[[:space:]]*"
     );
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1853,8 +1855,8 @@ S_msrNote msrNote::createRestFromString (
 
   size_t smSize = sm.size ();
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1895,8 +1897,8 @@ S_msrNote msrNote::createRestFromString (
 
   size_t dotsNumber = restDots.size ();
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1932,8 +1934,8 @@ S_msrNote msrNote::createRestFromString (
        msrDurationKindAsWholeNotes (
          restDurationKind);
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1968,8 +1970,8 @@ S_msrNote msrNote::createSkipFromString (
 
   S_msrNote result;
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceNotes ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceNotes ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1996,8 +1998,8 @@ S_msrNote msrNote::createSkipFromString (
     "[[:space:]]*"
     );
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<
@@ -2018,8 +2020,8 @@ S_msrNote msrNote::createSkipFromString (
 
   size_t smSize = sm.size ();
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<
@@ -2060,8 +2062,8 @@ S_msrNote msrNote::createSkipFromString (
 
   size_t dotsNumber = skipDots.size ();
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<
@@ -2097,8 +2099,8 @@ S_msrNote msrNote::createSkipFromString (
        msrDurationKindAsWholeNotes (
          skipDurationKind);
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<
@@ -2134,8 +2136,8 @@ S_msrNote msrNote::createNoteFromString (
 
   S_msrNote result;
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceNotes ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceNotes ()) {
 		std::stringstream ss;
 
     ss <<
@@ -2167,8 +2169,8 @@ S_msrNote msrNote::createNoteFromString (
     "[[:space:]]*"
     );
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<
@@ -2189,8 +2191,8 @@ S_msrNote msrNote::createNoteFromString (
 
   size_t smSize = sm.size ();
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<
@@ -2233,8 +2235,8 @@ S_msrNote msrNote::createNoteFromString (
 
   size_t dotsNumber = noteDots.size ();
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<
@@ -2295,8 +2297,8 @@ S_msrNote msrNote::createNoteFromString (
        msrDurationKindAsWholeNotes (
          noteDurationKind);
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<
@@ -2345,7 +2347,7 @@ S_msrNote msrNote::createNoteFromSemiTonesPitchAndOctave (
   msrNote * o =
     new msrNote (
       inputLineNumber,
-      gGlobalNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
+      gNullMeasure, // set later in setMeasureElementUpLinkToMeasure()
 
 //       K_MEASURE_NUMBER_UNKNOWN, // JMI ???  // v0.9.66
 
@@ -2376,8 +2378,8 @@ S_msrNote msrNote::createNoteFromSemiTonesPitchAndOctave (
       msrNoteHeadParenthesesKind::kNoteHeadParenthesesNo); // JMI
   assert (o != nullptr);
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceNotesOctaveEntry ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceNotesOctaveEntry ()) {
 		std::stringstream ss;
 
     ss <<
@@ -2403,8 +2405,8 @@ void msrNote::setMeasureElementMeasurePosition (
   const Rational&     measurePosition,
   const std::string&  context)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMeasurePositions ()) {
     S_msrMeasure upLinkToMeasure;
 
     getMeasureElementUpLinkToMeasure (
@@ -2457,8 +2459,8 @@ void msrNote::setNoteAttachedElementsMeasurePosition (
   const Rational&     measurePosition)
 {
 // // JMI v0.9.66
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceHarmonies ()) {
     std::stringstream ss;
 
     ss <<
@@ -2485,8 +2487,8 @@ void msrNote::setNoteAttachedElementsMeasurePosition (
 //     } // for
 //   }
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceFiguredBasses ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceFiguredBasses ()) {
 		std::stringstream ss;
 
     ss <<
@@ -2590,8 +2592,8 @@ void msrNote::setNoteStem (const S_msrStem& stem)
 
 void msrNote::setNoteBelongsToAChord ()
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceChords ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceChords ()) {
 		std::stringstream ss;
 
     ss <<
@@ -2636,8 +2638,8 @@ void msrNote::determineTupletMemberSoundingFromDisplayWholeNotes (
       </note>
   */
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceTuplets ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceTuplets ()) {
 		std::stringstream ss;
 
     ss <<
@@ -2664,8 +2666,8 @@ void msrNote::determineTupletMemberSoundingFromDisplayWholeNotes (
     actualNotes,
     "determineTupletMemberSoundingFromDisplayWholeNotes()");
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceTuplets ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceTuplets ()) {
 		std::stringstream ss;
 
     ss <<
@@ -2683,8 +2685,8 @@ void msrNote::determineTupletMemberSoundingFromDisplayWholeNotes (
 void msrNote::appendBeamToNote (
   const S_msrBeam& beam)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceBeams ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceBeams ()) {
 		std::stringstream ss;
 
     ss <<
@@ -2715,8 +2717,8 @@ if (false) { // JMI, note not yet append to anything....
 void msrNote::appendArticulationToNote (
   const S_msrArticulation& art)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceArticulations ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceArticulations ()) {
 		std::stringstream ss;
 
     ss <<
@@ -2738,8 +2740,8 @@ void msrNote::appendArticulationToNote (
 void msrNote::appendSpannerToNote (
   const S_msrSpanner& spanner)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceSpanners ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceSpanners ()) {
 		std::stringstream ss;
 
     ss <<
@@ -2784,8 +2786,8 @@ void msrNote::appendSpannerToNote (
 void msrNote::appendTechnicalToNote (
   const S_msrTechnical& technical)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceTechnicals ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceTechnicals ()) {
 		std::stringstream ss;
 
     ss <<
@@ -2809,8 +2811,8 @@ void msrNote::appendTechnicalToNote (
 void msrNote::appendTechnicalWithIntegerToNote (
   const S_msrTechnicalWithInteger& technicalWithInteger)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceTechnicals ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceTechnicals ()) {
 		std::stringstream ss;
 
     ss <<
@@ -2835,8 +2837,8 @@ void msrNote::appendTechnicalWithIntegerToNote (
 void msrNote::appendTechnicalWithFloatToNote (
   const S_msrTechnicalWithFloat& technicalWithFloat)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceTechnicals ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceTechnicals ()) {
 		std::stringstream ss;
 
     ss <<
@@ -2861,8 +2863,8 @@ void msrNote::appendTechnicalWithFloatToNote (
 void msrNote::appendTechnicalWithStringToNote (
   const S_msrTechnicalWithString& technicalWithString)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceTechnicals ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceTechnicals ()) {
 		std::stringstream ss;
 
     ss <<
@@ -2887,8 +2889,8 @@ void msrNote::appendTechnicalWithStringToNote (
 void msrNote::appendOrnamentToNote (
   const S_msrOrnament& ornament)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceOrnaments ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceOrnaments ()) {
 		std::stringstream ss;
 
     ss <<
@@ -2938,8 +2940,8 @@ void msrNote::appendOrnamentToNote (
 void msrNote::appendGlissandoToNote (
   const S_msrGlissando& glissando)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceGlissandos ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceGlissandos ()) {
 		std::stringstream ss;
 
     ss <<
@@ -2962,8 +2964,8 @@ void msrNote::appendGlissandoToNote (
 void msrNote::appendSlideToNote (
   const S_msrSlide& slide)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceSlides ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceSlides ()) {
 		std::stringstream ss;
 
     ss <<
@@ -2986,8 +2988,8 @@ void msrNote::appendSlideToNote (
 void msrNote::setNoteGraceNotesGroupBefore (
   const S_msrGraceNotesGroup& graceNotesGroupBefore)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceGraceNotes ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceGraceNotes ()) {
 		std::stringstream ss;
 
     ss <<
@@ -3016,8 +3018,8 @@ void msrNote::setNoteGraceNotesGroupBefore (
 void msrNote::setNoteGraceNotesGroupAfter (
   const S_msrGraceNotesGroup& graceNotesGroupAfter)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceGraceNotes ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceGraceNotes ()) {
 		std::stringstream ss;
 
     ss <<
@@ -3046,8 +3048,8 @@ void msrNote::setNoteGraceNotesGroupAfter (
 /* JMI
 void msrNote::setNoteAfterGraceNotesGroup (S_msrGraceNotesGroup afterGraceNotesGroup)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceGraceNotes ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceGraceNotes ()) {
 		std::stringstream ss;
 
     ss <<
@@ -3070,8 +3072,8 @@ void msrNote::setNoteAfterGraceNotesGroup (S_msrGraceNotesGroup afterGraceNotesG
 void msrNote::setNoteSingleTremolo (
   const S_msrSingleTremolo& trem)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceTremolos ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceTremolos ()) {
 		std::stringstream ss;
 
     ss <<
@@ -3095,8 +3097,8 @@ void msrNote::setNoteSingleTremolo (
 void msrNote::appendDynamicToNote (
   const S_msrDynamic& dynamic)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceDynamics ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceDynamics ()) {
 		std::stringstream ss;
 
     ss <<
@@ -3130,8 +3132,8 @@ void msrNote::appendWordsToNote (
 void msrNote::appendSlurToNote (
   const S_msrSlur& slur)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceSlurs ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceSlurs ()) {
 		std::stringstream ss;
 
     ss <<
@@ -3151,8 +3153,8 @@ void msrNote::appendSlurToNote (
 void msrNote::appendLigatureToNote (
   const S_msrLigature& ligature)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceLigatures ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceLigatures ()) {
 		std::stringstream ss;
 
     ss <<
@@ -3176,8 +3178,8 @@ void msrNote::appendLigatureToNote (
       // it may happen that a given note has a 'ligature start'
       // and a 'ligature stop' in sequence, ignore both
 
-#ifdef MF_TRACING_IS_ENABLED
-      if (gGlobalTracingOahGroup->getTraceLigatures ()) {
+#ifdef MF_TRACE_IS_ENABLED
+      if (gGlobalTraceOahGroup->getTraceLigatures ()) {
         std::stringstream ss;
 
         ss <<
@@ -3187,15 +3189,15 @@ void msrNote::appendLigatureToNote (
           ligature->getInputLineNumber ();
 
         msrWarning (
-          gGlobalCurrentServiceRunData->getInputSourceName (),
+          gServiceRunData->getInputSourceName (),
           ligature->getInputLineNumber (),
           ss.str ());
       }
 #endif
 
       // remove 'ligature start'
-#ifdef MF_TRACING_IS_ENABLED
-      if (gGlobalTracingOahGroup->getTraceLigatures ()) {
+#ifdef MF_TRACE_IS_ENABLED
+      if (gGlobalTraceOahGroup->getTraceLigatures ()) {
         std::stringstream ss;
 
         ss <<
@@ -3225,8 +3227,8 @@ void msrNote::appendLigatureToNote (
 void msrNote::appendPedalToNote (
   const S_msrPedal& pedal)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTracePedals ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTracePedals ()) {
 		std::stringstream ss;
 
     ss <<
@@ -3248,8 +3250,8 @@ void msrNote::appendPedalToNote (
       // it may happen that a given note has a 'pedal start'
       // and a 'pedal stop' in sequence, ignore both            // JMI ???
 
-#ifdef MF_TRACING_IS_ENABLED
-      if (gGlobalTracingOahGroup->getTracePedals ()) {
+#ifdef MF_TRACE_IS_ENABLED
+      if (gGlobalTraceOahGroup->getTracePedals ()) {
         std::stringstream ss;
 
         ss <<
@@ -3259,15 +3261,15 @@ void msrNote::appendPedalToNote (
           pedal->getInputLineNumber ();
 
         msrWarning (
-          gGlobalCurrentServiceRunData->getInputSourceName (),
+          gServiceRunData->getInputSourceName (),
           pedal->getInputLineNumber (),
           ss.str ());
       }
 #endif
 
       // rmeove 'pedal start'
-#ifdef MF_TRACING_IS_ENABLED
-      if (gGlobalTracingOahGroup->getTracePedals ()) {
+#ifdef MF_TRACE_IS_ENABLED
+      if (gGlobalTraceOahGroup->getTracePedals ()) {
         std::stringstream ss;
 
         ss <<
@@ -3296,8 +3298,8 @@ void msrNote::appendPedalToNote (
 void msrNote::appendSlashToNote (
   const S_msrSlash& slash)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceSlashes ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceSlashes ()) {
 		std::stringstream ss;
 
     ss <<
@@ -3337,8 +3339,8 @@ void msrNote::appendSegnoToNote (
 void msrNote::appendDalSegnoToNote (
   const S_msrDalSegno& dalSegno)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceDalSegnos ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceDalSegnos ()) {
 		std::stringstream ss;
 
     ss <<
@@ -3392,8 +3394,8 @@ void msrNote::appendScordaturaToNote (
 //   Rational&     voicePosition,
 //   const std::string& context)
 // {
-// #ifdef MF_TRACING_IS_ENABLED
-//   if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gGlobalTraceOahGroup->getTraceMeasurePositions ()) {
 // 		std::stringstream ss;
 //
 //     ss <<
@@ -3418,8 +3420,8 @@ void msrNote::appendScordaturaToNote (
 // #endif
 //
 //   // set measure element voice position
-// #ifdef MF_TRACING_IS_ENABLED
-//   if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gGlobalTraceOahGroup->getTraceMeasurePositions ()) {
 // 		std::stringstream ss;
 //
 //     ss <<
@@ -3441,8 +3443,8 @@ void msrNote::appendScordaturaToNote (
 //   voicePosition +=
 //     fMeasureElementSoundingWholeNotes;
 //
-// #ifdef MF_TRACING_IS_ENABLED
-//   if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gGlobalTraceOahGroup->getTraceMeasurePositions ()) {
 // 		 std::stringstream ss;
 //
 //     ss <<
@@ -3474,8 +3476,8 @@ bool msrNote::compareNotesByIncreasingMeasurePosition (
 
 S_msrDynamic msrNote::removeFirstDynamics () // JMI
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceDynamics ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceDynamics ()) {
 		std::stringstream ss;
 
     ss <<
@@ -3505,8 +3507,8 @@ S_msrDynamic msrNote::removeFirstDynamics () // JMI
 
 S_msrWedge msrNote::removeFirstWedge () // JMI
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceWedges ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceWedges ()) {
 		std::stringstream ss;
 
     ss <<
@@ -3536,8 +3538,8 @@ S_msrWedge msrNote::removeFirstWedge () // JMI
 void msrNote::appendSyllableToNote (
   const S_msrSyllable& syllable)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceLyrics ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceLyrics ()) {
 		std::stringstream ss;
 
     ss <<
@@ -3559,8 +3561,8 @@ void msrNote::appendSyllableToNote (
 void msrNote::appendHarmonyToNote (
   const S_msrHarmony& harmony)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceHarmonies ()) {
     std::stringstream ss;
 
     ss <<
@@ -3579,10 +3581,11 @@ void msrNote::appendHarmonyToNote (
 
   // set the harmony's whole notes duration
   // change the harmony whole notes if it belongs to a tuplet ??? utf8.xml JMI v0.9.66
-  harmony->
-    setMeasureElementSoundingWholeNotes (
-      fMeasureElementSoundingWholeNotes,
-      "appendHarmonyToNote()");
+  // JMI v0.9.67 NOT if there are several harmonies with offsets on the same note -- HARMFUL!
+//   harmony->
+//     setMeasureElementSoundingWholeNotes (
+//       fMeasureElementSoundingWholeNotes,
+//       "appendHarmonyToNote()");
 
   fNoteHarmoniesList.push_back (harmony);
 
@@ -3591,11 +3594,11 @@ void msrNote::appendHarmonyToNote (
 //     setHarmonyUpLinkToNote (this);
 }
 
-void msrNote::appendFiguredBassToNoteFiguredBassesList (
+void msrNote::appendFiguredBassToNote (
   const S_msrFiguredBass& figuredBass)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceFiguredBasses ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceFiguredBasses ()) {
 		std::stringstream ss;
 
     ss <<
@@ -3614,10 +3617,11 @@ void msrNote::appendFiguredBassToNoteFiguredBassesList (
 
   // set the figured bass's whole notes duration
   // change the figured bass whole notes if it belongs to a tuplet ??? utf8.xml JMI v0.9.66
+  // JMI v0.9.67 NOT if there are several figured basses with offsets on the same note -- HARMFUL!
   figuredBass->
     setMeasureElementSoundingWholeNotes (
       fMeasureElementSoundingWholeNotes,
-      "appendFiguredBassToNoteFiguredBassesList()");
+      "appendFiguredBassToNote()");
 
   fNoteFiguredBassesList.push_back (figuredBass);
 
@@ -3628,8 +3632,9 @@ void msrNote::appendFiguredBassToNoteFiguredBassesList (
 
 void msrNote::acceptIn (basevisitor* v)
 {
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "% ==> msrNote::acceptIn ()" <<
@@ -3639,12 +3644,14 @@ void msrNote::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
+#endif
 
   if (visitor<S_msrNote>*
     p =
       dynamic_cast<visitor<S_msrNote>*> (v)) {
         S_msrNote elem = this;
 
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
@@ -3656,14 +3663,16 @@ void msrNote::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
+#endif
         p->visitStart (elem);
   }
 }
 
 void msrNote::acceptOut (basevisitor* v)
 {
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "% ==> msrNote::acceptOut ()" <<
@@ -3673,12 +3682,14 @@ void msrNote::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
+#endif
 
   if (visitor<S_msrNote>*
     p =
       dynamic_cast<visitor<S_msrNote>*> (v)) {
         S_msrNote elem = this;
 
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
@@ -3690,6 +3701,7 @@ void msrNote::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
+#endif
         p->visitEnd (elem);
   }
 }
@@ -3710,13 +3722,13 @@ void msrNote::browseData (basevisitor* v)
             getInhibitGraceNotesGroupsBeforeBrowsing ();
 
       if (inhibitGraceNotesGroupsBeforeBrowsing) {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
         if (
           gGlobalMsrOahGroup->getTraceMsrVisitors ()
             ||
-          gGlobalTracingOahGroup->getTraceNotes ()
+          gGlobalTraceOahGroup->getTraceNotes ()
             ||
-          gGlobalTracingOahGroup->getTraceGraceNotes ()
+          gGlobalTraceOahGroup->getTraceGraceNotes ()
         ) {
           std::stringstream ss;
 
@@ -4135,13 +4147,13 @@ void msrNote::browseData (basevisitor* v)
           score->getInhibitGraceNotesGroupsAfterBrowsing ();
 
       if (inhibitGraceNotesGroupsAfterBrowsing) {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
         if (
           gGlobalMsrOahGroup->getTraceMsrVisitors ()
             ||
-          gGlobalTracingOahGroup->getTraceNotes ()
+          gGlobalTraceOahGroup->getTraceNotes ()
             ||
-          gGlobalTracingOahGroup->getTraceGraceNotes ()
+          gGlobalTraceOahGroup->getTraceGraceNotes ()
         ) {
           std::stringstream ss;
 
@@ -5865,7 +5877,7 @@ void msrNote::printFull (std::ostream& os) const
 //
 // // JMI     msrInternalError (
 //     msrInternalWarning (
-//       gGlobalCurrentServiceRunData->getInputSourceName (),
+//       gServiceRunData->getInputSourceName (),
 //       fInputLineNumber,
 //       ss.str ());
 //   }

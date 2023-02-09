@@ -18,7 +18,8 @@
 #include "msrOah2manPage.h"
 
 #include "oahOah.h"
-#include "oahEarlyOptions.h"
+
+#include "waeHandlers.h"
 
 
 namespace MusicFormats
@@ -39,8 +40,8 @@ msrOah2manPage::~msrOah2manPage ()
 //________________________________________________________________________
 void msrOah2manPage::visitStart (S_msrRenamePartAtom& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -75,8 +76,8 @@ void msrOah2manPage::visitStart (S_msrRenamePartAtom& elt)
 
 void msrOah2manPage::visitEnd (S_msrRenamePartAtom& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -95,8 +96,8 @@ void msrOah2manPage::visitEnd (S_msrRenamePartAtom& elt)
 //________________________________________________________________________
 void msrOah2manPage::visitStart (S_msrIgnorePartAtom& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -131,8 +132,8 @@ void msrOah2manPage::visitStart (S_msrIgnorePartAtom& elt)
 
 void msrOah2manPage::visitEnd (S_msrIgnorePartAtom& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -151,8 +152,8 @@ void msrOah2manPage::visitEnd (S_msrIgnorePartAtom& elt)
 //________________________________________________________________________
 void msrOah2manPage::visitStart (S_msrKeepPartAtom& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -187,8 +188,8 @@ void msrOah2manPage::visitStart (S_msrKeepPartAtom& elt)
 
 void msrOah2manPage::visitEnd (S_msrKeepPartAtom& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -207,8 +208,8 @@ void msrOah2manPage::visitEnd (S_msrKeepPartAtom& elt)
 //________________________________________________________________________
 void msrOah2manPage::visitStart (S_msrPitchesLanguageAtom& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -243,8 +244,8 @@ void msrOah2manPage::visitStart (S_msrPitchesLanguageAtom& elt)
 
 void msrOah2manPage::visitEnd (S_msrPitchesLanguageAtom& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<

@@ -25,9 +25,10 @@
 #include "msrMeasureConstants.h"
 
 #include "oahOah.h"
-#include "oahEarlyOptions.h"
 
 #include "msrOah.h"
+
+#include "waeHandlers.h"
 
 
 namespace MusicFormats
@@ -78,7 +79,7 @@ S_msrLineBreak msrLineBreak::create (
   return
     msrLineBreak::create (
       inputLineNumber,
-      gGlobalNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
+      gNullMeasure, // set later in setMeasureElementUpLinkToMeasure()
       nextBarNumber,
       userSelectedLineBreakKind);
 }
@@ -96,8 +97,8 @@ msrLineBreak::msrLineBreak (
 
   fUserSelectedLineBreakKind = userSelectedLineBreakKind;
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceLineBreaks ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceLineBreaks ()) {
 		std::stringstream ss;
 
     ss <<
@@ -129,11 +130,11 @@ void msrLineBreak::setLineBreakUpLinkToMeasure (
     "measure is null");
 #endif
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceWholeNotes ()) {
     ++gIndenter;
 
-    gLogStream <<
+    gLog <<
       "==> Setting the uplink to measure of line break " <<
       asString () <<
       " to measure " << measure->asString () <<
@@ -150,8 +151,9 @@ void msrLineBreak::setLineBreakUpLinkToMeasure (
 
 void msrLineBreak::acceptIn (basevisitor* v)
 {
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "% ==> msrLineBreak::acceptIn ()" <<
@@ -161,12 +163,14 @@ void msrLineBreak::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
+#endif
 
   if (visitor<S_msrLineBreak>*
     p =
       dynamic_cast<visitor<S_msrLineBreak>*> (v)) {
         S_msrLineBreak elem = this;
 
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
@@ -178,14 +182,16 @@ void msrLineBreak::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
+#endif
         p->visitStart (elem);
   }
 }
 
 void msrLineBreak::acceptOut (basevisitor* v)
 {
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "% ==> msrLineBreak::acceptOut ()" <<
@@ -195,12 +201,14 @@ void msrLineBreak::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
+#endif
 
   if (visitor<S_msrLineBreak>*
     p =
       dynamic_cast<visitor<S_msrLineBreak>*> (v)) {
         S_msrLineBreak elem = this;
 
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
@@ -212,6 +220,7 @@ void msrLineBreak::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
+#endif
         p->visitEnd (elem);
   }
 }
@@ -293,7 +302,7 @@ S_msrPageBreak msrPageBreak::create (
   return
     msrPageBreak::create (
       inputLineNumber,
-      gGlobalNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
+      gNullMeasure, // set later in setMeasureElementUpLinkToMeasure()
       userSelectedPageBreakKind);
 }
 
@@ -305,8 +314,8 @@ msrPageBreak::msrPageBreak (
     : msrMeasureElement (
         inputLineNumber)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTracePageBreaks ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTracePageBreaks ()) {
 		std::stringstream ss;
 
     ss <<
@@ -340,11 +349,11 @@ void msrPageBreak::setPageBreakUpLinkToMeasure (
     "measure is null");
 #endif
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceWholeNotes ()) {
     ++gIndenter;
 
-    gLogStream <<
+    gLog <<
       "==> Setting the uplink to measure of page break " <<
       asString () <<
       " to measure " << measure->asString () <<
@@ -361,8 +370,9 @@ void msrPageBreak::setPageBreakUpLinkToMeasure (
 
 void msrPageBreak::acceptIn (basevisitor* v)
 {
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "% ==> msrPageBreak::acceptIn ()" <<
@@ -372,12 +382,14 @@ void msrPageBreak::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
+#endif
 
   if (visitor<S_msrPageBreak>*
     p =
       dynamic_cast<visitor<S_msrPageBreak>*> (v)) {
         S_msrPageBreak elem = this;
 
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
@@ -389,14 +401,16 @@ void msrPageBreak::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
+#endif
         p->visitStart (elem);
   }
 }
 
 void msrPageBreak::acceptOut (basevisitor* v)
 {
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "% ==> msrPageBreak::acceptOut ()" <<
@@ -406,12 +420,14 @@ void msrPageBreak::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
+#endif
 
   if (visitor<S_msrPageBreak>*
     p =
       dynamic_cast<visitor<S_msrPageBreak>*> (v)) {
         S_msrPageBreak elem = this;
 
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
@@ -423,6 +439,7 @@ void msrPageBreak::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
+#endif
         p->visitEnd (elem);
   }
 }

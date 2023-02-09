@@ -19,12 +19,13 @@
 #include "bsrLines.h"
 
 #include "oahOah.h"
-#include "oahEarlyOptions.h"
 
 #include "bsrOah.h"
 #include "msr2bsrOah.h"
 
 #include "bsrBrowsers.h"
+
+#include "waeHandlers.h"
 
 
 namespace MusicFormats
@@ -58,7 +59,7 @@ bsrLine::bsrLine (
 
   fASpaceIsNeededInLine = true;
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceLines ()) {
 		std::stringstream ss;
 
@@ -81,7 +82,7 @@ bsrLine::~bsrLine ()
 
 S_bsrLine bsrLine::createLineNewbornClone ()
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceLines ()) {
 		std::stringstream ss;
 
@@ -183,9 +184,9 @@ void bsrLine::insertElementBeforeLastElementOfLine (
 
 void bsrLine::appendSpacesToLine (S_bsrSpaces spaces)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceSpaces () || gGlobalBsrOahGroup->getTraceLines ()) {
-    gLogStream <<
+    gLog <<
       "Appending spaces '" <<
       spaces->asShortString () <<
       "' to line '" <<
@@ -200,8 +201,8 @@ void bsrLine::appendSpacesToLine (S_bsrSpaces spaces)
 
 void bsrLine::appendKeyToLine (S_bsrKey key)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceKeys ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceKeys ()) {
 		std::stringstream ss;
 
     ss <<
@@ -219,8 +220,8 @@ void bsrLine::appendKeyToLine (S_bsrKey key)
 
 void bsrLine::appendTimeSignatureToLine (S_bsrTimeSignature timeSignature)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceTimeSignatures ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceTimeSignatures ()) {
 		std::stringstream ss;
 
     ss <<
@@ -239,8 +240,8 @@ void bsrLine::appendTimeSignatureToLine (S_bsrTimeSignature timeSignature)
 
 void bsrLine::insertTimeBeforeLastElementOfLine (S_bsrTimeSignature timeSignature)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceTimeSignatures ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceTimeSignatures ()) {
 		std::stringstream ss;
 
     ss <<
@@ -259,8 +260,8 @@ void bsrLine::insertTimeBeforeLastElementOfLine (S_bsrTimeSignature timeSignatur
 
 void bsrLine::appendTempoToLine (S_bsrTempo tempo)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceTempos ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceTempos ()) {
 		std::stringstream ss;
 
     ss <<
@@ -278,9 +279,9 @@ void bsrLine::appendTempoToLine (S_bsrTempo tempo)
 
 void bsrLine::appendMeasureToLine (S_bsrMeasure measure)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasures () || gGlobalBsrOahGroup->getTraceLines ()) {
-    gLogStream <<
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMeasures () || gGlobalBsrOahGroup->getTraceLines ()) {
+    gLog <<
       "Appending measure '" <<
       measure->asShortString () <<
       "' to line '" <<
@@ -343,8 +344,8 @@ void bsrLine::appendLineElementToLastMeasureOfLine (
 
 void bsrLine::appendNoteToLine (S_bsrNote note)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceNotes ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceNotes ()) {
 		std::stringstream ss;
 
     ss <<
@@ -417,7 +418,7 @@ int bsrLine::fetchCellsNumber () const
 
 void bsrLine::acceptIn (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
 		std::stringstream ss;
 
@@ -437,7 +438,7 @@ void bsrLine::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_bsrLine>*> (v)) {
         S_bsrLine elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           std::stringstream ss;
 
@@ -456,7 +457,7 @@ void bsrLine::acceptIn (basevisitor* v)
 
 void bsrLine::acceptOut (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
 		std::stringstream ss;
 
@@ -476,7 +477,7 @@ void bsrLine::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_bsrLine>*> (v)) {
         S_bsrLine elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           std::stringstream ss;
 

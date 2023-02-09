@@ -55,6 +55,8 @@
 
 #include "musicxml2guidoInterface.h"
 
+#include "waeHandlers.h"
+
 
 namespace MusicFormats
 {
@@ -66,7 +68,7 @@ static mfMusicformatsErrorKind xmlFile2guidoWithHandler (
   std::ostream&       err,
   const S_oahHandler& handler)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsr ()) {
 		std::stringstream ss;
 
@@ -79,12 +81,12 @@ static mfMusicformatsErrorKind xmlFile2guidoWithHandler (
 
     ++gIndenter;
 
-    sxmlfile->print (gLogStream);
-    gLogStream << std::endl << std::endl;
+    sxmlfile->print (gLog);
+    gLog << std::endl << std::endl;
 
     --gIndenter;
 
-    gLogStream <<
+    gLog <<
       "<!-- ----------------------------------------------------------- -->" <<
       std::endl << std::endl;
 
@@ -97,7 +99,7 @@ static mfMusicformatsErrorKind xmlFile2guidoWithHandler (
   // has quiet mode been requested?
   // ------------------------------------------------------
 
-  if (gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
+  if (gEarlyOptions.getEarlyQuietOption ()) {
     // disable all trace and display options
     handler->
       enforceHandlerQuietness ();
@@ -127,11 +129,11 @@ static mfMusicformatsErrorKind xmlFile2guidoWithHandler (
         "Create the skeleton of the first MSR from the originalMxsr");
   }
   catch (mxsr2msrException& e) {
-    mfDisplayException (e, gOutputStream);
+    mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
   catch (std::exception& e) {
-    mfDisplayException (e, gOutputStream);
+    mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
 
@@ -139,11 +141,11 @@ static mfMusicformatsErrorKind xmlFile2guidoWithHandler (
   // ------------------------------------------------------
 
   if (gGlobalXml2gmnInsiderOahGroup->getQuitAfterPass2a ()) {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
     gWaeHandler->waeTrace (
       err,
       __FILE__, __LINE__,
-      gWaeHandler->quittingAfterPass (mfPassIDKind::kMfPassID_2a));
+      gLanguage->quittingAfterPass (mfPassIDKind::kMfPassID_2a));
 #endif
 
     return mfMusicformatsErrorKind::kMusicformatsError_NONE;
@@ -158,14 +160,14 @@ static mfMusicformatsErrorKind xmlFile2guidoWithHandler (
       originalMxsr,
       firstMsrScore,
         mfPassIDKind::kMfPassID_2b,
-        gWaeHandler->populateTheMSRSqueletonFromMusicXMLData ());
+        gLanguage->populateTheMSRSqueletonFromMusicXMLData ());
   }
   catch (mxsr2msrException& e) {
-    mfDisplayException (e, gOutputStream);
+    mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
   catch (std::exception& e) {
-    mfDisplayException (e, gOutputStream);
+    mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
 
@@ -173,11 +175,11 @@ static mfMusicformatsErrorKind xmlFile2guidoWithHandler (
   // ------------------------------------------------------
 
   if (gGlobalXml2gmnInsiderOahGroup->getQuitAfterPass2b ()) {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
     gWaeHandler->waeTrace (
       err,
       __FILE__, __LINE__,
-      gWaeHandler->quittingAfterPass (mfPassIDKind::kMfPassID_2b));
+      gLanguage->quittingAfterPass (mfPassIDKind::kMfPassID_2b));
 #endif
 
     return mfMusicformatsErrorKind::kMusicformatsError_NONE;
@@ -195,14 +197,14 @@ static mfMusicformatsErrorKind xmlFile2guidoWithHandler (
         gGlobalMsrOahGroup,
         gGlobalMsr2msrOahGroup,
         mfPassIDKind::kMfPassID_3,
-        gWaeHandler->convertTheFirstMSRIntoASecondMSR ());
+        gLanguage->convertTheFirstMSRIntoASecondMSR ());
   }
   catch (mxsr2msrException& e) {
-    mfDisplayException (e, gOutputStream);
+    mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
   catch (std::exception& e) {
-    mfDisplayException (e, gOutputStream);
+    mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
 
@@ -210,11 +212,11 @@ static mfMusicformatsErrorKind xmlFile2guidoWithHandler (
   // ------------------------------------------------------
 
   if (gGlobalXml2gmnInsiderOahGroup->getQuitAfterPass3 ()) {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
     gWaeHandler->waeTrace (
       err,
       __FILE__, __LINE__,
-      gWaeHandler->quittingAfterPass (mfPassIDKind::kMfPassID_3));
+      gLanguage->quittingAfterPass (mfPassIDKind::kMfPassID_3));
 #endif
 
     return mfMusicformatsErrorKind::kMusicformatsError_NONE;
@@ -235,11 +237,11 @@ static mfMusicformatsErrorKind xmlFile2guidoWithHandler (
         mfTimingItemKind::kMandatory);
   }
   catch (mxsr2msrException& e) {
-    mfDisplayException (e, gOutputStream);
+    mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
   catch (std::exception& e) {
-    mfDisplayException (e, gOutputStream);
+    mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
 
@@ -260,11 +262,11 @@ static mfMusicformatsErrorKind xmlFile2guidoWithHandler (
       "Convert the MXSR into Guido text");
   }
   catch (mxsr2msrException& e) {
-    mfDisplayException (e, gOutputStream);
+    mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
   catch (std::exception& e) {
-    mfDisplayException (e, gOutputStream);
+    mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
 
@@ -290,8 +292,8 @@ static mfMusicformatsErrorKind xmlFile2guidoWithOptionsAndArguments (
   }
 
   else {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
   err <<
     "xmlFile2guido(), sxmlfile is NULL" <<
     std::endl;
@@ -318,8 +320,8 @@ static mfMusicformatsErrorKind xmlFile2guidoWithOptionsAndArguments (
 
   // print the options and arguments
   // ------------------------------------------------------
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<
@@ -330,17 +332,17 @@ static mfMusicformatsErrorKind xmlFile2guidoWithOptionsAndArguments (
   // apply early options if any
   // ------------------------------------------------------
 
-  gGlobalOahEarlyOptions.applyEarlyOptionsIfPresentInOptionsAndArguments (
+  gEarlyOptions.applyEarlyOptionsIfPresentInOptionsAndArguments (
     handlerOptionsAndArguments);
 
   // has the '-insider' option been used?
   // ------------------------------------------------------
 
   Bool insiderOption =
-    gGlobalOahEarlyOptions.getEarlyInsiderOption ();
+    gEarlyOptions.getEarlyInsiderOption ();
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<
@@ -385,9 +387,9 @@ static mfMusicformatsErrorKind xmlFile2guidoWithOptionsAndArguments (
   // create the global run data
   // ------------------------------------------------------
 
-  gGlobalCurrentServiceRunData =
+  setGlobalServiceRunData (
     mfServiceRunData::create (
-      serviceName);
+      serviceName));
 
   // handle the command line options and arguments
   // ------------------------------------------------------
@@ -411,17 +413,17 @@ static mfMusicformatsErrorKind xmlFile2guidoWithOptionsAndArguments (
     } // switch
   }
   catch (mfOahException& e) {
-    mfDisplayException (e, gOutputStream);
+    mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidOption;
   }
   catch (std::exception& e) {
-    mfDisplayException (e, gOutputStream);
+    mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
 
   // check indentation
   if (gIndenter != 0) {
-    gLogStream <<
+    gLog <<
       "### " <<
       serviceName <<
       " gIndenter value after options ands arguments checking: " <<
@@ -456,7 +458,7 @@ EXP mfMusicformatsErrorKind musicxmlFile2guido (
       createSXMLFileFromFile (
         fileName,
         mfPassIDKind::kMfPassID_1,
-        gWaeHandler->createAnMXSRFromAMusicXMLFileOrStdin ());
+        gLanguage->createAnMXSRFromAMusicXMLFileOrStdin ());
 
   if (sxmlfile) {
     return
@@ -481,7 +483,7 @@ mfMusicformatsErrorKind convertMusicxmlFile2guidoWithHandler (
       createSXMLFileFromFile (
         fileName,
         mfPassIDKind::kMfPassID_1,
-        gWaeHandler->createAnMXSRFromAMusicXMLFileOrStdin ());
+        gLanguage->createAnMXSRFromAMusicXMLFileOrStdin ());
 
   if (sxmlfile) {
     return
@@ -507,7 +509,7 @@ EXP mfMusicformatsErrorKind musicxmlFd2guido (
       createSXMLFileFromFd (
         fd,
         mfPassIDKind::kMfPassID_1,
-        gWaeHandler->createAnMXSRFromAMusicXMLDescriptor ());
+        gLanguage->createAnMXSRFromAMusicXMLDescriptor ());
 
   if (sxmlfile) {
     return
@@ -532,7 +534,7 @@ mfMusicformatsErrorKind convertMusicxmlFd2guidoWithHandler (
       createSXMLFileFromFd (
         fd,
         mfPassIDKind::kMfPassID_1,
-        gWaeHandler->createAnMXSRFromAMusicXMLDescriptor ());
+        gLanguage->createAnMXSRFromAMusicXMLDescriptor ());
 
   if (sxmlfile) {
     return
@@ -558,7 +560,7 @@ EXP mfMusicformatsErrorKind musicxmlString2guido (
       createSXMLFileFromString (
         buffer,
         mfPassIDKind::kMfPassID_1,
-        gWaeHandler->createAnMXSRFromAMusicXMLBuffer ());
+        gLanguage->createAnMXSRFromAMusicXMLBuffer ());
 
   // call xmlFile2guido() even if sxmlfile is null,
   // to handle the help options if any
@@ -583,7 +585,7 @@ mfMusicformatsErrorKind convertMusicxmlString2guidoWithHandler (
       createSXMLFileFromString (
         buffer,
         mfPassIDKind::kMfPassID_1,
-        gWaeHandler->createAnMXSRFromAMusicXMLBuffer ());
+        gLanguage->createAnMXSRFromAMusicXMLBuffer ());
 
   // call xmlFile2guido() even if sxmlfile is null,
   // to handle the help options if any

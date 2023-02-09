@@ -21,16 +21,14 @@
 #include "oahOah.h"
 #include "oahHarmoniesExtraOah.h"
 
-// MSR
 #include "msrOah.h"
 #include "msr2msrOah.h"
-
-
-// mxsr
 
 #include "guidoGenerationOah.h"
 
 #include "oahEarlyOptions.h"
+
+#include "waeHandlers.h"
 
 
 namespace MusicFormats
@@ -66,9 +64,9 @@ guidoGenerationOahGroup::~guidoGenerationOahGroup ()
 //_______________________________________________________________________________
 void guidoGenerationOahGroup::initializeGuidoGenerationOahGroup ()
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-  gLogStream << std::left <<
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
+  gLog << std::left <<
     "Initializing \"" <<
     fGroupHeader <<
     "\" group" <<
@@ -84,9 +82,9 @@ void guidoGenerationOahGroup::initializeGuidoGenerationOahGroup ()
 
 void guidoGenerationOahGroup::createGuidoSubGroup ()
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-  gLogStream << std::left <<
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
+  gLog << std::left <<
     "Creating insider Guido subgroup in \"" <<
     fGroupHeader <<
     "\"" <<
@@ -139,8 +137,8 @@ R"(Generate barLines in the Guido output.)",
 //______________________________________________________________________________
 void guidoGenerationOahGroup::acceptIn (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -158,8 +156,8 @@ void guidoGenerationOahGroup::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_guidoGenerationOahGroup>*> (v)) {
         S_guidoGenerationOahGroup elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
-        if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -177,8 +175,8 @@ void guidoGenerationOahGroup::acceptIn (basevisitor* v)
 
 void guidoGenerationOahGroup::acceptOut (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -196,8 +194,8 @@ void guidoGenerationOahGroup::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_guidoGenerationOahGroup>*> (v)) {
         S_guidoGenerationOahGroup elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
-        if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -215,8 +213,8 @@ void guidoGenerationOahGroup::acceptOut (basevisitor* v)
 
 void guidoGenerationOahGroup::browseData (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -242,7 +240,7 @@ void guidoGenerationOahGroup::checkGroupOptionsConsistency ()
 void guidoGenerationOahGroup::displayGuidoGenerationOahGroupValues (
   int fieldWidth)
 {
-  gLogStream <<
+  gLog <<
     "The generators options are:" <<
     std::endl;
 
@@ -251,13 +249,13 @@ void guidoGenerationOahGroup::displayGuidoGenerationOahGroupValues (
   // Guido
   // --------------------------------------
 
-  gLogStream << std::left <<
+  gLog << std::left <<
     std::setw (fieldWidth) << "Guido:" <<
     std::endl;
 
   ++gIndenter;
 
-  gLogStream << std::left <<
+  gLog << std::left <<
     std::setw (fieldWidth) <<
     "fGenerateGuidoComments" << ": " <<
     fGenerateGuidoComments <<
@@ -279,8 +277,8 @@ void guidoGenerationOahGroup::displayGuidoGenerationOahGroupValues (
 //______________________________________________________________________________
 S_guidoGenerationOahGroup createGlobalGuidoGenerationOahGroup ()
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<

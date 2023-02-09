@@ -274,7 +274,7 @@ Option
         ++gIndenter;
 
         if (drv.getDisplayOptions ()) {
-          gLogStream <<
+          gLog <<
             "====> option " << $1 <<
             ", line " << drv.getScannerLocation () <<
             std::endl;
@@ -292,7 +292,7 @@ Option
         ++gIndenter;
 
         if (drv.getDisplayOptions ()) {
-          gLogStream <<
+          gLog <<
             "====> option " << $1 << ' ' << $2 <<
             ", line " << drv.getScannerLocation () <<
             std::endl;
@@ -340,7 +340,7 @@ ChoiceDeclaration
         std::string choiceName = $2;
 
         if (drv.getTraceCaseChoiceStatements ()) {
-          gLogStream <<
+          gLog <<
             "====> choice " << choiceName << ": " << "..." <<
             ", line " << drv.getScannerLocation () <<
             std::endl;
@@ -389,7 +389,7 @@ ChoiceDeclaration
     SEMICOLON
       {
         if (drv.getTraceCaseChoiceStatements ()) {
-          gLogStream <<
+          gLog <<
             "------------------------------------------------------------" <<
             std::endl;
         }
@@ -467,7 +467,7 @@ CaseChoiceStatement
         std::string choiceName = $2;
 
         if (drv.getTraceCaseChoiceStatements ()) {
-          gLogStream <<
+          gLog <<
             "====> case " << choiceName << ": ..." <<
             ", line " << drv.getScannerLocation () <<
             std::endl;
@@ -524,7 +524,7 @@ CaseChoiceStatement
         drv.caseChoiceStatementsStackPop ();
 
         if (drv.getTraceCaseChoiceStatements ()) {
-          gLogStream <<
+          gLog <<
             "------------------------------------------------------------" <<
             std::endl;
         }
@@ -666,7 +666,7 @@ CaseInputStatement
         std::string inputName = "$2 INPUT";
 
         if (drv.getTraceCaseInputStatements ()) {
-          gLogStream <<
+          gLog <<
             "====> case input " << inputName << ": ..." <<
             ", line " << drv.getScannerLocation () <<
             std::endl;
@@ -723,7 +723,7 @@ CaseInputStatement
         drv.caseInputStatementsStackPop ();
 
         if (drv.getTraceCaseInputStatements ()) {
-          gLogStream <<
+          gLog <<
             "------------------------------------------------------------" <<
             std::endl;
         }

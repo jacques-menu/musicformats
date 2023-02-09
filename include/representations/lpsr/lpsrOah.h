@@ -400,7 +400,7 @@ class EXP lpsrOahGroup : public oahGroup
     // trace
     // --------------------------------------
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
     void                  setTraceLpsr ()
                               { fTraceLpsr = true; }
     Bool                  getTraceLpsr () const
@@ -693,8 +693,8 @@ class EXP lpsrOahGroup : public oahGroup
     // private methods
     // ------------------------------------------------------
 
-#ifdef MF_TRACING_IS_ENABLED
-    void                  initializeLpsrtracingOah ();
+#ifdef MF_TRACE_IS_ENABLED
+    void                  initializeLpsrTraceOah ();
 #endif
 
     void                  initializeLpsrDisplayOptions ();
@@ -719,7 +719,7 @@ class EXP lpsrOahGroup : public oahGroup
     // trace
     // --------------------------------------
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
     Bool                  fTraceLpsr;
 
     Bool                  fTraceLilypondVersion;

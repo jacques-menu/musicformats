@@ -127,7 +127,7 @@ class msdlParser : public smartable
     // ------------------------------------------------------
 
     // trace
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
     Bool                  fTraceSyntax;
     Bool                  fTraceSyntaxDetails;
 

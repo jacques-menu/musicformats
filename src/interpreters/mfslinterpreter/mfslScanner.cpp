@@ -1436,7 +1436,7 @@ YY_RULE_SETUP
 #line 189 "mfslScanner.ll"
 {
   if (drv.getDisplayTokens ()) {
-    gLogStream <<
+    gLog <<
       "--> " << drv.getScannerLocation () <<
       ": single quoted std::string [" << pStringBuffer << ']' <<
       std::endl;
@@ -1506,7 +1506,7 @@ YY_RULE_SETUP
 #line 235 "mfslScanner.ll"
 {
   if (drv.getDisplayTokens ()) {
-    gLogStream <<
+    gLog <<
       "--> " << drv.getScannerLocation () <<
       ": double quoted std::string [" << pStringBuffer << ']' <<
       std::endl;
@@ -1570,7 +1570,7 @@ YY_RULE_SETUP
 #line 278 "mfslScanner.ll"
 {
   if (drv.getDisplayTokens ()) {
-    gLogStream << "--> " << drv.getScannerLocation () <<
+    gLog << "--> " << drv.getScannerLocation () <<
     " double: " << yytext <<
     std::endl;
   }
@@ -1587,7 +1587,7 @@ YY_RULE_SETUP
 #line 292 "mfslScanner.ll"
 {
   if (drv.getDisplayTokens ()) {
-    gLogStream << "--> " << drv.getScannerLocation () <<
+    gLog << "--> " << drv.getScannerLocation () <<
     " integer: " << yytext <<
     std::endl;
   }
@@ -1604,7 +1604,7 @@ YY_RULE_SETUP
 #line 309 "mfslScanner.ll"
 {
   if (drv.getDisplayTokens ()) {
-    gLogStream << "--> " << drv.getScannerLocation () <<
+    gLog << "--> " << drv.getScannerLocation () <<
     ": " << yytext <<
     std::endl;
   }
@@ -1621,7 +1621,7 @@ YY_RULE_SETUP
 #line 323 "mfslScanner.ll"
 {
   if (drv.getDisplayTokens ()) {
-    gLogStream << "--> " << drv.getScannerLocation () <<
+    gLog << "--> " << drv.getScannerLocation () <<
     ": " << yytext <<
     std::endl;
   }
@@ -1638,7 +1638,7 @@ YY_RULE_SETUP
 #line 337 "mfslScanner.ll"
 {
   if (drv.getDisplayTokens ()) {
-    gLogStream << "--> " << drv.getScannerLocation () <<
+    gLog << "--> " << drv.getScannerLocation () <<
     ": " << yytext <<
     std::endl;
   }
@@ -1655,7 +1655,7 @@ YY_RULE_SETUP
 #line 351 "mfslScanner.ll"
 {
   if (drv.getDisplayTokens ()) {
-    gLogStream << "--> " << drv.getScannerLocation () <<
+    gLog << "--> " << drv.getScannerLocation () <<
     ": " << yytext <<
     std::endl;
   }
@@ -1672,7 +1672,7 @@ YY_RULE_SETUP
 #line 365 "mfslScanner.ll"
 {
   if (drv.getDisplayTokens ()) {
-    gLogStream << "--> " << drv.getScannerLocation () <<
+    gLog << "--> " << drv.getScannerLocation () <<
     ": " << yytext <<
     std::endl;
   }
@@ -1689,7 +1689,7 @@ YY_RULE_SETUP
 #line 379 "mfslScanner.ll"
 {
   if (drv.getDisplayTokens ()) {
-    gLogStream << "--> " << drv.getScannerLocation () <<
+    gLog << "--> " << drv.getScannerLocation () <<
     ": " << yytext <<
     std::endl;
   }
@@ -1706,7 +1706,7 @@ YY_RULE_SETUP
 #line 393 "mfslScanner.ll"
 {
   if (drv.getDisplayTokens ()) {
-    gLogStream << "--> " << drv.getScannerLocation () <<
+    gLog << "--> " << drv.getScannerLocation () <<
     ": " << yytext <<
     std::endl;
   }
@@ -1723,7 +1723,7 @@ YY_RULE_SETUP
 #line 409 "mfslScanner.ll"
 {
   if (drv.getDisplayTokens ()) {
-    gLogStream << "--> " << drv.getScannerLocation () <<
+    gLog << "--> " << drv.getScannerLocation () <<
     ": name [" << yytext << ']' <<
     std::endl;
   }
@@ -1742,7 +1742,7 @@ YY_RULE_SETUP
 #line 426 "mfslScanner.ll"
 {
   if (drv.getDisplayTokens ()) {
-    gLogStream << "--> " << drv.getScannerLocation () <<
+    gLog << "--> " << drv.getScannerLocation () <<
     ": option [" << yytext << ']' <<
     std::endl;
   }
@@ -1758,7 +1758,7 @@ YY_RULE_SETUP
 #line 441 "mfslScanner.ll"
 {
   if (drv.getDisplayTokens ()) {
-    gLogStream << "--> " << drv.getScannerLocation () <<
+    gLog << "--> " << drv.getScannerLocation () <<
     ": '" << yytext << '\'' <<
     std::endl;
   }
@@ -1775,7 +1775,7 @@ YY_RULE_SETUP
 #line 455 "mfslScanner.ll"
 {
   if (drv.getDisplayTokens ()) {
-    gLogStream << "--> " << drv.getScannerLocation () <<
+    gLog << "--> " << drv.getScannerLocation () <<
     ": '" << yytext << '\'' <<
     std::endl;
   }
@@ -1792,7 +1792,7 @@ YY_RULE_SETUP
 #line 469 "mfslScanner.ll"
 {
   if (drv.getDisplayTokens ()) {
-    gLogStream << "--> " << drv.getScannerLocation () <<
+    gLog << "--> " << drv.getScannerLocation () <<
     ": '" << yytext << '\'' <<
     std::endl;
   }
@@ -1809,7 +1809,7 @@ YY_RULE_SETUP
 #line 483 "mfslScanner.ll"
 {
   if (drv.getDisplayTokens ()) {
-    gLogStream << "--> " << drv.getScannerLocation () <<
+    gLog << "--> " << drv.getScannerLocation () <<
     ": '" << yytext << '\'' <<
     std::endl;
   }
@@ -1826,7 +1826,7 @@ YY_RULE_SETUP
 #line 497 "mfslScanner.ll"
 {
   if (drv.getDisplayTokens ()) {
-    gLogStream << "--> " << drv.getScannerLocation () <<
+    gLog << "--> " << drv.getScannerLocation () <<
     ": '" << yytext << '\'' <<
     std::endl;
   }
@@ -1843,7 +1843,7 @@ YY_RULE_SETUP
 #line 511 "mfslScanner.ll"
 {
   if (drv.getDisplayTokens ()) {
-    gLogStream << "--> " << drv.getScannerLocation () <<
+    gLog << "--> " << drv.getScannerLocation () <<
     ": '" << yytext << '\'' <<
     std::endl;
   }
@@ -3018,7 +3018,7 @@ void mfslDriver::scanBegin ()
 
       if (errorCString != nullptr) {
         ss <<
-          gWaeHandler->cannotOpenScriptForWriting (fScriptName) <<
+          gLanguage->cannotOpenScriptForWriting (fScriptName) <<
           ": " <<
           errorCString <<
           std::endl;

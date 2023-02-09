@@ -28,6 +28,8 @@
 
 #include "Mikrokosmos3WanderingRegularHandler.h"
 
+#include "waeHandlers.h"
+
 
 namespace MusicFormats
 {
@@ -73,7 +75,7 @@ Mikrokosmos3WanderingRegularHandler::Mikrokosmos3WanderingRegularHandler (
 
 /*
   // print the options handler initial state
-  gLogStream <<
+  gLog <<
     "Mikrokosmos3WanderingRegularHandler \"" <<
     fHandlerHeader <<
     "\" has been initialized as:" <<
@@ -81,16 +83,16 @@ Mikrokosmos3WanderingRegularHandler::Mikrokosmos3WanderingRegularHandler (
 
   ++gIndenter;
 
-  gLogStream <<
+  gLog <<
     "===> printHelp():" <<
     std::endl;
-  this->printHelp (gOutputStream); // JMI
+  this->printHelp (gOutput); // JMI
 
   --gIndenter;
 */
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
     // JMI ???
   }
 #endif
@@ -101,8 +103,8 @@ Mikrokosmos3WanderingRegularHandler::~Mikrokosmos3WanderingRegularHandler ()
 
 void Mikrokosmos3WanderingRegularHandler::createRegularHandlerGroups ()
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<
@@ -117,10 +119,10 @@ void Mikrokosmos3WanderingRegularHandler::createRegularHandlerGroups ()
   }
 #endif
 
-#ifdef MF_TRACING_IS_ENABLED
-  // create the tracing OAH group
+#ifdef MF_TRACE_IS_ENABLED
+  // create the trace OAH group
   appendGroupToHandler (
-    createGlobalTracingOahGroup (
+    createGlobalTraceOahGroup (
       this));
 #endif
 
@@ -213,8 +215,8 @@ void Mikrokosmos3WanderingRegularHandler::createRegularHandlerGroups ()
   createFiguredBassRegularGroup ();
   */
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<
@@ -475,7 +477,7 @@ void Mikrokosmos3WanderingRegularHandler::createOahRegularGroup ()
   registerAtomInRegularSubgroup (K_INSIDER_OPTION_LONG_NAME, subGroup);
 //  registerAtomInRegularSubgroup (K_REGULAR_OPTION_LONG_NAME, subGroup);
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   registerAtomInRegularSubgroup (K_TRACE_EARLY_OPTIONS_OPTION_LONG_NAME, subGroup);
   registerAtomInRegularSubgroup (K_OAH_VERBOSE_MODE_OPTION_LONG_NAME, subGroup);
 #endif
@@ -549,7 +551,7 @@ void Mikrokosmos3WanderingRegularHandler::createOahRegularGroup ()
       break;
 
     case mfMultiGenerationOutputKind::kGenerationMusicXML:
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   // JMI ???
       registerAtomInRegularSubgroup ("trace-encoding", subGroup);
       registerAtomInRegularSubgroup ("trace-divisions", subGroup);
@@ -560,7 +562,7 @@ void Mikrokosmos3WanderingRegularHandler::createOahRegularGroup ()
       break;
 
     case mfMultiGenerationOutputKind::kGenerationGuido:
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   // JMI ???
       registerAtomInRegularSubgroup ("trace-encoding", subGroup);
       registerAtomInRegularSubgroup ("trace-divisions", subGroup);
@@ -1434,8 +1436,8 @@ void Mikrokosmos3WanderingRegularHandler::createFiguredBassRegularGroup ()
 //______________________________________________________________________________
 void Mikrokosmos3WanderingRegularHandler::checkOptionsAndArguments () const
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<

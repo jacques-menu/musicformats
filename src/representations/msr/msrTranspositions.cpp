@@ -22,13 +22,14 @@
 #include "mfAssert.h"
 
 #include "oahOah.h"
-#include "oahEarlyOptions.h"
 
 #include "msrOah.h"
 
 #include "msrMeasureConstants.h"
 
 #include "msrTranspositions.h"
+
+#include "waeHandlers.h"
 
 
 namespace MusicFormats
@@ -65,7 +66,7 @@ S_msrTransposition msrTransposition::create (
   return
     msrTransposition::create (
       inputLineNumber,
-      gGlobalNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
+      gNullMeasure, // set later in setMeasureElementUpLinkToMeasure()
       transposeDiatonic,
       transposeChromatic,
       transposeOctaveChange,
@@ -87,8 +88,8 @@ msrTransposition::msrTransposition (
   fTranspositionOctaveChange = transposeOctaveChange;
   fTranspositionDouble       = transposeDouble;
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceTranspositions ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceTranspositions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -118,11 +119,11 @@ void msrTransposition::setTranspositionUpLinkToMeasure (
     "measure is null");
 #endif
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceWholeNotes ()) {
     ++gIndenter;
 
-    gLogStream <<
+    gLog <<
       "==> Setting the uplink to measure of transposition " <<
       asString () <<
       " to measure " << measure->asString () <<
@@ -160,8 +161,9 @@ Bool msrTransposition::isEqualTo (
 
 void msrTransposition::acceptIn (basevisitor* v)
 {
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "% ==> msrTransposition::acceptIn ()" <<
@@ -171,12 +173,14 @@ void msrTransposition::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
+#endif
 
   if (visitor<S_msrTransposition>*
     p =
       dynamic_cast<visitor<S_msrTransposition>*> (v)) {
         S_msrTransposition elem = this;
 
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
@@ -188,14 +192,16 @@ void msrTransposition::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
+#endif
         p->visitStart (elem);
   }
 }
 
 void msrTransposition::acceptOut (basevisitor* v)
 {
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "% ==> msrTransposition::acceptOut ()" <<
@@ -205,12 +211,14 @@ void msrTransposition::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
+#endif
 
   if (visitor<S_msrTransposition>*
     p =
       dynamic_cast<visitor<S_msrTransposition>*> (v)) {
         S_msrTransposition elem = this;
 
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
@@ -222,6 +230,7 @@ void msrTransposition::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
+#endif        
         p->visitEnd (elem);
   }
 }

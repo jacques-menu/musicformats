@@ -18,11 +18,12 @@
 #include "bsrPages.h"
 
 #include "oahOah.h"
-#include "oahEarlyOptions.h"
 
 #include "bsrOah.h"
 
 #include "bsrBrowsers.h"
+
+#include "waeHandlers.h"
 
 
 namespace MusicFormats
@@ -52,7 +53,7 @@ bsrPage::bsrPage (
 
   fLinesPerPage = linesPerPage;
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTracePages ()) {
 		std::stringstream ss;
 
@@ -75,7 +76,7 @@ bsrPage::~bsrPage ()
 
 S_bsrPage bsrPage::createPageNewbornClone ()
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTracePages ()) {
 		std::stringstream ss;
 
@@ -121,7 +122,7 @@ int bsrPage::fetchLineContentsNumber () const
 
 void bsrPage::acceptIn (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
 		std::stringstream ss;
 
@@ -141,7 +142,7 @@ void bsrPage::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_bsrPage>*> (v)) {
         S_bsrPage elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           std::stringstream ss;
 
@@ -160,7 +161,7 @@ void bsrPage::acceptIn (basevisitor* v)
 
 void bsrPage::acceptOut (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
 		std::stringstream ss;
 
@@ -180,7 +181,7 @@ void bsrPage::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_bsrPage>*> (v)) {
         S_bsrPage elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           std::stringstream ss;
 

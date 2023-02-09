@@ -27,7 +27,6 @@
 #include "mfStringsHandling.h"
 
 #include "oahOah.h"
-#include "oahEarlyOptions.h"
 
 #include "msrOah.h"
 
@@ -47,6 +46,8 @@
 #include "msrVoiceStaffChanges.h"
 
 #include "msrBrowsers.h"
+
+#include "waeHandlers.h"
 
 
 namespace MusicFormats
@@ -252,12 +253,9 @@ std::ostream& operator << (std::ostream& os, const S_msrRepeatDescr& elt)
 
 //______________________________________________________________________________
 // constants
-const int msrVoice::K_VOICE_NUMBER_UNKNOWN                      = -99;
+const int msrVoice::K_VOICE_NUMBER_UNKNOWN                 = -99;
 const int msrVoice::K_VOICE_HARMONIES_VOICE_BASE_NUMBER    =  20;
 const int msrVoice::K_VOICE_FIGURED_BASS_VOICE_BASE_NUMBER =  40;
-
-// global variable
-int msrVoice::gVoicesCounter = 0;
 
 S_msrVoice msrVoice::create (
   int               inputLineNumber,
@@ -353,8 +351,8 @@ msrVoice::msrVoice (
   initializeVoice (
     voiceCreateInitialLastSegmentKind);
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceVoices ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceVoices ()) {
 		std::stringstream ss;
 
     ss <<
@@ -387,8 +385,8 @@ msrVoice::msrVoice (
   initializeVoice (
     msrVoiceCreateInitialLastSegmentKind::kCreateInitialLastSegmentYes); // JMI default value
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceVoices ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceVoices ()) {
 		std::stringstream ss;
 
     ss <<
@@ -447,8 +445,8 @@ S_msrScore msrVoice::fetchVoiceUpLinkToScore () const
 void msrVoice::setRegularVoiceStaffSequentialNumber (
   int regularVoiceStaffSequentialNumber)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceVoices ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceVoices ()) {
 		std::stringstream ss;
 
     ss <<
@@ -471,8 +469,8 @@ void msrVoice::setVoiceNameFromNumber (
   int inputLineNumber,
   int voiceNumber)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceVoices ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceVoices ()) {
 		std::stringstream ss;
 
     ss <<
@@ -518,8 +516,8 @@ void msrVoice::setVoiceNameFromNumber (
       break;
   } // switch
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceVoices ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceVoices ()) {
 		std::stringstream ss;
 
     ss <<
@@ -557,8 +555,8 @@ void msrVoice::initializeVoice (
     fInputLineNumber,
     voiceNumber);
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceVoices ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceVoices ()) {
 		std::stringstream ss;
 
     ss <<
@@ -587,7 +585,7 @@ void msrVoice::initializeVoice (
 
           /* JMI ???
         msrError (
-          gGlobalCurrentServiceRunData->getInputSourceName (),
+          gServiceRunData->getInputSourceName (),
           fInputLineNumber,
           __FILE__, __LINE__,
           ss.str ());
@@ -611,7 +609,7 @@ void msrVoice::initializeVoice (
           " is not equal to " << msrPart::K_PART_FIGURED_BASS_VOICE_NUMBER;
 
         msrInternalError (
-          gGlobalCurrentServiceRunData->getInputSourceName (),
+          gServiceRunData->getInputSourceName (),
           fInputLineNumber,
           __FILE__, __LINE__,
           ss.str ());
@@ -696,8 +694,8 @@ void msrVoice::initializeVoice (
       break;
   } // switch
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceVoicesDetails ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceVoicesDetails ()) {
 		std::stringstream ss;
 
     ss <<
@@ -709,7 +707,7 @@ void msrVoice::initializeVoice (
 
     ++gIndenter;
 
-    this->print (gLogStream);
+    this->print (gLog);
 
     --gIndenter;
   }
@@ -721,8 +719,8 @@ void msrVoice::initializeVoice (
 void msrVoice::changeVoiceIdentity ( // after a deep clone is created
   int voiceNumber)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceVoices ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceVoices ()) {
 		std::stringstream ss;
 
     ss <<
@@ -755,8 +753,8 @@ void msrVoice::changeVoiceIdentity ( // after a deep clone is created
 S_msrVoice msrVoice::createVoiceNewbornClone (
   const S_msrStaff& staffClone)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceVoices ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceVoices ()) {
 		std::stringstream ss;
 
     ss <<
@@ -806,8 +804,8 @@ S_msrVoice msrVoice::createVoiceDeepClone (
   int               voiceNumber,
   const S_msrStaff& containingStaff)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceVoices ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceVoices ()) {
 		std::stringstream ss;
 
     ss <<
@@ -833,8 +831,8 @@ S_msrVoice msrVoice::createVoiceDeepClone (
     "containingStaff is null");
 #endif
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceVoicesDetails ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceVoicesDetails ()) {
 		std::stringstream ss;
 
     ss <<
@@ -842,9 +840,9 @@ S_msrVoice msrVoice::createVoiceDeepClone (
       " BEFORE deepClone = " <<
       std::endl;
 
-    print (gLogStream);
+    print (gLog);
 
-    gLogStream <<
+    gLog <<
       std::endl <<
       "****" <<
       std::endl;
@@ -925,8 +923,8 @@ S_msrVoice msrVoice::createVoiceDeepClone (
     fVoiceInitialElementsList.size ();
 
   if (numberOfInitialElements) {
-#ifdef MF_TRACING_IS_ENABLED
-    if (gGlobalTracingOahGroup->getTraceVoices ()) {
+#ifdef MF_TRACE_IS_ENABLED
+    if (gGlobalTraceOahGroup->getTraceVoices ()) {
       std::stringstream ss;
 
       ss <<
@@ -977,7 +975,7 @@ S_msrVoice msrVoice::createVoiceDeepClone (
           "\" initial elements element should be a repeat or a segment";
 
         msrInternalError (
-          gGlobalCurrentServiceRunData->getInputSourceName (),
+          gServiceRunData->getInputSourceName (),
           fInputLineNumber,
           __FILE__, __LINE__,
           ss.str ());
@@ -991,8 +989,8 @@ S_msrVoice msrVoice::createVoiceDeepClone (
   }
 
   else {
-#ifdef MF_TRACING_IS_ENABLED
-    if (gGlobalTracingOahGroup->getTraceVoices ()) {
+#ifdef MF_TRACE_IS_ENABLED
+    if (gGlobalTraceOahGroup->getTraceVoices ()) {
       std::stringstream ss;
 
       ss <<
@@ -1021,8 +1019,8 @@ S_msrVoice msrVoice::createVoiceDeepClone (
     }
   }
   else {
-#ifdef MF_TRACING_IS_ENABLED
-    if (gGlobalTracingOahGroup->getTraceVoices ()) {
+#ifdef MF_TRACE_IS_ENABLED
+    if (gGlobalTraceOahGroup->getTraceVoices ()) {
       std::stringstream ss;
 
       ss <<
@@ -1061,8 +1059,8 @@ S_msrVoice msrVoice::createVoiceDeepClone (
   deepClone->fVoiceUpLinkToStaff =
     containingStaff;
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceVoicesDetails ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceVoicesDetails ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1086,8 +1084,8 @@ S_msrVoice msrVoice::createVoiceDeepClone (
 void msrVoice::setVoiceLastSegmentInVoiceClone (
   const S_msrSegment& segment)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceSegments ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceSegments ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1123,8 +1121,8 @@ void msrVoice::setVoiceLastSegmentInVoiceClone (
 void msrVoice::appendSegmentToVoiceClone ( //JMI unused ???
   const S_msrSegment& segment)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceSegments ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceSegments ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1176,8 +1174,8 @@ void msrVoice::appendSegmentToVoiceClone ( //JMI unused ???
       */
 
     // segment becomes the fVoiceLastSegment
-#ifdef MF_TRACING_IS_ENABLED
-    if (gGlobalTracingOahGroup->getTraceSegments ()) {
+#ifdef MF_TRACE_IS_ENABLED
+    if (gGlobalTraceOahGroup->getTraceSegments ()) {
 	  	std::stringstream ss;
 
       ss <<
@@ -1205,22 +1203,22 @@ void msrVoice::appendSegmentToVoiceClone ( //JMI unused ???
 void msrVoice::setVoiceLastAppendedMeasure (
   const S_msrMeasure& measure)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceSegments ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceSegments ()) {
 		std::stringstream ss;
 
     ss <<
       "Setting voice last appended measure to ";
 
     if (measure) {
-      gLogStream <<
+      gLog <<
         measure->asString ();
     }
     else {
-      gLogStream << "[NONE]";
+      gLog << "[NONE]";
     }
 
-    gLogStream <<
+    gLog <<
       " in voice " <<
       asString () <<
       ", line " << fInputLineNumber <<
@@ -1239,8 +1237,8 @@ void msrVoice::setNextMeasureNumberInVoice (
   int           inputLineNumber,
   const std::string& nextMeasureNumber)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasures ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMeasures ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1266,8 +1264,8 @@ void msrVoice::setNextMeasureNumberInVoice (
   // is there a current multiple full-bar rests in this voice?
   if (fVoiceMultipleFullBarRestsWaitingForItsNextMeasureNumber) {
     // yes
-#ifdef MF_TRACING_IS_ENABLED
-    if (gGlobalTracingOahGroup->getTraceMultipleFullBarRests ()) {
+#ifdef MF_TRACE_IS_ENABLED
+    if (gGlobalTraceOahGroup->getTraceMultipleFullBarRests ()) {
 	  	std::stringstream ss;
 
       ss <<
@@ -1289,8 +1287,8 @@ void msrVoice::setNextMeasureNumberInVoice (
     // is this the last measure in the row?
     if (fVoiceRemainingMultipleFullBarRests == 0) {
       // yes, set waiting multiple full-bar rests's next measure number
-#ifdef MF_TRACING_IS_ENABLED
-      if (gGlobalTracingOahGroup->getTraceMultipleFullBarRests ()) {
+#ifdef MF_TRACE_IS_ENABLED
+      if (gGlobalTraceOahGroup->getTraceMultipleFullBarRests ()) {
         std::stringstream ss;
 
         ss <<
@@ -1332,8 +1330,8 @@ void msrVoice::incrementVoiceCurrentMeasurePuristNumber (
     ++fVoiceCurrentMeasurePuristNumber;
   }
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasures ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMeasures ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1354,8 +1352,8 @@ void msrVoice::incrementVoiceCurrentMeasurePuristNumber (
 void msrVoice::setVoiceFirstMeasure (
   const S_msrMeasure& measure)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasures ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMeasures ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1378,8 +1376,8 @@ void msrVoice::appendMeasureCloneToVoiceClone (
   int          inputLineNumber,
   const S_msrMeasure& measureClone)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasures ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMeasures ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1412,8 +1410,8 @@ void msrVoice::setWholeNotesSinceLastRegularMeasureEnd (
   int             inputLineNumber,
   const Rational& value)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasures ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMeasures ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1438,8 +1436,8 @@ void msrVoice::setCurrentVoiceRepeatPhaseKind (
   msrVoiceRepeatPhaseKind
            afterRepeatComponentPhaseKind)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceRepeats ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceRepeats ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1465,8 +1463,8 @@ void msrVoice::createNewLastSegmentForVoice (
   int           inputLineNumber,
   const std::string& context)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceSegments ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceSegments ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1477,7 +1475,7 @@ void msrVoice::createNewLastSegmentForVoice (
       std::endl;
   }
 
-  if (gGlobalTracingOahGroup->getTraceVoicesDetails ()) {
+  if (gGlobalTraceOahGroup->getTraceVoicesDetails ()) {
     std::string
       combinedContext =
         "createNewLastSegmentForVoice() 1 called from " + context;
@@ -1498,8 +1496,8 @@ void msrVoice::createNewLastSegmentForVoice (
     fVoiceFirstSegment = fVoiceLastSegment;
   }
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceVoicesDetails ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceVoicesDetails ()) {
     std::string
       combinedContext =
         "createNewLastSegmentForVoice() 2 called from " + context;
@@ -1526,8 +1524,8 @@ void msrVoice::createNewLastSegmentFromItsFirstMeasureForVoice (
     fVoiceFirstSegment = fVoiceLastSegment;
   }
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceSegments ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceSegments ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1565,8 +1563,8 @@ void msrVoice::createNewLastSegmentFromItsFirstMeasureForVoice (
       setMeasureIsFirstInVoice ();
   }
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasuresDetails ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMeasuresDetails ()) {
     displayVoice (
       inputLineNumber,
       "createNewLastSegmentFromItsFirstMeasureForVoice()");
@@ -1585,8 +1583,8 @@ S_msrMeasure msrVoice::createAMeasureAndAppendItToVoice (
 
   fVoiceCurrentMeasureNumber = measureNumber;
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasures ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMeasures ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1615,17 +1613,17 @@ S_msrMeasure msrVoice::createAMeasureAndAppendItToVoice (
       "Part_POne_HARMONIES_Staff_Voice_Eleven_HARMONIES"
     )
   ) { // POUSSE JMI
-    gLogStream <<
+    gLog <<
       std::endl <<
       "++++ createAMeasureAndAppendItToVoice() POUSSE, fCallsCounter: " << fCallsCounter << " ++++" <<
       std::endl;
-    this->print (gLogStream);
-    gLogStream <<
+    this->print (gLog);
+    gLog <<
       std::endl;
   }
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasuresDetails ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMeasuresDetails ()) {
     displayVoice (
       inputLineNumber,
       "createAMeasureAndAppendItToVoice() 1");
@@ -1639,8 +1637,8 @@ S_msrMeasure msrVoice::createAMeasureAndAppendItToVoice (
     // yes
 
     // create a measure
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasures ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMeasures ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1668,8 +1666,8 @@ S_msrMeasure msrVoice::createAMeasureAndAppendItToVoice (
         incrementVoiceCurrentMeasureOrdinalNumber ());
 
     // append it to the current multiple full-bar rests
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasures ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMeasures ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1717,8 +1715,8 @@ S_msrMeasure msrVoice::createAMeasureAndAppendItToVoice (
   setVoiceLastAppendedMeasure (
     result);
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasuresDetails ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMeasuresDetails ()) {
     displayVoice (
       inputLineNumber,
       "createAMeasureAndAppendItToVoice() 3");
@@ -1743,7 +1741,7 @@ S_msrVoice msrVoice::createRegularVoiceHarmoniesVoice (
       "\" already has a harmonies voice";
 
     msrInternalError (
-      gGlobalCurrentServiceRunData->getInputSourceName (),
+      gServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
       ss.str ());
@@ -1753,8 +1751,8 @@ S_msrVoice msrVoice::createRegularVoiceHarmoniesVoice (
   int regularVoiceHarmoniesVoiceNumber =
     msrVoice::K_VOICE_HARMONIES_VOICE_BASE_NUMBER + fVoiceNumber;
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceHarmonies ()) {
     std::stringstream ss;
 
     ss <<
@@ -1805,7 +1803,7 @@ S_msrVoice msrVoice::createRegularVoiceHarmoniesVoice (
 //       "\" already has a figured bass voice";
 //
 //     msrInternalError (
-//       gGlobalCurrentServiceRunData->getInputSourceName (),
+//       gServiceRunData->getInputSourceName (),
 //       inputLineNumber,
 //       __FILE__, __LINE__,
 //       ss.str ());
@@ -1815,9 +1813,9 @@ S_msrVoice msrVoice::createRegularVoiceHarmoniesVoice (
 //   int regularVoiceFiguredBassVoiceNumber =
 //     msrVoice::K_VOICE_FIGURED_BASS_VOICE_BASE_NUMBER + fVoiceNumber;
 //
-// #ifdef MF_TRACING_IS_ENABLED
-//   if (gGlobalTracingOahGroup->getTraceFiguredBasses ()) {
-//     gLogStream <<
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gGlobalTraceOahGroup->getTraceFiguredBasses ()) {
+//     gLog <<
 //       "Creating figured bass voice for regular voice \"" <<
 //       getVoiceName () <<
 //       "\" with voice number " <<
@@ -1863,7 +1861,7 @@ S_msrStanza msrVoice::addStanzaToVoiceByItsNumber (
       std::endl;
 
     msrInternalError (
-      gGlobalCurrentServiceRunData->getInputSourceName (),
+      gServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
       ss.str ());
@@ -1891,8 +1889,8 @@ void msrVoice::addStanzaToVoice (const S_msrStanza& stanza)
     stanza->getStanzaNumber ();
 
   // register stanza in this voice
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceLyrics ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceLyrics ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1918,8 +1916,8 @@ void msrVoice::addStanzaToVoiceWithoutCatchUp (const S_msrStanza& stanza)
     stanza->getStanzaNumber ();
 
   // register stanza in this voice
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceLyrics ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceLyrics ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1954,8 +1952,8 @@ S_msrStanza msrVoice::createStanzaInVoiceIfNotYetDone (
 
   else {
     // no, create it and add it to the voice
-#ifdef MF_TRACING_IS_ENABLED
-    if (gGlobalTracingOahGroup->getTraceLyrics ()) {
+#ifdef MF_TRACE_IS_ENABLED
+    if (gGlobalTraceOahGroup->getTraceLyrics ()) {
 	  	std::stringstream ss;
 
       ss <<
@@ -1998,14 +1996,14 @@ S_msrStanza msrVoice::fetchStanzaInVoice (
   else {
     std::stringstream ss;
 
-    gLogStream <<
+    gLog <<
       std::endl << std::endl << std::endl <<
       "VOICEVOICEVOICEVOICEVOICEVOICEVOICEVOICE" <<
       std::endl;
 
-    print (gLogStream);
+    print (gLog);
 
-    gLogStream <<
+    gLog <<
       "VOICEVOICEVOICEVOICEVOICEVOICEVOICEVOICE" <<
       std::endl << std::endl << std::endl <<
       std::endl;
@@ -2021,7 +2019,7 @@ S_msrStanza msrVoice::fetchStanzaInVoice (
       std::endl;
 
     msrInternalError (
-      gGlobalCurrentServiceRunData->getInputSourceName (),
+      gServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
       ss.str ());
@@ -2054,8 +2052,8 @@ void msrVoice::setVoiceCurrentTimeSignature (
 void msrVoice::appendMusicXMLPrintLayoutToVoice (
   const S_msrMusicXMLPrintLayout& musicXMLPrintLayout)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMusicXMLPrintLayouts ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMusicXMLPrintLayouts ()) {
 		std::stringstream ss;
 
     ss <<
@@ -2080,8 +2078,8 @@ void msrVoice::appendMusicXMLPrintLayoutToVoice (
 void msrVoice::appendClefToVoice  (
   const S_msrClef& clef)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceClefs ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceClefs ()) {
 		std::stringstream ss;
 
     ss <<
@@ -2118,8 +2116,8 @@ void msrVoice::appendClefToVoice  (
 void msrVoice::appendKeyToVoice (
   const S_msrKey& key)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceKeys ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceKeys ()) {
 		std::stringstream ss;
 
     ss <<
@@ -2142,8 +2140,8 @@ void msrVoice::appendKeyToVoice (
   fVoiceLastSegment->
     appendKeyToSegment (key);
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceKeysDetails ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceKeysDetails ()) {
     displayVoice ( // JMI TEMP
       key->getInputLineNumber (),
       "appendKeyToVoice()");
@@ -2155,8 +2153,8 @@ void msrVoice::appendKeyToVoice (
 
 void msrVoice::appendTimeSignatureToVoice (
   const S_msrTimeSignature& timeSignature){
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceTimeSignatures ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceTimeSignatures ()) {
 		std::stringstream ss;
 
     ss <<
@@ -2185,8 +2183,8 @@ void msrVoice::appendTimeSignatureToVoice (
 void msrVoice::appendTimeSignatureToVoiceClone (
   const S_msrTimeSignature& timeSignature) // superflous ??? JMI
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceTimeSignatures ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceTimeSignatures ()) {
 		std::stringstream ss;
 
     ss <<
@@ -2216,8 +2214,8 @@ void msrVoice::insertHiddenMeasureAndBarLineInVoiceClone (
   int             inputLineNumber,
   const Rational& measurePosition)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasures ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMeasures ()) {
 		std::stringstream ss;
 
     ss <<
@@ -2331,7 +2329,7 @@ S_msrNote msrVoice::fetchVoiceFirstNonGraceNote () const
               "'";
 
             msrInternalError (
-              gGlobalCurrentServiceRunData->getInputSourceName (),
+              gServiceRunData->getInputSourceName (),
               fInputLineNumber,
               __FILE__, __LINE__,
               ss.str ());
@@ -2343,13 +2341,13 @@ S_msrNote msrVoice::fetchVoiceFirstNonGraceNote () const
   }
 
 //     else {
-// #ifdef MF_TRACING_IS_ENABLED
-//       if (true || gGlobalTracingOahGroup->getTraceMeasuresDetails ()) { // KAKA  // JMI v0.9.66
-//         gLogStream <<
+// #ifdef MF_TRACE_IS_ENABLED
+//       if (true || gGlobalTraceOahGroup->getTraceMeasuresDetails ()) { // KAKA  // JMI v0.9.66
+//         gLog <<
 //           "++++++++++ fetchVoiceFirstNonGraceNote(), this voice: ++++++++++" <<
 //           std::endl;
 //         ++gIndenter;
-//         gLogStream << this;;
+//         gLog << this;;
 //         --gIndenter;
 //       }
 // #endif
@@ -2362,7 +2360,7 @@ S_msrNote msrVoice::fetchVoiceFirstNonGraceNote () const
 //         "\", since the latter is empty";
 //
 //       msrInternalError (
-//         gGlobalCurrentServiceRunData->getInputSourceName (),
+//         gServiceRunData->getInputSourceName (),
 //         fInputLineNumber,
 //         __FILE__, __LINE__,
 //         ss.str ());
@@ -2374,8 +2372,8 @@ S_msrNote msrVoice::fetchVoiceFirstNonGraceNote () const
 void msrVoice::setVoiceShortestNoteDuration (
   const Rational& duration)
 {
-#ifdef MF_TRACING_IS_ENABLED
-    if (gGlobalTracingOahGroup->getTraceNotes ()) {
+#ifdef MF_TRACE_IS_ENABLED
+    if (gGlobalTraceOahGroup->getTraceNotes ()) {
 	  	std::stringstream ss;
 
       ss <<
@@ -2397,8 +2395,8 @@ void msrVoice::setVoiceShortestNoteDuration (
 void msrVoice::setVoiceShortestNoteTupletFactor (
   const msrTupletFactor& noteTupletFactor)
 {
-#ifdef MF_TRACING_IS_ENABLED
-    if (gGlobalTracingOahGroup->getTraceNotes ()) {
+#ifdef MF_TRACE_IS_ENABLED
+    if (gGlobalTraceOahGroup->getTraceNotes ()) {
 	  	std::stringstream ss;
 
       ss <<
@@ -2459,8 +2457,8 @@ void msrVoice::registerShortestNoteInVoiceIfRelevant (const S_msrNote& note)
         fVoiceShortestNoteTupletFactor);
 */
 
-#ifdef MF_TRACING_IS_ENABLED
-    if (gGlobalTracingOahGroup->getTraceNotes ()) {
+#ifdef MF_TRACE_IS_ENABLED
+    if (gGlobalTraceOahGroup->getTraceNotes ()) {
 	  	std::stringstream ss;
 
       ss <<
@@ -2509,8 +2507,8 @@ void msrVoice::appendHarmonyToVoice (
   int inputLineNumber =
     harmony->getInputLineNumber ();
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceHarmonies ()) {
     std::stringstream ss;
 
     ss <<
@@ -2551,7 +2549,7 @@ void msrVoice::appendHarmonyToVoice (
           "\"";
 
         msrInternalError (
-          gGlobalCurrentServiceRunData->getInputSourceName (),
+          gServiceRunData->getInputSourceName (),
           inputLineNumber,
           __FILE__, __LINE__,
           ss.str ());
@@ -2566,11 +2564,11 @@ void msrVoice::appendHarmonyToVoice (
 void msrVoice::appendHarmonyToHarmoniesVoice (
   const S_msrHarmony& harmony)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   int inputLineNumber =
     harmony->getInputLineNumber ();
 
-  if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
+  if (gGlobalTraceOahGroup->getTraceHarmonies ()) {
     std::stringstream ss;
 
     ss <<
@@ -2601,11 +2599,11 @@ void msrVoice::appendHarmonyToHarmoniesVoice (
 void msrVoice::appendFiguredBassToFiguredBassVoice (
   const S_msrFiguredBass& figuredBass)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   int inputLineNumber =
     figuredBass->getInputLineNumber ();
 
-  if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
+  if (gGlobalTraceOahGroup->getTraceHarmonies ()) {
     std::stringstream ss;
 
     ss <<
@@ -2638,8 +2636,8 @@ void msrVoice::appendHarmonyToVoiceClone (const S_msrHarmony& harmony)
   int inputLineNumber =
     harmony->getInputLineNumber ();
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceHarmonies ()) {
     std::stringstream ss;
 
     ss <<
@@ -2680,7 +2678,7 @@ void msrVoice::appendHarmonyToVoiceClone (const S_msrHarmony& harmony)
           "\"";
 
         msrInternalError (
-          gGlobalCurrentServiceRunData->getInputSourceName (),
+          gServiceRunData->getInputSourceName (),
           inputLineNumber,
           __FILE__, __LINE__,
           ss.str ());
@@ -2697,8 +2695,8 @@ void msrVoice::appendFiguredBassToVoice (
   int inputLineNumber =
     figuredBass->getInputLineNumber ();
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceFiguredBasses ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceFiguredBasses ()) {
 		std::stringstream ss;
 
     ss <<
@@ -2739,7 +2737,7 @@ void msrVoice::appendFiguredBassToVoice (
           "\"";
 
         msrInternalError (
-          gGlobalCurrentServiceRunData->getInputSourceName (),
+          gServiceRunData->getInputSourceName (),
           inputLineNumber,
           __FILE__, __LINE__,
           ss.str ());
@@ -2754,11 +2752,11 @@ void msrVoice::appendFiguredBassToVoice (
 void msrVoice::appendFiguredBassToVoiceClone (
   const S_msrFiguredBass& figuredBass)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   int inputLineNumber =
     figuredBass->getInputLineNumber ();
 
-  if (gGlobalTracingOahGroup->getTraceFiguredBasses ()) {
+  if (gGlobalTraceOahGroup->getTraceFiguredBasses ()) {
 		std::stringstream ss;
 
     ss <<
@@ -2799,7 +2797,7 @@ void msrVoice::appendFiguredBassToVoiceClone (
           "\"";
 
         msrInternalError (
-          gGlobalCurrentServiceRunData->getInputSourceName (),
+          gServiceRunData->getInputSourceName (),
           figuredBass->getInputLineNumber (),
           __FILE__, __LINE__,
           ss.str ());
@@ -2814,8 +2812,8 @@ void msrVoice::padUpToMeasurePositionInVoice (
   int             inputLineNumber,
   const Rational& wholeNotesMeasurePosition)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMeasurePositions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -2867,8 +2865,8 @@ void msrVoice::backupByWholeNotesStepLengthInVoice (
   int             inputLineNumber,
   const Rational& backupTargetMeasureElementMeasurePosition)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceWholeNotes ()) {
 		std::stringstream ss;
 
     ss <<
@@ -2908,8 +2906,8 @@ void msrVoice::appendPaddingNoteToVoice (
   int             inputLineNumber,
   const Rational& forwardStepLength)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceNotes ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceNotes ()) {
 		std::stringstream ss;
 
     ss <<
@@ -2960,8 +2958,8 @@ void msrVoice::appendPaddingNoteToVoice (
 void msrVoice::appendTranspositionToVoice (
   const S_msrTransposition& transposition)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceTranspositions ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceTranspositions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -2983,8 +2981,8 @@ void msrVoice::appendTranspositionToVoice (
 void msrVoice::appendStaffDetailsToVoice (
   const S_msrStaffDetails& staffDetails)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceStaves ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceStaves ()) {
 		std::stringstream ss;
 
     ss <<
@@ -3014,8 +3012,8 @@ void msrVoice::appendStaffDetailsToVoice (
 void msrVoice::appendTempoToVoice (
   const S_msrTempo& tempo)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceTempos ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceTempos ()) {
 		std::stringstream ss;
 
     ss <<
@@ -3038,8 +3036,8 @@ void msrVoice::appendTempoToVoice (
 void msrVoice::appendOctaveShiftToVoice (
   const S_msrOctaveShift& octaveShift)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceOctaveShifts ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceOctaveShifts ()) {
 		std::stringstream ss;
 
     ss <<
@@ -3062,8 +3060,8 @@ void msrVoice::appendOctaveShiftToVoice (
 void msrVoice::appendScordaturaToVoice (
   const S_msrScordatura& scordatura)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceScordaturas ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceScordaturas ()) {
 		std::stringstream ss;
 
     ss <<
@@ -3086,8 +3084,8 @@ void msrVoice::appendAccordionRegistrationToVoice (
   const S_msrAccordionRegistration&
     accordionRegistration)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceAccordionRegistrations ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceAccordionRegistrations ()) {
 		std::stringstream ss;
 
     ss <<
@@ -3111,8 +3109,8 @@ void msrVoice::appendHarpPedalsTuningToVoice (
   const S_msrHarpPedalsTuning&
     harpPedalsTuning)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceHarpPedals ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceHarpPedals ()) {
 		std::stringstream ss;
 
     ss <<
@@ -3135,8 +3133,8 @@ void msrVoice::appendHarpPedalsTuningToVoice (
 void msrVoice::appendRehearsalMarkToVoice (
   const S_msrRehearsalMark& rehearsalMark)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceRehearsalMarks ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceRehearsalMarks ()) {
 		std::stringstream ss;
 
     ss <<
@@ -3157,13 +3155,13 @@ void msrVoice::appendRehearsalMarkToVoice (
 void msrVoice::appendVoiceStaffChangeToVoice (
   const S_msrVoiceStaffChange& voiceStaffChange)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   int inputLineNumber =
     voiceStaffChange->getInputLineNumber ();
 #endif
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceStaffChanges ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceStaffChanges ()) {
 		std::stringstream ss;
 
     ss <<
@@ -3195,8 +3193,8 @@ void msrVoice::appendNoteToVoice (const S_msrNote& note)
   int inputLineNumber =
     note->getInputLineNumber ();
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceNotes ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceNotes ()) {
 		std::stringstream ss;
 
     ss <<
@@ -3232,13 +3230,13 @@ void msrVoice::appendNoteToVoice (const S_msrNote& note)
       "fVoiceLastSegment is null in appendNoteToVoice()";
 
     msrInternalError (
-      gGlobalCurrentServiceRunData->getInputSourceName (),
+      gServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
       ss.str ());
 
-#ifdef MF_TRACING_IS_ENABLED
-    if (gGlobalTracingOahGroup->getTraceNotesDetails ()) {
+#ifdef MF_TRACE_IS_ENABLED
+    if (gGlobalTraceOahGroup->getTraceNotesDetails ()) {
       this->displayVoice (
         inputLineNumber,
         ss.str ());
@@ -3373,13 +3371,13 @@ void msrVoice::appendNoteToVoice (const S_msrNote& note)
 }
 
 void msrVoice::appendNoteToVoiceClone (const S_msrNote& note) {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   int inputLineNumber =
     note->getInputLineNumber ();
 #endif
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceNotes ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceNotes ()) {
 		std::stringstream ss;
 
     ss <<
@@ -3471,8 +3469,8 @@ void msrVoice::appendDoubleTremoloToVoice (
   const S_msrDoubleTremolo& doubleTremolo)
 
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceTremolos ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceTremolos ()) {
 		std::stringstream ss;
 
     ss <<
@@ -3495,8 +3493,8 @@ void msrVoice::appendDoubleTremoloToVoice (
 
 void msrVoice::appendChordToVoice (const S_msrChord& chord)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceChords ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceChords ()) {
 		std::stringstream ss;
 
     ss <<
@@ -3565,8 +3563,8 @@ void msrVoice::appendChordToVoice (const S_msrChord& chord)
 
 void msrVoice::appendTupletToVoice (const S_msrTuplet& tuplet)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceTuplets ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceTuplets ()) {
 		std::stringstream ss;
 
     ss <<
@@ -3604,8 +3602,8 @@ void msrVoice::addGraceNotesGroupBeforeAheadOfVoiceIfNeeded (
   int inputLineNumber =
     graceNotesGroup->getInputLineNumber ();
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceGraceNotes ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceGraceNotes ()) {
 		std::stringstream ss;
 
     ss <<
@@ -3621,12 +3619,12 @@ void msrVoice::addGraceNotesGroupBeforeAheadOfVoiceIfNeeded (
 #endif
 
 /* JMI
-  gLogStream <<
+  gLog <<
     std::endl <<
     "======================= prependGraceNotesToVoice" <<
     std::endl;
-  this->print (gLogStream);
-  gLogStream <<
+  this->print (gLog);
+  gLog <<
     "=======================" <<
     std::endl << std::endl;
   */
@@ -3664,8 +3662,8 @@ void msrVoice::addGraceNotesGroupBeforeAheadOfVoiceIfNeeded (
         getNoteShortcutUpLinkToChord ();
 
   if (firstNoteShortcutUpLinkToChord) {
-#ifdef MF_TRACING_IS_ENABLED
-    if (gGlobalTracingOahGroup->getTraceGraceNotes ()) {
+#ifdef MF_TRACE_IS_ENABLED
+    if (gGlobalTraceOahGroup->getTraceGraceNotes ()) {
 	  	std::stringstream ss;
 
       ss <<
@@ -3706,8 +3704,8 @@ void msrVoice::addGraceNotesGroupBeforeAheadOfVoiceIfNeeded (
   }
 
   else {
-#ifdef MF_TRACING_IS_ENABLED
-    if (gGlobalTracingOahGroup->getTraceGraceNotes ()) {
+#ifdef MF_TRACE_IS_ENABLED
+    if (gGlobalTraceOahGroup->getTraceGraceNotes ()) {
 	  	std::stringstream ss;
 
       ss <<
@@ -3737,8 +3735,8 @@ void msrVoice::addGraceNotesGroupBeforeAheadOfVoiceIfNeeded (
 void msrVoice::appendAfterGraceNotesToVoice (
   S_msrAfterGraceNotes afterGraceNotes)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceGraceNotes ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceGraceNotes ()) {
 		std::stringstream ss;
 
     ss <<
@@ -3761,8 +3759,8 @@ void msrVoice::appendAfterGraceNotesToVoice (
 void msrVoice::prependAfterGraceNotesToVoice (
   S_msrAfterGraceNotes afterGraceNotes)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceGraceNotes ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceGraceNotes ()) {
 		std::stringstream ss;
 
     ss <<
@@ -3790,8 +3788,8 @@ void msrVoice::appendSyllableToVoice (
   const S_msrSyllable& syllable)
 {
   // append syllable to this voice
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceLyrics ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceLyrics ()) {
 		std::stringstream ss;
 
     ss <<
@@ -3823,8 +3821,8 @@ void msrVoice::appendSyllableToVoice (
 void msrVoice::appendBarCheckToVoice (
   const S_msrBarCheck& barCheck)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasures ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMeasures ()) {
 		std::stringstream ss;
 
     ss <<
@@ -3848,8 +3846,8 @@ void msrVoice::appendBarCheckToVoice (
 void msrVoice::appendBarNumberCheckToVoice (
   const S_msrBarNumberCheck& barNumberCheck)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasures ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMeasures ()) {
 		std::stringstream ss;
 
     ss <<
@@ -3871,8 +3869,8 @@ void msrVoice::appendBarNumberCheckToVoice (
 void msrVoice::appendLineBreakToVoice  (
   const S_msrLineBreak& lineBreak)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasures ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMeasures ()) {
 		std::stringstream ss;
 
     ss <<
@@ -3904,8 +3902,8 @@ void msrVoice::appendLineBreakToVoice  (
 void msrVoice::appendPageBreakToVoice (
   const S_msrPageBreak& pageBreak)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasures ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMeasures ()) {
 		std::stringstream ss;
 
     ss <<
@@ -3924,8 +3922,8 @@ void msrVoice::appendPageBreakToVoice (
 }
 
 void msrVoice::prependOtherElementToVoice (const S_msrMeasureElement& elem) {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceVoices ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceVoices ()) {
 		std::stringstream ss;
 
     ss <<
@@ -3944,8 +3942,8 @@ void msrVoice::prependOtherElementToVoice (const S_msrMeasureElement& elem) {
 }
 
 void msrVoice::appendOtherElementToVoice (const S_msrMeasureElement& elem) {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceVoices ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceVoices ()) {
 		std::stringstream ss;
 
     ss <<
@@ -3984,7 +3982,7 @@ S_msrMeasure msrVoice::fetchVoiceLastMeasure (
 //       "attempting to fetch voice last measure in an empty measure elements list";
 //
 //     msrInternalError (
-//       gGlobalCurrentServiceRunData->getInputSourceName (),
+//       gServiceRunData->getInputSourceName (),
 //       inputLineNumber,
 //       __FILE__, __LINE__,
 //       ss.str ());
@@ -4017,7 +4015,7 @@ S_msrMeasureElement msrVoice::fetchVoiceLastMeasureElement (
       "attempting to fetch voice last element in an empty elements list";
 
     msrInternalError (
-      gGlobalCurrentServiceRunData->getInputSourceName (),
+      gServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
       ss.str ());
@@ -4031,8 +4029,8 @@ void msrVoice::pushRepeatOntoRepeatDescrsStack (
   const S_msrRepeat& repeat,
   const std::string& context)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceRepeats ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceRepeats ()) {
 		std::stringstream ss;
 
     ss <<
@@ -4055,8 +4053,8 @@ void msrVoice::pushRepeatOntoRepeatDescrsStack (
       inputLineNumber,
       repeat));
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceRepeats ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceRepeats ()) {
     std::string
       combinedContext =
         "pushRepeatOntoRepeatDescrsStack() called from " + context;
@@ -4073,8 +4071,8 @@ void msrVoice::popRepeatFromRepeatDescrsStack (
   const S_msrRepeat& repeat,
   const std::string& context)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceRepeats ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceRepeats ()) {
     std::string
       combinedContext =
         "popRepeatFromRepeatDescrsStack() 1 called from " + context;
@@ -4100,14 +4098,14 @@ void msrVoice::popRepeatFromRepeatDescrsStack (
       ", line " << inputLineNumber;
 
     msrInternalError (
-      gGlobalCurrentServiceRunData->getInputSourceName (),
+      gServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
       ss.str ());
   }
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceRepeats ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceRepeats ()) {
 		std::stringstream ss;
 
     ss <<
@@ -4128,8 +4126,8 @@ void msrVoice::popRepeatFromRepeatDescrsStack (
   // pop it from repeats stack
   fVoicePendingRepeatDescrsStack.pop_front ();
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceRepeats ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceRepeats ()) {
     std::string
       combinedContext =
         "popRepeatFromRepeatDescrsStack() 2 called from " + context;
@@ -4148,7 +4146,7 @@ void msrVoice::displayVoiceRepeatsStack (
   size_t repeatDescrsStackSize =
     fVoicePendingRepeatDescrsStack.size ();
 
-  gLogStream <<
+  gLog <<
     std::endl <<
     ">>++++++++++++++++ Displaying voice repeats stack " << context <<
     std::endl <<
@@ -4168,14 +4166,14 @@ void msrVoice::displayVoiceRepeatsStack (
 
     int n = repeatDescrsStackSize;
     for ( ; ; ) {
-      gLogStream <<
+      gLog <<
         "v (" << n << ")" <<
         ", fRepeatDescrStartInputLineNumber: " <<
         (*i)->getRepeatDescrStartInputLineNumber () <<
         std::endl;
 
       ++gIndenter;
-      gLogStream <<
+      gLog <<
         (*i)->
           getRepeatDescrRepeat ();
       --gIndenter;
@@ -4184,13 +4182,13 @@ void msrVoice::displayVoiceRepeatsStack (
 
       if (++i == iEnd) break;
 
-      gLogStream << std::endl;
+      gLog << std::endl;
     } // for
 
     --gIndenter;
   }
 
-  gLogStream <<
+  gLog <<
     " <<++++++++++++++++ " <<
     std::endl << std::endl;
 }
@@ -4202,7 +4200,7 @@ void msrVoice::displayVoiceRepeatsStackSummary (
   size_t repeatDescrsStackSize =
     fVoicePendingRepeatDescrsStack.size ();
 
-  gLogStream <<
+  gLog <<
     std::endl <<
     "The voice repeats stack contains " <<
     mfSingularOrPlural (repeatDescrsStackSize, "element", "elements") <<
@@ -4221,14 +4219,14 @@ void msrVoice::displayVoiceRepeatsStackSummary (
 
     int n = repeatDescrsStackSize;
     for ( ; ; ) {
-      gLogStream <<
+      gLog <<
         "v (" << n << ")" <<
         ", fRepeatDescrStartInputLineNumber: " <<
         (*i)->getRepeatDescrStartInputLineNumber () <<
         std::endl;
 
       ++gIndenter;
-      gLogStream <<
+      gLog <<
         (*i)->
           getRepeatDescrRepeat ();
       --gIndenter;
@@ -4237,10 +4235,10 @@ void msrVoice::displayVoiceRepeatsStackSummary (
 
       if (++i == iEnd) break;
 
-      gLogStream << std::endl;
+      gLog << std::endl;
     } // for
 
-    gLogStream <<
+    gLog <<
       "===============" <<
       std::endl << std::endl;
 
@@ -4265,7 +4263,7 @@ void msrVoice::displayVoiceMeasureRepeat (
   int           inputLineNumber,
   const std::string& context)
 {
-  gLogStream <<
+  gLog <<
     std::endl <<
     ">>++++++++++++++++ Displaying voice measure repeats " << context <<
     std::endl <<
@@ -4283,14 +4281,14 @@ void msrVoice::displayVoiceMeasureRepeat (
         context);
   }
   else {
-    gLogStream <<
+    gLog <<
       "[NONE]" <<
       std::endl;
   }
 
   --gIndenter;
 
-  gLogStream <<
+  gLog <<
     " <<++++++++++++++++ " <<
     std::endl << std::endl;
 }
@@ -4339,7 +4337,7 @@ void msrVoice::displayVoiceMeasureRepeatAndVoice (
 //       S_msrMeasure measure = (*i);
 //
 //       // print the measure
-//       if (gGlobalTracingOahGroup->getTraceMeasures ()) {
+//       if (gGlobalTraceOahGroup->getTraceMeasures ()) {
 //         os <<
 //           measure->asShortStringForMeasuresSlices ();
 //       }
@@ -4361,11 +4359,11 @@ void msrVoice::displayVoiceMeasuresFlatList (
   size_t voiceMeasuresFlatListSize =
     fVoiceMeasuresFlatList.size ();
 
-  gLogStream <<
+  gLog <<
     std::setw (fieldWidth) <<
     "fVoiceMeasuresFlatList" << ": ";
   if (voiceMeasuresFlatListSize) {
-    gLogStream <<
+    gLog <<
       mfSingularOrPlural (
         voiceMeasuresFlatListSize, "element", "elements");
 
@@ -4381,35 +4379,35 @@ void msrVoice::displayVoiceMeasuresFlatList (
       ++counter;
 
       // print the measure
-#ifdef MF_TRACING_IS_ENABLED
-//      if (gGlobalTracingOahGroup->getTraceMeasures ()) { // CAFE JMI v0.9.66
-        gLogStream <<
+#ifdef MF_TRACE_IS_ENABLED
+//      if (gGlobalTraceOahGroup->getTraceMeasures ()) { // CAFE JMI v0.9.66
+        gLog <<
           measure->asShortStringForMeasuresSlices ();
 //      }
 //      else {
-//        gLogStream << measure->getMeasureNumber ();
+//        gLog << measure->getMeasureNumber ();
  //     }
 #else
-      gLogStream << measure->getMeasureNumber ();
+      gLog << measure->getMeasureNumber ();
 #endif
 
       if (++i == iEnd) break;
 
 //       if (counter % 8 == 1) {
-//         gLogStream << ' ';
+//         gLog << ' ';
 //       }
 //       else {
-        gLogStream << std::endl;
+        gLog << std::endl;
 //       }
     } // for
-    gLogStream << std::endl;
+    gLog << std::endl;
 
     --gIndenter;
   }
   else {
-    gLogStream << "[EMPTY]";
+    gLog << "[EMPTY]";
   }
-  gLogStream << std::endl;
+  gLog << std::endl;
 
   if (voiceMeasuresFlatListSize) {
     ++gIndenter;
@@ -4424,28 +4422,28 @@ void msrVoice::displayVoiceMeasuresFlatList (
       ++counter;
 
       // print the measure
-#ifdef MF_TRACING_IS_ENABLED
-//      if (gGlobalTracingOahGroup->getTraceMeasures ()) { // CAFE JMI v0.9.66
-        gLogStream <<
+#ifdef MF_TRACE_IS_ENABLED
+//      if (gGlobalTraceOahGroup->getTraceMeasures ()) { // CAFE JMI v0.9.66
+        gLog <<
           measure->asShortStringForMeasuresSlices ();
 //      }
 //      else {
-//        gLogStream << measure->getMeasureNumber ();
+//        gLog << measure->getMeasureNumber ();
  //     }
 #else
-      gLogStream << measure->getMeasureNumber ();
+      gLog << measure->getMeasureNumber ();
 #endif
 
       if (++i == iEnd) break;
 
 //       if (counter % 8 == 1) {
-//         gLogStream << ' ';
+//         gLog << ' ';
 //       }
 //       else {
-        gLogStream << std::endl;
+        gLog << std::endl;
 //       }
     } // for
-    gLogStream << std::endl;
+    gLog << std::endl;
 
     --gIndenter;
   }
@@ -4455,7 +4453,7 @@ void msrVoice::displayVoiceMultipleFullBarRests (
   int           inputLineNumber,
   const std::string& context)
 {
-  gLogStream <<
+  gLog <<
     std::endl <<
     ">>++++++++++++++++ voice multiple full-bar rests " << context <<
     std::endl <<
@@ -4473,14 +4471,14 @@ void msrVoice::displayVoiceMultipleFullBarRests (
         context);
   }
   else {
-    gLogStream <<
+    gLog <<
       "[NONE]" <<
       std::endl;
   }
 
   --gIndenter;
 
-  gLogStream <<
+  gLog <<
     " <<++++++++++++++++ " <<
     std::endl << std::endl;
 }
@@ -4502,8 +4500,8 @@ S_msrRepeat msrVoice::createARepeatAndStackIt (
   int           inputLineNumber,
   const std::string& context)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceRepeats ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceRepeats ()) {
 		std::stringstream ss;
 
     ss <<
@@ -4533,8 +4531,8 @@ S_msrRepeat msrVoice::createARepeatAndStackIt (
     result,
     "createARepeatAndStackIt() 1");
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceRepeatsDetails ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceRepeatsDetails ()) {
     displayVoiceRepeatsStackSummary (
       inputLineNumber,
       "createARepeatAndStackIt() 2");
@@ -4549,8 +4547,8 @@ S_msrRepeat msrVoice::createARepeatCloneAndStackIt (
   const S_msrRepeat& repeat,
   const std::string& context)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceRepeats ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceRepeats ()) {
 		std::stringstream ss;
 
     ss <<
@@ -4587,8 +4585,8 @@ void msrVoice::moveVoiceInitialElementsToRepeatCommonPart (
   const std::string&    context)
 {
   // move the voice initial elements to the new repeat common part
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceRepeats ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceRepeats ()) {
 		std::stringstream ss;
 
     ss <<
@@ -4637,23 +4635,23 @@ void msrVoice::moveVoiceLastSegmentToRepeatCommonPart (
   const std::string&    context)
 {
   // move the voice last segment to repeatCommonPart
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceRepeats ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceRepeats ()) {
 		std::stringstream ss;
 
     ss <<
       "Moving the voice last segment ";
 
     if (fVoiceLastSegment) { // JMI should not be necessary?
-      gLogStream <<
+      gLog <<
         fVoiceLastSegment->asShortString ();
     }
     else {
-      gLogStream <<
+      gLog <<
         "[NONE]";
     }
 
-    gLogStream <<
+    gLog <<
       " to repeat common part '" <<
       repeatCommonPart->asShortString () <<
       "' (" << context << ")" <<
@@ -4669,8 +4667,8 @@ void msrVoice::moveVoiceLastSegmentToRepeatCommonPart (
   }
 #endif
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceRepeatsDetails ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceRepeatsDetails ()) {
     std::string
       combinedContext =
         "moveVoiceLastSegmentToRepeatCommonPart() 1 called from " + context;
@@ -4712,8 +4710,8 @@ void msrVoice::moveVoiceLastSegmentToRepeatCommonPart (
     fVoiceLastSegment = nullptr;
   }
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceRepeatsDetails ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceRepeatsDetails ()) {
     std::string
       combinedContext =
         "moveVoiceLastSegmentToRepeatCommonPart() 3 called from " + context;
@@ -4747,8 +4745,8 @@ void msrVoice::moveVoiceLastSegmentToRepeatEnding (
   const std::string&     context)
 {
   // move the voice last segment to repeatEnding
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceRepeats ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceRepeats ()) {
 		std::stringstream ss;
 
     ss <<
@@ -4784,8 +4782,8 @@ void msrVoice::appendRepeatToInitialVoiceElements (
   const std::string& context)
 {
   // append repeat to the list of initial elements
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceRepeats ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceRepeats ()) {
 		std::stringstream ss;
 
     ss <<
@@ -4836,9 +4834,9 @@ void msrVoice::appendRepeatToInitialVoiceElements (
 //   const std::string&        context)
 // {
 //   // append multipleFullBarRests to the list of initial elements
-// #ifdef MF_TRACING_IS_ENABLED
-//   if (gGlobalTracingOahGroup->getTraceMultipleFullBarRests ()) {
-//     gLogStream <<
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gGlobalTraceOahGroup->getTraceMultipleFullBarRests ()) {
+//     gLog <<
 //       "Appending multiple full-bar rests " <<
 //       multipleFullBarRests->asString () <<
 //       " to the initial elements in voice \"" <<
@@ -4859,8 +4857,8 @@ void msrVoice::appendMeasureRepeatToInitialVoiceElements (
   const std::string&      context)
 {
   // append measureRepeat to the list of initial elements
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMultipleFullBarRests ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMultipleFullBarRests ()) {
 		std::stringstream ss;
 
     ss <<
@@ -4887,8 +4885,8 @@ void msrVoice::appendVoiceLastSegmentToInitialVoiceElements (
   const std::string& context)
 {
   // append segment to the list of initial elements
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceSegments ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceSegments ()) {
 		std::stringstream ss;
 
     ss <<
@@ -4921,8 +4919,8 @@ void msrVoice::moveVoiceLastSegmentToInitialVoiceElementsIfRelevant (
           getSegmentElementsList ();
 
     if (segmentElementsList.size ()) {
-#ifdef MF_TRACING_IS_ENABLED
-      if (gGlobalTracingOahGroup->getTraceSegments ()) {
+#ifdef MF_TRACE_IS_ENABLED
+      if (gGlobalTraceOahGroup->getTraceSegments ()) {
         std::stringstream ss;
 
         ss <<
@@ -4939,7 +4937,7 @@ void msrVoice::moveVoiceLastSegmentToInitialVoiceElementsIfRelevant (
           ss.str ());
       }
 
-      if (gGlobalTracingOahGroup->getTraceSegmentsDetails ()) {
+      if (gGlobalTraceOahGroup->getTraceSegmentsDetails ()) {
         displayVoice (
           inputLineNumber,
           "moveVoiceLastSegmentToInitialVoiceElementsIfRelevant() 1");
@@ -4953,8 +4951,8 @@ void msrVoice::moveVoiceLastSegmentToInitialVoiceElementsIfRelevant (
       // forget about this last segment
       fVoiceLastSegment = nullptr;
 
-#ifdef MF_TRACING_IS_ENABLED
-      if (gGlobalTracingOahGroup->getTraceSegmentsDetails ()) {
+#ifdef MF_TRACE_IS_ENABLED
+      if (gGlobalTraceOahGroup->getTraceSegmentsDetails ()) {
         displayVoice (
           inputLineNumber,
           "moveVoiceLastSegmentToInitialVoiceElementsIfRelevant() 2");
@@ -4963,8 +4961,8 @@ void msrVoice::moveVoiceLastSegmentToInitialVoiceElementsIfRelevant (
     }
 
     else {
-#ifdef MF_TRACING_IS_ENABLED
-      if (gGlobalTracingOahGroup->getTraceSegments ()) {
+#ifdef MF_TRACE_IS_ENABLED
+      if (gGlobalTraceOahGroup->getTraceSegments ()) {
         std::stringstream ss;
 
         ss <<
@@ -4985,8 +4983,8 @@ void msrVoice::moveVoiceLastSegmentToInitialVoiceElementsIfRelevant (
   }
 
   else {
-#ifdef MF_TRACING_IS_ENABLED
-    if (gGlobalTracingOahGroup->getTraceSegments ()) {
+#ifdef MF_TRACE_IS_ENABLED
+    if (gGlobalTraceOahGroup->getTraceSegments ()) {
 	  	std::stringstream ss;
 
       ss <<
@@ -5012,8 +5010,8 @@ void msrVoice::appendRepeatCloneToInitialVoiceElements (
   const std::string& context)
 {
   // append repeatCLone to the list of initial elements
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceRepeats ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceRepeats ()) {
 		std::stringstream ss;
 
     ss <<
@@ -5038,8 +5036,8 @@ void msrVoice::appendRepeatCloneToInitialVoiceElements (
 void msrVoice::handleVoiceLevelRepeatStart (
   int inputLineNumber)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceRepeats ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceRepeats ()) {
 		std::stringstream ss;
 
     ss <<
@@ -5054,8 +5052,8 @@ void msrVoice::handleVoiceLevelRepeatStart (
   }
 #endif
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceRepeatsDetails ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceRepeatsDetails ()) {
     displayVoiceRepeatsStackSummary (
       inputLineNumber,
       "handleVoiceLevelRepeatStart() 1");
@@ -5083,8 +5081,8 @@ void msrVoice::handleVoiceLevelRepeatStart (
           fVoiceLastSegment->
             getSegmentLastMeasure (); // JMI v0.9.63
 
-#ifdef MF_TRACING_IS_ENABLED
-      if (gGlobalTracingOahGroup->getTraceRepeatsDetails ()) {
+#ifdef MF_TRACE_IS_ENABLED
+      if (gGlobalTraceOahGroup->getTraceRepeatsDetails ()) {
         lastMeasureInLastSegment->
           displayMeasure (
             inputLineNumber,
@@ -5119,9 +5117,9 @@ void msrVoice::handleVoiceLevelRepeatStart (
           fullMeasureWholeNotesDuration
         ) {
           // yes this measure is not yet complete and should be split
-#ifdef MF_TRACING_IS_ENABLED
-          if (gGlobalTracingOahGroup->getTraceRepeats ()) {
-            gLogStream <<
+#ifdef MF_TRACE_IS_ENABLED
+          if (gGlobalTraceOahGroup->getTraceRepeats ()) {
+            gLog <<
               "Splitting measure '" <<
               lastMeasureInLastSegment->asShortString () <<
               "' upon a repeat start in voice \"" <<
@@ -5150,9 +5148,9 @@ void msrVoice::handleVoiceLevelRepeatStart (
             "handleVoiceLevelRepeatStart() 4");
 
           // create a new last segment for the voice
-#ifdef MF_TRACING_IS_ENABLED
-          if (gGlobalTracingOahGroup->getTraceSegments ()) {
-            gLogStream <<
+#ifdef MF_TRACE_IS_ENABLED
+          if (gGlobalTraceOahGroup->getTraceSegments ()) {
+            gLog <<
               "Creating a new last segment for voice \"" <<
               fVoiceName << "\"" <<
               ", line " << inputLineNumber <<
@@ -5190,8 +5188,8 @@ void msrVoice::handleVoiceLevelRepeatStart (
         // keep it for a new voice last segment
 
         // remove last measure
-#ifdef MF_TRACING_IS_ENABLED
-        if (gGlobalTracingOahGroup->getTraceRepeats ()) {
+#ifdef MF_TRACE_IS_ENABLED
+        if (gGlobalTraceOahGroup->getTraceRepeats ()) {
           std::stringstream ss;
 
           ss <<
@@ -5221,8 +5219,8 @@ void msrVoice::handleVoiceLevelRepeatStart (
           "handleVoiceLevelRepeatStart() 555");
 
         // create a new last segment containing a new measure for the voice
-#ifdef MF_TRACING_IS_ENABLED
-        if (gGlobalTracingOahGroup->getTraceRepeats ()) {
+#ifdef MF_TRACE_IS_ENABLED
+        if (gGlobalTraceOahGroup->getTraceRepeats ()) {
           std::stringstream ss;
 
           ss <<
@@ -5257,8 +5255,8 @@ void msrVoice::handleVoiceLevelRepeatStart (
         "handleVoiceLevelRepeatStart() 10");
 
   // create the repeat common part
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceRepeats ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceRepeats ()) {
 		std::stringstream ss;
 
     ss <<
@@ -5290,8 +5288,8 @@ void msrVoice::handleVoiceLevelRepeatStart (
     setRepeatExplicitStartKind (
       msrRepeatExplicitStartKind::kRepeatExplicitStartYes);
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceRepeatsDetails ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceRepeatsDetails ()) {
     displayVoiceRepeatsStackSummary (
       inputLineNumber,
       "handleVoiceLevelRepeatStart() 11");
@@ -5304,8 +5302,8 @@ void msrVoice::handleVoiceLevelRepeatStart (
 void msrVoice::handleNestedRepeatStartInVoice (
   int inputLineNumber)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceRepeats ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceRepeats ()) {
 		std::stringstream ss;
 
     ss <<
@@ -5321,8 +5319,8 @@ void msrVoice::handleNestedRepeatStartInVoice (
   }
 #endif
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceRepeatsDetails ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceRepeatsDetails ()) {
     displayVoiceRepeatsStackSummary (
       inputLineNumber,
       "handleNestedRepeatStartInVoice() 2");
@@ -5333,8 +5331,8 @@ void msrVoice::handleNestedRepeatStartInVoice (
 void msrVoice::handleRepeatStartInVoice (
   int inputLineNumber)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceRepeats ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceRepeats ()) {
 		std::stringstream ss;
 
     ss <<
@@ -5350,8 +5348,8 @@ void msrVoice::handleRepeatStartInVoice (
   }
 #endif
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceRepeatsDetails ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceRepeatsDetails ()) {
     displayVoiceRepeatsStackSummary (
       inputLineNumber,
       "handleRepeatStartInVoice() 1");
@@ -5381,8 +5379,8 @@ void msrVoice::handleRepeatStartInVoice (
       break;
   } // switch
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceRepeatsDetails ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceRepeatsDetails ()) {
     displayVoiceRepeatsStackSummary (
       inputLineNumber,
       "handleRepeatStartInVoice() 2");
@@ -5395,8 +5393,8 @@ void msrVoice::handleVoiceLevelRepeatEndWithoutStart (
   const std::string& measureNumber,
   int           repeatTimes)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceRepeats ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceRepeats ()) {
 		std::stringstream ss;
 
     ss <<
@@ -5412,8 +5410,8 @@ void msrVoice::handleVoiceLevelRepeatEndWithoutStart (
   }
 #endif
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceRepeatsDetails ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceRepeatsDetails ()) {
     displayVoiceRepeatsStackSummary (
       inputLineNumber,
       "handleVoiceLevelRepeatEndWithoutStart() 1");
@@ -5422,8 +5420,8 @@ void msrVoice::handleVoiceLevelRepeatEndWithoutStart (
 
   ++gIndenter;
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceRepeats ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceRepeats ()) {
 		std::stringstream ss;
 
     ss <<
@@ -5438,8 +5436,8 @@ void msrVoice::handleVoiceLevelRepeatEndWithoutStart (
 #endif
 
   // create the repeat
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceRepeats ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceRepeats ()) {
 		std::stringstream ss;
 
     ss <<
@@ -5465,8 +5463,8 @@ void msrVoice::handleVoiceLevelRepeatEndWithoutStart (
         this);
 
   // create the repeat common part
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceRepeats ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceRepeats ()) {
 		std::stringstream ss;
 
     ss <<
@@ -5516,8 +5514,8 @@ void msrVoice::handleVoiceLevelRepeatEndWithoutStart (
       );
 */
   // append the voice last segment to the new repeat common part
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceRepeats ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceRepeats ()) {
 		std::stringstream ss;
 
     ss <<
@@ -5555,8 +5553,8 @@ void msrVoice::handleVoiceLevelRepeatEndWithoutStart (
     newRepeat,
     "handleVoiceLevelRepeatEndWithoutStart() 6");
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceRepeatsDetails ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceRepeatsDetails ()) {
     displayVoiceRepeatsStackSummary (
       inputLineNumber,
       "handleVoiceLevelRepeatEndWithoutStart() 7");
@@ -5571,8 +5569,8 @@ void msrVoice::handleVoiceLevelContainingRepeatEndWithoutStart (
   const std::string& measureNumber,
   int           repeatTimes)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceRepeats ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceRepeats ()) {
 		std::stringstream ss;
 
     ss <<
@@ -5588,8 +5586,8 @@ void msrVoice::handleVoiceLevelContainingRepeatEndWithoutStart (
   }
 #endif
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceRepeatsDetails ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceRepeatsDetails ()) {
     displayVoiceRepeatsStackSummary (
       inputLineNumber,
       "handleVoiceLevelContainingRepeatEndWithoutStart() 1");
@@ -5598,8 +5596,8 @@ void msrVoice::handleVoiceLevelContainingRepeatEndWithoutStart (
 
   ++gIndenter;
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceRepeats ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceRepeats ()) {
 		std::stringstream ss;
 
     ss <<
@@ -5614,8 +5612,8 @@ void msrVoice::handleVoiceLevelContainingRepeatEndWithoutStart (
 #endif
 
   // create the repeat
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceRepeats ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceRepeats ()) {
 		std::stringstream ss;
 
     ss <<
@@ -5641,8 +5639,8 @@ void msrVoice::handleVoiceLevelContainingRepeatEndWithoutStart (
         this);
 
   // create the repeat common part
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceRepeats ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceRepeats ()) {
 		std::stringstream ss;
 
     ss <<
@@ -5703,8 +5701,8 @@ void msrVoice::handleVoiceLevelContainingRepeatEndWithoutStart (
     "handleVoiceLevelContainingRepeatEndWithoutStart() 4");
 
   // append the voice last segment to the new repeat common part
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceRepeats ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceRepeats ()) {
 		std::stringstream ss;
 
     ss <<
@@ -5744,8 +5742,8 @@ void msrVoice::handleVoiceLevelContainingRepeatEndWithoutStart (
     newRepeat,
     "handleVoiceLevelContainingRepeatEndWithoutStart() 6");
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceRepeatsDetails ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceRepeatsDetails ()) {
     displayVoiceRepeatsStackSummary (
       inputLineNumber,
       "handleVoiceLevelContainingRepeatEndWithoutStart() 7");
@@ -5760,8 +5758,8 @@ void msrVoice::handleVoiceLevelRepeatEndWithStart (
   const std::string& measureNumber,
   int           repeatTimes)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceRepeats ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceRepeats ()) {
 		std::stringstream ss;
 
     ss <<
@@ -5777,16 +5775,16 @@ void msrVoice::handleVoiceLevelRepeatEndWithStart (
   }
 #endif
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceRepeatsDetails ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceRepeatsDetails ()) {
     displayVoiceRepeatsStackSummary (
       inputLineNumber,
       "handleVoiceLevelRepeatEndWithStart() 1");
   }
 #endif
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceRepeats ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceRepeats ()) {
 		std::stringstream ss;
 
     ss <<
@@ -5830,8 +5828,8 @@ void msrVoice::handleVoiceLevelRepeatEndWithStart (
     setRepeatTimes (repeatTimes);
 
   // create the currentRepeat's common part
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceRepeats ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceRepeats ()) {
 		std::stringstream ss;
 
     ss <<
@@ -5859,8 +5857,8 @@ void msrVoice::handleVoiceLevelRepeatEndWithStart (
       repeatCommonPart);
 
   // move the voice last segment to the new repeat common part
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceRepeats ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceRepeats ()) {
 		std::stringstream ss;
 
     ss <<
@@ -5902,8 +5900,8 @@ void msrVoice::handleVoiceLevelRepeatEndWithStart (
     currentRepeat,
     "handleVoiceLevelRepeatEndWithStart() 4");
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceRepeatsDetails ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceRepeatsDetails ()) {
     displayVoiceRepeatsStackSummary (
       inputLineNumber,
       "handleVoiceLevelRepeatEndWithStart() 5");
@@ -5918,8 +5916,8 @@ void msrVoice::handleNestedRepeatEndInVoice (
   const std::string& measureNumber,
   int           repeatTimes)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceRepeats ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceRepeats ()) {
 		std::stringstream ss;
 
     ss <<
@@ -5935,16 +5933,16 @@ void msrVoice::handleNestedRepeatEndInVoice (
   }
 #endif
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceRepeatsDetails ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceRepeatsDetails ()) {
     displayVoiceRepeatsStackSummary (
       inputLineNumber,
       "handleNestedRepeatEndInVoice() 1");
   }
 #endif
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceRepeats ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceRepeats ()) {
 		std::stringstream ss;
 
     ss <<
@@ -5971,8 +5969,8 @@ void msrVoice::handleNestedRepeatEndInVoice (
     voiceLastMeasure->getFullMeasureWholeNotesDuration ()
   ) {
     // this measure is incomplete and should be split
-#ifdef MF_TRACING_IS_ENABLED
-    if (gGlobalTracingOahGroup->getTraceRepeats ()) {
+#ifdef MF_TRACE_IS_ENABLED
+    if (gGlobalTraceOahGroup->getTraceRepeats ()) {
 	  	std::stringstream ss;
 
       ss <<
@@ -6006,8 +6004,8 @@ void msrVoice::handleNestedRepeatEndInVoice (
         */
   }
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceRepeatsDetails ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceRepeatsDetails ()) {
     displayVoiceRepeatsStackSummary (
       inputLineNumber,
       "handleNestedRepeatEndInVoice() 2");
@@ -6020,8 +6018,8 @@ void msrVoice::handleRepeatEndInVoice (
   const std::string& measureNumber,
   int           repeatTimes)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceRepeatsDetails ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceRepeatsDetails ()) {
     displayVoiceRepeatsStackSummary (
       inputLineNumber,
       "handleRepeatEndInVoice() 1");
@@ -6068,7 +6066,7 @@ void msrVoice::handleRepeatEndInVoice (
                       "' ";
 
                     msrInternalError (
-                      gGlobalCurrentServiceRunData->getInputSourceName (),
+                      gServiceRunData->getInputSourceName (),
                       fInputLineNumber,
                       __FILE__, __LINE__,
                       ss.str ());
@@ -6110,8 +6108,8 @@ void msrVoice::handleRepeatEndInVoice (
       break;
   } // switch
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceRepeatsDetails ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceRepeatsDetails ()) {
     displayVoiceRepeatsStackSummary (
       inputLineNumber,
       "handleRepeatEndInVoice() 2");
@@ -6123,8 +6121,8 @@ void msrVoice::handleVoiceLevelRepeatEndingStartWithoutExplicitStart (
   int          inputLineNumber,
   S_msrRepeat& currentRepeat)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceRepeats ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceRepeats ()) {
 		std::stringstream ss;
 
     ss <<
@@ -6140,8 +6138,8 @@ void msrVoice::handleVoiceLevelRepeatEndingStartWithoutExplicitStart (
   }
 #endif
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceRepeatsDetails ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceRepeatsDetails ()) {
     displayVoiceRepeatsStackSummary (
       inputLineNumber,
       "handleVoiceLevelRepeatEndingStartWithoutExplicitStart() 1");
@@ -6177,8 +6175,8 @@ void msrVoice::handleVoiceLevelRepeatEndingStartWithoutExplicitStart (
         s1.str ());
 
     // create the repeat common part
-#ifdef MF_TRACING_IS_ENABLED
-    if (gGlobalTracingOahGroup->getTraceRepeats ()) {
+#ifdef MF_TRACE_IS_ENABLED
+    if (gGlobalTraceOahGroup->getTraceRepeats ()) {
 	  	std::stringstream ss;
 
       ss <<
@@ -6206,8 +6204,8 @@ void msrVoice::handleVoiceLevelRepeatEndingStartWithoutExplicitStart (
   }
 
   // fetch last measure
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceRepeats ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceRepeats ()) {
 		std::stringstream ss;
 
     ss <<
@@ -6241,8 +6239,8 @@ void msrVoice::handleVoiceLevelRepeatEndingStartWithoutExplicitStart (
     // it is empty, keep it for a new voice last segment
 
     // remove last measure
-#ifdef MF_TRACING_IS_ENABLED
-    if (gGlobalTracingOahGroup->getTraceRepeats ()) {
+#ifdef MF_TRACE_IS_ENABLED
+    if (gGlobalTraceOahGroup->getTraceRepeats ()) {
 	  	std::stringstream ss;
 
       ss <<
@@ -6281,8 +6279,8 @@ void msrVoice::handleVoiceLevelRepeatEndingStartWithoutExplicitStart (
       s2.str ());
 
     // create a new last segment containing a new measure for the voice
-#ifdef MF_TRACING_IS_ENABLED
-    if (gGlobalTracingOahGroup->getTraceRepeats ()) {
+#ifdef MF_TRACE_IS_ENABLED
+    if (gGlobalTraceOahGroup->getTraceRepeats ()) {
 	  	std::stringstream ss;
 
       ss <<
@@ -6313,8 +6311,8 @@ void msrVoice::handleVoiceLevelRepeatEndingStartWithoutExplicitStart (
       "handleVoiceLevelRepeatEndingStartWithoutExplicitStart() 4");
 
     // create a new last segment for the voice
-#ifdef MF_TRACING_IS_ENABLED
-    if (gGlobalTracingOahGroup->getTraceSegments ()) {
+#ifdef MF_TRACE_IS_ENABLED
+    if (gGlobalTraceOahGroup->getTraceSegments ()) {
 	  	std::stringstream ss;
 
       ss <<
@@ -6339,8 +6337,8 @@ void msrVoice::handleVoiceLevelRepeatEndingStartWithoutExplicitStart (
     setCurrentRepeatBuildPhaseKind (
       msrRepeatBuildPhaseKind::kRepeatBuildPhaseInEndings);
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceRepeatsDetails ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceRepeatsDetails ()) {
     displayVoiceRepeatsStackSummary (
       inputLineNumber,
       "handleVoiceLevelRepeatEndingStartWithoutExplicitStart() 2");
@@ -6353,8 +6351,8 @@ void msrVoice::handleVoiceLevelRepeatEndingStartWithoutExplicitStart (
 void msrVoice::handleVoiceLevelRepeatEndingStartWithExplicitStart (
   int inputLineNumber)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceRepeats ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceRepeats ()) {
 		std::stringstream ss;
 
     ss <<
@@ -6370,8 +6368,8 @@ void msrVoice::handleVoiceLevelRepeatEndingStartWithExplicitStart (
   }
 #endif
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceRepeatsDetails ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceRepeatsDetails ()) {
     displayVoiceRepeatsStackSummary (
       inputLineNumber,
       "handleVoiceLevelRepeatEndingStartWithExplicitStart() 1");
@@ -6400,8 +6398,8 @@ void msrVoice::handleVoiceLevelRepeatEndingStartWithExplicitStart (
           inputLineNumber,
           "handleVoiceLevelRepeatEndingStartWithExplicitStart() 2");
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceRepeats ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceRepeats ()) {
 		std::stringstream ss;
 
     ss <<
@@ -6431,8 +6429,8 @@ void msrVoice::handleVoiceLevelRepeatEndingStartWithExplicitStart (
     // it is empty, keep it for a new voice last segment
 
     // remove last measure
-#ifdef MF_TRACING_IS_ENABLED
-    if (gGlobalTracingOahGroup->getTraceRepeats ()) {
+#ifdef MF_TRACE_IS_ENABLED
+    if (gGlobalTraceOahGroup->getTraceRepeats ()) {
 	  	std::stringstream ss;
 
       ss <<
@@ -6471,8 +6469,8 @@ void msrVoice::handleVoiceLevelRepeatEndingStartWithExplicitStart (
       s2.str ());
 
     // create a new last segment containing a new measure for the voice
-#ifdef MF_TRACING_IS_ENABLED
-    if (gGlobalTracingOahGroup->getTraceRepeats ()) {
+#ifdef MF_TRACE_IS_ENABLED
+    if (gGlobalTraceOahGroup->getTraceRepeats ()) {
 	  	std::stringstream ss;
 
       ss <<
@@ -6502,8 +6500,8 @@ void msrVoice::handleVoiceLevelRepeatEndingStartWithExplicitStart (
       "handleVoiceLevelRepeatEndingStartWithoutExplicitStart() 5");
 
     // create a new last segment for the voice
-#ifdef MF_TRACING_IS_ENABLED
-    if (gGlobalTracingOahGroup->getTraceSegments ()) {
+#ifdef MF_TRACE_IS_ENABLED
+    if (gGlobalTraceOahGroup->getTraceSegments ()) {
 	  	std::stringstream ss;
 
       ss <<
@@ -6528,8 +6526,8 @@ void msrVoice::handleVoiceLevelRepeatEndingStartWithExplicitStart (
     setCurrentRepeatBuildPhaseKind (
       msrRepeatBuildPhaseKind::kRepeatBuildPhaseInEndings);
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceRepeatsDetails ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceRepeatsDetails ()) {
     displayVoiceRepeatsStackSummary (
       inputLineNumber,
       "handleVoiceLevelRepeatEndingStartWithExplicitStart() 3");
@@ -6556,8 +6554,8 @@ void msrVoice::nestContentsIntoNewRepeatInVoice (
           finalizeLastAppendedMeasureInVoice (
             inputLineNumber);
 
-#ifdef MF_TRACING_IS_ENABLED
-          if (gGlobalTracingOahGroup->getTraceRepeatsDetails ()) {
+#ifdef MF_TRACE_IS_ENABLED
+          if (gGlobalTraceOahGroup->getTraceRepeatsDetails ()) {
             displayVoiceRepeatsStackSummary (
               inputLineNumber,
               "nestContentsIntoNewRepeatInVoice() 1");
@@ -6569,8 +6567,8 @@ void msrVoice::nestContentsIntoNewRepeatInVoice (
             inputLineNumber,
             "nestContentsIntoNewRepeatInVoice() 1");
 
-#ifdef MF_TRACING_IS_ENABLED
-          if (gGlobalTracingOahGroup->getTraceRepeatsDetails ()) {
+#ifdef MF_TRACE_IS_ENABLED
+          if (gGlobalTraceOahGroup->getTraceRepeatsDetails ()) {
             displayVoiceRepeatsStackSummary (
               inputLineNumber,
               "nestContentsIntoNewRepeatInVoice() 2");
@@ -6585,8 +6583,8 @@ void msrVoice::nestContentsIntoNewRepeatInVoice (
 void msrVoice::handleNestedRepeatEndingStartInVoice (
   int inputLineNumber)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceRepeats ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceRepeats ()) {
 		std::stringstream ss;
 
     ss <<
@@ -6598,8 +6596,8 @@ void msrVoice::handleNestedRepeatEndingStartInVoice (
  }
 #endif
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceRepeatsDetails ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceRepeatsDetails ()) {
     displayVoiceRepeatsStackSummary (
       inputLineNumber,
       "handleNestedRepeatEndingStartInVoice() 2");
@@ -6610,8 +6608,8 @@ void msrVoice::handleNestedRepeatEndingStartInVoice (
 void msrVoice::handleRepeatEndingStartInVoice (
   int inputLineNumber)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceRepeats ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceRepeats ()) {
 		std::stringstream ss;
 
     ss <<
@@ -6627,8 +6625,8 @@ void msrVoice::handleRepeatEndingStartInVoice (
   }
 #endif
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceRepeatsDetails ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceRepeatsDetails ()) {
     displayVoiceRepeatsStackSummary (
       inputLineNumber,
       "handleRepeatEndingStartInVoice() 1");
@@ -6650,7 +6648,7 @@ void msrVoice::handleRepeatEndingStartInVoice (
             // -------------------------------------
             handleVoiceLevelRepeatEndingStartWithoutExplicitStart (
               inputLineNumber,
-              gGlobalNullRepeatSmartPointer); // set later in XXX() JMI v0.9.66
+              gNullRepeat); // set later in XXX() JMI v0.9.66
             break;
 
           case 1:
@@ -6692,8 +6690,8 @@ void msrVoice::handleRepeatEndingStartInVoice (
       break;
   } // switch
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceRepeatsDetails ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceRepeatsDetails ()) {
     displayVoiceRepeatsStackSummary (
       inputLineNumber,
       "handleRepeatEndingStartInVoice() 2");
@@ -6707,8 +6705,8 @@ void msrVoice::handleRepeatEndingStartInVoiceClone (
                 repeatEndingKind,
   const std::string& repeatEndingNumber) // may be "1, 2"
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceRepeatsDetails ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceRepeatsDetails ()) {
     displayVoiceRepeatsStackSummary (
       inputLineNumber,
       "handleRepeatEndingStartInVoiceClone() 1");
@@ -6724,8 +6722,8 @@ void msrVoice::handleRepeatEndingStartInVoiceClone (
         // handle the repeat ending start
         ++gIndenter;
 
-#ifdef MF_TRACING_IS_ENABLED
-        if (gGlobalTracingOahGroup->getTraceRepeats ()) {
+#ifdef MF_TRACE_IS_ENABLED
+        if (gGlobalTraceOahGroup->getTraceRepeats ()) {
           std::stringstream ss;
 
           ss <<
@@ -6753,7 +6751,7 @@ void msrVoice::handleRepeatEndingStartInVoiceClone (
                 "' ";
 
               msrInternalError (
-                gGlobalCurrentServiceRunData->getInputSourceName (),
+                gServiceRunData->getInputSourceName (),
                 fInputLineNumber,
                 __FILE__, __LINE__,
                 ss.str ());
@@ -6771,9 +6769,9 @@ void msrVoice::handleRepeatEndingStartInVoiceClone (
                     getRepeatDescrRepeat ();
 
               // create a repeat ending
-#ifdef MF_TRACING_IS_ENABLED
-              if (gGlobalTracingOahGroup->getTraceRepeats ()) {
-                gLogStream <<
+#ifdef MF_TRACE_IS_ENABLED
+              if (gGlobalTraceOahGroup->getTraceRepeats ()) {
+                gLog <<
                   "Creating a " <<
                   msrRepeatEndingKindAsString (
                     repeatEndingKind) <<
@@ -6793,9 +6791,9 @@ void msrVoice::handleRepeatEndingStartInVoiceClone (
                     currentRepeat);
 
               // add the repeat ending to the voice current repeat
-#ifdef MF_TRACING_IS_ENABLED
-              if (gGlobalTracingOahGroup->getTraceRepeats ()) {
-                gLogStream <<
+#ifdef MF_TRACE_IS_ENABLED
+              if (gGlobalTraceOahGroup->getTraceRepeats ()) {
+                gLog <<
                   "Appending a " <<
                   msrRepeatEndingKindAsString (
                     repeatEndingKind) <<
@@ -6806,8 +6804,8 @@ void msrVoice::handleRepeatEndingStartInVoiceClone (
               }
 #endif
 
-#ifdef MF_TRACING_IS_ENABLED
-              if (gGlobalTracingOahGroup->getTraceRepeatsDetails ()) {
+#ifdef MF_TRACE_IS_ENABLED
+              if (gGlobalTraceOahGroup->getTraceRepeatsDetails ()) {
                 displayVoiceRepeatsStackSummary (
                   inputLineNumber,
                   "before adding a hooked repeat ending to current repeat");
@@ -6833,9 +6831,9 @@ void msrVoice::handleRepeatEndingStartInVoiceClone (
               // JMI ???
 
               // move voice last segment into the repeat common part
-#ifdef MF_TRACING_IS_ENABLED
-              if (gGlobalTracingOahGroup->getTraceRepeats ()) {
-                gLogStream <<
+#ifdef MF_TRACE_IS_ENABLED
+              if (gGlobalTraceOahGroup->getTraceRepeats ()) {
+                gLog <<
                   "Moving the voice last segment to the repeat common part in voice clone \"" <<
                   getVoiceName () <<
                   "\"" <<
@@ -6851,8 +6849,8 @@ void msrVoice::handleRepeatEndingStartInVoiceClone (
       break;
   } // switch
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceRepeatsDetails ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceRepeatsDetails ()) {
     displayVoiceRepeatsStackSummary (
       inputLineNumber,
       "handleRepeatEndingStartInVoiceClone() 2");
@@ -6864,8 +6862,8 @@ void msrVoice::handleSegmentCloneEndInVoiceClone (
   int          inputLineNumber,
   const S_msrSegment& segmentClone)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceSegments ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceSegments ()) {
 		std::stringstream ss;
 
     ss <<
@@ -6884,8 +6882,8 @@ void msrVoice::handleSegmentCloneEndInVoiceClone (
 
   ++gIndenter;
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceSegmentsDetails ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceSegmentsDetails ()) {
     displayVoice (
       inputLineNumber,
       "handleSegmentCloneEndInVoiceClone() 1");
@@ -6908,7 +6906,7 @@ void msrVoice::handleSegmentCloneEndInVoiceClone (
             "'cannot be added to a just created measures repeat";
 
           msrError (
-            gGlobalCurrentServiceRunData->getInputSourceName (),
+            gServiceRunData->getInputSourceName (),
             inputLineNumber,
             __FILE__, __LINE__,
             ss.str ());
@@ -6957,7 +6955,7 @@ void msrVoice::handleSegmentCloneEndInVoiceClone (
             "'cannot be added to a completed measures repeat";
 
           msrError (
-            gGlobalCurrentServiceRunData->getInputSourceName (),
+            gServiceRunData->getInputSourceName (),
             inputLineNumber,
             __FILE__, __LINE__,
             ss.str ());
@@ -6991,8 +6989,8 @@ void msrVoice::handleSegmentCloneEndInVoiceClone (
       "handleSegmentCloneEndInVoiceClone()");
   }
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceSegmentsDetails ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceSegmentsDetails ()) {
     displayVoice (
       inputLineNumber,
       "handleSegmentCloneEndInVoiceClone() 3");
@@ -7008,8 +7006,8 @@ void msrVoice::finalizeRepeatEndInVoice (
   const std::string& measureNumber,
   int    repeatTimes)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceRepeatsDetails ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceRepeatsDetails ()) {
     displayVoiceRepeatsStackSummary (
       inputLineNumber,
       "finalizeRepeatEndInVoice() 1");
@@ -7036,7 +7034,7 @@ void msrVoice::finalizeRepeatEndInVoice (
             "' ";
 
           msrInternalError (
-            gGlobalCurrentServiceRunData->getInputSourceName (),
+            gServiceRunData->getInputSourceName (),
             inputLineNumber,
             __FILE__, __LINE__,
             ss.str ());
@@ -7082,8 +7080,8 @@ void msrVoice::finalizeRepeatEndInVoice (
       break;
   } // switch
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceRepeatsDetails ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceRepeatsDetails ()) {
     displayVoiceRepeatsStackSummary (
       inputLineNumber,
       "finalizeRepeatEndInVoice() 2");
@@ -7097,9 +7095,9 @@ void msrVoice::createMeasureRepeatFromItsFirstMeasures (
   int measureRepeatMeasuresNumber,
   int measureRepeatSlashesNumber)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasureRepeatsDetails ()) {
-    gLogStream <<
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMeasureRepeatsDetails ()) {
+    gLog <<
       "Creating a measures repeat from its first measure in voice \"" <<
       getVoiceName () <<
       "\"" <<
@@ -7135,7 +7133,7 @@ void msrVoice::createMeasureRepeatFromItsFirstMeasures (
       " available";
 
     msrInternalError (
-      gGlobalCurrentServiceRunData->getInputSourceName (),
+      gServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
       ss.str ());
@@ -7163,8 +7161,8 @@ void msrVoice::createMeasureRepeatFromItsFirstMeasures (
 
   // remove the repeated measure(s) for the last segment
   // and prepend them to the repeated segment
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasureRepeats ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMeasureRepeats ()) {
 		std::stringstream ss;
 
     ss <<
@@ -7200,7 +7198,7 @@ void msrVoice::createMeasureRepeatFromItsFirstMeasures (
       "attempting to create a measures repeat while another one is pending";
 
     msrInternalError (
-      gGlobalCurrentServiceRunData->getInputSourceName (),
+      gServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
       ss.str ());
@@ -7214,8 +7212,8 @@ void msrVoice::createMeasureRepeatFromItsFirstMeasures (
       this);
 
   // create the measures repeat pattern
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasureRepeats ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMeasureRepeats ()) {
 		std::stringstream ss;
 
     ss <<
@@ -7248,8 +7246,8 @@ void msrVoice::createMeasureRepeatFromItsFirstMeasures (
 
   // create a new last segment to collect the measures repeat replicas,
   // containing the first, yet incomplete, replica
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasureRepeats ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMeasureRepeats ()) {
 		std::stringstream ss;
 
     ss <<
@@ -7272,8 +7270,8 @@ void msrVoice::createMeasureRepeatFromItsFirstMeasures (
   // keep the measures repeat pending
 
   // print resulting voice contents
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasureRepeatsDetails ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMeasureRepeatsDetails ()) {
     displayVoiceMeasureRepeatAndVoice (
       inputLineNumber,
       "createMeasureRepeatFromItsFirstMeasures() 3");
@@ -7285,8 +7283,8 @@ void msrVoice::appendMultipleFullBarRestsToVoice (
   int                       inputLineNumber,
   const S_msrMultipleFullBarRests& multipleFullBarRests)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMultipleFullBarRests ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMultipleFullBarRests ()) {
 		std::stringstream ss;
 
     ss <<
@@ -7304,8 +7302,8 @@ void msrVoice::appendMultipleFullBarRestsToVoice (
   }
 #endif
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMultipleFullBarRestsDetails ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMultipleFullBarRestsDetails ()) {
     displayVoiceMultipleFullBarRestsAndVoice (
       inputLineNumber,
       "appendMultipleFullBarRestsToVoice() 1");
@@ -7346,8 +7344,8 @@ void msrVoice::appendMultipleFullBarRestsToVoice (
           "appendMultipleFullBarRestsToVoice() 2");
   } // switch
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMultipleFullBarRestsDetails ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMultipleFullBarRestsDetails ()) {
     displayVoiceMultipleFullBarRestsAndVoice (
       inputLineNumber,
       "appendMultipleFullBarRestsToVoice() 3");
@@ -7359,8 +7357,8 @@ void msrVoice::appendMeasureRepeatToVoice (
   int                 inputLineNumber,
   const S_msrMeasureRepeat& measureRepeat)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasureRepeats ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMeasureRepeats ()) {
 		std::stringstream ss;
 
     ss <<
@@ -7378,8 +7376,8 @@ void msrVoice::appendMeasureRepeatToVoice (
   }
 #endif
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasureRepeatsDetails ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMeasureRepeatsDetails ()) {
     displayVoiceMeasureRepeatAndVoice (
       inputLineNumber,
       "appendMeasureRepeatToVoice() 1");
@@ -7410,8 +7408,8 @@ void msrVoice::appendMeasureRepeatToVoice (
           "appendMeasureRepeatToVoice() 2");
   } // switch
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasureRepeatsDetails ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMeasureRepeatsDetails ()) {
     displayVoiceMeasureRepeatAndVoice (
       inputLineNumber,
       "appendMeasureRepeatToVoice() 3");
@@ -7422,9 +7420,9 @@ void msrVoice::appendMeasureRepeatToVoice (
 void msrVoice::appendPendingMeasureRepeatToVoice (
   int inputLineNumber)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasureRepeatsDetails ()) {
-    gLogStream <<
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMeasureRepeatsDetails ()) {
+    gLog <<
       "Appending pending measures repeat to voice \"" <<
       getVoiceName () <<
       "\"" <<
@@ -7445,7 +7443,7 @@ void msrVoice::appendPendingMeasureRepeatToVoice (
       "attempting to append a pending measures repeat which doesn't exist";
 
     msrInternalError (
-      gGlobalCurrentServiceRunData->getInputSourceName (),
+      gServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
       ss.str ());
@@ -7469,7 +7467,7 @@ void msrVoice::appendPendingMeasureRepeatToVoice (
       "attempting to grab first measure of voice last segment, that contains none";
 
     msrInternalError (
-      gGlobalCurrentServiceRunData->getInputSourceName (),
+      gServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
       ss.str ());
@@ -7482,8 +7480,8 @@ void msrVoice::appendPendingMeasureRepeatToVoice (
 
 // BOFBOFBOF JMI
   // remove the next measure from the last segment's measure elements list
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasureRepeats ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMeasureRepeats ()) {
 		std::stringstream ss;
 
     ss <<
@@ -7493,17 +7491,17 @@ void msrVoice::appendPendingMeasureRepeatToVoice (
       "\":" <<
       std::endl;
     ++gIndenter;
-    gLogStream <<
+    gLog <<
       nextMeasureAfterMeasureRepeat;
-    gLogStream << std::endl;
+    gLog << std::endl;
     --gIndenter;
 }
 #endif
 
   voiceLastSegmentMeasureList.pop_back ();
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasureRepeatsDetails ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMeasureRepeatsDetails ()) {
     displayVoiceMeasureRepeatAndVoice (
       inputLineNumber,
       "appendPendingMeasureRepeatToVoice() 2");
@@ -7511,8 +7509,8 @@ void msrVoice::appendPendingMeasureRepeatToVoice (
 #endif
 
   // create the measures repeat replicas contents
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasureRepeats ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMeasureRepeats ()) {
 		std::stringstream ss;
 
     ss <<
@@ -7541,8 +7539,8 @@ void msrVoice::appendPendingMeasureRepeatToVoice (
     setMeasureRepeatReplicas (
       measureRepeatReplicas);
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasureRepeats ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMeasureRepeats ()) {
 		std::stringstream ss;
 
     ss <<
@@ -7561,8 +7559,8 @@ void msrVoice::appendPendingMeasureRepeatToVoice (
     setMeasureRepeatReplicas (
       measureRepeatReplicas);
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasureRepeats ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMeasureRepeats ()) {
 		std::stringstream ss;
 
     ss <<
@@ -7591,8 +7589,8 @@ void msrVoice::appendPendingMeasureRepeatToVoice (
 
   // create a new last segment to collect the remainder of the voice,
   // containing the next, yet incomplete, measure
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasureRepeats ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMeasureRepeats ()) {
 		std::stringstream ss;
 
     ss <<
@@ -7612,9 +7610,9 @@ void msrVoice::appendPendingMeasureRepeatToVoice (
     nextMeasureAfterMeasureRepeat,
     "appendPendingMeasureRepeatToVoice() 3");
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasureRepeatsDetails ()) {
-    gLogStream <<
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMeasureRepeatsDetails ()) {
+    gLog <<
       "Appending pending measures repeat to voice \"" <<
       getVoiceName () <<
       "\"" <<
@@ -7633,9 +7631,9 @@ void msrVoice::createMeasureRepeatAndAppendItToVoiceClone (
   int measureRepeatMeasuresNumber,
   int measureRepeatSlashesNumber)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasureRepeatsDetails ()) {
-    gLogStream <<
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMeasureRepeatsDetails ()) {
+    gLog <<
       "Creating measures repeat and appending it to voice clone \"" <<
       getVoiceName () <<
       "\"" <<
@@ -7662,15 +7660,15 @@ void msrVoice::createMeasureRepeatAndAppendItToVoiceClone (
             "attempting to create a measures repeat while another one is pending";
 
           msrInternalError (
-            gGlobalCurrentServiceRunData->getInputSourceName (),
+            gServiceRunData->getInputSourceName (),
             inputLineNumber,
             __FILE__, __LINE__,
             ss.str ());
         }
 
         // create the measures repeat
-#ifdef MF_TRACING_IS_ENABLED
-        if (gGlobalTracingOahGroup->getTraceMeasureRepeats ()) {
+#ifdef MF_TRACE_IS_ENABLED
+        if (gGlobalTraceOahGroup->getTraceMeasureRepeats ()) {
           std::stringstream ss;
 
           ss <<
@@ -7694,8 +7692,8 @@ void msrVoice::createMeasureRepeatAndAppendItToVoiceClone (
             this);
 
         // create a measures repeat pattern from current last segment
-#ifdef MF_TRACING_IS_ENABLED
-        if (gGlobalTracingOahGroup->getTraceMeasureRepeats ()) {
+#ifdef MF_TRACE_IS_ENABLED
+        if (gGlobalTraceOahGroup->getTraceMeasureRepeats ()) {
           std::stringstream ss;
 
           ss <<
@@ -7726,8 +7724,8 @@ void msrVoice::createMeasureRepeatAndAppendItToVoiceClone (
         fVoiceLastSegment = nullptr; // JMI
 
         // set the measures repeat pattern
-#ifdef MF_TRACING_IS_ENABLED
-        if (gGlobalTracingOahGroup->getTraceMeasureRepeats ()) {
+#ifdef MF_TRACE_IS_ENABLED
+        if (gGlobalTraceOahGroup->getTraceMeasureRepeats ()) {
           std::stringstream ss;
 
           ss <<
@@ -7747,8 +7745,8 @@ void msrVoice::createMeasureRepeatAndAppendItToVoiceClone (
             measureRepeatPattern);
 
         // append the measures repeat to the list of initial elements
-#ifdef MF_TRACING_IS_ENABLED
-        if (gGlobalTracingOahGroup->getTraceMeasureRepeats ()) {
+#ifdef MF_TRACE_IS_ENABLED
+        if (gGlobalTraceOahGroup->getTraceMeasureRepeats ()) {
           std::stringstream ss;
 
           ss <<
@@ -7771,9 +7769,9 @@ void msrVoice::createMeasureRepeatAndAppendItToVoiceClone (
       break;
   } // switch
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasureRepeatsDetails ()) {
-    gLogStream <<
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMeasureRepeatsDetails ()) {
+    gLog <<
       "Creating measures repeat and appending it to voice clone \"" <<
       getVoiceName () <<
       "\"" <<
@@ -7790,8 +7788,8 @@ void msrVoice::createMeasureRepeatAndAppendItToVoiceClone (
 void msrVoice::setVoiceContainsMultipleFullBarRests (
   int inputLineNumber)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMultipleFullBarRests ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMultipleFullBarRests ()) {
 		std::stringstream ss;
 
     ss <<
@@ -7814,8 +7812,8 @@ void msrVoice::setVoiceContainsMultipleFullBarRests (
 void msrVoice::setVoiceContainsMeasureRepeats (
   int inputLineNumber)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasureRepeats ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMeasureRepeats ()) {
 		std::stringstream ss;
 
     ss <<
@@ -7840,8 +7838,8 @@ void msrVoice::appendMultipleFullBarRestsToVoice (
   int multipleFullBarRestsMeasuresNumber)
 {
   // create a multiple full-bar rests
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMultipleFullBarRests ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMultipleFullBarRests ()) {
 		std::stringstream ss;
 
     ss <<
@@ -7860,8 +7858,8 @@ void msrVoice::appendMultipleFullBarRestsToVoice (
   }
 #endif
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMultipleFullBarRestsDetails ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMultipleFullBarRestsDetails ()) {
     displayVoiceMultipleFullBarRestsAndVoice (
       inputLineNumber,
       "appendMultipleFullBarRestsToVoice() 1");
@@ -7895,7 +7893,7 @@ void msrVoice::appendMultipleFullBarRestsToVoice (
             "attempting to create a multiple full-bar rests while another one is pending";
 
           msrInternalError (
-            gGlobalCurrentServiceRunData->getInputSourceName (),
+            gServiceRunData->getInputSourceName (),
             inputLineNumber,
             __FILE__, __LINE__,
             ss.str ());
@@ -7908,8 +7906,8 @@ void msrVoice::appendMultipleFullBarRestsToVoice (
 //             "appendMultipleFullBarRestsToVoice()");
 //         }
 
-#ifdef MF_TRACING_IS_ENABLED
-        if (gGlobalTracingOahGroup->getTraceMultipleFullBarRests ()) {
+#ifdef MF_TRACE_IS_ENABLED
+        if (gGlobalTraceOahGroup->getTraceMultipleFullBarRests ()) {
           std::stringstream ss;
 
           ss <<
@@ -7933,8 +7931,8 @@ void msrVoice::appendMultipleFullBarRestsToVoice (
             multipleFullBarRestsMeasuresNumber,
             fVoiceLastSegment); // JMI ??? KAKA
 
-#ifdef MF_TRACING_IS_ENABLED
-        if (gGlobalTracingOahGroup->getTraceMultipleFullBarRests ()) {
+#ifdef MF_TRACE_IS_ENABLED
+        if (gGlobalTraceOahGroup->getTraceMultipleFullBarRests ()) {
           std::stringstream ss;
 
           ss <<
@@ -7961,8 +7959,8 @@ void msrVoice::appendMultipleFullBarRestsToVoice (
             firstRestMeasure);
 
          // remember fVoiceCurrentMultipleFullBarRests for later next measure number setting
-#ifdef MF_TRACING_IS_ENABLED
-        if (gGlobalTracingOahGroup->getTraceMultipleFullBarRests ()) {
+#ifdef MF_TRACE_IS_ENABLED
+        if (gGlobalTraceOahGroup->getTraceMultipleFullBarRests ()) {
           std::stringstream ss;
 
           ss <<
@@ -7981,8 +7979,8 @@ void msrVoice::appendMultipleFullBarRestsToVoice (
         fVoiceMultipleFullBarRestsWaitingForItsNextMeasureNumber =
           fVoiceCurrentMultipleFullBarRests;
 
-#ifdef MF_TRACING_IS_ENABLED
-        if (gGlobalTracingOahGroup->getTraceMultipleFullBarRests ()) {
+#ifdef MF_TRACE_IS_ENABLED
+        if (gGlobalTraceOahGroup->getTraceMultipleFullBarRests ()) {
           std::stringstream ss;
 
           ss <<
@@ -8002,9 +8000,9 @@ void msrVoice::appendMultipleFullBarRestsToVoice (
 
 //         // create a new segment to collect the multiple full-bar rests,
 //         // containing the first, rest measure
-// #ifdef MF_TRACING_IS_ENABLED
-//         if (gGlobalTracingOahGroup->getTraceMultipleFullBarRests ()) {
-//           gLogStream <<
+// #ifdef MF_TRACE_IS_ENABLED
+//         if (gGlobalTraceOahGroup->getTraceMultipleFullBarRests ()) {
+//           gLog <<
 //             "Creating a new last segment to create the first, rest measure in voice \"" <<
 //             fVoiceName << "\"" <<
 //             ", line " << inputLineNumber <<
@@ -8029,8 +8027,8 @@ void msrVoice::appendMultipleFullBarRestsToVoice (
   } // switch
 
   // print resulting voice contents
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMultipleFullBarRestsDetails ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMultipleFullBarRestsDetails ()) {
     displayVoiceMultipleFullBarRestsAndVoice (
       inputLineNumber,
       "appendMultipleFullBarRestsToVoice() 4");
@@ -8063,7 +8061,7 @@ void msrVoice::replicateLastAppendedMeasureInVoice (
           std::to_string (i) +
           " (replicated)");
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
 	  	std::stringstream ss;
 
       ss <<
@@ -8104,8 +8102,8 @@ void msrVoice::addEmptyMeasuresToVoice (
   int           emptyMeasuresNumber)
 {
   // create a multiple full-bar rests
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMultipleFullBarRests ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMultipleFullBarRests ()) {
 		std::stringstream ss;
 
     ss <<
@@ -8133,8 +8131,8 @@ void msrVoice::addEmptyMeasuresToVoice (
 
   for (int i = 1; i <= emptyMeasuresNumber; ++i) {
     // create a measure
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasures ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMeasures ()) {
 		std::stringstream ss;
 
     ss <<
@@ -8194,8 +8192,8 @@ void msrVoice::addEmptyMeasuresToVoice (
       partMeasurePosition);
 
   // append emptyMeasure to the voice last segment
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasures ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMeasures ()) {
 		std::stringstream ss;
 
     ss <<
@@ -8225,8 +8223,8 @@ void msrVoice::addEmptyMeasuresToVoice (
 
   } //for
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMultipleFullBarRestsDetails ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMultipleFullBarRestsDetails ()) {
     displayVoiceMultipleFullBarRestsAndVoice (
       inputLineNumber,
       "addEmptyMeasuresToVoice() 1");
@@ -8254,7 +8252,7 @@ void msrVoice::addEmptyMeasuresToVoice (
 //             "attempting to create a multiple full-bar rests while another one is pending";
 //
 //           msrInternalError (
-//             gGlobalCurrentServiceRunData->getInputSourceName (),
+//             gServiceRunData->getInputSourceName (),
 //             inputLineNumber,
 //             __FILE__, __LINE__,
 //             ss.str ());
@@ -8270,9 +8268,9 @@ void msrVoice::addEmptyMeasuresToVoice (
 // */
 //
 //          // remember fVoiceCurrentMultipleFullBarRests for later next measure number setting JMI ???
-// #ifdef MF_TRACING_IS_ENABLED
-//         if (gGlobalTracingOahGroup->getTraceMultipleFullBarRests ()) {
-//           gLogStream <<
+// #ifdef MF_TRACE_IS_ENABLED
+//         if (gGlobalTraceOahGroup->getTraceMultipleFullBarRests ()) {
+//           gLog <<
 //             "Registering multiple full-bar rests " <<
 //             fVoiceCurrentMultipleFullBarRests->asString () <<
 //             " as waiting for its next measure number" <<
@@ -8290,9 +8288,9 @@ void msrVoice::addEmptyMeasuresToVoice (
 //         fVoiceRemainingMultipleFullBarRests =
 //           multipleFullBarRestsMeasuresNumber;
 //
-// #ifdef MF_TRACING_IS_ENABLED
-//         if (gGlobalTracingOahGroup->getTraceMultipleFullBarRests ()) {
-//           gLogStream <<
+// #ifdef MF_TRACE_IS_ENABLED
+//         if (gGlobalTraceOahGroup->getTraceMultipleFullBarRests ()) {
+//           gLog <<
 //             "Setting fVoiceRemainingMultipleFullBarRests to '" <<
 //             fVoiceRemainingMultipleFullBarRests <<
 //             "' in voice \"" <<
@@ -8303,9 +8301,9 @@ void msrVoice::addEmptyMeasuresToVoice (
 //
 //         // create a new segment to collect the multiple full-bar rests,
 //         // containing the first, rest measure
-// #ifdef MF_TRACING_IS_ENABLED
-//         if (gGlobalTracingOahGroup->getTraceMultipleFullBarRests ()) {
-//           gLogStream <<
+// #ifdef MF_TRACE_IS_ENABLED
+//         if (gGlobalTraceOahGroup->getTraceMultipleFullBarRests ()) {
+//           gLog <<
 //             "Creating a new last segment to add the first, rest measure in voice \"" <<
 //             fVoiceName << "\"" <<
 //             ", line " << inputLineNumber <<
@@ -8332,8 +8330,8 @@ void msrVoice::addEmptyMeasuresToVoice (
 //   } // switch
 
   // print resulting voice contents
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMultipleFullBarRestsDetails ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMultipleFullBarRestsDetails ()) {
     displayVoiceMultipleFullBarRestsAndVoice (
       inputLineNumber,
       "addEmptyMeasuresToVoice() 4");
@@ -8347,9 +8345,9 @@ void msrVoice::appendPendingMultipleFullBarRestsToVoice (
   // a multiple full-bar rests is a voice element,
   // and can be voice-level as well as part of a repeat
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMultipleFullBarRestsDetails ()) {
-      if (gGlobalTracingOahGroup->getTraceMultipleFullBarRests ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMultipleFullBarRestsDetails ()) {
+      if (gGlobalTraceOahGroup->getTraceMultipleFullBarRests ()) {
         std::stringstream ss;
 
         ss <<
@@ -8382,14 +8380,14 @@ void msrVoice::appendPendingMultipleFullBarRestsToVoice (
 //             "attempting to append a current multiple full-bar rests which doesn't exist";
 //
 //           msrInternalError (
-//             gGlobalCurrentServiceRunData->getInputSourceName (),
+//             gServiceRunData->getInputSourceName (),
 //             inputLineNumber,
 //             __FILE__, __LINE__,
 //             ss.str ());
 //         }
 
-#ifdef MF_TRACING_IS_ENABLED
-        if (gGlobalTracingOahGroup->getTraceMultipleFullBarRests ()) {
+#ifdef MF_TRACE_IS_ENABLED
+        if (gGlobalTraceOahGroup->getTraceMultipleFullBarRests ()) {
           std::stringstream ss;
 
           ss <<
@@ -8428,8 +8426,8 @@ void msrVoice::appendPendingMultipleFullBarRestsToVoice (
       break;
   } // switch
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMultipleFullBarRestsDetails ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMultipleFullBarRestsDetails ()) {
     displayVoiceMultipleFullBarRestsAndVoice (
       inputLineNumber,
       "appendPendingMultipleFullBarRestsToVoice() 2");
@@ -8441,8 +8439,8 @@ void msrVoice::handleMultipleFullBarRestsStartInVoiceClone (
   int                       inputLineNumber,
   const S_msrMultipleFullBarRests& multipleFullBarRests)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMultipleFullBarRests ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMultipleFullBarRests ()) {
 		std::stringstream ss;
 
     ss <<
@@ -8459,8 +8457,8 @@ void msrVoice::handleMultipleFullBarRestsStartInVoiceClone (
 
   ++gIndenter;
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMultipleFullBarRestsDetails ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMultipleFullBarRestsDetails ()) {
     displayVoiceMultipleFullBarRestsAndVoice (
       inputLineNumber,
       "handleMultipleFullBarRestsStartInVoiceClone() 1");
@@ -8496,8 +8494,8 @@ void msrVoice::handleMultipleFullBarRestsStartInVoiceClone (
 //             inputLineNumber,
 //             "handleMultipleFullBarRestsStartInVoiceClone()");
 //
-// #ifdef MF_TRACING_IS_ENABLED
-//           if (gGlobalTracingOahGroup->getTraceMultipleFullBarRestsDetails ()) {
+// #ifdef MF_TRACE_IS_ENABLED
+//           if (gGlobalTraceOahGroup->getTraceMultipleFullBarRestsDetails ()) {
 //             displayVoiceMultipleFullBarRestsAndVoice (
 //               inputLineNumber,
 //               "handleMultipleFullBarRestsStartInVoiceClone() 3");
@@ -8517,7 +8515,7 @@ void msrVoice::handleMultipleFullBarRestsStartInVoiceClone (
           "' ";
 
         msrInternalError (
-          gGlobalCurrentServiceRunData->getInputSourceName (),
+          gServiceRunData->getInputSourceName (),
           fInputLineNumber,
           __FILE__, __LINE__,
           ss.str ());
@@ -8536,8 +8534,8 @@ void msrVoice::handleMultipleFullBarRestsStartInVoiceClone (
       break;
   } // switch
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMultipleFullBarRestsDetails ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMultipleFullBarRestsDetails ()) {
     displayVoiceMultipleFullBarRestsAndVoice (
       inputLineNumber,
       "handleMultipleFullBarRestsStartInVoiceClone() 4");
@@ -8550,8 +8548,8 @@ void msrVoice::handleMultipleFullBarRestsStartInVoiceClone (
 void msrVoice::handleMultipleFullBarRestsEndInVoiceClone (
   int inputLineNumber)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMultipleFullBarRests ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMultipleFullBarRests ()) {
 		std::stringstream ss;
 
     ss <<
@@ -8568,8 +8566,8 @@ void msrVoice::handleMultipleFullBarRestsEndInVoiceClone (
 
   ++gIndenter;
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMultipleFullBarRestsDetails ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMultipleFullBarRestsDetails ()) {
     displayVoiceMultipleFullBarRestsAndVoice (
       inputLineNumber,
       "handleMultipleFullBarRestsEndInVoiceClone() 1");
@@ -8593,7 +8591,7 @@ void msrVoice::handleMultipleFullBarRestsEndInVoiceClone (
           "' ";
 
         msrInternalError (
-          gGlobalCurrentServiceRunData->getInputSourceName (),
+          gServiceRunData->getInputSourceName (),
           fInputLineNumber,
           __FILE__, __LINE__,
           ss.str ());
@@ -8607,8 +8605,8 @@ void msrVoice::handleMultipleFullBarRestsEndInVoiceClone (
       // forget about fVoiceCurrentMultipleFullBarRests
       fVoiceCurrentMultipleFullBarRests = nullptr;
 
-#ifdef MF_TRACING_IS_ENABLED
-      if (gGlobalTracingOahGroup->getTraceMultipleFullBarRestsDetails ()) {
+#ifdef MF_TRACE_IS_ENABLED
+      if (gGlobalTraceOahGroup->getTraceMultipleFullBarRestsDetails ()) {
         displayVoice (
           inputLineNumber,
           "handleMultipleFullBarRestsEndInVoiceClone() 3");
@@ -8640,8 +8638,8 @@ void msrVoice::appendMultipleFullBarRestsCloneToVoiceClone (
     case msrVoiceKind::kVoiceKindHarmonies:
     case msrVoiceKind::kVoiceKindFiguredBass:
       {
-#ifdef MF_TRACING_IS_ENABLED
-        if (gGlobalTracingOahGroup->getTraceMultipleFullBarRests ()) {
+#ifdef MF_TRACE_IS_ENABLED
+        if (gGlobalTraceOahGroup->getTraceMultipleFullBarRests ()) {
           std::stringstream ss;
 
           ss <<
@@ -8653,7 +8651,7 @@ void msrVoice::appendMultipleFullBarRestsCloneToVoiceClone (
             std::endl;
         }
 
-        if (gGlobalTracingOahGroup->getTraceMultipleFullBarRestsDetails ()) {
+        if (gGlobalTraceOahGroup->getTraceMultipleFullBarRestsDetails ()) {
           displayVoiceMultipleFullBarRestsAndVoice (
             inputLineNumber,
             "appendMultipleFullBarRestsCloneToVoiceClone() 1");
@@ -8697,8 +8695,8 @@ void msrVoice::appendMultipleFullBarRestsCloneToVoiceClone (
           multipleFullBarRestsClone);
 
         // print resulting voice contents
-#ifdef MF_TRACING_IS_ENABLED
-        if (gGlobalTracingOahGroup->getTraceMultipleFullBarRestsDetails ()) {
+#ifdef MF_TRACE_IS_ENABLED
+        if (gGlobalTraceOahGroup->getTraceMultipleFullBarRestsDetails ()) {
           displayVoice (
             inputLineNumber,
             "appendMultipleFullBarRestsCloneToVoiceClone() 3");
@@ -8715,8 +8713,8 @@ void msrVoice::appendRepeatCloneToVoiceClone (
   int         inputLineNumber,
   const S_msrRepeat& repeatCLone)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceRepeats ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceRepeats ()) {
 		std::stringstream ss;
 
     ss <<
@@ -8732,8 +8730,8 @@ void msrVoice::appendRepeatCloneToVoiceClone (
   }
 #endif
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceRepeatsDetails ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceRepeatsDetails ()) {
     displayVoiceRepeatsStackSummary (
       inputLineNumber,
       "appendRepeatCloneToVoiceClone() 1");
@@ -8757,8 +8755,8 @@ void msrVoice::appendRepeatCloneToVoiceClone (
     case msrVoiceKind::kVoiceKindFiguredBass:
       {
         // pushing repeat clone as the (new) current repeat
-#ifdef MF_TRACING_IS_ENABLED
-        if (gGlobalTracingOahGroup->getTraceRepeats ()) {
+#ifdef MF_TRACE_IS_ENABLED
+        if (gGlobalTraceOahGroup->getTraceRepeats ()) {
           std::stringstream ss;
 
           ss <<
@@ -8788,8 +8786,8 @@ void msrVoice::appendRepeatCloneToVoiceClone (
       break;
   } // switch
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceRepeatsDetails ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceRepeatsDetails ()) {
     displayVoiceRepeatsStackSummary (
       inputLineNumber,
       "appendRepeatCloneToVoiceClone() 4");
@@ -8803,8 +8801,8 @@ void msrVoice::handleMeasureRepeatStartInVoiceClone (
   int                 inputLineNumber,
   const S_msrMeasureRepeat& measureRepeat)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasureRepeats ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMeasureRepeats ()) {
 		std::stringstream ss;
 
     ss <<
@@ -8822,8 +8820,8 @@ void msrVoice::handleMeasureRepeatStartInVoiceClone (
 
   ++gIndenter;
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasureRepeatsDetails ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMeasureRepeatsDetails ()) {
     displayVoiceMeasureRepeatAndVoice (
       inputLineNumber,
       "handleMeasureRepeatStartInVoiceClone() 1");
@@ -8846,7 +8844,7 @@ void msrVoice::handleMeasureRepeatStartInVoiceClone (
           "' ";
 
         msrInternalError (
-          gGlobalCurrentServiceRunData->getInputSourceName (),
+          gServiceRunData->getInputSourceName (),
           fInputLineNumber,
           __FILE__, __LINE__,
           ss.str ());
@@ -8867,8 +8865,8 @@ void msrVoice::handleMeasureRepeatStartInVoiceClone (
         setCurrentMeasureRepeatBuildPhaseKind (
           msrMeasureRepeatBuildPhaseKind::kMeasureRepeatBuildPhaseJustCreated);
 
-#ifdef MF_TRACING_IS_ENABLED
-      if (gGlobalTracingOahGroup->getTraceMeasureRepeatsDetails ()) {
+#ifdef MF_TRACE_IS_ENABLED
+      if (gGlobalTraceOahGroup->getTraceMeasureRepeatsDetails ()) {
         displayVoiceMeasureRepeatAndVoice (
           inputLineNumber,
           "handleMeasureRepeatStartInVoiceClone() 2");
@@ -8877,8 +8875,8 @@ void msrVoice::handleMeasureRepeatStartInVoiceClone (
       break;
   } // switch
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasureRepeatsDetails ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMeasureRepeatsDetails ()) {
     displayVoiceMeasureRepeatAndVoice (
       inputLineNumber,
       "handleMeasureRepeatStartInVoiceClone() 3");
@@ -8891,8 +8889,8 @@ void msrVoice::handleMeasureRepeatStartInVoiceClone (
 void msrVoice::handleMeasureRepeatEndInVoiceClone (
   int inputLineNumber)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasureRepeats ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMeasureRepeats ()) {
 		std::stringstream ss;
 
     ss <<
@@ -8909,8 +8907,8 @@ void msrVoice::handleMeasureRepeatEndInVoiceClone (
 
   ++gIndenter;
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasureRepeatsDetails ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMeasureRepeatsDetails ()) {
     displayVoiceMeasureRepeatAndVoice (
       inputLineNumber,
       "handleMeasureRepeatEndInVoiceClone() 1");
@@ -8933,7 +8931,7 @@ void msrVoice::handleMeasureRepeatEndInVoiceClone (
           "' ";
 
         msrInternalError (
-          gGlobalCurrentServiceRunData->getInputSourceName (),
+          gServiceRunData->getInputSourceName (),
           fInputLineNumber,
           __FILE__, __LINE__,
           ss.str ());
@@ -8951,8 +8949,8 @@ void msrVoice::handleMeasureRepeatEndInVoiceClone (
     break;
   } // switch
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasureRepeatsDetails ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMeasureRepeatsDetails ()) {
     displayVoiceMeasureRepeatAndVoice (
       inputLineNumber,
       "handleMeasureRepeatEndInVoiceClone() 3");
@@ -8965,8 +8963,8 @@ void msrVoice::handleMeasureRepeatEndInVoiceClone (
 void msrVoice::handleMeasureRepeatPatternStartInVoiceClone (
   int inputLineNumber)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasureRepeats ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMeasureRepeats ()) {
 		std::stringstream ss;
 
     ss <<
@@ -8983,8 +8981,8 @@ void msrVoice::handleMeasureRepeatPatternStartInVoiceClone (
 
   ++gIndenter;
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasureRepeatsDetails ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMeasureRepeatsDetails ()) {
     displayVoiceMeasureRepeatAndVoice (
       inputLineNumber,
       "handleMeasureRepeatPatternStartInVoiceClone() 1");
@@ -9001,15 +8999,15 @@ void msrVoice::handleMeasureRepeatPatternStartInVoiceClone (
       "' ";
 
     msrInternalError (
-      gGlobalCurrentServiceRunData->getInputSourceName (),
+      gServiceRunData->getInputSourceName (),
       fInputLineNumber,
       __FILE__, __LINE__,
       ss.str ());
   }
 
   // create fVoicePendingMeasureRepeat' rest pattern
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasureRepeats ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMeasureRepeats ()) {
 		std::stringstream ss;
 
     ss <<
@@ -9036,8 +9034,8 @@ void msrVoice::handleMeasureRepeatPatternStartInVoiceClone (
     setMeasureRepeatPattern (
       measureRepeatPattern);
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasureRepeatsDetails ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMeasureRepeatsDetails ()) {
     displayVoiceMeasureRepeatAndVoice (
       inputLineNumber,
       "handleMeasureRepeatPatternStartInVoiceClone() 2");
@@ -9050,8 +9048,8 @@ void msrVoice::handleMeasureRepeatPatternStartInVoiceClone (
 void msrVoice::handleMeasureRepeatPatternEndInVoiceClone (
   int inputLineNumber)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasureRepeats ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMeasureRepeats ()) {
 		std::stringstream ss;
 
     ss <<
@@ -9068,8 +9066,8 @@ void msrVoice::handleMeasureRepeatPatternEndInVoiceClone (
 
   ++gIndenter;
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasureRepeatsDetails ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMeasureRepeatsDetails ()) {
     displayVoiceMeasureRepeatAndVoice (
       inputLineNumber,
       "handleMeasureRepeatPatternEndInVoiceClone() 1");
@@ -9086,7 +9084,7 @@ void msrVoice::handleMeasureRepeatPatternEndInVoiceClone (
       "' ";
 
     msrInternalError (
-      gGlobalCurrentServiceRunData->getInputSourceName (),
+      gServiceRunData->getInputSourceName (),
       fInputLineNumber,
       __FILE__, __LINE__,
       ss.str ());
@@ -9106,8 +9104,8 @@ void msrVoice::handleMeasureRepeatPatternEndInVoiceClone (
   // forget about fVoiceLastSegment
  // fVoiceLastSegment = nullptr;
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasureRepeatsDetails ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMeasureRepeatsDetails ()) {
     displayVoiceMeasureRepeatAndVoice (
       inputLineNumber,
       "handleMeasureRepeatPatternEndInVoiceClone() 2");
@@ -9120,8 +9118,8 @@ void msrVoice::handleMeasureRepeatPatternEndInVoiceClone (
 void msrVoice::handleMeasureRepeatReplicasStartInVoiceClone (
   int inputLineNumber)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasureRepeats ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMeasureRepeats ()) {
 		std::stringstream ss;
 
     ss <<
@@ -9138,8 +9136,8 @@ void msrVoice::handleMeasureRepeatReplicasStartInVoiceClone (
 
   ++gIndenter;
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasureRepeatsDetails ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMeasureRepeatsDetails ()) {
     displayVoiceMeasureRepeatAndVoice (
       inputLineNumber,
       "handleMeasureRepeatReplicasStartInVoiceClone() 1");
@@ -9156,15 +9154,15 @@ void msrVoice::handleMeasureRepeatReplicasStartInVoiceClone (
       "' ";
 
     msrInternalError (
-      gGlobalCurrentServiceRunData->getInputSourceName (),
+      gServiceRunData->getInputSourceName (),
       fInputLineNumber,
       __FILE__, __LINE__,
       ss.str ());
   }
 
   // create fVoicePendingMeasureRepeat' replicas
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasureRepeats ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMeasureRepeats ()) {
 		std::stringstream ss;
 
     ss <<
@@ -9191,8 +9189,8 @@ void msrVoice::handleMeasureRepeatReplicasStartInVoiceClone (
     setMeasureRepeatReplicas (
       measureRepeatReplicas);
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasureRepeatsDetails ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMeasureRepeatsDetails ()) {
     displayVoiceMeasureRepeatAndVoice (
       inputLineNumber,
       "handleMeasureRepeatReplicasStartInVoiceClone() 2");
@@ -9205,8 +9203,8 @@ void msrVoice::handleMeasureRepeatReplicasStartInVoiceClone (
 void msrVoice::handleMeasureRepeatReplicasEndInVoiceClone (
   int inputLineNumber)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasureRepeats ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMeasureRepeats ()) {
 		std::stringstream ss;
 
     ss <<
@@ -9223,8 +9221,8 @@ void msrVoice::handleMeasureRepeatReplicasEndInVoiceClone (
 
   ++gIndenter;
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasureRepeatsDetails ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMeasureRepeatsDetails ()) {
     displayVoiceMeasureRepeatAndVoice (
       inputLineNumber,
       "handleMeasureRepeatReplicasEndInVoiceClone() 1");
@@ -9241,7 +9239,7 @@ void msrVoice::handleMeasureRepeatReplicasEndInVoiceClone (
       "' ";
 
     msrInternalError (
-      gGlobalCurrentServiceRunData->getInputSourceName (),
+      gServiceRunData->getInputSourceName (),
       fInputLineNumber,
       __FILE__, __LINE__,
       ss.str ());
@@ -9261,8 +9259,8 @@ void msrVoice::handleMeasureRepeatReplicasEndInVoiceClone (
   // forget about fVoiceLastSegment
  // fVoiceLastSegment = nullptr;
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasureRepeatsDetails ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMeasureRepeatsDetails ()) {
     displayVoiceMeasureRepeatAndVoice (
       inputLineNumber,
       "handleMeasureRepeatReplicasEndInVoiceClone() 2");
@@ -9292,8 +9290,8 @@ void msrVoice::appendMeasureRepeatCloneToVoiceClone (
     case msrVoiceKind::kVoiceKindHarmonies:
     case msrVoiceKind::kVoiceKindFiguredBass:
       {
-#ifdef MF_TRACING_IS_ENABLED
-        if (gGlobalTracingOahGroup->getTraceMeasureRepeats ()) {
+#ifdef MF_TRACE_IS_ENABLED
+        if (gGlobalTraceOahGroup->getTraceMeasureRepeats ()) {
           std::stringstream ss;
 
           ss <<
@@ -9305,7 +9303,7 @@ void msrVoice::appendMeasureRepeatCloneToVoiceClone (
             std::endl;
         }
 
-        if (gGlobalTracingOahGroup->getTraceMeasureRepeatsDetails ()) {
+        if (gGlobalTraceOahGroup->getTraceMeasureRepeatsDetails ()) {
           displayVoiceMeasureRepeatAndVoice (
             inputLineNumber,
             "appendMeasureRepeatCloneToVoiceClone() 1");
@@ -9349,8 +9347,8 @@ void msrVoice::appendMeasureRepeatCloneToVoiceClone (
           measureRepeatClone);
 
         // print resulting voice contents
-#ifdef MF_TRACING_IS_ENABLED
-        if (gGlobalTracingOahGroup->getTraceMeasureRepeatsDetails ()) {
+#ifdef MF_TRACE_IS_ENABLED
+        if (gGlobalTraceOahGroup->getTraceMeasureRepeatsDetails ()) {
           displayVoiceMeasureRepeatAndVoice (
             inputLineNumber,
             "appendMeasureRepeatCloneToVoiceClone() 3");
@@ -9367,8 +9365,8 @@ void msrVoice::handleHookedRepeatEndingEndInVoice (
   int           inputLineNumber,
   const std::string& repeatEndingNumber) // may be "1, 2"
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceRepeats ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceRepeats ()) {
 		std::stringstream ss;
 
     ss <<
@@ -9383,8 +9381,8 @@ void msrVoice::handleHookedRepeatEndingEndInVoice (
   }
 #endif
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceRepeatsDetails ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceRepeatsDetails ()) {
     displayVoiceRepeatsStackSummary (
       inputLineNumber,
       "handleHookedRepeatEndingEndInVoice() 1");
@@ -9407,7 +9405,7 @@ void msrVoice::handleHookedRepeatEndingEndInVoice (
       "' ";
 
     msrInternalError (
-      gGlobalCurrentServiceRunData->getInputSourceName (),
+      gServiceRunData->getInputSourceName (),
       fInputLineNumber,
       __FILE__, __LINE__,
       ss.str ());
@@ -9443,8 +9441,8 @@ void msrVoice::handleHookedRepeatEndingEndInVoice (
     "handleHookedRepeatEndingEndInVoice() 2");
 
   // add the repeat ending to the voice current repeat
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceRepeats ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceRepeats ()) {
 		std::stringstream ss;
 
     ss <<
@@ -9462,8 +9460,8 @@ void msrVoice::handleHookedRepeatEndingEndInVoice (
   }
 #endif
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceRepeats ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceRepeats ()) {
     displayVoiceRepeatsStackSummary (
       inputLineNumber,
       "before adding a hooked repeat ending to current repeat");
@@ -9475,8 +9473,8 @@ void msrVoice::handleHookedRepeatEndingEndInVoice (
       inputLineNumber,
       repeatEnding);
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceRepeats ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceRepeats ()) {
     displayVoiceRepeatsStackSummary (
       inputLineNumber,
       "handleHookedRepeatEndingEndInVoice() 3");
@@ -9490,8 +9488,8 @@ void msrVoice::handleHooklessRepeatEndingEndInVoice (
   int           inputLineNumber,
   const std::string& repeatEndingNumber) // may be "1, 2"
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceRepeats ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceRepeats ()) {
 		std::stringstream ss;
 
     ss <<
@@ -9501,8 +9499,8 @@ void msrVoice::handleHooklessRepeatEndingEndInVoice (
       std::endl;  }
 #endif
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceRepeats ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceRepeats ()) {
     displayVoiceRepeatsStackSummary (
       inputLineNumber,
       "handleHooklessRepeatEndingEndInVoice() 1");
@@ -9520,7 +9518,7 @@ void msrVoice::handleHooklessRepeatEndingEndInVoice (
       "' ";
 
     msrInternalError (
-      gGlobalCurrentServiceRunData->getInputSourceName (),
+      gServiceRunData->getInputSourceName (),
       fInputLineNumber,
       __FILE__, __LINE__,
       ss.str ());
@@ -9556,8 +9554,8 @@ void msrVoice::handleHooklessRepeatEndingEndInVoice (
     "handleHookedRepeatEndingEndInVoice() 2");
 
   // add the repeat ending it to the voice current repeat
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceRepeats ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceRepeats ()) {
 		std::stringstream ss;
 
     ss <<
@@ -9575,8 +9573,8 @@ void msrVoice::handleHooklessRepeatEndingEndInVoice (
   }
 #endif
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceRepeats ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceRepeats ()) {
     displayVoiceRepeatsStackSummary (
       inputLineNumber,
       "before adding a hookless repeat ending to current repeat");
@@ -9588,8 +9586,8 @@ void msrVoice::handleHooklessRepeatEndingEndInVoice (
       inputLineNumber,
       repeatEnding);
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceRepeats ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceRepeats ()) {
     displayVoiceRepeatsStackSummary (
       inputLineNumber,
       "after adding a hookless repeat ending to current repeat");
@@ -9613,8 +9611,8 @@ void msrVoice::handleHooklessRepeatEndingEndInVoice (
     inputLineNumber,
     "handleHooklessRepeatEndingEndInVoice() 4");
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceRepeats ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceRepeats ()) {
     displayVoiceRepeatsStackSummary (
       inputLineNumber,
       "handleHooklessRepeatEndingEndInVoice() 5");
@@ -9653,8 +9651,8 @@ void msrVoice::handleRepeatEndingEndInVoice (
     }
   } // switch
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceRepeats ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceRepeats ()) {
     displayVoiceRepeatsStackSummary (
       inputLineNumber,
       "appendRepeatEndingToVoice() 0");
@@ -9665,8 +9663,8 @@ void msrVoice::handleRepeatEndingEndInVoice (
 void msrVoice::handleRepeatCommonPartStartInVoiceClone (
   int inputLineNumber) // may be "1, 2"
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceRepeats ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceRepeats ()) {
 		std::stringstream ss;
 
     ss <<
@@ -9681,8 +9679,8 @@ void msrVoice::handleRepeatCommonPartStartInVoiceClone (
   }
 #endif
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceRepeats ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceRepeats ()) {
     displayVoiceRepeatsStackSummary (
       inputLineNumber,
       "handleRepeatCommonPartStartInVoiceClone() 1");
@@ -9701,7 +9699,7 @@ void msrVoice::handleRepeatCommonPartStartInVoiceClone (
       "' ";
 
     msrInternalError (
-      gGlobalCurrentServiceRunData->getInputSourceName (),
+      gServiceRunData->getInputSourceName (),
       fInputLineNumber,
       __FILE__, __LINE__,
       ss.str ());
@@ -9714,8 +9712,8 @@ void msrVoice::handleRepeatCommonPartStartInVoiceClone (
         getRepeatDescrRepeat ();
 
   // create currentRepeat's common part
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceRepeats ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceRepeats ()) {
 		std::stringstream ss;
 
     ss <<
@@ -9742,8 +9740,8 @@ void msrVoice::handleRepeatCommonPartStartInVoiceClone (
     setRepeatCommonPart (
       repeatCommonPart);
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceRepeats ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceRepeats ()) {
     displayVoiceRepeatsStackSummary (
       inputLineNumber,
       "handleRepeatCommonPartStartInVoiceClone() 2");
@@ -9756,8 +9754,8 @@ void msrVoice::handleRepeatCommonPartStartInVoiceClone (
 void msrVoice::handleRepeatCommonPartEndInVoiceClone (
   int inputLineNumber) // may be "1, 2"
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceRepeats ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceRepeats ()) {
 		std::stringstream ss;
 
     ss <<
@@ -9772,8 +9770,8 @@ void msrVoice::handleRepeatCommonPartEndInVoiceClone (
   }
 #endif
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceRepeats ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceRepeats ()) {
     displayVoiceRepeatsStackSummary (
       inputLineNumber,
       "handleRepeatCommonPartEndInVoiceClone() 1");
@@ -9793,7 +9791,7 @@ void msrVoice::handleRepeatCommonPartEndInVoiceClone (
       "' ";
 
     msrInternalError (
-      gGlobalCurrentServiceRunData->getInputSourceName (),
+      gServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
       ss.str ());
@@ -9826,8 +9824,8 @@ void msrVoice::handleRepeatCommonPartEndInVoiceClone (
     inputLineNumber,
     msrVoiceRepeatPhaseKind::kVoiceRepeatPhaseAfterCommonPart);
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceRepeats ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceRepeats ()) {
     displayVoiceRepeatsStackSummary (
       inputLineNumber,
       "handleRepeatCommonPartEndInVoiceClone() 3");
@@ -9841,8 +9839,8 @@ void msrVoice::handleHookedRepeatEndingEndInVoiceClone (
   int           inputLineNumber,
   const std::string& repeatEndingNumber) // may be "1, 2"
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceRepeats ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceRepeats ()) {
 		std::stringstream ss;
 
     ss <<
@@ -9857,8 +9855,8 @@ void msrVoice::handleHookedRepeatEndingEndInVoiceClone (
   }
 #endif
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceRepeats ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceRepeats ()) {
     displayVoiceRepeatsStackSummary (
       inputLineNumber,
       "handleHookedRepeatEndingEndInVoiceClone() 1");
@@ -9878,7 +9876,7 @@ void msrVoice::handleHookedRepeatEndingEndInVoiceClone (
       "' ";
 
     msrInternalError (
-      gGlobalCurrentServiceRunData->getInputSourceName (),
+      gServiceRunData->getInputSourceName (),
       fInputLineNumber,
       __FILE__, __LINE__,
       ss.str ());
@@ -9922,8 +9920,8 @@ void msrVoice::handleHookedRepeatEndingEndInVoiceClone (
     repeatEnding,
     "handleHookedRepeatEndingEndInVoiceClone()");
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceRepeats ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceRepeats ()) {
     displayVoiceRepeatsStackSummary (
       inputLineNumber,
       "handleHookedRepeatEndingEndInVoiceClone() 3");
@@ -9937,8 +9935,8 @@ void msrVoice::handleHooklessRepeatEndingEndInVoiceClone (
   int           inputLineNumber,
   const std::string& repeatEndingNumber) // may be "1, 2"
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceRepeats ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceRepeats ()) {
 		std::stringstream ss;
 
     ss <<
@@ -9953,8 +9951,8 @@ void msrVoice::handleHooklessRepeatEndingEndInVoiceClone (
   }
 #endif
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceRepeats ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceRepeats ()) {
     displayVoiceRepeatsStackSummary (
       inputLineNumber,
       "handleHooklessRepeatEndingEndInVoiceClone() 1");
@@ -9974,7 +9972,7 @@ void msrVoice::handleHooklessRepeatEndingEndInVoiceClone (
       "' ";
 
     msrInternalError (
-      gGlobalCurrentServiceRunData->getInputSourceName (),
+      gServiceRunData->getInputSourceName (),
       fInputLineNumber,
       __FILE__, __LINE__,
       ss.str ());
@@ -10012,8 +10010,8 @@ void msrVoice::handleHooklessRepeatEndingEndInVoiceClone (
     inputLineNumber,
     msrVoiceRepeatPhaseKind::kVoiceRepeatPhaseAfterHooklessEnding);
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceRepeats ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceRepeats ()) {
     displayVoiceRepeatsStackSummary (
       inputLineNumber,
       "handleHooklessRepeatEndingEndInVoiceClone() 3");
@@ -10029,8 +10027,8 @@ void msrVoice::handleRepeatEndingEndInVoiceClone (
   msrRepeatEndingKind
             repeatEndingKind)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceRepeats ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceRepeats ()) {
     displayVoiceRepeatsStackSummary (
       inputLineNumber,
       "appendRepeatEndingToVoiceClone() 1");
@@ -10060,8 +10058,8 @@ void msrVoice::handleRepeatEndingEndInVoiceClone (
     }
   } // switch
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceRepeats ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceRepeats ()) {
     displayVoiceRepeatsStackSummary (
       inputLineNumber,
       "appendRepeatEndingToVoiceClone() 2");
@@ -10073,8 +10071,8 @@ void msrVoice::handleRepeatStartInVoiceClone (
   int         inputLineNumber,
   const S_msrRepeat& repeat)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceRepeats ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceRepeats ()) {
 		std::stringstream ss;
 
     ss <<
@@ -10090,8 +10088,8 @@ void msrVoice::handleRepeatStartInVoiceClone (
   }
 #endif
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceRepeats ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceRepeats ()) {
     displayVoiceRepeatsStackSummary (
       inputLineNumber,
       "handleRepeatStartInVoiceClone() 1");
@@ -10125,8 +10123,8 @@ void msrVoice::handleRepeatStartInVoiceClone (
             inputLineNumber,
             "handleRepeatStartInVoiceClone() 2");
 
-#ifdef MF_TRACING_IS_ENABLED
-          if (gGlobalTracingOahGroup->getTraceRepeats ()) {
+#ifdef MF_TRACE_IS_ENABLED
+          if (gGlobalTraceOahGroup->getTraceRepeats ()) {
             displayVoiceRepeatsStackSummary (
               inputLineNumber,
               "handleRepeatStartInVoiceClone() 3");
@@ -10136,8 +10134,8 @@ void msrVoice::handleRepeatStartInVoiceClone (
       }
 
       // create the repeat clone and stack it
-#ifdef MF_TRACING_IS_ENABLED
-      if (gGlobalTracingOahGroup->getTraceRepeats ()) {
+#ifdef MF_TRACE_IS_ENABLED
+      if (gGlobalTraceOahGroup->getTraceRepeats ()) {
         std::stringstream ss;
 
         ss <<
@@ -10160,8 +10158,8 @@ void msrVoice::handleRepeatStartInVoiceClone (
             repeat,
             "handleRepeatStartInVoiceClone() 4");
 
-#ifdef MF_TRACING_IS_ENABLED
-      if (gGlobalTracingOahGroup->getTraceRepeats ()) {
+#ifdef MF_TRACE_IS_ENABLED
+      if (gGlobalTraceOahGroup->getTraceRepeats ()) {
         displayVoiceRepeatsStackSummary (
           inputLineNumber,
           "handleRepeatStartInVoiceClone() 5");
@@ -10176,8 +10174,8 @@ void msrVoice::handleRepeatStartInVoiceClone (
 void msrVoice::handleRepeatEndInVoiceClone (
   int inputLineNumber)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceRepeats ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceRepeats ()) {
 		std::stringstream ss;
 
     ss <<
@@ -10207,8 +10205,8 @@ void msrVoice::handleRepeatEndInVoiceClone (
           inputLineNumber);
           */
 
-#ifdef MF_TRACING_IS_ENABLED
-        if (gGlobalTracingOahGroup->getTraceRepeats ()) {
+#ifdef MF_TRACE_IS_ENABLED
+        if (gGlobalTraceOahGroup->getTraceRepeats ()) {
           displayVoiceRepeatsStackSummary (
             inputLineNumber,
             "handleRepeatEndInVoiceClone() 1");
@@ -10227,7 +10225,7 @@ void msrVoice::handleRepeatEndInVoiceClone (
                 "' ";
 
               msrInternalError (
-                gGlobalCurrentServiceRunData->getInputSourceName (),
+                gServiceRunData->getInputSourceName (),
                 fInputLineNumber,
                 __FILE__, __LINE__,
                 ss.str ());
@@ -10298,8 +10296,8 @@ void msrVoice::handleRepeatEndInVoiceClone (
         } // switch
 
 
-#ifdef MF_TRACING_IS_ENABLED
-        if (gGlobalTracingOahGroup->getTraceRepeats ()) {
+#ifdef MF_TRACE_IS_ENABLED
+        if (gGlobalTraceOahGroup->getTraceRepeats ()) {
           displayVoiceRepeatsStackSummary (
             inputLineNumber,
             "handleRepeatEndInVoiceClone() 6");
@@ -10321,8 +10319,8 @@ void msrVoice::appendMeasureRepeatReplicaToVoice (
     case msrVoiceKind::kVoiceKindHarmonies:
     case msrVoiceKind::kVoiceKindFiguredBass:
       {
-#ifdef MF_TRACING_IS_ENABLED
-        if (gGlobalTracingOahGroup->getTraceMeasureRepeats ()) {
+#ifdef MF_TRACE_IS_ENABLED
+        if (gGlobalTraceOahGroup->getTraceMeasureRepeats ()) {
           std::stringstream ss;
 
           ss <<
@@ -10345,16 +10343,16 @@ void msrVoice::appendMeasureRepeatReplicaToVoice (
               getFullMeasureWholeNotesDuration ();
               */
 
-#ifdef MF_TRACING_IS_ENABLED
-        if (gGlobalTracingOahGroup->getTraceMeasureRepeats ()) { // JMI v0.9.67
+#ifdef MF_TRACE_IS_ENABLED
+        if (gGlobalTraceOahGroup->getTraceMeasureRepeats ()) { // JMI v0.9.67
           std::stringstream ss;
 
           ss <<
             std::endl <<
             "***********" <<
             std::endl << std::endl;
-          print (gLogStream);
-          gLogStream <<
+          print (gLog);
+          gLog <<
             "***********" <<
             std::endl << std::endl;
         }
@@ -10384,8 +10382,8 @@ void msrVoice::appendMeasureRepeatReplicaToVoice (
         fVoiceLastSegment = nullptr;
 
         // set the measures repeat replicas in the voice current measures repeat
-#ifdef MF_TRACING_IS_ENABLED
-        if (gGlobalTracingOahGroup->getTraceMeasureRepeats ()) { // // JMI v0.9.67
+#ifdef MF_TRACE_IS_ENABLED
+        if (gGlobalTraceOahGroup->getTraceMeasureRepeats ()) { // // JMI v0.9.67
           std::stringstream ss;
 
           ss <<
@@ -10411,9 +10409,9 @@ void msrVoice::appendMeasureRepeatReplicaToVoice (
 // void msrVoice::appendMultipleFullBarRestsToVoiceElementsList (
 //   const S_msrMultipleFullBarRests& multipleFullBarRests)
 // {
-// #ifdef MF_TRACING_IS_ENABLED
-//   if (gGlobalTracingOahGroup->getTraceMultipleFullBarRests ()) {
-//     gLogStream <<
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gGlobalTraceOahGroup->getTraceMultipleFullBarRests ()) {
+//     gLog <<
 //       "Appending multiple full-bar rests " <<
 //       multipleFullBarRests->asString () <<
 //       " to voice \"" <<
@@ -10437,8 +10435,8 @@ void msrVoice::appendMeasureRepeatReplicaToVoice (
 void msrVoice::appendMeasureRepeatToVoiceElementsList (
   const S_msrMeasureRepeat& measureRepeat)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasureRepeats ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMeasureRepeats ()) {
 		std::stringstream ss;
 
     ss <<
@@ -10469,7 +10467,7 @@ void msrVoice::appendMeasureRepeatToVoiceElementsList (
 void msrVoice:: appendRepeatEndingCloneToVoice ( // JMI
   const S_msrRepeatEnding& repeatEndingClone)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   int inputLineNumber =
     repeatEndingClone->getInputLineNumber (); // JMI
 #endif
@@ -10483,8 +10481,8 @@ void msrVoice:: appendRepeatEndingCloneToVoice ( // JMI
     case msrVoiceKind::kVoiceKindFiguredBass:
       {
         // add the repeat ending it to the voice current repeat
-#ifdef MF_TRACING_IS_ENABLED
-        if (gGlobalTracingOahGroup->getTraceRepeats ()) {
+#ifdef MF_TRACE_IS_ENABLED
+        if (gGlobalTraceOahGroup->getTraceRepeats ()) {
           std::stringstream ss;
 
           ss <<
@@ -10516,7 +10514,7 @@ void msrVoice:: appendRepeatEndingCloneToVoice ( // JMI
             "' ";
 
           msrInternalError (
-            gGlobalCurrentServiceRunData->getInputSourceName (),
+            gServiceRunData->getInputSourceName (),
             fInputLineNumber,
             __FILE__, __LINE__,
             ss.str ());
@@ -10533,8 +10531,8 @@ void msrVoice:: appendRepeatEndingCloneToVoice ( // JMI
             repeatEndingClone->getInputLineNumber (),
             repeatEndingClone);
 
-#ifdef MF_TRACING_IS_ENABLED
-        if (gGlobalTracingOahGroup->getTraceRepeats ()) {
+#ifdef MF_TRACE_IS_ENABLED
+        if (gGlobalTraceOahGroup->getTraceRepeats ()) {
           displayVoiceRepeatsStackSummary (
             inputLineNumber,
             "appendRepeatEndingCloneToVoice() 2");
@@ -10550,8 +10548,8 @@ void msrVoice:: appendRepeatEndingCloneToVoice ( // JMI
 void msrVoice::prependBarLineToVoice (
   const S_msrBarLine& barLine)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceBarLines ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceBarLines ()) {
 		std::stringstream ss;
 
     ss <<
@@ -10578,8 +10576,8 @@ void msrVoice::prependBarLineToVoice (
 void msrVoice::appendBarLineToVoice (
   const S_msrBarLine& barLine)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceBarLines ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceBarLines ()) {
 		std::stringstream ss;
 
     ss <<
@@ -10612,8 +10610,8 @@ void msrVoice::appendBarLineToVoice (
 
 void msrVoice::appendSegnoToVoice (const S_msrSegno& segno)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceSegnos ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceSegnos ()) {
 		std::stringstream ss;
 
     ss <<
@@ -10639,8 +10637,8 @@ void msrVoice::appendSegnoToVoice (const S_msrSegno& segno)
 
 void msrVoice::appendCodaToVoice (const S_msrCoda& coda)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceCodas ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceCodas ()) {
 		std::stringstream ss;
 
     ss <<
@@ -10668,8 +10666,8 @@ void msrVoice::appendCodaToVoice (const S_msrCoda& coda)
 void msrVoice::appendEyeGlassesToVoice (
   const S_msrEyeGlasses& eyeGlasses)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceEyeGlasses ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceEyeGlasses ()) {
 		std::stringstream ss;
 
     ss <<
@@ -10695,8 +10693,8 @@ void msrVoice::appendEyeGlassesToVoice (
 
 void msrVoice::appendPedalToVoice (const S_msrPedal& pedal)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTracePedals ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTracePedals ()) {
 		std::stringstream ss;
 
     ss <<
@@ -10723,8 +10721,8 @@ void msrVoice::appendPedalToVoice (const S_msrPedal& pedal)
 void msrVoice::appendDampToVoice (
   const S_msrDamp& damp)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceDamps ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceDamps ()) {
 		std::stringstream ss;
 
     ss <<
@@ -10751,8 +10749,8 @@ void msrVoice::appendDampToVoice (
 void msrVoice::appendDampAllToVoice (
   const S_msrDampAll& dampAll)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceDampAlls ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceDampAlls ()) {
 		std::stringstream ss;
 
     ss <<
@@ -10780,8 +10778,8 @@ void msrVoice::appendDampAllToVoice (
 S_msrElement msrVoice::removeLastElementFromVoice (  // JMI
   int inputLineNumber)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceVoices ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceVoices ()) {
 		std::stringstream ss;
 
     ss <<
@@ -10805,8 +10803,8 @@ void msrVoice::removeNoteFromVoice (
   int       inputLineNumber,
   const S_msrNote& note)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceChords ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceChords ()) {
 		std::stringstream ss;
 
     ss <<
@@ -10844,8 +10842,8 @@ void msrVoice::removeElementFromVoice (
   int          inputLineNumber,
   const S_msrElement& element)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceVoices ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceVoices ()) {
 		std::stringstream ss;
 
     ss <<
@@ -10873,8 +10871,8 @@ void msrVoice::removeElementFromVoice (
 S_msrMeasure msrVoice::removeLastMeasureFromVoice (
   int inputLineNumber)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasures ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMeasures ()) {
 		std::stringstream ss;
 
     ss <<
@@ -10908,8 +10906,8 @@ S_msrMeasure msrVoice::removeLastMeasureFromVoice (
 void msrVoice::finalizeLastAppendedMeasureInVoice (
   int inputLineNumber)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasures ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMeasures ()) {
 		std::stringstream ss;
 
     ss <<
@@ -10920,7 +10918,7 @@ void msrVoice::finalizeLastAppendedMeasureInVoice (
       std::endl;
   }
 
-  if (gGlobalTracingOahGroup->getTraceMeasuresDetails ()) {
+  if (gGlobalTraceOahGroup->getTraceMeasuresDetails ()) {
     displayVoice (
       inputLineNumber,
       "finalizeLastAppendedMeasureInVoice() 1");
@@ -10990,8 +10988,8 @@ void msrVoice::finalizeLastAppendedMeasureInVoice (
       break;
   } // switch
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasuresDetails ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMeasuresDetails ()) {
     displayVoice (
       inputLineNumber,
       "finalizeLastAppendedMeasureInVoice() 3");
@@ -11006,8 +11004,8 @@ void msrVoice:: collectVoiceMeasuresIntoFlatList (
 {
   // collect measures from the initial elements if any
   if (fVoiceInitialElementsList.size ()) {
-#ifdef MF_TRACING_IS_ENABLED
-    if (gGlobalTracingOahGroup->getTraceVoices ()) {
+#ifdef MF_TRACE_IS_ENABLED
+    if (gGlobalTraceOahGroup->getTraceVoices ()) {
       std::stringstream ss;
 
       ss <<
@@ -11026,8 +11024,8 @@ void msrVoice:: collectVoiceMeasuresIntoFlatList (
 
   // collect measures from the last segment if any
   if (fVoiceLastSegment) {
-#ifdef MF_TRACING_IS_ENABLED
-    if (gGlobalTracingOahGroup->getTraceVoices ()) {
+#ifdef MF_TRACE_IS_ENABLED
+    if (gGlobalTraceOahGroup->getTraceVoices ()) {
       std::stringstream ss;
 
       ss <<
@@ -11059,8 +11057,8 @@ void msrVoice:: collectVoiceMeasuresIntoFlatList (
 void msrVoice::finalizeVoice (
   int inputLineNumber)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceVoices ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceVoices ()) {
 		std::stringstream ss;
 
     ss <<
@@ -11070,7 +11068,7 @@ void msrVoice::finalizeVoice (
       std::endl;
   }
 
-  if (gGlobalTracingOahGroup->getTraceVoicesDetails ()) {
+  if (gGlobalTraceOahGroup->getTraceVoicesDetails ()) {
     displayVoice (
       inputLineNumber,
       "finalizeVoice() 1");
@@ -11086,7 +11084,7 @@ void msrVoice::finalizeVoice (
       "\" more than once";
 
     msrInternalError (
-      gGlobalCurrentServiceRunData->getInputSourceName (),
+      gServiceRunData->getInputSourceName (),
       fInputLineNumber,
       __FILE__, __LINE__,
       ss.str ());
@@ -11102,8 +11100,8 @@ void msrVoice::finalizeVoice (
       voicePart->
         getPartShortestNoteDuration ();
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceVoices ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceVoices ()) {
 		std::stringstream ss;
 
     ss <<
@@ -11149,7 +11147,7 @@ void msrVoice::finalizeVoice (
       std::endl;
 
     msrWarning (
-      gGlobalCurrentServiceRunData->getInputSourceName (),
+      gServiceRunData->getInputSourceName (),
       inputLineNumber,
       ss.str ());
   }
@@ -11159,8 +11157,8 @@ void msrVoice::finalizeVoice (
     fVoicePendingRepeatDescrsStack.size ();
 
   if (voicePendingRepeatDescrsStackSize) {
-#ifdef MF_TRACING_IS_ENABLED
-    if (gGlobalTracingOahGroup->getTraceMeasures ()) {
+#ifdef MF_TRACE_IS_ENABLED
+    if (gGlobalTraceOahGroup->getTraceMeasures ()) {
         displayVoiceRepeatsStackSummary (
           inputLineNumber,
           "finalizeVoice() 2");
@@ -11182,7 +11180,7 @@ void msrVoice::finalizeVoice (
       "\" ";
 
     msrWarning (
-      gGlobalCurrentServiceRunData->getInputSourceName (),
+      gServiceRunData->getInputSourceName (),
       fInputLineNumber,
       ss.str ());
   }
@@ -11193,8 +11191,8 @@ void msrVoice::finalizeVoice (
 
   fVoiceHasBeenFinalized = true;
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceVoicesDetails ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceVoicesDetails ()) {
     displayVoiceRepeatsStackMultipleFullBarRestsMeasureRepeatAndVoice (
       inputLineNumber,
       "finalizeVoice() 3");
@@ -11219,8 +11217,8 @@ void msrVoice::finalizeVoice (
 void msrVoice::finalizeVoiceAndAllItsMeasures (
   int inputLineNumber)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceVoices ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceVoices ()) {
 		std::stringstream ss;
 
     ss <<
@@ -11230,7 +11228,7 @@ void msrVoice::finalizeVoiceAndAllItsMeasures (
       std::endl;
   }
 
-  if (gGlobalTracingOahGroup->getTraceVoicesDetails ()) {
+  if (gGlobalTraceOahGroup->getTraceVoicesDetails ()) {
     displayVoice (
       inputLineNumber,
       "finalizeVoice() 1");
@@ -11246,7 +11244,7 @@ void msrVoice::finalizeVoiceAndAllItsMeasures (
       "\" more than once";
 
     msrInternalError (
-      gGlobalCurrentServiceRunData->getInputSourceName (),
+      gServiceRunData->getInputSourceName (),
       fInputLineNumber,
       __FILE__, __LINE__,
       ss.str ());
@@ -11262,8 +11260,8 @@ void msrVoice::finalizeVoiceAndAllItsMeasures (
       voicePart->
         getPartShortestNoteDuration ();
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceVoices ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceVoices ()) {
 		std::stringstream ss;
 
     ss <<
@@ -11307,7 +11305,7 @@ void msrVoice::finalizeVoiceAndAllItsMeasures (
       std::endl;
 
     msrWarning (
-      gGlobalCurrentServiceRunData->getInputSourceName (),
+      gServiceRunData->getInputSourceName (),
       inputLineNumber,
       ss.str ());
   }
@@ -11317,8 +11315,8 @@ void msrVoice::finalizeVoiceAndAllItsMeasures (
     fVoicePendingRepeatDescrsStack.size ();
 
   if (voicePendingRepeatDescrsStackSize) {
-#ifdef MF_TRACING_IS_ENABLED
-    if (gGlobalTracingOahGroup->getTraceMeasures ()) {
+#ifdef MF_TRACE_IS_ENABLED
+    if (gGlobalTraceOahGroup->getTraceMeasures ()) {
         displayVoiceRepeatsStackSummary (
           inputLineNumber,
           "finalizeVoice() 2");
@@ -11340,7 +11338,7 @@ void msrVoice::finalizeVoiceAndAllItsMeasures (
       "\" ";
 
     msrWarning (
-      gGlobalCurrentServiceRunData->getInputSourceName (),
+      gServiceRunData->getInputSourceName (),
       fInputLineNumber,
       ss.str ());
   }
@@ -11351,8 +11349,8 @@ void msrVoice::finalizeVoiceAndAllItsMeasures (
 
   fVoiceHasBeenFinalized = true;
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceVoicesDetails ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceVoicesDetails ()) {
     displayVoiceRepeatsStackMultipleFullBarRestsMeasureRepeatAndVoice (
       inputLineNumber,
       "finalizeVoice() 3");
@@ -11375,8 +11373,8 @@ void msrVoice::finalizeVoiceAndAllItsMeasures (
   }
 //
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceVoices ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceVoices ()) {
 		std::stringstream ss;
 
     ss <<
@@ -11405,8 +11403,8 @@ void msrVoice::checkBeamNumber (S_msrBeam beam, S_msrNote note)
   int inputLineNumber =
     beam->getInputLineNumber ();
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceBeams ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceBeams ()) {
 		std::stringstream ss;
 
     ss <<
@@ -11443,7 +11441,7 @@ void msrVoice::checkBeamNumber (S_msrBeam beam, S_msrNote note)
           note->asShortString ();
 
         msrError (
-          gGlobalCurrentServiceRunData->getInputSourceName (),
+          gServiceRunData->getInputSourceName (),
           inputLineNumber,
           __FILE__, __LINE__,
           ss.str ());
@@ -11469,7 +11467,7 @@ void msrVoice::checkBeamNumber (S_msrBeam beam, S_msrNote note)
             "'";
 
           msrError (
-            gGlobalCurrentServiceRunData->getInputSourceName (),
+            gServiceRunData->getInputSourceName (),
             inputLineNumber,
             __FILE__, __LINE__,
             ss.str ());
@@ -11494,7 +11492,7 @@ void msrVoice::checkBeamNumber (S_msrBeam beam, S_msrNote note)
           "'";
 
         msrError (
-          gGlobalCurrentServiceRunData->getInputSourceName (),
+          gServiceRunData->getInputSourceName (),
           beam->getInputLineNumber (),
           __FILE__, __LINE__,
           ss.str ());
@@ -11517,7 +11515,7 @@ void msrVoice::checkBeamNumber (S_msrBeam beam, S_msrNote note)
             "'";
 
           msrError (
-            gGlobalCurrentServiceRunData->getInputSourceName (),
+            gServiceRunData->getInputSourceName (),
             beam->getInputLineNumber (),
             __FILE__, __LINE__,
             ss.str ());
@@ -11544,7 +11542,7 @@ void msrVoice::checkBeamNumber (S_msrBeam beam, S_msrNote note)
             "'";
 
           msrError (
-            gGlobalCurrentServiceRunData->getInputSourceName (),
+            gServiceRunData->getInputSourceName (),
             inputLineNumber,
             __FILE__, __LINE__,
             ss.str ());
@@ -11565,8 +11563,9 @@ void msrVoice::checkBeamNumber (S_msrBeam beam, S_msrNote note)
 
 void msrVoice::acceptIn (basevisitor* v)
 {
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "% ==> msrVoice::acceptIn ()" <<
@@ -11576,12 +11575,14 @@ void msrVoice::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
+#endif
 
   if (visitor<S_msrVoice>*
     p =
       dynamic_cast<visitor<S_msrVoice>*> (v)) {
         S_msrVoice elem = this;
 
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
@@ -11593,14 +11594,16 @@ void msrVoice::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
+#endif
         p->visitStart (elem);
   }
 }
 
 void msrVoice::acceptOut (basevisitor* v)
 {
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "% ==> msrVoice::acceptOut ()" <<
@@ -11610,12 +11613,14 @@ void msrVoice::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
+#endif
 
   if (visitor<S_msrVoice>*
     p =
       dynamic_cast<visitor<S_msrVoice>*> (v)) {
         S_msrVoice elem = this;
 
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
@@ -11627,14 +11632,16 @@ void msrVoice::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
+#endif
         p->visitEnd (elem);
   }
 }
 
 void msrVoice::browseData (basevisitor* v)
 {
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "% ==> msrVoice::browseData ()" <<
@@ -11644,6 +11651,7 @@ void msrVoice::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
+#endif
 
   // browse the voice initial elements
   if (fVoiceInitialElementsList.size ()) {
@@ -11677,6 +11685,7 @@ void msrVoice::browseData (basevisitor* v)
     } // for
   }
 
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
 		std::stringstream ss;
 
@@ -11688,6 +11697,7 @@ void msrVoice::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
+#endif
 }
 
 std::string msrVoice::voiceNumberAsString () const
@@ -11761,7 +11771,7 @@ void msrVoice::displayVoice (
   int           inputLineNumber,
   const std::string& context) const
 {
-  gLogStream <<
+  gLog <<
     std::endl <<
     "*********>> Displaying voice \"" <<
     getVoiceName () <<
@@ -11771,10 +11781,10 @@ void msrVoice::displayVoice (
     std::endl;
 
   ++gIndenter;
-  print (gLogStream);
+  print (gLog);
   --gIndenter;
 
-  gLogStream <<
+  gLog <<
     " <<*********" <<
     std::endl << std::endl;
 }
@@ -11864,7 +11874,7 @@ void msrVoice::printFull (std::ostream& os) const
     regularVoiceStaffSequentialNumberAsString () <<
     std::endl;
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   // regular measure ends detection
   os << std::left <<
     std::setw (fieldWidth) <<
@@ -12226,7 +12236,7 @@ void msrVoice::print (std::ostream& os) const
     ")" <<
     std::endl;
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   displayVoiceMeasuresFlatList (fieldWidth);
 #endif
 

@@ -48,6 +48,8 @@
 #include "msr2musicxmlInterface.h"
 #include "msr2guidoInterface.h"
 
+#include "waeHandlers.h"
+
 
 using namespace MusicFormats;
 
@@ -93,14 +95,14 @@ void enforceSomeOptions (
   // ------------------------------------------------------
 
 /*
-  gGlobalTracingOahGroup->setTraceScores ();
-  gGlobalTracingOahGroup->setTracePartGroups ();
-  gGlobalTracingOahGroup->setTraceParts ();
-  gGlobalTracingOahGroup->setTraceStaves ();
-  gGlobalTracingOahGroup->setTraceVoices ();
-  gGlobalTracingOahGroup->setTraceSegments ();
-  gGlobalTracingOahGroup->setTraceMeasures ();
-  gGlobalTracingOahGroup->setTraceNotes ();
+  gGlobalTraceOahGroup->setTraceScores ();
+  gGlobalTraceOahGroup->setTracePartGroups ();
+  gGlobalTraceOahGroup->setTraceParts ();
+  gGlobalTraceOahGroup->setTraceStaves ();
+  gGlobalTraceOahGroup->setTraceVoices ();
+  gGlobalTraceOahGroup->setTraceSegments ();
+  gGlobalTraceOahGroup->setTraceMeasures ();
+  gGlobalTraceOahGroup->setTraceNotes ();
 */
 
   // MSR
@@ -205,7 +207,7 @@ int main (int argc, char*  argv[])
   // apply early options if any
   // ------------------------------------------------------
 
-  gGlobalOahEarlyOptions.applyEarlyOptionsIfPresentInArgcArgv (
+  gEarlyOptions.applyEarlyOptionsIfPresentInArgcArgv (
     argc,
     argv);
 
@@ -213,10 +215,10 @@ int main (int argc, char*  argv[])
   // ------------------------------------------------------
 
   Bool insiderOption =
-    gGlobalOahEarlyOptions.getEarlyInsiderOption ();
+    gEarlyOptions.getEarlyInsiderOption ();
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<
@@ -238,11 +240,11 @@ int main (int argc, char*  argv[])
 
   mfMultiGenerationOutputKind
     multiGenerationOutputKind =
-      gGlobalOahEarlyOptions.
+      gEarlyOptions.
         getEarlyMultiGenerationOutputKind ();
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<
@@ -269,7 +271,7 @@ int main (int argc, char*  argv[])
       break;
 
     case mfMultiGenerationOutputKind::kGenerationMidi:
-      gLogStream <<
+      gLog <<
         "MIDI output is not implemented yet, sorry" <<
         std::endl;
 
@@ -314,12 +316,12 @@ int main (int argc, char*  argv[])
           multiGenerationOutputKind);
     }
 
-  // create the global run data
-  // ------------------------------------------------------
+    // create the global run data
+    // ------------------------------------------------------
 
-  gGlobalCurrentServiceRunData =
-    mfServiceRunData::create (
-      serviceName);
+    setGlobalServiceRunData (
+      mfServiceRunData::create (
+        serviceName));
 
     // handle the command line options and arguments
     // ------------------------------------------------------
@@ -343,11 +345,11 @@ int main (int argc, char*  argv[])
     } // switch
   }
   catch (mfOahException& e) {
-    mfDisplayException (e, gOutputStream);
+    mfDisplayException (e, gOutput);
     return (int) mfMusicformatsErrorKind::kMusicformatsErrorInvalidOption;
   }
   catch (std::exception& e) {
-    mfDisplayException (e, gOutputStream);
+    mfDisplayException (e, gOutput);
     return (int) mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
 
@@ -381,7 +383,7 @@ int main (int argc, char*  argv[])
   // ------------------------------------------------------
 
   if (gIndenter != 0) {
-    gLogStream <<
+    gLog <<
       "### " <<
       serviceName <<
       " gIndenter value after options ands arguments checking: " <<
@@ -396,33 +398,33 @@ int main (int argc, char*  argv[])
   // ------------------------------------------------------
 
   if (gGlobalDisplayOahGroup->getDisplayOahHandler ()) {
-    gLogStream <<
+    gLog <<
       "The OAH handler contains:" <<
       std::endl;
 
     ++gIndenter;
-    handler->print (gLogStream);
+    handler->print (gLog);
     --gIndenter;
   }
 
   if (gGlobalDisplayOahGroup->getDisplayOahHandlerSummary ()) {
-    gLogStream <<
+    gLog <<
       "The summary of the OAH handler contains:" <<
       std::endl;
 
     ++gIndenter;
-    handler->printSummary (gLogStream);
+    handler->printSummary (gLog);
     --gIndenter;
   }
 
   if (gGlobalDisplayOahGroup->getDisplayOahHandlerEssentials ()) {
-    gLogStream <<
+    gLog <<
       "The essentials of the OAH handler contains:" <<
       std::endl;
 
     ++gIndenter;
     handler->printHandlerEssentials (
-      gLogStream,
+      gLog,
       30); // fieldWidth
     --gIndenter;
   }
@@ -430,39 +432,39 @@ int main (int argc, char*  argv[])
   // let's go ahead
   // ------------------------------------------------------
 
-  gLogStream <<
+  gLog <<
     "Time is " <<
-    gGlobalCurrentServiceRunData->getRunDateFull () <<
+    gServiceRunData->getRunDateFull () <<
     std::endl;
 
-  gLogStream <<
+  gLog <<
     "The command line is:" <<
     std::endl;
 
   ++gIndenter;
-  gLogStream <<
+  gLog <<
     handler->
       getLaunchCommandAsSupplied () <<
     std::endl;
   --gIndenter;
 
-  gLogStream <<
+  gLog <<
     "or with options long names:" <<
     std::endl;
 
   ++gIndenter;
-  gLogStream <<
+  gLog <<
     handler->
       getLaunchCommandWithLongOptionsNames () <<
     std::endl;
   --gIndenter;
 
-  gLogStream <<
+  gLog <<
     "or with options short names:" <<
     std::endl;
 
   ++gIndenter;
-  gLogStream <<
+  gLog <<
     handler->
       getLaunchCommandWithShortOptionsNames () <<
     std::endl;
@@ -476,8 +478,8 @@ int main (int argc, char*  argv[])
       gGlobalMsrGeneratorsOahGroup->
         getGenerationAPIKind ();
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<
@@ -497,8 +499,8 @@ int main (int argc, char*  argv[])
   // start the clock
   clock_t startClock = clock ();
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTracePasses ()) {
     std::string separator =
       "%--------------------------------------------------------------";
 
@@ -509,7 +511,7 @@ int main (int argc, char*  argv[])
       separator <<
       std::endl <<
       gTab <<
-      gWaeHandler->passIDKindAsString (mfPassIDKind::kMfPassID_1) <<
+      gLanguage->passIDKindAsString (mfPassIDKind::kMfPassID_1) <<
       ": " <<
       "Creating the MSR score with the " <<
       msrGenerationAPIKindAsString (theGenerationAPIKind) <<
@@ -538,7 +540,7 @@ int main (int argc, char*  argv[])
   // register time spent
   clock_t endClock = clock ();
 
-  mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
+  gGlobalTimingItemsList.appendTimingItem (
     mfPassIDKind::kMfPassID_1,
     "Create the MSR score",
     mfTimingItemKind::kMandatory,
@@ -567,9 +569,9 @@ int main (int argc, char*  argv[])
           mfPassIDKind::kMfPassID_2,
           "Convert the MSR into an LPSR",
           mfPassIDKind::kMfPassID_3,
-          gWaeHandler->convertTheLPSRIntoLilyPondCode (),
-          gOutputStream,
-          gLogStream,
+          gLanguage->convertTheLPSRIntoLilyPondCode (),
+          gOutput,
+          gLog,
           handler);
       break;
 
@@ -583,8 +585,8 @@ int main (int argc, char*  argv[])
           "Create the finalized BSR from the first BSR",
           mfPassIDKind::kMfPassID_3,
           "Convert the BSR into Braille text",
-          gOutputStream,
-          gLogStream,
+          gOutput,
+          gLog,
           handler);
       break;
 
@@ -598,8 +600,8 @@ int main (int argc, char*  argv[])
           "Convert the second MSR into an MXSR",
           mfPassIDKind::kMfPassID_4,
           "Convert the MXSR into MusicXML text",
-          gOutputStream,
-          gLogStream,
+          gOutput,
+          gLog,
           handler);
       break;
 
@@ -613,8 +615,8 @@ int main (int argc, char*  argv[])
           "Convert the second MSR into an MXSR",
           mfPassIDKind::kMfPassID_4,
           "Convert the MXSR into Guido text",
-          gOutputStream,
-          gLogStream,
+          gOutput,
+          gLog,
           handler);
       break;
 
@@ -622,10 +624,10 @@ int main (int argc, char*  argv[])
       break;
   } // switch
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
     if (err != mfMusicformatsErrorKind::kMusicformatsError_NONE) {
-      gLogStream <<
+      gLog <<
         serviceName << ", " <<
         mfMultiGenerationOutputKindAsString (multiGenerationOutputKind) <<
         ", err = " <<
@@ -644,15 +646,15 @@ int main (int argc, char*  argv[])
   // ------------------------------------------------------
 
   if (gGlobalDisplayOahGroup->getDisplayCPUusage ()) {
-    gLogStream <<
-      mfTimingItemsList::gGlobalTimingItemsList;
+    gLog <<
+      gGlobalTimingItemsList;
   }
 
   // check indentation
   // ------------------------------------------------------
 
   if (gIndenter != 0) {
-    gLogStream <<
+    gLog <<
       "### " << serviceName << " gIndenter final value: " <<
       gIndenter.getIndentation () <<
       " ###" <<
@@ -665,7 +667,7 @@ int main (int argc, char*  argv[])
   // ------------------------------------------------------
 
   if (err != mfMusicformatsErrorKind::kMusicformatsError_NONE) {
-    gLogStream <<
+    gLog <<
       "### The generation of " <<
       mfMultiGenerationOutputKindAsString (multiGenerationOutputKind) <<
       " thru the " <<

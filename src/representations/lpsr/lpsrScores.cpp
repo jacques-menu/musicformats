@@ -29,7 +29,7 @@
 
 #include "msrBrowsers.h"
 
-#include "oahEarlyOptions.h"
+#include "waeHandlers.h"
 
 
 namespace MusicFormats
@@ -133,13 +133,13 @@ lpsrScore::lpsrScore (
         std::endl <<
 
         "% on " <<
-        gGlobalCurrentServiceRunData->getRunDateFull () <<
+        gServiceRunData->getRunDateFull () <<
         std::endl <<
 
         "% from ";
 
       std::string inputSourceName =
-        gGlobalCurrentServiceRunData->getInputSourceName ();
+        gServiceRunData->getInputSourceName ();
 
       if (inputSourceName == "-") {
         ss << "standard input";
@@ -161,7 +161,7 @@ lpsrScore::lpsrScore (
 
       ss <<
         "The conversion date was: " <<
-        gGlobalCurrentServiceRunData->getRunDateFull ();
+        gServiceRunData->getRunDateFull ();
 
       fRunDateComment =
         lpsrComment::create (
@@ -502,7 +502,7 @@ R"(
 \include "jianpu10a.ly"
 )";
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
 		std::stringstream ss;
 
@@ -555,7 +555,7 @@ R"(
 #(use-modules (scm accreg))
 )";
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
 		std::stringstream ss;
 
@@ -623,7 +623,7 @@ R"(
 )";
 
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
 		std::stringstream ss;
 
@@ -691,7 +691,7 @@ tongue =
      script))
 )";
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
 		std::stringstream ss;
 
@@ -753,7 +753,7 @@ editorialAccidental =
   #})
 )";
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
 		std::stringstream ss;
 
@@ -812,7 +812,7 @@ fffff = #(make-dynamic-script "fffff")
 ffffff = #(make-dynamic-script "ffffff")
 )";
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
 		std::stringstream ss;
 
@@ -919,7 +919,7 @@ tupletsCurvedBrackets = {
 }
 )";
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
 		std::stringstream ss;
 
@@ -980,7 +980,7 @@ after =
    #})
 )";
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
 		std::stringstream ss;
 
@@ -1099,7 +1099,7 @@ tempoNotesRelationship =
      #}))
 )!";
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
 		std::stringstream ss;
 
@@ -1298,7 +1298,7 @@ glissandoTextOn =
 glissandoTextOff = \revert Glissando.stencil
 )";
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
 		std::stringstream ss;
 
@@ -1373,7 +1373,7 @@ otherDynamic =
        #}))
 )";
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
 		std::stringstream ss;
 
@@ -1700,7 +1700,7 @@ schleifer =
  )
 )";
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
 		std::stringstream ss;
 
@@ -1778,7 +1778,7 @@ scoopBelow = \once \override NoteHead #'stencil = #scoop-below-stencil
 %}
 )";
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
 		std::stringstream ss;
 
@@ -1847,7 +1847,7 @@ damp = \markup {
 }
 )!";
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
 		std::stringstream ss;
 
@@ -1910,7 +1910,7 @@ dampAll = \markup
 }
 )!";
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
 		std::stringstream ss;
 
@@ -1978,7 +1978,7 @@ whiteNoteHeads =
    )
 )!";
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
 		std::stringstream ss;
 
@@ -2039,7 +2039,7 @@ boxAroundNextBarNumber = {
 }
 )!";
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
 		std::stringstream ss;
 
@@ -2140,7 +2140,7 @@ R"(
 
   schemeFunctionCode = ss.str ();
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
 		std::stringstream ss;
 
@@ -2223,7 +2223,7 @@ R"(
 
   schemeFunctionCode = ss.str ();
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
 		std::stringstream ss;
 
@@ -2288,7 +2288,7 @@ R"(
 
   schemeFunctionCode = ss.str ();
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
 		std::stringstream ss;
 
@@ -2422,7 +2422,7 @@ R"(
 
   schemeFunctionCode = ss.str ();
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
 		std::stringstream ss;
 
@@ -2544,7 +2544,7 @@ R"(
 
   schemeFunctionCode = ss.str ();
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
 		std::stringstream ss;
 
@@ -2643,7 +2643,7 @@ R"(
 
   schemeFunctionCode = ss.str ();
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
 		std::stringstream ss;
 
@@ -2725,7 +2725,7 @@ R"(
 
   schemeFunctionCode = ss.str ();
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
 		std::stringstream ss;
 
@@ -2778,7 +2778,7 @@ R"(
 #(define modTimeAsString (strftime "%d/%m/%Y - %H:%M:%S" (localtime modTimeSignature)))
 )";
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
 		std::stringstream ss;
 
@@ -2822,7 +2822,7 @@ R"(
 \pointAndClickOff
 )";
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
 		std::stringstream ss;
 
@@ -2879,7 +2879,7 @@ void lpsrScore::appendLyricsUseToStoreCommand (const S_msrStanza& stanza)
 
 void lpsrScore::acceptIn (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
 		std::stringstream ss;
 
@@ -2898,7 +2898,7 @@ void lpsrScore::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_lpsrScore>*> (v)) {
         S_lpsrScore elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           std::stringstream ss;
 
@@ -2917,7 +2917,7 @@ void lpsrScore::acceptIn (basevisitor* v)
 
 void lpsrScore::acceptOut (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
 		std::stringstream ss;
 
@@ -2936,7 +2936,7 @@ void lpsrScore::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_lpsrScore>*> (v)) {
         S_lpsrScore elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           std::stringstream ss;
 
@@ -2955,7 +2955,7 @@ void lpsrScore::acceptOut (basevisitor* v)
 
 void lpsrScore::browseData (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
 		std::stringstream ss;
 
@@ -3057,7 +3057,7 @@ void lpsrScore::browseData (basevisitor* v)
     } // for
   }
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
 		std::stringstream ss;
 
@@ -3077,7 +3077,7 @@ void lpsrScore::printFull (std::ostream& os) const
   os <<
     std::string ("LPSR Score")
       + ", " +
-    gWaeHandler->fullVersion () <<
+    gLanguage->fullVersion () <<
     std::endl << std::endl;
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED

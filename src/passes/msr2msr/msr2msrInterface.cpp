@@ -42,6 +42,8 @@
 
 #include "mxsr2msrTranslatorInterface.h"
 
+#include "waeHandlers.h"
+
 
 namespace MusicFormats
 {
@@ -71,8 +73,8 @@ S_msrScore translateMsrToMsr (
   // set the global current passID
   setGlobalCurrentPassIDKind (passIDKind);
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTracePasses ()) {
     std::string separator =
       "%--------------------------------------------------------------";
 
@@ -83,7 +85,7 @@ S_msrScore translateMsrToMsr (
       separator <<
       std::endl <<
       gTab <<
-      gWaeHandler->passIDKindAsString (passIDKind) << ": " << passDescription <<
+      gLanguage->passIDKindAsString (passIDKind) << ": " << passDescription <<
       std::endl <<
       separator <<
       std::endl;
@@ -107,7 +109,7 @@ S_msrScore translateMsrToMsr (
   clock_t endClock = clock ();
 
   // register time spent
-  mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
+  gGlobalTimingItemsList.appendTimingItem (
     passIDKind,
     passDescription,
     mfTimingItemKind::kMandatory,
@@ -115,7 +117,7 @@ S_msrScore translateMsrToMsr (
     endClock);
 
   if (gIndenter != 0) {
-    if (! gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
+    if (! gEarlyOptions.getEarlyQuietOption ()) {
       std::stringstream ss;
 
       ss <<
@@ -123,7 +125,7 @@ S_msrScore translateMsrToMsr (
         gIndenter.getIndentation ();
 
       msr2msrWarning (
-        gGlobalCurrentServiceRunData->getInputSourceName (),
+        gServiceRunData->getInputSourceName (),
         1, // JMI inputLineNumber,
         ss.str ());
     }
@@ -133,7 +135,7 @@ S_msrScore translateMsrToMsr (
 
   // check indentation
   if (gIndenter != 0) {
-    gLogStream <<
+    gLog <<
       "### translateMsrToMsr gIndenter final value: " <<
       gIndenter.getIndentation () <<
       " ###" <<
@@ -148,17 +150,17 @@ S_msrScore translateMsrToMsr (
   if (gGlobalMsrOahGroup->getDisplaySecondMsr ()) {
     displayMsrScore (
       resultingNewMsrScore,
-      gWaeHandler->displayTheSecondMSRAsText ());
+      gLanguage->displayTheSecondMSRAsText ());
   }
 
   if (gGlobalMsrOahGroup->getDisplaySecondMsrFull ()) {
     displayMsrScoreFull (
       resultingNewMsrScore,
-      gWaeHandler->displayTheSecondMSRAsText ()
+      gLanguage->displayTheSecondMSRAsText ()
       	+
       ", "
         +
-      gWaeHandler->fullVersion ());
+      gLanguage->fullVersion ());
   }
 
   // display the populated MSR score summary if requested
@@ -169,7 +171,7 @@ S_msrScore translateMsrToMsr (
     displayMsrScoreSummary (
       resultingNewMsrScore,
       gGlobalMsrOahGroup,
-      gWaeHandler->displayASummaryOfTheSecondMSR ());
+      gLanguage->displayASummaryOfTheSecondMSR ());
   }
 
   // display the populated MSR score names if requested
@@ -180,7 +182,7 @@ S_msrScore translateMsrToMsr (
     displayMsrScoreNames (
       resultingNewMsrScore,
       gGlobalMsrOahGroup,
-      gWaeHandler->displayTheNamesInTheSecondMSR ());
+      gLanguage->displayTheNamesInTheSecondMSR ());
   }
   return resultingNewMsrScore;
 }
@@ -212,8 +214,8 @@ S_msrScore translateMsrToMsrAlongPathToVoice (
   // set the global current passID
   setGlobalCurrentPassIDKind (passIDKind);
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTracePasses ()) {
     std::string separator =
       "%--------------------------------------------------------------";
 
@@ -224,7 +226,7 @@ S_msrScore translateMsrToMsrAlongPathToVoice (
       separator <<
       std::endl <<
       gTab <<
-      gWaeHandler->passIDKindAsString (passIDKind) << ": " << passDescription <<
+      gLanguage->passIDKindAsString (passIDKind) << ": " << passDescription <<
       std::endl <<
       separator <<
       std::endl;
@@ -249,7 +251,7 @@ S_msrScore translateMsrToMsrAlongPathToVoice (
   clock_t endClock = clock ();
 
   // register time spent
-  mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
+  gGlobalTimingItemsList.appendTimingItem (
     passIDKind,
     passDescription,
     mfTimingItemKind::kMandatory,
@@ -257,7 +259,7 @@ S_msrScore translateMsrToMsrAlongPathToVoice (
     endClock);
 
   if (gIndenter != 0) {
-    if (! gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
+    if (! gEarlyOptions.getEarlyQuietOption ()) {
       std::stringstream ss;
 
       ss <<
@@ -265,7 +267,7 @@ S_msrScore translateMsrToMsrAlongPathToVoice (
         gIndenter.getIndentation ();
 
       msr2msrWarning (
-        gGlobalCurrentServiceRunData->getInputSourceName (),
+        gServiceRunData->getInputSourceName (),
         1, // JMI inputLineNumber,
         ss.str ());
     }
@@ -275,7 +277,7 @@ S_msrScore translateMsrToMsrAlongPathToVoice (
 
   // check indentation
   if (gIndenter != 0) {
-    gLogStream <<
+    gLog <<
       "### translateMsrToMsr gIndenter final value: " <<
       gIndenter.getIndentation () <<
       " ###" <<
@@ -290,13 +292,13 @@ S_msrScore translateMsrToMsrAlongPathToVoice (
   if (gGlobalMsrOahGroup->getDisplaySecondMsr ()) {
     displayMsrScore (
       resultingNewMsrScore,
-      gWaeHandler->displayTheSecondMSRAsText ());
+      gLanguage->displayTheSecondMSRAsText ());
   }
 
   if (gGlobalMsrOahGroup->getDisplaySecondMsrFull ()) {
     displayMsrScoreFull (
       resultingNewMsrScore,
-      gWaeHandler->displayTheSecondMSRAsText ());
+      gLanguage->displayTheSecondMSRAsText ());
   }
 
   // display the resulting new MSR score summary if requested
@@ -307,7 +309,7 @@ S_msrScore translateMsrToMsrAlongPathToVoice (
     displayMsrScoreSummary (
       resultingNewMsrScore,
       gGlobalMsrOahGroup,
-      gWaeHandler->displayASummaryOfTheSecondMSR ());
+      gLanguage->displayASummaryOfTheSecondMSR ());
   }
 
   // display the populated MSR score names if requested
@@ -318,7 +320,7 @@ S_msrScore translateMsrToMsrAlongPathToVoice (
     displayMsrScoreNames (
       resultingNewMsrScore,
       gGlobalMsrOahGroup,
-      gWaeHandler->displayTheNamesInTheSecondMSR ());
+      gLanguage->displayTheNamesInTheSecondMSR ());
   }
   return resultingNewMsrScore;
 }

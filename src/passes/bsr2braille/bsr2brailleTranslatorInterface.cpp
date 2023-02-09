@@ -20,12 +20,13 @@
 
 #include "oahEarlyOptions.h"
 
-
 #include "brailleGenerationOah.h"
 
 #include "bsr2brailleTranslator.h"
 
 #include "bsr2brailleTranslatorInterface.h"
+
+#include "waeHandlers.h"
 
 
 namespace MusicFormats
@@ -52,8 +53,8 @@ void translateBsrToBraille (
   // set the global current passID
   setGlobalCurrentPassIDKind (passIDKind);
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTracePasses ()) {
     std::string separator =
       "%--------------------------------------------------------------";
 
@@ -64,7 +65,7 @@ void translateBsrToBraille (
       separator <<
       std::endl <<
       gTab <<
-      gWaeHandler->passIDKindAsString (passIDKind) << ": " << passDescription <<
+      gLanguage->passIDKindAsString (passIDKind) << ": " << passDescription <<
       std::endl <<
       separator <<
       std::endl;
@@ -88,7 +89,7 @@ void translateBsrToBraille (
   // register time spent
   clock_t endClock = clock ();
 
-  mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
+  gGlobalTimingItemsList.appendTimingItem (
     passIDKind,
     passDescription,
     mfTimingItemKind::kMandatory,
@@ -97,7 +98,7 @@ void translateBsrToBraille (
 
   // check indentation
   if (gIndenter != 0) {
-    gLogStream <<
+    gLog <<
       "### translateBsrToBraille gIndenter final value: " <<
       gIndenter.getIndentation () <<
       " ###" <<

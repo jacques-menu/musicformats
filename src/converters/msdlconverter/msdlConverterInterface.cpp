@@ -66,9 +66,9 @@ namespace MusicFormats
 //   std::ostream&       err,
 //   const S_oahHandler& handler)
 // {
-// #ifdef MF_TRACING_IS_ENABLED
+// #ifdef MF_TRACE_IS_ENABLED
 //   if (gGlobalMxsrOahGroup->getTraceMxsr ()) {
-//     gLogStream <<
+//     gLog <<
 //       std::endl <<
 //       "<!-- ----------------------------------------------------------- -->" <<
 //       std::endl <<
@@ -77,12 +77,12 @@ namespace MusicFormats
 //
 //     ++gIndenter;
 //
-//     sxmlfile->print (gLogStream);
-//     gLogStream << std::endl << std::endl;
+//     sxmlfile->print (gLog);
+//     gLog << std::endl << std::endl;
 //
 //     --gIndenter;
 //
-//     gLogStream <<
+//     gLog <<
 //       "<!-- ----------------------------------------------------------- -->" <<
 //       std::endl << std::endl;
 //   }
@@ -91,7 +91,7 @@ namespace MusicFormats
 //   // has quiet mode been requested?
 //   // ------------------------------------------------------
 //
-//   if (gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
+//   if (gEarlyOptions.getEarlyQuietOption ()) {
 //     // disable all trace and display options
 //     handler->
 //       enforceHandlerQuietness ();
@@ -118,14 +118,14 @@ namespace MusicFormats
 //         theMxsr,
 //         gGlobalMsrOahGroup,
 //         mfPassIDKind::kMfPassID_2a,
-//         gWaeHandler->createAnMSRSqueletonFromTheMXSR ());
+//         gLanguage->createAnMSRSqueletonFromTheMXSR ());
 //   }
 //   catch (mxsr2msrException& e) {
-//     mfDisplayException (e, gOutputStream);
+//     mfDisplayException (e, gOutput);
 //     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
 //   }
 //   catch (std::exception& e) {
-//     mfDisplayException (e, gOutputStream);
+//     mfDisplayException (e, gOutput);
 //     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
 //   }
 //
@@ -135,7 +135,7 @@ namespace MusicFormats
 //   if (gGlobalXml2lyInsiderOahGroup->getQuitAfterPass2a ()) {
 //     err <<
 //       std::endl <<
-//       gWaeHandler->quittingAfterPass (mfPassIDKind::kMfPassID_2a MSR skeleton in pass 2a of sxmlFile2lilypondWithHandler as requested" <<
+//       gLanguage->quittingAfterPass (mfPassIDKind::kMfPassID_2a MSR skeleton in pass 2a of sxmlFile2lilypondWithHandler as requested" <<
 //       std::endl;
 //
 //     return mfMusicformatsErrorKind::kMusicformatsError_NONE;
@@ -149,14 +149,14 @@ namespace MusicFormats
 //       theMxsr,
 //       firstMsrScore,
 //         mfPassIDKind::kMfPassID_2b,
-//         gWaeHandler->populateTheMSRSqueletonFromMusicXMLData ());
+//         gLanguage->populateTheMSRSqueletonFromMusicXMLData ());
 //   }
 //   catch (mxsr2msrException& e) {
-//     mfDisplayException (e, gOutputStream);
+//     mfDisplayException (e, gOutput);
 //     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
 //   }
 //   catch (std::exception& e) {
-//     mfDisplayException (e, gOutputStream);
+//     mfDisplayException (e, gOutput);
 //     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
 //   }
 //
@@ -166,7 +166,7 @@ namespace MusicFormats
 //   if (gGlobalXml2lyInsiderOahGroup->getQuitAfterPass2b ()) {
 //     err <<
 //       std::endl <<
-//       gWaeHandler->quittingAfterPass (mfPassIDKind::kMfPassID_2b as requested" <<
+//       gLanguage->quittingAfterPass (mfPassIDKind::kMfPassID_2b as requested" <<
 //       std::endl;
 //
 //     return mfMusicformatsErrorKind::kMusicformatsError_NONE;
@@ -180,7 +180,7 @@ namespace MusicFormats
 //   try {
 // if (false) { // JMI
 //     for (const S_msrVoice& voice: firstMsrScore->getScoreAllVoicesList ()) {
-//       gLogStream <<
+//       gLog <<
 //         "===> firstMsrScore voice: " << voice->getVoiceName () <<
 //         std::endl;
 //
@@ -195,7 +195,7 @@ namespace MusicFormats
 //           gGlobalMsrOahGroup,
 //           gGlobalMsr2msrOahGroup,
 //           mfPassIDKind::kMfPassID_3,
-//           gWaeHandler->convertTheFirstMSRIntoASecondMSR (),
+//           gLanguage->convertTheFirstMSRIntoASecondMSR (),
 //           pathToVoice);
 //     } // for
 // }
@@ -206,15 +206,15 @@ namespace MusicFormats
 //         gGlobalMsrOahGroup,
 //         gGlobalMsr2msrOahGroup,
 //         mfPassIDKind::kMfPassID_3,
-//         gWaeHandler->convertTheFirstMSRIntoASecondMSR ());
+//         gLanguage->convertTheFirstMSRIntoASecondMSR ());
 // }
 //   }
 //   catch (mxsr2msrException& e) {
-//     mfDisplayException (e, gOutputStream);
+//     mfDisplayException (e, gOutput);
 //     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
 //   }
 //   catch (std::exception& e) {
-//     mfDisplayException (e, gOutputStream);
+//     mfDisplayException (e, gOutput);
 //     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
 //   }
 //
@@ -224,7 +224,7 @@ namespace MusicFormats
 //   if (gGlobalXml2lyInsiderOahGroup->getQuitAfterPass3 ()) {
 //     err <<
 //       std::endl <<
-//       gWaeHandler->quittingAfterPass (mfPassIDKind::kMfPassID_3 as requested" <<
+//       gLanguage->quittingAfterPass (mfPassIDKind::kMfPassID_3 as requested" <<
 //       std::endl;
 //
 //     return mfMusicformatsErrorKind::kMusicformatsError_NONE;
@@ -246,15 +246,15 @@ namespace MusicFormats
 //           gGlobalMsrOahGroup,
 //           gGlobalLpsrOahGroup,
 //           mfPassIDKind::kMfPassID_4,
-//           gWaeHandler->convertTheSecondMSRIntoAnLPSR (),
+//           gLanguage->convertTheSecondMSRIntoAnLPSR (),
 //           createMsdl2lilypondConverterComponent ());
 //     }
 //     catch (msr2lpsrException& e) {
-//       mfDisplayException (e, gOutputStream);
+//       mfDisplayException (e, gOutput);
 //       return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
 //     }
 //     catch (std::exception& e) {
-//       mfDisplayException (e, gOutputStream);
+//       mfDisplayException (e, gOutput);
 //       return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
 //     }
 //
@@ -266,7 +266,7 @@ namespace MusicFormats
 //         theLpsrScore,
 //         gGlobalMsrOahGroup,
 //         gGlobalLpsrOahGroup,
-//       	 gWaeHandler->displayTheLPSRAsText ());
+//       	 gLanguage->displayTheLPSRAsText ());
 //     }
 //
 //     if (gGlobalLpsrOahGroup->getDisplayLpsrFull ()) {
@@ -274,11 +274,11 @@ namespace MusicFormats
 //         theLpsrScore,
 //         gGlobalMsrOahGroup,
 //         gGlobalLpsrOahGroup,
-//         gWaeHandler->displayTheLPSRAsText ()
+//         gLanguage->displayTheLPSRAsText ()
 //       	   +
 //         ", " <<
 //       	   +
-//        gWaeHandler->fullVersion ());
+//        gLanguage->fullVersion ());
 //     }
 //   }
 //
@@ -291,8 +291,8 @@ namespace MusicFormats
 //         handler->
 //           fetchOutputFileNameFromTheOptions ();
 //
-// #ifdef MF_TRACING_IS_ENABLED
-//     if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+// #ifdef MF_TRACE_IS_ENABLED
+//     if (gEarlyOptions.getEarlyTraceOah ()) {
 //       err <<
 //         "xmlFile2lilypond() outputFileName = \"" <<
 //         outputFileName <<
@@ -302,8 +302,8 @@ namespace MusicFormats
 // #endif
 //
 //     if (! outputFileName.size ()) {
-// #ifdef MF_TRACING_IS_ENABLED
-//       if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+// #ifdef MF_TRACE_IS_ENABLED
+//       if (gEarlyOptions.getEarlyTraceOah ()) {
 //         err <<
 //           "xmlFile2lilypond() output goes to standard output" <<
 //           std::endl;
@@ -324,22 +324,22 @@ namespace MusicFormats
 //           gGlobalMsrOahGroup,
 //           gGlobalLpsrOahGroup,
 //           mfPassIDKind::kMfPassID_5,
-//           gWaeHandler->convertTheLPSRIntoLilyPondCode (),
+//           gLanguage->convertTheLPSRIntoLilyPondCode (),
 //           lilypondStandardOutputStream);
 //       }
 //       catch (lpsr2lilypondException& e) {
-//         mfDisplayException (e, gOutputStream);
+//         mfDisplayException (e, gOutput);
 //         return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
 //       }
 //       catch (std::exception& e) {
-//         mfDisplayException (e, gOutputStream);
+//         mfDisplayException (e, gOutput);
 //         return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
 //       }
 //     }
 //
 //     else {
-// #ifdef MF_TRACING_IS_ENABLED
-//       if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+// #ifdef MF_TRACE_IS_ENABLED
+//       if (gEarlyOptions.getEarlyTraceOah ()) {
 //         err <<
 //           "xmlFile2lilypond() output goes to file \"" <<
 //           outputFileName <<
@@ -349,11 +349,11 @@ namespace MusicFormats
 // #endif
 //
 //       // open output file
-// #ifdef MF_TRACING_IS_ENABLED
-//       if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
+// #ifdef MF_TRACE_IS_ENABLED
+//       if (gEarlyOptions.getEarlyTracePasses ()) {
 //         err <<
 //           std::endl <<
-// 		       gWaeHandler->openingLilypondFileForWriting (outputFileName) <<
+// 		       gLanguage->openingLilypondFileForWriting (outputFileName) <<
 //           std::endl;
 //       }
 // #endif
@@ -367,7 +367,7 @@ namespace MusicFormats
 //         std::stringstream ss;
 //
 //         ss <<
-//           gWaeHandler->cannotOpenLilypondFileForWriting (outputFileName);
+//           gLanguage->cannotOpenLilypondFileForWriting (outputFileName);
 //
 //         std::string message = ss.str ();
 //
@@ -392,24 +392,24 @@ namespace MusicFormats
 //           gGlobalMsrOahGroup,
 //           gGlobalLpsrOahGroup,
 //           mfPassIDKind::kMfPassID_5,
-//           gWaeHandler->convertTheLPSRIntoLilyPondCode (),
+//           gLanguage->convertTheLPSRIntoLilyPondCode (),
 //           lilypondFileOutputStream);
 //       }
 //       catch (lpsr2lilypondException& e) {
-//         mfDisplayException (e, gOutputStream);
+//         mfDisplayException (e, gOutput);
 //         return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
 //       }
 //       catch (std::exception& e) {
-//         mfDisplayException (e, gOutputStream);
+//         mfDisplayException (e, gOutput);
 //         return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
 //       }
 //
 //       // close output file
 // #ifdef TRACE_OAH
-//       if (gtracingOah->fTracePasses) {
-//         gLogStream <<
+//       if (gTraceOah->fTracePasses) {
+//         gLog <<
 //           std::endl <<
-//           gWaeHandler->closingLilypondFile (outputFileName) <<
+//           gLanguage->closingLilypondFile (outputFileName) <<
 //           std::endl;
 //       }
 // #endif
@@ -440,8 +440,8 @@ namespace MusicFormats
 //   }
 //
 //   else {
-// #ifdef MF_TRACING_IS_ENABLED
-//   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gEarlyOptions.getEarlyTraceOah ()) {
 //   err <<
 //     "xmlFile2musicxml(), sxmlfile is NULL" <<
 //     std::endl;
@@ -468,9 +468,9 @@ namespace MusicFormats
 //
 //   // print the options and arguments
 //   // ------------------------------------------------------
-// #ifdef MF_TRACING_IS_ENABLED
-//   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-//     gLogStream <<
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gEarlyOptions.getEarlyTraceOah ()) {
+//     gLog <<
 //       handlerOptionsAndArguments;
 //   }
 // #endif
@@ -478,7 +478,7 @@ namespace MusicFormats
 //   // apply early options if any
 //   // ------------------------------------------------------
 //
-//   gGlobalOahEarlyOptions.applyEarlyOptionsIfPresentInArgcArgv (
+//   gEarlyOptions.applyEarlyOptionsIfPresentInArgcArgv (
 //     argc,
 //     argv);
 //
@@ -486,11 +486,11 @@ namespace MusicFormats
 //   // ------------------------------------------------------
 //
 //   Bool insiderOption =
-//     gGlobalOahEarlyOptions.getEarlyInsiderOption ();
+//     gEarlyOptions.getEarlyInsiderOption ();
 //
-// #ifdef MF_TRACING_IS_ENABLED
-//   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-//     gLogStream <<
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gEarlyOptions.getEarlyTraceOah ()) {
+//     gLog <<
 //       serviceName << " main()" <<
 //       ", insiderOption: " << insiderOption <<
 //       std::endl;
@@ -529,7 +529,7 @@ namespace MusicFormats
 //   // create the global run data
 //   // ------------------------------------------------------
 //
-//   gGlobalCurrentServiceRunData =
+//   gServiceRunData =
 //     mfServiceRunData::create (
 //       serviceName);
 //
@@ -555,17 +555,17 @@ namespace MusicFormats
 //     } // switch
 //   }
 //   catch (mfOahException& e) {
-//     mfDisplayException (e, gOutputStream);
+//     mfDisplayException (e, gOutput);
 //     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidOption;
 //   }
 //   catch (std::exception& e) {
-//     mfDisplayException (e, gOutputStream);
+//     mfDisplayException (e, gOutput);
 //     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
 //   }
 //
 //   // check indentation
 //   if (gIndenter != 0) {
-//     gLogStream <<
+//     gLog <<
 //       "### " <<
 //       serviceName <<
 //       " gIndenter value after options ands arguments checking: " <<
@@ -600,7 +600,7 @@ EXP mfMusicformatsErrorKind msdlFile2lilypond (
 //       createSXMLFileFromFile (
 //         fileName,
 		//     mfPassIDKind::kMfPassID_1,
-//         gWaeHandler->createAnMXSRFromAMusicXMLFileOrStdin ());
+//         gLanguage->createAnMXSRFromAMusicXMLFileOrStdin ());
 //
 //   if (sxmlfile) {
 //     return
@@ -625,7 +625,7 @@ mfMusicformatsErrorKind convertMsdlFile2lilypondWithHandler ( // JMI ??? v0.9.66
 //       createSXMLFileFromFile (
 //         fileName,
 		//     mfPassIDKind::kMfPassID_1,
-//         gWaeHandler->createAnMXSRFromAMusicXMLFileOrStdin ());
+//         gLanguage->createAnMXSRFromAMusicXMLFileOrStdin ());
 //
 //   if (sxmlfile) {
 //     return
@@ -651,7 +651,7 @@ EXP mfMusicformatsErrorKind msdlFd2lilypond (
 //       createSXMLFileFromFd (
 //         fd,
 		//     mfPassIDKind::kMfPassID_1,
-//         gWaeHandler->createAnMXSRFromAMusicXMLDescriptor ());
+//         gLanguage->createAnMXSRFromAMusicXMLDescriptor ());
 //
 //   if (sxmlfile) {
 //     return
@@ -676,7 +676,7 @@ mfMusicformatsErrorKind convertMsdlFd2lilypondWithHandler (
 //       createSXMLFileFromFd (
 //         fd,
 		//     mfPassIDKind::kMfPassID_1,
-//         gWaeHandler->createAnMXSRFromAMusicXMLDescriptor ());
+//         gLanguage->createAnMXSRFromAMusicXMLDescriptor ());
 //
 //   if (sxmlfile) {
 //     return
@@ -702,7 +702,7 @@ EXP mfMusicformatsErrorKind msdlString2lilypond (
 //       createSXMLFileFromString (
 //         buffer,
 		//     mfPassIDKind::kMfPassID_1,
-//         gWaeHandler->createAnMXSRFromAMusicXMLBuffer ());
+//         gLanguage->createAnMXSRFromAMusicXMLBuffer ());
 //
 //   // call xmlFile2lilypond() even if sxmlfile is null,
 //   // to handle the help options if any

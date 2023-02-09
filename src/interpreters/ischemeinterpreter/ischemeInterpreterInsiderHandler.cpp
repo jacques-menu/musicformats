@@ -33,6 +33,9 @@
 // components
 #include "ischemeInterpreterComponent.h"
 
+// WAE
+#include "waeHandlers.h"
+
 #include "ischemeInterpreterInterface.h"
 
 #include "ischemeInterpreterInsiderHandler.h"
@@ -70,8 +73,8 @@ R"(
 )",
       usageInformation ())
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<
@@ -147,8 +150,8 @@ R"(What ischeme does:
 //______________________________________________________________________________
 void ischemeInterpreterInsiderHandler::createTheIschemeInterpreterPrefixes ()
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<
@@ -170,8 +173,8 @@ void ischemeInterpreterInsiderHandler::createTheIschemeInterpreterPrefixes ()
 void ischemeInterpreterInsiderHandler::createTheIschemeInterpreterOptionGroups (
   const std::string& serviceName)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<
@@ -198,10 +201,10 @@ void ischemeInterpreterInsiderHandler::createTheIschemeInterpreterOptionGroups (
   appendGroupToHandler (
     createGlobalWaeOahGroup ());
 
-#ifdef MF_TRACING_IS_ENABLED
-  // create the tracing OAH group
+#ifdef MF_TRACE_IS_ENABLED
+  // create the trace OAH group
   appendGroupToHandler (
-    createGlobalTracingOahGroup (
+    createGlobalTraceOahGroup (
       this));
 #endif
 
@@ -229,8 +232,8 @@ void ischemeInterpreterInsiderHandler::createTheIschemeInterpreterOptionGroups (
 //______________________________________________________________________________
 void ischemeInterpreterInsiderHandler::checkOptionsAndArguments () const
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<
@@ -264,8 +267,8 @@ void ischemeInterpreterInsiderHandler::checkHandlerOptionsConsistency ()
 //______________________________________________________________________________
 void ischemeInterpreterInsiderHandler::enforceHandlerQuietness ()
 {
-#ifdef MF_TRACING_IS_ENABLED
-  gGlobalTracingOahGroup->
+#ifdef MF_TRACE_IS_ENABLED
+  gGlobalTraceOahGroup->
     enforceGroupQuietness ();
 #endif
 
@@ -303,7 +306,7 @@ void ischemeInterpreterInsiderOahGroup::checkGroupOptionsConsistency ()
     oahError (ss.str ());
   }
 
-  else if (fOutputFileName == gGlobalCurrentServiceRunData->getInputSourceName ()) {
+  else if (fOutputFileName == gServiceRunData->getInputSourceName ()) {
     std::stringstream ss;
 
     ss <<
@@ -317,8 +320,8 @@ void ischemeInterpreterInsiderOahGroup::checkGroupOptionsConsistency ()
 //______________________________________________________________________________
 void ischemeInterpreterInsiderOahGroup::acceptIn (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -336,8 +339,8 @@ void ischemeInterpreterInsiderOahGroup::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_ischemeInterpreterInsiderOahGroup>*> (v)) {
         S_ischemeInterpreterInsiderOahGroup elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
-        if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -355,8 +358,8 @@ void ischemeInterpreterInsiderOahGroup::acceptIn (basevisitor* v)
 
 void ischemeInterpreterInsiderOahGroup::acceptOut (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -374,8 +377,8 @@ void ischemeInterpreterInsiderOahGroup::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_ischemeInterpreterInsiderOahGroup>*> (v)) {
         S_ischemeInterpreterInsiderOahGroup elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
-        if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -393,8 +396,8 @@ void ischemeInterpreterInsiderOahGroup::acceptOut (basevisitor* v)
 
 void ischemeInterpreterInsiderOahGroup::browseData (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -495,8 +498,8 @@ ischemeInterpreterInsiderOahGroup::~ischemeInterpreterInsiderOahGroup ()
 //_______________________________________________________________________________
 void ischemeInterpreterInsiderOahGroup::initializeIschemeInterpreterInsiderOahGroup ()
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
     std::stringstream ss;
 
     ss <<
@@ -517,7 +520,7 @@ void ischemeInterpreterInsiderOahGroup::initializeIschemeInterpreterInsiderOahGr
 //______________________________________________________________________________
 void ischemeInterpreterInsiderOahGroup::printIschemeInterpreterInsiderOahGroupValues (int fieldWidth)
 {
-  gLogStream <<
+  gLog <<
     "The ischeme options are:" <<
     std::endl;
 
@@ -529,8 +532,8 @@ void ischemeInterpreterInsiderOahGroup::printIschemeInterpreterInsiderOahGroupVa
 //______________________________________________________________________________
 S_ischemeInterpreterInsiderOahGroup createGlobalIschemeInterpreterInsiderOahGroup ()
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<

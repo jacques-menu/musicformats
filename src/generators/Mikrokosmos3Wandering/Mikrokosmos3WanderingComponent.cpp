@@ -11,6 +11,8 @@
 
 #include "mfcComponents.h"
 
+#include "waeHandlers.h"
+
 #include "Mikrokosmos3WanderingComponent.h"
 
 
@@ -79,8 +81,8 @@ S_mfcGeneratorComponent createMikrokosmos3WanderingGeneratorComponent ()
   // protect library against multiple initializations
   if (! pGeneratorComponent) {
 
-#ifdef MF_TRACING_IS_ENABLED
-    if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+    if (gEarlyOptions.getEarlyTraceOah ()) {
 	  	std::stringstream ss;
 
       ss <<

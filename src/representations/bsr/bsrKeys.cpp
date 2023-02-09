@@ -25,9 +25,12 @@
 #include "bsrWae.h"
 
 #include "oahOah.h"
-#include "oahEarlyOptions.h"
 
 #include "bsrOah.h"
+
+#include "waeHandlers.h"
+
+#include "waeHandlers.h"
 
 
 namespace MusicFormats
@@ -99,7 +102,7 @@ bsrKey::bsrKey (
       "numberOfAlterations: " << fNumberOfAlterations;
 
     bsrInternalError (
-      gGlobalCurrentServiceRunData->getInputSourceName (),
+      gServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
       ss.str ());
@@ -107,8 +110,8 @@ bsrKey::bsrKey (
 
   fKeyCellsList = buildCellsList ();
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceKeys ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceKeys ()) {
 		std::stringstream ss;
 
     ss <<
@@ -209,7 +212,7 @@ int bsrKey::fetchCellsNumber() const
 
 void bsrKey::acceptIn (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
 		std::stringstream ss;
 
@@ -229,7 +232,7 @@ void bsrKey::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_bsrKey>*> (v)) {
         S_bsrKey elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           std::stringstream ss;
 
@@ -248,7 +251,7 @@ void bsrKey::acceptIn (basevisitor* v)
 
 void bsrKey::acceptOut (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
 		std::stringstream ss;
 
@@ -268,7 +271,7 @@ void bsrKey::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_bsrKey>*> (v)) {
         S_bsrKey elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           std::stringstream ss;
 

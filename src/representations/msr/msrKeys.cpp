@@ -38,6 +38,8 @@
 
 #include "oahEarlyOptions.h"
 
+#include "waeHandlers.h"
+
 
 namespace MusicFormats
 {
@@ -83,8 +85,8 @@ msrHumdrumScotKeyItem::msrHumdrumScotKeyItem (
   int inputLineNumber)
     : msrElement (inputLineNumber)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceKeys ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceKeys ()) {
 		std::stringstream ss;
 
     ss <<
@@ -125,8 +127,8 @@ Bool msrHumdrumScotKeyItem::isEqualTo (
 void msrHumdrumScotKeyItem::setKeyItemDiatonicPitchKind (
   msrDiatonicPitchKind diatonicPitchKind)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceKeys ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceKeys ()) {
 		std::stringstream ss;
 
     ss <<
@@ -147,8 +149,8 @@ void msrHumdrumScotKeyItem::setKeyItemDiatonicPitchKind (
 void msrHumdrumScotKeyItem::setKeyItemAlterationKind (
   msrAlterationKind alterationKind)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceKeys ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceKeys ()) {
 		std::stringstream ss;
 
     ss <<
@@ -168,8 +170,8 @@ void msrHumdrumScotKeyItem::setKeyItemAlterationKind (
 
 void msrHumdrumScotKeyItem::setKeyItemOctaveKind (msrOctaveKind keyOctaveKind)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceKeys ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceKeys ()) {
 		std::stringstream ss;
 
     ss <<
@@ -189,8 +191,9 @@ void msrHumdrumScotKeyItem::setKeyItemOctaveKind (msrOctaveKind keyOctaveKind)
 
 void msrHumdrumScotKeyItem::acceptIn (basevisitor* v)
 {
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "% ==> msrHumdrumScotKeyItem::acceptIn ()" <<
@@ -200,12 +203,14 @@ void msrHumdrumScotKeyItem::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
+#endif
 
   if (visitor<S_msrHumdrumScotKeyItem>*
     p =
       dynamic_cast<visitor<S_msrHumdrumScotKeyItem>*> (v)) {
         S_msrHumdrumScotKeyItem elem = this;
 
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
@@ -217,14 +222,16 @@ void msrHumdrumScotKeyItem::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
+#endif
         p->visitStart (elem);
   }
 }
 
 void msrHumdrumScotKeyItem::acceptOut (basevisitor* v)
 {
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "% ==> msrHumdrumScotKeyItem::acceptOut ()" <<
@@ -234,12 +241,14 @@ void msrHumdrumScotKeyItem::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
+#endif
 
   if (visitor<S_msrHumdrumScotKeyItem>*
     p =
       dynamic_cast<visitor<S_msrHumdrumScotKeyItem>*> (v)) {
         S_msrHumdrumScotKeyItem elem = this;
 
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
@@ -251,6 +260,7 @@ void msrHumdrumScotKeyItem::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
+#endif
         p->visitEnd (elem);
   }
 }
@@ -338,7 +348,7 @@ S_msrKey msrKey::createTraditional (
   return
     msrKey::createTraditional (
       inputLineNumber,
-      gGlobalNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
+      gNullMeasure, // set later in setMeasureElementUpLinkToMeasure()
       keyTonicQuarterTonesPitchKind,
       modeKind,
       keyCancel);
@@ -362,7 +372,7 @@ S_msrKey msrKey::createHumdrumScot ( // for Humdrum/Scot keys
   return
     msrKey::createHumdrumScot (
       inputLineNumber,
-      gGlobalNullMeasureSmartPointer); // set later in setMeasureElementUpLinkToMeasure()
+      gNullMeasure); // set later in setMeasureElementUpLinkToMeasure()
 }
 
 msrKey::msrKey ( // for traditional keys
@@ -422,8 +432,8 @@ msrKey::msrKey ( // for traditional keys
   // initialization in all cases
   fKeyItemsOctavesAreSpecified = false;
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceKeys ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceKeys ()) {
 		std::stringstream ss;
 
     ss <<
@@ -447,8 +457,8 @@ msrKey::msrKey ( // for Humdrum/Scot keys
   // initialization in all cases
   fKeyItemsOctavesAreSpecified = false;
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceKeys ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceKeys ()) {
 		std::stringstream ss;
 
     ss <<
@@ -474,11 +484,11 @@ void msrKey::setKeyUpLinkToMeasure (
     "measure is null");
 #endif
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceWholeNotes ()) {
     ++gIndenter;
 
-    gLogStream <<
+    gLog <<
       "==> Setting the uplink to measure of key " <<
       asString () <<
       " to measure " << measure->asString () <<
@@ -554,8 +564,8 @@ Bool msrKey::isEqualTo (S_msrKey otherKey) const
 void msrKey::appendHumdrumScotKeyItem (
   const S_msrHumdrumScotKeyItem& item)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceKeys ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceKeys ()) {
 		std::stringstream ss;
 
     ss <<
@@ -588,8 +598,8 @@ S_msrKey msrKey::createTraditionalKeyFromString (
 
   S_msrKey result;
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceNotes ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceNotes ()) {
 		std::stringstream ss;
 
     ss <<
@@ -612,8 +622,8 @@ S_msrKey msrKey::createTraditionalKeyFromString (
     "[[:space:]]*"
     );
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<
@@ -634,8 +644,8 @@ S_msrKey msrKey::createTraditionalKeyFromString (
 
   size_t smSize = sm.size ();
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<
@@ -648,11 +658,11 @@ S_msrKey msrKey::createTraditionalKeyFromString (
     ++gIndenter;
 
     for (unsigned i = 0; i < smSize; ++i) {
-      gLogStream <<
+      gLog <<
         i << ": " << "\"" << sm [i] << "\"" <<
         std::endl;
     } // for
-    gLogStream << std::endl;
+    gLog << std::endl;
 
     --gIndenter;
   }
@@ -668,7 +678,7 @@ S_msrKey msrKey::createTraditionalKeyFromString (
       "\" is ill-formed";
 
     msrError (
-      gGlobalCurrentServiceRunData->getInputSourceName (),
+      gServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
       ss.str ());
@@ -693,8 +703,8 @@ S_msrKey msrKey::createTraditionalKeyFromString (
         inputLineNumber,
         keyMode);
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<
@@ -725,7 +735,7 @@ S_msrKey msrKey::createTraditionalKeyFromString (
   result =
     msrKey::createTraditional (
       __LINE__,
-      gGlobalNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
+      gNullMeasure, // set later in setMeasureElementUpLinkToMeasure()
       keyQuarterTonesTonicPitchKind,
       keyModeKind,
       0); // keyCancel JMI
@@ -735,8 +745,9 @@ S_msrKey msrKey::createTraditionalKeyFromString (
 
 void msrKey::acceptIn (basevisitor* v)
 {
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "% ==> msrKey::acceptIn ()" <<
@@ -746,12 +757,14 @@ void msrKey::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
+#endif
 
   if (visitor<S_msrKey>*
     p =
       dynamic_cast<visitor<S_msrKey>*> (v)) {
         S_msrKey elem = this;
 
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
@@ -763,14 +776,16 @@ void msrKey::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
+#endif
         p->visitStart (elem);
   }
 }
 
 void msrKey::acceptOut (basevisitor* v)
 {
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "% ==> msrKey::acceptOut ()" <<
@@ -780,12 +795,14 @@ void msrKey::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
+#endif
 
   if (visitor<S_msrKey>*
     p =
       dynamic_cast<visitor<S_msrKey>*> (v)) {
         S_msrKey elem = this;
 
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
@@ -797,6 +814,7 @@ void msrKey::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
+#endif
         p->visitEnd (elem);
   }
 }

@@ -84,8 +84,8 @@ class EXP msrGeneratorsOahGroup : public oahGroup
     // private services
     // ------------------------------------------------------
 
-#ifdef MF_TRACING_IS_ENABLED
-// JMI    void                  initializeMsrGeneratorstracingOah ();
+#ifdef MF_TRACE_IS_ENABLED
+// JMI    void                  initializeMsrGeneratorsTraceOah ();
 #endif
 
     void                  initializeGenerationAPIOptions ();

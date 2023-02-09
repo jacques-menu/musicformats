@@ -28,9 +28,10 @@
 #include "msrMeasureConstants.h"
 
 #include "oahOah.h"
-#include "oahEarlyOptions.h"
 
 #include "msrOah.h"
+
+#include "waeHandlers.h"
 
 
 namespace MusicFormats
@@ -55,7 +56,7 @@ S_msrBarCheck msrBarCheck::create (
   return
     msrBarCheck::create (
       inputLineNumber,
-      gGlobalNullMeasureSmartPointer); // set later in setMeasureElementUpLinkToMeasure()
+      gNullMeasure); // set later in setMeasureElementUpLinkToMeasure()
 }
 
 S_msrBarCheck msrBarCheck::createWithNextBarPuristNumber ( // JMI superflous??? v0.9.66
@@ -80,8 +81,8 @@ msrBarCheck::msrBarCheck (
     : msrMeasureElement (
         inputLineNumber)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasuresNumbers ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMeasuresNumbers ()) {
 		std::stringstream ss;
 
     ss <<
@@ -108,8 +109,8 @@ msrBarCheck::msrBarCheck (
   fNextBarOriginalNumber = nextBarOriginalNumber;
   fNextBarPuristNumber   = nextBarPuristNumber;
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasuresNumbers ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMeasuresNumbers ()) {
 		std::stringstream ss;
 
     ss <<
@@ -142,11 +143,11 @@ void msrBarCheck::setBarCheckUpLinkToMeasure (
     "measure is null");
 #endif
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceWholeNotes ()) {
     ++gIndenter;
 
-    gLogStream <<
+    gLog <<
       "==> Setting the uplink to measure of bar check " <<
       asString () <<
       " to measure " << measure->asString () <<
@@ -163,8 +164,8 @@ void msrBarCheck::setBarCheckUpLinkToMeasure (
 
 void msrBarCheck::setNextBarPuristNumber (int puristNumber)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasuresNumbers ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMeasuresNumbers ()) {
 		std::stringstream ss;
 
     ss <<
@@ -184,6 +185,7 @@ void msrBarCheck::setNextBarPuristNumber (int puristNumber)
 
 void msrBarCheck::acceptIn (basevisitor* v)
 {
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
 		std::stringstream ss;
 
@@ -195,12 +197,14 @@ void msrBarCheck::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
+#endif
 
   if (visitor<S_msrBarCheck>*
     p =
       dynamic_cast<visitor<S_msrBarCheck>*> (v)) {
         S_msrBarCheck elem = this;
 
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
@@ -212,14 +216,16 @@ void msrBarCheck::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
+#endif
         p->visitStart (elem);
   }
 }
 
 void msrBarCheck::acceptOut (basevisitor* v)
 {
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "% ==> msrBarCheck::acceptOut ()" <<
@@ -229,12 +235,14 @@ void msrBarCheck::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
+#endif
 
   if (visitor<S_msrBarCheck>*
     p =
       dynamic_cast<visitor<S_msrBarCheck>*> (v)) {
         S_msrBarCheck elem = this;
 
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
@@ -246,6 +254,7 @@ void msrBarCheck::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
+#endif
         p->visitEnd (elem);
   }
 }

@@ -56,7 +56,7 @@ void ischemeOptionsBlock::registerOptionsInOptionsBlock (
   ischemeDriver& drv)
 {
   if (gGlobalIschemeInterpreterOahGroup->getTraceOptionsBlocks ()) {
-    gLogStream <<
+    gLog <<
       "====> Registering option [" <<
       option->asString () <<
       "] in options block \"" <<
@@ -122,14 +122,14 @@ void ischemeOptionsBlock::print (std::ostream& os) const
     std::endl;
 
   // print the options blocks options name and value vector
-  gLogStream <<
+  gLog <<
     "fOptionsBlockOptionsVector" << ": " <<
     std::endl;
 
   ++gIndenter;
 
   for (S_oahOption option : fOptionsBlockOptionsVector) {
-    gLogStream << option;
+    gLog << option;
   } // for
 
   --gIndenter;
@@ -206,7 +206,7 @@ void ischemeInput::setInputNameSuppliedByAnOption (
   ischemeDriver&   drv)
 {
   if (gGlobalIschemeInterpreterOahGroup->getTraceInputs ()) {
-    gLogStream <<
+    gLog <<
       "====> Setting the name of input \"" <<
       fInputName <<
       "\" to \"" <<
@@ -225,7 +225,7 @@ void ischemeInput::selectInputName (
   ischemeDriver&   drv)
 {
   if (gGlobalIschemeInterpreterOahGroup->getTraceInputs ()) {
-    gLogStream <<
+    gLog <<
       "====> Setting the name of input \"" <<
       fInputName <<
       "\" to \"" <<
@@ -277,7 +277,7 @@ void ischemeInput::selectInputName (
 //
 //         if (inputGotAValueByAnOption) {
 //           if (gGlobalIschemeInterpreterOahGroup->getTraceInputs ()) {
-//             gLogStream <<
+//             gLog <<
 //               "====> Input name \"" <<
 //               fInputName <<
 //               "\" has been selected as \"" <<
@@ -368,7 +368,7 @@ std::string ischemeInput::getInputName (ischemeDriver& drv) const
 
     case ischemeInputNameKind::kInputNameOptionSupplied:
       if (gGlobalIschemeInterpreterOahGroup->getTraceInputs ()) {
-        gLogStream <<
+        gLog <<
           "====> " <<
           " input \"" <<
           fInputName <<
@@ -382,7 +382,7 @@ std::string ischemeInput::getInputName (ischemeDriver& drv) const
 
     case ischemeInputNameKind::kInputNameSetInScript:
       if (gGlobalIschemeInterpreterOahGroup->getTraceInputs ()) {
-        gLogStream <<
+        gLog <<
           "====>" <<
           "input \"" <<
           fInputName <<
@@ -431,7 +431,7 @@ S_ischemeOptionsBlock ischemeInput::getInputOptionsBlockForName (
   S_ischemeOptionsBlock result;
 
   if (gGlobalIschemeInterpreterOahGroup->getTraceInputs ()) {
-    gLogStream <<
+    gLog <<
       "====> Fetching name \"" <<
       name <<
       "\" in input \"" <<
@@ -464,7 +464,7 @@ S_ischemeOptionsBlock ischemeInput::getInputOptionsBlockForName (
   }
 
   if (gGlobalIschemeInterpreterOahGroup->getTraceInputs ()) {
-    gLogStream <<
+    gLog <<
       "<==== Result: \"" <<
       result <<
       "\", line " << drv.getScannerLocation () <<
@@ -501,7 +501,7 @@ void ischemeInput::addName (
 
   else {
     if (gGlobalIschemeInterpreterOahGroup->getTraceInputs ()) {
-      gLogStream <<
+      gLog <<
         "====> Adding name \"" <<
         name <<
         "\"" <<
@@ -541,7 +541,7 @@ void ischemeInput::enrichNameOptionsBlock (
 #endif
 
   if (gGlobalIschemeInterpreterOahGroup->getTraceInputs ()) {
-    gLogStream <<
+    gLog <<
       "====> Enriching options block \"" <<
       nameOptionsBlock->getOptionsBlockName () <<
       "\" (" <<
@@ -837,7 +837,7 @@ S_ischemeInput ischemeInputsTable::fetchInputByName (
   S_ischemeInput result;
 
   if (gGlobalIschemeInterpreterOahGroup->getTraceInputs ()) {
-    gLogStream <<
+    gLog <<
       "====> Fetching input named \"" <<
       name <<
       "\" in inputs table" <<
@@ -876,7 +876,7 @@ S_ischemeInput ischemeInputsTable::fetchInputByNameNonConst (
   S_ischemeInput result;
 
   if (gGlobalIschemeInterpreterOahGroup->getTraceInputs ()) {
-    gLogStream <<
+    gLog <<
       "====> Fetching input named \"" <<
       name <<
       "\" in inputs table (non-const)" <<
@@ -1029,7 +1029,7 @@ void ischemeChoice::setChoiceLabelSuppliedByAnOption (
   ischemeDriver&   drv)
 {
   if (gGlobalIschemeInterpreterOahGroup->getTraceChoices ()) {
-    gLogStream <<
+    gLog <<
       "====> Setting the label of choice \"" <<
       fChoiceName <<
       "\" to \"" <<
@@ -1048,7 +1048,7 @@ void ischemeChoice::selectChoiceLabel (
   ischemeDriver&   drv)
 {
   if (gGlobalIschemeInterpreterOahGroup->getTraceChoices ()) {
-    gLogStream <<
+    gLog <<
       "====> Setting the label of choice \"" <<
       fChoiceName <<
       "\" to \"" <<
@@ -1100,7 +1100,7 @@ void ischemeChoice::selectChoiceLabel (
 
         if (choiceGotAValueByAnOption) {
           if (gGlobalIschemeInterpreterOahGroup->getTraceChoices ()) {
-            gLogStream <<
+            gLog <<
               "====> Choice name \"" <<
               fChoiceName <<
               "\" has been selected as \"" <<
@@ -1191,7 +1191,7 @@ std::string ischemeChoice::getChoiceLabel (ischemeDriver& drv) const
 
     case ischemeChoiceLabelKind::kChoiceLabelOptionSupplied:
       if (gGlobalIschemeInterpreterOahGroup->getTraceChoices ()) {
-        gLogStream <<
+        gLog <<
           "====> " <<
           " choice \"" <<
           fChoiceName <<
@@ -1205,7 +1205,7 @@ std::string ischemeChoice::getChoiceLabel (ischemeDriver& drv) const
 
     case ischemeChoiceLabelKind::kChoiceLabelSetInScript:
       if (gGlobalIschemeInterpreterOahGroup->getTraceChoices ()) {
-        gLogStream <<
+        gLog <<
           "====>" <<
           "choice \"" <<
           fChoiceName <<
@@ -1254,7 +1254,7 @@ S_ischemeOptionsBlock ischemeChoice::getChoiceOptionsBlockForLabel (
   S_ischemeOptionsBlock result;
 
   if (gGlobalIschemeInterpreterOahGroup->getTraceChoices ()) {
-    gLogStream <<
+    gLog <<
       "====> Fetching label \"" <<
       label <<
       "\" in choice \"" <<
@@ -1287,7 +1287,7 @@ S_ischemeOptionsBlock ischemeChoice::getChoiceOptionsBlockForLabel (
   }
 
   if (gGlobalIschemeInterpreterOahGroup->getTraceChoices ()) {
-    gLogStream <<
+    gLog <<
       "<==== Result: \"" <<
       result <<
       "\", line " << drv.getScannerLocation () <<
@@ -1324,7 +1324,7 @@ void ischemeChoice::addLabel (
 
   else {
     if (gGlobalIschemeInterpreterOahGroup->getTraceChoices ()) {
-      gLogStream <<
+      gLog <<
         "====> Adding label \"" <<
         label <<
         "\"" <<
@@ -1364,7 +1364,7 @@ void ischemeChoice::enrichLabelOptionsBlock (
 #endif
 
   if (gGlobalIschemeInterpreterOahGroup->getTraceChoices ()) {
-    gLogStream <<
+    gLog <<
       "====> Enriching options block \"" <<
       labelOptionsBlock->getOptionsBlockName () <<
       "\" (" <<
@@ -1702,7 +1702,7 @@ S_ischemeChoice ischemeChoicesTable::fetchChoiceByName (
   S_ischemeChoice result;
 
   if (gGlobalIschemeInterpreterOahGroup->getTraceChoices ()) {
-    gLogStream <<
+    gLog <<
       "====> Fetching choice named \"" <<
       name <<
       "\" in choices table" <<
@@ -1741,7 +1741,7 @@ S_ischemeChoice ischemeChoicesTable::fetchChoiceByNameNonConst (
   S_ischemeChoice result;
 
   if (gGlobalIschemeInterpreterOahGroup->getTraceChoices ()) {
-    gLogStream <<
+    gLog <<
       "====> Fetching choice named \"" <<
       name <<
       "\" in choices table (non-const)" <<
@@ -1867,7 +1867,7 @@ ischemeCaseChoiceStatement::ischemeCaseChoiceStatement (
   fCaseChoice = caseChoice;
 
   if (gGlobalIschemeInterpreterOahGroup->getTraceCaseChoiceStatements ()) {
-    gLogStream <<
+    gLog <<
       "====> Creating case statement" <<
       ", caseChoice: [" <<
       fCaseChoice->asString () <<
@@ -1890,7 +1890,7 @@ void ischemeCaseChoiceStatement::registerCaseChoiceLabel (
   ischemeDriver&   drv)
 {
   if (gGlobalIschemeInterpreterOahGroup->getTraceCaseChoiceStatements ()) {
-    gLogStream <<
+    gLog <<
       "====> Registering case label \"" <<
       label <<
       "\" in case statement: [" <<
@@ -2072,7 +2072,7 @@ ischemeCaseInputStatement::ischemeCaseInputStatement (
   fCaseInputInput = caseInput;
 
   if (gGlobalIschemeInterpreterOahGroup->getTraceCaseInputStatements ()) {
-    gLogStream <<
+    gLog <<
       "====> Creating case statement" <<
       ", caseInput: [" <<
       fCaseInputInput->asString () <<
@@ -2095,7 +2095,7 @@ void ischemeCaseInputStatement::registerCaseInputName (
   ischemeDriver&   drv)
 {
   if (gGlobalIschemeInterpreterOahGroup->getTraceCaseInputStatements ()) {
-    gLogStream <<
+    gLog <<
       "====> Registering case name \"" <<
       name <<
       "\" in case statement: [" <<
@@ -2256,9 +2256,9 @@ std::ostream& operator << (std::ostream& os, const S_ischemeCaseInputStatement& 
 //   static Bool pPrivateThisMethodHasBeenRun (false);
 //
 //   if (! pPrivateThisMethodHasBeenRun) {
-// #ifdef MF_TRACING_IS_ENABLED
-//     if (gGlobalOahEarlyOptions.getEarlyTracingOah () && ! gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
-//       gLogStream <<
+// #ifdef MF_TRACE_IS_ENABLED
+//     if (gEarlyOptions.getEarlyTraceOah () && ! gEarlyOptions.getEarlyQuietOption ()) {
+//       gLog <<
 //         "Initializing iScheme basic types handling" <<
 //         std::endl;
 //     }

@@ -9,33 +9,33 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#ifndef ___mfWaeHandlersFrench___
-#define ___mfWaeHandlersFrench___
+#ifndef ___languagesFrench___
+#define ___languagesFrench___
 
-#include "mfWaeHandlers.h"
+#include "languages.h"
 
 
 namespace MusicFormats
 {
 
 //________________________________________________________________________
-class EXP mfWaeHandlerFrench : public mfWaeHandler
+class EXP languageFrench : public language
 {
   public:
 
     // creation
     // ------------------------------------------------------
 
-    static SMARTP<mfWaeHandlerFrench> create ();
+    static SMARTP<languageFrench> create ();
 
   public:
 
     // const overrideructors/destructor
     // ------------------------------------------------------
 
-                          mfWaeHandlerFrench ();
+                          languageFrench ();
 
-    virtual               ~mfWaeHandlerFrench ();
+    virtual               ~languageFrench ();
 
   public:
 
@@ -120,8 +120,8 @@ class EXP mfWaeHandlerFrench : public mfWaeHandler
     // private fields
     // ------------------------------------------------------
 };
-typedef SMARTP<mfWaeHandlerFrench> S_mfWaeHandlerFrench;
-EXP std::ostream& operator << (std::ostream& os, const S_mfWaeHandlerFrench& elt);
+typedef SMARTP<languageFrench> S_languageFrench;
+EXP std::ostream& operator << (std::ostream& os, const S_languageFrench& elt);
 
 
 }

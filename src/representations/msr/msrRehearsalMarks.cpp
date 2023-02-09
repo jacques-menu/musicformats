@@ -23,9 +23,10 @@
 #include "msrRehearsalMarks.h"
 
 #include "oahOah.h"
-#include "oahEarlyOptions.h"
 
 #include "msrOah.h"
+
+#include "waeHandlers.h"
 
 
 namespace MusicFormats
@@ -59,7 +60,7 @@ S_msrRehearsalMark msrRehearsalMark::create (
   return
     msrRehearsalMark::create (
       inputLineNumber,
-      gGlobalNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
+      gNullMeasure, // set later in setMeasureElementUpLinkToMeasure()
       rehearsalKind,
       rehearsalText,
       rehearsalPlacementKind);
@@ -95,11 +96,11 @@ void msrRehearsalMark::setRehearsalMarkUpLinkToMeasure (
     "measure is null");
 #endif
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceWholeNotes ()) {
     ++gIndenter;
 
-    gLogStream <<
+    gLog <<
       "==> Setting the uplink to measure of rehearsal mark " <<
       asString () <<
       " to measure " << measure->asString () <<
@@ -116,8 +117,9 @@ void msrRehearsalMark::setRehearsalMarkUpLinkToMeasure (
 
 void msrRehearsalMark::acceptIn (basevisitor* v)
 {
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "% ==> msrRehearsalMark::acceptIn ()" <<
@@ -127,12 +129,14 @@ void msrRehearsalMark::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
+#endif
 
   if (visitor<S_msrRehearsalMark>*
     p =
       dynamic_cast<visitor<S_msrRehearsalMark>*> (v)) {
         S_msrRehearsalMark elem = this;
 
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
@@ -144,14 +148,16 @@ void msrRehearsalMark::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
+#endif
         p->visitStart (elem);
   }
 }
 
 void msrRehearsalMark::acceptOut (basevisitor* v)
 {
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "% ==> msrRehearsalMark::acceptOut ()" <<
@@ -161,12 +167,14 @@ void msrRehearsalMark::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
+#endif
 
   if (visitor<S_msrRehearsalMark>*
     p =
       dynamic_cast<visitor<S_msrRehearsalMark>*> (v)) {
         S_msrRehearsalMark elem = this;
 
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
@@ -178,6 +186,7 @@ void msrRehearsalMark::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
+#endif        
         p->visitEnd (elem);
   }
 }

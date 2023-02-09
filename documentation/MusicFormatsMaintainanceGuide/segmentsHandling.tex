@@ -191,13 +191,13 @@ void msrSegment::assertSegmentElementsListIsNotEmpty (
   int inputLineNumber) const
 {
   if (! fSegmentElementsList.size ()) {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (
-    gGlobalTracingOahGroup->getTraceMeasuresDetails ()
+    gGlobalTraceOahGroup->getTraceMeasuresDetails ()
       ||
-    gGlobalTracingOahGroup->getTraceSegmentsDetails ()
+    gGlobalTraceOahGroup->getTraceSegmentsDetails ()
       ||
-    gGlobalTracingOahGroup->getTraceRepeatsDetails ()
+    gGlobalTraceOahGroup->getTraceRepeatsDetails ()
   ) {
     fSegmentUpLinkToVoice->
       displayVoiceRepeatsStackMultipleFullBarRestsMeasureRepeatAndVoice (
@@ -206,7 +206,7 @@ void msrSegment::assertSegmentElementsListIsNotEmpty (
   }
 #endif
 
-    gLogStream <<
+    gLog <<
       "assertSegmentElementsListIsNotEmpty()" <<
       ", fSegmentElementsList is empty" <<
       ", segment: " <<
@@ -230,8 +230,8 @@ One such call is:
 void msrSegment::appendKeyToSegment (
   const S_msrKey& key)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceKeys ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceKeys ()) {
 		std::stringstream ss;
 
     ss <<

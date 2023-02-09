@@ -9,9 +9,11 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include "mfIndentedTextOutput.h" // for gLogStream
+#include "mfIndentedTextOutput.h" // for gLog
 
 #include "msrComponent.h"
+
+#include "waeHandlers.h"
 
 
 namespace MusicFormats
@@ -25,8 +27,8 @@ S_mfcRepresentationComponent createMsrRepresentationComponent ()
   // protect library against multiple initializations
   if (! pRepresentationComponent) {
 
-#ifdef MF_TRACING_IS_ENABLED
-    if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {
+#ifdef MF_TRACE_IS_ENABLED
+    if (gEarlyOptions.getEarlyTraceComponents ()) {
 	  	std::stringstream ss;
 
       ss <<

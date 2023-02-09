@@ -820,7 +820,7 @@ namespace iscm {
         ++gIndenter;
 
         if (drv.getDisplayOptions ()) {
-          gLogStream <<
+          gLog <<
             "====> option " << yystack_[0].value.as < std::string > () <<
             ", line " << drv.getScannerLocation () <<
             std::endl;
@@ -841,7 +841,7 @@ namespace iscm {
         ++gIndenter;
 
         if (drv.getDisplayOptions ()) {
-          gLogStream <<
+          gLog <<
             "====> option " << yystack_[1].value.as < std::string > () << ' ' << yystack_[0].value.as < std::string > () <<
             ", line " << drv.getScannerLocation () <<
             std::endl;
@@ -914,7 +914,7 @@ namespace iscm {
         std::string choiceName = yystack_[1].value.as < std::string > ();
 
         if (drv.getTraceCaseChoiceStatements ()) {
-          gLogStream <<
+          gLog <<
             "====> choice " << choiceName << ": " << "..." <<
             ", line " << drv.getScannerLocation () <<
             std::endl;
@@ -965,7 +965,7 @@ namespace iscm {
 #line 390 "ischemeParser.yy"
       {
         if (drv.getTraceCaseChoiceStatements ()) {
-          gLogStream <<
+          gLog <<
             "------------------------------------------------------------" <<
             std::endl;
         }
@@ -1040,7 +1040,7 @@ namespace iscm {
         std::string choiceName = yystack_[1].value.as < std::string > ();
 
         if (drv.getTraceCaseChoiceStatements ()) {
-          gLogStream <<
+          gLog <<
             "====> case " << choiceName << ": ..." <<
             ", line " << drv.getScannerLocation () <<
             std::endl;
@@ -1100,7 +1100,7 @@ namespace iscm {
         drv.caseChoiceStatementsStackPop ();
 
         if (drv.getTraceCaseChoiceStatements ()) {
-          gLogStream <<
+          gLog <<
             "------------------------------------------------------------" <<
             std::endl;
         }
@@ -1231,7 +1231,7 @@ namespace iscm {
         std::string inputName = "$2 INPUT";
 
         if (drv.getTraceCaseInputStatements ()) {
-          gLogStream <<
+          gLog <<
             "====> case input " << inputName << ": ..." <<
             ", line " << drv.getScannerLocation () <<
             std::endl;
@@ -1291,7 +1291,7 @@ namespace iscm {
         drv.caseInputStatementsStackPop ();
 
         if (drv.getTraceCaseInputStatements ()) {
-          gLogStream <<
+          gLog <<
             "------------------------------------------------------------" <<
             std::endl;
         }

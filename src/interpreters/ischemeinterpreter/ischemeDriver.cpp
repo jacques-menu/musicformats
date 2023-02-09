@@ -38,6 +38,8 @@ int main()
 
 #include "ischemeWae.h"
 
+#include "waeHandlers.h"
+
 
 //_______________________________________________________________________________
 // constants
@@ -48,22 +50,22 @@ ischemeDriver::ischemeDriver ()
 {
   // get the script source name
   fScriptName =
-    gGlobalCurrentServiceRunData->
+    gServiceRunData->
       getInputSourceName ();
 
   if (fScriptName == "-") {
     // iScheme data comes from standard input
-#ifdef MF_TRACING_IS_ENABLED
-    if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-      gLogStream << "Reading standard input" << std::endl;
+#ifdef MF_TRACE_IS_ENABLED
+    if (gEarlyOptions.getEarlyTraceOah ()) {
+      gLog << "Reading standard input" << std::endl;
     }
 #endif
   }
 
   else {
     // iScheme data comes from a file
-#ifdef MF_TRACING_IS_ENABLED
-    if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+    if (gEarlyOptions.getEarlyTraceOah ()) {
 	  	std::stringstream ss;
 
       ss <<
@@ -133,7 +135,7 @@ ischemeDriver::ischemeDriver ()
   fKnownNames.insert ("msdl");
 
   if (fDisplayToolAndInput) {
-    gLogStream <<
+    gLog <<
       "====> The known tools names are: " <<
       mfStringSetAsString (fKnownNames) <<
       std::endl;
@@ -148,7 +150,7 @@ ischemeDriver::ischemeDriver ()
       getSelectChoiceToLabelsMultiMap ();
 
   if (fTraceChoices) {
-    gLogStream <<
+    gLog <<
       "====> The choice labels set by options are: " <<
       mfStringToStringMultiMapAsString (
         fOptionsSuppliedChoicesLabelsMultiMap) <<
@@ -172,14 +174,14 @@ ischemeDriver::~ischemeDriver ()
 void ischemeDriver::setTool (std::string tool)
 {
   if (fDisplayToolAndInput) {
-    gLogStream <<
+    gLog <<
       "====> tool: " << tool<<
       std::endl;
   }
 
   // is this tool a known tool name?
   if (! mfStringIsInStringSet (tool, fKnownNames)) {
-    gLogStream <<
+    gLog <<
       "### Unkown tool name \"" << tool << "\"" <<
       ", the known tool names are " <<
       mfStringSetAsString (fKnownNames) <<
@@ -192,7 +194,7 @@ void ischemeDriver::setTool (std::string tool)
 void ischemeDriver::appendInputSouce (std::string inputSouce)
 {
   if (fDisplayToolAndInput) {
-    gLogStream <<
+    gLog <<
       "====> input: " << inputSouce <<
       std::endl;
   }
@@ -205,7 +207,7 @@ void ischemeDriver::optionsBlocksStackPush (
   const std::string&      context)
 {
   if (fTraceOptionsBlocks) {
-    gLogStream <<
+    gLog <<
       "====> Pushing [" <<
       optionsBlock->asString () <<
       "] onto the options blocks stack" <<
@@ -258,7 +260,7 @@ void ischemeDriver::registerOptionInCurrentOptionsBlock (
 #endif
 
   if (fDisplayOptions) { // JMI
-    gLogStream <<
+    gLog <<
       "====> Registering option [" <<
       option->asString () <<
       "] in (current) \"" <<
@@ -277,7 +279,7 @@ void ischemeDriver::registerOptionsSuppliedChoicesAsUsed (
   const std::string& choiceName)
 {
   if (fDisplayOptions) { // JMI
-    gLogStream <<
+    gLog <<
       "====> Registering option-supplied choice [" <<
       choiceName <<
       "] as used" <<
@@ -292,7 +294,7 @@ void ischemeDriver::registerOptionsSuppliedChoicesAsUnused (
   const std::string& choiceName)
 {
   if (fDisplayOptions) { // JMI
-    gLogStream <<
+    gLog <<
       "====> Registering option-supplied choice [" <<
       choiceName <<
       "] as used" <<
@@ -315,7 +317,7 @@ void ischemeDriver::optionsBlocksStackPop (
 #endif
 
   if (fTraceOptionsBlocks) {
-    gLogStream <<
+    gLog <<
       "====> Popping [" <<
       fOptionsBlocksStack.front ()->asString () <<
       "] from the options blocks stack" <<
@@ -335,25 +337,25 @@ void ischemeDriver::optionsBlocksStackPop (
 void ischemeDriver::displayOptionsBlocksStack (
   const std::string& context) const
 {
-  gLogStream <<
+  gLog <<
     "OptionsBlocks stack, context: " <<
     context <<
     ":" ;
 
   if (fOptionsBlocksStack.size ()) {
-    gLogStream << std::endl;
+    gLog << std::endl;
 
     ++gIndenter;
 
     for (S_ischemeOptionsBlock optionsBlock : fOptionsBlocksStack) {
-      gLogStream << optionsBlock;
+      gLog << optionsBlock;
     } // for
 
     --gIndenter;
   }
 
   else {
-    gLogStream << "[EMPTY]" << std::endl;
+    gLog << "[EMPTY]" << std::endl;
   }
 }
 
@@ -361,7 +363,7 @@ void ischemeDriver::caseChoiceStatementsStackPush (
   const S_ischemeCaseChoiceStatement& caseChoiceStatement)
 {
   if (fTraceCaseChoiceStatements) {
-    gLogStream <<
+    gLog <<
       "====> Pushing [" <<
       caseChoiceStatement->asString () <<
       "] onto the case statements stack" <<
@@ -403,7 +405,7 @@ void ischemeDriver::caseChoiceStatementsStackPop ()
 #endif
 
   if (fTraceCaseChoiceStatements) {
-    gLogStream <<
+    gLog <<
       "====> Popping [" <<
       fCaseChoiceStatementsStack.front ()->asString () <<
       "] from the case statements stack" <<
@@ -421,7 +423,7 @@ void ischemeDriver::caseChoiceStatementsStackPop ()
 void ischemeDriver::displayCaseChoiceStatementsStack (
   const std::string& context) const
 {
-  gLogStream <<
+  gLog <<
     "Case statements stack" <<
     ", context: " << context <<
     std::endl;
@@ -430,14 +432,14 @@ void ischemeDriver::displayCaseChoiceStatementsStack (
     ++gIndenter;
 
     for (S_ischemeCaseChoiceStatement caseChoiceStatement : fCaseChoiceStatementsStack) {
-      gLogStream << caseChoiceStatement;
+      gLog << caseChoiceStatement;
     } // for
 
     --gIndenter;
   }
 
   else {
-    gLogStream << "[EMPTY]" << std::endl;
+    gLog << "[EMPTY]" << std::endl;
   }
 }
 
@@ -445,7 +447,7 @@ void ischemeDriver::caseInputStatementsStackPush (
   const S_ischemeCaseInputStatement& caseInputStatement)
 {
   if (fTraceCaseInputStatements) {
-    gLogStream <<
+    gLog <<
       "====> Pushing [" <<
       caseInputStatement->asString () <<
       "] onto the case statements stack" <<
@@ -487,7 +489,7 @@ void ischemeDriver::caseInputStatementsStackPop ()
 #endif
 
   if (fTraceCaseInputStatements) {
-    gLogStream <<
+    gLog <<
       "====> Popping [" <<
       fCaseInputStatementsStack.front ()->asString () <<
       "] from the case statements stack" <<
@@ -505,7 +507,7 @@ void ischemeDriver::caseInputStatementsStackPop ()
 void ischemeDriver::displayCaseInputStatementsStack (
   const std::string& context) const
 {
-  gLogStream <<
+  gLog <<
     "Case statements stack" <<
     ", context: " << context <<
     std::endl;
@@ -514,14 +516,14 @@ void ischemeDriver::displayCaseInputStatementsStack (
     ++gIndenter;
 
     for (S_ischemeCaseInputStatement caseInputStatement : fCaseInputStatementsStack) {
-      gLogStream << caseInputStatement;
+      gLog << caseInputStatement;
     } // for
 
     --gIndenter;
   }
 
   else {
-    gLogStream << "[EMPTY]" << std::endl;
+    gLog << "[EMPTY]" << std::endl;
   }
 }
 
@@ -551,11 +553,11 @@ int ischemeDriver::parseInput_Pass1 ()
 
   // print the basic results
   if (fTraceParsing) {
-    gLogStream <<
+    gLog <<
       "--> parseResult:   " << parseResult <<
       std::endl;
 
-    gLogStream <<
+    gLog <<
       "--> fTool:      " << fTool <<
       std::endl <<
       "--> fInputSoucesList: " <<
@@ -563,7 +565,7 @@ int ischemeDriver::parseInput_Pass1 ()
 
     ++gIndenter;
     for (std::string inputSouce : fInputSoucesList ) {
-      gLogStream <<
+      gLog <<
         inputSouce <<
         std::endl;
     } // for
@@ -572,21 +574,21 @@ int ischemeDriver::parseInput_Pass1 ()
 
   // print the options blocks stack if relevant
   if (gGlobalIschemeInterpreterOahGroup->getTraceOptionsBlocks ()) {
-    gLogStream <<
+    gLog <<
       "====> fOptionsBlocksStack:" <<
       std::endl;
 
     ++gIndenter;
 
     for (S_ischemeOptionsBlock optionsBlock : fOptionsBlocksStack) {
-      gLogStream <<
+      gLog <<
         optionsBlock <<
         std::endl;
     } // for
 
     --gIndenter;
 
-    gLogStream;
+    gLog;
   }
 
   // print the choices table if relevant
@@ -596,25 +598,25 @@ int ischemeDriver::parseInput_Pass1 ()
     gGlobalIschemeInterpreterOahGroup->getNoLaunch ()
   ) {
     if (fChoicesTable->getChoicesMap ().size ()) {
-      gLogStream <<
+      gLog <<
         "====> fChoicesTable:";
 
       if (fChoicesTable) {
-        gLogStream << std::endl;
+        gLog << std::endl;
 
         ++gIndenter;
 
-        gLogStream <<
+        gLog <<
           fChoicesTable <<
           std::endl;
 
         --gIndenter;
       }
       else {
-        gLogStream << "[NONE]" << std::endl;
+        gLog << "[NONE]" << std::endl;
       }
 
-      gLogStream << std::endl;
+      gLog << std::endl;
     }
   }
 
@@ -629,7 +631,7 @@ void ischemeDriver::handleSelectLabel (
   const std::string& label)
 {
   if (fTraceChoices) {
-    gLogStream <<
+    gLog <<
       "====> appendSelectLabelForToolLaunching()" <<
       ", choiceName: " << choiceName <<
       ", label: " << label <<
@@ -647,12 +649,12 @@ void ischemeDriver::handleSelectLabel (
   if (choice) {
     // register the options block to use for 'select' launching
     if (fTraceChoices) {
-      gLogStream <<
+      gLog <<
         "====> appendSelectLabelForToolLaunching()" <<
         ", choice: " <<
         std::endl;
       ++gIndenter;
-      gLogStream <<
+      gLog <<
         choice;
       --gIndenter;
     }
@@ -666,7 +668,7 @@ void ischemeDriver::handleSelectLabel (
       mfDisplayStringSet (
         "====> choiceLabelsSet",
         choiceLabelsSet,
-        gLogStream);
+        gLog);
     }
 
     if (label == K_ALL_PSEUDO_LABEL_NAME) {
@@ -723,7 +725,7 @@ void ischemeDriver::appendSelectLabelForToolLaunching (
       choice->getChoiceName ();
 
   if (fTraceChoices) {
-    gLogStream <<
+    gLog <<
       "====> appendSelectLabelForToolLaunching()" <<
       ", choiceName: " << choiceName <<
       ", label: " << label <<
@@ -775,11 +777,11 @@ void ischemeDriver::appendSelectLabelForToolLaunching (
             *this);
 
     if (fTraceChoices) {
-      gLogStream <<
+      gLog <<
         "====> optionsBlock from script:" <<
         std::endl;
       ++gIndenter;
-      gLogStream <<
+      gLog <<
         selectOptionsBlock;
       --gIndenter;
     }
@@ -802,7 +804,7 @@ mfMusicformatsErrorKind ischemeDriver::launchIschemeTool_Pass2 ()
     "fOptionsBlocksStack should contain only the main options block after parsing");
 
   if (fDisplayToolAndInput) {
-    gLogStream <<
+    gLog <<
       "====> Launching " <<
       fTool <<
       " with the argument and option gathered from " <<
@@ -823,7 +825,7 @@ mfMusicformatsErrorKind ischemeDriver::launchIschemeTool_Pass2 ()
 
   // display the commands list
   if (fDisplayToolAndInput) {
-    gLogStream <<
+    gLog <<
       "====> The " <<
       mfSingularOrPluralWithoutNumber (
         fCommandsList.size (),
@@ -838,7 +840,7 @@ mfMusicformatsErrorKind ischemeDriver::launchIschemeTool_Pass2 ()
     ++gIndenter;
 
     for (std::string command : fCommandsList) {
-      gLogStream <<
+      gLog <<
         command <<
         std::endl;
     } // for
@@ -848,7 +850,7 @@ mfMusicformatsErrorKind ischemeDriver::launchIschemeTool_Pass2 ()
 
   // execute the commands in the list
   if (fNoLaunch) {
-    gLogStream <<
+    gLog <<
       "====> The " <<
       mfSingularOrPluralWithoutNumber (
         fCommandsList.size (),
@@ -864,7 +866,7 @@ mfMusicformatsErrorKind ischemeDriver::launchIschemeTool_Pass2 ()
   else {
     for (std::string command : fCommandsList) {
       if (fDisplayToolAndInput) {
-        gLogStream <<
+        gLog <<
           "====> Running the tool with command: [" << command << ']' <<
           std::endl;
       }
@@ -876,7 +878,7 @@ mfMusicformatsErrorKind ischemeDriver::launchIschemeTool_Pass2 ()
             fDisplayToolAndInput);
 
       if (fDisplayToolAndInput) {
-        gLogStream <<
+        gLog <<
           "====> The execution result is: " <<
           commandExecutionResult <<
           std::endl;
@@ -900,7 +902,7 @@ Bool ischemeDriver::applySelectOptionsFinally ()
   Bool result;
 
   if (fTraceChoices) {
-    gLogStream <<
+    gLog <<
       "====> Finally applying 'select' options" <<
       std::endl;
   }
@@ -914,7 +916,7 @@ Bool ischemeDriver::applySelectOptionsFinally ()
     mfDisplayStringToStringMultiMap (
       "====> applySelectOptionsFinally(), selectChoiceToLabelsMultiMap",
       selectChoiceToLabelsMultiMap,
-      gLogStream);
+      gLog);
   }
 
   for (std::pair<std::string, std::string> thePair : selectChoiceToLabelsMultiMap) {
@@ -925,7 +927,7 @@ Bool ischemeDriver::applySelectOptionsFinally ()
         thePair.second;
 
     if (fTraceChoices) {
-      gLogStream <<
+      gLog <<
         "====> applySelectOptionsFinally():" <<
         "optionSuppliedChoiceName\"" <<
         optionSuppliedChoiceName <<
@@ -953,7 +955,7 @@ Bool ischemeDriver::applySelectOptionsFinally ()
         mfDisplayStringSet (
           "====> choiceLabelsSet",
           choiceLabelsSet,
-          gLogStream);
+          gLog);
       }
 
       for (std::string choiceLabel : choiceLabelsSet) {
@@ -986,7 +988,7 @@ Bool ischemeDriver::applySelectOption (
       choice->getChoiceName ();
 
   if (fTraceChoices) {
-    gLogStream <<
+    gLog <<
       "====> option-supplied label \"" <<
       label <<
       "\" for choice \"" <<
@@ -1004,7 +1006,7 @@ Bool ischemeDriver::applySelectOption (
     mfDisplayStringSet (
       "====> choiceLabelsSet",
       choiceLabelsSet,
-      gLogStream);
+      gLog);
   }
 
   Bool
@@ -1032,11 +1034,11 @@ Bool ischemeDriver::applySelectOption (
       selectOptionsBlock);
 
     if (fTraceChoices) {
-      gLogStream <<
+      gLog <<
         "====> selectOptionsBlock by an option:" <<
         std::endl;
       ++gIndenter;
-      gLogStream <<
+      gLog <<
         selectOptionsBlock;
       --gIndenter;
     }

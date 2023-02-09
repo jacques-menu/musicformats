@@ -16,17 +16,19 @@
 #include "mfServices.h"
 #include "mfStringsHandling.h"
 
+#include "languages.h"
+
 #include "oahEarlyOptions.h"
 
 #include "oahWae.h"
+
+#include "waeHandlers.h"
 
 
 namespace MusicFormats
 {
 
 //_______________________________________________________________________________
-S_mfService gGlobalService;
-
 S_mfService mfService::create (
   const std::string& serviceName)
 {
@@ -100,7 +102,7 @@ void mfService::print (std::ostream& os) const
 
     ++gIndenter;
     os <<
-      gWaeHandler->
+      gLanguage->
         passIDKindAsString (
           passDescription->getPassIDKind ()) <<
           std::endl;
@@ -197,7 +199,7 @@ void mfService::printServiceForAboutOption (std::ostream& os) const
   for (S_mfPassDescription passDescription : fServicePassDescriptionsList) {
     os << // std::left <<
 //       std::setw (fieldWidth) <<
-      gWaeHandler->
+      gLanguage->
         passIDKindAsString (
           passDescription->getPassIDKind ()) <<
       ":" <<
@@ -228,7 +230,7 @@ void mfService::printServiceForAboutOption (std::ostream& os) const
 }
 
 //_______________________________________________________________________________
-S_mfServiceRunData gGlobalCurrentServiceRunData;
+S_mfServiceRunData gServiceRunData;
 S_mfService gGlobalCurrentService;
 
 S_mfServiceRunData mfServiceRunData::create (
@@ -360,6 +362,33 @@ std::ostream& operator << (std::ostream& os, const mfServiceRunData& elt)
 {
   elt.print (os);
   return os;
+}
+
+//________________________________________________________________________
+// hidden global service variable
+S_mfService pGlobalService;
+
+EXP void setGlobalService (S_mfService service)
+{
+  pGlobalService = service;
+}
+
+EXP S_mfService getGlobalService ()
+{
+  return pGlobalService;
+}
+
+// hidden global current service run data variable
+S_mfServiceRunData pGlobalServiceRunData;
+
+EXP void setGlobalServiceRunData (S_mfServiceRunData serviceRunData)
+{
+  pGlobalServiceRunData = serviceRunData;
+}
+
+EXP S_mfServiceRunData getGlobalServiceRunData ()
+{
+  return pGlobalServiceRunData;
 }
 
 

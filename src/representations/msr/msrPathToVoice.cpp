@@ -171,7 +171,7 @@ Bool msrPathToVoice::pathContainsVoice (const S_msrVoice& voice)
 // void msrPathToVoice::acceptIn (basevisitor* v)
 // {
 //   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-//     gLogStream <<
+//     gLog <<
 //       "% ==> msrPathToVoice::acceptIn ()" <<
 //       std::endl;
 //   }
@@ -182,7 +182,7 @@ Bool msrPathToVoice::pathContainsVoice (const S_msrVoice& voice)
 //         S_msrPathToVoice elem = this;
 //
 //         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-//           gLogStream <<
+//           gLog <<
 //             "% ==> Launching msrPathToVoice::visitStart ()" <<
 //             std::endl;
 //         }
@@ -193,7 +193,7 @@ Bool msrPathToVoice::pathContainsVoice (const S_msrVoice& voice)
 // void msrPathToVoice::acceptOut (basevisitor* v)
 // {
 //   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-//     gLogStream <<
+//     gLog <<
 //       "% ==> msrPathToVoice::acceptOut ()" <<
 //       std::endl;
 //   }
@@ -204,7 +204,7 @@ Bool msrPathToVoice::pathContainsVoice (const S_msrVoice& voice)
 //         S_msrPathToVoice elem = this;
 //
 //         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-//           gLogStream <<
+//           gLog <<
 //             "% ==> Launching msrPathToVoice::visitEnd ()" <<
 //             std::endl;
 //         }

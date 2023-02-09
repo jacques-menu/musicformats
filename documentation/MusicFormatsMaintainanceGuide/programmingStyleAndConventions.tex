@@ -14,7 +14,7 @@ The ancillary files such as \mfutilitiesBoth{mfIndentedTextOutput} follow this r
 
 The '{\tt *Oah.*}' files handle the options and help for the corresponding component, such as\\ '\msrToMsrBoth{msr2msrOah}'.
 
-The '\oahBoth{\tt tracingOah}', \oahBoth{musicxmlOah}\, '{\tt extra}' and '{\tt general}' prefixes are about the corresponding help groups.
+The '\oahBoth{\tt traceOah}', \oahBoth{musicxmlOah}\, '{\tt extra}' and '{\tt general}' prefixes are about the corresponding help groups.
 
 There are a couple of 'globlal' files not related to any particular component, placed in \mfutilities{} with an \code{mf} name prefix:
 \begin{lstlisting}[language=Terminal]
@@ -463,7 +463,7 @@ Some sections of code in \starFileName{.cpp} are controlled by such definitions:
 \item \constantName{//\#define DEBUG_SPLITTING} in \mfutilities{mfStringsHandling.cpp}
 \end{itemize}
 
-These can be uncommented to obtain development-time tracing information, without there being a need for such in \mf\ library regular use.
+These can be uncommented to obtain development-time trace information, without there being a need for such in \mf\ library regular use.
 
 
 % -------------------------------------------------------------------------
@@ -488,7 +488,10 @@ enum class msrBassFigurePrefixKind {
 
 \item all classes member fields start with '{\tt f}';
 
-\item all global variables start with '{\tt gGlobal}';
+\item all class static fields start with '{\tt s}';
+
+\item all global variables start with '{\tt pGlobal}', in which case there are {\code set\dots} and {\code get\dots} macros to access them, starting with '{\tt g}' -- this is to facilitate typing and names completion in code editors;
+\item some (all? JMI) start with '{\tt g}';
 
 \item all variables private to methods start with '{\tt pPrivate}';
 
@@ -648,7 +651,7 @@ and:
           "' has no pedal type";
 
         msrInternalError (
-          gGlobalCurrentServiceRunData->getInputSourceName (),
+          gServiceRunData->getInputSourceName (),
           inputLineNumber,
           __FILE__, __LINE__,
           ss.str ());
@@ -663,7 +666,7 @@ void mxsr2msrTranslator::visitEnd ( S_accordion_registration& elt )
   int inputLineNumber =
     elt->getInputLineNumber ();
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
 		std::stringstream ss;
 
@@ -683,7 +686,7 @@ void mxsr2msrTranslator::visitEnd ( S_accordion_registration& elt )
 
   if (fCurrentAccordionNumbersCounter == 0) {
     musicxmlWarning (
-      gGlobalCurrentServiceRunData->getInputSourceName (),
+      gServiceRunData->getInputSourceName (),
       inputLineNumber,
       "accordion-registration has 0 child element, ignoring it");
   }
@@ -875,7 +878,7 @@ They are used for:
 
 \item functions of methods remanent variables such as \functionPrivateVariable{pPrivateThisMethodHasBeenRun} in \function{initializeMsrGenerationAPI};
 
-\item library-wide variables such as \globalVariable{gGlobalOStreamIndenter} and \globalVariable{gGlobalTimingItemsList}, that would be too cumbersome to pass to each and every method or function that uses them.
+\item library-wide variables such as \globalVariable{gGlobalOStreamIndenter} and \globalVariable{sGlobalTimingItemsList}, that would be too cumbersome to pass to each and every method or function that uses them.
 \end{itemize}
 
 
@@ -892,9 +895,9 @@ void initializeBSR ()
   static Bool pPrivateThisMethodHasBeenRun (false);
 
   if (! pPrivateThisMethodHasBeenRun) {
-#ifdef MF_TRACING_IS_ENABLED
-    if (gGlobalOahEarlyOptions.getEarlyTracingOah () && ! gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
-      gLogStream <<
+#ifdef MF_TRACE_IS_ENABLED
+    if (gEarlyOptions.getEarlyTraceOah () && ! gEarlyOptions.getEarlyQuietOption ()) {
+      gLog <<
         "Initializing BSR basic types handling" <<
         std::endl;
 
@@ -993,7 +996,7 @@ void mxsr2msrTranslator::visitStart ( S_repeat& elt )
           "\" is unknown";
 
         musicxmlError (
-          gGlobalCurrentServiceRunData->getInputSourceName (),
+          gServiceRunData->getInputSourceName (),
           inputLineNumber,
           __FILE__, __LINE__,
           ss.str ());
@@ -1540,7 +1543,7 @@ msrPart::msrPart (
     */
 
   // set part number
-  fPartAbsoluteNumber = ++gPartsCounter;
+  fPartAbsoluteNumber = ++sPartsCounter;
 
   // set part's part group upLink
   fPartUpLinkToPartGroup = partUpLinkToPartGroup;
@@ -1590,7 +1593,7 @@ msrPlacementKind msrPlacementKindFromString (
         "\" should be 'above' or 'below'";
 
       musicxmlError (
-        gGlobalCurrentServiceRunData->getInputSourceName (),
+        gServiceRunData->getInputSourceName (),
         inputLineNumber,
         __FILE__, __LINE__,
         ss.str ());
@@ -1726,7 +1729,7 @@ void msrMeasureRepeat::displayMeasureRepeat (
   int    inputLineNumber,
   const std::string& context)
 {
-  gLogStream <<
+  gLog <<
     std::endl <<
     "*********>> MeasureRepeat " <<
     ", measureRepeatMeasuresNumber: '" <<
@@ -1742,10 +1745,10 @@ void msrMeasureRepeat::displayMeasureRepeat (
     std::endl;
 
   ++gIndenter;
-  print (gLogStream);
+  print (gLog);
   --gIndenter;
 
-  gLogStream <<
+  gLog <<
     " <<*********" <<
     std::endl << std::endl;
 \end{lstlisting}

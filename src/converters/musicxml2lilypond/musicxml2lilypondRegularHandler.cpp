@@ -17,7 +17,6 @@
 
 #include "oahOah.h"
 
-
 #include "msrOah.h"
 #include "msr2lpsrOah.h"
 #include "lpsrOah.h"
@@ -26,6 +25,8 @@
 #include "oahEarlyOptions.h"
 
 #include "musicxml2lilypondRegularHandler.h"
+
+#include "waeHandlers.h"
 
 
 namespace MusicFormats
@@ -66,10 +67,10 @@ xml2lyRegularHandler::xml2lyRegularHandler (
   // create the regular handler groups
   createRegularHandlerGroups ();
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOahDetails ()) {
   // print the options handler initial state
-  gLogStream <<
+  gLog <<
     "musicxml2lilypondInsiderRegularHandler \"" <<
     fHandlerHeader <<
     "\" has been initialized as:" <<
@@ -83,8 +84,8 @@ xml2lyRegularHandler::~xml2lyRegularHandler ()
 
 void xml2lyRegularHandler::createRegularHandlerGroups ()
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<
@@ -97,10 +98,10 @@ void xml2lyRegularHandler::createRegularHandlerGroups ()
   }
 #endif
 
-#ifdef MF_TRACING_IS_ENABLED
-  // create the tracing OAH group
+#ifdef MF_TRACE_IS_ENABLED
+  // create the trace OAH group
   appendGroupToHandler (
-    createGlobalTracingOahGroup (
+    createGlobalTraceOahGroup (
       this));
 #endif
 
@@ -171,8 +172,8 @@ void xml2lyRegularHandler::createRegularHandlerGroups ()
 
   createMidiRegularGroup ();
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<
@@ -221,7 +222,7 @@ void xml2lyRegularHandler::createOahRegularGroup ()
   registerAtomInRegularSubgroup (K_INSIDER_OPTION_LONG_NAME, subGroup);
 //  registerAtomInRegularSubgroup (K_REGULAR_OPTION_LONG_NAME, subGroup);
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   registerAtomInRegularSubgroup (K_TRACE_EARLY_OPTIONS_OPTION_LONG_NAME, subGroup);
   registerAtomInRegularSubgroup (K_OAH_VERBOSE_MODE_OPTION_LONG_NAME, subGroup);
 #endif
@@ -269,7 +270,7 @@ void xml2lyRegularHandler::createOahRegularGroup ()
   registerAtomInRegularSubgroup ("display-lpsr", subGroup);
   registerAtomInRegularSubgroup ("display-lpsr-full", subGroup);
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   registerAtomInRegularSubgroup ("trace-mxsr", subGroup);
   registerAtomInRegularSubgroup ("trace-mxsr-visitors", subGroup);
 
@@ -1744,8 +1745,8 @@ void xml2lyRegularHandler::createMidiRegularGroup ()
 //______________________________________________________________________________
 void xml2lyRegularHandler::checkOptionsAndArguments () const
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<

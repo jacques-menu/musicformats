@@ -9,7 +9,7 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include "mfWaeInterface.h"
+#include "languageInterface.h"
 
 #include "mfOnOff.h"
 

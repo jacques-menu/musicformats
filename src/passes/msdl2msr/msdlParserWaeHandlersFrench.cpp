@@ -32,28 +32,28 @@ msdlParserWaeHandlerFrench::~msdlParserWaeHandlerFrench ()
 
 void msdlParserWaeHandlerFrench::multipleIdentifications () const
 {
-  gLogStream <<
+  gLog <<
     "### une seule section d'identification est possible, au début de la spécification ###" <<
     std::endl;
 }
 
 void msdlParserWaeHandlerFrench::stringExpectedAsTitle () const
 {
-  gLogStream <<
+  gLog <<
     "### une chaîne est attendue comme titre ###" <<
     std::endl;
 }
 
 void msdlParserWaeHandlerFrench::stringExpectedAsComposer () const
 {
-  gLogStream <<
+  gLog <<
     "### une chaîne est attendue comme compositeur-trice ###" <<
     std::endl;
 }
 
 void msdlParserWaeHandlerFrench::stringExpectedAsOpus () const
 {
-  gLogStream <<
+  gLog <<
     "### une chaîne est attendue comme opus ###" <<
     std::endl;
 }
@@ -63,7 +63,7 @@ void msdlParserWaeHandlerFrench::unexpectedToken (
   const std::string& context) const
 {
 
-  gLogStream <<
+  gLog <<
     "### " << context << ": " <<
     "terminal inattendu: " <<
     "'" << theToken.asString () <<  "'" <<
@@ -75,7 +75,7 @@ void msdlParserWaeHandlerFrench::ignoringToken (
   const msdlToken&   theToken,
   const std::string& context) const
 {
-  gLogStream <<
+  gLog <<
     "### " << context << ": " <<
     "on ignore le terminal: " <<
     "'" << theToken.asString () <<  "'" <<
@@ -85,28 +85,28 @@ void msdlParserWaeHandlerFrench::ignoringToken (
 
 void msdlParserWaeHandlerFrench::inputIsSyntacticallyCorrect () const
 {
-  gLogStream <<
+  gLog <<
     "Le texte MSDL est syntaxiquement correct" <<
     std::endl;
 }
 
 void msdlParserWaeHandlerFrench::inputIsSyntacticallyIncorrect () const
 {
-  gLogStream <<
+  gLog <<
     "### Le texte MSDL est syntaxiquement incorrect ###" <<
     std::endl;
 }
 
 void msdlParserWaeHandlerFrench::mixedCommasAndQuotesInOctaveIndication () const
 {
-  gLogStream <<
+  gLog <<
     "### On ne peut pas mélanger les virgules et apostrophes dans les indications d'octave ###" <<
     std::endl;
 }
 
 void msdlParserWaeHandlerFrench::malformedNoteDuration () const
 {
-  gLogStream <<
+  gLog <<
     "### Durée de note mal formée ###" <<
     std::endl;
 }

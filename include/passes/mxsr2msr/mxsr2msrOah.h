@@ -486,7 +486,7 @@ class EXP mxsr2msrOahGroup : public oahGroup
     // private services
     // ------------------------------------------------------
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
     void                  initializeMxsr2msrTraceOptions ();
 #endif
 
@@ -766,7 +766,7 @@ class EXP mxsr2msrOahGroup : public oahGroup
     Bool                  fCubase;
 
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
     // specific trace
     // --------------------------------------
 #endif

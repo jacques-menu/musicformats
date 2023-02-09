@@ -134,7 +134,7 @@ void mxsr2msrTranslator::visitStart ( S_barline& elt )
 
    // JMI   musicxmlError (
       musicxmlWarning (
-        gGlobalCurrentServiceRunData->getInputSourceName (),
+        gServiceRunData->getInputSourceName (),
         inputLineNumber,
    //     __FILE__, __LINE__,
         ss.str ());
@@ -192,7 +192,7 @@ void mxsr2msrTranslator::visitEnd ( S_barline& elt )
         // ------------------------------------------------------
         if (! fCurrentBarLineEndingNumber.size ()) {
           musicxmlWarning (
-            gGlobalCurrentServiceRunData->getInputSourceName (),
+            gServiceRunData->getInputSourceName (),
             inputLineNumber,
             "mandatory ending number is missing, assuming \"1\"");
 
@@ -340,7 +340,7 @@ void mxsr2msrTranslator::visitEnd ( S_barline& elt )
           " has no barLine style";
 
         musicxmlWarning (
-          gGlobalCurrentServiceRunData->getInputSourceName (),
+          gServiceRunData->getInputSourceName (),
           inputLineNumber,
      //     __FILE__, __LINE__,
           ss.str ());
@@ -357,7 +357,7 @@ void mxsr2msrTranslator::visitEnd ( S_barline& elt )
       barLine->asString ();
 
     msrInternalWarning (
-      gGlobalCurrentServiceRunData->getInputSourceName (),
+      gServiceRunData->getInputSourceName (),
       inputLineNumber,
       ss.str ());
   }

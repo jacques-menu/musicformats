@@ -51,14 +51,17 @@ void displayBsrScore (
 
   setGlobalCurrentPassIDKind (mfPassIDKind::kMfPassID_OptionalPass);
 
+#ifdef MF_TRACING_IS_ENABLED
   std::string separator =
     "%--------------------------------------------------------------";
 
-  gLogStream <<
+  std::stringstream ss;
+
+  ss <<
     separator <<
     std::endl <<
     gTab <<
-    gWaeHandler->passOptional () << ": "<< passDescription <<
+    gLanguage->passOptional () << ": "<< passDescription <<
     std::endl <<
     separator <<
     std::endl << std::endl <<
@@ -66,12 +69,17 @@ void displayBsrScore (
     separator <<
     std::endl << std::endl;
 
+  gWaeHandler->waeTrace (
+    __FILE__, __LINE__,
+    ss.str ());
+#endif
+
   // register time spent
   clock_t endClock = clock ();
 
-  mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
+  gGlobalTimingItemsList.appendTimingItem (
 		mfPassIDKind::kMfPassID_OptionalPass,
-    gWaeHandler->displayTheBSRAsText (), // JMI ??? v0.9.66
+    gLanguage->displayTheBSRAsText (), // JMI ??? v0.9.66
     mfTimingItemKind::kOptional,
     startClock,
     endClock);
@@ -97,34 +105,42 @@ void displayBsrScoreFull (
 
   setGlobalCurrentPassIDKind (mfPassIDKind::kMfPassID_OptionalPass);
 
+#ifdef MF_TRACING_IS_ENABLED
   std::string separator =
     "%--------------------------------------------------------------";
 
-  gLogStream <<
+  std::stringstream ss;
+
+  ss <<
     separator <<
     std::endl <<
     gTab <<
-    gWaeHandler->passOptional () << ": "<< passDescription <<
+    gLanguage->passOptional () << ": "<< passDescription <<
     ", " <<
-    gWaeHandler->fullVersion () <<
+    gLanguage->fullVersion () <<
     std::endl <<
     separator <<
     std::endl << std::endl;
 
-  gLogStream << bsrScore;
+  ss << bsrScore;
 
-  gLogStream <<
+  ss <<
     separator <<
     std::endl << std::endl;
+
+  gWaeHandler->waeTrace (
+    __FILE__, __LINE__,
+    ss.str ());
+#endif
 
   // register time spent
   clock_t endClock = clock ();
 
-  mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
+  gGlobalTimingItemsList.appendTimingItem (
 		mfPassIDKind::kMfPassID_OptionalPass,
-    gWaeHandler->displayTheBSRAsText ()
+    gLanguage->displayTheBSRAsText ()
       + ", " +
-    gWaeHandler->fullVersion (),
+    gLanguage->fullVersion (),
     mfTimingItemKind::kOptional,
     startClock,
     endClock);
@@ -134,7 +150,7 @@ void displayBsrScoreFull (
 }
 
 //   if (gIndenter != 0) {
-//     if (! gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
+//     if (! gEarlyOptions.getEarlyQuietOption ()) {
 //       std::stringstream ss;
 //
 //       ss <<
@@ -142,7 +158,7 @@ void displayBsrScoreFull (
 //         gIndenter.getIndentation ();
 //
 //       bsrWarning (
-//         gGlobalCurrentServiceRunData->getInputSourceName (),
+//         gServiceRunData->getInputSourceName (),
 //         1, // JMI inputLineNumber,
 //         ss.str ());
 //     }

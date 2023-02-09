@@ -19,11 +19,12 @@
 #include "bsrScores.h"
 
 #include "oahOah.h"
-#include "oahEarlyOptions.h"
 
 #include "brailleGenerationOah.h"
 
 #include "msrBrowsers.h"
+
+#include "waeHandlers.h"
 
 
 namespace MusicFormats
@@ -61,7 +62,7 @@ bsrScore::~bsrScore ()
 
 void bsrScore::acceptIn (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
 		std::stringstream ss;
 
@@ -81,7 +82,7 @@ void bsrScore::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_bsrScore>*> (v)) {
         S_bsrScore elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           std::stringstream ss;
 
@@ -100,7 +101,7 @@ void bsrScore::acceptIn (basevisitor* v)
 
 void bsrScore::acceptOut (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
 		std::stringstream ss;
 
@@ -120,7 +121,7 @@ void bsrScore::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_bsrScore>*> (v)) {
         S_bsrScore elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           std::stringstream ss;
 
@@ -139,7 +140,7 @@ void bsrScore::acceptOut (basevisitor* v)
 
 void bsrScore::browseData (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
 		std::stringstream ss;
 
@@ -171,7 +172,7 @@ void bsrScore::browseData (basevisitor* v)
     browser.browse (*(*i));
   } // for
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
 		std::stringstream ss;
 

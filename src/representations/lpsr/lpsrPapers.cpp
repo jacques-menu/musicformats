@@ -20,11 +20,12 @@
 #include "lpsrPapers.h"
 
 #include "oahOah.h"
-#include "oahEarlyOptions.h"
 
 #include "lpsrOah.h"
 
 #include "msrBrowsers.h"
+
+#include "waeHandlers.h"
 
 
 namespace MusicFormats
@@ -121,7 +122,7 @@ lpsrPaper::~lpsrPaper ()
 
 void lpsrPaper::acceptIn (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
 		std::stringstream ss;
 
@@ -140,7 +141,7 @@ void lpsrPaper::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_lpsrPaper>*> (v)) {
         S_lpsrPaper elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           std::stringstream ss;
 
@@ -159,7 +160,7 @@ void lpsrPaper::acceptIn (basevisitor* v)
 
 void lpsrPaper::acceptOut (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
 		std::stringstream ss;
 
@@ -178,7 +179,7 @@ void lpsrPaper::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_lpsrPaper>*> (v)) {
         S_lpsrPaper elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           std::stringstream ss;
 
@@ -197,7 +198,7 @@ void lpsrPaper::acceptOut (basevisitor* v)
 
 void lpsrPaper::browseData (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
 		std::stringstream ss;
 
@@ -223,7 +224,7 @@ void lpsrPaper::browseData (basevisitor* v)
     browser.browse (*fPageLayout);
   }
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
 		std::stringstream ss;
 

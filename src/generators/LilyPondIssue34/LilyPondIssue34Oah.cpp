@@ -31,6 +31,8 @@
 
 #include "LilyPondIssue34InsiderHandler.h"
 
+#include "waeHandlers.h"
+
 
 namespace MusicFormats
 {
@@ -153,10 +155,10 @@ void LilyPondIssue34OahGroup::initializeMultiGenerationOutputOptions ()
 
 void LilyPondIssue34OahGroup::initializeLilyPondIssue34OahGroup ()
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   // trace
   // --------------------------------------
-// JMI  initializeLilyPondIssue34tracingOah ();
+// JMI  initializeLilyPondIssue34TraceOah ();
 #endif
 
   // generation API
@@ -200,8 +202,8 @@ void LilyPondIssue34OahGroup::checkGroupOptionsConsistency ()
 
 void LilyPondIssue34OahGroup::acceptIn (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -219,8 +221,8 @@ void LilyPondIssue34OahGroup::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_LilyPondIssue34OahGroup>*> (v)) {
         S_LilyPondIssue34OahGroup elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
-        if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -238,8 +240,8 @@ void LilyPondIssue34OahGroup::acceptIn (basevisitor* v)
 
 void LilyPondIssue34OahGroup::acceptOut (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -257,8 +259,8 @@ void LilyPondIssue34OahGroup::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_LilyPondIssue34OahGroup>*> (v)) {
         S_LilyPondIssue34OahGroup elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
-        if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -276,8 +278,8 @@ void LilyPondIssue34OahGroup::acceptOut (basevisitor* v)
 
 void LilyPondIssue34OahGroup::browseData (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -294,7 +296,7 @@ void LilyPondIssue34OahGroup::browseData (basevisitor* v)
 void LilyPondIssue34OahGroup::printLilyPondIssue34OahValues (
   int fieldWidth)
 {
-  gLogStream <<
+  gLog <<
     "The LilyPondIssue34 options are:" <<
     std::endl;
 
@@ -303,13 +305,13 @@ void LilyPondIssue34OahGroup::printLilyPondIssue34OahValues (
   // generation API kind
   // --------------------------------------
 
-  gLogStream <<
+  gLog <<
     "Generation API:" <<
     std::endl;
 
   ++gIndenter;
 
-  gLogStream << std::left <<
+  gLog << std::left <<
     std::setw (fieldWidth) << "fGenerationAPIKind" << ": " <<
       msrGenerationAPIKindAsString (fGenerationAPIKind) <<
       std::endl;
@@ -319,13 +321,13 @@ void LilyPondIssue34OahGroup::printLilyPondIssue34OahValues (
   // multi-generation output kind
   // --------------------------------------
 
-  gLogStream <<
+  gLog <<
     "multi-generation output:" <<
     std::endl;
 
   ++gIndenter;
 
-  gLogStream << std::left <<
+  gLog << std::left <<
     std::setw (fieldWidth) << "fMultiGenerationOutputKind" << ": " <<
       mfMultiGenerationOutputKindAsString (fMultiGenerationOutputKind) <<
       std::endl;
@@ -350,8 +352,8 @@ std::ostream& operator << (std::ostream& os, const S_LilyPondIssue34OahGroup& el
 //______________________________________________________________________________
 S_LilyPondIssue34OahGroup createGlobalLilyPondIssue34OahGroup ()
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<

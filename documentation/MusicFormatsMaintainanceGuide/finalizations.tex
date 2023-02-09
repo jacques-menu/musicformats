@@ -132,8 +132,8 @@ A typical example of \cascading finalization is \method{msrPart}{finalizePartAnd
 void msrPart::finalizePartAndAllItsMeasures (
   int inputLineNumber)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceParts ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceParts ()) {
 		std::stringstream ss;
 
     ss <<
@@ -148,8 +148,8 @@ void msrPart::finalizePartAndAllItsMeasures (
   }
 #endif
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceVoices ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceVoices ()) {
 		std::stringstream ss;
 
     ss <<
@@ -192,8 +192,8 @@ void msrPart::finalizePartAndAllItsMeasures (
 void msrPart::finalizePart (
   int inputLineNumber)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceParts ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceParts ()) {
 		std::stringstream ss;
 
     ss <<
@@ -219,7 +219,7 @@ void msrPart::finalizePart (
       " appears in the part list, but doesn't contain any stave";
 
     musicxmlWarning (
-      gGlobalCurrentServiceRunData->getInputSourceName (),
+      gServiceRunData->getInputSourceName (),
       inputLineNumber,
       ss.str ());
   }
@@ -265,8 +265,8 @@ void msrPart::finalizePart (
 \begin{lstlisting}[language=CPlusPlus]
 void msrStaff::finalizeStaff (int inputLineNumber)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceStaves ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceStaves ()) {
 		std::stringstream ss;
 
     ss <<
@@ -284,8 +284,8 @@ void msrStaff::finalizeStaff (int inputLineNumber)
   ++gIndenter;
 
   // finalize the voices
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceVoices ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceVoices ()) {
 		std::stringstream ss;
 
     ss <<
@@ -343,7 +343,7 @@ void msrVoice::finalizeVoice (
       "\" more than once";
 
     msrInternalError (
-      gGlobalCurrentServiceRunData->getInputSourceName (),
+      gServiceRunData->getInputSourceName (),
       fInputLineNumber,
       __FILE__, __LINE__,
       ss.str ());
@@ -388,7 +388,7 @@ void msrVoice::finalizeVoice (
       std::endl;
 
     musicxmlWarning (
-      gGlobalCurrentServiceRunData->getInputSourceName (),
+      gServiceRunData->getInputSourceName (),
       inputLineNumber,
       ss.str ());
   }
@@ -446,7 +446,7 @@ void msrMeasure::finalizeMeasure (
 		// ... ... ...
 
     msrInternalWarning (
-      gGlobalCurrentServiceRunData->getInputSourceName (),
+      gServiceRunData->getInputSourceName (),
       fInputLineNumber,
       ss.str ());
   }
@@ -541,16 +541,16 @@ void msrMeasure::finalizeRegularMeasure (
     "regularPart is null");
 
   if (false) { // JMI
-    gLogStream <<
+    gLog <<
       "---> regularPart: " <<
       std::endl;
 
     ++gIndenter;
-    gLogStream <<
+    gLog <<
       regularPart <<
       std::endl;
     --gIndenter;
-    gLogStream << std::endl;
+    gLog << std::endl;
   }
 
   Rational
@@ -559,8 +559,8 @@ void msrMeasure::finalizeRegularMeasure (
         getPartMeasuresWholeNotesDurationsVector () [
            fMeasureOrdinalNumberInVoice - 1 ];
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasures ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMeasures ()) {
 		std::stringstream ss;
 
     ss <<
@@ -584,8 +584,8 @@ void msrMeasure::finalizeRegularMeasure (
 
   ++gIndenter;
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasuresDetails ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMeasuresDetails ()) {
     displayMeasure (
       inputLineNumber,
       "finalizeRegularMeasure() 1");
@@ -648,9 +648,9 @@ void msrMeasure::finalizeRegularMeasure (
         ==
       fFullMeasureWholeNotesDuration
     ) {
-#ifdef MF_TRACING_IS_ENABLED
-      if (gGlobalTracingOahGroup->getTraceMeasures ()) {
-        gLogStream <<
+#ifdef MF_TRACE_IS_ENABLED
+      if (gGlobalTraceOahGroup->getTraceMeasures ()) {
+        gLog <<
           "Note '" <<
           fMeasureLongestNote->asShortString () <<
           "' occupies measure " <<
@@ -673,8 +673,8 @@ void msrMeasure::finalizeRegularMeasure (
     }
   }
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasuresDetails ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMeasuresDetails ()) {
     displayMeasure (
       inputLineNumber,
       "finalizeRegularMeasure() 2");
@@ -713,8 +713,8 @@ void msrMeasure::finalizeHarmonyMeasure (
     harmoniesPart != nullptr,
     "harmoniesPart is null");
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceHarmonies ()) {
     std::stringstream ss;
 
     ss <<
@@ -736,22 +736,22 @@ void msrMeasure::finalizeHarmonyMeasure (
 
   ++gIndenter;
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceHarmoniesDetails ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceHarmoniesDetails ()) {
     displayMeasure (
       inputLineNumber,
       "finalizeHarmonyMeasure() 1");
   }
 #endif
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   // get the harmoniesPart number of measures
   int
     harmoniesPartNumberOfMeasures =
       harmoniesPart->
         getPartNumberOfMeasures ();
 
-  if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
+  if (gGlobalTraceOahGroup->getTraceHarmonies ()) {
     std::stringstream ss;
 
     ss <<
@@ -775,7 +775,7 @@ void msrMeasure::finalizeHarmonyMeasure (
            fMeasureOrdinalNumberInVoice - 1 ];
 
   // handle the harmonies in this measure
-  finalizeTheHarmoniesInHarmoniesMeasure (
+  finalizeTheHarmoniesInAHarmoniesMeasure (
     inputLineNumber,
     context);
 
@@ -789,8 +789,8 @@ void msrMeasure::finalizeHarmonyMeasure (
     inputLineNumber,
     measureRepeatContextKind);
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceHarmoniesDetails ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceHarmoniesDetails ()) {
     displayMeasure (
       inputLineNumber,
       "finalizeHarmonyMeasure() 2");
@@ -829,8 +829,8 @@ void msrMeasure::finalizeFiguredBassMeasure (
     figuredBassPart != nullptr,
     "figuredBassPart is null");
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceFiguredBasses ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceFiguredBasses ()) {
 		std::stringstream ss;
 
     ss <<
@@ -852,22 +852,22 @@ void msrMeasure::finalizeFiguredBassMeasure (
 
   ++gIndenter;
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceFiguredBassesDetails ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceFiguredBassesDetails ()) {
     displayMeasure (
       inputLineNumber,
       "finalizeFiguredBassMeasure() 1");
   }
 #endif
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   // get the figuredBassPart number of measures
   int
     figuredBassPartNumberOfMeasures =
       figuredBassPart->
         getPartNumberOfMeasures ();
 
-  if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
+  if (gGlobalTraceOahGroup->getTraceHarmonies ()) {
     std::stringstream ss;
 
     ss <<
@@ -891,7 +891,7 @@ void msrMeasure::finalizeFiguredBassMeasure (
            fMeasureOrdinalNumberInVoice - 1 ];
 
   // handle the figured bass elements in this measure
-  finalizeFiguredBassesInFiguredBassMeasure (
+  finalizeTheFiguredBassesInAFiguredBassMeasure (
     inputLineNumber,
     context);
 
@@ -905,8 +905,8 @@ void msrMeasure::finalizeFiguredBassMeasure (
     inputLineNumber,
     measureRepeatContextKind);
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceFiguredBassesDetails ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceFiguredBassesDetails ()) {
     displayMeasure (
       inputLineNumber,
       "finalizeFiguredBassMeasure() 2");

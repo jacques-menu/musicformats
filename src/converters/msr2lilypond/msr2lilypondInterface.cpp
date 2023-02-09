@@ -44,6 +44,9 @@
 
 #include "msr2lilypondInterface.h"
 
+#include "waeHandlers.h"
+
+
 namespace MusicFormats
 {
 
@@ -58,8 +61,8 @@ EXP mfMusicformatsErrorKind msrScore2lilypondWithHandler (
   std::ostream&       err,
   const S_oahHandler& handler)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<
@@ -77,7 +80,7 @@ EXP mfMusicformatsErrorKind msrScore2lilypondWithHandler (
   // has quiet mode been requested?
   // ------------------------------------------------------
 
-  if (gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
+  if (gEarlyOptions.getEarlyQuietOption ()) {
     // disable all trace and display options
     handler->
       enforceHandlerQuietness ();
@@ -101,11 +104,11 @@ EXP mfMusicformatsErrorKind msrScore2lilypondWithHandler (
           createMsr2lilypondConverterComponent ());
     }
     catch (msr2lpsrException& e) {
-      mfDisplayException (e, gOutputStream);
+      mfDisplayException (e, gOutput);
       return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
     }
     catch (std::exception& e) {
-      mfDisplayException (e, gOutputStream);
+      mfDisplayException (e, gOutput);
       return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
     }
   }
@@ -119,8 +122,8 @@ EXP mfMusicformatsErrorKind msrScore2lilypondWithHandler (
         handler->
           fetchOutputFileNameFromTheOptions ();
 
-#ifdef MF_TRACING_IS_ENABLED
-    if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+    if (gEarlyOptions.getEarlyTraceOah ()) {
       err <<
         "xmlFile2lilypond() outputFileName = \"" <<
         outputFileName <<
@@ -134,8 +137,8 @@ EXP mfMusicformatsErrorKind msrScore2lilypondWithHandler (
 #endif
 
     if (! outputFileName.size ()) {
-#ifdef MF_TRACING_IS_ENABLED
-      if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+      if (gEarlyOptions.getEarlyTraceOah ()) {
         err <<
           "xmlFile2lilypond() output goes to standard output" <<
           std::endl;
@@ -164,18 +167,18 @@ EXP mfMusicformatsErrorKind msrScore2lilypondWithHandler (
           lilypondStandardOutputStream);
       }
       catch (lpsr2lilypondException& e) {
-        mfDisplayException (e, gOutputStream);
+        mfDisplayException (e, gOutput);
         return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
       }
       catch (std::exception& e) {
-        mfDisplayException (e, gOutputStream);
+        mfDisplayException (e, gOutput);
         return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
       }
     }
 
     else {
-#ifdef MF_TRACING_IS_ENABLED
-      if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+      if (gEarlyOptions.getEarlyTraceOah ()) {
         err <<
           "xmlFile2lilypond() output goes to file \"" <<
           outputFileName <<
@@ -189,11 +192,11 @@ EXP mfMusicformatsErrorKind msrScore2lilypondWithHandler (
 #endif
 
       // open output file
-#ifdef MF_TRACING_IS_ENABLED
-      if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
+#ifdef MF_TRACE_IS_ENABLED
+      if (gEarlyOptions.getEarlyTracePasses ()) {
         err <<
           std::endl <<
-          gWaeHandler->openingLilypondFileForWriting (outputFileName) <<
+          gLanguage->openingLilypondFileForWriting (outputFileName) <<
           std::endl;
 
 //     gWaeHandler->waeTrace ( JMI v0.9.67
@@ -211,7 +214,7 @@ EXP mfMusicformatsErrorKind msrScore2lilypondWithHandler (
         std::stringstream ss;
 
         ss <<
-          gWaeHandler->cannotOpenLilypondFileForWriting (outputFileName);
+          gLanguage->cannotOpenLilypondFileForWriting (outputFileName);
 
         std::string message = ss.str ();
 
@@ -240,22 +243,22 @@ EXP mfMusicformatsErrorKind msrScore2lilypondWithHandler (
           lilypondFileOutputStream);
       }
       catch (lpsr2lilypondException& e) {
-        mfDisplayException (e, gOutputStream);
+        mfDisplayException (e, gOutput);
         return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
       }
       catch (std::exception& e) {
-        mfDisplayException (e, gOutputStream);
+        mfDisplayException (e, gOutput);
         return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
       }
 
       // close output file
 #ifdef TRACE_OAH
-      if (gtracingOah->fTracePasses) {
+      if (gTraceOah->fTracePasses) {
         std::stringstream ss;
 
         ss <<
           std::endl <<
-          gWaeHandler->closingLilypondFile (outputFileName) <<
+          gLanguage->closingLilypondFile (outputFileName) <<
           std::endl;
 
 //     gWaeHandler->waeTrace ( JMI v0.9.67

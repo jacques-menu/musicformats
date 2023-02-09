@@ -318,11 +318,24 @@ void msrTransposition::print (std::ostream& os) const
 }
 \end{lstlisting}
 
-The main indented output streams are:
+The global \Main{indenter} is \code{gIndenter}:
 \begin{lstlisting}[language=CPlusPlus]
-#define gOutputStream *gGlobalOutputIndentedOstream
-#define gLogStream    *gGlobalLogIndentedOstream
+// the global output indenter for general use
+EXP mfOutputIndenter& getGlobalOutputIndenter ();
 
+// useful shortcut macros
+#define gIndenter getGlobalOutputIndenter ()
+#define gTab      getGlobalOutputIndenter ().getSpacer ()
+\end{lstlisting}
+
+The main indented output streams are \code{gOutput} and \code{gLog}:
+\begin{lstlisting}[language=CPlusPlus]
+// the global log and output indented streams
+EXP extern S_indentedOstream gGlobalOutputIndentedOstream;
+EXP extern S_indentedOstream gGlobalLogIndentedOstream;
+
+#define gOutput *gGlobalOutputIndentedOstream
+#define gLog    *gGlobalLogIndentedOstream
 \end{lstlisting}
 
 

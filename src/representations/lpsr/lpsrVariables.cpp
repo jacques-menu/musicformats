@@ -14,9 +14,10 @@
 #include "lpsrVariables.h"
 
 #include "oahOah.h"
-#include "oahEarlyOptions.h"
 
 #include "lpsrOah.h"
+
+#include "waeHandlers.h"
 
 
 namespace MusicFormats
@@ -47,7 +48,7 @@ lpsrVariableUseCommand::~lpsrVariableUseCommand()
 
 void lpsrVariableUseCommand::acceptIn (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
 		std::stringstream ss;
 
@@ -66,7 +67,7 @@ void lpsrVariableUseCommand::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_lpsrVariableUseCommand>*> (v)) {
         S_lpsrVariableUseCommand elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           std::stringstream ss;
 
@@ -85,7 +86,7 @@ void lpsrVariableUseCommand::acceptIn (basevisitor* v)
 
 void lpsrVariableUseCommand::acceptOut (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
 		std::stringstream ss;
 
@@ -104,7 +105,7 @@ void lpsrVariableUseCommand::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_lpsrVariableUseCommand>*> (v)) {
         S_lpsrVariableUseCommand elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           std::stringstream ss;
 

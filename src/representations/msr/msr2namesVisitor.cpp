@@ -65,17 +65,23 @@ void msr2namesVisitor::printNamesFromMsrScore (
 //________________________________________________________________________
 void msr2namesVisitor::visitStart (S_msrScore& elt)
 {
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "--> Start visiting msrScore" <<
       std::endl;
-  }
 
-  gLogStream <<
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif
+
+  gLog <<
     "MSR names in \"" <<
-    gGlobalCurrentServiceRunData->getInputSourceName () <<
+    gServiceRunData->getInputSourceName () <<
     "\":" <<
     std::endl << std::endl;
 
@@ -86,15 +92,21 @@ void msr2namesVisitor::visitEnd (S_msrScore& elt)
 {
   --gIndenter;
 
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
 		std::stringstream ss;
 
     ss <<
       "--> End visiting msrScore" <<
       std::endl;
-  }
 
-  gLogStream <<
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif
+
+  gLog <<
     "The score contains:" <<
     std::endl;
 
@@ -102,7 +114,7 @@ void msr2namesVisitor::visitEnd (S_msrScore& elt)
 
   const int fieldWidth = 3;
 
-  gLogStream <<
+  gLog <<
     std::setw (fieldWidth) <<
     mfSingularOrPlural (
       fPartGroupsCounter,
@@ -137,13 +149,19 @@ void msr2namesVisitor::visitEnd (S_msrScore& elt)
 //________________________________________________________________________
 void msr2namesVisitor::visitStart (S_msrPartGroup& elt)
 {
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "--> Start visiting msrPartGroup" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
+#endif
 
   ++fPartGroupsCounter;
 
@@ -151,7 +169,7 @@ void msr2namesVisitor::visitStart (S_msrPartGroup& elt)
     elt->
       getPartGroupElementsList ().size ();
 
-  gLogStream <<
+  gLog <<
     "PartGroup" << ' ' << elt->getPartGroupCombinedName () <<
     " contains " <<
     mfSingularOrPlural (
@@ -164,7 +182,7 @@ void msr2namesVisitor::visitStart (S_msrPartGroup& elt)
 
   const int fieldWidth = 25;
 
-  gLogStream << std::left <<
+  gLog << std::left <<
     std::setw (fieldWidth) <<
     "partGroupName" << ": \"" <<
     elt->getPartGroupName  () << "\"" <<
@@ -190,25 +208,37 @@ void msr2namesVisitor::visitEnd (S_msrPartGroup& elt)
 {
   --gIndenter;
 
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
 		std::stringstream ss;
 
     ss <<
       "--> End visiting msrPartGroup" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
+#endif
 }
 
 //________________________________________________________________________
 void msr2namesVisitor::visitStart (S_msrPart& elt)
 {
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "--> Start visiting msrPart" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
+#endif
 
   ++fPartsCounter;
 
@@ -216,7 +246,7 @@ void msr2namesVisitor::visitStart (S_msrPart& elt)
     elt->
       getPartStaveNumbersToStavesMap ().size ();
 
-  gLogStream <<
+  gLog <<
     "Part " << elt->getPartCombinedName () <<
     " contains " <<
     mfSingularOrPlural (
@@ -228,7 +258,7 @@ void msr2namesVisitor::visitStart (S_msrPart& elt)
 
   const int fieldWidth = 27;
 
-  gLogStream << std::left <<
+  gLog << std::left <<
     std::setw (fieldWidth) <<
     "partID" << ": \"" <<
     elt->getPartID () << "\"" <<
@@ -254,32 +284,44 @@ void msr2namesVisitor::visitStart (S_msrPart& elt)
     elt->getPartInstrumentAbbreviation () << "\"" <<
     std::endl;
 
-  gLogStream << std::endl;
+  gLog << std::endl;
 }
 
 void msr2namesVisitor::visitEnd (S_msrPart& elt)
 {
   --gIndenter;
 
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
 		std::stringstream ss;
 
     ss <<
       "--> End visiting msrPart" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
+#endif
 }
 
 //________________________________________________________________________
 void msr2namesVisitor::visitStart (S_msrStaff& elt)
 {
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "--> Start visiting msrStaff" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
+#endif
 
   ++fStavesCounter;
 
@@ -287,7 +329,7 @@ void msr2namesVisitor::visitStart (S_msrStaff& elt)
     elt->
       getStaffAllVoicesVector ().size ();
 
-  gLogStream <<
+  gLog <<
     "Staff" << ' ' << elt->getStaffName () <<
     " contains " <<
     mfSingularOrPlural (
@@ -300,7 +342,7 @@ void msr2namesVisitor::visitStart (S_msrStaff& elt)
 
   const int fieldWidth = 28;
 
-  gLogStream << std::left <<
+  gLog << std::left <<
     std::setw (fieldWidth) <<
     "staffNumber" << ": " <<
     elt->getStaffNumber () <<
@@ -316,7 +358,7 @@ void msr2namesVisitor::visitStart (S_msrStaff& elt)
     elt->getStaffInstrumentAbbreviation () << "\"" <<
     std::endl;
 
-  gLogStream << std::endl;
+  gLog << std::endl;
 
   fOnGoingStaff = true;
 }
@@ -325,13 +367,19 @@ void msr2namesVisitor::visitEnd (S_msrStaff& elt)
 {
   --gIndenter;
 
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
 		std::stringstream ss;
 
     ss <<
       "--> End visiting msrStaff" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
+#endif
 
   fOnGoingStaff = false;
 }
@@ -339,19 +387,25 @@ void msr2namesVisitor::visitEnd (S_msrStaff& elt)
 //________________________________________________________________________
 void msr2namesVisitor::visitStart (S_msrVoice& elt)
 {
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "--> Start visiting msrVoice" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
+#endif
 
   ++fVoicesCounter;
 
   size_t voiceStanzasMapSize = elt->getVoiceStanzasMap ().size ();
 
-  gLogStream <<
+  gLog <<
     "Voice" << ' ' << elt->getVoiceName () <<
     " has " <<
     mfSingularOrPlural (
@@ -363,7 +417,7 @@ void msr2namesVisitor::visitStart (S_msrVoice& elt)
 
   const int fieldWidth = 28;
 
-  gLogStream << std::left <<
+  gLog << std::left <<
     std::setw (fieldWidth) <<
     "voiceNumber" << ": " <<
     elt->getVoiceNumber () <<
@@ -373,20 +427,26 @@ void msr2namesVisitor::visitStart (S_msrVoice& elt)
     elt->getMusicHasBeenInsertedInVoice () <<
     std::endl;
 
-  gLogStream << std::endl;
+  gLog << std::endl;
 }
 
 void msr2namesVisitor::visitEnd (S_msrVoice& elt)
 {
   --gIndenter;
 
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
 		std::stringstream ss;
 
     ss <<
       "--> End visiting msrVoice" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
+#endif
 }
 
 

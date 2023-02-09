@@ -116,8 +116,6 @@ class EXP mfService : public smartable
 typedef SMARTP<mfService> S_mfService;
 EXP std::ostream& operator << (std::ostream& os, const S_mfService& elt);
 
-EXP extern S_mfService gGlobalService;
-
 //______________________________________________________________________________
 class EXP mfServiceRunData : public smartable
 {
@@ -223,9 +221,23 @@ class EXP mfServiceRunData : public smartable
 typedef SMARTP<mfServiceRunData> S_mfServiceRunData;
 EXP std::ostream& operator << (std::ostream& os, const S_mfServiceRunData& elt);
 
-EXP extern S_mfServiceRunData gGlobalCurrentServiceRunData;
+//________________________________________________________________________
+// hidden global service variable
+EXP void setGlobalService (S_mfService service);
 
-EXP extern S_mfService gGlobalCurrentService;
+EXP S_mfService getGlobalService ();
+
+// a handy shortcut
+#define gService getGlobalService ()
+
+// hidden global current service run data variable
+EXP void setGlobalServiceRunData (S_mfServiceRunData serviceRunData);
+
+EXP S_mfServiceRunData getGlobalServiceRunData ();
+
+// a handy shortcut
+#define gServiceRunData getGlobalServiceRunData ()
+
 
 }
 

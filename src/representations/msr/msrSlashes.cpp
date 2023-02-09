@@ -18,11 +18,12 @@
 #include "msrSlashes.h"
 
 #include "oahOah.h"
-#include "oahEarlyOptions.h"
 
 #include "msrOah.h"
 
 #include "msrWae.h"
+
+#include "waeHandlers.h"
 
 
 namespace MusicFormats
@@ -49,7 +50,7 @@ msrUseDotsKind msrUseDotsFromString (
         "\" is unknown";
 
       msrError (
-        gGlobalCurrentServiceRunData->getInputSourceName (),
+        gServiceRunData->getInputSourceName (),
         inputLineNumber,
         __FILE__, __LINE__,
         ss.str ());
@@ -171,8 +172,9 @@ msrSlash::~msrSlash ()
 
 void msrSlash::acceptIn (basevisitor* v)
 {
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "% ==> msrSlash::acceptIn ()" <<
@@ -182,12 +184,14 @@ void msrSlash::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
+#endif
 
   if (visitor<S_msrSlash>*
     p =
       dynamic_cast<visitor<S_msrSlash>*> (v)) {
         S_msrSlash elem = this;
 
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
@@ -199,14 +203,16 @@ void msrSlash::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
+#endif
         p->visitStart (elem);
   }
 }
 
 void msrSlash::acceptOut (basevisitor* v)
 {
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "% ==> msrSlash::acceptOut ()" <<
@@ -216,12 +222,14 @@ void msrSlash::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
+#endif
 
   if (visitor<S_msrSlash>*
     p =
       dynamic_cast<visitor<S_msrSlash>*> (v)) {
         S_msrSlash elem = this;
 
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
@@ -233,6 +241,7 @@ void msrSlash::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
+#endif        
         p->visitEnd (elem);
   }
 }

@@ -21,9 +21,10 @@
 #include "msrTechnicals.h"
 
 #include "oahOah.h"
-#include "oahEarlyOptions.h"
 
 #include "msrOah.h"
+
+#include "waeHandlers.h"
 
 
 namespace MusicFormats
@@ -227,8 +228,9 @@ msrTechnical::~msrTechnical ()
 
 void msrTechnical::acceptIn (basevisitor* v)
 {
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "% ==> msrTechnical::acceptIn ()" <<
@@ -238,12 +240,14 @@ void msrTechnical::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
+#endif
 
   if (visitor<S_msrTechnical>*
     p =
       dynamic_cast<visitor<S_msrTechnical>*> (v)) {
         S_msrTechnical elem = this;
 
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
@@ -255,14 +259,16 @@ void msrTechnical::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
+#endif
         p->visitStart (elem);
   }
 }
 
 void msrTechnical::acceptOut (basevisitor* v)
 {
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "% ==> msrTechnical::acceptOut ()" <<
@@ -272,12 +278,14 @@ void msrTechnical::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
+#endif
 
   if (visitor<S_msrTechnical>*
     p =
       dynamic_cast<visitor<S_msrTechnical>*> (v)) {
         S_msrTechnical elem = this;
 
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
@@ -289,6 +297,7 @@ void msrTechnical::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
+#endif        
         p->visitEnd (elem);
   }
 }
@@ -361,8 +370,9 @@ msrTechnicalWithInteger::~msrTechnicalWithInteger ()
 
 void msrTechnicalWithInteger::acceptIn (basevisitor* v)
 {
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "% ==> msrTechnicalWithInteger::acceptIn ()" <<
@@ -372,12 +382,14 @@ void msrTechnicalWithInteger::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
+#endif
 
   if (visitor<S_msrTechnicalWithInteger>*
     p =
       dynamic_cast<visitor<S_msrTechnicalWithInteger>*> (v)) {
         S_msrTechnicalWithInteger elem = this;
 
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
@@ -389,14 +401,16 @@ void msrTechnicalWithInteger::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
+#endif
         p->visitStart (elem);
   }
 }
 
 void msrTechnicalWithInteger::acceptOut (basevisitor* v)
 {
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "% ==> msrTechnicalWithInteger::acceptOut ()" <<
@@ -406,12 +420,14 @@ void msrTechnicalWithInteger::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
+#endif
 
   if (visitor<S_msrTechnicalWithInteger>*
     p =
       dynamic_cast<visitor<S_msrTechnicalWithInteger>*> (v)) {
         S_msrTechnicalWithInteger elem = this;
 
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
@@ -423,6 +439,7 @@ void msrTechnicalWithInteger::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
+#endif        
         p->visitEnd (elem);
   }
 }
@@ -518,8 +535,9 @@ msrTechnicalWithFloat::~msrTechnicalWithFloat ()
 
 void msrTechnicalWithFloat::acceptIn (basevisitor* v)
 {
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "% ==> msrTechnicalWithFloat::acceptIn ()" <<
@@ -529,12 +547,14 @@ void msrTechnicalWithFloat::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
+#endif
 
   if (visitor<S_msrTechnicalWithFloat>*
     p =
       dynamic_cast<visitor<S_msrTechnicalWithFloat>*> (v)) {
         S_msrTechnicalWithFloat elem = this;
 
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
@@ -546,14 +566,16 @@ void msrTechnicalWithFloat::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
+#endif
         p->visitStart (elem);
   }
 }
 
 void msrTechnicalWithFloat::acceptOut (basevisitor* v)
 {
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "% ==> msrTechnicalWithFloat::acceptOut ()" <<
@@ -563,12 +585,14 @@ void msrTechnicalWithFloat::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
+#endif
 
   if (visitor<S_msrTechnicalWithFloat>*
     p =
       dynamic_cast<visitor<S_msrTechnicalWithFloat>*> (v)) {
         S_msrTechnicalWithFloat elem = this;
 
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
@@ -580,6 +604,7 @@ void msrTechnicalWithFloat::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
+#endif        
         p->visitEnd (elem);
   }
 }
@@ -681,8 +706,9 @@ msrTechnicalWithString::~msrTechnicalWithString ()
 
 void msrTechnicalWithString::acceptIn (basevisitor* v)
 {
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "% ==> msrTechnicalWithString::acceptIn ()" <<
@@ -692,12 +718,14 @@ void msrTechnicalWithString::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
+#endif
 
   if (visitor<S_msrTechnicalWithString>*
     p =
       dynamic_cast<visitor<S_msrTechnicalWithString>*> (v)) {
         S_msrTechnicalWithString elem = this;
 
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
@@ -709,14 +737,16 @@ void msrTechnicalWithString::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
+#endif
         p->visitStart (elem);
   }
 }
 
 void msrTechnicalWithString::acceptOut (basevisitor* v)
 {
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "% ==> msrTechnicalWithString::acceptOut ()" <<
@@ -726,12 +756,14 @@ void msrTechnicalWithString::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
+#endif
 
   if (visitor<S_msrTechnicalWithString>*
     p =
       dynamic_cast<visitor<S_msrTechnicalWithString>*> (v)) {
         S_msrTechnicalWithString elem = this;
 
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
@@ -743,6 +775,7 @@ void msrTechnicalWithString::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
+#endif        
         p->visitEnd (elem);
   }
 }

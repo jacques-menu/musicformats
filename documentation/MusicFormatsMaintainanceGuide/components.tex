@@ -452,7 +452,7 @@ int main (int argc, char* argv[])
   // create the global run data
   // ------------------------------------------------------
 
-  gGlobalCurrentServiceRunData =
+  gServiceRunData =
     mfServiceRunData::create (serviceName);
 
 	// ... ... ...
@@ -463,7 +463,7 @@ Then the various run data can be accessed easily:
 \begin{lstlisting}[language=CPlusPlus]
   std::string
     inputSourceName =
-      gGlobalCurrentServiceRunData->getInputSourceName ();
+      gServiceRunData->getInputSourceName ();
 \end{lstlisting}
 
 The run date is used for example in \class{lpsrScore}, defined in \lpsrBoth{lpsrScores}:%%%JMI
@@ -493,13 +493,13 @@ lpsrScore::lpsrScore (
         std::endl <<
 
         "% on " <<
-        gGlobalCurrentServiceRunData->getRunDateFull () <<
+        gServiceRunData->getRunDateFull () <<
         std::endl <<
 
         "% from ";
 
       std::string inputSourceName =
-        gGlobalCurrentServiceRunData->getInputSourceName ();
+        gServiceRunData->getInputSourceName ();
 
       if (inputSourceName == "-") {
         ss << "standard input";

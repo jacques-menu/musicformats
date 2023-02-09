@@ -40,6 +40,8 @@
 
 #include "msr2lpsrTranslator.h"
 
+#include "waeHandlers.h"
+
 
 namespace MusicFormats
 {
@@ -53,7 +55,7 @@ S_lpsrScore translateMsrToLpsr (
   const S_mfcMultiComponent& multiComponent)
 {
   if (gGlobalLpsr2lilypondOahGroup->getNoLilypondCode ()) {
-    gLogStream <<
+    gLog <<
       "Option '-nolpc, -no-lilypond-code' is set, no LPSR is created" <<
       std::endl;
 
@@ -74,8 +76,8 @@ S_lpsrScore translateMsrToLpsr (
   // set the global current passID
   setGlobalCurrentPassIDKind (passIDKind);
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTracePasses ()) {
     std::string separator =
       "%--------------------------------------------------------------";
 
@@ -86,7 +88,7 @@ S_lpsrScore translateMsrToLpsr (
       separator <<
       std::endl <<
       gTab <<
-      gWaeHandler->passIDKindAsString (passIDKind) << ": " << passDescription <<
+      gLanguage->passIDKindAsString (passIDKind) << ": " << passDescription <<
       std::endl <<
       separator <<
       std::endl;
@@ -111,7 +113,7 @@ S_lpsrScore translateMsrToLpsr (
   clock_t endClock = clock ();
 
   // register time spent
-  mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
+  gGlobalTimingItemsList.appendTimingItem (
     passIDKind,
     passDescription,
     mfTimingItemKind::kMandatory,
@@ -119,7 +121,7 @@ S_lpsrScore translateMsrToLpsr (
     endClock);
 
   if (gIndenter != 0) {
-    if (! gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
+    if (! gEarlyOptions.getEarlyQuietOption ()) {
       std::stringstream ss;
 
       ss <<
@@ -127,7 +129,7 @@ S_lpsrScore translateMsrToLpsr (
         gIndenter.getIndentation ();
 
       msr2lpsrWarning (
-        gGlobalCurrentServiceRunData->getInputSourceName (),
+        gServiceRunData->getInputSourceName (),
         1, // JMI inputLineNumber,
         ss.str ());
     }
@@ -139,7 +141,7 @@ S_lpsrScore translateMsrToLpsr (
     std::string message =
       "### Conversion from MSR to LPSR failed ###";
 
-    gLogStream <<
+    gLog <<
       message <<
       std::endl;
 
@@ -148,7 +150,7 @@ S_lpsrScore translateMsrToLpsr (
 
   // check indentation
   if (gIndenter != 0) {
-    gLogStream <<
+    gLog <<
       "### translateMsrToLpsrScore gIndenter final value: " <<
       gIndenter.getIndentation () <<
       " ###" <<

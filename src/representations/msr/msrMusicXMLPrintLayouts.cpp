@@ -23,9 +23,11 @@
 #include "msrMeasureConstants.h"
 #include "msrMusicXMLPrintLayouts.h"
 
-#include "oahEarlyOptions.h"
+// #include "oahEarlyOptions.h"
 
 #include "msrOah.h"
+
+#include "waeHandlers.h"
 
 
 namespace MusicFormats
@@ -50,7 +52,7 @@ S_msrMusicXMLPrintLayout msrMusicXMLPrintLayout::create (
   return
     msrMusicXMLPrintLayout::create (
       inputLineNumber,
-      gGlobalNullMeasureSmartPointer); // set later in setMeasureElementUpLinkToMeasure()
+      gNullMeasure); // set later in setMeasureElementUpLinkToMeasure()
 }
 
 msrMusicXMLPrintLayout::msrMusicXMLPrintLayout (
@@ -59,8 +61,8 @@ msrMusicXMLPrintLayout::msrMusicXMLPrintLayout (
     : msrMeasureElement (
         inputLineNumber)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMusicXMLPrintLayouts ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMusicXMLPrintLayouts ()) {
 		std::stringstream ss;
 
     ss <<
@@ -109,11 +111,11 @@ void msrMusicXMLPrintLayout::setMusicXMLPrintLayoutUpLinkToMeasure (
     "measure is null");
 #endif
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceWholeNotes ()) {
     ++gIndenter;
 
-    gLogStream <<
+    gLog <<
       "==> Setting the uplink to measure of print layout " <<
       asString () <<
       " to measure " << measure->asString () <<
@@ -135,8 +137,9 @@ S_msrMeasure msrMusicXMLPrintLayout::getMusicXMLPrintLayoutUpLinkToMeasure () co
 
 void msrMusicXMLPrintLayout::acceptIn (basevisitor* v)
 {
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "% ==> msrMusicXMLPrintLayout::acceptIn ()" <<
@@ -146,12 +149,14 @@ void msrMusicXMLPrintLayout::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
+#endif
 
   if (visitor<S_msrMusicXMLPrintLayout>*
     p =
       dynamic_cast<visitor<S_msrMusicXMLPrintLayout>*> (v)) {
         S_msrMusicXMLPrintLayout elem = this;
 
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
@@ -163,14 +168,16 @@ void msrMusicXMLPrintLayout::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
+#endif
         p->visitStart (elem);
   }
 }
 
 void msrMusicXMLPrintLayout::acceptOut (basevisitor* v)
 {
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "% ==> msrMusicXMLPrintLayout::acceptOut ()" <<
@@ -180,12 +187,14 @@ void msrMusicXMLPrintLayout::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
+#endif
 
   if (visitor<S_msrMusicXMLPrintLayout>*
     p =
       dynamic_cast<visitor<S_msrMusicXMLPrintLayout>*> (v)) {
         S_msrMusicXMLPrintLayout elem = this;
 
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
@@ -197,6 +206,7 @@ void msrMusicXMLPrintLayout::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
+#endif        
         p->visitEnd (elem);
   }
 }

@@ -17,11 +17,9 @@
 #include "xmlfile.h"
 #include "xmlreader.h"
 
-
 #include "mxsr2guidoWae.h"
 
 #include "mfStaticSettings.h"
-
 
 #include "mfAssert.h"
 #include "mfTiming.h"
@@ -35,6 +33,8 @@
 #include "mxsrGeneration.h"
 
 #include "xml2guidovisitor.h"
+
+#include "waeHandlers.h"
 
 
 namespace MusicFormats
@@ -58,8 +58,8 @@ void translateMxsrToGuido (
   // start the clock
   clock_t startClock = clock ();
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTracePasses ()) {
     std::string separator =
       "%--------------------------------------------------------------";
 
@@ -69,7 +69,7 @@ void translateMxsrToGuido (
       separator <<
       std::endl <<
       gTab <<
-      gWaeHandler->passIDKindAsString (passIDKind) << ": " << passDescription <<
+      gLanguage->passIDKindAsString (passIDKind) << ": " << passDescription <<
       std::endl <<
       separator <<
       std::endl;
@@ -94,8 +94,8 @@ void translateMxsrToGuido (
   Sguidoelement
     guidoData = v.convert (theMxsr);
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
     err <<
       "xmlFile2gmn() outputFileName = \"" <<
       outputFileName <<
@@ -109,8 +109,8 @@ void translateMxsrToGuido (
 #endif
 
   if (! outputFileName.size ()) {
-#ifdef MF_TRACING_IS_ENABLED
-    if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+    if (gEarlyOptions.getEarlyTraceOah ()) {
       err <<
         "xmlFile2gmn() output goes to standard output" <<
         std::endl;
@@ -122,14 +122,14 @@ void translateMxsrToGuido (
 #endif
 
     // write the Guido data to the output file stream
-    gOutputStream <<
+    gOutput <<
       guidoData <<
       std::endl;
   }
 
   else {
-#ifdef MF_TRACING_IS_ENABLED
-    if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+    if (gEarlyOptions.getEarlyTraceOah ()) {
       err <<
         "xmlFile2gmn() output goes to file \"" <<
         outputFileName <<
@@ -145,11 +145,11 @@ void translateMxsrToGuido (
     // open output file
     std::ofstream outputFileStream;
 
-#ifdef MF_TRACING_IS_ENABLED
-    if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
+#ifdef MF_TRACE_IS_ENABLED
+    if (gEarlyOptions.getEarlyTracePasses ()) {
       err <<
         std::endl <<
-        gWaeHandler->openingGuidoFileForWriting (outputFileName) <<
+        gLanguage->openingGuidoFileForWriting (outputFileName) <<
         std::endl;
 
 //     gWaeHandler->waeTrace ( JMI v0.9.67
@@ -167,7 +167,7 @@ void translateMxsrToGuido (
       std::stringstream ss;
 
       ss <<
-        gWaeHandler->cannotOpenGuidoFileForWriting (outputFileName);
+        gLanguage->cannotOpenGuidoFileForWriting (outputFileName);
 
       std::string message = ss.str ();
 
@@ -185,10 +185,10 @@ void translateMxsrToGuido (
 
     // close output file
 #ifdef TRACE_OAH
-    if (gtracingOah->fTracePasses) {
+    if (gTraceOah->fTracePasses) {
       err <<
         std::endl <<
-        gWaeHandler->closingGuidoFile (outputFileName) <<
+        gLanguage->closingGuidoFile (outputFileName) <<
         std::endl;
 
       gWaeHandler->waeTrace (
@@ -203,7 +203,7 @@ void translateMxsrToGuido (
   // register time spent
   clock_t endClock = clock ();
 
-  mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
+  gGlobalTimingItemsList.appendTimingItem (
     passIDKind,
     passDescription,
     mfTimingItemKind::kMandatory,

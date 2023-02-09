@@ -17,16 +17,15 @@
 
 #include "mfAssert.h"
 
-
-
 #include "msrRepeatCodas.h"
 
 #include "oahOah.h"
-#include "oahEarlyOptions.h"
 
 #include "msrOah.h"
 
 #include "msrBrowsers.h"
+
+#include "waeHandlers.h"
 
 
 namespace MusicFormats
@@ -80,8 +79,8 @@ msrRepeatCoda::~msrRepeatCoda ()
 S_msrRepeatCoda msrRepeatCoda::createRepeatCodaNewbornClone (
   const S_msrRepeat& containingRepeat)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceRepeats ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceRepeats ()) {
 		std::stringstream ss;
 
     ss <<
@@ -124,8 +123,8 @@ S_msrRepeatCoda msrRepeatCoda::createRepeatCodaNewbornClone (
 S_msrRepeatCoda msrRepeatCoda::createRepeatCodaDeepClone (
   const S_msrRepeat& containingRepeat)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceRepeats ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceRepeats ()) {
 		std::stringstream ss;
 
     ss <<
@@ -183,8 +182,9 @@ void msrRepeatCoda::appendElementToRepeatCoda (
 
 void msrRepeatCoda::acceptIn (basevisitor* v)
 {
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "% ==> msrRepeatCoda::acceptIn ()" <<
@@ -194,12 +194,14 @@ void msrRepeatCoda::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
+#endif
 
   if (visitor<S_msrRepeatCoda>*
     p =
       dynamic_cast<visitor<S_msrRepeatCoda>*> (v)) {
         S_msrRepeatCoda elem = this;
 
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
@@ -211,14 +213,16 @@ void msrRepeatCoda::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
+#endif
         p->visitStart (elem);
   }
 }
 
 void msrRepeatCoda::acceptOut (basevisitor* v)
 {
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "% ==> msrRepeatCoda::acceptOut ()" <<
@@ -228,12 +232,14 @@ void msrRepeatCoda::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
+#endif
 
   if (visitor<S_msrRepeatCoda>*
     p =
       dynamic_cast<visitor<S_msrRepeatCoda>*> (v)) {
         S_msrRepeatCoda elem = this;
 
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
@@ -245,6 +251,7 @@ void msrRepeatCoda::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
+#endif        
         p->visitEnd (elem);
   }
 }

@@ -207,7 +207,7 @@ Option
   : OPTION
     {
 	    if (drv.getDisplayNonTerminals ()) {
-        gLogStream <<
+        gLog <<
           "  ==> option " << $1 <<
           std::endl << std::endl;
 			}
@@ -218,7 +218,7 @@ Option
   | OPTION OptionValue
     {
       if (drv.getDisplayNonTerminals ()) {
-        gLogStream <<
+        gLog <<
           "  ==> option " << $1 << ' ' << $2 <<
           std::endl << std::endl;
       }
@@ -235,7 +235,7 @@ The name \code{OPTION} is used in \mfsl{mfslScanner.ll} prefixed by \code{yy::pa
 "--"{name} |
 "-"{name} {
   if (drv.getTraceTokens ()) {
-    gLogStream << "--> " << drv.getScannerLocation () <<
+    gLog << "--> " << drv.getScannerLocation () <<
     ": option [" << yytext << ']' <<
     std::endl;
   }
@@ -411,7 +411,7 @@ void mfslDriver::scanBegin ()
 
       if (errorString != nullptr) {
         ss <<
-          gWaeHandler->cannotOpenScriptForWriting (fScriptName) <<
+          gLanguage->cannotOpenScriptForWriting (fScriptName) <<
           ": " <<
           errorString <<
           std::endl;
@@ -526,7 +526,7 @@ The numbers are handled by:
 {integer}"."{integer}({exponent})? |
 {integer}{exponent} {
   if (drv.getTraceTokens ()) {
-    gLogStream <<
+    gLog <<
     	"--> " << drv.getScannerLocation () <<
 			" double: " << yytext <<
 			std::endl;
@@ -536,7 +536,7 @@ The numbers are handled by:
 
 {integer} {
   if (drv.getTraceTokens ()) {
-    gLogStream <<
+    gLog <<
     	"--> " << drv.getScannerLocation () <<
 			" integer: " << yytext <<
 			std::endl;
@@ -549,7 +549,7 @@ The \mfslLang\ keywords are handled with the \code{make_...} facility:
 \begin{lstlisting}[language=Flex]
 "tool" {
   if (drv.getTraceTokens ()) {
-    gLogStream <<
+    gLog <<
     	"--> " << drv.getScannerLocation () << ": " << yytext <<
 			std::endl;
   }
@@ -561,7 +561,7 @@ The names and the options are handled by:
 \begin{lstlisting}[language=Flex]
 {name} {
   if (drv.getDisplayTokens ()) {
-    gLogStream << "--> " << drv.getScannerLocation () <<
+    gLog << "--> " << drv.getScannerLocation () <<
     ": name [" << yytext << ']' <<
     std::endl;
   }
@@ -578,7 +578,7 @@ The names and the options are handled by:
 "--"{name} |
 "-"{name} {
   if (drv.getTraceTokens ()) {
-    gLogStream << "--> " << drv.getScannerLocation () <<
+    gLog << "--> " << drv.getScannerLocation () <<
     ": option [" << yytext << ']' <<
     std::endl;
   }
@@ -589,7 +589,7 @@ The names and the options are handled by:
 
 "(" {
   if (drv.getTraceTokens ()) {
-    gLogStream <<
+    gLog <<
     	"--> " << drv.getScannerLocation () << ": " << yytext <<
 			std::endl;
   }
@@ -779,7 +779,7 @@ EXP mfMusicformatsErrorKind launchMfslInterpreter (
   int parseResult =
   	theDriver.parseFile (inputSourceName);
 
-  gLogStream <<
+  gLog <<
     "--> parseResult: " << parseResult <<
     std::endl;
 
@@ -788,7 +788,7 @@ EXP mfMusicformatsErrorKind launchMfslInterpreter (
       mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
 
-	gLogStream <<
+	gLog <<
     "inputFileName: " << theDriver.getInputFileName () <<
   	std::endl <<
 		"toolName: " << theDriver.getToolName () <<

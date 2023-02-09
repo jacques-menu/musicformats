@@ -18,9 +18,10 @@
 #include "msrSlides.h"
 
 #include "oahOah.h"
-#include "oahEarlyOptions.h"
 
 #include "msrOah.h"
+
+#include "waeHandlers.h"
 
 
 namespace MusicFormats
@@ -93,8 +94,8 @@ msrSlide::~msrSlide ()
 
 S_msrSlide msrSlide::createSlideNewbornClone ()
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceSlides ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceSlides ()) {
 		std::stringstream ss;
 
     ss <<
@@ -123,8 +124,9 @@ S_msrSlide msrSlide::createSlideNewbornClone ()
 
 void msrSlide::acceptIn (basevisitor* v)
 {
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "% ==> msrSlide::acceptIn ()" <<
@@ -134,12 +136,14 @@ void msrSlide::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
+#endif
 
   if (visitor<S_msrSlide>*
     p =
       dynamic_cast<visitor<S_msrSlide>*> (v)) {
         S_msrSlide elem = this;
 
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
@@ -151,14 +155,16 @@ void msrSlide::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
+#endif
         p->visitStart (elem);
   }
 }
 
 void msrSlide::acceptOut (basevisitor* v)
 {
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "% ==> msrSlide::acceptOut ()" <<
@@ -168,12 +174,14 @@ void msrSlide::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
+#endif
 
   if (visitor<S_msrSlide>*
     p =
       dynamic_cast<visitor<S_msrSlide>*> (v)) {
         S_msrSlide elem = this;
 
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
@@ -185,6 +193,7 @@ void msrSlide::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
+#endif        
         p->visitEnd (elem);
   }
 }

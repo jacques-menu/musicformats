@@ -15,9 +15,12 @@
 
 #include "oahOah.h"
 #include "oahEarlyOptions.h"
+
 #include "waeOah.h"
 
 #include "waeHandlersForGUI.h"
+
+#include "waeHandlers.h"
 
 
 namespace MusicFormats
@@ -45,12 +48,12 @@ void waeHandlerForGUI::waeWarning (
   int                inputLineNumber,
   const std::string& message)
 {
-  if (! gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
+  if (! gEarlyOptions.getEarlyQuietOption ()) {
     int saveIndent = gIndenter.getIndentation ();
 
     gIndenter.resetToZero ();
 
-    gLogStream <<
+    gLog <<
       "*** " << context << " warning *** " <<
       inputSourceName << ":" << inputLineNumber << ": " <<message <<
       std::endl;
@@ -67,12 +70,12 @@ void waeHandlerForGUI::waeInternalWarning (
   int                inputLineNumber,
   const std::string& message)
 {
-  if (! gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
+  if (! gEarlyOptions.getEarlyQuietOption ()) {
     int saveIndent = gIndenter.getIndentation ();
 
     gIndenter.resetToZero ();
 
-    gLogStream <<
+    gLog <<
       "*** " << context << " INTERNAL warning *** " <<
       inputSourceName << ":" << inputLineNumber << ": " <<message <<
       std::endl;
@@ -91,9 +94,9 @@ void waeHandlerForGUI::waeErrorWithoutException (
   int                sourceCodeLineNumber,
   const std::string& message)
 {
-  if (! gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
+  if (! gEarlyOptions.getEarlyQuietOption ()) {
     if (gGlobalOahOahGroup->getDisplaySourceCodePositions ()) {
-      gLogStream <<
+      gLog <<
         mfBaseName (sourceCodeFileName) << ":" << sourceCodeLineNumber <<
         ' ';
     }
@@ -103,7 +106,7 @@ void waeHandlerForGUI::waeErrorWithoutException (
 
       gIndenter.resetToZero ();
 
-      gLogStream <<
+      gLog <<
         "### " << context << " ERROR ### " <<
         message <<
         std::endl;
@@ -121,9 +124,9 @@ void waeHandlerForGUI::waeErrorWithoutException (
   int                sourceCodeLineNumber,
   const std::string& message)
 {
-  if (! gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
+  if (! gEarlyOptions.getEarlyQuietOption ()) {
     if (gGlobalOahOahGroup->getDisplaySourceCodePositions ()) {
-      gLogStream <<
+      gLog <<
         mfBaseName (sourceCodeFileName) << ":" << sourceCodeLineNumber <<
         ' ';
     }
@@ -133,7 +136,7 @@ void waeHandlerForGUI::waeErrorWithoutException (
 
       gIndenter.resetToZero ();
 
-      gLogStream <<
+      gLog <<
         "### " << context << " ERROR ### " <<
         inputSourceName << ":" << inputLineNumber << ": " << message <<
         std::endl;
@@ -272,9 +275,9 @@ void waeHandlerForGUI::displayWarningsAndErrorsInputLineNumbers ()
   if (
     warningsInputLineNumbersSize
       &&
-    ! gGlobalOahEarlyOptions.getEarlyQuietOption ()
+    ! gEarlyOptions.getEarlyQuietOption ()
   ) {
-    gLogStream <<
+    gLog <<
       std::endl <<
       mfSingularOrPluralWithoutNumber (
         warningsInputLineNumbersSize, "A warning message has", "Warning messages have") <<
@@ -288,19 +291,19 @@ void waeHandlerForGUI::displayWarningsAndErrorsInputLineNumbers ()
       iEnd   = fWarningsInputLineNumbers.end (),
       i      = iBegin;
     for ( ; ; ) {
-      gLogStream << (*i);
+      gLog << (*i);
       if (++i == iEnd) break;
-      gLogStream << ", ";
+      gLog << ", ";
     } // for
 
-    gLogStream << std::endl;
+    gLog << std::endl;
   }
 
   size_t errorsInputLineNumbersSize =
     fErrorsInputLineNumbers.size ();
 
   if (errorsInputLineNumbersSize) {
-    gLogStream <<
+    gLog <<
       std::endl <<
       mfSingularOrPluralWithoutNumber (
         errorsInputLineNumbersSize, "An error message has", "Error messages have") <<
@@ -314,12 +317,12 @@ void waeHandlerForGUI::displayWarningsAndErrorsInputLineNumbers ()
       iEnd   = fErrorsInputLineNumbers.end (),
       i      = iBegin;
     for ( ; ; ) {
-      gLogStream << (*i);
+      gLog << (*i);
       if (++i == iEnd) break;
-      gLogStream << ", ";
+      gLog << ", ";
     } // for
 
-    gLogStream << std::endl;
+    gLog << std::endl;
   }
 }
 

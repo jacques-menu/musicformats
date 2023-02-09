@@ -14,9 +14,10 @@
 #include "lpsrBarNumbers.h"
 
 #include "oahOah.h"
-#include "oahEarlyOptions.h"
 
 #include "lpsrOah.h"
+
+#include "waeHandlers.h"
 
 
 namespace MusicFormats
@@ -47,7 +48,7 @@ lpsrBarNumberCheck::~lpsrBarNumberCheck ()
 
 void lpsrBarNumberCheck::acceptIn (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
 		std::stringstream ss;
 
@@ -66,7 +67,7 @@ void lpsrBarNumberCheck::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_lpsrBarNumberCheck>*> (v)) {
         S_lpsrBarNumberCheck elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           std::stringstream ss;
 
@@ -85,7 +86,7 @@ void lpsrBarNumberCheck::acceptIn (basevisitor* v)
 
 void lpsrBarNumberCheck::acceptOut (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
 		std::stringstream ss;
 
@@ -104,7 +105,7 @@ void lpsrBarNumberCheck::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_lpsrBarNumberCheck>*> (v)) {
         S_lpsrBarNumberCheck elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           std::stringstream ss;
 
@@ -164,7 +165,7 @@ lpsrBarCommand::~lpsrBarCommand ()
 
 void lpsrBarCommand::acceptIn (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
 		std::stringstream ss;
 
@@ -183,7 +184,7 @@ void lpsrBarCommand::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_lpsrBarCommand>*> (v)) {
         S_lpsrBarCommand elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           std::stringstream ss;
 
@@ -202,7 +203,7 @@ void lpsrBarCommand::acceptIn (basevisitor* v)
 
 void lpsrBarCommand::acceptOut (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
 		std::stringstream ss;
 
@@ -221,7 +222,7 @@ void lpsrBarCommand::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_lpsrBarCommand>*> (v)) {
         S_lpsrBarCommand elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           std::stringstream ss;
 

@@ -28,6 +28,9 @@
 
 #include "msdlConverterInsiderHandler.h"
 
+// WAE
+#include "waeHandlers.h"
+
 
 namespace MusicFormats
 {
@@ -69,10 +72,10 @@ msdlConverterOahGroup::~msdlConverterOahGroup ()
 
 void msdlConverterOahGroup::initializeMsdlConverterOahGroup ()
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   // trace
   // --------------------------------------
-// JMI  initializeMsdlConvertertracingOah ();
+// JMI  initializeMsdlConverterTraceOah ();
 #endif
 }
 
@@ -84,8 +87,8 @@ void msdlConverterOahGroup::checkGroupOptionsConsistency ()
 
 void msdlConverterOahGroup::acceptIn (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -103,8 +106,8 @@ void msdlConverterOahGroup::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_msdlConverterOahGroup>*> (v)) {
         S_msdlConverterOahGroup elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
-        if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -122,8 +125,8 @@ void msdlConverterOahGroup::acceptIn (basevisitor* v)
 
 void msdlConverterOahGroup::acceptOut (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -141,8 +144,8 @@ void msdlConverterOahGroup::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_msdlConverterOahGroup>*> (v)) {
         S_msdlConverterOahGroup elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
-        if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -160,8 +163,8 @@ void msdlConverterOahGroup::acceptOut (basevisitor* v)
 
 void msdlConverterOahGroup::browseData (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -178,7 +181,7 @@ void msdlConverterOahGroup::browseData (basevisitor* v)
 void msdlConverterOahGroup::printMsdlConverterOahValues (
   int fieldWidth)
 {
-  gLogStream <<
+  gLog <<
     "The msdlConverter options are:" <<
     std::endl;
 
@@ -202,8 +205,8 @@ std::ostream& operator << (std::ostream& os, const S_msdlConverterOahGroup& elt)
 //______________________________________________________________________________
 S_msdlConverterOahGroup createGlobalMsdlConverterOahGroup ()
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<

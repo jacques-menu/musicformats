@@ -180,7 +180,7 @@ A harmoniy belongs to a \musicXmlMarkup{part} in \mxml, but we sometimes need to
 \begin{lstlisting}[language=CPlusPlus]
 void mxsr2msrSkeletonBuilder::visitStart ( S_harmony& elt )
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
 		std::stringstream ss;
 
@@ -217,9 +217,9 @@ void mxsr2msrSkeletonBuilder::visitEnd ( S_note& elt )
   // are there harmonies attached to the current note?
   if (fThereAreHarmoniesToBeAttachedToCurrentNote) {
     if (gGlobalMxsr2msrOahGroup->getIgnoreHarmonies ()) {
-#ifdef MF_TRACING_IS_ENABLED
-      if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
-        gLogStream <<
+#ifdef MF_TRACE_IS_ENABLED
+      if (gGlobalTraceOahGroup->getTraceHarmonies ()) {
+        gLog <<
           "Ignoring the harmonies" <<
           ", line " <<
           inputLineNumber <<
@@ -293,7 +293,7 @@ void mxsr2msrTranslator::visitStart ( S_harmony& elt )
   int inputLineNumber =
     elt->getInputLineNumber ();
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
 		std::stringstream ss;
 
@@ -341,9 +341,9 @@ void mxsr2msrTranslator::visitEnd ( S_harmony& elt )
 	// ... ... ...
 
   if (gGlobalMxsr2msrOahGroup->getIgnoreHarmonies ()) {
- #ifdef MF_TRACING_IS_ENABLED
-    if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
-      gLogStream <<
+ #ifdef MF_TRACE_IS_ENABLED
+    if (gGlobalTraceOahGroup->getTraceHarmonies ()) {
+      gLog <<
         "Ignoring harmony" <<
         ", line " <<
         inputLineNumber <<
@@ -357,9 +357,9 @@ void mxsr2msrTranslator::visitEnd ( S_harmony& elt )
   }
   else {
    // create the harmony
-#ifdef MF_TRACING_IS_ENABLED
-    if (gGlobalTracingOahGroup->getTraceHarmoniesDetails ()) {
-      gLogStream <<
+#ifdef MF_TRACE_IS_ENABLED
+    if (gGlobalTraceOahGroup->getTraceHarmoniesDetails ()) {
+      gLog <<
         "Creating a harmony" <<
         ", line " << inputLineNumber << ":" <<
         std::endl;
@@ -393,10 +393,10 @@ void mxsr2msrTranslator::visitEnd ( S_harmony& elt )
 
     // append pending harmony degrees if any to the harmony
     if (! fCurrentHarmonyDegreesList.size ()) {
-#ifdef MF_TRACING_IS_ENABLED
-      if (gGlobalTracingOahGroup->getTraceHarmoniesDetails ()) {
+#ifdef MF_TRACE_IS_ENABLED
+      if (gGlobalTraceOahGroup->getTraceHarmoniesDetails ()) {
         musicxmlWarning (
-          gGlobalCurrentServiceRunData->getInputSourceName (),
+          gServiceRunData->getInputSourceName (),
           inputLineNumber,
           "harmony has no degrees contents");
       }
@@ -575,9 +575,9 @@ void mxsr2msrTranslator::handlePendingHarmonies (
 \begin{lstlisting}[language=CPlusPlus]
 void msrNote::appendHarmonyToNote (const S_msrHarmony& harmony)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
-    gLogStream <<
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceHarmonies ()) {
+    gLog <<
       "Appending harmony " <<
       harmony->asString () <<
       " to the harmonies list of " <<
@@ -618,9 +618,9 @@ void mxsr2msrTranslator::copyNoteHarmoniesToChord (
     for (i=noteHarmoniesList.begin (); i!=noteHarmoniesList.end (); ++i) {
       S_msrHarmony harmony = (*i);
 
-#ifdef MF_TRACING_IS_ENABLED
-      if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
-        gLogStream <<
+#ifdef MF_TRACE_IS_ENABLED
+      if (gGlobalTraceOahGroup->getTraceHarmonies ()) {
+        gLog <<
           "Copying harmony '" <<
           harmony->asString () <<
           "' from note " << note->asString () <<
@@ -689,7 +689,7 @@ In \msrToMsr{msr2msrTranslator.cpp}, a newborn clone of the harmony is created u
 \begin{lstlisting}[language=CPlusPlus]
 void msr2msrTranslator::visitStart (S_msrHarmony& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
 		std::stringstream ss;
 
@@ -773,7 +773,7 @@ void msr2msrTranslator::visitStart (S_msrHarmony& elt)
       elt->asShortString ();
 
     msrInternalError (
-      gGlobalCurrentServiceRunData->getInputSourceName (),
+      gServiceRunData->getInputSourceName (),
       elt->getInputLineNumber (),
       __FILE__, __LINE__,
       ss.str ());
@@ -787,7 +787,7 @@ There are only fields updates upon the second visit:
 \begin{lstlisting}[language=CPlusPlus]
 void msr2msrTranslator::visitEnd (S_msrHarmony& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
 		std::stringstream ss;
 
@@ -821,7 +821,7 @@ The same occurs in \msrToLpsr{msr2lpsrTranslator.cpp}: a newborn clone of the ha
 \begin{lstlisting}[language=CPlusPlus]
 void msr2lpsrTranslator::visitStart (S_msrHarmony& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
 		std::stringstream ss;
 
@@ -905,7 +905,7 @@ void msr2lpsrTranslator::visitStart (S_msrHarmony& elt)
       elt->asShortString ();
 
     msrInternalError (
-      gGlobalCurrentServiceRunData->getInputSourceName (),
+      gServiceRunData->getInputSourceName (),
       elt->getInputLineNumber (),
       __FILE__, __LINE__,
       ss.str ());
@@ -921,7 +921,7 @@ Here too, there are only fields updates upon the second visit of \smartPointerTy
 \begin{lstlisting}[language=CPlusPlus]
 void msr2lpsrTranslator::visitEnd (S_msrHarmony& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
 		std::stringstream ss;
 
@@ -954,7 +954,7 @@ There is only one visit of \class{msrHarmony} instances in \lpsrToLilypond{lpsr2
 \begin{lstlisting}[language=CPlusPlus]
 void lpsr2lilypondTranslator::visitStart (S_msrHarmony& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   {
     Bool
       traceMsrVisitors =
@@ -981,7 +981,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrHarmony& elt)
       std::endl;
 
       if (traceMsrVisitors) {
-        gLogStream << ss.str ();
+        gLog << ss.str ();
       }
 
       if (generateMsrVisitingInformation) {
@@ -993,8 +993,8 @@ void lpsr2lilypondTranslator::visitStart (S_msrHarmony& elt)
 
   if (fOnGoingNotesStack.size () > 0) {
   /* JMI
-#ifdef MF_TRACING_IS_ENABLED
-    if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
+#ifdef MF_TRACE_IS_ENABLED
+    if (gGlobalTraceOahGroup->getTraceHarmonies ()) {
       fLilypondCodeStream <<
         "%{ fOnGoingNotesStack.size () S_msrHarmony JMI " <<
         elt->asString () <<

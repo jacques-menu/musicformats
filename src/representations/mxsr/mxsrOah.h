@@ -63,7 +63,7 @@ class EXP mxsrOahGroup : public oahGroup
     // set and get
     // ------------------------------------------------------
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
     // specific trace
     // --------------------------------------
 
@@ -90,7 +90,7 @@ class EXP mxsrOahGroup : public oahGroup
     Bool                  getTraceForward () const
                               { return fTraceForward; }
 
-    // specific trace JMI move to tracingOah
+    // specific trace JMI move to traceOah
     // --------------------------------------
 
     void                  setTraceMxsr ()
@@ -115,8 +115,8 @@ class EXP mxsrOahGroup : public oahGroup
     // private services
     // ------------------------------------------------------
 
-#ifdef MF_TRACING_IS_ENABLED
-    void                  initializeMxsrtracingOah ();
+#ifdef MF_TRACE_IS_ENABLED
+    void                  initializeMxsrTraceOah ();
 #endif
 
   public:
@@ -143,7 +143,7 @@ class EXP mxsrOahGroup : public oahGroup
     // private fields
     // ------------------------------------------------------
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
     // specific trace
     // --------------------------------------
 
@@ -157,7 +157,7 @@ class EXP mxsrOahGroup : public oahGroup
     Bool                  fTraceBackup;
     Bool                  fTraceForward;
 
-    // specific trace JMI move to tracingOah JMI ???
+    // specific trace JMI move to traceOah JMI ???
     // --------------------------------------
 
     Bool                  fTraceMxsr;

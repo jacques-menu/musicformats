@@ -40,6 +40,9 @@
 
 #include "msr2bsrTranslator.h"
 
+#include "waeHandlers.h"
+
+
 namespace MusicFormats
 {
 //_______________________________________________________________________________
@@ -64,8 +67,8 @@ S_bsrScore translateMsrToBsr (
   // set the global current passID
   setGlobalCurrentPassIDKind (passIDKind);
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTracePasses ()) {
     std::string separator =
       "%--------------------------------------------------------------";
 
@@ -76,7 +79,7 @@ S_bsrScore translateMsrToBsr (
       separator <<
       std::endl <<
       gTab <<
-      gWaeHandler->passIDKindAsString (passIDKind) << ": " << passDescription <<
+      gLanguage->passIDKindAsString (passIDKind) << ": " << passDescription <<
       std::endl <<
       separator <<
       std::endl;
@@ -100,7 +103,7 @@ S_bsrScore translateMsrToBsr (
   clock_t endClock = clock ();
 
   // register time spent
-  mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
+  gGlobalTimingItemsList.appendTimingItem (
     passIDKind,
     passDescription,
     mfTimingItemKind::kMandatory,
@@ -108,7 +111,7 @@ S_bsrScore translateMsrToBsr (
     endClock);
 
   if (gIndenter != 0) {
-    if (! gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
+    if (! gEarlyOptions.getEarlyQuietOption ()) {
       std::stringstream ss;
 
       ss <<
@@ -116,7 +119,7 @@ S_bsrScore translateMsrToBsr (
         gIndenter.getIndentation ();
 
       msr2bsrWarning (
-        gGlobalCurrentServiceRunData->getInputSourceName (),
+        gServiceRunData->getInputSourceName (),
         1, // JMI inputLineNumber,
         ss.str ());
     }
@@ -128,7 +131,7 @@ S_bsrScore translateMsrToBsr (
     std::string message =
       "### Conversion from MSR to BSR failed ###";
 
-    gLogStream <<
+    gLog <<
       message <<
       std::endl;
 
@@ -137,7 +140,7 @@ S_bsrScore translateMsrToBsr (
 
   // check indentation
   if (gIndenter != 0) {
-    gLogStream <<
+    gLog <<
       "### translateMsrToBsr gIndenter final value: " <<
       gIndenter.getIndentation () <<
       " ###" <<

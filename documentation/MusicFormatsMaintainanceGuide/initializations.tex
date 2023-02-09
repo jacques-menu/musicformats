@@ -13,9 +13,9 @@ Some \initialization\ activities in \mf\ use the \oahRepr\ facility. \oahRepr\ s
 
 There is no \initialization\  of the \oahRepr\ architecture as such, but there are \functionName{create*OahGroup} functions to create the various \oahRepr\ groups.
 
-For example, \globalVariable{gGlobalCurrentServiceRunData} is supplied by \mflibraryBoth{mfServiceRunData}: %%%JMI
+For example, \globalVariable{gServiceRunData} is supplied by \mflibraryBoth{mfServiceRunData}: %%%JMI
 \begin{lstlisting}[language=CPlusPlus]
-EXP extern S_generalOahGroup gGlobalCurrentServiceRunData;
+EXP extern S_generalOahGroup gServiceRunData;
 
 //______________________________________________________________________________
 EXP S_generalOahGroup createGlobalGeneralOahGroup ();
@@ -24,8 +24,8 @@ EXP S_generalOahGroup createGlobalGeneralOahGroup ();
 \begin{lstlisting}[language=CPlusPlus]
 S_generalOahGroup createGlobalGeneralOahGroup ()
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<
@@ -39,15 +39,15 @@ S_generalOahGroup createGlobalGeneralOahGroup ()
 #endif
 
   // protect library against multiple initializations
-  if (! gGlobalCurrentServiceRunData) {
+  if (! gServiceRunData) {
     // create the global general options group
-    gGlobalCurrentServiceRunData =
+    gServiceRunData =
       generalOahGroup::create ();
-    assert (gGlobalCurrentServiceRunData != 0);
+    assert (gServiceRunData != 0);
   }
 
   // return the global OAH group
-  return gGlobalCurrentServiceRunData;
+  return gServiceRunData;
 }
 \end{lstlisting}
 
@@ -115,9 +115,9 @@ void initializeMsrBasicTypes ()
   static Bool pPrivateThisMethodHasBeenRun (false);
 
   if (! pPrivateThisMethodHasBeenRun) {
-#ifdef MF_TRACING_IS_ENABLED
-    if (gGlobalOahEarlyOptions.getEarlyTracingOah () && ! gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
-      gLogStream <<
+#ifdef MF_TRACE_IS_ENABLED
+    if (gEarlyOptions.getEarlyTraceOah () && ! gEarlyOptions.getEarlyQuietOption ()) {
+      gLog <<
         "Initializing MSR basic types handling" <<
         std::endl;
 
@@ -205,10 +205,10 @@ void xml2lyInsiderHandler::createTheXml2lyOptionGroups (
   appendGroupToHandler (
     createGlobalWaeOahGroup ());
 
-#ifdef MF_TRACING_IS_ENABLED
-  // create the tracing OAH group
+#ifdef MF_TRACE_IS_ENABLED
+  // create the trace OAH group
   appendGroupToHandler (
-    createGlobalTracingOahGroup (
+    createGlobalTraceOahGroup (
       this));
 #endif
 

@@ -401,7 +401,7 @@ class EXP msrStaff : public msrElement
     */
 
     // the staff regular (i.e. not harmonies nor figured bass) voices
-    static int            gStaffMaxRegularVoices;
+    static int            sStaffMaxRegularVoices;
 
     // we need to sort the voices by increasing voice numbers,
     // but with harmonies voices right before the corresponding regular voices

@@ -16,11 +16,12 @@
 #include "bsrParallels.h"
 
 #include "oahOah.h"
-#include "oahEarlyOptions.h"
 
 #include "bsrOah.h"
 
 #include "bsrBrowsers.h"
+
+#include "waeHandlers.h"
 
 
 namespace MusicFormats
@@ -44,7 +45,7 @@ bsrParallel::bsrParallel (
 
 bsrParallel::~bsrParallel ()
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceParallels ()) {
 		std::stringstream ss;
 
@@ -64,7 +65,7 @@ bsrParallel::~bsrParallel ()
 
 void bsrParallel::acceptIn (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
 		std::stringstream ss;
 
@@ -84,7 +85,7 @@ void bsrParallel::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_bsrParallel>*> (v)) {
         S_bsrParallel elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           std::stringstream ss;
 
@@ -103,7 +104,7 @@ void bsrParallel::acceptIn (basevisitor* v)
 
 void bsrParallel::acceptOut (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
 		std::stringstream ss;
 
@@ -123,7 +124,7 @@ void bsrParallel::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_bsrParallel>*> (v)) {
         S_bsrParallel elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           std::stringstream ss;
 

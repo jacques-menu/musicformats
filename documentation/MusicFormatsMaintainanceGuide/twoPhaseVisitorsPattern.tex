@@ -45,8 +45,9 @@ It is used as the base class   of all visitors in \methodName{browsedata} method
 \begin{lstlisting}[language=CPlusPlus]
 void msrWords::acceptIn (basevisitor* v)
 {
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "% ==> msrWords::acceptIn ()" <<
@@ -56,12 +57,14 @@ void msrWords::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
+#endif
 
   if (visitor<S_msrWords>*
     p =
       dynamic_cast<visitor<S_msrWords>*> (v)) {
         S_msrWords elem = this;
 
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
@@ -73,6 +76,7 @@ void msrWords::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
+#endif
         p->visitStart (elem);
   }
 }
@@ -177,7 +181,7 @@ In \mxsrToMsr{mxsr2msrTranslator.cpp}, visiting a \musicXmlMarkup{scaling} eleme
 \begin{lstlisting}[language=CPlusPlus,caption={Visiting {\tt $<$scaling /$>$}}]
 void mxsr2msrTranslator::visitStart ( S_millimeters& elt )
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
 		std::stringstream ss;
 
@@ -197,7 +201,7 @@ void mxsr2msrTranslator::visitStart ( S_millimeters& elt )
 
 void mxsr2msrTranslator::visitStart ( S_tenths& elt )
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
 		std::stringstream ss;
 
@@ -220,7 +224,7 @@ void mxsr2msrTranslator::visitEnd ( S_scaling& elt)
   int inputLineNumber =
     elt->getInputLineNumber ();
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
 		std::stringstream ss;
 
@@ -243,9 +247,9 @@ void mxsr2msrTranslator::visitEnd ( S_scaling& elt)
         fCurrentMillimeters,
         fCurrentTenths);
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceGeometry ()) {
-    gLogStream <<
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceGeometry ()) {
+    gLog <<
       "There are " << fCurrentTenths <<
       " tenths for " <<  fCurrentMillimeters <<
       std::endl;
@@ -336,21 +340,21 @@ void lpsr2lilypondTranslator::visitEnd (S_msrNote& elt)
                   getInhibitMultipleFullBarRestsBrowsing ();
 
             if (inhibitMultipleFullBarRestsBrowsing) {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
               if (
-                gGlobalTracingOahGroup->getTraceNotes ()
+                gGlobalTraceOahGroup->getTraceNotes ()
                   ||
-                gGlobalTracingOahGroup->getTraceMultipleFullBarRests ()
+                gGlobalTraceOahGroup->getTraceMultipleFullBarRests ()
               ) {
-                gLogStream <<
+                gLog <<
                   "% ==> end visiting multiple full-bar rests is ignored" <<
                   std::endl;
               }
 #endif
 
-#ifdef MF_TRACING_IS_ENABLED
-              if (gGlobalTracingOahGroup->getTraceNotesDetails ()) {
-                gLogStream <<
+#ifdef MF_TRACE_IS_ENABLED
+              if (gGlobalTraceOahGroup->getTraceNotesDetails ()) {
+                gLog <<
                   "% ==> returning from visitEnd (S_msrNote&)" <<
                   std::endl;
               }
@@ -411,13 +415,13 @@ void msrNote::browseData (basevisitor* v)
             getInhibitGraceNotesGroupsBeforeBrowsing ();
 
       if (inhibitGraceNotesGroupsBeforeBrowsing) {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
         if (
           gGlobalMsrOahGroup->getTraceMsrVisitors ()
             ||
-          gGlobalTracingOahGroup->getTraceNotes ()
+          gGlobalTraceOahGroup->getTraceNotes ()
             ||
-          gGlobalTracingOahGroup->getTraceGraceNotes ()
+          gGlobalTraceOahGroup->getTraceGraceNotes ()
         ) {
           std::stringstream ss;
 
@@ -478,8 +482,8 @@ void msrStaff::browseData (basevisitor* v)
       }
 
       if (ignoreVoice) {
-#ifdef MF_TRACING_IS_ENABLED // JMI
-        if (gGlobalTracingOahGroup->getTraceVoices ()) {
+#ifdef MF_TRACE_IS_ENABLED // JMI
+        if (gGlobalTraceOahGroup->getTraceVoices ()) {
           std::stringstream ss;
 
           ss <<

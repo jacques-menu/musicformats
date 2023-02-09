@@ -65,6 +65,9 @@
 // history
 #include "LilyPondIssue34Component.h"
 
+// WAE
+#include "waeHandlers.h"
+
 #include "LilyPondIssue34Oah.h"
 #include "LilyPondIssue34InsiderHandler.h"
 
@@ -109,8 +112,8 @@ R"(
       fMultiGenerationOutputKind (
         multiGenerationOutputKind)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<
@@ -321,8 +324,8 @@ R"(
 //______________________________________________________________________________
 void LilyPondIssue34InsiderHandler::createTheLilyPondIssue34Prefixes ()
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<
@@ -345,8 +348,8 @@ void LilyPondIssue34InsiderHandler::createTheLilyPondIssue34OptionGroups (
   const std::string&       serviceName,
   mfMultiGenerationOutputKind mfMultiGenerationOutputKind)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<
@@ -373,10 +376,10 @@ void LilyPondIssue34InsiderHandler::createTheLilyPondIssue34OptionGroups (
   appendGroupToHandler (
     createGlobalWaeOahGroup ());
 
-#ifdef MF_TRACING_IS_ENABLED
-  // create the tracing OAH group
+#ifdef MF_TRACE_IS_ENABLED
+  // create the trace OAH group
   appendGroupToHandler (
-    createGlobalTracingOahGroup (
+    createGlobalTraceOahGroup (
       this));
 #endif
 
@@ -509,8 +512,8 @@ void LilyPondIssue34InsiderHandler::createTheLilyPondIssue34OptionGroups (
 //______________________________________________________________________________
 void LilyPondIssue34InsiderHandler::checkOptionsAndArguments () const
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<
@@ -531,8 +534,8 @@ void LilyPondIssue34InsiderHandler::checkOptionsAndArguments () const
 //______________________________________________________________________________
 std::string LilyPondIssue34InsiderHandler::fetchOutputFileNameFromTheOptions () const
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<
@@ -567,8 +570,8 @@ std::string LilyPondIssue34InsiderHandler::fetchOutputFileNameFromTheOptions () 
       autoOutputFileNameAtom->
         getSelected ();
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<
@@ -692,8 +695,8 @@ std::string LilyPondIssue34InsiderHandler::fetchOutputFileNameFromTheOptions () 
     // return empty outputFileName to indicate that output goes to stdout
   }
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<
@@ -717,8 +720,8 @@ void LilyPondIssue34InsiderHandler::checkHandlerOptionsConsistency ()
 //______________________________________________________________________________
 void LilyPondIssue34InsiderHandler::enforceHandlerQuietness ()
 {
-#ifdef MF_TRACING_IS_ENABLED
-  gGlobalTracingOahGroup->
+#ifdef MF_TRACE_IS_ENABLED
+  gGlobalTraceOahGroup->
     enforceGroupQuietness ();
 #endif
 
@@ -770,7 +773,7 @@ void LilyPondIssue34InsiderOahGroup::checkGroupOptionsConsistency ()
     oahError (ss.str ());
   }
 
-  else if (fOutputFileName == gGlobalCurrentServiceRunData->getInputSourceName ()) {
+  else if (fOutputFileName == gServiceRunData->getInputSourceName ()) {
     std::stringstream ss;
 
     ss <<
@@ -784,8 +787,8 @@ void LilyPondIssue34InsiderOahGroup::checkGroupOptionsConsistency ()
 //______________________________________________________________________________
 void LilyPondIssue34InsiderOahGroup::acceptIn (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -803,8 +806,8 @@ void LilyPondIssue34InsiderOahGroup::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_LilyPondIssue34InsiderOahGroup>*> (v)) {
         S_LilyPondIssue34InsiderOahGroup elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
-        if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -822,8 +825,8 @@ void LilyPondIssue34InsiderOahGroup::acceptIn (basevisitor* v)
 
 void LilyPondIssue34InsiderOahGroup::acceptOut (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -841,8 +844,8 @@ void LilyPondIssue34InsiderOahGroup::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_LilyPondIssue34InsiderOahGroup>*> (v)) {
         S_LilyPondIssue34InsiderOahGroup elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
-        if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -860,8 +863,8 @@ void LilyPondIssue34InsiderOahGroup::acceptOut (basevisitor* v)
 
 void LilyPondIssue34InsiderOahGroup::browseData (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -965,8 +968,8 @@ LilyPondIssue34InsiderOahGroup::~LilyPondIssue34InsiderOahGroup ()
 
 void LilyPondIssue34InsiderOahGroup::initializeLilyPondIssue34InsiderOahGroup ()
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
     std::stringstream ss;
 
     ss <<
@@ -986,7 +989,7 @@ void LilyPondIssue34InsiderOahGroup::initializeLilyPondIssue34InsiderOahGroup ()
 
 void LilyPondIssue34InsiderOahGroup::printLilyPondIssue34InsiderOahGroupValues (int fieldWidth)
 {
-  gLogStream <<
+  gLog <<
     "The LilyPondIssue34 options are:" <<
     std::endl;
 
@@ -995,13 +998,13 @@ void LilyPondIssue34InsiderOahGroup::printLilyPondIssue34InsiderOahGroupValues (
   // generation API kind
   // --------------------------------------
 
-  gLogStream << std::left <<
+  gLog << std::left <<
     std::setw (fieldWidth) << "Generation API kind:" <<
     std::endl;
 
   ++gIndenter;
 
-  gLogStream << std::left <<
+  gLog << std::left <<
     std::setw (fieldWidth) <<
     "msrGenerationAPIKind" << ": " <<
     msrGenerationAPIKindAsString (fGenerationAPIKind) <<
@@ -1012,13 +1015,13 @@ void LilyPondIssue34InsiderOahGroup::printLilyPondIssue34InsiderOahGroupValues (
   // generate output kind
   // --------------------------------------
 
-  gLogStream << std::left <<
+  gLog << std::left <<
     std::setw (fieldWidth) << "Generated output kind:" <<
     std::endl;
 
   ++gIndenter;
 
-  gLogStream << std::left <<
+  gLog << std::left <<
     std::setw (fieldWidth) <<
     "mfMultiGenerationOutputKind" << ": " <<
     mfMultiGenerationOutputKindAsString (fMultiGenerationOutputKind) <<
@@ -1032,8 +1035,8 @@ void LilyPondIssue34InsiderOahGroup::printLilyPondIssue34InsiderOahGroupValues (
 //______________________________________________________________________________
 S_LilyPondIssue34InsiderOahGroup createGlobalLilyPondIssue34InsiderOahGroup ()
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<

@@ -18,9 +18,10 @@
 #include "bsrDynamics.h"
 
 #include "oahOah.h"
-#include "oahEarlyOptions.h"
 
 #include "bsrOah.h"
+
+#include "waeHandlers.h"
 
 
 namespace MusicFormats
@@ -233,7 +234,7 @@ int bsrDynamic::fetchCellsNumber() const
 
 void bsrDynamic::acceptIn (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
 		std::stringstream ss;
 
@@ -253,7 +254,7 @@ void bsrDynamic::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_bsrDynamic>*> (v)) {
         S_bsrDynamic elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           std::stringstream ss;
 
@@ -272,7 +273,7 @@ void bsrDynamic::acceptIn (basevisitor* v)
 
 void bsrDynamic::acceptOut (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
 		std::stringstream ss;
 
@@ -292,7 +293,7 @@ void bsrDynamic::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_bsrDynamic>*> (v)) {
         S_bsrDynamic elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           std::stringstream ss;
 

@@ -9,13 +9,13 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#ifndef ___tracingOah___
-#define ___tracingOah___
+#ifndef ___TraceOah___
+#define ___TraceOah___
 
 
 #include "mfStaticSettings.h"
 
-#ifdef MF_TRACING_IS_ENABLED // encompasses this whole file
+#ifdef MF_TRACE_IS_ENABLED // encompasses this whole file
 
 
 #include <set>
@@ -30,11 +30,11 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-class EXP tracingOahGroup : public oahGroup
+class EXP traceOahGroup : public oahGroup
 {
   public:
 
-    static SMARTP<tracingOahGroup> create (
+    static SMARTP<traceOahGroup> create (
                             const S_oahHandler& handler);
 
   protected:
@@ -42,10 +42,10 @@ class EXP tracingOahGroup : public oahGroup
     // constructors/destructor
     // ------------------------------------------------------
 
-                          tracingOahGroup (
+                          traceOahGroup (
                             const S_oahHandler& handler);
 
-    virtual               ~tracingOahGroup ();
+    virtual               ~traceOahGroup ();
 
   public:
 
@@ -55,49 +55,49 @@ class EXP tracingOahGroup : public oahGroup
     void                  createTheTracePrefixes (
                             const S_oahHandler& handler);
 
-    void                  initializeTracingOahGroup ();
+    void                  initializeTraceOahGroup ();
 
     void                  initializeOptionsTraceAndDisplayOptions ();
 
-    void                  initializeMusicXMLPrintLayoutstracingOah ();
+    void                  initializeMusicXMLPrintLayoutsTraceOah ();
 
-    void                  initializeRepeatsToSlashestracingOah ();
+    void                  initializeRepeatsToSlashesTraceOah ();
 
-    void                  initializeNotestracingOah ();
+    void                  initializeNotesTraceOah ();
 
-    void                  initializeNotesAttachmentstracingOah ();
+    void                  initializeNotesAttachmentsTraceOah ();
 
-    void                  initializeBooksToVoicestracingOah ();
+    void                  initializeBooksToVoicesTraceOah ();
 
-    void                  initializeSegmentstracingOah ();
+    void                  initializeSegmentsTraceOah ();
 
-    void                  initializeMeasurestracingOah ();
+    void                  initializeMeasuresTraceOah ();
 
-    void                  initializeMeasuresSlicestracingOah ();
+    void                  initializeMeasuresSlicesTraceOah ();
 
-    void                  initializeInstrumentstracingOah ();
+    void                  initializeInstrumentsTraceOah ();
 
-    void                  initializeChordsAndTupletstracingOah ();
+    void                  initializeChordsAndTupletsTraceOah ();
 
-    void                  initializeCreditsToWordstracingOah ();
+    void                  initializeCreditsToWordsTraceOah ();
 
-    void                  initializeHarmoniestracingOah ();
+    void                  initializeHarmoniesTraceOah ();
 
-    void                  initializeFiguredBassestracingOah ();
+    void                  initializeFiguredBassesTraceOah ();
 
-    void                  initializeSpannerstracingOah ();
+    void                  initializeSpannersTraceOah ();
 
-    void                  initializeInterNotestracingOah ();
+    void                  initializeInterNotesTraceOah ();
 
-    void                  initializeClefsToTempostracingOah ();
+    void                  initializeClefsToTemposTraceOah ();
 
-    void                  initializeBreaksAndBarLinestracingOah ();
+    void                  initializeBreaksAndBarLinesTraceOah ();
 
-    void                  initializeAboveStaffTracingOah ();
+    void                  initializeAboveStaffTraceOah ();
 
-    void                  initializeTranspositionstracingOah ();
+    void                  initializeTranspositionsTraceOah ();
 
-    void                  initializeOthertracingOah ();
+    void                  initializeOtherTraceOah ();
 
   public:
 
@@ -117,18 +117,18 @@ class EXP tracingOahGroup : public oahGroup
 //     S_oahPrefix           getLongDisplayPrefix () const
 //                               { return fLongDisplayPrefix; }
 
-    void                  setTracingOah ()
-                              { fTracingOah = true; }
-    Bool                  getTracingOah () const
-                              { return fTracingOah; }
+    void                  setTraceOah ()
+                              { fTraceOah = true; }
+    Bool                  getTraceOah () const
+                              { return fTraceOah; }
 
     const S_oahBooleanAtom&
-                          getTracingOahBooleanAtom () const
-                              { return fTracingOahBooleanAtom; }
+                          getTraceOahBooleanAtom () const
+                              { return fTraceOahBooleanAtom; }
 
-// replaced by getEarlyTracingOahDetails()
-//     Bool                  getTracingOahDetails () const
-//                               { return fTracingOahDetails; }
+// replaced by getEarlyTraceOahDetails()
+//     Bool                  getTraceOahDetails () const
+//                               { return fTraceOahDetails; }
 
     // other
     // --------------------------------------
@@ -757,9 +757,9 @@ class EXP tracingOahGroup : public oahGroup
     // print
     // ------------------------------------------------------
 
-    void                  printTracingOahHelp ();
+    void                  printTraceOahHelp ();
 
-    void                  displayTracingOahValues (int fieldWidth);
+    void                  displayTraceOahValues (int fieldWidth);
 
     virtual void          displayAtomWithVariableOptionsValues (
                             std::ostream& os,
@@ -781,12 +781,12 @@ class EXP tracingOahGroup : public oahGroup
 //     S_oahPrefix           fShortDisplayPrefix;
 //     S_oahPrefix           fLongDisplayPrefix;
 
-    Bool                  fTracingOah;
+    Bool                  fTraceOah;
                             // unused, only for the help
                             // since this option is detected early
-    S_oahBooleanAtom      fTracingOahBooleanAtom;
+    S_oahBooleanAtom      fTraceOahBooleanAtom;
 
-    Bool                  fTracingOahDetails;
+    Bool                  fTraceOahDetails;
 
     // other
     // --------------------------------------
@@ -1088,13 +1088,13 @@ class EXP tracingOahGroup : public oahGroup
     // layout
 */
 };
-typedef SMARTP<tracingOahGroup> S_tracingOahGroup;
-EXP std::ostream& operator << (std::ostream& os, const S_tracingOahGroup& elt);
+typedef SMARTP<traceOahGroup> S_TraceOahGroup;
+EXP std::ostream& operator << (std::ostream& os, const S_TraceOahGroup& elt);
 
-EXP extern S_tracingOahGroup gGlobalTracingOahGroup;
+EXP extern S_TraceOahGroup gGlobalTraceOahGroup;
 
 //______________________________________________________________________________
-EXP S_tracingOahGroup createGlobalTracingOahGroup (
+EXP S_TraceOahGroup createGlobalTraceOahGroup (
   const S_oahHandler& handler);
 
 

@@ -70,13 +70,13 @@ EXP int mfExecuteCommand (
   int result = 0;
 
   if (doTrace) {
-    gLogStream <<
+    gLog <<
       "Executing command:" <<
       std::endl;
 
     ++gIndenter;
 
-    gLogStream <<
+    gLog <<
       command <<
         std::endl;
 
@@ -130,7 +130,7 @@ EXP int mfExecuteCommand (
 // //       popen (commandAsCString, mode);
 // //
 // //   if (! commandOutputStream) {
-// //     gLogStream <<
+// //     gLog <<
 // //       "#### mfExecuteCommand" <<
 // //       ", failed to execute command [" <<
 // //       command <<

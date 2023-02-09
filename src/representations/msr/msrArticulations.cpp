@@ -17,9 +17,10 @@
 #include "msrArticulations.h"
 
 #include "oahOah.h"
-#include "oahEarlyOptions.h"
 
 #include "msrOah.h"
+
+#include "waeHandlers.h"
 
 
 namespace MusicFormats
@@ -131,6 +132,7 @@ std::ostream& operator << (std::ostream& os, const msrArticulationKind& elt)
 
 void msrArticulation::acceptIn (basevisitor* v)
 {
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
 		std::stringstream ss;
 
@@ -142,12 +144,14 @@ void msrArticulation::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
+#endif
 
   if (visitor<S_msrArticulation>*
     p =
       dynamic_cast<visitor<S_msrArticulation>*> (v)) {
         S_msrArticulation elem = this;
 
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
@@ -159,12 +163,14 @@ void msrArticulation::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
+#endif
         p->visitStart (elem);
   }
 }
 
 void msrArticulation::acceptOut (basevisitor* v)
 {
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
 		std::stringstream ss;
 
@@ -176,12 +182,14 @@ void msrArticulation::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
+#endif
 
   if (visitor<S_msrArticulation>*
     p =
       dynamic_cast<visitor<S_msrArticulation>*> (v)) {
         S_msrArticulation elem = this;
 
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
@@ -193,6 +201,7 @@ void msrArticulation::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
+#endif
         p->visitEnd (elem);
   }
 }
@@ -264,6 +273,7 @@ msrFermata::~msrFermata ()
 
 void msrFermata::acceptIn (basevisitor* v)
 {
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
 		std::stringstream ss;
 
@@ -275,12 +285,14 @@ void msrFermata::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
+#endif
 
   if (visitor<S_msrFermata>*
     p =
       dynamic_cast<visitor<S_msrFermata>*> (v)) {
         S_msrFermata elem = this;
 
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
@@ -292,12 +304,14 @@ void msrFermata::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
+#endif
         p->visitStart (elem);
   }
 }
 
 void msrFermata::acceptOut (basevisitor* v)
 {
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
 		std::stringstream ss;
 
@@ -309,12 +323,14 @@ void msrFermata::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
+#endif
 
   if (visitor<S_msrFermata>*
     p =
       dynamic_cast<visitor<S_msrFermata>*> (v)) {
         S_msrFermata elem = this;
 
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
@@ -326,6 +342,7 @@ void msrFermata::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
+#endif
         p->visitEnd (elem);
   }
 }
@@ -459,6 +476,7 @@ std::string msrArpeggiato::arpeggiatoDirectionKindAsString () const
 
 void msrArpeggiato::acceptIn (basevisitor* v)
 {
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
 		std::stringstream ss;
 
@@ -470,12 +488,14 @@ void msrArpeggiato::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
+#endif
 
   if (visitor<S_msrArpeggiato>*
     p =
       dynamic_cast<visitor<S_msrArpeggiato>*> (v)) {
         S_msrArpeggiato elem = this;
 
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
@@ -487,12 +507,14 @@ void msrArpeggiato::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
+#endif
         p->visitStart (elem);
   }
 }
 
 void msrArpeggiato::acceptOut (basevisitor* v)
 {
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
 		std::stringstream ss;
 
@@ -504,12 +526,14 @@ void msrArpeggiato::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
+#endif
 
   if (visitor<S_msrArpeggiato>*
     p =
       dynamic_cast<visitor<S_msrArpeggiato>*> (v)) {
         S_msrArpeggiato elem = this;
 
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
@@ -521,6 +545,7 @@ void msrArpeggiato::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
+#endif
         p->visitEnd (elem);
   }
 }
@@ -623,6 +648,7 @@ std::ostream& operator << (std::ostream& os, const msrNonArpeggiatoTypeKind& elt
 
 void msrNonArpeggiato::acceptIn (basevisitor* v)
 {
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
 		std::stringstream ss;
 
@@ -634,12 +660,14 @@ void msrNonArpeggiato::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
+#endif
 
   if (visitor<S_msrNonArpeggiato>*
     p =
       dynamic_cast<visitor<S_msrNonArpeggiato>*> (v)) {
         S_msrNonArpeggiato elem = this;
 
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
@@ -651,12 +679,14 @@ void msrNonArpeggiato::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
+#endif
         p->visitStart (elem);
   }
 }
 
 void msrNonArpeggiato::acceptOut (basevisitor* v)
 {
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
 		std::stringstream ss;
 
@@ -668,12 +698,13 @@ void msrNonArpeggiato::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-
+#endif
   if (visitor<S_msrNonArpeggiato>*
     p =
       dynamic_cast<visitor<S_msrNonArpeggiato>*> (v)) {
         S_msrNonArpeggiato elem = this;
 
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
@@ -685,6 +716,7 @@ void msrNonArpeggiato::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
+#endif
         p->visitEnd (elem);
   }
 }

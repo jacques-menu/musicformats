@@ -18,9 +18,10 @@
 #include "msrGlissandos.h"
 
 #include "oahOah.h"
-#include "oahEarlyOptions.h"
 
 #include "msrOah.h"
+
+#include "waeHandlers.h"
 
 
 namespace MusicFormats
@@ -93,8 +94,8 @@ msrGlissando::~msrGlissando ()
 
 S_msrGlissando msrGlissando::createGlissandoNewbornClone ()
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceGlissandos ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceGlissandos ()) {
 		std::stringstream ss;
 
     ss <<
@@ -123,8 +124,9 @@ S_msrGlissando msrGlissando::createGlissandoNewbornClone ()
 
 void msrGlissando::acceptIn (basevisitor* v)
 {
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "% ==> msrGlissando::acceptIn ()" <<
@@ -134,12 +136,14 @@ void msrGlissando::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
+#endif
 
   if (visitor<S_msrGlissando>*
     p =
       dynamic_cast<visitor<S_msrGlissando>*> (v)) {
         S_msrGlissando elem = this;
 
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
@@ -151,14 +155,16 @@ void msrGlissando::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
+#endif
         p->visitStart (elem);
   }
 }
 
 void msrGlissando::acceptOut (basevisitor* v)
 {
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "% ==> msrGlissando::acceptOut ()" <<
@@ -168,12 +174,14 @@ void msrGlissando::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
+#endif
 
   if (visitor<S_msrGlissando>*
     p =
       dynamic_cast<visitor<S_msrGlissando>*> (v)) {
         S_msrGlissando elem = this;
 
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
@@ -185,6 +193,7 @@ void msrGlissando::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
+#endif        
         p->visitEnd (elem);
   }
 }

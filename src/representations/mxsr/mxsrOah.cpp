@@ -25,6 +25,8 @@
 
 #include "visitor.h"
 
+#include "waeHandlers.h"
+
 
 namespace MusicFormats
 {
@@ -53,8 +55,8 @@ R"(These options control the way MXSR data are handled.)",
 mxsrOahGroup::~mxsrOahGroup ()
 {}
 
-#ifdef MF_TRACING_IS_ENABLED
-void mxsrOahGroup::initializeMxsrtracingOah ()
+#ifdef MF_TRACE_IS_ENABLED
+void mxsrOahGroup::initializeMxsrTraceOah ()
 {
   S_oahSubGroup
     subGroup =
@@ -76,8 +78,8 @@ R"()",
         "Trace SHORT_NAME/LONG_NAME when handling MusicXML data.",
         "SHORT_NAME",
         "LONG_NAME",
-        gGlobalTracingOahGroup->getShortTracePrefix (),
-        gGlobalTracingOahGroup->getLongTracePrefix ());
+        gGlobalTraceOahGroup->getShortTracePrefix (),
+        gGlobalTraceOahGroup->getLongTracePrefix ());
 
   subGroup->
     appendAtomToSubGroup (
@@ -169,16 +171,16 @@ R"(Write a trace of the MusicXML tree visiting activity to standard error.)",
 
 void mxsrOahGroup::initializeMxsrOah ()
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   // trace
   // --------------------------------------
-  initializeMxsrtracingOah ();
+  initializeMxsrTraceOah ();
 #endif
 }
 
 void mxsrOahGroup::enforceGroupQuietness ()
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
 //   fTraceMxsrVisitors = false; // JMI v0.9.63
 #endif
 }
@@ -191,8 +193,8 @@ void mxsrOahGroup::checkGroupOptionsConsistency ()
 //______________________________________________________________________________
 void mxsrOahGroup::acceptIn (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -210,8 +212,8 @@ void mxsrOahGroup::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_mxsrOahGroup>*> (v)) {
         S_mxsrOahGroup elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
-        if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -229,8 +231,8 @@ void mxsrOahGroup::acceptIn (basevisitor* v)
 
 void mxsrOahGroup::acceptOut (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -248,8 +250,8 @@ void mxsrOahGroup::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_mxsrOahGroup>*> (v)) {
         S_mxsrOahGroup elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
-        if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -267,8 +269,8 @@ void mxsrOahGroup::acceptOut (basevisitor* v)
 
 void mxsrOahGroup::browseData (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -284,23 +286,23 @@ void mxsrOahGroup::browseData (basevisitor* v)
 
 void mxsrOahGroup::displayMxsrOahValues (int fieldWidth)
 {
-  gLogStream <<
+  gLog <<
     "The MusicXML options are:" <<
     std::endl;
 
   ++gIndenter;
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   // trace
   // --------------------------------------
 
-  gLogStream <<
+  gLog <<
     "Trace:" <<
     std::endl;
 
   ++gIndenter;
 
-  gLogStream << std::left <<
+  gLog << std::left <<
     std::setw (fieldWidth) << "fTraceEncoding" << ": " <<
     fTraceEncoding <<
     std::endl <<
@@ -344,8 +346,8 @@ std::ostream& operator << (std::ostream& os, const S_mxsrOahGroup& elt)
 //______________________________________________________________________________
 S_mxsrOahGroup createGlobalMxsrOahGroup ()
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<

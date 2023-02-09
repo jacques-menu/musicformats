@@ -29,6 +29,8 @@
 
 #include "oahEarlyOptions.h"
 
+#include "waeHandlers.h"
+
 
 namespace MusicFormats
 {
@@ -104,8 +106,8 @@ void bsrFacSimileKindAtom::applyAtomWithValue (
 {
   // JMI ???
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<
@@ -123,8 +125,8 @@ void bsrFacSimileKindAtom::applyAtomWithValue (
 
 void bsrFacSimileKindAtom::acceptIn (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -142,8 +144,8 @@ void bsrFacSimileKindAtom::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_bsrFacSimileKindAtom>*> (v)) {
         S_bsrFacSimileKindAtom elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
-        if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -161,8 +163,8 @@ void bsrFacSimileKindAtom::acceptIn (basevisitor* v)
 
 void bsrFacSimileKindAtom::acceptOut (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -180,8 +182,8 @@ void bsrFacSimileKindAtom::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_bsrFacSimileKindAtom>*> (v)) {
         S_bsrFacSimileKindAtom elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
-        if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -199,8 +201,8 @@ void bsrFacSimileKindAtom::acceptOut (basevisitor* v)
 
 void bsrFacSimileKindAtom::browseData (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -348,8 +350,8 @@ void bsrTextsLanguageAtom::applyAtomWithValue (
 {
   // JMI ???
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<
@@ -367,8 +369,8 @@ void bsrTextsLanguageAtom::applyAtomWithValue (
 
 void bsrTextsLanguageAtom::acceptIn (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -386,8 +388,8 @@ void bsrTextsLanguageAtom::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_bsrTextsLanguageAtom>*> (v)) {
         S_bsrTextsLanguageAtom elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
-        if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -405,8 +407,8 @@ void bsrTextsLanguageAtom::acceptIn (basevisitor* v)
 
 void bsrTextsLanguageAtom::acceptOut (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -424,8 +426,8 @@ void bsrTextsLanguageAtom::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_bsrTextsLanguageAtom>*> (v)) {
         S_bsrTextsLanguageAtom elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
-        if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -443,8 +445,8 @@ void bsrTextsLanguageAtom::acceptOut (basevisitor* v)
 
 void bsrTextsLanguageAtom::browseData (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -688,8 +690,8 @@ The default is 'DEFAULT_VALUE'.)",
         fBsrTextsLanguageKind));
 }
 
-#ifdef MF_TRACING_IS_ENABLED
-void bsrOahGroup::initializeBsrtracingOah ()
+#ifdef MF_TRACE_IS_ENABLED
+void bsrOahGroup::initializeBsrTraceOah ()
 {
   S_oahSubGroup
     subGroup =
@@ -785,10 +787,10 @@ void bsrOahGroup::initializeBsrOahGroup ()
   // --------------------------------------
   initializeBsrLanguagesOptions ();
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   // trace
   // --------------------------------------
-  initializeBsrtracingOah ();
+  initializeBsrTraceOah ();
 #endif
 }
 
@@ -829,8 +831,8 @@ void bsrOahGroup::checkGroupOptionsConsistency ()
 //______________________________________________________________________________
 void bsrOahGroup::acceptIn (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -848,8 +850,8 @@ void bsrOahGroup::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_bsrOahGroup>*> (v)) {
         S_bsrOahGroup elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
-        if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -867,8 +869,8 @@ void bsrOahGroup::acceptIn (basevisitor* v)
 
 void bsrOahGroup::acceptOut (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -886,8 +888,8 @@ void bsrOahGroup::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_bsrOahGroup>*> (v)) {
         S_bsrOahGroup elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
-        if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -905,8 +907,8 @@ void bsrOahGroup::acceptOut (basevisitor* v)
 
 void bsrOahGroup::browseData (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -923,7 +925,7 @@ void bsrOahGroup::browseData (basevisitor* v)
 //______________________________________________________________________________
 void bsrOahGroup::displayBsrOahValues (int fieldWidth)
 {
-  gLogStream <<
+  gLog <<
     "The BSR bsr are:" <<
     std::endl;
 
@@ -931,13 +933,13 @@ void bsrOahGroup::displayBsrOahValues (int fieldWidth)
 
   // display
   // --------------------------------------
-  gLogStream <<
+  gLog <<
     "Display:" <<
     std::endl;
 
   ++gIndenter;
 
-  gLogStream << std::left <<
+  gLog << std::left <<
     std::setw (fieldWidth) << "fDisplayFirstBsr" << ": " <<
     fDisplayFirstBsr <<
     std::endl <<
@@ -957,14 +959,14 @@ void bsrOahGroup::displayBsrOahValues (int fieldWidth)
   // trace
   // --------------------------------------
 
-#ifdef MF_TRACING_IS_ENABLED
-  gLogStream <<
+#ifdef MF_TRACE_IS_ENABLED
+  gLog <<
     "Trace:" <<
     std::endl;
 
   ++gIndenter;
 
-  gLogStream << std::left <<
+  gLog << std::left <<
     std::setw (fieldWidth) << "fTraceBsr" << ": " <<
     fTraceBsr <<
     std::endl <<
@@ -1008,8 +1010,8 @@ std::ostream& operator << (std::ostream& os, const S_bsrOahGroup& elt)
 //______________________________________________________________________________
 S_bsrOahGroup createGlobalBsrOahGroup ()
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<

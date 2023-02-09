@@ -31,12 +31,13 @@ the following due to:
 #include "bsrLineContents.h"
 
 #include "oahOah.h"
-#include "oahEarlyOptions.h"
 
 #include "bsrOah.h"
 #include "msr2bsrOah.h"
 
 #include "bsrBrowsers.h"
+
+#include "waeHandlers.h"
 
 
 namespace MusicFormats
@@ -68,7 +69,7 @@ bsrLineContents::~bsrLineContents ()
 
 S_bsrLineContents bsrLineContents::createLineNewbornClone ()
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceLines ()) {
 		std::stringstream ss;
 
@@ -121,8 +122,8 @@ void bsrLineContents::appendLineElementToLineContents (
 void bsrLineContents::insertLineElementBeforeLastElementOfLineContents (
   const S_bsrLineContentsElement& lineElement)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasures ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMeasures ()) {
 		std::stringstream ss;
 
     ss <<
@@ -157,7 +158,7 @@ void bsrLineContents::insertLineElementBeforeLastElementOfLineContents (
       "' before its last element";
 
     bsrInternalError (
-      gGlobalCurrentServiceRunData->getInputSourceName (),
+      gServiceRunData->getInputSourceName (),
       lineElement->getInputLineNumber (),
       __FILE__, __LINE__,
       ss.str ());
@@ -207,7 +208,7 @@ int bsrLineContents::fetchCellsNumber () const
 
 void bsrLineContents::acceptIn (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
 		std::stringstream ss;
 
@@ -227,7 +228,7 @@ void bsrLineContents::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_bsrLineContents>*> (v)) {
         S_bsrLineContents elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           std::stringstream ss;
 
@@ -246,7 +247,7 @@ void bsrLineContents::acceptIn (basevisitor* v)
 
 void bsrLineContents::acceptOut (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
 		std::stringstream ss;
 
@@ -266,7 +267,7 @@ void bsrLineContents::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_bsrLineContents>*> (v)) {
         S_bsrLineContents elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           std::stringstream ss;
 

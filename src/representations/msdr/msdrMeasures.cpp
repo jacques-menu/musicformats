@@ -20,9 +20,10 @@
 #include "msdrMeasures.h"
 
 #include "oahOah.h"
-#include "oahEarlyOptions.h"
 
 #include "msrOah.h"
+
+#include "waeHandlers.h"
 
 
 namespace MusicFormats
@@ -45,8 +46,8 @@ msdrMeasure::msdrMeasure (
   int           inputLineNumber,
   const std::string& measureNumber)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceVoices ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceVoices ()) {
 		std::stringstream ss;
 
     ss <<
@@ -81,6 +82,7 @@ void msdrMeasure::addLayerToMeasure (
 
 void msdrMeasure::acceptIn (basevisitor* v)
 {
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
 		std::stringstream ss;
 
@@ -92,12 +94,14 @@ void msdrMeasure::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
+#endif
 
   if (visitor<S_msdrMeasure>*
     p =
       dynamic_cast<visitor<S_msdrMeasure>*> (v)) {
         S_msdrMeasure elem = this;
 
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
@@ -109,12 +113,14 @@ void msdrMeasure::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
+#endif
         p->visitStart (elem);
   }
 }
 
 void msdrMeasure::acceptOut (basevisitor* v)
 {
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
 		std::stringstream ss;
 
@@ -126,12 +132,14 @@ void msdrMeasure::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
+#endif
 
   if (visitor<S_msdrMeasure>*
     p =
       dynamic_cast<visitor<S_msdrMeasure>*> (v)) {
         S_msdrMeasure elem = this;
 
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
@@ -143,6 +151,7 @@ void msdrMeasure::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
+#endif
         p->visitEnd (elem);
   }
 }
@@ -161,6 +170,7 @@ void msdrMeasure::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
+#endif
 
   // browse the voice initial elements
   if (fInitialMusicLayersList.size ()) {
@@ -198,6 +208,7 @@ void msdrMeasure::browseData (basevisitor* v)
     } // for
   }
 
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
 		std::stringstream ss;
 
@@ -238,7 +249,7 @@ void msdrMeasure::displayMeasure (
   int           inputLineNumber,
   const std::string& context) const
 {
-  gLogStream <<
+  gLog <<
     std::endl <<
     "*********>> Displaying MSDR measure \"" <<
     fMeasureNumber <<
@@ -248,10 +259,10 @@ void msdrMeasure::displayMeasure (
     std::endl;
 
   ++gIndenter;
-  print (gLogStream);
+  print (gLog);
   --gIndenter;
 
-  gLogStream <<
+  gLog <<
     " <<*********" <<
     std::endl << std::endl;
 }
@@ -317,7 +328,7 @@ void msdrMeasure::printFull (std::ostream& os) const
     regularVoiceStaffSequentialNumberAsString () <<
     std::endl;
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   // regular measure ends detection
   os << std::left <<
     std::setw (fieldWidth) <<
@@ -374,7 +385,7 @@ void msdrMeasure::print (std::ostream& os) const
 
   const int fieldWidth = 41;
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   // print the voice measures flat list
   size_t voiceMeasuresFlatListSize =
     fVoiceMeasuresFlatList.size ();
@@ -402,7 +413,7 @@ void msdrMeasure::print (std::ostream& os) const
 
     for ( ; ; ) {
       // print the measure
-      if (gGlobalTracingOahGroup->getTraceMeasures ()) {
+      if (gGlobalTraceOahGroup->getTraceMeasures ()) {
         os << (*i)->asShortString ();
       }
       else {

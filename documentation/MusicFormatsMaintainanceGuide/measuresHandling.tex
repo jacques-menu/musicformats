@@ -107,8 +107,8 @@ void msrMeasure::appendElementToMeasure (const S_msrMeasureElement& elem)
   int inputLineNumber =
     elem->getInputLineNumber ();
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasures ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMeasures ()) {
 		std::stringstream ss;
 
     ss <<
@@ -160,9 +160,9 @@ void msrMeasure::appendHarmonyToMeasure (const S_msrHarmony& harmony)
   int inputLineNumber =
     harmony->getInputLineNumber ();
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
-    gLogStream <<
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceHarmonies ()) {
+    gLog <<
       "Appending harmony " << harmony->asString () <<
       " to measure " <<
       this->asShortString () <<
@@ -217,9 +217,9 @@ void msrMeasure::appendHarmonyToMeasureClone (const S_msrHarmony& harmony)
   int inputLineNumber =
     harmony->getInputLineNumber ();
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
-    gLogStream <<
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceHarmonies ()) {
+    gLog <<
       "Appending harmony " << harmony->asString () <<
       " to measure clone " <<
       this->asShortString () <<
@@ -286,8 +286,8 @@ void msrSegment::appendMeasureToSegment (const S_msrMeasure& measure)
       ? ""
       : fSegmentElementsList.back ()->getMeasureNumber ();
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasures ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMeasures ()) {
 		std::stringstream ss;
 
     ss <<
@@ -295,13 +295,13 @@ void msrSegment::appendMeasureToSegment (const S_msrMeasure& measure)
       "' to segment " << asString ();
 
     if (fSegmentElementsList.size () == 0)
-      gLogStream <<
+      gLog <<
         ", as first measure";
     else
-      gLogStream <<
+      gLog <<
       ", after measure number '" << currentMeasureNumber << "'";
 
-    gLogStream <<
+    gLog <<
       "' in voice \"" <<
       fSegmentUpLinkToVoice->getVoiceName () <<
       "\"" <<
@@ -327,7 +327,7 @@ void msrSegment::appendMeasureToSegment (const S_msrMeasure& measure)
 
 //    msrInternalWarning ( // JMI
     msrInternalError (
-      gGlobalCurrentServiceRunData->getInputSourceName (),
+      gServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
       ss.str ());
@@ -415,8 +415,8 @@ S_msrMeasure msrVoice::createAMeasureAndAppendItToVoice (
 {
   fVoiceCurrentMeasureNumber = measureNumber;
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasures ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMeasures ()) {
 		std::stringstream ss;
 
     ss <<
@@ -445,17 +445,17 @@ S_msrMeasure msrVoice::createAMeasureAndAppendItToVoice (
       "Part_POne_HARMONIES_Staff_Voice_Eleven_HARMONIES"
     )
   ) { // POUSSE JMI
-    gLogStream <<
+    gLog <<
       std::endl <<
       "++++ createAMeasureAndAppendItToVoice() POUSSE, fCallsCounter: " << fCallsCounter << " ++++" <<
       std::endl;
-    this->print (gLogStream);
-    gLogStream <<
+    this->print (gLog);
+    gLog <<
       std::endl;
   }
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasuresDetails ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMeasuresDetails ()) {
     displayVoice (
       inputLineNumber,
       "createAMeasureAndAppendItToVoice() 1");
@@ -483,8 +483,8 @@ S_msrMeasure msrVoice::createAMeasureAndAppendItToVoice (
   // result is the new voice last appended measure
   fVoiceLastAppendedMeasure = result;
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasuresDetails ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMeasuresDetails ()) {
     displayVoice (
       inputLineNumber,
       "createAMeasureAndAppendItToVoice() 3");
@@ -553,7 +553,7 @@ void mxsr2msrTranslator::visitStart (S_measure& elt)
         "\" is unknown";
 
       musicxmlError (
-        gGlobalCurrentServiceRunData->getInputSourceName (),
+        gServiceRunData->getInputSourceName (),
         inputLineNumber,
         __FILE__, __LINE__,
         ss.str ());

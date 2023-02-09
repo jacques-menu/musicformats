@@ -19,6 +19,8 @@
 
 #include "oahWae.h"
 
+#include "waeHandlers.h"
+
 
 namespace MusicFormats
 {
@@ -61,8 +63,8 @@ msrColorRGB::msrColorRGB (
 
   size_t smSize = sm.size ();
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<
@@ -79,13 +81,13 @@ msrColorRGB::msrColorRGB (
 #endif
 
   if (smSize == 4) {
-#ifdef MF_TRACING_IS_ENABLED
-    if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+    if (gEarlyOptions.getEarlyTraceOah ()) {
       for (unsigned i = 0; i < smSize; ++i) {
-        gLogStream <<
+        gLog <<
           '[' << sm [i] << "] ";
       } // for
-      gLogStream << std::endl;
+      gLog << std::endl;
     }
 #endif
   }
@@ -105,8 +107,8 @@ msrColorRGB::msrColorRGB (
     GString = sm [2],
     BString = sm [3];
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<
@@ -129,7 +131,7 @@ msrColorRGB::msrColorRGB (
     ss >> fR;
 
     if (fR < 0.0 || fR > 1.0) {
-      gLogStream <<
+      gLog <<
         "### ERROR: the R component " << fR <<
         " is not in the [0.0..1.0] interval in RGB color '" << theString << "'" <<
         std::endl;
@@ -142,7 +144,7 @@ msrColorRGB::msrColorRGB (
     ss >> fG;
 
     if (fG < 0.0 || fG > 1.0) {
-      gLogStream <<
+      gLog <<
         "### ERROR: the G component " << fG <<
         " is not in the [0.0..1.0] interval in RGB color '" << theString << "'" <<
         std::endl;
@@ -155,7 +157,7 @@ msrColorRGB::msrColorRGB (
     ss >> fB;
 
     if (fB < 0.0 || fB > 1.0) {
-      gLogStream <<
+      gLog <<
         "### ERROR: the B component " << fB <<
         " is not in the [0.0..1.0] interval in RGB color '" << theString << "'" <<
         std::endl;

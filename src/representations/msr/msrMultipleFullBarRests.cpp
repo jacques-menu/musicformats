@@ -26,11 +26,12 @@
 #include "msrMultipleFullBarRests.h"
 
 #include "oahOah.h"
-#include "oahEarlyOptions.h"
 
 #include "msrOah.h"
 
 #include "msrBrowsers.h"
+
+#include "waeHandlers.h"
 
 
 namespace MusicFormats
@@ -97,8 +98,8 @@ msrMultipleFullBarRests::~msrMultipleFullBarRests ()
 S_msrMultipleFullBarRests msrMultipleFullBarRests::createMultipleFullBarRestsNewbornClone (
   const S_msrSegment& containingVoice)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMultipleFullBarRests ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMultipleFullBarRests ()) {
 		std::stringstream ss;
 
     ss <<
@@ -151,8 +152,8 @@ Rational msrMultipleFullBarRests::fetchMultipleFullBarRestsMeasureSoundingNotes 
 void msrMultipleFullBarRests::setMultipleFullBarRestsNextMeasureNumber (
   const std::string& nextMeasureNumber)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMultipleFullBarRests ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMultipleFullBarRests ()) {
 		std::stringstream ss;
 
     ss <<
@@ -219,14 +220,14 @@ void msrMultipleFullBarRests::setMultipleFullBarRestsLastMeasurePuristMeasureNum
 //       "' ";
 //
 //     msrInternalError (
-//       gGlobalCurrentServiceRunData->getInputSourceName (),
+//       gServiceRunData->getInputSourceName (),
 //       fInputLineNumber,
 //       __FILE__, __LINE__,
 //       ss.str ());
 //   }
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMultipleFullBarRests ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMultipleFullBarRests ()) {
 		std::stringstream ss;
 
     ss <<
@@ -258,7 +259,7 @@ void msrMultipleFullBarRests:: appendMeasureElementToSegmentElement (
     asShortString ();
 
   msrInternalError (
-    gGlobalCurrentServiceRunData->getInputSourceName (),
+    gServiceRunData->getInputSourceName (),
     fInputLineNumber,
     __FILE__, __LINE__,
     ss.str ());
@@ -271,8 +272,8 @@ void msrMultipleFullBarRests::appendMeasureToMultipleFullBarRests (
 //     getMultipleFullBarRestsContentsSegment ()->
 //       appendMeasureToSegment (
 //         measureClone);
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMultipleFullBarRests ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMultipleFullBarRests ()) {
 		std::stringstream ss;
 
     ss <<
@@ -322,8 +323,9 @@ void msrMultipleFullBarRests::appendMeasureToMultipleFullBarRests (
 
 void msrMultipleFullBarRests::acceptIn (basevisitor* v)
 {
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "% ==> msrMultipleFullBarRests::acceptIn ()" <<
@@ -333,12 +335,14 @@ void msrMultipleFullBarRests::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
+#endif
 
   if (visitor<S_msrMultipleFullBarRests>*
     p =
       dynamic_cast<visitor<S_msrMultipleFullBarRests>*> (v)) {
         S_msrMultipleFullBarRests elem = this;
 
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
@@ -350,14 +354,16 @@ void msrMultipleFullBarRests::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
+#endif
         p->visitStart (elem);
   }
 }
 
 void msrMultipleFullBarRests::acceptOut (basevisitor* v)
 {
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "% ==> msrMultipleFullBarRests::acceptOut ()" <<
@@ -367,12 +373,14 @@ void msrMultipleFullBarRests::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
+#endif
 
   if (visitor<S_msrMultipleFullBarRests>*
     p =
       dynamic_cast<visitor<S_msrMultipleFullBarRests>*> (v)) {
         S_msrMultipleFullBarRests elem = this;
 
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
@@ -384,14 +392,16 @@ void msrMultipleFullBarRests::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
+#endif
         p->visitEnd (elem);
   }
 }
 
 void msrMultipleFullBarRests::browseData (basevisitor* v)
 {
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "% ==> msrMultipleFullBarRests::browseData ()" <<
@@ -401,6 +411,7 @@ void msrMultipleFullBarRests::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
+#endif
 
  // JMI   if (! inhibitMultipleFullBarRestsBrowsing) { // KAKA
   // browse the multiple full-bar rests measures
@@ -410,6 +421,7 @@ void msrMultipleFullBarRests::browseData (basevisitor* v)
     browser.browse (*(measure));
   } // for
 
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
 		std::stringstream ss;
 
@@ -421,7 +433,7 @@ void msrMultipleFullBarRests::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-//  }
+#endif
 }
 
 std::string msrMultipleFullBarRests::asString () const
@@ -473,7 +485,7 @@ void msrMultipleFullBarRests::displayMultipleFullBarRests (
   int           inputLineNumber,
   const std::string& context)
 {
-  gLogStream <<
+  gLog <<
     std::endl <<
     "*********>> Full-bar rests " << context << " \"" <<
  // JMI   getVoiceName () <<
@@ -483,10 +495,10 @@ void msrMultipleFullBarRests::displayMultipleFullBarRests (
     std::endl;
 
   ++gIndenter;
-  print (gLogStream);
+  print (gLog);
   --gIndenter;
 
-  gLogStream <<
+  gLog <<
     " <<*********" <<
     std::endl << std::endl;
 }

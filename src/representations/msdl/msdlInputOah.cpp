@@ -35,6 +35,8 @@
 
 #include "msdlTokens.h"
 
+#include "waeHandlers.h"
+
 
 namespace MusicFormats
 {
@@ -86,8 +88,8 @@ void msdlKeywordsLanguageAtom::applyAtomWithValue (
   const std::string& theString,
   std::ostream&      os)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<
@@ -103,8 +105,8 @@ void msdlKeywordsLanguageAtom::applyAtomWithValue (
   // theString contains the language name:
   // is it in the keywords languages map?
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<
@@ -152,8 +154,8 @@ void msdlKeywordsLanguageAtom::applyAtomWithValue (
 
 void msdlKeywordsLanguageAtom::acceptIn (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -171,8 +173,8 @@ void msdlKeywordsLanguageAtom::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_msdlKeywordsLanguageAtom>*> (v)) {
         S_msdlKeywordsLanguageAtom elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
-        if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -190,8 +192,8 @@ void msdlKeywordsLanguageAtom::acceptIn (basevisitor* v)
 
 void msdlKeywordsLanguageAtom::acceptOut (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -209,8 +211,8 @@ void msdlKeywordsLanguageAtom::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_msdlKeywordsLanguageAtom>*> (v)) {
         S_msdlKeywordsLanguageAtom elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
-        if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -228,8 +230,8 @@ void msdlKeywordsLanguageAtom::acceptOut (basevisitor* v)
 
 void msdlKeywordsLanguageAtom::browseData (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -407,7 +409,7 @@ void oahDisplayMsdlKeywordsInLanguageAtom::applyAtomWithValue (
       (*it).second;
 
   // write the existing keywords names
-  gLogStream <<
+  gLog <<
     "The keywords in language '" <<
     msdlKeywordsLanguageKindAsString (keywordsLanguageKind) <<
     "' are: " <<
@@ -419,7 +421,7 @@ void oahDisplayMsdlKeywordsInLanguageAtom::applyAtomWithValue (
     availableKeywordsInLanguage (
       keywordsLanguageKind,
       K_MF_NAMES_LIST_MAX_LENGTH),
-    gLogStream);
+    gLog);
 
   --gIndenter;
 
@@ -428,8 +430,8 @@ void oahDisplayMsdlKeywordsInLanguageAtom::applyAtomWithValue (
 
 void oahDisplayMsdlKeywordsInLanguageAtom::acceptIn (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -447,8 +449,8 @@ void oahDisplayMsdlKeywordsInLanguageAtom::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_oahDisplayMsdlKeywordsInLanguageAtom>*> (v)) {
         S_oahDisplayMsdlKeywordsInLanguageAtom elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
-        if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -466,8 +468,8 @@ void oahDisplayMsdlKeywordsInLanguageAtom::acceptIn (basevisitor* v)
 
 void oahDisplayMsdlKeywordsInLanguageAtom::acceptOut (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -485,8 +487,8 @@ void oahDisplayMsdlKeywordsInLanguageAtom::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_oahDisplayMsdlKeywordsInLanguageAtom>*> (v)) {
         S_oahDisplayMsdlKeywordsInLanguageAtom elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
-        if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -504,8 +506,8 @@ void oahDisplayMsdlKeywordsInLanguageAtom::acceptOut (basevisitor* v)
 
 void oahDisplayMsdlKeywordsInLanguageAtom::browseData (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -645,7 +647,7 @@ void oahDisplayMsdlTokensInLanguageAtom::applyAtomWithValue (
       (*it).second;
 
   // write the existing tokens
-  gLogStream <<
+  gLog <<
     "The tokens in language \"" <<
     msdlKeywordsLanguageKindAsString (keywordsLanguageKind) <<
     "\" are (<...> denotes a class   of tokens): " <<
@@ -657,7 +659,7 @@ void oahDisplayMsdlTokensInLanguageAtom::applyAtomWithValue (
     existingTokensInLanguage (
       keywordsLanguageKind,
       K_MF_NAMES_LIST_MAX_LENGTH),
-    gLogStream);
+    gLog);
 
   --gIndenter;
 
@@ -666,8 +668,8 @@ void oahDisplayMsdlTokensInLanguageAtom::applyAtomWithValue (
 
 void oahDisplayMsdlTokensInLanguageAtom::acceptIn (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -685,8 +687,8 @@ void oahDisplayMsdlTokensInLanguageAtom::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_oahDisplayMsdlTokensInLanguageAtom>*> (v)) {
         S_oahDisplayMsdlTokensInLanguageAtom elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
-        if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -704,8 +706,8 @@ void oahDisplayMsdlTokensInLanguageAtom::acceptIn (basevisitor* v)
 
 void oahDisplayMsdlTokensInLanguageAtom::acceptOut (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -723,8 +725,8 @@ void oahDisplayMsdlTokensInLanguageAtom::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_oahDisplayMsdlTokensInLanguageAtom>*> (v)) {
         S_oahDisplayMsdlTokensInLanguageAtom elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
-        if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -742,8 +744,8 @@ void oahDisplayMsdlTokensInLanguageAtom::acceptOut (basevisitor* v)
 
 void oahDisplayMsdlTokensInLanguageAtom::browseData (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -852,8 +854,8 @@ void msdlCommentsTypeAtom::applyAtomWithValue (
   const std::string& theString,
   std::ostream&      os)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<
@@ -869,8 +871,8 @@ void msdlCommentsTypeAtom::applyAtomWithValue (
   // theString contains the language name:
   // is it in the keywords languages map?
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<
@@ -918,8 +920,8 @@ void msdlCommentsTypeAtom::applyAtomWithValue (
 
 void msdlCommentsTypeAtom::acceptIn (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -937,8 +939,8 @@ void msdlCommentsTypeAtom::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_msdlCommentsTypeAtom>*> (v)) {
         S_msdlCommentsTypeAtom elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
-        if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -956,8 +958,8 @@ void msdlCommentsTypeAtom::acceptIn (basevisitor* v)
 
 void msdlCommentsTypeAtom::acceptOut (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -975,8 +977,8 @@ void msdlCommentsTypeAtom::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_msdlCommentsTypeAtom>*> (v)) {
         S_msdlCommentsTypeAtom elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
-        if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -994,8 +996,8 @@ void msdlCommentsTypeAtom::acceptOut (basevisitor* v)
 
 void msdlCommentsTypeAtom::browseData (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1143,8 +1145,8 @@ void msdlUserLanguageAtom::applyAtomWithValue (
   std::ostream&      os)
 {
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1160,8 +1162,8 @@ void msdlUserLanguageAtom::applyAtomWithValue (
   // theString contains the language name:
   // is it in the User languages map?
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1211,8 +1213,8 @@ void msdlUserLanguageAtom::applyAtomWithValue (
 
 void msdlUserLanguageAtom::acceptIn (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1230,8 +1232,8 @@ void msdlUserLanguageAtom::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_msdlUserLanguageAtom>*> (v)) {
         S_msdlUserLanguageAtom elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
-        if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -1249,8 +1251,8 @@ void msdlUserLanguageAtom::acceptIn (basevisitor* v)
 
 void msdlUserLanguageAtom::acceptOut (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1268,8 +1270,8 @@ void msdlUserLanguageAtom::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_msdlUserLanguageAtom>*> (v)) {
         S_msdlUserLanguageAtom elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
-        if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -1287,8 +1289,8 @@ void msdlUserLanguageAtom::acceptOut (basevisitor* v)
 
 void msdlUserLanguageAtom::browseData (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1439,8 +1441,8 @@ void msdlPitchesLanguageAtom::applyAtomWithValue (
   std::ostream&      os)
 {
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1456,8 +1458,8 @@ void msdlPitchesLanguageAtom::applyAtomWithValue (
   // theString contains the language name:
   // is it in the pitches languages map?
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1507,8 +1509,8 @@ void msdlPitchesLanguageAtom::applyAtomWithValue (
 
 void msdlPitchesLanguageAtom::acceptIn (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1526,8 +1528,8 @@ void msdlPitchesLanguageAtom::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_msdlPitchesLanguageAtom>*> (v)) {
         S_msdlPitchesLanguageAtom elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
-        if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -1545,8 +1547,8 @@ void msdlPitchesLanguageAtom::acceptIn (basevisitor* v)
 
 void msdlPitchesLanguageAtom::acceptOut (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1564,8 +1566,8 @@ void msdlPitchesLanguageAtom::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_msdlPitchesLanguageAtom>*> (v)) {
         S_msdlPitchesLanguageAtom elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
-        if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -1583,8 +1585,8 @@ void msdlPitchesLanguageAtom::acceptOut (basevisitor* v)
 
 void msdlPitchesLanguageAtom::browseData (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1947,8 +1949,8 @@ void msdlInputOahGroup::checkGroupOptionsConsistency ()
 //______________________________________________________________________________
 void msdlInputOahGroup::acceptIn (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1966,8 +1968,8 @@ void msdlInputOahGroup::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_msdlInputOahGroup>*> (v)) {
         S_msdlInputOahGroup elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
-        if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -1985,8 +1987,8 @@ void msdlInputOahGroup::acceptIn (basevisitor* v)
 
 void msdlInputOahGroup::acceptOut (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -2004,8 +2006,8 @@ void msdlInputOahGroup::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_msdlInputOahGroup>*> (v)) {
         S_msdlInputOahGroup elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
-        if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -2023,8 +2025,8 @@ void msdlInputOahGroup::acceptOut (basevisitor* v)
 
 void msdlInputOahGroup::browseData (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -2041,7 +2043,7 @@ void msdlInputOahGroup::browseData (basevisitor* v)
 //______________________________________________________________________________
 void msdlInputOahGroup::displayMsdlInputOahValues (int fieldWidth)
 {
-  gLogStream <<
+  gLog <<
     "The MSDR options are:" <<
     std::endl;
 
@@ -2049,13 +2051,13 @@ void msdlInputOahGroup::displayMsdlInputOahValues (int fieldWidth)
 
   // display
   // --------------------------------------
-  gLogStream <<
+  gLog <<
     "Display:" <<
     std::endl;
 
   ++gIndenter;
 
-  gLogStream << std::left <<
+  gLog << std::left <<
     std::setw (fieldWidth) << "fDisplayMsdl" << ": " <<
     fDisplayMsdl <<
     std::endl <<
@@ -2068,13 +2070,13 @@ void msdlInputOahGroup::displayMsdlInputOahValues (int fieldWidth)
   // languages
   // --------------------------------------
 
-  gLogStream <<
+  gLog <<
     "Languages:" <<
     std::endl;
 
   ++gIndenter;
 
-  gLogStream << std::left <<
+  gLog << std::left <<
     std::setw (fieldWidth) << "msdlQuarterTonesPitchesLanguage" << ": \"" <<
     msrQuarterTonesPitchesLanguageKindAsString (
       fMsdlQuarterTonesPitchesLanguageKind) <<
@@ -2106,8 +2108,8 @@ std::ostream& operator << (std::ostream& os, const S_msdlInputOahGroup& elt)
 S_msdlInputOahGroup createGlobalMsdlInputOahGroup (
   const std::string& serviceName)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<

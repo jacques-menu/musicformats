@@ -26,9 +26,10 @@
 #include "msrMeasuresSlices.h"
 
 #include "oahOah.h"
-#include "oahEarlyOptions.h"
 
 #include "msrOah.h"
+
+#include "waeHandlers.h"
 
 
 namespace MusicFormats
@@ -176,7 +177,7 @@ std::string msrNoteEvent::asString () const
         fetchNoteUpLinkToVoice ();
 
   if (voice) {
-    gLogStream <<
+    gLog <<
       " in voice \"" <<
       voice->getVoiceName () <<
       "\"";
@@ -319,8 +320,8 @@ msrMeasuresSlice::~msrMeasuresSlice ()
 
 S_msrMeasuresSlice msrMeasuresSlice::createMeasuresSliceShallowCopy ()
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasuresSlices ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMeasuresSlices ()) {
 		std::stringstream ss;
 
     ss <<
@@ -360,8 +361,8 @@ void msrMeasuresSlice::appendMeasureToMeasureSlice (
   int          inputLineNumber,
   const S_msrMeasure& measure)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasuresSlices ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMeasuresSlices ()) {
 		std::stringstream ss;
 
     ss <<
@@ -384,8 +385,8 @@ void msrMeasuresSlice::appendSliceMeasuresFrom (
   int                inputLineNumber,
   const S_msrMeasuresSlice& otherSlice)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasuresSlices ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMeasuresSlices ()) {
 		std::stringstream ss;
 
     ss <<
@@ -419,7 +420,7 @@ void msrMeasuresSlice::appendSliceMeasuresFrom (
 
 if (true) // JMI
     msrInternalError (
-      gGlobalCurrentServiceRunData->getInputSourceName (),
+      gServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
       ss.str ());
@@ -447,8 +448,8 @@ if (true) // JMI
 
 void msrMeasuresSlice::collectNonSkipNotesFromMeasuresSliceMeasures ()
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasuresSlices ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMeasuresSlices ()) {
 		std::stringstream ss;
 
     ss <<
@@ -486,8 +487,8 @@ void msrMeasuresSlice::collectNonSkipNotesFromMeasuresSliceMeasures ()
     ) {
       S_msrNote note = (*i);
 
-#ifdef MF_TRACING_IS_ENABLED
-      if (gGlobalTracingOahGroup->getTraceMeasuresSlices ()) {
+#ifdef MF_TRACE_IS_ENABLED
+      if (gGlobalTraceOahGroup->getTraceMeasuresSlices ()) {
         std::stringstream ss;
 
         ss <<
@@ -572,8 +573,8 @@ void msrMeasuresSlice::collectNonSkipNotesFromMeasuresSliceMeasures ()
 
 void msrMeasuresSlice::buildTheSimutaneousNotesChunksList ()
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasuresSlices ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMeasuresSlices ()) {
 		std::stringstream ss;
 
     ss <<
@@ -645,8 +646,8 @@ void msrMeasuresSlice::buildTheSimutaneousNotesChunksList ()
 
 void msrMeasuresSlice::identifySoloNotesAndRestsInMeasuresSlice ()
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasuresSlices ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMeasuresSlices ()) {
 		std::stringstream ss;
 
     ss <<
@@ -699,9 +700,9 @@ void msrMeasuresSlice::identifySoloNotesAndRestsInMeasuresSlice ()
         if (simultaneousNotesNumber == 1) {
           soloCandidate = note;
 
-#ifdef MF_TRACING_IS_ENABLED
-          if (gGlobalTracingOahGroup->getTraceMeasuresSlices ()) {
-            gLogStream <<
+#ifdef MF_TRACE_IS_ENABLED
+          if (gGlobalTraceOahGroup->getTraceMeasuresSlices ()) {
+            gLog <<
               "Solo note or rest " <<
               note->asShortStringForTimeView ();
 
@@ -711,13 +712,13 @@ void msrMeasuresSlice::identifySoloNotesAndRestsInMeasuresSlice ()
                   fetchNoteUpLinkToVoice ();
 
             if (voice) {
-              gLogStream <<
+              gLog <<
                 " in voice \"" <<
                 voice->getVoiceName () <<
                 "\"";
             }
 
-            gLogStream <<
+            gLog <<
               " is a solo candidate" <<
               std::endl;
           }
@@ -727,9 +728,9 @@ void msrMeasuresSlice::identifySoloNotesAndRestsInMeasuresSlice ()
         else {
           // forget about the solo candidate
           if (soloCandidate) {
-#ifdef MF_TRACING_IS_ENABLED
-            if (gGlobalTracingOahGroup->getTraceMeasuresSlices ()) {
-              gLogStream <<
+#ifdef MF_TRACE_IS_ENABLED
+            if (gGlobalTraceOahGroup->getTraceMeasuresSlices ()) {
+              gLog <<
                 "Forget about solo note or rest candidate " <<
                 soloCandidate->asShortStringForTimeView ();
 
@@ -739,7 +740,7 @@ void msrMeasuresSlice::identifySoloNotesAndRestsInMeasuresSlice ()
                     fetchNoteUpLinkToVoice ();
 
               if (voice) {
-                gLogStream <<
+                gLog <<
                   " in voice \"" <<
                   voice->getVoiceName () <<
                   "\"";
@@ -782,9 +783,9 @@ void msrMeasuresSlice::identifySoloNotesAndRestsInMeasuresSlice ()
                       staffRegularVoicesList.size ();
 
 
-#ifdef MF_TRACING_IS_ENABLED
-                  if (gGlobalTracingOahGroup->getTraceMeasuresSlices ()) {
-                    gLogStream <<
+#ifdef MF_TRACE_IS_ENABLED
+                  if (gGlobalTraceOahGroup->getTraceMeasuresSlices ()) {
+                    gLog <<
                       "Solo note or rest? " <<
                       note->asShortStringForTimeView ();
                   }
@@ -796,9 +797,9 @@ void msrMeasuresSlice::identifySoloNotesAndRestsInMeasuresSlice ()
                       setSoloNoteOrRestInStaffKind (
                         msrSoloNoteOrRestInStaffKind::kSoloNoteOrRestInStaffYes);
 
-#ifdef MF_TRACING_IS_ENABLED
-                    if (gGlobalTracingOahGroup->getTraceMeasuresSlices ()) {
-                      gLogStream <<
+#ifdef MF_TRACE_IS_ENABLED
+                    if (gGlobalTraceOahGroup->getTraceMeasuresSlices ()) {
+                      gLog <<
                         "Solo note or rest " <<
                         note->asShortStringForTimeView ();
 
@@ -808,13 +809,13 @@ void msrMeasuresSlice::identifySoloNotesAndRestsInMeasuresSlice ()
                             fetchNoteUpLinkToVoice ();
 
                       if (voice) {
-                        gLogStream <<
+                        gLog <<
                           " in voice \"" <<
                           voice->getVoiceName () <<
                           "\"";
                       }
 
-                      gLogStream <<
+                      gLog <<
                         " has been identified" <<
                         std::endl;
                     }
@@ -1150,8 +1151,8 @@ msrMeasuresSlicesSequence::~msrMeasuresSlicesSequence ()
 S_msrMeasuresSlicesSequence msrMeasuresSlicesSequence::createMeasuresSlicesSequenceShallowCopy (
   const std::string& measuresOrigin)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasuresSlices ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMeasuresSlices ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1192,8 +1193,8 @@ S_msrMeasuresSlicesSequence msrMeasuresSlicesSequence::createMeasuresSlicesSeque
 void msrMeasuresSlicesSequence::appendMeasuresSliceToSequence (
   const S_msrMeasuresSlice& measuresSlice)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasuresSlices ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMeasuresSlices ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1221,8 +1222,8 @@ S_msrMeasuresSlicesSequence msrMeasuresSlicesSequence::mergeWithMeasuresSlicesSe
 {
   S_msrMeasuresSlicesSequence result;
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasuresSlices ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMeasuresSlices ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1241,8 +1242,8 @@ S_msrMeasuresSlicesSequence msrMeasuresSlicesSequence::mergeWithMeasuresSlicesSe
   size_t sequenceSize =
     getSlicesSequenceSize ();
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasuresSlices ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMeasuresSlices ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1279,8 +1280,8 @@ S_msrMeasuresSlicesSequence msrMeasuresSlicesSequence::mergeWithMeasuresSlicesSe
     size_t otherSequenceSize =
       otherMeasuresSlicesSequence->getSlicesSequenceSize ();
 
-#ifdef MF_TRACING_IS_ENABLED
-    if (gGlobalTracingOahGroup->getTraceMeasuresSlices ()) {
+#ifdef MF_TRACE_IS_ENABLED
+    if (gGlobalTraceOahGroup->getTraceMeasuresSlices ()) {
 	  	std::stringstream ss;
 
       ss <<
@@ -1307,7 +1308,7 @@ S_msrMeasuresSlicesSequence msrMeasuresSlicesSequence::mergeWithMeasuresSlicesSe
         otherMeasuresSlicesSequence->asShortString () <<
         " which has not the same size";
 
-      gLogStream <<
+      gLog <<
         std::endl <<
         S_msrMeasuresSlicesSequence (this) <<
         std::endl <<
@@ -1315,7 +1316,7 @@ S_msrMeasuresSlicesSequence msrMeasuresSlicesSequence::mergeWithMeasuresSlicesSe
         std::endl;
 
       msrInternalError (
-        gGlobalCurrentServiceRunData->getInputSourceName (),
+        gServiceRunData->getInputSourceName (),
         inputLineNumber,
         __FILE__, __LINE__,
         ss.str ());
@@ -1368,8 +1369,8 @@ S_msrMeasuresSlicesSequence msrMeasuresSlicesSequence::mergeWithMeasuresSlicesSe
 #endif
   }
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasuresSlices ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMeasuresSlices ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1377,7 +1378,7 @@ S_msrMeasuresSlicesSequence msrMeasuresSlicesSequence::mergeWithMeasuresSlicesSe
       ", result: " <<
       std::endl;
     ++gIndenter;
-    gLogStream <<
+    gLog <<
       result->asShortStringForMeasuresSlices () <<
       std::endl;
     --gIndenter;
@@ -1389,8 +1390,8 @@ S_msrMeasuresSlicesSequence msrMeasuresSlicesSequence::mergeWithMeasuresSlicesSe
 
 void msrMeasuresSlicesSequence::identifySoloNotesAndRests ()
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasuresSlices ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMeasuresSlices ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1400,7 +1401,7 @@ void msrMeasuresSlicesSequence::identifySoloNotesAndRests ()
       std::endl;
 
     ++gIndenter;
-    gLogStream << this;
+    gLog << this;
     --gIndenter;
   }
 #endif

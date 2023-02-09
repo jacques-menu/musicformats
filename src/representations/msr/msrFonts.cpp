@@ -89,7 +89,7 @@ msrFontStyleKind msrFontStyleKindFromString (
         " should be 'normal' or 'italic'";
 
       msrError (
-        gGlobalCurrentServiceRunData->getInputSourceName (),
+        gServiceRunData->getInputSourceName (),
         inputLineNumber,
         __FILE__, __LINE__,
         ss.str ());
@@ -146,7 +146,7 @@ msrFontWeightKind msrFontWeightKindFromString (
         " should be 'normal' or 'bold'";
 
       msrError (
-        gGlobalCurrentServiceRunData->getInputSourceName (),
+        gServiceRunData->getInputSourceName (),
         inputLineNumber,
         __FILE__, __LINE__,
         ss.str ());
@@ -265,7 +265,7 @@ float msrFontSize::getFontNumericSize () const
           msrFontSizeKindAsString (fFontSizeKind);
 
         msrInternalError (
-          gGlobalCurrentServiceRunData->getInputSourceName (),
+          gServiceRunData->getInputSourceName (),
           K_MF_INPUT_LINE_UNKNOWN, // JMI
           __FILE__, __LINE__,
           ss.str ());

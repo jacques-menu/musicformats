@@ -43,6 +43,8 @@
 
 #include "msr2guidoInterface.h"
 
+#include "waeHandlers.h"
+
 
 namespace MusicFormats
 {
@@ -63,7 +65,7 @@ EXP mfMusicformatsErrorKind msrScore2guidoWithHandler (
   // has quiet mode been requested?
   // ------------------------------------------------------
 
-  if (gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
+  if (gEarlyOptions.getEarlyQuietOption ()) {
     // disable all trace and display options
     handler->
       enforceHandlerQuietness ();
@@ -84,11 +86,11 @@ EXP mfMusicformatsErrorKind msrScore2guidoWithHandler (
         passDescription_A);
   }
   catch (msr2msrException& e) {
-    mfDisplayException (e, gOutputStream);
+    mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
   catch (std::exception& e) {
-    mfDisplayException (e, gOutputStream);
+    mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
 
@@ -107,15 +109,15 @@ EXP mfMusicformatsErrorKind msrScore2guidoWithHandler (
         mfTimingItemKind::kMandatory);
   }
   catch (msr2mxsrException& e) {
-    mfDisplayException (e, gOutputStream);
+    mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
   catch (std::exception& e) {
-    mfDisplayException (e, gOutputStream);
+    mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsr ()) {
 		std::stringstream ss;
 
@@ -128,14 +130,14 @@ EXP mfMusicformatsErrorKind msrScore2guidoWithHandler (
 
     ++gIndenter;
 
-    printMxsr (secondMxsr, gLogStream);
+    printMxsr (secondMxsr, gLog);
 
-    gLogStream <<
+    gLog <<
       std::endl;
 
     --gIndenter;
 
-    gLogStream <<
+    gLog <<
       "<!-- ----------------------------------------------------------- -->" <<
       std::endl << std::endl;
 
@@ -162,11 +164,11 @@ EXP mfMusicformatsErrorKind msrScore2guidoWithHandler (
       passDescription_C);
   }
   catch (mxsr2guidoException& e) {
-    mfDisplayException (e, gOutputStream);
+    mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
   catch (std::exception& e) {
-    mfDisplayException (e, gOutputStream);
+    mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
 

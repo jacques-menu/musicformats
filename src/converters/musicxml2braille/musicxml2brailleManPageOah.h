@@ -157,8 +157,8 @@ class EXP xml2brlManPageOahGroup : public oahGroup
                             const S_oahVisitor&
                                  theOah2manPage);
 
-#ifdef MF_TRACING_IS_ENABLED
-    void                  initializeManPagetracingOah ();
+#ifdef MF_TRACE_IS_ENABLED
+    void                  initializeManPageTraceOah ();
 #endif
 
   public:

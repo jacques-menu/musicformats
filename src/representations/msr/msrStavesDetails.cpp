@@ -28,11 +28,12 @@
 #include "msrStavesDetails.h"
 
 #include "oahOah.h"
-#include "oahEarlyOptions.h"
 
 #include "msrOah.h"
 
 #include "msrBrowsers.h"
+
+#include "waeHandlers.h"
 
 
 namespace MusicFormats
@@ -151,8 +152,8 @@ msrStaffTuning::~ msrStaffTuning ()
 
 S_msrStaffTuning msrStaffTuning::createStaffTuningNewbornClone ()
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceStaffDetails ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceStaffDetails ()) {
 		std::stringstream ss;
 
     ss <<
@@ -180,8 +181,9 @@ S_msrStaffTuning msrStaffTuning::createStaffTuningNewbornClone ()
 
 void msrStaffTuning::acceptIn (basevisitor* v)
 {
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "% ==> msrStaffTuning::acceptIn ()" <<
@@ -191,12 +193,14 @@ void msrStaffTuning::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
+#endif
 
   if (visitor<S_msrStaffTuning>*
     p =
       dynamic_cast<visitor<S_msrStaffTuning>*> (v)) {
         S_msrStaffTuning elem = this;
 
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
@@ -208,14 +212,16 @@ void msrStaffTuning::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
+#endif
         p->visitStart (elem);
   }
 }
 
 void msrStaffTuning::acceptOut (basevisitor* v)
 {
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "% ==> msrStaffTuning::acceptOut ()" <<
@@ -225,12 +231,14 @@ void msrStaffTuning::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
+#endif
 
   if (visitor<S_msrStaffTuning>*
     p =
       dynamic_cast<visitor<S_msrStaffTuning>*> (v)) {
         S_msrStaffTuning elem = this;
 
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
@@ -242,6 +250,7 @@ void msrStaffTuning::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
+#endif        
         p->visitEnd (elem);
   }
 }
@@ -344,7 +353,7 @@ S_msrStaffDetails msrStaffDetails::create (
   return
     msrStaffDetails::create (
       inputLineNumber,
-      gGlobalNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
+      gNullMeasure, // set later in setMeasureElementUpLinkToMeasure()
       staffTypeKind,
       showFretsKind,
       printObjectKind,
@@ -385,11 +394,11 @@ void msrStaffDetails::setStaffDetailsUpLinkToMeasure (
     "measure is null");
 #endif
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceWholeNotes ()) {
     ++gIndenter;
 
-    gLogStream <<
+    gLog <<
       "==> Setting the uplink to measure of staff details " <<
       asString () <<
       " to measure " << measure->asString () <<
@@ -406,8 +415,9 @@ void msrStaffDetails::setStaffDetailsUpLinkToMeasure (
 
 void msrStaffDetails::acceptIn (basevisitor* v)
 {
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "% ==> msrStaffDetails::acceptIn ()" <<
@@ -417,12 +427,14 @@ void msrStaffDetails::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
+#endif
 
   if (visitor<S_msrStaffDetails>*
     p =
       dynamic_cast<visitor<S_msrStaffDetails>*> (v)) {
         S_msrStaffDetails elem = this;
 
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
@@ -434,14 +446,16 @@ void msrStaffDetails::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
+#endif
         p->visitStart (elem);
   }
 }
 
 void msrStaffDetails::acceptOut (basevisitor* v)
 {
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "% ==> msrStaffDetails::acceptOut ()" <<
@@ -451,12 +465,14 @@ void msrStaffDetails::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
+#endif
 
   if (visitor<S_msrStaffDetails>*
     p =
       dynamic_cast<visitor<S_msrStaffDetails>*> (v)) {
         S_msrStaffDetails elem = this;
 
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
@@ -468,6 +484,7 @@ void msrStaffDetails::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
+#endif        
         p->visitEnd (elem);
   }
 }

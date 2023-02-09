@@ -436,11 +436,11 @@ class EXP msrSegment : public msrVoiceElement
 
     // measures flat list
     // including those not in non-measure segment elements,
-    std::list<S_msrMeasure>    
+    std::list<S_msrMeasure>
                           fSegmentMeasuresFlatList;
 
     // debug number, unique for every msrSegment instance
-    static int            gSegmentDebugNumber;
+    static int            sSegmentDebugNumber;
     int                   fSegmentDebugNumber;
 
 /* JMI
@@ -459,7 +459,7 @@ class EXP msrSegment : public msrVoiceElement
     // ------------------------------------------------------
 
     // counter
-    static int            gSegmentsCounter;
+    static int            sSegmentsCounter;
 
     // measures
     S_msrMeasure          fSegmentFirstMeasure;

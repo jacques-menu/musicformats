@@ -27,6 +27,8 @@
 
 #include "oahEarlyOptions.h"
 
+#include "waeHandlers.h"
+
 
 namespace MusicFormats
 
@@ -56,7 +58,7 @@ R"(These options control the way MSR data is translated to an MXSR.)",
 msr2mxsrOahGroup::~msr2mxsrOahGroup ()
 {}
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
 void msr2mxsrOahGroup::initializMsr2mxsrTraceOptions ()
 {
   // JMI
@@ -162,7 +164,7 @@ R"(Set the movement number to STRING in the MusicXML output.)",
 
 void msr2mxsrOahGroup::initializeMsr2mxsrOahGroup ()
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   // trace
   // --------------------------------------
   initializMsr2mxsrTraceOptions ();
@@ -188,8 +190,8 @@ void msr2mxsrOahGroup::checkGroupOptionsConsistency ()
 //______________________________________________________________________________
 void msr2mxsrOahGroup::acceptIn (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -207,8 +209,8 @@ void msr2mxsrOahGroup::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_msr2mxsrOahGroup>*> (v)) {
         S_msr2mxsrOahGroup elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
-        if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -226,8 +228,8 @@ void msr2mxsrOahGroup::acceptIn (basevisitor* v)
 
 void msr2mxsrOahGroup::acceptOut (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -245,8 +247,8 @@ void msr2mxsrOahGroup::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_msr2mxsrOahGroup>*> (v)) {
         S_msr2mxsrOahGroup elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
-        if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -264,8 +266,8 @@ void msr2mxsrOahGroup::acceptOut (basevisitor* v)
 
 void msr2mxsrOahGroup::browseData (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -282,7 +284,7 @@ void msr2mxsrOahGroup::browseData (basevisitor* v)
 //______________________________________________________________________________
 void msr2mxsrOahGroup::displayMsr2mxsrOahValues (int valueFieldWidth)
 {
-  gLogStream <<
+  gLog <<
     "The MusicXML options are:" <<
     std::endl;
 
@@ -291,13 +293,13 @@ void msr2mxsrOahGroup::displayMsr2mxsrOahValues (int valueFieldWidth)
   // work and movement
   // --------------------------------------
 
-  gLogStream <<
+  gLog <<
     "Book:" <<
     std::endl;
 
   ++gIndenter;
 
-  gLogStream << std::left <<
+  gLog << std::left <<
     std::setw (valueFieldWidth) <<
     "fWorkCreditTypeTitle" << ": " <<
     fWorkCreditTypeTitle <<
@@ -330,15 +332,15 @@ std::ostream& operator << (std::ostream& os, const S_msr2mxsrOahGroup& elt)
   else {
     os << "[NONE]" << std::endl;
   }
-  
+
   return os;
 }
 
 //______________________________________________________________________________
 S_msr2mxsrOahGroup createGlobalMsr2mxsrOahGroup ()
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<

@@ -18,9 +18,10 @@
 #include "mfStaticSettings.h"
 
 #include "oahOah.h"
-#include "oahEarlyOptions.h"
 
 #include "brailleGenerationOah2manPage.h"
+
+#include "waeHandlers.h"
 
 
 namespace MusicFormats
@@ -41,8 +42,8 @@ brailleGenerationOah2manPage::~brailleGenerationOah2manPage ()
 //________________________________________________________________________
 void brailleGenerationOah2manPage::visitStart (S_brailleOutputKindAtom& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -76,8 +77,8 @@ void brailleGenerationOah2manPage::visitStart (S_brailleOutputKindAtom& elt)
 
 void brailleGenerationOah2manPage::visitEnd (S_brailleOutputKindAtom& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -96,8 +97,8 @@ void brailleGenerationOah2manPage::visitEnd (S_brailleOutputKindAtom& elt)
 //________________________________________________________________________
 void brailleGenerationOah2manPage::visitStart (S_brailleUTFKindAtom& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -131,8 +132,8 @@ void brailleGenerationOah2manPage::visitStart (S_brailleUTFKindAtom& elt)
 
 void brailleGenerationOah2manPage::visitEnd (S_brailleUTFKindAtom& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -151,8 +152,8 @@ void brailleGenerationOah2manPage::visitEnd (S_brailleUTFKindAtom& elt)
 //________________________________________________________________________
 void brailleGenerationOah2manPage::visitStart (S_brailleByteOrderingKindAtom& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -186,8 +187,8 @@ void brailleGenerationOah2manPage::visitStart (S_brailleByteOrderingKindAtom& el
 
 void brailleGenerationOah2manPage::visitEnd (S_brailleByteOrderingKindAtom& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<

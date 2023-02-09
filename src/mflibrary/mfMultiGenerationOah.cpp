@@ -30,6 +30,8 @@
 
 #include "mfMultiGenerationOah.h"
 
+#include "waeHandlers.h"
+
 
 namespace MusicFormats
 {
@@ -182,7 +184,7 @@ EXP mfMultiGenerationOutputKind fetchGeneratedOutputKindFromRunData ()
 //   // analyze the options
 //   const std::vector<oahOption>&
 //     optionsVector =
-//       gGlobalCurrentServiceRunData->
+//       gServiceRunData->
 //         getOptionsAndArguments ().getOptionsVector ();
 //
 //   if (optionsVector.size ()) {
@@ -194,7 +196,7 @@ EXP mfMultiGenerationOutputKind fetchGeneratedOutputKindFromRunData ()
 //
 //       std::string optionNameWithoutDash = optionName.substr (1);
 //
-// //     gLogStream << JMI
+// //     gLog << JMI
 // //       "optionName: " << optionName <<
 // //       ", optionValue: " << optionValue <<
 // //       ", optionNameWithoutDash: " << optionNameWithoutDash <<
@@ -228,7 +230,7 @@ EXP mfMultiGenerationOutputKind fetchGeneratedOutputKindFromRunData ()
 //     } //for
 //   }
 //
-  gLogStream <<  // JMIJMIJMI
+  gLog <<  // JMIJMIJMI
     "result: " <<
     mfMultiGenerationOutputKindAsString (result) <<
     std::endl;
@@ -287,8 +289,8 @@ mfMultiGenerationOutputKindAtom::~mfMultiGenerationOutputKindAtom ()
 
 void mfMultiGenerationOutputKindAtom::setImplicitVariable (std::ostream& os)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<
@@ -322,8 +324,8 @@ void mfMultiGenerationOutputKindAtom::setImplicitVariable (std::ostream& os)
 
 void mfMultiGenerationOutputKindAtom::acceptIn (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -341,8 +343,8 @@ void mfMultiGenerationOutputKindAtom::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_mfMultiGenerationOutputKindAtom>*> (v)) {
         S_mfMultiGenerationOutputKindAtom elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
-        if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -360,8 +362,8 @@ void mfMultiGenerationOutputKindAtom::acceptIn (basevisitor* v)
 
 void mfMultiGenerationOutputKindAtom::acceptOut (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -379,8 +381,8 @@ void mfMultiGenerationOutputKindAtom::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_mfMultiGenerationOutputKindAtom>*> (v)) {
         S_mfMultiGenerationOutputKindAtom elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
-        if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -398,8 +400,8 @@ void mfMultiGenerationOutputKindAtom::acceptOut (basevisitor* v)
 
 void mfMultiGenerationOutputKindAtom::browseData (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -621,8 +623,8 @@ void mfMultiGenerationOahGroup::checkGroupOptionsConsistency ()
 //______________________________________________________________________________
 void mfMultiGenerationOahGroup::acceptIn (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -640,8 +642,8 @@ void mfMultiGenerationOahGroup::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_multiGenerationOahGroup>*> (v)) {
         S_multiGenerationOahGroup elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
-        if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -659,8 +661,8 @@ void mfMultiGenerationOahGroup::acceptIn (basevisitor* v)
 
 void mfMultiGenerationOahGroup::acceptOut (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -678,8 +680,8 @@ void mfMultiGenerationOahGroup::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_multiGenerationOahGroup>*> (v)) {
         S_multiGenerationOahGroup elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
-        if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -697,8 +699,8 @@ void mfMultiGenerationOahGroup::acceptOut (basevisitor* v)
 
 void mfMultiGenerationOahGroup::browseData (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -715,7 +717,7 @@ void mfMultiGenerationOahGroup::browseData (basevisitor* v)
 //______________________________________________________________________________
 void mfMultiGenerationOahGroup::displayMultiGenerationOahValues (int fieldWidth)
 {
-  gLogStream <<
+  gLog <<
     "The MultiGeneration options are:" <<
     std::endl;
 
@@ -724,13 +726,13 @@ void mfMultiGenerationOahGroup::displayMultiGenerationOahValues (int fieldWidth)
   // Output kind
   // --------------------------------------
 
-  gLogStream << std::left <<
+  gLog << std::left <<
     std::setw (fieldWidth) << "Multigenerator output kind:" <<
     std::endl;
 
   ++gIndenter;
 
-  gLogStream <<
+  gLog <<
     std::setw (fieldWidth) << "fMultiGenerationOutputKind" << ": " <<
     mfMultiGenerationOutputKindAsString (
       fMultiGenerationOutputKind) <<
@@ -756,8 +758,8 @@ std::ostream& operator << (std::ostream& os, const S_multiGenerationOahGroup& el
 //______________________________________________________________________________
 S_multiGenerationOahGroup createGlobalMultiGenerationOahGroup ()
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<

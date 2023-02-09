@@ -37,6 +37,8 @@
 #include "bsrOah.h"
 #include "msr2bsrOah.h"
 
+#include "waeHandlers.h"
+
 
 namespace MusicFormats
 {
@@ -237,9 +239,9 @@ S_bsrCellsList bsrTempo::buildCellsList () const
 
           size_t smSize = sm.size ();
 
-#ifdef MF_TRACING_IS_ENABLED
-          if (gGlobalTracingOahGroup->getTraceTempos () && ! gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
-            gLogStream <<
+#ifdef MF_TRACE_IS_ENABLED
+          if (gGlobalTraceOahGroup->getTraceTempos () && ! gEarlyOptions.getEarlyQuietOption ()) {
+            gLog <<
               "There are " << smSize << " matches" <<
               " for Rational string '" << tempoPerMinuteString <<
               "' with std::regex '" << regularExpression <<
@@ -247,11 +249,11 @@ S_bsrCellsList bsrTempo::buildCellsList () const
               std::endl;
 
             for (unsigned i = 0; i < smSize; ++i) {
-              gLogStream <<
+              gLog <<
                 '[' << sm [i] << "] ";
             } // for
 
-            gLogStream << std::endl;
+            gLog << std::endl;
           }
 #endif
 
@@ -281,9 +283,9 @@ S_bsrCellsList bsrTempo::buildCellsList () const
 
             size_t smSize = sm.size ();
 
-#ifdef MF_TRACING_IS_ENABLED
-            if (gGlobalTracingOahGroup->getTraceTempos () && ! gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
-              gLogStream <<
+#ifdef MF_TRACE_IS_ENABLED
+            if (gGlobalTraceOahGroup->getTraceTempos () && ! gEarlyOptions.getEarlyQuietOption ()) {
+              gLog <<
                 "There are " << smSize << " matches" <<
                 " for Rational string '" << tempoPerMinuteString <<
                 "' with std::regex '" << regularExpression <<
@@ -291,11 +293,11 @@ S_bsrCellsList bsrTempo::buildCellsList () const
                 std::endl;
 
               for (unsigned i = 0; i < smSize; ++i) {
-                gLogStream <<
+                gLog <<
                   '[' << sm [i] << "] ";
               } // for
 
-              gLogStream << std::endl;
+              gLog << std::endl;
             }
 #endif
 
@@ -315,7 +317,7 @@ S_bsrCellsList bsrTempo::buildCellsList () const
                 ", line " << fInputLineNumber;
 
               bsrInternalError (
-                gGlobalCurrentServiceRunData->getInputSourceName (),
+                gServiceRunData->getInputSourceName (),
                 fInputLineNumber,
                 __FILE__, __LINE__,
                 ss.str ());
@@ -323,7 +325,7 @@ S_bsrCellsList bsrTempo::buildCellsList () const
           }
 
 /* JMI
-          gLogStream << // JMI
+          gLog << // JMI
             "% ==> bsrTempo::buildCellsList ()" <<
             ", tempoPerMinuteString: " << tempoPerMinuteString <<
             ", perMinuteMin: " << perMinuteMin <<
@@ -384,7 +386,7 @@ int bsrTempo::fetchCellsNumber() const
 
 void bsrTempo::acceptIn (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
 		std::stringstream ss;
 
@@ -404,7 +406,7 @@ void bsrTempo::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_bsrTempo>*> (v)) {
         S_bsrTempo elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           std::stringstream ss;
 
@@ -423,7 +425,7 @@ void bsrTempo::acceptIn (basevisitor* v)
 
 void bsrTempo::acceptOut (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
 		std::stringstream ss;
 
@@ -443,7 +445,7 @@ void bsrTempo::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_bsrTempo>*> (v)) {
         S_bsrTempo elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           std::stringstream ss;
 

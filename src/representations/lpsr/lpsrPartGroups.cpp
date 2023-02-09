@@ -16,11 +16,12 @@
 #include "lpsrPartGroups.h"
 
 #include "oahOah.h"
-#include "oahEarlyOptions.h"
 
 #include "lpsrOah.h"
 
 #include "msrBrowsers.h"
+
+#include "waeHandlers.h"
 
 
 namespace MusicFormats
@@ -48,7 +49,7 @@ lpsrPartGroupBlock::~lpsrPartGroupBlock ()
 
 void lpsrPartGroupBlock::acceptIn (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
 		std::stringstream ss;
 
@@ -67,7 +68,7 @@ void lpsrPartGroupBlock::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_lpsrPartGroupBlock>*> (v)) {
         S_lpsrPartGroupBlock elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           std::stringstream ss;
 
@@ -86,7 +87,7 @@ void lpsrPartGroupBlock::acceptIn (basevisitor* v)
 
 void lpsrPartGroupBlock::acceptOut (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
 		std::stringstream ss;
 
@@ -105,7 +106,7 @@ void lpsrPartGroupBlock::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_lpsrPartGroupBlock>*> (v)) {
         S_lpsrPartGroupBlock elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           std::stringstream ss;
 
@@ -124,7 +125,7 @@ void lpsrPartGroupBlock::acceptOut (basevisitor* v)
 
 void lpsrPartGroupBlock::browseData (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
 		std::stringstream ss;
 
@@ -148,7 +149,7 @@ void lpsrPartGroupBlock::browseData (basevisitor* v)
     browser.browse (*(*i));
   } // for
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
 		std::stringstream ss;
 

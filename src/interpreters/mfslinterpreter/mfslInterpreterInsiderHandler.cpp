@@ -33,6 +33,9 @@
 // components
 #include "mfslInterpreterComponent.h"
 
+// waeOah
+#include "waeHandlers.h"
+
 #include "mfslInterpreterInterface.h"
 
 #include "mfslInterpreterInsiderHandler.h"
@@ -70,8 +73,8 @@ R"(
 )",
       usageInformation ())
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<
@@ -147,8 +150,8 @@ R"(What mfsl does:
 //______________________________________________________________________________
 void mfslInterpreterInsiderHandler::createTheMfslInterpreterPrefixes ()
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<
@@ -170,8 +173,8 @@ void mfslInterpreterInsiderHandler::createTheMfslInterpreterPrefixes ()
 void mfslInterpreterInsiderHandler::createTheMfslInterpreterOptionGroups (
   const std::string& serviceName)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<
@@ -198,10 +201,10 @@ void mfslInterpreterInsiderHandler::createTheMfslInterpreterOptionGroups (
   appendGroupToHandler (
     createGlobalWaeOahGroup ());
 
-#ifdef MF_TRACING_IS_ENABLED
-  // create the tracing OAH group
+#ifdef MF_TRACE_IS_ENABLED
+  // create the trace OAH group
   appendGroupToHandler (
-    createGlobalTracingOahGroup (
+    createGlobalTraceOahGroup (
       this));
 #endif
 
@@ -229,8 +232,8 @@ void mfslInterpreterInsiderHandler::createTheMfslInterpreterOptionGroups (
 //______________________________________________________________________________
 void mfslInterpreterInsiderHandler::checkOptionsAndArguments () const
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<
@@ -264,8 +267,8 @@ void mfslInterpreterInsiderHandler::checkHandlerOptionsConsistency ()
 //______________________________________________________________________________
 void mfslInterpreterInsiderHandler::enforceHandlerQuietness ()
 {
-#ifdef MF_TRACING_IS_ENABLED
-  gGlobalTracingOahGroup->
+#ifdef MF_TRACE_IS_ENABLED
+  gGlobalTraceOahGroup->
     enforceGroupQuietness ();
 #endif
 
@@ -303,7 +306,7 @@ void mfslInterpreterInsiderOahGroup::checkGroupOptionsConsistency ()
     oahError (ss.str ());
   }
 
-  else if (fOutputFileName == gGlobalCurrentServiceRunData->getInputSourceName ()) {
+  else if (fOutputFileName == gServiceRunData->getInputSourceName ()) {
     std::stringstream ss;
 
     ss <<
@@ -317,8 +320,8 @@ void mfslInterpreterInsiderOahGroup::checkGroupOptionsConsistency ()
 //______________________________________________________________________________
 void mfslInterpreterInsiderOahGroup::acceptIn (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -336,8 +339,8 @@ void mfslInterpreterInsiderOahGroup::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_mfslInterpreterInsiderOahGroup>*> (v)) {
         S_mfslInterpreterInsiderOahGroup elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
-        if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -355,8 +358,8 @@ void mfslInterpreterInsiderOahGroup::acceptIn (basevisitor* v)
 
 void mfslInterpreterInsiderOahGroup::acceptOut (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -374,8 +377,8 @@ void mfslInterpreterInsiderOahGroup::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_mfslInterpreterInsiderOahGroup>*> (v)) {
         S_mfslInterpreterInsiderOahGroup elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
-        if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -393,8 +396,8 @@ void mfslInterpreterInsiderOahGroup::acceptOut (basevisitor* v)
 
 void mfslInterpreterInsiderOahGroup::browseData (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -495,8 +498,8 @@ mfslInterpreterInsiderOahGroup::~mfslInterpreterInsiderOahGroup ()
 //_______________________________________________________________________________
 void mfslInterpreterInsiderOahGroup::initializeMfslInterpreterInsiderOahGroup ()
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
     std::stringstream ss;
 
     ss <<
@@ -517,7 +520,7 @@ void mfslInterpreterInsiderOahGroup::initializeMfslInterpreterInsiderOahGroup ()
 //______________________________________________________________________________
 void mfslInterpreterInsiderOahGroup::printMfslInterpreterInsiderOahGroupValues (int fieldWidth)
 {
-  gLogStream <<
+  gLog <<
     "The mfsl options are:" <<
     std::endl;
 
@@ -529,8 +532,8 @@ void mfslInterpreterInsiderOahGroup::printMfslInterpreterInsiderOahGroupValues (
 //______________________________________________________________________________
 S_mfslInterpreterInsiderOahGroup createGlobalMfslInterpreterInsiderOahGroup ()
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<

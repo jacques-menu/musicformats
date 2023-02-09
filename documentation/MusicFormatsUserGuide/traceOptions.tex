@@ -48,7 +48,7 @@ As can be seen, there are event options to trace the handling of options and hel
 The source code contains many instances of trace code, such as:
 \begin{lstlisting}[language=CPlusPlus]
 #ifdef TRACE_OAH
-  if (gtracingOah->fTraceVoices) {
+  if (gTraceOah->fTraceVoices) {
     gLogOstream <<
       "Creating voice \"" << asString () << "\"" <<
       std::endl;
@@ -60,6 +60,6 @@ The source code contains many instances of trace code, such as:
 #endif
 \end{lstlisting}
 
-Building \xmlToLy\ with tracing disabled only gains less than 5\% in speed, this is why tracing is available by default.
+Building \xmlToLy\ with trace disabled only gains less than 5\% in speed, this is why trace is available by default.
 
 

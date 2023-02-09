@@ -31,7 +31,7 @@ msrPrintObjectKind msrPrintObjectKindFromString (
     result =
       msrPrintObjectKind::kPrintObjectNone; // default value JMI v0.9.65
 
-//   gLogStream << // JMI TEST JMI v0.9.65
+//   gLog << // JMI TEST JMI v0.9.65
 //     "printObjectString = " <<
 //     printObjectString <<
 //     std::endl;
@@ -49,7 +49,7 @@ msrPrintObjectKind msrPrintObjectKindFromString (
         "\" should be 'yes' or 'no'";
 
       msrError (
-        gGlobalCurrentServiceRunData->getInputSourceName (),
+        gServiceRunData->getInputSourceName (),
         inputLineNumber,
         __FILE__, __LINE__,
         ss.str ());

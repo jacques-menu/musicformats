@@ -42,7 +42,7 @@ msrPlacementKind msrPlacementKindFromString (
         "\" should be 'above' or 'below'";
 
       msrError (
-        gGlobalCurrentServiceRunData->getInputSourceName (),
+        gServiceRunData->getInputSourceName (),
         inputLineNumber,
         __FILE__, __LINE__,
         ss.str ());

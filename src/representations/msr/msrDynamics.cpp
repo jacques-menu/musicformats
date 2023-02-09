@@ -18,9 +18,10 @@
 #include "msrDynamics.h"
 
 #include "oahOah.h"
-#include "oahEarlyOptions.h"
 
 #include "msrOah.h"
+
+#include "waeHandlers.h"
 
 
 namespace MusicFormats
@@ -238,8 +239,8 @@ S_msrDynamic msrDynamic::createDynamicFromString (
   const std::string& dynamicsString,
   msrPlacementKind   dynamicPlacementKind)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceDynamics ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceDynamics ()) {
 		std::stringstream ss;
 
     ss <<
@@ -278,8 +279,9 @@ msrDynamic::~msrDynamic ()
 
 void msrDynamic::acceptIn (basevisitor* v)
 {
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "% ==> msrDynamic::acceptIn ()" <<
@@ -289,12 +291,14 @@ void msrDynamic::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
+#endif
 
   if (visitor<S_msrDynamic>*
     p =
       dynamic_cast<visitor<S_msrDynamic>*> (v)) {
         S_msrDynamic elem = this;
 
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
@@ -306,14 +310,16 @@ void msrDynamic::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
+#endif
         p->visitStart (elem);
   }
 }
 
 void msrDynamic::acceptOut (basevisitor* v)
 {
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "% ==> msrDynamic::acceptOut ()" <<
@@ -323,12 +329,14 @@ void msrDynamic::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
+#endif
 
   if (visitor<S_msrDynamic>*
     p =
       dynamic_cast<visitor<S_msrDynamic>*> (v)) {
         S_msrDynamic elem = this;
 
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
@@ -340,6 +348,7 @@ void msrDynamic::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
+#endif        
         p->visitEnd (elem);
   }
 }
@@ -402,8 +411,9 @@ msrOtherDynamic::~msrOtherDynamic ()
 
 void msrOtherDynamic::acceptIn (basevisitor* v)
 {
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "% ==> msrOtherDynamic::acceptIn ()" <<
@@ -413,12 +423,14 @@ void msrOtherDynamic::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
+#endif
 
   if (visitor<S_msrOtherDynamic>*
     p =
       dynamic_cast<visitor<S_msrOtherDynamic>*> (v)) {
         S_msrOtherDynamic elem = this;
 
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
@@ -430,14 +442,16 @@ void msrOtherDynamic::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
+#endif
         p->visitStart (elem);
   }
 }
 
 void msrOtherDynamic::acceptOut (basevisitor* v)
 {
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "% ==> msrOtherDynamic::acceptOut ()" <<
@@ -447,12 +461,14 @@ void msrOtherDynamic::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
+#endif
 
   if (visitor<S_msrOtherDynamic>*
     p =
       dynamic_cast<visitor<S_msrOtherDynamic>*> (v)) {
         S_msrOtherDynamic elem = this;
 
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
@@ -464,6 +480,7 @@ void msrOtherDynamic::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
+#endif        
         p->visitEnd (elem);
   }
 }
@@ -554,8 +571,9 @@ msrCrescDecresc::~msrCrescDecresc ()
 
 void msrCrescDecresc::acceptIn (basevisitor* v)
 {
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "% ==> msrCrescDecresc::acceptIn ()" <<
@@ -565,12 +583,14 @@ void msrCrescDecresc::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
+#endif
 
   if (visitor<S_msrCrescDecresc>*
     p =
       dynamic_cast<visitor<S_msrCrescDecresc>*> (v)) {
         S_msrCrescDecresc elem = this;
 
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
@@ -582,14 +602,16 @@ void msrCrescDecresc::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
+#endif
         p->visitStart (elem);
   }
 }
 
 void msrCrescDecresc::acceptOut (basevisitor* v)
 {
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "% ==> msrCrescDecresc::acceptOut ()" <<
@@ -599,12 +621,14 @@ void msrCrescDecresc::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
+#endif
 
   if (visitor<S_msrCrescDecresc>*
     p =
       dynamic_cast<visitor<S_msrCrescDecresc>*> (v)) {
         S_msrCrescDecresc elem = this;
 
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
@@ -616,6 +640,7 @@ void msrCrescDecresc::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
+#endif        
         p->visitEnd (elem);
   }
 }
@@ -736,8 +761,9 @@ msrWedge::~msrWedge ()
 
 void msrWedge::acceptIn (basevisitor* v)
 {
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "% ==> msrWedge::acceptIn ()" <<
@@ -747,12 +773,14 @@ void msrWedge::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
+#endif
 
   if (visitor<S_msrWedge>*
     p =
       dynamic_cast<visitor<S_msrWedge>*> (v)) {
         S_msrWedge elem = this;
 
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
@@ -764,14 +792,16 @@ void msrWedge::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
+#endif
         p->visitStart (elem);
   }
 }
 
 void msrWedge::acceptOut (basevisitor* v)
 {
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "% ==> msrWedge::acceptOut ()" <<
@@ -781,12 +811,14 @@ void msrWedge::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
+#endif
 
   if (visitor<S_msrWedge>*
     p =
       dynamic_cast<visitor<S_msrWedge>*> (v)) {
         S_msrWedge elem = this;
 
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
@@ -798,6 +830,7 @@ void msrWedge::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
+#endif        
         p->visitEnd (elem);
   }
 }

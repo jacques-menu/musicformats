@@ -30,7 +30,7 @@ int main (int argc, char* argv[])
   // display the library components history
   // ------------------------------------------------------
   createLibraryComponent ()->
-    printHistory (gLogStream);
+    printHistory (gLog);
 
   return 0;
 }
