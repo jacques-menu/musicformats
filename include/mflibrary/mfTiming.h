@@ -109,8 +109,8 @@ class EXP mfTimingItemsList {
     // global variable for general use
     // ------------------------------------------------------
 
-    static mfTimingItemsList
-                          gGlobalTimingItemsList;
+//     static mfTimingItemsList
+//                           sGlobalTimingItemsList;
 
   public:
 
@@ -153,6 +153,12 @@ class EXP mfTimingItemsList {
 };
 EXP std::ostream& operator << (std::ostream& os, const mfTimingItemsList& tim);
 
+//________________________________________________________________________
+// hidden global timing items list variable
+EXP mfTimingItemsList& getGlobalTimingItemsList ();
+
+// a handy shortcut
+#define gGlobalTimingItemsList getGlobalTimingItemsList ()
 
 
 }

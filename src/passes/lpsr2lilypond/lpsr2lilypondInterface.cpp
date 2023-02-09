@@ -30,6 +30,8 @@
 
 #include "lpsr2lilypondInterface.h"
 
+#include "waeHandlers.h"
+
 
 namespace MusicFormats
 {
@@ -57,8 +59,8 @@ void translateLpsrToLilypond (
   // set the global current passID
   setGlobalCurrentPassIDKind (passIDKind);
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTracePasses ()) {
     std::string separator =
       "%--------------------------------------------------------------";
 
@@ -69,7 +71,7 @@ void translateLpsrToLilypond (
       separator <<
       std::endl <<
       gTab <<
-      gWaeHandler->passIDKindAsString (passIDKind) << ": " << passDescription <<
+      gLanguage->passIDKindAsString (passIDKind) << ": " << passDescription <<
       std::endl <<
       separator <<
       std::endl;
@@ -94,7 +96,7 @@ void translateLpsrToLilypond (
   // register time spent
   clock_t endClock = clock ();
 
-  mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
+  gGlobalTimingItemsList.appendTimingItem (
     passIDKind,
     passDescription,
     mfTimingItemKind::kMandatory,
@@ -103,7 +105,7 @@ void translateLpsrToLilypond (
 
   // check indentation
   if (gIndenter != 0) {
-    gLogStream <<
+    gLog <<
       "### translateLpsrToLilypond gIndenter final value: " <<
       gIndenter.getIndentation () <<
       " ###" <<
@@ -128,8 +130,8 @@ EXP void translateLpsrToLilypondWithHandler (
       handler->
         fetchOutputFileNameFromTheOptions ();
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
     err <<
       "xmlFile2lilypond() outputFileName = \"" <<
       outputFileName <<
@@ -143,8 +145,8 @@ EXP void translateLpsrToLilypondWithHandler (
 #endif
 
   if (! outputFileName.size ()) {
-#ifdef MF_TRACING_IS_ENABLED
-    if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+    if (gEarlyOptions.getEarlyTraceOah ()) {
       err <<
         "xmlFile2lilypond() output goes to standard output" <<
         std::endl;
@@ -173,18 +175,18 @@ EXP void translateLpsrToLilypondWithHandler (
         lilypondStandardOutputStream);
     }
     catch (lpsr2lilypondException& e) {
-      mfDisplayException (e, gOutputStream);
+      mfDisplayException (e, gOutput);
       return;
     }
     catch (std::exception& e) {
-      mfDisplayException (e, gOutputStream);
+      mfDisplayException (e, gOutput);
       return;
     }
   }
 
   else {
-#ifdef MF_TRACING_IS_ENABLED
-    if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+    if (gEarlyOptions.getEarlyTraceOah ()) {
       err <<
         "xmlFile2lilypond() output goes to file \"" <<
         outputFileName <<
@@ -198,12 +200,12 @@ EXP void translateLpsrToLilypondWithHandler (
 #endif
 
     // open output file
-#ifdef MF_TRACING_IS_ENABLED
-    if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
+#ifdef MF_TRACE_IS_ENABLED
+    if (gEarlyOptions.getEarlyTracePasses ()) {
       gWaeHandler->waeTrace (
         err,
         __FILE__, __LINE__,
-        gWaeHandler->openingLilypondFileForWriting (outputFileName));
+        gLanguage->openingLilypondFileForWriting (outputFileName));
     }
 #endif
 
@@ -217,7 +219,7 @@ EXP void translateLpsrToLilypondWithHandler (
       std::stringstream ss;
 
       ss <<
-        gWaeHandler->cannotOpenLilypondFileForWriting (outputFileName);
+        gLanguage->cannotOpenLilypondFileForWriting (outputFileName);
 
       std::string message = ss.str ();
 
@@ -246,22 +248,22 @@ EXP void translateLpsrToLilypondWithHandler (
         lilypondFileOutputStream);
     }
     catch (lpsr2lilypondException& e) {
-      mfDisplayException (e, gOutputStream);
+      mfDisplayException (e, gOutput);
       return;
     }
     catch (std::exception& e) {
-      mfDisplayException (e, gOutputStream);
+      mfDisplayException (e, gOutput);
       return;
     }
 
     // close output file
 #ifdef TRACE_OAH
-    if (gtracingOah->fTracePasses) {
+    if (gTraceOah->fTracePasses) {
       std::stringstream ss;
 
       ss <<
         std::endl <<
-        gWaeHandler->closingLilypondFile (outputFileName) <<
+        gLanguage->closingLilypondFile (outputFileName) <<
         std::endl;
 
       gWaeHandler->waeTrace (

@@ -87,14 +87,14 @@ if (true) // for tests JMI
 
   if (gGlobalMsrOahGroup->getDisplayMsr ()) { // JMI CAFE
 /* JMI
-    gLogStream <<
+    gLog <<
       "___PART___" <<
       part <<
       std::endl;
 */
 
     // print the score
-    gOutputStream <<
+    gOutput <<
       std::endl <<
       "%--------------------------------------------------------------" <<
       std::endl <<
@@ -104,7 +104,7 @@ if (true) // for tests JMI
       std::endl << std::endl;
 
     ++gIndenter;
-    gOutputStream <<
+    gOutput <<
       theMsrScore <<
       std::endl;
     --gIndenter;
@@ -163,7 +163,7 @@ S_msrScore Mikrokosmos3WanderingGenerator::createTheScore (
 
 //------------------------------------------------------------------------
 S_msrStaff Mikrokosmos3WanderingGenerator::createStaffInPart (
-  int              staffNumber, 
+  int              staffNumber,
   const S_msrPart& part)
 //------------------------------------------------------------------------
 {

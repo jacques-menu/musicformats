@@ -23,8 +23,8 @@ S_mfcPassComponent createLpsr2lilypondComponent ()
   // protect library against multiple initializations
   if (! pPassComponent) {
 
-#ifdef MF_TRACING_IS_ENABLED
-    if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {
+#ifdef MF_TRACE_IS_ENABLED
+    if (gEarlyOptions.getEarlyTraceComponents ()) {
 	  	std::stringstream ss;
 
       ss <<

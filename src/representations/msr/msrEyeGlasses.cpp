@@ -22,13 +22,14 @@
 #include "mfAssert.h"
 
 #include "oahOah.h"
-#include "oahEarlyOptions.h"
 
 #include "msrOah.h"
 
 #include "msrMeasureConstants.h"
 
 #include "msrEyeGlasses.h"
+
+#include "waeHandlers.h"
 
 
 namespace MusicFormats
@@ -53,7 +54,7 @@ S_msrEyeGlasses msrEyeGlasses::create (
   return
     msrEyeGlasses::create (
       inputLineNumber,
-      gGlobalNullMeasureSmartPointer); // set later in setEyeGlassesUpLinkToMeasure()
+      gNullMeasure); // set later in setEyeGlassesUpLinkToMeasure()
 }
 
 msrEyeGlasses::msrEyeGlasses (
@@ -77,11 +78,11 @@ void msrEyeGlasses::setEyeGlassesUpLinkToMeasure (
     "measure is null");
 #endif
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceWholeNotes ()) {
     ++gIndenter;
 
-    gLogStream <<
+    gLog <<
       "==> Setting the uplink to measure of eyeglasses " <<
       asString () <<
       " to measure " << measure->asString () <<
@@ -101,10 +102,10 @@ void msrEyeGlasses::setEyeGlassesUpLinkToMeasure (
 //   const Rational&     measurePosition,
 //   const std::string&  context)
 // {
-// #ifdef MF_TRACING_IS_ENABLED
-//   if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gGlobalTraceOahGroup->getTraceMeasurePositions ()) {
 //
-//     gLogStream <<
+//     gLog <<
 //       "Setting measure element measure position of " <<
 //       asString () <<
 //       " to '" << measurePosition <<
@@ -161,8 +162,9 @@ void msrEyeGlasses::setEyeGlassesUpLinkToMeasure (
 //
 void msrEyeGlasses::acceptIn (basevisitor* v)
 {
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "% ==> msrEyeGlasses::acceptIn ()" <<
@@ -172,12 +174,14 @@ void msrEyeGlasses::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
+#endif
 
   if (visitor<S_msrEyeGlasses>*
     p =
       dynamic_cast<visitor<S_msrEyeGlasses>*> (v)) {
         S_msrEyeGlasses elem = this;
 
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
@@ -189,14 +193,16 @@ void msrEyeGlasses::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
+#endif
         p->visitStart (elem);
   }
 }
 
 void msrEyeGlasses::acceptOut (basevisitor* v)
 {
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "% ==> msrEyeGlasses::acceptOut ()" <<
@@ -206,12 +212,14 @@ void msrEyeGlasses::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
+#endif
 
   if (visitor<S_msrEyeGlasses>*
     p =
       dynamic_cast<visitor<S_msrEyeGlasses>*> (v)) {
         S_msrEyeGlasses elem = this;
 
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
@@ -223,6 +231,7 @@ void msrEyeGlasses::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
+#endif        
         p->visitEnd (elem);
   }
 }

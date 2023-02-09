@@ -491,7 +491,7 @@ int consumeDecimalNumber (
   int    result = 0;
 
   if (! isdigit (*cursor)) {
-    gLogStream <<
+    gLog <<
       "consumeDecimalNumber (" << *cursor <<
       "), " << *cursor << " is no decimal digit!" <<
       std::endl;
@@ -499,7 +499,7 @@ int consumeDecimalNumber (
 
   while (isdigit (*cursor)) {
     if (debugMode) {
-      gLogStream <<
+      gLog <<
         "--> consumeDecimalNumber: cursor = |" <<
         *cursor <<
         "|" <<
@@ -514,7 +514,7 @@ int consumeDecimalNumber (
   remainingStringIterator = cursor;
 
   if (debugMode) {
-    gLogStream <<
+    gLog <<
       "--> consumeDecimalNumber: result: " << result <<
       ", *remainingStringIterator = |" << *remainingStringIterator <<
       "|" <<
@@ -534,7 +534,7 @@ std::set<int> mfDecipherNaturalNumbersSetSpecification (
   std::set<int> result;
 
   if (debugMode) {
-    gLogStream <<
+    gLog <<
       "--> mfDecipherNaturalNumbersSetSpecification, theString = |" << theString <<
       "|" <<
       std::endl;
@@ -546,7 +546,7 @@ std::set<int> mfDecipherNaturalNumbersSetSpecification (
 
     while (1) {
       if (debugMode) {
-        gLogStream <<
+        gLog <<
           "--> mfDecipherNaturalNumbersSetSpecification: cursor = |" <<
           *cursor << "|" <<
           std::endl;
@@ -568,7 +568,7 @@ std::set<int> mfDecipherNaturalNumbersSetSpecification (
         ++cursor;
 
         if (debugMode) {
-          gLogStream <<
+          gLog <<
             "--> mfDecipherNaturalNumbersSetSpecification after '-' : cursor = |" <<
             *cursor <<
             "|" <<
@@ -584,7 +584,7 @@ std::set<int> mfDecipherNaturalNumbersSetSpecification (
       }
 
       if (debugMode) {
-        gLogStream <<
+        gLog <<
           "--> mfDecipherNaturalNumbersSetSpecification" <<
           ", intervalStartNumber: " << intervalStartNumber <<
           ", intervalEndNumber: " << intervalEndNumber <<
@@ -603,7 +603,7 @@ std::set<int> mfDecipherNaturalNumbersSetSpecification (
 
       if (*cursor != ',') {
         if (debugMode) {
-          gLogStream <<
+          gLog <<
             "--> mfDecipherNaturalNumbersSetSpecification, after non ',' : cursor = |" <<
             *cursor <<
             "|" <<
@@ -615,7 +615,7 @@ std::set<int> mfDecipherNaturalNumbersSetSpecification (
       ++cursor;
 
       if (debugMode) {
-        gLogStream <<
+        gLog <<
           "--> mfDecipherNaturalNumbersSetSpecification after ',' : cursor = |" <<
           *cursor <<
           "|"
@@ -625,7 +625,7 @@ std::set<int> mfDecipherNaturalNumbersSetSpecification (
     } // while
 
     if (* cursor != '\0') {
-      gLogStream <<
+      gLog <<
         "--> Extraneous characters |" << *cursor <<
         "| in numbers spec" <<
         std::endl << std::endl;
@@ -648,7 +648,7 @@ std::string consumeString (
 
   while ((*cursor) != ',') {
     if (debugMode) {
-      gLogStream <<
+      gLog <<
         "--> consumeString: cursor = |" <<
         *cursor <<
         "|" <<
@@ -663,7 +663,7 @@ std::string consumeString (
   remainingStringIterator = cursor;
 
   if (debugMode) {
-    gLogStream <<
+    gLog <<
       "--> consumeString: result: " << result <<
       ", *remainingStringIterator = |" << *remainingStringIterator <<
       "|" <<
@@ -685,7 +685,7 @@ std::set<std::string> mfDecipherStringsSetSpecification (
 
 /* JMI v0.9.66 ???
   if (debugMode) {
-    gLogStream <<
+    gLog <<
       "--> mfDecipherStringsSetSpecification, theString = |" << theString <<
       "|" <<
       std::endl;
@@ -696,7 +696,7 @@ std::set<std::string> mfDecipherStringsSetSpecification (
 
   while (1) {
     if (debugMode) {
-      gLogStream <<
+      gLog <<
         "--> mfDecipherStringsSetSpecification: cursor = |" <<
         *cursor << "|" <<
         std::endl;
@@ -707,7 +707,7 @@ std::set<std::string> mfDecipherStringsSetSpecification (
         consumeString (cursor, theString.end (), debugMode);
 
     if (debugMode) {
-      gLogStream <<
+      gLog <<
         "--> mfDecipherStringsSetSpecification" <<
         ", currentString: " << currentString <<
         ": *cursor = |" << *cursor << "|" <<
@@ -718,7 +718,7 @@ std::set<std::string> mfDecipherStringsSetSpecification (
 
     if (*cursor != ',') {
       if (debugMode) {
-        gLogStream <<
+        gLog <<
           "--> mfDecipherStringsSetSpecification, after non ',' : cursor = |" <<
           *cursor <<
           "|" <<
@@ -730,7 +730,7 @@ std::set<std::string> mfDecipherStringsSetSpecification (
     if (++cursor == theString.end ()) break;
 
     if (debugMode) {
-      gLogStream <<
+      gLog <<
         "--> mfDecipherStringsSetSpecification after ',' : cursor = |" <<
         *cursor <<
         "|"
@@ -740,7 +740,7 @@ std::set<std::string> mfDecipherStringsSetSpecification (
   } // while
 
   if (* cursor != '\0') {
-    gLogStream <<
+    gLog <<
       "--> Extraneous characters |" << *cursor <<
       "| in numbers spec" <<
       std::endl << std::endl;
@@ -758,7 +758,7 @@ std::list<int> mfExtractNumbersFromString (
   std::list<int> foundNumbers;
 
   if (debugMode) {
-    gLogStream <<
+    gLog <<
       "--> mfExtractNumbersFromString, theString = |" << theString <<
       "|" <<
       std::endl;
@@ -773,7 +773,7 @@ std::list<int> mfExtractNumbersFromString (
         break;
 
       if (debugMode) {
-        gLogStream <<
+        gLog <<
           "--> mfExtractNumbersFromString: cursor = |" <<
           *cursor << "|" <<
           std::endl;
@@ -847,7 +847,7 @@ std::pair<std::string, std::string> mfExtractNamesPairFromString (
   std::string name2;
 
   if (debugMode) {
-    gLogStream <<
+    gLog <<
       "--> mfExtractNamesPairFromString, theString = |" << theString <<
       "|" <<
       std::endl;
@@ -863,7 +863,7 @@ std::pair<std::string, std::string> mfExtractNamesPairFromString (
         break;
 
       if (debugMode) {
-        gLogStream <<
+        gLog <<
           "--> mfExtractNamesPairFromString: cursor = |" <<
           *cursor << "|" <<
           std::endl;
@@ -882,14 +882,14 @@ std::pair<std::string, std::string> mfExtractNamesPairFromString (
     name1 = mfTrimFromBothEnds (name1);
     if (! name1.size ()) {
       // found an empty name1
-      gLogStream <<
+      gLog <<
         "### ERROR: the first name before the " << separator <<
         " separator is empty in '" << theString << "'" <<
         std::endl;
     }
 
     if (cursor == theString.end ())
-      gLogStream <<
+      gLog <<
         "### ERROR: the " << separator <<
         " separator is missing in std::string '" <<
         theString << "'" <<
@@ -904,7 +904,7 @@ std::pair<std::string, std::string> mfExtractNamesPairFromString (
         break;
 
       if (debugMode) {
-        gLogStream <<
+        gLog <<
           "--> mfExtractNamesPairFromString: cursor = |" <<
           *cursor << "|" <<
           std::endl;
@@ -912,7 +912,7 @@ std::pair<std::string, std::string> mfExtractNamesPairFromString (
 
       if ((*cursor) == '=') {
         // found the separator
-        gLogStream <<
+        gLog <<
           "### ERROR: the " << separator <<
           " separator occurs more than once in std::string '" <<
           theString << "'" <<
@@ -928,7 +928,7 @@ std::pair<std::string, std::string> mfExtractNamesPairFromString (
     name2 = mfTrimFromBothEnds (name2);
     if (! name2.size ()) {
       // found an empty name2
-      gLogStream <<
+      gLog <<
         "### ERROR: the second name after the " << separator <<
         " separator is empty in '" << theString << "'" <<
         std::endl;
@@ -1263,7 +1263,7 @@ void mfSplitStringIntoChunks (
   std::list<std::string>& chunksList)
 {
 #ifdef DEBUG_SPLITTING
-  gLogStream <<
+  gLog <<
     "---> splitting |" << theString << "|" <<
     std::endl << std::endl;
 #endif
@@ -1300,7 +1300,7 @@ void mfSplitStringIntoChunks (
         chunk);
 
 #ifdef DEBUG_SPLITTING
-      gLogStream <<
+      gLog <<
         "theStringSize: " << theStringSize <<
         std::endl <<
         "currentPosition: " << currentPosition <<
@@ -1344,7 +1344,7 @@ void mfSplitStringIntoChunks (
         theString.substr (
           currentPosition);
 
-      gLogStream <<
+      gLog <<
         "theStringSize: " << theStringSize <<
         std::endl <<
         "currentPosition: " << currentPosition <<
@@ -1368,7 +1368,7 @@ void mfSplitRegularStringAtEndOfLines (
   std::list<std::string>& chunksList)
 {
 #ifdef DEBUG_SPLITTING
-  gLogStream <<
+  gLog <<
     "---> splitting |" << theString << "|" <<
     std::endl << std::endl;
 #endif
@@ -1412,7 +1412,7 @@ void mfSplitRegularStringAtEndOfLines (
         chunk);
 
 #ifdef DEBUG_SPLITTING
-      gLogStream <<
+      gLog <<
         "theStringSize: " << theStringSize <<
         std::endl <<
         "currentPosition: " << currentPosition <<
@@ -1456,7 +1456,7 @@ void mfSplitRegularStringAtEndOfLines (
         theString.substr (
           currentPosition);
 
-      gLogStream <<
+      gLog <<
         "theStringSize: " << theStringSize <<
         std::endl <<
         "currentPosition: " << currentPosition <<
@@ -1481,7 +1481,7 @@ void mfSplitHTMLStringContainingEndOfLines (
   std::list<std::string>& chunksList)
 {
 #ifdef DEBUG_SPLITTING
-  gLogStream <<
+  gLog <<
     "---> splitting |" << theString << "|" <<
     std::endl << std::endl;
 #endif
@@ -1537,7 +1537,7 @@ void mfSplitHTMLStringContainingEndOfLines (
         chunk);
 
 #ifdef DEBUG_SPLITTING
-      gLogStream <<
+      gLog <<
         "theStringSize: " << theStringSize <<
         std::endl <<
         "currentPosition: " << currentPosition <<
@@ -1581,7 +1581,7 @@ void mfSplitHTMLStringContainingEndOfLines (
         theString.substr (
           currentPosition);
 
-      gLogStream <<
+      gLog <<
         "theStringSize: " << theStringSize <<
         std::endl <<
         "currentPosition: " << currentPosition <<
@@ -1681,7 +1681,7 @@ void mfStringSetMinusEquals (
       numberOfEraseElements =
         dest.erase (theString);
 
-    gLogStream <<
+    gLog <<
       "numberOfEraseElements: " << numberOfEraseElements <<
       std::endl;
   } // for

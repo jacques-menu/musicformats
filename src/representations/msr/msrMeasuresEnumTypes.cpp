@@ -280,11 +280,11 @@ std::ostream& operator << (std::ostream& os, const msrMeasureEndRegularKind& elt
 //       setMeasureElementMeasurePosition (
 //         this,
 //         fMeasureWholeNotesDuration,
-//         "handleSubsequentHarmonyInHarmoniesMeasure() 2");
+//         "handleASubsequentHarmonyInAHarmoniesMeasure() 2");
 //
 //     // insert skipNote before currentHarmony in the measure's elements list
-// #ifdef MF_TRACING_IS_ENABLED
-//     if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
+// #ifdef MF_TRACE_IS_ENABLED
+//     if (gGlobalTraceOahGroup->getTraceHarmonies ()) {
 //       std::stringstream ss;
 //
 //       ss <<
@@ -321,7 +321,7 @@ std::ostream& operator << (std::ostream& os, const msrMeasureEndRegularKind& elt
 //       currentHarmony->asString ();
 //
 //     msrInternalWarning (
-//       gGlobalCurrentServiceRunData->getInputSourceName (),
+//       gServiceRunData->getInputSourceName (),
 //       inputLineNumber,
 //       ss.str ());
 //
@@ -332,8 +332,8 @@ std::ostream& operator << (std::ostream& os, const msrMeasureEndRegularKind& elt
 //           + // the delta is negative
 //         measurePositionsDelta;
 //
-// #ifdef MF_TRACING_IS_ENABLED
-//     if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
+// #ifdef MF_TRACE_IS_ENABLED
+//     if (gGlobalTraceOahGroup->getTraceHarmonies ()) {
 //       std::stringstream ss;
 //
 //       ss <<
@@ -363,7 +363,7 @@ std::ostream& operator << (std::ostream& os, const msrMeasureEndRegularKind& elt
 //         " to 0 : leaving it as it is";
 //
 //       msrInternalWarning (
-//         gGlobalCurrentServiceRunData->getInputSourceName (),
+//         gServiceRunData->getInputSourceName (),
 //         inputLineNumber,
 // //  JMI             __FILE__, __LINE__,
 //         ss.str ());

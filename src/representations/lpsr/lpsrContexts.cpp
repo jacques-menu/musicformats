@@ -12,9 +12,10 @@
 #include "lpsrContexts.h"
 
 #include "oahOah.h"
-#include "oahEarlyOptions.h"
 
 #include "lpsrOah.h"
+
+#include "waeHandlers.h"
 
 
 namespace MusicFormats
@@ -101,7 +102,7 @@ lpsrContext::~lpsrContext ()
 
 void lpsrContext::acceptIn (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
 		std::stringstream ss;
 
@@ -120,7 +121,7 @@ void lpsrContext::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_lpsrContext>*> (v)) {
         S_lpsrContext elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           std::stringstream ss;
 
@@ -139,7 +140,7 @@ void lpsrContext::acceptIn (basevisitor* v)
 
 void lpsrContext::acceptOut (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
 		std::stringstream ss;
 
@@ -158,7 +159,7 @@ void lpsrContext::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_lpsrContext>*> (v)) {
         S_lpsrContext elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           std::stringstream ss;
 
@@ -260,7 +261,7 @@ lpsrChordNamesContext::~lpsrChordNamesContext ()
 
 void lpsrChordNamesContext::acceptIn (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
 		std::stringstream ss;
 
@@ -279,7 +280,7 @@ void lpsrChordNamesContext::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_lpsrChordNamesContext>*> (v)) {
         S_lpsrChordNamesContext elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           std::stringstream ss;
 
@@ -298,7 +299,7 @@ void lpsrChordNamesContext::acceptIn (basevisitor* v)
 
 void lpsrChordNamesContext::acceptOut (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
 		std::stringstream ss;
 
@@ -317,7 +318,7 @@ void lpsrChordNamesContext::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_lpsrChordNamesContext>*> (v)) {
         S_lpsrChordNamesContext elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           std::stringstream ss;
 
@@ -447,7 +448,7 @@ lpsrFiguredBassContext::~lpsrFiguredBassContext ()
 
 void lpsrFiguredBassContext::acceptIn (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
 		std::stringstream ss;
 
@@ -466,7 +467,7 @@ void lpsrFiguredBassContext::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_lpsrFiguredBassContext>*> (v)) {
         S_lpsrFiguredBassContext elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           std::stringstream ss;
 
@@ -485,7 +486,7 @@ void lpsrFiguredBassContext::acceptIn (basevisitor* v)
 
 void lpsrFiguredBassContext::acceptOut (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
 		std::stringstream ss;
 
@@ -504,7 +505,7 @@ void lpsrFiguredBassContext::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_lpsrFiguredBassContext>*> (v)) {
         S_lpsrFiguredBassContext elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           std::stringstream ss;
 

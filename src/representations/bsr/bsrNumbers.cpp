@@ -18,9 +18,10 @@
 #include "bsrNumbers.h"
 
 #include "oahOah.h"
-#include "oahEarlyOptions.h"
 
 #include "bsrOah.h"
+
+#include "waeHandlers.h"
 
 
 namespace MusicFormats
@@ -77,7 +78,7 @@ S_bsrCellsList bsrNumber::numberValueAsCellsList () const
     int mod = n % 10;
 
 /* JMI
-    gLogStream << // JMI
+    gLog << // JMI
       "% ==> numberValueAsCellsList ()" <<
       ", n: " << n <<
       ", div: " << div <<
@@ -152,7 +153,7 @@ int bsrNumber::fetchCellsNumber() const
 
 void bsrNumber::acceptIn (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
 		std::stringstream ss;
 
@@ -172,7 +173,7 @@ void bsrNumber::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_bsrNumber>*> (v)) {
         S_bsrNumber elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           std::stringstream ss;
 
@@ -191,7 +192,7 @@ void bsrNumber::acceptIn (basevisitor* v)
 
 void bsrNumber::acceptOut (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
 		std::stringstream ss;
 
@@ -211,7 +212,7 @@ void bsrNumber::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_bsrNumber>*> (v)) {
         S_bsrNumber elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           std::stringstream ss;
 

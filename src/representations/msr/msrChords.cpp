@@ -31,13 +31,14 @@
 #include "msrTechnicals.h"
 
 #include "oahOah.h"
-#include "oahEarlyOptions.h"
 
 #include "msrOah.h"
 
 #include "msrWae.h"
 
 #include "msrBrowsers.h"
+
+#include "waeHandlers.h"
 
 
 namespace MusicFormats
@@ -83,8 +84,8 @@ S_msrChord msrChord::create (
   const Rational&     chordDisplayWholeNotes,
   msrDurationKind     chordGraphicDurationKind)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceChords ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceChords ()) {
 		std::stringstream ss;
 
     ss <<
@@ -117,8 +118,8 @@ S_msrChord msrChord::create (
   const Rational& chordDisplayWholeNotes,
   msrDurationKind chordGraphicDurationKind)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceChords ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceChords ()) {
 		std::stringstream ss;
 
     ss <<
@@ -138,7 +139,7 @@ S_msrChord msrChord::create (
   return
     msrChord::create (
       inputLineNumber,
-      gGlobalNullMeasureSmartPointer, // set later in setChordUpLinkToMeasure()
+      gNullMeasure, // set later in setChordUpLinkToMeasure()
       chordSoundingWholeNotes, chordDisplayWholeNotes,
       chordGraphicDurationKind);
 }
@@ -174,8 +175,8 @@ msrChord::~msrChord ()
 S_msrChord msrChord::createChordNewbornClone (
   const S_msrPart& containingPart)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceChords ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceChords ()) {
 		std::stringstream ss;
 
     ss <<
@@ -202,7 +203,7 @@ S_msrChord msrChord::createChordNewbornClone (
     newbornClone =
       msrChord::create (
         fInputLineNumber,
-        gGlobalNullMeasureSmartPointer, // set later in setChordUpLinkToMeasure()
+        gNullMeasure, // set later in setChordUpLinkToMeasure()
         fMeasureElementSoundingWholeNotes,
         fChordDisplayWholeNotes,
         fChordGraphicDurationKind);
@@ -229,8 +230,8 @@ S_msrChord msrChord::createChordNewbornClone (
 //   const Rational&    measurePosition,
 //   const std::string&      context)
 // {
-// #ifdef MF_TRACING_IS_ENABLED
-//   if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gGlobalTraceOahGroup->getTraceMeasurePositions ()) {
 // 		std::stringstream ss;
 //
 //     ss <<
@@ -320,8 +321,8 @@ void msrChord::setChordUpLinkToMeasure (
     "measure is null");
 #endif
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceWholeNotes ()) {
     ++gIndenter;
 
 		std::stringstream ss;
@@ -420,8 +421,8 @@ S_msrScore msrChord::fetchChordUpLinkToScore () const
 void msrChord::setChordDisplayWholeNotes (
    const Rational& wholeNotes)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceChords ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceChords ()) {
 		std::stringstream ss;
 
     ss <<
@@ -446,8 +447,8 @@ void msrChord::setChordGraceNotesGroupLinkBefore (
   const S_msrChordGraceNotesGroupLink&
           chordChordGraceNotesGroupLinkBefore)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceGraceNotes ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceGraceNotes ()) {
 		std::stringstream ss;
 
     ss <<
@@ -473,8 +474,8 @@ void msrChord::setChordGraceNotesGroupLinkAfter (
   const S_msrChordGraceNotesGroupLink&
           chordChordGraceNotesGroupLinkAfter)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceGraceNotes ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceGraceNotes ()) {
 		std::stringstream ss;
 
     ss <<
@@ -500,8 +501,8 @@ void msrChord::setMeasureElementMeasurePosition (
   const Rational&     measurePosition,
   const std::string&  context)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMeasurePositions ()) {
     S_msrMeasure upLinkToMeasure;
 
     getMeasureElementUpLinkToMeasure (
@@ -546,8 +547,8 @@ void msrChord::setChordMembersMeasurePosition (
   const S_msrMeasure& measure,
   const Rational&     measurePosition)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMeasurePositions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -603,8 +604,8 @@ void msrChord::addFirstNoteToChord (
   const S_msrNote&  note,
   const S_msrVoice& voice)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceChords ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceChords ()) {
 		std::stringstream ss;
 
     ss <<
@@ -666,8 +667,8 @@ void msrChord::addAnotherNoteToChord (
   const S_msrNote&  note,
   const S_msrVoice& voice)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceChords ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceChords ()) {
 		std::stringstream ss;
 
     ss <<
@@ -684,9 +685,9 @@ void msrChord::addAnotherNoteToChord (
   }
 #endif
 
-//   gLogStream << "++++++++++++++++++++++++++++++++++++++++++++++++++++++" << std::endl;
-//   print (gLogStream); // JMI v0.9.66
-//   gLogStream << "++++++++++++++++++++++++++++++++++++++++++++++++++++++" << std::endl;
+//   gLog << "++++++++++++++++++++++++++++++++++++++++++++++++++++++" << std::endl;
+//   print (gLog); // JMI v0.9.66
+//   gLog << "++++++++++++++++++++++++++++++++++++++++++++++++++++++" << std::endl;
 
   // append note to chord notes vector
   fChordNotesVector.push_back (note);
@@ -720,7 +721,7 @@ S_msrNote msrChord::fetchChordFirstNonGraceNote () const
 
   else {
     msrInternalError (
-      gGlobalCurrentServiceRunData->getInputSourceName (),
+      gServiceRunData->getInputSourceName (),
       fInputLineNumber,
       __FILE__, __LINE__,
       "cannot access the first note of an empty chord");
@@ -732,8 +733,8 @@ S_msrNote msrChord::fetchChordFirstNonGraceNote () const
 void msrChord::appendDalSegnoToChord (
   const S_msrDalSegno& dalSegno)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceDalSegnos ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceDalSegnos ()) {
 		std::stringstream ss;
 
     ss <<
@@ -766,8 +767,8 @@ void msrChord::appendArticulationToChord (
       return;
   } // for
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceArticulations ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceArticulations ()) {
 		std::stringstream ss;
 
     ss <<
@@ -799,8 +800,8 @@ void msrChord::appendSpannerToChord (
       return;
   } // for
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceSpanners ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceSpanners ()) {
 		std::stringstream ss;
 
     ss <<
@@ -823,8 +824,8 @@ void msrChord::appendSpannerToChord (
 void msrChord::setChordSingleTremolo (
   const S_msrSingleTremolo& trem)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceTremolos ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceTremolos ()) {
 		std::stringstream ss;
 
     ss <<
@@ -861,8 +862,8 @@ void msrChord::appendTechnicalToChord (
         return;
   } // for
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceChords ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceChords ()) {
 		std::stringstream ss;
 
     ss <<
@@ -899,8 +900,8 @@ void msrChord::appendTechnicalWithIntegerToChord (
         return;
   } // for
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceChords ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceChords ()) {
 		std::stringstream ss;
 
     ss <<
@@ -937,8 +938,8 @@ void msrChord::appendTechnicalWithFloatToChord (
         return;
   } // for
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceChords ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceChords ()) {
 		std::stringstream ss;
 
     ss <<
@@ -975,8 +976,8 @@ void msrChord::appendTechnicalWithStringToChord (
         return;
   } // for
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceChords ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceChords ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1008,8 +1009,8 @@ void msrChord::appendOrnamentToChord (
         return;
   } // for
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceChords ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceChords ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1041,8 +1042,8 @@ void msrChord::appendGlissandoToChord (
       return;
   } // for
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceChords ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceChords ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1078,8 +1079,8 @@ void msrChord::appendSlideToChord (
         return;
   } // for
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceChords ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceChords ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1100,8 +1101,8 @@ void msrChord::appendSlideToChord (
 void msrChord::appendChordSlurLinkToChord (
   const S_msrChordSlurLink& chordSlurLink)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceSlurs ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceSlurs ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1121,8 +1122,8 @@ void msrChord::appendChordSlurLinkToChord (
 void msrChord::appendStemToChord (
   const S_msrStem& stem)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceStems ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceStems ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1154,7 +1155,7 @@ void msrChord::appendStemToChord (
 
 //      msrInternalError ( // not internal actually JMI ???
       msrInternalWarning ( // not internal actually JMI ???
-        gGlobalCurrentServiceRunData->getInputSourceName (),
+        gServiceRunData->getInputSourceName (),
         fInputLineNumber,
   //      __FILE__, __LINE__,
         ss.str ());
@@ -1168,8 +1169,8 @@ void msrChord::appendStemToChord (
 /* JMI
 void msrChord::appendBeamToChord (const S_msrBeam& beam)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceBeams ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceBeams ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1191,8 +1192,8 @@ void msrChord::appendBeamToChord (const S_msrBeam& beam)
 void msrChord::appendChordBeamLinkToChord (
   const S_msrChordBeamLink& chordBeamLink)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceBeams ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceBeams ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1212,8 +1213,8 @@ void msrChord::appendChordBeamLinkToChord (
 void msrChord::finalizeChord (
   int inputLineNumber)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceChords ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceChords ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1233,6 +1234,7 @@ void msrChord::finalizeChord (
 #endif
 
   // we can now set the measure positions for all the chord members JMI v0.9.66
+  if (false) // JMI v0.9.67 MERDUM
   setChordMembersMeasurePosition (
     fChordUpLinkToMeasure,
     fMeasureElementMeasurePosition);
@@ -1240,8 +1242,9 @@ void msrChord::finalizeChord (
 
 void msrChord::acceptIn (basevisitor* v)
 {
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "% ==> msrChord::acceptIn ()" <<
@@ -1251,12 +1254,14 @@ void msrChord::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
+#endif
 
   if (visitor<S_msrChord>*
     p =
       dynamic_cast<visitor<S_msrChord>*> (v)) {
         S_msrChord elem = this;
 
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
@@ -1268,14 +1273,16 @@ void msrChord::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
+#endif
         p->visitStart (elem);
   }
 }
 
 void msrChord::acceptOut (basevisitor* v)
 {
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "% ==> msrChord::acceptOut ()" <<
@@ -1285,12 +1292,14 @@ void msrChord::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
+#endif
 
   if (visitor<S_msrChord>*
     p =
       dynamic_cast<visitor<S_msrChord>*> (v)) {
         S_msrChord elem = this;
 
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
@@ -1302,6 +1311,7 @@ void msrChord::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
+#endif
         p->visitEnd (elem);
   }
 }
@@ -1321,13 +1331,13 @@ void msrChord::browseData (basevisitor* v)
           getInhibitChordsInGraceNotesGroupsBrowsing ();
 
     if (inhibitChordsInGraceNotesGroupsBrowsing) {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
       if (
         gGlobalMsrOahGroup->getTraceMsrVisitors ()
           ||
-        gGlobalTracingOahGroup->getTraceNotes ()
+        gGlobalTraceOahGroup->getTraceNotes ()
           ||
-        gGlobalTracingOahGroup->getTraceGraceNotes ()
+        gGlobalTraceOahGroup->getTraceGraceNotes ()
       ) {
         std::stringstream ss;
 
@@ -1620,8 +1630,8 @@ void msrChord::browseData (basevisitor* v)
 void msrChord::applyTupletMemberDisplayFactorToChordMembers (
   int actualNotes, int normalNotes)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceTuplets ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceTuplets ()) {
 		std::stringstream ss;
 
     ss <<
@@ -2102,12 +2112,12 @@ void msrChord::printFull (std::ostream& os) const
     }
   }
 */
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   // print the beam links if any
   size_t chordBeamLinksSize = fChordBeamLinks.size ();
 
   if (
-    gGlobalTracingOahGroup->getTraceBeams ()
+    gGlobalTraceOahGroup->getTraceBeams ()
       ||
     chordBeamLinksSize
       ||
@@ -2456,12 +2466,12 @@ void msrChord::printFull (std::ostream& os) const
     os << std::endl;
   }
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   // print the slur links if any
   size_t chordSlurLinksSize = fChordSlurLinks.size ();
 
   if (
-    gGlobalTracingOahGroup->getTraceSlurs ()
+    gGlobalTraceOahGroup->getTraceSlurs ()
       ||
     chordSlurLinksSize
       ||
@@ -2884,11 +2894,11 @@ void msrChord::print (std::ostream& os) const
   }
 */
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   // print the beam links if any
   size_t chordBeamLinksSize = fChordBeamLinks.size ();
 
-  if (gGlobalTracingOahGroup->getTraceBeams () || chordBeamLinksSize) {
+  if (gGlobalTraceOahGroup->getTraceBeams () || chordBeamLinksSize) {
     os <<
       std::setw (fieldWidth) <<
       "fChordBeamLinks";
@@ -2961,11 +2971,11 @@ void msrChord::print (std::ostream& os) const
     }
   }
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   // print the slur links if any
   size_t chordSlurLinksSize = fChordSlurLinks.size ();
 
-  if (gGlobalTracingOahGroup->getTraceSlurs () || chordSlurLinksSize) {
+  if (gGlobalTraceOahGroup->getTraceSlurs () || chordSlurLinksSize) {
     os <<
       std::setw (fieldWidth) <<
       "fChordSlurLinks";
@@ -3386,8 +3396,8 @@ msrChordBeamLink::~msrChordBeamLink ()
 
 S_msrChordBeamLink msrChordBeamLink::createBeamNewbornClone ()
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceGraceNotes ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceGraceNotes ()) {
 		std::stringstream ss;
 
     ss <<
@@ -3424,8 +3434,9 @@ S_msrChordBeamLink msrChordBeamLink::createBeamNewbornClone ()
 
 void msrChordBeamLink::acceptIn (basevisitor* v)
 {
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "% ==> msrChordBeamLink::acceptIn ()" <<
@@ -3435,12 +3446,14 @@ void msrChordBeamLink::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
+#endif
 
   if (visitor<S_msrChordBeamLink>*
     p =
       dynamic_cast<visitor<S_msrChordBeamLink>*> (v)) {
         S_msrChordBeamLink elem = this;
 
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
@@ -3452,14 +3465,16 @@ void msrChordBeamLink::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
+#endif
         p->visitStart (elem);
   }
 }
 
 void msrChordBeamLink::acceptOut (basevisitor* v)
 {
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "% ==> msrChordBeamLink::acceptOut ()" <<
@@ -3469,12 +3484,14 @@ void msrChordBeamLink::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
+#endif
 
   if (visitor<S_msrChordBeamLink>*
     p =
       dynamic_cast<visitor<S_msrChordBeamLink>*> (v)) {
         S_msrChordBeamLink elem = this;
 
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
@@ -3486,6 +3503,7 @@ void msrChordBeamLink::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
+#endif
         p->visitEnd (elem);
   }
 }
@@ -3640,8 +3658,8 @@ msrChordSlurLink::~msrChordSlurLink ()
 
 S_msrChordSlurLink msrChordSlurLink::createSlurNewbornClone ()
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceGraceNotes ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceGraceNotes ()) {
 		std::stringstream ss;
 
     ss <<
@@ -3678,8 +3696,9 @@ S_msrChordSlurLink msrChordSlurLink::createSlurNewbornClone ()
 
 void msrChordSlurLink::acceptIn (basevisitor* v)
 {
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "% ==> msrChordSlurLink::acceptIn ()" <<
@@ -3689,12 +3708,14 @@ void msrChordSlurLink::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
+#endif
 
   if (visitor<S_msrChordSlurLink>*
     p =
       dynamic_cast<visitor<S_msrChordSlurLink>*> (v)) {
         S_msrChordSlurLink elem = this;
 
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
@@ -3706,14 +3727,16 @@ void msrChordSlurLink::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
+#endif
         p->visitStart (elem);
   }
 }
 
 void msrChordSlurLink::acceptOut (basevisitor* v)
 {
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "% ==> msrChordSlurLink::acceptOut ()" <<
@@ -3723,12 +3746,14 @@ void msrChordSlurLink::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
+#endif
 
   if (visitor<S_msrChordSlurLink>*
     p =
       dynamic_cast<visitor<S_msrChordSlurLink>*> (v)) {
         S_msrChordSlurLink elem = this;
 
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
@@ -3740,6 +3765,7 @@ void msrChordSlurLink::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
+#endif
         p->visitEnd (elem);
   }
 }
@@ -3866,8 +3892,8 @@ msrChordGraceNotesGroupLink::~msrChordGraceNotesGroupLink ()
 
 S_msrChordGraceNotesGroupLink msrChordGraceNotesGroupLink::createChordGraceNotesGroupLinkNewbornClone ()
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceGraceNotes ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceGraceNotes ()) {
 		std::stringstream ss;
 
     ss <<
@@ -3904,8 +3930,9 @@ S_msrChordGraceNotesGroupLink msrChordGraceNotesGroupLink::createChordGraceNotes
 
 void msrChordGraceNotesGroupLink::acceptIn (basevisitor* v)
 {
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "% ==> msrChordGraceNotesGroupLink::acceptIn ()" <<
@@ -3915,12 +3942,14 @@ void msrChordGraceNotesGroupLink::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
+#endif
 
   if (visitor<S_msrChordGraceNotesGroupLink>*
     p =
       dynamic_cast<visitor<S_msrChordGraceNotesGroupLink>*> (v)) {
         S_msrChordGraceNotesGroupLink elem = this;
 
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
@@ -3932,12 +3961,14 @@ void msrChordGraceNotesGroupLink::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
+#endif
         p->visitStart (elem);
   }
 }
 
 void msrChordGraceNotesGroupLink::acceptOut (basevisitor* v)
 {
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
@@ -3949,12 +3980,14 @@ void msrChordGraceNotesGroupLink::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
+#endif
 
   if (visitor<S_msrChordGraceNotesGroupLink>*
     p =
       dynamic_cast<visitor<S_msrChordGraceNotesGroupLink>*> (v)) {
         S_msrChordGraceNotesGroupLink elem = this;
 
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
@@ -3966,6 +3999,7 @@ void msrChordGraceNotesGroupLink::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
+#endif
         p->visitEnd (elem);
   }
 }

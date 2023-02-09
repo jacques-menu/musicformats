@@ -284,7 +284,7 @@ class EXP bsrOahGroup : public oahGroup
     // trace
     // --------------------------------------
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
     // BSR
     void                  setTraceBsr ()
                               { fTraceBsr = true; }
@@ -353,8 +353,8 @@ class EXP bsrOahGroup : public oahGroup
 
     void                  initializeBsrLanguagesOptions ();
 
-#ifdef MF_TRACING_IS_ENABLED
-    void                  initializeBsrtracingOah ();
+#ifdef MF_TRACE_IS_ENABLED
+    void                  initializeBsrTraceOah ();
 #endif
 
   public:
@@ -396,7 +396,7 @@ class EXP bsrOahGroup : public oahGroup
     // trace
     // --------------------------------------
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
 
     // BSR
     Bool                  fTraceBsr;

@@ -34,6 +34,8 @@
 
 #include "mfslInterpreterRegularHandler.h"
 
+#include "waeHandlers.h"
+
 
 namespace MusicFormats
 {
@@ -74,7 +76,7 @@ mfslInterpreterRegularHandler::mfslInterpreterRegularHandler (
 
 /* JMI
   // print the options handler initial state
-  gLogStream <<
+  gLog <<
     "mfslInterpreterRegularHandler \"" <<
     fHandlerHeader <<
     "\" has been initialized as:" <<
@@ -82,16 +84,16 @@ mfslInterpreterRegularHandler::mfslInterpreterRegularHandler (
 
   ++gIndenter;
 
-  gLogStream <<
+  gLog <<
     "===> printHelp():" <<
     std::endl;
-  this->printHelp (gOutputStream); // JMI
+  this->printHelp (gOutput); // JMI
 
   --gIndenter;
 */
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
     // JMI ???
   }
 #endif
@@ -102,8 +104,8 @@ mfslInterpreterRegularHandler::~mfslInterpreterRegularHandler ()
 
 void mfslInterpreterRegularHandler::createRegularHandlerGroups ()
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<
@@ -129,8 +131,8 @@ void mfslInterpreterRegularHandler::createRegularHandlerGroups ()
 
   createWarningAndErrorsRegularGroup ();
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<
@@ -338,7 +340,7 @@ void mfslInterpreterRegularHandler::createOahRegularGroup ()
   registerAtomInRegularSubgroup (K_INSIDER_OPTION_LONG_NAME, subGroup);
 //  registerAtomInRegularSubgroup (K_REGULAR_OPTION_LONG_NAME, subGroup);
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   registerAtomInRegularSubgroup (K_TRACE_EARLY_OPTIONS_OPTION_LONG_NAME, subGroup);
 #endif
 
@@ -361,7 +363,7 @@ void mfslInterpreterRegularHandler::createOahRegularGroup ()
   registerAtomInRegularSubgroup ("show-options-and-arguments", subGroup);
 
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   registerAtomInRegularSubgroup (K_TRACE_OAH_OPTION_LONG_NAME, subGroup);
   registerAtomInRegularSubgroup (K_TRACE_OAH_DETAILS_OPTION_LONG_NAME, subGroup);
 
@@ -409,8 +411,8 @@ void mfslInterpreterRegularHandler::createWarningAndErrorsRegularGroup ()
 //______________________________________________________________________________
 void mfslInterpreterRegularHandler::checkOptionsAndArguments () const
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<

@@ -58,8 +58,8 @@ S_mfcLibraryComponent createLibraryComponent ()
   // protect library against multiple initializations
   if (! pLibraryComponent) {
 
-#ifdef MF_TRACING_IS_ENABLED
-    if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+    if (gEarlyOptions.getEarlyTraceOah ()) {
 	  	std::stringstream ss;
 
       ss <<
@@ -235,7 +235,7 @@ S_mfcLibraryComponent createLibraryComponent ()
           mfcVersionNumber::createFromString ("0.9.54"),
           "Novermber 6, 2021",
           std::list<std::string> {
-            "Replaced std::cout and std::cerr by gOutputStream and gLogStream respectively in the CLI samples",
+            "Replaced std::cout and std::cerr by gOutput and gLog respectively in the CLI samples",
             "Finalized components numbering (MFC)"
           }
       ));
@@ -353,23 +353,24 @@ S_mfcLibraryComponent createLibraryComponent ()
           "January 31, 2023",
           std::list<std::string> {
             "Finalized the 'std::string existing*()' functions",
-            "The code base has had many internal evolutions, in particular:"
-            "  - there have been names changes;"
-            "  - some files have been renamed and moved around;"
-            "  - the various representations have been refined;"
-            "  - the OAH (Options And Help) architecture and early options handling have been finalized;"
+            "The code base has had many internal evolutions, in particular:",
+            "  - there have been names changes;",
+            "  - some files have been renamed and moved around;",
+            "  - the various representations have been refined;",
+            "  - the OAH (Options And Help) architecture and early options handling have been finalized;",
             "  - the way large data are passed as parameters to functions has been changed wherever relevant for more speed."
           }
       ));
-
 
     pLibraryComponent->
       appendVersionDescrToComponent (
         mfcVersionDescr::create (
           mfcVersionNumber::createFromString ("0.9.67"),
-          "February 5, 2023",
+          "February 6, 2023",
           std::list<std::string> {
-            "Switched to using gWaeHandler->waeTrace() instead of gLogStream for trace messages"
+            "Switched to using gWaeHandler->waeTrace() instead of gLog for trace messages",
+            "Moved language files to the new 'src/languages' folder",
+            "Made global variables private with set()/get() methods"
           }
       ));
   }

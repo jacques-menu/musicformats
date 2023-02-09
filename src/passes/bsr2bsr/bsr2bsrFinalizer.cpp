@@ -12,13 +12,14 @@
 #include "mfConstants.h"
 
 #include "oahOah.h"
-#include "oahEarlyOptions.h"
 
 #include "bsrOah.h"
 
 #include "bsr2bsrFinalizer.h"
 
 #include "bsrBrowsers.h"
+
+#include "waeHandlers.h"
 
 
 namespace MusicFormats
@@ -54,7 +55,7 @@ void bsr2bsrFinalizer::translateBsrToFinalizedBsr ()
 //________________________________________________________________________
 void bsr2bsrFinalizer::visitStart (S_bsrScore& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
 		std::stringstream ss;
 
@@ -79,7 +80,7 @@ void bsr2bsrFinalizer::visitStart (S_bsrScore& elt)
 
 void bsr2bsrFinalizer::visitEnd (S_bsrScore& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
 		std::stringstream ss;
 
@@ -99,7 +100,7 @@ void bsr2bsrFinalizer::visitEnd (S_bsrScore& elt)
 //________________________________________________________________________
 void bsr2bsrFinalizer::visitStart (S_bsrSpaces& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
 		std::stringstream ss;
 
@@ -122,7 +123,7 @@ void bsr2bsrFinalizer::visitStart (S_bsrSpaces& elt)
 
 void bsr2bsrFinalizer::visitEnd (S_bsrSpaces& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
 		std::stringstream ss;
 
@@ -142,7 +143,7 @@ void bsr2bsrFinalizer::visitEnd (S_bsrSpaces& elt)
 //________________________________________________________________________
 void bsr2bsrFinalizer::visitStart (S_bsrBarLine& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
 		std::stringstream ss;
 
@@ -165,7 +166,7 @@ void bsr2bsrFinalizer::visitStart (S_bsrBarLine& elt)
 //________________________________________________________________________
 void bsr2bsrFinalizer::visitStart (S_bsrTranscriptionNotes& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
 		std::stringstream ss;
 
@@ -184,7 +185,7 @@ void bsr2bsrFinalizer::visitStart (S_bsrTranscriptionNotes& elt)
 
 void bsr2bsrFinalizer::visitEnd (S_bsrTranscriptionNotes& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
 		std::stringstream ss;
 
@@ -204,7 +205,7 @@ void bsr2bsrFinalizer::visitEnd (S_bsrTranscriptionNotes& elt)
 //________________________________________________________________________
 void bsr2bsrFinalizer::visitStart (S_bsrTranscriptionNotesElement& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
 		std::stringstream ss;
 
@@ -228,7 +229,7 @@ void bsr2bsrFinalizer::visitStart (S_bsrTranscriptionNotesElement& elt)
 
 void bsr2bsrFinalizer::visitEnd (S_bsrTranscriptionNotesElement& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
 		std::stringstream ss;
 
@@ -248,7 +249,7 @@ void bsr2bsrFinalizer::visitEnd (S_bsrTranscriptionNotesElement& elt)
 //________________________________________________________________________
 void bsr2bsrFinalizer::visitStart (S_bsrPage& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
 		std::stringstream ss;
 
@@ -274,7 +275,7 @@ void bsr2bsrFinalizer::visitStart (S_bsrPage& elt)
 
 void bsr2bsrFinalizer::visitEnd (S_bsrPage& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
 		std::stringstream ss;
 
@@ -296,7 +297,7 @@ void bsr2bsrFinalizer::visitEnd (S_bsrPage& elt)
 //________________________________________________________________________
 void bsr2bsrFinalizer::visitStart (S_bsrPageHeading& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
 		std::stringstream ss;
 
@@ -324,7 +325,7 @@ void bsr2bsrFinalizer::visitStart (S_bsrPageHeading& elt)
 
 void bsr2bsrFinalizer::visitEnd (S_bsrPageHeading& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
 		std::stringstream ss;
 
@@ -348,7 +349,7 @@ void bsr2bsrFinalizer::visitEnd (S_bsrPageHeading& elt)
 //________________________________________________________________________
 void bsr2bsrFinalizer::visitStart (S_bsrMusicHeading& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
 		std::stringstream ss;
 
@@ -376,7 +377,7 @@ void bsr2bsrFinalizer::visitStart (S_bsrMusicHeading& elt)
 
 void bsr2bsrFinalizer::visitEnd (S_bsrMusicHeading& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
 		std::stringstream ss;
 
@@ -400,7 +401,7 @@ void bsr2bsrFinalizer::visitEnd (S_bsrMusicHeading& elt)
 //________________________________________________________________________
 void bsr2bsrFinalizer::visitStart (S_bsrFootNotes& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
 		std::stringstream ss;
 
@@ -428,7 +429,7 @@ void bsr2bsrFinalizer::visitStart (S_bsrFootNotes& elt)
 
 void bsr2bsrFinalizer::visitEnd (S_bsrFootNotes& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
 		std::stringstream ss;
 
@@ -452,7 +453,7 @@ void bsr2bsrFinalizer::visitEnd (S_bsrFootNotes& elt)
 //________________________________________________________________________
 void bsr2bsrFinalizer::visitStart (S_bsrLine& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
 		std::stringstream ss;
 
@@ -478,7 +479,7 @@ void bsr2bsrFinalizer::visitStart (S_bsrLine& elt)
 
 void bsr2bsrFinalizer::visitEnd (S_bsrLine& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
 		std::stringstream ss;
 
@@ -500,7 +501,7 @@ void bsr2bsrFinalizer::visitEnd (S_bsrLine& elt)
 //________________________________________________________________________
 void bsr2bsrFinalizer::visitStart (S_bsrLineContents& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
 		std::stringstream ss;
 
@@ -528,7 +529,7 @@ void bsr2bsrFinalizer::visitStart (S_bsrLineContents& elt)
 
 void bsr2bsrFinalizer::visitEnd (S_bsrLineContents& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
 		std::stringstream ss;
 
@@ -550,7 +551,7 @@ void bsr2bsrFinalizer::visitEnd (S_bsrLineContents& elt)
 //________________________________________________________________________
 void bsr2bsrFinalizer::visitStart (S_bsrMeasure& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
 		std::stringstream ss;
 
@@ -577,7 +578,7 @@ void bsr2bsrFinalizer::visitStart (S_bsrMeasure& elt)
 
 void bsr2bsrFinalizer::visitEnd (S_bsrMeasure& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
 		std::stringstream ss;
 
@@ -599,7 +600,7 @@ void bsr2bsrFinalizer::visitEnd (S_bsrMeasure& elt)
 //________________________________________________________________________
 void bsr2bsrFinalizer::visitStart (S_bsrNumber& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
 		std::stringstream ss;
 
@@ -623,7 +624,7 @@ void bsr2bsrFinalizer::visitStart (S_bsrNumber& elt)
 
 void bsr2bsrFinalizer::visitEnd (S_bsrNumber& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
 		std::stringstream ss;
 
@@ -645,7 +646,7 @@ void bsr2bsrFinalizer::visitEnd (S_bsrNumber& elt)
 //________________________________________________________________________
 void bsr2bsrFinalizer::visitStart (S_bsrWords& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
 		std::stringstream ss;
 
@@ -669,7 +670,7 @@ void bsr2bsrFinalizer::visitStart (S_bsrWords& elt)
 
 void bsr2bsrFinalizer::visitEnd (S_bsrWords& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
 		std::stringstream ss;
 
@@ -691,7 +692,7 @@ void bsr2bsrFinalizer::visitEnd (S_bsrWords& elt)
 //________________________________________________________________________
 void bsr2bsrFinalizer::visitStart (S_bsrClef& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
 		std::stringstream ss;
 
@@ -715,7 +716,7 @@ void bsr2bsrFinalizer::visitStart (S_bsrClef& elt)
 
 void bsr2bsrFinalizer::visitEnd (S_bsrClef& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
 		std::stringstream ss;
 
@@ -737,7 +738,7 @@ void bsr2bsrFinalizer::visitEnd (S_bsrClef& elt)
 //________________________________________________________________________
 void bsr2bsrFinalizer::visitStart (S_bsrKey& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
 		std::stringstream ss;
 
@@ -767,7 +768,7 @@ void bsr2bsrFinalizer::visitStart (S_bsrKey& elt)
 
 void bsr2bsrFinalizer::visitEnd (S_bsrKey& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
 		std::stringstream ss;
 
@@ -789,7 +790,7 @@ void bsr2bsrFinalizer::visitEnd (S_bsrKey& elt)
 //________________________________________________________________________
 void bsr2bsrFinalizer::visitStart (S_bsrTimeSignature& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
 		std::stringstream ss;
 
@@ -818,7 +819,7 @@ void bsr2bsrFinalizer::visitStart (S_bsrTimeSignature& elt)
 
 void bsr2bsrFinalizer::visitEnd (S_bsrTimeSignature& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
 		std::stringstream ss;
 
@@ -839,7 +840,7 @@ void bsr2bsrFinalizer::visitEnd (S_bsrTimeSignature& elt)
 //________________________________________________________________________
 void bsr2bsrFinalizer::visitStart (S_bsrTempo& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
 		std::stringstream ss;
 
@@ -870,7 +871,7 @@ void bsr2bsrFinalizer::visitStart (S_bsrTempo& elt)
 
 void bsr2bsrFinalizer::visitEnd (S_bsrTempo& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
 		std::stringstream ss;
 
@@ -891,7 +892,7 @@ void bsr2bsrFinalizer::visitEnd (S_bsrTempo& elt)
 //________________________________________________________________________
 void bsr2bsrFinalizer::visitStart (S_bsrNote& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
 		std::stringstream ss;
 
@@ -914,7 +915,7 @@ void bsr2bsrFinalizer::visitStart (S_bsrNote& elt)
 
 void bsr2bsrFinalizer::visitEnd (S_bsrNote& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
 		std::stringstream ss;
 

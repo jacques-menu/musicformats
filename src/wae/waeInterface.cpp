@@ -35,7 +35,7 @@ void waeWarning (
   int                inputLineNumber,
   const std::string& message)
 {
-  gGlobalWaeHandler->
+  gWaeHandler->
     waeWarning (
       context,
       inputSourceName,
@@ -49,7 +49,7 @@ void waeInternalWarning (
   int                inputLineNumber,
   const std::string& message)
 {
-  gGlobalWaeHandler->
+  gWaeHandler->
     waeInternalWarning (
       context,
       inputSourceName,
@@ -64,7 +64,7 @@ void waeErrorWithoutException (
   int                sourceCodeLineNumber,
   const std::string& message)
 {
-  gGlobalWaeHandler->
+  gWaeHandler->
     waeErrorWithoutException (
       context,
       sourceCodeFileName,
@@ -80,7 +80,7 @@ void waeErrorWithoutException (
   int                sourceCodeLineNumber,
   const std::string& message)
 {
-  gGlobalWaeHandler->
+  gWaeHandler->
     waeErrorWithoutException (
       context,
       inputSourceName,
@@ -207,7 +207,7 @@ void waeInternalErrorWithException (
 //______________________________________________________________________________
 void displayWarningsAndErrorsInputLineNumbers ()
 {
-  gGlobalWaeHandler->
+  gWaeHandler->
     displayWarningsAndErrorsInputLineNumbers ();
 }
 

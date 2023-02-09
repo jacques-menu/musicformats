@@ -22,9 +22,10 @@
 #include "msrSegmentElements.h"
 
 #include "oahOah.h"
-#include "oahEarlyOptions.h"
 
 #include "msrOah.h"
+
+#include "waeHandlers.h"
 
 
 namespace MusicFormats
@@ -59,8 +60,8 @@ void msrSegmentElement::setSegmentElementSoundingWholeNotes (
   const Rational& wholeNotes,
   const std::string&   context)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceWholeNotes ()) {
 		std::stringstream ss;
 
     ss <<
@@ -93,7 +94,7 @@ void msrSegmentElement::setSegmentElementSoundingWholeNotes (
 
 void msrSegmentElement::acceptIn (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
 		std::stringstream ss;
 
@@ -112,7 +113,7 @@ void msrSegmentElement::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_msrSegmentElement>*> (v)) {
         S_msrSegmentElement elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
@@ -131,7 +132,7 @@ void msrSegmentElement::acceptIn (basevisitor* v)
 
 void msrSegmentElement::acceptOut (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
 		std::stringstream ss;
 
@@ -150,7 +151,7 @@ void msrSegmentElement::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_msrSegmentElement>*> (v)) {
         S_msrSegmentElement elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 

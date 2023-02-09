@@ -32,9 +32,10 @@
 #include "msrMoments.h"
 
 #include "oahOah.h"
-#include "oahEarlyOptions.h"
 
 #include "msrOah.h"
+
+#include "waeHandlers.h"
 
 
 namespace MusicFormats
@@ -71,8 +72,8 @@ void msrMeasureElement::doSetMeasureElementSoundingWholeNotes (
   const Rational&    wholeNotes,
   const std::string& context)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceWholeNotes ()) {
     ++gIndenter;
 
     S_msrMeasure upLinkToMeasure;
@@ -80,7 +81,7 @@ void msrMeasureElement::doSetMeasureElementSoundingWholeNotes (
     getMeasureElementUpLinkToMeasure (
       upLinkToMeasure);
 
-    gLogStream <<
+    gLog <<
       "==> Setting measure element sounding whole notes of " <<
       asString () <<
       " to 'WHOLE_NOTES " << wholeNotes << // JMI v0.9.66
@@ -111,8 +112,8 @@ void msrMeasureElement::setMeasureElementMeasurePosition (
   const Rational&     measurePosition,
   const std::string&  context)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMeasurePositions ()) {
     S_msrMeasure upLinkToMeasure;
 
     getMeasureElementUpLinkToMeasure (
@@ -195,8 +196,8 @@ void msrMeasureElement::setMeasureElementVoicePosition (
   const Rational&    voicePosition,
   const std::string& context)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceVoicePositions ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceVoicePositions ()) {
     S_msrMeasure upLinkToMeasure;
 
     getMeasureElementUpLinkToMeasure (
@@ -230,8 +231,8 @@ void msrMeasureElement::setMeasureElementVoicePosition (
 #endif
 
   // set measure element voice position
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceVoicePositions ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceVoicePositions ()) {
     S_msrMeasure upLinkToMeasure;
 
     getMeasureElementUpLinkToMeasure (
@@ -263,9 +264,9 @@ void msrMeasureElement::setMeasureElementVoicePosition (
 //   const msrMoment& measureMoment,
 //   const std::string&    context)
 // {
-// #ifdef MF_TRACING_IS_ENABLED
-//   if (gGlobalTracingOahGroup->getTraceMeasureMoments ()) {
-//     gLogStream <<
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gGlobalTraceOahGroup->getTraceMeasureMoments ()) {
+//     gLog <<
 //       "Setting measure element measure moment of " <<
 //       asString () <<
 //       " to '" << measureMoment <<
@@ -290,9 +291,9 @@ void msrMeasureElement::setMeasureElementVoicePosition (
 //   const msrMoment& voiceMoment,
 //   const std::string&    context)
 // {
-// #ifdef MF_TRACING_IS_ENABLED
-//   if (gGlobalTracingOahGroup->getTraceMeasureMoments ()) {
-//     gLogStream <<
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gGlobalTraceOahGroup->getTraceMeasureMoments ()) {
+//     gLog <<
 //       "Setting measure element voice moment of " <<
 //       asString () <<
 //       " to '" << voiceMoment <<
@@ -318,7 +319,7 @@ void msrMeasureElement::setMeasureElementVoicePosition (
 
 void msrMeasureElement::acceptIn (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
 		std::stringstream ss;
 
@@ -337,7 +338,7 @@ void msrMeasureElement::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_msrMeasureElement>*> (v)) {
         S_msrMeasureElement elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
@@ -356,7 +357,7 @@ void msrMeasureElement::acceptIn (basevisitor* v)
 
 void msrMeasureElement::acceptOut (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
 		std::stringstream ss;
 
@@ -375,7 +376,7 @@ void msrMeasureElement::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_msrMeasureElement>*> (v)) {
         S_msrMeasureElement elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 

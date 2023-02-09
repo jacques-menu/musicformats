@@ -19,7 +19,6 @@
 #include "xmlfile.h"
 #include "xmlreader.h"
 
-
 #include "musicxml2mxsrWae.h"
 
 #include "mfStaticSettings.h"
@@ -39,6 +38,8 @@
 
 #include "oahAtomsCollection.h"
 
+#include "waeHandlers.h"
+
 
 namespace MusicFormats
 {
@@ -53,13 +54,13 @@ void displayXMLDeclaration (
 
   const int fieldWidth = 14;
 
-  gLogStream <<
+  gLog <<
     "XML Declaration:" <<
     std::endl;
 
   ++gIndenter;
 
-  gLogStream << std::left <<
+  gLog << std::left <<
     std::setw (fieldWidth) <<
     "xmlVersion" << " = \"" << xmlVersion << "\"" <<
     std::endl <<
@@ -79,7 +80,7 @@ void displayMusicXMLDocumentType (
 {
   const int fieldWidth = 16;
 
-  gLogStream <<
+  gLog <<
     "Document Type:" <<
     std::endl;
 
@@ -90,7 +91,7 @@ void displayMusicXMLDocumentType (
   std::string xmlPubLitteral  = documentType->getPubLitteral ();
   std::string xmlSysLitteral  = documentType->getSysLitteral ();
 
-  gLogStream << std::left <<
+  gLog << std::left <<
     std::setw (fieldWidth) <<
     "xmlStartElement" << " = \"" << xmlStartElement << "\"" <<
     std::endl <<
@@ -113,7 +114,7 @@ std::string uncompressMXLFile (
 {
   std::string fileBaseName = mfBaseName (mxlFileName);
 
-  gLogStream <<
+  gLog <<
     "The compressed file name is '" <<
     mxlFileName <<
     "'" <<
@@ -135,7 +136,7 @@ std::string uncompressMXLFile (
     std::string listContentsShellCommand = s1.str ();
 
     if (true) { // JMI
-      gLogStream <<
+      gLog <<
         "Listing the contents of the compressed file '" <<
         mxlFileName <<
         "' with command:" <<
@@ -143,7 +144,7 @@ std::string uncompressMXLFile (
 
       ++gIndenter;
 
-      gLogStream <<
+      gLog <<
         listContentsShellCommand <<
         std::endl << std::endl;
 
@@ -165,7 +166,7 @@ std::string uncompressMXLFile (
         "' with 'popen ()'";
 
       musicxml2mxsrInternalError (
-        gGlobalCurrentServiceRunData->getInputSourceName (),
+        gServiceRunData->getInputSourceName (),
         0, // inputLineNumber
         __FILE__, __LINE__,
         ss.str ());
@@ -193,13 +194,13 @@ std::string uncompressMXLFile (
       // close the stream
       if (pclose (inputStream) < 0) {
         musicxml2mxsrInternalError (
-          gGlobalCurrentServiceRunData->getInputSourceName (),
+          gServiceRunData->getInputSourceName (),
           0, // inputLineNumber
           __FILE__, __LINE__,
           "Cannot close the input stream after 'popen ()'");
       }
 
-      gLogStream <<
+      gLog <<
         "The contents of the compressed file '" <<
         mxlFileName <<
         "' is:" <<
@@ -207,7 +208,7 @@ std::string uncompressMXLFile (
 
       ++gIndenter;
 
-      gLogStream <<
+      gLog <<
         contentsList <<
         std::endl;
 
@@ -223,15 +224,15 @@ std::string uncompressMXLFile (
 
         if (inputStream.eof ()) break;
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
         {
-          gLogStream <<
+          gLog <<
             "*** currentLine:" <<
             std::endl;
 
           ++gIndenter;
 
-          gLogStream <<
+          gLog <<
             currentLine <<
             std::endl;
 
@@ -269,21 +270,21 @@ std::string uncompressMXLFile (
         regex_match (currentLine, sm, e);
 
         if (sm.size ()) {
-#ifdef MF_TRACING_IS_ENABLED
-          if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) { // JMI ???
-            gLogStream <<
+#ifdef MF_TRACE_IS_ENABLED
+          if (gEarlyOptions.getEarlyTracePasses ()) { // JMI ???
+            gLog <<
               "There are " << sm.size () - 1 << " match(es) " <<
               "with std::regex '" << regularExpression <<
               "':" <<
               std::endl;
 
             for (unsigned i = 1; i < sm.size (); ++i) {
-              gLogStream <<
+              gLog <<
                 '[' << sm [i] << "] " <<
                 std::endl;
             } // for
 
-            gLogStream <<
+            gLog <<
               std::endl << std::endl;
           }
 #endif
@@ -318,7 +319,7 @@ std::string uncompressMXLFile (
                   "' and then '" << stringFromLine << "'";
 
                 musicxml2mxsrInternalError (
-                  gGlobalCurrentServiceRunData->getInputSourceName (),
+                  gServiceRunData->getInputSourceName (),
                   0, // inputLineNumber
                   __FILE__, __LINE__,
                   ss.str ());
@@ -328,7 +329,7 @@ std::string uncompressMXLFile (
                 // we've got the uncompressed file name
                 uncompressedFileName = stringFromLine;
 
-                gLogStream <<
+                gLog <<
                   "The uncompressed file name is '" <<
                   uncompressedFileName <<
                   "'" <<
@@ -352,7 +353,7 @@ std::string uncompressMXLFile (
     std::string uncompressShellCommand = s2.str ();
 
     if (true) { // JMI
-      gLogStream <<
+      gLog <<
         "Uncompressing '" <<
         mxlFileName <<
         "' into '/tmp/" <<
@@ -362,7 +363,7 @@ std::string uncompressMXLFile (
 
       ++gIndenter;
 
-      gLogStream <<
+      gLog <<
         uncompressShellCommand <<
         std::endl << std::endl;
 
@@ -384,7 +385,7 @@ std::string uncompressMXLFile (
         "' with 'popen ()'";
 
       musicxml2mxsrInternalError (
-        gGlobalCurrentServiceRunData->getInputSourceName (),
+        gServiceRunData->getInputSourceName (),
         0, // inputLineNumber
         __FILE__, __LINE__,
         ss.str ());
@@ -410,7 +411,7 @@ void checkDesiredEncoding (
         desiredEncoding;
 
       musicxml2mxsrWarning (
-        gGlobalCurrentServiceRunData->getInputSourceName (),
+        gServiceRunData->getInputSourceName (),
         1, // inputLineNumber,
         ss.str ());
     }
@@ -433,7 +434,7 @@ void checkDesiredEncoding (
         " - handling it as is";
 
       musicxml2mxsrWarning (
-        gGlobalCurrentServiceRunData->getInputSourceName (),
+        gServiceRunData->getInputSourceName (),
         1, // inputLineNumber,
         ss.str ());
     }
@@ -445,17 +446,17 @@ void checkSXMLFile (
   SXMLFile      sxmlfile,
   const std::string& context)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceEncoding ()) {
-    gLogStream <<
+    gLog <<
       std::endl <<
       "!!!!! sxmlfile contents from " <<
       context <<
       std::endl;
 
-    sxmlfile->print (gLogStream);
+    sxmlfile->print (gLog);
 
-    gLogStream <<
+    gLog <<
       std::endl; // twice ??? JMI
   }
 #endif
@@ -463,29 +464,29 @@ void checkSXMLFile (
   // get the xmlDecl
   TXMLDecl * xmlDecl = sxmlfile->getXMLDecl ();
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceEncoding ()) {
-    gLogStream <<
+    gLog <<
       std::endl <<
       "!!!!! xmlDecl contents from file:" <<
       std::endl << std::endl;
-    xmlDecl->print (gLogStream);
+    xmlDecl->print (gLog);
 
     displayXMLDeclaration (
       xmlDecl);
   }
 #endif
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   // get the docType
   TDocType * docType = sxmlfile->getDocType ();
 
   if (gGlobalMxsrOahGroup->getTraceEncoding ()) {
-    gLogStream <<
+    gLog <<
       std::endl <<
       "!!!!! docType from file:" <<
       std::endl << std::endl;
-    docType->print (gLogStream);
+    docType->print (gLog);
 
     displayMusicXMLDocumentType (
       docType);
@@ -495,7 +496,7 @@ void checkSXMLFile (
   // get the encoding type
   std::string encoding = xmlDecl->getEncoding ();
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceEncoding ()) {
 		std::stringstream ss;
 
@@ -531,8 +532,8 @@ SXMLFile createSXMLFileFromFile (
   // set the global current passID
   setGlobalCurrentPassIDKind (passIDKind);
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTracePasses ()) {
     std::string separator =
       "%--------------------------------------------------------------";
 
@@ -555,7 +556,7 @@ SXMLFile createSXMLFileFromFile (
 
   // read the input MusicXML data from the file
 #ifdef TRACE_OAH
-      if (gtracingOah->fTracePasses) {
+      if (gTraceOah->fTracePasses) {
         std::stringstream ss;
 
         ss <<
@@ -586,7 +587,7 @@ SXMLFile createSXMLFileFromFile (
   // register time spent
   clock_t endClock = clock ();
 
-  mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
+  gGlobalTimingItemsList.appendTimingItem (
     passIDKind,
     passDescription,
     mfTimingItemKind::kMandatory,
@@ -610,8 +611,8 @@ SXMLFile createSXMLFileFromFd (
   // set the global current passID
   setGlobalCurrentPassIDKind (passIDKind);
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTracePasses ()) {
     std::string separator =
       "%--------------------------------------------------------------";
 
@@ -622,7 +623,7 @@ SXMLFile createSXMLFileFromFd (
       separator <<
       std::endl <<
       gTab <<
-      gWaeHandler->passIDKindAsString (passIDKind) << ": " << passDescription <<
+      gLanguage->passIDKindAsString (passIDKind) << ": " << passDescription <<
       std::endl <<
       separator <<
       std::endl;
@@ -635,7 +636,7 @@ SXMLFile createSXMLFileFromFd (
 
   // read the input MusicXML data from the file descriptor
 #ifdef TRACE_OAH
-      if (gtracingOah->fTracePasses) {
+      if (gTraceOah->fTracePasses) {
         std::stringstream ss;
 
         ss <<
@@ -666,7 +667,7 @@ SXMLFile createSXMLFileFromFd (
   // register time spent
   clock_t endClock = clock ();
 
-  mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
+  gGlobalTimingItemsList.appendTimingItem (
     passIDKind,
     passDescription,
     mfTimingItemKind::kMandatory,
@@ -692,7 +693,7 @@ SXMLFile createSXMLFileFromString (
 
   if (buffer [0] != '\0') { // superflous ??? JMI
 #ifdef TRACE_OAH
-    if (gtracingOah->fTracePasses) {
+    if (gTraceOah->fTracePasses) {
       std::stringstream ss;
 
       ss <<
@@ -724,7 +725,7 @@ SXMLFile createSXMLFileFromString (
   // register time spent
   clock_t endClock = clock ();
 
-  mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
+  gGlobalTimingItemsList.appendTimingItem (
     passIDKind,
     passDescription,
     mfTimingItemKind::kMandatory,
@@ -749,8 +750,8 @@ EXP Sxmlelement musicxmlFile2mxsr (
   // set the global current passID
   setGlobalCurrentPassIDKind (passIDKind);
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTracePasses ()) {
     std::string separator =
       "%--------------------------------------------------------------";
 
@@ -801,12 +802,12 @@ EXP Sxmlelement musicxmlFile2mxsr (
     std::string message = ss.str ();
 
     musicxml2mxsrError (
-      gGlobalCurrentServiceRunData->getInputSourceName (),
+      gServiceRunData->getInputSourceName (),
       1, // inputLineNumber,
       __FILE__, __LINE__,
       message);
 
-    gLogStream <<
+    gLog <<
       message <<
       std::endl;
 
@@ -836,7 +837,7 @@ EXP Sxmlelement musicxmlFile2mxsr (
   // register time spent
   clock_t endClock = clock ();
 
-  mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
+  gGlobalTimingItemsList.appendTimingItem (
     passIDKind,
     passDescription,
     mfTimingItemKind::kMandatory,
@@ -859,8 +860,8 @@ EXP Sxmlelement musicxmlFd2mxsr (
   // set the global current passID
   setGlobalCurrentPassIDKind (passIDKind);
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTracePasses ()) {
     std::string separator =
       "%--------------------------------------------------------------";
 
@@ -900,29 +901,29 @@ EXP Sxmlelement musicxmlFd2mxsr (
   // get the xmlDecl
   TXMLDecl *xmlDecl = sxmlfile->getXMLDecl ();
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceEncoding ()) {
-    gLogStream <<
+    gLog <<
       std::endl <<
       "xmlDecl contents:" <<
       std::endl << std::endl;
-    xmlDecl->print (gLogStream);
+    xmlDecl->print (gLog);
 
     displayXMLDeclaration (
       xmlDecl);
   }
 #endif
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   // get the docType
   TDocType * docType = sxmlfile->getDocType ();
 
   if (gGlobalMxsrOahGroup->getTraceEncoding ()) {
-    gLogStream <<
+    gLog <<
       std::endl <<
       "!!!!! docType from stream:" <<
       std::endl << std::endl;
-    docType->print (gLogStream);
+    docType->print (gLog);
 
     displayMusicXMLDocumentType (
       docType);
@@ -935,9 +936,9 @@ EXP Sxmlelement musicxmlFd2mxsr (
 //   // should the encoding be converted to UTF-8?
 //   std::string desiredEncoding = "UTF-8";
 //
-// #ifdef MF_TRACING_IS_ENABLED
+// #ifdef MF_TRACE_IS_ENABLED
 //   if (gGlobalMxsrOahGroup->getTraceEncoding ()) {
-//     gLogStream <<
+//     gLog <<
 //       "% MusicXML data uses \"" <<
 //       desiredEncoding <<
 //       "\" encoding" <<
@@ -956,7 +957,7 @@ EXP Sxmlelement musicxmlFd2mxsr (
 //       ", for example with iconv or using a text editor - handling it as is";
 //
 //     musicxml2mxsrWarning (
-//       gGlobalCurrentServiceRunData->getInputSourceName (),
+//       gServiceRunData->getInputSourceName (),
 //       1, // inputLineNumber,
 //       ss.str ());
 //   }
@@ -964,7 +965,7 @@ EXP Sxmlelement musicxmlFd2mxsr (
   // register time spent
   clock_t endClock = clock ();
 
-  mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
+  gGlobalTimingItemsList.appendTimingItem (
     passIDKind,
     passDescription,
     mfTimingItemKind::kMandatory,
@@ -990,8 +991,8 @@ EXP Sxmlelement musicxmlString2mxsr ( // JMI UNUSED SAX ???
   // set the global current passID
   setGlobalCurrentPassIDKind (passIDKind);
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTracePasses ()) {
     std::string separator =
       "%--------------------------------------------------------------";
 
@@ -1031,7 +1032,7 @@ EXP Sxmlelement musicxmlString2mxsr ( // JMI UNUSED SAX ???
   // register time spent
   clock_t endClock = clock ();
 
-  mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
+  gGlobalTimingItemsList.appendTimingItem (
     passIDKind,
     passDescription,
     mfTimingItemKind::kMandatory,
@@ -1050,8 +1051,8 @@ Sxmlelement convertMusicXMLToMxsr ( // JMI UNUSED SAX ???
   mfPassIDKind       passIDKind,
   const std::string& passDescription)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTracePasses ()) {
     std::string separator =
       "%--------------------------------------------------------------";
 
@@ -1072,7 +1073,7 @@ Sxmlelement convertMusicXMLToMxsr ( // JMI UNUSED SAX ???
 #endif
 
   // register the input source name
-  gGlobalCurrentServiceRunData->setInputSourceName (
+  gServiceRunData->setInputSourceName (
     inputSourceName);
 
   // create the MXSR

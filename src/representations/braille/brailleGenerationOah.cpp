@@ -19,14 +19,16 @@
 
 #include "mfStaticSettings.h"
 
+#include "mfOutputFileOah.h"
 #include "mfStringsHandling.h"
 
 #include "oahOah.h"
-#include "mfOutputFileOah.h"
 
 #include "brailleGenerationOah.h"
 
 #include "oahEarlyOptions.h"
+
+#include "waeHandlers.h"
 
 
 namespace MusicFormats
@@ -93,8 +95,8 @@ brailleOutputKindAtom::~brailleOutputKindAtom ()
 
 void brailleOutputKindAtom::setImplicitVariable (std::ostream& os)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<
@@ -128,8 +130,8 @@ void brailleOutputKindAtom::setImplicitVariable (std::ostream& os)
 
 void brailleOutputKindAtom::acceptIn (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -147,8 +149,8 @@ void brailleOutputKindAtom::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_brailleOutputKindAtom>*> (v)) {
         S_brailleOutputKindAtom elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
-        if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -166,8 +168,8 @@ void brailleOutputKindAtom::acceptIn (basevisitor* v)
 
 void brailleOutputKindAtom::acceptOut (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -185,8 +187,8 @@ void brailleOutputKindAtom::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_brailleOutputKindAtom>*> (v)) {
         S_brailleOutputKindAtom elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
-        if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -204,8 +206,8 @@ void brailleOutputKindAtom::acceptOut (basevisitor* v)
 
 void brailleOutputKindAtom::browseData (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -356,8 +358,8 @@ void brailleUTFKindAtom::applyAtomWithValue (
   const std::string& theString,
   std::ostream&      os)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<
@@ -400,8 +402,8 @@ void brailleUTFKindAtom::applyAtomWithValue (
 
 void brailleUTFKindAtom::acceptIn (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -419,8 +421,8 @@ void brailleUTFKindAtom::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_brailleUTFKindAtom>*> (v)) {
         S_brailleUTFKindAtom elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
-        if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -438,8 +440,8 @@ void brailleUTFKindAtom::acceptIn (basevisitor* v)
 
 void brailleUTFKindAtom::acceptOut (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -457,8 +459,8 @@ void brailleUTFKindAtom::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_brailleUTFKindAtom>*> (v)) {
         S_brailleUTFKindAtom elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
-        if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -476,8 +478,8 @@ void brailleUTFKindAtom::acceptOut (basevisitor* v)
 
 void brailleUTFKindAtom::browseData (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -622,8 +624,8 @@ void brailleByteOrderingKindAtom::applyAtomWithValue (
   const std::string& theString,
   std::ostream&      os)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<
@@ -666,8 +668,8 @@ void brailleByteOrderingKindAtom::applyAtomWithValue (
 
 void brailleByteOrderingKindAtom::acceptIn (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -685,8 +687,8 @@ void brailleByteOrderingKindAtom::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_brailleByteOrderingKindAtom>*> (v)) {
         S_brailleByteOrderingKindAtom elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
-        if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -704,8 +706,8 @@ void brailleByteOrderingKindAtom::acceptIn (basevisitor* v)
 
 void brailleByteOrderingKindAtom::acceptOut (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -723,8 +725,8 @@ void brailleByteOrderingKindAtom::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_brailleByteOrderingKindAtom>*> (v)) {
         S_brailleByteOrderingKindAtom elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
-        if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -742,8 +744,8 @@ void brailleByteOrderingKindAtom::acceptOut (basevisitor* v)
 
 void brailleByteOrderingKindAtom::browseData (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1127,10 +1129,10 @@ R"(Generate UTF-8 debug braille as output.)",
 
 void brailleGenerationOahGroup::initializeBrailleGenerationOahGroup ()
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   // trace
   // --------------------------------------
-// JMI  initializeBsr2brailletracingOah ();
+// JMI  initializeBsr2brailleTraceOah ();
 #endif
 
   // braille file name
@@ -1165,8 +1167,8 @@ void brailleGenerationOahGroup::checkGroupOptionsConsistency ()
 //______________________________________________________________________________
 void brailleGenerationOahGroup::acceptIn (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1184,8 +1186,8 @@ void brailleGenerationOahGroup::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_brailleGenerationOahGroup>*> (v)) {
         S_brailleGenerationOahGroup elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
-        if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -1203,8 +1205,8 @@ void brailleGenerationOahGroup::acceptIn (basevisitor* v)
 
 void brailleGenerationOahGroup::acceptOut (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1222,8 +1224,8 @@ void brailleGenerationOahGroup::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_brailleGenerationOahGroup>*> (v)) {
         S_brailleGenerationOahGroup elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
-        if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -1241,8 +1243,8 @@ void brailleGenerationOahGroup::acceptOut (basevisitor* v)
 
 void brailleGenerationOahGroup::browseData (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1259,7 +1261,7 @@ void brailleGenerationOahGroup::browseData (basevisitor* v)
 //______________________________________________________________________________
 void brailleGenerationOahGroup::displayBrailleGenerationOahValues (int fieldWidth)
 {
-  gLogStream <<
+  gLog <<
     "The Bsr2braille options are:" <<
     std::endl;
 
@@ -1268,13 +1270,13 @@ void brailleGenerationOahGroup::displayBrailleGenerationOahValues (int fieldWidt
   // code generation
   // --------------------------------------
 
-  gLogStream <<
+  gLog <<
     "Braille code generation:" <<
     std::endl;
 
   ++gIndenter;
 
-  gLogStream << std::left <<
+  gLog << std::left <<
     std::setw (fieldWidth) << "fBrailleUTFKind" << ": " <<
       bsrUTFKindAsString (fBrailleUTFKind) <<
       std::endl <<
@@ -1325,8 +1327,8 @@ std::ostream& operator << (std::ostream& os, const S_brailleGenerationOahGroup& 
 //______________________________________________________________________________
 S_brailleGenerationOahGroup createGlobalBrailleGenerationOahGroup ()
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<

@@ -11,7 +11,7 @@
 
 #include <map>
 
-#include "mfWaeInterface.h"
+// #include "mfWaeInterface.h"
 
 #include "mfConstants.h"
 #include "mfIndentedTextOutput.h"
@@ -242,11 +242,11 @@ void initializeMusicFormatsPassIDs ()
   static Bool pPrivateThisMethodHasBeenRun (false);
 
   if (! pPrivateThisMethodHasBeenRun) {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
     if (
-      gGlobalOahEarlyOptions.getEarlyTracingOah ()
+      gEarlyOptions.getEarlyTraceOah ()
         &&
-      ! gGlobalOahEarlyOptions.getEarlyQuietOption ()
+      ! gEarlyOptions.getEarlyQuietOption ()
     ) {
 	  	std::stringstream ss;
 
@@ -315,19 +315,18 @@ std::ostream& operator << (std::ostream& os, const S_mfPassDescription& elt) {
 }
 
 //______________________________________________________________________________
-// global variable
+// hidden global PassIDKind variable
+mfPassIDKind pGlobalCurrentPassIDKind =
+  mfPassIDKind::kMfPassID_ALL; // default value for passes trace
 
-EXP mfPassIDKind gGlobalCurrentPassIDKind =
-  mfPassIDKind::kMfPassID_ALL; // default value for passes tracing
-
-extern EXP void setGlobalCurrentPassIDKind (mfPassIDKind passIDKind)
+EXP void setGlobalCurrentPassIDKind (mfPassIDKind passIDKind)
 {
-  gGlobalCurrentPassIDKind = passIDKind;
+  pGlobalCurrentPassIDKind = passIDKind;
 }
 
-extern EXP mfPassIDKind getGlobalCurrentPassIDKind ()
+EXP mfPassIDKind getGlobalCurrentPassIDKind ()
 {
-  return gGlobalCurrentPassIDKind;
+  return pGlobalCurrentPassIDKind;
 }
 
 

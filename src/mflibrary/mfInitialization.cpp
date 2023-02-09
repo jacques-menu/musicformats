@@ -10,10 +10,12 @@
 */
 
 #include "mfInitialization.h"
-#include "mfLanguages.h"
+#include "languages.h"
 #include "mfPasses.h"
 
 #include "oahEarlyOptions.h"
+
+#include "waeHandlers.h"
 
 
 namespace MusicFormats
@@ -27,11 +29,11 @@ void initializeMusicFormats ()
   static Bool pPrivateThisMethodHasBeenRun (false);
 
   if (! pPrivateThisMethodHasBeenRun) {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
     if (
-      gGlobalOahEarlyOptions.getEarlyTracingOah ()
+      gEarlyOptions.getEarlyTraceOah ()
         &&
-      ! gGlobalOahEarlyOptions.getEarlyQuietOption ()
+      ! gEarlyOptions.getEarlyQuietOption ()
     ) {
 	  	std::stringstream ss;
 

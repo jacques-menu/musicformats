@@ -29,6 +29,8 @@
 
 #include "msrOah.h"
 
+#include "waeHandlers.h"
+
 
 namespace MusicFormats
 {
@@ -84,8 +86,8 @@ void msrPitchesLanguageAtom::applyAtomWithValue (
   const std::string& theString,
   std::ostream&      os)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<
@@ -101,8 +103,8 @@ void msrPitchesLanguageAtom::applyAtomWithValue (
   // theString contains the language name:
   // is it in the pitches languages map?
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<
@@ -152,8 +154,8 @@ void msrPitchesLanguageAtom::applyAtomWithValue (
 
 void msrPitchesLanguageAtom::acceptIn (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -171,8 +173,8 @@ void msrPitchesLanguageAtom::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_msrPitchesLanguageAtom>*> (v)) {
         S_msrPitchesLanguageAtom elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
-        if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -190,8 +192,8 @@ void msrPitchesLanguageAtom::acceptIn (basevisitor* v)
 
 void msrPitchesLanguageAtom::acceptOut (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -209,8 +211,8 @@ void msrPitchesLanguageAtom::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_msrPitchesLanguageAtom>*> (v)) {
         S_msrPitchesLanguageAtom elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
-        if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -228,8 +230,8 @@ void msrPitchesLanguageAtom::acceptOut (basevisitor* v)
 
 void msrPitchesLanguageAtom::browseData (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -379,8 +381,8 @@ void msrRenamePartAtom::applyAtomWithValue (
   const std::string& theString,
   std::ostream&      os)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<
@@ -396,8 +398,8 @@ void msrRenamePartAtom::applyAtomWithValue (
   // theString contains the part rename specification
   // decipher it to extract the old and new part names
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<
@@ -423,8 +425,8 @@ void msrRenamePartAtom::applyAtomWithValue (
 
   size_t smSize = sm.size ();
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<
@@ -441,13 +443,13 @@ void msrRenamePartAtom::applyAtomWithValue (
 #endif
 
   if (smSize == 3) {
-#ifdef MF_TRACING_IS_ENABLED
-    if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+    if (gEarlyOptions.getEarlyTraceOah ()) {
       for (unsigned i = 0; i < smSize; ++i) {
-        gLogStream <<
+        gLog <<
           '[' << sm [i] << "] ";
       } // for
-      gLogStream << std::endl;
+      gLog << std::endl;
     }
 #endif
   }
@@ -469,8 +471,8 @@ void msrRenamePartAtom::applyAtomWithValue (
   mfTrimFromBothEnds (oldPartName);
   mfTrimFromBothEnds (newPartName);
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<
@@ -510,8 +512,8 @@ void msrRenamePartAtom::applyAtomWithValue (
 
 void msrRenamePartAtom::acceptIn (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -529,8 +531,8 @@ void msrRenamePartAtom::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_msrRenamePartAtom>*> (v)) {
         S_msrRenamePartAtom elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
-        if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -548,8 +550,8 @@ void msrRenamePartAtom::acceptIn (basevisitor* v)
 
 void msrRenamePartAtom::acceptOut (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -567,8 +569,8 @@ void msrRenamePartAtom::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_msrRenamePartAtom>*> (v)) {
         S_msrRenamePartAtom elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
-        if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -586,8 +588,8 @@ void msrRenamePartAtom::acceptOut (basevisitor* v)
 
 void msrRenamePartAtom::browseData (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -766,8 +768,8 @@ R"(These options control the way MSR data is handled.)",
 msrOahGroup::~msrOahGroup ()
 {}
 
-#ifdef MF_TRACING_IS_ENABLED
-void msrOahGroup::initializeMsrtracingOah ()
+#ifdef MF_TRACE_IS_ENABLED
+void msrOahGroup::initializeMsrTraceOah ()
 {
   S_oahSubGroup subGroup =
     oahSubGroup::create (
@@ -1193,10 +1195,10 @@ even though they do not contain music.)",
 
 void msrOahGroup::initializeMsrOahGroup ()
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   // trace
   // --------------------------------------
-  initializeMsrtracingOah ();
+  initializeMsrTraceOah ();
 #endif
 
   // display
@@ -1264,8 +1266,8 @@ void msrOahGroup::checkGroupOptionsConsistency ()
 //______________________________________________________________________________
 void msrOahGroup::acceptIn (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1283,8 +1285,8 @@ void msrOahGroup::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_msrOahGroup>*> (v)) {
         S_msrOahGroup elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
-        if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -1302,8 +1304,8 @@ void msrOahGroup::acceptIn (basevisitor* v)
 
 void msrOahGroup::acceptOut (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1321,8 +1323,8 @@ void msrOahGroup::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_msrOahGroup>*> (v)) {
         S_msrOahGroup elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
-        if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -1340,8 +1342,8 @@ void msrOahGroup::acceptOut (basevisitor* v)
 
 void msrOahGroup::browseData (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1358,7 +1360,7 @@ void msrOahGroup::browseData (basevisitor* v)
 //______________________________________________________________________________
 void msrOahGroup::displayMsrOahValues (int valueFieldWidth)
 {
-  gLogStream <<
+  gLog <<
     "The MSR options are:" <<
     std::endl;
 
@@ -1367,13 +1369,13 @@ void msrOahGroup::displayMsrOahValues (int valueFieldWidth)
   // trace and display
   // --------------------------------------
 
-  gLogStream <<
+  gLog <<
     "Trace and display:" <<
     std::endl;
 
   ++gIndenter;
 
-  gLogStream << std::left <<
+  gLog << std::left <<
     std::setw (valueFieldWidth) << "fTraceMsr" << ": " <<
     fTraceMsr <<
     std::endl <<
@@ -1420,13 +1422,13 @@ void msrOahGroup::displayMsrOahValues (int valueFieldWidth)
   // languages
   // --------------------------------------
 
-  gLogStream <<
+  gLog <<
      "Languages:" <<
     std::endl;
 
   ++gIndenter;
 
-  gLogStream << std::left <<
+  gLog << std::left <<
     std::setw (valueFieldWidth) << "msrPitchesLanguage" << ": " <<
     msrQuarterTonesPitchesLanguageKindAsString (
       fMsrQuarterTonesPitchesLanguageKind) <<
@@ -1437,7 +1439,7 @@ void msrOahGroup::displayMsrOahValues (int valueFieldWidth)
   // parts
   // --------------------------------------
 
-  gLogStream <<
+  gLog <<
      "Parts:" <<
     std::endl;
 
@@ -1445,11 +1447,11 @@ void msrOahGroup::displayMsrOahValues (int valueFieldWidth)
 
   // parts renaming
 
-  gLogStream << std::left <<
+  gLog << std::left <<
     std::setw (valueFieldWidth) << "parts renaming" << ": ";
 
   if (! fMsrPartsRenamingMap.size ()) {
-    gLogStream <<
+    gLog <<
       "[NONE]";
   }
   else {
@@ -1459,25 +1461,25 @@ void msrOahGroup::displayMsrOahValues (int valueFieldWidth)
       i != fMsrPartsRenamingMap.end ();
       ++i
   ) {
-        gLogStream <<
+        gLog <<
           "\"" << ((*i).first) << "\" -> \"" << ((*i).second) << "\"";
     } // for
   }
 
-  gLogStream << std::endl;
+  gLog << std::endl;
 
   --gIndenter;
 
   // staves
   // --------------------------------------
 
-  gLogStream <<
+  gLog <<
     "Staves:" <<
     std::endl;
 
   ++gIndenter;
 
-  gLogStream << std::left <<
+  gLog << std::left <<
     std::setw (valueFieldWidth) <<
     "fCreateSingleLineStavesAsRythmic" << ": " <<
     fCreateSingleLineStavesAsRythmic <<
@@ -1488,13 +1490,13 @@ void msrOahGroup::displayMsrOahValues (int valueFieldWidth)
   // voices
   // --------------------------------------
 
-  gLogStream <<
+  gLog <<
     "Voices:" <<
     std::endl;
 
   ++gIndenter;
 
-  gLogStream << std::left <<
+  gLog << std::left <<
     std::setw (valueFieldWidth) <<
     "fCreateVoicesStaffRelativeNumbers" << ": " <<
     fCreateVoicesStaffRelativeNumbers <<
@@ -1505,13 +1507,13 @@ void msrOahGroup::displayMsrOahValues (int valueFieldWidth)
   // harmonies
   // --------------------------------------
 
-  gLogStream <<
+  gLog <<
     "Harmonies:" <<
     std::endl;
 
   ++gIndenter;
 
-  gLogStream << std::left <<
+  gLog << std::left <<
     std::setw (valueFieldWidth) << "fShowHarmoniesVoices" << ": " <<
     fShowHarmoniesVoices <<
     std::endl;
@@ -1521,13 +1523,13 @@ void msrOahGroup::displayMsrOahValues (int valueFieldWidth)
   // figured bass
   // --------------------------------------
 
-  gLogStream <<
+  gLog <<
     "Figured bass:" <<
     std::endl;
 
   ++gIndenter;
 
-  gLogStream << std::left <<
+  gLog << std::left <<
     std::setw (valueFieldWidth) << "fShowFiguredBassVoices" << ": " <<
     fShowFiguredBassVoices <<
     std::endl;
@@ -1552,8 +1554,8 @@ std::ostream& operator << (std::ostream& os, const S_msrOahGroup& elt)
 //______________________________________________________________________________
 S_msrOahGroup createGlobalMsrOahGroup ()
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<

@@ -14,7 +14,6 @@
 #include "mfStaticSettings.h"
 
 #include "oahOah.h"
-#include "oahEarlyOptions.h"
 
 #include "lpsrBookBlockElements.h"
 
@@ -22,6 +21,8 @@
 #include "lpsr2lilypondOah.h"
 
 #include "msrBrowsers.h"
+
+#include "waeHandlers.h"
 
 
 namespace MusicFormats
@@ -53,7 +54,7 @@ lpsrBookBlockElement::~lpsrBookBlockElement ()
 
 void lpsrBookBlockElement::acceptIn (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
 		std::stringstream ss;
 
@@ -72,7 +73,7 @@ void lpsrBookBlockElement::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_lpsrBookBlockElement>*> (v)) {
         S_lpsrBookBlockElement elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           std::stringstream ss;
 
@@ -91,7 +92,7 @@ void lpsrBookBlockElement::acceptIn (basevisitor* v)
 
 void lpsrBookBlockElement::acceptOut (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
 		std::stringstream ss;
 
@@ -110,7 +111,7 @@ void lpsrBookBlockElement::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_lpsrBookBlockElement>*> (v)) {
         S_lpsrBookBlockElement elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           std::stringstream ss;
 
@@ -129,7 +130,7 @@ void lpsrBookBlockElement::acceptOut (basevisitor* v)
 
 void lpsrBookBlockElement::browseData (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
 		std::stringstream ss;
 
@@ -161,7 +162,7 @@ void lpsrBookBlockElement::browseData (basevisitor* v)
   } // for
 */
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
 		std::stringstream ss;
 
@@ -253,8 +254,8 @@ lpsrScoreBlock::~lpsrScoreBlock ()
 void lpsrScoreBlock::appendPartGroupBlockToScoreBlock (
   const S_lpsrPartGroupBlock& partGroupBlock)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTracePartGroups ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTracePartGroups ()) {
 		std::stringstream ss;
 
     ss <<
@@ -280,8 +281,8 @@ void lpsrScoreBlock::appendPartGroupBlockToScoreBlock (
 void lpsrScoreBlock::appendVoiceUseToParallelMusicBLock (
   S_lpsrUseVoiceCommand voiceUse)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceVoices ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceVoices ()) {
 		std::stringstream ss;
 
     ss <<
@@ -305,8 +306,8 @@ void lpsrScoreBlock::appendVoiceUseToParallelMusicBLock (
 void lpsrScoreBlock::appendLyricsUseToParallelMusicBLock (
   S_lpsrNewLyricsBlock lyricsUse)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceLyrics ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceLyrics ()) {
 		std::stringstream ss;
 
     ss <<
@@ -328,7 +329,7 @@ void lpsrScoreBlock::appendLyricsUseToParallelMusicBLock (
 
 void lpsrScoreBlock::acceptIn (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
 		std::stringstream ss;
 
@@ -347,7 +348,7 @@ void lpsrScoreBlock::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_lpsrScoreBlock>*> (v)) {
         S_lpsrScoreBlock elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           std::stringstream ss;
 
@@ -366,7 +367,7 @@ void lpsrScoreBlock::acceptIn (basevisitor* v)
 
 void lpsrScoreBlock::acceptOut (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
 		std::stringstream ss;
 
@@ -385,7 +386,7 @@ void lpsrScoreBlock::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_lpsrScoreBlock>*> (v)) {
         S_lpsrScoreBlock elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           std::stringstream ss;
 
@@ -404,7 +405,7 @@ void lpsrScoreBlock::acceptOut (basevisitor* v)
 
 void lpsrScoreBlock::browseData (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
 		std::stringstream ss;
 
@@ -447,7 +448,7 @@ void lpsrScoreBlock::browseData (basevisitor* v)
     browser.browse (*fScoreBlockMidiTempo);
   }
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
 		std::stringstream ss;
 
@@ -518,8 +519,8 @@ lpsrBookPartBlock::~lpsrBookPartBlock ()
 void lpsrBookPartBlock::appendPartGroupBlockToBookPartBlock (
   const S_lpsrPartGroupBlock& partGroupBlock)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTracePartGroups ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTracePartGroups ()) {
 		std::stringstream ss;
 
     ss <<
@@ -545,8 +546,8 @@ void lpsrBookPartBlock::appendPartGroupBlockToBookPartBlock (
 void lpsrBookPartBlock::appendVoiceUseToParallelMusicBLock (
   S_lpsrUseVoiceCommand voiceUse)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceVoices ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceVoices ()) {
 		std::stringstream ss;
 
     ss <<
@@ -570,8 +571,8 @@ void lpsrBookPartBlock::appendVoiceUseToParallelMusicBLock (
 void lpsrBookPartBlock::appendLyricsUseToParallelMusicBLock (
   S_lpsrNewLyricsBlock lyricsUse)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceLyrics ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceLyrics ()) {
 		std::stringstream ss;
 
     ss <<
@@ -593,7 +594,7 @@ void lpsrBookPartBlock::appendLyricsUseToParallelMusicBLock (
 
 void lpsrBookPartBlock::acceptIn (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
 		std::stringstream ss;
 
@@ -612,7 +613,7 @@ void lpsrBookPartBlock::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_lpsrBookPartBlock>*> (v)) {
         S_lpsrBookPartBlock elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           std::stringstream ss;
 
@@ -631,7 +632,7 @@ void lpsrBookPartBlock::acceptIn (basevisitor* v)
 
 void lpsrBookPartBlock::acceptOut (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
 		std::stringstream ss;
 
@@ -650,7 +651,7 @@ void lpsrBookPartBlock::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_lpsrBookPartBlock>*> (v)) {
         S_lpsrBookPartBlock elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           std::stringstream ss;
 
@@ -669,7 +670,7 @@ void lpsrBookPartBlock::acceptOut (basevisitor* v)
 
 void lpsrBookPartBlock::browseData (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
 		std::stringstream ss;
 
@@ -689,7 +690,7 @@ void lpsrBookPartBlock::browseData (basevisitor* v)
     browser.browse (*fBookBlockElementParallelMusicBlock);
   }
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
 		std::stringstream ss;
 
@@ -762,8 +763,8 @@ lpsrBookBlock::~lpsrBookBlock ()
 void lpsrBookBlock::appendPartGroupBlockToBlock (
   const S_lpsrPartGroupBlock& partGroupBlock)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTracePartGroups ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTracePartGroups ()) {
 		std::stringstream ss;
 
     ss <<
@@ -790,7 +791,7 @@ void lpsrBookBlock::appendBookBlockElementToBookBlockElementsList (
   const S_lpsrBookBlockElement& bookBlockElement)
 {
 /* JMI
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceLpsrBlocks ()) {
 		std::stringstream ss;
 
@@ -813,7 +814,7 @@ void lpsrBookBlock::appendBookBlockElementToBookBlockElementsList (
 void lpsrBookBlock::appendLpsrScoreBlockToBookBlockElementsList (
   const S_lpsrScoreBlock& scoreBlock)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceLpsrBlocks ()) {
 		std::stringstream ss;
 
@@ -836,7 +837,7 @@ void lpsrBookBlock::appendLpsrScoreBlockToBookBlockElementsList (
 void lpsrBookBlock::appendLpsrBookPartBlockToBookBlockElementsList (
   const S_lpsrBookPartBlock& bookPartBlock)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceLpsrBlocks ()) {
 		std::stringstream ss;
 
@@ -860,8 +861,8 @@ void lpsrBookBlock::appendLpsrBookPartBlockToBookBlockElementsList (
 void lpsrBookBlock::appendVoiceUseToParallelMusicBLock (
   S_lpsrUseVoiceCommand voiceUse)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceVoices ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceVoices ()) {
 		std::stringstream ss;
 
     ss <<
@@ -885,8 +886,8 @@ void lpsrBookBlock::appendVoiceUseToParallelMusicBLock (
 void lpsrBookBlock::appendLyricsUseToParallelMusicBLock (
   S_lpsrNewLyricsBlock lyricsUse)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceLyrics ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceLyrics ()) {
 		std::stringstream ss;
 
     ss <<
@@ -908,7 +909,7 @@ void lpsrBookBlock::appendLyricsUseToParallelMusicBLock (
 
 void lpsrBookBlock::acceptIn (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
 		std::stringstream ss;
 
@@ -927,7 +928,7 @@ void lpsrBookBlock::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_lpsrBookBlock>*> (v)) {
         S_lpsrBookBlock elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           std::stringstream ss;
 
@@ -946,7 +947,7 @@ void lpsrBookBlock::acceptIn (basevisitor* v)
 
 void lpsrBookBlock::acceptOut (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
 		std::stringstream ss;
 
@@ -965,7 +966,7 @@ void lpsrBookBlock::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_lpsrBookBlock>*> (v)) {
         S_lpsrBookBlock elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           std::stringstream ss;
 
@@ -984,7 +985,7 @@ void lpsrBookBlock::acceptOut (basevisitor* v)
 
 void lpsrBookBlock::browseData (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
 		std::stringstream ss;
 
@@ -1020,7 +1021,7 @@ void lpsrBookBlock::browseData (basevisitor* v)
     browser.browse (*fBookBlockPaper);
   }
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
 		std::stringstream ss;
 

@@ -36,6 +36,8 @@
 
 #include "ischemeInterpreterInterface.h"
 
+#include "waeHandlers.h"
+
 
 using namespace MusicFormats;
 
@@ -94,7 +96,7 @@ int main (int argc, char* argv[])
   // apply early options if any
   // ------------------------------------------------------
 
-  gGlobalOahEarlyOptions.applyEarlyOptionsIfPresentInArgcArgv (
+  gEarlyOptions.applyEarlyOptionsIfPresentInArgcArgv (
     argc,
     argv);
 
@@ -102,10 +104,10 @@ int main (int argc, char* argv[])
   // ------------------------------------------------------
 
   Bool insiderOption =
-    gGlobalOahEarlyOptions.getEarlyInsiderOption ();
+    gEarlyOptions.getEarlyInsiderOption ();
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<
@@ -153,9 +155,9 @@ int main (int argc, char* argv[])
     // create the global run data
     // ------------------------------------------------------
 
-    gGlobalCurrentServiceRunData =
+    setGlobalServiceRunData (
       mfServiceRunData::create (
-        serviceName);
+        serviceName));
 
     // handle the command line options and arguments
     // ------------------------------------------------------
@@ -179,11 +181,11 @@ int main (int argc, char* argv[])
     } // switch
   }
   catch (mfOahException& e) {
-    mfDisplayException (e, gOutputStream);
+    mfDisplayException (e, gOutput);
     return (int) mfMusicformatsErrorKind::kMusicformatsErrorInvalidOption;
   }
   catch (std::exception& e) {
-    mfDisplayException (e, gOutputStream);
+    mfDisplayException (e, gOutput);
     return (int) mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
 
@@ -191,7 +193,7 @@ int main (int argc, char* argv[])
   // ------------------------------------------------------
 
   if (gIndenter != 0) {
-    gLogStream <<
+    gLog <<
       "### " <<
       serviceName <<
       " gIndenter value after options ands arguments checking: " <<
@@ -206,33 +208,33 @@ int main (int argc, char* argv[])
   // ------------------------------------------------------
 
   if (gGlobalDisplayOahGroup->getDisplayOahHandler ()) {
-    gLogStream <<
+    gLog <<
       "The OAH handler contains:" <<
       std::endl;
 
     ++gIndenter;
-    handler->print (gLogStream);
+    handler->print (gLog);
     --gIndenter;
   }
 
   if (gGlobalDisplayOahGroup->getDisplayOahHandlerSummary ()) {
-    gLogStream <<
+    gLog <<
       "The summary of the OAH handler contains:" <<
       std::endl;
 
     ++gIndenter;
-    handler->printSummary (gLogStream);
+    handler->printSummary (gLog);
     --gIndenter;
   }
 
   if (gGlobalDisplayOahGroup->getDisplayOahHandlerEssentials ()) {
-    gLogStream <<
+    gLog <<
       "The essentials of the OAH handler contains:" <<
       std::endl;
 
     ++gIndenter;
     handler->printHandlerEssentials (
-      gLogStream,
+      gLog,
       30); // fieldWidth
     --gIndenter;
   }
@@ -242,10 +244,10 @@ int main (int argc, char* argv[])
 
   std::string
     scriptSourceName =
-      gGlobalCurrentServiceRunData->getInputSourceName ();
+      gServiceRunData->getInputSourceName ();
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
     std::string separator =
       "%--------------------------------------------------------------";
 
@@ -286,7 +288,7 @@ int main (int argc, char* argv[])
   // has quiet mode been requested?
   // ------------------------------------------------------
 
-  if (gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
+  if (gEarlyOptions.getEarlyQuietOption ()) {
     // disable all trace and display options
     handler->
       enforceHandlerQuietness ();
@@ -295,8 +297,8 @@ int main (int argc, char* argv[])
   // welcome message
   // ------------------------------------------------------
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTracePasses ()) {
 		std::stringstream ss;
 
     ss <<
@@ -304,51 +306,51 @@ int main (int argc, char* argv[])
       getGlobalMusicFormatsVersionNumberAndDate () <<
       std::endl;
 
-    gLogStream <<
+    gLog <<
       "Launching the interpretation of ";
 
     if (scriptSourceName == "-") {
-      gLogStream <<
+      gLog <<
         "standard input";
     }
     else {
-      gLogStream <<
+      gLog <<
         "\"" << scriptSourceName << "\"";
     }
 
-    gLogStream <<
+    gLog <<
       "Time is " <<
-      gGlobalCurrentServiceRunData->getRunDateFull () <<
+      gServiceRunData->getRunDateFull () <<
       std::endl;
 
-    gLogStream <<
+    gLog <<
       "The command line is:" <<
       std::endl;
 
     ++gIndenter;
-    gLogStream <<
+    gLog <<
       handler->
         getLaunchCommandAsSupplied () <<
       std::endl;
     --gIndenter;
 
-    gLogStream <<
+    gLog <<
       "or with options long names:" <<
       std::endl;
 
     ++gIndenter;
-    gLogStream <<
+    gLog <<
       handler->
         getLaunchCommandWithLongOptionsNames () <<
       std::endl;
     --gIndenter;
 
-    gLogStream <<
+    gLog <<
       "or with options short names:" <<
       std::endl;
 
     ++gIndenter;
-    gLogStream <<
+    gLog <<
       handler->
         getLaunchCommandWithShortOptionsNames () <<
       std::endl;
@@ -359,8 +361,8 @@ int main (int argc, char* argv[])
   // acknoledge end of command line analysis
   // ------------------------------------------------------
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTracePasses ()) {
 		std::stringstream ss;
 
     ss <<
@@ -385,11 +387,11 @@ int main (int argc, char* argv[])
       launchIschemeInterpreter ();
   }
   catch (mfException& e) {
-    mfDisplayException (e, gOutputStream);
+    mfDisplayException (e, gOutput);
     return (int) mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
   catch (std::exception& e) {
-    mfDisplayException (e, gOutputStream);
+    mfDisplayException (e, gOutput);
     return (int) mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
 
@@ -402,15 +404,15 @@ int main (int argc, char* argv[])
   // ------------------------------------------------------
 
   if (gGlobalDisplayOahGroup->getDisplayCPUusage ()) {
-    gLogStream <<
-      mfTimingItemsList::gGlobalTimingItemsList;
+    gLog <<
+      gGlobalTimingItemsList;
   }
 
   // check indentation
   // ------------------------------------------------------
 
   if (gIndenter != 0) {
-    gLogStream <<
+    gLog <<
       "### " << executableName << " gIndenter final value: " <<
       gIndenter.getIndentation () <<
       " ###" <<

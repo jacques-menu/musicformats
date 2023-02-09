@@ -39,6 +39,8 @@
 
 #include "msrOah.h"
 
+#include "waeHandlers.h"
+
 
 namespace MusicFormats
 {
@@ -170,8 +172,8 @@ msrTimeSignatureItem::msrTimeSignatureItem (
 {
   fTimeSignatureBeatValue = -1;
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceTimeSignatures ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceTimeSignatures ()) {
 		std::stringstream ss;
 
     ss <<
@@ -225,8 +227,8 @@ Bool msrTimeSignatureItem::isEqualTo (
 
 void msrTimeSignatureItem::appendBeatsNumber (int beatsNumber)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceTimeSignatures ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceTimeSignatures ()) {
 		std::stringstream ss;
 
     ss <<
@@ -246,8 +248,8 @@ void msrTimeSignatureItem::appendBeatsNumber (int beatsNumber)
 
 void msrTimeSignatureItem::setTimeSignatureBeatValue (int timeSignatureBeatValue)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceTimeSignatures ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceTimeSignatures ()) {
 		std::stringstream ss;
 
     ss <<
@@ -277,8 +279,9 @@ int msrTimeSignatureItem::getTimeSignatureBeatsNumber () const
 
 void msrTimeSignatureItem::acceptIn (basevisitor* v)
 {
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "% ==> msrTimeSignatureItem::acceptIn ()" <<
@@ -288,12 +291,14 @@ void msrTimeSignatureItem::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
+#endif
 
   if (visitor<S_msrTimeSignatureItem>*
     p =
       dynamic_cast<visitor<S_msrTimeSignatureItem>*> (v)) {
         S_msrTimeSignatureItem elem = this;
 
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
@@ -305,14 +310,16 @@ void msrTimeSignatureItem::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
+#endif
         p->visitStart (elem);
   }
 }
 
 void msrTimeSignatureItem::acceptOut (basevisitor* v)
 {
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "% ==> msrTimeSignatureItem::acceptOut ()" <<
@@ -322,12 +329,14 @@ void msrTimeSignatureItem::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
+#endif
 
   if (visitor<S_msrTimeSignatureItem>*
     p =
       dynamic_cast<visitor<S_msrTimeSignatureItem>*> (v)) {
         S_msrTimeSignatureItem elem = this;
 
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
@@ -339,6 +348,7 @@ void msrTimeSignatureItem::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
+#endif        
         p->visitEnd (elem);
   }
 }
@@ -360,7 +370,7 @@ std::string msrTimeSignatureItem::asString () const
     case 0:
     /* JMI
       msrInternalError (
-        gGlobalCurrentServiceRunData->getInputSourceName (),
+        gServiceRunData->getInputSourceName (),
         fInputLineNumber,
         __FILE__, __LINE__,
         "time signature item beats numbers vector is empty");
@@ -413,7 +423,7 @@ std::string msrTimeSignatureItem::asShortStringForMeasuresSlices () const
     case 0:
     /* JMI
       msrInternalError (
-        gGlobalCurrentServiceRunData->getInputSourceName (),
+        gServiceRunData->getInputSourceName (),
         fInputLineNumber,
         __FILE__, __LINE__,
         "time signature item beats numbers vector is empty");
@@ -494,7 +504,7 @@ S_msrTimeSignature msrTimeSignature::create (
   return
     msrTimeSignature::create (
       inputLineNumber,
-      gGlobalNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
+      gNullMeasure, // set later in setMeasureElementUpLinkToMeasure()
       timeSignatureSymbolKind);
 }
 
@@ -553,7 +563,7 @@ S_msrTimeSignature msrTimeSignature::createTwoEightsTime (
     timeSignature =
       msrTimeSignature::create (
         inputLineNumber,
-        gGlobalNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
+        gNullMeasure, // set later in setMeasureElementUpLinkToMeasure()
         msrTimeSignatureSymbolKind::kTimeSignatureSymbolNone);
 
   // create a four quarters time signature item
@@ -583,7 +593,7 @@ S_msrTimeSignature msrTimeSignature::createThreeEightsTime (
     timeSignature =
       msrTimeSignature::create (
         inputLineNumber,
-        gGlobalNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
+        gNullMeasure, // set later in setMeasureElementUpLinkToMeasure()
         msrTimeSignatureSymbolKind::kTimeSignatureSymbolNone);
 
   // create a four quarters time signature item
@@ -613,7 +623,7 @@ S_msrTimeSignature msrTimeSignature::createSixEightsTime (
     timeSignature =
       msrTimeSignature::create (
         inputLineNumber,
-        gGlobalNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
+        gNullMeasure, // set later in setMeasureElementUpLinkToMeasure()
         msrTimeSignatureSymbolKind::kTimeSignatureSymbolNone);
 
   // create a four quarters time signature item
@@ -643,7 +653,7 @@ S_msrTimeSignature msrTimeSignature::createTwoQuartersTime (
     timeSignature =
       msrTimeSignature::create (
         inputLineNumber,
-        gGlobalNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
+        gNullMeasure, // set later in setMeasureElementUpLinkToMeasure()
         msrTimeSignatureSymbolKind::kTimeSignatureSymbolNone);
 
   // create a four quarters time signature item
@@ -673,7 +683,7 @@ S_msrTimeSignature msrTimeSignature::createThreeQuartersTime (
     timeSignature =
       msrTimeSignature::create (
         inputLineNumber,
-        gGlobalNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
+        gNullMeasure, // set later in setMeasureElementUpLinkToMeasure()
         msrTimeSignatureSymbolKind::kTimeSignatureSymbolNone);
 
   // create a four quarters time signature item
@@ -703,7 +713,7 @@ S_msrTimeSignature msrTimeSignature::createFourQuartersTime (
     timeSignature =
       msrTimeSignature::create (
         inputLineNumber,
-        gGlobalNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
+        gNullMeasure, // set later in setMeasureElementUpLinkToMeasure()
         msrTimeSignatureSymbolKind::kTimeSignatureSymbolNone);
 
   // create a four quarters time signature item
@@ -733,7 +743,7 @@ S_msrTimeSignature msrTimeSignature::createFiveQuartersTime (
     timeSignature =
       msrTimeSignature::create (
         inputLineNumber,
-        gGlobalNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
+        gNullMeasure, // set later in setMeasureElementUpLinkToMeasure()
         msrTimeSignatureSymbolKind::kTimeSignatureSymbolNone);
 
   // create a four quarters time signature item
@@ -763,7 +773,7 @@ S_msrTimeSignature msrTimeSignature::createTwoHalvesTime (
     timeSignature =
       msrTimeSignature::create (
         inputLineNumber,
-        gGlobalNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
+        gNullMeasure, // set later in setMeasureElementUpLinkToMeasure()
         msrTimeSignatureSymbolKind::kTimeSignatureSymbolNone);
 
   // create a four quarters time signature item
@@ -793,7 +803,7 @@ S_msrTimeSignature msrTimeSignature::createThreeHalvesTime (
     timeSignature =
       msrTimeSignature::create (
         inputLineNumber,
-        gGlobalNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
+        gNullMeasure, // set later in setMeasureElementUpLinkToMeasure()
         msrTimeSignatureSymbolKind::kTimeSignatureSymbolNone);
 
   // create a four quarters time signature item
@@ -823,7 +833,7 @@ S_msrTimeSignature msrTimeSignature::createFourHalvesTime (
     timeSignature =
       msrTimeSignature::create (
         inputLineNumber,
-        gGlobalNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
+        gNullMeasure, // set later in setMeasureElementUpLinkToMeasure()
         msrTimeSignatureSymbolKind::kTimeSignatureSymbolNone);
 
   // create a four quarters time signature item
@@ -856,8 +866,8 @@ S_msrTimeSignature msrTimeSignature::createTimeFromString (
 
   S_msrTimeSignature result;
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceNotes ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceNotes ()) {
 		std::stringstream ss;
 
     ss <<
@@ -882,8 +892,8 @@ S_msrTimeSignature msrTimeSignature::createTimeFromString (
     "[[:space:]]*"
     );
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<
@@ -904,8 +914,8 @@ S_msrTimeSignature msrTimeSignature::createTimeFromString (
 
   size_t smSize = sm.size ();
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<
@@ -918,11 +928,11 @@ S_msrTimeSignature msrTimeSignature::createTimeFromString (
     ++gIndenter;
 
     for (unsigned i = 0; i < smSize; ++i) {
-      gLogStream <<
+      gLog <<
         i << ": " << "\"" << sm [i] << "\"" <<
         std::endl;
     } // for
-    gLogStream << std::endl;
+    gLog << std::endl;
 
     --gIndenter;
   }
@@ -944,8 +954,8 @@ S_msrTimeSignature msrTimeSignature::createTimeFromString (
     beatsNumber   = sm [1],
     beatsDuration = sm [2];
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<
@@ -979,8 +989,8 @@ S_msrTimeSignature msrTimeSignature::createTimeFromString (
       ss >> integerValue;
     }
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1001,7 +1011,7 @@ S_msrTimeSignature msrTimeSignature::createTimeFromString (
   result =
     msrTimeSignature::create (
       inputLineNumber,
-        gGlobalNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
+        gNullMeasure, // set later in setMeasureElementUpLinkToMeasure()
       msrTimeSignatureSymbolKind::kTimeSignatureSymbolNone);
 
   // create a four quarters time signature item
@@ -1036,11 +1046,11 @@ void msrTimeSignature::setTimeSignatureUpLinkToMeasure (
     "measure is null");
 #endif
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceWholeNotes ()) {
     ++gIndenter;
 
-    gLogStream <<
+    gLog <<
       "==> Setting the uplink to measure of time signature " <<
       asString () <<
       " to measure " << measure->asString () <<
@@ -1058,8 +1068,8 @@ void msrTimeSignature::setTimeSignatureUpLinkToMeasure (
 void msrTimeSignature::appendTimeSignatureItem (
   const S_msrTimeSignatureItem& timeSignatureItem)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceTimeSignatures ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceTimeSignatures ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1110,7 +1120,7 @@ Rational msrTimeSignature::wholeNotesDurationPerMeasure () const
 */
 
 /* JMI
-    gLogStream <<
+    gLog <<
       std::endl << std::endl <<
       "result1 = " <<
       result.getNumerator () <<
@@ -1127,7 +1137,7 @@ Rational msrTimeSignature::wholeNotesDurationPerMeasure () const
           fTimeSignatureItemsVector [i]->getTimeSignatureBeatValue ());
 
 /* JMI
-      gLogStream <<
+      gLog <<
         std::endl << std::endl <<
         "result2 = " <<
         result.getNumerator () <<
@@ -1141,7 +1151,7 @@ Rational msrTimeSignature::wholeNotesDurationPerMeasure () const
 
   else {
     msrInternalError (
-      gGlobalCurrentServiceRunData->getInputSourceName (),
+      gServiceRunData->getInputSourceName (),
       fInputLineNumber,
       __FILE__, __LINE__,
       "time signature items vector is empty");
@@ -1153,8 +1163,9 @@ Rational msrTimeSignature::wholeNotesDurationPerMeasure () const
 
 void msrTimeSignature::acceptIn (basevisitor* v)
 {
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "% ==> msrTimeSignature::acceptIn ()" <<
@@ -1164,12 +1175,14 @@ void msrTimeSignature::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
+#endif
 
   if (visitor<S_msrTimeSignature>*
     p =
       dynamic_cast<visitor<S_msrTimeSignature>*> (v)) {
         S_msrTimeSignature elem = this;
 
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
@@ -1181,14 +1194,16 @@ void msrTimeSignature::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
+#endif
         p->visitStart (elem);
   }
 }
 
 void msrTimeSignature::acceptOut (basevisitor* v)
 {
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "% ==> msrTimeSignature::acceptOut ()" <<
@@ -1198,12 +1213,14 @@ void msrTimeSignature::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
+#endif
 
   if (visitor<S_msrTimeSignature>*
     p =
       dynamic_cast<visitor<S_msrTimeSignature>*> (v)) {
         S_msrTimeSignature elem = this;
 
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
@@ -1215,6 +1232,7 @@ void msrTimeSignature::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
+#endif        
         p->visitEnd (elem);
   }
 }
@@ -1257,7 +1275,7 @@ std::string msrTimeSignature::asString () const
   else {
     if (fTimeSignatureSymbolKind != msrTimeSignatureSymbolKind::kTimeSignatureSymbolSenzaMisura) {
       msrInternalError (
-        gGlobalCurrentServiceRunData->getInputSourceName (),
+        gServiceRunData->getInputSourceName (),
         fInputLineNumber,
         __FILE__, __LINE__,
         "time  items vector is empty");
@@ -1331,7 +1349,7 @@ std::string msrTimeSignature::asShortStringForMeasuresSlices () const
   else {
     if (fTimeSignatureSymbolKind != msrTimeSignatureSymbolKind::kTimeSignatureSymbolSenzaMisura) {
       msrInternalError (
-        gGlobalCurrentServiceRunData->getInputSourceName (),
+        gServiceRunData->getInputSourceName (),
         fInputLineNumber,
         __FILE__, __LINE__,
         "time  items vector is empty");

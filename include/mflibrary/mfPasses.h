@@ -34,7 +34,7 @@ enum class mfPassIDKind {
   // a given pass may have different IDs depending on the service
   kMfPassID_UNKNOWN,
 
-  kMfPassID_ALL, // default value for passes tracing
+  kMfPassID_ALL, // default value for passes trace
 
   kMfPassID_OptionsAndArgumentsHandling, // options and arguments handling
 
@@ -123,13 +123,15 @@ public:
 typedef SMARTP<mfPassDescription> S_mfPassDescription;
 EXP std::ostream& operator << (std::ostream& os, const S_mfPassDescription& elt);
 
-//______________________________________________________________________________
-// global variable
+//________________________________________________________________________
+// hidden global PassIDKind variable
+EXP void setGlobalCurrentPassIDKind (mfPassIDKind passIDKind);
 
-extern EXP mfPassIDKind gGlobalCurrentPassIDKind;
+EXP mfPassIDKind getGlobalCurrentPassIDKind ();
 
-extern EXP void setGlobalCurrentPassIDKind (mfPassIDKind passIDKind);
-extern EXP mfPassIDKind getGlobalCurrentPassIDKind ();
+// a handy shortcut
+#define gCurrentPassIDKind getGlobalCurrentPassIDKind ()
+
 
 }
 

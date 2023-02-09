@@ -662,7 +662,7 @@ class EXP msrMeasure : public msrSegmentElement
 
     // debug number, unique for every msrMeasure instance
 
-    static int            gGlobalMeasureDebugNumber;
+    static int            sGlobalMeasureDebugNumber;
     int                   fMeasureDebugNumber;
 
     // measure end line number
@@ -744,27 +744,27 @@ class EXP msrMeasure : public msrSegmentElement
     // ------------------------------------------------------
 
     // harmonies
-    void                  handleFirstHarmonyInHarmoniesMeasure (
+    void                  handleTheFirstHarmonyInAHarmoniesMeasure (
                             int                 inputLineNumber,
                             const S_msrVoice&   voice,
                             const S_msrHarmony& currentHarmony);
 
-    void                  handleSubsequentHarmonyInHarmoniesMeasure (
+    void                  handleASubsequentHarmonyInAHarmoniesMeasure (
                             int                 inputLineNumber,
                             const S_msrVoice&   voice,
                             const S_msrHarmony& previousHarmony,
                             const S_msrHarmony& currentHarmony);
 
-    void                  postHandleCurrentHarmonyInHarmoniesMeasure (
+    void                  handleTheLastHarmonyInAHarmoniesMeasure (
                             int                 inputLineNumber,
                             const S_msrVoice&   voice,
                             const S_msrHarmony& currentHarmony);
 
-    void                  finalizeTheHarmoniesInHarmoniesMeasure (
+    void                  finalizeTheHarmoniesInAHarmoniesMeasure (
                             int                inputLineNumber,
                             const std::string& context);
 
-    void                  finalizeHarmonyInHarmoniesMeasure (
+    void                  finalizeHarmonyInAHarmoniesMeasure (
                             int                 inputLineNumber,
                             const S_msrVoice&   voice,
                             const S_msrHarmony& previousHarmony,
@@ -795,7 +795,7 @@ class EXP msrMeasure : public msrSegmentElement
                             const S_msrVoice&       voice,
                             const S_msrFiguredBass& currentFiguredBass);
 
-    void                  finalizeFiguredBassesInFiguredBassMeasure (
+    void                  finalizeTheFiguredBassesInAFiguredBassMeasure (
                             int                inputLineNumber,
                             const std::string& context);
 

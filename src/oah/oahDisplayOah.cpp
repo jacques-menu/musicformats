@@ -24,6 +24,8 @@
 
 #include "oahDisplayOah.h"
 
+#include "waeHandlers.h"
+
 
 namespace MusicFormats
 {
@@ -168,8 +170,8 @@ void displayOahGroup::checkGroupOptionsConsistency ()
 //______________________________________________________________________________
 void displayOahGroup::acceptIn (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -187,8 +189,8 @@ void displayOahGroup::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_displayOahGroup>*> (v)) {
         S_displayOahGroup elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
-        if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -206,8 +208,8 @@ void displayOahGroup::acceptIn (basevisitor* v)
 
 void displayOahGroup::acceptOut (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -225,8 +227,8 @@ void displayOahGroup::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_displayOahGroup>*> (v)) {
         S_displayOahGroup elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
-        if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -244,8 +246,8 @@ void displayOahGroup::acceptOut (basevisitor* v)
 
 void displayOahGroup::browseData (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -299,7 +301,7 @@ void displayOahGroup::displayAtomWithVariableOptionsValues (
 //______________________________________________________________________________
 void displayOahGroup::displayDisplayOptionsValues (int valueFieldWidth)
 {
-  gLogStream <<
+  gLog <<
     "The basic options are:" <<
     std::endl;
 
@@ -308,13 +310,13 @@ void displayOahGroup::displayDisplayOptionsValues (int valueFieldWidth)
   // options and help display
   // --------------------------------------
 
-  gLogStream << std::left <<
+  gLog << std::left <<
     std::setw (valueFieldWidth) << "Display:" <<
     std::endl;
 
   ++gIndenter;
 
-  gLogStream << std::left <<
+  gLog << std::left <<
     std::setw (valueFieldWidth) << "fDisplayOptionsAndArguments" << ": " <<
     fDisplayOptionsAndArguments <<
     std::endl <<
@@ -364,8 +366,8 @@ std::ostream& operator << (std::ostream& os, const S_displayOahGroup& elt)
 //______________________________________________________________________________
 S_displayOahGroup createGlobalDisplayOahGroup ()
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<

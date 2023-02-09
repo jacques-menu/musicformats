@@ -34,6 +34,8 @@
 
 #include "oahAtomsCollection.h"
 
+#include "waeHandlers.h"
+
 
 namespace MusicFormats
 {
@@ -61,8 +63,8 @@ R"(These options control the way xmlelement are translated to MSDR.)",
 msdl2msrOahGroup::~msdl2msrOahGroup ()
 {}
 
-#ifdef MF_TRACING_IS_ENABLED
-void msdl2msrOahGroup::initializeMsdl2msrtracingOah ()
+#ifdef MF_TRACE_IS_ENABLED
+void msdl2msrOahGroup::initializeMsdl2msrTraceOah ()
 {
   S_oahSubGroup
     subGroup =
@@ -110,7 +112,7 @@ R"(Write a trace of the MSDL tokens handling activity with more details to stand
 R"(Write a trace of the MSDL syntax analysis activity to standard error.)",
         "traceSyntax",
         fTraceSyntax);
-        
+
   subGroup->
     appendAtomToSubGroup (
       traceSyntaxBooleanAtom);
@@ -136,7 +138,7 @@ R"(Write a trace of the MSDL syntax analysis activity with more details to stand
 R"(Write a trace of the MSDL syntax error recovery activity to standard error.)",
         "traceSyntaxErrorRecovery",
         fTraceSyntaxErrorRecovery);
-        
+
   subGroup->
     appendAtomToSubGroup (
       traceSyntaxErrorRecoveryBooleanAtom);
@@ -392,10 +394,10 @@ The default is 'DEFAULT_VALUE'.)",
 
 void msdl2msrOahGroup::initializeMsdl2msrGroup ()
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   // trace
   // --------------------------------------
-  initializeMsdl2msrtracingOah ();
+  initializeMsdl2msrTraceOah ();
 #endif
 
   initializeMsdlLanguagesOptions ();
@@ -424,7 +426,7 @@ Bool msdl2msrOahGroup::setMsdlQuarterTonesPitchesLanguage (std::string language)
 //______________________________________________________________________________
 void msdl2msrOahGroup::enforceGroupQuietness ()
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
 // JMI
 #endif
 }
@@ -438,8 +440,8 @@ void msdl2msrOahGroup::checkGroupOptionsConsistency ()
 //______________________________________________________________________________
 void msdl2msrOahGroup::acceptIn (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -457,8 +459,8 @@ void msdl2msrOahGroup::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_msdl2msrOahGroup>*> (v)) {
         S_msdl2msrOahGroup elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
-        if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -476,8 +478,8 @@ void msdl2msrOahGroup::acceptIn (basevisitor* v)
 
 void msdl2msrOahGroup::acceptOut (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -495,8 +497,8 @@ void msdl2msrOahGroup::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_msdl2msrOahGroup>*> (v)) {
         S_msdl2msrOahGroup elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
-        if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -514,8 +516,8 @@ void msdl2msrOahGroup::acceptOut (basevisitor* v)
 
 void msdl2msrOahGroup::browseData (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -532,17 +534,17 @@ void msdl2msrOahGroup::browseData (basevisitor* v)
 //______________________________________________________________________________
 void msdl2msrOahGroup::printMsdl2msrValues (int fieldWidth)
 {
-  gLogStream <<
+  gLog <<
     "The msdl2msr options are:" <<
     std::endl;
 
   ++gIndenter;
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   // trace
   // --------------------------------------
 
-  gLogStream <<
+  gLog <<
     "Trace:" <<
     std::endl;
 
@@ -551,13 +553,13 @@ void msdl2msrOahGroup::printMsdl2msrValues (int fieldWidth)
   // MSDL tokens and syntax
   // --------------------------------------
 
-  gLogStream <<
+  gLog <<
     "MSDL tokens and syntax:" <<
     std::endl;
 
   ++gIndenter;
 
-  gLogStream << std::left <<
+  gLog << std::left <<
     std::setw (fieldWidth) << "fTraceTokens" << ": " <<
       fTraceTokens <<
       std::endl <<
@@ -583,13 +585,13 @@ void msdl2msrOahGroup::printMsdl2msrValues (int fieldWidth)
 #endif
 
   // languages
-  gLogStream <<
+  gLog <<
     "Languages:" <<
     std::endl;
 
   ++gIndenter;
 
-  gLogStream << std::left <<
+  gLog << std::left <<
     std::setw (fieldWidth) << "fMsdlUserLanguageKind" << ": " <<
       msdlUserLanguageKindAsString (
         fMsdlUserLanguageKind) <<
@@ -608,13 +610,13 @@ void msdl2msrOahGroup::printMsdl2msrValues (int fieldWidth)
 
   // whole input scan
 
-  gLogStream <<
+  gLog <<
     "Whole input scan:" <<
     std::endl;
 
   ++gIndenter;
 
-  gLogStream << std::left <<
+  gLog << std::left <<
     std::setw (fieldWidth) << "fLexicalAnalysisOnly" << ": " <<
       fLexicalAnalysisOnly <<
       std::endl <<
@@ -636,13 +638,13 @@ void msdl2msrOahGroup::printMsdl2msrValues (int fieldWidth)
 
     // quit
 
-  gLogStream <<
+  gLog <<
     "Quit:" <<
     std::endl;
 
   ++gIndenter;
 
-  gLogStream << std::left <<
+  gLog << std::left <<
     std::setw (fieldWidth) << "fQuitOnLexicalErrors" << ": " <<
       fQuitOnLexicalErrors <<
       std::endl;
@@ -668,8 +670,8 @@ std::ostream& operator << (std::ostream& os, const S_msdl2msrOahGroup& elt)
 //______________________________________________________________________________
 S_msdl2msrOahGroup createGlobalMsdl2msrOahGroup ()
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<

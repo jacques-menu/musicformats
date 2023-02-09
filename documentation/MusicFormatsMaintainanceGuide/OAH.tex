@@ -308,8 +308,8 @@ void lilypondFixedOctaveEntryAtom::applyAtomWithValue (
   const std::string& theString,
   std::ostream&      os)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<
@@ -388,8 +388,8 @@ in \oah{oahAtomsCollection.cpp}:
 \begin{lstlisting}[language=CPlusPlus]
 void oahIntegerAtom::setIntegerVariable (int value)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1118,7 +1118,7 @@ int main (int argc, char*  argv[])
   // create the global run data
   // ------------------------------------------------------
 
-  gGlobalCurrentServiceRunData =
+  gServiceRunData =
     mfServiceRunData::create (serviceName);
 
   // ... ... ...
@@ -1210,7 +1210,7 @@ oahElementHelpOnlyKind oahHandler::applyOptionsFromElementUsesList ()
         ) {
           group->
             applyValueLessAtom (
-              gOutputStream);
+              gOutput);
         }
 
         else if (
@@ -1221,7 +1221,7 @@ oahElementHelpOnlyKind oahHandler::applyOptionsFromElementUsesList ()
         ) {
           subGroup->
             applyValueLessAtom (
-              gOutputStream);
+              gOutput);
         }
 
         else {
@@ -1259,7 +1259,7 @@ oahElementHelpOnlyKind oahHandler::applyOptionsFromElementUsesList ()
 %              case oahElementValueKind::kElementValueImplicit:
 %                valueFittedAtom->
 %                  applyAtomWithDefaultValue (
-%                    gOutputStream);
+%                    gOutput);
 %                break;
 
               case oahElementValueKind::kElementValueFitted:
@@ -1267,7 +1267,7 @@ oahElementHelpOnlyKind oahHandler::applyOptionsFromElementUsesList ()
                   valueFittedAtom->
                     applyAtomWithValue (
                       valueUsed,
-                      gOutputStream);
+                      gOutput);
                 }
                 else {
                   std::stringstream ss;
@@ -1286,27 +1286,27 @@ oahElementHelpOnlyKind oahHandler::applyOptionsFromElementUsesList ()
                   valueFittedAtom->
                     applyAtomWithValue (
                       valueUsed,
-                      gOutputStream);
+                      gOutput);
                 }
                 else {
                   valueFittedAtom->
                     applyAtomWithDefaultValue (
-                      gOutputStream);
+                      gOutput);
                 }
                 break;
             } // switch
           }
 
           else {
-  #ifdef MF_TRACING_IS_ENABLED
-            if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-              gLogStream <<
+  #ifdef MF_TRACE_IS_ENABLED
+            if (gEarlyOptions.getEarlyTraceOah ()) {
+              gLog <<
                 "**** Handling value-less atom:" <<
                 std::endl;
 
               ++gIndenter;
 
-              gLogStream <<
+              gLog <<
                 atom <<
                 std::endl;
 
@@ -1316,7 +1316,7 @@ oahElementHelpOnlyKind oahHandler::applyOptionsFromElementUsesList ()
 
             atom->
               applyValueLessAtom (
-                gOutputStream);
+                gOutput);
           }
         }
 
@@ -1353,7 +1353,7 @@ oahElementHelpOnlyKind oahHandler::applyOptionsFromElementUsesList ()
 \subsection{Early handling of some options}
 % -------------------------------------------------------------------------
 
-Debugging OAH needs the trace handling tracing options \optionBoth{trace-oah}{toah} and \optionBoth{trace-oah-details}{toahd} to be activated first, even if they are not the first ones supplied.
+Debugging OAH needs the trace handling trace options \optionBoth{trace-oah}{toah} and \optionBoth{trace-oah-details}{toahd} to be activated first, even if they are not the first ones supplied.
 
 The same holds to handle the \option{insider} option, since it involves using the \insider\ handler and not a \regular\ one.
 
@@ -1635,7 +1635,7 @@ In order to make a new option available, one should:
 
 When adding a new option, it is sometimes not clear whether to assign it to a format or to the passes that create or browse it.
 
-For example, the tracing of \musicXmlMarkup{backup} and \musicXmlMarkup{forward} is used by both \fileName{mxsr2msrOah} and \fileName{msr2mxsrOah}. The corresponding options are thus placed in \mxsrBoth{mxsrOah}:
+For example, the trace of \musicXmlMarkup{backup} and \musicXmlMarkup{forward} is used by both \fileName{mxsr2msrOah} and \fileName{msr2mxsrOah}. The corresponding options are thus placed in \mxsrBoth{mxsrOah}:
 \begin{lstlisting}[language=CPlusPlus]
 
 \end{lstlisting}
@@ -1696,7 +1696,7 @@ R"(Write the short names before the long ones.)",
 \begin{lstlisting}[language=CPlusPlus]
 void oahOahGroup::printOahOahValues (int valueFieldWidth)
 {
-  gLogStream <<
+  gLog <<
     "The basic options are:" <<
     std::endl;
 
@@ -1705,13 +1705,13 @@ void oahOahGroup::printOahOahValues (int valueFieldWidth)
   // options and help display
   // --------------------------------------
 
-  gLogStream << std::left <<
+  gLog << std::left <<
     std::setw (valueFieldWidth) << "Options trace and display:" <<
     std::endl;
 
   ++gIndenter;
 
-  gLogStream << std::left <<
+  gLog << std::left <<
     std::setw (valueFieldWidth) << "fReverseNamesDisplayOrder" << " : " <<
     fReverseNamesDisplayOrder <<
     std::endl <<
@@ -1837,8 +1837,8 @@ Then in \method{oahHistoryAtom}{printHistory}, the call to \methodName{printVers
 \begin{lstlisting}[language=CPlusPlus]
 void oahHistoryAtom::applyValueLessAtom (std::ostream& os)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<

@@ -26,6 +26,8 @@
 
 #include "msrGenerationOah.h"
 
+#include "waeHandlers.h"
+
 
 namespace MusicFormats
 {
@@ -102,10 +104,10 @@ The default is 'DEFAULT_VALUE'.)",
 
 void msrGeneratorsOahGroup::initializeMsrGeneratorsOahGroup ()
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   // trace
   // --------------------------------------
-// JMI  initializeMsrGeneratorstracingOah ();
+// JMI  initializeMsrGeneratorsTraceOah ();
 #endif
 
   // generation API
@@ -124,8 +126,8 @@ void msrGeneratorsOahGroup::checkGroupOptionsConsistency ()
 //______________________________________________________________________________
 void msrGeneratorsOahGroup::acceptIn (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -143,8 +145,8 @@ void msrGeneratorsOahGroup::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_msrGeneratorsOahGroup>*> (v)) {
         S_msrGeneratorsOahGroup elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
-        if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -162,8 +164,8 @@ void msrGeneratorsOahGroup::acceptIn (basevisitor* v)
 
 void msrGeneratorsOahGroup::acceptOut (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -181,8 +183,8 @@ void msrGeneratorsOahGroup::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_msrGeneratorsOahGroup>*> (v)) {
         S_msrGeneratorsOahGroup elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
-        if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -200,8 +202,8 @@ void msrGeneratorsOahGroup::acceptOut (basevisitor* v)
 
 void msrGeneratorsOahGroup::browseData (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -219,7 +221,7 @@ void msrGeneratorsOahGroup::browseData (basevisitor* v)
 void msrGeneratorsOahGroup::displayMsrGeneratorsOahValues (
   int fieldWidth)
 {
-  gLogStream <<
+  gLog <<
     "The msrGenerators options are:" <<
     std::endl;
 
@@ -228,13 +230,13 @@ void msrGeneratorsOahGroup::displayMsrGeneratorsOahValues (
   // generation API kind
   // --------------------------------------
 
-  gLogStream <<
+  gLog <<
     "Generation API:" <<
     std::endl;
 
   ++gIndenter;
 
-  gLogStream << std::left <<
+  gLog << std::left <<
     std::setw (fieldWidth) << "gnerationAPIKind" << ": " <<
       msrGenerationAPIKindAsString (fGenerationAPIKind) <<
       std::endl;
@@ -259,8 +261,8 @@ std::ostream& operator << (std::ostream& os, const S_msrGeneratorsOahGroup& elt)
 //______________________________________________________________________________
 S_msrGeneratorsOahGroup createGlobalMsrGeneratorsOahGroup ()
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<

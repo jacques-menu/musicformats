@@ -25,7 +25,7 @@ EXP void mfslWarning (
   const std::string&       message,
   const mfsl::location& loc)
 {
-  gLogStream <<
+  gLog <<
     "### [MFSL] WARNING " <<
     loc << ": " << message <<
     std::endl;
@@ -37,7 +37,7 @@ EXP void mfslError (
 {
   gIndenter.resetToZero ();
 
-  gLogStream <<
+  gLog <<
     "### [MFSL] ERROR " <<
     loc << ": " << message <<
     std::endl;
@@ -55,7 +55,7 @@ EXP void mfslInternalError (
 {
   gIndenter.resetToZero ();
 
-  gLogStream <<
+  gLog <<
     "### [MFSL] INNTERNAL ERROR " <<
     loc << ": " << message <<
     std::endl;
@@ -71,7 +71,7 @@ EXP void mfslFileError (
   const std::string& inputSourceName,
   const std::string& message)
 {
-  gLogStream <<
+  gLog <<
     "### MFSL file error: " << message <<
     std::endl;
 

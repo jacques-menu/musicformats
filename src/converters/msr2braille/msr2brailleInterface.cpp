@@ -47,6 +47,8 @@
 
 #include "msr2brailleInterface.h"
 
+#include "waeHandlers.h"
+
 
 namespace MusicFormats
 {
@@ -64,8 +66,8 @@ EXP mfMusicformatsErrorKind msrScore2brailleWithHandler (
   std::ostream&       err,
   const S_oahHandler& handler)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<
@@ -82,7 +84,7 @@ EXP mfMusicformatsErrorKind msrScore2brailleWithHandler (
   // has quiet mode been requested?
   // ------------------------------------------------------
 
-  if (gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
+  if (gEarlyOptions.getEarlyQuietOption ()) {
     // disable all trace and display options
     handler->
       enforceHandlerQuietness ();
@@ -105,11 +107,11 @@ EXP mfMusicformatsErrorKind msrScore2brailleWithHandler (
           passDescription_A);
     }
     catch (msr2bsrException& e) {
-      mfDisplayException (e, gOutputStream);
+      mfDisplayException (e, gOutput);
       return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
     }
     catch (std::exception& e) {
-      mfDisplayException (e, gOutputStream);
+      mfDisplayException (e, gOutput);
       return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
     }
 
@@ -121,7 +123,7 @@ EXP mfMusicformatsErrorKind msrScore2brailleWithHandler (
         firstBsrScore,
         gGlobalMsrOahGroup,
         gGlobalBsrOahGroup,
-        gWaeHandler->displayTheFirstMSRAsText ());
+        gLanguage->displayTheFirstMSRAsText ());
     }
 
     if (gGlobalBsrOahGroup->getDisplayFirstBsrFull ()) {
@@ -129,7 +131,7 @@ EXP mfMusicformatsErrorKind msrScore2brailleWithHandler (
         firstBsrScore,
         gGlobalMsrOahGroup,
         gGlobalBsrOahGroup,
-        gWaeHandler->displayTheFirstMSRAsText ());
+        gLanguage->displayTheFirstMSRAsText ());
     }
   }
 
@@ -149,11 +151,11 @@ EXP mfMusicformatsErrorKind msrScore2brailleWithHandler (
           passDescription_B);
     }
     catch (bsr2finalizedBsrException& e) {
-      mfDisplayException (e, gOutputStream);
+      mfDisplayException (e, gOutput);
       return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
     }
     catch (std::exception& e) {
-      mfDisplayException (e, gOutputStream);
+      mfDisplayException (e, gOutput);
       return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
     }
 
@@ -165,7 +167,7 @@ EXP mfMusicformatsErrorKind msrScore2brailleWithHandler (
         finalizedBsrScore,
         gGlobalMsrOahGroup,
         gGlobalBsrOahGroup,
-        gWaeHandler->displayTheFinalizedBSRAsText ());
+        gLanguage->displayTheFinalizedBSRAsText ());
     }
 
     if (gGlobalBsrOahGroup->getDisplaySecondBsrFull ()) {
@@ -173,7 +175,7 @@ EXP mfMusicformatsErrorKind msrScore2brailleWithHandler (
         finalizedBsrScore,
         gGlobalMsrOahGroup,
         gGlobalBsrOahGroup,
-        gWaeHandler->displayTheFinalizedBSRAsText ());
+        gLanguage->displayTheFinalizedBSRAsText ());
     }
   }
 
@@ -186,8 +188,8 @@ EXP mfMusicformatsErrorKind msrScore2brailleWithHandler (
         handler->
           fetchOutputFileNameFromTheOptions ();
 
-#ifdef MF_TRACING_IS_ENABLED
-      if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+      if (gEarlyOptions.getEarlyTraceOah ()) {
         err <<
           "xmlFile2braille() outputFileName = \"" <<
           outputFileName <<
@@ -201,8 +203,8 @@ EXP mfMusicformatsErrorKind msrScore2brailleWithHandler (
 #endif
 
     if (! outputFileName.size ()) {
-#ifdef MF_TRACING_IS_ENABLED
-      if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+      if (gEarlyOptions.getEarlyTraceOah ()) {
         err <<
           "xmlFile2braille() output goes to standard output" <<
           std::endl;
@@ -223,18 +225,18 @@ EXP mfMusicformatsErrorKind msrScore2brailleWithHandler (
           out);
       }
       catch (bsr2brailleException& e) {
-      mfDisplayException (e, gOutputStream);
+      mfDisplayException (e, gOutput);
         return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
       }
       catch (std::exception& e) {
-      mfDisplayException (e, gOutputStream);
+      mfDisplayException (e, gOutput);
         return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
       }
     }
 
     else {
-#ifdef MF_TRACING_IS_ENABLED
-      if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+      if (gEarlyOptions.getEarlyTraceOah ()) {
         err <<
           "xmlFile2braille() output goes to file \"" <<
           outputFileName <<
@@ -248,11 +250,11 @@ EXP mfMusicformatsErrorKind msrScore2brailleWithHandler (
 #endif
 
       // open output file
-#ifdef MF_TRACING_IS_ENABLED
-      if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
+#ifdef MF_TRACE_IS_ENABLED
+      if (gEarlyOptions.getEarlyTracePasses ()) {
         err <<
           std::endl <<
-          gWaeHandler->openingBrailleMusicFileForWriting (outputFileName) <<
+          gLanguage->openingBrailleMusicFileForWriting (outputFileName) <<
           std::endl;
 
 //     gWaeHandler->waeTrace ( JMI v0.9.67
@@ -270,7 +272,7 @@ EXP mfMusicformatsErrorKind msrScore2brailleWithHandler (
         std::stringstream ss;
 
         ss <<
-          gWaeHandler->cannotOpenBrailleMusicFileForWriting (outputFileName);
+          gLanguage->cannotOpenBrailleMusicFileForWriting (outputFileName);
 
         std::string message = ss.str ();
 
@@ -291,22 +293,22 @@ EXP mfMusicformatsErrorKind msrScore2brailleWithHandler (
           brailleCodeFileOutputStream);
       }
       catch (bsr2brailleException& e) {
-        mfDisplayException (e, gOutputStream);
+        mfDisplayException (e, gOutput);
         return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
       }
       catch (std::exception& e) {
-        mfDisplayException (e, gOutputStream);
+        mfDisplayException (e, gOutput);
         return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
       }
 
       // close output file
 #ifdef TRACE_OAH
-      if (gtracingOah->fTracePasses) {
+      if (gTraceOah->fTracePasses) {
         std::stringstream ss;
 
         ss <<
           std::endl <<
-          gWaeHandler->closingBrailleMusicFile (outputFileName) <<
+          gLanguage->closingBrailleMusicFile (outputFileName) <<
           std::endl;
 
         gWaeHandler->waeTrace (

@@ -10,7 +10,10 @@
 */
 
 
+#include "oahEarlyOptions.h"
 #include "oahComponent.h"
+
+#include "waeHandlers.h"
 
 
 namespace MusicFormats
@@ -24,8 +27,8 @@ S_mfcOahComponent createOahComponent ()
   // protect library against multiple initializations
   if (! pOahComponent) {
 
-#ifdef MF_TRACING_IS_ENABLED
-    if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {
+#ifdef MF_TRACE_IS_ENABLED
+    if (gEarlyOptions.getEarlyTraceComponents ()) {
 	  	std::stringstream ss;
 
       ss <<
@@ -72,6 +75,16 @@ S_mfcOahComponent createOahComponent ()
           "January 3, 2023",
           std::list<std::string> {
             "Added the '-language, -lang' option"
+          }
+      ));
+
+    pOahComponent->
+      appendVersionDescrToComponent (
+        mfcVersionDescr::create (
+          mfcVersionNumber::createFromString ("0.9.67"),
+          "February 5, 2023",
+          std::list<std::string> {
+            "Switched 'tracing' to 'trace' everywhere"
           }
       ));
   }

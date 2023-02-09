@@ -53,6 +53,8 @@
 
 #include "msdl2lilypondInterface.h"
 
+#include "waeHandlers.h"
+
 
 namespace MusicFormats
 {
@@ -66,13 +68,13 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
   std::ostream&       err)
 {
   // register the input source name
-  gGlobalCurrentServiceRunData->setInputSourceName (
+  gServiceRunData->setInputSourceName (
     inputSourceName);
 
   // has quiet mode been requested?
   // ------------------------------------------------------
 
-  if (gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
+  if (gEarlyOptions.getEarlyQuietOption ()) {
     // disable all trace and display options
     handler->
       enforceHandlerQuietness ();
@@ -90,8 +92,8 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
     // start the clock
     clock_t startClock = clock ();
 
-#ifdef MF_TRACING_IS_ENABLED
-    if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
+#ifdef MF_TRACE_IS_ENABLED
+    if (gEarlyOptions.getEarlyTracePasses ()) {
       std::string separator =
         "%--------------------------------------------------------------";
       err <<
@@ -99,7 +101,7 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
         separator <<
         std::endl <<
         gTab <<
-        gWaeHandler->passIDKindAsString (mfPassIDKind::kMfPassID_1) <<
+        gLanguage->passIDKindAsString (mfPassIDKind::kMfPassID_1) <<
         ": " <<
         "Creating a first MSR from the MSDL input" <<
         std::endl <<
@@ -126,7 +128,7 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
     // register time spent
     clock_t endClock = clock ();
 
-    mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
+    gGlobalTimingItemsList.appendTimingItem (
       mfPassIDKind::kMfPassID_1,
       "Create the first MSR from the MSDL input",
       mfTimingItemKind::kMandatory,
@@ -154,11 +156,11 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
 #endif
   }
   catch (msdl2msrException& e) {
-    mfDisplayException (e, gOutputStream);
+    mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
   catch (std::exception& e) {
-    mfDisplayException (e, gOutputStream);
+    mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
 
@@ -166,11 +168,11 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
   // ------------------------------------------------------
 
   if (gGlobalMsdl2lyInsiderOahGroup->getQuitAfterPass1 ()) {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
     gWaeHandler->waeTrace (
       err,
       __FILE__, __LINE__,
-      gWaeHandler->quittingAfterPass (mfPassIDKind::kMfPassID_1));
+      gLanguage->quittingAfterPass (mfPassIDKind::kMfPassID_1));
 #endif
 
     return mfMusicformatsErrorKind::kMusicformatsError_NONE;
@@ -194,11 +196,11 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
         createMsdl2lilypondConverterComponent ());
   }
   catch (msr2lpsrException& e) {
-    mfDisplayException (e, gOutputStream);
+    mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
   catch (std::exception& e) {
-    mfDisplayException (e, gOutputStream);
+    mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
 
@@ -206,11 +208,11 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
   // ------------------------------------------------------
 
   if (gGlobalMsdl2lyInsiderOahGroup->getQuitAfterPass2b ()) {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
     gWaeHandler->waeTrace (
       err,
       __FILE__, __LINE__,
-      gWaeHandler->quittingAfterPass (mfPassIDKind::kMfPassID_2b));
+      gLanguage->quittingAfterPass (mfPassIDKind::kMfPassID_2b));
 #endif
 
     return mfMusicformatsErrorKind::kMusicformatsError_NONE;
@@ -224,8 +226,8 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
       handler->
         fetchOutputFileNameFromTheOptions ();
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
     err <<
       "msdlStream2lilypond() outputFileName = \"" <<
       outputFileName <<
@@ -239,8 +241,8 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
 #endif
 
   if (! outputFileName.size ()) {
-#ifdef MF_TRACING_IS_ENABLED
-    if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+    if (gEarlyOptions.getEarlyTraceOah ()) {
       err <<
         "msdlStream2lilypond() output goes to standard output" <<
         std::endl;
@@ -265,22 +267,22 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
         gGlobalMsrOahGroup,
         gGlobalLpsrOahGroup,
         mfPassIDKind::kMfPassID_3,
-        gWaeHandler->convertTheLPSRIntoLilyPondCode (),
+        gLanguage->convertTheLPSRIntoLilyPondCode (),
         lilypondStandardOutputStream);
     }
     catch (lpsr2lilypondException& e) {
-      mfDisplayException (e, gOutputStream);
+      mfDisplayException (e, gOutput);
       return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
     }
     catch (std::exception& e) {
-      mfDisplayException (e, gOutputStream);
+      mfDisplayException (e, gOutput);
       return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
     }
   }
 
   else {
-#ifdef MF_TRACING_IS_ENABLED
-    if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+    if (gEarlyOptions.getEarlyTraceOah ()) {
       err <<
         "msdlStream2lilypond() output goes to file \"" <<
         outputFileName <<
@@ -294,11 +296,11 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
 #endif
 
     // open output file
-#ifdef MF_TRACING_IS_ENABLED
-    if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
+#ifdef MF_TRACE_IS_ENABLED
+    if (gEarlyOptions.getEarlyTracePasses ()) {
       err <<
         std::endl <<
-        gWaeHandler->openingLilypondFileForWriting (outputFileName) <<
+        gLanguage->openingLilypondFileForWriting (outputFileName) <<
         std::endl;
 
 //     gWaeHandler->waeTrace ( JMI v0.9.67
@@ -316,7 +318,7 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
       std::stringstream ss;
 
       ss <<
-        gWaeHandler->cannotOpenLilypondFileForWriting (outputFileName);
+        gLanguage->cannotOpenLilypondFileForWriting (outputFileName);
 
       std::string message = ss.str ();
 
@@ -341,26 +343,26 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
         gGlobalMsrOahGroup,
         gGlobalLpsrOahGroup,
         mfPassIDKind::kMfPassID_4,
-        gWaeHandler->convertTheLPSRIntoLilyPondCode (),
+        gLanguage->convertTheLPSRIntoLilyPondCode (),
         lilypondFileOutputStream);
     }
     catch (lpsr2lilypondException& e) {
-      mfDisplayException (e, gOutputStream);
+      mfDisplayException (e, gOutput);
       return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
     }
     catch (std::exception& e) {
-      mfDisplayException (e, gOutputStream);
+      mfDisplayException (e, gOutput);
       return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
     }
 
     // close output file
 #ifdef TRACE_OAH
-    if (gtracingOah->fTracePasses) {
+    if (gTraceOah->fTracePasses) {
       std::stringstream ss;
 
       ss <<
         std::endl <<
-        gWaeHandler->closingLilypondFile (outputFileName) <<
+        gLanguage->closingLilypondFile (outputFileName) <<
         std::endl;
 
       gWaeHandler->waeTrace (
@@ -400,9 +402,9 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
 
   // print the options and arguments
   // ------------------------------------------------------
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
 #ifdef ENFORCE_TRACE_OAH
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<
@@ -414,17 +416,17 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
   // apply early options if any
   // ------------------------------------------------------
 
-  gGlobalOahEarlyOptions.applyEarlyOptionsIfPresentInOptionsAndArguments (
+  gEarlyOptions.applyEarlyOptionsIfPresentInOptionsAndArguments (
     handlerOptionsAndArguments);
 
   // has the '-insider' option been used?
   // ------------------------------------------------------
 
   Bool insiderOption =
-    gGlobalOahEarlyOptions.getEarlyInsiderOption ();
+    gEarlyOptions.getEarlyInsiderOption ();
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<
@@ -470,9 +472,9 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
   // create the global run data
   // ------------------------------------------------------
 
-  gGlobalCurrentServiceRunData =
+  setGlobalServiceRunData (
     mfServiceRunData::create (
-      serviceName);
+      serviceName));
 
   // handle the command line options and arguments
   // ------------------------------------------------------
@@ -496,17 +498,17 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
     } // switch
   }
   catch (mfOahException& e) {
-    mfDisplayException (e, gOutputStream);
+    mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidOption;
   }
   catch (std::exception& e) {
-    mfDisplayException (e, gOutputStream);
+    mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
 
   // check indentation
   if (gIndenter != 0) {
-    gLogStream <<
+    gLog <<
       "### " <<
       serviceName <<
       " gIndenter value after options ands arguments checking: " <<
@@ -538,12 +540,12 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
 //   std::ostream&           err)
 // {
 //   // open input file
-// #ifdef MF_TRACING_IS_ENABLED
-//   if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gEarlyOptions.getEarlyTracePasses ()) {
 //     gWaeHandler->waeTrace (
 //       err,
 //       __FILE__, __LINE__,
-//       gWaeHandler->openingLilypondFileForWriting (inputFileName));
+//       gLanguage->openingLilypondFileForWriting (inputFileName));
 //   }
 // #endif
 //
@@ -556,7 +558,7 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
 //     std::stringstream ss;
 //
 //     ss <<
-//       gWaeHandler->cannotOpenMSDLFileForReading (inputFileName);
+//       gLanguage->cannotOpenMSDLFileForReading (inputFileName);
 //
 //     std::string message = ss.str ();
 //
@@ -583,12 +585,12 @@ mfMusicformatsErrorKind convertMsdlFile2lilypondWithHandler (
   std::ostream&       err)
 {
   // open input file
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTracePasses ()) {
     gWaeHandler->waeTrace (
       err,
       __FILE__, __LINE__,
-      gWaeHandler->openingLilypondFileForWriting (inputFileName));
+      gLanguage->openingLilypondFileForWriting (inputFileName));
   }
 #endif
 
@@ -601,7 +603,7 @@ mfMusicformatsErrorKind convertMsdlFile2lilypondWithHandler (
     std::stringstream ss;
 
     ss <<
-      gWaeHandler->cannotOpenMSDLFileForReading (inputFileName);
+      gLanguage->cannotOpenMSDLFileForReading (inputFileName);
 
     std::string message = ss.str ();
 

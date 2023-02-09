@@ -467,7 +467,7 @@ class EXP msrNote : public msrTupletElement
                               { return fNoteHarmoniesList; }
 
     // figured bass
-    void                  appendFiguredBassToNoteFiguredBassesList (
+    void                  appendFiguredBassToNote (
                             const S_msrFiguredBass& figuredBass);
 
     const std::list<S_msrFiguredBass>&

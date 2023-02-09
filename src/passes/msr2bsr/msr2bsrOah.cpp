@@ -24,6 +24,8 @@
 
 #include "oahAtomsCollection.h"
 
+#include "waeHandlers.h"
+
 
 namespace MusicFormats
 {
@@ -162,10 +164,10 @@ R"(Include clefs in BSR. By default, they are not.)",
 
 void msr2bsrOahGroup::initializeMsr2bsrOahGroup ()
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   // trace
   // --------------------------------------
-// JMI  initializeMsr2bsrtracingOahGroup ();
+// JMI  initializeMsr2bsrTraceOahGroup ();
 #endif
 
   // miscellaneous
@@ -181,8 +183,8 @@ void msr2bsrOahGroup::checkGroupOptionsConsistency ()
 
 void msr2bsrOahGroup::acceptIn (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -200,8 +202,8 @@ void msr2bsrOahGroup::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_msr2bsrOahGroup>*> (v)) {
         S_msr2bsrOahGroup elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
-        if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -219,8 +221,8 @@ void msr2bsrOahGroup::acceptIn (basevisitor* v)
 
 void msr2bsrOahGroup::acceptOut (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -238,8 +240,8 @@ void msr2bsrOahGroup::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_msr2bsrOahGroup>*> (v)) {
         S_msr2bsrOahGroup elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
-        if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -257,8 +259,8 @@ void msr2bsrOahGroup::acceptOut (basevisitor* v)
 
 void msr2bsrOahGroup::browseData (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -274,7 +276,7 @@ void msr2bsrOahGroup::browseData (basevisitor* v)
 
 void msr2bsrOahGroup::displayMsr2bsrOahValues (int fieldWidth)
 {
-  gLogStream <<
+  gLog <<
     "The Msr2bsr options are:" <<
     std::endl;
 
@@ -283,13 +285,13 @@ void msr2bsrOahGroup::displayMsr2bsrOahValues (int fieldWidth)
   // miscellaneous
   // --------------------------------------
 
-  gLogStream <<
+  gLog <<
     "Miscellaneous:" <<
     std::endl;
 
   ++gIndenter;
 
-  gLogStream << std::left <<
+  gLog << std::left <<
     std::setw (fieldWidth) << "fNoBrailleHeadings" << ": " <<
       fNoBrailleHeadings <<
       std::endl <<
@@ -344,8 +346,8 @@ std::ostream& operator << (std::ostream& os, const S_msr2bsrOahGroup& elt)
 //______________________________________________________________________________
 S_msr2bsrOahGroup createGlobalMsr2bsrOahGroup ()
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<

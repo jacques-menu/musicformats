@@ -18,9 +18,9 @@
 
 #include "oahBasicTypes.h"
 
-#include "mfLanguages.h"
+#include "languages.h"
 #include "mfMultiGenerationOah.h"
-#include "mfWaeHandlers.h"
+#include "languages.h"
 
 
 namespace MusicFormats
@@ -43,7 +43,7 @@ EXP extern const std::string K_QUIET_OPTION_SHORT_NAME;
 EXP extern const std::string K_INCLUDE_OPTION_LONG_NAME;
 EXP extern const std::string K_INCLUDE_OPTION_SHORT_NAME;
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
 
 // trace early options
 EXP extern const std::string K_TRACE_EARLY_OPTIONS_OPTION_LONG_NAME;
@@ -97,9 +97,6 @@ class EXP oahEarlyOptions
     mfLanguageKind&       getEarlyLanguageKindRef ()
                               { return fEarlyLanguageKind; }
 
-    S_mfWaeHandler        getMfWaeHandler () const
-                              { return fMfWaeHandler; }
-
     void                  setEarlyInsiderOption ();
     Bool                  getEarlyInsiderOption () const
                               { return fEarlyInsiderOption; }
@@ -128,7 +125,7 @@ class EXP oahEarlyOptions
                           getEarlyIncludeFileNamesListRef ()
                               { return fEarlyIncludeFileNamesList; }
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
 
     void                  setTraceEarlyOptions ();
     Bool                  getTraceEarlyOptions () const
@@ -142,17 +139,17 @@ class EXP oahEarlyOptions
     Bool&                 getEarlyOahVerboseModeRef ()
                               { return fEarlyOahVerboseMode; }
 
-    void                  setEarlyTracingOah ();
-    Bool                  getEarlyTracingOah () const
-                              { return fEarlyTracingOah; }
-    Bool&                 getEarlyTracingOahRef ()
-                              { return fEarlyTracingOah; }
+    void                  setEarlyTraceOah ();
+    Bool                  getEarlyTraceOah () const
+                              { return fEarlyTraceOah; }
+    Bool&                 getEarlyTraceOahRef ()
+                              { return fEarlyTraceOah; }
 
-    void                  setEarlyTracingOahDetails ();
-    Bool                  getEarlyTracingOahDetails () const
-                              { return fEarlyTracingOahDetails; }
-    Bool&                 getEarlyTracingOahDetailsRef ()
-                              { return fEarlyTracingOahDetails; }
+    void                  setEarlyTraceOahDetails ();
+    Bool                  getEarlyTraceOahDetails () const
+                              { return fEarlyTraceOahDetails; }
+    Bool&                 getEarlyTraceOahDetailsRef ()
+                              { return fEarlyTraceOahDetails; }
 
     void                  setEarlyTraceComponents ();
     Bool                  getEarlyTraceComponents () const
@@ -217,7 +214,6 @@ class EXP oahEarlyOptions
     // ------------------------------------------------------
 
     mfLanguageKind        fEarlyLanguageKind;
-    S_mfWaeHandler        fMfWaeHandler;
 
     Bool                  fEarlyInsiderOption;
 //     Bool                  fEarlyRegularOption;
@@ -230,14 +226,14 @@ class EXP oahEarlyOptions
     std::list<std::string>
                           fEarlyIncludeFileNamesList;
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
 
     Bool                  fTraceEarlyOptions;
 
     Bool                  fEarlyOahVerboseMode;
 
-    Bool                  fEarlyTracingOah;
-    Bool                  fEarlyTracingOahDetails;
+    Bool                  fEarlyTraceOah;
+    Bool                  fEarlyTraceOahDetails;
 
     Bool                  fEarlyTraceComponents;
 
@@ -250,12 +246,12 @@ typedef SMARTP<oahEarlyOptions> S_oahEarlyOptions;
 EXP std::ostream& operator << (std::ostream& os, const oahEarlyOptions& elt);
 
 //______________________________________________________________________________
-// global variable
-EXP extern oahEarlyOptions gGlobalOahEarlyOptions;
+// hidden global OAH early options variable
+EXP oahEarlyOptions& getGlobalOahEarlyOptions ();
 
-//______________________________________________________________________________
-// useful shortcut macro
-#define gWaeHandler gGlobalOahEarlyOptions.getMfWaeHandler ()
+// a handy shortcut
+#define gEarlyOptions getGlobalOahEarlyOptions ()
+
 
 }
 

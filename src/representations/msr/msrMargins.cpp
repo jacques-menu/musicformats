@@ -13,9 +13,10 @@
 #include <iomanip>      // setw()), set::precision(), ...
 
 #include "mfIndentedTextOutput.h"
-#include "msrMargins.h"
 #include "mfServices.h"
 #include "msrWae.h"
+
+#include "msrMargins.h"
 
 
 namespace MusicFormats
@@ -212,7 +213,7 @@ void msrMarginsGroup::setLeftMargin (
       " margins group";
 
     msrInternalError (
-      gGlobalCurrentServiceRunData->getInputSourceName (),
+      gServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
       ss.str ());
@@ -240,7 +241,7 @@ void msrMarginsGroup::setRightMargin (
       " margins group";
 
     msrInternalError (
-      gGlobalCurrentServiceRunData->getInputSourceName (),
+      gServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
       ss.str ());
@@ -268,7 +269,7 @@ void msrMarginsGroup::setTopMargin (
       " margins group";
 
     msrInternalError (
-      gGlobalCurrentServiceRunData->getInputSourceName (),
+      gServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
       ss.str ());
@@ -296,7 +297,7 @@ void msrMarginsGroup::setBottomMargin (
       " margins group";
 
     msrInternalError (
-      gGlobalCurrentServiceRunData->getInputSourceName (),
+      gServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
       ss.str ());
@@ -307,8 +308,9 @@ void msrMarginsGroup::setBottomMargin (
 
 /* JMI
 void msrMarginsGroup::acceptIn (basevisitor* v) {
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "% ==> msrMarginsGroup::acceptIn ()" <<
@@ -318,12 +320,14 @@ void msrMarginsGroup::acceptIn (basevisitor* v) {
       __FILE__, __LINE__,
       ss.str ());
   }
+#endif
 
   if (visitor<S_msrMarginsGroup>*
     p =
       dynamic_cast<visitor<S_msrMarginsGroup>*> (v)) {
         S_msrMarginsGroup elem = this;
 
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
@@ -335,8 +339,9 @@ void msrMarginsGroup::acceptIn (basevisitor* v) {
 }
 
 void msrMarginsGroup::acceptOut (basevisitor* v) {
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "% ==> msrMarginsGroup::acceptOut ()" <<
@@ -346,12 +351,14 @@ void msrMarginsGroup::acceptOut (basevisitor* v) {
       __FILE__, __LINE__,
       ss.str ());
   }
+#endif
 
   if (visitor<S_msrMarginsGroup>*
     p =
       dynamic_cast<visitor<S_msrMarginsGroup>*> (v)) {
         S_msrMarginsGroup elem = this;
 
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 

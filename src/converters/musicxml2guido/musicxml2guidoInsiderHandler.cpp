@@ -78,8 +78,8 @@ R"(
 Usage: xml2gmn [[option]* [MusicXMLFile|-] [[option]*
 )")
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<
@@ -140,8 +140,8 @@ R"(What xml2gmn does:
 //______________________________________________________________________________
 void xml2gmnInsiderHandler::createTheXml2gmnPrefixes ()
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOahDetails ()) {
 		std::stringstream ss;
 
     ss <<
@@ -163,8 +163,8 @@ void xml2gmnInsiderHandler::createTheXml2gmnPrefixes ()
 void xml2gmnInsiderHandler::createTheXml2gmnOptionGroups (
   const std::string& serviceName)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOahDetails ()) {
 		std::stringstream ss;
 
     ss <<
@@ -195,10 +195,10 @@ void xml2gmnInsiderHandler::createTheXml2gmnOptionGroups (
   appendGroupToHandler (
     createGlobalWaeOahGroup ());
 
-#ifdef MF_TRACING_IS_ENABLED
-  // create the tracing OAH group
+#ifdef MF_TRACE_IS_ENABLED
+  // create the trace OAH group
   appendGroupToHandler (
-    createGlobalTracingOahGroup (
+    createGlobalTraceOahGroup (
       this));
 #endif
 
@@ -261,8 +261,8 @@ void xml2gmnInsiderHandler::createTheXml2gmnOptionGroups (
 //______________________________________________________________________________
 void xml2gmnInsiderHandler::checkOptionsAndArguments () const
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOahDetails ()) {
 		std::stringstream ss;
 
     ss <<
@@ -283,8 +283,8 @@ void xml2gmnInsiderHandler::checkOptionsAndArguments () const
 //______________________________________________________________________________
 std::string xml2gmnInsiderHandler::fetchOutputFileNameFromTheOptions () const
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOahDetails ()) {
 		std::stringstream ss;
 
     ss <<
@@ -352,7 +352,7 @@ std::string xml2gmnInsiderHandler::fetchOutputFileNameFromTheOptions () const
       // '-aofn, -auto-output-file-name' has been selected
       std::string
         inputSourceName =
-          gGlobalCurrentServiceRunData->getInputSourceName ();
+          gServiceRunData->getInputSourceName ();
 
       // determine output file base name
       if (inputSourceName == "-") {
@@ -377,8 +377,8 @@ std::string xml2gmnInsiderHandler::fetchOutputFileNameFromTheOptions () const
         }
       }
 
-#ifdef MF_TRACING_IS_ENABLED
-      if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
+#ifdef MF_TRACE_IS_ENABLED
+      if (gEarlyOptions.getEarlyTraceOahDetails ()) {
         std::stringstream ss;
 
         ss <<
@@ -396,8 +396,8 @@ std::string xml2gmnInsiderHandler::fetchOutputFileNameFromTheOptions () const
       // append the file extension to the output file name
        outputFileName += ".gmn";
 
-#ifdef MF_TRACING_IS_ENABLED
-      if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
+#ifdef MF_TRACE_IS_ENABLED
+      if (gEarlyOptions.getEarlyTraceOahDetails ()) {
         std::stringstream ss;
 
         ss <<
@@ -430,8 +430,8 @@ void xml2gmnInsiderHandler::checkHandlerOptionsConsistency ()
 //______________________________________________________________________________
 void xml2gmnInsiderHandler::enforceHandlerQuietness ()
 {
-#ifdef MF_TRACING_IS_ENABLED
-  gGlobalTracingOahGroup->
+#ifdef MF_TRACE_IS_ENABLED
+  gGlobalTraceOahGroup->
     enforceGroupQuietness ();
 #endif
 
@@ -486,7 +486,7 @@ void xml2gmnInsiderOahGroup::checkGroupOptionsConsistency ()
     oahError (ss.str ());
   }
 
-  else if (fOutputFileName == gGlobalCurrentServiceRunData->getInputSourceName ()) {
+  else if (fOutputFileName == gServiceRunData->getInputSourceName ()) {
     std::stringstream ss;
 
     ss <<
@@ -500,8 +500,8 @@ void xml2gmnInsiderOahGroup::checkGroupOptionsConsistency ()
 //______________________________________________________________________________
 void xml2gmnInsiderOahGroup::acceptIn (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -519,8 +519,8 @@ void xml2gmnInsiderOahGroup::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_xml2gmnInsiderOahGroup>*> (v)) {
         S_xml2gmnInsiderOahGroup elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
-        if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -538,8 +538,8 @@ void xml2gmnInsiderOahGroup::acceptIn (basevisitor* v)
 
 void xml2gmnInsiderOahGroup::acceptOut (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -557,8 +557,8 @@ void xml2gmnInsiderOahGroup::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_xml2gmnInsiderOahGroup>*> (v)) {
         S_xml2gmnInsiderOahGroup elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
-        if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -576,8 +576,8 @@ void xml2gmnInsiderOahGroup::acceptOut (basevisitor* v)
 
 void xml2gmnInsiderOahGroup::browseData (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -678,9 +678,9 @@ xml2gmnInsiderOahGroup::~xml2gmnInsiderOahGroup ()
 //_______________________________________________________________________________
 void xml2gmnInsiderOahGroup::initializeXml2gmnInsiderOahGroup ()
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-  gLogStream << std::left <<
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
+  gLog << std::left <<
     "Initializing \"" <<
     fGroupHeader <<
     "\" group" <<
@@ -697,9 +697,9 @@ void xml2gmnInsiderOahGroup::initializeXml2gmnInsiderOahGroup ()
 //_______________________________________________________________________________
 void xml2gmnInsiderOahGroup::createInsiderQuitSubGroup ()
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
-  gLogStream << std::left <<
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOahDetails ()) {
+  gLog << std::left <<
     "Creating insider quit subgroup in \"" <<
     fGroupHeader <<
     "\"" <<
@@ -767,7 +767,7 @@ of the first MSR to the second one.)",
 //______________________________________________________________________________
 void xml2gmnInsiderOahGroup::printXml2gmnInsiderOahGroupValues (int fieldWidth)
 {
-  gLogStream <<
+  gLog <<
     "The xml2gmn options are:" <<
     std::endl;
 
@@ -777,13 +777,13 @@ void xml2gmnInsiderOahGroup::printXml2gmnInsiderOahGroupValues (int fieldWidth)
   // Guido
   // --------------------------------------
 
-  gLogStream << std::left <<
+  gLog << std::left <<
     std::setw (fieldWidth) << "Guido:" <<
     std::endl;
 
   ++gIndenter;
 
-  gLogStream << std::left <<
+  gLog << std::left <<
     std::setw (fieldWidth) <<
     "generateComments" << ": " << fGenerateComments <<
     std::endl <<
@@ -800,13 +800,13 @@ void xml2gmnInsiderOahGroup::printXml2gmnInsiderOahGroupValues (int fieldWidth)
   // quit after some passes
   // --------------------------------------
 
-  gLogStream <<
+  gLog <<
     "Quit after some passes:" <<
     std::endl;
 
   ++gIndenter;
 
-  gLogStream << std::left <<
+  gLog << std::left <<
     std::setw (fieldWidth) << "fQuitAfterPass2a" << ": " <<
     fQuitAfterPass2a <<
     std::endl <<
@@ -825,8 +825,8 @@ void xml2gmnInsiderOahGroup::printXml2gmnInsiderOahGroupValues (int fieldWidth)
 //______________________________________________________________________________
 S_xml2gmnInsiderOahGroup createGlobalXml2gmnOahGroup ()
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<

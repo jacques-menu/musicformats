@@ -377,7 +377,7 @@ void write_wchar_t ( wchar_t cell )
   conversion.cellar = cell;
 
   // write in reverse order!
-  gOutputStream << conversion.chars [0] << conversion.chars [1];
+  gOutput << conversion.chars [0] << conversion.chars [1];
 }
 
 void write_wstring (std::ostream& os, wstring wstr )

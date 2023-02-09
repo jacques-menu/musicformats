@@ -20,7 +20,8 @@ const std::string K_MEASURE_NUMBER_UNKNOWN = "K_MEASURE_NUMBER_UNKNOWN";
 const Rational    K_WHOLE_NOTES_UNKNOWN (-444444, 1);
 
 //______________________________________________________________________________
-S_msrMeasure gGlobalNullMeasureSmartPointer;
+// hidden global null measure variable
+S_msrMeasure pGlobalNullMeasure;
 
 
 }

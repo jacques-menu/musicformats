@@ -16,12 +16,13 @@
 #include "bsrMusicHeadings.h"
 
 #include "oahOah.h"
-#include "oahEarlyOptions.h"
 
 #include "bsrOah.h"
 #include "brailleGenerationOah.h"
 
 #include "msrBrowsers.h"
+
+#include "waeHandlers.h"
 
 
 namespace MusicFormats
@@ -86,7 +87,7 @@ S_bsrCellsList bsrMusicHeading::buildCellsList () const
 
 void bsrMusicHeading::acceptIn (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
 		std::stringstream ss;
 
@@ -106,7 +107,7 @@ void bsrMusicHeading::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_bsrMusicHeading>*> (v)) {
         S_bsrMusicHeading elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           std::stringstream ss;
 
@@ -125,7 +126,7 @@ void bsrMusicHeading::acceptIn (basevisitor* v)
 
 void bsrMusicHeading::acceptOut (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
 		std::stringstream ss;
 
@@ -145,7 +146,7 @@ void bsrMusicHeading::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_bsrMusicHeading>*> (v)) {
         S_bsrMusicHeading elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           std::stringstream ss;
 
@@ -164,7 +165,7 @@ void bsrMusicHeading::acceptOut (basevisitor* v)
 
 void bsrMusicHeading::browseData (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
 		std::stringstream ss;
 
@@ -197,7 +198,7 @@ void bsrMusicHeading::browseData (basevisitor* v)
     browser.browse (*fMusicHeadingTimeSignatureSignature);
   }
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
 		std::stringstream ss;
 

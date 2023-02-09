@@ -33,11 +33,11 @@ A typical use of exceptions in \lpsrToLilypond{lpsr2lilypondInterface.cpp} is:
         lilypondStandardOutputStream);
     }
     catch (lpsr2lilypondException& e) {
-      mfDisplayException (e, gOutputStream);
+      mfDisplayException (e, gOutput);
       return;
     }
     catch (std::exception& e) {
-      mfDisplayException (e, gOutputStream);
+      mfDisplayException (e, gOutput);
       return;
     }
 \end{lstlisting}

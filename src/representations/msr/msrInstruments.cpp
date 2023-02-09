@@ -29,9 +29,10 @@
 #include "msrInstruments.h"
 
 #include "oahOah.h"
-#include "oahEarlyOptions.h"
 
 #include "msrOah.h"
+
+#include "waeHandlers.h"
 
 
 namespace MusicFormats
@@ -86,11 +87,11 @@ void msrStringTuning::setStringTuningUpLinkToMeasure (
     "measure is null");
 #endif
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceWholeNotes ()) {
     ++gIndenter;
 
-    gLogStream <<
+    gLog <<
       "==> Setting the uplink to measure of string tuning " <<
       asString () <<
       " to measure " << measure->asString () <<
@@ -107,8 +108,9 @@ void msrStringTuning::setStringTuningUpLinkToMeasure (
 
 void msrStringTuning::acceptIn (basevisitor* v)
 {
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "% ==> msrStringTuning::acceptIn ()" <<
@@ -118,12 +120,14 @@ void msrStringTuning::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
+#endif
 
   if (visitor<S_msrStringTuning>*
     p =
       dynamic_cast<visitor<S_msrStringTuning>*> (v)) {
         S_msrStringTuning elem = this;
 
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
@@ -135,14 +139,16 @@ void msrStringTuning::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
+#endif
         p->visitStart (elem);
   }
 }
 
 void msrStringTuning::acceptOut (basevisitor* v)
 {
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "% ==> msrStringTuning::acceptOut ()" <<
@@ -152,12 +158,14 @@ void msrStringTuning::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
+#endif
 
   if (visitor<S_msrStringTuning>*
     p =
       dynamic_cast<visitor<S_msrStringTuning>*> (v)) {
         S_msrStringTuning elem = this;
 
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
@@ -169,6 +177,7 @@ void msrStringTuning::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
+#endif        
         p->visitEnd (elem);
   }
 }
@@ -235,7 +244,7 @@ S_msrScordatura msrScordatura::create (
   return
     msrScordatura::create (
       inputLineNumber,
-      gGlobalNullMeasureSmartPointer); // set later in setMeasureElementUpLinkToMeasure()
+      gNullMeasure); // set later in setMeasureElementUpLinkToMeasure()
 }
 
 msrScordatura::msrScordatura (
@@ -259,11 +268,11 @@ void msrScordatura::setScordaturaUpLinkToMeasure (
     "measure is null");
 #endif
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceWholeNotes ()) {
     ++gIndenter;
 
-    gLogStream <<
+    gLog <<
       "==> Setting the uplink to measure of scordatura " <<
       asString () <<
       " to measure " << measure->asString () <<
@@ -287,8 +296,9 @@ void msrScordatura::addStringTuningToScordatura (
 
 void msrScordatura::acceptIn (basevisitor* v)
 {
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "% ==> msrScordatura::acceptIn ()" <<
@@ -298,12 +308,14 @@ void msrScordatura::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
+#endif
 
   if (visitor<S_msrScordatura>*
     p =
       dynamic_cast<visitor<S_msrScordatura>*> (v)) {
         S_msrScordatura elem = this;
 
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
@@ -315,14 +327,16 @@ void msrScordatura::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
+#endif
         p->visitStart (elem);
   }
 }
 
 void msrScordatura::acceptOut (basevisitor* v)
 {
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "% ==> msrScordatura::acceptOut ()" <<
@@ -332,12 +346,14 @@ void msrScordatura::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
+#endif
 
   if (visitor<S_msrScordatura>*
     p =
       dynamic_cast<visitor<S_msrScordatura>*> (v)) {
         S_msrScordatura elem = this;
 
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
@@ -349,6 +365,7 @@ void msrScordatura::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
+#endif        
         p->visitEnd (elem);
   }
 }
@@ -427,7 +444,7 @@ S_msrAccordionRegistration msrAccordionRegistration::create (
   return
     msrAccordionRegistration::create (
       inputLineNumber,
-      gGlobalNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
+      gNullMeasure, // set later in setMeasureElementUpLinkToMeasure()
       highDotsNumber,
       middleDotsNumber,
       lowDotsNumber);
@@ -461,11 +478,11 @@ void msrAccordionRegistration::setAccordionRegistrationUpLinkToMeasure (
     "measure is null");
 #endif
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceWholeNotes ()) {
     ++gIndenter;
 
-    gLogStream <<
+    gLog <<
       "==> Setting the uplink to measure of accordion registration " <<
       asString () <<
       " to measure " << measure->asString () <<
@@ -482,8 +499,9 @@ void msrAccordionRegistration::setAccordionRegistrationUpLinkToMeasure (
 
 void msrAccordionRegistration::acceptIn (basevisitor* v)
 {
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "% ==> msrAccordionRegistration::acceptIn ()" <<
@@ -493,12 +511,14 @@ void msrAccordionRegistration::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
+#endif
 
   if (visitor<S_msrAccordionRegistration>*
     p =
       dynamic_cast<visitor<S_msrAccordionRegistration>*> (v)) {
         S_msrAccordionRegistration elem = this;
 
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
@@ -510,14 +530,16 @@ void msrAccordionRegistration::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
+#endif
         p->visitStart (elem);
   }
 }
 
 void msrAccordionRegistration::acceptOut (basevisitor* v)
 {
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "% ==> msrAccordionRegistration::acceptOut ()" <<
@@ -527,12 +549,14 @@ void msrAccordionRegistration::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
+#endif
 
   if (visitor<S_msrAccordionRegistration>*
     p =
       dynamic_cast<visitor<S_msrAccordionRegistration>*> (v)) {
         S_msrAccordionRegistration elem = this;
 
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
@@ -544,6 +568,7 @@ void msrAccordionRegistration::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
+#endif        
         p->visitEnd (elem);
   }
 }
@@ -605,7 +630,7 @@ S_msrHarpPedalsTuning msrHarpPedalsTuning::create (
   return
     msrHarpPedalsTuning::create (
       inputLineNumber,
-      gGlobalNullMeasureSmartPointer); // set later in setMeasureElementUpLinkToMeasure()
+      gNullMeasure); // set later in setMeasureElementUpLinkToMeasure()
 }
 
 msrHarpPedalsTuning::msrHarpPedalsTuning (
@@ -620,8 +645,8 @@ msrHarpPedalsTuning::~msrHarpPedalsTuning ()
 
 S_msrHarpPedalsTuning msrHarpPedalsTuning::createHarpPedalsTuningNewbornClone ()
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceRepeats ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceRepeats ()) {
 		std::stringstream ss;
 
     ss <<
@@ -643,8 +668,8 @@ S_msrHarpPedalsTuning msrHarpPedalsTuning::createHarpPedalsTuningNewbornClone ()
 
 S_msrHarpPedalsTuning msrHarpPedalsTuning::createHarpPedalsTuningDeepClone ()
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceRepeats ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceRepeats ()) {
 		std::stringstream ss;
 
     ss <<
@@ -675,11 +700,11 @@ void msrHarpPedalsTuning::setHarpPedalsTuningUpLinkToMeasure (
     "measure is null");
 #endif
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceWholeNotes ()) {
     ++gIndenter;
 
-    gLogStream <<
+    gLog <<
       "==> Setting the uplink to measure of harp pedals tuning " <<
       asString () <<
       " to measure " << measure->asString () <<
@@ -716,7 +741,7 @@ void msrHarpPedalsTuning::addPedalTuning (
       "' has already been specified";
 
     msrError (
-      gGlobalCurrentServiceRunData->getInputSourceName (),
+      gServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
       ss.str ());
@@ -727,8 +752,9 @@ void msrHarpPedalsTuning::addPedalTuning (
 
 void msrHarpPedalsTuning::acceptIn (basevisitor* v)
 {
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "% ==> msrHarpPedalsTuning::acceptIn ()" <<
@@ -738,12 +764,14 @@ void msrHarpPedalsTuning::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
+#endif
 
   if (visitor<S_msrHarpPedalsTuning>*
     p =
       dynamic_cast<visitor<S_msrHarpPedalsTuning>*> (v)) {
         S_msrHarpPedalsTuning elem = this;
 
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
@@ -755,14 +783,16 @@ void msrHarpPedalsTuning::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
+#endif
         p->visitStart (elem);
   }
 }
 
 void msrHarpPedalsTuning::acceptOut (basevisitor* v)
 {
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "% ==> msrHarpPedalsTuning::acceptOut ()" <<
@@ -772,12 +802,14 @@ void msrHarpPedalsTuning::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
+#endif
 
   if (visitor<S_msrHarpPedalsTuning>*
     p =
       dynamic_cast<visitor<S_msrHarpPedalsTuning>*> (v)) {
         S_msrHarpPedalsTuning elem = this;
 
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
@@ -789,6 +821,7 @@ void msrHarpPedalsTuning::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
+#endif        
         p->visitEnd (elem);
   }
 }
@@ -916,7 +949,7 @@ S_msrPedal msrPedal::create (
   return
     msrPedal::create (
       inputLineNumber,
-      gGlobalNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
+      gNullMeasure, // set later in setMeasureElementUpLinkToMeasure()
       pedalTypeKind,
       pedalLineKind,
       pedalSignKind);
@@ -950,11 +983,11 @@ void msrPedal::setPedalUpLinkToMeasure (
     "measure is null");
 #endif
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceWholeNotes ()) {
     ++gIndenter;
 
-    gLogStream <<
+    gLog <<
       "==> Setting the uplink to measure of pedal " <<
       asString () <<
       " to measure " << measure->asString () <<
@@ -971,8 +1004,9 @@ void msrPedal::setPedalUpLinkToMeasure (
 
 void msrPedal::acceptIn (basevisitor* v)
 {
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "% ==> msrPedal::acceptIn ()" <<
@@ -982,12 +1016,14 @@ void msrPedal::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
+#endif
 
   if (visitor<S_msrPedal>*
     p =
       dynamic_cast<visitor<S_msrPedal>*> (v)) {
         S_msrPedal elem = this;
 
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
@@ -999,14 +1035,16 @@ void msrPedal::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
+#endif
         p->visitStart (elem);
   }
 }
 
 void msrPedal::acceptOut (basevisitor* v)
 {
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "% ==> msrPedal::acceptOut ()" <<
@@ -1016,12 +1054,14 @@ void msrPedal::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
+#endif
 
   if (visitor<S_msrPedal>*
     p =
       dynamic_cast<visitor<S_msrPedal>*> (v)) {
         S_msrPedal elem = this;
 
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
@@ -1033,6 +1073,7 @@ void msrPedal::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
+#endif        
         p->visitEnd (elem);
   }
 }
@@ -1161,7 +1202,7 @@ S_msrDamp msrDamp::create (
   return
     msrDamp::create (
       inputLineNumber,
-      gGlobalNullMeasureSmartPointer); // set later in setMeasureElementUpLinkToMeasure()
+      gNullMeasure); // set later in setMeasureElementUpLinkToMeasure()
 }
 
 msrDamp::msrDamp (
@@ -1185,11 +1226,11 @@ void msrDamp::setDampUpLinkToMeasure (
     "measure is null");
 #endif
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceWholeNotes ()) {
     ++gIndenter;
 
-    gLogStream <<
+    gLog <<
       "==> Setting the uplink to measure of damp " <<
       asString () <<
       " to measure " << measure->asString () <<
@@ -1206,8 +1247,9 @@ void msrDamp::setDampUpLinkToMeasure (
 
 void msrDamp::acceptIn (basevisitor* v)
 {
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "% ==> msrDamp::acceptIn ()" <<
@@ -1217,12 +1259,14 @@ void msrDamp::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
+#endif
 
   if (visitor<S_msrDamp>*
     p =
       dynamic_cast<visitor<S_msrDamp>*> (v)) {
         S_msrDamp elem = this;
 
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
@@ -1234,14 +1278,16 @@ void msrDamp::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
+#endif
         p->visitStart (elem);
   }
 }
 
 void msrDamp::acceptOut (basevisitor* v)
 {
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "% ==> msrDamp::acceptOut ()" <<
@@ -1251,12 +1297,14 @@ void msrDamp::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
+#endif
 
   if (visitor<S_msrDamp>*
     p =
       dynamic_cast<visitor<S_msrDamp>*> (v)) {
         S_msrDamp elem = this;
 
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
@@ -1268,6 +1316,7 @@ void msrDamp::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
+#endif        
         p->visitEnd (elem);
   }
 }
@@ -1314,7 +1363,7 @@ S_msrDampAll msrDampAll::create (
   return
     msrDampAll::create (
       inputLineNumber,
-      gGlobalNullMeasureSmartPointer); // set later in setMeasureElementUpLinkToMeasure()
+      gNullMeasure); // set later in setMeasureElementUpLinkToMeasure()
 }
 
 msrDampAll::msrDampAll (
@@ -1338,11 +1387,11 @@ void msrDampAll::setDampAllUpLinkToMeasure (
     "measure is null");
 #endif
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceWholeNotes ()) {
     ++gIndenter;
 
-    gLogStream <<
+    gLog <<
       "==> Setting the uplink to measure of dampAll " <<
       asString () <<
       " to measure " << measure->asString () <<
@@ -1359,8 +1408,9 @@ void msrDampAll::setDampAllUpLinkToMeasure (
 
 void msrDampAll::acceptIn (basevisitor* v)
 {
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "% ==> msrDampAll::acceptIn ()" <<
@@ -1370,12 +1420,14 @@ void msrDampAll::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
+#endif
 
   if (visitor<S_msrDampAll>*
     p =
       dynamic_cast<visitor<S_msrDampAll>*> (v)) {
         S_msrDampAll elem = this;
 
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
@@ -1387,14 +1439,16 @@ void msrDampAll::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
+#endif
         p->visitStart (elem);
   }
 }
 
 void msrDampAll::acceptOut (basevisitor* v)
 {
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "% ==> msrDampAll::acceptOut ()" <<
@@ -1404,12 +1458,14 @@ void msrDampAll::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
+#endif
 
   if (visitor<S_msrDampAll>*
     p =
       dynamic_cast<visitor<S_msrDampAll>*> (v)) {
         S_msrDampAll elem = this;
 
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
@@ -1421,6 +1477,7 @@ void msrDampAll::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
+#endif        
         p->visitEnd (elem);
   }
 }

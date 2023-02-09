@@ -23,6 +23,9 @@
 
 #include "oahElements.h"
 
+#include "waeHandlers.h"
+
+
 namespace MusicFormats
 {
 
@@ -144,8 +147,8 @@ oahFindStringMatch::oahFindStringMatch (
       fFoundString (foundString),
       fContainingFindableElementInfo (containingFindableElementInfo)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<
@@ -461,9 +464,9 @@ std::string oahElement::fetchNamesInColumnsBetweenParentheses (
 
 // void oahElement::acceptIn (basevisitor* v)
 // {
-// #ifdef MF_TRACING_IS_ENABLED
-//   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-//     gLogStream <<
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+//     gLog <<
 //       ".\\\" ==> oahElement::acceptIn ()" <<
 //       std::endl;
 //   }
@@ -474,9 +477,9 @@ std::string oahElement::fetchNamesInColumnsBetweenParentheses (
 //       dynamic_cast<visitor<S_oahElement>*> (v)) {
 //         S_oahElement elem = this;
 //
-// #ifdef MF_TRACING_IS_ENABLED
-//         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-//           gLogStream <<
+// #ifdef MF_TRACE_IS_ENABLED
+//         if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+//           gLog <<
 //             ".\\\" ==> Launching oahElement::visitStart ()" <<
 //             std::endl;
 //         }
@@ -487,9 +490,9 @@ std::string oahElement::fetchNamesInColumnsBetweenParentheses (
 //
 // void oahElement::acceptOut (basevisitor* v)
 // {
-// #ifdef MF_TRACING_IS_ENABLED
-//   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-//     gLogStream <<
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+//     gLog <<
 //       ".\\\" ==> oahElement::acceptOut ()" <<
 //       std::endl;
 //   }
@@ -500,9 +503,9 @@ std::string oahElement::fetchNamesInColumnsBetweenParentheses (
 //       dynamic_cast<visitor<S_oahElement>*> (v)) {
 //         S_oahElement elem = this;
 //
-// #ifdef MF_TRACING_IS_ENABLED
-//         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-//           gLogStream <<
+// #ifdef MF_TRACE_IS_ENABLED
+//         if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+//           gLog <<
 //             ".\\\" ==> Launching oahElement::visitEnd ()" <<
 //             std::endl;
 //         }
@@ -513,9 +516,9 @@ std::string oahElement::fetchNamesInColumnsBetweenParentheses (
 //
 // void oahElement::browseData (basevisitor* v)
 // {
-// #ifdef MF_TRACING_IS_ENABLED
-//   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-//     gLogStream <<
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+//     gLog <<
 //       ".\\\" ==> oahElement::browseData ()" <<
 //       std::endl;
 //   }

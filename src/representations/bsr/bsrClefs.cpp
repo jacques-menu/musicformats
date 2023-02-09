@@ -20,9 +20,10 @@
 #include "bsrClefs.h"
 
 #include "oahOah.h"
-#include "oahEarlyOptions.h"
 
 #include "bsrOah.h"
+
+#include "waeHandlers.h"
 
 
 namespace MusicFormats
@@ -49,8 +50,8 @@ bsrClef::bsrClef (
 
   fClefCellsList = buildCellsList ();
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceClefs ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceClefs ()) {
 		std::stringstream ss;
 
     ss <<
@@ -159,7 +160,7 @@ int bsrClef::fetchCellsNumber() const
 
 void bsrClef::acceptIn (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
 		std::stringstream ss;
 
@@ -179,7 +180,7 @@ void bsrClef::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_bsrClef>*> (v)) {
         S_bsrClef elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           std::stringstream ss;
 
@@ -198,7 +199,7 @@ void bsrClef::acceptIn (basevisitor* v)
 
 void bsrClef::acceptOut (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
 		std::stringstream ss;
 
@@ -218,7 +219,7 @@ void bsrClef::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_bsrClef>*> (v)) {
         S_bsrClef elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           std::stringstream ss;
 

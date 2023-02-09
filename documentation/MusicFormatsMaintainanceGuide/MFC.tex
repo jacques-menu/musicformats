@@ -375,8 +375,8 @@ S_mfcRepresentationComponent EXP createMsrRepresentationComponent ()
   // protect library against multiple initializations
   if (! pRepresentationComponent) {
 
-#ifdef MF_TRACING_IS_ENABLED
-    if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {
+#ifdef MF_TRACE_IS_ENABLED
+    if (gEarlyOptions.getEarlyTraceComponents ()) {
 	  	std::stringstream ss;
 
       ss <<
@@ -439,8 +439,8 @@ S_mfcConverterComponent EXP createMusicxml2brailleConverterComponent ()
   // protect library against multiple initializations
   if (! pConverterComponent) {
 
-#ifdef MF_TRACING_IS_ENABLED
-    if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {
+#ifdef MF_TRACE_IS_ENABLED
+    if (gEarlyOptions.getEarlyTraceComponents ()) {
 	  	std::stringstream ss;
 
       ss <<
@@ -531,8 +531,8 @@ S_mfcLibraryComponent EXP createLibraryComponent ()
   // protect library against multiple initializations
   if (! pLibraryComponent) {
 
-#ifdef MF_TRACING_IS_ENABLED
-    if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+    if (gEarlyOptions.getEarlyTraceOah ()) {
 	  	std::stringstream ss;
 
       ss <<
@@ -601,7 +601,7 @@ S_mfcLibraryComponent EXP createLibraryComponent ()
           mfcVersionNumber::createFromString ("0.9.54"),
           "Novermber 6, 2021",
           std::list<std::string> {
-            "Replaced std::cout and std::cerr by gOutputStream and gLogStream respectively in the CLI samples",
+            "Replaced std::cout and std::cerr by gOutput and gLog respectively in the CLI samples",
             "Finalized components numbering (MFC)"
           }
       ));
@@ -889,8 +889,8 @@ The option is applied by \method{oahVersionAtom}{applyElement}:
 \begin{lstlisting}[language=CPlusPlus]
 void oahVersionAtom::applyValueLessAtom (std::ostream& os)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1015,16 +1015,16 @@ lpsrScore::lpsrScore (
         std::endl <<
 
         "% on " <<
-        gGlobalCurrentServiceRunData->getTranslationDateFull () <<
+        gServiceRunData->getTranslationDateFull () <<
         std::endl <<
 
         "% from ";
 
-      if (gGlobalCurrentServiceRunData->getInputSourceName () == "-") {
+      if (gServiceRunData->getInputSourceName () == "-") {
         ss << "standard input";
       }
       else {
-        ss << "\"" << gGlobalCurrentServiceRunData->getInputSourceName () << "\"";
+        ss << "\"" << gServiceRunData->getInputSourceName () << "\"";
       }
 
       fInputSourceNameComment =
@@ -1109,11 +1109,11 @@ void msr2mxsrTranslator::visitStart (S_msrScore& elt)
     std::endl <<
 
     "on " <<
-    gGlobalCurrentServiceRunData->getTranslationDateFull () <<
+    gServiceRunData->getTranslationDateFull () <<
     std::endl <<
 
     "from " <<
-    gGlobalCurrentServiceRunData->getInputSourceName () <<
+    gServiceRunData->getInputSourceName () <<
     std::endl <<
 
     "==================================================" <<

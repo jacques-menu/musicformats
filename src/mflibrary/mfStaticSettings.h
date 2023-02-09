@@ -40,11 +40,11 @@
 #endif
 
 //______________________________________________________________________________
-// comment the following definition if no tracing is desired
-#define MF_TRACING_IS_ENABLED
+// comment the following definition if no trace is desired
+#define MF_TRACE_IS_ENABLED
 
-#ifdef MF_TRACING_IS_ENABLED
-  #include "mfTracingOah.h"
+#ifdef MF_TRACE_IS_ENABLED
+  #include "mfTraceOah.h"
 #endif
 
 

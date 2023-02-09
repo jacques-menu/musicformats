@@ -17,10 +17,13 @@
 #include "bsrFootNotesElements.h"
 
 #include "oahOah.h"
-#include "oahEarlyOptions.h"
 
 #include "bsrOah.h"
 #include "brailleGenerationOah.h"
+
+#include "waeHandlers.h"
+
+#include "waeHandlers.h"
 
 
 namespace MusicFormats
@@ -54,7 +57,7 @@ bsrFootNotesElement::~bsrFootNotesElement ()
 
 void bsrFootNotesElement::acceptIn (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
 		std::stringstream ss;
 
@@ -74,7 +77,7 @@ void bsrFootNotesElement::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_bsrFootNotesElement>*> (v)) {
         S_bsrFootNotesElement elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           std::stringstream ss;
 
@@ -93,7 +96,7 @@ void bsrFootNotesElement::acceptIn (basevisitor* v)
 
 void bsrFootNotesElement::acceptOut (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
 		std::stringstream ss;
 
@@ -113,7 +116,7 @@ void bsrFootNotesElement::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_bsrFootNotesElement>*> (v)) {
         S_bsrFootNotesElement elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           std::stringstream ss;
 

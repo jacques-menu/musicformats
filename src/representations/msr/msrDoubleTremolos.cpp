@@ -30,11 +30,12 @@
 #include "msrDoubleTremolos.h"
 
 #include "oahOah.h"
-#include "oahEarlyOptions.h"
 
 #include "msrOah.h"
 
 #include "msrBrowsers.h"
+
+#include "waeHandlers.h"
 
 
 namespace MusicFormats
@@ -101,7 +102,7 @@ S_msrDoubleTremolo msrDoubleTremolo::create (
   return
     msrDoubleTremolo::create (
       inputLineNumber,
-      gGlobalNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
+      gNullMeasure, // set later in setMeasureElementUpLinkToMeasure()
       doubleTremoloKind,
       doubleDoubleTremoloTypeKind,
       doubleTremoloMarksNumber,
@@ -143,11 +144,11 @@ void msrDoubleTremolo::setDoubleTremoloUpLinkToMeasure (
     "measure is null");
 #endif
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceWholeNotes ()) {
     ++gIndenter;
 
-    gLogStream <<
+    gLog <<
       "==> Setting the uplink to measure of double tremolo " <<
       asString () <<
       " to measure " << measure->asString () <<
@@ -166,8 +167,8 @@ S_msrDoubleTremolo msrDoubleTremolo::createDoubleTremoloNewbornClone (
   const S_msrElement& doubleTremoloFirstElement,
   const S_msrElement& doubleTremoloSecondElement)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceTremolos ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceTremolos ()) {
 		std::stringstream ss;
 
     ss <<
@@ -197,7 +198,7 @@ S_msrDoubleTremolo msrDoubleTremolo::createDoubleTremoloNewbornClone (
     newbornClone =
       msrDoubleTremolo::create (
         fInputLineNumber,
-        gGlobalNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
+        gNullMeasure, // set later in setMeasureElementUpLinkToMeasure()
         fDoubleTremoloKind,
         fDoubleDoubleTremoloTypeKind,
         fDoubleTremoloMarksNumber,
@@ -228,11 +229,11 @@ S_msrDoubleTremolo msrDoubleTremolo::createDoubleTremoloNewbornClone (
 //   const Rational&     measurePosition,
 //   const std::string&  context)
 // {
-// #ifdef MF_TRACING_IS_ENABLED
-//   if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gGlobalTraceOahGroup->getTraceMeasurePositions ()) {
 //     ++gIndenter;
 //
-//     gLogStream <<
+//     gLog <<
 //       "Setting measure element measure position of double tremolo " <<
 //       asString () <<
 //       " to " <<
@@ -309,7 +310,7 @@ S_msrDoubleTremolo msrDoubleTremolo::createDoubleTremoloNewbornClone (
 //       }
 //       else {
 //         msrInternalError (
-//           gGlobalCurrentServiceRunData->getInputSourceName (),
+//           gServiceRunData->getInputSourceName (),
 //           fInputLineNumber,
 //           __FILE__, __LINE__,
 //           "notes double tremolo first element should be a note");
@@ -329,7 +330,7 @@ S_msrDoubleTremolo msrDoubleTremolo::createDoubleTremoloNewbornClone (
 //       }
 //       else {
 //         msrInternalError (
-//           gGlobalCurrentServiceRunData->getInputSourceName (),
+//           gServiceRunData->getInputSourceName (),
 //           fInputLineNumber,
 //           __FILE__, __LINE__,
 //           "chords double tremolo first element should be a chord");
@@ -340,8 +341,8 @@ S_msrDoubleTremolo msrDoubleTremolo::createDoubleTremoloNewbornClone (
 
 void msrDoubleTremolo::setDoubleTremoloNoteFirstElement (const S_msrNote& note)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceTremolos ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceTremolos ()) {
 		std::stringstream ss;
 
     ss <<
@@ -425,7 +426,7 @@ void msrDoubleTremolo::setDoubleTremoloNoteFirstElement (const S_msrNote& note)
       "line " << inputLineNumber;
 
     msrInternalError (
-      gGlobalCurrentServiceRunData->getInputSourceName (),
+      gServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
       ss.str ());
@@ -434,8 +435,8 @@ void msrDoubleTremolo::setDoubleTremoloNoteFirstElement (const S_msrNote& note)
   fDoubleTremoloNumberOfRepeats =
     numberOfRepeatsAsRational.getNumerator ();
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceTremolos ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceTremolos ()) {
 		std::stringstream ss;
 
     ss <<
@@ -458,8 +459,8 @@ void msrDoubleTremolo::setDoubleTremoloNoteFirstElement (const S_msrNote& note)
 void msrDoubleTremolo::setDoubleTremoloNoteSecondElement (
   const S_msrNote& note)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceTremolos ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceTremolos ()) {
 		std::stringstream ss;
 
     ss <<
@@ -497,8 +498,8 @@ void msrDoubleTremolo::setDoubleTremoloNoteSecondElement (
 
   // check that expected double tremolo sounding whole notes
   // match the known double tremolo sounding whole notes
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceTremolos ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceTremolos ()) {
 		std::stringstream ss;
 
     ss <<
@@ -541,7 +542,7 @@ void msrDoubleTremolo::setDoubleTremoloNoteSecondElement (
     --gIndenter;
 
     msrInternalError (
-      gGlobalCurrentServiceRunData->getInputSourceName (),
+      gServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
       ss.str ());
@@ -557,8 +558,8 @@ void msrDoubleTremolo::setDoubleTremoloNoteSecondElement (
 void msrDoubleTremolo::setDoubleTremoloChordFirstElement (
   const S_msrChord& chord)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceTremolos ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceTremolos ()) {
 		std::stringstream ss;
 
     ss <<
@@ -617,7 +618,7 @@ void msrDoubleTremolo::setDoubleTremoloChordFirstElement (
       --gIndenter;
 
       msrInternalError (
-        gGlobalCurrentServiceRunData->getInputSourceName (),
+        gServiceRunData->getInputSourceName (),
         chord->getInputLineNumber (),
         __FILE__, __LINE__,
         ss.str ());
@@ -630,8 +631,8 @@ void msrDoubleTremolo::setDoubleTremoloChordFirstElement (
 
 void msrDoubleTremolo::setDoubleTremoloChordSecondElement (const S_msrChord& chord)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceTremolos ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceTremolos ()) {
 		std::stringstream ss;
 
     ss <<
@@ -681,7 +682,7 @@ void msrDoubleTremolo::setDoubleTremoloChordSecondElement (const S_msrChord& cho
       --gIndenter;
 
       msrInternalError (
-        gGlobalCurrentServiceRunData->getInputSourceName (),
+        gServiceRunData->getInputSourceName (),
         chord->getInputLineNumber (),
         __FILE__, __LINE__,
         ss.str ());
@@ -702,8 +703,9 @@ void msrDoubleTremolo::setDoubleTremoloMeasureNumber (
 
 void msrDoubleTremolo::acceptIn (basevisitor* v)
 {
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "% ==> msrDoubleTremolo::acceptIn ()" <<
@@ -713,12 +715,14 @@ void msrDoubleTremolo::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
+#endif
 
   if (visitor<S_msrDoubleTremolo>*
     p =
       dynamic_cast<visitor<S_msrDoubleTremolo>*> (v)) {
         S_msrDoubleTremolo elem = this;
 
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
@@ -730,14 +734,16 @@ void msrDoubleTremolo::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
+#endif
         p->visitStart (elem);
   }
 }
 
 void msrDoubleTremolo::acceptOut (basevisitor* v)
 {
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "% ==> msrDoubleTremolo::acceptOut ()" <<
@@ -747,12 +753,14 @@ void msrDoubleTremolo::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
+#endif
 
   if (visitor<S_msrDoubleTremolo>*
     p =
       dynamic_cast<visitor<S_msrDoubleTremolo>*> (v)) {
         S_msrDoubleTremolo elem = this;
 
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
@@ -764,6 +772,7 @@ void msrDoubleTremolo::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
+#endif        
         p->visitEnd (elem);
   }
 }
@@ -857,7 +866,7 @@ std::string msrDoubleTremolo::asString () const
         }
         else {
           msrInternalError (
-            gGlobalCurrentServiceRunData->getInputSourceName (),
+            gServiceRunData->getInputSourceName (),
             fInputLineNumber,
             __FILE__, __LINE__,
             "notes double tremolo first element should be a note");
@@ -874,7 +883,7 @@ std::string msrDoubleTremolo::asString () const
         }
         else {
           msrInternalError (
-            gGlobalCurrentServiceRunData->getInputSourceName (),
+            gServiceRunData->getInputSourceName (),
             fInputLineNumber,
             __FILE__, __LINE__,
             "chords double tremolo first element should be a chord");
@@ -898,7 +907,7 @@ std::string msrDoubleTremolo::asString () const
         }
         else {
           msrInternalError (
-            gGlobalCurrentServiceRunData->getInputSourceName (),
+            gServiceRunData->getInputSourceName (),
             fInputLineNumber,
             __FILE__, __LINE__,
             "notes double tremolo second element should be a note");
@@ -915,7 +924,7 @@ std::string msrDoubleTremolo::asString () const
         }
         else {
           msrInternalError (
-            gGlobalCurrentServiceRunData->getInputSourceName (),
+            gServiceRunData->getInputSourceName (),
             fInputLineNumber,
             __FILE__, __LINE__,
             "chords double tremolo second element should be a chord");

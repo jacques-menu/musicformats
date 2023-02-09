@@ -62,11 +62,11 @@ msrTupletElement::~msrTupletElement ()
 //     "measure is null");
 // #endif
 //
-// #ifdef MF_TRACING_IS_ENABLED
-//   if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gGlobalTraceOahGroup->getTraceWholeNotes ()) {
 //     ++gIndenter;
 //
-//     gLogStream <<
+//     gLog <<
 //       "==> Setting the uplink to measure of tuplet element " <<
 //       asString () <<
 //       " to measure " << measure->asString () <<

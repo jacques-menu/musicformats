@@ -22,6 +22,8 @@
 
 #include "oahEarlyOptions.h"
 
+#include "waeHandlers.h"
+
 
 namespace MusicFormats
 {
@@ -488,7 +490,7 @@ std::string msdlKeywordKindAsMsdlString (
   msdlKeywordsLanguageKind languageKind,
   msdlKeywordKind          keywordKind)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsdl2msrOahGroup->getTraceTokensDetails ()) {
 		std::stringstream ss;
 
@@ -552,7 +554,7 @@ std::string msdlKeywordKindAsMsdlString (
     }
   }
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsdl2msrOahGroup->getTraceTokensDetails ()) {
 		std::stringstream ss;
 
@@ -663,7 +665,7 @@ msdlKeywordKind msdlKeywordKindFromString (
   msdlKeywordsLanguageKind languageKind,
   const std::string&       theString)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsdl2msrOahGroup->getTraceTokensDetails ()) {
 		std::stringstream ss;
 
@@ -727,7 +729,7 @@ msdlKeywordKind msdlKeywordKindFromString (
     }
   }
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsdl2msrOahGroup->getTraceTokensDetails ()) {
 		std::stringstream ss;
 
@@ -832,11 +834,11 @@ void initializeMSDLKeywords ()
   static Bool pPrivateThisMethodHasBeenRun (false);
 
   if (! pPrivateThisMethodHasBeenRun) {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
     if (
-      gGlobalOahEarlyOptions.getEarlyTracingOah ()
+      gEarlyOptions.getEarlyTraceOah ()
         &&
-     ! gGlobalOahEarlyOptions.getEarlyQuietOption ()
+     ! gEarlyOptions.getEarlyQuietOption ()
     ) {
 	  	std::stringstream ss;
 

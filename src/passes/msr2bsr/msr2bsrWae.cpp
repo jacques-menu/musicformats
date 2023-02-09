@@ -39,7 +39,7 @@ void msr2bsrUnsupported (
 {
   if (!
     (
-      gGlobalOahEarlyOptions.getEarlyQuietOption ()
+      gEarlyOptions.getEarlyQuietOption ()
         &&
       gGlobalWaeOahGroup->getDontShowErrors ()
     )
@@ -47,12 +47,12 @@ void msr2bsrUnsupported (
     gIndenter.resetToZero ();
 
     if (gGlobalOahOahGroup->getDisplaySourceCodePositions ()) {
-      gLogStream <<
+      gLog <<
         mfBaseName (sourceCodeFileName) << ":" << sourceCodeLineNumber <<
         ' ';
     }
 
-    gLogStream <<
+    gLog <<
       "### msr2bsr LIMITATION ### " <<
       inputSourceName << ":" << inputLineNumber << ": " << message <<
       std::endl;

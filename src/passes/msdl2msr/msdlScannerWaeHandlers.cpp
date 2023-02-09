@@ -90,7 +90,7 @@ msdlScannerWaeHandlerEnglish::~msdlScannerWaeHandlerEnglish ()
 
 void msdlScannerWaeHandlerEnglish::illegalCharacter (char theChar) const
 {
-  gLogStream <<
+  gLog <<
     "### illegal character: " <<
     "'" << theChar << "' ###" <<
     std::endl;
@@ -98,7 +98,7 @@ void msdlScannerWaeHandlerEnglish::illegalCharacter (char theChar) const
 
 void msdlScannerWaeHandlerEnglish::illegalCharacters (const std::string& theString) const
 {
-  gLogStream <<
+  gLog <<
     "### illegal characters: " <<
     "\"" << theString << "\" ###" <<
     std::endl;
@@ -106,14 +106,14 @@ void msdlScannerWaeHandlerEnglish::illegalCharacters (const std::string& theStri
 
 void msdlScannerWaeHandlerEnglish::digitExpectedAfterDecimalDot (char theChar) const
 {
-  gLogStream <<
+  gLog <<
     "### a digit is expected after decimal dot, found: " <<
     "'" << theChar << "' ###" <<
     std::endl;
 }
 void msdlScannerWaeHandlerEnglish::digitExpectedInExponent (char theChar) const
 {
-  gLogStream <<
+  gLog <<
     "### a digit is expected in exponent, found: " <<
     "'" << theChar << "' " <<
     std::endl;
@@ -121,7 +121,7 @@ void msdlScannerWaeHandlerEnglish::digitExpectedInExponent (char theChar) const
 
 void msdlScannerWaeHandlerEnglish::illegalEscapedCharacterInString (char theChar) const
 {
-  gLogStream <<
+  gLog <<
     "### illegal escaped character after '\': " <<
     "'" << theChar << "' ###" <<
     std::endl;
@@ -129,7 +129,7 @@ void msdlScannerWaeHandlerEnglish::illegalEscapedCharacterInString (char theChar
 
 void msdlScannerWaeHandlerEnglish::inputIsLexicallyCorrect (int numberOfTokens) const
 {
-  gLogStream <<
+  gLog <<
     "The MSDL input is lexically correct. It contains " <<
     mfSingularOrPlural (
       numberOfTokens, "token", "tokens") <<
@@ -138,7 +138,7 @@ void msdlScannerWaeHandlerEnglish::inputIsLexicallyCorrect (int numberOfTokens) 
 
 void msdlScannerWaeHandlerEnglish::inputIsLexicallyIncorrect (int numberOfTokens) const
 {
-  gLogStream <<
+  gLog <<
     "### The MSDL input is lexically incorrect. It contains " <<
     mfSingularOrPlural (
       numberOfTokens, "token", "tokens") <<
@@ -150,7 +150,7 @@ void msdlScannerWaeHandlerEnglish::inputIsAlreadyInMsdlKeywordsLanguage (
   msdlKeywordsLanguageKind
     keywordsConversionLanguage) const
 {
-  gLogStream <<
+  gLog <<
     "### The MSDL input is already in keywords language \"" <<
     msdlKeywordsLanguageKindAsString (keywordsConversionLanguage) <<
     "\", there is no need to translate it ###" <<
@@ -203,7 +203,7 @@ msdlScannerWaeHandlerFrench::~msdlScannerWaeHandlerFrench ()
 
 void msdlScannerWaeHandlerFrench::illegalCharacter (char theChar) const
 {
-  gLogStream <<
+  gLog <<
     "### caractère illégal: " <<
     "'" << theChar << "' ###" <<
     std::endl;
@@ -211,7 +211,7 @@ void msdlScannerWaeHandlerFrench::illegalCharacter (char theChar) const
 
 void msdlScannerWaeHandlerFrench::illegalCharacters (const std::string& theString) const
 {
-  gLogStream <<
+  gLog <<
     "### caractères illégaux: " <<
     "\"" << theString << "\" ###" <<
     std::endl;
@@ -219,14 +219,14 @@ void msdlScannerWaeHandlerFrench::illegalCharacters (const std::string& theStrin
 
 void msdlScannerWaeHandlerFrench::digitExpectedAfterDecimalDot (char theChar) const
 {
-  gLogStream <<
+  gLog <<
     "### un chiffre est attendu après un point décimal, trouvé: " <<
     "'" << theChar << "' ###" <<
     std::endl;
 }
 void msdlScannerWaeHandlerFrench::digitExpectedInExponent (char theChar) const
 {
-  gLogStream <<
+  gLog <<
     "### un chiffre est attendu dans un exposant, trouvé: " <<
     "'" << theChar << "' ###" <<
     std::endl;
@@ -234,7 +234,7 @@ void msdlScannerWaeHandlerFrench::digitExpectedInExponent (char theChar) const
 
 void msdlScannerWaeHandlerFrench::illegalEscapedCharacterInString (char theChar) const
 {
-  gLogStream <<
+  gLog <<
     "### caractère d'échappement illégal après '\': " <<
     "'" << theChar << "' ###" <<
     std::endl;
@@ -242,7 +242,7 @@ void msdlScannerWaeHandlerFrench::illegalEscapedCharacterInString (char theChar)
 
 void msdlScannerWaeHandlerFrench::inputIsLexicallyCorrect (int numberOfTokens) const
 {
-  gLogStream <<
+  gLog <<
     "Le texte MSDL est lexicalement correct. Il contient " <<
     mfSingularOrPlural (
       numberOfTokens, "terminal", "terminaux") <<
@@ -251,7 +251,7 @@ void msdlScannerWaeHandlerFrench::inputIsLexicallyCorrect (int numberOfTokens) c
 
 void msdlScannerWaeHandlerFrench::inputIsLexicallyIncorrect (int numberOfTokens) const
 {
-  gLogStream <<
+  gLog <<
     "### Le texte MSDL est lexicalement incorrect. Il contient " <<
     mfSingularOrPlural (
       numberOfTokens, "terminal", "terminaux") <<
@@ -263,7 +263,7 @@ void msdlScannerWaeHandlerFrench::inputIsAlreadyInMsdlKeywordsLanguage (
   msdlKeywordsLanguageKind
     keywordsConversionLanguage) const
 {
-  gLogStream <<
+  gLog <<
     "### Le texte MSDL est déjà dans la langue \"" <<
     msdlKeywordsLanguageKindAsString (keywordsConversionLanguage) <<
     "\" pour les mots clés, il n'a a pas besoin de le traduire ###" <<
@@ -316,7 +316,7 @@ msdlScannerWaeHandlerItalian::~msdlScannerWaeHandlerItalian ()
 
 void msdlScannerWaeHandlerItalian::illegalCharacter (char theChar) const
 {
-  gLogStream <<
+  gLog <<
     "### illegal character: " <<
     "'" << theChar << "' ###" <<
     std::endl;
@@ -324,7 +324,7 @@ void msdlScannerWaeHandlerItalian::illegalCharacter (char theChar) const
 
 void msdlScannerWaeHandlerItalian::illegalCharacters (const std::string& theString) const
 {
-  gLogStream <<
+  gLog <<
     "### illegal characters: " <<
     "\"" << theString << "\" ###" <<
     std::endl;
@@ -332,14 +332,14 @@ void msdlScannerWaeHandlerItalian::illegalCharacters (const std::string& theStri
 
 void msdlScannerWaeHandlerItalian::digitExpectedAfterDecimalDot (char theChar) const
 {
-  gLogStream <<
+  gLog <<
     "### a digit is expected after decimal dot, found: " <<
     "'" << theChar << "' ###" <<
     std::endl;
 }
 void msdlScannerWaeHandlerItalian::digitExpectedInExponent (char theChar) const
 {
-  gLogStream <<
+  gLog <<
     "### a digit is expected in exponent, found: " <<
     "'" << theChar << "' " <<
     std::endl;
@@ -347,7 +347,7 @@ void msdlScannerWaeHandlerItalian::digitExpectedInExponent (char theChar) const
 
 void msdlScannerWaeHandlerItalian::illegalEscapedCharacterInString (char theChar) const
 {
-  gLogStream <<
+  gLog <<
     "### illegal escaped character after '\': " <<
     "'" << theChar << "' ###" <<
     std::endl;
@@ -355,7 +355,7 @@ void msdlScannerWaeHandlerItalian::illegalEscapedCharacterInString (char theChar
 
 void msdlScannerWaeHandlerItalian::inputIsLexicallyCorrect (int numberOfTokens) const
 {
-  gLogStream <<
+  gLog <<
     "The MSDL input is lexically correct. It contains " <<
     mfSingularOrPlural (
       numberOfTokens, "token", "tokens") <<
@@ -364,7 +364,7 @@ void msdlScannerWaeHandlerItalian::inputIsLexicallyCorrect (int numberOfTokens) 
 
 void msdlScannerWaeHandlerItalian::inputIsLexicallyIncorrect (int numberOfTokens) const
 {
-  gLogStream <<
+  gLog <<
     "### The MSDL input is lexically incorrect. It contains " <<
     mfSingularOrPlural (
       numberOfTokens, "token", "tokens") <<
@@ -376,7 +376,7 @@ void msdlScannerWaeHandlerItalian::inputIsAlreadyInMsdlKeywordsLanguage (
   msdlKeywordsLanguageKind
     keywordsConversionLanguage) const
 {
-  gLogStream <<
+  gLog <<
     "### The MSDL input is already in keywords language \"" <<
     msdlKeywordsLanguageKindAsString (keywordsConversionLanguage) <<
     "\", there is no need to translate it ###" <<
@@ -429,7 +429,7 @@ msdlScannerWaeHandlerGerman::~msdlScannerWaeHandlerGerman ()
 
 void msdlScannerWaeHandlerGerman::illegalCharacter (char theChar) const
 {
-  gLogStream <<
+  gLog <<
     "### illegal character: " <<
     "'" << theChar << "' ###" <<
     std::endl;
@@ -437,7 +437,7 @@ void msdlScannerWaeHandlerGerman::illegalCharacter (char theChar) const
 
 void msdlScannerWaeHandlerGerman::illegalCharacters (const std::string& theString) const
 {
-  gLogStream <<
+  gLog <<
     "### illegal characters: " <<
     "\"" << theString << "\" ###" <<
     std::endl;
@@ -445,14 +445,14 @@ void msdlScannerWaeHandlerGerman::illegalCharacters (const std::string& theStrin
 
 void msdlScannerWaeHandlerGerman::digitExpectedAfterDecimalDot (char theChar) const
 {
-  gLogStream <<
+  gLog <<
     "### a digit is expected after decimal dot, found: " <<
     "'" << theChar << "' ###" <<
     std::endl;
 }
 void msdlScannerWaeHandlerGerman::digitExpectedInExponent (char theChar) const
 {
-  gLogStream <<
+  gLog <<
     "### a digit is expected in exponent, found: " <<
     "'" << theChar << "' " <<
     std::endl;
@@ -460,7 +460,7 @@ void msdlScannerWaeHandlerGerman::digitExpectedInExponent (char theChar) const
 
 void msdlScannerWaeHandlerGerman::illegalEscapedCharacterInString (char theChar) const
 {
-  gLogStream <<
+  gLog <<
     "### illegal escaped character after '\': " <<
     "'" << theChar << "' ###" <<
     std::endl;
@@ -468,7 +468,7 @@ void msdlScannerWaeHandlerGerman::illegalEscapedCharacterInString (char theChar)
 
 void msdlScannerWaeHandlerGerman::inputIsLexicallyCorrect (int numberOfTokens) const
 {
-  gLogStream <<
+  gLog <<
     "The MSDL input is lexically correct. It contains " <<
     mfSingularOrPlural (
       numberOfTokens, "token", "tokens") <<
@@ -478,7 +478,7 @@ void msdlScannerWaeHandlerGerman::inputIsLexicallyCorrect (int numberOfTokens) c
 
 void msdlScannerWaeHandlerGerman::inputIsLexicallyIncorrect (int numberOfTokens) const
 {
-  gLogStream <<
+  gLog <<
     "### The MSDL input is lexically incorrect. It contains " <<
     mfSingularOrPlural (
       numberOfTokens, "token", "tokens") <<
@@ -490,7 +490,7 @@ void msdlScannerWaeHandlerGerman::inputIsAlreadyInMsdlKeywordsLanguage (
   msdlKeywordsLanguageKind
     keywordsConversionLanguage) const
 {
-  gLogStream <<
+  gLog <<
     "### The MSDL input is already in keywords language \"" <<
     msdlKeywordsLanguageKindAsString (keywordsConversionLanguage) <<
     "\", there is no need to translate it ###" <<
@@ -543,7 +543,7 @@ msdlScannerWaeHandlerSpanish::~msdlScannerWaeHandlerSpanish ()
 
 void msdlScannerWaeHandlerSpanish::illegalCharacter (char theChar) const
 {
-  gLogStream <<
+  gLog <<
     "### illegal character: " <<
     "'" << theChar << "' ###" <<
     std::endl;
@@ -551,7 +551,7 @@ void msdlScannerWaeHandlerSpanish::illegalCharacter (char theChar) const
 
 void msdlScannerWaeHandlerSpanish::illegalCharacters (const std::string& theString) const
 {
-  gLogStream <<
+  gLog <<
     "### illegal characters: " <<
     "\"" << theString << "\" ###" <<
     std::endl;
@@ -559,14 +559,14 @@ void msdlScannerWaeHandlerSpanish::illegalCharacters (const std::string& theStri
 
 void msdlScannerWaeHandlerSpanish::digitExpectedAfterDecimalDot (char theChar) const
 {
-  gLogStream <<
+  gLog <<
     "### a digit is expected after decimal dot, found: " <<
     "'" << theChar << "' ###" <<
     std::endl;
 }
 void msdlScannerWaeHandlerSpanish::digitExpectedInExponent (char theChar) const
 {
-  gLogStream <<
+  gLog <<
     "### a digit is expected in exponent, found: " <<
     "'" << theChar << "' " <<
     std::endl;
@@ -574,7 +574,7 @@ void msdlScannerWaeHandlerSpanish::digitExpectedInExponent (char theChar) const
 
 void msdlScannerWaeHandlerSpanish::illegalEscapedCharacterInString (char theChar) const
 {
-  gLogStream <<
+  gLog <<
     "### illegal escaped character after '\': " <<
     "'" << theChar << "' ###" <<
     std::endl;
@@ -582,7 +582,7 @@ void msdlScannerWaeHandlerSpanish::illegalEscapedCharacterInString (char theChar
 
 void msdlScannerWaeHandlerSpanish::inputIsLexicallyCorrect (int numberOfTokens) const
 {
-  gLogStream <<
+  gLog <<
     "The MSDL input is lexically correct. It contains " <<
     mfSingularOrPlural (
       numberOfTokens, "token", "tokens") <<
@@ -592,7 +592,7 @@ void msdlScannerWaeHandlerSpanish::inputIsLexicallyCorrect (int numberOfTokens) 
 
 void msdlScannerWaeHandlerSpanish::inputIsLexicallyIncorrect (int numberOfTokens) const
 {
-  gLogStream <<
+  gLog <<
     "### The MSDL input is lexically incorrect. It contains " <<
     mfSingularOrPlural (
       numberOfTokens, "token", "tokens") <<
@@ -604,7 +604,7 @@ void msdlScannerWaeHandlerSpanish::inputIsAlreadyInMsdlKeywordsLanguage (
   msdlKeywordsLanguageKind
     keywordsConversionLanguage) const
 {
-  gLogStream <<
+  gLog <<
     "### The MSDL input is already in keywords language \"" <<
     msdlKeywordsLanguageKindAsString (keywordsConversionLanguage) <<
     "\", there is no need to translate it ###" <<
@@ -657,7 +657,7 @@ msdlScannerWaeHandlerDutch::~msdlScannerWaeHandlerDutch ()
 
 void msdlScannerWaeHandlerDutch::illegalCharacter (char theChar) const
 {
-  gLogStream <<
+  gLog <<
     "### illegal character: " <<
     "'" << theChar << "' ###" <<
     std::endl;
@@ -665,7 +665,7 @@ void msdlScannerWaeHandlerDutch::illegalCharacter (char theChar) const
 
 void msdlScannerWaeHandlerDutch::illegalCharacters (const std::string& theString) const
 {
-  gLogStream <<
+  gLog <<
     "### illegal characters: " <<
     "\"" << theString << "\" ###" <<
     std::endl;
@@ -673,14 +673,14 @@ void msdlScannerWaeHandlerDutch::illegalCharacters (const std::string& theString
 
 void msdlScannerWaeHandlerDutch::digitExpectedAfterDecimalDot (char theChar) const
 {
-  gLogStream <<
+  gLog <<
     "### a digit is expected after decimal dot, found: " <<
     "'" << theChar << "' ###" <<
     std::endl;
 }
 void msdlScannerWaeHandlerDutch::digitExpectedInExponent (char theChar) const
 {
-  gLogStream <<
+  gLog <<
     "### a digit is expected in exponent, found: " <<
     "'" << theChar << "' " <<
     std::endl;
@@ -688,7 +688,7 @@ void msdlScannerWaeHandlerDutch::digitExpectedInExponent (char theChar) const
 
 void msdlScannerWaeHandlerDutch::illegalEscapedCharacterInString (char theChar) const
 {
-  gLogStream <<
+  gLog <<
     "### illegal escaped character after '\': " <<
     "'" << theChar << "' ###" <<
     std::endl;
@@ -696,7 +696,7 @@ void msdlScannerWaeHandlerDutch::illegalEscapedCharacterInString (char theChar) 
 
 void msdlScannerWaeHandlerDutch::inputIsLexicallyCorrect (int numberOfTokens) const
 {
-  gLogStream <<
+  gLog <<
     "The MSDL input is lexically correct. It contains " <<
     mfSingularOrPlural (
       numberOfTokens, "token", "tokens") <<
@@ -706,7 +706,7 @@ void msdlScannerWaeHandlerDutch::inputIsLexicallyCorrect (int numberOfTokens) co
 
 void msdlScannerWaeHandlerDutch::inputIsLexicallyIncorrect (int numberOfTokens) const
 {
-  gLogStream <<
+  gLog <<
     "### The MSDL input is lexically incorrect. It contains " <<
     mfSingularOrPlural (
       numberOfTokens, "token", "tokens") <<
@@ -718,7 +718,7 @@ void msdlScannerWaeHandlerDutch::inputIsAlreadyInMsdlKeywordsLanguage (
   msdlKeywordsLanguageKind
     keywordsConversionLanguage) const
 {
-  gLogStream <<
+  gLog <<
     "### The MSDL input is already in keywords language \"" <<
     msdlKeywordsLanguageKindAsString (keywordsConversionLanguage) <<
     "\", there is no need to translate it ###" <<

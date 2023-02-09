@@ -15,8 +15,9 @@ Parts are presented at \sectionRef{Parts}.
 \begin{lstlisting}[language=CPlusPlus]
 void msrPart::browseData (basevisitor* v)
 {
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "% ==> msrPart::browseData ()" <<
@@ -26,17 +27,18 @@ void msrPart::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
+#endif
 
-#ifdef MF_TRACING_IS_ENABLED // JMI
+#ifdef MF_TRACE_IS_ENABLED // JMI
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) { // JMI TEMP
-    gLogStream <<
+    gLog <<
       "++++++++ fPartAllStavesList.size(): " <<
       fPartAllStavesList.size () <<
       std::endl;
 
     if (fPartAllStavesList.size ()) {
       for (S_msrStaff staff : fPartAllStavesList) {
-        gLogStream <<
+        gLog <<
           std::endl <<
           "+++++++++ staff: ++++++++" <<
           " \"" << staff->getStaffName () << "\"" <<
@@ -44,14 +46,14 @@ void msrPart::browseData (basevisitor* v)
       } // for
     }
 
-    gLogStream <<
+    gLog <<
       "++++++++ fPartNonHarmoniesNorFiguredBassStavesList.size(): " <<
       fPartNonHarmoniesNorFiguredBassStavesList.size () <<
       std::endl;
 
     if (fPartNonHarmoniesNorFiguredBassStavesList.size ()) {
       for (S_msrStaff staff : fPartNonHarmoniesNorFiguredBassStavesList) {
-        gLogStream <<
+        gLog <<
           std::endl <<
           "+++++++++ staff: ++++++++" <<
           " \"" << staff->getStaffName () << "\"" <<

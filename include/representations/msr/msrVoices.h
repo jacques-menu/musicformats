@@ -1344,8 +1344,6 @@ class EXP msrVoice : public msrElement
 
     // counters
 
-    static int            gVoicesCounter;
-
     int                   fVoiceActualNotesCounter;
     int                   fVoiceRestsCounter;
     int                   fVoiceSkipsCounter;

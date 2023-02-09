@@ -53,30 +53,38 @@ void displayLpsrScore (
 
   setGlobalCurrentPassIDKind (mfPassIDKind::kMfPassID_OptionalPass);
 
+#ifdef MF_TRACING_IS_ENABLED
   std::string separator =
     "%--------------------------------------------------------------";
 
-  gLogStream <<
+  std::stringstream ss;
+
+  ss <<
     separator <<
     std::endl <<
     gTab <<
-    gWaeHandler->passOptional () << ": "<< passDescription <<
+    gLanguage->passOptional () << ": "<< passDescription <<
     std::endl <<
     separator <<
     std::endl << std::endl;
 
-  gLogStream << theLpsrScore;
+  ss << theLpsrScore;
 
-  gLogStream <<
+  ss <<
     separator <<
     std::endl << std::endl;
+
+  gWaeHandler->waeTrace (
+    __FILE__, __LINE__,
+    ss.str ());
+#endif
 
   // register time spent
   clock_t endClock = clock ();
 
-  mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
+  gGlobalTimingItemsList.appendTimingItem (
 		mfPassIDKind::kMfPassID_OptionalPass,
-    gWaeHandler->displayTheLPSRAsText (),
+    gLanguage->displayTheLPSRAsText (),
     mfTimingItemKind::kOptional,
     startClock,
     endClock);
@@ -105,31 +113,39 @@ void displayLpsrScoreFull (
   std::string separator =
     "%--------------------------------------------------------------";
 
-  gLogStream <<
+#ifdef MF_TRACING_IS_ENABLED
+  std::stringstream ss;
+
+  ss <<
     separator <<
     std::endl <<
     gTab <<
-    gWaeHandler->passOptional () << ": "<< passDescription <<
+    gLanguage->passOptional () << ": "<< passDescription <<
     ", " <<
-    gWaeHandler->fullVersion () <<
+    gLanguage->fullVersion () <<
     std::endl <<
     separator <<
     std::endl << std::endl;
 
-  theLpsrScore->printFull (gLogStream);
+  gWaeHandler->waeTrace (
+    __FILE__, __LINE__,
+    ss.str ());
+#endif
 
-  gLogStream <<
+  theLpsrScore->printFull (gLog);
+
+  gLog <<
     separator <<
     std::endl << std::endl;
 
   // register time spent
   clock_t endClock = clock ();
 
-  mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
+  gGlobalTimingItemsList.appendTimingItem (
 		mfPassIDKind::kMfPassID_OptionalPass,
-    gWaeHandler->displayTheLPSRAsText ()
+    gLanguage->displayTheLPSRAsText ()
       + ", " +
-    gWaeHandler->fullVersion (),
+    gLanguage->fullVersion (),
     mfTimingItemKind::kOptional,
     startClock,
     endClock);
@@ -139,7 +155,7 @@ void displayLpsrScoreFull (
 }
 
 //   if (gIndenter != 0) {
-//     if (! gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
+//     if (! gEarlyOptions.getEarlyQuietOption ()) {
 //       std::stringstream ss;
 //
 //       ss <<
@@ -147,7 +163,7 @@ void displayLpsrScoreFull (
 //         gIndenter.getIndentation ();
 //
 //      lpsrWarning (
-//         gGlobalCurrentServiceRunData->getInputSourceName (),
+//         gServiceRunData->getInputSourceName (),
 //         1, // JMI inputLineNumber,
 //         ss.str ());
 //     }

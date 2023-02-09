@@ -123,7 +123,7 @@ void msrUnsupported (
 {
   if (!
     (
-      gGlobalOahEarlyOptions.getEarlyQuietOption ()
+      gEarlyOptions.getEarlyQuietOption ()
         &&
       gGlobalWaeOahGroup->getDontShowErrors ()
     )
@@ -131,12 +131,12 @@ void msrUnsupported (
     gIndenter.resetToZero ();
 
     if (gGlobalOahOahGroup->getDisplaySourceCodePositions ()) {
-      gLogStream <<
+      gLog <<
         mfBaseName (sourceCodeFileName) << ":" << sourceCodeLineNumber <<
         ' ';
     }
 
-    gLogStream <<
+    gLog <<
       "### MSR LIMITATION ### " <<
       inputSourceName << ":" << inputLineNumber << ": " << message <<
       std::endl;

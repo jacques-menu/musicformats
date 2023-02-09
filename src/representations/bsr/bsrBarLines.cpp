@@ -23,6 +23,8 @@
 
 #include "bsrOah.h"
 
+#include "waeHandlers.h"
+
 
 namespace MusicFormats
 {
@@ -48,8 +50,8 @@ bsrBarLine::bsrBarLine (
 
   fBarLineCellsList = buildCellsList ();
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceBarLines ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceBarLines ()) {
 		std::stringstream ss;
 
     ss <<
@@ -115,7 +117,7 @@ int bsrBarLine::fetchCellsNumber() const
 
 void bsrBarLine::acceptIn (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
 		std::stringstream ss;
 
@@ -135,7 +137,7 @@ void bsrBarLine::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_bsrBarLine>*> (v)) {
         S_bsrBarLine elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           std::stringstream ss;
 
@@ -154,7 +156,7 @@ void bsrBarLine::acceptIn (basevisitor* v)
 
 void bsrBarLine::acceptOut (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
 		std::stringstream ss;
 
@@ -174,7 +176,7 @@ void bsrBarLine::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_bsrBarLine>*> (v)) {
         S_bsrBarLine elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           std::stringstream ss;
 

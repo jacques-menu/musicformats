@@ -9,33 +9,33 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#ifndef ___mfWaeHandlersItalian___
-#define ___mfWaeHandlersItalian___
+#ifndef ___languagesDutch___
+#define ___languagesDutch___
 
-#include "mfWaeHandlers.h"
+#include "languages.h"
 
 
 namespace MusicFormats
 {
 
 //________________________________________________________________________
-class EXP mfWaeHandlerItalian : public mfWaeHandler
+class EXP languageDutch : public language
 {
   public:
 
     // creation
     // ------------------------------------------------------
 
-    static SMARTP<mfWaeHandlerItalian> create ();
+    static SMARTP<languageDutch> create ();
 
   public:
 
     // constructors/destructor
     // ------------------------------------------------------
 
-                          mfWaeHandlerItalian ();
+                          languageDutch ();
 
-    virtual               ~mfWaeHandlerItalian ();
+    virtual               ~languageDutch ();
 
   public:
 
@@ -47,7 +47,7 @@ class EXP mfWaeHandlerItalian : public mfWaeHandler
     // public services
     // ------------------------------------------------------
 
-    // use default (english) versions in mfWaeHandlers.h/.cpp
+    // use default (english) versions in // languages.h/.cpp
     // until they are overridden here
 
   public:
@@ -64,8 +64,8 @@ class EXP mfWaeHandlerItalian : public mfWaeHandler
     // private fields
     // ------------------------------------------------------
 };
-typedef SMARTP<mfWaeHandlerItalian> S_mfWaeHandlerItalian;
-EXP std::ostream& operator << (std::ostream& os, const S_mfWaeHandlerItalian& elt);
+typedef SMARTP<languageDutch> S_languageDutch;
+EXP std::ostream& operator << (std::ostream& os, const S_languageDutch& elt);
 
 
 }

@@ -34,11 +34,12 @@
 #include "msrTempos.h"
 
 #include "oahOah.h"
-#include "oahEarlyOptions.h"
 
 #include "msrOah.h"
 
 #include "msrBrowsers.h"
+
+#include "waeHandlers.h"
 
 
 namespace MusicFormats
@@ -53,7 +54,7 @@ const int msrPart::K_PART_FIGURED_BASS_STAFF_NUMBER = 20;
 const int msrPart::K_PART_FIGURED_BASS_VOICE_NUMBER = 21;
 
 // global variable
-int msrPart::gPartsCounter = 0;
+int msrPart::sPartsCounter = 0;
 
 S_msrPart msrPart::create (
   int                  inputLineNumber,
@@ -92,7 +93,7 @@ msrPart::msrPart (
 */
 
   // set part number
-  fPartAbsoluteNumber = ++gPartsCounter;
+  fPartAbsoluteNumber = ++sPartsCounter;
 
   // set part's part group upLink
   fPartUpLinkToPartGroup = partUpLinkToPartGroup;
@@ -103,8 +104,8 @@ msrPart::msrPart (
 
 void msrPart::initializePart ()
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceParts ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceParts ()) {
 		std::stringstream ss;
 
     ss <<
@@ -138,7 +139,7 @@ void msrPart::initializePart ()
       "\"";
 
     msrWarning (
-      gGlobalCurrentServiceRunData->getInputSourceName (),
+      gServiceRunData->getInputSourceName (),
       fInputLineNumber,
       ss.str ());
 
@@ -165,8 +166,8 @@ void msrPart::initializePart ()
   // part shortest note tuplet factor
   fPartShortestNoteTupletFactor = Rational (1, 1);
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceParts ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceParts ()) {
 		std::stringstream ss;
 
     ss <<
@@ -198,8 +199,8 @@ S_msrScore  msrPart::fetchPartUpLinkToScore () const
 
 S_msrPart msrPart::createPartNewbornClone (const S_msrPartGroup& partGroupClone)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceParts ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceParts ()) {
 		std::stringstream ss;
 
     ss <<
@@ -266,8 +267,8 @@ void msrPart::registerStaffInPart (
   msrStaffKind staffKind =
     staff->getStaffKind ();
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceStaves ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceStaves ()) {
 		std::stringstream ss;
 
     ss <<
@@ -323,7 +324,7 @@ void msrPart::registerStaffInPart (
           ", line " << inputLineNumber;
 
         msrInternalError ( // JMI ???
-          gGlobalCurrentServiceRunData->getInputSourceName (),
+          gServiceRunData->getInputSourceName (),
           inputLineNumber,
           __FILE__, __LINE__,
           ss.str ());
@@ -346,7 +347,7 @@ void msrPart::registerStaffInPart (
           ", line " << inputLineNumber;
 
         msrInternalError ( // JMI ???
-          gGlobalCurrentServiceRunData->getInputSourceName (),
+          gServiceRunData->getInputSourceName (),
           inputLineNumber,
           __FILE__, __LINE__,
           ss.str ());
@@ -363,8 +364,8 @@ void msrPart::setPartMeasurePosition (
   int             inputLineNumber,
   const Rational& measurePosition)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMeasurePositions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -391,7 +392,7 @@ void msrPart::setPartMeasurePosition (
       " since it is negative";
 
     msrInternalError (
-      gGlobalCurrentServiceRunData->getInputSourceName (),
+      gServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
       ss.str ());
@@ -407,8 +408,8 @@ void msrPart::incrementPartMeasurePosition (
 {
   fPartMeasurePosition += duration;
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMeasurePositions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -431,8 +432,8 @@ void msrPart::decrementPartMeasurePosition (
   int             inputLineNumber,
   const Rational& duration)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMeasurePositions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -463,14 +464,14 @@ void msrPart::decrementPartMeasurePosition (
       ", which is negative ";
 
     msrInternalError (
-      gGlobalCurrentServiceRunData->getInputSourceName (),
+      gServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
       ss.str ());
   }
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMeasurePositions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -490,9 +491,9 @@ void msrPart::decrementPartMeasurePosition (
 void msrPart::setPartShortestNoteDuration (
   const Rational& duration)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (
-    gGlobalTracingOahGroup->getTraceNotes ()
+    gGlobalTraceOahGroup->getTraceNotes ()
       ||
     gGlobalMsrOahGroup->getTraceMsrDurations ()
   ) {
@@ -517,9 +518,9 @@ void msrPart::setPartShortestNoteDuration (
 void msrPart::setPartShortestNoteTupletFactor (
   const msrTupletFactor& noteTupletFactor)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (
-    gGlobalTracingOahGroup->getTraceNotes ()
+    gGlobalTraceOahGroup->getTraceNotes ()
       ||
     gGlobalMsrOahGroup->getTraceMsrDurations ()
   ) {
@@ -544,8 +545,8 @@ void msrPart::setPartShortestNoteTupletFactor (
 void msrPart::assignSequentialNumbersToRegularVoicesInPart (
   int inputLineNumber)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceParts () || gGlobalTracingOahGroup->getTraceVoices ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceParts () || gGlobalTraceOahGroup->getTraceVoices ()) {
 		std::stringstream ss;
 
     ss <<
@@ -581,8 +582,8 @@ void msrPart::setPartMsrName (const std::string& partMsrName)
     // yes, rename the part accordinglingly
     fPartMsrName = (*it).second;
 
-#ifdef MF_TRACING_IS_ENABLED
-    if (gGlobalTracingOahGroup->getTraceParts ()) {
+#ifdef MF_TRACE_IS_ENABLED
+    if (gGlobalTraceOahGroup->getTraceParts ()) {
   		std::stringstream ss;
 
         ss <<
@@ -600,8 +601,8 @@ void msrPart::setPartMsrName (const std::string& partMsrName)
     // use the argument
     fPartMsrName = partMsrName;
 
-#ifdef MF_TRACING_IS_ENABLED
-    if (gGlobalTracingOahGroup->getTraceParts ()) {
+#ifdef MF_TRACE_IS_ENABLED
+    if (gGlobalTraceOahGroup->getTraceParts ()) {
   		std::stringstream ss;
 
         ss <<
@@ -650,8 +651,8 @@ void msrPart::createAMeasureAndAppendItToPart (
   msrMeasureImplicitKind
                      measureImplicitKind)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasures ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMeasures ()) {
 		std::stringstream ss;
 
     ss <<
@@ -690,8 +691,8 @@ void msrPart::setNextMeasureNumberInPart (
   int                inputLineNumber,
   const std::string& nextMeasureNumber)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasures ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMeasures ()) {
 		std::stringstream ss;
 
     ss <<
@@ -731,8 +732,8 @@ Rational msrPart::fetchPartMeasuresWholeNotesDurationsVectorAt (
     partMeasuresWholeNotesDurationsVectorSize =
       fPartMeasuresWholeNotesDurationsVector.size ();
 
-#ifdef MF_TRACING_IS_ENABLED
-    if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
+#ifdef MF_TRACE_IS_ENABLED
+    if (gGlobalTraceOahGroup->getTraceWholeNotes ()) {
   		std::stringstream ss;
 
         ss <<
@@ -776,7 +777,7 @@ Rational msrPart::fetchPartMeasuresWholeNotesDurationsVectorAt (
 
 //     msrInternalWarning (
      msrInternalError (
-      gGlobalCurrentServiceRunData->getInputSourceName (),
+      gServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
       ss.str ());
@@ -819,8 +820,8 @@ void msrPart::registerShortestNoteInPartIfRelevant (const S_msrNote& note)
         fVoiceShortestNoteTupletFactor);
 */
 
-#ifdef MF_TRACING_IS_ENABLED
-    if (gGlobalTracingOahGroup->getTraceNotes ()) {
+#ifdef MF_TRACE_IS_ENABLED
+    if (gGlobalTraceOahGroup->getTraceNotes ()) {
   		std::stringstream ss;
 
         ss <<
@@ -844,8 +845,8 @@ void msrPart::registerShortestNoteInPartIfRelevant (const S_msrNote& note)
 
 void msrPart::setPartNumberOfMeasures (size_t partNumberOfMeasures)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasures ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMeasures ()) {
 		std::stringstream ss;
 
     ss <<
@@ -864,8 +865,8 @@ void msrPart::setPartNumberOfMeasures (size_t partNumberOfMeasures)
       fPartMeasuresWholeNotesDurationsVector.size ();
 
   if (partNumberOfMeasures > fPartMeasuresWholeNotesDurationsVectorSize) {
-#ifdef MF_TRACING_IS_ENABLED
-    if (gGlobalTracingOahGroup->getTraceMeasures ()) {
+#ifdef MF_TRACE_IS_ENABLED
+    if (gGlobalTraceOahGroup->getTraceMeasures ()) {
   		std::stringstream ss;
 
       ss <<
@@ -896,8 +897,8 @@ void msrPart::registerOrdinalMeasureNumberWholeNotesDuration (
   int             measureOrdinalNumber,
   const Rational& wholeNotesDuration)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasures ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMeasures ()) {
 		std::stringstream ss;
 
     ss <<
@@ -916,8 +917,8 @@ void msrPart::registerOrdinalMeasureNumberWholeNotesDuration (
   }
 #endif
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasures ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMeasures ()) {
 		std::stringstream ss;
 
     ss <<
@@ -954,8 +955,8 @@ void msrPart::registerOrdinalMeasureNumberWholeNotesDuration (
     // yes
 
     // allow for polymetrics in non-MusicXML contexts? JMI
-#ifdef MF_TRACING_IS_ENABLED
-    if (gGlobalTracingOahGroup->getTraceMeasures ()) {
+#ifdef MF_TRACE_IS_ENABLED
+    if (gGlobalTraceOahGroup->getTraceMeasures ()) {
   		std::stringstream ss;
 
       ss <<
@@ -981,8 +982,8 @@ void msrPart::registerOrdinalMeasureNumberWholeNotesDuration (
     fPartMeasuresWholeNotesDurationsVector [index] =
       wholeNotesDuration;
 
-#ifdef MF_TRACING_IS_ENABLED
-    if (gGlobalTracingOahGroup->getTraceMeasures ()) {
+#ifdef MF_TRACE_IS_ENABLED
+    if (gGlobalTraceOahGroup->getTraceMeasures ()) {
   		std::stringstream ss;
 
         ss <<
@@ -1006,8 +1007,8 @@ void msrPart::registerOrdinalMeasureNumberWholeNotesDuration (
 void msrPart::appendStaffDetailsToPart (
   const S_msrStaffDetails& staffDetails)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceStaffDetails ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceStaffDetails ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1032,8 +1033,8 @@ void msrPart::appendStaffDetailsToPart (
 void msrPart::appendClefToPart (
   const S_msrClef& clef)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceClefs ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceClefs ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1068,8 +1069,8 @@ void msrPart::appendClefToPart (
 void msrPart::appendKeyToPart (
   const S_msrKey& key)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceKeys ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceKeys ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1111,8 +1112,8 @@ void msrPart::appendKeyToPart (
 void msrPart::appendTimeSignatureToPart (
   const S_msrTimeSignature& timeSignature)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceTimeSignatures ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceTimeSignatures ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1154,8 +1155,8 @@ void msrPart::appendTimeSignatureToPart (
 void msrPart::appendTimeSignatureToPartClone (
   const S_msrTimeSignature& timeSignature)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceTimeSignatures ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceTimeSignatures ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1187,8 +1188,8 @@ void msrPart::appendTimeSignatureToPartClone (
 void msrPart::appendTempoToPart (
   const S_msrTempo& tempo)
 {
- #ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceTempos ()) {
+ #ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceTempos ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1213,8 +1214,8 @@ void msrPart::appendTempoToPart (
 void msrPart::appendRehearsalMarkToPart (
   const S_msrRehearsalMark& rehearsalMark)
 {
- #ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceRehearsalMarks ()) {
+ #ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceRehearsalMarks ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1240,8 +1241,8 @@ void msrPart::appendRehearsalMarkToPart (
 void msrPart::appendLineBreakToPart (
   const S_msrLineBreak& lineBreak)
 {
- #ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceLineBreaks ()) {
+ #ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceLineBreaks ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1266,8 +1267,8 @@ void msrPart::appendLineBreakToPart (
 void msrPart::appendPageBreakToPart (
   const S_msrPageBreak& pageBreak)
 {
- #ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTracePageBreaks ()) {
+ #ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTracePageBreaks ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1293,8 +1294,8 @@ void msrPart::insertHiddenMeasureAndBarLineInPartClone (
   int             inputLineNumber,
   const Rational& measurePosition)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasures ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMeasures ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1326,8 +1327,8 @@ void msrPart::insertHiddenMeasureAndBarLineInPartClone (
 void msrPart::appendTranspositionToPart (
   const S_msrTransposition& transposition)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceTranspositions ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceTranspositions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1363,8 +1364,8 @@ void msrPart::nestContentsIntoNewRepeatInPart (
 void msrPart::handleRepeatStartInPart (
   int inputLineNumber)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceRepeats ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceRepeats ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1396,8 +1397,8 @@ void msrPart::handleRepeatEndInPart (
   const std::string& measureNumber,
   int                repeatTimes)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceRepeats ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceRepeats ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1430,8 +1431,8 @@ void msrPart::handleRepeatEndInPart (
 void msrPart::handleRepeatEndingStartInPart (
   int    inputLineNumber)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceRepeats ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceRepeats ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1464,8 +1465,8 @@ void msrPart::handleRepeatEndingEndInPart (
   const std::string&  repeatEndingNumber, // may be "1, 2"
   msrRepeatEndingKind repeatEndingKind)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceRepeats ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceRepeats ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1504,8 +1505,8 @@ void msrPart::finalizeRepeatEndInPart (
   const std::string& measureNumber,
   int    repeatTimes)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceRepeats ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceRepeats ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1608,8 +1609,8 @@ void msrPart::appendMultipleFullBarRestsToPart (
   int inputLineNumber,
   int multipleFullBarRestsMeasuresNumber)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMultipleFullBarRests ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMultipleFullBarRests ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1642,8 +1643,8 @@ void msrPart::replicateLastAppendedMeasureInPart (
   int inputLineNumber,
   int replicatasNumber)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMultipleFullBarRests ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMultipleFullBarRests ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1671,8 +1672,8 @@ void msrPart::addEmptyMeasuresToPart (
   const std::string& previousMeasureNumber,
   int                multipleFullBarRestsNumber)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMultipleFullBarRests ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMultipleFullBarRests ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1705,8 +1706,8 @@ void msrPart::addEmptyMeasuresToPart (
 void msrPart::appendPendingMultipleFullBarRestsToPart (
   int inputLineNumber)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMultipleFullBarRests ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMultipleFullBarRests ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1732,8 +1733,8 @@ void msrPart::appendMultipleFullBarRestsCloneToPart (
   int                              inputLineNumber,
   const S_msrMultipleFullBarRests& multipleFullBarRests)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMultipleFullBarRests ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMultipleFullBarRests ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1760,8 +1761,8 @@ void msrPart::appendMultipleFullBarRestsCloneToPart (
 void msrPart::appendBarLineToPart (
   const S_msrBarLine& barLine)
 {
- #ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceBarLines ()) {
+ #ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceBarLines ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1797,7 +1798,7 @@ S_msrStaff msrPart::addStaffToPartByItsNumber (
       ", line " << inputLineNumber;
 
     msrInternalError ( // JMI ???
-      gGlobalCurrentServiceRunData->getInputSourceName (),
+      gServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
       ss.str ());
@@ -1805,8 +1806,8 @@ S_msrStaff msrPart::addStaffToPartByItsNumber (
     return fPartStaveNumbersToStavesMap [staffNumber];
   }
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceStaves ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceStaves ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1855,8 +1856,8 @@ S_msrStaff msrPart::addStaffToPartByItsNumber (
 S_msrStaff msrPart::addHarmoniesStaffToPart (
   int inputLineNumber)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceStaves ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceStaves ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1908,8 +1909,8 @@ S_msrStaff msrPart::addHarmoniesStaffToPart (
 S_msrStaff msrPart::addHFiguredBassStaffToPart (
   int inputLineNumber)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceStaves ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceStaves ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1960,8 +1961,8 @@ S_msrStaff msrPart::addHFiguredBassStaffToPart (
 
 void msrPart::addStaffToPartCloneByItsNumber (const S_msrStaff& staff)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceStaves ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceStaves ()) {
 		std::stringstream ss;
 
     ss <<
@@ -2017,18 +2018,18 @@ S_msrVoice msrPart::createPartHarmoniesVoice (
       "\" already has a harmonies voice";
 
     msrInternalError (
-      gGlobalCurrentServiceRunData->getInputSourceName (),
+      gServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
       ss.str ());
   }
 
   // create the part harmonies staff
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   int partHarmoniesStaffNumber =
     msrPart::K_PART_HARMONIES_STAFF_NUMBER;
 
-  if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
+  if (gGlobalTraceOahGroup->getTraceHarmonies ()) {
     std::stringstream ss;
 
     ss <<
@@ -2053,8 +2054,8 @@ S_msrVoice msrPart::createPartHarmoniesVoice (
   int partHarmoniesVoiceNumber =
     msrPart::K_PART_HARMONIES_VOICE_NUMBER;
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceHarmonies ()) {
     std::stringstream ss;
 
     ss <<
@@ -2107,18 +2108,18 @@ S_msrVoice msrPart::createPartFiguredBassVoice (
       "\" already has a figured bass voice";
 
     msrInternalError (
-      gGlobalCurrentServiceRunData->getInputSourceName (),
+      gServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
       ss.str ());
   }
 
   // create the part figured bass staff
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   int partFiguredBassStaffNumber =
     msrPart::K_PART_FIGURED_BASS_STAFF_NUMBER;
 
-  if (gGlobalTracingOahGroup->getTraceFiguredBasses ()) {
+  if (gGlobalTraceOahGroup->getTraceFiguredBasses ()) {
 		std::stringstream ss;
 
     ss <<
@@ -2143,8 +2144,8 @@ S_msrVoice msrPart::createPartFiguredBassVoice (
   int partFiguredBassVoiceNumber =
     msrPart::K_PART_FIGURED_BASS_VOICE_NUMBER;
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceFiguredBasses ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceFiguredBasses ()) {
 		std::stringstream ss;
 
     ss <<
@@ -2196,8 +2197,8 @@ void msrPart::appendFiguredBassToPart (
   switch (figuredBassSupplierVoice->getVoiceKind ()) {
     case msrVoiceKind::kVoiceKindRegular:
       // append the figured bass to the part figured bass voice
-#ifdef MF_TRACING_IS_ENABLED
-      if (gGlobalTracingOahGroup->getTraceFiguredBasses ()) {
+#ifdef MF_TRACE_IS_ENABLED
+      if (gGlobalTraceOahGroup->getTraceFiguredBasses ()) {
     		std::stringstream ss;
 
     ss <<
@@ -2235,7 +2236,7 @@ void msrPart::appendFiguredBassToPart (
           "\"";
 
         msrInternalError (
-          gGlobalCurrentServiceRunData->getInputSourceName (),
+          gServiceRunData->getInputSourceName (),
           inputLineNumber,
           __FILE__, __LINE__,
           ss.str ());
@@ -2258,8 +2259,8 @@ void msrPart::appendFiguredBassToPartClone (
   switch (figuredBassSupplierVoice->getVoiceKind ()) {
     case msrVoiceKind::kVoiceKindFiguredBass:
       // append the figured bass to the part figured bass voice
-#ifdef MF_TRACING_IS_ENABLED
-      if (gGlobalTracingOahGroup->getTraceFiguredBasses ()) {
+#ifdef MF_TRACE_IS_ENABLED
+      if (gGlobalTraceOahGroup->getTraceFiguredBasses ()) {
     		std::stringstream ss;
 
     ss <<
@@ -2297,7 +2298,7 @@ void msrPart::appendFiguredBassToPartClone (
           "\"";
 
         msrInternalError (
-          gGlobalCurrentServiceRunData->getInputSourceName (),
+          gServiceRunData->getInputSourceName (),
           inputLineNumber,
           __FILE__, __LINE__,
           ss.str ());
@@ -2311,8 +2312,8 @@ void msrPart::appendFiguredBassToPartClone (
 void msrPart::appendScordaturaToPart (
   const S_msrScordatura& scordatura)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceParts ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceParts ()) {
 		std::stringstream ss;
 
     ss <<
@@ -2339,8 +2340,8 @@ void msrPart::appendAccordionRegistrationToPart (
   const S_msrAccordionRegistration&
     accordionRegistration)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceParts ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceParts ()) {
 		std::stringstream ss;
 
     ss <<
@@ -2367,8 +2368,8 @@ void msrPart::appendHarpPedalsTuningToPart (
   const S_msrHarpPedalsTuning&
     harpPedalsTuning)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceParts ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceParts ()) {
 		std::stringstream ss;
 
     ss <<
@@ -2395,18 +2396,18 @@ void msrPart::addSkipGraceNotesGroupAheadOfVoicesClonesIfNeeded (
   const S_msrVoice&           graceNotesGroupOriginVoice,
   const S_msrGraceNotesGroup& skipGraceNotesGroup)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   int inputLineNumber =
     skipGraceNotesGroup->getInputLineNumber ();
 #endif
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (
-    gGlobalTracingOahGroup->getTraceMeasures ()
+    gGlobalTraceOahGroup->getTraceMeasures ()
       ||
-    gGlobalTracingOahGroup->getTraceGraceNotes ()
+    gGlobalTraceOahGroup->getTraceGraceNotes ()
       ||
-    gGlobalTracingOahGroup->getTraceParts ()
+    gGlobalTraceOahGroup->getTraceParts ()
     ) {
 		std::stringstream ss;
 
@@ -2454,8 +2455,8 @@ void msrPart::handleBackupInPart (
 void msrPart::finalizeLastAppendedMeasureInPart (
   int    inputLineNumber)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasures ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMeasures ()) {
 		std::stringstream ss;
 
     ss <<
@@ -2545,8 +2546,8 @@ bool msrPart::compareStavesToHaveFiguredBassesBelowCorrespondingPart (
 void msrPart::finalizePart (
   int inputLineNumber)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceParts ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceParts ()) {
 		std::stringstream ss;
 
     ss <<
@@ -2572,7 +2573,7 @@ void msrPart::finalizePart (
       " appears in the part list, but doesn't contain any stave";
 
     msrWarning (
-      gGlobalCurrentServiceRunData->getInputSourceName (),
+      gServiceRunData->getInputSourceName (),
       inputLineNumber,
       ss.str ());
   }
@@ -2604,8 +2605,8 @@ void msrPart::finalizePart (
 void msrPart::finalizePartClone (
   int inputLineNumber)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceParts ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceParts ()) {
 		std::stringstream ss;
 
     ss <<
@@ -2645,8 +2646,8 @@ void msrPart::finalizePartAndAllItsMeasures (
 {
   return; // JMI TEMP NOEL
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceParts ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceParts ()) {
 		std::stringstream ss;
 
     ss <<
@@ -2675,8 +2676,8 @@ void msrPart::finalizePartAndAllItsMeasures (
 void msrPart::collectPartMeasuresSlices (
   int inputLineNumber)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasuresSlices ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMeasuresSlices ()) {
     size_t
       partAllStavesListSize =
         fPartAllStavesList.size ();
@@ -2718,8 +2719,8 @@ void msrPart::collectPartMeasuresSlices (
 
   // populate it
   for (S_msrStaff staff : fPartAllStavesList) {
-#ifdef MF_TRACING_IS_ENABLED
-    if (gGlobalTracingOahGroup->getTraceMeasuresSlices ()) {
+#ifdef MF_TRACE_IS_ENABLED
+    if (gGlobalTraceOahGroup->getTraceMeasuresSlices ()) {
   		std::stringstream ss;
 
         ss <<
@@ -2750,7 +2751,7 @@ void msrPart::collectPartMeasuresSlices (
         "\" is null";
 
       msrWarning (
-        gGlobalCurrentServiceRunData->getInputSourceName (),
+        gServiceRunData->getInputSourceName (),
         inputLineNumber,
         ss.str ());
     }
@@ -2765,8 +2766,8 @@ void msrPart::collectPartMeasuresSlices (
     --gIndenter;
   } // for
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasuresSlices ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceMeasuresSlices ()) {
 		std::stringstream ss;
 
     ss <<
@@ -2785,8 +2786,9 @@ void msrPart::collectPartMeasuresSlices (
 
 void msrPart::acceptIn (basevisitor* v)
 {
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "% ==> msrPart::acceptIn ()" <<
@@ -2796,12 +2798,14 @@ void msrPart::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
+#endif
 
   if (visitor<S_msrPart>*
     p =
       dynamic_cast<visitor<S_msrPart>*> (v)) {
         S_msrPart elem = this;
 
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
       		std::stringstream ss;
 
@@ -2813,14 +2817,16 @@ void msrPart::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
+#endif
         p->visitStart (elem);
   }
 }
 
 void msrPart::acceptOut (basevisitor* v)
 {
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "% ==> msrPart::acceptOut ()" <<
@@ -2830,12 +2836,14 @@ void msrPart::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
+#endif
 
   if (visitor<S_msrPart>*
     p =
       dynamic_cast<visitor<S_msrPart>*> (v)) {
         S_msrPart elem = this;
 
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
       		std::stringstream ss;
 
@@ -2846,15 +2854,17 @@ void msrPart::acceptOut (basevisitor* v)
           gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
-       }
+        }
+#endif
         p->visitEnd (elem);
   }
 }
 
 void msrPart::browseData (basevisitor* v)
 {
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "% ==> msrPart::browseData ()" <<
@@ -2864,8 +2874,9 @@ void msrPart::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
+#endif
 
-#ifdef MF_TRACING_IS_ENABLED // JMI
+#ifdef MF_TRACE_IS_ENABLED // JMI
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) { // JMI TEMP
 		std::stringstream ss;
 
@@ -3128,8 +3139,8 @@ void msrPart::printFull (std::ostream& os) const
   os << std::endl;
 
   // print current the part clef if any
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceClefs ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceClefs ()) {
     os << std::left <<
       std::setw (fieldWidth) <<
       "fPartCurrentClef" << ": ";
@@ -3150,8 +3161,8 @@ void msrPart::printFull (std::ostream& os) const
 #endif
 
   // print the current part key if any
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceKeys ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceKeys ()) {
     os << std::left <<
       std::setw (fieldWidth) <<
       "fPartCurrentKey" << ": ";
@@ -3172,8 +3183,8 @@ void msrPart::printFull (std::ostream& os) const
 #endif
 
   // print the current part time if any
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceTimeSignatures ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceTimeSignatures ()) {
     os << std::left <<
       std::setw (fieldWidth) <<
       "fPartCurrentTimeSignature" << ": ";

@@ -28,7 +28,11 @@ extern const std::string K_MEASURE_NUMBER_UNKNOWN;
 extern const Rational    K_WHOLE_NOTES_UNKNOWN;
 
 //______________________________________________________________________________
-extern S_msrMeasure gGlobalNullMeasureSmartPointer;
+// hidden global null measure variable
+extern S_msrMeasure pGlobalNullMeasure;
+
+// a handy shortcut
+#define gNullMeasure pGlobalNullMeasure
 
 
 }

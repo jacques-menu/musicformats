@@ -4420,7 +4420,7 @@ msrSemiTonesPitchKind noteAtIntervalFromSemiTonesPitch (
           ", line: " << inputLineNumber;
 
         msrUnsupported (
-          gGlobalCurrentServiceRunData->getInputSourceName (),
+          gServiceRunData->getInputSourceName (),
           inputLineNumber,
           __FILE__, __LINE__,
           ss.str ());
@@ -7312,7 +7312,7 @@ msrQuarterTonesPitchKind noteAtIntervalFromQuarterTonesPitch (
           ", line: " << inputLineNumber;
 
         msrUnsupported (
-          gGlobalCurrentServiceRunData->getInputSourceName (),
+          gServiceRunData->getInputSourceName (),
           inputLineNumber,
           __FILE__, __LINE__,
           ss.str ());

@@ -27,6 +27,8 @@
 
 #include "oahEarlyOptions.h"
 
+#include "waeHandlers.h"
+
 
 namespace MusicFormats
 {
@@ -80,8 +82,8 @@ void msrReplaceClefAtom::applyAtomWithValue (
   const std::string& theString,
   std::ostream&      os)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<
@@ -97,8 +99,8 @@ void msrReplaceClefAtom::applyAtomWithValue (
   // theString contains the replace clef specification
   // decipher it to extract the old and new clef names
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<
@@ -124,8 +126,8 @@ void msrReplaceClefAtom::applyAtomWithValue (
 
   size_t smSize = sm.size ();
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<
@@ -142,13 +144,13 @@ void msrReplaceClefAtom::applyAtomWithValue (
 #endif
 
   if (smSize == 3) {
-#ifdef MF_TRACING_IS_ENABLED
-    if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+    if (gEarlyOptions.getEarlyTraceOah ()) {
       for (unsigned i = 0; i < smSize; ++i) {
-        gLogStream <<
+        gLog <<
           '[' << sm [i] << "] ";
       } // for
-      gLogStream << std::endl;
+      gLog << std::endl;
     }
 #endif
   }
@@ -167,8 +169,8 @@ void msrReplaceClefAtom::applyAtomWithValue (
     originalClefName    = sm [1],
     destinationClefName = sm [2];
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<
@@ -222,8 +224,8 @@ void msrReplaceClefAtom::applyAtomWithValue (
 
 void msrReplaceClefAtom::acceptIn (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -241,8 +243,8 @@ void msrReplaceClefAtom::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_msrReplaceClefAtom>*> (v)) {
         S_msrReplaceClefAtom elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
-        if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -260,8 +262,8 @@ void msrReplaceClefAtom::acceptIn (basevisitor* v)
 
 void msrReplaceClefAtom::acceptOut (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -279,8 +281,8 @@ void msrReplaceClefAtom::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_msrReplaceClefAtom>*> (v)) {
         S_msrReplaceClefAtom elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
-        if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -298,8 +300,8 @@ void msrReplaceClefAtom::acceptOut (basevisitor* v)
 
 void msrReplaceClefAtom::browseData (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -532,7 +534,7 @@ void mxsr2msrOahGroup::createTheMxsr2msrPrefixes (
 
 void mxsr2msrOahGroup::initializeMxsr2msrOahGroup ()
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   // trace
   // --------------------------------------
   initializeMxsr2msrTraceOptions ();
@@ -579,7 +581,7 @@ void mxsr2msrOahGroup::initializeMxsr2msrOahGroup ()
   initializeCombinedOptionsOptions ();
 }
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
 void mxsr2msrOahGroup::initializeMxsr2msrTraceOptions ()
 {
   S_oahSubGroup
@@ -1637,8 +1639,8 @@ void mxsr2msrOahGroup::enforceGroupQuietness ()
 //______________________________________________________________________________
 void mxsr2msrOahGroup::checkGroupOptionsConsistency ()
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1995,8 +1997,8 @@ Bool mxsr2msrOahGroup::wordsIsToBeConvertedToDecresc (
 //______________________________________________________________________________
 void mxsr2msrOahGroup::acceptIn (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -2014,8 +2016,8 @@ void mxsr2msrOahGroup::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_mxsr2msrOahGroup>*> (v)) {
         S_mxsr2msrOahGroup elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
-        if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -2033,8 +2035,8 @@ void mxsr2msrOahGroup::acceptIn (basevisitor* v)
 
 void mxsr2msrOahGroup::acceptOut (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -2052,8 +2054,8 @@ void mxsr2msrOahGroup::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_mxsr2msrOahGroup>*> (v)) {
         S_mxsr2msrOahGroup elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
-        if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -2071,8 +2073,8 @@ void mxsr2msrOahGroup::acceptOut (basevisitor* v)
 
 void mxsr2msrOahGroup::browseData (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -2089,7 +2091,7 @@ void mxsr2msrOahGroup::browseData (basevisitor* v)
 //______________________________________________________________________________
 void mxsr2msrOahGroup::printMxsr2msrValues (int valueFieldWidth)
 {
-  gLogStream <<
+  gLog <<
     "The MusicXML options are:" <<
     std::endl;
 
@@ -2098,7 +2100,7 @@ void mxsr2msrOahGroup::printMxsr2msrValues (int valueFieldWidth)
   // parts
   // --------------------------------------
 
-  gLogStream <<
+  gLog <<
     "Parts:" <<
     std::endl;
 
@@ -2106,11 +2108,11 @@ void mxsr2msrOahGroup::printMxsr2msrValues (int valueFieldWidth)
 
   // parts ignored IDs
 
-  gLogStream << std::left <<
+  gLog << std::left <<
     std::setw (valueFieldWidth) << "parts ignored IDs" << ": ";
 
   if (! fPartsIgnoreIDSet.size ()) {
-    gLogStream <<
+    gLog <<
       "[NONE]";
   }
   else {
@@ -2120,18 +2122,18 @@ void mxsr2msrOahGroup::printMxsr2msrValues (int valueFieldWidth)
       i != fPartsIgnoreIDSet.end ();
       ++i
   ) {
-        gLogStream <<
+        gLog <<
           "\"" << (*i) << "\" ";
     } // for
   }
 
   // parts kept IDs
 
-  gLogStream << std::left <<
+  gLog << std::left <<
     std::setw (valueFieldWidth) << "parts kept IDs" << ": ";
 
   if (! fMusicXMLPartsKeepIDSet.size ()) {
-    gLogStream <<
+    gLog <<
       "[NONE]";
   }
   else {
@@ -2141,18 +2143,18 @@ void mxsr2msrOahGroup::printMxsr2msrValues (int valueFieldWidth)
       i != fMusicXMLPartsKeepIDSet.end ();
       ++i
   ) {
-        gLogStream <<
+        gLog <<
           "\"" << (*i) << "\" ";
     } // for
   }
 
   // parts ignored names
 
-  gLogStream << std::left <<
+  gLog << std::left <<
     std::setw (valueFieldWidth) << "parts ignored names" << ": ";
 
   if (! fMusicXMLPartsIgnoreNameSet.size ()) {
-    gLogStream <<
+    gLog <<
       "[NONE]";
   }
   else {
@@ -2162,18 +2164,18 @@ void mxsr2msrOahGroup::printMxsr2msrValues (int valueFieldWidth)
       i != fMusicXMLPartsIgnoreNameSet.end ();
       ++i
   ) {
-        gLogStream <<
+        gLog <<
           "\"" << (*i) << "\" ";
     } // for
   }
 
   // parts kept names
 
-  gLogStream << std::left <<
+  gLog << std::left <<
     std::setw (valueFieldWidth) << "parts kept names" << ": ";
 
   if (! fMusicXMLPartsKeepNameSet.size ()) {
-    gLogStream <<
+    gLog <<
       "[NONE]";
   }
   else {
@@ -2183,25 +2185,25 @@ void mxsr2msrOahGroup::printMxsr2msrValues (int valueFieldWidth)
       i != fMusicXMLPartsKeepNameSet.end ();
       ++i
   ) {
-        gLogStream <<
+        gLog <<
           "\"" << (*i) << "\" ";
     } // for
   }
 
-  gLogStream << std::endl;
+  gLog << std::endl;
 
   --gIndenter;
 
   // clefs, keys, time signatures
   // --------------------------------------
 
-  gLogStream <<
+  gLog <<
     "clefs, keys, time signatures:" <<
     std::endl;
 
   ++gIndenter;
 
-  gLogStream << std::left <<
+  gLog << std::left <<
     std::setw (valueFieldWidth) << "fIgnoreRedundantClefs" << ": " <<
     fIgnoreRedundantClefs <<
     std::endl <<
@@ -2219,13 +2221,13 @@ void mxsr2msrOahGroup::printMxsr2msrValues (int valueFieldWidth)
   // page and line breaks
   // --------------------------------------
 
-  gLogStream <<
+  gLog <<
     "Page breaks:" <<
     std::endl;
 
   ++gIndenter;
 
-  gLogStream << std::left <<
+  gLog << std::left <<
     std::setw (valueFieldWidth) << "fIgnorePageBreaksInMusicXML" << ": " <<
     fIgnorePageBreaksInMusicXML <<
     std::endl <<
@@ -2235,13 +2237,13 @@ void mxsr2msrOahGroup::printMxsr2msrValues (int valueFieldWidth)
   // line breaks
   // --------------------------------------
 
-  gLogStream <<
+  gLog <<
     "Line breaks:" <<
     std::endl;
 
   ++gIndenter;
 
-  gLogStream << std::left <<
+  gLog << std::left <<
     std::setw (valueFieldWidth) << "fIgnoreLineBreaksInMusicXML" << ": " <<
     fIgnoreLineBreaksInMusicXML <<
     std::endl <<
@@ -2251,7 +2253,7 @@ void mxsr2msrOahGroup::printMxsr2msrValues (int valueFieldWidth)
   // measures
   // --------------------------------------
 
-  gLogStream <<
+  gLog <<
     "Measures:" <<
     std::endl;
 
@@ -2260,7 +2262,7 @@ void mxsr2msrOahGroup::printMxsr2msrValues (int valueFieldWidth)
 //     std::map<std::string,int>       fAddEmptyMeasuresStringToIntMap;
 
 /* JMI
-  gLogStream << std::left <<
+  gLog << std::left <<
     std::setw (valueFieldWidth) << "fIgnoreRedundantClefs" << ": " <<
     fIgnoreRedundantClefs <<
     std::endl <<
@@ -2278,13 +2280,13 @@ void mxsr2msrOahGroup::printMxsr2msrValues (int valueFieldWidth)
   // notes
   // --------------------------------------
 
-  gLogStream <<
+  gLog <<
      "Notes:" <<
     std::endl;
 
   ++gIndenter;
 
-  gLogStream << std::left <<
+  gLog << std::left <<
     std::setw (valueFieldWidth) << "fDelayRestsDynamics" << ": " <<
     fDelayRestsDynamics <<
     std::endl <<
@@ -2328,13 +2330,13 @@ void mxsr2msrOahGroup::printMxsr2msrValues (int valueFieldWidth)
   // articulations
   // --------------------------------------
 
-  gLogStream <<
+  gLog <<
      "Articulations:" <<
     std::endl;
 
   ++gIndenter;
 
-  gLogStream << std::left <<
+  gLog << std::left <<
     std::setw (valueFieldWidth) << "fIgnoreArticulations" << ": " <<
     fIgnoreArticulations <<
     std::endl;
@@ -2344,13 +2346,13 @@ void mxsr2msrOahGroup::printMxsr2msrValues (int valueFieldWidth)
   // ornaments
   // --------------------------------------
 
-  gLogStream <<
+  gLog <<
      "Ornaments:" <<
     std::endl;
 
   ++gIndenter;
 
-  gLogStream << std::left <<
+  gLog << std::left <<
     std::setw (valueFieldWidth) << "fIgnoreOrnaments" << ": " <<
     fIgnoreOrnaments <<
     std::endl;
@@ -2360,13 +2362,13 @@ void mxsr2msrOahGroup::printMxsr2msrValues (int valueFieldWidth)
   // words
   // --------------------------------------
 
-  gLogStream <<
+  gLog <<
      "Words:" <<
     std::endl;
 
   ++gIndenter;
 
-  gLogStream << std::left <<
+  gLog << std::left <<
     std::setw (valueFieldWidth) << "fIgnoreMusicXMLWords" << ": " <<
     fIgnoreMusicXMLWords <<
     std::endl <<
@@ -2381,13 +2383,13 @@ void mxsr2msrOahGroup::printMxsr2msrValues (int valueFieldWidth)
   // ties
   // --------------------------------------
 
-  gLogStream <<
+  gLog <<
      "Ties:" <<
     std::endl;
 
   ++gIndenter;
 
-  gLogStream << std::left <<
+  gLog << std::left <<
     std::setw (valueFieldWidth) << "fIgnoreTies" << ": " <<
     fIgnoreTies <<
     std::endl;
@@ -2397,13 +2399,13 @@ void mxsr2msrOahGroup::printMxsr2msrValues (int valueFieldWidth)
   // dynamics
   // --------------------------------------
 
-  gLogStream <<
+  gLog <<
      "Dynamics:" <<
     std::endl;
 
   ++gIndenter;
 
-  gLogStream << std::left <<
+  gLog << std::left <<
     std::setw (valueFieldWidth) << "fIgnoreDynamics" << ": " <<
     fIgnoreDynamics <<
     std::endl;
@@ -2413,13 +2415,13 @@ void mxsr2msrOahGroup::printMxsr2msrValues (int valueFieldWidth)
   // slurs
   // --------------------------------------
 
-  gLogStream <<
+  gLog <<
      "Slurs:" <<
     std::endl;
 
   ++gIndenter;
 
-  gLogStream << std::left <<
+  gLog << std::left <<
     std::setw (valueFieldWidth) << "fIgnoreSlurs" << ": " <<
     fIgnoreSlurs <<
     std::endl;
@@ -2429,13 +2431,13 @@ void mxsr2msrOahGroup::printMxsr2msrValues (int valueFieldWidth)
   // wedges
   // --------------------------------------
 
-  gLogStream <<
+  gLog <<
      "Wedges:" <<
     std::endl;
 
   ++gIndenter;
 
-  gLogStream << std::left <<
+  gLog << std::left <<
     std::setw (valueFieldWidth) << "fIgnoreWedges" << ": " <<
     fIgnoreWedges <<
     std::endl;
@@ -2445,13 +2447,13 @@ void mxsr2msrOahGroup::printMxsr2msrValues (int valueFieldWidth)
   // lyrics
   // --------------------------------------
 
-  gLogStream <<
+  gLog <<
     "Lyrics:" <<
     std::endl;
 
   ++gIndenter;
 
-  gLogStream <<
+  gLog <<
     std::setw (valueFieldWidth) << "fIgnoreLyrics" << ": " <<
     fIgnoreLyrics <<
     std::endl;
@@ -2461,13 +2463,13 @@ void mxsr2msrOahGroup::printMxsr2msrValues (int valueFieldWidth)
   // harmonies
   // --------------------------------------
 
-  gLogStream <<
+  gLog <<
     "Harmonies:" <<
     std::endl;
 
   ++gIndenter;
 
-  gLogStream << std::left <<
+  gLog << std::left <<
     std::setw (valueFieldWidth) << "fIgnoreHarmonies" << ": " <<
     fIgnoreHarmonies <<
     std::endl;
@@ -2477,13 +2479,13 @@ void mxsr2msrOahGroup::printMxsr2msrValues (int valueFieldWidth)
   // figured bass
   // --------------------------------------
 
-  gLogStream <<
+  gLog <<
     "Figured bass:" <<
     std::endl;
 
   ++gIndenter;
 
-  gLogStream << std::left <<
+  gLog << std::left <<
     std::setw (valueFieldWidth) << "fIgnoreFiguredBasses" << ": " <<
     fIgnoreFiguredBasses <<
     std::endl;
@@ -2493,13 +2495,13 @@ void mxsr2msrOahGroup::printMxsr2msrValues (int valueFieldWidth)
   // dynamics and wedges
   // --------------------------------------
 
-  gLogStream <<
+  gLog <<
     "Dynamics and wedges:" <<
     std::endl;
 
   ++gIndenter;
 
-  gLogStream << std::left <<
+  gLog << std::left <<
     std::setw (valueFieldWidth) << "fAllDynamicsBelow" << ": " <<
     fAllDynamicsBelow <<
     std::endl <<
@@ -2512,24 +2514,24 @@ void mxsr2msrOahGroup::printMxsr2msrValues (int valueFieldWidth)
   // combined options, cubase
   // --------------------------------------
 
-  gLogStream <<
+  gLog <<
     "Cubase:" <<
     std::endl;
 
   ++gIndenter;
 
-  gLogStream << std::left <<
+  gLog << std::left <<
     std::setw (valueFieldWidth) << "fCubase" << ": " <<
     fCubase <<
     std::endl;
 
   --gIndenter;
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   // trace
   // --------------------------------------
 
-  gLogStream <<
+  gLog <<
     "Trace:" <<
     std::endl;
 
@@ -2560,8 +2562,8 @@ std::ostream& operator << (std::ostream& os, const S_mxsr2msrOahGroup& elt)
 S_mxsr2msrOahGroup createGlobalMxsr2msrOahGroup (
   const S_oahHandler& handler)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<

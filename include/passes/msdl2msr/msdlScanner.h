@@ -127,7 +127,7 @@ class   msdlScanner : public smartable
     // ------------------------------------------------------
 
     // trace
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
     Bool                  fTraceTokens;
     Bool                  fTraceTokensDetails;
 #endif

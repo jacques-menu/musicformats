@@ -21,12 +21,13 @@
 #include "bsr2brailleTranslator.h"
 
 #include "oahOah.h"
-#include "oahEarlyOptions.h"
 
 #include "bsrOah.h"
 #include "brailleGenerationOah.h"
 
 #include "bsrBrowsers.h"
+
+#include "waeHandlers.h"
 
 
 namespace MusicFormats
@@ -45,7 +46,7 @@ bsr2brailleTranslator::bsr2brailleTranslator (
   // the BSR score we're visiting
   fVisitedBsrScore = bsrScore;
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsr ()) {
 		std::stringstream ss;
 
@@ -96,7 +97,7 @@ bsr2brailleTranslator::bsr2brailleTranslator (
             std::string message = ss.str ();
 
             bsr2brailleInternalError (
-              gGlobalCurrentServiceRunData->getInputSourceName (),
+              gServiceRunData->getInputSourceName (),
               1, // JMI ???
               __FILE__, __LINE__,
               message);
@@ -144,7 +145,7 @@ void bsr2brailleTranslator::translateBsrToBraille ()
 //________________________________________________________________________
 void bsr2brailleTranslator::visitStart (S_bsrScore& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
 		std::stringstream ss;
 
@@ -163,7 +164,7 @@ void bsr2brailleTranslator::visitStart (S_bsrScore& elt)
 
 void bsr2brailleTranslator::visitEnd (S_bsrScore& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
 		std::stringstream ss;
 
@@ -183,7 +184,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrScore& elt)
 //________________________________________________________________________
 void bsr2brailleTranslator::visitStart (S_bsrSpaces& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
 		std::stringstream ss;
 
@@ -200,7 +201,7 @@ void bsr2brailleTranslator::visitStart (S_bsrSpaces& elt)
 #endif
 
 /* JMI
-  gLogStream <<
+  gLog <<
     "% --> bsrSpaces" <<
     ", numberOfSpaces: " << elt->getNumberOfSpaces () <<
     ", spacesCellsList: " << elt->fetchCellsList () <<
@@ -214,7 +215,7 @@ void bsr2brailleTranslator::visitStart (S_bsrSpaces& elt)
 
 void bsr2brailleTranslator::visitEnd (S_bsrSpaces& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
 		std::stringstream ss;
 
@@ -234,7 +235,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrSpaces& elt)
 //________________________________________________________________________
 void bsr2brailleTranslator::visitStart (S_bsrBarLine& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
 		std::stringstream ss;
 
@@ -257,7 +258,7 @@ void bsr2brailleTranslator::visitStart (S_bsrBarLine& elt)
 //________________________________________________________________________
 void bsr2brailleTranslator::visitStart (S_bsrTranscriptionNotes& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
 		std::stringstream ss;
 
@@ -276,7 +277,7 @@ void bsr2brailleTranslator::visitStart (S_bsrTranscriptionNotes& elt)
 
 void bsr2brailleTranslator::visitEnd (S_bsrTranscriptionNotes& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
 		std::stringstream ss;
 
@@ -296,7 +297,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrTranscriptionNotes& elt)
 //________________________________________________________________________
 void bsr2brailleTranslator::visitStart (S_bsrTranscriptionNotesElement& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
 		std::stringstream ss;
 
@@ -318,7 +319,7 @@ void bsr2brailleTranslator::visitStart (S_bsrTranscriptionNotesElement& elt)
 
 void bsr2brailleTranslator::visitEnd (S_bsrTranscriptionNotesElement& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
 		std::stringstream ss;
 
@@ -337,7 +338,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrTranscriptionNotesElement& elt)
 //________________________________________________________________________
 void bsr2brailleTranslator::visitStart (S_bsrPage& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
 		std::stringstream ss;
 
@@ -358,7 +359,7 @@ void bsr2brailleTranslator::visitStart (S_bsrPage& elt)
 
 void bsr2brailleTranslator::visitEnd (S_bsrPage& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
 		std::stringstream ss;
 
@@ -383,7 +384,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrPage& elt)
 
 void bsr2brailleTranslator::visitStart (S_bsrPageElement& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
 		std::stringstream ss;
 
@@ -404,7 +405,7 @@ void bsr2brailleTranslator::visitStart (S_bsrPageElement& elt)
 
 void bsr2brailleTranslator::visitEnd (S_bsrPageElement& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
 		std::stringstream ss;
 
@@ -426,7 +427,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrPageElement& elt)
 //________________________________________________________________________
 void bsr2brailleTranslator::visitStart (S_bsrPagination& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
 		std::stringstream ss;
 
@@ -450,7 +451,7 @@ void bsr2brailleTranslator::visitStart (S_bsrPagination& elt)
 
 void bsr2brailleTranslator::visitEnd (S_bsrPagination& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
 		std::stringstream ss;
 
@@ -472,7 +473,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrPagination& elt)
 //________________________________________________________________________
 void bsr2brailleTranslator::visitStart (S_bsrPageHeading& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
 		std::stringstream ss;
 
@@ -496,7 +497,7 @@ void bsr2brailleTranslator::visitStart (S_bsrPageHeading& elt)
 
 void bsr2brailleTranslator::visitEnd (S_bsrPageHeading& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
 		std::stringstream ss;
 
@@ -518,7 +519,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrPageHeading& elt)
 //________________________________________________________________________
 void bsr2brailleTranslator::visitStart (S_bsrMusicHeading& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
 		std::stringstream ss;
 
@@ -547,7 +548,7 @@ void bsr2brailleTranslator::visitStart (S_bsrMusicHeading& elt)
 /*
   for (int i = 0; i < 6; ++i) {   // JMI ???
     if (true) {
-      gLogStream <<
+      gLog <<
         "Generating a space before S_bsrMusicHeading" <<
         std::endl;
     }
@@ -562,7 +563,7 @@ void bsr2brailleTranslator::visitStart (S_bsrMusicHeading& elt)
 
 void bsr2brailleTranslator::visitEnd (S_bsrMusicHeading& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
 		std::stringstream ss;
 
@@ -580,7 +581,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrMusicHeading& elt)
   }
 #endif
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (false) { // JMI
 		std::stringstream ss;
 
@@ -602,7 +603,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrMusicHeading& elt)
 //________________________________________________________________________
 void bsr2brailleTranslator::visitStart (S_bsrFootNotes& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
 		std::stringstream ss;
 
@@ -628,7 +629,7 @@ void bsr2brailleTranslator::visitStart (S_bsrFootNotes& elt)
 
 void bsr2brailleTranslator::visitEnd (S_bsrFootNotes& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
 		std::stringstream ss;
 
@@ -650,7 +651,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrFootNotes& elt)
 //________________________________________________________________________
 void bsr2brailleTranslator::visitStart (S_bsrLine& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
 		std::stringstream ss;
 
@@ -671,7 +672,7 @@ void bsr2brailleTranslator::visitStart (S_bsrLine& elt)
 
 void bsr2brailleTranslator::visitEnd (S_bsrLine& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
 		std::stringstream ss;
 
@@ -693,7 +694,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrLine& elt)
 //________________________________________________________________________
 void bsr2brailleTranslator::visitStart (S_bsrLineContents& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
 		std::stringstream ss;
 
@@ -717,7 +718,7 @@ void bsr2brailleTranslator::visitStart (S_bsrLineContents& elt)
 
 void bsr2brailleTranslator::visitEnd (S_bsrLineContents& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
 		std::stringstream ss;
 
@@ -735,7 +736,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrLineContents& elt)
   }
 #endif
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (false) { // JMI
 		std::stringstream ss;
 
@@ -757,7 +758,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrLineContents& elt)
 //________________________________________________________________________
 void bsr2brailleTranslator::visitStart (S_bsrMeasure& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
 		std::stringstream ss;
 
@@ -778,7 +779,7 @@ void bsr2brailleTranslator::visitStart (S_bsrMeasure& elt)
 
 void bsr2brailleTranslator::visitEnd (S_bsrMeasure& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
 		std::stringstream ss;
 
@@ -800,7 +801,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrMeasure& elt)
 //________________________________________________________________________
 void bsr2brailleTranslator::visitStart (S_bsrNumber& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
 		std::stringstream ss;
 
@@ -824,7 +825,7 @@ void bsr2brailleTranslator::visitStart (S_bsrNumber& elt)
 
 void bsr2brailleTranslator::visitEnd (S_bsrNumber& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
 		std::stringstream ss;
 
@@ -846,7 +847,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrNumber& elt)
 //________________________________________________________________________
 void bsr2brailleTranslator::visitStart (S_bsrWords& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
 		std::stringstream ss;
 
@@ -870,7 +871,7 @@ void bsr2brailleTranslator::visitStart (S_bsrWords& elt)
 
 void bsr2brailleTranslator::visitEnd (S_bsrWords& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
 		std::stringstream ss;
 
@@ -892,7 +893,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrWords& elt)
 //________________________________________________________________________
 void bsr2brailleTranslator::visitStart (S_bsrClef& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
 		std::stringstream ss;
 
@@ -916,7 +917,7 @@ void bsr2brailleTranslator::visitStart (S_bsrClef& elt)
 
 void bsr2brailleTranslator::visitEnd (S_bsrClef& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
 		std::stringstream ss;
 
@@ -938,7 +939,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrClef& elt)
 //________________________________________________________________________
 void bsr2brailleTranslator::visitStart (S_bsrKey& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
 		std::stringstream ss;
 
@@ -962,7 +963,7 @@ void bsr2brailleTranslator::visitStart (S_bsrKey& elt)
 
 void bsr2brailleTranslator::visitEnd (S_bsrKey& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
 		std::stringstream ss;
 
@@ -984,7 +985,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrKey& elt)
 //________________________________________________________________________
 void bsr2brailleTranslator::visitStart (S_bsrTimeSignature& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
 		std::stringstream ss;
 
@@ -1007,7 +1008,7 @@ void bsr2brailleTranslator::visitStart (S_bsrTimeSignature& elt)
 
 void bsr2brailleTranslator::visitEnd (S_bsrTimeSignature& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
 		std::stringstream ss;
 
@@ -1028,7 +1029,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrTimeSignature& elt)
 //________________________________________________________________________
 void bsr2brailleTranslator::visitStart (S_bsrTempo& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
 		std::stringstream ss;
 
@@ -1051,7 +1052,7 @@ void bsr2brailleTranslator::visitStart (S_bsrTempo& elt)
 
 void bsr2brailleTranslator::visitEnd (S_bsrTempo& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
 		std::stringstream ss;
 
@@ -1072,7 +1073,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrTempo& elt)
 //________________________________________________________________________
 void bsr2brailleTranslator::visitStart (S_bsrNote& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
 		std::stringstream ss;
 
@@ -1095,7 +1096,7 @@ void bsr2brailleTranslator::visitStart (S_bsrNote& elt)
 
 void bsr2brailleTranslator::visitEnd (S_bsrNote& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
 		std::stringstream ss;
 

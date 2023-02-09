@@ -28,6 +28,8 @@
 
 #include "oahAtomsCollection.h"
 
+#include "waeHandlers.h"
+
 
 namespace MusicFormats
 {
@@ -76,7 +78,7 @@ R"()",
          K_QUIET_OPTION_LONG_NAME, K_QUIET_OPTION_SHORT_NAME,
 R"(Don't issue any warning or error messages.)",
         "fEarlyQuietOptionRef",
-        gGlobalOahEarlyOptions.getEarlyQuietOptionRef ()));
+        gEarlyOptions.getEarlyQuietOptionRef ()));
 
   // don't show errors
 
@@ -125,8 +127,8 @@ void waeOahGroup::checkGroupOptionsConsistency ()
 //______________________________________________________________________________
 void waeOahGroup::acceptIn (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -144,8 +146,8 @@ void waeOahGroup::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_waeOahGroup>*> (v)) {
         S_waeOahGroup elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
-        if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -163,8 +165,8 @@ void waeOahGroup::acceptIn (basevisitor* v)
 
 void waeOahGroup::acceptOut (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -182,8 +184,8 @@ void waeOahGroup::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_waeOahGroup>*> (v)) {
         S_waeOahGroup elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
-        if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -201,8 +203,8 @@ void waeOahGroup::acceptOut (basevisitor* v)
 
 void waeOahGroup::browseData (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -219,7 +221,7 @@ void waeOahGroup::browseData (basevisitor* v)
 //______________________________________________________________________________
 void waeOahGroup::displayWaeOahValues (int fieldWidth)
 {
-  gLogStream <<
+  gLog <<
     "The wae options are:" <<
     std::endl;
 
@@ -228,13 +230,13 @@ void waeOahGroup::displayWaeOahValues (int fieldWidth)
   // warning and error handling
   // --------------------------------------
 
-  gLogStream << std::left <<
+  gLog << std::left <<
     std::setw (fieldWidth) << "Warning and error handling:" <<
     std::endl;
 
   ++gIndenter;
 
-  gLogStream <<
+  gLog <<
     std::setw (fieldWidth) << "fDontShowErrors" << ": " <<
     fDontShowErrors <<
     std::endl <<
@@ -263,8 +265,8 @@ std::ostream& operator << (std::ostream& os, const S_waeOahGroup& elt)
 //______________________________________________________________________________
 S_waeOahGroup createGlobalWaeOahGroup ()
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<

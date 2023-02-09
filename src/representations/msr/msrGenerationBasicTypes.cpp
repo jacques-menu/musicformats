@@ -20,6 +20,8 @@
 
 #include "msrGenerationBasicTypes.h"
 
+#include "waeHandlers.h"
+
 
 namespace MusicFormats
 {
@@ -174,8 +176,8 @@ void msrGenerationAPIKindAtom::applyAtomWithValue (
   // theString contains the output kind name:
   // is it in the  output kinds map?
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<
@@ -225,8 +227,8 @@ void msrGenerationAPIKindAtom::applyAtomWithValue (
 
 void msrGenerationAPIKindAtom::acceptIn (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -244,8 +246,8 @@ void msrGenerationAPIKindAtom::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_msrGenerationAPIKindAtom>*> (v)) {
         S_msrGenerationAPIKindAtom elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
-        if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -263,8 +265,8 @@ void msrGenerationAPIKindAtom::acceptIn (basevisitor* v)
 
 void msrGenerationAPIKindAtom::acceptOut (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -282,8 +284,8 @@ void msrGenerationAPIKindAtom::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_msrGenerationAPIKindAtom>*> (v)) {
         S_msrGenerationAPIKindAtom elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
-        if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -301,8 +303,8 @@ void msrGenerationAPIKindAtom::acceptOut (basevisitor* v)
 
 void msrGenerationAPIKindAtom::browseData (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<

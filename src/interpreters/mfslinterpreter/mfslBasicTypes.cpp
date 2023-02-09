@@ -56,7 +56,7 @@ void mfslOptionsBlock::registerOptionsInOptionsBlock (
   mfslDriver& drv)
 {
   if (gGlobalMfslInterpreterOahGroup->getTraceOptionsBlocks ()) {
-    gLogStream <<
+    gLog <<
       "====> Registering option [" <<
       option->asString () <<
       "] in options block \"" <<
@@ -122,14 +122,14 @@ void mfslOptionsBlock::print (std::ostream& os) const
     std::endl;
 
   // print the options blocks options name and value vector
-  gLogStream <<
+  gLog <<
     "fOptionsBlockOptionsVector" << ": " <<
     std::endl;
 
   ++gIndenter;
 
   for (S_oahOption option : fOptionsBlockOptionsVector) {
-    gLogStream << option;
+    gLog << option;
   } // for
 
   --gIndenter;
@@ -206,7 +206,7 @@ void mfslInput::setInputNameSuppliedByAnOption (
   mfslDriver&   drv)
 {
   if (gGlobalMfslInterpreterOahGroup->getTraceInputs ()) {
-    gLogStream <<
+    gLog <<
       "====> Setting the name of input \"" <<
       fInputName <<
       "\" to \"" <<
@@ -225,7 +225,7 @@ void mfslInput::selectInputName (
   mfslDriver&   drv)
 {
   if (gGlobalMfslInterpreterOahGroup->getTraceInputs ()) {
-    gLogStream <<
+    gLog <<
       "====> Setting the name of input \"" <<
       fInputName <<
       "\" to \"" <<
@@ -277,7 +277,7 @@ void mfslInput::selectInputName (
 //
 //         if (inputGotAValueByAnOption) {
 //           if (gGlobalMfslInterpreterOahGroup->getTraceInputs ()) {
-//             gLogStream <<
+//             gLog <<
 //               "====> Input name \"" <<
 //               fInputName <<
 //               "\" has been selected as \"" <<
@@ -368,7 +368,7 @@ std::string mfslInput::getInputName (mfslDriver& drv) const
 
     case mfslInputNameKind::kInputNameOptionSupplied:
       if (gGlobalMfslInterpreterOahGroup->getTraceInputs ()) {
-        gLogStream <<
+        gLog <<
           "====> " <<
           " input \"" <<
           fInputName <<
@@ -382,7 +382,7 @@ std::string mfslInput::getInputName (mfslDriver& drv) const
 
     case mfslInputNameKind::kInputNameSetInScript:
       if (gGlobalMfslInterpreterOahGroup->getTraceInputs ()) {
-        gLogStream <<
+        gLog <<
           "====>" <<
           "input \"" <<
           fInputName <<
@@ -431,7 +431,7 @@ S_mfslOptionsBlock mfslInput::getInputOptionsBlockForName (
   S_mfslOptionsBlock result;
 
   if (gGlobalMfslInterpreterOahGroup->getTraceInputs ()) {
-    gLogStream <<
+    gLog <<
       "====> Fetching name \"" <<
       name <<
       "\" in input \"" <<
@@ -464,7 +464,7 @@ S_mfslOptionsBlock mfslInput::getInputOptionsBlockForName (
   }
 
   if (gGlobalMfslInterpreterOahGroup->getTraceInputs ()) {
-    gLogStream <<
+    gLog <<
       "<==== Result: \"" <<
       result <<
       "\", line " << drv.getScannerLocation () <<
@@ -501,7 +501,7 @@ void mfslInput::addName (
 
   else {
     if (gGlobalMfslInterpreterOahGroup->getTraceInputs ()) {
-      gLogStream <<
+      gLog <<
         "====> Adding name \"" <<
         name <<
         "\"" <<
@@ -541,7 +541,7 @@ void mfslInput::enrichNameOptionsBlock (
 #endif
 
   if (gGlobalMfslInterpreterOahGroup->getTraceInputs ()) {
-    gLogStream <<
+    gLog <<
       "====> Enriching options block \"" <<
       nameOptionsBlock->getOptionsBlockName () <<
       "\" (" <<
@@ -837,7 +837,7 @@ S_mfslInput mfslInputsTable::fetchInputByName (
   S_mfslInput result;
 
   if (gGlobalMfslInterpreterOahGroup->getTraceInputs ()) {
-    gLogStream <<
+    gLog <<
       "====> Fetching input named \"" <<
       name <<
       "\" in inputs table" <<
@@ -876,7 +876,7 @@ S_mfslInput mfslInputsTable::fetchInputByNameNonConst (
   S_mfslInput result;
 
   if (gGlobalMfslInterpreterOahGroup->getTraceInputs ()) {
-    gLogStream <<
+    gLog <<
       "====> Fetching input named \"" <<
       name <<
       "\" in inputs table (non-const)" <<
@@ -1029,7 +1029,7 @@ void mfslChoice::setChoiceLabelSuppliedByAnOption (
   mfslDriver&   drv)
 {
   if (gGlobalMfslInterpreterOahGroup->getTraceChoices ()) {
-    gLogStream <<
+    gLog <<
       "====> Setting the label of choice \"" <<
       fChoiceName <<
       "\" to \"" <<
@@ -1048,7 +1048,7 @@ void mfslChoice::selectChoiceLabel (
   mfslDriver&   drv)
 {
   if (gGlobalMfslInterpreterOahGroup->getTraceChoices ()) {
-    gLogStream <<
+    gLog <<
       "====> Setting the label of choice \"" <<
       fChoiceName <<
       "\" to \"" <<
@@ -1100,7 +1100,7 @@ void mfslChoice::selectChoiceLabel (
 
         if (choiceGotAValueByAnOption) {
           if (gGlobalMfslInterpreterOahGroup->getTraceChoices ()) {
-            gLogStream <<
+            gLog <<
               "====> Choice name \"" <<
               fChoiceName <<
               "\" has been selected as \"" <<
@@ -1191,7 +1191,7 @@ std::string mfslChoice::getChoiceLabel (mfslDriver& drv) const
 
     case mfslChoiceLabelKind::kChoiceLabelOptionSupplied:
       if (gGlobalMfslInterpreterOahGroup->getTraceChoices ()) {
-        gLogStream <<
+        gLog <<
           "====> " <<
           " choice \"" <<
           fChoiceName <<
@@ -1205,7 +1205,7 @@ std::string mfslChoice::getChoiceLabel (mfslDriver& drv) const
 
     case mfslChoiceLabelKind::kChoiceLabelSetInScript:
       if (gGlobalMfslInterpreterOahGroup->getTraceChoices ()) {
-        gLogStream <<
+        gLog <<
           "====>" <<
           "choice \"" <<
           fChoiceName <<
@@ -1254,7 +1254,7 @@ S_mfslOptionsBlock mfslChoice::getChoiceOptionsBlockForLabel (
   S_mfslOptionsBlock result;
 
   if (gGlobalMfslInterpreterOahGroup->getTraceChoices ()) {
-    gLogStream <<
+    gLog <<
       "====> Fetching label \"" <<
       label <<
       "\" in choice \"" <<
@@ -1287,7 +1287,7 @@ S_mfslOptionsBlock mfslChoice::getChoiceOptionsBlockForLabel (
   }
 
   if (gGlobalMfslInterpreterOahGroup->getTraceChoices ()) {
-    gLogStream <<
+    gLog <<
       "<==== Result: \"" <<
       result <<
       "\", line " << drv.getScannerLocation () <<
@@ -1324,7 +1324,7 @@ void mfslChoice::addLabel (
 
   else {
     if (gGlobalMfslInterpreterOahGroup->getTraceChoices ()) {
-      gLogStream <<
+      gLog <<
         "====> Adding label \"" <<
         label <<
         "\"" <<
@@ -1364,7 +1364,7 @@ void mfslChoice::enrichLabelOptionsBlock (
 #endif
 
   if (gGlobalMfslInterpreterOahGroup->getTraceChoices ()) {
-    gLogStream <<
+    gLog <<
       "====> Enriching options block \"" <<
       labelOptionsBlock->getOptionsBlockName () <<
       "\" (" <<
@@ -1702,7 +1702,7 @@ S_mfslChoice mfslChoicesTable::fetchChoiceByName (
   S_mfslChoice result;
 
   if (gGlobalMfslInterpreterOahGroup->getTraceChoices ()) {
-    gLogStream <<
+    gLog <<
       "====> Fetching choice named \"" <<
       name <<
       "\" in choices table" <<
@@ -1741,7 +1741,7 @@ S_mfslChoice mfslChoicesTable::fetchChoiceByNameNonConst (
   S_mfslChoice result;
 
   if (gGlobalMfslInterpreterOahGroup->getTraceChoices ()) {
-    gLogStream <<
+    gLog <<
       "====> Fetching choice named \"" <<
       name <<
       "\" in choices table (non-const)" <<
@@ -1867,7 +1867,7 @@ mfslCaseChoiceStatement::mfslCaseChoiceStatement (
   fCaseChoice = caseChoice;
 
   if (gGlobalMfslInterpreterOahGroup->getTraceCaseChoiceStatements ()) {
-    gLogStream <<
+    gLog <<
       "====> Creating case statement" <<
       ", caseChoice: [" <<
       fCaseChoice->asString () <<
@@ -1890,7 +1890,7 @@ void mfslCaseChoiceStatement::registerCaseChoiceLabel (
   mfslDriver&   drv)
 {
   if (gGlobalMfslInterpreterOahGroup->getTraceCaseChoiceStatements ()) {
-    gLogStream <<
+    gLog <<
       "====> Registering case label \"" <<
       label <<
       "\" in case statement: [" <<
@@ -2072,7 +2072,7 @@ mfslCaseInputStatement::mfslCaseInputStatement (
   fCaseInputInput = caseInput;
 
   if (gGlobalMfslInterpreterOahGroup->getTraceCaseInputStatements ()) {
-    gLogStream <<
+    gLog <<
       "====> Creating case statement" <<
       ", caseInput: [" <<
       fCaseInputInput->asString () <<
@@ -2095,7 +2095,7 @@ void mfslCaseInputStatement::registerCaseInputName (
   mfslDriver&   drv)
 {
   if (gGlobalMfslInterpreterOahGroup->getTraceCaseInputStatements ()) {
-    gLogStream <<
+    gLog <<
       "====> Registering case name \"" <<
       name <<
       "\" in case statement: [" <<
@@ -2256,9 +2256,9 @@ std::ostream& operator << (std::ostream& os, const S_mfslCaseInputStatement& elt
 //   static Bool pPrivateThisMethodHasBeenRun (false);
 //
 //   if (! pPrivateThisMethodHasBeenRun) {
-// #ifdef MF_TRACING_IS_ENABLED
-//     if (gGlobalOahEarlyOptions.getEarlyTracingOah () && ! gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
-//       gLogStream <<
+// #ifdef MF_TRACE_IS_ENABLED
+//     if (gEarlyOptions.getEarlyTraceOah () && ! gEarlyOptions.getEarlyQuietOption ()) {
+//       gLog <<
 //         "Initializing MFSL basic types handling" <<
 //         std::endl;
 //     }

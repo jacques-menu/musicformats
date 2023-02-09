@@ -16,9 +16,10 @@
 #include "bsrLineContentsElements.h"
 
 #include "oahOah.h"
-#include "oahEarlyOptions.h"
 
 #include "bsrOah.h"
+
+#include "waeHandlers.h"
 
 
 namespace MusicFormats
@@ -69,7 +70,7 @@ S_bsrLine bsrLineContentsElement::getUpLinkToBsrLine () const
 
 void bsrLineContentsElement::acceptIn (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
 		std::stringstream ss;
 
@@ -89,7 +90,7 @@ void bsrLineContentsElement::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_bsrLineContentsElement>*> (v)) {
         S_bsrLineContentsElement elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           std::stringstream ss;
 
@@ -108,7 +109,7 @@ void bsrLineContentsElement::acceptIn (basevisitor* v)
 
 void bsrLineContentsElement::acceptOut (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
 		std::stringstream ss;
 
@@ -128,7 +129,7 @@ void bsrLineContentsElement::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_bsrLineContentsElement>*> (v)) {
         S_bsrLineContentsElement elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           std::stringstream ss;
 

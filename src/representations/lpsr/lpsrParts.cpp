@@ -22,11 +22,12 @@
 #include "lpsrParts.h"
 
 #include "oahOah.h"
-#include "oahEarlyOptions.h"
 
 #include "lpsrOah.h"
 
 #include "msrBrowsers.h"
+
+#include "waeHandlers.h"
 
 
 namespace MusicFormats
@@ -118,14 +119,14 @@ bool lpsrPartBlock::compareStaffBlockWithOtherElement (
       " is not a staff nor a chord names or figured bass context";
 
     lpsrInternalError (
-      gGlobalCurrentServiceRunData->getInputSourceName (),
+      gServiceRunData->getInputSourceName (),
       otherElement->getInputLineNumber (),
       __FILE__, __LINE__,
       ss.str ());
   }
 
 /* JMI
-  gLogStream <<
+  gLog <<
     std::endl <<
     "!!!!!!!!!!!!!!!!!!!!!!!!!" <<
     std::endl <<
@@ -235,14 +236,14 @@ bool lpsrPartBlock::compareChordNamesContextWithOtherElement (
       " is not a staff nor a chord names or figured bass context";
 
     lpsrInternalError (
-      gGlobalCurrentServiceRunData->getInputSourceName (),
+      gServiceRunData->getInputSourceName (),
       otherElement->getInputLineNumber (),
       __FILE__, __LINE__,
       ss.str ());
   }
 
 /* JMI
-  gLogStream <<
+  gLog <<
     std::endl <<
     "!!!!!!!!!!!!!!!!!!!!!!!!!" <<
     std::endl <<
@@ -307,7 +308,7 @@ bool lpsrPartBlock::compareElementsToHaveHarmoniesAboveCorrespondingStaff (
       " is not a staff nor a chord names or figured bass context";
 
     lpsrInternalError (
-      gGlobalCurrentServiceRunData->getInputSourceName (),
+      gServiceRunData->getInputSourceName (),
       first->getInputLineNumber (),
       __FILE__, __LINE__,
       ss.str ());
@@ -330,8 +331,8 @@ void lpsrPartBlock::appendChordNamesContextToPartBlock (
   fPartBlockElementsList.push_back (chordNamesContext);
 
   // sort the std::list if necessary
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceHarmonies ()) {
     std::stringstream ss;
 
     ss <<
@@ -347,7 +348,7 @@ void lpsrPartBlock::appendChordNamesContextToPartBlock (
 #endif
 
 /* JMI
-  gLogStream <<
+  gLog <<
     std::endl << std::endl <<
     "@@@@@@@@@@@@@@@@ fPartBlockElementsList contains initially:" <<
     std::endl << std::endl;
@@ -360,11 +361,11 @@ void lpsrPartBlock::appendChordNamesContextToPartBlock (
     S_msrElement
       element = (*i);
 
-    gLogStream <<
+    gLog <<
       element->asShortString () <<
       std::endl;
   } // for
-  gLogStream <<
+  gLog <<
     std::endl << std::endl;
 */
 
@@ -376,7 +377,7 @@ void lpsrPartBlock::appendChordNamesContextToPartBlock (
   }
 
 /* JMI
-  gLogStream <<
+  gLog <<
     std::endl << std::endl <<
     "@@@@@@@@@@@@@@@@ fPartBlockElementsList contains after sort:" <<
     std::endl << std::endl;
@@ -389,11 +390,11 @@ void lpsrPartBlock::appendChordNamesContextToPartBlock (
     S_msrElement
       element = (*i);
 
-    gLogStream <<
+    gLog <<
       element->asShortString () <<
       std::endl;
   } // for
-  gLogStream <<
+  gLog <<
     std::endl << std::endl;
 */
 }
@@ -406,7 +407,7 @@ void lpsrPartBlock::appendFiguredBassContextToPartBlock (
 
 void lpsrPartBlock::acceptIn (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
 		std::stringstream ss;
 
@@ -425,7 +426,7 @@ void lpsrPartBlock::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_lpsrPartBlock>*> (v)) {
         S_lpsrPartBlock elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           std::stringstream ss;
 
@@ -444,7 +445,7 @@ void lpsrPartBlock::acceptIn (basevisitor* v)
 
 void lpsrPartBlock::acceptOut (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
 		std::stringstream ss;
 
@@ -463,7 +464,7 @@ void lpsrPartBlock::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_lpsrPartBlock>*> (v)) {
         S_lpsrPartBlock elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           std::stringstream ss;
 
@@ -482,7 +483,7 @@ void lpsrPartBlock::acceptOut (basevisitor* v)
 
 void lpsrPartBlock::browseData (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
 		std::stringstream ss;
 
@@ -506,7 +507,7 @@ void lpsrPartBlock::browseData (basevisitor* v)
     browser.browse (*(*i));
   } // for
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
 		std::stringstream ss;
 

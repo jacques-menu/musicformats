@@ -9,27 +9,62 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#ifndef ___msdrParserWaeHandlers___
-#define ___msdrParserWaeHandlers___
+#ifndef ___languages___
+#define ___languages___
 
-#include "msdlTokens.h"
+#include <string>
+#include <map>
 
-#include "waeHandlers.h"
+#include "smartpointer.h"
+
+#include "mfPasses.h"
 
 
 namespace MusicFormats
 {
 
+// the MusicFormats languages
+//______________________________________________________________________________
+enum class mfLanguageKind {
+  kMusicFormatsLanguage_UNKNOWN,
+
+  kMusicFormatsLanguageEnglish, // MusicFormats default
+  kMusicFormatsLanguageFrench,
+  kMusicFormatsLanguageItalian,
+  kMusicFormatsLanguageGerman,
+  kMusicFormatsLanguageSpanish,
+  kMusicFormatsLanguageDutch
+};
+
+std::string mfLanguageKindAsString (
+  mfLanguageKind languageKind);
+
+std::ostream& operator << (std::ostream& os, const mfLanguageKind& elt);
+
+mfLanguageKind mfLanguageKindFromString (
+  const std::string& theString);
+
+extern std::map<std::string, mfLanguageKind>
+  gGlobalMusicFormatsLanguageKindsMap;
+
+std::string availableMusicFormatsLanguageKinds (size_t namesListMaxLength);
+
+void initializeMusicFormatsLanguageKindsMap ();
+
+// initialization
+//______________________________________________________________________________
+void initializeMusicFormatsLanguages ();
+
 //________________________________________________________________________
-class EXP mfWaeHandler : public waeHandler
+class EXP language : public smartable
 {
-/* this class is purely virtual
+/* this class is purely virtual JMI v0.9.67 misses '= 0'
   public:
 
     // creation
     // ------------------------------------------------------
 
-    static SMARTP<mfWaeHandler> create ();
+    static SMARTP<language> create ();
 */
 
   public:
@@ -37,9 +72,9 @@ class EXP mfWaeHandler : public waeHandler
     // constructors/destructor
     // ------------------------------------------------------
 
-                          mfWaeHandler ();
+                          language ();
 
-    virtual               ~mfWaeHandler ();
+    virtual               ~language ();
 
   public:
 
@@ -187,8 +222,20 @@ class EXP mfWaeHandler : public waeHandler
     // private fields
     // ------------------------------------------------------
 };
-typedef SMARTP<mfWaeHandler> S_mfWaeHandler;
-EXP std::ostream& operator << (std::ostream& os, const S_mfWaeHandler& elt);
+typedef SMARTP<language> S_language;
+EXP std::ostream& operator << (std::ostream& os, const S_language& elt);
+
+//________________________________________________________________________
+// hidden global language variable
+EXP void setGlobalLanguage (mfLanguageKind languageKind);
+
+EXP S_language getGlobalLanguage ();
+
+// a handy shortcut
+#define gLanguage getGlobalLanguage ()
+
+//________________________________________________________________________
+void initializeLanguages (); // JMI superflous? v0.9.67
 
 
 }

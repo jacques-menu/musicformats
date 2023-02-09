@@ -19,6 +19,8 @@
 
 #include "oahInsiderHandlers.h"
 
+#include "waeHandlers.h"
+
 
 namespace MusicFormats
 {
@@ -54,8 +56,8 @@ oahInsiderHandler::oahInsiderHandler (
       handlerDescription,
       handlerUsage)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<

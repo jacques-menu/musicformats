@@ -34,7 +34,7 @@
 #include "mfStringsHandling.h"
 
 #include "oahOah.h"
-#include "oahEarlyOptions.h"
+// #include "oahEarlyOptions.h"
 #include "waeOah.h"
 
 #include "oahEarlyOptions.h"
@@ -62,6 +62,8 @@
 
 #include "musicxml2brailleInterface.h"
 
+#include "waeHandlers.h"
+
 
 namespace MusicFormats
 {
@@ -73,7 +75,7 @@ static mfMusicformatsErrorKind xmlFile2brailleWithHandler (
   std::ostream& err,
   S_oahHandler  handler)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsr ()) {
 		std::stringstream ss;
 
@@ -86,12 +88,12 @@ static mfMusicformatsErrorKind xmlFile2brailleWithHandler (
 
     ++gIndenter;
 
-    sxmlfile->print (gLogStream);
-    gLogStream << std::endl << std::endl;
+    sxmlfile->print (gLog);
+    gLog << std::endl << std::endl;
 
     --gIndenter;
 
-    gLogStream <<
+    gLog <<
       "<!-- ----------------------------------------------------------- -->" <<
       std::endl << std::endl;
 
@@ -104,7 +106,7 @@ static mfMusicformatsErrorKind xmlFile2brailleWithHandler (
   // has quiet mode been requested?
   // ------------------------------------------------------
 
-  if (gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
+  if (gEarlyOptions.getEarlyQuietOption ()) {
     // disable all trace and display options
     handler->
       enforceHandlerQuietness ();
@@ -131,14 +133,14 @@ static mfMusicformatsErrorKind xmlFile2brailleWithHandler (
         theMxsr,
         gGlobalMsrOahGroup,
         mfPassIDKind::kMfPassID_2a,
-        gWaeHandler->createAnMSRSqueletonFromTheMXSR ());
+        gLanguage->createAnMSRSqueletonFromTheMXSR ());
   }
   catch (mxsr2msrException& e) {
-    mfDisplayException (e, gOutputStream);
+    mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
   catch (std::exception& e) {
-    mfDisplayException (e, gOutputStream);
+    mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
 
@@ -146,11 +148,11 @@ static mfMusicformatsErrorKind xmlFile2brailleWithHandler (
   // ------------------------------------------------------
 
   if (gGlobalXml2brlInsiderOahGroup->getQuitAfterPass2a ()) {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
     gWaeHandler->waeTrace (
       err,
       __FILE__, __LINE__,
-      gWaeHandler->quittingAfterPass (mfPassIDKind::kMfPassID_2a));
+      gLanguage->quittingAfterPass (mfPassIDKind::kMfPassID_2a));
 #endif
 
     return mfMusicformatsErrorKind::kMusicformatsError_NONE;
@@ -164,14 +166,14 @@ static mfMusicformatsErrorKind xmlFile2brailleWithHandler (
       theMxsr,
       firstMsrScore,
         mfPassIDKind::kMfPassID_2b,
-        gWaeHandler->populateTheMSRSqueletonFromMusicXMLData ());
+        gLanguage->populateTheMSRSqueletonFromMusicXMLData ());
   }
   catch (mxsr2msrException& e) {
-    mfDisplayException (e, gOutputStream);
+    mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
   catch (std::exception& e) {
-    mfDisplayException (e, gOutputStream);
+    mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
 
@@ -179,11 +181,11 @@ static mfMusicformatsErrorKind xmlFile2brailleWithHandler (
   // ------------------------------------------------------
 
   if (gGlobalXml2brlInsiderOahGroup->getQuitAfterPass2b ()) {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
     gWaeHandler->waeTrace (
       err,
       __FILE__, __LINE__,
-      gWaeHandler->quittingAfterPass (mfPassIDKind::kMfPassID_2b));
+      gLanguage->quittingAfterPass (mfPassIDKind::kMfPassID_2b));
 #endif
 
     return mfMusicformatsErrorKind::kMusicformatsError_NONE;
@@ -201,14 +203,14 @@ static mfMusicformatsErrorKind xmlFile2brailleWithHandler (
         gGlobalMsrOahGroup,
         gGlobalMsr2msrOahGroup,
         mfPassIDKind::kMfPassID_3,
-        gWaeHandler->convertTheFirstMSRIntoASecondMSR ());
+        gLanguage->convertTheFirstMSRIntoASecondMSR ());
   }
   catch (mxsr2msrException& e) {
-    mfDisplayException (e, gOutputStream);
+    mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
   catch (std::exception& e) {
-    mfDisplayException (e, gOutputStream);
+    mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
 
@@ -216,11 +218,11 @@ static mfMusicformatsErrorKind xmlFile2brailleWithHandler (
   // ------------------------------------------------------
 
   if (gGlobalXml2brlInsiderOahGroup->getQuitAfterPass3 ()) {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
     gWaeHandler->waeTrace (
       err,
       __FILE__, __LINE__,
-      gWaeHandler->quittingAfterPass (mfPassIDKind::kMfPassID_3));
+      gLanguage->quittingAfterPass (mfPassIDKind::kMfPassID_3));
 #endif
 
     return mfMusicformatsErrorKind::kMusicformatsError_NONE;
@@ -245,11 +247,11 @@ static mfMusicformatsErrorKind xmlFile2brailleWithHandler (
           "Create a first BSR from the MSR");
     }
     catch (msr2bsrException& e) {
-      mfDisplayException (e, gOutputStream);
+      mfDisplayException (e, gOutput);
       return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
     }
     catch (std::exception& e) {
-      mfDisplayException (e, gOutputStream);
+      mfDisplayException (e, gOutput);
       return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
     }
 
@@ -261,7 +263,7 @@ static mfMusicformatsErrorKind xmlFile2brailleWithHandler (
         firstBsrScore,
         gGlobalMsrOahGroup,
         gGlobalBsrOahGroup,
-        gWaeHandler->displayTheFirstMSRAsText ());
+        gLanguage->displayTheFirstMSRAsText ());
     }
 
     if (gGlobalBsrOahGroup->getDisplayFirstBsrFull ()) {
@@ -269,7 +271,7 @@ static mfMusicformatsErrorKind xmlFile2brailleWithHandler (
         firstBsrScore,
         gGlobalMsrOahGroup,
         gGlobalBsrOahGroup,
-        gWaeHandler->displayTheFirstMSRAsText ());
+        gLanguage->displayTheFirstMSRAsText ());
     }
   }
 
@@ -289,11 +291,11 @@ static mfMusicformatsErrorKind xmlFile2brailleWithHandler (
           "Create the finalized BSR from the first BSR");
     }
     catch (bsr2finalizedBsrException& e) {
-      mfDisplayException (e, gOutputStream);
+      mfDisplayException (e, gOutput);
       return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
     }
     catch (std::exception& e) {
-      mfDisplayException (e, gOutputStream);
+      mfDisplayException (e, gOutput);
       return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
     }
 
@@ -305,7 +307,7 @@ static mfMusicformatsErrorKind xmlFile2brailleWithHandler (
         finalizedBsrScore,
         gGlobalMsrOahGroup,
         gGlobalBsrOahGroup,
-        gWaeHandler->displayTheFinalizedBSRAsText ());
+        gLanguage->displayTheFinalizedBSRAsText ());
     }
 
     if (gGlobalBsrOahGroup->getDisplaySecondBsrFull ()) {
@@ -313,7 +315,7 @@ static mfMusicformatsErrorKind xmlFile2brailleWithHandler (
         finalizedBsrScore,
         gGlobalMsrOahGroup,
         gGlobalBsrOahGroup,
-        gWaeHandler->displayTheFinalizedBSRAsText ());
+        gLanguage->displayTheFinalizedBSRAsText ());
     }
   }
 
@@ -326,8 +328,8 @@ static mfMusicformatsErrorKind xmlFile2brailleWithHandler (
         handler->
           fetchOutputFileNameFromTheOptions ();
 
-#ifdef MF_TRACING_IS_ENABLED
-      if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+      if (gEarlyOptions.getEarlyTraceOah ()) {
         err <<
           "xmlFile2braille() outputFileName = \"" <<
           outputFileName <<
@@ -341,8 +343,8 @@ static mfMusicformatsErrorKind xmlFile2brailleWithHandler (
 #endif
 
     if (! outputFileName.size ()) {
-#ifdef MF_TRACING_IS_ENABLED
-      if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+      if (gEarlyOptions.getEarlyTraceOah ()) {
         err <<
           "xmlFile2braille() output goes to standard output" <<
           std::endl;
@@ -363,18 +365,18 @@ static mfMusicformatsErrorKind xmlFile2brailleWithHandler (
           out);
       }
       catch (bsr2brailleException& e) {
-      mfDisplayException (e, gOutputStream);
+      mfDisplayException (e, gOutput);
         return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
       }
       catch (std::exception& e) {
-      mfDisplayException (e, gOutputStream);
+      mfDisplayException (e, gOutput);
         return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
       }
     }
 
     else {
-#ifdef MF_TRACING_IS_ENABLED
-      if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+      if (gEarlyOptions.getEarlyTraceOah ()) {
         err <<
           "xmlFile2braille() output goes to file \"" <<
           outputFileName <<
@@ -388,11 +390,11 @@ static mfMusicformatsErrorKind xmlFile2brailleWithHandler (
 #endif
 
       // open output file
-#ifdef MF_TRACING_IS_ENABLED
-      if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
+#ifdef MF_TRACE_IS_ENABLED
+      if (gEarlyOptions.getEarlyTracePasses ()) {
         err <<
           std::endl <<
-  	      gWaeHandler->openingBrailleMusicFileForWriting (outputFileName) <<
+  	      gLanguage->openingBrailleMusicFileForWriting (outputFileName) <<
           std::endl;
 
 //     gWaeHandler->waeTrace ( JMI v0.9.67
@@ -410,7 +412,7 @@ static mfMusicformatsErrorKind xmlFile2brailleWithHandler (
         std::stringstream ss;
 
         ss <<
-          gWaeHandler->cannotOpenBrailleMusicFileForWriting (outputFileName);
+          gLanguage->cannotOpenBrailleMusicFileForWriting (outputFileName);
 
         std::string message = ss.str ();
 
@@ -431,22 +433,22 @@ static mfMusicformatsErrorKind xmlFile2brailleWithHandler (
           brailleCodeFileOutputStream);
       }
       catch (bsr2brailleException& e) {
-        mfDisplayException (e, gOutputStream);
+        mfDisplayException (e, gOutput);
         return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
       }
       catch (std::exception& e) {
-        mfDisplayException (e, gOutputStream);
+        mfDisplayException (e, gOutput);
         return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
       }
 
       // close output file
 #ifdef TRACE_OAH
-      if (gtracingOah->fTracePasses) {
+      if (gTraceOah->fTracePasses) {
         std::stringstream ss;
 
         ss <<
           std::endl <<
-          gWaeHandler->closingBrailleMusicFile (outputFileName) <<
+          gLanguage->closingBrailleMusicFile (outputFileName) <<
           std::endl;
 
         gWaeHandler->waeTrace (
@@ -481,8 +483,8 @@ static mfMusicformatsErrorKind xmlFile2brailleWithOptionsAndArguments (
   }
 
   else {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
   err <<
     "xmlFile2braille(), sxmlfile is NULL" <<
     std::endl;
@@ -509,8 +511,8 @@ static mfMusicformatsErrorKind xmlFile2brailleWithOptionsAndArguments (
 
   // print the options and arguments
   // ------------------------------------------------------
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<
@@ -521,17 +523,17 @@ static mfMusicformatsErrorKind xmlFile2brailleWithOptionsAndArguments (
   // apply early options if any
   // ------------------------------------------------------
 
-  gGlobalOahEarlyOptions.applyEarlyOptionsIfPresentInOptionsAndArguments (
+  gEarlyOptions.applyEarlyOptionsIfPresentInOptionsAndArguments (
     handlerOptionsAndArguments);
 
   // has the '-insider' option been used?
   // ------------------------------------------------------
 
   Bool insiderOption =
-    gGlobalOahEarlyOptions.getEarlyInsiderOption ();
+    gEarlyOptions.getEarlyInsiderOption ();
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<
@@ -576,9 +578,9 @@ static mfMusicformatsErrorKind xmlFile2brailleWithOptionsAndArguments (
   // create the global run data
   // ------------------------------------------------------
 
-  gGlobalCurrentServiceRunData =
+  setGlobalServiceRunData (
     mfServiceRunData::create (
-      serviceName);
+      serviceName));
 
   // handle the command line options and arguments
   // ------------------------------------------------------
@@ -602,17 +604,17 @@ static mfMusicformatsErrorKind xmlFile2brailleWithOptionsAndArguments (
     } // switch
   }
   catch (mfOahException& e) {
-    mfDisplayException (e, gOutputStream);
+    mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidOption;
   }
   catch (std::exception& e) {
-    mfDisplayException (e, gOutputStream);
+    mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
 
   // check indentation
   if (gIndenter != 0) {
-    gLogStream <<
+    gLog <<
       "### " <<
       serviceName <<
       " gIndenter value after options ands arguments checking: " <<
@@ -648,7 +650,7 @@ EXP mfMusicformatsErrorKind musicxmlFile2braille (
       createSXMLFileFromFile (
         fileName,
         mfPassIDKind::kMfPassID_1,
-        gWaeHandler->createAnMXSRFromAMusicXMLFileOrStdin ());
+        gLanguage->createAnMXSRFromAMusicXMLFileOrStdin ());
 
   if (sxmlfile) {
     return
@@ -673,7 +675,7 @@ mfMusicformatsErrorKind convertMusicxmlFile2brailleWithHandler (
       createSXMLFileFromFile (
         fileName,
         mfPassIDKind::kMfPassID_1,
-        gWaeHandler->createAnMXSRFromAMusicXMLFileOrStdin ());
+        gLanguage->createAnMXSRFromAMusicXMLFileOrStdin ());
 
   if (sxmlfile) {
     return
@@ -699,7 +701,7 @@ EXP mfMusicformatsErrorKind musicxmlFd2braille (
       createSXMLFileFromFd (
         fd,
         mfPassIDKind::kMfPassID_1,
-        gWaeHandler->createAnMXSRFromAMusicXMLDescriptor ());
+        gLanguage->createAnMXSRFromAMusicXMLDescriptor ());
 
   if (sxmlfile) {
     return
@@ -724,7 +726,7 @@ mfMusicformatsErrorKind convertMusicxmlFd2brailleWithHandler (
       createSXMLFileFromFd (
         fd,
         mfPassIDKind::kMfPassID_1,
-        gWaeHandler->createAnMXSRFromAMusicXMLDescriptor ());
+        gLanguage->createAnMXSRFromAMusicXMLDescriptor ());
 
   if (sxmlfile) {
     return
@@ -750,7 +752,7 @@ EXP mfMusicformatsErrorKind musicxmlString2braille (
       createSXMLFileFromString (
         buffer,
         mfPassIDKind::kMfPassID_1,
-        gWaeHandler->createAnMXSRFromAMusicXMLBuffer ());
+        gLanguage->createAnMXSRFromAMusicXMLBuffer ());
 
   // call xmlFile2braille() even if sxmlfile is null,
   // to handle the help options if any
@@ -775,7 +777,7 @@ mfMusicformatsErrorKind convertMusicxmlString2brailleWithHandler (
       createSXMLFileFromString (
         buffer,
         mfPassIDKind::kMfPassID_1,
-        gWaeHandler->createAnMXSRFromAMusicXMLBuffer ());
+        gLanguage->createAnMXSRFromAMusicXMLBuffer ());
 
   // call xmlFile2braille() even if sxmlfile is null,
   // to handle the help options if any

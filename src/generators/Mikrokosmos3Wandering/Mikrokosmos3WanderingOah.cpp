@@ -31,6 +31,8 @@
 
 #include "Mikrokosmos3WanderingInsiderHandler.h"
 
+#include "waeHandlers.h"
+
 
 namespace MusicFormats
 {
@@ -153,10 +155,10 @@ void Mikrokosmos3WanderingOahGroup::initializeMultiGenerationOutputOptions () //
 
 void Mikrokosmos3WanderingOahGroup::initializeMikrokosmos3WanderingOahGroup ()
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   // trace
   // --------------------------------------
-// JMI  initializeMikrokosmos3WanderingtracingOah ();
+// JMI  initializeMikrokosmos3WanderingTraceOah ();
 #endif
 
   // generation API
@@ -200,8 +202,8 @@ void Mikrokosmos3WanderingOahGroup::checkGroupOptionsConsistency ()
 
 void Mikrokosmos3WanderingOahGroup::acceptIn (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -219,8 +221,8 @@ void Mikrokosmos3WanderingOahGroup::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_Mikrokosmos3WanderingOahGroup>*> (v)) {
         S_Mikrokosmos3WanderingOahGroup elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
-        if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -238,8 +240,8 @@ void Mikrokosmos3WanderingOahGroup::acceptIn (basevisitor* v)
 
 void Mikrokosmos3WanderingOahGroup::acceptOut (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -257,8 +259,8 @@ void Mikrokosmos3WanderingOahGroup::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_Mikrokosmos3WanderingOahGroup>*> (v)) {
         S_Mikrokosmos3WanderingOahGroup elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
-        if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -276,8 +278,8 @@ void Mikrokosmos3WanderingOahGroup::acceptOut (basevisitor* v)
 
 void Mikrokosmos3WanderingOahGroup::browseData (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -294,7 +296,7 @@ void Mikrokosmos3WanderingOahGroup::browseData (basevisitor* v)
 void Mikrokosmos3WanderingOahGroup::printMikrokosmos3WanderingOahValues (
   int fieldWidth)
 {
-  gLogStream <<
+  gLog <<
     "The Mikrokosmos3Wandering options are:" <<
     std::endl;
 
@@ -303,13 +305,13 @@ void Mikrokosmos3WanderingOahGroup::printMikrokosmos3WanderingOahValues (
   // generation API kind
   // --------------------------------------
 
-  gLogStream <<
+  gLog <<
     "Generation API:" <<
     std::endl;
 
   ++gIndenter;
 
-  gLogStream << std::left <<
+  gLog << std::left <<
     std::setw (fieldWidth) << "fGenerationAPIKind" << ": " <<
       msrGenerationAPIKindAsString (fGenerationAPIKind) <<
       std::endl;
@@ -319,13 +321,13 @@ void Mikrokosmos3WanderingOahGroup::printMikrokosmos3WanderingOahValues (
   // multi-generation output kind
   // --------------------------------------
 
-  gLogStream <<
+  gLog <<
     "multi-generation output:" <<
     std::endl;
 
   ++gIndenter;
 
-  gLogStream << std::left <<
+  gLog << std::left <<
     std::setw (fieldWidth) << "fMultiGenerationOutputKind" << ": " <<
       mfMultiGenerationOutputKindAsString (fMultiGenerationOutputKind) <<
       std::endl;
@@ -350,8 +352,8 @@ std::ostream& operator << (std::ostream& os, const S_Mikrokosmos3WanderingOahGro
 //______________________________________________________________________________
 S_Mikrokosmos3WanderingOahGroup createGlobalMikrokosmos3WanderingOahGroup ()
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<

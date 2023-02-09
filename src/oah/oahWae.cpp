@@ -47,7 +47,7 @@ void oahWarning (const std::string& warningMessage)
 
   gIndenter.resetToZero ();
 
-  gLogStream <<
+  gLog <<
     "*** WARNING [OAH]: " <<
     warningMessage <<
     std::endl;
@@ -63,7 +63,7 @@ void oahWarningWithContext (
 
   gIndenter.resetToZero ();
 
-  gLogStream <<
+  gLog <<
     "*** WARNING [OAH]: " <<
     warningMessage <<
     ", " <<
@@ -78,7 +78,7 @@ void oahError (const std::string& errorMessage)
 {
   gIndenter.resetToZero ();
 
-  gLogStream <<
+  gLog <<
     "### ERROR [OAH]: " <<
     errorMessage <<
     std::endl;
@@ -96,7 +96,7 @@ void oahErrorWithContext (
 {
   gIndenter.resetToZero ();
 
-  gLogStream <<
+  gLog <<
     "### ERROR [OAH]: " <<
     errorMessage <<
     ", " <<
@@ -115,7 +115,7 @@ void oahInternalError (const std::string& errorMessage)
 {
   gIndenter.resetToZero ();
 
-  gLogStream <<
+  gLog <<
     "### INTERNAL ERROR: [OAH]: " <<
     errorMessage <<
     std::endl;
@@ -133,7 +133,7 @@ void oahInternalWarning (const std::string& errorMessage)
 
   gIndenter.resetToZero ();
 
-  gLogStream <<
+  gLog <<
     "### INTERNAL WARNING: [OAH]: " <<
     errorMessage <<
     std::endl;
@@ -147,7 +147,7 @@ void oahInternalErrorWithContext (
 {
   gIndenter.resetToZero ();
 
-  gLogStream <<
+  gLog <<
     "### INTERNAL ERROR [OAH]: " <<
     errorMessage <<
     ", " <<

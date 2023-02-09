@@ -30,7 +30,7 @@ void mfAssert (
   if (! condition) {
     gIndenter.resetToZero ();
 
-    gLogStream <<
+    gLog <<
       "#### mfAssert" <<
       ", " << sourceCodeFileName << ":" << sourceCodeLineNumber <<
       " -- " << messageIfFalse <<

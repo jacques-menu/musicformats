@@ -28,6 +28,8 @@
 
 #include "mfslInterpreterInsiderHandler.h"
 
+#include "waeHandlers.h"
+
 
 namespace MusicFormats
 {
@@ -59,10 +61,10 @@ mfslInterpreterOahGroup::~mfslInterpreterOahGroup ()
 
 void mfslInterpreterOahGroup::initializeMfslInterpreterOahGroup ()
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   // trace
   // --------------------------------------
-// JMI  initializemfslInterpretertracingOah ();
+// JMI  initializemfslInterpreterTraceOah ();
 #endif
 
   // user options
@@ -257,8 +259,8 @@ void mfslInterpreterOahGroup::checkGroupOptionsConsistency ()
 
 void mfslInterpreterOahGroup::acceptIn (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -276,8 +278,8 @@ void mfslInterpreterOahGroup::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_mfslInterpreterOahGroup>*> (v)) {
         S_mfslInterpreterOahGroup elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
-        if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -295,8 +297,8 @@ void mfslInterpreterOahGroup::acceptIn (basevisitor* v)
 
 void mfslInterpreterOahGroup::acceptOut (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -314,8 +316,8 @@ void mfslInterpreterOahGroup::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_mfslInterpreterOahGroup>*> (v)) {
         S_mfslInterpreterOahGroup elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
-        if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -333,8 +335,8 @@ void mfslInterpreterOahGroup::acceptOut (basevisitor* v)
 
 void mfslInterpreterOahGroup::browseData (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -351,22 +353,22 @@ void mfslInterpreterOahGroup::browseData (basevisitor* v)
 void mfslInterpreterOahGroup::displayMfslInterpreterOahValues (
   int fieldWidth)
 {
-  gLogStream <<
+  gLog <<
     "The mfsl options are:" <<
     std::endl;
 
   ++gIndenter;
 
-  // tracing
+  // trace
   // --------------------------------------
 
-  gLogStream <<
+  gLog <<
     "Trace:" <<
     std::endl;
 
   ++gIndenter;
 
-  gLogStream << std::left <<
+  gLog << std::left <<
     std::setw (fieldWidth) << "fTraceScanning" << ": " <<
       fTraceScanning <<
       std::endl <<
@@ -419,20 +421,20 @@ void mfslInterpreterOahGroup::displayMfslInterpreterOahValues (
   // choice
   // --------------------------------------
 
-  gLogStream <<
+  gLog <<
     "Choice:" <<
     std::endl;
 
   ++gIndenter;
 
-  gLogStream << std::left <<
+  gLog << std::left <<
     std::setw (fieldWidth) << "fSelectChoiceToLabelsMultiMap" << ": ";
 
   ++gIndenter;
 
   if (fSelectChoiceToLabelsMultiMap.size ()) {
     for (std::pair<std::string, std::string> thePair : fSelectChoiceToLabelsMultiMap) {
-      gLogStream <<
+      gLog <<
         thePair.first << ": " << thePair.second <<
         std::endl;
     } // for
@@ -460,8 +462,8 @@ std::ostream& operator << (std::ostream& os, const S_mfslInterpreterOahGroup& el
 //______________________________________________________________________________
 S_mfslInterpreterOahGroup createGlobalMfslInterpreterOahGroup ()
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<

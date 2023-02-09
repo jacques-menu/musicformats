@@ -25,6 +25,11 @@ MUSIC_FORMATS_DEV=${MY_WORK_DIR}/musicformats-git-dev
 alias mfdev="cd ${MUSIC_FORMATS_DEV}"
 alias mfd=mfdev
 
+# scripts
+#----------------------------------------------
+
+export PATH=${MUSIC_FORMATS_DEV}/scripts:$PATH
+
 # working on dev branch
 #----------------------------------------------
 
@@ -40,6 +45,9 @@ SRC_DIR=${MUSIC_FORMATS_DEV}/src
 
 LXML_SRC_DIR=${LXML_DIR}/src
 LXML_INTERFACE_DIR=${LXML_SRC_DIR}/interface
+
+LANGUAGES_DIR=${MUSIC_FORMATS_DEV}/src/languages
+alias lang="cd ${LANGUAGES_DIR}"
 
 SCRIPTS_DIR=${MUSIC_FORMATS_DEV}/scripts
 alias skr="cd ${SCRIPTS_DIR}"

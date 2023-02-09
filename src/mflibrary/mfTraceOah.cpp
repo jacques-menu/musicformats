@@ -12,7 +12,7 @@
 #include "mfStaticSettings.h"
 
 
-#ifdef MF_TRACING_IS_ENABLED // encompasses the remainder of this file
+#ifdef MF_TRACE_IS_ENABLED // encompasses the remainder of this file
 
 #include <iomanip>      // std::setw, std::setprecision, ...
 
@@ -26,23 +26,25 @@
 #include "oahAtomsCollection.h"
 #include "oahEarlyOptions.h"
 
+#include "waeHandlers.h"
+
 
 namespace MusicFormats
 {
 
 //_______________________________________________________________________________
-S_tracingOahGroup gGlobalTracingOahGroup;
+S_TraceOahGroup gGlobalTraceOahGroup;
 
-S_tracingOahGroup tracingOahGroup::create (
+S_TraceOahGroup traceOahGroup::create (
   const S_oahHandler& handler)
 {
-  tracingOahGroup* o = new tracingOahGroup (
+  traceOahGroup* o = new traceOahGroup (
     handler);
   assert (o != nullptr);
   return o;
 }
 
-tracingOahGroup::tracingOahGroup (
+traceOahGroup::traceOahGroup (
   const S_oahHandler& handler)
   : oahGroup (
       "OAH Trace",
@@ -56,15 +58,15 @@ All of them imply '-trace-passes, -tpasses'.)",
 {
   createTheTracePrefixes (handler);
 
-  initializeTracingOahGroup ();
+  initializeTraceOahGroup ();
 }
 
-tracingOahGroup::~tracingOahGroup ()
+traceOahGroup::~traceOahGroup ()
 {}
 
-void tracingOahGroup::createTheTracePrefixes (const S_oahHandler& handler)
+void traceOahGroup::createTheTracePrefixes (const S_oahHandler& handler)
 {
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<
@@ -115,7 +117,7 @@ void tracingOahGroup::createTheTracePrefixes (const S_oahHandler& handler)
   --gIndenter;
 }
 
-void tracingOahGroup::initializeMusicXMLPrintLayoutstracingOah ()
+void traceOahGroup::initializeMusicXMLPrintLayoutsTraceOah ()
 {
   S_oahSubGroup
     subGroup =
@@ -144,7 +146,7 @@ R"(Print layouts)",
       traceMusicXMLPrintLayoutsAtom);
 }
 
-void tracingOahGroup::initializeOthertracingOah ()
+void traceOahGroup::initializeOtherTraceOah ()
 {
   S_oahSubGroup
     subGroup =
@@ -181,7 +183,7 @@ R"()",
         K_TRACE_COMPONENTS_OPTION_LONG_NAME, K_TRACE_COMPONENTS_OPTION_SHORT_NAME,
 R"(Write a trace of components handling to standard error.)",
         "fEarlyTraceComponentsRef",
-        gGlobalOahEarlyOptions.getEarlyTraceComponentsRef ()));
+        gEarlyOptions.getEarlyTraceComponentsRef ()));
 
   // passes
 
@@ -190,7 +192,7 @@ R"(Write a trace of components handling to standard error.)",
       K_TRACE_PASSES_OPTION_LONG_NAME, K_TRACE_PASSES_OPTION_SHORT_NAME,
 R"(Write a trace of the passes to standard error.)",
       "fEarlyTracePassesRef",
-      gGlobalOahEarlyOptions.getEarlyTracePassesRef ());
+      gEarlyOptions.getEarlyTracePassesRef ());
 
   subGroup->
     appendAtomToSubGroup (
@@ -202,7 +204,7 @@ R"(Write a trace of the passes to standard error.)",
 
   mfPassIDKind
     mfPassIDKindDefaultValue =
-      mfPassIDKind::kMfPassID_ALL; // default value for passes tracing
+      mfPassIDKind::kMfPassID_ALL; // default value for passes trace
 
   fTraceOnlyPassIDOahAtom =
     passIDOahAtom::create (
@@ -223,7 +225,7 @@ The default is 'DEFAULT_VALUE'.)",
         mfPassIDKindDefaultValue)),
     "PASSID",
     "fEarlyTraceOnlyPassRef",
-    gGlobalOahEarlyOptions.getEarlyTraceOnlyPassRef ());
+    gEarlyOptions.getEarlyTraceOnlyPassRef ());
 
   subGroup->
     appendAtomToSubGroup (
@@ -286,7 +288,7 @@ R"(Write a trace for tests to standard error.)",
       traceForTestsOahBooleanAtom);
 }
 
-void tracingOahGroup::initializeTranspositionstracingOah ()
+void traceOahGroup::initializeTranspositionsTraceOah ()
 {
   S_oahSubGroup
    subGroup =
@@ -330,7 +332,7 @@ R"(Octave shifts (<octave-shift/> in MusicXML, \ottava in LilyPond))",
       traceOctaveShiftsAtom);
 }
 
-void tracingOahGroup::initializeAboveStaffTracingOah ()
+void traceOahGroup::initializeAboveStaffTraceOah ()
 {
   S_oahSubGroup
     subGroup =
@@ -450,7 +452,7 @@ R"(Eyeglasses)",
       traceEyeGlassesAtom);
 }
 
-void tracingOahGroup::initializeBreaksAndBarLinestracingOah ()
+void traceOahGroup::initializeBreaksAndBarLinesTraceOah ()
 {
   S_oahSubGroup
     subGroup =
@@ -591,7 +593,7 @@ R"(Bar number checks)",
       traceBarNumberChecksAtom);
 }
 
-void tracingOahGroup::initializeClefsToTempostracingOah ()
+void traceOahGroup::initializeClefsToTemposTraceOah ()
 {
   S_oahSubGroup
     subGroup =
@@ -716,7 +718,7 @@ R"(Tempos)",
       traceTemposAtom);
 }
 
-void tracingOahGroup::initializeInterNotestracingOah ()
+void traceOahGroup::initializeInterNotesTraceOah ()
 {
   S_oahSubGroup
     subGroup =
@@ -782,7 +784,7 @@ R"(Glissandos)",
       traceGlissandosAtom);
 }
 
-void tracingOahGroup::initializeSpannerstracingOah ()
+void traceOahGroup::initializeSpannersTraceOah ()
 {
   S_oahSubGroup
     subGroup =
@@ -921,7 +923,7 @@ R"(Ligatures)",
       traceLigaturesAtom);
 }
 
-void tracingOahGroup::initializeHarmoniestracingOah ()
+void traceOahGroup::initializeHarmoniesTraceOah ()
 {
   S_oahSubGroup
     subGroup =
@@ -998,7 +1000,7 @@ R"(<harmony/> in MusicXML, \chordmode in LilyPond)",
       traceExtraHarmoniesAtom);
 }
 
-void tracingOahGroup::initializeFiguredBassestracingOah ()
+void traceOahGroup::initializeFiguredBassesTraceOah ()
 {
   S_oahSubGroup
     subGroup =
@@ -1042,7 +1044,7 @@ R"(<figured-bass> in MusicXML, \figuremode in LilyPond, with more details)",
       traceFiguredBasseseAtomDetails);
 }
 
-void tracingOahGroup::initializeCreditsToWordstracingOah ()
+void traceOahGroup::initializeCreditsToWordsTraceOah ()
 {
   S_oahSubGroup
     subGroup =
@@ -1145,7 +1147,7 @@ R"(Words)",
       traceWordsBooleanAtom);
 }
 
-void tracingOahGroup::initializeChordsAndTupletstracingOah ()
+void traceOahGroup::initializeChordsAndTupletsTraceOah ()
 {
   S_oahSubGroup
     subGroup =
@@ -1262,7 +1264,7 @@ R"(Tuplets details)",
       traceTupletsDetailsBooleanAtom);
 }
 
-void tracingOahGroup::initializeInstrumentstracingOah ()
+void traceOahGroup::initializeInstrumentsTraceOah ()
 {
   S_oahSubGroup
     subGroup =
@@ -1474,7 +1476,7 @@ R"(MIDI)",
       traceMidiBooleanAtom);
 }
 
-void tracingOahGroup::initializeNotesAttachmentstracingOah ()
+void traceOahGroup::initializeNotesAttachmentsTraceOah ()
 {
   S_oahSubGroup
     subGroup =
@@ -1629,7 +1631,7 @@ R"(Dynamics)",
       traceDynamicsBooleanAtom);
 }
 
-void tracingOahGroup::initializeSegmentstracingOah ()
+void traceOahGroup::initializeSegmentsTraceOah ()
 {
   S_oahSubGroup
     subGroup =
@@ -1696,7 +1698,7 @@ R"(Voices segments details)",
       traceSegmentsDetailsBooleanAtom);
 }
 
-void tracingOahGroup::initializeMeasurestracingOah ()
+void traceOahGroup::initializeMeasuresTraceOah ()
 {
   S_oahSubGroup
     subGroup =
@@ -1855,7 +1857,7 @@ R"(Voice moments)",
   // fTraceDetailedMeasureNumbersSet is empty
 }
 
-void tracingOahGroup::initializeMeasuresSlicestracingOah ()
+void traceOahGroup::initializeMeasuresSlicesTraceOah ()
 {
   S_oahSubGroup
     subGroup =
@@ -1924,7 +1926,7 @@ R"(Measures slices details)",
 //       traceMeasuresSlicesDetailsBooleanAtom);
 }
 
-void tracingOahGroup::initializeBooksToVoicestracingOah ()
+void traceOahGroup::initializeBooksToVoicesTraceOah ()
 {
   S_oahSubGroup
     subGroup =
@@ -2139,7 +2141,7 @@ This option implies '-tvoices, -trace-voices'.)",
       traceVoicesDetailsBooleanAtom);
 }
 
-void tracingOahGroup::initializeNotestracingOah ()
+void traceOahGroup::initializeNotesTraceOah ()
 {
   S_oahSubGroup
     subGroup =
@@ -2334,7 +2336,7 @@ R"(Tremolos)",
       traceTremolosBooleanAtom);
 }
 
-void tracingOahGroup::initializeOptionsTraceAndDisplayOptions ()
+void traceOahGroup::initializeOptionsTraceAndDisplayOptions ()
 {
   S_oahSubGroup
     subGroup =
@@ -2349,16 +2351,16 @@ R"()",
 
   // trace options
 
-  fTracingOahBooleanAtom =
+  fTraceOahBooleanAtom =
     oahBooleanAtom::create (
       K_TRACE_OAH_OPTION_LONG_NAME, K_TRACE_OAH_OPTION_SHORT_NAME,
 R"(Write a trace of options and help handling to standard error.)",
-      "fTracingOah",
-      fTracingOah);
+      "fTraceOah",
+      fTraceOah);
 
   subGroup->
     appendAtomToSubGroup (
-      fTracingOahBooleanAtom);
+      fTraceOahBooleanAtom);
 
  // trace options details
 
@@ -2367,14 +2369,14 @@ R"(Write a trace of options and help handling to standard error.)",
       oahTwoBooleansAtom::create (
         K_TRACE_OAH_DETAILS_OPTION_LONG_NAME, K_TRACE_OAH_DETAILS_OPTION_SHORT_NAME,
 R"(Write a trace of options and help handling with more details to standard error.)",
-        "fTracingOahDetails",
-        fTracingOahDetails,
-        fTracingOahBooleanAtom));
+        "fTraceOahDetails",
+        fTraceOahDetails,
+        fTraceOahBooleanAtom));
 
   // fTraceDetailedMeasureNumbersSet is intially empty
 }
 
-void tracingOahGroup::initializeRepeatsToSlashestracingOah ()
+void traceOahGroup::initializeRepeatsToSlashesTraceOah ()
 {
   S_oahSubGroup
     subGroup =
@@ -2547,196 +2549,206 @@ R"(Slashes)",
       traceSlashesBooleanAtom);
 }
 
-void tracingOahGroup::initializeTracingOahGroup ()
+void traceOahGroup::initializeTraceOahGroup ()
 {
   // other trace
-  // FIRST, to initialize passes tracing
-  initializeOthertracingOah ();
+  // FIRST, to initialize passes trace
+  initializeOtherTraceOah ();
 
   // options and help trace and display
   initializeOptionsTraceAndDisplayOptions ();
 
   // score to voices
-  initializeBooksToVoicestracingOah ();
+  initializeBooksToVoicesTraceOah ();
 
   // print layouts
-  initializeMusicXMLPrintLayoutstracingOah ();
+  initializeMusicXMLPrintLayoutsTraceOah ();
 
   // segments
-  initializeSegmentstracingOah ();
+  initializeSegmentsTraceOah ();
 
   // measures
-  initializeMeasurestracingOah ();
+  initializeMeasuresTraceOah ();
 
   // measures slices
-  initializeMeasuresSlicestracingOah ();
+  initializeMeasuresSlicesTraceOah ();
 
   // notes
-  initializeNotestracingOah ();
+  initializeNotesTraceOah ();
 
   // notes attachments
-  initializeNotesAttachmentstracingOah ();
+  initializeNotesAttachmentsTraceOah ();
 
   // repeats to slashes
-  initializeRepeatsToSlashestracingOah ();
+  initializeRepeatsToSlashesTraceOah ();
 
   // instruments
-  initializeInstrumentstracingOah ();
+  initializeInstrumentsTraceOah ();
 
   // chords and tuplets
-  initializeChordsAndTupletstracingOah ();
+  initializeChordsAndTupletsTraceOah ();
 
   // texts
-  initializeCreditsToWordstracingOah ();
+  initializeCreditsToWordsTraceOah ();
 
   // harmonies
-  initializeHarmoniestracingOah ();
+  initializeHarmoniesTraceOah ();
 
   // figured bass elements
-  initializeFiguredBassestracingOah ();
+  initializeFiguredBassesTraceOah ();
 
   // spanners
-  initializeSpannerstracingOah ();
+  initializeSpannersTraceOah ();
 
   // inter-notes
-  initializeInterNotestracingOah ();
+  initializeInterNotesTraceOah ();
 
   // clefs to tempos
-  initializeClefsToTempostracingOah ();
+  initializeClefsToTemposTraceOah ();
 
   // breaks
-  initializeBreaksAndBarLinestracingOah ();
+  initializeBreaksAndBarLinesTraceOah ();
 
   // above staff
-  initializeAboveStaffTracingOah ();
+  initializeAboveStaffTraceOah ();
 
   //transpositions
-  initializeTranspositionstracingOah ();
+  initializeTranspositionsTraceOah ();
 }
 
 //______________________________________________________________________________
-void tracingOahGroup::enforceGroupQuietness ()
+void traceOahGroup::enforceGroupQuietness ()
 {}
 
 //______________________________________________________________________________
-void tracingOahGroup::checkGroupOptionsConsistency ()
+void traceOahGroup::checkGroupOptionsConsistency ()
 {
   // JMI
 }
 
 //______________________________________________________________________________
-void tracingOahGroup::acceptIn (basevisitor* v)
+void traceOahGroup::acceptIn (basevisitor* v)
 {
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
-      ".\\\" ==> tracingOahGroup::acceptIn ()" <<
+      ".\\\" ==> traceOahGroup::acceptIn ()" <<
       std::endl;
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
+#endif
 
-  if (visitor<S_tracingOahGroup>*
+  if (visitor<S_TraceOahGroup>*
     p =
-      dynamic_cast<visitor<S_tracingOahGroup>*> (v)) {
-        S_tracingOahGroup elem = this;
+      dynamic_cast<visitor<S_TraceOahGroup>*> (v)) {
+        S_TraceOahGroup elem = this;
 
-        if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
-            ".\\\" ==> Launching tracingOahGroup::visitStart ()" <<
+            ".\\\" ==> Launching traceOahGroup::visitStart ()" <<
             std::endl;
 
           gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
+#endif
         p->visitStart (elem);
   }
 }
 
-void tracingOahGroup::acceptOut (basevisitor* v)
+void traceOahGroup::acceptOut (basevisitor* v)
 {
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
-      ".\\\" ==> tracingOahGroup::acceptOut ()" <<
+      ".\\\" ==> traceOahGroup::acceptOut ()" <<
       std::endl;
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
+#endif
 
-  if (visitor<S_tracingOahGroup>*
+  if (visitor<S_TraceOahGroup>*
     p =
-      dynamic_cast<visitor<S_tracingOahGroup>*> (v)) {
-        S_tracingOahGroup elem = this;
+      dynamic_cast<visitor<S_TraceOahGroup>*> (v)) {
+        S_TraceOahGroup elem = this;
 
-        if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
-            ".\\\" ==> Launching tracingOahGroup::visitEnd ()" <<
+            ".\\\" ==> Launching traceOahGroup::visitEnd ()" <<
             std::endl;
 
           gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
+#endif
         p->visitEnd (elem);
   }
 }
 
-void tracingOahGroup::browseData (basevisitor* v)
+void traceOahGroup::browseData (basevisitor* v)
 {
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
-      ".\\\" ==> tracingOahGroup::browseData ()" <<
+      ".\\\" ==> traceOahGroup::browseData ()" <<
       std::endl;
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
+#endif
 
   oahGroup::browseData (v);
 }
 
 //______________________________________________________________________________
-void tracingOahGroup::displayAtomWithVariableOptionsValues (
+void traceOahGroup::displayAtomWithVariableOptionsValues (
   std::ostream& os,
   int           valueFieldWidth) const
 {}
 
-void tracingOahGroup::displayTracingOahValues (int fieldWidth)
+void traceOahGroup::displayTraceOahValues (int fieldWidth)
 {
-  gLogStream <<
+  gLog <<
     "The trace options are:" <<
     std::endl;
 
   ++gIndenter;
 
-  gLogStream << std::left <<
+  gLog << std::left <<
     std::setw (fieldWidth) << "Trace:" <<
     std::endl;
 
   ++gIndenter;
 
-  gLogStream << std::left <<
+  gLog << std::left <<
     // options and help display
-    std::setw (fieldWidth) << "fTracingOah" << ": " <<
-    fTracingOah <<
+    std::setw (fieldWidth) << "fTraceOah" << ": " <<
+    fTraceOah <<
     std::endl <<
-    std::setw (fieldWidth) << "fTracingOahDetails" << ": " <<
-    fTracingOahDetails <<
+    std::setw (fieldWidth) << "fTraceOahDetails" << ": " <<
+    fTraceOahDetails <<
     std::endl <<
 
     // components
@@ -2829,7 +2841,7 @@ void tracingOahGroup::displayTracingOahValues (int fieldWidth)
     fTraceVoiceMoments <<
     std::endl;
 
-  gLogStream << std::left <<
+  gLog << std::left <<
     std::setw (fieldWidth) << "fTraceDetailedMeasureNumbersSet" << ": " <<
     std::endl;
 
@@ -2842,7 +2854,7 @@ void tracingOahGroup::displayTracingOahValues (int fieldWidth)
     ++gIndenter;
 
     for ( ; ; ) {
-      gLogStream << "v " << (*i);
+      gLog << "v " << (*i);
       if (++i == iEnd) break;
       // no std::endl here
     } // for
@@ -2850,13 +2862,13 @@ void tracingOahGroup::displayTracingOahValues (int fieldWidth)
     --gIndenter;
   }
   else {
-    gLogStream <<
+    gLog <<
       "[NONE]";
   }
-  gLogStream << std::endl;
+  gLog << std::endl;
 
     // segments
-  gLogStream << std::left <<
+  gLog << std::left <<
     std::setw (fieldWidth) << "fTraceSegments" << ": " <<
     fTraceSegments <<
     std::endl <<
@@ -3209,7 +3221,7 @@ void tracingOahGroup::displayTracingOahValues (int fieldWidth)
   --gIndenter;
 }
 
-std::ostream& operator << (std::ostream& os, const S_tracingOahGroup& elt)
+std::ostream& operator << (std::ostream& os, const S_TraceOahGroup& elt)
 {
   if (elt) {
     elt->print (os);
@@ -3222,10 +3234,10 @@ std::ostream& operator << (std::ostream& os, const S_tracingOahGroup& elt)
 }
 
 //______________________________________________________________________________
-S_tracingOahGroup createGlobalTracingOahGroup (
+S_TraceOahGroup createGlobalTraceOahGroup (
   const S_oahHandler& handler)
 {
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<
@@ -3234,16 +3246,16 @@ S_tracingOahGroup createGlobalTracingOahGroup (
   }
 
   // protect library against multiple initializations
-  if (! gGlobalTracingOahGroup) {
+  if (! gGlobalTraceOahGroup) {
     // create the global OAH group
-    gGlobalTracingOahGroup =
-      tracingOahGroup::create (
+    gGlobalTraceOahGroup =
+      traceOahGroup::create (
         handler);
-    assert (gGlobalTracingOahGroup != 0);
+    assert (gGlobalTraceOahGroup != 0);
   }
 
   // return the global OAH group
-  return gGlobalTracingOahGroup;
+  return gGlobalTraceOahGroup;
 }
 
 
@@ -3251,6 +3263,7 @@ S_tracingOahGroup createGlobalTracingOahGroup (
 
 
 #endif
+
 
 
 /* JMI

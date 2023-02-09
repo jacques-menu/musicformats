@@ -94,8 +94,8 @@ Applying the macro atom is done in \method{oahMacroAtom}{applyElement}:
 \begin{lstlisting}[language=CPlusPlus]
 void oahMacroAtom::applyValueLessAtom (std::ostream& os)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<
@@ -184,7 +184,7 @@ R"()",
   fBrailleOutputKindAtom->
     applyAtomWithValue (
       "utf8d",
-      gLogStream);
+      gLog);
   autoUTFd8MacroAtom->
     oahValueLessAtomAlias (
       fBrailleOutputKindAtom);

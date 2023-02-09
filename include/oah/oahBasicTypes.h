@@ -1581,7 +1581,7 @@ class EXP oahHandler : public oahFindableElement
 
     // OAH handler
     static S_oahHandler   getCurrentOahHandler ()
-                              { return pCurrentOahHandler; }
+                              { return sCurrentOahHandler; }
 
   public:
 
@@ -1783,7 +1783,7 @@ class EXP oahHandler : public oahFindableElement
 
     void                  printOptionsSummary (std::ostream& os) const;
     void                  printOptionsSummary () const
-                              { printOptionsSummary (gLogStream); }
+                              { printOptionsSummary (gLog); }
 
     void                  printHandlerAndGroupAndSubGroupSpecificHelp (
                             std::ostream&      os,
@@ -1803,7 +1803,7 @@ class EXP oahHandler : public oahFindableElement
                             std::ostream&      os);
 
     static int            getIncludeFilesMaximumLevel ()
-                              { return pIncludeFilesMaximumLevel; }
+                              { return sIncludeFilesMaximumLevel; }
 
     void                  printHandlerOptionsAndArguments (
                             std::ostream& os) const;
@@ -1964,7 +1964,7 @@ class EXP oahHandler : public oahFindableElement
     // ------------------------------------------------------
 
     // current OAH handler
-    static S_oahHandler   pCurrentOahHandler;
+    static S_oahHandler   sCurrentOahHandler;
 
     // service
     std::string           fHandlerServiceName;
@@ -2080,7 +2080,7 @@ class EXP oahHandler : public oahFindableElement
     std::list <std::string>
                           fIncludeFileNamesStack;
     int                   fIncludeFilesCurrentLevel;
-    static int            pIncludeFilesMaximumLevel;
+    static int            sIncludeFilesMaximumLevel;
 };
 typedef SMARTP<oahHandler> S_oahHandler;
 EXP std::ostream& operator << (std::ostream& os, const S_oahHandler& elt);

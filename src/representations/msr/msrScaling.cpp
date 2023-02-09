@@ -20,11 +20,12 @@
 #include "msrScaling.h"
 
 #include "oahOah.h"
-#include "oahEarlyOptions.h"
 
 #include "msrOah.h"
 
 #include "lpsrOah.h"
+
+#include "waeHandlers.h"
 
 
 namespace MusicFormats
@@ -99,13 +100,13 @@ float msrScaling::fetchGlobalStaffSize () const
 
     result = optionsGlobalStaffSize * ratio;
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
     const float
       optionsStaffGlobalSizeDefaultValue =
         gGlobalLpsrOahGroup->getStaffGlobalSizeDefaultValue ();
 
-    if (gGlobalTracingOahGroup->getTraceGeometry ()) {
-      gLogStream <<
+    if (gGlobalTraceOahGroup->getTraceGeometry ()) {
+      gLog <<
         "fetchGlobalStaffSize():" <<
         std::endl;
 
@@ -113,7 +114,7 @@ float msrScaling::fetchGlobalStaffSize () const
 
       const int fieldWidth = 32;
 
-      gLogStream << std::left <<
+      gLog << std::left <<
         std::setw (fieldWidth) <<
         "optionsGlobalStaffSize" << ": " <<
         optionsGlobalStaffSize <<
@@ -155,8 +156,8 @@ float msrScaling::fetchGlobalStaffSize () const
 #endif
 
     if (result < 1.0 || result > 100.0) {
-#ifdef MF_TRACING_IS_ENABLED
-      if (gGlobalTracingOahGroup->getTraceGeometry ()) {
+#ifdef MF_TRACE_IS_ENABLED
+      if (gGlobalTraceOahGroup->getTraceGeometry ()) {
         std::stringstream ss;
 
         ss <<
@@ -165,7 +166,7 @@ float msrScaling::fetchGlobalStaffSize () const
           std::endl;
 
         musicxmlWarning (
-          gGlobalCurrentServiceRunData->getInputSourceName (),
+          gServiceRunData->getInputSourceName (),
           fInputLineNumber,
           ss.str ());
       }
@@ -181,8 +182,9 @@ float msrScaling::fetchGlobalStaffSize () const
 
 void msrScaling::acceptIn (basevisitor* v)
 {
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "% ==> msrScaling::acceptIn ()" <<
@@ -192,12 +194,14 @@ void msrScaling::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
+#endif
 
   if (visitor<S_msrScaling>*
     p =
       dynamic_cast<visitor<S_msrScaling>*> (v)) {
         S_msrScaling elem = this;
 
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
@@ -209,14 +213,16 @@ void msrScaling::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
+#endif
         p->visitStart (elem);
   }
 }
 
 void msrScaling::acceptOut (basevisitor* v)
 {
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "% ==> msrScaling::acceptOut ()" <<
@@ -226,12 +232,14 @@ void msrScaling::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
+#endif
 
   if (visitor<S_msrScaling>*
     p =
       dynamic_cast<visitor<S_msrScaling>*> (v)) {
         S_msrScaling elem = this;
 
+#ifdef MF_TRACE_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
@@ -243,6 +251,7 @@ void msrScaling::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
+#endif        
         p->visitEnd (elem);
   }
 }

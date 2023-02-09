@@ -41,6 +41,9 @@
 
 #include "msr2summaryVisitor.h"
 
+#include "waeHandlers.h"
+
+
 namespace MusicFormats
 {
 //_______________________________________________________________________________
@@ -64,8 +67,8 @@ S_msrScore translateMxsrToMsrSkeleton (
   // set the global current passID
   setGlobalCurrentPassIDKind (passIDKind);
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTracePasses ()) {
     std::string separator =
       "%--------------------------------------------------------------";
 
@@ -76,7 +79,7 @@ S_msrScore translateMxsrToMsrSkeleton (
       separator <<
       std::endl <<
       gTab <<
-      gWaeHandler->passIDKindAsString (passIDKind) << ": " << passDescription <<
+      gLanguage->passIDKindAsString (passIDKind) << ": " << passDescription <<
       std::endl <<
       separator <<
       std::endl;
@@ -105,13 +108,13 @@ S_msrScore translateMxsrToMsrSkeleton (
   if (gGlobalMsrOahGroup->getDisplayMsrSkeleton ()) {
     displayMsrScore (
       scoreSkeleton,
-      gWaeHandler->displayTheFirstMSRSkeletonAsText ());
+      gLanguage->displayTheFirstMSRSkeletonAsText ());
   }
 
   // register time spent
   clock_t endClock = clock ();
 
-  mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
+  gGlobalTimingItemsList.appendTimingItem (
     passIDKind,
     passDescription,
     mfTimingItemKind::kMandatory,
@@ -120,7 +123,7 @@ S_msrScore translateMxsrToMsrSkeleton (
 
   // check indentation
   if (gIndenter != 0) {
-    if (! gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
+    if (! gEarlyOptions.getEarlyQuietOption ()) {
       std::stringstream ss;
 
       ss <<
@@ -128,7 +131,7 @@ S_msrScore translateMxsrToMsrSkeleton (
         gIndenter.getIndentation ();
 
       mxsr2msrWarning (
-        gGlobalCurrentServiceRunData->getInputSourceName (),
+        gServiceRunData->getInputSourceName (),
         1, // JMI inputLineNumber,
         ss.str ());
     }
@@ -140,7 +143,7 @@ S_msrScore translateMxsrToMsrSkeleton (
     std::string message =
       "### Conversion from MXSR to an MSR skeleton failed ###";
 
-    gLogStream <<
+    gLog <<
       message <<
       std::endl;
 
@@ -174,12 +177,12 @@ S_msrScore translateMxsrToMsrSkeleton (
 //   std::string separator =
 //     "%--------------------------------------------------------------";
 //
-//   gLogStream <<
+//   gLog <<
 //     std::endl <<
 //     separator <<
 //     std::endl <<
 //     gTab <<
-//     gWaeHandler->passOptional () << ": "<< passDescription <<
+//     gLanguage->passOptional () << ": "<< passDescription <<
 //     std::endl <<
 //     separator <<
 //     std::endl << std::endl <<
@@ -188,9 +191,9 @@ S_msrScore translateMxsrToMsrSkeleton (
 //   // register time spent
 //   clock_t endClock = clock ();
 //
-//   mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
+//   gGlobalTimingItemsList.appendTimingItem (
 // 		 mfPassIDKind::kMfPassID_OptionsAndArgumentsHandling,
-//     gWaeHandler->displayTheFirstMSRSkeletonAsText (), // JMI ??? v0.9.66
+//     gLanguage->displayTheFirstMSRSkeletonAsText (), // JMI ??? v0.9.66
 //     mfTimingItemKind::kOptional,
 //     startClock,
 //     endClock);

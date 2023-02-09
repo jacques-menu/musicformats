@@ -100,8 +100,8 @@ class EXP Mikrokosmos3WanderingOahGroup : public oahGroup
     // private services
     // ------------------------------------------------------
 
-#ifdef MF_TRACING_IS_ENABLED
-// JMI    void                  initializeMikrokosmos3WanderingtracingOah ();
+#ifdef MF_TRACE_IS_ENABLED
+// JMI    void                  initializeMikrokosmos3WanderingTraceOah ();
 #endif
 
     void                  initializeGenerationAPIOptions ();

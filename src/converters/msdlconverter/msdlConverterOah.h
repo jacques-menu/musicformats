@@ -80,8 +80,8 @@ class EXP msdlConverterOahGroup : public oahGroup
     // private services
     // ------------------------------------------------------
 
-#ifdef MF_TRACING_IS_ENABLED
-// JMI    void                  initializeMsdlConvertertracingOah ();
+#ifdef MF_TRACE_IS_ENABLED
+// JMI    void                  initializeMsdlConverterTraceOah ();
 #endif
 
   public:

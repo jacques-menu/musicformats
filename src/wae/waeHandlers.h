@@ -12,6 +12,8 @@
 #ifndef ___waeHandlers___
 #define ___waeHandlers___
 
+#include <set>
+
 #include "smartpointer.h"
 
 #include "mfExceptions.h"
@@ -132,7 +134,7 @@ class EXP waeHandler : public smartable
 
     // trace
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
     virtual void          waeTrace (
 //                             const std::string& context,
                             const std::string& inputSourceName,
@@ -166,8 +168,15 @@ typedef SMARTP<waeHandler> S_waeHandler;
 EXP std::ostream& operator << (std::ostream& os, const S_waeHandler& elt);
 
 //________________________________________________________________________
-extern EXP S_waeHandler gGlobalWaeHandler;
+// hidden global WAE handler variable
+EXP void setGlobalWaeHandler (S_waeHandler handler);
 
+EXP S_waeHandler getGlobalWaeHandler ();
+
+// a handy shortcut
+#define gWaeHandler getGlobalWaeHandler ()
+
+//________________________________________________________________________
 EXP void initializeWAE ();
 }
 

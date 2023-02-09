@@ -390,8 +390,8 @@ class EXP brailleGenerationOahGroup : public oahGroup
     // private services
     // ------------------------------------------------------
 
-#ifdef MF_TRACING_IS_ENABLED
-// JMI    void                  initializeBsr2brailletracingOah ();
+#ifdef MF_TRACE_IS_ENABLED
+// JMI    void                  initializeBsr2brailleTraceOah ();
 #endif
 
     void                  initializeBrailleFileNameOptions ();

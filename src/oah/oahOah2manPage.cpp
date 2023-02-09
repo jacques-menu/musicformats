@@ -39,8 +39,8 @@ oahOah2manPage::~oahOah2manPage ()
 //________________________________________________________________________
 void oahOah2manPage::visitStart (S_oahOptionalValuesStyleKindAtom& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -75,8 +75,8 @@ void oahOah2manPage::visitStart (S_oahOptionalValuesStyleKindAtom& elt)
 
 void oahOah2manPage::visitEnd (S_oahOptionalValuesStyleKindAtom& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<

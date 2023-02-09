@@ -34,6 +34,9 @@
 
 #include "msr2mxsrTranslator.h"
 
+#include "waeHandlers.h"
+
+
 namespace MusicFormats
 {
 
@@ -59,8 +62,8 @@ Sxmlelement translateMsrToMxsr (
   // set the global current passID
   setGlobalCurrentPassIDKind (passIDKind);
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTracePasses ()) {
     std::string separator =
       "%--------------------------------------------------------------";
 
@@ -71,7 +74,7 @@ Sxmlelement translateMsrToMxsr (
       separator <<
       std::endl <<
       gTab <<
-      gWaeHandler->passIDKindAsString (passIDKind) << ": " << passDescription <<
+      gLanguage->passIDKindAsString (passIDKind) << ": " << passDescription <<
       std::endl <<
       separator <<
       std::endl;
@@ -95,14 +98,14 @@ Sxmlelement translateMsrToMxsr (
   // register time spent
   clock_t endClock = clock ();
 
-  mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
+  gGlobalTimingItemsList.appendTimingItem (
     passIDKind,
     passDescription,
     mfTimingItemKind::kMandatory,
     startClock,
     endClock);
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsr ()) {
 		std::stringstream ss;
 
@@ -115,14 +118,14 @@ Sxmlelement translateMsrToMxsr (
 
     ++gIndenter;
 
-    printMxsr (resultingMxsr, gLogStream);
+    printMxsr (resultingMxsr, gLog);
 
-    gLogStream <<
+    gLog <<
       std::endl;
 
     --gIndenter;
 
-    gLogStream <<
+    gLog <<
       "<!-- ----------------------------------------------------------- -->" <<
       std::endl << std::endl;
 

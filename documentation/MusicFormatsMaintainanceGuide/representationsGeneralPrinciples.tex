@@ -108,12 +108,12 @@ For example, in \msrToLpsr{}, the \smartPointerType{S_msrBarLine} values found i
 \begin{lstlisting}[language=CPlusPlus]
 void msr2lpsrTranslator::visitStart (S_msrBarLine& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   int inputLineNumber =
     elt->getInputLineNumber ();
 #endif
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
 		std::stringstream ss;
 
@@ -142,8 +142,8 @@ Such new descriptions are created by \starMethodName{NewbornClone} methods, such
 \begin{lstlisting}[language=CPlusPlus]
 S_msrTuplet msrTuplet::createTupletNewbornClone ()
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceTuplets ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceTuplets ()) {
 		std::stringstream ss;
 
     ss <<
@@ -179,7 +179,7 @@ Such a newborn clone is created and used this way in \method{}{}:
 \begin{lstlisting}[language=CPlusPlus]
 void msr2lpsrTranslator::visitStart (S_msrTuplet& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
 		std::stringstream ss;
 
@@ -200,8 +200,8 @@ void msr2lpsrTranslator::visitStart (S_msrTuplet& elt)
       elt->createTupletNewbornClone ();
 
   // register it in this visitor
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceTuplets ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalTraceOahGroup->getTraceTuplets ()) {
 		std::stringstream ss;
 
     ss <<
@@ -368,7 +368,7 @@ msdlScanner::msdlScanner (std::istream& inputStream)
         fCurrentToken.getTokenDescriptionNonConst ())
 {
   // trace
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   fTraceTokens        = gGlobalMsdl2msrOahGroup->getTraceTokens ();
   fTraceTokensDetails = gGlobalMsdl2msrOahGroup->getTraceTokensDetails ();
 #endif
@@ -403,7 +403,7 @@ Then there are \methodName{visitStart} and/or \methodName{visitEnd} methods to h
 \begin{lstlisting}[language=CPlusPlus]
 void msr2msrTranslator::visitStart (S_msrIdentification& elt)
 {
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
 		std::stringstream ss;
 
@@ -439,7 +439,7 @@ void msr2msrTranslator::visitEnd (S_msrIdentification& elt)
 
   --gIndenter;
 
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
 		std::stringstream ss;
 

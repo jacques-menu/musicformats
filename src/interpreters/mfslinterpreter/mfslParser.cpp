@@ -818,7 +818,7 @@ namespace mfsl {
         ++gIndenter;
 
         if (drv.getDisplayOptions ()) {
-          gLogStream <<
+          gLog <<
             "====> option " << yystack_[0].value.as < std::string > () <<
             ", line " << drv.getScannerLocation () <<
             std::endl;
@@ -839,7 +839,7 @@ namespace mfsl {
         ++gIndenter;
 
         if (drv.getDisplayOptions ()) {
-          gLogStream <<
+          gLog <<
             "====> option " << yystack_[1].value.as < std::string > () << ' ' << yystack_[0].value.as < std::string > () <<
             ", line " << drv.getScannerLocation () <<
             std::endl;
@@ -912,7 +912,7 @@ namespace mfsl {
         std::string choiceName = yystack_[1].value.as < std::string > ();
 
         if (drv.getTraceCaseChoiceStatements ()) {
-          gLogStream <<
+          gLog <<
             "====> choice " << choiceName << ": " << "..." <<
             ", line " << drv.getScannerLocation () <<
             std::endl;
@@ -963,7 +963,7 @@ namespace mfsl {
 #line 390 "mfslParser.yy"
       {
         if (drv.getTraceCaseChoiceStatements ()) {
-          gLogStream <<
+          gLog <<
             "------------------------------------------------------------" <<
             std::endl;
         }
@@ -1038,7 +1038,7 @@ namespace mfsl {
         std::string choiceName = yystack_[1].value.as < std::string > ();
 
         if (drv.getTraceCaseChoiceStatements ()) {
-          gLogStream <<
+          gLog <<
             "====> case " << choiceName << ": ..." <<
             ", line " << drv.getScannerLocation () <<
             std::endl;
@@ -1098,7 +1098,7 @@ namespace mfsl {
         drv.caseChoiceStatementsStackPop ();
 
         if (drv.getTraceCaseChoiceStatements ()) {
-          gLogStream <<
+          gLog <<
             "------------------------------------------------------------" <<
             std::endl;
         }
@@ -1229,7 +1229,7 @@ namespace mfsl {
         std::string inputName = "$2 INPUT";
 
         if (drv.getTraceCaseInputStatements ()) {
-          gLogStream <<
+          gLog <<
             "====> case input " << inputName << ": ..." <<
             ", line " << drv.getScannerLocation () <<
             std::endl;
@@ -1289,7 +1289,7 @@ namespace mfsl {
         drv.caseInputStatementsStackPop ();
 
         if (drv.getTraceCaseInputStatements ()) {
-          gLogStream <<
+          gLog <<
             "------------------------------------------------------------" <<
             std::endl;
         }

@@ -52,8 +52,8 @@ S_mfcConverterComponent createMsdl2lilypondConverterComponent ()
   // protect library against multiple initializations
   if (! pConverterComponent) {
 
-#ifdef MF_TRACING_IS_ENABLED
-    if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {
+#ifdef MF_TRACE_IS_ENABLED
+    if (gEarlyOptions.getEarlyTraceComponents ()) {
 	  	std::stringstream ss;
 
       ss <<

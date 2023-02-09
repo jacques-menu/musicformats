@@ -231,7 +231,7 @@ void bsrAsciiBrailleGenerator::generateCodeForBrailleCell (
           bsrCellKindAsString (cellKind) <<
           "'";
         bsr2brailleInternalError (
-          gGlobalCurrentServiceRunData->getInputSourceName (),
+          gServiceRunData->getInputSourceName (),
           -999, // inputLineNumber, TICINO JMI
           __FILE__, __LINE__,
           ss.str ());
@@ -317,7 +317,7 @@ void bsrAsciiBrailleGenerator::generateCodeForBrailleCell (
 
 void bsrAsciiBrailleGenerator::writeTestData (std::ostream& os)
 {
-  gLogStream <<
+  gLog <<
     "bsrAsciiBrailleGenerator::writeTestData()" <<
     std::endl;
 
@@ -417,7 +417,7 @@ void bsrUTF8BrailleGenerator::generateCodeForBrailleCell (
           bsrCellKindAsString (cellKind) <<
           "'";
         bsr2brailleInternalError (
-          gGlobalCurrentServiceRunData->getInputSourceName (),
+          gServiceRunData->getInputSourceName (),
           -999, // TICINO inputLineNumber,
           __FILE__, __LINE__,
           ss.str ());
@@ -503,7 +503,7 @@ void bsrUTF8BrailleGenerator::generateCodeForBrailleCell (
 
 void bsrUTF8BrailleGenerator::writeTestData (std::ostream& os)
 {
-  gLogStream <<
+  gLog <<
     "bsrUTF8BrailleGenerator::writeTestData()" <<
     std::endl;
 
@@ -761,7 +761,7 @@ Octal Escape Sequence  \342\240\203*/
           bsrCellKindAsString (cellKind) <<
           "'";
         bsr2brailleInternalError (
-          gGlobalCurrentServiceRunData->getInputSourceName (),
+          gServiceRunData->getInputSourceName (),
           -999, // TICINO inputLineNumber,
           __FILE__, __LINE__,
           ss.str ());
@@ -847,7 +847,7 @@ Octal Escape Sequence  \342\240\203*/
 
 void bsrUTF16BigEndianBrailleGenerator::writeTestData (std::ostream& os)
 {
-  gLogStream <<
+  gLog <<
     "bsrUTF16BigEndianBrailleGenerator::writeTestData()" <<
     std::endl;
 
@@ -984,7 +984,7 @@ Octal Escape Sequence  \342\240\203
           bsrCellKindAsString (cellKind) <<
           "'";
         bsr2brailleInternalError (
-          gGlobalCurrentServiceRunData->getInputSourceName (),
+          gServiceRunData->getInputSourceName (),
           -999, // TICINO inputLineNumber,
           __FILE__, __LINE__,
           ss.str ());
@@ -1070,7 +1070,7 @@ Octal Escape Sequence  \342\240\203
 
 void bsrUTF16SmallEndianBrailleGenerator::writeTestData (std::ostream& os)
 {
-  gLogStream <<
+  gLog <<
     "bsrUTF16SmallEndianBrailleGenerator::writeTestData()" <<
     std::endl;
 

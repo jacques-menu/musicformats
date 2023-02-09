@@ -607,7 +607,7 @@ class EXP msrPart : public msrPartGroupElement
 
     // counter
 
-    static int            gPartsCounter;
+    static int            sPartsCounter;
 
     // multiple full-bar rests
 

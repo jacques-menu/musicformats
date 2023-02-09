@@ -1074,7 +1074,7 @@ EXP std::ostream& operator << (std::ostream& os, const S_oahBooleanAtom& elt);
 class EXP oahBooleanAtomWithTracePasses : public oahBooleanAtom
 {
 /*
-  an atom that activates passes tracing implicitly
+  an atom that activates passes trace implicitly
 */
 
   public:

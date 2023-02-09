@@ -100,8 +100,8 @@ class EXP LilyPondIssue34OahGroup : public oahGroup
     // private services
     // ------------------------------------------------------
 
-#ifdef MF_TRACING_IS_ENABLED
-// JMI    void                  initializeLilyPondIssue34tracingOah ();
+#ifdef MF_TRACE_IS_ENABLED
+// JMI    void                  initializeLilyPondIssue34TraceOah ();
 #endif
 
     void                  initializeGenerationAPIOptions ();

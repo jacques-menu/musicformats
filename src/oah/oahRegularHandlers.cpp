@@ -21,12 +21,13 @@
 #include "mfAssert.h"
 #include "mfStringsHandling.h"
 
-
 #include "oahOah.h"
 
 #include "oahEarlyOptions.h"
 
 #include "oahRegularHandlers.h"
+
+#include "waeHandlers.h"
 
 
 namespace MusicFormats
@@ -61,8 +62,8 @@ oahRegularHandler::oahRegularHandler (
       insiderOahHandler->getHandlerUsage ())
 {
   // create the insider handler
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<
@@ -89,8 +90,8 @@ oahRegularHandler::~oahRegularHandler ()
 
 void oahRegularHandler::initializeOahRegularHandler ()
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<
@@ -113,10 +114,10 @@ void oahRegularHandler::initializeOahRegularHandler ()
   // createRegularHandlerGroups() is executed
   // in the sub-classes for code homogeneity
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOahDetails ()) {
   // print the options handler initial state
-  gLogStream <<
+  gLog <<
     "oahRegularHandler \"" <<
     fHandlerHeader <<
     "\" has been initialized as:" <<
@@ -124,10 +125,10 @@ void oahRegularHandler::initializeOahRegularHandler ()
 
   ++gIndenter;
 
-//  this->print (gLogStream); JMI v0.9.66
-  this->printHelp (gOutputStream); // JMI
+//  this->print (gLog); JMI v0.9.66
+  this->printHelp (gOutput); // JMI
 
-  gLogStream <<
+  gLog <<
     std::endl << std::endl;
 
   --gIndenter;
@@ -146,8 +147,8 @@ void oahRegularHandler::appendGroupToRegulalHandler (
     "group is null");
 #endif
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOahDetails ()) {
 		std::stringstream ss;
 
     ss <<
@@ -191,8 +192,8 @@ void oahRegularHandler::prependGroupToRegularHandler (
     "group is null");
 #endif
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<
@@ -237,7 +238,7 @@ void oahRegularHandler::registerAtomInRegularSubgroup (
 
   if (insiderElement) {
     // atomName is the name of an option
-#ifdef MF_TRACING_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
     if (false) { // JMI
 			std::stringstream ss;
 
@@ -245,7 +246,7 @@ void oahRegularHandler::registerAtomInRegularSubgroup (
         "===> insiderElement:" <<
         std::endl;
       ++gIndenter;
-      gLogStream <<
+      gLog <<
         insiderElement <<
         std::endl;
       --gIndenter;

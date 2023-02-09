@@ -102,8 +102,8 @@ class EXP msr2bsrOahGroup : public oahGroup
     // private services
     // ------------------------------------------------------
 
-#ifdef MF_TRACING_IS_ENABLED
-// JMI    void                  initializeMsr2bsrtracingOahGroup ();
+#ifdef MF_TRACE_IS_ENABLED
+// JMI    void                  initializeMsr2bsrTraceOahGroup ();
 #endif
 
     void                  initializeMsr2bsrMiscellaneousOptions ();

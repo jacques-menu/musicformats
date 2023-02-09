@@ -88,8 +88,8 @@ Usage: msdl2lilypond [option]* [MSDLFile] [option]*
 */
       usageFromUsedThruKind (handlerUsedThruKind))
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<
@@ -181,8 +181,8 @@ std::string msdl2lilypondInsiderHandler::usageFromUsedThruKind (
 
 void msdl2lilypondInsiderHandler::createTheMsdl2lyPrefixes ()
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<
@@ -201,8 +201,8 @@ void msdl2lilypondInsiderHandler::createTheMsdl2lyPrefixes ()
 void msdl2lilypondInsiderHandler::createTheMsdl2lyOptionGroups (
   const std::string& serviceName)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<
@@ -229,10 +229,10 @@ void msdl2lilypondInsiderHandler::createTheMsdl2lyOptionGroups (
   appendGroupToHandler (
     createGlobalWaeOahGroup ());
 
-#ifdef MF_TRACING_IS_ENABLED
-  // create the tracing OAH group
+#ifdef MF_TRACE_IS_ENABLED
+  // create the trace OAH group
   appendGroupToHandler (
-    createGlobalTracingOahGroup (
+    createGlobalTraceOahGroup (
       this));
 #endif
 
@@ -283,8 +283,8 @@ void msdl2lilypondInsiderHandler::createTheMsdl2lyOptionGroups (
     createGlobalHarmoniesExtraOahGroup ());
 #endif
 
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOahDetails ()) {
     // print the options handler initial state
 		std::stringstream ss;
 
@@ -294,30 +294,30 @@ void msdl2lilypondInsiderHandler::createTheMsdl2lyOptionGroups (
 
     ++gIndenter;
 
-    print (gLogStream);
+    print (gLog);
 
-    gLogStream <<
+    gLog <<
       std::endl << std::endl;
 
     --gIndenter;
   }
 #endif
 
-#ifdef MF_TRACING_IS_ENABLED
-if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
-    gLogStream <<
+#ifdef MF_TRACE_IS_ENABLED
+if (gEarlyOptions.getEarlyTraceOahDetails ()) {
+    gLog <<
       "msdl2lilypondInsiderHandler help:" <<
       std::endl;
 
-    this->printHelp (gOutputStream);
+    this->printHelp (gOutput);
   }
 #endif
 }
 
 void msdl2lilypondInsiderHandler::checkOptionsAndArguments () const
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<
@@ -345,8 +345,8 @@ void msdl2lilypondInsiderHandler::checkHandlerOptionsConsistency ()
 
 void msdl2lilypondInsiderHandler::enforceHandlerQuietness ()
 {
-#ifdef MF_TRACING_IS_ENABLED
-  gGlobalTracingOahGroup->
+#ifdef MF_TRACE_IS_ENABLED
+  gGlobalTraceOahGroup->
     enforceGroupQuietness ();
 #endif
 
@@ -379,8 +379,8 @@ void msdl2lilypondInsiderOahGroup::checkGroupOptionsConsistency ()
 
 void msdl2lilypondInsiderOahGroup::acceptIn (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -398,8 +398,8 @@ void msdl2lilypondInsiderOahGroup::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_msdl2lilypondInsiderOahGroup>*> (v)) {
         S_msdl2lilypondInsiderOahGroup elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
-        if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -417,8 +417,8 @@ void msdl2lilypondInsiderOahGroup::acceptIn (basevisitor* v)
 
 void msdl2lilypondInsiderOahGroup::acceptOut (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -436,8 +436,8 @@ void msdl2lilypondInsiderOahGroup::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_msdl2lilypondInsiderOahGroup>*> (v)) {
         S_msdl2lilypondInsiderOahGroup elem = this;
 
-#ifdef MF_TRACING_IS_ENABLED
-        if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -455,8 +455,8 @@ void msdl2lilypondInsiderOahGroup::acceptOut (basevisitor* v)
 
 void msdl2lilypondInsiderOahGroup::browseData (basevisitor* v)
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -555,8 +555,8 @@ msdl2lilypondInsiderOahGroup::~msdl2lilypondInsiderOahGroup ()
 
 void msdl2lilypondInsiderOahGroup::initializeMsdl2lyInsiderOahGroup ()
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
     std::stringstream ss;
 
     ss <<
@@ -579,9 +579,9 @@ void msdl2lilypondInsiderOahGroup::initializeMsdl2lyInsiderOahGroup ()
 
 void msdl2lilypondInsiderOahGroup::createInsiderQuitSubGroup ()
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-  gLogStream << std::left <<
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
+  gLog << std::left <<
     "Creating insider quit subgroup in \"" <<
     fGroupHeader <<
     "\"" <<
@@ -619,7 +619,7 @@ of the MusicXML tree to an MSR skeleton.)",
 void msdl2lilypondInsiderOahGroup::printMsdl2lyInsiderOahGroupValues (
   int fieldWidth)
 {
-  gLogStream <<
+  gLog <<
     "The msdl2lilypond options are:" <<
     std::endl;
 
@@ -628,13 +628,13 @@ void msdl2lilypondInsiderOahGroup::printMsdl2lyInsiderOahGroupValues (
   // quit after some passes
   // --------------------------------------
 
-  gLogStream <<
+  gLog <<
     "Quit after some passes:" <<
     std::endl;
 
   ++gIndenter;
 
-  gLogStream << std::left <<
+  gLog << std::left <<
     std::setw (fieldWidth) << "fQuitAfterPass1" << ": " <<
     fQuitAfterPass1 <<
     std::endl;
@@ -647,8 +647,8 @@ void msdl2lilypondInsiderOahGroup::printMsdl2lyInsiderOahGroupValues (
 //______________________________________________________________________________
 S_msdl2lilypondInsiderOahGroup createGlobalMsdl2lyInsiderOahGroup ()
 {
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTraceOah ()) {
 		std::stringstream ss;
 
     ss <<
