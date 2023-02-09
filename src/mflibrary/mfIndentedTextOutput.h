@@ -350,19 +350,20 @@ EXP mfIndentedStringStream& operator << (
   mfIndentedStringStream& iss, const Rational& rat);
 
 //______________________________________________________________________________
-// the global output indenter for general use
+// the hidden global output indenter for general use
 EXP mfOutputIndenter& getGlobalOutputIndenter ();
 
 // useful shortcut macros
 #define gIndenter getGlobalOutputIndenter ()
 #define gTab      getGlobalOutputIndenter ().getSpacer ()
 
-// the global log and output indented streams
-EXP extern S_indentedOstream gGlobalOutputIndentedOstream;
-EXP extern S_indentedOstream gGlobalLogIndentedOstream;
+// the hidden global log and output indented streams
+EXP S_indentedOstream& getGlobalOutputIndentedOstream ();
+EXP S_indentedOstream& getGlobalLogIndentedOstream ();
 
-#define gOutput *gGlobalOutputIndentedOstream
-#define gLog    *gGlobalLogIndentedOstream
+// useful shortcut macros
+#define gOutput getGlobalOutputIndentedOstream ()
+#define gLog    getGlobalLogIndentedOstream ()
 
 //______________________________________________________________________________
 EXP extern void createTheGlobalIndentedOstreams (
