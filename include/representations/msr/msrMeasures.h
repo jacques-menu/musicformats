@@ -310,7 +310,7 @@ class EXP msrMeasure : public msrSegmentElement
 
     void                  backupByWholeNotesStepLengthInMeasure (
                             int             inputLineNumber,
-                            const Rational& backupTargetMeasureElementMeasurePosition);
+                            const Rational& backupTargetMeasurePosition);
 
     void                  appendPaddingSkipNoteToMeasure (
                             int             inputLineNumber,

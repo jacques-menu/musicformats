@@ -44,7 +44,7 @@ std::string mfPassIDKindAsString (
       break;
 
     case mfPassIDKind::kMfPassID_OptionsAndArgumentsHandling:
-      result = "opts & args";
+      result = "0";
       break;
 
     case mfPassIDKind::kMfPassID_OptionalPass:

@@ -668,7 +668,7 @@ S_mxmlPartGroupDescr mxsr2msrSkeletonBuilder::fetchPartGroupDescrStackTop ()
 
 //________________________________________________________________________
 void mxsr2msrSkeletonBuilder::registerPartGroupDescrAsStarted (
-  int                  inputLineNumber,
+  int                         inputLineNumber,
   const S_mxmlPartGroupDescr& partGroupDescr)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -916,7 +916,7 @@ void mxsr2msrSkeletonBuilder::insertPartGroupDescInStoppingList (
 
 //________________________________________________________________________
 void mxsr2msrSkeletonBuilder::registerPartGroupDescrAsStoppingAtCurrentPosition (
-  int                  inputLineNumber,
+  int                         inputLineNumber,
   const S_mxmlPartGroupDescr& partGroupDescr)
 {
   // fetch the list of part group descrs stopping at
@@ -965,7 +965,7 @@ void mxsr2msrSkeletonBuilder::registerPartGroupDescrAsStoppingAtCurrentPosition 
 
 //________________________________________________________________________
 void mxsr2msrSkeletonBuilder::registerPartGroupDescrAsStopped (
-  int                  inputLineNumber,
+  int                         inputLineNumber,
   const S_mxmlPartGroupDescr& partGroupDescr)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -3472,14 +3472,14 @@ void mxsr2msrSkeletonBuilder::visitStart (S_score_part& elt)
   }
 #endif
 
-  fCurrentPartID = elt->getAttributeValue ("id");
+  fCurrentScorePartID = elt->getAttributeValue ("id");
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalTraceOahGroup->getTraceParts ()) {
 		std::stringstream ss;
 
 		ss <<
-      "Found part name \"" << fCurrentPartID << "\"" <<
+      "Found part name \"" << fCurrentScorePartID << "\"" <<
       " in part list" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -3500,13 +3500,13 @@ void mxsr2msrSkeletonBuilder::visitStart (S_score_part& elt)
   std::regex  e (regularExpression);
   std::smatch sm;
 
-  regex_match (fCurrentPartID, sm, e);
+  regex_match (fCurrentScorePartID, sm, e);
 
   if (sm.size () == 1) {
     std::stringstream ss;
 
     ss <<
-      "Part name \"" << fCurrentPartID << "\"" <<
+      "PartID \"" << fCurrentScorePartID << "\"" <<
       " is a pure number" <<
       ", line " << inputLineNumber;
 
@@ -3745,7 +3745,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_score_part& elt)
 
   ++fCurrentPartsPosition;
 
-  std::string partID = elt->getAttributeValue ("id");
+  std::string scorePartID = elt->getAttributeValue ("id");
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalTraceOahGroup->getTraceParts ()) {
@@ -3754,7 +3754,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_score_part& elt)
 	ss <<
     "--------------------------------------------" <<
     std::endl <<
-    "Handling score part name \"" << fCurrentPartID << "\"" <<
+    "Handling score part name \"" << scorePartID << "\"" <<
     ", fCurrentPartsPosition: " << fCurrentPartsPosition <<
     ", line " << inputLineNumber <<
     std::endl;
@@ -3775,7 +3775,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_score_part& elt)
 		ss <<
 			"--------------------------------------------" <<
 			std::endl <<
-			"Creating part \"" << fCurrentPartID << "\"" <<
+			"Creating part \"" << scorePartID << "\"" <<
 			", line " << inputLineNumber <<
 			std::endl;
 
@@ -3789,7 +3789,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_score_part& elt)
     part =
       msrPart::create (
         inputLineNumber,
-        fCurrentPartID,
+        scorePartID,
         0); // partUpLinkToPartGroup will be set later
 
   // populate it
@@ -3824,7 +3824,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_score_part& elt)
   if (gGlobalTraceOahGroup->getTracePartGroupsDetails ()) {
     showPartGroupsData (
       inputLineNumber,
-      "AFTER handling score part \"" + partID + "\"");
+      "AFTER handling score part \"" + scorePartID + "\"");
   }
 #endif
 
@@ -3833,8 +3833,8 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_score_part& elt)
 
 //________________________________________________________________________
 void mxsr2msrSkeletonBuilder::registerPart (
-  int       inputLineNumber,
-  int       partPosition,
+  int              inputLineNumber,
+  int              partPosition,
   const S_msrPart& part)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -3903,9 +3903,12 @@ void mxsr2msrSkeletonBuilder::visitStart (S_part& elt)
 		std::stringstream ss;
 
 		ss <<
-      std::endl <<
-      "<!--=== part \"" << fCurrentPartID << "\"" <<
-      ", line " << inputLineNumber << " ===-->" <<
+//       std::endl <<
+      "<!--=== "
+      " partID \"" << fCurrentPartID << "\"" <<
+//       "partName \"" << fCurrentPartName << "\"" << JMI from fPartGroupElementsList ??? v0.9.67
+      ", line " << inputLineNumber <<
+      " ===-->" <<
       std::endl;
 
     gWaeHandler->waeTrace (
@@ -3925,7 +3928,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_part& elt)
       std::stringstream ss;
 
       ss <<
-        "part id is empty, using '" <<
+        "partID is empty, using '" <<
         fCurrentPartID <<
         "' since it is the only part in the <part-list />";
 
@@ -4223,9 +4226,11 @@ void mxsr2msrSkeletonBuilder::visitStart (S_voice& elt)
 		std::stringstream ss;
 
 		ss <<
-      std::endl <<
-      "<!--=== voice \"" << "elt->getVoiceName ()" << "\"" <<
-      ", line " << elt->getInputLineNumber () << " ===-->" <<
+//       std::endl <<
+      "<!--=== "
+      "voice \"" << "elt->getVoiceName ()" << "\"" <<
+      ", line " << elt->getInputLineNumber () <<
+      " ===-->" <<
       std::endl;
 
     gWaeHandler->waeTrace (
@@ -4286,9 +4291,13 @@ void mxsr2msrSkeletonBuilder::visitStart (S_measure& elt)
 		std::stringstream ss;
 
 		ss <<
-      std::endl <<
-      "<!--=== measure \"" << fCurrentMeasureNumber << "\"" <<
-      ", line " << inputLineNumber << " ===-->" <<
+//       std::endl <<
+      "<!--=== " <<
+//       "part \"" << fCurrentPartName << "\"" << JMI v0.9.67
+      " (partID \"" << fCurrentPartID << "\")" <<
+      ", measure \"" << fCurrentMeasureNumber << "\"" <<
+      ", line " << inputLineNumber <<
+      " ===-->" <<
       std::endl;
 
     gWaeHandler->waeTrace (

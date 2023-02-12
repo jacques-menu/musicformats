@@ -172,24 +172,17 @@ std::string languageFrench::handleOptionsAndArgumentsFromArgcArgv () const
 //_______________________________________________________________________________
 // passes
 
-std::string languageFrench::createAnMXSRFromAMusicXMLFileOrStdin () const
+std::string languageFrench::createAnMXSRFromAMusicXMLStream () const
 {
-  std::stringstream ss;
-
-  ss <<
-    "Lit le contenu d'un fichier MusicXML file ou de l'entrée standard stdin ('-')" <<
-    std::endl <<
-    "et le convertit en un MXSR (arbre MusicXML);";
-
-  return ss.str ();
+  return "Création d'un MXSR (arbre MusicXML) à partir d'un flot de texte MusicXML";
 }
 std::string languageFrench::createAnMXSRFromAMusicXMLDescriptor () const
 {
-  return "Création d'un MXSR à partir d'un descripteor MusicXML";
+  return "Création d'un MXSR (arbre MusicXML) à partir d'un descripteor MusicXML";
 }
 std::string languageFrench::createAnMXSRFromAMusicXMLBuffer () const
 {
-  return "Création d'un MXSR à partir d'un tampon MusicXML";
+  return "Création d'un MXSR (arbre MusicXML) à partir d'un tampon MusicXML";
 }
 
 std::string languageFrench::createAnMSRSqueletonFromTheMXSR () const

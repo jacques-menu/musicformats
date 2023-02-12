@@ -390,7 +390,7 @@ void msr2msrTranslator::handlePartHiddenMeasureAndBarLineDescrList ()
       fCurrentPartClone->
         insertHiddenMeasureAndBarLineInPartClone (
           hiddenMeasureAndBarLineDescr->getInputLineNumber (),
-          dalSegno->getMeasureElementMeasurePosition ());
+          dalSegno->getMeasurePosition ());
 
       if (++i == iEnd) break;
     } // for
@@ -957,7 +957,7 @@ void msr2msrTranslator::visitStart (S_msrPart& elt)
 		std::stringstream ss;
 
 		ss <<
-      std::endl <<
+//       std::endl <<
       "<!--=== part \"" << partCombinedName << "\"" <<
       ", line " << inputLineNumber << " ===-->" <<
       std::endl;
@@ -1308,7 +1308,7 @@ void msr2msrTranslator::visitStart (S_msrVoice& elt)
 		std::stringstream ss;
 
 		ss <<
-      std::endl <<
+//       std::endl <<
       "<!--=== voice \"" << elt->getVoiceName () << "\"" <<
       ", line " << elt->getInputLineNumber () << " ===-->" <<
       std::endl;
@@ -1716,10 +1716,11 @@ void msr2msrTranslator::visitStart (S_msrFrame& elt)
       "frame is out of context, cannot be handled: " <<
       elt->asShortString ();
 
-    msr2msrInternalError (
+//     msr2msrInternalError ( // JMI v0.9.67
+    msr2msrInternalWarning (
       gServiceRunData->getInputSourceName (),
       elt->getInputLineNumber (),
-      __FILE__, __LINE__,
+//       __FILE__, __LINE__,
       ss.str ());
   }
 }
@@ -1890,12 +1891,16 @@ void msr2msrTranslator::visitStart (S_msrMeasure& elt)
 		std::stringstream ss;
 
 		ss <<
-      std::endl <<
-      "<!--=== measure '" << measureNumber <<
+//       std::endl <<
+      "<!--=== " <<
+      "part \"" << fCurrentPartClone->getPartName () << "\"" <<
+      " (partID \"" << fCurrentPartClone->getPartID () << "\")" <<
+      ", measure \"" << measureNumber << "\"" <<
       "', voice \"" <<
       fCurrentVoiceClone->getVoiceName () <<
       "\"" <<
-      ", line " << inputLineNumber << " ===-->" <<
+      ", line " << inputLineNumber <<
+      " ===-->" <<
       std::endl;
 
     gWaeHandler->waeTrace (
@@ -5080,10 +5085,11 @@ void msr2msrTranslator::visitEnd (S_msrNote& elt)
           "grace note '" << fCurrentNonGraceNoteClone->asShortString () <<
           "' found outside of any grace notes group";
 
-        msr2msrInternalError (
+//         msr2msrInternalError ( // JMI v0.9.67
+        msr2msrInternalWarning(
           gServiceRunData->getInputSourceName (),
           inputLineNumber,
-          __FILE__, __LINE__,
+//           __FILE__, __LINE__,
           ss.str ());
       }
 
@@ -6027,7 +6033,7 @@ void msr2msrTranslator::visitStart (S_msrDalSegno& elt)
   fCurrentPartClone->
     insertHiddenMeasureAndBarLineInPartClone (
       inputLineNumber,
-      elt->getMeasureElementMeasurePosition ());
+      elt->getMeasurePosition ());
      // */
 }
 

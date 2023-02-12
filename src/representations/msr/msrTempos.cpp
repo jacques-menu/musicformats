@@ -147,7 +147,7 @@ void msrTempoNote::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif        
+#endif
         p->visitEnd (elem);
   }
 }
@@ -662,7 +662,7 @@ void msrTempoTuplet::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif        
+#endif
         p->visitEnd (elem);
   }
 }
@@ -739,7 +739,7 @@ std::string msrTempoTuplet::asString () const
   ss <<
     "TempoTuplet " <<
     fTempoTupletFactor <<
-    ' ' << fTempoTupletSoundingWholeNotes << " sound whole notes" <<
+    ' ' << fTempoTupletSoundingWholeNotes << " tempo tuplet sounding whole notes" <<
     " measure '" <<
     fTempoTupletMeasureNumber <<
     "':";
@@ -1005,7 +1005,7 @@ void msrTempoNotesRelationshipElements::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif        
+#endif
         p->visitEnd (elem);
   }
 }
@@ -1504,7 +1504,7 @@ void msrTempo::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif        
+#endif
         p->visitEnd (elem);
   }
 }

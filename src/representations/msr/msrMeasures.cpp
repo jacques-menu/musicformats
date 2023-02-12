@@ -1063,7 +1063,7 @@ void msrMeasure::appendMeasureElementToMeasure (
 
   // set elem's measure position
   elem->
-    setMeasureElementMeasurePosition (
+    setMeasurePosition (
       this,
       fMeasureWholeNotesDuration,
       "appendMeasureElementToMeasure()");
@@ -1075,7 +1075,7 @@ void msrMeasure::appendMeasureElementToMeasure (
   incrementMeasureWholeNotesDuration (
     inputLineNumber,
     elem->
-      getMeasureElementSoundingWholeNotes ());
+      getSoundingWholeNotes ());
 }
 
 void msrMeasure::insertElementInMeasureBeforeIterator (
@@ -1130,7 +1130,7 @@ void msrMeasure::insertElementInMeasureBeforeIterator (
 
   // set elem's measure position
   elem->
-    setMeasureElementMeasurePosition (
+    setMeasurePosition (
       this,
       fMeasureWholeNotesDuration,
       "insertElementInMeasureBeforeIterator()");
@@ -1143,7 +1143,7 @@ void msrMeasure::insertElementInMeasureBeforeIterator (
   incrementMeasureWholeNotesDuration (
     inputLineNumber,
     elem->
-      getMeasureElementSoundingWholeNotes ());
+      getSoundingWholeNotes ());
 }
 
 void msrMeasure::appendElementAtTheEndOfMeasure (
@@ -1170,7 +1170,7 @@ void msrMeasure::appendElementAtTheEndOfMeasure (
         getSegmentUpLinkToVoice ()
           ->getVoiceName () <<
       "\", has measure position '" <<
-      elem->getMeasureElementMeasurePosition () <<
+      elem->getMeasurePosition () <<
       ", fMeasureWholeNotesDuration: " <<
       fMeasureWholeNotesDuration <<
       ", line " << inputLineNumber <<
@@ -1235,7 +1235,7 @@ void msrMeasure::appendElementAtTheEndOfMeasure (
     incrementMeasureWholeNotesDuration (
       inputLineNumber,
       elem->
-        getMeasureElementSoundingWholeNotes ());
+        getSoundingWholeNotes ());
   }
 
   else {
@@ -1428,7 +1428,7 @@ void msrMeasure::insertElementAtMeasurePosition (
 
       Rational currentMeasurePosition =
         currentElement->
-          getMeasureElementMeasurePosition ();
+          getMeasurePosition ();
 
       if (measurePosition == currentMeasurePosition) {
         // insert elem in the measure elements list before (*i)
@@ -1504,7 +1504,7 @@ void msrMeasure::insertElementAtMeasurePosition (
 
   // set elem's measure position
   elem->
-    setMeasureElementMeasurePosition (
+    setMeasurePosition (
       this,
       measurePosition,
       "insertElementAtMeasurePosition()");
@@ -1513,7 +1513,7 @@ void msrMeasure::insertElementAtMeasurePosition (
   incrementMeasureWholeNotesDuration (
     inputLineNumber,
     elem->
-      getMeasureElementSoundingWholeNotes ());
+      getSoundingWholeNotes ());
 }
 
 void msrMeasure::setNextMeasureNumber (const std::string& nextMeasureNumber)
@@ -2495,7 +2495,7 @@ void msrMeasure::appendNoteToMeasure (
     noteGraceNotesGroupBefore->
       setGraceNotesGroupElementsMeasurePositions (
         this,
-        note->getMeasureElementMeasurePosition ());
+        note->getMeasurePosition ());
   }
 
   // set grace notes group 'after' elements measure position in relevant
@@ -2508,9 +2508,9 @@ void msrMeasure::appendNoteToMeasure (
     noteGraceNotesGroupAfter->
       setGraceNotesGroupElementsMeasurePositions (
         this,
-        note->getMeasureElementMeasurePosition ()
+        note->getMeasurePosition ()
          +
-        note->getMeasureElementSoundingWholeNotes ());
+        note->getSoundingWholeNotes ());
   }
 
   --gIndenter;
@@ -2528,7 +2528,7 @@ void msrMeasure::appendNoteOrPaddingToMeasure (
   Rational
     noteSoundingWholeNotes =
       note->
-        getMeasureElementSoundingWholeNotes ();
+        getSoundingWholeNotes ();
 
   S_msrVoice
     voice =
@@ -2590,9 +2590,9 @@ void msrMeasure::appendNoteOrPaddingToMeasure (
     // register note as measure longest sounding and/or display note if relevant
     // JMI ???
     if (
-      note->getMeasureElementSoundingWholeNotes ()
+      note->getSoundingWholeNotes ()
         >
-      fMeasureLongestNote->getMeasureElementSoundingWholeNotes ()
+      fMeasureLongestNote->getSoundingWholeNotes ()
     ) {
       fMeasureLongestNote = note;
     }
@@ -2642,7 +2642,7 @@ void msrMeasure::accountForTupletMemberNoteDurationInMeasure ( // JMI v0.9.66 RE
 
   // set note's measure position JMI v0.9.66
 //   note->
-//     setMeasureElementMeasurePosition (
+//     setMeasurePosition (
 //       this,
 //       fMeasureWholeNotesDuration,
 //       "accountForTupletMemberNoteDurationInMeasure()");
@@ -2650,7 +2650,7 @@ void msrMeasure::accountForTupletMemberNoteDurationInMeasure ( // JMI v0.9.66 RE
   // fetch note sounding whole notes
   Rational
     noteSoundingWholeNotes =
-      note->getMeasureElementSoundingWholeNotes ();
+      note->getSoundingWholeNotes ();
 
   // append it to the measure notes flat list
   appendNoteToMeasureNotesFlatList (note);
@@ -2708,9 +2708,9 @@ void msrMeasure::appendPaddingNoteAtTheEndOfMeasure (const S_msrNote& note)
     // register note as measure longest sounding and/or display note if relevant
     // JMI ???
     if (
-      note->getMeasureElementSoundingWholeNotes ()
+      note->getSoundingWholeNotes ()
         >
-      fMeasureLongestNote->getMeasureElementSoundingWholeNotes ()
+      fMeasureLongestNote->getSoundingWholeNotes ()
     ) {
       fMeasureLongestNote = note;
     }
@@ -2718,7 +2718,7 @@ void msrMeasure::appendPaddingNoteAtTheEndOfMeasure (const S_msrNote& note)
     if (
       note->getNoteDisplayWholeNotes ()
         >
-      fMeasureLongestNote->getMeasureElementSoundingWholeNotes ()
+      fMeasureLongestNote->getSoundingWholeNotes ()
     ) {
       fMeasureLongestNote = note;
     }
@@ -2785,7 +2785,7 @@ void msrMeasure::appendNoteToMeasureClone (const S_msrNote& note)
     Rational
       noteSoundingWholeNotes =
         note->
-          getMeasureElementSoundingWholeNotes ();
+          getSoundingWholeNotes ();
 
   /* JMI
     // determine whether the note occupies a full measure
@@ -2888,7 +2888,7 @@ void msrMeasure::appendChordToMeasure (const S_msrChord& chord)
 //   Rational
 //     chordSoundingWholeNotes =
 //       chord->
-//         getMeasureElementSoundingWholeNotes ();
+//         getSoundingWholeNotes ();
 //
   // determine if the chord occupies a full measure
 // XXL  JMI  if (chordSoundingWholeNotes == fMeasureDivisionsPerWholeMeasure)
@@ -3073,7 +3073,7 @@ void msrMeasure::appendFiguredBassToMeasure (
     measurePosition =
       figuredBass->
         getFiguredBassUpLinkToNote ()->
-          getMeasureElementMeasurePosition ();
+          getMeasurePosition ();
 
   // pad up to it
   padUpToMeasurePositionInMeasure (
@@ -3566,14 +3566,14 @@ void msrMeasure::padUpToPositionAtTheEndOfTheMeasure (
 
 void msrMeasure::backupByWholeNotesStepLengthInMeasure ( // JMI USELESS ??? v0.9.66
   int             inputLineNumber,
-  const Rational& backupTargetMeasureElementMeasurePosition)
+  const Rational& backupTargetMeasurePosition)
 {
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
-    backupTargetMeasureElementMeasurePosition.getNumerator () >= 0,
-    "backupTargetMeasureElementMeasurePosition.getNumerator () is negative");
+    backupTargetMeasurePosition.getNumerator () >= 0,
+    "backupTargetMeasurePosition.getNumerator () is negative");
 #endif
 
   // fetch the measure voice
@@ -3594,7 +3594,7 @@ void msrMeasure::backupByWholeNotesStepLengthInMeasure ( // JMI USELESS ??? v0.9
 
     ss <<
       "Backup by a '" <<
-      backupTargetMeasureElementMeasurePosition <<
+      backupTargetMeasurePosition <<
       "' whole notes step length in measure " <<
       this->asShortString () <<
       ", measureWholeNotesDuration: '" <<
@@ -3614,10 +3614,10 @@ void msrMeasure::backupByWholeNotesStepLengthInMeasure ( // JMI USELESS ??? v0.9
   }
 #endif
 
-  // determine the measure position 'backupTargetMeasureElementMeasurePosition' backward
+  // determine the measure position 'backupTargetMeasurePosition' backward
   Rational
     measurePosition =
-      fFullMeasureWholeNotesDuration - backupTargetMeasureElementMeasurePosition;
+      fFullMeasureWholeNotesDuration - backupTargetMeasurePosition;
 
   // pad up to it
   padUpToMeasurePositionInMeasure (
@@ -3817,7 +3817,7 @@ void msrMeasure::removeNoteFromMeasure (
         inputLineNumber,
         fMeasureWholeNotesDuration
           -
-        fMeasureLastHandledNote->getMeasureElementSoundingWholeNotes ());
+        fMeasureLastHandledNote->getSoundingWholeNotes ());
 
       // return from function
       return;
@@ -3932,7 +3932,7 @@ void msrMeasure::removeElementFromMeasure (
         inputLineNumber,
         fMeasureWholeNotesDuration
           -
-        fMeasureLastHandledNote->getMeasureElementSoundingWholeNotes ());
+        fMeasureLastHandledNote->getSoundingWholeNotes ());
 
       // return from function
       return;
@@ -4605,7 +4605,7 @@ void msrMeasure::finalizeRegularMeasure (
   // is there a single note or rest occupying the full measure?
   if (fMeasureLongestNote) {
     if (
-      fMeasureLongestNote-> getMeasureElementSoundingWholeNotes ()
+      fMeasureLongestNote-> getSoundingWholeNotes ()
         ==
       fFullMeasureWholeNotesDuration
     ) {
@@ -4658,7 +4658,7 @@ void msrMeasure::handleTheFirstHarmonyInAHarmoniesMeasure (
   Rational
     currentHarmonyMeasurePosition =
       currentHarmony->
-        getMeasureElementMeasurePosition ();
+        getMeasurePosition ();
 
   // get currentHarmony's note uplink
   S_msrNote
@@ -4668,16 +4668,16 @@ void msrMeasure::handleTheFirstHarmonyInAHarmoniesMeasure (
 
   // set currentHarmony's sounding whole notes // HARMFUL
   currentHarmony->
-    setMeasureElementSoundingWholeNotes (
+    setSoundingWholeNotes (
       currentUpLinkToHarmonyToNote->
-        getMeasureElementSoundingWholeNotes (),
+        getSoundingWholeNotes (),
       "msrMeasure::handleTheFirstHarmonyInAHarmoniesMeasure()");
 
   // get the currentHarmony's note uplink position in the measure
   Rational
     currentUpLinkToHarmonyToNoteMeasurePosition =
       currentUpLinkToHarmonyToNote->
-        getMeasureElementMeasurePosition ();
+        getMeasurePosition ();
 
   // the position to pad up to is the minimum
   // of those of the currentHarmony and currentUpLinkToHarmonyToNote,
@@ -4756,7 +4756,7 @@ void msrMeasure::handleTheFirstHarmonyInAHarmoniesMeasure (
 
 //   // set current harmony's element measure position
 //   currentHarmony->
-//     setMeasureElementMeasurePosition (
+//     setMeasurePosition (
 //       this,
 //       measurePositionToPadUpTo,
 //       "first harmony in measure");
@@ -4784,17 +4784,17 @@ void msrMeasure::handleASubsequentHarmonyInAHarmoniesMeasure (
   Rational
     currentHarmonyMeasurePosition =
       currentHarmony->
-        getMeasureElementMeasurePosition ();
+        getMeasurePosition ();
 
   // get previousHarmony's position in the measure
   Rational
     previousHarmonyMeasurePosition =
-      previousHarmony->getMeasureElementMeasurePosition ();
+      previousHarmony->getMeasurePosition ();
 
   // get previousHarmony's duration
   Rational
     previousHarmonySoundingWholeNotes =
-      previousHarmony->getMeasureElementSoundingWholeNotes ();
+      previousHarmony->getSoundingWholeNotes ();
 
   // compute the measure position following previousHarmony
   Rational
@@ -4923,9 +4923,9 @@ void msrMeasure::handleASubsequentHarmonyInAHarmoniesMeasure (
   if (previousHarmony) {
     Rational
       newPreviousHarmonyWholeNotes =
-        currentHarmony->getMeasureElementMeasurePosition ()
+        currentHarmony->getMeasurePosition ()
           -
-        previousHarmony->getMeasureElementMeasurePosition ();
+        previousHarmony->getMeasurePosition ();
 
 #ifdef MF_TRACE_IS_ENABLED
     if (gGlobalTraceOahGroup->getTraceHarmonies ()) {
@@ -4946,7 +4946,7 @@ void msrMeasure::handleASubsequentHarmonyInAHarmoniesMeasure (
 
     // set previousHarmony's sounding whole notes // HARMFUL
     previousHarmony->
-      setMeasureElementSoundingWholeNotes (
+      setSoundingWholeNotes (
         newPreviousHarmonyWholeNotes,
         "msrMeasure::handleASubsequentHarmonyInAHarmoniesMeasure()");
   }
@@ -4963,11 +4963,11 @@ void msrMeasure::handleTheLastHarmonyInAHarmoniesMeasure (
   Rational
     currentHarmonyMeasurePosition =
       currentHarmony->
-        getMeasureElementMeasurePosition ();
+        getMeasurePosition ();
 
 //   // set previousHarmony's sounding whole notes // HARMFUL
 //   previousHarmony->
-//     setMeasureElementSoundingWholeNotes (
+//     setSoundingWholeNotes (
 //       newPreviousHarmonyWholeNotes,
 //       "msrMeasure::handleASubsequentHarmonyInAHarmoniesMeasure()");
 
@@ -4975,7 +4975,7 @@ void msrMeasure::handleTheLastHarmonyInAHarmoniesMeasure (
   Rational
     currentHarmonySoundingWholeNotes =
       currentHarmony->
-        getMeasureElementSoundingWholeNotes ();
+        getSoundingWholeNotes ();
 
   // compute the measure position following currentHarmony
   Rational
@@ -5181,7 +5181,7 @@ void msrMeasure::handleTheLastHarmonyInAHarmoniesMeasure (
     else {
       // set currentHarmony's duration to the reduced value
       currentHarmony->
-        setMeasureElementSoundingWholeNotes (
+        setSoundingWholeNotes (
           reducedSoundingWholeNotes,
           "msrMeasure::handleTheLastHarmonyInAHarmoniesMeasure()");
     }
@@ -5282,8 +5282,7 @@ void msrMeasure::finalizeTheHarmoniesInAHarmoniesMeasure (
 #endif
 
     fMeasureElementsList.sort (
-      msrMeasureElement::
-        compareMeasureElementsByIncreasingMeasurePosition);
+      msrMeasureElement::compareMeasureElementsByIncreasingMeasurePosition);
 
 #ifdef MF_TRACE_IS_ENABLED
     if (gGlobalTraceOahGroup->getTraceHarmoniesDetails ()) {
@@ -5412,9 +5411,9 @@ void msrMeasure::finalizeHarmonyInAHarmoniesMeasure (
   // set currentHarmony's sounding whole notes
   // JMI v0.9.67 NOT if there are several figured basses with offsets on the same note -- HARMFUL!
 //   currentHarmony->
-//     setMeasureElementSoundingWholeNotes (
+//     setSoundingWholeNotes (
 //       currentUpLinkToHarmonyToNote->
-//         getMeasureElementSoundingWholeNotes (),
+//         getSoundingWholeNotes (),
 //       "msrMeasure::finalizeHarmonyInAHarmoniesMeasure()");
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -5422,7 +5421,7 @@ void msrMeasure::finalizeHarmonyInAHarmoniesMeasure (
   Rational
     currentUpLinkToHarmonyToNoteMeasurePosition =
       currentUpLinkToHarmonyToNote->
-        getMeasureElementMeasurePosition ();
+        getMeasurePosition ();
 
   if (gGlobalTraceOahGroup->getTraceHarmonies ()) {
     std::stringstream ss;
@@ -5574,12 +5573,12 @@ void msrMeasure::handleSubsequentFiguredBassInFiguredBassMeasure (
   // get the previousFiguredBass's position in the measure
   Rational
     previousFiguredBassMeasurePosition =
-      previousFiguredBass->getMeasureElementMeasurePosition ();
+      previousFiguredBass->getMeasurePosition ();
 
   // get the previousFiguredBass's duration
   Rational
     previousFiguredBassSoundingWholeNotes =
-      previousFiguredBass->getMeasureElementSoundingWholeNotes ();
+      previousFiguredBass->getSoundingWholeNotes ();
 
   // compute the measure position following previousFiguredBass
   Rational
@@ -5642,7 +5641,7 @@ void msrMeasure::handleSubsequentFiguredBassInFiguredBassMeasure (
 
     // set its measure position
 //     skipNote->
-//       setMeasureElementMeasurePosition (
+//       setMeasurePosition (
 //         this,
 //         fMeasureWholeNotesDuration,
 //         "handleSubsequentFiguredBassInFiguredBassMeasure() 8");
@@ -5736,7 +5735,7 @@ void msrMeasure::handleSubsequentFiguredBassInFiguredBassMeasure (
     else {
       // set previousFiguredBass's duration to the reduced value
       previousFiguredBass->
-        setMeasureElementSoundingWholeNotes (
+        setSoundingWholeNotes (
           reducedSoundingWholeNotes,
           "msrMeasure::handleSubsequentFiguredBassInFiguredBassMeasure ()");
     }
@@ -5753,13 +5752,13 @@ void msrMeasure::postHandleCurrentFiguredBassInFiguredBassMeasure (
   // get the currentFiguredBass's position in the measure
   Rational
     currentFiguredBassMeasurePosition =
-      currentFiguredBass->getMeasureElementMeasurePosition ();
+      currentFiguredBass->getMeasurePosition ();
 
   // get the currentFiguredBass's sounding whole notes
   Rational
     currentFiguredBassSoundingWholeNotes =
       currentFiguredBass->
-        getMeasureElementSoundingWholeNotes ();
+        getSoundingWholeNotes ();
 
   // compute the measure position following currentFiguredBass
   Rational
@@ -5905,7 +5904,7 @@ void msrMeasure::postHandleCurrentFiguredBassInFiguredBassMeasure (
     else {
       // set currentFiguredBass's duration to the reduced value
       currentFiguredBass->
-        setMeasureElementSoundingWholeNotes (
+        setSoundingWholeNotes (
           reducedSoundingWholeNotes,
           "msrMeasure::postHandleCurrentFiguredBassInFiguredBassMeasure () 3");
     }
@@ -5960,24 +5959,24 @@ void msrMeasure::finalizeTheFiguredBassesInAFiguredBassMeasure (
     // we thus have to sort them in the measure by increasing position,
     // taking their offset into account
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceHarmonies ()) {
-    std::stringstream ss;
+    if (gGlobalTraceOahGroup->getTraceHarmonies ()) {
+      std::stringstream ss;
 
-    ss <<
-      "Sorting the elements in figured bass measure " <<
-      this->asShortString () <<
-      " in segment '" <<
-      fMeasureUpLinkToSegment->getSegmentAbsoluteNumber () <<
-      "' in voice \"" <<
-      voice->getVoiceName () <<
-      "\" (" << context << ")" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ss <<
+        "Sorting the elements in figured bass measure " <<
+        this->asShortString () <<
+        " in segment '" <<
+        fMeasureUpLinkToSegment->getSegmentAbsoluteNumber () <<
+        "' in voice \"" <<
+        voice->getVoiceName () <<
+        "\" (" << context << ")" <<
+        ", line " << inputLineNumber <<
+        std::endl;
 
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
-  }
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
+    }
 #endif
 
     fMeasureElementsList.sort (
@@ -6045,7 +6044,7 @@ void msrMeasure::finalizeTheFiguredBassesInAFiguredBassMeasure (
         Rational
           currentFiguredBassMeasurePosition =
             currentFiguredBass->
-              getMeasureElementMeasurePosition ();
+              getMeasurePosition ();
 
         // get the currentFiguredBass's note uplink
         S_msrNote
@@ -6058,7 +6057,7 @@ void msrMeasure::finalizeTheFiguredBassesInAFiguredBassMeasure (
         Rational
           currentFiguredBassUpLinkToNoteMeasurePosition =
             currentFiguredBassUpLinkToNote->
-              getMeasureElementMeasurePosition ();
+              getMeasurePosition ();
 
         if (gGlobalTraceOahGroup->getTraceHarmonies () ) {
           std::stringstream ss;
@@ -6524,7 +6523,7 @@ void msrMeasure::finalizeMeasure (
       S_msrMeasureElement measureElement = (*i);
 
 //       measureElement->
-//         setMeasureElementVoicePosition ( // JMI v0.9.66
+//         setVoicePosition ( // JMI v0.9.66
 //           voicePosition,
 //           "finalizeMeasure()");
     } // for
@@ -6767,7 +6766,7 @@ void msrMeasure::finalizeMeasureClone (
     S_msrMeasureElement measureElement = (*i);
 
 //     measureElement->
-//       setMeasureElementVoicePosition ( // JMI v0.9.66
+//       setVoicePosition ( // JMI v0.9.66
 //         voicePosition,
 //         "finalizeMeasure()");
   } // for
@@ -7553,7 +7552,7 @@ std::ostream& operator << (std::ostream& os, const S_msrMeasure& elt)
 //
 //     // set its measure position
 //     skipNote->
-//       setMeasureElementMeasurePosition (
+//       setMeasurePosition (
 //         this,
 //         fMeasureWholeNotesDuration,
 //         "handleASubsequentHarmonyInAHarmoniesMeasure() 2");
@@ -7647,7 +7646,7 @@ std::ostream& operator << (std::ostream& os, const S_msrMeasure& elt)
 //     else {
 //       // set previousHarmony's duration to the reduced value
 //       previousHarmony->
-//         setMeasureElementSoundingWholeNotes (
+//         setSoundingWholeNotes (
 //           reducedSoundingWholeNotes);
 //     }
 //   }

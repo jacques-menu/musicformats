@@ -224,7 +224,7 @@ S_msrDoubleTremolo msrDoubleTremolo::createDoubleTremoloNewbornClone (
   return newbornClone;
 }
 
-// void msrDoubleTremolo::setMeasureElementMeasurePosition (
+// void msrDoubleTremolo::setMeasurePosition (
 //   const S_msrMeasure& measure,
 //   const Rational&     measurePosition,
 //   const std::string&  context)
@@ -239,7 +239,7 @@ S_msrDoubleTremolo msrDoubleTremolo::createDoubleTremoloNewbornClone (
 //       " to " <<
 //       measurePosition <<
 //       " (was " <<
-//       fMeasureElementMeasurePosition <<
+//       fMeasurePosition <<
 //       ") in measure " <<
 //       measure->asShortString () <<
 //       " (measureElementMeasureNumber: " <<
@@ -262,16 +262,16 @@ S_msrDoubleTremolo msrDoubleTremolo::createDoubleTremoloNewbornClone (
 // #endif
 //
 //   // set double tremolo's measure position
-//   fMeasureElementMeasurePosition = measurePosition;
+//   fMeasurePosition = measurePosition;
 // }
 
-// void msrDoubleTremolo::setMeasureElementMeasurePosition ( ??? JMI v0.9.66
+// void msrDoubleTremolo::setMeasurePosition ( ??? JMI v0.9.66
 //   const Rational& measurePosition)
 // {
 //   std::string context =
-//     "setMeasureElementMeasurePosition()";
+//     "setMeasurePosition()";
 //
-//   setMeasureElementMeasurePosition ( // JMI v0.9.66 CLEAN THAT!!!
+//   setMeasurePosition ( // JMI v0.9.66 CLEAN THAT!!!
 //     measurePosition,
 //     context);
 //
@@ -284,7 +284,7 @@ S_msrDoubleTremolo msrDoubleTremolo::createDoubleTremoloNewbornClone (
 //       measurePosition;
 //
 //   // set double tremolo's voice position
-//   setMeasureElementVoicePosition (
+//   setVoicePosition (
 //     voicePosition,
 //     context);
 // }
@@ -306,7 +306,7 @@ S_msrDoubleTremolo msrDoubleTremolo::createDoubleTremoloNewbornClone (
 //         voice->
 //           incrementCurrentVoicePosition (
 //             note->
-//               getMeasureElementSoundingWholeNotes ());
+//               getSoundingWholeNotes ());
 //       }
 //       else {
 //         msrInternalError (
@@ -326,7 +326,7 @@ S_msrDoubleTremolo msrDoubleTremolo::createDoubleTremoloNewbornClone (
 //         voice->
 //           incrementCurrentVoicePosition (
 //             chord->
-//               getMeasureElementSoundingWholeNotes ());
+//               getSoundingWholeNotes ());
 //       }
 //       else {
 //         msrInternalError (
@@ -395,7 +395,7 @@ void msrDoubleTremolo::setDoubleTremoloNoteFirstElement (const S_msrNote& note)
 
   // set note's sounding whole notes
   note->
-    setMeasureElementSoundingWholeNotes (
+    setSoundingWholeNotes (
       fDoubleTremoloElementsDuration,
       "msrDoubleTremolo::setDoubleTremoloNoteFirstElement()");
 
@@ -550,7 +550,7 @@ void msrDoubleTremolo::setDoubleTremoloNoteSecondElement (
 
   // set note's sounding whole notes
   note->
-    setMeasureElementSoundingWholeNotes (
+    setSoundingWholeNotes (
       fDoubleTremoloElementsDuration,
       "msrDoubleTremolo::setDoubleTremoloNoteSecondElement()");
 }

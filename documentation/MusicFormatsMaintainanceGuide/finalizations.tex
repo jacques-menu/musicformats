@@ -500,7 +500,7 @@ void msrMeasure::finalizeMeasure (
       S_msrMeasureElement measureElement = (*i);
 
       measureElement->
-        setMeasureElementVoicePosition (
+        setVoicePosition (
           voicePosition,
           "finalizeMeasure()");
     } // for
@@ -644,7 +644,7 @@ void msrMeasure::finalizeRegularMeasure (
   // is there a single note or rest occupying the full measure?
   if (fMeasureLongestNote) {
     if (
-      fMeasureLongestNote-> getMeasureElementSoundingWholeNotes ()
+      fMeasureLongestNote-> getSoundingWholeNotes ()
         ==
       fFullMeasureWholeNotesDuration
     ) {

@@ -253,7 +253,7 @@ std::ostream& operator << (std::ostream& os, const S_msrRepeatDescr& elt)
 
 //______________________________________________________________________________
 // constants
-const int msrVoice::K_VOICE_NUMBER_UNKNOWN                 = -99;
+const int msrVoice::K_VOICE_NUMBER_UNKNOWN                 = -96;
 const int msrVoice::K_VOICE_HARMONIES_VOICE_BASE_NUMBER    =  20;
 const int msrVoice::K_VOICE_FIGURED_BASS_VOICE_BASE_NUMBER =  40;
 
@@ -2421,7 +2421,7 @@ void msrVoice::registerShortestNoteInVoiceIfRelevant (const S_msrNote& note)
   Rational
     noteSoundingWholeNotes =
       note->
-        getMeasureElementSoundingWholeNotes ();
+        getSoundingWholeNotes ();
 
       /* JMI
   Rational
@@ -2488,7 +2488,7 @@ void msrVoice::registerNoteAsVoiceLastAppendedNote (const S_msrNote& note)
   Rational
     noteSoundingWholeNotes =
       note->
-        getMeasureElementSoundingWholeNotes (),
+        getSoundingWholeNotes (),
     noteDisplayWholeNotes =
       note->
         getNoteDisplayWholeNotes (); // JMI
@@ -2863,7 +2863,7 @@ void msrVoice::padUpToMeasurePositionInVoice (
 
 void msrVoice::backupByWholeNotesStepLengthInVoice (
   int             inputLineNumber,
-  const Rational& backupTargetMeasureElementMeasurePosition)
+  const Rational& backupTargetMeasurePosition)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalTraceOahGroup->getTraceWholeNotes ()) {
@@ -2871,7 +2871,7 @@ void msrVoice::backupByWholeNotesStepLengthInVoice (
 
     ss <<
       "Backup by a '" <<
-      backupTargetMeasureElementMeasurePosition <<
+      backupTargetMeasurePosition <<
       "' whole notes step length in voice \"" <<
       getVoiceName () <<
       "\", line " << inputLineNumber <<
@@ -2897,7 +2897,7 @@ void msrVoice::backupByWholeNotesStepLengthInVoice (
   fVoiceLastSegment->
     backupByWholeNotesStepLengthInSegment (
       inputLineNumber,
-      backupTargetMeasureElementMeasurePosition);
+      backupTargetMeasurePosition);
 
   --gIndenter;
 }
@@ -2907,7 +2907,11 @@ void msrVoice::appendPaddingNoteToVoice (
   const Rational& forwardStepLength)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceNotes ()) {
+  if (
+    gGlobalTraceOahGroup->getTraceNotes ()
+      ||
+    gGlobalTraceOahGroup->getTraceVoices ()
+  ) {
 		std::stringstream ss;
 
     ss <<
@@ -3262,7 +3266,7 @@ void msrVoice::appendNoteToVoice (const S_msrNote& note)
   part->
     incrementPartMeasurePosition (
       inputLineNumber,
-      note->getMeasureElementSoundingWholeNotes ());
+      note->getSoundingWholeNotes ());
 
   // register whether music (i.e. not just skips)
   // has been inserted into the voice
@@ -3517,7 +3521,7 @@ void msrVoice::appendChordToVoice (const S_msrChord& chord)
     getStaffUpLinkToPart ()->
       incrementPartMeasurePosition (
         chord->getInputLineNumber (),
-        chord->getMeasureElementSoundingWholeNotes ());
+        chord->getSoundingWholeNotes ());
 
   // get the chord's notes vector
   const std::vector<S_msrNote>&
@@ -3589,7 +3593,7 @@ void msrVoice::appendTupletToVoice (const S_msrTuplet& tuplet)
     getStaffUpLinkToPart ()->
       incrementPartMeasurePosition (
         tuplet->getInputLineNumber (),
-        tuplet->getMeasureElementSoundingWholeNotes ());
+        tuplet->getSoundingWholeNotes ());
 
   --gIndenter;
 
@@ -10833,7 +10837,7 @@ void msrVoice::removeNoteFromVoice (
       decrementPartMeasurePosition (
         inputLineNumber,
         note->
-          getMeasureElementSoundingWholeNotes ());
+          getSoundingWholeNotes ());
 
   --gIndenter;
 }

@@ -137,7 +137,7 @@ mxsr2msrTranslator::mxsr2msrTranslator (
   fCurrentClefStaffNumber = msrStaff::K_STAFF_NUMBER_UNKNOWN;
   fCurrentClefSign = "";
   fCurrentClefLine = -1;
-  fCurrentClefOctaveChange = -77;
+  fCurrentClefOctaveChange = -97;
 
   // key handling
   fCurrentKeyKind = msrKeyKind::kKeyTraditional;
@@ -508,9 +508,11 @@ S_msrStaff mxsr2msrTranslator::fetchStaffFromCurrentPart (
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
-  mfAssert (
+  mfAssertWithInputLocalisation (
     __FILE__, __LINE__,
     staffNumber != msrStaff::K_STAFF_NUMBER_UNKNOWN,
+    gServiceRunData->getInputSourceName (),
+    inputLineNumber,
     "staffNumber == msrStaff::K_STAFF_NUMBER_UNKNOWN");
 #endif
 
@@ -2451,7 +2453,7 @@ void mxsr2msrTranslator::visitStart (S_part& elt)
 		std::stringstream ss;
 
 		ss <<
-      std::endl <<
+//       std::endl <<
       "<!--=== part \"" << partID << "\"" <<
       ", line " << inputLineNumber << " ===-->" <<
       std::endl;
@@ -2556,8 +2558,11 @@ void mxsr2msrTranslator::visitStart (S_part& elt)
   fPreviousNoteMusicXMLStaffNumber = msrStaff::K_STAFF_NUMBER_UNKNOWN;
   fCurrentMusicXMLStaffNumber      = msrStaff::K_STAFF_NUMBER_UNKNOWN;
 
+	// voice numbers
+  fCurrentMusicXMLVoiceNumber = msrVoice::K_VOICE_NUMBER_UNKNOWN;
+
   // staff change detection
-  fCurrentStaffNumberToInsertInto = 1; // default value JMI msrStaff::K_STAFF_NUMBER_UNKNOWN;
+  fCurrentStaffNumberToInsertInto = 1; // default value JMI v0.9.67 msrStaff::K_STAFF_NUMBER_UNKNOWN;
 
   // cross staff chords
   fCurrentNoteIsCrossStaves = false; // needed ??? JMI
@@ -2579,9 +2584,6 @@ void mxsr2msrTranslator::visitStart (S_part& elt)
   fCurrentMeasureNumber = "???";
 
   fPreviousMeasureEndInputLineNumber = -1;
-
-  fCurrentMusicXMLStaffNumber = msrStaff::K_STAFF_NUMBER_UNKNOWN;
-  fCurrentMusicXMLVoiceNumber = msrVoice::K_VOICE_NUMBER_UNKNOWN;
 
   ++gIndenter;
 }
@@ -7708,7 +7710,7 @@ void mxsr2msrTranslator::visitStart (S_voice& elt)
 		std::stringstream ss;
 
 		ss <<
-      std::endl <<
+//       std::endl <<
       "<!--=== voice \"" << "elt->getVoiceName ()" << "\"" <<
       ", line " << elt->getInputLineNumber () << " ===-->" <<
       std::endl;
@@ -7780,6 +7782,26 @@ void mxsr2msrTranslator::visitEnd (S_backup& elt)
   int inputLineNumber =
     elt->getInputLineNumber ();
 
+/*
+<!--
+	The backup and forward elements are required to coordinate
+	multiple voices in one part, including music on multiple
+	staves. The forward element is generally used within voices
+	and staves, while the backup element is generally used to
+	move between voices and staves. Thus the backup element
+	does not include voice or staff elements. Duration values
+	should always be positive, and should not cross measure
+	boundaries or mid-measure changes in the divisions value.
+-->
+<!ELEMENT backup (duration, %editorial;)>
+<!ELEMENT forward
+	(duration, %editorial-voice;, staff?)>
+
+      <backup>
+        <duration>8</duration>
+      </backup>
+*/
+
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
 		std::stringstream ss;
@@ -7816,16 +7838,16 @@ void mxsr2msrTranslator::visitEnd (S_backup& elt)
 #endif
 
   // reset notes staff numbers
-  fPreviousNoteMusicXMLStaffNumber = msrStaff::K_STAFF_NUMBER_UNKNOWN;
-  fCurrentMusicXMLStaffNumber      = msrStaff::K_STAFF_NUMBER_UNKNOWN;
+//   fPreviousNoteMusicXMLStaffNumber = msrStaff::K_STAFF_NUMBER_UNKNOWN;
+//   fCurrentMusicXMLStaffNumber      = msrStaff::K_STAFF_NUMBER_UNKNOWN;
 
   // handle the backup right now:
   handleBackup (
     inputLineNumber);
 
   // reset staff change detection
-  // only now, it is used by handleBackup() v0.9.63
-  fCurrentStaffNumberToInsertInto = msrStaff::K_STAFF_NUMBER_UNKNOWN;
+  // only now, it is used by handleBackup() v0.9.63 JMI ???
+//   fCurrentStaffNumberToInsertInto = msrStaff::K_STAFF_NUMBER_UNKNOWN;
 
   fOnGoingBackup = false;
 }
@@ -7833,13 +7855,15 @@ void mxsr2msrTranslator::visitEnd (S_backup& elt)
 //______________________________________________________________________________
 void mxsr2msrTranslator::visitStart (S_forward& elt)
 {
+	int inputLineNumber = elt->getInputLineNumber ();
+
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
 		std::stringstream ss;
 
 		ss <<
       "--> Start visiting S_forward" <<
-      ", line " << elt->getInputLineNumber () <<
+      ", line " << inputLineNumber <<
       std::endl;
 
     gWaeHandler->waeTrace (
@@ -7847,16 +7871,6 @@ void mxsr2msrTranslator::visitStart (S_forward& elt)
       ss.str ());
   }
 #endif
-
-//* JMI ???
-  // the <staff /> element is present only
-  // in case of a staff change
-  fCurrentForwardStaffNumber = 1; // JMI default value??? fCurrentMusicXMLStaffNumber;
-
-  // the <voice /> element is present only
-  // in case of a voice change
-  fCurrentForwardVoiceNumber = 1; // JMI default value??? fCurrentMusicXMLVoiceNumber;
-//*/
 
   fOnGoingForward = true;
 }
@@ -7881,13 +7895,36 @@ void mxsr2msrTranslator::visitEnd (S_forward& elt)
   }
 #endif
 
+/*
+<!--
+	The backup and forward elements are required to coordinate
+	multiple voices in one part, including music on multiple
+	staves. The forward element is generally used within voices
+	and staves, while the backup element is generally used to
+	move between voices and staves. Thus the backup element
+	does not include voice or staff elements. Duration values
+	should always be positive, and should not cross measure
+	boundaries or mid-measure changes in the divisions value.
+-->
+<!ELEMENT backup (duration, %editorial;)>
+<!ELEMENT forward
+	(duration, %editorial-voice;, staff?)>
+
+      <forward>
+        <duration>4</duration>
+        <voice>2</voice>
+        <staff>1</staff>
+      </forward>
+*/
+
+  // the <staff /> element is present only in case of a staff change ???
+
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceForward ()) {
 		std::stringstream ss;
 
 		ss <<
-      "Handling 'forward <<< " << fCurrentBackupDivisions <<
-      " divisions >>>" <<
+      "Handling forward <<< " << fCurrentBackupDivisions << " divisions >>>" <<
       ", fCurrentForwardStaffNumber: " <<
       fCurrentForwardStaffNumber <<
       ", fCurrentForwardVoiceNumber: " <<
@@ -7933,18 +7970,18 @@ void mxsr2msrTranslator::visitEnd (S_forward& elt)
 
   // compute the forward step length
 #ifdef MF_TRACE_IS_ENABLED
-    if (gGlobalMxsrOahGroup->getTraceForward ()) {
-			std::stringstream ss;
+	if (gGlobalMxsrOahGroup->getTraceForward ()) {
+		std::stringstream ss;
 
-			ss <<
-        "--> current forward divisions: " <<
-        fCurrentForwardDivisions <<
-        std::endl;
+		ss <<
+			"--> current forward divisions: " <<
+			fCurrentForwardDivisions <<
+			std::endl;
 
-			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
-				ss.str ());
-    }
+		gWaeHandler->waeTrace (
+			__FILE__, __LINE__,
+			ss.str ());
+	}
 #endif
 
   Rational
@@ -7961,7 +7998,7 @@ void mxsr2msrTranslator::visitEnd (S_forward& elt)
 
   // reset staff change detection
   // fCurrentStaffNumberToInsertInto = 1; // default value JMI msrStaff::K_STAFF_NUMBER_UNKNOWN;
-  fCurrentStaffNumberToInsertInto = msrStaff::K_STAFF_NUMBER_UNKNOWN; // JMI ??? no if forward is followed by backup???
+//   fCurrentStaffNumberToInsertInto = msrStaff::K_STAFF_NUMBER_UNKNOWN; // JMI ??? no if forward is followed by backup???
 
   fOnGoingForward = false;
 }
@@ -9637,9 +9674,13 @@ void mxsr2msrTranslator::visitStart (S_measure& elt)
 			std::stringstream ss;
 
 			ss <<
-      std::endl <<
-      "<!--=== measure '" << fCurrentMeasureNumber << "'" <<
-      ", line " << inputLineNumber << " ===-->" <<
+//       std::endl <<
+      "<!--=== " <<
+      "part \"" << fCurrentPart->getPartName () << "\"" <<
+      " (partID \"" << fCurrentPart->getPartID () << "\")" <<
+      ", measure \"" << fCurrentMeasureNumber << "\"" <<
+      ", line " << inputLineNumber <<
+      " ===-->" <<
       std::endl;
 
     gWaeHandler->waeTrace (
@@ -11703,11 +11744,11 @@ void mxsr2msrTranslator::visitStart (S_duration& elt)
   int duration = (int)(*elt); // divisions
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceNotesDetails ()) {
+  if (gGlobalTraceOahGroup->getTraceDurations ()) {
 		std::stringstream ss;
 
 		ss <<
-      "Note duration: " << duration <<
+      "Duration: " << duration <<
       std::endl;
 
     gWaeHandler->waeTrace (
@@ -19187,7 +19228,7 @@ S_msrChord mxsr2msrTranslator::createChordFromItsFirstNote (
     chord =
       msrChord::create (
         firstNoteInputLineNumber,
-        chordFirstNote->getMeasureElementSoundingWholeNotes (),
+        chordFirstNote->getSoundingWholeNotes (),
         chordFirstNote->getNoteDisplayWholeNotes (),
         chordFirstNote->getNoteGraphicDurationKind ());
 
@@ -20802,7 +20843,7 @@ void mxsr2msrTranslator::createAndPushTupletUponItsFirstNote (
   // account for note duration
   Rational
     memberNotesSoundingWholeNotes =
-      firstNote->getMeasureElementSoundingWholeNotes ();
+      firstNote->getSoundingWholeNotes ();
 
   Rational
     memberNotesDisplayWholeNotes =
@@ -23891,7 +23932,7 @@ void mxsr2msrTranslator::populateNoteBeforeNoteItselfIsHandled (
         }
 
         newNote->
-          setMeasureElementSoundingWholeNotes (
+          setSoundingWholeNotes (
             fCurrentNoteDisplayWholeNotesFromType,
             "mxsr2msrTranslator::populateNoteBeforeNoteItselfIsHandled()");
         break;
@@ -24779,17 +24820,39 @@ void mxsr2msrTranslator::handlePendingHarmonies (
   Rational
     newNoteSoundingWholeNotes =
       newNote->
-        getMeasureElementSoundingWholeNotes (),
+        getSoundingWholeNotes (),
     newNoteDisplayWholeNotes =
       newNote->
         getNoteDisplayWholeNotes ();
+
+ #ifdef MF_TRACE_IS_ENABLED
+    if (gGlobalTraceOahGroup->getTraceHarmonies ()) {
+			std::stringstream ss;
+
+			ss <<
+        "handlePendingHarmonies(), " <<
+        ", newNoteSoundingWholeNotes: " << newNoteSoundingWholeNotes <<
+        ", newNoteDisplayWholeNotes: " << newNoteDisplayWholeNotes <<
+        ", line " <<
+        newNote->getInputLineNumber () <<
+        std::endl;
+
+			gWaeHandler->waeTrace (
+				__FILE__, __LINE__,
+				ss.str ());
+    }
+#endif
 
   while (fPendingHarmoniesList.size ()) { // recompute at each iteration
     S_msrHarmony
       harmony =
         fPendingHarmoniesList.front ();
 
-    /*
+     // register this note as the harmony's note upLink
+    harmony->
+      setHarmonyUpLinkToNote (newNote);
+
+   /*
        MusicXML harmonies don't have a duration,
        and MSR could follow this line, but LilyPond needs one...
        So:
@@ -24805,8 +24868,33 @@ void mxsr2msrTranslator::handlePendingHarmonies (
 
     // set the harmony's sounding whole notes
     // JMI v0.9.67 NOT if there are several harmonies with offsets on the same note -- HARMFUL!
+    Rational
+    	harmonySoundingWholeNotes =
+    		newNoteSoundingWholeNotes,
+      harmonyWholeNotesOffset =
+      	harmony->
+      		getHarmonyWholeNotesOffset ();
+
+ #ifdef MF_TRACE_IS_ENABLED
+    if (gGlobalTraceOahGroup->getTraceHarmonies ()) {
+			std::stringstream ss;
+
+			ss <<
+        "handlePendingHarmonies(), " <<
+        ", harmonySoundingWholeNotes: " << harmonySoundingWholeNotes <<
+        ", harmonyWholeNotesOffset: " << harmonyWholeNotesOffset <<
+        ", line " <<
+        newNote->getInputLineNumber () <<
+        std::endl;
+
+			gWaeHandler->waeTrace (
+				__FILE__, __LINE__,
+				ss.str ());
+    }
+#endif
+
     harmony->
-      setMeasureElementSoundingWholeNotes (
+      setSoundingWholeNotes (
         newNoteSoundingWholeNotes,
         "mxsr2msrTranslator::handlePendingHarmonies()");
 
@@ -24821,10 +24909,6 @@ void mxsr2msrTranslator::handlePendingHarmonies (
         msrTupletFactor (
           fCurrentNoteActualNotes,
           fCurrentNoteNormalNotes));
-
-    // register this note as the harmony note upLink
-    harmony->
-      setHarmonyUpLinkToNote (newNote);
 
     // append the harmony to newNote's harmonies list
     newNote->
@@ -24886,7 +24970,7 @@ void mxsr2msrTranslator::handlePendingFiguredBasses (
   Rational
     newNoteSoundingWholeNotes =
       newNote->
-        getMeasureElementSoundingWholeNotes (),
+        getSoundingWholeNotes (),
     newNoteDisplayWholeNotes =
       newNote->
         getNoteDisplayWholeNotes ();
@@ -24913,7 +24997,7 @@ void mxsr2msrTranslator::handlePendingFiguredBasses (
     // set the figured bass sounding whole notes
     // JMI v0.9.67 NOT if there are several figured basses with offsets on the same note -- HARMFUL!
     figuredBass->
-      setMeasureElementSoundingWholeNotes (
+      setSoundingWholeNotes (
         newNoteSoundingWholeNotes,
         "mxsr2msrTranslator::handlePendingFiguredBasses()");
 
@@ -25964,7 +26048,7 @@ void mxsr2msrTranslator::handleNoteBelongingToAChord (
           // fetch chordFirstNote's sounding divisions
           int chordFirstNoteSoundingWholeNotes = // JMI
             chordFirstNote->
-              getMeasureElementSoundingWholeNotes ();
+              getSoundingWholeNotes ();
               */
 
           /* JMI
@@ -25983,7 +26067,7 @@ void mxsr2msrTranslator::handleNoteBelongingToAChord (
 #endif
 
           chord->
-            setMeasureElementSoundingWholeNotes ( // ??? JMI
+            setSoundingWholeNotes ( // ??? JMI
               chordFirstNoteSoundingWholeNotes,
               "mxsr2msrTranslator::handleNoteBelongingToAChord()");
               */

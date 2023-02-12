@@ -49,7 +49,7 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 // constant
-const int msrStaff::K_STAFF_NUMBER_UNKNOWN = -777;
+const int msrStaff::K_STAFF_NUMBER_UNKNOWN = -99;
 
 // global variable
 int msrStaff::sStaffMaxRegularVoices = 4;
@@ -418,7 +418,7 @@ void msrStaff::registerShortestNoteInStaffIfRelevant (const S_msrNote& note)
   Rational
     noteSoundingWholeNotes =
       note->
-        getMeasureElementSoundingWholeNotes ();
+        getSoundingWholeNotes ();
 
       /* JMI
   Rational

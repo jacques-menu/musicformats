@@ -587,18 +587,18 @@ class EXP msr2mxsrTranslator :
 */
 
     // identification creator
-    std::list<Sxmlelement>         fComposersElementsList;
-    std::list<Sxmlelement>         fLyricistsElementsList;
-    std::list<Sxmlelement>         fArrangersElementsList;
+    std::list<Sxmlelement>    fComposersElementsList;
+    std::list<Sxmlelement>    fLyricistsElementsList;
+    std::list<Sxmlelement>    fArrangersElementsList;
 
-    std::list<Sxmlelement>         fPoetsElementsList;
-    std::list<Sxmlelement>         fTranslatorsElementsList;
-    std::list<Sxmlelement>         fArtistsElementsList;
+    std::list<Sxmlelement>    fPoetsElementsList;
+    std::list<Sxmlelement>    fTranslatorsElementsList;
+    std::list<Sxmlelement>    fArtistsElementsList;
 
-    std::list<Sxmlelement>         fSoftwaresElementsList;
+    std::list<Sxmlelement>    fSoftwaresElementsList;
 
     // identification rights
-    std::list<Sxmlelement>         fRightsElementsList;
+    std::list<Sxmlelement>    fRightsElementsList;
 
 
     // identification encoding
@@ -671,7 +671,7 @@ class EXP msr2mxsrTranslator :
                                 const S_msrSystemLayout& systemLayout);
 
     // staff layouts
-    std::list<Sxmlelement>         fScoreDefaultsStaffLayoutElementsList;
+    std::list<Sxmlelement>    fScoreDefaultsStaffLayoutElementsList;
 
     // measure print layout
     Sxmlelement               fCurrentMeasureMusicXMLPrintLayoutElement; // not used JMI
@@ -682,19 +682,19 @@ class EXP msr2mxsrTranslator :
     Sxmlelement               fScoreDefaultsAppearanceElement;
 
   void                        populateAppearanceLineWidths (
-                                Sxmlelement                 appearanceElement,
+                                Sxmlelement                      appearanceElement,
                                 const std::list<S_msrLineWidth>& lineWidthsList);
 
   void                        populateAppearanceNoteSizes (
-                                Sxmlelement                appearanceElement,
+                                Sxmlelement                     appearanceElement,
                                 const std::list<S_msrNoteSize>& noteSizesList);
 
   void                        populateAppearanceDistances (
-                                Sxmlelement                appearanceElement,
+                                Sxmlelement                     appearanceElement,
                                 const std::list<S_msrDistance>& distancesList);
 
   void                        populateAppearanceGlyphs (
-                                Sxmlelement             appearanceElement,
+                                Sxmlelement                  appearanceElement,
                                 const std::list<S_msrGlyph>& glyphsList);
 
   void                        populateAppearanceOtherAppearances (
@@ -707,15 +707,7 @@ class EXP msr2mxsrTranslator :
 
     Sxmlelement               fCurrentScoreCreditElement;
 
-    std::list<Sxmlelement>         fPendingScoreCreditElementsList;
-
-    // part list
-    // ------------------------------------------------------
-
-    Sxmlelement               fScorePartListElement;
-    Sxmlelement               fScorePartElement;
-    Sxmlelement               fScoreInstrumentElement;
-
+    std::list<Sxmlelement>    fPendingScoreCreditElementsList;
 
     // the part direction element
     // ------------------------------------------------------
@@ -755,7 +747,7 @@ class EXP msr2mxsrTranslator :
 
     // partGroup's can be nested, hence this stack
     // the current partGroup is the top of the stack
-    std::stack<Sxmlelement>        fPartGroupElementsStack;
+    std::stack<Sxmlelement>   fPartGroupElementsStack;
 
     // parts
     // ------------------------------------------------------
@@ -764,7 +756,16 @@ class EXP msr2mxsrTranslator :
 
     Sxmlelement               fCurrentPartElement;
 
-    std::list<Sxmlelement>         fPendingPartElementsList;
+    std::list<Sxmlelement>    fPendingPartElementsList;
+
+    Sxmlelement               fScorePartListElement;
+    Sxmlelement               fScorePartElement;
+
+
+    // instruments
+    // ------------------------------------------------------
+
+    Sxmlelement               fScoreInstrumentElement;
 
 /*
     // staff details
@@ -793,9 +794,13 @@ class EXP msr2mxsrTranslator :
 
     // measures
     // ------------------------------------------------------
+
+    S_msrMeasure              fCurrentMSRMeasure;
+
     Sxmlelement               fCurrentMeasureElement;
 
-    std::map<std::string, Sxmlelement>  fPartMeasureNumbersToElementsMap;
+    std::map<std::string, Sxmlelement>
+                              fPartMeasureNumbersToElementsMap;
 
     void                      appendOtherToMeasure (
                                 Sxmlelement elem);
@@ -816,7 +821,7 @@ class EXP msr2mxsrTranslator :
 
     Sxmlelement               fStavesElement;
 
-    std::list<Sxmlelement>         fClefElementsList;
+    std::list<Sxmlelement>    fClefElementsList;
 
     void                      createMxmlAttributesElementAndAppendItToMeasure ();
 
@@ -840,7 +845,7 @@ class EXP msr2mxsrTranslator :
 
     S_msrKey                  fCurrentPartKey;
 
-    std::string          msrModeKindAsMusicXMLString (
+    std::string               msrModeKindAsMusicXMLString (
                                 msrModeKind modeKind);
 
     // time signatures
@@ -926,8 +931,8 @@ class EXP msr2mxsrTranslator :
                                 const S_msrNote& theMsrNote);
 
     void                      appendNoteToMeasure (
-                                Sxmlelement note,
-                                const S_msrNote&   theMsrNote);
+                                Sxmlelement      note,
+                                const S_msrNote& theMsrNote);
 
     Bool                      fCurrentNoteAwaitsGraceNotes;
     S_msrNote                 fPendingMsrNoteAwaitingGraceNotes;
@@ -1055,15 +1060,15 @@ class EXP msr2mxsrTranslator :
     void                      displayCurrentOnGoingValues ();
 */
 
-    std::string          msrLengthAsTenths (
+    std::string               msrLengthAsTenths (
                                 msrLength length);
-    std::string          S_msrLengthAsTenths (
+    std::string               S_msrLengthAsTenths (
                                 const S_msrLength& length);
 
-    std::string          msrPlacementKindAsMusicXMLString (
+    std::string               msrPlacementKindAsMusicXMLString (
                                 msrPlacementKind placementKind);
 
-    std::string          msrSpannerTypeKindAsMusicXMLString (
+    std::string               msrSpannerTypeKindAsMusicXMLString (
                                 msrSpannerTypeKind spannerTypeKind);
 };
 

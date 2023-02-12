@@ -128,6 +128,18 @@ S_mfcRepresentationComponent createMsrRepresentationComponent ()
             "Finalized the '-display-msr-*' options"
           }
       ));
+
+    pRepresentationComponent->
+      appendVersionDescrToComponent (
+        mfcVersionDescr::create (
+          mfcVersionNumber::createFromString ("0.9.67"),
+          "October 6, 2022",
+          std::list<std::string> {
+            "Finalized the computation of measure positions",
+            "Finalized the '-display-msr-*' options",
+            "Finalized harmonies handling"
+          }
+      ));
   }
 
   return pRepresentationComponent;

@@ -497,7 +497,7 @@ msrFiguredBass::msrFiguredBass (
     figuredBassUpLinkToPart;
     */
 
-  doSetMeasureElementSoundingWholeNotes (
+  doSetSoundingWholeNotes (
     figuredBassSoundingWholeNotes,
     "msrFiguredBass::msrFiguredBass()");
 
@@ -509,7 +509,7 @@ msrFiguredBass::msrFiguredBass (
 
   // a figured bass element is considered to be at the beginning of the measure
   // until this is computed in msrMeasure::finalizeTheFiguredBassesInAFiguredBassMeasure()
-  fMeasureElementMeasurePosition = Rational (0, 1);
+  fMeasurePosition = Rational (0, 1);
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalTraceOahGroup->getTraceFiguredBasses ()) {
@@ -562,7 +562,7 @@ S_msrFiguredBass msrFiguredBass::createFiguredBassNewbornClone (
       msrFiguredBass::create (
         fInputLineNumber,
         gNullMeasure, // set later in setMeasureElementUpLinkToMeasure()
-        fMeasureElementSoundingWholeNotes,
+        fSoundingWholeNotes,
         fFiguredBassDisplayWholeNotes,
         fFiguredBassParenthesesKind,
         fFiguredBassTupletFactor);
@@ -605,7 +605,7 @@ S_msrFiguredBass msrFiguredBass::createFiguredBassDeepClone ()
       msrFiguredBass::create (
         fInputLineNumber,
         gNullMeasure, // set later in setMeasureElementUpLinkToMeasure()
-        fMeasureElementSoundingWholeNotes,
+        fSoundingWholeNotes,
         fFiguredBassDisplayWholeNotes,
         fFiguredBassParenthesesKind,
         fFiguredBassTupletFactor);
@@ -791,12 +791,12 @@ std::string msrFiguredBass::asString () const
   ss <<
     "[FiguredBass" <<
     ", " << std::hex << std::showbase << this << std::dec <<
-    ", fMeasureElementMeasurePosition: " <<
-    fMeasureElementMeasurePosition <<
-    ", fMeasureElementSoundingWholeNotes: " <<
+    ", fMeasurePosition: " <<
+    fMeasurePosition <<
+    ", fSoundingWholeNotes: " <<
     wholeNotesAsMsrString (
       fInputLineNumber,
-      fMeasureElementSoundingWholeNotes) <<
+      fSoundingWholeNotes) <<
     ", fFiguredBassDisplayWholeNotes: " <<
     wholeNotesAsMsrString (
       fInputLineNumber,
@@ -857,7 +857,7 @@ std::string msrFiguredBass::asString () const
 
   // print the figured bass measure position
   ss <<
-    ", measurePosition: " << fMeasureElementMeasurePosition;
+    ", measurePosition: " << fMeasurePosition;
 
 /* JMI
   if (fFiguredBassUpLinkToPart) { // JMI ???
@@ -871,7 +871,7 @@ std::string msrFiguredBass::asString () const
 
   // print the figured bass voice position
 //   ss <<
-//     ", voicePosition: " << fMeasureElementVoicePosition;
+//     ", voicePosition: " << fVoicePosition;
 
   ss <<
     ", line " << fInputLineNumber <<
@@ -893,13 +893,13 @@ void msrFiguredBass::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fMeasureElementMeasurePosition" << ": " <<
-    fMeasureElementMeasurePosition <<
+    "fMeasurePosition" << ": " <<
+    fMeasurePosition <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fMeasureElementSoundingWholeNotes" << ": " <<
-    fMeasureElementSoundingWholeNotes <<
+    "fSoundingWholeNotes" << ": " <<
+    fSoundingWholeNotes <<
     std::endl <<
 
     std::setw (fieldWidth) <<
@@ -971,13 +971,13 @@ void msrFiguredBass::print (std::ostream& os) const
   // print the figured bass measure position
   os <<
     std::setw (fieldWidth) <<
-    "fMeasureElementMeasurePosition" << ": " << fMeasureElementMeasurePosition <<
+    "fMeasurePosition" << ": " << fMeasurePosition <<
     std::endl;
 
 //   // print the figured bass voice position
 //   os <<
 //     std::setw (fieldWidth) <<
-//     "fMeasureElementVoicePosition" << ": " << fMeasureElementVoicePosition <<
+//     "fVoicePosition" << ": " << fVoicePosition <<
 //     std::endl;
 
   --gIndenter;

@@ -370,7 +370,8 @@ S_mfcLibraryComponent createLibraryComponent ()
           std::list<std::string> {
             "Switched to using gWaeHandler->waeTrace() instead of gLog for trace messages",
             "Moved language files to the new 'src/languages' folder",
-            "Made global variables private with set()/get() methods"
+            "Made global variables private with set()/get() methods",
+            "Added mfAssertWithInputLocalisation() to mflibrary"
           }
       ));
   }

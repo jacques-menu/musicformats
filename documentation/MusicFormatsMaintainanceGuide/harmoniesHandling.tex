@@ -485,7 +485,7 @@ void mxsr2msrTranslator::handlePendingHarmonies (
   Rational
     newNoteSoundingWholeNotes =
       newNote->
-        getMeasureElementSoundingWholeNotes (),
+        getSoundingWholeNotes (),
     newNoteDisplayWholeNotes =
       newNote->
         getNoteDisplayWholeNotes ();
@@ -511,7 +511,7 @@ void mxsr2msrTranslator::handlePendingHarmonies (
 
     // set the harmony's sounding whole notes
     harmony->
-      setMeasureElementSoundingWholeNotes (
+      setSoundingWholeNotes (
         newNoteSoundingWholeNotes,
         "mxsr2msrTranslator::handlePendingHarmonies()");
 

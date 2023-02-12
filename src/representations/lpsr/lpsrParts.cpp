@@ -540,6 +540,10 @@ void lpsrPartBlock::print (std::ostream& os) const
     std::setw (fieldWidth) << std::string ("") + "partName" << " = \"" <<
     fPart->getPartName () << "\"" <<
     std::endl <<
+    std::setw (fieldWidth) << std::string ("") + "partID" << " = \"" <<
+    fPart->getPartID () << "\"" <<
+    std::endl <<
+
     std::setw (fieldWidth) << std::string ("") + "partAbbreviation" << " = \"" <<
     fPart->getPartAbbreviation () << "\"" <<
     std::endl <<

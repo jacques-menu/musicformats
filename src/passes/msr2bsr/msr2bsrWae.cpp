@@ -68,7 +68,7 @@ void msr2bsrInternalWarning (
   const std::string& message)
 {
   waeInternalWarning (
-    "msr2bsr",
+    "msr2bsr INTERNAL",
     inputSourceName,
     inputLineNumber,
     message);

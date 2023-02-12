@@ -623,7 +623,7 @@ EXP mfMusicformatsErrorKind musicxmlFile2lilypond (
       createSXMLFileFromFile (
         fileName,
         mfPassIDKind::kMfPassID_1,
-        gLanguage->createAnMXSRFromAMusicXMLFileOrStdin ());
+        gLanguage->createAnMXSRFromAMusicXMLStream ());
 
   if (sxmlfile) {
     return
@@ -648,7 +648,7 @@ mfMusicformatsErrorKind convertMusicxmlFile2lilypondWithHandler (
       createSXMLFileFromFile (
         fileName,
         mfPassIDKind::kMfPassID_1,
-        gLanguage->createAnMXSRFromAMusicXMLFileOrStdin ());
+        gLanguage->createAnMXSRFromAMusicXMLStream ());
 
   if (sxmlfile) {
     return

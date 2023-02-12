@@ -277,7 +277,7 @@ std::ostream& operator << (std::ostream& os, const msrMeasureEndRegularKind& elt
 //
 //     // set its measure position
 //     skipNote->
-//       setMeasureElementMeasurePosition (
+//       setMeasurePosition (
 //         this,
 //         fMeasureWholeNotesDuration,
 //         "handleASubsequentHarmonyInAHarmoniesMeasure() 2");
@@ -371,7 +371,7 @@ std::ostream& operator << (std::ostream& os, const msrMeasureEndRegularKind& elt
 //     else {
 //       // set previousHarmony's duration to the reduced value
 //       previousHarmony->
-//         setMeasureElementSoundingWholeNotes (
+//         setSoundingWholeNotes (
 //           reducedSoundingWholeNotes);
 //     }
 //   }

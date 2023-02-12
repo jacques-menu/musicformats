@@ -68,7 +68,7 @@ class EXP languageFrench : public language
 
     // passes
 
-    std::string           createAnMXSRFromAMusicXMLFileOrStdin () const override;
+    std::string           createAnMXSRFromAMusicXMLStream () const override;
     std::string           createAnMXSRFromAMusicXMLDescriptor () const override;
     std::string           createAnMXSRFromAMusicXMLBuffer () const override;
 

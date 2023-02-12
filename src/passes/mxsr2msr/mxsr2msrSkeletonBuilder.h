@@ -489,11 +489,11 @@ class EXP mxsr2msrSkeletonBuilder :
     S_mxmlPartGroupDescr      fetchPartGroupDescrStackTop ();
 
     void                      registerPartGroupDescrAsStarted (
-                                int                  inputLineNumber,
+                                int                         inputLineNumber,
                                 const S_mxmlPartGroupDescr& partGroupDescr);
 
     void                      registerPartGroupDescrAsStopped (
-                                int                  inputLineNumber,
+                                int                         inputLineNumber,
                                 const S_mxmlPartGroupDescr& partGroupDescr);
 
     void                      showPartGroupsData (
@@ -530,12 +530,12 @@ class EXP mxsr2msrSkeletonBuilder :
                                                      stoppingPartGroupDescrsList);
 
     void                      registerPartGroupDescrAsStoppingAtCurrentPosition (
-                                int                  inputLineNumber,
+                                int                         inputLineNumber,
                                 const S_mxmlPartGroupDescr& partGroupDescr);
 
     void                      registerPart (
-                                int       inputLineNumber,
-                                int       partPosition,
+                                int              inputLineNumber,
+                                int              partPosition,
                                 const S_msrPart& part);
 
     void                      doNestPartGroupDescrInItsContainer (
@@ -551,7 +551,8 @@ class EXP mxsr2msrSkeletonBuilder :
     // parts handling
     // ------------------------------------------------------
 
-    std::string               fCurrentPartID; // used throughout
+    std::string               fCurrentScorePartID; // from <score-part />
+    std::string               fCurrentPartID;      // used throughout, computed
 
     std::string               fCurrentPartName;
     std::string               fCurrentPartNameDisplayText;

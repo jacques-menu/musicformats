@@ -25,7 +25,7 @@ namespace MusicFormats
 //______________________________________________________________________________
 // constants
 const Rational
-  msrMoment::K_MEASURE_POSITION_UNKNOWN (-987, 1);
+  msrMoment::K_MEASURE_POSITION_UNKNOWN (-95, 1);
 const msrMoment
   msrMoment::K_MOMENT_UNKNOWN(K_MEASURE_POSITION_UNKNOWN, K_MEASURE_POSITION_UNKNOWN);
 

@@ -252,7 +252,7 @@ class EXP msrNote : public msrTupletElement
 
     // measure positions
     // this override calls setNoteAttachedElementsMeasurePosition()
-    void                  setMeasureElementMeasurePosition (
+    void                  setMeasurePosition (
                             const S_msrMeasure& measure,
                             const Rational&     measurePosition,
                             const std::string&  context) override;

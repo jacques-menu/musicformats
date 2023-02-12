@@ -625,8 +625,8 @@ std::string msrBarLine::asShortString () const
     msrBarLineCategoryKindAsString (fBarLineCategoryKind) <<
     ", measureNumber: " <<
     fBarLineUpLinkToMeasure->getMeasureNumber () <<
-    ", fMeasureElementMeasurePosition " <<
-    fMeasureElementMeasurePosition <<
+    ", fMeasurePosition " <<
+    fMeasurePosition <<
 
 /* JMI
     ", " <<
@@ -666,7 +666,7 @@ std::string msrBarLine::asString () const
     "[BarLine " <<
     msrBarLineCategoryKindAsString (fBarLineCategoryKind) <<
     ", measureElementMeasureNumber: " << fBarLineUpLinkToMeasure->getMeasureNumber () <<
-    ", fMeasureElementMeasurePosition: " << fMeasureElementMeasurePosition <<
+    ", fMeasurePosition: " << fMeasurePosition <<
 
     ", " <<
     msrBarLineLocationKindAsString (fLocationKind) <<
@@ -729,8 +729,8 @@ void msrBarLine::printFull (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fMeasureElementMeasurePosition" << ": " <<
-    fMeasureElementMeasurePosition <<
+    "fMeasurePosition" << ": " <<
+    fMeasurePosition <<
     std::endl <<
 
     std::setw (fieldWidth) <<
@@ -806,7 +806,7 @@ void msrBarLine::print (std::ostream& os) const
     ", fBarLineCategoryKind: " << fBarLineCategoryKind <<
     fBarLineCategoryKind <<
     ", measureElementMeasureNumber: " << fBarLineUpLinkToMeasure->getMeasureNumber () <<
-    ", fMeasureElementMeasurePosition: " << fMeasureElementMeasurePosition <<
+    ", fMeasurePosition: " << fMeasurePosition <<
     ", line " << fInputLineNumber <<
     ']' <<
     std::endl;

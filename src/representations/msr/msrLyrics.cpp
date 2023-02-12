@@ -377,7 +377,7 @@ void msrSyllable:: setSyllableNextMeasurePuristNumber (
     puristMeasureNumber;
 }
 
-// void msrSyllable::setMeasureElementMeasurePosition (
+// void msrSyllable::setMeasurePosition (
 //   const S_msrMeasure measure,
 //   const Rational&    measurePosition,
 //   const std::string&      context)
@@ -389,7 +389,7 @@ void msrSyllable:: setSyllableNextMeasurePuristNumber (
 //       " to " <<
 //       measurePosition <<
 //       " (was " <<
-//       fMeasureElementMeasurePosition <<
+//       fMeasurePosition <<
 //       ") in measure " <<
 //       measure->asShortString () <<
 //       " (measureElementMeasureNumber: " <<
@@ -410,7 +410,7 @@ void msrSyllable:: setSyllableNextMeasurePuristNumber (
 // #endif
 //
 //   // set syllable's measure position
-//   fMeasureElementMeasurePosition = measurePosition;
+//   fMeasurePosition = measurePosition;
 // }
 
 void msrSyllable::appendLyricTextToSyllable (const std::string& text)
@@ -1190,7 +1190,7 @@ void msrStanza::appendSyllableToStanza (
     syllableSoundingWholeNotes =
       syllable->
         getSyllableUpLinkToNote ()->
-          getMeasureElementSoundingWholeNotes ();
+          getSoundingWholeNotes ();
 
   // update the stanza's measure whole notes
   fStanzaMeasureWholeNotesDuration +=syllableSoundingWholeNotes;

@@ -3280,11 +3280,15 @@ void msr2bsrTranslator::visitStart (S_msrMeasure& elt)
 
     ss <<
       std::endl <<
-      "<!--=== measure '" << measureNumber <<
+      "<!--=== " <<
+      "part \"" << fCurrentPartName << "\"" <<
+      " (partID \"" << fCurrentPart->getPartID () << "\")" <<
+      ", measure \"" << measureNumber << "\"" <<
       "', voice \"" <<
       fCurrentVoiceClone->getVoiceName () <<
       "\"" <<
-      ", line " << inputLineNumber << " ===-->" <<
+      ", line " << inputLineNumber <<
+      " ===-->" <<
       std::endl;
 
     gWaeHandler->waeTrace (

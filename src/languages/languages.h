@@ -109,7 +109,7 @@ class EXP language : public smartable
 
     // passes
 
-    virtual std::string   createAnMXSRFromAMusicXMLFileOrStdin () const;
+    virtual std::string   createAnMXSRFromAMusicXMLStream () const;
     virtual std::string   createAnMXSRFromAMusicXMLDescriptor () const;
     virtual std::string   createAnMXSRFromAMusicXMLBuffer () const;
 

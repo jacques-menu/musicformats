@@ -27,6 +27,14 @@ EXP void mfAssert (
   Bool               condition,
   const std::string& messageIfFalse);
 
+EXP void mfAssertWithInputLocalisation (
+  const std::string& sourceCodeFileName,
+  int                sourceCodeLineNumber,
+  Bool               condition,
+  const std::string& inputSourceName,
+  int                inputLineNumber,
+  const std::string& messageIfFalse);
+
 
 }
 

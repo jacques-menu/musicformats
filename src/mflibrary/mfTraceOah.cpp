@@ -2141,6 +2141,35 @@ This option implies '-tvoices, -trace-voices'.)",
       traceVoicesDetailsBooleanAtom);
 }
 
+void traceOahGroup::initializeDurationsTraceOah ()
+{
+  S_oahSubGroup
+    subGroup =
+      oahSubGroup::create (
+        "Durations",
+        "help-trace-durations", "htd",
+R"()",
+      oahElementVisibilityKind::kElementVisibilityWhole,
+      this);
+
+  appendSubGroupToGroup (subGroup);
+
+  // durations
+
+  S_oahTwoBooleansAtomWithTracePasses
+    traceDurationsBooleanAtom =
+      oahTwoBooleansAtomWithTracePasses::create ( // JMI trace too??? v0.9.67
+        "trace-durations", "tdurs",
+R"(Durations)",
+        "fTraceDurations",
+        fTraceDurations,
+        fTracePassesBooleanAtom);
+
+  subGroup->
+    appendAtomToSubGroup (
+      traceDurationsBooleanAtom);
+}
+
 void traceOahGroup::initializeNotesTraceOah ()
 {
   S_oahSubGroup
@@ -2572,6 +2601,9 @@ void traceOahGroup::initializeTraceOahGroup ()
 
   // measures slices
   initializeMeasuresSlicesTraceOah ();
+
+  // durations
+  initializeDurationsTraceOah ();
 
   // notes
   initializeNotesTraceOah ();
