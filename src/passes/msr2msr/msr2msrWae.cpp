@@ -30,9 +30,9 @@ namespace MusicFormats
 //______________________________________________________________________________
 void msr2msrUnsupported (
   const std::string& inputSourceName,
-  int           inputLineNumber,
+  int                inputLineNumber,
   const std::string& sourceCodeFileName,
-  int           sourceCodeLineNumber,
+  int                sourceCodeLineNumber,
   const std::string& message)
 {
   if (!
@@ -63,7 +63,7 @@ void msr2msrUnsupported (
 //______________________________________________________________________________
 void msr2msrInternalWarning (
   const std::string& inputSourceName,
-  int           inputLineNumber,
+  int                inputLineNumber,
   const std::string& message)
 {
   waeInternalWarning (
@@ -75,15 +75,15 @@ void msr2msrInternalWarning (
 
 void msr2msrInternalError (
   const std::string& inputSourceName,
-  int           inputLineNumber,
+  int                inputLineNumber,
   const std::string& sourceCodeFileName,
-  int           sourceCodeLineNumber,
+  int                sourceCodeLineNumber,
   const std::string& message)
 {
   gIndenter.resetToZero ();
 
   waeErrorWithoutException (
-    "MSR INTERNAL",
+    "msr2msr INTERNAL",
     inputSourceName,
     inputLineNumber,
     sourceCodeFileName,
@@ -100,7 +100,7 @@ void msr2msrInternalError (
 //______________________________________________________________________________
 void msr2msrWarning (
   const std::string& inputSourceName,
-  int           inputLineNumber,
+  int                inputLineNumber,
   const std::string& message)
 {
   waeWarning (
@@ -112,9 +112,9 @@ void msr2msrWarning (
 
 void msr2msrError (
   const std::string& inputSourceName,
-  int           inputLineNumber,
+  int                inputLineNumber,
   const std::string& sourceCodeFileName,
-  int           sourceCodeLineNumber,
+  int                sourceCodeLineNumber,
   const std::string& message)
 {
   waeError (

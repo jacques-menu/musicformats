@@ -173,17 +173,17 @@ std::string languageGerman::handleOptionsAndArgumentsFromArgcArgv () const
 //_______________________________________________________________________________
 // passes
 
-std::string languageGerman::createAnMXSRFromAMusicXMLFileOrStdin () const
+std::string languageGerman::createAnMXSRFromAMusicXMLStream () const
 {
-  return "Create an MXSR from a MusicXML file";
+  return "Create an MXSR (MusicXML tree) from a MusicXML file";
 }
 std::string languageGerman::createAnMXSRFromAMusicXMLDescriptor () const
 {
-  return "Create an MXSR from a MusicXML descriptor";
+  return "Create an MXSR (MusicXML tree) from a MusicXML descriptor";
 }
 std::string languageGerman::createAnMXSRFromAMusicXMLBuffer () const
 {
-  return "Create an MXSR from a MusicXML buffer";
+  return "Create an MXSR (MusicXML tree) from a MusicXML buffer";
 }
 
 std::string languageGerman::createAnMSRSqueletonFromTheMXSR () const

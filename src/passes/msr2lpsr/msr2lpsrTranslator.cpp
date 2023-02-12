@@ -768,7 +768,7 @@ void msr2lpsrTranslator::handlePartHiddenMeasureAndBarLineDescrList ()
       fCurrentPartClone->
         insertHiddenMeasureAndBarLineInPartClone (
           hiddenMeasureAndBarLineDescr->getInputLineNumber (),
-          dalSegno->getMeasureElementMeasurePosition ());
+          dalSegno->getMeasurePosition ());
 
       if (++i == iEnd) break;
     } // for
@@ -3107,11 +3107,15 @@ void msr2lpsrTranslator::visitStart (S_msrMeasure& elt)
 
     ss <<
       std::endl <<
-      "<!--=== measure '" << measureNumber <<
+      "<!--=== " <<
+      "part \"" << fCurrentPartClone->getPartName () << "\"" <<
+      " (partID \"" << fCurrentPartClone->getPartID () << "\")" <<
+      ", measure \"" << measureNumber << "\"" <<
       "', voice \"" <<
       fCurrentVoiceClone->getVoiceName () <<
       "\"" <<
-      ", line " << inputLineNumber << " ===-->" <<
+      ", line " << inputLineNumber <<
+      " ===-->" <<
       std::endl;
 
     gWaeHandler->waeTrace (
@@ -7460,7 +7464,7 @@ void msr2lpsrTranslator::visitStart (S_msrDalSegno& elt)
   fCurrentPartClone->
     insertHiddenMeasureAndBarLineInPartClone (
       inputLineNumber,
-      elt->getMeasureElementMeasurePosition ());
+      elt->getMeasurePosition ());
      // */
 }
 

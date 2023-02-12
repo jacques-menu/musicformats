@@ -387,24 +387,17 @@ std::string language::handleOptionsAndArgumentsFromArgcArgv () const
 //_______________________________________________________________________________
 // passes
 
-std::string language::createAnMXSRFromAMusicXMLFileOrStdin () const
+std::string language::createAnMXSRFromAMusicXMLStream () const
 {
-  mfIndentedStringStream iss;
-
-  iss <<
-    "Reads the contents of a MusicXML file or stdin ('-')" <<
-    '\n' <<
-    "and converts it to an MXSR (MusicXML tree);";
-
-  return iss.str ();
+  return "Create an MXSR (MusicXML tree) from a MusicXML text stream";
 }
 std::string language::createAnMXSRFromAMusicXMLDescriptor () const
 {
-  return "Create an MXSR from a MusicXML descriptor";
+  return "Create an MXSR (MusicXML tree) from a MusicXML descriptor";
 }
 std::string language::createAnMXSRFromAMusicXMLBuffer () const
 {
-  return "Create an MXSR from a MusicXML buffer";
+  return "Create an MXSR (MusicXML tree) from a MusicXML buffer";
 }
 
 std::string language::createAnMSRSqueletonFromTheMXSR () const

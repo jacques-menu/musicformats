@@ -45,30 +45,30 @@ namespace MusicFormats
 msrMeasureElement::msrMeasureElement (
   int inputLineNumber)
     : msrElement (inputLineNumber)
-//       fMeasureElementMeasureMoment (
+//       fMeasureMoment (
 //         msrMoment::K_MEASURE_POSITION_UNKNOWN, msrMoment::K_MEASURE_POSITION_UNKNOWN),
-//       fMeasureElementVoiceMoment (
+//       fVoiceMoment (
 //         msrMoment::K_MEASURE_POSITION_UNKNOWN, msrMoment::K_MEASURE_POSITION_UNKNOWN)
 {
-  fMeasureElementSoundingWholeNotes = Rational (0, 1),
+  fSoundingWholeNotes = Rational (0, 1),
 
-  fMeasureElementMeasurePosition = msrMoment::K_MEASURE_POSITION_UNKNOWN;
-  fMeasureElementVoicePosition   = msrMoment::K_MEASURE_POSITION_UNKNOWN;
+  fMeasurePosition = msrMoment::K_MEASURE_POSITION_UNKNOWN;
+  fVoicePosition   = msrMoment::K_MEASURE_POSITION_UNKNOWN;
 }
 
 msrMeasureElement::~msrMeasureElement ()
 {}
 
-void msrMeasureElement::setMeasureElementSoundingWholeNotes (
+void msrMeasureElement::setSoundingWholeNotes (
   const Rational&    wholeNotes,
   const std::string& context)
 {
-  doSetMeasureElementSoundingWholeNotes (
+  doSetSoundingWholeNotes (
     wholeNotes,
     context);
 }
 
-void msrMeasureElement::doSetMeasureElementSoundingWholeNotes (
+void msrMeasureElement::doSetSoundingWholeNotes (
   const Rational&    wholeNotes,
   const std::string& context)
 {
@@ -104,10 +104,10 @@ void msrMeasureElement::doSetMeasureElementSoundingWholeNotes (
     "wholeNotes == K_WHOLE_NOTES_UNKNOWN");
 #endif
 
-  fMeasureElementSoundingWholeNotes = wholeNotes;
+  fSoundingWholeNotes = wholeNotes;
 }
 
-void msrMeasureElement::setMeasureElementMeasurePosition (
+void msrMeasureElement::setMeasurePosition (
   const S_msrMeasure& measure,
   const Rational&     measurePosition,
   const std::string&  context)
@@ -126,7 +126,7 @@ void msrMeasureElement::setMeasureElementMeasurePosition (
       asString () <<
       " to '" << measurePosition <<
       "' (was '" <<
-      fMeasureElementMeasurePosition <<
+      fMeasurePosition <<
       "') in measure " <<
       measure->asShortString () <<
       " (measureElementMeasureNumber: " <<
@@ -151,7 +151,7 @@ void msrMeasureElement::setMeasureElementMeasurePosition (
 #endif
 
   // set measure element's measure position
-  fMeasureElementMeasurePosition = measurePosition;
+  fMeasurePosition = measurePosition;
 
 //   // compute measure element's voice position
 // // if (false) { // JMI CAFE v0.9.66
@@ -163,7 +163,7 @@ void msrMeasureElement::setMeasureElementMeasurePosition (
 //       measurePosition;
 
   // set figured bass's voice position
-//   setMeasureElementVoicePosition ( // JMI v0.9.66
+//   setVoicePosition ( // JMI v0.9.66
 //     voicePosition,
 //     context);
 // }
@@ -177,7 +177,7 @@ void msrMeasureElement::setMeasureElementMeasurePosition (
 //   voice->
 //     incrementCurrentVoicePosition (
 //       fFiguredBassUpLinkToNote->
-//         getMeasureElementSoundingWholeNotes ());
+//         getSoundingWholeNotes ());
 }
 
 bool msrMeasureElement::compareMeasureElementsByIncreasingMeasurePosition (
@@ -186,13 +186,13 @@ bool msrMeasureElement::compareMeasureElementsByIncreasingMeasurePosition (
 {
   return
     bool (
-      first->getMeasureElementMeasurePosition ()
+      first->getMeasurePosition ()
         <
-      second->getMeasureElementMeasurePosition ()
+      second->getMeasurePosition ()
     );
 }
 
-void msrMeasureElement::setMeasureElementVoicePosition (
+void msrMeasureElement::setVoicePosition (
   const Rational&    voicePosition,
   const std::string& context)
 {
@@ -257,10 +257,10 @@ void msrMeasureElement::setMeasureElementVoicePosition (
   }
 #endif
 
-  fMeasureElementVoicePosition = voicePosition;
+  fVoicePosition = voicePosition;
 }
 
-// void msrMeasureElement::setMeasureElementMeasureMoment (
+// void msrMeasureElement::setMeasureMoment (
 //   const msrMoment& measureMoment,
 //   const std::string&    context)
 // {
@@ -271,7 +271,7 @@ void msrMeasureElement::setMeasureElementVoicePosition (
 //       asString () <<
 //       " to '" << measureMoment <<
 //       "' (was '" <<
-//       fMeasureElementMeasureMoment.asString () <<
+//       fMeasureMoment.asString () <<
 // //       "') " <<
 // //       in measure " << JMI v0.9.66
 // //       measure->asShortString () <<
@@ -284,10 +284,10 @@ void msrMeasureElement::setMeasureElementVoicePosition (
 //   }
 // #endif
 //
-//   fMeasureElementMeasureMoment = measureMoment;
+//   fMeasureMoment = measureMoment;
 // }
 //
-// void msrMeasureElement::setMeasureElementVoiceMoment (
+// void msrMeasureElement::setVoiceMoment (
 //   const msrMoment& voiceMoment,
 //   const std::string&    context)
 // {
@@ -314,7 +314,7 @@ void msrMeasureElement::setMeasureElementVoicePosition (
 //     "voiceMoment == msrMoment::K_MOMENT_UNKNOWN");
 // #endif
 //
-//   fMeasureElementVoiceMoment = voiceMoment;
+//   fVoiceMoment = voiceMoment;
 // }
 
 void msrMeasureElement::acceptIn (basevisitor* v)

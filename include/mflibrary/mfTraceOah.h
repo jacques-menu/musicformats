@@ -63,6 +63,8 @@ class EXP traceOahGroup : public oahGroup
 
     void                  initializeRepeatsToSlashesTraceOah ();
 
+    void                  initializeDurationsTraceOah ();
+
     void                  initializeNotesTraceOah ();
 
     void                  initializeNotesAttachmentsTraceOah ();
@@ -396,6 +398,14 @@ class EXP traceOahGroup : public oahGroup
     Bool                  getTraceSlashes () const
                               { return fTraceSlashes; }
 
+
+    // durations
+    // --------------------------------------
+
+    void                  setTraceDurations ()
+                              { fTraceDurations = true; }
+    Bool                  getTraceDurations () const
+                              { return fTraceDurations; }
 
     // notes
     // --------------------------------------
@@ -931,6 +941,12 @@ class EXP traceOahGroup : public oahGroup
     Bool                  fTraceBeatRepeats;
     // slashes
     Bool                  fTraceSlashes;
+
+
+    // notes
+    // --------------------------------------
+
+    Bool                  fTraceDurations;
 
 
     // notes

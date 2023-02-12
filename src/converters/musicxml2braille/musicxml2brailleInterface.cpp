@@ -650,7 +650,7 @@ EXP mfMusicformatsErrorKind musicxmlFile2braille (
       createSXMLFileFromFile (
         fileName,
         mfPassIDKind::kMfPassID_1,
-        gLanguage->createAnMXSRFromAMusicXMLFileOrStdin ());
+        gLanguage->createAnMXSRFromAMusicXMLStream ());
 
   if (sxmlfile) {
     return
@@ -675,7 +675,7 @@ mfMusicformatsErrorKind convertMusicxmlFile2brailleWithHandler (
       createSXMLFileFromFile (
         fileName,
         mfPassIDKind::kMfPassID_1,
-        gLanguage->createAnMXSRFromAMusicXMLFileOrStdin ());
+        gLanguage->createAnMXSRFromAMusicXMLStream ());
 
   if (sxmlfile) {
     return

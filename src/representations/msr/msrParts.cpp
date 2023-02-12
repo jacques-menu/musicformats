@@ -794,7 +794,7 @@ void msrPart::registerShortestNoteInPartIfRelevant (const S_msrNote& note)
   Rational
     noteSoundingWholeNotes =
       note->
-        getMeasureElementSoundingWholeNotes ();
+        getSoundingWholeNotes ();
 
 /* JMI
   Rational
@@ -3032,16 +3032,16 @@ void msrPart::printFull (std::ostream& os) const
     "fPartID" << ": \"" <<
     fPartID << "\"" <<
     std::endl <<
+    std::setw (fieldWidth) <<
+    "fPartName" << ": \"" <<
+    fPartName << "\"" <<
+    std::endl <<
 
     std::setw (fieldWidth) <<
     "fPartMsrName" << ": \"" <<
     fPartMsrName << "\"" <<
     std::endl <<
 
-    std::setw (fieldWidth) <<
-    "fPartName" << ": \"" <<
-    fPartName << "\"" <<
-    std::endl <<
     std::setw (fieldWidth) <<
     "fPartNameDisplayText" << ": \"" <<
     fPartNameDisplayText << "\"" <<
@@ -3464,6 +3464,11 @@ void msrPart::print (std::ostream& os) const
     std::endl <<
 
     std::setw (fieldWidth) <<
+    "fPartName" << ": \"" <<
+    fPartName << "\"" <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
     "fPartMsrName" << ": \"" <<
     fPartMsrName << "\"" <<
     std::endl <<
@@ -3471,11 +3476,6 @@ void msrPart::print (std::ostream& os) const
     std::setw (fieldWidth) <<
     "fPartAbsoluteNumber" << ": " <<
     fPartAbsoluteNumber <<
-    std::endl <<
-
-    std::setw (fieldWidth) <<
-    "fPartName" << ": \"" <<
-    fPartName << "\"" <<
     std::endl;
 
   os << std::left <<
@@ -3614,15 +3614,15 @@ void msrPart::printSummary (std::ostream& os) const
     "fPartID" << ": \"" <<
     fPartID << "\"" <<
     std::endl <<
+    std::setw (fieldWidth) <<
+    "fPartName" << ": \"" <<
+    fPartName << "\"" <<
+    std::endl <<
+
 
     std::setw (fieldWidth) <<
     "fPartMsrName" << ": \"" <<
     fPartMsrName << "\"" <<
-    std::endl <<
-
-    std::setw (fieldWidth) <<
-    "fPartName" << ": \"" <<
-    fPartName << "\"" <<
     std::endl <<
 
     std::setw (fieldWidth) <<

@@ -343,11 +343,16 @@ EXP mfIndentedStringStream& operator << (
 EXP mfIndentedStringStream& operator << (
   mfIndentedStringStream& iss, const unsigned long int& elt);
 
+#ifdef WIN32
+EXP mfIndentedStringStream& operator << (
+  mfIndentedStringStream& iss, const size_t& elt);
+#endif
+
 EXP mfIndentedStringStream& operator << (
   mfIndentedStringStream& iss, const float& elt);
 
 EXP mfIndentedStringStream& operator << (
-  mfIndentedStringStream& iss, const Rational& rat);
+  mfIndentedStringStream& iss, const Rational& elt);
 
 //______________________________________________________________________________
 // the hidden global output indenter for general use

@@ -600,7 +600,7 @@ EXP mfMusicformatsErrorKind msdlFile2lilypond (
 //       createSXMLFileFromFile (
 //         fileName,
 		//     mfPassIDKind::kMfPassID_1,
-//         gLanguage->createAnMXSRFromAMusicXMLFileOrStdin ());
+//         gLanguage->createAnMXSRFromAMusicXMLStream ());
 //
 //   if (sxmlfile) {
 //     return
@@ -625,7 +625,7 @@ mfMusicformatsErrorKind convertMsdlFile2lilypondWithHandler ( // JMI ??? v0.9.66
 //       createSXMLFileFromFile (
 //         fileName,
 		//     mfPassIDKind::kMfPassID_1,
-//         gLanguage->createAnMXSRFromAMusicXMLFileOrStdin ());
+//         gLanguage->createAnMXSRFromAMusicXMLStream ());
 //
 //   if (sxmlfile) {
 //     return

@@ -2403,8 +2403,10 @@ class EXP mxsr2msrTranslator :
     // ------------------------------------------------------
 
     int                       fCurrentForwardDivisions;
-    int                       fCurrentForwardVoiceNumber;
+
     int                       fCurrentForwardStaffNumber;
+    int                       fCurrentForwardVoiceNumber;
+
     Bool                      fOnGoingForward;
 
 

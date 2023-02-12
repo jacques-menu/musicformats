@@ -137,7 +137,7 @@ void msrMeasure::appendElementToMeasure (const S_msrMeasureElement& elem)
 
   // set elem's measure position
   elem->
-    setMeasureElementMeasurePosition (
+    setMeasurePosition (
       this,
       fCurrentMeasureWholeNotesDuration,
       "appendElementToMeasure()");
@@ -149,7 +149,7 @@ if (false) // JMI CAFE
   incrementCurrentMeasureWholeNotesDuration (
     inputLineNumber,
     elem->
-      getMeasureElementSoundingWholeNotes ());
+      getSoundingWholeNotes ());
 }
 \end{lstlisting}
 
@@ -198,7 +198,7 @@ void msrMeasure::appendHarmonyToMeasure (const S_msrHarmony& harmony)
   Rational
     harmonySoundingWholeNotes =
       harmony->
-        getMeasureElementSoundingWholeNotes ();
+        getSoundingWholeNotes ();
 
   // account for harmony duration in measure whole notes
   incrementCurrentMeasureWholeNotesDuration (
@@ -249,7 +249,7 @@ void msrMeasure::appendHarmonyToMeasureClone (const S_msrHarmony& harmony)
   Rational
     harmonySoundingWholeNotes =
       harmony->
-        getMeasureElementSoundingWholeNotes ();
+        getSoundingWholeNotes ();
 
   // account for harmony duration in measure whole notes
   incrementCurrentMeasureWholeNotesDuration (

@@ -458,7 +458,7 @@ EXP mfMusicformatsErrorKind musicxmlFile2guido (
       createSXMLFileFromFile (
         fileName,
         mfPassIDKind::kMfPassID_1,
-        gLanguage->createAnMXSRFromAMusicXMLFileOrStdin ());
+        gLanguage->createAnMXSRFromAMusicXMLStream ());
 
   if (sxmlfile) {
     return
@@ -483,7 +483,7 @@ mfMusicformatsErrorKind convertMusicxmlFile2guidoWithHandler (
       createSXMLFileFromFile (
         fileName,
         mfPassIDKind::kMfPassID_1,
-        gLanguage->createAnMXSRFromAMusicXMLFileOrStdin ());
+        gLanguage->createAnMXSRFromAMusicXMLStream ());
 
   if (sxmlfile) {
     return

@@ -104,6 +104,7 @@ void mfTimingItemsList::appendTimingItem (
 void mfTimingItemsList::doPrint (std::ostream& os) const
 {
   // printing the details
+
   int
     activityWidth    = 1,
     descriptionWidth = 1,
@@ -152,11 +153,79 @@ void mfTimingItemsList::doPrint (std::ostream& os) const
       secondsWidth      =  9;
       break;
   } // switch
+
+  // compute the timing items columns widths
+  for (S_mfTimingItem theTimingItem : fTimingItemsList) {
+    // take care of multi-line descriptions
+    std::string
+      activity =
+        theTimingItem->getActivity ();
+
+    // if activity contains non-diacritic characters (UTF-8),
+    // that fouls std::setw() which accounts two characters for them
+    int
+      activityTwoBytesWideCharactersInString =
+        countTwoBytesWideCharactersInString (activity);
+
+    size_t activitySize =
+      activity.size () - activityTwoBytesWideCharactersInString;
+
+    gLog << "--> activitySize: " << activitySize << std::endl;
+    gLog << "--> activityTwoBytesWideCharactersInString: " << activityTwoBytesWideCharactersInString << std::endl << std::endl;
+
+    if (activitySize > activityWidth) {
+      activityWidth = activitySize;
+    }
+
+    std::string
+      description =
+        theTimingItem->getDescription ();
+
+    // if description contains non-diacritic characters (UTF-8),
+    // that fouls std::setw() which accounts two characters for them
+    int
+      descriptionTwoBytesWideCharactersInString =
+        countTwoBytesWideCharactersInString (description);
+
+    size_t descriptionSize =
+      description.size () - descriptionTwoBytesWideCharactersInString;
+
+    gLog << "--> descriptionSize: " << descriptionSize << std::endl;
+    gLog << "--> descriptionTwoBytesWideCharactersInString: " << descriptionTwoBytesWideCharactersInString << std::endl << std::endl;
+
+    if (descriptionSize > descriptionWidth) {
+      descriptionWidth = descriptionSize;
+    }
+
+    std::string
+      kind =
+        mfTimingItemKindAsString (
+          theTimingItem->getTimingItemKind ());
+
+    // if kind contains non-diacritic characters (UTF-8),
+    // that fouls std::setw() which accounts two characters for them
+    int
+      kindTwoBytesWideCharactersInString =
+        countTwoBytesWideCharactersInString (kind);
+
+    size_t kindSize =
+      kind.size () - kindTwoBytesWideCharactersInString;
+
+    gLog << "--> kindSize: " << kindSize << std::endl;
+    gLog << "--> kindTwoBytesWideCharactersInString: " << kindTwoBytesWideCharactersInString << std::endl << std::endl;
+
+    if (kindSize > kindWidth) {
+      kindWidth = kindSize;
+    }
+  } // for
+
   secondsPrecision = secondsWidth - 4; // to leave room for large numbers
 
-//   gLog << "descriptionWidth: " << descriptionWidth << std::endl;
-//   gLog << "secondsWidth: " << secondsWidth << std::endl;
-//   gLog << "secondsPrecision: " << secondsPrecision << std::endl;
+  gLog << "activityWidth: " << activityWidth << std::endl;
+  gLog << "descriptionWidth: " << descriptionWidth << std::endl;
+  gLog << "kindWidth: " << kindWidth << std::endl;
+  gLog << "secondsWidth: " << secondsWidth << std::endl;
+  gLog << "secondsPrecision: " << secondsPrecision << std::endl;
 
   //  print the timing items columns headers and separators
   os << std::left <<
@@ -186,12 +255,12 @@ void mfTimingItemsList::doPrint (std::ostream& os) const
     mfReplicateString ("-", secondsWidth) <<
     std::endl << std::endl;
 
+  // print the timing items
   clock_t
     totalClock          = 0,
     totalMandatoryClock = 0,
     totalOptionalClock  = 0;
 
-  // print the timing items
   for (S_mfTimingItem theTimingItem : fTimingItemsList) {
     clock_t timingItemClock =
       theTimingItem->getEndClock () - theTimingItem->getStartClock ();
@@ -222,9 +291,9 @@ void mfTimingItemsList::doPrint (std::ostream& os) const
       descriptionWidth,
       os);
 
-    os << std::left <<
-      std::setw (descriptionWidth) <<
-      description;
+//     os << std::left <<
+//       std::setw (descriptionWidth) <<
+//       description;
 
     // if description contains non-diacritic characters (UTF-8),
     // that fouls std::setw() which accounts two characters for them

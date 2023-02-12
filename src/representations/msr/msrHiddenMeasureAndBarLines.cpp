@@ -197,7 +197,7 @@ std::string msrHiddenMeasureAndBarLine::asString () const
 
   ss <<
     "HiddenMeasureAndBarLine" <<
-    ", measurePosition: " << fMeasureElementMeasurePosition <<
+    ", measurePosition: " << fMeasurePosition <<
     ", line " << fInputLineNumber;
 
   return ss.str ();

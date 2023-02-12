@@ -157,7 +157,7 @@ msrChord::msrChord (
 
   fChordUpLinkToMeasure = upLinkToMeasure;
 
-  doSetMeasureElementSoundingWholeNotes (
+  doSetSoundingWholeNotes (
     chordSoundingWholeNotes,
     "msrChord::msrChord()");
 
@@ -204,7 +204,7 @@ S_msrChord msrChord::createChordNewbornClone (
       msrChord::create (
         fInputLineNumber,
         gNullMeasure, // set later in setChordUpLinkToMeasure()
-        fMeasureElementSoundingWholeNotes,
+        fSoundingWholeNotes,
         fChordDisplayWholeNotes,
         fChordGraphicDurationKind);
 
@@ -240,7 +240,7 @@ S_msrChord msrChord::createChordNewbornClone (
 //       " to " <<
 //       measurePosition <<
 //       " (was " <<
-//       fMeasureElementMeasurePosition <<
+//       fMeasurePosition <<
 //       ") in measure " <<
 //       measure->asShortString () <<
 //       " (measureElementMeasureNumber: " <<
@@ -261,7 +261,7 @@ S_msrChord msrChord::createChordNewbornClone (
 // #endif
 //
 //   // set chord's measure position
-//   fMeasureElementMeasurePosition = measurePosition;
+//   fMeasurePosition = measurePosition;
 // }
 
 // uplink to measure
@@ -496,7 +496,7 @@ void msrChord::setChordGraceNotesGroupLinkAfter (
     chordChordGraceNotesGroupLinkAfter;
 }
 
-void msrChord::setMeasureElementMeasurePosition (
+void msrChord::setMeasurePosition (
   const S_msrMeasure& measure,
   const Rational&     measurePosition,
   const std::string&  context)
@@ -515,7 +515,7 @@ void msrChord::setMeasureElementMeasurePosition (
       asString () <<
       " to '" << measurePosition <<
       "' (was '" <<
-      fMeasureElementMeasurePosition <<
+      fMeasurePosition <<
       "') in measure " <<
       measure->asShortString () <<
       " (measureElementMeasureNumber: " <<
@@ -532,7 +532,7 @@ void msrChord::setMeasureElementMeasurePosition (
 #endif
 
   // handle the chord itself
-  msrMeasureElement::setMeasureElementMeasurePosition (
+  msrMeasureElement::setMeasurePosition (
     measure,
     measurePosition,
     context);
@@ -576,14 +576,14 @@ void msrChord::setChordMembersMeasurePosition (
 
     // set note's measure position // JMI v0.9.66
     note->
-      setMeasureElementMeasurePosition (
+      setMeasurePosition (
         measure,
         measurePosition, // they all share the same one
         "setChordMembersMeasurePosition()");
 
 //    // set note's voice position JMI v0.9.66
 //       note->
-//         setMeasureElementVoicePosition (
+//         setVoicePosition (
 //           voicePosition,
 //           context); // they all share the same one
   } // for
@@ -1222,9 +1222,9 @@ void msrChord::finalizeChord (
       asString () <<
       "', line " << inputLineNumber <<
       std::endl <<
-      "fMeasureElementMeasurePosition = " <<
+      "fMeasurePosition = " <<
       std::endl <<
-      fMeasureElementMeasurePosition <<
+      fMeasurePosition <<
       std::endl;
 
     gWaeHandler->waeTrace (
@@ -1237,7 +1237,7 @@ void msrChord::finalizeChord (
   if (false) // JMI v0.9.67 MERDUM
   setChordMembersMeasurePosition (
     fChordUpLinkToMeasure,
-    fMeasureElementMeasurePosition);
+    fMeasurePosition);
 }
 
 void msrChord::acceptIn (basevisitor* v)
@@ -1709,7 +1709,7 @@ std::string msrChord::asString () const
         note->notePitchAsString () <<
         ", whole notes: " <<
         " sounding " <<
-        note->getMeasureElementSoundingWholeNotes () <<
+        note->getSoundingWholeNotes () <<
         ", displayed " <<
         note->getNoteDisplayWholeNotes () <<
         ", octave: " <<
@@ -1748,7 +1748,7 @@ std::string msrChord::asShortString () const
       ss <<
         note->notePitchAsString () <<
         " snd: " <<
-        note->getMeasureElementSoundingWholeNotes () <<
+        note->getSoundingWholeNotes () <<
         ", disp: " <<
         note->getNoteDisplayWholeNotes () <<
         ", " <<
@@ -1788,9 +1788,9 @@ void msrChord::printFull (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fMeasureElementMeasurePosition" << ": " << fMeasureElementMeasurePosition <<
+    "fMeasurePosition" << ": " << fMeasurePosition <<
     std::setw (fieldWidth) <<
-    "fMeasureElementSoundingWholeNotes" << ": " << fMeasureElementSoundingWholeNotes <<
+    "fSoundingWholeNotes" << ": " << fSoundingWholeNotes <<
     std::endl <<
     std::setw (fieldWidth) <<
     "fChordDisplayWholeNotes" << ": " << fChordDisplayWholeNotes <<
@@ -1800,7 +1800,7 @@ void msrChord::printFull (std::ostream& os) const
     fChordUpLinkToMeasure->getMeasureNumber () <<
     std::endl <<
 //     std::setw (fieldWidth) <<
-//     "fMeasureElementVoicePosition" << ": " << fMeasureElementVoicePosition <<
+//     "fVoicePosition" << ": " << fVoicePosition <<
 //     std::endl <<
     std::setw (fieldWidth) <<
     "chordMeasureFullLength" << ": " << chordMeasureFullLength <<
@@ -2583,7 +2583,7 @@ void msrChord::print (std::ostream& os) const
   os << std::left <<
     std::setw (fieldWidth) <<
  // JMI   "chordSoundingWholeNotes" << ": " << fChordSoundingWholeNotes <<
-    "fMeasureElementSoundingWholeNotes" << ": " << fMeasureElementSoundingWholeNotes <<
+    "fSoundingWholeNotes" << ": " << fSoundingWholeNotes <<
     std::endl <<
     std::setw (fieldWidth) <<
     "fChordDisplayWholeNotes" << ": " << fChordDisplayWholeNotes <<
@@ -2603,10 +2603,10 @@ void msrChord::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fMeasureElementMeasurePosition" << ": " << fMeasureElementMeasurePosition <<
+    "fMeasurePosition" << ": " << fMeasurePosition <<
     std::endl <<
 //     std::setw (fieldWidth) <<
-//     "fMeasureElementVoicePosition" << ": " << fMeasureElementVoicePosition <<
+//     "fVoicePosition" << ": " << fVoicePosition <<
 //     std::endl <<
     std::setw (fieldWidth) <<
     "chordMeasureFullLength" << ": " << chordMeasureFullLength <<

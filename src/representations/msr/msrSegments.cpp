@@ -2039,7 +2039,7 @@ void msrSegment::padUpToMeasurePositionInSegment (
 void msrSegment::backupByWholeNotesStepLengthInSegment (
   int     inputLineNumber,
   const Rational&
-          backupTargetMeasureElementMeasurePosition)
+          backupTargetMeasurePosition)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (
@@ -2051,7 +2051,7 @@ void msrSegment::backupByWholeNotesStepLengthInSegment (
 
     ss <<
       "Backup by a '" <<
-      backupTargetMeasureElementMeasurePosition <<
+      backupTargetMeasurePosition <<
       "' whole notes step length in segment '" <<
       fSegmentAbsoluteNumber <<
       ", segmentDebugNumber: '" <<
@@ -2072,7 +2072,7 @@ void msrSegment::backupByWholeNotesStepLengthInSegment (
     fSegmentLastMeasure->
       backupByWholeNotesStepLengthInMeasure (
         inputLineNumber,
-        backupTargetMeasureElementMeasurePosition);
+        backupTargetMeasurePosition);
   }
 }
 
@@ -2105,10 +2105,10 @@ void msrSegment::appendPaddingNoteToSegment (
 
   ++gIndenter;
 
-  if (fSegmentMeasuresFlatList.size ()) { // JMI BOFBOF
+  if (fSegmentMeasuresFlatList.size ()) { // JMI BOFBOF v0.9.67
     // append a padding note to the segment's last measure
     fSegmentLastMeasure->
-      appendPaddingSkipNoteToMeasure (
+      appendPaddingSkipNoteToMeasure ( // JMI why not a rest??? v0.9.67
         inputLineNumber,
         forwardStepLength);
   }

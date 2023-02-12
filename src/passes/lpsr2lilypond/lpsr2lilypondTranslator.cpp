@@ -1336,7 +1336,7 @@ std::string lpsr2lilypondTranslator::pitchedRestAsLilypondString (
     durationAsLilypondString (
       noteInputLineNumber,
       note->
-        getMeasureElementSoundingWholeNotes ());
+        getSoundingWholeNotes ());
 
   // generate the '\rest'
   ss <<
@@ -2047,7 +2047,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteRegularInMeasure (
   Rational
     noteSoundingWholeNotes =
       note->
-        getMeasureElementSoundingWholeNotes ();
+        getSoundingWholeNotes ();
 
   // generate the note duration
   fLilypondCodeStream <<
@@ -2174,7 +2174,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteRestInMeasure (
     // get the note sounding whole notes
     Rational
       noteSoundingWholeNotes =
-        note->getMeasureElementSoundingWholeNotes ();
+        note->getSoundingWholeNotes ();
 
     // get note's voice
     S_msrVoice
@@ -2335,7 +2335,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteSkipInMeasure (
     durationAsLilypondString (
       inputLineNumber,
       note->
-        getMeasureElementSoundingWholeNotes ());
+        getSoundingWholeNotes ());
 
   if (gGlobalLpsr2lilypondOahGroup->getInputLineNumbers ()) {
     // generate information and line number as a comment
@@ -2399,7 +2399,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteUnpitchedInMeasure (
   Rational
     noteSoundingWholeNotes =
       note->
-        getMeasureElementSoundingWholeNotes ();
+        getSoundingWholeNotes ();
 
   // generate the note duration
   fLilypondCodeStream <<
@@ -3134,7 +3134,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteInDoubleTremolo (
   fLilypondCodeStream <<
     durationAsLilypondString (
       inputLineNumber,
-      note->getMeasureElementSoundingWholeNotes ());
+      note->getSoundingWholeNotes ());
 
   // handle delayed ornaments if any
   if (note->getNoteDelayedTurnOrnament ()) {
@@ -4749,7 +4749,7 @@ std::string lpsr2lilypondTranslator::harmonyAsLilypondString (
       durationAsLilypondString (
         inputLineNumber,
         harmony->
-          getMeasureElementSoundingWholeNotes ());
+          getSoundingWholeNotes ());
   }
   else {
     // use harmony display whole notes and tuplet factor
@@ -5204,7 +5204,7 @@ std::string lpsr2lilypondTranslator::figuredBassAsLilypondString (
       durationAsLilypondString (
         inputLineNumber,
         figuredBass->
-          getMeasureElementSoundingWholeNotes ());
+          getSoundingWholeNotes ());
   }
   else {
     // use figured bass element display whole notes and tuplet factor
@@ -5421,7 +5421,7 @@ void lpsr2lilypondTranslator::generateInputLineNumberAndOrMeasurePositionAsAComm
     // generate the measure position as a comment
     fLilypondCodeStream <<
       "memp: " <<
-      measureElement->getMeasureElementMeasurePosition () <<
+      measureElement->getMeasurePosition () <<
       ' ';
   }
 
@@ -11115,7 +11115,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrPart& elt)
 		std::stringstream ss;
 
     ss <<
-      std::endl <<
+//       std::endl <<
       "<!--=== part \"" << partCombinedName << "\"" <<
       ", line " << elt->getInputLineNumber () << " ===-->" <<
       std::endl;
@@ -11394,7 +11394,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrVoice& elt)
 		std::stringstream ss;
 
     ss <<
-      std::endl <<
+//       std::endl <<
       "<!--=== voice \"" << elt->getVoiceName () << "\"" <<
       ", line " << elt->getInputLineNumber () << " ===-->" <<
       std::endl;
@@ -12471,8 +12471,11 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
 		std::stringstream ss;
 
     ss <<
-      std::endl <<
-      "% <!--=== measure '" << measureNumber << "' start, " <<
+//       std::endl <<
+      "<!--=== " <<
+      "part \"" << fCurrentPart->getPartName () << "\"" <<
+      " (partID \"" << fCurrentPart->getPartID () << "\")" <<
+      ", measure \"" << measureNumber << "\"" <<
       ", measureEndRegularKind = '" << measureEndRegularKind <<
       ", measurePuristNumber = '" << measurePuristNumber <<
       ", fOnGoingMultipleFullBarRests: " << fOnGoingMultipleFullBarRests <<
@@ -12886,8 +12889,11 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMeasure& elt)
 		std::stringstream ss;
 
     ss <<
-      std::endl <<
-      "% <!--=== measure '" << measureNumber << "' end, " <<
+//       std::endl <<
+      "<!--=== " <<
+      "part \"" << fCurrentPart->getPartName () << "\"" <<
+      " (partID \"" << fCurrentPart->getPartID () << "\")" <<
+      ", measure \"" << measureNumber << "\"" <<
       ", measureEndRegularKind: " << measureEndRegularKind <<
       ", measurePuristNumber: '" << measurePuristNumber << "'" <<
       ", fOnGoingMultipleFullBarRests: " << fOnGoingMultipleFullBarRests <<
@@ -16448,7 +16454,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrDoubleTremolo& elt)
 
     fLilypondCodeStream <<
       "% doubleTremoloSoundingWholeNotes = " <<
-      elt->getMeasureElementSoundingWholeNotes () <<
+      elt->getSoundingWholeNotes () <<
       std::endl <<
 
       "% gdoubleTremoloElementsDuration = " <<
@@ -19028,7 +19034,7 @@ void lpsr2lilypondTranslator::generateNoteTechnicalsWithStrings (
               {
                 Rational
                   noteSoundingWholeNotes =
-                    note->getMeasureElementSoundingWholeNotes ();
+                    note->getSoundingWholeNotes ();
 
                 Rational
                   halfWholeNotes =
@@ -19060,7 +19066,7 @@ void lpsr2lilypondTranslator::generateNoteTechnicalsWithStrings (
               {
                 Rational
                   noteSoundingWholeNotes =
-                    note->getMeasureElementSoundingWholeNotes ();
+                    note->getSoundingWholeNotes ();
 
                 Rational
                   halfWholeNotes =
@@ -20671,7 +20677,7 @@ void lpsr2lilypondTranslator::generateCodeRightAfterChordContents (
     chord->getChordIsSecondChordInADoubleTremolo ()) {
       // generate chord duration
       fLilypondCodeStream <<
-        chord->getMeasureElementSoundingWholeNotes ();
+        chord->getSoundingWholeNotes ();
   }
 
   else {

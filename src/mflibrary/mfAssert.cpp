@@ -45,5 +45,32 @@ void mfAssert (
   }
 }
 
+void mfAssertWithInputLocalisation (
+  const std::string& sourceCodeFileName,
+  int                sourceCodeLineNumber,
+  Bool               condition,
+  const std::string& inputSourceName,
+  int                inputLineNumber,
+  const std::string& messageIfFalse)
+{
+  if (! condition) {
+    gIndenter.resetToZero ();
+
+    gLog <<
+      "#### mfAssert" <<
+      ", " << inputSourceName << ":" << inputLineNumber <<
+      ", " << sourceCodeFileName << ":" << sourceCodeLineNumber <<
+      " -- " << messageIfFalse <<
+      " - quitting." <<
+      std::endl;
+
+#ifdef MF_ABORT_TO_DEBUG_ERRORS_IS_ENABLED
+  abort ();
+#endif
+
+    throw mfAssertException (messageIfFalse);
+  }
+}
+
 
 }

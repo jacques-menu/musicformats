@@ -452,7 +452,7 @@ class EXP msrVoice : public msrElement
 
     void                  backupByWholeNotesStepLengthInVoice (
                             int             inputLineNumber,
-                            const Rational& backupTargetMeasureElementMeasurePosition);
+                            const Rational& backupTargetMeasurePosition);
 
     // clef, key, time signature
 

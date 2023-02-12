@@ -232,7 +232,7 @@ void bsrAsciiBrailleGenerator::generateCodeForBrailleCell (
           "'";
         bsr2brailleInternalError (
           gServiceRunData->getInputSourceName (),
-          -999, // inputLineNumber, TICINO JMI
+          -901, // inputLineNumber, TICINO JMI
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -418,7 +418,7 @@ void bsrUTF8BrailleGenerator::generateCodeForBrailleCell (
           "'";
         bsr2brailleInternalError (
           gServiceRunData->getInputSourceName (),
-          -999, // TICINO inputLineNumber,
+          -901, // TICINO inputLineNumber,
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -762,7 +762,7 @@ Octal Escape Sequence  \342\240\203*/
           "'";
         bsr2brailleInternalError (
           gServiceRunData->getInputSourceName (),
-          -999, // TICINO inputLineNumber,
+          -902, // TICINO inputLineNumber,
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -985,7 +985,7 @@ Octal Escape Sequence  \342\240\203
           "'";
         bsr2brailleInternalError (
           gServiceRunData->getInputSourceName (),
-          -999, // TICINO inputLineNumber,
+          -903, // TICINO inputLineNumber,
           __FILE__, __LINE__,
           ss.str ());
       }

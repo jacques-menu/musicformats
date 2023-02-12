@@ -29,11 +29,11 @@ namespace MusicFormats
 EXP extern const std::string K_BRAILLE_USE_ENCODING_IN_FILE_NAME_LONG_NAME;
 EXP extern const std::string K_BRAILLE_USE_ENCODING_IN_FILE_NAME_SHORT_NAME;
 
-EXP extern const std::string K_BRAILLE_OUTPUT_KIND_LONG_NAME;
-EXP extern const std::string K_BRAILLE_OUTPUT_KIND_SHORT_NAME;
+// EXP extern const std::string K_BRAILLE_OUTPUT_KIND_LONG_NAME;
+// EXP extern const std::string K_BRAILLE_OUTPUT_KIND_SHORT_NAME;
 
-EXP extern const std::string K_BRAILLE_UTF_KIND_LONG_NAME;
-EXP extern const std::string K_BRAILLE_UTF_KIND_SHORT_NAME;
+// EXP extern const std::string K_BRAILLE_UTF_KIND_LONG_NAME;
+// EXP extern const std::string K_BRAILLE_UTF_KIND_SHORT_NAME;
 
 EXP extern const std::string K_BRAILLE_BYTE_ORDERING_KIND_LONG_NAME;
 EXP extern const std::string K_BRAILLE_BYTE_ORDERING_KIND_SHORT_NAME;

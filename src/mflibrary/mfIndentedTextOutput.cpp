@@ -398,6 +398,17 @@ EXP mfIndentedStringStream& operator << (
   return iss;
 }
 
+#ifdef WIN32
+EXP mfIndentedStringStream& operator << (
+  mfIndentedStringStream& iss, const size_t& elt)
+{
+  iss.getStringstream () <<
+    elt;
+
+  return iss;
+}
+#endif
+
 EXP mfIndentedStringStream& operator << (
   mfIndentedStringStream& iss, const float& elt)
 {
@@ -408,11 +419,11 @@ EXP mfIndentedStringStream& operator << (
 }
 
 EXP mfIndentedStringStream& operator << (
-  mfIndentedStringStream& iss, const Rational& rat)
+  mfIndentedStringStream& iss, const Rational& elt)
 {
   iss.getStringstream () <<
     gIndenter.indentMultiLineStringWithCurrentOffset (
-      rat.asString ());
+      elt.asString ());
 
   return iss;
 }

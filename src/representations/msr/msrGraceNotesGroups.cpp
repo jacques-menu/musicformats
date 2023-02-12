@@ -217,7 +217,7 @@ S_msrGraceNotesGroup msrGraceNotesGroup::createSkipGraceNotesGroupClone ()
 
         ss <<
           "Creating a skip grace note" <<
-          ", soundingWholeNotes: " << note->getMeasureElementSoundingWholeNotes () <<
+          ", soundingWholeNotes: " << note->getSoundingWholeNotes () <<
           ", displayWholeNotes: " << note->getNoteDisplayWholeNotes () <<
           std::endl;
 
@@ -232,7 +232,7 @@ S_msrGraceNotesGroup msrGraceNotesGroup::createSkipGraceNotesGroupClone ()
           msrNote::createGraceSkipNote (
             note->getInputLineNumber (),
             note->getNoteUpLinkToMeasure ()->getMeasureNumber (),
-            note->getMeasureElementSoundingWholeNotes (), // 0/1 JMI v0.9.66
+            note->getSoundingWholeNotes (), // 0/1 JMI v0.9.66
             note->getNoteDisplayWholeNotes (),
             note->getNoteDotsNumber ());
 
@@ -255,7 +255,7 @@ S_msrGraceNotesGroup msrGraceNotesGroup::createSkipGraceNotesGroupClone ()
           msrNote::createGraceSkipNote (
             chordFirstNote->getInputLineNumber (),
             chordFirstNote->getNoteUpLinkToMeasure ()->getMeasureNumber (),
-            chordFirstNote->getMeasureElementSoundingWholeNotes (), // 0/1 JMI v0.9.66
+            chordFirstNote->getSoundingWholeNotes (), // 0/1 JMI v0.9.66
             chordFirstNote->getNoteDisplayWholeNotes (),
             chordFirstNote->getNoteDotsNumber ());
 
@@ -447,7 +447,7 @@ void msrGraceNotesGroup::setGraceNotesGroupElementsMeasurePositions (
   std::string context =
     "setChordMembersMeasurePosition()";
 
-  setMeasureElementMeasurePosition (
+  setMeasurePosition (
     measurePosition,
     context);
 
@@ -460,7 +460,7 @@ void msrGraceNotesGroup::setGraceNotesGroupElementsMeasurePositions (
       measurePosition;
 
   // set chord's voice position
-  setMeasureElementVoicePosition (
+  setVoicePosition (
     voicePosition,
     context);
 
@@ -472,7 +472,7 @@ void msrGraceNotesGroup::setGraceNotesGroupElementsMeasurePositions (
 
   voice->
     incrementCurrentVoicePosition (
-      fChordNotesVector [0]->getMeasureElementSoundingWholeNotes ());
+      fChordNotesVector [0]->getSoundingWholeNotes ());
 }
 */
 
@@ -497,7 +497,7 @@ void msrGraceNotesGroup::setGraceNotesGroupElementsMeasurePositions (
     for (S_msrMeasureElement measureElement : fGraceNotesGroupElementsList) {
       // set measure element's measure position
       measureElement->
-        setMeasureElementMeasurePosition (
+        setMeasurePosition (
           measure,
           measurePosition,
           context);
@@ -506,7 +506,7 @@ void msrGraceNotesGroup::setGraceNotesGroupElementsMeasurePositions (
       // set measure element's measure position
   if (false) { // JMI
       measureElement->
-        setMeasureElementVoicePosition (
+        setVoicePosition (
           voicePosition,
           context);
 }

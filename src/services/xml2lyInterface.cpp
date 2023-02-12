@@ -128,7 +128,7 @@ EXP int xml2ly (
     appendPassToService (
       mfPassDescription::create (
         mfPassIDKind::kMfPassID_1,
-        gLanguage->createAnMXSRFromAMusicXMLFileOrStdin ()));
+        gLanguage->createAnMXSRFromAMusicXMLStream ()));
 
 //   gLog << "--------------" << std::endl;
 //

@@ -548,7 +548,7 @@ void mxsr2msrTranslator::handlePendingFiguredBasses (
   Rational
     newNoteSoundingWholeNotes =
       newNote->
-        getMeasureElementSoundingWholeNotes (),
+        getSoundingWholeNotes (),
     newNoteDisplayWholeNotes =
       newNote->
         getNoteDisplayWholeNotes ();
@@ -567,7 +567,7 @@ void mxsr2msrTranslator::handlePendingFiguredBasses (
 
     // set the figured bass element's sounding whole notes
     figuredBass->
-      setMeasureElementSoundingWholeNotes (
+      setSoundingWholeNotes (
         newNoteSoundingWholeNotes,
         "handlePendingFiguredBasses()");
 
