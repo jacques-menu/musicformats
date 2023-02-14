@@ -34,4 +34,4 @@ std::ostream& operator << (std::ostream& os, const msrDirectionKind& elt);
 
 }
 
-#endif
+#endif // ___msrDirections___

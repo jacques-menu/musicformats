@@ -110,7 +110,7 @@ void lpsrHeader::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_lpsrHeader>*
     p =
@@ -129,7 +129,7 @@ void lpsrHeader::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -148,7 +148,7 @@ void lpsrHeader::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_lpsrHeader>*
     p =
@@ -167,7 +167,7 @@ void lpsrHeader::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -384,7 +384,7 @@ void lpsrHeader::appendRight (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fRightsList.push_back (value);
 }
@@ -408,7 +408,7 @@ void lpsrHeader::appendComposer (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fComposersList.push_back (value);
 }
@@ -432,7 +432,7 @@ void lpsrHeader::appendArranger (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fArrangersList.push_back (value);
 }
@@ -456,7 +456,7 @@ void lpsrHeader::appendLyricist (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fLyricistsList.push_back (value);
 }
@@ -480,7 +480,7 @@ void lpsrHeader::appendPoet (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fPoetsList.push_back (value);
 }
@@ -501,7 +501,7 @@ void lpsrHeader::removeAllPoets (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fPoetsList.clear ();
 }
@@ -525,7 +525,7 @@ void lpsrHeader::appendTranslator (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fTranslatorsList.push_back (value);
 }
@@ -549,7 +549,7 @@ void lpsrHeader::appendArtist (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fArtistsList.push_back (value);
 }
@@ -573,7 +573,7 @@ void lpsrHeader::appendSoftware (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fSoftwaresList.push_back (value);
 }

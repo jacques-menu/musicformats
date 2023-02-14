@@ -170,4 +170,4 @@ EXP std::ostream& operator << (std::ostream& os, const S_msrPathToVoice& elt);
 }
 
 
-#endif
+#endif // ___msrPathToVoice___

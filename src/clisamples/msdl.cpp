@@ -75,7 +75,7 @@ static void catchSignals ()
 }
 #else
 static void catchSignals () {}
-#endif
+#endif // WIN32
 
 
 // //------------------------------------------------------------------------
@@ -342,7 +342,7 @@ int main (int argc, char*  argv[])
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // fetch the generated output kind from optionsAndArguments,
   // right now before any OAH handler is created,
@@ -368,7 +368,7 @@ int main (int argc, char*  argv[])
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   switch (multiGenerationOutputKind) {
     case mfMultiGenerationOutputKind::kGeneration_UNKNOWN:
@@ -568,7 +568,7 @@ int main (int argc, char*  argv[])
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // set the desired options
   // ------------------------------------------------------
@@ -669,7 +669,7 @@ int main (int argc, char*  argv[])
     }
     gLog << std::endl;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // acknoledge end of command line analysis
   // ------------------------------------------------------
@@ -686,7 +686,7 @@ int main (int argc, char*  argv[])
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // do the job
   // ------------------------------------------------------
@@ -701,7 +701,7 @@ int main (int argc, char*  argv[])
       if (gEarlyOptions.getEarlyTraceOah ()) {
       gLog << "Reading standard input" << std::endl;
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       err =
         generateCodeFromStandardInput (
@@ -715,7 +715,7 @@ int main (int argc, char*  argv[])
       if (gEarlyOptions.getEarlyTraceOah ()) {
         gLog << "Reading file \"" << inputSourceName << "\"" << std::endl;
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     err =
       generateCodeFromAFile (
@@ -735,7 +735,7 @@ int main (int argc, char*  argv[])
           std::endl;
       }
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
   }
   catch (mfException& e) {
     mfDisplayException (e, gOutput);

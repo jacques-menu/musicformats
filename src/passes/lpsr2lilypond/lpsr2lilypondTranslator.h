@@ -1338,4 +1338,4 @@ class EXP lpsr2lilypondTranslator :
 }
 
 
-#endif
+#endif // ___lpsr2lilypondTranslator___

@@ -378,4 +378,4 @@ EXP std::ostream& operator << (std::ostream& os, const S_msrNonArpeggiato& elt);
 }
 
 
-#endif
+#endif // ___msrArticulations___

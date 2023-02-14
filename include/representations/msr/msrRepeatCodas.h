@@ -108,4 +108,4 @@ EXP std::ostream& operator << (std::ostream& os, const S_msrRepeatCoda& elt);
 }
 
 
-#endif
+#endif // ___msrRepeatCodas___

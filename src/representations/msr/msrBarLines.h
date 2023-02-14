@@ -338,4 +338,4 @@ EXP std::ostream& operator << (std::ostream& os, const S_msrBarLine& elt);
 }
 
 
-#endif
+#endif // ___msrBarLines___

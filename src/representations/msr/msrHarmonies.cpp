@@ -85,7 +85,7 @@ msrHarmonyInterval::msrHarmonyInterval (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 msrHarmonyInterval::~msrHarmonyInterval ()
@@ -176,7 +176,7 @@ S_msrHarmonyInterval msrHarmonyInterval::intervalDifference (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   msrIntervalKind resultIntervalKind   = msrIntervalKind::kInterval_UNKNOWN;
 
@@ -208,7 +208,7 @@ S_msrHarmonyInterval msrHarmonyInterval::intervalDifference (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // fetch the relative octaves
   int
@@ -274,7 +274,7 @@ S_msrHarmonyInterval msrHarmonyInterval::intervalDifference (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // compute resulting interval Kind
   switch (intervalKind1) {
@@ -1455,7 +1455,7 @@ S_msrHarmonyInterval msrHarmonyInterval::intervalDifference (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // take interval inversion into account if relevant
   if (invertInterval) {
@@ -1494,7 +1494,7 @@ S_msrHarmonyInterval msrHarmonyInterval::intervalDifference (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // return it;
   return result;
@@ -2649,7 +2649,7 @@ void msrHarmonyInterval::acceptIn (basevisitor* v) {
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrHarmonyInterval>*
     p =
@@ -2680,7 +2680,7 @@ void msrHarmonyInterval::acceptOut (basevisitor* v) {
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrHarmonyInterval>*
     p =
@@ -3673,7 +3673,7 @@ msrHarmonyDegree::msrHarmonyDegree (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 msrHarmonyDegree::~msrHarmonyDegree ()
@@ -3688,7 +3688,7 @@ void msrHarmonyDegree::setHarmonyDegreeUpLinkToHarmony (
     __FILE__, __LINE__,
     UpLinkToHarmony != nullptr,
      "UpLinkToHarmony is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fHarmonyDegreeUpLinkToHarmony =
     UpLinkToHarmony;
@@ -3769,7 +3769,7 @@ void msrHarmonyDegree::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrHarmonyDegree>*
     p =
@@ -3788,7 +3788,7 @@ void msrHarmonyDegree::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -3807,7 +3807,7 @@ void msrHarmonyDegree::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrHarmonyDegree>*
     p =
@@ -3826,7 +3826,7 @@ void msrHarmonyDegree::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif        
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -3945,7 +3945,7 @@ msrHarmonyContents::msrHarmonyContents (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // create the root harmony element
   S_msrSemiTonesPitchAndOctave
@@ -4169,7 +4169,7 @@ void msrHarmonyContents::acceptIn (basevisitor* v) {
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrHarmonyContents>*
     p =
@@ -4200,7 +4200,7 @@ void msrHarmonyContents::acceptOut (basevisitor* v) {
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrHarmonyContents>*
     p =
@@ -4438,7 +4438,7 @@ msrHarmony::msrHarmony (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 msrHarmony::~msrHarmony ()
@@ -4461,7 +4461,7 @@ S_msrHarmony msrHarmony::createHarmonyNewbornClone (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
@@ -4469,7 +4469,7 @@ S_msrHarmony msrHarmony::createHarmonyNewbornClone (
     __FILE__, __LINE__,
     containingVoice != nullptr,
     "containingVoice is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   S_msrHarmony
     newbornClone =
@@ -4514,7 +4514,7 @@ S_msrHarmony msrHarmony::createHarmonyDeepClone (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
@@ -4522,7 +4522,7 @@ S_msrHarmony msrHarmony::createHarmonyDeepClone (
     __FILE__, __LINE__,
     containingVoice != nullptr,
     "containingVoice is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   S_msrHarmony
     deepClone =
@@ -4557,7 +4557,7 @@ void msrHarmony::setHarmonyUpLinkToMeasure (
     __FILE__, __LINE__,
     measure != nullptr,
     "measure is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalTraceOahGroup->getTraceWholeNotes ()) {
@@ -4573,7 +4573,7 @@ void msrHarmony::setHarmonyUpLinkToMeasure (
 
     --gIndenter;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fHarmonyUpLinkToMeasure = measure;
 }
@@ -4597,7 +4597,7 @@ void msrHarmony::setHarmonyTupletFactor (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fHarmonyTupletFactor = tupletFactor;
 }
@@ -4619,7 +4619,7 @@ void msrHarmony::setHarmonyUpLinkToNote (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
@@ -4627,7 +4627,7 @@ void msrHarmony::setHarmonyUpLinkToNote (
     __FILE__, __LINE__,
     note != nullptr,
     "note is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fHarmonyUpLinkToNote = note;
 }
@@ -4645,7 +4645,7 @@ void msrHarmony::setHarmonyUpLinkToNote (
 //     __FILE__, __LINE__,
 //     measure != nullptr,
 //      "setMeasurePosition(): measure is null");
-// #endif
+// #endif // MF_SANITY_CHECKS_ARE_ENABLED
 //
 //   // the offset can be negative, so we merely add it to measurePosition
 //   // to obtain the harmony's actual measurePosition
@@ -4675,7 +4675,7 @@ void msrHarmony::setHarmonyUpLinkToNote (
 //       fHarmonyWholeNotesOffset <<
 //       std::endl;
 //   }
-// #endif
+// #endif // MF_TRACE_IS_ENABLED
 //
 // #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
@@ -4683,7 +4683,7 @@ void msrHarmony::setHarmonyUpLinkToNote (
 //     __FILE__, __LINE__,
 //     fHarmonyUpLinkToNote != nullptr,
 //     "fHarmonyUpLinkToNote is null");
-// #endif
+// #endif // MF_SANITY_CHECKS_ARE_ENABLED
 //
 //   // compute harmony's voice position
 //   Rational
@@ -4699,7 +4699,7 @@ void msrHarmony::setHarmonyUpLinkToNote (
 //     __FILE__, __LINE__,
 //     measurePosition != msrMoment::K_MEASURE_POSITION_UNKNOWN,
 //     "measurePosition == msrMoment::K_MEASURE_POSITION_UNKNOWN");
-// #endif
+// #endif // MF_SANITY_CHECKS_ARE_ENABLED
 //
 //   // set harmony's measure position
 //   fMeasurePosition = measurePosition;
@@ -4731,7 +4731,7 @@ void msrHarmony::setHarmonyFrame (const S_msrFrame& frame)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fHarmonyFrame = frame;
 }
@@ -4770,7 +4770,7 @@ void msrHarmony::incrementHarmonySoundingWholeNotesDuration (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   setSoundingWholeNotes (
     augmentedSoundingWholeNotes,
@@ -4791,7 +4791,7 @@ void msrHarmony::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrHarmony>*
     p =
@@ -4810,7 +4810,7 @@ void msrHarmony::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -4829,7 +4829,7 @@ void msrHarmony::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrHarmony>*
     p =
@@ -4848,7 +4848,7 @@ void msrHarmony::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif        
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -5291,7 +5291,7 @@ void printHarmonyDetails (
           std::endl;
         --gIndenter;
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       // get the inverted harmony structure intervals
       const std::vector <S_msrHarmonyInterval>&
@@ -5472,7 +5472,7 @@ void printHarmonyAnalysis (
           std::endl;
         --gIndenter;
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       // get the inverted harmony structure intervals
       const std::vector <S_msrHarmonyInterval>&
@@ -5788,7 +5788,7 @@ msrHarmonyStructure::msrHarmonyStructure (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 S_msrHarmonyStructure msrHarmonyStructure::createHarmonyStructureNewbornClone ()
@@ -6691,7 +6691,7 @@ void msrHarmonyStructure::acceptIn (basevisitor* v) {
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrHarmonyStructure>*
     p =
@@ -6722,7 +6722,7 @@ void msrHarmonyStructure::acceptOut (basevisitor* v) {
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrHarmonyStructure>*
     p =
@@ -6809,7 +6809,7 @@ S_msrHarmonyStructure msrHarmonyStructure::invertHarmonyStructure (int inversion
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (harmonyStructureIntervalsSize) {
     // add the first items
@@ -6836,7 +6836,7 @@ S_msrHarmonyStructure msrHarmonyStructure::invertHarmonyStructure (int inversion
           __FILE__, __LINE__,
           ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       result->
         appendHarmonyIntervalToHarmonyStructure (
@@ -6860,7 +6860,7 @@ S_msrHarmonyStructure msrHarmonyStructure::invertHarmonyStructure (int inversion
           __FILE__, __LINE__,
           ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
     } // for
 
     // add  the octaviate last items
@@ -6890,7 +6890,7 @@ S_msrHarmonyStructure msrHarmonyStructure::invertHarmonyStructure (int inversion
           __FILE__, __LINE__,
           ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       result->
         appendHarmonyIntervalToHarmonyStructure (
@@ -6914,7 +6914,7 @@ S_msrHarmonyStructure msrHarmonyStructure::invertHarmonyStructure (int inversion
           __FILE__, __LINE__,
           ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
     } // for
   }
 

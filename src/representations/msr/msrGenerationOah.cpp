@@ -108,7 +108,7 @@ void msrGeneratorsOahGroup::initializeMsrGeneratorsOahGroup ()
   // trace
   // --------------------------------------
 // JMI  initializeMsrGeneratorsTraceOah ();
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // generation API
   // --------------------------------------
@@ -138,7 +138,7 @@ void msrGeneratorsOahGroup::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrGeneratorsOahGroup>*
     p =
@@ -157,7 +157,7 @@ void msrGeneratorsOahGroup::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -176,7 +176,7 @@ void msrGeneratorsOahGroup::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrGeneratorsOahGroup>*
     p =
@@ -195,7 +195,7 @@ void msrGeneratorsOahGroup::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -214,7 +214,7 @@ void msrGeneratorsOahGroup::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //______________________________________________________________________________
@@ -273,7 +273,7 @@ S_msrGeneratorsOahGroup createGlobalMsrGeneratorsOahGroup ()
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // protect library against multiple initializations
   if (! gGlobalMsrGeneratorsOahGroup) {

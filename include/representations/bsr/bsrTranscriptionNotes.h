@@ -169,4 +169,4 @@ EXP std::ostream& operator << (std::ostream& os, const S_bsrTranscriptionNotes& 
 }
 
 
-#endif
+#endif // ___bsrTranscriptionNotes___

@@ -360,7 +360,7 @@ void msrNote::initializeNote ()
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // solo note or rest?
   // ------------------------------------------------------
@@ -396,7 +396,7 @@ void msrNote::setNoteUpLinkToMeasure (
     __FILE__, __LINE__,
     measure != nullptr,
     "measure is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalTraceOahGroup->getTraceWholeNotes ()) {
@@ -418,7 +418,7 @@ void msrNote::setNoteUpLinkToMeasure (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fNoteUpLinkToMeasure = measure;
 }
@@ -570,7 +570,7 @@ S_msrVoice msrNote::fetchNoteUpLinkToVoice () const
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   switch (fNoteKind) {
     case msrNoteKind::kNote_UNKNOWN:
@@ -712,7 +712,7 @@ void msrNote::setNoteKind (msrNoteKind noteKind)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fNoteKind = noteKind;
 }
@@ -743,7 +743,7 @@ S_msrNote msrNote::createNoteNewbornClone (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
@@ -751,7 +751,7 @@ S_msrNote msrNote::createNoteNewbornClone (
     __FILE__, __LINE__,
     containingPart != nullptr,
     "containingPart is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   S_msrNote
     newbornClone =
@@ -953,7 +953,7 @@ S_msrNote msrNote::createNoteDeepClone (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 /* JMI
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
@@ -962,7 +962,7 @@ S_msrNote msrNote::createNoteDeepClone (
     __FILE__, __LINE__,
     containingVoice != nullptr,
     "containingVoice is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 */
 
   S_msrNote
@@ -1498,7 +1498,7 @@ S_msrNote msrNote::createRestNote (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   return o;
 }
@@ -1555,7 +1555,7 @@ S_msrNote msrNote::createSkipNote (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   return o;
 }
@@ -1612,7 +1612,7 @@ S_msrNote msrNote::createGraceSkipNote (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   return o;
 }
@@ -1671,7 +1671,7 @@ S_msrNote msrNote::createRestNoteWithOctave (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   return o;
 }
@@ -1730,7 +1730,7 @@ S_msrNote msrNote::createSkipNoteWithOctave (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   return o;
 }
@@ -1790,7 +1790,7 @@ S_msrNote msrNote::createRegularNote (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   return o;
 }
@@ -1821,7 +1821,7 @@ S_msrNote msrNote::createRestFromString (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   std::string regularExpression (
     "[[:space:]]*"
@@ -1846,7 +1846,7 @@ S_msrNote msrNote::createRestFromString (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   std::regex  e (regularExpression);
   std::smatch sm;
@@ -1877,7 +1877,7 @@ S_msrNote msrNote::createRestFromString (
 
     --gIndenter;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // handling restString à la LilyPond, such as "r4.."
 
@@ -1919,7 +1919,7 @@ S_msrNote msrNote::createRestFromString (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // compute the restDurationKind from restDuration
   msrDurationKind
@@ -1947,7 +1947,7 @@ S_msrNote msrNote::createRestFromString (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   result =
     msrNote::createRestNote (
@@ -1986,7 +1986,7 @@ S_msrNote msrNote::createSkipFromString (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   std::string regularExpression (
     "[[:space:]]*"
@@ -2011,7 +2011,7 @@ S_msrNote msrNote::createSkipFromString (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   std::regex  e (regularExpression);
   std::smatch sm;
@@ -2042,7 +2042,7 @@ S_msrNote msrNote::createSkipFromString (
 
     --gIndenter;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // handling skipString à la LilyPond, such as "s4.."
 
@@ -2084,7 +2084,7 @@ S_msrNote msrNote::createSkipFromString (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // compute the skipDurationKind from skipDuration
   msrDurationKind
@@ -2112,7 +2112,7 @@ S_msrNote msrNote::createSkipFromString (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   result =
 //    msrNote::createSkipNote (
@@ -2152,7 +2152,7 @@ S_msrNote msrNote::createNoteFromString (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // noteString contains note specification
   // decipher it to extract its components
@@ -2182,7 +2182,7 @@ S_msrNote msrNote::createNoteFromString (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   std::regex  e (regularExpression);
   std::smatch sm;
@@ -2213,7 +2213,7 @@ S_msrNote msrNote::createNoteFromString (
 
     --gIndenter;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // handling noteString à la LilyPond, such as "bes,4.."
 
@@ -2267,7 +2267,7 @@ S_msrNote msrNote::createNoteFromString (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // fetch the quarternotes pitches kind
   msrQuarterTonesPitchKind
@@ -2316,7 +2316,7 @@ S_msrNote msrNote::createNoteFromString (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   result =
     msrNote::createRegularNote (
@@ -2342,7 +2342,7 @@ S_msrNote msrNote::createNoteFromSemiTonesPitchAndOctave (
     __FILE__, __LINE__,
     semiTonesPitchAndOctave != nullptr,
     "semiTonesPitchAndOctave is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   msrNote * o =
     new msrNote (
@@ -2394,7 +2394,7 @@ S_msrNote msrNote::createNoteFromSemiTonesPitchAndOctave (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   return o;
 }
@@ -2433,7 +2433,7 @@ void msrNote::setMeasurePosition (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
@@ -2441,7 +2441,7 @@ void msrNote::setMeasurePosition (
     __FILE__, __LINE__,
     measurePosition != msrMoment::K_MEASURE_POSITION_UNKNOWN,
     "measurePosition == msrMoment::K_MEASURE_POSITION_UNKNOWN");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // handle the chord itself
   msrMeasureElement::setMeasurePosition (
@@ -2472,7 +2472,7 @@ void msrNote::setNoteAttachedElementsMeasurePosition (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 // JMI v0.9.66
 //   if (fNoteHarmoniesList.size ()) {
@@ -2500,7 +2500,7 @@ void msrNote::setNoteAttachedElementsMeasurePosition (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // are there figured bass elements attached to this note?
 //   if (fNoteFiguredBassesList.size ()) {
@@ -2607,7 +2607,7 @@ void msrNote::setNoteBelongsToAChord ()
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fNoteBelongsToAChord = true;
 }
@@ -2655,7 +2655,7 @@ void msrNote::determineTupletMemberSoundingFromDisplayWholeNotes (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // the display whole notes are known, compute the sounding ones
   doSetSoundingWholeNotes (
@@ -2679,7 +2679,7 @@ void msrNote::determineTupletMemberSoundingFromDisplayWholeNotes (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void msrNote::appendBeamToNote (
@@ -2700,7 +2700,7 @@ void msrNote::appendBeamToNote (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // check the order of the beams begins, continues and ends
 if (false) { // JMI, note not yet append to anything....
@@ -2732,7 +2732,7 @@ void msrNote::appendArticulationToNote (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fNoteArticulations.push_back (art);
 }
@@ -2755,7 +2755,7 @@ void msrNote::appendSpannerToNote (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // register note has having a wavy line start
   switch (spanner->getSpannerKind ()) {
@@ -2802,7 +2802,7 @@ void msrNote::appendTechnicalToNote (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // append the technical to the note technicals list
   fNoteTechnicals.push_back (technical);
@@ -2827,7 +2827,7 @@ void msrNote::appendTechnicalWithIntegerToNote (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // append the technical with integer to the note technicals with integers list
   fNoteTechnicalWithIntegers.push_back (
@@ -2853,7 +2853,7 @@ void msrNote::appendTechnicalWithFloatToNote (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // append the technical with float to the note technicals with floats list
   fNoteTechnicalWithFloats.push_back (
@@ -2879,7 +2879,7 @@ void msrNote::appendTechnicalWithStringToNote (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // append the technical with string to the note technicals with strings list
   fNoteTechnicalWithStrings.push_back (
@@ -2904,7 +2904,7 @@ void msrNote::appendOrnamentToNote (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // append the ornament to the note ornaments list
   fNoteOrnaments.push_back (ornament);
@@ -2955,7 +2955,7 @@ void msrNote::appendGlissandoToNote (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // append the glissando to the note glissandos list
   fNoteGlissandos.push_back (glissando);
@@ -2979,7 +2979,7 @@ void msrNote::appendSlideToNote (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // append the slide to the note glissandos list
   fNoteSlides.push_back (slide);
@@ -3004,7 +3004,7 @@ void msrNote::setNoteGraceNotesGroupBefore (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // register the before grace notes group in the note
   fNoteGraceNotesGroupBefore = graceNotesGroupBefore;
@@ -3034,7 +3034,7 @@ void msrNote::setNoteGraceNotesGroupAfter (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // register the after grace notes group in the note
   fNoteGraceNotesGroupAfter = graceNotesGroupAfter;
@@ -3062,7 +3062,7 @@ void msrNote::setNoteAfterGraceNotesGroup (S_msrGraceNotesGroup afterGraceNotesG
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // register the grace notes in the note
   fNoteAfterGraceNotesGroup = afterGraceNotesGroup;
@@ -3088,7 +3088,7 @@ void msrNote::setNoteSingleTremolo (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // register the singleTremolo in the note
   fNoteSingleTremolo = trem;
@@ -3113,7 +3113,7 @@ void msrNote::appendDynamicToNote (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fNoteDynamics.push_back (dynamic);
 }
@@ -3145,7 +3145,7 @@ void msrNote::appendSlurToNote (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fNoteSlurs.push_back (slur);
 }
@@ -3165,7 +3165,7 @@ void msrNote::appendLigatureToNote (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (fNoteLigatures.size ()) {
     if (
@@ -3193,7 +3193,7 @@ void msrNote::appendLigatureToNote (
           ligature->getInputLineNumber (),
           ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       // remove 'ligature start'
 #ifdef MF_TRACE_IS_ENABLED
@@ -3209,7 +3209,7 @@ void msrNote::appendLigatureToNote (
           __FILE__, __LINE__,
           ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       fNoteLigatures.pop_back ();
 
@@ -3239,7 +3239,7 @@ void msrNote::appendPedalToNote (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (fNotePedals.size ()) {
     if (
@@ -3265,7 +3265,7 @@ void msrNote::appendPedalToNote (
           pedal->getInputLineNumber (),
           ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       // rmeove 'pedal start'
 #ifdef MF_TRACE_IS_ENABLED
@@ -3281,7 +3281,7 @@ void msrNote::appendPedalToNote (
           __FILE__, __LINE__,
           ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
       fNotePedals.pop_back ();
 
       // don't register 'pedal stop'
@@ -3313,7 +3313,7 @@ void msrNote::appendSlashToNote (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fNoteSlashes.push_back (slash);
 }
@@ -3354,7 +3354,7 @@ void msrNote::appendDalSegnoToNote (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fNoteDalSegnos.push_back (dalSegno);
 }
@@ -3409,7 +3409,7 @@ void msrNote::appendScordaturaToNote (
 //       "\"" <<
 //       std::endl;
 //   }
-// #endif
+// #endif // MF_TRACE_IS_ENABLED
 //
 // #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
@@ -3417,7 +3417,7 @@ void msrNote::appendScordaturaToNote (
 //     __FILE__, __LINE__,
 //     voicePosition != msrMoment::K_MEASURE_POSITION_UNKNOWN,
 //     "voicePosition == msrMoment::K_MEASURE_POSITION_UNKNOWN");
-// #endif
+// #endif // MF_SANITY_CHECKS_ARE_ENABLED
 //
 //   // set measure element voice position
 // #ifdef MF_TRACE_IS_ENABLED
@@ -3435,7 +3435,7 @@ void msrNote::appendScordaturaToNote (
 //       "\"" <<
 //       std::endl;
 //   }
-// #endif
+// #endif // MF_TRACE_IS_ENABLED
 //
 //   fVoicePosition = voicePosition;
 //
@@ -3459,7 +3459,7 @@ void msrNote::appendScordaturaToNote (
 //       __FILE__, __LINE__,
 //       ss.str ());
 //   }
-// #endif
+// #endif // MF_TRACE_IS_ENABLED
 // }
 
 bool msrNote::compareNotesByIncreasingMeasurePosition (
@@ -3489,7 +3489,7 @@ S_msrDynamic msrNote::removeFirstDynamics () // JMI
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
@@ -3497,7 +3497,7 @@ S_msrDynamic msrNote::removeFirstDynamics () // JMI
     __FILE__, __LINE__,
     fNoteDynamics.size () > 0,
     "fNoteDynamics is empty");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   S_msrDynamic dyn = fNoteDynamics.front ();
   fNoteDynamics.pop_front ();
@@ -3520,7 +3520,7 @@ S_msrWedge msrNote::removeFirstWedge () // JMI
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
@@ -3528,7 +3528,7 @@ S_msrWedge msrNote::removeFirstWedge () // JMI
     __FILE__, __LINE__,
     fNoteDynamics.size () > 0,
     "fNoteDynamics is empty");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   S_msrWedge wedge = fNoteWedges.front ();
   fNoteWedges.pop_front ();
@@ -3553,7 +3553,7 @@ void msrNote::appendSyllableToNote (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fNoteSyllables.push_back (syllable);
 }
@@ -3577,7 +3577,7 @@ void msrNote::appendHarmonyToNote (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // set the harmony's whole notes duration
   // change the harmony whole notes if it belongs to a tuplet ??? utf8.xml JMI v0.9.66
@@ -3613,7 +3613,7 @@ void msrNote::appendFiguredBassToNote (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // set the figured bass's whole notes duration
   // change the figured bass whole notes if it belongs to a tuplet ??? utf8.xml JMI v0.9.66
@@ -3644,7 +3644,7 @@ void msrNote::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrNote>*
     p =
@@ -3663,7 +3663,7 @@ void msrNote::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -3682,7 +3682,7 @@ void msrNote::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrNote>*
     p =
@@ -3701,7 +3701,7 @@ void msrNote::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -3740,7 +3740,7 @@ void msrNote::browseData (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
       }
       else {
         // browse the grace notes group before
@@ -4165,7 +4165,7 @@ void msrNote::browseData (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
       }
       else {
         // browse the grace notes group after
@@ -5056,7 +5056,7 @@ std::string msrNote::soundingNoteEssentialsAsString () const
     __FILE__, __LINE__,
     fNoteDotsNumber < 10,
     "fNoteDotsNumber " + std::to_string (fNoteDotsNumber) + ">= 10");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   std::stringstream ss;
 

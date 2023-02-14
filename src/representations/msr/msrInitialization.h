@@ -23,4 +23,4 @@ void initializeMSR ();
 }
 
 
-#endif
+#endif // ___msrInitialization___

@@ -862,4 +862,4 @@ EXP std::ostream& operator << (std::ostream& os, const S_msrMeasure& elt);
 }
 
 
-#endif
+#endif // ___msrMeasures___

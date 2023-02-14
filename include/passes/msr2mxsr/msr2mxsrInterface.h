@@ -39,4 +39,4 @@ EXP Sxmlelement translateMsrToMxsr (
 }
 
 
-#endif
+#endif // ___msr2mxsrInterface___

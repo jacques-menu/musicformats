@@ -255,7 +255,7 @@ S_bsrCellsList bsrTempo::buildCellsList () const
 
             gLog << std::endl;
           }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
           if (smSize == 3) {
             {
@@ -299,7 +299,7 @@ S_bsrCellsList bsrTempo::buildCellsList () const
 
               gLog << std::endl;
             }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
             if (smSize == 2) {
               std::stringstream ss;
@@ -399,7 +399,7 @@ void bsrTempo::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_bsrTempo>*
     p =
@@ -418,7 +418,7 @@ void bsrTempo::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -438,7 +438,7 @@ void bsrTempo::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_bsrTempo>*
     p =
@@ -457,7 +457,7 @@ void bsrTempo::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }

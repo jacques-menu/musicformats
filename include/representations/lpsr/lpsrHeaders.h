@@ -200,4 +200,4 @@ EXP mfIndentedStringStream& operator << (
 }
 
 
-#endif
+#endif // ___lpsrHeaders___

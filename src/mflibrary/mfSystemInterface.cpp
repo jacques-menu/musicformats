@@ -13,15 +13,15 @@
 
 #ifdef __APPLE__
   // nothing specific needed here
-#endif
+#endif // __APPLE__
 
 #ifdef __gnu_linux__
   #include <string.h> // strerror_r()
-#endif
+#endif // __gnu_linux__
 
 #ifdef WIN32
   // nothing specific needed here
-#endif
+#endif // WIN32
 
 #include "mfIndentedTextOutput.h"
 #include "mfStringsHandling.h"
@@ -42,19 +42,19 @@ EXP char* mfStrErrorCString ()
   errno_t
     result =
       strerror_r (errno, pBuffer, kBufferSize);
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef __gnu_linux__
   char*
     result =
       strerror_r (errno, pBuffer, kBufferSize);
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef WIN32
   int
     result =
       strerror_s (pBuffer, kBufferSize, errno);
-#endif
+#endif // WIN32
 
   // use result just to avoid a compiler warning...
   result = result;
@@ -140,7 +140,7 @@ EXP int mfExecuteCommand (
 // //     result = pclose (commandOutputStream);
 // //   }
 //
-// #endif
+// #endif // MF_TRACE_IS_ENABLED
 
   return result;
 }

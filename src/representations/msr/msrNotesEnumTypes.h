@@ -179,4 +179,4 @@ std::ostream& operator << (std::ostream& os, const msrNoteIsACueNoteKind& elt);
 }
 
 
-#endif
+#endif // ___msrNotesEnumTypes___

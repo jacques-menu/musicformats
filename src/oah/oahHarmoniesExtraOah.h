@@ -12,12 +12,6 @@
 #ifndef ___harmoniesExtraOah___
 #define ___harmoniesExtraOah___
 
-
-#include "mfStaticSettings.h"
-
-#ifdef MF_HARMONIES_EXTRA_IS_ENABLED
-
-
 #include "msrPitches.h"
 
 #include "oahBasicTypes.h"
@@ -416,7 +410,12 @@ class EXP harmoniesExtraOahGroup : public oahGroup
 typedef SMARTP<harmoniesExtraOahGroup> S_harmoniesExtraOahGroup;
 EXP std::ostream& operator << (std::ostream& os, const S_harmoniesExtraOahGroup& elt);
 
-EXP extern S_harmoniesExtraOahGroup gGlobalHarmoniesExtraOahGroup;
+//______________________________________________________________________________
+// hidden global harmonies extra OAH group variable
+EXP S_harmoniesExtraOahGroup getGlobalHarmoniesExtraOahGroup ();
+
+// a handy shortcut
+#define gHarmoniesExtraOahGroup getGlobalHarmoniesExtraOahGroup ()
 
 //______________________________________________________________________________
 EXP S_harmoniesExtraOahGroup createGlobalHarmoniesExtraOahGroup ();
@@ -425,7 +424,4 @@ EXP S_harmoniesExtraOahGroup createGlobalHarmoniesExtraOahGroup ();
 }
 
 
-#endif
-
-
-#endif
+#endif // ___harmoniesExtraOah___

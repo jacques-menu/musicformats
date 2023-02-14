@@ -21,6 +21,8 @@
 
 #include "msrDivisions.h"
 
+#include "oahEarlyOptions.h"
+
 #include "oahOah.h"
 
 #include "mxsrOah.h"
@@ -61,7 +63,7 @@ S_msrDivisions msrDivisions::createDivisionsNewbornClone ()
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   S_msrDivisions
     newbornClone =
@@ -107,7 +109,7 @@ void msrDivisions::initializeDivisions ()
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -166,7 +168,7 @@ void msrDivisions::initializeDivisions ()
   if (gGlobalMxsrOahGroup->getTraceDivisions ()) {
     printDurationKindsDivisions (gLog);
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   --gIndenter;
 }
@@ -293,7 +295,7 @@ std::string msrDivisions::divisionsAsMsrString (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   msrDurationKind baseDurationKind          = msrDurationKind::kDuration1024th;
   int             baseDurationDivisions = -1;
@@ -346,7 +348,7 @@ std::string msrDivisions::divisionsAsMsrString (
           "result" << ": " << result <<
           std::endl << std::endl;
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       break;
     }
@@ -384,7 +386,7 @@ std::string msrDivisions::divisionsAsMsrString (
       "remainingDivisions" << ": " << remainingDivisions <<
         std::endl << std::endl;
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     if (remainingDivisions < nextDivisionsInList) {
       // the suffix is a multiplication factor
@@ -407,7 +409,7 @@ std::string msrDivisions::divisionsAsMsrString (
           "r" << ": " << r <<
           std::endl << std::endl;
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       result +=
         "*" + r.toString ();
@@ -442,7 +444,7 @@ std::string msrDivisions::divisionsAsMsrString (
             "dotsNumber" << ": " << dotsNumber <<
             std::endl << std::endl;
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
         if (dotsNumber > 5 ) {
           break; // JMI
@@ -470,7 +472,7 @@ std::string msrDivisions::divisionsAsMsrString (
           "dotsNumber" << ": " << dotsNumber <<
           std::endl << std::endl;
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       if (remainingDivisions - nextDivisionsInList == 0) {
         // the suffix is composed of dots
@@ -494,7 +496,7 @@ std::string msrDivisions::divisionsAsMsrString (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   return result;
 }
@@ -552,7 +554,7 @@ void msrDivisions::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrDivisions>*
     p =
@@ -571,7 +573,7 @@ void msrDivisions::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -590,7 +592,7 @@ void msrDivisions::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrDivisions>*
     p =
@@ -609,7 +611,7 @@ void msrDivisions::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif        
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }

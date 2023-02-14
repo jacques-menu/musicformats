@@ -70,4 +70,4 @@ EXP std::ostream& operator << (std::ostream& os, const S_languageEnglish& elt);
 }
 
 
-#endif
+#endif // ___languagesEnglish___

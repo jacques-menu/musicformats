@@ -34,4 +34,4 @@ std::ostream& operator << (std::ostream& os, const msrLineTypeKind& elt);
 
 }
 
-#endif
+#endif // ___msrLineTypes___

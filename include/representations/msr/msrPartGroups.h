@@ -403,4 +403,4 @@ EXP std::ostream& operator << (std::ostream& os, const S_msrPartGroup& elt);
 
 }
 
-#endif
+#endif // ___msrPartGroups___

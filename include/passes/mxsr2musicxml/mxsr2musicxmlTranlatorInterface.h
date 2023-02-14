@@ -12,7 +12,6 @@
 #ifndef ___mxsr2xmlTranslatorInterface___
 #define ___mxsr2xmlTranslatorInterface___
 
-
 #include <iostream>
 
 #include "exports.h"
@@ -33,4 +32,4 @@ EXP void translateMxsrToMusicXML (
 }
 
 
-#endif
+#endif // ___mxsr2xmlTranslatorInterface___

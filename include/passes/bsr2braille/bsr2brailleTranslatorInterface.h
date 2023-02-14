@@ -32,4 +32,4 @@ EXP void translateBsrToBraille (
 }
 
 
-#endif
+#endif // ___bsr2brailleTranslatorInterface___

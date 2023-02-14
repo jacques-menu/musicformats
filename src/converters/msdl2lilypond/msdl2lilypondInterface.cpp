@@ -112,7 +112,7 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
 //       __FILE__, __LINE__,
 //       ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     // create the MSDL parser
     msdlParser
@@ -153,7 +153,7 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
 
       throw msdl2msrException (message);
     }
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
   }
   catch (msdl2msrException& e) {
     mfDisplayException (e, gOutput);
@@ -173,7 +173,7 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
       err,
       __FILE__, __LINE__,
       gLanguage->quittingAfterPass (mfPassIDKind::kMfPassID_1));
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     return mfMusicformatsErrorKind::kMusicformatsError_NONE;
   }
@@ -213,7 +213,7 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
       err,
       __FILE__, __LINE__,
       gLanguage->quittingAfterPass (mfPassIDKind::kMfPassID_2b));
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     return mfMusicformatsErrorKind::kMusicformatsError_NONE;
   }
@@ -238,7 +238,7 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
 //       __FILE__, __LINE__,
 //       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (! outputFileName.size ()) {
 #ifdef MF_TRACE_IS_ENABLED
@@ -251,7 +251,7 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
 //       __FILE__, __LINE__,
 //       ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     // create an indented output stream for the LilyPond code
     // to be written to outputFileStream
@@ -293,7 +293,7 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
 //       __FILE__, __LINE__,
 //       ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     // open output file
 #ifdef MF_TRACE_IS_ENABLED
@@ -307,7 +307,7 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
 //       __FILE__, __LINE__,
 //       ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     std::ofstream
       outputFileStream (
@@ -369,7 +369,7 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     outputFileStream.close ();
   }
@@ -410,8 +410,8 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
     ss <<
       handlerOptionsAndArguments;
   }
-#endif
-#endif
+#endif // MF_TRACE_IS_ENABLED
+#endif // MF_TRACE_IS_ENABLED
 
   // apply early options if any
   // ------------------------------------------------------
@@ -438,7 +438,7 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // create an msdl2lilypond insider OAH handler
   // ------------------------------------------------------
@@ -547,7 +547,7 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
 //       __FILE__, __LINE__,
 //       gLanguage->openingLilypondFileForWriting (inputFileName));
 //   }
-// #endif
+// #endif // MF_TRACE_IS_ENABLED
 //
 //   std::ifstream
 //     inputStream (
@@ -592,7 +592,7 @@ mfMusicformatsErrorKind convertMsdlFile2lilypondWithHandler (
       __FILE__, __LINE__,
       gLanguage->openingLilypondFileForWriting (inputFileName));
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   std::ifstream
     inputStream (

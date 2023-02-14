@@ -303,7 +303,7 @@ void mfMultiGenerationOutputKindAtom::setImplicitVariable (std::ostream& os)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (fSelected) {
     std::stringstream ss;
@@ -336,7 +336,7 @@ void mfMultiGenerationOutputKindAtom::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_mfMultiGenerationOutputKindAtom>*
     p =
@@ -355,7 +355,7 @@ void mfMultiGenerationOutputKindAtom::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -374,7 +374,7 @@ void mfMultiGenerationOutputKindAtom::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_mfMultiGenerationOutputKindAtom>*
     p =
@@ -393,7 +393,7 @@ void mfMultiGenerationOutputKindAtom::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -412,7 +412,7 @@ void mfMultiGenerationOutputKindAtom::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 std::string mfMultiGenerationOutputKindAtom::asShortNamedOptionString () const
@@ -635,7 +635,7 @@ void mfMultiGenerationOahGroup::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_multiGenerationOahGroup>*
     p =
@@ -654,7 +654,7 @@ void mfMultiGenerationOahGroup::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -673,7 +673,7 @@ void mfMultiGenerationOahGroup::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_multiGenerationOahGroup>*
     p =
@@ -692,7 +692,7 @@ void mfMultiGenerationOahGroup::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -711,7 +711,7 @@ void mfMultiGenerationOahGroup::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //______________________________________________________________________________
@@ -770,7 +770,7 @@ S_multiGenerationOahGroup createGlobalMultiGenerationOahGroup ()
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // protect library against multiple initializations
   if (! gGlobalMultiGenerationOahGroup) {

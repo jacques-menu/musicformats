@@ -104,4 +104,4 @@ std::ostream& operator << (std::ostream& os, const msrMeasureEndRegularKind& elt
 }
 
 
-#endif
+#endif // ___msrMeasuresEnumTypes___

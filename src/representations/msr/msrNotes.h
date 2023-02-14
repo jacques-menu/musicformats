@@ -1288,4 +1288,4 @@ EXP std::ostream& operator << (std::ostream& os, const S_msrNote& elt);
 }
 
 
-#endif
+#endif // ___msrNotes___

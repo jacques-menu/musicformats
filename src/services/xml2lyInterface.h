@@ -40,4 +40,4 @@ EXP int xml2ly (
 
 }
 
-#endif
+#endif // __xml2lyInterface___

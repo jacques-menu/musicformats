@@ -391,4 +391,4 @@ typedef SMARTP<msrWords> S_msrWords;
 }
 
 
-#endif
+#endif // ___msrTypesForwardDeclarations___

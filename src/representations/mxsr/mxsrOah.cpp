@@ -167,7 +167,7 @@ R"(Write a trace of the MusicXML tree visiting activity to standard error.)",
         "fTraceMxsrVisitors",
         fTraceMxsrVisitors));
 }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 void mxsrOahGroup::initializeMxsrOah ()
 {
@@ -175,14 +175,14 @@ void mxsrOahGroup::initializeMxsrOah ()
   // trace
   // --------------------------------------
   initializeMxsrTraceOah ();
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void mxsrOahGroup::enforceGroupQuietness ()
 {
 #ifdef MF_TRACE_IS_ENABLED
 //   fTraceMxsrVisitors = false; // JMI v0.9.63
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void mxsrOahGroup::checkGroupOptionsConsistency ()
@@ -205,7 +205,7 @@ void mxsrOahGroup::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_mxsrOahGroup>*
     p =
@@ -224,7 +224,7 @@ void mxsrOahGroup::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -243,7 +243,7 @@ void mxsrOahGroup::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_mxsrOahGroup>*
     p =
@@ -262,7 +262,7 @@ void mxsrOahGroup::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -281,7 +281,7 @@ void mxsrOahGroup::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void mxsrOahGroup::displayMxsrOahValues (int fieldWidth)
@@ -326,7 +326,7 @@ void mxsrOahGroup::displayMxsrOahValues (int fieldWidth)
     std::endl;
 
   --gIndenter;
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   --gIndenter;
 }
@@ -358,7 +358,7 @@ S_mxsrOahGroup createGlobalMxsrOahGroup ()
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // protect library against multiple initializations
   if (! gGlobalMxsrOahGroup) {

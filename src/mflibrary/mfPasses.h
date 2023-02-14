@@ -136,4 +136,4 @@ EXP mfPassIDKind getGlobalCurrentPassIDKind ();
 }
 
 
-#endif
+#endif // ___mfPasses___

@@ -56,7 +56,7 @@ void bsrOah2manPage::visitStart (S_bsrFacSimileKindAtom& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fManPageOutputStream <<
     ".HP" <<
@@ -91,7 +91,7 @@ void bsrOah2manPage::visitEnd (S_bsrFacSimileKindAtom& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -111,7 +111,7 @@ void bsrOah2manPage::visitStart (S_bsrTextsLanguageAtom& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fManPageOutputStream <<
     ".HP" <<
@@ -146,7 +146,7 @@ void bsrOah2manPage::visitEnd (S_bsrTextsLanguageAtom& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 

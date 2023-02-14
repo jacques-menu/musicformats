@@ -11,6 +11,8 @@
 
 #include "mfcComponents.h"
 
+#include "oahEarlyOptions.h"
+
 #include "waeHandlers.h"
 
 #include "LilyPondIssue34Component.h"
@@ -95,7 +97,7 @@ S_mfcGeneratorComponent createLilyPondIssue34GeneratorComponent ()
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     // create the generator component
     pGeneratorComponent =

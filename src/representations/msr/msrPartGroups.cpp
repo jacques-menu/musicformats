@@ -157,7 +157,7 @@ msrPartGroup::msrPartGroup (
     __FILE__, __LINE__,
     fPartGroupUpLinkToScore != nullptr,
     "fPartGroupUpLinkToScore is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 */
 
   fPartGroupUpLinkToScore     = partGroupUpLinkToScore;
@@ -210,7 +210,7 @@ msrPartGroup::msrPartGroup (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 msrPartGroup::msrPartGroup (
@@ -234,7 +234,7 @@ msrPartGroup::msrPartGroup (
     __FILE__, __LINE__,
     fPartGroupUpLinkToScore != nullptr,
     "fPartGroupUpLinkToScore is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 */
 
   fPartGroupUpLinkToScore     = partGroupUpLinkToScore;
@@ -289,7 +289,7 @@ msrPartGroup::msrPartGroup (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 msrPartGroup::~msrPartGroup ()
@@ -314,7 +314,7 @@ S_msrPartGroup msrPartGroup::createPartGroupNewbornClone (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // don't check partGroupClone against 0, since the partGroup stack JMI
   // that it comes from may be empty
@@ -325,7 +325,7 @@ S_msrPartGroup msrPartGroup::createPartGroupNewbornClone (
     __FILE__, __LINE__,
     partGroupClone != nullptr,
     "partGroupClone is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 */
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
@@ -334,7 +334,7 @@ S_msrPartGroup msrPartGroup::createPartGroupNewbornClone (
     __FILE__, __LINE__,
     scoreClone != nullptr,
     "scoreClone is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   S_msrPartGroup
     newbornClone =
@@ -457,7 +457,7 @@ void msrPartGroup::checkPartGroupElement (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 }
 
 S_msrPart msrPartGroup::appendPartToPartGroupByItsPartID (
@@ -470,7 +470,7 @@ S_msrPart msrPartGroup::appendPartToPartGroupByItsPartID (
     __FILE__, __LINE__,
     partID.size () > 0,
     "partID is empty");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // has this partID already been added to this part?
   if (fPartGroupPartsMap.count (partID)) {
@@ -513,12 +513,12 @@ S_msrPart msrPartGroup::appendPartToPartGroupByItsPartID (
     gLog << this;
     gLog << part;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   checkPartGroupElement (part);
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fPartGroupPartsMap [partID] = part;
 
@@ -577,7 +577,7 @@ S_msrPart msrPartGroup::appendPartToPartGroupByItsPartID (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // return the part
   return part;
@@ -599,7 +599,7 @@ void msrPartGroup::appendPartToPartGroup (S_msrPart part)
     gLog << this;
     gLog << part;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // register part into this part group's data
   fPartGroupPartsMap [part->getPartID ()] = part;
@@ -607,7 +607,7 @@ void msrPartGroup::appendPartToPartGroup (S_msrPart part)
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   checkPartGroupElement (part);
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fPartGroupElementsList.push_back (part);
 
@@ -633,7 +633,7 @@ void msrPartGroup::removePartFromPartGroup (
     gLog << this;
     gLog << partToBeRemoved;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -698,14 +698,14 @@ void msrPartGroup::prependSubPartGroupToPartGroup (
     gLog << this;
     gLog << partGroup;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // register it in this part group
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   checkPartGroupElement (partGroup);
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fPartGroupElementsList.push_front (partGroup);
 }
@@ -724,14 +724,14 @@ void msrPartGroup::appendSubPartGroupToPartGroup (
     gLog << this;
     gLog << partGroup;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // register it in this part group
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   checkPartGroupElement (partGroup);
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fPartGroupElementsList.push_back (partGroup);
 }
@@ -922,7 +922,7 @@ S_msrPart msrPartGroup::fetchPartFromPartGroupByItsPartID (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   for (
     std::list<S_msrPartGroupElement>::const_iterator i =
@@ -1018,7 +1018,7 @@ void msrPartGroup::collectPartGroupPartsList (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
       // sanity check
       checkPartGroupElement (part);
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
       partsList.push_back (part);
     }
@@ -1065,7 +1065,7 @@ void msrPartGroup::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrPartGroup>*
     p =
@@ -1084,7 +1084,7 @@ void msrPartGroup::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -1103,7 +1103,7 @@ void msrPartGroup::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrPartGroup>*
     p =
@@ -1122,7 +1122,7 @@ void msrPartGroup::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -1141,7 +1141,7 @@ void msrPartGroup::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   for (S_msrPartGroupElement partGroupElement : fPartGroupElementsList) {
     // browse the part group element
@@ -1161,7 +1161,7 @@ void msrPartGroup::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 std::string msrPartGroupImplicitKindAsString (

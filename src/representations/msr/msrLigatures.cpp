@@ -80,7 +80,7 @@ void msrLigature::setLigatureSideLinkToOtherEnd (
     __FILE__, __LINE__,
     sideLinkToOtherEnd != nullptr,
     "sideLinkToOtherEnd is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // set the two-way sideLink between both ends of the spanner
   fLigatureSideLinkToOtherEnd =
@@ -104,7 +104,7 @@ void msrLigature::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrLigature>*
     p =
@@ -123,7 +123,7 @@ void msrLigature::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -142,7 +142,7 @@ void msrLigature::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrLigature>*
     p =
@@ -161,7 +161,7 @@ void msrLigature::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif        
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }

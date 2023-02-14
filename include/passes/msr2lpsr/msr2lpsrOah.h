@@ -12,6 +12,7 @@
 #ifndef ___msr2lpsrOah___
 #define ___msr2lpsrOah___
 
+#include "mfStaticSettings.h"
 
 #include "oahBasicTypes.h"
 
@@ -169,7 +170,7 @@ class EXP msr2lpsrOahGroup : public oahGroup
 
 #ifdef MF_TRACE_IS_ENABLED
     void                  initializMsr2lpsrTraceOptions ();
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     void                  initializeScoreOutputOptions ();
 
@@ -221,4 +222,4 @@ EXP S_msr2lpsrOahGroup createGlobalMsr2lpsrOahGroup ();
 }
 
 
-#endif
+#endif // ___msr2lpsrOah___

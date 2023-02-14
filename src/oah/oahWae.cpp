@@ -85,7 +85,7 @@ void oahError (const std::string& errorMessage)
 
 #ifdef MF_ABORT_TO_DEBUG_ERRORS_IS_ENABLED
   abort ();
-#endif
+#endif // MF_ABORT_TO_DEBUG_ERRORS_IS_ENABLED
 
   throw mfOahException (errorMessage);
 }
@@ -105,7 +105,7 @@ void oahErrorWithContext (
 
 #ifdef MF_ABORT_TO_DEBUG_ERRORS_IS_ENABLED
   abort ();
-#endif
+#endif // MF_ABORT_TO_DEBUG_ERRORS_IS_ENABLED
 
   throw mfOahException (errorMessage);
 }
@@ -122,7 +122,7 @@ void oahInternalError (const std::string& errorMessage)
 
 #ifdef MF_ABORT_TO_DEBUG_ERRORS_IS_ENABLED
   abort ();
-#endif
+#endif // MF_ABORT_TO_DEBUG_ERRORS_IS_ENABLED
 
   throw mfOahException (errorMessage);
 }
@@ -156,7 +156,7 @@ void oahInternalErrorWithContext (
 
 #ifdef MF_ABORT_TO_DEBUG_ERRORS_IS_ENABLED
   abort ();
-#endif
+#endif // MF_ABORT_TO_DEBUG_ERRORS_IS_ENABLED
 
   throw mfOahException (errorMessage);
 }

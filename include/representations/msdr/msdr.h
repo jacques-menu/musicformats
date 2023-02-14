@@ -12,7 +12,6 @@
 #ifndef ___msdr___
 #define ___msdr___
 
-
 #include "msdrMusics.h"
 
 
@@ -23,4 +22,4 @@ EXP void initializeMSDR ();
 }
 
 
-#endif
+#endif // ___msdr___

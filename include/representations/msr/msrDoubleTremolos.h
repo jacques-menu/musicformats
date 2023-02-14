@@ -268,4 +268,4 @@ EXP std::ostream& operator << (std::ostream& os, const S_msrDoubleTremolo& elt);
 }
 
 
-#endif
+#endif // ___msrDoubleTremolos___

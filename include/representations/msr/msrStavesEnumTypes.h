@@ -54,4 +54,4 @@ std::ostream& operator << (std::ostream& os, const msrStaffChangeKind& elt);
 }
 
 
-#endif
+#endif // ___msrStavesEnumTypes___

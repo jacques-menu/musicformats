@@ -43,4 +43,4 @@ typedef SMARTP<msdl2guidoException> S_msdl2guidoException;
 }
 
 
-#endif
+#endif // ___guidoWae___

@@ -143,7 +143,7 @@ std::string wholeNotesAsLilypondString (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   int
     numerator    = wholeNotes.getNumerator (),
@@ -163,7 +163,7 @@ std::string wholeNotesAsLilypondString (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 /* JMI
   if (false && numerator <= 0) { // JMI
@@ -208,7 +208,7 @@ std::string wholeNotesAsLilypondString (
 
     return s2.str ();
   }
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   Bool
     integralNumberOfWholeNotes = denominator == 1;
@@ -229,7 +229,7 @@ std::string wholeNotesAsLilypondString (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   /*
     augmentation dots add half the preceding increment to the duration:
@@ -256,7 +256,7 @@ std::string wholeNotesAsLilypondString (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 /*
     default:
@@ -367,7 +367,7 @@ std::string wholeNotesAsLilypondString (
     //    __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     return result;
   }
@@ -385,7 +385,7 @@ std::string wholeNotesAsLilypondString (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // bring the resulting fraction to be less that two if needed
   if (integralNumberOfWholeNotes) {
@@ -405,7 +405,7 @@ std::string wholeNotesAsLilypondString (
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     while (numerator % 2 == 0) {
       numerator /= 2;
@@ -421,7 +421,7 @@ std::string wholeNotesAsLilypondString (
           denominatorDurationLog <<
           std::endl << std::endl;
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
     } // while
 
     // update the number of dots
@@ -447,7 +447,7 @@ std::string wholeNotesAsLilypondString (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // take care of the dots
   int multiplyingFactor = 1;
@@ -468,7 +468,7 @@ std::string wholeNotesAsLilypondString (
         multiplyingFactor <<
         std::endl << std::endl;
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
   }
   else {
     // set the multiplying factor
@@ -484,7 +484,7 @@ std::string wholeNotesAsLilypondString (
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     // 5/8 becomes 8*5
 
@@ -506,7 +506,7 @@ std::string wholeNotesAsLilypondString (
         multiplyingFactor <<
         std::endl << std::endl;
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     while (multiplyingFactor >= 2) {
       // double duration
@@ -525,7 +525,7 @@ std::string wholeNotesAsLilypondString (
           multiplyingFactor <<
           std::endl << std::endl;
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
     } // while
     */
   }
@@ -552,7 +552,7 @@ std::string wholeNotesAsLilypondString (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // generate the code for the duration
   std::stringstream ss;
@@ -612,7 +612,7 @@ std::string wholeNotesAsLilypondString (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // return the result
   dotsNumber = numeratorDots;
@@ -1278,7 +1278,7 @@ std::string msrSemiTonesPitchAndOctaveAsLilypondString (
       semiTonesPitchAndOctave->asString () <<
       " %}";
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   return ss.str ();
 }

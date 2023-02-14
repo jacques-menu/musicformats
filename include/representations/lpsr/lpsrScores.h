@@ -538,4 +538,4 @@ EXP std::ostream& operator << (std::ostream& os, const S_lpsrScore& elt);
 }
 
 
-#endif
+#endif // ___lpsrScores___

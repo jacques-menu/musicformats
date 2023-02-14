@@ -9,8 +9,8 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#ifndef ___msr2guidoInsiderOahGroup___
-#define ___msr2guidoInsiderOahGroup___
+#ifndef ___msr2guidoInsiderHandler___
+#define ___msr2guidoInsiderHandler___
 
 #include "oahBasicTypes.h"
 
@@ -21,6 +21,7 @@
 
 namespace MusicFormats
 {
+
 //_______________________________________________________________________________
 class EXP msr2guidoInsiderHandler : public oahInsiderHandler
 {
@@ -225,4 +226,4 @@ S_msr2guidoInsiderOahGroup createGlobalMsr2guidoOahGroup ();
 }
 
 
-#endif
+#endif // ___msr2guidoInsiderHandler___

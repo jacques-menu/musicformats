@@ -1841,7 +1841,7 @@ R"(Measure moments)",
   S_oahTwoBooleansAtomWithTracePasses
     traceVoiceMomentsBooleanAtom =
       oahTwoBooleansAtomWithTracePasses::create (
-        "trace-measure-moments", "tvm",
+        "trace-voice-moments", "tvm",
 R"(Voice moments)",
         "fTraceVoiceMoments",
         fTraceVoiceMoments,
@@ -2673,7 +2673,7 @@ void traceOahGroup::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_TraceOahGroup>*
     p =
@@ -2692,7 +2692,7 @@ void traceOahGroup::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -2711,7 +2711,7 @@ void traceOahGroup::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_TraceOahGroup>*
     p =
@@ -2730,7 +2730,7 @@ void traceOahGroup::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -2749,7 +2749,7 @@ void traceOahGroup::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   oahGroup::browseData (v);
 }
@@ -3294,7 +3294,7 @@ S_TraceOahGroup createGlobalTraceOahGroup (
 }
 
 
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 
 

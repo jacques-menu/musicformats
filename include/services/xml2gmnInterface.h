@@ -40,4 +40,4 @@ EXP int xml2gmn (
 
 }
 
-#endif
+#endif // __xml2gmnInterface___

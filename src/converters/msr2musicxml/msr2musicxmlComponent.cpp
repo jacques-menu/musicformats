@@ -60,7 +60,7 @@ S_mfcConverterComponent createMsr2musicxmlConverterComponent ()
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     // create the converter component
     pConverterComponent =

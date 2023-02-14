@@ -112,7 +112,7 @@ S_msrMultipleFullBarRests msrMultipleFullBarRests::createMultipleFullBarRestsNew
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
@@ -120,7 +120,7 @@ S_msrMultipleFullBarRests msrMultipleFullBarRests::createMultipleFullBarRestsNew
     __FILE__, __LINE__,
     containingVoice != nullptr,
     "containingVoice is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   S_msrMultipleFullBarRests
     newbornClone =
@@ -166,7 +166,7 @@ void msrMultipleFullBarRests::setMultipleFullBarRestsNextMeasureNumber (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fMultipleFullBarRestsNextMeasureNumber =
     nextMeasureNumber;
@@ -181,7 +181,7 @@ void msrMultipleFullBarRests::setMultipleFullBarRestsLastMeasurePuristMeasureNum
 //     __FILE__, __LINE__,
 //     fMultipleFullBarRestsContents != nullptr,
 //     "fMultipleFullBarRestsContents is null");
-// #endif
+// #endif // MF_SANITY_CHECKS_ARE_ENABLED
 //
 //   S_msrSegment
 //     multipleFullBarRestsContentsSegment =
@@ -194,6 +194,7 @@ void msrMultipleFullBarRests::setMultipleFullBarRestsLastMeasurePuristMeasureNum
 //     __FILE__, __LINE__,
 //     multipleFullBarRestsContentsSegment != nullptr,
 //     "multipleFullBarRestsContentsSegment is null");
+// #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // get multiple full-bar rests contents segment measure elements list
 //   const std::list<S_msrMeasure>&
@@ -241,7 +242,7 @@ void msrMultipleFullBarRests::setMultipleFullBarRestsLastMeasurePuristMeasureNum
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fMultipleFullBarRestsLastMeasurePuristNumber =
     lastMeasuresPuristNumber;
@@ -288,7 +289,7 @@ void msrMultipleFullBarRests::appendMeasureToMultipleFullBarRests (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fFullBarRestsMeasuresList.push_back (measure);
 
@@ -335,7 +336,7 @@ void msrMultipleFullBarRests::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrMultipleFullBarRests>*
     p =
@@ -354,7 +355,7 @@ void msrMultipleFullBarRests::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -373,7 +374,7 @@ void msrMultipleFullBarRests::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrMultipleFullBarRests>*
     p =
@@ -392,7 +393,7 @@ void msrMultipleFullBarRests::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -411,7 +412,7 @@ void msrMultipleFullBarRests::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
  // JMI   if (! inhibitMultipleFullBarRestsBrowsing) { // KAKA
   // browse the multiple full-bar rests measures
@@ -433,7 +434,7 @@ void msrMultipleFullBarRests::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 std::string msrMultipleFullBarRests::asString () const

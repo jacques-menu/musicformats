@@ -12,6 +12,8 @@
 #ifndef ___mxsr2msrOah___
 #define ___mxsr2msrOah___
 
+#include "mfStaticSettings.h"
+
 #include "msrClefs.h"
 #include "msrSegnos.h"
 
@@ -488,7 +490,7 @@ class EXP mxsr2msrOahGroup : public oahGroup
 
 #ifdef MF_TRACE_IS_ENABLED
     void                  initializeMxsr2msrTraceOptions ();
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     void                  initializePartsOptions ();
 
@@ -769,7 +771,7 @@ class EXP mxsr2msrOahGroup : public oahGroup
 #ifdef MF_TRACE_IS_ENABLED
     // specific trace
     // --------------------------------------
-#endif
+#endif // MF_TRACE_IS_ENABLED
 };
 typedef SMARTP<mxsr2msrOahGroup> S_mxsr2msrOahGroup;
 EXP std::ostream& operator << (std::ostream& os, const S_mxsr2msrOahGroup& elt);
@@ -784,4 +786,4 @@ EXP S_mxsr2msrOahGroup createGlobalMxsr2msrOahGroup (
 }
 
 
-#endif
+#endif // ___mxsr2msrOah___

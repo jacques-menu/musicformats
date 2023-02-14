@@ -96,7 +96,7 @@ ischemeInterpreterRegularHandler::ischemeInterpreterRegularHandler (
   if (gEarlyOptions.getEarlyTraceOah ()) {
     // JMI ???
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 ischemeInterpreterRegularHandler::~ischemeInterpreterRegularHandler ()
@@ -118,7 +118,7 @@ void ischemeInterpreterRegularHandler::createRegularHandlerGroups ()
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   createInformationsRegularGroup ();
 
@@ -145,7 +145,7 @@ void ischemeInterpreterRegularHandler::createRegularHandlerGroups ()
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void ischemeInterpreterRegularHandler::createInformationsRegularGroup ()
@@ -342,7 +342,7 @@ void ischemeInterpreterRegularHandler::createOahRegularGroup ()
 
 #ifdef MF_TRACE_IS_ENABLED
   registerAtomInRegularSubgroup (K_TRACE_EARLY_OPTIONS_OPTION_LONG_NAME, subGroup);
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   registerAtomInRegularSubgroup ("help", subGroup);
   registerAtomInRegularSubgroup ("help-summary", subGroup);
@@ -369,7 +369,7 @@ void ischemeInterpreterRegularHandler::createOahRegularGroup ()
 
   registerAtomInRegularSubgroup (K_TRACE_PASSES_OPTION_LONG_NAME, subGroup);
   registerAtomInRegularSubgroup (K_TRACE_ONLY_PASS_OPTION_LONG_NAME, subGroup);
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void ischemeInterpreterRegularHandler::createWarningAndErrorsRegularGroup ()
@@ -425,7 +425,7 @@ void ischemeInterpreterRegularHandler::checkOptionsAndArguments () const
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (MSDR_STANDARD_INPUT_NAME == std::string ("-")) {
     checkSingleInputSourceInArgumentsVector ();

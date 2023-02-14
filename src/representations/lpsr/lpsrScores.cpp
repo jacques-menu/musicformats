@@ -112,7 +112,7 @@ lpsrScore::lpsrScore (
     __FILE__, __LINE__,
     multiComponent != nullptr,
     "multiComponent is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fMsrScore = theMsrScore;
 
@@ -514,7 +514,7 @@ R"(
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // create the Scheme function
   S_lpsrSchemeFunction
@@ -567,7 +567,7 @@ R"(
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // create the Scheme function
   S_lpsrSchemeFunction
@@ -635,7 +635,7 @@ R"(
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // create the Scheme function
   S_lpsrSchemeFunction
@@ -703,7 +703,7 @@ tongue =
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // create the Scheme function
   S_lpsrSchemeFunction
@@ -765,7 +765,7 @@ editorialAccidental =
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // create the Scheme function
   S_lpsrSchemeFunction
@@ -824,7 +824,7 @@ ffffff = #(make-dynamic-script "ffffff")
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // create the Scheme function
   S_lpsrSchemeFunction
@@ -931,7 +931,7 @@ tupletsCurvedBrackets = {
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // create the Scheme function
   S_lpsrSchemeFunction
@@ -992,7 +992,7 @@ after =
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // create the Scheme function
   S_lpsrSchemeFunction
@@ -1111,7 +1111,7 @@ tempoNotesRelationship =
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // create the Scheme function
   S_lpsrSchemeFunction
@@ -1310,7 +1310,7 @@ glissandoTextOff = \revert Glissando.stencil
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // create the Scheme function
   S_lpsrSchemeFunction
@@ -1385,7 +1385,7 @@ otherDynamic =
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // create the Scheme function
   S_lpsrSchemeFunction
@@ -1712,7 +1712,7 @@ schleifer =
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // create the Scheme function
   S_lpsrSchemeFunction
@@ -1790,7 +1790,7 @@ scoopBelow = \once \override NoteHead #'stencil = #scoop-below-stencil
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // create the Scheme function
   S_lpsrSchemeFunction
@@ -1859,7 +1859,7 @@ damp = \markup {
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // create the Scheme function
   S_lpsrSchemeFunction
@@ -1922,7 +1922,7 @@ dampAll = \markup
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // create the Scheme function
   S_lpsrSchemeFunction
@@ -1990,7 +1990,7 @@ whiteNoteHeads =
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // create the Scheme function
   S_lpsrSchemeFunction
@@ -2051,7 +2051,7 @@ boxAroundNextBarNumber = {
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // create the Scheme function
   S_lpsrSchemeFunction
@@ -2152,7 +2152,7 @@ R"(
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // create the Scheme function
   S_lpsrSchemeFunction
@@ -2235,7 +2235,7 @@ R"(
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // create the Scheme function
   S_lpsrSchemeFunction
@@ -2300,7 +2300,7 @@ R"(
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // create the Scheme function
   S_lpsrSchemeFunction
@@ -2434,7 +2434,7 @@ R"(
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // create the Scheme function
   S_lpsrSchemeFunction
@@ -2556,7 +2556,7 @@ R"(
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // create the Scheme function
   S_lpsrSchemeFunction
@@ -2655,7 +2655,7 @@ R"(
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // create the Scheme function
   S_lpsrSchemeFunction
@@ -2737,7 +2737,7 @@ R"(
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // create the Scheme function
   S_lpsrSchemeFunction
@@ -2790,7 +2790,7 @@ R"(
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // create the Scheme function
   S_lpsrSchemeFunction
@@ -2834,7 +2834,7 @@ R"(
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // create the Scheme function
   S_lpsrSchemeFunction
@@ -2891,7 +2891,7 @@ void lpsrScore::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_lpsrScore>*
     p =
@@ -2910,7 +2910,7 @@ void lpsrScore::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -2929,7 +2929,7 @@ void lpsrScore::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_lpsrScore>*
     p =
@@ -2948,7 +2948,7 @@ void lpsrScore::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -2967,7 +2967,7 @@ void lpsrScore::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (fInputSourceNameComment) {
     // browse the input source name comment
@@ -3069,7 +3069,7 @@ void lpsrScore::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void lpsrScore::printFull (std::ostream& os) const
@@ -3086,7 +3086,7 @@ void lpsrScore::printFull (std::ostream& os) const
     __FILE__, __LINE__,
     fMsrScore != nullptr,
     "fMsrScore is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   ++gIndenter;
 
@@ -3302,7 +3302,7 @@ void lpsrScore::print (std::ostream& os) const
     __FILE__, __LINE__,
     fMsrScore != nullptr,
     "fMsrScore is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   ++gIndenter;
 

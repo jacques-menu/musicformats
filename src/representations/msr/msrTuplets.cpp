@@ -148,7 +148,7 @@ msrTuplet::msrTuplet (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 msrTuplet::~msrTuplet ()
@@ -169,7 +169,7 @@ S_msrTuplet msrTuplet::createTupletNewbornClone ()
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   S_msrTuplet
     newbornClone =
@@ -267,7 +267,7 @@ void msrTuplet::setTupletUpLinkToMeasure (
     __FILE__, __LINE__,
     measure != nullptr,
     "measure is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalTraceOahGroup->getTraceWholeNotes ()) {
@@ -289,7 +289,7 @@ void msrTuplet::setTupletUpLinkToMeasure (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fTupletUpLinkToMeasure = measure;
 }
@@ -320,7 +320,7 @@ void msrTuplet::appendNoteToTuplet (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -387,7 +387,7 @@ void msrTuplet::appendChordToTuplet (const S_msrChord& chord)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // set the chord kind
   chord->setChordKind (msrChordInKind::kChordInTuplet);
@@ -433,7 +433,7 @@ void msrTuplet::appendTupletToTuplet (const S_msrTuplet& tuplet)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 /* JMI
   // unapply containing tuplet factor,
@@ -479,7 +479,7 @@ void msrTuplet::appendTupletToTupletClone (const S_msrTuplet& tuplet)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // dont' unapply containing tuplet factor,
   // this has been done when building the MSR from MusicXML
@@ -552,7 +552,7 @@ S_msrNote msrTuplet::removeFirstNoteFromTuplet (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (fTupletElementsList.size ()) {
     S_msrElement
@@ -663,7 +663,7 @@ S_msrNote msrTuplet::removeLastNoteFromTuplet (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (fTupletElementsList.size ()) {
     S_msrElement
@@ -731,7 +731,7 @@ S_msrNote msrTuplet::removeLastNoteFromTuplet (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   return result;
 }
@@ -769,7 +769,7 @@ void msrTuplet::setMeasurePosition (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // handle the chord itself
   msrMeasureElement::setMeasurePosition (
@@ -802,7 +802,7 @@ void msrTuplet::setTupletMembersMeasurePositions (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   std::string context = // JMI v0.9.66
     "setTupletMembersMeasurePositions()";
@@ -813,7 +813,7 @@ void msrTuplet::setTupletMembersMeasurePositions (
     __FILE__, __LINE__,
     measurePosition != msrMoment::K_MEASURE_POSITION_UNKNOWN,
     "measurePosition == msrMoment::K_MEASURE_POSITION_UNKNOWN");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // set tuplet's measure position
   fMeasurePosition = measurePosition;
@@ -916,7 +916,7 @@ void msrTuplet::unapplySoundingFactorToTupletMembers (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fTupletFactor.setTupletActualNotes (
     fTupletFactor.getTupletActualNotes ()
@@ -953,7 +953,7 @@ void msrTuplet::finalizeTuplet (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 / * JMI v0.9.66
   // we can now set the measure position for all the tuplet members
@@ -977,7 +977,7 @@ void msrTuplet::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrTuplet>*
     p =
@@ -996,7 +996,7 @@ void msrTuplet::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -1015,7 +1015,7 @@ void msrTuplet::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrTuplet>*
     p =
@@ -1034,7 +1034,7 @@ void msrTuplet::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }

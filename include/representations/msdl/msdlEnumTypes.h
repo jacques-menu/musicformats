@@ -81,4 +81,4 @@ void initializeMSDLBasicTypes ();
 }
 
 
-#endif
+#endif // ___msdlEnumTypes___

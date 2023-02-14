@@ -12,6 +12,8 @@
 #ifndef ___ischemeInterpreterOah___
 #define ___ischemeInterpreterOah___
 
+#include "mfStaticSettings.h"
+
 #include "msrGenerationBasicTypes.h"
 
 #include "brailleGenerationOah.h"
@@ -167,7 +169,7 @@ class EXP ischemeInterpreterOahGroup : public oahGroup
 
 #ifdef MF_TRACE_IS_ENABLED
 // JMI    void                  initializeischemeInterpreterTraceOah ();
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     void                  initializeIschemeOptions ();
 
@@ -246,4 +248,4 @@ EXP S_ischemeInterpreterOahGroup createGlobalIschemeInterpreterOahGroup ();
 }
 
 
-#endif
+#endif // ___ischemeInterpreterOah___

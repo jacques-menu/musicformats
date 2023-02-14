@@ -63,7 +63,7 @@ bsr2brailleTranslator::bsr2brailleTranslator (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   switch (gGlobalBrailleGenerationOahGroup->getBrailleOutputKind ()) {
     case bsrBrailleOutputKind::kBrailleOutputAscii:
@@ -159,7 +159,7 @@ void bsr2brailleTranslator::visitStart (S_bsrScore& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void bsr2brailleTranslator::visitEnd (S_bsrScore& elt)
@@ -178,7 +178,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrScore& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -198,7 +198,7 @@ void bsr2brailleTranslator::visitStart (S_bsrSpaces& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 /* JMI
   gLog <<
@@ -229,7 +229,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrSpaces& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -249,7 +249,7 @@ void bsr2brailleTranslator::visitStart (S_bsrBarLine& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fBrailleGenerator->generateCodeForCellsList (
     elt->fetchCellsList ());
@@ -272,7 +272,7 @@ void bsr2brailleTranslator::visitStart (S_bsrTranscriptionNotes& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void bsr2brailleTranslator::visitEnd (S_bsrTranscriptionNotes& elt)
@@ -291,7 +291,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrTranscriptionNotes& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -311,7 +311,7 @@ void bsr2brailleTranslator::visitStart (S_bsrTranscriptionNotesElement& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fBrailleGenerator->generateCodeForCellsList (
     elt->fetchCellsList ());
@@ -332,7 +332,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrTranscriptionNotesElement& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -354,7 +354,7 @@ void bsr2brailleTranslator::visitStart (S_bsrPage& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void bsr2brailleTranslator::visitEnd (S_bsrPage& elt)
@@ -375,7 +375,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrPage& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fBrailleGenerator->
     generateCodeForBrailleCell (
@@ -400,7 +400,7 @@ void bsr2brailleTranslator::visitStart (S_bsrPageElement& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void bsr2brailleTranslator::visitEnd (S_bsrPageElement& elt)
@@ -421,7 +421,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrPageElement& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -443,7 +443,7 @@ void bsr2brailleTranslator::visitStart (S_bsrPagination& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fBrailleGenerator->generateCodeForCellsList (
     elt->fetchCellsList ());
@@ -467,7 +467,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrPagination& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -489,7 +489,7 @@ void bsr2brailleTranslator::visitStart (S_bsrPageHeading& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fBrailleGenerator->generateCodeForCellsList (
     elt->fetchCellsList ());
@@ -513,7 +513,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrPageHeading& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -535,7 +535,7 @@ void bsr2brailleTranslator::visitStart (S_bsrMusicHeading& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fBrailleGenerator->
     generateCodeForMusicHeading (elt);
@@ -579,7 +579,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrMusicHeading& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   if (false) { // JMI
@@ -593,7 +593,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrMusicHeading& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fBrailleGenerator->
     generateCodeForBrailleCell (
@@ -619,7 +619,7 @@ void bsr2brailleTranslator::visitStart (S_bsrFootNotes& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 /* JMI
   fBrailleGenerator->generateCodeForCellsList (
@@ -645,7 +645,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrFootNotes& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -667,7 +667,7 @@ void bsr2brailleTranslator::visitStart (S_bsrLine& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void bsr2brailleTranslator::visitEnd (S_bsrLine& elt)
@@ -688,7 +688,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrLine& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -710,7 +710,7 @@ void bsr2brailleTranslator::visitStart (S_bsrLineContents& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fBrailleGenerator->
     generateCodeForLineContents (elt);
@@ -734,7 +734,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrLineContents& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   if (false) { // JMI
@@ -748,7 +748,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrLineContents& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fBrailleGenerator->
     generateCodeForBrailleCell (
@@ -774,7 +774,7 @@ void bsr2brailleTranslator::visitStart (S_bsrMeasure& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void bsr2brailleTranslator::visitEnd (S_bsrMeasure& elt)
@@ -795,7 +795,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrMeasure& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -817,7 +817,7 @@ void bsr2brailleTranslator::visitStart (S_bsrNumber& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fBrailleGenerator->generateCodeForCellsList (
     elt->fetchCellsList ());
@@ -841,7 +841,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrNumber& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -863,7 +863,7 @@ void bsr2brailleTranslator::visitStart (S_bsrWords& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fBrailleGenerator->generateCodeForCellsList (
     elt->fetchCellsList ());
@@ -887,7 +887,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrWords& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -909,7 +909,7 @@ void bsr2brailleTranslator::visitStart (S_bsrClef& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fBrailleGenerator->generateCodeForCellsList (
     elt->fetchCellsList ());
@@ -933,7 +933,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrClef& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -955,7 +955,7 @@ void bsr2brailleTranslator::visitStart (S_bsrKey& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fBrailleGenerator->generateCodeForCellsList (
     elt->fetchCellsList ());
@@ -979,7 +979,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrKey& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -1000,7 +1000,7 @@ void bsr2brailleTranslator::visitStart (S_bsrTimeSignature& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 // JMI  fBrailleGenerator->generateCodeForCellsList (
  //   elt->fetchCellsList ());
@@ -1023,7 +1023,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrTimeSignature& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -1044,7 +1044,7 @@ void bsr2brailleTranslator::visitStart (S_bsrTempo& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fBrailleGenerator->generateCodeForCellsList (
     elt->fetchCellsList ());
@@ -1067,7 +1067,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrTempo& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -1088,7 +1088,7 @@ void bsr2brailleTranslator::visitStart (S_bsrNote& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 // JMI  fBrailleGenerator->generateCodeForCellsList (
  //   elt->fetchCellsList ());
@@ -1111,7 +1111,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrNote& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 

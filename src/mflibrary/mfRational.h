@@ -169,4 +169,4 @@ EXP void testRational ();
 }
 
 
-#endif
+#endif // ___mfRational___

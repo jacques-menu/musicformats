@@ -26,4 +26,4 @@ S_mfcPassComponent EXP createLpsr2lilypondComponent ();
 
 }
 
-#endif
+#endif // ___lpsr2lilypondComponent___

@@ -120,4 +120,4 @@ EXP std::ostream& operator << (std::ostream& os, const S_msrBarNumberCheck& elt)
 }
 
 
-#endif
+#endif // ___msrBarNumberChecks___

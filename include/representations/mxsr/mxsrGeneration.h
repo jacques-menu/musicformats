@@ -54,4 +54,4 @@ Sxmlelement createMxmlScorePartWiseElement ();
 }
 
 
-#endif
+#endif // ___mxsrGeneration___

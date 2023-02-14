@@ -101,7 +101,7 @@ static mfMusicformatsErrorKind sxmlFile2lilypondWithHandler (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // has quiet mode been requested?
   // ------------------------------------------------------
@@ -153,7 +153,7 @@ static mfMusicformatsErrorKind sxmlFile2lilypondWithHandler (
       err,
       __FILE__, __LINE__,
       gLanguage->quittingAfterPass (mfPassIDKind::kMfPassID_2a));
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     return mfMusicformatsErrorKind::kMusicformatsError_NONE;
   }
@@ -186,7 +186,7 @@ static mfMusicformatsErrorKind sxmlFile2lilypondWithHandler (
       err,
       __FILE__, __LINE__,
       gLanguage->quittingAfterPass (mfPassIDKind::kMfPassID_2b));
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     return mfMusicformatsErrorKind::kMusicformatsError_NONE;
   }
@@ -246,7 +246,7 @@ else {
       err,
       __FILE__, __LINE__,
       gLanguage->quittingAfterPass (mfPassIDKind::kMfPassID_3));
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     return mfMusicformatsErrorKind::kMusicformatsError_NONE;
   }
@@ -298,7 +298,7 @@ else {
 //       __FILE__, __LINE__,
 //       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (! outputFileName.size ()) {
 #ifdef MF_TRACE_IS_ENABLED
@@ -311,7 +311,7 @@ else {
 //       __FILE__, __LINE__,
 //       ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     // create an indented output stream for the LilyPond code
     // to be written to outputFileStream
@@ -353,7 +353,7 @@ else {
 //       __FILE__, __LINE__,
 //       ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     // open output file
 #ifdef MF_TRACE_IS_ENABLED
@@ -367,7 +367,7 @@ else {
 //       __FILE__, __LINE__,
 //       ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     std::ofstream
       outputFileStream (
@@ -429,7 +429,7 @@ else {
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     outputFileStream.close ();
   }
@@ -462,7 +462,7 @@ static mfMusicformatsErrorKind xmlFile2lilypondWithOptionsAndArguments (
     "xmlFile2musicxml(), sxmlfile is NULL" <<
     std::endl;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
@@ -491,7 +491,7 @@ static mfMusicformatsErrorKind xmlFile2lilypondWithOptionsAndArguments (
     ss <<
       handlerOptionsAndArguments;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // apply early options if any
   // ------------------------------------------------------
@@ -518,7 +518,7 @@ static mfMusicformatsErrorKind xmlFile2lilypondWithOptionsAndArguments (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // create an xml2ly insider OAH handler
   // ------------------------------------------------------

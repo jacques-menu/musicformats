@@ -61,7 +61,7 @@ void lpsrPartGroupBlock::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_lpsrPartGroupBlock>*
     p =
@@ -80,7 +80,7 @@ void lpsrPartGroupBlock::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -99,7 +99,7 @@ void lpsrPartGroupBlock::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_lpsrPartGroupBlock>*
     p =
@@ -118,7 +118,7 @@ void lpsrPartGroupBlock::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -137,7 +137,7 @@ void lpsrPartGroupBlock::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   for (
     std::list<S_msrElement>::const_iterator i = fPartGroupBlockElements.begin ();
@@ -161,7 +161,7 @@ void lpsrPartGroupBlock::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void lpsrPartGroupBlock::print (std::ostream& os) const

@@ -64,7 +64,7 @@ S_mfcConverterComponent createMsdl2lilypondConverterComponent ()
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     // create the converter component
     pConverterComponent =

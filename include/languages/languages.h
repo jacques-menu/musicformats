@@ -241,4 +241,4 @@ void initializeLanguages (); // JMI superflous? v0.9.67
 }
 
 
-#endif
+#endif // ___languages___

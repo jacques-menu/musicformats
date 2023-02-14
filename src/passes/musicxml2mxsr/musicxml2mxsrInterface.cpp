@@ -238,7 +238,7 @@ std::string uncompressMXLFile (
 
           --gIndenter;
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
         /*
         user@lilydev: ~/libmusicxml-git/musicxml > unzip -l UnofficialTestSuite/90a-Compressed-MusicXML.mxl
@@ -287,7 +287,7 @@ std::string uncompressMXLFile (
             gLog <<
               std::endl << std::endl;
           }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
           std::string stringFromLine = sm [1];
 
@@ -391,7 +391,7 @@ std::string uncompressMXLFile (
         ss.str ());
     }
   }
-#endif
+#endif // WIN32
 
   return uncompressedFileName;
 }
@@ -459,7 +459,7 @@ void checkSXMLFile (
     gLog <<
       std::endl; // twice ??? JMI
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // get the xmlDecl
   TXMLDecl * xmlDecl = sxmlfile->getXMLDecl ();
@@ -475,7 +475,7 @@ void checkSXMLFile (
     displayXMLDeclaration (
       xmlDecl);
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   // get the docType
@@ -491,7 +491,7 @@ void checkSXMLFile (
     displayMusicXMLDocumentType (
       docType);
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // get the encoding type
   std::string encoding = xmlDecl->getEncoding ();
@@ -510,7 +510,7 @@ void checkSXMLFile (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // is the encoding UTF-8?
   checkDesiredEncoding (
@@ -552,7 +552,7 @@ SXMLFile createSXMLFileFromFile (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // read the input MusicXML data from the file
 #ifdef TRACE_OAH
@@ -568,7 +568,7 @@ SXMLFile createSXMLFileFromFile (
           __FILE__, __LINE__,
           ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   xmlreader r;
 
@@ -632,7 +632,7 @@ SXMLFile createSXMLFileFromFd (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // read the input MusicXML data from the file descriptor
 #ifdef TRACE_OAH
@@ -648,7 +648,7 @@ SXMLFile createSXMLFileFromFd (
           __FILE__, __LINE__,
           ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   xmlreader r;
 
@@ -705,7 +705,7 @@ SXMLFile createSXMLFileFromString (
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     xmlreader r;
 
@@ -771,7 +771,7 @@ EXP Sxmlelement musicxmlFile2mxsr (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // has the input file name a ".mxl" suffix?
   size_t
@@ -881,7 +881,7 @@ EXP Sxmlelement musicxmlFd2mxsr (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // read the input MusicXML data from the file descriptor
   xmlreader r;
@@ -912,7 +912,7 @@ EXP Sxmlelement musicxmlFd2mxsr (
     displayXMLDeclaration (
       xmlDecl);
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   // get the docType
@@ -928,7 +928,7 @@ EXP Sxmlelement musicxmlFd2mxsr (
     displayMusicXMLDocumentType (
       docType);
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // get the encoding type JMI
   std::string encoding = xmlDecl->getEncoding ();
@@ -945,7 +945,7 @@ EXP Sxmlelement musicxmlFd2mxsr (
 //       ", desired encoding is \"" << desiredEncoding << "\"" <<
 //       std::endl;
 //   }
-// #endif
+// #endif // MF_TRACE_IS_ENABLED
 //
 //   if (encoding != desiredEncoding) {
 //      std::stringstream ss;
@@ -1012,7 +1012,7 @@ EXP Sxmlelement musicxmlString2mxsr ( // JMI UNUSED SAX ???
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // read the input MusicXML data from the buffer
   xmlreader r;
@@ -1070,7 +1070,7 @@ Sxmlelement convertMusicXMLToMxsr ( // JMI UNUSED SAX ???
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // register the input source name
   gServiceRunData->setInputSourceName (

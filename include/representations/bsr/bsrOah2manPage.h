@@ -50,4 +50,4 @@ typedef SMARTP<bsrOah2manPage> S_bsrOah2manPage;
 }
 
 
-#endif
+#endif // ___bsrOah2manPage___

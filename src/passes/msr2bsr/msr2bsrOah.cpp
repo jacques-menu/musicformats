@@ -29,6 +29,7 @@
 
 namespace MusicFormats
 {
+
 //_______________________________________________________________________________
 
 S_msr2bsrOahGroup gGlobalMsr2bsrOahGroup;
@@ -168,7 +169,7 @@ void msr2bsrOahGroup::initializeMsr2bsrOahGroup ()
   // trace
   // --------------------------------------
 // JMI  initializeMsr2bsrTraceOahGroup ();
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // miscellaneous
   // --------------------------------------
@@ -195,7 +196,7 @@ void msr2bsrOahGroup::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msr2bsrOahGroup>*
     p =
@@ -214,7 +215,7 @@ void msr2bsrOahGroup::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -233,7 +234,7 @@ void msr2bsrOahGroup::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msr2bsrOahGroup>*
     p =
@@ -252,7 +253,7 @@ void msr2bsrOahGroup::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -271,7 +272,7 @@ void msr2bsrOahGroup::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void msr2bsrOahGroup::displayMsr2bsrOahValues (int fieldWidth)
@@ -358,7 +359,7 @@ S_msr2bsrOahGroup createGlobalMsr2bsrOahGroup ()
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // protect library against multiple initializations
   if (! gGlobalMsr2bsrOahGroup) {

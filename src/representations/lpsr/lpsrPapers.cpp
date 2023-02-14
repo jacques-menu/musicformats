@@ -64,7 +64,7 @@ lpsrPaper::lpsrPaper (
 //     __FILE__, __LINE__,
 //     pageLayout != nullptr,
 //     "pageLayout is null");
-// #endif
+// #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fScaling = scaling;
   fPageLayout = pageLayout;
@@ -134,7 +134,7 @@ void lpsrPaper::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_lpsrPaper>*
     p =
@@ -153,7 +153,7 @@ void lpsrPaper::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -172,7 +172,7 @@ void lpsrPaper::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_lpsrPaper>*
     p =
@@ -191,7 +191,7 @@ void lpsrPaper::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -210,7 +210,7 @@ void lpsrPaper::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // browse the scaling
   if (fScaling) {
@@ -236,7 +236,7 @@ void lpsrPaper::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void lpsrPaper::printFull (std::ostream& os) const

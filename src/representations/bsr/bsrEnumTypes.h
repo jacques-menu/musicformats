@@ -281,7 +281,7 @@ EXP std::ostream& operator << (std::ostream& os, const wstring& wstr);
 }
 
 
-#endif
+#endif // ___bsrEnumTypes___
 
 
 /*

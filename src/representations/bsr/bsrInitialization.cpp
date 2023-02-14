@@ -44,7 +44,7 @@ void initializeBSR ()
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     // BSR braille output kinds handling
     // ------------------------------------------------------

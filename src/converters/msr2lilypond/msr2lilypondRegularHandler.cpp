@@ -76,7 +76,7 @@ msr2lilypondRegularHandler::msr2lilypondRegularHandler (
     "\" has been initialized as:" <<
     std::endl;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
   }
 
 msr2lilypondRegularHandler::~msr2lilypondRegularHandler ()
@@ -96,7 +96,7 @@ void msr2lilypondRegularHandler::createRegularHandlerGroups ()
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   createInformationsRegularGroup ();
 
@@ -177,7 +177,7 @@ void msr2lilypondRegularHandler::createRegularHandlerGroups ()
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void msr2lilypondRegularHandler::createOahRegularGroup ()
@@ -216,7 +216,7 @@ void msr2lilypondRegularHandler::createOahRegularGroup ()
 #ifdef MF_TRACE_IS_ENABLED
   registerAtomInRegularSubgroup (K_TRACE_EARLY_OPTIONS_OPTION_LONG_NAME, subGroup);
   registerAtomInRegularSubgroup (K_OAH_VERBOSE_MODE_OPTION_LONG_NAME, subGroup);
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   registerAtomInRegularSubgroup ("help", subGroup);
   registerAtomInRegularSubgroup ("help-summary", subGroup);
@@ -242,9 +242,7 @@ void msr2lilypondRegularHandler::createOahRegularGroup ()
   registerAtomInRegularSubgroup ("display-msr1-skeleton", subGroup);
 
   registerAtomInRegularSubgroup ("display-msr1", subGroup);
-  registerAtomInRegularSubgroup ("display-msr1", subGroup);
   registerAtomInRegularSubgroup ("display-msr1-full", subGroup);
-  registerAtomInRegularSubgroup ("display-msr2", subGroup);
   registerAtomInRegularSubgroup ("display-msr2", subGroup);
   registerAtomInRegularSubgroup ("display-msr2-full", subGroup);
 
@@ -257,7 +255,6 @@ void msr2lilypondRegularHandler::createOahRegularGroup ()
   registerAtomInRegularSubgroup ("display-msr1-summary", subGroup);
   registerAtomInRegularSubgroup ("display-msr2-summary", subGroup);
 
-  registerAtomInRegularSubgroup ("display-lpsr", subGroup);
   registerAtomInRegularSubgroup ("display-lpsr", subGroup);
   registerAtomInRegularSubgroup ("display-lpsr-full", subGroup);
 
@@ -299,7 +296,7 @@ void msr2lilypondRegularHandler::createOahRegularGroup ()
 //   registerAtomInRegularSubgroup ("markup-system-spacing-padding", subGroup);
 //   registerAtomInRegularSubgroup ("between-system-space", subGroup);
 //   registerAtomInRegularSubgroup ("page-top-spacing", subGroup);
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void msr2lilypondRegularHandler::createInformationsRegularGroup ()
@@ -1005,7 +1002,7 @@ void msr2lilypondRegularHandler::createChordsRegularGroup ()
 
 #ifdef MF_TRACE_IS_ENABLED
   registerAtomInRegularSubgroup ("trace-chords", subGroup);
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   registerAtomInRegularSubgroup ("lpsr-pitches-language", subGroup);
 
@@ -1307,12 +1304,10 @@ void msr2lilypondRegularHandler::createHarmoniesRegularGroup ()
 
   registerAtomInRegularSubgroup ("show-harmony-voices", subGroup);
 
-#ifdef MF_HARMONIES_EXTRA_IS_ENABLED
   registerAtomInRegularSubgroup ("display-harmonies-structures", subGroup);
   registerAtomInRegularSubgroup ("display-all-harmonies-contents", subGroup);
   registerAtomInRegularSubgroup ("display-harmony-details", subGroup);
   registerAtomInRegularSubgroup ("display-harmony-analysis", subGroup);
-#endif
 }
 
 void msr2lilypondRegularHandler::createFiguredBassRegularGroup ()
@@ -1693,7 +1688,7 @@ void msr2lilypondRegularHandler::checkOptionsAndArguments () const
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   checkSingleInputSourceInArgumentsVector ();
 }

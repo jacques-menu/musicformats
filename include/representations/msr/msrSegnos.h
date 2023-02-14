@@ -225,4 +225,4 @@ EXP std::ostream& operator << (std::ostream& os, const S_msrDalSegno& elt);
 }
 
 
-#endif
+#endif // ___msrSegnos___

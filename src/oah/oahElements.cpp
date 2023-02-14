@@ -162,7 +162,7 @@ oahFindStringMatch::oahFindStringMatch (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 oahFindStringMatch::~oahFindStringMatch ()
@@ -470,7 +470,7 @@ std::string oahElement::fetchNamesInColumnsBetweenParentheses (
 //       ".\\\" ==> oahElement::acceptIn ()" <<
 //       std::endl;
 //   }
-// #endif
+// #endif // MF_TRACE_IS_ENABLED
 //
 //   if (visitor<S_oahElement>*
 //     p =
@@ -483,7 +483,7 @@ std::string oahElement::fetchNamesInColumnsBetweenParentheses (
 //             ".\\\" ==> Launching oahElement::visitStart ()" <<
 //             std::endl;
 //         }
-// #endif
+// #endif // MF_TRACE_IS_ENABLED
 //         p->visitStart (elem);
 //   }
 // }
@@ -496,7 +496,7 @@ std::string oahElement::fetchNamesInColumnsBetweenParentheses (
 //       ".\\\" ==> oahElement::acceptOut ()" <<
 //       std::endl;
 //   }
-// #endif
+// #endif // MF_TRACE_IS_ENABLED
 //
 //   if (visitor<S_oahElement>*
 //     p =
@@ -509,7 +509,7 @@ std::string oahElement::fetchNamesInColumnsBetweenParentheses (
 //             ".\\\" ==> Launching oahElement::visitEnd ()" <<
 //             std::endl;
 //         }
-// #endif
+// #endif // MF_TRACE_IS_ENABLED
 //         p->visitEnd (elem);
 //   }
 // }
@@ -522,7 +522,7 @@ std::string oahElement::fetchNamesInColumnsBetweenParentheses (
 //       ".\\\" ==> oahElement::browseData ()" <<
 //       std::endl;
 //   }
-// #endif
+// #endif // MF_TRACE_IS_ENABLED
 // }
 
 Bool oahElement::findStringInFindableElement (

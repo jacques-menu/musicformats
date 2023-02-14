@@ -91,4 +91,4 @@ typedef SMARTP<lpsrVariableUseCommand> S_lpsrVariableUseCommand;
 }
 
 
-#endif
+#endif // ___lpsrTypesForwardDeclarations___

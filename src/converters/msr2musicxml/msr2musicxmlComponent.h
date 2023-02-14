@@ -27,5 +27,5 @@ S_mfcConverterComponent EXP createMsr2musicxmlConverterComponent ();
 }
 
 
-#endif
+#endif // ___msr2musicxmlComponent___
 

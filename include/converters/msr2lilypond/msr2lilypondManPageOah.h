@@ -12,6 +12,8 @@
 #ifndef ___msr2lilypondManPageOah___
 #define ___msr2lilypondManPageOah___
 
+#include "mfStaticSettings.h"
+
 #include "oahVisitor.h"
 
 #include "msr2lilypondOah2manPage.h"
@@ -153,7 +155,7 @@ class EXP msr2lilypondManPageOahGroup : public oahGroup
 
 #ifdef MF_TRACE_IS_ENABLED
     void                  initializeManPageTraceOah ();
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   public:
 
@@ -194,4 +196,4 @@ EXP S_msr2lilypondManPageOahGroup createGlobalMsr2lilypondManPageOahGroup (
 }
 
 
-#endif
+#endif // ___msr2lilypondManPageOah___

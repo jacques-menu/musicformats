@@ -61,7 +61,7 @@ msrMeasureRepeatElement::msrMeasureRepeatElement (
     __FILE__, __LINE__,
     upLinkToMeasureRepeat != nullptr,
     "upLinkToMeasureRepeat is null");
-#endif
+// #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fMeasureRepeatElementUpLinkToMeasureRepeat = upLinkToMeasureRepeat;
 }
@@ -89,7 +89,7 @@ void msrMeasureRepeatElement::appendSegmentToMeasureRepeatElementsList ( // JMI 
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
@@ -97,7 +97,7 @@ void msrMeasureRepeatElement::appendSegmentToMeasureRepeatElementsList ( // JMI 
     __FILE__, __LINE__,
     segment != nullptr,
     "segment is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fMeasureRepeatElementsList.push_back (segment);
 }
@@ -122,7 +122,7 @@ void msrMeasureRepeatElement::appendMeasureRepeatToMeasureRepeatElementsList (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
@@ -130,7 +130,7 @@ void msrMeasureRepeatElement::appendMeasureRepeatToMeasureRepeatElementsList (
     __FILE__, __LINE__,
     measureRepeat != nullptr,
     "measureRepeat is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fMeasureRepeatElementsList.push_back (measureRepeat);
 }
@@ -155,7 +155,7 @@ void msrMeasureRepeatElement::appendVoiceElementToMeasureRepeatElementsList (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
@@ -163,7 +163,7 @@ void msrMeasureRepeatElement::appendVoiceElementToMeasureRepeatElementsList (
     __FILE__, __LINE__,
     voiceElement != nullptr,
     "voiceElement is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fMeasureRepeatElementsList.push_back (voiceElement);
 }
@@ -263,7 +263,7 @@ void msrMeasureRepeatElement::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrMeasureRepeatElement>*
     p =
@@ -282,7 +282,7 @@ void msrMeasureRepeatElement::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -301,7 +301,7 @@ void msrMeasureRepeatElement::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrMeasureRepeatElement>*
     p =
@@ -320,7 +320,7 @@ void msrMeasureRepeatElement::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -509,7 +509,7 @@ msrMeasureRepeatPattern::msrMeasureRepeatPattern (
     __FILE__, __LINE__,
     upLinkToMeasureRepeat != nullptr,
     "upLinkToMeasureRepeat is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fUpLinkToMeasureRepeat = upLinkToMeasureRepeat;
 }
@@ -536,7 +536,7 @@ void msrMeasureRepeatPattern::setMeasureRepeatPatternSegment (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
@@ -544,7 +544,7 @@ void msrMeasureRepeatPattern::setMeasureRepeatPatternSegment (
     __FILE__, __LINE__,
     measureRepeatPatternSegment != nullptr,
     "measureRepeatPatternSegment is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fMeasureRepeatPatternSegment =
     measureRepeatPatternSegment;
@@ -580,7 +580,7 @@ void msrMeasureRepeatPattern::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrMeasureRepeatPattern>*
     p =
@@ -599,7 +599,7 @@ void msrMeasureRepeatPattern::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -618,7 +618,7 @@ void msrMeasureRepeatPattern::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrMeasureRepeatPattern>*
     p =
@@ -637,7 +637,7 @@ void msrMeasureRepeatPattern::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -656,7 +656,7 @@ void msrMeasureRepeatPattern::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (fMeasureRepeatPatternSegment) {
     // browse the pattern segment
@@ -754,7 +754,7 @@ msrMeasureRepeatReplicas::msrMeasureRepeatReplicas (
     __FILE__, __LINE__,
     upLinkToMeasureRepeat != nullptr,
     "upLinkToMeasureRepeat is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fUpLinkToMeasureRepeat = upLinkToMeasureRepeat;
 }
@@ -781,7 +781,7 @@ void msrMeasureRepeatReplicas::setMeasureRepeatReplicasSegment (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
@@ -789,7 +789,7 @@ void msrMeasureRepeatReplicas::setMeasureRepeatReplicasSegment (
     __FILE__, __LINE__,
     measureRepeatReplicasSegment != nullptr,
     "measureRepeatReplicasSegment is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fMeasureRepeatReplicasSegment =
     measureRepeatReplicasSegment;
@@ -825,7 +825,7 @@ void msrMeasureRepeatReplicas::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrMeasureRepeatReplicas>*
     p =
@@ -844,7 +844,7 @@ void msrMeasureRepeatReplicas::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -863,7 +863,7 @@ void msrMeasureRepeatReplicas::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrMeasureRepeatReplicas>*
     p =
@@ -882,7 +882,7 @@ void msrMeasureRepeatReplicas::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -901,7 +901,7 @@ void msrMeasureRepeatReplicas::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (fMeasureRepeatReplicasSegment) {
   // browse the replicas segment
@@ -1005,7 +1005,7 @@ msrMeasureRepeat::msrMeasureRepeat (
     __FILE__, __LINE__,
     measureRepeatMeasuresNumber > 0,
     "measureRepeatMeasuresNumber is not positive");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fMeasureRepeatMeasuresNumber = measureRepeatMeasuresNumber;
 
@@ -1015,7 +1015,7 @@ msrMeasureRepeat::msrMeasureRepeat (
     __FILE__, __LINE__,
     measureRepeatSlashesNumber > 0,
     "measureRepeatSlashesNumber is not positive");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fMeasureRepeatSlashesNumber  = measureRepeatSlashesNumber;
 
@@ -1046,7 +1046,7 @@ S_msrMeasureRepeat msrMeasureRepeat::createMeasureRepeatNewbornClone (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
@@ -1054,7 +1054,7 @@ S_msrMeasureRepeat msrMeasureRepeat::createMeasureRepeatNewbornClone (
     __FILE__, __LINE__,
     containingVoice != nullptr,
     "containingVoice is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   S_msrMeasureRepeat
     newbornClone =
@@ -1087,7 +1087,7 @@ void msrMeasureRepeat::setMeasureRepeatPattern (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
@@ -1095,7 +1095,7 @@ void msrMeasureRepeat::setMeasureRepeatPattern (
     __FILE__, __LINE__,
     measureRepeatPattern != nullptr,
     "measureRepeatPattern is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fMeasureRepeatPattern = measureRepeatPattern;
 
@@ -1124,7 +1124,7 @@ void msrMeasureRepeat::setMeasureRepeatReplicas (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
@@ -1132,7 +1132,7 @@ void msrMeasureRepeat::setMeasureRepeatReplicas (
     __FILE__, __LINE__,
     measureRepeatReplicas != nullptr,
     "measureRepeatReplicas is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fMeasureRepeatReplicas = measureRepeatReplicas;
 
@@ -1152,7 +1152,7 @@ int msrMeasureRepeat::fetchMeasureRepeatReplicasNumber () const
     __FILE__, __LINE__,
     patternMeasuresNumber > 0,
     "patternMeasuresNumber is not positive");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   return
     fetchMeasureRepeatReplicasMeasuresNumber ()
@@ -1168,7 +1168,7 @@ int msrMeasureRepeat::fetchMeasureRepeatPatternMeasuresNumber () const
     __FILE__, __LINE__,
     fMeasureRepeatPattern != nullptr,
     "fMeasureRepeatPattern is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   return
     fMeasureRepeatPattern->
@@ -1183,7 +1183,7 @@ int msrMeasureRepeat::fetchMeasureRepeatReplicasMeasuresNumber () const
     __FILE__, __LINE__,
     fMeasureRepeatReplicas != nullptr,
     "fMeasureRepeatReplicas is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   return
     fMeasureRepeatReplicas->
@@ -1204,7 +1204,7 @@ void msrMeasureRepeat::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrMeasureRepeat>*
     p =
@@ -1223,7 +1223,7 @@ void msrMeasureRepeat::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -1242,7 +1242,7 @@ void msrMeasureRepeat::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrMeasureRepeat>*
     p =
@@ -1261,7 +1261,7 @@ void msrMeasureRepeat::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -1280,7 +1280,7 @@ void msrMeasureRepeat::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (fMeasureRepeatPattern) {
   // browse the measdure repeat pattern
@@ -1314,7 +1314,7 @@ void msrMeasureRepeat::browseData (basevisitor* v)
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
   }
 
   if (fMeasureRepeatReplicas) {
@@ -1462,7 +1462,7 @@ void msrMeasureRepeat::print (std::ostream& os) const
         fCurrentMeasureRepeatBuildPhaseKind) <<
       std::endl;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // print the measures repeat pattern
   if (! fMeasureRepeatPattern) {

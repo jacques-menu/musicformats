@@ -33,6 +33,7 @@
 #include "waeOah.h"
 #include "mfOutputFileOah.h"
 #include "oahDisplayOah.h"
+#include "oahHarmoniesExtraOah.h"
 
 #include "msrOah.h"
 #include "msr2lpsrOah.h"
@@ -102,7 +103,7 @@ Usage: msr2lilypond [[option]* [MusicXMLFile|-] [[option]*
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // initialize the history
   initializeHandlerMultiComponent ();
@@ -194,7 +195,7 @@ void msr2lilypondInsiderHandler::createTheMsr2lilypondPrefixes ()
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   createTheCommonPrefixes ();
 }
@@ -217,7 +218,7 @@ void msr2lilypondInsiderHandler::createTheMsr2lilypondOptionGroups (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // initialize options handling, phase 1
   // ------------------------------------------------------
@@ -236,7 +237,7 @@ void msr2lilypondInsiderHandler::createTheMsr2lilypondOptionGroups (
   appendGroupToHandler (
     createGlobalTraceOahGroup (
       this));
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // create the output file OAH group
   appendGroupToHandler (
@@ -279,11 +280,9 @@ void msr2lilypondInsiderHandler::createTheMsr2lilypondOptionGroups (
   appendGroupToHandler (
     createGlobalLpsr2lilypondOahGroup ());
 
-#ifdef MF_HARMONIES_EXTRA_IS_ENABLED
   // create the extra OAH group
   appendGroupToHandler (
     createGlobalHarmoniesExtraOahGroup ());
-#endif
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getEarlyTraceOahDetails ()) {
@@ -303,7 +302,7 @@ void msr2lilypondInsiderHandler::createTheMsr2lilypondOptionGroups (
 
     --gIndenter;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
 if (gEarlyOptions.getEarlyTraceOahDetails ()) {
@@ -313,7 +312,7 @@ if (gEarlyOptions.getEarlyTraceOahDetails ()) {
 
     this->printHelp (gOutput);
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //______________________________________________________________________________
@@ -333,7 +332,7 @@ void msr2lilypondInsiderHandler::checkOptionsAndArguments () const
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   checkSingleInputSourceInArgumentsVector ();
 }
@@ -355,7 +354,7 @@ std::string msr2lilypondInsiderHandler::fetchOutputFileNameFromTheOptions () con
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   S_oahStringAtom
     outputFileNameStringAtom =
@@ -449,7 +448,7 @@ std::string msr2lilypondInsiderHandler::fetchOutputFileNameFromTheOptions () con
           __FILE__, __LINE__,
           ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       // append the file extension to the output file name
        outputFileName += ".ly";
@@ -468,7 +467,7 @@ std::string msr2lilypondInsiderHandler::fetchOutputFileNameFromTheOptions () con
           __FILE__, __LINE__,
           ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
     }
 
     else {
@@ -491,7 +490,7 @@ void msr2lilypondInsiderHandler::enforceHandlerQuietness ()
 #ifdef MF_TRACE_IS_ENABLED
   gGlobalTraceOahGroup->
     enforceGroupQuietness ();
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   gGlobalMsr2lilypondInsiderOahGroup->
     enforceGroupQuietness ();
@@ -508,10 +507,8 @@ void msr2lilypondInsiderHandler::enforceHandlerQuietness ()
   gGlobalLpsr2lilypondOahGroup->
     enforceGroupQuietness ();
 
-#ifdef MF_HARMONIES_EXTRA_IS_ENABLED
-  gGlobalHarmoniesExtraOahGroup->
+  gHarmoniesExtraOahGroup->
     enforceGroupQuietness ();
-#endif
 }
 
 //______________________________________________________________________________
@@ -537,7 +534,7 @@ void msr2lilypondInsiderOahGroup::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msr2lilypondInsiderOahGroup>*
     p =
@@ -556,7 +553,7 @@ void msr2lilypondInsiderOahGroup::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -575,7 +572,7 @@ void msr2lilypondInsiderOahGroup::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msr2lilypondInsiderOahGroup>*
     p =
@@ -594,7 +591,7 @@ void msr2lilypondInsiderOahGroup::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -613,7 +610,7 @@ void msr2lilypondInsiderOahGroup::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   oahGroup::browseData (v);
 }
@@ -711,7 +708,7 @@ void msr2lilypondInsiderOahGroup::initializeMsr2lilypondInsiderOahGroup ()
     "\" group" <<
     std::endl;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //______________________________________________________________________________
@@ -760,7 +757,7 @@ S_msr2lilypondInsiderOahGroup createGlobalMsr2lilypondInsiderOahGroup ()
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // protect library against multiple initializations
   if (! gGlobalMsr2lilypondInsiderOahGroup) {

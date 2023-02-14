@@ -167,4 +167,4 @@ class EXP bsr2brailleTranslator :
 }
 
 
-#endif
+#endif // ___bsr2brailleTranslator___

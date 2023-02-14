@@ -101,4 +101,4 @@ EXP std::ostream& operator << (std::ostream& os, const S_msrElement& elt);
 }
 
 
-#endif
+#endif // ___msrElements___

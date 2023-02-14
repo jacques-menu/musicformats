@@ -107,20 +107,17 @@ void displayMsrScore (
     __FILE__, __LINE__,
     theMsrScore != nullptr,
     "theMsrScore is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // start the clock
   clock_t startClock =  clock ();
 
   setGlobalCurrentPassIDKind (mfPassIDKind::kMfPassID_OptionalPass);
 
-#ifdef MF_TRACING_IS_ENABLED
   std::string separator =
     "%--------------------------------------------------------------";
 
-  std::stringstream ss;
-
-  ss <<
+  gLog <<
     std::endl <<
     separator <<
     std::endl <<
@@ -129,12 +126,10 @@ void displayMsrScore (
     std::endl <<
     separator <<
     std::endl << std::endl <<
-    theMsrScore;
 
-  gWaeHandler->waeTrace (
-    __FILE__, __LINE__,
-    ss.str ());
-#endif
+    theMsrScore <<
+
+    std::endl << std::endl;
 
   // register time spent
   clock_t endClock = clock ();
@@ -175,37 +170,31 @@ void displayMsrScoreFull (
     __FILE__, __LINE__,
     theMsrScore != nullptr,
     "theMsrScore is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // start the clock
   clock_t startClock = clock ();
 
   setGlobalCurrentPassIDKind (mfPassIDKind::kMfPassID_OptionalPass);
 
-#ifdef MF_TRACING_IS_ENABLED
   std::string separator =
     "%--------------------------------------------------------------";
 
-  std::stringstream ss;
-
-  ss <<
+  gLog <<
     std::endl <<
     separator <<
     std::endl <<
     gTab <<
     gLanguage->passOptional () << ": "<< passDescription <<
-    ", " <<
-    gLanguage->fullVersion () <<
+    ", " << gLanguage->fullVersion () <<
     std::endl <<
     separator <<
     std::endl << std::endl;
 
-  gLog << theMsrScore;
+    theMsrScore->printFull (gLog);
 
-  gWaeHandler->waeTrace (
-    __FILE__, __LINE__,
-    ss.str ());
-#endif
+  gLog <<
+    std::endl << std::endl;
 
   // register time spent
   clock_t endClock = clock ();
@@ -247,38 +236,27 @@ void displayMsrScoreSummary (
     __FILE__, __LINE__,
     theMsrScore != nullptr,
     "theMsrScore is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // start the clock
   clock_t startClock = clock ();
 
   setGlobalCurrentPassIDKind (mfPassIDKind::kMfPassID_OptionalPass);
 
-#ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTracePasses ()) {
-    std::string separator =
-      "%--------------------------------------------------------------";
+  std::string separator =
+    "%--------------------------------------------------------------";
 
-    std::stringstream ss;
-
-    ss <<
-      std::endl <<
-      separator <<
-      std::endl <<
-      gTab <<
+  gLog <<
+    std::endl <<
+    separator <<
+    std::endl <<
+    gTab <<
     gLanguage->passOptional () << ": "<< passDescription <<
-      passDescription <<
-      ", " <<
-      gLanguage->summary () <<
-      std::endl <<
-      separator <<
-      std::endl << std::endl;
-
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
-  }
-#endif
+    ", " <<
+    gLanguage->summary () <<
+    std::endl <<
+    separator <<
+    std::endl << std::endl;
 
   // create an msr2summaryVisitor visitor
   msr2summaryVisitor
@@ -311,37 +289,25 @@ void displayMsrScoreNames (
     __FILE__, __LINE__,
     theMsrScore != nullptr,
     "theMsrScore is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // start the clock
   clock_t startClock = clock ();
 
   setGlobalCurrentPassIDKind (mfPassIDKind::kMfPassID_OptionalPass);
 
-#ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTracePasses ()) {
-    std::string separator =
-      "%--------------------------------------------------------------";
+  std::string separator =
+    "%--------------------------------------------------------------";
 
-    std::stringstream ss;
-
-    ss <<
-      std::endl <<
-      separator <<
-      std::endl <<
-      gTab <<
-      gLanguage->passOptional () << ": "<< passDescription <<
-      ", " <<
-      gLanguage->names () <<
-      std::endl <<
-      separator <<
-      std::endl << std::endl;
-
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
-  }
-#endif
+  gLog <<
+    std::endl <<
+    separator <<
+    std::endl <<
+    gTab <<
+    gLanguage->passOptional () << ": "<< passDescription <<
+    std::endl <<
+    separator <<
+    std::endl << std::endl;
 
   // create an msr2namesVisitor visitor
   msr2namesVisitor
@@ -373,38 +339,32 @@ void displayMsrScoreSlices (
     __FILE__, __LINE__,
     theMsrScore != nullptr,
     "theMsrScore is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // start the clock
   clock_t startClock = clock ();
 
   setGlobalCurrentPassIDKind (mfPassIDKind::kMfPassID_OptionalPass);
 
-#ifdef MF_TRACING_IS_ENABLED
   std::string separator =
     "%--------------------------------------------------------------";
 
-  std::stringstream ss;
-
-  ss <<
-
+  gLog <<
     std::endl <<
     separator <<
     std::endl <<
     gTab <<
     gLanguage->passOptional () << ": "<< passDescription <<
     ", " <<
-    gWaeHandler->slices () <<
+    gLanguage->slices () <<
     std::endl <<
     separator <<
     std::endl << std::endl;
 
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
-#endif
-
   theMsrScore->printSlices (gLog);
+
+  gLog <<
+    std::endl << std::endl;
 
   // register time spent
   clock_t endClock = clock ();

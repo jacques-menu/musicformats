@@ -235,4 +235,4 @@ std::string multipleFullBarRestsWholeNotesAsMsrString (
 
 }
 
-#endif
+#endif // ___msrDurations___

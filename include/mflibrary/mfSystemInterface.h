@@ -46,7 +46,7 @@ namespace MusicFormats
 
   // see https://stackoverflow.com/questions/341817/is-there-a-replacement-for-unistd-h-for-windows-visual-c
   #define isatty _isatty
-#endif
+#endif // WIN32
 
 //______________________________________________________________________________
 EXP char* mfStrErrorCString ();
@@ -60,4 +60,4 @@ EXP int mfExecuteCommand (
 }
 
 
-#endif
+#endif // ___mfSystemInterface___

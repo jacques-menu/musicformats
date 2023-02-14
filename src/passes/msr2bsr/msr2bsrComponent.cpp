@@ -32,7 +32,7 @@ S_mfcPassComponent createMsr2bsrComponent ()
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // protect library against multiple initializations
   if (! pPassComponent) {

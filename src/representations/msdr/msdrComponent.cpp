@@ -36,7 +36,7 @@ S_mfcRepresentationComponent getMsdrRepresentationComponent ()
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     // create the format component
     pRepresentationComponent =

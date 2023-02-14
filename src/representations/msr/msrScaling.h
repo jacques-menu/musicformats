@@ -98,4 +98,4 @@ EXP std::ostream& operator << (std::ostream& os, const S_msrScaling& elt);
 }
 
 
-#endif
+#endif // ___msrScaling___

@@ -100,7 +100,7 @@ void lpsrParallelMusicBLock::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_lpsrParallelMusicBLock>*
     p =
@@ -119,7 +119,7 @@ void lpsrParallelMusicBLock::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -138,7 +138,7 @@ void lpsrParallelMusicBLock::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_lpsrParallelMusicBLock>*
     p =
@@ -157,7 +157,7 @@ void lpsrParallelMusicBLock::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -176,7 +176,7 @@ void lpsrParallelMusicBLock::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   for (
     std::list<S_lpsrPartGroupBlock>::const_iterator i =
@@ -201,7 +201,7 @@ void lpsrParallelMusicBLock::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void lpsrParallelMusicBLock::print (std::ostream& os) const

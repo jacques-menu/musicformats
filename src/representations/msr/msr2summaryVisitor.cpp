@@ -24,6 +24,8 @@
 
 #include "msrBrowsers.h"
 
+#include "waeHandlers.h"
+
 
 namespace MusicFormats
 {
@@ -98,7 +100,7 @@ void msr2summaryVisitor::visitStart (S_msrScore& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   gLog <<
     "MSR contents summary of \"" <<
@@ -125,7 +127,7 @@ void msr2summaryVisitor::visitEnd (S_msrScore& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   gLog <<
     "The score contains:" <<
@@ -274,7 +276,7 @@ void msr2summaryVisitor::visitStart (S_msrPartGroup& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++fPartGroupsCounter;
 
@@ -359,7 +361,7 @@ void msr2summaryVisitor::visitEnd (S_msrPartGroup& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -377,7 +379,7 @@ void msr2summaryVisitor::visitStart (S_msrPart& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++fPartsCounter;
 
@@ -448,7 +450,7 @@ void msr2summaryVisitor::visitEnd (S_msrPart& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -466,7 +468,7 @@ void msr2summaryVisitor::visitStart (S_msrStaff& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++fStavesCounter;
 
@@ -524,7 +526,7 @@ void msr2summaryVisitor::visitEnd (S_msrStaff& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fOnGoingStaff = false;
 }
@@ -544,7 +546,7 @@ void msr2summaryVisitor::visitStart (S_msrVoice& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++fVoicesCounter;
 
@@ -605,7 +607,7 @@ void msr2summaryVisitor::visitEnd (S_msrVoice& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -623,7 +625,7 @@ void msr2summaryVisitor::visitStart (S_msrStanza& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++fStanzasCounter;
 
@@ -659,7 +661,7 @@ void msr2summaryVisitor::visitEnd (S_msrStanza& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -677,7 +679,7 @@ void msr2summaryVisitor::visitStart (S_msrSyllable& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void msr2summaryVisitor::visitEnd (S_msrSyllable& elt)
@@ -694,7 +696,7 @@ void msr2summaryVisitor::visitEnd (S_msrSyllable& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -712,7 +714,7 @@ void msr2summaryVisitor::visitStart (S_msrClef& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (! fOnGoingStaff) {
     gLog <<
@@ -735,7 +737,7 @@ void msr2summaryVisitor::visitEnd (S_msrClef& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -753,7 +755,7 @@ void msr2summaryVisitor::visitStart (S_msrKey& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (! fOnGoingStaff) {
     gLog <<
@@ -776,7 +778,7 @@ void msr2summaryVisitor::visitEnd (S_msrKey& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -794,7 +796,7 @@ void msr2summaryVisitor::visitStart (S_msrTimeSignature& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (! fOnGoingStaff) {
     gLog <<
@@ -817,7 +819,7 @@ void msr2summaryVisitor::visitEnd (S_msrTimeSignature& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -835,7 +837,7 @@ void msr2summaryVisitor::visitStart (S_msrTempo& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   gLog <<
     "Tempo " <<
@@ -857,7 +859,7 @@ void msr2summaryVisitor::visitEnd (S_msrTempo& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -875,7 +877,7 @@ void msr2summaryVisitor::visitStart (S_msrSegment& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void msr2summaryVisitor::visitEnd (S_msrSegment& elt)
@@ -892,7 +894,7 @@ void msr2summaryVisitor::visitEnd (S_msrSegment& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -910,7 +912,7 @@ void msr2summaryVisitor::visitStart (S_msrArticulation& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void msr2summaryVisitor::visitEnd (S_msrArticulation& elt)
@@ -927,7 +929,7 @@ void msr2summaryVisitor::visitEnd (S_msrArticulation& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -945,7 +947,7 @@ void msr2summaryVisitor::visitStart (S_msrDynamic& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void msr2summaryVisitor::visitEnd (S_msrDynamic& elt)
@@ -962,7 +964,7 @@ void msr2summaryVisitor::visitEnd (S_msrDynamic& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -979,7 +981,7 @@ void msr2summaryVisitor::visitStart (S_msrCrescDecresc& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void msr2summaryVisitor::visitEnd (S_msrCrescDecresc& elt)
@@ -995,7 +997,7 @@ void msr2summaryVisitor::visitEnd (S_msrCrescDecresc& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -1012,7 +1014,7 @@ void msr2summaryVisitor::visitStart (S_msrWedge& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void msr2summaryVisitor::visitEnd (S_msrWedge& elt)
@@ -1028,7 +1030,7 @@ void msr2summaryVisitor::visitEnd (S_msrWedge& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -1045,7 +1047,7 @@ void msr2summaryVisitor::visitStart (S_msrGraceNotesGroup& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void msr2summaryVisitor::visitEnd (S_msrGraceNotesGroup& elt)
@@ -1061,7 +1063,7 @@ void msr2summaryVisitor::visitEnd (S_msrGraceNotesGroup& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -1082,7 +1084,7 @@ void msr2summaryVisitor::visitStart (S_msrNote& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   switch (elt->getNoteKind ()) {
     case msrNoteKind::kNote_UNKNOWN:
@@ -1136,7 +1138,7 @@ void msr2summaryVisitor::visitEnd (S_msrNote& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   switch (elt->getNoteKind ()) { // JMI
     case msrNoteKind::kNote_UNKNOWN:
@@ -1179,7 +1181,7 @@ void msr2summaryVisitor::visitStart (S_msrStem& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void msr2summaryVisitor::visitEnd (S_msrStem& elt)
@@ -1196,7 +1198,7 @@ void msr2summaryVisitor::visitEnd (S_msrStem& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -1213,7 +1215,7 @@ void msr2summaryVisitor::visitStart (S_msrBeam& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void msr2summaryVisitor::visitEnd (S_msrBeam& elt)
@@ -1230,7 +1232,7 @@ void msr2summaryVisitor::visitEnd (S_msrBeam& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -1248,7 +1250,7 @@ void msr2summaryVisitor::visitStart (S_msrChord& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++fScoreChordsCounter;
 }
@@ -1267,7 +1269,7 @@ void msr2summaryVisitor::visitEnd (S_msrChord& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -1285,7 +1287,7 @@ void msr2summaryVisitor::visitStart (S_msrTuplet& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++fScoreTupletsCounter;
 }
@@ -1304,7 +1306,7 @@ void msr2summaryVisitor::visitEnd (S_msrTuplet& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -1322,7 +1324,7 @@ void msr2summaryVisitor::visitStart (S_msrSlur& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void msr2summaryVisitor::visitEnd (S_msrSlur& elt)
@@ -1339,7 +1341,7 @@ void msr2summaryVisitor::visitEnd (S_msrSlur& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -1357,7 +1359,7 @@ void msr2summaryVisitor::visitStart (S_msrBarLine& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void msr2summaryVisitor::visitEnd (S_msrBarLine& elt)
@@ -1374,7 +1376,7 @@ void msr2summaryVisitor::visitEnd (S_msrBarLine& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -1392,7 +1394,7 @@ void msr2summaryVisitor::visitStart (S_msrBarNumberCheck& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void msr2summaryVisitor::visitEnd (S_msrBarNumberCheck& elt)
@@ -1409,7 +1411,7 @@ void msr2summaryVisitor::visitEnd (S_msrBarNumberCheck& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -1427,7 +1429,7 @@ void msr2summaryVisitor::visitStart (S_msrLineBreak& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void msr2summaryVisitor::visitEnd (S_msrLineBreak& elt)
@@ -1444,7 +1446,7 @@ void msr2summaryVisitor::visitEnd (S_msrLineBreak& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -1462,7 +1464,7 @@ void msr2summaryVisitor::visitStart (S_msrRepeat& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void msr2summaryVisitor::visitEnd (S_msrRepeat& elt)
@@ -1479,7 +1481,7 @@ void msr2summaryVisitor::visitEnd (S_msrRepeat& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -1497,7 +1499,7 @@ void msr2summaryVisitor::visitStart (S_msrScaling& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   gLog <<
     elt;
@@ -1517,7 +1519,7 @@ void msr2summaryVisitor::visitEnd (S_msrScaling& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -1535,7 +1537,7 @@ void msr2summaryVisitor::visitStart (S_msrPageLayout& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   gLog << elt << std::endl;
 }
@@ -1554,7 +1556,7 @@ void msr2summaryVisitor::visitEnd (S_msrPageLayout& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -1572,7 +1574,7 @@ void msr2summaryVisitor::visitStart (S_msrMidiTempo& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void msr2summaryVisitor::visitEnd (S_msrMidiTempo& elt)
@@ -1589,7 +1591,7 @@ void msr2summaryVisitor::visitEnd (S_msrMidiTempo& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 

@@ -27,5 +27,5 @@ EXP S_mfcConverterComponent createMusicxml2guidoConverterComponent ();
 }
 
 
-#endif
+#endif // ___musicxml2guidoComponent___
 

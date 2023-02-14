@@ -89,4 +89,4 @@ typedef SMARTP<mfAssertException> S_mfAssertException;
 
 }
 
-#endif
+#endif // ___mfExceptions___

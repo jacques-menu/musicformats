@@ -244,4 +244,4 @@ EXP std::ostream& operator << (std::ostream& os, const S_lpsrPaper& elt);
 }
 
 
-#endif
+#endif // ___lpsrPapers___

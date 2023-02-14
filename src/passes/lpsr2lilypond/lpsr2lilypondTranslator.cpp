@@ -238,7 +238,7 @@ if (false) // JMI
         gGlobalLpsr2lilypondOahGroup->
         getFixedOctaveEntrySemiTonesPitchAndOctave () != nullptr,
        "gGlobalLpsr2lilypondOahGroup->getFixedOctaveEntrySemiTonesPitchAndOctave () is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
       fCurrentOctaveEntryReference =
         msrNote::createNoteFromSemiTonesPitchAndOctave (
@@ -269,7 +269,7 @@ if (false) // JMI
     }
     gLog << std::endl;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // figured bass
   fCurrentFiguredBassFiguresCounter = 0;
@@ -357,7 +357,7 @@ void lpsr2lilypondTranslator::setCurrentOctaveEntryReferenceFromTheLilypondOah (
     }
     gLog << std::endl;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -487,7 +487,7 @@ std::string lpsr2lilypondTranslator::absoluteOctaveAsLilypondString (
       " %} " <<
       std::endl;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // generate LilyPond absolute octave
   switch (absoluteOctaveKind) {
@@ -678,7 +678,7 @@ std::string lpsr2lilypondTranslator::lilypondOctaveInRelativeEntryMode (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   std::stringstream ss;
 
@@ -712,7 +712,7 @@ std::string lpsr2lilypondTranslator::lilypondOctaveInRelativeEntryMode (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   return ss.str ();
 }
@@ -760,7 +760,7 @@ std::string lpsr2lilypondTranslator::lilypondOctaveInFixedEntryMode (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   std::stringstream ss;
 
@@ -916,7 +916,7 @@ std::string lpsr2lilypondTranslator::stringTuningAsLilypondString (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   std::stringstream ss;
 
@@ -1032,7 +1032,7 @@ std::stringstream ss;
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   switch (gGlobalLpsr2lilypondOahGroup->fetchOctaveEntryVariableValue ()) {
     case msrOctaveEntryKind::kOctaveEntryRelative:
@@ -1049,7 +1049,7 @@ std::stringstream ss;
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
         // generate absolute octave
         ss <<
@@ -1073,7 +1073,7 @@ std::stringstream ss;
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
         // generate octave relative to mobile fCurrentOctaveEntryReference
         ss <<
@@ -1130,7 +1130,7 @@ std::stringstream ss;
   if (gGlobalTraceOahGroup->getTraceNotesOctaveEntry ()) {
     gLog << std::endl;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   return ss.str ();
 }
@@ -1309,7 +1309,7 @@ std::string lpsr2lilypondTranslator::pitchedRestAsLilypondString (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   switch (gGlobalLpsr2lilypondOahGroup->fetchOctaveEntryVariableValue ()) {
     case msrOctaveEntryKind::kOctaveEntryRelative:
@@ -1459,7 +1459,7 @@ void lpsr2lilypondTranslator::generateNoteLigatures (
                 ", line " << ligature->getInputLineNumber () <<
                 std::endl;
             }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
             // compute ligature start edge height
             float edgeHeightAbsValue = 0.75;
@@ -1622,7 +1622,7 @@ void lpsr2lilypondTranslator::generateStemIfNeededAndUpdateCurrentStemKind (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (stem) {
     msrStemKind
@@ -1651,7 +1651,7 @@ void lpsr2lilypondTranslator::generateStemIfNeededAndUpdateCurrentStemKind (
           __FILE__, __LINE__,
           ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       fLilypondCodeStream <<
         stemAsLilypondString (stemKind);
@@ -1892,7 +1892,7 @@ void lpsr2lilypondTranslator::generateCodeForNote (
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////
@@ -2038,7 +2038,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteRegularInMeasure (
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // generate the note name
   fLilypondCodeStream <<
@@ -2128,7 +2128,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteRestInMeasure (
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // get pitched rest status
   Bool noteIsAPitchedRest =
@@ -2319,7 +2319,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteSkipInMeasure (
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (gGlobalLpsr2lilypondOahGroup->getGenerateMeasurePositions ()) {
     // generate the rest name to help pin-point bugs
@@ -2390,7 +2390,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteUnpitchedInMeasure (
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // generate the note name, "e" by convention
   fLilypondCodeStream <<
@@ -2471,7 +2471,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteRegularInChord (
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // generate the note name
   fLilypondCodeStream <<
@@ -2559,7 +2559,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteRegularInTuplet (
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (gGlobalLpsr2lilypondOahGroup->getIndentTuplets ()) {
     fLilypondCodeStream << std::endl;
@@ -2638,7 +2638,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteRestInTuplet (
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (gGlobalLpsr2lilypondOahGroup->getIndentTuplets ()) {
     fLilypondCodeStream << std::endl;
@@ -2725,7 +2725,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteUnpitchedInTuplet (
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (gGlobalLpsr2lilypondOahGroup->getIndentTuplets ()) {
     fLilypondCodeStream << std::endl;
@@ -2793,7 +2793,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteRegularInGraceNotesGroup (
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // generate the note name
   fLilypondCodeStream <<
@@ -2872,7 +2872,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteSkipInGraceNotesGroup (
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // generate the note name
   if (gGlobalLpsr2lilypondOahGroup->getGenerateMeasurePositions ()) {
@@ -2949,7 +2949,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteInChordInGraceNotesGroup (
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // generate the note name
   fLilypondCodeStream <<
@@ -3024,7 +3024,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteInTupletInGraceNotesGroup (
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (gGlobalLpsr2lilypondOahGroup->getIndentTuplets ()) {
     fLilypondCodeStream << std::endl;
@@ -3124,7 +3124,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteInDoubleTremolo (
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // generate the note name
   fLilypondCodeStream <<
@@ -3405,7 +3405,7 @@ void lpsr2lilypondTranslator::generateNoteArticulation (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // should the placement be generated?
   Bool doGeneratePlacement (true);
@@ -3667,7 +3667,7 @@ void lpsr2lilypondTranslator::generateChordArticulation (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // JMI v0.9.62
   msrArticulationKind
@@ -4458,7 +4458,7 @@ void lpsr2lilypondTranslator::generateCodeForSpannerAfterNote (
               __FILE__, __LINE__,
               spannerStartEnd != nullptr,
               "spannerStartEnd is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
             // has the start end a trill ornament?
             if (spannerStartEnd->getSpannerUpLinkToNote ()->getNoteTrillOrnament ()) {
@@ -4649,7 +4649,7 @@ std::string lpsr2lilypondTranslator::singleTremoloDurationAsLilypondString (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   std::stringstream ss;
 
@@ -5561,7 +5561,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrScore& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // generate a LyLuaTeX preamble if needed
   if (gGlobalLpsr2lilypondOahGroup->getLyLuaTexOutput ()) {
@@ -5636,7 +5636,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrScore& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // final empty line in LilyPond code
   // to help copy/paste it
@@ -5679,7 +5679,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrIdentification& elt) // JMI
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void lpsr2lilypondTranslator::visitEnd (S_msrIdentification& elt) // JMI
@@ -5711,7 +5711,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrIdentification& elt) // JMI
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -5765,7 +5765,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrSchemeVariable& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   std::string
     comment =
@@ -5834,7 +5834,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrSchemeVariable& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //______________________________________________________________________________
@@ -5888,7 +5888,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrHeader& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (gGlobalLpsr2lilypondOahGroup->getNoHeaderBlock ()) {
     return;
@@ -5941,7 +5941,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrHeader& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fLilypondCodeStream <<
     '}';
@@ -6112,7 +6112,7 @@ void lpsr2lilypondTranslator::generateHeaderIdentificationPart (
 #ifdef MF_TRACE_IS_ENABLED
   int fieldWidth =
     identification -> maxIdentificationNamesLength ();
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // work number
   std::string
@@ -6424,7 +6424,7 @@ void lpsr2lilypondTranslator::generateHeaderIdentificationPart (
       "% ====> fieldWidth: " << fieldWidth <<
       std::endl;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -6871,7 +6871,7 @@ void lpsr2lilypondTranslator::generatePaper (
       "% ====> fieldWidth: " << fieldWidth <<
       std::endl;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   for (
     std::list<std::pair<std::string, Bool> >::const_iterator i =
@@ -6912,7 +6912,7 @@ void lpsr2lilypondTranslator::generatePaper (
       "% ====> fieldWidth: " << fieldWidth <<
       std::endl;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // page size
   generatePaperPageSize (
@@ -7691,7 +7691,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrPaper& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (gGlobalLpsr2lilypondOahGroup->getNoPaperBlock ()) {
     return;
@@ -7731,7 +7731,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrPaper& elt) // superflous ??? JMI
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (gGlobalLpsr2lilypondOahGroup->getNoPaperBlock ()) {
     return;
@@ -7768,7 +7768,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrLayout& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fLilypondCodeStream <<
     "\\layout {" <<
@@ -7882,7 +7882,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrLayout& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // should we set the repeat brackets type?
   if (gGlobalLpsr2lilypondOahGroup->getRepeatBrackets ()) {
@@ -8010,7 +8010,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrBookBlock& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (gGlobalLpsr2lilypondOahGroup->getNoBookBlock ()) {
     return;
@@ -8054,7 +8054,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrBookBlock& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (gGlobalLpsr2lilypondOahGroup->getNoBookBlock ()) {
     return;
@@ -8109,7 +8109,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrScoreBlock& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fLilypondCodeStream <<
     "\\score {" <<
@@ -8149,7 +8149,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrScoreBlock& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   --gIndenter; // incremented in visitStart (S_lpsrScoreBlock& elt)
 
@@ -8201,7 +8201,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrBookPartBlock& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fLilypondCodeStream <<
     "\\bookpart {" <<
@@ -8241,7 +8241,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrBookPartBlock& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   --gIndenter; // incremented in visitStart (S_lpsrBookPartBlock& elt)
 
@@ -8290,7 +8290,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrParallelMusicBLock& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fNumberOfPartGroupBlocks =
     elt->
@@ -8346,7 +8346,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrParallelMusicBLock& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fLilypondCodeStream << std::endl;
 
@@ -8406,7 +8406,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrPartGroupBlock& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++fPartGroupBlocksCounter;
 
@@ -8508,7 +8508,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrPartGroupBlock& elt)
           partGroup->getPartGroupAbsoluteNumber () <<
           " %} ";
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       // should a '\with' block be generated?
       Bool doGenerateAWithBlock (false);
@@ -8689,7 +8689,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrPartGroupBlock& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // fetch part group
   S_msrPartGroup
@@ -8762,7 +8762,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrPartBlock& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++fPartGroupBlockElementsCounter;
 
@@ -8874,7 +8874,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrPartBlock& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (part->getPartStaveNumbersToStavesMap ().size () > 1) {
     // don't generate code for a part with only one stave
@@ -8930,7 +8930,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrStaffBlock& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++fStaffBlocksCounter;
 
@@ -9260,7 +9260,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrStaffBlock& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   --gIndenter; // incremented in visitStart (S_lpsrStaffBlock& elt)
 
@@ -9313,7 +9313,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrNewStaffgroupBlock& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
    fLilypondCodeStream <<
      "\\new StaffGroup" << ' ' << "{" <<
@@ -9351,7 +9351,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrNewStaffgroupBlock& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   --gIndenter; // incremented in visitStart (S_lpsrStaffBlock& elt)
 
@@ -9390,7 +9390,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrNewStaffBlock& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter; // decremented in visitEnd (S_lpsrNewStaffBlock& elt)
 }
@@ -9424,7 +9424,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrNewStaffBlock& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   --gIndenter; // incremented in visitStart (S_lpsrNewStaffBlock& elt)
 }
@@ -9460,7 +9460,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrUseVoiceCommand& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   S_msrVoice
     voice = elt->getVoice ();
@@ -9590,7 +9590,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrUseVoiceCommand& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // should we transpose fCurrentPart?
   Bool doTransposeCurrentPart (false);
@@ -9664,7 +9664,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrUseVoiceCommand& elt)
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     // fetch the LilyPond pitch and octave
     std::string
@@ -9751,7 +9751,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrUseVoiceCommand& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -9784,7 +9784,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrNewLyricsBlock& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (! gGlobalLpsr2lilypondOahGroup->getNoLilypondLyrics ()) {
     const S_msrStanza& stanza = elt->getStanza ();
@@ -9860,7 +9860,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrNewLyricsBlock& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (! gGlobalLpsr2lilypondOahGroup->getNoLilypondLyrics ()) {
     // JMI
@@ -9897,7 +9897,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrVariableUseCommand& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter; // decremented in visitEnd (S_lpsrVariableUseCommand& elt)
 }
@@ -9931,7 +9931,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrVariableUseCommand& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   --gIndenter; // incremented in visitStart (S_lpsrVariableUseCommand& elt)
 }
@@ -9966,7 +9966,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrChordNamesContext& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   switch (elt->getContextUseExistingKind ()) {
     case lpsrContextUseExistingKind::kUseExistingContextYes:
@@ -10047,7 +10047,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrChordNamesContext& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -10080,7 +10080,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrFiguredBassContext& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fLilypondCodeStream <<
     "%{" <<
@@ -10170,7 +10170,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrFiguredBassContext& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -10203,7 +10203,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrBarCommand& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void lpsr2lilypondTranslator::visitEnd (S_lpsrBarCommand& elt)
@@ -10235,7 +10235,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrBarCommand& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -10268,7 +10268,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrComment& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fLilypondCodeStream <<
     "% " << elt->getContents () <<
@@ -10307,7 +10307,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrComment& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -10340,7 +10340,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrSchemeFunction& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fLilypondCodeStream <<
     std::endl <<
@@ -10381,7 +10381,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrSchemeFunction& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -10415,7 +10415,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrMelismaCommand& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   switch (elt->getMelismaKind ()) {
     case lpsrMelismaCommand::kMelismaStart:
@@ -10456,7 +10456,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrMelismaCommand& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 */
 
@@ -10490,7 +10490,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrScore& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void lpsr2lilypondTranslator::visitEnd (S_msrScore& elt)
@@ -10522,7 +10522,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrScore& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -10555,7 +10555,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrScaling& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void lpsr2lilypondTranslator::visitEnd (S_msrScaling& elt)
@@ -10587,7 +10587,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrScaling& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -10620,7 +10620,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrPageLayout& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 /* JMI
     // page size
@@ -10675,7 +10675,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrPageLayout& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -10708,7 +10708,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrSystemLayout& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void lpsr2lilypondTranslator::visitEnd (S_msrSystemLayout& elt)
@@ -10740,7 +10740,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrSystemLayout& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -10773,7 +10773,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrStaffLayout& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void lpsr2lilypondTranslator::visitEnd (S_msrStaffLayout& elt)
@@ -10805,7 +10805,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrStaffLayout& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -10838,7 +10838,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrAppearance& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void lpsr2lilypondTranslator::visitEnd (S_msrAppearance& elt)
@@ -10870,7 +10870,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrAppearance& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -10903,7 +10903,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrCredit& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void lpsr2lilypondTranslator::visitEnd (S_msrCredit& elt)
@@ -10935,7 +10935,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrCredit& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void lpsr2lilypondTranslator::visitStart (S_msrCreditWords& elt)
@@ -10967,7 +10967,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrCreditWords& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void lpsr2lilypondTranslator::visitEnd (S_msrCreditWords& elt)
@@ -10999,7 +10999,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrCreditWords& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -11037,7 +11037,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrPartGroup& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void lpsr2lilypondTranslator::visitEnd (S_msrPartGroup& elt)
@@ -11070,7 +11070,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrPartGroup& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -11108,7 +11108,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrPart& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalTraceOahGroup->getTraceParts ()) {
@@ -11124,7 +11124,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrPart& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // remember current part
   fCurrentPart = elt;
@@ -11163,7 +11163,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrPart& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // forget about current part
   fCurrentPart = nullptr;
@@ -11201,7 +11201,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrStaff& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fOnGoingStaff = true;
 }
@@ -11237,7 +11237,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrStaff& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fOnGoingStaff = false;
 }
@@ -11270,7 +11270,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrStaffTuning& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 /* JMI
   const std::list<S_msrStaffTuning>&
@@ -11337,7 +11337,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrStaffDetails& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // fetch staff lines number
   int
@@ -11387,7 +11387,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrVoice& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalTraceOahGroup->getTraceVoices ()) {
@@ -11403,7 +11403,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrVoice& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fCurrentVoice = elt;
 
@@ -11547,7 +11547,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrVoice& elt)
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     fLilypondCodeStream <<
       "\\override Score.BarNumber.self-alignment-X = #CENTER" <<
@@ -11675,7 +11675,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrVoice& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   /* JMI
   if (
@@ -11770,7 +11770,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrVoiceStaffChange& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fLilypondCodeStream <<
     std::endl <<
@@ -11829,7 +11829,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrHarmony& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (fOnGoingNotesStack.size () > 0) {
   /* JMI v0.9.66
@@ -11847,7 +11847,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrHarmony& elt)
 				__FILE__, __LINE__,
 				ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 */
   }
 
@@ -11903,7 +11903,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrFrame& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (fOnGoingNotesStack.size () > 0) {
 #ifdef MF_TRACE_IS_ENABLED
@@ -11912,7 +11912,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrFrame& elt)
         "%{ " << elt->asString () << " %}" <<
         std::endl;
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     fLilypondCodeStream <<
       frameAsLilypondString (elt) <<
@@ -11958,7 +11958,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrFiguredBass& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // handle the figured bass only when attached to a note in a regular voice,
   // since it needs to be attached to the latter
@@ -11990,7 +11990,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrFiguredBass& elt)
 					" %}" <<
 					std::endl;
 			}
-	#endif
+	#endif // MF_TRACE_IS_ENABLED
 		}
 
 		else if (fOnGoingChord) { // JMI
@@ -12048,7 +12048,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrBassFigure& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (fOnGoingFiguredBassVoice) {
     ++fCurrentFiguredBassFiguresCounter;
@@ -12182,7 +12182,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrFiguredBass& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 /* JMI
   if (fOnGoingFiguredBassVoice) {
@@ -12249,7 +12249,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrSegment& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
     // generate the end of the voice definition
@@ -12295,7 +12295,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrSegment& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
     --gIndenter; // incremented in visitStart (S_msrSegment& elt)
@@ -12334,7 +12334,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
   msrMeasureEndRegularKind
     measureEndRegularKind =
       elt-> getMeasureEndRegularKind ();
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   {
@@ -12367,7 +12367,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // generate measure start comment if relevant
   if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
@@ -12406,7 +12406,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
           "', line " << inputLineNumber << " ===-->" <<
           std::endl;
       }
-  #endif
+  #endif // MF_TRACE_IS_ENABLED
 
       fLilypondCodeStream <<
         "\\boxAroundNextBarNumber" <<
@@ -12441,7 +12441,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
             "', line " << inputLineNumber << " ===-->" <<
             std::endl;
         }
-  #endif
+  #endif // MF_TRACE_IS_ENABLED
 
         fLilypondCodeStream <<
           "\\set Score.currentBarNumber = #" <<
@@ -12461,7 +12461,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
             "', line " << inputLineNumber << " ===-->" <<
             std::endl;
         }
-  #endif
+  #endif // MF_TRACE_IS_ENABLED
       }
     }
   }
@@ -12487,7 +12487,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // should we show the measure number???
   std::set<std::string, int>::const_iterator
@@ -12680,7 +12680,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
             ratioToFullMeasureWholeNotesDuration <<
             std::endl << std::endl;
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
         if (ratioToFullMeasureWholeNotesDuration == Rational (1, 1)) {
           std::stringstream ss;
@@ -12848,7 +12848,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMeasure& elt)
   msrMeasureEndRegularKind
     measureEndRegularKind =
       elt-> getMeasureEndRegularKind ();
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   {
@@ -12882,7 +12882,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMeasure& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalTraceOahGroup->getTraceMeasures ()) {
@@ -12905,7 +12905,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMeasure& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (! fOnGoingMultipleFullBarRests) {
     // handle the measure
@@ -13017,7 +13017,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMeasure& elt)
             "', line " << inputLineNumber << " ===-->" <<
             std::endl;
         }
-  #endif
+  #endif // MF_TRACE_IS_ENABLED
 
         fLilypondCodeStream <<
           "\\break" <<
@@ -13036,7 +13036,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMeasure& elt)
           ", line " << inputLineNumber <<
           std::endl;
       }
-  #endif
+  #endif // MF_TRACE_IS_ENABLED
     }
     */
   }
@@ -13059,7 +13059,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMeasure& elt)
             "', line " << inputLineNumber << " ===-->" <<
             std::endl;
         }
-  #endif
+  #endif // MF_TRACE_IS_ENABLED
 
         fLilypondCodeStream <<
           "\\pageBreak" <<
@@ -13078,7 +13078,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMeasure& elt)
           ", line " << inputLineNumber <<
           std::endl;
       }
-  #endif
+  #endif // MF_TRACE_IS_ENABLED
     }
  */
   }
@@ -13120,7 +13120,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrStanza& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (! gGlobalLpsr2lilypondOahGroup->getNoLilypondLyrics ()) {
     // don't generate code for the stanza inside the code for the voice
@@ -13186,7 +13186,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrStanza& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (! gGlobalLpsr2lilypondOahGroup->getNoLilypondLyrics ()) {
     if (fGenerateCodeForOngoingNonEmptyStanza) {
@@ -13236,7 +13236,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrSyllable& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (
     ! gGlobalLpsr2lilypondOahGroup->getNoLilypondLyrics ()
@@ -13269,7 +13269,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrSyllable& elt)
             fLilypondCodeStream <<
               "%{ kSyllableSingle %} ";
           }
-#endif
+#endif // MF_TRACE_IS_ENABLED
           break;
 
         case msrSyllableKind::kSyllableBegin:
@@ -13295,7 +13295,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrSyllable& elt)
             fLilypondCodeStream <<
               "%{ kSyllableBegin %} ";
           }
-#endif
+#endif // MF_TRACE_IS_ENABLED
           break;
 
         case msrSyllableKind::kSyllableMiddle:
@@ -13321,7 +13321,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrSyllable& elt)
             fLilypondCodeStream <<
               "%{ kSyllableMiddle %} ";
           }
-#endif
+#endif // MF_TRACE_IS_ENABLED
           break;
 
         case msrSyllableKind::kSyllableEnd:
@@ -13347,7 +13347,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrSyllable& elt)
             fLilypondCodeStream <<
               "%{ kSyllableEnd %} ";
           }
-#endif
+#endif // MF_TRACE_IS_ENABLED
           break;
 
         case msrSyllableKind::kSyllableOnRestNote:
@@ -13363,7 +13363,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrSyllable& elt)
             fLilypondCodeStream <<
             " %{ kSyllableOnRestNote %} ";
           }
-#endif
+#endif // MF_TRACE_IS_ENABLED
           break;
 
         case msrSyllableKind::kSyllableSkipRestNote:
@@ -13377,7 +13377,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrSyllable& elt)
                   elt->syllableWholeNotesAsMsrString () <<
                   " %} ";
               }
-#endif
+#endif // MF_TRACE_IS_ENABLED
               break;
             case lpsrLyricsDurationsKind::kLyricsDurationsExplicit:
               fLilypondCodeStream <<
@@ -13389,7 +13389,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrSyllable& elt)
                 fLilypondCodeStream <<
                 " %{ lpsrLyricsDurationsKind::kLyricsDurationsExplicit %} ";
               }
-#endif
+#endif // MF_TRACE_IS_ENABLED
               break;
           } // switch
           break;
@@ -13407,7 +13407,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrSyllable& elt)
                 fLilypondCodeStream <<
                   " %{ syllableSkipNonRestNote lyricsDurationsImplicit %} ";
               }
-#endif
+#endif // MF_TRACE_IS_ENABLED
               break;
             case lpsrLyricsDurationsKind::kLyricsDurationsExplicit:
               fLilypondCodeStream <<
@@ -13419,7 +13419,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrSyllable& elt)
                 fLilypondCodeStream <<
                 " %{ syllableSkipNonRestNote lyricsDurationsExplicit %} ";
               }
-#endif
+#endif // MF_TRACE_IS_ENABLED
               break;
           } // switch
           break;
@@ -13471,7 +13471,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrSyllable& elt)
             fLilypondCodeStream <<
               "%{ kSyllableExtendNone %} ";
           }
-#endif
+#endif // MF_TRACE_IS_ENABLED
           break;
 
         case msrSyllableExtendKind::kSyllableExtendEmpty:
@@ -13480,7 +13480,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrSyllable& elt)
             fLilypondCodeStream <<
               "%{ kSyllableExtendEmpty %} ";
           }
-#endif
+#endif // MF_TRACE_IS_ENABLED
           break;
 
         case msrSyllableExtendKind::kSyllableExtendSingle:
@@ -13501,7 +13501,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrSyllable& elt)
             fLilypondCodeStream <<
               "%{ kSyllableExtendSingle %} ";
           }
-#endif
+#endif // MF_TRACE_IS_ENABLED
           break;
 
         case msrSyllableExtendKind::kSyllableExtendStart:
@@ -13522,7 +13522,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrSyllable& elt)
             fLilypondCodeStream <<
               "%{ kSyllableExtendStart %} ";
           }
-#endif
+#endif // MF_TRACE_IS_ENABLED
           break;
 
         case msrSyllableExtendKind::kSyllableExtendContinue:
@@ -13531,7 +13531,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrSyllable& elt)
             fLilypondCodeStream <<
               "%{ kSyllableExtendContinue %} ";
           }
-#endif
+#endif // MF_TRACE_IS_ENABLED
           break;
 
         case msrSyllableExtendKind::kSyllableExtendStop:
@@ -13540,7 +13540,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrSyllable& elt)
             fLilypondCodeStream <<
               "%{ kSyllableExtendStop %} ";
           }
-#endif
+#endif // MF_TRACE_IS_ENABLED
           break;
       } // switch
 
@@ -13588,7 +13588,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrSyllable& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -13623,7 +13623,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrClef& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // get the clef kind
   msrClefKind
@@ -13669,7 +13669,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrClef& elt)
             elt->asShortString () <<
             std::endl;
         }
-  #endif
+  #endif // MF_TRACE_IS_ENABLED
 
         fLilypondCodeStream << "% ";
       }
@@ -13807,7 +13807,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrClef& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -13842,7 +13842,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrKey& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   msrKeyKind
     keyKind =
@@ -14015,7 +14015,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrKey& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -14049,7 +14049,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrTimeSignature& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   msrTimeSignatureSymbolKind
     timeSignatureSymbolKind =
@@ -14266,7 +14266,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrTimeSignature& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -14299,7 +14299,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrTransposition& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -14767,7 +14767,7 @@ If the double element is present, it indicates that the music is doubled one oct
       '(' << transpositionOctaveKind << ")" <<
       std::endl;
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 */
 
   // now we can generate the transpostion command
@@ -14808,7 +14808,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrTransposition& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -14841,7 +14841,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrTempo& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   switch (elt->getTempoPlacementKind ()) {
     case msrPlacementKind::kPlacement_UNKNOWN:
@@ -15350,7 +15350,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrTempoNotesRelationshipElements& e
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fLilypondCodeStream <<
     "\\fixed b' {" <<
@@ -15388,7 +15388,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrTempoNotesRelationshipElements& elt
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   --gIndenter; // incremented in visitStart (S_msrTempoNotesRelationshipElements& elt)
 
@@ -15427,7 +15427,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrTempoNote& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fLilypondCodeStream <<
     "b" <<
@@ -15466,7 +15466,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrTempoTuplet& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   const msrTupletFactor&
     tempoTupletFactor =
@@ -15508,7 +15508,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrTempoTuplet& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fLilypondCodeStream <<
     '}';
@@ -15543,7 +15543,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrTempo& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -15576,7 +15576,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrArticulation& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // don't generate the articulation here,
   // the note or chord will do it in its visitEnd () method
@@ -15611,7 +15611,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrArticulation& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -15644,7 +15644,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrFermata& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 /*
 Articulations can be attached to rests as well as notes but they cannot be attached to multiple full-bar rests. A special predefined command, \fermataMarkup, is available for at- taching a fermata to a multiple full-bar rest (and only a multiple full-bar rest). This creates a MultiMeasureRestText object.
@@ -15721,7 +15721,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrFermata& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -15754,7 +15754,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrArpeggiato& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 /* VIRER JMI
   */
@@ -15789,7 +15789,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrArpeggiato& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -15822,7 +15822,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrNonArpeggiato& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 /* VIRER JMI
   */
@@ -15857,7 +15857,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrNonArpeggiato& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -15890,7 +15890,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrTechnical& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // don't generate the technical here,
   // the note or chord will do it in its visitEnd () method
@@ -15925,7 +15925,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrTechnical& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -15960,7 +15960,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrTechnicalWithInteger& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // don't generate the technicalWithInteger here,
   // the note or chord will do it in its visitEnd () method
@@ -15995,7 +15995,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrTechnicalWithInteger& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -16030,7 +16030,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrTechnicalWithFloat& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // don't generate the technicalWithFloat here,
   // the note or chord will do it in its visitEnd () method
@@ -16065,7 +16065,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrTechnicalWithFloat& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -16098,7 +16098,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrTechnicalWithString& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // don't generate the technicalWithString here,
   // the note or chord will do it in its visitEnd () method
@@ -16133,7 +16133,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrTechnicalWithString& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -16166,7 +16166,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrOrnament& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // don't generate the ornament here,
   // the note or chord will do it in its visitEnd () method
@@ -16201,7 +16201,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrOrnament& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -16234,7 +16234,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrGlissando& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // don't generate the glissando here,
   // the note or chord will do it in its visitEnd () method
@@ -16269,7 +16269,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrGlissando& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -16302,7 +16302,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrSlide& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // don't generate the slide here,
   // the note or chord will do it in its visitEnd () method
@@ -16337,7 +16337,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrSlide& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -16370,7 +16370,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrSingleTremolo& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // don't generate the singleTremolo here,
   // the note or chord will do it in its visitEnd () method
@@ -16405,7 +16405,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrSingleTremolo& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -16438,7 +16438,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrDoubleTremolo& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // get double tremolo number of repeats
   int numberOfRepeats =
@@ -16471,7 +16471,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrDoubleTremolo& elt)
 
     --gIndenter;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fLilypondCodeStream <<
     "\\repeat tremolo " << numberOfRepeats << " {";
@@ -16508,7 +16508,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrDoubleTremolo& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   --gIndenter; // incremented in visitStart (S_msrDoubleTremolo& elt)
 
@@ -16547,7 +16547,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrDynamic& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void lpsr2lilypondTranslator::visitEnd (S_msrDynamic& elt)
@@ -16579,7 +16579,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrDynamic& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -16612,7 +16612,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrOtherDynamic& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void lpsr2lilypondTranslator::visitEnd (S_msrOtherDynamic& elt)
@@ -16644,7 +16644,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrOtherDynamic& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -16677,7 +16677,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrWords& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void lpsr2lilypondTranslator::visitEnd (S_msrWords& elt)
@@ -16709,7 +16709,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrWords& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -16743,7 +16743,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrSlur& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void lpsr2lilypondTranslator::visitEnd (S_msrSlur& elt)
@@ -16776,7 +16776,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrSlur& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 /*
@@ -16810,7 +16810,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrChordSlurLink& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void lpsr2lilypondTranslator::visitEnd (S_msrChordSlurLink& elt)
@@ -16843,7 +16843,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrChordSlurLink& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 */
 
@@ -16877,7 +16877,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrLigature& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void lpsr2lilypondTranslator::visitEnd (S_msrLigature& elt)
@@ -16909,7 +16909,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrLigature& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -16942,7 +16942,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrCrescDecresc& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   switch (elt->getCrescDecrescKind ()) {
     case msrCrescDecrescKind::kCrescDecrescCrescendo:
@@ -16985,7 +16985,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrCrescDecresc& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -17018,7 +17018,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrWedge& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void lpsr2lilypondTranslator::visitEnd (S_msrWedge& elt)
@@ -17050,7 +17050,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrWedge& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -17084,7 +17084,7 @@ void lpsr2lilypondTranslator::generateNoteBeams (
           __FILE__, __LINE__,
           ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       // LilyPond will take care of multiple beams automatically,
       // so we need only generate code for the first number (level)
@@ -17102,7 +17102,7 @@ void lpsr2lilypondTranslator::generateNoteBeams (
                   note->asShortString () <<
                   std::endl;
               }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
               fLilypondCodeStream << "[ ";
 
@@ -17178,7 +17178,7 @@ void lpsr2lilypondTranslator::generateNoteSlurDirection (
           __FILE__, __LINE__,
           ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       switch (slur->getSlurPlacementKind ()) {
         case msrPlacementKind::kPlacement_UNKNOWN:
@@ -17227,7 +17227,7 @@ void lpsr2lilypondTranslator::generateNoteSlurs (
           __FILE__, __LINE__,
           ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       /* JMI ???
         \slurDashed, \slurDotted, \slurHalfDashed,
@@ -17248,7 +17248,7 @@ void lpsr2lilypondTranslator::generateNoteSlurs (
               note->asShortString () <<
               std::endl;
           }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
           fLilypondCodeStream << "( ";
 
@@ -17273,7 +17273,7 @@ void lpsr2lilypondTranslator::generateNoteSlurs (
               note->asShortString () <<
               std::endl;
           }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
           fLilypondCodeStream << ") ";
 
@@ -17303,7 +17303,7 @@ void lpsr2lilypondTranslator::generateNoteSlurs (
               note->asShortString () <<
               std::endl;
           }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
           fLilypondCodeStream << "\\( ";
 
@@ -17328,7 +17328,7 @@ void lpsr2lilypondTranslator::generateNoteSlurs (
               note->asShortString () <<
               std::endl;
           }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
           fLilypondCodeStream << "\\) ";
 
@@ -17362,7 +17362,7 @@ void lpsr2lilypondTranslator::generateGraceNotesGroup (
       ", line " << graceNotesGroup->getInputLineNumber () <<
       std::endl;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   Bool doGenerateASlurIfPresent (false);
 
@@ -17472,7 +17472,7 @@ slash = \tweak Flag.stroke-style grace \etc
         __FILE__, __LINE__,
         element != nullptr,
         "element is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
       elementNumber += 1;
 
@@ -17623,7 +17623,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrGraceNotesGroup& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fOnGoingGraceNotesGroup = true;
 }
@@ -17658,7 +17658,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrGraceNotesGroup& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fOnGoingGraceNotesGroup = false;
 }
@@ -17694,7 +17694,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrChordGraceNotesGroupLink& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fOnGoingChordGraceNotesGroupLink = true;
 }
@@ -17729,7 +17729,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrChordGraceNotesGroupLink& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fOnGoingChordGraceNotesGroupLink = false;
 }
@@ -17765,7 +17765,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrAfterGraceNotesGroup& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
  // JMI exists? if (elt->getGraceNotesGroupIsSlashed ()) {}
   fLilypondCodeStream <<
@@ -17802,7 +17802,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrAfterGraceNotesGroupContents& elt
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // write a first closing right bracket right now
   fLilypondCodeStream <<
@@ -17843,7 +17843,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrAfterGraceNotesGroupContents& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fLilypondCodeStream <<
     "} ";
@@ -17879,7 +17879,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrAfterGraceNotesGroup& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -18012,7 +18012,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrNote& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // register the note as on-going note
   fOnGoingNotesStack.push (elt); // will be popped in visitEnd (S_msrNote&)
@@ -18100,7 +18100,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrNote& elt)
             }
             gLog << std::endl;
           }
-#endif
+#endif // MF_TRACE_IS_ENABLED
           break;
 
        // in tuplets in grace notes groups
@@ -18144,7 +18144,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrNote& elt)
         "% ==> returning from visitStart (S_msrNote&)" <<
       std::endl;
     }
-  #endif
+  #endif // MF_TRACE_IS_ENABLED
 
             noteIsToBeIgnored = true;
             }
@@ -18162,7 +18162,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrNote& elt)
               elt->asString () <<
               std::endl;
           }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
           noteIsToBeIgnored = true;
         break;
@@ -18180,7 +18180,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrNote& elt)
               elt->asString () <<
               std::endl;
           }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
           noteIsToBeIgnored = true;
         }
@@ -18199,7 +18199,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrNote& elt)
               elt->asString () <<
               std::endl;
           }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
           noteIsToBeIgnored = true;
         break;
@@ -18216,7 +18216,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrNote& elt)
               elt->asString () <<
               std::endl;
           }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
           noteIsToBeIgnored = true;
         break;
@@ -18241,7 +18241,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrNote& elt)
         inputLineNumber,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     return;
   }
@@ -18268,7 +18268,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrNote& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // get the note's grace notes group after
   S_msrGraceNotesGroup
@@ -19124,7 +19124,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrNote& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   Bool noteIsToBeIgnored (false);
 
@@ -19154,7 +19154,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrNote& elt)
                   "% ==> end visiting multiple full-bar rests is ignored" <<
                   std::endl;
               }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
               if (gGlobalTraceOahGroup->getTraceNotesDetails ()) {
@@ -19162,7 +19162,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrNote& elt)
                   "% ==> returning from visitEnd (S_msrNote&)" <<
                   std::endl;
               }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
               noteIsToBeIgnored = true;
             }
@@ -19181,7 +19181,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrNote& elt)
               "% ==> end visiting skip notes is ignored" <<
               std::endl;
           }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
           noteIsToBeIgnored = true;
         }
@@ -19198,7 +19198,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrNote& elt)
               "% ==> end visiting grace notes is ignored" <<
               std::endl;
           }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
           noteIsToBeIgnored = true;
         break;
@@ -19222,7 +19222,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrNote& elt)
         inputLineNumber,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     return;
   }
@@ -19908,7 +19908,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrOctaveShift& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void lpsr2lilypondTranslator::visitEnd (S_msrOctaveShift& elt)
@@ -19940,7 +19940,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrOctaveShift& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -19973,7 +19973,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrAccordionRegistration& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   int highDotsNumber =
     elt->getHighDotsNumber ();
@@ -20044,7 +20044,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrHarpPedalsTuning& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   std::map<msrDiatonicPitchKind, msrAlterationKind>
     harpPedalsAlterationKindsMap =
@@ -20111,7 +20111,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrStem& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void lpsr2lilypondTranslator::visitEnd (S_msrStem& elt)
@@ -20143,7 +20143,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrStem& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -20176,7 +20176,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrBeam& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void lpsr2lilypondTranslator::visitEnd (S_msrBeam& elt)
@@ -20208,7 +20208,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrBeam& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -20325,7 +20325,7 @@ void lpsr2lilypondTranslator::generateCodeRightBeforeChordContents (
       ", line " << chord->getInputLineNumber () <<
       std::endl;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 /* JMI
   gLog <<
@@ -20563,7 +20563,7 @@ void lpsr2lilypondTranslator::generateCodeRightBeforeChordContents (
       __FILE__, __LINE__,
       firstChordStem != nullptr,
       "firstChordStem is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
     if (gGlobalTraceOahGroup->getTraceStems ()) {
@@ -20574,7 +20574,7 @@ void lpsr2lilypondTranslator::generateCodeRightBeforeChordContents (
         ", line " << chord->getInputLineNumber () <<
         std::endl;
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     generateStemIfNeededAndUpdateCurrentStemKind (firstChordStem);
 
@@ -20604,7 +20604,7 @@ void lpsr2lilypondTranslator::generateCodeForChordInGraceNotesGroupContents (
       ", line " << chord->getInputLineNumber () <<
       std::endl;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // get the chord notes vector
   const std::vector<S_msrNote>&
@@ -20649,7 +20649,7 @@ void lpsr2lilypondTranslator::generateCodeRightAfterChordContents (
       ", line " << chord->getInputLineNumber () <<
       std::endl;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // get the chord notes vector
   const std::vector<S_msrNote>&
@@ -21344,7 +21344,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrChord& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   if (fOnGoingGraceNotesGroup) {
@@ -21366,7 +21366,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrChord& elt)
 
     return;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fOnGoingChord = true;
   fCurrentChord = elt;
@@ -21430,7 +21430,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrChord& elt)
 
     return;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // generate the end of the chord
   fLilypondCodeStream <<
@@ -21496,7 +21496,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrTuplet& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (fOnGoingTupletsStack.size ()) {
     // elt is a nested tuplet
@@ -21671,7 +21671,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrTuplet& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (gGlobalLpsr2lilypondOahGroup->getIndentTuplets ()) {
     fLilypondCodeStream << std::endl;
@@ -21745,7 +21745,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrTie& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   switch (elt->getTieKind ()) {
     case msrTieKind::kTieNone:
@@ -21796,7 +21796,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrTie& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -21829,7 +21829,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrSegno& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void lpsr2lilypondTranslator::visitStart (S_msrHiddenMeasureAndBarLine& elt)
@@ -21861,7 +21861,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrHiddenMeasureAndBarLine& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fLilypondCodeStream <<
     "\\HiddenMeasureAndBarLine " <<
@@ -21904,7 +21904,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrCoda& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -21937,7 +21937,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrEyeGlasses& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fLilypondCodeStream <<
     "^\\markup {\\eyeglasses} ";
@@ -21972,7 +21972,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrScordatura& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 /* JMI
   const std::list<S_msrStringTuning>&
@@ -22064,7 +22064,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrPedal& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fLilypondCodeStream << std::endl;
 
@@ -22136,7 +22136,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrDamp& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fLilypondCodeStream <<
     "^\\markup {\\damp} ";
@@ -22171,7 +22171,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrDampAll& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fLilypondCodeStream <<
     "^\\markup {\\dampAll} ";
@@ -22208,7 +22208,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrBarLine& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -22411,7 +22411,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrBarLine& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -22449,7 +22449,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrBarCheck& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   int nextBarPuristNumber =
     elt->getNextBarPuristNumber ();
@@ -22468,7 +22468,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrBarCheck& elt)
       ", line " << inputLineNumber <<
       std::endl;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (
     !
@@ -22530,7 +22530,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrBarCheck& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -22566,7 +22566,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrBarNumberCheck& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (gGlobalLpsr2lilypondOahGroup->getNoBarNumberChecks ()) {
     return;
@@ -22582,7 +22582,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrBarNumberCheck& elt)
       ", line " << inputLineNumber <<
       std::endl;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (
     !
@@ -22648,7 +22648,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrBarNumberCheck& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -22681,7 +22681,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrLineBreak& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // enforce a page break here, not \myBreak // JMI
   fLilypondCodeStream <<
@@ -22751,7 +22751,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrLineBreak& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -22784,7 +22784,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrPageBreak& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // enforce a page break here, not using \myPageBreak,
   // if this is a user selected page break
@@ -22838,7 +22838,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrPageBreak& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -22871,7 +22871,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrRepeat& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   int repeatEndingsNumber =
     elt->getRepeatEndings ().size ();
@@ -22948,7 +22948,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrRepeat& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   /*
     CAUTION:
@@ -23010,7 +23010,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrRepeatCommonPart& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void lpsr2lilypondTranslator::visitEnd (S_msrRepeatCommonPart& elt)
@@ -23042,7 +23042,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrRepeatCommonPart& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -23075,7 +23075,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrRepeatEnding& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fRepeatDescrsStack.back ()->
     incrementRepeatEndingsCounter ();
@@ -23211,7 +23211,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrRepeatEnding& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   --gIndenter;  // incremented in visitStart (S_msrRepeatEnding&)
 
@@ -23266,7 +23266,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrRepeatEnding& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 */
 
   if (
@@ -23322,7 +23322,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrRehearsalMark& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fLilypondCodeStream << std::endl;
 
@@ -23408,7 +23408,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrRehearsalMark& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -23441,12 +23441,12 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasureRepeat& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   int repeatReplicasMeasuresNumber =
     elt->fetchMeasureRepeatReplicasMeasuresNumber ();
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   int replicasNumber =
     elt->fetchMeasureRepeatReplicasNumber ();
@@ -23473,7 +23473,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasureRepeat& elt)
       "% replicasNumber" << ": " << replicasNumber <<
       std::endl;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
     fLilypondCodeStream << std::left <<
@@ -23526,7 +23526,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMeasureRepeat& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   --gIndenter; // incremented in visitStart (S_msrMeasureRepeat&)
 
@@ -23576,7 +23576,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasureRepeatPattern& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void lpsr2lilypondTranslator::visitEnd (S_msrMeasureRepeatPattern& elt)
@@ -23607,7 +23607,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMeasureRepeatPattern& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void lpsr2lilypondTranslator::visitStart (S_msrMeasureRepeatReplicas& elt)
@@ -23638,7 +23638,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasureRepeatReplicas& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // output the start of the ending
   if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
@@ -23685,7 +23685,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMeasureRepeatReplicas& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   --gIndenter; // incremented in visitStart (S_msrMeasureRepeatReplicas&)
 }
@@ -23720,7 +23720,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMultipleFullBarRests& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -23789,7 +23789,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMultipleFullBarRests& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -23815,7 +23815,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMultipleFullBarRests& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // get multiple full-bar rests sounding notes JMI USELESS v0.9.63
   Rational
@@ -23836,7 +23836,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMultipleFullBarRests& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // generate multiple full-bar rests only now, in case there are
   // clef, keys or times before them in the first measure
@@ -23860,7 +23860,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMultipleFullBarRests& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fLilypondCodeStream <<
     "R" <<
@@ -23955,7 +23955,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMidiTempo& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (gGlobalLpsr2lilypondOahGroup->getNoMidi ()) {
     fLilypondCodeStream <<
@@ -24027,7 +24027,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMidiTempo& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 

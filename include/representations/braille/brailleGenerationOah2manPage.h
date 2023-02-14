@@ -55,4 +55,4 @@ typedef SMARTP<brailleGenerationOah2manPage> S_brailleGenerationOah2manPage;
 }
 
 
-#endif
+#endif // ___brailleGenerationOah2manPage___

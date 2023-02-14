@@ -17,6 +17,7 @@
 
 namespace MusicFormats
 {
+
 //_______________________________________________________________________________
 class EXP oahRegularHandler : public oahHandler
 /*
@@ -124,4 +125,4 @@ EXP std::ostream& operator << (std::ostream& os, const S_oahRegularHandler& elt)
 }
 
 
-#endif
+#endif // ___oahRegularHandlers___

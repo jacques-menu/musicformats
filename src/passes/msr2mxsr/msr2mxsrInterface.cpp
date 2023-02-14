@@ -54,7 +54,7 @@ Sxmlelement translateMsrToMxsr (
     __FILE__, __LINE__,
     theMsrScore != nullptr,
     "theMsrScore is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // start the clock
   clock_t startClock = clock ();
@@ -83,7 +83,7 @@ Sxmlelement translateMsrToMxsr (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // create an msr2mxsrTranslator
   msr2mxsrTranslator
@@ -133,7 +133,7 @@ Sxmlelement translateMsrToMxsr (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // return it
   return resultingMxsr;

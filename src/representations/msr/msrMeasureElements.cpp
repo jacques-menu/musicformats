@@ -94,7 +94,7 @@ void msrMeasureElement::doSetSoundingWholeNotes (
 
     --gIndenter;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
@@ -102,7 +102,7 @@ void msrMeasureElement::doSetSoundingWholeNotes (
     __FILE__, __LINE__,
     wholeNotes != K_WHOLE_NOTES_UNKNOWN,
     "wholeNotes == K_WHOLE_NOTES_UNKNOWN");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fSoundingWholeNotes = wholeNotes;
 }
@@ -140,7 +140,7 @@ void msrMeasureElement::setMeasurePosition (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
@@ -148,7 +148,7 @@ void msrMeasureElement::setMeasurePosition (
     __FILE__, __LINE__,
     measurePosition != msrMoment::K_MEASURE_POSITION_UNKNOWN,
     "measurePosition == msrMoment::K_MEASURE_POSITION_UNKNOWN");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // set measure element's measure position
   fMeasurePosition = measurePosition;
@@ -220,7 +220,7 @@ void msrMeasureElement::setVoicePosition (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
@@ -228,7 +228,7 @@ void msrMeasureElement::setVoicePosition (
     __FILE__, __LINE__,
     voicePosition != msrMoment::K_MEASURE_POSITION_UNKNOWN,
     "voicePosition == msrMoment::K_MEASURE_POSITION_UNKNOWN");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // set measure element voice position
 #ifdef MF_TRACE_IS_ENABLED
@@ -255,7 +255,7 @@ void msrMeasureElement::setVoicePosition (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fVoicePosition = voicePosition;
 }
@@ -282,7 +282,7 @@ void msrMeasureElement::setVoicePosition (
 //       "\"" <<
 //       std::endl;
 //   }
-// #endif
+// #endif // MF_TRACE_IS_ENABLED
 //
 //   fMeasureMoment = measureMoment;
 // }
@@ -304,7 +304,7 @@ void msrMeasureElement::setVoicePosition (
 //       "\"" <<
 //       std::endl;
 //   }
-// #endif
+// #endif // MF_TRACE_IS_ENABLED
 //
 // #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
@@ -312,7 +312,7 @@ void msrMeasureElement::setVoicePosition (
 //     __FILE__, __LINE__,
 //     voiceMoment != msrMoment::K_MOMENT_UNKNOWN,
 //     "voiceMoment == msrMoment::K_MOMENT_UNKNOWN");
-// #endif
+// #endif // MF_SANITY_CHECKS_ARE_ENABLED
 //
 //   fVoiceMoment = voiceMoment;
 // }
@@ -331,7 +331,7 @@ void msrMeasureElement::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrMeasureElement>*
     p =
@@ -350,7 +350,7 @@ void msrMeasureElement::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -369,7 +369,7 @@ void msrMeasureElement::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrMeasureElement>*
     p =
@@ -388,7 +388,7 @@ void msrMeasureElement::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }

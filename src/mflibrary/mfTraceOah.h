@@ -9,11 +9,8 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#ifndef ___TraceOah___
-#define ___TraceOah___
-
-
-#include "mfStaticSettings.h"
+#ifndef ___mfTraceOah___
+#define ___mfTraceOah___
 
 #ifdef MF_TRACE_IS_ENABLED // encompasses this whole file
 
@@ -1117,7 +1114,7 @@ EXP S_TraceOahGroup createGlobalTraceOahGroup (
 }
 
 
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 
-#endif
+#endif // ___mfTraceOah___

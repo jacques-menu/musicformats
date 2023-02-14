@@ -53,7 +53,7 @@ lpsrPartBlock::lpsrPartBlock (
     __FILE__, __LINE__,
     part != nullptr,
     "part is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fPart = part;
 
@@ -345,7 +345,7 @@ void lpsrPartBlock::appendChordNamesContextToPartBlock (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 /* JMI
   gLog <<
@@ -419,7 +419,7 @@ void lpsrPartBlock::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_lpsrPartBlock>*
     p =
@@ -438,7 +438,7 @@ void lpsrPartBlock::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -457,7 +457,7 @@ void lpsrPartBlock::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_lpsrPartBlock>*
     p =
@@ -476,7 +476,7 @@ void lpsrPartBlock::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -495,7 +495,7 @@ void lpsrPartBlock::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   for (
     std::list<S_msrElement>::const_iterator i = fPartBlockElementsList.begin ();
@@ -519,7 +519,7 @@ void lpsrPartBlock::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void lpsrPartBlock::print (std::ostream& os) const

@@ -829,4 +829,4 @@ void printHarmonyStructuresMap ();
 }
 
 
-#endif
+#endif // ___msrHarmonies___

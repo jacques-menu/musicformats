@@ -46,4 +46,4 @@ EXP mfMusicformatsErrorKind convertMsdlString2lilypondWithHandler (
 
 }
 
-#endif
+#endif // ___msdlConverterInterface___

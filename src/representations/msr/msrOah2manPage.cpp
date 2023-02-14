@@ -54,7 +54,7 @@ void msrOah2manPage::visitStart (S_msrRenamePartAtom& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 /*
   fManPageOutputStream <<
     ".HP" <<
@@ -90,7 +90,7 @@ void msrOah2manPage::visitEnd (S_msrRenamePartAtom& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -110,7 +110,7 @@ void msrOah2manPage::visitStart (S_msrIgnorePartAtom& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 /*
   fManPageOutputStream <<
     ".HP" <<
@@ -146,7 +146,7 @@ void msrOah2manPage::visitEnd (S_msrIgnorePartAtom& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -166,7 +166,7 @@ void msrOah2manPage::visitStart (S_msrKeepPartAtom& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 /*
   fManPageOutputStream <<
     ".HP" <<
@@ -202,7 +202,7 @@ void msrOah2manPage::visitEnd (S_msrKeepPartAtom& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -222,7 +222,7 @@ void msrOah2manPage::visitStart (S_msrPitchesLanguageAtom& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 /*
   fManPageOutputStream <<
     ".HP" <<
@@ -258,7 +258,7 @@ void msrOah2manPage::visitEnd (S_msrPitchesLanguageAtom& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 

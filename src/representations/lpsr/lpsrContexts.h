@@ -281,4 +281,4 @@ EXP std::ostream& operator << (std::ostream& os, const S_lpsrFiguredBassContext&
 }
 
 
-#endif
+#endif // ___lpsrContexts___

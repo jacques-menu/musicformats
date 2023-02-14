@@ -104,5 +104,5 @@ EXP std::ostream& operator << (std::ostream& os, const S_msrEyeGlasses& elt);
 }
 
 
-#endif
+#endif // ___msrEyeGlasses___
 

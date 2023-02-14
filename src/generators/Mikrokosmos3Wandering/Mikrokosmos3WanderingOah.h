@@ -12,6 +12,8 @@
 #ifndef ___Mikrokosmos3WanderingOah___
 #define ___Mikrokosmos3WanderingOah___
 
+#include "mfStaticSettings.h"
+
 #include "mfMultiGenerationOah.h"
 
 #include "msrGenerationBasicTypes.h"
@@ -102,7 +104,7 @@ class EXP Mikrokosmos3WanderingOahGroup : public oahGroup
 
 #ifdef MF_TRACE_IS_ENABLED
 // JMI    void                  initializeMikrokosmos3WanderingTraceOah ();
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     void                  initializeGenerationAPIOptions ();
 
@@ -158,4 +160,4 @@ EXP S_Mikrokosmos3WanderingOahGroup createGlobalMikrokosmos3WanderingOahGroup ()
 }
 
 
-#endif
+#endif // ___Mikrokosmos3WanderingOah___

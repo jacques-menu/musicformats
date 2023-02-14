@@ -125,4 +125,4 @@ void initializeMsrGenerationAPI ();
 }
 
 
-#endif
+#endif // ___msrGenerationBasicTypes___

@@ -1,3 +1,14 @@
+/*
+  MusicFormats Library
+  Copyright (C) Jacques Menu 2016-2023
+
+  This Source Code Form is subject to the terms of the Mozilla Public
+  License, v. 2.0. If a copy of the MPL was not distributed with this
+  file, you can obtain one at http://mozilla.org/MPL/2.0/.
+
+  https://github.com/jacques-menu/musicformats
+*/
+
 
 ///<reference path="lib/libmusicxml.ts"/>
 ///<reference path="download.ts"/>
@@ -36,7 +47,7 @@ class   XMLConverter {
     event.preventDefault();
   }
 
-  dragEnter (event : DragEvent) : void { 
+  dragEnter (event : DragEvent) : void {
     this.capture (event);
     this.fCode.style.opacity = "0.3";
   }
@@ -53,7 +64,7 @@ class   XMLConverter {
     else {
       let filelist = event.dataTransfer.files;
       if (!filelist) return;
-    
+
       let filecount = filelist.length;
       for (let i = 0; i < filecount; i++ )
         this.droppedFile (filelist[i]);
@@ -61,11 +72,11 @@ class   XMLConverter {
   }
 
   droppedFile (file: File) {
-    let reader = new FileReader();  
+    let reader = new FileReader();
     reader.onload = (event) => { this.convert (reader.result.toString(), file.name); };
     reader.readAsText(file, file.name);
   }
-  
+
   initialize (xmlengine: libmusicxml) {
     this.fXmlEngine = xmlengine;
     let div = document.getElementById ("codepane");
@@ -93,7 +104,7 @@ class   XMLConverter {
     // logs.style.fontSize = $("#log-size").val() + "px";
   }
 
-  lilyHelp () { 
+  lilyHelp () {
     this.fXmlEngine.string2lily ("", "-help");
     $("#lognav").click();
   }
@@ -116,7 +127,7 @@ class   XMLConverter {
   fontSize(val: number) : void {
     let pre = document.getElementsByTagName("pre");
     let i = 0;
-    let px = val + "px"; 
+    let px = val + "px";
     while (i < pre.length) {
       pre[i++].style.fontSize = px;
     }
@@ -126,11 +137,11 @@ class   XMLConverter {
     if (this.fXmlContent.length) {
       let content = this.fCode.innerText;
       if (content.length)
-        download (this.fFileName + this.outSuffix(),  this.fCode.innerText); 
+        download (this.fFileName + this.outSuffix(),  this.fCode.innerText);
     }
   }
 
-  outSuffix () : std::string    { 
+  outSuffix () : std::string    {
     switch (this.fMode) {
       case kGuidoMode: return ".gmn";
       case kLilyMode : return ".ly";
@@ -145,7 +156,7 @@ class   XMLConverter {
     return 0;
   }
 
-  cversion () : std::string    { 
+  cversion () : std::string    {
     switch (this.fMode) {
       case kGuidoMode: return this.fXmlEngine.musicxml2guidoVersionStr();
       case kLilyMode : return this.fXmlEngine.musicxml2lilypondVersionStr();
@@ -170,7 +181,7 @@ class   XMLConverter {
     }
   }
 
-  changeMode (mode: std::string) : void    { 
+  changeMode (mode: std::string) : void    {
     this.fMode = mode;
     $("#convVersion").text (this.cversion());
     this.changeGuidoTryStatus();
@@ -210,5 +221,5 @@ class   XMLConverter {
       console.error ("std::exception raised while converting " + path);
       $("#lognav").click();
     }
-  } 
+  }
 }

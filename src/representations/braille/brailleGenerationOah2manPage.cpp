@@ -56,7 +56,7 @@ void brailleGenerationOah2manPage::visitStart (S_brailleOutputKindAtom& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fManPageOutputStream <<
     ".HP" <<
@@ -91,7 +91,7 @@ void brailleGenerationOah2manPage::visitEnd (S_brailleOutputKindAtom& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -111,7 +111,7 @@ void brailleGenerationOah2manPage::visitStart (S_brailleUTFKindAtom& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fManPageOutputStream <<
     ".HP" <<
@@ -146,7 +146,7 @@ void brailleGenerationOah2manPage::visitEnd (S_brailleUTFKindAtom& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -166,7 +166,7 @@ void brailleGenerationOah2manPage::visitStart (S_brailleByteOrderingKindAtom& el
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fManPageOutputStream <<
     ".HP" <<
@@ -201,7 +201,7 @@ void brailleGenerationOah2manPage::visitEnd (S_brailleByteOrderingKindAtom& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 

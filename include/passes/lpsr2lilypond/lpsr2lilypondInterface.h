@@ -12,7 +12,6 @@
 #ifndef ___lpsr2lilypondInterface___
 #define ___lpsr2lilypondInterface___
 
-
 #include "exports.h"
 
 
@@ -42,4 +41,4 @@ EXP void translateLpsrToLilypondWithHandler (
 }
 
 
-#endif
+#endif // ___lpsr2lilypondInterface___

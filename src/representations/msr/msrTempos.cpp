@@ -90,7 +90,7 @@ void msrTempoNote::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrTempoNote>*
     p =
@@ -109,7 +109,7 @@ void msrTempoNote::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -128,7 +128,7 @@ void msrTempoNote::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrTempoNote>*
     p =
@@ -147,7 +147,7 @@ void msrTempoNote::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -295,7 +295,7 @@ msrTempoTuplet::msrTempoTuplet (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 msrTempoTuplet::~msrTempoTuplet ()
@@ -395,7 +395,7 @@ void msrTempoTuplet::addTempoNoteToTempoTuplet (S_msrTempoNote tempoNote)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fTempoTupletElements.push_back (tempoNote);
 
@@ -429,7 +429,7 @@ void msrTempoTuplet::addTempoTupletToTempoTuplet (S_msrTempoTuplet tempoTuplet)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // register tempoTuplet in elements list
   fTempoTupletElements.push_back (tempoTuplet);
@@ -475,7 +475,7 @@ void msrTempoTuplet::removeFirstNoteFromTempoTuplet (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (fTempoTupletElements.size ()) {
     S_msrElement
@@ -555,7 +555,7 @@ void msrTempoTuplet::applyDisplayFactorToTempoTupletMembers ()
 
     --gIndenter;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void msrTempoTuplet::unapplySoundingFactorToTempoTupletMembers (
@@ -584,7 +584,7 @@ void msrTempoTuplet::unapplySoundingFactorToTempoTupletMembers (
 
     --gIndenter;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fTempoTupletFactor /= // JMI ???
     containingTempoTupletActualNotes;
@@ -605,7 +605,7 @@ void msrTempoTuplet::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrTempoTuplet>*
     p =
@@ -624,7 +624,7 @@ void msrTempoTuplet::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -643,7 +643,7 @@ void msrTempoTuplet::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrTempoTuplet>*
     p =
@@ -662,7 +662,7 @@ void msrTempoTuplet::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -929,7 +929,7 @@ void msrTempoNotesRelationshipElements::addElementToTempoNotesRelationshipElemen
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fTempoNotesRelationshipElementsList.push_back (element);
 }
@@ -948,7 +948,7 @@ void msrTempoNotesRelationshipElements::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrTempoNotesRelationshipElements>*
     p =
@@ -967,7 +967,7 @@ void msrTempoNotesRelationshipElements::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -986,7 +986,7 @@ void msrTempoNotesRelationshipElements::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrTempoNotesRelationshipElements>*
     p =
@@ -1005,7 +1005,7 @@ void msrTempoNotesRelationshipElements::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -1304,7 +1304,7 @@ msrTempo::msrTempo (
     __FILE__, __LINE__,
     tempoWords != nullptr,
     "tempoWords is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fTempoKind = msrTempoKBeatUnitsKind::kTempoBeatUnitsWordsOnly;
 
@@ -1412,7 +1412,7 @@ void msrTempo::setTempoUpLinkToMeasure (
     __FILE__, __LINE__,
     measure != nullptr,
     "measure is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalTraceOahGroup->getTraceWholeNotes ()) {
@@ -1428,7 +1428,7 @@ void msrTempo::setTempoUpLinkToMeasure (
 
     --gIndenter;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fTempoUpLinkToMeasure = measure;
 }
@@ -1447,7 +1447,7 @@ void msrTempo::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrTempo>*
     p =
@@ -1466,7 +1466,7 @@ void msrTempo::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -1485,7 +1485,7 @@ void msrTempo::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrTempo>*
     p =
@@ -1504,7 +1504,7 @@ void msrTempo::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }

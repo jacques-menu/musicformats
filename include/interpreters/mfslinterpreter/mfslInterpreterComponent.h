@@ -27,5 +27,5 @@ S_mfcConverterComponent EXP createMfslInterpreterComponent ();
 }
 
 
-#endif
+#endif // ___mfslInterpreterComponent___
 

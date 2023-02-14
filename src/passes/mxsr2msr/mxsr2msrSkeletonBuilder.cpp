@@ -98,7 +98,7 @@ std::string mxmlPartGroupDescr::partGroupDescrAsString () const
       ", positions " <<
       fStartPosition << ".." << fStopPosition;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ss <<
     ", lines " <<
@@ -695,7 +695,7 @@ void mxsr2msrSkeletonBuilder::registerPartGroupDescrAsStarted (
         partGroupDescrAsString () +
       " in the data");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // register part group in part groups vector, i.e. by appearance order
   fPartGroupDescsVector.push_back (
@@ -725,7 +725,7 @@ void mxsr2msrSkeletonBuilder::registerPartGroupDescrAsStarted (
         partGroupDescrAsString () +
       " in the data");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -762,7 +762,7 @@ void mxsr2msrSkeletonBuilder::insertPartGroupDescInStartingList (
 					__FILE__, __LINE__,
 					ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       startingPartGroupDescrsList.push_back (
         partGroupDescr);
@@ -810,7 +810,7 @@ void mxsr2msrSkeletonBuilder::insertPartGroupDescInStartingList (
 					__FILE__, __LINE__,
 					ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       startingPartGroupDescrsList.insert (
         i, partGroupDescr);
@@ -855,7 +855,7 @@ void mxsr2msrSkeletonBuilder::insertPartGroupDescInStoppingList (
 					__FILE__, __LINE__,
 					ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       stoppingPartGroupDescrsList.push_back (
         partGroupDescr);
@@ -903,7 +903,7 @@ void mxsr2msrSkeletonBuilder::insertPartGroupDescInStoppingList (
 					__FILE__, __LINE__,
 					ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       stoppingPartGroupDescrsList.insert (
         i, partGroupDescr);
@@ -983,7 +983,7 @@ void mxsr2msrSkeletonBuilder::registerPartGroupDescrAsStopped (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // register part group descr as stopping at current position
   registerPartGroupDescrAsStoppingAtCurrentPosition (
@@ -1006,7 +1006,7 @@ void mxsr2msrSkeletonBuilder::registerPartGroupDescrAsStopped (
           partGroupDescrAsString () +
         " in the data");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -1027,7 +1027,7 @@ void mxsr2msrSkeletonBuilder::handlePartGroupStart (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++fPartGroupsCounter;
 
@@ -1078,7 +1078,7 @@ void mxsr2msrSkeletonBuilder::handlePartGroupStart (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   registerPartGroupDescrAsStarted (
     inputLineNumber,
@@ -1090,7 +1090,7 @@ void mxsr2msrSkeletonBuilder::handlePartGroupStart (
       inputLineNumber,
       "AFTER handlePartGroupStart()");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -1138,7 +1138,7 @@ void mxsr2msrSkeletonBuilder::handlePartGroupStop (
       inputLineNumber,
       "AFTER handlePartGroupStop()");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -1175,7 +1175,7 @@ void mxsr2msrSkeletonBuilder::doNestPartGroupDescrInItsContainer (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   partGroupToBeStopped->
     setPartGroupUpLinkToPartGroup (
@@ -1200,7 +1200,7 @@ void mxsr2msrSkeletonBuilder::doNestPartGroupDescrInItsContainer (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   containingPartGroup->
     appendSubPartGroupToPartGroup (
@@ -1219,7 +1219,7 @@ void mxsr2msrSkeletonBuilder::createImplicitPartGroup ()
     __FILE__, __LINE__,
     fImplicitPartGroup == nullptr,
     "fImplicitPartGroup already exists");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   int inputLineNumber = 0;
     // this occurs independantly from the MusicXML data
@@ -1241,7 +1241,7 @@ void mxsr2msrSkeletonBuilder::createImplicitPartGroup ()
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++fPartGroupsCounter;
 
@@ -1273,7 +1273,7 @@ void mxsr2msrSkeletonBuilder::createImplicitPartGroup ()
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fMsrScore->
     addPartGroupToScore (
@@ -1304,7 +1304,7 @@ void mxsr2msrSkeletonBuilder::createImplicitPartGroup ()
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   registerPartGroupDescrAsStarted (
     inputLineNumber,
@@ -1316,7 +1316,7 @@ void mxsr2msrSkeletonBuilder::createImplicitPartGroup ()
       inputLineNumber,
       "AFTER creating fImplicitPartGroup");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //______________________________________________________________________________
@@ -1335,7 +1335,7 @@ void mxsr2msrSkeletonBuilder::doPartGroupsNestingAndPartsAllocation (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // this is actually a partial subpass of pass 2a,
   // since we run through the contents of <part-list />,
@@ -1347,7 +1347,7 @@ void mxsr2msrSkeletonBuilder::doPartGroupsNestingAndPartsAllocation (
       inputLineNumber,
       "BEFORE doPartGroupsNestingAndPartsAllocation");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // handle each position in turn
   for (int k = 0; k <= fCurrentPartsPosition; ++k) {
@@ -1460,7 +1460,7 @@ void mxsr2msrSkeletonBuilder::doPartGroupsNestingAndPartsAllocation (
 								__FILE__, __LINE__,
 								ss.str ());
             }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
             fPartGroupsDescrStack.pop_front ();
 
@@ -1503,7 +1503,7 @@ void mxsr2msrSkeletonBuilder::doPartGroupsNestingAndPartsAllocation (
                 stopInputLineNumber,
                 "UPON overlapping part groups");
             }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
             std::stringstream ss;
 
@@ -1627,7 +1627,7 @@ R"(Please contact the maintainers of MusicFormats (see option '-c, -contact'):
 							__FILE__, __LINE__,
 							ss.str ());
           }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
           fPartGroupsDescrStack.push_front (
             partGroupDescr);
@@ -1651,7 +1651,7 @@ R"(Please contact the maintainers of MusicFormats (see option '-c, -contact'):
         inputLineNumber,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   } // for
 
@@ -1661,7 +1661,7 @@ R"(Please contact the maintainers of MusicFormats (see option '-c, -contact'):
       inputLineNumber,
       "AFTER doPartGroupsNestingAndPartsAllocation");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //______________________________________________________________________________
@@ -1831,7 +1831,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_score_partwise& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalTraceOahGroup->getTraceParts ()) {
@@ -1845,7 +1845,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_score_partwise& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fScoreNumberOfMeasures = 0;
 }
@@ -1868,7 +1868,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_score_partwise& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // register the number of measures
   fMsrScore->
@@ -1907,7 +1907,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_work_number& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fMsrScore->getIdentification () ->
     setIdentificationWorkNumber (
@@ -1933,7 +1933,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_work_title& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   std::string workCreditTypeTitle = elt->getValue ();
 
@@ -1961,7 +1961,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_opus& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   std::string opus = elt->getValue ();
 
@@ -1989,7 +1989,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_movement_number& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fMsrScore->getIdentification () ->
     setIdentificationMovementNumber (
@@ -2015,7 +2015,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_movement_title& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   std::string movementTitle = elt->getValue ();
 
@@ -2050,7 +2050,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_identification& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void mxsr2msrSkeletonBuilder::visitEnd (S_identification& elt)
@@ -2071,7 +2071,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_identification& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void mxsr2msrSkeletonBuilder::visitStart (S_creator& elt)
@@ -2092,7 +2092,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_creator& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   std::string creatorType = elt->getAttributeValue ("type");
   std::string creatorValue = elt->getValue ();
@@ -2181,7 +2181,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_rights& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   std::string rightsValue = elt->getValue ();
 
@@ -2211,7 +2211,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_source& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 /* JMI
   std::string rightsValue = elt->getValue ();
@@ -2243,7 +2243,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_relation& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 /* JMI
   std::string rightsValue = elt->getValue ();
@@ -2273,7 +2273,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_encoding& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalTraceOahGroup->getTraceParts ()) {
@@ -2288,7 +2288,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_encoding& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fScoreNumberOfMeasures = 0;
 }
@@ -2311,7 +2311,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_encoding& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void mxsr2msrSkeletonBuilder::visitStart (S_encoding_date& elt)
@@ -2332,7 +2332,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_encoding_date& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fMsrScore->getIdentification () ->
     setIdentificationEncodingDate (
@@ -2358,7 +2358,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_encoder& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 /* JMI
   fMsrScore->getIdentification () ->
@@ -2386,7 +2386,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_software& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   std::string softwareValue = elt->getValue ();
 
@@ -2426,7 +2426,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_software& elt)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
         combinedBooleanAtom->
           setCombinedBooleanVariables (true);
@@ -2460,7 +2460,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_encoding_description& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 /* JMI
   fMsrScore->getIdentification () ->
@@ -2488,7 +2488,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_supports& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 /* JMI
   fMsrScore->getIdentification () ->
@@ -2517,7 +2517,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_miscellaneous& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 /* JMI
   std::string miscellaneousFielValue = elt->getValue ();
@@ -2551,7 +2551,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_miscellaneous& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -2573,7 +2573,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_miscellaneous_field& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   std::string miscellaneousFielValue = elt->getValue ();
 
@@ -2677,7 +2677,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_credit& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   int creditPageNumber =
     elt->getAttributeIntValue ("page", 0);
@@ -2711,7 +2711,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_credit_type& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   std::string creditTypeValue = elt->getValue ();
 
@@ -2762,7 +2762,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_credit_symbol& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void mxsr2msrSkeletonBuilder::visitStart (S_credit_image& elt)
@@ -2783,7 +2783,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_credit_image& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void mxsr2msrSkeletonBuilder::visitStart (S_credit_words& elt)
@@ -2804,7 +2804,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_credit_words& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 /*
   <credit page="1">
@@ -2939,7 +2939,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_credit& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // forget about the current credit
   fCurrentCredit = nullptr;
@@ -2961,7 +2961,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_part_list& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalTraceOahGroup->getTraceParts ()) {
@@ -2975,7 +2975,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_part_list& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 }
@@ -2998,7 +2998,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_part_list& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   --gIndenter;
 
@@ -3023,7 +3023,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_part_list& elt)
       inputLineNumber,
       "Part groups data gathered for score skeleton");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (gGlobalMsrOahGroup->getDisplayPartGroups ()) {
     gLog <<
@@ -3042,7 +3042,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_part_list& elt)
     if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
       gLog << std::endl; // JMI v0.9.67
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     --gIndenter;
   }
@@ -3067,7 +3067,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_part_group& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // part group number
 
@@ -3144,7 +3144,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_group_name& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fCurrentPartGroupName = elt->getValue();
 }
@@ -3167,7 +3167,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_group_name_display& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // print-object
 
@@ -3198,7 +3198,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_group_name_display& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fOnGoingPartGroupNameDisplay = false;
 }
@@ -3221,7 +3221,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_display_text& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (fOnGoingPartGroupNameDisplay) {
     fCurrentPartGroupNameDisplayText =
@@ -3259,7 +3259,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_accidental_text& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     fCurrentPartGroupAccidentalText = elt->getValue();
 }
@@ -3279,7 +3279,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_group_abbreviation& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fCurrentPartGroupAbbreviation = elt->getValue ();
 }
@@ -3302,7 +3302,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_group_symbol& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   std::string groupSymbol = elt->getValue ();
 
@@ -3362,7 +3362,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_group_barline& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   std::string groupBarLine = elt->getValue ();
 
@@ -3404,7 +3404,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_part_group& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalTraceOahGroup->getTracePartGroups ()) {
@@ -3424,7 +3424,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_part_group& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -3470,7 +3470,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_score_part& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fCurrentScorePartID = elt->getAttributeValue ("id");
 
@@ -3488,7 +3488,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_score_part& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // is the part id a pure number?
   std::string regularExpression (
@@ -3546,7 +3546,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_part_name& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fCurrentPartName = elt->getValue ();
 
@@ -3584,7 +3584,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_part_name_display& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fOnGoingPartNameDisplay = true;
 }
@@ -3604,7 +3604,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_part_name_display& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fOnGoingPartNameDisplay = false;
 }
@@ -3627,7 +3627,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_part_abbreviation& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fCurrentPartAbbreviation = elt->getValue ();
 
@@ -3658,7 +3658,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_part_abbreviation_display& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fOnGoingPartAbbreviationDisplay = true;
 }
@@ -3678,7 +3678,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_part_abbreviation_display& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fOnGoingPartAbbreviationDisplay = false;
 }
@@ -3698,7 +3698,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_instrument_name& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fCurrentPartInstrumentName = elt->getValue();
 }
@@ -3718,7 +3718,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_instrument_abbreviation& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fCurrentPartInstrumentAbbreviation = elt->getValue();
 }
@@ -3741,7 +3741,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_score_part& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++fCurrentPartsPosition;
 
@@ -3763,7 +3763,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_score_part& elt)
 			__FILE__, __LINE__,
 			ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -3783,7 +3783,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_score_part& elt)
 			__FILE__, __LINE__,
 			ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   S_msrPart
     part =
@@ -3826,7 +3826,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_score_part& elt)
       inputLineNumber,
       "AFTER handling score part \"" + scorePartID + "\"");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   --gIndenter;
 }
@@ -3853,7 +3853,7 @@ void mxsr2msrSkeletonBuilder::registerPart (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // register part in the parts vector
   fPartsVector.push_back (part);
@@ -3889,7 +3889,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_part& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // fCurrentPartID is used throughout
   fCurrentPartID = elt->getAttributeValue ("id");
@@ -3915,7 +3915,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_part& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (! fCurrentPartID.size ()) {
     if (fPartsMap.size () == 1) {
@@ -3993,7 +3993,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_part& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // measures
   fPartNumberOfMeasures = 0;
@@ -4021,7 +4021,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_part& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalTraceOahGroup->getTraceParts ()) {
@@ -4037,7 +4037,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_part& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   --gIndenter;
 
@@ -4101,7 +4101,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_staves& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   int stavesNumber = int(*elt);
 
@@ -4133,7 +4133,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_staves& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (stavesNumber > 1) {
     // add stavesNumber staves to current part
@@ -4177,7 +4177,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_staff& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fCurrentStaffMusicXMLNumber = int(*elt);
 
@@ -4219,7 +4219,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_voice& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalTraceOahGroup->getTraceVoices ()) {
@@ -4237,7 +4237,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_voice& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fCurrentVoiceMusicXMLNumber = int(*elt);
 
@@ -4272,7 +4272,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_measure& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 /*
   Measures have a required number attribute (going from partwise to timewise,
@@ -4304,7 +4304,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_measure& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // take this measure into account
   ++fPartNumberOfMeasures;
@@ -4327,7 +4327,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_measure& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   --gIndenter;
 }
@@ -4351,7 +4351,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_print& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fOnGoingPrint = true;
 }
@@ -4371,7 +4371,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_print& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fOnGoingPrint = false;
 }
@@ -4392,7 +4392,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_note& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // assuming staff number 1, unless S_staff states otherwise afterwards
   fCurrentStaffMusicXMLNumber = 1;
@@ -4425,7 +4425,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_note& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // should the staff be created?
   S_msrStaff
@@ -4464,7 +4464,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_note& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // are there harmonies attached to the current note?
   if (fThereAreHarmoniesToBeAttachedToCurrentNote) {
@@ -4483,7 +4483,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_note& elt)
 					__FILE__, __LINE__,
 					ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
     }
     else {
       // create the part harmonies voice if not yet done
@@ -4514,7 +4514,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_note& elt)
 					__FILE__, __LINE__,
 					ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
     }
     else {
       // create the part figured bass voice if not yet done
@@ -4550,7 +4550,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_lyric& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // number
 
@@ -4582,7 +4582,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_lyric& elt)
 					__FILE__, __LINE__,
 					ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       // register it as current stanza number, JMI
       // that remains set until another positive value is found,
@@ -4613,7 +4613,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_lyric& elt)
           inputLineNumber,
           ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       fCurrentStanzaName = msrStanza::K_STANZA_NAME_UNKNOWN;
     }
@@ -4633,7 +4633,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_lyric& elt)
 					__FILE__, __LINE__,
 					ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       // register it as current stanza name, JMI
       // that remains set another positive value is found,
@@ -4661,7 +4661,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_lyric& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalTraceOahGroup->getTraceLyrics ()) {
@@ -4699,7 +4699,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_lyric& elt)
 			__FILE__, __LINE__,
 			ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (! gGlobalMxsr2msrOahGroup->getIgnoreLyrics ()) {
     // create current voice if need be
@@ -4738,7 +4738,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_harmony& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   /* JMI ???
     several harmonies can be attached to a given note,
@@ -4768,7 +4768,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_figured_bass& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   /* JMI
     several figured bass elements can be attached to a given note,

@@ -99,7 +99,7 @@ S_msrBook msrBook::createBookNewbornClone ()
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   S_msrBook
     newbornClone =
@@ -209,7 +209,7 @@ void msrBook::appendCreditToBook (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fCreditsList.push_back (credit);
 }
@@ -295,7 +295,7 @@ void msrBook::fetchIdentificationFromCreditsIfAny ( // THROW AWAY JMI ??? v0.9.6
                       "' as score title" <<
                       std::endl;
               }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
                   fIdentification->
                     setIdentificationWorkCreditTypeTitle (
@@ -312,7 +312,7 @@ void msrBook::fetchIdentificationFromCreditsIfAny ( // THROW AWAY JMI ??? v0.9.6
                       "' as movement title" <<
                       std::endl;
               }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
                   fIdentification->
                     setIdentificationMovementTitle (
@@ -341,7 +341,7 @@ void msrBook::fetchIdentificationFromCreditsIfAny ( // THROW AWAY JMI ??? v0.9.6
                       "' as composer" <<
                       std::endl;
               }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
                   fIdentification->
                     appendComposer (
@@ -358,7 +358,7 @@ void msrBook::fetchIdentificationFromCreditsIfAny ( // THROW AWAY JMI ??? v0.9.6
                       "' as poet" <<
                       std::endl;
               }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
                   fIdentification->
                     appendPoet (
@@ -408,7 +408,7 @@ void msrBook::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrBook>*
     p =
@@ -427,7 +427,7 @@ void msrBook::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -446,7 +446,7 @@ void msrBook::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrBook>*
     p =
@@ -465,7 +465,7 @@ void msrBook::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -484,7 +484,7 @@ void msrBook::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (fIdentification) {
     // browse identification
@@ -554,7 +554,7 @@ void msrBook::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void msrBook::printFull (std::ostream& os) const

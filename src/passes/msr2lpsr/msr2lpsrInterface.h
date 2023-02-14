@@ -23,6 +23,7 @@
 
 namespace MusicFormats
 {
+
 //_______________________________________________________________________________
 EXP extern S_lpsrScore translateMsrToLpsr (
   const S_msrScore&          originalMsrScore,
@@ -36,4 +37,4 @@ EXP extern S_lpsrScore translateMsrToLpsr (
 }
 
 
-#endif
+#endif // ___msr2lpsrInterface___

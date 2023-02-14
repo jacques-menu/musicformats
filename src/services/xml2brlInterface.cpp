@@ -13,7 +13,7 @@
 
 #ifndef WIN32
 #include <signal.h>
-#endif
+#endif // WIN32
 
 #include "mfBool.h"
 #include "mfMusicformatsErrors.h"
@@ -67,7 +67,7 @@ static void catchSignals ()
 
 #else
 static void catchSignals ()  {}
-#endif
+#endif // WIN32
 
 //_______________________________________________________________________________
 EXP int xml2brl (
@@ -113,7 +113,7 @@ EXP int xml2brl (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // the oahHandler, set below
   // ------------------------------------------------------
@@ -227,7 +227,7 @@ EXP int xml2brl (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // what if no input source name has been supplied?
   if (! inputSourceName.size ()) {
@@ -336,7 +336,7 @@ EXP int xml2brl (
     }
     gLog << std::endl;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // acknoledge end of command line analysis
   // ------------------------------------------------------
@@ -353,7 +353,7 @@ EXP int xml2brl (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // do the conversion
   // ------------------------------------------------------
@@ -367,7 +367,7 @@ EXP int xml2brl (
       if (gEarlyOptions.getEarlyTraceOah ()) {
           gLog << "Reading standard input" << std::endl;
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       err =
         convertMusicxmlFd2brailleWithHandler (
@@ -392,7 +392,7 @@ EXP int xml2brl (
           __FILE__, __LINE__,
           ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       err =
         convertMusicxmlFile2brailleWithHandler (

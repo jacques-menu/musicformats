@@ -79,7 +79,7 @@ msr2brailleRegularHandler::msr2brailleRegularHandler (
     "\" has been initialized as:" <<
     std::endl;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 msr2brailleRegularHandler::~msr2brailleRegularHandler ()
@@ -101,7 +101,7 @@ void msr2brailleRegularHandler::createRegularHandlerGroups ()
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   createInformationsRegularGroup ();
 
@@ -171,7 +171,7 @@ void msr2brailleRegularHandler::createRegularHandlerGroups ()
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void msr2brailleRegularHandler::createOahRegularGroup ()
@@ -210,7 +210,7 @@ void msr2brailleRegularHandler::createOahRegularGroup ()
 #ifdef MF_TRACE_IS_ENABLED
   registerAtomInRegularSubgroup (K_TRACE_EARLY_OPTIONS_OPTION_LONG_NAME, subGroup);
   registerAtomInRegularSubgroup (K_OAH_VERBOSE_MODE_OPTION_LONG_NAME, subGroup);
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   registerAtomInRegularSubgroup ("help", subGroup);
   registerAtomInRegularSubgroup ("help-summary", subGroup);
@@ -236,9 +236,7 @@ void msr2brailleRegularHandler::createOahRegularGroup ()
   registerAtomInRegularSubgroup ("display-msr1-skeleton", subGroup);
 
   registerAtomInRegularSubgroup ("display-msr1", subGroup);
-  registerAtomInRegularSubgroup ("display-msr1", subGroup);
   registerAtomInRegularSubgroup ("display-msr1-full", subGroup);
-  registerAtomInRegularSubgroup ("display-msr2", subGroup);
   registerAtomInRegularSubgroup ("display-msr2", subGroup);
   registerAtomInRegularSubgroup ("display-msr2-full", subGroup);
 
@@ -267,7 +265,7 @@ void msr2brailleRegularHandler::createOahRegularGroup ()
   registerAtomInRegularSubgroup (K_TRACE_ONLY_PASS_OPTION_LONG_NAME, subGroup);
 
   registerAtomInRegularSubgroup ("trace-bsr", subGroup);
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void msr2brailleRegularHandler::createInformationsRegularGroup ()
@@ -908,7 +906,7 @@ void msr2brailleRegularHandler::createChordsRegularGroup ()
 
 #ifdef MF_TRACE_IS_ENABLED
   registerAtomInRegularSubgroup ("trace-chords", subGroup);
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void msr2brailleRegularHandler::createTiesRegularGroup ()
@@ -1099,7 +1097,7 @@ void msr2brailleRegularHandler::createTupletsRegularGroup ()
 
 #ifdef MF_TRACE_IS_ENABLED
   registerAtomInRegularSubgroup ("trace-tuplets", subGroup);
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   registerAtomInRegularSubgroup ("display-tuplets", subGroup);
 }
@@ -1311,7 +1309,7 @@ void msr2brailleRegularHandler::checkOptionsAndArguments () const
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   checkSingleInputSourceInArgumentsVector ();
 }

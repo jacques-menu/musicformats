@@ -104,7 +104,7 @@ msdlConverterRegularHandler::msdlConverterRegularHandler (
   if (gEarlyOptions.getEarlyTraceOah ()) {
     // JMI ???
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 msdlConverterRegularHandler::~msdlConverterRegularHandler ()
@@ -126,7 +126,7 @@ void msdlConverterRegularHandler::createRegularHandlerGroups ()
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   createInformationsRegularGroup ();
 
@@ -231,7 +231,7 @@ void msdlConverterRegularHandler::createRegularHandlerGroups ()
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void msdlConverterRegularHandler::createInformationsRegularGroup ()
@@ -480,7 +480,7 @@ void msdlConverterRegularHandler::createOahRegularGroup ()
 #ifdef MF_TRACE_IS_ENABLED
   registerAtomInRegularSubgroup (K_TRACE_EARLY_OPTIONS_OPTION_LONG_NAME, subGroup);
   registerAtomInRegularSubgroup (K_OAH_VERBOSE_MODE_OPTION_LONG_NAME, subGroup);
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   registerAtomInRegularSubgroup ("help", subGroup);
   registerAtomInRegularSubgroup ("help-summary", subGroup);
@@ -506,9 +506,7 @@ void msdlConverterRegularHandler::createOahRegularGroup ()
   registerAtomInRegularSubgroup ("display-msr1-skeleton", subGroup);
 
   registerAtomInRegularSubgroup ("display-msr1", subGroup);
-  registerAtomInRegularSubgroup ("display-msr1", subGroup);
   registerAtomInRegularSubgroup ("display-msr1-full", subGroup);
-  registerAtomInRegularSubgroup ("display-msr2", subGroup);
   registerAtomInRegularSubgroup ("display-msr2", subGroup);
   registerAtomInRegularSubgroup ("display-msr2-full", subGroup);
 
@@ -527,7 +525,7 @@ void msdlConverterRegularHandler::createOahRegularGroup ()
 
   registerAtomInRegularSubgroup (K_TRACE_PASSES_OPTION_LONG_NAME, subGroup);
   registerAtomInRegularSubgroup (K_TRACE_ONLY_PASS_OPTION_LONG_NAME, subGroup);
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // atoms from the insider handler depending on the generated output kind
   switch (fMultiGenerationOutputKind) {
@@ -565,7 +563,7 @@ void msdlConverterRegularHandler::createOahRegularGroup ()
 
       registerAtomInRegularSubgroup ("trace-backup", subGroup);
       registerAtomInRegularSubgroup ("trace-forward", subGroup);
-#endif
+#endif // MF_TRACE_IS_ENABLED
       break;
 
     case mfMultiGenerationOutputKind::kGenerationGuido:
@@ -575,7 +573,7 @@ void msdlConverterRegularHandler::createOahRegularGroup ()
 
       registerAtomInRegularSubgroup ("trace-backup", subGroup);
       registerAtomInRegularSubgroup ("trace-forward", subGroup);
-#endif
+#endif // MF_TRACE_IS_ENABLED
       break;
 
     case mfMultiGenerationOutputKind::kGenerationMidi:
@@ -1145,7 +1143,7 @@ void msdlConverterRegularHandler::createChordsRegularGroup ()
 
 #ifdef MF_TRACE_IS_ENABLED
   registerAtomInRegularSubgroup ("trace-chords", subGroup);
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void msdlConverterRegularHandler::createTiesRegularGroup ()
@@ -1343,7 +1341,7 @@ void msdlConverterRegularHandler::createTupletsRegularGroup ()
 
 #ifdef MF_TRACE_IS_ENABLED
   registerAtomInRegularSubgroup ("trace-tuplets", subGroup);
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   registerAtomInRegularSubgroup ("display-tuplets", subGroup);
 }
@@ -1462,7 +1460,7 @@ void msdlConverterRegularHandler::checkOptionsAndArguments () const
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (MSDR_STANDARD_INPUT_NAME == std::string ("-")) {
     checkSingleInputSourceInArgumentsVector ();

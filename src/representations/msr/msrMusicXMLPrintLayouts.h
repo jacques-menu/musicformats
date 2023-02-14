@@ -230,4 +230,4 @@ EXP std::ostream& operator << (std::ostream& os, const S_msrMusicXMLPrintLayout&
 }
 
 
-#endif
+#endif // ___msrMusicXMLPrintLayouts___

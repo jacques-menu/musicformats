@@ -76,7 +76,7 @@ xml2lyRegularHandler::xml2lyRegularHandler (
     "\" has been initialized as:" <<
     std::endl;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
   }
 
 xml2lyRegularHandler::~xml2lyRegularHandler ()
@@ -96,14 +96,14 @@ void xml2lyRegularHandler::createRegularHandlerGroups ()
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   // create the trace OAH group
   appendGroupToHandler (
     createGlobalTraceOahGroup (
       this));
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   createInformationsRegularGroup ();
 
@@ -186,7 +186,7 @@ void xml2lyRegularHandler::createRegularHandlerGroups ()
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void xml2lyRegularHandler::createOahRegularGroup ()
@@ -225,7 +225,7 @@ void xml2lyRegularHandler::createOahRegularGroup ()
 #ifdef MF_TRACE_IS_ENABLED
   registerAtomInRegularSubgroup (K_TRACE_EARLY_OPTIONS_OPTION_LONG_NAME, subGroup);
   registerAtomInRegularSubgroup (K_OAH_VERBOSE_MODE_OPTION_LONG_NAME, subGroup);
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   registerAtomInRegularSubgroup ("help", subGroup);
   registerAtomInRegularSubgroup ("help-summary", subGroup);
@@ -251,9 +251,7 @@ void xml2lyRegularHandler::createOahRegularGroup ()
   registerAtomInRegularSubgroup ("display-msr1-skeleton", subGroup);
 
   registerAtomInRegularSubgroup ("display-msr1", subGroup);
-  registerAtomInRegularSubgroup ("display-msr1", subGroup);
   registerAtomInRegularSubgroup ("display-msr1-full", subGroup);
-  registerAtomInRegularSubgroup ("display-msr2", subGroup);
   registerAtomInRegularSubgroup ("display-msr2", subGroup);
   registerAtomInRegularSubgroup ("display-msr2-full", subGroup);
 
@@ -266,7 +264,6 @@ void xml2lyRegularHandler::createOahRegularGroup ()
   registerAtomInRegularSubgroup ("display-msr1-summary", subGroup);
   registerAtomInRegularSubgroup ("display-msr2-summary", subGroup);
 
-  registerAtomInRegularSubgroup ("display-lpsr", subGroup);
   registerAtomInRegularSubgroup ("display-lpsr", subGroup);
   registerAtomInRegularSubgroup ("display-lpsr-full", subGroup);
 
@@ -286,7 +283,7 @@ void xml2lyRegularHandler::createOahRegularGroup ()
 
   registerAtomInRegularSubgroup ("trace-lpsr", subGroup);
   registerAtomInRegularSubgroup ("trace-lpsr-visitors", subGroup);
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   registerAtomInRegularSubgroup ("quit-after-pass-2a", subGroup);
   registerAtomInRegularSubgroup ("quit-after-pass-2b", subGroup);
@@ -1373,12 +1370,10 @@ void xml2lyRegularHandler::createHarmoniesRegularGroup ()
 
   registerAtomInRegularSubgroup ("show-harmony-voices", subGroup);
 
-#ifdef MF_HARMONIES_EXTRA_IS_ENABLED
   registerAtomInRegularSubgroup ("display-harmonies-structures", subGroup);
   registerAtomInRegularSubgroup ("display-all-harmonies-contents", subGroup);
   registerAtomInRegularSubgroup ("display-harmony-details", subGroup);
   registerAtomInRegularSubgroup ("display-harmony-analysis", subGroup);
-#endif
 }
 
 void xml2lyRegularHandler::createFiguredBassRegularGroup ()
@@ -1759,7 +1754,7 @@ void xml2lyRegularHandler::checkOptionsAndArguments () const
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   checkSingleInputSourceInArgumentsVector ();
 }

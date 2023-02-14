@@ -119,4 +119,4 @@ EXP std::ostream& operator << (std::ostream& os, const S_msrTie& elt);
 }
 
 
-#endif
+#endif // ___msrTies___

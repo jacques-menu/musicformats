@@ -73,7 +73,7 @@ msrSegment::msrSegment (
     __FILE__, __LINE__,
     segmentUpLinkToVoice != nullptr,
     "segmentUpLinkToVoice is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // set segment's voice upLink
   fSegmentUpLinkToVoice =
@@ -109,7 +109,7 @@ void msrSegment::initializeSegment ()
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 // JMI v0.9.63
 //  // segment shortest note duration
@@ -151,7 +151,7 @@ void msrSegment::setSegmentFirstMeasure (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fSegmentFirstMeasure = measure;
 }
@@ -188,7 +188,7 @@ void msrSegment::setSegmentLastMeasure (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fSegmentLastMeasure = measure;
 }
@@ -261,7 +261,7 @@ S_msrSegment msrSegment::createSegmentNewbornClone (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
@@ -269,7 +269,7 @@ S_msrSegment msrSegment::createSegmentNewbornClone (
     __FILE__, __LINE__,
     containingVoice != nullptr,
     "containingVoice is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   S_msrSegment
     newbornClone =
@@ -302,7 +302,7 @@ S_msrSegment msrSegment::createSegmentDeepClone (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
@@ -310,7 +310,7 @@ S_msrSegment msrSegment::createSegmentDeepClone (
     __FILE__, __LINE__,
     containingVoice != nullptr,
     "containingVoice is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   S_msrSegment
     deepClone =
@@ -343,7 +343,7 @@ S_msrSegment msrSegment::createSegmentDeepClone (
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     for (S_msrSegmentElement measureElement : fSegmentElementsList) {
       // append a deep clone of the measure element to the deep clone
@@ -372,7 +372,7 @@ S_msrSegment msrSegment::createSegmentDeepClone (
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
   }
 
   // upLinks
@@ -405,7 +405,7 @@ void msrSegment::setSegmentShortestNoteDuration (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fSegmentShortestNoteDuration = duration;
 }
@@ -432,7 +432,7 @@ void msrSegment::setSegmentShortestNoteTupletFactor (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fSegmentShortestNoteTupletFactor = noteTupletFactor;
 }
@@ -455,7 +455,7 @@ void msrSegment::assertSegmentLastMeasureIsNotNull (
         inputLineNumber,
         "assertSegmentLastMeasureIsNotNull()");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     std::stringstream ss;
 
@@ -493,7 +493,7 @@ void msrSegment::assertSegmentElementsListIsNotEmpty (
         inputLineNumber,
         "assertSegmentElementsListIsNotEmpty()");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     std::stringstream ss;
 
@@ -544,7 +544,7 @@ S_msrMeasure msrSegment::createAMeasureAndAppendItToSegment (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -563,7 +563,7 @@ S_msrMeasure msrSegment::createAMeasureAndAppendItToSegment (
     measureFirstInSegmentKind =
       msrMeasureFirstInSegmentKind::kMeasureFirstInSegmentKindNo;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // create a measure
 #ifdef MF_TRACE_IS_ENABLED
@@ -585,7 +585,7 @@ S_msrMeasure msrSegment::createAMeasureAndAppendItToSegment (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   S_msrMeasure
     result =
@@ -617,7 +617,7 @@ S_msrMeasure msrSegment::createAMeasureAndAppendItToSegment (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   result->
     setMeasureEndInputLineNumber (
@@ -658,7 +658,7 @@ void msrSegment::setNextMeasureNumberInSegment (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -681,7 +681,7 @@ void msrSegment::setNextMeasureNumberInSegment (
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     fSegmentLastMeasure->
       setNextMeasureNumber (
@@ -710,7 +710,7 @@ void msrSegment::appendMusicXMLPrintLayoutToSegment (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -744,7 +744,7 @@ void msrSegment::appendMusicXMLPrintLayoutToSegment (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // register print layout in segments's current measure
   fSegmentLastMeasure->
@@ -772,7 +772,7 @@ void msrSegment::appendClefToSegment  (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -806,7 +806,7 @@ void msrSegment::appendClefToSegment  (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // register clef in segments's current measure
   fSegmentLastMeasure->
@@ -834,7 +834,7 @@ void msrSegment::prependClefToSegment  (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -868,7 +868,7 @@ void msrSegment::prependClefToSegment  (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // register clef in segments's current measure
 
@@ -1018,13 +1018,13 @@ void msrSegment::appendKeyToSegment (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   assertSegmentLastMeasureIsNotNull (
     key->getInputLineNumber ());
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   ++gIndenter;
 
@@ -1064,13 +1064,13 @@ void msrSegment::appendTimeSignatureToSegment (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   assertSegmentLastMeasureIsNotNull (
     timeSignature->getInputLineNumber ());
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   ++gIndenter;
 
@@ -1109,7 +1109,7 @@ void msrSegment::appendTimeSignatureToSegmentClone (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -1117,7 +1117,7 @@ void msrSegment::appendTimeSignatureToSegmentClone (
   // sanity check
   assertSegmentLastMeasureIsNotNull (
     timeSignature->getInputLineNumber ());
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // append timeSignature to segments's current measure
   fSegmentLastMeasure->
@@ -1148,7 +1148,7 @@ void msrSegment::insertHiddenMeasureAndBarLineInSegmentClone (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -1156,7 +1156,7 @@ void msrSegment::insertHiddenMeasureAndBarLineInSegmentClone (
   // sanity check
   assertSegmentLastMeasureIsNotNull (
     inputLineNumber);
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // append time to segments's current measure
   fSegmentLastMeasure->
@@ -1185,7 +1185,7 @@ void msrSegment::appendHarmonyToSegment (const S_msrHarmony& harmony)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   int inputLineNumber =
     harmony->getInputLineNumber ();
@@ -1196,7 +1196,7 @@ void msrSegment::appendHarmonyToSegment (const S_msrHarmony& harmony)
   // sanity check
   assertSegmentLastMeasureIsNotNull (
     inputLineNumber);
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // append harmony to this segment
   fSegmentLastMeasure->
@@ -1223,13 +1223,13 @@ void msrSegment::appendHarmonyToSegmentClone (const S_msrHarmony& harmony)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   assertSegmentLastMeasureIsNotNull (
     harmony->getInputLineNumber ());
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // append harmony to this segment
   fSegmentLastMeasure->
@@ -1256,7 +1256,7 @@ void msrSegment::appendFiguredBassToSegment (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   int inputLineNumber =
     figuredBass->getInputLineNumber ();
@@ -1267,7 +1267,7 @@ void msrSegment::appendFiguredBassToSegment (
   // sanity check
   assertSegmentLastMeasureIsNotNull (
     inputLineNumber);
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // append figuredBass to this segment
   fSegmentLastMeasure->
@@ -1297,13 +1297,13 @@ void msrSegment::appendFiguredBassToSegmentClone (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   assertSegmentLastMeasureIsNotNull (
     figuredBass->getInputLineNumber ());
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // append figuredBass to this segment
   fSegmentLastMeasure->
@@ -1328,13 +1328,13 @@ void msrSegment::appendSegnoToSegment (const S_msrSegno& segno)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   assertSegmentLastMeasureIsNotNull (
     segno->getInputLineNumber ());
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   ++gIndenter;
 
@@ -1363,13 +1363,13 @@ void msrSegment::appendCodaToSegment (const S_msrCoda& coda)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   assertSegmentLastMeasureIsNotNull (
     coda->getInputLineNumber ());
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   ++gIndenter;
 
@@ -1399,13 +1399,13 @@ void msrSegment::appendEyeGlassesToSegment (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   assertSegmentLastMeasureIsNotNull (
     eyeGlasses->getInputLineNumber ());
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   ++gIndenter;
 
@@ -1434,13 +1434,13 @@ void msrSegment::appendPedalToSegment (const S_msrPedal& pedal)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   assertSegmentLastMeasureIsNotNull (
     pedal->getInputLineNumber ());
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   ++gIndenter;
 
@@ -1470,13 +1470,13 @@ void msrSegment::appendDampToSegment (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   assertSegmentLastMeasureIsNotNull (
     damp->getInputLineNumber ());
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   ++gIndenter;
 
@@ -1506,13 +1506,13 @@ void msrSegment::appendDampAllToSegment (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   assertSegmentLastMeasureIsNotNull (
     dampAll->getInputLineNumber ());
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   ++gIndenter;
 
@@ -1542,13 +1542,13 @@ void msrSegment::appendTranspositionToSegment (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   assertSegmentLastMeasureIsNotNull (
     transposition->getInputLineNumber ());
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   ++gIndenter;
 
@@ -1586,7 +1586,7 @@ void msrSegment::appendStaffDetailsToSegment (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   if (
@@ -1599,7 +1599,7 @@ void msrSegment::appendStaffDetailsToSegment (
         inputLineNumber,
         "appendStaffDetailsToSegment() 1");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -1607,7 +1607,7 @@ void msrSegment::appendStaffDetailsToSegment (
   // sanity check
   assertSegmentLastMeasureIsNotNull (
     staffDetails->getInputLineNumber ());
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // append staffDetails to this segment
   fSegmentLastMeasure->
@@ -1624,7 +1624,7 @@ void msrSegment::appendStaffDetailsToSegment (
         inputLineNumber,
         "appendStaffDetailsToSegment() 2");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   --gIndenter;
 }
@@ -1649,13 +1649,13 @@ void msrSegment::appendLineBreakToSegment (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   assertSegmentLastMeasureIsNotNull (
     lineBreak->getInputLineNumber ());
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   ++gIndenter;
 
@@ -1685,13 +1685,13 @@ void msrSegment::appendPageBreakToSegment (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   assertSegmentLastMeasureIsNotNull (
     pageBreak->getInputLineNumber ());
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   ++gIndenter;
 
@@ -1721,13 +1721,13 @@ void msrSegment::appendBarNumberCheckToSegment (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   assertSegmentLastMeasureIsNotNull (
     barNumberCheck->getInputLineNumber ());
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   ++gIndenter;
 
@@ -1759,13 +1759,13 @@ void msrSegment::appendTempoToSegment (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   assertSegmentLastMeasureIsNotNull (
     tempo->getInputLineNumber ());
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   ++gIndenter;
 
@@ -1795,13 +1795,13 @@ void msrSegment::appendRehearsalMarkToSegment (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   assertSegmentLastMeasureIsNotNull (
     rehearsalMark->getInputLineNumber ());
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   ++gIndenter;
 
@@ -1832,13 +1832,13 @@ void msrSegment::appendOctaveShiftToSegment (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   assertSegmentLastMeasureIsNotNull (
     octaveShift->getInputLineNumber ());
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   ++gIndenter;
 
@@ -1869,13 +1869,13 @@ void msrSegment::appendScordaturaToSegment (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   assertSegmentLastMeasureIsNotNull (
     scordatura->getInputLineNumber ());
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   ++gIndenter;
 
@@ -1907,13 +1907,13 @@ void msrSegment::appendAccordionRegistrationToSegment (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   assertSegmentLastMeasureIsNotNull (
     accordionRegistration->getInputLineNumber ());
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   ++gIndenter;
 
@@ -1946,13 +1946,13 @@ void msrSegment::appendHarpPedalsTuningToSegment (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   assertSegmentLastMeasureIsNotNull (
     harpPedalsTuning->getInputLineNumber ());
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   ++gIndenter;
 
@@ -1987,7 +1987,7 @@ void msrSegment::padUpToMeasurePositionInSegment (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (false && fSegmentMeasuresFlatList.size () == 0) { // JMI
     std::stringstream ss;
@@ -2065,7 +2065,7 @@ void msrSegment::backupByWholeNotesStepLengthInSegment (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (fSegmentMeasuresFlatList.size ()) { // JMI BOFBOF
     // pad last measure up to to this actual wholes notes
@@ -2101,7 +2101,7 @@ void msrSegment::appendPaddingNoteToSegment (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -2158,7 +2158,7 @@ void msrSegment::appendMeasureToSegment (const S_msrMeasure& measure)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (measureNumber == currentMeasureNumber) {
     std::stringstream ss;
@@ -2261,7 +2261,7 @@ void msrSegment::prependMeasureToSegment (const S_msrMeasure& measure)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (measureNumber == currentMeasureNumber) {
     std::stringstream ss;
@@ -2310,7 +2310,7 @@ void msrSegment::appendMultipleFullBarRestsToSegment (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // append multipleFullBarRests to the segment
   fSegmentElementsList.push_back (multipleFullBarRests);
@@ -2335,13 +2335,13 @@ void msrSegment::prependBarLineToSegment (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   assertSegmentElementsListIsNotEmpty (
     barLine->getInputLineNumber ());
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // prepend barLine to this segment
   ++gIndenter;
@@ -2371,13 +2371,13 @@ void msrSegment::appendBarLineToSegment (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   assertSegmentLastMeasureIsNotNull (
     barLine->getInputLineNumber ());
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   ++gIndenter;
 
@@ -2407,13 +2407,13 @@ void msrSegment::appendBarCheckToSegment (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   assertSegmentLastMeasureIsNotNull (
     barCheck->getInputLineNumber ());
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fSegmentLastMeasure->
     appendBarCheckToMeasure (barCheck);
@@ -2437,13 +2437,13 @@ void msrSegment::appendVoiceStaffChangeToSegment (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   assertSegmentLastMeasureIsNotNull (
     voiceStaffChange->getInputLineNumber ());
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   ++gIndenter;
 
@@ -2466,13 +2466,13 @@ void msrSegment::appendNoteToSegment (
         "appendNoteToSegment()");
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   assertSegmentLastMeasureIsNotNull (
     note->getInputLineNumber ());
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fSegmentLastMeasure->
     appendNoteToMeasure (
@@ -2506,13 +2506,13 @@ void msrSegment::appendDoubleTremoloToSegment ( // JMI
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   assertSegmentLastMeasureIsNotNull (
     doubleTremolo->getInputLineNumber ());
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fSegmentLastMeasure->
     appendDoubleTremoloToMeasure (doubleTremolo);
@@ -2524,7 +2524,7 @@ void msrSegment::appendChordToSegment (const S_msrChord& chord) // JMI
   // sanity check
   assertSegmentLastMeasureIsNotNull (
     chord->getInputLineNumber ());
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fSegmentLastMeasure->
     appendChordToMeasure (chord);
@@ -2536,7 +2536,7 @@ void msrSegment::appendTupletToSegment (const S_msrTuplet& tuplet) // JMI
   // sanity check
   assertSegmentLastMeasureIsNotNull (
     tuplet->getInputLineNumber ());
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fSegmentLastMeasure->
     appendTupletToMeasure (tuplet);
@@ -2551,7 +2551,7 @@ void msrSegment::addGraceNotesGroupAheadOfSegmentIfNeeded (
   // sanity check
   assertSegmentLastMeasureIsNotNull (
     graceNotesGroup->getInputLineNumber ());
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fSegmentMeasuresFlatList.front ()->
     addGraceNotesGroupAheadOfMeasure (graceNotesGroup);
@@ -2564,7 +2564,7 @@ void msrSegment::appendAfterGraceNotesToSegment (
   // sanity check
   assertSegmentLastMeasureIsNotNull (
     afterGraceNotes->getInputLineNumber ());
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fSegmentLastMeasure->
     appendAfterGraceNotesToMeasure (afterGraceNotes);
@@ -2578,7 +2578,7 @@ void msrSegment::prependAfterGraceNotesToSegment (
   // sanity check
   assertSegmentLastMeasureIsNotNull (
     afterGraceNotes->getInputLineNumber ());
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fSegmentMeasuresFlatList.front ()->
     prependAfterGraceNotesToMeasure (afterGraceNotes); // JMI
@@ -2592,7 +2592,7 @@ void msrSegment::prependOtherElementToSegment (
   // sanity check
   assertSegmentLastMeasureIsNotNull (
     elem->getInputLineNumber ());
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fSegmentLastMeasure->
     prependOtherElementToMeasure (elem);
@@ -2605,7 +2605,7 @@ void msrSegment::appendOtherElementToSegment (
   // sanity check
   assertSegmentLastMeasureIsNotNull (
     elem->getInputLineNumber ());
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fSegmentLastMeasure->
     appendOtherElementToMeasure (elem);
@@ -2654,7 +2654,7 @@ void msrSegment::removeNoteFromSegment (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -2705,7 +2705,7 @@ void msrSegment::removeElementFromSegment (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
  if (fSegmentMeasuresFlatList.size ()) {
     fSegmentLastMeasure->
@@ -2754,7 +2754,7 @@ S_msrMeasure msrSegment::fetchLastMeasureFromSegment (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (! fSegmentMeasuresFlatList.size ()) {
     std::stringstream ss;
@@ -2795,7 +2795,7 @@ S_msrMeasure msrSegment::fetchLastMeasureFromSegment (
 
     --gIndenter;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   return result;
 }
@@ -2823,7 +2823,7 @@ S_msrMeasure msrSegment::removeLastMeasureFromSegment (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalTraceOahGroup->getTraceMeasuresDetails ()) {
@@ -2832,7 +2832,7 @@ S_msrMeasure msrSegment::removeLastMeasureFromSegment (
         inputLineNumber,
         "removeLastMeasureFromSegment() 1");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 //   if (! fSegmentMeasuresFlatList.size ()) {
 //     std::stringstream ss;
@@ -2875,7 +2875,7 @@ S_msrMeasure msrSegment::removeLastMeasureFromSegment (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // we've got the result
   result = fSegmentLastMeasure;
@@ -2889,7 +2889,7 @@ S_msrMeasure msrSegment::removeLastMeasureFromSegment (
         inputLineNumber,
         "removeLastMeasureFromSegment() 2");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   S_msrSegmentElement
     segmentElementsListLastElement =
@@ -2963,7 +2963,7 @@ S_msrMeasure msrSegment::removeLastMeasureFromSegment (
 
     --gIndenter;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // remove the last measure from the segments measures flat list
   fSegmentMeasuresFlatList.pop_back ();
@@ -2993,7 +2993,7 @@ void msrSegment::finalizeAllTheMeasuresOfSegment ( // superflous JMI ???
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   for (S_msrMeasure measure : fSegmentMeasuresFlatList) {
     measure->
@@ -3018,7 +3018,7 @@ void msrSegment::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrSegment>*
     p =
@@ -3037,7 +3037,7 @@ void msrSegment::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -3056,7 +3056,7 @@ void msrSegment::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrSegment>*
     p =
@@ -3075,7 +3075,7 @@ void msrSegment::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -3094,7 +3094,7 @@ void msrSegment::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   for (S_msrSegmentElement segmentElement : fSegmentElementsList) {
     // browse the element
@@ -3114,7 +3114,7 @@ void msrSegment::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 std::string msrSegment::asShortString () const

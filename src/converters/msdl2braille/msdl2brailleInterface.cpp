@@ -114,7 +114,7 @@ mfMusicformatsErrorKind convertMsdlStream2brailleWithHandler (
 //         __FILE__, __LINE__,
 //         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     // create the MSDL parser
     msdlParser parser (inputStream);
@@ -154,7 +154,7 @@ mfMusicformatsErrorKind convertMsdlStream2brailleWithHandler (
 
       throw msdl2msrException (message);
     }
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
   }
   catch (msdl2msrException& e) {
     mfDisplayException (e, gOutput);
@@ -174,7 +174,7 @@ mfMusicformatsErrorKind convertMsdlStream2brailleWithHandler (
       err,
       __FILE__, __LINE__,
       gLanguage->quittingAfterPass (mfPassIDKind::kMfPassID_1));
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     return mfMusicformatsErrorKind::kMusicformatsError_NONE;
   }
@@ -211,7 +211,7 @@ mfMusicformatsErrorKind convertMsdlStream2brailleWithHandler (
       err,
       __FILE__, __LINE__,
       gLanguage->quittingAfterPass (mfPassIDKind::kMfPassID_2));
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     return mfMusicformatsErrorKind::kMusicformatsError_NONE;
   }
@@ -272,7 +272,7 @@ mfMusicformatsErrorKind convertMsdlStream2brailleWithHandler (
       err,
       __FILE__, __LINE__,
       gLanguage->quittingAfterPass (mfPassIDKind::kMfPassID_3));
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     return mfMusicformatsErrorKind::kMusicformatsError_NONE;
   }
@@ -332,7 +332,7 @@ mfMusicformatsErrorKind convertMsdlStream2brailleWithHandler (
       err,
       __FILE__, __LINE__,
       gLanguage->quittingAfterPass (mfPassIDKind::kMfPassID_4));
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     return mfMusicformatsErrorKind::kMusicformatsError_NONE;
   }
@@ -358,7 +358,7 @@ mfMusicformatsErrorKind convertMsdlStream2brailleWithHandler (
 //           __FILE__, __LINE__,
 //           ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     if (! outputFileName.size ()) {
 #ifdef MF_TRACE_IS_ENABLED
@@ -371,7 +371,7 @@ mfMusicformatsErrorKind convertMsdlStream2brailleWithHandler (
 //           __FILE__, __LINE__,
 //           ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       // convert the BSR to braille
       try {
@@ -405,7 +405,7 @@ mfMusicformatsErrorKind convertMsdlStream2brailleWithHandler (
 //           __FILE__, __LINE__,
 //           ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       // open output file
 #ifdef MF_TRACE_IS_ENABLED
@@ -415,7 +415,7 @@ mfMusicformatsErrorKind convertMsdlStream2brailleWithHandler (
           __FILE__, __LINE__,
           gLanguage->openingBrailleMusicFileForWriting (outputFileName));
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       std::ofstream
         brailleCodeFileOutputStream (
@@ -469,7 +469,7 @@ mfMusicformatsErrorKind convertMsdlStream2brailleWithHandler (
           __FILE__, __LINE__,
           ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       brailleCodeFileOutputStream.close ();
     }
@@ -510,7 +510,7 @@ mfMusicformatsErrorKind convertMsdlStream2brailleWithOptionsAndArguments (
     ss <<
       handlerOptionsAndArguments;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // apply early options if any
   // ------------------------------------------------------
@@ -537,7 +537,7 @@ mfMusicformatsErrorKind convertMsdlStream2brailleWithOptionsAndArguments (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // create an msdl2braille insider OAH handler
   // ------------------------------------------------------
@@ -645,7 +645,7 @@ EXP mfMusicformatsErrorKind convertMsdlFile2brailleWithOptionsAndArguments (
       __FILE__, __LINE__,
       gLanguage->openingBrailleMusicFileForWriting (inputFileName));
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   std::ifstream
     inputStream (
@@ -690,7 +690,7 @@ mfMusicformatsErrorKind convertMsdlFile2brailleWithHandler (
       __FILE__, __LINE__,
       gLanguage->openingBrailleMusicFileForWriting (inputFileName));
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   std::ifstream
     inputStream (

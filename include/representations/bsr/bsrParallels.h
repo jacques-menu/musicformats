@@ -106,4 +106,4 @@ EXP std::ostream& operator << (std::ostream& os, const S_bsrParallel& elt);
 }
 
 
-#endif
+#endif // ___bsrParallels___

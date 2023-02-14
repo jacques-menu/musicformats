@@ -76,7 +76,7 @@ msrMeasure::msrMeasure (
     __FILE__, __LINE__,
     measureUpLinkToSegment != nullptr,
     "measureUpLinkToSegment is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // set measure's segment upLink
   fMeasureUpLinkToSegment =
@@ -124,7 +124,7 @@ void msrMeasure::initializeMeasure ()
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // measure kind
   fMeasureKind = msrMeasureKind::kMeasureKindUnknown;
@@ -269,7 +269,7 @@ S_msrMeasure msrMeasure::createMeasureNewbornClone (
     __FILE__, __LINE__,
     containingSegment != nullptr,
     "containingSegment is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   S_msrVoice
     containingSegmentUpLinkToVoice =
@@ -295,7 +295,7 @@ S_msrMeasure msrMeasure::createMeasureNewbornClone (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
@@ -303,7 +303,7 @@ S_msrMeasure msrMeasure::createMeasureNewbornClone (
     __FILE__, __LINE__,
     containingSegment != nullptr,
     "containingSegment is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // create newborn clone
   S_msrMeasure
@@ -386,7 +386,7 @@ S_msrMeasure msrMeasure::createMeasureDeepClone (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
@@ -394,7 +394,7 @@ S_msrMeasure msrMeasure::createMeasureDeepClone (
     __FILE__, __LINE__,
     containingSegment != nullptr,
     "containingSegment is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // create deep clone
   S_msrMeasure
@@ -479,7 +479,7 @@ S_msrMeasure msrMeasure::createMeasureDeepClone (
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     for (
       std::list<S_msrMeasureElement>::const_iterator i = fMeasureElementsList.begin ();
@@ -527,7 +527,7 @@ S_msrMeasure msrMeasure::createMeasureDeepClone (
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
         // share the element with the original measure
         elementDeepClone = element;
@@ -565,7 +565,7 @@ S_msrMeasure msrMeasure::createMeasureDeepClone (
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
   }
 
   // upLinks
@@ -602,7 +602,7 @@ S_msrMeasure msrMeasure::createMeasureCopyWithNotesOnly (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
@@ -610,7 +610,7 @@ S_msrMeasure msrMeasure::createMeasureCopyWithNotesOnly (
     __FILE__, __LINE__,
     containingSegment != nullptr,
     "containingSegment is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // create copy
   S_msrMeasure
@@ -678,7 +678,7 @@ S_msrMeasure msrMeasure::createMeasureCopyWithNotesOnly (
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     for (
       std::list<S_msrMeasureElement>::const_iterator i = fMeasureElementsList.begin ();
@@ -729,7 +729,7 @@ S_msrMeasure msrMeasure::createMeasureCopyWithNotesOnly (
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
         // share the element with the original measure
         elementDeepClone = time;
@@ -769,7 +769,7 @@ S_msrMeasure msrMeasure::createMeasureCopyWithNotesOnly (
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
   }
 
   return measureCopy;
@@ -798,7 +798,7 @@ void msrMeasure::setMeasureShortestNoteDuration (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fMeasureShortestNoteDuration = duration;
 }
@@ -825,7 +825,7 @@ void msrMeasure::setMeasureShortestNoteTupletFactor (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fMeasureShortestNoteTupletFactor = noteTupletFactor;
 }
@@ -857,7 +857,7 @@ void msrMeasure::setMeasureEndRegularKind (
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fMeasureEndRegularKind = measureEndRegularKind;
 }
@@ -888,7 +888,7 @@ void msrMeasure::setMeasureRepeatContextKind (
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fMeasureRepeatContextKind = measureRepeatContextKind;
 }
@@ -919,7 +919,7 @@ void msrMeasure::setMeasureNumber (
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fMeasureNumber = measureNumber;
 }
@@ -950,7 +950,7 @@ void msrMeasure::setMeasureOrdinalNumberInVoice (
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fMeasureOrdinalNumberInVoice = measureOrdinalNumber;
 }
@@ -981,7 +981,7 @@ void msrMeasure::setMeasurePuristNumber (
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fMeasurePuristNumber = measurePuristNumber;
 }
@@ -1007,7 +1007,7 @@ void msrMeasure::setMeasurePuristNumber (
 // 		  	 __FILE__, __LINE__,
 // 			   ss.str ());
 //      }
-// #endif
+// #endif // MF_TRACE_IS_ENABLED
 //
 //   fMeasureVoicePosition += wholeNotesDelta;
 // }
@@ -1024,7 +1024,7 @@ void msrMeasure::appendMeasureElementToMeasure (
     __FILE__, __LINE__,
     elem != nullptr,
     "appendMeasureElementToMeasure(): elem is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalTraceOahGroup->getTraceMeasures ()) {
@@ -1048,7 +1048,7 @@ void msrMeasure::appendMeasureElementToMeasure (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // populate elem uplink to measure
   S_msrMeasure upLinkToMeasure = this;
@@ -1107,7 +1107,7 @@ void msrMeasure::insertElementInMeasureBeforeIterator (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 //   // set elem's measure number
 //   S_msrMeasure upLinkToMeasure;
@@ -1122,7 +1122,7 @@ void msrMeasure::insertElementInMeasureBeforeIterator (
 //     __FILE__, __LINE__,
 //     upLinkToMeasure != nullptr,
 //     "upLinkToMeasure is null");
-// #endif
+// #endif // MF_SANITY_CHECKS_ARE_ENABLED
 //
 //   upLinkToMeasure->
 //     setMeasureNumber (
@@ -1210,7 +1210,7 @@ void msrMeasure::appendElementAtTheEndOfMeasure (
       inputLineNumber,
       "appendPaddingNoteAtTheEndOfMeasure() 1");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (! fMeasureElementsList.size ()) {
 #ifdef MF_TRACE_IS_ENABLED
@@ -1226,7 +1226,7 @@ void msrMeasure::appendElementAtTheEndOfMeasure (
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     appendMeasureElementToMeasure (elem);
 
@@ -1257,7 +1257,7 @@ void msrMeasure::appendElementAtTheEndOfMeasure (
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     if (
         // barLine?
@@ -1284,7 +1284,7 @@ void msrMeasure::appendElementAtTheEndOfMeasure (
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
         // fetch iterator to list end
         std::list<S_msrMeasureElement>::iterator it =
@@ -1323,7 +1323,7 @@ void msrMeasure::appendElementAtTheEndOfMeasure (
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
         appendMeasureElementToMeasure (elem);
       }
@@ -1348,7 +1348,7 @@ void msrMeasure::appendElementAtTheEndOfMeasure (
           __FILE__, __LINE__,
           ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       appendMeasureElementToMeasure (elem);
     }
@@ -1379,7 +1379,7 @@ void msrMeasure::appendElementAtTheEndOfMeasure (
       inputLineNumber,
       "appendPaddingNoteAtTheEndOfMeasure() 2");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void msrMeasure::insertElementAtMeasurePosition (
@@ -1411,7 +1411,7 @@ void msrMeasure::insertElementAtMeasurePosition (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   size_t
     measureElementsListSize =
@@ -1541,7 +1541,7 @@ void msrMeasure::setNextMeasureNumber (const std::string& nextMeasureNumber)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fNextMeasureNumber = nextMeasureNumber;
 }
@@ -1569,7 +1569,7 @@ void msrMeasure::setMeasureIsFirstInVoice ()
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fMeasureIsFirstInVoice = true;
 }
@@ -1601,7 +1601,7 @@ void msrMeasure::setFullMeasureWholeNotesDuration (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fFullMeasureWholeNotesDuration = wholeNotes;
 }
@@ -1631,7 +1631,7 @@ void msrMeasure::setMeasureWholeNotesDuration (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // set measure whole notes
   fMeasureWholeNotesDuration =
@@ -1649,7 +1649,7 @@ void msrMeasure::incrementMeasureWholeNotesDuration (
 //     __FILE__, __LINE__,
 //     wholeNotesDelta.getNumerator () != 0,
 //     "wholeNotesDelta.getNumerator () == 0");
-// #endif
+// #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // compute the new measure whole notes duration
   Rational
@@ -1681,7 +1681,7 @@ void msrMeasure::incrementMeasureWholeNotesDuration (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // set new measure whole notes duration
   setMeasureWholeNotesDuration (
@@ -1723,7 +1723,7 @@ void msrMeasure::setMeasureKind (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   switch (measureKind) {
     case msrMeasureKind::kMeasureKindUnknown:
@@ -1774,7 +1774,7 @@ void msrMeasure::setMeasureKind (
         gLog << std::endl;
         --gIndenter;
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
       break;
 
     case msrMeasureKind::kMeasureKindCadenza:
@@ -1807,7 +1807,7 @@ void msrMeasure::setMeasureKind (
         gLog << std::endl;
         --gIndenter;
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       break;
   } // switch
@@ -1836,7 +1836,7 @@ void msrMeasure::appendMusicXMLPrintLayoutToMeasure (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // append it to the measure elements list
   prependOtherElementToMeasure (musicXMLPrintLayout);
@@ -1866,7 +1866,7 @@ void msrMeasure::appendClefToMeasure (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // append it to the measure elements list
   appendMeasureElementToMeasure (clef);
@@ -1893,7 +1893,7 @@ void msrMeasure::appendKeyToMeasure (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // append it to the measure elements list
   appendMeasureElementToMeasure (key);
@@ -1908,7 +1908,7 @@ void msrMeasure::appendTimeSignatureToMeasure (
     __FILE__, __LINE__,
     timeSignature != nullptr,
     "timeSignature is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalTraceOahGroup->getTraceTimeSignatures ()) {
@@ -1939,7 +1939,7 @@ void msrMeasure::appendTimeSignatureToMeasure (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -1962,7 +1962,7 @@ void msrMeasure::appendTimeSignatureToMeasureClone (
     __FILE__, __LINE__,
     timeSignature != nullptr,
     "timeSignature is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalTraceOahGroup->getTraceTimeSignatures ()) {
@@ -1998,7 +1998,7 @@ void msrMeasure::appendTimeSignatureToMeasureClone (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // append timeSignature to the measure elements list
   appendMeasureElementToMeasure (timeSignature);
@@ -2029,7 +2029,7 @@ void msrMeasure::insertHiddenMeasureAndBarLineInMeasureClone (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // create a hidden measure and barLine
   S_msrHiddenMeasureAndBarLine
@@ -2056,7 +2056,7 @@ void msrMeasure::setFullMeasureWholeNotesDurationFromTime (
     __FILE__, __LINE__,
     timeSignature != nullptr,
     "timeSignature is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   if ( // JMI
@@ -2092,7 +2092,7 @@ void msrMeasure::setFullMeasureWholeNotesDurationFromTime (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -2143,7 +2143,7 @@ void msrMeasure::setFullMeasureWholeNotesDurationFromTime (
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
         // set full measure whole notes
         setFullMeasureWholeNotesDuration (
@@ -2170,7 +2170,7 @@ void msrMeasure::setFullMeasureWholeNotesDurationFromTime (
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
       }
       break;
 
@@ -2197,7 +2197,7 @@ void msrMeasure::setFullMeasureWholeNotesDurationFromTime (
           __FILE__, __LINE__,
           ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       setMeasureKind (msrMeasureKind::kMeasureKindCadenza);
 
@@ -2236,7 +2236,7 @@ void msrMeasure::appendTranspositionToMeasure (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // append it to the measure elements list
   appendMeasureElementToMeasure (transposition);
@@ -2302,7 +2302,7 @@ void msrMeasure::appendBarLineToMeasure (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   appendMeasureElementToMeasure (barLine);
 }
@@ -2409,7 +2409,7 @@ void msrMeasure::appendNoteToMeasure (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -2522,7 +2522,7 @@ void msrMeasure::appendNoteOrPaddingToMeasure (
 #ifdef MF_TRACE_IS_ENABLED
   int inputLineNumber =
     note->getInputLineNumber ();
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // fetch note sounding whole notes
   Rational
@@ -2556,7 +2556,7 @@ void msrMeasure::appendNoteOrPaddingToMeasure (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -2638,7 +2638,7 @@ void msrMeasure::accountForTupletMemberNoteDurationInMeasure ( // JMI v0.9.66 RE
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // set note's measure position JMI v0.9.66
 //   note->
@@ -2686,7 +2686,7 @@ void msrMeasure::appendPaddingNoteAtTheEndOfMeasure (const S_msrNote& note)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -2756,7 +2756,7 @@ void msrMeasure::appendNoteToMeasureClone (const S_msrNote& note)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -2830,7 +2830,7 @@ void msrMeasure::appendDoubleTremoloToMeasure (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -2869,7 +2869,7 @@ void msrMeasure::appendChordToMeasure (const S_msrChord& chord)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // set the chord kind
   chord->setChordKind (msrChordInKind::kChordInMeasure);
@@ -2923,7 +2923,7 @@ void msrMeasure::appendTupletToMeasure (const S_msrTuplet& tuplet)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -2980,7 +2980,7 @@ void msrMeasure::appendHarmonyToMeasure (const S_msrHarmony& harmony)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -3024,7 +3024,7 @@ void msrMeasure::appendHarmonyToMeasureClone (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -3064,7 +3064,7 @@ void msrMeasure::appendFiguredBassToMeasure (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -3118,7 +3118,7 @@ void msrMeasure::appendFiguredBassToMeasureClone (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -3158,7 +3158,7 @@ S_msrNote msrMeasure::createPaddingSkipNoteForVoice (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // create a skip note
   S_msrNote
@@ -3209,7 +3209,7 @@ S_msrNote msrMeasure::createPaddingSkipNoteForVoice (
 //       "\", line " << inputLineNumber <<
 //       std::endl;
 //   }
-// #endif
+// #endif // MF_TRACE_IS_ENABLED
 //
 // #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
@@ -3217,7 +3217,7 @@ S_msrNote msrMeasure::createPaddingSkipNoteForVoice (
 //     __FILE__, __LINE__,
 //     measurePositionToPadUpTo.getNumerator () >= 0,
 //     "measurePositionToPadUpTo.getNumerator () is negative in padUpToMeasurePositionInMeasure()");
-// #endif
+// #endif // MF_SANITY_CHECKS_ARE_ENABLED
 //
 //   if (fMeasureWholeNotesDuration < measurePositionToPadUpTo) {
 //     ++gIndenter;
@@ -3251,7 +3251,7 @@ S_msrNote msrMeasure::createPaddingSkipNoteForVoice (
 //         measureVoice->getVoiceName () <<
 //         std::endl;
 //     }
-// #endif
+// #endif // MF_TRACE_IS_ENABLED
 //
 //     // append the paddingNote to the measure
 //     appendNoteOrPaddingToMeasure (paddingNote);
@@ -3288,7 +3288,7 @@ S_msrNote msrMeasure::createPaddingSkipNoteForVoice (
 //         "\", line " << inputLineNumber <<
 //         std::endl;
 //     }
-// #endif
+// #endif // MF_TRACE_IS_ENABLED
 //   }
 //
 //   else {
@@ -3349,7 +3349,7 @@ void msrMeasure::padUpToMeasurePositionInMeasure (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalTraceOahGroup->getTraceMeasuresDetails ()) {
@@ -3357,7 +3357,7 @@ void msrMeasure::padUpToMeasurePositionInMeasure (
       inputLineNumber,
       "padUpToMeasurePositionInMeasure() 1");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -3386,7 +3386,7 @@ void msrMeasure::padUpToMeasurePositionInMeasure (
         __FILE__, __LINE__,
         ss.str ());
    }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     // create a padding skip note
     S_msrNote
@@ -3414,7 +3414,7 @@ void msrMeasure::padUpToMeasurePositionInMeasure (
         __FILE__, __LINE__,
         ss.str ());
    }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     // append the paddingNote to the measure
     appendNoteOrPaddingToMeasure (paddingNote);
@@ -3429,7 +3429,7 @@ void msrMeasure::padUpToMeasurePositionInMeasure (
       inputLineNumber,
       "padUpToMeasurePositionInMeasure() 2");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   --gIndenter;
 }
@@ -3466,7 +3466,7 @@ void msrMeasure::padUpToPositionAtTheEndOfTheMeasure (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalTraceOahGroup->getTraceMeasuresDetails ()) {
@@ -3474,7 +3474,7 @@ void msrMeasure::padUpToPositionAtTheEndOfTheMeasure (
       inputLineNumber,
       "padUpToPositionAtTheEndOfTheMeasure() 1");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -3503,7 +3503,7 @@ void msrMeasure::padUpToPositionAtTheEndOfTheMeasure (
         __FILE__, __LINE__,
         ss.str ());
    }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 //     gLog << JMI
 //       std::endl << std::endl <<
@@ -3542,7 +3542,7 @@ void msrMeasure::padUpToPositionAtTheEndOfTheMeasure (
         __FILE__, __LINE__,
         ss.str ());
    }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     // append the rest to the measure elements list
     // only now to make it possible to remove it afterwards
@@ -3559,7 +3559,7 @@ void msrMeasure::padUpToPositionAtTheEndOfTheMeasure (
       inputLineNumber,
       "padUpToPositionAtTheEndOfTheMeasure() 2");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   --gIndenter;
 }
@@ -3574,7 +3574,7 @@ void msrMeasure::backupByWholeNotesStepLengthInMeasure ( // JMI USELESS ??? v0.9
     __FILE__, __LINE__,
     backupTargetMeasurePosition.getNumerator () >= 0,
     "backupTargetMeasurePosition.getNumerator () is negative");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // fetch the measure voice
   S_msrVoice
@@ -3612,7 +3612,7 @@ void msrMeasure::backupByWholeNotesStepLengthInMeasure ( // JMI USELESS ??? v0.9
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // determine the measure position 'backupTargetMeasurePosition' backward
   Rational
@@ -3648,7 +3648,7 @@ void msrMeasure::appendPaddingSkipNoteToMeasure (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -3745,7 +3745,7 @@ void msrMeasure::appendStaffDetailsToMeasure (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   appendMeasureElementToMeasure (staffDetails);
 }
@@ -3801,7 +3801,7 @@ void msrMeasure::removeNoteFromMeasure (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   for (
     std::list<S_msrMeasureElement>::iterator i=fMeasureElementsList.begin ();
@@ -3859,7 +3859,7 @@ void msrMeasure::removeNoteFromMeasure (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   std::stringstream ss;
 
@@ -3916,7 +3916,7 @@ void msrMeasure::removeElementFromMeasure (
       std::endl;
     --gIndenter;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   for (
     std::list<S_msrMeasureElement>::iterator i=fMeasureElementsList.begin ();
@@ -3978,7 +3978,7 @@ void msrMeasure::appendNoteToMeasureNotesFlatList (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fMeasureNotesFlatList.push_back (note);
 }
@@ -4064,7 +4064,7 @@ void msrMeasure::determineMeasureKindAndPuristNumber (
       inputLineNumber,
       "determineMeasureKindAndPuristNumber() 1");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -4092,7 +4092,7 @@ void msrMeasure::determineMeasureKindAndPuristNumber (
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (fMeasureWholeNotesDuration.getNumerator () == 0) {
     // empty measure
@@ -4159,7 +4159,7 @@ void msrMeasure::determineMeasureKindAndPuristNumber (
       inputLineNumber,
       "determineMeasureKindAndPuristNumber() 3");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   --gIndenter;
 }
@@ -4181,7 +4181,7 @@ void msrMeasure::handleEmptyMeasure (
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalTraceOahGroup->getTraceMeasuresDetails ()) {
@@ -4212,7 +4212,7 @@ void msrMeasure::handleEmptyMeasure (
         inputLineNumber,
         ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // set it's measure kind
   setMeasureKind (msrMeasureKind::kMeasureKindMusicallyEmpty);
@@ -4247,7 +4247,7 @@ void msrMeasure::handleRegularMeasure (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // this is a regular measure end
   setMeasureEndRegularKind (kMeasureEndRegularKindYes);
@@ -4291,7 +4291,7 @@ void msrMeasure::handleIncompleteMeasure (
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (fMeasureIsFirstInVoice) {
     // this is an anacrusis
@@ -4346,7 +4346,7 @@ void msrMeasure::handleIncompleteMeasure (
               inputLineNumber,
               "handleIncompleteMeasure 6 kMeasureRepeatContext_UNKNOWN");
           }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
           ss <<
             "measure " <<
@@ -4438,7 +4438,7 @@ void msrMeasure::handleOverFullMeasure (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // set it's measure kind
   setMeasureKind (msrMeasureKind::kMeasureKindOvercomplete);
@@ -4515,7 +4515,7 @@ void msrMeasure::finalizeRegularMeasure (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 //* JMI v0.9.66 USELESS ???
   Rational
@@ -4538,7 +4538,7 @@ void msrMeasure::finalizeRegularMeasure (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 //*/
 
   ++gIndenter;
@@ -4549,7 +4549,7 @@ void msrMeasure::finalizeRegularMeasure (
       inputLineNumber,
       "finalizeRegularMeasure() 1");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 //* JMI v0.9.66 USELESS ??? harmonies problem
   padUpToPositionAtTheEndOfTheMeasure (
@@ -4629,7 +4629,7 @@ void msrMeasure::finalizeRegularMeasure (
           __FILE__, __LINE__,
           ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       fMeasureLongestNote->
         setNoteOccupiesAFullMeasure ();
@@ -4642,7 +4642,7 @@ void msrMeasure::finalizeRegularMeasure (
       inputLineNumber,
       "finalizeRegularMeasure() 2");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   --gIndenter;
 }
@@ -4714,7 +4714,7 @@ void msrMeasure::handleTheFirstHarmonyInAHarmoniesMeasure (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // is a padding skip note needed?
   if (measurePositionToPadUpTo.getNumerator () != 0) {
@@ -4746,7 +4746,7 @@ void msrMeasure::handleTheFirstHarmonyInAHarmoniesMeasure (
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 //     // insert skipNote in the measure elements list before (*i)
 //     insertElementInMeasureBeforeIterator (
@@ -4767,7 +4767,7 @@ void msrMeasure::handleTheFirstHarmonyInAHarmoniesMeasure (
         inputLineNumber,
         "handleTheFirstHarmonyInAHarmoniesMeasure() 2");
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
   }
 }
 
@@ -4866,7 +4866,7 @@ void msrMeasure::handleASubsequentHarmonyInAHarmoniesMeasure (
       __FILE__, __LINE__,
       iss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   Rational
     measurePositionToPadUpTo =
@@ -4901,7 +4901,7 @@ void msrMeasure::handleASubsequentHarmonyInAHarmoniesMeasure (
 //         __FILE__, __LINE__,
 //         ss.str ());
 //     }
-// #endif
+// #endif // MF_TRACE_IS_ENABLED
 //
 //     // insert skipNote in the measure elements list before (*i)
 // //     insertElementInMeasureBeforeIterator (
@@ -4915,7 +4915,7 @@ void msrMeasure::handleASubsequentHarmonyInAHarmoniesMeasure (
 //         inputLineNumber,
 //         "handleTheFirstHarmonyInAHarmoniesMeasure() 2");
 //     }
-// #endif
+// #endif // MF_TRACE_IS_ENABLED
 //   }
 
   // update the previous harmony sounding whole notes duration if relevant
@@ -4942,7 +4942,7 @@ void msrMeasure::handleASubsequentHarmonyInAHarmoniesMeasure (
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     // set previousHarmony's sounding whole notes // HARMFUL
     previousHarmony->
@@ -5069,7 +5069,7 @@ void msrMeasure::handleTheLastHarmonyInAHarmoniesMeasure (
       __FILE__, __LINE__,
       iss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (measureOverflowWholeNotes.getNumerator () < 0) {
     // the currentHarmony's duration is too short,
@@ -5112,7 +5112,7 @@ void msrMeasure::handleTheLastHarmonyInAHarmoniesMeasure (
           __FILE__, __LINE__,
           ss.str ());
       }
-  #endif
+  #endif // MF_TRACE_IS_ENABLED
 
       incrementMeasureWholeNotesDuration ( // JMI v0.9.66
         inputLineNumber,
@@ -5162,7 +5162,7 @@ void msrMeasure::handleTheLastHarmonyInAHarmoniesMeasure (
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     if (reducedSoundingWholeNotes.getNumerator () == 0) {
       std::stringstream ss;
@@ -5209,7 +5209,7 @@ void msrMeasure::handleTheLastHarmonyInAHarmoniesMeasure (
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
   }
 }
 
@@ -5245,7 +5245,7 @@ void msrMeasure::finalizeTheHarmoniesInAHarmoniesMeasure (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (fMeasureElementsList.size ()) {
 #ifdef MF_TRACE_IS_ENABLED
@@ -5254,7 +5254,7 @@ void msrMeasure::finalizeTheHarmoniesInAHarmoniesMeasure (
         inputLineNumber,
         "finalizeTheHarmoniesInAHarmoniesMeasure() 1");
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     // in MusicXML, harmonies don't have their own duration
     // and may have a non-null offset:
@@ -5279,7 +5279,7 @@ void msrMeasure::finalizeTheHarmoniesInAHarmoniesMeasure (
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     fMeasureElementsList.sort (
       msrMeasureElement::compareMeasureElementsByIncreasingMeasurePosition);
@@ -5290,7 +5290,7 @@ void msrMeasure::finalizeTheHarmoniesInAHarmoniesMeasure (
         inputLineNumber,
         "finalizeTheHarmoniesInAHarmoniesMeasure() 2");
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     // consider each measure element (a harmony in fact) in turn,
     // updating their duration and adding skips if needed
@@ -5367,7 +5367,7 @@ void msrMeasure::finalizeTheHarmoniesInAHarmoniesMeasure (
         inputLineNumber,
         "finalizeTheHarmoniesInAHarmoniesMeasure() 3");
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
   }
 }
 
@@ -5400,7 +5400,7 @@ void msrMeasure::finalizeHarmonyInAHarmoniesMeasure (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // get currentHarmony's note uplink
   S_msrNote
@@ -5447,7 +5447,7 @@ void msrMeasure::finalizeHarmonyInAHarmoniesMeasure (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (! previousHarmony) {
     handleTheFirstHarmonyInAHarmoniesMeasure (
@@ -5509,7 +5509,7 @@ void msrMeasure::handleFirstFiguredBassInFiguredBassMeasure (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // is a padding skip note needed?
   if (measurePositionToPadUpTo.getNumerator () != 0) {
@@ -5541,7 +5541,7 @@ void msrMeasure::handleFirstFiguredBassInFiguredBassMeasure (
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     // insert skipNote in the measure elements list before (*i)
     insertElementInMeasureBeforeIterator (
@@ -5555,7 +5555,7 @@ void msrMeasure::handleFirstFiguredBassInFiguredBassMeasure (
         inputLineNumber,
         "handleFirstFiguredBassInFiguredBassMeasure() 6");
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
   }
 }
 
@@ -5627,7 +5627,7 @@ void msrMeasure::handleSubsequentFiguredBassInFiguredBassMeasure (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // is a padding skip note needed?
   if (measurePositionsDelta.getNumerator () > 0) {
@@ -5665,7 +5665,7 @@ void msrMeasure::handleSubsequentFiguredBassInFiguredBassMeasure (
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     // insert skipNote in the measure elements list before (*i)
     insertElementInMeasureBeforeIterator (
@@ -5716,7 +5716,7 @@ void msrMeasure::handleSubsequentFiguredBassInFiguredBassMeasure (
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     if (reducedSoundingWholeNotes.getNumerator () == 0) {
       std::stringstream ss;
@@ -5791,7 +5791,7 @@ void msrMeasure::postHandleCurrentFiguredBassInFiguredBassMeasure (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // compute the measure overflow whole notes
   Rational
@@ -5841,7 +5841,7 @@ void msrMeasure::postHandleCurrentFiguredBassInFiguredBassMeasure (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (measureOverflowWholeNotes.getNumerator () > 0) {
     // the currentFiguredBass's duration is too large
@@ -5885,7 +5885,7 @@ void msrMeasure::postHandleCurrentFiguredBassInFiguredBassMeasure (
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     if (reducedSoundingWholeNotes.getNumerator () == 0) {
       std::stringstream ss;
@@ -5943,7 +5943,7 @@ void msrMeasure::finalizeTheFiguredBassesInAFiguredBassMeasure (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (fMeasureElementsList.size ()) {
 #ifdef MF_TRACE_IS_ENABLED
@@ -5952,7 +5952,7 @@ void msrMeasure::finalizeTheFiguredBassesInAFiguredBassMeasure (
         inputLineNumber,
         "finalizeTheFiguredBassesInAFiguredBassMeasure() 1");
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     // in MusicXML, harmonies don't have their own duration
     // and may have a non-null offset:
@@ -5977,7 +5977,7 @@ void msrMeasure::finalizeTheFiguredBassesInAFiguredBassMeasure (
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     fMeasureElementsList.sort (
       msrMeasureElement::compareMeasureElementsByIncreasingMeasurePosition);
@@ -5988,7 +5988,7 @@ void msrMeasure::finalizeTheFiguredBassesInAFiguredBassMeasure (
         inputLineNumber,
         "finalizeTheFiguredBassesInAFiguredBassMeasure() 2");
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     // consider each measure element (a figured bass in fact) in turn,
     // updating their duration and adding skips if needed
@@ -6038,7 +6038,7 @@ void msrMeasure::finalizeTheFiguredBassesInAFiguredBassMeasure (
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
         // its position in the measure should take it's offset into account
         Rational
@@ -6085,7 +6085,7 @@ void msrMeasure::finalizeTheFiguredBassesInAFiguredBassMeasure (
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
         if (! previousFiguredBass) {
           handleFirstFiguredBassInFiguredBassMeasure (
@@ -6133,7 +6133,7 @@ void msrMeasure::finalizeTheFiguredBassesInAFiguredBassMeasure (
         inputLineNumber,
         "finalizeTheFiguredBassesInAFiguredBassMeasure() 5");
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
   }
 }
 
@@ -6178,7 +6178,7 @@ void msrMeasure::finalizeHarmonyMeasure (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -6188,7 +6188,7 @@ void msrMeasure::finalizeHarmonyMeasure (
       inputLineNumber,
       "finalizeHarmonyMeasure() 1");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   // get the harmoniesPart number of measures
@@ -6211,7 +6211,7 @@ void msrMeasure::finalizeHarmonyMeasure (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // handle the harmonies in this measure
   finalizeTheHarmoniesInAHarmoniesMeasure (
@@ -6246,7 +6246,7 @@ void msrMeasure::finalizeHarmonyMeasure (
       inputLineNumber,
       "finalizeHarmonyMeasure() 2");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   --gIndenter;
 }
@@ -6292,7 +6292,7 @@ void msrMeasure::finalizeFiguredBassMeasure (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -6302,7 +6302,7 @@ void msrMeasure::finalizeFiguredBassMeasure (
       inputLineNumber,
       "finalizeFiguredBassMeasure() 1");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   // get the figuredBassPart number of measures
@@ -6325,7 +6325,7 @@ void msrMeasure::finalizeFiguredBassMeasure (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // handle the figured bass element in this measure
   finalizeTheFiguredBassesInAFiguredBassMeasure (
@@ -6360,7 +6360,7 @@ void msrMeasure::finalizeFiguredBassMeasure (
       inputLineNumber,
       "finalizeFiguredBassMeasure() 2");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   --gIndenter;
 }
@@ -6412,7 +6412,7 @@ void msrMeasure::finalizeMeasure (
       __FILE__, __LINE__,
       ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     msrInternalWarning (
       gServiceRunData->getInputSourceName (),
@@ -6447,7 +6447,7 @@ void msrMeasure::finalizeMeasure (
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalTraceOahGroup->getTraceMeasures ()) {
@@ -6471,7 +6471,7 @@ void msrMeasure::finalizeMeasure (
         ss.str ());
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalTraceOahGroup->getTraceMeasuresDetails ()) {
@@ -6479,7 +6479,7 @@ void msrMeasure::finalizeMeasure (
       inputLineNumber,
       "finalizeMeasureClone() 1");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     // delegate finalization to voice kind specific methods
     switch (voice->getVoiceKind ()) {
@@ -6558,7 +6558,7 @@ void msrMeasure::finalizeMeasureClone (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalTraceOahGroup->getTraceMeasures ()) {
@@ -6582,7 +6582,7 @@ void msrMeasure::finalizeMeasureClone (
         ss.str ());
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalTraceOahGroup->getTraceMeasuresDetails ()) {
@@ -6590,7 +6590,7 @@ void msrMeasure::finalizeMeasureClone (
       inputLineNumber,
       "finalizeMeasureClone() 1");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (fMeasureHasBeenFinalized) {
     std::stringstream ss;
@@ -6716,7 +6716,7 @@ void msrMeasure::finalizeMeasureClone (
           ss.str ());
       }
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
   }
 
   // delegate finalization to voice kind specific methods
@@ -6781,7 +6781,7 @@ void msrMeasure::finalizeMeasureClone (
       inputLineNumber,
       "finalizeMeasureClone() 4");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   --gIndenter;
 }
@@ -6800,7 +6800,7 @@ void msrMeasure::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrMeasure>*
     p =
@@ -6819,7 +6819,7 @@ void msrMeasure::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -6838,7 +6838,7 @@ void msrMeasure::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrMeasure>*
     p =
@@ -6857,7 +6857,7 @@ void msrMeasure::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -6876,7 +6876,7 @@ void msrMeasure::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   for (
     std::list<S_msrMeasureElement>::const_iterator i = fMeasureElementsList.begin ();
@@ -6900,7 +6900,7 @@ void msrMeasure::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 // std::string msrMeasureFirstInSegmentKindAsString (
@@ -7286,7 +7286,7 @@ void msrMeasure::printFull (std::ostream& os) const
   else {
     os << "[NONE]" << std::endl;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     /* JMI
 
@@ -7576,7 +7576,7 @@ std::ostream& operator << (std::ostream& os, const S_msrMeasure& elt)
 //         __FILE__, __LINE__,
 //         ss.str ());
 //     }
-// #endif
+// #endif // MF_TRACE_IS_ENABLED
 //
 //     // insert skipNote in the measure elements list before (*i)
 //     insertElementInMeasureBeforeIterator (
@@ -7627,7 +7627,7 @@ std::ostream& operator << (std::ostream& os, const S_msrMeasure& elt)
 //         __FILE__, __LINE__,
 //         ss.str ());
 //     }
-// #endif
+// #endif // MF_TRACE_IS_ENABLED
 //
 //     if (reducedSoundingWholeNotes.getNumerator () == 0) {
 //       std::stringstream ss;

@@ -92,7 +92,7 @@ void msr2lpsrScoreOutputKindAtom::applyAtomWithValue (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // theString contains the score output kind:
   // is it in the score output kinds map?
@@ -109,7 +109,7 @@ void msr2lpsrScoreOutputKindAtom::applyAtomWithValue (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   std::map<std::string, lpsrScoreOutputKind>::const_iterator
     it =
@@ -160,7 +160,7 @@ void msr2lpsrScoreOutputKindAtom::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msr2lpsrScoreOutputKindAtom>*
     p =
@@ -179,7 +179,7 @@ void msr2lpsrScoreOutputKindAtom::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -198,7 +198,7 @@ void msr2lpsrScoreOutputKindAtom::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msr2lpsrScoreOutputKindAtom>*
     p =
@@ -217,7 +217,7 @@ void msr2lpsrScoreOutputKindAtom::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -236,7 +236,7 @@ void msr2lpsrScoreOutputKindAtom::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 std::string msr2lpsrScoreOutputKindAtom::asShortNamedOptionString () const
@@ -352,7 +352,7 @@ msr2lpsrOahGroup::~msr2lpsrOahGroup ()
 #ifdef MF_TRACE_IS_ENABLED
 void msr2lpsrOahGroup::initializMsr2lpsrTraceOptions ()
 {}
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 void msr2lpsrOahGroup::initializeScoreOutputOptions ()
 {
@@ -461,7 +461,7 @@ void msr2lpsrOahGroup::initializeMsr2lpsrOahGroup ()
   // trace
   // --------------------------------------
   initializMsr2lpsrTraceOptions ();
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // score output kind
   // --------------------------------------
@@ -503,7 +503,7 @@ void msr2lpsrOahGroup::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msr2lpsrOahGroup>*
     p =
@@ -522,7 +522,7 @@ void msr2lpsrOahGroup::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -541,7 +541,7 @@ void msr2lpsrOahGroup::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msr2lpsrOahGroup>*
     p =
@@ -560,7 +560,7 @@ void msr2lpsrOahGroup::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -579,7 +579,7 @@ void msr2lpsrOahGroup::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //______________________________________________________________________________
@@ -654,7 +654,7 @@ S_msr2lpsrOahGroup createGlobalMsr2lpsrOahGroup ()
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // protect library against multiple initializations
   if (! gGlobalMsr2lpsrOahGroup) {

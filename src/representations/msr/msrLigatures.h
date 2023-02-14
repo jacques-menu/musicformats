@@ -164,4 +164,4 @@ EXP std::ostream& operator << (std::ostream& os, const S_msrLigature& elt);
 }
 
 
-#endif
+#endif // ___msrLigatures___

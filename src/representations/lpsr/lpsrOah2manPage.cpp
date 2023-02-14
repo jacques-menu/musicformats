@@ -55,7 +55,7 @@ void lpsrOah2manPage::visitStart (S_lpsrScoreOutputKindAtom& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 / *
   fManPageOutputStream <<
     ".HP" <<
@@ -91,7 +91,7 @@ void lpsrOah2manPage::visitEnd (S_lpsrScoreOutputKindAtom& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 */
 
@@ -112,7 +112,7 @@ void lpsrOah2manPage::visitStart (S_lpsrPitchesLanguageAtom& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 /*
   fManPageOutputStream <<
     ".HP" <<
@@ -148,7 +148,7 @@ void lpsrOah2manPage::visitEnd (S_lpsrPitchesLanguageAtom& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -168,7 +168,7 @@ void lpsrOah2manPage::visitStart (S_lpsrChordsLanguageAtom& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 /*
   fManPageOutputStream <<
     ".HP" <<
@@ -204,7 +204,7 @@ void lpsrOah2manPage::visitEnd (S_lpsrChordsLanguageAtom& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -224,7 +224,7 @@ void lpsrOah2manPage::visitStart (S_lpsrTransposeAtom& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 /*
   fManPageOutputStream <<
     ".HP" <<
@@ -260,7 +260,7 @@ void lpsrOah2manPage::visitEnd (S_lpsrTransposeAtom& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 

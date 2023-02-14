@@ -12,7 +12,6 @@
 #ifndef ___mxsr2guidoTranslatorInterface___
 #define ___mxsr2guidoTranslatorInterface___
 
-
 #include <iostream>
 
 #include "exports.h"
@@ -33,4 +32,4 @@ EXP void translateMxsrToGuido (
 }
 
 
-#endif
+#endif // ___mxsr2guidoTranslatorInterface___

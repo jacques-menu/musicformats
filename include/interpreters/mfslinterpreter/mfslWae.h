@@ -140,4 +140,4 @@ EXP void mfslOptionsIncompatibilityError (
 }
 
 
-#endif
+#endif // ___mfslWae___

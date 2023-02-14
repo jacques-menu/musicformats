@@ -47,4 +47,4 @@ EXP mfMusicformatsErrorKind convertMusicxmlString2guidoWithHandler (
 }
 
 
-#endif
+#endif // ___musicxml2guidoInterface___

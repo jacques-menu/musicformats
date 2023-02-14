@@ -126,4 +126,4 @@ void testMsrMomentComparisons (std::ostream& os);
 
 }
 
-#endif
+#endif // ___msrMoments___

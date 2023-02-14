@@ -307,4 +307,4 @@ EXP std::ostream& operator << (std::ostream& os, const S_msrTimeSignature& elt);
 }
 
 
-#endif
+#endif // ___msrTimeSignatures___

@@ -110,7 +110,7 @@ void msrSpanner::setSpannerSideLinkToOtherEnd (
     __FILE__, __LINE__,
     sideLinkToOtherEnd != nullptr,
     "sideLinkToOtherEnd is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // set the two-way sideLink between both ends of the spanner
   fSpannerSideLinkToOtherEnd =
@@ -134,7 +134,7 @@ void msrSpanner::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrSpanner>*
     p =
@@ -153,7 +153,7 @@ void msrSpanner::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -172,7 +172,7 @@ void msrSpanner::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrSpanner>*
     p =
@@ -191,7 +191,7 @@ void msrSpanner::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif        
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }

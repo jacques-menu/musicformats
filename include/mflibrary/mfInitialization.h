@@ -23,4 +23,4 @@ void initializeMusicFormats ();
 }
 
 
-#endif
+#endif // ___mfInitialization___

@@ -713,4 +713,4 @@ EXP std::ostream& operator << (std::ostream& os, const S_msrPart& elt);
 }
 
 
-#endif
+#endif // ___msrParts___

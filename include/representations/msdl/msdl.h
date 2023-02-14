@@ -12,8 +12,6 @@
 #ifndef ___msdl___
 #define ___msdl___
 
-
-
 #include "msdlEnumTypes.h"
 
 #include "msdlKeywords.h"
@@ -31,4 +29,4 @@ void EXP initializeMSDL ();
 }
 
 
-#endif
+#endif // ___msdl___

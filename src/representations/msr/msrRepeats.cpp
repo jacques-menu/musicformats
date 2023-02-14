@@ -81,7 +81,7 @@ msrRepeatCommonPart::msrRepeatCommonPart (
     __FILE__, __LINE__,
     upLinkToRepeat != nullptr,
     "upLinkToRepeat is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fRepeatCommonPartUpLinkToRepeat = upLinkToRepeat;
 }
@@ -110,7 +110,7 @@ void msrRepeatCommonPart::appendSegmentToRepeatCommonPart (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
@@ -118,7 +118,7 @@ void msrRepeatCommonPart::appendSegmentToRepeatCommonPart (
     __FILE__, __LINE__,
     segment != nullptr,
     "segment is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fRepeatCommonPartElementsList.push_back (segment);
 }
@@ -145,7 +145,7 @@ void msrRepeatCommonPart::appendRepeatToRepeatCommonPart (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
@@ -153,7 +153,7 @@ void msrRepeatCommonPart::appendRepeatToRepeatCommonPart (
     __FILE__, __LINE__,
     repeat != nullptr,
     "repeat is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fRepeatCommonPartElementsList.push_back (repeat);
 }
@@ -179,7 +179,7 @@ void msrRepeatCommonPart::appendMeasureRepeatToRepeatCommonPart (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
@@ -187,7 +187,7 @@ void msrRepeatCommonPart::appendMeasureRepeatToRepeatCommonPart (
     __FILE__, __LINE__,
     measureRepeat != nullptr,
     "measureRepeat is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 // KAKA  fRepeatCommonPartElementsList.push_back (measureRepeat); JMI v0.9.66
 }
@@ -213,7 +213,7 @@ void msrRepeatCommonPart::appendMultipleFullBarRestsToRepeatCommonPart (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
@@ -221,7 +221,7 @@ void msrRepeatCommonPart::appendMultipleFullBarRestsToRepeatCommonPart (
     __FILE__, __LINE__,
     multipleFullBarRests != nullptr,
     "multipleFullBarRests is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 //  KAKA fRepeatCommonPartElementsList.push_back (multipleFullBarRests);
 }
@@ -247,7 +247,7 @@ void msrRepeatCommonPart::appendVoiceElementToRepeatCommonPart (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
@@ -255,7 +255,7 @@ void msrRepeatCommonPart::appendVoiceElementToRepeatCommonPart (
     __FILE__, __LINE__,
     voiceElement != nullptr,
     "voiceElement is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fRepeatCommonPartElementsList.push_back (voiceElement);
 }
@@ -355,7 +355,7 @@ void msrRepeatCommonPart::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrRepeatCommonPart>*
     p =
@@ -374,7 +374,7 @@ void msrRepeatCommonPart::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -393,7 +393,7 @@ void msrRepeatCommonPart::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrRepeatCommonPart>*
     p =
@@ -412,7 +412,7 @@ void msrRepeatCommonPart::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif        
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -640,7 +640,7 @@ void msrRepeatEnding::appendSegmentToRepeatEnding (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
@@ -648,7 +648,7 @@ void msrRepeatEnding::appendSegmentToRepeatEnding (
     __FILE__, __LINE__,
     segment != nullptr,
     "segment is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fRepeatEndingElementsList.push_back (segment);
 }
@@ -673,7 +673,7 @@ void msrRepeatEnding::appendRepeatToRepeatEnding (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
@@ -681,7 +681,7 @@ void msrRepeatEnding::appendRepeatToRepeatEnding (
     __FILE__, __LINE__,
     repeat != nullptr,
     "repeat is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fRepeatEndingElementsList.push_back (repeat);
 }
@@ -707,7 +707,7 @@ void msrRepeatEnding::appendMeasureRepeatToRepeatEnding (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
@@ -715,7 +715,7 @@ void msrRepeatEnding::appendMeasureRepeatToRepeatEnding (
     __FILE__, __LINE__,
     measureRepeat != nullptr,
     "measureRepeat is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 // KAKA  fRepeatEndingElementsList.push_back (measureRepeat);
 }
@@ -741,7 +741,7 @@ void msrRepeatEnding::appendMultipleFullBarRestsToRepeatEnding (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
@@ -749,7 +749,7 @@ void msrRepeatEnding::appendMultipleFullBarRestsToRepeatEnding (
     __FILE__, __LINE__,
     multipleFullBarRests != nullptr,
     "multipleFullBarRests is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 //  KAKA fRepeatEndingElementsList.push_back (multipleFullBarRests);
 }
@@ -774,7 +774,7 @@ void msrRepeatEnding::appendVoiceElementToRepeatEnding (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
@@ -782,7 +782,7 @@ void msrRepeatEnding::appendVoiceElementToRepeatEnding (
     __FILE__, __LINE__,
     voiceElement != nullptr,
     "voiceElement is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fRepeatEndingElementsList.push_back (voiceElement);
 }
@@ -801,7 +801,7 @@ void msrRepeatEnding::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrRepeatEnding>*
     p =
@@ -820,7 +820,7 @@ void msrRepeatEnding::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -839,7 +839,7 @@ void msrRepeatEnding::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrRepeatEnding>*
     p =
@@ -858,7 +858,7 @@ void msrRepeatEnding::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif        
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -1114,7 +1114,7 @@ msrRepeat::msrRepeat (
     __FILE__, __LINE__,
     upLinkToVoice != nullptr,
     "upLinkToVoice is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fRepeatUpLinkToVoice = upLinkToVoice;
 
@@ -1145,7 +1145,7 @@ S_msrRepeat msrRepeat::createRepeatNewbornClone (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
@@ -1153,7 +1153,7 @@ S_msrRepeat msrRepeat::createRepeatNewbornClone (
     __FILE__, __LINE__,
     containingVoice != nullptr,
     "containingVoice is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   S_msrRepeat
     newbornClone =
@@ -1177,7 +1177,7 @@ void msrRepeat::setRepeatCommonPart (
     __FILE__, __LINE__,
     repeatCommonPart != nullptr,
     "repeatCommonPart is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalTraceOahGroup->getTraceRepeats ()) {
@@ -1196,7 +1196,7 @@ void msrRepeat::setRepeatCommonPart (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fRepeatCommonPart = repeatCommonPart;
 
@@ -1215,7 +1215,7 @@ void msrRepeat::addRepeatEndingToRepeat (
     __FILE__, __LINE__,
     repeatEnding != nullptr,
     "repeatEnding is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalTraceOahGroup->getTraceRepeats ()) {
@@ -1234,7 +1234,7 @@ void msrRepeat::addRepeatEndingToRepeat (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalTraceOahGroup->getTraceRepeatsDetails ()) {
@@ -1242,7 +1242,7 @@ void msrRepeat::addRepeatEndingToRepeat (
       inputLineNumber,
       "addRepeatEndingToRepeat() 1");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // get repeat ending kind
   msrRepeatEndingKind
@@ -1366,7 +1366,7 @@ void msrRepeat::addRepeatEndingToRepeat (
       inputLineNumber,
       "addRepeatEndingToRepeat() 2");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void msrRepeat::appendSegmentToRepeat (
@@ -1390,7 +1390,7 @@ void msrRepeat::appendSegmentToRepeat (
       inputLineNumber,
       "appendSegmentToRepeat() 1");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   switch (fCurrentRepeatBuildPhaseKind) {
     case msrRepeatBuildPhaseKind::kRepeatBuildPhaseJustCreated:
@@ -1452,7 +1452,7 @@ void msrRepeat::appendSegmentToRepeat (
       inputLineNumber,
       "appendSegmentToRepeat() 2");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void msrRepeat::appendRepeatToRepeat (
@@ -1476,7 +1476,7 @@ void msrRepeat::appendRepeatToRepeat (
       inputLineNumber,
       "appendRepeatToRepeat() 1");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   switch (fCurrentRepeatBuildPhaseKind) {
     case msrRepeatBuildPhaseKind::kRepeatBuildPhaseJustCreated:
@@ -1538,7 +1538,7 @@ void msrRepeat::appendRepeatToRepeat (
       inputLineNumber,
       "appendRepeatToRepeat() 2");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void msrRepeat::appendMeasureRepeatToRepeat (
@@ -1562,7 +1562,7 @@ void msrRepeat::appendMeasureRepeatToRepeat (
       inputLineNumber,
       "appendMeasureRepeatToRepeat() 1");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   switch (fCurrentRepeatBuildPhaseKind) {
     case msrRepeatBuildPhaseKind::kRepeatBuildPhaseJustCreated:
@@ -1624,7 +1624,7 @@ void msrRepeat::appendMeasureRepeatToRepeat (
       inputLineNumber,
       "appendMeasureRepeatToRepeat() 2");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void msrRepeat::appendMultipleFullBarRestsToRepeat (
@@ -1647,7 +1647,7 @@ void msrRepeat::appendMultipleFullBarRestsToRepeat (
       inputLineNumber,
       "appendMultipleFullBarRestsToRepeat() 1");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   switch (fCurrentRepeatBuildPhaseKind) {
     case msrRepeatBuildPhaseKind::kRepeatBuildPhaseJustCreated:
@@ -1709,7 +1709,7 @@ void msrRepeat::appendMultipleFullBarRestsToRepeat (
       inputLineNumber,
       "appendMultipleFullBarRestsToRepeat() 2");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 S_msrNote msrRepeat::fetchRepeatFirstNonGraceNote () const
@@ -1739,7 +1739,7 @@ void msrRepeat::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrRepeat>*
     p =
@@ -1758,7 +1758,7 @@ void msrRepeat::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -1777,7 +1777,7 @@ void msrRepeat::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrRepeat>*
     p =
@@ -1796,7 +1796,7 @@ void msrRepeat::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif        
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -1996,7 +1996,7 @@ void msrRepeat::printFull (std::ostream& os) const
 //         fCurrentRepeatBuildPhaseKind) <<
 //       std::endl;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   os << std::endl;
 

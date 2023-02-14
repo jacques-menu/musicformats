@@ -82,7 +82,7 @@ S_bsrLineContents bsrLineContents::createLineNewbornClone ()
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   S_bsrLineContents
     newbornClone =
@@ -134,7 +134,7 @@ void bsrLineContents::insertLineElementBeforeLastElementOfLineContents (
       "'" <<
       std::endl;
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   size_t
     lineContentsElementsListSize =
@@ -221,7 +221,7 @@ void bsrLineContents::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_bsrLineContents>*
     p =
@@ -240,7 +240,7 @@ void bsrLineContents::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -260,7 +260,7 @@ void bsrLineContents::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_bsrLineContents>*
     p =
@@ -279,7 +279,7 @@ void bsrLineContents::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }

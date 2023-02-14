@@ -12,6 +12,7 @@
 #ifndef ___msdl2msrOah___
 #define ___msdl2msrOah___
 
+#include "mfStaticSettings.h"
 
 #include "msrPitchesNames.h"
 
@@ -71,7 +72,7 @@ class EXP msdl2msrOahGroup : public oahGroup
                               { return fTraceSyntaxErrorRecovery; }
     Bool                  getTraceSyntaxErrorRecoveryDetails () const
                               { return fTraceSyntaxErrorRecoveryDetails; }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     msdlUserLanguageKind  getMsdlUserLanguageKind () const
                               { return fMsdlUserLanguageKind; }
@@ -126,7 +127,7 @@ class EXP msdl2msrOahGroup : public oahGroup
 
 #ifdef MF_TRACE_IS_ENABLED
     void                  initializeMsdl2msrTraceOah ();
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     void                  initializeMsdlLanguagesOptions ();
 
@@ -167,7 +168,7 @@ class EXP msdl2msrOahGroup : public oahGroup
 
     Bool                  fTraceSyntaxErrorRecovery;
     Bool                  fTraceSyntaxErrorRecoveryDetails;
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     // languages
     // --------------------------------------
@@ -209,4 +210,4 @@ EXP S_msdl2msrOahGroup createGlobalMsdl2msrOahGroup ();
 }
 
 
-#endif
+#endif // ___msdl2msrOah___

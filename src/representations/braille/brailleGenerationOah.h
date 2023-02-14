@@ -12,6 +12,7 @@
 #ifndef ___brailleGenerationOah___
 #define ___brailleGenerationOah___
 
+#include "mfStaticSettings.h"
 
 #include "oahBasicTypes.h"
 #include "oahAtomsCollection.h"
@@ -392,7 +393,7 @@ class EXP brailleGenerationOahGroup : public oahGroup
 
 #ifdef MF_TRACE_IS_ENABLED
 // JMI    void                  initializeBsr2brailleTraceOah ();
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     void                  initializeBrailleFileNameOptions ();
 
@@ -470,4 +471,4 @@ EXP S_brailleGenerationOahGroup createGlobalBrailleGenerationOahGroup ();
 }
 
 
-#endif
+#endif // ___brailleGenerationOah___

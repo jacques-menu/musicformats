@@ -109,7 +109,7 @@ void brailleOutputKindAtom::setImplicitVariable (std::ostream& os)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (fSelected) {
     std::stringstream ss;
@@ -142,7 +142,7 @@ void brailleOutputKindAtom::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_brailleOutputKindAtom>*
     p =
@@ -161,7 +161,7 @@ void brailleOutputKindAtom::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -180,7 +180,7 @@ void brailleOutputKindAtom::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_brailleOutputKindAtom>*
     p =
@@ -199,7 +199,7 @@ void brailleOutputKindAtom::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -218,7 +218,7 @@ void brailleOutputKindAtom::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 std::string brailleOutputKindAtom::asShortNamedOptionString () const
@@ -371,7 +371,7 @@ void brailleUTFKindAtom::applyAtomWithValue (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   bsrUTFKind UTFKind = bsrUTFKind::kUTF8; // default value
 
@@ -414,7 +414,7 @@ void brailleUTFKindAtom::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_brailleUTFKindAtom>*
     p =
@@ -433,7 +433,7 @@ void brailleUTFKindAtom::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -452,7 +452,7 @@ void brailleUTFKindAtom::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_brailleUTFKindAtom>*
     p =
@@ -471,7 +471,7 @@ void brailleUTFKindAtom::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -490,7 +490,7 @@ void brailleUTFKindAtom::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 std::string brailleUTFKindAtom::asShortNamedOptionString () const
@@ -637,7 +637,7 @@ void brailleByteOrderingKindAtom::applyAtomWithValue (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   bsrByteOrderingKind byteOrderingKind = bsrByteOrderingKind::kByteOrderingNone;
 
@@ -680,7 +680,7 @@ void brailleByteOrderingKindAtom::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_brailleByteOrderingKindAtom>*
     p =
@@ -699,7 +699,7 @@ void brailleByteOrderingKindAtom::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -718,7 +718,7 @@ void brailleByteOrderingKindAtom::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_brailleByteOrderingKindAtom>*
     p =
@@ -737,7 +737,7 @@ void brailleByteOrderingKindAtom::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -756,7 +756,7 @@ void brailleByteOrderingKindAtom::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 std::string brailleByteOrderingKindAtom::asShortNamedOptionString () const
@@ -1133,7 +1133,7 @@ void brailleGenerationOahGroup::initializeBrailleGenerationOahGroup ()
   // trace
   // --------------------------------------
 // JMI  initializeBsr2brailleTraceOah ();
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // braille file name
   // --------------------------------------
@@ -1179,7 +1179,7 @@ void brailleGenerationOahGroup::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_brailleGenerationOahGroup>*
     p =
@@ -1198,7 +1198,7 @@ void brailleGenerationOahGroup::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -1217,7 +1217,7 @@ void brailleGenerationOahGroup::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_brailleGenerationOahGroup>*
     p =
@@ -1236,7 +1236,7 @@ void brailleGenerationOahGroup::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -1255,7 +1255,7 @@ void brailleGenerationOahGroup::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //______________________________________________________________________________
@@ -1339,7 +1339,7 @@ S_brailleGenerationOahGroup createGlobalBrailleGenerationOahGroup ()
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // protect library against multiple initializations
   if (! gGlobalBrailleGenerationOahGroup) {

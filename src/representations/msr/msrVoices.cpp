@@ -336,7 +336,7 @@ msrVoice::msrVoice (
     __FILE__, __LINE__,
     voiceUpLinkToStaff != nullptr,
     "voiceUpLinkToStaff is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // set voice staff upLink
   fVoiceUpLinkToStaff = voiceUpLinkToStaff;
@@ -363,7 +363,7 @@ msrVoice::msrVoice (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 msrVoice::msrVoice (
@@ -397,7 +397,7 @@ msrVoice::msrVoice (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 msrVoice::~msrVoice ()
@@ -459,7 +459,7 @@ void msrVoice::setRegularVoiceStaffSequentialNumber (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fRegularVoiceStaffSequentialNumber =
     regularVoiceStaffSequentialNumber;
@@ -484,7 +484,7 @@ void msrVoice::setVoiceNameFromNumber (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   switch (fVoiceKind) {
     case msrVoiceKind::kVoiceKindRegular:
@@ -530,7 +530,7 @@ void msrVoice::setVoiceNameFromNumber (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void msrVoice::initializeVoice (
@@ -570,7 +570,7 @@ void msrVoice::initializeVoice (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // check voice number
   switch (fVoiceKind) {
@@ -711,7 +711,7 @@ void msrVoice::initializeVoice (
 
     --gIndenter;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   --gIndenter;
 }
@@ -734,7 +734,7 @@ void msrVoice::changeVoiceIdentity ( // after a deep clone is created
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // make it a regular voice
   setVoiceKind (
@@ -767,7 +767,7 @@ S_msrVoice msrVoice::createVoiceNewbornClone (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
@@ -775,7 +775,7 @@ S_msrVoice msrVoice::createVoiceNewbornClone (
     __FILE__, __LINE__,
     staffClone != nullptr,
     "staffClone is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   S_msrVoice
     newbornClone =
@@ -821,7 +821,7 @@ S_msrVoice msrVoice::createVoiceDeepClone (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
@@ -829,7 +829,7 @@ S_msrVoice msrVoice::createVoiceDeepClone (
     __FILE__, __LINE__,
     containingStaff != nullptr,
     "containingStaff is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalTraceOahGroup->getTraceVoicesDetails ()) {
@@ -851,7 +851,7 @@ S_msrVoice msrVoice::createVoiceDeepClone (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   S_msrVoice
     deepClone =
@@ -939,7 +939,7 @@ S_msrVoice msrVoice::createVoiceDeepClone (
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     for (S_msrVoiceElement voiceElement : fVoiceInitialElementsList) {
       // handle the deep clone
@@ -1003,7 +1003,7 @@ S_msrVoice msrVoice::createVoiceDeepClone (
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
   }
 
   // last segment
@@ -1033,7 +1033,7 @@ S_msrVoice msrVoice::createVoiceDeepClone (
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
   }
 
   // multiple full-bar rests
@@ -1076,7 +1076,7 @@ S_msrVoice msrVoice::createVoiceDeepClone (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   return deepClone;
 }
@@ -1101,7 +1101,7 @@ void msrVoice::setVoiceLastSegmentInVoiceClone (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
@@ -1109,7 +1109,7 @@ void msrVoice::setVoiceLastSegmentInVoiceClone (
     __FILE__, __LINE__,
     segment != nullptr,
     "segment is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fVoiceLastSegment = segment;
 
@@ -1137,7 +1137,7 @@ void msrVoice::appendSegmentToVoiceClone ( //JMI unused ???
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   int inputLineNumber =
     segment->getInputLineNumber ();
@@ -1190,7 +1190,7 @@ void msrVoice::appendSegmentToVoiceClone ( //JMI unused ???
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     fVoiceLastSegment = segment;
 
@@ -1228,7 +1228,7 @@ void msrVoice::setVoiceLastAppendedMeasure (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fVoiceLastAppendedMeasure = measure;
 }
@@ -1252,7 +1252,7 @@ void msrVoice::setNextMeasureNumberInVoice (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -1280,7 +1280,7 @@ void msrVoice::setNextMeasureNumberInVoice (
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     --fVoiceRemainingMultipleFullBarRests;
 
@@ -1302,7 +1302,7 @@ void msrVoice::setNextMeasureNumberInVoice (
           __FILE__, __LINE__,
           ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       fVoiceMultipleFullBarRestsWaitingForItsNextMeasureNumber->
         setMultipleFullBarRestsNextMeasureNumber (
@@ -1346,7 +1346,7 @@ void msrVoice::incrementVoiceCurrentMeasurePuristNumber (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void msrVoice::setVoiceFirstMeasure (
@@ -1367,7 +1367,7 @@ void msrVoice::setVoiceFirstMeasure (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fVoiceFirstMeasure = measure;
 }
@@ -1391,7 +1391,7 @@ void msrVoice::appendMeasureCloneToVoiceClone (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -1426,7 +1426,7 @@ void msrVoice::setWholeNotesSinceLastRegularMeasureEnd (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fWholeNotesSinceLastRegularMeasureEnd = value;
 }
@@ -1453,7 +1453,7 @@ void msrVoice::setCurrentVoiceRepeatPhaseKind (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fCurrentVoiceRepeatPhaseKind =
     afterRepeatComponentPhaseKind;
@@ -1484,7 +1484,7 @@ void msrVoice::createNewLastSegmentForVoice (
       inputLineNumber,
       combinedContext);
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // create the last segment
   fVoiceLastSegment =
@@ -1506,7 +1506,7 @@ void msrVoice::createNewLastSegmentForVoice (
       inputLineNumber,
       combinedContext);
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void msrVoice::createNewLastSegmentFromItsFirstMeasureForVoice (
@@ -1543,7 +1543,7 @@ void msrVoice::createNewLastSegmentFromItsFirstMeasureForVoice (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // append firstMeasure to fVoiceLastSegment
   fVoiceLastSegment->
@@ -1569,7 +1569,7 @@ void msrVoice::createNewLastSegmentFromItsFirstMeasureForVoice (
       inputLineNumber,
       "createNewLastSegmentFromItsFirstMeasureForVoice()");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 S_msrMeasure msrVoice::createAMeasureAndAppendItToVoice (
@@ -1598,7 +1598,7 @@ S_msrMeasure msrVoice::createAMeasureAndAppendItToVoice (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fCallsCounter++;
 
@@ -1628,7 +1628,7 @@ S_msrMeasure msrVoice::createAMeasureAndAppendItToVoice (
       inputLineNumber,
       "createAMeasureAndAppendItToVoice() 1");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -1652,7 +1652,7 @@ S_msrMeasure msrVoice::createAMeasureAndAppendItToVoice (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     result =
       msrMeasure::create (
@@ -1684,7 +1684,7 @@ S_msrMeasure msrVoice::createAMeasureAndAppendItToVoice (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     fVoiceCurrentMultipleFullBarRests->
       appendMeasureToMultipleFullBarRests (
@@ -1721,7 +1721,7 @@ S_msrMeasure msrVoice::createAMeasureAndAppendItToVoice (
       inputLineNumber,
       "createAMeasureAndAppendItToVoice() 3");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   --gIndenter;
 
@@ -1767,7 +1767,7 @@ S_msrVoice msrVoice::createRegularVoiceHarmoniesVoice (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fRegularVoiceForwardLinkToHarmoniesVoice =
     msrVoice::create (
@@ -1823,7 +1823,7 @@ S_msrVoice msrVoice::createRegularVoiceHarmoniesVoice (
 //       ", line " << inputLineNumber <<
 //       std::endl;
 //   }
-// #endif
+// #endif // MF_TRACE_IS_ENABLED
 //
 //   fRegularVoiceForwardLinkToFiguredBassVoice =
 //     msrVoice::create (
@@ -1903,7 +1903,7 @@ void msrVoice::addStanzaToVoice (const S_msrStanza& stanza)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // add the stanza to this voice
   fVoiceStanzasMap [stanzaNumber] = stanza;
@@ -1930,7 +1930,7 @@ void msrVoice::addStanzaToVoiceWithoutCatchUp (const S_msrStanza& stanza)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // add the stanza to this voice
   fVoiceStanzasMap [stanzaNumber] = stanza;
@@ -1969,7 +1969,7 @@ S_msrStanza msrVoice::createStanzaInVoiceIfNotYetDone (
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     stanza =
       addStanzaToVoiceByItsNumber (
@@ -2065,7 +2065,7 @@ void msrVoice::appendMusicXMLPrintLayoutToVoice (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -2091,7 +2091,7 @@ void msrVoice::appendClefToVoice  (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -2129,7 +2129,7 @@ void msrVoice::appendKeyToVoice (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -2146,7 +2146,7 @@ void msrVoice::appendKeyToVoice (
       key->getInputLineNumber (),
       "appendKeyToVoice()");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   --gIndenter;
 }
@@ -2166,7 +2166,7 @@ void msrVoice::appendTimeSignatureToVoice (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -2196,7 +2196,7 @@ void msrVoice::appendTimeSignatureToVoiceClone (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -2229,7 +2229,7 @@ void msrVoice::insertHiddenMeasureAndBarLineInVoiceClone (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -2350,7 +2350,7 @@ S_msrNote msrVoice::fetchVoiceFirstNonGraceNote () const
 //         gLog << this;;
 //         --gIndenter;
 //       }
-// #endif
+// #endif // MF_TRACE_IS_ENABLED
 //
 //       std::stringstream ss;
 //
@@ -2387,7 +2387,7 @@ void msrVoice::setVoiceShortestNoteDuration (
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fVoiceShortestNoteDuration = duration;
 }
@@ -2410,7 +2410,7 @@ void msrVoice::setVoiceShortestNoteTupletFactor (
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fVoiceShortestNoteTupletFactor = noteTupletFactor;
 }
@@ -2470,7 +2470,7 @@ void msrVoice::registerShortestNoteInVoiceIfRelevant (const S_msrNote& note)
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
   }
 
 /* JMI
@@ -2521,7 +2521,7 @@ void msrVoice::appendHarmonyToVoice (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -2556,7 +2556,7 @@ void msrVoice::appendHarmonyToVoice (
       }
       break;
   } // switch
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   --gIndenter;
 }
@@ -2581,7 +2581,7 @@ void msrVoice::appendHarmonyToHarmoniesVoice (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -2616,7 +2616,7 @@ void msrVoice::appendFiguredBassToFiguredBassVoice (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -2650,7 +2650,7 @@ void msrVoice::appendHarmonyToVoiceClone (const S_msrHarmony& harmony)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -2709,7 +2709,7 @@ void msrVoice::appendFiguredBassToVoice (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -2744,7 +2744,7 @@ void msrVoice::appendFiguredBassToVoice (
       }
       break;
   } // switch
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   --gIndenter;
 }
@@ -2769,7 +2769,7 @@ void msrVoice::appendFiguredBassToVoiceClone (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -2828,7 +2828,7 @@ void msrVoice::padUpToMeasurePositionInVoice (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -2838,7 +2838,7 @@ void msrVoice::padUpToMeasurePositionInVoice (
     __FILE__, __LINE__,
     fVoiceLastSegment != nullptr,
     "fVoiceLastSegment is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // pad up the voice's last segment
   fVoiceLastSegment->
@@ -2881,7 +2881,7 @@ void msrVoice::backupByWholeNotesStepLengthInVoice (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -2891,7 +2891,7 @@ void msrVoice::backupByWholeNotesStepLengthInVoice (
     __FILE__, __LINE__,
     fVoiceLastSegment != nullptr,
     "fVoiceLastSegment is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // pad up the voice's last segment
   fVoiceLastSegment->
@@ -2927,7 +2927,7 @@ void msrVoice::appendPaddingNoteToVoice (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -2976,7 +2976,7 @@ void msrVoice::appendTranspositionToVoice (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fVoiceLastSegment->
     appendTranspositionToSegment (transposition);
@@ -2999,7 +2999,7 @@ void msrVoice::appendStaffDetailsToVoice (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // staff details are attributes in MusicXML,
   // create the voice last segment if needed
@@ -3031,7 +3031,7 @@ void msrVoice::appendTempoToVoice (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fVoiceLastSegment->
     appendTempoToSegment (tempo);
@@ -3055,7 +3055,7 @@ void msrVoice::appendOctaveShiftToVoice (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fVoiceLastSegment->
     appendOctaveShiftToSegment (octaveShift);
@@ -3078,7 +3078,7 @@ void msrVoice::appendScordaturaToVoice (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fVoiceLastSegment->
     appendScordaturaToSegment (scordatura);
@@ -3102,7 +3102,7 @@ void msrVoice::appendAccordionRegistrationToVoice (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fVoiceLastSegment->
     appendAccordionRegistrationToSegment (
@@ -3127,7 +3127,7 @@ void msrVoice::appendHarpPedalsTuningToVoice (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fVoiceLastSegment->
     appendHarpPedalsTuningToSegment (
@@ -3150,7 +3150,7 @@ void msrVoice::appendRehearsalMarkToVoice (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fVoiceLastSegment->
     appendRehearsalMarkToSegment (rehearsalMark);
@@ -3162,7 +3162,7 @@ void msrVoice::appendVoiceStaffChangeToVoice (
 #ifdef MF_TRACE_IS_ENABLED
   int inputLineNumber =
     voiceStaffChange->getInputLineNumber ();
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalTraceOahGroup->getTraceStaffChanges ()) {
@@ -3180,7 +3180,7 @@ void msrVoice::appendVoiceStaffChangeToVoice (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -3212,7 +3212,7 @@ void msrVoice::appendNoteToVoice (const S_msrNote& note)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -3245,7 +3245,7 @@ void msrVoice::appendNoteToVoice (const S_msrNote& note)
         inputLineNumber,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
   }
 
   // append the note to the last segment
@@ -3378,7 +3378,7 @@ void msrVoice::appendNoteToVoiceClone (const S_msrNote& note) {
 #ifdef MF_TRACE_IS_ENABLED
   int inputLineNumber =
     note->getInputLineNumber ();
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalTraceOahGroup->getTraceNotes ()) {
@@ -3395,7 +3395,7 @@ void msrVoice::appendNoteToVoiceClone (const S_msrNote& note) {
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // append the note to the last segment
   fVoiceLastSegment->
@@ -3487,7 +3487,7 @@ void msrVoice::appendDoubleTremoloToVoice (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fVoiceLastSegment->
     appendDoubleTremoloToSegment (doubleTremolo);
@@ -3510,7 +3510,7 @@ void msrVoice::appendChordToVoice (const S_msrChord& chord)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // append chord to voice last segment
   fVoiceLastSegment->
@@ -3580,7 +3580,7 @@ void msrVoice::appendTupletToVoice (const S_msrTuplet& tuplet)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -3620,7 +3620,7 @@ void msrVoice::addGraceNotesGroupBeforeAheadOfVoiceIfNeeded (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 /* JMI
   gLog <<
@@ -3683,7 +3683,7 @@ void msrVoice::addGraceNotesGroupBeforeAheadOfVoiceIfNeeded (
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 /*
     firstNoteShortcutUpLinkToChord->
@@ -3725,7 +3725,7 @@ void msrVoice::addGraceNotesGroupBeforeAheadOfVoiceIfNeeded (
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     voiceFirstNote->
       setNoteGraceNotesGroupBefore (
@@ -3752,7 +3752,7 @@ void msrVoice::appendAfterGraceNotesToVoice (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fVoiceLastSegment->
     appendAfterGraceNotesToSegment (afterGraceNotes);
@@ -3776,7 +3776,7 @@ void msrVoice::prependAfterGraceNotesToVoice (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fVoiceFirstSegment->
     prependAfterGraceNotesToSegment (afterGraceNotes);
@@ -3806,7 +3806,7 @@ void msrVoice::appendSyllableToVoice (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // fetch stanzaNumber in this voice
   S_msrStanza
@@ -3841,7 +3841,7 @@ void msrVoice::appendBarCheckToVoice (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fVoiceLastSegment->
     appendBarCheckToSegment (barCheck);
@@ -3864,7 +3864,7 @@ void msrVoice::appendBarNumberCheckToVoice (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fVoiceLastSegment->
     appendBarNumberCheckToSegment (barNumberCheck);
@@ -3886,7 +3886,7 @@ void msrVoice::appendLineBreakToVoice  (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fVoiceLastSegment->
     appendLineBreakToSegment (lineBreak);
@@ -3919,7 +3919,7 @@ void msrVoice::appendPageBreakToVoice (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fVoiceLastSegment->
     appendPageBreakToSegment (pageBreak);
@@ -3939,7 +3939,7 @@ void msrVoice::prependOtherElementToVoice (const S_msrMeasureElement& elem) {
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fVoiceLastSegment->
     prependOtherElementToSegment (elem);
@@ -3959,7 +3959,7 @@ void msrVoice::appendOtherElementToVoice (const S_msrMeasureElement& elem) {
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fVoiceLastSegment->
     appendOtherElementToSegment (elem);
@@ -4050,7 +4050,7 @@ void msrVoice::pushRepeatOntoRepeatDescrsStack (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fVoicePendingRepeatDescrsStack.push_front (
     msrRepeatDescr::create (
@@ -4067,7 +4067,7 @@ void msrVoice::pushRepeatOntoRepeatDescrsStack (
       inputLineNumber,
       combinedContext);
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void msrVoice::popRepeatFromRepeatDescrsStack (
@@ -4085,7 +4085,7 @@ void msrVoice::popRepeatFromRepeatDescrsStack (
       inputLineNumber,
       combinedContext);
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (
     repeat
@@ -4125,7 +4125,7 @@ void msrVoice::popRepeatFromRepeatDescrsStack (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // pop it from repeats stack
   fVoicePendingRepeatDescrsStack.pop_front ();
@@ -4140,7 +4140,7 @@ void msrVoice::popRepeatFromRepeatDescrsStack (
       inputLineNumber,
       combinedContext);
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void msrVoice::displayVoiceRepeatsStack (
@@ -4393,7 +4393,7 @@ void msrVoice::displayVoiceMeasuresFlatList (
  //     }
 #else
       gLog << measure->getMeasureNumber ();
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       if (++i == iEnd) break;
 
@@ -4436,7 +4436,7 @@ void msrVoice::displayVoiceMeasuresFlatList (
  //     }
 #else
       gLog << measure->getMeasureNumber ();
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       if (++i == iEnd) break;
 
@@ -4520,7 +4520,7 @@ S_msrRepeat msrVoice::createARepeatAndStackIt (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   S_msrRepeat
     result =
@@ -4541,7 +4541,7 @@ S_msrRepeat msrVoice::createARepeatAndStackIt (
       inputLineNumber,
       "createARepeatAndStackIt() 2");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   return result;
 }
@@ -4567,7 +4567,7 @@ S_msrRepeat msrVoice::createARepeatCloneAndStackIt (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   S_msrRepeat
     result =
@@ -4612,7 +4612,7 @@ void msrVoice::moveVoiceInitialElementsToRepeatCommonPart (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   for (
     std::list<S_msrVoiceElement>::iterator i = fVoiceInitialElementsList.begin ();
@@ -4669,7 +4669,7 @@ void msrVoice::moveVoiceLastSegmentToRepeatCommonPart (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalTraceOahGroup->getTraceRepeatsDetails ()) {
@@ -4681,7 +4681,7 @@ void msrVoice::moveVoiceLastSegmentToRepeatCommonPart (
       inputLineNumber,
       combinedContext);
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (fVoiceLastSegment) { // JMI should not be necessary?
   /* JMI
@@ -4724,7 +4724,7 @@ void msrVoice::moveVoiceLastSegmentToRepeatCommonPart (
       inputLineNumber,
       combinedContext);
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void msrVoice::moveAllVoiceContentsToRepeatCommonPart (
@@ -4766,7 +4766,7 @@ void msrVoice::moveVoiceLastSegmentToRepeatEnding (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (fVoiceLastSegment) { // JMI should not be necessary?
     repeatEnding->
@@ -4803,7 +4803,7 @@ void msrVoice::appendRepeatToInitialVoiceElements (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // is the previous element in the voice elements list a repeat?
   S_msrVoiceElement previousElement;
@@ -4849,7 +4849,7 @@ void msrVoice::appendRepeatToInitialVoiceElements (
 //       ", line " << inputLineNumber <<
 //       std::endl;
 //   }
-// #endif
+// #endif // MF_TRACE_IS_ENABLED
 //
 // //   fVoiceInitialElementsList.push_back ( KAKA
 // //     multipleFullBarRests);
@@ -4878,7 +4878,7 @@ void msrVoice::appendMeasureRepeatToInitialVoiceElements (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 //   fVoiceInitialElementsList.push_back ( KAKA
 //     measureRepeat);
@@ -4906,7 +4906,7 @@ void msrVoice::appendVoiceLastSegmentToInitialVoiceElements (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fVoiceInitialElementsList.push_back (
     fVoiceLastSegment);
@@ -4946,7 +4946,7 @@ void msrVoice::moveVoiceLastSegmentToInitialVoiceElementsIfRelevant (
           inputLineNumber,
           "moveVoiceLastSegmentToInitialVoiceElementsIfRelevant() 1");
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       // append segment to the list of initial elements
       fVoiceInitialElementsList.push_back (
@@ -4961,7 +4961,7 @@ void msrVoice::moveVoiceLastSegmentToInitialVoiceElementsIfRelevant (
           inputLineNumber,
           "moveVoiceLastSegmentToInitialVoiceElementsIfRelevant() 2");
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
     }
 
     else {
@@ -4982,7 +4982,7 @@ void msrVoice::moveVoiceLastSegmentToInitialVoiceElementsIfRelevant (
           __FILE__, __LINE__,
           ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
     }
   }
 
@@ -5004,7 +5004,7 @@ void msrVoice::moveVoiceLastSegmentToInitialVoiceElementsIfRelevant (
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
   }
 }
 
@@ -5031,7 +5031,7 @@ void msrVoice::appendRepeatCloneToInitialVoiceElements (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fVoiceInitialElementsList.push_back (
     repeatCLone);
@@ -5054,7 +5054,7 @@ void msrVoice::handleVoiceLevelRepeatStart (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalTraceOahGroup->getTraceRepeatsDetails ()) {
@@ -5062,7 +5062,7 @@ void msrVoice::handleVoiceLevelRepeatStart (
       inputLineNumber,
       "handleVoiceLevelRepeatStart() 1");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -5092,7 +5092,7 @@ void msrVoice::handleVoiceLevelRepeatStart (
             inputLineNumber,
             "lastMeasureInLastSegment - handleVoiceLevelRepeatStart() 2");
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       // let's look at the last measure in detail
 
@@ -5136,7 +5136,7 @@ void msrVoice::handleVoiceLevelRepeatStart (
               ", line " << inputLineNumber <<
               std::endl;
           }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 /* JMI
           // finalize lastMeasureInLastSegment
@@ -5160,7 +5160,7 @@ void msrVoice::handleVoiceLevelRepeatStart (
               ", line " << inputLineNumber <<
               std::endl;
           }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
           createNewLastSegmentForVoice (
             inputLineNumber,
@@ -5208,7 +5208,7 @@ void msrVoice::handleVoiceLevelRepeatStart (
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
         S_msrMeasure
           dummyMeasure =
@@ -5237,7 +5237,7 @@ void msrVoice::handleVoiceLevelRepeatStart (
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
         createNewLastSegmentFromItsFirstMeasureForVoice (
           inputLineNumber,
@@ -5274,7 +5274,7 @@ void msrVoice::handleVoiceLevelRepeatStart (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   S_msrRepeatCommonPart
     repeatCommonPart =
@@ -5298,7 +5298,7 @@ void msrVoice::handleVoiceLevelRepeatStart (
       inputLineNumber,
       "handleVoiceLevelRepeatStart() 11");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   --gIndenter;
 }
@@ -5321,7 +5321,7 @@ void msrVoice::handleNestedRepeatStartInVoice (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalTraceOahGroup->getTraceRepeatsDetails ()) {
@@ -5329,7 +5329,7 @@ void msrVoice::handleNestedRepeatStartInVoice (
       inputLineNumber,
       "handleNestedRepeatStartInVoice() 2");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void msrVoice::handleRepeatStartInVoice (
@@ -5350,7 +5350,7 @@ void msrVoice::handleRepeatStartInVoice (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalTraceOahGroup->getTraceRepeatsDetails ()) {
@@ -5358,7 +5358,7 @@ void msrVoice::handleRepeatStartInVoice (
       inputLineNumber,
       "handleRepeatStartInVoice() 1");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   switch (fVoiceKind) {
     case msrVoiceKind::kVoiceKindRegular:
@@ -5389,7 +5389,7 @@ void msrVoice::handleRepeatStartInVoice (
       inputLineNumber,
       "handleRepeatStartInVoice() 2");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void msrVoice::handleVoiceLevelRepeatEndWithoutStart (
@@ -5412,7 +5412,7 @@ void msrVoice::handleVoiceLevelRepeatEndWithoutStart (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalTraceOahGroup->getTraceRepeatsDetails ()) {
@@ -5420,7 +5420,7 @@ void msrVoice::handleVoiceLevelRepeatEndWithoutStart (
       inputLineNumber,
       "handleVoiceLevelRepeatEndWithoutStart() 1");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -5437,7 +5437,7 @@ void msrVoice::handleVoiceLevelRepeatEndWithoutStart (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // create the repeat
 #ifdef MF_TRACE_IS_ENABLED
@@ -5455,7 +5455,7 @@ void msrVoice::handleVoiceLevelRepeatEndWithoutStart (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   int repeatInputLineNumber = 1; // could find first measure's input line number??? JMI
 
@@ -5482,7 +5482,7 @@ void msrVoice::handleVoiceLevelRepeatEndWithoutStart (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   S_msrRepeatCommonPart
     repeatCommonPart =
@@ -5533,7 +5533,7 @@ void msrVoice::handleVoiceLevelRepeatEndWithoutStart (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   repeatCommonPart->
     appendSegmentToRepeatCommonPart (
@@ -5563,7 +5563,7 @@ void msrVoice::handleVoiceLevelRepeatEndWithoutStart (
       inputLineNumber,
       "handleVoiceLevelRepeatEndWithoutStart() 7");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   --gIndenter;
 }
@@ -5588,7 +5588,7 @@ void msrVoice::handleVoiceLevelContainingRepeatEndWithoutStart (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalTraceOahGroup->getTraceRepeatsDetails ()) {
@@ -5596,7 +5596,7 @@ void msrVoice::handleVoiceLevelContainingRepeatEndWithoutStart (
       inputLineNumber,
       "handleVoiceLevelContainingRepeatEndWithoutStart() 1");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -5613,7 +5613,7 @@ void msrVoice::handleVoiceLevelContainingRepeatEndWithoutStart (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // create the repeat
 #ifdef MF_TRACE_IS_ENABLED
@@ -5631,7 +5631,7 @@ void msrVoice::handleVoiceLevelContainingRepeatEndWithoutStart (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   int repeatInputLineNumber = 1; // could find first measure's input line number??? JMI
 
@@ -5658,7 +5658,7 @@ void msrVoice::handleVoiceLevelContainingRepeatEndWithoutStart (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   S_msrRepeatCommonPart
     newRepeatCommonPart =
@@ -5720,7 +5720,7 @@ void msrVoice::handleVoiceLevelContainingRepeatEndWithoutStart (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   newRepeatCommonPart->
     appendSegmentToRepeatCommonPart (
@@ -5752,7 +5752,7 @@ void msrVoice::handleVoiceLevelContainingRepeatEndWithoutStart (
       inputLineNumber,
       "handleVoiceLevelContainingRepeatEndWithoutStart() 7");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   --gIndenter;
 }
@@ -5777,7 +5777,7 @@ void msrVoice::handleVoiceLevelRepeatEndWithStart (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalTraceOahGroup->getTraceRepeatsDetails ()) {
@@ -5785,7 +5785,7 @@ void msrVoice::handleVoiceLevelRepeatEndWithStart (
       inputLineNumber,
       "handleVoiceLevelRepeatEndWithStart() 1");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalTraceOahGroup->getTraceRepeats ()) {
@@ -5800,7 +5800,7 @@ void msrVoice::handleVoiceLevelRepeatEndWithStart (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -5847,7 +5847,7 @@ void msrVoice::handleVoiceLevelRepeatEndWithStart (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   S_msrRepeatCommonPart
     repeatCommonPart =
@@ -5877,7 +5877,7 @@ void msrVoice::handleVoiceLevelRepeatEndWithStart (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   moveVoiceLastSegmentToRepeatCommonPart (
     inputLineNumber,
@@ -5910,7 +5910,7 @@ void msrVoice::handleVoiceLevelRepeatEndWithStart (
       inputLineNumber,
       "handleVoiceLevelRepeatEndWithStart() 5");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   --gIndenter;
 }
@@ -5935,7 +5935,7 @@ void msrVoice::handleNestedRepeatEndInVoice (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalTraceOahGroup->getTraceRepeatsDetails ()) {
@@ -5943,7 +5943,7 @@ void msrVoice::handleNestedRepeatEndInVoice (
       inputLineNumber,
       "handleNestedRepeatEndInVoice() 1");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalTraceOahGroup->getTraceRepeats ()) {
@@ -5958,7 +5958,7 @@ void msrVoice::handleNestedRepeatEndInVoice (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 // fetch the voice's last measure
   S_msrMeasure
@@ -5990,7 +5990,7 @@ void msrVoice::handleNestedRepeatEndInVoice (
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     // create a new measure with the same number as the voice last measure
     // and append it to the voice,
@@ -6014,7 +6014,7 @@ void msrVoice::handleNestedRepeatEndInVoice (
       inputLineNumber,
       "handleNestedRepeatEndInVoice() 2");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void msrVoice::handleRepeatEndInVoice (
@@ -6028,7 +6028,7 @@ void msrVoice::handleRepeatEndInVoice (
       inputLineNumber,
       "handleRepeatEndInVoice() 1");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   switch (fVoiceKind) {
     case msrVoiceKind::kVoiceKindRegular:
@@ -6118,7 +6118,7 @@ void msrVoice::handleRepeatEndInVoice (
       inputLineNumber,
       "handleRepeatEndInVoice() 2");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void msrVoice::handleVoiceLevelRepeatEndingStartWithoutExplicitStart (
@@ -6140,7 +6140,7 @@ void msrVoice::handleVoiceLevelRepeatEndingStartWithoutExplicitStart (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalTraceOahGroup->getTraceRepeatsDetails ()) {
@@ -6148,7 +6148,7 @@ void msrVoice::handleVoiceLevelRepeatEndingStartWithoutExplicitStart (
       inputLineNumber,
       "handleVoiceLevelRepeatEndingStartWithoutExplicitStart() 1");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -6194,7 +6194,7 @@ void msrVoice::handleVoiceLevelRepeatEndingStartWithoutExplicitStart (
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     repeatCommonPart =
       msrRepeatCommonPart::create (
@@ -6223,7 +6223,7 @@ void msrVoice::handleVoiceLevelRepeatEndingStartWithoutExplicitStart (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   S_msrMeasure
     lastMeasure =
@@ -6259,7 +6259,7 @@ void msrVoice::handleVoiceLevelRepeatEndingStartWithoutExplicitStart (
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     S_msrMeasure
       dummyMeasure =
@@ -6297,7 +6297,7 @@ void msrVoice::handleVoiceLevelRepeatEndingStartWithoutExplicitStart (
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     createNewLastSegmentFromItsFirstMeasureForVoice (
       inputLineNumber,
@@ -6329,7 +6329,7 @@ void msrVoice::handleVoiceLevelRepeatEndingStartWithoutExplicitStart (
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     createNewLastSegmentForVoice (
       inputLineNumber,
@@ -6347,7 +6347,7 @@ void msrVoice::handleVoiceLevelRepeatEndingStartWithoutExplicitStart (
       inputLineNumber,
       "handleVoiceLevelRepeatEndingStartWithoutExplicitStart() 2");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   --gIndenter;
 }
@@ -6370,7 +6370,7 @@ void msrVoice::handleVoiceLevelRepeatEndingStartWithExplicitStart (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalTraceOahGroup->getTraceRepeatsDetails ()) {
@@ -6378,7 +6378,7 @@ void msrVoice::handleVoiceLevelRepeatEndingStartWithExplicitStart (
       inputLineNumber,
       "handleVoiceLevelRepeatEndingStartWithExplicitStart() 1");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -6420,7 +6420,7 @@ void msrVoice::handleVoiceLevelRepeatEndingStartWithExplicitStart (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // fetch lastMeasure's elements list
   const std::list<S_msrMeasureElement>&
@@ -6449,7 +6449,7 @@ void msrVoice::handleVoiceLevelRepeatEndingStartWithExplicitStart (
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     S_msrMeasure
       dummyMeasure =
@@ -6487,7 +6487,7 @@ void msrVoice::handleVoiceLevelRepeatEndingStartWithExplicitStart (
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     createNewLastSegmentFromItsFirstMeasureForVoice (
       inputLineNumber,
@@ -6518,7 +6518,7 @@ void msrVoice::handleVoiceLevelRepeatEndingStartWithExplicitStart (
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     createNewLastSegmentForVoice (
       inputLineNumber,
@@ -6536,7 +6536,7 @@ void msrVoice::handleVoiceLevelRepeatEndingStartWithExplicitStart (
       inputLineNumber,
       "handleVoiceLevelRepeatEndingStartWithExplicitStart() 3");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   --gIndenter;
 }
@@ -6564,7 +6564,7 @@ void msrVoice::nestContentsIntoNewRepeatInVoice (
               inputLineNumber,
               "nestContentsIntoNewRepeatInVoice() 1");
           }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
           // move voice last segment to the list of initial elements
           moveVoiceLastSegmentToInitialVoiceElementsIfRelevant (
@@ -6577,7 +6577,7 @@ void msrVoice::nestContentsIntoNewRepeatInVoice (
               inputLineNumber,
               "nestContentsIntoNewRepeatInVoice() 2");
           }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         }
       }
       break;
@@ -6598,7 +6598,7 @@ void msrVoice::handleNestedRepeatEndingStartInVoice (
       ", line " << inputLineNumber <<
       std::endl;
  }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalTraceOahGroup->getTraceRepeatsDetails ()) {
@@ -6606,7 +6606,7 @@ void msrVoice::handleNestedRepeatEndingStartInVoice (
       inputLineNumber,
       "handleNestedRepeatEndingStartInVoice() 2");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void msrVoice::handleRepeatEndingStartInVoice (
@@ -6627,7 +6627,7 @@ void msrVoice::handleRepeatEndingStartInVoice (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalTraceOahGroup->getTraceRepeatsDetails ()) {
@@ -6635,7 +6635,7 @@ void msrVoice::handleRepeatEndingStartInVoice (
       inputLineNumber,
       "handleRepeatEndingStartInVoice() 1");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   switch (fVoiceKind) {
     case msrVoiceKind::kVoiceKindRegular:
@@ -6700,7 +6700,7 @@ void msrVoice::handleRepeatEndingStartInVoice (
       inputLineNumber,
       "handleRepeatEndingStartInVoice() 2");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void msrVoice::handleRepeatEndingStartInVoiceClone (
@@ -6715,7 +6715,7 @@ void msrVoice::handleRepeatEndingStartInVoiceClone (
       inputLineNumber,
       "handleRepeatEndingStartInVoiceClone() 1");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   switch (fVoiceKind) {
     case msrVoiceKind::kVoiceKindRegular:
@@ -6741,7 +6741,7 @@ void msrVoice::handleRepeatEndingStartInVoiceClone (
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
         // is there a current repeat?
         switch (fVoicePendingRepeatDescrsStack.size ()) {
@@ -6784,7 +6784,7 @@ void msrVoice::handleRepeatEndingStartInVoiceClone (
                   "\"" <<
                   std::endl;
               }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
               S_msrRepeatEnding
                 repeatEnding =
@@ -6806,7 +6806,7 @@ void msrVoice::handleRepeatEndingStartInVoiceClone (
                   "\"" <<
                   std::endl;
               }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
               if (gGlobalTraceOahGroup->getTraceRepeatsDetails ()) {
@@ -6814,7 +6814,7 @@ void msrVoice::handleRepeatEndingStartInVoiceClone (
                   inputLineNumber,
                   "before adding a hooked repeat ending to current repeat");
               }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
               currentRepeat->
                 addRepeatEndingToRepeat (
@@ -6844,7 +6844,7 @@ void msrVoice::handleRepeatEndingStartInVoiceClone (
                   ", line " << inputLineNumber <<
                   std::endl;
               }
-#endif
+#endif // MF_TRACE_IS_ENABLED
             }
         } // switch
 
@@ -6859,7 +6859,7 @@ void msrVoice::handleRepeatEndingStartInVoiceClone (
       inputLineNumber,
       "handleRepeatEndingStartInVoiceClone() 2");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void msrVoice::handleSegmentCloneEndInVoiceClone (
@@ -6882,7 +6882,7 @@ void msrVoice::handleSegmentCloneEndInVoiceClone (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -6892,7 +6892,7 @@ void msrVoice::handleSegmentCloneEndInVoiceClone (
       inputLineNumber,
       "handleSegmentCloneEndInVoiceClone() 1");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (fVoicePendingMeasureRepeat) {
     // segmentClone belongs to a measures repeat
@@ -6999,7 +6999,7 @@ void msrVoice::handleSegmentCloneEndInVoiceClone (
       inputLineNumber,
       "handleSegmentCloneEndInVoiceClone() 3");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   --gIndenter;
 }
@@ -7016,7 +7016,7 @@ void msrVoice::finalizeRepeatEndInVoice (
       inputLineNumber,
       "finalizeRepeatEndInVoice() 1");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   switch (fVoiceKind) {
     case msrVoiceKind::kVoiceKindRegular:
@@ -7090,7 +7090,7 @@ void msrVoice::finalizeRepeatEndInVoice (
       inputLineNumber,
       "finalizeRepeatEndInVoice() 2");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 */
 
@@ -7112,7 +7112,7 @@ void msrVoice::createMeasureRepeatFromItsFirstMeasures (
       inputLineNumber,
       "createMeasureRepeatFromItsFirstMeasures() 1");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // this occurs after an empty measure has just been created,
   // hence the repeated measure/measures is/are the
@@ -7181,7 +7181,7 @@ void msrVoice::createMeasureRepeatFromItsFirstMeasures (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   for (int i = 0; i < measureRepeatMeasuresNumber; ++i) {
     S_msrMeasure
@@ -7230,7 +7230,7 @@ void msrVoice::createMeasureRepeatFromItsFirstMeasures (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   S_msrMeasureRepeatPattern
     measureRepeatPattern =
@@ -7264,7 +7264,7 @@ void msrVoice::createMeasureRepeatFromItsFirstMeasures (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   createNewLastSegmentFromItsFirstMeasureForVoice (
     inputLineNumber,
@@ -7280,7 +7280,7 @@ void msrVoice::createMeasureRepeatFromItsFirstMeasures (
       inputLineNumber,
       "createMeasureRepeatFromItsFirstMeasures() 3");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void msrVoice::appendMultipleFullBarRestsToVoice (
@@ -7304,7 +7304,7 @@ void msrVoice::appendMultipleFullBarRestsToVoice (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalTraceOahGroup->getTraceMultipleFullBarRestsDetails ()) {
@@ -7312,7 +7312,7 @@ void msrVoice::appendMultipleFullBarRestsToVoice (
       inputLineNumber,
       "appendMultipleFullBarRestsToVoice() 1");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // analyze this multiple full-bar rests's context
   switch (fVoicePendingRepeatDescrsStack.size ()) {
@@ -7354,7 +7354,7 @@ void msrVoice::appendMultipleFullBarRestsToVoice (
       inputLineNumber,
       "appendMultipleFullBarRestsToVoice() 3");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void msrVoice::appendMeasureRepeatToVoice (
@@ -7378,7 +7378,7 @@ void msrVoice::appendMeasureRepeatToVoice (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalTraceOahGroup->getTraceMeasureRepeatsDetails ()) {
@@ -7386,7 +7386,7 @@ void msrVoice::appendMeasureRepeatToVoice (
       inputLineNumber,
       "appendMeasureRepeatToVoice() 1");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // analyze this measure repeats's context
   switch (fVoicePendingRepeatDescrsStack.size ()) {
@@ -7418,7 +7418,7 @@ void msrVoice::appendMeasureRepeatToVoice (
       inputLineNumber,
       "appendMeasureRepeatToVoice() 3");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void msrVoice::appendPendingMeasureRepeatToVoice (
@@ -7437,7 +7437,7 @@ void msrVoice::appendPendingMeasureRepeatToVoice (
       inputLineNumber,
       "appendPendingMeasureRepeatToVoice() 1");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // does the current measures repeat exist?
   if (! fVoicePendingMeasureRepeat) {
@@ -7500,7 +7500,7 @@ void msrVoice::appendPendingMeasureRepeatToVoice (
     gLog << std::endl;
     --gIndenter;
 }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   voiceLastSegmentMeasureList.pop_back ();
 
@@ -7510,7 +7510,7 @@ void msrVoice::appendPendingMeasureRepeatToVoice (
       inputLineNumber,
       "appendPendingMeasureRepeatToVoice() 2");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // create the measures repeat replicas contents
 #ifdef MF_TRACE_IS_ENABLED
@@ -7526,7 +7526,7 @@ void msrVoice::appendPendingMeasureRepeatToVoice (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   S_msrMeasureRepeatReplicas
     measureRepeatReplicas =
@@ -7557,7 +7557,7 @@ void msrVoice::appendPendingMeasureRepeatToVoice (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fVoicePendingMeasureRepeat->
     setMeasureRepeatReplicas (
@@ -7576,7 +7576,7 @@ void msrVoice::appendPendingMeasureRepeatToVoice (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fVoicePendingMeasureRepeat->
     getMeasureRepeatReplicas ()->
@@ -7607,7 +7607,7 @@ void msrVoice::appendPendingMeasureRepeatToVoice (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   createNewLastSegmentFromItsFirstMeasureForVoice (
     inputLineNumber,
@@ -7627,7 +7627,7 @@ void msrVoice::appendPendingMeasureRepeatToVoice (
       inputLineNumber,
       "appendPendingMeasureRepeatToVoice() 4");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void msrVoice::createMeasureRepeatAndAppendItToVoiceClone (
@@ -7648,7 +7648,7 @@ void msrVoice::createMeasureRepeatAndAppendItToVoiceClone (
       inputLineNumber,
       "createMeasureRepeatAndAppendItToVoiceClone() 1");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   switch (fVoiceKind) {
     case msrVoiceKind::kVoiceKindRegular:
@@ -7686,7 +7686,7 @@ void msrVoice::createMeasureRepeatAndAppendItToVoiceClone (
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
         fVoicePendingMeasureRepeat =
           msrMeasureRepeat::create (
@@ -7711,7 +7711,7 @@ void msrVoice::createMeasureRepeatAndAppendItToVoiceClone (
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
         S_msrMeasureRepeatPattern
           measureRepeatPattern =
@@ -7742,7 +7742,7 @@ void msrVoice::createMeasureRepeatAndAppendItToVoiceClone (
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
         fVoicePendingMeasureRepeat->
           setMeasureRepeatPattern (
@@ -7763,7 +7763,7 @@ void msrVoice::createMeasureRepeatAndAppendItToVoiceClone (
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
         // append pending measures repeat to the voice
         appendMeasureRepeatToVoice (
@@ -7786,7 +7786,7 @@ void msrVoice::createMeasureRepeatAndAppendItToVoiceClone (
       inputLineNumber,
       "createMeasureRepeatAndAppendItToVoiceClone() 2");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void msrVoice::setVoiceContainsMultipleFullBarRests (
@@ -7808,7 +7808,7 @@ void msrVoice::setVoiceContainsMultipleFullBarRests (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fVoiceContainsMultipleFullBarRests = true;
 }
@@ -7832,7 +7832,7 @@ void msrVoice::setVoiceContainsMeasureRepeats (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fVoiceContainsMeasureRepeats = true;
 }
@@ -7860,7 +7860,7 @@ void msrVoice::appendMultipleFullBarRestsToVoice (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalTraceOahGroup->getTraceMultipleFullBarRestsDetails ()) {
@@ -7868,7 +7868,7 @@ void msrVoice::appendMultipleFullBarRestsToVoice (
       inputLineNumber,
       "appendMultipleFullBarRestsToVoice() 1");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   switch (fVoiceKind) {
     case msrVoiceKind::kVoiceKindRegular:
@@ -7928,7 +7928,7 @@ void msrVoice::appendMultipleFullBarRestsToVoice (
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         fVoiceCurrentMultipleFullBarRests =
           msrMultipleFullBarRests::create (
             inputLineNumber,
@@ -7952,7 +7952,7 @@ void msrVoice::appendMultipleFullBarRestsToVoice (
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         fVoiceLastSegment->
           appendMultipleFullBarRestsToSegment (
             fVoiceCurrentMultipleFullBarRests);
@@ -7979,7 +7979,7 @@ void msrVoice::appendMultipleFullBarRestsToVoice (
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         fVoiceMultipleFullBarRestsWaitingForItsNextMeasureNumber =
           fVoiceCurrentMultipleFullBarRests;
 
@@ -7998,7 +7998,7 @@ void msrVoice::appendMultipleFullBarRestsToVoice (
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         fVoiceRemainingMultipleFullBarRests =
           multipleFullBarRestsMeasuresNumber;
 
@@ -8012,7 +8012,7 @@ void msrVoice::appendMultipleFullBarRestsToVoice (
 //             ", line " << inputLineNumber <<
 //             std::endl;
 //         }
-// #endif
+// #endif // MF_TRACE_IS_ENABLED
 //
 //         createNewLastSegmentFromItsFirstMeasureForVoice (
 //           inputLineNumber,
@@ -8037,7 +8037,7 @@ void msrVoice::appendMultipleFullBarRestsToVoice (
       inputLineNumber,
       "appendMultipleFullBarRestsToVoice() 4");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void msrVoice::replicateLastAppendedMeasureInVoice (
@@ -8077,7 +8077,7 @@ void msrVoice::replicateLastAppendedMeasureInVoice (
         getVoiceName () <<
         "\"" <<
         std::endl;
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     // register its whole notes duration
     fetchVoiceUpLinkToPart ()->
@@ -8124,7 +8124,7 @@ void msrVoice::addEmptyMeasuresToVoice (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // get the empty measure whole notes duration
   // JMI maybe not OK if first measure such as after a repeat segment???
@@ -8152,7 +8152,7 @@ void msrVoice::addEmptyMeasuresToVoice (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   std::string measureNumber = std::to_string (i) + " (added)"; // JMI
 
@@ -8213,7 +8213,7 @@ void msrVoice::addEmptyMeasuresToVoice (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fVoiceLastSegment->
     appendMeasureToSegment (emptyMeasure);
@@ -8233,7 +8233,7 @@ void msrVoice::addEmptyMeasuresToVoice (
       inputLineNumber,
       "addEmptyMeasuresToVoice() 1");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 //   switch (fVoiceKind) {//
 //     case msrVoiceKind::kVoiceKindRegular:
@@ -8284,7 +8284,7 @@ void msrVoice::addEmptyMeasuresToVoice (
 //             fVoiceName << "\"" <<
 //             std::endl;
 //         }
-// #endif
+// #endif // MF_TRACE_IS_ENABLED
 //
 //         fVoiceMultipleFullBarRestsWaitingForItsNextMeasureNumber =
 //           fVoiceCurrentMultipleFullBarRests;
@@ -8301,7 +8301,7 @@ void msrVoice::addEmptyMeasuresToVoice (
 //             fVoiceName << "\"" <<
 //             std::endl;
 //         }
-// #endif
+// #endif // MF_TRACE_IS_ENABLED
 //
 //         // create a new segment to collect the multiple full-bar rests,
 //         // containing the first, rest measure
@@ -8313,7 +8313,7 @@ void msrVoice::addEmptyMeasuresToVoice (
 //             ", line " << inputLineNumber <<
 //             std::endl;
 //         }
-// #endif
+// #endif // MF_TRACE_IS_ENABLED
 //
 // /* JMI
 //         createNewLastSegmentFromItsFirstMeasureForVoice (
@@ -8340,7 +8340,7 @@ void msrVoice::addEmptyMeasuresToVoice (
       inputLineNumber,
       "addEmptyMeasuresToVoice() 4");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void msrVoice::appendPendingMultipleFullBarRestsToVoice (
@@ -8368,7 +8368,7 @@ void msrVoice::appendPendingMultipleFullBarRestsToVoice (
       inputLineNumber,
       "appendPendingMultipleFullBarRestsToVoice() 1");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   switch (fVoiceKind) {
     case msrVoiceKind::kVoiceKindRegular:
@@ -8407,7 +8407,7 @@ void msrVoice::appendPendingMultipleFullBarRestsToVoice (
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 //        fVoiceLastSegment->
           // KAKA
 
@@ -8436,7 +8436,7 @@ void msrVoice::appendPendingMultipleFullBarRestsToVoice (
       inputLineNumber,
       "appendPendingMultipleFullBarRestsToVoice() 2");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void msrVoice::handleMultipleFullBarRestsStartInVoiceClone (
@@ -8457,7 +8457,7 @@ void msrVoice::handleMultipleFullBarRestsStartInVoiceClone (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -8467,7 +8467,7 @@ void msrVoice::handleMultipleFullBarRestsStartInVoiceClone (
       inputLineNumber,
       "handleMultipleFullBarRestsStartInVoiceClone() 1");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   switch (fVoiceKind) {
     case msrVoiceKind::kVoiceKindRegular:
@@ -8504,7 +8504,7 @@ void msrVoice::handleMultipleFullBarRestsStartInVoiceClone (
 //               inputLineNumber,
 //               "handleMultipleFullBarRestsStartInVoiceClone() 3");
 //           }
-// #endif
+// #endif // MF_TRACE_IS_ENABLED
 //         }
 //       }
 
@@ -8544,7 +8544,7 @@ void msrVoice::handleMultipleFullBarRestsStartInVoiceClone (
       inputLineNumber,
       "handleMultipleFullBarRestsStartInVoiceClone() 4");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   --gIndenter;
 }
@@ -8566,7 +8566,7 @@ void msrVoice::handleMultipleFullBarRestsEndInVoiceClone (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -8576,7 +8576,7 @@ void msrVoice::handleMultipleFullBarRestsEndInVoiceClone (
       inputLineNumber,
       "handleMultipleFullBarRestsEndInVoiceClone() 1");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   switch (fVoiceKind) {
     case msrVoiceKind::kVoiceKindRegular:
@@ -8615,7 +8615,7 @@ void msrVoice::handleMultipleFullBarRestsEndInVoiceClone (
           inputLineNumber,
           "handleMultipleFullBarRestsEndInVoiceClone() 3");
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
     break;
   } // switch
 
@@ -8634,7 +8634,7 @@ void msrVoice::appendMultipleFullBarRestsCloneToVoiceClone (
     __FILE__, __LINE__,
     multipleFullBarRestsClone != nullptr,
     "multipleFullBarRestsClone is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   switch (fVoiceKind) {
     case msrVoiceKind::kVoiceKindRegular:
@@ -8660,7 +8660,7 @@ void msrVoice::appendMultipleFullBarRestsCloneToVoiceClone (
             inputLineNumber,
             "appendMultipleFullBarRestsCloneToVoiceClone() 1");
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
         // is multiple full-bar rests nested in a repeat?
         if (fVoicePendingRepeatDescrsStack.size ()) {
@@ -8705,7 +8705,7 @@ void msrVoice::appendMultipleFullBarRestsCloneToVoiceClone (
             inputLineNumber,
             "appendMultipleFullBarRestsCloneToVoiceClone() 3");
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
       }
       break;
   } // switch
@@ -8732,7 +8732,7 @@ void msrVoice::appendRepeatCloneToVoiceClone (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalTraceOahGroup->getTraceRepeatsDetails ()) {
@@ -8740,7 +8740,7 @@ void msrVoice::appendRepeatCloneToVoiceClone (
       inputLineNumber,
       "appendRepeatCloneToVoiceClone() 1");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -8750,7 +8750,7 @@ void msrVoice::appendRepeatCloneToVoiceClone (
     __FILE__, __LINE__,
     repeatCLone != nullptr,
     "repeatCLone is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   switch (fVoiceKind) {
     case msrVoiceKind::kVoiceKindRegular:
@@ -8773,7 +8773,7 @@ void msrVoice::appendRepeatCloneToVoiceClone (
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
         // push the repeat clone onto the voice's repeat descrs stack
         pushRepeatOntoRepeatDescrsStack (
@@ -8796,7 +8796,7 @@ void msrVoice::appendRepeatCloneToVoiceClone (
       inputLineNumber,
       "appendRepeatCloneToVoiceClone() 4");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   --gIndenter;
 }
@@ -8820,7 +8820,7 @@ void msrVoice::handleMeasureRepeatStartInVoiceClone (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -8830,7 +8830,7 @@ void msrVoice::handleMeasureRepeatStartInVoiceClone (
       inputLineNumber,
       "handleMeasureRepeatStartInVoiceClone() 1");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   switch (fVoiceKind) {
     case msrVoiceKind::kVoiceKindRegular:
@@ -8875,7 +8875,7 @@ void msrVoice::handleMeasureRepeatStartInVoiceClone (
           inputLineNumber,
           "handleMeasureRepeatStartInVoiceClone() 2");
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
       break;
   } // switch
 
@@ -8885,7 +8885,7 @@ void msrVoice::handleMeasureRepeatStartInVoiceClone (
       inputLineNumber,
       "handleMeasureRepeatStartInVoiceClone() 3");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   --gIndenter;
 }
@@ -8907,7 +8907,7 @@ void msrVoice::handleMeasureRepeatEndInVoiceClone (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -8917,7 +8917,7 @@ void msrVoice::handleMeasureRepeatEndInVoiceClone (
       inputLineNumber,
       "handleMeasureRepeatEndInVoiceClone() 1");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   switch (fVoiceKind) {
     case msrVoiceKind::kVoiceKindRegular:
@@ -8959,7 +8959,7 @@ void msrVoice::handleMeasureRepeatEndInVoiceClone (
       inputLineNumber,
       "handleMeasureRepeatEndInVoiceClone() 3");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   --gIndenter;
 }
@@ -8981,7 +8981,7 @@ void msrVoice::handleMeasureRepeatPatternStartInVoiceClone (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -8991,7 +8991,7 @@ void msrVoice::handleMeasureRepeatPatternStartInVoiceClone (
       inputLineNumber,
       "handleMeasureRepeatPatternStartInVoiceClone() 1");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (! fVoicePendingMeasureRepeat) {
     std::stringstream ss;
@@ -9025,7 +9025,7 @@ void msrVoice::handleMeasureRepeatPatternStartInVoiceClone (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   S_msrMeasureRepeatPattern
     measureRepeatPattern =
@@ -9044,7 +9044,7 @@ void msrVoice::handleMeasureRepeatPatternStartInVoiceClone (
       inputLineNumber,
       "handleMeasureRepeatPatternStartInVoiceClone() 2");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   --gIndenter;
 }
@@ -9066,7 +9066,7 @@ void msrVoice::handleMeasureRepeatPatternEndInVoiceClone (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -9076,7 +9076,7 @@ void msrVoice::handleMeasureRepeatPatternEndInVoiceClone (
       inputLineNumber,
       "handleMeasureRepeatPatternEndInVoiceClone() 1");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (! fVoicePendingMeasureRepeat) {
     std::stringstream ss;
@@ -9114,7 +9114,7 @@ void msrVoice::handleMeasureRepeatPatternEndInVoiceClone (
       inputLineNumber,
       "handleMeasureRepeatPatternEndInVoiceClone() 2");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   --gIndenter;
 }
@@ -9136,7 +9136,7 @@ void msrVoice::handleMeasureRepeatReplicasStartInVoiceClone (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -9146,7 +9146,7 @@ void msrVoice::handleMeasureRepeatReplicasStartInVoiceClone (
       inputLineNumber,
       "handleMeasureRepeatReplicasStartInVoiceClone() 1");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (! fVoicePendingMeasureRepeat) {
     std::stringstream ss;
@@ -9180,7 +9180,7 @@ void msrVoice::handleMeasureRepeatReplicasStartInVoiceClone (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   S_msrMeasureRepeatReplicas
     measureRepeatReplicas =
@@ -9199,7 +9199,7 @@ void msrVoice::handleMeasureRepeatReplicasStartInVoiceClone (
       inputLineNumber,
       "handleMeasureRepeatReplicasStartInVoiceClone() 2");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   --gIndenter;
 }
@@ -9221,7 +9221,7 @@ void msrVoice::handleMeasureRepeatReplicasEndInVoiceClone (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -9231,7 +9231,7 @@ void msrVoice::handleMeasureRepeatReplicasEndInVoiceClone (
       inputLineNumber,
       "handleMeasureRepeatReplicasEndInVoiceClone() 1");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (! fVoicePendingMeasureRepeat) {
     std::stringstream ss;
@@ -9269,7 +9269,7 @@ void msrVoice::handleMeasureRepeatReplicasEndInVoiceClone (
       inputLineNumber,
       "handleMeasureRepeatReplicasEndInVoiceClone() 2");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   --gIndenter;
 }
@@ -9286,7 +9286,7 @@ void msrVoice::appendMeasureRepeatCloneToVoiceClone (
     __FILE__, __LINE__,
     measureRepeatClone != nullptr,
     "measureRepeatClone is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   switch (fVoiceKind) { // superflous JMI ???
     case msrVoiceKind::kVoiceKindRegular:
@@ -9312,7 +9312,7 @@ void msrVoice::appendMeasureRepeatCloneToVoiceClone (
             inputLineNumber,
             "appendMeasureRepeatCloneToVoiceClone() 1");
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
         // is measures repeat nested in a repeat?
         if (fVoicePendingRepeatDescrsStack.size ()) {
@@ -9357,7 +9357,7 @@ void msrVoice::appendMeasureRepeatCloneToVoiceClone (
             inputLineNumber,
             "appendMeasureRepeatCloneToVoiceClone() 3");
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
       }
       break;
   } // switch
@@ -9383,7 +9383,7 @@ void msrVoice::handleHookedRepeatEndingEndInVoice (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalTraceOahGroup->getTraceRepeatsDetails ()) {
@@ -9391,7 +9391,7 @@ void msrVoice::handleHookedRepeatEndingEndInVoice (
       inputLineNumber,
       "handleHookedRepeatEndingEndInVoice() 1");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -9462,7 +9462,7 @@ void msrVoice::handleHookedRepeatEndingEndInVoice (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalTraceOahGroup->getTraceRepeats ()) {
@@ -9470,7 +9470,7 @@ void msrVoice::handleHookedRepeatEndingEndInVoice (
       inputLineNumber,
       "before adding a hooked repeat ending to current repeat");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   currentRepeat->
     addRepeatEndingToRepeat (
@@ -9483,7 +9483,7 @@ void msrVoice::handleHookedRepeatEndingEndInVoice (
       inputLineNumber,
       "handleHookedRepeatEndingEndInVoice() 3");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   --gIndenter;
 }
@@ -9501,7 +9501,7 @@ void msrVoice::handleHooklessRepeatEndingEndInVoice (
       getVoiceName () <<  "\"" <<
       ", line " << inputLineNumber <<
       std::endl;  }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalTraceOahGroup->getTraceRepeats ()) {
@@ -9509,7 +9509,7 @@ void msrVoice::handleHooklessRepeatEndingEndInVoice (
       inputLineNumber,
       "handleHooklessRepeatEndingEndInVoice() 1");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -9575,7 +9575,7 @@ void msrVoice::handleHooklessRepeatEndingEndInVoice (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalTraceOahGroup->getTraceRepeats ()) {
@@ -9583,7 +9583,7 @@ void msrVoice::handleHooklessRepeatEndingEndInVoice (
       inputLineNumber,
       "before adding a hookless repeat ending to current repeat");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   currentRepeat->
     addRepeatEndingToRepeat (
@@ -9596,7 +9596,7 @@ void msrVoice::handleHooklessRepeatEndingEndInVoice (
       inputLineNumber,
       "after adding a hookless repeat ending to current repeat");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // append currentRepeat to the list of initial elements
   appendRepeatCloneToInitialVoiceElements (
@@ -9621,7 +9621,7 @@ void msrVoice::handleHooklessRepeatEndingEndInVoice (
       inputLineNumber,
       "handleHooklessRepeatEndingEndInVoice() 5");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   --gIndenter;
 }
@@ -9661,7 +9661,7 @@ void msrVoice::handleRepeatEndingEndInVoice (
       inputLineNumber,
       "appendRepeatEndingToVoice() 0");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void msrVoice::handleRepeatCommonPartStartInVoiceClone (
@@ -9681,7 +9681,7 @@ void msrVoice::handleRepeatCommonPartStartInVoiceClone (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalTraceOahGroup->getTraceRepeats ()) {
@@ -9689,7 +9689,7 @@ void msrVoice::handleRepeatCommonPartStartInVoiceClone (
       inputLineNumber,
       "handleRepeatCommonPartStartInVoiceClone() 1");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -9731,7 +9731,7 @@ void msrVoice::handleRepeatCommonPartStartInVoiceClone (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   S_msrRepeatCommonPart
     repeatCommonPart =
@@ -9750,7 +9750,7 @@ void msrVoice::handleRepeatCommonPartStartInVoiceClone (
       inputLineNumber,
       "handleRepeatCommonPartStartInVoiceClone() 2");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   --gIndenter;
 }
@@ -9772,7 +9772,7 @@ void msrVoice::handleRepeatCommonPartEndInVoiceClone (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalTraceOahGroup->getTraceRepeats ()) {
@@ -9780,7 +9780,7 @@ void msrVoice::handleRepeatCommonPartEndInVoiceClone (
       inputLineNumber,
       "handleRepeatCommonPartEndInVoiceClone() 1");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -9834,7 +9834,7 @@ void msrVoice::handleRepeatCommonPartEndInVoiceClone (
       inputLineNumber,
       "handleRepeatCommonPartEndInVoiceClone() 3");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   --gIndenter;
 }
@@ -9857,7 +9857,7 @@ void msrVoice::handleHookedRepeatEndingEndInVoiceClone (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalTraceOahGroup->getTraceRepeats ()) {
@@ -9865,7 +9865,7 @@ void msrVoice::handleHookedRepeatEndingEndInVoiceClone (
       inputLineNumber,
       "handleHookedRepeatEndingEndInVoiceClone() 1");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -9930,7 +9930,7 @@ void msrVoice::handleHookedRepeatEndingEndInVoiceClone (
       inputLineNumber,
       "handleHookedRepeatEndingEndInVoiceClone() 3");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   --gIndenter;
 }
@@ -9953,7 +9953,7 @@ void msrVoice::handleHooklessRepeatEndingEndInVoiceClone (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalTraceOahGroup->getTraceRepeats ()) {
@@ -9961,7 +9961,7 @@ void msrVoice::handleHooklessRepeatEndingEndInVoiceClone (
       inputLineNumber,
       "handleHooklessRepeatEndingEndInVoiceClone() 1");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -10020,7 +10020,7 @@ void msrVoice::handleHooklessRepeatEndingEndInVoiceClone (
       inputLineNumber,
       "handleHooklessRepeatEndingEndInVoiceClone() 3");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   --gIndenter;
 }
@@ -10037,7 +10037,7 @@ void msrVoice::handleRepeatEndingEndInVoiceClone (
       inputLineNumber,
       "appendRepeatEndingToVoiceClone() 1");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   switch (fVoiceKind) {
     case msrVoiceKind::kVoiceKindRegular:
@@ -10068,7 +10068,7 @@ void msrVoice::handleRepeatEndingEndInVoiceClone (
       inputLineNumber,
       "appendRepeatEndingToVoiceClone() 2");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void msrVoice::handleRepeatStartInVoiceClone (
@@ -10090,7 +10090,7 @@ void msrVoice::handleRepeatStartInVoiceClone (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalTraceOahGroup->getTraceRepeats ()) {
@@ -10098,7 +10098,7 @@ void msrVoice::handleRepeatStartInVoiceClone (
       inputLineNumber,
       "handleRepeatStartInVoiceClone() 1");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -10133,7 +10133,7 @@ void msrVoice::handleRepeatStartInVoiceClone (
               inputLineNumber,
               "handleRepeatStartInVoiceClone() 3");
           }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         }
       }
 
@@ -10153,7 +10153,7 @@ void msrVoice::handleRepeatStartInVoiceClone (
           __FILE__, __LINE__,
           ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       S_msrRepeat
         repeatClone =
@@ -10168,7 +10168,7 @@ void msrVoice::handleRepeatStartInVoiceClone (
           inputLineNumber,
           "handleRepeatStartInVoiceClone() 5");
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
       break;
   } // switch
 
@@ -10193,7 +10193,7 @@ void msrVoice::handleRepeatEndInVoiceClone (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -10215,7 +10215,7 @@ void msrVoice::handleRepeatEndInVoiceClone (
             inputLineNumber,
             "handleRepeatEndInVoiceClone() 1");
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
         // is there a current repeat?
         switch (fVoicePendingRepeatDescrsStack.size ()) {
@@ -10306,7 +10306,7 @@ void msrVoice::handleRepeatEndInVoiceClone (
             inputLineNumber,
             "handleRepeatEndInVoiceClone() 6");
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
       }
       break;
   } // switch
@@ -10337,7 +10337,7 @@ void msrVoice::appendMeasureRepeatReplicaToVoice (
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
         // fetch last measure's full measure whole notes
         /* JMI
@@ -10360,7 +10360,7 @@ void msrVoice::appendMeasureRepeatReplicaToVoice (
             "***********" <<
             std::endl << std::endl;
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
         // sanity check
@@ -10368,7 +10368,7 @@ void msrVoice::appendMeasureRepeatReplicaToVoice (
           __FILE__, __LINE__,
           fVoicePendingMeasureRepeat != nullptr,
           "fVoicePendingMeasureRepeat is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
         // create a measures repeat replicas
         S_msrMeasureRepeatReplicas
@@ -10400,7 +10400,7 @@ void msrVoice::appendMeasureRepeatReplicaToVoice (
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
         fVoicePendingMeasureRepeat->
           setMeasureRepeatReplicas (
@@ -10423,7 +10423,7 @@ void msrVoice::appendMeasureRepeatReplicaToVoice (
 //       "\"" <<
 //       std::endl;
 //   }
-// #endif
+// #endif // MF_TRACE_IS_ENABLED
 //
 // #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
@@ -10431,7 +10431,7 @@ void msrVoice::appendMeasureRepeatReplicaToVoice (
 //     __FILE__, __LINE__,
 //     multipleFullBarRests != nullptr,
 //     "multipleFullBarRests is null");
-// #endif
+// #endif // MF_SANITY_CHECKS_ARE_ENABLED
 //
 // // KAKA  fVoiceInitialElementsList.push_back (multipleFullBarRests);
 // }
@@ -10455,7 +10455,7 @@ void msrVoice::appendMeasureRepeatToVoiceElementsList (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
@@ -10463,7 +10463,7 @@ void msrVoice::appendMeasureRepeatToVoiceElementsList (
     __FILE__, __LINE__,
     measureRepeat != nullptr,
     "measureRepeat is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 // KAKA  fVoiceInitialElementsList.push_back (measureRepeat);
 }
@@ -10474,7 +10474,7 @@ void msrVoice:: appendRepeatEndingCloneToVoice ( // JMI
 #ifdef MF_TRACE_IS_ENABLED
   int inputLineNumber =
     repeatEndingClone->getInputLineNumber (); // JMI
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -10502,7 +10502,7 @@ void msrVoice:: appendRepeatEndingCloneToVoice ( // JMI
             inputLineNumber,
             "appendRepeatEndingCloneToVoice() 1");
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
         // sanity check
@@ -10523,7 +10523,7 @@ void msrVoice:: appendRepeatEndingCloneToVoice ( // JMI
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
         S_msrRepeat
           currentRepeat =
@@ -10541,7 +10541,7 @@ void msrVoice:: appendRepeatEndingCloneToVoice ( // JMI
             inputLineNumber,
             "appendRepeatEndingCloneToVoice() 2");
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
       }
       break;
   } // switch
@@ -10567,7 +10567,7 @@ void msrVoice::prependBarLineToVoice (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -10595,7 +10595,7 @@ void msrVoice::appendBarLineToVoice (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -10626,7 +10626,7 @@ void msrVoice::appendSegnoToVoice (const S_msrSegno& segno)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // create the voice last segment if needed
   if (! fVoiceLastSegment) {
@@ -10654,7 +10654,7 @@ void msrVoice::appendCodaToVoice (const S_msrCoda& coda)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // create the voice last segment if needed
   if (! fVoiceLastSegment) {
@@ -10682,7 +10682,7 @@ void msrVoice::appendEyeGlassesToVoice (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // create the voice last segment if needed
   if (! fVoiceLastSegment) {
@@ -10709,7 +10709,7 @@ void msrVoice::appendPedalToVoice (const S_msrPedal& pedal)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // create the voice last segment if needed
   if (! fVoiceLastSegment) {
@@ -10737,7 +10737,7 @@ void msrVoice::appendDampToVoice (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // create the voice last segment if needed
   if (! fVoiceLastSegment) {
@@ -10765,7 +10765,7 @@ void msrVoice::appendDampAllToVoice (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // create the voice last segment if needed
   if (! fVoiceLastSegment) {
@@ -10795,7 +10795,7 @@ S_msrElement msrVoice::removeLastElementFromVoice (  // JMI
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   return
     fVoiceLastSegment->
@@ -10821,7 +10821,7 @@ void msrVoice::removeNoteFromVoice (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -10860,7 +10860,7 @@ void msrVoice::removeElementFromVoice (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -10889,7 +10889,7 @@ S_msrMeasure msrVoice::removeLastMeasureFromVoice (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -10927,7 +10927,7 @@ void msrVoice::finalizeLastAppendedMeasureInVoice (
       inputLineNumber,
       "finalizeLastAppendedMeasureInVoice() 1");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -10937,7 +10937,7 @@ void msrVoice::finalizeLastAppendedMeasureInVoice (
     __FILE__, __LINE__,
     fVoiceLastAppendedMeasure != nullptr,
     "fVoiceLastAppendedMeasure is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // finalize fVoiceLastAppendedMeasure
   msrMeasureRepeatContextKind
@@ -10998,7 +10998,7 @@ void msrVoice::finalizeLastAppendedMeasureInVoice (
       inputLineNumber,
       "finalizeLastAppendedMeasureInVoice() 3");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   --gIndenter;
 }
@@ -11023,7 +11023,7 @@ void msrVoice:: collectVoiceMeasuresIntoFlatList (
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
   }
 
   // collect measures from the last segment if any
@@ -11043,7 +11043,7 @@ void msrVoice:: collectVoiceMeasuresIntoFlatList (
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     std::list<S_msrMeasure>
       lastSegmentMeasuresFlatList =
@@ -11077,7 +11077,7 @@ void msrVoice::finalizeVoice (
       inputLineNumber,
       "finalizeVoice() 1");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (fVoiceHasBeenFinalized) {
     std::stringstream ss;
@@ -11120,7 +11120,7 @@ void msrVoice::finalizeVoice (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (fVoiceShortestNoteDuration < partShortestNoteDuration) {
     // set the voice part shortest note duration
@@ -11167,7 +11167,7 @@ void msrVoice::finalizeVoice (
           inputLineNumber,
           "finalizeVoice() 2");
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     std::stringstream ss;
 
@@ -11201,7 +11201,7 @@ void msrVoice::finalizeVoice (
       inputLineNumber,
       "finalizeVoice() 3");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 //
   // finalize the harmonies voice if any
@@ -11237,7 +11237,7 @@ void msrVoice::finalizeVoiceAndAllItsMeasures (
       inputLineNumber,
       "finalizeVoice() 1");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (fVoiceHasBeenFinalized) {
     std::stringstream ss;
@@ -11280,7 +11280,7 @@ void msrVoice::finalizeVoiceAndAllItsMeasures (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (fVoiceShortestNoteDuration < partShortestNoteDuration) {
     // set the voice part shortest note duration
@@ -11325,7 +11325,7 @@ void msrVoice::finalizeVoiceAndAllItsMeasures (
           inputLineNumber,
           "finalizeVoice() 2");
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     std::stringstream ss;
 
@@ -11359,7 +11359,7 @@ void msrVoice::finalizeVoiceAndAllItsMeasures (
       inputLineNumber,
       "finalizeVoice() 3");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 // JMI
   // finalize the harmonies voice if any
@@ -11391,7 +11391,7 @@ void msrVoice::finalizeVoiceAndAllItsMeasures (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   for (S_msrMeasure measure : fVoiceMeasuresFlatList) {
     measure->
@@ -11424,7 +11424,7 @@ void msrVoice::checkBeamNumber (S_msrBeam beam, S_msrNote note)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   msrBeamKind beamKind   = beam->getBeamKind ();
   int         beamNumber = beam->getBeamNumber ();
@@ -11579,7 +11579,7 @@ void msrVoice::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrVoice>*
     p =
@@ -11598,7 +11598,7 @@ void msrVoice::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -11617,7 +11617,7 @@ void msrVoice::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrVoice>*
     p =
@@ -11636,7 +11636,7 @@ void msrVoice::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -11655,7 +11655,7 @@ void msrVoice::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // browse the voice initial elements
   if (fVoiceInitialElementsList.size ()) {
@@ -11701,7 +11701,7 @@ void msrVoice::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 std::string msrVoice::voiceNumberAsString () const
@@ -11938,7 +11938,7 @@ void msrVoice::printFull (std::ostream& os) const
   else {
     os << "[NONE]" << std::endl;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 // JMI
   // print the regular voice harmonies voice name if any
@@ -12242,7 +12242,7 @@ void msrVoice::print (std::ostream& os) const
 
 #ifdef MF_TRACE_IS_ENABLED
   displayVoiceMeasuresFlatList (fieldWidth);
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // print the voice initial elements
   size_t voiceInitialElementsListSize =
@@ -12287,7 +12287,7 @@ void msrVoice::print (std::ostream& os) const
     __FILE__, __LINE__,
     fVoiceLastSegment != nullptr,
     "fVoiceLastSegment is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 */
 
   // print the last segment

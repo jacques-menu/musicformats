@@ -23,4 +23,4 @@ void initializeBSR ();
 }
 
 
-#endif
+#endif // ___bsrInitialization___

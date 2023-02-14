@@ -12,6 +12,8 @@
 #ifndef ___msdlScanner___
 #define ___msdlScanner___
 
+#include "mfStaticSettings.h"
+
 #include "smartpointer.h"
 
 #include "msdlKeywords.h"
@@ -130,7 +132,7 @@ class   msdlScanner : public smartable
 #ifdef MF_TRACE_IS_ENABLED
     Bool                  fTraceTokens;
     Bool                  fTraceTokensDetails;
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     // user language
     msdlUserLanguageKind  fUserLanguageKind;
@@ -201,4 +203,4 @@ EXP std::ostream& operator << (std::ostream& os, const msdlScanner& elt);
 }
 
 
-#endif
+#endif // ___msdlScanner___

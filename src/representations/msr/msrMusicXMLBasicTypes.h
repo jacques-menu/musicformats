@@ -1138,4 +1138,4 @@ EXP std::ostream& operator << (std::ostream& os, const S_msrAppearance& elt);
 }
 
 
-#endif
+#endif // ___msrMusicXMLBasicLayouts___

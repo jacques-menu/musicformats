@@ -276,7 +276,7 @@ char* mfCharStarCat (
       __FILE__, __LINE__,
       false,
       ss.str ());
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
   }
 
   return
@@ -1266,7 +1266,7 @@ void mfSplitStringIntoChunks (
   gLog <<
     "---> splitting |" << theString << "|" <<
     std::endl << std::endl;
-#endif
+#endif // DEBUG_SPLITTING
 
   size_t theStringSize = theString.size ();
 
@@ -1274,7 +1274,7 @@ void mfSplitStringIntoChunks (
 
 #ifdef DEBUG_SPLITTING
   std::string remainder = theString;
-#endif
+#endif // DEBUG_SPLITTING
 
   size_t theSeparatorSize = theSeparator.size ();
 
@@ -1311,7 +1311,7 @@ void mfSplitStringIntoChunks (
         std::endl <<
         "chunk = \"" << chunk << "\"" <<
         std::endl << std::endl;
-#endif
+#endif // DEBUG_SPLITTING
 
       break;
     }
@@ -1357,7 +1357,7 @@ void mfSplitStringIntoChunks (
         std::endl <<
         "chunk = \"" << chunk << "\"" <<
         std::endl << std::endl;
-#endif
+#endif // DEBUG_SPLITTING
     }
   } // while
 }
@@ -1371,7 +1371,7 @@ void mfSplitRegularStringAtEndOfLines (
   gLog <<
     "---> splitting |" << theString << "|" <<
     std::endl << std::endl;
-#endif
+#endif // DEBUG_SPLITTING
 
   mfSplitStringIntoChunks (
     theString,
@@ -1385,7 +1385,7 @@ void mfSplitRegularStringAtEndOfLines (
 
 #ifdef DEBUG_SPLITTING
   std::string remainder = theString;
-#endif
+#endif // DEBUG_SPLITTING
 
   std::string lookedFor     = "\n";
   size_t    lookedForSize = lookedFor.size ();
@@ -1423,7 +1423,7 @@ void mfSplitRegularStringAtEndOfLines (
         std::endl <<
         "chunk = \"" << chunk << "\"" <<
         std::endl << std::endl;
-#endif
+#endif // DEBUG_SPLITTING
 
       break;
     }
@@ -1469,7 +1469,7 @@ void mfSplitRegularStringAtEndOfLines (
         std::endl <<
         "chunk = \"" << chunk << "\"" <<
         std::endl << std::endl;
-#endif
+#endif // DEBUG_SPLITTING
     }
   } // while
   */
@@ -1484,7 +1484,7 @@ void mfSplitHTMLStringContainingEndOfLines (
   gLog <<
     "---> splitting |" << theString << "|" <<
     std::endl << std::endl;
-#endif
+#endif // DEBUG_SPLITTING
 
   size_t theStringSize = theString.size ();
 
@@ -1500,7 +1500,7 @@ void mfSplitHTMLStringContainingEndOfLines (
 
 #ifdef DEBUG_SPLITTING
   std::string remainder = theString;
-#endif
+#endif // DEBUG_SPLITTING
 
 // JMI  std::string lookedFor     = "&#xd;";
   std::string       lookedFor     = "\n";
@@ -1548,7 +1548,7 @@ void mfSplitHTMLStringContainingEndOfLines (
         std::endl <<
         "chunk = \"" << chunk << "\"" <<
         std::endl << std::endl;
-#endif
+#endif // DEBUG_SPLITTING
 
       break;
     }
@@ -1594,7 +1594,7 @@ void mfSplitHTMLStringContainingEndOfLines (
         std::endl <<
         "chunk = \"" << chunk << "\"" <<
         std::endl << std::endl;
-#endif
+#endif // DEBUG_SPLITTING
     }
   } // while
 }

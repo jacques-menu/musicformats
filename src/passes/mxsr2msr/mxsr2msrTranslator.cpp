@@ -504,7 +504,7 @@ S_msrStaff mxsr2msrTranslator::fetchStaffFromCurrentPart (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
@@ -514,7 +514,7 @@ S_msrStaff mxsr2msrTranslator::fetchStaffFromCurrentPart (
     gServiceRunData->getInputSourceName (),
     inputLineNumber,
     "staffNumber == msrStaff::K_STAFF_NUMBER_UNKNOWN");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // fetch the staff from current part
   S_msrStaff
@@ -538,7 +538,7 @@ S_msrStaff mxsr2msrTranslator::fetchStaffFromCurrentPart (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalTraceOahGroup->getTraceStaves ()) {
@@ -553,7 +553,7 @@ S_msrStaff mxsr2msrTranslator::fetchStaffFromCurrentPart (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   return staff;
 }
@@ -581,7 +581,7 @@ S_msrVoice mxsr2msrTranslator::fetchVoiceFromCurrentPart (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // the voice number is relative to a part,
 
@@ -615,7 +615,7 @@ S_msrVoice mxsr2msrTranslator::fetchVoiceFromCurrentPart (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
     std::stringstream ss;
 
@@ -631,7 +631,7 @@ S_msrVoice mxsr2msrTranslator::fetchVoiceFromCurrentPart (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     /* JMI
   // fetch registered voice displaying staff number
@@ -652,7 +652,7 @@ S_msrVoice mxsr2msrTranslator::fetchVoiceFromCurrentPart (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   return voice;
 }
@@ -678,7 +678,7 @@ S_msrVoice mxsr2msrTranslator::fetchFirstVoiceFromCurrentPart (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // fetch the staff from current part
   S_msrStaff
@@ -712,7 +712,7 @@ S_msrVoice mxsr2msrTranslator::fetchFirstVoiceFromCurrentPart (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
     /* JMI
   // fetch registered voice displaying staff number
@@ -733,7 +733,7 @@ S_msrVoice mxsr2msrTranslator::fetchFirstVoiceFromCurrentPart (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   return voice;
 }
@@ -754,7 +754,7 @@ void mxsr2msrTranslator::visitStart (S_millimeters& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fCurrentMillimeters = (float)(*elt);
 }
@@ -774,7 +774,7 @@ void mxsr2msrTranslator::visitStart (S_tenths& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fCurrentTenths = (float)(*elt);
 }
@@ -797,7 +797,7 @@ void mxsr2msrTranslator::visitEnd (S_scaling& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // create a scaling
   S_msrScaling
@@ -820,7 +820,7 @@ void mxsr2msrTranslator::visitEnd (S_scaling& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // set the MSR score's scaling
   fMsrScore->
@@ -846,7 +846,7 @@ void mxsr2msrTranslator::visitStart (S_system_layout& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // create the system layout
   fCurrentSystemLayout =
@@ -874,7 +874,7 @@ void mxsr2msrTranslator::visitEnd (S_system_layout& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (fOnGoingPrint) {
     // set the current print layout's system layout
@@ -914,7 +914,7 @@ void mxsr2msrTranslator::visitStart (S_system_margins& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (! fOnGoingSystemLayout) {
     mxsr2msrError (
@@ -942,7 +942,7 @@ void mxsr2msrTranslator::visitStart (S_system_distance& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (fOnGoingSystemLayout) {
     float systemDistanceTenths = (float)(*elt);
@@ -981,7 +981,7 @@ void mxsr2msrTranslator::visitStart (S_top_system_distance& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (fOnGoingSystemLayout) {
     float topSystemDistanceTenths = (float)(*elt);
@@ -1020,7 +1020,7 @@ void mxsr2msrTranslator::visitEnd (S_system_margins& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (! fOnGoingSystemLayout) {
     mxsr2msrError (
@@ -1049,7 +1049,7 @@ void mxsr2msrTranslator::visitStart (S_system_dividers& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     std::stringstream ss;
 
@@ -1083,7 +1083,7 @@ void mxsr2msrTranslator::visitStart (S_left_divider& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // print-object
 
@@ -1115,7 +1115,7 @@ void mxsr2msrTranslator::visitStart (S_right_divider& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // print-object
 
@@ -1148,7 +1148,7 @@ void mxsr2msrTranslator::visitStart (S_notations& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // JMI
 }
@@ -1171,7 +1171,7 @@ void mxsr2msrTranslator::visitStart (S_other_notation& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // JMI
 }
@@ -1195,7 +1195,7 @@ void mxsr2msrTranslator::visitStart (S_page_layout& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // create a page layout
   fCurrentPageLayout =
@@ -1220,7 +1220,7 @@ void mxsr2msrTranslator::visitEnd (S_page_layout& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (fOnGoingPrint) {
     // JMI
@@ -1249,7 +1249,7 @@ void mxsr2msrTranslator::visitStart (S_page_height& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (fOnGoingPageLayout) {
     float pageHeight = (float)(*elt);
@@ -1284,7 +1284,7 @@ void mxsr2msrTranslator::visitStart (S_page_width& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (fOnGoingPageLayout) {
     float pageWidth = (float)(*elt);
@@ -1322,7 +1322,7 @@ void mxsr2msrTranslator::visitStart (S_page_margins& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (fOnGoingPageLayout) {
     std::string pageMarginsType =
@@ -1404,7 +1404,7 @@ void mxsr2msrTranslator::visitEnd (S_page_margins& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // forget about the current page layout margins group
   fCurrentPageLayoutMarginsGroup = nullptr;
@@ -1433,7 +1433,7 @@ void mxsr2msrTranslator::visitStart (S_left_margin& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   msrLength
     leftMarginLength (
@@ -1485,7 +1485,7 @@ void mxsr2msrTranslator::visitStart (S_right_margin& elt)
        ", line " << inputLineNumber <<
      std::endl;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   msrLength
     rightMarginLength (
@@ -1541,7 +1541,7 @@ void mxsr2msrTranslator::visitStart (S_top_margin& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (fOnGoingPageMargins) {
     fCurrentPageLayoutMarginsGroup->
@@ -1584,7 +1584,7 @@ void mxsr2msrTranslator::visitStart (S_bottom_margin& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (fOnGoingPageMargins) {
     fCurrentPageLayoutMarginsGroup->
@@ -1625,7 +1625,7 @@ void mxsr2msrTranslator::visitStart (S_staff_layout& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 /*
 From DalSegno.xml: JMI there is no <staff-distance /> ...
@@ -1678,7 +1678,7 @@ void mxsr2msrTranslator::visitEnd (S_staff_layout& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // forget about the current staff layout
   fCurrentStaffLayout = nullptr;
@@ -1704,7 +1704,7 @@ void mxsr2msrTranslator::visitStart (S_staff_distance& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (fOnGoingStaffLayout) {
     float staffDistanceTenths = (float)(*elt);
@@ -1744,7 +1744,7 @@ void mxsr2msrTranslator::visitStart (S_measure_layout& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // create a measure layout
   fCurrentMeasureLayout =
@@ -1772,7 +1772,7 @@ void mxsr2msrTranslator::visitEnd (S_measure_layout& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // forget about the current measure layout
   fCurrentMeasureLayout = nullptr;
@@ -1798,7 +1798,7 @@ void mxsr2msrTranslator::visitStart (S_measure_distance& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (fOnGoingMeasureLayout) {
     float measureDistanceTenths = (float)(*elt);
@@ -1838,7 +1838,7 @@ void mxsr2msrTranslator::visitStart (S_appearance& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 /*
 <!--
@@ -1961,7 +1961,7 @@ void mxsr2msrTranslator::visitEnd (S_appearance& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // forget about the current appearance
   fCurrentAppearance = nullptr;
@@ -1987,7 +1987,7 @@ void mxsr2msrTranslator::visitStart (S_line_width& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (fOnGoingAppearance) {
     // value
@@ -2112,7 +2112,7 @@ void mxsr2msrTranslator::visitStart (S_note_size& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (fOnGoingAppearance) {
     // value
@@ -2203,7 +2203,7 @@ void mxsr2msrTranslator::visitStart (S_distance& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (fOnGoingAppearance) {
     // value
@@ -2293,7 +2293,7 @@ void mxsr2msrTranslator::visitStart (S_glyph& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (fOnGoingAppearance) {
     // value
@@ -2405,7 +2405,7 @@ void mxsr2msrTranslator::visitStart (S_other_appearance& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (fOnGoingAppearance) {
     // what can we find in such a markup??? JMI
@@ -2440,7 +2440,7 @@ void mxsr2msrTranslator::visitStart (S_part& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   std::string partID = elt->getAttributeValue ("id");
 
@@ -2462,7 +2462,7 @@ void mxsr2msrTranslator::visitStart (S_part& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // fetch current part from its partID
   fCurrentPart =
@@ -2519,7 +2519,7 @@ void mxsr2msrTranslator::visitStart (S_part& elt)
         ss.str ());
     }
   }
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // print-object
 
@@ -2549,7 +2549,7 @@ void mxsr2msrTranslator::visitStart (S_part& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // no time has been defined yet
   fCurrentTimeSignature = nullptr;
@@ -2606,7 +2606,7 @@ void mxsr2msrTranslator::visitEnd (S_part& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   --gIndenter;
 
@@ -2628,7 +2628,7 @@ void mxsr2msrTranslator::visitEnd (S_part& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 */
 
   // fetch current note's voice
@@ -2645,7 +2645,7 @@ void mxsr2msrTranslator::visitEnd (S_part& elt)
     __FILE__, __LINE__,
     currentNoteVoice != nullptr,
     "currentNoteVoice is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // the elements pending since before the note if any
   // can now be appended to the latter's voice
@@ -2758,7 +2758,7 @@ void mxsr2msrTranslator::visitStart (S_attributes& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void mxsr2msrTranslator::visitEnd (S_attributes& elt)
@@ -2779,7 +2779,7 @@ void mxsr2msrTranslator::visitEnd (S_attributes& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // have the divisions been defined alright?
   if (! fCurrentDivisions) {
@@ -2833,7 +2833,7 @@ void mxsr2msrTranslator::visitStart (S_divisions& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fCurrentDivisionsPerQuarterNote = (int)(*elt);
 
@@ -2875,7 +2875,7 @@ void mxsr2msrTranslator::visitStart (S_divisions& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // create current divisions
   fCurrentDivisions =
@@ -2903,7 +2903,7 @@ void mxsr2msrTranslator::visitStart (S_clef& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // https://usermanuals.musicxml.com/MusicXML/Content/EL-MusicXML-clef.htm
 
@@ -2944,7 +2944,7 @@ void mxsr2msrTranslator::visitStart (S_sign& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fCurrentClefSign = elt->getValue();
 }
@@ -2964,7 +2964,7 @@ void mxsr2msrTranslator::visitStart (S_line& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fCurrentClefLine = (int)(*elt);
 }
@@ -2987,7 +2987,7 @@ void mxsr2msrTranslator::visitStart (S_clef_octave_change& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fCurrentClefOctaveChange = (int)(*elt);
 
@@ -3024,7 +3024,7 @@ void mxsr2msrTranslator::visitEnd (S_clef& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // convert clef to upper case for analysis
   std::string currentClefSignToUpperCase =
@@ -3269,7 +3269,7 @@ void mxsr2msrTranslator::visitEnd (S_clef& elt)
 				__FILE__, __LINE__,
 				ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     clefKind = newClefKind;
   }
@@ -3318,7 +3318,7 @@ void mxsr2msrTranslator::visitStart (S_key& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // The optional number attribute refers to staff numbers.
   // If absent (0), apply to all part staves.
@@ -3365,7 +3365,7 @@ void mxsr2msrTranslator::visitStart (S_cancel& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fCurrentKeyCancelFifths = (int)(*elt);
 }
@@ -3385,7 +3385,7 @@ void mxsr2msrTranslator::visitStart (S_fifths& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fCurrentKeyKind = msrKeyKind::kKeyTraditional;
 
@@ -3410,7 +3410,7 @@ void mxsr2msrTranslator::visitStart (S_mode& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   std::string mode = elt->getValue();
 
@@ -3476,7 +3476,7 @@ void mxsr2msrTranslator::visitStart (S_key_step& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (fCurrentHumdrumScotKeyItem) {
     mxsr2msrError (
@@ -3535,7 +3535,7 @@ void mxsr2msrTranslator::visitStart (S_key_alter& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (! fCurrentHumdrumScotKeyItem) {
     mxsr2msrError (
@@ -3594,7 +3594,7 @@ void mxsr2msrTranslator::visitStart (S_key_octave& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   int keyOctaveNumber = (int)(*elt);
 
@@ -3689,7 +3689,7 @@ void mxsr2msrTranslator::visitEnd (S_key& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // handle key
   S_msrKey key;
@@ -3895,7 +3895,7 @@ void mxsr2msrTranslator::visitStart (S_time& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fCurrentTimeStaffNumber =
     elt->getAttributeIntValue ("number", 0);
@@ -3957,7 +3957,7 @@ void mxsr2msrTranslator::visitStart (S_beats& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fCurrentTimeSignatureBeats = elt->getValue (); // can be a string such as 3+2
 }
@@ -3980,7 +3980,7 @@ void mxsr2msrTranslator::visitStart (S_beat_type& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   int beatType = (int)(*elt);
 
@@ -4043,7 +4043,7 @@ void mxsr2msrTranslator::visitStart (S_senza_misura& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fCurrentTimeSignatureSymbolKind = msrTimeSignatureSymbolKind::kTimeSignatureSymbolSenzaMisura;
 }
@@ -4066,7 +4066,7 @@ void mxsr2msrTranslator::visitStart (S_interchangeable& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   std::string interchangeableSymbol =
     elt->getAttributeValue ("symbol");
@@ -4163,7 +4163,7 @@ void mxsr2msrTranslator::visitStart (S_time_relation& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   std::string timeSignatureRelation = elt->getValue ();
 
@@ -4229,7 +4229,7 @@ void mxsr2msrTranslator::visitEnd (S_time& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // create the time
   fCurrentTimeSignature =
@@ -4306,7 +4306,7 @@ void mxsr2msrTranslator::visitStart (S_score_instrument& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 /*
 <!--
@@ -4372,7 +4372,7 @@ void mxsr2msrTranslator::visitStart (S_instrument_name& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 /*
         <instruments>2</instruments>
@@ -4396,7 +4396,7 @@ void mxsr2msrTranslator::visitStart (S_solo& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 /*
         <instruments>2</instruments>
@@ -4420,7 +4420,7 @@ void mxsr2msrTranslator::visitStart (S_instruments& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 /*
 <!--
@@ -4482,7 +4482,7 @@ void mxsr2msrTranslator::visitStart (S_transpose& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fCurrentTransposeNumber = elt->getAttributeIntValue ("number", 0);
 
@@ -4507,7 +4507,7 @@ void mxsr2msrTranslator::visitStart (S_diatonic& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fCurrentTransposeDiatonic = (int)(*elt);
 }
@@ -4527,7 +4527,7 @@ void mxsr2msrTranslator::visitStart (S_chromatic& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fCurrentTransposeChromatic = (int)(*elt);
 }
@@ -4547,7 +4547,7 @@ void mxsr2msrTranslator::visitStart (S_octave_change& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fCurrentTransposeOctaveChange = (int)(*elt);
 }
@@ -4567,7 +4567,7 @@ void mxsr2msrTranslator::visitStart (S_double& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   /*
     If the double element is present,
@@ -4597,7 +4597,7 @@ void mxsr2msrTranslator::visitEnd (S_transpose& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // bring the transpose chromatic value in the -11..+11 interval
   if (fCurrentTransposeChromatic < -11) {
@@ -4701,7 +4701,7 @@ void mxsr2msrTranslator::visitStart (S_direction& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // placement
 
@@ -4739,7 +4739,7 @@ void mxsr2msrTranslator::visitEnd (S_direction& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (fCurrentMetronomeTempo) {
     size_t pendingWordsSize = fPendingWordsList.size ();
@@ -4765,7 +4765,7 @@ void mxsr2msrTranslator::visitEnd (S_direction& elt)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
         fCurrentMetronomeTempo->
           appendWordsToTempo (words);
@@ -4815,7 +4815,7 @@ void mxsr2msrTranslator::visitStart (S_direction_type& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (! fOnGoingDirection) {
     mxsr2msrError (
@@ -4843,7 +4843,7 @@ void mxsr2msrTranslator::visitEnd (S_direction_type& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fOnGoingDirectionType = false;
 }
@@ -4867,7 +4867,7 @@ void mxsr2msrTranslator::visitStart (S_offset& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   int offsetValue = (int)(*elt);
 
@@ -4929,7 +4929,7 @@ void mxsr2msrTranslator::visitStart (S_offset& elt)
 				__FILE__, __LINE__,
 				ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     fCurrentHarmonyWholeNotesOffset =
       offsetWholeNotesFromDuration;
@@ -4955,7 +4955,7 @@ void mxsr2msrTranslator::visitStart (S_other_direction& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // print-object
 
@@ -4988,7 +4988,7 @@ void mxsr2msrTranslator::visitStart (S_sound& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (fOnGoingDirection) {
     // tempo
@@ -5034,7 +5034,7 @@ void mxsr2msrTranslator::visitEnd (S_sound& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -5056,7 +5056,7 @@ void mxsr2msrTranslator::visitStart (S_octave_shift& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // size
 
@@ -5161,7 +5161,7 @@ void mxsr2msrTranslator::visitStart (S_octave_shift& elt)
 				__FILE__, __LINE__,
 				ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // append the octave shift to the pending octave shifts list
   fPendingOctaveShiftsList.push_back (octaveShift);
@@ -5186,7 +5186,7 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   std::string wordsValue = elt->getValue ();
 
@@ -5421,7 +5421,7 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
 				__FILE__, __LINE__,
 				ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       fPendingTemposList.push_back (tempo);
 
@@ -5464,7 +5464,7 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
 				__FILE__, __LINE__,
 				ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       // append the rehearsalMark to the pending tempos list
       fPendingRehearsalMarksList.push_back (rehearsalMark);
@@ -5505,7 +5505,7 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
 				__FILE__, __LINE__,
 				ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       // append dal segno to the pending tempos list
       fPendingSegnosList.push_back (segno);
@@ -5546,7 +5546,7 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
 					__FILE__, __LINE__,
 					ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       fPendingDalSegnosList.push_back (dalSegno);
 
@@ -5590,7 +5590,7 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
 					__FILE__, __LINE__,
 					ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       fPendingDalSegnosList.push_back (dalSegno);
 
@@ -5630,7 +5630,7 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
 					__FILE__, __LINE__,
 					ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       fPendingDalSegnosList.push_back (dalSegno);
 
@@ -5673,7 +5673,7 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
 					__FILE__, __LINE__,
 					ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       // append it to the pending codas list
       fPendingCodasList.push_back (coda);
@@ -5717,7 +5717,7 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
 					__FILE__, __LINE__,
 					ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       // append it to the pending codas list
       fPendingCodasList.push_back (coda);
@@ -5750,7 +5750,7 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
 					__FILE__, __LINE__,
 					ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 //       convertWordsToCresc (
 //         inputLineNumber,
@@ -5769,7 +5769,7 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
 					__FILE__, __LINE__,
 					ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       S_msrCrescDecresc
         crescDecresc =
@@ -5808,7 +5808,7 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
 					__FILE__, __LINE__,
 					ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 //       convertWordsToDecresc (
 //         inputLineNumber,
@@ -5827,7 +5827,7 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
 					__FILE__, __LINE__,
 					ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       S_msrCrescDecresc
         crescDecresc =
@@ -5861,7 +5861,7 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
 					__FILE__, __LINE__,
 					ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       // should we convert wordsValue to bold?
       if (gGlobalMxsr2msrOahGroup->wordsIsToBeConvertedToBold (wordsValue)) {
@@ -5918,7 +5918,7 @@ void mxsr2msrTranslator::visitStart (S_accordion_registration& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 /*
       <direction>
@@ -5954,7 +5954,7 @@ void mxsr2msrTranslator::visitStart (S_accordion_high& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fCurrentAccordionHigh = 1;
 
@@ -5975,7 +5975,7 @@ void mxsr2msrTranslator::visitStart (S_accordion_middle& elt)
        ", line " << inputLineNumber <<
      std::endl;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fCurrentAccordionMiddle = (int)(*elt);
 
@@ -6013,7 +6013,7 @@ void mxsr2msrTranslator::visitStart (S_accordion_low& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fCurrentAccordionLow = 1;
 
@@ -6038,7 +6038,7 @@ void mxsr2msrTranslator::visitEnd (S_accordion_registration& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // An accordion-registration element needs to have
   // at least one of the child elements present
@@ -6086,7 +6086,7 @@ void mxsr2msrTranslator::visitStart (S_metronome& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   std::string parentheses = elt->getAttributeValue ("parentheses");
 
@@ -6166,7 +6166,7 @@ void mxsr2msrTranslator::visitStart (S_beat_unit& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   std::string beatUnitString = elt->getValue();
 
@@ -6217,7 +6217,7 @@ void mxsr2msrTranslator::visitStart (S_beat_unit_dot& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (fCurrentMetronomeBeatUnitsVector.size ()) {
     fCurrentMetronomeBeatUnitsVector.back ().incrDotsNumber ();
@@ -6251,7 +6251,7 @@ void mxsr2msrTranslator::visitStart (S_per_minute& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fCurrentMetrenomePerMinute = elt->getValue ();
 }
@@ -6271,7 +6271,7 @@ void mxsr2msrTranslator::visitStart (S_metronome_note& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fOnGoingMetronomeNote = true;
 }
@@ -6294,7 +6294,7 @@ void mxsr2msrTranslator::visitStart (S_metronome_type& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   std::string noteType = elt->getValue();
 
@@ -6320,7 +6320,7 @@ void mxsr2msrTranslator::visitStart (S_metronome_dot& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++fCurrentMetrenomeDotsNumber;
 }
@@ -6339,7 +6339,7 @@ void mxsr2msrTranslator::visitStart (S_metronome_beam& elt)
       ", line " << inputLineNumber <<
      std::endl;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // value
 
@@ -6416,7 +6416,7 @@ void mxsr2msrTranslator::attachCurrentMetronomeBeamsToMetronomeNote (
 				__FILE__, __LINE__,
 				ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     while (fPendingMetronomeBeamsList.size ()) {
       S_msrBeam
@@ -6441,7 +6441,7 @@ void mxsr2msrTranslator::attachCurrentMetronomeBeamsToMetronomeNote (
 					__FILE__, __LINE__,
 					ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       tempoNote->
         appendBeamToTempoNote (beam);
@@ -6470,7 +6470,7 @@ void mxsr2msrTranslator::visitEnd (S_metronome_note& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // convert metronome note duration into whole notes
   fCurrentMetronomeNoteWholeNotesFromMetronomeType =
@@ -6567,7 +6567,7 @@ void mxsr2msrTranslator::visitStart (S_metronome_relation& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   std::string metrenomeRelation = elt->getValue ();
 
@@ -6609,7 +6609,7 @@ void mxsr2msrTranslator::visitStart (S_metronome_tuplet& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // number
 
@@ -6654,7 +6654,7 @@ void mxsr2msrTranslator::visitStart (S_metronome_tuplet& elt)
             inputLineNumber,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
       }
     }
   }
@@ -6730,7 +6730,7 @@ void mxsr2msrTranslator::visitStart (S_metronome_tuplet& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fOnGoingMetronomeTuplet = true;
 }
@@ -6750,7 +6750,7 @@ void mxsr2msrTranslator::visitStart (S_normal_dot& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++fCurrentMetrenomeNormalDotsNumber;
 }
@@ -6773,7 +6773,7 @@ void mxsr2msrTranslator::visitEnd (S_metronome_tuplet& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   switch (fCurrentTempoTupletTypeKind) {
     case msrTempoTupletTypeKind::kTempoTupletTypeNone:
@@ -6854,7 +6854,7 @@ void mxsr2msrTranslator::visitEnd (S_metronome& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // fCurrentMetronomeParenthesedKind ??? JMI
 
@@ -6957,7 +6957,7 @@ void mxsr2msrTranslator::visitEnd (S_metronome& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // append metrenome words to tempo if any
   S_msrWords tempoWords;
@@ -6990,7 +6990,7 @@ void mxsr2msrTranslator::visitEnd (S_metronome& elt)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
         fCurrentMetronomeTempo->
           appendWordsToTempo (words);
@@ -7048,7 +7048,7 @@ else {
     __FILE__, __LINE__,
     currentDirectionsVoice != nullptr,
     "currentDirectionsVoice is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // append the tempo to the voice
   currentDirectionsVoice->
@@ -7073,7 +7073,7 @@ void mxsr2msrTranslator::visitStart (S_staves& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -7095,7 +7095,7 @@ void mxsr2msrTranslator::visitStart (S_staff& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fCurrentMusicXMLStaffNumber = int(*elt);
 
@@ -7135,7 +7135,7 @@ void mxsr2msrTranslator::visitStart (S_staff& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (fOnGoingForward) {
     fCurrentForwardStaffNumber = fCurrentMusicXMLStaffNumber;
@@ -7188,7 +7188,7 @@ void mxsr2msrTranslator::visitStart (S_staff_details& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // number
 
@@ -7287,7 +7287,7 @@ void mxsr2msrTranslator::visitStart (S_staff_details& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fCurrentStaffTypeKind =
     msrStaffTypeKind::kStaffTypeRegular;
@@ -7331,7 +7331,7 @@ void mxsr2msrTranslator::visitStart (S_staff_type& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   std::string staffType = elt->getValue ();
 
@@ -7393,7 +7393,7 @@ void mxsr2msrTranslator::visitStart (S_staff_lines& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fCurrentStaffLinesNumber = (int)(*elt);
 }
@@ -7413,7 +7413,7 @@ void mxsr2msrTranslator::visitStart (S_staff_tuning& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fCurrentStaffTuningLine =
     elt->getAttributeIntValue ("line", 0);
@@ -7442,7 +7442,7 @@ void mxsr2msrTranslator::visitStart (S_tuning_step& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   std::string tuningStep = elt->getValue();
 
@@ -7496,7 +7496,7 @@ void mxsr2msrTranslator::visitStart (S_tuning_octave& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   int tuningOctaveNumber = (int)(*elt);
 
@@ -7546,7 +7546,7 @@ void mxsr2msrTranslator::visitStart (S_tuning_alter& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   float tuningAlter = (float)(*elt);
 
@@ -7605,7 +7605,7 @@ void mxsr2msrTranslator::visitEnd (S_staff_tuning& elt)
        ", line " << inputLineNumber <<
      std::endl;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // fetch relevant staff
   S_msrStaff
@@ -7665,7 +7665,7 @@ void mxsr2msrTranslator::visitEnd (S_staff_tuning& elt)
 
     --gIndenter;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // create the staff tuning
   S_msrStaffTuning
@@ -7703,7 +7703,7 @@ void mxsr2msrTranslator::visitStart (S_voice& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalTraceOahGroup->getTraceVoices ()) {
@@ -7719,7 +7719,7 @@ void mxsr2msrTranslator::visitStart (S_voice& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fCurrentMusicXMLVoiceNumber = int(*elt);
 
@@ -7772,7 +7772,7 @@ void mxsr2msrTranslator::visitStart (S_backup& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fOnGoingBackup = true;
 }
@@ -7815,7 +7815,7 @@ void mxsr2msrTranslator::visitEnd (S_backup& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceBackup ()) {
@@ -7835,7 +7835,7 @@ void mxsr2msrTranslator::visitEnd (S_backup& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // reset notes staff numbers
 //   fPreviousNoteMusicXMLStaffNumber = msrStaff::K_STAFF_NUMBER_UNKNOWN;
@@ -7870,7 +7870,7 @@ void mxsr2msrTranslator::visitStart (S_forward& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fOnGoingForward = true;
 }
@@ -7893,7 +7893,7 @@ void mxsr2msrTranslator::visitEnd (S_forward& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 /*
 <!--
@@ -7936,7 +7936,7 @@ void mxsr2msrTranslator::visitEnd (S_forward& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // the staff number should be positive
   if (fCurrentForwardStaffNumber <= 0) {
@@ -7966,7 +7966,7 @@ void mxsr2msrTranslator::visitEnd (S_forward& elt)
     __FILE__, __LINE__,
     voiceToBeForwarded != nullptr,
     "voiceToBeForwarded is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // compute the forward step length
 #ifdef MF_TRACE_IS_ENABLED
@@ -7982,7 +7982,7 @@ void mxsr2msrTranslator::visitEnd (S_forward& elt)
 			__FILE__, __LINE__,
 			ss.str ());
 	}
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   Rational
     forwardStepLength =
@@ -8022,7 +8022,7 @@ void mxsr2msrTranslator::visitStart (S_tied& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 // <tied orientation="over" type="start"/>
 
@@ -8190,14 +8190,14 @@ void mxsr2msrTranslator::visitStart (S_slur& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (! gGlobalMxsr2msrOahGroup->getIgnoreSlurs ()) {
 #ifdef MF_TRACE_IS_ENABLED
     if (gGlobalTraceOahGroup->getTraceSlursDetails ()) {
       displaySlurStartsStack ("BEFORE handling slur");
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     /*
       Only the  first note of the chord should get the slur notation.
@@ -8266,7 +8266,7 @@ void mxsr2msrTranslator::visitStart (S_slur& elt)
                   ", line " << inputLineNumber <<
                   std::endl;
               }
-  #endif
+  #endif // MF_TRACE_IS_ENABLED
 
               containingSlur->
                 setSlurTypeKind (
@@ -8353,7 +8353,7 @@ void mxsr2msrTranslator::visitStart (S_slur& elt)
                     ", line " << inputLineNumber <<
                     std::endl;
                 }
-  #endif
+  #endif // MF_TRACE_IS_ENABLED
 
                 fCurrentSlurTypeKind = msrSlurTypeKind::kSlurTypePhrasingStop;
                 break;
@@ -8445,7 +8445,7 @@ void mxsr2msrTranslator::visitStart (S_slur& elt)
 					__FILE__, __LINE__,
 					ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       S_msrSlur
         slur =
@@ -8474,7 +8474,7 @@ void mxsr2msrTranslator::visitStart (S_slur& elt)
   if (gGlobalTraceOahGroup->getTraceSlursDetails ()) {
     displaySlurStartsStack ("AFTER handling slur");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -8496,7 +8496,7 @@ void mxsr2msrTranslator::visitStart (S_bracket& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // number
 
@@ -8644,7 +8644,7 @@ void mxsr2msrTranslator::visitStart (S_bracket& elt)
                 inputLineNumber,
                 ss.str ());
             }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
             ligature->setLigaturePlacementKind (msrPlacementKind::kPlacementAbove);
             fCurrentLigatureStartAbove = ligature;
@@ -8680,7 +8680,7 @@ void mxsr2msrTranslator::visitStart (S_bracket& elt)
                 inputLineNumber,
                 ss.str ());
             }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
             ligature->setLigaturePlacementKind (msrPlacementKind::kPlacementAbove);
 
@@ -8790,7 +8790,7 @@ void mxsr2msrTranslator::visitStart (S_wedge& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // type
 
@@ -8923,7 +8923,7 @@ void mxsr2msrTranslator::visitStart (S_lyric& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // number
 
@@ -8954,7 +8954,7 @@ void mxsr2msrTranslator::visitStart (S_lyric& elt)
 				__FILE__, __LINE__,
 				ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     // register it as current stanza number,
     // that remains set another positive value is found,
@@ -8984,7 +8984,7 @@ void mxsr2msrTranslator::visitStart (S_lyric& elt)
 					__FILE__, __LINE__,
 					ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       fCurrentStanzaName = msrStanza::K_STANZA_NAME_UNKNOWN;
     }
@@ -9003,7 +9003,7 @@ void mxsr2msrTranslator::visitStart (S_lyric& elt)
 				__FILE__, __LINE__,
 				ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     // register it as current stanza name,
     // that remains set another positive value is found,
@@ -9051,7 +9051,7 @@ void mxsr2msrTranslator::visitStart (S_syllabic& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fCurrentSyllabic = elt->getValue();
 
@@ -9105,7 +9105,7 @@ void mxsr2msrTranslator::visitStart (S_text& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   std::string textValue = elt->getValue();
 
@@ -9129,7 +9129,7 @@ void mxsr2msrTranslator::visitStart (S_text& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fCurrentNoteHasLyrics = true;
   fCurrentStanzaHasText = true;
@@ -9164,7 +9164,7 @@ void mxsr2msrTranslator::visitStart (S_text& elt)
 
     --gIndenter;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // a <text/> markup puts an end to the effect of <extend/>
   fCurrentSyllableExtendKind = msrSyllableExtendKind::kSyllableExtendNone;
@@ -9185,7 +9185,7 @@ void mxsr2msrTranslator::visitStart (S_elision& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   std::string elisionValue = elt->getValue ();
 
@@ -9219,7 +9219,7 @@ void mxsr2msrTranslator::visitStart (S_extend& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   std::string extendType =
     elt->getAttributeValue ("type");
@@ -9285,7 +9285,7 @@ void mxsr2msrTranslator::visitEnd (S_lyric& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (fCurrentSyllableKind == msrSyllableKind::kSyllableNone) {
 #ifdef MF_TRACE_IS_ENABLED
@@ -9301,7 +9301,7 @@ void mxsr2msrTranslator::visitEnd (S_lyric& elt)
         inputLineNumber,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     fCurrentSyllableKind = msrSyllableKind::kSyllableSingle;
   }
@@ -9326,7 +9326,7 @@ void mxsr2msrTranslator::visitEnd (S_lyric& elt)
         inputLineNumber,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     if (fCurrentLyricTextsList.size ()) {
       // register a skip in lyrics for rests with syllables
@@ -9466,7 +9466,7 @@ void mxsr2msrTranslator::visitEnd (S_lyric& elt)
 
     --gIndenter;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalTraceOahGroup->getTraceLyrics ()) {
@@ -9515,7 +9515,7 @@ void mxsr2msrTranslator::visitEnd (S_lyric& elt)
 
     --gIndenter;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (! gGlobalMxsr2msrOahGroup->getIgnoreLyrics ()) {
     // fetch current voice
@@ -9567,7 +9567,7 @@ void mxsr2msrTranslator::visitEnd (S_lyric& elt)
 				__FILE__, __LINE__,
 				ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     // create a syllable
     S_msrSyllable
@@ -9635,7 +9635,7 @@ void mxsr2msrTranslator::visitStart (S_measure& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // take this measure into account
   ++fPartMeasuresCounter;
@@ -9659,7 +9659,7 @@ void mxsr2msrTranslator::visitStart (S_measure& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // number
   fCurrentMeasureNumber =
@@ -9687,7 +9687,7 @@ void mxsr2msrTranslator::visitStart (S_measure& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // set next measure number in current part' previous measure
   // if this measure is not the first one
@@ -9813,7 +9813,7 @@ void mxsr2msrTranslator::visitStart (S_measure& elt)
       gGlobalLpsr2lilypondOahGroup = gGlobalLilypondOahWithDetailedTrace;
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
   */
 }
 
@@ -9835,7 +9835,7 @@ void mxsr2msrTranslator::visitEnd (S_measure& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // fetch the voice
   S_msrVoice
@@ -9881,7 +9881,7 @@ void mxsr2msrTranslator::visitEnd (S_measure& elt)
 				__FILE__, __LINE__,
 				ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     // attach these grace notes group as an after grace notes group
     // to the last note found in its voice
@@ -9977,7 +9977,7 @@ void mxsr2msrTranslator::visitEnd (S_measure& elt)
 					__FILE__, __LINE__,
 					ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       int measureReplicatesNumber = (*it).second;
 
@@ -10031,7 +10031,7 @@ void mxsr2msrTranslator::visitEnd (S_measure& elt)
 					__FILE__, __LINE__,
 					ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       fCurrentPart->
         addEmptyMeasuresToPart (
@@ -10077,7 +10077,7 @@ void mxsr2msrTranslator::handleOnGoingMultipleFullBarRestsAtTheEndOfMeasure (
 
     --gIndenter;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   //  if (! fOnGoingMultipleFullBarRests) { JMI
   //   }
@@ -10152,7 +10152,7 @@ void mxsr2msrTranslator::handleOnGoingMultipleFullBarRestsAtTheEndOfMeasure (
 
     --gIndenter;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //______________________________________________________________________________
@@ -10174,7 +10174,7 @@ void mxsr2msrTranslator::visitStart (S_print& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 /* JMI
   The print element contains general printing parameters,
@@ -10268,7 +10268,7 @@ Staff spacing between multiple staves is measured in
 					__FILE__, __LINE__,
 					ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       S_msrLineBreak
         lineBreak =
@@ -10315,7 +10315,7 @@ Staff spacing between multiple staves is measured in
             "line: " << inputLineNumber <<
             std::endl;
         }
-  #endif
+  #endif // MF_TRACE_IS_ENABLED
 
         S_msrPageBreak
           pageBreak =
@@ -10385,7 +10385,7 @@ void mxsr2msrTranslator::visitEnd (S_print& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // append the current print layout to voice 1 in staff 1 of the current part
   // it's not worth using specific 'layout voices' for such part-level stuff
@@ -10420,7 +10420,7 @@ void mxsr2msrTranslator::visitStart (S_measure_numbering& elt)
 			__FILE__, __LINE__,
 			ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // JMI
 }
@@ -10444,7 +10444,7 @@ void mxsr2msrTranslator::visitStart (S_barline& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fCurrentBarLineEndingNumber    = ""; // may be "1, 2"
 
@@ -10516,7 +10516,7 @@ void mxsr2msrTranslator::visitStart (S_bar_style& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // style
 
@@ -10599,7 +10599,7 @@ void mxsr2msrTranslator::visitStart (S_segno& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (fOnGoingDirectionType) {
     // create the segno
@@ -10649,7 +10649,7 @@ void mxsr2msrTranslator::visitStart (S_coda& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (fOnGoingDirectionType) {
     // account for this coda
@@ -10728,7 +10728,7 @@ void mxsr2msrTranslator::visitStart (S_eyeglasses& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (fOnGoingDirectionType) {
     // create the eyeglasses
@@ -10772,7 +10772,7 @@ void mxsr2msrTranslator::visitStart (S_pedal& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // type
 
@@ -10907,7 +10907,7 @@ void mxsr2msrTranslator::visitStart (S_ending& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // number
 
@@ -10992,7 +10992,7 @@ void mxsr2msrTranslator::visitStart (S_repeat& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // direction
 
@@ -11097,7 +11097,7 @@ void mxsr2msrTranslator::visitEnd (S_barline& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // is there a pending tuplet?
   if (fTupletsStack.size ()) { // JMI
@@ -11139,7 +11139,7 @@ void mxsr2msrTranslator::visitEnd (S_barline& elt)
 
     --gIndenter;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // wait until its category is defined
   // to append the barLine to the current segment
@@ -11311,7 +11311,7 @@ void mxsr2msrTranslator::visitEnd (S_barline& elt)
 
           --gIndenter;
         }
-  #endif
+  #endif // MF_TRACE_IS_ENABLED
 
 //         fCurrentPart->
 //           appendBarLineToPart (barLine);
@@ -11380,7 +11380,7 @@ void mxsr2msrTranslator::visitEnd (S_barline& elt)
     case msrBarLineCategoryKind::kBarLineCategoryHooklessEndingEnd:
       break;
   } // switch
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 */
 
   fOnGoingBarLine = false;
@@ -11405,7 +11405,7 @@ void mxsr2msrTranslator::visitStart (S_note& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 /*
 ====
@@ -11624,7 +11624,7 @@ void mxsr2msrTranslator::visitStart (S_step& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   std::string step = elt->getValue();
 
@@ -11655,7 +11655,7 @@ void mxsr2msrTranslator::visitStart (S_alter& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   float alter = (float)(*elt);
 
@@ -11696,7 +11696,7 @@ void mxsr2msrTranslator::visitStart (S_octave& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   int octaveNumber = (int)(*elt);
 
@@ -11739,7 +11739,7 @@ void mxsr2msrTranslator::visitStart (S_duration& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   int duration = (int)(*elt); // divisions
 
@@ -11749,13 +11749,18 @@ void mxsr2msrTranslator::visitStart (S_duration& elt)
 
 		ss <<
       "Duration: " << duration <<
+      ", fOnGoingBackup: " << fOnGoingBackup <<
+      ", fOnGoingForward: " << fOnGoingForward <<
+      ", fOnGoingNote: " << fOnGoingNote <<
+      ", fOnGoingFiguredBass: " << fOnGoingFiguredBass <<
+      ", line " << inputLineNumber <<
       std::endl;
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (fOnGoingBackup) {
     fCurrentBackupDivisions = duration;
@@ -11779,7 +11784,7 @@ void mxsr2msrTranslator::visitStart (S_duration& elt)
 				__FILE__, __LINE__,
 				ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     // set current grace note whole notes
     fCurrentNoteSoundingWholeNotesFromDuration =
@@ -11800,7 +11805,7 @@ void mxsr2msrTranslator::visitStart (S_duration& elt)
 				__FILE__, __LINE__,
 				ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 /* JMI
     // set current grace note display whole notes
@@ -11824,7 +11829,7 @@ void mxsr2msrTranslator::visitStart (S_duration& elt)
 				__FILE__, __LINE__,
 				ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     // set current figured bass sounding whole notes
     fCurrentFiguredBassSoundingWholeNotes =
@@ -11845,7 +11850,7 @@ void mxsr2msrTranslator::visitStart (S_duration& elt)
 				__FILE__, __LINE__,
 				ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     // set current figured bass display whole notes
     fCurrentFiguredBassDisplayWholeNotes =
@@ -11866,7 +11871,7 @@ void mxsr2msrTranslator::visitStart (S_duration& elt)
 				__FILE__, __LINE__,
 				ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
   }
 
   else {
@@ -11899,7 +11904,7 @@ void mxsr2msrTranslator::visitStart (S_instrument& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 /*
 <!--
@@ -11947,7 +11952,7 @@ void mxsr2msrTranslator::visitStart (S_dot& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++fCurrentNoteDotsNumber;
 }
@@ -11970,7 +11975,7 @@ void mxsr2msrTranslator::visitStart (S_type& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 /*
  Type indicates the graphic note type, Valid values (from shortest to longest) are 1024th, 512th, 256th, 128th, 64th, 32nd, 16th, eighth, quarter, half, whole, breve, long, and maxima. The size attribute indicates full, cue, or large size, with full the default for regular notes and cue the default for cue and grace notes.
@@ -12022,7 +12027,7 @@ void mxsr2msrTranslator::visitStart (S_type& elt)
       std::endl;
         */
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void mxsr2msrTranslator::visitStart (S_notehead& elt)
@@ -12043,7 +12048,7 @@ void mxsr2msrTranslator::visitStart (S_notehead& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   {
     std::string noteHead = elt->getValue();
@@ -12189,7 +12194,7 @@ void mxsr2msrTranslator::visitStart (S_accidental& elt) // JMI
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // value
 
@@ -12365,7 +12370,7 @@ void mxsr2msrTranslator::visitStart (S_stem& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 /*
 <!--
@@ -12442,7 +12447,7 @@ void mxsr2msrTranslator::visitStart (S_beam& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // value
 
@@ -12512,7 +12517,7 @@ void mxsr2msrTranslator::visitStart (S_measure_style& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // color JMI
 }
@@ -12535,7 +12540,7 @@ void mxsr2msrTranslator::visitStart (S_beat_repeat& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 /*
 <!--
@@ -12588,7 +12593,7 @@ void mxsr2msrTranslator::visitStart (S_measure_repeat& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 /*
   The multiple-rest and measure-repeat symbols indicate the
@@ -12638,7 +12643,7 @@ void mxsr2msrTranslator::visitStart (S_measure_repeat& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     fCurrentPart->
       createMeasureRepeatFromItsFirstMeasuresInPart (
@@ -12666,7 +12671,7 @@ void mxsr2msrTranslator::visitStart (S_measure_repeat& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     fCurrentPart->
       appendPendingMeasureRepeatToPart (
@@ -12772,7 +12777,7 @@ void mxsr2msrTranslator::visitStart (S_multiple_rest& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fCurrentMultipleFullBarRestsNumber = (int)(*elt);
 
@@ -12838,7 +12843,7 @@ void mxsr2msrTranslator::visitStart (S_slash& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // type
 
@@ -12916,7 +12921,7 @@ void mxsr2msrTranslator::visitStart (S_slash_type& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   std::string slashType = elt->getValue();
 
@@ -12961,7 +12966,7 @@ void mxsr2msrTranslator::visitStart (S_slash_type& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void mxsr2msrTranslator::visitStart (S_slash_dot& elt)
@@ -12979,7 +12984,7 @@ void mxsr2msrTranslator::visitStart (S_slash_dot& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++fCurrentSlashDotsNumber;
 }
@@ -13002,7 +13007,7 @@ void mxsr2msrTranslator::visitEnd (S_slash& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   S_msrSlash
     slash =
@@ -13031,7 +13036,7 @@ void mxsr2msrTranslator::visitStart (S_articulations& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void mxsr2msrTranslator::visitStart (S_accent& elt)
@@ -13052,7 +13057,7 @@ void mxsr2msrTranslator::visitStart (S_accent& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // placement
 
@@ -13095,7 +13100,7 @@ void mxsr2msrTranslator::visitStart (S_breath_mark& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // placement
 
@@ -13138,7 +13143,7 @@ void mxsr2msrTranslator::visitStart (S_caesura& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // placement
 
@@ -13181,7 +13186,7 @@ void mxsr2msrTranslator::visitStart (S_spiccato& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // placement
 
@@ -13224,7 +13229,7 @@ void mxsr2msrTranslator::visitStart (S_staccato& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // placement
 
@@ -13267,7 +13272,7 @@ void mxsr2msrTranslator::visitStart (S_staccatissimo& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // placement
 
@@ -13310,7 +13315,7 @@ void mxsr2msrTranslator::visitStart (S_stress& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // placement
 
@@ -13353,7 +13358,7 @@ void mxsr2msrTranslator::visitStart (S_unstress& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // placement
 
@@ -13396,7 +13401,7 @@ void mxsr2msrTranslator::visitStart (S_detached_legato& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // placement
 
@@ -13439,7 +13444,7 @@ void mxsr2msrTranslator::visitStart (S_strong_accent& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // placement
 
@@ -13483,7 +13488,7 @@ void mxsr2msrTranslator::visitStart (S_tenuto& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // type : upright inverted  (Binchois20.xml) // JMI ???
 
@@ -13528,7 +13533,7 @@ void mxsr2msrTranslator::visitStart (S_doit& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // placement
 
@@ -13571,7 +13576,7 @@ void mxsr2msrTranslator::visitStart (S_falloff& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // placement
 
@@ -13614,7 +13619,7 @@ void mxsr2msrTranslator::visitStart (S_plop& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // placement
 
@@ -13657,7 +13662,7 @@ void mxsr2msrTranslator::visitStart (S_scoop& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // placement
 
@@ -13697,7 +13702,7 @@ void mxsr2msrTranslator::visitEnd (S_articulations& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // JMI
 }
@@ -13721,7 +13726,7 @@ void mxsr2msrTranslator::visitStart (S_arpeggiate& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // placement
 
@@ -13795,7 +13800,7 @@ void mxsr2msrTranslator::visitStart (S_non_arpeggiate& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // placement
 
@@ -13872,7 +13877,7 @@ void mxsr2msrTranslator::visitStart (S_technical& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fOnGoingTechnical = true;
 }
@@ -13892,7 +13897,7 @@ void mxsr2msrTranslator::visitEnd (S_technical& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fOnGoingTechnical = false;
 }
@@ -13915,7 +13920,7 @@ void mxsr2msrTranslator::visitStart (S_arrow& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // placement
 
@@ -13953,7 +13958,7 @@ void mxsr2msrTranslator::visitStart (S_bend_alter& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fBendAlterValue = (float)(*elt);
 }
@@ -13973,7 +13978,7 @@ void mxsr2msrTranslator::visitStart (S_bend& elt) // JMI
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void mxsr2msrTranslator::visitEnd (S_bend& elt)
@@ -13994,7 +13999,7 @@ void mxsr2msrTranslator::visitEnd (S_bend& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // placement
 
@@ -14037,7 +14042,7 @@ void mxsr2msrTranslator::visitStart (S_double_tongue& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // placement
 
@@ -14078,7 +14083,7 @@ void mxsr2msrTranslator::visitStart (S_down_bow& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // placement
 
@@ -14119,7 +14124,7 @@ void mxsr2msrTranslator::visitStart (S_fingering& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   int fingeringValue = (int)(*elt);
 
@@ -14184,7 +14189,7 @@ void mxsr2msrTranslator::visitStart (S_fingernails& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // placement
 
@@ -14225,7 +14230,7 @@ void mxsr2msrTranslator::visitStart (S_fret& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   int fretValue = (int)(*elt);
 
@@ -14289,7 +14294,7 @@ void mxsr2msrTranslator::visitStart (S_hammer_on& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   std::string hammerOnValue = elt->getValue ();
 
@@ -14360,7 +14365,7 @@ void mxsr2msrTranslator::visitStart (S_handbell& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   std::string handBellValue = elt->getValue ();
 
@@ -14405,7 +14410,7 @@ void mxsr2msrTranslator::visitStart (S_harmonic& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // placement
 
@@ -14457,7 +14462,7 @@ void mxsr2msrTranslator::visitStart (S_heel& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // placement
 
@@ -14498,7 +14503,7 @@ void mxsr2msrTranslator::visitStart (S_hole& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // placement
 
@@ -14539,7 +14544,7 @@ void mxsr2msrTranslator::visitStart (S_open_string& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // placement
 
@@ -14580,7 +14585,7 @@ void mxsr2msrTranslator::visitStart (S_other_technical& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   std::string otherTechnicalValue = elt->getValue ();
 
@@ -14625,7 +14630,7 @@ void mxsr2msrTranslator::visitStart (S_pluck& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   std::string pluckValue = elt->getValue ();
 
@@ -14670,7 +14675,7 @@ void mxsr2msrTranslator::visitStart (S_pull_off& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   std::string pullOffValue = elt->getValue ();
 
@@ -14741,7 +14746,7 @@ void mxsr2msrTranslator::visitStart (S_snap_pizzicato& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // placement
 
@@ -14782,7 +14787,7 @@ void mxsr2msrTranslator::visitStart (S_stopped& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // placement
 
@@ -14823,7 +14828,7 @@ void mxsr2msrTranslator::visitStart (S_string& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 /*
         <notations>
@@ -14918,7 +14923,7 @@ void mxsr2msrTranslator::visitStart (S_tap& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // placement
 
@@ -14959,7 +14964,7 @@ void mxsr2msrTranslator::visitStart (S_thumb_position& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // placement
 
@@ -15000,7 +15005,7 @@ void mxsr2msrTranslator::visitStart (S_toe& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // placement
 
@@ -15041,7 +15046,7 @@ void mxsr2msrTranslator::visitStart (S_triple_tongue& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // placement
 
@@ -15082,7 +15087,7 @@ void mxsr2msrTranslator::visitStart (S_up_bow& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // placement
 
@@ -15124,7 +15129,7 @@ void mxsr2msrTranslator::visitStart (S_fermata& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   std::string fermataTextValue = elt->getValue ();
 
@@ -15216,7 +15221,7 @@ void mxsr2msrTranslator::visitStart (S_ornaments& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void mxsr2msrTranslator::visitStart (S_tremolo& elt)
@@ -15237,7 +15242,7 @@ void mxsr2msrTranslator::visitStart (S_tremolo& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // value (tremolo marks number)
 
@@ -15398,7 +15403,7 @@ void mxsr2msrTranslator::visitStart (S_tremolo& elt)
 					__FILE__, __LINE__,
 					ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       fCurrentSingleTremolo =
         msrSingleTremolo::create (
@@ -15438,7 +15443,7 @@ void mxsr2msrTranslator::visitStart (S_tremolo& elt)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
         fCurrentDoubleTremolo =
           msrDoubleTremolo::create (
@@ -15480,7 +15485,7 @@ void mxsr2msrTranslator::visitStart (S_tremolo& elt)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
         // it will be handled in
         // handleNonChordNorTupletNoteOrRest()
@@ -15520,7 +15525,7 @@ void mxsr2msrTranslator::visitStart (S_trill_mark& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
  // type : upright inverted  (Binchois20.xml) JMI
 
@@ -15565,7 +15570,7 @@ void mxsr2msrTranslator::visitStart (S_dashes& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
  // type : upright inverted  (Binchois20.xml) JMI
 
@@ -15645,7 +15650,7 @@ void mxsr2msrTranslator::visitStart (S_wavy_line& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // number
 
@@ -15763,7 +15768,7 @@ void mxsr2msrTranslator::visitStart (S_turn& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // placement
 
@@ -15806,7 +15811,7 @@ void mxsr2msrTranslator::visitStart (S_inverted_turn& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // placement
 
@@ -15849,7 +15854,7 @@ void mxsr2msrTranslator::visitStart (S_delayed_turn& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // placement
 
@@ -15892,7 +15897,7 @@ void mxsr2msrTranslator::visitStart (S_delayed_inverted_turn& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // placement
 
@@ -15935,7 +15940,7 @@ void mxsr2msrTranslator::visitStart (S_vertical_turn& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // placement
 
@@ -15978,7 +15983,7 @@ void mxsr2msrTranslator::visitStart (S_mordent& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // placement
 
@@ -16021,7 +16026,7 @@ void mxsr2msrTranslator::visitStart (S_inverted_mordent& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // placement
 
@@ -16064,7 +16069,7 @@ void mxsr2msrTranslator::visitStart (S_schleifer& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // placement
 
@@ -16107,7 +16112,7 @@ void mxsr2msrTranslator::visitStart (S_shake& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // placement
 
@@ -16150,7 +16155,7 @@ void mxsr2msrTranslator::visitStart (S_accidental_mark& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   std::string accidentalMark = elt->getValue ();
 
@@ -16366,7 +16371,7 @@ void mxsr2msrTranslator::visitEnd (S_ornaments& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //______________________________________________________________________________
@@ -16388,7 +16393,7 @@ void mxsr2msrTranslator::visitStart( S_f& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // placement
 
@@ -16435,7 +16440,7 @@ void mxsr2msrTranslator::visitStart( S_ff& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // placement
 
@@ -16482,7 +16487,7 @@ void mxsr2msrTranslator::visitStart( S_fff& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // placement
 
@@ -16529,7 +16534,7 @@ void mxsr2msrTranslator::visitStart( S_ffff& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // placement
 
@@ -16576,7 +16581,7 @@ void mxsr2msrTranslator::visitStart( S_fffff& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // placement
 
@@ -16623,7 +16628,7 @@ void mxsr2msrTranslator::visitStart( S_ffffff& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // placement
 
@@ -16671,7 +16676,7 @@ void mxsr2msrTranslator::visitStart( S_p& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // placement
 
@@ -16718,7 +16723,7 @@ void mxsr2msrTranslator::visitStart( S_pp& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // placement
 
@@ -16765,7 +16770,7 @@ void mxsr2msrTranslator::visitStart( S_ppp& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // placement
 
@@ -16812,7 +16817,7 @@ void mxsr2msrTranslator::visitStart( S_pppp& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // placement
 
@@ -16859,7 +16864,7 @@ void mxsr2msrTranslator::visitStart( S_ppppp& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // placement
 
@@ -16906,7 +16911,7 @@ void mxsr2msrTranslator::visitStart( S_pppppp& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // placement
 
@@ -16955,7 +16960,7 @@ void mxsr2msrTranslator::visitStart( S_mf& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // placement
 
@@ -17002,7 +17007,7 @@ void mxsr2msrTranslator::visitStart( S_mp& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // placement
 
@@ -17050,7 +17055,7 @@ void mxsr2msrTranslator::visitStart( S_fp& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // placement
 
@@ -17098,7 +17103,7 @@ void mxsr2msrTranslator::visitStart( S_fz& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // placement
 
@@ -17146,7 +17151,7 @@ void mxsr2msrTranslator::visitStart( S_pf& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // placement
 
@@ -17194,7 +17199,7 @@ void mxsr2msrTranslator::visitStart( S_rf& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // placement
 
@@ -17242,7 +17247,7 @@ void mxsr2msrTranslator::visitStart( S_sf& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // placement
 
@@ -17290,7 +17295,7 @@ void mxsr2msrTranslator::visitStart( S_rfz& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // placement
 
@@ -17338,7 +17343,7 @@ void mxsr2msrTranslator::visitStart( S_sfz& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // placement
 
@@ -17386,7 +17391,7 @@ void mxsr2msrTranslator::visitStart( S_sfp& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // placement
 
@@ -17434,7 +17439,7 @@ void mxsr2msrTranslator::visitStart( S_sfpp& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // placement
 
@@ -17482,7 +17487,7 @@ void mxsr2msrTranslator::visitStart( S_sffz& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // placement
 
@@ -17530,7 +17535,7 @@ void mxsr2msrTranslator::visitStart( S_sfzp& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // placement
 
@@ -17578,7 +17583,7 @@ void mxsr2msrTranslator::visitStart( S_n& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // placement
 
@@ -17626,7 +17631,7 @@ void mxsr2msrTranslator::visitStart( S_other_dynamics& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   std::string otherDynamicsValue = elt->getValue ();
 
@@ -17688,7 +17693,7 @@ void mxsr2msrTranslator::visitStart( S_damper_pedal& elt)
       "--> Start visiting S_damper_pedal" <<
       ", line " << inputLineNumber <<
       std::endl;
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   std::string damperPedalValue = elt->getValue ();
 
@@ -17759,7 +17764,7 @@ void mxsr2msrTranslator::visitStart( S_soft_pedal& elt)
        ", line " << inputLineNumber <<
      std::endl;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   std::string softPedalValue = elt->getValue ();
 
@@ -17802,7 +17807,7 @@ void mxsr2msrTranslator::visitStart( S_sostenuto_pedal& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   std::string sostenutoPedalValue = elt->getValue ();
 
@@ -17844,7 +17849,7 @@ void mxsr2msrTranslator::visitStart (S_cue& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fCurrentNoteIsACueNoteKind = msrNoteIsACueNoteKind::kNoteIsACueNoteYes;
 }
@@ -17868,7 +17873,7 @@ void mxsr2msrTranslator::visitStart (S_grace& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fCurrentNoteIsAGraceNote = true;
 
@@ -17931,7 +17936,7 @@ void mxsr2msrTranslator::visitStart (S_chord& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // the current note belongs to a chord,
   // placed in the corresponding staff AND voice
@@ -17958,7 +17963,7 @@ void mxsr2msrTranslator::visitStart (S_time_modification& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // there may be no '<tuplet number="n" type="start" />'
   // in the tuplet notes after the first one,
@@ -17984,7 +17989,7 @@ void mxsr2msrTranslator::visitStart (S_actual_notes& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   int actualNotes = (int)(*elt);
 
@@ -18004,7 +18009,7 @@ void mxsr2msrTranslator::visitStart (S_actual_notes& elt)
 				__FILE__, __LINE__,
 				ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     // notes inside a tuplet have no <tuplet/> markup
     // and 2 actual notes indicate a double tremolo
@@ -18033,7 +18038,7 @@ void mxsr2msrTranslator::visitStart (S_actual_notes& elt)
 				__FILE__, __LINE__,
 				ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
   }
 
   else {
@@ -18069,7 +18074,7 @@ void mxsr2msrTranslator::visitStart (S_normal_notes& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   int normalNotes = (int)(*elt);
 
@@ -18089,7 +18094,7 @@ void mxsr2msrTranslator::visitStart (S_normal_notes& elt)
 				__FILE__, __LINE__,
 				ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     // notes inside a tuplet have no <tuplet/> markup
     // and 1 actual note indicates a double tremolo
@@ -18118,7 +18123,7 @@ void mxsr2msrTranslator::visitStart (S_normal_notes& elt)
 				__FILE__, __LINE__,
 				ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
   }
 
   else {
@@ -18154,7 +18159,7 @@ void mxsr2msrTranslator::visitStart (S_normal_type& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   std::string normalTypeString = elt->getValue();
 
@@ -18172,7 +18177,7 @@ void mxsr2msrTranslator::visitStart (S_normal_type& elt)
 				__FILE__, __LINE__,
 				ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     // the type contains a display duration
     fCurrentNoteNormalTypeDuration =
@@ -18206,7 +18211,7 @@ void mxsr2msrTranslator::visitStart (S_normal_type& elt)
 				__FILE__, __LINE__,
 				ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   }
 
@@ -18244,7 +18249,7 @@ void mxsr2msrTranslator::visitStart (S_tuplet& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // number
 
@@ -18291,7 +18296,7 @@ void mxsr2msrTranslator::visitStart (S_tuplet& elt)
             inputLineNumber,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
       }
     }
   }
@@ -18349,7 +18354,7 @@ void mxsr2msrTranslator::visitStart (S_tuplet& elt)
 					__FILE__, __LINE__,
 					ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       fCurrentTupletTypeKind = msrTupletTypeKind::kTupletTypeStart;
     }
@@ -18367,7 +18372,7 @@ void mxsr2msrTranslator::visitStart (S_tuplet& elt)
 					__FILE__, __LINE__,
 					ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       fCurrentTupletTypeKind = msrTupletTypeKind::kTupletTypeContinue;
     }
@@ -18398,7 +18403,7 @@ void mxsr2msrTranslator::visitStart (S_tuplet& elt)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
         fCurrentTupletTypeKind = msrTupletTypeKind::kTupletTypeStartAndStopInARow;
       }
@@ -18417,7 +18422,7 @@ void mxsr2msrTranslator::visitStart (S_tuplet& elt)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
         fCurrentTupletTypeKind = msrTupletTypeKind::kTupletTypeStop;
       }
@@ -18517,7 +18522,7 @@ void mxsr2msrTranslator::visitStart (S_tuplet& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fCurrentNoteBelongsToATuplet = true;
 }
@@ -18537,7 +18542,7 @@ void mxsr2msrTranslator::visitStart (S_tuplet_actual& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fOnGoingTupletActual = true;
 }
@@ -18557,7 +18562,7 @@ void mxsr2msrTranslator::visitEnd (S_tuplet_actual& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fOnGoingTupletActual = false;
 }
@@ -18577,7 +18582,7 @@ void mxsr2msrTranslator::visitStart (S_tuplet_normal& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fOnGoingTupletNormal = true;
 }
@@ -18597,7 +18602,7 @@ void mxsr2msrTranslator::visitEnd (S_tuplet_normal& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fOnGoingTupletNormal = false;
 }
@@ -18620,7 +18625,7 @@ void mxsr2msrTranslator::visitStart (S_tuplet_number& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // not handled JMI
   int tupletNumberValue = (int)(*elt);
@@ -18654,7 +18659,7 @@ void mxsr2msrTranslator::visitStart (S_tuplet_number& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void mxsr2msrTranslator::visitStart (S_tuplet_type& elt)
@@ -18675,7 +18680,7 @@ void mxsr2msrTranslator::visitStart (S_tuplet_type& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // not handled JMI
   std::string tupletTypeValue = elt->getValue();
@@ -18709,7 +18714,7 @@ void mxsr2msrTranslator::visitStart (S_tuplet_type& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void mxsr2msrTranslator::visitStart (S_tuplet_dot& elt)
@@ -18730,7 +18735,7 @@ void mxsr2msrTranslator::visitStart (S_tuplet_dot& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (fOnGoingTupletActual) {
     ++fCurrentTupletActualDotsNumber;
@@ -18768,7 +18773,7 @@ void mxsr2msrTranslator::visitStart (S_glissando& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // glissando text, i.e. the text along it
   std::string glissandoTextValue = elt->getValue ();
@@ -18847,7 +18852,7 @@ void mxsr2msrTranslator::visitStart (S_glissando& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // create glissando
   S_msrGlissando
@@ -18874,7 +18879,7 @@ void mxsr2msrTranslator::visitStart (S_glissando& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fPendingGlissandosList.push_back (glissando);
 }
@@ -18898,7 +18903,7 @@ void mxsr2msrTranslator::visitStart (S_slide& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // slide text, i.e. the text along it
   std::string slideTextValue = elt->getValue ();
@@ -18979,7 +18984,7 @@ void mxsr2msrTranslator::visitStart (S_slide& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // create slide
   S_msrSlide
@@ -19006,7 +19011,7 @@ void mxsr2msrTranslator::visitStart (S_slide& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fPendingSlidesList.push_back (slide);
 }
@@ -19030,7 +19035,7 @@ void mxsr2msrTranslator::visitStart (S_rest& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   /*
     <measure number='65'>
@@ -19109,7 +19114,7 @@ void mxsr2msrTranslator::visitStart (S_display_step& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   std::string displayStep = elt->getValue();
 
@@ -19145,7 +19150,7 @@ void mxsr2msrTranslator::visitStart (S_display_octave& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   int displayOctaveNumber = (int)(*elt);
 
@@ -19185,7 +19190,7 @@ void mxsr2msrTranslator::visitEnd (S_unpitched& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fCurrentNoteIsUnpitched = true;
 
@@ -19218,7 +19223,7 @@ S_msrChord mxsr2msrTranslator::createChordFromItsFirstNote (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // chordFirstNote has been registered as regular note in the part element sequence,
   // but it is actually the first note of a chord
@@ -19249,7 +19254,7 @@ S_msrChord mxsr2msrTranslator::createChordFromItsFirstNote (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   chord->
     addFirstNoteToChord (
@@ -19290,7 +19295,7 @@ S_msrChord mxsr2msrTranslator::createChordFromItsFirstNote (
         "[NONE]";
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 /* forget about this, too early??? JMI
   // grace notes cannot be cross staff
@@ -19330,7 +19335,7 @@ void mxsr2msrTranslator::registerVoiceCurrentChordInMap (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
  // fVoicesCurrentChordMap [voice] = chord;
   fVoicesCurrentChordMap [
@@ -19346,7 +19351,7 @@ void mxsr2msrTranslator::registerVoiceCurrentChordInMap (
   if (gGlobalTraceOahGroup->getTraceChordsDetails ()) {
     printCurrentChord ();
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 */
 
@@ -19430,7 +19435,7 @@ void mxsr2msrTranslator::finalizeCurrentChord (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fCurrentChord->
     finalizeChord (
@@ -19452,7 +19457,7 @@ void mxsr2msrTranslator::finalizeCurrentChord (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // forget about the current chord
   fCurrentChord = nullptr;
@@ -19517,7 +19522,7 @@ void mxsr2msrTranslator::copyNoteArticulationsToChord (
 				__FILE__, __LINE__,
 				ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     chord->appendArticulationToChord (articulation);
   } // for
@@ -19547,7 +19552,7 @@ void mxsr2msrTranslator::copyNoteTechnicalsToChord (
       " to chord" <<
       std::endl;
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     chord->appendTechnicalToChord (technical);
   } // for
@@ -19575,7 +19580,7 @@ void mxsr2msrTranslator::copyNoteTechnicalWithIntegersToChord (
         " to chord" <<
         std::endl;
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     chord->appendTechnicalWithIntegerToChord (technicalWithInteger);
   } // for
@@ -19609,7 +19614,7 @@ void mxsr2msrTranslator::copyNoteTechnicalWithFloatsToChord (
 				__FILE__, __LINE__,
 				ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     chord->appendTechnicalWithFloatToChord (technicalWithFloat);
   } // for
@@ -19643,7 +19648,7 @@ void mxsr2msrTranslator::copyNoteTechnicalWithStringsToChord (
 				__FILE__, __LINE__,
 				ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     chord->appendTechnicalWithStringToChord (technicalWithString);
   } // for
@@ -19677,7 +19682,7 @@ void mxsr2msrTranslator::copyNoteOrnamentsToChord (
 				__FILE__, __LINE__,
 				ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     chord->
       appendOrnamentToChord (ornament);
@@ -19712,7 +19717,7 @@ void mxsr2msrTranslator::copyNoteSpannersToChord (
 				__FILE__, __LINE__,
 				ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     chord->
       appendSpannerToChord (spanner);
@@ -19747,7 +19752,7 @@ void mxsr2msrTranslator::copyNoteSingleTremoloToChord (
 				__FILE__, __LINE__,
 				ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     chord->
       setChordSingleTremolo (noteSingleTremolo);
@@ -19788,7 +19793,7 @@ void mxsr2msrTranslator::copyNoteDynamicsToChord (
 				__FILE__, __LINE__,
 				ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     chord->
       appendDynamicToChord ((*i));
@@ -19829,7 +19834,7 @@ void mxsr2msrTranslator::copyNoteOtherDynamicsToChord (
 				__FILE__, __LINE__,
 				ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     chord->
       appendOtherDynamicToChord ((*i));
@@ -19870,7 +19875,7 @@ void mxsr2msrTranslator::copyNoteWordsToChord (
 				__FILE__, __LINE__,
 				ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     chord->
       appendWordsToChord ((*i));
@@ -19905,7 +19910,7 @@ void mxsr2msrTranslator::copyNoteStemToChord (
 				__FILE__, __LINE__,
 				ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     chord->
       appendStemToChord (noteStem);
@@ -19945,7 +19950,7 @@ void mxsr2msrTranslator::copyNoteBeamsToChord (
 				__FILE__, __LINE__,
 				ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     chord->
       appendBeamToChord ((*i));
@@ -19967,7 +19972,7 @@ void mxsr2msrTranslator::copyNoteBeamsToChord (
 
     --gIndenter;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 */
 
@@ -20005,7 +20010,7 @@ void mxsr2msrTranslator::appendNoteBeamsLinksToChord (
 				__FILE__, __LINE__,
 				ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     // create the beam link
     S_msrChordBeamLink
@@ -20036,7 +20041,7 @@ void mxsr2msrTranslator::appendNoteBeamsLinksToChord (
 
     --gIndenter;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //______________________________________________________________________________
@@ -20067,7 +20072,7 @@ void mxsr2msrTranslator::copyNoteTieToChord (
 				__FILE__, __LINE__,
 				ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     chord->
       appendTieToChord (noteTie);
@@ -20093,7 +20098,7 @@ void mxsr2msrTranslator::copyNoteTieToChord (
 			__FILE__, __LINE__,
 			ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 /*
@@ -20129,7 +20134,7 @@ void mxsr2msrTranslator::copyNoteSlursToChord (
 				__FILE__, __LINE__,
 				ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     chord->
       appendSlurToChord ((*i));
@@ -20172,7 +20177,7 @@ void mxsr2msrTranslator::appendNoteSlursLinksToChord (
 				__FILE__, __LINE__,
 				ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     // create the slur link
     S_msrChordSlurLink
@@ -20203,7 +20208,7 @@ void mxsr2msrTranslator::appendNoteSlursLinksToChord (
 
     --gIndenter;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //______________________________________________________________________________
@@ -20234,7 +20239,7 @@ void mxsr2msrTranslator::copyNoteLigaturesToChord (
 				__FILE__, __LINE__,
 				ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     chord->
       appendLigatureToChord (ligature);
@@ -20270,7 +20275,7 @@ void mxsr2msrTranslator::copyNotePedalsToChord (
 				__FILE__, __LINE__,
 				ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     chord->
       appendPedalToChord ((*i));
@@ -20311,7 +20316,7 @@ void mxsr2msrTranslator::copyNoteSlashesToChord (
 				__FILE__, __LINE__,
 				ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     chord->
       appendSlashToChord ((*i));
@@ -20353,7 +20358,7 @@ void mxsr2msrTranslator::copyNoteWedgesToChord (
 				__FILE__, __LINE__,
 				ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     chord->
       appendWedgeToChord ((*i));
@@ -20394,7 +20399,7 @@ void mxsr2msrTranslator::copyNoteSegnosToChord (
 				__FILE__, __LINE__,
 				ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     chord->
       appendSegnoToChord ((*i));
@@ -20435,7 +20440,7 @@ void mxsr2msrTranslator::copyNoteDalSegnosToChord (
 				__FILE__, __LINE__,
 				ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     chord->
       appendDalSegnoToChord ((*i));
@@ -20476,7 +20481,7 @@ void mxsr2msrTranslator::copyNoteCodasToChord (
 				__FILE__, __LINE__,
 				ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     chord->
       appendCodaToChord ((*i));
@@ -20511,7 +20516,7 @@ void mxsr2msrTranslator::copyNoteOctaveShiftToChord (
 				__FILE__, __LINE__,
 				ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     chord->
       setChordOctaveShift (noteOctaveShift);
@@ -20546,7 +20551,7 @@ void mxsr2msrTranslator::copyNoteGraceNotesGroupsToChord (
 				__FILE__, __LINE__,
 				ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     chord->
       setChordGraceNotesGroupBefore (graceNotesGroupBefore);
@@ -20574,7 +20579,7 @@ void mxsr2msrTranslator::copyNoteGraceNotesGroupsToChord (
 				__FILE__, __LINE__,
 				ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     chord->
       setChordGraceNotesGroupAfter (graceNotesGroupAfter);
@@ -20611,7 +20616,7 @@ void mxsr2msrTranslator::addNoteGraceNotesGroupsLinksToChord (
 				__FILE__, __LINE__,
 				ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     // create the grace notes group link
     const S_msrChordGraceNotesGroupLink&
@@ -20650,7 +20655,7 @@ void mxsr2msrTranslator::addNoteGraceNotesGroupsLinksToChord (
 				__FILE__, __LINE__,
 				ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     // create the grace notes group link
     const S_msrChordGraceNotesGroupLink&
@@ -20722,7 +20727,7 @@ void mxsr2msrTranslator::copyNoteHarmoniesToChord (
 					__FILE__, __LINE__,
 					iss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       chord->
         appendHarmonyToChord (harmony);
@@ -20838,7 +20843,7 @@ void mxsr2msrTranslator::createAndPushTupletUponItsFirstNote (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // account for note duration
   Rational
@@ -20896,7 +20901,7 @@ void mxsr2msrTranslator::createAndPushTupletUponItsFirstNote (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // set tuplet's uplink to tuplet
   if (fTupletsStack.size ()) {
@@ -20920,7 +20925,7 @@ void mxsr2msrTranslator::createAndPushTupletUponItsFirstNote (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fTupletsStack.push_front (tuplet);
 
@@ -20929,7 +20934,7 @@ void mxsr2msrTranslator::createAndPushTupletUponItsFirstNote (
     displayTupletsStack (
       "############## createAndPushTupletUponItsFirstNote() 1");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 /* JMI
   // set note displayed divisions
@@ -20959,7 +20964,7 @@ void mxsr2msrTranslator::createAndPushTupletUponItsFirstNote (
     displayLastHandledTupletInVoiceMap (
       "############## createAndPushTupletUponItsFirstNote() 2");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //______________________________________________________________________________
@@ -20979,14 +20984,14 @@ void mxsr2msrTranslator::finalizeTupletAndPopItFromTupletsStack (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalTraceOahGroup->getTraceTupletsDetails ()) {
     displayTupletsStack (
       "############## Before finalizeTupletAndPopItFromTupletsStack()");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // fetch current voice
   S_msrVoice
@@ -21024,7 +21029,7 @@ void mxsr2msrTranslator::finalizeTupletAndPopItFromTupletsStack (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   tuplet->appendNoteToTuplet (lastNote);
 */
@@ -21050,7 +21055,7 @@ void mxsr2msrTranslator::finalizeTupletAndPopItFromTupletsStack (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fTupletsStack.pop_front ();
 
@@ -21067,7 +21072,7 @@ void mxsr2msrTranslator::finalizeTupletAndPopItFromTupletsStack (
       ", line " << inputLineNumber <<
       std::endl;
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     fTupletsStack.front ()->
       appendTupletToTuplet (tuplet);
@@ -21086,7 +21091,7 @@ void mxsr2msrTranslator::finalizeTupletAndPopItFromTupletsStack (
       ", line " << inputLineNumber <<
       std::endl;
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     currentVoice->
       appendTupletToVoice (tuplet);
@@ -21107,7 +21112,7 @@ void mxsr2msrTranslator::finalizeTupletAndPopItFromTupletsStack (
     displayTupletsStack (
       "############## After  finalizeTupletAndPopItFromTupletsStack()");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //______________________________________________________________________________
@@ -21130,7 +21135,7 @@ void mxsr2msrTranslator::attachCurrentArticulationsToNote (
 				__FILE__, __LINE__,
 				ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     while (fCurrentArticulations.size ()) {
       S_msrArticulation
@@ -21151,7 +21156,7 @@ void mxsr2msrTranslator::attachCurrentArticulationsToNote (
 					__FILE__, __LINE__,
 					ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       note->
         appendArticulationToNote (art);
@@ -21182,7 +21187,7 @@ void mxsr2msrTranslator::attachCurrentTechnicalsToNote (
 				__FILE__, __LINE__,
 				ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     while (fCurrentTechnicalsList.size ()) {
       S_msrTechnical
@@ -21203,7 +21208,7 @@ void mxsr2msrTranslator::attachCurrentTechnicalsToNote (
 					__FILE__, __LINE__,
 					ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       note->
         appendTechnicalToNote (tech);
@@ -21234,7 +21239,7 @@ void mxsr2msrTranslator::attachCurrentTechnicalWithIntegersToNote (
 				__FILE__, __LINE__,
 				ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     while (fCurrentTechnicalWithIntegersList.size ()) {
       S_msrTechnicalWithInteger
@@ -21255,7 +21260,7 @@ void mxsr2msrTranslator::attachCurrentTechnicalWithIntegersToNote (
 					__FILE__, __LINE__,
 					ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       note->
         appendTechnicalWithIntegerToNote (tech);
@@ -21286,7 +21291,7 @@ void mxsr2msrTranslator::attachCurrentTechnicalWithFloatsToNote (
 				__FILE__, __LINE__,
 				ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     while (fCurrentTechnicalWithFloatsList.size ()) {
       S_msrTechnicalWithFloat
@@ -21307,7 +21312,7 @@ void mxsr2msrTranslator::attachCurrentTechnicalWithFloatsToNote (
 					__FILE__, __LINE__,
 					ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       note->
         appendTechnicalWithFloatToNote (tech);
@@ -21338,7 +21343,7 @@ void mxsr2msrTranslator::attachCurrentTechnicalWithStringsToNote (
 				__FILE__, __LINE__,
 				ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     while (fCurrentTechnicalWithStringsList.size ()) {
       S_msrTechnicalWithString
@@ -21359,7 +21364,7 @@ void mxsr2msrTranslator::attachCurrentTechnicalWithStringsToNote (
 					__FILE__, __LINE__,
 					ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       note->
         appendTechnicalWithStringToNote (tech);
@@ -21390,7 +21395,7 @@ void mxsr2msrTranslator::attachCurrentOrnamentsToNote (
 				__FILE__, __LINE__,
 				ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     while (fCurrentOrnamentsList.size ()) {
       S_msrOrnament
@@ -21411,7 +21416,7 @@ void mxsr2msrTranslator::attachCurrentOrnamentsToNote (
 				__FILE__, __LINE__,
 				ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       note->
         appendOrnamentToNote (ornament);
@@ -21442,7 +21447,7 @@ void mxsr2msrTranslator::attachCurrentSpannersToNote (
 				__FILE__, __LINE__,
 				ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     Bool doHandleSpanner (true);
     Bool spannerStopMetForThisNote (false);
@@ -21505,7 +21510,7 @@ void mxsr2msrTranslator::attachCurrentSpannersToNote (
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
         note->
           appendSpannerToNote (spanner);
@@ -21533,7 +21538,7 @@ void mxsr2msrTranslator::attachCurrentSpannersToNote (
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
         // keep track of this stop spanner
         delayedStopSpanner = spanner;
@@ -21571,7 +21576,7 @@ void mxsr2msrTranslator::attachCurrentSingleTremoloToNote (
 				__FILE__, __LINE__,
 				ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     note->
       setNoteSingleTremolo (fCurrentSingleTremolo);
@@ -21605,7 +21610,7 @@ void mxsr2msrTranslator::attachCurrentArticulationsToChord ( // JMI
 				__FILE__, __LINE__,
 				ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     std::list<S_msrArticulation>::const_iterator i;
     for (
@@ -21624,7 +21629,7 @@ void mxsr2msrTranslator::attachCurrentArticulationsToChord ( // JMI
 				__FILE__, __LINE__,
 				ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       chord->
         appendArticulationToChord ((*i));
@@ -21651,7 +21656,7 @@ void mxsr2msrTranslator::attachCurrentOrnamentsToChord ( // JMI
 				__FILE__, __LINE__,
 				ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     std::list<S_msrOrnament>::const_iterator i;
     for (
@@ -21670,7 +21675,7 @@ void mxsr2msrTranslator::attachCurrentOrnamentsToChord ( // JMI
 				__FILE__, __LINE__,
 				ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       chord->
         appendOrnamentToChord ((*i));
@@ -21699,7 +21704,7 @@ void mxsr2msrTranslator::attachPendingTemposToVoice (
 				__FILE__, __LINE__,
 				ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     while (fPendingTemposList.size ()) {
       S_msrTempo
@@ -21733,7 +21738,7 @@ void mxsr2msrTranslator::attachPendingTemposToPart (
 				__FILE__, __LINE__,
 				ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     while (fPendingTemposList.size ()) {
       S_msrTempo
@@ -21767,7 +21772,7 @@ void mxsr2msrTranslator::attachPendingBarLinesToVoice (
 				__FILE__, __LINE__,
 				ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     while (fPendingBarLinesList.size ()) {
       S_msrBarLine
@@ -21804,7 +21809,7 @@ void mxsr2msrTranslator::attachPendingBarLinesToPart (
 				__FILE__, __LINE__,
 				ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     while (fPendingBarLinesList.size ()) {
       S_msrBarLine
@@ -21841,7 +21846,7 @@ void mxsr2msrTranslator::attachPendingRehearsalMarksToVoice (
 				__FILE__, __LINE__,
 				ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     while (fPendingRehearsalMarksList.size ()) {
       S_msrRehearsalMark
@@ -21875,7 +21880,7 @@ void mxsr2msrTranslator::attachPendingRehearsalMarksToPart (
 				__FILE__, __LINE__,
 				ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     while (fPendingRehearsalMarksList.size ()) {
       S_msrRehearsalMark
@@ -21909,7 +21914,7 @@ void mxsr2msrTranslator::attachLineBreaksToVoice (
 				__FILE__, __LINE__,
 				ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     while (fPendingLineBreaksList.size ()) {
       S_msrLineBreak
@@ -21945,7 +21950,7 @@ void mxsr2msrTranslator::attachLineBreaksToPart (
 				__FILE__, __LINE__,
 				ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     while (fPendingLineBreaksList.size ()) {
       S_msrLineBreak
@@ -21981,7 +21986,7 @@ void mxsr2msrTranslator::attachPageBreaksToVoice (
 				__FILE__, __LINE__,
 				ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     while (fPendingPageBreaksList.size ()) {
       S_msrPageBreak
@@ -22017,7 +22022,7 @@ void mxsr2msrTranslator::attachPageBreaksToPart (
 				__FILE__, __LINE__,
 				ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     while (fPendingPageBreaksList.size ()) {
       S_msrPageBreak
@@ -22053,7 +22058,7 @@ void mxsr2msrTranslator::attachPendingSegnosToNote (
 				__FILE__, __LINE__,
 				ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     while (fPendingSegnosList.size ()) {
       S_msrSegno
@@ -22087,7 +22092,7 @@ void mxsr2msrTranslator::attachPendingDalSegnosToNote (
 				__FILE__, __LINE__,
 				ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     while (fPendingDalSegnosList.size ()) {
       S_msrDalSegno
@@ -22120,7 +22125,7 @@ void mxsr2msrTranslator::attachPendingDalSegnosToChord (
 				__FILE__, __LINE__,
 				ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     while (fPendingDalSegnosList.size ()) {
       S_msrDalSegno
@@ -22154,7 +22159,7 @@ void mxsr2msrTranslator::attachPendingCodasToNote (
 				__FILE__, __LINE__,
 				ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     while (fPendingCodasList.size ()) {
       S_msrCoda
@@ -22188,7 +22193,7 @@ void mxsr2msrTranslator::attachPendingCrescDecrescsToNote (
 				__FILE__, __LINE__,
 				ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     while (fPendinCrescDecrescsList.size ()) {
       S_msrCrescDecresc
@@ -22222,7 +22227,7 @@ void mxsr2msrTranslator::attachPendingEyeGlassesToNote (
 				__FILE__, __LINE__,
 				ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     while (fPendingEyeGlassesList.size ()) {
       S_msrEyeGlasses
@@ -22256,7 +22261,7 @@ void mxsr2msrTranslator::attachPendingDampsToNote (
 				__FILE__, __LINE__,
 				ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     while (fPendingDampsList.size ()) {
       S_msrDamp
@@ -22290,7 +22295,7 @@ void mxsr2msrTranslator::attachPendingDampAllsToNote (
 				__FILE__, __LINE__,
 				ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     while (fPendingDampAllsList.size ()) {
       S_msrDampAll
@@ -22324,7 +22329,7 @@ void mxsr2msrTranslator::attachPendingOctaveShiftsToNote (
 				__FILE__, __LINE__,
 				ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 /* JMI
     // fetch the voice ??? JMI
@@ -22368,7 +22373,7 @@ void mxsr2msrTranslator::attachPendingScordaturasToNote (
 				__FILE__, __LINE__,
 				ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     while (fPendingScordaturasList.size ()) {
       S_msrScordatura
@@ -22404,7 +22409,7 @@ void mxsr2msrTranslator::attachPendingDynamicsToNote (
 				__FILE__, __LINE__,
 				ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     if (fCurrentNoteIsARest) {
       if (gGlobalMxsr2msrOahGroup->getDelayRestsDynamics ()) {
@@ -22438,7 +22443,7 @@ void mxsr2msrTranslator::attachPendingDynamicsToNote (
             note->getInputLineNumber (),
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
       }
     }
 
@@ -22476,7 +22481,7 @@ void mxsr2msrTranslator::attachPendingOtherDynamicsToNote (
 				__FILE__, __LINE__,
 				ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     if (fCurrentNoteIsARest) {
       if (gGlobalMxsr2msrOahGroup->getDelayRestsDynamics ()) {
@@ -22510,7 +22515,7 @@ void mxsr2msrTranslator::attachPendingOtherDynamicsToNote (
             note->getInputLineNumber (),
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
       }
     }
 
@@ -22548,7 +22553,7 @@ void mxsr2msrTranslator::attachPendingWordsToNote (
 				__FILE__, __LINE__,
 				ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     if (fCurrentNoteIsARest) {
       if (gGlobalMxsr2msrOahGroup->getDelayRestsWords ()) {
@@ -22581,7 +22586,7 @@ void mxsr2msrTranslator::attachPendingWordsToNote (
             note->getInputLineNumber (),
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
       }
     }
 
@@ -22620,7 +22625,7 @@ void mxsr2msrTranslator::attachPendingBeamsToNote (
 				__FILE__, __LINE__,
 				ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     if (fCurrentNoteIsARest) {
       if (gGlobalMxsr2msrOahGroup->getDelayRestsBeams ()) {
@@ -22654,7 +22659,7 @@ void mxsr2msrTranslator::attachPendingBeamsToNote (
             note->getInputLineNumber (),
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
       }
     }
 
@@ -22692,7 +22697,7 @@ void mxsr2msrTranslator::attachPendingSlursToNote (
 				__FILE__, __LINE__,
 				ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     if (fCurrentNoteIsARest) {
       if (gGlobalMxsr2msrOahGroup->getDelayRestsSlurs ()) {
@@ -22765,7 +22770,7 @@ void mxsr2msrTranslator::attachPendingLigaturesToNote (
 				__FILE__, __LINE__,
 				ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     Bool delayAttachment (false);
 
@@ -22801,7 +22806,7 @@ void mxsr2msrTranslator::attachPendingLigaturesToNote (
             note->getInputLineNumber (),
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
       }
     }
 
@@ -22829,7 +22834,7 @@ void mxsr2msrTranslator::attachPendingLigaturesToNote (
             note->getInputLineNumber (),
             ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       // append ligatures to note only if they belong to a suitable voice,
       // i.e. above goes to voice 1 or 3, and below to voice 2 or 4
@@ -22855,7 +22860,7 @@ void mxsr2msrTranslator::attachPendingLigaturesToNote (
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
         // fetch ligatures placement kind
         msrPlacementKind
@@ -22870,13 +22875,12 @@ void mxsr2msrTranslator::attachPendingLigaturesToNote (
 //               getNoteUpLinkToMeasure ();
 //
 // #ifdef MF_SANITY_CHECKS_ARE_ENABLED
-// #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
 //         mfAssert (
 //           __FILE__, __LINE__,
 //           noteMeasure != nullptr,
 //           "attachPendingLigaturesToNote(): noteMeasure is null");
-// #endif
+// #endif // MF_TRACE_IS_ENABLED
 //
 //         // fetch note's segment
 //         S_msrSegment
@@ -22889,7 +22893,7 @@ void mxsr2msrTranslator::attachPendingLigaturesToNote (
 //           __FILE__, __LINE__,
 //           noteSegment != nullptr,
 //           "noteSegment is null");
-// #endif
+// #endif // MF_TRACE_IS_ENABLED
 //
 //         // fetch note's voice
 //         S_msrVoice
@@ -22903,7 +22907,7 @@ void mxsr2msrTranslator::attachPendingLigaturesToNote (
 //           __FILE__, __LINE__,
 //           noteVoice != nullptr,
 //           "noteVoice is null");
-// #endif
+// #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
         // handle ligature placement kind
         switch (ligaturePlacementKind) {
@@ -22926,7 +22930,7 @@ void mxsr2msrTranslator::attachPendingLigaturesToNote (
                 ", line " << ligature->getInputLineNumber () <<
                 std::endl;
             }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
             note->appendLigatureToNote (ligature);
             break;
@@ -22961,7 +22965,7 @@ void mxsr2msrTranslator::attachPendingPedalsToNote (
 				__FILE__, __LINE__,
 				ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     if (fCurrentNoteIsARest) {
       if (gGlobalMxsr2msrOahGroup->getDelayRestsPedals ()) {
@@ -23029,7 +23033,7 @@ void mxsr2msrTranslator::attachPendingSlashesToNote (
 				__FILE__, __LINE__,
 				ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     if (fCurrentNoteIsARest) {
       if (gGlobalMxsr2msrOahGroup->getDelayRestsSlashes ()) {
@@ -23097,7 +23101,7 @@ void mxsr2msrTranslator::attachPendingWedgesToNote (
 				__FILE__, __LINE__,
 				ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     if (fCurrentNoteIsARest) {
       if (gGlobalMxsr2msrOahGroup->getDelayRestsWedges ()) {
@@ -23131,7 +23135,7 @@ void mxsr2msrTranslator::attachPendingWedgesToNote (
             note->getInputLineNumber (),
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
       }
     }
 
@@ -23167,7 +23171,7 @@ void mxsr2msrTranslator::attachPendingGlissandosToNote (
 				__FILE__, __LINE__,
 				ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     while (fPendingGlissandosList.size ()) {
       S_msrGlissando
@@ -23213,7 +23217,7 @@ void mxsr2msrTranslator::attachPendingGlissandosToNote (
                   ", line " << inputLineNumber <<
                   std::endl;
               }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
           if (voiceStanzasMap.size ()) {
             // there are lyrics in this voice
@@ -23229,7 +23233,7 @@ void mxsr2msrTranslator::attachPendingGlissandosToNote (
                   ", line " << inputLineNumber <<
                   std::endl;
               }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
               for (
                 std::map<std::string, S_msrStanza>::const_iterator i = voiceStanzasMap.begin ();
@@ -23288,7 +23292,7 @@ void mxsr2msrTranslator::attachPendingSlidesToNote (
 				__FILE__, __LINE__,
 				ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     while (fPendingSlidesList.size ()) {
       S_msrSlide
@@ -23334,7 +23338,7 @@ void mxsr2msrTranslator::attachPendingSlidesToNote (
                   ", line " << inputLineNumber <<
                   std::endl;
               }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
           if (voiceStanzasMap.size ()) {
             // there are lyrics in this voice
@@ -23350,7 +23354,7 @@ void mxsr2msrTranslator::attachPendingSlidesToNote (
                   ", line " << inputLineNumber <<
                   std::endl;
               }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
               for (
                 std::map<std::string, S_msrStanza>::const_iterator i = voiceStanzasMap.begin ();
@@ -23569,7 +23573,7 @@ S_msrNote mxsr2msrTranslator::createNote (
           fCurrentNoteDotsNumber <<
           std::endl << std::endl;
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       // take dots into account if any
       if (fCurrentNoteDotsNumber > 0) {
@@ -23604,7 +23608,7 @@ S_msrNote mxsr2msrTranslator::createNote (
               dots <<
               std::endl << std::endl;
           }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         } // while
       }
 
@@ -23625,7 +23629,7 @@ S_msrNote mxsr2msrTranslator::createNote (
           fCurrentNoteDotsNumber <<
           std::endl << std::endl;
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
   } // switch
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -23713,7 +23717,7 @@ S_msrNote mxsr2msrTranslator::createNote (
 
     --gIndenter;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (fCurrentNoteIsAGraceNote) {
     // set current grace note display whole notes
@@ -23855,7 +23859,7 @@ S_msrNote mxsr2msrTranslator::createNote (
 
     --gIndenter;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   return newNote;
 }
@@ -24036,7 +24040,7 @@ void mxsr2msrTranslator::populateNoteAfterNoteItselfIsHandled (
       __FILE__, __LINE__,
       voiceToInsertHarmoniesInto != nullptr,
       "voiceToInsertHarmoniesInto is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
     handlePendingHarmonies (
       newNote,
@@ -24060,7 +24064,7 @@ void mxsr2msrTranslator::populateNoteAfterNoteItselfIsHandled (
       __FILE__, __LINE__,
       voiceToInsertFiguredBassesInto != nullptr,
       "voiceToInsertFiguredBassesInto is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
     handlePendingFiguredBasses (
       newNote,
@@ -24122,7 +24126,7 @@ void mxsr2msrTranslator::createAStaffChangeIfNecessary (
 				__FILE__, __LINE__,
 				ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       fCurrentStaffChangeKind = msrStaffChangeKind::kStaffChangeChordMemberNote;
 
@@ -24157,7 +24161,7 @@ void mxsr2msrTranslator::createAStaffChangeIfNecessary (
 				__FILE__, __LINE__,
 				ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       // create the voice staff change
       S_msrVoiceStaffChange
@@ -24255,7 +24259,7 @@ void mxsr2msrTranslator::handleNoteItself (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (! fCurrentNoteBelongsToAChord) {
     if (fOnGoingChord) {
@@ -24301,7 +24305,7 @@ void mxsr2msrTranslator::handleNoteItself (
       std::endl;
       */
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fVoicesLastMetNoteMap [
     std::make_pair (
@@ -24316,7 +24320,7 @@ void mxsr2msrTranslator::handleNoteItself (
       inputLineNumber,
       "handleNote()");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //______________________________________________________________________________
@@ -24372,7 +24376,7 @@ void mxsr2msrTranslator::attachPendingGraceNotesGroupToNoteIfRelevant (
 //         voice->getVoiceLastAppendedNote ();
     }
 
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     if (false && fCurrentNonGraceNote) { // JMI
 #ifdef MF_TRACE_IS_ENABLED
@@ -24382,7 +24386,7 @@ void mxsr2msrTranslator::attachPendingGraceNotesGroupToNoteIfRelevant (
         fCurrentNonGraceNote <<
         "+++++++++++++++++" <<
         std::endl;
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       // set the pending grace notes group's kind to 'after'
       fPendingGraceNotesGroup->
@@ -24439,7 +24443,7 @@ void mxsr2msrTranslator::handleBackup (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // fetch current voice
 #ifdef MF_TRACE_IS_ENABLED
@@ -24459,7 +24463,7 @@ void mxsr2msrTranslator::handleBackup (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   S_msrVoice
     currentVoice =
@@ -24509,7 +24513,7 @@ void mxsr2msrTranslator::visitEnd (S_note& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   /*
     This is a complex method, due to the fact that
@@ -24592,7 +24596,7 @@ void mxsr2msrTranslator::visitEnd (S_note& elt)
     __FILE__, __LINE__,
     currentNoteVoice != nullptr,
     "currentNoteVoice is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // the elements pending since before the note if any
   // can now be appended to the latter's voice
@@ -24622,7 +24626,7 @@ void mxsr2msrTranslator::visitEnd (S_note& elt)
 				__FILE__, __LINE__,
 				ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     fCurrentStaffNumberToInsertInto = fCurrentMusicXMLStaffNumber;
   }
@@ -24648,7 +24652,7 @@ void mxsr2msrTranslator::visitEnd (S_note& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // fetch voice to insert note into
   S_msrVoice
@@ -24664,7 +24668,7 @@ void mxsr2msrTranslator::visitEnd (S_note& elt)
     __FILE__, __LINE__,
     voiceToInsertNoteInto != nullptr,
     "voiceToInsertNoteInto is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalTraceOahGroup->getTraceNotes () || gGlobalTraceOahGroup->getTraceStaffChanges ()) {
@@ -24694,7 +24698,7 @@ void mxsr2msrTranslator::visitEnd (S_note& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // create a staff change if necessary
   createAStaffChangeIfNecessary (
@@ -24728,7 +24732,7 @@ void mxsr2msrTranslator::visitEnd (S_note& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 /* JMI
   // fetch the staff from current part
@@ -24815,7 +24819,7 @@ void mxsr2msrTranslator::handlePendingHarmonies (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   Rational
     newNoteSoundingWholeNotes =
@@ -24841,7 +24845,7 @@ void mxsr2msrTranslator::handlePendingHarmonies (
 				__FILE__, __LINE__,
 				ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   while (fPendingHarmoniesList.size ()) { // recompute at each iteration
     S_msrHarmony
@@ -24891,7 +24895,7 @@ void mxsr2msrTranslator::handlePendingHarmonies (
 				__FILE__, __LINE__,
 				ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     harmony->
       setSoundingWholeNotes (
@@ -24927,7 +24931,7 @@ void mxsr2msrTranslator::handlePendingHarmonies (
       __FILE__, __LINE__,
       partHarmoniesVoice != nullptr,
       "partHarmoniesVoice is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
     // set the harmony's voice upLink
     // only now that we know which harmonies voice will contain it
@@ -24965,7 +24969,7 @@ void mxsr2msrTranslator::handlePendingFiguredBasses (
       std::endl;
     --gIndenter;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   Rational
     newNoteSoundingWholeNotes =
@@ -25037,7 +25041,7 @@ void mxsr2msrTranslator::handlePendingFiguredBasses (
       __FILE__, __LINE__,
       partFiguredBassVoice != nullptr,
       "partFiguredBassVoice is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
     // set the figuredBass's voice upLink
     // only now that we know which figured bass voice will contain it
@@ -25093,7 +25097,7 @@ void mxsr2msrTranslator::handleNonChordNorTupletNoteOrRest (
 				__FILE__, __LINE__,
 				ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     if (
       fCurrentDoubleTremoloTypeKind == msrDoubleTremoloTypeKind::kDoubleTremoloTypeStart
@@ -25137,7 +25141,7 @@ void mxsr2msrTranslator::handleNonChordNorTupletNoteOrRest (
       std::endl;
     --gIndenter;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // fetch current voice
   S_msrVoice
@@ -25207,7 +25211,7 @@ void mxsr2msrTranslator::handleNonChordNorTupletNoteOrRest (
 
     --gIndenter;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 /* JMI ???
   // handle the pending tuplets if any,
@@ -25238,7 +25242,7 @@ void mxsr2msrTranslator::handleNonChordNorTupletNoteOrRest (
 					__FILE__, __LINE__,
 					ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       // create grace notes group
       fPendingGraceNotesGroup =
@@ -25304,7 +25308,7 @@ void mxsr2msrTranslator::handleNonChordNorTupletNoteOrRest (
 				__FILE__, __LINE__,
 				ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     // append newNote to the pending grace notes group
     fPendingGraceNotesGroup->
@@ -25338,7 +25342,7 @@ void mxsr2msrTranslator::handleNonChordNorTupletNoteOrRest (
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
         currentVoice->
           appendNoteToVoice (newNote);
@@ -25367,7 +25371,7 @@ void mxsr2msrTranslator::handleNonChordNorTupletNoteOrRest (
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
         fCurrentDoubleTremolo->
           setDoubleTremoloNoteFirstElement (
@@ -25394,7 +25398,7 @@ void mxsr2msrTranslator::handleNonChordNorTupletNoteOrRest (
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
         fCurrentDoubleTremolo->
           setDoubleTremoloNoteSecondElement (
@@ -25432,7 +25436,7 @@ void mxsr2msrTranslator::handleNonChordNorTupletNoteOrRest (
 				__FILE__, __LINE__,
 				ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     ++gIndenter;
 
@@ -25558,7 +25562,7 @@ void mxsr2msrTranslator::handleLyricsForNoteAfterNoteItselfIsHandled (
 
     --gIndenter;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (fCurrentNoteHasLyrics) {
     // newNote has lyrics attached to it
@@ -25576,7 +25580,7 @@ void mxsr2msrTranslator::handleLyricsForNoteAfterNoteItselfIsHandled (
 				__FILE__, __LINE__,
 				ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     for (
       std::list<S_msrSyllable>::const_iterator i =
@@ -25730,7 +25734,7 @@ void mxsr2msrTranslator::handleNoteBelongingToAChord (
 
     --gIndenter;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (fCurrentNoteIsARest) {
     mxsr2msrError (
@@ -25791,7 +25795,7 @@ void mxsr2msrTranslator::handleNoteBelongingToAChord (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   S_msrVoice
     currentVoice =
@@ -25806,7 +25810,7 @@ void mxsr2msrTranslator::handleNoteBelongingToAChord (
     __FILE__, __LINE__,
     currentVoice != nullptr,
     "currentVoice is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalTraceOahGroup->getTraceChords ()) {
@@ -25825,7 +25829,7 @@ void mxsr2msrTranslator::handleNoteBelongingToAChord (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalTraceOahGroup->getTraceChordsDetails ()) {
@@ -25852,7 +25856,7 @@ void mxsr2msrTranslator::handleNoteBelongingToAChord (
 
     gLog << std::endl;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // should a chord be created?
   if (! fOnGoingChord) {
@@ -25867,7 +25871,7 @@ void mxsr2msrTranslator::handleNoteBelongingToAChord (
         inputLineNumber,
         "handleNoteBelongingToAChord()");
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     S_msrNote
       chordFirstNote =
@@ -25917,7 +25921,7 @@ void mxsr2msrTranslator::handleNoteBelongingToAChord (
 
       --gIndenter;
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     // fetch chord first note's kind before createChordFromItsFirstNote(),
     // because the latter will change it to kChordMemberNote or msrNoteKind::kNoteInChordInGraceNotesGroup
@@ -25941,7 +25945,7 @@ void mxsr2msrTranslator::handleNoteBelongingToAChord (
 
       --gIndenter;
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     // create the current chord from its first note
     fCurrentChord =
@@ -25980,7 +25984,7 @@ void mxsr2msrTranslator::handleNoteBelongingToAChord (
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
         if (gGlobalTraceOahGroup->getTraceChordsDetails ()) {
@@ -25991,7 +25995,7 @@ void mxsr2msrTranslator::handleNoteBelongingToAChord (
             fCurrentPart <<
             std::endl << std::endl;
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
         if (gGlobalTraceOahGroup->getTraceStaffChanges ()) {
@@ -26012,7 +26016,7 @@ void mxsr2msrTranslator::handleNoteBelongingToAChord (
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
         currentVoice->
           removeNoteFromVoice (
@@ -26035,7 +26039,7 @@ void mxsr2msrTranslator::handleNoteBelongingToAChord (
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
         currentVoice->
           appendChordToVoice (
@@ -26064,7 +26068,7 @@ void mxsr2msrTranslator::handleNoteBelongingToAChord (
               "\"" <<
               std::endl;
           }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
           chord->
             setSoundingWholeNotes ( // ??? JMI
@@ -26124,7 +26128,7 @@ void mxsr2msrTranslator::handleNoteBelongingToAChord (
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
         currentVoice->
           removeNoteFromVoice (
@@ -26166,7 +26170,7 @@ void mxsr2msrTranslator::handleNoteBelongingToAChord (
 
       printVoicesCurrentChordMap ();
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 */
 
   // register newChordNote as another member of chord
@@ -26186,7 +26190,7 @@ void mxsr2msrTranslator::handleNoteBelongingToAChord (
 				__FILE__, __LINE__,
 				ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
   }
 
   // add newChordNote to current chord
@@ -26202,7 +26206,7 @@ void mxsr2msrTranslator::handleNoteBelongingToAChord (
   if (gGlobalTraceOahGroup->getTraceChordsDetails ()) {
     printCurrentChord ();
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //______________________________________________________________________________
@@ -26228,7 +26232,7 @@ void mxsr2msrTranslator::handlePendingTupletStopIfAny (
 				__FILE__, __LINE__,
 				ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     finalizeTupletAndPopItFromTupletsStack (
       inputLineNumber);
@@ -26283,7 +26287,7 @@ void mxsr2msrTranslator::handleNoteBelongingToATuplet (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // is there an ongoing chord?
   if (! fOnGoingChord) {
@@ -26309,7 +26313,7 @@ void mxsr2msrTranslator::handleNoteBelongingToATuplet (
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
         handlePendingTupletStopIfAny (
           inputLineNumber,
@@ -26327,7 +26331,7 @@ void mxsr2msrTranslator::handleNoteBelongingToATuplet (
               "', line " << inputLineNumber <<
               std::endl;
           }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
           finalizeTupletAndPopItFromTupletsStack (
             inputLineNumber);
@@ -26367,7 +26371,7 @@ void mxsr2msrTranslator::handleNoteBelongingToATuplet (
               "', line " << inputLineNumber <<
               std::endl;
           }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
           // fetch current voice
           S_msrVoice
@@ -26388,7 +26392,7 @@ void mxsr2msrTranslator::handleNoteBelongingToATuplet (
             displayTupletsStack (
               "############## kTupletTypeContinue");
           }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 /* JMI
           // set note displayed divisions
@@ -26462,7 +26466,7 @@ void mxsr2msrTranslator::handleNoteBelongingToATuplet (
                   ", line " << inputLineNumber <<
                   std::endl;
               }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
               // fetch current voice
               S_msrVoice
@@ -26483,7 +26487,7 @@ void mxsr2msrTranslator::handleNoteBelongingToATuplet (
                 displayTupletsStack (
                   "############## kTupletTypeStop, outer-most");
               }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     //* JMI
               if (fCurrentATupletStopIsPending) {
@@ -26495,7 +26499,7 @@ void mxsr2msrTranslator::handleNoteBelongingToATuplet (
                     ", line " << inputLineNumber <<
                     std::endl;
                 }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
                 finalizeTupletAndPopItFromTupletsStack (
                   inputLineNumber);
@@ -26511,7 +26515,7 @@ void mxsr2msrTranslator::handleNoteBelongingToATuplet (
                     ", line " << inputLineNumber <<
                     std::endl;
                 }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
                 finalizeTupletAndPopItFromTupletsStack (
                   inputLineNumber);
@@ -26541,7 +26545,7 @@ void mxsr2msrTranslator::handleNoteBelongingToATuplet (
                     ", line " << inputLineNumber <<
                     std::endl;
                 }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
                 finalizeTupletAndPopItFromTupletsStack (
                   inputLineNumber);
@@ -26567,7 +26571,7 @@ void mxsr2msrTranslator::handleNoteBelongingToATuplet (
                   ", line " << inputLineNumber <<
                   std::endl;
               }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
               // fetch current voice
               S_msrVoice
@@ -26588,7 +26592,7 @@ void mxsr2msrTranslator::handleNoteBelongingToATuplet (
                 displayTupletsStack (
                   "############## kTupletTypeStop, nested");
               }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       /* JMI
               // set note displayed divisions
@@ -26626,7 +26630,7 @@ void mxsr2msrTranslator::handleNoteBelongingToATuplet (
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
         if (fCurrentSingleTremolo) {
           fCurrentTupletTypeKind = msrTupletTypeKind::kTupletTypeStartAndStopInARow;
@@ -26714,7 +26718,7 @@ void mxsr2msrTranslator::handleNoteBelongingToAChordInATuplet (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (fCurrentNoteIsARest) {
     mxsr2msrError (
@@ -26795,7 +26799,7 @@ void mxsr2msrTranslator::handleNoteBelongingToAChordInATuplet (
       displayTupletsStack (
         "############## After  removeLastNoteFromTuplet()");
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     // create the current chord from its first note
     fCurrentChord =
@@ -26821,7 +26825,7 @@ void mxsr2msrTranslator::handleNoteBelongingToAChordInATuplet (
 				__FILE__, __LINE__,
 				ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     // add chord to the current tuplet instead of tupletLastNote
 #ifdef MF_TRACE_IS_ENABLED
@@ -26840,7 +26844,7 @@ void mxsr2msrTranslator::handleNoteBelongingToAChordInATuplet (
 				__FILE__, __LINE__,
 				ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     currentTuplet->
       appendChordToTuplet (fCurrentChord);
@@ -26876,7 +26880,7 @@ void mxsr2msrTranslator::handleNoteBelongingToAChordInATuplet (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fCurrentChord->
     addAnotherNoteToChord (
@@ -26890,7 +26894,7 @@ void mxsr2msrTranslator::handleNoteBelongingToAChordInATuplet (
   if (gGlobalTraceOahGroup->getTraceChordsDetails ()) {
     printCurrentChord ();
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //______________________________________________________________________________
@@ -26929,7 +26933,7 @@ void mxsr2msrTranslator::handleNoteBelongingToAChordInAGraceNotesGroup (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (fCurrentNoteIsARest) {
     mxsr2msrError (
@@ -27002,7 +27006,7 @@ void mxsr2msrTranslator::handleNoteBelongingToAChordInAGraceNotesGroup (
 				__FILE__, __LINE__,
 				ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     // set the first note's kind as grace chord member
     chordFirstNote->
@@ -27081,7 +27085,7 @@ void mxsr2msrTranslator::handleNoteBelongingToAChordInAGraceNotesGroup (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fCurrentChord->
     addAnotherNoteToChord (
@@ -27095,7 +27099,7 @@ void mxsr2msrTranslator::handleNoteBelongingToAChordInAGraceNotesGroup (
   if (gGlobalTraceOahGroup->getTraceChordsDetails ()) {
     printCurrentChord ();
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //______________________________________________________________________________
@@ -27120,7 +27124,7 @@ void mxsr2msrTranslator::handleTupletsPendingOnTupletsStack (
     displayTupletsStack (
       "############## Before  handleTupletsPendingOnTupletsStack()");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 /* superfluous JMI
   // fetch current voice
@@ -27148,7 +27152,7 @@ void mxsr2msrTranslator::handleTupletsPendingOnTupletsStack (
     displayTupletsStack (
       "############## Before  handleTupletsPendingOnTupletsStack()");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void mxsr2msrTranslator::displayLastHandledTupletInVoiceMap (const std::string& header)
@@ -27219,7 +27223,7 @@ void mxsr2msrTranslator::handleRepeatStart (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // remember repeat start measure number
   fCurrentRepeatStartMeasureNumber = inputLineNumber;
@@ -27265,7 +27269,7 @@ void mxsr2msrTranslator::handleRepeatEnd (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // append the bar line to the current part
   fCurrentPart->
@@ -27304,7 +27308,7 @@ void mxsr2msrTranslator::handleRepeatEndingStart (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalTraceOahGroup->getTraceRepeatsDetails ()) {
@@ -27322,7 +27326,7 @@ void mxsr2msrTranslator::handleRepeatEndingStart (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // handle the repeat ending
 #ifdef MF_TRACE_IS_ENABLED
@@ -27339,7 +27343,7 @@ void mxsr2msrTranslator::handleRepeatEndingStart (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fCurrentPart->
     handleRepeatEndingStartInPart (
@@ -27372,7 +27376,7 @@ void mxsr2msrTranslator::handleRepeatHookedEndingEnd (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalTraceOahGroup->getTraceRepeatsDetails ()) {
@@ -27390,7 +27394,7 @@ void mxsr2msrTranslator::handleRepeatHookedEndingEnd (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // append the bar line to the current part
   fCurrentPart->
@@ -27411,7 +27415,7 @@ void mxsr2msrTranslator::handleRepeatHookedEndingEnd (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fCurrentPart->
     handleRepeatEndingEndInPart (
@@ -27451,7 +27455,7 @@ void mxsr2msrTranslator::handleRepeatHooklessEndingEnd (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalTraceOahGroup->getTraceRepeatsDetails ()) {
@@ -27469,7 +27473,7 @@ void mxsr2msrTranslator::handleRepeatHooklessEndingEnd (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // append the bar line to the current part
   fCurrentPart->
@@ -27490,7 +27494,7 @@ void mxsr2msrTranslator::handleRepeatHooklessEndingEnd (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fCurrentPart->
     handleRepeatEndingEndInPart (
@@ -27518,7 +27522,7 @@ void mxsr2msrTranslator::visitStart (S_rehearsal& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   std::string rehearsalValue = elt->getValue();
 
@@ -27580,7 +27584,7 @@ void mxsr2msrTranslator::visitStart (S_rehearsal& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   S_msrRehearsalMark
     rehearsalMark =
@@ -27613,7 +27617,7 @@ void mxsr2msrTranslator::visitStart (S_harmony& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // print-object
 
@@ -27663,7 +27667,7 @@ void mxsr2msrTranslator::visitStart (S_root& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // print-object
 
@@ -27695,7 +27699,7 @@ void mxsr2msrTranslator::visitStart (S_root_step& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   std::string step = elt->getValue ();
 
@@ -27727,7 +27731,7 @@ void mxsr2msrTranslator::visitStart (S_root_alter& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   float rootAlter = (float)(*elt);
 
@@ -27768,7 +27772,7 @@ void mxsr2msrTranslator::visitStart (S_kind& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // harmony kind
   // ----------------------------------
@@ -27998,7 +28002,7 @@ void mxsr2msrTranslator::visitStart (S_inversion& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 /*
   Inversion is a number indicating which inversion is used:
@@ -28026,7 +28030,7 @@ void mxsr2msrTranslator::visitStart (S_bass& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void mxsr2msrTranslator::visitStart (S_bass_step& elt)
@@ -28047,7 +28051,7 @@ void mxsr2msrTranslator::visitStart (S_bass_step& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   std::string step = elt->getValue();
 
@@ -28079,7 +28083,7 @@ void mxsr2msrTranslator::visitStart (S_bass_alter& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   float bassAlter = (float)(*elt);
 
@@ -28120,7 +28124,7 @@ void mxsr2msrTranslator::visitStart (S_degree& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // print-object
 
@@ -28149,7 +28153,7 @@ void mxsr2msrTranslator::visitStart (S_degree_value& elt)
 			__FILE__, __LINE__,
 			ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fCurrentHarmonyDegreeValue = (int)(*elt);
 }
@@ -28172,7 +28176,7 @@ void mxsr2msrTranslator::visitStart (S_degree_alter& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   float degreeAlter = (float)(*elt);
 
@@ -28213,7 +28217,7 @@ void mxsr2msrTranslator::visitStart (S_degree_type& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   std::string degreeType = elt->getValue ();
 
@@ -28257,7 +28261,7 @@ void mxsr2msrTranslator::visitEnd (S_degree& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // create harmony degree
   S_msrHarmonyDegree
@@ -28291,7 +28295,7 @@ void mxsr2msrTranslator::visitEnd (S_harmony& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // convert root diatonic pitch to a quarter tone pitch
   fCurrentHarmonyRootQuarterTonesPitchKind =
@@ -28358,7 +28362,7 @@ void mxsr2msrTranslator::visitEnd (S_harmony& elt)
 				__FILE__, __LINE__,
 				ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
   }
   else {
    // create the harmony
@@ -28436,7 +28440,7 @@ void mxsr2msrTranslator::visitEnd (S_harmony& elt)
 				__FILE__, __LINE__,
 				ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     S_msrHarmony
       harmony =
@@ -28470,7 +28474,7 @@ void mxsr2msrTranslator::visitEnd (S_harmony& elt)
           inputLineNumber,
           "harmony has no degrees contents");
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
     }
 
     else {
@@ -28526,7 +28530,7 @@ void mxsr2msrTranslator::visitStart (S_frame& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (! fOnGoingHarmony) {
     std::stringstream ss;
@@ -28619,7 +28623,7 @@ void mxsr2msrTranslator::visitStart (S_frame_strings& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fCurrentFrameStrings = (int)(*elt);
 }
@@ -28639,7 +28643,7 @@ void mxsr2msrTranslator::visitStart (S_frame_frets& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fCurrentFrameFrets = (int)(*elt);
 }
@@ -28659,7 +28663,7 @@ void mxsr2msrTranslator::visitStart (S_first_fret& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 /*
           <first-fret location="right" text="12fr.">12</first-fret>
@@ -28687,7 +28691,7 @@ void mxsr2msrTranslator::visitStart (S_frame_note& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fCurrentFrameNoteStringNumber = -1;
   fCurrentFrameNoteFretNumber = -1;
@@ -28715,7 +28719,7 @@ void mxsr2msrTranslator::visitStart (S_barre& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // type
 
@@ -28762,7 +28766,7 @@ void mxsr2msrTranslator::visitEnd (S_frame_note& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // create the frame note
   S_msrFrameNote
@@ -28798,7 +28802,7 @@ void mxsr2msrTranslator::visitEnd (S_frame& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // create the frame
   fCurrentFrame =
@@ -28847,7 +28851,7 @@ void mxsr2msrTranslator::visitStart (S_figured_bass& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++fFiguredBassVoicesCounter;
 
@@ -28908,7 +28912,7 @@ void mxsr2msrTranslator::visitStart (S_figure& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void mxsr2msrTranslator::visitStart (S_prefix& elt)
@@ -28929,7 +28933,7 @@ void mxsr2msrTranslator::visitStart (S_prefix& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   std::string prefix =
     elt->getValue ();
@@ -28991,7 +28995,7 @@ void mxsr2msrTranslator::visitStart (S_figure_number& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fCurrentFigureNumber = (int)(*elt);
 
@@ -29027,7 +29031,7 @@ void mxsr2msrTranslator::visitStart (S_suffix& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   std::string suffix =
     elt->getValue ();
@@ -29091,7 +29095,7 @@ void mxsr2msrTranslator::visitEnd (S_figure& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // create the bass figure
   S_msrBassFigure
@@ -29126,7 +29130,7 @@ void mxsr2msrTranslator::visitEnd (S_figured_bass& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // create the figured bass element
 #ifdef MF_TRACE_IS_ENABLED
@@ -29142,7 +29146,7 @@ void mxsr2msrTranslator::visitEnd (S_figured_bass& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // create the figured bass element
   // if the sounding whole notes is 0/1 (no <duration /> was found), JMI ???
@@ -29200,7 +29204,7 @@ void mxsr2msrTranslator::visitStart (S_harp_pedals& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 /*
 <!--
@@ -29277,7 +29281,7 @@ void mxsr2msrTranslator::visitStart (S_harp_pedals& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fCurrentHarpPedalsTuning =
     msrHarpPedalsTuning::create (
@@ -29304,7 +29308,7 @@ void mxsr2msrTranslator::visitStart (S_pedal_tuning& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void mxsr2msrTranslator::visitStart (S_pedal_step& elt)
@@ -29325,7 +29329,7 @@ void mxsr2msrTranslator::visitStart (S_pedal_step& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   std::string tuningStep = elt->getValue();
 
@@ -29357,7 +29361,7 @@ void mxsr2msrTranslator::visitStart (S_pedal_alter& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   float pedalAlter = (float)(*elt);
 
@@ -29398,7 +29402,7 @@ void mxsr2msrTranslator::visitEnd (S_pedal_tuning& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // create a harp pedals tuning
 #ifdef MF_TRACE_IS_ENABLED
@@ -29426,7 +29430,7 @@ void mxsr2msrTranslator::visitEnd (S_pedal_tuning& elt)
 
     --gIndenter;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fCurrentHarpPedalsTuning->
     addPedalTuning (
@@ -29453,7 +29457,7 @@ void mxsr2msrTranslator::visitStart( S_damp& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (fOnGoingDirectionType) {
     // fetch current voice
@@ -29493,7 +29497,7 @@ void mxsr2msrTranslator::visitStart( S_damp_all& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (fOnGoingDirectionType) {
     // fetch current voice
@@ -29531,7 +29535,7 @@ void mxsr2msrTranslator::visitStart (S_capo& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fCurrentStaffDetailsCapo = (int)(*elt);
 }
@@ -29551,7 +29555,7 @@ void mxsr2msrTranslator::visitStart (S_staff_size& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fCurrentStaffDetailsStaffSize = (int)(*elt);
   // JMI not used
@@ -29575,7 +29579,7 @@ void mxsr2msrTranslator::visitEnd (S_staff_details& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalTraceOahGroup->getTraceStaves ()) {
@@ -29605,7 +29609,7 @@ void mxsr2msrTranslator::visitEnd (S_staff_details& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   --gIndenter;
 
@@ -29655,7 +29659,7 @@ void mxsr2msrTranslator::visitStart (S_scordatura& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 /*
   <direction>
@@ -29701,7 +29705,7 @@ void mxsr2msrTranslator::visitStart (S_accord& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 /*
         <accord std::string="3">
@@ -29742,7 +29746,7 @@ void mxsr2msrTranslator::visitEnd (S_accord& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fOnGoingAccord = false;
 
@@ -29778,7 +29782,7 @@ void mxsr2msrTranslator::visitEnd (S_scordatura& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // append the current scordatura to the pending scordatura list
   fPendingScordaturasList.push_back (fCurrentScordatura);
@@ -29803,7 +29807,7 @@ void mxsr2msrTranslator::visitStart (S_instrument_sound& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //______________________________________________________________________________
@@ -29822,7 +29826,7 @@ void mxsr2msrTranslator::visitStart (S_virtual_instrument& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //______________________________________________________________________________
@@ -29841,7 +29845,7 @@ void mxsr2msrTranslator::visitStart (S_midi_device& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 /*
       <midi-device>SmartMusic SoftSynth</midi-device>
@@ -29864,7 +29868,7 @@ void mxsr2msrTranslator::visitStart (S_midi_instrument& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 /*
       <midi-instrument id="P2-I2">
@@ -29902,7 +29906,7 @@ void mxsr2msrTranslator::visitStart (S_midi_instrument& elt)
 
       --gIndenter;
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     if (fCurrentFiguredBassSoundingWholeNotes.getNumerator () == 0) {
       // no duration has been found,
@@ -29983,7 +29987,7 @@ part-symbol
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 */
 
 /* JMI
@@ -30018,7 +30022,7 @@ part-symbol
       std::endl <<
       * std::endl;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 */
 
   /* JMI
@@ -30108,7 +30112,7 @@ The discontinue value is typically used for the last ending in a set, where ther
 //       ", line " << inputLineNumber <<
 //       std::endl;
 //   }
-// #endif
+// #endif // MF_TRACE_IS_ENABLED
 //
 //   fPendingTemposList.push_back (tempo);
 // }
@@ -30141,7 +30145,7 @@ The discontinue value is typically used for the last ending in a set, where ther
 //           ", line " << inputLineNumber <<
 //           std::endl;
 //       }
-//     #endif
+//     #endif // MF_TRACE_IS_ENABLED
 //
 //       // append the rehearsalMark to the pending tempos list
 //       fPendingRehearsalMarksList.push_back (rehearsalMark);
@@ -30175,7 +30179,7 @@ The discontinue value is typically used for the last ending in a set, where ther
 //           ", line " << inputLineNumber <<
 //           std::endl;
 //       }
-//     #endif
+//     #endif // MF_TRACE_IS_ENABLED
 //
 //       // append dal segno to the pending tempos list
 //       fPendingRehearsalMarksList.push_back (rehearsalMark);
@@ -30206,7 +30210,7 @@ The discontinue value is typically used for the last ending in a set, where ther
 //       ", line " << inputLineNumber <<
 //       std::endl;
 //   }
-// #endif
+// #endif // MF_TRACE_IS_ENABLED
 //
 //   // append dal segno al fine to the pending tempos list
 //   fPendingRehearsalMarksList.push_back (rehearsalMark);
@@ -30240,7 +30244,7 @@ The discontinue value is typically used for the last ending in a set, where ther
 //       ", line " << inputLineNumber <<
 //       std::endl;
 //   }
-// #endif
+// #endif // MF_TRACE_IS_ENABLED
 //
 //   // append dal segno al coda to the pending tempos list
 //   fPendingRehearsalMarksList.push_back (rehearsalMark);
@@ -30273,7 +30277,7 @@ The discontinue value is typically used for the last ending in a set, where ther
 //           ", line " << inputLineNumber <<
 //           std::endl;
 //       }
-//     #endif
+//     #endif // MF_TRACE_IS_ENABLED
 //
 //       // append coda to the pending tempos list
 //       fPendingRehearsalMarksList.push_back (rehearsalMark);
@@ -30307,7 +30311,7 @@ The discontinue value is typically used for the last ending in a set, where ther
 //           ", line " << inputLineNumber <<
 //           std::endl;
 //       }
-//     #endif
+//     #endif // MF_TRACE_IS_ENABLED
 //
 //       // append the rehearsalMark to the pending tempos list
 //       fPendinCrescDecrescsList.push_back (crescDecresc);
@@ -30340,7 +30344,7 @@ The discontinue value is typically used for the last ending in a set, where ther
 //           ", line " << inputLineNumber <<
 //           std::endl;
 //       }
-//     #endif
+//     #endif // MF_TRACE_IS_ENABLED
 //
 //       // append the rehearsalMark to the pending tempos list
 //       fPendinCrescDecrescsList.push_back (crescDecresc);
@@ -30360,7 +30364,7 @@ The discontinue value is typically used for the last ending in a set, where ther
 //                     ", line " << ligature->getInputLineNumber () <<
 //                     std::endl;
 //                 }
-// #endif
+// #endif // MF_TRACE_IS_ENABLED
 //
 //                 note->appendLigatureToNote (ligature);
 //                 break;
@@ -30382,7 +30386,7 @@ The discontinue value is typically used for the last ending in a set, where ther
 //                     ", line " << ligature->getInputLineNumber () <<
 //                     std::endl;
 //                 }
-// #endif
+// #endif // MF_TRACE_IS_ENABLED
 //
 //                 note->appendLigatureToNote (ligature);
 //                 break;

@@ -11,9 +11,6 @@
 
 #include "oahHarmoniesExtraOah.h"
 
-#ifdef MF_HARMONIES_EXTRA_IS_ENABLED
-
-
 #include <iomanip>      // std::setw, std::setprecision, ...
 #include <regex>
 
@@ -77,7 +74,7 @@ void extraDisplayAllHarmoniesStructuresAtom::applyValueLessAtom (std::ostream& o
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   printAllHarmoniesStructures (os);
 
@@ -94,7 +91,7 @@ void extraDisplayAllHarmoniesStructuresAtom::applyValueLessAtom (std::ostream& o
 //       "==> option '" << fetchNames () << "' is a extraDisplayAllHarmoniesStructuresAtom" <<
 //       std::endl;
 //   }
-// #endif
+// #endif // MF_TRACE_IS_ENABLED
 //
 //   printAllHarmoniesStructures (os);
 // }
@@ -113,7 +110,7 @@ void extraDisplayAllHarmoniesStructuresAtom::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_extraDisplayAllHarmoniesStructuresAtom>*
     p =
@@ -132,7 +129,7 @@ void extraDisplayAllHarmoniesStructuresAtom::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -151,7 +148,7 @@ void extraDisplayAllHarmoniesStructuresAtom::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_extraDisplayAllHarmoniesStructuresAtom>*
     p =
@@ -170,7 +167,7 @@ void extraDisplayAllHarmoniesStructuresAtom::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -189,7 +186,7 @@ void extraDisplayAllHarmoniesStructuresAtom::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void extraDisplayAllHarmoniesStructuresAtom::print (std::ostream& os) const
@@ -292,7 +289,7 @@ void extraDisplayAllHarmoniesContentsAtom::applyAtomWithValue (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // theString contains the pitch name in the current language
   // is it in the accidental styles map?
@@ -310,7 +307,7 @@ void extraDisplayAllHarmoniesContentsAtom::applyAtomWithValue (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // fetch the semitones pitch from theString
   msrSemiTonesPitchKind
@@ -399,7 +396,7 @@ void extraDisplayAllHarmoniesContentsAtom::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_extraDisplayAllHarmoniesContentsAtom>*
     p =
@@ -418,7 +415,7 @@ void extraDisplayAllHarmoniesContentsAtom::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -437,7 +434,7 @@ void extraDisplayAllHarmoniesContentsAtom::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_extraDisplayAllHarmoniesContentsAtom>*
     p =
@@ -456,7 +453,7 @@ void extraDisplayAllHarmoniesContentsAtom::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -475,7 +472,7 @@ void extraDisplayAllHarmoniesContentsAtom::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void extraDisplayAllHarmoniesContentsAtom::print (std::ostream& os) const
@@ -582,7 +579,7 @@ void extraDisplayHarmonyDetailsAtom::applyAtomWithValue (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // theString contains the pitch name in the current language
   // is it in the accidental styles map?
@@ -599,7 +596,7 @@ void extraDisplayHarmonyDetailsAtom::applyAtomWithValue (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // decipher theString with a regular expression
   std::string regularExpression (
@@ -631,7 +628,7 @@ void extraDisplayHarmonyDetailsAtom::applyAtomWithValue (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getEarlyTraceOah ()) {
@@ -645,7 +642,7 @@ void extraDisplayHarmonyDetailsAtom::applyAtomWithValue (
     } // for
     gLog << std::endl;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (smSize == 3) { // JMI ???
   }
@@ -677,7 +674,7 @@ void extraDisplayHarmonyDetailsAtom::applyAtomWithValue (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // fetch the semitones pitch from rootName
   msrSemiTonesPitchKind
@@ -773,7 +770,7 @@ void extraDisplayHarmonyDetailsAtom::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_extraDisplayHarmonyDetailsAtom>*
     p =
@@ -792,7 +789,7 @@ void extraDisplayHarmonyDetailsAtom::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -811,7 +808,7 @@ void extraDisplayHarmonyDetailsAtom::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_extraDisplayHarmonyDetailsAtom>*
     p =
@@ -830,7 +827,7 @@ void extraDisplayHarmonyDetailsAtom::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -849,7 +846,7 @@ void extraDisplayHarmonyDetailsAtom::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void extraDisplayHarmonyDetailsAtom::print (std::ostream& os) const
@@ -935,7 +932,7 @@ void extraDisplayHarmonyAnalysisAtom::applyAtomWithValue (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // theString contains the pitch name in the current language
   // is it in the accidental styles map?
@@ -953,7 +950,7 @@ void extraDisplayHarmonyAnalysisAtom::applyAtomWithValue (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // decipher theString with a regular expression
   std::string regularExpression (
@@ -987,7 +984,7 @@ void extraDisplayHarmonyAnalysisAtom::applyAtomWithValue (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (smSize == 4) {
 #ifdef MF_TRACE_IS_ENABLED
@@ -1002,7 +999,7 @@ void extraDisplayHarmonyAnalysisAtom::applyAtomWithValue (
       } // for
       gLog << std::endl;
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
   }
 
   else {
@@ -1051,7 +1048,7 @@ void extraDisplayHarmonyAnalysisAtom::applyAtomWithValue (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // fetch the semitones pitch from rootName
   msrSemiTonesPitchKind
@@ -1161,7 +1158,7 @@ void extraDisplayHarmonyAnalysisAtom::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_extraDisplayHarmonyAnalysisAtom>*
     p =
@@ -1180,7 +1177,7 @@ void extraDisplayHarmonyAnalysisAtom::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -1199,7 +1196,7 @@ void extraDisplayHarmonyAnalysisAtom::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_extraDisplayHarmonyAnalysisAtom>*
     p =
@@ -1218,7 +1215,7 @@ void extraDisplayHarmonyAnalysisAtom::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -1237,7 +1234,7 @@ void extraDisplayHarmonyAnalysisAtom::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void extraDisplayHarmonyAnalysisAtom::print (std::ostream& os) const
@@ -1264,8 +1261,6 @@ void extraDisplayHarmonyAnalysisAtom::displayAtomWithVariableOptionsValues (
 }
 
 //_______________________________________________________________________________
-
-S_harmoniesExtraOahGroup gGlobalHarmoniesExtraOahGroup;
 
 S_harmoniesExtraOahGroup harmoniesExtraOahGroup::create ()
 {
@@ -1452,7 +1447,7 @@ void harmoniesExtraOahGroup::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_harmoniesExtraOahGroup>*
     p =
@@ -1471,7 +1466,7 @@ void harmoniesExtraOahGroup::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -1490,7 +1485,7 @@ void harmoniesExtraOahGroup::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_harmoniesExtraOahGroup>*
     p =
@@ -1509,7 +1504,7 @@ void harmoniesExtraOahGroup::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -1528,7 +1523,7 @@ void harmoniesExtraOahGroup::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //______________________________________________________________________________
@@ -1561,6 +1556,15 @@ std::ostream& operator << (std::ostream& os, const S_harmoniesExtraOahGroup& elt
   return os;
 }
 
+//________________________________________________________________________
+// hidden global harmonies extra OAH group variable
+EXP S_harmoniesExtraOahGroup pGlobalHarmoniesExtraOahGroup;
+
+EXP S_harmoniesExtraOahGroup getGlobalHarmoniesExtraOahGroup ()
+{
+  return pGlobalHarmoniesExtraOahGroup;
+}
+
 //______________________________________________________________________________
 S_harmoniesExtraOahGroup createGlobalHarmoniesExtraOahGroup ()
 {
@@ -1576,22 +1580,19 @@ S_harmoniesExtraOahGroup createGlobalHarmoniesExtraOahGroup ()
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // protect library against multiple initializations
-  if (! gGlobalHarmoniesExtraOahGroup) {
+  if (! pGlobalHarmoniesExtraOahGroup) {
     // create the global OAH group
-    gGlobalHarmoniesExtraOahGroup =
+    pGlobalHarmoniesExtraOahGroup =
       harmoniesExtraOahGroup::create ();
-    assert (gGlobalHarmoniesExtraOahGroup != 0);
+    assert (pGlobalHarmoniesExtraOahGroup != 0);
   }
 
   // return the global OAH group
-  return gGlobalHarmoniesExtraOahGroup;
+  return pGlobalHarmoniesExtraOahGroup;
 }
 
 
 }
-
-
-#endif

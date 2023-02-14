@@ -12,12 +12,9 @@
 #ifndef ___mxsr2msrTranslatorInterface___
 #define ___mxsr2msrTranslatorInterface___
 
-
 #include <iostream>
 
 #include "exports.h"
-
-
 
 #include "msrOah.h"
 
@@ -36,4 +33,4 @@ EXP void populateMsrSkeletonFromMxsr (
 }
 
 
-#endif
+#endif // ___mxsr2msrTranslatorInterface___

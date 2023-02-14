@@ -100,7 +100,7 @@ S_msrChord msrChord::create (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   msrChord* o =
     new msrChord (
@@ -134,7 +134,7 @@ S_msrChord msrChord::create (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   return
     msrChord::create (
@@ -189,7 +189,7 @@ S_msrChord msrChord::createChordNewbornClone (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
@@ -197,7 +197,7 @@ S_msrChord msrChord::createChordNewbornClone (
     __FILE__, __LINE__,
     containingPart != nullptr,
     "containingPart is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   S_msrChord
     newbornClone =
@@ -250,7 +250,7 @@ S_msrChord msrChord::createChordNewbornClone (
 //       "\"" <<
 //       std::endl;
 //   }
-// #endif
+// #endif // MF_TRACE_IS_ENABLED
 //
 // #ifdef MF_SANITY_CHECKS_ARE_ENABLED
 //   sanity check
@@ -258,7 +258,7 @@ S_msrChord msrChord::createChordNewbornClone (
 //     __FILE__, __LINE__,
 //     measurePosition != msrMoment::K_MEASURE_POSITION_UNKNOWN,
 //     "measurePosition == msrMoment::K_MEASURE_POSITION_UNKNOWN");
-// #endif
+// #endif // MF_SANITY_CHECKS_ARE_ENABLED
 //
 //   // set chord's measure position
 //   fMeasurePosition = measurePosition;
@@ -319,7 +319,7 @@ void msrChord::setChordUpLinkToMeasure (
     __FILE__, __LINE__,
     measure != nullptr,
     "measure is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalTraceOahGroup->getTraceWholeNotes ()) {
@@ -341,7 +341,7 @@ void msrChord::setChordUpLinkToMeasure (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fChordUpLinkToMeasure = measure;
 }
@@ -437,7 +437,7 @@ void msrChord::setChordDisplayWholeNotes (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fChordDisplayWholeNotes = wholeNotes;
 }
@@ -463,7 +463,7 @@ void msrChord::setChordGraceNotesGroupLinkBefore (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fChordGraceNotesGroupLinkBefore =
     chordChordGraceNotesGroupLinkBefore;
@@ -490,7 +490,7 @@ void msrChord::setChordGraceNotesGroupLinkAfter (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fChordGraceNotesGroupLinkAfter =
     chordChordGraceNotesGroupLinkAfter;
@@ -529,7 +529,7 @@ void msrChord::setMeasurePosition (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // handle the chord itself
   msrMeasureElement::setMeasurePosition (
@@ -562,7 +562,7 @@ void msrChord::setChordMembersMeasurePosition (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   std::string context =
     "setChordMembersMeasurePosition()";
@@ -620,7 +620,7 @@ void msrChord::addFirstNoteToChord (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // append note to chord notes vector
   fChordNotesVector.push_back (note);
@@ -683,7 +683,7 @@ void msrChord::addAnotherNoteToChord (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 //   gLog << "++++++++++++++++++++++++++++++++++++++++++++++++++++++" << std::endl;
 //   print (gLog); // JMI v0.9.66
@@ -748,7 +748,7 @@ void msrChord::appendDalSegnoToChord (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fChordDalSegnos.push_back (dalSegno);
 }
@@ -781,7 +781,7 @@ void msrChord::appendArticulationToChord (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fChordArticulations.push_back (art);
 }
@@ -816,7 +816,7 @@ void msrChord::appendSpannerToChord (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fChordSpanners.push_back (span);
 }
@@ -838,7 +838,7 @@ void msrChord::setChordSingleTremolo (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fChordSingleTremolo = trem;
 }
@@ -876,7 +876,7 @@ void msrChord::appendTechnicalToChord (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fChordTechnicals.push_back (tech);
 }
@@ -914,7 +914,7 @@ void msrChord::appendTechnicalWithIntegerToChord (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fChordTechnicalWithIntegers.push_back (tech);
 }
@@ -952,7 +952,7 @@ void msrChord::appendTechnicalWithFloatToChord (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fChordTechnicalWithFloats.push_back (tech);
 }
@@ -990,7 +990,7 @@ void msrChord::appendTechnicalWithStringToChord (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fChordTechnicalWithStrings.push_back (tech);
 }
@@ -1023,7 +1023,7 @@ void msrChord::appendOrnamentToChord (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fChordOrnaments.push_back (orn);
 }
@@ -1056,7 +1056,7 @@ void msrChord::appendGlissandoToChord (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fChordGlissandos.push_back (gliss);
 }
@@ -1093,7 +1093,7 @@ void msrChord::appendSlideToChord (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fChordSlides.push_back (slide);
 }
@@ -1114,7 +1114,7 @@ void msrChord::appendChordSlurLinkToChord (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fChordSlurLinks.push_back (chordSlurLink);
 }
@@ -1135,7 +1135,7 @@ void msrChord::appendStemToChord (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
@@ -1161,7 +1161,7 @@ void msrChord::appendStemToChord (
         ss.str ());
     }
   } // for
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fChordStems.push_back (stem);
 }
@@ -1183,7 +1183,7 @@ void msrChord::appendBeamToChord (const S_msrBeam& beam)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fChordBeams.push_back (beam);
 }
@@ -1205,7 +1205,7 @@ void msrChord::appendChordBeamLinkToChord (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fChordBeamLinks.push_back (chordBeamLink);
 }
@@ -1231,7 +1231,7 @@ void msrChord::finalizeChord (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // we can now set the measure positions for all the chord members JMI v0.9.66
   if (false) // JMI v0.9.67 MERDUM
@@ -1254,7 +1254,7 @@ void msrChord::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrChord>*
     p =
@@ -1273,7 +1273,7 @@ void msrChord::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -1292,7 +1292,7 @@ void msrChord::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrChord>*
     p =
@@ -1311,7 +1311,7 @@ void msrChord::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -1349,7 +1349,7 @@ void msrChord::browseData (basevisitor* v)
           __FILE__, __LINE__,
           ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       return;
     }
@@ -1650,7 +1650,7 @@ void msrChord::applyTupletMemberDisplayFactorToChordMembers (
         actualNotes, normalNotes);
   } // for
 }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 */
 
 std::string msrChord::asStringwithRawDivisions () const
@@ -2143,7 +2143,7 @@ void msrChord::printFull (std::ostream& os) const
       std::endl;
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // print the words if any
   size_t chordWordsSize = fChordWords.size ();
@@ -2497,7 +2497,7 @@ void msrChord::printFull (std::ostream& os) const
       std::endl;
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 /*
   // print the chord grace notes groups if any
@@ -2919,7 +2919,7 @@ void msrChord::print (std::ostream& os) const
       std::endl;
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // print the words if any
   size_t chordWordsSize = fChordWords.size ();
@@ -2996,7 +2996,7 @@ void msrChord::print (std::ostream& os) const
       std::endl;
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // print the ligatures if any
   size_t chordLigaturesSize = fChordLigatures.size ();
@@ -3384,7 +3384,7 @@ msrChordBeamLink::msrChordBeamLink (
     __FILE__, __LINE__,
     upLinkToChord != nullptr,
     "upLinkToChord is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fUpLinkToChord = upLinkToChord;
 
@@ -3410,7 +3410,7 @@ S_msrChordBeamLink msrChordBeamLink::createBeamNewbornClone ()
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 /* JMI
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
@@ -3419,7 +3419,7 @@ S_msrChordBeamLink msrChordBeamLink::createBeamNewbornClone ()
     __FILE__, __LINE__,
     containingVoice != nullptr,
     "containingVoice is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 */
 
   S_msrChordBeamLink
@@ -3446,7 +3446,7 @@ void msrChordBeamLink::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrChordBeamLink>*
     p =
@@ -3465,7 +3465,7 @@ void msrChordBeamLink::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -3484,7 +3484,7 @@ void msrChordBeamLink::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrChordBeamLink>*
     p =
@@ -3503,7 +3503,7 @@ void msrChordBeamLink::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -3646,7 +3646,7 @@ msrChordSlurLink::msrChordSlurLink (
     __FILE__, __LINE__,
     upLinkToChord != nullptr,
     "upLinkToChord is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fUpLinkToChord = upLinkToChord;
 
@@ -3672,7 +3672,7 @@ S_msrChordSlurLink msrChordSlurLink::createSlurNewbornClone ()
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 /* JMI
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
@@ -3681,7 +3681,7 @@ S_msrChordSlurLink msrChordSlurLink::createSlurNewbornClone ()
     __FILE__, __LINE__,
     containingVoice != nullptr,
     "containingVoice is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 */
 
   S_msrChordSlurLink
@@ -3708,7 +3708,7 @@ void msrChordSlurLink::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrChordSlurLink>*
     p =
@@ -3727,7 +3727,7 @@ void msrChordSlurLink::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -3746,7 +3746,7 @@ void msrChordSlurLink::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrChordSlurLink>*
     p =
@@ -3765,7 +3765,7 @@ void msrChordSlurLink::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -3880,7 +3880,7 @@ msrChordGraceNotesGroupLink::msrChordGraceNotesGroupLink (
     __FILE__, __LINE__,
     upLinkToChord != nullptr,
     "upLinkToChord is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fUpLinkToChord = upLinkToChord;
 
@@ -3906,7 +3906,7 @@ S_msrChordGraceNotesGroupLink msrChordGraceNotesGroupLink::createChordGraceNotes
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 /* JMI
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
@@ -3915,7 +3915,7 @@ S_msrChordGraceNotesGroupLink msrChordGraceNotesGroupLink::createChordGraceNotes
     __FILE__, __LINE__,
     containingVoice != nullptr,
     "containingVoice is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 */
 
   const S_msrChordGraceNotesGroupLink&
@@ -3942,7 +3942,7 @@ void msrChordGraceNotesGroupLink::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrChordGraceNotesGroupLink>*
     p =
@@ -3961,7 +3961,7 @@ void msrChordGraceNotesGroupLink::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -3980,7 +3980,7 @@ void msrChordGraceNotesGroupLink::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrChordGraceNotesGroupLink>*
     p =
@@ -3999,7 +3999,7 @@ void msrChordGraceNotesGroupLink::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }

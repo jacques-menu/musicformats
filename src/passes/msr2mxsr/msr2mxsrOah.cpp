@@ -63,7 +63,7 @@ void msr2mxsrOahGroup::initializMsr2mxsrTraceOptions ()
 {
   // JMI
 }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 void msr2mxsrOahGroup::initializeCodeGenerationOptions ()
 {
@@ -168,7 +168,7 @@ void msr2mxsrOahGroup::initializeMsr2mxsrOahGroup ()
   // trace
   // --------------------------------------
   initializMsr2mxsrTraceOptions ();
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // code generation
   // --------------------------------------
@@ -202,7 +202,7 @@ void msr2mxsrOahGroup::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msr2mxsrOahGroup>*
     p =
@@ -221,7 +221,7 @@ void msr2mxsrOahGroup::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -240,7 +240,7 @@ void msr2mxsrOahGroup::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msr2mxsrOahGroup>*
     p =
@@ -259,7 +259,7 @@ void msr2mxsrOahGroup::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -278,7 +278,7 @@ void msr2mxsrOahGroup::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //______________________________________________________________________________
@@ -351,7 +351,7 @@ S_msr2mxsrOahGroup createGlobalMsr2mxsrOahGroup ()
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // protect library against multiple initializations
   if (! gGlobalMsr2mxsrOahGroup) {

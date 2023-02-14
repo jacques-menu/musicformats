@@ -13,6 +13,8 @@
 
 #include "lpsrInitialization.h"
 
+#include "oahEarlyOptions.h"
+
 #include "waeHandlers.h"
 
 
@@ -42,7 +44,7 @@ void initializeLPSR ()
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     // LPSR score output handling
     // ------------------------------------------------------

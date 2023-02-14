@@ -87,7 +87,7 @@ R"(
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // initialize the history
   initializeHandlerMultiComponent ();
@@ -164,7 +164,7 @@ void ischemeInterpreterInsiderHandler::createTheIschemeInterpreterPrefixes ()
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   createTheCommonPrefixes ();
 }
@@ -187,7 +187,7 @@ void ischemeInterpreterInsiderHandler::createTheIschemeInterpreterOptionGroups (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // initialize options handling, phase 1
   // ------------------------------------------------------
@@ -206,7 +206,7 @@ void ischemeInterpreterInsiderHandler::createTheIschemeInterpreterOptionGroups (
   appendGroupToHandler (
     createGlobalTraceOahGroup (
       this));
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // create the display OAH group
   appendGroupToHandler (
@@ -246,7 +246,7 @@ void ischemeInterpreterInsiderHandler::checkOptionsAndArguments () const
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (MSDR_STANDARD_INPUT_NAME == std::string ("-")) {
     checkSingleInputSourceInArgumentsVector ();
@@ -270,7 +270,7 @@ void ischemeInterpreterInsiderHandler::enforceHandlerQuietness ()
 #ifdef MF_TRACE_IS_ENABLED
   gGlobalTraceOahGroup->
     enforceGroupQuietness ();
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   gGlobalIschemeInterpreterInsiderOahGroup->
     enforceGroupQuietness ();
@@ -332,7 +332,7 @@ void ischemeInterpreterInsiderOahGroup::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_ischemeInterpreterInsiderOahGroup>*
     p =
@@ -351,7 +351,7 @@ void ischemeInterpreterInsiderOahGroup::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -370,7 +370,7 @@ void ischemeInterpreterInsiderOahGroup::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_ischemeInterpreterInsiderOahGroup>*
     p =
@@ -389,7 +389,7 @@ void ischemeInterpreterInsiderOahGroup::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -408,7 +408,7 @@ void ischemeInterpreterInsiderOahGroup::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   oahGroup::browseData (v);
 }
@@ -512,7 +512,7 @@ void ischemeInterpreterInsiderOahGroup::initializeIschemeInterpreterInsiderOahGr
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // JMI ???
 }
@@ -544,7 +544,7 @@ S_ischemeInterpreterInsiderOahGroup createGlobalIschemeInterpreterInsiderOahGrou
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // protect library against multiple initializations
   if (! gGlobalIschemeInterpreterInsiderOahGroup) {

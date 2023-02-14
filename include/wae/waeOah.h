@@ -9,8 +9,8 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#ifndef ___waeOahGroup___
-#define ___waeOahGroup___
+#ifndef ___waeOah___
+#define ___waeOah___
 
 #include <set>
 
@@ -118,4 +118,4 @@ EXP S_waeOahGroup createGlobalWaeOahGroup ();
 }
 
 
-#endif
+#endif // ___waeOah___

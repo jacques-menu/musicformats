@@ -13,9 +13,9 @@
 #define ___mxsr2msrSkeletonBuilderInterface___
 
 
-
 namespace MusicFormats
 {
+
 //_______________________________________________________________________________
 EXP S_msrScore translateMxsrToMsrSkeleton (
   Sxmlelement        theMxsr,
@@ -34,4 +34,4 @@ EXP S_msrScore translateMxsrToMsrSkeleton (
 }
 
 
-#endif
+#endif // ___mxsr2msrSkeletonBuilderInterface___

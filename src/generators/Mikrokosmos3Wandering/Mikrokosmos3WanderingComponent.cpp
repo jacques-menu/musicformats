@@ -11,6 +11,8 @@
 
 #include "mfcComponents.h"
 
+#include "oahEarlyOptions.h"
+
 #include "waeHandlers.h"
 
 #include "Mikrokosmos3WanderingComponent.h"
@@ -93,7 +95,7 @@ S_mfcGeneratorComponent createMikrokosmos3WanderingGeneratorComponent ()
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     // create the generator component
     pGeneratorComponent =

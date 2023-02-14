@@ -12,6 +12,8 @@
 #ifndef ___mfslInterpreterOah___
 #define ___mfslInterpreterOah___
 
+#include "mfStaticSettings.h"
+
 #include "msrGenerationBasicTypes.h"
 
 #include "brailleGenerationOah.h"
@@ -167,7 +169,7 @@ class EXP mfslInterpreterOahGroup : public oahGroup
 
 #ifdef MF_TRACE_IS_ENABLED
 // JMI    void                  initializemfslInterpreterTraceOah ();
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     void                  initializeMfslOptions ();
 
@@ -246,4 +248,4 @@ EXP S_mfslInterpreterOahGroup createGlobalMfslInterpreterOahGroup ();
 }
 
 
-#endif
+#endif // ___mfslInterpreterOah___

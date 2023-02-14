@@ -109,7 +109,7 @@ mfMusicformatsErrorKind convertMsdlStream2guidoWithHandler (
 //       __FILE__, __LINE__,
 //       ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     // create the MSDL parser
     msdlParser
@@ -150,7 +150,7 @@ mfMusicformatsErrorKind convertMsdlStream2guidoWithHandler (
 
       throw msdlException (message);
     }
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
   }
   catch (msdl2msrException& e) {
     mfDisplayException (e, gOutput);
@@ -170,7 +170,7 @@ mfMusicformatsErrorKind convertMsdlStream2guidoWithHandler (
       err,
       __FILE__, __LINE__,
       gLanguage->quittingAfterPass (mfPassIDKind::kMfPassID_1));
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     return mfMusicformatsErrorKind::kMusicformatsError_NONE;
   }
@@ -278,8 +278,8 @@ mfMusicformatsErrorKind convertMsdlStream2guidoWithOptionsAndArguments (
 #ifdef ENFORCE_TRACE_OAH
     gLog <<
       handlerOptionsAndArguments;
-#endif
-#endif
+#endif // MF_TRACE_IS_ENABLED
+#endif // MF_TRACE_IS_ENABLED
 
   // apply early options if any
   // ------------------------------------------------------
@@ -306,7 +306,7 @@ mfMusicformatsErrorKind convertMsdlStream2guidoWithOptionsAndArguments (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // create an msdl2guido insider OAH handler
   // ------------------------------------------------------
@@ -414,7 +414,7 @@ EXP mfMusicformatsErrorKind convertMsdlFile2guidoWithOptionsAndArguments (
       __FILE__, __LINE__,
       gLanguage->openingGuidoFileForWriting (inputFileName));
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   std::ifstream
     inputStream (
@@ -459,7 +459,7 @@ mfMusicformatsErrorKind msdlFile2guidoWithHandler (
       __FILE__, __LINE__,
       gLanguage->openingGuidoFileForWriting (inputFileName));
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   std::ifstream
     inputStream (

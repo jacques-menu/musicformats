@@ -89,4 +89,4 @@ EXP std::ostream& operator << (std::ostream& os, const S_msdlParserWaeHandlerFre
 }
 
 
-#endif
+#endif // ___msdlParserHandlersFrench___

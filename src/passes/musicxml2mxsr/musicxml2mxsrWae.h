@@ -54,4 +54,4 @@ EXP void musicxml2mxsrInternalError (
 }
 
 
-#endif
+#endif // ___musicxml2mxsr___

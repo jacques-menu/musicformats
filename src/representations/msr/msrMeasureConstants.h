@@ -22,7 +22,7 @@
 namespace MusicFormats
 {
 
-// ------------------------------------------------------
+//______________________________________________________________________________
 extern const std::string K_MEASURE_NUMBER_UNKNOWN;
 
 extern const Rational    K_WHOLE_NOTES_UNKNOWN;
@@ -38,4 +38,4 @@ extern S_msrMeasure pGlobalNullMeasure;
 }
 
 
-#endif
+#endif // ___msrMeasureConstants___

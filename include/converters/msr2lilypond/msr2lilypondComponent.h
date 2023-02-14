@@ -27,5 +27,5 @@ S_mfcConverterComponent EXP createMsr2lilypondConverterComponent ();
 }
 
 
-#endif
+#endif // ___msr2lilypondComponent___
 

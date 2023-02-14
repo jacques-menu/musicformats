@@ -19,9 +19,10 @@
 
 namespace MusicFormats
 {
-// JMI ???
+
+// JMI ??? v0.9.67
 
 }
 
 
-#endif
+#endif // _____msrArpeggiatos____

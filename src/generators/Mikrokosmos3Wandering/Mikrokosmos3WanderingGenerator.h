@@ -121,4 +121,4 @@ typedef SMARTP<Mikrokosmos3WanderingGenerator> S_Mikrokosmos3WanderingGenerator;
 }
 
 
-#endif
+#endif // ___Mikrokosmos3WanderingGenerator___

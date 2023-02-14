@@ -63,4 +63,4 @@ EXP void bmmlInternalError (
 }
 
 
-#endif
+#endif // ___bmmlWae___

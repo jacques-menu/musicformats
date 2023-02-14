@@ -80,7 +80,7 @@ EXP mfMusicformatsErrorKind msrScore2brailleWithHandler (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
   // has quiet mode been requested?
   // ------------------------------------------------------
 
@@ -200,7 +200,7 @@ EXP mfMusicformatsErrorKind msrScore2brailleWithHandler (
 //       __FILE__, __LINE__,
 //       ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     if (! outputFileName.size ()) {
 #ifdef MF_TRACE_IS_ENABLED
@@ -213,7 +213,7 @@ EXP mfMusicformatsErrorKind msrScore2brailleWithHandler (
 //       __FILE__, __LINE__,
 //       ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       // convert the BSR score to braille( pass C)
       try {
@@ -247,7 +247,7 @@ EXP mfMusicformatsErrorKind msrScore2brailleWithHandler (
 //       __FILE__, __LINE__,
 //       ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       // open output file
 #ifdef MF_TRACE_IS_ENABLED
@@ -261,7 +261,7 @@ EXP mfMusicformatsErrorKind msrScore2brailleWithHandler (
 //       __FILE__, __LINE__,
 //       ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       std::ofstream
         brailleCodeFileOutputStream (
@@ -315,7 +315,7 @@ EXP mfMusicformatsErrorKind msrScore2brailleWithHandler (
           __FILE__, __LINE__,
           ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       brailleCodeFileOutputStream.close ();
     }

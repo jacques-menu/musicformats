@@ -311,7 +311,7 @@ std::string msdlTokenKindAsMsdlString (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   std::string result;
 
@@ -723,7 +723,7 @@ S_msdlTokenKindsSet msdlTokenKindsSet::createClone ()
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   return result;
 }
@@ -922,7 +922,7 @@ EXP S_msdlTokenKindsSet operator+ (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   return result;
 }
@@ -950,7 +950,7 @@ EXP S_msdlTokenKindsSet operator+ (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   return result;
 }
@@ -1640,7 +1640,7 @@ std::string msdlToken::asMsdlString (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   std::stringstream ss;
 

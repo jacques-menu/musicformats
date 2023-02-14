@@ -54,7 +54,7 @@ void basicOah2manPage::visitStart (S_oahHandler& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // initial comment
   fManPageOutputStream <<
@@ -124,7 +124,7 @@ void basicOah2manPage::visitEnd (S_oahHandler& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -144,7 +144,7 @@ void basicOah2manPage::visitStart (S_oahPrefix& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fManPageOutputStream <<
     ".IT FL " <<
@@ -171,7 +171,7 @@ void basicOah2manPage::visitEnd (S_oahPrefix& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -191,7 +191,7 @@ void basicOah2manPage::visitStart (S_oahGroup& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fManPageOutputStream <<
     ".SH " <<
@@ -222,7 +222,7 @@ void basicOah2manPage::visitEnd (S_oahGroup& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -242,7 +242,7 @@ void basicOah2manPage::visitStart (S_oahSubGroup& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 /*
   fManPageOutputStream <<
     ".TP" <<
@@ -277,7 +277,7 @@ void basicOah2manPage::visitEnd (S_oahSubGroup& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -297,7 +297,7 @@ void basicOah2manPage::visitStart (S_oahAtom& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void basicOah2manPage::visitEnd (S_oahAtom& elt)
@@ -316,7 +316,7 @@ void basicOah2manPage::visitEnd (S_oahAtom& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -338,7 +338,7 @@ void basicOah2manPage::visitStart (S_oahAtomStoringAValue& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void basicOah2manPage::visitEnd (S_oahAtomStoringAValue& elt)
@@ -357,7 +357,7 @@ void basicOah2manPage::visitEnd (S_oahAtomStoringAValue& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -377,7 +377,7 @@ void basicOah2manPage::visitStart (S_oahValueLessAtomAlias& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 }
 
@@ -397,7 +397,7 @@ void basicOah2manPage::visitEnd (S_oahValueLessAtomAlias& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -417,7 +417,7 @@ void basicOah2manPage::visitStart (S_oahOptionsUsageAtom& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 }
 
@@ -437,7 +437,7 @@ void basicOah2manPage::visitEnd (S_oahOptionsUsageAtom& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -457,7 +457,7 @@ void basicOah2manPage::visitStart (S_oahHelpSummaryAtom& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void basicOah2manPage::visitEnd (S_oahHelpSummaryAtom& elt)
@@ -476,7 +476,7 @@ void basicOah2manPage::visitEnd (S_oahHelpSummaryAtom& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -498,7 +498,7 @@ void basicOah2manPage::visitStart (S_oahOptionNameHelpAtom& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void basicOah2manPage::visitEnd (S_oahOptionNameHelpAtom& elt)
@@ -517,7 +517,7 @@ void basicOah2manPage::visitEnd (S_oahOptionNameHelpAtom& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -539,7 +539,7 @@ void basicOah2manPage::visitStart (S_oahBooleanAtom& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 /*
   fManPageOutputStream <<
     ".HP" <<
@@ -575,7 +575,7 @@ void basicOah2manPage::visitEnd (S_oahBooleanAtom& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -597,7 +597,7 @@ void basicOah2manPage::visitStart (S_oahTwoBooleansAtom& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 /*
   fManPageOutputStream <<
@@ -634,7 +634,7 @@ void basicOah2manPage::visitEnd (S_oahTwoBooleansAtom& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -656,7 +656,7 @@ void basicOah2manPage::visitStart (S_oahThreeBooleansAtom& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 /*
   fManPageOutputStream <<
@@ -693,7 +693,7 @@ void basicOah2manPage::visitEnd (S_oahThreeBooleansAtom& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -715,7 +715,7 @@ void basicOah2manPage::visitStart (S_oahCombinedBooleansAtom& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void basicOah2manPage::visitEnd (S_oahCombinedBooleansAtom& elt)
@@ -734,7 +734,7 @@ void basicOah2manPage::visitEnd (S_oahCombinedBooleansAtom& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -756,7 +756,7 @@ void basicOah2manPage::visitStart (S_oahCommonPrefixBooleansAtom& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void basicOah2manPage::visitEnd (S_oahCommonPrefixBooleansAtom& elt)
@@ -775,7 +775,7 @@ void basicOah2manPage::visitEnd (S_oahCommonPrefixBooleansAtom& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -797,7 +797,7 @@ void basicOah2manPage::visitStart (S_oahIntegerAtom& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void basicOah2manPage::visitEnd (S_oahIntegerAtom& elt)
@@ -816,7 +816,7 @@ void basicOah2manPage::visitEnd (S_oahIntegerAtom& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -838,7 +838,7 @@ void basicOah2manPage::visitStart (S_oahTwoIntegersAtom& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void basicOah2manPage::visitEnd (S_oahTwoIntegersAtom& elt)
@@ -857,7 +857,7 @@ void basicOah2manPage::visitEnd (S_oahTwoIntegersAtom& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -879,7 +879,7 @@ void basicOah2manPage::visitStart (S_oahFloatAtom& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void basicOah2manPage::visitEnd (S_oahFloatAtom& elt)
@@ -898,7 +898,7 @@ void basicOah2manPage::visitEnd (S_oahFloatAtom& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -920,7 +920,7 @@ void basicOah2manPage::visitStart (S_oahStringAtom& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void basicOah2manPage::visitEnd (S_oahStringAtom& elt)
@@ -939,7 +939,7 @@ void basicOah2manPage::visitEnd (S_oahStringAtom& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -961,7 +961,7 @@ void basicOah2manPage::visitStart (S_oahRationalAtom& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void basicOah2manPage::visitEnd (S_oahRationalAtom& elt)
@@ -980,7 +980,7 @@ void basicOah2manPage::visitEnd (S_oahRationalAtom& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -1002,7 +1002,7 @@ void basicOah2manPage::visitStart (S_oahFactorizedStringAtom& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void basicOah2manPage::visitEnd (S_oahFactorizedStringAtom& elt)
@@ -1021,7 +1021,7 @@ void basicOah2manPage::visitEnd (S_oahFactorizedStringAtom& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -1043,7 +1043,7 @@ void basicOah2manPage::visitStart (S_oahDefaultedStringAtom& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void basicOah2manPage::visitEnd (S_oahDefaultedStringAtom& elt)
@@ -1064,7 +1064,7 @@ void basicOah2manPage::visitEnd (S_oahDefaultedStringAtom& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 }
 
@@ -1087,7 +1087,7 @@ void basicOah2manPage::visitStart (S_oahNaturalNumbersSetElementAtom& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void basicOah2manPage::visitEnd (S_oahNaturalNumbersSetElementAtom& elt)
@@ -1106,7 +1106,7 @@ void basicOah2manPage::visitEnd (S_oahNaturalNumbersSetElementAtom& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 /* JMI
@@ -1129,7 +1129,7 @@ void basicOah2manPage::visitStart (S_oahStringsSetElementAtom& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void basicOah2manPage::visitEnd (S_oahStringsSetElementAtom& elt)
@@ -1148,7 +1148,7 @@ void basicOah2manPage::visitEnd (S_oahStringsSetElementAtom& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 */
 
@@ -1171,7 +1171,7 @@ void basicOah2manPage::visitStart (S_oahStringSetElementAtom& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void basicOah2manPage::visitEnd (S_oahStringSetElementAtom& elt)
@@ -1190,7 +1190,7 @@ void basicOah2manPage::visitEnd (S_oahStringSetElementAtom& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -1212,7 +1212,7 @@ void basicOah2manPage::visitStart (S_oahColorRGBAtom& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void basicOah2manPage::visitEnd (S_oahColorRGBAtom& elt)
@@ -1231,7 +1231,7 @@ void basicOah2manPage::visitEnd (S_oahColorRGBAtom& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -1253,7 +1253,7 @@ void basicOah2manPage::visitStart (S_oahStringAndIntegerAtom& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void basicOah2manPage::visitEnd (S_oahStringAndIntegerAtom& elt)
@@ -1272,7 +1272,7 @@ void basicOah2manPage::visitEnd (S_oahStringAndIntegerAtom& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -1294,7 +1294,7 @@ void basicOah2manPage::visitStart (S_oahStringAndTwoIntegersAtom& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void basicOah2manPage::visitEnd (S_oahStringAndTwoIntegersAtom& elt)
@@ -1313,7 +1313,7 @@ void basicOah2manPage::visitEnd (S_oahStringAndTwoIntegersAtom& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 

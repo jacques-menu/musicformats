@@ -39,6 +39,7 @@
 
 namespace MusicFormats
 {
+
 //_______________________________________________________________________________
 
 S_msdl2msrOahGroup gGlobalMsdl2msrOahGroup;
@@ -155,7 +156,7 @@ R"(Write a trace of the MSDL syntax error recovery activity with more details to
         traceSyntaxErrorRecoveryBooleanAtom,
         traceSyntaxErrorRecoveryBooleanAtom));
 }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 void msdl2msrOahGroup::initializeMsdlLanguagesOptions ()
 {
@@ -398,7 +399,7 @@ void msdl2msrOahGroup::initializeMsdl2msrGroup ()
   // trace
   // --------------------------------------
   initializeMsdl2msrTraceOah ();
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   initializeMsdlLanguagesOptions ();
 
@@ -428,7 +429,7 @@ void msdl2msrOahGroup::enforceGroupQuietness ()
 {
 #ifdef MF_TRACE_IS_ENABLED
 // JMI
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //______________________________________________________________________________
@@ -452,7 +453,7 @@ void msdl2msrOahGroup::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msdl2msrOahGroup>*
     p =
@@ -471,7 +472,7 @@ void msdl2msrOahGroup::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -490,7 +491,7 @@ void msdl2msrOahGroup::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msdl2msrOahGroup>*
     p =
@@ -509,7 +510,7 @@ void msdl2msrOahGroup::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -528,7 +529,7 @@ void msdl2msrOahGroup::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //______________________________________________________________________________
@@ -582,7 +583,7 @@ void msdl2msrOahGroup::printMsdl2msrValues (int fieldWidth)
       std::endl;
 
   --gIndenter;
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // languages
   gLog <<
@@ -682,7 +683,7 @@ S_msdl2msrOahGroup createGlobalMsdl2msrOahGroup ()
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // protect library against multiple initializations
   if (! gGlobalMsdl2msrOahGroup) {

@@ -301,7 +301,7 @@ std::ostream& operator << (std::ostream& os, const msrMeasureEndRegularKind& elt
 //         __FILE__, __LINE__,
 //         ss.str ());
 //     }
-// #endif
+// #endif // MF_TRACE_IS_ENABLED
 //
 //     // insert skipNote in the measure elements list before (*i)
 //     insertElementInMeasureBeforeIterator (
@@ -352,7 +352,7 @@ std::ostream& operator << (std::ostream& os, const msrMeasureEndRegularKind& elt
 //         __FILE__, __LINE__,
 //         ss.str ());
 //     }
-// #endif
+// #endif // MF_TRACE_IS_ENABLED
 //
 //     if (reducedSoundingWholeNotes.getNumerator () == 0) {
 //       std::stringstream ss;

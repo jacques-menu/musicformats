@@ -31,6 +31,7 @@
 
 namespace MusicFormats
 {
+
 //_______________________________________________________________________________
 void translateBsrToBraille (
   const S_bsrScore     originalBsrScore,
@@ -45,7 +46,7 @@ void translateBsrToBraille (
     __FILE__, __LINE__,
     originalBsrScore != nullptr,
     "originalBsrScore is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // start the clock
   clock_t startClock = clock ();
@@ -74,7 +75,7 @@ void translateBsrToBraille (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // create a bsr2brailleTranslator
   bsr2brailleTranslator

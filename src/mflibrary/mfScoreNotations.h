@@ -9,8 +9,8 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#ifndef ___mfRational___
-#define ___mfRational___
+#ifndef ___mfScoreNotations___
+#define ___mfScoreNotations___
 
 #include <string>
 #include <ostream>
@@ -35,4 +35,4 @@ std::ostream& operator << (std::ostream& os, const msrScoreNotationKind& elt);
 }
 
 
-#endif
+#endif // ___mfScoreNotations___

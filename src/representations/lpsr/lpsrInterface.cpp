@@ -33,6 +33,7 @@
 
 namespace MusicFormats
 {
+
 //_______________________________________________________________________________
 void displayLpsrScore (
   const S_lpsrScore&     theLpsrScore,
@@ -46,38 +47,28 @@ void displayLpsrScore (
     __FILE__, __LINE__,
     theLpsrScore != nullptr,
     "theLpsrScore is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // start the clock
   clock_t startClock = clock ();
 
   setGlobalCurrentPassIDKind (mfPassIDKind::kMfPassID_OptionalPass);
 
-#ifdef MF_TRACING_IS_ENABLED
   std::string separator =
     "%--------------------------------------------------------------";
 
-  std::stringstream ss;
-
-  ss <<
+  gLog <<
     separator <<
     std::endl <<
     gTab <<
     gLanguage->passOptional () << ": "<< passDescription <<
     std::endl <<
     separator <<
+    std::endl << std::endl <<
+
+    theLpsrScore <<
+
     std::endl << std::endl;
-
-  ss << theLpsrScore;
-
-  ss <<
-    separator <<
-    std::endl << std::endl;
-
-  gWaeHandler->waeTrace (
-    __FILE__, __LINE__,
-    ss.str ());
-#endif
 
   // register time spent
   clock_t endClock = clock ();
@@ -103,7 +94,7 @@ void displayLpsrScoreFull (
     __FILE__, __LINE__,
     theLpsrScore != nullptr,
     "theLpsrScore is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // start the clock
   clock_t startClock = clock ();
@@ -113,24 +104,16 @@ void displayLpsrScoreFull (
   std::string separator =
     "%--------------------------------------------------------------";
 
-#ifdef MF_TRACING_IS_ENABLED
-  std::stringstream ss;
-
-  ss <<
+  gLog <<
     separator <<
     std::endl <<
     gTab <<
     gLanguage->passOptional () << ": "<< passDescription <<
-    ", " <<
-    gLanguage->fullVersion () <<
+    ", " << gLanguage->fullVersion () <<
     std::endl <<
     separator <<
     std::endl << std::endl;
 
-  gWaeHandler->waeTrace (
-    __FILE__, __LINE__,
-    ss.str ());
-#endif
 
   theLpsrScore->printFull (gLog);
 

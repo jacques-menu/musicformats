@@ -47,7 +47,7 @@ mfOutputIndenter& mfOutputIndenter::operator++ ()
   gLog <<
     "% Incrementing INDENTER: " << fIndentation <<
     std::endl;
-#endif
+#endif // DEBUG_INDENTER
 
   ++fIndentation;
 
@@ -55,7 +55,7 @@ mfOutputIndenter& mfOutputIndenter::operator++ ()
   gLog <<
     "% INDENTER: " << fIndentation <<
     std::endl;
-#endif
+#endif // DEBUG_INDENTER
 
   return *this;
 }
@@ -67,7 +67,7 @@ mfOutputIndenter& mfOutputIndenter::operator-- ()
   gLog <<
     "% Decrementing INDENTER: " << fIndentation <<
     std::endl;
-#endif
+#endif // DEBUG_INDENTER
 
   --fIndentation;
 
@@ -82,7 +82,7 @@ mfOutputIndenter& mfOutputIndenter::operator-- ()
       __FILE__, __LINE__,
       false,
       "indentation has become negative");
-#endif
+#endif // DEBUG_INDENTER
   }
 
 #ifdef DEBUG_INDENTER
@@ -95,7 +95,7 @@ mfOutputIndenter& mfOutputIndenter::operator-- ()
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // DEBUG_INDENTER
 
   return *this;
 }
@@ -109,7 +109,7 @@ mfOutputIndenter mfOutputIndenter::mfOutputIndenter::operator++ (int)
   gLog <<
     "% INDENTER: " << fIndentation <<
     std::endl;
-#endif
+#endif // DEBUG_INDENTER
 
   return *this;
 }
@@ -130,7 +130,7 @@ mfOutputIndenter mfOutputIndenter::mfOutputIndenter::operator-- (int)
       __FILE__, __LINE__,
       false,
       "indentation has become negative");
-#endif
+#endif // DEBUG_INDENTER
   }
 
 #ifdef DEBUG_INDENTER
@@ -143,7 +143,7 @@ mfOutputIndenter mfOutputIndenter::mfOutputIndenter::operator-- (int)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // DEBUG_INDENTER
 
   return *this;
 }
@@ -163,7 +163,7 @@ mfOutputIndenter& mfOutputIndenter::increment (int value)
       __FILE__, __LINE__,
       false,
       "indentation has become negative");
-#endif
+#endif // DEBUG_INDENTER
   }
 
 #ifdef DEBUG_INDENTER
@@ -176,7 +176,7 @@ mfOutputIndenter& mfOutputIndenter::increment (int value)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // DEBUG_INDENTER
 
   return *this;
 }
@@ -196,7 +196,7 @@ mfOutputIndenter& mfOutputIndenter::decrement (int value)
       __FILE__, __LINE__,
       false,
       "indentation has become negative");
-#endif
+#endif // DEBUG_INDENTER
   }
 
 #ifdef DEBUG_INDENTER
@@ -209,7 +209,7 @@ mfOutputIndenter& mfOutputIndenter::decrement (int value)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // DEBUG_INDENTER
 
   return *this;
 }
@@ -407,7 +407,7 @@ EXP mfIndentedStringStream& operator << (
 
   return iss;
 }
-#endif
+#endif // WIN32
 
 EXP mfIndentedStringStream& operator << (
   mfIndentedStringStream& iss, const float& elt)

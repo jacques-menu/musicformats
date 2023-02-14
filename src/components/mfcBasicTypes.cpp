@@ -80,7 +80,7 @@ void crackVersionNumber ( // JMI ??? v0.9.66
 
       gLog << std::endl;
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (smSize == 4) {
     // found an n.x.y specification
@@ -103,7 +103,7 @@ void crackVersionNumber ( // JMI ??? v0.9.66
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     generationNumber = stoi (generationNumberValue);
     majorNumber      = stoi (majorNumberValue);
@@ -148,7 +148,7 @@ void crackVersionNumber ( // JMI ??? v0.9.66
           __FILE__, __LINE__,
           ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     if (smSize == 3) {
       // found an n.x specification
@@ -170,7 +170,7 @@ void crackVersionNumber ( // JMI ??? v0.9.66
           __FILE__, __LINE__,
           ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       generationNumber = stoi (generationNumberValue);
       majorNumber      = stoi (majorNumberValue);
@@ -373,7 +373,7 @@ mfcVersionNumber::mfcVersionNumber (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fMajorNumber = majorNumber;
   fMinorNumber = minorNumber;
@@ -435,7 +435,7 @@ S_mfcVersionNumber mfcVersionNumber::createFromString (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   int
     majorNumber = 0,
@@ -469,7 +469,7 @@ S_mfcVersionNumber mfcVersionNumber::createFromString (
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     majorNumber      = stoi (majorNumberValue);
     minorNumber      = stoi (minorNumberValue);
@@ -776,7 +776,7 @@ mfcVersionDescr::mfcVersionDescr (
     } // for
     --gIndenter;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fVersionNumber       = versionNumber;
   fVersionDate         = versionDate;
@@ -841,7 +841,7 @@ S_mfcVersionsHistory mfcVersionsHistory::create ()
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   mfcVersionsHistory* o =
     new mfcVersionsHistory ();
@@ -864,7 +864,7 @@ mfcVersionsHistory::mfcVersionsHistory ()
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 mfcVersionsHistory::~mfcVersionsHistory ()
@@ -887,7 +887,7 @@ void mfcVersionsHistory::appendVersionDescrToHistory (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fVersionsList.push_back (versionDescr);
 }
@@ -900,7 +900,7 @@ S_mfcVersionDescr mfcVersionsHistory::fetchMostRecentVersion () const
     __FILE__, __LINE__,
     fVersionsList.size () > 0,
     "fVersionsList is empty");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   return fVersionsList.back ();
 }
@@ -979,7 +979,7 @@ S_mfcComponent mfcComponent::create (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   mfcComponent* o =
     new mfcComponent (
@@ -1008,7 +1008,7 @@ mfcComponent::mfcComponent (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fComponentName = componentName;
   fComponentKind  = componentKind;
@@ -1040,7 +1040,7 @@ void mfcComponent::appendVersionDescrToComponent (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fVersionsHistory->
     appendVersionDescrToHistory (versionDescr);
@@ -1157,7 +1157,7 @@ S_mfcOahComponent mfcOahComponent::create (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   mfcOahComponent* o =
     new mfcOahComponent (
@@ -1186,7 +1186,7 @@ mfcOahComponent::mfcOahComponent (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 mfcOahComponent::~mfcOahComponent ()
@@ -1221,7 +1221,7 @@ S_mfcRepresentationComponent mfcRepresentationComponent::create (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   mfcRepresentationComponent* o =
     new mfcRepresentationComponent (
@@ -1250,7 +1250,7 @@ mfcRepresentationComponent::mfcRepresentationComponent (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 mfcRepresentationComponent::~mfcRepresentationComponent ()
@@ -1285,7 +1285,7 @@ S_mfcPassComponent mfcPassComponent::create (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   mfcPassComponent* o =
     new mfcPassComponent (
@@ -1314,7 +1314,7 @@ mfcPassComponent::mfcPassComponent (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 mfcPassComponent::~mfcPassComponent ()
@@ -1390,7 +1390,7 @@ S_mfcMultiComponent mfcMultiComponent::create (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   mfcMultiComponent* o =
     new mfcMultiComponent (
@@ -1428,7 +1428,7 @@ mfcMultiComponent::mfcMultiComponent (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fComponentEntropicityKind =
     mfcMultiComponentEntropicityKind::kComponentEntropicityYes; // JMI v0.9.66 componentEntropicityKind; SUPERFLOUS ???
@@ -1465,7 +1465,7 @@ void mfcMultiComponent::appendRepresentationToMultiComponent (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
@@ -1473,7 +1473,7 @@ void mfcMultiComponent::appendRepresentationToMultiComponent (
     __FILE__, __LINE__,
     format != nullptr,
     "format is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   switch (fComponentEntropicityKind) {
     case mfcMultiComponentEntropicityKind::kComponentEntropicityYes:
@@ -1534,7 +1534,7 @@ void mfcMultiComponent::appendPassToMultiComponent (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
@@ -1542,7 +1542,7 @@ void mfcMultiComponent::appendPassToMultiComponent (
     __FILE__, __LINE__,
     pass != nullptr,
     "pass is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   switch (fComponentEntropicityKind) {
     case mfcMultiComponentEntropicityKind::kComponentEntropicityYes:
@@ -2035,7 +2035,7 @@ S_mfcGeneratorComponent mfcGeneratorComponent::create (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   mfcGeneratorComponent* o =
     new mfcGeneratorComponent (
@@ -2072,7 +2072,7 @@ mfcGeneratorComponent::mfcGeneratorComponent (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 mfcGeneratorComponent::~mfcGeneratorComponent ()
@@ -2111,7 +2111,7 @@ S_mfcConverterComponent mfcConverterComponent::create (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   mfcConverterComponent* o =
     new mfcConverterComponent (
@@ -2148,7 +2148,7 @@ mfcConverterComponent::mfcConverterComponent (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 mfcConverterComponent::~mfcConverterComponent ()
@@ -2187,7 +2187,7 @@ S_mfcLibraryComponent mfcLibraryComponent::create (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   mfcLibraryComponent* o =
     new mfcLibraryComponent (
@@ -2224,7 +2224,7 @@ mfcLibraryComponent::mfcLibraryComponent (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 mfcLibraryComponent::~mfcLibraryComponent ()
@@ -2252,7 +2252,7 @@ void mfcLibraryComponent::appendConverterToMultiComponent (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
@@ -2260,7 +2260,7 @@ void mfcLibraryComponent::appendConverterToMultiComponent (
     __FILE__, __LINE__,
     converter != nullptr,
     "converter is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   switch (fComponentEntropicityKind) {
     case mfcMultiComponentEntropicityKind::kComponentEntropicityYes:

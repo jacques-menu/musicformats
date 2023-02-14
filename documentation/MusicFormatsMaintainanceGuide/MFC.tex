@@ -1,3 +1,14 @@
+% -------------------------------------------------------------------------
+%  MusicFormats Library
+%  Copyright (C) Jacques Menu 2016-2023
+
+%  This Source Code Form is subject to the terms of the Mozilla Public
+%  License, v. 2.0. If a copy of the MPL was not distributed with this
+%  file, you can obtain one at http://mozilla.org/MPL/2.0/.
+
+%  https://github.com/jacques-menu/musicformats
+% -------------------------------------------------------------------------
+
 % !TEX root = MusicFormatsMaintainanceGuide.tex
 
 % -------------------------------------------------------------------------
@@ -123,6 +134,7 @@ S_mfcVersionDescr mfcVersionsHistory::fetchMostRecentVersion () const
     __FILE__, __LINE__,
     fVersionsList.size () > 0,
     "fVersionsList is empty");
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   return fVersionsList.back ();
 }
@@ -931,6 +943,7 @@ void oahVersionAtom::printVersion (std::ostream& os) const
     __FILE__, __LINE__,
     handlerMultiComponent != nullptr,
     "handlerMultiComponent is null");
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   handlerMultiComponent->
     printVersion (os);

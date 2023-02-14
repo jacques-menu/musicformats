@@ -118,7 +118,7 @@ void bsrFacSimileKindAtom::applyAtomWithValue (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 	fSelected = true;
 }
@@ -137,7 +137,7 @@ void bsrFacSimileKindAtom::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_bsrFacSimileKindAtom>*
     p =
@@ -156,7 +156,7 @@ void bsrFacSimileKindAtom::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -175,7 +175,7 @@ void bsrFacSimileKindAtom::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_bsrFacSimileKindAtom>*
     p =
@@ -194,7 +194,7 @@ void bsrFacSimileKindAtom::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -213,7 +213,7 @@ void bsrFacSimileKindAtom::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 std::string bsrFacSimileKindAtom::asShortNamedOptionString () const
@@ -362,7 +362,7 @@ void bsrTextsLanguageAtom::applyAtomWithValue (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 	fSelected = true;
 }
@@ -381,7 +381,7 @@ void bsrTextsLanguageAtom::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_bsrTextsLanguageAtom>*
     p =
@@ -400,7 +400,7 @@ void bsrTextsLanguageAtom::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -419,7 +419,7 @@ void bsrTextsLanguageAtom::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_bsrTextsLanguageAtom>*
     p =
@@ -438,7 +438,7 @@ void bsrTextsLanguageAtom::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -457,7 +457,7 @@ void bsrTextsLanguageAtom::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 std::string bsrTextsLanguageAtom::asShortNamedOptionString () const
@@ -775,7 +775,7 @@ R"(Write a trace of the BSR tree visiting activity to standard error.)",
         "fTraceBsrVisitors",
         fTraceBsrVisitors));
 }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 void bsrOahGroup::initializeBsrOahGroup ()
 {
@@ -791,7 +791,7 @@ void bsrOahGroup::initializeBsrOahGroup ()
   // trace
   // --------------------------------------
   initializeBsrTraceOah ();
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //______________________________________________________________________________
@@ -843,7 +843,7 @@ void bsrOahGroup::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_bsrOahGroup>*
     p =
@@ -862,7 +862,7 @@ void bsrOahGroup::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -881,7 +881,7 @@ void bsrOahGroup::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_bsrOahGroup>*
     p =
@@ -900,7 +900,7 @@ void bsrOahGroup::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -919,7 +919,7 @@ void bsrOahGroup::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //______________________________________________________________________________
@@ -990,7 +990,7 @@ void bsrOahGroup::displayBsrOahValues (int fieldWidth)
     std::endl;
 
   --gIndenter;
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   --gIndenter;
 }
@@ -1022,7 +1022,7 @@ S_bsrOahGroup createGlobalBsrOahGroup ()
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // protect library against multiple initializations
   if (! gGlobalBsrOahGroup) {

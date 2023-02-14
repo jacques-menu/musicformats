@@ -134,4 +134,4 @@ EXP std::ostream& operator << (std::ostream& os, const S_msrFontSize& elt);
 
 }
 
-#endif
+#endif // ___msrFonts___

@@ -65,7 +65,7 @@ void mfslInterpreterOahGroup::initializeMfslInterpreterOahGroup ()
   // trace
   // --------------------------------------
 // JMI  initializemfslInterpreterTraceOah ();
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // user options
   // --------------------------------------
@@ -271,7 +271,7 @@ void mfslInterpreterOahGroup::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_mfslInterpreterOahGroup>*
     p =
@@ -290,7 +290,7 @@ void mfslInterpreterOahGroup::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -309,7 +309,7 @@ void mfslInterpreterOahGroup::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_mfslInterpreterOahGroup>*
     p =
@@ -328,7 +328,7 @@ void mfslInterpreterOahGroup::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -347,7 +347,7 @@ void mfslInterpreterOahGroup::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void mfslInterpreterOahGroup::displayMfslInterpreterOahValues (
@@ -474,7 +474,7 @@ S_mfslInterpreterOahGroup createGlobalMfslInterpreterOahGroup ()
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // protect library against multiple initializations
   if (! gGlobalMfslInterpreterOahGroup) {

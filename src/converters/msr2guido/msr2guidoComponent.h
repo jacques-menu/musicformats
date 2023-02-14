@@ -27,5 +27,5 @@ S_mfcConverterComponent EXP createMsr2guidoConverterComponent ();
 }
 
 
-#endif
+#endif // ___msr2guidoComponent___
 

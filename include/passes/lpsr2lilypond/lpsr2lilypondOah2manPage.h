@@ -85,4 +85,4 @@ typedef SMARTP<lpsr2lilypondOah2manPage> S_lpsr2lilypondOah2manPage;
 }
 
 
-#endif
+#endif // ___lpsr2lilypondOah2manPage___

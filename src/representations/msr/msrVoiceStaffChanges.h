@@ -116,4 +116,4 @@ EXP std::ostream& operator << (std::ostream& os, const S_msrVoiceStaffChange& el
 }
 
 
-#endif
+#endif // ___msrVoiceStaffChange___

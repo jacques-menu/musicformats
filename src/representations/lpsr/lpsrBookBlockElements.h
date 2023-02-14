@@ -329,4 +329,4 @@ EXP std::ostream& operator << (std::ostream& os, const S_lpsrBookBlock& elt);
 }
 
 
-#endif
+#endif // ___lpsrBookBlockElements___

@@ -98,7 +98,7 @@ msrHumdrumScotKeyItem::msrHumdrumScotKeyItem (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fKeyDiatonicPitchKind = msrDiatonicPitchKind::kDiatonicPitch_UNKNOWN;
   fKeyAlterationKind    = msrAlterationKind::kAlteration_UNKNOWN;
@@ -141,7 +141,7 @@ void msrHumdrumScotKeyItem::setKeyItemDiatonicPitchKind (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fKeyDiatonicPitchKind = diatonicPitchKind;
 }
@@ -163,7 +163,7 @@ void msrHumdrumScotKeyItem::setKeyItemAlterationKind (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fKeyAlterationKind = alterationKind;
 }
@@ -184,7 +184,7 @@ void msrHumdrumScotKeyItem::setKeyItemOctaveKind (msrOctaveKind keyOctaveKind)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fKeyOctaveKind = keyOctaveKind;
 }
@@ -203,7 +203,7 @@ void msrHumdrumScotKeyItem::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrHumdrumScotKeyItem>*
     p =
@@ -222,7 +222,7 @@ void msrHumdrumScotKeyItem::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -241,7 +241,7 @@ void msrHumdrumScotKeyItem::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrHumdrumScotKeyItem>*
     p =
@@ -260,7 +260,7 @@ void msrHumdrumScotKeyItem::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -442,7 +442,7 @@ msrKey::msrKey ( // for traditional keys
       "'" <<
       std::endl;
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 msrKey::msrKey ( // for Humdrum/Scot keys
@@ -467,7 +467,7 @@ msrKey::msrKey ( // for Humdrum/Scot keys
       "'" <<
       std::endl;
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 msrKey::~msrKey ()
@@ -482,7 +482,7 @@ void msrKey::setKeyUpLinkToMeasure (
     __FILE__, __LINE__,
     measure != nullptr,
     "measure is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalTraceOahGroup->getTraceWholeNotes ()) {
@@ -498,7 +498,7 @@ void msrKey::setKeyUpLinkToMeasure (
 
     --gIndenter;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fKeyUpLinkToMeasure = measure;
 }
@@ -575,7 +575,7 @@ void msrKey::appendHumdrumScotKeyItem (
       "'" <<
       std::endl;
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // have key items octaves been specified?
   if (item->getKeyItemOctaveKind () != msrOctaveKind::kOctave_UNKNOWN) {
@@ -612,7 +612,7 @@ S_msrKey msrKey::createTraditionalKeyFromString (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   std::string regularExpression (
     "[[:space:]]*"
@@ -635,7 +635,7 @@ S_msrKey msrKey::createTraditionalKeyFromString (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   std::regex  e (regularExpression);
   std::smatch sm;
@@ -666,7 +666,7 @@ S_msrKey msrKey::createTraditionalKeyFromString (
 
     --gIndenter;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   //  Handles keyString à la LilyPond, such as c [major] or bes minor
 
@@ -729,7 +729,7 @@ S_msrKey msrKey::createTraditionalKeyFromString (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // create the traditional key
   result =
@@ -757,7 +757,7 @@ void msrKey::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrKey>*
     p =
@@ -776,7 +776,7 @@ void msrKey::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -795,7 +795,7 @@ void msrKey::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrKey>*
     p =
@@ -814,7 +814,7 @@ void msrKey::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }

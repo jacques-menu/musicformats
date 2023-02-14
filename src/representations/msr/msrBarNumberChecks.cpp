@@ -93,7 +93,7 @@ msrBarNumberCheck::msrBarNumberCheck (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 msrBarNumberCheck::~msrBarNumberCheck ()
@@ -108,7 +108,7 @@ void msrBarNumberCheck::setBarNumberCheckUpLinkToMeasure (
     __FILE__, __LINE__,
     measure != nullptr,
     "measure is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalTraceOahGroup->getTraceWholeNotes ()) {
@@ -124,7 +124,7 @@ void msrBarNumberCheck::setBarNumberCheckUpLinkToMeasure (
 
     --gIndenter;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fBarNumberCheckUpLinkToMeasure = measure;
 }
@@ -143,7 +143,7 @@ void msrBarNumberCheck::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrBarNumberCheck>*
     p =
@@ -162,7 +162,7 @@ void msrBarNumberCheck::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -181,7 +181,7 @@ void msrBarNumberCheck::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrBarNumberCheck>*
     p =
@@ -200,7 +200,7 @@ void msrBarNumberCheck::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif        
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }

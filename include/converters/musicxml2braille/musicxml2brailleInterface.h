@@ -47,4 +47,4 @@ EXP mfMusicformatsErrorKind convertMusicxmlString2brailleWithHandler (
 }
 
 
-#endif
+#endif // ___musicxml2brailleInterface___

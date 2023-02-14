@@ -66,7 +66,7 @@ void lpsrNewStaffgroupBlock::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_lpsrNewStaffgroupBlock>*
     p =
@@ -85,7 +85,7 @@ void lpsrNewStaffgroupBlock::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -104,7 +104,7 @@ void lpsrNewStaffgroupBlock::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_lpsrNewStaffgroupBlock>*
     p =
@@ -123,7 +123,7 @@ void lpsrNewStaffgroupBlock::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -189,7 +189,7 @@ void lpsrNewStaffTuningBlock::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_lpsrNewStaffTuningBlock>*
     p =
@@ -208,7 +208,7 @@ void lpsrNewStaffTuningBlock::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -227,7 +227,7 @@ void lpsrNewStaffTuningBlock::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_lpsrNewStaffTuningBlock>*
     p =
@@ -246,7 +246,7 @@ void lpsrNewStaffTuningBlock::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -305,7 +305,7 @@ void lpsrNewStaffBlock::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_lpsrNewStaffBlock>*
     p =
@@ -324,7 +324,7 @@ void lpsrNewStaffBlock::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -343,7 +343,7 @@ void lpsrNewStaffBlock::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_lpsrNewStaffBlock>*
     p =
@@ -362,7 +362,7 @@ void lpsrNewStaffBlock::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -411,7 +411,7 @@ lpsrStaffBlock::lpsrStaffBlock (
     __FILE__, __LINE__,
     staff != nullptr,
     "staff is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fStaff = staff;
 
@@ -464,7 +464,7 @@ void lpsrStaffBlock::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_lpsrStaffBlock>*
     p =
@@ -483,7 +483,7 @@ void lpsrStaffBlock::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -502,7 +502,7 @@ void lpsrStaffBlock::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_lpsrStaffBlock>*
     p =
@@ -521,7 +521,7 @@ void lpsrStaffBlock::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -540,7 +540,7 @@ void lpsrStaffBlock::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   for (
     std::list<S_msrElement>::const_iterator i = fStaffBlockElements.begin ();
@@ -564,7 +564,7 @@ void lpsrStaffBlock::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void lpsrStaffBlock::print (std::ostream& os) const

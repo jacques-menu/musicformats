@@ -27,5 +27,5 @@ S_mfcConverterComponent EXP createMsdl2brailleConverterComponent ();
 }
 
 
-#endif
+#endif // ___msdl2brailleComponent___
 

@@ -51,7 +51,7 @@ oahEarlyOptions::oahEarlyOptions ()
   std::cerr << // JMI
     "Enforcing fTraceEarlyOptions" <<
     std::endl;
-#endif
+#endif // DEBUG_EARLY_OPTIONS
 
   initializeEarlyOptions ();
 }
@@ -64,7 +64,7 @@ void oahEarlyOptions::initializeEarlyOptions ()
 #ifdef MF_TRACE_IS_ENABLED
   fEarlyTraceOnlyPass =
     mfPassIDKind::kMfPassID_ALL; // default value for passes trace
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //_______________________________________________________________________________
@@ -87,7 +87,7 @@ void oahEarlyOptions::setEarlyLanguageKind (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fEarlyLanguageKind = languageKind;
 
@@ -112,7 +112,7 @@ void oahEarlyOptions::setEarlyInsiderOption ()
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fEarlyInsiderOption = true;
 }
@@ -128,7 +128,7 @@ void oahEarlyOptions::setEarlyInsiderOption ()
 //       "Setting fEarlyRegularOption" <<
 //       std::endl;
 //   }
-// #endif
+// #endif // MF_TRACE_IS_ENABLED
 //
 //   fEarlyRegularOption = true;
 // }
@@ -156,7 +156,7 @@ void oahEarlyOptions::setEarlyQuietOption ()
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fEarlyQuietOption = true;
 }
@@ -177,7 +177,7 @@ void oahEarlyOptions::setEarlyMultiGenerationOutputKind (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fEarlyMultiGenerationOutputKind = value;
 }
@@ -202,7 +202,7 @@ void oahEarlyOptions::appendEarlyIncludeFileName (std::string includeFileName)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fEarlyIncludeFileNamesList.push_back (includeFileName);
 }
@@ -219,7 +219,7 @@ void oahEarlyOptions::setTraceEarlyOptions ()
   gLog <<
     "Setting fTraceEarlyOptions" <<
     std::endl;
-#endif
+#endif // DEBUG_EARLY_OPTIONS
 
   fTraceEarlyOptions = true;
 }
@@ -242,7 +242,7 @@ void oahEarlyOptions::setEarlyOahVerboseMode ()
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fEarlyOahVerboseMode = true;
 }
@@ -265,7 +265,7 @@ void oahEarlyOptions::setEarlyTraceOah ()
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fEarlyTraceOah = true;
 }
@@ -288,7 +288,7 @@ void oahEarlyOptions::setEarlyTraceOahDetails ()
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fEarlyTraceOahDetails = true;
 }
@@ -311,7 +311,7 @@ void oahEarlyOptions::setEarlyTraceComponents ()
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fEarlyTraceComponents = true;
 }
@@ -349,7 +349,7 @@ void oahEarlyOptions::setEarlyTraceOnlyPass (mfPassIDKind passIDKind)
   fEarlyTraceOnlyPass = passIDKind;
 }
 
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 //______________________________________________________________________________
 Bool oahEarlyOptions::isEarlyOptionRecognized (
@@ -381,7 +381,7 @@ Bool oahEarlyOptions::isEarlyOptionRecognized (
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     result = true;
   }
@@ -551,7 +551,7 @@ void oahEarlyOptions::applyEarlyOptionIfRelevant (
       mfPassIDKindFromString (optionValue));
   }
 
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void oahEarlyOptions::applyEarlyOptionsIfPresentInArgcArgv (
@@ -594,7 +594,7 @@ void oahEarlyOptions::applyEarlyOptionsIfPresentInArgcArgv (
           __FILE__, __LINE__,
           ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       // is argumentWithoutDash starting with a prefix?
       Bool   argumentWithoutDashStartsWithAPrefix;
@@ -645,7 +645,7 @@ void oahEarlyOptions::applyEarlyOptionsIfPresentInArgcArgv (
           __FILE__, __LINE__,
           ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       // apply argumentWithoutDashToBeUsed early if it is known as such
 
@@ -713,7 +713,7 @@ void oahEarlyOptions::applyEarlyOptionsIfPresentInOptionsAndArguments (
         std::endl;
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   for (size_t i = 0; i < argumentsNumber; ++i) {
     std::string argumentAsString = argumentsVector [i];
@@ -749,7 +749,7 @@ void oahEarlyOptions::applyEarlyOptionsIfPresentInOptionsAndArguments (
           __FILE__, __LINE__,
           ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       // is argumentWithoutDash starting with a prefix?
       Bool   argumentWithoutDashStartsWithAPrefix;
@@ -800,7 +800,7 @@ void oahEarlyOptions::applyEarlyOptionsIfPresentInOptionsAndArguments (
           __FILE__, __LINE__,
           ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       // apply argumentWithoutDashToBeUsed early if it is known as such
       applyEarlyOptionIfRelevant (
@@ -874,7 +874,7 @@ void oahEarlyOptions::print (std::ostream& os) const
     std::setw (fieldWidth) <<
     "fEarlyOahVerboseMode" << ": " << fEarlyOahVerboseMode <<
     std::endl;
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   os << std::left <<
     std::setw (fieldWidth) <<
@@ -894,7 +894,7 @@ void oahEarlyOptions::print (std::ostream& os) const
     "fEarlyTraceOnlyPass" << ": " << fEarlyTraceOnlyPass <<
     std::endl;
 
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   --gIndenter;
 }

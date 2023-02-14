@@ -144,4 +144,4 @@ EXP std::ostream& operator << (std::ostream& os, const S_msrOrnament& elt);
 }
 
 
-#endif
+#endif // ___msrOrnaments___

@@ -42,7 +42,7 @@ Rational::Rational (
     __FILE__, __LINE__,
     denom > 0,
     "denom '" + std::to_string (denom) + "' is not positive");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fNumerator = num;
   fDenominator = denom;
@@ -92,7 +92,7 @@ Rational::Rational (const std::string &theString)
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     // extract the numerator
     {
@@ -113,7 +113,7 @@ Rational::Rational (const std::string &theString)
         __FILE__, __LINE__,
         fDenominator > 0,
         "fDenominator '" + denominator + "' is not positive");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
     }
   }
 

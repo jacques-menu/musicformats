@@ -13,7 +13,6 @@
 #define ___msdl2musicxmldComponent___
 
 
-
 namespace MusicFormats
 {
 
@@ -24,5 +23,4 @@ S_mfcConverterComponent EXP createMsdl2musicxmlConverterComponent ();
 }
 
 
-#endif
-
+#endif // ___msdl2musicxmldComponent___

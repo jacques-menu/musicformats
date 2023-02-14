@@ -64,7 +64,7 @@
 # define YY_CPLUSPLUS __cplusplus
 #else
 # define YY_CPLUSPLUS 199711L
-#endif
+#endif // ___
 
 // Support move semantics when possible.
 #if 201103L <= YY_CPLUSPLUS
@@ -79,7 +79,7 @@
 # define YY_MOVE_REF(Type) Type&
 # define YY_RVREF(Type)    const Type&
 # define YY_COPY(Type)     const Type&
-#endif
+#endif // ___
 
 // Support noexcept when possible.
 #if 201103L <= YY_CPLUSPLUS
@@ -88,20 +88,20 @@
 #else
 # define YY_NOEXCEPT
 # define YY_NOTHROW throw ()
-#endif
+#endif // ___
 
 // Support constexpr when possible.
 #if 201703 <= YY_CPLUSPLUS
 # define YY_CONSTEXPR constexpr
 #else
 # define YY_CONSTEXPR
-#endif
+#endif // ___
 # include "location.hh"
 #include <typeinfo>
 #ifndef MFSL_ASSERT
 # include <cassert>
 # define MFSL_ASSERT assert
-#endif
+#endif // ___
 
 
 #ifndef YY_ATTRIBUTE_PURE
@@ -110,7 +110,7 @@
 # else
 #  define YY_ATTRIBUTE_PURE
 # endif
-#endif
+#endif // ___
 
 #ifndef YY_ATTRIBUTE_UNUSED
 # if defined __GNUC__ && 2 < __GNUC__ + (7 <= __GNUC_MINOR__)
@@ -118,14 +118,14 @@
 # else
 #  define YY_ATTRIBUTE_UNUSED
 # endif
-#endif
+#endif // ___
 
 /* Suppress unused-variable warnings by "using" E.  */
 #if ! defined lint || defined __GNUC__
 # define YY_USE(E) ((void) (E))
 #else
 # define YY_USE(E) /* empty */
-#endif
+#endif // ___
 
 /* Suppress an incorrect diagnostic about yylval being uninitialized.  */
 #if defined __GNUC__ && ! defined __ICC && 406 <= __GNUC__ * 100 + __GNUC_MINOR__
@@ -143,14 +143,14 @@
     _Pragma ("GCC diagnostic pop")
 #else
 # define YY_INITIAL_VALUE(Value) Value
-#endif
+#endif // ___
 #ifndef YY_IGNORE_MAYBE_UNINITIALIZED_BEGIN
 # define YY_IGNORE_MAYBE_UNINITIALIZED_BEGIN
 # define YY_IGNORE_MAYBE_UNINITIALIZED_END
-#endif
+#endif // ___
 #ifndef YY_INITIAL_VALUE
 # define YY_INITIAL_VALUE(Value) /* Nothing. */
-#endif
+#endif // ___
 
 #if defined __cplusplus && defined __GNUC__ && ! defined __ICC && 6 <= __GNUC__
 # define YY_IGNORE_USELESS_CAST_BEGIN                          \
@@ -158,11 +158,11 @@
     _Pragma ("GCC diagnostic ignored \"-Wuseless-cast\"")
 # define YY_IGNORE_USELESS_CAST_END            \
     _Pragma ("GCC diagnostic pop")
-#endif
+#endif // ___
 #ifndef YY_IGNORE_USELESS_CAST_BEGIN
 # define YY_IGNORE_USELESS_CAST_BEGIN
 # define YY_IGNORE_USELESS_CAST_END
-#endif
+#endif // ___
 
 # ifndef YY_CAST
 #  ifdef __cplusplus
@@ -245,7 +245,7 @@ namespace mfsl {
     value_type (const self_type&) = delete;
     /// Non copyable.
     self_type& operator= (const self_type&) = delete;
-#endif
+#endif // ___
 
     /// Destruction, allowed only if empty.
     ~value_type () YY_NOEXCEPT
@@ -370,7 +370,7 @@ namespace mfsl {
       emplace<T> (std::move (that.as<T> ()));
       that.destroy<T> ();
     }
-#endif
+#endif // ___
 
     /// Copy the content of \a that to this.
     template <typename T>
@@ -395,7 +395,7 @@ namespace mfsl {
     value_type (const self_type&);
     /// Non copyable.
     self_type& operator= (const self_type&);
-#endif
+#endif // ___
 
     /// Accessor to raw memory as \a T.
     template <typename T>
@@ -448,7 +448,7 @@ namespace mfsl {
     const std::type_info *yytypeid_;
   };
 
-#endif
+#endif // ___
     /// Backward compatibility (Bison 3.8).
     typedef value_type semantic_type;
 
@@ -638,7 +638,7 @@ namespace mfsl {
     }
 
       }
-#endif
+#endif // ___
 
       /// Copy constructor.
       basic_symbol (const basic_symbol& that);
@@ -654,7 +654,7 @@ namespace mfsl {
         : Base (t)
         , location (l)
       {}
-#endif
+#endif // ___
 
 #if 201103L <= YY_CPLUSPLUS
       basic_symbol (typename Base::kind_type t, std::string&& v, location_type&& l)
@@ -668,7 +668,7 @@ namespace mfsl {
         , value (v)
         , location (l)
       {}
-#endif
+#endif // ___
 
       /// Destroy the symbol.
       ~basic_symbol ()
@@ -740,7 +740,7 @@ switch (yykind)
 #if YY_CPLUSPLUS < 201103L
       /// Assignment operator.
       basic_symbol& operator= (const basic_symbol& that);
-#endif
+#endif // ___
     };
 
     /// Type access provider for token (enum) based symbols.
@@ -755,7 +755,7 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       /// Move constructor.
       by_kind (by_kind&& that) YY_NOEXCEPT;
-#endif
+#endif // ___
 
       /// Copy constructor.
       by_kind (const by_kind& that) YY_NOEXCEPT;
@@ -802,12 +802,12 @@ switch (yykind)
 #else
       symbol_type (int tok, const location_type& l)
         : super_type (token_kind_type (tok), l)
-#endif
+#endif // ___
       {
 #if !defined _MSC_VER || defined __clang__
         MFSL_ASSERT (tok == token::MFSL_TOK_YYEOF
                    || (token::MFSL_TOK_MFSLerror <= tok && tok <= token::MFSL_TOK_ALL));
-#endif
+#endif // ___
       }
 #if 201103L <= YY_CPLUSPLUS
       symbol_type (int tok, std::string v, location_type l)
@@ -815,11 +815,11 @@ switch (yykind)
 #else
       symbol_type (int tok, const std::string& v, const location_type& l)
         : super_type (token_kind_type (tok), v, l)
-#endif
+#endif // ___
       {
 #if !defined _MSC_VER || defined __clang__
         MFSL_ASSERT ((token::MFSL_TOK_INTEGER <= tok && tok <= token::MFSL_TOK_OPTION));
-#endif
+#endif // ___
       }
     };
 
@@ -832,7 +832,7 @@ switch (yykind)
     parser (const parser&) = delete;
     /// Non copyable.
     parser& operator= (const parser&) = delete;
-#endif
+#endif // ___
 
     /// Parse.  An alias for parse ().
     /// \returns  0 iff parsing succeeded.
@@ -854,7 +854,7 @@ switch (yykind)
     debug_level_type debug_level () const YY_ATTRIBUTE_PURE;
     /// Set the current debugging level.
     void set_debug_level (debug_level_type l);
-#endif
+#endif // ___
 
     /// Report a syntax error.
     /// \param loc    where the syntax error is found.
@@ -883,7 +883,7 @@ switch (yykind)
       {
         return symbol_type (token::MFSL_TOK_YYEOF, l);
       }
-#endif
+#endif // ___
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
@@ -898,7 +898,7 @@ switch (yykind)
       {
         return symbol_type (token::MFSL_TOK_MFSLerror, l);
       }
-#endif
+#endif // ___
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
@@ -913,7 +913,7 @@ switch (yykind)
       {
         return symbol_type (token::MFSL_TOK_MFSLUNDEF, l);
       }
-#endif
+#endif // ___
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
@@ -928,7 +928,7 @@ switch (yykind)
       {
         return symbol_type (token::MFSL_TOK_BAR, l);
       }
-#endif
+#endif // ___
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
@@ -943,7 +943,7 @@ switch (yykind)
       {
         return symbol_type (token::MFSL_TOK_AMPERSAND, l);
       }
-#endif
+#endif // ___
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
@@ -958,7 +958,7 @@ switch (yykind)
       {
         return symbol_type (token::MFSL_TOK_EQUAL, l);
       }
-#endif
+#endif // ___
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
@@ -973,7 +973,7 @@ switch (yykind)
       {
         return symbol_type (token::MFSL_TOK_SEMICOLON, l);
       }
-#endif
+#endif // ___
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
@@ -988,7 +988,7 @@ switch (yykind)
       {
         return symbol_type (token::MFSL_TOK_COLON, l);
       }
-#endif
+#endif // ___
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
@@ -1003,7 +1003,7 @@ switch (yykind)
       {
         return symbol_type (token::MFSL_TOK_COMMA, l);
       }
-#endif
+#endif // ___
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
@@ -1018,7 +1018,7 @@ switch (yykind)
       {
         return symbol_type (token::MFSL_TOK_TOOL, l);
       }
-#endif
+#endif // ___
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
@@ -1033,7 +1033,7 @@ switch (yykind)
       {
         return symbol_type (token::MFSL_TOK_INPUT, l);
       }
-#endif
+#endif // ___
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
@@ -1048,7 +1048,7 @@ switch (yykind)
       {
         return symbol_type (token::MFSL_TOK_CHOICE, l);
       }
-#endif
+#endif // ___
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
@@ -1063,7 +1063,7 @@ switch (yykind)
       {
         return symbol_type (token::MFSL_TOK_DEFAULT, l);
       }
-#endif
+#endif // ___
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
@@ -1078,7 +1078,7 @@ switch (yykind)
       {
         return symbol_type (token::MFSL_TOK_CASE, l);
       }
-#endif
+#endif // ___
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
@@ -1093,7 +1093,7 @@ switch (yykind)
       {
         return symbol_type (token::MFSL_TOK_SELECT, l);
       }
-#endif
+#endif // ___
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
@@ -1108,7 +1108,7 @@ switch (yykind)
       {
         return symbol_type (token::MFSL_TOK_ALL, l);
       }
-#endif
+#endif // ___
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
@@ -1123,7 +1123,7 @@ switch (yykind)
       {
         return symbol_type (token::MFSL_TOK_INTEGER, v, l);
       }
-#endif
+#endif // ___
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
@@ -1138,7 +1138,7 @@ switch (yykind)
       {
         return symbol_type (token::MFSL_TOK_DOUBLE, v, l);
       }
-#endif
+#endif // ___
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
@@ -1153,7 +1153,7 @@ switch (yykind)
       {
         return symbol_type (token::MFSL_TOK_SINGLE_QUOTED_STRING, v, l);
       }
-#endif
+#endif // ___
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
@@ -1168,7 +1168,7 @@ switch (yykind)
       {
         return symbol_type (token::MFSL_TOK_DOUBLE_QUOTED_STRING, v, l);
       }
-#endif
+#endif // ___
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
@@ -1183,7 +1183,7 @@ switch (yykind)
       {
         return symbol_type (token::MFSL_TOK_NAME, v, l);
       }
-#endif
+#endif // ___
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
@@ -1198,7 +1198,7 @@ switch (yykind)
       {
         return symbol_type (token::MFSL_TOK_OPTION, v, l);
       }
-#endif
+#endif // ___
 
 
     class   context
@@ -1225,7 +1225,7 @@ switch (yykind)
     parser (const parser&);
     /// Non copyable.
     parser& operator= (const parser&);
-#endif
+#endif // ___
 
     /// Check the lookahead yytoken.
     /// \returns  true iff the token will be eventually shifted.
@@ -1323,7 +1323,7 @@ switch (yykind)
     /// \param yysym  The symbol.
     template <typename Base>
     void yy_print_ (std::ostream& yyo, const basic_symbol<Base>& yysym) const;
-#endif
+#endif // ___
 
     /// \brief Reclaim the memory associated to a symbol.
     /// \param yymsg     Why this token is reclaimed.
@@ -1386,7 +1386,7 @@ switch (yykind)
       /// Assignment, needed by push_back by other implementations.
       /// Needed by some other old implementations.
       stack_symbol_type& operator= (const stack_symbol_type& that);
-#endif
+#endif // ___
     };
 
     /// A stack with random access from its top.
@@ -1409,7 +1409,7 @@ switch (yykind)
       stack (const stack&) = delete;
       /// Non copyable.
       stack& operator= (const stack&) = delete;
-#endif
+#endif // ___
 
       /// Random access.
       ///
@@ -1501,7 +1501,7 @@ switch (yykind)
       stack (const stack&);
       /// Non copyable.
       stack& operator= (const stack&);
-#endif
+#endif // ___
       /// The wrapped container.
       S seq_;
     };
@@ -1649,7 +1649,7 @@ switch (yykind)
   {
     that.clear ();
   }
-#endif
+#endif // ___
 
   inline
   parser::by_kind::by_kind (const by_kind& that) YY_NOEXCEPT

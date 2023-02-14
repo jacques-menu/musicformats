@@ -14,7 +14,6 @@
 
 #include "mfStaticSettings.h"
 
-#ifdef MF_HARMONIES_EXTRA_IS_ENABLED
 
 #include "oahHarmoniesExtraOah.h"
 
@@ -64,6 +63,6 @@ typedef SMARTP<harmoniesExtraOah2manPage> S_harmoniesExtraOah2manPage;
 }
 
 
-#endif
 
-#endif
+
+#endif // ___harmoniesExtraOah2manPage___

@@ -105,4 +105,4 @@ EXP std::ostream& operator << (std::ostream& os, const msrTupletFactor& elt);
 }
 
 
-#endif
+#endif // ___msrTupletFactors___

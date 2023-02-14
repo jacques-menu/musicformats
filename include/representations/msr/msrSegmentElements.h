@@ -158,4 +158,4 @@ EXP std::ostream& operator << (std::ostream& os, const S_msrSegmentElement& elt)
 }
 
 
-#endif
+#endif // ___msrSegmentElements___

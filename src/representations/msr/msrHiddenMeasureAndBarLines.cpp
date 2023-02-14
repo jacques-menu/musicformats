@@ -53,7 +53,7 @@ S_msrHiddenMeasureAndBarLine msrHiddenMeasureAndBarLine::create (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   msrHiddenMeasureAndBarLine* o =
     new msrHiddenMeasureAndBarLine (
@@ -91,7 +91,7 @@ void msrHiddenMeasureAndBarLine::setHiddenMeasureAndBarLineUpLinkToMeasure (
     __FILE__, __LINE__,
     measure != nullptr,
     "measure is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalTraceOahGroup->getTraceWholeNotes ()) {
@@ -107,7 +107,7 @@ void msrHiddenMeasureAndBarLine::setHiddenMeasureAndBarLineUpLinkToMeasure (
 
     --gIndenter;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fHiddenMeasureAndBarLineUpLinkToMeasure = measure;
 }
@@ -126,7 +126,7 @@ void msrHiddenMeasureAndBarLine::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrHiddenMeasureAndBarLine>*
     p =
@@ -145,7 +145,7 @@ void msrHiddenMeasureAndBarLine::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -164,7 +164,7 @@ void msrHiddenMeasureAndBarLine::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrHiddenMeasureAndBarLine>*
     p =
@@ -183,7 +183,7 @@ void msrHiddenMeasureAndBarLine::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif        
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }

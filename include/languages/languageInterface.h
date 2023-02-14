@@ -9,8 +9,8 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#ifndef ___mfWae___
-#define ___mfWae___
+#ifndef __languageInterface___
+#define __languageInterface___
 
 #include "exports.h"
 
@@ -39,4 +39,4 @@ EXP void mfInternalWarning (
 }
 
 
-#endif
+#endif // __languageInterface___

@@ -323,7 +323,7 @@ class EXP bsrOahGroup : public oahGroup
                               { fTraceBsrVisitors = true; }
     Bool                  getTraceBsrVisitors () const
                               { return fTraceBsrVisitors; }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   public:
 
@@ -355,7 +355,7 @@ class EXP bsrOahGroup : public oahGroup
 
 #ifdef MF_TRACE_IS_ENABLED
     void                  initializeBsrTraceOah ();
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   public:
 
@@ -414,7 +414,7 @@ class EXP bsrOahGroup : public oahGroup
 
     // visitors
     Bool                  fTraceBsrVisitors;
-#endif
+#endif // MF_TRACE_IS_ENABLED
 };
 typedef SMARTP<bsrOahGroup> S_bsrOahGroup;
 EXP std::ostream& operator << (std::ostream& os, const S_bsrOahGroup& elt);
@@ -428,4 +428,4 @@ EXP  S_bsrOahGroup createGlobalBsrOahGroup ();
 }
 
 
-#endif
+#endif // ___bsrOah___

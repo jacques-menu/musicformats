@@ -31,6 +31,7 @@
 #include "waeOah.h"
 #include "mfOutputFileOah.h"
 #include "oahDisplayOah.h"
+#include "oahHarmoniesExtraOah.h"
 
 #include "mxsrOah.h"
 #include "mxsr2msrOah.h"
@@ -97,7 +98,7 @@ Usage: xml2brl [[option]* [MusicXMLFile|-] [[option]*
 //       __FILE__, __LINE__,
 //       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // initialize the history
   initializeHandlerMultiComponent ();
@@ -164,7 +165,7 @@ void xml2brlInsiderHandler::createTheXml2brlPrefixes ()
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   createTheCommonPrefixes ();
 }
@@ -187,7 +188,7 @@ void xml2brlInsiderHandler::createTheXml2brlOptionGroups (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // initialize options handling, phase 1
   // ------------------------------------------------------
@@ -206,7 +207,7 @@ void xml2brlInsiderHandler::createTheXml2brlOptionGroups (
   appendGroupToHandler (
     createGlobalTraceOahGroup (
       this));
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // create the output file OAH group
   appendGroupToHandler (
@@ -258,11 +259,9 @@ void xml2brlInsiderHandler::createTheXml2brlOptionGroups (
   appendGroupToHandler (
     createGlobalBrailleGenerationOahGroup ());
 
-#ifdef MF_HARMONIES_EXTRA_IS_ENABLED
   // create the extra OAH group
   appendGroupToHandler (
     createGlobalHarmoniesExtraOahGroup ());
-#endif
 
   // create the global xml2brl OAH group only now,
   // after the groups whose options it may use
@@ -290,7 +289,7 @@ void xml2brlInsiderHandler::createTheXml2brlOptionGroups (
 
     --gIndenter;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //______________________________________________________________________________
@@ -310,7 +309,7 @@ void xml2brlInsiderHandler::checkOptionsAndArguments () const
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   checkSingleInputSourceInArgumentsVector ();
 }
@@ -332,7 +331,7 @@ std::string xml2brlInsiderHandler::fetchOutputFileNameFromTheOptions () const
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   S_oahStringAtom
     outputFileNameStringAtom =
@@ -426,7 +425,7 @@ std::string xml2brlInsiderHandler::fetchOutputFileNameFromTheOptions () const
           __FILE__, __LINE__,
           ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       // should encoding be used by the output file name?
       bsrBrailleOutputKind
@@ -492,7 +491,7 @@ std::string xml2brlInsiderHandler::fetchOutputFileNameFromTheOptions () const
           __FILE__, __LINE__,
           ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       // append the file extension to the output file name
       switch (brailleOutputKind) {
@@ -524,7 +523,7 @@ std::string xml2brlInsiderHandler::fetchOutputFileNameFromTheOptions () const
           __FILE__, __LINE__,
           ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
     }
 
     else {
@@ -547,7 +546,7 @@ void xml2brlInsiderHandler::enforceHandlerQuietness ()
 #ifdef MF_TRACE_IS_ENABLED
   gGlobalTraceOahGroup->
     enforceGroupQuietness ();
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   gGlobalXml2brlInsiderOahGroup->
     enforceGroupQuietness ();
@@ -570,10 +569,8 @@ void xml2brlInsiderHandler::enforceHandlerQuietness ()
   gGlobalBrailleGenerationOahGroup->
     enforceGroupQuietness ();
 
-#ifdef MF_HARMONIES_EXTRA_IS_ENABLED
-  gGlobalHarmoniesExtraOahGroup->
+  gHarmoniesExtraOahGroup->
     enforceGroupQuietness ();
-#endif
 }
 
 //______________________________________________________________________________
@@ -599,7 +596,7 @@ void xml2brlInsiderOahGroup::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_xml2brlInsiderOahGroup>*
     p =
@@ -618,7 +615,7 @@ void xml2brlInsiderOahGroup::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -637,7 +634,7 @@ void xml2brlInsiderOahGroup::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_xml2brlInsiderOahGroup>*
     p =
@@ -656,7 +653,7 @@ void xml2brlInsiderOahGroup::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -675,7 +672,7 @@ void xml2brlInsiderOahGroup::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   oahGroup::browseData (v);
 }
@@ -785,7 +782,7 @@ void xml2brlInsiderOahGroup::initializeXml2brlInsiderOahGroup ()
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // quit after some passes
   // --------------------------------------
@@ -810,7 +807,7 @@ void xml2brlInsiderOahGroup::createInsiderQuitSubGroup ()
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   S_oahSubGroup
     subGroup =
@@ -920,7 +917,7 @@ S_xml2brlInsiderOahGroup createGlobalXml2brlOahGroup (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // protect library against multiple initializations
   if (! gGlobalXml2brlInsiderOahGroup) {

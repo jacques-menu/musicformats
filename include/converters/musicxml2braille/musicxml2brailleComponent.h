@@ -27,5 +27,5 @@ EXP S_mfcConverterComponent createMusicxml2brailleConverterComponent ();
 }
 
 
-#endif
+#endif // ___musicxml2brailleComponent___
 

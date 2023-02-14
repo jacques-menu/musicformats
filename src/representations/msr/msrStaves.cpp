@@ -83,7 +83,7 @@ msrStaff::msrStaff (
     __FILE__, __LINE__,
     staffUpLinkToPart != nullptr,
     "staffUpLinkToPart is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // set staff part upLink
   fStaffUpLinkToPart =
@@ -110,7 +110,7 @@ msrStaff::msrStaff (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void msrStaff::initializeStaff ()
@@ -250,7 +250,7 @@ void msrStaff::initializeStaff ()
           __FILE__, __LINE__,
           ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       appendClefToStaff (clef); // JMI
     }
@@ -281,7 +281,7 @@ void msrStaff::initializeStaff ()
           __FILE__, __LINE__,
           ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       appendKeyToStaff (key);
     }
@@ -311,7 +311,7 @@ void msrStaff::initializeStaff ()
           __FILE__, __LINE__,
           ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       fStaffCurrentTransposition = transposition;
 
@@ -353,7 +353,7 @@ S_msrStaff msrStaff::createStaffNewbornClone (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
@@ -361,7 +361,7 @@ S_msrStaff msrStaff::createStaffNewbornClone (
     __FILE__, __LINE__,
     containingPart != nullptr,
     "containingPart is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   S_msrStaff
     newbornClone =
@@ -463,7 +463,7 @@ void msrStaff::registerShortestNoteInStaffIfRelevant (const S_msrNote& note)
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
   }
 
 /* JMI
@@ -559,7 +559,7 @@ void msrStaff::createAMeasureAndAppendItToStaff (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // cascade it to all voices
   for (const S_msrVoice& voice : fStaffAllVoicesList) {
@@ -569,7 +569,7 @@ void msrStaff::createAMeasureAndAppendItToStaff (
       __FILE__, __LINE__,
       voice != nullptr,
       "voice is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
     voice->
       createAMeasureAndAppendItToVoice (
@@ -599,7 +599,7 @@ void msrStaff::setNextMeasureNumberInStaff (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -611,7 +611,7 @@ void msrStaff::setNextMeasureNumberInStaff (
       __FILE__, __LINE__,
       voice != nullptr,
       "voice is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
     if (gGlobalTraceOahGroup->getTraceMeasures ()) {
@@ -628,7 +628,7 @@ void msrStaff::setNextMeasureNumberInStaff (
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     voice->
       setNextMeasureNumberInVoice (
@@ -666,7 +666,7 @@ S_msrVoice msrStaff::createRegularVoiceInStaffByItsNumber (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // are there too many regular voices in this staff?
   if (fStaffRegularVoicesCounter > msrStaff::sStaffMaxRegularVoices) {
@@ -768,7 +768,7 @@ S_msrVoice msrStaff::createRegularVoiceInStaffByItsNumber (
           __FILE__, __LINE__,
           ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
       break;
 
     case msrVoiceKind::kVoiceKindFiguredBass:
@@ -792,7 +792,7 @@ S_msrVoice msrStaff::createRegularVoiceInStaffByItsNumber (
           __FILE__, __LINE__,
           ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
       break;
   } // switch
 
@@ -847,7 +847,7 @@ void msrStaff::setStaffShortestNoteDuration (
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fStaffShortestNoteDuration = duration;
 }
@@ -870,7 +870,7 @@ void msrStaff::setStaffShortestNoteTupletFactor (
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fStaffShortestNoteTupletFactor = noteTupletFactor;
 }
@@ -891,7 +891,7 @@ void msrStaff::registerVoiceInStaffAllVoicesList (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -952,7 +952,7 @@ void msrStaff::registerVoiceInStaffAllVoicesList (
       }
     } // for
   }
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // register voice in this staff's 'all voices' list
   fStaffAllVoicesList.push_back (voice);
@@ -986,7 +986,7 @@ void msrStaff::registerVoiceByItsNumber (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -1029,7 +1029,7 @@ void msrStaff::registerVoiceByItsNumber (
           __FILE__, __LINE__,
           ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       // sort fStaffAllVoicesList, to have harmonies just before
       // the corresponding voice
@@ -1054,7 +1054,7 @@ void msrStaff::registerVoiceByItsNumber (
           __FILE__, __LINE__,
           ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       // sort fStaffAllVoicesList, to have figured bass elements just after
       // the corresponding voice
@@ -1091,7 +1091,7 @@ void msrStaff::registerRegularVoiceByItsNumber (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
@@ -1150,7 +1150,7 @@ void msrStaff::registerRegularVoiceByItsNumber (
       }
     } // for
   }
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   ++gIndenter;
 
@@ -1182,7 +1182,7 @@ void msrStaff::registerHarmoniesVoiceByItsNumber (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // register the harmonies voice by its number
   registerVoiceByItsNumber (
@@ -1211,7 +1211,7 @@ void msrStaff::registerFiguredBassVoiceByItsNumber (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // register the figured bass voice by its number
   registerVoiceByItsNumber (
@@ -1242,13 +1242,13 @@ S_msrVoice msrStaff::fetchRegularVoiceFromStaffByItsNumber (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // search list ??? JMI
   for (std::pair<int, S_msrVoice> thePair : fStaffVoiceNumbersToRegularVoicesMap) {
 #ifdef MF_TRACE_IS_ENABLED
     int        number = thePair.first;
-#endif
+#endif // MF_TRACE_IS_ENABLED
     const S_msrVoice& voice  = thePair.second;
 
     if (
@@ -1271,7 +1271,7 @@ S_msrVoice msrStaff::fetchRegularVoiceFromStaffByItsNumber (
           __FILE__, __LINE__,
           ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       result = voice;
       break;
@@ -1299,7 +1299,7 @@ void msrStaff::assignSequentialNumbersToRegularVoicesInStaff (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // assign sequential numbers to the regular voices,
   // needed to know about voices 1, 2, 3 and 4
@@ -1325,7 +1325,7 @@ void msrStaff::assignSequentialNumbersToRegularVoicesInStaff (
         __FILE__, __LINE__,
         voice != nullptr,
         "voice is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
       ++voiceSequentialCounter;
 
@@ -1347,7 +1347,7 @@ void msrStaff::assignSequentialNumbersToRegularVoicesInStaff (
           __FILE__, __LINE__,
           ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       voice->
         setRegularVoiceStaffSequentialNumber (
@@ -1379,7 +1379,7 @@ S_msrVoice msrStaff::fetchFirstRegularVoiceFromStaff (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (! fStaffRegularVoicesList.size ()) {
     std::stringstream ss;
@@ -1407,7 +1407,7 @@ S_msrVoice msrStaff::fetchFirstRegularVoiceFromStaff (
       __FILE__, __LINE__,
       result->getRegularVoiceStaffSequentialNumber () == 1,
       "result->getRegularVoiceStaffSequentialNumber () is not equal to 1");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
     if (gGlobalTraceOahGroup->getTraceVoices ()) {
@@ -1424,7 +1424,7 @@ S_msrVoice msrStaff::fetchFirstRegularVoiceFromStaff (
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
   }
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -1441,7 +1441,7 @@ S_msrVoice msrStaff::fetchFirstRegularVoiceFromStaff (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   return result;
 }
@@ -1456,7 +1456,7 @@ void msrStaff::registerVoiceInStaff (
     __FILE__, __LINE__,
     voice != nullptr,
     "voice is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalTraceOahGroup->getTraceVoices ()) {
@@ -1475,7 +1475,7 @@ void msrStaff::registerVoiceInStaff (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -1569,7 +1569,7 @@ void msrStaff::registerPartLevelVoiceInStaff (
     __FILE__, __LINE__,
     voice != nullptr,
     "voice is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   ++gIndenter;
 
@@ -1637,7 +1637,7 @@ void msrStaff::registerPartLevelVoiceInStaff (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // register it in staff by its number
   registerVoiceByItsNumber (
@@ -1687,7 +1687,7 @@ void msrStaff::registerVoiceInStaffClone (
     __FILE__, __LINE__,
     voice != nullptr,
     "voice is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   ++gIndenter;
 
@@ -1714,7 +1714,7 @@ void msrStaff::registerVoiceInStaffClone (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // register the voice in staff clone by it's number
   int voiceNumber = voice->getVoiceNumber ();
@@ -1798,7 +1798,7 @@ void msrStaff::appendClefToStaff  (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -1846,7 +1846,7 @@ void msrStaff::appendClefToStaff  (
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
   }
 
   --gIndenter;
@@ -1870,7 +1870,7 @@ void msrStaff::appendKeyToStaff (S_msrKey  key)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -1905,7 +1905,7 @@ void msrStaff::appendKeyToStaff (S_msrKey  key)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
         doAppendKeyToStaff = false;
       }
@@ -1943,7 +1943,7 @@ void msrStaff::appendTimeSignatureToStaff (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -1978,7 +1978,7 @@ void msrStaff::appendTimeSignatureToStaff (
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
         doAppendTimeToStaff = false;
       }
@@ -2017,7 +2017,7 @@ void msrStaff::appendTimeSignatureToStaffClone (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -2050,7 +2050,7 @@ void msrStaff::appendTempoToStaff (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
  // append tempo to registered staves
   for (const S_msrVoice& voice : fStaffAllVoicesList) {
@@ -2076,7 +2076,7 @@ void msrStaff::appendRehearsalMarkToStaff (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
  // append rehearsal mark to registered staves
   for (const S_msrVoice& voice : fStaffAllVoicesList) {
@@ -2102,7 +2102,7 @@ void msrStaff::appendLineBreakToStaff  (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
  // append line break to registered staves
   for (const S_msrVoice& voice : fStaffAllVoicesList) {
@@ -2128,7 +2128,7 @@ void msrStaff::appendPageBreakToStaff (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
  // append page break to registered staves
   for (const S_msrVoice& voice : fStaffAllVoicesList) {
@@ -2159,7 +2159,7 @@ void msrStaff::insertHiddenMeasureAndBarLineInStaffClone (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -2193,7 +2193,7 @@ void msrStaff::nestContentsIntoNewRepeatInStaff (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   for (const S_msrVoice& voice : fStaffAllVoicesList) {
     voice->
@@ -2222,7 +2222,7 @@ void msrStaff::handleRepeatStartInStaff (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -2256,7 +2256,7 @@ void msrStaff::handleRepeatEndInStaff (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -2290,7 +2290,7 @@ void msrStaff::handleRepeatEndingStartInStaff (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -2328,7 +2328,7 @@ void msrStaff::handleRepeatEndingEndInStaff (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -2365,7 +2365,7 @@ void msrStaff::finalizeRepeatEndInStaff (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -2401,7 +2401,7 @@ void msrStaff::createMeasureRepeatFromItsFirstMeasuresInStaff (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   for (const S_msrVoice& voice : fStaffAllVoicesList) {
     voice->
@@ -2430,7 +2430,7 @@ void msrStaff::appendPendingMeasureRepeatToStaff (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   for (const S_msrVoice& voice : fStaffAllVoicesList) {
     voice->
@@ -2462,7 +2462,7 @@ void msrStaff::appendMultipleFullBarRestsToStaff (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fStaffContainsMultipleFullBarRests = true;
 
@@ -2492,7 +2492,7 @@ void msrStaff::replicateLastAppendedMeasureInStaff (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // add multiple rest to all staves
   for (const S_msrVoice& voice : fStaffAllVoicesList) {
@@ -2528,7 +2528,7 @@ void msrStaff::addEmptyMeasuresToStaff (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fStaffContainsMultipleFullBarRests = true;
 
@@ -2559,7 +2559,7 @@ void msrStaff::appendPendingMultipleFullBarRestsToStaff (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   for (const S_msrVoice& voice : fStaffAllVoicesList) {
     voice->
@@ -2588,7 +2588,7 @@ void msrStaff::appendMultipleFullBarRestsCloneToStaff (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   for (const S_msrVoice& voice : fStaffAllVoicesList) {
     voice->
@@ -2617,7 +2617,7 @@ void msrStaff::appendRepeatCloneToStaff (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   for (const S_msrVoice& voice : fStaffAllVoicesList) {
     voice->
@@ -2645,7 +2645,7 @@ void msrStaff::appendRepeatEndingCloneToStaff (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -2677,7 +2677,7 @@ void msrStaff::appendBarLineToStaff (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -2709,7 +2709,7 @@ void msrStaff::appendTranspositionToStaff (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // set staff transposition
   Bool doAppendTransposeToStaff (true);
@@ -2737,7 +2737,7 @@ void msrStaff::appendTranspositionToStaff (
           __FILE__, __LINE__,
           ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       doAppendTransposeToStaff = false;
     }
@@ -2772,7 +2772,7 @@ void msrStaff::appendStaffDetailsToStaff (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
@@ -2780,7 +2780,7 @@ void msrStaff::appendStaffDetailsToStaff (
     __FILE__, __LINE__,
     staffDetails != nullptr,
     "staffDetails is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // register staff details in staff
   fCurrentStaffStaffDetails = staffDetails;
@@ -2816,7 +2816,7 @@ void msrStaff::appendStaffDetailsToStaff (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   for (const S_msrVoice& voice : fStaffAllVoicesList) {
     voice->
@@ -2881,7 +2881,7 @@ void msrStaff::finalizeLastAppendedMeasureInStaff (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -3067,7 +3067,7 @@ void msrStaff::finalizeStaff (int inputLineNumber)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -3086,7 +3086,7 @@ void msrStaff::finalizeStaff (int inputLineNumber)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   for (const S_msrVoice& voice : fStaffAllVoicesList) {
     voice->
@@ -3120,7 +3120,7 @@ void msrStaff::collectStaffMeasuresIntoFlatListsVector (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   for (const S_msrVoice& voice : fStaffAllVoicesList) {
     S_msrVoice foo = voice; // ??? JMI v0.9.66
@@ -3154,7 +3154,7 @@ void msrStaff::collectStaffMeasuresSlices (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
@@ -3162,7 +3162,7 @@ void msrStaff::collectStaffMeasuresSlices (
     __FILE__, __LINE__,
     fStaffMeasuresSlicesSequence == nullptr,
     "fStaffMeasuresSlicesSequence is not null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   ++gIndenter;
 
@@ -3187,7 +3187,7 @@ void msrStaff::collectStaffMeasuresSlices (
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     ++gIndenter;
 
@@ -3216,7 +3216,7 @@ void msrStaff::collectStaffMeasuresSlices (
         gLog << " : [NONE]" << std::endl;
       }
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     // merge it with the voice measures slices sequence
     if (voiceMeasuresSlicesSequence) { // JMI
@@ -3248,7 +3248,7 @@ void msrStaff::collectStaffMeasuresSlices (
       fStaffMeasuresSlicesSequence;
     --gIndenter;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   --gIndenter;
 }
@@ -3267,7 +3267,7 @@ void msrStaff::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrStaff>*
     p =
@@ -3286,7 +3286,7 @@ void msrStaff::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -3305,7 +3305,7 @@ void msrStaff::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrStaff>*
     p =
@@ -3324,7 +3324,7 @@ void msrStaff::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -3343,7 +3343,7 @@ void msrStaff::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 /*
   if (fStaffTuningsList.size ()) {
@@ -3386,7 +3386,7 @@ void msrStaff::browseData (basevisitor* v)
       } // for
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (fStaffAllVoicesList.size ()) {
     for (const S_msrVoice& voice : fStaffAllVoicesList) {
@@ -3443,7 +3443,7 @@ void msrStaff::browseData (basevisitor* v)
           ignoreMsrVoicesSet,
           gLog);
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       const std::set<std::string>&
         keepMsrVoicesSet =
@@ -3457,7 +3457,7 @@ void msrStaff::browseData (basevisitor* v)
           keepMsrVoicesSet,
           gLog);
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       // a voice is to be browsed by default
       Bool voiceIsToBeBrowsed (true);
@@ -3511,7 +3511,7 @@ void msrStaff::browseData (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
       }
     } // for
   }
@@ -3528,7 +3528,7 @@ void msrStaff::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 std::string msrStaff::asString () const
@@ -3612,7 +3612,7 @@ void msrStaff::printFull (std::ostream& os) const
 
     os << std::endl;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // print the current staff key if any
 #ifdef MF_TRACE_IS_ENABLED
@@ -3634,7 +3634,7 @@ void msrStaff::printFull (std::ostream& os) const
 
     os << std::endl;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // print the current staff time if any
 #ifdef MF_TRACE_IS_ENABLED
@@ -3656,7 +3656,7 @@ void msrStaff::printFull (std::ostream& os) const
 
     os << std::endl;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalTraceOahGroup->getTraceStaffDetails ()) {
@@ -3672,7 +3672,7 @@ void msrStaff::printFull (std::ostream& os) const
     }
     os << std::endl;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // print the staff 'all voices' list
   os << std::left <<
@@ -3713,7 +3713,7 @@ void msrStaff::printFull (std::ostream& os) const
         __FILE__, __LINE__,
         voice != nullptr,
         "voice is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
       ++voiceNumber;
 
@@ -3763,7 +3763,7 @@ void msrStaff::printFull (std::ostream& os) const
         __FILE__, __LINE__,
         voice != nullptr,
         "voice is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
       os <<
         voiceNumber <<
@@ -3810,7 +3810,7 @@ void msrStaff::printFull (std::ostream& os) const
         __FILE__, __LINE__,
         voice != nullptr,
         "voice is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
       os <<
         voiceNumber <<

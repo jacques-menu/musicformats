@@ -47,4 +47,4 @@ EXP mfMusicformatsErrorKind convertMusicxmlString2musicxmlWithHandler (
 }
 
 
-#endif
+#endif // ___musicxml2musicxmlInterface___

@@ -18,6 +18,8 @@
 #include "mfConstants.h"
 #include "mfStringsHandling.h"
 
+#include "oahEarlyOptions.h"
+
 #include "msrGenerationBasicTypes.h"
 
 #include "waeHandlers.h"
@@ -189,7 +191,7 @@ void msrGenerationAPIKindAtom::applyAtomWithValue (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   std::map<std::string, msrGenerationAPIKind>::const_iterator
     it =
@@ -239,7 +241,7 @@ void msrGenerationAPIKindAtom::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrGenerationAPIKindAtom>*
     p =
@@ -258,7 +260,7 @@ void msrGenerationAPIKindAtom::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -277,7 +279,7 @@ void msrGenerationAPIKindAtom::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrGenerationAPIKindAtom>*
     p =
@@ -296,7 +298,7 @@ void msrGenerationAPIKindAtom::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -315,7 +317,7 @@ void msrGenerationAPIKindAtom::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 std::string msrGenerationAPIKindAtom::asShortNamedOptionString () const

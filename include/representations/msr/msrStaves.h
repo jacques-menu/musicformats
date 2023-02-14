@@ -563,4 +563,4 @@ EXP std::ostream& operator << (std::ostream& os, const S_msrStaff& elt);
 }
 
 
-#endif
+#endif // ___msrStaves___

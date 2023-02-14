@@ -106,4 +106,4 @@ template <typename T> class   msrBrowserAlongPathToVoice : public browser <T>
 }
 
 
-#endif
+#endif // ___msrBrowsers___

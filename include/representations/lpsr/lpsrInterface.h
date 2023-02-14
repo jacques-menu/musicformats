@@ -42,4 +42,4 @@ EXP void displayLpsrScoreFull (
 }
 
 
-#endif
+#endif // ___lpsrInterface___

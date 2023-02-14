@@ -45,4 +45,4 @@ typedef SMARTP<oahVisitor> S_oahVisitor;
 }
 
 
-#endif
+#endif // ___oahVisitor___

@@ -21,6 +21,7 @@
 
 namespace MusicFormats
 {
+
 // layout settings
 //______________________________________________________________________________
 EXP extern const int K_OAH_ELEMENTS_INDENTER_OFFSET;
@@ -483,4 +484,4 @@ EXP std::ostream& operator << (std::ostream& os, const S_oahElementUse& elt);
 }
 
 
-#endif
+#endif // ___oahElements___

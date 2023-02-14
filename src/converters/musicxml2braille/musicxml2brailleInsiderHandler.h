@@ -21,6 +21,7 @@
 
 namespace MusicFormats
 {
+
 //_______________________________________________________________________________
 class EXP xml2brlInsiderHandler : public oahInsiderHandler
 {
@@ -210,4 +211,4 @@ S_xml2brlInsiderOahGroup createGlobalXml2brlOahGroup (
 }
 
 
-#endif
+#endif // ___musicxml2brailleInsiderHandler___

@@ -40,4 +40,4 @@ EXP int xml2xml (
 
 }
 
-#endif
+#endif // __xml2xmlInterface___

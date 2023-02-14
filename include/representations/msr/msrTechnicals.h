@@ -478,4 +478,4 @@ EXP std::ostream& operator << (std::ostream& os, const S_msrTechnicalWithString&
 }
 
 
-#endif
+#endif // ___msrTechnicals___

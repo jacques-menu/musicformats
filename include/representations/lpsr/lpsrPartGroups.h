@@ -99,4 +99,4 @@ EXP std::ostream& operator << (std::ostream& os, const S_lpsrPartGroupBlock& elt
 }
 
 
-#endif
+#endif // ___lpsrPartGroups___

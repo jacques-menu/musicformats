@@ -709,4 +709,4 @@ EXP std::ostream& operator << (std::ostream& os, const S_mfcLibraryComponent& el
 }
 
 
-#endif
+#endif // ___mfcBasicTypes___

@@ -131,5 +131,5 @@ EXP std::ostream& operator << (std::ostream& os, const S_msrCoda& elt);
 }
 
 
-#endif
+#endif // _ms
 

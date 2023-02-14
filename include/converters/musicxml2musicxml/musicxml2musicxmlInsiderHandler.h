@@ -9,8 +9,8 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#ifndef ___musicxml2musicxmlInsiderOahGroup___
-#define ___musicxml2musicxmlInsiderOahGroup___
+#ifndef ___musicxml2musicxmlInsiderHandler___
+#define ___musicxml2musicxmlInsiderHandler___
 
 #include "oahBasicTypes.h"
 
@@ -19,6 +19,7 @@
 
 namespace MusicFormats
 {
+
 //_______________________________________________________________________________
 class EXP xml2xmlInsiderHandler : public oahInsiderHandler
 {
@@ -202,4 +203,4 @@ S_xml2xmlInsiderOahGroup createGlobalXml2xmlOahGroup ();
 }
 
 
-#endif
+#endif // ___musicxml2musicxmlInsiderHandler___

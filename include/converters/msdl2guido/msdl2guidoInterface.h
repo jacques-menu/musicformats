@@ -63,4 +63,4 @@ EXP mfMusicformatsErrorKind msdlString2guidoWithHandler (
 }
 
 
-#endif
+#endif // ___msdl2guidoInterface___

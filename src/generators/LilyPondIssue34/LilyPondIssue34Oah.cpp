@@ -159,7 +159,7 @@ void LilyPondIssue34OahGroup::initializeLilyPondIssue34OahGroup ()
   // trace
   // --------------------------------------
 // JMI  initializeLilyPondIssue34TraceOah ();
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // generation API
   // --------------------------------------
@@ -214,7 +214,7 @@ void LilyPondIssue34OahGroup::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_LilyPondIssue34OahGroup>*
     p =
@@ -233,7 +233,7 @@ void LilyPondIssue34OahGroup::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -252,7 +252,7 @@ void LilyPondIssue34OahGroup::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_LilyPondIssue34OahGroup>*
     p =
@@ -271,7 +271,7 @@ void LilyPondIssue34OahGroup::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -290,7 +290,7 @@ void LilyPondIssue34OahGroup::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void LilyPondIssue34OahGroup::printLilyPondIssue34OahValues (
@@ -364,7 +364,7 @@ S_LilyPondIssue34OahGroup createGlobalLilyPondIssue34OahGroup ()
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // protect library against multiple initializations
   if (! gGlobalLilyPondIssue34OahGroup) {

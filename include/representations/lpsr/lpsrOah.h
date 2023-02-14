@@ -425,7 +425,7 @@ class EXP lpsrOahGroup : public oahGroup
                               { fTraceSchemeFunctions = true; }
     Bool                  getTraceSchemeFunctions () const
                               { return fTraceSchemeFunctions; }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     // display
     // --------------------------------------
@@ -695,7 +695,7 @@ class EXP lpsrOahGroup : public oahGroup
 
 #ifdef MF_TRACE_IS_ENABLED
     void                  initializeLpsrTraceOah ();
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     void                  initializeLpsrDisplayOptions ();
 
@@ -729,7 +729,7 @@ class EXP lpsrOahGroup : public oahGroup
     Bool                  fTraceLpsrBlocks;
 
     Bool                  fTraceSchemeFunctions;
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     // display
     // --------------------------------------
@@ -846,7 +846,7 @@ class EXP lpsrOahGroup : public oahGroup
                           fLpsrChordsLanguageKind;
 
     // staves instrument names
-    std::map<std::string, std::string>   
+    std::map<std::string, std::string>
                           fLpsrStavesInstrumentsNamesMap;
     S_lpsrStaffInstrumentNameAtom
                           fLpsrStavesInstrumentsNamesMapAtom;
@@ -869,5 +869,5 @@ EXP S_lpsrOahGroup createGlobalLpsrOahGroup ();
 }
 
 
-#endif
+#endif // ___lpsrOah___
 

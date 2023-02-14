@@ -83,7 +83,7 @@ msr2musicxmlRegularHandler::msr2musicxmlRegularHandler (
 
   --gIndenter;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 msr2musicxmlRegularHandler::~msr2musicxmlRegularHandler ()
@@ -105,7 +105,7 @@ void msr2musicxmlRegularHandler::createRegularHandlerGroups ()
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   createInformationsRegularGroup ();
 
@@ -173,7 +173,7 @@ void msr2musicxmlRegularHandler::createRegularHandlerGroups ()
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void msr2musicxmlRegularHandler::createInformationsRegularGroup ()
@@ -317,7 +317,7 @@ void msr2musicxmlRegularHandler::createOahRegularGroup ()
 #ifdef MF_TRACE_IS_ENABLED
   registerAtomInRegularSubgroup (K_TRACE_EARLY_OPTIONS_OPTION_LONG_NAME, subGroup);
   registerAtomInRegularSubgroup (K_OAH_VERBOSE_MODE_OPTION_LONG_NAME, subGroup);
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   registerAtomInRegularSubgroup ("help", subGroup);
   registerAtomInRegularSubgroup ("help-summary", subGroup);
@@ -343,9 +343,7 @@ void msr2musicxmlRegularHandler::createOahRegularGroup ()
   registerAtomInRegularSubgroup ("display-msr1-skeleton", subGroup);
 
   registerAtomInRegularSubgroup ("display-msr1", subGroup);
-  registerAtomInRegularSubgroup ("display-msr1", subGroup);
   registerAtomInRegularSubgroup ("display-msr1-full", subGroup);
-  registerAtomInRegularSubgroup ("display-msr2", subGroup);
   registerAtomInRegularSubgroup ("display-msr2", subGroup);
   registerAtomInRegularSubgroup ("display-msr2-full", subGroup);
 
@@ -370,7 +368,7 @@ void msr2musicxmlRegularHandler::createOahRegularGroup ()
 
   registerAtomInRegularSubgroup ("trace-backup", subGroup);
   registerAtomInRegularSubgroup ("trace-forward", subGroup);
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   registerAtomInRegularSubgroup ("quit-after-pass-2a", subGroup);
   registerAtomInRegularSubgroup ("quit-after-pass-2b", subGroup);
@@ -901,7 +899,7 @@ void msr2musicxmlRegularHandler::createChordsRegularGroup ()
 
 #ifdef MF_TRACE_IS_ENABLED
   registerAtomInRegularSubgroup ("trace-chords", subGroup);
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void msr2musicxmlRegularHandler::createTiesRegularGroup ()
@@ -1099,7 +1097,7 @@ void msr2musicxmlRegularHandler::createTupletsRegularGroup ()
 
 #ifdef MF_TRACE_IS_ENABLED
   registerAtomInRegularSubgroup ("trace-tuplets", subGroup);
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   registerAtomInRegularSubgroup ("display-tuplets", subGroup);
 }
@@ -1250,7 +1248,7 @@ void msr2musicxmlRegularHandler::checkOptionsAndArguments () const
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   checkSingleInputSourceInArgumentsVector ();
 }

@@ -63,4 +63,4 @@ EXP void bsr2brailleInternalError (
 }
 
 
-#endif
+#endif // ___bsr2brailleWae___

@@ -18,6 +18,7 @@
 
 namespace MusicFormats
 {
+
 //_______________________________________________________________________________
 class EXP Mikrokosmos3WanderingRegularHandler : public oahRegularHandler
 /*
@@ -187,4 +188,4 @@ EXP std::ostream& operator << (std::ostream& os, const S_Mikrokosmos3WanderingRe
 }
 
 
-#endif
+#endif // ___Mikrokosmos3WanderingRegularHandler___

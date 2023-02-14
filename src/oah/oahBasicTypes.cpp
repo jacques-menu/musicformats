@@ -26,6 +26,7 @@
 #include "mfConstants.h"
 #include "mfStringsHandling.h"
 #include "mfTiming.h"
+#include "mfTraceOah.h"
 
 #include "oahOah.h"
 #include "oahEarlyOptions.h"
@@ -53,7 +54,7 @@ namespace MusicFormats
 //       "Converting argc/argv to a string pair vector" <<
 //       std::endl;
 //   }
-// #endif
+// #endif // MF_TRACE_IS_ENABLED
 //
 //   // make sure stringPairVector is empty
 //   stringPairVector.erase (
@@ -75,7 +76,7 @@ namespace MusicFormats
 //         "--> currString 222: " << currString <<
 //         std::endl << std::endl;
 //     }
-// #endif
+// #endif // MF_TRACE_IS_ENABLED
 //
 //     if (currentOption.empty ()) {  // wait for option
 //       if (currString [0] == '-') {
@@ -117,7 +118,7 @@ namespace MusicFormats
 //       stringPairVector,
 //       gLog);
 //   }
-// #endif
+// #endif // MF_TRACE_IS_ENABLED
 // }
 
 EXP void displayStringPairVector (
@@ -198,7 +199,7 @@ EXP void displayStringPairVector (
 //
 //     gLog << std::endl;
 //   }
-// #endif
+// #endif // MF_TRACE_IS_ENABLED
 //
 //   // populate the oahOptionsVector
 //   // ------------------------------------------------------
@@ -217,7 +218,7 @@ EXP void displayStringPairVector (
 //         gLog << "--> curOption: " << curOption << std::endl;
 //         gLog << "--> str     : " << str << std::endl;
 //       }
-//   #endif
+//   #endif // MF_TRACE_IS_ENABLED
 //
 //       if (curOption.empty ()) {  // wait for option
 //         if (str [0] == '-') {
@@ -312,7 +313,7 @@ EXP void displayStringPairVector (
 //       "Converting argc/argv to options and arguments" <<
 //       std::endl;
 //   }
-// #endif
+// #endif // MF_TRACE_IS_ENABLED
 //   // create a strings vector from the elements in argv
 //   std::vector<std::string> stringsVector;
 //
@@ -340,7 +341,7 @@ EXP void displayStringPairVector (
 //
 //     gLog << std::endl;
 //   }
-// #endif
+// #endif // MF_TRACE_IS_ENABLED
 //
 //   // populate optionsAndArguments
 //   // ------------------------------------------------------
@@ -358,7 +359,7 @@ EXP void displayStringPairVector (
 //           "--> currString  : " << currString <<
 //           std::endl << std::endl;
 //       }
-// #endif
+// #endif // MF_TRACE_IS_ENABLED
 //
 //       if (currentOption.empty ()) {  // wait for option
 //         if (currString [0] == '-') {
@@ -397,7 +398,7 @@ EXP void displayStringPairVector (
 //     gLog <<
 //       optionsAndArguments;
 //   }
-// #endif
+// #endif // MF_TRACE_IS_ENABLED
 // }
 
 //______________________________________________________________________________
@@ -1034,7 +1035,7 @@ void oahPrefix::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_oahPrefix>*
     p =
@@ -1053,7 +1054,7 @@ void oahPrefix::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -1072,7 +1073,7 @@ void oahPrefix::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_oahPrefix>*
     p =
@@ -1091,7 +1092,7 @@ void oahPrefix::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -1110,7 +1111,7 @@ void oahPrefix::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 std::string oahPrefix::fetchPrefixNames () const
@@ -1294,7 +1295,7 @@ void oahAtom::setUpLinkToSubGroup (
     __FILE__, __LINE__,
     subGroup != nullptr,
     "subGroup is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // set the atom subgroup upLink
   fUpLinkToSubGroup = subGroup;
@@ -1348,7 +1349,7 @@ void oahAtom::appendAtomToElementsList (
 				ss.str ());
 		}
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -1424,7 +1425,7 @@ void oahAtom::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_oahAtom>*
     p =
@@ -1443,7 +1444,7 @@ void oahAtom::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -1462,7 +1463,7 @@ void oahAtom::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_oahAtom>*
     p =
@@ -1481,7 +1482,7 @@ void oahAtom::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -1500,7 +1501,7 @@ void oahAtom::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void oahAtom::printFull (std::ostream& os) const
@@ -1635,7 +1636,7 @@ void oahValueLessAtom::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_oahValueLessAtom>*
     p =
@@ -1654,7 +1655,7 @@ void oahValueLessAtom::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -1673,7 +1674,7 @@ void oahValueLessAtom::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_oahValueLessAtom>*
     p =
@@ -1692,7 +1693,7 @@ void oahValueLessAtom::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -1711,7 +1712,7 @@ void oahValueLessAtom::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void oahValueLessAtom::printFull (std::ostream& os) const
@@ -1802,7 +1803,7 @@ void oahValueFittedAtom::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_oahValueFittedAtom>*
     p =
@@ -1821,7 +1822,7 @@ void oahValueFittedAtom::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -1840,7 +1841,7 @@ void oahValueFittedAtom::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_oahValueFittedAtom>*
     p =
@@ -1859,7 +1860,7 @@ void oahValueFittedAtom::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -1878,7 +1879,7 @@ void oahValueFittedAtom::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 // void oahValueFittedAtom::applyAtomWithDefaultValue (std::ostream& os) // JMI ??? v0.9.66
@@ -1985,7 +1986,7 @@ void oahAtomImplicitlySettingAVariable::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_oahAtomImplicitlySettingAVariable>*
     p =
@@ -2004,7 +2005,7 @@ void oahAtomImplicitlySettingAVariable::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -2023,7 +2024,7 @@ void oahAtomImplicitlySettingAVariable::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_oahAtomImplicitlySettingAVariable>*
     p =
@@ -2042,7 +2043,7 @@ void oahAtomImplicitlySettingAVariable::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -2061,7 +2062,7 @@ void oahAtomImplicitlySettingAVariable::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void oahAtomImplicitlySettingAVariable::printAtomWithVariableEssentials (
@@ -2227,7 +2228,7 @@ oahValueDefaultedAtom::~oahValueDefaultedAtom ()
 //       "' which is a oahValueDefaultedAtom" <<
 //       std::endl;
 //   }
-// #endif
+// #endif // MF_TRACE_IS_ENABLED
 //
 //   oahStringAtom::applyAtomWithValue (
 //     theString,
@@ -2242,7 +2243,7 @@ oahValueDefaultedAtom::~oahValueDefaultedAtom ()
 //       ".\\\" ==> oahValueDefaultedAtom::acceptIn ()" <<
 //       std::endl;
 //   }
-// #endif
+// #endif // MF_TRACE_IS_ENABLED
 //
 //   if (visitor<S_oahValueDefaultedAtom>*
 //     p =
@@ -2255,7 +2256,7 @@ oahValueDefaultedAtom::~oahValueDefaultedAtom ()
 //             ".\\\" ==> Launching oahValueDefaultedAtom::visitStart ()" <<
 //             std::endl;
 //         }
-// #endif
+// #endif // MF_TRACE_IS_ENABLED
 //         p->visitStart (elem);
 //   }
 // }
@@ -2272,7 +2273,7 @@ oahValueDefaultedAtom::~oahValueDefaultedAtom ()
 //       "\"" <<
 //       std::endl;
 //   }
-// #endif
+// #endif // MF_TRACE_IS_ENABLED
 //
 //   oahStringAtom::setStringVariable (value);
 //   fSelected = true;
@@ -2286,7 +2287,7 @@ oahValueDefaultedAtom::~oahValueDefaultedAtom ()
 //       ".\\\" ==> oahValueDefaultedAtom::acceptOut ()" <<
 //       std::endl;
 //   }
-// #endif
+// #endif // MF_TRACE_IS_ENABLED
 //
 //   if (visitor<S_oahValueDefaultedAtom>*
 //     p =
@@ -2299,7 +2300,7 @@ oahValueDefaultedAtom::~oahValueDefaultedAtom ()
 //             ".\\\" ==> Launching oahValueDefaultedAtom::visitEnd ()" <<
 //             std::endl;
 //         }
-// #endif
+// #endif // MF_TRACE_IS_ENABLED
 //         p->visitEnd (elem);
 //   }
 // }
@@ -2312,7 +2313,7 @@ oahValueDefaultedAtom::~oahValueDefaultedAtom ()
 //       ".\\\" ==> oahValueDefaultedAtom::browseData ()" <<
 //       std::endl;
 //   }
-// #endif
+// #endif // MF_TRACE_IS_ENABLED
 // }
 //
 // std::string oahValueDefaultedAtom::asShortNamedOptionString () const
@@ -2448,7 +2449,7 @@ void oahAtomStoringAValue::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_oahAtomStoringAValue>*
     p =
@@ -2467,7 +2468,7 @@ void oahAtomStoringAValue::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -2486,7 +2487,7 @@ void oahAtomStoringAValue::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_oahAtomStoringAValue>*
     p =
@@ -2505,7 +2506,7 @@ void oahAtomStoringAValue::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -2524,7 +2525,7 @@ void oahAtomStoringAValue::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void oahAtomStoringAValue::printAtomWithVariableEssentials (
@@ -2694,7 +2695,7 @@ void oahPureHelpValueLessAtom::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_oahPureHelpValueLessAtom>*
     p =
@@ -2713,7 +2714,7 @@ void oahPureHelpValueLessAtom::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -2732,7 +2733,7 @@ void oahPureHelpValueLessAtom::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_oahPureHelpValueLessAtom>*
     p =
@@ -2751,7 +2752,7 @@ void oahPureHelpValueLessAtom::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -2770,7 +2771,7 @@ void oahPureHelpValueLessAtom::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void oahPureHelpValueLessAtom::print (std::ostream& os) const
@@ -2864,7 +2865,7 @@ void oahPureHelpValueFittedAtom::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_oahPureHelpValueFittedAtom>*
     p =
@@ -2883,7 +2884,7 @@ void oahPureHelpValueFittedAtom::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -2902,7 +2903,7 @@ void oahPureHelpValueFittedAtom::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_oahPureHelpValueFittedAtom>*
     p =
@@ -2921,7 +2922,7 @@ void oahPureHelpValueFittedAtom::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -2940,7 +2941,7 @@ void oahPureHelpValueFittedAtom::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void oahPureHelpValueFittedAtom::print (std::ostream& os) const
@@ -3100,7 +3101,7 @@ void oahSubGroup::appendSubGroupToElementsList (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -3147,7 +3148,7 @@ void oahSubGroup::registerNamesInSubGroupToTheNamesToElementsMap (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -3183,7 +3184,26 @@ void oahSubGroup::appendAtomToSubGroup (
     __FILE__, __LINE__,
     atom != nullptr,
     "atom is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
+
+	// is atom already present in this subgroup?
+	std::string
+		atomLongName =
+			atom->getLongName ();
+
+	if (fetchOptionByNameInSubGroup (atomLongName)) {
+    // prefixName is already known in the map
+    std::stringstream ss;
+
+    ss <<
+      "atom \"" <<
+      atomLongName <<
+      "\" is already known in OAH subgroup \"" <<
+      fSubGroupHeader <<
+      "\"";
+
+    oahError (ss.str ());
+	}
 
   // append atom to atoms list
   fSubGroupAtomsList.push_back (
@@ -3235,7 +3255,7 @@ void oahSubGroup::applySubGroup (std::ostream& os)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   int saveIndent = gIndenter.getIndentation ();
 
@@ -3279,7 +3299,7 @@ void oahSubGroup::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_oahSubGroup>*
     p =
@@ -3298,7 +3318,7 @@ void oahSubGroup::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -3317,7 +3337,7 @@ void oahSubGroup::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_oahSubGroup>*
     p =
@@ -3336,7 +3356,7 @@ void oahSubGroup::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -3356,7 +3376,7 @@ void oahSubGroup::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // browse the atoms
   if (fSubGroupAtomsList.size ()) {
@@ -3762,7 +3782,7 @@ void oahSubGroup::printSubGroupSpecificHelpOrOptionsSummary (
       "oahSubGroup::printSubGroupSpecificHelpOrOptionsSummary" <<
       std::endl;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // print only the summary if this is not the desired subgroup,
   // otherwise print the regular help
@@ -4133,7 +4153,7 @@ void oahGroup::appendGroupToElementsList (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -4143,7 +4163,7 @@ void oahGroup::appendGroupToElementsList (
     __FILE__, __LINE__,
     handler != nullptr,
     "handler is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // append this group to the elements list
   handler->
@@ -4189,7 +4209,7 @@ void oahGroup::registerNamesInGroupToTheNamesToElementsMap (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -4199,7 +4219,7 @@ void oahGroup::registerNamesInGroupToTheNamesToElementsMap (
     __FILE__, __LINE__,
     handler != nullptr,
     "handler is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // register this group' names in handler
   handler->
@@ -4233,7 +4253,7 @@ void  oahGroup::appendSubGroupToGroup (
     __FILE__, __LINE__,
     subGroup != nullptr,
     "subGroup is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // append options subgroup
   fGroupSubGroupsList.push_back (
@@ -4283,7 +4303,7 @@ void oahGroup::applyGroup (std::ostream& os)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   int saveIndent = gIndenter.getIndentation ();
 
@@ -4348,7 +4368,7 @@ void oahGroup::checkGroupSubGroupsOptionsConsistency ()
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -4387,7 +4407,7 @@ void oahGroup::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_oahGroup>*
     p =
@@ -4406,7 +4426,7 @@ void oahGroup::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -4425,7 +4445,7 @@ void oahGroup::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_oahGroup>*
     p =
@@ -4444,7 +4464,7 @@ void oahGroup::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -4464,7 +4484,7 @@ void oahGroup::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // browse the subGroups
   if (fGroupSubGroupsList.size ()) {
@@ -4792,7 +4812,7 @@ void oahGroup::printGroupAndSubGroupSpecificHelp (
       "oahGroup::printGroupAndSubGroupSpecificHelp" <<
       std::endl;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   switch (fElementVisibilityKind) {
     case oahElementVisibilityKind::kElementVisibilityNone:
@@ -5093,7 +5113,7 @@ void oahHandler::initializeHandler ()
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // DON'T create the fHandlerMultiComponent,
   // this will be done in the sub-classes' initializeHandlerMultiComponent ()
@@ -5185,7 +5205,7 @@ void oahHandler::registerElementNamesInHandler (
 				ss.str ());
 		}
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -5211,7 +5231,7 @@ void oahHandler::registerElementNamesInHandler (
 
     oahError (ss.str ());
   }
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   if (elementShortNameSize == 0 && elementLongNameSize == 0) {
     std::stringstream ss;
@@ -5368,7 +5388,7 @@ void oahHandler::registerNamesInHandlerToTheNamesToElementsMap ()
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -5407,7 +5427,7 @@ void oahHandler::registerNamesInHandlerToTheNamesToElementsMap ()
 				ss.str ());
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   --gIndenter;
 }
@@ -5435,7 +5455,7 @@ void oahHandler::appendElementToElementsList (
 				ss.str ());
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // insert element into the registered elements list
   fHandlerElementsList.push_back (element);
@@ -5496,7 +5516,7 @@ void oahHandler::checkOptionsAndArgumentsConsistency ()
 
       --gIndenter;
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     oahInternalWarning (
       "the arguments vector should be empty with options and arguments???");
@@ -5516,7 +5536,7 @@ void oahHandler::checkOptionsAndArgumentsConsistency ()
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
   }
 }
 
@@ -5537,7 +5557,7 @@ void oahHandler::createTheCommonPrefixes ()
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -5595,7 +5615,7 @@ void oahHandler::checkNoInputSourceInArgumentsVector () const
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   const std::vector<std::string>&
     argumentsVector =
@@ -5643,7 +5663,7 @@ void oahHandler::checkNoInputSourceInArgumentsVector () const
         std::endl;
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // input source name
   // ------------------------------------------------------
@@ -5689,7 +5709,7 @@ void oahHandler::checkNoOrOneInputSourceInArgumentsVector () const
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   const std::vector<std::string>&
     argumentsVector =
@@ -5737,7 +5757,7 @@ void oahHandler::checkNoOrOneInputSourceInArgumentsVector () const
         std::endl;
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // input source name
   // ------------------------------------------------------
@@ -5810,7 +5830,7 @@ void oahHandler::checkSingleInputSourceInArgumentsVector () const
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   const std::vector<std::string>&
     argumentsVector =
@@ -5855,7 +5875,7 @@ void oahHandler::checkSingleInputSourceInArgumentsVector () const
         std::endl;
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // input source name
   // ------------------------------------------------------
@@ -5924,7 +5944,7 @@ void oahHandler::setOahHandlerFoundAHelpOption (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fOahHandlerFoundAHelpOption = true;
 }
@@ -5959,7 +5979,7 @@ void oahHandler::checkHandlerOptionsConsistency ()
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -6095,7 +6115,7 @@ void oahHandler::displayElementUsesList (std::ostream& os) const
         __FILE__, __LINE__,
         elementUse != nullptr,
         "elementUse is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
       ++counter;
 
@@ -6155,7 +6175,7 @@ void oahHandler::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_oahHandler>*
     p =
@@ -6174,7 +6194,7 @@ void oahHandler::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -6193,7 +6213,7 @@ void oahHandler::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_oahHandler>*
     p =
@@ -6212,7 +6232,7 @@ void oahHandler::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -6231,7 +6251,7 @@ void oahHandler::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // browse the prefixes
   if (fHandlerPrefixesMap.size ()) {
@@ -6615,7 +6635,7 @@ void oahHandler::printHandlerAndGroupAndSubGroupSpecificHelp (
 //       __FILE__, __LINE__,
 //       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // print the options handler help header and option names
   os <<
@@ -6664,7 +6684,7 @@ void oahHandler::printNameIntrospectiveHelp (
 //       __FILE__, __LINE__,
 //       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // a given name can be both that of a prefix and that of an option,
   // such as "h" and "help"
@@ -6877,7 +6897,7 @@ Bool oahHandler::findStringInFindableElement (
 //       __FILE__, __LINE__,
 //       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // does this handler's header match?
   Bool headerMatches =
@@ -6970,7 +6990,7 @@ void oahHandler::includeOptionsFileInHandler (
 //       __FILE__, __LINE__,
 //       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // open options file
 #ifdef MF_TRACE_IS_ENABLED
@@ -6979,7 +6999,7 @@ void oahHandler::includeOptionsFileInHandler (
     	__FILE__, __LINE__,
       gLanguage->openingOptionsFileForReading (optionsFileName));
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   std::ifstream
     optionsStream (
@@ -7013,7 +7033,7 @@ void oahHandler::includeOptionsFileInHandler (
     	__FILE__, __LINE__,
 			gLanguage->closingOptionsFile (optionsFileName));
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   optionsStream.close ();
 
@@ -7023,7 +7043,7 @@ void oahHandler::includeOptionsFileInHandler (
 //     gLog <<
 //       fOptionsAndArguments;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void oahHandler::printHandlerOptionsAndArguments (
@@ -7065,7 +7085,7 @@ void oahHandler::printHandlerOptionsValues (
 //       __FILE__, __LINE__,
 //       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   os <<
     "The options values for ";
@@ -7080,7 +7100,7 @@ void oahHandler::printHandlerOptionsValues (
   else {
     os << fHandlerServiceName;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (gEarlyOptions.getEarlyInsiderOption ()) {
     os <<
@@ -7171,7 +7191,7 @@ void oahHandler::printHandlerOptionsValuesAll (
 //       __FILE__, __LINE__,
 //       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   os <<
     "All the options values for ";
@@ -7185,7 +7205,7 @@ void oahHandler::printHandlerOptionsValuesAll (
   else {
     os << fHandlerServiceName;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
   os <<
     " are:" <<
     std::endl;
@@ -7284,7 +7304,7 @@ void oahHandler::registerPrefixInHandler (
     __FILE__, __LINE__,
     prefix != nullptr,
     "prefix is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getEarlyTraceOah ()) {
@@ -7302,7 +7322,7 @@ void oahHandler::registerPrefixInHandler (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   std::string prefixName = prefix->getPrefixName ();
 
@@ -7359,7 +7379,7 @@ void oahHandler::appendGroupToHandler (
     __FILE__, __LINE__,
     group != nullptr,
     "group is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getEarlyTraceOahDetails ()) {
@@ -7377,7 +7397,7 @@ void oahHandler::appendGroupToHandler (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // append group to elements list
   group->
@@ -7400,7 +7420,7 @@ void oahHandler::prependGroupToHandler (
     __FILE__, __LINE__,
     group != nullptr,
     "group is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getEarlyTraceOahDetails ()) {
@@ -7418,7 +7438,7 @@ void oahHandler::prependGroupToHandler (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // prepend group  to elements list
   group->
@@ -7756,9 +7776,9 @@ void oahHandler::checkMissingPendingArgvValueFittedAtomValue (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 */
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
 	if (gEarlyOptions.getEarlyTraceOah ()) {
@@ -7769,7 +7789,7 @@ void oahHandler::checkMissingPendingArgvValueFittedAtomValue (
 			"\"" << fNameUsedForPendingArgvValueFittedAtom << "\"" <<
 			std::endl;
 	}
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (fPendingArgvValueFittedAtom) {
 		std::stringstream ss;
@@ -7827,7 +7847,7 @@ void oahHandler::checkMissingPendingArgvValueFittedAtomValue (
 // //             "\"" << fNameUsedForPendingArgvValueFittedAtom << "\"" <<
 // //             std::endl;
 // //         }
-// // #endif
+// // #endif // MF_TRACE_IS_ENABLED
 // //
 // //         fPendingArgvValueFittedAtom->
 // //           applyAtomWithDefaultValue (
@@ -7850,7 +7870,7 @@ void oahHandler::checkMissingPendingArgvValueFittedAtomValue (
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     fPendingArgvValueFittedAtom = nullptr;
     fNameUsedForPendingArgvValueFittedAtom = "";
@@ -7872,7 +7892,7 @@ void oahHandler::checkMissingPendingArgvValueFittedAtomValue (
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
   }
 }
 
@@ -7888,7 +7908,7 @@ void oahHandler::registerOahElementUse (
     __FILE__, __LINE__,
     elementUsed != nullptr,
     "elementUsed is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
@@ -7905,7 +7925,7 @@ void oahHandler::registerOahElementUse (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fElementUsesList.push_back (
     oahElementUse::create (
@@ -7926,7 +7946,7 @@ void oahHandler::registerOahElementUse (
   ) {
     gGlobalTraceOahGroup->setTraceOah ();
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // should we apply '-include' right now? JMIJMIJMI
   if (
@@ -7948,7 +7968,7 @@ void oahHandler::registerOahElementUse (
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 //     displayOptionsAndArguments (gLog); // JMIJMIJMI
 
@@ -7987,7 +8007,7 @@ void oahHandler::registerOahElementUseInLaunchCommand (
     __FILE__, __LINE__,
     elementUsed != nullptr,
     "elementUsed is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
@@ -8005,7 +8025,7 @@ void oahHandler::registerOahElementUseInLaunchCommand (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   size_t valueUsedSize = valueUsed.size ();
 
@@ -8178,7 +8198,7 @@ void oahHandler::handleOptionPrefixName (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // split stringAfterEqualsSign into a list of strings
   // using the comma as separator
@@ -8220,7 +8240,7 @@ void oahHandler::handleOptionPrefixName (
 
     --gIndenter;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   S_oahPrefix
     prefix =
@@ -8256,7 +8276,7 @@ void oahHandler::handleOptionPrefixName (
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
         // handle the uncontracted option name
         handleOptionNameCommon (
@@ -8300,7 +8320,7 @@ Bool oahHandler::isNameASingleCharacterOptionsCluster (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
@@ -8308,7 +8328,7 @@ Bool oahHandler::isNameASingleCharacterOptionsCluster (
     __FILE__, __LINE__,
     optionName.size () != 0,
     "optionName.size () == 0");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   ++gIndenter;
 
@@ -8334,7 +8354,7 @@ Bool oahHandler::isNameASingleCharacterOptionsCluster (
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     std::set<std::string>::const_iterator
       it =
@@ -8358,7 +8378,7 @@ Bool oahHandler::isNameASingleCharacterOptionsCluster (
     if (gEarlyOptions.getEarlyTraceOahDetails ()) {
       gLog << std::endl;
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   size_t clusterElementsListSize =
     clusterElementsList.size ();
@@ -8411,7 +8431,7 @@ Bool oahHandler::isNameASingleCharacterOptionsCluster (
     } // for
     gLog << std::endl;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   size_t optionNameSize =
     optionName.size ();
@@ -8428,7 +8448,7 @@ Bool oahHandler::isNameASingleCharacterOptionsCluster (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (
     clusterElementsListSize
@@ -8454,7 +8474,7 @@ Bool oahHandler::isNameASingleCharacterOptionsCluster (
           std::endl;
       }
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     handleOptionNameCommon (
       element->getShortName ());
@@ -8476,7 +8496,7 @@ Bool oahHandler::isNameASingleCharacterOptionsCluster (
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
     result = false;
   }
 
@@ -8514,7 +8534,7 @@ void oahHandler::handleNameContainingEqualSign (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // prefixes have precedence over options with optional values
   S_oahPrefix
@@ -8538,7 +8558,7 @@ void oahHandler::handleNameContainingEqualSign (
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     handleOptionPrefixName (
       stringBeforeEqualsSign,
@@ -8578,7 +8598,7 @@ void oahHandler::handleNameContainingEqualSign (
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
         // register the use of stringWithDefaultValueAtom
         registerAtomUse (
@@ -8624,7 +8644,7 @@ void oahHandler::handleOptionsVectorOptionName (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   std::string
     trailerAfterFirstDash =
@@ -8647,7 +8667,7 @@ if (gEarlyOptions.getEarlyTraceOah ()) {
     "\"" <<
     std::endl;
 }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     handleKnownOptionsVectorElement (
       element,
@@ -8667,7 +8687,7 @@ if (gEarlyOptions.getEarlyTraceOah ()) {
         optionName,
         "unknown to handler 2 ???");
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     handleUnknownOptionName (
       optionName);
@@ -8691,7 +8711,7 @@ std::string oahHandler::handleArgvOptionName (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   std::string currentOptionName;
 
@@ -8734,7 +8754,7 @@ std::string oahHandler::handleArgvOptionName (
           __FILE__, __LINE__,
           ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
     }
   }
 
@@ -8754,7 +8774,7 @@ std::string oahHandler::handleArgvOptionName (
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
   }
 
   // handle the current option name
@@ -8786,7 +8806,7 @@ void oahHandler::handleOptionNameAndValueAtTopOahLevel (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
@@ -8794,7 +8814,7 @@ void oahHandler::handleOptionNameAndValueAtTopOahLevel (
     __FILE__, __LINE__,
     optionName.size () > 0,
     "optionName is empty");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // does optionName start with a dash?
   if (optionName.front () != '-') {
@@ -8874,7 +8894,7 @@ void oahHandler::handleArgvOptionValueOrArgument (
 
     --gIndenter;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // options are registered at once, unless they are valued,
   // in which case the handling of the option and its value
@@ -8899,7 +8919,7 @@ void oahHandler::handleArgvOptionValueOrArgument (
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     if (
       fPendingArgvValueFittedAtom
@@ -8936,7 +8956,7 @@ void oahHandler::handleArgvOptionValueOrArgument (
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     fPendingArgvValueFittedAtom = nullptr;
     fNameUsedForPendingArgvValueFittedAtom = "";
@@ -8957,7 +8977,7 @@ void oahHandler::handleArgvOptionValueOrArgument (
           __FILE__, __LINE__,
           ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     fOptionsAndArguments.appendArgument (
       theString);
@@ -8986,7 +9006,7 @@ oahElementHelpOnlyKind oahHandler::handleOptionsFromOptionsAndArguments (
 
     gGlobalTraceOahGroup->setTraceOah ();
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   std::string optionsPassDescription =
     "Handle the options from the options and arguments";
@@ -8996,22 +9016,15 @@ oahElementHelpOnlyKind oahHandler::handleOptionsFromOptionsAndArguments (
     std::string separator =
       "%--------------------------------------------------------------";
 
-    std::stringstream ss;
-
-    ss <<
+    gLog <<
       std::endl <<
       separator <<
       std::endl <<
       gTab <<
-//       gLanguage->passIDKindAsString (passIDKind) << ": " << passDescription <<
       optionsPassDescription <<
       std::endl <<
       separator <<
       std::endl;
-
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
   }
 #endif
 
@@ -9035,7 +9048,7 @@ oahElementHelpOnlyKind oahHandler::handleOptionsFromOptionsAndArguments (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   initializeHandlerMultiComponent ();
 
@@ -9049,7 +9062,7 @@ oahElementHelpOnlyKind oahHandler::handleOptionsFromOptionsAndArguments (
 //     gLog <<
 //       fOptionsAndArguments;
 //   }
-// #endif
+// #endif // MF_TRACE_IS_ENABLED
 
   // apply the options in the elements uses list
   result =
@@ -9071,7 +9084,7 @@ oahElementHelpOnlyKind oahHandler::handleOptionsFromOptionsAndArguments (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // register time spent
   clock_t endClock = clock ();
@@ -9094,8 +9107,9 @@ oahElementHelpOnlyKind oahHandler::handleOptionsAndArgumentsFromArgcArgv (
     result =
       oahElementHelpOnlyKind::kElementHelpOnlyNo;
 
-  std::string optionsAndArgumentsPassDescription =
-    gLanguage->handleOptionsAndArgumentsFromArgcArgv ();
+  std::string
+  	optionsAndArgumentsPassDescription =
+    	gLanguage->handleOptionsAndArgumentsFromArgcArgv ();
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
@@ -9113,33 +9127,28 @@ oahElementHelpOnlyKind oahHandler::handleOptionsAndArgumentsFromArgcArgv (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // start the clock
   clock_t startClock = clock ();
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTracePasses ()) {
-    std::string separator =
-      "%--------------------------------------------------------------";
+  if (gGlobalTraceOahGroup->getTraceOah ()) {
+		std::string separator =
+			"%--------------------------------------------------------------";
 
-    std::stringstream ss;
-
-    ss <<
-      std::endl <<
-      separator <<
-      std::endl <<
-//       gLanguage->passIDKindAsString (passIDKind) << ": " << passDescription <<
+		gLog <<
 			optionsAndArgumentsPassDescription <<
-      std::endl <<
-      separator <<
-      std::endl;
-
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
+				std::endl <<
+				separator <<
+				std::endl <<
+				gTab <<
+				optionsAndArgumentsPassDescription <<
+				std::endl <<
+				separator <<
+				std::endl;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
@@ -9148,7 +9157,7 @@ oahElementHelpOnlyKind oahHandler::handleOptionsAndArgumentsFromArgcArgv (
       argv,
       gLog);
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // register service name
   fHandlerServiceName = std::string (argv [0]);
@@ -9171,7 +9180,7 @@ oahElementHelpOnlyKind oahHandler::handleOptionsAndArgumentsFromArgcArgv (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   initializeHandlerMultiComponent ();
 
@@ -9199,7 +9208,7 @@ oahElementHelpOnlyKind oahHandler::handleOptionsAndArgumentsFromArgcArgv (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // register time spent
   clock_t endClock = clock ();
@@ -9231,7 +9240,7 @@ void oahHandler::createElementUsesListFromOptionsAndArguments (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
@@ -9267,7 +9276,7 @@ void oahHandler::createElementUsesListFromOptionsAndArguments (
       }
       break;
   } // switch
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   ++gIndenter;
 
@@ -9276,7 +9285,7 @@ void oahHandler::createElementUsesListFromOptionsAndArguments (
 //     gLog <<
 //       fOptionsAndArguments;
 //   }
-// #endif
+// #endif // MF_TRACE_IS_ENABLED
 
   // register service name
   fHandlerServiceName = serviceName;
@@ -9309,7 +9318,7 @@ void oahHandler::createElementUsesListFromOptionsAndArguments (
 //         "\"" <<
 //         std::endl;
 //     }
-// #endif
+// #endif // MF_TRACE_IS_ENABLED
 //   }
 //
 //   gLog << std::endl;
@@ -9325,7 +9334,7 @@ void oahHandler::createElementUsesListFromOptionsAndArguments (
 //
 //     displayElementUsesList ();
 //   }
-// #endif
+// #endif // MF_TRACE_IS_ENABLED
 }
 
 void oahHandler::createElementUsesListFromArgcArgv (
@@ -9355,7 +9364,7 @@ void oahHandler::createElementUsesListFromArgcArgv (
 				ss.str ());
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
@@ -9391,7 +9400,7 @@ void oahHandler::createElementUsesListFromArgcArgv (
       }
       break;
   } // switch
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   ++gIndenter;
 
@@ -9427,7 +9436,7 @@ void oahHandler::createElementUsesListFromArgcArgv (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     ++gIndenter;
 
@@ -9449,7 +9458,7 @@ void oahHandler::createElementUsesListFromArgcArgv (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
         // currentString is an argument
 #ifdef MF_TRACE_IS_ENABLED
@@ -9464,7 +9473,7 @@ void oahHandler::createElementUsesListFromArgcArgv (
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
         // append it to the arguments vector
         fOptionsAndArguments.appendArgument (
@@ -9485,7 +9494,7 @@ void oahHandler::createElementUsesListFromArgcArgv (
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         // first '-' has been found and currentString.size () >= 2
 
         lastOptionNameFound =
@@ -9521,7 +9530,7 @@ void oahHandler::createElementUsesListFromArgcArgv (
 
     displayElementUsesList (gLog);
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 oahElementHelpOnlyKind oahHandler::applyOptionsFromElementUsesList ()
@@ -9541,7 +9550,7 @@ oahElementHelpOnlyKind oahHandler::applyOptionsFromElementUsesList ()
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -9551,7 +9560,7 @@ oahElementHelpOnlyKind oahHandler::applyOptionsFromElementUsesList ()
 
     displayElementUsesList (gLog);
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (fElementUsesList.size ()) {
     ++gIndenter;
@@ -9601,7 +9610,7 @@ oahElementHelpOnlyKind oahHandler::applyOptionsFromElementUsesList ()
 
       --gIndenter;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       if (elementUsed) {
 #ifdef MF_TRACE_IS_ENABLED
@@ -9622,7 +9631,7 @@ oahElementHelpOnlyKind oahHandler::applyOptionsFromElementUsesList ()
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
         // the heart of it
         if (
@@ -9681,7 +9690,7 @@ oahElementHelpOnlyKind oahHandler::applyOptionsFromElementUsesList ()
 
               --gIndenter;
             }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 						if (valueUsed.size ()) {
 							valueFittedAtom->
@@ -9780,7 +9789,7 @@ oahElementHelpOnlyKind oahHandler::applyOptionsFromElementUsesList ()
 
               --gIndenter;
             }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
             valueLessAtom->
             	applyValueLessAtom (
@@ -9827,7 +9836,7 @@ oahElementHelpOnlyKind oahHandler::applyOptionsFromElementUsesList ()
 
     gLog << std::endl;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // print the early options if so selected
   // ------------------------------------------------------
@@ -9839,7 +9848,7 @@ oahElementHelpOnlyKind oahHandler::applyOptionsFromElementUsesList ()
 
     gLog << std::endl;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // print the options values if so selected
   // ------------------------------------------------------
@@ -9850,7 +9859,7 @@ oahElementHelpOnlyKind oahHandler::applyOptionsFromElementUsesList ()
       gLog);
     gLog << std::endl;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalDisplayOahGroup->getDisplayOptionsValuesAll ()) {
@@ -9858,7 +9867,7 @@ oahElementHelpOnlyKind oahHandler::applyOptionsFromElementUsesList ()
       gLog);
     gLog << std::endl;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // check the consistency of the options
   // ------------------------------------------------------
@@ -9891,7 +9900,7 @@ oahElementHelpOnlyKind oahHandler::applyOptionsFromElementUsesList ()
       // let's go ahead
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   return
     fOahHandlerFoundAHelpOption
@@ -9921,7 +9930,7 @@ void oahHandler::handleKnownOptionsVectorElement (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getEarlyTraceOahDetails ()) {
@@ -9940,7 +9949,7 @@ void oahHandler::handleKnownOptionsVectorElement (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // is this element already present in the commande line?
   std::multiset<S_oahElement>::const_iterator
@@ -9979,7 +9988,7 @@ void oahHandler::handleKnownOptionsVectorElement (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fHandlerCommandLineElementsMultiset.insert (element);
 
@@ -10052,7 +10061,7 @@ void oahHandler::handleKnownOptionsVectorElement (
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     handleKnownOptionsVectorAtom (
       originalValueLessAtom,
@@ -10106,7 +10115,7 @@ void oahHandler::handleKnownArgvElement (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getEarlyTraceOahDetails ()) {
@@ -10125,7 +10134,7 @@ void oahHandler::handleKnownArgvElement (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // is this element already present in the commande line?
   std::multiset<S_oahElement, compareOahElements>::const_iterator
@@ -10220,7 +10229,7 @@ void oahHandler::handleKnownArgvElement (
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     handleKnownArgvAtom (
       originalValueLessAtom,
@@ -10268,7 +10277,7 @@ void oahHandler::handleKnownOptionsVectorAtom (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   switch (atom->getElementValueKind ()) {
     case oahElementValueKind::kElementValue_UNKNOWN:
@@ -10332,7 +10341,7 @@ void oahHandler::handleKnownArgvAtom (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (fPendingArgvValueFittedAtom) {
     std::stringstream ss;
@@ -10418,7 +10427,7 @@ void oahHandler::handleUnknownOptionName (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // is optionName an options cluster?
   Bool nameIsAnOptionsCluster;
@@ -10527,7 +10536,7 @@ void oahHandler::handleOptionNameCommon (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // does optionName contain an equal sign?
   size_t equalsSignPosition =
@@ -10564,7 +10573,7 @@ void oahHandler::handleOptionNameCommon (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       handleKnownArgvElement (
         element,
@@ -10583,7 +10592,7 @@ void oahHandler::handleOptionNameCommon (
           optionName,
           "unknown to handler 3 ???");
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       handleUnknownOptionName (
         optionName);
@@ -10743,7 +10752,7 @@ void oahHandler::includeOptionsAndArgumentsFile (
 //       __FILE__, __LINE__,
 //       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fIncludeFileNamesStack.push_back (includeFileName);
 
@@ -10776,7 +10785,7 @@ void oahHandler::includeOptionsAndArgumentsFile (
     	__FILE__, __LINE__,
       gLanguage->openingIncludeFileForReading (includeFileName));
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   std::ifstream
     optionsStream (
@@ -10812,7 +10821,7 @@ void oahHandler::includeOptionsAndArgumentsFile (
       std::endl <<
       fOptionsAndArguments;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fIncludeFileNamesStack.pop_back ();
   --fIncludeFilesCurrentLevel;
@@ -10835,7 +10844,7 @@ void oahHandler::includeOptionsFromFile (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // decipher inputStream line by line
   while (true) {
@@ -10855,7 +10864,7 @@ void oahHandler::includeOptionsFromFile (
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     ++gIndenter;
 
@@ -10874,7 +10883,7 @@ void oahHandler::includeOptionsFromFile (
           __FILE__, __LINE__,
           ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     if (commentStart != std::string::npos) {
       currentLine.erase (
@@ -10892,7 +10901,7 @@ void oahHandler::includeOptionsFromFile (
           __FILE__, __LINE__,
           ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
     }
 
     if (currentLine.size ()) {
@@ -10911,7 +10920,7 @@ void oahHandler::includeOptionsFromFile (
           __FILE__, __LINE__,
           ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
     }
 
     if (currentLine.size ()) {
@@ -10932,7 +10941,7 @@ void oahHandler::includeOptionsFromFile (
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
         // fetch the option name part and value if any
         std::string optionNamePart (currentLine);
@@ -10955,7 +10964,7 @@ void oahHandler::includeOptionsFromFile (
               "Found option [" << optionNamePart << ']' <<
               std::endl;
           }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
           valuePart.erase (0);
         }
@@ -10980,7 +10989,7 @@ void oahHandler::includeOptionsFromFile (
               "Found option [" << optionNamePart << ' ' << valuePart << ']' <<
               std::endl;
           }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         }
 
         // the valuePart may be surrounded by quotes or double quotes,
@@ -11024,7 +11033,7 @@ void oahHandler::includeOptionsFromFile (
               "valuePartToBeUsed: [" << valuePartToBeUsed << ']' <<
               std::endl;
           }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 //         size_t
 //           firstNonDashCharacterPosition =
@@ -11054,7 +11063,7 @@ void oahHandler::includeOptionsFromFile (
 //             "optionName: " << optionName <<
 //             std::endl;
 //         }
-// #endif
+// #endif // MF_TRACE_IS_ENABLED
 
         // store the option name and value
         optionsAndArguments.appendOptionNameAndValue (
@@ -11110,7 +11119,7 @@ void oahHandler::includeOptionsFromFile (
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
         optionsAndArguments.appendArgument (
           currentLine);
@@ -11130,7 +11139,7 @@ void oahHandler::includeOptionsFromFile (
     ss <<
       optionsAndArguments;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //_______________________________________________________________________________
@@ -11179,7 +11188,7 @@ EXP void convertArgcArgvToOptionsAndArguments ( // JMIJMIJMI
 
       gLog << std::endl;
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (smSize == 4) {
     // found an n.x.y specification
@@ -11202,7 +11211,7 @@ EXP void convertArgcArgvToOptionsAndArguments ( // JMIJMIJMI
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     generationNumber = stoi (generationNumberValue);
     majorNumber      = stoi (majorNumberValue);
@@ -11247,7 +11256,7 @@ EXP void convertArgcArgvToOptionsAndArguments ( // JMIJMIJMI
           __FILE__, __LINE__,
           ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     if (smSize == 3) {
       // found an n.x specification
@@ -11269,7 +11278,7 @@ EXP void convertArgcArgvToOptionsAndArguments ( // JMIJMIJMI
           __FILE__, __LINE__,
           ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       generationNumber = stoi (generationNumberValue);
       majorNumber      = stoi (majorNumberValue);

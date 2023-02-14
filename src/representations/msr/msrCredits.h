@@ -260,4 +260,4 @@ EXP std::ostream& operator << (std::ostream& os, const S_msrCredit& elt);
 }
 
 
-#endif
+#endif // ___msrCredits___

@@ -76,7 +76,7 @@ void msrEyeGlasses::setEyeGlassesUpLinkToMeasure (
     __FILE__, __LINE__,
     measure != nullptr,
     "measure is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalTraceOahGroup->getTraceWholeNotes ()) {
@@ -92,7 +92,7 @@ void msrEyeGlasses::setEyeGlassesUpLinkToMeasure (
 
     --gIndenter;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fEyeGlassesUpLinkToMeasure = measure;
 }
@@ -120,7 +120,7 @@ void msrEyeGlasses::setEyeGlassesUpLinkToMeasure (
 //       "\"" <<
 //       std::endl;
 //   }
-// #endif
+// #endif // MF_TRACE_IS_ENABLED
 //
 // #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
@@ -128,7 +128,7 @@ void msrEyeGlasses::setEyeGlassesUpLinkToMeasure (
 //     __FILE__, __LINE__,
 //     measurePosition != msrMoment::K_MEASURE_POSITION_UNKNOWN,
 //     "measurePosition == msrMoment::K_MEASURE_POSITION_UNKNOWN");
-// #endif
+// #endif // MF_SANITY_CHECKS_ARE_ENABLED
 //
 //   // set measure element's measure position
 //   fEyeGlassesMeasurePosition = measurePosition;
@@ -174,7 +174,7 @@ void msrEyeGlasses::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrEyeGlasses>*
     p =
@@ -193,7 +193,7 @@ void msrEyeGlasses::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -212,7 +212,7 @@ void msrEyeGlasses::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrEyeGlasses>*
     p =
@@ -231,7 +231,7 @@ void msrEyeGlasses::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif        
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
