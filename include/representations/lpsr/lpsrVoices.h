@@ -88,4 +88,4 @@ EXP std::ostream& operator << (std::ostream& os, const S_lpsrUseVoiceCommand& el
 }
 
 
-#endif
+#endif // ___lpsrVoices___

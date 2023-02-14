@@ -1434,4 +1434,4 @@ EXP std::ostream& operator << (std::ostream& os, const S_msrVoice& elt);
 }
 
 
-#endif
+#endif // ___msrVoices___

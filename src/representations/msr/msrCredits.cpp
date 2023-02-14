@@ -160,7 +160,7 @@ void msrCreditWords::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrCreditWords>*
     p =
@@ -179,7 +179,7 @@ void msrCreditWords::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -198,7 +198,7 @@ void msrCreditWords::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrCreditWords>*
     p =
@@ -354,7 +354,7 @@ void msrCredit::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrCredit>*
     p =
@@ -373,7 +373,7 @@ void msrCredit::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -392,7 +392,7 @@ void msrCredit::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrCredit>*
     p =

@@ -13,7 +13,7 @@
 
 #ifndef WIN32
 #include <signal.h>
-#endif
+#endif // WIN32
 
 #include "mfBool.h"
 #include "mfMusicformatsErrors.h"
@@ -67,7 +67,7 @@ static void catchSignals ()
 
 #else
 static void catchSignals ()  {}
-#endif
+#endif // WIN32
 
 //_______________________________________________________________________________
 EXP int ischeme (
@@ -125,7 +125,7 @@ EXP int ischeme (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // the oahHandler, set below
   // ------------------------------------------------------
@@ -245,7 +245,7 @@ EXP int ischeme (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // what if no input source name has been supplied?
   if (! inputSourceName.size ()) {
@@ -355,7 +355,7 @@ EXP int ischeme (
     }
     gLog << std::endl;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // acknoledge end of command line analysis
   // ------------------------------------------------------
@@ -372,7 +372,7 @@ EXP int ischeme (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // do the conversion
   // ------------------------------------------------------
@@ -386,7 +386,7 @@ EXP int ischeme (
       if (gEarlyOptions.getEarlyTraceOah ()) {
         gLog << "Reading standard input" << std::endl;
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       err =
         convertMusicxmlFd2lilypondWithHandler (
@@ -412,7 +412,7 @@ EXP int ischeme (
           __FILE__, __LINE__,
           ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       err =
         convertMusicxmlFile2lilypondWithHandler (

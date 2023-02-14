@@ -1,13 +1,13 @@
 /*
-
   MusicFormats Library
-  Copyright (C) Jacques Menu 2016-2022
+  Copyright (C) Jacques Menu 2016-2023
 
-  This file is provided as an example of the MusicXML Library use.
-  It shows how to build a memory representation of a score from scratch.
+  This Source Code Form is subject to the terms of the Mozilla Public
+  License, v. 2.0. If a copy of the MPL was not distributed with this
+  file, you can obtain one at http://mozilla.org/MPL/2.0/.
 
+  https://github.com/jacques-menu/musicformats
 */
-
 
 #include <ctime>
 #include <iostream>
@@ -34,7 +34,8 @@ static int getrandom(int range) {
   float f = (float)rand() / RAND_MAX;
 #else
   float f = (float)random() / RAND_MAX;
-#endif
+#endif // WIN32
+
   return (int)(f * range);
 }
 
@@ -258,12 +259,14 @@ static Sxmlelement randomMusic(int measuresCount) {
 int main (int argc, char*  argv[]) {
   // if present, reads the measures count from the command line
   int count = (argc == 2) ? atoi(argv[1]) : 20;
+
   // sets the random numbers seed
 #ifdef WIN32
   srand((unsigned)time(0));
 #else
   srandom((unsigned)time(0));
-#endif
+#endif // WIN32
+
   SXMLFile f = TXMLFile::create();
   f->set( new TXMLDecl("1.0", "UTF-8", TXMLDecl::kNo));
   f->set( new TDocType("score-partwise"));

@@ -236,4 +236,4 @@ EXP std::ostream& operator << (std::ostream& os, const S_msrPageBreak& elt);
 }
 
 
-#endif
+#endif // ___msrBreaks___

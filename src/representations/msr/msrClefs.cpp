@@ -430,7 +430,7 @@ S_msrClef msrClef::createClefFromString (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   std::string regularExpression (
     "[[:space:]]*"
@@ -451,7 +451,7 @@ S_msrClef msrClef::createClefFromString (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   std::regex  e (regularExpression);
   std::smatch sm;
@@ -482,7 +482,7 @@ S_msrClef msrClef::createClefFromString (
 
     --gIndenter;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   //  Handles clefString à la LilyPond, such as c [major] or bes minor
 
@@ -523,7 +523,7 @@ S_msrClef msrClef::createClefFromString (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // create the clef
   result =
@@ -545,7 +545,7 @@ void msrClef::setClefUpLinkToMeasure (
     __FILE__, __LINE__,
     measure != nullptr,
     "measure is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalTraceOahGroup->getTraceWholeNotes ()) {
@@ -561,7 +561,7 @@ void msrClef::setClefUpLinkToMeasure (
 
     --gIndenter;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fClefUpLinkToMeasure = measure;
 }
@@ -617,7 +617,7 @@ void msrClef::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrClef>*
     p =
@@ -636,7 +636,7 @@ void msrClef::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -655,7 +655,7 @@ void msrClef::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrClef>*
     p =
@@ -674,7 +674,7 @@ void msrClef::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif        
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }

@@ -87,7 +87,7 @@ void languageOahAtom::applyAtomWithValue (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fLanguageKindVariable = mfLanguageKindFromString (theString);
 
@@ -110,7 +110,7 @@ void languageOahAtom::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_languageOahAtom>*
     p =
@@ -129,7 +129,7 @@ void languageOahAtom::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -148,7 +148,7 @@ void languageOahAtom::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_languageOahAtom>*
     p =
@@ -167,7 +167,7 @@ void languageOahAtom::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -186,7 +186,7 @@ void languageOahAtom::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void languageOahAtom::print (std::ostream& os) const
@@ -287,7 +287,7 @@ void insiderOahAtom::applyValueLessAtom (std::ostream& os)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fSelected = true;
 
@@ -310,7 +310,7 @@ void insiderOahAtom::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_insiderOahAtom>*
     p =
@@ -329,7 +329,7 @@ void insiderOahAtom::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -348,7 +348,7 @@ void insiderOahAtom::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_insiderOahAtom>*
     p =
@@ -367,7 +367,7 @@ void insiderOahAtom::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -386,7 +386,7 @@ void insiderOahAtom::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void insiderOahAtom::print (std::ostream& os) const
@@ -480,7 +480,7 @@ void regularOahAtom::applyValueLessAtom (std::ostream& os)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fSelected = true;
 
@@ -503,7 +503,7 @@ void regularOahAtom::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_regularOahAtom>*
     p =
@@ -522,7 +522,7 @@ void regularOahAtom::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -541,7 +541,7 @@ void regularOahAtom::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_regularOahAtom>*
     p =
@@ -560,7 +560,7 @@ void regularOahAtom::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -579,7 +579,7 @@ void regularOahAtom::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void regularOahAtom::print (std::ostream& os) const
@@ -690,7 +690,7 @@ void passIDOahAtom::applyAtomWithValue (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fPassIDKindVariable = mfPassIDKindFromString (theString);
 
@@ -713,7 +713,7 @@ void passIDOahAtom::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_passIDOahAtom>*
     p =
@@ -732,7 +732,7 @@ void passIDOahAtom::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -751,7 +751,7 @@ void passIDOahAtom::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_passIDOahAtom>*
     p =
@@ -770,7 +770,7 @@ void passIDOahAtom::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -789,7 +789,7 @@ void passIDOahAtom::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void passIDOahAtom::print (std::ostream& os) const
@@ -966,7 +966,7 @@ This option is handy to debug OAH.)",
   subGroup->
     appendAtomToSubGroup (
       fOahVerboseModeAtom);
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // help
 
@@ -1258,7 +1258,7 @@ R"(Write a trace of the OAH tree visiting activity to standard error.)",
         "fTraceOahVisitors",
         fTraceOahVisitors));
 }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 void oahOahGroup::initializeOahOahGroup (
   const std::string& serviceName)
@@ -1275,7 +1275,7 @@ void oahOahGroup::initializeOahOahGroup (
   // trace
   // --------------------------------------
   initializeOahTraceOah ();
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //______________________________________________________________________________
@@ -1313,7 +1313,7 @@ void oahOahGroup::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_oahOahGroup>*
     p =
@@ -1332,7 +1332,7 @@ void oahOahGroup::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -1351,7 +1351,7 @@ void oahOahGroup::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_oahOahGroup>*
     p =
@@ -1370,7 +1370,7 @@ void oahOahGroup::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -1389,7 +1389,7 @@ void oahOahGroup::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void oahOahGroup::displayAtomWithVariableOptionsValues ( // JMIJMIJMI
@@ -1492,7 +1492,7 @@ S_oahOahGroup createGlobalOahOahGroup (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // protect library against multiple initializations
   if (! gGlobalOahOahGroup) {

@@ -78,7 +78,7 @@ void bsrTranscriptionNotesElement::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_bsrTranscriptionNotesElement>*
     p =
@@ -97,7 +97,7 @@ void bsrTranscriptionNotesElement::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -117,7 +117,7 @@ void bsrTranscriptionNotesElement::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_bsrTranscriptionNotesElement>*
     p =
@@ -136,7 +136,7 @@ void bsrTranscriptionNotesElement::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -222,7 +222,7 @@ void bsrTranscriptionNotes::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_bsrTranscriptionNotes>*
     p =
@@ -241,7 +241,7 @@ void bsrTranscriptionNotes::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -261,7 +261,7 @@ void bsrTranscriptionNotes::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_bsrTranscriptionNotes>*
     p =
@@ -280,7 +280,7 @@ void bsrTranscriptionNotes::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }

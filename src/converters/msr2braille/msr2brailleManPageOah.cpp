@@ -75,7 +75,7 @@ void msr2brailleManPageGenerateAtom::applyValueLessAtom (std::ostream& os)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   generateManPageData (os);
 }
@@ -94,7 +94,7 @@ void msr2brailleManPageGenerateAtom::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msr2brailleManPageGenerateAtom>*
     p =
@@ -113,7 +113,7 @@ void msr2brailleManPageGenerateAtom::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -132,7 +132,7 @@ void msr2brailleManPageGenerateAtom::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msr2brailleManPageGenerateAtom>*
     p =
@@ -151,7 +151,7 @@ void msr2brailleManPageGenerateAtom::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -170,7 +170,7 @@ void msr2brailleManPageGenerateAtom::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void msr2brailleManPageGenerateAtom::print (std::ostream& os) const
@@ -292,7 +292,7 @@ R"(  Note: the options in this group imply '-tmp, -trace-man-page'.)",
 
   // JMI ???
 }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 void msr2brailleManPageOahGroup::initializeXml2brailleManPageOahGroup (
   const S_oahVisitor& theOah2manPage)
@@ -306,7 +306,7 @@ void msr2brailleManPageOahGroup::initializeXml2brailleManPageOahGroup (
   // trace
   // --------------------------------------
   initializeManPageTraceOah ();
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //______________________________________________________________________________
@@ -336,7 +336,7 @@ void msr2brailleManPageOahGroup::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msr2brailleManPageOahGroup>*
     p =
@@ -355,7 +355,7 @@ void msr2brailleManPageOahGroup::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -374,7 +374,7 @@ void msr2brailleManPageOahGroup::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msr2brailleManPageOahGroup>*
     p =
@@ -393,7 +393,7 @@ void msr2brailleManPageOahGroup::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -412,7 +412,7 @@ void msr2brailleManPageOahGroup::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //______________________________________________________________________________
@@ -457,7 +457,7 @@ S_msr2brailleManPageOahGroup createGlobalXml2brailleManPageOahHandler (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // protect library against multiple initializations
   if (! gGlobalXml2brailleManPageOahGroup) {

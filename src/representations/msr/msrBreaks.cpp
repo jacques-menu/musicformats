@@ -113,7 +113,7 @@ msrLineBreak::msrLineBreak (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 msrLineBreak::~msrLineBreak ()
@@ -128,7 +128,7 @@ void msrLineBreak::setLineBreakUpLinkToMeasure (
     __FILE__, __LINE__,
     measure != nullptr,
     "measure is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalTraceOahGroup->getTraceWholeNotes ()) {
@@ -144,7 +144,7 @@ void msrLineBreak::setLineBreakUpLinkToMeasure (
 
     --gIndenter;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fLineBreakUpLinkToMeasure = measure;
 }
@@ -163,7 +163,7 @@ void msrLineBreak::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrLineBreak>*
     p =
@@ -182,7 +182,7 @@ void msrLineBreak::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -201,7 +201,7 @@ void msrLineBreak::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrLineBreak>*
     p =
@@ -220,7 +220,7 @@ void msrLineBreak::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -330,7 +330,7 @@ msrPageBreak::msrPageBreak (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fUserSelectedPageBreakKind = userSelectedPageBreakKind;
 }
@@ -347,7 +347,7 @@ void msrPageBreak::setPageBreakUpLinkToMeasure (
     __FILE__, __LINE__,
     measure != nullptr,
     "measure is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalTraceOahGroup->getTraceWholeNotes ()) {
@@ -363,7 +363,7 @@ void msrPageBreak::setPageBreakUpLinkToMeasure (
 
     --gIndenter;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fPageBreakUpLinkToMeasure = measure;
 }
@@ -382,7 +382,7 @@ void msrPageBreak::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrPageBreak>*
     p =
@@ -401,7 +401,7 @@ void msrPageBreak::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -420,7 +420,7 @@ void msrPageBreak::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrPageBreak>*
     p =
@@ -439,7 +439,7 @@ void msrPageBreak::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }

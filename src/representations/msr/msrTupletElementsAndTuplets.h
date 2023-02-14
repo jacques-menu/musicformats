@@ -9,8 +9,8 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#ifndef ___msrTuplets___
-#define ___msrTuplets___
+#ifndef ___msrTupletElementsAndTuplets___
+#define ___msrTupletElementsAndTuplets___
 
 #include "msrTypesForwardDeclarations.h"
 
@@ -309,4 +309,4 @@ EXP std::ostream& operator << (std::ostream& os, const S_msrTuplet& elt);
 }
 
 
-#endif
+#endif // ___msrTupletElementsAndTuplets___

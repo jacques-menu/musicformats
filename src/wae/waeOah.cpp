@@ -139,7 +139,7 @@ void waeOahGroup::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_waeOahGroup>*
     p =
@@ -158,7 +158,7 @@ void waeOahGroup::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -177,7 +177,7 @@ void waeOahGroup::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_waeOahGroup>*
     p =
@@ -196,7 +196,7 @@ void waeOahGroup::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -215,7 +215,7 @@ void waeOahGroup::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //______________________________________________________________________________
@@ -277,7 +277,7 @@ S_waeOahGroup createGlobalWaeOahGroup ()
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // protect library against multiple initializations
   if (! gGlobalWaeOahGroup) {

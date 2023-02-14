@@ -39,4 +39,4 @@ EXP mfMusicformatsErrorKind msrScore2lilypondWithHandler (
 }
 
 
-#endif
+#endif // ___msr2lilypondInterface___

@@ -95,7 +95,7 @@ Mikrokosmos3WanderingRegularHandler::Mikrokosmos3WanderingRegularHandler (
   if (gEarlyOptions.getEarlyTraceOah ()) {
     // JMI ???
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 Mikrokosmos3WanderingRegularHandler::~Mikrokosmos3WanderingRegularHandler ()
@@ -117,14 +117,14 @@ void Mikrokosmos3WanderingRegularHandler::createRegularHandlerGroups ()
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   // create the trace OAH group
   appendGroupToHandler (
     createGlobalTraceOahGroup (
       this));
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   createInformationsRegularGroup ();
 
@@ -229,7 +229,7 @@ void Mikrokosmos3WanderingRegularHandler::createRegularHandlerGroups ()
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void Mikrokosmos3WanderingRegularHandler::createInformationsRegularGroup ()
@@ -480,7 +480,7 @@ void Mikrokosmos3WanderingRegularHandler::createOahRegularGroup ()
 #ifdef MF_TRACE_IS_ENABLED
   registerAtomInRegularSubgroup (K_TRACE_EARLY_OPTIONS_OPTION_LONG_NAME, subGroup);
   registerAtomInRegularSubgroup (K_OAH_VERBOSE_MODE_OPTION_LONG_NAME, subGroup);
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   registerAtomInRegularSubgroup ("help", subGroup);
   registerAtomInRegularSubgroup ("help-summary", subGroup);
@@ -506,11 +506,9 @@ void Mikrokosmos3WanderingRegularHandler::createOahRegularGroup ()
   registerAtomInRegularSubgroup ("display-msr1-skeleton", subGroup);
 
   registerAtomInRegularSubgroup ("display-msr1", subGroup);
-  registerAtomInRegularSubgroup ("display-msr1", subGroup);
   registerAtomInRegularSubgroup ("display-msr1-full", subGroup);
   registerAtomInRegularSubgroup ("display-msr1-slices", subGroup);
 
-  registerAtomInRegularSubgroup ("display-msr2", subGroup);
   registerAtomInRegularSubgroup ("display-msr2", subGroup);
   registerAtomInRegularSubgroup ("display-msr2-full", subGroup);
   registerAtomInRegularSubgroup ("display-msr2-slices", subGroup);
@@ -558,7 +556,7 @@ void Mikrokosmos3WanderingRegularHandler::createOahRegularGroup ()
 
       registerAtomInRegularSubgroup ("trace-backup", subGroup);
       registerAtomInRegularSubgroup ("trace-forward", subGroup);
-#endif
+#endif // MF_TRACE_IS_ENABLED
       break;
 
     case mfMultiGenerationOutputKind::kGenerationGuido:
@@ -569,7 +567,7 @@ void Mikrokosmos3WanderingRegularHandler::createOahRegularGroup ()
 
       registerAtomInRegularSubgroup ("trace-backup", subGroup);
       registerAtomInRegularSubgroup ("trace-forward", subGroup);
-#endif
+#endif // MF_TRACE_IS_ENABLED
       break;
 
     case mfMultiGenerationOutputKind::kGenerationMidi:
@@ -1450,7 +1448,7 @@ void Mikrokosmos3WanderingRegularHandler::checkOptionsAndArguments () const
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   checkNoInputSourceInArgumentsVector ();
 }

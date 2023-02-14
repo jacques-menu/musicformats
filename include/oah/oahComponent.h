@@ -27,4 +27,4 @@ S_mfcOahComponent EXP createOahComponent ();
 }
 
 
-#endif
+#endif // ___oahComponent___

@@ -29,7 +29,7 @@
 
 #ifdef MF_TRACE_IS_ENABLED
   #include "lpsrOah.h"
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #include "msrBrowsers.h"
 
@@ -106,7 +106,7 @@ S_msrScore msrScore::createScoreNewbornClone ()
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   S_msrScore
     newbornClone =
@@ -205,7 +205,7 @@ void msrScore::appendCreditToScore (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fCreditsList.push_back (credit);
 }
@@ -250,7 +250,7 @@ S_msrPart msrScore::fetchPartFromScoreByItsPartID (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   for (
     std::list<S_msrPartGroup>::const_iterator i = fPartGroupsList.begin ();
@@ -321,7 +321,7 @@ void msrScore::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrScore>*
     p =
@@ -340,7 +340,7 @@ void msrScore::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -359,7 +359,7 @@ void msrScore::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrScore>*
     p =
@@ -378,7 +378,7 @@ void msrScore::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -397,7 +397,7 @@ void msrScore::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (fIdentification) {
     // browse identification
@@ -467,7 +467,7 @@ void msrScore::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void msrScore::printFull (std::ostream& os) const
@@ -790,7 +790,7 @@ void msrScore::printSummary (std::ostream& os) const
   }
 #else
   os << "MSR score";
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   os << std::endl << std::endl;
 

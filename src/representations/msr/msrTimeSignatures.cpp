@@ -185,7 +185,7 @@ msrTimeSignatureItem::msrTimeSignatureItem (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 msrTimeSignatureItem::~msrTimeSignatureItem ()
@@ -239,7 +239,7 @@ void msrTimeSignatureItem::appendBeatsNumber (int beatsNumber)
       "'" <<
       std::endl;
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fTimeSignatureBeatsNumbersVector.insert (
     fTimeSignatureBeatsNumbersVector.end (),
@@ -260,7 +260,7 @@ void msrTimeSignatureItem::setTimeSignatureBeatValue (int timeSignatureBeatValue
       "'" <<
       std::endl;
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fTimeSignatureBeatValue = timeSignatureBeatValue;
 }
@@ -291,7 +291,7 @@ void msrTimeSignatureItem::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrTimeSignatureItem>*
     p =
@@ -310,7 +310,7 @@ void msrTimeSignatureItem::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -329,7 +329,7 @@ void msrTimeSignatureItem::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrTimeSignatureItem>*
     p =
@@ -348,7 +348,7 @@ void msrTimeSignatureItem::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif        
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -880,7 +880,7 @@ S_msrTimeSignature msrTimeSignature::createTimeFromString (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   std::string regularExpression (
     "[[:space:]]*"
@@ -905,7 +905,7 @@ S_msrTimeSignature msrTimeSignature::createTimeFromString (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   std::regex  e (regularExpression);
   std::smatch sm;
@@ -936,7 +936,7 @@ S_msrTimeSignature msrTimeSignature::createTimeFromString (
 
     --gIndenter;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // handling timeString à la LilyPond, such as "3/4"
 
@@ -973,7 +973,7 @@ S_msrTimeSignature msrTimeSignature::createTimeFromString (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     int integerBeatsNumber;
     {
@@ -1005,7 +1005,7 @@ S_msrTimeSignature msrTimeSignature::createTimeFromString (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // create the time signature
   result =
@@ -1044,7 +1044,7 @@ void msrTimeSignature::setTimeSignatureUpLinkToMeasure (
     __FILE__, __LINE__,
     measure != nullptr,
     "measure is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalTraceOahGroup->getTraceWholeNotes ()) {
@@ -1060,7 +1060,7 @@ void msrTimeSignature::setTimeSignatureUpLinkToMeasure (
 
     --gIndenter;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fTimeSignatureUpLinkToMeasure = measure;
 }
@@ -1080,7 +1080,7 @@ void msrTimeSignature::appendTimeSignatureItem (
       "'" <<
       std::endl;
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (! fTimeSignatureItemsVector.size ()) {
     // this is the first item inserted
@@ -1175,7 +1175,7 @@ void msrTimeSignature::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrTimeSignature>*
     p =
@@ -1194,7 +1194,7 @@ void msrTimeSignature::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -1213,7 +1213,7 @@ void msrTimeSignature::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrTimeSignature>*
     p =
@@ -1232,7 +1232,7 @@ void msrTimeSignature::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif        
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }

@@ -39,6 +39,7 @@
 
 namespace MusicFormats
 {
+
 //_______________________________________________________________________________
 void translateMxsrToGuido (
   Sxmlelement        theMxsr,
@@ -53,7 +54,7 @@ void translateMxsrToGuido (
     __FILE__, __LINE__,
     theMxsr != nullptr,
     "translateMxsrToGuido(): theMxsr is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // start the clock
   clock_t startClock = clock ();
@@ -79,7 +80,7 @@ void translateMxsrToGuido (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // convert the MXSR intto Guido data
   xml2guidovisitor v (
@@ -106,7 +107,7 @@ void translateMxsrToGuido (
 //       __FILE__, __LINE__,
 //       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (! outputFileName.size ()) {
 #ifdef MF_TRACE_IS_ENABLED
@@ -119,7 +120,7 @@ void translateMxsrToGuido (
 //       __FILE__, __LINE__,
 //       ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     // write the Guido data to the output file stream
     gOutput <<
@@ -140,7 +141,7 @@ void translateMxsrToGuido (
 //       __FILE__, __LINE__,
 //       ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     // open output file
     std::ofstream outputFileStream;
@@ -156,7 +157,7 @@ void translateMxsrToGuido (
 //       __FILE__, __LINE__,
 //       ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     std::ofstream
       guidoFileOutputStream (
@@ -195,7 +196,7 @@ void translateMxsrToGuido (
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     guidoFileOutputStream.close ();
   }

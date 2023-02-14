@@ -538,7 +538,7 @@ void ischemeInput::enrichNameOptionsBlock (
     __FILE__, __LINE__,
     nameOptionsBlock != nullptr,
     "nameOptionsBlock is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   if (gGlobalIschemeInterpreterOahGroup->getTraceInputs ()) {
     gLog <<
@@ -1361,7 +1361,7 @@ void ischemeChoice::enrichLabelOptionsBlock (
     __FILE__, __LINE__,
     labelOptionsBlock != nullptr,
     "labelOptionsBlock is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   if (gGlobalIschemeInterpreterOahGroup->getTraceChoices ()) {
     gLog <<
@@ -1862,7 +1862,7 @@ ischemeCaseChoiceStatement::ischemeCaseChoiceStatement (
     __FILE__, __LINE__,
     caseChoice != nullptr,
     "caseChoice is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fCaseChoice = caseChoice;
 
@@ -2067,7 +2067,7 @@ ischemeCaseInputStatement::ischemeCaseInputStatement (
     __FILE__, __LINE__,
     caseInput != nullptr,
     "caseInput is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fCaseInputInput = caseInput;
 
@@ -2262,7 +2262,7 @@ std::ostream& operator << (std::ostream& os, const S_ischemeCaseInputStatement& 
 //         "Initializing iScheme basic types handling" <<
 //         std::endl;
 //     }
-// #endif
+// #endif // MF_TRACE_IS_ENABLED
 //
 //     pPrivateThisMethodHasBeenRun = true;
 //   }

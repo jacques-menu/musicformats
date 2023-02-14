@@ -31,6 +31,7 @@
 #include "oahOah.h"
 #include "waeOah.h"
 #include "oahDisplayOah.h"
+#include "oahHarmoniesExtraOah.h"
 
 #include "mfOutputFileOah.h"
 #include "oahHarmoniesExtraOah.h"
@@ -151,7 +152,7 @@ R"(
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // initialize the history
   initializeHandlerMultiComponent ();
@@ -363,7 +364,7 @@ void msdlConverterInsiderHandler::createTheMsdlConverterPrefixes ()
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   createTheCommonPrefixes ();
 }
@@ -387,7 +388,7 @@ void msdlConverterInsiderHandler::createTheMsdlConverterOptionGroups (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // initialize options handling, phase 1
   // ------------------------------------------------------
@@ -406,7 +407,7 @@ void msdlConverterInsiderHandler::createTheMsdlConverterOptionGroups (
   appendGroupToHandler (
     createGlobalTraceOahGroup (
       this));
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // create the MSR generator OAH group
   appendGroupToHandler (
@@ -559,11 +560,9 @@ void msdlConverterInsiderHandler::createTheMsdlConverterOptionGroups (
       break;
   } // switch
 
-#ifdef MF_HARMONIES_EXTRA_IS_ENABLED
   // create the extra OAH group
   appendGroupToHandler (
     createGlobalHarmoniesExtraOahGroup ());
-#endif
 }
 
 //______________________________________________________________________________
@@ -583,7 +582,7 @@ void msdlConverterInsiderHandler::checkOptionsAndArguments () const
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (MSDR_STANDARD_INPUT_NAME == std::string ("-")) {
     checkSingleInputSourceInArgumentsVector ();
@@ -614,7 +613,7 @@ std::string msdlConverterInsiderHandler::fetchOutputFileNameFromTheOptions () co
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   S_oahStringAtom
     outputFileNameStringAtom =
@@ -652,7 +651,7 @@ std::string msdlConverterInsiderHandler::fetchOutputFileNameFromTheOptions () co
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   std::string
     inputSourceName =
@@ -726,7 +725,7 @@ std::string msdlConverterInsiderHandler::fetchOutputFileNameFromTheOptions () co
           __FILE__, __LINE__,
           ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
       if (gEarlyOptions.getEarlyTraceOah ()) {
@@ -742,7 +741,7 @@ std::string msdlConverterInsiderHandler::fetchOutputFileNameFromTheOptions () co
           __FILE__, __LINE__,
           ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
     }
 
     else {
@@ -853,7 +852,7 @@ std::string msdlConverterInsiderHandler::fetchOutputFileNameFromTheOptions () co
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   return outputFileName;
 }
@@ -868,7 +867,7 @@ void msdlConverterInsiderHandler::enforceHandlerQuietness ()
 #ifdef MF_TRACE_IS_ENABLED
   gGlobalTraceOahGroup->
     enforceGroupQuietness ();
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   gGlobalmsdlConverterInsiderOahGroup->
     enforceGroupQuietness ();
@@ -879,10 +878,8 @@ void msdlConverterInsiderHandler::enforceHandlerQuietness ()
   gGlobalMsr2mxsrOahGroup->
     enforceGroupQuietness ();
 
-#ifdef MF_HARMONIES_EXTRA_IS_ENABLED
-  gGlobalHarmoniesExtraOahGroup->
+  gHarmoniesExtraOahGroup->
     enforceGroupQuietness ();
-#endif
 }
 
 //______________________________________________________________________________
@@ -941,7 +938,7 @@ void msdlConverterInsiderOahGroup::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msdlConverterInsiderOahGroup>*
     p =
@@ -960,7 +957,7 @@ void msdlConverterInsiderOahGroup::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -979,7 +976,7 @@ void msdlConverterInsiderOahGroup::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msdlConverterInsiderOahGroup>*
     p =
@@ -998,7 +995,7 @@ void msdlConverterInsiderOahGroup::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -1017,7 +1014,7 @@ void msdlConverterInsiderOahGroup::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   oahGroup::browseData (v);
 }
@@ -1122,7 +1119,7 @@ void msdlConverterInsiderOahGroup::initializemsdlConverterInsiderOahGroup ()
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // JMI ???
 }
@@ -1171,7 +1168,7 @@ S_msdlConverterInsiderOahGroup createGlobalmsdlConverterInsiderOahGroup ()
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // protect library against multiple initializations
   if (! gGlobalmsdlConverterInsiderOahGroup) {

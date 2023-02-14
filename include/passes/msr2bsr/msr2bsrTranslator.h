@@ -465,7 +465,7 @@ class EXP msr2bsrTranslator :
 }
 
 
-#endif
+#endif // ___msr2bsrTranslator___
 
     /*
 

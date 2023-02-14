@@ -79,7 +79,7 @@ void msrSegmentElement::setSegmentElementSoundingWholeNotes (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
@@ -87,7 +87,7 @@ void msrSegmentElement::setSegmentElementSoundingWholeNotes (
     __FILE__, __LINE__,
     wholeNotes != K_WHOLE_NOTES_UNKNOWN,
     "wholeNotes == K_WHOLE_NOTES_UNKNOWN");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fSegmentElementSoundingWholeNotes = wholeNotes;
 }
@@ -106,7 +106,7 @@ void msrSegmentElement::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrSegmentElement>*
     p =
@@ -125,7 +125,7 @@ void msrSegmentElement::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -144,7 +144,7 @@ void msrSegmentElement::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrSegmentElement>*
     p =
@@ -163,7 +163,7 @@ void msrSegmentElement::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }

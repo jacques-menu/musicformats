@@ -189,4 +189,4 @@ EXP std::ostream& operator << (std::ostream& os, const S_msrWords& elt);
 }
 
 
-#endif
+#endif // ___msrWords___

@@ -236,4 +236,4 @@ S_LilyPondIssue34InsiderOahGroup createGlobalLilyPondIssue34InsiderOahGroup ();
 }
 
 
-#endif
+#endif // ___LilyPondIssue34InsiderHandler___

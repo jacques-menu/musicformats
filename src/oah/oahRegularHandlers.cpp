@@ -76,7 +76,7 @@ oahRegularHandler::oahRegularHandler (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fInsiderHandler = insiderOahHandler;
 
@@ -104,7 +104,7 @@ void oahRegularHandler::initializeOahRegularHandler ()
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // get the prefixes from fInsiderHandler
   fHandlerPrefixesMap =
@@ -133,7 +133,7 @@ void oahRegularHandler::initializeOahRegularHandler ()
 
   --gIndenter;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void oahRegularHandler::appendGroupToRegulalHandler (
@@ -145,7 +145,7 @@ void oahRegularHandler::appendGroupToRegulalHandler (
     __FILE__, __LINE__,
     group != nullptr,
     "group is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getEarlyTraceOahDetails ()) {
@@ -163,7 +163,7 @@ void oahRegularHandler::appendGroupToRegulalHandler (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // a regular group should not be displayed
   group->
@@ -190,7 +190,7 @@ void oahRegularHandler::prependGroupToRegularHandler (
     __FILE__, __LINE__,
     group != nullptr,
     "group is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getEarlyTraceOah ()) {
@@ -208,7 +208,7 @@ void oahRegularHandler::prependGroupToRegularHandler (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // a regular group should not be displayed
   group->
@@ -255,7 +255,7 @@ void oahRegularHandler::registerAtomInRegularSubgroup (
 				__FILE__, __LINE__,
 				ss.str ());
 		}
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     if (
       // atom?

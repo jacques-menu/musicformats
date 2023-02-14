@@ -1,3 +1,14 @@
+% -------------------------------------------------------------------------
+%  MusicFormats Library
+%  Copyright (C) Jacques Menu 2016-2023
+
+%  This Source Code Form is subject to the terms of the Mozilla Public
+%  License, v. 2.0. If a copy of the MPL was not distributed with this
+%  file, you can obtain one at http://mozilla.org/MPL/2.0/.
+
+%  https://github.com/jacques-menu/musicformats
+% -------------------------------------------------------------------------
+
 % !TEX root = MusicFormatsMaintainanceGuide.tex
 
 % -------------------------------------------------------------------------
@@ -25,7 +36,7 @@ Note that \file{MusicFormatsVersionNumber.txt} should not end with an end of lin
 
 These informations can be displayed with \scripts{ShowMusicFormatsVersion.bash}:
 \begin{lstlisting}[language=Terminal]
-jacquesmenu@macmini: ~/musicformats-git-dev > scripts/ShowMusicFormatsVersion.bash 
+jacquesmenu@macmini: ~/musicformats-git-dev > scripts/ShowMusicFormatsVersion.bash
 Version number:
 0.9.63Version date:
 June 9, 2022
@@ -42,8 +53,8 @@ jacquesmenu@macmini: ~/musicformats-git-dev > scripts/CreateDocumentationPDFs.ba
 \begin{lstlisting}[language=Terminal]
 jacquesmenu@macmini: ~/musicformats-git-dev > type addAll
 addAll is a function
-addAll () 
-{ 
+addAll ()
+{
     git add -f ${MUSIC_FORMATS_DEV}/MusicFormatsVersionNumber.txt;
     git add -f ${MUSIC_FORMATS_DEV}/MusicFormatsVersionDate.txt;
     git add -f ${MUSIC_FORMATS_DEV}/src/MusicFormatsVersionNumber.h;
@@ -179,10 +190,10 @@ jacquesmenu@macmini: ~/musicformats-git-dev > git push
 \begin{lstlisting}[language=Terminal]
 jacquesmenu@macmini: ~/musicformats-git-dev > git push --set-upstream origin v0.9.63
 Total 0 (delta 0), reused 0 (delta 0), pack-reused 0
-remote: 
+remote:
 remote: Create a pull request for 'v0.9.63' on GitHub by visiting:
 remote:      https://github.com/jacques-menu/musicformats/pull/new/v0.9.63
-remote: 
+remote:
 To https://github.com/jacques-menu/musicformats.git
  * [new branch]      v0.9.63 -> v0.9.63
 branch 'v0.9.63' set up to track 'origin/v0.9.63'.
@@ -195,7 +206,7 @@ jacquesmenu@macmini: ~/musicformats-git-dev > git branch -r
   origin/v0.9.61
   origin/v0.9.62
   origin/v0.9.63
-  
+
 jacquesmenu@macmini: ~/musicformats-git-dev > git branch
 * master
   v0.9.63
@@ -244,7 +255,7 @@ June 9, 2022
 
 Check the result with:
 \begin{lstlisting}[language=Terminal]
-jacquesmenu@macmini: ~/musicformats-git-dev > scripts/ShowMusicFormatsVersion.bash 
+jacquesmenu@macmini: ~/musicformats-git-dev > scripts/ShowMusicFormatsVersion.bash
 Version number:
 0.9.64Version date:
 June 9, 2022

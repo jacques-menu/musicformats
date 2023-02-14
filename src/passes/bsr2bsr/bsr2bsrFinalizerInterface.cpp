@@ -35,6 +35,7 @@
 
 namespace MusicFormats
 {
+
 //_______________________________________________________________________________
 S_bsrScore translateBsrToFinalizedBsr (
   const S_bsrScore     originalBsrScore,
@@ -51,7 +52,7 @@ S_bsrScore translateBsrToFinalizedBsr (
         __FILE__, __LINE__,
       originalBsrScore != nullptr,
       "originalBsrScore is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
     S_bsrScore result;
 
@@ -79,7 +80,7 @@ S_bsrScore translateBsrToFinalizedBsr (
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     // create an bsr2bsrFinalizer
     bsr2bsrFinalizer

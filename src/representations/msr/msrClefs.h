@@ -192,4 +192,4 @@ EXP std::ostream& operator << (std::ostream& os, const S_msrClef& elt);
 }
 
 
-#endif
+#endif // ___msrClefs___

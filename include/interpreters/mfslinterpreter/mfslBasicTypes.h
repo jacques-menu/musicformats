@@ -363,7 +363,7 @@ class EXP mfslCaseInputStatement : public smartable
     S_mfslInput           fCaseInputInput;
 
     std::set<std::string> fCaseInputNamesSet;
-    std::list<std::string>          
+    std::list<std::string>
                           fCaseInputCurrentNamesList;
 
     // checking unused names
@@ -642,7 +642,7 @@ class EXP mfslCaseChoiceStatement : public smartable
     S_mfslChoice          fCaseChoice;
 
     std::set<std::string> fCaseLabelsSet;
-    std::list<std::string>          
+    std::list<std::string>
                           fCaseCurrentLabelsList;
 
     // checking unused labels
@@ -657,4 +657,4 @@ EXP std::ostream& operator << (std::ostream& os, const S_mfslCaseChoiceStatement
 // void initializeMFSLBasicTypes ();
 
 
-#endif
+#endif // ___mfslBasicTypes___

@@ -26,4 +26,4 @@ S_mfcPassComponent EXP createMsdl2msrComponent ();
 
 }
 
-#endif
+#endif // ___msdl2msrComponent___

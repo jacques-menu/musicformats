@@ -31,6 +31,7 @@
 
 namespace MusicFormats
 {
+
 //_______________________________________________________________________________
 void displayBsrScore (
   S_bsrScore    bsrScore,
@@ -44,20 +45,17 @@ void displayBsrScore (
     __FILE__, __LINE__,
     bsrScore != nullptr,
     "bsrScore is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // start the clock
   clock_t startClock = clock ();
 
   setGlobalCurrentPassIDKind (mfPassIDKind::kMfPassID_OptionalPass);
 
-#ifdef MF_TRACING_IS_ENABLED
   std::string separator =
     "%--------------------------------------------------------------";
 
-  std::stringstream ss;
-
-  ss <<
+  gLog <<
     separator <<
     std::endl <<
     gTab <<
@@ -65,14 +63,10 @@ void displayBsrScore (
     std::endl <<
     separator <<
     std::endl << std::endl <<
-    bsrScore <<
-    separator <<
-    std::endl << std::endl;
 
-  gWaeHandler->waeTrace (
-    __FILE__, __LINE__,
-    ss.str ());
-#endif
+    bsrScore <<
+
+    std::endl << std::endl;
 
   // register time spent
   clock_t endClock = clock ();
@@ -98,40 +92,30 @@ void displayBsrScoreFull (
     __FILE__, __LINE__,
     bsrScore != nullptr,
     "bsrScore is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // start the clock
   clock_t startClock = clock ();
 
   setGlobalCurrentPassIDKind (mfPassIDKind::kMfPassID_OptionalPass);
 
-#ifdef MF_TRACING_IS_ENABLED
   std::string separator =
     "%--------------------------------------------------------------";
 
-  std::stringstream ss;
-
-  ss <<
+  gLog <<
     separator <<
     std::endl <<
     gTab <<
     gLanguage->passOptional () << ": "<< passDescription <<
-    ", " <<
-    gLanguage->fullVersion () <<
+    ", " << gLanguage->fullVersion () <<
     std::endl <<
     separator <<
     std::endl << std::endl;
 
-  ss << bsrScore;
+    bsrScore->printFull (gLog);
 
-  ss <<
-    separator <<
+  gLog <<
     std::endl << std::endl;
-
-  gWaeHandler->waeTrace (
-    __FILE__, __LINE__,
-    ss.str ());
-#endif
 
   // register time spent
   clock_t endClock = clock ();

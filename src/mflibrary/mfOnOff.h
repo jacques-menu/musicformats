@@ -40,4 +40,4 @@ std::ostream& operator << (std::ostream& os, const mfOnOffKind elt);
 }
 
 
-#endif
+#endif // ___mfOnOff___

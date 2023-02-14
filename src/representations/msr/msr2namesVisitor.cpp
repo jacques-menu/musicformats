@@ -15,12 +15,16 @@
 
 #include "mfStringsHandling.h"
 
+#include "oahEarlyOptions.h"
+
 #include "oahOah.h"
 #include "msrOah.h"
 
 #include "msr2namesVisitor.h"
 
 #include "msrBrowsers.h"
+
+#include "waeHandlers.h"
 
 
 namespace MusicFormats
@@ -77,7 +81,7 @@ void msr2namesVisitor::visitStart (S_msrScore& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   gLog <<
     "MSR names in \"" <<
@@ -104,7 +108,7 @@ void msr2namesVisitor::visitEnd (S_msrScore& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   gLog <<
     "The score contains:" <<
@@ -161,7 +165,7 @@ void msr2namesVisitor::visitStart (S_msrPartGroup& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++fPartGroupsCounter;
 
@@ -220,7 +224,7 @@ void msr2namesVisitor::visitEnd (S_msrPartGroup& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -238,7 +242,7 @@ void msr2namesVisitor::visitStart (S_msrPart& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++fPartsCounter;
 
@@ -303,7 +307,7 @@ void msr2namesVisitor::visitEnd (S_msrPart& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -321,7 +325,7 @@ void msr2namesVisitor::visitStart (S_msrStaff& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++fStavesCounter;
 
@@ -379,7 +383,7 @@ void msr2namesVisitor::visitEnd (S_msrStaff& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fOnGoingStaff = false;
 }
@@ -399,7 +403,7 @@ void msr2namesVisitor::visitStart (S_msrVoice& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++fVoicesCounter;
 
@@ -446,7 +450,7 @@ void msr2namesVisitor::visitEnd (S_msrVoice& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 

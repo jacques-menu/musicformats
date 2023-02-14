@@ -86,7 +86,7 @@ S_msrVoiceStaffChange msrVoiceStaffChange::createStaffChangeNewbornClone ()
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
  S_msrVoiceStaffChange
     newbornClone =
@@ -107,7 +107,7 @@ void msrVoiceStaffChange::setVoiceStaffChangeUpLinkToMeasure (
     __FILE__, __LINE__,
     measure != nullptr,
     "measure is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalTraceOahGroup->getTraceWholeNotes ()) {
@@ -123,7 +123,7 @@ void msrVoiceStaffChange::setVoiceStaffChangeUpLinkToMeasure (
 
     --gIndenter;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fVoiceStaffChangeUpLinkToMeasure = measure;
 }
@@ -142,7 +142,7 @@ void msrVoiceStaffChange::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrVoiceStaffChange>*
     p =
@@ -161,7 +161,7 @@ void msrVoiceStaffChange::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -180,7 +180,7 @@ void msrVoiceStaffChange::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrVoiceStaffChange>*
     p =
@@ -199,7 +199,7 @@ void msrVoiceStaffChange::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif        
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }

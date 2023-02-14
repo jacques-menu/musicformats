@@ -92,4 +92,4 @@ EXP std::ostream& operator << (std::ostream& os, const S_lpsrNewLyricsBlock& elt
 }
 
 
-#endif
+#endif // ___lpsrLyrics___

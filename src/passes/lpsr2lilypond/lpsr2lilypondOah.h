@@ -2130,7 +2130,7 @@ EXP S_lpsr2lilypondOahGroup createGlobalLpsr2lilypondOahGroup ();
 }
 
 
-#endif
+#endif // ___lpsr2lilypondOah___
 
 /* JMI
 //______________________________________________________________________________

@@ -346,7 +346,7 @@ EXP mfIndentedStringStream& operator << (
 #ifdef WIN32
 EXP mfIndentedStringStream& operator << (
   mfIndentedStringStream& iss, const size_t& elt);
-#endif
+#endif // WIN32
 
 EXP mfIndentedStringStream& operator << (
   mfIndentedStringStream& iss, const float& elt);
@@ -379,4 +379,4 @@ EXP extern void createTheGlobalIndentedOstreams (
 }
 
 
-#endif
+#endif // ___mfIndentedTextOutput___

@@ -27,5 +27,5 @@ S_mfcConverterComponent EXP createIschemeInterpreterComponent ();
 }
 
 
-#endif
+#endif // ___ischemeInterpreterComponent___
 

@@ -59,4 +59,4 @@ EXP void lpsr2lilypondInternalError (
 }
 
 
-#endif
+#endif // ___lpsr2lilypondWae___

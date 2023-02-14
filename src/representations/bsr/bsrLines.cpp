@@ -74,7 +74,7 @@ bsrLine::bsrLine (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 bsrLine::~bsrLine ()
@@ -95,7 +95,7 @@ S_bsrLine bsrLine::createLineNewbornClone ()
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   S_bsrLine
     newbornClone =
@@ -194,7 +194,7 @@ void bsrLine::appendSpacesToLine (S_bsrSpaces spaces)
       "'" <<
       std::endl;
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   appendLineElementToLine (spaces);
 }
@@ -212,7 +212,7 @@ void bsrLine::appendKeyToLine (S_bsrKey key)
       asString () <<
       std::endl;
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   appendLineElementToLine (key);
   fASpaceIsNeededInLine = true;
@@ -232,7 +232,7 @@ void bsrLine::appendTimeSignatureToLine (S_bsrTimeSignature timeSignature)
       "'" <<
       std::endl;
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   appendLineElementToLine (timeSignature);
   fASpaceIsNeededInLine = true;
@@ -252,7 +252,7 @@ void bsrLine::insertTimeBeforeLastElementOfLine (S_bsrTimeSignature timeSignatur
       "'" <<
       std::endl;
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   insertElementBeforeLastElementOfLine (timeSignature);
   fASpaceIsNeededInLine = true;
@@ -271,7 +271,7 @@ void bsrLine::appendTempoToLine (S_bsrTempo tempo)
       asString () <<
       std::endl;
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   appendLineElementToLine (tempo);
   fASpaceIsNeededInLine = true;
@@ -289,7 +289,7 @@ void bsrLine::appendMeasureToLine (S_bsrMeasure measure)
       "'" <<
       std::endl;
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   appendLineElementToLine (measure);
   fASpaceIsNeededInLine = true;
@@ -356,7 +356,7 @@ void bsrLine::appendNoteToLine (S_bsrNote note)
       "'" <<
       std::endl;
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   appendLineElementToLastMeasureOfLine (note); // last measure? JMI
 }
@@ -431,7 +431,7 @@ void bsrLine::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_bsrLine>*
     p =
@@ -450,7 +450,7 @@ void bsrLine::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -470,7 +470,7 @@ void bsrLine::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_bsrLine>*
     p =
@@ -489,7 +489,7 @@ void bsrLine::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }

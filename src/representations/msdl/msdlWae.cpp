@@ -78,7 +78,7 @@ EXP void msdlInternalError (
 
 #ifdef MF_ABORT_TO_DEBUG_ERRORS_IS_ENABLED
   abort ();
-#endif
+#endif // MF_ABORT_TO_DEBUG_ERRORS_IS_ENABLED
 
   throw msdlInternalException (message);
 }

@@ -147,4 +147,4 @@ EXP std::ostream& operator << (std::ostream& os, const S_lpsrPartBlock& elt);
 }
 
 
-#endif
+#endif // ___lpsrParts___

@@ -76,7 +76,7 @@ template <typename T> class   oahBrowser : public browser <T>
                                   ".\\\" --> browse()" <<
                                   std::endl;
                               }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 */
 
                                 enter (t);
@@ -100,7 +100,7 @@ template <typename T> class   oahBrowser : public browser <T>
                               ".\\\" --> enter()" <<
                               std::endl;
                           }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 */
 
                                 t.acceptIn  (fVisitor);
@@ -116,7 +116,7 @@ template <typename T> class   oahBrowser : public browser <T>
                                     ".\\\" --> leave()" <<
                                     std::endl;
                                 }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 */
 
                                 t.acceptOut (fVisitor);
@@ -127,4 +127,4 @@ template <typename T> class   oahBrowser : public browser <T>
 }
 
 
-#endif
+#endif // ___oahBrowsers___

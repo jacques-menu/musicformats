@@ -39,4 +39,4 @@ msrPrintObjectKind msrPrintObjectKindFromString (
 
 }
 
-#endif
+#endif // ___msrPrintObjects___

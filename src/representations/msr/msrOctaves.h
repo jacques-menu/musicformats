@@ -239,4 +239,4 @@ EXP std::ostream& operator << (std::ostream& os, const S_msrQuarterTonesPitchAnd
 
 }
 
-#endif
+#endif // ___msrOctaves___

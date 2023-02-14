@@ -135,7 +135,7 @@ msrSyllable::msrSyllable (
     __FILE__, __LINE__,
     syllableUpLinkToStanza != nullptr,
     "syllableUpLinkToStanza is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // set syllable's stanza upLink
   fSyllableUpLinkToStanza =
@@ -170,7 +170,7 @@ msrSyllable::msrSyllable (
 
     --gIndenter;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 msrSyllable::~msrSyllable ()
@@ -193,7 +193,7 @@ S_msrSyllable msrSyllable::createSyllableNewbornClone (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
@@ -201,7 +201,7 @@ S_msrSyllable msrSyllable::createSyllableNewbornClone (
     __FILE__, __LINE__,
     containingPart != nullptr,
     "containingPart is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   S_msrSyllable
     newbornClone =
@@ -252,7 +252,7 @@ S_msrSyllable msrSyllable::createSyllableDeepClone (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
@@ -260,7 +260,7 @@ S_msrSyllable msrSyllable::createSyllableDeepClone (
     __FILE__, __LINE__,
     containingPart != nullptr,
     "containingPart is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   S_msrSyllable
     deepClone =
@@ -303,7 +303,7 @@ void msrSyllable::setSyllableUpLinkToMeasure (
     __FILE__, __LINE__,
     measure != nullptr,
     "measure is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalTraceOahGroup->getTraceWholeNotes ()) {
@@ -319,7 +319,7 @@ void msrSyllable::setSyllableUpLinkToMeasure (
 
     --gIndenter;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fSyllableUpLinkToMeasure = measure;
 }
@@ -340,7 +340,7 @@ void msrSyllable:: setSyllableNextMeasurePuristNumber (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   switch (fSyllableKind) {
     case msrSyllableKind::kSyllableNone:
@@ -399,7 +399,7 @@ void msrSyllable:: setSyllableNextMeasurePuristNumber (
 //       "\"" <<
 //       std::endl;
 //   }
-// #endif
+// #endif // MF_TRACE_IS_ENABLED
 //
 // #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
@@ -407,7 +407,7 @@ void msrSyllable:: setSyllableNextMeasurePuristNumber (
 //     __FILE__, __LINE__,
 //     measurePosition != msrMoment::K_MEASURE_POSITION_UNKNOWN,
 //     "measurePosition == msrMoment::K_MEASURE_POSITION_UNKNOWN");
-// #endif
+// #endif // MF_SANITY_CHECKS_ARE_ENABLED
 //
 //   // set syllable's measure position
 //   fMeasurePosition = measurePosition;
@@ -431,7 +431,7 @@ void msrSyllable::appendLyricTextToSyllable (const std::string& text)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fSyllableTextsList.push_back (
     text);
@@ -446,7 +446,7 @@ void msrSyllable::appendSyllableToNoteAndSetItsUpLinkToNote (
     __FILE__, __LINE__,
     note != nullptr,
     "note is empty");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fSyllableUpLinkToNote = note;
 
@@ -481,7 +481,7 @@ void msrSyllable::appendSyllableToNoteAndSetItsUpLinkToNote (
 
     --gIndenter;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void msrSyllable::acceptIn (basevisitor* v)
@@ -498,7 +498,7 @@ void msrSyllable::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrSyllable>*
     p =
@@ -517,7 +517,7 @@ void msrSyllable::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -536,7 +536,7 @@ void msrSyllable::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrSyllable>*
     p =
@@ -555,7 +555,7 @@ void msrSyllable::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -970,7 +970,7 @@ msrStanza::msrStanza (
     __FILE__, __LINE__,
     stanzaUpLinkToVoice != nullptr,
     "stanzaUpLinkToVoice is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // set stanza's voice upLink
   fStanzaUpLinkToVoice =
@@ -1001,7 +1001,7 @@ void msrStanza::initializeStanza ()
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fStanzaTextPresent = false;
 
@@ -1030,7 +1030,7 @@ S_msrStanza msrStanza::createStanzaNewbornClone (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
@@ -1038,7 +1038,7 @@ S_msrStanza msrStanza::createStanzaNewbornClone (
     __FILE__, __LINE__,
     containingVoice != nullptr,
     "containingVoice is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   S_msrStanza
     newbornClone =
@@ -1085,7 +1085,7 @@ S_msrStanza msrStanza::createStanzaDeepClone (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
@@ -1093,7 +1093,7 @@ S_msrStanza msrStanza::createStanzaDeepClone (
     __FILE__, __LINE__,
     containingVoice != nullptr,
     "containingVoice is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   S_msrStanza
     stanzaDeepClone =
@@ -1146,7 +1146,7 @@ void msrStanza::appendSyllableToStanza (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // append the syllable to this stanza
   fSyllables.push_back (syllable);
@@ -1216,7 +1216,7 @@ S_msrSyllable msrStanza::appendRestSyllableToStanza (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -1261,7 +1261,7 @@ S_msrSyllable msrStanza::appendSkipSyllableToStanza (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -1304,7 +1304,7 @@ S_msrSyllable msrStanza::appendMeasureEndSyllableToStanza (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -1355,7 +1355,7 @@ S_msrSyllable msrStanza::appendMelismaSyllableToStanza (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -1400,7 +1400,7 @@ S_msrSyllable msrStanza::appendLineBreakSyllableToStanza (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -1449,7 +1449,7 @@ S_msrSyllable msrStanza::appendPageBreakSyllableToStanza (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -1509,7 +1509,7 @@ void msrStanza::appendPaddingNoteToStanza (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -1532,7 +1532,7 @@ void msrStanza::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrStanza>*
     p =
@@ -1551,7 +1551,7 @@ void msrStanza::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -1570,7 +1570,7 @@ void msrStanza::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrStanza>*
     p =
@@ -1589,7 +1589,7 @@ void msrStanza::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -1608,7 +1608,7 @@ void msrStanza::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -1634,7 +1634,7 @@ void msrStanza::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void msrStanza::print (std::ostream& os) const

@@ -36,6 +36,7 @@
 
 namespace MusicFormats
 {
+
 //_______________________________________________________________________________
 EXP void translateMxsrToMusicXML (
   Sxmlelement        theMxsr,
@@ -50,7 +51,7 @@ EXP void translateMxsrToMusicXML (
     __FILE__, __LINE__,
     theMxsr != nullptr,
     "translateMxsrToMusicXML(): theMxsr is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // start the clock
   clock_t startClock = clock ();
@@ -76,7 +77,7 @@ EXP void translateMxsrToMusicXML (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getEarlyTraceOah ()) {
@@ -90,7 +91,7 @@ EXP void translateMxsrToMusicXML (
 //       __FILE__, __LINE__,
 //       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // create the MusicXML data
   SXMLFile sxmlfile = createSxmlFile ();
@@ -110,7 +111,7 @@ EXP void translateMxsrToMusicXML (
 //       __FILE__, __LINE__,
 //       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (! outputFileName.size ()) {
 #ifdef MF_TRACE_IS_ENABLED
@@ -123,7 +124,7 @@ EXP void translateMxsrToMusicXML (
 //       __FILE__, __LINE__,
 //       ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     // write the MusicXML data to the output file stream
     sxmlfile->print (gOutput);
@@ -143,7 +144,7 @@ EXP void translateMxsrToMusicXML (
 //       __FILE__, __LINE__,
 //       ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     // open output file
     std::ofstream outputFileStream;
@@ -159,7 +160,7 @@ EXP void translateMxsrToMusicXML (
 //       __FILE__, __LINE__,
 //       ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     std::ofstream
       musicxmlFileOutputStream (
@@ -202,7 +203,7 @@ EXP void translateMxsrToMusicXML (
 //       __FILE__, __LINE__,
 //       ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     musicxmlFileOutputStream.close ();
   }

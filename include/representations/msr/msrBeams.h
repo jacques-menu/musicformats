@@ -128,4 +128,4 @@ EXP std::ostream& operator << (std::ostream& os, const S_msrBeam& elt);
 }
 
 
-#endif
+#endif // ___msrBeams___

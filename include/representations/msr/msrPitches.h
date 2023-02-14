@@ -227,4 +227,4 @@ EXP msrSemiTonesPitchKind enharmonicSemiTonesPitch (
 
 }
 
-#endif
+#endif // ___msrPitches___

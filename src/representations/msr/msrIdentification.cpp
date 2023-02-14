@@ -64,7 +64,7 @@ void msrIdentification::setIdentificationWorkNumber (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fIdentificationWorkNumber = val;
 }
@@ -85,7 +85,7 @@ void msrIdentification::setIdentificationWorkCreditTypeTitle (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fIdentificationWorkCreditTypeTitle = val;
 }
@@ -106,7 +106,7 @@ void msrIdentification::setIdentificationOpus (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fIdentificationOpus = val;
 }
@@ -127,7 +127,7 @@ void msrIdentification::setIdentificationMovementNumber (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fIdentificationMovementNumber = val;
 }
@@ -148,7 +148,7 @@ void msrIdentification::setIdentificationMovementTitle (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fIdentificationMovementTitle = val;
 }
@@ -169,7 +169,7 @@ void msrIdentification::setIdentificationEncodingDate (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fIdentificationEncodingDate = val;
 }
@@ -190,7 +190,7 @@ void msrIdentification::setIdentificationMiscellaneousField (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fIdentificationMiscellaneousField = val;
 }
@@ -211,7 +211,7 @@ void msrIdentification::setIdentificationScoreInstrument (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fIdentificationScoreInstrument = val;
 }
@@ -232,7 +232,7 @@ void msrIdentification::appendComposer (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fIdentificationComposersList.push_back (value);
 }
@@ -253,7 +253,7 @@ void msrIdentification::appendLyricist (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fIdentificationLyricistsList.push_back (value);
 }
@@ -274,7 +274,7 @@ void msrIdentification::appendArranger (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fIdentificationArrangersList.push_back (value);
 }
@@ -295,7 +295,7 @@ void msrIdentification::appendPoet (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fIdentificationPoetsList.push_back (value);
 }
@@ -316,7 +316,7 @@ void msrIdentification::appendTranslator (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fIdentificationTranslatorsList.push_back (value);
 }
@@ -337,7 +337,7 @@ void msrIdentification::appendArtist (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fIdentificationArtistsList.push_back (value);
 }
@@ -358,7 +358,7 @@ void msrIdentification::appendSoftware (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fIdentificationSoftwaresList.push_back (value);
 }
@@ -379,7 +379,7 @@ void msrIdentification::appendRight (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fIdentificationRightsList.push_back (value);
 }
@@ -400,7 +400,7 @@ void msrIdentification::appendSource (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fIdentificationSourcesList.push_back (value);
 }
@@ -421,7 +421,7 @@ void msrIdentification::appendRelation (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fIdentificationRelationsList.push_back (value);
 }
@@ -589,7 +589,7 @@ void msrIdentification::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrIdentification>*
     p =
@@ -608,7 +608,7 @@ void msrIdentification::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -627,7 +627,7 @@ void msrIdentification::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrIdentification>*
     p =

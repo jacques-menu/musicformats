@@ -12,6 +12,8 @@
 #ifndef ___msdl2brailleManPageOah___
 #define ___msdl2brailleManPageOah___
 
+#include "mfStaticSettings.h"
+
 #include "msdl2brailleOah2manPage.h"
 
 
@@ -159,7 +161,7 @@ class EXP msdl2brailleManPageOahGroup : public oahGroup
 
 #ifdef MF_TRACE_IS_ENABLED
     void                  initializeManPageTraceOah ();
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   public:
 
@@ -201,4 +203,4 @@ EXP extern S_msdl2brailleManPageOahGroup createGlobalMsdl2brlManPageOahHandler (
 }
 
 
-#endif
+#endif // ___msdl2brailleManPageOah___

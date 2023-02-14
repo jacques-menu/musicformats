@@ -1,3 +1,14 @@
+% -------------------------------------------------------------------------
+%  MusicFormats Library
+%  Copyright (C) Jacques Menu 2016-2023
+
+%  This Source Code Form is subject to the terms of the Mozilla Public
+%  License, v. 2.0. If a copy of the MPL was not distributed with this
+%  file, you can obtain one at http://mozilla.org/MPL/2.0/.
+
+%  https://github.com/jacques-menu/musicformats
+% -------------------------------------------------------------------------
+
 % !TEX root = MusicFormatsMaintainanceGuide.tex
 
 % -------------------------------------------------------------------------
@@ -251,6 +262,7 @@ They are performed to ensure that the formats in \mf\ are consistent, to avoid u
 			__FILE__, __LINE__,
 			voiceToInsertHarmoniesInto != nullptr,
 			"voiceToInsertHarmoniesInto is null");
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 \end{lstlisting}
 
 
@@ -1540,7 +1552,7 @@ msrPart::msrPart (
     __FILE__, __LINE__,
     partUpLinkToPartGroup != nullptr,
     "partUpLinkToPartGroup is null");
-    */
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // set part number
   fPartAbsoluteNumber = ++sPartsCounter;
@@ -1670,6 +1682,7 @@ S_msrScore msr2msrTranslator::translateMsrToMsr (
     __FILE__, __LINE__,
     theMsrScore != nullptr,
     "theMsrScore is null");
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // the MSR score we're visiting
   fVisitedMsrScore = theMsrScore;

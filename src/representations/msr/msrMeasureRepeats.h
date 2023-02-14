@@ -374,7 +374,7 @@ EXP std::ostream& operator << (std::ostream& os, const S_msrMeasureRepeat& elt);
 }
 
 
-#endif
+#endif // ___msrMeasureRepeats___
 
 
 //______________________________________________________________________________

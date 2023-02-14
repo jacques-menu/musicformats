@@ -76,7 +76,7 @@ void msdlConverterOahGroup::initializeMsdlConverterOahGroup ()
   // trace
   // --------------------------------------
 // JMI  initializeMsdlConverterTraceOah ();
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void msdlConverterOahGroup::enforceGroupQuietness ()
@@ -99,7 +99,7 @@ void msdlConverterOahGroup::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msdlConverterOahGroup>*
     p =
@@ -118,7 +118,7 @@ void msdlConverterOahGroup::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -137,7 +137,7 @@ void msdlConverterOahGroup::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msdlConverterOahGroup>*
     p =
@@ -156,7 +156,7 @@ void msdlConverterOahGroup::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -175,7 +175,7 @@ void msdlConverterOahGroup::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void msdlConverterOahGroup::printMsdlConverterOahValues (
@@ -217,7 +217,7 @@ S_msdlConverterOahGroup createGlobalMsdlConverterOahGroup ()
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // protect library against multiple initializations
   if (! gGlobalMsdlConverterOahGroup) {

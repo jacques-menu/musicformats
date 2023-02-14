@@ -146,4 +146,4 @@ EXP std::ostream& operator << (std::ostream& os, const S_msrRehearsalMark& elt);
 }
 
 
-#endif
+#endif // ___msrRehearsalMarks___

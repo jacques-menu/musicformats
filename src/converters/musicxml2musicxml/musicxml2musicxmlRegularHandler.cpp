@@ -83,7 +83,7 @@ xml2xmlRegularHandler::xml2xmlRegularHandler (
 
   --gIndenter;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 xml2xmlRegularHandler::~xml2xmlRegularHandler ()
@@ -105,14 +105,14 @@ void xml2xmlRegularHandler::createRegularHandlerGroups ()
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   // create the trace OAH group
   appendGroupToHandler (
     createGlobalTraceOahGroup (
       this));
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   createInformationsRegularGroup ();
 
@@ -184,7 +184,7 @@ void xml2xmlRegularHandler::createRegularHandlerGroups ()
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void xml2xmlRegularHandler::createInformationsRegularGroup ()
@@ -328,7 +328,7 @@ void xml2xmlRegularHandler::createOahRegularGroup ()
 #ifdef MF_TRACE_IS_ENABLED
   registerAtomInRegularSubgroup (K_TRACE_EARLY_OPTIONS_OPTION_LONG_NAME, subGroup);
   registerAtomInRegularSubgroup (K_OAH_VERBOSE_MODE_OPTION_LONG_NAME, subGroup);
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   registerAtomInRegularSubgroup ("help", subGroup);
   registerAtomInRegularSubgroup ("help-summary", subGroup);
@@ -354,9 +354,7 @@ void xml2xmlRegularHandler::createOahRegularGroup ()
   registerAtomInRegularSubgroup ("display-msr1-skeleton", subGroup);
 
   registerAtomInRegularSubgroup ("display-msr1", subGroup);
-  registerAtomInRegularSubgroup ("display-msr1", subGroup);
   registerAtomInRegularSubgroup ("display-msr1-full", subGroup);
-  registerAtomInRegularSubgroup ("display-msr2", subGroup);
   registerAtomInRegularSubgroup ("display-msr2", subGroup);
   registerAtomInRegularSubgroup ("display-msr2-full", subGroup);
 
@@ -382,7 +380,7 @@ void xml2xmlRegularHandler::createOahRegularGroup ()
 
   registerAtomInRegularSubgroup ("trace-backup", subGroup);
   registerAtomInRegularSubgroup ("trace-forward", subGroup);
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   registerAtomInRegularSubgroup ("quit-after-pass-2a", subGroup);
   registerAtomInRegularSubgroup ("quit-after-pass-2b", subGroup);
@@ -1314,7 +1312,7 @@ void xml2xmlRegularHandler::checkOptionsAndArguments () const
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   checkSingleInputSourceInArgumentsVector ();
 }

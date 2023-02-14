@@ -68,7 +68,7 @@ bsrMeasure::bsrMeasure (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 bsrMeasure::~bsrMeasure ()
@@ -89,7 +89,7 @@ S_bsrMeasure bsrMeasure::createMeasureNewbornClone ()
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   S_bsrMeasure
     newbornClone =
@@ -124,7 +124,7 @@ void bsrMeasure::appendClefToMeasure (S_bsrClef clef)
       "'" <<
       std::endl;
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   appendLineElementToMeasure (clef);
 }
@@ -143,7 +143,7 @@ void bsrMeasure::appendBarLineToMeasure (S_bsrBarLine barLine)
       "'" <<
       std::endl;
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   appendLineElementToMeasure (barLine);
 }
@@ -160,7 +160,7 @@ void bsrMeasure::appendNumberToMeasure (S_bsrNumber number)
       "'" <<
       std::endl;
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   appendLineElementToMeasure (number);
 }
@@ -177,7 +177,7 @@ void bsrMeasure::appendWordsToMeasure (S_bsrWords words)
       "'" <<
       std::endl;
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   appendLineElementToMeasure (words);
 }
@@ -196,7 +196,7 @@ void bsrMeasure::appendNoteToMeasure (S_bsrNote note)
       "'" <<
       std::endl;
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   appendLineElementToMeasure (note);
 }
@@ -215,7 +215,7 @@ void bsrMeasure::appendDynamicToMeasure (S_bsrDynamic dynamic)
       "'" <<
       std::endl;
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   appendLineElementToMeasure (dynamic);
 }
@@ -259,7 +259,7 @@ void bsrMeasure::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_bsrMeasure>*
     p =
@@ -278,7 +278,7 @@ void bsrMeasure::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -298,7 +298,7 @@ void bsrMeasure::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_bsrMeasure>*
     p =
@@ -317,7 +317,7 @@ void bsrMeasure::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }

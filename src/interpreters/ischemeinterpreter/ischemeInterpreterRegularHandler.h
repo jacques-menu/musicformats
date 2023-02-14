@@ -18,6 +18,7 @@
 
 namespace MusicFormats
 {
+
 //_______________________________________________________________________________
 class EXP ischemeInterpreterRegularHandler : public oahRegularHandler
 /*
@@ -122,4 +123,4 @@ EXP std::ostream& operator << (std::ostream& os, const S_ischemeInterpreterRegul
 }
 
 
-#endif
+#endif // ___ischemeInterpreterRegularHandler___

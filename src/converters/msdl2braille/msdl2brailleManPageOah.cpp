@@ -73,7 +73,7 @@ void msdl2brailleManPageGenerateAtom::applyValueLessAtom (std::ostream& os)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   generateManPageData (os);
 }
@@ -92,7 +92,7 @@ void msdl2brailleManPageGenerateAtom::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msdl2brailleManPageGenerateAtom>*
     p =
@@ -111,7 +111,7 @@ void msdl2brailleManPageGenerateAtom::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -130,7 +130,7 @@ void msdl2brailleManPageGenerateAtom::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msdl2brailleManPageGenerateAtom>*
     p =
@@ -149,7 +149,7 @@ void msdl2brailleManPageGenerateAtom::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -168,7 +168,7 @@ void msdl2brailleManPageGenerateAtom::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void msdl2brailleManPageGenerateAtom::print (std::ostream& os) const
@@ -290,7 +290,7 @@ R"(  Note: the options in this group imply '-tmp, -trace-man-page'.)",
 
   // JMI ???
 }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 void msdl2brailleManPageOahGroup::initializeMsdl2brlManPageOahGroup (
   const S_oahVisitor& theOah2manPage)
@@ -304,7 +304,7 @@ void msdl2brailleManPageOahGroup::initializeMsdl2brlManPageOahGroup (
   // trace
   // --------------------------------------
   initializeManPageTraceOah ();
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //______________________________________________________________________________
@@ -334,7 +334,7 @@ void msdl2brailleManPageOahGroup::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msdl2brailleManPageOahGroup>*
     p =
@@ -353,7 +353,7 @@ void msdl2brailleManPageOahGroup::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -372,7 +372,7 @@ void msdl2brailleManPageOahGroup::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msdl2brailleManPageOahGroup>*
     p =
@@ -391,7 +391,7 @@ void msdl2brailleManPageOahGroup::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -410,7 +410,7 @@ void msdl2brailleManPageOahGroup::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //______________________________________________________________________________
@@ -455,7 +455,7 @@ S_msdl2brailleManPageOahGroup createGlobalMsdl2brlManPageOahHandler (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // protect library against multiple initializations
   if (! gGlobalMsdl2brlManPageOahGroup) {

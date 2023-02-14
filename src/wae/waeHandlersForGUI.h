@@ -143,4 +143,4 @@ EXP std::ostream& operator << (std::ostream& os, const S_waeHandlerForGUI& elt);
 }
 
 
-#endif
+#endif // ___waeHandlersForGUI___

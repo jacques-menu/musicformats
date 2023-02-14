@@ -41,4 +41,4 @@ EXP mfMusicformatsErrorKind msrScore2musicxmlWithHandler (
 }
 
 
-#endif
+#endif // ___msr2musicxmlInterface___

@@ -26,4 +26,4 @@ S_mfcPassComponent EXP createBsr2brailleComponent ();
 
 }
 
-#endif
+#endif // ___bsr2brailleComponent___

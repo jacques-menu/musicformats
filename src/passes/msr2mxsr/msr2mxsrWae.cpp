@@ -91,7 +91,7 @@ void msr2mxsrInternalError (
 
 #ifdef MF_ABORT_TO_DEBUG_ERRORS_IS_ENABLED
   abort ();
-#endif
+#endif // MF_ABORT_TO_DEBUG_ERRORS_IS_ENABLED
 
   throw msr2mxsrInternalException (message);
 }

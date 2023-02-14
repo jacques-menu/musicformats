@@ -73,7 +73,7 @@ void msdl2musicxmlManPageGenerateAtom::applyValueLessAtom (std::ostream& os)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   generateManPageData (os);
 }
@@ -92,7 +92,7 @@ void msdl2musicxmlManPageGenerateAtom::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msdl2musicxmlManPageGenerateAtom>*
     p =
@@ -111,7 +111,7 @@ void msdl2musicxmlManPageGenerateAtom::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -130,7 +130,7 @@ void msdl2musicxmlManPageGenerateAtom::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msdl2musicxmlManPageGenerateAtom>*
     p =
@@ -149,7 +149,7 @@ void msdl2musicxmlManPageGenerateAtom::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -168,7 +168,7 @@ void msdl2musicxmlManPageGenerateAtom::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void msdl2musicxmlManPageGenerateAtom::print (std::ostream& os) const
@@ -303,7 +303,7 @@ R"(  Note: the options in this group imply '-tmp, -trace-man-page'.)",
 
   // JMI ???
 }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 void msdl2musicxmlManPageOahGroup::initializeMsdl2xmlManPageOahGroup (
   const S_oahVisitor& theOah2manPage)
@@ -317,7 +317,7 @@ void msdl2musicxmlManPageOahGroup::initializeMsdl2xmlManPageOahGroup (
   // trace
   // --------------------------------------
   initializeManPageTraceOah ();
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //______________________________________________________________________________
@@ -347,7 +347,7 @@ void msdl2musicxmlManPageOahGroup::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msdl2musicxmlManPageOahGroup>*
     p =
@@ -366,7 +366,7 @@ void msdl2musicxmlManPageOahGroup::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -385,7 +385,7 @@ void msdl2musicxmlManPageOahGroup::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msdl2musicxmlManPageOahGroup>*
     p =
@@ -404,7 +404,7 @@ void msdl2musicxmlManPageOahGroup::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -423,7 +423,7 @@ void msdl2musicxmlManPageOahGroup::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //______________________________________________________________________________
@@ -468,7 +468,7 @@ S_msdl2musicxmlManPageOahGroup createGlobalMsdl2xmlManPageOahGroupHandler (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // protect library against multiple initializations
   if (! gGlobalMsdl2xmlManPageOahGroup) {

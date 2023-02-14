@@ -58,7 +58,7 @@ msdrMeasure::msdrMeasure (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fMeasureNumber = measureNumber;
 
@@ -94,7 +94,7 @@ void msdrMeasure::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msdrMeasure>*
     p =
@@ -113,7 +113,7 @@ void msdrMeasure::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -132,7 +132,7 @@ void msdrMeasure::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msdrMeasure>*
     p =
@@ -151,7 +151,7 @@ void msdrMeasure::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -170,7 +170,7 @@ void msdrMeasure::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // browse the voice initial elements
   if (fInitialMusicLayersList.size ()) {
@@ -426,7 +426,7 @@ void msdrMeasure::print (std::ostream& os) const
 
     --gIndenter;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 */
 
   --gIndenter;

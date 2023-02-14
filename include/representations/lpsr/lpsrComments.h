@@ -104,4 +104,4 @@ EXP std::ostream& operator << (std::ostream& os, const S_lpsrComment& elt);
 }
 
 
-#endif
+#endif // ___lpsrComments___

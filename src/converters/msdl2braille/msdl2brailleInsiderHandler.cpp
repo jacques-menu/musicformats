@@ -28,6 +28,7 @@
 #include "waeOah.h"
 #include "mfOutputFileOah.h"
 #include "oahDisplayOah.h"
+#include "oahHarmoniesExtraOah.h"
 
 #include "msdl2msrOah.h"
 
@@ -93,7 +94,7 @@ Usage: msdl2braille [option]* [MSDLFile] [option]*
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // initialize the history
   initializeHandlerMultiComponent ();
@@ -157,7 +158,7 @@ void msdl2brailleInsiderHandler::createTheMsdl2brlPrefixes ()
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   createTheCommonPrefixes ();
 }
@@ -180,7 +181,7 @@ void msdl2brailleInsiderHandler::createTheMsdl2brlOptionGroups (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // initialize options handling, phase 1
   // ------------------------------------------------------
@@ -199,7 +200,7 @@ void msdl2brailleInsiderHandler::createTheMsdl2brlOptionGroups (
   appendGroupToHandler (
     createGlobalTraceOahGroup (
       this));
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // create the output file OAH group
   appendGroupToHandler (
@@ -244,11 +245,9 @@ void msdl2brailleInsiderHandler::createTheMsdl2brlOptionGroups (
   appendGroupToHandler (
     createGlobalBrailleGenerationOahGroup ());
 
-#ifdef MF_HARMONIES_EXTRA_IS_ENABLED
   // create the extra OAH group
   appendGroupToHandler (
     createGlobalHarmoniesExtraOahGroup ());
-#endif
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getEarlyTraceOahDetails ()) {
@@ -268,7 +267,7 @@ void msdl2brailleInsiderHandler::createTheMsdl2brlOptionGroups (
 
     --gIndenter;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //______________________________________________________________________________
@@ -288,7 +287,7 @@ void msdl2brailleInsiderHandler::checkOptionsAndArguments () const
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   checkSingleInputSourceInArgumentsVector ();
 }
@@ -309,7 +308,7 @@ void msdl2brailleInsiderHandler::enforceHandlerQuietness ()
 #ifdef MF_TRACE_IS_ENABLED
   gGlobalTraceOahGroup->
     enforceGroupQuietness ();
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   gGlobalMsdl2brlInsiderOahGroup->
     enforceGroupQuietness ();
@@ -326,10 +325,8 @@ void msdl2brailleInsiderHandler::enforceHandlerQuietness ()
   gGlobalBrailleGenerationOahGroup->
     enforceGroupQuietness ();
 
-#ifdef MF_HARMONIES_EXTRA_IS_ENABLED
-  gGlobalHarmoniesExtraOahGroup->
+  gHarmoniesExtraOahGroup->
     enforceGroupQuietness ();
-#endif
 }
 
 //______________________________________________________________________________
@@ -355,7 +352,7 @@ void msdl2brailleInsiderOahGroup::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msdl2brailleInsiderOahGroup>*
     p =
@@ -374,7 +371,7 @@ void msdl2brailleInsiderOahGroup::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -393,7 +390,7 @@ void msdl2brailleInsiderOahGroup::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msdl2brailleInsiderOahGroup>*
     p =
@@ -412,7 +409,7 @@ void msdl2brailleInsiderOahGroup::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -431,7 +428,7 @@ void msdl2brailleInsiderOahGroup::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   oahGroup::browseData (v);
 }
@@ -535,7 +532,7 @@ void msdl2brailleInsiderOahGroup::initializeMsdl2brlInsiderOahGroup ()
     "\" group" <<
     std::endl;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // quit after some passes
   // --------------------------------------
@@ -553,7 +550,7 @@ void msdl2brailleInsiderOahGroup::createInsiderQuitSubGroup ()
     "\"" <<
     std::endl;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   S_oahSubGroup
     subGroup =
@@ -675,7 +672,7 @@ S_msdl2brailleInsiderOahGroup createGlobalMsdl2brlOahGroup (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // protect library against multiple initializations
   if (! gGlobalMsdl2brlInsiderOahGroup) {

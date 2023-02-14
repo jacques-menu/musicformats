@@ -33,4 +33,4 @@ EXP extern const int K_MF_NAMES_LIST_MAX_LENGTH;
 }
 
 
-#endif
+#endif // ___mfConstants___

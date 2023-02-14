@@ -71,7 +71,7 @@ EXP extern const std::string K_TRACE_PASSES_OPTION_SHORT_NAME;
 EXP extern const std::string K_TRACE_ONLY_PASS_OPTION_LONG_NAME;
 EXP extern const std::string K_TRACE_ONLY_PASS_OPTION_SHORT_NAME;
 
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 //______________________________________________________________________________
 class EXP oahEarlyOptions
@@ -170,7 +170,7 @@ class EXP oahEarlyOptions
     mfPassIDKind&         getEarlyTraceOnlyPassRef ()
                               { return fEarlyTraceOnlyPass; }
 
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   public:
 
@@ -240,7 +240,7 @@ class EXP oahEarlyOptions
     Bool                  fEarlyTracePasses;
     mfPassIDKind          fEarlyTraceOnlyPass;
 
-#endif
+#endif // MF_TRACE_IS_ENABLED
 };
 typedef SMARTP<oahEarlyOptions> S_oahEarlyOptions;
 EXP std::ostream& operator << (std::ostream& os, const oahEarlyOptions& elt);
@@ -256,4 +256,4 @@ EXP oahEarlyOptions& getGlobalOahEarlyOptions ();
 }
 
 
-#endif
+#endif // ___oahEarlyOptions___

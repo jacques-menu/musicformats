@@ -68,7 +68,7 @@ static void catchSignals ()
 
 #else
 static void catchSignals ()  {}
-#endif
+#endif // WIN32
 
 //_______________________________________________________________________________
 int main (int argc, char* argv[])
@@ -119,7 +119,7 @@ int main (int argc, char* argv[])
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // the oahHandler, set below
   // ------------------------------------------------------
@@ -264,7 +264,7 @@ int main (int argc, char* argv[])
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // what if no script source name has been supplied?
   if (! scriptSourceName.size ()) {
@@ -356,7 +356,7 @@ int main (int argc, char* argv[])
       std::endl;
     --gIndenter;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // acknoledge end of command line analysis
   // ------------------------------------------------------
@@ -373,7 +373,7 @@ int main (int argc, char* argv[])
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // do the interpretation
   // ------------------------------------------------------

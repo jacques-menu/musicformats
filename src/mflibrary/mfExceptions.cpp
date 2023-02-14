@@ -27,7 +27,7 @@ EXP void mfDisplayException (std::exception& e, std::ostream& os)
     "std::exception caught: " <<
     e.what () <<
     std::endl;
-#endif
+#endif // MF_CAUGHT_EXCEPTIONS_DISPLAY_IS_ENABLED
 }
 
 //______________________________________________________________________________

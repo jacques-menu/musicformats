@@ -97,7 +97,7 @@ using namespace MusicFormats;
 # ifndef YY_
 #  define YY_(msgid) msgid
 # endif
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 
 // Whether we are compiled with std::exception support.
@@ -107,7 +107,7 @@ using namespace MusicFormats;
 # else
 #  define YY_EXCEPTIONS 1
 # endif
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #define YYRHSLOC(Rhs, K) ((Rhs)[K].location)
 /* YYLLOC_DEFAULT -- Set CURRENT to span from RHS[1] to RHS[N].
@@ -185,7 +185,7 @@ namespace iscm {
       yycdebug_ (&std::cerr),
 #else
     :
-#endif
+#endif // MF_TRACE_IS_ENABLED
       yy_lac_established_ (false),
       drv (drv_yyarg)
   {}
@@ -266,7 +266,7 @@ namespace iscm {
 #if 201103L <= YY_CPLUSPLUS
     // that is emptied.
     that.state = empty_state;
-#endif
+#endif // MF_TRACE_IS_ENABLED
   }
 
   parser::stack_symbol_type::stack_symbol_type (state_type s, YY_MOVE_REF (symbol_type) that)
@@ -354,7 +354,7 @@ namespace iscm {
     that.state = empty_state;
     return *this;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   template <typename Base>
   void
@@ -453,7 +453,7 @@ namespace iscm {
         yyo << ')';
       }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   void
   parser::yypush_ (const char* m, YY_MOVE_REF (stack_symbol_type) sym)
@@ -471,7 +471,7 @@ namespace iscm {
 #else
     stack_symbol_type ss (s, sym);
     yypush_ (m, ss);
-#endif
+#endif // MF_TRACE_IS_ENABLED
   }
 
   void
@@ -1640,7 +1640,7 @@ namespace iscm {
     // only do it for the sake of debugging output.
     if (!yyparser_.yy_lac_established_)
       yyparser_.yy_lac_check_ (yyla_.kind ());
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     for (int yyx = 0; yyx < YYNTOKENS; ++yyx)
       {
@@ -1674,7 +1674,7 @@ namespace iscm {
     // Reduce until we encounter a shift and thereby accept the token.
 #if ISCMDEBUG
     YYCDEBUG << "LAC: checking lookahead " << symbol_name (yytoken) << ':';
-#endif
+#endif // MF_TRACE_IS_ENABLED
     std::ptrdiff_t lac_top = 0;
     while (true)
       {
@@ -1776,7 +1776,7 @@ namespace iscm {
 #if ISCMDEBUG
         YYCDEBUG << "LAC: initial context established for "
                  << symbol_name (yytoken) << std::endl;
-#endif
+#endif // MF_TRACE_IS_ENABLED
         yy_lac_established_ = true;
         return yy_lac_check_ (yytoken);
       }

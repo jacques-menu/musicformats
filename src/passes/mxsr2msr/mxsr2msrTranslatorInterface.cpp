@@ -60,7 +60,7 @@ void populateMsrSkeletonFromMxsr (
     __FILE__, __LINE__,
     scoreSkeletonToBePopulated != nullptr,
     "scoreSkeletonToBePopulated is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // start the clock
   clock_t startClock = clock ();
@@ -89,7 +89,7 @@ void populateMsrSkeletonFromMxsr (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // create an mxsr2msrTranslator
   mxsr2msrTranslator
@@ -133,11 +133,7 @@ void populateMsrSkeletonFromMxsr (
   if (gGlobalMsrOahGroup->getDisplayFirstMsrFull ()) {
     displayMsrScoreFull (
       scoreSkeletonToBePopulated,
-      gLanguage->displayTheFirstMSRAsText ()
-      	+
-      ", "
-        +
-      gLanguage->fullVersion () );
+      gLanguage->displayTheFirstMSRAsText ());
   }
 
   // display the populated MSR score summary if requested

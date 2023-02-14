@@ -90,7 +90,7 @@ msdlScanner::msdlScanner (std::istream& inputStream)
 #ifdef MF_TRACE_IS_ENABLED
   fTraceTokens        = gGlobalMsdl2msrOahGroup->getTraceTokens ();
   fTraceTokensDetails = gGlobalMsdl2msrOahGroup->getTraceTokensDetails ();
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // user language
   fUserLanguageKind =
@@ -180,7 +180,7 @@ void msdlScanner::populateInputString (std::istream& inputStream)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   for ( ; ; ) {
     char character;
@@ -214,7 +214,7 @@ void msdlScanner::populateInputString (std::istream& inputStream)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 // --------------------------------------------------------------------------
@@ -265,7 +265,7 @@ char msdlScanner::fetchNextCharacter ()
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // has the end of input been reached?
   if (fCurrentPositionInInput == fInputStringSize - 1) {
@@ -296,7 +296,7 @@ char msdlScanner::fetchNextCharacter ()
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   return fCurrentCharacter;
 }
@@ -323,7 +323,7 @@ void msdlScanner::handleEndOfLine (const std::string& context)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++fCurrentLineNumber;
   fCurrentLinePositionInInput = fCurrentPositionInInput + 1;
@@ -346,7 +346,7 @@ void msdlScanner::handleEndOfLine (const std::string& context)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 // --------------------------------------------------------------------------
@@ -394,7 +394,7 @@ msdlTokenKind msdlScanner::fetchNextToken (
 
     --gIndenter;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -418,7 +418,7 @@ msdlTokenKind msdlScanner::fetchNextToken (
         if (fTraceTokensDetails) {
           gLog << "EOF has been reached" << std::endl;
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
         fCurrentTokenKind = msdlTokenKind::k_TokenEOF;
         fNextCharacterIsAvailable = true; // don't go ahead anymore
@@ -633,7 +633,7 @@ msdlTokenKind msdlScanner::fetchNextToken (
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     // should we loop once more?
     Bool onceMore;
@@ -681,7 +681,7 @@ msdlTokenKind msdlScanner::fetchNextToken (
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     if (onceMore) {
       if (! fNextCharacterIsAvailable) {
@@ -745,7 +745,7 @@ msdlTokenKind msdlScanner::fetchNextToken (
 
     --gIndenter;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // should the current token be appended to the tokens list?
   if (fAppendTokensToList) {
@@ -807,7 +807,7 @@ void msdlScanner::handlePercent ()
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
         std::string commentString =
           fInputString.substr (
@@ -896,7 +896,7 @@ void msdlScanner::handleSlash ()
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
         std::string commentString =
           fInputString.substr (
@@ -975,7 +975,7 @@ void msdlScanner::acceptAName ()
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -1020,7 +1020,7 @@ void msdlScanner::acceptAName ()
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
   // is nameString the name of a keyword?
   msdlKeywordKind
     keyWordKind =
@@ -1042,7 +1042,7 @@ void msdlScanner::acceptAName ()
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   switch (keyWordKind) {
     case msdlKeywordKind::kKeyword_UNKNOWN: // no, it is a name
@@ -1146,7 +1146,7 @@ void msdlScanner::acceptAName ()
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 // --------------------------------------------------------------------------
@@ -1175,7 +1175,7 @@ void msdlScanner::acceptAnInteger ()
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -1231,7 +1231,7 @@ void msdlScanner::acceptAnInteger ()
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 // --------------------------------------------------------------------------
@@ -1260,7 +1260,7 @@ void msdlScanner::acceptAString ()
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -1298,7 +1298,7 @@ void msdlScanner::acceptAString ()
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     switch (fCurrentCharacter) {
       case '"':
@@ -1321,7 +1321,7 @@ void msdlScanner::acceptAString ()
               fCurrentPositionInInput - chunkStartPositionInInput <<
               std::endl;
           }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
           std::string currentChunk =
             fInputString.substr (
@@ -1337,7 +1337,7 @@ void msdlScanner::acceptAString ()
               "\"" <<
               std::endl;
           }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
           theString += currentChunk;
 #ifdef MF_TRACE_IS_ENABLED
@@ -1349,7 +1349,7 @@ void msdlScanner::acceptAString ()
               "\"" <<
               std::endl;
           }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
           // consume the escape '\'
           fetchNextCharacter ();
@@ -1362,7 +1362,7 @@ void msdlScanner::acceptAString ()
               currentCharacterAsString () <<
               std::endl;
           }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
           switch (fCurrentCharacter) {
             case '"':
@@ -1395,7 +1395,7 @@ void msdlScanner::acceptAString ()
               "\"" <<
               std::endl;
           }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
           // starting a new chunk
           chunkStartPositionInInput = fCurrentPositionInInput;
@@ -1449,7 +1449,7 @@ void msdlScanner::acceptAString ()
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 // --------------------------------------------------------------------------
@@ -1474,7 +1474,7 @@ std::string msdlScanner::currentLocationAsString () const
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // the line indication
   std::string lineIndication;
@@ -1517,7 +1517,7 @@ std::string msdlScanner::currentLocationAsString () const
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ss <<
     lineIndication <<
@@ -1558,14 +1558,14 @@ void msdlScanner::scanAllTheInputAtOnce (
   else {
     gLog << std::endl;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (fInputIsEmpty) {
 #ifdef MF_TRACE_IS_ENABLED
     gLog <<
       "Input is empty " <<
       std::endl;
-#endif
+#endif // MF_TRACE_IS_ENABLED
   }
 
   else {
@@ -1617,7 +1617,7 @@ void msdlScanner::scanAllTheInputAtOnce (
 
           --gIndenter;
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
       }
       while (tokenKind != msdlTokenKind::k_TokenEOF); // do
     }
@@ -1653,7 +1653,7 @@ void msdlScanner::scanAllTheInputAtOnce (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 // --------------------------------------------------------------------------
@@ -1678,14 +1678,14 @@ void msdlScanner::translateAllTheInputToKeywordsLanguage (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (fInputIsEmpty) {
 #ifdef MF_TRACE_IS_ENABLED
     gLog <<
       "Input is empty " <<
       std::endl;
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     return;
   }
@@ -1757,7 +1757,7 @@ void msdlScanner::translateAllTheInputToKeywordsLanguage (
 
         --gIndenter;
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       // write current token translated to standard output
 //      gOutput <<
@@ -1788,7 +1788,7 @@ void msdlScanner::translateAllTheInputToKeywordsLanguage (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 // --------------------------------------------------------------------------
@@ -1809,14 +1809,14 @@ void msdlScanner::scanWholeInputAtOnce ()
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (fInputIsEmpty) {
 #ifdef MF_TRACE_IS_ENABLED
     gLog <<
       "Input is empty " <<
       std::endl;
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     return;
   }

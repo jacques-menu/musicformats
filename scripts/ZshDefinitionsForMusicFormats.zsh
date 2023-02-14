@@ -538,6 +538,8 @@ alias tzxb='tail -20 z_test_xml2brl.log'
 #----------------------------------------------
 
 alias xlbh='xl basic/HelloWorld.xml'
+alias xlbhf='xl basic/HelloWorld.xml -auto-output-file-name'
+alias cxlbhf='clear; xl basic/HelloWorld.xml -auto-output-file-name'
 alias ixlbh='ixl basic/HelloWorld.xml'
 alias dixlbh='dixl basic/HelloWorld.xml'
 

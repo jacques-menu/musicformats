@@ -126,4 +126,4 @@ EXP std::ostream& operator << (std::ostream& os, const S_msrSlide& elt);
 }
 
 
-#endif
+#endif // ___msrSlides___

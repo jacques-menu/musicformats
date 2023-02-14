@@ -97,4 +97,4 @@ namespace MusicFormats
 }
 
 
-#endif
+#endif // ___msrTupletElements___

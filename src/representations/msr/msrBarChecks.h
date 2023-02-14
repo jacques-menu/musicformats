@@ -134,4 +134,4 @@ EXP std::ostream& operator << (std::ostream& os, const S_msrBarCheck& elt);
 }
 
 
-#endif
+#endif // ___msrBarChecks___

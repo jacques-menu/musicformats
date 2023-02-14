@@ -65,4 +65,4 @@ typedef SMARTP<lpsrElement> S_lpsrElement;
 }
 
 
-#endif
+#endif // ___lpsrElements___

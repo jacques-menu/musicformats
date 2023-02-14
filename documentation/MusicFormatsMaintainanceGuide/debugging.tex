@@ -9,7 +9,7 @@ Debugging \mf\ can be quite time-consuming. The trace options available have bee
 
 \Function{catchSignals} at the beginning of the \functionName {main} function can be commented out in order to run a tool under a debugger.
 
-File \wae{mfEnableAbortToDebugErrorsSetting.h} contains:
+File \mflib{mfStaticSettings.h} contains:
 \begin{lstlisting}[language=CPlusPlus]
 /*
   MusicFormats Library
@@ -22,20 +22,44 @@ File \wae{mfEnableAbortToDebugErrorsSetting.h} contains:
   https://github.com/jacques-menu/musicformats
 */
 
-#ifndef ___waeEnableAbortToDebugErrors___
-#define ___waeEnableAbortToDebugErrors___
+#ifndef ___mfStaticSettings___
+#define ___mfStaticSettings___
 
+/*
+  This file groups several build-time setting that influence
+  code security and speed, as well as a couple of facilities
+*/
 
+//______________________________________________________________________________
+// uncomment the following definition if no exceptions display is desired
+#define MF_CAUGHT_EXCEPTIONS_DISPLAY_IS_ENABLED
+
+//______________________________________________________________________________
 // comment the following definition if abort on internal errors is desired
 // CAUTION: DON'T USE THIS IN PRODUCTION CODE,
-// since that could kill a session on a \Web\ server, for example
+// since that could kill a session on a web server, for example
+#define MF_ABORT_TO_DEBUG_ERRORS_IS_ENABLED
 
-#ifndef MF_ABORT_TO_DEBUG_ERRORS_IS_ENABLED
-  #define MF_ABORT_TO_DEBUG_ERRORS_IS_ENABLED
-#endif
+//______________________________________________________________________________
+// uncomment the following definition if abort on internal errors is desired
+#define MF_SANITY_CHECKS_ARE_ENABLED
+
+//______________________________________________________________________________
+// uncomment the following definition if harmonies extra options are desired
+#define MF_HARMONIES_EXTRA_IS_ENABLED
+
+  #include "oahHarmoniesExtraOah.h"
+
+//______________________________________________________________________________
+// comment the following definition if no trace is desired
+#define MF_TRACE_IS_ENABLED
+
+#ifdef MF_TRACE_IS_ENABLED
+  #include "mfTraceOah.h"
+#endif // MF_TRACE_IS_ENABLED
 
 
-#endif
+#endif // ___mfStaticSettings___
 \end{lstlisting}
 
 

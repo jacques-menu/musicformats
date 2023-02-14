@@ -38,4 +38,4 @@ msrPlacementKind msrPlacementKindFromString (
 
 }
 
-#endif
+#endif // ___msrPlacements___

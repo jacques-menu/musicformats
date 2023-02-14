@@ -65,4 +65,4 @@ EXP mfMusicformatsErrorKind convertMsdlString2musicxmlWithHandler (
 }
 
 
-#endif
+#endif // ___msdl2musicxmlInterface___

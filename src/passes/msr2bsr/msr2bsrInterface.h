@@ -39,4 +39,4 @@ EXP S_bsrScore translateMsrToBsr (
 }
 
 
-#endif
+#endif // ___msr2bsrInterface___

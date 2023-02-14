@@ -9,8 +9,8 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#ifndef ___bsrBrailleGeneration___
-#define ___bsrBrailleGeneration___
+#ifndef ___brailleGeneration___
+#define ___brailleGeneration___
 
 #include "bsrCellsLists.h"
 
@@ -411,4 +411,4 @@ EXP std::ostream& operator << (std::ostream& os, const S_bsrUTF16SmallEndianBrai
 }
 
 
-#endif
+#endif // ___brailleGeneration___

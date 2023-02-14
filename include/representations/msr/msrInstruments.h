@@ -722,4 +722,4 @@ EXP std::ostream& operator << (std::ostream& os, const S_msrDampAll& elt);
 }
 
 
-#endif
+#endif // ___msrInstruments___

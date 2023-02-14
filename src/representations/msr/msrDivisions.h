@@ -155,4 +155,4 @@ EXP std::ostream& operator << (std::ostream& os, const S_msrDivisions& elt);
 }
 
 
-#endif
+#endif // ___msrDivisions___

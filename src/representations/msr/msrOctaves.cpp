@@ -19,6 +19,8 @@
 
 #include "msrOctaves.h"
 
+#include "oahEarlyOptions.h"
+
 #include "msrOah.h"
 
 #include "oahWae.h"
@@ -490,7 +492,7 @@ msrSemiTonesPitchAndOctave::msrSemiTonesPitchAndOctave (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 msrSemiTonesPitchAndOctave::~msrSemiTonesPitchAndOctave ()
@@ -545,7 +547,7 @@ S_msrSemiTonesPitchAndOctave msrSemiTonesPitchAndOctave::createFromString (
 
       gLog << std::endl;
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (smSize == 3) {
     // found a well-formed specification,
@@ -567,7 +569,7 @@ S_msrSemiTonesPitchAndOctave msrSemiTonesPitchAndOctave::createFromString (
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     // fetch semitones pitch
     msrSemiTonesPitchKind
@@ -598,7 +600,7 @@ S_msrSemiTonesPitchAndOctave msrSemiTonesPitchAndOctave::createFromString (
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     // create the semiTonesPitchAndOctave
     result =
@@ -790,7 +792,7 @@ msrSemiTonesPitchAndAbsoluteOctave::msrSemiTonesPitchAndAbsoluteOctave (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 msrSemiTonesPitchAndAbsoluteOctave::~msrSemiTonesPitchAndAbsoluteOctave ()
@@ -892,7 +894,7 @@ msrSemiTonesPitchAndRelativeOctave::msrSemiTonesPitchAndRelativeOctave (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 msrSemiTonesPitchAndRelativeOctave::~msrSemiTonesPitchAndRelativeOctave ()
@@ -995,7 +997,7 @@ msrQuarterTonesPitchAndOctave::msrQuarterTonesPitchAndOctave (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 msrQuarterTonesPitchAndOctave::~msrQuarterTonesPitchAndOctave ()
@@ -1050,7 +1052,7 @@ S_msrQuarterTonesPitchAndOctave msrQuarterTonesPitchAndOctave::createFromString 
 
       gLog << std::endl;
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (smSize == 3) {
     // found a well-formed specification,
@@ -1072,7 +1074,7 @@ S_msrQuarterTonesPitchAndOctave msrQuarterTonesPitchAndOctave::createFromString 
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     // fetch quartertones pitch
     msrQuarterTonesPitchKind
@@ -1105,7 +1107,7 @@ S_msrQuarterTonesPitchAndOctave msrQuarterTonesPitchAndOctave::createFromString 
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     // create the quarterTonesPitchAndOctave
     result =

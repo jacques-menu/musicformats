@@ -12,6 +12,8 @@
 #ifndef ___msdlConverterOah___
 #define ___msdlConverterOah___
 
+#include "mfStaticSettings.h"
+
 #include "msrGenerationBasicTypes.h"
 
 #include "brailleGenerationOah.h"
@@ -82,7 +84,7 @@ class EXP msdlConverterOahGroup : public oahGroup
 
 #ifdef MF_TRACE_IS_ENABLED
 // JMI    void                  initializeMsdlConverterTraceOah ();
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   public:
 
@@ -121,4 +123,4 @@ EXP S_msdlConverterOahGroup createGlobalMsdlConverterOahGroup ();
 }
 
 
-#endif
+#endif // ___msdlConverterOah___

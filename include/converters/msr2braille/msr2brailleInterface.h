@@ -41,4 +41,4 @@ EXP mfMusicformatsErrorKind msrScore2brailleWithHandler (
 }
 
 
-#endif
+#endif // ___msr2brailleInterface___

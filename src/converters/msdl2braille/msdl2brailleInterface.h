@@ -63,4 +63,4 @@ EXP mfMusicformatsErrorKind convertMsdlString2brailleWithHandler (
 }
 
 
-#endif
+#endif // ___msdl2brailleInterface___

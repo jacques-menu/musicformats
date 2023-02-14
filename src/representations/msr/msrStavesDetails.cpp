@@ -166,7 +166,7 @@ S_msrStaffTuning msrStaffTuning::createStaffTuningNewbornClone ()
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
  S_msrStaffTuning
     newbornClone =
@@ -193,7 +193,7 @@ void msrStaffTuning::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrStaffTuning>*
     p =
@@ -212,7 +212,7 @@ void msrStaffTuning::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -231,7 +231,7 @@ void msrStaffTuning::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrStaffTuning>*
     p =
@@ -250,7 +250,7 @@ void msrStaffTuning::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif        
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -392,7 +392,7 @@ void msrStaffDetails::setStaffDetailsUpLinkToMeasure (
     __FILE__, __LINE__,
     measure != nullptr,
     "measure is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalTraceOahGroup->getTraceWholeNotes ()) {
@@ -408,7 +408,7 @@ void msrStaffDetails::setStaffDetailsUpLinkToMeasure (
 
     --gIndenter;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fStaffDetailsUpLinkToMeasure = measure;
 }
@@ -427,7 +427,7 @@ void msrStaffDetails::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrStaffDetails>*
     p =
@@ -446,7 +446,7 @@ void msrStaffDetails::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -465,7 +465,7 @@ void msrStaffDetails::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrStaffDetails>*
     p =
@@ -484,7 +484,7 @@ void msrStaffDetails::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif        
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }

@@ -98,7 +98,7 @@ void lpsrPitchesLanguageAtom::applyAtomWithValue (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // theString contains the language name:
   // is it in the pitches languages map?
@@ -115,7 +115,7 @@ void lpsrPitchesLanguageAtom::applyAtomWithValue (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   std::map<std::string, msrQuarterTonesPitchesLanguageKind>::const_iterator
     it =
@@ -166,7 +166,7 @@ void lpsrPitchesLanguageAtom::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_lpsrPitchesLanguageAtom>*
     p =
@@ -185,7 +185,7 @@ void lpsrPitchesLanguageAtom::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -204,7 +204,7 @@ void lpsrPitchesLanguageAtom::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_lpsrPitchesLanguageAtom>*
     p =
@@ -223,7 +223,7 @@ void lpsrPitchesLanguageAtom::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -242,7 +242,7 @@ void lpsrPitchesLanguageAtom::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 std::string lpsrPitchesLanguageAtom::asShortNamedOptionString () const
@@ -391,7 +391,7 @@ void lpsrChordsLanguageAtom::applyAtomWithValue (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // theString contains the language name:
   // is it in the chords languages map?
@@ -408,7 +408,7 @@ void lpsrChordsLanguageAtom::applyAtomWithValue (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   std::map<std::string, lpsrChordsLanguageKind>::const_iterator
     it =
@@ -457,7 +457,7 @@ void lpsrChordsLanguageAtom::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_lpsrChordsLanguageAtom>*
     p =
@@ -476,7 +476,7 @@ void lpsrChordsLanguageAtom::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -495,7 +495,7 @@ void lpsrChordsLanguageAtom::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_lpsrChordsLanguageAtom>*
     p =
@@ -514,7 +514,7 @@ void lpsrChordsLanguageAtom::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -533,7 +533,7 @@ void lpsrChordsLanguageAtom::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 std::string lpsrChordsLanguageAtom::asShortNamedOptionString () const
@@ -679,7 +679,7 @@ void lpsrStaffInstrumentNameAtom::applyAtomWithValue (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // theString contains the part rename specification
   // decipher it to extract the old and new part names
@@ -696,7 +696,7 @@ void lpsrStaffInstrumentNameAtom::applyAtomWithValue (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   std::string regularExpression (
     "[[:space:]]*(.+)[[:space:]]*"
@@ -726,7 +726,7 @@ void lpsrStaffInstrumentNameAtom::applyAtomWithValue (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (smSize == 3) {
 #ifdef MF_TRACE_IS_ENABLED
@@ -737,7 +737,7 @@ void lpsrStaffInstrumentNameAtom::applyAtomWithValue (
       } // for
       gLog << std::endl;
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
   }
 
   else {
@@ -770,7 +770,7 @@ void lpsrStaffInstrumentNameAtom::applyAtomWithValue (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // is this part name in the part renaming map?
   std::map<std::string, std::string>::iterator
@@ -810,7 +810,7 @@ void lpsrStaffInstrumentNameAtom::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_lpsrStaffInstrumentNameAtom>*
     p =
@@ -829,7 +829,7 @@ void lpsrStaffInstrumentNameAtom::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -848,7 +848,7 @@ void lpsrStaffInstrumentNameAtom::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_lpsrStaffInstrumentNameAtom>*
     p =
@@ -867,7 +867,7 @@ void lpsrStaffInstrumentNameAtom::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -886,7 +886,7 @@ void lpsrStaffInstrumentNameAtom::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 std::string lpsrStaffInstrumentNameAtom::asShortNamedOptionString () const
@@ -1105,7 +1105,7 @@ void lpsrTransposeAtom::applyAtomWithValue (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // theString contains the language name:
   // is it in the chords languages map?
@@ -1122,7 +1122,7 @@ void lpsrTransposeAtom::applyAtomWithValue (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // create the semitones pitch and octave from theString
   S_msrSemiTonesPitchAndOctave
@@ -1152,7 +1152,7 @@ void lpsrTransposeAtom::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_lpsrTransposeAtom>*
     p =
@@ -1171,7 +1171,7 @@ void lpsrTransposeAtom::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -1190,7 +1190,7 @@ void lpsrTransposeAtom::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_lpsrTransposeAtom>*
     p =
@@ -1209,7 +1209,7 @@ void lpsrTransposeAtom::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -1228,7 +1228,7 @@ void lpsrTransposeAtom::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 std::string lpsrTransposeAtom::asShortNamedOptionString () const
@@ -1403,7 +1403,7 @@ R"(Write a trace of the activity regarding Scheme functions to standard error.)"
         "fTraceSchemeFunctions",
         fTraceSchemeFunctions));
 }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 void lpsrOahGroup::initializeLpsrDisplayOptions ()
 {
@@ -2119,7 +2119,7 @@ void lpsrOahGroup::initializeLpsrOahGroup ()
   // trace and display
   // --------------------------------------
   initializeLpsrTraceOah ();
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // display
   // --------------------------------------
@@ -2197,7 +2197,7 @@ void lpsrOahGroup::enforceGroupQuietness ()
   fTraceLpsrVisitors = false;
   fTraceLpsrBlocks = false;
   fTraceSchemeFunctions = false;
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fDisplayLpsr = false;
   fDisplayLpsrFull = false;
@@ -2224,7 +2224,7 @@ void lpsrOahGroup::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_lpsrOahGroup>*
     p =
@@ -2243,7 +2243,7 @@ void lpsrOahGroup::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -2262,7 +2262,7 @@ void lpsrOahGroup::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_lpsrOahGroup>*
     p =
@@ -2281,7 +2281,7 @@ void lpsrOahGroup::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -2300,7 +2300,7 @@ void lpsrOahGroup::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //______________________________________________________________________________
@@ -2343,7 +2343,7 @@ void lpsrOahGroup::displayLpsrOahValues (int fieldWidth)
     std::endl;
 
   --gIndenter;
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // display
   // --------------------------------------
@@ -2586,7 +2586,7 @@ S_lpsrOahGroup createGlobalLpsrOahGroup ()
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // protect library against multiple initializations
   if (! gGlobalLpsrOahGroup) {

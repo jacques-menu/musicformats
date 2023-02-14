@@ -86,7 +86,7 @@ namespace MusicFormats
 //       "<!-- ----------------------------------------------------------- -->" <<
 //       std::endl << std::endl;
 //   }
-// #endif
+// #endif // MF_TRACE_IS_ENABLED
 //
 //   // has quiet mode been requested?
 //   // ------------------------------------------------------
@@ -299,7 +299,7 @@ namespace MusicFormats
 //         "\"" <<
 //         std::endl;
 //     }
-// #endif
+// #endif // MF_TRACE_IS_ENABLED
 //
 //     if (! outputFileName.size ()) {
 // #ifdef MF_TRACE_IS_ENABLED
@@ -308,7 +308,7 @@ namespace MusicFormats
 //           "xmlFile2lilypond() output goes to standard output" <<
 //           std::endl;
 //       }
-// #endif
+// #endif // MF_TRACE_IS_ENABLED
 //
 //       // create an indented output stream for the LilyPond code
 //       // to be written to outputFileStream
@@ -346,7 +346,7 @@ namespace MusicFormats
 //           "\"" <<
 //           std::endl;
 //       }
-// #endif
+// #endif // MF_TRACE_IS_ENABLED
 //
 //       // open output file
 // #ifdef MF_TRACE_IS_ENABLED
@@ -356,7 +356,7 @@ namespace MusicFormats
 // 		       gLanguage->openingLilypondFileForWriting (outputFileName) <<
 //           std::endl;
 //       }
-// #endif
+// #endif // MF_TRACE_IS_ENABLED
 //
 //       std::ofstream
 //         outputFileStream (
@@ -412,7 +412,7 @@ namespace MusicFormats
 //           gLanguage->closingLilypondFile (outputFileName) <<
 //           std::endl;
 //       }
-// #endif
+// #endif // MF_TRACE_IS_ENABLED
 //
 //       outputFileStream.close ();
 //     }
@@ -446,7 +446,7 @@ namespace MusicFormats
 //     "xmlFile2musicxml(), sxmlfile is NULL" <<
 //     std::endl;
 //   }
-// #endif
+// #endif // MF_TRACE_IS_ENABLED
 //
 //     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
 //   }
@@ -473,7 +473,7 @@ namespace MusicFormats
 //     gLog <<
 //       handlerOptionsAndArguments;
 //   }
-// #endif
+// #endif // MF_TRACE_IS_ENABLED
 //
 //   // apply early options if any
 //   // ------------------------------------------------------
@@ -495,7 +495,7 @@ namespace MusicFormats
 //       ", insiderOption: " << insiderOption <<
 //       std::endl;
 //   }
-// #endif
+// #endif // MF_TRACE_IS_ENABLED
 //
 //   // create an xml2ly insider OAH handler
 //   // ------------------------------------------------------

@@ -66,7 +66,7 @@ void lpsrBookBlockElement::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_lpsrBookBlockElement>*
     p =
@@ -85,7 +85,7 @@ void lpsrBookBlockElement::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -104,7 +104,7 @@ void lpsrBookBlockElement::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_lpsrBookBlockElement>*
     p =
@@ -123,7 +123,7 @@ void lpsrBookBlockElement::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -142,7 +142,7 @@ void lpsrBookBlockElement::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   {
     // browse the book block element parallel music
@@ -174,7 +174,7 @@ void lpsrBookBlockElement::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void lpsrBookBlockElement::print (std::ostream& os) const
@@ -268,7 +268,7 @@ void lpsrScoreBlock::appendPartGroupBlockToScoreBlock (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fBookBlockElementParallelMusicBlock->
     appendPartGroupBlockToParallelMusicBLock (
@@ -295,7 +295,7 @@ void lpsrScoreBlock::appendVoiceUseToParallelMusicBLock (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fBookBlockElementParallelMusicBlock->
     addElementToParallelMusicBLock (voiceUse);
@@ -320,7 +320,7 @@ void lpsrScoreBlock::appendLyricsUseToParallelMusicBLock (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fBookBlockElementParallelMusicBlock->
     addElementToParallelMusicBLock (lyricsUse);
@@ -341,7 +341,7 @@ void lpsrScoreBlock::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_lpsrScoreBlock>*
     p =
@@ -360,7 +360,7 @@ void lpsrScoreBlock::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -379,7 +379,7 @@ void lpsrScoreBlock::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_lpsrScoreBlock>*
     p =
@@ -398,7 +398,7 @@ void lpsrScoreBlock::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -417,7 +417,7 @@ void lpsrScoreBlock::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   {
     // browse the score block parallel music
@@ -460,7 +460,7 @@ void lpsrScoreBlock::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void lpsrScoreBlock::print (std::ostream& os) const
@@ -533,7 +533,7 @@ void lpsrBookPartBlock::appendPartGroupBlockToBookPartBlock (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fBookBlockElementParallelMusicBlock->
     appendPartGroupBlockToParallelMusicBLock (
@@ -560,7 +560,7 @@ void lpsrBookPartBlock::appendVoiceUseToParallelMusicBLock (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fBookBlockElementParallelMusicBlock->
     addElementToParallelMusicBLock (voiceUse);
@@ -585,7 +585,7 @@ void lpsrBookPartBlock::appendLyricsUseToParallelMusicBLock (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fBookBlockElementParallelMusicBlock->
     addElementToParallelMusicBLock (lyricsUse);
@@ -606,7 +606,7 @@ void lpsrBookPartBlock::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_lpsrBookPartBlock>*
     p =
@@ -625,7 +625,7 @@ void lpsrBookPartBlock::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -644,7 +644,7 @@ void lpsrBookPartBlock::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_lpsrBookPartBlock>*
     p =
@@ -663,7 +663,7 @@ void lpsrBookPartBlock::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -682,7 +682,7 @@ void lpsrBookPartBlock::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   {
     // browse the bookpart block parallel music
@@ -702,7 +702,7 @@ void lpsrBookPartBlock::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void lpsrBookPartBlock::print (std::ostream& os) const
@@ -777,7 +777,7 @@ void lpsrBookBlock::appendPartGroupBlockToBlock (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fBookBlockElementParallelMusicBlock->
     appendPartGroupBlockToParallelMusicBLock (
@@ -805,7 +805,7 @@ void lpsrBookBlock::appendBookBlockElementToBookBlockElementsList (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 */
   fBookBlockElementsList.push_back (
       bookBlockElement);
@@ -828,7 +828,7 @@ void lpsrBookBlock::appendLpsrScoreBlockToBookBlockElementsList (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   appendBookBlockElementToBookBlockElementsList (
     scoreBlock);
@@ -851,7 +851,7 @@ void lpsrBookBlock::appendLpsrBookPartBlockToBookBlockElementsList (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   appendBookBlockElementToBookBlockElementsList (
       bookPartBlock);
@@ -875,7 +875,7 @@ void lpsrBookBlock::appendVoiceUseToParallelMusicBLock (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fBookBlockElementParallelMusicBlock->
     addElementToParallelMusicBLock (voiceUse);
@@ -900,7 +900,7 @@ void lpsrBookBlock::appendLyricsUseToParallelMusicBLock (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fBookBlockElementParallelMusicBlock->
     addElementToParallelMusicBLock (lyricsUse);
@@ -921,7 +921,7 @@ void lpsrBookBlock::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_lpsrBookBlock>*
     p =
@@ -940,7 +940,7 @@ void lpsrBookBlock::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -959,7 +959,7 @@ void lpsrBookBlock::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_lpsrBookBlock>*
     p =
@@ -978,7 +978,7 @@ void lpsrBookBlock::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -997,7 +997,7 @@ void lpsrBookBlock::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (fBookBlockHeader) {
     // browse the book block header
@@ -1033,7 +1033,7 @@ void lpsrBookBlock::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void lpsrBookBlock::print (std::ostream& os) const

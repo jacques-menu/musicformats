@@ -379,4 +379,4 @@ EXP std::ostream& operator << (std::ostream& os, const S_msrWedge& elt);
 }
 
 
-#endif
+#endif // ___msrDynamics___

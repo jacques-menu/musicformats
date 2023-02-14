@@ -199,4 +199,4 @@ EXP std::ostream& operator << (std::ostream& os, const S_msrSpanner& elt);
 }
 
 
-#endif
+#endif // ___msrSpanners___

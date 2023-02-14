@@ -21,6 +21,7 @@
 
 namespace MusicFormats
 {
+
 //_______________________________________________________________________________
 class EXP msr2brailleInsiderHandler : public oahInsiderHandler
 {
@@ -208,4 +209,4 @@ S_msr2brailleInsiderOahGroup createGlobalMrailleGenerationOahGroup (
 }
 
 
-#endif
+#endif // ___msr2brailleInsiderHandler___

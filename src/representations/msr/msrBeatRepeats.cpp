@@ -62,7 +62,7 @@ msrBeatRepeatElement::msrBeatRepeatElement (
     __FILE__, __LINE__,
     upLinkToBeatRepeat != nullptr,
     "upLinkToBeatRepeat is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fBeatRepeatElementUpLinkToBeatRepeat = upLinkToBeatRepeat;
 }
@@ -90,7 +90,7 @@ void msrBeatRepeatElement::appendSegmentToBeatRepeatElementsList ( // JMI ???
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
@@ -98,7 +98,7 @@ void msrBeatRepeatElement::appendSegmentToBeatRepeatElementsList ( // JMI ???
     __FILE__, __LINE__,
     segment != nullptr,
     "segment is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fBeatRepeatElementsList.push_back (segment);
 }
@@ -123,7 +123,7 @@ void msrBeatRepeatElement::appendBeatRepeatToBeatRepeatElementsList (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
@@ -131,7 +131,7 @@ void msrBeatRepeatElement::appendBeatRepeatToBeatRepeatElementsList (
     __FILE__, __LINE__,
     beatRepeat != nullptr,
     "beatRepeat is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fBeatRepeatElementsList.push_back (beatRepeat);
 }
@@ -156,7 +156,7 @@ void msrBeatRepeatElement::appendVoiceElementToBeatRepeatElementsList (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
@@ -164,7 +164,7 @@ void msrBeatRepeatElement::appendVoiceElementToBeatRepeatElementsList (
     __FILE__, __LINE__,
     voiceElement != nullptr,
     "voiceElement is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fBeatRepeatElementsList.push_back (voiceElement);
 }
@@ -264,7 +264,7 @@ void msrBeatRepeatElement::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrBeatRepeatElement>*
     p =
@@ -283,7 +283,7 @@ void msrBeatRepeatElement::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -302,7 +302,7 @@ void msrBeatRepeatElement::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrBeatRepeatElement>*
     p =
@@ -321,7 +321,7 @@ void msrBeatRepeatElement::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -510,7 +510,7 @@ msrBeatRepeatPattern::msrBeatRepeatPattern (
     __FILE__, __LINE__,
     upLinkToBeatRepeat != nullptr,
     "upLinkToBeatRepeat is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fUpLinkToBeatRepeat = upLinkToBeatRepeat;
 }
@@ -537,7 +537,7 @@ void msrBeatRepeatPattern::setBeatRepeatPatternSegment (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
@@ -545,7 +545,7 @@ void msrBeatRepeatPattern::setBeatRepeatPatternSegment (
     __FILE__, __LINE__,
     beatRepeatPatternSegment != nullptr,
     "beatRepeatPatternSegment is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fBeatRepeatPatternSegment =
     beatRepeatPatternSegment;
@@ -581,7 +581,7 @@ void msrBeatRepeatPattern::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrBeatRepeatPattern>*
     p =
@@ -600,7 +600,7 @@ void msrBeatRepeatPattern::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -619,7 +619,7 @@ void msrBeatRepeatPattern::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrBeatRepeatPattern>*
     p =
@@ -638,7 +638,7 @@ void msrBeatRepeatPattern::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -657,7 +657,7 @@ void msrBeatRepeatPattern::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (fBeatRepeatPatternSegment) {
     // browse the pattern segment
@@ -755,7 +755,7 @@ msrBeatRepeatReplicas::msrBeatRepeatReplicas (
     __FILE__, __LINE__,
     upLinkToBeatRepeat != nullptr,
     "upLinkToBeatRepeat is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fUpLinkToBeatRepeat = upLinkToBeatRepeat;
 }
@@ -782,7 +782,7 @@ void msrBeatRepeatReplicas::setBeatRepeatReplicasSegment (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
@@ -790,7 +790,7 @@ void msrBeatRepeatReplicas::setBeatRepeatReplicasSegment (
     __FILE__, __LINE__,
     beatRepeatReplicasSegment != nullptr,
     "beatRepeatReplicasSegment is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fBeatRepeatReplicasSegment =
     beatRepeatReplicasSegment;
@@ -826,7 +826,7 @@ void msrBeatRepeatReplicas::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrBeatRepeatReplicas>*
     p =
@@ -845,7 +845,7 @@ void msrBeatRepeatReplicas::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -864,7 +864,7 @@ void msrBeatRepeatReplicas::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrBeatRepeatReplicas>*
     p =
@@ -883,7 +883,7 @@ void msrBeatRepeatReplicas::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -902,7 +902,7 @@ void msrBeatRepeatReplicas::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (fBeatRepeatReplicasSegment) {
   // browse the replicas segment
@@ -1006,7 +1006,7 @@ msrBeatRepeat::msrBeatRepeat (
     __FILE__, __LINE__,
     beatRepeatMeasuresNumber > 0,
     "beatRepeatMeasuresNumber is not positive");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fBeatRepeatMeasuresNumber = beatRepeatMeasuresNumber;
 
@@ -1016,7 +1016,7 @@ msrBeatRepeat::msrBeatRepeat (
     __FILE__, __LINE__,
     beatRepeatSlashesNumber > 0,
     "beatRepeatSlashesNumber is not positive");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fBeatRepeatSlashesNumber  = beatRepeatSlashesNumber;
 
@@ -1047,7 +1047,7 @@ S_msrBeatRepeat msrBeatRepeat::createBeatRepeatNewbornClone (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
@@ -1055,7 +1055,7 @@ S_msrBeatRepeat msrBeatRepeat::createBeatRepeatNewbornClone (
     __FILE__, __LINE__,
     containingVoice != nullptr,
     "containingVoice is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   S_msrBeatRepeat
     newbornClone =
@@ -1088,7 +1088,7 @@ void msrBeatRepeat::setBeatRepeatPattern (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
@@ -1096,7 +1096,7 @@ void msrBeatRepeat::setBeatRepeatPattern (
     __FILE__, __LINE__,
     beatRepeatPattern != nullptr,
     "beatRepeatPattern is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fBeatRepeatPattern = beatRepeatPattern;
 
@@ -1125,7 +1125,7 @@ void msrBeatRepeat::setBeatRepeatReplicas (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
@@ -1133,7 +1133,7 @@ void msrBeatRepeat::setBeatRepeatReplicas (
     __FILE__, __LINE__,
     beatRepeatReplicas != nullptr,
     "beatRepeatReplicas is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fBeatRepeatReplicas = beatRepeatReplicas;
 
@@ -1153,7 +1153,7 @@ int msrBeatRepeat::fetchBeatRepeatReplicasNumber () const
     __FILE__, __LINE__,
     patternMeasuresNumber > 0,
     "patternMeasuresNumber is not positive");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   return
     fetchBeatRepeatReplicasMeasuresNumber ()
@@ -1169,7 +1169,7 @@ int msrBeatRepeat::fetchBeatRepeatPatternMeasuresNumber () const
     __FILE__, __LINE__,
     fBeatRepeatPattern != nullptr,
     "fBeatRepeatPattern is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   return
     fBeatRepeatPattern->
@@ -1184,7 +1184,7 @@ int msrBeatRepeat::fetchBeatRepeatReplicasMeasuresNumber () const
     __FILE__, __LINE__,
     fBeatRepeatReplicas != nullptr,
     "fBeatRepeatReplicas is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   return
     fBeatRepeatReplicas->
@@ -1205,7 +1205,7 @@ void msrBeatRepeat::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrBeatRepeat>*
     p =
@@ -1224,7 +1224,7 @@ void msrBeatRepeat::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -1243,7 +1243,7 @@ void msrBeatRepeat::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrBeatRepeat>*
     p =
@@ -1262,7 +1262,7 @@ void msrBeatRepeat::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -1281,7 +1281,7 @@ void msrBeatRepeat::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (fBeatRepeatPattern) {
   // browse the measdure repeat pattern
@@ -1310,7 +1310,7 @@ void msrBeatRepeat::browseData (basevisitor* v)
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
   }
 
   if (fBeatRepeatReplicas) {
@@ -1485,7 +1485,7 @@ void msrBeatRepeat::print (std::ostream& os) const
         fCurrentBeatRepeatBuildPhaseKind) <<
       std::endl;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // print the beat repeat pattern
   if (! fBeatRepeatPattern) {

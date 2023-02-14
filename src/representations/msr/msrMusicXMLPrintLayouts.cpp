@@ -73,7 +73,7 @@ msrMusicXMLPrintLayout::msrMusicXMLPrintLayout (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fStaffSpacing = -1;
 
@@ -109,7 +109,7 @@ void msrMusicXMLPrintLayout::setMusicXMLPrintLayoutUpLinkToMeasure (
     __FILE__, __LINE__,
     measure != nullptr,
     "measure is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalTraceOahGroup->getTraceWholeNotes ()) {
@@ -125,7 +125,7 @@ void msrMusicXMLPrintLayout::setMusicXMLPrintLayoutUpLinkToMeasure (
 
     --gIndenter;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fMusicXMLPrintLayoutUpLinkToMeasure = measure;
 }
@@ -149,7 +149,7 @@ void msrMusicXMLPrintLayout::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrMusicXMLPrintLayout>*
     p =
@@ -168,7 +168,7 @@ void msrMusicXMLPrintLayout::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -187,7 +187,7 @@ void msrMusicXMLPrintLayout::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrMusicXMLPrintLayout>*
     p =
@@ -206,7 +206,7 @@ void msrMusicXMLPrintLayout::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif        
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }

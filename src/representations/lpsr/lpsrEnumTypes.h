@@ -205,4 +205,4 @@ void initializeLpsrLyricsDurationsKindsMap ();
 }
 
 
-#endif
+#endif // ___lpsrEnumTypes___

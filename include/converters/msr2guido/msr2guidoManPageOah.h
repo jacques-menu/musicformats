@@ -12,6 +12,8 @@
 #ifndef ___msr2guidoManPageOah___
 #define ___msr2guidoManPageOah___
 
+#include "mfStaticSettings.h"
+
 #include "oahVisitor.h"
 
 #include "msr2guidoOah2manPage.h"
@@ -152,7 +154,7 @@ class EXP msr2guidoManPageOahGroup : public oahGroup
 
 #ifdef MF_TRACE_IS_ENABLED
     void                  initializeManPageTraceOah ();
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   public:
 
@@ -194,4 +196,4 @@ EXP S_msr2guidoManPageOahGroup createGlobalMsr2guidoManPageOahGroupHandling (
 }
 
 
-#endif
+#endif // ___msr2guidoManPageOah___

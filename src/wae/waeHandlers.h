@@ -16,6 +16,8 @@
 
 #include "smartpointer.h"
 
+#include "mfStaticSettings.h"
+
 #include "mfExceptions.h"
 
 
@@ -147,7 +149,7 @@ class EXP waeHandler : public smartable
                             const std::string& inputSourceName,
                             int                inputLineNumber,
                             const std::string& message);
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     // print
     // ------------------------------------------------------
@@ -181,4 +183,4 @@ EXP void initializeWAE ();
 }
 
 
-#endif
+#endif // ___waeHandlers___

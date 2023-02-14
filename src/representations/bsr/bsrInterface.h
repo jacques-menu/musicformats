@@ -57,4 +57,4 @@ EXP void displayBsrScoreFull (
 }
 
 
-#endif
+#endif // ___bsrInterface___

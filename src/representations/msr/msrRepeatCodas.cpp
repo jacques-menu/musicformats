@@ -58,7 +58,7 @@ msrRepeatCoda::msrRepeatCoda (
     __FILE__, __LINE__,
     repeatCodaSegment != nullptr,
     "repeatCodaSegment is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fRepeatCodaSegment = repeatCodaSegment;
 
@@ -68,7 +68,7 @@ msrRepeatCoda::msrRepeatCoda (
     __FILE__, __LINE__,
     upLinkToRepeat != nullptr,
     "upLinkToRepeat is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fRepeatCodaUpLinkToRepeat = upLinkToRepeat;
 }
@@ -92,7 +92,7 @@ S_msrRepeatCoda msrRepeatCoda::createRepeatCodaNewbornClone (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
@@ -100,7 +100,7 @@ S_msrRepeatCoda msrRepeatCoda::createRepeatCodaNewbornClone (
     __FILE__, __LINE__,
     containingRepeat != nullptr,
     "containingRepeat is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   S_msrRepeatCoda
     newbornClone = 0; // JMI
@@ -136,7 +136,7 @@ S_msrRepeatCoda msrRepeatCoda::createRepeatCodaDeepClone (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
@@ -144,7 +144,7 @@ S_msrRepeatCoda msrRepeatCoda::createRepeatCodaDeepClone (
     __FILE__, __LINE__,
     containingRepeat != nullptr,
     "containingRepeat is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   S_msrRepeatCoda
     deepClone = nullptr; // JMI v0.9.66
@@ -194,7 +194,7 @@ void msrRepeatCoda::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrRepeatCoda>*
     p =
@@ -213,7 +213,7 @@ void msrRepeatCoda::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -232,7 +232,7 @@ void msrRepeatCoda::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrRepeatCoda>*
     p =
@@ -251,7 +251,7 @@ void msrRepeatCoda::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif        
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }

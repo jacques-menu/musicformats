@@ -46,6 +46,7 @@
 
 namespace MusicFormats
 {
+
 //_______________________________________________________________________________
 S_msrScore translateMxsrToMsrSkeleton (
   Sxmlelement        theMxsr,
@@ -59,7 +60,7 @@ S_msrScore translateMxsrToMsrSkeleton (
     __FILE__, __LINE__,
     theMxsr != nullptr,
     "translateMxsrToMsrSkeleton(): theMxsr is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // start the clock
   clock_t startClock = clock ();
@@ -88,7 +89,7 @@ S_msrScore translateMxsrToMsrSkeleton (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   S_msrScore scoreSkeleton;
 
@@ -167,7 +168,7 @@ S_msrScore translateMxsrToMsrSkeleton (
 //     __FILE__, __LINE__,
 //     theMsrScore != nullptr,
 //     "theMsrScore is null");
-// #endif
+// #endif // MF_SANITY_CHECKS_ARE_ENABLED
 //
 //   // start the clock
 //   clock_t startClock = clock ();

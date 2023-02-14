@@ -12,10 +12,9 @@
 #ifndef ___msrElementsBase___
 #define ___msrElementsBase___
 
-
 // #ifdef WIN32
 // #pragma warning (disable : 4251 4275)
-// #endif
+// #endif // WIN32
 
 namespace MusicXML2
 {
@@ -38,4 +37,4 @@ template<class C> class msrElementsBaseVisitor : virtual public msrElementsBase
 }
 
 
-#endif
+#endif // ___msrElementsBase___

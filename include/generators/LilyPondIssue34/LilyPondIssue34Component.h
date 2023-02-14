@@ -27,5 +27,5 @@ S_mfcGeneratorComponent EXP createLilyPondIssue34GeneratorComponent ();
 }
 
 
-#endif
+#endif // ___LilyPondIssue34Component___
 

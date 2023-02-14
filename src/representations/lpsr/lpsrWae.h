@@ -54,4 +54,4 @@ EXP void lpsrInternalError (
 }
 
 
-#endif
+#endif // ___lpsrWae___

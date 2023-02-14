@@ -92,4 +92,4 @@ EXP void msrInternalError (
 }
 
 
-#endif
+#endif // ___msrWae___

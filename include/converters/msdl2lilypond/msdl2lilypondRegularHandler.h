@@ -19,6 +19,7 @@
 
 namespace MusicFormats
 {
+
 //_______________________________________________________________________________
 class EXP msdl2lilypondRegularHandler : public oahRegularHandler
 /*
@@ -178,4 +179,4 @@ EXP std::ostream& operator << (std::ostream& os, const S_msdl2lilypondRegularHan
 }
 
 
-#endif
+#endif // ___msdl2lilypondRegularHandler___

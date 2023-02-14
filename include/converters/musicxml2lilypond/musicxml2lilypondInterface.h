@@ -50,4 +50,4 @@ EXP mfMusicformatsErrorKind convertMusicxmlString2lilypondWithHandler (
 
 }
 
-#endif
+#endif // ___musicxml2lilypondInterface___

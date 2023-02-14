@@ -85,7 +85,7 @@ msdl2brailleRegularHandler::msdl2brailleRegularHandler (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 msdl2brailleRegularHandler::~msdl2brailleRegularHandler ()
@@ -107,7 +107,7 @@ void msdl2brailleRegularHandler::createRegularHandlerGroups ()
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   createInformationsRegularGroup ();
 
@@ -177,7 +177,7 @@ void msdl2brailleRegularHandler::createRegularHandlerGroups ()
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void msdl2brailleRegularHandler::createOahRegularGroup ()
@@ -216,7 +216,7 @@ void msdl2brailleRegularHandler::createOahRegularGroup ()
 #ifdef MF_TRACE_IS_ENABLED
   registerAtomInRegularSubgroup (K_TRACE_EARLY_OPTIONS_OPTION_LONG_NAME, subGroup);
   registerAtomInRegularSubgroup (K_OAH_VERBOSE_MODE_OPTION_LONG_NAME, subGroup);
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   registerAtomInRegularSubgroup ("help", subGroup);
   registerAtomInRegularSubgroup ("help-summary", subGroup);
@@ -272,7 +272,7 @@ void msdl2brailleRegularHandler::createOahRegularGroup ()
   registerAtomInRegularSubgroup (K_TRACE_ONLY_PASS_OPTION_LONG_NAME, subGroup);
 
   registerAtomInRegularSubgroup ("trace-bsr", subGroup);
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void msdl2brailleRegularHandler::createInformationsRegularGroup ()
@@ -913,7 +913,7 @@ void msdl2brailleRegularHandler::createChordsRegularGroup ()
 
 #ifdef MF_TRACE_IS_ENABLED
   registerAtomInRegularSubgroup ("trace-chords", subGroup);
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void msdl2brailleRegularHandler::createTiesRegularGroup ()
@@ -1104,7 +1104,7 @@ void msdl2brailleRegularHandler::createTupletsRegularGroup ()
 
 #ifdef MF_TRACE_IS_ENABLED
   registerAtomInRegularSubgroup ("trace-tuplets", subGroup);
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   registerAtomInRegularSubgroup ("display-tuplets", subGroup);
 }
@@ -1316,7 +1316,7 @@ void msdl2brailleRegularHandler::checkOptionsAndArguments () const
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   checkSingleInputSourceInArgumentsVector ();
 }

@@ -57,4 +57,4 @@ template <typename T> class   lpsrBrowser : public browser<T>
 }
 
 
-#endif
+#endif // ___lpsrBrowsers___

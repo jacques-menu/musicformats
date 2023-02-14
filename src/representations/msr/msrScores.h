@@ -425,4 +425,4 @@ EXP std::ostream& operator << (std::ostream& os, const S_msrScore& elt);
 
 }
 
-#endif
+#endif // ___msrScores___

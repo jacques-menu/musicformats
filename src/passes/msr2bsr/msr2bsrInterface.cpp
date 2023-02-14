@@ -45,6 +45,7 @@
 
 namespace MusicFormats
 {
+
 //_______________________________________________________________________________
 S_bsrScore translateMsrToBsr (
   S_msrScore         originalMsrScore,
@@ -59,7 +60,7 @@ S_bsrScore translateMsrToBsr (
     __FILE__, __LINE__,
     originalMsrScore != nullptr,
     "originalMsrScore is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // start the clock
   clock_t startClock = clock ();
@@ -88,7 +89,7 @@ S_bsrScore translateMsrToBsr (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // the msr2bsrTranslator
   msr2bsrTranslator

@@ -233,4 +233,4 @@ EXP std::ostream& operator << (std::ostream& os, const S_msrMarginsGroup& elt);
 
 }
 
-#endif
+#endif // ___msrMargins___

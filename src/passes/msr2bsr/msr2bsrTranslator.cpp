@@ -93,7 +93,7 @@ S_bsrScore msr2bsrTranslator::translateMsrToBsr (
     __FILE__, __LINE__,
     theMsrScore != nullptr,
     "theMsrScore is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // the MSR score we're visiting
   fVisitedMsrScore = theMsrScore;
@@ -160,7 +160,7 @@ void msr2bsrTranslator::visitStart (S_msrLineBreak& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // create the line
   fCurrentLine =
@@ -193,7 +193,7 @@ void msr2bsrTranslator::visitEnd (S_msrLineBreak& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -215,7 +215,7 @@ void msr2bsrTranslator::visitStart (S_msrPageBreak& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fCurrentPage =
     bsrPage::create (
@@ -242,7 +242,7 @@ void msr2bsrTranslator::visitEnd (S_msrPageBreak& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -264,7 +264,7 @@ void msr2bsrTranslator::visitStart (S_msrScore& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // get the worktitle if any
   S_msrIdentification
@@ -378,7 +378,7 @@ void msr2bsrTranslator::visitEnd (S_msrScore& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 /*
   if (fWorkCreditTypeTitleKnown && fMovementTitleKnown) {
@@ -465,7 +465,7 @@ void msr2bsrTranslator::visitStart (S_msrPartGroup& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fCurrentPartGroup = elt;
 }
@@ -486,7 +486,7 @@ void msr2bsrTranslator::visitEnd (S_msrPartGroup& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -495,7 +495,7 @@ void msr2bsrTranslator::visitStart (S_msrPart& elt)
 #ifdef MF_TRACE_IS_ENABLED
   int inputLineNumber =
     elt->getInputLineNumber ();
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   std::string
     partCombinedName =
@@ -515,7 +515,7 @@ void msr2bsrTranslator::visitStart (S_msrPart& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalTraceOahGroup->getTraceParts ()) {
@@ -531,7 +531,7 @@ void msr2bsrTranslator::visitStart (S_msrPart& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -557,7 +557,7 @@ void msr2bsrTranslator::visitEnd (S_msrPart& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   --gIndenter;
 }
@@ -578,7 +578,7 @@ void msr2bsrTranslator::visitStart (S_msrStaffTuning& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // create a staff tuning clone
   fCurrentStaffTuning = elt;
@@ -600,7 +600,7 @@ void msr2bsrTranslator::visitStart (S_msrStaffDetails& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fCurrentStaffTuning = nullptr;
 }
@@ -620,7 +620,7 @@ void msr2bsrTranslator::visitEnd (S_msrStaffDetails& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -640,7 +640,7 @@ void msr2bsrTranslator::visitStart (S_msrStaff& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -665,7 +665,7 @@ void msr2bsrTranslator::visitEnd (S_msrStaff& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -688,7 +688,7 @@ void msr2bsrTranslator::visitStart (S_msrVoice& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fCurrentVoice = elt;
 
@@ -715,7 +715,7 @@ void msr2bsrTranslator::visitEnd (S_msrVoice& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -735,7 +735,7 @@ void msr2bsrTranslator::visitStart (S_msrVoiceStaffChange& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -757,7 +757,7 @@ void msr2bsrTranslator::visitStart (S_msrBarLine& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalTraceOahGroup->getTraceBarLines ()) {
@@ -773,7 +773,7 @@ void msr2bsrTranslator::visitStart (S_msrBarLine& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // get the MSR barLine attributes
 
@@ -864,7 +864,7 @@ void msr2bsrTranslator::visitStart (S_msrMeasure& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // create a measure
   fCurrentMeasure =
@@ -897,7 +897,7 @@ void msr2bsrTranslator::visitEnd (S_msrMeasure& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   std::string
     measureNumber =
@@ -923,7 +923,7 @@ void msr2bsrTranslator::visitStart (S_msrClef& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (gGlobalMsr2bsrOahGroup->getIncludeClefs ()) {
     bsrClefKind bClefKind = bsrClefKind::kClefKindNone;
@@ -1036,7 +1036,7 @@ void msr2bsrTranslator::visitEnd (S_msrClef& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -1058,7 +1058,7 @@ void msr2bsrTranslator::visitStart (S_msrKey& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // get MSR key attributes
 
@@ -1571,7 +1571,7 @@ void msr2bsrTranslator::visitStart (S_msrKey& elt)
        msrSemiTonesPitchKindAsString (mSemiTonesPitchKind) <<
        std::endl;
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
   }
   else {
     S_bsrKey
@@ -1610,7 +1610,7 @@ void msr2bsrTranslator::visitEnd (S_msrKey& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -1632,7 +1632,7 @@ void msr2bsrTranslator::visitStart (S_msrTimeSignature& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // get MSR time attributes
 
@@ -1780,7 +1780,7 @@ void msr2bsrTranslator::visitEnd (S_msrTimeSignature& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -1802,7 +1802,7 @@ void msr2bsrTranslator::visitStart (S_msrTempo& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (! gGlobalMsr2bsrOahGroup->getNoTempos ()) {
     // create the BSR tempo
@@ -1833,7 +1833,7 @@ void msr2bsrTranslator::visitEnd (S_msrTempo& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -1959,7 +1959,7 @@ bsrNoteOctaveIsNeeded msr2bsrTranslator::brailleOctaveMarkInNeeded (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   std::stringstream ss;
 
@@ -2692,7 +2692,7 @@ void msr2bsrTranslator::createBsrForNote (const S_msrNote& note)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (false && noteValueSizeKind != fCurrentNoteValueSizeKind) { // JMI
     gLog <<
@@ -2728,7 +2728,7 @@ void msr2bsrTranslator::visitStart (S_msrNote& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   createBsrForNote (elt);
 
@@ -2754,7 +2754,7 @@ void msr2bsrTranslator::visitEnd (S_msrNote& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -2773,7 +2773,7 @@ void msr2bsrTranslator::visitStart (S_msrDynamic& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // create the dynamic
   S_bsrDynamic
@@ -2802,7 +2802,7 @@ void msr2bsrTranslator::visitEnd (S_msrDynamic& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 /*
@@ -2822,7 +2822,7 @@ void msr2bsrTranslator::visitStart (S_msrIdentification& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -2853,7 +2853,7 @@ void msr2bsrTranslator::visitEnd (S_msrIdentification& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 */
 
@@ -2874,7 +2874,7 @@ void msr2bsrTranslator::visitStart (S_msrCredit& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fCurrentCredit = elt;
 
@@ -2899,7 +2899,7 @@ void msr2bsrTranslator::visitEnd (S_msrCredit& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fCurrentCredit = nullptr;
 }
@@ -2919,7 +2919,7 @@ void msr2bsrTranslator::visitStart (S_msrCreditWords& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // don't append it to the current credit, since the latter is no clone
   / * JMI
@@ -2944,7 +2944,7 @@ void msr2bsrTranslator::visitEnd (S_msrCreditWords& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -2964,7 +2964,7 @@ void msr2bsrTranslator::visitStart (S_msrSegment& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 / * JMI
 
@@ -3006,7 +3006,7 @@ void msr2bsrTranslator::visitEnd (S_msrSegment& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // forget current segment clone
   fCurrentSegmentClonesStack.pop ();
@@ -3032,7 +3032,7 @@ void msr2bsrTranslator::visitStart (S_msrHarmony& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // create a harmony newborn clone
   fCurrentHarmonyClone =
@@ -3085,7 +3085,7 @@ void msr2bsrTranslator::visitStart (S_msrHarmonyDegree& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // append the harmony degree to the current harmony clone
   fCurrentHarmonyClone->
@@ -3110,7 +3110,7 @@ void msr2bsrTranslator::visitEnd (S_msrHarmony& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -3131,7 +3131,7 @@ void msr2bsrTranslator::visitStart (S_msrFrame& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (fOnGoingNote) {
     // register the frame in the current non-grace note clone
@@ -3158,7 +3158,7 @@ void msr2bsrTranslator::visitStart (S_msrFiguredBass& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // create a deep clone of the figured bass
   fCurrentFiguredBass =
@@ -3207,7 +3207,7 @@ void msr2bsrTranslator::visitStart (S_msrBassFigure& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // append the bass figure to the current figured bass
   fCurrentFiguredBass->
@@ -3232,7 +3232,7 @@ void msr2bsrTranslator::visitEnd (S_msrFiguredBass& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fCurrentFiguredBass = nullptr;
 }
@@ -3263,7 +3263,7 @@ void msr2bsrTranslator::visitStart (S_msrMeasure& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 / * JMI
   {
@@ -3295,7 +3295,7 @@ void msr2bsrTranslator::visitStart (S_msrMeasure& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // measure 1 is created by default initially ??? JMI
 
@@ -3372,7 +3372,7 @@ void msr2bsrTranslator::finalizeCurrentMeasureClone (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   msrMeasureKind
     measureKind =
@@ -3452,7 +3452,7 @@ void msr2bsrTranslator::visitEnd (S_msrMeasure& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   std::string
     measureNumber =
@@ -3562,7 +3562,7 @@ void msr2bsrTranslator::visitStart (S_msrStanza& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -3606,7 +3606,7 @@ void msr2bsrTranslator::visitEnd (S_msrStanza& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // forget about this stanza
   fCurrentStanzaClone = nullptr;
@@ -3633,7 +3633,7 @@ void msr2bsrTranslator::visitStart (S_msrSyllable& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // create the syllable clone
   fCurrentSyllableClone =
@@ -3682,7 +3682,7 @@ void msr2bsrTranslator::visitStart (S_msrSyllable& elt)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
         S_msrWords
           words =
@@ -3713,7 +3713,7 @@ void msr2bsrTranslator::visitStart (S_msrSyllable& elt)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         fCurrentNonGraceNoteClone->
           appendWordsToNote (
             words);
@@ -3755,7 +3755,7 @@ void msr2bsrTranslator::visitEnd (S_msrSyllable& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 */
 
@@ -3776,7 +3776,7 @@ void msr2bsrTranslator::visitStart (S_msrTransposition& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // append transpose to voice clone
   fCurrentVoiceClone->
@@ -3798,7 +3798,7 @@ void msr2bsrTranslator::visitEnd (S_msrTransposition& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -3817,7 +3817,7 @@ void msr2bsrTranslator::visitStart (S_msrRehearsalMark& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fCurrentVoiceClone->
     appendRehearsalMarkToVoice (elt);
@@ -3838,7 +3838,7 @@ void msr2bsrTranslator::visitEnd (S_msrRehearsalMark& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -3857,7 +3857,7 @@ void msr2bsrTranslator::visitStart (S_msrArticulation& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (fOnGoingNote) {
     fCurrentNonGraceNoteClone->
@@ -3884,7 +3884,7 @@ void msr2bsrTranslator::visitEnd (S_msrArticulation& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -3903,7 +3903,7 @@ void msr2bsrTranslator::visitStart (S_msrFermata& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // a fermata is an articulation
 
@@ -3933,7 +3933,7 @@ void msr2bsrTranslator::visitStart (S_msrArpeggiato& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // an arpeggiato is an articulation
 
@@ -3963,7 +3963,7 @@ void msr2bsrTranslator::visitStart (S_msrNonArpeggiato& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // an nonArpeggiato is an articulation
 
@@ -3993,7 +3993,7 @@ void msr2bsrTranslator::visitStart (S_msrTechnical& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (fOnGoingNote) {
     fCurrentNonGraceNoteClone->
@@ -4060,7 +4060,7 @@ void msr2bsrTranslator::visitEnd (S_msrTechnical& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -4079,7 +4079,7 @@ void msr2bsrTranslator::visitStart (S_msrTechnicalWithInteger& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (fOnGoingNote) {
     fCurrentNonGraceNoteClone->
@@ -4106,7 +4106,7 @@ void msr2bsrTranslator::visitEnd (S_msrTechnicalWithInteger& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -4125,7 +4125,7 @@ void msr2bsrTranslator::visitStart (S_msrTechnicalWithFloat& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (fOnGoingNote) {
     fCurrentNonGraceNoteClone->
@@ -4152,7 +4152,7 @@ void msr2bsrTranslator::visitEnd (S_msrTechnicalWithFloat& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -4171,7 +4171,7 @@ void msr2bsrTranslator::visitStart (S_msrTechnicalWithString& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (fOnGoingNote) {
     fCurrentNonGraceNoteClone->
@@ -4209,7 +4209,7 @@ void msr2bsrTranslator::visitEnd (S_msrTechnicalWithString& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -4228,7 +4228,7 @@ void msr2bsrTranslator::visitStart (S_msrOrnament& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (fOnGoingNote) {
     fCurrentNonGraceNoteClone->
@@ -4255,7 +4255,7 @@ void msr2bsrTranslator::visitEnd (S_msrOrnament& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -4274,7 +4274,7 @@ void msr2bsrTranslator::visitStart (S_msrSpanner& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   switch (elt->getSpannerTypeKind ()) {
     case msrSpannerTypeKind::kSpannerTypeStart:
@@ -4313,7 +4313,7 @@ void msr2bsrTranslator::visitEnd (S_msrSpanner& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -4332,7 +4332,7 @@ void msr2bsrTranslator::visitStart (S_msrGlissando& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (fOnGoingNote) {
     fCurrentNonGraceNoteClone->
@@ -4365,7 +4365,7 @@ void msr2bsrTranslator::visitEnd (S_msrGlissando& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -4384,7 +4384,7 @@ void msr2bsrTranslator::visitStart (S_msrSlide& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (fOnGoingNote) {
     fCurrentNonGraceNoteClone->
@@ -4411,7 +4411,7 @@ void msr2bsrTranslator::visitEnd (S_msrSlide& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -4430,7 +4430,7 @@ void msr2bsrTranslator::visitStart (S_msrSingleTremolo& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (fOnGoingNote) {
     fCurrentNonGraceNoteClone->
@@ -4457,7 +4457,7 @@ void msr2bsrTranslator::visitEnd (S_msrSingleTremolo& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -4476,7 +4476,7 @@ void msr2bsrTranslator::visitStart (S_msrDoubleTremolo& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // create a double tremolo clone from the two elements
   fCurrentDoubleTremoloClone = elt; // JMI FIX THAT
@@ -4506,7 +4506,7 @@ void msr2bsrTranslator::visitEnd (S_msrDoubleTremolo& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // append the current double tremolo clone to the current voice clone
   fCurrentVoiceClone->
@@ -4535,7 +4535,7 @@ void msr2bsrTranslator::visitStart (S_msrOtherDynamic& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (fOnGoingNote) {
     fCurrentNonGraceNoteClone->
@@ -4562,7 +4562,7 @@ void msr2bsrTranslator::visitEnd (S_msrOtherDynamic& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -4581,7 +4581,7 @@ void msr2bsrTranslator::visitStart (S_msrWords& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (fOnGoingNote) {
     fCurrentNonGraceNoteClone->
@@ -4608,7 +4608,7 @@ void msr2bsrTranslator::visitEnd (S_msrWords& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -4627,7 +4627,7 @@ void msr2bsrTranslator::visitStart (S_msrSlur& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   / *
     Only the  first note of the chord should get the slur notation.
@@ -4673,7 +4673,7 @@ void msr2bsrTranslator::visitEnd (S_msrSlur& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -4692,7 +4692,7 @@ void msr2bsrTranslator::visitStart (S_msrLigature& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (fOnGoingNote) {
     fCurrentNonGraceNoteClone->
@@ -4719,7 +4719,7 @@ void msr2bsrTranslator::visitEnd (S_msrLigature& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -4738,7 +4738,7 @@ void msr2bsrTranslator::visitStart (S_msrSlash& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (fOnGoingNote) {
     fCurrentNonGraceNoteClone->
@@ -4767,7 +4767,7 @@ void msr2bsrTranslator::visitStart (S_msrCrescDecresc& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (fOnGoingNote) {
     fCurrentNonGraceNoteClone->
@@ -4795,7 +4795,7 @@ void msr2bsrTranslator::visitEnd (S_msrCrescDecresc& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -4814,7 +4814,7 @@ void msr2bsrTranslator::visitStart (S_msrWedge& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (fOnGoingNote) {
     fCurrentNonGraceNoteClone->
@@ -4842,7 +4842,7 @@ void msr2bsrTranslator::visitEnd (S_msrWedge& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -4864,7 +4864,7 @@ void msr2bsrTranslator::visitStart (S_msrGraceNotesGroup& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   Bool doCreateAGraceNoteClone (true); // JMI
 
@@ -4880,7 +4880,7 @@ void msr2bsrTranslator::visitStart (S_msrGraceNotesGroup& elt)
         "'" <<
         std::endl;
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     fCurrentGraceNotesGroupClone =
       elt->
@@ -4926,7 +4926,7 @@ void msr2bsrTranslator::visitStart (S_msrGraceNotesGroup& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // get the note this grace notes group is attached to
   S_msrNote
@@ -4982,7 +4982,7 @@ void msr2bsrTranslator::visitStart (S_msrGraceNotesGroup& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   if (
@@ -5015,7 +5015,7 @@ void msr2bsrTranslator::visitStart (S_msrGraceNotesGroup& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // fetch the original voice first non grace note
   S_msrNote
@@ -5049,7 +5049,7 @@ void msr2bsrTranslator::visitStart (S_msrGraceNotesGroup& elt)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       fCurrentSkipGraceNotesGroup =
         elt->
@@ -5085,7 +5085,7 @@ void msr2bsrTranslator::visitStart (S_msrGraceNotesGroup& elt)
           __FILE__, __LINE__,
           ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       // attach the current after grace notes clone to the current note clone
       if (fOnGoingNote) { // JMI
@@ -5136,7 +5136,7 @@ void msr2bsrTranslator::visitStart (S_msrGraceNotesGroup& elt)
           __FILE__, __LINE__,
           ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       S_msrGraceNotesGroup
         skipGraceNotesGroup =
@@ -5175,7 +5175,7 @@ void msr2bsrTranslator::visitStart (S_msrGraceNotesGroup& elt)
 
         --gIndenter;
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       fPendingAfterGraceNotesGroup =
         msrAfterGraceNotesGroup::create (
@@ -5195,7 +5195,7 @@ void msr2bsrTranslator::visitStart (S_msrGraceNotesGroup& elt)
           __FILE__, __LINE__,
           ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       if (fOnGoingNote) { // JMI
         fCurrentNonGraceNoteClone->
@@ -5223,7 +5223,7 @@ void msr2bsrTranslator::visitEnd (S_msrGraceNotesGroup& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
     if (gGlobalTraceOahGroup->getTraceNotes () || gGlobalTraceOahGroup->getTraceGraceNotes ()) {
@@ -5242,7 +5242,7 @@ void msr2bsrTranslator::visitEnd (S_msrGraceNotesGroup& elt)
     }
     gLog << std::endl;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // forget about these grace notes
   fCurrentGraceNotesGroupClone = nullptr;
@@ -5263,7 +5263,7 @@ void msr2bsrTranslator::visitEnd (S_msrGraceNotesGroup& elt)
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     fCurrentVoiceClone->
       removeElementFromVoice (
@@ -5297,7 +5297,7 @@ void msr2bsrTranslator::visitStart (S_msrNote& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // create the note clone
   S_msrNote
@@ -5334,7 +5334,7 @@ void msr2bsrTranslator::visitStart (S_msrNote& elt)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 * /
 
   switch (elt->getNoteKind ()) {
@@ -5367,7 +5367,7 @@ void msr2bsrTranslator::visitStart (S_msrNote& elt)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
       }
 
       fOnGoingNote = true;
@@ -5393,7 +5393,7 @@ void msr2bsrTranslator::visitStart (S_msrNote& elt)
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     fPendingAfterGraceNotesGroup =
       msrAfterGraceNotesGroup::create (
@@ -5428,7 +5428,7 @@ void msr2bsrTranslator::visitEnd (S_msrNote& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalTraceOahGroup->getTraceNotesDetails ()) {
@@ -5460,7 +5460,7 @@ void msr2bsrTranslator::visitEnd (S_msrNote& elt)
         std::endl;
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   switch (elt->getNoteKind ()) {
 
@@ -5480,7 +5480,7 @@ void msr2bsrTranslator::visitEnd (S_msrNote& elt)
           __FILE__, __LINE__,
           ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       fCurrentVoiceClone->
         appendNoteToVoiceClone (
@@ -5500,7 +5500,7 @@ void msr2bsrTranslator::visitEnd (S_msrNote& elt)
           __FILE__, __LINE__,
           ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       fCurrentVoiceClone->
         appendNoteToVoiceClone (
@@ -5520,7 +5520,7 @@ void msr2bsrTranslator::visitEnd (S_msrNote& elt)
           __FILE__, __LINE__,
           ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       fCurrentVoiceClone->
         appendNoteToVoiceClone (
@@ -5540,7 +5540,7 @@ void msr2bsrTranslator::visitEnd (S_msrNote& elt)
           __FILE__, __LINE__,
           ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       fCurrentVoiceClone->
         appendNoteToVoiceClone (
@@ -5563,7 +5563,7 @@ void msr2bsrTranslator::visitEnd (S_msrNote& elt)
               "\"" <<
               std::endl;
           }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
           fCurrentDoubleTremoloClone->
             setDoubleTremoloNoteFirstElement (
@@ -5583,7 +5583,7 @@ void msr2bsrTranslator::visitEnd (S_msrNote& elt)
               "\"" <<
               std::endl;
           }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
           fCurrentDoubleTremoloClone->
             setDoubleTremoloNoteSecondElement (
@@ -5658,7 +5658,7 @@ void msr2bsrTranslator::visitEnd (S_msrNote& elt)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
         fCurrentGraceNotesGroupClone->
           appendNoteToGraceNotesGroup (
@@ -5680,7 +5680,7 @@ void msr2bsrTranslator::visitEnd (S_msrNote& elt)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
         fCurrentGraceNotesClone->
           appendNoteToGraceNotes (
@@ -5701,7 +5701,7 @@ void msr2bsrTranslator::visitEnd (S_msrNote& elt)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
         fPendingAfterGraceNotes->
           appendNoteToAfterGraceNotesContents (
@@ -5791,7 +5791,7 @@ void msr2bsrTranslator::visitEnd (S_msrNote& elt)
           __FILE__, __LINE__,
           ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       fTupletClonesStack.top ()->
         appendNoteToTuplet (
@@ -5876,7 +5876,7 @@ void msr2bsrTranslator::visitStart (S_msrOctaveShift& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fCurrentNonGraceNoteClone->
     setNoteOctaveShift (elt);
@@ -5897,7 +5897,7 @@ void msr2bsrTranslator::visitEnd (S_msrOctaveShift& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -5916,7 +5916,7 @@ void msr2bsrTranslator::visitStart (S_msrAccordionRegistration& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // append the accordion registration to the voice clone
   fCurrentVoiceClone->
@@ -5943,7 +5943,7 @@ void msr2bsrTranslator::visitStart (S_msrHarpPedalsTuning& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // append the harp pedals tuning to the voice clone
   fCurrentVoiceClone->
@@ -5966,7 +5966,7 @@ void msr2bsrTranslator::visitStart (S_msrStem& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (fOnGoingNote) {
     fCurrentNonGraceNoteClone->
@@ -5993,7 +5993,7 @@ void msr2bsrTranslator::visitEnd (S_msrStem& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -6016,7 +6016,7 @@ void msr2bsrTranslator::visitStart (S_msrBeam& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // a beam may be present at the same time
   // in a note or grace note and the chord the latter belongs to
@@ -6051,7 +6051,7 @@ void msr2bsrTranslator::visitEnd (S_msrBeam& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -6073,7 +6073,7 @@ void msr2bsrTranslator::visitStart (S_msrChord& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fCurrentChordClone =
     elt->createChordNewbornClone (
@@ -6148,7 +6148,7 @@ void msr2bsrTranslator::visitEnd (S_msrChord& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fOnGoingChord = false;
 }
@@ -6169,7 +6169,7 @@ void msr2bsrTranslator::visitStart (S_msrTuplet& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // create the tuplet clone
   S_msrTuplet
@@ -6191,7 +6191,7 @@ void msr2bsrTranslator::visitStart (S_msrTuplet& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fTupletClonesStack.push (tupletClone);
 
@@ -6220,7 +6220,7 @@ void msr2bsrTranslator::visitEnd (S_msrTuplet& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalTraceOahGroup->getTraceTuplets ()) {
@@ -6236,7 +6236,7 @@ void msr2bsrTranslator::visitEnd (S_msrTuplet& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fTupletClonesStack.pop ();
 
@@ -6252,7 +6252,7 @@ void msr2bsrTranslator::visitEnd (S_msrTuplet& elt)
       "'" <<
       std::endl;
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     fTupletClonesStack.top ()->
       appendTupletToTupletClone (elt);
@@ -6270,7 +6270,7 @@ void msr2bsrTranslator::visitEnd (S_msrTuplet& elt)
       fCurrentVoiceClone->getVoiceName () <<
       std::endl;
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     fCurrentVoiceClone->
       appendTupletToVoice (elt);
@@ -6293,7 +6293,7 @@ void msr2bsrTranslator::visitStart (S_msrTie& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fCurrentNonGraceNoteClone->
     setNoteTie (elt);
@@ -6314,7 +6314,7 @@ void msr2bsrTranslator::visitEnd (S_msrTie& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -6333,7 +6333,7 @@ void msr2bsrTranslator::visitStart (S_msrSegno& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fCurrentVoiceClone->
     appendSegnoToVoice (elt);
@@ -6354,7 +6354,7 @@ void msr2bsrTranslator::visitStart (S_msrCoda& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fCurrentVoiceClone->
     appendCodaToVoice (elt);
@@ -6376,7 +6376,7 @@ void msr2bsrTranslator::visitStart (S_msrEyeGlasses& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fCurrentNonGraceNoteClone->
     appendEyeGlassesToNote (elt);
@@ -6397,7 +6397,7 @@ void msr2bsrTranslator::visitStart (S_msrScordatura& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fCurrentNonGraceNoteClone->
     appendScordaturaToNote (elt);
@@ -6418,7 +6418,7 @@ void msr2bsrTranslator::visitStart (S_msrPedal& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fCurrentNonGraceNoteClone->
     appendPedalToNote (elt);
@@ -6439,7 +6439,7 @@ void msr2bsrTranslator::visitStart (S_msrDamp& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fCurrentNonGraceNoteClone->
     appendDampToNote (elt);
@@ -6464,7 +6464,7 @@ void msr2bsrTranslator::visitStart (S_msrDampAll& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fCurrentNonGraceNoteClone->
     appendDampAllToNote (elt);
@@ -6492,7 +6492,7 @@ void msr2bsrTranslator::visitStart (S_msrBarCheck& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fCurrentVoiceClone->
     appendBarCheckToVoice (elt);
@@ -6513,7 +6513,7 @@ void msr2bsrTranslator::visitEnd (S_msrBarCheck& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -6532,7 +6532,7 @@ void msr2bsrTranslator::visitStart (S_msrBarNumberCheck& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fCurrentVoiceClone->
     appendBarNumberCheckToVoice (elt);
@@ -6553,7 +6553,7 @@ void msr2bsrTranslator::visitEnd (S_msrBarNumberCheck& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -6575,7 +6575,7 @@ void msr2bsrTranslator::visitStart (S_msrRepeat& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 / * JMI
   gLog <<
@@ -6601,7 +6601,7 @@ void msr2bsrTranslator::visitStart (S_msrRepeat& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 / * JMI ???
   fCurrentPartClone->
@@ -6633,7 +6633,7 @@ void msr2bsrTranslator::visitStart (S_msrRepeat& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fCurrentRepeatClone =
     elt->
@@ -6660,7 +6660,7 @@ void msr2bsrTranslator::visitEnd (S_msrRepeat& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 / * JMI
   // append the repeat clone to the current part clone
@@ -6677,7 +6677,7 @@ void msr2bsrTranslator::visitEnd (S_msrRepeat& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fCurrentPartClone-> // no test needed JMI
     appendRepeatCloneToPart (
@@ -6708,7 +6708,7 @@ void msr2bsrTranslator::visitStart (S_msrRepeatCommonPart& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   if (
@@ -6738,7 +6738,7 @@ void msr2bsrTranslator::visitStart (S_msrRepeatCommonPart& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void msr2bsrTranslator::visitEnd (S_msrRepeatCommonPart& elt)
@@ -6759,7 +6759,7 @@ void msr2bsrTranslator::visitEnd (S_msrRepeatCommonPart& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   if (
@@ -6785,7 +6785,7 @@ void msr2bsrTranslator::visitEnd (S_msrRepeatCommonPart& elt)
 
     --gIndenter;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // create a repeat and append it to voice clone
 #ifdef MF_TRACE_IS_ENABLED
@@ -6802,7 +6802,7 @@ void msr2bsrTranslator::visitEnd (S_msrRepeatCommonPart& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fCurrentVoiceClone->
     createRepeatUponItsEndAndAppendItToVoiceClone ( // JMI
@@ -6828,7 +6828,7 @@ void msr2bsrTranslator::visitStart (S_msrRepeatEnding& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void msr2bsrTranslator::visitEnd (S_msrRepeatEnding& elt)
@@ -6849,7 +6849,7 @@ void msr2bsrTranslator::visitEnd (S_msrRepeatEnding& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // create a repeat ending clone and append it to voice clone
 #ifdef MF_TRACE_IS_ENABLED
@@ -6879,7 +6879,7 @@ void msr2bsrTranslator::visitEnd (S_msrRepeatEnding& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fCurrentVoiceClone->
     handleRepeatEndingEndInVoice (
@@ -6904,7 +6904,7 @@ void msr2bsrTranslator::visitStart (S_msrMeasureRepeat& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 }
@@ -6924,7 +6924,7 @@ void msr2bsrTranslator::visitEnd (S_msrMeasureRepeat& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   --gIndenter;
 
@@ -6943,7 +6943,7 @@ void msr2bsrTranslator::visitEnd (S_msrMeasureRepeat& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -6962,7 +6962,7 @@ void msr2bsrTranslator::visitStart (S_msrMeasureRepeatPattern& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 }
@@ -6985,7 +6985,7 @@ void msr2bsrTranslator::visitEnd (S_msrMeasureRepeatPattern& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   --gIndenter;
 
@@ -7009,7 +7009,7 @@ void msr2bsrTranslator::visitEnd (S_msrMeasureRepeatPattern& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fCurrentVoiceClone->
     createMeasureRepeatAndAppendItToVoiceClone (
@@ -7039,7 +7039,7 @@ void msr2bsrTranslator::visitStart (S_msrMeasureRepeatReplicas& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 }
@@ -7062,7 +7062,7 @@ void msr2bsrTranslator::visitEnd (S_msrMeasureRepeatReplicas& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   --gIndenter;
 
@@ -7081,7 +7081,7 @@ void msr2bsrTranslator::visitEnd (S_msrMeasureRepeatReplicas& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fCurrentVoiceClone->
     appendMeasureRepeatReplicaToVoice (
@@ -7110,7 +7110,7 @@ void msr2bsrTranslator::visitStart (S_msrMultipleRest& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalTraceOahGroup->getTraceMultipleFullBarRests ()) {
@@ -7126,7 +7126,7 @@ void msr2bsrTranslator::visitStart (S_msrMultipleRest& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   if (
@@ -7152,7 +7152,7 @@ void msr2bsrTranslator::visitStart (S_msrMultipleRest& elt)
 
     --gIndenter;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fCurrentVoiceClone->
     handleMultipleRestInVoiceClone (
@@ -7182,7 +7182,7 @@ void msr2bsrTranslator::visitStart (S_msrMultipleRest& elt)
 
     --gIndenter;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void msr2bsrTranslator::visitEnd (S_msrMultipleRest& elt)
@@ -7203,7 +7203,7 @@ void msr2bsrTranslator::visitEnd (S_msrMultipleRest& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // create the multiple rest clone
 #ifdef MF_TRACE_IS_ENABLED
@@ -7232,7 +7232,7 @@ void msr2bsrTranslator::visitEnd (S_msrMultipleRest& elt)
 
     --gIndenter;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   S_msrMultipleRest
     multipleRestClone =
@@ -7265,7 +7265,7 @@ void msr2bsrTranslator::visitEnd (S_msrMultipleRest& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fCurrentVoiceClone->
     createNewLastSegmentForVoice (
@@ -7304,7 +7304,7 @@ void msr2bsrTranslator::visitEnd (S_msrMultipleRest& elt)
 
     --gIndenter;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -7326,7 +7326,7 @@ void msr2bsrTranslator::visitStart (S_msrMultipleRestContents& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -7354,7 +7354,7 @@ void msr2bsrTranslator::visitStart (S_msrMultipleRestContents& elt)
 
     --gIndenter;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void msr2bsrTranslator::visitEnd (S_msrMultipleRestContents& elt)
@@ -7375,7 +7375,7 @@ void msr2bsrTranslator::visitEnd (S_msrMultipleRestContents& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   --gIndenter;
 
@@ -7399,7 +7399,7 @@ void msr2bsrTranslator::visitEnd (S_msrMultipleRestContents& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fCurrentMultipleRestContentsClone->
     setMultipleRestContentsSegment (
@@ -7430,7 +7430,7 @@ void msr2bsrTranslator::visitEnd (S_msrMultipleRestContents& elt)
 
     --gIndenter;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -7449,7 +7449,7 @@ void msr2bsrTranslator::visitStart (S_msrLayout& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 }
@@ -7471,7 +7471,7 @@ void msr2bsrTranslator::visitEnd (S_msrLayout& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 */
 

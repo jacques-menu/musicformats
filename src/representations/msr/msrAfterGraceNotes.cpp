@@ -56,7 +56,7 @@ msrAfterGraceNotesGroupContents::msrAfterGraceNotesGroupContents (
     __FILE__, __LINE__,
     afterGraceNotesGroupContentsUpLinkToVoice != nullptr,
     "afterGraceNotesGroupContentsUpLinkToVoice is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // set after notes contents's voice upLink
   fAfterGraceNotesGroupContentsUpLinkToVoice =
@@ -94,7 +94,7 @@ S_msrAfterGraceNotesGroupContents msrAfterGraceNotesGroupContents::createAfterGr
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
@@ -102,7 +102,7 @@ S_msrAfterGraceNotesGroupContents msrAfterGraceNotesGroupContents::createAfterGr
     __FILE__, __LINE__,
     containingVoice != nullptr,
     "containingVoice is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   S_msrAfterGraceNotesGroupContents
     newbornClone =
@@ -139,7 +139,7 @@ void msrAfterGraceNotesGroupContents::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrAfterGraceNotesGroupContents>*
     p =
@@ -158,7 +158,7 @@ void msrAfterGraceNotesGroupContents::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -177,7 +177,7 @@ void msrAfterGraceNotesGroupContents::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrAfterGraceNotesGroupContents>*
     p =
@@ -196,7 +196,7 @@ void msrAfterGraceNotesGroupContents::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -315,7 +315,7 @@ msrAfterGraceNotesGroup::msrAfterGraceNotesGroup (
     __FILE__, __LINE__,
     afterGraceNotesGroupUpLinkToVoice != nullptr,
     "afterGraceNotesGroupUpLinkToVoice is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // set after gracenotes group voice upLink
   fAfterGraceNotesGroupUpLinkToVoice =
@@ -369,7 +369,7 @@ S_msrAfterGraceNotesGroup msrAfterGraceNotesGroup::createAfterGraceNotesGroupNew
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
@@ -382,7 +382,7 @@ S_msrAfterGraceNotesGroup msrAfterGraceNotesGroup::createAfterGraceNotesGroupNew
     __FILE__, __LINE__,
     containingVoice != nullptr,
     "containingVoice is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   S_msrAfterGraceNotesGroup
     newbornClone =
@@ -417,7 +417,7 @@ void msrAfterGraceNotesGroup::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrAfterGraceNotesGroup>*
     p =
@@ -436,7 +436,7 @@ void msrAfterGraceNotesGroup::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -455,7 +455,7 @@ void msrAfterGraceNotesGroup::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrAfterGraceNotesGroup>*
     p =
@@ -474,7 +474,7 @@ void msrAfterGraceNotesGroup::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }

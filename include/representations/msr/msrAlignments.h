@@ -73,4 +73,4 @@ msrVerticalAlignmentKind msrVerticalAlignmentKindFromString (
 
 }
 
-#endif
+#endif // ___msrAlignments___

@@ -89,7 +89,7 @@ msrPart::msrPart (
     __FILE__, __LINE__,
     partUpLinkToPartGroup != nullptr,
     "partUpLinkToPartGroup is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 */
 
   // set part number
@@ -118,7 +118,7 @@ void msrPart::initializePart ()
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // is this part name in the part renaming map?
   std::map<std::string, std::string>::const_iterator
@@ -178,7 +178,7 @@ void msrPart::initializePart ()
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 msrPart::~msrPart ()
@@ -212,7 +212,7 @@ S_msrPart msrPart::createPartNewbornClone (const S_msrPartGroup& partGroupClone)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
@@ -220,7 +220,7 @@ S_msrPart msrPart::createPartNewbornClone (const S_msrPartGroup& partGroupClone)
     __FILE__, __LINE__,
     partGroupClone != nullptr,
     "partGroupClone is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   S_msrPart
     newbornClone =
@@ -286,7 +286,7 @@ void msrPart::registerStaffInPart (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // register staff in the all staves list
   fPartAllStavesList.push_back (staff);
@@ -329,7 +329,7 @@ void msrPart::registerStaffInPart (
           __FILE__, __LINE__,
           ss.str ());
       }
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
       // register harmonies staff
       fPartHarmoniesStaff = staff;
@@ -352,7 +352,7 @@ void msrPart::registerStaffInPart (
           __FILE__, __LINE__,
           ss.str ());
       }
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
       // register figured bass staff
       fPartFiguredBassStaff = staff;
@@ -379,7 +379,7 @@ void msrPart::setPartMeasurePosition (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (measurePosition.getNumerator () < 0) {
     std::stringstream ss;
@@ -425,7 +425,7 @@ void msrPart::incrementPartMeasurePosition (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void msrPart::decrementPartMeasurePosition (
@@ -447,7 +447,7 @@ void msrPart::decrementPartMeasurePosition (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fPartMeasurePosition -= duration;
 
@@ -485,7 +485,7 @@ void msrPart::decrementPartMeasurePosition (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void msrPart::setPartShortestNoteDuration (
@@ -510,7 +510,7 @@ void msrPart::setPartShortestNoteDuration (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fPartShortestNoteDuration = duration;
 }
@@ -537,7 +537,7 @@ void msrPart::setPartShortestNoteTupletFactor (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fPartShortestNoteTupletFactor = noteTupletFactor;
 }
@@ -562,7 +562,7 @@ void msrPart::assignSequentialNumbersToRegularVoicesInPart (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   for (S_msrStaff staff : fPartAllStavesList) {
     staff->
@@ -595,7 +595,7 @@ void msrPart::setPartMsrName (const std::string& partMsrName)
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
   }
   else {
     // use the argument
@@ -610,7 +610,7 @@ void msrPart::setPartMsrName (const std::string& partMsrName)
         "\" as part name  for " << getPartCombinedName () <<
       std::endl;
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
   }
 }
 
@@ -667,7 +667,7 @@ void msrPart::createAMeasureAndAppendItToPart (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -707,7 +707,7 @@ void msrPart::setNextMeasureNumberInPart (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -749,7 +749,7 @@ Rational msrPart::fetchPartMeasuresWholeNotesDurationsVectorAt (
       __FILE__, __LINE__,
       ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // has this measureOrdinalNumber been registered already?
   try {
@@ -833,7 +833,7 @@ void msrPart::registerShortestNoteInPartIfRelevant (const S_msrNote& note)
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
   }
 
 /* JMI
@@ -856,7 +856,7 @@ void msrPart::setPartNumberOfMeasures (size_t partNumberOfMeasures)
       partNumberOfMeasures <<
     std::endl;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fPartNumberOfMeasures = partNumberOfMeasures;
 
@@ -883,7 +883,7 @@ void msrPart::setPartNumberOfMeasures (size_t partNumberOfMeasures)
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     fPartMeasuresWholeNotesDurationsVector.clear ();
     fPartMeasuresWholeNotesDurationsVector.resize (
@@ -915,7 +915,7 @@ void msrPart::registerOrdinalMeasureNumberWholeNotesDuration (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalTraceOahGroup->getTraceMeasures ()) {
@@ -942,7 +942,7 @@ void msrPart::registerOrdinalMeasureNumberWholeNotesDuration (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   size_t index = measureOrdinalNumber - 1;
 
@@ -973,7 +973,7 @@ void msrPart::registerOrdinalMeasureNumberWholeNotesDuration (
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
   }
 
   catch (const std::out_of_range& e) {
@@ -1000,7 +1000,7 @@ void msrPart::registerOrdinalMeasureNumberWholeNotesDuration (
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
   }
 }
 
@@ -1017,7 +1017,7 @@ void msrPart::appendStaffDetailsToPart (
       "\" to part " << getPartCombinedName () <<
     std::endl;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // register staff details in part
   fCurrentPartStaffDetails = staffDetails;
@@ -1043,7 +1043,7 @@ void msrPart::appendClefToPart (
       "' to part " << getPartCombinedName () <<
     std::endl;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -1083,7 +1083,7 @@ void msrPart::appendKeyToPart (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // set part key
   fPartCurrentKey = key;
@@ -1126,7 +1126,7 @@ void msrPart::appendTimeSignatureToPart (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // set part time signature
   fPartCurrentTimeSignature = timeSignature;
@@ -1169,7 +1169,7 @@ void msrPart::appendTimeSignatureToPartClone (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // set part time signature
   fPartCurrentTimeSignature = timeSignature;
@@ -1202,7 +1202,7 @@ void msrPart::appendTempoToPart (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
  // append tempo to registered staves
   for (S_msrStaff staff : fPartAllStavesList) {
@@ -1228,7 +1228,7 @@ void msrPart::appendRehearsalMarkToPart (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
  // append rehearsal mark to registered staves
   for (S_msrStaff staff : fPartAllStavesList) {
@@ -1255,7 +1255,7 @@ void msrPart::appendLineBreakToPart (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
  // append line break to registered staves
   for (S_msrStaff staff : fPartAllStavesList) {
@@ -1281,7 +1281,7 @@ void msrPart::appendPageBreakToPart (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
  // append page break to registered staves
   for (S_msrStaff staff : fPartAllStavesList) {
@@ -1309,7 +1309,7 @@ void msrPart::insertHiddenMeasureAndBarLineInPartClone (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -1337,7 +1337,7 @@ void msrPart::appendTranspositionToPart (
       "\" to part " << getPartCombinedName () <<
     std::endl;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // set part current transposition
   fPartCurrentTransposition = transposition;
@@ -1378,7 +1378,7 @@ void msrPart::handleRepeatStartInPart (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -1412,7 +1412,7 @@ void msrPart::handleRepeatEndInPart (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -1446,7 +1446,7 @@ void msrPart::handleRepeatEndingStartInPart (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -1483,7 +1483,7 @@ void msrPart::handleRepeatEndingEndInPart (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -1520,7 +1520,7 @@ void msrPart::finalizeRepeatEndInPart (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -1626,7 +1626,7 @@ void msrPart::appendMultipleFullBarRestsToPart (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fPartContainsMultipleFullBarRests = true;
 
@@ -1656,7 +1656,7 @@ void msrPart::replicateLastAppendedMeasureInPart (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // add multiple rest to all staves
   for (S_msrStaff staff : fPartAllStavesList) {
@@ -1689,7 +1689,7 @@ void msrPart::addEmptyMeasuresToPart (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fPartContainsMultipleFullBarRests = true;
 
@@ -1719,7 +1719,7 @@ void msrPart::appendPendingMultipleFullBarRestsToPart (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // append pending multiple rest to all staves
   for (S_msrStaff staff : fPartAllStavesList) {
@@ -1748,7 +1748,7 @@ void msrPart::appendMultipleFullBarRestsCloneToPart (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   for (S_msrStaff staff : fPartAllStavesList) {
     staff->
@@ -1775,7 +1775,7 @@ void msrPart::appendBarLineToPart (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
  // append barLine to registered staves
   for (S_msrStaff staff : fPartAllStavesList) {
@@ -1822,7 +1822,7 @@ S_msrStaff msrPart::addStaffToPartByItsNumber (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // create the staff
   S_msrStaff
@@ -1870,7 +1870,7 @@ S_msrStaff msrPart::addHarmoniesStaffToPart (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // create the staff
   int partHarmoniesStaffNumber =
@@ -1923,7 +1923,7 @@ S_msrStaff msrPart::addHFiguredBassStaffToPart (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // create the staff
   int partFiguredBassStaffNumber =
@@ -1974,7 +1974,7 @@ void msrPart::addStaffToPartCloneByItsNumber (const S_msrStaff& staff)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // register staff in this part
   registerStaffInPart (
@@ -2044,7 +2044,7 @@ S_msrVoice msrPart::createPartHarmoniesVoice (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fPartHarmoniesStaff =
     addHarmoniesStaffToPart (
@@ -2070,7 +2070,7 @@ S_msrVoice msrPart::createPartHarmoniesVoice (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fPartHarmoniesVoice =
     msrVoice::create (
@@ -2134,7 +2134,7 @@ S_msrVoice msrPart::createPartFiguredBassVoice (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fPartFiguredBassStaff =
     addHFiguredBassStaffToPart (
@@ -2160,7 +2160,7 @@ S_msrVoice msrPart::createPartFiguredBassVoice (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fPartFiguredBassVoice =
     msrVoice::create (
@@ -2213,7 +2213,7 @@ void msrPart::appendFiguredBassToPart (
           __FILE__, __LINE__,
           ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       fPartFiguredBassVoice->
         appendFiguredBassToVoice (figuredBass);
@@ -2275,7 +2275,7 @@ void msrPart::appendFiguredBassToPartClone (
           __FILE__, __LINE__,
           ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       fPartFiguredBassVoice->
         appendFiguredBassToVoiceClone (figuredBass);
@@ -2327,7 +2327,7 @@ void msrPart::appendScordaturaToPart (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   for (S_msrStaff staff : fPartRegularStavesList) {
     staff->
@@ -2355,7 +2355,7 @@ void msrPart::appendAccordionRegistrationToPart (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   for (S_msrStaff staff : fPartRegularStavesList) {
     staff->
@@ -2383,7 +2383,7 @@ void msrPart::appendHarpPedalsTuningToPart (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   for (S_msrStaff staff : fPartRegularStavesList) {
     staff->
@@ -2399,7 +2399,7 @@ void msrPart::addSkipGraceNotesGroupAheadOfVoicesClonesIfNeeded (
 #ifdef MF_TRACE_IS_ENABLED
   int inputLineNumber =
     skipGraceNotesGroup->getInputLineNumber ();
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   if (
@@ -2421,7 +2421,7 @@ void msrPart::addSkipGraceNotesGroupAheadOfVoicesClonesIfNeeded (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   for (S_msrStaff staff : fPartAllStavesList) {
     std::map<int, S_msrVoice>
@@ -2469,7 +2469,7 @@ void msrPart::finalizeLastAppendedMeasureInPart (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -2560,7 +2560,7 @@ void msrPart::finalizePart (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -2619,7 +2619,7 @@ void msrPart::finalizePartClone (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 // JMI CAFE ???
     // sort the staves to have harmonies above and figured bass below the part
@@ -2660,7 +2660,7 @@ void msrPart::finalizePartAndAllItsMeasures (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   for (const S_msrVoice& voice : fPartAllVoicesList) {
     voice->
@@ -2700,7 +2700,7 @@ void msrPart::collectPartMeasuresSlices (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
@@ -2708,7 +2708,7 @@ void msrPart::collectPartMeasuresSlices (
     __FILE__, __LINE__,
     fPartMeasuresSlicesSequence == nullptr,
     "fPartMeasuresSlicesSequence is not null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   ++gIndenter;
 
@@ -2733,7 +2733,7 @@ void msrPart::collectPartMeasuresSlices (
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     ++gIndenter;
 
@@ -2779,7 +2779,7 @@ void msrPart::collectPartMeasuresSlices (
       fPartMeasuresSlicesSequence;
     --gIndenter;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   --gIndenter;
 }
@@ -2798,7 +2798,7 @@ void msrPart::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrPart>*
     p =
@@ -2817,7 +2817,7 @@ void msrPart::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -2836,7 +2836,7 @@ void msrPart::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrPart>*
     p =
@@ -2855,7 +2855,7 @@ void msrPart::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -2874,7 +2874,7 @@ void msrPart::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED // JMI
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) { // JMI TEMP
@@ -2914,7 +2914,7 @@ void msrPart::browseData (basevisitor* v)
       } // for
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   /* don't enforce any order here, leave it to the client thru sorting ??? JMI v0.9.66 */
 
@@ -3158,7 +3158,7 @@ void msrPart::printFull (std::ostream& os) const
 
     os << std::endl;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // print the current part key if any
 #ifdef MF_TRACE_IS_ENABLED
@@ -3180,7 +3180,7 @@ void msrPart::printFull (std::ostream& os) const
 
     os << std::endl;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // print the current part time if any
 #ifdef MF_TRACE_IS_ENABLED
@@ -3201,7 +3201,7 @@ void msrPart::printFull (std::ostream& os) const
 
     os << std::endl;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   os << std::left <<
     std::setw (fieldWidth) << "fPartShortestNoteDuration" << ": " <<
@@ -3365,7 +3365,7 @@ void msrPart::printFull (std::ostream& os) const
         __FILE__, __LINE__,
         staff != nullptr,
         "staff is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
       msrStaffKind
         staffKind =
@@ -3549,7 +3549,7 @@ void msrPart::print (std::ostream& os) const
         __FILE__, __LINE__,
         staff != nullptr,
         "staff is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
       msrStaffKind
         staffKind =

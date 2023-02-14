@@ -102,4 +102,4 @@ EXP std::ostream& operator << (std::ostream& os, const S_msrHiddenMeasureAndBarL
 }
 
 
-#endif
+#endif // ___msrHiddenMeasureAndBarLine___

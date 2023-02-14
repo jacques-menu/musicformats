@@ -39,4 +39,4 @@ EXP void mfAssertWithInputLocalisation (
 }
 
 
-#endif
+#endif // ___mfAssert___

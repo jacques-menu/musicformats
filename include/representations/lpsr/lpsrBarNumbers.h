@@ -138,4 +138,4 @@ EXP std::ostream& operator << (std::ostream& os, const S_lpsrBarCommand& elt);
 }
 
 
-#endif
+#endif // ___lpsrBarNumbers___

@@ -20,6 +20,7 @@
 
 namespace MusicFormats
 {
+
 //_______________________________________________________________________________
 S_msrScore translateMsrToMsr (
   S_msrScore           originalMsrScore,
@@ -41,4 +42,4 @@ S_msrScore translateMsrToMsrAlongPathToVoice (
 }
 
 
-#endif
+#endif // ___msr2msrInterface___

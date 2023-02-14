@@ -1,3 +1,14 @@
+% -------------------------------------------------------------------------
+%  MusicFormats Library
+%  Copyright (C) Jacques Menu 2016-2023
+
+%  This Source Code Form is subject to the terms of the Mozilla Public
+%  License, v. 2.0. If a copy of the MPL was not distributed with this
+%  file, you can obtain one at http://mozilla.org/MPL/2.0/.
+
+%  https://github.com/jacques-menu/musicformats
+% -------------------------------------------------------------------------
+
 % !TEX root = MusicFormatsMaintainanceGuide.tex
 
 % -------------------------------------------------------------------------
@@ -49,7 +60,7 @@ It can use whichever occurrence of any given denormalized data safely, though.
 \subsection{Multiple voices}
 % -------------------------------------------------------------------------
 
-Another aspect to account for is that of \Main{dynamics}, \Main{lyrics}, \Main{harmonies} and \Main{figured bass}. 
+Another aspect to account for is that of \Main{dynamics}, \Main{lyrics}, \Main{harmonies} and \Main{figured bass}.
 
 \lily\ supplies specific support to have them outside of notes, chords and other sound-producing score elements.\
 This provides flexibility when combining a score's staves and voices in various ways depending on the needs .
@@ -75,7 +86,7 @@ An \className{msrNote} instance will thus be browsed twice, when those two voice
 void msrNote::browseData (basevisitor* v)
 {
 	// ... ... ...
-	
+
   // browse the harmonies if any
   if (fNoteHarmoniesList.size ()) {
     ++gIndenter;
@@ -86,7 +97,7 @@ void msrNote::browseData (basevisitor* v)
     } // for
     --gIndenter;
   }
-	
+
 	// ... ... ...
 };
 \end{lstlisting}

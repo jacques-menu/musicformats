@@ -19,6 +19,7 @@
 
 namespace MusicFormats
 {
+
 //_______________________________________________________________________________
 EXP S_bsrScore translateBsrToFinalizedBsr (
   const S_bsrScore     originalBsrScore,
@@ -29,4 +30,4 @@ EXP S_bsrScore translateBsrToFinalizedBsr (
 }
 
 
-#endif
+#endif // ___bsr2bsrFinalizerInterface___

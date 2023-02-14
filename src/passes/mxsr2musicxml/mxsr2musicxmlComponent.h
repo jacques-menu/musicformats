@@ -26,4 +26,4 @@ S_mfcPassComponent EXP createMxsr2musicxmlComponent ();
 
 }
 
-#endif
+#endif // ___mxsr2musicxmlComponent___

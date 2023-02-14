@@ -78,7 +78,7 @@ static void catchSignals ()
 }
 #else
 static void catchSignals () {}
-#endif
+#endif // WIN32
 
 
 //------------------------------------------------------------------------
@@ -230,7 +230,7 @@ int main (int argc, char*  argv[])
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // fetch the generated output kind from optionsAndArguments,
   // right now before any OAH handler is created,
@@ -256,7 +256,7 @@ int main (int argc, char*  argv[])
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   switch (multiGenerationOutputKind) {
     case mfMultiGenerationOutputKind::kGeneration_UNKNOWN:
@@ -491,7 +491,7 @@ int main (int argc, char*  argv[])
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // create and populate the theMsrScore
   // ------------------------------------------------------
@@ -523,7 +523,7 @@ int main (int argc, char*  argv[])
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // the generator
   S_Mikrokosmos3WanderingGenerator
@@ -635,7 +635,7 @@ int main (int argc, char*  argv[])
         std::endl;
     }
  }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // display the input line numbers for which messages have been issued
   // ------------------------------------------------------

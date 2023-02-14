@@ -27,5 +27,5 @@ EXP S_mfcConverterComponent createMusicxml2lilypondConverterComponent ();
 }
 
 
-#endif
+#endif // ___musicxml2lilypondComponent___
 

@@ -309,4 +309,4 @@ EXP std::ostream& operator << (std::ostream& os, const S_lpsrStaffBlock& elt);
 }
 
 
-#endif
+#endif // ___lpsrStaves___

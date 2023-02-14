@@ -16,7 +16,6 @@
 #include <ostream>
 
 
-
 namespace MusicFormats
 {
 
@@ -85,4 +84,4 @@ std::ostream& operator << (std::ostream& os, const msrTupletShowTypeKind& elt);
 }
 
 
-#endif
+#endif // ___msrTupletsEnumTypes___

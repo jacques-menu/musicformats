@@ -72,7 +72,7 @@ void guidoGenerationOahGroup::initializeGuidoGenerationOahGroup ()
     "\" group" <<
     std::endl;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // Guido
   // --------------------------------------
@@ -90,7 +90,7 @@ void guidoGenerationOahGroup::createGuidoSubGroup ()
     "\"" <<
     std::endl;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   S_oahSubGroup
     subGroup =
@@ -149,7 +149,7 @@ void guidoGenerationOahGroup::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_guidoGenerationOahGroup>*
     p =
@@ -168,7 +168,7 @@ void guidoGenerationOahGroup::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -187,7 +187,7 @@ void guidoGenerationOahGroup::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_guidoGenerationOahGroup>*
     p =
@@ -206,7 +206,7 @@ void guidoGenerationOahGroup::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -225,7 +225,7 @@ void guidoGenerationOahGroup::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //______________________________________________________________________________
@@ -289,7 +289,7 @@ S_guidoGenerationOahGroup createGlobalGuidoGenerationOahGroup ()
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // protect library against multiple initializations
   if (! gGlobalGuidoGenerationOahGroup) {

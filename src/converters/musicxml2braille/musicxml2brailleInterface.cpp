@@ -101,7 +101,7 @@ static mfMusicformatsErrorKind xmlFile2brailleWithHandler (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // has quiet mode been requested?
   // ------------------------------------------------------
@@ -153,7 +153,7 @@ static mfMusicformatsErrorKind xmlFile2brailleWithHandler (
       err,
       __FILE__, __LINE__,
       gLanguage->quittingAfterPass (mfPassIDKind::kMfPassID_2a));
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     return mfMusicformatsErrorKind::kMusicformatsError_NONE;
   }
@@ -186,7 +186,7 @@ static mfMusicformatsErrorKind xmlFile2brailleWithHandler (
       err,
       __FILE__, __LINE__,
       gLanguage->quittingAfterPass (mfPassIDKind::kMfPassID_2b));
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     return mfMusicformatsErrorKind::kMusicformatsError_NONE;
   }
@@ -223,7 +223,7 @@ static mfMusicformatsErrorKind xmlFile2brailleWithHandler (
       err,
       __FILE__, __LINE__,
       gLanguage->quittingAfterPass (mfPassIDKind::kMfPassID_3));
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     return mfMusicformatsErrorKind::kMusicformatsError_NONE;
   }
@@ -340,7 +340,7 @@ static mfMusicformatsErrorKind xmlFile2brailleWithHandler (
 //       __FILE__, __LINE__,
 //       ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     if (! outputFileName.size ()) {
 #ifdef MF_TRACE_IS_ENABLED
@@ -353,7 +353,7 @@ static mfMusicformatsErrorKind xmlFile2brailleWithHandler (
 //       __FILE__, __LINE__,
 //       ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       // convert the BSR to braille
       try {
@@ -387,7 +387,7 @@ static mfMusicformatsErrorKind xmlFile2brailleWithHandler (
 //       __FILE__, __LINE__,
 //       ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       // open output file
 #ifdef MF_TRACE_IS_ENABLED
@@ -401,7 +401,7 @@ static mfMusicformatsErrorKind xmlFile2brailleWithHandler (
 //       __FILE__, __LINE__,
 //       ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       std::ofstream
         brailleCodeFileOutputStream (
@@ -455,7 +455,7 @@ static mfMusicformatsErrorKind xmlFile2brailleWithHandler (
           __FILE__, __LINE__,
           ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       brailleCodeFileOutputStream.close ();
     }
@@ -489,7 +489,7 @@ static mfMusicformatsErrorKind xmlFile2brailleWithOptionsAndArguments (
     "xmlFile2braille(), sxmlfile is NULL" <<
     std::endl;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
@@ -518,7 +518,7 @@ static mfMusicformatsErrorKind xmlFile2brailleWithOptionsAndArguments (
     ss <<
       handlerOptionsAndArguments;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // apply early options if any
   // ------------------------------------------------------
@@ -545,7 +545,7 @@ static mfMusicformatsErrorKind xmlFile2brailleWithOptionsAndArguments (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // create an xml2brl insider OAH handler
   // ------------------------------------------------------

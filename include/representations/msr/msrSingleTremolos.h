@@ -123,4 +123,4 @@ EXP std::ostream& operator << (std::ostream& os, const S_msrSingleTremolo& elt);
 }
 
 
-#endif
+#endif // ___msrSingleTremolos___

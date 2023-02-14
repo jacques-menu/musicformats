@@ -29,6 +29,7 @@
 #include "waeOah.h"
 #include "mfOutputFileOah.h"
 #include "oahDisplayOah.h"
+#include "oahHarmoniesExtraOah.h"
 
 #include "msdl2msrOah.h"
 
@@ -102,7 +103,7 @@ Usage: msdl2lilypond [option]* [MSDLFile] [option]*
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // initialize the history
   initializeHandlerMultiComponent ();
@@ -193,7 +194,7 @@ void msdl2lilypondInsiderHandler::createTheMsdl2lyPrefixes ()
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   createTheCommonPrefixes ();
 }
@@ -215,7 +216,7 @@ void msdl2lilypondInsiderHandler::createTheMsdl2lyOptionGroups (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // initialize options handling, phase 1
   // ------------------------------------------------------
@@ -234,7 +235,7 @@ void msdl2lilypondInsiderHandler::createTheMsdl2lyOptionGroups (
   appendGroupToHandler (
     createGlobalTraceOahGroup (
       this));
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // create the output file OAH group
   appendGroupToHandler (
@@ -277,11 +278,9 @@ void msdl2lilypondInsiderHandler::createTheMsdl2lyOptionGroups (
   appendGroupToHandler (
     createGlobalLpsr2lilypondOahGroup ());
 
-#ifdef MF_HARMONIES_EXTRA_IS_ENABLED
   // create the extra OAH group
   appendGroupToHandler (
     createGlobalHarmoniesExtraOahGroup ());
-#endif
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getEarlyTraceOahDetails ()) {
@@ -301,7 +300,7 @@ void msdl2lilypondInsiderHandler::createTheMsdl2lyOptionGroups (
 
     --gIndenter;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
 if (gEarlyOptions.getEarlyTraceOahDetails ()) {
@@ -311,7 +310,7 @@ if (gEarlyOptions.getEarlyTraceOahDetails ()) {
 
     this->printHelp (gOutput);
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void msdl2lilypondInsiderHandler::checkOptionsAndArguments () const
@@ -330,7 +329,7 @@ void msdl2lilypondInsiderHandler::checkOptionsAndArguments () const
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   checkSingleInputSourceInArgumentsVector ();
 }
@@ -348,7 +347,7 @@ void msdl2lilypondInsiderHandler::enforceHandlerQuietness ()
 #ifdef MF_TRACE_IS_ENABLED
   gGlobalTraceOahGroup->
     enforceGroupQuietness ();
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   gGlobalMsdl2lyInsiderOahGroup->
     enforceGroupQuietness ();
@@ -365,10 +364,8 @@ void msdl2lilypondInsiderHandler::enforceHandlerQuietness ()
   gGlobalLpsr2lilypondOahGroup->
     enforceGroupQuietness ();
 
-#ifdef MF_HARMONIES_EXTRA_IS_ENABLED
-  gGlobalHarmoniesExtraOahGroup->
+  gHarmoniesExtraOahGroup->
     enforceGroupQuietness ();
-#endif
 }
 
 void msdl2lilypondInsiderOahGroup::enforceGroupQuietness ()
@@ -391,7 +388,7 @@ void msdl2lilypondInsiderOahGroup::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msdl2lilypondInsiderOahGroup>*
     p =
@@ -410,7 +407,7 @@ void msdl2lilypondInsiderOahGroup::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -429,7 +426,7 @@ void msdl2lilypondInsiderOahGroup::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msdl2lilypondInsiderOahGroup>*
     p =
@@ -448,7 +445,7 @@ void msdl2lilypondInsiderOahGroup::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -467,7 +464,7 @@ void msdl2lilypondInsiderOahGroup::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   oahGroup::browseData (v);
 }
@@ -569,7 +566,7 @@ void msdl2lilypondInsiderOahGroup::initializeMsdl2lyInsiderOahGroup ()
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // quit after some passes
   // --------------------------------------
@@ -587,7 +584,7 @@ void msdl2lilypondInsiderOahGroup::createInsiderQuitSubGroup ()
     "\"" <<
     std::endl;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   S_oahSubGroup
     subGroup =
@@ -659,7 +656,7 @@ S_msdl2lilypondInsiderOahGroup createGlobalMsdl2lyInsiderOahGroup ()
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // protect library against multiple initializations
   if (! gGlobalMsdl2lyInsiderOahGroup) {

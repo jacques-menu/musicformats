@@ -153,7 +153,7 @@ float msrScaling::fetchGlobalStaffSize () const
 
       --gIndenter;
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     if (result < 1.0 || result > 100.0) {
 #ifdef MF_TRACE_IS_ENABLED
@@ -170,7 +170,7 @@ float msrScaling::fetchGlobalStaffSize () const
           fInputLineNumber,
           ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       result = optionsGlobalStaffSize;
     }
@@ -194,7 +194,7 @@ void msrScaling::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrScaling>*
     p =
@@ -213,7 +213,7 @@ void msrScaling::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -232,7 +232,7 @@ void msrScaling::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrScaling>*
     p =

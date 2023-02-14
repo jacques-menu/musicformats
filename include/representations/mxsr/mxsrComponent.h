@@ -26,4 +26,4 @@ S_mfcRepresentationComponent EXP createMxsrRepresentationComponent ();
 
 }
 
-#endif
+#endif // ___mxsrComponent___

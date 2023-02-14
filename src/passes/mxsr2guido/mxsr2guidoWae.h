@@ -54,4 +54,4 @@ EXP void mxsr2guidoInternalError (
 }
 
 
-#endif
+#endif // ___mxsr2guidoWae___

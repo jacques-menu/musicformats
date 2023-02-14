@@ -493,7 +493,7 @@ void msrPageLayout::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrPageLayout>*
     p =
@@ -512,7 +512,7 @@ void msrPageLayout::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -531,7 +531,7 @@ void msrPageLayout::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrPageLayout>*
     p =
@@ -702,7 +702,7 @@ void msrSystemLayout::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrSystemLayout>*
     p =
@@ -721,7 +721,7 @@ void msrSystemLayout::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -740,7 +740,7 @@ void msrSystemLayout::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrSystemLayout>*
     p =
@@ -896,7 +896,7 @@ void msrSystemDividers::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrSystemDividers>*
     p =
@@ -915,7 +915,7 @@ void msrSystemDividers::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -934,7 +934,7 @@ void msrSystemDividers::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrSystemDividers>*
     p =
@@ -1044,7 +1044,7 @@ void msrStaffLayout::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrStaffLayout>*
     p =
@@ -1063,7 +1063,7 @@ void msrStaffLayout::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -1082,7 +1082,7 @@ void msrStaffLayout::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrStaffLayout>*
     p =
@@ -1195,7 +1195,7 @@ void msrMeasureLayout::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrMeasureLayout>*
     p =
@@ -1214,7 +1214,7 @@ void msrMeasureLayout::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -1233,7 +1233,7 @@ void msrMeasureLayout::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrMeasureLayout>*
     p =
@@ -1337,7 +1337,7 @@ msrLineWidth::msrLineWidth (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fLineWidthTypeKind = lineWidthTypeKind;
   fLineWidthValue    = lineWidthValue;
@@ -1360,7 +1360,7 @@ void msrLineWidth::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrLineWidth>*
     p =
@@ -1379,7 +1379,7 @@ void msrLineWidth::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -1398,7 +1398,7 @@ void msrLineWidth::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrLineWidth>*
     p =
@@ -1522,7 +1522,7 @@ msrNoteSize::msrNoteSize (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fNoteSizeTypeKind = noteSizeTypeKind;
   fNoteSizeValue    = noteSizeValue;
@@ -1545,7 +1545,7 @@ void msrNoteSize::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrNoteSize>*
     p =
@@ -1564,7 +1564,7 @@ void msrNoteSize::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -1583,7 +1583,7 @@ void msrNoteSize::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrNoteSize>*
     p =
@@ -1694,7 +1694,7 @@ msrDistance::msrDistance (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fDistanceTypeKind = distanceTypeKind;
   fDistanceValue    = distanceValue;
@@ -1717,7 +1717,7 @@ void msrDistance::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrDistance>*
     p =
@@ -1736,7 +1736,7 @@ void msrDistance::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -1755,7 +1755,7 @@ void msrDistance::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrDistance>*
     p =
@@ -1866,7 +1866,7 @@ msrGlyph::msrGlyph (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fGlyphTypeKind = glyphTypeKind;
   fGlyphValue    = glyphValue;
@@ -1889,7 +1889,7 @@ void msrGlyph::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrGlyph>*
     p =
@@ -1908,7 +1908,7 @@ void msrGlyph::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -1927,7 +1927,7 @@ void msrGlyph::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrGlyph>*
     p =
@@ -2038,7 +2038,7 @@ msrOtherAppearance::msrOtherAppearance (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fOtherAppearanceTypeKind = otherAppearanceTypeKind;
   fOtherAppearanceValue    = otherAppearanceValue;
@@ -2061,7 +2061,7 @@ void msrOtherAppearance::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrOtherAppearance>*
     p =
@@ -2080,7 +2080,7 @@ void msrOtherAppearance::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -2099,7 +2099,7 @@ void msrOtherAppearance::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrOtherAppearance>*
     p =
@@ -2204,7 +2204,7 @@ msrAppearance::msrAppearance (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 msrAppearance::~msrAppearance ()
@@ -2224,7 +2224,7 @@ void msrAppearance::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrAppearance>*
     p =
@@ -2243,7 +2243,7 @@ void msrAppearance::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -2262,7 +2262,7 @@ void msrAppearance::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrAppearance>*
     p =

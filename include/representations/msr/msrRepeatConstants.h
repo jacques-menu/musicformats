@@ -32,4 +32,4 @@ extern S_msrRepeat pGlobalNullRepeat;
 }
 
 
-#endif
+#endif // ___msrRepeatConstants___

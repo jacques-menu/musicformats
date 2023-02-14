@@ -140,4 +140,4 @@ EXP std::ostream& operator << (std::ostream& os, const S_msrTransposition& elt);
 }
 
 
-#endif
+#endif // ___msrTranspositions___

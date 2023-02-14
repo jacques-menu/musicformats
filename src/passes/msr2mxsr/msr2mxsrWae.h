@@ -87,4 +87,4 @@ EXP void msr2mxsrError (
 }
 
 
-#endif
+#endif // ___msr2mxsrWae___

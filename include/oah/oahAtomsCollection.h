@@ -3883,4 +3883,4 @@ EXP std::ostream& operator << (std::ostream& os, const S_oahIncludeOptionsAndArg
 }
 
 
-#endif
+#endif // ___oahAtomsCollection___

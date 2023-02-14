@@ -18,6 +18,7 @@
 
 namespace MusicFormats
 {
+
 //_______________________________________________________________________________
 class EXP msdl2musicxmlRegularHandler : public oahRegularHandler
 /*
@@ -164,4 +165,4 @@ EXP std::ostream& operator << (std::ostream& os, const S_msdl2musicxmlRegularHan
 }
 
 
-#endif
+#endif // ___msdl2musicxmlRegularHandler___

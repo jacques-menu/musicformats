@@ -100,7 +100,7 @@ void bsrMusicHeading::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_bsrMusicHeading>*
     p =
@@ -119,7 +119,7 @@ void bsrMusicHeading::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -139,7 +139,7 @@ void bsrMusicHeading::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_bsrMusicHeading>*
     p =
@@ -158,7 +158,7 @@ void bsrMusicHeading::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -178,7 +178,7 @@ void bsrMusicHeading::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (fMusicHeadingTempo) {
     // browse the tempo
@@ -211,7 +211,7 @@ void bsrMusicHeading::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 std::string bsrMusicHeading::asString () const

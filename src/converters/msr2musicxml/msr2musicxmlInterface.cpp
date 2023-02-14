@@ -79,7 +79,7 @@ EXP mfMusicformatsErrorKind msrScore2musicxmlWithHandler (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // has quiet mode been requested?
   // ------------------------------------------------------
@@ -164,7 +164,7 @@ EXP mfMusicformatsErrorKind msrScore2musicxmlWithHandler (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // convert the MXSR into MusicXML text
   // ------------------------------------------------------

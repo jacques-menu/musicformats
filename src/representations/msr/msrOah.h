@@ -12,6 +12,8 @@
 #ifndef ___msrOah___
 #define ___msrOah___
 
+#include "mfStaticSettings.h"
+
 #include "msrPitchesNames.h"
 #include "oahAtomsCollection.h"
 
@@ -387,7 +389,7 @@ class EXP msrOahGroup : public oahGroup
 
 #ifdef MF_TRACE_IS_ENABLED
     void                  initializeMsrTraceOah ();
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     void                  initializeMsrDisplayOptions ();
 
@@ -494,4 +496,4 @@ EXP S_msrOahGroup createGlobalMsrOahGroup ();
 }
 
 
-#endif
+#endif // ___msrOah___

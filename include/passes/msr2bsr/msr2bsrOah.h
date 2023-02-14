@@ -12,8 +12,9 @@
 #ifndef ___msr2bsrOah___
 #define ___msr2bsrOah___
 
-#include "bsrOah.h"
+#include "mfStaticSettings.h"
 
+#include "bsrOah.h"
 
 #include "oahBasicTypes.h"
 
@@ -104,7 +105,7 @@ class EXP msr2bsrOahGroup : public oahGroup
 
 #ifdef MF_TRACE_IS_ENABLED
 // JMI    void                  initializeMsr2bsrTraceOahGroup ();
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     void                  initializeMsr2bsrMiscellaneousOptions ();
 
@@ -161,4 +162,4 @@ EXP S_msr2bsrOahGroup createGlobalMsr2bsrOahGroup ();
 }
 
 
-#endif
+#endif // ___msr2bsrOah___

@@ -1,6 +1,6 @@
 /*
   MusicFormats Library
-  Copyright (C) Grame 2006-2020
+  Copyright (C) Jacques Menu 2016-2023
 
   This Source Code Form is subject to the terms of the Mozilla Public
   License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -37,4 +37,4 @@ std::ostream& operator << (std::ostream& os, const mfMusicformatsErrorKind& elt)
 }
 
 
-#endif
+#endif // ___musicformatsError___

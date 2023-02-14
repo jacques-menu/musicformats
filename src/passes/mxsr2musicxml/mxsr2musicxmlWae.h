@@ -34,4 +34,4 @@ typedef SMARTP<mxsr2musicxmlException> S_mxsr2musicxmlException;
 }
 
 
-#endif
+#endif // ___mxsr2musicxmlWae___

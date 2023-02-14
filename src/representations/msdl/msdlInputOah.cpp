@@ -100,7 +100,7 @@ void msdlKeywordsLanguageAtom::applyAtomWithValue (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // theString contains the language name:
   // is it in the keywords languages map?
@@ -117,7 +117,7 @@ void msdlKeywordsLanguageAtom::applyAtomWithValue (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   std::map<std::string, msdlKeywordsLanguageKind>::const_iterator
     it =
@@ -166,7 +166,7 @@ void msdlKeywordsLanguageAtom::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msdlKeywordsLanguageAtom>*
     p =
@@ -185,7 +185,7 @@ void msdlKeywordsLanguageAtom::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -204,7 +204,7 @@ void msdlKeywordsLanguageAtom::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msdlKeywordsLanguageAtom>*
     p =
@@ -223,7 +223,7 @@ void msdlKeywordsLanguageAtom::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -242,7 +242,7 @@ void msdlKeywordsLanguageAtom::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 std::string msdlKeywordsLanguageAtom::asShortNamedOptionString () const
@@ -442,7 +442,7 @@ void oahDisplayMsdlKeywordsInLanguageAtom::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_oahDisplayMsdlKeywordsInLanguageAtom>*
     p =
@@ -461,7 +461,7 @@ void oahDisplayMsdlKeywordsInLanguageAtom::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -480,7 +480,7 @@ void oahDisplayMsdlKeywordsInLanguageAtom::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_oahDisplayMsdlKeywordsInLanguageAtom>*
     p =
@@ -499,7 +499,7 @@ void oahDisplayMsdlKeywordsInLanguageAtom::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -518,7 +518,7 @@ void oahDisplayMsdlKeywordsInLanguageAtom::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 std::string oahDisplayMsdlKeywordsInLanguageAtom::asShortNamedOptionString () const
@@ -680,7 +680,7 @@ void oahDisplayMsdlTokensInLanguageAtom::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_oahDisplayMsdlTokensInLanguageAtom>*
     p =
@@ -699,7 +699,7 @@ void oahDisplayMsdlTokensInLanguageAtom::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -718,7 +718,7 @@ void oahDisplayMsdlTokensInLanguageAtom::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_oahDisplayMsdlTokensInLanguageAtom>*
     p =
@@ -737,7 +737,7 @@ void oahDisplayMsdlTokensInLanguageAtom::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -756,7 +756,7 @@ void oahDisplayMsdlTokensInLanguageAtom::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 std::string oahDisplayMsdlTokensInLanguageAtom::asShortNamedOptionString () const
@@ -866,7 +866,7 @@ void msdlCommentsTypeAtom::applyAtomWithValue (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // theString contains the language name:
   // is it in the keywords languages map?
@@ -883,7 +883,7 @@ void msdlCommentsTypeAtom::applyAtomWithValue (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   std::map<std::string, msdlCommentsTypeKind>::const_iterator
     it =
@@ -932,7 +932,7 @@ void msdlCommentsTypeAtom::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msdlCommentsTypeAtom>*
     p =
@@ -951,7 +951,7 @@ void msdlCommentsTypeAtom::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -970,7 +970,7 @@ void msdlCommentsTypeAtom::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msdlCommentsTypeAtom>*
     p =
@@ -989,7 +989,7 @@ void msdlCommentsTypeAtom::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -1008,7 +1008,7 @@ void msdlCommentsTypeAtom::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 std::string msdlCommentsTypeAtom::asShortNamedOptionString () const
@@ -1157,7 +1157,7 @@ void msdlUserLanguageAtom::applyAtomWithValue (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // theString contains the language name:
   // is it in the User languages map?
@@ -1174,7 +1174,7 @@ void msdlUserLanguageAtom::applyAtomWithValue (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   std::map<std::string, msdlUserLanguageKind>::const_iterator
     it =
@@ -1225,7 +1225,7 @@ void msdlUserLanguageAtom::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msdlUserLanguageAtom>*
     p =
@@ -1244,7 +1244,7 @@ void msdlUserLanguageAtom::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -1263,7 +1263,7 @@ void msdlUserLanguageAtom::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msdlUserLanguageAtom>*
     p =
@@ -1282,7 +1282,7 @@ void msdlUserLanguageAtom::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -1301,7 +1301,7 @@ void msdlUserLanguageAtom::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 std::string msdlUserLanguageAtom::asShortNamedOptionString () const
@@ -1453,7 +1453,7 @@ void msdlPitchesLanguageAtom::applyAtomWithValue (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // theString contains the language name:
   // is it in the pitches languages map?
@@ -1470,7 +1470,7 @@ void msdlPitchesLanguageAtom::applyAtomWithValue (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   std::map<std::string, msrQuarterTonesPitchesLanguageKind>::const_iterator
     it =
@@ -1521,7 +1521,7 @@ void msdlPitchesLanguageAtom::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msdlPitchesLanguageAtom>*
     p =
@@ -1540,7 +1540,7 @@ void msdlPitchesLanguageAtom::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -1559,7 +1559,7 @@ void msdlPitchesLanguageAtom::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msdlPitchesLanguageAtom>*
     p =
@@ -1578,7 +1578,7 @@ void msdlPitchesLanguageAtom::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -1597,7 +1597,7 @@ void msdlPitchesLanguageAtom::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 std::string msdlPitchesLanguageAtom::asShortNamedOptionString () const
@@ -1961,7 +1961,7 @@ void msdlInputOahGroup::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msdlInputOahGroup>*
     p =
@@ -1980,7 +1980,7 @@ void msdlInputOahGroup::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -1999,7 +1999,7 @@ void msdlInputOahGroup::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msdlInputOahGroup>*
     p =
@@ -2018,7 +2018,7 @@ void msdlInputOahGroup::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -2037,7 +2037,7 @@ void msdlInputOahGroup::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //______________________________________________________________________________
@@ -2120,7 +2120,7 @@ S_msdlInputOahGroup createGlobalMsdlInputOahGroup (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // protect library against multiple initializations
   if (! gGlobalMsdlInputOahGroup) {

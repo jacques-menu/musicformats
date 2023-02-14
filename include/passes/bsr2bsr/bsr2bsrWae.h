@@ -75,4 +75,4 @@ EXP void bsr2bsrInternalError (
 }
 
 
-#endif
+#endif // ___bsr2bsrWae___

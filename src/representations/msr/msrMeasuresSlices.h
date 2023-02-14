@@ -388,4 +388,4 @@ EXP std::ostream& operator << (std::ostream& os, const S_msrMeasuresSlicesSequen
 }
 
 
-#endif
+#endif // ___msrMeasuresSlices___

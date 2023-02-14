@@ -59,7 +59,7 @@ mfslDriver::mfslDriver ()
     if (gEarlyOptions.getEarlyTraceOah ()) {
       gLog << "Reading standard input" << std::endl;
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
   }
 
   else {
@@ -76,7 +76,7 @@ mfslDriver::mfslDriver ()
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
   }
 
   // get the options values as bool,
@@ -238,7 +238,7 @@ S_mfslOptionsBlock mfslDriver::optionsBlocksStackTop () const
     __FILE__, __LINE__,
     fOptionsBlocksStack.size (),
     "optionsBlocksStackTop(): fOptionsBlocksStack is empty");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   return fOptionsBlocksStack.front ();
 }
@@ -257,7 +257,7 @@ void mfslDriver::registerOptionInCurrentOptionsBlock (
     __FILE__, __LINE__,
     currentOptionsBlock != nullptr,
     "currentOptionsBlock is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   if (fDisplayOptions) { // JMI
     gLog <<
@@ -314,7 +314,7 @@ void mfslDriver::optionsBlocksStackPop (
     __FILE__, __LINE__,
     fOptionsBlocksStack.size () != 0,
     "optionsBlocksStackPop(): fOptionsBlocksStack is empty");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   if (fTraceOptionsBlocks) {
     gLog <<
@@ -389,7 +389,7 @@ S_mfslCaseChoiceStatement mfslDriver::caseChoiceStatementsStackTop () const
     __FILE__, __LINE__,
     fCaseChoiceStatementsStack.size (),
     "caseChoiceStatementsStackTop(): fCaseChoiceStatementsStack is empty");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   return fCaseChoiceStatementsStack.front ();
 }
@@ -402,7 +402,7 @@ void mfslDriver::caseChoiceStatementsStackPop ()
     __FILE__, __LINE__,
     fCaseChoiceStatementsStack.size () != 0,
     "caseChoiceStatementsStackPop(): fCaseChoiceStatementsStack is empty");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   if (fTraceCaseChoiceStatements) {
     gLog <<
@@ -473,7 +473,7 @@ S_mfslCaseInputStatement mfslDriver::caseInputStatementsStackTop () const
     __FILE__, __LINE__,
     fCaseInputStatementsStack.size (),
     "caseInputStatementsStackTop(): fCaseInputStatementsStack is empty");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   return fCaseInputStatementsStack.front ();
 }
@@ -486,7 +486,7 @@ void mfslDriver::caseInputStatementsStackPop ()
     __FILE__, __LINE__,
     fCaseInputStatementsStack.size () != 0,
     "caseInputStatementsStackPop(): fCaseInputStatementsStack is empty");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   if (fTraceCaseInputStatements) {
     gLog <<
@@ -818,7 +818,7 @@ mfMusicformatsErrorKind mfslDriver::launchMfslTool_Pass2 ()
     __FILE__, __LINE__,
     fCaseChoiceStatementsStack.size () == 0,
     "fCaseChoiceStatementsStack should be empty after parsing");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // populate the commands list with the options gathered in the script
   populateTheCommandsList ();

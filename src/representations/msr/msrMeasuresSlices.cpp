@@ -333,7 +333,7 @@ S_msrMeasuresSlice msrMeasuresSlice::createMeasuresSliceShallowCopy ()
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // create the shallow copy
   S_msrMeasuresSlice
@@ -376,7 +376,7 @@ void msrMeasuresSlice::appendMeasureToMeasureSlice (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fSliceMeasuresVector.push_back (measure);
 }
@@ -400,7 +400,7 @@ void msrMeasuresSlice::appendSliceMeasuresFrom (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
@@ -425,7 +425,7 @@ if (true) // JMI
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   size_t otherSliceSize = otherSlice->getSliceSize ();
 
@@ -461,7 +461,7 @@ void msrMeasuresSlice::collectNonSkipNotesFromMeasuresSliceMeasures ()
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // collect the notes from the measures
   for (
@@ -500,7 +500,7 @@ void msrMeasuresSlice::collectNonSkipNotesFromMeasuresSliceMeasures ()
           __FILE__, __LINE__,
           ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       // don't keep the skip notes,
       // they're the ones that may make another note or rest 'solo'
@@ -586,7 +586,7 @@ void msrMeasuresSlice::buildTheSimutaneousNotesChunksList ()
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   S_msrSimultaneousNotesChunk
     currentSimultaneousNotesChunk;
@@ -659,7 +659,7 @@ void msrMeasuresSlice::identifySoloNotesAndRestsInMeasuresSlice ()
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   int simultaneousNotesNumber = 0;
 
@@ -722,7 +722,7 @@ void msrMeasuresSlice::identifySoloNotesAndRestsInMeasuresSlice ()
               " is a solo candidate" <<
               std::endl;
           }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         }
 
         else {
@@ -746,7 +746,7 @@ void msrMeasuresSlice::identifySoloNotesAndRestsInMeasuresSlice ()
                   "\"";
               }
             }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
             soloCandidate = nullptr;
           }
@@ -789,7 +789,7 @@ void msrMeasuresSlice::identifySoloNotesAndRestsInMeasuresSlice ()
                       "Solo note or rest? " <<
                       note->asShortStringForTimeView ();
                   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
                   if (staffRegularVoicesListSize > 1) {
                     // this is a solo note or rest
@@ -819,7 +819,7 @@ void msrMeasuresSlice::identifySoloNotesAndRestsInMeasuresSlice ()
                         " has been identified" <<
                         std::endl;
                     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
                   }
                 }
                 break;
@@ -1164,7 +1164,7 @@ S_msrMeasuresSlicesSequence msrMeasuresSlicesSequence::createMeasuresSlicesSeque
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // create shallow copy
   S_msrMeasuresSlicesSequence
@@ -1208,7 +1208,7 @@ void msrMeasuresSlicesSequence::appendMeasuresSliceToSequence (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fMeasuresSlicesVector.push_back (
     measuresSlice);
@@ -1237,7 +1237,7 @@ S_msrMeasuresSlicesSequence msrMeasuresSlicesSequence::mergeWithMeasuresSlicesSe
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   size_t sequenceSize =
     getSlicesSequenceSize ();
@@ -1255,7 +1255,7 @@ S_msrMeasuresSlicesSequence msrMeasuresSlicesSequence::mergeWithMeasuresSlicesSe
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (sequenceSize == 0) {
     // merge an empty measures slices sequence with another
@@ -1294,7 +1294,7 @@ S_msrMeasuresSlicesSequence msrMeasuresSlicesSequence::mergeWithMeasuresSlicesSe
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
@@ -1323,7 +1323,7 @@ S_msrMeasuresSlicesSequence msrMeasuresSlicesSequence::mergeWithMeasuresSlicesSe
     }
 
     else {
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
       if (sequenceSize) {
         // the two measures slices sequences have the same non null size
 
@@ -1366,7 +1366,7 @@ S_msrMeasuresSlicesSequence msrMeasuresSlicesSequence::mergeWithMeasuresSlicesSe
       }
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
     }
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
   }
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -1383,7 +1383,7 @@ S_msrMeasuresSlicesSequence msrMeasuresSlicesSequence::mergeWithMeasuresSlicesSe
       std::endl;
     --gIndenter;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   return result;
 }
@@ -1404,7 +1404,7 @@ void msrMeasuresSlicesSequence::identifySoloNotesAndRests ()
     gLog << this;
     --gIndenter;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // collect the notes from the sequence's measures slices
   for (

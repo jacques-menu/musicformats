@@ -65,7 +65,7 @@ void ischemeInterpreterOahGroup::initializeIschemeInterpreterOahGroup ()
   // trace
   // --------------------------------------
 // JMI  initializeischemeInterpreterTraceOah ();
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // user options
   // --------------------------------------
@@ -271,7 +271,7 @@ void ischemeInterpreterOahGroup::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_ischemeInterpreterOahGroup>*
     p =
@@ -290,7 +290,7 @@ void ischemeInterpreterOahGroup::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -309,7 +309,7 @@ void ischemeInterpreterOahGroup::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_ischemeInterpreterOahGroup>*
     p =
@@ -328,7 +328,7 @@ void ischemeInterpreterOahGroup::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -347,7 +347,7 @@ void ischemeInterpreterOahGroup::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void ischemeInterpreterOahGroup::printIschemeInterpreterOahValues (
@@ -474,7 +474,7 @@ S_ischemeInterpreterOahGroup createGlobalIschemeInterpreterOahGroup ()
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // protect library against multiple initializations
   if (! gGlobalIschemeInterpreterOahGroup) {

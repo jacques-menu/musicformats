@@ -159,7 +159,7 @@ void Mikrokosmos3WanderingOahGroup::initializeMikrokosmos3WanderingOahGroup ()
   // trace
   // --------------------------------------
 // JMI  initializeMikrokosmos3WanderingTraceOah ();
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // generation API
   // --------------------------------------
@@ -214,7 +214,7 @@ void Mikrokosmos3WanderingOahGroup::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_Mikrokosmos3WanderingOahGroup>*
     p =
@@ -233,7 +233,7 @@ void Mikrokosmos3WanderingOahGroup::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -252,7 +252,7 @@ void Mikrokosmos3WanderingOahGroup::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_Mikrokosmos3WanderingOahGroup>*
     p =
@@ -271,7 +271,7 @@ void Mikrokosmos3WanderingOahGroup::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -290,7 +290,7 @@ void Mikrokosmos3WanderingOahGroup::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void Mikrokosmos3WanderingOahGroup::printMikrokosmos3WanderingOahValues (
@@ -364,7 +364,7 @@ S_Mikrokosmos3WanderingOahGroup createGlobalMikrokosmos3WanderingOahGroup ()
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // protect library against multiple initializations
   if (! gGlobalMikrokosmos3WanderingOahGroup) {

@@ -285,4 +285,4 @@ EXP std::ostream& operator << (std::ostream& os, const S_msrFrame& elt);
 }
 
 
-#endif
+#endif // ___msrTablatures___

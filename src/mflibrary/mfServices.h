@@ -9,8 +9,8 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#ifndef ___mfServiceRunData___
-#define ___mfServiceRunData___
+#ifndef ___mfServices___
+#define ___mfServices___
 
 #include <list>
 
@@ -242,4 +242,4 @@ EXP S_mfServiceRunData getGlobalServiceRunData ();
 }
 
 
-#endif
+#endif // ___mfServices___

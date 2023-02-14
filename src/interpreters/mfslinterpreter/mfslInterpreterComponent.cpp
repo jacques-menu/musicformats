@@ -89,7 +89,7 @@ S_mfcConverterComponent createMfslInterpreterComponent ()
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     // create the interpreter component
     pConverterComponent =

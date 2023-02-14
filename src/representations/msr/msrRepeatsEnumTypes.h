@@ -58,4 +58,4 @@ std::ostream& operator << (std::ostream& os, const msrRepeatEndingKind& elt);
 }
 
 
-#endif
+#endif // ___msrRepeatsEnumTypes___

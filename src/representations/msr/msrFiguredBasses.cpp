@@ -177,7 +177,7 @@ msrBassFigure::msrBassFigure (
     __FILE__, __LINE__,
     figureUpLinkToPart != nullptr,
     "figureUpLinkToPart is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // set figured's part upLink
   fFigureUpLinkToPart =
@@ -200,7 +200,7 @@ msrBassFigure::msrBassFigure (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 msrBassFigure::~msrBassFigure ()
@@ -222,7 +222,7 @@ S_msrBassFigure msrBassFigure::createFigureNewbornClone (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
@@ -230,7 +230,7 @@ S_msrBassFigure msrBassFigure::createFigureNewbornClone (
     __FILE__, __LINE__,
     containingPart != nullptr,
     "containingPart is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   S_msrBassFigure
     newbornClone =
@@ -260,7 +260,7 @@ S_msrBassFigure msrBassFigure::createFigureDeepClone (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
@@ -268,7 +268,7 @@ S_msrBassFigure msrBassFigure::createFigureDeepClone (
     __FILE__, __LINE__,
     containingPart != nullptr,
     "containingPart is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   S_msrBassFigure
     deepClone =
@@ -296,7 +296,7 @@ void msrBassFigure::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrBassFigure>*
     p =
@@ -315,7 +315,7 @@ void msrBassFigure::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -334,7 +334,7 @@ void msrBassFigure::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrBassFigure>*
     p =
@@ -353,7 +353,7 @@ void msrBassFigure::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif        
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -524,7 +524,7 @@ msrFiguredBass::msrFiguredBass (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 msrFiguredBass::~msrFiguredBass ()
@@ -547,7 +547,7 @@ S_msrFiguredBass msrFiguredBass::createFiguredBassNewbornClone (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
@@ -555,7 +555,7 @@ S_msrFiguredBass msrFiguredBass::createFiguredBassNewbornClone (
     __FILE__, __LINE__,
     containingVoice != nullptr,
     "containingVoice is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   S_msrFiguredBass
     newbornClone =
@@ -590,7 +590,7 @@ S_msrFiguredBass msrFiguredBass::createFiguredBassDeepClone ()
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 // #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
@@ -598,7 +598,7 @@ S_msrFiguredBass msrFiguredBass::createFiguredBassDeepClone ()
 //     __FILE__, __LINE__,
 //     containingPart != nullptr,
 //     "containingPart is null");
-// #endif
+// ?#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   S_msrFiguredBass
     figuredBassDeepClone =
@@ -633,7 +633,7 @@ void msrFiguredBass::setFiguredBassUpLinkToNote (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
@@ -641,7 +641,7 @@ void msrFiguredBass::setFiguredBassUpLinkToNote (
     __FILE__, __LINE__,
     note != nullptr,
     "note is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fFiguredBassUpLinkToNote = note;
 }
@@ -655,7 +655,7 @@ void msrFiguredBass::setFiguredBassUpLinkToMeasure (
     __FILE__, __LINE__,
     measure != nullptr,
     "measure is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalTraceOahGroup->getTraceFiguredBasses ()) {
@@ -671,7 +671,7 @@ void msrFiguredBass::setFiguredBassUpLinkToMeasure (
 
     --gIndenter;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fFiguredBassUpLinkToMeasure = measure;
 }
@@ -694,7 +694,7 @@ void msrFiguredBass::appendFigureToFiguredBass (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fFiguredBassFiguresList.push_back (bassFigure);
 }
@@ -713,7 +713,7 @@ void msrFiguredBass::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrFiguredBass>*
     p =
@@ -732,7 +732,7 @@ void msrFiguredBass::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -751,7 +751,7 @@ void msrFiguredBass::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrFiguredBass>*
     p =
@@ -770,7 +770,7 @@ void msrFiguredBass::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif        
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }

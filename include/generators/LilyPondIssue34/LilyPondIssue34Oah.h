@@ -12,6 +12,8 @@
 #ifndef ___LilyPondIssue34Oah___
 #define ___LilyPondIssue34Oah___
 
+#include "mfStaticSettings.h"
+
 #include "mfMultiGenerationOah.h"
 
 #include "msrGenerationBasicTypes.h"
@@ -102,7 +104,7 @@ class EXP LilyPondIssue34OahGroup : public oahGroup
 
 #ifdef MF_TRACE_IS_ENABLED
 // JMI    void                  initializeLilyPondIssue34TraceOah ();
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     void                  initializeGenerationAPIOptions ();
 
@@ -158,4 +160,4 @@ EXP S_LilyPondIssue34OahGroup createGlobalLilyPondIssue34OahGroup ();
 }
 
 
-#endif
+#endif // ___LilyPondIssue34Oah___

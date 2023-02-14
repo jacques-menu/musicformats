@@ -214,4 +214,4 @@ EXP std::ostream& operator << (std::ostream& os, const S_lpsrSchemeFunction& sch
 }
 
 
-#endif
+#endif // ___lpsrScheme___

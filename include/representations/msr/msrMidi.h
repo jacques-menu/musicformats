@@ -102,4 +102,4 @@ EXP std::ostream& operator << (std::ostream& os, const S_msrMidiTempo& elt);
 }
 
 
-#endif
+#endif // ___msrMidi___

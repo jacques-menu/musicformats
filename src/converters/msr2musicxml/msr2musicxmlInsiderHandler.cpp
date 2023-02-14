@@ -25,6 +25,7 @@
 #include "waeOah.h"
 #include "mfOutputFileOah.h"
 #include "oahDisplayOah.h"
+#include "oahHarmoniesExtraOah.h"
 
 #include "mxsrOah.h"
 #include "msr2mxsrOah.h"
@@ -90,7 +91,7 @@ Usage: msr2musicxml [[option]* [MusicXMLFile|-] [[option]*
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // initialize the history
   initializeHandlerMultiComponent ();
@@ -151,7 +152,7 @@ void msr2musicxmlInsiderHandler::createTheMsr2musicxmlPrefixes ()
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   createTheCommonPrefixes ();
 }
@@ -174,7 +175,7 @@ void msr2musicxmlInsiderHandler::createTheMsr2musicxmlOptionGroups (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // initialize options handling, phase 1
   // ------------------------------------------------------
@@ -193,7 +194,7 @@ void msr2musicxmlInsiderHandler::createTheMsr2musicxmlOptionGroups (
   appendGroupToHandler (
     createGlobalTraceOahGroup (
       this));
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // create the output file OAH group
   appendGroupToHandler (
@@ -235,11 +236,9 @@ void msr2musicxmlInsiderHandler::createTheMsr2musicxmlOptionGroups (
   appendGroupToHandler (
     createGlobalMsr2mxsrOahGroup ());
 
-#ifdef MF_HARMONIES_EXTRA_IS_ENABLED
   // create the extra OAH group
   appendGroupToHandler (
     createGlobalHarmoniesExtraOahGroup ());
-#endif
 }
 
 //______________________________________________________________________________
@@ -259,7 +258,7 @@ void msr2musicxmlInsiderHandler::checkOptionsAndArguments () const
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   checkSingleInputSourceInArgumentsVector ();
 }
@@ -281,7 +280,7 @@ std::string msr2musicxmlInsiderHandler::fetchOutputFileNameFromTheOptions () con
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   S_oahStringAtom
     outputFileNameStringAtom =
@@ -375,7 +374,7 @@ std::string msr2musicxmlInsiderHandler::fetchOutputFileNameFromTheOptions () con
           __FILE__, __LINE__,
           ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       // append the file extension to the output file name
        outputFileName += ".xml";
@@ -394,7 +393,7 @@ std::string msr2musicxmlInsiderHandler::fetchOutputFileNameFromTheOptions () con
           __FILE__, __LINE__,
           ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
     }
 
     else {
@@ -417,7 +416,7 @@ void msr2musicxmlInsiderHandler::enforceHandlerQuietness ()
 #ifdef MF_TRACE_IS_ENABLED
   gGlobalTraceOahGroup->
     enforceGroupQuietness ();
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   gGlobalMsr2musicxmlInsiderOahGroup->
     enforceGroupQuietness ();
@@ -428,10 +427,8 @@ void msr2musicxmlInsiderHandler::enforceHandlerQuietness ()
   gGlobalMsr2mxsrOahGroup->
     enforceGroupQuietness ();
 
-#ifdef MF_HARMONIES_EXTRA_IS_ENABLED
-  gGlobalHarmoniesExtraOahGroup->
+  gHarmoniesExtraOahGroup->
     enforceGroupQuietness ();
-#endif
 }
 
 //______________________________________________________________________________
@@ -490,7 +487,7 @@ void msr2musicxmlInsiderOahGroup::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msr2musicxmlInsiderOahGroup>*
     p =
@@ -509,7 +506,7 @@ void msr2musicxmlInsiderOahGroup::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -528,7 +525,7 @@ void msr2musicxmlInsiderOahGroup::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msr2musicxmlInsiderOahGroup>*
     p =
@@ -547,7 +544,7 @@ void msr2musicxmlInsiderOahGroup::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -566,7 +563,7 @@ void msr2musicxmlInsiderOahGroup::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   oahGroup::browseData (v);
 }
@@ -664,7 +661,7 @@ void msr2musicxmlInsiderOahGroup::initializeMsr2musicxmlInsiderOahGroup ()
     "\" group" <<
     std::endl;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //______________________________________________________________________________
@@ -713,7 +710,7 @@ S_msr2musicxmlInsiderOahGroup createGlobalMsr2musicxmlOahGroup ()
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // protect library against multiple initializations
   if (! gGlobalMsr2musicxmlInsiderOahGroup) {

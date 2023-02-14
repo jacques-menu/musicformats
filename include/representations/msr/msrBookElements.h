@@ -53,4 +53,4 @@ EXP std::ostream& operator << (std::ostream& os, const S_msrBookElement& elt);
 }
 
 
-#endif
+#endif // ___msrBookElements___

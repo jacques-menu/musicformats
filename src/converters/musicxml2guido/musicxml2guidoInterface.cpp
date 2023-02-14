@@ -94,7 +94,7 @@ static mfMusicformatsErrorKind xmlFile2guidoWithHandler (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // has quiet mode been requested?
   // ------------------------------------------------------
@@ -146,7 +146,7 @@ static mfMusicformatsErrorKind xmlFile2guidoWithHandler (
       err,
       __FILE__, __LINE__,
       gLanguage->quittingAfterPass (mfPassIDKind::kMfPassID_2a));
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     return mfMusicformatsErrorKind::kMusicformatsError_NONE;
   }
@@ -180,7 +180,7 @@ static mfMusicformatsErrorKind xmlFile2guidoWithHandler (
       err,
       __FILE__, __LINE__,
       gLanguage->quittingAfterPass (mfPassIDKind::kMfPassID_2b));
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     return mfMusicformatsErrorKind::kMusicformatsError_NONE;
   }
@@ -217,7 +217,7 @@ static mfMusicformatsErrorKind xmlFile2guidoWithHandler (
       err,
       __FILE__, __LINE__,
       gLanguage->quittingAfterPass (mfPassIDKind::kMfPassID_3));
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     return mfMusicformatsErrorKind::kMusicformatsError_NONE;
   }
@@ -298,7 +298,7 @@ static mfMusicformatsErrorKind xmlFile2guidoWithOptionsAndArguments (
     "xmlFile2guido(), sxmlfile is NULL" <<
     std::endl;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
@@ -327,7 +327,7 @@ static mfMusicformatsErrorKind xmlFile2guidoWithOptionsAndArguments (
     ss <<
       handlerOptionsAndArguments;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // apply early options if any
   // ------------------------------------------------------
@@ -354,7 +354,7 @@ static mfMusicformatsErrorKind xmlFile2guidoWithOptionsAndArguments (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // create an xml2gmn insider OAH handler
   // ------------------------------------------------------

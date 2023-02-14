@@ -106,4 +106,4 @@ EXP msrIntervalKind intervalBetweenSemiTonesPitches (
 
 }
 
-#endif
+#endif // ___msrIntervals___

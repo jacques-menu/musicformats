@@ -21,6 +21,7 @@
 
 namespace MusicFormats
 {
+
 //_______________________________________________________________________________
 class EXP msdl2brailleRegularHandler : public oahRegularHandler
 /*
@@ -171,4 +172,4 @@ EXP std::ostream& operator << (std::ostream& os, const S_msdl2brailleRegularHand
 }
 
 
-#endif
+#endif // ___msdl2brailleRegularHandler___

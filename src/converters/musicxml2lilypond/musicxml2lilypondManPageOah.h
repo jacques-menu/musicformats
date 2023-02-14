@@ -12,6 +12,8 @@
 #ifndef ___musicxml2lilypondManPageOah___
 #define ___musicxml2lilypondManPageOah___
 
+#include "mfStaticSettings.h"
+
 #include "oahVisitor.h"
 
 #include "musicxml2lilypondManPageOah.h"
@@ -153,7 +155,7 @@ class EXP xml2lyManPageOahGroup : public oahGroup
 
 #ifdef MF_TRACE_IS_ENABLED
     void                  initializeManPageTraceOah ();
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   public:
 
@@ -194,4 +196,4 @@ EXP S_xml2lyManPageOahGroup createGlobalXml2lyManPageOahGroup (
 }
 
 
-#endif
+#endif // ___musicxml2lilypondManPageOah___

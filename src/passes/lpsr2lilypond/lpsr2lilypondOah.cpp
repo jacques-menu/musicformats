@@ -121,7 +121,7 @@ void lilypondScoreOutputKindAtom::applyAtomWithValue (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 	fSelected = true;
 }
@@ -140,7 +140,7 @@ void lilypondScoreOutputKindAtom::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_lilypondScoreOutputKindAtom>*
     p =
@@ -159,7 +159,7 @@ void lilypondScoreOutputKindAtom::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -178,7 +178,7 @@ void lilypondScoreOutputKindAtom::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_lilypondScoreOutputKindAtom>*
     p =
@@ -197,7 +197,7 @@ void lilypondScoreOutputKindAtom::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -216,7 +216,7 @@ void lilypondScoreOutputKindAtom::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 std::string lilypondScoreOutputKindAtom::asShortNamedOptionString () const
@@ -366,7 +366,7 @@ void lilypondTransposePartNameAtom::applyAtomWithValue (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // theString contains the part transpose specification
   // decipher it to extract the old and new part names
@@ -402,7 +402,7 @@ void lilypondTransposePartNameAtom::applyAtomWithValue (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (smSize == 3) {
 #ifdef MF_TRACE_IS_ENABLED
@@ -413,7 +413,7 @@ void lilypondTransposePartNameAtom::applyAtomWithValue (
       } // for
       gLog << std::endl;
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
   }
 
   else {
@@ -443,7 +443,7 @@ void lilypondTransposePartNameAtom::applyAtomWithValue (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // is this part name in the part renaming map?
   std::map<std::string, S_msrSemiTonesPitchAndOctave>::iterator
@@ -486,7 +486,7 @@ void lilypondTransposePartNameAtom::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_lilypondTransposePartNameAtom>*
     p =
@@ -505,7 +505,7 @@ void lilypondTransposePartNameAtom::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -524,7 +524,7 @@ void lilypondTransposePartNameAtom::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_lilypondTransposePartNameAtom>*
     p =
@@ -543,7 +543,7 @@ void lilypondTransposePartNameAtom::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -562,7 +562,7 @@ void lilypondTransposePartNameAtom::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 std::string lilypondTransposePartNameAtom::asShortNamedOptionString () const
@@ -779,7 +779,7 @@ void lilypondTransposePartIDAtom::applyAtomWithValue (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // theString contains the part transpose specification
   // decipher it to extract the old and new part names
@@ -812,7 +812,7 @@ void lilypondTransposePartIDAtom::applyAtomWithValue (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (smSize == 3) {
 #ifdef MF_TRACE_IS_ENABLED
@@ -823,7 +823,7 @@ void lilypondTransposePartIDAtom::applyAtomWithValue (
       } // for
       gLog << std::endl;
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
   }
 
   else {
@@ -853,7 +853,7 @@ void lilypondTransposePartIDAtom::applyAtomWithValue (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // is this part name in the part renaming map?
   std::map<std::string, S_msrSemiTonesPitchAndOctave>::iterator
@@ -896,7 +896,7 @@ void lilypondTransposePartIDAtom::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_lilypondTransposePartIDAtom>*
     p =
@@ -915,7 +915,7 @@ void lilypondTransposePartIDAtom::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -934,7 +934,7 @@ void lilypondTransposePartIDAtom::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_lilypondTransposePartIDAtom>*
     p =
@@ -953,7 +953,7 @@ void lilypondTransposePartIDAtom::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -972,7 +972,7 @@ void lilypondTransposePartIDAtom::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 std::string lilypondTransposePartIDAtom::asShortNamedOptionString () const
@@ -1264,7 +1264,7 @@ void lilypondAbsoluteOctaveEntryAtom::applyValueLessAtom (std::ostream& os)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // set octave entry kind
   fOctaveEntryKindVariable.setOctaveEntryKind (
@@ -1287,7 +1287,7 @@ void lilypondAbsoluteOctaveEntryAtom::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_lilypondAbsoluteOctaveEntryAtom>*
     p =
@@ -1306,7 +1306,7 @@ void lilypondAbsoluteOctaveEntryAtom::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -1325,7 +1325,7 @@ void lilypondAbsoluteOctaveEntryAtom::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_lilypondAbsoluteOctaveEntryAtom>*
     p =
@@ -1344,7 +1344,7 @@ void lilypondAbsoluteOctaveEntryAtom::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -1363,7 +1363,7 @@ void lilypondAbsoluteOctaveEntryAtom::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void lilypondAbsoluteOctaveEntryAtom::applyAtomWithValue (
@@ -1480,7 +1480,7 @@ void lilypondRelativeOctaveEntryAtom::applyAtomWithValue (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // theString contains the relative reference note
 
@@ -1550,7 +1550,7 @@ void lilypondRelativeOctaveEntryAtom::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_lilypondRelativeOctaveEntryAtom>*
     p =
@@ -1569,7 +1569,7 @@ void lilypondRelativeOctaveEntryAtom::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -1588,7 +1588,7 @@ void lilypondRelativeOctaveEntryAtom::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_lilypondRelativeOctaveEntryAtom>*
     p =
@@ -1607,7 +1607,7 @@ void lilypondRelativeOctaveEntryAtom::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -1626,7 +1626,7 @@ void lilypondRelativeOctaveEntryAtom::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 std::string lilypondRelativeOctaveEntryAtom::asShortNamedOptionString () const
@@ -1774,7 +1774,7 @@ void lilypondFixedOctaveEntryAtom::applyAtomWithValue (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // theString contains the fixed reference note
 
@@ -1805,7 +1805,7 @@ void lilypondFixedOctaveEntryAtom::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_lilypondFixedOctaveEntryAtom>*
     p =
@@ -1824,7 +1824,7 @@ void lilypondFixedOctaveEntryAtom::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -1843,7 +1843,7 @@ void lilypondFixedOctaveEntryAtom::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_lilypondFixedOctaveEntryAtom>*
     p =
@@ -1862,7 +1862,7 @@ void lilypondFixedOctaveEntryAtom::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -1881,7 +1881,7 @@ void lilypondFixedOctaveEntryAtom::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 std::string lilypondFixedOctaveEntryAtom::asShortNamedOptionString () const
@@ -2022,7 +2022,7 @@ void lilypondAccidentalStyleKindAtom::applyAtomWithValue (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // theString contains the language name:
   // is it in the accidental styles map?
@@ -2039,7 +2039,7 @@ void lilypondAccidentalStyleKindAtom::applyAtomWithValue (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   std::map<std::string, lpsrAccidentalStyleKind>::const_iterator
     it =
@@ -2089,7 +2089,7 @@ void lilypondAccidentalStyleKindAtom::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_lilypondAccidentalStyleKindAtom>*
     p =
@@ -2108,7 +2108,7 @@ void lilypondAccidentalStyleKindAtom::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -2127,7 +2127,7 @@ void lilypondAccidentalStyleKindAtom::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_lilypondAccidentalStyleKindAtom>*
     p =
@@ -2146,7 +2146,7 @@ void lilypondAccidentalStyleKindAtom::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -2165,7 +2165,7 @@ void lilypondAccidentalStyleKindAtom::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 std::string lilypondAccidentalStyleKindAtom::asShortNamedOptionString () const
@@ -2314,7 +2314,7 @@ void lilypondChordsDisplayAtom::applyAtomWithValue (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   /*
     % std::exception music is chords with markups
@@ -2366,7 +2366,7 @@ void lilypondChordsDisplayAtom::applyAtomWithValue (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   std::string regularExpression (
     "(<.+>)"
@@ -2403,7 +2403,7 @@ void lilypondChordsDisplayAtom::applyAtomWithValue (
 
     --gIndenter;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (smSize != 3) {
     std::stringstream ss;
@@ -2434,7 +2434,7 @@ void lilypondChordsDisplayAtom::applyAtomWithValue (
     std::make_pair (
       chordContents, chordsDisplaycode));
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 	fSelected = true;
 }
@@ -2453,7 +2453,7 @@ void lilypondChordsDisplayAtom::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_lilypondChordsDisplayAtom>*
     p =
@@ -2472,7 +2472,7 @@ void lilypondChordsDisplayAtom::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -2491,7 +2491,7 @@ void lilypondChordsDisplayAtom::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_lilypondChordsDisplayAtom>*
     p =
@@ -2510,7 +2510,7 @@ void lilypondChordsDisplayAtom::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -2529,7 +2529,7 @@ void lilypondChordsDisplayAtom::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 std::string lilypondChordsDisplayAtom::asShortNamedOptionString () const
@@ -2742,7 +2742,7 @@ void lilypondLyricsDurationsKindAtom::applyAtomWithValue (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // theString contains the language name:
   // is it in the lyrics alignment kinds map?
@@ -2759,7 +2759,7 @@ void lilypondLyricsDurationsKindAtom::applyAtomWithValue (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   std::map<std::string, lpsrLyricsDurationsKind>::const_iterator
     it =
@@ -2809,7 +2809,7 @@ void lilypondLyricsDurationsKindAtom::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_lilypondLyricsDurationsKindAtom>*
     p =
@@ -2828,7 +2828,7 @@ void lilypondLyricsDurationsKindAtom::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -2847,7 +2847,7 @@ void lilypondLyricsDurationsKindAtom::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_lilypondLyricsDurationsKindAtom>*
     p =
@@ -2866,7 +2866,7 @@ void lilypondLyricsDurationsKindAtom::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -2885,7 +2885,7 @@ void lilypondLyricsDurationsKindAtom::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 std::string lilypondLyricsDurationsKindAtom::asShortNamedOptionString () const
@@ -3037,7 +3037,7 @@ void lilypondDynamicsTextSpannersStyleKindAtom::applyAtomWithValue (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // theString contains the dynamics text spanners style name:
   // is it in the lyrics alignment kinds map?
@@ -3054,7 +3054,7 @@ void lilypondDynamicsTextSpannersStyleKindAtom::applyAtomWithValue (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   std::map<std::string, lpsrDynamicsTextSpannersStyleKind>::const_iterator
     it =
@@ -3104,7 +3104,7 @@ void lilypondDynamicsTextSpannersStyleKindAtom::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_lilypondDynamicsTextSpannersStyleKindAtom>*
     p =
@@ -3123,7 +3123,7 @@ void lilypondDynamicsTextSpannersStyleKindAtom::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -3142,7 +3142,7 @@ void lilypondDynamicsTextSpannersStyleKindAtom::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_lilypondDynamicsTextSpannersStyleKindAtom>*
     p =
@@ -3161,7 +3161,7 @@ void lilypondDynamicsTextSpannersStyleKindAtom::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -3180,7 +3180,7 @@ void lilypondDynamicsTextSpannersStyleKindAtom::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 std::string lilypondDynamicsTextSpannersStyleKindAtom::asShortNamedOptionString () const
@@ -5403,7 +5403,7 @@ void lpsr2lilypondOahGroup::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_lpsr2lilypondOahGroup>*
     p =
@@ -5422,7 +5422,7 @@ void lpsr2lilypondOahGroup::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -5441,7 +5441,7 @@ void lpsr2lilypondOahGroup::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_lpsr2lilypondOahGroup>*
     p =
@@ -5460,7 +5460,7 @@ void lpsr2lilypondOahGroup::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -5479,7 +5479,7 @@ void lpsr2lilypondOahGroup::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void lpsr2lilypondOahGroup::displayAtomWithVariableOptionsValues (
@@ -6844,7 +6844,7 @@ S_lpsr2lilypondOahGroup createGlobalLpsr2lilypondOahGroup ()
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // protect library against multiple initializations
   if (! gGlobalLpsr2lilypondOahGroup) {
@@ -6920,7 +6920,7 @@ void lilypondBreakPageAfterMeasureNumberAtom::applyAtomWithValue (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // theString contains the midi tempo specification
   // decipher it to extract duration and perSecond values
@@ -6937,7 +6937,7 @@ void lilypondBreakPageAfterMeasureNumberAtom::applyAtomWithValue (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   std::string regularExpression (
     "[[:space:]]*"
@@ -6978,7 +6978,7 @@ void lilypondBreakPageAfterMeasureNumberAtom::applyAtomWithValue (
 
     --gIndenter;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (smSize != 3) {
     std::stringstream ss;
@@ -7011,7 +7011,7 @@ void lilypondBreakPageAfterMeasureNumberAtom::applyAtomWithValue (
 
   fStringSetVariable [musicxmlMeasureNumber] = lilypondMeasureNumber;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 	fSelected = true;
 }

@@ -112,7 +112,7 @@ EXP mfMusicformatsErrorKind convertMsdlStream2musicxmlWithHandler (
 //       __FILE__, __LINE__,
 //       ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     // create the MSDL parser
     msdlParser parser (inputStream);
@@ -152,7 +152,7 @@ EXP mfMusicformatsErrorKind convertMsdlStream2musicxmlWithHandler (
 
       throw msdl2msrException (message);
     }
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
   }
   catch (msdl2musicxmlException& e) {
     mfDisplayException (e, gOutput);
@@ -172,7 +172,7 @@ EXP mfMusicformatsErrorKind convertMsdlStream2musicxmlWithHandler (
       err,
       __FILE__, __LINE__,
       gLanguage->quittingAfterPass (mfPassIDKind::kMfPassID_1));
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     return mfMusicformatsErrorKind::kMusicformatsError_NONE;
   }
@@ -280,8 +280,8 @@ EXP mfMusicformatsErrorKind convertMsdlStream2musicxmlWithOptionsAndArguments (
 #ifdef ENFORCE_TRACE_OAH
     gLog <<
       handlerOptionsAndArguments;
-#endif
-#endif
+#endif // MF_TRACE_IS_ENABLED
+#endif // MF_TRACE_IS_ENABLED
 
   // apply early options if any
   // ------------------------------------------------------
@@ -308,7 +308,7 @@ EXP mfMusicformatsErrorKind convertMsdlStream2musicxmlWithOptionsAndArguments (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // create an msdl2musicxml insider OAH handler
   // ------------------------------------------------------
@@ -416,7 +416,7 @@ EXP mfMusicformatsErrorKind convertMsdlFile2musicxmlWithOptionsAndArguments (
       __FILE__, __LINE__,
       gLanguage->openingMusicXMLFileForWriting (inputFileName));
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   std::ifstream
     inputStream (
@@ -461,7 +461,7 @@ EXP mfMusicformatsErrorKind convertMsdlFile2musicxmlWithHandler (
       __FILE__, __LINE__,
       gLanguage->openingMusicXMLFileForWriting (inputFileName));
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   std::ifstream
     inputStream (

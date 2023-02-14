@@ -12,6 +12,8 @@
 #ifndef ___msr2musicxmlManPageOah___
 #define ___msr2musicxmlManPageOah___
 
+#include "mfStaticSettings.h"
+
 #include "oahVisitor.h"
 
 #include "msr2musicxmlOah2manPage.h"
@@ -152,7 +154,7 @@ class EXP msr2musicxmlManPageOahGroup : public oahGroup
 
 #ifdef MF_TRACE_IS_ENABLED
     void                  initializeManPageTraceOah ();
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   public:
 
@@ -194,4 +196,4 @@ EXP S_msr2musicxmlManPageOahGroup createGlobalMsr2musicxmlManPageOahGroupHandlin
 }
 
 
-#endif
+#endif // ___msr2musicxmlManPageOah___

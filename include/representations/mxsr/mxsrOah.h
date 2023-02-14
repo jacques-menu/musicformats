@@ -12,6 +12,8 @@
 #ifndef ___mxsrOah___
 #define ___mxsrOah___
 
+#include "mfStaticSettings.h"
+
 #include "oahBasicTypes.h"
 
 
@@ -103,7 +105,7 @@ class EXP mxsrOahGroup : public oahGroup
                               { fTraceMxsrVisitors = true; }
     Bool                  getTraceMxsrVisitors () const
                               { return fTraceMxsrVisitors; }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   public:
 
@@ -117,7 +119,7 @@ class EXP mxsrOahGroup : public oahGroup
 
 #ifdef MF_TRACE_IS_ENABLED
     void                  initializeMxsrTraceOah ();
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   public:
 
@@ -164,7 +166,7 @@ class EXP mxsrOahGroup : public oahGroup
 
     // visitors
     Bool                  fTraceMxsrVisitors;
-#endif
+#endif // MF_TRACE_IS_ENABLED
 };
 typedef SMARTP<mxsrOahGroup> S_mxsrOahGroup;
 EXP std::ostream& operator << (std::ostream& os, const S_mxsrOahGroup& elt);
@@ -178,4 +180,4 @@ EXP S_mxsrOahGroup createGlobalMxsrOahGroup ();
 }
 
 
-#endif
+#endif // ___mxsrOah___

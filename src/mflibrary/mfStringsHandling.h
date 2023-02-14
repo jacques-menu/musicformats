@@ -414,4 +414,4 @@ int countTwoBytesWideCharactersInString (const std::string theString);
 }
 
 
-#endif
+#endif // ___mfStringsHandling___

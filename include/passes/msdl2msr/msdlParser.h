@@ -12,6 +12,8 @@
 #ifndef ___msdlParser___
 #define ___msdlParser___
 
+#include "mfStaticSettings.h"
+
 #include "msrScores.h"
 #include "msrPartGroups.h"
 #include "msrParts.h"
@@ -133,7 +135,7 @@ class msdlParser : public smartable
 
     Bool                  fTraceSyntaxErrorRecovery;
     Bool                  fTraceSyntaxErrorRecoveryDetails;
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     // software
     std::string           fSoftware;
@@ -408,4 +410,4 @@ EXP std::ostream& operator << (std::ostream& os, const msdlParser& elt);
 }
 
 
-#endif
+#endif // ___msdlParser___

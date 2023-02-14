@@ -1,3 +1,14 @@
+% -------------------------------------------------------------------------
+%  MusicFormats Library
+%  Copyright (C) Jacques Menu 2016-2023
+
+%  This Source Code Form is subject to the terms of the Mozilla Public
+%  License, v. 2.0. If a copy of the MPL was not distributed with this
+%  file, you can obtain one at http://mozilla.org/MPL/2.0/.
+
+%  https://github.com/jacques-menu/musicformats
+% -------------------------------------------------------------------------
+
 % !TEX root = MusicFormatsMaintainanceGuide.tex
 
 % -------------------------------------------------------------------------
@@ -220,7 +231,7 @@ void xml2lyInsiderHandler::createTheXml2lyOptionGroups (
   // ------------------------------------------------------
 
   initializeWAE ();
-  
+
   initializeMSR ();
   initializeLPSR ();
 
@@ -256,11 +267,9 @@ void xml2lyInsiderHandler::createTheXml2lyOptionGroups (
   appendGroupToHandler (
     createGlobalLpsr2lilypondOahGroup ());
 
-#ifdef MF_HARMONIES_EXTRA_IS_ENABLED
   // create the extra OAH group
   appendGroupToHandler (
     createGlobalHarmoniesExtraOahGroup ());
-#endif
 
   // create the global xml2ly OAH group only now,
   // after the groups whose options it may use

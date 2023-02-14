@@ -21,6 +21,7 @@
 
 namespace MusicFormats
 {
+
 //_______________________________________________________________________________
 class EXP msdl2lilypondInsiderHandler : public oahInsiderHandler
 {
@@ -220,4 +221,4 @@ S_msdl2lilypondInsiderOahGroup createGlobalMsdl2lyInsiderOahGroup ();
 }
 
 
-#endif
+#endif // ___msdl2lilypondInsiderHandler___

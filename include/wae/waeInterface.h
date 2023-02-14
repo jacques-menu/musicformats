@@ -104,5 +104,5 @@ EXP void displayWarningsAndErrorsInputLineNumbers ();
 }
 
 
-#endif
+#endif // ___waeInterface___
 

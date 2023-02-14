@@ -232,7 +232,7 @@ EXP Rational rationalFromDurationKindAndDotsNumber (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // take dots into account if any
   if (dotsNumber > 0) {
@@ -261,7 +261,7 @@ EXP Rational rationalFromDurationKindAndDotsNumber (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       --dots;
     } // while
@@ -607,7 +607,7 @@ Rational msrDuration::dottedDurationAsWholeNotes (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // take dots into account if any
   if (fDotsNumber > 0) {
@@ -636,7 +636,7 @@ Rational msrDuration::dottedDurationAsWholeNotes (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       --dots;
     } // while
@@ -671,7 +671,7 @@ Rational msrDuration::dottedDurationAsWholeNotes_FOR_TEMPO (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // take dots into account if any
   if (fDotsNumber > 0) {
@@ -696,7 +696,7 @@ Rational msrDuration::dottedDurationAsWholeNotes_FOR_TEMPO (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       --dots;
     } // while
@@ -879,7 +879,7 @@ Rational msrDottedDuration::dottedDurationAsWholeNotes (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // take dots into account if any
   if (fDotsNumber > 0) {
@@ -908,7 +908,7 @@ Rational msrDottedDuration::dottedDurationAsWholeNotes (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       --dots;
     } // while
@@ -943,7 +943,7 @@ Rational msrDottedDuration::dottedDurationAsWholeNotes_FOR_TEMPO (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // take dots into account if any
   if (fDotsNumber > 0) {
@@ -968,7 +968,7 @@ Rational msrDottedDuration::dottedDurationAsWholeNotes_FOR_TEMPO (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       --dots;
     } // while
@@ -1031,7 +1031,7 @@ std::string wholeNotesAsMsrString (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   int
     numerator    = wholeNotes.getNumerator (),
@@ -1051,7 +1051,7 @@ std::string wholeNotesAsMsrString (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (numerator == 0) { // JMI TEMP
     dotsNumber = 0;
@@ -1074,7 +1074,7 @@ std::string wholeNotesAsMsrString (
       ss.str ());
 
     return "???";
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
   }
 
   Bool
@@ -1093,7 +1093,7 @@ std::string wholeNotesAsMsrString (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   /*
     augmentation dots add half the preceding duration or increment to the duration:
@@ -1120,7 +1120,7 @@ std::string wholeNotesAsMsrString (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   /*
     valid denominators are powers of 2
@@ -1187,7 +1187,7 @@ std::string wholeNotesAsMsrString (
     //    __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     return result;
   }
@@ -1205,7 +1205,7 @@ std::string wholeNotesAsMsrString (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // bring the resulting fraction to be less that two if needed
   if (integralNumberOfWholeNotes) {
@@ -1225,7 +1225,7 @@ std::string wholeNotesAsMsrString (
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     while (numerator % 2 == 0) {
       numerator /= 2;
@@ -1241,7 +1241,7 @@ std::string wholeNotesAsMsrString (
           denominatorDurationLog <<
           std::endl << std::endl;
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
     } // while
 
     // update the number of dots
@@ -1267,7 +1267,7 @@ std::string wholeNotesAsMsrString (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // take care of the dots
   int multiplyingFactor = 1;
@@ -1286,7 +1286,7 @@ std::string wholeNotesAsMsrString (
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     denominatorDurationLog -= numeratorDots;
 
@@ -1302,7 +1302,7 @@ std::string wholeNotesAsMsrString (
         multiplyingFactor <<
         std::endl << std::endl;
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
   }
   else {
     // set the multiplying factor
@@ -1318,7 +1318,7 @@ std::string wholeNotesAsMsrString (
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     // 5/8 becomes 8*5
 
@@ -1340,7 +1340,7 @@ std::string wholeNotesAsMsrString (
         multiplyingFactor <<
         std::endl << std::endl;
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     while (multiplyingFactor >= 2) {
       // double duration
@@ -1359,7 +1359,7 @@ std::string wholeNotesAsMsrString (
           multiplyingFactor <<
           std::endl << std::endl;
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
     } // while
     */
   }
@@ -1386,7 +1386,7 @@ std::string wholeNotesAsMsrString (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // generate the code for the duration
   std::stringstream ss;
@@ -1446,7 +1446,7 @@ std::string wholeNotesAsMsrString (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // return the result
   dotsNumber = numeratorDots;

@@ -194,4 +194,4 @@ EXP std::ostream& operator << (std::ostream& os, const S_bsrCellsList& elt);
 }
 
 
-#endif
+#endif // ___bsrCellsLists___

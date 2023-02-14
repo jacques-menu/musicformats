@@ -101,4 +101,4 @@ void initializeMsrPitchesNames ();
 }
 
 
-#endif
+#endif // ___msrPitchesNames___

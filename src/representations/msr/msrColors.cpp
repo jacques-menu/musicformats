@@ -17,6 +17,8 @@
 
 #include "msrColors.h"
 
+#include "oahEarlyOptions.h"
+
 #include "oahWae.h"
 
 #include "waeHandlers.h"
@@ -78,7 +80,7 @@ msrColorRGB::msrColorRGB (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (smSize == 4) {
 #ifdef MF_TRACE_IS_ENABLED
@@ -89,7 +91,7 @@ msrColorRGB::msrColorRGB (
       } // for
       gLog << std::endl;
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
   }
 
   else {
@@ -121,7 +123,7 @@ msrColorRGB::msrColorRGB (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // are these strings alright?
   {

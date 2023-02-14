@@ -94,7 +94,7 @@ void msrReplaceClefAtom::applyAtomWithValue (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // theString contains the replace clef specification
   // decipher it to extract the old and new clef names
@@ -111,7 +111,7 @@ void msrReplaceClefAtom::applyAtomWithValue (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   std::string regularExpression (
     "(.*)" // originalClefName
@@ -141,7 +141,7 @@ void msrReplaceClefAtom::applyAtomWithValue (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (smSize == 3) {
 #ifdef MF_TRACE_IS_ENABLED
@@ -152,7 +152,7 @@ void msrReplaceClefAtom::applyAtomWithValue (
       } // for
       gLog << std::endl;
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
   }
 
   else {
@@ -182,7 +182,7 @@ void msrReplaceClefAtom::applyAtomWithValue (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // is originalClefName in the replace clef map?
   msrClefKind
@@ -236,7 +236,7 @@ void msrReplaceClefAtom::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrReplaceClefAtom>*
     p =
@@ -255,7 +255,7 @@ void msrReplaceClefAtom::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -274,7 +274,7 @@ void msrReplaceClefAtom::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrReplaceClefAtom>*
     p =
@@ -293,7 +293,7 @@ void msrReplaceClefAtom::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -312,7 +312,7 @@ void msrReplaceClefAtom::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 std::string msrReplaceClefAtom::asShortNamedOptionString () const
@@ -538,7 +538,7 @@ void mxsr2msrOahGroup::initializeMxsr2msrOahGroup ()
   // trace
   // --------------------------------------
   initializeMxsr2msrTraceOptions ();
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // parts
   // --------------------------------------
@@ -595,7 +595,7 @@ R"()",
 
   appendSubGroupToGroup (subGroup);
 }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 void mxsr2msrOahGroup::initializePartsOptions ()
 {
@@ -1653,7 +1653,7 @@ void mxsr2msrOahGroup::checkGroupOptionsConsistency ()
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // JMI and if mixed ID and name options are used?
 
@@ -2009,7 +2009,7 @@ void mxsr2msrOahGroup::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_mxsr2msrOahGroup>*
     p =
@@ -2028,7 +2028,7 @@ void mxsr2msrOahGroup::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -2047,7 +2047,7 @@ void mxsr2msrOahGroup::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_mxsr2msrOahGroup>*
     p =
@@ -2066,7 +2066,7 @@ void mxsr2msrOahGroup::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -2085,7 +2085,7 @@ void mxsr2msrOahGroup::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //______________________________________________________________________________
@@ -2541,7 +2541,7 @@ void mxsr2msrOahGroup::printMxsr2msrValues (int valueFieldWidth)
   // --------------------------------------
 
   --gIndenter;
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   --gIndenter;
 }
@@ -2574,7 +2574,7 @@ S_mxsr2msrOahGroup createGlobalMxsr2msrOahGroup (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // protect library against multiple initializations
   if (! gGlobalMxsr2msrOahGroup) {

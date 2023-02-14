@@ -12,6 +12,8 @@
 #ifndef ___musicxml2brailleManPageOah___
 #define ___musicxml2brailleManPageOah___
 
+#include "mfStaticSettings.h"
+
 #include "musicxml2brailleOah2manPage.h"
 
 
@@ -159,7 +161,7 @@ class EXP xml2brlManPageOahGroup : public oahGroup
 
 #ifdef MF_TRACE_IS_ENABLED
     void                  initializeManPageTraceOah ();
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   public:
 
@@ -201,4 +203,4 @@ EXP extern S_xml2brlManPageOahGroup createGlobalXml2brlManPageOahHandler (
 }
 
 
-#endif
+#endif // ___musicxml2brailleManPageOah___

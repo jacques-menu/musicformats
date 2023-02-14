@@ -69,7 +69,7 @@ void bsr2bsrFinalizer::visitStart (S_bsrScore& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // create the BSR score
   fBsrScore =
@@ -94,7 +94,7 @@ void bsr2bsrFinalizer::visitEnd (S_bsrScore& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -114,7 +114,7 @@ void bsr2bsrFinalizer::visitStart (S_bsrSpaces& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 /* JMI
   fCurrentLine->
     appendSpacesToLine (elt);
@@ -137,7 +137,7 @@ void bsr2bsrFinalizer::visitEnd (S_bsrSpaces& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -157,7 +157,7 @@ void bsr2bsrFinalizer::visitStart (S_bsrBarLine& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fCurrentMeasure->
     appendBarLineToMeasure (elt);
@@ -180,7 +180,7 @@ void bsr2bsrFinalizer::visitStart (S_bsrTranscriptionNotes& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void bsr2bsrFinalizer::visitEnd (S_bsrTranscriptionNotes& elt)
@@ -199,7 +199,7 @@ void bsr2bsrFinalizer::visitEnd (S_bsrTranscriptionNotes& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -219,7 +219,7 @@ void bsr2bsrFinalizer::visitStart (S_bsrTranscriptionNotesElement& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // JMI create the BSR score
   fBsrScore->
@@ -243,7 +243,7 @@ void bsr2bsrFinalizer::visitEnd (S_bsrTranscriptionNotesElement& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -265,7 +265,7 @@ void bsr2bsrFinalizer::visitStart (S_bsrPage& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fCurrentPage = elt->createPageNewbornClone ();
 
@@ -291,7 +291,7 @@ void bsr2bsrFinalizer::visitEnd (S_bsrPage& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -313,7 +313,7 @@ void bsr2bsrFinalizer::visitStart (S_bsrPageHeading& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
  // JMI fCurrentPageHeading = elt->createPageHeadingNewbornClone ();
 
@@ -341,7 +341,7 @@ void bsr2bsrFinalizer::visitEnd (S_bsrPageHeading& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fCurrentPageHeading = nullptr;
 }
@@ -365,7 +365,7 @@ void bsr2bsrFinalizer::visitStart (S_bsrMusicHeading& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
  // JMI fCurrentPageHeading = elt->createPageHeadingNewbornClone ();
 
@@ -393,7 +393,7 @@ void bsr2bsrFinalizer::visitEnd (S_bsrMusicHeading& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fCurrentMusicHeading = nullptr;
 }
@@ -417,7 +417,7 @@ void bsr2bsrFinalizer::visitStart (S_bsrFootNotes& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
  // JMI fCurrentPageHeading = elt->createPageHeadingNewbornClone ();
 
@@ -445,7 +445,7 @@ void bsr2bsrFinalizer::visitEnd (S_bsrFootNotes& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fCurrentFootNotes = nullptr;
 }
@@ -469,7 +469,7 @@ void bsr2bsrFinalizer::visitStart (S_bsrLine& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fCurrentLine = elt->createLineNewbornClone ();
 
@@ -495,7 +495,7 @@ void bsr2bsrFinalizer::visitEnd (S_bsrLine& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -517,7 +517,7 @@ void bsr2bsrFinalizer::visitStart (S_bsrLineContents& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 /* JMI ???
   fCurrentLine = elt->createLineNewbornClone ();
@@ -545,7 +545,7 @@ void bsr2bsrFinalizer::visitEnd (S_bsrLineContents& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -567,7 +567,7 @@ void bsr2bsrFinalizer::visitStart (S_bsrMeasure& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fCurrentMeasure =
     elt->createMeasureNewbornClone ();
@@ -594,7 +594,7 @@ void bsr2bsrFinalizer::visitEnd (S_bsrMeasure& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -616,7 +616,7 @@ void bsr2bsrFinalizer::visitStart (S_bsrNumber& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fCurrentMeasure->
     appendNumberToMeasure (elt);
@@ -640,7 +640,7 @@ void bsr2bsrFinalizer::visitEnd (S_bsrNumber& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -662,7 +662,7 @@ void bsr2bsrFinalizer::visitStart (S_bsrWords& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fCurrentMeasure->
     appendWordsToMeasure (elt);
@@ -686,7 +686,7 @@ void bsr2bsrFinalizer::visitEnd (S_bsrWords& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -708,7 +708,7 @@ void bsr2bsrFinalizer::visitStart (S_bsrClef& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fCurrentMeasure->
     appendClefToMeasure (elt);
@@ -732,7 +732,7 @@ void bsr2bsrFinalizer::visitEnd (S_bsrClef& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -754,7 +754,7 @@ void bsr2bsrFinalizer::visitStart (S_bsrKey& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (fCurrentMusicHeading) {
     fCurrentMusicHeading->
@@ -784,7 +784,7 @@ void bsr2bsrFinalizer::visitEnd (S_bsrKey& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -805,7 +805,7 @@ void bsr2bsrFinalizer::visitStart (S_bsrTimeSignature& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (fCurrentMusicHeading) {
     fCurrentMusicHeading->
@@ -834,7 +834,7 @@ void bsr2bsrFinalizer::visitEnd (S_bsrTimeSignature& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -855,7 +855,7 @@ void bsr2bsrFinalizer::visitStart (S_bsrTempo& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 /* JMI ???
   if (fCurrentMusicHeading) {
@@ -886,7 +886,7 @@ void bsr2bsrFinalizer::visitEnd (S_bsrTempo& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -907,7 +907,7 @@ void bsr2bsrFinalizer::visitStart (S_bsrNote& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fCurrentMeasure->
     appendNoteToMeasure (elt);
@@ -930,7 +930,7 @@ void bsr2bsrFinalizer::visitEnd (S_bsrNote& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 

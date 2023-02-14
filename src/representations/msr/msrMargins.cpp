@@ -320,7 +320,7 @@ void msrMarginsGroup::acceptIn (basevisitor* v) {
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrMarginsGroup>*
     p =
@@ -351,7 +351,7 @@ void msrMarginsGroup::acceptOut (basevisitor* v) {
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrMarginsGroup>*
     p =

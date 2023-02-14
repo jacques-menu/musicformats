@@ -26,4 +26,4 @@ S_mfcPassComponent EXP createMxsr2guidoComponent ();
 
 }
 
-#endif
+#endif // ___mxsr2guidoComponent___

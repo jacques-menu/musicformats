@@ -47,6 +47,7 @@
 
 namespace MusicFormats
 {
+
 //_______________________________________________________________________________
 S_msrScore translateMsrToMsr (
   S_msrScore           originalMsrScore,
@@ -61,7 +62,7 @@ S_msrScore translateMsrToMsr (
     __FILE__, __LINE__,
     originalMsrScore != nullptr,
     "originalMsrScore is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   if (gGlobalMsr2msrOahGroup->getAvoidMsr2msr ()) { // for TESTS ONLY ???
     return originalMsrScore;
@@ -94,7 +95,7 @@ S_msrScore translateMsrToMsr (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // the msr2msrTranslator
   msr2msrTranslator
@@ -156,11 +157,7 @@ S_msrScore translateMsrToMsr (
   if (gGlobalMsrOahGroup->getDisplaySecondMsrFull ()) {
     displayMsrScoreFull (
       resultingNewMsrScore,
-      gLanguage->displayTheSecondMSRAsText ()
-      	+
-      ", "
-        +
-      gLanguage->fullVersion ());
+      gLanguage->displayTheSecondMSRAsText ());
   }
 
   // display the populated MSR score summary if requested
@@ -202,7 +199,7 @@ S_msrScore translateMsrToMsrAlongPathToVoice (
     __FILE__, __LINE__,
     originalMsrScore != nullptr,
     "originalMsrScore is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   if (gGlobalMsr2msrOahGroup->getAvoidMsr2msr ()) { // for TESTS
     return originalMsrScore;
@@ -235,7 +232,7 @@ S_msrScore translateMsrToMsrAlongPathToVoice (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // the msr2msrTranslator
   msr2msrTranslator

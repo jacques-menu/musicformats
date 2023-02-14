@@ -129,4 +129,4 @@ EXP void testBool ();
 }
 
 
-#endif
+#endif // ___mfBool___

@@ -92,7 +92,7 @@ void msrIgnorePartAtom::applyAtomWithValue (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // theString contains the name of the part to be ignored
 
@@ -110,7 +110,7 @@ void msrIgnorePartAtom::applyAtomWithValue (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // is this part name in the part renaming map?
   std::set<std::string>::iterator
@@ -151,7 +151,7 @@ void msrIgnorePartAtom::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrIgnorePartAtom>*
     p =
@@ -170,7 +170,7 @@ void msrIgnorePartAtom::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -189,7 +189,7 @@ void msrIgnorePartAtom::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrIgnorePartAtom>*
     p =
@@ -208,7 +208,7 @@ void msrIgnorePartAtom::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -227,7 +227,7 @@ void msrIgnorePartAtom::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 std::string msrIgnorePartAtom::asShortNamedOptionString () const
@@ -429,7 +429,7 @@ void msrKeepPartAtom::applyAtomWithValue (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // theString contains the name of the part to be kept
 
@@ -447,7 +447,7 @@ void msrKeepPartAtom::applyAtomWithValue (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // is this part name in the part renaming map?
   std::set<std::string>::iterator
@@ -488,7 +488,7 @@ void msrKeepPartAtom::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrKeepPartAtom>*
     p =
@@ -507,7 +507,7 @@ void msrKeepPartAtom::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -526,7 +526,7 @@ void msrKeepPartAtom::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrKeepPartAtom>*
     p =
@@ -545,7 +545,7 @@ void msrKeepPartAtom::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -564,7 +564,7 @@ void msrKeepPartAtom::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 std::string msrKeepPartAtom::asShortNamedOptionString () const
@@ -736,7 +736,7 @@ void msr2msrOahGroup::initializMsr2msrTraceOptions ()
 {
   // JMI
 }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 void msr2msrOahGroup::initializeBookOptions ()
 {
@@ -1023,7 +1023,7 @@ void msr2msrOahGroup::initializeMsr2msrOahGroup ()
   // trace
   // --------------------------------------
   initializMsr2msrTraceOptions ();
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // book
   // --------------------------------------
@@ -1078,7 +1078,7 @@ void msr2msrOahGroup::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msr2msrOahGroup>*
     p =
@@ -1097,7 +1097,7 @@ void msr2msrOahGroup::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -1116,7 +1116,7 @@ void msr2msrOahGroup::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msr2msrOahGroup>*
     p =
@@ -1135,7 +1135,7 @@ void msr2msrOahGroup::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -1154,7 +1154,7 @@ void msr2msrOahGroup::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //______________________________________________________________________________
@@ -1317,7 +1317,7 @@ S_msr2msrOahGroup createGlobalMsr2msrOahGroup ()
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // protect library against multiple initializations
   if (! gGlobalMsr2msrOahGroup) {

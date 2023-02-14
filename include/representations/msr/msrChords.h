@@ -886,4 +886,4 @@ EXP std::ostream& operator << (std::ostream& os, const S_msrChordGraceNotesGroup
 }
 
 
-#endif
+#endif // ___msrChords___

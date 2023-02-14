@@ -33,6 +33,7 @@
 #include "waeOah.h"
 #include "mfOutputFileOah.h"
 #include "oahDisplayOah.h"
+#include "oahHarmoniesExtraOah.h"
 
 #include "mxsrOah.h"
 #include "mxsr2msrOah.h"
@@ -106,7 +107,7 @@ Usage: xml2ly [[option]* [MusicXMLFile|-] [[option]*
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // initialize the history
   initializeHandlerMultiComponent ();
@@ -212,7 +213,7 @@ void xml2lyInsiderHandler::createTheXml2lyPrefixes ()
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   createTheCommonPrefixes ();
 }
@@ -235,7 +236,7 @@ void xml2lyInsiderHandler::createTheXml2lyOptionGroups (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // initialize common things
   // ------------------------------------------------------
@@ -258,7 +259,7 @@ void xml2lyInsiderHandler::createTheXml2lyOptionGroups (
   appendGroupToHandler (
     createGlobalTraceOahGroup (
       this));
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // create the output file OAH group
   appendGroupToHandler (
@@ -308,11 +309,9 @@ void xml2lyInsiderHandler::createTheXml2lyOptionGroups (
   appendGroupToHandler (
     createGlobalLpsr2lilypondOahGroup ());
 
-#ifdef MF_HARMONIES_EXTRA_IS_ENABLED
   // create the extra OAH group
   appendGroupToHandler (
     createGlobalHarmoniesExtraOahGroup ());
-#endif
 
   // create the global xml2ly OAH group only now,
   // after the groups whose options it may use
@@ -338,7 +337,7 @@ void xml2lyInsiderHandler::createTheXml2lyOptionGroups (
 
     --gIndenter;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
 if (gEarlyOptions.getEarlyTraceOahDetails ()) {
@@ -348,7 +347,7 @@ if (gEarlyOptions.getEarlyTraceOahDetails ()) {
 
     this->printHelp (gOutput);
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //______________________________________________________________________________
@@ -368,7 +367,7 @@ void xml2lyInsiderHandler::checkOptionsAndArguments () const
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   checkSingleInputSourceInArgumentsVector ();
 }
@@ -390,7 +389,7 @@ std::string xml2lyInsiderHandler::fetchOutputFileNameFromTheOptions () const
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   S_oahStringAtom
     outputFileNameStringAtom =
@@ -484,7 +483,7 @@ std::string xml2lyInsiderHandler::fetchOutputFileNameFromTheOptions () const
           __FILE__, __LINE__,
           ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       // append the file extension to the output file name
        outputFileName += ".ly";
@@ -503,7 +502,7 @@ std::string xml2lyInsiderHandler::fetchOutputFileNameFromTheOptions () const
           __FILE__, __LINE__,
           ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
     }
 
     else {
@@ -526,7 +525,7 @@ void xml2lyInsiderHandler::enforceHandlerQuietness ()
 #ifdef MF_TRACE_IS_ENABLED
   gGlobalTraceOahGroup->
     enforceGroupQuietness ();
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   gGlobalXml2lyInsiderOahGroup->
     enforceGroupQuietness ();
@@ -549,10 +548,8 @@ void xml2lyInsiderHandler::enforceHandlerQuietness ()
   gGlobalLpsr2lilypondOahGroup->
     enforceGroupQuietness ();
 
-#ifdef MF_HARMONIES_EXTRA_IS_ENABLED
-  gGlobalHarmoniesExtraOahGroup->
+  gHarmoniesExtraOahGroup->
     enforceGroupQuietness ();
-#endif
 }
 
 //______________________________________________________________________________
@@ -578,7 +575,7 @@ void xml2lyInsiderOahGroup::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_xml2lyInsiderOahGroup>*
     p =
@@ -597,7 +594,7 @@ void xml2lyInsiderOahGroup::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -616,7 +613,7 @@ void xml2lyInsiderOahGroup::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_xml2lyInsiderOahGroup>*
     p =
@@ -635,7 +632,7 @@ void xml2lyInsiderOahGroup::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -654,7 +651,7 @@ void xml2lyInsiderOahGroup::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   oahGroup::browseData (v);
 }
@@ -751,7 +748,7 @@ void xml2lyInsiderOahGroup::initializeXml2lyInsiderOahGroup ()
     "\" group" <<
     std::endl;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // quit after some passes
   // --------------------------------------
@@ -775,7 +772,7 @@ void xml2lyInsiderOahGroup::createInsiderQuitSubGroup ()
     "\"" <<
     std::endl;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   S_oahSubGroup
     subGroup =
@@ -845,7 +842,7 @@ void xml2lyInsiderOahGroup::createInsiderMacrosSubGroup ()
     "\"" <<
     std::endl;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   S_oahSubGroup
     subGroup =
@@ -876,7 +873,7 @@ R"()",
     appendValueLessAtomToMacro (
       gGlobalTraceOahGroup->
         getTracePassesBooleanAtom ());
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   debugMacroAtom->
     appendValueLessAtomToMacro (
@@ -938,7 +935,7 @@ S_xml2lyInsiderOahGroup createGlobalXml2lyInsiderOahGroup ()
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // protect library against multiple initializations
   if (! gGlobalXml2lyInsiderOahGroup) {

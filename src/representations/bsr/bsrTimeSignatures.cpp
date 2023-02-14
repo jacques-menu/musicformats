@@ -146,7 +146,7 @@ bsrTimeSignatureItem::bsrTimeSignatureItem (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 bsrTimeSignatureItem::~bsrTimeSignatureItem ()
@@ -199,7 +199,7 @@ void bsrTimeSignatureItem::appendBeatsNumber (int beatsNumber)
       "'" <<
       std::endl;
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fTimeSignatureBeatsNumbersVector.insert (
     fTimeSignatureBeatsNumbersVector.end (),
@@ -220,7 +220,7 @@ void bsrTimeSignatureItem::setTimeSignatureBeatValue (int timeSignatureBeatValue
       "'" <<
       std::endl;
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fTimeSignatureBeatValue = timeSignatureBeatValue;
 }
@@ -252,7 +252,7 @@ void bsrTimeSignatureItem::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_bsrTimeSignatureItem>*
     p =
@@ -271,7 +271,7 @@ void bsrTimeSignatureItem::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -291,7 +291,7 @@ void bsrTimeSignatureItem::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_bsrTimeSignatureItem>*
     p =
@@ -310,7 +310,7 @@ void bsrTimeSignatureItem::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -425,7 +425,7 @@ bsrTimeSignature::bsrTimeSignature (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 bsrTimeSignature::~bsrTimeSignature ()
@@ -450,7 +450,7 @@ void bsrTimeSignature::appendTimeSignatureItem (S_bsrTimeSignatureItem timeSigna
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fTimeSignatureItemsVector.push_back (timeSignatureItem);
 }
@@ -816,7 +816,7 @@ void bsrTimeSignature::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_bsrTimeSignature>*
     p =
@@ -835,7 +835,7 @@ void bsrTimeSignature::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -855,7 +855,7 @@ void bsrTimeSignature::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_bsrTimeSignature>*
     p =
@@ -874,7 +874,7 @@ void bsrTimeSignature::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }

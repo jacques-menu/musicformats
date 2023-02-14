@@ -63,7 +63,7 @@ void lpsrUseVoiceCommand::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_lpsrUseVoiceCommand>*
     p =
@@ -82,7 +82,7 @@ void lpsrUseVoiceCommand::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -101,7 +101,7 @@ void lpsrUseVoiceCommand::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_lpsrUseVoiceCommand>*
     p =
@@ -120,7 +120,7 @@ void lpsrUseVoiceCommand::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }

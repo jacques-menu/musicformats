@@ -41,4 +41,4 @@ EXP mfMusicformatsErrorKind msrScore2guidoWithHandler (
 }
 
 
-#endif
+#endif // ___msr2guidoInterface___

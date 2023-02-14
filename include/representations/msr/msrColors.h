@@ -135,4 +135,4 @@ EXP std::ostream& operator << (std::ostream& os, const msrColorAlphaRGB& elt);
 
 }
 
-#endif
+#endif // ___msrColors___

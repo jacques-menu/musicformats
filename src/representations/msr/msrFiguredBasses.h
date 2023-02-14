@@ -326,4 +326,4 @@ EXP std::ostream& operator << (std::ostream& os, const S_msrFiguredBass& elt);
 }
 
 
-#endif
+#endif // ___msrFiguredBasses___

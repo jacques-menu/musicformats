@@ -97,4 +97,4 @@ EXP std::ostream& operator << (std::ostream& os, const S_lpsrLayout& elt);
 }
 
 
-#endif
+#endif // ___lpsrLayouts___

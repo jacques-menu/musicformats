@@ -59,4 +59,4 @@ EXP void mxsr2msrInternalError (
 }
 
 
-#endif
+#endif // ___mxsr2msrWae___

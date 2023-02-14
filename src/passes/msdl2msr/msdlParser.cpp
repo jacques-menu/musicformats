@@ -73,7 +73,7 @@ msdlParser::msdlParser (std::istream& inputStream)
 
   fTraceSyntaxErrorRecoveryDetails =
     gGlobalMsdl2msrOahGroup->getTraceSyntaxErrorRecoveryDetails ();
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // software
   fSoftware =
@@ -307,7 +307,7 @@ void msdlParser::displayTokenKindsSetsStack (const std::string& context)
         __FILE__, __LINE__,
         tokenKindsSet != nullptr,
         "tokenKindsSet is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
       gLog <<
         "v " <<
@@ -368,7 +368,7 @@ Bool msdlParser::isCurrentTokenKindInSetsStack (const std::string& context)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // the stack cannot be empty JMI ???
   // since msdlTokenKind::kTokenEOF is in the set at the bottom of the stack
@@ -393,7 +393,7 @@ Bool msdlParser::isCurrentTokenKindInSetsStack (const std::string& context)
 
         displayTokenKindsSetsStack ("---isCurrentTokenKindInSetsStack()");
       }
-  #endif
+  #endif // MF_TRACE_IS_ENABLED
 
       if (stoppersSet->containsTokenKind (fCurrentTokenKind)) {
         // found it
@@ -432,7 +432,7 @@ void msdlParser::fetchNextToken ()
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -461,7 +461,7 @@ Bool msdlParser::checkMandatoryTokenKind (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   Bool result (false);
 
@@ -469,7 +469,7 @@ Bool msdlParser::checkMandatoryTokenKind (
   if (fTraceSyntaxErrorRecoveryDetails) {
     displayTokenKindsSetsStack ("checkMandatoryTokenKind()");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // is the current token kind tokenKind?
   if (fCurrentTokenKind == tokenKind) {
@@ -501,7 +501,7 @@ Bool msdlParser::checkMandatoryTokenKind (
           fParserWaeHandler->
             ignoringToken (fCurrentToken, context);
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
         // fetch next token
         fetchNextToken ();
@@ -531,7 +531,7 @@ Bool msdlParser::checkMandatoryTokenKind (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   return result;
 }
@@ -563,7 +563,7 @@ Bool msdlParser:: checkMandatoryTokenKindsSet (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   Bool result (false);
 
@@ -571,7 +571,7 @@ Bool msdlParser:: checkMandatoryTokenKindsSet (
   if (fTraceSyntaxErrorRecoveryDetails) {
     displayTokenKindsSetsStack ("checkMandatoryTokenKindsSet()");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // is the current token kind in tokenKindsSet?
   if (tokenKindsSet->containsTokenKind (fCurrentTokenKind)) {
@@ -603,7 +603,7 @@ Bool msdlParser:: checkMandatoryTokenKindsSet (
           fParserWaeHandler->
             ignoringToken (fCurrentToken, context);
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         fetchNextToken ();
 
         if (tokenKindsSet->containsTokenKind (fCurrentTokenKind)) {
@@ -631,7 +631,7 @@ Bool msdlParser:: checkMandatoryTokenKindsSet (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   return result;
 }
@@ -662,7 +662,7 @@ Bool msdlParser::checkOptionalTokenKind (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   Bool result (false);
 
@@ -670,7 +670,7 @@ Bool msdlParser::checkOptionalTokenKind (
   if (fTraceSyntaxErrorRecoveryDetails) {
     displayTokenKindsSetsStack ("checkOptionalTokenKind()");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (fCurrentTokenKind == msdlTokenKind::k_TokenEOF) {
     result = false;
@@ -724,7 +724,7 @@ Bool msdlParser::checkOptionalTokenKind (
           fParserWaeHandler->
             ignoringToken (fCurrentToken, context);
         }
-  #endif
+  #endif // MF_TRACE_IS_ENABLED
 
         if (++i == iEnd) break;
         // no std::endl here
@@ -750,7 +750,7 @@ Bool msdlParser::checkOptionalTokenKind (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   return result;
 }
@@ -782,13 +782,13 @@ Bool msdlParser:: checkOptionalTokenKindsSet (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   if (fTraceSyntaxErrorRecoveryDetails) {
     displayTokenKindsSetsStack ("checkOptionalTokenKindsSet()");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   Bool result (false);
 
@@ -825,7 +825,7 @@ Bool msdlParser:: checkOptionalTokenKindsSet (
             fParserWaeHandler->
               ignoringToken (fCurrentToken, context);
           }
-  #endif
+  #endif // MF_TRACE_IS_ENABLED
           fetchNextToken ();
 
           if (tokenKindsSet->containsTokenKind (fCurrentTokenKind)) {
@@ -854,7 +854,7 @@ Bool msdlParser:: checkOptionalTokenKindsSet (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   return result;
 }
@@ -1029,7 +1029,7 @@ void msdlParser::createIdentificationIfNeeded (int inputLineNumber)
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     fMsrIdentification->
       setIdentificationEncodingDate (
@@ -1070,7 +1070,7 @@ void msdlParser::setCurrentOctaveEntryReference ()
         gGlobalLpsr2lilypondOahGroup->
         getFixedOctaveEntrySemiTonesPitchAndOctave () != nullptr,
        "gGlobalLpsr2lilypondOahGroup->getFixedOctaveEntrySemiTonesPitchAndOctave () is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
       fCurrentOctaveEntryReference =
         msrNote::createNoteFromSemiTonesPitchAndOctave (
@@ -1117,7 +1117,7 @@ void msdlParser::setCurrentOctaveEntryReference ()
     }
     gLog << std::endl;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 */
 }
 
@@ -1213,7 +1213,7 @@ std::string msdlParser::lilypondOctaveInRelativeEntryMode (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   std::stringstream ss;
 
@@ -1245,7 +1245,7 @@ std::string msdlParser::lilypondOctaveInRelativeEntryMode (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
   return ss.str ();
 */
 
@@ -1297,7 +1297,7 @@ std::string msdlParser::lilypondOctaveInFixedEntryMode (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   std::stringstream ss;
 
@@ -1408,7 +1408,7 @@ void msdlParser::parse ()
     gLog <<
       "Input doesn't contain any token" <<
       std::endl;
-#endif
+#endif // MF_TRACE_IS_ENABLED
   }
 
   else {
@@ -1428,7 +1428,7 @@ void msdlParser::parse ()
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     // do the parsing of the main non-terminal notions
     Specification (
@@ -1450,7 +1450,7 @@ void msdlParser::parse ()
           ", msdlTokenKind::k_TokenEOF has been reached" <<
           std::endl << std::endl;
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
     }
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -1464,7 +1464,7 @@ void msdlParser::parse ()
           inputIsSyntacticallyIncorrect ();
       }
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     // should we display the MSR score?
     if (gGlobalMsrOahGroup->getDisplayMsr ()) { // JMI CAFE
@@ -1507,7 +1507,7 @@ void msdlParser::Specification (S_msdlTokenKindsSet stopperTokensSet)
   if (fTraceSyntaxErrorRecovery) {
     displayTokenKindsSetsStack ("Specification");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -1597,7 +1597,7 @@ void msdlParser::Identification (S_msdlTokenKindsSet stopperTokensSet)
   if (fTraceSyntaxErrorRecovery) {
     displayTokenKindsSetsStack ("Identification");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -1649,7 +1649,7 @@ void msdlParser::Identification (S_msdlTokenKindsSet stopperTokensSet)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 // --------------------------------------------------------------------------
@@ -1678,7 +1678,7 @@ void msdlParser::Title (S_msdlTokenKindsSet stopperTokensSet)
   if (fTraceSyntaxErrorRecovery) {
     displayTokenKindsSetsStack ("Title");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -1706,7 +1706,7 @@ void msdlParser::Title (S_msdlTokenKindsSet stopperTokensSet)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     // set the title in the MSR identification
     fMsrIdentification->setIdentificationWorkCreditTypeTitle (
@@ -1741,7 +1741,7 @@ void msdlParser::Title (S_msdlTokenKindsSet stopperTokensSet)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 // --------------------------------------------------------------------------
@@ -1770,7 +1770,7 @@ void msdlParser::Composer (S_msdlTokenKindsSet stopperTokensSet)
   if (fTraceSyntaxErrorRecovery) {
     displayTokenKindsSetsStack ("Composer");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -1799,7 +1799,7 @@ void msdlParser::Composer (S_msdlTokenKindsSet stopperTokensSet)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     // append the composer to the MSR identification
     fMsrIdentification->appendComposer (
@@ -1833,7 +1833,7 @@ void msdlParser::Composer (S_msdlTokenKindsSet stopperTokensSet)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 // --------------------------------------------------------------------------
@@ -1862,7 +1862,7 @@ void msdlParser::Opus (S_msdlTokenKindsSet stopperTokensSet)
   if (fTraceSyntaxErrorRecovery) {
     displayTokenKindsSetsStack ("Opus");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -1891,7 +1891,7 @@ void msdlParser::Opus (S_msdlTokenKindsSet stopperTokensSet)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     // set the opus in the MSR identification
     fMsrIdentification->setIdentificationOpus (
@@ -1926,7 +1926,7 @@ void msdlParser::Opus (S_msdlTokenKindsSet stopperTokensSet)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 // --------------------------------------------------------------------------
@@ -1965,9 +1965,7 @@ void msdlParser::Identifier (S_msdlTokenKindsSet stopperTokensSet)
   if (fTraceSyntaxErrorRecovery) {
     displayTokenKindsSetsStack ("Identifier");
   }
-#endif
-
-
+#endif // MF_TRACE_IS_ENABLED
 
   --gIndenter;
 
@@ -1991,7 +1989,7 @@ void msdlParser::Identifier (S_msdlTokenKindsSet stopperTokensSet)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 // --------------------------------------------------------------------------
@@ -2022,7 +2020,7 @@ void msdlParser::Pitches (S_msdlTokenKindsSet stopperTokensSet)
   if (fTraceSyntaxErrorRecovery) {
     displayTokenKindsSetsStack ("Pitches");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (
     checkOptionalTokenKind (
@@ -2056,7 +2054,7 @@ void msdlParser::Pitches (S_msdlTokenKindsSet stopperTokensSet)
           __FILE__, __LINE__,
           ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       // set the pitches language name // also in the MSR identification ??? JMI
       fPitchesLanguageKind =
@@ -2078,7 +2076,7 @@ void msdlParser::Pitches (S_msdlTokenKindsSet stopperTokensSet)
           __FILE__, __LINE__,
           ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       fetchNextToken ();
     }
@@ -2106,7 +2104,7 @@ void msdlParser::Pitches (S_msdlTokenKindsSet stopperTokensSet)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 // --------------------------------------------------------------------------
@@ -2137,7 +2135,7 @@ void msdlParser::Octaves (S_msdlTokenKindsSet stopperTokensSet)
   if (fTraceSyntaxErrorRecovery) {
     displayTokenKindsSetsStack ("Octaves");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (
     checkOptionalTokenKind (
@@ -2171,7 +2169,7 @@ void msdlParser::Octaves (S_msdlTokenKindsSet stopperTokensSet)
           __FILE__, __LINE__,
           ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       // set the pitches language name // also in the MSR identification ??? JMI
       fPitchesLanguageKind =
@@ -2193,7 +2191,7 @@ void msdlParser::Octaves (S_msdlTokenKindsSet stopperTokensSet)
           __FILE__, __LINE__,
           ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       fetchNextToken ();
     }
@@ -2221,7 +2219,7 @@ void msdlParser::Octaves (S_msdlTokenKindsSet stopperTokensSet)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 // --------------------------------------------------------------------------
@@ -2252,9 +2250,7 @@ void msdlParser::PitchesLanguage (S_msdlTokenKindsSet stopperTokensSet)
   if (fTraceSyntaxErrorRecovery) {
     displayTokenKindsSetsStack ("PitchesLanguage");
   }
-#endif
-
-
+#endif // MF_TRACE_IS_ENABLED
 
   --gIndenter;
 
@@ -2278,7 +2274,7 @@ void msdlParser::PitchesLanguage (S_msdlTokenKindsSet stopperTokensSet)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 // --------------------------------------------------------------------------
@@ -2309,9 +2305,7 @@ void msdlParser::PitchesOctaveEntry (S_msdlTokenKindsSet stopperTokensSet)
   if (fTraceSyntaxErrorRecovery) {
     displayTokenKindsSetsStack ("PitchesOctaveEntry");
   }
-#endif
-
-
+#endif // MF_TRACE_IS_ENABLED
 
   --gIndenter;
 
@@ -2335,7 +2329,7 @@ void msdlParser::PitchesOctaveEntry (S_msdlTokenKindsSet stopperTokensSet)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 // --------------------------------------------------------------------------
@@ -2366,7 +2360,7 @@ void msdlParser::Anacrusis (S_msdlTokenKindsSet stopperTokensSet)
   if (fTraceSyntaxErrorRecovery) {
     displayTokenKindsSetsStack ("Anacrusis");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (
     checkOptionalTokenKind (
@@ -2388,7 +2382,7 @@ void msdlParser::Anacrusis (S_msdlTokenKindsSet stopperTokensSet)
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     // consume the anacrusis token
     fetchNextToken ();
@@ -2416,7 +2410,7 @@ void msdlParser::Anacrusis (S_msdlTokenKindsSet stopperTokensSet)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 // --------------------------------------------------------------------------
@@ -2445,7 +2439,7 @@ void msdlParser::Structure (S_msdlTokenKindsSet stopperTokensSet)
   if (fTraceSyntaxErrorRecovery) {
     displayTokenKindsSetsStack ("Structure");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -2500,7 +2494,7 @@ void msdlParser::Structure (S_msdlTokenKindsSet stopperTokensSet)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 // --------------------------------------------------------------------------
@@ -2529,7 +2523,7 @@ void msdlParser::Book (S_msdlTokenKindsSet stopperTokensSet)
   if (fTraceSyntaxErrorRecovery) {
     displayTokenKindsSetsStack ("Book");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -2585,7 +2579,7 @@ void msdlParser::Book (S_msdlTokenKindsSet stopperTokensSet)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 // --------------------------------------------------------------------------
@@ -2614,7 +2608,7 @@ void msdlParser::Score (S_msdlTokenKindsSet stopperTokensSet)
   if (fTraceSyntaxErrorRecovery) {
     displayTokenKindsSetsStack ("Score");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -2667,7 +2661,7 @@ void msdlParser::Score (S_msdlTokenKindsSet stopperTokensSet)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 // --------------------------------------------------------------------------
@@ -2696,7 +2690,7 @@ void msdlParser::PartGroup (S_msdlTokenKindsSet stopperTokensSet)
   if (fTraceSyntaxErrorRecovery) {
     displayTokenKindsSetsStack ("PartGroup");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -2746,7 +2740,7 @@ void msdlParser::PartGroup (S_msdlTokenKindsSet stopperTokensSet)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 // --------------------------------------------------------------------------
@@ -2775,7 +2769,7 @@ void msdlParser::Part (S_msdlTokenKindsSet stopperTokensSet)
   if (fTraceSyntaxErrorRecovery) {
     displayTokenKindsSetsStack ("Part");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -2822,7 +2816,7 @@ void msdlParser::Part (S_msdlTokenKindsSet stopperTokensSet)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 // --------------------------------------------------------------------------
@@ -2851,7 +2845,7 @@ void msdlParser::Music (S_msdlTokenKindsSet stopperTokensSet)
   if (fTraceSyntaxErrorRecovery) {
     displayTokenKindsSetsStack ("Music");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -2882,7 +2876,7 @@ void msdlParser::Music (S_msdlTokenKindsSet stopperTokensSet)
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
   }
 */
 
@@ -2936,7 +2930,7 @@ void msdlParser::Music (S_msdlTokenKindsSet stopperTokensSet)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 // --------------------------------------------------------------------------
@@ -2965,7 +2959,7 @@ void msdlParser::Fragment (S_msdlTokenKindsSet stopperTokensSet)
   if (fTraceSyntaxErrorRecovery) {
     displayTokenKindsSetsStack ("Fragment");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -3012,7 +3006,7 @@ void msdlParser::Fragment (S_msdlTokenKindsSet stopperTokensSet)
           __FILE__, __LINE__,
           ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 /*
       // set the fragment in the MSR identification ??? JMI
@@ -3055,7 +3049,7 @@ void msdlParser::Fragment (S_msdlTokenKindsSet stopperTokensSet)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 // --------------------------------------------------------------------------
@@ -3084,7 +3078,7 @@ void msdlParser::MeasuresSequence (S_msdlTokenKindsSet stopperTokensSet)
   if (fTraceSyntaxErrorRecovery) {
     displayTokenKindsSetsStack ("MeasuresSequence");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -3119,7 +3113,7 @@ void msdlParser::MeasuresSequence (S_msdlTokenKindsSet stopperTokensSet)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 // --------------------------------------------------------------------------
@@ -3148,7 +3142,7 @@ void msdlParser::Measure (S_msdlTokenKindsSet stopperTokensSet)
   if (fTraceSyntaxErrorRecovery) {
     displayTokenKindsSetsStack ("Measure");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -3201,7 +3195,7 @@ void msdlParser::Measure (S_msdlTokenKindsSet stopperTokensSet)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 // --------------------------------------------------------------------------
@@ -3230,7 +3224,7 @@ void msdlParser::MeasureNumber (S_msdlTokenKindsSet stopperTokensSet)
   if (fTraceSyntaxErrorRecovery) {
     displayTokenKindsSetsStack ("MeasureNumber");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -3263,7 +3257,7 @@ void msdlParser::MeasureNumber (S_msdlTokenKindsSet stopperTokensSet)
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     // consume the measure integer token
     fetchNextToken ();
@@ -3296,7 +3290,7 @@ void msdlParser::MeasureNumber (S_msdlTokenKindsSet stopperTokensSet)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 // --------------------------------------------------------------------------
@@ -3325,7 +3319,7 @@ void msdlParser::Clef (S_msdlTokenKindsSet stopperTokensSet)
   if (fTraceSyntaxErrorRecovery) {
     displayTokenKindsSetsStack ("Clef");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -3352,7 +3346,7 @@ void msdlParser::Clef (S_msdlTokenKindsSet stopperTokensSet)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 // --------------------------------------------------------------------------
@@ -3381,7 +3375,7 @@ void msdlParser::Key (S_msdlTokenKindsSet stopperTokensSet)
   if (fTraceSyntaxErrorRecovery) {
     displayTokenKindsSetsStack ("Key");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -3408,7 +3402,7 @@ void msdlParser::Key (S_msdlTokenKindsSet stopperTokensSet)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 // --------------------------------------------------------------------------
@@ -3437,7 +3431,7 @@ void msdlParser::Time (S_msdlTokenKindsSet stopperTokensSet)
   if (fTraceSyntaxErrorRecovery) {
     displayTokenKindsSetsStack ("Time");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -3464,7 +3458,7 @@ void msdlParser::Time (S_msdlTokenKindsSet stopperTokensSet)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 // --------------------------------------------------------------------------
@@ -3493,7 +3487,7 @@ void msdlParser::Note (S_msdlTokenKindsSet stopperTokensSet)
   if (fTraceSyntaxErrorRecovery) {
     displayTokenKindsSetsStack ("Note");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -3527,7 +3521,7 @@ void msdlParser::Note (S_msdlTokenKindsSet stopperTokensSet)
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     noteQuarterTonesPitchKind =
       quarterTonesPitchKindFromString (
@@ -3549,7 +3543,7 @@ void msdlParser::Note (S_msdlTokenKindsSet stopperTokensSet)
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     // consume the pitch indentifier
     fetchNextToken ();
@@ -3572,7 +3566,7 @@ void msdlParser::Note (S_msdlTokenKindsSet stopperTokensSet)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // an octave indication is a sequence of commas or quotes, respectively,
   // or empty, in which case octave 3 (one below Midlle C) is implicit
@@ -3599,7 +3593,7 @@ void msdlParser::Note (S_msdlTokenKindsSet stopperTokensSet)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (
     checkOptionalTokenKindsSet (
@@ -3642,7 +3636,7 @@ void msdlParser::Note (S_msdlTokenKindsSet stopperTokensSet)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // append it to the current measure
   fCurrentMeasure->
@@ -3669,7 +3663,7 @@ void msdlParser::Note (S_msdlTokenKindsSet stopperTokensSet)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 // --------------------------------------------------------------------------
@@ -3698,7 +3692,7 @@ void msdlParser::Pitch (S_msdlTokenKindsSet stopperTokensSet)
   if (fTraceSyntaxErrorRecovery) {
     displayTokenKindsSetsStack ("Pitch");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -3725,7 +3719,7 @@ void msdlParser::Pitch (S_msdlTokenKindsSet stopperTokensSet)
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     // consume the pitch indentifier
     fetchNextToken ();
@@ -3752,7 +3746,7 @@ void msdlParser::Pitch (S_msdlTokenKindsSet stopperTokensSet)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 // --------------------------------------------------------------------------
@@ -3783,7 +3777,7 @@ msrOctaveKind msdlParser::OctaveIndication (S_msdlTokenKindsSet stopperTokensSet
   if (fTraceSyntaxErrorRecovery) {
     displayTokenKindsSetsStack ("OctaveIndication");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -3827,7 +3821,7 @@ msrOctaveKind msdlParser::OctaveIndication (S_msdlTokenKindsSet stopperTokensSet
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
@@ -3835,7 +3829,7 @@ msrOctaveKind msdlParser::OctaveIndication (S_msdlTokenKindsSet stopperTokensSet
     fParserWaeHandler->
       mixedCommasAndQuotesInOctaveIndication ();
   }
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // compute result - the octave starting at Middle C (c') has number 4
   if (commasCounter > 0) {
@@ -3865,7 +3859,7 @@ msrOctaveKind msdlParser::OctaveIndication (S_msdlTokenKindsSet stopperTokensSet
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   --gIndenter;
 
@@ -3888,7 +3882,7 @@ msrOctaveKind msdlParser::OctaveIndication (S_msdlTokenKindsSet stopperTokensSet
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   return result;
 }
@@ -3919,7 +3913,7 @@ void msdlParser::NoteDuration (S_msdlTokenKindsSet stopperTokensSet)
   if (fTraceSyntaxErrorRecovery) {
     displayTokenKindsSetsStack ("NoteDuration");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -3955,7 +3949,7 @@ void msdlParser::NoteDuration (S_msdlTokenKindsSet stopperTokensSet)
           __FILE__, __LINE__,
           ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
     }
 
     else if (checkMandatoryTokenKind (
@@ -3986,7 +3980,7 @@ void msdlParser::NoteDuration (S_msdlTokenKindsSet stopperTokensSet)
           __FILE__, __LINE__,
           ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
     }
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
@@ -3999,7 +3993,7 @@ void msdlParser::NoteDuration (S_msdlTokenKindsSet stopperTokensSet)
       default:
         ;
     } // switch
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
     // consume the duration integer or name
     fetchNextToken ();
@@ -4050,7 +4044,7 @@ void msdlParser::NoteDuration (S_msdlTokenKindsSet stopperTokensSet)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 

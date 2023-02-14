@@ -27,5 +27,5 @@ S_mfcConverterComponent EXP createMsdlConverterConverterComponent ();
 }
 
 
-#endif
+#endif // ___msdlConverterComponent___
 

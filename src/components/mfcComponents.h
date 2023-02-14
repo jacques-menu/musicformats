@@ -60,5 +60,5 @@
 #include "mfLibraryComponent.h"
 
 
-#endif
+#endif // ___mfcComponents___
 

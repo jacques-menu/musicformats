@@ -24,4 +24,4 @@ void initializeLPSR ();
 }
 
 
-#endif
+#endif // ___lpsrInitialization___

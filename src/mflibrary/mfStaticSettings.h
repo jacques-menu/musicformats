@@ -32,20 +32,12 @@
 #define MF_SANITY_CHECKS_ARE_ENABLED
 
 //______________________________________________________________________________
-// uncomment the following definition if harmonies extra options are desired
-#define MF_HARMONIES_EXTRA_IS_ENABLED
-
-#ifdef MF_HARMONIES_EXTRA_IS_ENABLED
-  #include "oahHarmoniesExtraOah.h"
-#endif
-
-//______________________________________________________________________________
 // comment the following definition if no trace is desired
 #define MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   #include "mfTraceOah.h"
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 
-#endif
+#endif // ___mfStaticSettings___

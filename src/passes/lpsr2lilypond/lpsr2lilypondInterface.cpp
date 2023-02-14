@@ -51,7 +51,7 @@ void translateLpsrToLilypond (
     __FILE__, __LINE__,
     theLpsrScore != nullptr,
     "theLpsrScore is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // start the clock
   clock_t startClock = clock ();
@@ -80,7 +80,7 @@ void translateLpsrToLilypond (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // the lpsr2lilypondTranslator
   lpsr2lilypondTranslator
@@ -142,7 +142,7 @@ EXP void translateLpsrToLilypondWithHandler (
 //       __FILE__, __LINE__,
 //       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (! outputFileName.size ()) {
 #ifdef MF_TRACE_IS_ENABLED
@@ -155,7 +155,7 @@ EXP void translateLpsrToLilypondWithHandler (
 //       __FILE__, __LINE__,
 //       ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     // create an indented output stream for the LilyPond code
     // to be written to outputFileStream
@@ -197,7 +197,7 @@ EXP void translateLpsrToLilypondWithHandler (
 //       __FILE__, __LINE__,
 //       ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     // open output file
 #ifdef MF_TRACE_IS_ENABLED
@@ -207,7 +207,7 @@ EXP void translateLpsrToLilypondWithHandler (
         __FILE__, __LINE__,
         gLanguage->openingLilypondFileForWriting (outputFileName));
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     // create a file output stream
     std::ofstream
@@ -270,7 +270,7 @@ EXP void translateLpsrToLilypondWithHandler (
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     outputFileStream.close ();
   }

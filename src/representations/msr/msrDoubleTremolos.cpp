@@ -142,7 +142,7 @@ void msrDoubleTremolo::setDoubleTremoloUpLinkToMeasure (
     __FILE__, __LINE__,
     measure != nullptr,
     "measure is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalTraceOahGroup->getTraceWholeNotes ()) {
@@ -158,7 +158,7 @@ void msrDoubleTremolo::setDoubleTremoloUpLinkToMeasure (
 
     --gIndenter;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fDoubleTremoloUpLinkToMeasure = measure;
 }
@@ -179,7 +179,7 @@ S_msrDoubleTremolo msrDoubleTremolo::createDoubleTremoloNewbornClone (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
@@ -192,7 +192,7 @@ S_msrDoubleTremolo msrDoubleTremolo::createDoubleTremoloNewbornClone (
     __FILE__, __LINE__,
     doubleTremoloSecondElement != nullptr,
     "doubleTremoloSecondElement is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   S_msrDoubleTremolo
     newbornClone =
@@ -251,7 +251,7 @@ S_msrDoubleTremolo msrDoubleTremolo::createDoubleTremoloNewbornClone (
 //
 //     --gIndenter;
 //   }
-// #endif
+// #endif // MF_TRACE_IS_ENABLED
 //
 // #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
@@ -259,7 +259,7 @@ S_msrDoubleTremolo msrDoubleTremolo::createDoubleTremoloNewbornClone (
 //     __FILE__, __LINE__,
 //     measurePosition != msrMoment::K_MEASURE_POSITION_UNKNOWN,
 //     "measurePosition == msrMoment::K_MEASURE_POSITION_UNKNOWN");
-// #endif
+// #endif // MF_SANITY_CHECKS_ARE_ENABLED
 //
 //   // set double tremolo's measure position
 //   fMeasurePosition = measurePosition;
@@ -355,7 +355,7 @@ void msrDoubleTremolo::setDoubleTremoloNoteFirstElement (const S_msrNote& note)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   int inputLineNumber =
     note->getInputLineNumber ();
@@ -453,7 +453,7 @@ void msrDoubleTremolo::setDoubleTremoloNoteFirstElement (const S_msrNote& note)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void msrDoubleTremolo::setDoubleTremoloNoteSecondElement (
@@ -473,7 +473,7 @@ void msrDoubleTremolo::setDoubleTremoloNoteSecondElement (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   int inputLineNumber =
     note->getInputLineNumber ();
@@ -517,7 +517,7 @@ void msrDoubleTremolo::setDoubleTremoloNoteSecondElement (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (
     expectedDoubleTremoloSoundingWholeNotes
@@ -572,7 +572,7 @@ void msrDoubleTremolo::setDoubleTremoloChordFirstElement (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // register chord as first element of this double tremolo
   fDoubleTremoloFirstElement = chord;
@@ -645,7 +645,7 @@ void msrDoubleTremolo::setDoubleTremoloChordSecondElement (const S_msrChord& cho
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // register chord as second element of this double tremolo
   fDoubleTremoloSecondElement = chord;
@@ -715,7 +715,7 @@ void msrDoubleTremolo::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrDoubleTremolo>*
     p =
@@ -734,7 +734,7 @@ void msrDoubleTremolo::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -753,7 +753,7 @@ void msrDoubleTremolo::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrDoubleTremolo>*
     p =
@@ -772,7 +772,7 @@ void msrDoubleTremolo::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif        
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }

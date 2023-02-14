@@ -97,4 +97,4 @@ std::ostream& operator << (std::ostream& os, const msrTempoNotesRelationshipKind
 }
 
 
-#endif
+#endif // ___msrTemposEnumTypes___

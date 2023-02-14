@@ -210,4 +210,4 @@ EXP std::ostream& operator << (std::ostream& os, const S_msrAfterGraceNotesGroup
 }
 
 
-#endif
+#endif // ___msrAfterGraceNotes___

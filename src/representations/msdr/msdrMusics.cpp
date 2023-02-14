@@ -56,7 +56,7 @@ msdrMusic::msdrMusic (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fMusicName = musicName;
 
@@ -92,7 +92,7 @@ void msdrMusic::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msdrMusic>*
     p =
@@ -111,7 +111,7 @@ void msdrMusic::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -130,7 +130,7 @@ void msdrMusic::acceptOut (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msdrMusic>*
     p =
@@ -149,7 +149,7 @@ void msdrMusic::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
   }
 }
@@ -168,7 +168,7 @@ void msdrMusic::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // browse the voice initial elements
   if (fInitialMusicElementsList.size ()) {
@@ -423,7 +423,7 @@ void msdrMusic::print (std::ostream& os) const
 
     --gIndenter;
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 */
 
   --gIndenter;

@@ -84,4 +84,4 @@ EXP std::ostream& operator << (std::ostream& os, const S_lpsrVariableUseCommand&
 }
 
 
-#endif
+#endif // ___lpsrVariables___

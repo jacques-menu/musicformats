@@ -12,6 +12,8 @@
 #ifndef ___msrGenerationOah___
 #define ___msrGenerationOah___
 
+#include "mfStaticSettings.h"
+
 #include "msrGenerationBasicTypes.h"
 
 
@@ -86,7 +88,7 @@ class EXP msrGeneratorsOahGroup : public oahGroup
 
 #ifdef MF_TRACE_IS_ENABLED
 // JMI    void                  initializeMsrGeneratorsTraceOah ();
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     void                  initializeGenerationAPIOptions ();
 
@@ -133,4 +135,4 @@ EXP S_msrGeneratorsOahGroup createGlobalMsrGeneratorsOahGroup ();
 }
 
 
-#endif
+#endif // ___msrGenerationOah___

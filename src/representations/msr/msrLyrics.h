@@ -453,4 +453,4 @@ EXP std::ostream& operator << (std::ostream& os, const S_msrStanza& elt);
 }
 
 
-#endif
+#endif // ___msrLyrics___

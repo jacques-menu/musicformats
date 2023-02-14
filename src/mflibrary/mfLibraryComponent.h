@@ -34,5 +34,5 @@ S_mfcLibraryComponent EXP createLibraryComponent ();
 }
 
 
-#endif
+#endif // ___mfLibraryComponent__
 

@@ -11,6 +11,8 @@
 
 #include "mfIndentedTextOutput.h" // for gLog
 
+#include "oahEarlyOptions.h"
+
 #include "msrComponent.h"
 
 #include "waeHandlers.h"
@@ -39,7 +41,7 @@ S_mfcRepresentationComponent createMsrRepresentationComponent ()
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     // create the format component
     pRepresentationComponent =

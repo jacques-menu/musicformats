@@ -84,4 +84,4 @@ std::ostream& operator << (std::ostream& os, const msrCautionaryAccidentalKind& 
 }
 
 
-#endif
+#endif // ___msrAccidentals___

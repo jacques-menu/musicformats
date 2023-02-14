@@ -47,4 +47,4 @@ EXP void musicxmlError (
 }
 
 
-#endif
+#endif // ___musicxmlWae___

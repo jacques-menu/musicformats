@@ -504,7 +504,7 @@ std::string msdlKeywordKindAsMsdlString (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   std::string result;
 
@@ -567,7 +567,7 @@ std::string msdlKeywordKindAsMsdlString (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   return result;
 }
@@ -679,7 +679,7 @@ msdlKeywordKind msdlKeywordKindFromString (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   msdlKeywordKind result = msdlKeywordKind::kKeyword_UNKNOWN;
 
@@ -743,7 +743,7 @@ msdlKeywordKind msdlKeywordKindFromString (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   return result;
 }
@@ -850,7 +850,7 @@ void initializeMSDLKeywords ()
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     // keywords languages handling
     // ------------------------------------------------------

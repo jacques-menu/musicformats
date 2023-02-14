@@ -32,4 +32,4 @@ using namespace MusicFormats;
 EXP extern mfMusicformatsErrorKind launchMfslInterpreter ();
 
 
-#endif
+#endif // ___mfslInterpreterInterface___

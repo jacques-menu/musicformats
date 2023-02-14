@@ -27,5 +27,5 @@ S_mfcGeneratorComponent EXP createMikrokosmos3WanderingGeneratorComponent ();
 }
 
 
-#endif
+#endif // ___Mikrokosmos3WanderingComponent___
 

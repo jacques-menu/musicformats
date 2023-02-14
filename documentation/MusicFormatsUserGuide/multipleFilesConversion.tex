@@ -1,3 +1,14 @@
+% -------------------------------------------------------------------------
+%  MusicFormats Library
+%  Copyright (C) Jacques Menu 2016-2023
+
+%  This Source Code Form is subject to the terms of the Mozilla Public
+%  License, v. 2.0. If a copy of the MPL was not distributed with this
+%  file, you can obtain one at http://mozilla.org/MPL/2.0/.
+
+%  https://github.com/jacques-menu/musicformats
+% -------------------------------------------------------------------------
+
 % !TEX root = MusicFormatsUserGuide.tex
 
 % -------------------------------------------------------------------------
@@ -71,7 +82,7 @@ total 24
 Using a \symbolicLink\ avoids copying the \Makefile\ into multiple sub-folders. \\
 That also ensures that any change to the \Makefile\ in \libFiles{musicxmlfiles} is taken into account in the sub-folders.
 
-\item use this \Makefile\ with the \make\ command as shown below. 
+\item use this \Makefile\ with the \make\ command as shown below.
 \end{itemize}
 
 %\filbreak
@@ -98,7 +109,7 @@ Available targets are:
 Make variables:
   XML2LY=/path/to/xml2ly
   LILYPOND=/path/to/lilypond
-  When XML2LY and/or LILYPOND are not set, 
+  When XML2LY and/or LILYPOND are not set,
   these tools are looked up in the PATH variable,
 
   OPTIONS=...
@@ -112,10 +123,10 @@ XML2LY   = xml2ly
 OPTIONS  = -q
 LILYPOND = /Applications/LilyPond/lilypond-2.23.6/bin/lilypond
 
-xml2ly version is: 
+xml2ly version is:
 Command line version of musicxml2lilypond converter v0.9.53 (February 21, 2022)
 
-lilypond version is: 
+lilypond version is:
 GNU LilyPond 2.23.6 (running Guile 2.2)
 
 xml2ly -q -o "lilypond/HumdrumScotKeys.ly" "HumdrumScotKeys.xml"

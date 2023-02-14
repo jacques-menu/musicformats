@@ -82,4 +82,4 @@ S_msrMeasure createMeasureInVoice (
 }
 
 
-#endif
+#endif // ___msrInterface___

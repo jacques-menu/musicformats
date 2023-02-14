@@ -126,4 +126,4 @@ EXP std::ostream& operator << (std::ostream& os, const S_msrGlissando& elt);
 }
 
 
-#endif
+#endif // ___msrGlissandos___

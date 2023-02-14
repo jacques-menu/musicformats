@@ -308,7 +308,7 @@ void initializeMSDLBasicTypes ()
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     // MSDL user languages handling
     // ------------------------------------------------------

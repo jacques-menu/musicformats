@@ -64,4 +64,4 @@ typename mfEnumAll<T>::Iterator end (mfEnumAll<T>)
 }
 
 
-#endif
+#endif // ___mfEnumAll___

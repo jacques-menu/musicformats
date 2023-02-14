@@ -361,7 +361,7 @@ void waeHandler::waeTrace (
     message);
 }
 
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 //______________________________________________________________________________
 void waeHandler::displayWarningsAndErrorsInputLineNumbers ()

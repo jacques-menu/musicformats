@@ -538,7 +538,7 @@ void mfslInput::enrichNameOptionsBlock (
     __FILE__, __LINE__,
     nameOptionsBlock != nullptr,
     "nameOptionsBlock is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   if (gGlobalMfslInterpreterOahGroup->getTraceInputs ()) {
     gLog <<
@@ -1361,7 +1361,7 @@ void mfslChoice::enrichLabelOptionsBlock (
     __FILE__, __LINE__,
     labelOptionsBlock != nullptr,
     "labelOptionsBlock is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   if (gGlobalMfslInterpreterOahGroup->getTraceChoices ()) {
     gLog <<
@@ -1862,7 +1862,7 @@ mfslCaseChoiceStatement::mfslCaseChoiceStatement (
     __FILE__, __LINE__,
     caseChoice != nullptr,
     "caseChoice is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fCaseChoice = caseChoice;
 
@@ -2067,7 +2067,7 @@ mfslCaseInputStatement::mfslCaseInputStatement (
     __FILE__, __LINE__,
     caseInput != nullptr,
     "caseInput is null");
-#endif
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fCaseInputInput = caseInput;
 
@@ -2262,7 +2262,7 @@ std::ostream& operator << (std::ostream& os, const S_mfslCaseInputStatement& elt
 //         "Initializing MFSL basic types handling" <<
 //         std::endl;
 //     }
-// #endif
+// #endif // MF_TRACE_IS_ENABLED
 //
 //     pPrivateThisMethodHasBeenRun = true;
 //   }

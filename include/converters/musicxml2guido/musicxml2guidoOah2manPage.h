@@ -25,4 +25,4 @@ namespace MusicFormats
 }
 
 
-#endif
+#endif // ___musicxml2guidoOah2manPage___

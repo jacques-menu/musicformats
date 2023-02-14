@@ -9,8 +9,8 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#ifndef ___outputFileOahGroup___
-#define ___outputFileOahGroup___
+#ifndef ___outputFileOah___
+#define ___outputFileOah___
 
 #include <set>
 
@@ -132,4 +132,4 @@ EXP S_outputFileOahGroup createGlobalOutputFileOahGroup ();
 }
 
 
-#endif
+#endif // ___outputFileOah___

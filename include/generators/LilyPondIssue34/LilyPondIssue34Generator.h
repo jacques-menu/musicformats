@@ -121,4 +121,4 @@ typedef SMARTP<LilyPondIssue34Generator> S_LilyPondIssue34Generator;
 }
 
 
-#endif
+#endif // ___LilyPondIssue34Generator___

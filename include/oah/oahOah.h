@@ -14,6 +14,8 @@
 
 #include "exports.h"
 
+// #include "mfStaticSettings.h"
+
 #include "languages.h"
 
 #include "oahAtomsCollection.h"
@@ -407,7 +409,7 @@ class EXP oahOahGroup : public oahGroup
 
 #ifdef MF_TRACE_IS_ENABLED
     void                  initializeOahTraceOah ();
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   public:
 
@@ -499,4 +501,4 @@ EXP S_oahOahGroup createGlobalOahOahGroup (
 }
 
 
-#endif
+#endif // ___oahOah___

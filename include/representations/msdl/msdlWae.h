@@ -135,4 +135,4 @@ EXP void msdlInternalError (
 }
 
 
-#endif
+#endif // ___msdlWae___
