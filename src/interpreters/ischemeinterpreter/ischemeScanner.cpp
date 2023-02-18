@@ -872,11 +872,11 @@ int yy_flex_debug = 1;
 
 static const flex_int16_t yy_rule_linenum[46] =
     {   0,
-      139,  143,  149,  154,  159,  165,  170,  174,  178,  185,
-      190,  204,  209,  214,  218,  222,  226,  231,  236,  250,
-      255,  260,  264,  268,  272,  278,  279,  293,  310,  324,
-      338,  352,  366,  380,  394,  410,  426,  427,  442,  456,
-      470,  484,  498,  512,  527
+      140,  144,  150,  155,  160,  166,  171,  175,  179,  186,
+      191,  205,  210,  215,  219,  223,  227,  232,  237,  251,
+      256,  261,  265,  269,  273,  279,  280,  294,  311,  325,
+      339,  353,  367,  381,  395,  411,  427,  428,  443,  457,
+      471,  485,  499,  513,  528
     } ;
 
 /* The intent behind this definition is that it'll catch
@@ -907,9 +907,10 @@ char *yytext;
 /* ---------------------------------------------------------------------- */
 
 #include <sstream>
-#include <string>     // strerror_r
+#include <string>
 
 #include "mfStringsHandling.h"
+#include "mfSystemInterface.h"
 
 #include "oahBasicTypes.h"
 
@@ -938,27 +939,27 @@ char *yytext;
 /* functions */
 /* ---------------------------------------------------------------------- */
 
-#line 941 "ischemeScanner.cpp"
+#line 942 "ischemeScanner.cpp"
 /* ---------------------------------------------------------------------- */
 /* flex options */
 /* ---------------------------------------------------------------------- */
 #define YY_NO_INPUT 1
-#line 68 "ischemeScanner.ll"
+#line 69 "ischemeScanner.ll"
 //   iscm::parser::symbol_type JMI
 //   make_NAME (const std::string &s, const iscm::parser::location_type& loc);
-#line 949 "ischemeScanner.cpp"
+#line 950 "ischemeScanner.cpp"
 /* ---------------------------------------------------------------------- */
 /* regular expressions */
 /* ---------------------------------------------------------------------- */
-#line 96 "ischemeScanner.ll"
+#line 97 "ischemeScanner.ll"
   // Code run each time a pattern is matched.
   # define YY_USER_ACTION  loc.columns (yyleng);
-#line 956 "ischemeScanner.cpp"
+#line 957 "ischemeScanner.cpp"
 /* ---------------------------------------------------------------------- */
 /* exclusive modes */
 /* ---------------------------------------------------------------------- */
 
-#line 961 "ischemeScanner.cpp"
+#line 962 "ischemeScanner.cpp"
 
 #define INITIAL 0
 #define SINGLE_QUOTED_STRING_MODE 1
@@ -1240,14 +1241,14 @@ YY_DECL
 
 	{
 /* %% [7.0] user's declarations go here */
-#line 113 "ischemeScanner.ll"
+#line 114 "ischemeScanner.ll"
 
 
 
 
 
 
-#line 120 "ischemeScanner.ll"
+#line 121 "ischemeScanner.ll"
 /* ---------------------------------------------------------------------- */
 /* choices local to yylex() */
 /* ---------------------------------------------------------------------- */
@@ -1267,7 +1268,7 @@ loc.step ();
 
 
 
-#line 1270 "ischemeScanner.cpp"
+#line 1271 "ischemeScanner.cpp"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -1359,7 +1360,7 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 139 "ischemeScanner.ll"
+#line 140 "ischemeScanner.ll"
 {
   loc.step ();
 }
@@ -1367,14 +1368,14 @@ YY_RULE_SETUP
 case 2:
 /* rule 2 can match eol */
 YY_RULE_SETUP
-#line 143 "ischemeScanner.ll"
+#line 144 "ischemeScanner.ll"
 {
   loc.lines (yyleng); loc.step ();
 }
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 149 "ischemeScanner.ll"
+#line 150 "ischemeScanner.ll"
 { // comment
   loc.step ();
   BEGIN COMMENT_TO_END_OF_LINE_MODE;
@@ -1383,7 +1384,7 @@ YY_RULE_SETUP
 case 4:
 /* rule 4 can match eol */
 YY_RULE_SETUP
-#line 154 "ischemeScanner.ll"
+#line 155 "ischemeScanner.ll"
 {
   loc.lines (yyleng); loc.step ();
   BEGIN INITIAL;
@@ -1391,7 +1392,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 159 "ischemeScanner.ll"
+#line 160 "ischemeScanner.ll"
 {
   /* accepting any character other than {endOfLine} */
   loc.step ();
@@ -1399,7 +1400,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 165 "ischemeScanner.ll"
+#line 166 "ischemeScanner.ll"
 {
   loc.step ();
   BEGIN PARENTHESIZED_COMMENT_MODE;
@@ -1408,21 +1409,21 @@ YY_RULE_SETUP
 case 7:
 /* rule 7 can match eol */
 YY_RULE_SETUP
-#line 170 "ischemeScanner.ll"
+#line 171 "ischemeScanner.ll"
 {
   loc.lines (yyleng); loc.step ();
 }
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 174 "ischemeScanner.ll"
+#line 175 "ischemeScanner.ll"
 {
   BEGIN INITIAL;
 }
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 178 "ischemeScanner.ll"
+#line 179 "ischemeScanner.ll"
 {
   /* accepting any character other than {endOfLine} */
   loc.step ();
@@ -1430,7 +1431,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 185 "ischemeScanner.ll"
+#line 186 "ischemeScanner.ll"
 {
   pStringBuffer [0] = '\0';
   BEGIN SINGLE_QUOTED_STRING_MODE;
@@ -1438,7 +1439,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 190 "ischemeScanner.ll"
+#line 191 "ischemeScanner.ll"
 {
   if (drv.getDisplayTokens ()) {
     gLog <<
@@ -1455,7 +1456,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 204 "ischemeScanner.ll"
+#line 205 "ischemeScanner.ll"
 {
   mfCharStarCat (pStringBuffer, "'", STRING_BUFFER_SIZE);
   loc.step ();
@@ -1464,7 +1465,7 @@ YY_RULE_SETUP
 case 13:
 /* rule 13 can match eol */
 YY_RULE_SETUP
-#line 209 "ischemeScanner.ll"
+#line 210 "ischemeScanner.ll"
 {
   mfCharStarCat (pStringBuffer, yytext, STRING_BUFFER_SIZE);
   loc.lines (yyleng); loc.step ();
@@ -1472,35 +1473,35 @@ YY_RULE_SETUP
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 214 "ischemeScanner.ll"
+#line 215 "ischemeScanner.ll"
 {
   mfCharStarCat (pStringBuffer, "\n", STRING_BUFFER_SIZE);
 }
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 218 "ischemeScanner.ll"
+#line 219 "ischemeScanner.ll"
 {
   mfCharStarCat (pStringBuffer, "\t", STRING_BUFFER_SIZE);
 }
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 222 "ischemeScanner.ll"
+#line 223 "ischemeScanner.ll"
 {
   mfCharStarCat (pStringBuffer, "\\", STRING_BUFFER_SIZE);
 }
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 226 "ischemeScanner.ll"
+#line 227 "ischemeScanner.ll"
 {
   mfCharStarCat (pStringBuffer, yytext, STRING_BUFFER_SIZE);
 }
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 231 "ischemeScanner.ll"
+#line 232 "ischemeScanner.ll"
 {
   pStringBuffer [0] = '\0';
   BEGIN DOUBLE_QUOTED_STRING_MODE;
@@ -1508,7 +1509,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 236 "ischemeScanner.ll"
+#line 237 "ischemeScanner.ll"
 {
   if (drv.getDisplayTokens ()) {
     gLog <<
@@ -1525,7 +1526,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 250 "ischemeScanner.ll"
+#line 251 "ischemeScanner.ll"
 {
   mfCharStarCat (pStringBuffer, "\"", STRING_BUFFER_SIZE);
   loc.step ();
@@ -1534,7 +1535,7 @@ YY_RULE_SETUP
 case 21:
 /* rule 21 can match eol */
 YY_RULE_SETUP
-#line 255 "ischemeScanner.ll"
+#line 256 "ischemeScanner.ll"
 {
   mfCharStarCat (pStringBuffer, yytext, STRING_BUFFER_SIZE);
   loc.lines (yyleng); loc.step ();
@@ -1542,37 +1543,37 @@ YY_RULE_SETUP
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 260 "ischemeScanner.ll"
+#line 261 "ischemeScanner.ll"
 {
   mfCharStarCat (pStringBuffer, "\n", STRING_BUFFER_SIZE);
 }
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 264 "ischemeScanner.ll"
+#line 265 "ischemeScanner.ll"
 {
   mfCharStarCat (pStringBuffer, "\t", STRING_BUFFER_SIZE);
 }
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 268 "ischemeScanner.ll"
+#line 269 "ischemeScanner.ll"
 {
   mfCharStarCat (pStringBuffer, "\\", STRING_BUFFER_SIZE);
 }
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 272 "ischemeScanner.ll"
+#line 273 "ischemeScanner.ll"
 {
   mfCharStarCat (pStringBuffer, yytext, STRING_BUFFER_SIZE);
 }
 	YY_BREAK
 case 26:
-#line 279 "ischemeScanner.ll"
+#line 280 "ischemeScanner.ll"
 case 27:
 YY_RULE_SETUP
-#line 279 "ischemeScanner.ll"
+#line 280 "ischemeScanner.ll"
 {
   if (drv.getDisplayTokens ()) {
     gLog << "--> " << drv.getScannerLocation () <<
@@ -1589,7 +1590,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 293 "ischemeScanner.ll"
+#line 294 "ischemeScanner.ll"
 {
   if (drv.getDisplayTokens ()) {
     gLog << "--> " << drv.getScannerLocation () <<
@@ -1606,7 +1607,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 310 "ischemeScanner.ll"
+#line 311 "ischemeScanner.ll"
 {
   if (drv.getDisplayTokens ()) {
     gLog << "--> " << drv.getScannerLocation () <<
@@ -1623,7 +1624,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 324 "ischemeScanner.ll"
+#line 325 "ischemeScanner.ll"
 {
   if (drv.getDisplayTokens ()) {
     gLog << "--> " << drv.getScannerLocation () <<
@@ -1640,7 +1641,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 338 "ischemeScanner.ll"
+#line 339 "ischemeScanner.ll"
 {
   if (drv.getDisplayTokens ()) {
     gLog << "--> " << drv.getScannerLocation () <<
@@ -1657,7 +1658,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 352 "ischemeScanner.ll"
+#line 353 "ischemeScanner.ll"
 {
   if (drv.getDisplayTokens ()) {
     gLog << "--> " << drv.getScannerLocation () <<
@@ -1674,7 +1675,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 366 "ischemeScanner.ll"
+#line 367 "ischemeScanner.ll"
 {
   if (drv.getDisplayTokens ()) {
     gLog << "--> " << drv.getScannerLocation () <<
@@ -1691,7 +1692,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 380 "ischemeScanner.ll"
+#line 381 "ischemeScanner.ll"
 {
   if (drv.getDisplayTokens ()) {
     gLog << "--> " << drv.getScannerLocation () <<
@@ -1708,7 +1709,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
-#line 394 "ischemeScanner.ll"
+#line 395 "ischemeScanner.ll"
 {
   if (drv.getDisplayTokens ()) {
     gLog << "--> " << drv.getScannerLocation () <<
@@ -1725,7 +1726,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
-#line 410 "ischemeScanner.ll"
+#line 411 "ischemeScanner.ll"
 {
   if (drv.getDisplayTokens ()) {
     gLog << "--> " << drv.getScannerLocation () <<
@@ -1741,10 +1742,10 @@ YY_RULE_SETUP
 }
 	YY_BREAK
 case 37:
-#line 427 "ischemeScanner.ll"
+#line 428 "ischemeScanner.ll"
 case 38:
 YY_RULE_SETUP
-#line 427 "ischemeScanner.ll"
+#line 428 "ischemeScanner.ll"
 {
   if (drv.getDisplayTokens ()) {
     gLog << "--> " << drv.getScannerLocation () <<
@@ -1760,7 +1761,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
-#line 442 "ischemeScanner.ll"
+#line 443 "ischemeScanner.ll"
 {
   if (drv.getDisplayTokens ()) {
     gLog << "--> " << drv.getScannerLocation () <<
@@ -1777,7 +1778,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 40:
 YY_RULE_SETUP
-#line 456 "ischemeScanner.ll"
+#line 457 "ischemeScanner.ll"
 {
   if (drv.getDisplayTokens ()) {
     gLog << "--> " << drv.getScannerLocation () <<
@@ -1794,7 +1795,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 41:
 YY_RULE_SETUP
-#line 470 "ischemeScanner.ll"
+#line 471 "ischemeScanner.ll"
 {
   if (drv.getDisplayTokens ()) {
     gLog << "--> " << drv.getScannerLocation () <<
@@ -1811,7 +1812,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 42:
 YY_RULE_SETUP
-#line 484 "ischemeScanner.ll"
+#line 485 "ischemeScanner.ll"
 {
   if (drv.getDisplayTokens ()) {
     gLog << "--> " << drv.getScannerLocation () <<
@@ -1828,7 +1829,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 43:
 YY_RULE_SETUP
-#line 498 "ischemeScanner.ll"
+#line 499 "ischemeScanner.ll"
 {
   if (drv.getDisplayTokens ()) {
     gLog << "--> " << drv.getScannerLocation () <<
@@ -1845,7 +1846,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 44:
 YY_RULE_SETUP
-#line 512 "ischemeScanner.ll"
+#line 513 "ischemeScanner.ll"
 {
   if (drv.getDisplayTokens ()) {
     gLog << "--> " << drv.getScannerLocation () <<
@@ -1862,7 +1863,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 45:
 YY_RULE_SETUP
-#line 527 "ischemeScanner.ll"
+#line 528 "ischemeScanner.ll"
 {
    throw iscm::parser::syntax_error (
      loc,
@@ -1874,7 +1875,7 @@ case YY_STATE_EOF(SINGLE_QUOTED_STRING_MODE):
 case YY_STATE_EOF(DOUBLE_QUOTED_STRING_MODE):
 case YY_STATE_EOF(COMMENT_TO_END_OF_LINE_MODE):
 case YY_STATE_EOF(PARENTHESIZED_COMMENT_MODE):
-#line 535 "ischemeScanner.ll"
+#line 536 "ischemeScanner.ll"
 {
   return
     iscm::parser::make_YYEOF (loc);
@@ -1882,10 +1883,10 @@ case YY_STATE_EOF(PARENTHESIZED_COMMENT_MODE):
 	YY_BREAK
 case 46:
 YY_RULE_SETUP
-#line 542 "ischemeScanner.ll"
+#line 543 "ischemeScanner.ll"
 ECHO;
 	YY_BREAK
-#line 1888 "ischemeScanner.cpp"
+#line 1889 "ischemeScanner.cpp"
 
 	case YY_END_OF_BUFFER:
 		{
@@ -2996,7 +2997,7 @@ void yyfree (void * ptr )
 
 /* %ok-for-header */
 
-#line 542 "ischemeScanner.ll"
+#line 543 "ischemeScanner.ll"
 
 
 
@@ -3019,7 +3020,7 @@ void ischemeDriver::scanBegin ()
 
       char*
         errorString =
-          strerror (errno);
+          mfStrErrorCString ();
 
       if (errorString != nullptr) {
         s <<

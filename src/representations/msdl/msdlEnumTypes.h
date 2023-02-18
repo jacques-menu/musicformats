@@ -12,8 +12,11 @@
 #ifndef ___msdlEnumTypes___
 #define ___msdlEnumTypes___
 
+#include <string>
 #include <list>
 #include <map>
+
+#include <ostream>
 
 #include "smartpointer.h"
 
