@@ -17,9 +17,10 @@
 /* ---------------------------------------------------------------------- */
 
 #include <sstream>
-#include <string>     // strerror_r
+#include <string>
 
 #include "mfStringsHandling.h"
+#include "mfSystemInterface.h"
 
 #include "oahBasicTypes.h"
 
@@ -560,7 +561,7 @@ void ischemeDriver::scanBegin ()
 
       char*
         errorString =
-          strerror (errno);
+          mfStrErrorCString ();
 
       if (errorString != nullptr) {
         s <<
