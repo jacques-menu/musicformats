@@ -22,6 +22,8 @@
 #include "mfStringsHandling.h"
 #include "mfIndentedTextOutput.h"
 
+#include "msrWholeNotes.h"
+
 #include "oahEarlyOptions.h"
 
 #include "mfcBasicTypes.h"

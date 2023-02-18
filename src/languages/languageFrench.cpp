@@ -79,8 +79,8 @@ std::string languageFrench::passIDKindAsString (mfPassIDKind passIDKind) const
       result = "Opts & Args";
       break;
 
-    case mfPassIDKind::kMfPassID_OptionalPass:
-      result = "Optional";
+    case mfPassIDKind::kMfPassID_DisplayPass:
+      result = "Affichage";
       break;
 
     case mfPassIDKind::kMfPassID_1:

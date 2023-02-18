@@ -65,7 +65,7 @@ void outputFileOahGroup::initializeOutputFileOah ()
 void outputFileOahGroup::initializeOutputFileNameOptions ()
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
   gLog << std::left <<
     "Creating insider output file subgroup in \"" <<
     fGroupHeader <<
@@ -131,7 +131,7 @@ void outputFileOahGroup::checkGroupOptionsConsistency ()
 void outputFileOahGroup::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -150,7 +150,7 @@ void outputFileOahGroup::acceptIn (basevisitor* v)
         S_outputFileOahGroup elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -169,7 +169,7 @@ void outputFileOahGroup::acceptIn (basevisitor* v)
 void outputFileOahGroup::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -188,7 +188,7 @@ void outputFileOahGroup::acceptOut (basevisitor* v)
         S_outputFileOahGroup elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -207,7 +207,7 @@ void outputFileOahGroup::acceptOut (basevisitor* v)
 void outputFileOahGroup::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -270,7 +270,7 @@ std::ostream& operator << (std::ostream& os, const S_outputFileOahGroup& elt)
 S_outputFileOahGroup createGlobalOutputFileOahGroup ()
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<

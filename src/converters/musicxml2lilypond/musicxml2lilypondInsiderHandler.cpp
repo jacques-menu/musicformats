@@ -94,7 +94,7 @@ Usage: xml2ly [[option]* [MusicXMLFile|-] [[option]*
       )
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -202,7 +202,7 @@ std::string xml2lyInsiderHandler::usageFromUsedThruKind (
 void xml2lyInsiderHandler::createTheXml2lyPrefixes ()
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOahDetails ()) {
+  if (gEarlyOptions.getTraceEarlyOptionsDetails ()) {
 		std::stringstream ss;
 
     ss <<
@@ -223,7 +223,7 @@ void xml2lyInsiderHandler::createTheXml2lyOptionGroups (
   const std::string& serviceName)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOahDetails ()) {
+  if (gEarlyOptions.getTraceEarlyOptionsDetails ()) {
 		std::stringstream ss;
 
     ss <<
@@ -320,7 +320,7 @@ void xml2lyInsiderHandler::createTheXml2lyOptionGroups (
     createGlobalXml2lyInsiderOahGroup ());
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOahDetails ()) {
+  if (gEarlyOptions.getTraceEarlyOptionsDetails ()) {
     // print the options handler initial state
 		std::stringstream ss;
 
@@ -340,7 +340,7 @@ void xml2lyInsiderHandler::createTheXml2lyOptionGroups (
 #endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
-if (gEarlyOptions.getEarlyTraceOahDetails ()) {
+if (gEarlyOptions.getTraceEarlyOptionsDetails ()) {
     gLog <<
       "musicxml2lilypondInsiderInsiderHandler help:" <<
       std::endl;
@@ -354,7 +354,7 @@ if (gEarlyOptions.getEarlyTraceOahDetails ()) {
 void xml2lyInsiderHandler::checkOptionsAndArguments () const
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOahDetails ()) {
+  if (gEarlyOptions.getTraceEarlyOptionsDetails ()) {
 		std::stringstream ss;
 
     ss <<
@@ -376,7 +376,7 @@ void xml2lyInsiderHandler::checkOptionsAndArguments () const
 std::string xml2lyInsiderHandler::fetchOutputFileNameFromTheOptions () const
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOahDetails ()) {
+  if (gEarlyOptions.getTraceEarlyOptionsDetails ()) {
 		std::stringstream ss;
 
     ss <<
@@ -470,7 +470,7 @@ std::string xml2lyInsiderHandler::fetchOutputFileNameFromTheOptions () const
       }
 
 #ifdef MF_TRACE_IS_ENABLED
-      if (gEarlyOptions.getEarlyTraceOahDetails ()) {
+      if (gEarlyOptions.getTraceEarlyOptionsDetails ()) {
         std::stringstream ss;
 
         ss <<
@@ -489,7 +489,7 @@ std::string xml2lyInsiderHandler::fetchOutputFileNameFromTheOptions () const
        outputFileName += ".ly";
 
 #ifdef MF_TRACE_IS_ENABLED
-      if (gEarlyOptions.getEarlyTraceOahDetails ()) {
+      if (gEarlyOptions.getTraceEarlyOptionsDetails ()) {
         std::stringstream ss;
 
         ss <<
@@ -523,7 +523,7 @@ void xml2lyInsiderHandler::checkHandlerOptionsConsistency ()
 void xml2lyInsiderHandler::enforceHandlerQuietness ()
 {
 #ifdef MF_TRACE_IS_ENABLED
-  gGlobalTraceOahGroup->
+  gTraceOahGroup->
     enforceGroupQuietness ();
 #endif // MF_TRACE_IS_ENABLED
 
@@ -564,7 +564,7 @@ void xml2lyInsiderOahGroup::checkGroupOptionsConsistency ()
 void xml2lyInsiderOahGroup::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -583,7 +583,7 @@ void xml2lyInsiderOahGroup::acceptIn (basevisitor* v)
         S_xml2lyInsiderOahGroup elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -602,7 +602,7 @@ void xml2lyInsiderOahGroup::acceptIn (basevisitor* v)
 void xml2lyInsiderOahGroup::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -621,7 +621,7 @@ void xml2lyInsiderOahGroup::acceptOut (basevisitor* v)
         S_xml2lyInsiderOahGroup elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -640,7 +640,7 @@ void xml2lyInsiderOahGroup::acceptOut (basevisitor* v)
 void xml2lyInsiderOahGroup::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -741,7 +741,7 @@ xml2lyInsiderOahGroup::~xml2lyInsiderOahGroup ()
 void xml2lyInsiderOahGroup::initializeXml2lyInsiderOahGroup ()
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
   gLog << std::left <<
     "Initializing \"" <<
     fGroupHeader <<
@@ -765,7 +765,7 @@ void xml2lyInsiderOahGroup::initializeXml2lyInsiderOahGroup ()
 void xml2lyInsiderOahGroup::createInsiderQuitSubGroup ()
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOahDetails ()) {
+  if (gEarlyOptions.getTraceEarlyOptionsDetails ()) {
   gLog << std::left <<
     "Creating insider quit subgroup in \"" <<
     fGroupHeader <<
@@ -835,7 +835,7 @@ of the first MSR to a second MSR.)",
 void xml2lyInsiderOahGroup::createInsiderMacrosSubGroup ()
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOahDetails ()) {
+  if (gEarlyOptions.getTraceEarlyOptionsDetails ()) {
   gLog << std::left <<
     "Creating insider macro subgroup in \"" <<
     fGroupHeader <<
@@ -871,7 +871,7 @@ R"()",
 #ifdef MF_TRACE_IS_ENABLED
   debugMacroAtom->
     appendValueLessAtomToMacro (
-      gGlobalTraceOahGroup->
+      gTraceOahGroup->
         getTracePassesBooleanAtom ());
 #endif // MF_TRACE_IS_ENABLED
 
@@ -924,7 +924,7 @@ void xml2lyInsiderOahGroup::printXml2lyInsiderOahGroupValues (int fieldWidth)
 S_xml2lyInsiderOahGroup createGlobalXml2lyInsiderOahGroup ()
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<

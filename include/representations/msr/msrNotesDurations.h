@@ -9,13 +9,13 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#ifndef ___msrDurations___
-#define ___msrDurations___
+#ifndef ___msrNotesDurations___
+#define ___msrNotesDurations___
 
 #include <string>
 #include <ostream>
 
-#include "mfRational.h"
+#include "msrWholeNotes.h"
 
 
 namespace MusicFormats
@@ -23,71 +23,72 @@ namespace MusicFormats
 
 // durations
 //______________________________________________________________________________
-enum class msrDurationKind {
-  kDuration_UNKNOWN,
+enum class msrNotesDurationKind {
+  kNotesDuration_UNKNOWN,
 
   // from longest to shortest for the algorithms
-  kDurationMaxima, kDurationLonga, kDurationBreve,
-  kDurationWhole, kDurationHalf,
-  kDurationQuarter,
-  kDurationEighth, kDuration16th, kDuration32nd, kDuration64th,
-  kDuration128th, kDuration256th, kDuration512th, kDuration1024th
+  kNotesDurationMaxima, kNotesDurationLonga, kNotesDurationBreve,
+  kNotesDurationWhole, kNotesDurationHalf,
+  kNotesDurationQuarter,
+  kNotesDurationEighth, kNotesDuration16th, kNotesDuration32nd, kNotesDuration64th,
+  kNotesDuration128th, kNotesDuration256th, kNotesDuration512th, kNotesDuration1024th
 };
 
-std::string msrDurationKindAsString (msrDurationKind durationKind);
+std::string msrNotesDurationKindAsString (msrNotesDurationKind notesNotesDurationKind);
 
-std::ostream& operator << (std::ostream& os, const msrDurationKind& elt);
+std::ostream& operator << (std::ostream& os, const msrNotesDurationKind& elt);
 
-EXP msrDurationKind msrDurationKindFromMusicXMLString (
-  int           inputLineNumber,
+EXP msrNotesDurationKind msrNotesDurationKindFromMusicXMLString (
+  int                inputLineNumber,
   const std::string& durationString);
 
-EXP msrDurationKind msrDurationKindFromInteger (
+EXP msrNotesDurationKind msrNotesDurationKindFromInteger (
   int inputLineNumber,
   int durationInteger);
 
-EXP msrDurationKind msrDurationKindFromString (
-  int           inputLineNumber,
+EXP msrNotesDurationKind msrNotesDurationKindFromString (
+  int                inputLineNumber,
   const std::string& durationString);
 
-EXP Rational rationalFromDurationKindAndDotsNumber (
-  msrDurationKind durationKind,
-  int             dotsNumber);
+EXP msrWholeNotes wholeNotesFromNotesDurationKindAndDotsNumber (
+  msrNotesDurationKind notesNotesDurationKind,
+  int                  dotsNumber);
 
-EXP Rational msrDurationKindAsWholeNotes (
-  msrDurationKind durationKind);
+EXP msrWholeNotes msrNotesDurationKindAsWholeNotes (
+  msrNotesDurationKind notesNotesDurationKind);
 
-EXP msrDurationKind wholeNotesAsDurationKind (Rational wholeNotes);
+EXP msrNotesDurationKind wholeNotesAsNotesDurationKind (msrWholeNotes wholeNotes);
 
-std::string msrDurationKindAsMusicXMLType (msrDurationKind durationKind);
+std::string msrNotesDurationKindAsMusicXMLType (msrNotesDurationKind notesNotesDurationKind);
 
 // durations
 //______________________________________________________________________________
-class EXP msrDuration
+class EXP msrNotesDuration
 {
   public:
 
     // constructors/destructor
     // ------------------------------------------------------
 
-                          msrDuration ();
+                          msrNotesDuration ();
 
-                          msrDuration (
-                            msrDurationKind durationKind,
-                            int             dotsNumber);
+                          msrNotesDuration (
+                            msrNotesDurationKind notesNotesDurationKind,
+                            int                  dotsNumber);
 
-    virtual               ~msrDuration ();
+    virtual               ~msrNotesDuration ();
 
   public:
 
     // set and get
     // ------------------------------------------------------
 
-    void                  setDurationKind (msrDurationKind durationKind)
-                              { fDurationKind = durationKind; }
+    void                  setNotesDurationKind (
+    												msrNotesDurationKind notesNotesDurationKind)
+                              { fNotesDurationKind = notesNotesDurationKind; }
 
-    msrDurationKind       getDurationKind () const
-                              { return fDurationKind; }
+    msrNotesDurationKind  getNotesDurationKind () const
+                              { return fNotesDurationKind; }
 
     void                  setDotsNumber (int dotsNumber)
                               { fDotsNumber = dotsNumber; }
@@ -103,10 +104,10 @@ class EXP msrDuration
     void                  incrDotsNumber ()
                               { ++fDotsNumber; }
 
-    Rational              dottedDurationAsWholeNotes_FOR_TEMPO (
+    msrWholeNotes          dottedNotesDurationAsWholeNotes_FOR_TEMPO (
                             int inputLineNumber) const;
 
-    Rational              dottedDurationAsWholeNotes (
+    msrWholeNotes          dottedNotesDurationAsWholeNotes (
                             int inputLineNumber) const;
 
   public:
@@ -134,38 +135,39 @@ class EXP msrDuration
     // private fields
     // ------------------------------------------------------
 
-    msrDurationKind       fDurationKind;
+    msrNotesDurationKind  fNotesDurationKind;
     int                   fDotsNumber;
 };
-EXP std::ostream& operator << (std::ostream& os, const msrDuration& elt);
+EXP std::ostream& operator << (std::ostream& os, const msrNotesDuration& elt);
 
 // dotted durations
 //______________________________________________________________________________
-class EXP msrDottedDuration
+class EXP msrDottedNotesDuration
 {
   public:
 
     // constructors/destructor
     // ------------------------------------------------------
 
-                          msrDottedDuration ();
+                          msrDottedNotesDuration ();
 
-                          msrDottedDuration (
-                            msrDurationKind durationKind,
-                            int             dotsNumber);
+                          msrDottedNotesDuration (
+                            msrNotesDurationKind notesNotesDurationKind,
+                            int                  dotsNumber);
 
-    virtual               ~msrDottedDuration ();
+    virtual               ~msrDottedNotesDuration ();
 
   public:
 
     // set and get
     // ------------------------------------------------------
 
-    void                  setDurationKind (msrDurationKind durationKind)
-                              { fDurationKind = durationKind; }
+    void                  setNotesDurationKind (
+    												msrNotesDurationKind notesNotesDurationKind)
+                              { fNotesDurationKind = notesNotesDurationKind; }
 
-    msrDurationKind       getDurationKind () const
-                              { return fDurationKind; }
+    msrNotesDurationKind  getNotesDurationKind () const
+                              { return fNotesDurationKind; }
 
     void                  setDotsNumber (int dotsNumber)
                               { fDotsNumber = dotsNumber; }
@@ -181,10 +183,10 @@ class EXP msrDottedDuration
     void                  incrDotsNumber ()
                               { ++fDotsNumber; }
 
-    Rational              dottedDurationAsWholeNotes_FOR_TEMPO (
+    msrWholeNotes          dottedNotesDurationAsWholeNotes_FOR_TEMPO (
                             int inputLineNumber) const;
 
-    Rational              dottedDurationAsWholeNotes (
+    msrWholeNotes          dottedNotesDurationAsWholeNotes (
                             int inputLineNumber) const;
 
   public:
@@ -212,27 +214,12 @@ class EXP msrDottedDuration
     // private fields
     // ------------------------------------------------------
 
-    msrDurationKind       fDurationKind;
+    msrNotesDurationKind  fNotesDurationKind;
     int                   fDotsNumber;
 };
-EXP std::ostream& operator << (std::ostream& os, const msrDottedDuration& elt);
-
-// whole notes
-//______________________________________________________________________________
-std::string wholeNotesAsMsrString (
-  int             inputLineNumber,
-  const Rational& wholeNotes,
-  int&            dotsNumber);
-
-std::string wholeNotesAsMsrString (
-  int             inputLineNumber,
-  const Rational& wholeNotes);
-
-std::string multipleFullBarRestsWholeNotesAsMsrString (
-  int             inputLineNumber, // JMI
-  const Rational& wholeNotes);
+EXP std::ostream& operator << (std::ostream& os, const msrDottedNotesDuration& elt);
 
 
 }
 
-#endif // ___msrDurations___
+#endif // ___msrNotesDurations___

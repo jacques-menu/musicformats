@@ -370,7 +370,7 @@ void lpsrHeader::appendRight (
   std::string value)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceIdentification ()) {
+  if (gTraceOahGroup->getTraceIdentification ()) {
 		std::stringstream ss;
 
     ss <<
@@ -394,7 +394,7 @@ void lpsrHeader::appendComposer (
   std::string value)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceIdentification ()) {
+  if (gTraceOahGroup->getTraceIdentification ()) {
 		std::stringstream ss;
 
     ss <<
@@ -418,7 +418,7 @@ void lpsrHeader::appendArranger (
   std::string value)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceIdentification ()) {
+  if (gTraceOahGroup->getTraceIdentification ()) {
 		std::stringstream ss;
 
     ss <<
@@ -442,7 +442,7 @@ void lpsrHeader::appendLyricist (
   std::string value)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceIdentification ()) {
+  if (gTraceOahGroup->getTraceIdentification ()) {
 		std::stringstream ss;
 
     ss <<
@@ -466,7 +466,7 @@ void lpsrHeader::appendPoet (
   std::string value)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceIdentification ()) {
+  if (gTraceOahGroup->getTraceIdentification ()) {
 		std::stringstream ss;
 
     ss <<
@@ -489,7 +489,7 @@ void lpsrHeader::removeAllPoets (
   int    inputLineNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceIdentification ()) {
+  if (gTraceOahGroup->getTraceIdentification ()) {
 		std::stringstream ss;
 
     ss <<
@@ -511,7 +511,7 @@ void lpsrHeader::appendTranslator (
   std::string value)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceIdentification ()) {
+  if (gTraceOahGroup->getTraceIdentification ()) {
 		std::stringstream ss;
 
     ss <<
@@ -535,7 +535,7 @@ void lpsrHeader::appendArtist (
   std::string value)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceIdentification ()) {
+  if (gTraceOahGroup->getTraceIdentification ()) {
 		std::stringstream ss;
 
     ss <<
@@ -559,7 +559,7 @@ void lpsrHeader::appendSoftware (
   std::string value)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceIdentification ()) {
+  if (gTraceOahGroup->getTraceIdentification ()) {
 		std::stringstream ss;
 
     ss <<

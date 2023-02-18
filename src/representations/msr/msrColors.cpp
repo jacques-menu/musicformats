@@ -66,7 +66,7 @@ msrColorRGB::msrColorRGB (
   size_t smSize = sm.size ();
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -84,7 +84,7 @@ msrColorRGB::msrColorRGB (
 
   if (smSize == 4) {
 #ifdef MF_TRACE_IS_ENABLED
-    if (gEarlyOptions.getEarlyTraceOah ()) {
+    if (gEarlyOptions.getTraceEarlyOptions ()) {
       for (unsigned i = 0; i < smSize; ++i) {
         gLog <<
           '[' << sm [i] << "] ";
@@ -110,7 +110,7 @@ msrColorRGB::msrColorRGB (
     BString = sm [3];
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<

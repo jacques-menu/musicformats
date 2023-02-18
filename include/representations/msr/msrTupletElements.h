@@ -42,7 +42,7 @@ namespace MusicFormats
 //       // ------------------------------------------------------
 //
 //                           msrTupletElement (
-//                             int                 inputLineNumber);
+//                             int inputLineNumber);
 //
 // //                           msrTupletElement (
 // //                             int                 inputLineNumber,

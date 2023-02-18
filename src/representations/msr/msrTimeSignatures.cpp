@@ -173,7 +173,7 @@ msrTimeSignatureItem::msrTimeSignatureItem (
   fTimeSignatureBeatValue = -1;
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceTimeSignatures ()) {
+  if (gTraceOahGroup->getTraceTimeSignatures ()) {
 		std::stringstream ss;
 
     ss <<
@@ -228,7 +228,7 @@ Bool msrTimeSignatureItem::isEqualTo (
 void msrTimeSignatureItem::appendBeatsNumber (int beatsNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceTimeSignatures ()) {
+  if (gTraceOahGroup->getTraceTimeSignatures ()) {
 		std::stringstream ss;
 
     ss <<
@@ -249,7 +249,7 @@ void msrTimeSignatureItem::appendBeatsNumber (int beatsNumber)
 void msrTimeSignatureItem::setTimeSignatureBeatValue (int timeSignatureBeatValue)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceTimeSignatures ()) {
+  if (gTraceOahGroup->getTraceTimeSignatures ()) {
 		std::stringstream ss;
 
     ss <<
@@ -867,7 +867,7 @@ S_msrTimeSignature msrTimeSignature::createTimeFromString (
   S_msrTimeSignature result;
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceNotes ()) {
+  if (gTraceOahGroup->getTraceNotes ()) {
 		std::stringstream ss;
 
     ss <<
@@ -888,12 +888,12 @@ S_msrTimeSignature msrTimeSignature::createTimeFromString (
     "[[:space:]]*"
     "/"
     "[[:space:]]*"
-    "([[:digit:]]+)" // beatsDuration
+    "([[:digit:]]+)" // beatsNotesDuration
     "[[:space:]]*"
     );
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -915,7 +915,7 @@ S_msrTimeSignature msrTimeSignature::createTimeFromString (
   size_t smSize = sm.size ();
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -952,10 +952,10 @@ S_msrTimeSignature msrTimeSignature::createTimeFromString (
 
   std::string
     beatsNumber   = sm [1],
-    beatsDuration = sm [2];
+    beatsNotesDuration = sm [2];
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -964,8 +964,8 @@ S_msrTimeSignature msrTimeSignature::createTimeFromString (
       "\"" <<
       std::endl <<
 
-      "beatsDuration = \"" <<
-      beatsDuration <<
+      "beatsNotesDuration = \"" <<
+      beatsNotesDuration <<
       "\"" <<
       std::endl;
 
@@ -985,12 +985,12 @@ S_msrTimeSignature msrTimeSignature::createTimeFromString (
     int integerValue;
     {
       std::stringstream ss;
-      ss << beatsDuration;
+      ss << beatsNotesDuration;
       ss >> integerValue;
     }
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1047,7 +1047,7 @@ void msrTimeSignature::setTimeSignatureUpLinkToMeasure (
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceWholeNotes ()) {
+  if (gTraceOahGroup->getTraceWholeNotes ()) {
     ++gIndenter;
 
     gLog <<
@@ -1069,7 +1069,7 @@ void msrTimeSignature::appendTimeSignatureItem (
   const S_msrTimeSignatureItem& timeSignatureItem)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceTimeSignatures ()) {
+  if (gTraceOahGroup->getTraceTimeSignatures ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1104,9 +1104,9 @@ void msrTimeSignature::appendTimeSignatureItem (
     fTimeSignatureItemsVector.end (), timeSignatureItem);
 }
 
-Rational msrTimeSignature::wholeNotesDurationPerMeasure () const
+msrWholeNotes msrTimeSignature::timeSignatureWholeNotesPerMeasure () const
 {
-  Rational result (0, 1); // addition neutral element
+  msrWholeNotes result (0, 1); // addition neutral element
 
   size_t vectorSize = fTimeSignatureItemsVector.size ();
 
@@ -1114,7 +1114,7 @@ Rational msrTimeSignature::wholeNotesDurationPerMeasure () const
     /* JMI
     // start with first item
     result =
-      Rational (
+      msrWholeNotes (
         fTimeSignatureItemsVector [0]->getTimeSignatureBeatsNumber (),
         fTimeSignatureItemsVector [0]->getTimeSignatureBeatValue ());
 */
@@ -1132,7 +1132,7 @@ Rational msrTimeSignature::wholeNotesDurationPerMeasure () const
     // iterate over the others
     for (size_t i = 0; i < vectorSize; ++i) {
       result +=
-        Rational (
+        msrWholeNotes (
           fTimeSignatureItemsVector [i]->getTimeSignatureBeatsNumber (),
           fTimeSignatureItemsVector [i]->getTimeSignatureBeatValue ());
 

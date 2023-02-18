@@ -1,22 +1,17 @@
 /*
   MusicFormats Library
-  Copyright (C) Jacques Menu 2016-2023
+  Copyright (C) Jacques Menu 2016-2022
 
   This Source Code Form is subject to the terms of the Mozilla Public
   License, v. 2.0. If a copy of the MPL was not distributed with this
-  file, you can obtain one at http://mozilla.org/MPL/2.0/.
+  file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
   https://github.com/jacques-menu/musicformats
 */
 
-#include <iomanip>      // std::setw, std::setprecision, ...
+#include <iomanip>      // setw, setprecision, ...
 
 #include <regex>
-
-// libmusicxml2
-#include "visitor.h"
-
-#include "mfStaticSettings.h"
 
 #include "oahOah.h"
 
@@ -28,8 +23,8 @@
 
 #include "mfslInterpreterInsiderHandler.h"
 
-#include "waeHandlers.h"
 
+using namespace std;
 
 namespace MusicFormats
 {
@@ -64,7 +59,7 @@ void mfslInterpreterOahGroup::initializeMfslInterpreterOahGroup ()
 #ifdef MF_TRACE_IS_ENABLED
   // trace
   // --------------------------------------
-// JMI  initializemfslInterpreterTraceOah ();
+// JMI  initializemfslInterpretertracingOah ();
 #endif // MF_TRACE_IS_ENABLED
 
   // user options
@@ -103,16 +98,16 @@ R"(Write a trace of the MFSL tokens to standard error.)",
         "fDisplayTokens",
         fDisplayTokens));
 
-  fDisplayToolAndInputAtom =
+  fDisplayServiceAndInputAtom =
     oahBooleanAtom::create (
-      "display-tool-and-input", "dtai",
-R"(Write MFSL tool and input analysis activity to standard output.)",
-      "fDisplayToolAndInput",
-      fDisplayToolAndInput);
+      "display-service-and-input", "dtai",
+R"(Write MFSL service and input analysis activity to standard output.)",
+      "fDisplayServiceAndInput",
+      fDisplayServiceAndInput);
 
   subGroup->
     appendAtomToSubGroup (
-      fDisplayToolAndInputAtom);
+      fDisplayServiceAndInputAtom);
 
   subGroup->
     appendAtomToSubGroup (
@@ -128,23 +123,23 @@ R"(Write MFSL options analysis activity to standard output.)",
     appendAtomToSubGroup (
       oahTwoBooleansAtom::create (
         "no-launch", "nol",
-R"(Analyze the MFSL script, but don't launch the tool actually.
+R"(Analyze the MFSL script, but don't launch the service actually.
 This is useful to check the options gathered by the MFSL interpreter,
 and what command(s) would be launched.
-This option implies the '-display-tool-and-input, -ttai' option.)",
+This option implies the '-display-service-and-input, -ttai' option.)",
         "fNoLaunch",
         fNoLaunch,
-        fDisplayToolAndInputAtom));
+        fDisplayServiceAndInputAtom));
 
   // input
 
   fInputSourcesSetAtom =
     oahStringSetElementAtom::create (
       "input", "",
-R"(Use INPUT_SOURCE_NAME as input to launch the tool.
+R"(Use INPUT_SOURCE_NAME as input to launch the service.
 This option overrides the 'input' value(s) specified in the script.
 There can be several occurrences of this option,
-in which case the tool will be run several times.)",
+in which case the service will be run several times.)",
       "INPUT_SOURCE_NAME",
       "fInputSourcesSet",
       fInputSourcesSet);
@@ -162,9 +157,9 @@ in which case the tool will be run several times.)",
     oahStringToStringMultiMapElementAtom::create (
       "select", "sel",
 R"(Select LABEL for choice CHOICE.
-The tool will be run using the corresponding options block(s).
+The service will be run using the corresponding options block(s).
 There can be several occurrences of this option,
-in which case the tool will be run several times.
+in which case the service will be run several times.
 The LABEL can be 'ALL', in which case
 all the labels of the given choice are selected.)",
       "CHOICE:LABEL",
@@ -260,16 +255,10 @@ void mfslInterpreterOahGroup::checkGroupOptionsConsistency ()
 void mfslInterpreterOahGroup::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
-
-    ss <<
+  if (gOahOahGroup->getTraceOahVisitors ()) {
+    gLog <<
       ".\\\" ==> mfslInterpreterOahGroup::acceptIn ()" <<
-      std::endl;
-
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
+      endl;
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -279,16 +268,10 @@ void mfslInterpreterOahGroup::acceptIn (basevisitor* v)
         S_mfslInterpreterOahGroup elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
-          std::stringstream ss;
-
-          ss <<
+        if (gOahOahGroup->getTraceOahVisitors ()) {
+          gLog <<
             ".\\\" ==> Launching mfslInterpreterOahGroup::visitStart ()" <<
-            std::endl;
-
-          gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
-            ss.str ());
+            endl;
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
@@ -298,16 +281,10 @@ void mfslInterpreterOahGroup::acceptIn (basevisitor* v)
 void mfslInterpreterOahGroup::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
-
-    ss <<
+  if (gOahOahGroup->getTraceOahVisitors ()) {
+    gLog <<
       ".\\\" ==> mfslInterpreterOahGroup::acceptOut ()" <<
-      std::endl;
-
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
+      endl;
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -317,16 +294,10 @@ void mfslInterpreterOahGroup::acceptOut (basevisitor* v)
         S_mfslInterpreterOahGroup elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
-          std::stringstream ss;
-
-          ss <<
+        if (gOahOahGroup->getTraceOahVisitors ()) {
+          gLog <<
             ".\\\" ==> Launching mfslInterpreterOahGroup::visitEnd ()" <<
-            std::endl;
-
-          gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
-            ss.str ());
+            endl;
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
@@ -336,85 +307,79 @@ void mfslInterpreterOahGroup::acceptOut (basevisitor* v)
 void mfslInterpreterOahGroup::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
-
-    ss <<
+  if (gOahOahGroup->getTraceOahVisitors ()) {
+    gLog <<
       ".\\\" ==> mfslInterpreterOahGroup::browseData ()" <<
-      std::endl;
-
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
+      endl;
   }
 #endif // MF_TRACE_IS_ENABLED
 }
 
-void mfslInterpreterOahGroup::displayMfslInterpreterOahValues (
+void mfslInterpreterOahGroup::printMfslInterpreterOahValues (
   int fieldWidth)
 {
   gLog <<
     "The mfsl options are:" <<
-    std::endl;
+    endl;
 
   ++gIndenter;
 
-  // trace
+  // tracing
   // --------------------------------------
 
   gLog <<
     "Trace:" <<
-    std::endl;
+    endl;
 
   ++gIndenter;
 
-  gLog << std::left <<
-    std::setw (fieldWidth) << "fTraceScanning" << ": " <<
+  gLog << left <<
+    setw (fieldWidth) << "fTraceScanning" << " : " <<
       fTraceScanning <<
-      std::endl <<
-    std::setw (fieldWidth) << "fDisplayTokens" << ": " <<
+      endl <<
+    setw (fieldWidth) << "fDisplayTokens" << " : " <<
       fDisplayTokens <<
-      std::endl <<
+      endl <<
 
-    std::setw (fieldWidth) << "fTraceParsing" << ": " <<
+    setw (fieldWidth) << "fTraceParsing" << " : " <<
       fTraceParsing <<
-      std::endl <<
+      endl <<
 
-    std::setw (fieldWidth) << "fDisplayToolAndInput" << ": " <<
-      fDisplayToolAndInput <<
-      std::endl <<
+    setw (fieldWidth) << "fDisplayServiceAndInput" << " : " <<
+      fDisplayServiceAndInput <<
+      endl <<
 
-    std::setw (fieldWidth) << "fDisplayOptions" << ": " <<
+    setw (fieldWidth) << "fDisplayOptions" << " : " <<
       fDisplayOptions <<
-      std::endl <<
+      endl <<
 
-    std::setw (fieldWidth) << "fTraceInputs" << ": " <<
+    setw (fieldWidth) << "fTraceInputs" << " : " <<
       fTraceInputs <<
-      std::endl <<
-    std::setw (fieldWidth) << "fTraceCaseInputStatements" << ": " <<
+      endl <<
+    setw (fieldWidth) << "fTraceCaseInputStatements" << " : " <<
       fTraceCaseInputStatements <<
-      std::endl <<
+      endl <<
 
-    std::setw (fieldWidth) << "fTraceChoices" << ": " <<
+    setw (fieldWidth) << "fTraceChoices" << " : " <<
       fTraceChoices <<
-      std::endl <<
-    std::setw (fieldWidth) << "fTraceCaseChoiceStatements" << ": " <<
+      endl <<
+    setw (fieldWidth) << "fTraceCaseChoiceStatements" << " : " <<
       fTraceCaseChoiceStatements <<
-      std::endl <<
+      endl <<
 
-    std::setw (fieldWidth) << "fTraceCaseChoiceStatements" << ": " <<
+    setw (fieldWidth) << "fTraceCaseChoiceStatements" << " : " <<
       fTraceCaseChoiceStatements <<
-      std::endl <<
-    std::setw (fieldWidth) << "fTraceCaseInputStatements" << ": " <<
+      endl <<
+    setw (fieldWidth) << "fTraceCaseInputStatements" << " : " <<
       fTraceCaseInputStatements <<
-      std::endl <<
-    std::setw (fieldWidth) << "fNoLaunch" << ": " <<
+      endl <<
+    setw (fieldWidth) << "fNoLaunch" << " : " <<
       fNoLaunch <<
-      std::endl <<
+      endl <<
 
-    std::setw (fieldWidth) << "fTraceOptionsBlocks" << ": " <<
+    setw (fieldWidth) << "fTraceOptionsBlocks" << " : " <<
       fTraceOptionsBlocks <<
-      std::endl;
+      endl;
 
   --gIndenter;
 
@@ -423,20 +388,20 @@ void mfslInterpreterOahGroup::displayMfslInterpreterOahValues (
 
   gLog <<
     "Choice:" <<
-    std::endl;
+    endl;
 
   ++gIndenter;
 
-  gLog << std::left <<
-    std::setw (fieldWidth) << "fSelectChoiceToLabelsMultiMap" << ": ";
+  gLog << left <<
+    setw (fieldWidth) << "fSelectChoiceToLabelsMultiMap" << " : ";
 
   ++gIndenter;
 
   if (fSelectChoiceToLabelsMultiMap.size ()) {
-    for (std::pair<std::string, std::string> thePair : fSelectChoiceToLabelsMultiMap) {
+    for (pair<std::string, std::string> thePair : fSelectChoiceToLabelsMultiMap) {
       gLog <<
-        thePair.first << ": " << thePair.second <<
-        std::endl;
+        thePair.first << " : " << thePair.second <<
+        endl;
     } // for
   }
 
@@ -447,13 +412,13 @@ void mfslInterpreterOahGroup::displayMfslInterpreterOahValues (
   --gIndenter;
 }
 
-std::ostream& operator << (std::ostream& os, const S_mfslInterpreterOahGroup& elt)
+std::ostream& operator<< (std::ostream& os, const S_mfslInterpreterOahGroup& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "*** NONE ***" << endl;
   }
 
   return os;
@@ -464,15 +429,9 @@ S_mfslInterpreterOahGroup createGlobalMfslInterpreterOahGroup ()
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getEarlyTraceOah ()) {
-		std::stringstream ss;
-
-    ss <<
+    gLog <<
       "Creating global mfsl OAH group" <<
-      std::endl;
-
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
+      endl;
   }
 #endif // MF_TRACE_IS_ENABLED
 

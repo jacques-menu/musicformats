@@ -1,16 +1,18 @@
 /*
   MusicFormats Library
-  Copyright (C) Jacques Menu 2016-2023
+  Copyright (C) Jacques Menu 2016-2022
 
   This Source Code Form is subject to the terms of the Mozilla Public
   License, v. 2.0. If a copy of the MPL was not distributed with this
-  file, you can obtain one at http://mozilla.org/MPL/2.0/.
+  file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
   https://github.com/jacques-menu/musicformats
 */
 
 #include "mfcComponents.h"
 
+
+using namespace std;
 
 namespace MusicFormats
 {
@@ -20,7 +22,7 @@ static S_mfcConverterComponent pConverterComponent;
 //______________________________________________________________________________
 static void populateMultiComponent ()
 {
-  // populate the interpreter's representations list
+  // populate the interpreter's formats list
   pConverterComponent->
     appendRepresentationToMultiComponent (
       createMsrRepresentationComponent ());
@@ -79,15 +81,9 @@ S_mfcConverterComponent createMfslInterpreterComponent ()
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getEarlyTraceComponents ()) {
-		std::stringstream ss;
-
-    ss <<
+    gLog <<
       "Creating the mfsl component" <<
-      std::endl;
-
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
+      endl;
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -104,7 +100,7 @@ S_mfcConverterComponent createMfslInterpreterComponent ()
         mfcVersionDescr::create (
           mfcVersionNumber::createFromString ("0.9.62"),
           "March 9, 2022",
-          std::list<std::string> {
+          list<std::string> {
             "Created the MFSL component"
           }
       ));
@@ -115,7 +111,7 @@ S_mfcConverterComponent createMfslInterpreterComponent ()
         mfcVersionDescr::create (
           mfcVersionNumber::createFromString ("0.9.63"),
           "March 9, 2022",
-          std::list<std::string> {
+          list<std::string> {
             "Finalized the syntax and semantics of MFSL, added '-input' option"
           }
       ));

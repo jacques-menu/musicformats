@@ -34,7 +34,7 @@ class EXP msrTupletFactor
                             int tupletNormalNotes);
 
                           msrTupletFactor (
-                            const Rational& rationalTupletFactor);
+                            const mfRational& rationalTupletFactor);
 
     virtual               ~msrTupletFactor ();
 
@@ -68,10 +68,10 @@ class EXP msrTupletFactor
 
     msrTupletFactor       inverse () const;
 
-    Rational              asRational () const
+    mfRational              asRational () const
                             {
                               return
-                                Rational (
+                                mfRational (
                                   fTupletActualNotes,
                                   fTupletNormalNotes);
                             }

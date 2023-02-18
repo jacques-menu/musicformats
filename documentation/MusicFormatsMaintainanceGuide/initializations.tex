@@ -36,7 +36,7 @@ EXP S_generalOahGroup createGlobalGeneralOahGroup ();
 S_generalOahGroup createGlobalGeneralOahGroup ()
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -47,7 +47,7 @@ S_generalOahGroup createGlobalGeneralOahGroup ()
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // protect library against multiple initializations
   if (! gServiceRunData) {
@@ -127,7 +127,7 @@ void initializeMsrBasicTypes ()
 
   if (! pPrivateThisMethodHasBeenRun) {
 #ifdef MF_TRACE_IS_ENABLED
-    if (gEarlyOptions.getEarlyTraceOah () && ! gEarlyOptions.getEarlyQuietOption ()) {
+    if (gEarlyOptions.getTraceEarlyOptions () && ! gEarlyOptions.getEarlyQuietOption ()) {
       gLog <<
         "Initializing MSR basic types handling" <<
         std::endl;
@@ -136,7 +136,7 @@ void initializeMsrBasicTypes ()
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     // languages handling
     // ------------------------------------------------------
@@ -221,7 +221,7 @@ void xml2lyInsiderHandler::createTheXml2lyOptionGroups (
   appendGroupToHandler (
     createGlobalTraceOahGroup (
       this));
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // create the output file OAH group
   appendGroupToHandler (

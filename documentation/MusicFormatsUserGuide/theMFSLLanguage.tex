@@ -15,7 +15,7 @@
 \chapter{MFSL (MusicFormats Scripting Language}
 % -------------------------------------------------------------------------
 
-\mfslLang\ is meant for launching \mf\ tools easily, gathering options for them and providing selection criteria to do so. The syntax and semantics are very simple, for use by musicians.
+\mfslLang\ is meant for launching \mf\ services easily, gathering options for them and providing selection criteria to do so. The syntax and semantics are very simple, for use by musicians.
 
 A file containing \mfslLang\ elements is called a {\it \script}, with name extension \code{.mfsl} typically, though other extensions can be used at will.
 
@@ -27,10 +27,10 @@ The main features of \mfslLang\ are:
 
 \item a small number of names are reserved keywords:
 \begin{itemize}
-\item \code{tool}, to specify the \mf\ \tool\ to be run;
-\item \code{input}, to indicate the input source when the \tool\ is launched, a file name or \code{-} for \standardInput;
+\item \code{service}, to specify the \mf\ \service\ to be run;
+\item \code{input}, to indicate the input source when the \service\ is launched, a file name or \code{-} for \standardInput;
 \item \code{choice}, \code{default} and \code{case}, to \select\ options or others depending on the needs;
-\item \code{select} and \code{all}, to indicate whether the tool should be launched once or multiple times;
+\item \code{select} and \code{all}, to indicate whether the service should be launched once or multiple times;
 \item comments can be used in \script s: they can be span from a \code{\#} to the end of the line, or span multiple lines, starting and ending with \code{\#\#\#}.
 \end{itemize}
 \end{itemize}
@@ -50,8 +50,8 @@ jacquesmenu@macmini > mfsl -about
 What mfsl does:
 
     This interpreter reads text input containing
-    a tool name, an input source name, keywords and options,
-    and launches the specified tool
+    a service name, an input source name, keywords and options,
+    and launches the specified service
     with these options applied to the input source name.
 
     The input can come from a file or from standard input,
@@ -106,10 +106,10 @@ jacquesmenu@macmini: ~/musicformats-git-dev/mfslfiles > cat minimal.mfsl
   And here is a multi-line comment.
 
   This minimal MFSL script contains only the mandatory elements:
-    - a tool specification, telling which MusicFormats tool to use,
+    - a service specification, telling which MusicFormats service to use,
       here xml2ly;
 
-    - an input specification, specifying the input source for this tool,
+    - an input specification, specifying the input source for this service,
       here file name "Hymn121.xml".
 
       It can be a file name or '-' to specify standard input.
@@ -119,19 +119,19 @@ jacquesmenu@macmini: ~/musicformats-git-dev/mfslfiles > cat minimal.mfsl
           mxl2ly Hymn121.xml
 
       Useful scripts contain options in complement to that,
-      since MFSL is intended to gather options to be used by the tool.
+      since MFSL is intended to gather options to be used by the service.
 ###
 
 
 # ----------------------------------------------------------
-# the MusicFormats tool to be used
+# the MusicFormats service to be used
 # ----------------------------------------------------------
 
-tool : xml2ly ;
+service : xml2ly ;
 
 
 # ----------------------------------------------------------
-# the input file to be processed by the tool
+# the input file to be processed by the service
 # ----------------------------------------------------------
 
 input : "Hymn121.xml" ;
@@ -158,31 +158,31 @@ jacquesmenu@macmini: ~/musicformats-git-dev/mfslfiles > ls -sal minimal.mfsl
 8 -rwxr-xr-x@ 1 jacquesmenu  staff  1488 Mar 26 18:20 minimal.mfsl
 \end{lstlisting}
 
-The \mfslInterp\ has the \optionNameBoth{no-launch}{nol} option to display the essential information found in the script and quit without actually running the tool:
+The \mfslInterp\ has the \optionNameBoth{no-launch}{nol} option to display the essential information found in the script and quit without actually running the service:
 \begin{lstlisting}[language=Terminal]
 jacquesmenu@macmini: ~/musicformats-git-dev/mfslfiles > mfsl -query no-launch
 --- Help for atom "no-launch" in subgroup "MFSL"
     -no-launch, -nol
-          Analyze the MFSL script, but don't launch the tool actually.
+          Analyze the MFSL script, but don't launch the service actually.
           This is useful to check the options gathered by the MFSL interpreter,
           and what command(s) would be launched.
-          This option implies the '-display-tool-and-input, -ttai' option.
+          This option implies the '-display-service-and-input, -ttai' option.
 jacquesmenu@macmini: ~/musicformats-git-dev/mfslfiles >
 \end{lstlisting}
 
-The \optionNameBoth{display-tool-and-input}{dtai} option itself has this effect:
+The \optionNameBoth{display-service-and-input}{dtai} option itself has this effect:
 \begin{lstlisting}[language=Terminal]
-jacquesmenu@macmini: ~/musicformats-git-dev/mfslfiles > mfsl -query display-tool-and-input
---- Help for atom "display-tool-and-input" in subgroup "MFSL"
-    -display-tool-and-input, -dtai
-          Write MFSL tool and input analysis activity to standard output.
+jacquesmenu@macmini: ~/musicformats-git-dev/mfslfiles > mfsl -query display-service-and-input
+--- Help for atom "display-service-and-input" in subgroup "MFSL"
+    -display-service-and-input, -dtai
+          Write MFSL service and input analysis activity to standard output.
 \end{lstlisting}
 
 When running the \mfslfiles{minimal.mfsl} \script\ from the \CLI\ with \optionBoth{no-launch}{nol}, we get:
 \begin{lstlisting}[language=Terminal]
 jacquesmenu@macmini: ~/musicformats-git-dev/mfslfiles > ./minimal.mfsl -no-launch
-====> The known tools names are: ["msdlconverter", "xml2brl", "xml2gmn", "xml2ly" and "xml2xml"]
-====> tool: xml2ly
+====> The known services names are: ["msdlconverter", "xml2brl", "xml2gmn", "xml2ly" and "xml2xml"]
+====> service: xml2ly
 ====> input: Hymn121.xml
 ====> Launching xml2ly with the argument and option gathered from ./minimal.mfsl
 ====> The command to be executed is:
@@ -221,7 +221,7 @@ As is traditional when using interpreters from the \CLI, the \mfslInterp\ \mfslE
 If that is done in a terminal, a \code{Ctrl-d} (control key held when typing the {\tt d}) should be typed after the input, to indicate the end of it, such as:
 \begin{lstlisting}[language=Terminal]
 jacquesmenu@macmini: ~/musicformats-git-dev/mfslfiles > mfsl
-tool : xml2ly ;
+service : xml2ly ;
 input : "HelloWorld.xml" ;
 
 -auto-output-file-name
@@ -253,15 +253,15 @@ jacquesmenu@macmini: ~/musicformats-git-dev/mfslfiles > ls -sal HelloWorld.ly
 \section{The structure of MFSL scripts}
 % -------------------------------------------------------------------------
 
-\mfslLang\ is about collecting options to launch a \mf\ tool using some specified input.
+\mfslLang\ is about collecting options to launch a \mf\ service using some specified input.
 
 Thus, an \mfslLang\ \script\ starts by:
 \begin{itemize}
-\item a mandatory \code{tool} specification: it tells which MusicFormats tool
+\item a mandatory \code{service} specification: it tells which MusicFormats service
     to use, here \xmlToLy;
 
 \item  a mandatory  \code{input} specification: it tells the input source to apply
-    the tool to, such as \fileName{Hymn121.xml} above.
+    the service to, such as \fileName{Hymn121.xml} above.
 \end{itemize}
 
 After that, there can be:
@@ -295,21 +295,21 @@ jacquesmenu@macmini: ~/musicformats-git-dev/mfslfiles > mfsl -help-user
     MFSL (-help-user, -hu):
       -display-tokens, -dtoks
             Write a trace of the MFSL tokens to standard error.
-      -display-tool-and-input, -dtai
-            Write MFSL tool and input analysis activity to standard output.
+      -display-service-and-input, -dtai
+            Write MFSL service and input analysis activity to standard output.
       -display-options, -dopts
             Write MFSL options analysis activity to standard output.
       -select, -sel CHOICE:LABEL
             Select LABEL for choice CHOICE.
-            The tool will be run once using the corresponding options block(s).
+            The service will be run once using the corresponding options block(s).
       -all CHOICE
             Select each label for choice CHOICE in turn.
-            The tool will be run as many times, using the corresponding options block(s).
+            The service will be run as many times, using the corresponding options block(s).
       -no-launch, -nol
-            Analyze the MFSL script, but don't launch the tool actually.
+            Analyze the MFSL script, but don't launch the service actually.
             This is useful to check the options collected by the MFSL interpreter,
             and what command(s) would be launched.
-            This option implies the '-display-tool-and-input, -ttai' option.
+            This option implies the '-display-service-and-input, -ttai' option.
 \end{lstlisting}
 
 The second group, diplayed by \optionBoth{help-maintainer}{hm}, if for the curious and the maintainers of \mf:
@@ -355,7 +355,7 @@ jacquesmenu@macmini: ~/musicformats-git-dev/mfslfiles > cat Hymn121ForBass.mfsl
 
 ###
   This MFSL script contain s:
-    - a 'tool' specification, telling which MusicFormats tool
+    - a 'service' specification, telling which MusicFormats service
       to use, here xml2ly;
 
     - an 'input' specification, the input source to apply
@@ -367,14 +367,14 @@ jacquesmenu@macmini: ~/musicformats-git-dev/mfslfiles > cat Hymn121ForBass.mfsl
 
 
 # ----------------------------------------------------------
-# the MusicFormats tool to be used
+# the MusicFormats service to be used
 # ----------------------------------------------------------
 
-tool : xml2ly ;
+service : xml2ly ;
 
 
 # ----------------------------------------------------------
-# the input file to be handled by the tool
+# the input file to be handled by the service
 # ----------------------------------------------------------
 
 input : "Hymn121.xml" ;
@@ -540,7 +540,7 @@ This example shows the use of a \code{choice} specification and a \code{case} st
 The actual selection works this way:
 \begin{itemize}
 \item there can be \code{select} statements at the end of the \script;
-\item if such statements are present in the \script, they are used to decide which options to use for the tool;
+\item if such statements are present in the \script, they are used to decide which options to use for the service;
 \item this behaviour can be overridden by the use of \optionNameBoth{select}{sel}, which override the \code{select} statements in the \script if any;
 \item if no \code{select} is present in the \script, the default \coiceLabel\ for the \choice\ is implicitly used.
 \end{itemize}
@@ -552,7 +552,7 @@ jacquesmenu@macmini: ~/musicformats-git-dev/mfslfiles > cat Hymn121ForVocalSATBQ
 
 ###
   This MFSL script contains:
-    - a tool specification, telling which MusicFormats tool
+    - a service specification, telling which MusicFormats service
       to use, here xml2ly;
 
     - an input specification, the input source to apply the latter to,
@@ -571,14 +571,14 @@ jacquesmenu@macmini: ~/musicformats-git-dev/mfslfiles > cat Hymn121ForVocalSATBQ
 
 
 # ----------------------------------------------------------
-# the MusicFormats tool to be used
+# the MusicFormats service to be used
 # ----------------------------------------------------------
 
-tool : xml2ly ;
+service : xml2ly ;
 
 
 # ----------------------------------------------------------
-# the input file to be handled by the tool
+# the input file to be handled by the service
 # ----------------------------------------------------------
 
 input : "Hymn121.xml" ;
@@ -737,7 +737,7 @@ select SCORE: tenorAndBass ;
 
 
 % -------------------------------------------------------------------------
-\section{Running the tool for one or more choice labels}
+\section{Running the service for one or more choice labels}
 % -------------------------------------------------------------------------
 
 One or more can be selected by \code{select]} statements or with the \optionNameBoth{select}{sel} option.
@@ -756,7 +756,7 @@ we get this score:\\
 
 
 % -------------------------------------------------------------------------
-\section{Running the tool for all choice labels}
+\section{Running the service for all choice labels}
 % -------------------------------------------------------------------------
 
 With:
@@ -972,5 +972,5 @@ The \mfslInterp\ is organized as too \pass es:
 \begin{enumerate}
 \item a first pass analyses the script body and builds an internal representation, which is displayed by the \optionNameBoth{trace-choices}{tchoices} option;
 
-\item the second pass uses the informations thus collected to launch the tool as many times as needed, depending on \code{select}  usage in the script body and the \optionNameBoth{select}{sel} options to the \mfslInterp.
+\item the second pass uses the informations thus collected to launch the service as many times as needed, depending on \code{select}  usage in the script body and the \optionNameBoth{select}{sel} options to the \mfslInterp.
 \end{enumerate}

@@ -87,7 +87,7 @@ void lpsrPitchesLanguageAtom::applyAtomWithValue (
 {
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -104,7 +104,7 @@ void lpsrPitchesLanguageAtom::applyAtomWithValue (
   // is it in the pitches languages map?
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -155,7 +155,7 @@ void lpsrPitchesLanguageAtom::applyAtomWithValue (
 void lpsrPitchesLanguageAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -174,7 +174,7 @@ void lpsrPitchesLanguageAtom::acceptIn (basevisitor* v)
         S_lpsrPitchesLanguageAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -193,7 +193,7 @@ void lpsrPitchesLanguageAtom::acceptIn (basevisitor* v)
 void lpsrPitchesLanguageAtom::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -212,7 +212,7 @@ void lpsrPitchesLanguageAtom::acceptOut (basevisitor* v)
         S_lpsrPitchesLanguageAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -231,7 +231,7 @@ void lpsrPitchesLanguageAtom::acceptOut (basevisitor* v)
 void lpsrPitchesLanguageAtom::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -380,7 +380,7 @@ void lpsrChordsLanguageAtom::applyAtomWithValue (
   std::ostream&      os)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -397,7 +397,7 @@ void lpsrChordsLanguageAtom::applyAtomWithValue (
   // is it in the chords languages map?
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -446,7 +446,7 @@ void lpsrChordsLanguageAtom::applyAtomWithValue (
 void lpsrChordsLanguageAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -465,7 +465,7 @@ void lpsrChordsLanguageAtom::acceptIn (basevisitor* v)
         S_lpsrChordsLanguageAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -484,7 +484,7 @@ void lpsrChordsLanguageAtom::acceptIn (basevisitor* v)
 void lpsrChordsLanguageAtom::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -503,7 +503,7 @@ void lpsrChordsLanguageAtom::acceptOut (basevisitor* v)
         S_lpsrChordsLanguageAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -522,7 +522,7 @@ void lpsrChordsLanguageAtom::acceptOut (basevisitor* v)
 void lpsrChordsLanguageAtom::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -668,7 +668,7 @@ void lpsrStaffInstrumentNameAtom::applyAtomWithValue (
   std::ostream&      os)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -685,7 +685,7 @@ void lpsrStaffInstrumentNameAtom::applyAtomWithValue (
   // decipher it to extract the old and new part names
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -712,7 +712,7 @@ void lpsrStaffInstrumentNameAtom::applyAtomWithValue (
   size_t smSize = sm.size ();
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -730,7 +730,7 @@ void lpsrStaffInstrumentNameAtom::applyAtomWithValue (
 
   if (smSize == 3) {
 #ifdef MF_TRACE_IS_ENABLED
-    if (gEarlyOptions.getEarlyTraceOah ()) {
+    if (gEarlyOptions.getTraceEarlyOptions ()) {
       for (unsigned i = 0; i < smSize; ++i) {
         gLog <<
           '[' << sm [i] << "] ";
@@ -758,7 +758,7 @@ void lpsrStaffInstrumentNameAtom::applyAtomWithValue (
   mfTrimFromBothEnds (partInstrumentName);
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -799,7 +799,7 @@ void lpsrStaffInstrumentNameAtom::applyAtomWithValue (
 void lpsrStaffInstrumentNameAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -818,7 +818,7 @@ void lpsrStaffInstrumentNameAtom::acceptIn (basevisitor* v)
         S_lpsrStaffInstrumentNameAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -837,7 +837,7 @@ void lpsrStaffInstrumentNameAtom::acceptIn (basevisitor* v)
 void lpsrStaffInstrumentNameAtom::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -856,7 +856,7 @@ void lpsrStaffInstrumentNameAtom::acceptOut (basevisitor* v)
         S_lpsrStaffInstrumentNameAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -875,7 +875,7 @@ void lpsrStaffInstrumentNameAtom::acceptOut (basevisitor* v)
 void lpsrStaffInstrumentNameAtom::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1094,7 +1094,7 @@ void lpsrTransposeAtom::applyAtomWithValue (
   std::ostream&      os)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1111,7 +1111,7 @@ void lpsrTransposeAtom::applyAtomWithValue (
   // is it in the chords languages map?
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1141,7 +1141,7 @@ void lpsrTransposeAtom::applyAtomWithValue (
 void lpsrTransposeAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1160,7 +1160,7 @@ void lpsrTransposeAtom::acceptIn (basevisitor* v)
         S_lpsrTransposeAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -1179,7 +1179,7 @@ void lpsrTransposeAtom::acceptIn (basevisitor* v)
 void lpsrTransposeAtom::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1198,7 +1198,7 @@ void lpsrTransposeAtom::acceptOut (basevisitor* v)
         S_lpsrTransposeAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -1217,7 +1217,7 @@ void lpsrTransposeAtom::acceptOut (basevisitor* v)
 void lpsrTransposeAtom::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1895,7 +1895,7 @@ the names in the score or a summary of the latter in a first run with options
 There can be spaces around the ':', in which case quoting is needed.
 There can be several occurrences of this option.)",
         std::regex ("EXECUTABLE"),
-        gGlobalOahOahGroup->getOahOahGroupServiceName ()),
+        gOahOahGroup->getOahOahGroupServiceName ()),
       "STAFF_INSTRUMENT_NAME_SPEC",
       "fLpsrStavesInstrumentsNamesMap",
       fLpsrStavesInstrumentsNamesMap);
@@ -2213,7 +2213,7 @@ void lpsrOahGroup::checkGroupOptionsConsistency ()
 void lpsrOahGroup::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -2232,7 +2232,7 @@ void lpsrOahGroup::acceptIn (basevisitor* v)
         S_lpsrOahGroup elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -2251,7 +2251,7 @@ void lpsrOahGroup::acceptIn (basevisitor* v)
 void lpsrOahGroup::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -2270,7 +2270,7 @@ void lpsrOahGroup::acceptOut (basevisitor* v)
         S_lpsrOahGroup elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -2289,7 +2289,7 @@ void lpsrOahGroup::acceptOut (basevisitor* v)
 void lpsrOahGroup::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -2575,7 +2575,7 @@ std::ostream& operator << (std::ostream& os, const S_lpsrOahGroup& elt)
 S_lpsrOahGroup createGlobalLpsrOahGroup ()
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<

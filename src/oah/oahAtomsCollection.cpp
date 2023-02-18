@@ -78,7 +78,7 @@ oahValueLessAtomAlias::~oahValueLessAtomAlias ()
 void oahValueLessAtomAlias::applyValueLessAtom (std::ostream& os)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -99,7 +99,7 @@ void oahValueLessAtomAlias::applyValueLessAtom (std::ostream& os)
 void oahValueLessAtomAlias::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -118,7 +118,7 @@ void oahValueLessAtomAlias::acceptIn (basevisitor* v)
         S_oahValueLessAtomAlias elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -137,7 +137,7 @@ void oahValueLessAtomAlias::acceptIn (basevisitor* v)
 void oahValueLessAtomAlias::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -156,7 +156,7 @@ void oahValueLessAtomAlias::acceptOut (basevisitor* v)
         S_oahValueLessAtomAlias elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -175,7 +175,7 @@ void oahValueLessAtomAlias::acceptOut (basevisitor* v)
 void oahValueLessAtomAlias::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -271,7 +271,7 @@ void oahValueFittedAtomAlias::applyAtomWithValue (
   std::ostream&      os)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -293,7 +293,7 @@ void oahValueFittedAtomAlias::applyAtomWithValue (
 void oahValueFittedAtomAlias::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -312,7 +312,7 @@ void oahValueFittedAtomAlias::acceptIn (basevisitor* v)
         S_oahValueFittedAtomAlias elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -331,7 +331,7 @@ void oahValueFittedAtomAlias::acceptIn (basevisitor* v)
 void oahValueFittedAtomAlias::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -350,7 +350,7 @@ void oahValueFittedAtomAlias::acceptOut (basevisitor* v)
         S_oahValueFittedAtomAlias elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -369,7 +369,7 @@ void oahValueFittedAtomAlias::acceptOut (basevisitor* v)
 void oahValueFittedAtomAlias::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -472,7 +472,7 @@ void oahMacroAtom::appendValueLessAtomToMacro (
 void oahMacroAtom::applyValueLessAtom (std::ostream& os)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -498,7 +498,7 @@ void oahMacroAtom::applyValueLessAtom (std::ostream& os)
 void oahMacroAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -517,7 +517,7 @@ void oahMacroAtom::acceptIn (basevisitor* v)
         S_oahMacroAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -536,7 +536,7 @@ void oahMacroAtom::acceptIn (basevisitor* v)
 void oahMacroAtom::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -555,7 +555,7 @@ void oahMacroAtom::acceptOut (basevisitor* v)
         S_oahMacroAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -574,7 +574,7 @@ void oahMacroAtom::acceptOut (basevisitor* v)
 void oahMacroAtom::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -776,7 +776,7 @@ oahOptionsUsageAtom::~oahOptionsUsageAtom ()
 void oahOptionsUsageAtom::applyValueLessAtom (std::ostream& os)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -840,7 +840,7 @@ Using options that attempt to create files, such as '-output-file-name, -o',
 leads to an error if the environment is read-only access,
 as is the case of https://libmusicxml.grame.fr .)",
         std::regex ("OPTION_NAME_HELP_NAMES"),
-        gGlobalOahOahGroup->
+        gOahOahGroup->
           getOptionNameHelpAtom ()->
             fetchNamesBetweenQuotes ()
         ),
@@ -857,7 +857,7 @@ as is the case of https://libmusicxml.grame.fr .)",
 void oahOptionsUsageAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -876,7 +876,7 @@ void oahOptionsUsageAtom::acceptIn (basevisitor* v)
         S_oahOptionsUsageAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -895,7 +895,7 @@ void oahOptionsUsageAtom::acceptIn (basevisitor* v)
 void oahOptionsUsageAtom::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -914,7 +914,7 @@ void oahOptionsUsageAtom::acceptOut (basevisitor* v)
         S_oahOptionsUsageAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -933,7 +933,7 @@ void oahOptionsUsageAtom::acceptOut (basevisitor* v)
 void oahOptionsUsageAtom::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1010,7 +1010,7 @@ oahHelpAtom::~oahHelpAtom ()
 void oahHelpAtom::applyValueLessAtom (std::ostream& os)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1040,7 +1040,7 @@ void oahHelpAtom::applyValueLessAtom (std::ostream& os)
 void oahHelpAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1059,7 +1059,7 @@ void oahHelpAtom::acceptIn (basevisitor* v)
         S_oahHelpAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -1078,7 +1078,7 @@ void oahHelpAtom::acceptIn (basevisitor* v)
 void oahHelpAtom::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1097,7 +1097,7 @@ void oahHelpAtom::acceptOut (basevisitor* v)
         S_oahHelpAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -1116,7 +1116,7 @@ void oahHelpAtom::acceptOut (basevisitor* v)
 void oahHelpAtom::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1149,7 +1149,7 @@ void oahHelpAtom::print (std::ostream& os) const
 void oahHelpAtom::printOptionsSummary (std::ostream& os) const
 {
   os <<
-    gGlobalOahOahGroup->getOahOahGroupServiceName () <<
+    gOahOahGroup->getOahOahGroupServiceName () <<
     std::endl;
 }
 
@@ -1200,7 +1200,7 @@ oahHelpSummaryAtom::~oahHelpSummaryAtom ()
 void oahHelpSummaryAtom::applyValueLessAtom (std::ostream& os)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1230,7 +1230,7 @@ void oahHelpSummaryAtom::applyValueLessAtom (std::ostream& os)
 void oahHelpSummaryAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1249,7 +1249,7 @@ void oahHelpSummaryAtom::acceptIn (basevisitor* v)
         S_oahHelpSummaryAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -1268,7 +1268,7 @@ void oahHelpSummaryAtom::acceptIn (basevisitor* v)
 void oahHelpSummaryAtom::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1287,7 +1287,7 @@ void oahHelpSummaryAtom::acceptOut (basevisitor* v)
         S_oahHelpSummaryAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -1306,7 +1306,7 @@ void oahHelpSummaryAtom::acceptOut (basevisitor* v)
 void oahHelpSummaryAtom::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1339,7 +1339,7 @@ void oahHelpSummaryAtom::print (std::ostream& os) const
 void oahHelpSummaryAtom::printOptionsSummary (std::ostream& os) const
 {
   os <<
-    gGlobalOahOahGroup->getOahOahGroupServiceName () <<
+    gOahOahGroup->getOahOahGroupServiceName () <<
     std::endl;
 }
 
@@ -1390,7 +1390,7 @@ oahAboutAtom::~oahAboutAtom ()
 void oahAboutAtom::applyValueLessAtom (std::ostream& os)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1417,7 +1417,7 @@ void oahAboutAtom::applyValueLessAtom (std::ostream& os)
 void oahAboutAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1436,7 +1436,7 @@ void oahAboutAtom::acceptIn (basevisitor* v)
         S_oahAboutAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -1455,7 +1455,7 @@ void oahAboutAtom::acceptIn (basevisitor* v)
 void oahAboutAtom::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1474,7 +1474,7 @@ void oahAboutAtom::acceptOut (basevisitor* v)
         S_oahAboutAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -1493,7 +1493,7 @@ void oahAboutAtom::acceptOut (basevisitor* v)
 void oahAboutAtom::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1607,7 +1607,7 @@ oahVersionAtom::~oahVersionAtom ()
 void oahVersionAtom::applyValueLessAtom (std::ostream& os)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1641,7 +1641,7 @@ void oahVersionAtom::applyValueLessAtom (std::ostream& os)
 void oahVersionAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1660,7 +1660,7 @@ void oahVersionAtom::acceptIn (basevisitor* v)
         S_oahVersionAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -1679,7 +1679,7 @@ void oahVersionAtom::acceptIn (basevisitor* v)
 void oahVersionAtom::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1698,7 +1698,7 @@ void oahVersionAtom::acceptOut (basevisitor* v)
         S_oahVersionAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -1717,7 +1717,7 @@ void oahVersionAtom::acceptOut (basevisitor* v)
 void oahVersionAtom::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1834,7 +1834,7 @@ oahLibraryVersionAtom::~oahLibraryVersionAtom ()
 void oahLibraryVersionAtom::applyValueLessAtom (std::ostream& os)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1861,7 +1861,7 @@ void oahLibraryVersionAtom::applyValueLessAtom (std::ostream& os)
 void oahLibraryVersionAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1880,7 +1880,7 @@ void oahLibraryVersionAtom::acceptIn (basevisitor* v)
         S_oahLibraryVersionAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -1899,7 +1899,7 @@ void oahLibraryVersionAtom::acceptIn (basevisitor* v)
 void oahLibraryVersionAtom::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1918,7 +1918,7 @@ void oahLibraryVersionAtom::acceptOut (basevisitor* v)
         S_oahLibraryVersionAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -1937,7 +1937,7 @@ void oahLibraryVersionAtom::acceptOut (basevisitor* v)
 void oahLibraryVersionAtom::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -2034,7 +2034,7 @@ oahHistoryAtom::~oahHistoryAtom ()
 void oahHistoryAtom::applyValueLessAtom (std::ostream& os)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -2061,7 +2061,7 @@ void oahHistoryAtom::applyValueLessAtom (std::ostream& os)
 void oahHistoryAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -2080,7 +2080,7 @@ void oahHistoryAtom::acceptIn (basevisitor* v)
         S_oahHistoryAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -2099,7 +2099,7 @@ void oahHistoryAtom::acceptIn (basevisitor* v)
 void oahHistoryAtom::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -2118,7 +2118,7 @@ void oahHistoryAtom::acceptOut (basevisitor* v)
         S_oahHistoryAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -2137,7 +2137,7 @@ void oahHistoryAtom::acceptOut (basevisitor* v)
 void oahHistoryAtom::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -2234,7 +2234,7 @@ oahLibraryHistoryAtom::~oahLibraryHistoryAtom ()
 void oahLibraryHistoryAtom::applyValueLessAtom (std::ostream& os)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -2261,7 +2261,7 @@ void oahLibraryHistoryAtom::applyValueLessAtom (std::ostream& os)
 void oahLibraryHistoryAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -2280,7 +2280,7 @@ void oahLibraryHistoryAtom::acceptIn (basevisitor* v)
         S_oahLibraryHistoryAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -2299,7 +2299,7 @@ void oahLibraryHistoryAtom::acceptIn (basevisitor* v)
 void oahLibraryHistoryAtom::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -2318,7 +2318,7 @@ void oahLibraryHistoryAtom::acceptOut (basevisitor* v)
         S_oahLibraryHistoryAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -2337,7 +2337,7 @@ void oahLibraryHistoryAtom::acceptOut (basevisitor* v)
 void oahLibraryHistoryAtom::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -2435,7 +2435,7 @@ oahContactAtom::~oahContactAtom ()
 void oahContactAtom::applyValueLessAtom (std::ostream& os)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -2462,7 +2462,7 @@ void oahContactAtom::applyValueLessAtom (std::ostream& os)
 void oahContactAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -2481,7 +2481,7 @@ void oahContactAtom::acceptIn (basevisitor* v)
         S_oahContactAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -2500,7 +2500,7 @@ void oahContactAtom::acceptIn (basevisitor* v)
 void oahContactAtom::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -2519,7 +2519,7 @@ void oahContactAtom::acceptOut (basevisitor* v)
         S_oahContactAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -2538,7 +2538,7 @@ void oahContactAtom::acceptOut (basevisitor* v)
 void oahContactAtom::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -2629,7 +2629,7 @@ oahDisplayPrefixes::~oahDisplayPrefixes ()
 void oahDisplayPrefixes::applyValueLessAtom (std::ostream& os)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -2656,7 +2656,7 @@ void oahDisplayPrefixes::applyValueLessAtom (std::ostream& os)
 void oahDisplayPrefixes::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -2675,7 +2675,7 @@ void oahDisplayPrefixes::acceptIn (basevisitor* v)
         S_oahDisplayPrefixes elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -2694,7 +2694,7 @@ void oahDisplayPrefixes::acceptIn (basevisitor* v)
 void oahDisplayPrefixes::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -2713,7 +2713,7 @@ void oahDisplayPrefixes::acceptOut (basevisitor* v)
         S_oahDisplayPrefixes elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -2732,7 +2732,7 @@ void oahDisplayPrefixes::acceptOut (basevisitor* v)
 void oahDisplayPrefixes::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -2821,7 +2821,7 @@ oahDisplaySingleCharacterOptions::~oahDisplaySingleCharacterOptions ()
 void oahDisplaySingleCharacterOptions::applyValueLessAtom (std::ostream& os)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -2848,7 +2848,7 @@ void oahDisplaySingleCharacterOptions::applyValueLessAtom (std::ostream& os)
 void oahDisplaySingleCharacterOptions::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -2867,7 +2867,7 @@ void oahDisplaySingleCharacterOptions::acceptIn (basevisitor* v)
         S_oahDisplaySingleCharacterOptions elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -2886,7 +2886,7 @@ void oahDisplaySingleCharacterOptions::acceptIn (basevisitor* v)
 void oahDisplaySingleCharacterOptions::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -2905,7 +2905,7 @@ void oahDisplaySingleCharacterOptions::acceptOut (basevisitor* v)
         S_oahDisplaySingleCharacterOptions elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -2924,7 +2924,7 @@ void oahDisplaySingleCharacterOptions::acceptOut (basevisitor* v)
 void oahDisplaySingleCharacterOptions::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -3023,7 +3023,7 @@ void oahOnOffAtom::applyAtomWithValue (
   std::ostream&      os)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -3067,7 +3067,7 @@ void oahOnOffAtom::applyAtomWithValue (
 void oahOnOffAtom::setOnOffKindVariable (mfOnOffKind value)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
     if (fLongName == K_TRACE_OAH_OPTION_LONG_NAME) {
       // get the options handler
       S_oahHandler
@@ -3093,7 +3093,7 @@ void oahOnOffAtom::setOnOffKindVariable (mfOnOffKind value)
 void oahOnOffAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -3112,7 +3112,7 @@ void oahOnOffAtom::acceptIn (basevisitor* v)
         S_oahOnOffAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -3131,7 +3131,7 @@ void oahOnOffAtom::acceptIn (basevisitor* v)
 void oahOnOffAtom::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -3150,7 +3150,7 @@ void oahOnOffAtom::acceptOut (basevisitor* v)
         S_oahOnOffAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -3169,7 +3169,7 @@ void oahOnOffAtom::acceptOut (basevisitor* v)
 void oahOnOffAtom::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -3293,7 +3293,7 @@ oahBooleanAtom::~oahBooleanAtom ()
 void oahBooleanAtom::applyValueLessAtom (std::ostream& os)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -3316,7 +3316,7 @@ void oahBooleanAtom::applyValueLessAtom (std::ostream& os)
 void oahBooleanAtom::setBooleanVariable (Bool value)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
     if (fLongName == K_TRACE_OAH_OPTION_LONG_NAME) {
       // get the options handler
       S_oahHandler
@@ -3342,7 +3342,7 @@ void oahBooleanAtom::setBooleanVariable (Bool value)
 void oahBooleanAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -3361,7 +3361,7 @@ void oahBooleanAtom::acceptIn (basevisitor* v)
         S_oahBooleanAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -3380,7 +3380,7 @@ void oahBooleanAtom::acceptIn (basevisitor* v)
 void oahBooleanAtom::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -3399,7 +3399,7 @@ void oahBooleanAtom::acceptOut (basevisitor* v)
         S_oahBooleanAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -3418,7 +3418,7 @@ void oahBooleanAtom::acceptOut (basevisitor* v)
 void oahBooleanAtom::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -3540,7 +3540,7 @@ oahBooleanAtomWithTracePasses::~oahBooleanAtomWithTracePasses ()
 void oahBooleanAtomWithTracePasses::applyValueLessAtom (std::ostream& os)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -3560,7 +3560,7 @@ void oahBooleanAtomWithTracePasses::applyValueLessAtom (std::ostream& os)
 void oahBooleanAtomWithTracePasses::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -3579,7 +3579,7 @@ void oahBooleanAtomWithTracePasses::acceptIn (basevisitor* v)
         S_oahBooleanAtomWithTracePasses elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -3598,7 +3598,7 @@ void oahBooleanAtomWithTracePasses::acceptIn (basevisitor* v)
 void oahBooleanAtomWithTracePasses::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -3617,7 +3617,7 @@ void oahBooleanAtomWithTracePasses::acceptOut (basevisitor* v)
         S_oahBooleanAtomWithTracePasses elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -3636,7 +3636,7 @@ void oahBooleanAtomWithTracePasses::acceptOut (basevisitor* v)
 void oahBooleanAtomWithTracePasses::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -3763,7 +3763,7 @@ oahTwoBooleansAtom::~oahTwoBooleansAtom ()
 void oahTwoBooleansAtom::applyValueLessAtom (std::ostream& os)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -3786,7 +3786,7 @@ void oahTwoBooleansAtom::applyValueLessAtom (std::ostream& os)
 void oahTwoBooleansAtom::setTwoBooleansVariables (Bool value)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -3813,7 +3813,7 @@ void oahTwoBooleansAtom::setTwoBooleansVariables (Bool value)
 void oahTwoBooleansAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -3832,7 +3832,7 @@ void oahTwoBooleansAtom::acceptIn (basevisitor* v)
         S_oahTwoBooleansAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -3851,7 +3851,7 @@ void oahTwoBooleansAtom::acceptIn (basevisitor* v)
 void oahTwoBooleansAtom::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -3870,7 +3870,7 @@ void oahTwoBooleansAtom::acceptOut (basevisitor* v)
         S_oahTwoBooleansAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -3889,7 +3889,7 @@ void oahTwoBooleansAtom::acceptOut (basevisitor* v)
 void oahTwoBooleansAtom::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -4023,7 +4023,7 @@ oahTwoBooleansAtomWithTracePasses::~oahTwoBooleansAtomWithTracePasses ()
 void oahTwoBooleansAtomWithTracePasses::applyValueLessAtom (std::ostream& os)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -4044,7 +4044,7 @@ void oahTwoBooleansAtomWithTracePasses::applyValueLessAtom (std::ostream& os)
 void oahTwoBooleansAtomWithTracePasses::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -4063,7 +4063,7 @@ void oahTwoBooleansAtomWithTracePasses::acceptIn (basevisitor* v)
         S_oahTwoBooleansAtomWithTracePasses elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -4082,7 +4082,7 @@ void oahTwoBooleansAtomWithTracePasses::acceptIn (basevisitor* v)
 void oahTwoBooleansAtomWithTracePasses::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -4101,7 +4101,7 @@ void oahTwoBooleansAtomWithTracePasses::acceptOut (basevisitor* v)
         S_oahTwoBooleansAtomWithTracePasses elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -4120,7 +4120,7 @@ void oahTwoBooleansAtomWithTracePasses::acceptOut (basevisitor* v)
 void oahTwoBooleansAtomWithTracePasses::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -4260,7 +4260,7 @@ oahThreeBooleansAtom::~oahThreeBooleansAtom ()
 void oahThreeBooleansAtom::applyValueLessAtom (std::ostream& os)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -4283,7 +4283,7 @@ void oahThreeBooleansAtom::applyValueLessAtom (std::ostream& os)
 void oahThreeBooleansAtom::setThreeBooleansVariables (Bool value)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -4311,7 +4311,7 @@ void oahThreeBooleansAtom::setThreeBooleansVariables (Bool value)
 void oahThreeBooleansAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -4330,7 +4330,7 @@ void oahThreeBooleansAtom::acceptIn (basevisitor* v)
         S_oahThreeBooleansAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -4349,7 +4349,7 @@ void oahThreeBooleansAtom::acceptIn (basevisitor* v)
 void oahThreeBooleansAtom::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -4368,7 +4368,7 @@ void oahThreeBooleansAtom::acceptOut (basevisitor* v)
         S_oahThreeBooleansAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -4387,7 +4387,7 @@ void oahThreeBooleansAtom::acceptOut (basevisitor* v)
 void oahThreeBooleansAtom::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -4527,7 +4527,7 @@ oahThreeBooleansAtomWithTracePasses::~oahThreeBooleansAtomWithTracePasses ()
 void oahThreeBooleansAtomWithTracePasses::applyValueLessAtom (std::ostream& os)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -4546,7 +4546,7 @@ void oahThreeBooleansAtomWithTracePasses::applyValueLessAtom (std::ostream& os)
 void oahThreeBooleansAtomWithTracePasses::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -4565,7 +4565,7 @@ void oahThreeBooleansAtomWithTracePasses::acceptIn (basevisitor* v)
         S_oahThreeBooleansAtomWithTracePasses elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -4584,7 +4584,7 @@ void oahThreeBooleansAtomWithTracePasses::acceptIn (basevisitor* v)
 void oahThreeBooleansAtomWithTracePasses::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -4603,7 +4603,7 @@ void oahThreeBooleansAtomWithTracePasses::acceptOut (basevisitor* v)
         S_oahThreeBooleansAtomWithTracePasses elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -4622,7 +4622,7 @@ void oahThreeBooleansAtomWithTracePasses::acceptOut (basevisitor* v)
 void oahThreeBooleansAtomWithTracePasses::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -4816,7 +4816,7 @@ void oahCombinedBooleansAtom::addBooleanAtomByName (
 void oahCombinedBooleansAtom::setCombinedBooleanVariables (Bool value)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -4860,7 +4860,7 @@ void oahCombinedBooleansAtom::setCombinedBooleanVariables (Bool value)
 void oahCombinedBooleansAtom::applyValueLessAtom (std::ostream& os)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -4883,7 +4883,7 @@ void oahCombinedBooleansAtom::applyValueLessAtom (std::ostream& os)
 void oahCombinedBooleansAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -4902,7 +4902,7 @@ void oahCombinedBooleansAtom::acceptIn (basevisitor* v)
         S_oahCombinedBooleansAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -4921,7 +4921,7 @@ void oahCombinedBooleansAtom::acceptIn (basevisitor* v)
 void oahCombinedBooleansAtom::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -4940,7 +4940,7 @@ void oahCombinedBooleansAtom::acceptOut (basevisitor* v)
         S_oahCombinedBooleansAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -4959,7 +4959,7 @@ void oahCombinedBooleansAtom::acceptOut (basevisitor* v)
 void oahCombinedBooleansAtom::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -5251,7 +5251,7 @@ void oahIntegerAtom::applyAtomWithValue (
   size_t smSize = sm.size ();
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -5299,7 +5299,7 @@ void oahIntegerAtom::applyAtomWithValue (
 void oahIntegerAtom::setIntegerVariable (int value)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -5324,7 +5324,7 @@ void oahIntegerAtom::setIntegerVariable (int value)
 void oahIntegerAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -5343,7 +5343,7 @@ void oahIntegerAtom::acceptIn (basevisitor* v)
         S_oahIntegerAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -5362,7 +5362,7 @@ void oahIntegerAtom::acceptIn (basevisitor* v)
 void oahIntegerAtom::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -5381,7 +5381,7 @@ void oahIntegerAtom::acceptOut (basevisitor* v)
         S_oahIntegerAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -5400,7 +5400,7 @@ void oahIntegerAtom::acceptOut (basevisitor* v)
 void oahIntegerAtom::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -5560,7 +5560,7 @@ void oahTwoIntegersAtom::applyAtomWithValue ( // NOT USE YET JMI
   size_t smSize = sm.size ();
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -5614,7 +5614,7 @@ void oahTwoIntegersAtom::applyAtomWithValue ( // NOT USE YET JMI
 void oahTwoIntegersAtom::setIntegerVariable (int value)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -5639,7 +5639,7 @@ void oahTwoIntegersAtom::setIntegerVariable (int value)
 void oahTwoIntegersAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -5658,7 +5658,7 @@ void oahTwoIntegersAtom::acceptIn (basevisitor* v)
         S_oahTwoIntegersAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -5677,7 +5677,7 @@ void oahTwoIntegersAtom::acceptIn (basevisitor* v)
 void oahTwoIntegersAtom::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -5696,7 +5696,7 @@ void oahTwoIntegersAtom::acceptOut (basevisitor* v)
         S_oahTwoIntegersAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -5715,7 +5715,7 @@ void oahTwoIntegersAtom::acceptOut (basevisitor* v)
 void oahTwoIntegersAtom::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -5885,7 +5885,7 @@ void oahFloatAtom::applyAtomWithValue (
   size_t smSize = sm.size ();
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -5934,7 +5934,7 @@ void oahFloatAtom::applyAtomWithValue (
 void oahFloatAtom::setFloatVariable (float value)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -5959,7 +5959,7 @@ void oahFloatAtom::setFloatVariable (float value)
 void oahFloatAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -5978,7 +5978,7 @@ void oahFloatAtom::acceptIn (basevisitor* v)
         S_oahFloatAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -5997,7 +5997,7 @@ void oahFloatAtom::acceptIn (basevisitor* v)
 void oahFloatAtom::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -6016,7 +6016,7 @@ void oahFloatAtom::acceptOut (basevisitor* v)
         S_oahFloatAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -6035,7 +6035,7 @@ void oahFloatAtom::acceptOut (basevisitor* v)
 void oahFloatAtom::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -6180,7 +6180,7 @@ void oahStringAtom::applyAtomWithValue (
 void oahStringAtom::setStringVariable (const std::string& value)
   {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -6205,7 +6205,7 @@ void oahStringAtom::setStringVariable (const std::string& value)
 void oahStringAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -6224,7 +6224,7 @@ void oahStringAtom::acceptIn (basevisitor* v)
         S_oahStringAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -6243,7 +6243,7 @@ void oahStringAtom::acceptIn (basevisitor* v)
 void oahStringAtom::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -6262,7 +6262,7 @@ void oahStringAtom::acceptOut (basevisitor* v)
         S_oahStringAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -6281,7 +6281,7 @@ void oahStringAtom::acceptOut (basevisitor* v)
 void oahStringAtom::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -6543,7 +6543,7 @@ void oahFactorizedStringAtom::addStringAtomByName (
 void oahFactorizedStringAtom::applyValueLessAtom (std::ostream& os) // JMI v0.9.66
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -6566,7 +6566,7 @@ void oahFactorizedStringAtom::applyValueLessAtom (std::ostream& os) // JMI v0.9.
 void oahFactorizedStringAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -6585,7 +6585,7 @@ void oahFactorizedStringAtom::acceptIn (basevisitor* v)
         S_oahFactorizedStringAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -6604,7 +6604,7 @@ void oahFactorizedStringAtom::acceptIn (basevisitor* v)
 void oahFactorizedStringAtom::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -6623,7 +6623,7 @@ void oahFactorizedStringAtom::acceptOut (basevisitor* v)
         S_oahFactorizedStringAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -6642,7 +6642,7 @@ void oahFactorizedStringAtom::acceptOut (basevisitor* v)
 void oahFactorizedStringAtom::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -6868,7 +6868,7 @@ void oahDefaultedStringAtom::applyAtomWithValue (
   std::ostream&      os)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -6891,7 +6891,7 @@ void oahDefaultedStringAtom::applyAtomWithValue (
 void oahDefaultedStringAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -6910,7 +6910,7 @@ void oahDefaultedStringAtom::acceptIn (basevisitor* v)
         S_oahDefaultedStringAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -6929,7 +6929,7 @@ void oahDefaultedStringAtom::acceptIn (basevisitor* v)
 void oahDefaultedStringAtom::setStringVariable (const std::string& value)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -6954,7 +6954,7 @@ void oahDefaultedStringAtom::setStringVariable (const std::string& value)
 void oahDefaultedStringAtom::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -6973,7 +6973,7 @@ void oahDefaultedStringAtom::acceptOut (basevisitor* v)
         S_oahDefaultedStringAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -6992,7 +6992,7 @@ void oahDefaultedStringAtom::acceptOut (basevisitor* v)
 void oahDefaultedStringAtom::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -7401,7 +7401,7 @@ void oahCommonPrefixBooleansAtom::addBooleanAtomByName (
 void oahCommonPrefixBooleansAtom::applyValueLessAtom (std::ostream& os)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -7424,7 +7424,7 @@ void oahCommonPrefixBooleansAtom::applyValueLessAtom (std::ostream& os)
 void oahCommonPrefixBooleansAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -7443,7 +7443,7 @@ void oahCommonPrefixBooleansAtom::acceptIn (basevisitor* v)
         S_oahCommonPrefixBooleansAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -7462,7 +7462,7 @@ void oahCommonPrefixBooleansAtom::acceptIn (basevisitor* v)
 void oahCommonPrefixBooleansAtom::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -7481,7 +7481,7 @@ void oahCommonPrefixBooleansAtom::acceptOut (basevisitor* v)
         S_oahCommonPrefixBooleansAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -7500,7 +7500,7 @@ void oahCommonPrefixBooleansAtom::acceptOut (basevisitor* v)
 void oahCommonPrefixBooleansAtom::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -7820,7 +7820,7 @@ void oahRegexAtom::applyAtomWithValue (
   std::ostream&      os)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -7847,7 +7847,7 @@ void oahRegexAtom::applyAtomWithValue (
 void oahRegexAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -7866,7 +7866,7 @@ void oahRegexAtom::acceptIn (basevisitor* v)
         S_oahRegexAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -7885,7 +7885,7 @@ void oahRegexAtom::acceptIn (basevisitor* v)
 void oahRegexAtom::setStringVariable (const std::string& value)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -7910,7 +7910,7 @@ void oahRegexAtom::setStringVariable (const std::string& value)
 void oahRegexAtom::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -7929,7 +7929,7 @@ void oahRegexAtom::acceptOut (basevisitor* v)
         S_oahRegexAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -7948,7 +7948,7 @@ void oahRegexAtom::acceptOut (basevisitor* v)
 void oahRegexAtom::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -8056,7 +8056,7 @@ S_oahRationalAtom oahRationalAtom::create (
   const std::string& description,
   const std::string& valueSpecification,
   const std::string& variableName,
-  Rational&          rationalVariable)
+  mfRational&          rationalVariable)
 {
   oahRationalAtom* o = new
     oahRationalAtom (
@@ -8076,7 +8076,7 @@ oahRationalAtom::oahRationalAtom (
   const std::string& description,
   const std::string& valueSpecification,
   const std::string& variableName,
-  Rational&          rationalVariable)
+  mfRational&          rationalVariable)
   : oahAtomStoringAValue (
       longName,
       shortName,
@@ -8111,12 +8111,12 @@ void oahRationalAtom::applyAtomWithValue (
   size_t smSize = sm.size ();
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
       "There are " << smSize << " matches" <<
-      " for Rational string \"" << theString <<
+      " for mfRational string \"" << theString <<
       "\" with std::regex \"" << regularExpression <<
       "\"" <<
       std::endl;
@@ -8146,12 +8146,12 @@ void oahRationalAtom::applyAtomWithValue (
       ss >> denominator;
     }
 
-    Rational
+    mfRational
       rationalValue =
-        Rational (numerator, denominator);
+        mfRational (numerator, denominator);
 
 #ifdef MF_TRACE_IS_ENABLED
-    if (gEarlyOptions.getEarlyTraceOah ()) {
+    if (gEarlyOptions.getTraceEarlyOptions ()) {
 	  	std::stringstream ss;
 
       ss <<
@@ -8172,7 +8172,7 @@ void oahRationalAtom::applyAtomWithValue (
     std::stringstream ss;
 
     ss <<
-      "Rational atom value \"" << theString <<
+      "mfRational atom value \"" << theString <<
       "\" is ill-formed";
 
     oahError (ss.str ());
@@ -8184,7 +8184,7 @@ void oahRationalAtom::applyAtomWithValue (
 void oahRationalAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -8203,7 +8203,7 @@ void oahRationalAtom::acceptIn (basevisitor* v)
         S_oahRationalAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -8222,7 +8222,7 @@ void oahRationalAtom::acceptIn (basevisitor* v)
 void oahRationalAtom::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -8241,7 +8241,7 @@ void oahRationalAtom::acceptOut (basevisitor* v)
         S_oahRationalAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -8260,7 +8260,7 @@ void oahRationalAtom::acceptOut (basevisitor* v)
 void oahRationalAtom::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -8410,7 +8410,7 @@ void oahNaturalNumbersSetElementAtom::applyAtomWithValue (
 void oahNaturalNumbersSetElementAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -8429,7 +8429,7 @@ void oahNaturalNumbersSetElementAtom::acceptIn (basevisitor* v)
         S_oahNaturalNumbersSetElementAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -8448,7 +8448,7 @@ void oahNaturalNumbersSetElementAtom::acceptIn (basevisitor* v)
 void oahNaturalNumbersSetElementAtom::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -8467,7 +8467,7 @@ void oahNaturalNumbersSetElementAtom::acceptOut (basevisitor* v)
         S_oahNaturalNumbersSetElementAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -8486,7 +8486,7 @@ void oahNaturalNumbersSetElementAtom::acceptOut (basevisitor* v)
 void oahNaturalNumbersSetElementAtom::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -8709,7 +8709,7 @@ void oahColorRGBAtom::applyAtomWithValue (
 void oahColorRGBAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -8728,7 +8728,7 @@ void oahColorRGBAtom::acceptIn (basevisitor* v)
         S_oahColorRGBAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -8747,7 +8747,7 @@ void oahColorRGBAtom::acceptIn (basevisitor* v)
 void oahColorRGBAtom::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -8766,7 +8766,7 @@ void oahColorRGBAtom::acceptOut (basevisitor* v)
         S_oahColorRGBAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -8785,7 +8785,7 @@ void oahColorRGBAtom::acceptOut (basevisitor* v)
 void oahColorRGBAtom::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -8935,7 +8935,7 @@ void oahIntSetElementAtom::applyAtomWithValue (
   // decipher it to extract duration and perSecond values
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -8963,7 +8963,7 @@ void oahIntSetElementAtom::applyAtomWithValue (
   size_t smSize = sm.size ();
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -9004,7 +9004,7 @@ void oahIntSetElementAtom::applyAtomWithValue (
   }
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -9026,7 +9026,7 @@ void oahIntSetElementAtom::applyAtomWithValue (
 void oahIntSetElementAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -9045,7 +9045,7 @@ void oahIntSetElementAtom::acceptIn (basevisitor* v)
         S_oahIntSetElementAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -9064,7 +9064,7 @@ void oahIntSetElementAtom::acceptIn (basevisitor* v)
 void oahIntSetElementAtom::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -9083,7 +9083,7 @@ void oahIntSetElementAtom::acceptOut (basevisitor* v)
         S_oahIntSetElementAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -9102,7 +9102,7 @@ void oahIntSetElementAtom::acceptOut (basevisitor* v)
 void oahIntSetElementAtom::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -9299,7 +9299,7 @@ void oahStringSetElementAtom::applyAtomWithValue (
   std::ostream&      os)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -9317,7 +9317,7 @@ void oahStringSetElementAtom::applyAtomWithValue (
   std::string partName = theString;
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -9357,7 +9357,7 @@ void oahStringSetElementAtom::applyAtomWithValue (
 void oahStringSetElementAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -9376,7 +9376,7 @@ void oahStringSetElementAtom::acceptIn (basevisitor* v)
         S_oahStringSetElementAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -9395,7 +9395,7 @@ void oahStringSetElementAtom::acceptIn (basevisitor* v)
 void oahStringSetElementAtom::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -9414,7 +9414,7 @@ void oahStringSetElementAtom::acceptOut (basevisitor* v)
         S_oahStringSetElementAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -9433,7 +9433,7 @@ void oahStringSetElementAtom::acceptOut (basevisitor* v)
 void oahStringSetElementAtom::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -9630,7 +9630,7 @@ void oahStringToIntMapElementAtom::applyAtomWithValue (
   std::ostream&      os)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -9647,7 +9647,7 @@ void oahStringToIntMapElementAtom::applyAtomWithValue (
   // decipher it to extract duration and perSecond values
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -9678,7 +9678,7 @@ void oahStringToIntMapElementAtom::applyAtomWithValue (
   size_t smSize = sm.size ();
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -9725,7 +9725,7 @@ void oahStringToIntMapElementAtom::applyAtomWithValue (
   }
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -9751,7 +9751,7 @@ void oahStringToIntMapElementAtom::applyAtomWithValue (
 void oahStringToIntMapElementAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -9770,7 +9770,7 @@ void oahStringToIntMapElementAtom::acceptIn (basevisitor* v)
         S_oahStringToIntMapElementAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -9789,7 +9789,7 @@ void oahStringToIntMapElementAtom::acceptIn (basevisitor* v)
 void oahStringToIntMapElementAtom::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -9808,7 +9808,7 @@ void oahStringToIntMapElementAtom::acceptOut (basevisitor* v)
         S_oahStringToIntMapElementAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -9827,7 +9827,7 @@ void oahStringToIntMapElementAtom::acceptOut (basevisitor* v)
 void oahStringToIntMapElementAtom::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -10030,7 +10030,7 @@ void oahStringToStringMapElementAtom::applyAtomWithValue (
   std::ostream&      os)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -10047,7 +10047,7 @@ void oahStringToStringMapElementAtom::applyAtomWithValue (
   // decipher it to extract duration and perSecond values
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -10078,7 +10078,7 @@ void oahStringToStringMapElementAtom::applyAtomWithValue (
   size_t smSize = sm.size ();
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -10120,7 +10120,7 @@ void oahStringToStringMapElementAtom::applyAtomWithValue (
     value = sm [2];
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -10145,7 +10145,7 @@ void oahStringToStringMapElementAtom::applyAtomWithValue (
 void oahStringToStringMapElementAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -10164,7 +10164,7 @@ void oahStringToStringMapElementAtom::acceptIn (basevisitor* v)
         S_oahStringToStringMapElementAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -10183,7 +10183,7 @@ void oahStringToStringMapElementAtom::acceptIn (basevisitor* v)
 void oahStringToStringMapElementAtom::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -10202,7 +10202,7 @@ void oahStringToStringMapElementAtom::acceptOut (basevisitor* v)
         S_oahStringToStringMapElementAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -10221,7 +10221,7 @@ void oahStringToStringMapElementAtom::acceptOut (basevisitor* v)
 void oahStringToStringMapElementAtom::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -10429,7 +10429,7 @@ void oahStringToStringMultiMapElementAtom::applyAtomWithValue (
   std::ostream&      os)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -10446,7 +10446,7 @@ void oahStringToStringMultiMapElementAtom::applyAtomWithValue (
   // decipher it to extract duration and perSecond values
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -10477,7 +10477,7 @@ void oahStringToStringMultiMapElementAtom::applyAtomWithValue (
   size_t smSize = sm.size ();
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -10519,7 +10519,7 @@ void oahStringToStringMultiMapElementAtom::applyAtomWithValue (
     value = sm [2];
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -10545,7 +10545,7 @@ void oahStringToStringMultiMapElementAtom::applyAtomWithValue (
 void oahStringToStringMultiMapElementAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -10564,7 +10564,7 @@ void oahStringToStringMultiMapElementAtom::acceptIn (basevisitor* v)
         S_oahStringToStringMultiMapElementAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -10583,7 +10583,7 @@ void oahStringToStringMultiMapElementAtom::acceptIn (basevisitor* v)
 void oahStringToStringMultiMapElementAtom::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -10602,7 +10602,7 @@ void oahStringToStringMultiMapElementAtom::acceptOut (basevisitor* v)
         S_oahStringToStringMultiMapElementAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -10621,7 +10621,7 @@ void oahStringToStringMultiMapElementAtom::acceptOut (basevisitor* v)
 void oahStringToStringMultiMapElementAtom::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -10859,7 +10859,7 @@ void oahStringAndIntegerAtom::applyAtomWithValue (
   size_t smSize = sm.size ();
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -10909,7 +10909,7 @@ void oahStringAndIntegerAtom::applyAtomWithValue (
 void oahStringAndIntegerAtom::setIntegerVariable (int value)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -10934,7 +10934,7 @@ void oahStringAndIntegerAtom::setIntegerVariable (int value)
 void oahStringAndIntegerAtom::setStringVariable (const std::string& value)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -10959,7 +10959,7 @@ void oahStringAndIntegerAtom::setStringVariable (const std::string& value)
 void oahStringAndIntegerAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -10978,7 +10978,7 @@ void oahStringAndIntegerAtom::acceptIn (basevisitor* v)
         S_oahStringAndIntegerAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -10997,7 +10997,7 @@ void oahStringAndIntegerAtom::acceptIn (basevisitor* v)
 void oahStringAndIntegerAtom::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -11016,7 +11016,7 @@ void oahStringAndIntegerAtom::acceptOut (basevisitor* v)
         S_oahStringAndIntegerAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -11035,7 +11035,7 @@ void oahStringAndIntegerAtom::acceptOut (basevisitor* v)
 void oahStringAndIntegerAtom::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -11232,7 +11232,7 @@ void oahStringAndTwoIntegersAtom::applyAtomWithValue (
   size_t smSize = sm.size ();
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -11288,7 +11288,7 @@ void oahStringAndTwoIntegersAtom::applyAtomWithValue (
 void oahStringAndTwoIntegersAtom::setStringVariable (const std::string& value)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -11313,7 +11313,7 @@ void oahStringAndTwoIntegersAtom::setStringVariable (const std::string& value)
 void oahStringAndTwoIntegersAtom::setPrimaryIntegerVariable (int value)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -11338,7 +11338,7 @@ void oahStringAndTwoIntegersAtom::setPrimaryIntegerVariable (int value)
 void oahStringAndTwoIntegersAtom::setSecondaryIntegerVariable (int value)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -11363,7 +11363,7 @@ void oahStringAndTwoIntegersAtom::setSecondaryIntegerVariable (int value)
 void oahStringAndTwoIntegersAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -11382,7 +11382,7 @@ void oahStringAndTwoIntegersAtom::acceptIn (basevisitor* v)
         S_oahStringAndTwoIntegersAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -11401,7 +11401,7 @@ void oahStringAndTwoIntegersAtom::acceptIn (basevisitor* v)
 void oahStringAndTwoIntegersAtom::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -11420,7 +11420,7 @@ void oahStringAndTwoIntegersAtom::acceptOut (basevisitor* v)
         S_oahStringAndTwoIntegersAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -11439,7 +11439,7 @@ void oahStringAndTwoIntegersAtom::acceptOut (basevisitor* v)
 void oahStringAndTwoIntegersAtom::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -11610,7 +11610,7 @@ void oahLengthUnitKindAtom::applyAtomWithValue (
   std::ostream&      os)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -11627,7 +11627,7 @@ void oahLengthUnitKindAtom::applyAtomWithValue (
   // is it in the score output kinds map?
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -11678,7 +11678,7 @@ void oahLengthUnitKindAtom::applyAtomWithValue (
 void oahLengthUnitKindAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -11697,7 +11697,7 @@ void oahLengthUnitKindAtom::acceptIn (basevisitor* v)
         S_oahLengthUnitKindAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -11716,7 +11716,7 @@ void oahLengthUnitKindAtom::acceptIn (basevisitor* v)
 void oahLengthUnitKindAtom::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -11735,7 +11735,7 @@ void oahLengthUnitKindAtom::acceptOut (basevisitor* v)
         S_oahLengthUnitKindAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -11754,7 +11754,7 @@ void oahLengthUnitKindAtom::acceptOut (basevisitor* v)
 void oahLengthUnitKindAtom::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -11898,7 +11898,7 @@ void oahLengthAtom::applyAtomWithValue (
   std::ostream&      os)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -11929,7 +11929,7 @@ void oahLengthAtom::applyAtomWithValue (
   size_t smSize = sm.size ();
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -12013,7 +12013,7 @@ void oahLengthAtom::applyAtomWithValue (
 void oahLengthAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -12032,7 +12032,7 @@ void oahLengthAtom::acceptIn (basevisitor* v)
         S_oahLengthAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -12051,7 +12051,7 @@ void oahLengthAtom::acceptIn (basevisitor* v)
 void oahLengthAtom::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -12070,7 +12070,7 @@ void oahLengthAtom::acceptOut (basevisitor* v)
         S_oahLengthAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -12089,7 +12089,7 @@ void oahLengthAtom::acceptOut (basevisitor* v)
 void oahLengthAtom::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -12230,7 +12230,7 @@ void oahMidiTempoAtom::setMidiTempoVariable (
   const msrMidiTempo& value)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -12254,7 +12254,7 @@ void oahMidiTempoAtom::applyAtomWithValue (
   std::ostream&      os)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -12271,7 +12271,7 @@ void oahMidiTempoAtom::applyAtomWithValue (
   // decipher it to extract duration and perSecond values
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -12286,7 +12286,7 @@ void oahMidiTempoAtom::applyAtomWithValue (
 
   std::string regularExpression (
     "[[:space:]]*"
-    "([[:digit:]]+\\.*)" // midiTempoDuration
+    "([[:digit:]]+\\.*)" // midiTempoNotesDuration
     "[[:space:]]*"
     "="
     "[[:space:]]*"
@@ -12302,7 +12302,7 @@ void oahMidiTempoAtom::applyAtomWithValue (
   size_t smSize = sm.size ();
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -12335,7 +12335,7 @@ void oahMidiTempoAtom::applyAtomWithValue (
     oahError (ss.str ());
   }
 
-  std::string midiTempoDuration = sm [1];
+  std::string midiTempoNotesDuration = sm [1];
 
   int midiTempoPerSecond;
   {
@@ -12345,12 +12345,12 @@ void oahMidiTempoAtom::applyAtomWithValue (
   }
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
-      "midiTempoDuration  = " <<
-      midiTempoDuration <<
+      "midiTempoNotesDuration  = " <<
+      midiTempoNotesDuration <<
       std::endl <<
       "midiTempoPerSecond = " <<
       midiTempoPerSecond <<
@@ -12359,7 +12359,7 @@ void oahMidiTempoAtom::applyAtomWithValue (
   msrMidiTempo
     theMidiTempo (
       0, // inputLineNumber
-      midiTempoDuration,
+      midiTempoNotesDuration,
       midiTempoPerSecond);
 
   setMidiTempoVariable (
@@ -12373,7 +12373,7 @@ void oahMidiTempoAtom::applyAtomWithValue (
 void oahMidiTempoAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -12392,7 +12392,7 @@ void oahMidiTempoAtom::acceptIn (basevisitor* v)
         S_oahMidiTempoAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -12411,7 +12411,7 @@ void oahMidiTempoAtom::acceptIn (basevisitor* v)
 void oahMidiTempoAtom::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -12430,7 +12430,7 @@ void oahMidiTempoAtom::acceptOut (basevisitor* v)
         S_oahMidiTempoAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -12449,7 +12449,7 @@ void oahMidiTempoAtom::acceptOut (basevisitor* v)
 void oahMidiTempoAtom::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -12599,7 +12599,7 @@ void oahOptionNameHelpAtom::applyAtomWithValue (
   std::ostream&      os)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -12633,7 +12633,7 @@ void oahOptionNameHelpAtom::applyAtomWithDefaultValue (std::ostream& os)
 void oahOptionNameHelpAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -12652,7 +12652,7 @@ void oahOptionNameHelpAtom::acceptIn (basevisitor* v)
         S_oahOptionNameHelpAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -12671,7 +12671,7 @@ void oahOptionNameHelpAtom::acceptIn (basevisitor* v)
 void oahOptionNameHelpAtom::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -12690,7 +12690,7 @@ void oahOptionNameHelpAtom::acceptOut (basevisitor* v)
         S_oahOptionNameHelpAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -12709,7 +12709,7 @@ void oahOptionNameHelpAtom::acceptOut (basevisitor* v)
 void oahOptionNameHelpAtom::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -12821,7 +12821,7 @@ void oahQueryOptionNameAtom::applyAtomWithValue (
   std::ostream&      os)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -12846,7 +12846,7 @@ void oahQueryOptionNameAtom::applyAtomWithValue (
 void oahQueryOptionNameAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -12865,7 +12865,7 @@ void oahQueryOptionNameAtom::acceptIn (basevisitor* v)
         S_oahQueryOptionNameAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -12884,7 +12884,7 @@ void oahQueryOptionNameAtom::acceptIn (basevisitor* v)
 void oahQueryOptionNameAtom::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -12903,7 +12903,7 @@ void oahQueryOptionNameAtom::acceptOut (basevisitor* v)
         S_oahQueryOptionNameAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -12922,7 +12922,7 @@ void oahQueryOptionNameAtom::acceptOut (basevisitor* v)
 void oahQueryOptionNameAtom::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -13105,7 +13105,7 @@ void oahFindStringAtom::applyAtomWithValue (
   std::ostream&      os)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -13222,7 +13222,7 @@ void oahFindStringAtom::applyAtomWithValue (
 void oahFindStringAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -13241,7 +13241,7 @@ void oahFindStringAtom::acceptIn (basevisitor* v)
         S_oahFindStringAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -13260,7 +13260,7 @@ void oahFindStringAtom::acceptIn (basevisitor* v)
 void oahFindStringAtom::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -13279,7 +13279,7 @@ void oahFindStringAtom::acceptOut (basevisitor* v)
         S_oahFindStringAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -13298,7 +13298,7 @@ void oahFindStringAtom::acceptOut (basevisitor* v)
 void oahFindStringAtom::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -13412,7 +13412,7 @@ void oahIncludeOptionsAndArgumentsFileAtom::applyAtomWithValue (
 {
   // nothing to do, this option has already be applied early JMIJMIJMI
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -13437,7 +13437,7 @@ void oahIncludeOptionsAndArgumentsFileAtom::applyAtomWithValue (
 void oahIncludeOptionsAndArgumentsFileAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -13456,7 +13456,7 @@ void oahIncludeOptionsAndArgumentsFileAtom::acceptIn (basevisitor* v)
         S_oahIncludeOptionsAndArgumentsFileAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -13475,7 +13475,7 @@ void oahIncludeOptionsAndArgumentsFileAtom::acceptIn (basevisitor* v)
 void oahIncludeOptionsAndArgumentsFileAtom::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -13494,7 +13494,7 @@ void oahIncludeOptionsAndArgumentsFileAtom::acceptOut (basevisitor* v)
         S_oahIncludeOptionsAndArgumentsFileAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -13513,7 +13513,7 @@ void oahIncludeOptionsAndArgumentsFileAtom::acceptOut (basevisitor* v)
 void oahIncludeOptionsAndArgumentsFileAtom::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<

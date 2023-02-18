@@ -18,7 +18,6 @@
 #include "exports.h"
 
 #include "mfBool.h"
-#include "mfRational.h"
 
 
 namespace MusicFormats
@@ -33,8 +32,6 @@ class EXP msrMoment
     // constants
     // ------------------------------------------------------
 
-    static const Rational  K_MEASURE_POSITION_UNKNOWN;
-
     static const msrMoment K_MOMENT_UNKNOWN;
 
   public:
@@ -45,11 +42,11 @@ class EXP msrMoment
                           msrMoment ();
 
                           msrMoment (
-                            const Rational& writtenMeasurePosition,
-                            const Rational& soundingRelativeOffset);
+                            const msrWholeNotes& writtenMeasurePosition,
+                            const msrWholeNotes& soundingRelativeOffset);
 
                           msrMoment (
-                            const Rational& writtenMeasurePosition);
+                            const msrWholeNotes& writtenMeasurePosition);
 
     virtual               ~msrMoment ();
 
@@ -58,16 +55,16 @@ class EXP msrMoment
     // set and get
     // ------------------------------------------------------
 
-    void                  setWrittenPositionInMeseasure (Rational position)
+    void                  setWrittenPositionInMeseasure (msrWholeNotes position)
                               { fWrittenPositionInMeseasure = position; }
 
-    Rational              getWrittenPositionInMeseasure () const
+    msrWholeNotes              getWrittenPositionInMeseasure () const
                               { return fWrittenPositionInMeseasure; }
 
-    void                  setSoundingRelativeOffset (Rational offset)
+    void                  setSoundingRelativeOffset (msrWholeNotes offset)
                               { fSoundingRelativeOffset = offset; }
 
-    Rational              getSoundingRelativeOffset () const
+    msrWholeNotes              getSoundingRelativeOffset () const
                               { return fSoundingRelativeOffset; }
 
   public:
@@ -115,8 +112,8 @@ class EXP msrMoment
     // private fields
     // ------------------------------------------------------
 
-    Rational              fWrittenPositionInMeseasure;
-    Rational              fSoundingRelativeOffset;
+    msrWholeNotes          fWrittenPositionInMeseasure;
+    msrWholeNotes          fSoundingRelativeOffset;
 };
 EXP std::ostream& operator << (std::ostream& os, const msrMoment& elt);
 

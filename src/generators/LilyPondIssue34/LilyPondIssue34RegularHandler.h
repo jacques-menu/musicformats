@@ -16,6 +16,7 @@
 
 #include "LilyPondIssue34InsiderHandler.h"
 
+
 namespace MusicFormats
 {
 

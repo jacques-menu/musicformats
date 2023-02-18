@@ -40,7 +40,7 @@ namespace MusicFormats
 {
 
 //_______________________________________________________________________________
-int lpsrDurationBinaryLogarithm (int duration)
+int lpsrNotesDurationBinaryLogarithm (int duration)
 {
   int result = INT_MIN;
 
@@ -123,13 +123,13 @@ int lpsrNumberOfDots (int n)
 //_______________________________________________________________________________
 std::string wholeNotesAsLilypondString (
   int             inputLineNumber,
-  const Rational& wholeNotes,
+  const msrWholeNotes& wholeNotes,
   int&            dotsNumber)
 {
   // this algorithm is inspired by musicxml2ly
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceWholeNotes ()) {
+  if (gTraceOahGroup->getTraceWholeNotes ()) {
 		std::stringstream ss;
 
     ss <<
@@ -150,7 +150,7 @@ std::string wholeNotesAsLilypondString (
     denominator  = wholeNotes.getDenominator ();
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceWholeNotes ()) {
+  if (gTraceOahGroup->getTraceWholeNotes ()) {
 		std::stringstream ss;
 
     ss <<
@@ -214,7 +214,7 @@ std::string wholeNotesAsLilypondString (
     integralNumberOfWholeNotes = denominator == 1;
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceWholeNotesDetails ()) {
+  if (gTraceOahGroup->getTraceWholeNotesDetails ()) {
 		std::stringstream ss;
 
     ss <<
@@ -245,7 +245,7 @@ std::string wholeNotesAsLilypondString (
   int  numeratorDots = lpsrNumberOfDots (numerator);
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceWholeNotesDetails ()) {
+  if (gTraceOahGroup->getTraceWholeNotesDetails ()) {
 		std::stringstream ss;
 
     ss <<
@@ -297,7 +297,7 @@ std::string wholeNotesAsLilypondString (
   /*
     valid denominators are powers of 2
 
-    the Rational representing a dotted duration has to be brought
+    the mfRational representing a dotted duration has to be brought
     to a value less than two, as explained above
 
     this is done by changing it denominator in the resulting std::string:
@@ -318,10 +318,10 @@ std::string wholeNotesAsLilypondString (
     we'll be better of using binary logarithms for the computations
   */
 
-  int denominatorDurationLog =
-    lpsrDurationBinaryLogarithm (denominator);
+  int denominatorNotesDurationLog =
+    lpsrNotesDurationBinaryLogarithm (denominator);
 
-  if (denominatorDurationLog == INT_MIN) {
+  if (denominatorNotesDurationLog == INT_MIN) {
     std::string result;
 
     {
@@ -338,7 +338,7 @@ std::string wholeNotesAsLilypondString (
     }
 
 #ifdef MF_TRACE_IS_ENABLED
-    if (gGlobalTraceOahGroup->getTraceWholeNotesDetails ()) {
+    if (gTraceOahGroup->getTraceWholeNotesDetails ()) {
       std::stringstream ss;
 
       ss <<
@@ -373,12 +373,12 @@ std::string wholeNotesAsLilypondString (
   }
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceWholeNotesDetails ()) {
+  if (gTraceOahGroup->getTraceWholeNotesDetails ()) {
 		std::stringstream ss;
 
     ss <<
-      "--> denominatorDurationLog" << ": " <<
-      denominatorDurationLog <<
+      "--> denominatorNotesDurationLog" << ": " <<
+      denominatorNotesDurationLog <<
       std::endl << std::endl;
 
     gWaeHandler->waeTrace (
@@ -393,7 +393,7 @@ std::string wholeNotesAsLilypondString (
     // since dotted durations cannot be recognized otherwise
     // 6/1 thus becomes 3\breve, hence \longa.
 #ifdef MF_TRACE_IS_ENABLED
-    if (gGlobalTraceOahGroup->getTraceWholeNotesDetails ()) {
+    if (gTraceOahGroup->getTraceWholeNotesDetails ()) {
       std::stringstream ss;
 
       ss <<
@@ -409,16 +409,16 @@ std::string wholeNotesAsLilypondString (
 
     while (numerator % 2 == 0) {
       numerator /= 2;
-      denominatorDurationLog -= 1;
+      denominatorNotesDurationLog -= 1;
 
 #ifdef MF_TRACE_IS_ENABLED
-      if (gGlobalTraceOahGroup->getTraceWholeNotesDetails ()) {
+      if (gTraceOahGroup->getTraceWholeNotesDetails ()) {
         gLog <<
           "--> numerator" << ": " <<
           numerator <<
           std::endl <<
-          "--> denominatorDurationLog " << ": " <<
-          denominatorDurationLog <<
+          "--> denominatorNotesDurationLog " << ": " <<
+          denominatorNotesDurationLog <<
           std::endl << std::endl;
       }
 #endif // MF_TRACE_IS_ENABLED
@@ -429,15 +429,15 @@ std::string wholeNotesAsLilypondString (
   }
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceWholeNotesDetails ()) {
+  if (gTraceOahGroup->getTraceWholeNotesDetails ()) {
 		std::stringstream ss;
 
     ss <<
       "--> numerator" << ": " <<
       numerator <<
       std::endl <<
-      "--> denominatorDurationLog" << ": " <<
-      denominatorDurationLog <<
+      "--> denominatorNotesDurationLog" << ": " <<
+      denominatorNotesDurationLog <<
       std::endl <<
       "--> numeratorDots " << ": " <<
       numeratorDots <<
@@ -452,17 +452,17 @@ std::string wholeNotesAsLilypondString (
   // take care of the dots
   int multiplyingFactor = 1;
 
-  if (numeratorDots >= 0 && denominatorDurationLog >= numeratorDots) {
+  if (numeratorDots >= 0 && denominatorNotesDurationLog >= numeratorDots) {
     // take the dots into account
-    denominatorDurationLog -= numeratorDots;
+    denominatorNotesDurationLog -= numeratorDots;
 
 #ifdef MF_TRACE_IS_ENABLED
-    if (gGlobalTraceOahGroup->getTraceWholeNotesDetails ()) {
+    if (gTraceOahGroup->getTraceWholeNotesDetails ()) {
       std::stringstream ss;
 
       ss <<
-        "--> denominatorDurationLog" << ": " <<
-        denominatorDurationLog <<
+        "--> denominatorNotesDurationLog" << ": " <<
+        denominatorNotesDurationLog <<
         std::endl <<
         "--> multiplyingFactor " << ": " <<
         multiplyingFactor <<
@@ -473,7 +473,7 @@ std::string wholeNotesAsLilypondString (
   else {
     // set the multiplying factor
 #ifdef MF_TRACE_IS_ENABLED
-    if (gGlobalTraceOahGroup->getTraceWholeNotesDetails ()) {
+    if (gTraceOahGroup->getTraceWholeNotesDetails ()) {
       std::stringstream ss;
 
       ss <<
@@ -495,12 +495,12 @@ std::string wholeNotesAsLilypondString (
     multiplyingFactor = numerator;
 
 #ifdef MF_TRACE_IS_ENABLED
-    if (gGlobalTraceOahGroup->getTraceWholeNotesDetails ()) {
+    if (gTraceOahGroup->getTraceWholeNotesDetails ()) {
       std::stringstream ss;
 
       ss <<
-        "--> denominatorDurationLog" << ": " <<
-        denominatorDurationLog <<
+        "--> denominatorNotesDurationLog" << ": " <<
+        denominatorNotesDurationLog <<
         std::endl <<
         "--> multiplyingFactor " << ": " <<
         multiplyingFactor <<
@@ -510,16 +510,16 @@ std::string wholeNotesAsLilypondString (
 
     while (multiplyingFactor >= 2) {
       // double duration
-      --denominatorDurationLog;
+      --denominatorNotesDurationLog;
 
       // adapt multiplying factor
       multiplyingFactor /= 2;
 
 #ifdef MF_TRACE_IS_ENABLED
-      if (gGlobalTraceOahGroup->getTraceWholeNotesDetails ()) {
+      if (gTraceOahGroup->getTraceWholeNotesDetails ()) {
         gLog <<
-          "--> denominatorDurationLog" << ": " <<
-          denominatorDurationLog <<
+          "--> denominatorNotesDurationLog" << ": " <<
+          denominatorNotesDurationLog <<
           std::endl <<
           "--> multiplyingFactor " << ": " <<
           multiplyingFactor <<
@@ -531,7 +531,7 @@ std::string wholeNotesAsLilypondString (
   }
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceWholeNotes ()) {
+  if (gTraceOahGroup->getTraceWholeNotes ()) {
 		std::stringstream ss;
 
     ss <<
@@ -541,8 +541,8 @@ std::string wholeNotesAsLilypondString (
       "--> numeratorDots " << ": " <<
       numeratorDots <<
       std::endl <<
-      "--> denominatorDurationLog" << ": " <<
-      denominatorDurationLog <<
+      "--> denominatorNotesDurationLog" << ": " <<
+      denominatorNotesDurationLog <<
       std::endl <<
       "--> multiplyingFactor " << ": " <<
       multiplyingFactor <<
@@ -557,7 +557,7 @@ std::string wholeNotesAsLilypondString (
   // generate the code for the duration
   std::stringstream ss;
 
-  switch (denominatorDurationLog) {
+  switch (denominatorNotesDurationLog) {
     case -3:
       ss << "\\maxima";
       break;
@@ -569,7 +569,7 @@ std::string wholeNotesAsLilypondString (
       break;
 
     default:
-      ss << (1 << denominatorDurationLog);
+      ss << (1 << denominatorNotesDurationLog);
   } // switch
 
   // append the dots if any
@@ -599,7 +599,7 @@ std::string wholeNotesAsLilypondString (
   std::string result = ss.str ();
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceWholeNotesDetails ()) {
+  if (gTraceOahGroup->getTraceWholeNotesDetails ()) {
 		std::stringstream ss;
 
     ss <<
@@ -622,7 +622,7 @@ std::string wholeNotesAsLilypondString (
 
 std::string wholeNotesAsLilypondString (
   int             inputLineNumber,
-  const Rational& wholeNotes)
+  const msrWholeNotes& wholeNotes)
 {
   int dotsNumber; // not used
 
@@ -634,25 +634,25 @@ std::string wholeNotesAsLilypondString (
 }
 
 //_______________________________________________________________________________
-std::string dottedDurationAsLilypondString (
+std::string dottedNotesDurationAsLilypondString (
   int               inputLineNumber,
-  msrDottedDuration dottedDuration)
+  msrDottedNotesDuration dottedNotesDuration)
 {
   return
     wholeNotesAsLilypondString (
       inputLineNumber,
-      dottedDuration.dottedDurationAsWholeNotes_FOR_TEMPO (
+      dottedNotesDuration.dottedNotesDurationAsWholeNotes_FOR_TEMPO (
         inputLineNumber));
 }
 
-std::string dottedDurationAsLilypondStringWithoutBackSlash (
+std::string dottedNotesDurationAsLilypondStringWithoutBackSlash (
   int               inputLineNumber,
-  msrDottedDuration dottedDuration)
+  msrDottedNotesDuration dottedNotesDuration)
 {
   std::string result =
     wholeNotesAsLilypondString (
       inputLineNumber,
-      dottedDuration.dottedDurationAsWholeNotes_FOR_TEMPO (
+      dottedNotesDuration.dottedNotesDurationAsWholeNotes_FOR_TEMPO (
         inputLineNumber));
 
   if (result [0] == '\\') {
@@ -665,23 +665,23 @@ std::string dottedDurationAsLilypondStringWithoutBackSlash (
 //_______________________________________________________________________________
 std::string multipleFullBarRestsWholeNoteAsLilypondString (
   int             inputLineNumber,
-  const Rational& wholeNotes)
+  const msrWholeNotes& wholeNotes)
 {
   std::stringstream ss;
 
-  Rational
-    denominatorAsFraction =
-      Rational (
+  msrWholeNotes
+    wholeNotesUnit = // JMI v0.9.67
+      msrWholeNotes (
         1,
         wholeNotes.getDenominator ());
-
-  int numberOfWholeNotes =
-    wholeNotes.getNumerator ();
 
   ss <<
     wholeNotesAsLilypondString (
       inputLineNumber,
-      denominatorAsFraction);
+      wholeNotesUnit);
+
+  int numberOfWholeNotes =
+    wholeNotes.getNumerator ();
 
   if (numberOfWholeNotes != 1) {
     ss <<
@@ -1272,7 +1272,7 @@ std::string msrSemiTonesPitchAndOctaveAsLilypondString (
   } // switch
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceNotesOctaveEntry ()) {
+  if (gTraceOahGroup->getTraceNotesOctaveEntry ()) {
     ss <<
       " %{ " <<
       semiTonesPitchAndOctave->asString () <<
@@ -1453,21 +1453,21 @@ std::string availableLpsrDynamicsTextSpannersStyleKinds (
 // lyrics durations
 //______________________________________________________________________________
 
-std::map<std::string, lpsrLyricsDurationsKind>
-  gGlobalLpsrLyricsDurationsKindsMap;
+std::map<std::string, lpsrLyricsNotesDurationsKind>
+  gGlobalLpsrLyricsNotesDurationsKindsMap;
 
-std::string lpsrLyricsDurationsKindAsString (
-  lpsrLyricsDurationsKind lyricsDurationsKind)
+std::string lpsrLyricsNotesDurationsKindAsString (
+  lpsrLyricsNotesDurationsKind lyricsNotesDurationsKind)
 {
   std::string result;
 
   // no CamelCase here, these strings are used in the command line options
 
-  switch (lyricsDurationsKind) {
-    case lpsrLyricsDurationsKind::kLyricsDurationsImplicit:
+  switch (lyricsNotesDurationsKind) {
+    case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsImplicit:
       result = "implicit";
       break;
-    case lpsrLyricsDurationsKind::kLyricsDurationsExplicit:
+    case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsExplicit:
       result = "explicit";
       break;
   } // switch
@@ -1475,45 +1475,45 @@ std::string lpsrLyricsDurationsKindAsString (
   return result;
 }
 
-std::ostream& operator << (std::ostream& os, const lpsrLyricsDurationsKind& elt)
+std::ostream& operator << (std::ostream& os, const lpsrLyricsNotesDurationsKind& elt)
 {
-  os << lpsrLyricsDurationsKindAsString (elt);
+  os << lpsrLyricsNotesDurationsKindAsString (elt);
   return os;
 }
 
-void initializeLpsrLyricsDurationsKindsMap ()
+void initializeLpsrLyricsNotesDurationsKindsMap ()
 {
   // register the LilyPond score output kinds
   // --------------------------------------
 
   // no CamelCase here, these strings are used in the command line options
 
-  gGlobalLpsrLyricsDurationsKindsMap ["implicit"] =
-    lpsrLyricsDurationsKind::kLyricsDurationsImplicit;
-  gGlobalLpsrLyricsDurationsKindsMap ["explicit"] =
-    lpsrLyricsDurationsKind::kLyricsDurationsExplicit;
+  gGlobalLpsrLyricsNotesDurationsKindsMap ["implicit"] =
+    lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsImplicit;
+  gGlobalLpsrLyricsNotesDurationsKindsMap ["explicit"] =
+    lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsExplicit;
 }
 
-std::string availableLpsrLyricsDurationsKinds (size_t namesListMaxLength)
+std::string availableLpsrLyricsNotesDurationsKinds (size_t namesListMaxLength)
 {
   std::stringstream ss;
 
   size_t
-    lpsrLyricsDurationsKindsMapSize =
-      gGlobalLpsrLyricsDurationsKindsMap.size ();
+    lpsrLyricsNotesDurationsKindsMapSize =
+      gGlobalLpsrLyricsNotesDurationsKindsMap.size ();
 
-  if (lpsrLyricsDurationsKindsMapSize) {
+  if (lpsrLyricsNotesDurationsKindsMapSize) {
     size_t
       nextToLast =
-        lpsrLyricsDurationsKindsMapSize - 1;
+        lpsrLyricsNotesDurationsKindsMapSize - 1;
 
     size_t count = 0;
     size_t cumulatedLength = 0;
 
     for (
-      std::map<std::string, lpsrLyricsDurationsKind>::const_iterator i =
-        gGlobalLpsrLyricsDurationsKindsMap.begin ();
-      i != gGlobalLpsrLyricsDurationsKindsMap.end ();
+      std::map<std::string, lpsrLyricsNotesDurationsKind>::const_iterator i =
+        gGlobalLpsrLyricsNotesDurationsKindsMap.begin ();
+      i != gGlobalLpsrLyricsNotesDurationsKindsMap.end ();
       ++i
     ) {
       std::string theString = (*i).first;
@@ -1535,7 +1535,7 @@ std::string availableLpsrLyricsDurationsKinds (size_t namesListMaxLength)
       if (count == nextToLast) {
         ss << " and ";
       }
-      else if (count != lpsrLyricsDurationsKindsMapSize) {
+      else if (count != lpsrLyricsNotesDurationsKindsMapSize) {
         ss << ", ";
       }
     } // for

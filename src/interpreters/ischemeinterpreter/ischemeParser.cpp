@@ -17,17 +17,17 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-// As a special std::exception, you may create a larger work that contains
+// As a special exception, you may create a larger work that contains
 // part or all of the Bison parser skeleton and distribute that work
 // under terms of your choice, so long as that work isn't itself a
 // parser generator using the skeleton or a modified version thereof
 // as a parser skeleton.  Alternatively, if you modify or redistribute
 // the parser skeleton itself, you may (at your option) remove this
-// special std::exception, which will cause the skeleton and the resulting
+// special exception, which will cause the skeleton and the resulting
 // Bison output files to be licensed under the GNU General Public
-// License without this special std::exception.
+// License without this special exception.
 
-// This special std::exception was added by the Free Software Foundation in
+// This special exception was added by the Free Software Foundation in
 // version 2.2 of Bison.
 
 // DO NOT RELY ON FEATURES THAT ARE NOT DOCUMENTED in the manual,
@@ -44,11 +44,11 @@
 
 /*
   MusicFormats Library
-  Copyright (C) Jacques Menu 2016-2023
+  Copyright (C) Jacques Menu 2016-2022
 
   This Source Code Form is subject to the terms of the Mozilla Public
   License, v. 2.0. If a copy of the MPL was not distributed with this
-  file, you can obtain one at http://mozilla.org/MPL/2.0/.
+  file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
   https://github.com/jacques-menu/musicformats
 */
@@ -97,17 +97,17 @@ using namespace MusicFormats;
 # ifndef YY_
 #  define YY_(msgid) msgid
 # endif
-#endif // MF_TRACE_IS_ENABLED
+#endif
 
 
-// Whether we are compiled with std::exception support.
+// Whether we are compiled with exception support.
 #ifndef YY_EXCEPTIONS
 # if defined __GNUC__ && !defined __EXCEPTIONS
 #  define YY_EXCEPTIONS 0
 # else
 #  define YY_EXCEPTIONS 1
 # endif
-#endif // MF_TRACE_IS_ENABLED
+#endif
 
 #define YYRHSLOC(Rhs, K) ((Rhs)[K].location)
 /* YYLLOC_DEFAULT -- Set CURRENT to span from RHS[1] to RHS[N].
@@ -133,7 +133,7 @@ using namespace MusicFormats;
 // Enable debugging if requested.
 #if ISCMDEBUG
 
-// A pseudo std::ostream that takes yydebug_ into account.
+// A pseudo ostream that takes yydebug_ into account.
 # define YYCDEBUG if (yydebug_) (*yycdebug_)
 
 # define YY_SYMBOL_PRINT(Title, Symbol)         \
@@ -142,7 +142,7 @@ using namespace MusicFormats;
     {                                           \
       *yycdebug_ << Title << ' ';               \
       yy_print_ (*yycdebug_, Symbol);           \
-      *yycdebug_ << std::endl;                       \
+      *yycdebug_ << '\n';                       \
     }                                           \
   } while (false)
 
@@ -185,7 +185,7 @@ namespace iscm {
       yycdebug_ (&std::cerr),
 #else
     :
-#endif // MF_TRACE_IS_ENABLED
+#endif
       yy_lac_established_ (false),
       drv (drv_yyarg)
   {}
@@ -253,7 +253,7 @@ namespace iscm {
       case symbol_kind::S_OPTION: // "option"
       case symbol_kind::S_Number: // Number
       case symbol_kind::S_SingleString: // SingleString
-      case symbol_kind::S_String: // std::string
+      case symbol_kind::S_String: // String
       case symbol_kind::S_OptionValue: // OptionValue
       case symbol_kind::S_LabelName: // LabelName
         value.YY_MOVE_OR_COPY< std::string > (YY_MOVE (that.value));
@@ -266,7 +266,7 @@ namespace iscm {
 #if 201103L <= YY_CPLUSPLUS
     // that is emptied.
     that.state = empty_state;
-#endif // MF_TRACE_IS_ENABLED
+#endif
   }
 
   parser::stack_symbol_type::stack_symbol_type (state_type s, YY_MOVE_REF (symbol_type) that)
@@ -282,7 +282,7 @@ namespace iscm {
       case symbol_kind::S_OPTION: // "option"
       case symbol_kind::S_Number: // Number
       case symbol_kind::S_SingleString: // SingleString
-      case symbol_kind::S_String: // std::string
+      case symbol_kind::S_String: // String
       case symbol_kind::S_OptionValue: // OptionValue
       case symbol_kind::S_LabelName: // LabelName
         value.move< std::string > (YY_MOVE (that.value));
@@ -311,7 +311,7 @@ namespace iscm {
       case symbol_kind::S_OPTION: // "option"
       case symbol_kind::S_Number: // Number
       case symbol_kind::S_SingleString: // SingleString
-      case symbol_kind::S_String: // std::string
+      case symbol_kind::S_String: // String
       case symbol_kind::S_OptionValue: // OptionValue
       case symbol_kind::S_LabelName: // LabelName
         value.copy< std::string > (that.value);
@@ -339,7 +339,7 @@ namespace iscm {
       case symbol_kind::S_OPTION: // "option"
       case symbol_kind::S_Number: // Number
       case symbol_kind::S_SingleString: // SingleString
-      case symbol_kind::S_String: // std::string
+      case symbol_kind::S_String: // String
       case symbol_kind::S_OptionValue: // OptionValue
       case symbol_kind::S_LabelName: // LabelName
         value.move< std::string > (that.value);
@@ -354,7 +354,7 @@ namespace iscm {
     that.state = empty_state;
     return *this;
   }
-#endif // MF_TRACE_IS_ENABLED
+#endif
 
   template <typename Base>
   void
@@ -376,7 +376,7 @@ namespace iscm {
     else
       {
         symbol_kind_type yykind = yysym.kind ();
-        yyo << (yykind < YYNTOKENS ? "token": "nterm")
+        yyo << (yykind < YYNTOKENS ? "token" : "nterm")
             << ' ' << yysym.name () << " ("
             << yysym.location << ": ";
         switch (yykind)
@@ -429,7 +429,7 @@ namespace iscm {
 #line 430 "ischemeParser.cpp"
         break;
 
-      case symbol_kind::S_String: // std::string
+      case symbol_kind::S_String: // String
 #line 64 "ischemeParser.yy"
                  { yyo << yysym.value.template as < std::string > (); }
 #line 436 "ischemeParser.cpp"
@@ -453,7 +453,7 @@ namespace iscm {
         yyo << ')';
       }
   }
-#endif // MF_TRACE_IS_ENABLED
+#endif
 
   void
   parser::yypush_ (const char* m, YY_MOVE_REF (stack_symbol_type) sym)
@@ -471,7 +471,7 @@ namespace iscm {
 #else
     stack_symbol_type ss (s, sym);
     yypush_ (m, ss);
-#endif // MF_TRACE_IS_ENABLED
+#endif
   }
 
   void
@@ -577,7 +577,7 @@ namespace iscm {
   | yynewstate -- push a new symbol on the stack.  |
   `-----------------------------------------------*/
   yynewstate:
-    YYCDEBUG << "Entering state " << int (yystack_[0].state) << std::endl;
+    YYCDEBUG << "Entering state " << int (yystack_[0].state) << '\n';
     YY_STACK_PRINT ();
 
     // Accept?
@@ -610,7 +610,7 @@ namespace iscm {
 #if YY_EXCEPTIONS
         catch (const syntax_error& yyexc)
           {
-            YYCDEBUG << "Caught std::exception: " << yyexc.what() << std::endl;
+            YYCDEBUG << "Caught exception: " << yyexc.what() << '\n';
             error (yyexc);
             goto yyerrlab1;
           }
@@ -692,7 +692,7 @@ namespace iscm {
       case symbol_kind::S_OPTION: // "option"
       case symbol_kind::S_Number: // Number
       case symbol_kind::S_SingleString: // SingleString
-      case symbol_kind::S_String: // std::string
+      case symbol_kind::S_String: // String
       case symbol_kind::S_OptionValue: // OptionValue
       case symbol_kind::S_LabelName: // LabelName
         yylhs.value.emplace< std::string > ();
@@ -724,7 +724,7 @@ namespace iscm {
         ++gIndenter;
 
         // create the main options block
-        const S_ischemeOptionsBlock&
+        S_ischemeOptionsBlock
           mainOptionsBlock =
             ischemeOptionsBlock::create (
               "Main options block");
@@ -776,13 +776,13 @@ namespace iscm {
 #line 777 "ischemeParser.cpp"
     break;
 
-  case 9: // std::string: SingleString
+  case 9: // String: SingleString
 #line 202 "ischemeParser.yy"
     { yylhs.value.as < std::string > () = yystack_[0].value.as < std::string > (); }
 #line 783 "ischemeParser.cpp"
     break;
 
-  case 10: // std::string: std::string SingleString
+  case 10: // String: String SingleString
 #line 204 "ischemeParser.yy"
       {
         yylhs.value.as < std::string > () = yystack_[1].value.as < std::string > () + yystack_[0].value.as < std::string > ();
@@ -790,10 +790,10 @@ namespace iscm {
 #line 791 "ischemeParser.cpp"
     break;
 
-  case 11: // Tool: "tool" ":" "name" ";"
+  case 11: // Service: "service" ":" "name" ";"
 #line 215 "ischemeParser.yy"
       {
-        drv.setTool (yystack_[1].value.as < std::string > ());
+        drv.setService (yystack_[1].value.as < std::string > ());
       }
 #line 799 "ischemeParser.cpp"
     break;
@@ -806,7 +806,7 @@ namespace iscm {
 #line 807 "ischemeParser.cpp"
     break;
 
-  case 16: // InputSource: std::string
+  case 16: // InputSource: String
 #line 240 "ischemeParser.yy"
       {
         drv.appendInputSouce (yystack_[0].value.as < std::string > ());
@@ -823,7 +823,7 @@ namespace iscm {
           gLog <<
             "====> option " << yystack_[0].value.as < std::string > () <<
             ", line " << drv.getScannerLocation () <<
-            std::endl;
+            endl;
         }
 
         drv.registerOptionInCurrentOptionsBlock (
@@ -844,7 +844,7 @@ namespace iscm {
           gLog <<
             "====> option " << yystack_[1].value.as < std::string > () << ' ' << yystack_[0].value.as < std::string > () <<
             ", line " << drv.getScannerLocation () <<
-            std::endl;
+            endl;
         }
 
         drv.registerOptionInCurrentOptionsBlock (
@@ -868,7 +868,7 @@ namespace iscm {
 #line 869 "ischemeParser.cpp"
     break;
 
-  case 29: // OptionValue: std::string
+  case 29: // OptionValue: String
 #line 312 "ischemeParser.yy"
     { yylhs.value.as < std::string > () = yystack_[0].value.as < std::string > (); }
 #line 875 "ischemeParser.cpp"
@@ -915,9 +915,9 @@ namespace iscm {
 
         if (drv.getTraceCaseChoiceStatements ()) {
           gLog <<
-            "====> choice " << choiceName << ": " << "..." <<
+            "====> choice " << choiceName << " : " << "..." <<
             ", line " << drv.getScannerLocation () <<
-            std::endl;
+            endl;
         }
 
         // create a choice
@@ -967,7 +967,7 @@ namespace iscm {
         if (drv.getTraceCaseChoiceStatements ()) {
           gLog <<
             "------------------------------------------------------------" <<
-            std::endl;
+            endl;
         }
 
         --gIndenter;
@@ -1043,7 +1043,7 @@ namespace iscm {
           gLog <<
             "====> case " << choiceName << ": ..." <<
             ", line " << drv.getScannerLocation () <<
-            std::endl;
+            endl;
         }
 
         // create a new current case statement
@@ -1059,16 +1059,16 @@ namespace iscm {
                 drv);
 
         if (! choice) {
-          std::stringstream ss;
+          stringstream s;
 
-          ss <<
+          s <<
             "name \"" << choiceName <<
             "\" is no choice name, cannot be used in a 'select' statement" <<
             ", line " << drv.getScannerLocation () <<
-            std::endl;
+            endl;
 
           ischemeError (
-            ss.str (),
+            s.str (),
             drv.getScannerLocation ());
         }
 
@@ -1102,7 +1102,7 @@ namespace iscm {
         if (drv.getTraceCaseChoiceStatements ()) {
           gLog <<
             "------------------------------------------------------------" <<
-            std::endl;
+            endl;
         }
 
         --gIndenter;
@@ -1134,9 +1134,9 @@ namespace iscm {
             drv.caseChoiceStatementsStackTop ();
 
         // push a new current options block onto the stack
-        std::stringstream ss;
+        stringstream s;
 
-        ss <<
+        s <<
           "Case alternative for " <<
           currentCaseChoiceStatement->
             currentLabelsListAsString () <<
@@ -1144,9 +1144,9 @@ namespace iscm {
 
         std::string
           CaseChoiceAlternativeDescription =
-            ss.str ();
+            s.str ();
 
-        const S_ischemeOptionsBlock&
+        S_ischemeOptionsBlock
           CaseChoiceAlternativeOptionsBlock =
             ischemeOptionsBlock::create (
               CaseChoiceAlternativeDescription);
@@ -1181,16 +1181,16 @@ namespace iscm {
         } // for
 
         // discard this case alternative
-        std::stringstream ss;
+        stringstream s;
 
-        ss <<
+        s <<
           "Discarding case alternative options block for " <<
           currentCaseChoiceStatement->
             currentLabelsListAsString () <<
           ", line " << drv.getScannerLocation () <<
-          std::endl;
+          endl;
 
-        std::string context = ss.str ();
+        std::string context = s.str ();
 
         drv.optionsBlocksStackPop (
           context);
@@ -1234,7 +1234,7 @@ namespace iscm {
           gLog <<
             "====> case input " << inputName << ": ..." <<
             ", line " << drv.getScannerLocation () <<
-            std::endl;
+            endl;
         }
 
         // create a new current case input statement
@@ -1250,16 +1250,16 @@ namespace iscm {
                 drv);
 
         if (! input) {
-          std::stringstream ss;
+          stringstream s;
 
-          ss <<
+          s <<
             "name \"" << inputName <<
             "\" is no input name, cannot be used in a 'select' statement" <<
             ", line " << drv.getScannerLocation () <<
-            std::endl;
+            endl;
 
           ischemeError (
-            ss.str (),
+            s.str (),
             drv.getScannerLocation ());
         }
 
@@ -1293,7 +1293,7 @@ namespace iscm {
         if (drv.getTraceCaseInputStatements ()) {
           gLog <<
             "------------------------------------------------------------" <<
-            std::endl;
+            endl;
         }
 
         --gIndenter;
@@ -1325,9 +1325,9 @@ namespace iscm {
             drv.caseInputStatementsStackTop ();
 
         // push a new current options block onto the stack
-        std::stringstream ss;
+        stringstream s;
 
-        ss <<
+        s <<
           "CaseInput alternative for " <<
           currentCaseInputStatement->
             currentNamesListAsString () <<
@@ -1335,9 +1335,9 @@ namespace iscm {
 
         std::string
           caseInputAlternativeDescription =
-            ss.str ();
+            s.str ();
 
-        const S_ischemeOptionsBlock&
+        S_ischemeOptionsBlock
           caseInputAlternativeOptionsBlock =
             ischemeOptionsBlock::create (
               caseInputAlternativeDescription);
@@ -1372,16 +1372,16 @@ namespace iscm {
         } // for
 
         // discard this case input alternative
-        std::stringstream ss;
+        stringstream s;
 
-        ss <<
+        s <<
           "Discarding case input alternative options block for " <<
           currentCaseInputStatement->
             currentNamesListAsString () <<
           ", line " << drv.getScannerLocation () <<
-          std::endl;
+          endl;
 
-        std::string context = ss.str ();
+        std::string context = s.str ();
 
         drv.optionsBlocksStackPop (
           context);
@@ -1427,7 +1427,7 @@ namespace iscm {
 #if YY_EXCEPTIONS
       catch (const syntax_error& yyexc)
         {
-          YYCDEBUG << "Caught std::exception: " << yyexc.what() << std::endl;
+          YYCDEBUG << "Caught exception: " << yyexc.what() << '\n';
           error (yyexc);
           YYERROR;
         }
@@ -1575,9 +1575,9 @@ namespace iscm {
 #if YY_EXCEPTIONS
     catch (...)
       {
-        YYCDEBUG << "std::exception caught: cleaning lookahead and stack\n";
+        YYCDEBUG << "Exception caught: cleaning lookahead and stack\n";
         // Do not try to display the values of the reclaimed symbols,
-        // as their printers might throw an std::exception.
+        // as their printers might throw an exception.
         if (!yyla.empty ())
           yy_destroy_ (YY_NULLPTR, yyla);
 
@@ -1603,10 +1603,10 @@ namespace iscm {
     static const char *const yy_sname[] =
     {
     "end of file", "error", "invalid token", "|", "&", "=", ";", ":", ",",
-  "tool", "input", "choice", "default", "case", "select", "all",
+  "service", "input", "choice", "default", "case", "select", "all",
   "integer number", "double number", "single quoted_string",
   "double quoted_string", "name", "option", "$accept", "Script", "$@1",
-  "$@2", "Number", "SingleString", "std::string", "Tool", "Input",
+  "$@2", "Number", "SingleString", "String", "Service", "Input",
   "InputSourcesSeq", "InputSource", "OptionalScriptElementsSeq",
   "ScriptElementsSeq", "ScriptElement", "Option", "OptionValue",
   "ChoiceDeclaration", "$@3", "$@4", "ChoiceLabels", "CaseChoiceLabel",
@@ -1640,7 +1640,7 @@ namespace iscm {
     // only do it for the sake of debugging output.
     if (!yyparser_.yy_lac_established_)
       yyparser_.yy_lac_check_ (yyla_.kind ());
-#endif // MF_TRACE_IS_ENABLED
+#endif
 
     for (int yyx = 0; yyx < YYNTOKENS; ++yyx)
       {
@@ -1674,7 +1674,7 @@ namespace iscm {
     // Reduce until we encounter a shift and thereby accept the token.
 #if ISCMDEBUG
     YYCDEBUG << "LAC: checking lookahead " << symbol_name (yytoken) << ':';
-#endif // MF_TRACE_IS_ENABLED
+#endif
     std::ptrdiff_t lac_top = 0;
     while (true)
       {
@@ -1705,7 +1705,7 @@ namespace iscm {
               }
             if (0 < yyrule)
               {
-                YYCDEBUG << " S" << yyrule << std::endl;
+                YYCDEBUG << " S" << yyrule << '\n';
                 return true;
               }
             yyrule = -yyrule;
@@ -1775,8 +1775,8 @@ namespace iscm {
       {
 #if ISCMDEBUG
         YYCDEBUG << "LAC: initial context established for "
-                 << symbol_name (yytoken) << std::endl;
-#endif // MF_TRACE_IS_ENABLED
+                 << symbol_name (yytoken) << '\n';
+#endif
         yy_lac_established_ = true;
         return yy_lac_check_ (yytoken);
       }
@@ -1800,7 +1800,7 @@ namespace iscm {
     if (yy_lac_established_)
       {
         YYCDEBUG << "LAC: initial context discarded due to "
-                 << event << std::endl;
+                 << event << '\n';
         yy_lac_established_ = false;
       }
   }
@@ -2028,13 +2028,13 @@ namespace iscm {
   void
   parser::yy_stack_print_ () const
   {
-    *yycdebug_ << "stack now";
+    *yycdebug_ << "Stack now";
     for (stack_type::const_iterator
            i = yystack_.begin (),
            i_end = yystack_.end ();
          i != i_end; ++i)
       *yycdebug_ << ' ' << int (i->state);
-    *yycdebug_ << std::endl;
+    *yycdebug_ << '\n';
   }
 
   void

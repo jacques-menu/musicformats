@@ -347,7 +347,7 @@ mfMusicformatsErrorKind convertMsdlStream2brailleWithHandler (
           fetchOutputFileNameFromTheOptions ();
 
 #ifdef MF_TRACE_IS_ENABLED
-      if (gEarlyOptions.getEarlyTraceOah ()) {
+      if (gEarlyOptions.getTraceEarlyOptions ()) {
         err <<
           "convertMsdlStream2brailleWithHandler() outputFileName = \"" <<
           outputFileName <<
@@ -362,7 +362,7 @@ mfMusicformatsErrorKind convertMsdlStream2brailleWithHandler (
 
     if (! outputFileName.size ()) {
 #ifdef MF_TRACE_IS_ENABLED
-      if (gEarlyOptions.getEarlyTraceOah ()) {
+      if (gEarlyOptions.getTraceEarlyOptions ()) {
         err <<
           "convertMsdlStream2brailleWithHandler() output goes to standard output" <<
           std::endl;
@@ -394,7 +394,7 @@ mfMusicformatsErrorKind convertMsdlStream2brailleWithHandler (
 
     else {
 #ifdef MF_TRACE_IS_ENABLED
-      if (gEarlyOptions.getEarlyTraceOah ()) {
+      if (gEarlyOptions.getTraceEarlyOptions ()) {
         err <<
           "convertMsdlStream2brailleWithHandler() output goes to file \"" <<
           outputFileName <<
@@ -504,7 +504,7 @@ mfMusicformatsErrorKind convertMsdlStream2brailleWithOptionsAndArguments (
   // print the options and arguments
   // ------------------------------------------------------
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -525,7 +525,7 @@ mfMusicformatsErrorKind convertMsdlStream2brailleWithOptionsAndArguments (
     gEarlyOptions.getEarlyInsiderOption ();
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<

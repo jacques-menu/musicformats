@@ -268,16 +268,26 @@ void mfOutputIndenter::printMultiLineStringInATable (
   std::string        line;
 
   // print theString line by line
-  int counter = 0;
+  int lineCounter = 0;
 
   while (getline (inputStream, line)) {
-    ++ counter;
-    if (counter > 1) {
+    ++ lineCounter;
+    if (lineCounter > 1) {
+      // this is a multiline string's line after the first one,
+      // write spaces before it up to columnStart
       os << std::left <<
-        std::setw (columnWidth) <<
         mfReplicateChar (' ', columnStart);
     }
-    os << line;
+
+  int
+    twoBytesWideCharactersInLine =
+      countTwoBytesWideCharactersInString (line); // JMI v0.9.67
+//   os << "countTwoBytesWideCharactersInString: " << countTwoBytesWideCharactersInString << std::endl;
+
+    os << std::left <<
+//       std::setw (columnWidth - twoBytesWideCharactersInLine) <<
+      std::setw (columnWidth) <<
+      line;
   } // while
 }
 
@@ -419,7 +429,7 @@ EXP mfIndentedStringStream& operator << (
 }
 
 EXP mfIndentedStringStream& operator << (
-  mfIndentedStringStream& iss, const Rational& elt)
+  mfIndentedStringStream& iss, const mfRational& elt)
 {
   iss.getStringstream () <<
     gIndenter.indentMultiLineStringWithCurrentOffset (

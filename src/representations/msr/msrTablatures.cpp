@@ -72,7 +72,7 @@ msrFrameNote::msrFrameNote (
   fFrameNoteBarreTypeKind = frameNoteBarreTypeKind;
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceHarmonies ()) {
+  if (gTraceOahGroup->getTraceHarmonies ()) {
     std::stringstream ss;
 
     ss <<
@@ -285,7 +285,7 @@ msrFrame::msrFrame (
   fFrameContainsFingerings = false;
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceHarmonies ()) {
+  if (gTraceOahGroup->getTraceHarmonies ()) {
     std::stringstream ss;
 
     ss <<

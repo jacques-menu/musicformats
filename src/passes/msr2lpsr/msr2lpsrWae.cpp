@@ -36,12 +36,12 @@ void msr2lpsrUnsupported (
     (
       gEarlyOptions.getEarlyQuietOption ()
         &&
-      gGlobalWaeOahGroup->getDontShowErrors ()
+      gWaeOahGroup->getDontShowErrors ()
     )
   ) {
     gIndenter.resetToZero ();
 
-    if (gGlobalOahOahGroup->getDisplaySourceCodePositions ()) {
+    if (gOahOahGroup->getDisplaySourceCodePositions ()) {
       gLog <<
         mfBaseName (sourceCodeFileName) << ":" << sourceCodeLineNumber <<
         ' ';

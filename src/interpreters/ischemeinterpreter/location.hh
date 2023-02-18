@@ -17,17 +17,17 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-// As a special std::exception, you may create a larger work that contains
+// As a special exception, you may create a larger work that contains
 // part or all of the Bison parser skeleton and distribute that work
 // under terms of your choice, so long as that work isn't itself a
 // parser generator using the skeleton or a modified version thereof
 // as a parser skeleton.  Alternatively, if you modify or redistribute
 // the parser skeleton itself, you may (at your option) remove this
-// special std::exception, which will cause the skeleton and the resulting
+// special exception, which will cause the skeleton and the resulting
 // Bison output files to be licensed under the GNU General Public
-// License without this special std::exception.
+// License without this special exception.
 
-// This special std::exception was added by the Free Software Foundation in
+// This special exception was added by the Free Software Foundation in
 // version 2.2 of Bison.
 
 /**
@@ -57,7 +57,7 @@ namespace iscm {
 #line 58 "location.hh"
 
   /// A point in a source file.
-  class   position
+  class position
   {
   public:
     /// Type for file name.
@@ -154,7 +154,7 @@ namespace iscm {
    */
   template <typename YYChar>
   std::basic_ostream<YYChar>&
-  operator << (std::basic_ostream<YYChar>& ostr, const position& pos)
+  operator<< (std::basic_ostream<YYChar>& ostr, const position& pos)
   {
     if (pos.filename)
       ostr << *pos.filename << ':';
@@ -162,7 +162,7 @@ namespace iscm {
   }
 
   /// Two points in a source file.
-  class   location
+  class location
   {
   public:
     /// Type for file name.
@@ -282,7 +282,7 @@ namespace iscm {
    */
   template <typename YYChar>
   std::basic_ostream<YYChar>&
-  operator << (std::basic_ostream<YYChar>& ostr, const location& loc)
+  operator<< (std::basic_ostream<YYChar>& ostr, const location& loc)
   {
     location::counter_type end_col
       = 0 < loc.end.column ? loc.end.column - 1 : 0;

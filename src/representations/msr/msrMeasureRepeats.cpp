@@ -75,7 +75,7 @@ void msrMeasureRepeatElement::appendSegmentToMeasureRepeatElementsList ( // JMI 
   std::string       context)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceVoices ()) {
+  if (gTraceOahGroup->getTraceVoices ()) {
 		std::stringstream ss;
 
     ss <<
@@ -108,7 +108,7 @@ void msrMeasureRepeatElement::appendMeasureRepeatToMeasureRepeatElementsList (
   std::string          context)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceVoices ()) {
+  if (gTraceOahGroup->getTraceVoices ()) {
 		std::stringstream ss;
 
     ss <<
@@ -141,7 +141,7 @@ void msrMeasureRepeatElement::appendVoiceElementToMeasureRepeatElementsList (
   std::string       context)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceVoices ()) {
+  if (gTraceOahGroup->getTraceVoices ()) {
 		std::stringstream ss;
 
     ss <<
@@ -521,7 +521,7 @@ void msrMeasureRepeatPattern::setMeasureRepeatPatternSegment (
   const S_msrSegment& measureRepeatPatternSegment)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceMeasureRepeats ()) {
+  if (gTraceOahGroup->getTraceMeasureRepeats ()) {
 		std::stringstream ss;
 
     ss <<
@@ -766,7 +766,7 @@ void msrMeasureRepeatReplicas::setMeasureRepeatReplicasSegment (
   const S_msrSegment& measureRepeatReplicasSegment)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceMeasureRepeats ()) {
+  if (gTraceOahGroup->getTraceMeasureRepeats ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1033,7 +1033,7 @@ S_msrMeasureRepeat msrMeasureRepeat::createMeasureRepeatNewbornClone (
   const S_msrVoice& containingVoice)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceMeasureRepeats ()) {
+  if (gTraceOahGroup->getTraceMeasureRepeats ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1071,7 +1071,7 @@ void msrMeasureRepeat::setMeasureRepeatPattern (
   const S_msrMeasureRepeatPattern& measureRepeatPattern)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceMeasureRepeats ()) {
+  if (gTraceOahGroup->getTraceMeasureRepeats ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1108,7 +1108,7 @@ void msrMeasureRepeat::setMeasureRepeatReplicas (
   const S_msrMeasureRepeatReplicas& measureRepeatReplicas)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceMeasureRepeats ()) {
+  if (gTraceOahGroup->getTraceMeasureRepeats ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1302,7 +1302,7 @@ void msrMeasureRepeat::browseData (basevisitor* v)
     if (
       gGlobalMsrOahGroup->getTraceMsrVisitors ()
         ||
-      gGlobalTraceOahGroup->getTraceMeasureRepeats ()
+      gTraceOahGroup->getTraceMeasureRepeats ()
     ) {
       std::stringstream ss;
 
@@ -1451,7 +1451,7 @@ void msrMeasureRepeat::print (std::ostream& os) const
   ++gIndenter;
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceMeasureRepeats ()) {
+  if (gTraceOahGroup->getTraceMeasureRepeats ()) {
     // print the current measures repeat build phase
     const int fieldWidth = 36;
 

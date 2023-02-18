@@ -68,7 +68,7 @@ void msrWords::acceptIn (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (visitor<S_msrWords>*
     p =
@@ -87,7 +87,7 @@ void msrWords::acceptIn (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
   }
 }
@@ -205,7 +205,7 @@ void mxsr2msrTranslator::visitStart ( S_millimeters& elt )
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fCurrentMillimeters = (float)(*elt);
 }
@@ -225,7 +225,7 @@ void mxsr2msrTranslator::visitStart ( S_tenths& elt )
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fCurrentTenths = (float)(*elt);
 }
@@ -248,7 +248,7 @@ void mxsr2msrTranslator::visitEnd ( S_scaling& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // create a scaling
   S_msrScaling
@@ -259,7 +259,7 @@ void mxsr2msrTranslator::visitEnd ( S_scaling& elt)
         fCurrentTenths);
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceGeometry ()) {
+  if (gTraceOahGroup->getTraceGeometry ()) {
     gLog <<
       "There are " << fCurrentTenths <<
       " tenths for " <<  fCurrentMillimeters <<
@@ -269,7 +269,7 @@ void mxsr2msrTranslator::visitEnd ( S_scaling& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // set the MSR score's scaling
   fMsrScore->
@@ -353,23 +353,23 @@ void lpsr2lilypondTranslator::visitEnd (S_msrNote& elt)
             if (inhibitMultipleFullBarRestsBrowsing) {
 #ifdef MF_TRACE_IS_ENABLED
               if (
-                gGlobalTraceOahGroup->getTraceNotes ()
+                gTraceOahGroup->getTraceNotes ()
                   ||
-                gGlobalTraceOahGroup->getTraceMultipleFullBarRests ()
+                gTraceOahGroup->getTraceMultipleFullBarRests ()
               ) {
                 gLog <<
                   "% ==> end visiting multiple full-bar rests is ignored" <<
                   std::endl;
               }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
-              if (gGlobalTraceOahGroup->getTraceNotesDetails ()) {
+              if (gTraceOahGroup->getTraceNotesDetails ()) {
                 gLog <<
                   "% ==> returning from visitEnd (S_msrNote&)" <<
                   std::endl;
               }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
               noteIsToBeIgnored = true;
             }
@@ -430,9 +430,9 @@ void msrNote::browseData (basevisitor* v)
         if (
           gGlobalMsrOahGroup->getTraceMsrVisitors ()
             ||
-          gGlobalTraceOahGroup->getTraceNotes ()
+          gTraceOahGroup->getTraceNotes ()
             ||
-          gGlobalTraceOahGroup->getTraceGraceNotes ()
+          gTraceOahGroup->getTraceGraceNotes ()
         ) {
           std::stringstream ss;
 
@@ -444,7 +444,7 @@ void msrNote::browseData (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
       }
       else {
         // browse the grace notes group before
@@ -494,7 +494,7 @@ void msrStaff::browseData (basevisitor* v)
 
       if (ignoreVoice) {
 #ifdef MF_TRACE_IS_ENABLED // JMI
-        if (gGlobalTraceOahGroup->getTraceVoices ()) {
+        if (gTraceOahGroup->getTraceVoices ()) {
           std::stringstream ss;
 
           ss <<
@@ -507,7 +507,7 @@ void msrStaff::browseData (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif
+#endif // MF_TRACE_IS_ENABLED
       }
 
       else {

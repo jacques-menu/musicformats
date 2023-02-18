@@ -1,10 +1,10 @@
 /*
   MusicFormats Library
-  Copyright (C) Jacques Menu 2016-2023
+  Copyright (C) Jacques Menu 2016-2022
 
   This Source Code Form is subject to the terms of the Mozilla Public
   License, v. 2.0. If a copy of the MPL was not distributed with this
-  file, you can obtain one at http://mozilla.org/MPL/2.0/.
+  file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
   https://github.com/jacques-menu/musicformats
 */
@@ -12,7 +12,7 @@
 #ifndef ___mfslInterpreterOah___
 #define ___mfslInterpreterOah___
 
-#include "mfStaticSettings.h"
+#include "msr.h"
 
 #include "msrGenerationBasicTypes.h"
 
@@ -91,11 +91,11 @@ class EXP mfslInterpreterOahGroup : public oahGroup
                               { return fTraceParsing; }
 
     // display
-    void                  setDisplayToolAndInput ()
-                              { fDisplayToolAndInput = true; }
+    void                  setDisplayServiceAndInput ()
+                              { fDisplayServiceAndInput = true; }
 
-    Bool                  getDisplayToolAndInput () const
-                              { return fDisplayToolAndInput; }
+    Bool                  getDisplayServiceAndInput () const
+                              { return fDisplayServiceAndInput; }
 
     void                  setDisplayOptions ()
                               { fDisplayOptions = true; }
@@ -142,7 +142,8 @@ class EXP mfslInterpreterOahGroup : public oahGroup
     Bool                  getNoLaunch () const
                               { return fNoLaunch; }
 
-    const std::set<std::string>&    getInputSourcesSet () const
+    const std::set<std::string>&
+    									    getInputSourcesSet () const
                               { return fInputSourcesSet; }
 
     S_oahStringSetElementAtom
@@ -168,7 +169,7 @@ class EXP mfslInterpreterOahGroup : public oahGroup
     // ------------------------------------------------------
 
 #ifdef MF_TRACE_IS_ENABLED
-// JMI    void                  initializemfslInterpreterTraceOah ();
+// JMI    void                  initializemfslInterpretertracingOah ();
 #endif // MF_TRACE_IS_ENABLED
 
     void                  initializeMfslOptions ();
@@ -190,7 +191,7 @@ class EXP mfslInterpreterOahGroup : public oahGroup
 
     void                  printMfslInterpreterOahHelp ();
 
-    void                  displayMfslInterpreterOahValues (
+    void                  printMfslInterpreterOahValues (
                             int fieldWidth);
 
   private:
@@ -201,8 +202,8 @@ class EXP mfslInterpreterOahGroup : public oahGroup
     // user options
     Bool                  fDisplayTokens;
 
-    Bool                  fDisplayToolAndInput;
-    S_oahBooleanAtom      fDisplayToolAndInputAtom;
+    Bool                  fDisplayServiceAndInput;
+    S_oahBooleanAtom      fDisplayServiceAndInputAtom;
 
     Bool                  fDisplayOptions;
 
@@ -237,7 +238,7 @@ class EXP mfslInterpreterOahGroup : public oahGroup
                           fSelectChoiceToLabelsMultiMapAtom;
 };
 typedef SMARTP<mfslInterpreterOahGroup> S_mfslInterpreterOahGroup;
-EXP std::ostream& operator << (std::ostream& os, const S_mfslInterpreterOahGroup& elt);
+EXP std::ostream& operator<< (std::ostream& os, const S_mfslInterpreterOahGroup& elt);
 
 EXP extern S_mfslInterpreterOahGroup gGlobalMfslInterpreterOahGroup;
 

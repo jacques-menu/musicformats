@@ -27,12 +27,26 @@ using namespace MusicXML2;
 #define debug	0
 
 //_______________________________________________________________________________
+/*
+C++20 change from predicate to ourpredicate:
+
+/Users/jacquesmenu/musicformats-git-dev/libmusicxml/samples/xmliter.cpp:43:2: error: reference to 'predicate' is ambiguous
+        predicate p(type);
+        ^
+/Users/jacquesmenu/musicformats-git-dev/libmusicxml/samples/xmliter.cpp:30:7: note: candidate found by name lookup is 'predicate'
 class predicate {
+      ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk/usr/include/c++/v1/concepts:429:9: note: candidate found by name lookup is 'std::predicate'
+concept predicate =
+        ^
+*/
+
+class ourpredicate {
 	public:
 		int fType;
-			 predicate(int type) : fType(type) {}
-	virtual ~predicate() {}
-	virtual bool operator () (const Sxmlelement elt) const { 
+			 ourpredicate(int type) : fType(type) {}
+	virtual ~ourpredicate() {}
+	virtual bool operator () (const Sxmlelement elt) const {
 		return elt->getType() == fType;
 	}
 };
@@ -40,8 +54,8 @@ class predicate {
 //_______________________________________________________________________________
 static void count(Sxmlelement elt, int type)
 {
-	predicate p(type);
-	cerr << "  count of type " << type << " elements: " 
+	ourpredicate p(type);
+	cerr << "  count of type " << type << " elements: "
 		 << count_if(elt->begin(), elt->end(), p) << endl;
 }
 
@@ -55,7 +69,7 @@ static void test1(Sxmlelement elt)
 	while (iter != elt->end()) {
 		Sxmlelement xml = *iter;
 		if (xml)
-			cerr << "  element type " << xml->getType() 
+			cerr << "  element type " << xml->getType()
 				 << " - " << xml->getName()
 				 << " - size: " << xml->size() << endl;
 		else
@@ -77,7 +91,7 @@ static void test2(Sxmlelement elt)
 		next++;
 		assert (xml);
 		if (xml->getType() == k_software) {
-				next = elt->erase(iter);			
+				next = elt->erase(iter);
 		}
 		else if (xml->getType() == k_measure) {
 			if (!(measure & 1)) {
@@ -137,7 +151,7 @@ int main(int argc, char *argv[]) {
 				count(st, k_note);
 
 				file->print (cout);
-				cout << endl;		
+				cout << endl;
 			}
 		}
 	}

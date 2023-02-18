@@ -370,6 +370,9 @@ void mfStringSetMinusEquals (
 std::string mfStringSetAsString (
   const std::set<std::string>& stringSet);
 
+std::string mfStringSetAsBracketedString (
+  const std::set<std::string>& stringSet);
+
 void mfDisplayStringSet (
   const std::string&           title,
   const std::set<std::string>& stringSet,

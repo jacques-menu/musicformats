@@ -77,7 +77,7 @@ msrBarNumberCheck::msrBarNumberCheck (
   fNextBarPuristNumber   = nextBarPuristNumber;
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceMeasuresNumbers ()) {
+  if (gTraceOahGroup->getTraceMeasuresNumbers ()) {
 		std::stringstream ss;
 
     ss <<
@@ -111,7 +111,7 @@ void msrBarNumberCheck::setBarNumberCheckUpLinkToMeasure (
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceWholeNotes ()) {
+  if (gTraceOahGroup->getTraceWholeNotes ()) {
     ++gIndenter;
 
     gLog <<

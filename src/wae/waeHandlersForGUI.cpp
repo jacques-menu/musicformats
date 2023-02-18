@@ -95,13 +95,13 @@ void waeHandlerForGUI::waeErrorWithoutException (
   const std::string& message)
 {
   if (! gEarlyOptions.getEarlyQuietOption ()) {
-    if (gGlobalOahOahGroup->getDisplaySourceCodePositions ()) {
+    if (gOahOahGroup->getDisplaySourceCodePositions ()) {
       gLog <<
         mfBaseName (sourceCodeFileName) << ":" << sourceCodeLineNumber <<
         ' ';
     }
 
-    if (! gGlobalWaeOahGroup->getDontShowErrors ()) {
+    if (! gWaeOahGroup->getDontShowErrors ()) {
       int saveIndent = gIndenter.getIndentation ();
 
       gIndenter.resetToZero ();
@@ -125,13 +125,13 @@ void waeHandlerForGUI::waeErrorWithoutException (
   const std::string& message)
 {
   if (! gEarlyOptions.getEarlyQuietOption ()) {
-    if (gGlobalOahOahGroup->getDisplaySourceCodePositions ()) {
+    if (gOahOahGroup->getDisplaySourceCodePositions ()) {
       gLog <<
         mfBaseName (sourceCodeFileName) << ":" << sourceCodeLineNumber <<
         ' ';
     }
 
-    if (! gGlobalWaeOahGroup->getDontShowErrors ()) {
+    if (! gWaeOahGroup->getDontShowErrors ()) {
       int saveIndent = gIndenter.getIndentation ();
 
       gIndenter.resetToZero ();

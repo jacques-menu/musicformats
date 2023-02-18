@@ -16,6 +16,7 @@
 
 #include "msdl2guidoInsiderHandler.h"
 
+
 namespace MusicFormats
 {
 

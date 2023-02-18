@@ -17,7 +17,7 @@
 
 #include "mfServices.h"
 
-#include "msrDurations.h"
+#include "msrNotesDurations.h"
 
 #include "oahEarlyOptions.h"
 
@@ -31,53 +31,53 @@ namespace MusicFormats
 
 // durations
 //______________________________________________________________________________
-msrDurationKind msrDurationKindFromMusicXMLString (
-  int           inputLineNumber,
+msrNotesDurationKind msrNotesDurationKindFromMusicXMLString (
+  int                inputLineNumber,
   const std::string& durationString)
 {
-  msrDurationKind result = msrDurationKind::kDuration_UNKNOWN;
+  msrNotesDurationKind result = msrNotesDurationKind::kNotesDuration_UNKNOWN;
 
   if      (durationString == "maxima") {
-    result = msrDurationKind::kDurationMaxima;
+    result = msrNotesDurationKind::kNotesDurationMaxima;
   }
   else if (durationString == "long") {
-    result = msrDurationKind::kDurationLonga;
+    result = msrNotesDurationKind::kNotesDurationLonga;
   }
   else if (durationString == "breve") {
-    result = msrDurationKind::kDurationBreve;
+    result = msrNotesDurationKind::kNotesDurationBreve;
   }
   else if (durationString == "whole") {
-    result = msrDurationKind::kDurationWhole;
+    result = msrNotesDurationKind::kNotesDurationWhole;
   }
   else if (durationString == "half") {
-    result = msrDurationKind::kDurationHalf;
+    result = msrNotesDurationKind::kNotesDurationHalf;
   }
   else if (durationString == "quarter") {
-    result = msrDurationKind::kDurationQuarter;
+    result = msrNotesDurationKind::kNotesDurationQuarter;
   }
   else if (durationString == "eighth") {
-    result = msrDurationKind::kDurationEighth;
+    result = msrNotesDurationKind::kNotesDurationEighth;
   }
   else if (durationString == "16th") {
-    result = msrDurationKind::kDuration16th;
+    result = msrNotesDurationKind::kNotesDuration16th;
   }
   else if (durationString == "32nd") {
-    result = msrDurationKind::kDuration32nd;
+    result = msrNotesDurationKind::kNotesDuration32nd;
   }
   else if (durationString == "64th") {
-    result = msrDurationKind::kDuration64th;
+    result = msrNotesDurationKind::kNotesDuration64th;
   }
   else if (durationString == "128th") {
-    result = msrDurationKind::kDuration128th;
+    result = msrNotesDurationKind::kNotesDuration128th;
   }
   else if (durationString == "256th") {
-    result = msrDurationKind::kDuration256th;
+    result = msrNotesDurationKind::kNotesDuration256th;
   }
   else if (durationString == "512th") {
-    result = msrDurationKind::kDuration512th;
+    result = msrNotesDurationKind::kNotesDuration512th;
   }
   else if (durationString == "1024th") {
-    result = msrDurationKind::kDuration1024th;
+    result = msrNotesDurationKind::kNotesDuration1024th;
   }
   else {
     std::stringstream ss;
@@ -96,45 +96,45 @@ msrDurationKind msrDurationKindFromMusicXMLString (
   return result;
 }
 
-EXP msrDurationKind msrDurationKindFromInteger (
+EXP msrNotesDurationKind msrNotesDurationKindFromInteger (
   int inputLineNumber,
   int durationInteger)
 {
-  msrDurationKind result = msrDurationKind::kDuration_UNKNOWN;
+  msrNotesDurationKind result = msrNotesDurationKind::kNotesDuration_UNKNOWN;
 
   switch (durationInteger) {
     case 1:
-      result = msrDurationKind::kDurationWhole;
+      result = msrNotesDurationKind::kNotesDurationWhole;
       break;
     case 2:
-      result = msrDurationKind::kDurationHalf;
+      result = msrNotesDurationKind::kNotesDurationHalf;
       break;
     case 4:
-      result = msrDurationKind::kDurationQuarter;
+      result = msrNotesDurationKind::kNotesDurationQuarter;
       break;
     case 8:
-      result = msrDurationKind::kDurationEighth;
+      result = msrNotesDurationKind::kNotesDurationEighth;
       break;
     case 16:
-      result = msrDurationKind::kDuration16th;
+      result = msrNotesDurationKind::kNotesDuration16th;
       break;
     case 32:
-      result = msrDurationKind::kDuration32nd;
+      result = msrNotesDurationKind::kNotesDuration32nd;
       break;
     case 64:
-      result = msrDurationKind::kDuration64th;
+      result = msrNotesDurationKind::kNotesDuration64th;
       break;
     case 128:
-      result = msrDurationKind::kDuration128th;
+      result = msrNotesDurationKind::kNotesDuration128th;
       break;
     case 256:
-      result = msrDurationKind::kDuration256th;
+      result = msrNotesDurationKind::kNotesDuration256th;
       break;
     case 512:
-      result = msrDurationKind::kDuration512th;
+      result = msrNotesDurationKind::kNotesDuration512th;
       break;
     case 1024:
-      result = msrDurationKind::kDuration1024th;
+      result = msrNotesDurationKind::kNotesDuration1024th;
       break;
     default:
       ;
@@ -143,53 +143,53 @@ EXP msrDurationKind msrDurationKindFromInteger (
   return result;
 }
 
-msrDurationKind msrDurationKindFromString (
-  int           inputLineNumber,
+msrNotesDurationKind msrNotesDurationKindFromString (
+  int                inputLineNumber,
   const std::string& durationString)
 {
-  msrDurationKind result = msrDurationKind::kDuration_UNKNOWN;
+  msrNotesDurationKind result = msrNotesDurationKind::kNotesDuration_UNKNOWN;
 
   if      (durationString == "maxima") {
-    result = msrDurationKind::kDurationMaxima;
+    result = msrNotesDurationKind::kNotesDurationMaxima;
   }
   else if (durationString == "long") {
-    result = msrDurationKind::kDurationLonga;
+    result = msrNotesDurationKind::kNotesDurationLonga;
   }
   else if (durationString == "breve") {
-    result = msrDurationKind::kDurationBreve;
+    result = msrNotesDurationKind::kNotesDurationBreve;
   }
   else if (durationString == "1") {
-    result = msrDurationKind::kDurationWhole;
+    result = msrNotesDurationKind::kNotesDurationWhole;
   }
   else if (durationString == "2") {
-    result = msrDurationKind::kDurationHalf;
+    result = msrNotesDurationKind::kNotesDurationHalf;
   }
   else if (durationString == "4") {
-    result = msrDurationKind::kDurationQuarter;
+    result = msrNotesDurationKind::kNotesDurationQuarter;
   }
   else if (durationString == "8") {
-    result = msrDurationKind::kDurationEighth;
+    result = msrNotesDurationKind::kNotesDurationEighth;
   }
   else if (durationString == "16") {
-    result = msrDurationKind::kDuration16th;
+    result = msrNotesDurationKind::kNotesDuration16th;
   }
   else if (durationString == "32") {
-    result = msrDurationKind::kDuration32nd;
+    result = msrNotesDurationKind::kNotesDuration32nd;
   }
   else if (durationString == "64") {
-    result = msrDurationKind::kDuration64th;
+    result = msrNotesDurationKind::kNotesDuration64th;
   }
   else if (durationString == "128") {
-    result = msrDurationKind::kDuration128th;
+    result = msrNotesDurationKind::kNotesDuration128th;
   }
   else if (durationString == "256") {
-    result = msrDurationKind::kDuration256th;
+    result = msrNotesDurationKind::kNotesDuration256th;
   }
   else if (durationString == "512") {
-    result = msrDurationKind::kDuration512th;
+    result = msrNotesDurationKind::kNotesDuration512th;
   }
   else if (durationString == "1024") {
-    result = msrDurationKind::kDuration1024th;
+    result = msrNotesDurationKind::kNotesDuration1024th;
   }
   else {
     std::stringstream ss;
@@ -208,23 +208,23 @@ msrDurationKind msrDurationKindFromString (
   return result;
 }
 
-EXP Rational rationalFromDurationKindAndDotsNumber (
-  msrDurationKind durationKind,
-  int             dotsNumber)
+EXP msrWholeNotes wholeNotesFromNotesDurationKindAndDotsNumber (
+  msrNotesDurationKind notesNotesDurationKind,
+  int                  dotsNumber)
 {
   // convert duration into whole notes
-  Rational
+  msrWholeNotes
     result =
-      msrDurationKindAsWholeNotes (
-        durationKind);
+      msrNotesDurationKindAsWholeNotes (
+        notesNotesDurationKind);
 
 #ifdef MF_TRACE_IS_ENABLED
   if (false) { // JMI v0.9.67
 		std::stringstream ss;
 
     ss <<
-      "=== rationalFromDurationKindAndDotsNumber()" <<
-      ", (int) durationKind: " << (int) durationKind <<
+      "=== wholeNotesFromNotesDurationKindAndDotsNumber()" <<
+      ", (int) notesNotesDurationKind: " << (int) notesNotesDurationKind <<
       ", result: " << result <<
       std::endl;
 
@@ -236,22 +236,22 @@ EXP Rational rationalFromDurationKindAndDotsNumber (
 
   // take dots into account if any
   if (dotsNumber > 0) {
-    Rational
-      increment = result * Rational (1,2);
+    msrWholeNotes
+      increment = result * mfRational (1,2);
 
     int dots = dotsNumber;
 
     while (dots > 0) {
       result += increment;
 
-      increment *= Rational (1,2);
+      increment *= mfRational (1,2);
 
 #ifdef MF_TRACE_IS_ENABLED
   if (false) { // JMI v0.9.67
 		std::stringstream ss;
 
     ss <<
-      "=== rationalFromDurationKindAndDotsNumber()" <<
+      "=== wholeNotesFromNotesDurationKindAndDotsNumber()" <<
       ", dots: " << dots <<
       ", result: " << result <<
       ", increment: " << increment <<
@@ -270,100 +270,100 @@ EXP Rational rationalFromDurationKindAndDotsNumber (
   return result;
 }
 
-Rational msrDurationKindAsWholeNotes (msrDurationKind durationKind)
+msrWholeNotes msrNotesDurationKindAsWholeNotes (msrNotesDurationKind notesNotesDurationKind)
 {
-  Rational result;
+  msrWholeNotes result;
 
-  switch (durationKind) {
-    case msrDurationKind::kDuration_UNKNOWN:
-      result = Rational (0, 1);
+  switch (notesNotesDurationKind) {
+    case msrNotesDurationKind::kNotesDuration_UNKNOWN:
+      result = msrWholeNotes (0, 1);
       break;
 
-    case msrDurationKind::kDuration1024th:
-      result = Rational (1, 1024);
+    case msrNotesDurationKind::kNotesDuration1024th:
+      result = msrWholeNotes (1, 1024);
       break;
-    case msrDurationKind::kDuration512th:
-      result = Rational (1, 512);
+    case msrNotesDurationKind::kNotesDuration512th:
+      result = msrWholeNotes (1, 512);
       break;
-    case msrDurationKind::kDuration256th:
-      result = Rational (1, 256);
+    case msrNotesDurationKind::kNotesDuration256th:
+      result = msrWholeNotes (1, 256);
       break;
-    case msrDurationKind::kDuration128th:
-      result = Rational (1, 128);
+    case msrNotesDurationKind::kNotesDuration128th:
+      result = msrWholeNotes (1, 128);
       break;
-    case msrDurationKind::kDuration64th:
-      result = Rational (1, 64);
+    case msrNotesDurationKind::kNotesDuration64th:
+      result = msrWholeNotes (1, 64);
       break;
-    case msrDurationKind::kDuration32nd:
-      result = Rational (1, 32);
+    case msrNotesDurationKind::kNotesDuration32nd:
+      result = msrWholeNotes (1, 32);
       break;
-    case msrDurationKind::kDuration16th:
-      result = Rational (1, 16);
+    case msrNotesDurationKind::kNotesDuration16th:
+      result = msrWholeNotes (1, 16);
       break;
-    case msrDurationKind::kDurationEighth:
-      result = Rational (1, 8);
+    case msrNotesDurationKind::kNotesDurationEighth:
+      result = msrWholeNotes (1, 8);
       break;
-    case msrDurationKind::kDurationQuarter:
-      result = Rational (1, 4);
+    case msrNotesDurationKind::kNotesDurationQuarter:
+      result = msrWholeNotes (1, 4);
       break;
-    case msrDurationKind::kDurationHalf:
-      result = Rational (1, 2);
+    case msrNotesDurationKind::kNotesDurationHalf:
+      result = msrWholeNotes (1, 2);
       break;
-    case msrDurationKind::kDurationWhole:
-      result = Rational (1, 1);
+    case msrNotesDurationKind::kNotesDurationWhole:
+      result = msrWholeNotes (1, 1);
       break;
-    case msrDurationKind::kDurationBreve:
-      result = Rational (2, 1);
+    case msrNotesDurationKind::kNotesDurationBreve:
+      result = msrWholeNotes (2, 1);
       break;
-    case msrDurationKind::kDurationLonga:
-      result = Rational (4, 1);
+    case msrNotesDurationKind::kNotesDurationLonga:
+      result = msrWholeNotes (4, 1);
       break;
-    case msrDurationKind::kDurationMaxima:
-      result = Rational (8, 1);
+    case msrNotesDurationKind::kNotesDurationMaxima:
+      result = msrWholeNotes (8, 1);
       break;
   } // switch
 
   return result;
 }
 
-msrDurationKind wholeNotesAsDurationKind (Rational wholeNotes)
+msrNotesDurationKind wholeNotesAsNotesDurationKind (msrWholeNotes wholeNotes)
 {
-  msrDurationKind result = msrDurationKind::kDuration_UNKNOWN;
+  msrNotesDurationKind result = msrNotesDurationKind::kNotesDuration_UNKNOWN;
 
   if (wholeNotes.getNumerator () == 1) {
     switch (wholeNotes.getDenominator ()) {
       case 1:
-        result = msrDurationKind::kDurationWhole;
+        result = msrNotesDurationKind::kNotesDurationWhole;
         break;
       case 2:
-        result = msrDurationKind::kDurationHalf;
+        result = msrNotesDurationKind::kNotesDurationHalf;
         break;
       case 4:
-        result = msrDurationKind::kDurationQuarter;
+        result = msrNotesDurationKind::kNotesDurationQuarter;
         break;
       case 8:
-        result = msrDurationKind::kDurationEighth;
+        result = msrNotesDurationKind::kNotesDurationEighth;
         break;
       case 16:
-        result = msrDurationKind::kDuration16th;
+        result = msrNotesDurationKind::kNotesDuration16th;
         break;
       case 32:
-        result = msrDurationKind::kDuration32nd;
+        result = msrNotesDurationKind::kNotesDuration32nd;
         break;
       case 64:
-        result = msrDurationKind::kDuration64th;
+        result = msrNotesDurationKind::kNotesDuration64th;
         break;
       case 128:
-        result = msrDurationKind::kDuration128th;
+        result = msrNotesDurationKind::kNotesDuration128th;
         break;
       case 256:
-        result = msrDurationKind::kDuration256th;
+        result = msrNotesDurationKind::kNotesDuration256th;
         break;
       case 512:
-        result = msrDurationKind::kDuration512th;
+        result = msrNotesDurationKind::kNotesDuration512th;
         break;
       case 1024:
-        result = msrDurationKind::kDuration1024th;
+        result = msrNotesDurationKind::kNotesDuration1024th;
         break;
       default:
         ;
@@ -373,13 +373,13 @@ msrDurationKind wholeNotesAsDurationKind (Rational wholeNotes)
   else if (wholeNotes.getDenominator () == 1) {
     switch (wholeNotes.getNumerator ()) {
       case 2:
-        result = msrDurationKind::kDurationBreve;
+        result = msrNotesDurationKind::kNotesDurationBreve;
         break;
       case 4:
-        result = msrDurationKind::kDurationLonga;
+        result = msrNotesDurationKind::kNotesDurationLonga;
         break;
       case 8:
-        result = msrDurationKind::kDurationMaxima;
+        result = msrNotesDurationKind::kNotesDurationMaxima;
         break;
       default:
         ;
@@ -389,55 +389,55 @@ msrDurationKind wholeNotesAsDurationKind (Rational wholeNotes)
   return result;
 }
 
-std::string msrDurationKindAsMusicXMLType (msrDurationKind durationKind)
+std::string msrNotesDurationKindAsMusicXMLType (msrNotesDurationKind notesNotesDurationKind)
 {
   std::string result;
 
-  switch (durationKind) {
-    case msrDurationKind::kDuration_UNKNOWN:
-      result = "noDuration";
+  switch (notesNotesDurationKind) {
+    case msrNotesDurationKind::kNotesDuration_UNKNOWN:
+      result = "noNotesDuration";
       break;
 
-    case msrDurationKind::kDuration1024th:
+    case msrNotesDurationKind::kNotesDuration1024th:
       result = "1024th";
       break;
-    case msrDurationKind::kDuration512th:
+    case msrNotesDurationKind::kNotesDuration512th:
       result = "512th";
       break;
-    case msrDurationKind::kDuration256th:
+    case msrNotesDurationKind::kNotesDuration256th:
       result = "256th";
       break;
-    case msrDurationKind::kDuration128th:
+    case msrNotesDurationKind::kNotesDuration128th:
       result = "128th";
       break;
-    case msrDurationKind::kDuration64th:
+    case msrNotesDurationKind::kNotesDuration64th:
       result = "64th";
       break;
-    case msrDurationKind::kDuration32nd:
+    case msrNotesDurationKind::kNotesDuration32nd:
       result = "32nd";
       break;
-    case msrDurationKind::kDuration16th:
+    case msrNotesDurationKind::kNotesDuration16th:
       result = "16th";
       break;
-    case msrDurationKind::kDurationEighth:
+    case msrNotesDurationKind::kNotesDurationEighth:
       result = "eighth";
       break;
-    case msrDurationKind::kDurationQuarter:
+    case msrNotesDurationKind::kNotesDurationQuarter:
       result = "quarter";
       break;
-    case msrDurationKind::kDurationHalf:
+    case msrNotesDurationKind::kNotesDurationHalf:
       result = "half";
       break;
-    case msrDurationKind::kDurationWhole:
+    case msrNotesDurationKind::kNotesDurationWhole:
       result = "whole";
       break;
-    case msrDurationKind::kDurationBreve:
+    case msrNotesDurationKind::kNotesDurationBreve:
       result = "breve";
       break;
-    case msrDurationKind::kDurationLonga:
+    case msrNotesDurationKind::kNotesDurationLonga:
       result = "long";
       break;
-    case msrDurationKind::kDurationMaxima:
+    case msrNotesDurationKind::kNotesDurationMaxima:
       result = "maxima";
       break;
   } // switch
@@ -445,111 +445,113 @@ std::string msrDurationKindAsMusicXMLType (msrDurationKind durationKind)
   return result;
 }
 
-std::string msrDurationKindAsString_INTERNAL (msrDurationKind durationKind) // JMI don't keep ???
+std::string msrNotesDurationKindAsString_INTERNAL (
+	msrNotesDurationKind notesNotesDurationKind) // JMI don't keep ??? v0.9.67
 {
   std::string result;
 
-  switch (durationKind) {
-    case msrDurationKind::kDuration_UNKNOWN:
-      result = "kDuration_UNKNOWN";
+  switch (notesNotesDurationKind) {
+    case msrNotesDurationKind::kNotesDuration_UNKNOWN:
+      result = "kNotesDuration_UNKNOWN";
       break;
 
-    case msrDurationKind::kDuration1024th:
-      result = "kDuration1024th";
+    case msrNotesDurationKind::kNotesDuration1024th:
+      result = "kNotesDuration1024th";
       break;
-    case msrDurationKind::kDuration512th:
-      result = "kDuration512th";
+    case msrNotesDurationKind::kNotesDuration512th:
+      result = "kNotesDuration512th";
       break;
-    case msrDurationKind::kDuration256th:
-      result = "kDuration256th";
+    case msrNotesDurationKind::kNotesDuration256th:
+      result = "kNotesDuration256th";
       break;
-    case msrDurationKind::kDuration128th:
-      result = "kDuration128th";
+    case msrNotesDurationKind::kNotesDuration128th:
+      result = "kNotesDuration128th";
       break;
-    case msrDurationKind::kDuration64th:
-      result = "kDuration64th";
+    case msrNotesDurationKind::kNotesDuration64th:
+      result = "kNotesDuration64th";
       break;
-    case msrDurationKind::kDuration32nd:
-      result = "kDuration32nd";
+    case msrNotesDurationKind::kNotesDuration32nd:
+      result = "kNotesDuration32nd";
       break;
-    case msrDurationKind::kDuration16th:
-      result = "kDuration16th";
+    case msrNotesDurationKind::kNotesDuration16th:
+      result = "kNotesDuration16th";
       break;
-    case msrDurationKind::kDurationEighth:
-      result = "kDurationEighth";
+    case msrNotesDurationKind::kNotesDurationEighth:
+      result = "kNotesDurationEighth";
       break;
-    case msrDurationKind::kDurationQuarter:
-      result = "kDurationQuarter";
+    case msrNotesDurationKind::kNotesDurationQuarter:
+      result = "kNotesDurationQuarter";
       break;
-    case msrDurationKind::kDurationHalf:
-      result = "kDurationHalf";
+    case msrNotesDurationKind::kNotesDurationHalf:
+      result = "kNotesDurationHalf";
       break;
-    case msrDurationKind::kDurationWhole:
-      result = "kDurationWhole";
+    case msrNotesDurationKind::kNotesDurationWhole:
+      result = "kNotesDurationWhole";
       break;
-    case msrDurationKind::kDurationBreve:
-      result = "kDurationBreve";
+    case msrNotesDurationKind::kNotesDurationBreve:
+      result = "kNotesDurationBreve";
       break;
-    case msrDurationKind::kDurationLonga:
-      result = "kDurationLonga";
+    case msrNotesDurationKind::kNotesDurationLonga:
+      result = "kNotesDurationLonga";
       break;
-    case msrDurationKind::kDurationMaxima:
-      result = "kDurationMaxima";
+    case msrNotesDurationKind::kNotesDurationMaxima:
+      result = "kNotesDurationMaxima";
       break;
   } // switch
 
   return result;
 }
 
-std::string msrDurationKindAsString (msrDurationKind durationKind)
+std::string msrNotesDurationKindAsString (
+	msrNotesDurationKind notesNotesDurationKind)
 {
   std::string result;
 
-  switch (durationKind) {
-    case msrDurationKind::kDuration_UNKNOWN:
-      result = "???NoDuration???";
+  switch (notesNotesDurationKind) {
+    case msrNotesDurationKind::kNotesDuration_UNKNOWN:
+      result = "???NoNotesDuration???";
       break;
 
-    case msrDurationKind::kDuration1024th:
+    case msrNotesDurationKind::kNotesDuration1024th:
       result = "1024";
       break;
-    case msrDurationKind::kDuration512th:
+    case msrNotesDurationKind::kNotesDuration512th:
       result = "512";
       break;
-    case msrDurationKind::kDuration256th:
+    case msrNotesDurationKind::kNotesDuration256th:
       result = "256";
       break;
-    case msrDurationKind::kDuration128th:
+    case msrNotesDurationKind::kNotesDuration128th:
       result = "128";
       break;
-    case msrDurationKind::kDuration64th:
+    case msrNotesDurationKind::kNotesDuration64th:
       result = "64";
       break;
-    case msrDurationKind::kDuration32nd:
+    case msrNotesDurationKind::kNotesDuration32nd:
       result = "32nd";
       break;
-    case msrDurationKind::kDuration16th:
+    case msrNotesDurationKind::kNotesDuration16th:
       result = "16";
       break;
-    case msrDurationKind::kDurationEighth:
+    case msrNotesDurationKind::kNotesDurationEighth:
       result = "8";
       break;
-    case msrDurationKind::kDurationQuarter:
+    case msrNotesDurationKind::kNotesDurationQuarter:
       result = "4";
       break;
-    case msrDurationKind::kDurationHalf:
+    case msrNotesDurationKind::kNotesDurationHalf:
       result = "2";
       break;
-    case msrDurationKind::kDurationWhole:
+    case msrNotesDurationKind::kNotesDurationWhole:
       result = "1";
       break;
-    case msrDurationKind::kDurationBreve:
+    case msrNotesDurationKind::kNotesDurationBreve:
       result = "Breve";
       break;
-    case msrDurationKind::kDurationLonga:
+    case msrNotesDurationKind::kNotesDurationLonga:
       result = "Longa";
       break;
-    case msrDurationKind::kDurationMaxima:
+    case msrNotesDurationKind::kNotesDurationMaxima:
       result = "Maxima";
       break;
   } // switch
@@ -557,39 +559,39 @@ std::string msrDurationKindAsString (msrDurationKind durationKind)
   return result;
 }
 
-std::ostream& operator << (std::ostream& os, const msrDurationKind& elt)
+std::ostream& operator << (std::ostream& os, const msrNotesDurationKind& elt)
 {
-  os << msrDurationKindAsString (elt);
+  os << msrNotesDurationKindAsString (elt);
   return os;
 }
 
 // duration
 //______________________________________________________________________________
-msrDuration::msrDuration ()
+msrNotesDuration::msrNotesDuration ()
 {
-  fDurationKind = msrDurationKind::kDuration_UNKNOWN;
+  fNotesDurationKind = msrNotesDurationKind::kNotesDuration_UNKNOWN;
   fDotsNumber   = 0;
 }
 
-msrDuration::msrDuration (
-  msrDurationKind durationKind,
-  int             dotsNumber)
+msrNotesDuration::msrNotesDuration (
+  msrNotesDurationKind notesNotesDurationKind,
+  int                  dotsNumber)
 {
-  fDurationKind = durationKind;
-  fDotsNumber   = dotsNumber;
+  fNotesDurationKind = notesNotesDurationKind;
+  fDotsNumber        = dotsNumber;
 }
 
-msrDuration::~msrDuration ()
+msrNotesDuration::~msrNotesDuration ()
 {}
 
-Rational msrDuration::dottedDurationAsWholeNotes (
+msrWholeNotes msrNotesDuration::dottedNotesDurationAsWholeNotes (
   int inputLineNumber) const
 {
   // convert duration into whole notes
-  Rational
+  msrWholeNotes
     result =
-      msrDurationKindAsWholeNotes (
-        fDurationKind);
+      msrNotesDurationKindAsWholeNotes (
+        fNotesDurationKind);
 
 #ifdef MF_TRACE_IS_ENABLED
   if (false) { // JMI
@@ -598,8 +600,8 @@ Rational msrDuration::dottedDurationAsWholeNotes (
 		std::stringstream ss;
 
     ss <<
-      "=== dottedDurationAsWholeNotes()" <<
-      ", (int) fDurationKind: " << (int) fDurationKind <<
+      "=== dottedNotesDurationAsWholeNotes()" <<
+      ", (int) fNotesDurationKind: " << (int) fNotesDurationKind <<
       ", result: " << result <<
       std::endl;
 
@@ -611,22 +613,22 @@ Rational msrDuration::dottedDurationAsWholeNotes (
 
   // take dots into account if any
   if (fDotsNumber > 0) {
-    Rational
-      increment = result * Rational (1,2);
+    msrWholeNotes
+      increment = result * mfRational (1,2);
 
     int dots = fDotsNumber;
 
     while (dots > 0) {
       result += increment;
 
-      increment *= Rational (1,2);
+      increment *= mfRational (1,2);
 
 #ifdef MF_TRACE_IS_ENABLED
   if (false) { // JMI v0.9.67
 		std::stringstream ss;
 
     ss <<
-      "=== dottedDurationAsWholeNotes()" <<
+      "=== dottedNotesDurationAsWholeNotes()" <<
       ", dots: " << dots <<
       ", result: " << result <<
       ", increment: " << increment <<
@@ -645,24 +647,24 @@ Rational msrDuration::dottedDurationAsWholeNotes (
   return result;
 }
 
-Rational msrDuration::dottedDurationAsWholeNotes_FOR_TEMPO (
-  // used in lpsrEnumTypes, dottedDurationAsLilypondStringWithoutBackSlash(),
+msrWholeNotes msrNotesDuration::dottedNotesDurationAsWholeNotes_FOR_TEMPO (
+  // used in lpsrEnumTypes, dottedNotesDurationAsLilypondStringWithoutBackSlash(),
   // called in lpsr2lilypondTranslator.cpp, visitStart (S_msrTempo& elt)
   // JMI BUGGY, NEVER TESTED TEMP???
   int inputLineNumber) const
 {
   // convert duration into whole notes
-  Rational
+  msrWholeNotes
     result =
-      msrDurationKindAsWholeNotes (
-        fDurationKind);
+      msrNotesDurationKindAsWholeNotes (
+        fNotesDurationKind);
 
 #ifdef MF_TRACE_IS_ENABLED
   if (false) { // JMI v0.9.67
 		std::stringstream ss;
 
     ss <<
-      "=== dottedDurationAsWholeNotes_FOR_TEMPO()" <<
+      "=== dottedNotesDurationAsWholeNotes_FOR_TEMPO()" <<
       ", result: " << result <<
       "\"" <<
       std::endl;
@@ -679,14 +681,14 @@ Rational msrDuration::dottedDurationAsWholeNotes_FOR_TEMPO (
 
     while (dots > 0) {
       result *=
-        Rational (3, 2);
+        mfRational (3, 2);
 
 #ifdef MF_TRACE_IS_ENABLED
   if (false) { // JMI v0.9.67
 		std::stringstream ss;
 
     ss <<
-      "=== dottedDurationAsWholeNotes_FOR_TEMPO()" <<
+      "=== dottedNotesDurationAsWholeNotes_FOR_TEMPO()" <<
       ", dots: " << dots <<
       ", result: " << result <<
       "\"" <<
@@ -705,12 +707,12 @@ Rational msrDuration::dottedDurationAsWholeNotes_FOR_TEMPO (
   return result;
 }
 
-std::string msrDuration::asString () const
+std::string msrNotesDuration::asString () const
 {
   std::stringstream ss;
 
   ss <<
-     msrDurationKindAsString (fDurationKind);
+     msrNotesDurationKindAsString (fNotesDurationKind);
 
   for (int i = 1; i <= fDotsNumber; ++i) {
     ss << ".";
@@ -719,28 +721,28 @@ std::string msrDuration::asString () const
   return ss.str ();
 }
 
-void msrDuration::print (std::ostream& os) const
+void msrNotesDuration::print (std::ostream& os) const
 {
   const int fieldWidth = 11;
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "durationKind" << ": " <<
-    msrDurationKindAsString (fDurationKind) <<
+    "notesNotesDurationKind" << ": " <<
+    msrNotesDurationKindAsString (fNotesDurationKind) <<
     std::endl <<
     std::setw (fieldWidth) <<
     "dotsNumber" << ": " << fDotsNumber <<
     std::endl;
 };
 
-std::ostream& operator << (std::ostream& os, const msrDuration& elt)
+std::ostream& operator << (std::ostream& os, const msrNotesDuration& elt)
 {
   os << elt.asString ();
   return os;
 }
 
 //_______________________________________________________________________________
-int msrDurationBinaryLogarithm (int duration)
+int msrNotesDurationBinaryLogarithm (int duration)
 {
   int result = INT_MIN;
 
@@ -837,31 +839,31 @@ int msrNumberOfDots (int n)
 
 // dotted durations
 //______________________________________________________________________________
-msrDottedDuration::msrDottedDuration ()
+msrDottedNotesDuration::msrDottedNotesDuration ()
 {
-  fDurationKind = msrDurationKind::kDuration_UNKNOWN;
+  fNotesDurationKind = msrNotesDurationKind::kNotesDuration_UNKNOWN;
   fDotsNumber   = 0;
 }
 
-msrDottedDuration::msrDottedDuration (
-  msrDurationKind durationKind,
-  int             dotsNumber)
+msrDottedNotesDuration::msrDottedNotesDuration (
+  msrNotesDurationKind notesNotesDurationKind,
+  int                  dotsNumber)
 {
-  fDurationKind = durationKind;
-  fDotsNumber   = dotsNumber;
+  fNotesDurationKind = notesNotesDurationKind;
+  fDotsNumber        = dotsNumber;
 }
 
-msrDottedDuration::~msrDottedDuration ()
+msrDottedNotesDuration::~msrDottedNotesDuration ()
 {}
 
-Rational msrDottedDuration::dottedDurationAsWholeNotes (
+msrWholeNotes msrDottedNotesDuration::dottedNotesDurationAsWholeNotes (
   int inputLineNumber) const
 {
   // convert duration into whole notes
-  Rational
+  msrWholeNotes
     result =
-      msrDurationKindAsWholeNotes (
-        fDurationKind);
+      msrNotesDurationKindAsWholeNotes (
+        fNotesDurationKind);
 
 #ifdef MF_TRACE_IS_ENABLED
   if (false) { // JMI
@@ -870,8 +872,8 @@ Rational msrDottedDuration::dottedDurationAsWholeNotes (
 		std::stringstream ss;
 
     ss <<
-      "=== dottedDurationAsWholeNotes()" <<
-      ", (int) fDurationKind: " << (int) fDurationKind <<
+      "=== dottedNotesDurationAsWholeNotes()" <<
+      ", (int) fNotesDurationKind: " << (int) fNotesDurationKind <<
       ", result: " << result <<
       std::endl;
 
@@ -883,22 +885,22 @@ Rational msrDottedDuration::dottedDurationAsWholeNotes (
 
   // take dots into account if any
   if (fDotsNumber > 0) {
-    Rational
-      increment = result * Rational (1,2);
+    msrWholeNotes
+      increment = result * mfRational (1,2);
 
     int dots = fDotsNumber;
 
     while (dots > 0) {
       result += increment;
 
-      increment *= Rational (1,2);
+      increment *= mfRational (1,2);
 
 #ifdef MF_TRACE_IS_ENABLED
   if (false) { // JMI v0.9.67
 		std::stringstream ss;
 
     ss <<
-      "=== dottedDurationAsWholeNotes()" <<
+      "=== dottedNotesDurationAsWholeNotes()" <<
       ", dots: " << dots <<
       ", result: " << result <<
       ", increment: " << increment <<
@@ -917,24 +919,24 @@ Rational msrDottedDuration::dottedDurationAsWholeNotes (
   return result;
 }
 
-Rational msrDottedDuration::dottedDurationAsWholeNotes_FOR_TEMPO (
-  // used in lpsrEnumTypes, dottedDurationAsLilypondStringWithoutBackSlash(),
+msrWholeNotes msrDottedNotesDuration::dottedNotesDurationAsWholeNotes_FOR_TEMPO (
+  // used in lpsrEnumTypes, dottedNotesDurationAsLilypondStringWithoutBackSlash(),
   // called in lpsr2lilypondTranslator.cpp, visitStart (S_msrTempo& elt)
   // JMI BUGGY, NEVER TESTED TEMP???
   int inputLineNumber) const
 {
   // convert duration into whole notes
-  Rational
+  msrWholeNotes
     result =
-      msrDurationKindAsWholeNotes (
-        fDurationKind);
+      msrNotesDurationKindAsWholeNotes (
+        fNotesDurationKind);
 
 #ifdef MF_TRACE_IS_ENABLED
   if (false) { // JMI v0.9.67
 		std::stringstream ss;
 
     ss <<
-      "=== dottedDurationAsWholeNotes_FOR_TEMPO()" <<
+      "=== dottedNotesDurationAsWholeNotes_FOR_TEMPO()" <<
       ", result: " << result <<
       "\"" <<
       std::endl;
@@ -951,14 +953,14 @@ Rational msrDottedDuration::dottedDurationAsWholeNotes_FOR_TEMPO (
 
     while (dots > 0) {
       result *=
-        Rational (3, 2);
+        mfRational (3, 2);
 
 #ifdef MF_TRACE_IS_ENABLED
   if (false) { // JMI v0.9.67
 		std::stringstream ss;
 
     ss <<
-      "=== dottedDurationAsWholeNotes_FOR_TEMPO()" <<
+      "=== dottedNotesDurationAsWholeNotes_FOR_TEMPO()" <<
       ", dots: " << dots <<
       ", result: " << result <<
       "\"" <<
@@ -977,12 +979,12 @@ Rational msrDottedDuration::dottedDurationAsWholeNotes_FOR_TEMPO (
   return result;
 }
 
-std::string msrDottedDuration::asString () const
+std::string msrDottedNotesDuration::asString () const
 {
   std::stringstream ss;
 
   ss <<
-     msrDurationKindAsString (fDurationKind);
+     msrNotesDurationKindAsString (fNotesDurationKind);
 
   for (int i = 1; i <= fDotsNumber; ++i) {
     ss << ".";
@@ -991,21 +993,21 @@ std::string msrDottedDuration::asString () const
   return ss.str ();
 }
 
-void msrDottedDuration::print (std::ostream& os) const
+void msrDottedNotesDuration::print (std::ostream& os) const
 {
   const int fieldWidth = 11;
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "durationKind" << ": " <<
-    msrDurationKindAsString (fDurationKind) <<
+    "notesNotesDurationKind" << ": " <<
+    msrNotesDurationKindAsString (fNotesDurationKind) <<
     std::endl <<
     std::setw (fieldWidth) <<
     "dotsNumber" << ": " << fDotsNumber <<
     std::endl;
 };
 
-std::ostream& operator << (std::ostream& os, const msrDottedDuration& elt)
+std::ostream& operator << (std::ostream& os, const msrDottedNotesDuration& elt)
 {
   os << elt.asString ();
   return os;
@@ -1013,12 +1015,12 @@ std::ostream& operator << (std::ostream& os, const msrDottedDuration& elt)
 
 //_______________________________________________________________________________
 std::string wholeNotesAsMsrString (
-  int             inputLineNumber,
-  const Rational& wholeNotes,
-  int&            dotsNumber)
+  int                 inputLineNumber,
+  const msrWholeNotes& wholeNotes,
+  int&                dotsNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceWholeNotesDetails ()) {
+  if (gTraceOahGroup->getTraceWholeNotesDetails ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1038,7 +1040,7 @@ std::string wholeNotesAsMsrString (
     denominator  = wholeNotes.getDenominator ();
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceWholeNotesDetails ()) {
+  if (gTraceOahGroup->getTraceWholeNotesDetails ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1081,7 +1083,7 @@ std::string wholeNotesAsMsrString (
     integralNumberOfWholeNotes = denominator == 1;
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceWholeNotesDetails ()) {
+  if (gTraceOahGroup->getTraceWholeNotesDetails ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1109,7 +1111,7 @@ std::string wholeNotesAsMsrString (
   int  numeratorDots = msrNumberOfDots (numerator);
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceWholeNotesDetails ()) {
+  if (gTraceOahGroup->getTraceWholeNotesDetails ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1125,7 +1127,7 @@ std::string wholeNotesAsMsrString (
   /*
     valid denominators are powers of 2
 
-    the Rational representing a dotted duration has to be brought
+    the mfRational representing a dotted duration has to be brought
     to a value less than two, as explained above
 
     this is done by changing it denominator in the resulting std::string:
@@ -1146,10 +1148,10 @@ std::string wholeNotesAsMsrString (
     we'll be better of using binary logarithms for the computations
   */
 
-  int denominatorDurationLog =
-    msrDurationBinaryLogarithm (denominator);
+  int denominatorNotesDurationLog =
+    msrNotesDurationBinaryLogarithm (denominator);
 
-  if (denominatorDurationLog == INT_MIN) {
+  if (denominatorNotesDurationLog == INT_MIN) {
     std::string result;
 
     {
@@ -1166,7 +1168,7 @@ std::string wholeNotesAsMsrString (
     }
 
 #ifdef MF_TRACE_IS_ENABLED
-    if (gGlobalTraceOahGroup->getTraceWholeNotesDetails ()) {
+    if (gTraceOahGroup->getTraceWholeNotesDetails ()) {
       std::stringstream ss;
 
       ss <<
@@ -1193,12 +1195,12 @@ std::string wholeNotesAsMsrString (
   }
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceWholeNotesDetails ()) {
+  if (gTraceOahGroup->getTraceWholeNotesDetails ()) {
 		std::stringstream ss;
 
     ss <<
-      "--> denominatorDurationLog" << ": " <<
-      denominatorDurationLog <<
+      "--> denominatorNotesDurationLog" << ": " <<
+      denominatorNotesDurationLog <<
       std::endl << std::endl;
 
     gWaeHandler->waeTrace (
@@ -1213,7 +1215,7 @@ std::string wholeNotesAsMsrString (
     // since dotted durations cannot be recognized otherwise
     // 6/1 thus becomes 3 \breve, hence '\longa.'
 #ifdef MF_TRACE_IS_ENABLED
-    if (gGlobalTraceOahGroup->getTraceWholeNotesDetails ()) {
+    if (gTraceOahGroup->getTraceWholeNotesDetails ()) {
       std::stringstream ss;
 
       ss <<
@@ -1229,16 +1231,16 @@ std::string wholeNotesAsMsrString (
 
     while (numerator % 2 == 0) {
       numerator /= 2;
-      denominatorDurationLog -= 1;
+      denominatorNotesDurationLog -= 1;
 
 #ifdef MF_TRACE_IS_ENABLED
-      if (gGlobalTraceOahGroup->getTraceWholeNotesDetails ()) {
+      if (gTraceOahGroup->getTraceWholeNotesDetails ()) {
         gLog <<
           "--> numerator" << ": " <<
           numerator <<
           std::endl <<
-          "--> denominatorDurationLog " << ": " <<
-          denominatorDurationLog <<
+          "--> denominatorNotesDurationLog " << ": " <<
+          denominatorNotesDurationLog <<
           std::endl << std::endl;
       }
 #endif // MF_TRACE_IS_ENABLED
@@ -1249,15 +1251,15 @@ std::string wholeNotesAsMsrString (
   }
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceWholeNotesDetails ()) {
+  if (gTraceOahGroup->getTraceWholeNotesDetails ()) {
 		std::stringstream ss;
 
     ss <<
       "--> numerator: " <<
       numerator <<
       std::endl <<
-      "--> denominatorDurationLog: " <<
-      denominatorDurationLog <<
+      "--> denominatorNotesDurationLog: " <<
+      denominatorNotesDurationLog <<
       std::endl <<
       "--> numeratorDots: " <<
       numeratorDots <<
@@ -1272,10 +1274,10 @@ std::string wholeNotesAsMsrString (
   // take care of the dots
   int multiplyingFactor = 1;
 
-  if (numeratorDots >= 0 && denominatorDurationLog >= numeratorDots) {
+  if (numeratorDots >= 0 && denominatorNotesDurationLog >= numeratorDots) {
     // take the dots into account
 #ifdef MF_TRACE_IS_ENABLED
-    if (gGlobalTraceOahGroup->getTraceWholeNotesDetails ()) {
+    if (gTraceOahGroup->getTraceWholeNotesDetails ()) {
       std::stringstream ss;
 
       ss <<
@@ -1288,15 +1290,15 @@ std::string wholeNotesAsMsrString (
     }
 #endif // MF_TRACE_IS_ENABLED
 
-    denominatorDurationLog -= numeratorDots;
+    denominatorNotesDurationLog -= numeratorDots;
 
 #ifdef MF_TRACE_IS_ENABLED
-    if (gGlobalTraceOahGroup->getTraceWholeNotesDetails ()) {
+    if (gTraceOahGroup->getTraceWholeNotesDetails ()) {
       std::stringstream ss;
 
       ss <<
-        "--> denominatorDurationLog" << ": " <<
-        denominatorDurationLog <<
+        "--> denominatorNotesDurationLog" << ": " <<
+        denominatorNotesDurationLog <<
         std::endl <<
         "--> multiplyingFactor " << ": " <<
         multiplyingFactor <<
@@ -1307,7 +1309,7 @@ std::string wholeNotesAsMsrString (
   else {
     // set the multiplying factor
 #ifdef MF_TRACE_IS_ENABLED
-    if (gGlobalTraceOahGroup->getTraceWholeNotesDetails ()) {
+    if (gTraceOahGroup->getTraceWholeNotesDetails ()) {
       std::stringstream ss;
 
       ss <<
@@ -1329,12 +1331,12 @@ std::string wholeNotesAsMsrString (
     multiplyingFactor = numerator;
 
 #ifdef MF_TRACE_IS_ENABLED
-    if (gGlobalTraceOahGroup->getTraceWholeNotesDetails ()) {
+    if (gTraceOahGroup->getTraceWholeNotesDetails ()) {
       std::stringstream ss;
 
       ss <<
-        "--> denominatorDurationLog" << ": " <<
-        denominatorDurationLog <<
+        "--> denominatorNotesDurationLog" << ": " <<
+        denominatorNotesDurationLog <<
         std::endl <<
         "--> multiplyingFactor " << ": " <<
         multiplyingFactor <<
@@ -1344,16 +1346,16 @@ std::string wholeNotesAsMsrString (
 
     while (multiplyingFactor >= 2) {
       // double duration
-      --denominatorDurationLog;
+      --denominatorNotesDurationLog;
 
       // adapt multiplying factor
       multiplyingFactor /= 2;
 
 #ifdef MF_TRACE_IS_ENABLED
-      if (gGlobalTraceOahGroup->getTraceWholeNotesDetails ()) {
+      if (gTraceOahGroup->getTraceWholeNotesDetails ()) {
         gLog <<
-          "--> denominatorDurationLog" << ": " <<
-          denominatorDurationLog <<
+          "--> denominatorNotesDurationLog" << ": " <<
+          denominatorNotesDurationLog <<
           std::endl <<
           "--> multiplyingFactor " << ": " <<
           multiplyingFactor <<
@@ -1365,7 +1367,7 @@ std::string wholeNotesAsMsrString (
   }
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceWholeNotesDetails ()) {
+  if (gTraceOahGroup->getTraceWholeNotesDetails ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1375,8 +1377,8 @@ std::string wholeNotesAsMsrString (
       "--> numeratorDots " << ": " <<
       numeratorDots <<
       std::endl <<
-      "--> denominatorDurationLog" << ": " <<
-      denominatorDurationLog <<
+      "--> denominatorNotesDurationLog" << ": " <<
+      denominatorNotesDurationLog <<
       std::endl <<
       "--> multiplyingFactor " << ": " <<
       multiplyingFactor <<
@@ -1391,7 +1393,7 @@ std::string wholeNotesAsMsrString (
   // generate the code for the duration
   std::stringstream ss;
 
-  switch (denominatorDurationLog) {
+  switch (denominatorNotesDurationLog) {
     case -3:
       ss << "\\maxima";
       break;
@@ -1403,7 +1405,7 @@ std::string wholeNotesAsMsrString (
       break;
 
     default:
-      ss << (1 << denominatorDurationLog);
+      ss << (1 << denominatorNotesDurationLog);
   } // switch
 
   // append the dots if any
@@ -1433,7 +1435,7 @@ std::string wholeNotesAsMsrString (
   std::string result = ss.str ();
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceWholeNotesDetails ()) {
+  if (gTraceOahGroup->getTraceWholeNotesDetails ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1455,8 +1457,8 @@ std::string wholeNotesAsMsrString (
 }
 
 std::string wholeNotesAsMsrString (
-  int             inputLineNumber,
-  const Rational& wholeNotes)
+  int                 inputLineNumber,
+  const msrWholeNotes& wholeNotes)
 {
   int dotsNumber; // not used
 
@@ -1468,14 +1470,14 @@ std::string wholeNotesAsMsrString (
 }
 
 std::string multipleFullBarRestsWholeNotesAsMsrString (
-  int             inputLineNumber, // JMI
-  const Rational& wholeNotes)
+  int                 inputLineNumber, // JMI
+  const msrWholeNotes& wholeNotes)
 {
   std::stringstream ss;
 
-  Rational
-    denominatorAsFraction =
-      Rational (
+  msrWholeNotes
+    wholeNotesUnit =
+      msrWholeNotes (
         1,
         wholeNotes.getDenominator ());
 
@@ -1485,7 +1487,7 @@ std::string multipleFullBarRestsWholeNotesAsMsrString (
   ss <<
     wholeNotesAsMsrString ( // JMI ??? v0.9.66
       inputLineNumber,
-      denominatorAsFraction);
+      wholeNotesUnit);
 
   if (numberOfWholeNotes != 1) {
     ss <<

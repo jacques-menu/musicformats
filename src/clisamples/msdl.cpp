@@ -92,14 +92,14 @@ static void catchSignals () {}
 //   // ------------------------------------------------------
 //
 // /*
-//   gGlobalTraceOahGroup->setTraceScores ();
-//   gGlobalTraceOahGroup->setTracePartGroups ();
-//   gGlobalTraceOahGroup->setTraceParts ();
-//   gGlobalTraceOahGroup->setTraceStaves ();
-//   gGlobalTraceOahGroup->setTraceVoices ();
-//   gGlobalTraceOahGroup->setTraceSegments ();
-//   gGlobalTraceOahGroup->setTraceMeasures ();
-//   gGlobalTraceOahGroup->setTraceNotes ();
+//   gTraceOahGroup->setTraceScores ();
+//   gTraceOahGroup->setTracePartGroups ();
+//   gTraceOahGroup->setTraceParts ();
+//   gTraceOahGroup->setTraceStaves ();
+//   gTraceOahGroup->setTraceVoices ();
+//   gTraceOahGroup->setTraceSegments ();
+//   gTraceOahGroup->setTraceMeasures ();
+//   gTraceOahGroup->setTraceNotes ();
 // */
 //
 //   // MSR
@@ -110,7 +110,7 @@ static void catchSignals () {}
 //   gGlobalMsrOahGroup->setTraceMsrVisitors ();
 //   gGlobalMsrOahGroup->setDisplayMsr ();
 //
-//   gGlobalMsrOahGroup->setTraceMsrDurations ();
+//   gGlobalMsrOahGroup->setTraceMsrNotesDurations ();
 // */
 //
 //   // generate code dependant specific options
@@ -330,7 +330,7 @@ int main (int argc, char*  argv[])
     gEarlyOptions.getEarlyInsiderOption ();
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -356,7 +356,7 @@ int main (int argc, char*  argv[])
         getEarlyMultiGenerationOutputKind ();
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -550,7 +550,7 @@ int main (int argc, char*  argv[])
         fetchOutputFileNameFromTheOptions ();
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
     std::string separator =
       "%--------------------------------------------------------------";
 
@@ -698,7 +698,7 @@ int main (int argc, char*  argv[])
     if (inputSourceName == MSDR_STANDARD_INPUT_NAME) {
       // MSDL data comes from standard input
 #ifdef MF_TRACE_IS_ENABLED
-      if (gEarlyOptions.getEarlyTraceOah ()) {
+      if (gEarlyOptions.getTraceEarlyOptions ()) {
       gLog << "Reading standard input" << std::endl;
       }
 #endif // MF_TRACE_IS_ENABLED
@@ -712,7 +712,7 @@ int main (int argc, char*  argv[])
     else {
       // MSDL data comes from a file
 #ifdef MF_TRACE_IS_ENABLED
-      if (gEarlyOptions.getEarlyTraceOah ()) {
+      if (gEarlyOptions.getTraceEarlyOptions ()) {
         gLog << "Reading file \"" << inputSourceName << "\"" << std::endl;
       }
 #endif // MF_TRACE_IS_ENABLED
@@ -725,7 +725,7 @@ int main (int argc, char*  argv[])
     }
 
 #ifdef MF_TRACE_IS_ENABLED
-    if (gEarlyOptions.getEarlyTraceOah ()) {
+    if (gEarlyOptions.getTraceEarlyOptions ()) {
       if (err != mfMusicformatsErrorKind::kMusicformatsError_NONE) {
         gLog <<
           serviceName << ", " <<

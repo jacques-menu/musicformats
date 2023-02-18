@@ -35,8 +35,6 @@ namespace MusicFormats
 {
 
 //_______________________________________________________________________________
-S_waeOahGroup gGlobalWaeOahGroup;
-
 S_waeOahGroup waeOahGroup::create ()
 {
   waeOahGroup* o = new waeOahGroup ();
@@ -100,7 +98,7 @@ R"(Don't show errors in the log.)",
 R"(Do not quit execution on errors and go ahead.
 This may be useful when debugging EXECUTABLE.)",
           std::regex ("EXECUTABLE"),
-          gGlobalOahOahGroup->getOahOahGroupServiceName ()),
+          gOahOahGroup->getOahOahGroupServiceName ()),
         "fDontQuitOnErrors",
         fDontQuitOnErrors));
 }
@@ -128,7 +126,7 @@ void waeOahGroup::checkGroupOptionsConsistency ()
 void waeOahGroup::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -147,7 +145,7 @@ void waeOahGroup::acceptIn (basevisitor* v)
         S_waeOahGroup elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -166,7 +164,7 @@ void waeOahGroup::acceptIn (basevisitor* v)
 void waeOahGroup::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -185,7 +183,7 @@ void waeOahGroup::acceptOut (basevisitor* v)
         S_waeOahGroup elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -204,7 +202,7 @@ void waeOahGroup::acceptOut (basevisitor* v)
 void waeOahGroup::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -262,11 +260,20 @@ std::ostream& operator << (std::ostream& os, const S_waeOahGroup& elt)
   return os;
 }
 
+//________________________________________________________________________
+// hidden global OAH early options variable
+EXP S_waeOahGroup pGlobalWaeOahGroup;
+
+EXP S_waeOahGroup getGlobalWaeOahGroup ()
+{
+  return pGlobalWaeOahGroup;
+}
+
 //______________________________________________________________________________
 S_waeOahGroup createGlobalWaeOahGroup ()
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -280,15 +287,15 @@ S_waeOahGroup createGlobalWaeOahGroup ()
 #endif // MF_TRACE_IS_ENABLED
 
   // protect library against multiple initializations
-  if (! gGlobalWaeOahGroup) {
+  if (! pGlobalWaeOahGroup) {
     // create the global wae options group
-    gGlobalWaeOahGroup =
+    pGlobalWaeOahGroup =
       waeOahGroup::create ();
-    assert (gGlobalWaeOahGroup != 0);
+    assert (pGlobalWaeOahGroup != 0);
   }
 
   // return the global OAH group
-  return gGlobalWaeOahGroup;
+  return pGlobalWaeOahGroup;
 }
 
 

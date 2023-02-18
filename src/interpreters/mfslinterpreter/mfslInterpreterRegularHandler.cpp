@@ -1,20 +1,18 @@
 /*
   MusicFormats Library
-  Copyright (C) Jacques Menu 2016-2023
+  Copyright (C) Jacques Menu 2016-2022
 
   This Source Code Form is subject to the terms of the Mozilla Public
   License, v. 2.0. If a copy of the MPL was not distributed with this
-  file, you can obtain one at http://mozilla.org/MPL/2.0/.
+  file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
   https://github.com/jacques-menu/musicformats
 */
 
-#include <iomanip>      // std::setw, std::setprecision, ...
+#include <iomanip>      // setw, setprecision, ...
 
 // WAE
 #include "oahWae.h"
-
-#include "mfStaticSettings.h"
 
 #include "mfStringsHandling.h"
 
@@ -22,7 +20,11 @@
 #include "oahOah.h"
 
 // MSR
+#include "msr.h"
+
 // LPSR
+#include "lpsr.h"
+
 // MXSR
 #include "msrOah.h"
 #include "msr2msrOah.h"
@@ -34,18 +36,18 @@
 
 #include "mfslInterpreterRegularHandler.h"
 
-#include "waeHandlers.h"
 
+using namespace std;
 
 namespace MusicFormats
 {
 
 //______________________________________________________________________________
 S_mfslInterpreterRegularHandler mfslInterpreterRegularHandler::create (
-  const std::string&     serviceName,
-  const std::string&     handlerHeader,
-  const S_mfslInterpreterInsiderHandler&
-                    insiderOahHandler)
+	const std::string& serviceName,
+	const std::string& handlerHeader,
+	S_mfslInterpreterInsiderHandler
+										 insiderOahHandler)
 {
   // create the regular handler
   mfslInterpreterRegularHandler* o = new
@@ -54,14 +56,15 @@ S_mfslInterpreterRegularHandler mfslInterpreterRegularHandler::create (
       handlerHeader,
       insiderOahHandler);
   assert (o != nullptr);
+
   return o;
 }
 
 mfslInterpreterRegularHandler::mfslInterpreterRegularHandler (
-  const std::string&     serviceName,
-  const std::string&     handlerHeader,
-  const S_mfslInterpreterInsiderHandler&
-                    insiderOahHandler)
+	const std::string& serviceName,
+	const std::string& handlerHeader,
+	S_mfslInterpreterInsiderHandler
+										 insiderOahHandler)
   : oahRegularHandler (
       serviceName,
       handlerHeader,
@@ -80,14 +83,14 @@ mfslInterpreterRegularHandler::mfslInterpreterRegularHandler (
     "mfslInterpreterRegularHandler \"" <<
     fHandlerHeader <<
     "\" has been initialized as:" <<
-    std::endl;
+    endl;
 
   ++gIndenter;
 
   gLog <<
     "===> printHelp():" <<
-    std::endl;
-  this->printHelp (gOutput); // JMI
+    endl;
+  this->printHelp (gOutputStream); // JMI
 
   --gIndenter;
 */
@@ -106,23 +109,15 @@ void mfslInterpreterRegularHandler::createRegularHandlerGroups ()
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getEarlyTraceOah ()) {
-		std::stringstream ss;
-
-    ss <<
+    gLog <<
       "Creating the regular handler groups for \"" <<
       fHandlerHeader <<
       "\"" <<
-      std::endl;
-
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
+      endl;
   }
 #endif // MF_TRACE_IS_ENABLED
 
   createInformationsRegularGroup ();
-
-  createDisplayRegularGroup ();
 
   createMfslRegularUserGroup ();
   createMfslRegularMaintainanceGroup ();
@@ -133,17 +128,11 @@ void mfslInterpreterRegularHandler::createRegularHandlerGroups ()
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getEarlyTraceOah ()) {
-		std::stringstream ss;
-
-    ss <<
+    gLog <<
       "All the regular handler groups for \"" <<
       fHandlerHeader <<
       "\" have been created" <<
-      std::endl;
-
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
+      endl;
   }
 #endif // MF_TRACE_IS_ENABLED
 }
@@ -183,38 +172,6 @@ void mfslInterpreterRegularHandler::createInformationsRegularGroup ()
   registerAtomInRegularSubgroup ("mf-version", subGroup);
   registerAtomInRegularSubgroup ("mf-history", subGroup);
   registerAtomInRegularSubgroup ("contact", subGroup);
-}
-
-void mfslInterpreterRegularHandler::createDisplayRegularGroup ()
-{
-  // group
-
-  S_oahGroup
-    group =
-      oahGroup::create (
-        "Display group",
-        "help-display-group", "hdisplay-group",
-        "",
-        oahElementVisibilityKind::kElementVisibilityWhole);
-  appendGroupToRegulalHandler (group);
-
-  // subgroup
-
-  S_oahSubGroup
-    subGroup =
-      oahSubGroup::create (
-        "Display",
-        "help-display", "hdisplay",
-        "",
-        oahElementVisibilityKind::kElementVisibilityWhole,
-        group);
-  group->
-    appendSubGroupToGroup (subGroup);
-
-  // atoms from the insider handler
-
-  registerAtomInRegularSubgroup ("language", subGroup);
-
   registerAtomInRegularSubgroup ("display-prefixes", subGroup);
   registerAtomInRegularSubgroup ("display-single-character-options", subGroup);
 
@@ -255,7 +212,7 @@ void mfslInterpreterRegularHandler::createMfslRegularUserGroup ()
 
   registerAtomInRegularSubgroup ("display-tokens", subGroup);
 
-  registerAtomInRegularSubgroup ("display-tool-and-input", subGroup);
+  registerAtomInRegularSubgroup ("display-service-and-input", subGroup);
 
   registerAtomInRegularSubgroup ("display-options", subGroup);
 
@@ -335,8 +292,6 @@ void mfslInterpreterRegularHandler::createOahRegularGroup ()
 
   // atoms from the insider handler
 
-  registerAtomInRegularSubgroup (K_LANGUAGE_OPTION_LONG_NAME, subGroup);
-
   registerAtomInRegularSubgroup (K_INSIDER_OPTION_LONG_NAME, subGroup);
 //  registerAtomInRegularSubgroup (K_REGULAR_OPTION_LONG_NAME, subGroup);
 
@@ -368,7 +323,6 @@ void mfslInterpreterRegularHandler::createOahRegularGroup ()
   registerAtomInRegularSubgroup (K_TRACE_OAH_DETAILS_OPTION_LONG_NAME, subGroup);
 
   registerAtomInRegularSubgroup (K_TRACE_PASSES_OPTION_LONG_NAME, subGroup);
-  registerAtomInRegularSubgroup (K_TRACE_ONLY_PASS_OPTION_LONG_NAME, subGroup);
 #endif // MF_TRACE_IS_ENABLED
 }
 
@@ -413,17 +367,11 @@ void mfslInterpreterRegularHandler::checkOptionsAndArguments () const
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getEarlyTraceOah ()) {
-		std::stringstream ss;
-
-    ss <<
+    gLog <<
       "checking options and arguments from argc/argv in \"" <<
       fHandlerHeader <<
       "\"" <<
-      std::endl;
-
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
+      endl;
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -446,27 +394,27 @@ void mfslInterpreterRegularHandler::print (std::ostream& os) const
 
   os <<
     "mfslInterpreterRegularHandler '" << fHandlerHeader << "':" <<
-    std::endl;
+    endl;
 
   ++gIndenter;
 
   printHandlerEssentials (
     os, fieldWidth);
-  os << std::endl;
+  os << endl;
 
   os <<
     "Options groups (" <<
     mfSingularOrPlural (
       fHandlerGroupsList.size (), "element",  "elements") <<
     "):" <<
-    std::endl;
+    endl;
 
   if (fHandlerGroupsList.size ()) {
-    os << std::endl;
+    os << endl;
 
     ++gIndenter;
 
-    std::list<S_oahGroup>::const_iterator
+    list<S_oahGroup>::const_iterator
       iBegin = fHandlerGroupsList.begin (),
       iEnd   = fHandlerGroupsList.end (),
       i      = iBegin;
@@ -475,7 +423,7 @@ void mfslInterpreterRegularHandler::print (std::ostream& os) const
       // print the options group
       os << (*i);
       if (++i == iEnd) break;
-      os << std::endl;
+      os << endl;
     } // for
 
     --gIndenter;
@@ -483,16 +431,16 @@ void mfslInterpreterRegularHandler::print (std::ostream& os) const
 
   --gIndenter;
 
-  os << std::endl;
+  os << endl;
 }
 
-std::ostream& operator << (std::ostream& os, const S_mfslInterpreterRegularHandler& elt)
+std::ostream& operator<< (std::ostream& os, const S_mfslInterpreterRegularHandler& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "*** NONE ***" << endl;
   }
 
   return os;

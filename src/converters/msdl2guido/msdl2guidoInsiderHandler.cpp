@@ -78,7 +78,7 @@ Usage: msdl2guido [option]* [MSDLFile] [option]*
 )")
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -140,7 +140,7 @@ R"(What msdl2guido does:
 void msdl2guidoInsiderHandler::createTheMsdl2gmnPrefixes ()
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -163,7 +163,7 @@ void msdl2guidoInsiderHandler::createTheMsdl2gmnOptionGroups (
   const std::string& serviceName)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -246,7 +246,7 @@ void msdl2guidoInsiderHandler::createTheMsdl2gmnOptionGroups (
 void msdl2guidoInsiderHandler::checkOptionsAndArguments () const
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -278,7 +278,7 @@ void msdl2guidoInsiderHandler::checkHandlerOptionsConsistency ()
 void msdl2guidoInsiderHandler::enforceHandlerQuietness ()
 {
 #ifdef MF_TRACE_IS_ENABLED
-  gGlobalTraceOahGroup->
+  gTraceOahGroup->
     enforceGroupQuietness ();
 #endif // MF_TRACE_IS_ENABLED
 
@@ -340,7 +340,7 @@ void msdl2guidoInsiderOahGroup::checkGroupOptionsConsistency ()
 void msdl2guidoInsiderOahGroup::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -359,7 +359,7 @@ void msdl2guidoInsiderOahGroup::acceptIn (basevisitor* v)
         S_msdl2guidoInsiderOahGroup elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -378,7 +378,7 @@ void msdl2guidoInsiderOahGroup::acceptIn (basevisitor* v)
 void msdl2guidoInsiderOahGroup::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -397,7 +397,7 @@ void msdl2guidoInsiderOahGroup::acceptOut (basevisitor* v)
         S_msdl2guidoInsiderOahGroup elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -416,7 +416,7 @@ void msdl2guidoInsiderOahGroup::acceptOut (basevisitor* v)
 void msdl2guidoInsiderOahGroup::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -518,7 +518,7 @@ msdl2guidoInsiderOahGroup::~msdl2guidoInsiderOahGroup ()
 void msdl2guidoInsiderOahGroup::initializeMsdl2gmnInsiderOahGroup ()
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
   gLog << std::left <<
     "Initializing \"" <<
     fGroupHeader <<
@@ -536,7 +536,7 @@ void msdl2guidoInsiderOahGroup::initializeMsdl2gmnInsiderOahGroup ()
 void msdl2guidoInsiderOahGroup::createInsiderQuitSubGroup ()
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
   gLog << std::left <<
     "Creating insider quit subgroup in \"" <<
     fGroupHeader <<
@@ -605,7 +605,7 @@ void msdl2guidoInsiderOahGroup::printMsdl2gmnInsiderOahGroupValues (
 S_msdl2guidoInsiderOahGroup createGlobalMsdl2gmnInsiderOahGroup ()
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<

@@ -16,14 +16,10 @@
 #include "mfStaticSettings.h"
 
 #include "mfServices.h"
-
 #include "mfStringsHandling.h"
 
-#include "msrWae.h"
-
-#include "mfStaticSettings.h"
-
 #include "msrMeasuresSlices.h"
+#include "msrWholeNotes.h"
 
 #include "oahOah.h"
 
@@ -31,6 +27,7 @@
 
 #include "waeHandlers.h"
 
+#include "msrWae.h"
 
 namespace MusicFormats
 {
@@ -55,7 +52,7 @@ std::string msrNoteEventKindAsString (
 
 //______________________________________________________________________________
 S_msrNoteEvent msrNoteEvent::create (
-  const Rational&  noteEventMeasurePosition,
+  const msrWholeNotes&  noteEventMeasurePosition,
   const S_msrNote& noteEventNote,
   msrNoteEventKind noteEventKind)
 {
@@ -69,7 +66,7 @@ S_msrNoteEvent msrNoteEvent::create (
 }
 
 msrNoteEvent::msrNoteEvent (
-  const Rational& noteEventMeasurePosition,
+  const msrWholeNotes& noteEventMeasurePosition,
   const S_msrNote& noteEventNote,
   msrNoteEventKind noteEventKind)
 {
@@ -89,7 +86,7 @@ bool msrNoteEvent::compareNotesEventsByIncreasingMeasurePosition (
   // start events with the same measure position
   bool result = false;
 
-  Rational
+  msrWholeNotes
     firstMeasurePosition =
       first->
         getNoteEventMeasurePosition (),
@@ -207,7 +204,7 @@ std::ostream& operator << (std::ostream& os, const S_msrNoteEvent& elt)
 
 //______________________________________________________________________________
 S_msrSimultaneousNotesChunk msrSimultaneousNotesChunk::create (
-  const Rational& chunkMeasurePosition)
+  const msrWholeNotes& chunkMeasurePosition)
 {
   msrSimultaneousNotesChunk* o = new
     msrSimultaneousNotesChunk (
@@ -217,7 +214,7 @@ S_msrSimultaneousNotesChunk msrSimultaneousNotesChunk::create (
 }
 
 msrSimultaneousNotesChunk::msrSimultaneousNotesChunk (
-  const Rational& chunkMeasurePosition)
+  const msrWholeNotes& chunkMeasurePosition)
 {
   fChunkMeasurePosition = chunkMeasurePosition;
 }
@@ -321,7 +318,7 @@ msrMeasuresSlice::~msrMeasuresSlice ()
 S_msrMeasuresSlice msrMeasuresSlice::createMeasuresSliceShallowCopy ()
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceMeasuresSlices ()) {
+  if (gTraceOahGroup->getTraceMeasuresSlices ()) {
 		std::stringstream ss;
 
     ss <<
@@ -362,7 +359,7 @@ void msrMeasuresSlice::appendMeasureToMeasureSlice (
   const S_msrMeasure& measure)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceMeasuresSlices ()) {
+  if (gTraceOahGroup->getTraceMeasuresSlices ()) {
 		std::stringstream ss;
 
     ss <<
@@ -386,7 +383,7 @@ void msrMeasuresSlice::appendSliceMeasuresFrom (
   const S_msrMeasuresSlice& otherSlice)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceMeasuresSlices ()) {
+  if (gTraceOahGroup->getTraceMeasuresSlices ()) {
 		std::stringstream ss;
 
     ss <<
@@ -449,7 +446,7 @@ if (true) // JMI
 void msrMeasuresSlice::collectNonSkipNotesFromMeasuresSliceMeasures ()
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceMeasuresSlices ()) {
+  if (gTraceOahGroup->getTraceMeasuresSlices ()) {
 		std::stringstream ss;
 
     ss <<
@@ -488,7 +485,7 @@ void msrMeasuresSlice::collectNonSkipNotesFromMeasuresSliceMeasures ()
       S_msrNote note = (*i);
 
 #ifdef MF_TRACE_IS_ENABLED
-      if (gGlobalTraceOahGroup->getTraceMeasuresSlices ()) {
+      if (gTraceOahGroup->getTraceMeasuresSlices ()) {
         std::stringstream ss;
 
         ss <<
@@ -516,7 +513,7 @@ void msrMeasuresSlice::collectNonSkipNotesFromMeasuresSliceMeasures ()
       } // switch
 
       if (doKeepTheNote) {
-        Rational
+        msrWholeNotes
           noteMeasurePosition =
             note->
               getMeasurePosition ();
@@ -535,7 +532,7 @@ void msrMeasuresSlice::collectNonSkipNotesFromMeasuresSliceMeasures ()
         fSliceNoteEventsList.push_back (noteStartEvent);
 
         // append a note stop event to the slice notes events list
-        Rational
+        msrWholeNotes
           noteEndMeasurePosition =
             noteMeasurePosition
               +
@@ -574,7 +571,7 @@ void msrMeasuresSlice::collectNonSkipNotesFromMeasuresSliceMeasures ()
 void msrMeasuresSlice::buildTheSimutaneousNotesChunksList ()
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceMeasuresSlices ()) {
+  if (gTraceOahGroup->getTraceMeasuresSlices ()) {
 		std::stringstream ss;
 
     ss <<
@@ -591,8 +588,8 @@ void msrMeasuresSlice::buildTheSimutaneousNotesChunksList ()
   S_msrSimultaneousNotesChunk
     currentSimultaneousNotesChunk;
 
-  Rational
-    currentChunkMeasurePosition = Rational (-1, 1);
+  msrWholeNotes
+    currentChunkMeasurePosition (-1, 1);
 
   for (
     std::list<S_msrNoteEvent>::const_iterator i = fSliceNoteEventsList.begin ();
@@ -601,7 +598,7 @@ void msrMeasuresSlice::buildTheSimutaneousNotesChunksList ()
   ) {
     S_msrNoteEvent noteEvent = (*i);
 
-    Rational
+    msrWholeNotes
       noteEventMeasurePosition =
         noteEvent->
           getNoteEventMeasurePosition ();
@@ -647,7 +644,7 @@ void msrMeasuresSlice::buildTheSimutaneousNotesChunksList ()
 void msrMeasuresSlice::identifySoloNotesAndRestsInMeasuresSlice ()
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceMeasuresSlices ()) {
+  if (gTraceOahGroup->getTraceMeasuresSlices ()) {
 		std::stringstream ss;
 
     ss <<
@@ -673,7 +670,7 @@ void msrMeasuresSlice::identifySoloNotesAndRestsInMeasuresSlice ()
     S_msrNoteEvent noteEvent = (*i);
 
     // handle the note event
-//     Rational JMI
+//     msrWholeNotes JMI
 //       noteEventMeasurePosition =
 //         noteEvent->
 //           getNoteEventMeasurePosition ();
@@ -701,7 +698,7 @@ void msrMeasuresSlice::identifySoloNotesAndRestsInMeasuresSlice ()
           soloCandidate = note;
 
 #ifdef MF_TRACE_IS_ENABLED
-          if (gGlobalTraceOahGroup->getTraceMeasuresSlices ()) {
+          if (gTraceOahGroup->getTraceMeasuresSlices ()) {
             gLog <<
               "Solo note or rest " <<
               note->asShortStringForTimeView ();
@@ -729,7 +726,7 @@ void msrMeasuresSlice::identifySoloNotesAndRestsInMeasuresSlice ()
           // forget about the solo candidate
           if (soloCandidate) {
 #ifdef MF_TRACE_IS_ENABLED
-            if (gGlobalTraceOahGroup->getTraceMeasuresSlices ()) {
+            if (gTraceOahGroup->getTraceMeasuresSlices ()) {
               gLog <<
                 "Forget about solo note or rest candidate " <<
                 soloCandidate->asShortStringForTimeView ();
@@ -784,7 +781,7 @@ void msrMeasuresSlice::identifySoloNotesAndRestsInMeasuresSlice ()
 
 
 #ifdef MF_TRACE_IS_ENABLED
-                  if (gGlobalTraceOahGroup->getTraceMeasuresSlices ()) {
+                  if (gTraceOahGroup->getTraceMeasuresSlices ()) {
                     gLog <<
                       "Solo note or rest? " <<
                       note->asShortStringForTimeView ();
@@ -798,7 +795,7 @@ void msrMeasuresSlice::identifySoloNotesAndRestsInMeasuresSlice ()
                         msrSoloNoteOrRestInStaffKind::kSoloNoteOrRestInStaffYes);
 
 #ifdef MF_TRACE_IS_ENABLED
-                    if (gGlobalTraceOahGroup->getTraceMeasuresSlices ()) {
+                    if (gTraceOahGroup->getTraceMeasuresSlices ()) {
                       gLog <<
                         "Solo note or rest " <<
                         note->asShortStringForTimeView ();
@@ -1152,7 +1149,7 @@ S_msrMeasuresSlicesSequence msrMeasuresSlicesSequence::createMeasuresSlicesSeque
   const std::string& measuresOrigin)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceMeasuresSlices ()) {
+  if (gTraceOahGroup->getTraceMeasuresSlices ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1194,7 +1191,7 @@ void msrMeasuresSlicesSequence::appendMeasuresSliceToSequence (
   const S_msrMeasuresSlice& measuresSlice)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceMeasuresSlices ()) {
+  if (gTraceOahGroup->getTraceMeasuresSlices ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1223,7 +1220,7 @@ S_msrMeasuresSlicesSequence msrMeasuresSlicesSequence::mergeWithMeasuresSlicesSe
   S_msrMeasuresSlicesSequence result;
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceMeasuresSlices ()) {
+  if (gTraceOahGroup->getTraceMeasuresSlices ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1243,7 +1240,7 @@ S_msrMeasuresSlicesSequence msrMeasuresSlicesSequence::mergeWithMeasuresSlicesSe
     getSlicesSequenceSize ();
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceMeasuresSlices ()) {
+  if (gTraceOahGroup->getTraceMeasuresSlices ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1281,7 +1278,7 @@ S_msrMeasuresSlicesSequence msrMeasuresSlicesSequence::mergeWithMeasuresSlicesSe
       otherMeasuresSlicesSequence->getSlicesSequenceSize ();
 
 #ifdef MF_TRACE_IS_ENABLED
-    if (gGlobalTraceOahGroup->getTraceMeasuresSlices ()) {
+    if (gTraceOahGroup->getTraceMeasuresSlices ()) {
 	  	std::stringstream ss;
 
       ss <<
@@ -1370,7 +1367,7 @@ S_msrMeasuresSlicesSequence msrMeasuresSlicesSequence::mergeWithMeasuresSlicesSe
   }
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceMeasuresSlices ()) {
+  if (gTraceOahGroup->getTraceMeasuresSlices ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1391,7 +1388,7 @@ S_msrMeasuresSlicesSequence msrMeasuresSlicesSequence::mergeWithMeasuresSlicesSe
 void msrMeasuresSlicesSequence::identifySoloNotesAndRests ()
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceMeasuresSlices ()) {
+  if (gTraceOahGroup->getTraceMeasuresSlices ()) {
 		std::stringstream ss;
 
     ss <<

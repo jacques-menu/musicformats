@@ -173,7 +173,7 @@ S_msrScore translateMxsrToMsrSkeleton (
 //   // start the clock
 //   clock_t startClock = clock ();
 //
-//   setGlobalCurrentPassIDKind (mfPassIDKind::kMfPassID_OptionalPass);
+//   setGlobalCurrentPassIDKind (mfPassIDKind::kMfPassID_DisplayPass);
 //
 //   std::string separator =
 //     "%--------------------------------------------------------------";

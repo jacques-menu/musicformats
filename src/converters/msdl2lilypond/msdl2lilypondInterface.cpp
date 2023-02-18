@@ -227,7 +227,7 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
         fetchOutputFileNameFromTheOptions ();
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
     err <<
       "msdlStream2lilypond() outputFileName = \"" <<
       outputFileName <<
@@ -242,7 +242,7 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
 
   if (! outputFileName.size ()) {
 #ifdef MF_TRACE_IS_ENABLED
-    if (gEarlyOptions.getEarlyTraceOah ()) {
+    if (gEarlyOptions.getTraceEarlyOptions ()) {
       err <<
         "msdlStream2lilypond() output goes to standard output" <<
         std::endl;
@@ -282,7 +282,7 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
 
   else {
 #ifdef MF_TRACE_IS_ENABLED
-    if (gEarlyOptions.getEarlyTraceOah ()) {
+    if (gEarlyOptions.getTraceEarlyOptions ()) {
       err <<
         "msdlStream2lilypond() output goes to file \"" <<
         outputFileName <<
@@ -404,7 +404,7 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
   // ------------------------------------------------------
 #ifdef MF_TRACE_IS_ENABLED
 #ifdef ENFORCE_TRACE_OAH
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -426,7 +426,7 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
     gEarlyOptions.getEarlyInsiderOption ();
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<

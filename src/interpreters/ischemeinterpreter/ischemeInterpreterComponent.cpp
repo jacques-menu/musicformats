@@ -1,16 +1,18 @@
 /*
   MusicFormats Library
-  Copyright (C) Jacques Menu 2016-2023
+  Copyright (C) Jacques Menu 2016-2022
 
   This Source Code Form is subject to the terms of the Mozilla Public
   License, v. 2.0. If a copy of the MPL was not distributed with this
-  file, you can obtain one at http://mozilla.org/MPL/2.0/.
+  file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
   https://github.com/jacques-menu/musicformats
 */
 
 #include "mfcComponents.h"
 
+
+using namespace std;
 
 namespace MusicFormats
 {
@@ -40,15 +42,9 @@ S_mfcConverterComponent createIschemeInterpreterComponent ()
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getEarlyTraceComponents ()) {
-		std::stringstream ss;
-
-    ss <<
+    gLog <<
       "Creating the ischeme component" <<
-      std::endl;
-
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
+      endl;
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -65,8 +61,18 @@ S_mfcConverterComponent createIschemeInterpreterComponent ()
         mfcVersionDescr::create (
           mfcVersionNumber::createFromString ("0.9.64"),
           "June 20, 2022",
-          std::list<std::string> {
-            "Created the iScheme interpreter component",
+          list<std::string> {
+            "Created the iScheme interpreter component"
+          }
+      ));
+
+    // populate the interpreter's own history
+    pConverterComponent->
+      appendVersionDescrToComponent (
+        mfcVersionDescr::create (
+          mfcVersionNumber::createFromString ("0.9.64"),
+          "June 20, 2022",
+          list<std::string> {
             "Cloned the MFSL interpreter into iScheme"
           }
       ));

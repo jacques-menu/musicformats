@@ -79,7 +79,7 @@ void msrEyeGlasses::setEyeGlassesUpLinkToMeasure (
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceWholeNotes ()) {
+  if (gTraceOahGroup->getTraceWholeNotes ()) {
     ++gIndenter;
 
     gLog <<
@@ -99,11 +99,11 @@ void msrEyeGlasses::setEyeGlassesUpLinkToMeasure (
 
 // void msrEyeGlasses::setEyeGlassesMeasurePosition (
 //   const S_msrMeasure& measure,
-//   const Rational&     measurePosition,
+//   const mfRational&     measurePosition,
 //   const std::string&  context)
 // {
 // #ifdef MF_TRACE_IS_ENABLED
-//   if (gGlobalTraceOahGroup->getTraceMeasurePositions ()) {
+//   if (gTraceOahGroup->getTraceMeasurePositions ()) {
 //
 //     gLog <<
 //       "Setting measure element measure position of " <<
@@ -126,8 +126,8 @@ void msrEyeGlasses::setEyeGlassesUpLinkToMeasure (
   // sanity check
 //   mfAssert (
 //     __FILE__, __LINE__,
-//     measurePosition != msrMoment::K_MEASURE_POSITION_UNKNOWN,
-//     "measurePosition == msrMoment::K_MEASURE_POSITION_UNKNOWN");
+//     measurePosition != K_MEASURE_POSITION_UNKNOWN,
+//     "measurePosition == K_MEASURE_POSITION_UNKNOWN");
 // #endif // MF_SANITY_CHECKS_ARE_ENABLED
 //
 //   // set measure element's measure position
@@ -135,7 +135,7 @@ void msrEyeGlasses::setEyeGlassesUpLinkToMeasure (
 //
 //   // compute measure element's voice position
 // // if (false) { // JMI CAFE v0.9.66
-//   Rational
+//   mfRational
 //     voicePosition =
 //       measure->
 //         getMeasureVoicePosition ()

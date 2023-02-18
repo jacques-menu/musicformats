@@ -113,24 +113,24 @@ void msrDivisions::initializeDivisions ()
 
   ++gIndenter;
 
-  // forget fDurationsToDivisions's contents
-  fDurationKindsToDivisions.clear ();
+  // forget fNotesDurationsToDivisions's contents
+  fNotesDurationKindsToDivisions.clear ();
 
   // positive powers of 2 of a quarter note
   int bigDivisions = fDivisionsPerQuarterNote;
 
-  for (int i = (int) msrDurationKind::kDurationQuarter; i >= (int) msrDurationKind::kDurationMaxima; --i) {
+  for (int i = (int) msrNotesDurationKind::kNotesDurationQuarter; i >= (int) msrNotesDurationKind::kNotesDurationMaxima; --i) {
     /*
     gLog <<
-      msrDurationAsString (msrDuration (i)) <<
+      msrNotesDurationAsString (msrNotesDuration (i)) <<
       " -> " <<
       bigDivisions <<
       std::endl;
     */
 
-    fDurationKindsToDivisions.push_front (
+    fNotesDurationKindsToDivisions.push_front (
       std::make_pair (
-        msrDurationKind (i), bigDivisions));
+        msrNotesDurationKind (i), bigDivisions));
 
     bigDivisions *= 2;
   } // for
@@ -140,25 +140,25 @@ void msrDivisions::initializeDivisions ()
     int
       smallDivisions =
         fDivisionsPerQuarterNote / 2;
-    msrDurationKind
-      currentDurationKind =
-        msrDurationKind::kDurationEighth;
+    msrNotesDurationKind
+      currentNotesDurationKind =
+        msrNotesDurationKind::kNotesDurationEighth;
 
     while (smallDivisions >= 1) {
       /*
       gLog <<
-        msrDurationAsString (currentDuration) <<
+        msrNotesDurationAsString (currentNotesDuration) <<
         " % --> " <<
         smallDivisions <<
         std::endl;
       */
 
-      fDurationKindsToDivisions.push_back (
-        std::make_pair (currentDurationKind, smallDivisions));
+      fNotesDurationKindsToDivisions.push_back (
+        std::make_pair (currentNotesDurationKind, smallDivisions));
 
-      currentDurationKind =
-        msrDurationKind (
-          (int) currentDurationKind + 1);
+      currentNotesDurationKind =
+        msrNotesDurationKind (
+          (int) currentNotesDurationKind + 1);
       smallDivisions /= 2;
     } // while
   }
@@ -166,24 +166,24 @@ void msrDivisions::initializeDivisions ()
   // print the durations divisions if needed
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceDivisions ()) {
-    printDurationKindsDivisions (gLog);
+    printNotesDurationKindsDivisions (gLog);
   }
 #endif // MF_TRACE_IS_ENABLED
 
   --gIndenter;
 }
 
-int msrDivisions::durationKindAsDivisions (
+int msrDivisions::notesNotesDurationKindAsDivisions (
   int             inputLineNumber,
-  msrDurationKind durationKind)
+  msrNotesDurationKind notesNotesDurationKind)
 {
   for (
-    std::list<std::pair<msrDurationKind, int> >::const_iterator i =
-      fDurationKindsToDivisions.begin ();
-    i != fDurationKindsToDivisions.end ();
+    std::list<std::pair<msrNotesDurationKind, int> >::const_iterator i =
+      fNotesDurationKindsToDivisions.begin ();
+    i != fNotesDurationKindsToDivisions.end ();
     ++i
   ) {
-    if ((*i).first == durationKind)
+    if ((*i).first == notesNotesDurationKind)
       return
         (*i).second;
   } // for
@@ -191,12 +191,12 @@ int msrDivisions::durationKindAsDivisions (
   std::stringstream ss;
 
   ss <<
-    "duration " << msrDurationKindAsString (durationKind) <<
+    "duration " << msrNotesDurationKindAsString (notesNotesDurationKind) <<
     " cannot be converted to divisions with " <<
     fDivisionsPerQuarterNote << " divisions per quarter note" <<
     std::endl;
 
-  printDurationKindsDivisions (ss);
+  printNotesDurationKindsDivisions (ss);
 
   msrInternalError (
     gServiceRunData->getInputSourceName (),
@@ -207,7 +207,7 @@ int msrDivisions::durationKindAsDivisions (
   return -1; // never reached
 }
 
-void msrDivisions::printDurationKindsDivisions (std::ostream& os)
+void msrDivisions::printNotesDurationKindsDivisions (std::ostream& os)
 {
   os <<
     "The mapping of durations to divisions with " <<
@@ -217,17 +217,17 @@ void msrDivisions::printDurationKindsDivisions (std::ostream& os)
 
   ++gIndenter;
 
-  if (fDurationKindsToDivisions.size ()) {
-    std::list<std::pair<msrDurationKind, int> >::const_iterator
-      iBegin = fDurationKindsToDivisions.begin (),
-      iEnd   = fDurationKindsToDivisions.end (),
+  if (fNotesDurationKindsToDivisions.size ()) {
+    std::list<std::pair<msrNotesDurationKind, int> >::const_iterator
+      iBegin = fNotesDurationKindsToDivisions.begin (),
+      iEnd   = fNotesDurationKindsToDivisions.end (),
       i      = iBegin;
 
     for ( ; ; ) {
       os <<
         std::setw (6) << std::left <<
-        msrDurationKindAsString (
-          msrDurationKind ((*i).first)) <<
+        msrNotesDurationKindAsString (
+          msrNotesDurationKind ((*i).first)) <<
         ": " <<
         std::setw (5) << std::right <<
         (*i).second;
@@ -240,14 +240,14 @@ void msrDivisions::printDurationKindsDivisions (std::ostream& os)
 /* JMI
 
     for (
-      std::list<std::pair<msrDuration, int> >::const_iterator i =
-        fDurationsToDivisions.begin ();
-      i != fDurationsToDivisions.end ();
+      std::list<std::pair<msrNotesDuration, int> >::const_iterator i =
+        fNotesDurationsToDivisions.begin ();
+      i != fNotesDurationsToDivisions.end ();
       ++i
   ) {
       os <<
         std::setw (6) << std::left <<
-        msrDurationAsString (msrDuration((*i).first)) <<
+        msrNotesDurationAsString (msrNotesDuration((*i).first)) <<
         ": " <<
         std::setw (4) << std::right <<
         (*i).second <<
@@ -297,13 +297,13 @@ std::string msrDivisions::divisionsAsMsrString (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  msrDurationKind baseDurationKind          = msrDurationKind::kDuration1024th;
-  int             baseDurationDivisions = -1;
+  msrNotesDurationKind baseNotesDurationKind          = msrNotesDurationKind::kNotesDuration1024th;
+  int             baseNotesDurationDivisions = -1;
 
-  // search fDurationsToDivisions in longer to shortest order
-  std::list<std::pair<msrDurationKind, int> >::const_iterator
-    iBegin = fDurationKindsToDivisions.begin (),
-    iEnd   = fDurationKindsToDivisions.end (),
+  // search fNotesDurationsToDivisions in longer to shortest order
+  std::list<std::pair<msrNotesDurationKind, int> >::const_iterator
+    iBegin = fNotesDurationKindsToDivisions.begin (),
+    iEnd   = fNotesDurationKindsToDivisions.end (),
     i      = iBegin;
 
   for ( ; ; ) {
@@ -315,7 +315,7 @@ std::string msrDivisions::divisionsAsMsrString (
         " could not be handled by divisionsAsMsrString () with:" <<
         std::endl;
 
-      printDurationKindsDivisions (gLog);
+      printNotesDurationKindsDivisions (gLog);
 
       msrInternalError (
         gServiceRunData->getInputSourceName (),
@@ -327,11 +327,11 @@ std::string msrDivisions::divisionsAsMsrString (
 
     if ((*i).second <= divisions) {
       // found base duration in list
-      baseDurationKind      = (*i).first;
-      baseDurationDivisions = (*i).second;
+      baseNotesDurationKind      = (*i).first;
+      baseNotesDurationDivisions = (*i).second;
 
       result =
-        msrDurationKindAsString (baseDurationKind);
+        msrNotesDurationKindAsString (baseNotesDurationKind);
 
 #ifdef MF_TRACE_IS_ENABLED
       if (gGlobalMxsrOahGroup->getTraceDivisions ()) {
@@ -342,7 +342,7 @@ std::string msrDivisions::divisionsAsMsrString (
           "divisions" << ": " << divisions <<
           std::endl << std::endl <<
             gTab << std::setw (fieldWidth) <<
-          "baseDurationDivisions" << ": " << baseDurationDivisions <<
+          "baseNotesDurationDivisions" << ": " << baseNotesDurationDivisions <<
           std::endl <<
             gTab << std::setw (fieldWidth) <<
           "result" << ": " << result <<
@@ -359,14 +359,14 @@ std::string msrDivisions::divisionsAsMsrString (
 
   int dotsNumber = 0;
 
-  if (divisions > baseDurationDivisions) {
+  if (divisions > baseNotesDurationDivisions) {
     // divisions is not a power of 2 of a quarter note
 
     // the next element in the list is half as long as (*i)
     int remainingDivisions =
-      divisions - baseDurationDivisions;
+      divisions - baseNotesDurationDivisions;
     int nextDivisionsInList =
-      baseDurationDivisions / 2;
+      baseNotesDurationDivisions / 2;
 
 #ifdef MF_TRACE_IS_ENABLED
     if (gGlobalMxsrOahGroup->getTraceDivisions ()) {
@@ -377,7 +377,7 @@ std::string msrDivisions::divisionsAsMsrString (
         "divisions" << ": " << divisions <<
         std::endl <<
         gTab << std::setw (fieldWidth) <<
-      "baseDurationDivisions" << ": " << baseDurationDivisions <<
+      "baseNotesDurationDivisions" << ": " << baseNotesDurationDivisions <<
         std::endl <<
         gTab << std::setw (fieldWidth) <<
       "nextDivisionsInList" << ": " << nextDivisionsInList <<
@@ -390,9 +390,10 @@ std::string msrDivisions::divisionsAsMsrString (
 
     if (remainingDivisions < nextDivisionsInList) {
       // the suffix is a multiplication factor
-      Rational r (
-        divisions,
-        baseDurationDivisions);
+      mfRational
+      	r (
+        	divisions,
+        	baseNotesDurationDivisions);
 
 #ifdef MF_TRACE_IS_ENABLED
       if (gGlobalMxsrOahGroup->getTraceDivisions ()) {
@@ -403,7 +404,7 @@ std::string msrDivisions::divisionsAsMsrString (
           "divisions" << ": " << divisions <<
           std::endl <<
           gTab << std::setw (fieldWidth) <<
-          "baseDurationDivisions" << ": " << baseDurationDivisions <<
+          "baseNotesDurationDivisions" << ": " << baseNotesDurationDivisions <<
           std::endl <<
           gTab << std::setw (fieldWidth) <<
           "r" << ": " << r <<
@@ -432,7 +433,7 @@ std::string msrDivisions::divisionsAsMsrString (
             "divisions" << ": " << divisions <<
             std::endl <<
             gTab << std::setw (fieldWidth) <<
-            "baseDurationDivisions" << ": " << baseDurationDivisions <<
+            "baseNotesDurationDivisions" << ": " << baseNotesDurationDivisions <<
             std::endl <<
             gTab << std::setw (fieldWidth) <<
             "nextDivisionsInList" << ": " << nextDivisionsInList <<
@@ -460,7 +461,7 @@ std::string msrDivisions::divisionsAsMsrString (
           "divisions" << ": " << divisions <<
           std::endl <<
           gTab << std::setw (fieldWidth) <<
-          "baseDurationDivisions" << ": " << baseDurationDivisions <<
+          "baseNotesDurationDivisions" << ": " << baseNotesDurationDivisions <<
           std::endl <<
           gTab << std::setw (fieldWidth) <<
           "nextDivisionsInList" << ": " << nextDivisionsInList <<
@@ -528,7 +529,7 @@ std::string msrDivisions::tupletDivisionsAsMsrString (
 
 std::string tupletWholeNotesAsMsrString (
   int             inputLineNumber,
-  const Rational& wholeNotes,
+  const msrWholeNotes& wholeNotes,
   int             actualNotes,
   int             normalNotes)
 {
@@ -537,7 +538,7 @@ std::string tupletWholeNotesAsMsrString (
       inputLineNumber,
       wholeNotes
         *
-      Rational (actualNotes, normalNotes));
+      mfRational (actualNotes, normalNotes));
 }
 
 void msrDivisions::acceptIn (basevisitor* v)

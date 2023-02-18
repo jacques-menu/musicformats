@@ -11,13 +11,13 @@
 
 #include <climits>      // INT_MIN, INT_MAX
 
-#include "mfStaticSettings.h"
-
 #include "visitor.h"
 
 #include "mfStaticSettings.h"
 
 #include "mfAssert.h"
+#include "mfConstants.h"
+
 
 /*
   CAUTION: // JMI v0.9.66
@@ -46,21 +46,21 @@ msrMeasureElement::msrMeasureElement (
   int inputLineNumber)
     : msrElement (inputLineNumber)
 //       fMeasureMoment (
-//         msrMoment::K_MEASURE_POSITION_UNKNOWN, msrMoment::K_MEASURE_POSITION_UNKNOWN),
+//         K_MEASURE_POSITION_UNKNOWN, K_MEASURE_POSITION_UNKNOWN),
 //       fVoiceMoment (
-//         msrMoment::K_MEASURE_POSITION_UNKNOWN, msrMoment::K_MEASURE_POSITION_UNKNOWN)
+//         K_MEASURE_POSITION_UNKNOWN, K_MEASURE_POSITION_UNKNOWN)
 {
-  fSoundingWholeNotes = Rational (0, 1),
+  fSoundingWholeNotes = msrWholeNotes (0, 1),
 
-  fMeasurePosition = msrMoment::K_MEASURE_POSITION_UNKNOWN;
-  fVoicePosition   = msrMoment::K_MEASURE_POSITION_UNKNOWN;
+  fMeasurePosition = K_MEASURE_POSITION_UNKNOWN;
+  fVoicePosition   = K_MEASURE_POSITION_UNKNOWN;
 }
 
 msrMeasureElement::~msrMeasureElement ()
 {}
 
 void msrMeasureElement::setSoundingWholeNotes (
-  const Rational&    wholeNotes,
+  const msrWholeNotes&    wholeNotes,
   const std::string& context)
 {
   doSetSoundingWholeNotes (
@@ -69,11 +69,11 @@ void msrMeasureElement::setSoundingWholeNotes (
 }
 
 void msrMeasureElement::doSetSoundingWholeNotes (
-  const Rational&    wholeNotes,
+  const msrWholeNotes&    wholeNotes,
   const std::string& context)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceWholeNotes ()) {
+  if (gTraceOahGroup->getTraceWholeNotes ()) {
     ++gIndenter;
 
     S_msrMeasure upLinkToMeasure;
@@ -109,11 +109,11 @@ void msrMeasureElement::doSetSoundingWholeNotes (
 
 void msrMeasureElement::setMeasurePosition (
   const S_msrMeasure& measure,
-  const Rational&     measurePosition,
+  const msrWholeNotes&     measurePosition,
   const std::string&  context)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceMeasurePositions ()) {
+  if (gTraceOahGroup->getTraceMeasurePositions ()) {
     S_msrMeasure upLinkToMeasure;
 
     getMeasureElementUpLinkToMeasure (
@@ -146,8 +146,8 @@ void msrMeasureElement::setMeasurePosition (
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
-    measurePosition != msrMoment::K_MEASURE_POSITION_UNKNOWN,
-    "measurePosition == msrMoment::K_MEASURE_POSITION_UNKNOWN");
+    measurePosition != K_MEASURE_POSITION_UNKNOWN,
+    "measurePosition == K_MEASURE_POSITION_UNKNOWN");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // set measure element's measure position
@@ -155,7 +155,7 @@ void msrMeasureElement::setMeasurePosition (
 
 //   // compute measure element's voice position
 // // if (false) { // JMI CAFE v0.9.66
-//   Rational
+//   msrWholeNotes
 //     voicePosition =
 //       measure->
 //         getMeasureVoicePosition ()
@@ -193,11 +193,11 @@ bool msrMeasureElement::compareMeasureElementsByIncreasingMeasurePosition (
 }
 
 void msrMeasureElement::setVoicePosition (
-  const Rational&    voicePosition,
+  const msrWholeNotes&    voicePosition,
   const std::string& context)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceVoicePositions ()) {
+  if (gTraceOahGroup->getTraceVoicePositions ()) {
     S_msrMeasure upLinkToMeasure;
 
     getMeasureElementUpLinkToMeasure (
@@ -226,13 +226,13 @@ void msrMeasureElement::setVoicePosition (
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
-    voicePosition != msrMoment::K_MEASURE_POSITION_UNKNOWN,
-    "voicePosition == msrMoment::K_MEASURE_POSITION_UNKNOWN");
+    voicePosition != K_MEASURE_POSITION_UNKNOWN,
+    "voicePosition == K_MEASURE_POSITION_UNKNOWN");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // set measure element voice position
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceVoicePositions ()) {
+  if (gTraceOahGroup->getTraceVoicePositions ()) {
     S_msrMeasure upLinkToMeasure;
 
     getMeasureElementUpLinkToMeasure (
@@ -265,7 +265,7 @@ void msrMeasureElement::setVoicePosition (
 //   const std::string&    context)
 // {
 // #ifdef MF_TRACE_IS_ENABLED
-//   if (gGlobalTraceOahGroup->getTraceMeasureMoments ()) {
+//   if (gTraceOahGroup->getTraceMeasureMoments ()) {
 //     gLog <<
 //       "Setting measure element measure moment of " <<
 //       asString () <<
@@ -292,7 +292,7 @@ void msrMeasureElement::setVoicePosition (
 //   const std::string&    context)
 // {
 // #ifdef MF_TRACE_IS_ENABLED
-//   if (gGlobalTraceOahGroup->getTraceMeasureMoments ()) {
+//   if (gTraceOahGroup->getTraceMeasureMoments ()) {
 //     gLog <<
 //       "Setting measure element voice moment of " <<
 //       asString () <<

@@ -125,7 +125,7 @@ msrDoubleTremolo::msrDoubleTremolo (
   fDoubleTremoloPlacementKind  = doubleTremoloPlacementKind;
 
   fDoubleTremoloSoundingWholeNotes =
-    Rational (-1, 1); // will be set later
+    msrWholeNotes (-1, 1); // will be set later
 
   fDoubleTremoloNumberOfRepeats = -1; // will be set later
 }
@@ -145,7 +145,7 @@ void msrDoubleTremolo::setDoubleTremoloUpLinkToMeasure (
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceWholeNotes ()) {
+  if (gTraceOahGroup->getTraceWholeNotes ()) {
     ++gIndenter;
 
     gLog <<
@@ -168,7 +168,7 @@ S_msrDoubleTremolo msrDoubleTremolo::createDoubleTremoloNewbornClone (
   const S_msrElement& doubleTremoloSecondElement)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceTremolos ()) {
+  if (gTraceOahGroup->getTraceTremolos ()) {
 		std::stringstream ss;
 
     ss <<
@@ -212,8 +212,8 @@ S_msrDoubleTremolo msrDoubleTremolo::createDoubleTremoloNewbornClone (
   newbornClone->fDoubleTremoloSoundingWholeNotes =
     fDoubleTremoloSoundingWholeNotes;
 
-  newbornClone->fDoubleTremoloElementsDuration =
-    fDoubleTremoloElementsDuration;
+  newbornClone->fDoubleTremoloElementsWholeNotes =
+    fDoubleTremoloElementsWholeNotes;
 
   newbornClone->fDoubleTremoloNumberOfRepeats =
     fDoubleTremoloNumberOfRepeats;
@@ -226,11 +226,11 @@ S_msrDoubleTremolo msrDoubleTremolo::createDoubleTremoloNewbornClone (
 
 // void msrDoubleTremolo::setMeasurePosition (
 //   const S_msrMeasure& measure,
-//   const Rational&     measurePosition,
+//   const msrWholeNotes&     measurePosition,
 //   const std::string&  context)
 // {
 // #ifdef MF_TRACE_IS_ENABLED
-//   if (gGlobalTraceOahGroup->getTraceMeasurePositions ()) {
+//   if (gTraceOahGroup->getTraceMeasurePositions ()) {
 //     ++gIndenter;
 //
 //     gLog <<
@@ -257,8 +257,8 @@ S_msrDoubleTremolo msrDoubleTremolo::createDoubleTremoloNewbornClone (
   // sanity check
 //   mfAssert (
 //     __FILE__, __LINE__,
-//     measurePosition != msrMoment::K_MEASURE_POSITION_UNKNOWN,
-//     "measurePosition == msrMoment::K_MEASURE_POSITION_UNKNOWN");
+//     measurePosition != K_MEASURE_POSITION_UNKNOWN,
+//     "measurePosition == K_MEASURE_POSITION_UNKNOWN");
 // #endif // MF_SANITY_CHECKS_ARE_ENABLED
 //
 //   // set double tremolo's measure position
@@ -266,7 +266,7 @@ S_msrDoubleTremolo msrDoubleTremolo::createDoubleTremoloNewbornClone (
 // }
 
 // void msrDoubleTremolo::setMeasurePosition ( ??? JMI v0.9.66
-//   const Rational& measurePosition)
+//   const msrWholeNotes& measurePosition)
 // {
 //   std::string context =
 //     "setMeasurePosition()";
@@ -277,7 +277,7 @@ S_msrDoubleTremolo msrDoubleTremolo::createDoubleTremoloNewbornClone (
 //
 //   if (false) { // JMI
 //   // compute double tremolo's voice position
-//   Rational
+//   msrWholeNotes
 //      voicePosition =
 //       fDoubleTremoloUpLinkToMeasure->getMeasureVoicePosition ()
 //         +
@@ -342,7 +342,7 @@ S_msrDoubleTremolo msrDoubleTremolo::createDoubleTremoloNewbornClone (
 void msrDoubleTremolo::setDoubleTremoloNoteFirstElement (const S_msrNote& note)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceTremolos ()) {
+  if (gTraceOahGroup->getTraceTremolos ()) {
 		std::stringstream ss;
 
     ss <<
@@ -368,7 +368,7 @@ void msrDoubleTremolo::setDoubleTremoloNoteFirstElement (const S_msrNote& note)
     setNoteIsFirstNoteInADoubleTremolo ();
 
   // fetch note display whole notes
-  Rational
+  msrWholeNotes
     noteDisplayWholeNotes =
       note->
         getNoteDisplayWholeNotes ();
@@ -382,8 +382,8 @@ void msrDoubleTremolo::setDoubleTremoloNoteFirstElement (const S_msrNote& note)
   // compute double tremolo elements duration
   // the marks number determines the duration of the two elements:
   // '8' for 1, '16' for 2, etc
-  fDoubleTremoloElementsDuration =
-    Rational (
+  fDoubleTremoloElementsWholeNotes =
+    msrWholeNotes (
       1,
       /* JMI
       int (
@@ -396,15 +396,15 @@ void msrDoubleTremolo::setDoubleTremoloNoteFirstElement (const S_msrNote& note)
   // set note's sounding whole notes
   note->
     setSoundingWholeNotes (
-      fDoubleTremoloElementsDuration,
+      fDoubleTremoloElementsWholeNotes,
       "msrDoubleTremolo::setDoubleTremoloNoteFirstElement()");
 
   // setting number of repeats
-  Rational
+  mfRational
     numberOfRepeatsAsRational =
       fDoubleTremoloSoundingWholeNotes
         /
-      fDoubleTremoloElementsDuration
+      fDoubleTremoloElementsWholeNotes
         /
       2; // there are two repeated notes
 
@@ -420,8 +420,8 @@ void msrDoubleTremolo::setDoubleTremoloNoteFirstElement (const S_msrNote& note)
       "fDoubleTremoloSoundingWholeNotes = '" <<
       fDoubleTremoloSoundingWholeNotes << "'" <<
       std::endl <<
-      "fDoubleTremoloElementsDuration = '" <<
-      fDoubleTremoloElementsDuration << "'" <<
+      "fDoubleTremoloElementsWholeNotes = '" <<
+      fDoubleTremoloElementsWholeNotes << "'" <<
       std::endl <<
       "line " << inputLineNumber;
 
@@ -436,7 +436,7 @@ void msrDoubleTremolo::setDoubleTremoloNoteFirstElement (const S_msrNote& note)
     numberOfRepeatsAsRational.getNumerator ();
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceTremolos ()) {
+  if (gTraceOahGroup->getTraceTremolos ()) {
 		std::stringstream ss;
 
     ss <<
@@ -444,8 +444,8 @@ void msrDoubleTremolo::setDoubleTremoloNoteFirstElement (const S_msrNote& note)
       fDoubleTremoloNumberOfRepeats <<
       "', fDoubleTremoloSoundingWholeNotes = '" <<
       fDoubleTremoloSoundingWholeNotes << "'" <<
-      ", fDoubleTremoloElementsDuration = '" <<
-      fDoubleTremoloElementsDuration << "'" <<
+      ", fDoubleTremoloElementsWholeNotes = '" <<
+      fDoubleTremoloElementsWholeNotes << "'" <<
       "', line " << inputLineNumber <<
       std::endl;
 
@@ -460,7 +460,7 @@ void msrDoubleTremolo::setDoubleTremoloNoteSecondElement (
   const S_msrNote& note)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceTremolos ()) {
+  if (gTraceOahGroup->getTraceTremolos ()) {
 		std::stringstream ss;
 
     ss <<
@@ -486,20 +486,20 @@ void msrDoubleTremolo::setDoubleTremoloNoteSecondElement (
     setNoteIsSecondNoteInADoubleTremolo ();
 
   // fetch note display whole notes
-  Rational
+  msrWholeNotes
     noteDisplayWholeNotes =
       note->
         getNoteDisplayWholeNotes ();
 
   // compute expected double tremolo sounding whole notes
-  Rational
+  msrWholeNotes
     expectedDoubleTremoloSoundingWholeNotes =
       noteDisplayWholeNotes;
 
   // check that expected double tremolo sounding whole notes
   // match the known double tremolo sounding whole notes
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceTremolos ()) {
+  if (gTraceOahGroup->getTraceTremolos ()) {
 		std::stringstream ss;
 
     ss <<
@@ -508,8 +508,8 @@ void msrDoubleTremolo::setDoubleTremoloNoteSecondElement (
       fDoubleTremoloNumberOfRepeats <<
       "', doubleTremoloSoundingWholeNotes = '" <<
       fDoubleTremoloSoundingWholeNotes <<
-      "', doubleTremoloElementsDuration = '" <<
-      fDoubleTremoloElementsDuration << "'" <<
+      "', doubleTremoloElementsNotesDuration = '" <<
+      fDoubleTremoloElementsWholeNotes << "'" <<
       "', line " << inputLineNumber <<
       std::endl;
 
@@ -551,7 +551,7 @@ void msrDoubleTremolo::setDoubleTremoloNoteSecondElement (
   // set note's sounding whole notes
   note->
     setSoundingWholeNotes (
-      fDoubleTremoloElementsDuration,
+      fDoubleTremoloElementsWholeNotes,
       "msrDoubleTremolo::setDoubleTremoloNoteSecondElement()");
 }
 
@@ -559,7 +559,7 @@ void msrDoubleTremolo::setDoubleTremoloChordFirstElement (
   const S_msrChord& chord)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceTremolos ()) {
+  if (gTraceOahGroup->getTraceTremolos ()) {
 		std::stringstream ss;
 
     ss <<
@@ -582,13 +582,13 @@ void msrDoubleTremolo::setDoubleTremoloChordFirstElement (
     setChordIsFirstChordInADoubleTremolo ();
 
   // fetch chord displayed whole notes
-  Rational
+  msrWholeNotes
     chordDisplayWholeNotes =
       chord->
         getChordDisplayWholeNotes ();
 
   // compute expected double tremolo sounding whole notes
-  Rational
+  msrWholeNotes
     expectedDoubleTremoloSoundingWholeNotes =
       chordDisplayWholeNotes * 2;
 
@@ -632,7 +632,7 @@ void msrDoubleTremolo::setDoubleTremoloChordFirstElement (
 void msrDoubleTremolo::setDoubleTremoloChordSecondElement (const S_msrChord& chord)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceTremolos ()) {
+  if (gTraceOahGroup->getTraceTremolos ()) {
 		std::stringstream ss;
 
     ss <<
@@ -655,7 +655,7 @@ void msrDoubleTremolo::setDoubleTremoloChordSecondElement (const S_msrChord& cho
     setChordIsSecondChordInADoubleTremolo ();
 
   // fetch chord displayed whole notes
-  Rational
+  msrWholeNotes
     chordDisplayWholeNotes =
       chord->
         getChordDisplayWholeNotes ();
@@ -963,8 +963,8 @@ void msrDoubleTremolo::print (std::ostream& os) const
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "doubleTremoloElementsDuration" << ": " <<
-    fDoubleTremoloElementsDuration <<
+    "doubleTremoloElementsNotesDuration" << ": " <<
+    fDoubleTremoloElementsWholeNotes <<
     std::endl <<
 
     std::setw (fieldWidth) <<

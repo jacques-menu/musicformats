@@ -19,6 +19,7 @@
 
 #include "mfBool.h"
 
+
 namespace MusicFormats
 {
 

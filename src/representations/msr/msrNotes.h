@@ -47,6 +47,7 @@
 #include "msrTupletElementsAndTuplets.h"
 #include "msrTupletElements.h"
 #include "msrTupletFactors.h"
+#include "msrWholeNotes.h"
 
 
 namespace MusicFormats
@@ -71,12 +72,12 @@ class EXP msrNote : public msrTupletElement
                             msrQuarterTonesPitchKind   noteQuarterTonesPitchKind,
                             msrOctaveKind              noteOctaveKind,
 
-                            const Rational&            noteSoundingWholeNotes,
-                            const Rational&            noteDisplayWholeNotes,
+                            const msrWholeNotes&            noteSoundingWholeNotes,
+                            const msrWholeNotes&            noteDisplayWholeNotes,
 
                             int                        noteDotsNumber,
 
-                            msrDurationKind            noteGraphicDurationKind,
+                            msrNotesDurationKind       noteGraphicNotesDurationKind,
 
                             msrQuarterTonesPitchKind   noteQuarterTonesDisplayPitchKind,
                             msrOctaveKind              noteDisplayOctaveKind,
@@ -101,38 +102,38 @@ class EXP msrNote : public msrTupletElement
     static SMARTP<msrNote> createRestNote (
                             int                inputLineNumber,
                             const std::string& noteMeasureNumber,
-                            const Rational&    soundingWholeNotes,
-                            const Rational&    displayWholeNotes,
+                            const msrWholeNotes&    soundingWholeNotes,
+                            const msrWholeNotes&    displayWholeNotes,
                             int                dotsNumber);
 
     static SMARTP<msrNote> createRestNoteWithOctave (
                             int                inputLineNumber,
                             const std::string& noteMeasureNumber,
                             msrOctaveKind      noteOctave,
-                            const Rational&    soundingWholeNotes,
-                            const Rational&    displayWholeNotes,
+                            const msrWholeNotes&    soundingWholeNotes,
+                            const msrWholeNotes&    displayWholeNotes,
                             int                dotsNumber);
 
     static SMARTP<msrNote> createSkipNote (
                             int                inputLineNumber,
                             const std::string& noteMeasureNumber,
-                            const Rational&    soundingWholeNotes,
-                            const Rational&    displayWholeNotes,
+                            const msrWholeNotes&    soundingWholeNotes,
+                            const msrWholeNotes&    displayWholeNotes,
                             int                dotsNumberr);
 
     static SMARTP<msrNote> createSkipNoteWithOctave (
                             int                inputLineNumber,
                             const std::string& noteMeasureNumber,
                             msrOctaveKind      noteOctave,
-                            const Rational&    soundingWholeNotes,
-                            const Rational&    displayWholeNotes,
+                            const msrWholeNotes&    soundingWholeNotes,
+                            const msrWholeNotes&    displayWholeNotes,
                             int                dotsNumber);
 
     static SMARTP<msrNote> createGraceSkipNote (
                             int                inputLineNumber,
                             const std::string& noteMeasureNumber,
-                            const Rational&    soundingWholeNotes,
-                            const Rational&    displayWholeNotes,
+                            const msrWholeNotes&    soundingWholeNotes,
+                            const msrWholeNotes&    displayWholeNotes,
                             int                dotsNumber);
 
     static SMARTP<msrNote> createRegularNote (
@@ -140,8 +141,8 @@ class EXP msrNote : public msrTupletElement
                             const std::string&       noteMeasureNumber,
                             msrQuarterTonesPitchKind quarterTonesPitchKind,
                             msrOctaveKind            noteOctaveKind,
-                            const Rational&          soundingWholeNotes,
-                            const Rational&          displayWholeNotes,
+                            const msrWholeNotes&          soundingWholeNotes,
+                            const msrWholeNotes&          displayWholeNotes,
                             int                      dotsNumber);
 
     static SMARTP<msrNote> createRestFromString (
@@ -182,12 +183,12 @@ class EXP msrNote : public msrTupletElement
                             msrQuarterTonesPitchKind   noteQuarterTonesPitchKind,
                             msrOctaveKind              noteOctaveKind,
 
-                            const Rational&            noteSoundingWholeNotes,
-                            const Rational&            noteDisplayWholeNotes,
+                            const msrWholeNotes&            noteSoundingWholeNotes,
+                            const msrWholeNotes&            noteDisplayWholeNotes,
 
                             int                        noteDotsNumber,
 
-                            msrDurationKind            noteGraphicDurationKind,
+                            msrNotesDurationKind       noteGraphicNotesDurationKind,
 
                             msrQuarterTonesPitchKind   noteQuarterTonesDisplayPitchKind,
                             msrOctaveKind              noteDisplayOctaveKind,
@@ -254,12 +255,12 @@ class EXP msrNote : public msrTupletElement
     // this override calls setNoteAttachedElementsMeasurePosition()
     void                  setMeasurePosition (
                             const S_msrMeasure& measure,
-                            const Rational&     measurePosition,
+                            const msrWholeNotes&     measurePosition,
                             const std::string&  context) override;
 
     void                  setNoteAttachedElementsMeasurePosition (
                             const S_msrMeasure& measure,
-                            const Rational&     measurePosition);
+                            const msrWholeNotes&     measurePosition);
 
     // note kind
 
@@ -358,10 +359,10 @@ class EXP msrNote : public msrTupletElement
                               { return fNoteQuarterTonesDisplayPitchKind; }
 
     void                  setNoteDisplayWholeNotes (
-                            const Rational& wholeNotes)
+                            const msrWholeNotes& wholeNotes)
                               { fNoteDisplayWholeNotes = wholeNotes; }
 
-    Rational              getNoteDisplayWholeNotes () const
+    msrWholeNotes              getNoteDisplayWholeNotes () const
                               { return fNoteDisplayWholeNotes; }
 
     // dots
@@ -369,8 +370,8 @@ class EXP msrNote : public msrTupletElement
     int                   getNoteDotsNumber () const
                               { return fNoteDotsNumber; }
 
-    msrDurationKind       getNoteGraphicDurationKind () const
-                              { return fNoteGraphicDurationKind; }
+    msrNotesDurationKind  getNoteGraphicNotesDurationKind () const
+                              { return fNoteGraphicNotesDurationKind; }
 
     // tuplet factor
 
@@ -938,9 +939,9 @@ class EXP msrNote : public msrTupletElement
     std::string           noteDisplayWholeNotesAsMsrString () const;
 
     // graphic duration
-    std::string           noteGraphicDurationAsMusicXMLString () const;
+    std::string           noteGraphicNotesDurationAsMusicXMLString () const;
 
-//     std::string           tupletNoteGraphicDurationAsMsrString ( // JMI v0.9.66
+//     std::string           tupletNoteGraphicNotesDurationAsMsrString ( // JMI v0.9.66
 //                             int actualNotes, int normalNotes) const;
 
     // note as std::string
@@ -1005,11 +1006,11 @@ class EXP msrNote : public msrTupletElement
     msrOctaveKind         fNoteOctaveKind;
 
     // whole notes
-    Rational              fNoteDisplayWholeNotes;
+    msrWholeNotes          fNoteDisplayWholeNotes;
 
     int                   fNoteDotsNumber;
 
-    msrDurationKind       fNoteGraphicDurationKind;
+    msrNotesDurationKind  fNoteGraphicNotesDurationKind;
 
     msrTupletFactor       fNoteTupletFactor;
 

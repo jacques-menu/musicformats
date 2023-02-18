@@ -51,7 +51,7 @@ bsrClef::bsrClef (
   fClefCellsList = buildCellsList ();
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceClefs ()) {
+  if (gTraceOahGroup->getTraceClefs ()) {
 		std::stringstream ss;
 
     ss <<

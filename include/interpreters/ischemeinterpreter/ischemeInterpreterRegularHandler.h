@@ -1,10 +1,10 @@
 /*
   MusicFormats Library
-  Copyright (C) Jacques Menu 2016-2023
+  Copyright (C) Jacques Menu 2016-2022
 
   This Source Code Form is subject to the terms of the Mozilla Public
   License, v. 2.0. If a copy of the MPL was not distributed with this
-  file, you can obtain one at http://mozilla.org/MPL/2.0/.
+  file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
   https://github.com/jacques-menu/musicformats
 */
@@ -16,9 +16,9 @@
 
 #include "ischemeInterpreterInsiderHandler.h"
 
+
 namespace MusicFormats
 {
-
 //_______________________________________________________________________________
 class EXP ischemeInterpreterRegularHandler : public oahRegularHandler
 /*
@@ -35,7 +35,7 @@ class EXP ischemeInterpreterRegularHandler : public oahRegularHandler
     static SMARTP<ischemeInterpreterRegularHandler> create (
                             const std::string& serviceName,
                             const std::string& handlerHeader,
-                            const S_ischemeInterpreterInsiderHandler&
+                            S_ischemeInterpreterInsiderHandler
                                                insiderOahHandler);
 
   protected:
@@ -46,7 +46,7 @@ class EXP ischemeInterpreterRegularHandler : public oahRegularHandler
                           ischemeInterpreterRegularHandler (
                             const std::string& serviceName,
                             const std::string& handlerHeader,
-                            const S_ischemeInterpreterInsiderHandler&
+                            S_ischemeInterpreterInsiderHandler
                                                insiderOahHandler);
 
     virtual               ~ischemeInterpreterRegularHandler ();
@@ -102,8 +102,6 @@ class EXP ischemeInterpreterRegularHandler : public oahRegularHandler
 
     void                  createInformationsRegularGroup ();
 
-    void                  createDisplayRegularGroup ();
-
     void                  createIschemeRegularUserGroup ();
     void                  createIschemeRegularMaintainanceGroup ();
 
@@ -117,7 +115,7 @@ class EXP ischemeInterpreterRegularHandler : public oahRegularHandler
     // ------------------------------------------------------
 };
 typedef SMARTP<ischemeInterpreterRegularHandler> S_ischemeInterpreterRegularHandler;
-EXP std::ostream& operator << (std::ostream& os, const S_ischemeInterpreterRegularHandler& elt);
+EXP std::ostream& operator<< (std::ostream& os, const S_ischemeInterpreterRegularHandler& elt);
 
 
 }

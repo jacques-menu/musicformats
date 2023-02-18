@@ -202,7 +202,7 @@ void bsrLine::appendSpacesToLine (S_bsrSpaces spaces)
 void bsrLine::appendKeyToLine (S_bsrKey key)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceKeys ()) {
+  if (gTraceOahGroup->getTraceKeys ()) {
 		std::stringstream ss;
 
     ss <<
@@ -221,7 +221,7 @@ void bsrLine::appendKeyToLine (S_bsrKey key)
 void bsrLine::appendTimeSignatureToLine (S_bsrTimeSignature timeSignature)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceTimeSignatures ()) {
+  if (gTraceOahGroup->getTraceTimeSignatures ()) {
 		std::stringstream ss;
 
     ss <<
@@ -241,7 +241,7 @@ void bsrLine::appendTimeSignatureToLine (S_bsrTimeSignature timeSignature)
 void bsrLine::insertTimeBeforeLastElementOfLine (S_bsrTimeSignature timeSignature)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceTimeSignatures ()) {
+  if (gTraceOahGroup->getTraceTimeSignatures ()) {
 		std::stringstream ss;
 
     ss <<
@@ -261,7 +261,7 @@ void bsrLine::insertTimeBeforeLastElementOfLine (S_bsrTimeSignature timeSignatur
 void bsrLine::appendTempoToLine (S_bsrTempo tempo)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceTempos ()) {
+  if (gTraceOahGroup->getTraceTempos ()) {
 		std::stringstream ss;
 
     ss <<
@@ -280,7 +280,7 @@ void bsrLine::appendTempoToLine (S_bsrTempo tempo)
 void bsrLine::appendMeasureToLine (S_bsrMeasure measure)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceMeasures () || gGlobalBsrOahGroup->getTraceLines ()) {
+  if (gTraceOahGroup->getTraceMeasures () || gGlobalBsrOahGroup->getTraceLines ()) {
     gLog <<
       "Appending measure '" <<
       measure->asShortString () <<
@@ -345,7 +345,7 @@ void bsrLine::appendLineElementToLastMeasureOfLine (
 void bsrLine::appendNoteToLine (S_bsrNote note)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceNotes ()) {
+  if (gTraceOahGroup->getTraceNotes ()) {
 		std::stringstream ss;
 
     ss <<

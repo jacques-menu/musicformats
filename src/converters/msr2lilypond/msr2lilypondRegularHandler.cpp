@@ -68,7 +68,7 @@ msr2lilypondRegularHandler::msr2lilypondRegularHandler (
   createRegularHandlerGroups ();
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOahDetails ()) {
+  if (gEarlyOptions.getTraceEarlyOptionsDetails ()) {
   // print the options handler initial state
   gLog <<
     "msr2lilypondRegularHandler \"" <<
@@ -85,7 +85,7 @@ msr2lilypondRegularHandler::~msr2lilypondRegularHandler ()
 void msr2lilypondRegularHandler::createRegularHandlerGroups ()
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -164,7 +164,7 @@ void msr2lilypondRegularHandler::createRegularHandlerGroups ()
   createMidiRegularGroup ();
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1675,7 +1675,7 @@ void msr2lilypondRegularHandler::createMidiRegularGroup ()
 void msr2lilypondRegularHandler::checkOptionsAndArguments () const
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<

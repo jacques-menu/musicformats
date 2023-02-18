@@ -293,7 +293,7 @@ static mfMusicformatsErrorKind xmlFile2guidoWithOptionsAndArguments (
 
   else {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
   err <<
     "xmlFile2guido(), sxmlfile is NULL" <<
     std::endl;
@@ -321,7 +321,7 @@ static mfMusicformatsErrorKind xmlFile2guidoWithOptionsAndArguments (
   // print the options and arguments
   // ------------------------------------------------------
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -342,7 +342,7 @@ static mfMusicformatsErrorKind xmlFile2guidoWithOptionsAndArguments (
     gEarlyOptions.getEarlyInsiderOption ();
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<

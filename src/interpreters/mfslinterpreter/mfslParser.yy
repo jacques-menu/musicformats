@@ -2,11 +2,11 @@
 
 /*
   MusicFormats Library
-  Copyright (C) Jacques Menu 2016-2023
+  Copyright (C) Jacques Menu 2016-2022
 
   This Source Code Form is subject to the terms of the Mozilla Public
   License, v. 2.0. If a copy of the MPL was not distributed with this
-  file, you can obtain one at http://mozilla.org/MPL/2.0/.
+  file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
   https://github.com/jacques-menu/musicformats
 */
@@ -46,7 +46,7 @@ using namespace MusicFormats;
 %code requires {
   #include <string>
 
-  class   mfslDriver;
+  class mfslDriver;
 }
 
 // the parsing context
@@ -83,7 +83,7 @@ using namespace MusicFormats;
   COLON       ":"
   COMMA       ","
 
-  TOOL        "tool"
+  SERVICE        "service"
   INPUT       "input"
 
   CHOICE      "choice"
@@ -116,7 +116,7 @@ using namespace MusicFormats;
 %nterm <std::string> Number
 
 %nterm <std::string> SingleString
-%nterm <std::string> std::string
+%nterm <std::string> String
 
 %nterm <std::string> OptionValue
 
@@ -145,7 +145,7 @@ using namespace MusicFormats;
 //_______________________________________________________________________________
 
 Script :
-  Tool
+  Service
 
   Input
 
@@ -198,22 +198,22 @@ SingleString
   | DOUBLE_QUOTED_STRING
 ;
 
-std::string
+String
   : SingleString
-  | std::string SingleString
+  | String SingleString
       {
         $$ = $1 + $2;
       }
 ;
 
 
-// tool statement
+// service statement
 //_______________________________________________________________________________
 
-Tool
- : TOOL COLON NAME SEMICOLON
+Service
+ : SERVICE COLON NAME SEMICOLON
       {
-        drv.setTool ($3);
+        drv.setService ($3);
       }
  ;
 
@@ -236,7 +236,7 @@ InputSource
         drv.appendInputSouce ($1);
       }
 
-  | std::string
+  | String
       {
         drv.appendInputSouce ($1);
       }
@@ -252,9 +252,9 @@ OptionalScriptElementsSeq
 ;
 
 ScriptElementsSeq
-  : ScriptElement
+	: ScriptElement
 
-  | ScriptElementsSeq ScriptElement
+	| ScriptElementsSeq ScriptElement
 ;
 
 ScriptElement
@@ -277,7 +277,7 @@ Option
           gLog <<
             "====> option " << $1 <<
             ", line " << drv.getScannerLocation () <<
-            std::endl;
+            endl;
         }
 
         drv.registerOptionInCurrentOptionsBlock (
@@ -295,7 +295,7 @@ Option
           gLog <<
             "====> option " << $1 << ' ' << $2 <<
             ", line " << drv.getScannerLocation () <<
-            std::endl;
+            endl;
         }
 
         drv.registerOptionInCurrentOptionsBlock (
@@ -309,7 +309,7 @@ Option
 OptionValue
   : NAME
   | Number
-  | std::string
+  | String
   | NAME EQUAL NAME
       {
         $$ = $1 + "=" + $3;
@@ -341,9 +341,9 @@ ChoiceDeclaration
 
         if (drv.getTraceCaseChoiceStatements ()) {
           gLog <<
-            "====> choice " << choiceName << ": " << "..." <<
+            "====> choice " << choiceName << " : " << "..." <<
             ", line " << drv.getScannerLocation () <<
-            std::endl;
+            endl;
         }
 
         // create a choice
@@ -391,7 +391,7 @@ ChoiceDeclaration
         if (drv.getTraceCaseChoiceStatements ()) {
           gLog <<
             "------------------------------------------------------------" <<
-            std::endl;
+            endl;
         }
 
         --gIndenter;
@@ -470,7 +470,7 @@ CaseChoiceStatement
           gLog <<
             "====> case " << choiceName << ": ..." <<
             ", line " << drv.getScannerLocation () <<
-            std::endl;
+            endl;
         }
 
         // create a new current case statement
@@ -486,16 +486,16 @@ CaseChoiceStatement
                 drv);
 
         if (! choice) {
-          std::stringstream ss;
+          stringstream s;
 
-          ss <<
+          s <<
             "name \"" << choiceName <<
             "\" is no choice name, cannot be used in a 'select' statement" <<
             ", line " << drv.getScannerLocation () <<
-            std::endl;
+            endl;
 
           mfslError (
-            ss.str (),
+            s.str (),
             drv.getScannerLocation ());
         }
 
@@ -526,7 +526,7 @@ CaseChoiceStatement
         if (drv.getTraceCaseChoiceStatements ()) {
           gLog <<
             "------------------------------------------------------------" <<
-            std::endl;
+            endl;
         }
 
         --gIndenter;
@@ -565,9 +565,9 @@ CaseChoiceAlternative
             drv.caseChoiceStatementsStackTop ();
 
         // push a new current options block onto the stack
-        std::stringstream ss;
+        stringstream s;
 
-        ss <<
+        s <<
           "Case alternative for " <<
           currentCaseChoiceStatement->
             currentLabelsListAsString () <<
@@ -575,7 +575,7 @@ CaseChoiceAlternative
 
         std::string
           CaseChoiceAlternativeDescription =
-            ss.str ();
+            s.str ();
 
         S_mfslOptionsBlock
           CaseChoiceAlternativeOptionsBlock =
@@ -609,16 +609,16 @@ CaseChoiceAlternative
         } // for
 
         // discard this case alternative
-        std::stringstream ss;
+        stringstream s;
 
-        ss <<
+        s <<
           "Discarding case alternative options block for " <<
           currentCaseChoiceStatement->
             currentLabelsListAsString () <<
           ", line " << drv.getScannerLocation () <<
-          std::endl;
+          endl;
 
-        std::string context = ss.str ();
+        std::string context = s.str ();
 
         drv.optionsBlocksStackPop (
           context);
@@ -669,7 +669,7 @@ CaseInputStatement
           gLog <<
             "====> case input " << inputName << ": ..." <<
             ", line " << drv.getScannerLocation () <<
-            std::endl;
+            endl;
         }
 
         // create a new current case input statement
@@ -685,16 +685,16 @@ CaseInputStatement
                 drv);
 
         if (! input) {
-          std::stringstream ss;
+          stringstream s;
 
-          ss <<
+          s <<
             "name \"" << inputName <<
             "\" is no input name, cannot be used in a 'select' statement" <<
             ", line " << drv.getScannerLocation () <<
-            std::endl;
+            endl;
 
           mfslError (
-            ss.str (),
+            s.str (),
             drv.getScannerLocation ());
         }
 
@@ -725,7 +725,7 @@ CaseInputStatement
         if (drv.getTraceCaseInputStatements ()) {
           gLog <<
             "------------------------------------------------------------" <<
-            std::endl;
+            endl;
         }
 
         --gIndenter;
@@ -764,9 +764,9 @@ CaseInputAlternative
             drv.caseInputStatementsStackTop ();
 
         // push a new current options block onto the stack
-        std::stringstream ss;
+        stringstream s;
 
-        ss <<
+        s <<
           "CaseInput alternative for " <<
           currentCaseInputStatement->
             currentNamesListAsString () <<
@@ -774,7 +774,7 @@ CaseInputAlternative
 
         std::string
           caseInputAlternativeDescription =
-            ss.str ();
+            s.str ();
 
         S_mfslOptionsBlock
           caseInputAlternativeOptionsBlock =
@@ -808,16 +808,16 @@ CaseInputAlternative
         } // for
 
         // discard this case input alternative
-        std::stringstream ss;
+        stringstream s;
 
-        ss <<
+        s <<
           "Discarding case input alternative options block for " <<
           currentCaseInputStatement->
             currentNamesListAsString () <<
           ", line " << drv.getScannerLocation () <<
-          std::endl;
+          endl;
 
-        std::string context = ss.str ();
+        std::string context = s.str ();
 
         drv.optionsBlocksStackPop (
           context);

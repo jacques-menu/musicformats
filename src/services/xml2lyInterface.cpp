@@ -183,7 +183,7 @@ EXP int xml2ly (
     gEarlyOptions.getEarlyInsiderOption ();
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -297,7 +297,7 @@ EXP int xml2ly (
         fetchOutputFileNameFromTheOptions ();
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
     std::string separator =
       "%--------------------------------------------------------------";
 
@@ -453,7 +453,7 @@ EXP int xml2ly (
     if (inputSourceName == "-") {
       // MusicXML data comes from standard input
 #ifdef MF_TRACE_IS_ENABLED
-      if (gEarlyOptions.getEarlyTraceOah ()) {
+      if (gEarlyOptions.getTraceEarlyOptions ()) {
         gLog << "Reading standard input" << std::endl;
       }
 #endif // MF_TRACE_IS_ENABLED
@@ -469,7 +469,7 @@ EXP int xml2ly (
     else {
       // MusicXML data comes from a file
 #ifdef MF_TRACE_IS_ENABLED
-      if (gEarlyOptions.getEarlyTraceOah ()) {
+      if (gEarlyOptions.getTraceEarlyOptions ()) {
         std::stringstream ss;
 
         ss <<

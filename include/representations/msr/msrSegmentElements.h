@@ -36,7 +36,7 @@ class EXP msrSegmentElement : public msrElement
 
     static const std::string K_MEASURE_NUMBER_UNKNOWN;
 
-    static const Rational K_WHOLE_NOTES_UNKNOWN;
+    static const mfRational K_WHOLE_NOTES_UNKNOWN;
 
   protected:
 
@@ -54,10 +54,10 @@ class EXP msrSegmentElement : public msrElement
     // ------------------------------------------------------
 
     void                  setSegmentElementSoundingWholeNotes (
-                            const Rational& wholeNotes,
+                            const mfRational& wholeNotes,
                             const std::string&   context);
 
-    Rational              getSegmentElementSoundingWholeNotes () const
+    mfRational              getSegmentElementSoundingWholeNotes () const
                               { return fSegmentElementSoundingWholeNotes; }
 
 //     void                  setSegmentElementMeasureNumber (
@@ -69,14 +69,14 @@ class EXP msrSegmentElement : public msrElement
 //     std::string           getSegmentElementMeasureNumber () const
 //                               { return fSegmentElementMeasureNumber; }
 //
-//     Rational              getSegmentElementMeasurePosition () const
+//     mfRational              getSegmentElementMeasurePosition () const
 //                               { return fSegmentElementMeasurePosition; }
 //
 //     void                  setSegmentElementVoicePosition (
-//                             const Rational& voicePosition,
+//                             const mfRational& voicePosition,
 //                             const std::string&   context);
 //
-//     Rational              getSegmentElementVoicePosition () const
+//     mfRational              getSegmentElementVoicePosition () const
 //                               { return fSegmentElementVoicePosition; }
 //
 //     void                  setSegmentElementMeasureMoment (
@@ -106,7 +106,7 @@ class EXP msrSegmentElement : public msrElement
 //                             const SMARTP<msrSegmentElement>& second);
 //
 //     virtual void          assignSegmentElementVoicePosition (
-//                             Rational&     voicePosition,
+//                             mfRational&     voicePosition,
 //                             const std::string& context);
 
   public:
@@ -141,12 +141,12 @@ class EXP msrSegmentElement : public msrElement
       to allow for separate *.h files, C++ constraint
     */
 
-    Rational              fSegmentElementSoundingWholeNotes;
+    mfRational              fSegmentElementSoundingWholeNotes;
 
 //     std::string           fSegmentElementMeasureNumber;
 //
-//     Rational              fSegmentElementMeasurePosition;
-//     Rational              fSegmentElementVoicePosition;
+//     mfRational              fSegmentElementMeasurePosition;
+//     mfRational              fSegmentElementVoicePosition;
 //
 //     msrMoment             fSegmentElementMeasureMoment;
 //     msrMoment             fSegmentElementVoiceMoment;

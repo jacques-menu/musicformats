@@ -9,19 +9,15 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include "mfStaticSettings.h"
-
 #include "visitor.h"
 
+#include "mfStaticSettings.h"
+
 #include "mfAssert.h"
-
 #include "mfServices.h"
-
 #include "mfStringsHandling.h"
 
 #include "msrWae.h"
-
-#include "mfStaticSettings.h"
 
 #include "msrMultipleFullBarRests.h"
 
@@ -39,9 +35,9 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 S_msrMultipleFullBarRests msrMultipleFullBarRests::create (
-  int              inputLineNumber,
-  int              multipleFullBarRestsNumber,
-  const S_msrSegment&     upLinkToSegment)
+	int                 inputLineNumber,
+	int                 multipleFullBarRestsNumber,
+	const S_msrSegment& upLinkToSegment)
 {
   msrMultipleFullBarRests* o =
     new msrMultipleFullBarRests (
@@ -53,9 +49,9 @@ S_msrMultipleFullBarRests msrMultipleFullBarRests::create (
 }
 
 S_msrMultipleFullBarRests msrMultipleFullBarRests::create (
-  int          inputLineNumber,
-  const S_msrMeasure& restMeasureClone,
-  const S_msrSegment& upLinkToSegment)
+	int                 inputLineNumber,
+	const S_msrMeasure& restMeasureClone,
+	const S_msrSegment& upLinkToSegment)
 {
   msrMultipleFullBarRests* o =
     new msrMultipleFullBarRests (
@@ -67,9 +63,9 @@ S_msrMultipleFullBarRests msrMultipleFullBarRests::create (
 }
 
 msrMultipleFullBarRests::msrMultipleFullBarRests (
-  int             inputLineNumber,
-  int             multipleFullBarRestsNumber,
-  const S_msrSegment&    upLinkToSegment)
+	int                 inputLineNumber,
+	int                 multipleFullBarRestsNumber,
+	const S_msrSegment& upLinkToSegment)
     : msrSegmentElement (inputLineNumber)
 {
   fMultipleFullBarRestsUpLinkToSegment = upLinkToSegment;
@@ -80,9 +76,9 @@ msrMultipleFullBarRests::msrMultipleFullBarRests (
 }
 
 msrMultipleFullBarRests::msrMultipleFullBarRests (
-  int          inputLineNumber,
-  const S_msrMeasure& restMeasureClone,
-  const S_msrSegment& upLinkToSegment)
+	int                 inputLineNumber,
+	const S_msrMeasure& restMeasureClone,
+	const S_msrSegment& upLinkToSegment)
     : msrSegmentElement (inputLineNumber)
 {
   fMultipleFullBarRestsUpLinkToSegment = upLinkToSegment;
@@ -99,7 +95,7 @@ S_msrMultipleFullBarRests msrMultipleFullBarRests::createMultipleFullBarRestsNew
   const S_msrSegment& containingVoice)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceMultipleFullBarRests ()) {
+  if (gTraceOahGroup->getTraceMultipleFullBarRests ()) {
 		std::stringstream ss;
 
     ss <<
@@ -137,13 +133,13 @@ S_msrMultipleFullBarRests msrMultipleFullBarRests::createMultipleFullBarRestsNew
   return newbornClone;
 }
 
-Rational msrMultipleFullBarRests::fetchMultipleFullBarRestsMeasureSoundingNotes () const
+msrWholeNotes msrMultipleFullBarRests::fetchMultipleFullBarRestsMeasureSoundingNotes () const
 {
-  Rational result;
+  msrWholeNotes result;
 
   for (S_msrMeasure measure : fFullBarRestsMeasuresList) {
     result +=
-      measure->getFullMeasureWholeNotesDuration ();
+      measure->getFullMeasureWholeNotes ();
   } // for
 
   return result;
@@ -153,7 +149,7 @@ void msrMultipleFullBarRests::setMultipleFullBarRestsNextMeasureNumber (
   const std::string& nextMeasureNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceMultipleFullBarRests ()) {
+  if (gTraceOahGroup->getTraceMultipleFullBarRests ()) {
 		std::stringstream ss;
 
     ss <<
@@ -228,7 +224,7 @@ void msrMultipleFullBarRests::setMultipleFullBarRestsLastMeasurePuristMeasureNum
 //   }
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceMultipleFullBarRests ()) {
+  if (gTraceOahGroup->getTraceMultipleFullBarRests ()) {
 		std::stringstream ss;
 
     ss <<
@@ -274,7 +270,7 @@ void msrMultipleFullBarRests::appendMeasureToMultipleFullBarRests (
 //       appendMeasureToSegment (
 //         measureClone);
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceMultipleFullBarRests ()) {
+  if (gTraceOahGroup->getTraceMultipleFullBarRests ()) {
 		std::stringstream ss;
 
     ss <<

@@ -60,7 +60,7 @@ class EXP traceOahGroup : public oahGroup
 
     void                  initializeRepeatsToSlashesTraceOah ();
 
-    void                  initializeDurationsTraceOah ();
+    void                  initializeNotesDurationsTraceOah ();
 
     void                  initializeNotesTraceOah ();
 
@@ -125,7 +125,7 @@ class EXP traceOahGroup : public oahGroup
                           getTraceOahBooleanAtom () const
                               { return fTraceOahBooleanAtom; }
 
-// replaced by getEarlyTraceOahDetails()
+// replaced by getTraceEarlyOptionsDetails()
 //     Bool                  getTraceOahDetails () const
 //                               { return fTraceOahDetails; }
 
@@ -399,10 +399,10 @@ class EXP traceOahGroup : public oahGroup
     // durations
     // --------------------------------------
 
-    void                  setTraceDurations ()
-                              { fTraceDurations = true; }
-    Bool                  getTraceDurations () const
-                              { return fTraceDurations; }
+    void                  setTraceNotesDurations ()
+                              { fTraceNotesDurations = true; }
+    Bool                  getTraceNotesDurations () const
+                              { return fTraceNotesDurations; }
 
     // notes
     // --------------------------------------
@@ -943,7 +943,7 @@ class EXP traceOahGroup : public oahGroup
     // notes
     // --------------------------------------
 
-    Bool                  fTraceDurations;
+    Bool                  fTraceNotesDurations;
 
 
     // notes
@@ -1101,13 +1101,18 @@ class EXP traceOahGroup : public oahGroup
     // layout
 */
 };
-typedef SMARTP<traceOahGroup> S_TraceOahGroup;
-EXP std::ostream& operator << (std::ostream& os, const S_TraceOahGroup& elt);
-
-EXP extern S_TraceOahGroup gGlobalTraceOahGroup;
+typedef SMARTP<traceOahGroup> S_traceOahGroup;
+EXP std::ostream& operator << (std::ostream& os, const S_traceOahGroup& elt);
 
 //______________________________________________________________________________
-EXP S_TraceOahGroup createGlobalTraceOahGroup (
+// hidden global trace OAH group variable
+EXP S_traceOahGroup getGlobalTraceOahGroup ();
+
+// a handy shortcut
+#define gTraceOahGroup getGlobalTraceOahGroup ()
+
+//______________________________________________________________________________
+EXP S_traceOahGroup createGlobalTraceOahGroup (
   const S_oahHandler& handler);
 
 

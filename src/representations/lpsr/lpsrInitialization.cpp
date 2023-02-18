@@ -30,7 +30,7 @@ void initializeLPSR ()
   if (! pPrivateThisMethodHasBeenRun) {
 #ifdef MF_TRACE_IS_ENABLED
     if (
-      gEarlyOptions.getEarlyTraceOah ()
+      gEarlyOptions.getTraceEarlyOptions ()
         &&
       ! gEarlyOptions.getEarlyQuietOption ()
     ) {
@@ -74,7 +74,7 @@ void initializeLPSR ()
     // LPSR lyrics durations kinds handling
     // ------------------------------------------------------
 
-    initializeLpsrLyricsDurationsKindsMap ();
+    initializeLpsrLyricsNotesDurationsKindsMap ();
 
     pPrivateThisMethodHasBeenRun = true;
   }

@@ -203,7 +203,7 @@ void initializeMusicFormatsLanguages ()
   if (! pPrivateThisMethodHasBeenRun) {
 #ifdef MF_TRACE_IS_ENABLED
     if (
-      gEarlyOptions.getEarlyTraceOah ()
+      gEarlyOptions.getTraceEarlyOptions ()
         &&
       ! gEarlyOptions.getEarlyQuietOption ()
     ) {
@@ -291,11 +291,11 @@ std::string language::passIDKindAsString (mfPassIDKind passIDKind) const
       break;
 
     case mfPassIDKind::kMfPassID_OptionsAndArgumentsHandling:
-      result = "opts & args";
+      result = "Opts & Args";
       break;
 
-    case mfPassIDKind::kMfPassID_OptionalPass:
-      result = "optional";
+    case mfPassIDKind::kMfPassID_DisplayPass:
+      result = "Display";
       break;
 
     case mfPassIDKind::kMfPassID_1:

@@ -329,7 +329,7 @@ static mfMusicformatsErrorKind xmlFile2brailleWithHandler (
           fetchOutputFileNameFromTheOptions ();
 
 #ifdef MF_TRACE_IS_ENABLED
-      if (gEarlyOptions.getEarlyTraceOah ()) {
+      if (gEarlyOptions.getTraceEarlyOptions ()) {
         err <<
           "xmlFile2braille() outputFileName = \"" <<
           outputFileName <<
@@ -344,7 +344,7 @@ static mfMusicformatsErrorKind xmlFile2brailleWithHandler (
 
     if (! outputFileName.size ()) {
 #ifdef MF_TRACE_IS_ENABLED
-      if (gEarlyOptions.getEarlyTraceOah ()) {
+      if (gEarlyOptions.getTraceEarlyOptions ()) {
         err <<
           "xmlFile2braille() output goes to standard output" <<
           std::endl;
@@ -376,7 +376,7 @@ static mfMusicformatsErrorKind xmlFile2brailleWithHandler (
 
     else {
 #ifdef MF_TRACE_IS_ENABLED
-      if (gEarlyOptions.getEarlyTraceOah ()) {
+      if (gEarlyOptions.getTraceEarlyOptions ()) {
         err <<
           "xmlFile2braille() output goes to file \"" <<
           outputFileName <<
@@ -484,7 +484,7 @@ static mfMusicformatsErrorKind xmlFile2brailleWithOptionsAndArguments (
 
   else {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
   err <<
     "xmlFile2braille(), sxmlfile is NULL" <<
     std::endl;
@@ -512,7 +512,7 @@ static mfMusicformatsErrorKind xmlFile2brailleWithOptionsAndArguments (
   // print the options and arguments
   // ------------------------------------------------------
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -533,7 +533,7 @@ static mfMusicformatsErrorKind xmlFile2brailleWithOptionsAndArguments (
     gEarlyOptions.getEarlyInsiderOption ();
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<

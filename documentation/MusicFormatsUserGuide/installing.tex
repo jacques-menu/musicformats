@@ -44,7 +44,7 @@ Then click on the link to the desired version such as v0.9.65, to access its con
 Each \code{.zip} archive contains:
 \begin{itemize}
 \item  text files containing the version number and release date;
-\item  the executable tools in the bin subdirectory;
+\item  the executable tools ans services in the bin subdirectory;
 \item  binary versions of the library in the lib subdirectory;
 \item  a PDF introduction to MusicXML;
 \item  a PDF MusicFormats user guide.
@@ -393,7 +393,7 @@ The \make\ file as a number of possibilities:
 jacquesmenu@macmini: ~/musicformats_local_clone/build > make help
 MusicFormats makefile - Targets are :
    all (default): build the MusicFormats library for the current platform,
-                  build the MusicFormats tools,
+                  build the MusicFormats tools and services,
 
 Platform targets to build the MusicFormats library are:
    macos     build the library for macos
@@ -408,8 +408,8 @@ the platform targets is automatically evaluated by the default target.
 Misc:
    cmake     re-generates the cmake project
    format    source code formatting using clang-format
-   install   install library, tools and headers
-   localinstall   install the tools to ~/bin
+   install   install library, tools, services and headers
+   localinstall   install the tools  and services to ~/bin
    package   create the musicformats-v0.9.60 package
 
 Options:
@@ -439,7 +439,7 @@ In order to build \mf\ from source on your machine, you need:
 \item the \cmake\ tool. It is available ready to install on \MacOS\ via \macports\ (\url{https://www.macports.org}).
 \end{itemize}
 
-The supported \OS s to build the library and run the \CLI\ tools are Linux, Windows and MacOS. Other systems may be fine but have not been tested.
+The supported \OS s to build the library and run the \CLI\ services are Linux, Windows and MacOS. Other systems may be fine but have not been tested.
 
 \mf\ requires \CPlusplus\ at least. More recent versions are fine too.
 
@@ -542,7 +542,7 @@ In order to build \mf\ from source on your machine, you need:
 \item the \cmake\ tool. It is available ready to install on \MacOS\ via \macports\ (\url{https://www.macports.org}).
 \end{itemize}
 
-The supported \OS s to build the library and run the \CLI\ tools are Linux, Windows and MacOS. Other systems may be fine but have not been used for tests.
+The supported \OS s to build the library and run the \CLI\ services are Linux, Windows and MacOS. Other systems may be fine but have not been used for tests.
 
 \mf\ requires \CPlusplus\ at least. More recent versions are fine too.
 

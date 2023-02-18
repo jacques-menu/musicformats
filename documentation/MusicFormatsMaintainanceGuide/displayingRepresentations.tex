@@ -36,7 +36,7 @@
 %    note->getInputLineNumber ();
 %
 %#ifdef MF_TRACE_IS_ENABLED
-%  if (gGlobalTraceOahGroup->getTraceNotes ()) {
+%  if (gTraceOahGroup->getTraceNotes ()) {
 %    std::stringstream ss;
 %
 %    ss <<
@@ -49,7 +49,7 @@
 %    gLog          << ss.str ();
 %    fLilypondCodeStream << ss.str ();
 %  }
-%#endif
+%#endif // MF_TRACE_IS_ENABLED
 %
 %\end{lstlisting}
 

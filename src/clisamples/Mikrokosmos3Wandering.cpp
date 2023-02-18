@@ -95,14 +95,14 @@ void enforceSomeOptions (
   // ------------------------------------------------------
 
 /*
-  gGlobalTraceOahGroup->setTraceScores ();
-  gGlobalTraceOahGroup->setTracePartGroups ();
-  gGlobalTraceOahGroup->setTraceParts ();
-  gGlobalTraceOahGroup->setTraceStaves ();
-  gGlobalTraceOahGroup->setTraceVoices ();
-  gGlobalTraceOahGroup->setTraceSegments ();
-  gGlobalTraceOahGroup->setTraceMeasures ();
-  gGlobalTraceOahGroup->setTraceNotes ();
+  gTraceOahGroup->setTraceScores ();
+  gTraceOahGroup->setTracePartGroups ();
+  gTraceOahGroup->setTraceParts ();
+  gTraceOahGroup->setTraceStaves ();
+  gTraceOahGroup->setTraceVoices ();
+  gTraceOahGroup->setTraceSegments ();
+  gTraceOahGroup->setTraceMeasures ();
+  gTraceOahGroup->setTraceNotes ();
 */
 
   // MSR
@@ -113,7 +113,7 @@ void enforceSomeOptions (
   gGlobalMsrOahGroup->setTraceMsrVisitors ();
   gGlobalMsrOahGroup->setDisplayMsr ();
 
-  gGlobalMsrOahGroup->setTraceMsrDurations ();
+  gGlobalMsrOahGroup->setTraceMsrNotesDurations ();
 */
 
   // generate code dependant specific options
@@ -218,7 +218,7 @@ int main (int argc, char*  argv[])
     gEarlyOptions.getEarlyInsiderOption ();
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -244,7 +244,7 @@ int main (int argc, char*  argv[])
         getEarlyMultiGenerationOutputKind ();
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -479,7 +479,7 @@ int main (int argc, char*  argv[])
         getGenerationAPIKind ();
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -625,7 +625,7 @@ int main (int argc, char*  argv[])
   } // switch
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
     if (err != mfMusicformatsErrorKind::kMusicformatsError_NONE) {
       gLog <<
         serviceName << ", " <<

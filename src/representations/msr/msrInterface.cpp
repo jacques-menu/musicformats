@@ -23,7 +23,7 @@
 
 #include "msrWae.h"
 
-#include "mfStaticSettings.h"
+#include "msrWholeNotes.h"
 
 #include "oahOah.h"
 #include "waeOah.h"
@@ -112,7 +112,7 @@ void displayMsrScore (
   // start the clock
   clock_t startClock =  clock ();
 
-  setGlobalCurrentPassIDKind (mfPassIDKind::kMfPassID_OptionalPass);
+  setGlobalCurrentPassIDKind (mfPassIDKind::kMfPassID_DisplayPass);
 
   std::string separator =
     "%--------------------------------------------------------------";
@@ -135,7 +135,7 @@ void displayMsrScore (
   clock_t endClock = clock ();
 
   gGlobalTimingItemsList.appendTimingItem (
-		mfPassIDKind::kMfPassID_OptionalPass,
+		mfPassIDKind::kMfPassID_DisplayPass,
     passDescription,
     mfTimingItemKind::kOptional,
     startClock,
@@ -175,7 +175,7 @@ void displayMsrScoreFull (
   // start the clock
   clock_t startClock = clock ();
 
-  setGlobalCurrentPassIDKind (mfPassIDKind::kMfPassID_OptionalPass);
+  setGlobalCurrentPassIDKind (mfPassIDKind::kMfPassID_DisplayPass);
 
   std::string separator =
     "%--------------------------------------------------------------";
@@ -200,7 +200,7 @@ void displayMsrScoreFull (
   clock_t endClock = clock ();
 
   gGlobalTimingItemsList.appendTimingItem (
-		mfPassIDKind::kMfPassID_OptionalPass,
+		mfPassIDKind::kMfPassID_DisplayPass,
     passDescription,
     mfTimingItemKind::kOptional,
     startClock,
@@ -241,7 +241,7 @@ void displayMsrScoreSummary (
   // start the clock
   clock_t startClock = clock ();
 
-  setGlobalCurrentPassIDKind (mfPassIDKind::kMfPassID_OptionalPass);
+  setGlobalCurrentPassIDKind (mfPassIDKind::kMfPassID_DisplayPass);
 
   std::string separator =
     "%--------------------------------------------------------------";
@@ -270,7 +270,7 @@ void displayMsrScoreSummary (
   clock_t endClock = clock ();
 
   gGlobalTimingItemsList.appendTimingItem (
-		mfPassIDKind::kMfPassID_OptionalPass,
+		mfPassIDKind::kMfPassID_DisplayPass,
     passDescription,
     mfTimingItemKind::kOptional,
     startClock,
@@ -294,7 +294,7 @@ void displayMsrScoreNames (
   // start the clock
   clock_t startClock = clock ();
 
-  setGlobalCurrentPassIDKind (mfPassIDKind::kMfPassID_OptionalPass);
+  setGlobalCurrentPassIDKind (mfPassIDKind::kMfPassID_DisplayPass);
 
   std::string separator =
     "%--------------------------------------------------------------";
@@ -321,7 +321,7 @@ void displayMsrScoreNames (
   clock_t endClock = clock ();
 
   gGlobalTimingItemsList.appendTimingItem (
-		mfPassIDKind::kMfPassID_OptionalPass,
+		mfPassIDKind::kMfPassID_DisplayPass,
     passDescription,
     mfTimingItemKind::kOptional,
     startClock,
@@ -344,7 +344,7 @@ void displayMsrScoreSlices (
   // start the clock
   clock_t startClock = clock ();
 
-  setGlobalCurrentPassIDKind (mfPassIDKind::kMfPassID_OptionalPass);
+  setGlobalCurrentPassIDKind (mfPassIDKind::kMfPassID_DisplayPass);
 
   std::string separator =
     "%--------------------------------------------------------------";
@@ -370,7 +370,7 @@ void displayMsrScoreSlices (
   clock_t endClock = clock ();
 
   gGlobalTimingItemsList.appendTimingItem (
-		mfPassIDKind::kMfPassID_OptionalPass,
+		mfPassIDKind::kMfPassID_DisplayPass,
     passDescription,
     mfTimingItemKind::kOptional,
     startClock,
@@ -422,8 +422,8 @@ S_msrPart createPartInScore (
 
 if (false) { // JMI TEMP
   part->
-    setPartShortestNoteDuration (
-      Rational (1, 16));
+    setPartShortestNoteWholeNotes (
+      msrWholeNotes (1, 16));
 }
 
   return part;
@@ -539,8 +539,8 @@ S_msrMeasure createMeasureInVoice (
             measure1number,
             msrQuarterTonesPitchKind::kQTP_A_Natural,
             msrOctaveKind::kOctave4,
-            Rational (1, 8), // soundingWholeNotes
-            Rational (1, 8), // displayWholeNotes
+            msrWholeNotes (1, 8), // soundingWholeNotes
+            msrWholeNotes (1, 8), // displayWholeNotes
             0);              // dotsNumber
 
       // append the dynamic to the note

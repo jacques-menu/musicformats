@@ -144,7 +144,7 @@ void msrPart::finalizePartAndAllItsMeasures (
   int inputLineNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceParts ()) {
+  if (gTraceOahGroup->getTraceParts ()) {
 		std::stringstream ss;
 
     ss <<
@@ -157,10 +157,10 @@ void msrPart::finalizePartAndAllItsMeasures (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceVoices ()) {
+  if (gTraceOahGroup->getTraceVoices ()) {
 		std::stringstream ss;
 
     ss <<
@@ -173,7 +173,7 @@ void msrPart::finalizePartAndAllItsMeasures (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   for (
     std::list<S_msrVoice>::const_iterator i = fPartAllVoicesList.begin ();
@@ -204,7 +204,7 @@ void msrPart::finalizePart (
   int inputLineNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceParts ()) {
+  if (gTraceOahGroup->getTraceParts ()) {
 		std::stringstream ss;
 
     ss <<
@@ -217,7 +217,7 @@ void msrPart::finalizePart (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -277,7 +277,7 @@ void msrPart::finalizePart (
 void msrStaff::finalizeStaff (int inputLineNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceStaves ()) {
+  if (gTraceOahGroup->getTraceStaves ()) {
 		std::stringstream ss;
 
     ss <<
@@ -290,13 +290,13 @@ void msrStaff::finalizeStaff (int inputLineNumber)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
   // finalize the voices
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceVoices ()) {
+  if (gTraceOahGroup->getTraceVoices ()) {
 		std::stringstream ss;
 
     ss <<
@@ -309,7 +309,7 @@ void msrStaff::finalizeStaff (int inputLineNumber)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   for (
     std::map<int, S_msrVoice>::const_iterator i =
@@ -365,18 +365,18 @@ void msrVoice::finalizeVoice (
     voicePart =
       fetchVoiceUpLinkToPart ();
 
-  Rational
-    partShortestNoteDuration =
+  mfRational
+    partShortestNoteWholeNotes =
       voicePart->
-        getPartShortestNoteDuration ();
+        getPartShortestNoteWholeNotes ();
 
 	// ... ... ...
 
-  if (fVoiceShortestNoteDuration < partShortestNoteDuration) {
+  if (fVoiceShortestNoteWholeNotes < partShortestNoteWholeNotes) {
     // set the voice part shortest note duration
     voicePart->
-      setPartShortestNoteDuration (
-        fVoiceShortestNoteDuration);
+      setPartShortestNoteWholeNotes (
+        fVoiceShortestNoteWholeNotes);
 
     // set the voice part shortest note tuplet factor // JMI
     voicePart->
@@ -497,7 +497,7 @@ void msrMeasure::finalizeMeasure (
     } // switch
 
     // position in voice
-    Rational
+    mfRational
       voicePosition =
         fetchMeasureUpLinkToVoice ()->
           getCurrentVoicePosition ();
@@ -564,14 +564,14 @@ void msrMeasure::finalizeRegularMeasure (
     gLog << std::endl;
   }
 
-  Rational
-    measureWholeNotesDurationFromPartMeasuresVector =
+  mfRational
+    measureWholeNotesFromPartMeasuresVector =
       regularPart->
-        getPartMeasuresWholeNotesDurationsVector () [
+        getPartMeasuresWholeNotessVector () [
            fMeasureOrdinalNumberInVoice - 1 ];
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceMeasures ()) {
+  if (gTraceOahGroup->getTraceMeasures ()) {
 		std::stringstream ss;
 
     ss <<
@@ -582,8 +582,8 @@ void msrMeasure::finalizeRegularMeasure (
       "' in regular voice \"" <<
       voice->getVoiceName () <<
       "\" (" << context << ")" <<
-      ", measureWholeNotesDurationFromPartMeasuresVector: " <<
-      measureWholeNotesDurationFromPartMeasuresVector <<
+      ", measureWholeNotesFromPartMeasuresVector: " <<
+      measureWholeNotesFromPartMeasuresVector <<
       ", line " << inputLineNumber <<
       std::endl;
 
@@ -591,21 +591,21 @@ void msrMeasure::finalizeRegularMeasure (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceMeasuresDetails ()) {
+  if (gTraceOahGroup->getTraceMeasuresDetails ()) {
     displayMeasure (
       inputLineNumber,
       "finalizeRegularMeasure() 1");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   padUpToPositionAtTheEndOfTheMeasure (
     inputLineNumber,
-    measureWholeNotesDurationFromPartMeasuresVector);
+    measureWholeNotesFromPartMeasuresVector);
 
   // register this measures's length in the part
   S_msrPart
@@ -613,10 +613,10 @@ void msrMeasure::finalizeRegularMeasure (
       this->fetchMeasureUpLinkToPart ();
 
   part->
-    registerOrdinalMeasureNumberWholeNotesDuration (
+    registerOrdinalMeasureNumberWholeNotes (
       inputLineNumber,
       fMeasureOrdinalNumberInVoice,
-      fCurrentMeasureWholeNotesDuration);
+      fCurrentMeasureWholeNotes);
 
   // determine the measure kind and purist number
   determineMeasureKindAndPuristNumber (
@@ -655,12 +655,12 @@ void msrMeasure::finalizeRegularMeasure (
   // is there a single note or rest occupying the full measure?
   if (fMeasureLongestNote) {
     if (
-      fMeasureLongestNote-> getSoundingWholeNotes ()
+      fMeasureLongestNote->getSoundingWholeNotes ()
         ==
-      fFullMeasureWholeNotesDuration
+      fFullMeasureWholeNotes
     ) {
 #ifdef MF_TRACE_IS_ENABLED
-      if (gGlobalTraceOahGroup->getTraceMeasures ()) {
+      if (gTraceOahGroup->getTraceMeasures ()) {
         gLog <<
           "Note '" <<
           fMeasureLongestNote->asShortString () <<
@@ -677,7 +677,7 @@ void msrMeasure::finalizeRegularMeasure (
           __FILE__, __LINE__,
           ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       fMeasureLongestNote->
         setNoteOccupiesAFullMeasure ();
@@ -685,12 +685,12 @@ void msrMeasure::finalizeRegularMeasure (
   }
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceMeasuresDetails ()) {
+  if (gTraceOahGroup->getTraceMeasuresDetails ()) {
     displayMeasure (
       inputLineNumber,
       "finalizeRegularMeasure() 2");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   --gIndenter;
 }
@@ -725,7 +725,7 @@ void msrMeasure::finalizeHarmonyMeasure (
     "harmoniesPart is null");
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceHarmonies ()) {
+  if (gTraceOahGroup->getTraceHarmonies ()) {
     std::stringstream ss;
 
     ss <<
@@ -743,17 +743,17 @@ void msrMeasure::finalizeHarmonyMeasure (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceHarmoniesDetails ()) {
+  if (gTraceOahGroup->getTraceHarmoniesDetails ()) {
     displayMeasure (
       inputLineNumber,
       "finalizeHarmonyMeasure() 1");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   // get the harmoniesPart number of measures
@@ -762,7 +762,7 @@ void msrMeasure::finalizeHarmonyMeasure (
       harmoniesPart->
         getPartNumberOfMeasures ();
 
-  if (gGlobalTraceOahGroup->getTraceHarmonies ()) {
+  if (gTraceOahGroup->getTraceHarmonies ()) {
     std::stringstream ss;
 
     ss <<
@@ -776,13 +776,13 @@ void msrMeasure::finalizeHarmonyMeasure (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
-  // the measureWholeNotesDuration has to be computed
-  Rational
-    measureWholeNotesDurationFromPartMeasuresVector =
+  // the measureWholeNotes has to be computed
+  mfRational
+    measureWholeNotesFromPartMeasuresVector =
       harmoniesPart->
-        getPartMeasuresWholeNotesDurationsVector () [
+        getPartMeasuresWholeNotessVector () [
            fMeasureOrdinalNumberInVoice - 1 ];
 
   // handle the harmonies in this measure
@@ -790,10 +790,10 @@ void msrMeasure::finalizeHarmonyMeasure (
     inputLineNumber,
     context);
 
-  // pad the measure up to measureWholeNotesDurationFromPartMeasuresVector
+  // pad the measure up to measureWholeNotesFromPartMeasuresVector
   padUpToPositionAtTheEndOfTheMeasure (
     inputLineNumber,
-    measureWholeNotesDurationFromPartMeasuresVector);
+    measureWholeNotesFromPartMeasuresVector);
 
   // determine the measure kind and purist number
   determineMeasureKindAndPuristNumber (
@@ -801,12 +801,12 @@ void msrMeasure::finalizeHarmonyMeasure (
     measureRepeatContextKind);
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceHarmoniesDetails ()) {
+  if (gTraceOahGroup->getTraceHarmoniesDetails ()) {
     displayMeasure (
       inputLineNumber,
       "finalizeHarmonyMeasure() 2");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   --gIndenter;
 }
@@ -841,7 +841,7 @@ void msrMeasure::finalizeFiguredBassMeasure (
     "figuredBassPart is null");
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceFiguredBasses ()) {
+  if (gTraceOahGroup->getTraceFiguredBasses ()) {
 		std::stringstream ss;
 
     ss <<
@@ -859,17 +859,17 @@ void msrMeasure::finalizeFiguredBassMeasure (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceFiguredBassesDetails ()) {
+  if (gTraceOahGroup->getTraceFiguredBassesDetails ()) {
     displayMeasure (
       inputLineNumber,
       "finalizeFiguredBassMeasure() 1");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   // get the figuredBassPart number of measures
@@ -878,7 +878,7 @@ void msrMeasure::finalizeFiguredBassMeasure (
       figuredBassPart->
         getPartNumberOfMeasures ();
 
-  if (gGlobalTraceOahGroup->getTraceHarmonies ()) {
+  if (gTraceOahGroup->getTraceHarmonies ()) {
     std::stringstream ss;
 
     ss <<
@@ -892,13 +892,13 @@ void msrMeasure::finalizeFiguredBassMeasure (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
-  // the measureWholeNotesDuration has to be computed
-  Rational
-    measureWholeNotesDuration =
+  // the measureWholeNotes has to be computed
+  mfRational
+    measureWholeNotes =
       figuredBassPart->
-        getPartMeasuresWholeNotesDurationsVector () [
+        getPartMeasuresWholeNotessVector () [
            fMeasureOrdinalNumberInVoice - 1 ];
 
   // handle the figured bass elements in this measure
@@ -906,10 +906,10 @@ void msrMeasure::finalizeFiguredBassMeasure (
     inputLineNumber,
     context);
 
-  // pad the measure up to fFullMeasureWholeNotesDuration
+  // pad the measure up to fFullMeasureWholeNotes
   padUpToPositionAtTheEndOfTheMeasure (
     inputLineNumber,
-    measureWholeNotesDuration);
+    measureWholeNotes);
 
   // determine the measure kind and purist number
   determineMeasureKindAndPuristNumber (
@@ -917,12 +917,12 @@ void msrMeasure::finalizeFiguredBassMeasure (
     measureRepeatContextKind);
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceFiguredBassesDetails ()) {
+  if (gTraceOahGroup->getTraceFiguredBassesDetails ()) {
     displayMeasure (
       inputLineNumber,
       "finalizeFiguredBassMeasure() 2");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   --gIndenter;
 }

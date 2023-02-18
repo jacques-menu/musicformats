@@ -72,7 +72,7 @@ msrHarmonyInterval::msrHarmonyInterval (
   fHarmonyIntervalRelativeOctave = harmonyIntervalRelativeOctave;
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceHarmoniesDetails ()) {
+  if (gTraceOahGroup->getTraceHarmoniesDetails ()) {
     std::stringstream ss;
 
     ss <<
@@ -160,7 +160,7 @@ S_msrHarmonyInterval msrHarmonyInterval::intervalDifference (
   const S_msrHarmonyInterval& otherHarmonyInterval)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceExtraHarmonies ()) {
+  if (gTraceOahGroup->getTraceExtraHarmonies ()) {
 		std::stringstream ss;
 
     ss <<
@@ -193,7 +193,7 @@ S_msrHarmonyInterval msrHarmonyInterval::intervalDifference (
     normalizeInterval ();
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceExtraHarmonies ()) {
+  if (gTraceOahGroup->getTraceExtraHarmonies ()) {
 		std::stringstream ss;
 
     ss <<
@@ -258,7 +258,7 @@ S_msrHarmonyInterval msrHarmonyInterval::intervalDifference (
   }
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceExtraHarmonies ()) {
+  if (gTraceOahGroup->getTraceExtraHarmonies ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1442,7 +1442,7 @@ S_msrHarmonyInterval msrHarmonyInterval::intervalDifference (
   } // switch
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceExtraHarmonies ()) {
+  if (gTraceOahGroup->getTraceExtraHarmonies ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1481,7 +1481,7 @@ S_msrHarmonyInterval msrHarmonyInterval::intervalDifference (
   result->deNormalizeInterval ();
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceExtraHarmonies ()) {
+  if (gTraceOahGroup->getTraceExtraHarmonies ()) {
 		std::stringstream ss;
 
     ss <<
@@ -3660,7 +3660,7 @@ msrHarmonyDegree::msrHarmonyDegree (
   fHarmonyDegreeTypeKind       = harmonyDegreeTypeKind;
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceHarmonies ()) {
+  if (gTraceOahGroup->getTraceHarmonies ()) {
     std::stringstream ss;
 
     ss <<
@@ -3932,7 +3932,7 @@ msrHarmonyContents::msrHarmonyContents (
   fHarmonyContentsHarmonyKind = harmonyContentsHarmonyKind;
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceHarmoniesDetails ()) {
+  if (gTraceOahGroup->getTraceHarmoniesDetails ()) {
     std::stringstream ss;
 
     ss <<
@@ -4296,11 +4296,11 @@ S_msrHarmony msrHarmony::create (
   const std::string&       harmonyKindText,
   int                      harmonyInversion,
   msrQuarterTonesPitchKind harmonyBassQuarterTonesPitchKind,
-  const Rational&          harmonySoundingWholeNotes,
-  const Rational&          harmonyDisplayWholeNotes,
+  const msrWholeNotes&          harmonySoundingWholeNotes,
+  const msrWholeNotes&          harmonyDisplayWholeNotes,
   int                      harmoniesStaffNumber,
   const msrTupletFactor&   harmonyTupletFactor,
-  const Rational&          harmonyWholeNotesOffset)
+  const msrWholeNotes&          harmonyWholeNotesOffset)
 {
   msrHarmony* o =
     new msrHarmony (
@@ -4328,11 +4328,11 @@ msrHarmony::msrHarmony (
   const std::string&       harmonyKindText,
   int                      harmonyInversion,
   msrQuarterTonesPitchKind harmonyBassQuarterTonesPitchKind,
-  const Rational&          harmonySoundingWholeNotes,
-  const Rational&          harmonyDisplayWholeNotes,
+  const msrWholeNotes&          harmonySoundingWholeNotes,
+  const msrWholeNotes&          harmonyDisplayWholeNotes,
   int                      harmoniesStaffNumber,
   const msrTupletFactor&   harmonyTupletFactor,
-  const Rational&          harmonyWholeNotesOffset)
+  const msrWholeNotes&          harmonyWholeNotesOffset)
     : msrMeasureElement (
         inputLineNumber),
       fHarmonyTupletFactor (
@@ -4358,7 +4358,7 @@ msrHarmony::msrHarmony (
 
   // a harmony is considered to be at the beginning of the measure
   // until this is computed in msrMeasure::finalizeHarmonyInAHarmoniesMeasure()
-  fMeasurePosition = Rational (0, 1);
+  fMeasurePosition = msrWholeNotes (0, 1);
 
   fHarmoniesStaffNumber = harmoniesStaffNumber;
 
@@ -4426,7 +4426,7 @@ msrHarmony::msrHarmony (
   }
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceHarmonies ()) {
+  if (gTraceOahGroup->getTraceHarmonies ()) {
     std::stringstream ss;
 
     ss <<
@@ -4448,7 +4448,7 @@ S_msrHarmony msrHarmony::createHarmonyNewbornClone (
   const S_msrVoice& containingVoice)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceHarmonies ()) {
+  if (gTraceOahGroup->getTraceHarmonies ()) {
     std::stringstream ss;
 
     ss <<
@@ -4501,7 +4501,7 @@ S_msrHarmony msrHarmony::createHarmonyDeepClone (
   const S_msrVoice& containingVoice)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceHarmonies ()) {
+  if (gTraceOahGroup->getTraceHarmonies ()) {
     std::stringstream ss;
 
     ss <<
@@ -4560,7 +4560,7 @@ void msrHarmony::setHarmonyUpLinkToMeasure (
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceWholeNotes ()) {
+  if (gTraceOahGroup->getTraceWholeNotes ()) {
     ++gIndenter;
 
     gLog <<
@@ -4582,7 +4582,7 @@ void msrHarmony::setHarmonyTupletFactor (
   const msrTupletFactor& tupletFactor)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceTuplets ()) {
+  if (gTraceOahGroup->getTraceTuplets ()) {
 		std::stringstream ss;
 
     ss <<
@@ -4606,7 +4606,7 @@ void msrHarmony::setHarmonyUpLinkToNote (
   const S_msrNote& note)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceHarmonies ()) {
+  if (gTraceOahGroup->getTraceHarmonies ()) {
     std::stringstream ss;
 
     ss <<
@@ -4634,7 +4634,7 @@ void msrHarmony::setHarmonyUpLinkToNote (
 
 // void msrHarmony::setMeasurePosition (
 //   const S_msrMeasure measure,
-//   const Rational&    measurePosition,
+//   const msrWholeNotes&    measurePosition,
 //   const std::string&      context)
 // {
 //   // set the harmony measure position, taking it's offset into account
@@ -4650,14 +4650,14 @@ void msrHarmony::setHarmonyUpLinkToNote (
 //   // the offset can be negative, so we merely add it to measurePosition
 //   // to obtain the harmony's actual measurePosition
 //   // this overwrites it with the same value if fHarmonyWholeNotesOffset is null JMI ???
-//   Rational
+//   msrWholeNotes
 //     actualMeasurePosition =
 //       measurePosition
 //         +
 //       fHarmonyWholeNotesOffset;
 //
 // #ifdef MF_TRACE_IS_ENABLED
-//   if (gGlobalTraceOahGroup->getTraceMeasurePositions ()) {
+//   if (gTraceOahGroup->getTraceMeasurePositions ()) {
 //     gLog <<
 //       "Setting harmony's measure position of " << asString () <<
 //       " to " <<
@@ -4686,7 +4686,7 @@ void msrHarmony::setHarmonyUpLinkToNote (
 // #endif // MF_SANITY_CHECKS_ARE_ENABLED
 //
 //   // compute harmony's voice position
-//   Rational
+//   msrWholeNotes
 //     voicePosition =
 //       measure->
 //         getMeasureVoicePosition ()
@@ -4697,8 +4697,8 @@ void msrHarmony::setHarmonyUpLinkToNote (
   // sanity check
 //   mfAssert (
 //     __FILE__, __LINE__,
-//     measurePosition != msrMoment::K_MEASURE_POSITION_UNKNOWN,
-//     "measurePosition == msrMoment::K_MEASURE_POSITION_UNKNOWN");
+//     measurePosition != K_MEASURE_POSITION_UNKNOWN,
+//     "measurePosition == K_MEASURE_POSITION_UNKNOWN");
 // #endif // MF_SANITY_CHECKS_ARE_ENABLED
 //
 //   // set harmony's measure position
@@ -4719,7 +4719,7 @@ void msrHarmony::setHarmonyUpLinkToNote (
 void msrHarmony::setHarmonyFrame (const S_msrFrame& frame)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceFrames ()) {
+  if (gTraceOahGroup->getTraceFrames ()) {
 		std::stringstream ss;
 
     ss <<
@@ -4736,12 +4736,12 @@ void msrHarmony::setHarmonyFrame (const S_msrFrame& frame)
   fHarmonyFrame = frame;
 }
 
-void msrHarmony::incrementHarmonySoundingWholeNotesDuration (
+void msrHarmony::incrementHarmonySoundingWholeNotes (
   int             inputLineNumber,
-  const Rational& wholeNotesDelta)
+  const msrWholeNotes& wholeNotesDelta)
 {
   // compute currentHarmony's future sounding whole notes
-  Rational
+  msrWholeNotes
     augmentedSoundingWholeNotes =
       fSoundingWholeNotes
         +
@@ -4749,7 +4749,7 @@ void msrHarmony::incrementHarmonySoundingWholeNotesDuration (
 
   // extend currentHarmony's sounding whole notes
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceHarmonies ()) {
+  if (gTraceOahGroup->getTraceHarmonies ()) {
     std::stringstream ss;
 
     ss <<
@@ -4774,7 +4774,7 @@ void msrHarmony::incrementHarmonySoundingWholeNotesDuration (
 
   setSoundingWholeNotes (
     augmentedSoundingWholeNotes,
-    "incrementHarmonySoundingWholeNotesDuration()");
+    "incrementHarmonySoundingWholeNotes()");
 }
 
 void msrHarmony::acceptIn (basevisitor* v)
@@ -5279,7 +5279,7 @@ void printHarmonyDetails (
             invertHarmonyStructure (inversion);
 
 #ifdef MF_TRACE_IS_ENABLED
-      if (gGlobalTraceOahGroup->getTraceHarmoniesDetails ()) {
+      if (gTraceOahGroup->getTraceHarmoniesDetails ()) {
         os <<
           "==> inversion: " << inversion <<
           ", initial invertedHarmonyStructure:" <<
@@ -5460,7 +5460,7 @@ void printHarmonyAnalysis (
             invertHarmonyStructure (inversion);
 
 #ifdef MF_TRACE_IS_ENABLED
-      if (gGlobalTraceOahGroup->getTraceHarmoniesDetails ()) {
+      if (gTraceOahGroup->getTraceHarmoniesDetails ()) {
         os <<
           "==> inversion: " << inversion <<
           ", initial invertedHarmonyStructure:" <<
@@ -5775,7 +5775,7 @@ msrHarmonyStructure::msrHarmonyStructure (
   fHarmonyStructureHarmonyKind = harmonyStructureHarmonyKind;
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceHarmoniesDetails ()) {
+  if (gTraceOahGroup->getTraceHarmoniesDetails ()) {
     std::stringstream ss;
 
     ss <<
@@ -6795,7 +6795,7 @@ S_msrHarmonyStructure msrHarmonyStructure::invertHarmonyStructure (int inversion
       fHarmonyStructureIntervals.size ();
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceHarmoniesDetails ()) {
+  if (gTraceOahGroup->getTraceHarmoniesDetails ()) {
     std::stringstream ss;
 
     ss <<
@@ -6820,7 +6820,7 @@ S_msrHarmonyStructure msrHarmonyStructure::invertHarmonyStructure (int inversion
             createHarmonyIntervalNewbornClone ();
 
 #ifdef MF_TRACE_IS_ENABLED
-      if (gGlobalTraceOahGroup->getTraceHarmoniesDetails ()) {
+      if (gTraceOahGroup->getTraceHarmoniesDetails ()) {
         std::stringstream ss;
 
         ss <<
@@ -6843,7 +6843,7 @@ S_msrHarmonyStructure msrHarmonyStructure::invertHarmonyStructure (int inversion
           harmonyIntervalClone);
 
 #ifdef MF_TRACE_IS_ENABLED
-      if (gGlobalTraceOahGroup->getTraceHarmoniesDetails ()) {
+      if (gTraceOahGroup->getTraceHarmoniesDetails ()) {
         std::stringstream ss;
 
         ss <<
@@ -6874,7 +6874,7 @@ S_msrHarmonyStructure msrHarmonyStructure::invertHarmonyStructure (int inversion
         incrementHarmonyIntervalRelativeOctave ();
 
 #ifdef MF_TRACE_IS_ENABLED
-      if (gGlobalTraceOahGroup->getTraceHarmoniesDetails ()) {
+      if (gTraceOahGroup->getTraceHarmoniesDetails ()) {
         std::stringstream ss;
 
         ss <<
@@ -6897,7 +6897,7 @@ S_msrHarmonyStructure msrHarmonyStructure::invertHarmonyStructure (int inversion
           harmonyIntervalClone);
 
 #ifdef MF_TRACE_IS_ENABLED
-      if (gGlobalTraceOahGroup->getTraceHarmoniesDetails ()) {
+      if (gTraceOahGroup->getTraceHarmoniesDetails ()) {
         std::stringstream ss;
 
         ss <<

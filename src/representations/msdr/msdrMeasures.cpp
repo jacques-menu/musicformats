@@ -47,7 +47,7 @@ msdrMeasure::msdrMeasure (
   const std::string& measureNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceVoices ()) {
+  if (gTraceOahGroup->getTraceVoices ()) {
 		std::stringstream ss;
 
     ss <<
@@ -413,7 +413,7 @@ void msdrMeasure::print (std::ostream& os) const
 
     for ( ; ; ) {
       // print the measure
-      if (gGlobalTraceOahGroup->getTraceMeasures ()) {
+      if (gTraceOahGroup->getTraceMeasures ()) {
         os << (*i)->asShortString ();
       }
       else {

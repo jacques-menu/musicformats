@@ -2,11 +2,11 @@
 
 /*
   MusicFormats Library
-  Copyright (C) Jacques Menu 2016-2023
+  Copyright (C) Jacques Menu 2016-2022
 
   This Source Code Form is subject to the terms of the Mozilla Public
   License, v. 2.0. If a copy of the MPL was not distributed with this
-  file, you can obtain one at http://mozilla.org/MPL/2.0/.
+  file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
   https://github.com/jacques-menu/musicformats
 */
@@ -17,6 +17,7 @@
 /* ---------------------------------------------------------------------- */
 
 #include <sstream>
+#include <string>     // strerror_r
 
 #include "mfStringsHandling.h"
 
@@ -29,13 +30,13 @@
 
 #include "mfslInterpreterOah.h"
 
-#include "mfSystemInterface.h" // for isatty(), mfStrErrorCString()
+#include "mfslInterpreterInterface.h"
 
 #ifdef WIN32
-  #define YY_NO_UNISTD_H
-#endif
+	#include "mfSystemInterface.h" // for isatty()
 
-#include "oahEarlyOptions.h"
+  #define YY_NO_UNISTD_H
+#endif // WIN32
 
 
 /* ---------------------------------------------------------------------- */
@@ -189,8 +190,8 @@ loc.step ();
   if (drv.getDisplayTokens ()) {
     gLog <<
       "--> " << drv.getScannerLocation () <<
-      ": single quoted std::string [" << pStringBuffer << ']' <<
-      std::endl;
+      ": single quoted std::string [" << pStringBuffer << "]" <<
+      endl;
   }
 
   BEGIN INITIAL;
@@ -235,8 +236,8 @@ loc.step ();
   if (drv.getDisplayTokens ()) {
     gLog <<
       "--> " << drv.getScannerLocation () <<
-      ": double quoted std::string [" << pStringBuffer << ']' <<
-      std::endl;
+      ": double quoted std::string [" << pStringBuffer << "]" <<
+      endl;
   }
 
   loc.step ();
@@ -278,7 +279,7 @@ loc.step ();
   if (drv.getDisplayTokens ()) {
     gLog << "--> " << drv.getScannerLocation () <<
     " double: " << yytext <<
-    std::endl;
+    endl;
   }
 
   loc.begin.column += yyleng;
@@ -292,7 +293,7 @@ loc.step ();
   if (drv.getDisplayTokens ()) {
     gLog << "--> " << drv.getScannerLocation () <<
     " integer: " << yytext <<
-    std::endl;
+    endl;
   }
 
   loc.begin.column += yyleng;
@@ -305,25 +306,25 @@ loc.step ();
 
 
 
-"tool" {
+"service" {
   if (drv.getDisplayTokens ()) {
     gLog << "--> " << drv.getScannerLocation () <<
     ": " << yytext <<
-    std::endl;
+    endl;
   }
 
   loc.begin.column += yyleng;
   loc.step ();
 
   return
-    mfsl::parser::make_TOOL (loc);
+    mfsl::parser::make_SERVICE (loc);
 }
 
 "input" {
   if (drv.getDisplayTokens ()) {
     gLog << "--> " << drv.getScannerLocation () <<
     ": " << yytext <<
-    std::endl;
+    endl;
   }
 
   loc.begin.column += yyleng;
@@ -337,7 +338,7 @@ loc.step ();
   if (drv.getDisplayTokens ()) {
     gLog << "--> " << drv.getScannerLocation () <<
     ": " << yytext <<
-    std::endl;
+    endl;
   }
 
   loc.begin.column += yyleng;
@@ -351,7 +352,7 @@ loc.step ();
   if (drv.getDisplayTokens ()) {
     gLog << "--> " << drv.getScannerLocation () <<
     ": " << yytext <<
-    std::endl;
+    endl;
   }
 
   loc.begin.column += yyleng;
@@ -365,7 +366,7 @@ loc.step ();
   if (drv.getDisplayTokens ()) {
     gLog << "--> " << drv.getScannerLocation () <<
     ": " << yytext <<
-    std::endl;
+    endl;
   }
 
   loc.begin.column += yyleng;
@@ -379,7 +380,7 @@ loc.step ();
   if (drv.getDisplayTokens ()) {
     gLog << "--> " << drv.getScannerLocation () <<
     ": " << yytext <<
-    std::endl;
+    endl;
   }
 
   loc.begin.column += yyleng;
@@ -393,7 +394,7 @@ loc.step ();
   if (drv.getDisplayTokens ()) {
     gLog << "--> " << drv.getScannerLocation () <<
     ": " << yytext <<
-    std::endl;
+    endl;
   }
 
   loc.begin.column += yyleng;
@@ -408,8 +409,8 @@ loc.step ();
 {name} {
   if (drv.getDisplayTokens ()) {
     gLog << "--> " << drv.getScannerLocation () <<
-    ": name [" << yytext << ']' <<
-    std::endl;
+    ": name [" << yytext << "]" <<
+    endl;
   }
 
   loc.begin.column += yyleng;
@@ -425,8 +426,8 @@ loc.step ();
 "-"{name} {
   if (drv.getDisplayTokens ()) {
     gLog << "--> " << drv.getScannerLocation () <<
-    ": option [" << yytext << ']' <<
-    std::endl;
+    ": option [" << yytext << "]" <<
+    endl;
   }
 
   loc.begin.column += yyleng;
@@ -441,7 +442,7 @@ loc.step ();
   if (drv.getDisplayTokens ()) {
     gLog << "--> " << drv.getScannerLocation () <<
     ": '" << yytext << '\'' <<
-    std::endl;
+    endl;
   }
 
   loc.begin.column += yyleng;
@@ -455,7 +456,7 @@ loc.step ();
   if (drv.getDisplayTokens ()) {
     gLog << "--> " << drv.getScannerLocation () <<
     ": '" << yytext << '\'' <<
-    std::endl;
+    endl;
   }
 
   loc.begin.column += yyleng;
@@ -469,7 +470,7 @@ loc.step ();
   if (drv.getDisplayTokens ()) {
     gLog << "--> " << drv.getScannerLocation () <<
     ": '" << yytext << '\'' <<
-    std::endl;
+    endl;
   }
 
   loc.begin.column += yyleng;
@@ -483,7 +484,7 @@ loc.step ();
   if (drv.getDisplayTokens ()) {
     gLog << "--> " << drv.getScannerLocation () <<
     ": '" << yytext << '\'' <<
-    std::endl;
+    endl;
   }
 
   loc.begin.column += yyleng;
@@ -497,7 +498,7 @@ loc.step ();
   if (drv.getDisplayTokens ()) {
     gLog << "--> " << drv.getScannerLocation () <<
     ": '" << yytext << '\'' <<
-    std::endl;
+    endl;
   }
 
   loc.begin.column += yyleng;
@@ -511,7 +512,7 @@ loc.step ();
   if (drv.getDisplayTokens ()) {
     gLog << "--> " << drv.getScannerLocation () <<
     ": '" << yytext << '\'' <<
-    std::endl;
+    endl;
   }
 
   loc.begin.column += yyleng;
@@ -555,22 +556,22 @@ void mfslDriver::scanBegin ()
 
   else if (!(yyin = fopen (fScriptName.c_str (), "r")))
     {
-      std::stringstream ss;
+      stringstream s;
 
       char*
-        errorCString =
-          mfStrErrorCString ();
+        errorString =
+          strerror (errno);
 
-      if (errorCString != nullptr) {
-        ss <<
-          gLanguage->cannotOpenScriptForWriting (fScriptName) <<
-          ": " <<
-          errorCString <<
-          std::endl;
+      if (errorString != nullptr) {
+        s <<
+          "cannot open " <<
+          fScriptName << ": " <<
+          errorString <<
+          endl;
 
         mfslFileError (
           fScriptName,
-          ss.str ());
+          s.str ());
       }
     }
 }
@@ -581,7 +582,7 @@ void mfslDriver::scanEnd ()
 }
 
 //_______________________________________________________________________________
-EXP mfMusicformatsErrorKind launchMfslInterpreter ()
+mfMusicformatsErrorKind launchMfslInterpreter ()
 {
   mfMusicformatsErrorKind
     result =
@@ -594,9 +595,9 @@ EXP mfMusicformatsErrorKind launchMfslInterpreter ()
   // parse the script
   int
     parseResult =
-      theDriver.parseInput_Pass1 ();
+  	  theDriver.parseInput_Pass1 ();
 
-  // launch the tool
+  // launch the service
   if (parseResult != 0) {
     result =
       mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
@@ -604,8 +605,8 @@ EXP mfMusicformatsErrorKind launchMfslInterpreter ()
 
   else {
     result =
-      theDriver.launchMfslTool_Pass2 ();
+      theDriver.launchMfslService_Pass2 ();
   }
 
-  return result;
+	return result;
 }

@@ -818,47 +818,47 @@ typedef SMARTP<lilypondChordsDisplayAtom> S_lilypondChordsDisplayAtom;
 EXP std::ostream& operator << (std::ostream& os, const S_lilypondChordsDisplayAtom& elt);
 
 //______________________________________________________________________________
-class EXP lilypondLyricsDurationsKindAtom : public oahAtomStoringAValue
+class EXP lilypondLyricsNotesDurationsKindAtom : public oahAtomStoringAValue
 {
   public:
 
     // creation
     // ------------------------------------------------------
 
-    static SMARTP<lilypondLyricsDurationsKindAtom> create (
+    static SMARTP<lilypondLyricsNotesDurationsKindAtom> create (
                             const std::string&          longName,
                             const std::string&          shortName,
                             const std::string&          description,
                             const std::string&          valueSpecification,
                             const std::string&          variableName,
-                            lpsrLyricsDurationsKind&
-                                              lilypondLyricsDurationsKindVariable);
+                            lpsrLyricsNotesDurationsKind&
+                                              lilypondLyricsNotesDurationsKindVariable);
 
   protected:
 
     // constructors/destructor
     // ------------------------------------------------------
 
-                          lilypondLyricsDurationsKindAtom (
+                          lilypondLyricsNotesDurationsKindAtom (
                             const std::string&          longName,
                             const std::string&          shortName,
                             const std::string&          description,
                             const std::string&          valueSpecification,
                             const std::string&          variableName,
-                            lpsrLyricsDurationsKind&
-                                              lilypondLyricsDurationsKindVariable);
+                            lpsrLyricsNotesDurationsKind&
+                                              lilypondLyricsNotesDurationsKindVariable);
 
-    virtual               ~lilypondLyricsDurationsKindAtom ();
+    virtual               ~lilypondLyricsNotesDurationsKindAtom ();
 
   public:
 
     // set and get
     // ------------------------------------------------------
 
-    void                  setLpsrLyricsDurationsKindVariable (
-                            lpsrLyricsDurationsKind value)
+    void                  setLpsrLyricsNotesDurationsKindVariable (
+                            lpsrLyricsNotesDurationsKind value)
                               {
-                                fLpsrLyricsDurationsKindVariable = value;
+                                fLpsrLyricsNotesDurationsKindVariable = value;
                               }
 
   public:
@@ -899,11 +899,11 @@ class EXP lilypondLyricsDurationsKindAtom : public oahAtomStoringAValue
     // private fields
     // ------------------------------------------------------
 
-    lpsrLyricsDurationsKind&
-                          fLpsrLyricsDurationsKindVariable;
+    lpsrLyricsNotesDurationsKind&
+                          fLpsrLyricsNotesDurationsKindVariable;
 };
-typedef SMARTP<lilypondLyricsDurationsKindAtom> S_lilypondLyricsDurationsKindAtom;
-EXP std::ostream& operator << (std::ostream& os, const S_lilypondLyricsDurationsKindAtom& elt);
+typedef SMARTP<lilypondLyricsNotesDurationsKindAtom> S_lilypondLyricsNotesDurationsKindAtom;
+EXP std::ostream& operator << (std::ostream& os, const S_lilypondLyricsNotesDurationsKindAtom& elt);
 
 //______________________________________________________________________________
 class EXP lilypondDynamicsTextSpannersStyleKindAtom : public oahAtomStoringAValue
@@ -1270,10 +1270,10 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
                               { return fSemiTonesPitchAndOctaveDefaultValue; }
 
 
-    void                  setAllDurations ()
-                              { fAllDurations = true; }
-    Bool                  getAllDurations () const
-                              { return fAllDurations; }
+    void                  setAllNotesDurations ()
+                              { fAllNotesDurations = true; }
+    Bool                  getAllNotesDurations () const
+                              { return fAllNotesDurations; }
 
     void                  setNoAutoBeaming ()
                               { fNoAutoBeaming = true; }
@@ -1493,7 +1493,7 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
     // ornaments
     // --------------------------------------
 
-    Rational              getDelayedOrnamentsFraction () const
+    mfRational              getDelayedOrnamentsFraction () const
                               { return fDelayedOrnamentsFraction; }
 
 
@@ -1619,12 +1619,12 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
     Bool                  getAddLilypondStanzasNumbers () const
                               { return fAddLilypondStanzasNumbers; }
 
-    void                  setLyricsDurationsKind (
-                            lpsrLyricsDurationsKind value)
-                              { fLyricsDurationsKind = value; }
-    lpsrLyricsDurationsKind
-                          getLyricsDurationsKind () const
-                              { return fLyricsDurationsKind; }
+    void                  setLyricsNotesDurationsKind (
+                            lpsrLyricsNotesDurationsKind value)
+                              { fLyricsNotesDurationsKind = value; }
+    lpsrLyricsNotesDurationsKind
+                          getLyricsNotesDurationsKind () const
+                              { return fLyricsNotesDurationsKind; }
 
     // midi
     // --------------------------------------
@@ -1980,7 +1980,7 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
                           fSemiTonesPitchAndOctaveDefaultValue;
 
 
-    Bool                  fAllDurations;
+    Bool                  fAllNotesDurations;
 
     Bool                  fNoAutoBeaming;
     Bool                  fNoBeams;
@@ -2032,7 +2032,7 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
     // ornaments
     // --------------------------------------
 
-    Rational              fDelayedOrnamentsFraction;
+    mfRational              fDelayedOrnamentsFraction;
 
 
     // chords display
@@ -2100,8 +2100,8 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
 
     Bool                  fAddLilypondStanzasNumbers;
 
-    lpsrLyricsDurationsKind
-                          fLyricsDurationsKind;
+    lpsrLyricsNotesDurationsKind
+                          fLyricsNotesDurationsKind;
 
     // midi
     // --------------------------------------

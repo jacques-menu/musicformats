@@ -67,15 +67,15 @@ class EXP msrChord : public msrTupletElement
     static SMARTP<msrChord> create (
                             int                 inputLineNumber,
                             const S_msrMeasure& upLinkToMeasure,
-                            const Rational&     chordSoundingWholeNotes,
-                            const Rational&     chordDisplayWholeNotes,
-                            msrDurationKind     chordGraphicDurationKind);
+                            const msrWholeNotes&     chordSoundingWholeNotes,
+                            const msrWholeNotes&     chordDisplayWholeNotes,
+                            msrNotesDurationKind     chordGraphicNotesDurationKind);
 
     static SMARTP<msrChord> create (
                             int                 inputLineNumber,
-                            const Rational&     chordSoundingWholeNotes,
-                            const Rational&     chordDisplayWholeNotes,
-                            msrDurationKind     chordGraphicDurationKind);
+                            const msrWholeNotes&     chordSoundingWholeNotes,
+                            const msrWholeNotes&     chordDisplayWholeNotes,
+                            msrNotesDurationKind     chordGraphicNotesDurationKind);
 
     // creation from MusicXML
     // ------------------------------------------------------
@@ -91,9 +91,9 @@ class EXP msrChord : public msrTupletElement
                           msrChord (
                             int                 inputLineNumber,
                             const S_msrMeasure& upLinkToMeasure,
-                            const Rational&     chordSoundingWholeNotes,
-                            const Rational&     chordDisplayWholeNotes,
-                            msrDurationKind     chordGraphicDurationKind);
+                            const msrWholeNotes&     chordSoundingWholeNotes,
+                            const msrWholeNotes&     chordDisplayWholeNotes,
+                            msrNotesDurationKind     chordGraphicNotesDurationKind);
 
     virtual               ~msrChord ();
 
@@ -143,14 +143,14 @@ class EXP msrChord : public msrTupletElement
 
      // whole notes
     void                  setChordDisplayWholeNotes (
-                            const Rational& wholeNotes);
+                            const msrWholeNotes& wholeNotes);
 
-    Rational              getChordDisplayWholeNotes () const
+    msrWholeNotes          getChordDisplayWholeNotes () const
                              { return fChordDisplayWholeNotes; }
 
     // graphic duration
-    msrDurationKind       getChordGraphicDurationKind () const
-                              { return fChordGraphicDurationKind; }
+    msrNotesDurationKind  getChordGraphicNotesDurationKind () const
+                              { return fChordGraphicNotesDurationKind; }
 
     // chord notes
     const std::vector<S_msrNote>&
@@ -357,12 +357,12 @@ class EXP msrChord : public msrTupletElement
     // this override calls setChordMembersMeasurePosition()
     void                  setMeasurePosition (
                             const S_msrMeasure& measure,
-                            const Rational&     measurePosition,
+                            const msrWholeNotes&     measurePosition,
                             const std::string&  context) override;
 
     void                  setChordMembersMeasurePosition (
                             const S_msrMeasure& measure,
-                            const Rational&     measurePosition);
+                            const msrWholeNotes&     measurePosition);
 
   public:
 
@@ -543,17 +543,17 @@ class EXP msrChord : public msrTupletElement
 
     msrChordInKind        fChordKind;
 
-    // sounding whole notes
-    // no need for 'Rational fChordSoundingWholeNotes;',
+    // sounding whole notes JMI v0.9.67
+    // no need for 'msrWholeNotes fChordSoundingWholeNotes;',
     // since fChordNotesVector [0] contains this information,
     // as do all the other elements in this vector
 
     // display whole notes
-    Rational              fChordDisplayWholeNotes;
+    msrWholeNotes          fChordDisplayWholeNotes;
 
     // graphic duration is needed for grace notes,
     // since they don't have any note (sounding) duration
-    msrDurationKind       fChordGraphicDurationKind;
+    msrNotesDurationKind  fChordGraphicNotesDurationKind;
 
     std::vector<S_msrNote>
                           fChordNotesVector;

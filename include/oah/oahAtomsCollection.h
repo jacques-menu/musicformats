@@ -2300,7 +2300,7 @@ EXP std::ostream& operator << (std::ostream& os, const S_oahRegexAtom& elt);
 class EXP oahRationalAtom : public oahAtomStoringAValue
 {
 /*
-  an atom controlling a Rational variable
+  an atom controlling a mfRational variable
 */
 
   public:
@@ -2314,7 +2314,7 @@ class EXP oahRationalAtom : public oahAtomStoringAValue
                             const std::string& description,
                             const std::string& valueSpecification,
                             const std::string& variableName,
-                            Rational&          rationalVariable);
+                            mfRational&          rationalVariable);
 
   protected:
 
@@ -2327,7 +2327,7 @@ class EXP oahRationalAtom : public oahAtomStoringAValue
                             const std::string& description,
                             const std::string& valueSpecification,
                             const std::string& variableName,
-                            Rational&          rationalVariable);
+                            mfRational&          rationalVariable);
 
     virtual               ~oahRationalAtom ();
 
@@ -2337,12 +2337,12 @@ class EXP oahRationalAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
     void                  setRationalVariable (
-                            const Rational& value)
+                            const mfRational& value)
                               {
                                 fRationalVariable = value;
                               }
 
-    Rational              getRationalVariable () const
+    mfRational              getRationalVariable () const
                               { return fRationalVariable; }
 
   public:
@@ -2383,7 +2383,7 @@ class EXP oahRationalAtom : public oahAtomStoringAValue
     // private fields
     // ------------------------------------------------------
 
-    Rational&             fRationalVariable;
+    mfRational&             fRationalVariable;
 };
 typedef SMARTP<oahRationalAtom> S_oahRationalAtom;
 EXP std::ostream& operator << (std::ostream& os, const S_oahRationalAtom& elt);

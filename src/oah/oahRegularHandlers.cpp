@@ -63,7 +63,7 @@ oahRegularHandler::oahRegularHandler (
 {
   // create the insider handler
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -91,7 +91,7 @@ oahRegularHandler::~oahRegularHandler ()
 void oahRegularHandler::initializeOahRegularHandler ()
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -115,7 +115,7 @@ void oahRegularHandler::initializeOahRegularHandler ()
   // in the sub-classes for code homogeneity
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOahDetails ()) {
+  if (gEarlyOptions.getTraceEarlyOptionsDetails ()) {
   // print the options handler initial state
   gLog <<
     "oahRegularHandler \"" <<
@@ -148,7 +148,7 @@ void oahRegularHandler::appendGroupToRegulalHandler (
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOahDetails ()) {
+  if (gEarlyOptions.getTraceEarlyOptionsDetails ()) {
 		std::stringstream ss;
 
     ss <<
@@ -193,7 +193,7 @@ void oahRegularHandler::prependGroupToRegularHandler (
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<

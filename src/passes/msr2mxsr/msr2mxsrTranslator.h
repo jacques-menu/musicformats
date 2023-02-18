@@ -22,6 +22,7 @@
 #include "msrPlacements.h"
 #include "msrSpanners.h"
 #include "msrTupletFactors.h"
+#include "msrWholeNotes.h"
 
 
 namespace MusicFormats
@@ -718,7 +719,7 @@ class EXP msr2mxsrTranslator :
 
     // divisions
     // ------------------------------------------------------
-    Rational                  fPartShortestNoteDuration;
+    msrWholeNotes          fPartShortestNoteWholeNotes;
     msrTupletFactor           fPartShortestNoteTupletFactor;
 
     int                       fDivisionsPerQuarterNote;
@@ -726,7 +727,7 @@ class EXP msr2mxsrTranslator :
 
     int                       wholeNotesAsDivisions (
                                 int             inputLineNumber,
-                                const Rational& wholeNotes);
+                                const msrWholeNotes& wholeNotes);
 
     Bool                      fPartDivisionsElementHasToBeAppended;
 
@@ -863,9 +864,9 @@ class EXP msr2mxsrTranslator :
     // backup and forward
     // ------------------------------------------------------
 
-    Rational                  fCurrentMeasurePosition;
+    msrWholeNotes              fCurrentMeasurePosition;
 
-    Rational                  fCurrentCumulatedSkipsDurations;
+    msrWholeNotes              fCurrentCumulatedSkipsNotesDurations;
     int                       fCurrentCumulatedSkipsStaffNumber;
     int                       fCurrentCumulatedSkipsVoiceNumber;
 
@@ -907,7 +908,7 @@ class EXP msr2mxsrTranslator :
 
     // duration
     // ------------------------------------------------------
-    void                      appendDurationToNoteIfRelevant (
+    void                      appendNotesDurationToNoteIfRelevant (
                                 const S_msrNote& theMsrNote);
 
     // tuplets

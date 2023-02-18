@@ -221,7 +221,7 @@ lpsrScoreBlock::lpsrScoreBlock (
       gGlobalLpsr2lilypondOahGroup ->
         getMidiTempoAtom ();
 
-  std::string midiTempoDuration  = "16";
+  std::string midiTempoNotesDuration  = "16";
   int    midiTempoPerSecond = 360;
 
   if (midiTempoAtom->getSelected ()) {
@@ -229,7 +229,7 @@ lpsrScoreBlock::lpsrScoreBlock (
       midiTempo =
        gGlobalLpsr2lilypondOahGroup->getMidiTempo ();
 
-    midiTempoDuration  = midiTempo.getMidiTempoDuration ();
+    midiTempoNotesDuration  = midiTempo.getMidiTempoNotesDuration ();
     midiTempoPerSecond = midiTempo.getMidiTempoPerSecond ();
   }
   else {
@@ -239,7 +239,7 @@ lpsrScoreBlock::lpsrScoreBlock (
   fScoreBlockMidiTempo =
     msrMidiTempo::create (
       inputLineNumber,
-      midiTempoDuration,
+      midiTempoNotesDuration,
       midiTempoPerSecond);
 
   // create the score block midi tempo // JMI
@@ -255,7 +255,7 @@ void lpsrScoreBlock::appendPartGroupBlockToScoreBlock (
   const S_lpsrPartGroupBlock& partGroupBlock)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTracePartGroups ()) {
+  if (gTraceOahGroup->getTracePartGroups ()) {
 		std::stringstream ss;
 
     ss <<
@@ -282,7 +282,7 @@ void lpsrScoreBlock::appendVoiceUseToParallelMusicBLock (
   S_lpsrUseVoiceCommand voiceUse)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceVoices ()) {
+  if (gTraceOahGroup->getTraceVoices ()) {
 		std::stringstream ss;
 
     ss <<
@@ -307,7 +307,7 @@ void lpsrScoreBlock::appendLyricsUseToParallelMusicBLock (
   S_lpsrNewLyricsBlock lyricsUse)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceLyrics ()) {
+  if (gTraceOahGroup->getTraceLyrics ()) {
 		std::stringstream ss;
 
     ss <<
@@ -520,7 +520,7 @@ void lpsrBookPartBlock::appendPartGroupBlockToBookPartBlock (
   const S_lpsrPartGroupBlock& partGroupBlock)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTracePartGroups ()) {
+  if (gTraceOahGroup->getTracePartGroups ()) {
 		std::stringstream ss;
 
     ss <<
@@ -547,7 +547,7 @@ void lpsrBookPartBlock::appendVoiceUseToParallelMusicBLock (
   S_lpsrUseVoiceCommand voiceUse)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceVoices ()) {
+  if (gTraceOahGroup->getTraceVoices ()) {
 		std::stringstream ss;
 
     ss <<
@@ -572,7 +572,7 @@ void lpsrBookPartBlock::appendLyricsUseToParallelMusicBLock (
   S_lpsrNewLyricsBlock lyricsUse)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceLyrics ()) {
+  if (gTraceOahGroup->getTraceLyrics ()) {
 		std::stringstream ss;
 
     ss <<
@@ -764,7 +764,7 @@ void lpsrBookBlock::appendPartGroupBlockToBlock (
   const S_lpsrPartGroupBlock& partGroupBlock)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTracePartGroups ()) {
+  if (gTraceOahGroup->getTracePartGroups ()) {
 		std::stringstream ss;
 
     ss <<
@@ -862,7 +862,7 @@ void lpsrBookBlock::appendVoiceUseToParallelMusicBLock (
   S_lpsrUseVoiceCommand voiceUse)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceVoices ()) {
+  if (gTraceOahGroup->getTraceVoices ()) {
 		std::stringstream ss;
 
     ss <<
@@ -887,7 +887,7 @@ void lpsrBookBlock::appendLyricsUseToParallelMusicBLock (
   S_lpsrNewLyricsBlock lyricsUse)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceLyrics ()) {
+  if (gTraceOahGroup->getTraceLyrics ()) {
 		std::stringstream ss;
 
     ss <<

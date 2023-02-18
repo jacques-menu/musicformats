@@ -812,7 +812,7 @@ std::string& mfLeftTrim (std::string& s)
     find_if (
       s.begin (),
       s.end (),
-      std::unary_negate (checkSpace) // 'not1<std::function<int (int)>>' is deprecated as of C++17
+      std::not_fn (checkSpace) // since C++17
       )
     );
 
@@ -829,7 +829,7 @@ std::string& mfRightTrim (std::string& s)
     find_if (
       s.rbegin (),
       s.rend (),
-      std::unary_negate (checkSpace) // 'not1<std::function<int (int)>>' is deprecated as of C++17
+      std::not_fn (checkSpace) // since C++17
       ).base(),
     s.end ()
     );
@@ -1692,31 +1692,19 @@ std::string mfStringSetAsString (
 {
   std::stringstream ss;
 
-  ss << '[';
-
-  // append the set elements if any
+  // append the set elements if any to ss
   size_t stringSetSize =
     stringSet.size ();
 
   if (stringSetSize) {
-    size_t nextToLast =
-      stringSetSize - 1;
+    size_t nextToLast = stringSetSize - 1;
 
     size_t count = 0;
 
-    for (
-      std::set<std::string>::const_iterator
-        i    = stringSet.begin (),
-        iEnd = stringSet.end ();
-      i != iEnd;
-      ++i
-    ) {
-      std::string theString = (*i);
-
+    for (std::string theString : stringSet) {
       ++count;
 
       ss << "\"" << theString << "\"";
-      if (++i == iEnd) break;
 
       if (count == nextToLast) {
         ss << " and ";
@@ -1727,7 +1715,15 @@ std::string mfStringSetAsString (
     } // for
   }
 
-  ss << ']';
+  return ss.str ();
+}
+
+std::string mfStringSetAsBracketedString (
+  const std::set<std::string>& stringSet)
+{
+  std::stringstream ss;
+
+  ss << '[' << mfStringSetAsString (stringSet) << ']';
 
   return ss.str ();
 }
@@ -2090,35 +2086,36 @@ int countTwoBytesWideCharactersInString (const std::string theString)
       {
         if (
           // to be augmented when other 1-byte characters appear later in the code...
-          (theChar >= 'a' && theChar <= 'z')
-            ||
-          (theChar >= 'A' && theChar <= 'Z')
-            ||
-          (theChar == ' ')
-            ||
-          (theChar == ',')
-            ||
-          (theChar == ':')
-            ||
-          (theChar == '.')
-            ||
-          (theChar == '-')
-            ||
-          (theChar == '(')
-            ||
-          (theChar == ')')
-            ||
-          (theChar == '[')
-            ||
-          (theChar == ']')
-            ||
-          (theChar == '/')
-            ||
-          (theChar == '\\')
-            ||
-          (theChar == '\'')
-            ||
-          (theChar == '"')
+//           (theChar >= 'a' && theChar <= 'z')
+//             ||
+//           (theChar >= 'A' && theChar <= 'Z')
+//             ||
+//           (theChar == ' ')
+//             ||
+//           (theChar == ',')
+//             ||
+//           (theChar == ':')
+//             ||
+//           (theChar == '.')
+//             ||
+//           (theChar == '-')
+//             ||
+//           (theChar == '(')
+//             ||
+//           (theChar == ')')
+//             ||
+//           (theChar == '[')
+//             ||
+//           (theChar == ']')
+//             ||
+//           (theChar == '/')
+//             ||
+//           (theChar == '\\')
+//             ||
+//           (theChar == '\'')
+//             ||
+//           (theChar == '"')
+          theChar <= 127 // JMI v0.9.67
         ) {
           // theChar is 1-byte large
         }

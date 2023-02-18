@@ -23,8 +23,8 @@ This \script\ illustrates the basic features of \mfslLang:
 \begin{lstlisting}[language=MFSL]
 #!//Users/jacquesmenu/musicformats-git-dev/build/bin/mfsl
 
-# the MusicFormats tool to be used
-tool : xml2ly
+# the MusicFormats service to be used
+service : xml2ly
 
 # the input file
 input :test.mfsl
@@ -86,7 +86,7 @@ The latter file can be used to check the grammar, in particular if \LR\ conflict
 
 Only the predefined \code{bool} type is used, since the generated C++ code relies on this. This is why \methodName{getValue} is used in \clisamples{mfsl.cpp}:
 \begin{lstlisting}[language=CPlusPlus]
-    std::string       theMfTool;
+    std::string       theMfService;
     std::string       theInputFile;
     oahOptionsAndArguments optionsAndArguments;
 
@@ -97,7 +97,7 @@ Only the predefined \code{bool} type is used, since the generated C++ code relie
         traceParsing.getValue (),
         displayTokens.getValue (),
         displayNonTerminals.getValue (),
-        theMfTool,
+        theMfService,
         theInputFile,
         optionsAndArguments);
 \end{lstlisting}
@@ -345,8 +345,8 @@ class   mfslDriver
     // private fields
     // ------------------------------------------------------
 
-    // the name of the MusicFormats tool
-		std::string           fTool;
+    // the name of the MusicFormats service
+		std::string           fService;
 
     // the name of the MusicFormats script
 		std::string           fScriptName;
@@ -558,13 +558,13 @@ The numbers are handled by:
 
 The \mfslLang\ keywords are handled with the \code{make_...} facility:
 \begin{lstlisting}[language=Flex]
-"tool" {
+"service" {
   if (drv.getTraceTokens ()) {
     gLog <<
     	"--> " << drv.getScannerLocation () << ": " << yytext <<
 			std::endl;
   }
-  return yy::parser::make_TOOL (loc);
+  return yy::parser::make_SERVICE (loc);
 }
 \end{lstlisting}
 
@@ -693,7 +693,7 @@ The \mfslLang\ tokens are:
   COLON       ":"
   COMMA       ","
 
-  TOOL        "tool"
+  SERVICE     "service"
   INPUT       "input"
 
   CHOICE      "choice"
@@ -759,7 +759,7 @@ EXP extern mfMusicformatsErrorKind launchMfslInterpreter (
   bool                    traceParsing,
   bool                    displayTokens,
   bool                    displayNonTerminals,
-  std::string&                 theMfTool,
+  std::string&                 theMfService,
   std::string&                 theInputFile,
   oahOptionsAndArguments& optionsAndArguments);
 \end{lstlisting}
@@ -772,7 +772,7 @@ EXP mfMusicformatsErrorKind launchMfslInterpreter (
   bool                    traceParsing,
   bool                    displayTokens,
   bool                    displayNonTerminals,
-  std::string&                 theMfTool,
+  std::string&                 theMfService,
   std::string&                 theInputFile,
   oahOptionsAndArguments& optionsAndArguments)
 {
@@ -802,10 +802,10 @@ EXP mfMusicformatsErrorKind launchMfslInterpreter (
 	gLog <<
     "inputFileName: " << theDriver.getInputFileName () <<
   	std::endl <<
-		"toolName: " << theDriver.getToolName () <<
+		"serviceName: " << theDriver.getServiceName () <<
   	std::endl;
 
-  theMfTool    = theDriver.getToolName ();
+  theMfService    = theDriver.getServiceName ();
   theInputFile = theDriver.getInputFileName ();
 
 	return result;
@@ -833,10 +833,10 @@ jacquesmenu@macmini: ~/musicformats-git-dev/src/interpreters/mfsl > ./test.mfsl 
         fDisplayOptionsValues              : true, selected option
 
 
---> ./test.mfsl:2.1-39: tool
+--> ./test.mfsl:2.1-39: service
 --> ./test.mfsl:2.41: :
 --> ./test.mfsl:2.43-48: name [xml2ly]
-  ==> tool: xml2ly
+  ==> service: xml2ly
 
 --> ./test.mfsl:4.1-22: input
 --> ./test.mfsl:4.24: :
@@ -904,7 +904,7 @@ jacquesmenu@macmini: ~/musicformats-git-dev/src/interpreters/mfsl > ./test.mfsl 
 
 --> parseResult: 0
 ==> inputFileName: test.mfsl
-==> toolName:      xml2ly
+==> serviceName:      xml2ly
 jacquesmenu@macmini: ~/musicformats-git-dev/src/interpreters/mfsl >
 \end{lstlisting}
 

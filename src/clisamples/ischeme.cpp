@@ -107,7 +107,7 @@ int main (int argc, char* argv[])
     gEarlyOptions.getEarlyInsiderOption ();
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -247,7 +247,7 @@ int main (int argc, char* argv[])
       gServiceRunData->getInputSourceName ();
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
     std::string separator =
       "%--------------------------------------------------------------";
 

@@ -43,7 +43,7 @@ bsrOah2manPage::~bsrOah2manPage ()
 void bsrOah2manPage::visitStart (S_bsrFacSimileKindAtom& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -78,7 +78,7 @@ void bsrOah2manPage::visitStart (S_bsrFacSimileKindAtom& elt)
 void bsrOah2manPage::visitEnd (S_bsrFacSimileKindAtom& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -98,7 +98,7 @@ void bsrOah2manPage::visitEnd (S_bsrFacSimileKindAtom& elt)
 void bsrOah2manPage::visitStart (S_bsrTextsLanguageAtom& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -133,7 +133,7 @@ void bsrOah2manPage::visitStart (S_bsrTextsLanguageAtom& elt)
 void bsrOah2manPage::visitEnd (S_bsrTextsLanguageAtom& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<

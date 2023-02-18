@@ -31,6 +31,7 @@
 
 #include "lpsrInterface.h"
 
+
 namespace MusicFormats
 {
 
@@ -52,7 +53,7 @@ void displayLpsrScore (
   // start the clock
   clock_t startClock = clock ();
 
-  setGlobalCurrentPassIDKind (mfPassIDKind::kMfPassID_OptionalPass);
+  setGlobalCurrentPassIDKind (mfPassIDKind::kMfPassID_DisplayPass);
 
   std::string separator =
     "%--------------------------------------------------------------";
@@ -74,7 +75,7 @@ void displayLpsrScore (
   clock_t endClock = clock ();
 
   gGlobalTimingItemsList.appendTimingItem (
-		mfPassIDKind::kMfPassID_OptionalPass,
+		mfPassIDKind::kMfPassID_DisplayPass,
     gLanguage->displayTheLPSRAsText (),
     mfTimingItemKind::kOptional,
     startClock,
@@ -99,7 +100,7 @@ void displayLpsrScoreFull (
   // start the clock
   clock_t startClock = clock ();
 
-  setGlobalCurrentPassIDKind (mfPassIDKind::kMfPassID_OptionalPass);
+  setGlobalCurrentPassIDKind (mfPassIDKind::kMfPassID_DisplayPass);
 
   std::string separator =
     "%--------------------------------------------------------------";
@@ -125,7 +126,7 @@ void displayLpsrScoreFull (
   clock_t endClock = clock ();
 
   gGlobalTimingItemsList.appendTimingItem (
-		mfPassIDKind::kMfPassID_OptionalPass,
+		mfPassIDKind::kMfPassID_DisplayPass,
     gLanguage->displayTheLPSRAsText ()
       + ", " +
     gLanguage->fullVersion (),

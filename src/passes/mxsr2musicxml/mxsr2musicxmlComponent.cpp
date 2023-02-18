@@ -21,7 +21,7 @@ S_mfcPassComponent createMxsr2musicxmlComponent ()
   static S_mfcPassComponent pPassComponent;
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<

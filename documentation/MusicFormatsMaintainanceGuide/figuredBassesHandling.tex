@@ -55,7 +55,7 @@ class EXP msrFiguredBass : public msrMeasureElement
     S_msrNote             fFiguredBassUpLinkToNote;
     S_msrVoice            fFiguredBassUpLinkToVoice; // for use in figured bass voices JMI
 
-    Rational              fFiguredBassDisplayWholeNotes;
+    mfRational              fFiguredBassDisplayWholeNotes;
 
     msrFiguredBassParenthesesKind
                           fFiguredBassParenthesesKind;
@@ -279,7 +279,7 @@ void mxsr2msrSkeletonBuilder::visitStart ( S_figured_bass& elt )
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   /* JMI
     several figured bass elements can be attached to a given note,
@@ -303,7 +303,7 @@ void mxsr2msrSkeletonBuilder::visitEnd ( S_note& elt )
   if (fThereAreFiguredBassToBeAttachedToCurrentNote) {
     if (gGlobalMxsr2msrOahGroup->getIgnoreFiguredBasses ()) {
 #ifdef MF_TRACE_IS_ENABLED
-      if (gGlobalTraceOahGroup->getTraceFiguredBasses ()) {
+      if (gTraceOahGroup->getTraceFiguredBasses ()) {
         gLog <<
           "Ignoring the figured bass elements" <<
           ", line " <<
@@ -314,7 +314,7 @@ void mxsr2msrSkeletonBuilder::visitEnd ( S_note& elt )
           __FILE__, __LINE__,
           ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
     }
     else {
       // create the part figured bass voice if not yet done
@@ -381,7 +381,7 @@ void mxsr2msrTranslator::visitStart ( S_figured_bass& elt )
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++fFiguredBassVoicesCounter;
 
@@ -421,8 +421,8 @@ void mxsr2msrTranslator::visitStart ( S_figured_bass& elt )
   fCurrentFigurePrefixKind = msrBassFigurePrefixKind::kBassFigurePrefix_UNKNOWN;
   fCurrentFigureSuffixKind = msrBassFigureSuffixKind::kBassFigureSuffix_UNKNOWN;
 
-  fCurrentFiguredBassSoundingWholeNotes = Rational (0, 1);
-  fCurrentFiguredBassDisplayWholeNotes  = Rational (0, 1);
+  fCurrentFiguredBassSoundingWholeNotes = mfRational (0, 1);
+  fCurrentFiguredBassDisplayWholeNotes  = mfRational (0, 1);
 
   fOnGoingFiguredBass = true;
 }
@@ -453,11 +453,11 @@ void mxsr2msrTranslator::visitEnd ( S_figured_bass& elt )
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // create the figured bass element
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceFiguredBasses ()) {
+  if (gTraceOahGroup->getTraceFiguredBasses ()) {
 		std::stringstream ss;
 
     ss <<
@@ -469,7 +469,7 @@ void mxsr2msrTranslator::visitEnd ( S_figured_bass& elt )
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // create the figured bass element
   // if the sounding whole notes is 0/1 (no <duration /> was found), JMI ???
@@ -556,7 +556,7 @@ void mxsr2msrTranslator::handlePendingFiguredBasses (
 {
 	// ... ... ...
 
-  Rational
+  mfRational
     newNoteSoundingWholeNotes =
       newNote->
         getSoundingWholeNotes (),
@@ -654,7 +654,7 @@ void mxsr2msrTranslator::handlePendingFiguredBasses (
 %      S_msrHarmony harmony = (*i);
 %
 %#ifdef MF_TRACE_IS_ENABLED
-%      if (gGlobalTraceOahGroup->getTraceHarmonies ()) {
+%      if (gTraceOahGroup->getTraceHarmonies ()) {
 %        std::stringstream ss;
 %
 %        ss <<
@@ -669,7 +669,7 @@ void mxsr2msrTranslator::handlePendingFiguredBasses (
 %        __FILE__, __LINE__,
 %        ss.str ());
 %      }
-%#endif
+%#endif // MF_TRACE_IS_ENABLED
 %
 %      chord->
 %        appendHarmonyToChord (harmony);
@@ -738,7 +738,7 @@ void msr2msrTranslator::visitStart (S_msrFiguredBass& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // create a figured bass element newborn clone
   fCurrentFiguredBassClone =
@@ -813,7 +813,7 @@ void msr2msrTranslator::visitEnd (S_msrFiguredBass& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fCurrentFiguredBassClone = nullptr;
 }
@@ -844,7 +844,7 @@ void msr2lpsrTranslator::visitStart (S_msrFiguredBass& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // create a figured bass newborn clone
   fCurrentFiguredBassClone =
@@ -919,7 +919,7 @@ void msr2lpsrTranslator::visitEnd (S_msrFiguredBass& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fCurrentFiguredBassClone = nullptr;
 }
@@ -955,7 +955,7 @@ void msr2lpsrTranslator::visitStart (S_msrFiguredBass& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // create a figured bass newborn clone
   fCurrentFiguredBassClone =

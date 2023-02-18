@@ -139,7 +139,7 @@ R"(
         multiGenerationOutputKind)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -351,7 +351,7 @@ R"(
 void msdlConverterInsiderHandler::createTheMsdlConverterPrefixes ()
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -375,7 +375,7 @@ void msdlConverterInsiderHandler::createTheMsdlConverterOptionGroups (
   mfMultiGenerationOutputKind mfMultiGenerationOutputKind)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -423,6 +423,8 @@ void msdlConverterInsiderHandler::createTheMsdlConverterOptionGroups (
 
   // initialize the library
   // ------------------------------------------------------
+
+  initializeWAE ();
 
   initializeMSR (); // used whatever the output kind
 
@@ -569,7 +571,7 @@ void msdlConverterInsiderHandler::createTheMsdlConverterOptionGroups (
 void msdlConverterInsiderHandler::checkOptionsAndArguments () const
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -600,7 +602,7 @@ void msdlConverterInsiderHandler::checkOptionsAndArguments () const
 std::string msdlConverterInsiderHandler::fetchOutputFileNameFromTheOptions () const
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -636,7 +638,7 @@ std::string msdlConverterInsiderHandler::fetchOutputFileNameFromTheOptions () co
         getSelected ();
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -712,7 +714,7 @@ std::string msdlConverterInsiderHandler::fetchOutputFileNameFromTheOptions () co
       }
 
 #ifdef MF_TRACE_IS_ENABLED
-      if (gEarlyOptions.getEarlyTraceOah ()) {
+      if (gEarlyOptions.getTraceEarlyOptions ()) {
         std::stringstream ss;
 
         ss <<
@@ -728,7 +730,7 @@ std::string msdlConverterInsiderHandler::fetchOutputFileNameFromTheOptions () co
 #endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
-      if (gEarlyOptions.getEarlyTraceOah ()) {
+      if (gEarlyOptions.getTraceEarlyOptions ()) {
         std::stringstream ss;
 
         ss <<
@@ -840,7 +842,7 @@ std::string msdlConverterInsiderHandler::fetchOutputFileNameFromTheOptions () co
   }
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -865,7 +867,7 @@ void msdlConverterInsiderHandler::checkHandlerOptionsConsistency ()
 void msdlConverterInsiderHandler::enforceHandlerQuietness ()
 {
 #ifdef MF_TRACE_IS_ENABLED
-  gGlobalTraceOahGroup->
+  gTraceOahGroup->
     enforceGroupQuietness ();
 #endif // MF_TRACE_IS_ENABLED
 
@@ -927,7 +929,7 @@ void msdlConverterInsiderOahGroup::checkGroupOptionsConsistency ()
 void msdlConverterInsiderOahGroup::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -946,7 +948,7 @@ void msdlConverterInsiderOahGroup::acceptIn (basevisitor* v)
         S_msdlConverterInsiderOahGroup elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -965,7 +967,7 @@ void msdlConverterInsiderOahGroup::acceptIn (basevisitor* v)
 void msdlConverterInsiderOahGroup::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -984,7 +986,7 @@ void msdlConverterInsiderOahGroup::acceptOut (basevisitor* v)
         S_msdlConverterInsiderOahGroup elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -1003,7 +1005,7 @@ void msdlConverterInsiderOahGroup::acceptOut (basevisitor* v)
 void msdlConverterInsiderOahGroup::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1106,7 +1108,7 @@ msdlConverterInsiderOahGroup::~msdlConverterInsiderOahGroup ()
 void msdlConverterInsiderOahGroup::initializemsdlConverterInsiderOahGroup ()
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
     std::stringstream ss;
 
     ss <<
@@ -1157,7 +1159,7 @@ void msdlConverterInsiderOahGroup::printmsdlConverterInsiderOahGroupValues (int 
 S_msdlConverterInsiderOahGroup createGlobalmsdlConverterInsiderOahGroup ()
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<

@@ -1212,7 +1212,7 @@ class EXP mxsr2msrTranslator :
     msrUseDotsKind            fCurrentUseDotsKind;
     msrSlashUseStemsKind      fCurrentSlashUseStemsKind;
 
-    msrDurationKind           fCurrentSlashGraphicDurationKind;
+    msrNotesDurationKind      fCurrentSlashGraphicNotesDurationKind;
     int                       fCurrentSlashDotsNumber;
 
     // beats repeats
@@ -1523,16 +1523,16 @@ class EXP mxsr2msrTranslator :
     // metronome handling
     // ------------------------------------------------------
 
-    msrDurationKind           fCurrentMetronomeBeatUnitDurationKind;
+    msrNotesDurationKind      fCurrentMetronomeBeatUnitNotesDurationKind;
 
-    std::vector<msrDottedDuration> fCurrentMetronomeBeatUnitsVector;
+    std::vector<msrDottedNotesDuration> fCurrentMetronomeBeatUnitsVector;
     std::string               fCurrentMetrenomePerMinute;
     msrTempoParenthesizedKind fCurrentMetronomeParenthesedKind;
 
     int                       fCurrentMetrenomeDotsNumber;
     msrTempoNotesRelationshipKind
                               fCurrentMetrenomeRelationKind;
-    msrDurationKind           fCurrentMetronomeDurationKind;
+    msrNotesDurationKind      fCurrentMetronomeNotesDurationKind;
     std::string               fCurrentMetronomeBeamValue;
 
     Bool                      fOnGoingMetronomeNote;
@@ -1551,7 +1551,7 @@ class EXP mxsr2msrTranslator :
     int                       fCurrentMetronomeNoteNormalNotes;
     std::string               fCurrentMetronomeNoteNormalType; // JMI ???
 
-    Rational                  fCurrentMetronomeNoteWholeNotesFromMetronomeType;
+    msrWholeNotes              fCurrentMetronomeNoteWholeNotesFromMetronomeType;
 
     S_msrTempoTuplet          fCurrentMetronomeTuplet;
     Bool                      fOnGoingMetronomeTuplet;
@@ -1730,7 +1730,7 @@ class EXP mxsr2msrTranslator :
 
     int                       fCurrentHarmoniesStaffNumber;
 
-    Rational                  fCurrentHarmonyWholeNotesOffset;
+    msrWholeNotes              fCurrentHarmonyWholeNotesOffset;
 
     Bool                      fOnGoingHarmony;
 
@@ -1752,8 +1752,8 @@ class EXP mxsr2msrTranslator :
     int                       fCurrentFigureNumber;
     msrBassFigureSuffixKind   fCurrentFigureSuffixKind;
 
-    Rational                  fCurrentFiguredBassSoundingWholeNotes;
-    Rational                  fCurrentFiguredBassDisplayWholeNotes;
+    msrWholeNotes              fCurrentFiguredBassSoundingWholeNotes;
+    msrWholeNotes              fCurrentFiguredBassDisplayWholeNotes;
 
     msrFiguredBassParenthesesKind
                               fCurrentFiguredBassParenthesesKind;
@@ -1897,19 +1897,19 @@ class EXP mxsr2msrTranslator :
 
     // note sound
     msrQuarterTonesPitchKind  fCurrentNoteQuarterTonesPitchKind;
-    Rational                  fCurrentNoteSoundingWholeNotesFromDuration;
-    Rational                  fCurrentNoteSoundingWholeNotes;
+    msrWholeNotes              fCurrentNoteSoundingWholeNotesFromNotesDuration;
+    msrWholeNotes              fCurrentNoteSoundingWholeNotes;
 
     // note display
     msrQuarterTonesPitchKind  fCurrentNoteQuarterTonesDisplayPitchKind;
-    Rational                  fCurrentNoteDisplayWholeNotesFromType;
-    Rational                  fCurrentNoteDisplayWholeNotes;
+    msrWholeNotes              fCurrentNoteDisplayWholeNotesFromType;
+    msrWholeNotes              fCurrentNoteDisplayWholeNotes;
 
     // augmentation dots
     int                       fCurrentNoteDotsNumber;
 
     // graphic duration
-    msrDurationKind           fCurrentNoteGraphicDurationKind;
+    msrNotesDurationKind      fCurrentNoteGraphicNotesDurationKind;
 
     // rests
     Bool                      fCurrentNoteIsARest;
@@ -2280,7 +2280,7 @@ class EXP mxsr2msrTranslator :
 
     int                       fCurrentNoteActualNotes;
     int                       fCurrentNoteNormalNotes;
-    msrDurationKind           fCurrentNoteNormalTypeDuration;
+    msrNotesDurationKind      fCurrentNoteNormalTypeNotesDuration;
 
     // nested tuplets are numbered 1, 2, ...
     int                       fCurrentTupletNumber;

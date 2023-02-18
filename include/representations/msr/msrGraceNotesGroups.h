@@ -12,11 +12,9 @@
 #ifndef ___msrGraceNotesGroups___
 #define ___msrGraceNotesGroups___
 
-#include "mfRational.h"
-
 #include "msrElements.h"
-
 #include "msrTypesForwardDeclarations.h"
+#include "msrWholeNotes.h"
 
 
 namespace MusicFormats
@@ -125,7 +123,7 @@ class EXP msrGraceNotesGroup : public msrElement
     // measure positions
     void                  setGraceNotesGroupElementsMeasurePositions (
                             const S_msrMeasure& measure,
-                            const Rational&     measurePosition);
+                            const msrWholeNotes&     measurePosition);
 
   public:
 

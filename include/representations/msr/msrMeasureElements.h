@@ -15,8 +15,7 @@
 #include "msrTypesForwardDeclarations.h"
 
 #include "msrElements.h"
-
-#include "mfRational.h"
+#include "msrWholeNotes.h"
 
 
 namespace MusicFormats
@@ -54,10 +53,10 @@ class EXP msrMeasureElement : public msrElement
                             S_msrMeasure& upLinkToMeasure) const = 0;
 
     void                  setSoundingWholeNotes (
-                            const Rational&    wholeNotes,
+                            const msrWholeNotes&    wholeNotes,
                             const std::string& context);
 
-    Rational              getSoundingWholeNotes () const
+    msrWholeNotes          getSoundingWholeNotes () const
                               { return fSoundingWholeNotes; }
 
     // this method is overridden in sub-classes such as those for
@@ -69,17 +68,17 @@ class EXP msrMeasureElement : public msrElement
     // the computations of measure positions
     virtual void          setMeasurePosition (
                             const S_msrMeasure& measure,
-                            const Rational&     measurePosition,
+                            const msrWholeNotes&     measurePosition,
                             const std::string&  context);
 
-    Rational              getMeasurePosition () const
+    msrWholeNotes          getMeasurePosition () const
                               { return fMeasurePosition; }
 
     void                  setVoicePosition (
-                            const Rational&    voicePosition,
+                            const msrWholeNotes&    voicePosition,
                             const std::string& context);
 
-    Rational              getVoicePosition () const
+    msrWholeNotes          getVoicePosition () const
                               { return fVoicePosition; }
 
 //     void                  setMeasureMoment (
@@ -133,7 +132,7 @@ class EXP msrMeasureElement : public msrElement
     // ------------------------------------------------------
 
     void                  doSetSoundingWholeNotes (
-                            const Rational&    wholeNotes,
+                            const msrWholeNotes&    wholeNotes,
                             const std::string& context);
 
   protected:
@@ -141,10 +140,10 @@ class EXP msrMeasureElement : public msrElement
     // protected fields
     // ------------------------------------------------------
 
-    Rational              fSoundingWholeNotes;
+    msrWholeNotes              fSoundingWholeNotes;
 
-    Rational              fMeasurePosition;
-    Rational              fVoicePosition;
+    msrWholeNotes              fMeasurePosition;
+    msrWholeNotes              fVoicePosition;
 
 //     msrMoment             fMeasureMoment;
 //     msrMoment             fVoiceMoment;

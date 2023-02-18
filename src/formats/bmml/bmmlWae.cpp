@@ -49,7 +49,7 @@ void bmmlError (
     sourceCodeLineNumber,
     message);
 
-  if (! gGlobalWaeOahGroup->getDontShowErrors ()) { // JMI
+  if (! gWaeOahGroup->getDontShowErrors ()) { // JMI
     throw bmmlException (message);
   }
 

@@ -352,7 +352,7 @@ EXP mfIndentedStringStream& operator << (
   mfIndentedStringStream& iss, const float& elt);
 
 EXP mfIndentedStringStream& operator << (
-  mfIndentedStringStream& iss, const Rational& elt);
+  mfIndentedStringStream& iss, const mfRational& elt);
 
 //______________________________________________________________________________
 // the hidden global output indenter for general use

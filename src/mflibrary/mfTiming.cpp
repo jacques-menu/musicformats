@@ -106,97 +106,37 @@ void mfTimingItemsList::doPrint (std::ostream& os) const
   // printing the details
 
   int
-    activityWidth    = 1,
-    descriptionWidth = 1,
-    kindWidth        = 1,
-    secondsWidth     = 1,
-    secondsPrecision = 1;
-
-  // set the timing items columns widths
-  switch (gEarlyOptions.getEarlyLanguageKind ()) {
-    case mfLanguageKind::kMusicFormatsLanguage_UNKNOWN:
-      break;
-    case mfLanguageKind::kMusicFormatsLanguageEnglish:
-      activityWidth     =  8;
-      descriptionWidth  = 54;
-      kindWidth         =  9;
-      secondsWidth      =  9;
-      break;
-    case mfLanguageKind::kMusicFormatsLanguageFrench:
-      activityWidth     =  8;
-      descriptionWidth  = 59;
-      kindWidth         = 11;
-      secondsWidth      =  9;
-      break;
-    case mfLanguageKind::kMusicFormatsLanguageItalian:
-      activityWidth     =  8;
-      descriptionWidth  = 54;
-      kindWidth         =  9;
-      secondsWidth      =  9;
-      break;
-    case mfLanguageKind::kMusicFormatsLanguageGerman:
-      activityWidth     =  8;
-      descriptionWidth  = 54;
-      kindWidth         =  9;
-      secondsWidth      =  9;
-      break;
-    case mfLanguageKind::kMusicFormatsLanguageSpanish:
-      activityWidth     =  8;
-      descriptionWidth  = 54;
-      kindWidth         =  9;
-      secondsWidth      =  9;
-      break;
-    case mfLanguageKind::kMusicFormatsLanguageDutch:
-      activityWidth     =  8;
-      descriptionWidth  = 54;
-      kindWidth         =  9;
-      secondsWidth      =  9;
-      break;
-  } // switch
+    activityWidth    = 0,
+    kindWidth        = 0,
+    secondsWidth     = 0,
+    descriptionWidth = 0;
 
   // compute the timing items columns widths
+  // -------------------------------------------
   for (S_mfTimingItem theTimingItem : fTimingItemsList) {
-    // take care of multi-line descriptions
+		// activityWidth
     std::string
       activity =
         theTimingItem->getActivity ();
 
     // if activity contains non-diacritic characters (UTF-8),
     // that fouls std::setw() which accounts two characters for them
-    int
-      activityTwoBytesWideCharactersInString =
-        countTwoBytesWideCharactersInString (activity);
+//     int
+//       activityTwoBytesWideCharactersInString =
+//         countTwoBytesWideCharactersInString (activity);
 
     size_t activitySize =
-      activity.size () - activityTwoBytesWideCharactersInString;
+//       activity.size () - activityTwoBytesWideCharactersInString;
+      activity.size ();
 
-    gLog << "--> activitySize: " << activitySize << std::endl;
-    gLog << "--> activityTwoBytesWideCharactersInString: " << activityTwoBytesWideCharactersInString << std::endl << std::endl;
+//     gLog << "--> activitySize: " << activitySize << std::endl;
+//     gLog << "--> activityTwoBytesWideCharactersInString: " << activityTwoBytesWideCharactersInString << std::endl << std::endl;
 
     if (activitySize > activityWidth) {
       activityWidth = activitySize;
     }
 
-    std::string
-      description =
-        theTimingItem->getDescription ();
-
-    // if description contains non-diacritic characters (UTF-8),
-    // that fouls std::setw() which accounts two characters for them
-    int
-      descriptionTwoBytesWideCharactersInString =
-        countTwoBytesWideCharactersInString (description);
-
-    size_t descriptionSize =
-      description.size () - descriptionTwoBytesWideCharactersInString;
-
-    gLog << "--> descriptionSize: " << descriptionSize << std::endl;
-    gLog << "--> descriptionTwoBytesWideCharactersInString: " << descriptionTwoBytesWideCharactersInString << std::endl << std::endl;
-
-    if (descriptionSize > descriptionWidth) {
-      descriptionWidth = descriptionSize;
-    }
-
+		// kindWidth
     std::string
       kind =
         mfTimingItemKindAsString (
@@ -204,82 +144,163 @@ void mfTimingItemsList::doPrint (std::ostream& os) const
 
     // if kind contains non-diacritic characters (UTF-8),
     // that fouls std::setw() which accounts two characters for them
-    int
-      kindTwoBytesWideCharactersInString =
-        countTwoBytesWideCharactersInString (kind);
+//     int
+//       kindTwoBytesWideCharactersInString =
+//         countTwoBytesWideCharactersInString (kind);
 
     size_t kindSize =
-      kind.size () - kindTwoBytesWideCharactersInString;
+//       kind.size () - kindTwoBytesWideCharactersInString;
+      kind.size ();
 
-    gLog << "--> kindSize: " << kindSize << std::endl;
-    gLog << "--> kindTwoBytesWideCharactersInString: " << kindTwoBytesWideCharactersInString << std::endl << std::endl;
+//     gLog << "--> kindSize: " << kindSize << std::endl;
+//     gLog << "--> kindTwoBytesWideCharactersInString: " << kindTwoBytesWideCharactersInString << std::endl << std::endl;
 
     if (kindSize > kindWidth) {
       kindWidth = kindSize;
     }
+
+		// descriptionWidth
+    std::string
+      description =
+        theTimingItem->getDescription ();
+
+    // take care of multi-line descriptions
+    // if description contains non-diacritic characters (UTF-8),
+    // that fouls std::setw() which accounts two characters for them
+//     int
+//       descriptionTwoBytesWideCharactersInString =
+//         countTwoBytesWideCharactersInString (description);
+
+    size_t descriptionSize =
+//       description.size () - descriptionTwoBytesWideCharactersInString;
+      description.size ();
+
+//     gLog << "--> descriptionSize: " << descriptionSize << std::endl;
+//     gLog << "--> descriptionTwoBytesWideCharactersInString: " << descriptionTwoBytesWideCharactersInString << std::endl << std::endl;
+
+    if (descriptionSize > descriptionWidth) {
+      descriptionWidth = descriptionSize;
+    }
   } // for
 
-  secondsPrecision = secondsWidth - 4; // to leave room for large numbers
+  int
+  	secondsPrecision = secondsWidth - 4; // to leave room for large numbers
 
-  gLog << "activityWidth: " << activityWidth << std::endl;
-  gLog << "descriptionWidth: " << descriptionWidth << std::endl;
-  gLog << "kindWidth: " << kindWidth << std::endl;
-  gLog << "secondsWidth: " << secondsWidth << std::endl;
-  gLog << "secondsPrecision: " << secondsPrecision << std::endl;
+//   gLog << "activityWidth: " << activityWidth << std::endl;
+//   gLog << "descriptionWidth: " << descriptionWidth << std::endl;
+//   gLog << "kindWidth: " << kindWidth << std::endl;
+//   gLog << "secondsWidth: " << secondsWidth << std::endl;
+//   gLog << "secondsPrecision: " << secondsPrecision << std::endl;
 
   //  print the timing items columns headers and separators
+  // -------------------------------------------
   os << std::left <<
     std::setw (activityWidth) <<
     gLanguage->activity () <<
-    ' ' <<
-    std::setw (descriptionWidth) <<
-    gLanguage->description () <<
     ' ' <<
     std::setw (kindWidth)     <<
     gLanguage->kind () <<
     ' ' <<
     std::setw (secondsWidth)  <<
     gLanguage->CPUSeconds () <<
+    ' ' <<
+    std::setw (descriptionWidth) <<
+    gLanguage->description () <<
+    ' ' <<
+
     std::endl <<
 
     std::setw (activityWidth) <<
     mfReplicateString ("-", activityWidth) <<
-    ' ' <<
-    std::setw (descriptionWidth) <<
-    mfReplicateString ("-", descriptionWidth) <<
     ' ' <<
     std::setw (kindWidth) <<
     mfReplicateString ("-", kindWidth) <<
     ' ' <<
     std::setw (secondsWidth) <<
     mfReplicateString ("-", secondsWidth) <<
-    std::endl << std::endl;
+    ' ' <<
+    std::setw (descriptionWidth) <<
+    mfReplicateString ("-", descriptionWidth) <<
+    std::endl;
 
   // print the timing items
+  // -------------------------------------------
   clock_t
     totalClock          = 0,
     totalMandatoryClock = 0,
     totalOptionalClock  = 0;
 
   for (S_mfTimingItem theTimingItem : fTimingItemsList) {
-    clock_t timingItemClock =
-      theTimingItem->getEndClock () - theTimingItem->getStartClock ();
-    totalClock += timingItemClock;
+    // print the activity
+//     switch (theTimingItem->getTimingItemKind ()) {
+//       case mfTimingItemKind::kMandatory:
+//         os << std::left <<
+//           std::setw (activityWidth) <<
+//           theTimingItem->getActivity ();
+//         break;
+//       case mfTimingItemKind::kOptional:
+//         os << std::left <<
+//           std::setw (activityWidth) <<
+//           theTimingItem->getActivity ();
+//         break;
+//     } // switch
 
-    // do not print optional passes as activity
+		os << std::left <<
+			std::setw (activityWidth) <<
+			theTimingItem->getActivity ();
+
+    os << ' ';
+
+    // print the kind
     switch (theTimingItem->getTimingItemKind ()) {
       case mfTimingItemKind::kMandatory:
-        os << std::left <<
-          std::setw (activityWidth) <<
-          theTimingItem->getActivity () <<
-          ' ';
+        os <<
+          std::left <<
+          std::setw (kindWidth) <<
+          gLanguage->mandatory () <<
+					mfReplicateChar (
+						' ',
+						countTwoBytesWideCharactersInString (gLanguage->mandatory ()));
         break;
       case mfTimingItemKind::kOptional:
-        os << std::left <<
-          ' ';
+        os <<
+          std::left <<
+          std::setw (kindWidth) <<
+          gLanguage->optional () <<
+					mfReplicateChar (
+						' ',
+						countTwoBytesWideCharactersInString (gLanguage->optional ()));
         break;
     } // switch
 
+    os << ' ';
+
+    // print the time spent
+    clock_t
+    	timingItemClock =
+      	theTimingItem->getEndClock () - theTimingItem->getStartClock ();
+
+    totalClock += timingItemClock;
+
+    os <<
+      std::left <<
+      std::fixed <<
+      std::setprecision (secondsPrecision) <<
+      std::setw (secondsWidth) <<
+      float (timingItemClock) / CLOCKS_PER_SEC;
+
+    switch (theTimingItem->getTimingItemKind ()) {
+      case mfTimingItemKind::kMandatory:
+          totalMandatoryClock += timingItemClock;
+        break;
+      case mfTimingItemKind::kOptional:
+          totalOptionalClock += timingItemClock;
+        break;
+    } // switch
+
+    os << ' ';
+
+    // print the description
     // take care of multi-line descriptions
     std::string
       description =
@@ -287,56 +308,31 @@ void mfTimingItemsList::doPrint (std::ostream& os) const
 
     gIndenter.printMultiLineStringInATable (
       description,
-      activityWidth + 1,
+      activityWidth,
       descriptionWidth,
       os);
+
+		gLog << std::endl;
 
 //     os << std::left <<
 //       std::setw (descriptionWidth) <<
 //       description;
 
-    // if description contains non-diacritic characters (UTF-8),
-    // that fouls std::setw() which accounts two characters for them
-    int
-      twoBytesWideCharactersInString =
-        countTwoBytesWideCharactersInString (description);
+//     // if description contains non-diacritic characters (UTF-8),
+//     // that fouls std::setw() which accounts two characters for them
+//     int
+//       twoBytesWideCharactersInString =
+//         countTwoBytesWideCharactersInString (description);
+//
+// //     gLog << "twoBytesWideCharactersInString: " << twoBytesWideCharactersInString << std::endl;
+//
+//     if (twoBytesWideCharactersInString > 0) {
+//       os <<
+//         mfReplicateChar (' ', twoBytesWideCharactersInString);
+//     }
+//     os <<
+//       ' ';
 
-//     gLog << "twoBytesWideCharactersInString: " << twoBytesWideCharactersInString << std::endl;
-
-    if (twoBytesWideCharactersInString > 0) {
-      os <<
-        mfReplicateChar (' ', twoBytesWideCharactersInString);
-    }
-    os <<
-      ' ';
-
-    os <<
-      std::left <<
-      std::setw (kindWidth);
-    switch (theTimingItem->getTimingItemKind ()) {
-      case mfTimingItemKind::kMandatory:
-        totalMandatoryClock += timingItemClock;
-        os <<
-//           std::left <<
-//           std::setw (kindWidth) <<
-          gLanguage->mandatory ();
-        break;
-      case mfTimingItemKind::kOptional:
-        totalOptionalClock += timingItemClock;
-        os <<
-//           std::left <<
-//           std::setw (kindWidth) <<
-          gLanguage->optional ();
-        break;
-    } // switch
-
-    os << ' ' <<
-      std::left <<
-      std::fixed <<
-      std::setprecision (secondsPrecision) <<
-      std::setw (secondsWidth) <<
-      float(timingItemClock) / CLOCKS_PER_SEC <<
-      std::endl;
   } // for
   os << std::endl;
 
@@ -411,7 +407,7 @@ void mfTimingItemsList::doPrint (std::ostream& os) const
     float (totalClock) / CLOCKS_PER_SEC <<
     ' ' <<
     std::setw (totalMandatoryClockWidth) <<
-    float(totalMandatoryClock) / CLOCKS_PER_SEC <<
+    float (totalMandatoryClock) / CLOCKS_PER_SEC <<
     ' ' <<
     std::setw (totalOptionalClockWidth) <<
     float (totalOptionalClock) / CLOCKS_PER_SEC <<

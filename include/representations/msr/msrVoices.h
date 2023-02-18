@@ -15,10 +15,9 @@
 #include <map>
 #include <stack>
 
-#include "msrElements.h"
-
 #include "msrTypesForwardDeclarations.h"
 
+#include "msrElements.h"
 #include "msrMeasures.h"
 #include "msrMeasuresSlices.h"
 #include "msrRepeatsEnumTypes.h"
@@ -316,11 +315,11 @@ class EXP msrVoice : public msrElement
 
     // voice shortest note
 
-    void                  setVoiceShortestNoteDuration (
-                            const Rational& duration);
+    void                  setVoiceShortestNoteWholeNotes (
+                            const msrWholeNotes& wholeNotes);
 
-    Rational              getVoiceShortestNoteDuration () const
-                              { return fVoiceShortestNoteDuration; }
+    msrWholeNotes          getVoiceShortestNoteWholeNotes () const
+                              { return fVoiceShortestNoteWholeNotes; }
 
     void                  setVoiceShortestNoteTupletFactor (
                             const msrTupletFactor& noteTupletFactor);
@@ -358,9 +357,9 @@ class EXP msrVoice : public msrElement
 
     void                  setWholeNotesSinceLastRegularMeasureEnd (
                             int             inputLineNumber,
-                            const Rational& value);
+                            const msrWholeNotes& wholeNotes);
 
-    Rational              getWholeNotesSinceLastRegularMeasureEnd () const
+    msrWholeNotes          getWholeNotesSinceLastRegularMeasureEnd () const
                               { return fWholeNotesSinceLastRegularMeasureEnd; }
 
     // incomplete measures after repeats detection
@@ -442,17 +441,17 @@ class EXP msrVoice : public msrElement
 
     void                  appendPaddingNoteToVoice (
                             int             inputLineNumber,
-                            const Rational& forwardStepLength);
+                            const msrWholeNotes& forwardStepLength);
 
     // backup and padding
 
     void                  padUpToMeasurePositionInVoice (
                             int             inputLineNumber,
-                            const Rational& wholeNotesMeasurePosition);
+                            const msrWholeNotes& wholeNotesMeasurePosition);
 
     void                  backupByWholeNotesStepLengthInVoice (
                             int             inputLineNumber,
-                            const Rational& backupTargetMeasurePosition);
+                            const msrWholeNotes& backupTargetMeasurePosition);
 
     // clef, key, time signature
 
@@ -471,7 +470,7 @@ class EXP msrVoice : public msrElement
 
     void                  insertHiddenMeasureAndBarLineInVoiceClone (
                             int             inputLineNumber,
-                            const Rational& measurePosition);
+                            const msrWholeNotes& measurePosition);
 
     // notes
 
@@ -885,12 +884,12 @@ class EXP msrVoice : public msrElement
     // voice position
 
     void                  incrementCurrentVoicePosition (
-                            const Rational& delta)
+                            const msrWholeNotes& delta)
                               {
                                 fCurrentVoicePosition += delta;
                               }
 
-    Rational              getCurrentVoicePosition () const
+    msrWholeNotes          getCurrentVoicePosition () const
                               { return fCurrentVoicePosition; }
 
     const msrMoment&      getCurrentVoiceMoment () const
@@ -1132,7 +1131,7 @@ class EXP msrVoice : public msrElement
 
     // regular measure ends detection
 
-    Rational              fWholeNotesSinceLastRegularMeasureEnd;
+    msrWholeNotes          fWholeNotesSinceLastRegularMeasureEnd;
 
      // stanzas
 
@@ -1164,10 +1163,10 @@ class EXP msrVoice : public msrElement
 
     // part shortest note
 
-    // fVoiceShortestNoteDuration and fVoiceShortestNoteTupletFactor
+    // fVoiceShortestNoteWholeNotes and fVoiceShortestNoteTupletFactor
     // are used to compute a number of divisions per quarter note
     // if needed, such as when generating MusicXML from MSR
-    Rational              fVoiceShortestNoteDuration;
+    msrWholeNotes          fVoiceShortestNoteWholeNotes;
     msrTupletFactor       fVoiceShortestNoteTupletFactor;
 
     // repeats
@@ -1413,7 +1412,7 @@ class EXP msrVoice : public msrElement
 
     // current voice position
 
-    Rational              fCurrentVoicePosition;
+    msrWholeNotes          fCurrentVoicePosition;
     msrMoment             fCurrentVoiceMoment;
 
     // voice finalization
@@ -1422,7 +1421,7 @@ class EXP msrVoice : public msrElement
 
     // beams begin, continue and end check
 
-    std::stack<int>            fVoiceBeamNumbersStack;
+    std::stack<int>       fVoiceBeamNumbersStack;
 
     // calls counter (for debug)
     int                   fCallsCounter;

@@ -44,11 +44,11 @@ std::string mfPassIDKindAsString (
       break;
 
     case mfPassIDKind::kMfPassID_OptionsAndArgumentsHandling:
-      result = "0";
+      result = "Opt & args";
       break;
 
-    case mfPassIDKind::kMfPassID_OptionalPass:
-      result = "opt";
+    case mfPassIDKind::kMfPassID_DisplayPass:
+      result = "Display";
       break;
 
     case mfPassIDKind::kMfPassID_1:
@@ -199,27 +199,27 @@ void initializeMusicFormatsPassIDKindsMap ()
   static Bool pPrivateThisMethodHasBeenRun (false);
 
   if (! pPrivateThisMethodHasBeenRun) {
-    gGlobalMusicFormatsPassIDKindsMap ["0"]   =
+    gGlobalMusicFormatsPassIDKindsMap ["opt&args"] = // JMI v0.9.67
       mfPassIDKind::kMfPassID_OptionsAndArgumentsHandling;
 
-    gGlobalMusicFormatsPassIDKindsMap ["opt"]   =
-      mfPassIDKind::kMfPassID_OptionalPass;
+    gGlobalMusicFormatsPassIDKindsMap ["display"] = // JMI v0.9.67
+      mfPassIDKind::kMfPassID_DisplayPass;
 
-    gGlobalMusicFormatsPassIDKindsMap ["1"]   =
+    gGlobalMusicFormatsPassIDKindsMap ["1"] =
       mfPassIDKind::kMfPassID_1;
 
-    gGlobalMusicFormatsPassIDKindsMap ["2"]  =
+    gGlobalMusicFormatsPassIDKindsMap ["2"] =
       mfPassIDKind::kMfPassID_2;
-    gGlobalMusicFormatsPassIDKindsMap ["2a"]  =
+    gGlobalMusicFormatsPassIDKindsMap ["2a"] =
       mfPassIDKind::kMfPassID_2a;
-    gGlobalMusicFormatsPassIDKindsMap ["2b"]   =
+    gGlobalMusicFormatsPassIDKindsMap ["2b"] =
       mfPassIDKind::kMfPassID_2b;
 
-    gGlobalMusicFormatsPassIDKindsMap ["3"]   =
+    gGlobalMusicFormatsPassIDKindsMap ["3"] =
       mfPassIDKind::kMfPassID_3;
-    gGlobalMusicFormatsPassIDKindsMap ["3a"]   =
+    gGlobalMusicFormatsPassIDKindsMap ["3a"] =
       mfPassIDKind::kMfPassID_3a;
-    gGlobalMusicFormatsPassIDKindsMap ["3b"]   =
+    gGlobalMusicFormatsPassIDKindsMap ["3b"] =
       mfPassIDKind::kMfPassID_3b;
 
     gGlobalMusicFormatsPassIDKindsMap ["4"] =
@@ -244,7 +244,7 @@ void initializeMusicFormatsPassIDs ()
   if (! pPrivateThisMethodHasBeenRun) {
 #ifdef MF_TRACE_IS_ENABLED
     if (
-      gEarlyOptions.getEarlyTraceOah ()
+      gEarlyOptions.getTraceEarlyOptions ()
         &&
       ! gEarlyOptions.getEarlyQuietOption ()
     ) {

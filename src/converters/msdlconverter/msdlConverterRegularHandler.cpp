@@ -101,7 +101,7 @@ msdlConverterRegularHandler::msdlConverterRegularHandler (
 */
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
     // JMI ???
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -113,7 +113,7 @@ msdlConverterRegularHandler::~msdlConverterRegularHandler ()
 void msdlConverterRegularHandler::createRegularHandlerGroups ()
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -218,7 +218,7 @@ void msdlConverterRegularHandler::createRegularHandlerGroups ()
   */
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1447,7 +1447,7 @@ void msdlConverterRegularHandler::createFiguredBassRegularGroup ()
 void msdlConverterRegularHandler::checkOptionsAndArguments () const
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<

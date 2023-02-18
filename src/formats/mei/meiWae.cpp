@@ -49,7 +49,7 @@ void meiError (
     sourceCodeLineNumber,
     message);
 
-  if (! gGlobalWaeOahGroup->getDontShowErrors ()) { // JMI
+  if (! gWaeOahGroup->getDontShowErrors ()) { // JMI
     throw meiException (message);
   }
 

@@ -94,7 +94,7 @@ LilyPondIssue34RegularHandler::LilyPondIssue34RegularHandler (
 */
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
     // JMI ???
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -106,7 +106,7 @@ LilyPondIssue34RegularHandler::~LilyPondIssue34RegularHandler ()
 void LilyPondIssue34RegularHandler::createRegularHandlerGroups ()
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -218,7 +218,7 @@ void LilyPondIssue34RegularHandler::createRegularHandlerGroups ()
   */
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1437,7 +1437,7 @@ void LilyPondIssue34RegularHandler::createFiguredBassRegularGroup ()
 void LilyPondIssue34RegularHandler::checkOptionsAndArguments () const
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<

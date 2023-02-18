@@ -123,7 +123,7 @@ void bsrLineContents::insertLineElementBeforeLastElementOfLineContents (
   const S_bsrLineContentsElement& lineElement)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceMeasures ()) {
+  if (gTraceOahGroup->getTraceMeasures ()) {
 		std::stringstream ss;
 
     ss <<

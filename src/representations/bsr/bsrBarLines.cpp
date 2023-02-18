@@ -51,7 +51,7 @@ bsrBarLine::bsrBarLine (
   fBarLineCellsList = buildCellsList ();
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceBarLines ()) {
+  if (gTraceOahGroup->getTraceBarLines ()) {
 		std::stringstream ss;
 
     ss <<

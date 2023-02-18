@@ -30,13 +30,13 @@ namespace MusicFormats
 //______________________________________________________________________________
 S_msrMidiTempo msrMidiTempo::create (
   int           inputLineNumber,
-  const std::string& midiTempoDuration,
+  const std::string& midiTempoNotesDuration,
   int           midiTempoPerSecond)
 {
   msrMidiTempo* o =
     new msrMidiTempo (
       inputLineNumber,
-      midiTempoDuration,
+      midiTempoNotesDuration,
       midiTempoPerSecond);
   assert (o != nullptr);
   return o;
@@ -44,18 +44,18 @@ S_msrMidiTempo msrMidiTempo::create (
 
 msrMidiTempo::msrMidiTempo (
   int           inputLineNumber,
-  const std::string& midiTempoDuration,
+  const std::string& midiTempoNotesDuration,
   int           midiTempoPerSecond)
     : msrElement (inputLineNumber)
 {
-  fMidiTempoDuration = midiTempoDuration;
+  fMidiTempoNotesDuration = midiTempoNotesDuration;
   fMidiTempoPerSecond = midiTempoPerSecond;
 }
 
 msrMidiTempo::msrMidiTempo ()
     : msrElement (0) // input line number
 {
-  fMidiTempoDuration = "2";
+  fMidiTempoNotesDuration = "2";
   fMidiTempoPerSecond = 45;
 }
 
@@ -68,7 +68,7 @@ S_msrMidiTempo msrMidiTempo::createMsrMidiTempoNewbornClone ()
     newbornClone =
       msrMidiTempo::create (
         fInputLineNumber,
-        fMidiTempoDuration,
+        fMidiTempoNotesDuration,
         fMidiTempoPerSecond);
 
   return newbornClone;
@@ -159,7 +159,7 @@ std::string msrMidiTempo::asString () const
 
   ss <<
     "[MidiTempo" <<
-    ", midiTempoDuration = \"" << fMidiTempoDuration << "\"" <<
+    ", midiTempoNotesDuration = \"" << fMidiTempoNotesDuration << "\"" <<
     ", midiTempoPerSecond: " << fMidiTempoPerSecond <<
     ", line " << fInputLineNumber <<
     ']';
@@ -177,7 +177,7 @@ void msrMidiTempo::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "midiTempoDuration" << ": " << fMidiTempoDuration <<
+    "midiTempoNotesDuration" << ": " << fMidiTempoNotesDuration <<
     std::endl <<
     std::setw (fieldWidth) <<
     "midiTempoPerSecond" << ": " << fMidiTempoPerSecond <<

@@ -88,7 +88,7 @@ msrBeam::msrBeam (
   fBeamKind   = beamKind;
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceBeams ()) {
+  if (gTraceOahGroup->getTraceBeams ()) {
 		std::stringstream ss;
 
     ss <<

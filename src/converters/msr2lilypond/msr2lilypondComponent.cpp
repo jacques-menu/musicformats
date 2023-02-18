@@ -11,6 +11,7 @@
 
 #include "mfcComponents.h"
 
+
 namespace MusicFormats
 {
 

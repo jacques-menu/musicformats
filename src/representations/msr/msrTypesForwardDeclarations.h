@@ -117,8 +117,8 @@ typedef SMARTP<msrDoubleTremolo> S_msrDoubleTremolo;
 class   msrDynamic;
 typedef SMARTP<msrDynamic> S_msrDynamic;
 
-class   msrDuration;
-typedef SMARTP<msrDuration> S_msrDuration;
+class   msrNotesDuration;
+typedef SMARTP<msrNotesDuration> S_msrNotesDuration;
 
 class   msrEyeGlasses;
 typedef SMARTP<msrEyeGlasses> S_msrEyeGlasses;

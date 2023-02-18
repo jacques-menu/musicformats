@@ -92,7 +92,7 @@ Mikrokosmos3WanderingRegularHandler::Mikrokosmos3WanderingRegularHandler (
 */
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
     // JMI ???
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -104,7 +104,7 @@ Mikrokosmos3WanderingRegularHandler::~Mikrokosmos3WanderingRegularHandler ()
 void Mikrokosmos3WanderingRegularHandler::createRegularHandlerGroups ()
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -216,7 +216,7 @@ void Mikrokosmos3WanderingRegularHandler::createRegularHandlerGroups ()
   */
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1435,7 +1435,7 @@ void Mikrokosmos3WanderingRegularHandler::createFiguredBassRegularGroup ()
 void Mikrokosmos3WanderingRegularHandler::checkOptionsAndArguments () const
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<

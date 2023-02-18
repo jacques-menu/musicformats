@@ -67,7 +67,7 @@ EXP mfMusicformatsErrorKind msrScore2brailleWithHandler (
   const S_oahHandler& handler)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -189,7 +189,7 @@ EXP mfMusicformatsErrorKind msrScore2brailleWithHandler (
           fetchOutputFileNameFromTheOptions ();
 
 #ifdef MF_TRACE_IS_ENABLED
-      if (gEarlyOptions.getEarlyTraceOah ()) {
+      if (gEarlyOptions.getTraceEarlyOptions ()) {
         err <<
           "xmlFile2braille() outputFileName = \"" <<
           outputFileName <<
@@ -204,7 +204,7 @@ EXP mfMusicformatsErrorKind msrScore2brailleWithHandler (
 
     if (! outputFileName.size ()) {
 #ifdef MF_TRACE_IS_ENABLED
-      if (gEarlyOptions.getEarlyTraceOah ()) {
+      if (gEarlyOptions.getTraceEarlyOptions ()) {
         err <<
           "xmlFile2braille() output goes to standard output" <<
           std::endl;
@@ -236,7 +236,7 @@ EXP mfMusicformatsErrorKind msrScore2brailleWithHandler (
 
     else {
 #ifdef MF_TRACE_IS_ENABLED
-      if (gEarlyOptions.getEarlyTraceOah ()) {
+      if (gEarlyOptions.getTraceEarlyOptions ()) {
         err <<
           "xmlFile2braille() output goes to file \"" <<
           outputFileName <<
