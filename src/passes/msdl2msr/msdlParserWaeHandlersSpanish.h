@@ -66,7 +66,7 @@ class EXP msdlParserWaeHandlerSpanish : public msdlParserWaeHandler
 
     void                  mixedCommasAndQuotesInOctaveIndication () const override;
 
-    void                  malformedNoteDuration () const override;
+    void                  malformedNoteNotesDuration () const override;
 
   public:
 

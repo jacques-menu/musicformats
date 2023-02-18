@@ -54,7 +54,7 @@ bsrMeasure::bsrMeasure (
   fBrailleMeasureNumber = fPrintMeasureNumber;
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceMeasures ()) {
+  if (gTraceOahGroup->getTraceMeasures ()) {
 		std::stringstream ss;
 
     ss <<
@@ -77,7 +77,7 @@ bsrMeasure::~bsrMeasure ()
 S_bsrMeasure bsrMeasure::createMeasureNewbornClone ()
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceMeasures ()) {
+  if (gTraceOahGroup->getTraceMeasures ()) {
 		std::stringstream ss;
 
     ss <<
@@ -113,7 +113,7 @@ void bsrMeasure::appendLineElementToMeasure (
 void bsrMeasure::appendClefToMeasure (S_bsrClef clef)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceClefs ()) {
+  if (gTraceOahGroup->getTraceClefs ()) {
 		std::stringstream ss;
 
     ss <<
@@ -132,7 +132,7 @@ void bsrMeasure::appendClefToMeasure (S_bsrClef clef)
 void bsrMeasure::appendBarLineToMeasure (S_bsrBarLine barLine)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceBarLines ()) {
+  if (gTraceOahGroup->getTraceBarLines ()) {
 		std::stringstream ss;
 
     ss <<
@@ -185,7 +185,7 @@ void bsrMeasure::appendWordsToMeasure (S_bsrWords words)
 void bsrMeasure::appendNoteToMeasure (S_bsrNote note)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceNotes ()) {
+  if (gTraceOahGroup->getTraceNotes ()) {
 		std::stringstream ss;
 
     ss <<
@@ -204,7 +204,7 @@ void bsrMeasure::appendNoteToMeasure (S_bsrNote note)
 void bsrMeasure::appendDynamicToMeasure (S_bsrDynamic dynamic)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceDynamics ()) {
+  if (gTraceOahGroup->getTraceDynamics ()) {
 		std::stringstream ss;
 
     ss <<

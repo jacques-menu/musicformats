@@ -95,7 +95,7 @@ msrGlissando::~msrGlissando ()
 S_msrGlissando msrGlissando::createGlissandoNewbornClone ()
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceGlissandos ()) {
+  if (gTraceOahGroup->getTraceGlissandos ()) {
 		std::stringstream ss;
 
     ss <<

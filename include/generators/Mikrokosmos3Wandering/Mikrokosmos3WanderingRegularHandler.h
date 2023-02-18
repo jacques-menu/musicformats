@@ -16,6 +16,7 @@
 
 #include "Mikrokosmos3WanderingInsiderHandler.h"
 
+
 namespace MusicFormats
 {
 

@@ -64,7 +64,7 @@ msr2brailleManPageGenerateAtom::~msr2brailleManPageGenerateAtom ()
 void msr2brailleManPageGenerateAtom::applyValueLessAtom (std::ostream& os)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -83,7 +83,7 @@ void msr2brailleManPageGenerateAtom::applyValueLessAtom (std::ostream& os)
 void msr2brailleManPageGenerateAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -102,7 +102,7 @@ void msr2brailleManPageGenerateAtom::acceptIn (basevisitor* v)
         S_msr2brailleManPageGenerateAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -121,7 +121,7 @@ void msr2brailleManPageGenerateAtom::acceptIn (basevisitor* v)
 void msr2brailleManPageGenerateAtom::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -140,7 +140,7 @@ void msr2brailleManPageGenerateAtom::acceptOut (basevisitor* v)
         S_msr2brailleManPageGenerateAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -159,7 +159,7 @@ void msr2brailleManPageGenerateAtom::acceptOut (basevisitor* v)
 void msr2brailleManPageGenerateAtom::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -271,7 +271,7 @@ R"()",
         regex_replace (
 R"(Write man page data for EXECUTABLE to standard output.)",
           std::regex ("EXECUTABLE"),
-          gGlobalOahOahGroup->getOahOahGroupServiceName ()),
+          gOahOahGroup->getOahOahGroupServiceName ()),
         fOah2manPage));
 }
 
@@ -325,7 +325,7 @@ void msr2brailleManPageOahGroup::checkGroupOptionsConsistency ()
 void msr2brailleManPageOahGroup::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -344,7 +344,7 @@ void msr2brailleManPageOahGroup::acceptIn (basevisitor* v)
         S_msr2brailleManPageOahGroup elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -363,7 +363,7 @@ void msr2brailleManPageOahGroup::acceptIn (basevisitor* v)
 void msr2brailleManPageOahGroup::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -382,7 +382,7 @@ void msr2brailleManPageOahGroup::acceptOut (basevisitor* v)
         S_msr2brailleManPageOahGroup elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -401,7 +401,7 @@ void msr2brailleManPageOahGroup::acceptOut (basevisitor* v)
 void msr2brailleManPageOahGroup::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -446,7 +446,7 @@ S_msr2brailleManPageOahGroup createGlobalXml2brailleManPageOahHandler (
   const S_oahVisitor& theOah2manPage)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<

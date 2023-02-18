@@ -17,8 +17,6 @@
 
 #include "smartpointer.h"
 
-#include "mfRational.h"
-
 
 namespace MusicFormats
 {

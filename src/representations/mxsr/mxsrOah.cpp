@@ -78,8 +78,8 @@ R"()",
         "Trace SHORT_NAME/LONG_NAME when handling MusicXML data.",
         "SHORT_NAME",
         "LONG_NAME",
-        gGlobalTraceOahGroup->getShortTracePrefix (),
-        gGlobalTraceOahGroup->getLongTracePrefix ());
+        gTraceOahGroup->getShortTracePrefix (),
+        gTraceOahGroup->getLongTracePrefix ());
 
   subGroup->
     appendAtomToSubGroup (
@@ -194,7 +194,7 @@ void mxsrOahGroup::checkGroupOptionsConsistency ()
 void mxsrOahGroup::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -213,7 +213,7 @@ void mxsrOahGroup::acceptIn (basevisitor* v)
         S_mxsrOahGroup elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -232,7 +232,7 @@ void mxsrOahGroup::acceptIn (basevisitor* v)
 void mxsrOahGroup::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -251,7 +251,7 @@ void mxsrOahGroup::acceptOut (basevisitor* v)
         S_mxsrOahGroup elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -270,7 +270,7 @@ void mxsrOahGroup::acceptOut (basevisitor* v)
 void mxsrOahGroup::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -347,7 +347,7 @@ std::ostream& operator << (std::ostream& os, const S_mxsrOahGroup& elt)
 S_mxsrOahGroup createGlobalMxsrOahGroup ()
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<

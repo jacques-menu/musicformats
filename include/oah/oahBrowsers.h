@@ -70,7 +70,7 @@ template <typename T> class   oahBrowser : public browser <T>
                               {
 /* JMI
 #ifdef MF_TRACE_IS_ENABLED
-                              if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+                              if (gOahOahGroup->getTraceOahVisitors ()) {
                                 gOutput <<
                                   std::endl <<
                                   ".\\\" --> browse()" <<
@@ -94,7 +94,7 @@ template <typename T> class   oahBrowser : public browser <T>
                               {
 /* JMI
 #ifdef MF_TRACE_IS_ENABLED
-                          if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+                          if (gOahOahGroup->getTraceOahVisitors ()) {
                             gOutput <<
                               std::endl <<
                               ".\\\" --> enter()" <<
@@ -110,7 +110,7 @@ template <typename T> class   oahBrowser : public browser <T>
                               {
 /* JMI
 #ifdef MF_TRACE_IS_ENABLED
-                                if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+                                if (gOahOahGroup->getTraceOahVisitors ()) {
                                   gOutput <<
                                     std::endl <<
                                     ".\\\" --> leave()" <<

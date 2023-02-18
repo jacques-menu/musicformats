@@ -51,8 +51,8 @@ void lpsrError (
     sourceCodeLineNumber,
     message);
 
-  if (! gGlobalWaeOahGroup->getDontShowErrors ()) {
-    if (! gGlobalWaeOahGroup->getDontQuitOnErrors ()) { // JMI
+  if (! gWaeOahGroup->getDontShowErrors ()) {
+    if (! gWaeOahGroup->getDontQuitOnErrors ()) { // JMI
       throw lpsrException (message);
     }
     else {

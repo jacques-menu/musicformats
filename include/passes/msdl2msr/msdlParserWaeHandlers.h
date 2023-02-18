@@ -70,7 +70,7 @@ class EXP msdlParserWaeHandler : public waeHandler
 
     virtual void          mixedCommasAndQuotesInOctaveIndication () const = 0;
 
-    virtual void          malformedNoteDuration () const = 0;
+    virtual void          malformedNoteNotesDuration () const = 0;
 
   public:
 

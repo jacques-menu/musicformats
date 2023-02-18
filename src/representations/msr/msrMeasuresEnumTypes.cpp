@@ -279,12 +279,12 @@ std::ostream& operator << (std::ostream& os, const msrMeasureEndRegularKind& elt
 //     skipNote->
 //       setMeasurePosition (
 //         this,
-//         fMeasureWholeNotesDuration,
+//         fMeasureWholeNotes,
 //         "handleASubsequentHarmonyInAHarmoniesMeasure() 2");
 //
 //     // insert skipNote before currentHarmony in the measure's elements list
 // #ifdef MF_TRACE_IS_ENABLED
-//     if (gGlobalTraceOahGroup->getTraceHarmonies ()) {
+//     if (gTraceOahGroup->getTraceHarmonies ()) {
 //       std::stringstream ss;
 //
 //       ss <<
@@ -326,14 +326,14 @@ std::ostream& operator << (std::ostream& os, const msrMeasureEndRegularKind& elt
 //       ss.str ());
 //
 //     // compute previousHarmony's future sounding whole notes
-//     Rational
+//     mfRational
 //       reducedSoundingWholeNotes =
 //         previousHarmonySoundingWholeNotes
 //           + // the delta is negative
 //         measurePositionsDelta;
 //
 // #ifdef MF_TRACE_IS_ENABLED
-//     if (gGlobalTraceOahGroup->getTraceHarmonies ()) {
+//     if (gTraceOahGroup->getTraceHarmonies ()) {
 //       std::stringstream ss;
 //
 //       ss <<

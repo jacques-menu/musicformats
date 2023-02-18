@@ -66,7 +66,7 @@ msdl2musicxmlRegularHandler::msdl2musicxmlRegularHandler (
   createRegularHandlerGroups ();
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOahDetails ()) {
+  if (gEarlyOptions.getTraceEarlyOptionsDetails ()) {
     // print the options handler initial state
 		std::stringstream ss;
 
@@ -94,7 +94,7 @@ msdl2musicxmlRegularHandler::~msdl2musicxmlRegularHandler ()
 void msdl2musicxmlRegularHandler::createRegularHandlerGroups ()
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -162,7 +162,7 @@ void msdl2musicxmlRegularHandler::createRegularHandlerGroups ()
   createOutputRegularGroup ();
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1237,7 +1237,7 @@ void msdl2musicxmlRegularHandler::createOutputRegularGroup ()
 void msdl2musicxmlRegularHandler::checkOptionsAndArguments () const
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<

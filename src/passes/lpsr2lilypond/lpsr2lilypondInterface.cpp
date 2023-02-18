@@ -131,7 +131,7 @@ EXP void translateLpsrToLilypondWithHandler (
         fetchOutputFileNameFromTheOptions ();
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
     err <<
       "xmlFile2lilypond() outputFileName = \"" <<
       outputFileName <<
@@ -146,7 +146,7 @@ EXP void translateLpsrToLilypondWithHandler (
 
   if (! outputFileName.size ()) {
 #ifdef MF_TRACE_IS_ENABLED
-    if (gEarlyOptions.getEarlyTraceOah ()) {
+    if (gEarlyOptions.getTraceEarlyOptions ()) {
       err <<
         "xmlFile2lilypond() output goes to standard output" <<
         std::endl;
@@ -186,7 +186,7 @@ EXP void translateLpsrToLilypondWithHandler (
 
   else {
 #ifdef MF_TRACE_IS_ENABLED
-    if (gEarlyOptions.getEarlyTraceOah ()) {
+    if (gEarlyOptions.getTraceEarlyOptions ()) {
       err <<
         "xmlFile2lilypond() output goes to file \"" <<
         outputFileName <<

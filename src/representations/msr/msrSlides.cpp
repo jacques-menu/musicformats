@@ -95,7 +95,7 @@ msrSlide::~msrSlide ()
 S_msrSlide msrSlide::createSlideNewbornClone ()
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceSlides ()) {
+  if (gTraceOahGroup->getTraceSlides ()) {
 		std::stringstream ss;
 
     ss <<

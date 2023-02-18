@@ -17,11 +17,10 @@
 
 #include "smartpointer.h"
 
-#include "mfRational.h"
-
-#include "msrDurations.h"
+#include "msrNotesDurations.h"
 #include "msrOctaves.h"
 #include "msrPitchesNames.h"
+#include "msrWholeNotes.h"
 
 
 namespace MusicFormats
@@ -116,29 +115,29 @@ void initializeLpsrChordsLanguageKindsMap ();
 //______________________________________________________________________________
 std::string wholeNotesAsLilypondString (
   int             inputLineNumber,
-  const Rational& wholeNotes,
+  const msrWholeNotes& wholeNotes,
   int&            dotsNumber);
 
 std::string wholeNotesAsLilypondString (
   int             inputLineNumber,
-  const Rational& wholeNotes);
+  const msrWholeNotes& wholeNotes);
 
 // dotted durations
 //______________________________________________________________________________
 
-std::string dottedDurationAsLilypondString (
+std::string dottedNotesDurationAsLilypondString (
   int               inputLineNumber,
-  msrDottedDuration dottedDuration);
+  msrDottedNotesDuration dottedNotesDuration);
 
-std::string dottedDurationAsLilypondStringWithoutBackSlash (
+std::string dottedNotesDurationAsLilypondStringWithoutBackSlash (
   int               inputLineNumber,
-  msrDottedDuration dottedDuration);
+  msrDottedNotesDuration dottedNotesDuration);
 
 // rests measures
 //______________________________________________________________________________
 std::string multipleFullBarRestsWholeNoteAsLilypondString (
   int             inputLineNumber,
-  const Rational& wholeNotes);
+  const msrWholeNotes& wholeNotes);
 
 // texts lists
 //______________________________________________________________________________
@@ -184,22 +183,22 @@ void initializeLpsrDynamicsTextSpannersStyleKindsMap ();
 
 // lyrics durations
 //______________________________________________________________________________
-enum class lpsrLyricsDurationsKind {
-  kLyricsDurationsImplicit, // default value
-  kLyricsDurationsExplicit
+enum class lpsrLyricsNotesDurationsKind {
+  kLyricsNotesDurationsImplicit, // default value
+  kLyricsNotesDurationsExplicit
 };
 
-std::string lpsrLyricsDurationsKindAsString (
-  lpsrLyricsDurationsKind lyricsDurationsKind);
+std::string lpsrLyricsNotesDurationsKindAsString (
+  lpsrLyricsNotesDurationsKind lyricsNotesDurationsKind);
 
-std::ostream& operator << (std::ostream& os, const lpsrLyricsDurationsKind& elt);
+std::ostream& operator << (std::ostream& os, const lpsrLyricsNotesDurationsKind& elt);
 
-extern std::map<std::string, lpsrLyricsDurationsKind>
-  gGlobalLpsrLyricsDurationsKindsMap;
+extern std::map<std::string, lpsrLyricsNotesDurationsKind>
+  gGlobalLpsrLyricsNotesDurationsKindsMap;
 
-std::string availableLpsrLyricsDurationsKinds (size_t namesListMaxLength);
+std::string availableLpsrLyricsNotesDurationsKinds (size_t namesListMaxLength);
 
-void initializeLpsrLyricsDurationsKindsMap ();
+void initializeLpsrLyricsNotesDurationsKindsMap ();
 
 
 }

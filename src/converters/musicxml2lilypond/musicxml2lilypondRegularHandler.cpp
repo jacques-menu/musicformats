@@ -68,7 +68,7 @@ xml2lyRegularHandler::xml2lyRegularHandler (
   createRegularHandlerGroups ();
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOahDetails ()) {
+  if (gEarlyOptions.getTraceEarlyOptionsDetails ()) {
   // print the options handler initial state
   gLog <<
     "musicxml2lilypondInsiderRegularHandler \"" <<
@@ -85,7 +85,7 @@ xml2lyRegularHandler::~xml2lyRegularHandler ()
 void xml2lyRegularHandler::createRegularHandlerGroups ()
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -173,7 +173,7 @@ void xml2lyRegularHandler::createRegularHandlerGroups ()
   createMidiRegularGroup ();
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1741,7 +1741,7 @@ void xml2lyRegularHandler::createMidiRegularGroup ()
 void xml2lyRegularHandler::checkOptionsAndArguments () const
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<

@@ -240,7 +240,7 @@ S_msrDynamic msrDynamic::createDynamicFromString (
   msrPlacementKind   dynamicPlacementKind)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceDynamics ()) {
+  if (gTraceOahGroup->getTraceDynamics ()) {
 		std::stringstream ss;
 
     ss <<

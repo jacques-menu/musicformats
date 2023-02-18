@@ -295,8 +295,8 @@ S_msrPart Mikrokosmos3WanderingGenerator::createPartInScore (
 
 if (false) { // JMI TEMP
   part->
-    setPartShortestNoteDuration (
-      Rational (1, 16));
+    setPartShortestNoteWholeNotes (
+      msrWholeNotes (1, 16));
 }
 
   return part;
@@ -401,8 +401,8 @@ void Mikrokosmos3WanderingGenerator::populateUpperVoice1WithTheFunctionsAPI (
             measure1number,
             msrQuarterTonesPitchKind::kQTP_A_Natural,
             msrOctaveKind::kOctave4,
-            Rational (1, 8), // soundingWholeNotes
-            Rational (1, 8), // displayWholeNotes
+            msrWholeNotes (1, 8), // soundingWholeNotes
+            msrWholeNotes (1, 8), // displayWholeNotes
             0);              // dotsNumber
 
       // append the dynamic to the note
@@ -444,8 +444,8 @@ void Mikrokosmos3WanderingGenerator::populateUpperVoice1WithTheFunctionsAPI (
             measure1number,
             msrQuarterTonesPitchKind::kQTP_G_Natural,
             msrOctaveKind::kOctave4,
-            Rational (1, 8), // soundingWholeNotes
-            Rational (1, 8), // displayWholeNotes
+            msrWholeNotes (1, 8), // soundingWholeNotes
+            msrWholeNotes (1, 8), // displayWholeNotes
             0);              // dotsNumber
 
       // append the first beam continue to the note
@@ -469,8 +469,8 @@ void Mikrokosmos3WanderingGenerator::populateUpperVoice1WithTheFunctionsAPI (
             measure1number,
             msrQuarterTonesPitchKind::kQTP_F_Natural,
             msrOctaveKind::kOctave4,
-            Rational (1, 8), // soundingWholeNotes
-            Rational (1, 8), // displayWholeNotes
+            msrWholeNotes (1, 8), // soundingWholeNotes
+            msrWholeNotes (1, 8), // displayWholeNotes
             0);              // dotsNumber
 
       // append the first beam continue to the note
@@ -501,8 +501,8 @@ void Mikrokosmos3WanderingGenerator::populateUpperVoice1WithTheFunctionsAPI (
             measure1number,
             msrQuarterTonesPitchKind::kQTP_E_Natural,
             msrOctaveKind::kOctave4,
-            Rational (1, 8), // soundingWholeNotes
-            Rational (1, 8), // displayWholeNotes
+            msrWholeNotes (1, 8), // soundingWholeNotes
+            msrWholeNotes (1, 8), // displayWholeNotes
             0);             // dotsNumber
 
       // append the first beam end to the note
@@ -551,8 +551,8 @@ void Mikrokosmos3WanderingGenerator::populateUpperVoice1WithTheFunctionsAPI (
             measure2number,
             msrQuarterTonesPitchKind::kQTP_D_Natural,
             msrOctaveKind::kOctave4,
-            Rational (1, 4), // soundingWholeNotes
-            Rational (1, 4), // displayWholeNotes
+            msrWholeNotes (1, 4), // soundingWholeNotes
+            msrWholeNotes (1, 4), // displayWholeNotes
             0);             // dotsNumber
 
       // append the slur stop to the note
@@ -577,8 +577,8 @@ void Mikrokosmos3WanderingGenerator::populateUpperVoice1WithTheFunctionsAPI (
             measure2number,
             msrQuarterTonesPitchKind::kQTP_G_Natural,
             msrOctaveKind::kOctave4,
-            Rational (1, 8), // soundingWholeNotes
-            Rational (1, 8), // displayWholeNotes
+            msrWholeNotes (1, 8), // soundingWholeNotes
+            msrWholeNotes (1, 8), // displayWholeNotes
             0);              // dotsNumber
 
       // append the dynamic to the note
@@ -620,8 +620,8 @@ void Mikrokosmos3WanderingGenerator::populateUpperVoice1WithTheFunctionsAPI (
             measure2number,
             msrQuarterTonesPitchKind::kQTP_F_Natural,
             msrOctaveKind::kOctave4,
-            Rational (1, 8), // soundingWholeNotes
-            Rational (1, 8), // displayWholeNotes
+            msrWholeNotes (1, 8), // soundingWholeNotes
+            msrWholeNotes (1, 8), // displayWholeNotes
             0);              // dotsNumber
 
       // append the first beam continue to the note
@@ -652,8 +652,8 @@ void Mikrokosmos3WanderingGenerator::populateUpperVoice1WithTheFunctionsAPI (
             measure2number,
             msrQuarterTonesPitchKind::kQTP_E_Natural,
             msrOctaveKind::kOctave4,
-            Rational (1, 8), // soundingWholeNotes
-            Rational (1, 8), // displayWholeNotes
+            msrWholeNotes (1, 8), // soundingWholeNotes
+            msrWholeNotes (1, 8), // displayWholeNotes
             0);              // dotsNumber
 
       // append the first beam continue to the note
@@ -677,8 +677,8 @@ void Mikrokosmos3WanderingGenerator::populateUpperVoice1WithTheFunctionsAPI (
             measure2number,
             msrQuarterTonesPitchKind::kQTP_D_Natural,
             msrOctaveKind::kOctave4,
-            Rational (1, 8), // soundingWholeNotes
-            Rational (1, 8), // displayWholeNotes
+            msrWholeNotes (1, 8), // soundingWholeNotes
+            msrWholeNotes (1, 8), // displayWholeNotes
             0);             // dotsNumber
 
       // append the first beam end to the note
@@ -727,8 +727,8 @@ void Mikrokosmos3WanderingGenerator::populateUpperVoice1WithTheFunctionsAPI (
             measure3number,
             msrQuarterTonesPitchKind::kQTP_C_Natural,
             msrOctaveKind::kOctave4,
-            Rational (1, 8), // soundingWholeNotes
-            Rational (1, 8), // displayWholeNotes
+            msrWholeNotes (1, 8), // soundingWholeNotes
+            msrWholeNotes (1, 8), // displayWholeNotes
             0);             // dotsNumber
 
       if (false) { // for tests JMI
@@ -799,8 +799,8 @@ void Mikrokosmos3WanderingGenerator::populateUpperVoice1WithTheFunctionsAPI (
             measure3number,
             msrQuarterTonesPitchKind::kQTP_D_Natural,
             msrOctaveKind::kOctave4,
-            Rational (1, 16), // soundingWholeNotes
-            Rational (1, 16), // displayWholeNotes
+            msrWholeNotes (1, 16), // soundingWholeNotes
+            msrWholeNotes (1, 16), // displayWholeNotes
             0);               // dotsNumber
 
       // append the first beam continue to the note
@@ -832,8 +832,8 @@ void Mikrokosmos3WanderingGenerator::populateUpperVoice1WithTheFunctionsAPI (
             measure3number,
             msrQuarterTonesPitchKind::kQTP_E_Natural,
             msrOctaveKind::kOctave4,
-            Rational (1, 16), // soundingWholeNotes
-            Rational (1, 16), // displayWholeNotes
+            msrWholeNotes (1, 16), // soundingWholeNotes
+            msrWholeNotes (1, 16), // displayWholeNotes
             0);              // dotsNumber
 
       // append the second beam end to the note
@@ -865,8 +865,8 @@ void Mikrokosmos3WanderingGenerator::populateUpperVoice1WithTheFunctionsAPI (
             measure3number,
             msrQuarterTonesPitchKind::kQTP_F_Natural,
             msrOctaveKind::kOctave4,
-            Rational (1, 8), // soundingWholeNotes
-            Rational (1, 8), // displayWholeNotes
+            msrWholeNotes (1, 8), // soundingWholeNotes
+            msrWholeNotes (1, 8), // displayWholeNotes
             0);             // dotsNumber
 
       // append the first beam begin to the note
@@ -890,8 +890,8 @@ void Mikrokosmos3WanderingGenerator::populateUpperVoice1WithTheFunctionsAPI (
             measure3number,
             msrQuarterTonesPitchKind::kQTP_E_Natural,
             msrOctaveKind::kOctave4,
-            Rational (1, 8), // soundingWholeNotes
-            Rational (1, 8), // displayWholeNotes
+            msrWholeNotes (1, 8), // soundingWholeNotes
+            msrWholeNotes (1, 8), // displayWholeNotes
             0);             // dotsNumber
 
       // append the wedge stop to the note
@@ -944,8 +944,8 @@ void Mikrokosmos3WanderingGenerator::populateUpperVoice1WithTheFunctionsAPI (
             measure4number,
             msrQuarterTonesPitchKind::kQTP_D_Natural,
             msrOctaveKind::kOctave4,
-            Rational (1, 2), // soundingWholeNotes
-            Rational (1, 2), // displayWholeNotes
+            msrWholeNotes (1, 2), // soundingWholeNotes
+            msrWholeNotes (1, 2), // displayWholeNotes
             0);              // dotsNumber
 
       // set the note tie start
@@ -998,8 +998,8 @@ void Mikrokosmos3WanderingGenerator::populateUpperVoice1WithTheFunctionsAPI (
             measure5number,
             msrQuarterTonesPitchKind::kQTP_D_Natural,
             msrOctaveKind::kOctave4,
-            Rational (1, 2), // soundingWholeNotes
-            Rational (1, 2), // displayWholeNotes
+            msrWholeNotes (1, 2), // soundingWholeNotes
+            msrWholeNotes (1, 2), // displayWholeNotes
             0);              // dotsNumber
 
       // set the note tie stop
@@ -1397,8 +1397,8 @@ void Mikrokosmos3WanderingGenerator::populateLowerVoice2WithTheFunctionsAPI (
             measure1number,
             msrQuarterTonesPitchKind::kQTP_B_Natural,
             msrOctaveKind::kOctave3,
-            Rational (1, 4), // soundingWholeNotes
-            Rational (1, 4), // displayWholeNotes
+            msrWholeNotes (1, 4), // soundingWholeNotes
+            msrWholeNotes (1, 4), // displayWholeNotes
             0));             // dotsNumber
     }
 
@@ -1410,8 +1410,8 @@ void Mikrokosmos3WanderingGenerator::populateLowerVoice2WithTheFunctionsAPI (
             measure1number,
             msrQuarterTonesPitchKind::kQTP_D_Natural,
             msrOctaveKind::kOctave4,
-            Rational (1, 8), // soundingWholeNotes
-            Rational (1, 8), // displayWholeNotes
+            msrWholeNotes (1, 8), // soundingWholeNotes
+            msrWholeNotes (1, 8), // displayWholeNotes
             0);             // dotsNumber
 
       // append the dynamic to the note
@@ -1453,8 +1453,8 @@ void Mikrokosmos3WanderingGenerator::populateLowerVoice2WithTheFunctionsAPI (
             measure1number,
             msrQuarterTonesPitchKind::kQTP_C_Natural,
             msrOctaveKind::kOctave4,
-            Rational (1, 8), // soundingWholeNotes
-            Rational (1, 8), // displayWholeNotes
+            msrWholeNotes (1, 8), // soundingWholeNotes
+            msrWholeNotes (1, 8), // displayWholeNotes
             0);              // dotsNumber
 
       // append the first beam continue to the note
@@ -1504,8 +1504,8 @@ void Mikrokosmos3WanderingGenerator::populateLowerVoice2WithTheFunctionsAPI (
             measure2number,
             msrQuarterTonesPitchKind::kQTP_B_Natural,
             msrOctaveKind::kOctave3,
-            Rational (1, 8), // soundingWholeNotes
-            Rational (1, 8), // displayWholeNotes
+            msrWholeNotes (1, 8), // soundingWholeNotes
+            msrWholeNotes (1, 8), // displayWholeNotes
             0);              // dotsNumber
 
       // append the first beam continue to the note
@@ -1529,8 +1529,8 @@ void Mikrokosmos3WanderingGenerator::populateLowerVoice2WithTheFunctionsAPI (
             measure2number,
             msrQuarterTonesPitchKind::kQTP_A_Natural,
             msrOctaveKind::kOctave3,
-            Rational (1, 8), // soundingWholeNotes
-            Rational (1, 8), // displayWholeNotes
+            msrWholeNotes (1, 8), // soundingWholeNotes
+            msrWholeNotes (1, 8), // displayWholeNotes
             0);             // dotsNumber
 
       // append the first beam end to the note
@@ -1554,8 +1554,8 @@ void Mikrokosmos3WanderingGenerator::populateLowerVoice2WithTheFunctionsAPI (
             measure2number,
             msrQuarterTonesPitchKind::kQTP_A_Flat,
             msrOctaveKind::kOctave3,
-            Rational (1, 4), // soundingWholeNotes
-            Rational (1, 4), // displayWholeNotes
+            msrWholeNotes (1, 4), // soundingWholeNotes
+            msrWholeNotes (1, 4), // displayWholeNotes
             0);             // dotsNumber
 
       // append the slur stop to the note
@@ -1580,8 +1580,8 @@ void Mikrokosmos3WanderingGenerator::populateLowerVoice2WithTheFunctionsAPI (
             measure2number,
             msrQuarterTonesPitchKind::kQTP_C_Natural,
             msrOctaveKind::kOctave4,
-            Rational (1, 8), // soundingWholeNotes
-            Rational (1, 8), // displayWholeNotes
+            msrWholeNotes (1, 8), // soundingWholeNotes
+            msrWholeNotes (1, 8), // displayWholeNotes
             0);              // dotsNumber
 
       // append the dynamic to the note
@@ -1613,8 +1613,8 @@ void Mikrokosmos3WanderingGenerator::populateLowerVoice2WithTheFunctionsAPI (
             measure2number,
             msrQuarterTonesPitchKind::kQTP_B_Flat,
             msrOctaveKind::kOctave3,
-            Rational (1, 8), // soundingWholeNotes
-            Rational (1, 8), // displayWholeNotes
+            msrWholeNotes (1, 8), // soundingWholeNotes
+            msrWholeNotes (1, 8), // displayWholeNotes
             0);              // dotsNumber
 
       // append the first beam continue to the note
@@ -1664,8 +1664,8 @@ void Mikrokosmos3WanderingGenerator::populateLowerVoice2WithTheFunctionsAPI (
             measure3number,
             msrQuarterTonesPitchKind::kQTP_A_Natural,
             msrOctaveKind::kOctave3,
-            Rational (1, 8), // soundingWholeNotes
-            Rational (1, 8), // displayWholeNotes
+            msrWholeNotes (1, 8), // soundingWholeNotes
+            msrWholeNotes (1, 8), // displayWholeNotes
             0);              // dotsNumber
 
       // append the first beam continue to the note
@@ -1689,8 +1689,8 @@ void Mikrokosmos3WanderingGenerator::populateLowerVoice2WithTheFunctionsAPI (
             measure3number,
             msrQuarterTonesPitchKind::kQTP_G_Natural,
             msrOctaveKind::kOctave3,
-            Rational (1, 8), // soundingWholeNotes
-            Rational (1, 8), // displayWholeNotes
+            msrWholeNotes (1, 8), // soundingWholeNotes
+            msrWholeNotes (1, 8), // displayWholeNotes
             0);              // dotsNumber
 
       // append the first beam end to the note
@@ -1714,8 +1714,8 @@ void Mikrokosmos3WanderingGenerator::populateLowerVoice2WithTheFunctionsAPI (
             measure3number,
             msrQuarterTonesPitchKind::kQTP_F_Sharp,
             msrOctaveKind::kOctave3,
-            Rational (1, 8), // soundingWholeNotes
-            Rational (1, 8), // displayWholeNotes
+            msrWholeNotes (1, 8), // soundingWholeNotes
+            msrWholeNotes (1, 8), // displayWholeNotes
             0);             // dotsNumber
 
       // append the first beam begin to the note
@@ -1738,8 +1738,8 @@ void Mikrokosmos3WanderingGenerator::populateLowerVoice2WithTheFunctionsAPI (
             measure3number,
             msrQuarterTonesPitchKind::kQTP_G_Natural,
             msrOctaveKind::kOctave3,
-            Rational (1, 16), // soundingWholeNotes
-            Rational (1, 16), // displayWholeNotes
+            msrWholeNotes (1, 16), // soundingWholeNotes
+            msrWholeNotes (1, 16), // displayWholeNotes
             0);               // dotsNumber
 
       // append the first beam continue to the note
@@ -1771,8 +1771,8 @@ void Mikrokosmos3WanderingGenerator::populateLowerVoice2WithTheFunctionsAPI (
             measure3number,
             msrQuarterTonesPitchKind::kQTP_A_Natural,
             msrOctaveKind::kOctave3,
-            Rational (1, 16), // soundingWholeNotes
-            Rational (1, 16), // displayWholeNotes
+            msrWholeNotes (1, 16), // soundingWholeNotes
+            msrWholeNotes (1, 16), // displayWholeNotes
             0);               // dotsNumber
 
       // append the second beam end to the note
@@ -2177,8 +2177,8 @@ void Mikrokosmos3WanderingGenerator::populateLowerVoice1WithTheFunctionsAPI (
         msrNote::createSkipNote (
           __LINE__,
           measure1number,
-          Rational (1, 2), // soundingWholeNotes
-          Rational (1, 2), // displayWholeNotes
+          msrWholeNotes (1, 2), // soundingWholeNotes
+          msrWholeNotes (1, 2), // displayWholeNotes
           0));             // dotsNumber
   }
 
@@ -2212,8 +2212,8 @@ void Mikrokosmos3WanderingGenerator::populateLowerVoice1WithTheFunctionsAPI (
         msrNote::createSkipNote (
           __LINE__,
           measure2number,
-          Rational (3, 4), // soundingWholeNotes
-          Rational (2, 4), // displayWholeNotes
+          msrWholeNotes (3, 4), // soundingWholeNotes
+          msrWholeNotes (2, 4), // displayWholeNotes
           0));             // dotsNumber
   }
 
@@ -2246,8 +2246,8 @@ void Mikrokosmos3WanderingGenerator::populateLowerVoice1WithTheFunctionsAPI (
         msrNote::createSkipNote (
           __LINE__,
           measure3number,
-          Rational (1, 2), // soundingWholeNotes
-          Rational (1, 2), // displayWholeNotes
+          msrWholeNotes (1, 2), // soundingWholeNotes
+          msrWholeNotes (1, 2), // displayWholeNotes
           0));             // dotsNumber
   }
 
@@ -2276,8 +2276,8 @@ void Mikrokosmos3WanderingGenerator::populateLowerVoice1WithTheFunctionsAPI (
             measure4number,
             msrQuarterTonesPitchKind::kQTP_B_Natural,
             msrOctaveKind::kOctave3,
-            Rational (1, 2), // soundingWholeNotes
-            Rational (1, 2), // displayWholeNotes
+            msrWholeNotes (1, 2), // soundingWholeNotes
+            msrWholeNotes (1, 2), // displayWholeNotes
             0);             // dotsNumber
 
       // set the note tie start
@@ -2319,8 +2319,8 @@ void Mikrokosmos3WanderingGenerator::populateLowerVoice1WithTheFunctionsAPI (
             measure5number,
             msrQuarterTonesPitchKind::kQTP_B_Natural,
             msrOctaveKind::kOctave3,
-            Rational (1, 2), // soundingWholeNotes
-            Rational (1, 2), // displayWholeNotes
+            msrWholeNotes (1, 2), // soundingWholeNotes
+            msrWholeNotes (1, 2), // displayWholeNotes
             0);             // dotsNumber
 
       // set the note tie stop

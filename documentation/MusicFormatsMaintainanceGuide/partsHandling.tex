@@ -38,7 +38,7 @@ void msrPart::browseData (basevisitor* v)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED // JMI
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) { // JMI TEMP
@@ -72,7 +72,7 @@ void msrPart::browseData (basevisitor* v)
       } // for
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   /* don't enforce any order here, leave it to the client thru sorting JMI */
 

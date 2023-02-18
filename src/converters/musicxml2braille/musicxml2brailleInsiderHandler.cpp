@@ -85,7 +85,7 @@ Usage: xml2brl [[option]* [MusicXMLFile|-] [[option]*
 )")
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOahDetails ()) {
+  if (gEarlyOptions.getTraceEarlyOptionsDetails ()) {
 		std::stringstream ss;
 
     ss <<
@@ -154,7 +154,7 @@ R"(What xml2brl does:
 void xml2brlInsiderHandler::createTheXml2brlPrefixes ()
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOahDetails ()) {
+  if (gEarlyOptions.getTraceEarlyOptionsDetails ()) {
 		std::stringstream ss;
 
     ss <<
@@ -175,7 +175,7 @@ void xml2brlInsiderHandler::createTheXml2brlOptionGroups (
   const std::string& serviceName)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOahDetails ()) {
+  if (gEarlyOptions.getTraceEarlyOptionsDetails ()) {
 		std::stringstream ss;
 
     ss <<
@@ -272,7 +272,7 @@ void xml2brlInsiderHandler::createTheXml2brlOptionGroups (
       fHandlerHeader));
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOahDetails ()) {
+  if (gEarlyOptions.getTraceEarlyOptionsDetails ()) {
     // print the options handler initial state
 		std::stringstream ss;
 
@@ -296,7 +296,7 @@ void xml2brlInsiderHandler::createTheXml2brlOptionGroups (
 void xml2brlInsiderHandler::checkOptionsAndArguments () const
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOahDetails ()) {
+  if (gEarlyOptions.getTraceEarlyOptionsDetails ()) {
 		std::stringstream ss;
 
     ss <<
@@ -318,7 +318,7 @@ void xml2brlInsiderHandler::checkOptionsAndArguments () const
 std::string xml2brlInsiderHandler::fetchOutputFileNameFromTheOptions () const
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOahDetails ()) {
+  if (gEarlyOptions.getTraceEarlyOptionsDetails ()) {
 		std::stringstream ss;
 
     ss <<
@@ -412,7 +412,7 @@ std::string xml2brlInsiderHandler::fetchOutputFileNameFromTheOptions () const
       }
 
 #ifdef MF_TRACE_IS_ENABLED
-      if (gEarlyOptions.getEarlyTraceOahDetails ()) {
+      if (gEarlyOptions.getTraceEarlyOptionsDetails ()) {
         std::stringstream ss;
 
         ss <<
@@ -478,7 +478,7 @@ std::string xml2brlInsiderHandler::fetchOutputFileNameFromTheOptions () const
       }
 
 #ifdef MF_TRACE_IS_ENABLED
-      if (gEarlyOptions.getEarlyTraceOahDetails ()) {
+      if (gEarlyOptions.getTraceEarlyOptionsDetails ()) {
         std::stringstream ss;
 
         ss <<
@@ -510,7 +510,7 @@ std::string xml2brlInsiderHandler::fetchOutputFileNameFromTheOptions () const
       } // switch
 
 #ifdef MF_TRACE_IS_ENABLED
-      if (gEarlyOptions.getEarlyTraceOahDetails ()) {
+      if (gEarlyOptions.getTraceEarlyOptionsDetails ()) {
         std::stringstream ss;
 
         ss <<
@@ -544,7 +544,7 @@ void xml2brlInsiderHandler::checkHandlerOptionsConsistency ()
 void xml2brlInsiderHandler::enforceHandlerQuietness ()
 {
 #ifdef MF_TRACE_IS_ENABLED
-  gGlobalTraceOahGroup->
+  gTraceOahGroup->
     enforceGroupQuietness ();
 #endif // MF_TRACE_IS_ENABLED
 
@@ -585,7 +585,7 @@ void xml2brlInsiderOahGroup::checkGroupOptionsConsistency ()
 void xml2brlInsiderOahGroup::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -604,7 +604,7 @@ void xml2brlInsiderOahGroup::acceptIn (basevisitor* v)
         S_xml2brlInsiderOahGroup elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -623,7 +623,7 @@ void xml2brlInsiderOahGroup::acceptIn (basevisitor* v)
 void xml2brlInsiderOahGroup::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -642,7 +642,7 @@ void xml2brlInsiderOahGroup::acceptOut (basevisitor* v)
         S_xml2brlInsiderOahGroup elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -661,7 +661,7 @@ void xml2brlInsiderOahGroup::acceptOut (basevisitor* v)
 void xml2brlInsiderOahGroup::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -769,7 +769,7 @@ xml2brlInsiderOahGroup::~xml2brlInsiderOahGroup ()
 void xml2brlInsiderOahGroup::initializeXml2brlInsiderOahGroup ()
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
     std::stringstream ss;
 
     ss <<
@@ -794,7 +794,7 @@ void xml2brlInsiderOahGroup::initializeXml2brlInsiderOahGroup ()
 void xml2brlInsiderOahGroup::createInsiderQuitSubGroup ()
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOahDetails ()) {
+  if (gEarlyOptions.getTraceEarlyOptionsDetails ()) {
 		std::stringstream ss;
 
     ss <<
@@ -906,7 +906,7 @@ S_xml2brlInsiderOahGroup createGlobalXml2brlOahGroup (
   const std::string& handlerHeader)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<

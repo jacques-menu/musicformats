@@ -258,7 +258,7 @@ class EXP msrTimeSignature : public msrMeasureElement
     void                  appendTimeSignatureItem (
                             const S_msrTimeSignatureItem& timeSignatureItem);
 
-    Rational              wholeNotesDurationPerMeasure () const;
+    msrWholeNotes          timeSignatureWholeNotesPerMeasure () const;
 
   public:
 

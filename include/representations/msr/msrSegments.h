@@ -104,11 +104,11 @@ class EXP msrSegment : public msrVoiceElement
 /* JMI
     // segment shortest note
 
-    void                  setSegmentShortestNoteDuration (
-                            const Rational& duration);
+    void                  setSegmentShortestNoteWholeNotes (
+                            const msrWholeNotes& wholeNotes);
 
-    Rational              getSegmentShortestNoteDuration () const
-                              { return fSegmentShortestNoteDuration; }
+    msrWholeNotes          getSegmentShortestNoteWholeNotes () const
+                              { return fSegmentShortestNoteWholeNotes; }
 
     void                  setSegmentShortestNoteTupletFactor (
                             const msrTupletFactor& noteTupletFactor);
@@ -142,16 +142,16 @@ class EXP msrSegment : public msrVoiceElement
 
     void                  padUpToMeasurePositionInSegment (
                             int             inputLineNumber,
-                            const Rational& wholeNotes);
+                            const msrWholeNotes& wholeNotes);
 
     void                  backupByWholeNotesStepLengthInSegment (
                             int     inputLineNumber,
-                            const Rational&
+                            const msrWholeNotes&
                                     backupTargetMeasurePosition);
 
     void                  appendPaddingNoteToSegment (
                             int             inputLineNumber,
-                            const Rational& forwardStepLength);
+                            const msrWholeNotes& forwardStepLength);
 
     // measures
 
@@ -198,7 +198,7 @@ class EXP msrSegment : public msrVoiceElement
 
     void                  insertHiddenMeasureAndBarLineInSegmentClone (
                             int             inputLineNumber,
-                            const Rational& measurePosition);
+                            const msrWholeNotes& measurePosition);
 
     // transposition
 
@@ -275,7 +275,7 @@ class EXP msrSegment : public msrVoiceElement
 
     void                  appendNoteToSegment (
                             const S_msrNote& note,
-                            const Rational& partMeasurePosition);
+                            const msrWholeNotes& partMeasurePosition);
 
     void                  appendNoteToSegmentClone (const S_msrNote& note);
 
@@ -446,10 +446,10 @@ class EXP msrSegment : public msrVoiceElement
 /* JMI
     // segment shortest note
 
-    // fPartShortestNoteDuration and fPartShortestNoteTupletFactor
+    // fPartShortestNoteWholeNotes and fPartShortestNoteTupletFactor
     // are used to compute a number of divisions per quarter note
     // if needed, such as when generating MusicXML from MSR
-    Rational              fSegmentShortestNoteDuration;
+    msrWholeNotes              fSegmentShortestNoteWholeNotes;
     msrTupletFactor       fSegmentShortestNoteTupletFactor;
     */
 

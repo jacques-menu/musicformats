@@ -691,7 +691,7 @@ void mxsr2msrTranslator::visitEnd ( S_accordion_registration& elt )
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // An accordion-registration element needs to have
   // at least one of the child elements present
@@ -866,7 +866,7 @@ S_msrStaff Mikrokosmos3WanderingGenerator::createStaffInPart (
 }
 \end{lstlisting}
 
-In all output produced by \mf\ tools, including trace informations and comments in the generated output refering to the input data, line numbers appear as:
+In all output produced by \mf\ services, including trace informations and comments in the generated output refering to the input data, line numbers appear as:
 \begin{lstlisting}[language=Terminal]
 	line <number>
 \end{lstlisting}
@@ -908,7 +908,7 @@ void initializeBSR ()
 
   if (! pPrivateThisMethodHasBeenRun) {
 #ifdef MF_TRACE_IS_ENABLED
-    if (gEarlyOptions.getEarlyTraceOah () && ! gEarlyOptions.getEarlyQuietOption ()) {
+    if (gEarlyOptions.getTraceEarlyOptions () && ! gEarlyOptions.getEarlyQuietOption ()) {
       gLog <<
         "Initializing BSR basic types handling" <<
         std::endl;
@@ -917,7 +917,7 @@ void initializeBSR ()
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     // BSR braille output kinds handling
     // ------------------------------------------------------
@@ -1337,13 +1337,13 @@ void msrHarmonyStructure::printAllHarmoniesStructures (std::ostream& os)
 
 
 % -------------------------------------------------------------------------
-\section{Rational numbers}
+\section{mfRational numbers}
 % -------------------------------------------------------------------------
 
 \mf\ uses rationals for notes sounding and display whole notes and measure positionss, among others.
-class   {\tt Rational} is defined by \libmusicxml\ in \libBoth{Rational}:
+class   {\tt mfRational} is defined by \libmusicxml\ in \libBoth{mfRational}:
 \begin{lstlisting}[language=CPlusPlus]
-class EXP Rational {
+class EXP mfRational {
 
    private:
 
@@ -1355,9 +1355,9 @@ class EXP Rational {
 
     public:
 
-        Rational(long int num = 0, long int denom = 1);
-        Rational(const Rational& d);
-        Rational(const std::string &str);
+        mfRational(long int num = 0, long int denom = 1);
+        mfRational(const mfRational& d);
+        mfRational(const std::string &str);
 
 	// ... ... ...
 };
@@ -1412,7 +1412,7 @@ One case is that of \class{msrTempo} in \msrBoth{msrTempos}, because calls to th
 
     static SMARTP<msrTempo> createTempoPerMinute (
       int               inputLineNumber,
-      msrDottedDuration tempoBeatUnit,
+      msrDottedNotesDuration tempoBeatUnit,
       std::string       tempoPerMinute,
       msrTempoParenthesizedKind
                         tempoParenthesizedKind,
@@ -1420,8 +1420,8 @@ One case is that of \class{msrTempo} in \msrBoth{msrTempos}, because calls to th
 
     static SMARTP<msrTempo> createTempoBeatUnitEquivalent (
       int               inputLineNumber,
-      msrDottedDuration tempoBeatUnit,
-      msrDottedDuration tempoEquivalentBeatUnit,
+      msrDottedNotesDuration tempoBeatUnit,
+      msrDottedNotesDuration tempoEquivalentBeatUnit,
       msrTempoParenthesizedKind
                         tempoParenthesizedKind,
       msrPlacementKind  tempoPlacementKind);

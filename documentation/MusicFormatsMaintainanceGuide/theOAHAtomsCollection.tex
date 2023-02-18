@@ -107,7 +107,7 @@ Applying the macro atom is done in \method{oahMacroAtom}{applyElement}:
 void oahMacroAtom::applyValueLessAtom (std::ostream& os)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -118,7 +118,7 @@ void oahMacroAtom::applyValueLessAtom (std::ostream& os)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   for (
     std::list<S_oahAtom>::const_iterator i =

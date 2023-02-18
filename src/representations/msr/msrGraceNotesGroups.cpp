@@ -87,7 +87,7 @@ msrGraceNotesGroup::~msrGraceNotesGroup ()
 S_msrGraceNotesGroup msrGraceNotesGroup::createGraceNotesGroupNewbornClone ()
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceGraceNotes ()) {
+  if (gTraceOahGroup->getTraceGraceNotes ()) {
 		std::stringstream ss;
 
     ss <<
@@ -170,7 +170,7 @@ std::ostream& operator << (std::ostream& os, const msrGraceNotesGroupKind& elt)
 S_msrGraceNotesGroup msrGraceNotesGroup::createSkipGraceNotesGroupClone ()
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceGraceNotes ()) {
+  if (gTraceOahGroup->getTraceGraceNotes ()) {
 		std::stringstream ss;
 
     ss <<
@@ -212,7 +212,7 @@ S_msrGraceNotesGroup msrGraceNotesGroup::createSkipGraceNotesGroupClone ()
     ) {
       // create grace skip note with same duration as note
 #ifdef MF_TRACE_IS_ENABLED
-      if (gGlobalTraceOahGroup->getTraceGraceNotes ()) {
+      if (gTraceOahGroup->getTraceGraceNotes ()) {
         std::stringstream ss;
 
         ss <<
@@ -279,7 +279,7 @@ S_msrGraceNotesGroup msrGraceNotesGroup::createSkipGraceNotesGroupClone ()
 void msrGraceNotesGroup::appendNoteToGraceNotesGroup (const S_msrNote& note)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceGraceNotes ()) {
+  if (gTraceOahGroup->getTraceGraceNotes ()) {
 		std::stringstream ss;
 
     ss <<
@@ -313,7 +313,7 @@ void msrGraceNotesGroup::appendNoteToGraceNotesGroup (const S_msrNote& note)
 void msrGraceNotesGroup::appendChordToGraceNotesGroup (const S_msrChord& chord)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceGraceNotes ()) {
+  if (gTraceOahGroup->getTraceGraceNotes ()) {
 		std::stringstream ss;
 
     ss <<
@@ -342,7 +342,7 @@ S_msrNote msrGraceNotesGroup::removeLastNoteFromGraceNotesGroup (
   int inputLineNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceGraceNotes ()) {
+  if (gTraceOahGroup->getTraceGraceNotes ()) {
 		std::stringstream ss;
 
     ss <<
@@ -368,7 +368,7 @@ S_msrNote msrGraceNotesGroup::removeLastNoteFromGraceNotesGroup (
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceGraceNotes ()) {
+  if (gTraceOahGroup->getTraceGraceNotes ()) {
 		std::stringstream ss;
 
     ss <<
@@ -400,7 +400,7 @@ S_msrNote msrGraceNotesGroup::removeLastNoteFromGraceNotesGroup (
   }
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceGraceNotes ()) {
+  if (gTraceOahGroup->getTraceGraceNotes ()) {
 		std::stringstream ss;
 
     ss <<
@@ -424,10 +424,10 @@ S_msrNote msrGraceNotesGroup::removeLastNoteFromGraceNotesGroup (
 
 void msrGraceNotesGroup::setGraceNotesGroupElementsMeasurePositions (
   const S_msrMeasure& measure,
-  const Rational&     measurePosition)
+  const msrWholeNotes&     measurePosition)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceMeasurePositions ()) {
+  if (gTraceOahGroup->getTraceMeasurePositions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -453,7 +453,7 @@ void msrGraceNotesGroup::setGraceNotesGroupElementsMeasurePositions (
 
   if (false) { // JMI
   // compute chord's voice position
-  Rational
+  msrWholeNotes
      voicePosition =
       fMeasureElementUpLinkToMeasure->getMeasureVoicePosition ()
         +
@@ -481,7 +481,7 @@ void msrGraceNotesGroup::setGraceNotesGroupElementsMeasurePositions (
   /* JMI
   if (false) { // JMI
     // compute chord's voice position
-    Rational
+    msrWholeNotes
        voicePosition =
         fGraceNotesGroupUpLinkToNote->
           getMeasureElementUpLinkToMeasure ()->

@@ -52,7 +52,7 @@ EXP void msdlError (
     sourceCodeLineNumber,
     message);
 
-  if (! gGlobalWaeOahGroup->getDontShowErrors ()) { // JMI
+  if (! gWaeOahGroup->getDontShowErrors ()) { // JMI
     throw msdlException (message);
   }
 

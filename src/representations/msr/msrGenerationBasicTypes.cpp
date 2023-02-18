@@ -179,7 +179,7 @@ void msrGenerationAPIKindAtom::applyAtomWithValue (
   // is it in the  output kinds map?
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -230,7 +230,7 @@ void msrGenerationAPIKindAtom::applyAtomWithValue (
 void msrGenerationAPIKindAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -249,7 +249,7 @@ void msrGenerationAPIKindAtom::acceptIn (basevisitor* v)
         S_msrGenerationAPIKindAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -268,7 +268,7 @@ void msrGenerationAPIKindAtom::acceptIn (basevisitor* v)
 void msrGenerationAPIKindAtom::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -287,7 +287,7 @@ void msrGenerationAPIKindAtom::acceptOut (basevisitor* v)
         S_msrGenerationAPIKindAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -306,7 +306,7 @@ void msrGenerationAPIKindAtom::acceptOut (basevisitor* v)
 void msrGenerationAPIKindAtom::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<

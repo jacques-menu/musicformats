@@ -39,12 +39,12 @@ void msr2msrUnsupported (
     (
       gEarlyOptions.getEarlyQuietOption ()
         &&
-      gGlobalWaeOahGroup->getDontShowErrors ()
+      gWaeOahGroup->getDontShowErrors ()
     )
   ) {
     gIndenter.resetToZero ();
 
-    if (gGlobalOahOahGroup->getDisplaySourceCodePositions ()) {
+    if (gOahOahGroup->getDisplaySourceCodePositions ()) {
       gLog <<
         mfBaseName (sourceCodeFileName) << ":" << sourceCodeLineNumber <<
         ' ';
@@ -125,8 +125,8 @@ void msr2msrError (
     sourceCodeLineNumber,
     message);
 
-  if (! gGlobalWaeOahGroup->getDontShowErrors ()) {
-    if (! gGlobalWaeOahGroup->getDontQuitOnErrors ()) { // JMI
+  if (! gWaeOahGroup->getDontShowErrors ()) {
+    if (! gWaeOahGroup->getDontQuitOnErrors ()) { // JMI
       throw msr2msrException (message);
     }
     else {

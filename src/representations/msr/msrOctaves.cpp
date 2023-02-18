@@ -479,7 +479,7 @@ msrSemiTonesPitchAndOctave::msrSemiTonesPitchAndOctave (
   fOctaveKind         = octaveKind;
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceHarmoniesDetails ()) {
+  if (gTraceOahGroup->getTraceHarmoniesDetails ()) {
     std::stringstream ss;
 
     ss <<
@@ -529,7 +529,7 @@ S_msrSemiTonesPitchAndOctave msrSemiTonesPitchAndOctave::createFromString (
   size_t smSize = sm.size ();
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -557,7 +557,7 @@ S_msrSemiTonesPitchAndOctave msrSemiTonesPitchAndOctave::createFromString (
       octaveIndication = sm [2];
 
 #ifdef MF_TRACE_IS_ENABLED
-    if (gEarlyOptions.getEarlyTraceOah ()) {
+    if (gEarlyOptions.getTraceEarlyOptions ()) {
 	  	std::stringstream ss;
 
       ss <<
@@ -585,7 +585,7 @@ S_msrSemiTonesPitchAndOctave msrSemiTonesPitchAndOctave::createFromString (
           octaveIndication);
 
 #ifdef MF_TRACE_IS_ENABLED
-    if (gEarlyOptions.getEarlyTraceOah ()) {
+    if (gEarlyOptions.getTraceEarlyOptions ()) {
 	  	std::stringstream ss;
 
       ss <<
@@ -779,7 +779,7 @@ msrSemiTonesPitchAndAbsoluteOctave::msrSemiTonesPitchAndAbsoluteOctave (
   fAbsoluteOctave = absoluteOctave;
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceHarmoniesDetails ()) {
+  if (gTraceOahGroup->getTraceHarmoniesDetails ()) {
     std::stringstream ss;
 
     ss <<
@@ -881,7 +881,7 @@ msrSemiTonesPitchAndRelativeOctave::msrSemiTonesPitchAndRelativeOctave (
   fRelativeOctave = relativeOctave;
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceHarmoniesDetails ()) {
+  if (gTraceOahGroup->getTraceHarmoniesDetails ()) {
     std::stringstream ss;
 
     ss <<
@@ -984,7 +984,7 @@ msrQuarterTonesPitchAndOctave::msrQuarterTonesPitchAndOctave (
   fOctaveKind            = octaveKind;
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceHarmoniesDetails ()) {
+  if (gTraceOahGroup->getTraceHarmoniesDetails ()) {
     std::stringstream ss;
 
     ss <<
@@ -1034,7 +1034,7 @@ S_msrQuarterTonesPitchAndOctave msrQuarterTonesPitchAndOctave::createFromString 
   size_t smSize = sm.size ();
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1062,7 +1062,7 @@ S_msrQuarterTonesPitchAndOctave msrQuarterTonesPitchAndOctave::createFromString 
       octaveIndication = sm [2];
 
 #ifdef MF_TRACE_IS_ENABLED
-    if (gEarlyOptions.getEarlyTraceOah ()) {
+    if (gEarlyOptions.getTraceEarlyOptions ()) {
 	  	std::stringstream ss;
 
       ss <<
@@ -1092,7 +1092,7 @@ S_msrQuarterTonesPitchAndOctave msrQuarterTonesPitchAndOctave::createFromString 
           octaveIndication);
 
 #ifdef MF_TRACE_IS_ENABLED
-    if (gEarlyOptions.getEarlyTraceOah ()) {
+    if (gEarlyOptions.getTraceEarlyOptions ()) {
 	  	std::stringstream ss;
 
       ss <<

@@ -33,9 +33,7 @@ namespace MusicFormats
 {
 
 //_______________________________________________________________________________
-S_TraceOahGroup gGlobalTraceOahGroup;
-
-S_TraceOahGroup traceOahGroup::create (
+S_traceOahGroup traceOahGroup::create (
   const S_oahHandler& handler)
 {
   traceOahGroup* o = new traceOahGroup (
@@ -66,7 +64,7 @@ traceOahGroup::~traceOahGroup ()
 
 void traceOahGroup::createTheTracePrefixes (const S_oahHandler& handler)
 {
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -2141,13 +2139,13 @@ This option implies '-tvoices, -trace-voices'.)",
       traceVoicesDetailsBooleanAtom);
 }
 
-void traceOahGroup::initializeDurationsTraceOah ()
+void traceOahGroup::initializeNotesDurationsTraceOah ()
 {
   S_oahSubGroup
     subGroup =
       oahSubGroup::create (
-        "Durations",
-        "help-trace-durations", "htd",
+        "NotesDurations",
+        "help-trace-notes-durations", "htnd",
 R"()",
       oahElementVisibilityKind::kElementVisibilityWhole,
       this);
@@ -2157,17 +2155,17 @@ R"()",
   // durations
 
   S_oahTwoBooleansAtomWithTracePasses
-    traceDurationsBooleanAtom =
+    traceNotesDurationsBooleanAtom =
       oahTwoBooleansAtomWithTracePasses::create ( // JMI trace too??? v0.9.67
-        "trace-durations", "tdurs",
-R"(Durations)",
-        "fTraceDurations",
-        fTraceDurations,
+        "trace-notes-durations", "tndurs",
+R"(NotesDurations)",
+        "fTraceNotesDurations",
+        fTraceNotesDurations,
         fTracePassesBooleanAtom);
 
   subGroup->
     appendAtomToSubGroup (
-      traceDurationsBooleanAtom);
+      traceNotesDurationsBooleanAtom);
 }
 
 void traceOahGroup::initializeNotesTraceOah ()
@@ -2603,7 +2601,7 @@ void traceOahGroup::initializeTraceOahGroup ()
   initializeMeasuresSlicesTraceOah ();
 
   // durations
-  initializeDurationsTraceOah ();
+  initializeNotesDurationsTraceOah ();
 
   // notes
   initializeNotesTraceOah ();
@@ -2662,7 +2660,7 @@ void traceOahGroup::checkGroupOptionsConsistency ()
 void traceOahGroup::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -2675,13 +2673,13 @@ void traceOahGroup::acceptIn (basevisitor* v)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  if (visitor<S_TraceOahGroup>*
+  if (visitor<S_traceOahGroup>*
     p =
-      dynamic_cast<visitor<S_TraceOahGroup>*> (v)) {
-        S_TraceOahGroup elem = this;
+      dynamic_cast<visitor<S_traceOahGroup>*> (v)) {
+        S_traceOahGroup elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -2700,7 +2698,7 @@ void traceOahGroup::acceptIn (basevisitor* v)
 void traceOahGroup::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -2713,13 +2711,13 @@ void traceOahGroup::acceptOut (basevisitor* v)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  if (visitor<S_TraceOahGroup>*
+  if (visitor<S_traceOahGroup>*
     p =
-      dynamic_cast<visitor<S_TraceOahGroup>*> (v)) {
-        S_TraceOahGroup elem = this;
+      dynamic_cast<visitor<S_traceOahGroup>*> (v)) {
+        S_traceOahGroup elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -2738,7 +2736,7 @@ void traceOahGroup::acceptOut (basevisitor* v)
 void traceOahGroup::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -3253,7 +3251,7 @@ void traceOahGroup::displayTraceOahValues (int fieldWidth)
   --gIndenter;
 }
 
-std::ostream& operator << (std::ostream& os, const S_TraceOahGroup& elt)
+std::ostream& operator << (std::ostream& os, const S_traceOahGroup& elt)
 {
   if (elt) {
     elt->print (os);
@@ -3265,11 +3263,20 @@ std::ostream& operator << (std::ostream& os, const S_TraceOahGroup& elt)
   return os;
 }
 
+//________________________________________________________________________
+// hidden global trace OAH variable
+EXP S_traceOahGroup pGlobalTraceOahGroup;
+
+EXP S_traceOahGroup getGlobalTraceOahGroup ()
+{
+  return pGlobalTraceOahGroup;
+}
+
 //______________________________________________________________________________
-S_TraceOahGroup createGlobalTraceOahGroup (
+S_traceOahGroup createGlobalTraceOahGroup (
   const S_oahHandler& handler)
 {
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -3278,16 +3285,16 @@ S_TraceOahGroup createGlobalTraceOahGroup (
   }
 
   // protect library against multiple initializations
-  if (! gGlobalTraceOahGroup) {
+  if (! pGlobalTraceOahGroup) {
     // create the global OAH group
-    gGlobalTraceOahGroup =
+    pGlobalTraceOahGroup =
       traceOahGroup::create (
         handler);
-    assert (gGlobalTraceOahGroup != 0);
+    assert (pGlobalTraceOahGroup != 0);
   }
 
   // return the global OAH group
-  return gGlobalTraceOahGroup;
+  return pGlobalTraceOahGroup;
 }
 
 

@@ -1,10 +1,10 @@
 /*
   MusicFormats Library
-  Copyright (C) Jacques Menu 2016-2023
+  Copyright (C) Jacques Menu 2016-2022
 
   This Source Code Form is subject to the terms of the Mozilla Public
   License, v. 2.0. If a copy of the MPL was not distributed with this
-  file, you can obtain one at http://mozilla.org/MPL/2.0/.
+  file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
   https://github.com/jacques-menu/musicformats
 */
@@ -112,7 +112,7 @@ class EXP ischemeInterpreterInsiderHandler : public oahInsiderHandler
 
 };
 typedef SMARTP<ischemeInterpreterInsiderHandler> S_ischemeInterpreterInsiderHandler;
-EXP std::ostream& operator << (std::ostream& os, const S_ischemeInterpreterInsiderHandler& elt);
+EXP std::ostream& operator<< (std::ostream& os, const S_ischemeInterpreterInsiderHandler& elt);
 
 //______________________________________________________________________________
 class EXP ischemeInterpreterInsiderOahGroup : public oahGroup
@@ -186,7 +186,7 @@ class EXP ischemeInterpreterInsiderOahGroup : public oahGroup
     // ------------------------------------------------------
 };
 typedef SMARTP<ischemeInterpreterInsiderOahGroup> S_ischemeInterpreterInsiderOahGroup;
-EXP std::ostream& operator << (std::ostream& os, const S_ischemeInterpreterInsiderOahGroup& elt);
+EXP std::ostream& operator<< (std::ostream& os, const S_ischemeInterpreterInsiderOahGroup& elt);
 
 EXP extern S_ischemeInterpreterInsiderOahGroup gGlobalIschemeInterpreterInsiderOahGroup;
 

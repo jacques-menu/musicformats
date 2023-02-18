@@ -103,8 +103,8 @@ void msrError (
     sourceCodeLineNumber,
     message);
 
-  if (! gGlobalWaeOahGroup->getDontShowErrors ()) {
-    if (! gGlobalWaeOahGroup->getDontQuitOnErrors ()) { // JMI
+  if (! gWaeOahGroup->getDontShowErrors ()) {
+    if (! gWaeOahGroup->getDontQuitOnErrors ()) { // JMI
       throw msrException (message);
     }
     else {
@@ -125,12 +125,12 @@ void msrUnsupported (
     (
       gEarlyOptions.getEarlyQuietOption ()
         &&
-      gGlobalWaeOahGroup->getDontShowErrors ()
+      gWaeOahGroup->getDontShowErrors ()
     )
   ) {
     gIndenter.resetToZero ();
 
-    if (gGlobalOahOahGroup->getDisplaySourceCodePositions ()) {
+    if (gOahOahGroup->getDisplaySourceCodePositions ()) {
       gLog <<
         mfBaseName (sourceCodeFileName) << ":" << sourceCodeLineNumber <<
         ' ';

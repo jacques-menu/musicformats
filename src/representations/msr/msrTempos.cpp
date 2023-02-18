@@ -45,7 +45,7 @@ namespace MusicFormats
 //______________________________________________________________________________
 S_msrTempoNote msrTempoNote::create (
   int             inputLineNumber,
-  const Rational& tempoNoteWholeNotes,
+  const msrWholeNotes& tempoNoteWholeNotes,
   Bool            tempoNoteBelongsToATuplet)
 {
   msrTempoNote * o =
@@ -59,7 +59,7 @@ S_msrTempoNote msrTempoNote::create (
 
 msrTempoNote::msrTempoNote (
   int             inputLineNumber,
-  const Rational& tempoNoteWholeNotes,
+  const msrWholeNotes& tempoNoteWholeNotes,
   Bool            tempoNoteBelongsToATuplet)
     : msrElement (inputLineNumber)
 {
@@ -247,7 +247,7 @@ S_msrTempoTuplet msrTempoTuplet::create (
   msrTempoTupletBracketKind    tempoTupletBracketKind,
   msrTempoTupletShowNumberKind tempoTupletShowNumberKind,
   const msrTupletFactor&       tempoTupletFactor,
-  const Rational&              memberNotesDisplayWholeNotes)
+  const msrWholeNotes&          memberNotesDisplayWholeNotes)
 {
   msrTempoTuplet* o =
     new msrTempoTuplet (
@@ -267,7 +267,7 @@ msrTempoTuplet::msrTempoTuplet (
   msrTempoTupletBracketKind    tempoTupletBracketKind,
   msrTempoTupletShowNumberKind tempoTupletShowNumberKind,
   const msrTupletFactor&       tempoTupletFactor,
-  const Rational&              memberNotesDisplayWholeNotes)
+  const msrWholeNotes&          memberNotesDisplayWholeNotes)
     : msrElement (inputLineNumber)
 {
   fTempoTupletNumber = tempoTupletNumber;
@@ -279,10 +279,10 @@ msrTempoTuplet::msrTempoTuplet (
 
   fMemberNotesDisplayWholeNotes  = memberNotesDisplayWholeNotes;
 
-  fTempoTupletDisplayWholeNotes  = Rational (0, 1);
+  fTempoTupletDisplayWholeNotes  = msrWholeNotes (0, 1);
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceTempos ()){
+  if (gTraceOahGroup->getTraceTempos ()){
 		std::stringstream ss;
 
     ss <<
@@ -379,7 +379,7 @@ std::ostream& operator << (std::ostream& os, const msrTempoTupletShowNumberKind&
 void msrTempoTuplet::addTempoNoteToTempoTuplet (S_msrTempoNote tempoNote)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceTempos ()) {
+  if (gTraceOahGroup->getTraceTempos ()) {
 		std::stringstream ss;
 
     ss <<
@@ -414,7 +414,7 @@ void msrTempoTuplet::addTempoNoteToTempoTuplet (S_msrTempoNote tempoNote)
 void msrTempoTuplet::addTempoTupletToTempoTuplet (S_msrTempoTuplet tempoTuplet)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceTempos ()) {
+  if (gTraceOahGroup->getTraceTempos ()) {
 		std::stringstream ss;
 
     ss <<
@@ -460,7 +460,7 @@ void msrTempoTuplet::removeFirstNoteFromTempoTuplet (
   const S_msrTempoNote& tempoNote)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceTempos ()) {
+  if (gTraceOahGroup->getTraceTempos ()) {
 		std::stringstream ss;
 
     ss <<
@@ -539,7 +539,7 @@ void msrTempoTuplet::removeFirstNoteFromTempoTuplet (
 void msrTempoTuplet::applyDisplayFactorToTempoTupletMembers ()
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceTempos ()) {
+  if (gTraceOahGroup->getTraceTempos ()) {
 		std::stringstream ss;
 
     ss <<
@@ -563,7 +563,7 @@ void msrTempoTuplet::unapplySoundingFactorToTempoTupletMembers (
   int containingTempoTupletNormalNotes)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceTempos ()) {
+  if (gTraceOahGroup->getTraceTempos ()) {
 		std::stringstream ss;
 
     ss <<
@@ -916,7 +916,7 @@ void msrTempoNotesRelationshipElements::addElementToTempoNotesRelationshipElemen
   const S_msrElement& element)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceTempos ()){
+  if (gTraceOahGroup->getTraceTempos ()){
 		std::stringstream ss;
 
     ss <<
@@ -1162,7 +1162,7 @@ S_msrTempo msrTempo::createTempoWordsOnly (
 S_msrTempo msrTempo::createTempoPerMinute (
   int               inputLineNumber,
   const S_msrMeasure& upLinkToMeasure,
-  msrDottedDuration tempoBeatUnit,
+  msrDottedNotesDuration tempoBeatUnit,
   std::string       tempoPerMinute,
   msrTempoParenthesizedKind
                     tempoParenthesizedKind,
@@ -1182,7 +1182,7 @@ S_msrTempo msrTempo::createTempoPerMinute (
 
 S_msrTempo msrTempo::createTempoPerMinute (
   int               inputLineNumber,
-  msrDottedDuration tempoBeatUnit,
+  msrDottedNotesDuration tempoBeatUnit,
   std::string       tempoPerMinute,
   msrTempoParenthesizedKind
                     tempoParenthesizedKind,
@@ -1201,8 +1201,8 @@ S_msrTempo msrTempo::createTempoPerMinute (
 S_msrTempo msrTempo::createTempoBeatUnitEquivalent (
   int               inputLineNumber,
   const S_msrMeasure& upLinkToMeasure,
-  msrDottedDuration tempoBeatUnit,
-  msrDottedDuration tempoEquivalentBeatUnit,
+  msrDottedNotesDuration tempoBeatUnit,
+  msrDottedNotesDuration tempoEquivalentBeatUnit,
   msrTempoParenthesizedKind
                     tempoParenthesizedKind,
   msrPlacementKind  tempoPlacementKind)
@@ -1221,8 +1221,8 @@ S_msrTempo msrTempo::createTempoBeatUnitEquivalent (
 
 S_msrTempo msrTempo::createTempoBeatUnitEquivalent (
   int               inputLineNumber,
-  msrDottedDuration tempoBeatUnit,
-  msrDottedDuration tempoEquivalentBeatUnit,
+  msrDottedNotesDuration tempoBeatUnit,
+  msrDottedNotesDuration tempoEquivalentBeatUnit,
   msrTempoParenthesizedKind
                     tempoParenthesizedKind,
   msrPlacementKind  tempoPlacementKind)
@@ -1323,7 +1323,7 @@ msrTempo::msrTempo (
 msrTempo::msrTempo (
   int               inputLineNumber,
   const S_msrMeasure& upLinkToMeasure,
-  msrDottedDuration tempoBeatUnit,
+  msrDottedNotesDuration tempoBeatUnit,
   std::string       tempoPerMinute,
   msrTempoParenthesizedKind
                     tempoParenthesizedKind,
@@ -1348,8 +1348,8 @@ msrTempo::msrTempo (
 msrTempo::msrTempo (
   int               inputLineNumber,
   const S_msrMeasure& upLinkToMeasure,
-  msrDottedDuration tempoBeatUnit,
-  msrDottedDuration tempoEquivalentBeatUnit,
+  msrDottedNotesDuration tempoBeatUnit,
+  msrDottedNotesDuration tempoEquivalentBeatUnit,
   msrTempoParenthesizedKind
                     tempoParenthesizedKind,
   msrPlacementKind  tempoPlacementKind)
@@ -1415,7 +1415,7 @@ void msrTempo::setTempoUpLinkToMeasure (
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceWholeNotes ()) {
+  if (gTraceOahGroup->getTraceWholeNotes ()) {
     ++gIndenter;
 
     gLog <<

@@ -83,7 +83,7 @@ void msrReplaceClefAtom::applyAtomWithValue (
   std::ostream&      os)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -100,7 +100,7 @@ void msrReplaceClefAtom::applyAtomWithValue (
   // decipher it to extract the old and new clef names
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -127,7 +127,7 @@ void msrReplaceClefAtom::applyAtomWithValue (
   size_t smSize = sm.size ();
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -145,7 +145,7 @@ void msrReplaceClefAtom::applyAtomWithValue (
 
   if (smSize == 3) {
 #ifdef MF_TRACE_IS_ENABLED
-    if (gEarlyOptions.getEarlyTraceOah ()) {
+    if (gEarlyOptions.getTraceEarlyOptions ()) {
       for (unsigned i = 0; i < smSize; ++i) {
         gLog <<
           '[' << sm [i] << "] ";
@@ -170,7 +170,7 @@ void msrReplaceClefAtom::applyAtomWithValue (
     destinationClefName = sm [2];
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -225,7 +225,7 @@ void msrReplaceClefAtom::applyAtomWithValue (
 void msrReplaceClefAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -244,7 +244,7 @@ void msrReplaceClefAtom::acceptIn (basevisitor* v)
         S_msrReplaceClefAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -263,7 +263,7 @@ void msrReplaceClefAtom::acceptIn (basevisitor* v)
 void msrReplaceClefAtom::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -282,7 +282,7 @@ void msrReplaceClefAtom::acceptOut (basevisitor* v)
         S_msrReplaceClefAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -301,7 +301,7 @@ void msrReplaceClefAtom::acceptOut (basevisitor* v)
 void msrReplaceClefAtom::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1640,7 +1640,7 @@ void mxsr2msrOahGroup::enforceGroupQuietness ()
 void mxsr2msrOahGroup::checkGroupOptionsConsistency ()
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1998,7 +1998,7 @@ Bool mxsr2msrOahGroup::wordsIsToBeConvertedToDecresc (
 void mxsr2msrOahGroup::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -2017,7 +2017,7 @@ void mxsr2msrOahGroup::acceptIn (basevisitor* v)
         S_mxsr2msrOahGroup elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -2036,7 +2036,7 @@ void mxsr2msrOahGroup::acceptIn (basevisitor* v)
 void mxsr2msrOahGroup::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -2055,7 +2055,7 @@ void mxsr2msrOahGroup::acceptOut (basevisitor* v)
         S_mxsr2msrOahGroup elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -2074,7 +2074,7 @@ void mxsr2msrOahGroup::acceptOut (basevisitor* v)
 void mxsr2msrOahGroup::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -2563,7 +2563,7 @@ S_mxsr2msrOahGroup createGlobalMxsr2msrOahGroup (
   const S_oahHandler& handler)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<

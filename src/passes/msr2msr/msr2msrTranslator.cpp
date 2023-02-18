@@ -833,7 +833,7 @@ void msr2msrTranslator::visitStart (S_msrPartGroup& elt)
   // push it onto this visitors's stack,
   // making it the current partGroup
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTracePartGroups ()) {
+  if (gTraceOahGroup->getTracePartGroups ()) {
 		std::stringstream ss;
 
 		ss <<
@@ -880,7 +880,7 @@ void msr2msrTranslator::visitEnd (S_msrPartGroup& elt)
     // since it's alone in the stack
 
 #ifdef MF_TRACE_IS_ENABLED
-    if (gGlobalTraceOahGroup->getTracePartGroups ()) {
+    if (gTraceOahGroup->getTracePartGroups ()) {
 		std::stringstream ss;
 
 		ss <<
@@ -910,7 +910,7 @@ void msr2msrTranslator::visitEnd (S_msrPartGroup& elt)
 
   // pop current partGroup from this visitors's stack
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTracePartGroups ()) {
+  if (gTraceOahGroup->getTracePartGroups ()) {
 		std::stringstream ss;
 
 		ss <<
@@ -953,7 +953,7 @@ void msr2msrTranslator::visitStart (S_msrPart& elt)
       ss.str ());
   }
 
-  if (gGlobalTraceOahGroup->getTraceParts ()) {
+  if (gTraceOahGroup->getTraceParts ()) {
 		std::stringstream ss;
 
 		ss <<
@@ -977,7 +977,7 @@ void msr2msrTranslator::visitStart (S_msrPart& elt)
 
   // add it to the partGroup clone
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceParts ()) {
+  if (gTraceOahGroup->getTraceParts ()) {
 		std::stringstream ss;
 
 		ss <<
@@ -1044,7 +1044,7 @@ void msr2msrTranslator::visitEnd (S_msrPart& elt)
 
   // handle the hidden measure and barLine elements
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceMeasures ()) {
+  if (gTraceOahGroup->getTraceMeasures ()) {
     displayPartHiddenMeasureAndBarLineDescrList ();
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1304,7 +1304,7 @@ void msr2msrTranslator::visitStart (S_msrVoice& elt)
 #endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceVoices ()) {
+  if (gTraceOahGroup->getTraceVoices ()) {
 		std::stringstream ss;
 
 		ss <<
@@ -1361,7 +1361,7 @@ void msr2msrTranslator::visitStart (S_msrVoice& elt)
                 getPartCombinedName ();
 
 #ifdef MF_TRACE_IS_ENABLED
-          if (gGlobalTraceOahGroup->getTraceHarmonies ()) {
+          if (gTraceOahGroup->getTraceHarmonies ()) {
 						std::stringstream ss;
 
 						ss <<
@@ -1397,7 +1397,7 @@ void msr2msrTranslator::visitStart (S_msrVoice& elt)
                 getPartCombinedName ();
 
 #ifdef MF_TRACE_IS_ENABLED
-          if (gGlobalTraceOahGroup->getTraceHarmonies ()) {
+          if (gTraceOahGroup->getTraceHarmonies ()) {
 						std::stringstream ss;
 
 						ss <<
@@ -1887,7 +1887,7 @@ void msr2msrTranslator::visitStart (S_msrMeasure& elt)
 #endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceMeasures ()) {
+  if (gTraceOahGroup->getTraceMeasures ()) {
 		std::stringstream ss;
 
 		ss <<
@@ -2355,7 +2355,7 @@ void msr2msrTranslator::visitStart (S_msrSyllable& elt)
 //
 //         // create the words
 // #ifdef MF_TRACE_IS_ENABLED
-//         if (gGlobalTraceOahGroup->getTraceLyrics ()) {
+//         if (gTraceOahGroup->getTraceLyrics ()) {
 // 		std::stringstream ss;
 //
 // 		ss <<
@@ -2390,7 +2390,7 @@ void msr2msrTranslator::visitStart (S_msrSyllable& elt)
 //
 //         // append it to the current non-grace note
 // #ifdef MF_TRACE_IS_ENABLED
-//         if (gGlobalTraceOahGroup->getTraceWords ()) {
+//         if (gTraceOahGroup->getTraceWords ()) {
 // 		std::stringstream ss;
 //
 // 		ss <<
@@ -2652,7 +2652,7 @@ void msr2msrTranslator::visitStart (S_msrTempo& elt)
 //           elt->getTempoPlacementKind ());
 //
 // #ifdef MF_TRACE_IS_ENABLED
-//     if (gGlobalTraceOahGroup->getTraceTempos ()) {
+//     if (gTraceOahGroup->getTraceTempos ()) {
 //       gLog <<
 //         "Converting tempos '" <<
 //         elt->asShortString () <<
@@ -3179,7 +3179,7 @@ void msr2msrTranslator::visitStart (S_msrOrnament& elt)
 #endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
-    if (gGlobalTraceOahGroup->getTraceOrnamentsDetails ()) {
+    if (gTraceOahGroup->getTraceOrnamentsDetails ()) {
       displayOnGoingNotesStack ("visitStart (S_msrOrnament&)");
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -3703,7 +3703,7 @@ void msr2msrTranslator::visitStart (S_msrWords& elt)
 //             msrPlacementKind::kPlacementAbove); // JMI
 //
 // #ifdef MF_TRACE_IS_ENABLED
-//       if (gGlobalTraceOahGroup->getTraceWords ()) {
+//       if (gTraceOahGroup->getTraceWords ()) {
 //         gLog <<
 //           "Converting words '" <<
 //           elt->asShortString () <<
@@ -3793,7 +3793,7 @@ void msr2msrTranslator::visitStart (S_msrSlur& elt)
 #endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceSlurs ()) {
+  if (gTraceOahGroup->getTraceSlurs ()) {
 		std::stringstream ss;
 
 		ss <<
@@ -3904,7 +3904,7 @@ void msr2msrTranslator::visitStart (S_msrChordSlurLink& elt)
   S_msrSlur originalSlur = elt->getOriginalSlur ();
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceSlurs ()) {
+  if (gTraceOahGroup->getTraceSlurs ()) {
 		std::stringstream ss;
 
 		ss <<
@@ -4221,7 +4221,7 @@ void msr2msrTranslator::visitStart (S_msrGraceNotesGroup& elt)
   if (doCreateAGraceNoteClone) {
     // create a clone of this graceNotesGroup
 #ifdef MF_TRACE_IS_ENABLED
-    if (gGlobalTraceOahGroup->getTraceGraceNotes ()) {
+    if (gTraceOahGroup->getTraceGraceNotes ()) {
       std::stringstream ss;
 
       ss <<
@@ -4301,7 +4301,7 @@ void msr2msrTranslator::visitStart (S_msrGraceNotesGroup& elt)
   }
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceGraceNotes ()) {
+  if (gTraceOahGroup->getTraceGraceNotes ()) {
     std::stringstream ss;
 
     ss <<
@@ -4348,7 +4348,7 @@ void msr2msrTranslator::visitStart (S_msrGraceNotesGroup& elt)
 
   // is noteNotesGroupIsAttachedTo the first one in its voice?
 #ifdef MF_TRACE_IS_ENABLED
-  if (false && gGlobalTraceOahGroup->getTraceGraceNotes ()) { // JMI
+  if (false && gTraceOahGroup->getTraceGraceNotes ()) { // JMI
     std::stringstream ss;
 
     ss <<
@@ -4375,7 +4375,7 @@ void msr2msrTranslator::visitStart (S_msrGraceNotesGroup& elt)
 #endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (false && gGlobalTraceOahGroup->getTraceGraceNotes ()) { // JMI
+  if (false && gTraceOahGroup->getTraceGraceNotes ()) { // JMI
     std::stringstream ss;
 
     ss <<
@@ -4416,7 +4416,7 @@ void msr2msrTranslator::visitStart (S_msrGraceNotesGroup& elt)
 
       // create the skip grace notes group
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalTraceOahGroup->getTraceGraceNotes ()) {
+        if (gTraceOahGroup->getTraceGraceNotes ()) {
           std::stringstream ss;
 
           ss <<
@@ -4464,7 +4464,7 @@ void msr2msrTranslator::visitEnd (S_msrGraceNotesGroup& elt)
 #endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceGraceNotes ()) {
+  if (gTraceOahGroup->getTraceGraceNotes ()) {
     std::stringstream ss;
 
     ss <<
@@ -4497,7 +4497,7 @@ void msr2msrTranslator::visitEnd (S_msrGraceNotesGroup& elt)
     // remove the current afterGraceNotesGroup note clone
     // from the current voice clone
 #ifdef MF_TRACE_IS_ENABLED
-    if (gGlobalTraceOahGroup->getTraceGraceNotes ()) {
+    if (gTraceOahGroup->getTraceGraceNotes ()) {
       std::stringstream ss;
 
       ss <<
@@ -4551,7 +4551,7 @@ void msr2msrTranslator::visitStart (S_msrChordGraceNotesGroupLink& elt)
       elt->getOriginalGraceNotesGroup ();
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceGraceNotes ()) {
+  if (gTraceOahGroup->getTraceGraceNotes ()) {
 		std::stringstream ss;
 
 		ss <<
@@ -4678,7 +4678,7 @@ void msr2msrTranslator::visitStart (S_msrNote& elt)
   fOnGoingNotesStack.push_front (noteClone);
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceNotesDetails ()) { // JMI
+  if (gTraceOahGroup->getTraceNotesDetails ()) { // JMI
     displayOnGoingNotesStack ("visitStart (S_msrNote&)");
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -4687,7 +4687,7 @@ void msr2msrTranslator::visitStart (S_msrNote& elt)
   // but as the current grace note clone instead
 /* JMI
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalTraceOahGroup->getTraceGraceNotes ()) {
+        if (gTraceOahGroup->getTraceGraceNotes ()) {
 		std::stringstream ss;
 
 		ss <<
@@ -4725,7 +4725,7 @@ void msr2msrTranslator::visitStart (S_msrNote& elt)
     default:
       fCurrentNonGraceNoteClone = noteClone;
 #ifdef MF_TRACE_IS_ENABLED
-      if (gGlobalTraceOahGroup->getTraceNotes ()) {
+      if (gTraceOahGroup->getTraceNotes ()) {
         std::stringstream ss;
 
         ss <<
@@ -4744,7 +4744,7 @@ void msr2msrTranslator::visitStart (S_msrNote& elt)
           fCurrentNonGraceNoteClone;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalTraceOahGroup->getTraceNotes ()) {
+        if (gTraceOahGroup->getTraceNotes ()) {
           std::stringstream ss;
 
           ss <<
@@ -4776,7 +4776,7 @@ void msr2msrTranslator::visitStart (S_msrNote& elt)
 
     // yes, create the after grace notes
 #ifdef MF_TRACE_IS_ENABLED
-    if (gGlobalTraceOahGroup->getTraceGraceNotes ()) {
+    if (gTraceOahGroup->getTraceGraceNotes ()) {
         std::stringstream ss;
 
         ss <<
@@ -4831,7 +4831,7 @@ void msr2msrTranslator::visitEnd (S_msrNote& elt)
 #endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceNotesDetails ()) {
+  if (gTraceOahGroup->getTraceNotesDetails ()) {
     std::stringstream ss;
 
     ss <<
@@ -4873,7 +4873,7 @@ void msr2msrTranslator::visitEnd (S_msrNote& elt)
 
     case msrNoteKind::kNoteRestInMeasure:
 #ifdef MF_TRACE_IS_ENABLED
-      if (gGlobalTraceOahGroup->getTraceNotes ()) {
+      if (gTraceOahGroup->getTraceNotes ()) {
         std::stringstream ss;
 
         ss <<
@@ -4896,7 +4896,7 @@ void msr2msrTranslator::visitEnd (S_msrNote& elt)
     case msrNoteKind::kNoteSkipInMeasure: // JMI
 #ifdef MF_TRACE_IS_ENABLED
 
-      if (gGlobalTraceOahGroup->getTraceNotes ()) {
+      if (gTraceOahGroup->getTraceNotes ()) {
         std::stringstream ss;
 
         ss <<
@@ -4918,7 +4918,7 @@ void msr2msrTranslator::visitEnd (S_msrNote& elt)
 
     case msrNoteKind::kNoteUnpitchedInMeasure:
 #ifdef MF_TRACE_IS_ENABLED
-      if (gGlobalTraceOahGroup->getTraceNotes ()) {
+      if (gTraceOahGroup->getTraceNotes ()) {
         std::stringstream ss;
 
         ss <<
@@ -4940,7 +4940,7 @@ void msr2msrTranslator::visitEnd (S_msrNote& elt)
 
     case msrNoteKind::kNoteRegularInMeasure:
 #ifdef MF_TRACE_IS_ENABLED
-      if (gGlobalTraceOahGroup->getTraceNotes ()) {
+      if (gTraceOahGroup->getTraceNotes ()) {
         std::stringstream ss;
 
         ss <<
@@ -4965,7 +4965,7 @@ void msr2msrTranslator::visitEnd (S_msrNote& elt)
 
         if (fCurrentNonGraceNoteClone->getNoteIsFirstNoteInADoubleTremolo ()) {
 #ifdef MF_TRACE_IS_ENABLED
-          if (gGlobalTraceOahGroup->getTraceNotes ()) {
+          if (gTraceOahGroup->getTraceNotes ()) {
             std::stringstream ss;
 
             ss <<
@@ -4991,7 +4991,7 @@ void msr2msrTranslator::visitEnd (S_msrNote& elt)
 
         else if (fCurrentNonGraceNoteClone->getNoteIsSecondNoteInADoubleTremolo ()) {
 #ifdef MF_TRACE_IS_ENABLED
-          if (gGlobalTraceOahGroup->getTraceNotes ()) {
+          if (gTraceOahGroup->getTraceNotes ()) {
             std::stringstream ss;
 
             ss <<
@@ -5056,7 +5056,7 @@ void msr2msrTranslator::visitEnd (S_msrNote& elt)
 
       if (!fOnGoingGraceNotesGroup) { // JMI v0.9.66
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalTraceOahGroup->getTraceGraceNotes ()) {
+        if (gTraceOahGroup->getTraceGraceNotes ()) {
           std::stringstream ss;
 
           ss <<
@@ -5096,7 +5096,7 @@ void msr2msrTranslator::visitEnd (S_msrNote& elt)
     /* JMI ???
       if (fCurrentGraceNotesGroupClone) {
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalTraceOahGroup->getTraceGraceNotes ()) {
+        if (gTraceOahGroup->getTraceGraceNotes ()) {
           gLog <<
             "Appending note '" <<
             fCurrentNonGraceNoteClone->asShortString () <<
@@ -5117,7 +5117,7 @@ void msr2msrTranslator::visitEnd (S_msrNote& elt)
 
       else if (fPendingAfterGraceNotes) {
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalTraceOahGroup->getTraceGraceNotes ()) {
+        if (gTraceOahGroup->getTraceGraceNotes ()) {
           gLog <<
             "Appending note '" <<
             fCurrentNonGraceNoteClone->asShortString () <<
@@ -5217,7 +5217,7 @@ void msr2msrTranslator::visitEnd (S_msrNote& elt)
     case msrNoteKind::kNoteInTupletInGraceNotesGroup:
     case msrNoteKind::kNoteUnpitchedInTuplet:
 #ifdef MF_TRACE_IS_ENABLED
-      if (gGlobalTraceOahGroup->getTraceNotes ()) {
+      if (gTraceOahGroup->getTraceNotes ()) {
         std::stringstream ss;
 
         ss <<
@@ -5550,7 +5550,7 @@ void msr2msrTranslator::visitStart (S_msrChordBeamLink& elt)
   S_msrBeam originalBeam = elt->getOriginalBeam ();
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceBeams ()) {
+  if (gTraceOahGroup->getTraceBeams ()) {
 		std::stringstream ss;
 
 		ss <<
@@ -5647,7 +5647,7 @@ void msr2msrTranslator::visitStart (S_msrChord& elt)
   // set fCurrentChordClone's measure position  // JMI ??? v0.9.66
 //   fCurrentMeasureClone->
 //     setChordMeasurePosition (
-//       Rational (FOO, 1),
+//       mfRational (FOO, 1),
 //       "msr2msrTranslator::visitStart (S_msrChord& elt)");
 
   if (fTupletClonesStack.size ()) {
@@ -5760,7 +5760,7 @@ void msr2msrTranslator::visitStart (S_msrTuplet& elt)
 
   // register it in this visitor
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceTuplets ()) {
+  if (gTraceOahGroup->getTraceTuplets ()) {
 		std::stringstream ss;
 
 		ss <<
@@ -5796,7 +5796,7 @@ void msr2msrTranslator::visitEnd (S_msrTuplet& elt)
 #endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceTuplets ()) {
+  if (gTraceOahGroup->getTraceTuplets ()) {
 		std::stringstream ss;
 
 		ss <<
@@ -5816,7 +5816,7 @@ void msr2msrTranslator::visitEnd (S_msrTuplet& elt)
   if (fTupletClonesStack.size ()) {
     // tuplet is a nested tuplet
 #ifdef MF_TRACE_IS_ENABLED
-    if (gGlobalTraceOahGroup->getTraceTuplets ()) {
+    if (gTraceOahGroup->getTraceTuplets ()) {
 		std::stringstream ss;
 
 		ss <<
@@ -5841,7 +5841,7 @@ void msr2msrTranslator::visitEnd (S_msrTuplet& elt)
     // tuplet is a top level tuplet
 
 #ifdef MF_TRACE_IS_ENABLED
-    if (gGlobalTraceOahGroup->getTraceTuplets ()) {
+    if (gTraceOahGroup->getTraceTuplets ()) {
 		std::stringstream ss;
 
 		ss <<
@@ -6368,7 +6368,7 @@ void msr2msrTranslator::visitStart (S_msrRepeat& elt)
 #endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceRepeats ()) {
+  if (gTraceOahGroup->getTraceRepeats ()) {
 		std::stringstream ss;
 
 		ss <<
@@ -6410,7 +6410,7 @@ void msr2msrTranslator::visitEnd (S_msrRepeat& elt)
 #endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceRepeats ()) {
+  if (gTraceOahGroup->getTraceRepeats ()) {
 		std::stringstream ss;
 
 		ss <<
@@ -6506,7 +6506,7 @@ void msr2msrTranslator::visitStart (S_msrRepeatEnding& elt)
 
   // handle the repeat ending start in the voice clone
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceRepeats ()) {
+  if (gTraceOahGroup->getTraceRepeats ()) {
 		std::stringstream ss;
 
 		ss <<
@@ -6550,7 +6550,7 @@ void msr2msrTranslator::visitEnd (S_msrRepeatEnding& elt)
 
   // handle the repeat ending end in the voice clone
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceRepeats ()) {
+  if (gTraceOahGroup->getTraceRepeats ()) {
 		std::stringstream ss;
 
 		ss <<
@@ -6596,7 +6596,7 @@ void msr2msrTranslator::visitStart (S_msrMultipleFullBarRests& elt)
   ++gIndenter;
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceMultipleFullBarRests ()) {
+  if (gTraceOahGroup->getTraceMultipleFullBarRests ()) {
 		std::stringstream ss;
 
 		ss <<
@@ -6649,7 +6649,7 @@ void msr2msrTranslator::visitEnd (S_msrMultipleFullBarRests& elt)
   --gIndenter;
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceMultipleFullBarRests ()) {
+  if (gTraceOahGroup->getTraceMultipleFullBarRests ()) {
 		std::stringstream ss;
 
 		ss <<
@@ -6694,7 +6694,7 @@ void msr2msrTranslator::visitStart (S_msrMeasureRepeat& elt)
   ++gIndenter;
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceMeasureRepeats ()) {
+  if (gTraceOahGroup->getTraceMeasureRepeats ()) {
 		std::stringstream ss;
 
 		ss <<
@@ -6740,7 +6740,7 @@ void msr2msrTranslator::visitEnd (S_msrMeasureRepeat& elt)
 /* JMI
   // set last segment as the measures repeat pattern segment
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceMeasureRepeats ()) {
+  if (gTraceOahGroup->getTraceMeasureRepeats ()) {
 		std::stringstream ss;
 
 		ss <<
@@ -6757,7 +6757,7 @@ void msr2msrTranslator::visitEnd (S_msrMeasureRepeat& elt)
 */
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceMeasureRepeats ()) {
+  if (gTraceOahGroup->getTraceMeasureRepeats ()) {
 		std::stringstream ss;
 
 		ss <<
@@ -6801,7 +6801,7 @@ void msr2msrTranslator::visitStart (S_msrMeasureRepeatPattern& elt)
   ++gIndenter;
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceMeasureRepeats ()) {
+  if (gTraceOahGroup->getTraceMeasureRepeats ()) {
     fCurrentVoiceClone->
       displayVoice (
         inputLineNumber,
@@ -6837,7 +6837,7 @@ void msr2msrTranslator::visitEnd (S_msrMeasureRepeatPattern& elt)
   --gIndenter;
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceMeasureRepeats ()) {
+  if (gTraceOahGroup->getTraceMeasureRepeats ()) {
     fCurrentVoiceClone->
       displayVoice (
         inputLineNumber,
@@ -6874,7 +6874,7 @@ void msr2msrTranslator::visitStart (S_msrMeasureRepeatReplicas& elt)
   ++gIndenter;
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceMeasureRepeats ()) {
+  if (gTraceOahGroup->getTraceMeasureRepeats ()) {
     fCurrentVoiceClone->
       displayVoice (
         inputLineNumber,
@@ -6911,7 +6911,7 @@ void msr2msrTranslator::visitEnd (S_msrMeasureRepeatReplicas& elt)
 
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceMeasureRepeats ()) {
+  if (gTraceOahGroup->getTraceMeasureRepeats ()) {
     fCurrentVoiceClone->
       displayVoice (
         inputLineNumber,
@@ -6948,7 +6948,7 @@ void msr2msrTranslator::visitStart (S_msrBarLine& elt)
 #endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceBarLines ()) {
+  if (gTraceOahGroup->getTraceBarLines ()) {
 		std::stringstream ss;
 
 		ss <<
@@ -7036,7 +7036,7 @@ void msr2msrTranslator::prependSkipGraceNotesGroupToPartOtherVoices (
   const S_msrGraceNotesGroup& skipGraceNotesGroup)
 {
 #ifdef MF_TRACE_IS_ENABLED
-    if (gGlobalTraceOahGroup->getTraceGraceNotes ()) {
+    if (gTraceOahGroup->getTraceGraceNotes ()) {
       std::stringstream ss;
 
       ss <<
@@ -7103,7 +7103,7 @@ void msr2msrTranslator::prependSkipGraceNotesGroupToPartOtherVoices (
 //             elt->getWordsPlacementKind ()); // above ??? JMI
 //
 // #ifdef MF_TRACE_IS_ENABLED
-//       if (gGlobalTraceOahGroup->getTraceWords ()) {
+//       if (gTraceOahGroup->getTraceWords ()) {
 // 		std::stringstream ss;
 //
 // 		ss <<
@@ -7151,7 +7151,7 @@ void msr2msrTranslator::prependSkipGraceNotesGroupToPartOtherVoices (
 //               elt->getWordsStaffNumber ());
 //
 // #ifdef MF_TRACE_IS_ENABLED
-//         if (gGlobalTraceOahGroup->getTraceWords ()) {
+//         if (gTraceOahGroup->getTraceWords ()) {
 // 		std::stringstream ss;
 //
 // 		ss <<

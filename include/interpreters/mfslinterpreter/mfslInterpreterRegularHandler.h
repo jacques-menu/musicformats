@@ -1,10 +1,10 @@
 /*
   MusicFormats Library
-  Copyright (C) Jacques Menu 2016-2023
+  Copyright (C) Jacques Menu 2016-2022
 
   This Source Code Form is subject to the terms of the Mozilla Public
   License, v. 2.0. If a copy of the MPL was not distributed with this
-  file, you can obtain one at http://mozilla.org/MPL/2.0/.
+  file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
   https://github.com/jacques-menu/musicformats
 */
@@ -16,9 +16,9 @@
 
 #include "mfslInterpreterInsiderHandler.h"
 
+
 namespace MusicFormats
 {
-
 //_______________________________________________________________________________
 class EXP mfslInterpreterRegularHandler : public oahRegularHandler
 /*
@@ -35,8 +35,8 @@ class EXP mfslInterpreterRegularHandler : public oahRegularHandler
     static SMARTP<mfslInterpreterRegularHandler> create (
                             const std::string& serviceName,
                             const std::string& handlerHeader,
-                            const S_mfslInterpreterInsiderHandler&
-                                              insiderOahHandler);
+                            S_mfslInterpreterInsiderHandler
+                                               insiderOahHandler);
 
   protected:
 
@@ -46,8 +46,8 @@ class EXP mfslInterpreterRegularHandler : public oahRegularHandler
                           mfslInterpreterRegularHandler (
                             const std::string& serviceName,
                             const std::string& handlerHeader,
-                            const S_mfslInterpreterInsiderHandler&
-                                              insiderOahHandler);
+                            S_mfslInterpreterInsiderHandler
+                                               insiderOahHandler);
 
     virtual               ~mfslInterpreterRegularHandler ();
 
@@ -102,8 +102,6 @@ class EXP mfslInterpreterRegularHandler : public oahRegularHandler
 
     void                  createInformationsRegularGroup ();
 
-    void                  createDisplayRegularGroup ();
-
     void                  createMfslRegularUserGroup ();
     void                  createMfslRegularMaintainanceGroup ();
 
@@ -117,7 +115,7 @@ class EXP mfslInterpreterRegularHandler : public oahRegularHandler
     // ------------------------------------------------------
 };
 typedef SMARTP<mfslInterpreterRegularHandler> S_mfslInterpreterRegularHandler;
-EXP std::ostream& operator << (std::ostream& os, const S_mfslInterpreterRegularHandler& elt);
+EXP std::ostream& operator<< (std::ostream& os, const S_mfslInterpreterRegularHandler& elt);
 
 
 }

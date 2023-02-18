@@ -15,6 +15,8 @@
 #include "mfIndentedTextOutput.h"
 #include "mfStringsHandling.h"
 
+#include "msrMeasureConstants.h"
+
 #include "msrMoments.h"
 
 
@@ -24,30 +26,30 @@ namespace MusicFormats
 // moments
 //______________________________________________________________________________
 // constants
-const Rational
-  msrMoment::K_MEASURE_POSITION_UNKNOWN (-95, 1);
 const msrMoment
-  msrMoment::K_MOMENT_UNKNOWN(K_MEASURE_POSITION_UNKNOWN, K_MEASURE_POSITION_UNKNOWN);
+  msrMoment::K_MOMENT_UNKNOWN (
+  	K_MEASURE_POSITION_UNKNOWN,
+  	K_MEASURE_POSITION_UNKNOWN);
 
 msrMoment::msrMoment ()
 {
-  fWrittenPositionInMeseasure = Rational (-1, 1);
-  fSoundingRelativeOffset     = Rational (-1, 1);
+  fWrittenPositionInMeseasure = msrWholeNotes (-1, 1);
+  fSoundingRelativeOffset     = msrWholeNotes (-1, 1);
 }
 
 msrMoment::msrMoment (
-  const Rational& writtenPositionInMeseasure,
-  const Rational& soundingRelativeOffset)
+  const msrWholeNotes& writtenPositionInMeseasure,
+  const msrWholeNotes& soundingRelativeOffset)
 {
   fWrittenPositionInMeseasure = writtenPositionInMeseasure;
   fSoundingRelativeOffset     = soundingRelativeOffset;
 }
 
 msrMoment::msrMoment (
-  const Rational& writtenPositionInMeseasure)
+  const msrWholeNotes& writtenPositionInMeseasure)
 {
   fWrittenPositionInMeseasure = writtenPositionInMeseasure;
-  fSoundingRelativeOffset     = Rational (0, 1);
+  fSoundingRelativeOffset     = msrWholeNotes (0, 1);
 }
 
 msrMoment::~msrMoment ()
@@ -148,9 +150,9 @@ std::ostream& operator << (std::ostream& os, const msrMoment& elt)
 //______________________________________________________________________________
 void testMsrMomentComparisons (std::ostream& os)
 {
-  msrMoment m0 (Rational (3, 4));
-  msrMoment m1 (Rational (3, 4), Rational (-1, 16));
-  msrMoment m2 (Rational (3, 4), Rational (2, 16));
+  msrMoment m0 (msrWholeNotes (3, 4));
+  msrMoment m1 (msrWholeNotes (3, 4), msrWholeNotes (-1, 16));
+  msrMoment m2 (msrWholeNotes (3, 4), msrWholeNotes (2, 16));
 
   os <<
     "m1: " << m1 << std::endl <<
@@ -225,18 +227,18 @@ void testMsrMomentComparisons (std::ostream& os)
 /* output: JMI
 
 m1: [Moment
-fWrittenPositionInMeseasure : [Rational 3/4]
-fSoundingRelativeOffset     : [Rational -1/16]
+fWrittenPositionInMeseasure : [msrWholeNotes 3/4]
+fSoundingRelativeOffset     : [msrWholeNotes -1/16]
 ]
 
 m0: [Moment
-fWrittenPositionInMeseasure : [Rational 3/4]
-fSoundingRelativeOffset     : [Rational 0/1]
+fWrittenPositionInMeseasure : [msrWholeNotes 3/4]
+fSoundingRelativeOffset     : [msrWholeNotes 0/1]
 ]
 
 m2: [Moment
-fWrittenPositionInMeseasure : [Rational 3/4]
-fSoundingRelativeOffset     : [Rational 1/8]
+fWrittenPositionInMeseasure : [msrWholeNotes 3/4]
+fSoundingRelativeOffset     : [msrWholeNotes 1/8]
 ]
 
 

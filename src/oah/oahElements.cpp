@@ -148,7 +148,7 @@ oahFindStringMatch::oahFindStringMatch (
       fContainingFindableElementInfo (containingFindableElementInfo)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -353,7 +353,7 @@ std::string oahElement::fetchNames () const
         &&
     fShortName.size ()
   ) {
-    if (gGlobalOahOahGroup->getReverseNamesDisplayOrder ()) {
+    if (gOahOahGroup->getReverseNamesDisplayOrder ()) {
       ss <<
         '-' << fShortName <<
         ", " <<
@@ -391,7 +391,7 @@ std::string oahElement::fetchNamesInColumns (
         &&
     fLongName.size ()
     ) {
-      if (gGlobalOahOahGroup->getReverseNamesDisplayOrder ()) {
+      if (gOahOahGroup->getReverseNamesDisplayOrder ()) {
         ss << std::left <<
           std::setw (subGroupsShortNameFieldWidth) <<
           '-' << fLongName <<
@@ -465,7 +465,7 @@ std::string oahElement::fetchNamesInColumnsBetweenParentheses (
 // void oahElement::acceptIn (basevisitor* v)
 // {
 // #ifdef MF_TRACE_IS_ENABLED
-//   if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+//   if (gOahOahGroup->getTraceOahVisitors ()) {
 //     gLog <<
 //       ".\\\" ==> oahElement::acceptIn ()" <<
 //       std::endl;
@@ -478,7 +478,7 @@ std::string oahElement::fetchNamesInColumnsBetweenParentheses (
 //         S_oahElement elem = this;
 //
 // #ifdef MF_TRACE_IS_ENABLED
-//         if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+//         if (gOahOahGroup->getTraceOahVisitors ()) {
 //           gLog <<
 //             ".\\\" ==> Launching oahElement::visitStart ()" <<
 //             std::endl;
@@ -491,7 +491,7 @@ std::string oahElement::fetchNamesInColumnsBetweenParentheses (
 // void oahElement::acceptOut (basevisitor* v)
 // {
 // #ifdef MF_TRACE_IS_ENABLED
-//   if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+//   if (gOahOahGroup->getTraceOahVisitors ()) {
 //     gLog <<
 //       ".\\\" ==> oahElement::acceptOut ()" <<
 //       std::endl;
@@ -504,7 +504,7 @@ std::string oahElement::fetchNamesInColumnsBetweenParentheses (
 //         S_oahElement elem = this;
 //
 // #ifdef MF_TRACE_IS_ENABLED
-//         if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+//         if (gOahOahGroup->getTraceOahVisitors ()) {
 //           gLog <<
 //             ".\\\" ==> Launching oahElement::visitEnd ()" <<
 //             std::endl;
@@ -517,7 +517,7 @@ std::string oahElement::fetchNamesInColumnsBetweenParentheses (
 // void oahElement::browseData (basevisitor* v)
 // {
 // #ifdef MF_TRACE_IS_ENABLED
-//   if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+//   if (gOahOahGroup->getTraceOahVisitors ()) {
 //     gLog <<
 //       ".\\\" ==> oahElement::browseData ()" <<
 //       std::endl;

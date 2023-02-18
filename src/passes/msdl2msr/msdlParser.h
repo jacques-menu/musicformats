@@ -14,14 +14,14 @@
 
 #include "mfStaticSettings.h"
 
-#include "msrScores.h"
+#include "msrIdentification.h"
+#include "msrMeasures.h"
 #include "msrPartGroups.h"
 #include "msrParts.h"
+#include "msrScores.h"
 #include "msrStaves.h"
 #include "msrVoices.h"
-#include "msrMeasures.h"
-
-#include "msrIdentification.h"
+#include "msrWholeNotes.h"
 
 #include "msdlTokens.h"
 
@@ -101,27 +101,27 @@ class msdlParser : public smartable
 
     Bool                  checkMandatoryTokenKind (
                             const std::string& fileName,
-                            int           lineNumber,
-                            msdlTokenKind tokenKind,
+                            int                lineNumber,
+                            msdlTokenKind      tokenKind,
                             const std::string& context);
 
     Bool                  checkMandatoryTokenKindsSet (
-                            const std::string&       fileName,
-                            int                 lineNumber,
+                            const std::string&         fileName,
+                            int                        lineNumber,
                             const S_msdlTokenKindsSet& tokenKindsSet,
-                            const std::string&       context);
+                            const std::string&         context);
 
     Bool                  checkOptionalTokenKind (
                             const std::string& fileName,
-                            int           lineNumber,
-                            msdlTokenKind tokenKind,
+                            int                lineNumber,
+                            msdlTokenKind      tokenKind,
                             const std::string& context);
 
     Bool                  checkOptionalTokenKindsSet (
-                            const std::string&       fileName,
-                            int                 lineNumber,
+                            const std::string&         fileName,
+                            int                        lineNumber,
                             const S_msdlTokenKindsSet& tokenKindsSet,
-                            const std::string&       context);
+                            const std::string&         context);
 
   private:
 
@@ -229,8 +229,8 @@ class msdlParser : public smartable
                             const S_msrNote& note);
 
     // note
-    Rational              fCurrentNoteSoundingWholeNotes;
-    Rational              fCurrentNoteDisplayWholeNotes;
+    msrWholeNotes          fCurrentNoteSoundingWholeNotes;
+    msrWholeNotes          fCurrentNoteDisplayWholeNotes;
     int                   fCurrentNoteDotsNumber;
 
     // private score building methods
@@ -317,9 +317,9 @@ class msdlParser : public smartable
     S_msdlTokenKindsSet   fOctaveIndicationFIRST;
     S_msdlTokenKindsSet   fOctaveIndicationFOLLOW;
 
-    // NoteDuration
-    S_msdlTokenKindsSet   fNoteDurationFIRST;
-    S_msdlTokenKindsSet   fNoteDurationFOLLOW;
+    // NoteNotesDuration
+    S_msdlTokenKindsSet   fNoteNotesDurationFIRST;
+    S_msdlTokenKindsSet   fNoteNotesDurationFOLLOW;
 
   private:
 
@@ -401,7 +401,7 @@ class msdlParser : public smartable
 
     msrOctaveKind           OctaveIndication (S_msdlTokenKindsSet stopperTokensSet);
 
-    void                    NoteDuration (S_msdlTokenKindsSet stopperTokensSet);
+    void                    NoteNotesDuration (S_msdlTokenKindsSet stopperTokensSet);
 };
 typedef SMARTP<msdlParser> S_msdlParser;
 EXP std::ostream& operator << (std::ostream& os, const msdlParser& elt);

@@ -188,7 +188,7 @@ msrBassFigure::msrBassFigure (
   fFigureSuffixKind = figureSuffixKind;
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceFiguredBasses ()) {
+  if (gTraceOahGroup->getTraceFiguredBasses ()) {
 		std::stringstream ss;
 
     ss <<
@@ -210,7 +210,7 @@ S_msrBassFigure msrBassFigure::createFigureNewbornClone (
   const S_msrPart& containingPart)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceFiguredBasses ()) {
+  if (gTraceOahGroup->getTraceFiguredBasses ()) {
 		std::stringstream ss;
 
     ss <<
@@ -248,7 +248,7 @@ S_msrBassFigure msrBassFigure::createFigureDeepClone (
   const S_msrPart& containingPart)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceFiguredBasses ()) {
+  if (gTraceOahGroup->getTraceFiguredBasses ()) {
 		std::stringstream ss;
 
     ss <<
@@ -414,8 +414,8 @@ S_msrFiguredBass msrFiguredBass::create (
     new msrFiguredBass (
       inputLineNumber,
       upLinkToMeasure,
-      Rational (0, 1),           // figuredBassSoundingWholeNotes
-      Rational (0, 1),           // figuredBassDisplayWholeNotes
+      msrWholeNotes (0, 1),           // figuredBassSoundingWholeNotes
+      msrWholeNotes (0, 1),           // figuredBassDisplayWholeNotes
       msrFiguredBassParenthesesKind::kFiguredBassParenthesesNo,
       msrTupletFactor (1, 1));
   assert (o != nullptr);
@@ -434,8 +434,8 @@ S_msrFiguredBass msrFiguredBass::create (
 S_msrFiguredBass msrFiguredBass::create (
   int                    inputLineNumber,
   const S_msrMeasure&    upLinkToMeasure,
-  const Rational&        figuredBassSoundingWholeNotes,
-  const Rational&        figuredBassDisplayWholeNotes,
+  const msrWholeNotes&        figuredBassSoundingWholeNotes,
+  const msrWholeNotes&        figuredBassDisplayWholeNotes,
   msrFiguredBassParenthesesKind
                          figuredBassParenthesesKind,
   const msrTupletFactor& figuredBassTupletFactor)
@@ -454,8 +454,8 @@ S_msrFiguredBass msrFiguredBass::create (
 
 S_msrFiguredBass msrFiguredBass::create (
   int                    inputLineNumber,
-  const Rational&        figuredBassSoundingWholeNotes,
-  const Rational&        figuredBassDisplayWholeNotes,
+  const msrWholeNotes&        figuredBassSoundingWholeNotes,
+  const msrWholeNotes&        figuredBassDisplayWholeNotes,
   msrFiguredBassParenthesesKind
                          figuredBassParenthesesKind,
   const msrTupletFactor& figuredBassTupletFactor)
@@ -473,8 +473,8 @@ S_msrFiguredBass msrFiguredBass::create (
 msrFiguredBass::msrFiguredBass (
   int                    inputLineNumber,
   const S_msrMeasure&    upLinkToMeasure,
-  const Rational&        figuredBassSoundingWholeNotes,
-  const Rational&        figuredBassDisplayWholeNotes,
+  const msrWholeNotes&        figuredBassSoundingWholeNotes,
+  const msrWholeNotes&        figuredBassDisplayWholeNotes,
   msrFiguredBassParenthesesKind
                          figuredBassParenthesesKind,
   const msrTupletFactor& figuredBassTupletFactor)
@@ -509,10 +509,10 @@ msrFiguredBass::msrFiguredBass (
 
   // a figured bass element is considered to be at the beginning of the measure
   // until this is computed in msrMeasure::finalizeTheFiguredBassesInAFiguredBassMeasure()
-  fMeasurePosition = Rational (0, 1);
+  fMeasurePosition = msrWholeNotes (0, 1);
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceFiguredBasses ()) {
+  if (gTraceOahGroup->getTraceFiguredBasses ()) {
 		std::stringstream ss;
 
     ss <<
@@ -534,7 +534,7 @@ S_msrFiguredBass msrFiguredBass::createFiguredBassNewbornClone (
   const S_msrVoice& containingVoice)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceFiguredBasses ()) {
+  if (gTraceOahGroup->getTraceFiguredBasses ()) {
 		std::stringstream ss;
 
     ss <<
@@ -577,7 +577,7 @@ S_msrFiguredBass msrFiguredBass::createFiguredBassDeepClone ()
  // S_msrPart containingPart) // JMI v0.9.66
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceFiguredBasses ()) {
+  if (gTraceOahGroup->getTraceFiguredBasses ()) {
 		std::stringstream ss;
 
     ss <<
@@ -620,7 +620,7 @@ void msrFiguredBass::setFiguredBassUpLinkToNote (
   const S_msrNote& note)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceFiguredBasses ()) {
+  if (gTraceOahGroup->getTraceFiguredBasses ()) {
 		std::stringstream ss;
 
     ss <<
@@ -658,7 +658,7 @@ void msrFiguredBass::setFiguredBassUpLinkToMeasure (
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceFiguredBasses ()) {
+  if (gTraceOahGroup->getTraceFiguredBasses ()) {
     ++gIndenter;
 
     gLog <<
@@ -680,7 +680,7 @@ void msrFiguredBass::appendFigureToFiguredBass (
   const S_msrBassFigure& bassFigure)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceFiguredBasses ()) {
+  if (gTraceOahGroup->getTraceFiguredBasses ()) {
 		std::stringstream ss;
 
     ss <<

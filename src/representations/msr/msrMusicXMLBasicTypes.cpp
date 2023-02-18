@@ -1326,7 +1326,7 @@ msrLineWidth::msrLineWidth (
     : msrElement (inputLineNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceMusicXMLPrintLayouts ()) {
+  if (gTraceOahGroup->getTraceMusicXMLPrintLayouts ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1511,7 +1511,7 @@ msrNoteSize::msrNoteSize (
     : msrElement (inputLineNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceMusicXMLPrintLayouts ()) {
+  if (gTraceOahGroup->getTraceMusicXMLPrintLayouts ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1683,7 +1683,7 @@ msrDistance::msrDistance (
     : msrElement (inputLineNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceMusicXMLPrintLayouts ()) {
+  if (gTraceOahGroup->getTraceMusicXMLPrintLayouts ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1855,7 +1855,7 @@ msrGlyph::msrGlyph (
     : msrElement (inputLineNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceMusicXMLPrintLayouts ()) {
+  if (gTraceOahGroup->getTraceMusicXMLPrintLayouts ()) {
 		std::stringstream ss;
 
     ss <<
@@ -2027,7 +2027,7 @@ msrOtherAppearance::msrOtherAppearance (
     : msrElement (inputLineNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceMusicXMLPrintLayouts ()) {
+  if (gTraceOahGroup->getTraceMusicXMLPrintLayouts ()) {
 		std::stringstream ss;
 
     ss <<
@@ -2193,7 +2193,7 @@ msrAppearance::msrAppearance (
     : msrElement (inputLineNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceMusicXMLPrintLayouts ()) {
+  if (gTraceOahGroup->getTraceMusicXMLPrintLayouts ()) {
 		std::stringstream ss;
 
     ss <<

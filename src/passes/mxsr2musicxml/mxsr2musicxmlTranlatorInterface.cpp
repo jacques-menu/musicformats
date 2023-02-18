@@ -80,7 +80,7 @@ EXP void translateMxsrToMusicXML (
 #endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
     err <<
       "translateMxsrToMusicXML() outputFileName = \"" <<
       outputFileName <<
@@ -100,7 +100,7 @@ EXP void translateMxsrToMusicXML (
   sxmlfile->set (theMxsr);
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
     err <<
       "xmlFile2musicxml() outputFileName = \"" <<
       outputFileName <<
@@ -115,7 +115,7 @@ EXP void translateMxsrToMusicXML (
 
   if (! outputFileName.size ()) {
 #ifdef MF_TRACE_IS_ENABLED
-    if (gEarlyOptions.getEarlyTraceOah ()) {
+    if (gEarlyOptions.getTraceEarlyOptions ()) {
       err <<
         "xmlFile2musicxml() output goes to standard output" <<
         std::endl;
@@ -133,7 +133,7 @@ EXP void translateMxsrToMusicXML (
 
   else {
 #ifdef MF_TRACE_IS_ENABLED
-    if (gEarlyOptions.getEarlyTraceOah ()) {
+    if (gEarlyOptions.getTraceEarlyOptions ()) {
       err <<
         "xmlFile2musicxml() output goes to file \"" <<
         outputFileName <<

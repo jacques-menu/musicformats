@@ -37,7 +37,7 @@ msrTupletFactor::msrTupletFactor (
 }
 
 msrTupletFactor::msrTupletFactor (
-  const Rational& rationalTupletFactor)
+  const mfRational& rationalTupletFactor)
 {
   fTupletActualNotes = rationalTupletFactor.getNumerator ();
   fTupletNormalNotes = rationalTupletFactor.getDenominator ();

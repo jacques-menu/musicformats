@@ -15,10 +15,8 @@
 #include <list>
 
 #include "msrElements.h"
-
-#include "mfRational.h"
-
-#include "msrDurations.h"
+#include "msrNotesDurations.h"
+#include "msrWholeNotes.h"
 
 
 namespace MusicFormats
@@ -77,11 +75,11 @@ class EXP msrDivisions : public msrElement
     // ------------------------------------------------------
 
     // durations
-    int                   durationKindAsDivisions (
+    int                   notesNotesDurationKindAsDivisions (
                             int             inputLineNumber,
-                            msrDurationKind durationKind);
+                            msrNotesDurationKind notesNotesDurationKind);
 
-    void                  printDurationKindsDivisions (std::ostream& os);
+    void                  printNotesDurationKindsDivisions (std::ostream& os);
 
     // MSR strings
     std::string           divisionsAsMsrString (
@@ -95,12 +93,12 @@ class EXP msrDivisions : public msrElement
 /* JMI
     std::string           wholeNotesAsMsrString (
                             int      inputLineNumber,
-                            const Rational& wholeNotes,
+                            const msrWholeNotes& wholeNotes,
                             int&     numberOfDotsNeeded);
 
     std::string           wholeNotesAsMsrString (
                             int      inputLineNumber,
-                            const Rational& wholeNotes);
+                            const msrWholeNotes& wholeNotes);
 */
     std::string           tupletDivisionsAsMsrString (
                             int inputLineNumber,
@@ -110,13 +108,13 @@ class EXP msrDivisions : public msrElement
 
     std::string           tupletWholeNotesAsMsrString (
                             int             inputLineNumber,
-                            const Rational& wholeNotes,
+                            const msrWholeNotes& wholeNotes,
                             int             actualNotes,
                             int             normalNotes);
 
 /* JMI
-    void                  testDivisionsAndDurations (); // JMI
-    void                  testTupletSoundingWholeNotesAndDurations ();
+    void                  testDivisionsAndNotesDurations (); // JMI
+    void                  testTupletSoundingWholeNotesAndNotesDurations ();
 */
 
   public:
@@ -145,8 +143,8 @@ class EXP msrDivisions : public msrElement
 
     int                   fDivisionsPerQuarterNote;
 
-    std::list<std::pair<msrDurationKind, int> >
-                          fDurationKindsToDivisions;
+    std::list<std::pair<msrNotesDurationKind, int> >
+                          fNotesDurationKindsToDivisions;
 };
 typedef SMARTP<msrDivisions> S_msrDivisions;
 EXP std::ostream& operator << (std::ostream& os, const S_msrDivisions& elt);

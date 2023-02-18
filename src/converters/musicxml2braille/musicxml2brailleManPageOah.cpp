@@ -62,7 +62,7 @@ xml2brlManPageGenerateAtom::~xml2brlManPageGenerateAtom ()
 void xml2brlManPageGenerateAtom::applyValueLessAtom (std::ostream& os)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -81,7 +81,7 @@ void xml2brlManPageGenerateAtom::applyValueLessAtom (std::ostream& os)
 void xml2brlManPageGenerateAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -100,7 +100,7 @@ void xml2brlManPageGenerateAtom::acceptIn (basevisitor* v)
         S_xml2brlManPageGenerateAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -119,7 +119,7 @@ void xml2brlManPageGenerateAtom::acceptIn (basevisitor* v)
 void xml2brlManPageGenerateAtom::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -138,7 +138,7 @@ void xml2brlManPageGenerateAtom::acceptOut (basevisitor* v)
         S_xml2brlManPageGenerateAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -157,7 +157,7 @@ void xml2brlManPageGenerateAtom::acceptOut (basevisitor* v)
 void xml2brlManPageGenerateAtom::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -269,7 +269,7 @@ R"()",
         regex_replace (
 R"(Write man page data for EXECUTABLE to standard output.)",
           std::regex ("EXECUTABLE"),
-          gGlobalOahOahGroup->getOahOahGroupServiceName ()),
+          gOahOahGroup->getOahOahGroupServiceName ()),
         fOah2manPage));
 }
 
@@ -323,7 +323,7 @@ void xml2brlManPageOahGroup::checkGroupOptionsConsistency ()
 void xml2brlManPageOahGroup::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -342,7 +342,7 @@ void xml2brlManPageOahGroup::acceptIn (basevisitor* v)
         S_xml2brlManPageOahGroup elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -361,7 +361,7 @@ void xml2brlManPageOahGroup::acceptIn (basevisitor* v)
 void xml2brlManPageOahGroup::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -380,7 +380,7 @@ void xml2brlManPageOahGroup::acceptOut (basevisitor* v)
         S_xml2brlManPageOahGroup elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -399,7 +399,7 @@ void xml2brlManPageOahGroup::acceptOut (basevisitor* v)
 void xml2brlManPageOahGroup::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -444,7 +444,7 @@ S_xml2brlManPageOahGroup createGlobalXml2brlManPageOahHandler (
   const S_oahVisitor& theOah2manPage)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<

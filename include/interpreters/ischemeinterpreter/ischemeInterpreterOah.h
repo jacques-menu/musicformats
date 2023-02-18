@@ -1,10 +1,10 @@
 /*
   MusicFormats Library
-  Copyright (C) Jacques Menu 2016-2023
+  Copyright (C) Jacques Menu 2016-2022
 
   This Source Code Form is subject to the terms of the Mozilla Public
   License, v. 2.0. If a copy of the MPL was not distributed with this
-  file, you can obtain one at http://mozilla.org/MPL/2.0/.
+  file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
   https://github.com/jacques-menu/musicformats
 */
@@ -12,7 +12,7 @@
 #ifndef ___ischemeInterpreterOah___
 #define ___ischemeInterpreterOah___
 
-#include "mfStaticSettings.h"
+#include "msr.h"
 
 #include "msrGenerationBasicTypes.h"
 
@@ -91,11 +91,11 @@ class EXP ischemeInterpreterOahGroup : public oahGroup
                               { return fTraceParsing; }
 
     // display
-    void                  setDisplayToolAndInput ()
-                              { fDisplayToolAndInput = true; }
+    void                  setDisplayServiceAndInput ()
+                              { fDisplayServiceAndInput = true; }
 
-    Bool                  getDisplayToolAndInput () const
-                              { return fDisplayToolAndInput; }
+    Bool                  getDisplayServiceAndInput () const
+                              { return fDisplayServiceAndInput; }
 
     void                  setDisplayOptions ()
                               { fDisplayOptions = true; }
@@ -142,7 +142,8 @@ class EXP ischemeInterpreterOahGroup : public oahGroup
     Bool                  getNoLaunch () const
                               { return fNoLaunch; }
 
-    const std::set<std::string>&    getInputSourcesSet () const
+    const std::set<std::string>&
+    				    					getInputSourcesSet () const
                               { return fInputSourcesSet; }
 
     S_oahStringSetElementAtom
@@ -168,7 +169,7 @@ class EXP ischemeInterpreterOahGroup : public oahGroup
     // ------------------------------------------------------
 
 #ifdef MF_TRACE_IS_ENABLED
-// JMI    void                  initializeischemeInterpreterTraceOah ();
+// JMI    void                  initializeischemeInterpretertracingOah ();
 #endif // MF_TRACE_IS_ENABLED
 
     void                  initializeIschemeOptions ();
@@ -201,8 +202,8 @@ class EXP ischemeInterpreterOahGroup : public oahGroup
     // user options
     Bool                  fDisplayTokens;
 
-    Bool                  fDisplayToolAndInput;
-    S_oahBooleanAtom      fDisplayToolAndInputAtom;
+    Bool                  fDisplayServiceAndInput;
+    S_oahBooleanAtom      fDisplayServiceAndInputAtom;
 
     Bool                  fDisplayOptions;
 
@@ -226,7 +227,8 @@ class EXP ischemeInterpreterOahGroup : public oahGroup
     Bool                  fTraceOptionsBlocks;
 
     // input sources
-    std::set<std::string> fInputSourcesSet;
+    std::set<std::string>
+    						          fInputSourcesSet;
     S_oahStringSetElementAtom
                           fInputSourcesSetAtom;
 
@@ -237,7 +239,7 @@ class EXP ischemeInterpreterOahGroup : public oahGroup
                           fSelectChoiceToLabelsMultiMapAtom;
 };
 typedef SMARTP<ischemeInterpreterOahGroup> S_ischemeInterpreterOahGroup;
-EXP std::ostream& operator << (std::ostream& os, const S_ischemeInterpreterOahGroup& elt);
+EXP std::ostream& operator<< (std::ostream& os, const S_ischemeInterpreterOahGroup& elt);
 
 EXP extern S_ischemeInterpreterOahGroup gGlobalIschemeInterpreterOahGroup;
 
@@ -248,4 +250,4 @@ EXP S_ischemeInterpreterOahGroup createGlobalIschemeInterpreterOahGroup ();
 }
 
 
-#endif // ___ischemeInterpreterOah___
+#endif // MF_TRACE_IS_ENABLED

@@ -255,7 +255,7 @@ function bit ()
 
   egrep \
     --colour=always \
-    -i 'BUILD|error|warning|Undefined|referenced from|duplicate symbol|unknown|undeclared|In file included from|const|unterminated|expected|^' \
+    -i 'BUILD|error|warning|Undefined|referenced from|duplicate symbol|unknown|undeclared|redefinition|In file included from|const|unterminated|expected|^' \
     ${LOGFILE} \
     | \
     egrep -v 'forward' | egrep -v 'build' | egrep -v 'Build' | grep -v 'TARGET'
@@ -263,7 +263,7 @@ function bit ()
 #     | \
 #    egrep -v 'Xcode.app' | egrep -v 'VSTD'
 
-#    -i 'BUILD|error|warning|note:|Undefined|referenced from|duplicate symbol|unknown|undeclared' \
+#    -i 'BUILD|error|warning|note:|Undefined|referenced from|duplicate symbol|unknown|undeclared|redefinition' \
 
 #   echo
 
@@ -402,31 +402,31 @@ function renam ()
 function grh ()
 {
 #  set -x
-  grep -r "$1" **/* | grep '\.h'
+  grep -r "$1" **/*.h
 }
 
 function grc ()
 {
 #  set -x
-  grep -r "$1" **/* | grep '\.c'
+  grep -r "$1" **/*.cpp
 }
 
 function grx ()
 {
 #  set -x
-  grep -r "$1" **/* | grep '\.xml'
+  grep -r "$1" **/*.xml
 }
 
 function grly ()
 {
 #  set -x
-  grep -r "$1" **/* | grep '\.ly'
+  grep -r "$1" **/*.ly
 }
 
 function grt ()
 {
 #  set -x
-  grep -r "$1" **/* | grep '\.tex'
+  grep -r "$1" **/*.tex
 }
 
 
@@ -913,7 +913,7 @@ function wclf ()
   cd "${SRC_DIR}"
   echo "SRC_DIR = ${SRC_DIR}"
 
-  wc -l **/* | sort -n     # grep -v ‘wc: ’ |
+  (wc -l **/* | sort -n) 2> /dev/null    # grep -v ‘wc: ’
 }
 
 function wcl ()
@@ -921,7 +921,7 @@ function wcl ()
   cd "${SRC_DIR}"
   echo "SRC_DIR = ${SRC_DIR}"
 
-  wc -l **/* | sort -n | tail -n 20
+  (wc -l **/* | sort -n | tail -n 20) 2> /dev/null
 }
 
 function wcla ()

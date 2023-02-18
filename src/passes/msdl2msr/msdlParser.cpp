@@ -176,7 +176,7 @@ void msdlParser::initializeTokensHandling ()
       msdlTokenKind::kTokenComma,
       msdlTokenKind::kTokenQuote});
 
-  fNoteDurationFIRST =
+  fNoteNotesDurationFIRST =
     msdlTokenKindsSet::create ({
       msdlTokenKind::kTokenInteger,
       msdlTokenKind::kTokenName});
@@ -1098,7 +1098,7 @@ void msdlParser::setCurrentOctaveEntryReference ()
   }
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceNotesOctaveEntry ()) {
+  if (gTraceOahGroup->getTraceNotesOctaveEntry ()) {
     gLog <<
       "setCurrentOctaveEntryReferenceFromTheLilypondOah()" <<
       ", octaveEntryKind is" <<
@@ -1180,7 +1180,7 @@ std::string msdlParser::lilypondOctaveInRelativeEntryMode (
       referenceDiatonicPitchKind - msrDiatonicPitchKind::kDiatonicPitchC;
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceNotesOctaveEntry ()) {
+  if (gTraceOahGroup->getTraceNotesOctaveEntry ()) {
     const int fieldWidth = 28;
 
     gLog << std::left <<
@@ -1235,7 +1235,7 @@ std::string msdlParser::lilypondOctaveInRelativeEntryMode (
   }
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceNotesOctaveEntry ()) {
+  if (gTraceOahGroup->getTraceNotesOctaveEntry ()) {
     gLog <<
       "lilypondOctaveInRelativeEntryMode() 2" <<
       ", result: " << ss.str () <<
@@ -1283,7 +1283,7 @@ std::string msdlParser::lilypondOctaveInFixedEntryMode (
     (int) noteAbsoluteOctave - (int) referenceAbsoluteOctave;
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceNotesOctaveEntry ()) {
+  if (gTraceOahGroup->getTraceNotesOctaveEntry ()) {
     gLog << std::left <<
       "% noteAbsoluteOctave = " <<
       msrOctaveKindAsString (noteAbsoluteOctave) <<
@@ -3598,10 +3598,10 @@ void msdlParser::Note (S_msdlTokenKindsSet stopperTokensSet)
   if (
     checkOptionalTokenKindsSet (
       __FILE__, __LINE__,
-      fNoteDurationFIRST,
+      fNoteNotesDurationFIRST,
       "Note")
   ) {
-    NoteDuration (
+    NoteNotesDuration (
       stopperTokensSet);
   }
 
@@ -3888,10 +3888,10 @@ msrOctaveKind msdlParser::OctaveIndication (S_msdlTokenKindsSet stopperTokensSet
 }
 
 // --------------------------------------------------------------------------
-//  msdlParser::NoteDuration
+//  msdlParser::NoteNotesDuration
 // --------------------------------------------------------------------------
 
-void msdlParser::NoteDuration (S_msdlTokenKindsSet stopperTokensSet)
+void msdlParser::NoteNotesDuration (S_msdlTokenKindsSet stopperTokensSet)
 {
   if (stopperTokensSet->getTokenKindsSetSize ()) {
     fMsdlTokensSetsStack.push_front (stopperTokensSet);
@@ -3905,33 +3905,33 @@ void msdlParser::NoteDuration (S_msdlTokenKindsSet stopperTokensSet)
       std::endl <<
       "=================================================================" <<
       std::endl <<
-      "--> NoteDuration()" <<
+      "--> NoteNotesDuration()" <<
       ", fCurrentToken: " << currentTokenAsString () <<
       std::endl;
   }
 
   if (fTraceSyntaxErrorRecovery) {
-    displayTokenKindsSetsStack ("NoteDuration");
+    displayTokenKindsSetsStack ("NoteNotesDuration");
   }
 #endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
   // there should be an integer or a name such as "maxima"
-  msrDurationKind durationKind = msrDurationKind::kDuration_UNKNOWN;
+  msrNotesDurationKind notesNotesDurationKind = msrNotesDurationKind::kNotesDuration_UNKNOWN;
 
   if (
     checkOptionalTokenKindsSet (
       __FILE__, __LINE__,
-      fNoteDurationFIRST,
-      "NoteDuration")
+      fNoteNotesDurationFIRST,
+      "NoteNotesDuration")
   ) {
     if (fCurrentTokenKind == msdlTokenKind::kTokenInteger) {
       // get the fraction
       int durationInteger = fCurrentToken.getTokenDescription ().getInteger ();
 
-      durationKind =
-        msrDurationKindFromInteger (
+      notesNotesDurationKind =
+        msrNotesDurationKindFromInteger (
           fCurrentToken.getTokenLineNumber (),
           durationInteger);
 
@@ -3940,9 +3940,9 @@ void msdlParser::NoteDuration (S_msdlTokenKindsSet stopperTokensSet)
         std::stringstream ss;
 
         ss <<
-          "=== NoteDuration()" <<
+          "=== NoteNotesDuration()" <<
           ", durationInteger: \"" << durationInteger << "\"" <<
-          ", durationKind: \"" << msrDurationKindAsString (durationKind) << "\"" <<
+          ", notesNotesDurationKind: \"" << msrNotesDurationKindAsString (notesNotesDurationKind) << "\"" <<
           std::endl;
 
         gWaeHandler->waeTrace (
@@ -3955,14 +3955,14 @@ void msdlParser::NoteDuration (S_msdlTokenKindsSet stopperTokensSet)
     else if (checkMandatoryTokenKind (
       __FILE__, __LINE__,
       msdlTokenKind::kTokenName,
-      "NoteDuration")
+      "NoteNotesDuration")
     ) {
       // get the duration name
       std::string durationName =
         fCurrentToken.getTokenDescription ().getString ();
 
-      durationKind =
-        msrDurationKindFromString (
+      notesNotesDurationKind =
+        msrNotesDurationKindFromString (
           fCurrentToken.getTokenLineNumber (),
           durationName);
 
@@ -3971,9 +3971,9 @@ void msdlParser::NoteDuration (S_msdlTokenKindsSet stopperTokensSet)
         std::stringstream ss;
 
         ss <<
-          "=== NoteDuration()" <<
+          "=== NoteNotesDuration()" <<
           ", durationName: \"" << durationName << "\"" <<
-          ", durationKind: \"" << msrDurationKindAsString (durationKind) << "\"" <<
+          ", notesNotesDurationKind: \"" << msrNotesDurationKindAsString (notesNotesDurationKind) << "\"" <<
           std::endl;
 
         gWaeHandler->waeTrace (
@@ -3985,10 +3985,10 @@ void msdlParser::NoteDuration (S_msdlTokenKindsSet stopperTokensSet)
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
-    switch (durationKind) {
-      case msrDurationKind::kDuration_UNKNOWN:
+    switch (notesNotesDurationKind) {
+      case msrNotesDurationKind::kNotesDuration_UNKNOWN:
         fParserWaeHandler->
-          malformedNoteDuration ();
+          malformedNoteNotesDuration ();
         break;
       default:
         ;
@@ -4006,7 +4006,7 @@ void msdlParser::NoteDuration (S_msdlTokenKindsSet stopperTokensSet)
     checkOptionalTokenKind (
       __FILE__, __LINE__,
       msdlTokenKind::kTokenDot,
-      "NoteDuration")
+      "NoteNotesDuration")
   ) {
     ++fCurrentNoteDotsNumber;
 
@@ -4015,13 +4015,13 @@ void msdlParser::NoteDuration (S_msdlTokenKindsSet stopperTokensSet)
   } // while
 
   fCurrentNoteSoundingWholeNotes =
-    rationalFromDurationKindAndDotsNumber (
-      durationKind,
+    wholeNotesFromNotesDurationKindAndDotsNumber (
+      notesNotesDurationKind,
       fCurrentNoteDotsNumber);
 
   fCurrentNoteDisplayWholeNotes =
-    msrDurationKindAsWholeNotes (
-      durationKind);
+    msrNotesDurationKindAsWholeNotes (
+      notesNotesDurationKind);
 
   --gIndenter;
 
@@ -4034,7 +4034,7 @@ void msdlParser::NoteDuration (S_msdlTokenKindsSet stopperTokensSet)
 		std::stringstream ss;
 
     ss <<
-      "<-- NoteDuration()" <<
+      "<-- NoteNotesDuration()" <<
       ", fCurrentNoteSoundingWholeNotes: " << fCurrentNoteSoundingWholeNotes <<
       ", fCurrentNoteDisplayWholeNotes: " << fCurrentNoteDisplayWholeNotes <<
       ", fCurrentNoteDotsNumber: " << fCurrentNoteDotsNumber <<

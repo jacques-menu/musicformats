@@ -40,7 +40,4 @@
 #include "lpsrBookBlockElements.h"
 
 
-}
-
-
 #endif // ___lpsr___

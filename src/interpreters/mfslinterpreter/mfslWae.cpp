@@ -1,21 +1,23 @@
 /*
   MusicFormats Library
-  Copyright (C) Jacques Menu 2016-2023
+  Copyright (C) Jacques Menu 2016-2022
 
   This Source Code Form is subject to the terms of the Mozilla Public
   License, v. 2.0. If a copy of the MPL was not distributed with this
-  file, you can obtain one at http://mozilla.org/MPL/2.0/.
+  file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
   https://github.com/jacques-menu/musicformats
 */
 
 #include "mfIndentedTextOutput.h"
 
-#include "waeInterface.h"
+#include "waeOah.h"
 #include "mfslWae.h"
 
 #include "waeOah.h"
 
+
+using namespace std;
 
 namespace MusicFormats
 {
@@ -28,7 +30,7 @@ EXP void mfslWarning (
   gLog <<
     "### [MFSL] WARNING " <<
     loc << ": " << message <<
-    std::endl;
+    endl;
 }
 
 EXP void mfslError (
@@ -40,9 +42,9 @@ EXP void mfslError (
   gLog <<
     "### [MFSL] ERROR " <<
     loc << ": " << message <<
-    std::endl;
+    endl;
 
-  if (! gGlobalWaeOahGroup->getDontShowErrors ()) { // JMI
+  if (! gWaeOahGroup->getDontShowErrors ()) { // JMI
     throw mfslException (message);
   }
 
@@ -58,9 +60,9 @@ EXP void mfslInternalError (
   gLog <<
     "### [MFSL] INNTERNAL ERROR " <<
     loc << ": " << message <<
-    std::endl;
+    endl;
 
-  if (! gGlobalWaeOahGroup->getDontShowErrors ()) { // JMI
+  if (! gWaeOahGroup->getDontShowErrors ()) { // JMI
     throw mfslException (message);
   }
 
@@ -73,9 +75,9 @@ EXP void mfslFileError (
 {
   gLog <<
     "### MFSL file error: " << message <<
-    std::endl;
+    endl;
 
-  if (! gGlobalWaeOahGroup->getDontShowErrors ()) { // JMI
+  if (! gWaeOahGroup->getDontShowErrors ()) { // JMI
     throw mfslException (message);
   }
 
@@ -86,19 +88,19 @@ EXP void mfslOptionsIncompatibilityError (
   const S_oahAtom atom1,
   const S_oahAtom atom2)
 {
-  std::stringstream ss;
+  stringstream s;
 
-  ss <<
+  s <<
     "### MFSL options incompatibility: " <<
     atom1->fetchNamesBetweenQuotes () <<
     " and " <<
     atom2->fetchNamesBetweenQuotes () <<
     " are incompatible" <<
-    std::endl;
+    endl;
 
-  std::string message = ss.str ();
+  std::string message = s.str ();
 
-  if (! gGlobalWaeOahGroup->getDontShowErrors ()) { // JMI
+  if (! gWaeOahGroup->getDontShowErrors ()) { // JMI
     throw mfslException (message);
   }
 

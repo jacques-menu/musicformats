@@ -836,7 +836,7 @@ void initializeMSDLKeywords ()
   if (! pPrivateThisMethodHasBeenRun) {
 #ifdef MF_TRACE_IS_ENABLED
     if (
-      gEarlyOptions.getEarlyTraceOah ()
+      gEarlyOptions.getTraceEarlyOptions ()
         &&
      ! gEarlyOptions.getEarlyQuietOption ()
     ) {

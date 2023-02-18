@@ -119,7 +119,7 @@ void msrMeasure::appendElementToMeasure (const S_msrMeasureElement& elem)
     elem->getInputLineNumber ();
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceMeasures ()) {
+  if (gTraceOahGroup->getTraceMeasures ()) {
 		std::stringstream ss;
 
     ss <<
@@ -130,8 +130,8 @@ void msrMeasure::appendElementToMeasure (const S_msrMeasureElement& elem)
       " in voice \"" <<
       fetchMeasureUpLinkToVoice ()->
         getVoiceName () <<
-      "\", currentMeasureWholeNotesDuration = " <<
-      fCurrentMeasureWholeNotesDuration <<
+      "\", currentMeasureWholeNotes = " <<
+      fCurrentMeasureWholeNotes <<
       ", line " << inputLineNumber <<
       std::endl;
 
@@ -139,7 +139,7 @@ void msrMeasure::appendElementToMeasure (const S_msrMeasureElement& elem)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // set elem's measure number
   elem->
@@ -150,14 +150,14 @@ void msrMeasure::appendElementToMeasure (const S_msrMeasureElement& elem)
   elem->
     setMeasurePosition (
       this,
-      fCurrentMeasureWholeNotesDuration,
+      fCurrentMeasureWholeNotes,
       "appendElementToMeasure()");
 
   fMeasureElementsList.push_back (elem);
 
   // take elem's sounding whole notes into account JMI ???
 if (false) // JMI CAFE
-  incrementCurrentMeasureWholeNotesDuration (
+  incrementCurrentMeasureWholeNotes (
     inputLineNumber,
     elem->
       getSoundingWholeNotes ());
@@ -172,7 +172,7 @@ void msrMeasure::appendHarmonyToMeasure (const S_msrHarmony& harmony)
     harmony->getInputLineNumber ();
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceHarmonies ()) {
+  if (gTraceOahGroup->getTraceHarmonies ()) {
     gLog <<
       "Appending harmony " << harmony->asString () <<
       " to measure " <<
@@ -183,8 +183,8 @@ void msrMeasure::appendHarmonyToMeasure (const S_msrHarmony& harmony)
       fMeasureUpLinkToSegment->
         getSegmentUpLinkToVoice ()->
           getVoiceName () <<
-      "\", currentMeasureWholeNotesDuration = " <<
-      fCurrentMeasureWholeNotesDuration <<
+      "\", currentMeasureWholeNotes = " <<
+      fCurrentMeasureWholeNotes <<
       ", line " << inputLineNumber <<
       std::endl;
 
@@ -192,7 +192,7 @@ void msrMeasure::appendHarmonyToMeasure (const S_msrHarmony& harmony)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // set harmony's measure number
   harmony->
@@ -206,13 +206,13 @@ void msrMeasure::appendHarmonyToMeasure (const S_msrHarmony& harmony)
   fMeasureElementsList.push_back (harmony);
 
   // get harmony sounding whole notes
-  Rational
+  mfRational
     harmonySoundingWholeNotes =
       harmony->
         getSoundingWholeNotes ();
 
   // account for harmony duration in measure whole notes
-  incrementCurrentMeasureWholeNotesDuration (
+  incrementCurrentMeasureWholeNotes (
     inputLineNumber,
     harmonySoundingWholeNotes);
 
@@ -229,7 +229,7 @@ void msrMeasure::appendHarmonyToMeasureClone (const S_msrHarmony& harmony)
     harmony->getInputLineNumber ();
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceHarmonies ()) {
+  if (gTraceOahGroup->getTraceHarmonies ()) {
     gLog <<
       "Appending harmony " << harmony->asString () <<
       " to measure clone " <<
@@ -240,8 +240,8 @@ void msrMeasure::appendHarmonyToMeasureClone (const S_msrHarmony& harmony)
       fMeasureUpLinkToSegment->
         getSegmentUpLinkToVoice ()->
           getVoiceName () <<
-      "\", currentMeasureWholeNotesDuration = " <<
-      fCurrentMeasureWholeNotesDuration <<
+      "\", currentMeasureWholeNotes = " <<
+      fCurrentMeasureWholeNotes <<
       ", line " << inputLineNumber <<
       std::endl;
 
@@ -249,7 +249,7 @@ void msrMeasure::appendHarmonyToMeasureClone (const S_msrHarmony& harmony)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -257,13 +257,13 @@ void msrMeasure::appendHarmonyToMeasureClone (const S_msrHarmony& harmony)
   appendElementToMeasure (harmony);
 
   // fetch harmony sounding whole notes
-  Rational
+  mfRational
     harmonySoundingWholeNotes =
       harmony->
         getSoundingWholeNotes ();
 
   // account for harmony duration in measure whole notes
-  incrementCurrentMeasureWholeNotesDuration (
+  incrementCurrentMeasureWholeNotes (
     inputLineNumber,
     harmonySoundingWholeNotes);
 
@@ -298,7 +298,7 @@ void msrSegment::appendMeasureToSegment (const S_msrMeasure& measure)
       : fSegmentElementsList.back ()->getMeasureNumber ();
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceMeasures ()) {
+  if (gTraceOahGroup->getTraceMeasures ()) {
 		std::stringstream ss;
 
     ss <<
@@ -323,7 +323,7 @@ void msrSegment::appendMeasureToSegment (const S_msrMeasure& measure)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (measureNumber == currentMeasureNumber) {
     std::stringstream ss;
@@ -427,7 +427,7 @@ S_msrMeasure msrVoice::createAMeasureAndAppendItToVoice (
   fVoiceCurrentMeasureNumber = measureNumber;
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceMeasures ()) {
+  if (gTraceOahGroup->getTraceMeasures ()) {
 		std::stringstream ss;
 
     ss <<
@@ -441,7 +441,7 @@ S_msrMeasure msrVoice::createAMeasureAndAppendItToVoice (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fCallsCounter++;
 
@@ -466,12 +466,12 @@ S_msrMeasure msrVoice::createAMeasureAndAppendItToVoice (
   }
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceMeasuresDetails ()) {
+  if (gTraceOahGroup->getTraceMeasuresDetails ()) {
     displayVoice (
       inputLineNumber,
       "createAMeasureAndAppendItToVoice() 1");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -495,12 +495,12 @@ S_msrMeasure msrVoice::createAMeasureAndAppendItToVoice (
   fVoiceLastAppendedMeasure = result;
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceMeasuresDetails ()) {
+  if (gTraceOahGroup->getTraceMeasuresDetails ()) {
     displayVoice (
       inputLineNumber,
       "createAMeasureAndAppendItToVoice() 3");
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   --gIndenter;
 

@@ -96,7 +96,7 @@ void translateMxsrToGuido (
     guidoData = v.convert (theMxsr);
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
     err <<
       "xmlFile2gmn() outputFileName = \"" <<
       outputFileName <<
@@ -111,7 +111,7 @@ void translateMxsrToGuido (
 
   if (! outputFileName.size ()) {
 #ifdef MF_TRACE_IS_ENABLED
-    if (gEarlyOptions.getEarlyTraceOah ()) {
+    if (gEarlyOptions.getTraceEarlyOptions ()) {
       err <<
         "xmlFile2gmn() output goes to standard output" <<
         std::endl;
@@ -130,7 +130,7 @@ void translateMxsrToGuido (
 
   else {
 #ifdef MF_TRACE_IS_ENABLED
-    if (gEarlyOptions.getEarlyTraceOah ()) {
+    if (gEarlyOptions.getTraceEarlyOptions ()) {
       err <<
         "xmlFile2gmn() output goes to file \"" <<
         outputFileName <<

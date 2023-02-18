@@ -185,7 +185,7 @@ void msr2bsrOahGroup::checkGroupOptionsConsistency ()
 void msr2bsrOahGroup::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -204,7 +204,7 @@ void msr2bsrOahGroup::acceptIn (basevisitor* v)
         S_msr2bsrOahGroup elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -223,7 +223,7 @@ void msr2bsrOahGroup::acceptIn (basevisitor* v)
 void msr2bsrOahGroup::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -242,7 +242,7 @@ void msr2bsrOahGroup::acceptOut (basevisitor* v)
         S_msr2bsrOahGroup elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -261,7 +261,7 @@ void msr2bsrOahGroup::acceptOut (basevisitor* v)
 void msr2bsrOahGroup::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -348,7 +348,7 @@ std::ostream& operator << (std::ostream& os, const S_msr2bsrOahGroup& elt)
 S_msr2bsrOahGroup createGlobalMsr2bsrOahGroup ()
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<

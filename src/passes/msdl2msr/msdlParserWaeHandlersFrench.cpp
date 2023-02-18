@@ -104,7 +104,7 @@ void msdlParserWaeHandlerFrench::mixedCommasAndQuotesInOctaveIndication () const
     std::endl;
 }
 
-void msdlParserWaeHandlerFrench::malformedNoteDuration () const
+void msdlParserWaeHandlerFrench::malformedNoteNotesDuration () const
 {
   gLog <<
     "### Durée de note mal formée ###" <<

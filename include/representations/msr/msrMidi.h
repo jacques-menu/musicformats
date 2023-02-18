@@ -28,7 +28,7 @@ class EXP msrMidiTempo : public msrElement
 
     static SMARTP<msrMidiTempo> create (
                             int           inputLineNumber,
-                            const std::string& midiTempoDuration,
+                            const std::string& midiTempoNotesDuration,
                             int           midiTempoPerSecond);
 
     SMARTP<msrMidiTempo> createMsrMidiTempoNewbornClone ();
@@ -40,7 +40,7 @@ class EXP msrMidiTempo : public msrElement
 
                           msrMidiTempo (
                             int           inputLineNumber,
-                            const std::string& midiTempoDuration,
+                            const std::string& midiTempoNotesDuration,
                             int           midiTempoPerSecond);
 
     msrMidiTempo ();
@@ -51,11 +51,11 @@ class EXP msrMidiTempo : public msrElement
 
     // set and get
     // ------------------------------------------------------
-    void                  setMidiTempoDuration (const std::string& value)
-                              { fMidiTempoDuration = value; }
+    void                  setMidiTempoNotesDuration (const std::string& value)
+                              { fMidiTempoNotesDuration = value; }
 
-    std::string           getMidiTempoDuration () const
-                              { return fMidiTempoDuration; }
+    std::string           getMidiTempoNotesDuration () const
+                              { return fMidiTempoNotesDuration; }
 
     void                  setMidiTempoPerSecond (int value)
                               { fMidiTempoPerSecond = value; }
@@ -92,7 +92,7 @@ class EXP msrMidiTempo : public msrElement
     // private fields
     // ------------------------------------------------------
 
-    std::string           fMidiTempoDuration;
+    std::string           fMidiTempoNotesDuration;
     int                   fMidiTempoPerSecond;
 };
 typedef SMARTP<msrMidiTempo> S_msrMidiTempo;

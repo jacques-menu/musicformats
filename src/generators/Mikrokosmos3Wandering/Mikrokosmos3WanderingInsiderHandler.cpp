@@ -114,7 +114,7 @@ R"(
         multiGenerationOutputKind)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -324,7 +324,7 @@ R"(
 void Mikrokosmos3WanderingInsiderHandler::createTheMikrokosmos3WanderingPrefixes ()
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -348,7 +348,7 @@ void Mikrokosmos3WanderingInsiderHandler::createTheMikrokosmos3WanderingOptionGr
   mfMultiGenerationOutputKind mfMultiGenerationOutputKind)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -510,7 +510,7 @@ void Mikrokosmos3WanderingInsiderHandler::createTheMikrokosmos3WanderingOptionGr
 void Mikrokosmos3WanderingInsiderHandler::checkOptionsAndArguments () const
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -532,7 +532,7 @@ void Mikrokosmos3WanderingInsiderHandler::checkOptionsAndArguments () const
 std::string Mikrokosmos3WanderingInsiderHandler::fetchOutputFileNameFromTheOptions () const
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -568,7 +568,7 @@ std::string Mikrokosmos3WanderingInsiderHandler::fetchOutputFileNameFromTheOptio
         getSelected ();
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -693,7 +693,7 @@ std::string Mikrokosmos3WanderingInsiderHandler::fetchOutputFileNameFromTheOptio
   }
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -718,7 +718,7 @@ void Mikrokosmos3WanderingInsiderHandler::checkHandlerOptionsConsistency ()
 void Mikrokosmos3WanderingInsiderHandler::enforceHandlerQuietness ()
 {
 #ifdef MF_TRACE_IS_ENABLED
-  gGlobalTraceOahGroup->
+  gTraceOahGroup->
     enforceGroupQuietness ();
 #endif // MF_TRACE_IS_ENABLED
 
@@ -783,7 +783,7 @@ void Mikrokosmos3WanderingInsiderOahGroup::checkGroupOptionsConsistency ()
 void Mikrokosmos3WanderingInsiderOahGroup::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -802,7 +802,7 @@ void Mikrokosmos3WanderingInsiderOahGroup::acceptIn (basevisitor* v)
         S_Mikrokosmos3WanderingInsiderOahGroup elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -821,7 +821,7 @@ void Mikrokosmos3WanderingInsiderOahGroup::acceptIn (basevisitor* v)
 void Mikrokosmos3WanderingInsiderOahGroup::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -840,7 +840,7 @@ void Mikrokosmos3WanderingInsiderOahGroup::acceptOut (basevisitor* v)
         S_Mikrokosmos3WanderingInsiderOahGroup elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -859,7 +859,7 @@ void Mikrokosmos3WanderingInsiderOahGroup::acceptOut (basevisitor* v)
 void Mikrokosmos3WanderingInsiderOahGroup::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -964,7 +964,7 @@ Mikrokosmos3WanderingInsiderOahGroup::~Mikrokosmos3WanderingInsiderOahGroup ()
 void Mikrokosmos3WanderingInsiderOahGroup::initializeMikrokosmos3WanderingInsiderOahGroup ()
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
     std::stringstream ss;
 
     ss <<
@@ -1031,7 +1031,7 @@ void Mikrokosmos3WanderingInsiderOahGroup::printMikrokosmos3WanderingInsiderOahG
 S_Mikrokosmos3WanderingInsiderOahGroup createGlobalMikrokosmos3WanderingInsiderOahGroup ()
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<

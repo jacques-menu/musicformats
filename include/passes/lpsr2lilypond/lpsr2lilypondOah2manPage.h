@@ -37,7 +37,7 @@ class EXP lpsr2lilypondOah2manPage : virtual public oah2manPage,
 
   public visitor<S_lilypondChordsDisplayAtom>,
 
-  public visitor<S_lilypondLyricsDurationsKindAtom>,
+  public visitor<S_lilypondLyricsNotesDurationsKindAtom>,
 
   public visitor<S_oahMidiTempoAtom>
 
@@ -73,8 +73,8 @@ class EXP lpsr2lilypondOah2manPage : virtual public oah2manPage,
     virtual void          visitStart (S_lilypondChordsDisplayAtom& elt);
     virtual void          visitEnd   (S_lilypondChordsDisplayAtom& elt);
 
-    virtual void          visitStart (S_lilypondLyricsDurationsKindAtom& elt);
-    virtual void          visitEnd   (S_lilypondLyricsDurationsKindAtom& elt);
+    virtual void          visitStart (S_lilypondLyricsNotesDurationsKindAtom& elt);
+    virtual void          visitEnd   (S_lilypondLyricsNotesDurationsKindAtom& elt);
 
     virtual void          visitStart (S_oahMidiTempoAtom& elt);
     virtual void          visitEnd   (S_oahMidiTempoAtom& elt);

@@ -29,6 +29,7 @@
 
 #include "bsrInterface.h"
 
+
 namespace MusicFormats
 {
 
@@ -50,7 +51,7 @@ void displayBsrScore (
   // start the clock
   clock_t startClock = clock ();
 
-  setGlobalCurrentPassIDKind (mfPassIDKind::kMfPassID_OptionalPass);
+  setGlobalCurrentPassIDKind (mfPassIDKind::kMfPassID_DisplayPass);
 
   std::string separator =
     "%--------------------------------------------------------------";
@@ -72,7 +73,7 @@ void displayBsrScore (
   clock_t endClock = clock ();
 
   gGlobalTimingItemsList.appendTimingItem (
-		mfPassIDKind::kMfPassID_OptionalPass,
+		mfPassIDKind::kMfPassID_DisplayPass,
     gLanguage->displayTheBSRAsText (), // JMI ??? v0.9.66
     mfTimingItemKind::kOptional,
     startClock,
@@ -97,7 +98,7 @@ void displayBsrScoreFull (
   // start the clock
   clock_t startClock = clock ();
 
-  setGlobalCurrentPassIDKind (mfPassIDKind::kMfPassID_OptionalPass);
+  setGlobalCurrentPassIDKind (mfPassIDKind::kMfPassID_DisplayPass);
 
   std::string separator =
     "%--------------------------------------------------------------";
@@ -121,7 +122,7 @@ void displayBsrScoreFull (
   clock_t endClock = clock ();
 
   gGlobalTimingItemsList.appendTimingItem (
-		mfPassIDKind::kMfPassID_OptionalPass,
+		mfPassIDKind::kMfPassID_DisplayPass,
     gLanguage->displayTheBSRAsText ()
       + ", " +
     gLanguage->fullVersion (),

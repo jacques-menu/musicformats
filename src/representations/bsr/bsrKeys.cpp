@@ -111,7 +111,7 @@ bsrKey::bsrKey (
   fKeyCellsList = buildCellsList ();
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceKeys ()) {
+  if (gTraceOahGroup->getTraceKeys ()) {
 		std::stringstream ss;
 
     ss <<

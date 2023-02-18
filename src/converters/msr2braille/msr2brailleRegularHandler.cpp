@@ -71,7 +71,7 @@ msr2brailleRegularHandler::msr2brailleRegularHandler (
   createRegularHandlerGroups ();
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOahDetails ()) {
+  if (gEarlyOptions.getTraceEarlyOptionsDetails ()) {
   // print the options handler initial state
   gLog <<
     "msr2brailleRegularHandler \"" <<
@@ -88,7 +88,7 @@ msr2brailleRegularHandler::~msr2brailleRegularHandler ()
 void msr2brailleRegularHandler::createRegularHandlerGroups ()
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -158,7 +158,7 @@ void msr2brailleRegularHandler::createRegularHandlerGroups ()
   createOutputRegularGroup ();
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1296,7 +1296,7 @@ void msr2brailleRegularHandler::createOutputRegularGroup ()
 void msr2brailleRegularHandler::checkOptionsAndArguments () const
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<

@@ -129,11 +129,11 @@ class EXP msrStaff : public msrElement
 
     // staff shortest note
 
-    void                  setStaffShortestNoteDuration (
-                            const Rational& duration);
+    void                  setStaffShortestNoteWholeNotes (
+                            const msrWholeNotes& wholeNotes);
 
-    Rational              getStaffShortestNoteDuration () const
-                              { return fStaffShortestNoteDuration; }
+    msrWholeNotes          getStaffShortestNoteWholeNotes () const
+                              { return fStaffShortestNoteWholeNotes; }
 
     void                  setStaffShortestNoteTupletFactor (
                             const msrTupletFactor& noteTupletFactor);
@@ -206,7 +206,7 @@ class EXP msrStaff : public msrElement
 
     void                  insertHiddenMeasureAndBarLineInStaffClone (
                             int             inputLineNumber,
-                            const Rational& measurePosition);
+                            const msrWholeNotes& measurePosition);
 
     // transposition
 
@@ -420,9 +420,9 @@ class EXP msrStaff : public msrElement
 
     // part shortest note
 
-    // fStaffShortestNoteDuration and fStaffShortestNoteTupletFactor
+    // fStaffShortestNoteWholeNotes and fStaffShortestNoteTupletFactor
     // are used in the time-oriented handling of staff measures slices
-    Rational              fStaffShortestNoteDuration;
+    msrWholeNotes          fStaffShortestNoteWholeNotes;
     msrTupletFactor       fStaffShortestNoteTupletFactor;
 
     // measures flat vector

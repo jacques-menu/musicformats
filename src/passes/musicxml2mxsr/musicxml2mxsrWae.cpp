@@ -48,8 +48,8 @@ void musicxml2mxsrError (
     sourceCodeLineNumber,
     message);
 
-  if (! gGlobalWaeOahGroup->getDontShowErrors ()) {
-    if (! gGlobalWaeOahGroup->getDontQuitOnErrors ()) { // JMI
+  if (! gWaeOahGroup->getDontShowErrors ()) {
+    if (! gWaeOahGroup->getDontQuitOnErrors ()) { // JMI
       throw musicxml2mxsrException (message);
     }
     else {

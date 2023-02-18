@@ -62,7 +62,7 @@ EXP mfMusicformatsErrorKind msrScore2lilypondWithHandler (
   const S_oahHandler& handler)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -123,7 +123,7 @@ EXP mfMusicformatsErrorKind msrScore2lilypondWithHandler (
           fetchOutputFileNameFromTheOptions ();
 
 #ifdef MF_TRACE_IS_ENABLED
-    if (gEarlyOptions.getEarlyTraceOah ()) {
+    if (gEarlyOptions.getTraceEarlyOptions ()) {
       err <<
         "xmlFile2lilypond() outputFileName = \"" <<
         outputFileName <<
@@ -138,7 +138,7 @@ EXP mfMusicformatsErrorKind msrScore2lilypondWithHandler (
 
     if (! outputFileName.size ()) {
 #ifdef MF_TRACE_IS_ENABLED
-      if (gEarlyOptions.getEarlyTraceOah ()) {
+      if (gEarlyOptions.getTraceEarlyOptions ()) {
         err <<
           "xmlFile2lilypond() output goes to standard output" <<
           std::endl;
@@ -178,7 +178,7 @@ EXP mfMusicformatsErrorKind msrScore2lilypondWithHandler (
 
     else {
 #ifdef MF_TRACE_IS_ENABLED
-      if (gEarlyOptions.getEarlyTraceOah ()) {
+      if (gEarlyOptions.getTraceEarlyOptions ()) {
         err <<
           "xmlFile2lilypond() output goes to file \"" <<
           outputFileName <<

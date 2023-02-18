@@ -283,7 +283,7 @@ void msr2bsrTranslator::visitStart (S_msrScore& elt)
         inputLineNumber,
         "This Braille data created by "
           +
-        gGlobalOahOahGroup->getOahOahGroupServiceName ());
+        gOahOahGroup->getOahOahGroupServiceName ());
 
   fResultingBsr->
     getTranscriptionNotes ()->
@@ -518,7 +518,7 @@ void msr2bsrTranslator::visitStart (S_msrPart& elt)
 #endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceParts ()) {
+  if (gTraceOahGroup->getTraceParts ()) {
 		std::stringstream ss;
 
     ss <<
@@ -544,7 +544,7 @@ void msr2bsrTranslator::visitEnd (S_msrPart& elt)
   int inputLineNumber =
     elt->getInputLineNumber ();
 
-  if (gGlobalTraceOahGroup->getTraceParts ()) {
+  if (gTraceOahGroup->getTraceParts ()) {
 		std::stringstream ss;
 
     ss <<
@@ -760,7 +760,7 @@ void msr2bsrTranslator::visitStart (S_msrBarLine& elt)
 #endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceBarLines ()) {
+  if (gTraceOahGroup->getTraceBarLines ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1563,7 +1563,7 @@ void msr2bsrTranslator::visitStart (S_msrKey& elt)
   // create the BSR key
   if (theBsrKeyKind == bsrKeyKind::kKeyKindNone) {
 #ifdef MF_TRACE_IS_ENABLED
-    if (gGlobalTraceOahGroup->getTraceKeys ()) {
+    if (gTraceOahGroup->getTraceKeys ()) {
       gLog <<
         "BSR key kind is absent, ignoring '" <<
         bsrKeyKindAsString (theBsrKeyKind) <<
@@ -1898,7 +1898,7 @@ bsrNoteOctaveIsNeeded msr2bsrTranslator::brailleOctaveMarkInNeeded (
       (int) referenceDiatonicPitchKind - (int) msrDiatonicPitchKind::kDiatonicPitchC;
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceNotesDetails ()) {
+  if (gTraceOahGroup->getTraceNotesDetails ()) {
     const int fieldWidth = 28;
 
 		std::stringstream ss;
@@ -2019,10 +2019,10 @@ void msr2bsrTranslator::createBsrForNote (const S_msrNote& note)
 
   int noteDotsNumber = note->getNoteDotsNumber ();
 
-  msrDurationKind
-    noteGraphicDurationKind =
+  msrNotesDurationKind
+    noteGraphicNotesDurationKind =
       note->
-        getNoteGraphicDurationKind ();
+        getNoteGraphicNotesDurationKind ();
 
   msrOctaveKind
     noteOctave =
@@ -2156,47 +2156,47 @@ void msr2bsrTranslator::createBsrForNote (const S_msrNote& note)
   bsrNoteValueKind noteValueKind = bsrNoteValueKind::kNoteValueNone;
 
   if (note->fetchNoteIsARest ()) {
-    switch (noteGraphicDurationKind) {
-      case msrDurationKind::kDuration_UNKNOWN:
+    switch (noteGraphicNotesDurationKind) {
+      case msrNotesDurationKind::kNotesDuration_UNKNOWN:
         break;
 
-      case msrDurationKind::kDuration1024th:
+      case msrNotesDurationKind::kNotesDuration1024th:
         break;
-      case msrDurationKind::kDuration512th:
+      case msrNotesDurationKind::kNotesDuration512th:
         break;
-      case msrDurationKind::kDuration256th:
+      case msrNotesDurationKind::kNotesDuration256th:
         noteValueKind = bsrNoteValueKind::kNoteValueRest256th;
         break;
-      case msrDurationKind::kDuration128th:
+      case msrNotesDurationKind::kNotesDuration128th:
         noteValueKind = bsrNoteValueKind::kNoteValueRest128th;
         break;
-      case msrDurationKind::kDuration64th:
+      case msrNotesDurationKind::kNotesDuration64th:
         noteValueKind = bsrNoteValueKind::kNoteValueRest64th;
         break;
-      case msrDurationKind::kDuration32nd:
+      case msrNotesDurationKind::kNotesDuration32nd:
         noteValueKind = bsrNoteValueKind::kNoteValueRest32nd;
         break;
-      case msrDurationKind::kDuration16th:
+      case msrNotesDurationKind::kNotesDuration16th:
         noteValueKind = bsrNoteValueKind::kNoteValueRest16th;
         break;
-      case msrDurationKind::kDurationEighth:
+      case msrNotesDurationKind::kNotesDurationEighth:
         noteValueKind = bsrNoteValueKind::kNoteValueRest8th;
         break;
-      case msrDurationKind::kDurationQuarter:
+      case msrNotesDurationKind::kNotesDurationQuarter:
         noteValueKind = bsrNoteValueKind::kNoteValueRestQuarter;
         break;
-      case msrDurationKind::kDurationHalf:
+      case msrNotesDurationKind::kNotesDurationHalf:
         noteValueKind = bsrNoteValueKind::kNoteValueRestHalf;
         break;
-      case msrDurationKind::kDurationWhole:
+      case msrNotesDurationKind::kNotesDurationWhole:
         noteValueKind = bsrNoteValueKind::kNoteValueRestWhole;
         break;
-      case msrDurationKind::kDurationBreve:
+      case msrNotesDurationKind::kNotesDurationBreve:
         noteValueKind = bsrNoteValueKind::kNoteValueRestBreve;
         break;
-      case msrDurationKind::kDurationLonga:
+      case msrNotesDurationKind::kNotesDurationLonga:
         break;
-      case msrDurationKind::kDurationMaxima:
+      case msrNotesDurationKind::kNotesDurationMaxima:
         break;
     } // switch
   }
@@ -2207,323 +2207,323 @@ void msr2bsrTranslator::createBsrForNote (const S_msrNote& note)
         break;
 
       case msrDiatonicPitchKind::kDiatonicPitchA:
-        switch (noteGraphicDurationKind) {
-          case msrDurationKind::kDuration_UNKNOWN:
+        switch (noteGraphicNotesDurationKind) {
+          case msrNotesDurationKind::kNotesDuration_UNKNOWN:
             break;
 
-          case msrDurationKind::kDuration1024th:
+          case msrNotesDurationKind::kNotesDuration1024th:
             break;
-          case msrDurationKind::kDuration512th:
+          case msrNotesDurationKind::kNotesDuration512th:
             break;
-          case msrDurationKind::kDuration256th:
+          case msrNotesDurationKind::kNotesDuration256th:
             noteValueKind = bsrNoteValueKind::kNoteValueA256th;
             break;
-          case msrDurationKind::kDuration128th:
+          case msrNotesDurationKind::kNotesDuration128th:
             noteValueKind = bsrNoteValueKind::kNoteValueA128th;
             break;
-          case msrDurationKind::kDuration64th:
+          case msrNotesDurationKind::kNotesDuration64th:
             noteValueKind = bsrNoteValueKind::kNoteValueA64th;
             break;
-          case msrDurationKind::kDuration32nd:
+          case msrNotesDurationKind::kNotesDuration32nd:
             noteValueKind = bsrNoteValueKind::kNoteValueA32nd;
             break;
-          case msrDurationKind::kDuration16th:
+          case msrNotesDurationKind::kNotesDuration16th:
             noteValueKind = bsrNoteValueKind::kNoteValueA16th;
             break;
-          case msrDurationKind::kDurationEighth:
+          case msrNotesDurationKind::kNotesDurationEighth:
             noteValueKind = bsrNoteValueKind::kNoteValueA8th;
             break;
-          case msrDurationKind::kDurationQuarter:
+          case msrNotesDurationKind::kNotesDurationQuarter:
             noteValueKind = bsrNoteValueKind::kNoteValueAQuarter;
             break;
-          case msrDurationKind::kDurationHalf:
+          case msrNotesDurationKind::kNotesDurationHalf:
             noteValueKind = bsrNoteValueKind::kNoteValueAHalf;
             break;
-          case msrDurationKind::kDurationWhole:
+          case msrNotesDurationKind::kNotesDurationWhole:
             noteValueKind = bsrNoteValueKind::kNoteValueAWhole;
             break;
-          case msrDurationKind::kDurationBreve:
+          case msrNotesDurationKind::kNotesDurationBreve:
             noteValueKind = bsrNoteValueKind::kNoteValueABreve;
             break;
-          case msrDurationKind::kDurationLonga:
+          case msrNotesDurationKind::kNotesDurationLonga:
             break;
-          case msrDurationKind::kDurationMaxima:
+          case msrNotesDurationKind::kNotesDurationMaxima:
             break;
         } // switch
         break;
 
       case msrDiatonicPitchKind::kDiatonicPitchB:
-        switch (noteGraphicDurationKind) {
-          case msrDurationKind::kDuration_UNKNOWN:
+        switch (noteGraphicNotesDurationKind) {
+          case msrNotesDurationKind::kNotesDuration_UNKNOWN:
             break;
 
-          case msrDurationKind::kDuration1024th:
+          case msrNotesDurationKind::kNotesDuration1024th:
             break;
-          case msrDurationKind::kDuration512th:
+          case msrNotesDurationKind::kNotesDuration512th:
             break;
-          case msrDurationKind::kDuration256th:
+          case msrNotesDurationKind::kNotesDuration256th:
             noteValueKind = bsrNoteValueKind::kNoteValueB256th;
             break;
-          case msrDurationKind::kDuration128th:
+          case msrNotesDurationKind::kNotesDuration128th:
             noteValueKind = bsrNoteValueKind::kNoteValueB128th;
             break;
-          case msrDurationKind::kDuration64th:
+          case msrNotesDurationKind::kNotesDuration64th:
             noteValueKind = bsrNoteValueKind::kNoteValueB64th;
             break;
-          case msrDurationKind::kDuration32nd:
+          case msrNotesDurationKind::kNotesDuration32nd:
             noteValueKind = bsrNoteValueKind::kNoteValueB32nd;
             break;
-          case msrDurationKind::kDuration16th:
+          case msrNotesDurationKind::kNotesDuration16th:
             noteValueKind = bsrNoteValueKind::kNoteValueB16th;
             break;
-          case msrDurationKind::kDurationEighth:
+          case msrNotesDurationKind::kNotesDurationEighth:
             noteValueKind = bsrNoteValueKind::kNoteValueB8th;
             break;
-          case msrDurationKind::kDurationQuarter:
+          case msrNotesDurationKind::kNotesDurationQuarter:
             noteValueKind = bsrNoteValueKind::kNoteValueBQuarter;
             break;
-          case msrDurationKind::kDurationHalf:
+          case msrNotesDurationKind::kNotesDurationHalf:
             noteValueKind = bsrNoteValueKind::kNoteValueBHalf;
             break;
-          case msrDurationKind::kDurationWhole:
+          case msrNotesDurationKind::kNotesDurationWhole:
             noteValueKind = bsrNoteValueKind::kNoteValueBWhole;
             break;
-          case msrDurationKind::kDurationBreve:
+          case msrNotesDurationKind::kNotesDurationBreve:
             noteValueKind = bsrNoteValueKind::kNoteValueBBreve;
             break;
-          case msrDurationKind::kDurationLonga:
+          case msrNotesDurationKind::kNotesDurationLonga:
             break;
-          case msrDurationKind::kDurationMaxima:
+          case msrNotesDurationKind::kNotesDurationMaxima:
             break;
         } // switch
         break;
 
       case msrDiatonicPitchKind::kDiatonicPitchC:
-        switch (noteGraphicDurationKind) {
-          case msrDurationKind::kDuration_UNKNOWN:
+        switch (noteGraphicNotesDurationKind) {
+          case msrNotesDurationKind::kNotesDuration_UNKNOWN:
             break;
 
-          case msrDurationKind::kDuration1024th:
+          case msrNotesDurationKind::kNotesDuration1024th:
             break;
-          case msrDurationKind::kDuration512th:
+          case msrNotesDurationKind::kNotesDuration512th:
             break;
-          case msrDurationKind::kDuration256th:
+          case msrNotesDurationKind::kNotesDuration256th:
             noteValueKind = bsrNoteValueKind::kNoteValueC256th;
             break;
-          case msrDurationKind::kDuration128th:
+          case msrNotesDurationKind::kNotesDuration128th:
             noteValueKind = bsrNoteValueKind::kNoteValueC128th;
             break;
-          case msrDurationKind::kDuration64th:
+          case msrNotesDurationKind::kNotesDuration64th:
             noteValueKind = bsrNoteValueKind::kNoteValueC64th;
             break;
-          case msrDurationKind::kDuration32nd:
+          case msrNotesDurationKind::kNotesDuration32nd:
             noteValueKind = bsrNoteValueKind::kNoteValueC32nd;
             break;
-          case msrDurationKind::kDuration16th:
+          case msrNotesDurationKind::kNotesDuration16th:
             noteValueKind = bsrNoteValueKind::kNoteValueC16th;
             break;
-          case msrDurationKind::kDurationEighth:
+          case msrNotesDurationKind::kNotesDurationEighth:
             noteValueKind = bsrNoteValueKind::kNoteValueC8th;
             break;
-          case msrDurationKind::kDurationQuarter:
+          case msrNotesDurationKind::kNotesDurationQuarter:
             noteValueKind = bsrNoteValueKind::kNoteValueCQuarter;
             break;
-          case msrDurationKind::kDurationHalf:
+          case msrNotesDurationKind::kNotesDurationHalf:
             noteValueKind = bsrNoteValueKind::kNoteValueCHalf;
             break;
-          case msrDurationKind::kDurationWhole:
+          case msrNotesDurationKind::kNotesDurationWhole:
             noteValueKind = bsrNoteValueKind::kNoteValueCWhole;
             break;
-          case msrDurationKind::kDurationBreve:
+          case msrNotesDurationKind::kNotesDurationBreve:
             noteValueKind = bsrNoteValueKind::kNoteValueCBreve;
             break;
-          case msrDurationKind::kDurationLonga:
+          case msrNotesDurationKind::kNotesDurationLonga:
             break;
-          case msrDurationKind::kDurationMaxima:
+          case msrNotesDurationKind::kNotesDurationMaxima:
             break;
         } // switch
         break;
 
       case msrDiatonicPitchKind::kDiatonicPitchD:
-        switch (noteGraphicDurationKind) {
-          case msrDurationKind::kDuration_UNKNOWN:
+        switch (noteGraphicNotesDurationKind) {
+          case msrNotesDurationKind::kNotesDuration_UNKNOWN:
             break;
 
-          case msrDurationKind::kDuration1024th:
+          case msrNotesDurationKind::kNotesDuration1024th:
             break;
-          case msrDurationKind::kDuration512th:
+          case msrNotesDurationKind::kNotesDuration512th:
             break;
-          case msrDurationKind::kDuration256th:
+          case msrNotesDurationKind::kNotesDuration256th:
             noteValueKind = bsrNoteValueKind::kNoteValueD256th;
             break;
-          case msrDurationKind::kDuration128th:
+          case msrNotesDurationKind::kNotesDuration128th:
             noteValueKind = bsrNoteValueKind::kNoteValueD128th;
             break;
-          case msrDurationKind::kDuration64th:
+          case msrNotesDurationKind::kNotesDuration64th:
             noteValueKind = bsrNoteValueKind::kNoteValueD64th;
             break;
-          case msrDurationKind::kDuration32nd:
+          case msrNotesDurationKind::kNotesDuration32nd:
             noteValueKind = bsrNoteValueKind::kNoteValueD32nd;
             break;
-          case msrDurationKind::kDuration16th:
+          case msrNotesDurationKind::kNotesDuration16th:
             noteValueKind = bsrNoteValueKind::kNoteValueD16th;
             break;
-          case msrDurationKind::kDurationEighth:
+          case msrNotesDurationKind::kNotesDurationEighth:
             noteValueKind = bsrNoteValueKind::kNoteValueD8th;
             break;
-          case msrDurationKind::kDurationQuarter:
+          case msrNotesDurationKind::kNotesDurationQuarter:
             noteValueKind = bsrNoteValueKind::kNoteValueDQuarter;
             break;
-          case msrDurationKind::kDurationHalf:
+          case msrNotesDurationKind::kNotesDurationHalf:
             noteValueKind = bsrNoteValueKind::kNoteValueDHalf;
             break;
-          case msrDurationKind::kDurationWhole:
+          case msrNotesDurationKind::kNotesDurationWhole:
             noteValueKind = bsrNoteValueKind::kNoteValueDWhole;
             break;
-          case msrDurationKind::kDurationBreve:
+          case msrNotesDurationKind::kNotesDurationBreve:
             noteValueKind = bsrNoteValueKind::kNoteValueDBreve;
             break;
-          case msrDurationKind::kDurationLonga:
+          case msrNotesDurationKind::kNotesDurationLonga:
             break;
-          case msrDurationKind::kDurationMaxima:
+          case msrNotesDurationKind::kNotesDurationMaxima:
             break;
         } // switch
         break;
 
       case msrDiatonicPitchKind::kDiatonicPitchE:
-        switch (noteGraphicDurationKind) {
-          case msrDurationKind::kDuration_UNKNOWN:
+        switch (noteGraphicNotesDurationKind) {
+          case msrNotesDurationKind::kNotesDuration_UNKNOWN:
             break;
 
-          case msrDurationKind::kDuration1024th:
+          case msrNotesDurationKind::kNotesDuration1024th:
             break;
-          case msrDurationKind::kDuration512th:
+          case msrNotesDurationKind::kNotesDuration512th:
             break;
-          case msrDurationKind::kDuration256th:
+          case msrNotesDurationKind::kNotesDuration256th:
             noteValueKind = bsrNoteValueKind::kNoteValueE256th;
             break;
-          case msrDurationKind::kDuration128th:
+          case msrNotesDurationKind::kNotesDuration128th:
             noteValueKind = bsrNoteValueKind::kNoteValueE128th;
             break;
-          case msrDurationKind::kDuration64th:
+          case msrNotesDurationKind::kNotesDuration64th:
             noteValueKind = bsrNoteValueKind::kNoteValueE64th;
             break;
-          case msrDurationKind::kDuration32nd:
+          case msrNotesDurationKind::kNotesDuration32nd:
             noteValueKind = bsrNoteValueKind::kNoteValueE32nd;
             break;
-          case msrDurationKind::kDuration16th:
+          case msrNotesDurationKind::kNotesDuration16th:
             noteValueKind = bsrNoteValueKind::kNoteValueE16th;
             break;
-          case msrDurationKind::kDurationEighth:
+          case msrNotesDurationKind::kNotesDurationEighth:
             noteValueKind = bsrNoteValueKind::kNoteValueE8th;
             break;
-          case msrDurationKind::kDurationQuarter:
+          case msrNotesDurationKind::kNotesDurationQuarter:
             noteValueKind = bsrNoteValueKind::kNoteValueEQuarter;
             break;
-          case msrDurationKind::kDurationHalf:
+          case msrNotesDurationKind::kNotesDurationHalf:
             noteValueKind = bsrNoteValueKind::kNoteValueEHalf;
             break;
-          case msrDurationKind::kDurationWhole:
+          case msrNotesDurationKind::kNotesDurationWhole:
             noteValueKind = bsrNoteValueKind::kNoteValueEWhole;
             break;
-          case msrDurationKind::kDurationBreve:
+          case msrNotesDurationKind::kNotesDurationBreve:
             noteValueKind = bsrNoteValueKind::kNoteValueEBreve;
             break;
-          case msrDurationKind::kDurationLonga:
+          case msrNotesDurationKind::kNotesDurationLonga:
             break;
-          case msrDurationKind::kDurationMaxima:
+          case msrNotesDurationKind::kNotesDurationMaxima:
             break;
         } // switch
         break;
 
       case msrDiatonicPitchKind::kDiatonicPitchF:
-        switch (noteGraphicDurationKind) {
-          case msrDurationKind::kDuration_UNKNOWN:
+        switch (noteGraphicNotesDurationKind) {
+          case msrNotesDurationKind::kNotesDuration_UNKNOWN:
             break;
 
-          case msrDurationKind::kDuration1024th:
+          case msrNotesDurationKind::kNotesDuration1024th:
             break;
-          case msrDurationKind::kDuration512th:
+          case msrNotesDurationKind::kNotesDuration512th:
             break;
-          case msrDurationKind::kDuration256th:
+          case msrNotesDurationKind::kNotesDuration256th:
             noteValueKind = bsrNoteValueKind::kNoteValueF256th;
             break;
-          case msrDurationKind::kDuration128th:
+          case msrNotesDurationKind::kNotesDuration128th:
             noteValueKind = bsrNoteValueKind::kNoteValueF128th;
             break;
-          case msrDurationKind::kDuration64th:
+          case msrNotesDurationKind::kNotesDuration64th:
             noteValueKind = bsrNoteValueKind::kNoteValueF64th;
             break;
-          case msrDurationKind::kDuration32nd:
+          case msrNotesDurationKind::kNotesDuration32nd:
             noteValueKind = bsrNoteValueKind::kNoteValueF32nd;
             break;
-          case msrDurationKind::kDuration16th:
+          case msrNotesDurationKind::kNotesDuration16th:
             noteValueKind = bsrNoteValueKind::kNoteValueF16th;
             break;
-          case msrDurationKind::kDurationEighth:
+          case msrNotesDurationKind::kNotesDurationEighth:
             noteValueKind = bsrNoteValueKind::kNoteValueF8th;
             break;
-          case msrDurationKind::kDurationQuarter:
+          case msrNotesDurationKind::kNotesDurationQuarter:
             noteValueKind = bsrNoteValueKind::kNoteValueFQuarter;
             break;
-          case msrDurationKind::kDurationHalf:
+          case msrNotesDurationKind::kNotesDurationHalf:
             noteValueKind = bsrNoteValueKind::kNoteValueFHalf;
             break;
-          case msrDurationKind::kDurationWhole:
+          case msrNotesDurationKind::kNotesDurationWhole:
             noteValueKind = bsrNoteValueKind::kNoteValueFWhole;
             break;
-          case msrDurationKind::kDurationBreve:
+          case msrNotesDurationKind::kNotesDurationBreve:
             noteValueKind = bsrNoteValueKind::kNoteValueFBreve;
             break;
-          case msrDurationKind::kDurationLonga:
+          case msrNotesDurationKind::kNotesDurationLonga:
             break;
-          case msrDurationKind::kDurationMaxima:
+          case msrNotesDurationKind::kNotesDurationMaxima:
             break;
         } // switch
         break;
 
       case msrDiatonicPitchKind::kDiatonicPitchG:
-        switch (noteGraphicDurationKind) {
-          case msrDurationKind::kDuration_UNKNOWN:
+        switch (noteGraphicNotesDurationKind) {
+          case msrNotesDurationKind::kNotesDuration_UNKNOWN:
             break;
 
-          case msrDurationKind::kDuration1024th:
+          case msrNotesDurationKind::kNotesDuration1024th:
             break;
-          case msrDurationKind::kDuration512th:
+          case msrNotesDurationKind::kNotesDuration512th:
             break;
-          case msrDurationKind::kDuration256th:
+          case msrNotesDurationKind::kNotesDuration256th:
             noteValueKind = bsrNoteValueKind::kNoteValueG256th;
             break;
-          case msrDurationKind::kDuration128th:
+          case msrNotesDurationKind::kNotesDuration128th:
             noteValueKind = bsrNoteValueKind::kNoteValueG128th;
             break;
-          case msrDurationKind::kDuration64th:
+          case msrNotesDurationKind::kNotesDuration64th:
             noteValueKind = bsrNoteValueKind::kNoteValueG64th;
             break;
-          case msrDurationKind::kDuration32nd:
+          case msrNotesDurationKind::kNotesDuration32nd:
             noteValueKind = bsrNoteValueKind::kNoteValueG32nd;
             break;
-          case msrDurationKind::kDuration16th:
+          case msrNotesDurationKind::kNotesDuration16th:
             noteValueKind = bsrNoteValueKind::kNoteValueG16th;
             break;
-          case msrDurationKind::kDurationEighth:
+          case msrNotesDurationKind::kNotesDurationEighth:
             noteValueKind = bsrNoteValueKind::kNoteValueG8th;
             break;
-          case msrDurationKind::kDurationQuarter:
+          case msrNotesDurationKind::kNotesDurationQuarter:
             noteValueKind = bsrNoteValueKind::kNoteValueGQuarter;
             break;
-          case msrDurationKind::kDurationHalf:
+          case msrNotesDurationKind::kNotesDurationHalf:
             noteValueKind = bsrNoteValueKind::kNoteValueGHalf;
             break;
-          case msrDurationKind::kDurationWhole:
+          case msrNotesDurationKind::kNotesDurationWhole:
             noteValueKind = bsrNoteValueKind::kNoteValueGWhole;
             break;
-          case msrDurationKind::kDurationBreve:
+          case msrNotesDurationKind::kNotesDurationBreve:
             noteValueKind = bsrNoteValueKind::kNoteValueGBreve;
             break;
-          case msrDurationKind::kDurationLonga:
+          case msrNotesDurationKind::kNotesDurationLonga:
             break;
-          case msrDurationKind::kDurationMaxima:
+          case msrNotesDurationKind::kNotesDurationMaxima:
             break;
         } // switch
         break;
@@ -2675,7 +2675,7 @@ void msr2bsrTranslator::createBsrForNote (const S_msrNote& note)
 
   // is a note value sign needed?
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceNotesDetails ()) {
+  if (gTraceOahGroup->getTraceNotesDetails ()) {
 		std::stringstream ss;
 
     ss <<
@@ -3275,7 +3275,7 @@ void msr2bsrTranslator::visitStart (S_msrMeasure& elt)
      * /
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceMeasures ()) {
+  if (gTraceOahGroup->getTraceMeasures ()) {
 		std::stringstream ss;
 
     ss <<
@@ -3345,19 +3345,19 @@ void msr2bsrTranslator::finalizeCurrentMeasureClone (
         getMeasureNumber ();
 
   // get the measure whole notes
-  Rational
-    measureWholeNotesDuration =
+  mfRational
+    measureWholeNotes =
       fCurrentMeasureClone->
-        getMeasureWholeNotesDuration ();
+        getMeasureWholeNotes ();
 
   // get the full measure whole notes
-  Rational
+  mfRational
     measureFullLength =
       fCurrentMeasureClone->
         getMeasureFullLength ();
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceMeasures ()) {
+  if (gTraceOahGroup->getTraceMeasures ()) {
 		std::stringstream ss;
 
     ss <<
@@ -3365,7 +3365,7 @@ void msr2bsrTranslator::finalizeCurrentMeasureClone (
       "' in voice \"" << voice->getVoiceName () <<
       "\", line " << inputLineNumber <<
       std::endl <<
-      "measureWholeNotesDuration: " << measureWholeNotesDuration <<
+      "measureWholeNotes: " << measureWholeNotes <<
       std::endl;
 
     gWaeHandler->waeTrace (
@@ -3379,13 +3379,13 @@ void msr2bsrTranslator::finalizeCurrentMeasureClone (
       msrMeasure::kUnknownMeasure; // JMI
  // JMI     fMeasureKind = kFullMeasure; // may be changed afterwards
 
-  if (measureWholeNotesDuration == measureFullLength ) {
+  if (measureWholeNotes == measureFullLength ) {
     // this measure is full
     measureKind =
       msrMeasure::kFullMeasure;
   }
 
-  else if (measureWholeNotesDuration < measureFullLength) {
+  else if (measureWholeNotes < measureFullLength) {
     / *
     if (fSegmentElementsList.size () == 1) { // JMI
       // this is the first measure in the segment
@@ -3405,7 +3405,7 @@ void msr2bsrTranslator::finalizeCurrentMeasureClone (
       msrMeasure::kUpbeatMeasure; // JMI
   }
 
-  else if (measureWholeNotesDuration > measureFullLength) {
+  else if (measureWholeNotes > measureFullLength) {
     // this measure is overfull
     measureKind =
       msrMeasure::kOverfullMeasure;
@@ -3668,7 +3668,7 @@ void msr2bsrTranslator::visitStart (S_msrSyllable& elt)
 
         // create the words
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalTraceOahGroup->getTraceLyrics () || gGlobalTraceOahGroup->getTraceWords ()) {
+        if (gTraceOahGroup->getTraceLyrics () || gTraceOahGroup->getTraceWords ()) {
           gLog <<
             "Changing lyrics '" <<
             wordsValue <<
@@ -3700,7 +3700,7 @@ void msr2bsrTranslator::visitStart (S_msrSyllable& elt)
 
         // append it to the current non-grace note
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalTraceOahGroup->getTraceLyrics () || gGlobalTraceOahGroup->getTraceWords ()) {
+        if (gTraceOahGroup->getTraceLyrics () || gTraceOahGroup->getTraceWords ()) {
           gLog <<
             "Appending words '" <<
             words->asShortString () <<
@@ -4871,7 +4871,7 @@ void msr2bsrTranslator::visitStart (S_msrGraceNotesGroup& elt)
   if (doCreateAGraceNoteClone) {
     // create a clone of this graceNotesGroup
 #ifdef MF_TRACE_IS_ENABLED
-    if (gGlobalTraceOahGroup->getTraceNotes () || gGlobalTraceOahGroup->getTraceGraceNotes ()) {
+    if (gTraceOahGroup->getTraceNotes () || gTraceOahGroup->getTraceGraceNotes ()) {
       gLog <<
         "Creating a clone of grace notes group '" <<
         elt->asShortString () <<
@@ -4906,7 +4906,7 @@ void msr2bsrTranslator::visitStart (S_msrGraceNotesGroup& elt)
   }
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceNotes () || gGlobalTraceOahGroup->getTraceGraceNotes ()) {
+  if (gTraceOahGroup->getTraceNotes () || gTraceOahGroup->getTraceGraceNotes ()) {
     gLog <<
       "+++++++++++++++++++++++++ 1" <<
       std::endl <<
@@ -4953,11 +4953,11 @@ void msr2bsrTranslator::visitStart (S_msrGraceNotesGroup& elt)
   // is noteNotesGroupIsAttachedTo the first one in its voice?
 #ifdef MF_TRACE_IS_ENABLED
   if (
-    gGlobalTraceOahGroup->getTraceGraceNotes ()
+    gTraceOahGroup->getTraceGraceNotes ()
       ||
-    gGlobalTraceOahGroup->getTraceNotes ()
+    gTraceOahGroup->getTraceNotes ()
       ||
-    gGlobalTraceOahGroup->getTraceVoices ()
+    gTraceOahGroup->getTraceVoices ()
   ) {
 		std::stringstream ss;
 
@@ -4986,11 +4986,11 @@ void msr2bsrTranslator::visitStart (S_msrGraceNotesGroup& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (
-    gGlobalTraceOahGroup->getTraceGraceNotes ()
+    gTraceOahGroup->getTraceGraceNotes ()
       ||
-    gGlobalTraceOahGroup->getTraceNotes ()
+    gTraceOahGroup->getTraceNotes ()
       ||
-    gGlobalTraceOahGroup->getTraceVoices ()
+    gTraceOahGroup->getTraceVoices ()
   ) {
 		std::stringstream ss;
 
@@ -5031,11 +5031,11 @@ void msr2bsrTranslator::visitStart (S_msrGraceNotesGroup& elt)
       // create the skip grace notes group
 #ifdef MF_TRACE_IS_ENABLED
         if (
-            gGlobalTraceOahGroup->getTraceGraceNotes ()
+            gTraceOahGroup->getTraceGraceNotes ()
               ||
-            gGlobalTraceOahGroup->getTraceNotes ()
+            gTraceOahGroup->getTraceNotes ()
               ||
-            gGlobalTraceOahGroup->getTraceVoices ()
+            gTraceOahGroup->getTraceVoices ()
         ) {
           std::stringstream ss;
 
@@ -5074,7 +5074,7 @@ void msr2bsrTranslator::visitStart (S_msrGraceNotesGroup& elt)
       // the afterGraceNotesGroup to use
 
 #ifdef MF_TRACE_IS_ENABLED
-      if (gGlobalTraceOahGroup->getTraceGraceNotes ()Group) {
+      if (gTraceOahGroup->getTraceGraceNotes ()Group) {
         gLog <<
           "Optimising grace notes '" <<
           elt->asShortString () <<
@@ -5125,7 +5125,7 @@ void msr2bsrTranslator::visitStart (S_msrGraceNotesGroup& elt)
 
       // create skip graceNotesGroup clone
 #ifdef MF_TRACE_IS_ENABLED
-      if (gGlobalTraceOahGroup->getTraceGraceNotes ()Group) {
+      if (gTraceOahGroup->getTraceGraceNotes ()Group) {
         gLog <<
           "Creating a skip clone of grace notes '" <<
           elt->asShortString () <<
@@ -5161,7 +5161,7 @@ void msr2bsrTranslator::visitStart (S_msrGraceNotesGroup& elt)
 
       // create the after grace notes
 #ifdef MF_TRACE_IS_ENABLED
-      if (gGlobalTraceOahGroup->getTraceGraceNotes ()Group) {
+      if (gTraceOahGroup->getTraceGraceNotes ()Group) {
         gLog <<
           "Converting grace notes '" <<
           elt->asShortString () <<
@@ -5186,7 +5186,7 @@ void msr2bsrTranslator::visitStart (S_msrGraceNotesGroup& elt)
 
       // append it to the current note clone
 #ifdef MF_TRACE_IS_ENABLED
-      if (gGlobalTraceOahGroup->getTraceGraceNotes ()Group) {
+      if (gTraceOahGroup->getTraceGraceNotes ()Group) {
         gLog <<
           "Appending the after grace notes to current note clone" <<
           std::endl;
@@ -5226,7 +5226,7 @@ void msr2bsrTranslator::visitEnd (S_msrGraceNotesGroup& elt)
 #endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
-    if (gGlobalTraceOahGroup->getTraceNotes () || gGlobalTraceOahGroup->getTraceGraceNotes ()) {
+    if (gTraceOahGroup->getTraceNotes () || gTraceOahGroup->getTraceGraceNotes ()) {
     gLog <<
       "+++++++++++++++++++++++++ 2" <<
       std::endl <<
@@ -5254,7 +5254,7 @@ void msr2bsrTranslator::visitEnd (S_msrGraceNotesGroup& elt)
     // remove the current afterGraceNotesGroup note clone
     // from the current voice clone
 #ifdef MF_TRACE_IS_ENABLED
-    if (gGlobalTraceOahGroup->getTraceGraceNotes ()Group) {
+    if (gTraceOahGroup->getTraceGraceNotes ()Group) {
       gLog <<
         "Removing the after grace notes element from the current voice clone" <<
         std::endl;
@@ -5312,7 +5312,7 @@ void msr2bsrTranslator::visitStart (S_msrNote& elt)
   // but as the current grace note clone instead
 / * JMI
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalTraceOahGroup->getTraceNotes () || gGlobalTraceOahGroup->getTraceVoices ()) {
+        if (gTraceOahGroup->getTraceNotes () || gTraceOahGroup->getTraceVoices ()) {
           gLog <<
             "The first note of voice clone GFFF '" <<
             fCurrentVoiceClone->getVoiceName () <<
@@ -5354,7 +5354,7 @@ void msr2bsrTranslator::visitStart (S_msrNote& elt)
           fCurrentNonGraceNoteClone;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalTraceOahGroup->getTraceNotes () || gGlobalTraceOahGroup->getTraceVoices ()) {
+        if (gTraceOahGroup->getTraceNotes () || gTraceOahGroup->getTraceVoices ()) {
           gLog <<
             "The first note of voice clone RJIRWR '" <<
             fCurrentVoiceClone->getVoiceName () <<
@@ -5381,7 +5381,7 @@ void msr2bsrTranslator::visitStart (S_msrNote& elt)
     elt->getNoteTrillOrnament ()) {
     // yes, create the after grace notes
 #ifdef MF_TRACE_IS_ENABLED
-    if (gGlobalTraceOahGroup->getTraceNotes ()Group) {
+    if (gTraceOahGroup->getTraceNotes ()Group) {
       gLog <<
         "Optimizing grace notes on trilled note '" <<
         elt->asShortString () <<
@@ -5431,7 +5431,7 @@ void msr2bsrTranslator::visitEnd (S_msrNote& elt)
 #endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceNotesDetails ()) {
+  if (gTraceOahGroup->getTraceNotesDetails ()) {
 		std::stringstream ss;
 
     ss <<
@@ -5469,7 +5469,7 @@ void msr2bsrTranslator::visitEnd (S_msrNote& elt)
 
     case msrNoteKind::kNoteRestInMeasure:
 #ifdef MF_TRACE_IS_ENABLED
-      if (gGlobalTraceOahGroup->getTraceNotes ()) {
+      if (gTraceOahGroup->getTraceNotes ()) {
         gLog <<
           "Appending rest note clone '" <<
           fCurrentNonGraceNoteClone->asShortString () << "' to voice clone " <<
@@ -5489,7 +5489,7 @@ void msr2bsrTranslator::visitEnd (S_msrNote& elt)
 
     case msrNoteKind::kNoteSkipInMeasure: // JMI
 #ifdef MF_TRACE_IS_ENABLED
-      if (gGlobalTraceOahGroup->getTraceNotes ()) {
+      if (gTraceOahGroup->getTraceNotes ()) {
         gLog <<
           "Appending skip note clone '" <<
           fCurrentNonGraceNoteClone->asShortString () << "' to voice clone " <<
@@ -5509,7 +5509,7 @@ void msr2bsrTranslator::visitEnd (S_msrNote& elt)
 
     case msrNoteKind::kNoteUnpitchedInMeasure:
 #ifdef MF_TRACE_IS_ENABLED
-      if (gGlobalTraceOahGroup->getTraceNotes ()) {
+      if (gTraceOahGroup->getTraceNotes ()) {
         gLog <<
           "Appending unpitched note clone '" <<
           fCurrentNonGraceNoteClone->asShortString () << "' to voice clone " <<
@@ -5529,7 +5529,7 @@ void msr2bsrTranslator::visitEnd (S_msrNote& elt)
 
     case msrNoteKind::kNoteRegularInMeasure:
 #ifdef MF_TRACE_IS_ENABLED
-      if (gGlobalTraceOahGroup->getTraceNotes ()) {
+      if (gTraceOahGroup->getTraceNotes ()) {
         gLog <<
           "Appending regular note clone '" <<
           fCurrentNonGraceNoteClone->asShortString () << "' to voice clone " <<
@@ -5552,7 +5552,7 @@ void msr2bsrTranslator::visitEnd (S_msrNote& elt)
 
         if (fCurrentNonGraceNoteClone->getNoteIsFirstNoteInADoubleTremolo ()) {
 #ifdef MF_TRACE_IS_ENABLED
-          if (gGlobalTraceOahGroup->getTraceNotes ()) {
+          if (gTraceOahGroup->getTraceNotes ()) {
             gLog <<
               "Setting note '" <<
               fCurrentNonGraceNoteClone->asString () <<
@@ -5572,7 +5572,7 @@ void msr2bsrTranslator::visitEnd (S_msrNote& elt)
 
         else if (fCurrentNonGraceNoteClone->getNoteIsSecondNoteInADoubleTremolo ()) {
 #ifdef MF_TRACE_IS_ENABLED
-          if (gGlobalTraceOahGroup->getTraceNotes ()) {
+          if (gTraceOahGroup->getTraceNotes ()) {
             gLog <<
               "Setting note '" <<
               fCurrentNonGraceNoteClone->asString () <<
@@ -5644,7 +5644,7 @@ void msr2bsrTranslator::visitEnd (S_msrNote& elt)
       }
       else {
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalTraceOahGroup->getTraceGraceNotes () || gGlobalTraceOahGroup->getTraceNotes ()) {
+        if (gTraceOahGroup->getTraceGraceNotes () || gTraceOahGroup->getTraceNotes ()) {
           gLog <<
             "Appending grace note '" <<
             fCurrentGraceNoteClone->asShortString () <<
@@ -5668,7 +5668,7 @@ void msr2bsrTranslator::visitEnd (S_msrNote& elt)
     / * JMI ???
       if (fCurrentGraceNotesGroupClone) {
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalTraceOahGroup->getTraceGraceNotes () || gGlobalTraceOahGroup->getTraceNotes ()) {
+        if (gTraceOahGroup->getTraceGraceNotes () || gTraceOahGroup->getTraceNotes ()) {
           gLog <<
             "Appending note '" <<
             fCurrentNonGraceNoteClone->asShortString () <<
@@ -5689,7 +5689,7 @@ void msr2bsrTranslator::visitEnd (S_msrNote& elt)
 
       else if (fPendingAfterGraceNotes) {
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalTraceOahGroup->getTraceGraceNotes () || gGlobalTraceOahGroup->getTraceNotes ()) {
+        if (gTraceOahGroup->getTraceGraceNotes () || gTraceOahGroup->getTraceNotes ()) {
           gLog <<
             "Appending note '" <<
             fCurrentNonGraceNoteClone->asShortString () <<
@@ -5780,7 +5780,7 @@ void msr2bsrTranslator::visitEnd (S_msrNote& elt)
     case msrNoteKind::kNoteInTupletInGraceNotesGroup:
     case msrNoteKind::kNoteUnpitchedInTuplet:
 #ifdef MF_TRACE_IS_ENABLED
-      if (gGlobalTraceOahGroup->getTraceNotes ()) {
+      if (gTraceOahGroup->getTraceNotes ()) {
         gLog <<
           "Appending note clone '" <<
           fCurrentNonGraceNoteClone->asShortString () << "'' to voice clone " <<
@@ -6178,7 +6178,7 @@ void msr2bsrTranslator::visitStart (S_msrTuplet& elt)
 
   // register it in this visitor
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceTuplets ()) {
+  if (gTraceOahGroup->getTraceTuplets ()) {
 		std::stringstream ss;
 
     ss <<
@@ -6223,7 +6223,7 @@ void msr2bsrTranslator::visitEnd (S_msrTuplet& elt)
 #endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceTuplets ()) {
+  if (gTraceOahGroup->getTraceTuplets ()) {
 		std::stringstream ss;
 
     ss <<
@@ -6243,7 +6243,7 @@ void msr2bsrTranslator::visitEnd (S_msrTuplet& elt)
   if (fTupletClonesStack.size ()) {
     // tuplet is a nested tuplet
 #ifdef MF_TRACE_IS_ENABLED
-    if (gGlobalTraceOahGroup->getTraceTuplets ()) {
+    if (gTraceOahGroup->getTraceTuplets ()) {
       gLog <<
         "Adding nested tuplet '" <<
       elt->asString () <<
@@ -6262,7 +6262,7 @@ void msr2bsrTranslator::visitEnd (S_msrTuplet& elt)
     // tuplet is a top level tuplet
 
 #ifdef MF_TRACE_IS_ENABLED
-    if (gGlobalTraceOahGroup->getTraceTuplets ()) {
+    if (gTraceOahGroup->getTraceTuplets ()) {
       gLog <<
         "Adding top level tuplet '" <<
       elt->asString () <<
@@ -6589,7 +6589,7 @@ void msr2bsrTranslator::visitStart (S_msrRepeat& elt)
     * /
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceRepeats ()) {
+  if (gTraceOahGroup->getTraceRepeats ()) {
 		std::stringstream ss;
 
     ss <<
@@ -6616,7 +6616,7 @@ void msr2bsrTranslator::visitStart (S_msrRepeat& elt)
 / * JMI
   // create a repeat clone
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceRepeats ()) {
+  if (gTraceOahGroup->getTraceRepeats ()) {
 		std::stringstream ss;
 
     ss <<
@@ -6665,7 +6665,7 @@ void msr2bsrTranslator::visitEnd (S_msrRepeat& elt)
 / * JMI
   // append the repeat clone to the current part clone
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceRepeats ()) {
+  if (gTraceOahGroup->getTraceRepeats ()) {
 		std::stringstream ss;
 
     ss <<
@@ -6712,9 +6712,9 @@ void msr2bsrTranslator::visitStart (S_msrRepeatCommonPart& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (
-    gGlobalTraceOahGroup->getTraceRepeats ()
+    gTraceOahGroup->getTraceRepeats ()
       ||
-    gGlobalTraceOahGroup->getTraceVoicesDetails ()
+    gTraceOahGroup->getTraceVoicesDetails ()
   ) {
 		std::stringstream ss;
 
@@ -6763,9 +6763,9 @@ void msr2bsrTranslator::visitEnd (S_msrRepeatCommonPart& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (
-    gGlobalTraceOahGroup->getTraceRepeats ()
+    gTraceOahGroup->getTraceRepeats ()
       ||
-    gGlobalTraceOahGroup->getTraceVoicesDetails ()
+    gTraceOahGroup->getTraceVoicesDetails ()
   ) {
 		std::stringstream ss;
 
@@ -6789,7 +6789,7 @@ void msr2bsrTranslator::visitEnd (S_msrRepeatCommonPart& elt)
 
   // create a repeat and append it to voice clone
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceRepeats ()) {
+  if (gTraceOahGroup->getTraceRepeats ()) {
 		std::stringstream ss;
 
     ss <<
@@ -6853,7 +6853,7 @@ void msr2bsrTranslator::visitEnd (S_msrRepeatEnding& elt)
 
   // create a repeat ending clone and append it to voice clone
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceRepeats ()) {
+  if (gTraceOahGroup->getTraceRepeats ()) {
 		std::stringstream ss;
 
     ss <<
@@ -6863,7 +6863,7 @@ void msr2bsrTranslator::visitEnd (S_msrRepeatEnding& elt)
       std::endl;
   }
 
-  if (gGlobalTraceOahGroup->getTraceRepeats () || gGlobalTraceOahGroup->getTraceVoices ()) {
+  if (gTraceOahGroup->getTraceRepeats () || gTraceOahGroup->getTraceVoices ()) {
     gLog <<
       std::endl <<
       "*********>> msrRepeatEnding HHH " <<
@@ -6930,7 +6930,7 @@ void msr2bsrTranslator::visitEnd (S_msrMeasureRepeat& elt)
 
   // set last segment as the measures repeat pattern segment
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceRepeats ()) {
+  if (gTraceOahGroup->getTraceRepeats ()) {
 		std::stringstream ss;
 
     ss <<
@@ -6996,7 +6996,7 @@ void msr2bsrTranslator::visitEnd (S_msrMeasureRepeatPattern& elt)
 
   // create a measures repeat and append it to voice clone
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceMeasureRepeats ()) {
+  if (gTraceOahGroup->getTraceMeasureRepeats ()) {
 		std::stringstream ss;
 
     ss <<
@@ -7068,7 +7068,7 @@ void msr2bsrTranslator::visitEnd (S_msrMeasureRepeatReplicas& elt)
 
   // create a measures repeat replica clone and append it to voice clone
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceRepeats ()) {
+  if (gTraceOahGroup->getTraceRepeats ()) {
 		std::stringstream ss;
 
     ss <<
@@ -7113,7 +7113,7 @@ void msr2bsrTranslator::visitStart (S_msrMultipleRest& elt)
 #endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceMultipleFullBarRests ()) {
+  if (gTraceOahGroup->getTraceMultipleFullBarRests ()) {
 		std::stringstream ss;
 
     ss <<
@@ -7130,9 +7130,9 @@ void msr2bsrTranslator::visitStart (S_msrMultipleRest& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (
-    gGlobalTraceOahGroup->getTraceMultipleFullBarRests ()
+    gTraceOahGroup->getTraceMultipleFullBarRests ()
       ||
-    gGlobalTraceOahGroup->getTraceVoicesDetails ()
+    gTraceOahGroup->getTraceVoicesDetails ()
   ) {
 		std::stringstream ss;
 
@@ -7160,9 +7160,9 @@ void msr2bsrTranslator::visitStart (S_msrMultipleRest& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (
-    gGlobalTraceOahGroup->getTraceMultipleFullBarRests ()
+    gTraceOahGroup->getTraceMultipleFullBarRests ()
       ||
-    gGlobalTraceOahGroup->getTraceVoicesDetails ()
+    gTraceOahGroup->getTraceVoicesDetails ()
   ) {
 		std::stringstream ss;
 
@@ -7208,11 +7208,11 @@ void msr2bsrTranslator::visitEnd (S_msrMultipleRest& elt)
   // create the multiple rest clone
 #ifdef MF_TRACE_IS_ENABLED
   if (
-    gGlobalTraceOahGroup->getTraceMultipleFullBarRests ()
+    gTraceOahGroup->getTraceMultipleFullBarRests ()
       ||
-    gGlobalTraceOahGroup->getTraceSegments ()
+    gTraceOahGroup->getTraceSegments ()
       ||
-    gGlobalTraceOahGroup->getTraceVoices ()
+    gTraceOahGroup->getTraceVoices ()
   ) {
 		std::stringstream ss;
 
@@ -7248,11 +7248,11 @@ void msr2bsrTranslator::visitEnd (S_msrMultipleRest& elt)
   // containing the next, yet incomplete, measure
 #ifdef MF_TRACE_IS_ENABLED
   if (
-    gGlobalTraceOahGroup->getTraceMultipleFullBarRests ()
+    gTraceOahGroup->getTraceMultipleFullBarRests ()
       ||
-    gGlobalTraceOahGroup->getTraceSegments ()
+    gTraceOahGroup->getTraceSegments ()
       ||
-    gGlobalTraceOahGroup->getTraceVoices ()
+    gTraceOahGroup->getTraceVoices ()
   ) {
 		std::stringstream ss;
 
@@ -7282,9 +7282,9 @@ void msr2bsrTranslator::visitEnd (S_msrMultipleRest& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (
-    gGlobalTraceOahGroup->getTraceMultipleFullBarRests ()
+    gTraceOahGroup->getTraceMultipleFullBarRests ()
       ||
-    gGlobalTraceOahGroup->getTraceVoicesDetails ()
+    gTraceOahGroup->getTraceVoicesDetails ()
   ) {
 		std::stringstream ss;
 
@@ -7332,9 +7332,9 @@ void msr2bsrTranslator::visitStart (S_msrMultipleRestContents& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (
-    gGlobalTraceOahGroup->getTraceMultipleFullBarRests ()
+    gTraceOahGroup->getTraceMultipleFullBarRests ()
       ||
-    gGlobalTraceOahGroup->getTraceVoicesDetails ()
+    gTraceOahGroup->getTraceVoicesDetails ()
   ) {
 		std::stringstream ss;
 
@@ -7386,7 +7386,7 @@ void msr2bsrTranslator::visitEnd (S_msrMultipleRestContents& elt)
 
   // set last segment as the multiple rest contents segment
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceMultipleFullBarRests ()) {
+  if (gTraceOahGroup->getTraceMultipleFullBarRests ()) {
 		std::stringstream ss;
 
     ss <<
@@ -7408,9 +7408,9 @@ void msr2bsrTranslator::visitEnd (S_msrMultipleRestContents& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (
-    gGlobalTraceOahGroup->getTraceMultipleFullBarRests ()
+    gTraceOahGroup->getTraceMultipleFullBarRests ()
       ||
-    gGlobalTraceOahGroup->getTraceVoicesDetails ()
+    gTraceOahGroup->getTraceVoicesDetails ()
   ) {
 		std::stringstream ss;
 

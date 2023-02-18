@@ -82,7 +82,7 @@ Usage: msr2braille [option]* [MusicXMLFile|-] [[option]*
 )")
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -149,7 +149,7 @@ R"(What msr2braille does:
 void msr2brailleInsiderHandler::createTheXml2braillePrefixes ()
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -170,7 +170,7 @@ void msr2brailleInsiderHandler::createTheXml2brailleOptionGroups (
   const std::string& serviceName)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -252,7 +252,7 @@ void msr2brailleInsiderHandler::createTheXml2brailleOptionGroups (
     createGlobalHarmoniesExtraOahGroup ());
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOahDetails ()) {
+  if (gEarlyOptions.getTraceEarlyOptionsDetails ()) {
     // print the options handler initial state
 		std::stringstream ss;
 
@@ -276,7 +276,7 @@ void msr2brailleInsiderHandler::createTheXml2brailleOptionGroups (
 void msr2brailleInsiderHandler::checkOptionsAndArguments () const
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -298,7 +298,7 @@ void msr2brailleInsiderHandler::checkOptionsAndArguments () const
 std::string msr2brailleInsiderHandler::fetchOutputFileNameFromTheOptions () const
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -392,7 +392,7 @@ std::string msr2brailleInsiderHandler::fetchOutputFileNameFromTheOptions () cons
       }
 
 #ifdef MF_TRACE_IS_ENABLED
-      if (gEarlyOptions.getEarlyTraceOah ()) {
+      if (gEarlyOptions.getTraceEarlyOptions ()) {
         std::stringstream ss;
 
         ss <<
@@ -458,7 +458,7 @@ std::string msr2brailleInsiderHandler::fetchOutputFileNameFromTheOptions () cons
       }
 
 #ifdef MF_TRACE_IS_ENABLED
-      if (gEarlyOptions.getEarlyTraceOah ()) {
+      if (gEarlyOptions.getTraceEarlyOptions ()) {
         std::stringstream ss;
 
         ss <<
@@ -490,7 +490,7 @@ std::string msr2brailleInsiderHandler::fetchOutputFileNameFromTheOptions () cons
       } // switch
 
 #ifdef MF_TRACE_IS_ENABLED
-      if (gEarlyOptions.getEarlyTraceOah ()) {
+      if (gEarlyOptions.getTraceEarlyOptions ()) {
         std::stringstream ss;
 
         ss <<
@@ -524,7 +524,7 @@ void msr2brailleInsiderHandler::checkHandlerOptionsConsistency ()
 void msr2brailleInsiderHandler::enforceHandlerQuietness ()
 {
 #ifdef MF_TRACE_IS_ENABLED
-  gGlobalTraceOahGroup->
+  gTraceOahGroup->
     enforceGroupQuietness ();
 #endif // MF_TRACE_IS_ENABLED
 
@@ -559,7 +559,7 @@ void msr2brailleInsiderOahGroup::checkGroupOptionsConsistency ()
 void msr2brailleInsiderOahGroup::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -578,7 +578,7 @@ void msr2brailleInsiderOahGroup::acceptIn (basevisitor* v)
         S_msr2brailleInsiderOahGroup elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -597,7 +597,7 @@ void msr2brailleInsiderOahGroup::acceptIn (basevisitor* v)
 void msr2brailleInsiderOahGroup::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -616,7 +616,7 @@ void msr2brailleInsiderOahGroup::acceptOut (basevisitor* v)
         S_msr2brailleInsiderOahGroup elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -635,7 +635,7 @@ void msr2brailleInsiderOahGroup::acceptOut (basevisitor* v)
 void msr2brailleInsiderOahGroup::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -743,7 +743,7 @@ msr2brailleInsiderOahGroup::~msr2brailleInsiderOahGroup ()
 void msr2brailleInsiderOahGroup::initializeXml2brailleInsiderOahGroup ()
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
     std::stringstream ss;
 
     ss <<
@@ -796,7 +796,7 @@ S_msr2brailleInsiderOahGroup createGlobalMrailleGenerationOahGroup (
   const std::string& handlerHeader)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<

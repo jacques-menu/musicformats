@@ -2026,7 +2026,7 @@ class EXP oahHandler : public oahFindableElement
                             oahOptionsAndArguments& optionsAndArguments);
 
 //     void                  analyzeOptionsAndArguments ( // UNUSED JMI v0.9.66
-//                             std::string                   serviceName,
+//                             std::string              serviceName,
 //                             const oahOptionsAndArguments& optionsAndArguments);
 
     size_t                getMaximumVariableNameWidth () const

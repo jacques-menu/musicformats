@@ -81,7 +81,7 @@ void msr2lpsrScoreOutputKindAtom::applyAtomWithValue (
   std::ostream&      os)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -98,7 +98,7 @@ void msr2lpsrScoreOutputKindAtom::applyAtomWithValue (
   // is it in the score output kinds map?
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -149,7 +149,7 @@ void msr2lpsrScoreOutputKindAtom::applyAtomWithValue (
 void msr2lpsrScoreOutputKindAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -168,7 +168,7 @@ void msr2lpsrScoreOutputKindAtom::acceptIn (basevisitor* v)
         S_msr2lpsrScoreOutputKindAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -187,7 +187,7 @@ void msr2lpsrScoreOutputKindAtom::acceptIn (basevisitor* v)
 void msr2lpsrScoreOutputKindAtom::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -206,7 +206,7 @@ void msr2lpsrScoreOutputKindAtom::acceptOut (basevisitor* v)
         S_msr2lpsrScoreOutputKindAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -225,7 +225,7 @@ void msr2lpsrScoreOutputKindAtom::acceptOut (basevisitor* v)
 void msr2lpsrScoreOutputKindAtom::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -492,7 +492,7 @@ void msr2lpsrOahGroup::checkGroupOptionsConsistency ()
 void msr2lpsrOahGroup::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -511,7 +511,7 @@ void msr2lpsrOahGroup::acceptIn (basevisitor* v)
         S_msr2lpsrOahGroup elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -530,7 +530,7 @@ void msr2lpsrOahGroup::acceptIn (basevisitor* v)
 void msr2lpsrOahGroup::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -549,7 +549,7 @@ void msr2lpsrOahGroup::acceptOut (basevisitor* v)
         S_msr2lpsrOahGroup elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -568,7 +568,7 @@ void msr2lpsrOahGroup::acceptOut (basevisitor* v)
 void msr2lpsrOahGroup::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -643,7 +643,7 @@ std::ostream& operator << (std::ostream& os, const S_msr2lpsrOahGroup& elt)
 S_msr2lpsrOahGroup createGlobalMsr2lpsrOahGroup ()
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<

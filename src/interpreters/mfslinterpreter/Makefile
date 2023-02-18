@@ -4,7 +4,7 @@
 
 #  This Source Code Form is subject to the terms of the Mozilla Public
 #  License, v. 2.0. If a copy of the MPL was not distributed with this
-#  file, you can obtain one at http://mozilla.org/MPL/2.0/.
+#  file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 #  https://github.com/jacques-menu/musicformats
 #
@@ -43,7 +43,7 @@ mfslScanner.cpp : $(MAKEFILE) mfslScanner.ll
 
 
 mfslParser.h mfslParser.cpp : $(MAKEFILE) mfslParser.yy
-  $(BISON) --defines=mfslParser.h -o mfslParser.cpp mfslParser.yy
+	$(BISON) --defines=mfslParser.h -o mfslParser.cpp mfslParser.yy
 
 
 # clean

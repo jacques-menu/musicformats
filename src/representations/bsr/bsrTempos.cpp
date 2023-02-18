@@ -117,8 +117,8 @@ S_bsrCellsList bsrTempo::buildCellsList () const
             tempoWordsList =
               fMsrTempo->getTempoWordsList ();
 
-          msrDottedDuration
-            tempoDottedDuration =
+          msrDottedNotesDuration
+            tempoDottedNotesDuration =
               fMsrTempo->getTempoBeatUnit ();
 
           // handle tempo words
@@ -140,58 +140,58 @@ S_bsrCellsList bsrTempo::buildCellsList () const
           }
 
           // handle tempo duration and continuation dots number
-          msrDurationKind
-            durationKind =
-              tempoDottedDuration.getDurationKind ();
+          msrNotesDurationKind
+            notesNotesDurationKind =
+              tempoDottedNotesDuration.getNotesDurationKind ();
           int
             dotsNumber =
-              tempoDottedDuration.getDotsNumber ();
+              tempoDottedNotesDuration.getDotsNumber ();
 
           // determine the note sign
           bsrNoteValueKind
             noteValueKind = bsrNoteValueKind::kNoteValueNone;
 
-          switch (durationKind) {
-            case msrDurationKind::kDuration_UNKNOWN:
+          switch (notesNotesDurationKind) {
+            case msrNotesDurationKind::kNotesDuration_UNKNOWN:
               break;
 
-            case msrDurationKind::kDuration1024th: // JMI
+            case msrNotesDurationKind::kNotesDuration1024th: // JMI
               break;
-            case msrDurationKind::kDuration512th: // JMI
+            case msrNotesDurationKind::kNotesDuration512th: // JMI
               break;
-            case msrDurationKind::kDuration256th:
+            case msrNotesDurationKind::kNotesDuration256th:
               noteValueKind = bsrNoteValueKind::kNoteValueC256th;
               break;
-            case msrDurationKind::kDuration128th:
+            case msrNotesDurationKind::kNotesDuration128th:
               noteValueKind = bsrNoteValueKind::kNoteValueC128th;
               break;
-            case msrDurationKind::kDuration64th:
+            case msrNotesDurationKind::kNotesDuration64th:
               noteValueKind = bsrNoteValueKind::kNoteValueC64th;
               break;
-            case msrDurationKind::kDuration32nd:
+            case msrNotesDurationKind::kNotesDuration32nd:
               noteValueKind = bsrNoteValueKind::kNoteValueC32nd;
               break;
-            case msrDurationKind::kDuration16th:
+            case msrNotesDurationKind::kNotesDuration16th:
               noteValueKind = bsrNoteValueKind::kNoteValueC16th;
               break;
-            case msrDurationKind::kDurationEighth:
+            case msrNotesDurationKind::kNotesDurationEighth:
               noteValueKind = bsrNoteValueKind::kNoteValueC8th;
               break;
-            case msrDurationKind::kDurationQuarter:
+            case msrNotesDurationKind::kNotesDurationQuarter:
               noteValueKind = bsrNoteValueKind::kNoteValueCQuarter;
               break;
-            case msrDurationKind::kDurationHalf:
+            case msrNotesDurationKind::kNotesDurationHalf:
               noteValueKind = bsrNoteValueKind::kNoteValueCHalf;
               break;
-            case msrDurationKind::kDurationWhole:
+            case msrNotesDurationKind::kNotesDurationWhole:
               noteValueKind = bsrNoteValueKind::kNoteValueCWhole;
               break;
-            case msrDurationKind::kDurationBreve:
+            case msrNotesDurationKind::kNotesDurationBreve:
               noteValueKind = bsrNoteValueKind::kNoteValueCBreve;
               break;
-            case msrDurationKind::kDurationLonga:
+            case msrNotesDurationKind::kNotesDurationLonga:
               break;
-            case msrDurationKind::kDurationMaxima:
+            case msrNotesDurationKind::kNotesDurationMaxima:
               break;
           } // switch
 
@@ -240,10 +240,10 @@ S_bsrCellsList bsrTempo::buildCellsList () const
           size_t smSize = sm.size ();
 
 #ifdef MF_TRACE_IS_ENABLED
-          if (gGlobalTraceOahGroup->getTraceTempos () && ! gEarlyOptions.getEarlyQuietOption ()) {
+          if (gTraceOahGroup->getTraceTempos () && ! gEarlyOptions.getEarlyQuietOption ()) {
             gLog <<
               "There are " << smSize << " matches" <<
-              " for Rational string '" << tempoPerMinuteString <<
+              " for mfRational string '" << tempoPerMinuteString <<
               "' with std::regex '" << regularExpression <<
               "'" <<
               std::endl;
@@ -284,10 +284,10 @@ S_bsrCellsList bsrTempo::buildCellsList () const
             size_t smSize = sm.size ();
 
 #ifdef MF_TRACE_IS_ENABLED
-            if (gGlobalTraceOahGroup->getTraceTempos () && ! gEarlyOptions.getEarlyQuietOption ()) {
+            if (gTraceOahGroup->getTraceTempos () && ! gEarlyOptions.getEarlyQuietOption ()) {
               gLog <<
                 "There are " << smSize << " matches" <<
-                " for Rational string '" << tempoPerMinuteString <<
+                " for mfRational string '" << tempoPerMinuteString <<
                 "' with std::regex '" << regularExpression <<
                 "'" <<
                 std::endl;
@@ -497,7 +497,7 @@ std::string bsrTempo::asDebugString () const
       break;
     case msrTempoKBeatUnitsKind::kTempoBeatUnitsPerMinute:
       {
-        msrDottedDuration
+        msrDottedNotesDuration
           tempoBeatUnit =
             fMsrTempo->getTempoBeatUnit ();
 

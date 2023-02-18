@@ -7,7 +7,7 @@
 
 Debugging \mf\ can be quite time-consuming. The trace options available have been designed to provide fine-grained trace information to help locate issues.
 
-\Function{catchSignals} at the beginning of the \functionName {main} function can be commented out in order to run a tool under a debugger.
+\Function{catchSignals} at the beginning of the \functionName {main} function can be commented out in order to run a service under a debugger.
 
 File \mflib{mfStaticSettings.h} contains:
 \begin{lstlisting}[language=CPlusPlus]
@@ -158,8 +158,8 @@ Current executable set to 'xml2ly' (x86_64).
 (lldb) settings set -- target.run-args  "fullbarrests/FullBarRestWithoutBarLine.xml" "-display-lpsr" "-aofn"
 (lldb) r
 Process 28676 launched: '/Users/jacquesmenu/musicformats-git-dev/build/bin/xml2ly' (x86_64)
-        The measure with ordinal number 3 is now registered with a duration of 1/1 in part Part_POne (partID "P1", partName "Soprano"), fPartMeasuresWholeNotesDurationsVector.size () = 2
-        The measure with ordinal number 4 is now registered with a duration of 1/1 in part Part_POne (partID "P1", partName "Soprano"), fPartMeasuresWholeNotesDurationsVector.size () = 2
+        The measure with ordinal number 3 is now registered with a duration of 1/1 in part Part_POne (partID "P1", partName "Soprano"), fPartMeasuresWholeNotessVector.size () = 2
+        The measure with ordinal number 4 is now registered with a duration of 1/1 in part Part_POne (partID "P1", partName "Soprano"), fPartMeasuresWholeNotessVector.size () = 2
 %--------------------------------------------------------------
   Pass (ptional): displaying the LPSR as text
 %--------------------------------------------------------------

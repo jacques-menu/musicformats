@@ -66,7 +66,7 @@ msdl2guidoRegularHandler::msdl2guidoRegularHandler (
   createRegularHandlerGroups ();
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOahDetails ()) {
+  if (gEarlyOptions.getTraceEarlyOptionsDetails ()) {
     // print the options handler initial state
 		std::stringstream ss;
 
@@ -94,7 +94,7 @@ msdl2guidoRegularHandler::~msdl2guidoRegularHandler ()
 void msdl2guidoRegularHandler::createRegularHandlerGroups ()
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -162,7 +162,7 @@ void msdl2guidoRegularHandler::createRegularHandlerGroups ()
   createOutputRegularGroup ();
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1235,7 +1235,7 @@ void msdl2guidoRegularHandler::createOutputRegularGroup ()
 void msdl2guidoRegularHandler::checkOptionsAndArguments () const
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<

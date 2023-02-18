@@ -95,7 +95,7 @@ msrScore::~msrScore ()
 S_msrScore msrScore::createScoreNewbornClone ()
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceScores ()) {
+  if (gTraceOahGroup->getTraceScores ()) {
 		std::stringstream ss;
 
     ss <<
@@ -192,7 +192,7 @@ void msrScore::appendCreditToScore (
   const S_msrCredit& credit)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceCredits ()) {
+  if (gTraceOahGroup->getTraceCredits ()) {
 		std::stringstream ss;
 
     ss <<
@@ -217,7 +217,7 @@ S_msrPart msrScore::fetchPartFromScoreByItsPartID (
   S_msrPart result;
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTracePartGroupsDetails ()) {
+  if (gTraceOahGroup->getTracePartGroupsDetails ()) {
 		std::stringstream ss;
 
     ss <<

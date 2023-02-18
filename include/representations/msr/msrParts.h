@@ -152,9 +152,9 @@ class EXP msrPart : public msrPartGroupElement
     const size_t          getPartNumberOfMeasures () const
                               { return fPartNumberOfMeasures; }
 
-    const std::vector<Rational>&
-                          getPartMeasuresWholeNotesDurationsVector () const
-                              { return fPartMeasuresWholeNotesDurationsVector; }
+    const std::vector<msrWholeNotes>&
+                          getPartMeasuresWholeNotessVector () const
+                              { return fPartMeasuresWholeNotessVector; }
 
     // instrument name
 
@@ -213,29 +213,29 @@ class EXP msrPart : public msrPartGroupElement
                           getPartStaveNumbersToStavesMap () const
                               { return fPartStaveNumbersToStavesMap; }
 
-    // staff measure position
+    // part measure position
 
     void                  setPartMeasurePosition (
                             int             inputLineNumber,
-                            const Rational& measurePosition);
+                            const msrWholeNotes& measurePosition);
 
     void                  incrementPartMeasurePosition (
                             int             inputLineNumber,
-                            const Rational& duration);
+                            const msrWholeNotes& wholeNotes);
     void                  decrementPartMeasurePosition (
                             int             inputLineNumber,
-                            const Rational& duration);
+                            const msrWholeNotes& wholeNotes);
 
-    Rational              getPartMeasurePosition () const
+    msrWholeNotes          getPartMeasurePosition () const
                               { return fPartMeasurePosition; }
 
     // part shortest note
 
-    void                  setPartShortestNoteDuration (
-                            const Rational& duration);
+    void                  setPartShortestNoteWholeNotes (
+                            const msrWholeNotes& wholeNotes);
 
-    Rational              getPartShortestNoteDuration () const
-                              { return fPartShortestNoteDuration; }
+    msrWholeNotes          getPartShortestNoteWholeNotes () const
+                              { return fPartShortestNoteWholeNotes; }
 
     void                  setPartShortestNoteTupletFactor (
                             const msrTupletFactor& noteTupletFactor);
@@ -269,14 +269,14 @@ class EXP msrPart : public msrPartGroupElement
 
     // whole notes durations
 
-    Rational              fetchPartMeasuresWholeNotesDurationsVectorAt (
+    msrWholeNotes          fetchPartMeasuresWholeNotessVectorAt (
                             int inputLineNumber,
                             int indexValue) const;
 
-    void                  registerOrdinalMeasureNumberWholeNotesDuration (
+    void                  registerOrdinalMeasureNumberWholeNotes (
                             int             inputLineNumber,
                             int             measureOrdinalNumber,
-                            const Rational& wholeNotesDuration);
+                            const msrWholeNotes& wholeNotes);
 
     // path shortest note
 
@@ -338,7 +338,7 @@ class EXP msrPart : public msrPartGroupElement
 
     void                  insertHiddenMeasureAndBarLineInPartClone (
                             int             inputLineNumber,
-                            const Rational& measurePosition);
+                            const msrWholeNotes& measurePosition);
 
     // breaks
 
@@ -489,7 +489,7 @@ class EXP msrPart : public msrPartGroupElement
 
     void                  handleBackupInPart (
                             int             inputLineNumber,
-                            const Rational& backupStepLength);
+                            const msrWholeNotes& backupStepLength);
 
   public:
 
@@ -508,7 +508,7 @@ class EXP msrPart : public msrPartGroupElement
 
     std::string           asString () const override;
 
-    void                  printPartMeasuresWholeNotesDurationsVector (
+    void                  printPartMeasuresWholeNotessVector (
                             std::ostream& os,
                             int           fieldWidth) const;
 
@@ -583,7 +583,8 @@ class EXP msrPart : public msrPartGroupElement
 
     size_t                fPartNumberOfMeasures;
 
-    std::vector<Rational> fPartMeasuresWholeNotesDurationsVector; // SUPERFLOUS ??? JMI v0.9.66
+    std::vector<msrWholeNotes>
+    										  fPartMeasuresWholeNotessVector; // SUPERFLOUS ??? JMI v0.9.66
 
     // clef, key, time signature
 
@@ -595,10 +596,10 @@ class EXP msrPart : public msrPartGroupElement
 
     // part shortest note
 
-    // fPartShortestNoteDuration and fPartShortestNoteTupletFactor
+    // fPartShortestNoteWholeNotes and fPartShortestNoteTupletFactor
     // are used to compute a number of divisions per quarter note
     // if needed, such as when generating MusicXML from MSR
-    Rational              fPartShortestNoteDuration;
+    msrWholeNotes          fPartShortestNoteWholeNotes;
     msrTupletFactor       fPartShortestNoteTupletFactor;
 
     // transposition
@@ -704,7 +705,7 @@ class EXP msrPart : public msrPartGroupElement
 
     // measure position
 
-    Rational              fPartMeasurePosition;
+    msrWholeNotes          fPartMeasurePosition;
 };
 typedef SMARTP<msrPart> S_msrPart;
 EXP std::ostream& operator << (std::ostream& os, const S_msrPart& elt);

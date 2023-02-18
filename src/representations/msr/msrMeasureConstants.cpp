@@ -11,13 +11,14 @@
 
 #include "msrMeasureConstants.h"
 
+
 namespace MusicFormats
 {
 
 //______________________________________________________________________________
-const std::string K_MEASURE_NUMBER_UNKNOWN = "K_MEASURE_NUMBER_UNKNOWN";
+const std::string  K_MEASURE_NUMBER_UNKNOWN = "K_MEASURE_NUMBER_UNKNOWN";
 
-const Rational    K_WHOLE_NOTES_UNKNOWN (-444444, 1);
+const msrWholeNotes K_MEASURE_POSITION_UNKNOWN (-95, 1);
 
 //______________________________________________________________________________
 // hidden global null measure variable

@@ -1,23 +1,23 @@
 /*
   MusicFormats Library
-  Copyright (C) Jacques Menu 2016-2023
+  Copyright (C) Jacques Menu 2016-2022
 
   This Source Code Form is subject to the terms of the Mozilla Public
   License, v. 2.0. If a copy of the MPL was not distributed with this
-  file, you can obtain one at http://mozilla.org/MPL/2.0/.
+  file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
   https://github.com/jacques-menu/musicformats
 */
 
-#include <iomanip>      // std::setw, std::setprecision, ...
-
-// libmusicxml2
-#include "visitor.h"
+#include <iomanip>      // setw, setprecision, ...
 
 #include "mfStaticSettings.h"
 
 #include "mfServices.h"
 #include "mfStringsHandling.h"
+
+// early options
+#include "oahEarlyOptions.h"
 
 // OAH
 #include "oahOah.h"
@@ -25,21 +25,18 @@
 #include "oahDisplayOah.h"
 
 // WAE
+#include "waeHandlers.h"
 #include "oahWae.h"
-
-// early options
-#include "oahEarlyOptions.h"
 
 // components
 #include "ischemeInterpreterComponent.h"
-
-// WAE
-#include "waeHandlers.h"
 
 #include "ischemeInterpreterInterface.h"
 
 #include "ischemeInterpreterInsiderHandler.h"
 
+
+using namespace std;
 
 namespace MusicFormats
 {
@@ -55,6 +52,7 @@ S_ischemeInterpreterInsiderHandler ischemeInterpreterInsiderHandler::create (
       serviceName,
       handlerHeader);
   assert (o != nullptr);
+
   return o;
 }
 
@@ -75,19 +73,14 @@ R"(
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getEarlyTraceOah ()) {
-		std::stringstream ss;
-
-    ss <<
+    gLog <<
       "Initializing \"" <<
       fHandlerHeader <<
       "\" regular options handler" <<
-      std::endl;
-
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
+      endl;
   }
 #endif // MF_TRACE_IS_ENABLED
+
 
   // initialize the history
   initializeHandlerMultiComponent ();
@@ -112,14 +105,14 @@ void ischemeInterpreterInsiderHandler::initializeHandlerMultiComponent ()
 
 std::string ischemeInterpreterInsiderHandler::usageInformation ()
 {
-  std::stringstream ss;
+  stringstream s;
 
-  ss <<
+  s <<
 R"(Usage: ischeme [option]*
 )" <<
-    std::endl;
+    endl;
 
-  return ss.str ();
+  return s.str ();
 }
 
 std::string ischemeInterpreterInsiderHandler::handlerServiceAboutInformation () const
@@ -134,8 +127,8 @@ std::string ischemeInterpreterInsiderHandler::ischemeInterpreterAboutInformation
 R"(What ischeme does:
 
     This interpreter reads text input containing
-    a tool name, an input source name, keywords and options,
-    and launches the specified tool
+    a service name, an input source name, keywords and options,
+    and launches the specified service
     with these options applied to the input source name.
 
     The input can come from a file or from standard input,
@@ -152,17 +145,11 @@ void ischemeInterpreterInsiderHandler::createTheIschemeInterpreterPrefixes ()
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getEarlyTraceOah ()) {
-		std::stringstream ss;
-
-    ss <<
+    gLog <<
       "Creating the ischeme prefixes in \"" <<
       fHandlerHeader <<
       "\"" <<
-      std::endl;
-
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
+      endl;
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -175,17 +162,11 @@ void ischemeInterpreterInsiderHandler::createTheIschemeInterpreterOptionGroups (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getEarlyTraceOah ()) {
-		std::stringstream ss;
-
-    ss <<
+    gLog <<
       "Creating the \"" <<
       fHandlerHeader <<
       "\" insider option groups" <<
-      std::endl;
-
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
+      endl;
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -202,7 +183,7 @@ void ischemeInterpreterInsiderHandler::createTheIschemeInterpreterOptionGroups (
     createGlobalWaeOahGroup ());
 
 #ifdef MF_TRACE_IS_ENABLED
-  // create the trace OAH group
+  // create the tracing OAH group
   appendGroupToHandler (
     createGlobalTraceOahGroup (
       this));
@@ -215,7 +196,7 @@ void ischemeInterpreterInsiderHandler::createTheIschemeInterpreterOptionGroups (
   // initialize the library
   // ------------------------------------------------------
 
-// JMI
+  initializeWAE ();
 
   // initialize options handling, phase 2
   // ------------------------------------------------------
@@ -234,17 +215,11 @@ void ischemeInterpreterInsiderHandler::checkOptionsAndArguments () const
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getEarlyTraceOah ()) {
-		std::stringstream ss;
-
-    ss <<
+    gLog <<
       "checking options and arguments from argc/argv in \"" <<
       fHandlerHeader <<
       "\"" <<
-      std::endl;
-
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
+      endl;
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -268,7 +243,7 @@ void ischemeInterpreterInsiderHandler::checkHandlerOptionsConsistency ()
 void ischemeInterpreterInsiderHandler::enforceHandlerQuietness ()
 {
 #ifdef MF_TRACE_IS_ENABLED
-  gGlobalTraceOahGroup->
+  gTraceOahGroup->
     enforceGroupQuietness ();
 #endif // MF_TRACE_IS_ENABLED
 
@@ -286,33 +261,33 @@ void ischemeInterpreterInsiderOahGroup::checkGroupOptionsConsistency ()
 /* JMI
 
   if (inputSourceName.size () > 0 && inputSourceName == outputFileName) {
-    std::stringstream ss;
+    stringstream s;
 
-    ss <<
+    s <<
       "\"" << inputSourceName << "\" is both the input and output file name";
 
-    oahError (ss.str ());
+    oahError (s.str ());
   }
 
 
 
 
   if (! fOutputFileName.size ()) {
-    std::stringstream ss;
+    stringstream s;
 
-    ss <<
-      "ischemeInterpreterInsiderOahGroup: a MusicXML output file name must be selected with '-o, -output-file-name";
+    s <<
+      "ischemeInterpreterInsiderOahGroup: a MusicXML output file name must be chosen with '-o, -output-file-name";
 
-    oahError (ss.str ());
+    oahError (s.str ());
   }
 
   else if (fOutputFileName == gServiceRunData->getInputSourceName ()) {
-    std::stringstream ss;
+    stringstream s;
 
-    ss <<
+    s <<
       "\"" << fOutputFileName << "\" is both the input and output file name";
 
-    oahError (ss.str ());
+    oahError (s.str ());
   }
   */
 }
@@ -321,16 +296,10 @@ void ischemeInterpreterInsiderOahGroup::checkGroupOptionsConsistency ()
 void ischemeInterpreterInsiderOahGroup::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
-
-    ss <<
+  if (gOahOahGroup->getTraceOahVisitors ()) {
+    gLog <<
       ".\\\" ==> ischemeInterpreterInsiderOahGroup::acceptIn ()" <<
-      std::endl;
-
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
+      endl;
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -340,16 +309,10 @@ void ischemeInterpreterInsiderOahGroup::acceptIn (basevisitor* v)
         S_ischemeInterpreterInsiderOahGroup elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
-          std::stringstream ss;
-
-          ss <<
+        if (gOahOahGroup->getTraceOahVisitors ()) {
+          gLog <<
             ".\\\" ==> Launching ischemeInterpreterInsiderOahGroup::visitStart ()" <<
-            std::endl;
-
-          gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
-            ss.str ());
+            endl;
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
@@ -359,16 +322,10 @@ void ischemeInterpreterInsiderOahGroup::acceptIn (basevisitor* v)
 void ischemeInterpreterInsiderOahGroup::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
-
-    ss <<
+  if (gOahOahGroup->getTraceOahVisitors ()) {
+    gLog <<
       ".\\\" ==> ischemeInterpreterInsiderOahGroup::acceptOut ()" <<
-      std::endl;
-
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
+      endl;
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -378,16 +335,10 @@ void ischemeInterpreterInsiderOahGroup::acceptOut (basevisitor* v)
         S_ischemeInterpreterInsiderOahGroup elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
-          std::stringstream ss;
-
-          ss <<
+        if (gOahOahGroup->getTraceOahVisitors ()) {
+          gLog <<
             ".\\\" ==> Launching ischemeInterpreterInsiderOahGroup::visitEnd ()" <<
-            std::endl;
-
-          gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
-            ss.str ());
+            endl;
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
@@ -397,16 +348,10 @@ void ischemeInterpreterInsiderOahGroup::acceptOut (basevisitor* v)
 void ischemeInterpreterInsiderOahGroup::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
-
-    ss <<
+  if (gOahOahGroup->getTraceOahVisitors ()) {
+    gLog <<
       ".\\\" ==> ischemeInterpreterInsiderOahGroup::browseData ()" <<
-      std::endl;
-
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
+      endl;
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -420,27 +365,27 @@ void ischemeInterpreterInsiderHandler::print (std::ostream& os) const
 
   os <<
     "ischemeInterpreterInsiderHandler:" <<
-    std::endl;
+    endl;
 
   ++gIndenter;
 
   printHandlerEssentials (
     os, fieldWidth);
-  os << std::endl;
+  os << endl;
 
   os <<
     "Options groups (" <<
     mfSingularOrPlural (
       fHandlerGroupsList.size (), "element",  "elements") <<
     "):" <<
-    std::endl;
+    endl;
 
   if (fHandlerGroupsList.size ()) {
-    os << std::endl;
+    os << endl;
 
     ++gIndenter;
 
-    std::list<S_oahGroup>::const_iterator
+    list<S_oahGroup>::const_iterator
       iBegin = fHandlerGroupsList.begin (),
       iEnd   = fHandlerGroupsList.end (),
       i      = iBegin;
@@ -449,7 +394,7 @@ void ischemeInterpreterInsiderHandler::print (std::ostream& os) const
       // print the element
       os << (*i);
       if (++i == iEnd) break;
-      os << std::endl;
+      os << endl;
     } // for
 
     --gIndenter;
@@ -457,16 +402,16 @@ void ischemeInterpreterInsiderHandler::print (std::ostream& os) const
 
   --gIndenter;
 
-  os << std::endl;
+  os << endl;
 }
 
-std::ostream& operator << (std::ostream& os, const S_ischemeInterpreterInsiderHandler& elt)
+std::ostream& operator<< (std::ostream& os, const S_ischemeInterpreterInsiderHandler& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "*** NONE ***" << endl;
   }
 
   return os;
@@ -479,6 +424,7 @@ S_ischemeInterpreterInsiderOahGroup ischemeInterpreterInsiderOahGroup::create ()
 {
   ischemeInterpreterInsiderOahGroup* o = new ischemeInterpreterInsiderOahGroup ();
   assert (o != nullptr);
+
   return o;
 }
 
@@ -500,17 +446,11 @@ void ischemeInterpreterInsiderOahGroup::initializeIschemeInterpreterInsiderOahGr
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getEarlyTraceOah ()) {
-    std::stringstream ss;
-
-    ss <<
+    gLog << left <<
       "Initializing \"" <<
       fGroupHeader <<
       "\" group" <<
-      std::endl;
-
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
+      endl;
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -522,7 +462,7 @@ void ischemeInterpreterInsiderOahGroup::printIschemeInterpreterInsiderOahGroupVa
 {
   gLog <<
     "The ischeme options are:" <<
-    std::endl;
+    endl;
 
   ++gIndenter;
 
@@ -534,15 +474,9 @@ S_ischemeInterpreterInsiderOahGroup createGlobalIschemeInterpreterInsiderOahGrou
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getEarlyTraceOah ()) {
-		std::stringstream ss;
-
-    ss <<
+    gLog <<
       "Creating global ischeme insider OAH group" <<
-      std::endl;
-
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
+      endl;
   }
 #endif // MF_TRACE_IS_ENABLED
 

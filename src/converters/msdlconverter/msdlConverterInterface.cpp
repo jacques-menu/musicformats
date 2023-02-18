@@ -56,6 +56,7 @@
 
 #include "msdlConverterInterface.h"
 
+
 namespace MusicFormats
 {
 
@@ -292,7 +293,7 @@ namespace MusicFormats
 //           fetchOutputFileNameFromTheOptions ();
 //
 // #ifdef MF_TRACE_IS_ENABLED
-//     if (gEarlyOptions.getEarlyTraceOah ()) {
+//     if (gEarlyOptions.getTraceEarlyOptions ()) {
 //       err <<
 //         "xmlFile2lilypond() outputFileName = \"" <<
 //         outputFileName <<
@@ -303,7 +304,7 @@ namespace MusicFormats
 //
 //     if (! outputFileName.size ()) {
 // #ifdef MF_TRACE_IS_ENABLED
-//       if (gEarlyOptions.getEarlyTraceOah ()) {
+//       if (gEarlyOptions.getTraceEarlyOptions ()) {
 //         err <<
 //           "xmlFile2lilypond() output goes to standard output" <<
 //           std::endl;
@@ -339,7 +340,7 @@ namespace MusicFormats
 //
 //     else {
 // #ifdef MF_TRACE_IS_ENABLED
-//       if (gEarlyOptions.getEarlyTraceOah ()) {
+//       if (gEarlyOptions.getTraceEarlyOptions ()) {
 //         err <<
 //           "xmlFile2lilypond() output goes to file \"" <<
 //           outputFileName <<
@@ -441,7 +442,7 @@ namespace MusicFormats
 //
 //   else {
 // #ifdef MF_TRACE_IS_ENABLED
-//   if (gEarlyOptions.getEarlyTraceOah ()) {
+//   if (gEarlyOptions.getTraceEarlyOptions ()) {
 //   err <<
 //     "xmlFile2musicxml(), sxmlfile is NULL" <<
 //     std::endl;
@@ -469,7 +470,7 @@ namespace MusicFormats
 //   // print the options and arguments
 //   // ------------------------------------------------------
 // #ifdef MF_TRACE_IS_ENABLED
-//   if (gEarlyOptions.getEarlyTraceOah ()) {
+//   if (gEarlyOptions.getTraceEarlyOptions ()) {
 //     gLog <<
 //       handlerOptionsAndArguments;
 //   }
@@ -489,7 +490,7 @@ namespace MusicFormats
 //     gEarlyOptions.getEarlyInsiderOption ();
 //
 // #ifdef MF_TRACE_IS_ENABLED
-//   if (gEarlyOptions.getEarlyTraceOah ()) {
+//   if (gEarlyOptions.getTraceEarlyOptions ()) {
 //     gLog <<
 //       serviceName << " main()" <<
 //       ", insiderOption: " << insiderOption <<

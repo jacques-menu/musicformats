@@ -1,10 +1,10 @@
 /*
   MusicFormats Library
-  Copyright (C) Jacques Menu 2016-2023
+  Copyright (C) Jacques Menu 2016-2022
 
   This Source Code Form is subject to the terms of the Mozilla Public
   License, v. 2.0. If a copy of the MPL was not distributed with this
-  file, you can obtain one at http://mozilla.org/MPL/2.0/.
+  file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
   https://github.com/jacques-menu/musicformats
 */
@@ -112,7 +112,7 @@ class EXP mfslInterpreterInsiderHandler : public oahInsiderHandler
 
 };
 typedef SMARTP<mfslInterpreterInsiderHandler> S_mfslInterpreterInsiderHandler;
-EXP std::ostream& operator << (std::ostream& os, const S_mfslInterpreterInsiderHandler& elt);
+EXP std::ostream& operator<< (std::ostream& os, const S_mfslInterpreterInsiderHandler& elt);
 
 //______________________________________________________________________________
 class EXP mfslInterpreterInsiderOahGroup : public oahGroup
@@ -186,7 +186,7 @@ class EXP mfslInterpreterInsiderOahGroup : public oahGroup
     // ------------------------------------------------------
 };
 typedef SMARTP<mfslInterpreterInsiderOahGroup> S_mfslInterpreterInsiderOahGroup;
-EXP std::ostream& operator << (std::ostream& os, const S_mfslInterpreterInsiderOahGroup& elt);
+EXP std::ostream& operator<< (std::ostream& os, const S_mfslInterpreterInsiderOahGroup& elt);
 
 EXP extern S_mfslInterpreterInsiderOahGroup gGlobalMfslInterpreterInsiderOahGroup;
 

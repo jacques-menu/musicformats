@@ -19,16 +19,16 @@
 
 #include "mfBool.h"
 
+
 namespace MusicFormats
 {
 
-// Rational
 //______________________________________________________________________________
-class EXP Rational
+class EXP mfRational
 /*
-  a Rational is a Rational whose denominator is strictly positive
-   and always in rationalised form,
-   directly derived from libmusicxml2's Rational class
+  a mfRational is a rational number whose denominator is strictly positive
+   and which is in rationalised form at all times,
+   directly derived from libmusicxml2's mfRational class
 */
 {
   public:
@@ -36,15 +36,15 @@ class EXP Rational
     // constructors/destructor
     // ------------------------------------------------------
 
-                          Rational (
+                          mfRational (
                             long int num   = 0,
                             long int denom = 1);
 
-                          Rational (const Rational& rat);
+                          mfRational (const mfRational& rat);
 
-                          Rational (const std::string &theString);
+                          mfRational (const std::string &theString);
 
-    virtual               ~Rational ();
+    virtual               ~mfRational ();
 
 
   public:
@@ -72,44 +72,46 @@ class EXP Rational
 
     // arithmetic
 
-    Rational              inverse () const;
-    Rational              opposite () const;
+    mfRational              inverse () const;
+    mfRational              opposite () const;
 
-    Rational              operator + (const Rational &rat) const;
-    Rational              operator - (const Rational &rat) const;
+    mfRational              operator + (const mfRational &rat) const;
+    mfRational              operator - (const mfRational &rat) const;
     //! Useful for notes with dots.
-    Rational              operator * (const Rational &rat) const;
-    Rational              operator / (const Rational &rat) const;
+    mfRational              operator * (const mfRational &rat) const;
+    mfRational              operator / (const mfRational &rat) const;
     // (i.e. rat * 3/2 or rat * 7/4)
 
-    Rational              operator * (int num) const;
-    Rational              operator / (int num) const;
+    mfRational              operator * (int num) const;
+    mfRational              operator / (int num) const;
 
-    Rational&             operator += (const Rational &rat);
-    Rational&             operator -= (const Rational &rat);
+    mfRational&             operator += (const mfRational &rat);
+    mfRational&             operator -= (const mfRational &rat);
     //! Useful for notes with dots.
-    Rational&             operator *= (const Rational &rat);
-    Rational&             operator /= (const Rational &rat);
+    mfRational&             operator *= (const mfRational &rat);
+    mfRational&             operator /= (const mfRational &rat);
     // (i.e. rat * 3/2 or rat * 7/4)
 
-    Rational&             operator *= (long int num)
+    mfRational&             operator *= (long int num)
                               { fNumerator *= num; return *this; }
-    Rational&             operator /= (long int num)
+    mfRational&             operator /= (long int num)
                               { fDenominator *= num; return *this; }
+
+    // assignment
+
+    mfRational&             operator = (const mfRational& rat);
 
     // comparisons
 
-    Rational&             operator = (const Rational& rat);
-
-    Bool                  operator >  (const Rational &rat) const;
-    Bool                  operator >= (const Rational &rat) const
+    Bool                  operator >  (const mfRational &rat) const;
+    Bool                  operator >= (const mfRational &rat) const
                               {return !(*this < rat);}
-    Bool                  operator <  (const Rational &rat) const;
-    Bool                  operator <= (const Rational &rat) const
+    Bool                  operator <  (const mfRational &rat) const;
+    Bool                  operator <= (const mfRational &rat) const
                               {return !(*this > rat);}
 
-    Bool                  operator == (const Rational &rat) const;
-    Bool                  operator != (const Rational &rat) const
+    Bool                  operator == (const mfRational &rat) const;
+    Bool                  operator != (const mfRational &rat) const
                               {return !(*this == rat);}
 
     Bool                  operator >  (double num) const;
@@ -146,7 +148,7 @@ class EXP Rational
     // private methods
     // ------------------------------------------------------
 
-    // 'rationalise' Rational values
+    // 'rationalise' mfRational values
     void                  rationalise ();
 
   private:
@@ -160,7 +162,7 @@ class EXP Rational
     // Used by rationalise()
     long int gcd(long int a, long int b);
 };
-EXP std::ostream& operator << (std::ostream& os, const Rational& rat);
+EXP std::ostream& operator << (std::ostream& os, const mfRational& rat);
 
 
 EXP void testRational ();

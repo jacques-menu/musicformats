@@ -24,6 +24,7 @@
 #include "bsrTempos.h"
 #include "bsrTimeSignatures.h"
 
+
 namespace MusicFormats
 {
 

@@ -81,7 +81,7 @@ Usage: msdl2braille [option]* [MSDLFile] [option]*
 )")
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -147,7 +147,7 @@ R"(What msdl2braille does:
 void msdl2brailleInsiderHandler::createTheMsdl2brlPrefixes ()
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -168,7 +168,7 @@ void msdl2brailleInsiderHandler::createTheMsdl2brlOptionGroups (
   const std::string& serviceName)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -250,7 +250,7 @@ void msdl2brailleInsiderHandler::createTheMsdl2brlOptionGroups (
     createGlobalHarmoniesExtraOahGroup ());
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOahDetails ()) {
+  if (gEarlyOptions.getTraceEarlyOptionsDetails ()) {
     // print the options handler initial state
 		std::stringstream ss;
 
@@ -274,7 +274,7 @@ void msdl2brailleInsiderHandler::createTheMsdl2brlOptionGroups (
 void msdl2brailleInsiderHandler::checkOptionsAndArguments () const
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -306,7 +306,7 @@ void msdl2brailleInsiderHandler::checkHandlerOptionsConsistency ()
 void msdl2brailleInsiderHandler::enforceHandlerQuietness ()
 {
 #ifdef MF_TRACE_IS_ENABLED
-  gGlobalTraceOahGroup->
+  gTraceOahGroup->
     enforceGroupQuietness ();
 #endif // MF_TRACE_IS_ENABLED
 
@@ -341,7 +341,7 @@ void msdl2brailleInsiderOahGroup::checkGroupOptionsConsistency ()
 void msdl2brailleInsiderOahGroup::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -360,7 +360,7 @@ void msdl2brailleInsiderOahGroup::acceptIn (basevisitor* v)
         S_msdl2brailleInsiderOahGroup elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -379,7 +379,7 @@ void msdl2brailleInsiderOahGroup::acceptIn (basevisitor* v)
 void msdl2brailleInsiderOahGroup::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -398,7 +398,7 @@ void msdl2brailleInsiderOahGroup::acceptOut (basevisitor* v)
         S_msdl2brailleInsiderOahGroup elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -417,7 +417,7 @@ void msdl2brailleInsiderOahGroup::acceptOut (basevisitor* v)
 void msdl2brailleInsiderOahGroup::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -525,7 +525,7 @@ msdl2brailleInsiderOahGroup::~msdl2brailleInsiderOahGroup ()
 void msdl2brailleInsiderOahGroup::initializeMsdl2brlInsiderOahGroup ()
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
   gLog << std::left <<
     "Initializing \"" <<
     fGroupHeader <<
@@ -543,7 +543,7 @@ void msdl2brailleInsiderOahGroup::initializeMsdl2brlInsiderOahGroup ()
 void msdl2brailleInsiderOahGroup::createInsiderQuitSubGroup ()
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
   gLog << std::left <<
     "Creating insider quit subgroup in \"" <<
     fGroupHeader <<
@@ -661,7 +661,7 @@ S_msdl2brailleInsiderOahGroup createGlobalMsdl2brlOahGroup (
   const std::string& handlerHeader)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<

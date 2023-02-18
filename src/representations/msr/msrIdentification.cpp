@@ -53,7 +53,7 @@ void msrIdentification::setIdentificationWorkNumber (
   const std::string& val)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceIdentification ()) {
+  if (gTraceOahGroup->getTraceIdentification ()) {
 		std::stringstream ss;
 
     ss <<
@@ -74,7 +74,7 @@ void msrIdentification::setIdentificationWorkCreditTypeTitle (
   const std::string& val)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceIdentification ()) {
+  if (gTraceOahGroup->getTraceIdentification ()) {
 		std::stringstream ss;
 
     ss <<
@@ -95,7 +95,7 @@ void msrIdentification::setIdentificationOpus (
   const std::string& val)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceIdentification ()) {
+  if (gTraceOahGroup->getTraceIdentification ()) {
 		std::stringstream ss;
 
     ss <<
@@ -116,7 +116,7 @@ void msrIdentification::setIdentificationMovementNumber (
   const std::string& val)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceIdentification ()) {
+  if (gTraceOahGroup->getTraceIdentification ()) {
 		std::stringstream ss;
 
     ss <<
@@ -137,7 +137,7 @@ void msrIdentification::setIdentificationMovementTitle (
   const std::string& val)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceIdentification ()) {
+  if (gTraceOahGroup->getTraceIdentification ()) {
 		std::stringstream ss;
 
     ss <<
@@ -158,7 +158,7 @@ void msrIdentification::setIdentificationEncodingDate (
   const std::string& val)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceIdentification ()) {
+  if (gTraceOahGroup->getTraceIdentification ()) {
 		std::stringstream ss;
 
     ss <<
@@ -179,7 +179,7 @@ void msrIdentification::setIdentificationMiscellaneousField (
   const std::string& val)
 {
  #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceIdentification ()) {
+  if (gTraceOahGroup->getTraceIdentification ()) {
 		std::stringstream ss;
 
     ss <<
@@ -200,7 +200,7 @@ void msrIdentification::setIdentificationScoreInstrument (
   const std::string& val)
 {
  #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceIdentification ()) {
+  if (gTraceOahGroup->getTraceIdentification ()) {
 		std::stringstream ss;
 
     ss <<
@@ -221,7 +221,7 @@ void msrIdentification::appendComposer (
   const std::string& value)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceIdentification ()) {
+  if (gTraceOahGroup->getTraceIdentification ()) {
 		std::stringstream ss;
 
     ss <<
@@ -242,7 +242,7 @@ void msrIdentification::appendLyricist (
   const std::string& value)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceIdentification ()) {
+  if (gTraceOahGroup->getTraceIdentification ()) {
 		std::stringstream ss;
 
     ss <<
@@ -263,7 +263,7 @@ void msrIdentification::appendArranger (
   const std::string& value)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceIdentification ()) {
+  if (gTraceOahGroup->getTraceIdentification ()) {
 		std::stringstream ss;
 
     ss <<
@@ -284,7 +284,7 @@ void msrIdentification::appendPoet (
   const std::string& value)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceIdentification ()) {
+  if (gTraceOahGroup->getTraceIdentification ()) {
 		std::stringstream ss;
 
     ss <<
@@ -305,7 +305,7 @@ void msrIdentification::appendTranslator (
   const std::string& value)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceIdentification ()) {
+  if (gTraceOahGroup->getTraceIdentification ()) {
 		std::stringstream ss;
 
     ss <<
@@ -326,7 +326,7 @@ void msrIdentification::appendArtist (
   const std::string& value)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceIdentification ()) {
+  if (gTraceOahGroup->getTraceIdentification ()) {
 		std::stringstream ss;
 
     ss <<
@@ -347,7 +347,7 @@ void msrIdentification::appendSoftware (
   const std::string& value)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceIdentification ()) {
+  if (gTraceOahGroup->getTraceIdentification ()) {
 		std::stringstream ss;
 
     ss <<
@@ -368,7 +368,7 @@ void msrIdentification::appendRight (
   const std::string& value)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceIdentification ()) {
+  if (gTraceOahGroup->getTraceIdentification ()) {
 		std::stringstream ss;
 
     ss <<
@@ -389,7 +389,7 @@ void msrIdentification::appendSource (
   const std::string& value)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceIdentification ()) {
+  if (gTraceOahGroup->getTraceIdentification ()) {
 		std::stringstream ss;
 
     ss <<
@@ -410,7 +410,7 @@ void msrIdentification::appendRelation (
   const std::string& value)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceIdentification ()) {
+  if (gTraceOahGroup->getTraceIdentification ()) {
 		std::stringstream ss;
 
     ss <<

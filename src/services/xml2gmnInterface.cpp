@@ -103,7 +103,7 @@ EXP int xml2gmn (
     gEarlyOptions.getEarlyInsiderOption ();
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -211,7 +211,7 @@ EXP int xml2gmn (
         fetchOutputFileNameFromTheOptions ();
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
     std::string separator =
       "%--------------------------------------------------------------";
 

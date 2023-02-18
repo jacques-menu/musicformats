@@ -88,7 +88,7 @@ msrBook::~msrBook ()
 S_msrBook msrBook::createBookNewbornClone ()
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceBooks ()) {
+  if (gTraceOahGroup->getTraceBooks ()) {
 		std::stringstream ss;
 
     ss <<
@@ -196,7 +196,7 @@ void msrBook::appendCreditToBook (
   const S_msrCredit& credit)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceCredits ()) {
+  if (gTraceOahGroup->getTraceCredits ()) {
 		std::stringstream ss;
 
     ss <<
@@ -288,7 +288,7 @@ void msrBook::fetchIdentificationFromCreditsIfAny ( // THROW AWAY JMI ??? v0.9.6
               switch (topCreditsCounter) {
                 case 1:
 #ifdef MF_TRACE_IS_ENABLED
-                  if (gGlobalTraceOahGroup->getTraceCredits ()) {
+                  if (gTraceOahGroup->getTraceCredits ()) {
                     gLog <<
                       "Using credit words '" <<
                       creditWordsContents <<
@@ -305,7 +305,7 @@ void msrBook::fetchIdentificationFromCreditsIfAny ( // THROW AWAY JMI ??? v0.9.6
 
                 case 2:
 #ifdef MF_TRACE_IS_ENABLED
-                  if (gGlobalTraceOahGroup->getTraceCredits ()) {
+                  if (gTraceOahGroup->getTraceCredits ()) {
                     gLog <<
                       "Using credit words '" <<
                       creditWordsContents <<
@@ -334,7 +334,7 @@ void msrBook::fetchIdentificationFromCreditsIfAny ( // THROW AWAY JMI ??? v0.9.6
               switch (bottomCreditsCounter) {
                 case 1:
 #ifdef MF_TRACE_IS_ENABLED
-                  if (gGlobalTraceOahGroup->getTraceCredits ()) {
+                  if (gTraceOahGroup->getTraceCredits ()) {
                     gLog <<
                       "Using credit words '" <<
                       creditWordsContents <<
@@ -351,7 +351,7 @@ void msrBook::fetchIdentificationFromCreditsIfAny ( // THROW AWAY JMI ??? v0.9.6
 
                 case 2:
 #ifdef MF_TRACE_IS_ENABLED
-                  if (gGlobalTraceOahGroup->getTraceCredits ()) {
+                  if (gTraceOahGroup->getTraceCredits ()) {
                     gLog <<
                       "Using credit words '" <<
                       creditWordsContents <<

@@ -50,29 +50,29 @@ Other data are computed by the MSR private methods. For example, in \msr{msrVoic
 
 		// ... ... ...
 
-    // fVoiceShortestNoteDuration and fVoiceShortestNoteTupletFactor
+    // fVoiceShortestNoteWholeNotes and fVoiceShortestNoteTupletFactor
     // are used to compute a number of divisions per quarter note
     // if needed, such as when generating MusicXML from MSR
-    Rational              fVoiceShortestNoteDuration;
+    mfRational              fVoiceShortestNoteWholeNotes;
     msrTupletFactor       fVoiceShortestNoteTupletFactor;
 \end{lstlisting}
 
 There are also data that varies during the lifetime of the object, while it is being populated for example.
 One such case is \class{msrMeasure}:
 \begin{lstlisting}[language=CPlusPlus]
-    Rational              fCurrentMeasureWholeNotesDuration;
+    mfRational              fCurrentMeasureWholeNotes;
                             // this increases when musical elements
                             // are appended to the measure
 \end{lstlisting}
 
-MSR has been designed to be as general as possible, leading it to contain informations fitted to the various textual formats that can be converted to it or output from it by \mf\ tools.
+MSR has been designed to be as general as possible, leading it to contain informations fitted to the various textual formats that can be converted to it or output from it by \mf\ services.
 
 It is a \MainIt{very fine-grained} representation of scores:
 \begin{itemize}
 \item some informations it contains are present as such in the textual formats;
 \item others are computed when the representation is populated, such as, in \msr{msrVoices.h}:
 \begin{lstlisting}[language=CPlusPlus]
-    Rational              fVoiceShortestNoteDuration;
+    mfRational              fVoiceShortestNoteWholeNotes;
 \end{lstlisting}
 \end{itemize}
 This information is used when generating \mxml\ output to set the \musicXmlMarkup{divisions} value.
@@ -220,22 +220,22 @@ class EXP msrLength : public smartable
 \section{Sounding and displayed durations}\label{Sounding and displayed durations}
 % -------------------------------------------------------------------------
 
-All durations are represented by Rational numbers whose denominators are powers of 2, such as {\tt Rational (3, 16}, and relative to the duration of a whole note.
+All durations are represented by mfRational numbers whose denominators are powers of 2, such as {\tt mfRational (3, 16}, and relative to the duration of a whole note.
 
 This information is a field of \class{msrMeasureElement}:
 \begin{lstlisting}[language=CPlusPlus]
-    Rational              fSoundingWholeNotes;
+    mfRational              fSoundingWholeNotes;
 \end{lstlisting}
 
 In a tuplet, the sounding durations are different than the written durations, so we store the written duration in \class{msrNote}:
 
 \begin{lstlisting}[language=CPlusPlus]
     // whole notes
-    Rational              fNoteDisplayWholeNotes;
+    mfRational              fNoteDisplayWholeNotes;
 
     int                   fNoteDotsNumber;
 
-    msrDurationKind       fNoteGraphicDurationKind;
+    msrNotesDurationKind  fNoteGraphicNotesDurationKind;
 
     msrTupletFactor       fNoteTupletFactor;
 
@@ -246,17 +246,17 @@ In a tuplet, the sounding durations are different than the written durations, so
                                 // and pitched rests
 \end{lstlisting}
 
-\EnumType{msrDurationKind} is declared in \msr{msrDurations.h}:
+\EnumType{msrNotesDurationKind} is declared in \msr{msrNotesDurations.h}:
 \begin{lstlisting}[language=CPlusPlus]
-enum class msrDurationKind {
-  kDuration_UNKNOWN,
+enum class msrNotesDurationKind {
+  kNotesDuration_UNKNOWN,
 
   // from longest to shortest for the algorithms
-  kDurationMaxima, kDurationLonga, kDurationBreve,
-  kDurationWhole, kDurationHalf,
-  kDurationQuarter,
-  kDurationEighth, kDuration16th, kDuration32nd, kDuration64th,
-  kDuration128th, kDuration256th, kDuration512th, kDuration1024th
+  kNotesDurationMaxima, kNotesDurationLonga, kNotesDurationBreve,
+  kNotesDurationWhole, kNotesDurationHalf,
+  kNotesDurationQuarter,
+  kNotesDurationEighth, kNotesDuration16th, kNotesDuration32nd, kNotesDuration64th,
+  kNotesDuration128th, kNotesDuration256th, kNotesDuration512th, kNotesDuration1024th
 };
 \end{lstlisting}
 
@@ -264,7 +264,7 @@ enum class msrDurationKind {
 \section{Measure positions and moments}\label{Measure positions and moments}
 % -------------------------------------------------------------------------
 
-Measure positions are represented by \code{Rational} numbers such as {\tt 3/8}, {\tt 1/1} being a whole note.
+Measure positions are represented by \code{mfRational} numbers such as {\tt 3/8}, {\tt 1/1} being a whole note.
 
 Measure positions are stored in \field{msrMeasureElement}{fMeasurePosition} in \class{msrMeasureElement}, defined in \msrBoth{msrMeasureElement}:
 \begin{lstlisting}[language=CPlusPlus]
@@ -282,12 +282,12 @@ class EXP msrMeasureElement : public msrElement
       to allow for separate *.h files, C++ constraint
     */
 
-    Rational              fSoundingWholeNotes;
+    mfRational              fSoundingWholeNotes;
 
     std::string           fBarLineUpLinkToMeasure->getMeasureNumber ();
 
-    Rational              fMeasurePosition;
-    Rational              fVoicePosition;
+    mfRational              fMeasurePosition;
+    mfRational              fVoicePosition;
 };
 \end{lstlisting}
 
@@ -295,8 +295,8 @@ class EXP msrMeasureElement : public msrElement
 
 \Class{msrMoment} stores a position in a measure, with a relative offset since harmonies can be placed on a note during its sounding time:
 \begin{lstlisting}[language=CPlusPlus]
-    Rational              fWrittenPositionInMeseasure;
-    Rational              fSoundingRelativeOffset;
+    mfRational              fWrittenPositionInMeseasure;
+    mfRational              fSoundingRelativeOffset;
 \end{lstlisting}
 
 
@@ -368,7 +368,7 @@ enum class msrNoteEventKind {
 
 \Class{msrNoteEvent} contains:
 \begin{lstlisting}[language=CPlusPlus]
-    Rational              fNoteEventMeasurePosition;
+    mfRational              fNoteEventMeasurePosition;
     S_msrNote             fNoteEventNote;
     msrNoteEventKind      fNoteEventKind;
 
@@ -700,20 +700,20 @@ enum class msrOctaveEntryKind {
 
 
 % -------------------------------------------------------------------------
-\section{Durations}\label{Durations}
+\section{NotesDurations}\label{NotesDurations}
 % -------------------------------------------------------------------------
 
-\mf\ represents durations with \enumType{msrDurationKind}, defined in \msr{msrBasicTypes.h}:
+\mf\ represents durations with \enumType{msrNotesDurationKind}, defined in \msr{msrBasicTypes.h}:
 \begin{lstlisting}[language=CPlusPlus]
 // durations
 //______________________________________________________________________________
-enum class msrDurationKind {
-  kDuration_UNKNOWN,
+enum class msrNotesDurationKind {
+  kNotesDuration_UNKNOWN,
 
   // from longest to shortest for the algorithms
-  kDurationMaxima, kDurationLonga, kDurationBreve, kDurationWhole, kDurationHalf,
-  kDurationQuarter,
-  kDurationEighth, kDuration16th, kDuration32nd, kDuration64th, kDuration128th, kDuration256th, kDuration512th, kDuration1024th
+  kNotesDurationMaxima, kNotesDurationLonga, kNotesDurationBreve, kNotesDurationWhole, kNotesDurationHalf,
+  kNotesDurationQuarter,
+  kNotesDurationEighth, kNotesDuration16th, kNotesDuration32nd, kNotesDuration64th, kNotesDuration128th, kNotesDuration256th, kNotesDuration512th, kNotesDuration1024th
 };
 \end{lstlisting}
 
@@ -771,26 +771,26 @@ enum class msrAccidentalKind {
 
 
 % -------------------------------------------------------------------------
-\section{Durations}\label{Durations}
+\section{NotesDurations}\label{NotesDurations}
 % -------------------------------------------------------------------------
 
-They are represented in MSR with the \enumType{msrDurationKind} enumeration type, defined in \msr{msrBasicTypes.h}:
+They are represented in MSR with the \enumType{msrNotesDurationKind} enumeration type, defined in \msr{msrBasicTypes.h}:
 \begin{lstlisting}[language=CPlusPlus]
 // durations
 //______________________________________________________________________________
-enum class msrDurationKind {
-  kDuration_UNKNOWN,
+enum class msrNotesDurationKind {
+  kNotesDuration_UNKNOWN,
 
   // from longest to shortest for the algorithms
-  kDurationMaxima, kDurationLonga, kDurationBreve, kDurationWhole, kDurationHalf,
-  kDurationQuarter,
-  kDurationEighth, kDuration16th, kDuration32nd, kDuration64th, kDuration128th, kDuration256th, kDuration512th, kDuration1024th
+  kNotesDurationMaxima, kNotesDurationLonga, kNotesDurationBreve, kNotesDurationWhole, kNotesDurationHalf,
+  kNotesDurationQuarter,
+  kNotesDurationEighth, kNotesDuration16th, kNotesDuration32nd, kNotesDuration64th, kNotesDuration128th, kNotesDuration256th, kNotesDuration512th, kNotesDuration1024th
 };
 \end{lstlisting}
 
-\Class{msrDottedDuration} contains:
+\Class{msrDottedNotesDuration} contains:
 \begin{lstlisting}[language=CPlusPlus]
-    msrDurationKind       fDurationKind;
+    msrNotesDurationKind  fNotesDurationKind;
     int                   fDotsNumber;
 \end{lstlisting}
 
@@ -848,7 +848,7 @@ class EXP msrTempoNote : public msrElement
 
     static SMARTP<msrTempoNote> create (
                             int             inputLineNumber,
-                            const Rational& tempoNoteWholeNotes,
+                            const mfRational& tempoNoteWholeNotes,
                             Bool            tempoNoteBelongsToATuplet);
 
   protected:
@@ -858,7 +858,7 @@ class EXP msrTempoNote : public msrElement
 
                           msrTempoNote (
                             int             inputLineNumber,
-                            const Rational& tempoNoteWholeNotes,
+                            const mfRational& tempoNoteWholeNotes,
                             Bool            tempoNoteBelongsToATuplet);
 
 		// ... ... ...
@@ -868,7 +868,7 @@ class EXP msrTempoNote : public msrElement
     // private fields
     // ------------------------------------------------------
 
-    Rational              fTempoNoteWholeNotes;
+    mfRational              fTempoNoteWholeNotes;
 
     std::list<S_msrBeam>  fTempoNoteBeams;
 
@@ -920,7 +920,7 @@ class EXP msrTempoTuplet : public msrElement
       msrTempoTupletBracketKind    tempoTupletBracketKind,
       msrTempoTupletShowNumberKind tempoTupletShowNumberKind,
       msrTupletFactor              tempoTupletFactor,
-      Rational                     memberNotesDisplayWholeNotes);
+      msrWholeNotes                 memberNotesDisplayWholeNotes);
 
   protected:
 
@@ -933,7 +933,7 @@ class EXP msrTempoTuplet : public msrElement
       msrTempoTupletBracketKind    tempoTupletBracketKind,
       msrTempoTupletShowNumberKind tempoTupletShowNumberKind,
       msrTupletFactor              tempoTupletFactor,
-      Rational                     memberNotesDisplayWholeNotes);
+      msrWholeNotes                 memberNotesDisplayWholeNotes);
 
 		// ... ... ...
 
@@ -952,9 +952,9 @@ class EXP msrTempoTuplet : public msrElement
 
     msrTupletFactor       fTempoTupletFactor;
 
-    Rational              fMemberNotesDisplayWholeNotes;
+    mfRational              fMemberNotesDisplayWholeNotes;
 
-    Rational              fTempoTupletDisplayWholeNotes;
+    mfRational              fTempoTupletDisplayWholeNotes;
 
     std::list<S_msrElement>
                           fTempoTupletElements;
@@ -982,10 +982,10 @@ class EXP msrTempo : public msrMeasureElement
 
     std::list<S_msrWords> fTempoWordsList;
 
-    msrDottedDuration     fTempoBeatUnit;
+    msrDottedNotesDuration     fTempoBeatUnit;
 
     std::string           fTempoPerMinute; // '90' or '132-156' for example
-    msrDottedDuration     fTempoEquivalentBeatUnit;
+    msrDottedNotesDuration     fTempoEquivalentBeatUnit;
 
     S_msrTempoNotesRelationshipElements
                           fTempoNotesRelationshipLeftElements;
@@ -2086,10 +2086,10 @@ class EXP msrTupletFactor
                                   fTupletActualNotes == fTupletNormalNotes;
                               }
 
-    Rational              asRational () const
+    mfRational              asRational () const
                             {
                               return
-                                Rational (
+                                mfRational (
                                   fTupletActualNotes,
                                   fTupletNormalNotes);
                             }
@@ -2278,7 +2278,7 @@ Extensions are described by enumeration type {\tt }:
     std::string           fSyllableStanzaNumber;
 
     // syllable whole notes
-    Rational              fSyllableWholeNotes;
+    mfRational              fSyllableWholeNotes;
 
     // syllable tuplet factor
     msrTupletFactor       fSyllableTupletFactor;

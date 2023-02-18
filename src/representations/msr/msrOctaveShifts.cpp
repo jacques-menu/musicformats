@@ -93,7 +93,7 @@ void msrOctaveShift::setOctaveShiftUpLinkToMeasure (
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceWholeNotes ()) {
+  if (gTraceOahGroup->getTraceWholeNotes ()) {
     ++gIndenter;
 
     gLog <<

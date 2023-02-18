@@ -16,6 +16,7 @@
 
 #include "mfcBasicTypes.h"
 
+
 namespace MusicFormats
 {
 

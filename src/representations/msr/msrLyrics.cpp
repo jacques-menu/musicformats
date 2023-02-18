@@ -48,7 +48,7 @@ S_msrSyllable msrSyllable::create (
   msrSyllableKind        syllableKind,
   msrSyllableExtendKind  syllableExtendKind,
   const std::string&     syllableStanzaNumber,
-  const Rational&        syllableWholeNotes,
+  const msrWholeNotes&        syllableWholeNotes,
   const msrTupletFactor& syllableTupletFactor,
   const S_msrStanza&     syllableUpLinkToStanza)
 {
@@ -71,7 +71,7 @@ S_msrSyllable msrSyllable::create (
   msrSyllableKind        syllableKind,
   msrSyllableExtendKind  syllableExtendKind,
   const std::string&     syllableStanzaNumber,
-  const Rational&        syllableWholeNotes,
+  const msrWholeNotes&        syllableWholeNotes,
   const msrTupletFactor& syllableTupletFactor,
   const S_msrStanza&     syllableUpLinkToStanza)
 {
@@ -93,7 +93,7 @@ S_msrSyllable msrSyllable::createWithNextMeasurePuristNumber ( // JMI superflous
   msrSyllableKind        syllableKind,
   msrSyllableExtendKind  syllableExtendKind,
   const std::string&     syllableStanzaNumber,
-  const Rational&        syllableWholeNotes,
+  const msrWholeNotes&        syllableWholeNotes,
   const msrTupletFactor& syllableTupletFactor,
   const S_msrStanza&     syllableUpLinkToStanza,
   int                    syllableNextMeasurePuristNumber)
@@ -123,7 +123,7 @@ msrSyllable::msrSyllable (
   msrSyllableKind        syllableKind,
   msrSyllableExtendKind  syllableExtendKind,
   const std::string&     syllableStanzaNumber,
-  const Rational&        syllableWholeNotes,
+  const msrWholeNotes&        syllableWholeNotes,
   const msrTupletFactor& syllableTupletFactor,
   const S_msrStanza&     syllableUpLinkToStanza)
     : msrMeasureElement (
@@ -157,7 +157,7 @@ msrSyllable::msrSyllable (
   fSyllableNextMeasurePuristNumber = -1;
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceLyrics ()) {
+  if (gTraceOahGroup->getTraceLyrics ()) {
 		std::stringstream ss;
 
     ss <<
@@ -180,7 +180,7 @@ S_msrSyllable msrSyllable::createSyllableNewbornClone (
   const S_msrPart& containingPart)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceLyrics ()) {
+  if (gTraceOahGroup->getTraceLyrics ()) {
 		std::stringstream ss;
 
     ss <<
@@ -239,7 +239,7 @@ S_msrSyllable msrSyllable::createSyllableDeepClone (
   const S_msrPart& containingPart)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceLyrics ()) {
+  if (gTraceOahGroup->getTraceLyrics ()) {
 		std::stringstream ss;
 
     ss <<
@@ -306,7 +306,7 @@ void msrSyllable::setSyllableUpLinkToMeasure (
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceWholeNotes ()) {
+  if (gTraceOahGroup->getTraceWholeNotes ()) {
     ++gIndenter;
 
     gLog <<
@@ -328,7 +328,7 @@ void msrSyllable:: setSyllableNextMeasurePuristNumber (
   int puristMeasureNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceLyrics ()) {
+  if (gTraceOahGroup->getTraceLyrics ()) {
 		std::stringstream ss;
 
     ss <<
@@ -379,11 +379,11 @@ void msrSyllable:: setSyllableNextMeasurePuristNumber (
 
 // void msrSyllable::setMeasurePosition (
 //   const S_msrMeasure measure,
-//   const Rational&    measurePosition,
+//   const msrWholeNotes&    measurePosition,
 //   const std::string&      context)
 // {
 // #ifdef MF_TRACE_IS_ENABLED
-//   if (gGlobalTraceOahGroup->getTraceMeasurePositions ()) {
+//   if (gTraceOahGroup->getTraceMeasurePositions ()) {
 //     gLog <<
 //       "Setting syllable's measure position of " << asString () <<
 //       " to " <<
@@ -405,8 +405,8 @@ void msrSyllable:: setSyllableNextMeasurePuristNumber (
   // sanity check
 //   mfAssert (
 //     __FILE__, __LINE__,
-//     measurePosition != msrMoment::K_MEASURE_POSITION_UNKNOWN,
-//     "measurePosition == msrMoment::K_MEASURE_POSITION_UNKNOWN");
+//     measurePosition != K_MEASURE_POSITION_UNKNOWN,
+//     "measurePosition == K_MEASURE_POSITION_UNKNOWN");
 // #endif // MF_SANITY_CHECKS_ARE_ENABLED
 //
 //   // set syllable's measure position
@@ -416,7 +416,7 @@ void msrSyllable:: setSyllableNextMeasurePuristNumber (
 void msrSyllable::appendLyricTextToSyllable (const std::string& text)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceLyrics ()) {
+  if (gTraceOahGroup->getTraceLyrics ()) {
 		std::stringstream ss;
 
     ss <<
@@ -464,7 +464,7 @@ void msrSyllable::appendSyllableToNoteAndSetItsUpLinkToNote (
 
   // set it upLink to note
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceLyrics ()) {
+  if (gTraceOahGroup->getTraceLyrics ()) {
 		std::stringstream ss;
 
     ss <<
@@ -990,7 +990,7 @@ void msrStanza::initializeStanza ()
           fStanzaNumber));
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceLyrics ()) {
+  if (gTraceOahGroup->getTraceLyrics ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1005,7 +1005,7 @@ void msrStanza::initializeStanza ()
 
   fStanzaTextPresent = false;
 
-  fStanzaMeasureWholeNotesDuration = Rational (0, 1);
+  fStanzaMeasureWholeNotes = msrWholeNotes (0, 1);
 }
 
 msrStanza::~msrStanza ()
@@ -1015,7 +1015,7 @@ S_msrStanza msrStanza::createStanzaNewbornClone (
   const S_msrVoice& containingVoice)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceLyrics ()) {
+  if (gTraceOahGroup->getTraceLyrics ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1070,7 +1070,7 @@ S_msrStanza msrStanza::createStanzaDeepClone (
   const S_msrVoice& containingVoice)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceLyrics ()) {
+  if (gTraceOahGroup->getTraceLyrics ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1134,7 +1134,7 @@ void msrStanza::appendSyllableToStanza (
   const S_msrSyllable& syllable)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceLyrics ()) {
+  if (gTraceOahGroup->getTraceLyrics ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1186,23 +1186,23 @@ void msrStanza::appendSyllableToStanza (
 
 /*
   // get the syllable's sounding whole notes JMI
-  Rational
+  msrWholeNotes
     syllableSoundingWholeNotes =
       syllable->
         getSyllableUpLinkToNote ()->
           getSoundingWholeNotes ();
 
   // update the stanza's measure whole notes
-  fStanzaMeasureWholeNotesDuration +=syllableSoundingWholeNotes;
+  fStanzaMeasureWholeNotes +=syllableSoundingWholeNotes;
   */
 }
 
 S_msrSyllable msrStanza::appendRestSyllableToStanza (
   int             inputLineNumber,
-  const Rational& wholeNotes)
+  const msrWholeNotes& wholeNotes)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceLyrics ()) {
+  if (gTraceOahGroup->getTraceLyrics ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1244,10 +1244,10 @@ S_msrSyllable msrStanza::appendRestSyllableToStanza (
 
 S_msrSyllable msrStanza::appendSkipSyllableToStanza (
   int             inputLineNumber,
-  const Rational& wholeNotes)
+  const msrWholeNotes& wholeNotes)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceLyrics ()) {
+  if (gTraceOahGroup->getTraceLyrics ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1291,7 +1291,7 @@ S_msrSyllable msrStanza::appendMeasureEndSyllableToStanza (
   int inputLineNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceLyrics ()) {
+  if (gTraceOahGroup->getTraceLyrics ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1325,7 +1325,7 @@ S_msrSyllable msrStanza::appendMeasureEndSyllableToStanza (
   appendSyllableToStanza (syllable);
 
   // reset measure whole notes
-  fStanzaMeasureWholeNotesDuration = Rational (0, 1);
+  fStanzaMeasureWholeNotes = msrWholeNotes (0, 1);
 
   --gIndenter;
 
@@ -1336,10 +1336,10 @@ S_msrSyllable msrStanza::appendMeasureEndSyllableToStanza (
 S_msrSyllable msrStanza::appendMelismaSyllableToStanza (
   int             inputLineNumber,
   msrSyllableKind syllableKind,
-  const Rational& wholeNotes)
+  const msrWholeNotes& wholeNotes)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceLyrics ()) {
+  if (gTraceOahGroup->getTraceLyrics ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1386,7 +1386,7 @@ S_msrSyllable msrStanza::appendLineBreakSyllableToStanza (
   int nextMeasurePuristNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceLyrics ()) {
+  if (gTraceOahGroup->getTraceLyrics ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1435,7 +1435,7 @@ S_msrSyllable msrStanza::appendPageBreakSyllableToStanza (
   int nextMeasurePuristNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceLyrics ()) {
+  if (gTraceOahGroup->getTraceLyrics ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1479,19 +1479,19 @@ S_msrSyllable msrStanza::appendPageBreakSyllableToStanza (
   return syllable;
 }
 
-void msrStanza::padUpToMeasureWholeNotesDurationInStanza (
+void msrStanza::padUpToMeasureWholeNotesInStanza (
   int             inputLineNumber,
-  const Rational& wholeNotes)
+  const msrWholeNotes& wholeNotes)
 {
   // JMI ???
 }
 
 void msrStanza::appendPaddingNoteToStanza (
   int             inputLineNumber,
-  const Rational& forwardStepLength)
+  const msrWholeNotes& forwardStepLength)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceLyrics ()) {
+  if (gTraceOahGroup->getTraceLyrics ()) {
 		std::stringstream ss;
 
     ss <<

@@ -14,8 +14,6 @@
 
 #include <string>
 
-#include "mfRational.h"
-
 #include "msrMeasures.h"
 
 
@@ -25,7 +23,7 @@ namespace MusicFormats
 //______________________________________________________________________________
 extern const std::string K_MEASURE_NUMBER_UNKNOWN;
 
-extern const Rational    K_WHOLE_NOTES_UNKNOWN;
+extern const msrWholeNotes K_MEASURE_POSITION_UNKNOWN;
 
 //______________________________________________________________________________
 // hidden global null measure variable

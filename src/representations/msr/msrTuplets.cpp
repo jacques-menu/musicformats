@@ -46,8 +46,8 @@ S_msrTuplet msrTuplet::create (
   msrTupletShowNumberKind tupletShowNumberKind,
   msrTupletShowTypeKind   tupletShowTypeKind,
   const msrTupletFactor&  tupletFactor,
-  const Rational&         memberNotesSoundingWholeNotes,
-  const Rational&         memberNotesDisplayWholeNotes)
+  const msrWholeNotes&         memberNotesSoundingWholeNotes,
+  const msrWholeNotes&         memberNotesDisplayWholeNotes)
 {
   msrTuplet* o =
     new msrTuplet (
@@ -75,8 +75,8 @@ S_msrTuplet msrTuplet::create (
   msrTupletShowNumberKind tupletShowNumberKind,
   msrTupletShowTypeKind   tupletShowTypeKind,
   const msrTupletFactor&  tupletFactor,
-  const Rational&         memberNotesSoundingWholeNotes,
-  const Rational&         memberNotesDisplayWholeNotes)
+  const msrWholeNotes&         memberNotesSoundingWholeNotes,
+  const msrWholeNotes&         memberNotesDisplayWholeNotes)
 {
   return
     msrTuplet::create (
@@ -103,8 +103,8 @@ msrTuplet::msrTuplet (
   msrTupletShowNumberKind tupletShowNumberKind,
   msrTupletShowTypeKind   tupletShowTypeKind,
   const msrTupletFactor&  tupletFactor,
-  const Rational&         memberNotesSoundingWholeNotes,
-  const Rational&         memberNotesDisplayWholeNotes)
+  const msrWholeNotes&         memberNotesSoundingWholeNotes,
+  const msrWholeNotes&         memberNotesDisplayWholeNotes)
     : msrTupletElement (
         inputLineNumber)
 {
@@ -125,13 +125,13 @@ msrTuplet::msrTuplet (
   fMemberNotesDisplayWholeNotes  = memberNotesDisplayWholeNotes;
 
   doSetSoundingWholeNotes (
-    Rational (0, 1),
+    msrWholeNotes (0, 1),
     "msrTuplet::msrTuplet()");
 
-  fTupletDisplayWholeNotes          = Rational (0, 1);
+  fTupletDisplayWholeNotes = msrWholeNotes (0, 1);
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceTuplets ()) {
+  if (gTraceOahGroup->getTraceTuplets ()) {
 		std::stringstream ss;
 
     ss <<
@@ -157,7 +157,7 @@ msrTuplet::~msrTuplet ()
 S_msrTuplet msrTuplet::createTupletNewbornClone ()
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceTuplets ()) {
+  if (gTraceOahGroup->getTraceTuplets ()) {
 		std::stringstream ss;
 
     ss <<
@@ -270,7 +270,7 @@ void msrTuplet::setTupletUpLinkToMeasure (
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceWholeNotes ()) {
+  if (gTraceOahGroup->getTraceWholeNotes ()) {
     ++gIndenter;
 
 		std::stringstream ss;
@@ -305,7 +305,7 @@ void msrTuplet::appendNoteToTuplet (
   const S_msrVoice& voice)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceTuplets ()) {
+  if (gTraceOahGroup->getTraceTuplets ()) {
 		std::stringstream ss;
 
     ss <<
@@ -364,7 +364,7 @@ void msrTuplet::appendNoteToTuplet (
 //
 //   // account for the duration of note in voice last measure
 //   voiceLastMeasure->
-//     accountForTupletMemberNoteDurationInMeasure (
+//     accountForTupletMemberNoteNotesDurationInMeasure (
 //       note);
 
   --gIndenter;
@@ -373,7 +373,7 @@ void msrTuplet::appendNoteToTuplet (
 void msrTuplet::appendChordToTuplet (const S_msrChord& chord)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceTuplets ()) {
+  if (gTraceOahGroup->getTraceTuplets ()) {
 		std::stringstream ss;
 
     ss <<
@@ -419,7 +419,7 @@ void msrTuplet::appendChordToTuplet (const S_msrChord& chord)
 void msrTuplet::appendTupletToTuplet (const S_msrTuplet& tuplet)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceTuplets ()) {
+  if (gTraceOahGroup->getTraceTuplets ()) {
 		std::stringstream ss;
 
     ss <<
@@ -465,7 +465,7 @@ void msrTuplet::appendTupletToTuplet (const S_msrTuplet& tuplet)
 void msrTuplet::appendTupletToTupletClone (const S_msrTuplet& tuplet)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceTuplets ()) {
+  if (gTraceOahGroup->getTraceTuplets ()) {
 		std::stringstream ss;
 
     ss <<
@@ -540,7 +540,7 @@ S_msrNote msrTuplet::removeFirstNoteFromTuplet (
   S_msrNote result;
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceTuplets ()) {
+  if (gTraceOahGroup->getTraceTuplets ()) {
 		std::stringstream ss;
 
     ss <<
@@ -651,7 +651,7 @@ S_msrNote msrTuplet::removeLastNoteFromTuplet (
   S_msrNote result;
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceTuplets ()) {
+  if (gTraceOahGroup->getTraceTuplets ()) {
 		std::stringstream ss;
 
     ss <<
@@ -717,7 +717,7 @@ S_msrNote msrTuplet::removeLastNoteFromTuplet (
   }
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceTuplets ()) {
+  if (gTraceOahGroup->getTraceTuplets ()) {
 		std::stringstream ss;
 
     ss <<
@@ -738,11 +738,11 @@ S_msrNote msrTuplet::removeLastNoteFromTuplet (
 
 void msrTuplet::setMeasurePosition (
   const S_msrMeasure& measure,
-  const Rational&     measurePosition,
+  const msrWholeNotes&     measurePosition,
   const std::string&  context)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceMeasurePositions ()) {
+  if (gTraceOahGroup->getTraceMeasurePositions ()) {
     S_msrMeasure upLinkToMeasure;
 
     getMeasureElementUpLinkToMeasure (
@@ -785,10 +785,10 @@ void msrTuplet::setMeasurePosition (
 
 void msrTuplet::setTupletMembersMeasurePositions (
   const S_msrMeasure& measure,
-  const Rational&     measurePosition)
+  const msrWholeNotes&     measurePosition)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceMeasurePositions ()) {
+  if (gTraceOahGroup->getTraceMeasurePositions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -811,15 +811,15 @@ void msrTuplet::setTupletMembersMeasurePositions (
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
-    measurePosition != msrMoment::K_MEASURE_POSITION_UNKNOWN,
-    "measurePosition == msrMoment::K_MEASURE_POSITION_UNKNOWN");
+    measurePosition != K_MEASURE_POSITION_UNKNOWN,
+    "measurePosition == K_MEASURE_POSITION_UNKNOWN");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // set tuplet's measure position
   fMeasurePosition = measurePosition;
 
   // current position
-  Rational currentPosition = measurePosition;
+  msrWholeNotes currentPosition = measurePosition;
 
   // compute measure position for the tuplets elements
   for (
@@ -895,7 +895,7 @@ void msrTuplet::unapplySoundingFactorToTupletMembers (
   */
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceTuplets ()) {
+  if (gTraceOahGroup->getTraceTuplets ()) {
 		std::stringstream ss;
 
     ss <<
@@ -940,7 +940,7 @@ void msrTuplet::finalizeTuplet (
   int inputLineNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceTuplets ()) {
+  if (gTraceOahGroup->getTraceTuplets ()) {
 		std::stringstream ss;
 
     ss <<

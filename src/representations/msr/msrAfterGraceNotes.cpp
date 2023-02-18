@@ -83,7 +83,7 @@ S_msrAfterGraceNotesGroupContents msrAfterGraceNotesGroupContents::createAfterGr
   const S_msrVoice& containingVoice)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceGraceNotes ()) {
+  if (gTraceOahGroup->getTraceGraceNotes ()) {
 		std::stringstream ss;
 
     ss <<
@@ -356,7 +356,7 @@ S_msrAfterGraceNotesGroup msrAfterGraceNotesGroup::createAfterGraceNotesGroupNew
   const S_msrVoice& containingVoice)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceGraceNotes ()) {
+  if (gTraceOahGroup->getTraceGraceNotes ()) {
 		std::stringstream ss;
 
     ss <<

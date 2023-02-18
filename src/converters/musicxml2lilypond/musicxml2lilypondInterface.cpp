@@ -287,7 +287,7 @@ else {
         fetchOutputFileNameFromTheOptions ();
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
     err <<
       "xmlFile2lilypond() outputFileName = \"" <<
       outputFileName <<
@@ -302,7 +302,7 @@ else {
 
   if (! outputFileName.size ()) {
 #ifdef MF_TRACE_IS_ENABLED
-    if (gEarlyOptions.getEarlyTraceOah ()) {
+    if (gEarlyOptions.getTraceEarlyOptions ()) {
       err <<
         "xmlFile2lilypond() output goes to standard output" <<
         std::endl;
@@ -342,7 +342,7 @@ else {
 
   else {
 #ifdef MF_TRACE_IS_ENABLED
-    if (gEarlyOptions.getEarlyTraceOah ()) {
+    if (gEarlyOptions.getTraceEarlyOptions ()) {
       err <<
         "xmlFile2lilypond() output goes to file \"" <<
         outputFileName <<
@@ -457,7 +457,7 @@ static mfMusicformatsErrorKind xmlFile2lilypondWithOptionsAndArguments (
 
   else {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
   err <<
     "xmlFile2musicxml(), sxmlfile is NULL" <<
     std::endl;
@@ -485,7 +485,7 @@ static mfMusicformatsErrorKind xmlFile2lilypondWithOptionsAndArguments (
   // print the options and arguments
   // ------------------------------------------------------
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -506,7 +506,7 @@ static mfMusicformatsErrorKind xmlFile2lilypondWithOptionsAndArguments (
     gEarlyOptions.getEarlyInsiderOption ();
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<

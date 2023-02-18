@@ -15,6 +15,7 @@
 #include <list>
 
 #include "msrSegmentElements.h"
+#include "msrWholeNotes.h"
 
 
 namespace MusicFormats
@@ -29,12 +30,12 @@ class EXP msrMultipleFullBarRests : public msrSegmentElement
     // ------------------------------------------------------
 
     static SMARTP<msrMultipleFullBarRests> create (
-                            int             inputLineNumber,
-                            int             multipleFullBarRestsNumber,
-                            const S_msrSegment&    upLinkToSegment);
+                            int                 inputLineNumber,
+                            int                 multipleFullBarRestsNumber,
+                            const S_msrSegment& upLinkToSegment);
 
     static SMARTP<msrMultipleFullBarRests> create (
-                            int          inputLineNumber,
+                            int                 inputLineNumber,
                             const S_msrMeasure& restMeasureClone,
                             const S_msrSegment& upLinkToSegment);
 
@@ -47,12 +48,12 @@ class EXP msrMultipleFullBarRests : public msrSegmentElement
     // ------------------------------------------------------
 
                           msrMultipleFullBarRests (
-                            int             inputLineNumber,
-                            int             multipleFullBarRestsNumber,
-                            const S_msrSegment&    upLinkToSegment);
+                            int                 inputLineNumber,
+                            int                 multipleFullBarRestsNumber,
+                            const S_msrSegment& upLinkToSegment);
 
                           msrMultipleFullBarRests (
-                            int          inputLineNumber,
+                            int                 inputLineNumber,
                             const S_msrMeasure& restMeasureClone,
                             const S_msrSegment& upLinkToSegment);
 
@@ -85,7 +86,7 @@ class EXP msrMultipleFullBarRests : public msrSegmentElement
     int                   getMultipleFullBarRestsLastMeasurePuristMeasureNumber () const
                               { return fMultipleFullBarRestsLastMeasurePuristNumber; }
 
-    Rational              fetchMultipleFullBarRestsMeasureSoundingNotes () const;
+    msrWholeNotes          fetchMultipleFullBarRestsMeasureSoundingNotes () const;
                             // don't simply multiply duration by number,
                             // may help pin-point errors in representation
   public:

@@ -332,7 +332,7 @@ void lpsrPartBlock::appendChordNamesContextToPartBlock (
 
   // sort the std::list if necessary
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceHarmonies ()) {
+  if (gTraceOahGroup->getTraceHarmonies ()) {
     std::stringstream ss;
 
     ss <<

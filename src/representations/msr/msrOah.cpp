@@ -87,7 +87,7 @@ void msrPitchesLanguageAtom::applyAtomWithValue (
   std::ostream&      os)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -104,7 +104,7 @@ void msrPitchesLanguageAtom::applyAtomWithValue (
   // is it in the pitches languages map?
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -155,7 +155,7 @@ void msrPitchesLanguageAtom::applyAtomWithValue (
 void msrPitchesLanguageAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -174,7 +174,7 @@ void msrPitchesLanguageAtom::acceptIn (basevisitor* v)
         S_msrPitchesLanguageAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -193,7 +193,7 @@ void msrPitchesLanguageAtom::acceptIn (basevisitor* v)
 void msrPitchesLanguageAtom::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -212,7 +212,7 @@ void msrPitchesLanguageAtom::acceptOut (basevisitor* v)
         S_msrPitchesLanguageAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -231,7 +231,7 @@ void msrPitchesLanguageAtom::acceptOut (basevisitor* v)
 void msrPitchesLanguageAtom::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -382,7 +382,7 @@ void msrRenamePartAtom::applyAtomWithValue (
   std::ostream&      os)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -399,7 +399,7 @@ void msrRenamePartAtom::applyAtomWithValue (
   // decipher it to extract the old and new part names
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -426,7 +426,7 @@ void msrRenamePartAtom::applyAtomWithValue (
   size_t smSize = sm.size ();
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -444,7 +444,7 @@ void msrRenamePartAtom::applyAtomWithValue (
 
   if (smSize == 3) {
 #ifdef MF_TRACE_IS_ENABLED
-    if (gEarlyOptions.getEarlyTraceOah ()) {
+    if (gEarlyOptions.getTraceEarlyOptions ()) {
       for (unsigned i = 0; i < smSize; ++i) {
         gLog <<
           '[' << sm [i] << "] ";
@@ -472,7 +472,7 @@ void msrRenamePartAtom::applyAtomWithValue (
   mfTrimFromBothEnds (newPartName);
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -513,7 +513,7 @@ void msrRenamePartAtom::applyAtomWithValue (
 void msrRenamePartAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -532,7 +532,7 @@ void msrRenamePartAtom::acceptIn (basevisitor* v)
         S_msrRenamePartAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -551,7 +551,7 @@ void msrRenamePartAtom::acceptIn (basevisitor* v)
 void msrRenamePartAtom::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -570,7 +570,7 @@ void msrRenamePartAtom::acceptOut (basevisitor* v)
         S_msrRenamePartAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -589,7 +589,7 @@ void msrRenamePartAtom::acceptOut (basevisitor* v)
 void msrRenamePartAtom::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -808,8 +808,8 @@ R"(Write a trace of the MSR graphs visiting activity to standard error.)",
       oahBooleanAtom::create (
         "trace-msr-durations", "tmsrd",
 R"(Write a trace of the MSR durations handling activity to standard error.)",
-        "fTraceMsrDurations",
-        fTraceMsrDurations));
+        "fTraceMsrNotesDurations",
+        fTraceMsrNotesDurations));
 }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1088,7 +1088,7 @@ the names in the score or a summary of the latter in a first run with options
 There can be spaces around the ':', in which case quoting is needed.
 There can be several occurrences of this option.)",
           std::regex ("EXECUTABLE"),
-          gGlobalOahOahGroup->getOahOahGroupServiceName ()),
+          gOahOahGroup->getOahOahGroupServiceName ()),
         "PART_RENAME_SPEC",
         "fMsrPartsRenamingMap",
         fMsrPartsRenamingMap));
@@ -1267,7 +1267,7 @@ void msrOahGroup::checkGroupOptionsConsistency ()
 void msrOahGroup::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1286,7 +1286,7 @@ void msrOahGroup::acceptIn (basevisitor* v)
         S_msrOahGroup elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -1305,7 +1305,7 @@ void msrOahGroup::acceptIn (basevisitor* v)
 void msrOahGroup::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1324,7 +1324,7 @@ void msrOahGroup::acceptOut (basevisitor* v)
         S_msrOahGroup elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -1343,7 +1343,7 @@ void msrOahGroup::acceptOut (basevisitor* v)
 void msrOahGroup::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1555,7 +1555,7 @@ std::ostream& operator << (std::ostream& os, const S_msrOahGroup& elt)
 S_msrOahGroup createGlobalMsrOahGroup ()
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<

@@ -134,7 +134,7 @@ bsrTimeSignatureItem::bsrTimeSignatureItem (
   fTimeSignatureBeatValue = -1;
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceTimeSignatures ()) {
+  if (gTraceOahGroup->getTraceTimeSignatures ()) {
 		std::stringstream ss;
 
     ss <<
@@ -188,7 +188,7 @@ Bool bsrTimeSignatureItem::isEqualTo (S_bsrTimeSignatureItem otherTimeSignatureI
 void bsrTimeSignatureItem::appendBeatsNumber (int beatsNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceTimeSignatures ()) {
+  if (gTraceOahGroup->getTraceTimeSignatures ()) {
 		std::stringstream ss;
 
     ss <<
@@ -209,7 +209,7 @@ void bsrTimeSignatureItem::appendBeatsNumber (int beatsNumber)
 void bsrTimeSignatureItem::setTimeSignatureBeatValue (int timeSignatureBeatValue)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceTimeSignatures ()) {
+  if (gTraceOahGroup->getTraceTimeSignatures ()) {
 		std::stringstream ss;
 
     ss <<
@@ -411,7 +411,7 @@ bsrTimeSignature::bsrTimeSignature (
   fTimeKind = timeKind;
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceTimeSignatures ()) {
+  if (gTraceOahGroup->getTraceTimeSignatures ()) {
 		std::stringstream ss;
 
     ss <<
@@ -434,7 +434,7 @@ bsrTimeSignature::~bsrTimeSignature ()
 void bsrTimeSignature::appendTimeSignatureItem (S_bsrTimeSignatureItem timeSignatureItem)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceTimeSignatures ()) {
+  if (gTraceOahGroup->getTraceTimeSignatures ()) {
 		std::stringstream ss;
 
     ss <<

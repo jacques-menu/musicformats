@@ -146,9 +146,9 @@ class EXP oahEarlyOptions
                               { return fEarlyTraceOah; }
 
     void                  setEarlyTraceOahDetails ();
-    Bool                  getEarlyTraceOahDetails () const
+    Bool                  getTraceEarlyOptionsDetails () const
                               { return fEarlyTraceOahDetails; }
-    Bool&                 getEarlyTraceOahDetailsRef ()
+    Bool&                 getTraceEarlyOptionsDetailsRef ()
                               { return fEarlyTraceOahDetails; }
 
     void                  setEarlyTraceComponents ();

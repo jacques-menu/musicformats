@@ -203,7 +203,7 @@ void LilyPondIssue34OahGroup::checkGroupOptionsConsistency ()
 void LilyPondIssue34OahGroup::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -222,7 +222,7 @@ void LilyPondIssue34OahGroup::acceptIn (basevisitor* v)
         S_LilyPondIssue34OahGroup elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -241,7 +241,7 @@ void LilyPondIssue34OahGroup::acceptIn (basevisitor* v)
 void LilyPondIssue34OahGroup::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -260,7 +260,7 @@ void LilyPondIssue34OahGroup::acceptOut (basevisitor* v)
         S_LilyPondIssue34OahGroup elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -279,7 +279,7 @@ void LilyPondIssue34OahGroup::acceptOut (basevisitor* v)
 void LilyPondIssue34OahGroup::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -353,7 +353,7 @@ std::ostream& operator << (std::ostream& os, const S_LilyPondIssue34OahGroup& el
 S_LilyPondIssue34OahGroup createGlobalLilyPondIssue34OahGroup ()
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<

@@ -54,7 +54,7 @@ namespace MusicFormats
 {
 /*
   ENFORCE_TRACE_OAH can be used to issue trace messages
-  before gGlobalOahOahGroup->fTrace has been initialized
+  before gOahOahGroup->fTrace has been initialized
 */
 
 //#define ENFORCE_TRACE_OAH
@@ -296,7 +296,7 @@ EXP mfMusicformatsErrorKind convertMsdlStream2musicxmlWithOptionsAndArguments (
     gEarlyOptions.getEarlyInsiderOption ();
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<

@@ -205,7 +205,7 @@ void mxsr2msrSkeletonBuilder::visitStart ( S_harmony& elt )
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   /* JMI ???
     several harmonies can be attached to a given note,
@@ -229,7 +229,7 @@ void mxsr2msrSkeletonBuilder::visitEnd ( S_note& elt )
   if (fThereAreHarmoniesToBeAttachedToCurrentNote) {
     if (gGlobalMxsr2msrOahGroup->getIgnoreHarmonies ()) {
 #ifdef MF_TRACE_IS_ENABLED
-      if (gGlobalTraceOahGroup->getTraceHarmonies ()) {
+      if (gTraceOahGroup->getTraceHarmonies ()) {
         gLog <<
           "Ignoring the harmonies" <<
           ", line " <<
@@ -240,7 +240,7 @@ void mxsr2msrSkeletonBuilder::visitEnd ( S_note& elt )
           __FILE__, __LINE__,
           ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
     }
     else {
       // create the part harmonies voice if not yet done
@@ -317,7 +317,7 @@ void mxsr2msrTranslator::visitStart ( S_harmony& elt )
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   ++fHarmoniesVoicesCounter;
 
@@ -333,7 +333,7 @@ void mxsr2msrTranslator::visitStart ( S_harmony& elt )
   fCurrentHarmonyDegreeValue           = -1;
   fCurrentHarmonyDegreeAlterationKind  = msrAlterationKind::kAlterationNatural;
 
-  fCurrentHarmonyWholeNotesOffset = Rational (0, 1);
+  fCurrentHarmonyWholeNotesOffset = mfRational (0, 1);
 
   fOnGoingHarmony = true;
 }
@@ -353,7 +353,7 @@ void mxsr2msrTranslator::visitEnd ( S_harmony& elt )
 
   if (gGlobalMxsr2msrOahGroup->getIgnoreHarmonies ()) {
  #ifdef MF_TRACE_IS_ENABLED
-    if (gGlobalTraceOahGroup->getTraceHarmonies ()) {
+    if (gTraceOahGroup->getTraceHarmonies ()) {
       gLog <<
         "Ignoring harmony" <<
         ", line " <<
@@ -364,12 +364,12 @@ void mxsr2msrTranslator::visitEnd ( S_harmony& elt )
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
   }
   else {
    // create the harmony
 #ifdef MF_TRACE_IS_ENABLED
-    if (gGlobalTraceOahGroup->getTraceHarmoniesDetails ()) {
+    if (gTraceOahGroup->getTraceHarmoniesDetails ()) {
       gLog <<
         "Creating a harmony" <<
         ", line " << inputLineNumber << ":" <<
@@ -377,7 +377,7 @@ void mxsr2msrTranslator::visitEnd ( S_harmony& elt )
 
     	// ... ... ...
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
     S_msrHarmony
       harmony =
@@ -394,9 +394,9 @@ void mxsr2msrTranslator::visitEnd ( S_harmony& elt )
 
           fCurrentHarmonyBassQuarterTonesPitchKind,
 
-          Rational (1, 1),            // harmonySoundingWholeNotes,
+          mfRational (1, 1),            // harmonySoundingWholeNotes,
                                       // will be set upon next note handling
-          Rational (1, 1),            // harmonyDisplayWholeNotes,
+          mfRational (1, 1),            // harmonyDisplayWholeNotes,
                                       // will be set upon next note handling
           fCurrentHarmoniesStaffNumber,
           msrTupletFactor (1, 1),     // will be set upon next note handling
@@ -405,13 +405,13 @@ void mxsr2msrTranslator::visitEnd ( S_harmony& elt )
     // append pending harmony degrees if any to the harmony
     if (! fCurrentHarmonyDegreesList.size ()) {
 #ifdef MF_TRACE_IS_ENABLED
-      if (gGlobalTraceOahGroup->getTraceHarmoniesDetails ()) {
+      if (gTraceOahGroup->getTraceHarmoniesDetails ()) {
         musicxmlWarning (
           gServiceRunData->getInputSourceName (),
           inputLineNumber,
           "harmony has no degrees contents");
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
     }
 
     else {
@@ -493,7 +493,7 @@ void mxsr2msrTranslator::handlePendingHarmonies (
 {
 	// ... ... ...
 
-  Rational
+  mfRational
     newNoteSoundingWholeNotes =
       newNote->
         getSoundingWholeNotes (),
@@ -588,7 +588,7 @@ void mxsr2msrTranslator::handlePendingHarmonies (
 void msrNote::appendHarmonyToNote (const S_msrHarmony& harmony)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceHarmonies ()) {
+  if (gTraceOahGroup->getTraceHarmonies ()) {
     gLog <<
       "Appending harmony " <<
       harmony->asString () <<
@@ -601,7 +601,7 @@ void msrNote::appendHarmonyToNote (const S_msrHarmony& harmony)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // update the harmony whole notes if it belongs to a tuplet ??? utf8.xml JMI
 
@@ -631,7 +631,7 @@ void mxsr2msrTranslator::copyNoteHarmoniesToChord (
       S_msrHarmony harmony = (*i);
 
 #ifdef MF_TRACE_IS_ENABLED
-      if (gGlobalTraceOahGroup->getTraceHarmonies ()) {
+      if (gTraceOahGroup->getTraceHarmonies ()) {
         gLog <<
           "Copying harmony '" <<
           harmony->asString () <<
@@ -644,7 +644,7 @@ void mxsr2msrTranslator::copyNoteHarmoniesToChord (
           __FILE__, __LINE__,
           ss.str ());
       }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
       chord->
         appendHarmonyToChord (harmony);
@@ -719,7 +719,7 @@ void msr2msrTranslator::visitStart (S_msrHarmony& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // create a harmony newborn clone
   fCurrentHarmonyClone =
@@ -746,7 +746,7 @@ void msr2msrTranslator::visitStart (S_msrHarmony& elt)
   else if (fOnGoingHarmoniesVoice) {
   /* JMI
     // get the harmony whole notes offset
-    Rational
+    mfRational
       harmonyWholeNotesOffset =
         elt->getHarmonyWholeNotesOffset ();
 
@@ -814,7 +814,7 @@ void msr2msrTranslator::visitEnd (S_msrHarmony& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fCurrentHarmonyClone = nullptr;
   fOnGoingHarmony = false;
@@ -851,7 +851,7 @@ void msr2lpsrTranslator::visitStart (S_msrHarmony& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // create a harmony newborn clone
   fCurrentHarmonyClone =
@@ -878,7 +878,7 @@ void msr2lpsrTranslator::visitStart (S_msrHarmony& elt)
   else if (fOnGoingHarmoniesVoice) {
   /* JMI
     // get the harmony whole notes offset
-    Rational
+    mfRational
       harmonyWholeNotesOffset =
         elt->getHarmonyWholeNotesOffset ();
 
@@ -948,7 +948,7 @@ void msr2lpsrTranslator::visitEnd (S_msrHarmony& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fCurrentHarmonyClone = nullptr;
   fOnGoingHarmony = false;
@@ -1001,12 +1001,12 @@ void lpsr2lilypondTranslator::visitStart (S_msrHarmony& elt)
       }
     }
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   if (fOnGoingNotesStack.size () > 0) {
   /* JMI
 #ifdef MF_TRACE_IS_ENABLED
-    if (gGlobalTraceOahGroup->getTraceHarmonies ()) {
+    if (gTraceOahGroup->getTraceHarmonies ()) {
       fLilypondCodeStream <<
         "%{ fOnGoingNotesStack.size () S_msrHarmony JMI " <<
         elt->asString () <<
@@ -1017,7 +1017,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrHarmony& elt)
         __FILE__, __LINE__,
         ss.str ());
     }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 */
   }
 

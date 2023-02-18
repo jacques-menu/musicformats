@@ -20,6 +20,7 @@
 
 #include "oahOah.h"
 
+
 namespace MusicFormats
 {
 
@@ -40,7 +41,7 @@ oahOah2manPage::~oahOah2manPage ()
 void oahOah2manPage::visitStart (S_oahOptionalValuesStyleKindAtom& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -76,7 +77,7 @@ void oahOah2manPage::visitStart (S_oahOptionalValuesStyleKindAtom& elt)
 void oahOah2manPage::visitEnd (S_oahOptionalValuesStyleKindAtom& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<

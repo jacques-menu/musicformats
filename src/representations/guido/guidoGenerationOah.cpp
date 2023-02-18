@@ -65,7 +65,7 @@ guidoGenerationOahGroup::~guidoGenerationOahGroup ()
 void guidoGenerationOahGroup::initializeGuidoGenerationOahGroup ()
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
   gLog << std::left <<
     "Initializing \"" <<
     fGroupHeader <<
@@ -83,7 +83,7 @@ void guidoGenerationOahGroup::initializeGuidoGenerationOahGroup ()
 void guidoGenerationOahGroup::createGuidoSubGroup ()
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
   gLog << std::left <<
     "Creating insider Guido subgroup in \"" <<
     fGroupHeader <<
@@ -138,7 +138,7 @@ R"(Generate barLines in the Guido output.)",
 void guidoGenerationOahGroup::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -157,7 +157,7 @@ void guidoGenerationOahGroup::acceptIn (basevisitor* v)
         S_guidoGenerationOahGroup elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -176,7 +176,7 @@ void guidoGenerationOahGroup::acceptIn (basevisitor* v)
 void guidoGenerationOahGroup::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -195,7 +195,7 @@ void guidoGenerationOahGroup::acceptOut (basevisitor* v)
         S_guidoGenerationOahGroup elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -214,7 +214,7 @@ void guidoGenerationOahGroup::acceptOut (basevisitor* v)
 void guidoGenerationOahGroup::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -278,7 +278,7 @@ void guidoGenerationOahGroup::displayGuidoGenerationOahGroupValues (
 S_guidoGenerationOahGroup createGlobalGuidoGenerationOahGroup ()
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<

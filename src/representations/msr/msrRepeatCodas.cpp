@@ -80,7 +80,7 @@ S_msrRepeatCoda msrRepeatCoda::createRepeatCodaNewbornClone (
   const S_msrRepeat& containingRepeat)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceRepeats ()) {
+  if (gTraceOahGroup->getTraceRepeats ()) {
 		std::stringstream ss;
 
     ss <<
@@ -124,7 +124,7 @@ S_msrRepeatCoda msrRepeatCoda::createRepeatCodaDeepClone (
   const S_msrRepeat& containingRepeat)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceRepeats ()) {
+  if (gTraceOahGroup->getTraceRepeats ()) {
 		std::stringstream ss;
 
     ss <<

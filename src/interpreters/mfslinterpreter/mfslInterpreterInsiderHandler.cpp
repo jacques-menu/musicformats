@@ -1,22 +1,18 @@
 /*
   MusicFormats Library
-  Copyright (C) Jacques Menu 2016-2023
+  Copyright (C) Jacques Menu 2016-2022
 
   This Source Code Form is subject to the terms of the Mozilla Public
   License, v. 2.0. If a copy of the MPL was not distributed with this
-  file, you can obtain one at http://mozilla.org/MPL/2.0/.
+  file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
   https://github.com/jacques-menu/musicformats
 */
 
-#include <iomanip>      // std::setw, std::setprecision, ...
-
-// libmusicxml2
-#include "visitor.h"
-
-#include "mfStaticSettings.h"
+#include <iomanip>      // setw, setprecision, ...
 
 #include "mfServices.h"
+
 #include "mfStringsHandling.h"
 
 // OAH
@@ -24,22 +20,22 @@
 #include "waeOah.h"
 #include "oahDisplayOah.h"
 
-// WAE
-#include "oahWae.h"
-
 // early options
 #include "oahEarlyOptions.h"
 
+// WAE
+#include "waeHandlers.h"
+#include "oahWae.h"
+
 // components
 #include "mfslInterpreterComponent.h"
-
-// waeOah
-#include "waeHandlers.h"
 
 #include "mfslInterpreterInterface.h"
 
 #include "mfslInterpreterInsiderHandler.h"
 
+
+using namespace std;
 
 namespace MusicFormats
 {
@@ -55,6 +51,7 @@ S_mfslInterpreterInsiderHandler mfslInterpreterInsiderHandler::create (
       serviceName,
       handlerHeader);
   assert (o != nullptr);
+
   return o;
 }
 
@@ -75,17 +72,11 @@ R"(
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getEarlyTraceOah ()) {
-		std::stringstream ss;
-
-    ss <<
+    gLog <<
       "Initializing \"" <<
       fHandlerHeader <<
       "\" regular options handler" <<
-      std::endl;
-
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
+      endl;
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -112,14 +103,14 @@ void mfslInterpreterInsiderHandler::initializeHandlerMultiComponent ()
 
 std::string mfslInterpreterInsiderHandler::usageInformation ()
 {
-  std::stringstream ss;
+  stringstream s;
 
-  ss <<
+  s <<
 R"(Usage: mfsl [option]*
 )" <<
-    std::endl;
+    endl;
 
-  return ss.str ();
+  return s.str ();
 }
 
 std::string mfslInterpreterInsiderHandler::handlerServiceAboutInformation () const
@@ -134,8 +125,8 @@ std::string mfslInterpreterInsiderHandler::mfslInterpreterAboutInformation () co
 R"(What mfsl does:
 
     This interpreter reads text input containing
-    a tool name, an input source name, keywords and options,
-    and launches the specified tool
+    a service name, an input source name, keywords and options,
+    and launches the specified service
     with these options applied to the input source name.
 
     The input can come from a file or from standard input,
@@ -152,17 +143,11 @@ void mfslInterpreterInsiderHandler::createTheMfslInterpreterPrefixes ()
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getEarlyTraceOah ()) {
-		std::stringstream ss;
-
-    ss <<
+    gLog <<
       "Creating the mfsl prefixes in \"" <<
       fHandlerHeader <<
       "\"" <<
-      std::endl;
-
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
+      endl;
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -175,17 +160,11 @@ void mfslInterpreterInsiderHandler::createTheMfslInterpreterOptionGroups (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getEarlyTraceOah ()) {
-		std::stringstream ss;
-
-    ss <<
+    gLog <<
       "Creating the \"" <<
       fHandlerHeader <<
       "\" insider option groups" <<
-      std::endl;
-
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
+      endl;
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -202,7 +181,7 @@ void mfslInterpreterInsiderHandler::createTheMfslInterpreterOptionGroups (
     createGlobalWaeOahGroup ());
 
 #ifdef MF_TRACE_IS_ENABLED
-  // create the trace OAH group
+  // create the tracing OAH group
   appendGroupToHandler (
     createGlobalTraceOahGroup (
       this));
@@ -215,7 +194,7 @@ void mfslInterpreterInsiderHandler::createTheMfslInterpreterOptionGroups (
   // initialize the library
   // ------------------------------------------------------
 
-// JMI
+  initializeWAE ();
 
   // initialize options handling, phase 2
   // ------------------------------------------------------
@@ -234,17 +213,11 @@ void mfslInterpreterInsiderHandler::checkOptionsAndArguments () const
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getEarlyTraceOah ()) {
-		std::stringstream ss;
-
-    ss <<
+    gLog <<
       "checking options and arguments from argc/argv in \"" <<
       fHandlerHeader <<
       "\"" <<
-      std::endl;
-
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
+      endl;
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -268,7 +241,7 @@ void mfslInterpreterInsiderHandler::checkHandlerOptionsConsistency ()
 void mfslInterpreterInsiderHandler::enforceHandlerQuietness ()
 {
 #ifdef MF_TRACE_IS_ENABLED
-  gGlobalTraceOahGroup->
+  gTraceOahGroup->
     enforceGroupQuietness ();
 #endif // MF_TRACE_IS_ENABLED
 
@@ -286,33 +259,33 @@ void mfslInterpreterInsiderOahGroup::checkGroupOptionsConsistency ()
 /* JMI
 
   if (inputSourceName.size () > 0 && inputSourceName == outputFileName) {
-    std::stringstream ss;
+    stringstream s;
 
-    ss <<
+    s <<
       "\"" << inputSourceName << "\" is both the input and output file name";
 
-    oahError (ss.str ());
+    oahError (s.str ());
   }
 
 
 
 
   if (! fOutputFileName.size ()) {
-    std::stringstream ss;
+    stringstream s;
 
-    ss <<
-      "mfslInterpreterInsiderOahGroup: a MusicXML output file name must be selected with '-o, -output-file-name";
+    s <<
+      "mfslInterpreterInsiderOahGroup: a MusicXML output file name must be chosen with '-o, -output-file-name";
 
-    oahError (ss.str ());
+    oahError (s.str ());
   }
 
   else if (fOutputFileName == gServiceRunData->getInputSourceName ()) {
-    std::stringstream ss;
+    stringstream s;
 
-    ss <<
+    s <<
       "\"" << fOutputFileName << "\" is both the input and output file name";
 
-    oahError (ss.str ());
+    oahError (s.str ());
   }
   */
 }
@@ -321,16 +294,10 @@ void mfslInterpreterInsiderOahGroup::checkGroupOptionsConsistency ()
 void mfslInterpreterInsiderOahGroup::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
-
-    ss <<
+  if (gOahOahGroup->getTraceOahVisitors ()) {
+    gLog <<
       ".\\\" ==> mfslInterpreterInsiderOahGroup::acceptIn ()" <<
-      std::endl;
-
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
+      endl;
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -340,16 +307,10 @@ void mfslInterpreterInsiderOahGroup::acceptIn (basevisitor* v)
         S_mfslInterpreterInsiderOahGroup elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
-          std::stringstream ss;
-
-          ss <<
+        if (gOahOahGroup->getTraceOahVisitors ()) {
+          gLog <<
             ".\\\" ==> Launching mfslInterpreterInsiderOahGroup::visitStart ()" <<
-            std::endl;
-
-          gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
-            ss.str ());
+            endl;
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
@@ -359,16 +320,10 @@ void mfslInterpreterInsiderOahGroup::acceptIn (basevisitor* v)
 void mfslInterpreterInsiderOahGroup::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
-
-    ss <<
+  if (gOahOahGroup->getTraceOahVisitors ()) {
+    gLog <<
       ".\\\" ==> mfslInterpreterInsiderOahGroup::acceptOut ()" <<
-      std::endl;
-
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
+      endl;
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -378,16 +333,10 @@ void mfslInterpreterInsiderOahGroup::acceptOut (basevisitor* v)
         S_mfslInterpreterInsiderOahGroup elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
-          std::stringstream ss;
-
-          ss <<
+        if (gOahOahGroup->getTraceOahVisitors ()) {
+          gLog <<
             ".\\\" ==> Launching mfslInterpreterInsiderOahGroup::visitEnd ()" <<
-            std::endl;
-
-          gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
-            ss.str ());
+            endl;
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
@@ -397,16 +346,10 @@ void mfslInterpreterInsiderOahGroup::acceptOut (basevisitor* v)
 void mfslInterpreterInsiderOahGroup::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
-
-    ss <<
+  if (gOahOahGroup->getTraceOahVisitors ()) {
+    gLog <<
       ".\\\" ==> mfslInterpreterInsiderOahGroup::browseData ()" <<
-      std::endl;
-
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
+      endl;
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -420,27 +363,27 @@ void mfslInterpreterInsiderHandler::print (std::ostream& os) const
 
   os <<
     "mfslInterpreterInsiderHandler:" <<
-    std::endl;
+    endl;
 
   ++gIndenter;
 
   printHandlerEssentials (
     os, fieldWidth);
-  os << std::endl;
+  os << endl;
 
   os <<
     "Options groups (" <<
     mfSingularOrPlural (
       fHandlerGroupsList.size (), "element",  "elements") <<
     "):" <<
-    std::endl;
+    endl;
 
   if (fHandlerGroupsList.size ()) {
-    os << std::endl;
+    os << endl;
 
     ++gIndenter;
 
-    std::list<S_oahGroup>::const_iterator
+    list<S_oahGroup>::const_iterator
       iBegin = fHandlerGroupsList.begin (),
       iEnd   = fHandlerGroupsList.end (),
       i      = iBegin;
@@ -449,7 +392,7 @@ void mfslInterpreterInsiderHandler::print (std::ostream& os) const
       // print the element
       os << (*i);
       if (++i == iEnd) break;
-      os << std::endl;
+      os << endl;
     } // for
 
     --gIndenter;
@@ -457,16 +400,16 @@ void mfslInterpreterInsiderHandler::print (std::ostream& os) const
 
   --gIndenter;
 
-  os << std::endl;
+  os << endl;
 }
 
-std::ostream& operator << (std::ostream& os, const S_mfslInterpreterInsiderHandler& elt)
+std::ostream& operator<< (std::ostream& os, const S_mfslInterpreterInsiderHandler& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "*** NONE ***" << endl;
   }
 
   return os;
@@ -479,6 +422,7 @@ S_mfslInterpreterInsiderOahGroup mfslInterpreterInsiderOahGroup::create ()
 {
   mfslInterpreterInsiderOahGroup* o = new mfslInterpreterInsiderOahGroup ();
   assert (o != nullptr);
+
   return o;
 }
 
@@ -500,17 +444,11 @@ void mfslInterpreterInsiderOahGroup::initializeMfslInterpreterInsiderOahGroup ()
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getEarlyTraceOah ()) {
-    std::stringstream ss;
-
-    ss <<
+    gLog << left <<
       "Initializing \"" <<
       fGroupHeader <<
       "\" group" <<
-      std::endl;
-
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
+      endl;
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -522,7 +460,7 @@ void mfslInterpreterInsiderOahGroup::printMfslInterpreterInsiderOahGroupValues (
 {
   gLog <<
     "The mfsl options are:" <<
-    std::endl;
+    endl;
 
   ++gIndenter;
 
@@ -534,15 +472,9 @@ S_mfslInterpreterInsiderOahGroup createGlobalMfslInterpreterInsiderOahGroup ()
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getEarlyTraceOah ()) {
-		std::stringstream ss;
-
-    ss <<
+    gLog <<
       "Creating global mfsl insider OAH group" <<
-      std::endl;
-
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
+      endl;
   }
 #endif // MF_TRACE_IS_ENABLED
 

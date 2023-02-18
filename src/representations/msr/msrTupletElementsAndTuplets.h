@@ -36,7 +36,7 @@ class EXP msrTupletElement : public msrMeasureElement
       // ------------------------------------------------------
 
                           msrTupletElement (
-                            int                 inputLineNumber);
+                            int inputLineNumber);
 
     virtual               ~msrTupletElement ();
 
@@ -85,8 +85,8 @@ class EXP msrTuplet : public msrTupletElement
                             msrTupletShowNumberKind tupletShowNumberKind,
                             msrTupletShowTypeKind   tupletShowTypeKind,
                             const msrTupletFactor&  tupletFactor,
-                            const Rational&         memberNotesSoundingWholeNotes,
-                            const Rational&         memberNotesDisplayWholeNotes);
+                            const msrWholeNotes&         memberNotesSoundingWholeNotes,
+                            const msrWholeNotes&         memberNotesDisplayWholeNotes);
 
     static SMARTP<msrTuplet> create (
                             int                     inputLineNumber,
@@ -97,8 +97,8 @@ class EXP msrTuplet : public msrTupletElement
                             msrTupletShowNumberKind tupletShowNumberKind,
                             msrTupletShowTypeKind   tupletShowTypeKind,
                             const msrTupletFactor&  tupletFactor,
-                            const Rational&         memberNotesSoundingWholeNotes,
-                            const Rational&         memberNotesDisplayWholeNotes);
+                            const msrWholeNotes&         memberNotesSoundingWholeNotes,
+                            const msrWholeNotes&         memberNotesDisplayWholeNotes);
 
     SMARTP<msrTuplet> createTupletNewbornClone ();
 
@@ -119,8 +119,8 @@ class EXP msrTuplet : public msrTupletElement
                             msrTupletShowNumberKind tupletShowNumberKind,
                             msrTupletShowTypeKind   tupletShowTypeKind,
                             const msrTupletFactor&  tupletFactor,
-                            const Rational&         memberNotesSoundingWholeNotes,
-                            const Rational&         memberNotesDisplayWholeNotes);
+                            const msrWholeNotes&         memberNotesSoundingWholeNotes,
+                            const msrWholeNotes&         memberNotesDisplayWholeNotes);
 
     virtual               ~msrTuplet ();
 
@@ -161,12 +161,12 @@ class EXP msrTuplet : public msrTupletElement
     // this override calls setTupletMembersMeasurePositions()
     void                  setMeasurePosition (
                             const S_msrMeasure& measure,
-                            const Rational&     measurePosition,
+                            const msrWholeNotes&     measurePosition,
                             const std::string&  context) override;
 
     void                  setTupletMembersMeasurePositions (
                             const S_msrMeasure& measure,
-                            const Rational&     measurePosition);
+                            const msrWholeNotes&     measurePosition);
 
     // number
     int                   getTupletNumber () const
@@ -193,9 +193,9 @@ class EXP msrTuplet : public msrTupletElement
                               { return fTupletFactor; }
 
     // member notes durations
-    Rational              getMemberNotesSoundingWholeNotes () const
+    msrWholeNotes          getMemberNotesSoundingWholeNotes () const
                               { return fMemberNotesSoundingWholeNotes; }
-    Rational              getMemberNotesDisplayWholeNotes () const
+    msrWholeNotes          getMemberNotesDisplayWholeNotes () const
                               { return fMemberNotesDisplayWholeNotes; }
 
     // elements
@@ -204,7 +204,7 @@ class EXP msrTuplet : public msrTupletElement
                               { return fTupletElementsList; }
 
     // tuplet durations
-    Rational              getTupletDisplayWholeNotes () const
+    msrWholeNotes          getTupletDisplayWholeNotes () const
                               { return fTupletDisplayWholeNotes; }
 
   public:
@@ -292,11 +292,11 @@ class EXP msrTuplet : public msrTupletElement
     msrTupletFactor       fTupletFactor;
 
     // member notes durations
-    Rational              fMemberNotesSoundingWholeNotes;
-    Rational              fMemberNotesDisplayWholeNotes;
+    msrWholeNotes          fMemberNotesSoundingWholeNotes;
+    msrWholeNotes          fMemberNotesDisplayWholeNotes;
 
     // display whole notes
-    Rational              fTupletDisplayWholeNotes;
+    msrWholeNotes          fTupletDisplayWholeNotes;
 
     // elements
     std::list<S_msrTupletElement>

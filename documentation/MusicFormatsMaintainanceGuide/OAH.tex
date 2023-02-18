@@ -319,7 +319,7 @@ void lilypondFixedOctaveEntryAtom::applyAtomWithValue (
   std::ostream&      os)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -330,7 +330,7 @@ void lilypondFixedOctaveEntryAtom::applyAtomWithValue (
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   // theString contains the fixed reference note
 
@@ -399,7 +399,7 @@ in \oah{oahAtomsCollection.cpp}:
 void oahIntegerAtom::setIntegerVariable (int value)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -414,7 +414,7 @@ void oahIntegerAtom::setIntegerVariable (int value)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   fIntegerVariable = value;
 
@@ -533,7 +533,7 @@ passes/lpsr2lilypond/lpsr2lilypondOah.h:class EXP lilypondTransposePartNameAtom 
 passes/lpsr2lilypond/lpsr2lilypondOah.h:class EXP lilypondTransposePartIDAtom : public oahAtomStoringAValue
 passes/lpsr2lilypond/lpsr2lilypondOah.h:class EXP lilypondAccidentalStyleKindAtom : public oahAtomStoringAValue
 passes/lpsr2lilypond/lpsr2lilypondOah.h:class EXP lilypondChordsDisplayAtom : public oahAtomStoringAValue
-passes/lpsr2lilypond/lpsr2lilypondOah.h:class EXP lilypondLyricsDurationsKindAtom : public oahAtomStoringAValue
+passes/lpsr2lilypond/lpsr2lilypondOah.h:class EXP lilypondLyricsNotesDurationsKindAtom : public oahAtomStoringAValue
 passes/lpsr2lilypond/lpsr2lilypondOah.h:class EXP lilypondDynamicsTextSpannersStyleKindAtom : public oahAtomStoringAValue
 passes/lpsr2lilypond/lpsr2lilypondOah.h:class EXP lilypondBreakPageAfterMeasureNumberAtom : public oahAtomStoringAValue
 passes/msr2lpsr/msr2lpsrOah.h:class EXP msr2lpsrScoreOutputKindAtom : public oahAtomStoringAValue
@@ -793,7 +793,7 @@ class EXP oahValueLessAtom : public oahAtom
 
 Passing the options and arguments over to the library when using \mf\ can be done in two ways:
 \begin{itemize}
-\item \CLI\ tools get them from \argcargv\ as usual;
+\item \CLI\ services get them from \argcargv\ as usual;
 \item application using the library through the \API\ should place them in an {\tt oahOptionsVector}, defined in \mflibrary{mfMusicformatsErrors.h}:
 \begin{lstlisting}[language=CPlusPlus]
 typedef std::vector<std::pair<std::string, std::string> > oahOptionsVector;
@@ -804,10 +804,10 @@ typedef std::vector<std::pair<std::string, std::string> > oahOptionsVector;
 Using an {\tt oahOptionsVector} can be done for example:
 \begin{itemize}
 \item in \Web\ sites; %%% JMI below
-\item in the generators CLI tools found in the \clisamples{} folder \clisamples{xml2Any.cpp}, \clisamples{libMultipleInitsTest.cpp}, \clisamples{Mikrokosmos3Wandering.cpp} and \clisamples{LilyPondIssue34.cpp}, as well as in \clisamples{msdl.cpp}, the MSDL converter command line interface.
+\item in the generators CLI services found in the \clisamples{} folder \clisamples{xml2Any.cpp}, \clisamples{libMultipleInitsTest.cpp}, \clisamples{Mikrokosmos3Wandering.cpp} and \clisamples{LilyPondIssue34.cpp}, as well as in \clisamples{msdl.cpp}, the MSDL converter command line interface.
 \end{itemize}
 
- In these tools, and {\tt oahOptionsVector} is instantiated ans populated from \argcargv\ with \functionName{convertArgcArgvToOptionsAndArguments}, defined in \oah{oahBasicTypes.h}:%%%JMI
+ In these services, an {\tt oahOptionsVector} is instantiated ans populated from \argcargv\ with \functionName{convertArgcArgvToOptionsAndArguments}, defined in \oah{oahBasicTypes.h}:%%%JMI
 \begin{lstlisting}[language=CPlusPlus]
 EXP Bool convertArgcArgvToOptionsAndArguments (
   int               argc,
@@ -1036,7 +1036,7 @@ class   {\tt oahRegularHandler} relies on the corresponding \insider\ handler:
 
 A \regular\ handler merely selects options from the \fieldName{fInsiderHandler}, and presents them in groups and subgroups its own way. The group names are hidden to the user, and only the subgroups are seen in the help provided to the user.
 
-For example, in \xmlToXmlTool{xml2xmlRegularHandler.cpp}, there is:
+For example, in \xmlToXmlService{xml2xmlRegularHandler.cpp}, there is:
 \begin{lstlisting}[language=CPlusPlus]
 void xml2xmlRegularHandler::createInformationsRegularGroup ()
 {
@@ -1308,8 +1308,8 @@ oahElementHelpOnlyKind oahHandler::applyOptionsFromElementUsesList ()
           }
 
           else {
-  #ifdef MF_TRACE_IS_ENABLED
-            if (gEarlyOptions.getEarlyTraceOah ()) {
+#ifdef MF_TRACE_IS_ENABLED
+            if (gEarlyOptions.getTraceEarlyOptions ()) {
               gLog <<
                 "**** Handling value-less atom:" <<
                 std::endl;
@@ -1322,7 +1322,7 @@ oahElementHelpOnlyKind oahHandler::applyOptionsFromElementUsesList ()
 
               --gIndenter;
             }
-  #endif
+#endif // MF_TRACE_IS_ENABLED
 
             atom->
               applyValueLessAtom (
@@ -1510,7 +1510,7 @@ class   oahFindStringMatch : public smartable
     // protected fields
     // ------------------------------------------------------
 
-    std::string			          fFoundString;
+    std::string			      fFoundString;
 		std::string           fContainingFindableElementInfo;
 };
 \end{lstlisting}
@@ -1660,7 +1660,7 @@ When \optionBoth{reverse-names-display-order}{rndo} was added to \oahRepr\ by th
 
 \item \class{oahBooleanAtom} was ready to be used;
 
-\item it was decided to place it in the \globalVariable{gGlobalOahOahGroup} \oahRepr\ group, in its {\tt Options~help} sub group;
+\item it was decided to place it in the \globalVariable{gOahOahGroup} \oahRepr\ group, in its {\tt Options~help} sub group;
 
 \item \class{oahOahGroup} in \oahBoth{oahOah} got a new \fieldName{fReverseNamesDisplayOrder} field:
 \begin{lstlisting}[language=CPlusPlus]
@@ -1740,7 +1740,7 @@ std::string oahElement::fetchNames () const
         &&
     fLongName.size ()
   ) {
-    if (gGlobalOahOahGroup->getReverseNamesDisplayOrder ()) {
+    if (gOahOahGroup->getReverseNamesDisplayOrder ()) {
       ss <<
         '-' << fShortName <<
         ", " <<
@@ -1848,7 +1848,7 @@ Then in \method{oahHistoryAtom}{printHistory}, the call to \methodName{printVers
 void oahHistoryAtom::applyValueLessAtom (std::ostream& os)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1859,7 +1859,7 @@ void oahHistoryAtom::applyValueLessAtom (std::ostream& os)
       __FILE__, __LINE__,
       ss.str ());
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
   int saveIndent = gIndenter.getIndent ();
 
@@ -2207,7 +2207,7 @@ Macro {\tt MF_HARMONIES_EXTRA_IS_ENABLED} is defined or not in \oah{mfEnableHarm
 \section{{\tt man} pages generation}
 % -------------------------------------------------------------------------
 
-\mf\ can create man pages for its \CLI\ tools by browing their \oahRepr\ hierarchy. This has not been finalized yet.%%%JMI
+\mf\ can create man pages for its \CLI\ services by browing their \oahRepr\ hierarchy. This has not been finalized yet.%%%JMI
 
 
 % -------------------------------------------------------------------------

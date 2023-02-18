@@ -40,7 +40,7 @@ class msrNoteEvent : public smartable
     // ------------------------------------------------------
 
       static SMARTP<msrNoteEvent> create (
-                            const Rational&  noteEventMeasurePosition,
+                            const msrWholeNotes&  noteEventMeasurePosition,
                             const S_msrNote&        noteEventNote,
                             msrNoteEventKind noteEventKind);
 
@@ -50,7 +50,7 @@ class msrNoteEvent : public smartable
     // ------------------------------------------------------
 
                           msrNoteEvent (
-                            const Rational&  noteEventMeasurePosition,
+                            const msrWholeNotes&  noteEventMeasurePosition,
                             const S_msrNote&        noteEventNote,
                             msrNoteEventKind noteEventKind);
 
@@ -61,7 +61,7 @@ class msrNoteEvent : public smartable
     // set and get
     // ------------------------------------------------------
 
-    Rational              getNoteEventMeasurePosition () const
+    msrWholeNotes          getNoteEventMeasurePosition () const
                               { return fNoteEventMeasurePosition; }
 
     S_msrNote             getNoteEventNote () const
@@ -93,7 +93,7 @@ class msrNoteEvent : public smartable
     // private fields
     // ------------------------------------------------------
 
-    Rational              fNoteEventMeasurePosition;
+    msrWholeNotes          fNoteEventMeasurePosition;
     S_msrNote             fNoteEventNote;
     msrNoteEventKind      fNoteEventKind;
 };
@@ -109,7 +109,7 @@ class msrSimultaneousNotesChunk : public smartable
     // ------------------------------------------------------
 
       static SMARTP<msrSimultaneousNotesChunk> create (
-                            const Rational& chunkMeasurePosition);
+                            const msrWholeNotes& chunkMeasurePosition);
 
   protected:
 
@@ -117,7 +117,7 @@ class msrSimultaneousNotesChunk : public smartable
     // ------------------------------------------------------
 
                           msrSimultaneousNotesChunk (
-                            const Rational& chunkMeasurePosition);
+                            const msrWholeNotes& chunkMeasurePosition);
 
     virtual               ~msrSimultaneousNotesChunk ();
 
@@ -126,7 +126,7 @@ class msrSimultaneousNotesChunk : public smartable
     // set and get
     // ------------------------------------------------------
 
-    Rational              getChunkMeasurePosition () const
+    msrWholeNotes          getChunkMeasurePosition () const
                               { return fChunkMeasurePosition; }
 
     const std::list<S_msrNote>&
@@ -134,8 +134,8 @@ class msrSimultaneousNotesChunk : public smartable
                               { return fChunkNotesList; }
 
 
-    Rational              getChunkDurationWholeNotes () const
-                              { return fChunkDurationWholeNotes; }
+    msrWholeNotes          getChunkNotesDurationWholeNotes () const
+                              { return fChunkNotesDurationWholeNotes; }
 
   public:
 
@@ -164,9 +164,9 @@ class msrSimultaneousNotesChunk : public smartable
     // private fields
     // ------------------------------------------------------
 
-    Rational              fChunkMeasurePosition;
+    msrWholeNotes          fChunkMeasurePosition;
     std::list<S_msrNote>  fChunkNotesList;
-    Rational              fChunkDurationWholeNotes;
+    msrWholeNotes          fChunkNotesDurationWholeNotes;
 };
 typedef SMARTP<msrSimultaneousNotesChunk> S_msrSimultaneousNotesChunk;
 EXP std::ostream& operator << (std::ostream& os, const S_msrSimultaneousNotesChunk& elt);
@@ -275,14 +275,14 @@ class EXP msrMeasuresSlice : public smartable
     std::string           fSliceMeasureNumber;
 
     // the measures in the slice
-    std::vector<S_msrMeasure>  fSliceMeasuresVector;
+    std::vector<S_msrMeasure>
+    										  fSliceMeasuresVector;
 
     // notes flat list
     std::list<S_msrNote>  fSliceNotesFlatList;
 
     // note events list
     std::list<S_msrNoteEvent>
-
                           fSliceNoteEventsList;
 
     // simultaneous notes chunks list

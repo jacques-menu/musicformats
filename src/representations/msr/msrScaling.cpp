@@ -105,7 +105,7 @@ float msrScaling::fetchGlobalStaffSize () const
       optionsStaffGlobalSizeDefaultValue =
         gGlobalLpsrOahGroup->getStaffGlobalSizeDefaultValue ();
 
-    if (gGlobalTraceOahGroup->getTraceGeometry ()) {
+    if (gTraceOahGroup->getTraceGeometry ()) {
       gLog <<
         "fetchGlobalStaffSize():" <<
         std::endl;
@@ -157,7 +157,7 @@ float msrScaling::fetchGlobalStaffSize () const
 
     if (result < 1.0 || result > 100.0) {
 #ifdef MF_TRACE_IS_ENABLED
-      if (gGlobalTraceOahGroup->getTraceGeometry ()) {
+      if (gTraceOahGroup->getTraceGeometry ()) {
         std::stringstream ss;
 
         ss <<

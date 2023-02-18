@@ -14,12 +14,10 @@
 
 #include "msrElements.h"
 #include "msrMeasureElements.h"
-
 #include "msrMeasures.h"
-
 #include "msrTypesForwardDeclarations.h"
-
 #include "msrTupletFactors.h"
+#include "msrWholeNotes.h"
 
 
 namespace MusicFormats
@@ -173,16 +171,16 @@ class EXP msrFiguredBass : public msrMeasureElement
     static SMARTP<msrFiguredBass> create (
                             int                    inputLineNumber,
                             const S_msrMeasure&    upLinkToMeasure,
-                            const Rational&        figuredBassSoundingWholeNotes,
-                            const Rational&        figuredBassDisplayWholeNotes,
+                            const msrWholeNotes&        figuredBassSoundingWholeNotes,
+                            const msrWholeNotes&        figuredBassDisplayWholeNotes,
                             msrFiguredBassParenthesesKind
                                                    figuredBassParenthesesKind,
                             const msrTupletFactor& figuredBassTupletFactor);
 
     static SMARTP<msrFiguredBass> create (
                             int                    inputLineNumber,
-                            const Rational&        figuredBassSoundingWholeNotes,
-                            const Rational&        figuredBassDisplayWholeNotes,
+                            const msrWholeNotes&        figuredBassSoundingWholeNotes,
+                            const msrWholeNotes&        figuredBassDisplayWholeNotes,
                             msrFiguredBassParenthesesKind
                                                    figuredBassParenthesesKind,
                             const msrTupletFactor& figuredBassTupletFactor);
@@ -200,8 +198,8 @@ class EXP msrFiguredBass : public msrMeasureElement
                           msrFiguredBass (
                             int                    inputLineNumber,
                             const S_msrMeasure&    upLinkToMeasure,
-                            const Rational&        figuredBassSoundingWholeNotes,
-                            const Rational&        figuredBassDisplayWholeNotes,
+                            const msrWholeNotes&        figuredBassSoundingWholeNotes,
+                            const msrWholeNotes&        figuredBassDisplayWholeNotes,
                             msrFiguredBassParenthesesKind
                                                    figuredBassParenthesesKind,
                             const msrTupletFactor& figuredBassTupletFactor);
@@ -248,12 +246,12 @@ class EXP msrFiguredBass : public msrMeasureElement
 
     // whole notes
     void                  setFiguredBassDisplayWholeNotes (
-                            const Rational& wholeNotes)
+                            const msrWholeNotes& wholeNotes)
                               {
                                 fFiguredBassDisplayWholeNotes = wholeNotes;
                               }
 
-    Rational              getFiguredBassDisplayWholeNotes () const
+    msrWholeNotes          getFiguredBassDisplayWholeNotes () const
                               { return fFiguredBassDisplayWholeNotes; }
 
     msrFiguredBassParenthesesKind
@@ -309,7 +307,7 @@ class EXP msrFiguredBass : public msrMeasureElement
     S_msrNote             fFiguredBassUpLinkToNote;
     S_msrVoice            fFiguredBassUpLinkToVoice; // for use in figured bass voices JMI v0.9.66
 
-    Rational              fFiguredBassDisplayWholeNotes;
+    msrWholeNotes          fFiguredBassDisplayWholeNotes;
 
     msrFiguredBassParenthesesKind
                           fFiguredBassParenthesesKind;

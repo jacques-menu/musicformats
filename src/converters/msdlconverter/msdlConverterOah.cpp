@@ -88,7 +88,7 @@ void msdlConverterOahGroup::checkGroupOptionsConsistency ()
 void msdlConverterOahGroup::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -107,7 +107,7 @@ void msdlConverterOahGroup::acceptIn (basevisitor* v)
         S_msdlConverterOahGroup elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -126,7 +126,7 @@ void msdlConverterOahGroup::acceptIn (basevisitor* v)
 void msdlConverterOahGroup::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -145,7 +145,7 @@ void msdlConverterOahGroup::acceptOut (basevisitor* v)
         S_msdlConverterOahGroup elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -164,7 +164,7 @@ void msdlConverterOahGroup::acceptOut (basevisitor* v)
 void msdlConverterOahGroup::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -206,7 +206,7 @@ std::ostream& operator << (std::ostream& os, const S_msdlConverterOahGroup& elt)
 S_msdlConverterOahGroup createGlobalMsdlConverterOahGroup ()
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<

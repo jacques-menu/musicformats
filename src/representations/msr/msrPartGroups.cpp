@@ -195,7 +195,7 @@ msrPartGroup::msrPartGroup (
   fPartGroupBarLineKind     = partGroupBarLineKind;
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTracePartGroups ()) {
+  if (gTraceOahGroup->getTracePartGroups ()) {
 		std::stringstream ss;
 
     ss <<
@@ -274,7 +274,7 @@ msrPartGroup::msrPartGroup (
 */
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTracePartGroups ()) {
+  if (gTraceOahGroup->getTracePartGroups ()) {
 		std::stringstream ss;
 
     ss <<
@@ -300,7 +300,7 @@ S_msrPartGroup msrPartGroup::createPartGroupNewbornClone (
   const S_msrScore&     scoreClone)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTracePartGroups ()) {
+  if (gTraceOahGroup->getTracePartGroups ()) {
 		std::stringstream ss;
 
     ss <<
@@ -499,7 +499,7 @@ S_msrPart msrPartGroup::appendPartToPartGroupByItsPartID (
 
   // register it in this part group
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTracePartGroups ()) {
+  if (gTraceOahGroup->getTracePartGroups ()) {
 		std::stringstream ss;
 
     ss <<
@@ -525,7 +525,7 @@ S_msrPart msrPartGroup::appendPartToPartGroupByItsPartID (
   fPartGroupElementsList.push_back (part);
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTracePartGroupsDetails ()) {
+  if (gTraceOahGroup->getTracePartGroupsDetails ()) {
 		std::stringstream ss;
 
     ss <<
@@ -587,7 +587,7 @@ void msrPartGroup::appendPartToPartGroup (S_msrPart part)
 {
   // register part in this part group
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTracePartGroups ()) {
+  if (gTraceOahGroup->getTracePartGroups ()) {
 		std::stringstream ss;
 
     ss <<
@@ -621,7 +621,7 @@ void msrPartGroup::removePartFromPartGroup (
 {
   // register part in this part group
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTracePartGroups ()) {
+  if (gTraceOahGroup->getTracePartGroups ()) {
 		std::stringstream ss;
 
     ss <<
@@ -688,7 +688,7 @@ void msrPartGroup::prependSubPartGroupToPartGroup (
   const S_msrPartGroup& partGroup)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTracePartGroups ()) {
+  if (gTraceOahGroup->getTracePartGroups ()) {
 		std::stringstream ss;
 
     ss <<
@@ -714,7 +714,7 @@ void msrPartGroup::appendSubPartGroupToPartGroup (
   const S_msrPartGroup& partGroup)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTracePartGroups ()) {
+  if (gTraceOahGroup->getTracePartGroups ()) {
 		std::stringstream ss;
 
     ss <<
@@ -897,7 +897,7 @@ S_msrPart msrPartGroup::fetchPartFromPartGroupByItsPartID (
   S_msrPart result;
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTracePartGroupsDetails ()) {
+  if (gTraceOahGroup->getTracePartGroupsDetails ()) {
 		std::stringstream ss;
 
     ss <<

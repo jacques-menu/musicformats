@@ -27,6 +27,7 @@
 #include "msrRepeats.h"
 #include "msrStems.h"
 #include "msrTupletFactors.h"
+#include "msrWholeNotes.h"
 
 #include "lpsrContexts.h"
 
@@ -795,14 +796,14 @@ class EXP lpsr2lilypondTranslator :
 
     // durations
 
-    Rational              fLastMetWholeNotes;
+    msrWholeNotes          fLastMetWholeNotes;
 
-    std::string           durationAsLilypondString (
-                            int             inputLineNumber,
-                            const Rational& wholeNotes);
+    std::string           wholeNotesAsLilypondString (
+                            int                 inputLineNumber,
+                            const msrWholeNotes& wholeNotes);
 
-    std::string           msrDurationKindAsLilypondString (
-                            msrDurationKind durationKind);
+    std::string           msrNotesDurationKindAsLilypondString (
+                            msrNotesDurationKind notesNotesDurationKind);
 
     // notes
 
@@ -983,7 +984,7 @@ class EXP lpsr2lilypondTranslator :
 
     // tremolos
 
-    std::string           singleTremoloDurationAsLilypondString (
+    std::string           singleTremoloNotesDurationAsLilypondString (
                             const S_msrSingleTremolo& singleTremolo);
 
     // dynamics

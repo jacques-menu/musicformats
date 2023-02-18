@@ -244,10 +244,10 @@ class EXP msrOahGroup : public oahGroup
                               { return fUseLyricistsAsPoets; }
 
     // durations
-    void                  setTraceMsrDurations ()
-                              { fTraceMsrDurations = true; }
-    Bool                  getTraceMsrDurations () const
-                              { return fTraceMsrDurations; }
+    void                  setTraceMsrNotesDurations ()
+                              { fTraceMsrNotesDurations = true; }
+    Bool                  getTraceMsrNotesDurations () const
+                              { return fTraceMsrNotesDurations; }
 
     // display
     void                  setDisplayPartGroups ()
@@ -442,7 +442,7 @@ class EXP msrOahGroup : public oahGroup
     Bool                  fUseLyricistsAsPoets; // lyricist is unknown to LilyPond
 
     // durations
-    Bool                  fTraceMsrDurations;
+    Bool                  fTraceMsrNotesDurations;
 
     // display
     Bool                  fDisplayPartGroups;

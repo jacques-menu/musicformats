@@ -98,7 +98,7 @@ msrLineBreak::msrLineBreak (
   fUserSelectedLineBreakKind = userSelectedLineBreakKind;
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceLineBreaks ()) {
+  if (gTraceOahGroup->getTraceLineBreaks ()) {
 		std::stringstream ss;
 
     ss <<
@@ -131,7 +131,7 @@ void msrLineBreak::setLineBreakUpLinkToMeasure (
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceWholeNotes ()) {
+  if (gTraceOahGroup->getTraceWholeNotes ()) {
     ++gIndenter;
 
     gLog <<
@@ -315,7 +315,7 @@ msrPageBreak::msrPageBreak (
         inputLineNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTracePageBreaks ()) {
+  if (gTraceOahGroup->getTracePageBreaks ()) {
 		std::stringstream ss;
 
     ss <<
@@ -350,7 +350,7 @@ void msrPageBreak::setPageBreakUpLinkToMeasure (
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceWholeNotes ()) {
+  if (gTraceOahGroup->getTraceWholeNotes ()) {
     ++gIndenter;
 
     gLog <<

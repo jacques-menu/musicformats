@@ -73,7 +73,7 @@ msrVoiceStaffChange::~msrVoiceStaffChange ()
 S_msrVoiceStaffChange msrVoiceStaffChange::createStaffChangeNewbornClone ()
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceStaffChanges ()) {
+  if (gTraceOahGroup->getTraceStaffChanges ()) {
 		std::stringstream ss;
 
     ss <<
@@ -110,7 +110,7 @@ void msrVoiceStaffChange::setVoiceStaffChangeUpLinkToMeasure (
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceWholeNotes ()) {
+  if (gTraceOahGroup->getTraceWholeNotes ()) {
     ++gIndenter;
 
     gLog <<

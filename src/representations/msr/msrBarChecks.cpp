@@ -82,7 +82,7 @@ msrBarCheck::msrBarCheck (
         inputLineNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceMeasuresNumbers ()) {
+  if (gTraceOahGroup->getTraceMeasuresNumbers ()) {
 		std::stringstream ss;
 
     ss <<
@@ -110,7 +110,7 @@ msrBarCheck::msrBarCheck (
   fNextBarPuristNumber   = nextBarPuristNumber;
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceMeasuresNumbers ()) {
+  if (gTraceOahGroup->getTraceMeasuresNumbers ()) {
 		std::stringstream ss;
 
     ss <<
@@ -144,7 +144,7 @@ void msrBarCheck::setBarCheckUpLinkToMeasure (
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceWholeNotes ()) {
+  if (gTraceOahGroup->getTraceWholeNotes ()) {
     ++gIndenter;
 
     gLog <<
@@ -165,7 +165,7 @@ void msrBarCheck::setBarCheckUpLinkToMeasure (
 void msrBarCheck::setNextBarPuristNumber (int puristNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceMeasuresNumbers ()) {
+  if (gTraceOahGroup->getTraceMeasuresNumbers ()) {
 		std::stringstream ss;
 
     ss <<

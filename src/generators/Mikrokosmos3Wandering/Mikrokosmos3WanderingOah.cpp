@@ -203,7 +203,7 @@ void Mikrokosmos3WanderingOahGroup::checkGroupOptionsConsistency ()
 void Mikrokosmos3WanderingOahGroup::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -222,7 +222,7 @@ void Mikrokosmos3WanderingOahGroup::acceptIn (basevisitor* v)
         S_Mikrokosmos3WanderingOahGroup elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -241,7 +241,7 @@ void Mikrokosmos3WanderingOahGroup::acceptIn (basevisitor* v)
 void Mikrokosmos3WanderingOahGroup::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -260,7 +260,7 @@ void Mikrokosmos3WanderingOahGroup::acceptOut (basevisitor* v)
         S_Mikrokosmos3WanderingOahGroup elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -279,7 +279,7 @@ void Mikrokosmos3WanderingOahGroup::acceptOut (basevisitor* v)
 void Mikrokosmos3WanderingOahGroup::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -353,7 +353,7 @@ std::ostream& operator << (std::ostream& os, const S_Mikrokosmos3WanderingOahGro
 S_Mikrokosmos3WanderingOahGroup createGlobalMikrokosmos3WanderingOahGroup ()
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<

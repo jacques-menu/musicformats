@@ -63,7 +63,7 @@ extraDisplayAllHarmoniesStructuresAtom::~extraDisplayAllHarmoniesStructuresAtom 
 void extraDisplayAllHarmoniesStructuresAtom::applyValueLessAtom (std::ostream& os)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -86,7 +86,7 @@ void extraDisplayAllHarmoniesStructuresAtom::applyValueLessAtom (std::ostream& o
 //   std::ostream&      os)
 // {
 // #ifdef MF_TRACE_IS_ENABLED
-//   if (gEarlyOptions.getEarlyTraceOah ()) {
+//   if (gEarlyOptions.getTraceEarlyOptions ()) {
 //     gLog <<
 //       "==> option '" << fetchNames () << "' is a extraDisplayAllHarmoniesStructuresAtom" <<
 //       std::endl;
@@ -99,7 +99,7 @@ void extraDisplayAllHarmoniesStructuresAtom::applyValueLessAtom (std::ostream& o
 void extraDisplayAllHarmoniesStructuresAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -118,7 +118,7 @@ void extraDisplayAllHarmoniesStructuresAtom::acceptIn (basevisitor* v)
         S_extraDisplayAllHarmoniesStructuresAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -137,7 +137,7 @@ void extraDisplayAllHarmoniesStructuresAtom::acceptIn (basevisitor* v)
 void extraDisplayAllHarmoniesStructuresAtom::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -156,7 +156,7 @@ void extraDisplayAllHarmoniesStructuresAtom::acceptOut (basevisitor* v)
         S_extraDisplayAllHarmoniesStructuresAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -175,7 +175,7 @@ void extraDisplayAllHarmoniesStructuresAtom::acceptOut (basevisitor* v)
 void extraDisplayAllHarmoniesStructuresAtom::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -278,7 +278,7 @@ void extraDisplayAllHarmoniesContentsAtom::applyAtomWithValue (
   std::ostream&      os)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -295,7 +295,7 @@ void extraDisplayAllHarmoniesContentsAtom::applyAtomWithValue (
   // is it in the accidental styles map?
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -385,7 +385,7 @@ void extraDisplayAllHarmoniesContentsAtom::applyAtomWithValue (
 void extraDisplayAllHarmoniesContentsAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -404,7 +404,7 @@ void extraDisplayAllHarmoniesContentsAtom::acceptIn (basevisitor* v)
         S_extraDisplayAllHarmoniesContentsAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -423,7 +423,7 @@ void extraDisplayAllHarmoniesContentsAtom::acceptIn (basevisitor* v)
 void extraDisplayAllHarmoniesContentsAtom::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -442,7 +442,7 @@ void extraDisplayAllHarmoniesContentsAtom::acceptOut (basevisitor* v)
         S_extraDisplayAllHarmoniesContentsAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -461,7 +461,7 @@ void extraDisplayAllHarmoniesContentsAtom::acceptOut (basevisitor* v)
 void extraDisplayAllHarmoniesContentsAtom::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -568,7 +568,7 @@ void extraDisplayHarmonyDetailsAtom::applyAtomWithValue (
   std::ostream&      os)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -584,7 +584,7 @@ void extraDisplayHarmonyDetailsAtom::applyAtomWithValue (
   // theString contains the pitch name in the current language
   // is it in the accidental styles map?
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -614,7 +614,7 @@ void extraDisplayHarmonyDetailsAtom::applyAtomWithValue (
   size_t smSize = sm.size ();
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -631,7 +631,7 @@ void extraDisplayHarmonyDetailsAtom::applyAtomWithValue (
 #endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -662,7 +662,7 @@ void extraDisplayHarmonyDetailsAtom::applyAtomWithValue (
     harmonyName = sm [2];
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -759,7 +759,7 @@ void extraDisplayHarmonyDetailsAtom::applyAtomWithValue (
 void extraDisplayHarmonyDetailsAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -778,7 +778,7 @@ void extraDisplayHarmonyDetailsAtom::acceptIn (basevisitor* v)
         S_extraDisplayHarmonyDetailsAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -797,7 +797,7 @@ void extraDisplayHarmonyDetailsAtom::acceptIn (basevisitor* v)
 void extraDisplayHarmonyDetailsAtom::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -816,7 +816,7 @@ void extraDisplayHarmonyDetailsAtom::acceptOut (basevisitor* v)
         S_extraDisplayHarmonyDetailsAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -835,7 +835,7 @@ void extraDisplayHarmonyDetailsAtom::acceptOut (basevisitor* v)
 void extraDisplayHarmonyDetailsAtom::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -921,7 +921,7 @@ void extraDisplayHarmonyAnalysisAtom::applyAtomWithValue (
   std::ostream&      os)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -938,7 +938,7 @@ void extraDisplayHarmonyAnalysisAtom::applyAtomWithValue (
   // is it in the accidental styles map?
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -970,7 +970,7 @@ void extraDisplayHarmonyAnalysisAtom::applyAtomWithValue (
   size_t smSize = sm.size ();
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -988,7 +988,7 @@ void extraDisplayHarmonyAnalysisAtom::applyAtomWithValue (
 
   if (smSize == 4) {
 #ifdef MF_TRACE_IS_ENABLED
-    if (gEarlyOptions.getEarlyTraceOah ()) {
+    if (gEarlyOptions.getTraceEarlyOptions ()) {
 	  	std::stringstream ss;
 
       ss <<
@@ -1035,7 +1035,7 @@ void extraDisplayHarmonyAnalysisAtom::applyAtomWithValue (
   }
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1147,7 +1147,7 @@ void extraDisplayHarmonyAnalysisAtom::applyAtomWithValue (
 void extraDisplayHarmonyAnalysisAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1166,7 +1166,7 @@ void extraDisplayHarmonyAnalysisAtom::acceptIn (basevisitor* v)
         S_extraDisplayHarmonyAnalysisAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -1185,7 +1185,7 @@ void extraDisplayHarmonyAnalysisAtom::acceptIn (basevisitor* v)
 void extraDisplayHarmonyAnalysisAtom::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1204,7 +1204,7 @@ void extraDisplayHarmonyAnalysisAtom::acceptOut (basevisitor* v)
         S_extraDisplayHarmonyAnalysisAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -1223,7 +1223,7 @@ void extraDisplayHarmonyAnalysisAtom::acceptOut (basevisitor* v)
 void extraDisplayHarmonyAnalysisAtom::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1369,7 +1369,7 @@ in the current language and the given harmony to standard output.
 HARMONY_SPEC should be of the form ROOT_DIATONIC_PITCH:HARMONY_NAME .
 There can be spaces around the ':', in which case quoting is needed.")",
          std::regex ("EXECUTABLE"),
-          gGlobalOahOahGroup->getOahOahGroupServiceName ()),
+          gOahOahGroup->getOahOahGroupServiceName ()),
         "HARMONY_SPEC",
         "fHarmoniesRootAsString",
         fHarmoniesRootAsString));
@@ -1397,7 +1397,7 @@ R"(Write an analysis of the harmony for the given diatonic (semitones) pitch
 in the current language and the given harmony to standard output.
 HARMONY_SPEC should be of the form ROOT_DIATONIC_PITCH:HARMONY_NAME INVERSION .")",
           std::regex ("EXECUTABLE"),
-          gGlobalOahOahGroup->getOahOahGroupServiceName ()),
+          gOahOahGroup->getOahOahGroupServiceName ()),
         "HARMONY_SPEC",
         "fHarmoniesRootAsString",
         fHarmoniesRootAsString));
@@ -1436,7 +1436,7 @@ void harmoniesExtraOahGroup::checkGroupOptionsConsistency ()
 void harmoniesExtraOahGroup::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1455,7 +1455,7 @@ void harmoniesExtraOahGroup::acceptIn (basevisitor* v)
         S_harmoniesExtraOahGroup elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -1474,7 +1474,7 @@ void harmoniesExtraOahGroup::acceptIn (basevisitor* v)
 void harmoniesExtraOahGroup::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1493,7 +1493,7 @@ void harmoniesExtraOahGroup::acceptOut (basevisitor* v)
         S_harmoniesExtraOahGroup elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+        if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -1512,7 +1512,7 @@ void harmoniesExtraOahGroup::acceptOut (basevisitor* v)
 void harmoniesExtraOahGroup::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalOahOahGroup->getTraceOahVisitors ()) {
+  if (gOahOahGroup->getTraceOahVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -1569,7 +1569,7 @@ EXP S_harmoniesExtraOahGroup getGlobalHarmoniesExtraOahGroup ()
 S_harmoniesExtraOahGroup createGlobalHarmoniesExtraOahGroup ()
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getEarlyTraceOah ()) {
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
 		std::stringstream ss;
 
     ss <<

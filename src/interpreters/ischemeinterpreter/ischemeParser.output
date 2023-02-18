@@ -6,7 +6,7 @@ Grammar
 
     2 $@2: ε
 
-    3 Script: Tool Input $@1 OptionalScriptElementsSeq $@2 OptionalSelectStatements
+    3 Script: Service Input $@1 OptionalScriptElementsSeq $@2 OptionalSelectStatements
 
     4 Number: "integer number"
     5       | "double number"
@@ -14,10 +14,10 @@ Grammar
     6 SingleString: "single quoted_string"
     7             | "double quoted_string"
 
-    8 std::string: SingleString
-    9       | std::string SingleString
+    8 String: SingleString
+    9       | String SingleString
 
-   10 Tool: "tool" ":" "name" ";"
+   10 Service: "service" ":" "name" ";"
 
    11 Input: "input" ":" InputSourcesSeq ";"
 
@@ -25,7 +25,7 @@ Grammar
    13                | InputSourcesSeq "&" InputSource
 
    14 InputSource: "name"
-   15            | std::string
+   15            | String
 
    16 OptionalScriptElementsSeq: ScriptElementsSeq
    17                          | ε
@@ -43,7 +43,7 @@ Grammar
 
    26 OptionValue: "name"
    27            | Number
-   28            | std::string
+   28            | String
    29            | "name" "=" "name"
    30            | "name" ":" "name"
    31            | "name" "=" Number
@@ -122,7 +122,7 @@ Terminals, with rules where they appear
     ";" (261) 10 11 35 42 49 54 61 68
     ":" (262) 10 11 30 32 35 42 49 54 61 68
     "," (263) 35 40 52
-    "tool" (264) 10
+    "service" (264) 10
     "input" (265) 11 54
     "choice" (266) 35
     "default" (267) 35
@@ -156,10 +156,10 @@ Nonterminals, with rules where they appear
     SingleString <std::string> (27)
         on left: 6 7
         on right: 8 9
-    std::string <std::string> (28)
+    String <std::string> (28)
         on left: 8 9
         on right: 9 15 28
-    Tool (29)
+    Service (29)
         on left: 10
         on right: 3
     Input (30)
@@ -270,15 +270,15 @@ State 0
 
     0 $accept: • Script $end
 
-    "tool"  shift, and go to state 1
+    "service"  shift, and go to state 1
 
-    Script  go to state 2
-    Tool    go to state 3
+    Script   go to state 2
+    Service  go to state 3
 
 
 State 1
 
-   10 Tool: "tool" • ":" "name" ";"
+   10 Service: "service" • ":" "name" ";"
 
     ":"  shift, and go to state 4
 
@@ -292,7 +292,7 @@ State 2
 
 State 3
 
-    3 Script: Tool • Input $@1 OptionalScriptElementsSeq $@2 OptionalSelectStatements
+    3 Script: Service • Input $@1 OptionalScriptElementsSeq $@2 OptionalSelectStatements
 
     "input"  shift, and go to state 6
 
@@ -301,7 +301,7 @@ State 3
 
 State 4
 
-   10 Tool: "tool" ":" • "name" ";"
+   10 Service: "service" ":" • "name" ";"
 
     "name"  shift, and go to state 8
 
@@ -322,7 +322,7 @@ State 6
 
 State 7
 
-    3 Script: Tool Input • $@1 OptionalScriptElementsSeq $@2 OptionalSelectStatements
+    3 Script: Service Input • $@1 OptionalScriptElementsSeq $@2 OptionalSelectStatements
 
     $default  reduce using rule 1 ($@1)
 
@@ -331,7 +331,7 @@ State 7
 
 State 8
 
-   10 Tool: "tool" ":" "name" • ";"
+   10 Service: "service" ":" "name" • ";"
 
     ";"  shift, and go to state 11
 
@@ -345,14 +345,14 @@ State 9
     "name"                  shift, and go to state 14
 
     SingleString     go to state 15
-    std::string           go to state 16
+    String           go to state 16
     InputSourcesSeq  go to state 17
     InputSource      go to state 18
 
 
 State 10
 
-    3 Script: Tool Input $@1 • OptionalScriptElementsSeq $@2 OptionalSelectStatements
+    3 Script: Service Input $@1 • OptionalScriptElementsSeq $@2 OptionalSelectStatements
 
     "choice"  shift, and go to state 19
     "case"    shift, and go to state 20
@@ -371,9 +371,9 @@ State 10
 
 State 11
 
-   10 Tool: "tool" ":" "name" ";" •
+   10 Service: "service" ":" "name" ";" •
 
-    $default  reduce using rule 10 (Tool)
+    $default  reduce using rule 10 (Service)
 
 
 State 12
@@ -399,15 +399,15 @@ State 14
 
 State 15
 
-    8 std::string: SingleString •
+    8 String: SingleString •
 
-    $default  reduce using rule 8 (std::string)
+    $default  reduce using rule 8 (String)
 
 
 State 16
 
-    9 std::string: std::string • SingleString
-   15 InputSource: std::string •
+    9 String: String • SingleString
+   15 InputSource: String •
 
     "single quoted_string"  shift, and go to state 12
     "double quoted_string"  shift, and go to state 13
@@ -464,13 +464,13 @@ State 21
 
     Number        go to state 38
     SingleString  go to state 15
-    std::string        go to state 39
+    String        go to state 39
     OptionValue   go to state 40
 
 
 State 22
 
-    3 Script: Tool Input $@1 OptionalScriptElementsSeq • $@2 OptionalSelectStatements
+    3 Script: Service Input $@1 OptionalScriptElementsSeq • $@2 OptionalSelectStatements
 
     $default  reduce using rule 2 ($@2)
 
@@ -532,9 +532,9 @@ State 28
 
 State 29
 
-    9 std::string: std::string SingleString •
+    9 String: String SingleString •
 
-    $default  reduce using rule 9 (std::string)
+    $default  reduce using rule 9 (String)
 
 
 State 30
@@ -546,7 +546,7 @@ State 30
     "name"                  shift, and go to state 14
 
     SingleString  go to state 15
-    std::string        go to state 16
+    String        go to state 16
     InputSource   go to state 43
 
 
@@ -615,8 +615,8 @@ State 38
 
 State 39
 
-    9 std::string: std::string • SingleString
-   28 OptionValue: std::string •
+    9 String: String • SingleString
+   28 OptionValue: String •
 
     "single quoted_string"  shift, and go to state 12
     "double quoted_string"  shift, and go to state 13
@@ -635,7 +635,7 @@ State 40
 
 State 41
 
-    3 Script: Tool Input $@1 OptionalScriptElementsSeq $@2 • OptionalSelectStatements
+    3 Script: Service Input $@1 OptionalScriptElementsSeq $@2 • OptionalSelectStatements
 
     "select"  shift, and go to state 49
 
@@ -720,7 +720,7 @@ State 49
 
 State 50
 
-    3 Script: Tool Input $@1 OptionalScriptElementsSeq $@2 OptionalSelectStatements •
+    3 Script: Service Input $@1 OptionalScriptElementsSeq $@2 OptionalSelectStatements •
 
     $default  reduce using rule 3 (Script)
 

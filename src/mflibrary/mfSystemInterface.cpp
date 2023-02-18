@@ -57,7 +57,7 @@ EXP char* mfStrErrorCString ()
 #endif // WIN32
 
   // use result just to avoid a compiler warning...
-  result = result;
+  result = result + 0;
 
   return pBuffer;
 }

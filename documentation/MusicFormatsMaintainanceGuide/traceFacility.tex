@@ -32,9 +32,9 @@ Trace is controlled by {\tt MF_TRACE_IS_ENABLED}, defined or nor in \oah{mfStati
 #ifndef MF_TRACE_IS_ENABLED
   // comment the following definition if no trace is desired
   #define MF_TRACE_IS_ENABLED
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
-#endif
+#endif // ___enableTraceIfDesired___
 \end{lstlisting}
 
 This file should be included when the trace facility is used:
@@ -94,7 +94,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteRegularInMeasure (
     note->getInputLineNumber ();
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalTraceOahGroup->getTraceNotes ()) {
+  if (gTraceOahGroup->getTraceNotes ()) {
     std::stringstream ss;
 
     ss <<
@@ -107,7 +107,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteRegularInMeasure (
     gLog          << ss.str ();
     fLilypondCodeStream << ss.str ();
   }
-#endif
+#endif // MF_TRACE_IS_ENABLED
 
 \end{lstlisting}
 
@@ -124,6 +124,6 @@ If case there is a null pointer in a case such as:
 the way to go is to:%%%JMI
 \begin{itemize}
 \item locate {\tt gGlobalMxsr2msrOahGroup} in the {\tt *.h} it is declared in;
-\item check that the creation method in the same, such as \methodName{createGlobalMxsr2msrOahGroup}, is called in the {\tt *InsiderHandler.cpp} file for the tool that crashed, which may require including that \starFileName{.h} header in \starFileName{InsiderHandler.cpp}.
+\item check that the creation method in the same, such as \methodName{createGlobalMxsr2msrOahGroup}, is called in the {\tt *InsiderHandler.cpp} file for the service that crashed, which may require including that \starFileName{.h} header in \starFileName{InsiderHandler.cpp}.
 \end{itemize}
 

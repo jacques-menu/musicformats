@@ -30,9 +30,8 @@
 namespace MusicFormats
 {
 
-// Rational
 //______________________________________________________________________________
-Rational::Rational (
+mfRational::mfRational (
   long int num,
   long int denom)
 {
@@ -50,13 +49,13 @@ Rational::Rational (
   rationalise ();
 }
 
-Rational::Rational(const Rational& rat)
+mfRational::mfRational(const mfRational& rat)
 {
   fNumerator   = rat.fNumerator;
   fDenominator = rat.fDenominator;
 }
 
-Rational::Rational (const std::string &theString)
+mfRational::mfRational (const std::string &theString)
 {
   // decipher theString
   std::string regularExpression (
@@ -121,7 +120,7 @@ Rational::Rational (const std::string &theString)
     std::stringstream ss;
 
     ss <<
-      "Rational std::string '" << theString <<
+      "mfRational std::string '" << theString <<
       "' is ill-formed";
 
     msrError (
@@ -135,87 +134,95 @@ Rational::Rational (const std::string &theString)
   rationalise ();
 }
 
-Rational::~Rational ()
+mfRational::~mfRational ()
 {}
 
-Rational Rational::inverse () const
+mfRational mfRational::inverse () const
 {
-  Rational result (
-    fDenominator, fNumerator);
+  mfRational
+  	result (
+    	fDenominator, fNumerator);
 
   result.rationalise ();
 
   return result;
 }
 
-Rational Rational::opposite () const
+mfRational mfRational::opposite () const
 {
-  Rational result (
-    -fNumerator, fDenominator);
+  mfRational
+  	result (
+    	-fNumerator, fDenominator);
 
   result.rationalise ();
 
   return result;
 }
 
-Rational Rational::operator + (const Rational &rat) const
+mfRational mfRational::operator + (const mfRational &rat) const
 {
-  Rational result (
-    fNumerator * rat.fDenominator + rat.fNumerator * fDenominator,
-    fDenominator * rat.fDenominator);
+  mfRational
+  	result (
+    	fNumerator * rat.fDenominator + rat.fNumerator * fDenominator,
+   	  fDenominator * rat.fDenominator);
 
   result.rationalise ();
 
   return result;
 }
 
-Rational Rational::operator - (const Rational &rat) const
+mfRational mfRational::operator - (const mfRational &rat) const
 {
-  Rational result (
-    fNumerator * rat.fDenominator - rat.fNumerator * fDenominator,
-    fDenominator * rat.fDenominator);
+  mfRational
+  	result (
+    	fNumerator * rat.fDenominator - rat.fNumerator * fDenominator,
+    	fDenominator * rat.fDenominator);
 
   result.rationalise ();
 
   return result;
 }
 
-Rational Rational::operator * (const Rational &rat) const
+mfRational mfRational::operator * (const mfRational &rat) const
 {
-  Rational result (
-    fNumerator * rat.fNumerator,
-    fDenominator * rat.fDenominator);
+  mfRational
+  	result (
+    	fNumerator * rat.fNumerator,
+    	fDenominator * rat.fDenominator);
 
   result.rationalise ();
 
   return result;
 }
 
-Rational Rational::operator / (const Rational &rat) const
+mfRational mfRational::operator / (const mfRational &rat) const
 {
-  Rational result (
-  fNumerator * rat.fDenominator,
-  fDenominator * rat.fNumerator);
+  mfRational
+  	result (
+  		fNumerator * rat.fDenominator,
+  		fDenominator * rat.fNumerator);
 
   result.rationalise ();
 
   return result;
 }
 
-Rational Rational::operator * (int num) const
+mfRational mfRational::operator * (int num) const
 {
-  Rational result (
-    fNumerator * num,
-    fDenominator);
+  mfRational
+  	result (
+    	fNumerator * num,
+    	fDenominator);
 
   result.rationalise ();
 
   return result;
 }
 
-Rational Rational::operator / (int num) const
+mfRational mfRational::operator / (int num) const
 {
-  Rational result (
+  mfRational
+  	result (
       fNumerator,
       fDenominator * num);
 
@@ -224,7 +231,7 @@ Rational Rational::operator / (int num) const
   return result;
 }
 
-Rational& Rational::operator += (const Rational &rat)
+mfRational& mfRational::operator += (const mfRational &rat)
 {
   if (fDenominator == rat.fDenominator) {
     fNumerator += rat.fNumerator;
@@ -239,7 +246,7 @@ Rational& Rational::operator += (const Rational &rat)
   return (*this);
 }
 
-Rational& Rational::operator -= (const Rational &rat)
+mfRational& mfRational::operator -= (const mfRational &rat)
 {
   if (fDenominator == rat.fDenominator) {
     fNumerator -= rat.fNumerator;
@@ -254,7 +261,7 @@ Rational& Rational::operator -= (const Rational &rat)
   return (*this);
 }
 
-Rational& Rational::operator *= (const Rational &rat)
+mfRational& mfRational::operator *= (const mfRational &rat)
 {
   fNumerator   *= rat.fNumerator;
   fDenominator *= rat.fDenominator;
@@ -264,7 +271,7 @@ Rational& Rational::operator *= (const Rational &rat)
   return (*this);
 }
 
-Rational& Rational::operator /= (const Rational &rat)
+mfRational& mfRational::operator /= (const mfRational &rat)
 {
   fNumerator   *= rat.fDenominator;
   fDenominator *= rat.fNumerator;
@@ -274,56 +281,56 @@ Rational& Rational::operator /= (const Rational &rat)
   return (*this);
 }
 
-Rational& Rational::operator = (const Rational& rat) {
+mfRational& mfRational::operator = (const mfRational& rat) {
   fNumerator   = rat.fNumerator;
   fDenominator = rat.fDenominator;
 
   return (*this);
 }
 
-Bool Rational::operator > (const Rational &rat) const
+Bool mfRational::operator > (const mfRational &rat) const
 {
   // a/b > c/d if and only if a * d > b * c.
   return
     ((fNumerator * rat.fDenominator) > (fDenominator * rat.fNumerator));
 }
 
-Bool Rational::operator < (const Rational &rat) const
+Bool mfRational::operator < (const mfRational &rat) const
 {
   // a/b < c/d if and only if a * d < b * c.
   return
     ((fNumerator * rat.fDenominator) < (fDenominator * rat.fNumerator));
 }
 
-Bool Rational::operator == (const Rational &rat) const
+Bool mfRational::operator == (const mfRational &rat) const
 {
   // a/b < c/d if and only if a * d < b * c.
   return
     ((fNumerator * rat.fDenominator) == (fDenominator * rat.fNumerator));
 }
 
-Bool Rational::operator > (double num) const
+Bool mfRational::operator > (double num) const
 {
   return (toDouble() > num);
 }
-Bool Rational::operator >= (double num) const
+Bool mfRational::operator >= (double num) const
 {
   return (toDouble() >= num);
 }
-Bool Rational::operator < (double num) const
+Bool mfRational::operator < (double num) const
 {
   return (toDouble() < num);
 }
-Bool Rational::operator <= (double num) const
+Bool mfRational::operator <= (double num) const
 {
   return (toDouble() <= num);
 }
-Bool Rational::operator == (double num) const
+Bool mfRational::operator == (double num) const
 {
   return (toDouble() == num); }
 
 // gcd(a, b) calculates the gcd of a and b using Euclid's algorithm.
-long int Rational::gcd (long int a1, long int b1)
+long int mfRational::gcd (long int a1, long int b1)
 {
   long int r;
 
@@ -343,7 +350,7 @@ long int Rational::gcd (long int a1, long int b1)
   return 1;
 }
 
-void Rational::rationalise ()
+void mfRational::rationalise ()
 {
   long int g = gcd (fNumerator, fDenominator);
 
@@ -359,19 +366,19 @@ void Rational::rationalise ()
   }
 }
 
-double Rational::toDouble () const
+double mfRational::toDouble () const
 {
   return
     (fDenominator != 0) ? ((double)fNumerator/(double)fDenominator) : 0;
 }
 
-float Rational::toFloat () const
+float mfRational::toFloat () const
 {
   return
     (fDenominator != 0) ? ((float)fNumerator/(float)fDenominator) : 0;
 }
 
-std::string Rational::toString () const
+std::string mfRational::toString () const
 {
   std::ostringstream res;
 
@@ -380,26 +387,26 @@ std::string Rational::toString () const
   return res.str ();
 }
 
-Rational::operator std::string () const
+mfRational::operator std::string () const
 {
   return toString ();
 }
-Rational::operator double () const
+mfRational::operator double () const
 {
   return toDouble ();
 }
-Rational::operator float () const
+mfRational::operator float () const
 {
   return toFloat ();
 }
-Rational::operator int () const
+mfRational::operator int () const
 {
   const double x = toDouble ();
 
   return ((int) floor (x + 0.5f));
 }
 
-std::string Rational::asString () const
+std::string mfRational::asString () const
 {
   std::stringstream ss;
 
@@ -408,7 +415,7 @@ std::string Rational::asString () const
   return ss.str ();
 }
 
-std::string Rational::asFractionString () const
+std::string mfRational::asFractionString () const
 {
   std::stringstream ss;
 
@@ -417,12 +424,12 @@ std::string Rational::asFractionString () const
   return ss.str ();
 }
 
-void Rational::print (std::ostream& os) const
+void mfRational::print (std::ostream& os) const
 {
-  os << "[Rational " << fNumerator << '/' << fDenominator << ']';
+  os << "[mfRational " << fNumerator << '/' << fDenominator << ']';
 }
 
-std::ostream& operator << (std::ostream& os, const Rational& rat)
+std::ostream& operator << (std::ostream& os, const mfRational& rat)
 {
   rat.print (os);
   return os;
@@ -430,16 +437,16 @@ std::ostream& operator << (std::ostream& os, const Rational& rat)
 
 void testRational ()
 {
-  Rational rat1 ("33/55");
+  mfRational rat1 ("33/55");
   std::cout << "rat1: " << rat1 << std::endl;
 
-  Rational rat2 (-1, 4);
+  mfRational rat2 (-1, 4);
   std::cout << "rat2: " << rat2 << std::endl;
 
-  Rational rat3 (3, 8);
+  mfRational rat3 (3, 8);
   std::cout << "rat3: " << rat3 << std::endl;
 
-  Rational res1 = rat2 - rat3;
+  mfRational res1 = rat2 - rat3;
   std::cout << "res1: " << res1 << std::endl;
 }
 
