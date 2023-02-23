@@ -63,8 +63,8 @@ bsrScore::~bsrScore ()
 void bsrScore::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
-		std::stringstream ss;
+  if (gBsrOahGroup->getTraceBsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% --> End visiting bsrTranscriptionNotesElement" <<
@@ -83,7 +83,7 @@ void bsrScore::acceptIn (basevisitor* v)
         S_bsrScore elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
+        if (gBsrOahGroup->getTraceBsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -102,8 +102,8 @@ void bsrScore::acceptIn (basevisitor* v)
 void bsrScore::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
-		std::stringstream ss;
+  if (gBsrOahGroup->getTraceBsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% --> End visiting bsrTranscriptionNotesElement" <<
@@ -122,7 +122,7 @@ void bsrScore::acceptOut (basevisitor* v)
         S_bsrScore elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
+        if (gBsrOahGroup->getTraceBsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -141,8 +141,8 @@ void bsrScore::acceptOut (basevisitor* v)
 void bsrScore::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
-		std::stringstream ss;
+  if (gBsrOahGroup->getTraceBsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% --> End visiting bsrTranscriptionNotesElement" <<
@@ -173,8 +173,8 @@ void bsrScore::browseData (basevisitor* v)
   } // for
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
-		std::stringstream ss;
+  if (gBsrOahGroup->getTraceBsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% --> End visiting bsrTranscriptionNotesElement" <<
@@ -204,7 +204,7 @@ void bsrScore::printFull (std::ostream& os) const
   // print the transcription notes if any
   const int fieldWidth = 19;
 
-  if (fTranscriptionNotes || gGlobalBsrOahGroup->getDisplayBsrFull ()) {
+  if (fTranscriptionNotes || gBsrOahGroup->getDisplayBsrFull ()) {
     if (fTranscriptionNotes) {
       os <<
         fTranscriptionNotes;
@@ -231,7 +231,7 @@ void bsrScore::printFull (std::ostream& os) const
   // print the score pages if any
   size_t scorePagesListSize = fScorePagesList.size ();
 
-  if (scorePagesListSize || gGlobalBsrOahGroup->getDisplayBsrFull ()) {
+  if (scorePagesListSize || gBsrOahGroup->getDisplayBsrFull ()) {
     os <<
       std::setw (fieldWidth) <<
       "ScorePagesList";
@@ -278,7 +278,7 @@ void bsrScore::print (std::ostream& os) const
   // print the transcription notes if any
   const int fieldWidth = 19;
 
-  if (fTranscriptionNotes || gGlobalBsrOahGroup->getDisplayBsrFull ()) {
+  if (fTranscriptionNotes || gBsrOahGroup->getDisplayBsrFull ()) {
     if (fTranscriptionNotes) {
       os <<
         fTranscriptionNotes;
@@ -305,7 +305,7 @@ void bsrScore::print (std::ostream& os) const
   // print the score pages if any
   size_t scorePagesListSize = fScorePagesList.size ();
 
-  if (scorePagesListSize || gGlobalBsrOahGroup->getDisplayBsrFull ()) {
+  if (scorePagesListSize || gBsrOahGroup->getDisplayBsrFull ()) {
     os <<
       std::setw (fieldWidth) <<
       "ScorePagesList";

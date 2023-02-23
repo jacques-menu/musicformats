@@ -121,8 +121,8 @@ When writing to \standardOutput, the indented output stream is constructed above
     try {
       translateLpsrToLilypond (
         theLpsrScore,
-        gGlobalMsrOahGroup,
-        gGlobalLpsrOahGroup,
+        gMsrOahGroup,
+        gLpsrOahGroup,
         passIDKind,
         passDescription,
         lilypondStandardOutputStream);
@@ -147,8 +147,8 @@ When writing to a file, an {\tt std::ofstream} is instantiated to write to the f
     try {
       translateLpsrToLilypond (
         theLpsrScore,
-        gGlobalMsrOahGroup,
-        gGlobalLpsrOahGroup,
+        gMsrOahGroup,
+        gLpsrOahGroup,
         passIDKind,
         passDescription,
         lilypondFileOutputStream);
@@ -185,16 +185,16 @@ void msrTransposition::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fTranspositionDiatonic" << " = " << fTranspositionDiatonic <<
+    "fTranspositionDiatonic" << ": " << fTranspositionDiatonic <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fTranspositionChromatic" << " = " << fTranspositionChromatic <<
+    "fTranspositionChromatic" << ": " << fTranspositionChromatic <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fTranspositionOctaveChange" << " = " << fTranspositionOctaveChange <<
+    "fTranspositionOctaveChange" << ": " << fTranspositionOctaveChange <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fTranspositionDouble" << " = " << fTranspositionDouble <<
+    "fTranspositionDouble" << ": " << fTranspositionDouble <<
     std::endl << std::endl;
 
   --gIndenter;
@@ -313,16 +313,16 @@ void msrTransposition::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fTranspositionDiatonic" << " = " << fTranspositionDiatonic <<
+    "fTranspositionDiatonic" << ": " << fTranspositionDiatonic <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fTranspositionChromatic" << " = " << fTranspositionChromatic <<
+    "fTranspositionChromatic" << ": " << fTranspositionChromatic <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fTranspositionOctaveChange" << " = " << fTranspositionOctaveChange <<
+    "fTranspositionOctaveChange" << ": " << fTranspositionOctaveChange <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fTranspositionDouble" << " = " << fTranspositionDouble <<
+    "fTranspositionDouble" << ": " << fTranspositionDouble <<
     std::endl << std::endl;
 
   --gIndenter;

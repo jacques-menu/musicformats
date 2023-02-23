@@ -16,9 +16,11 @@
 #endif // WIN32
 
 #include "mfBool.h"
+#include "mfInitialization.h"
 #include "mfMusicformatsErrors.h"
-#include "mfcComponents.h"
 #include "mfTiming.h"
+
+#include "mfcComponents.h"
 
 #include "waeInterface.h"
 #include "oahWae.h"
@@ -27,12 +29,12 @@
 
 #include "oahEarlyOptions.h"
 
-#include "musicxml2lilypondInsiderHandler.h"
-#include "musicxml2lilypondRegularHandler.h"
-
 #include "musicxml2lilypondInterface.h"
 
-#include "xml2lyInterface.h"
+#include "ischemeInterpreterInsiderHandler.h"
+#include "ischemeInterpreterRegularHandler.h"
+
+#include "ischemeInterface.h"
 
 #include "waeHandlers.h"
 
@@ -99,6 +101,18 @@ EXP int ischeme (
 //     "getGlobalMusicFormatsVersionNumberAndDate (): " << getGlobalMusicFormatsVersionNumberAndDate () <<
 //     std::endl;
 
+  // initialize common things
+  // ------------------------------------------------------
+
+  initializeMusicFormats ();
+
+  initializeWAE ();
+
+  // register ischeme as current service
+  // ------------------------------------------------------
+
+  setGlobalService (mfServiceKind::kMfService_ischeme);
+
   // apply early options if any
   // ------------------------------------------------------
 
@@ -114,10 +128,10 @@ EXP int ischeme (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
-      serviceName << " xml2ly()" <<
+      serviceName << " ischeme()" <<
       ", insiderOption: " << insiderOption <<
       std::endl;
 
@@ -133,15 +147,16 @@ EXP int ischeme (
   S_oahHandler handler;
 
   try {
-    // create an xml2ly insider OAH handler
+    // create an ischeme insider OAH handler
     // ------------------------------------------------------
 
-    const S_xml2lyInsiderHandler&
+    const S_ischemeInterpreterInsiderHandler&
       insiderOahHandler =
-        xml2lyInsiderHandler::create (
+        ischemeInterpreterInsiderHandler::create (
           serviceName,
-          serviceName + " insider OAH handler with argc/argv",
-          oahHandlerUsedThruKind::kHandlerUsedThruArgcArgv);
+          serviceName + " insider OAH handler with argc/argv"); // JMI v0.9.67
+//           serviceName + " insider OAH handler with argc/argv",
+//           oahHandlerUsedThruKind::kHandlerUsedThruArgcArgv);
 
     // the OAH handler to be used, a regular handler is the default
     // ------------------------------------------------------
@@ -150,13 +165,13 @@ EXP int ischeme (
       gEarlyOptions.getEarlyInsiderOption ();
 
     if (insiderOption) {
-      // use the insider xml2ly OAH handler
+      // use the insider ischeme OAH handler
       handler = insiderOahHandler;
     }
     else {
-      // create a regular xml2ly OAH handler
+      // create a regular ischeme OAH handler
       handler =
-        xml2lyRegularHandler::create (
+        ischemeInterpreterRegularHandler::create (
           serviceName,
           serviceName + " regular OAH handler with argc/argv",
           insiderOahHandler);
@@ -231,7 +246,7 @@ EXP int ischeme (
     std::string separator =
       "%--------------------------------------------------------------";
 
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       serviceName << ": " <<
@@ -362,7 +377,7 @@ EXP int ischeme (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getEarlyTracePasses ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "The command line options and arguments have been analyzed" <<

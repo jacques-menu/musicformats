@@ -76,7 +76,7 @@ void oahEarlyOptions::setEarlyLanguageKind (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (fTraceEarlyOptions) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Setting fEarlyLanguageKind to " <<
@@ -102,7 +102,7 @@ void oahEarlyOptions::setEarlyInsiderOption ()
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (fTraceEarlyOptions) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Setting fEarlyInsiderOption" <<
@@ -146,7 +146,7 @@ void oahEarlyOptions::setEarlyQuietOption ()
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (fTraceEarlyOptions) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Setting fEarlyQuietOption" <<
@@ -167,7 +167,7 @@ void oahEarlyOptions::setEarlyMultiGenerationOutputKind (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (fTraceEarlyOptions) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Setting fEarlyMultiGenerationOutputKind" <<
@@ -190,7 +190,7 @@ void oahEarlyOptions::appendEarlyIncludeFileName (std::string includeFileName)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (fTraceEarlyOptions) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending fEarlyIncludeFileName [" <<
@@ -232,7 +232,7 @@ void oahEarlyOptions::setEarlyOahVerboseMode ()
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (fTraceEarlyOptions) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Setting fEarlyOahVerboseMode" <<
@@ -255,7 +255,7 @@ void oahEarlyOptions::setEarlyTraceOah ()
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (fTraceEarlyOptions) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Setting fEarlyTraceOah" <<
@@ -278,7 +278,7 @@ void oahEarlyOptions::setEarlyTraceOahDetails ()
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (fTraceEarlyOptions) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Setting fEarlyTraceOahDetails" <<
@@ -301,7 +301,7 @@ void oahEarlyOptions::setEarlyTraceComponents ()
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (fTraceEarlyOptions) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Setting fEarlyTraceComponents" <<
@@ -323,7 +323,7 @@ const std::string K_TRACE_PASSES_OPTION_SHORT_NAME = "tpasses";
 void oahEarlyOptions::setEarlyTracePasses ()
 {
   if (fTraceEarlyOptions) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Setting fEarlyTracePasses" <<
@@ -339,7 +339,7 @@ const std::string K_TRACE_ONLY_PASS_OPTION_SHORT_NAME = "topass";
 void oahEarlyOptions::setEarlyTraceOnlyPass (mfPassIDKind passIDKind)
 {
   if (fTraceEarlyOptions) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Setting fEarlyTraceOnlyPass to " << passIDKind <<

@@ -174,7 +174,7 @@ msrTimeSignatureItem::msrTimeSignatureItem (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceTimeSignatures ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating time signature item" <<
@@ -229,7 +229,7 @@ void msrTimeSignatureItem::appendBeatsNumber (int beatsNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceTimeSignatures ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending beat number '" <<
@@ -250,7 +250,7 @@ void msrTimeSignatureItem::setTimeSignatureBeatValue (int timeSignatureBeatValue
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceTimeSignatures ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Setting beat value to '" <<
@@ -280,7 +280,7 @@ int msrTimeSignatureItem::getTimeSignatureBeatsNumber () const
 void msrTimeSignatureItem::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -299,7 +299,7 @@ void msrTimeSignatureItem::acceptIn (basevisitor* v)
         S_msrTimeSignatureItem elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -318,7 +318,7 @@ void msrTimeSignatureItem::acceptIn (basevisitor* v)
 void msrTimeSignatureItem::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -337,7 +337,7 @@ void msrTimeSignatureItem::acceptOut (basevisitor* v)
         S_msrTimeSignatureItem elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -868,7 +868,7 @@ S_msrTimeSignature msrTimeSignature::createTimeFromString (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceNotes ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating time from string \"" <<
@@ -894,7 +894,7 @@ S_msrTimeSignature msrTimeSignature::createTimeFromString (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "regularExpression = " <<
@@ -916,7 +916,7 @@ S_msrTimeSignature msrTimeSignature::createTimeFromString (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "There are " << smSize << " matches" <<
@@ -956,7 +956,7 @@ S_msrTimeSignature msrTimeSignature::createTimeFromString (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "beatsNumber = \"" <<
@@ -991,7 +991,7 @@ S_msrTimeSignature msrTimeSignature::createTimeFromString (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "integerBeatsNumber = " <<
@@ -1070,7 +1070,7 @@ void msrTimeSignature::appendTimeSignatureItem (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceTimeSignatures ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Append item '" <<
@@ -1164,7 +1164,7 @@ msrWholeNotes msrTimeSignature::timeSignatureWholeNotesPerMeasure () const
 void msrTimeSignature::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -1183,7 +1183,7 @@ void msrTimeSignature::acceptIn (basevisitor* v)
         S_msrTimeSignature elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -1202,7 +1202,7 @@ void msrTimeSignature::acceptIn (basevisitor* v)
 void msrTimeSignature::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -1221,7 +1221,7 @@ void msrTimeSignature::acceptOut (basevisitor* v)
         S_msrTimeSignature elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<

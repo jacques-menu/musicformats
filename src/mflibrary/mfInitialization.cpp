@@ -10,8 +10,9 @@
 */
 
 #include "mfInitialization.h"
-#include "languages.h"
 #include "mfPasses.h"
+
+#include "languages.h"
 
 #include "oahEarlyOptions.h"
 
@@ -35,7 +36,7 @@ void initializeMusicFormats ()
         &&
       ! gEarlyOptions.getEarlyQuietOption ()
     ) {
-	  	std::stringstream ss;
+      std::stringstream ss;
 
       ss <<
         "Initializing MusicFormats" <<

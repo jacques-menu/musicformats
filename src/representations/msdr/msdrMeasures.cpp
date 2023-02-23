@@ -48,7 +48,7 @@ msdrMeasure::msdrMeasure (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceVoices ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating MSDR music \"" << asString () << "\"" <<
@@ -83,8 +83,8 @@ void msdrMeasure::addLayerToMeasure (
 void msdrMeasure::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% ==> msdrMeasure::acceptIn ()" <<
@@ -102,7 +102,7 @@ void msdrMeasure::acceptIn (basevisitor* v)
         S_msdrMeasure elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -121,8 +121,8 @@ void msdrMeasure::acceptIn (basevisitor* v)
 void msdrMeasure::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% ==> msdrMeasure::acceptOut ()" <<
@@ -140,7 +140,7 @@ void msdrMeasure::acceptOut (basevisitor* v)
         S_msdrMeasure elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -159,8 +159,8 @@ void msdrMeasure::acceptOut (basevisitor* v)
 void msdrMeasure::browseData (basevisitor* v)
 {
 /* JMI
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% ==> msdrMeasure::browseData ()" <<
@@ -209,8 +209,8 @@ void msdrMeasure::browseData (basevisitor* v)
   }
 
 #ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% <== msdrMeasure::browseData ()" <<

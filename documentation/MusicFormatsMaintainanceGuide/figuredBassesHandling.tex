@@ -723,7 +723,7 @@ In \msrToMsr{msr2msrTranslator.cpp}, a newborn clone of the figured bass element
 void msr2msrTranslator::visitStart (S_msrFiguredBass& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -799,7 +799,7 @@ There are only fields updates upon the second visit:
 void msr2msrTranslator::visitEnd (S_msrFiguredBass& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -829,7 +829,7 @@ The same occurs in \msrToLpsr{msr2lpsrTranslator.cpp}: a newborn clone of the fi
 void msr2lpsrTranslator::visitStart (S_msrFiguredBass& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -905,7 +905,7 @@ Here too, there are only fields updates upon the second visit of \smartPointerTy
 void msr2lpsrTranslator::visitEnd (S_msrFiguredBass& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -940,7 +940,7 @@ The \lily\ code is generated only if the figured bass element belongs to a figur
 void msr2lpsrTranslator::visitStart (S_msrFiguredBass& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
 		std::stringstream ss;
 
     ss <<

@@ -64,7 +64,7 @@ oahRegularHandler::oahRegularHandler (
   // create the insider handler
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating the insider handler for \"" <<
@@ -92,7 +92,7 @@ void oahRegularHandler::initializeOahRegularHandler ()
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Initializing the regular handler \"" <<
@@ -149,7 +149,7 @@ void oahRegularHandler::appendGroupToRegulalHandler (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptionsDetails ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending group \"" <<
@@ -194,7 +194,7 @@ void oahRegularHandler::prependGroupToRegularHandler (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Prepending group \"" <<
@@ -240,9 +240,9 @@ void oahRegularHandler::registerAtomInRegularSubgroup (
     // atomName is the name of an option
 #ifdef MF_TRACE_IS_ENABLED
     if (false) { // JMI
-			std::stringstream ss;
+      std::stringstream ss;
 
-			ss <<
+      ss <<
         "===> insiderElement:" <<
         std::endl;
       ++gIndenter;
@@ -251,10 +251,10 @@ void oahRegularHandler::registerAtomInRegularSubgroup (
         std::endl;
       --gIndenter;
 
-			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
-				ss.str ());
-		}
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
+    }
 #endif // MF_TRACE_IS_ENABLED
 
     if (
@@ -262,7 +262,7 @@ void oahRegularHandler::registerAtomInRegularSubgroup (
       S_oahAtom
         atom =
           dynamic_cast<oahAtom*>(&(*insiderElement))
-		) {
+    ) {
         // append atom to subgroup, thus modify its fUpLinkToSubGroup
         // that previous linked it to an insider handler subgroup
         subGroup->

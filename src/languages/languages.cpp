@@ -207,7 +207,7 @@ void initializeMusicFormatsLanguages ()
         &&
       ! gEarlyOptions.getEarlyQuietOption ()
     ) {
-	  	std::stringstream ss;
+      std::stringstream ss;
 
       ss <<
         "Initializing MusicFormats languages" <<

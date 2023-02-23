@@ -42,7 +42,7 @@ S_msrHiddenMeasureAndBarLine msrHiddenMeasureAndBarLine::create (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasures ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating hiddenMeasureAndBarLine" <<
@@ -115,7 +115,7 @@ void msrHiddenMeasureAndBarLine::setHiddenMeasureAndBarLineUpLinkToMeasure (
 void msrHiddenMeasureAndBarLine::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -134,7 +134,7 @@ void msrHiddenMeasureAndBarLine::acceptIn (basevisitor* v)
         S_msrHiddenMeasureAndBarLine elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -153,7 +153,7 @@ void msrHiddenMeasureAndBarLine::acceptIn (basevisitor* v)
 void msrHiddenMeasureAndBarLine::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -172,7 +172,7 @@ void msrHiddenMeasureAndBarLine::acceptOut (basevisitor* v)
         S_msrHiddenMeasureAndBarLine elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<

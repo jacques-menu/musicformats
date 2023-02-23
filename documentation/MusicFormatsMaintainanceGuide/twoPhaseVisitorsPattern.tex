@@ -57,7 +57,7 @@ It is used as the base class   of all visitors in \methodName{browsedata} method
 void msrWords::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -76,7 +76,7 @@ void msrWords::acceptIn (basevisitor* v)
         S_msrWords elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -428,7 +428,7 @@ void msrNote::browseData (basevisitor* v)
       if (inhibitGraceNotesGroupsBeforeBrowsing) {
 #ifdef MF_TRACE_IS_ENABLED
         if (
-          gGlobalMsrOahGroup->getTraceMsrVisitors ()
+          gMsrOahGroup->getTraceMsrVisitors ()
             ||
           gTraceOahGroup->getTraceNotes ()
             ||

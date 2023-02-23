@@ -419,7 +419,14 @@ class EXP bsrOahGroup : public oahGroup
 typedef SMARTP<bsrOahGroup> S_bsrOahGroup;
 EXP std::ostream& operator << (std::ostream& os, const S_bsrOahGroup& elt);
 
-EXP extern S_bsrOahGroup gGlobalBsrOahGroup;
+//______________________________________________________________________________
+// hidden global BSR OAH group variable
+EXP S_bsrOahGroup getGlobalBsrOahGroup ();
+
+// a handy shortcut
+#define gBsrOahGroup getGlobalBsrOahGroup ()
+
+EXP extern S_bsrOahGroup gBsrOahGroup;
 
 //______________________________________________________________________________
 EXP  S_bsrOahGroup createGlobalBsrOahGroup ();

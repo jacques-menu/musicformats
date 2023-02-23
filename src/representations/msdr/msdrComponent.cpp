@@ -26,7 +26,7 @@ S_mfcRepresentationComponent getMsdrRepresentationComponent ()
 
 #ifdef MF_TRACE_IS_ENABLED
     if (gEarlyOptions.getEarlyTraceComponents ()) {
-	  	std::stringstream ss;
+      std::stringstream ss;
 
       ss <<
         "Create the MSDR format component" <<

@@ -158,7 +158,7 @@ msrSyllable::msrSyllable (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceLyrics ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating a syllable containing:" <<
@@ -181,7 +181,7 @@ S_msrSyllable msrSyllable::createSyllableNewbornClone (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceLyrics ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating a newborn clone of syllable '" <<
@@ -240,7 +240,7 @@ S_msrSyllable msrSyllable::createSyllableDeepClone (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceLyrics ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating a newborn clone of syllable '" <<
@@ -329,7 +329,7 @@ void msrSyllable:: setSyllableNextMeasurePuristNumber (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceLyrics ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Setting syllable next measure purist number to " <<
@@ -417,7 +417,7 @@ void msrSyllable::appendLyricTextToSyllable (const std::string& text)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceLyrics ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending text \"" <<
@@ -465,7 +465,7 @@ void msrSyllable::appendSyllableToNoteAndSetItsUpLinkToNote (
   // set it upLink to note
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceLyrics ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Setting syllable note upLink for:" <<
@@ -487,7 +487,7 @@ void msrSyllable::appendSyllableToNoteAndSetItsUpLinkToNote (
 void msrSyllable::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -506,7 +506,7 @@ void msrSyllable::acceptIn (basevisitor* v)
         S_msrSyllable elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -525,7 +525,7 @@ void msrSyllable::acceptIn (basevisitor* v)
 void msrSyllable::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -544,7 +544,7 @@ void msrSyllable::acceptOut (basevisitor* v)
         S_msrSyllable elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -991,7 +991,7 @@ void msrStanza::initializeStanza ()
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceLyrics ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Initializing stanza " << getStanzaName () <<
@@ -1016,7 +1016,7 @@ S_msrStanza msrStanza::createStanzaNewbornClone (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceLyrics ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating a newborn clone of stanza \"" <<
@@ -1071,7 +1071,7 @@ S_msrStanza msrStanza::createStanzaDeepClone (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceLyrics ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating a deep clone of stanza \"" <<
@@ -1135,7 +1135,7 @@ void msrStanza::appendSyllableToStanza (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceLyrics ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending syllable '" << syllable->asString () <<
@@ -1203,7 +1203,7 @@ S_msrSyllable msrStanza::appendRestSyllableToStanza (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceLyrics ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending 'Rest' syllable" <<
@@ -1248,7 +1248,7 @@ S_msrSyllable msrStanza::appendSkipSyllableToStanza (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceLyrics ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending 'Skip' syllable " <<
@@ -1292,7 +1292,7 @@ S_msrSyllable msrStanza::appendMeasureEndSyllableToStanza (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceLyrics ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending 'Measure end' syllable " <<
@@ -1340,7 +1340,7 @@ S_msrSyllable msrStanza::appendMelismaSyllableToStanza (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceLyrics ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending '" <<
@@ -1387,7 +1387,7 @@ S_msrSyllable msrStanza::appendLineBreakSyllableToStanza (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceLyrics ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending a 'LineBreak' syllable" <<
@@ -1436,7 +1436,7 @@ S_msrSyllable msrStanza::appendPageBreakSyllableToStanza (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceLyrics ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending a 'PageBreak' syllable" <<
@@ -1492,7 +1492,7 @@ void msrStanza::appendPaddingNoteToStanza (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceLyrics ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending padding note" <<
@@ -1521,7 +1521,7 @@ void msrStanza::appendPaddingNoteToStanza (
 void msrStanza::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -1540,7 +1540,7 @@ void msrStanza::acceptIn (basevisitor* v)
         S_msrStanza elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -1559,7 +1559,7 @@ void msrStanza::acceptIn (basevisitor* v)
 void msrStanza::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -1578,7 +1578,7 @@ void msrStanza::acceptOut (basevisitor* v)
         S_msrStanza elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -1597,7 +1597,7 @@ void msrStanza::acceptOut (basevisitor* v)
 void msrStanza::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -1623,8 +1623,8 @@ void msrStanza::browseData (basevisitor* v)
   --gIndenter;
 
 #ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% <== msrStanza::browseData ()" <<

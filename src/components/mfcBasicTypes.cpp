@@ -22,7 +22,7 @@
 #include "mfStringsHandling.h"
 #include "mfIndentedTextOutput.h"
 
-#include "msrWholeNotes.h"
+// #include "msrWholeNotes.h"
 
 #include "oahEarlyOptions.h"
 
@@ -65,7 +65,7 @@ void crackVersionNumber ( // JMI ??? v0.9.66
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getEarlyTraceComponents ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "There are " << smSize << " matches" <<
@@ -93,7 +93,7 @@ void crackVersionNumber ( // JMI ??? v0.9.66
 
 #ifdef MF_TRACE_IS_ENABLED
     if (gEarlyOptions.getEarlyTraceComponents ()) {
-	  	std::stringstream ss;
+      std::stringstream ss;
 
       ss <<
         "--> generationNumberValue = \"" << generationNumberValue << "\", " <<
@@ -129,7 +129,7 @@ void crackVersionNumber ( // JMI ??? v0.9.66
 
 #ifdef MF_TRACE_IS_ENABLED
     if (gEarlyOptions.getEarlyTraceComponents ()) {
-	  	std::stringstream ss;
+      std::stringstream ss;
 
       ss <<
         "There are " << smSize << " matches" <<
@@ -361,7 +361,7 @@ mfcVersionNumber::mfcVersionNumber (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getEarlyTraceComponents ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Constructing mfcVersionNumber" <<
@@ -416,7 +416,7 @@ S_mfcVersionNumber mfcVersionNumber::createFromString (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getEarlyTraceComponents ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "There are " << smSize << " matches" <<
@@ -458,7 +458,7 @@ S_mfcVersionNumber mfcVersionNumber::createFromString (
 
 #ifdef MF_TRACE_IS_ENABLED
     if (gEarlyOptions.getEarlyTraceComponents ()) {
-	  	std::stringstream ss;
+      std::stringstream ss;
 
       ss <<
         "--> majorNumberValue = \"" << majorNumberValue << "\", " <<
@@ -763,7 +763,7 @@ mfcVersionDescr::mfcVersionDescr (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getEarlyTraceComponents ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Constructing mfcVersionDescr" <<
@@ -833,7 +833,7 @@ S_mfcVersionsHistory mfcVersionsHistory::create ()
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getEarlyTraceComponents ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating mfcVersionsHistory" <<
@@ -856,7 +856,7 @@ mfcVersionsHistory::mfcVersionsHistory ()
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getEarlyTraceComponents ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Constructing mfcVersionsHistory" <<
@@ -877,7 +877,7 @@ void mfcVersionsHistory::appendVersionDescrToHistory (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getEarlyTraceComponents ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending version " <<
@@ -970,7 +970,7 @@ S_mfcComponent mfcComponent::create (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getEarlyTraceComponents ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating mfcComponent" <<
@@ -998,7 +998,7 @@ mfcComponent::mfcComponent (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getEarlyTraceComponents ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Constructing mfcComponent \"" <<
@@ -1027,7 +1027,7 @@ void mfcComponent::appendVersionDescrToComponent (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getEarlyTraceComponents ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending version " <<
@@ -1148,7 +1148,7 @@ S_mfcOahComponent mfcOahComponent::create (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getEarlyTraceComponents ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating mfcOahComponent" <<
@@ -1176,7 +1176,7 @@ mfcOahComponent::mfcOahComponent (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getEarlyTraceComponents ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Constructing mfcOahComponent \"" <<
@@ -1212,7 +1212,7 @@ S_mfcRepresentationComponent mfcRepresentationComponent::create (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getEarlyTraceComponents ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating mfcRepresentationComponent" <<
@@ -1240,7 +1240,7 @@ mfcRepresentationComponent::mfcRepresentationComponent (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getEarlyTraceComponents ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Constructing mfcRepresentationComponent \"" <<
@@ -1276,7 +1276,7 @@ S_mfcPassComponent mfcPassComponent::create (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getEarlyTraceComponents ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating mfcPassComponent" <<
@@ -1304,7 +1304,7 @@ mfcPassComponent::mfcPassComponent (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getEarlyTraceComponents ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Constructing mfcPassComponent \"" <<
@@ -1381,7 +1381,7 @@ S_mfcMultiComponent mfcMultiComponent::create (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getEarlyTraceComponents ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating mfcMultiComponent" <<
@@ -1418,7 +1418,7 @@ mfcMultiComponent::mfcMultiComponent (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getEarlyTraceComponents ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Constructing mfcMultiComponent \"" <<
@@ -1450,7 +1450,7 @@ void mfcMultiComponent::appendRepresentationToMultiComponent (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getEarlyTraceComponents ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending format " <<
@@ -1524,7 +1524,7 @@ void mfcMultiComponent::appendPassToMultiComponent (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getEarlyTraceComponents ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending pass " <<
@@ -2026,7 +2026,7 @@ S_mfcGeneratorComponent mfcGeneratorComponent::create (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getEarlyTraceComponents ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating mfcGeneratorComponent" <<
@@ -2062,7 +2062,7 @@ mfcGeneratorComponent::mfcGeneratorComponent (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getEarlyTraceComponents ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Constructing mfcGeneratorComponent \"" <<
@@ -2102,7 +2102,7 @@ S_mfcConverterComponent mfcConverterComponent::create (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getEarlyTraceComponents ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating mfcConverterComponent" <<
@@ -2138,7 +2138,7 @@ mfcConverterComponent::mfcConverterComponent (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getEarlyTraceComponents ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Constructing mfcConverterComponent \"" <<
@@ -2178,7 +2178,7 @@ S_mfcLibraryComponent mfcLibraryComponent::create (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getEarlyTraceComponents ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating mfcLibraryComponent" <<
@@ -2214,7 +2214,7 @@ mfcLibraryComponent::mfcLibraryComponent (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getEarlyTraceComponents ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Constructing mfcLibraryComponent \"" <<
@@ -2237,7 +2237,7 @@ void mfcLibraryComponent::appendConverterToMultiComponent (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getEarlyTraceComponents ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending converter " <<

@@ -117,7 +117,7 @@ namespace MusicFormats
 //     firstMsrScore =
 //       translateMxsrToMsrSkeleton (
 //         theMxsr,
-//         gGlobalMsrOahGroup,
+//         gMsrOahGroup,
 //         mfPassIDKind::kMfPassID_2a,
 //         gLanguage->createAnMSRSqueletonFromTheMXSR ());
 //   }
@@ -193,7 +193,7 @@ namespace MusicFormats
 //       secondMsrScore =
 //         translateMsrToMsrAlongPathToVoice (
 //           firstMsrScore,
-//           gGlobalMsrOahGroup,
+//           gMsrOahGroup,
 //           gGlobalMsr2msrOahGroup,
 //           mfPassIDKind::kMfPassID_3,
 //           gLanguage->convertTheFirstMSRIntoASecondMSR (),
@@ -204,7 +204,7 @@ namespace MusicFormats
 //     secondMsrScore =
 //       translateMsrToMsr (
 //         firstMsrScore,
-//         gGlobalMsrOahGroup,
+//         gMsrOahGroup,
 //         gGlobalMsr2msrOahGroup,
 //         mfPassIDKind::kMfPassID_3,
 //         gLanguage->convertTheFirstMSRIntoASecondMSR ());
@@ -244,8 +244,8 @@ namespace MusicFormats
 //       theLpsrScore =
 //         translateMsrToLpsr (
 //           secondMsrScore,
-//           gGlobalMsrOahGroup,
-//           gGlobalLpsrOahGroup,
+//           gMsrOahGroup,
+//           gLpsrOahGroup,
 //           mfPassIDKind::kMfPassID_4,
 //           gLanguage->convertTheSecondMSRIntoAnLPSR (),
 //           createMsdl2lilypondConverterComponent ());
@@ -262,23 +262,23 @@ namespace MusicFormats
 //     // display the LPSR score if requested
 //     // ------------------------------------------------------
 //
-//     if (gGlobalLpsrOahGroup->getDisplayLpsr ()) {
+//     if (gLpsrOahGroup->getDisplayLpsr ()) {
 //       displayLpsrScore (
 //         theLpsrScore,
-//         gGlobalMsrOahGroup,
-//         gGlobalLpsrOahGroup,
-//       	 gLanguage->displayTheLPSRAsText ());
+//         gMsrOahGroup,
+//         gLpsrOahGroup,
+//          gLanguage->displayTheLPSRAsText ());
 //     }
 //
-//     if (gGlobalLpsrOahGroup->getDisplayLpsrFull ()) {
+//     if (gLpsrOahGroup->getDisplayLpsrFull ()) {
 //       displayLpsrScoreFull (
 //         theLpsrScore,
-//         gGlobalMsrOahGroup,
-//         gGlobalLpsrOahGroup,
+//         gMsrOahGroup,
+//         gLpsrOahGroup,
 //         gLanguage->displayTheLPSRAsText ()
-//       	   +
+//            +
 //         ", " <<
-//       	   +
+//            +
 //        gLanguage->fullVersion ());
 //     }
 //   }
@@ -322,8 +322,8 @@ namespace MusicFormats
 //       try {
 //         translateLpsrToLilypond (
 //           theLpsrScore,
-//           gGlobalMsrOahGroup,
-//           gGlobalLpsrOahGroup,
+//           gMsrOahGroup,
+//           gLpsrOahGroup,
 //           mfPassIDKind::kMfPassID_5,
 //           gLanguage->convertTheLPSRIntoLilyPondCode (),
 //           lilypondStandardOutputStream);
@@ -354,7 +354,7 @@ namespace MusicFormats
 //       if (gEarlyOptions.getEarlyTracePasses ()) {
 //         err <<
 //           std::endl <<
-// 		       gLanguage->openingLilypondFileForWriting (outputFileName) <<
+//            gLanguage->openingLilypondFileForWriting (outputFileName) <<
 //           std::endl;
 //       }
 // #endif // MF_TRACE_IS_ENABLED
@@ -390,8 +390,8 @@ namespace MusicFormats
 //       try {
 //         translateLpsrToLilypond (
 //           theLpsrScore,
-//           gGlobalMsrOahGroup,
-//           gGlobalLpsrOahGroup,
+//           gMsrOahGroup,
+//           gLpsrOahGroup,
 //           mfPassIDKind::kMfPassID_5,
 //           gLanguage->convertTheLPSRIntoLilyPondCode (),
 //           lilypondFileOutputStream);
@@ -600,7 +600,7 @@ EXP mfMusicformatsErrorKind msdlFile2lilypond (
 //     sxmlfile =
 //       createSXMLFileFromFile (
 //         fileName,
-		//     mfPassIDKind::kMfPassID_1,
+    //     mfPassIDKind::kMfPassID_1,
 //         gLanguage->createAnMXSRFromAMusicXMLStream ());
 //
 //   if (sxmlfile) {
@@ -625,7 +625,7 @@ mfMusicformatsErrorKind convertMsdlFile2lilypondWithHandler ( // JMI ??? v0.9.66
 //     sxmlfile =
 //       createSXMLFileFromFile (
 //         fileName,
-		//     mfPassIDKind::kMfPassID_1,
+    //     mfPassIDKind::kMfPassID_1,
 //         gLanguage->createAnMXSRFromAMusicXMLStream ());
 //
 //   if (sxmlfile) {
@@ -651,7 +651,7 @@ EXP mfMusicformatsErrorKind msdlFd2lilypond (
 //     sxmlfile =
 //       createSXMLFileFromFd (
 //         fd,
-		//     mfPassIDKind::kMfPassID_1,
+    //     mfPassIDKind::kMfPassID_1,
 //         gLanguage->createAnMXSRFromAMusicXMLDescriptor ());
 //
 //   if (sxmlfile) {
@@ -676,7 +676,7 @@ mfMusicformatsErrorKind convertMsdlFd2lilypondWithHandler (
 //     sxmlfile =
 //       createSXMLFileFromFd (
 //         fd,
-		//     mfPassIDKind::kMfPassID_1,
+    //     mfPassIDKind::kMfPassID_1,
 //         gLanguage->createAnMXSRFromAMusicXMLDescriptor ());
 //
 //   if (sxmlfile) {
@@ -702,7 +702,7 @@ EXP mfMusicformatsErrorKind msdlString2lilypond (
 //     sxmlfile =
 //       createSXMLFileFromString (
 //         buffer,
-		//     mfPassIDKind::kMfPassID_1,
+    //     mfPassIDKind::kMfPassID_1,
 //         gLanguage->createAnMXSRFromAMusicXMLBuffer ());
 //
 //   // call xmlFile2lilypond() even if sxmlfile is null,
@@ -727,7 +727,7 @@ mfMusicformatsErrorKind convertMsdlString2lilypondWithHandler (
 //     sxmlfile =
 //       createSXMLFileFromString (
 //         buffer,
-		//     mfPassIDKind::kMfPassID_1,
+    //     mfPassIDKind::kMfPassID_1,
 //         "Create an MXSR from a MusicXML buffer");
 //
 //   // call xmlFile2lilypond() even if sxmlfile is null,

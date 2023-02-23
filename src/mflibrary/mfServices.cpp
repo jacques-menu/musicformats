@@ -13,6 +13,7 @@
 
 #include "mfStaticSettings.h"
 
+#include "mfConstants.h"
 #include "mfServices.h"
 #include "mfStringsHandling.h"
 
@@ -27,6 +28,216 @@
 
 namespace MusicFormats
 {
+
+//______________________________________________________________________________
+std::map<std::string, mfServiceKind>
+  gGlobalMusicFormatsServiceKindsMap;
+
+std::string mfServiceKindAsString (
+  mfServiceKind serviceKind)
+{
+  std::string result;
+
+  // these strings are used in the command line options
+  switch (serviceKind) {
+    case mfServiceKind::kMfService_UNKNOWN:
+      result = "*kMfService_UNKNOWN*";
+      break;
+
+    case mfServiceKind::kMfService_xml2ly:
+      result = "kMfService_xml2ly";
+      break;
+
+    case mfServiceKind::kMfService_xml2brl:
+      result = "kMfService_xml2brl";
+      break;
+
+    case mfServiceKind::kMfService_xml2xml:
+      result = "kMfService_xml2xml";
+      break;
+
+    case mfServiceKind::kMfService_xml2gmn:
+      result = "kMfService_xml2gmn";
+      break;
+
+    case mfServiceKind::kMfService_msdl:
+      result = "kMfService_msdl";
+      break;
+
+    case mfServiceKind::kMfService_mfsl:
+      result = "kMfService_mfsl";
+      break;
+
+    case mfServiceKind::kMfService_ischeme:
+      result = "kMfService_ischeme";
+      break;
+  } // switch
+
+  return result;
+}
+
+std::ostream& operator << (std::ostream& os, const mfServiceKind elt)
+{
+  os << mfServiceKindAsString (elt);
+  return os;
+}
+
+EXP mfIndentedStringStream& operator << (
+  mfIndentedStringStream& iss, const mfServiceKind& elt)
+{
+  iss << mfServiceKindAsString (elt);
+  return iss;
+}
+
+mfServiceKind mfServiceKindFromString (const std::string& theString)
+{
+  mfServiceKind result =
+    mfServiceKind::kMfService_UNKNOWN;
+
+  std::map<std::string, mfServiceKind>::const_iterator
+    it =
+      gGlobalMusicFormatsServiceKindsMap.find (
+        theString);
+
+  if (it == gGlobalMusicFormatsServiceKindsMap.end ()) {
+    // no, service kind is unknown in the map
+    std::stringstream ss;
+
+    ss <<
+      "MusicFormats service kind '" << theString <<
+      "' is unknown" <<
+      std::endl <<
+      "The " <<
+      gGlobalMusicFormatsServiceKindsMap.size () - 1 <<
+      " known MusicFormats service kinds are:" <<
+      std::endl;
+
+    ++gIndenter;
+
+    ss <<
+      availableMusicFormatsServiceKinds (K_MF_NAMES_LIST_MAX_LENGTH);
+
+    --gIndenter;
+
+    oahError (ss.str ());
+  }
+
+  result = (*it).second;
+
+  return result;
+}
+
+std::string availableMusicFormatsServiceKinds (size_t namesListMaxLength)
+{
+  std::stringstream ss;
+
+  size_t
+    mfServiceKindsMapSize =
+      gGlobalMusicFormatsServiceKindsMap.size ();
+
+  if (mfServiceKindsMapSize) {
+    size_t nextToLast =
+      mfServiceKindsMapSize - 1;
+
+    size_t count = 0;
+    size_t cumulatedLength = 0;
+
+    for (
+      std::pair<std::string, mfServiceKind>
+        thePair :
+          gGlobalMusicFormatsServiceKindsMap
+    ) {
+      std::string theString = thePair.first;
+
+      ++count;
+
+      cumulatedLength += theString.size ();
+      if (cumulatedLength >= namesListMaxLength) {
+        ss << std::endl << gIndenter.getSpacer ();
+        cumulatedLength = 0;
+        break;
+      }
+
+      if (count == 1) {
+        ss << gIndenter.getSpacer ();
+      }
+      ss << theString;
+
+      if (count == nextToLast) {
+        ss << " and ";
+      }
+      else if (count != mfServiceKindsMapSize) {
+        ss << ", ";
+      }
+    } // for
+  }
+
+  return ss.str ();
+}
+
+void initializeMusicFormatsServiceKindsMap ()
+{
+  // protect library against multiple initializations
+  static Bool pPrivateThisMethodHasBeenRun (false);
+
+  if (! pPrivateThisMethodHasBeenRun) {
+    gGlobalMusicFormatsServiceKindsMap ["xml2ly"] =
+      mfServiceKind::kMfService_xml2ly;
+
+    gGlobalMusicFormatsServiceKindsMap ["xml2brl"] =
+      mfServiceKind::kMfService_xml2brl;
+
+    gGlobalMusicFormatsServiceKindsMap ["xml2xml"] =
+      mfServiceKind::kMfService_xml2xml;
+
+    gGlobalMusicFormatsServiceKindsMap ["xml2gmn"] =
+      mfServiceKind::kMfService_xml2gmn;
+
+    gGlobalMusicFormatsServiceKindsMap ["msdl"] =
+      mfServiceKind::kMfService_msdl;
+
+    gGlobalMusicFormatsServiceKindsMap ["mfsl"] =
+      mfServiceKind::kMfService_mfsl;
+
+    gGlobalMusicFormatsServiceKindsMap ["ischeme"] =
+      mfServiceKind::kMfService_ischeme;
+
+    pPrivateThisMethodHasBeenRun = true;
+  }
+}
+
+void initializeMusicFormatsServices ()
+{
+  // protect library against multiple initializations
+  static Bool pPrivateThisMethodHasBeenRun (false);
+
+  if (! pPrivateThisMethodHasBeenRun) {
+#ifdef MF_TRACE_IS_ENABLED
+    if (
+      gEarlyOptions.getTraceEarlyOptions ()
+        &&
+      ! gEarlyOptions.getEarlyQuietOption ()
+    ) {
+      std::stringstream ss;
+
+      ss <<
+        "Initializing MusicFormats services" <<
+        std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+    // services handling
+    // ------------------------------------------------------
+
+    initializeMusicFormatsServiceKindsMap ();
+
+    pPrivateThisMethodHasBeenRun = true;
+  }
+}
 
 //_______________________________________________________________________________
 S_mfService mfService::create (
@@ -230,9 +441,6 @@ void mfService::printServiceForAboutOption (std::ostream& os) const
 }
 
 //_______________________________________________________________________________
-S_mfServiceRunData gServiceRunData;
-S_mfService gGlobalCurrentService;
-
 S_mfServiceRunData mfServiceRunData::create (
   const std::string& serviceName)
 {
@@ -366,10 +574,17 @@ std::ostream& operator << (std::ostream& os, const mfServiceRunData& elt)
 
 //________________________________________________________________________
 // hidden global service variable
+std::map<mfServiceKind, S_mfService> pGlobalServicesMap;
+
+// hidden global service variable
 S_mfService pGlobalService;
 
-EXP void setGlobalService (S_mfService service)
+EXP void setGlobalService (mfServiceKind serviceKind)
 {
+  S_mfService
+    service =
+      pGlobalServicesMap [serviceKind];
+
   pGlobalService = service;
 }
 
@@ -389,6 +604,354 @@ EXP void setGlobalServiceRunData (S_mfServiceRunData serviceRunData)
 EXP S_mfServiceRunData getGlobalServiceRunData ()
 {
   return pGlobalServiceRunData;
+}
+
+//________________________________________________________________________
+EXP void initializeServices ()
+{
+  // xml2ly
+  // ------------------------------
+
+  {
+    std::string serviceName = "xml2ly";
+
+    S_mfService
+      xml2lyService =
+        mfService::create (serviceName);
+
+  //     This multi-pass converter basically performs 5 passes:
+  //         Pass 1:  reads the contents of MusicXMLFile or stdin ('-')
+  //                  and converts it to a MusicXML tree;
+  //         Pass 2a: converts that MusicXML tree into
+  //                  a first Music Score Representation (MSR) skeleton;
+  //         Pass 2b: populates the first MSR skeleton from the MusicXML tree
+  //                  to get a full MSR;
+  //         Pass 3:  converts the first MSR into a second MSR to apply options
+  //         Pass 4:  converts the second MSR into a
+  //                  LilyPond Score Representation (LPSR);
+  //         Pass 5:  converts the LPSR to LilyPond code
+  //                  and writes it to standard output.
+
+    xml2lyService->
+      appendPassToService (
+        mfPassDescription::create (
+          mfPassIDKind::kMfPassID_1,
+          gLanguage->createAnMXSRFromAMusicXMLStream ()));
+
+    xml2lyService->
+      appendPassToService (
+        mfPassDescription::create (
+          mfPassIDKind::kMfPassID_2a,
+          gLanguage->createAnMSRSqueletonFromTheMXSR ()));
+
+    xml2lyService->
+      appendPassToService (
+        mfPassDescription::create (
+          mfPassIDKind::kMfPassID_2b,
+          gLanguage->populateTheMSRSqueletonFromMusicXMLData ()));
+
+    xml2lyService->
+      appendPassToService (
+        mfPassDescription::create (
+          mfPassIDKind::kMfPassID_3,
+          gLanguage->convertTheFirstMSRIntoASecondMSR ()));
+
+    xml2lyService->
+      appendPassToService (
+        mfPassDescription::create (
+          mfPassIDKind::kMfPassID_4,
+          gLanguage->convertTheSecondMSRIntoAnLPSR ()));
+
+    xml2lyService->
+      appendPassToService (
+        mfPassDescription::create (
+          mfPassIDKind::kMfPassID_5,
+          gLanguage->convertTheLPSRIntoLilyPondCode ()));
+
+    pGlobalServicesMap [mfServiceKind::kMfService_xml2ly] = xml2lyService;
+
+  //   gLog << "--------------" << std::endl;
+  //
+  //   gLog <<
+  //     "xml2lyService::print ()" <<
+  //     std::endl;
+  //
+  //   ++gIndenter;
+  //   gLog <<
+  //     xml2lyService <<
+  //     std::endl;
+  //   --gIndenter;
+  //
+  //   gLog << "--------------" << std::endl;
+  //
+  //   gLog <<
+  //     "xml2lyService::printServiceForAboutOption ()" <<
+  //     std::endl;
+  //
+  //   ++gIndenter;
+  //   xml2lyService-> printServiceForAboutOption (gLog);
+  //   --gIndenter;
+  //
+  //   gLog << "--------------" << std::endl;
+  //
+  //   gLog <<
+  //     "xml2lyService::fetchServicePassDescriptionsAsString ()" <<
+  //     std::endl;
+  //
+  //   ++gIndenter;
+  //   gLog <<
+  //     xml2lyService-> fetchServicePassDescriptionsAsString () <<
+  //     std::endl;
+  //   --gIndenter;
+  //
+  //   gLog << "--------------" << std::endl;
+  }
+
+  // xml2brl
+  // ------------------------------
+
+  {
+    std::string serviceName = "xml2brl";
+
+//         Pass 1:  reads the contents of MusicXMLFile or stdin ('-')
+//                  and converts it to a MusicXML tree;
+//         Pass 2a: converts that MusicXML tree into
+//                  a first Music Score Representation (MSR) skeleton;
+//         Pass 2b: populates the MSR skeleton from the MusicXML tree
+//                  to get a full MSR;
+//         Pass 3:  converts the first MSR into a second MSR, to apply options
+//         Pass 4:  converts the second MSR into
+//                  a first Braille Score Representation (BSR)
+//                  containing one Braille page per MusicXML page;
+//         Pass 5:  converts the first BSR into a second BSR
+//                  with as many Braille pages as needed
+//                  to fit the line and page lengthes;
+//         Pass 6:  converts the BSR to Braille text
+//                  and writes it to standard output.
+
+    S_mfService
+      xml2brlService =
+        mfService::create (serviceName);
+
+    xml2brlService->
+      appendPassToService (
+        mfPassDescription::create (
+          mfPassIDKind::kMfPassID_1,
+          gLanguage->createAnMXSRFromAMusicXMLStream ()));
+
+    xml2brlService->
+      appendPassToService (
+        mfPassDescription::create (
+          mfPassIDKind::kMfPassID_2a,
+          gLanguage->createAnMSRSqueletonFromTheMXSR ()));
+
+    xml2brlService->
+      appendPassToService (
+        mfPassDescription::create (
+          mfPassIDKind::kMfPassID_2b,
+          gLanguage->populateTheMSRSqueletonFromMusicXMLData ()));
+
+    xml2brlService->
+      appendPassToService (
+        mfPassDescription::create (
+          mfPassIDKind::kMfPassID_3,
+          gLanguage->convertTheFirstMSRIntoASecondMSR ()));
+
+    xml2brlService->
+      appendPassToService (
+        mfPassDescription::create (
+          mfPassIDKind::kMfPassID_4,
+          gLanguage->convertTheSecondMSRIntoAnLPSR ()));
+
+    xml2brlService->
+      appendPassToService (
+        mfPassDescription::create (
+          mfPassIDKind::kMfPassID_5,
+          gLanguage->convertTheLPSRIntoLilyPondCode ()));
+
+    pGlobalServicesMap [mfServiceKind::kMfService_xml2brl] = xml2brlService;
+  }
+
+  // xml2xml
+  // ------------------------------
+
+  {
+    std::string serviceName = "xml2xml";
+
+//         Pass 1:  reads the contents of MusicXMLFile or stdin ('-')
+//                  and converts it to a MusicXML tree;
+//         Pass 2a: converts that MusicXML tree into
+//                  a first Music Score Representation (MSR) skeleton;
+//         Pass 2b: populates the MSR skeleton from the MusicXML tree
+//                  to get a full MSR;
+//         Pass 3:  converts the first MSR into a second MSR, to apply options;
+//         Pass 4:  converts the second MSR into a second MusicXML tree;
+//         Pass 5:  converts the second MusicXML tree to MusicXML code
+//                  and writes it to standard output.
+
+    S_mfService
+      xml2xmlService =
+        mfService::create (serviceName);
+
+    xml2xmlService->
+      appendPassToService (
+        mfPassDescription::create (
+          mfPassIDKind::kMfPassID_1,
+          gLanguage->createAnMXSRFromAMusicXMLStream ()));
+
+    xml2xmlService->
+      appendPassToService (
+        mfPassDescription::create (
+          mfPassIDKind::kMfPassID_2a,
+          gLanguage->createAnMSRSqueletonFromTheMXSR ()));
+
+    xml2xmlService->
+      appendPassToService (
+        mfPassDescription::create (
+          mfPassIDKind::kMfPassID_2b,
+          gLanguage->populateTheMSRSqueletonFromMusicXMLData ()));
+
+    xml2xmlService->
+      appendPassToService (
+        mfPassDescription::create (
+          mfPassIDKind::kMfPassID_3,
+          gLanguage->convertTheFirstMSRIntoASecondMSR ()));
+
+    xml2xmlService->
+      appendPassToService (
+        mfPassDescription::create (
+          mfPassIDKind::kMfPassID_4,
+          gLanguage->convertTheSecondMSRIntoAnLPSR ()));
+
+    xml2xmlService->
+      appendPassToService (
+        mfPassDescription::create (
+          mfPassIDKind::kMfPassID_5,
+          gLanguage->convertTheLPSRIntoLilyPondCode ()));
+
+    pGlobalServicesMap [mfServiceKind::kMfService_xml2xml] = xml2xmlService;
+  }
+
+  // xml2gmn
+  // ------------------------------
+
+  {
+    std::string serviceName = "xml2gmn";
+
+    S_mfService
+      xml2gmnService =
+        mfService::create (serviceName);
+
+//         Pass 1:  reads the contents of MusicXMLFile or stdin ('-')
+//                  and converts it to a first MusicXML tree;
+//         Pass 2a: converts that MusicXML tree into
+//                  a first Music Score Representation (MSR) skeleton;
+//         Pass 2b: populates the MSR skeleton from the MusicXML tree
+//                  to get a full MSR;
+//         Pass 3:  converts the first MSR a second MSR, to apply options;
+//         Pass 4:  converts the second MSR into a second MusicXML tree;
+//         Pass 5:  converts the second MusicXML tree to Guido code
+//                  and writes it to standard output.
+
+    xml2gmnService->
+      appendPassToService (
+        mfPassDescription::create (
+          mfPassIDKind::kMfPassID_1,
+          gLanguage->createAnMXSRFromAMusicXMLStream ()));
+
+    xml2gmnService->
+      appendPassToService (
+        mfPassDescription::create (
+          mfPassIDKind::kMfPassID_2a,
+          gLanguage->createAnMSRSqueletonFromTheMXSR ()));
+
+    xml2gmnService->
+      appendPassToService (
+        mfPassDescription::create (
+          mfPassIDKind::kMfPassID_2b,
+          gLanguage->populateTheMSRSqueletonFromMusicXMLData ()));
+
+    xml2gmnService->
+      appendPassToService (
+        mfPassDescription::create (
+          mfPassIDKind::kMfPassID_3,
+          gLanguage->convertTheFirstMSRIntoASecondMSR ()));
+
+    xml2gmnService->
+      appendPassToService (
+        mfPassDescription::create (
+          mfPassIDKind::kMfPassID_4,
+          gLanguage->convertTheSecondMSRIntoAnLPSR ()));
+
+    xml2gmnService->
+      appendPassToService (
+        mfPassDescription::create (
+          mfPassIDKind::kMfPassID_5,
+          gLanguage->convertTheLPSRIntoLilyPondCode ()));
+
+    pGlobalServicesMap [mfServiceKind::kMfService_xml2gmn] = xml2gmnService;
+  }
+
+  // msdl
+  // ------------------------------
+
+  {
+    std::string serviceName = "msdl";
+
+// What msdlConverter does:
+//
+//     This multi-pass converter performs various passes depending on the output generated,
+//     which should be specified by an option
+//
+//     Other passes are performed according to the options, such as
+//     displaying views of the internal data or printing a summary of the score.
+//
+//     The activity log and warning/error messages go to standard error.
+
+    S_mfService
+      msdlService =
+        mfService::create (serviceName);
+
+    msdlService->
+      appendPassToService (
+        mfPassDescription::create (
+          mfPassIDKind::kMfPassID_1,
+          gLanguage->createAnMXSRFromAMusicXMLStream ()));
+
+    msdlService->
+      appendPassToService (
+        mfPassDescription::create (
+          mfPassIDKind::kMfPassID_2a,
+          gLanguage->createAnMSRSqueletonFromTheMXSR ()));
+
+    msdlService->
+      appendPassToService (
+        mfPassDescription::create (
+          mfPassIDKind::kMfPassID_2b,
+          gLanguage->populateTheMSRSqueletonFromMusicXMLData ()));
+
+    msdlService->
+      appendPassToService (
+        mfPassDescription::create (
+          mfPassIDKind::kMfPassID_3,
+          gLanguage->convertTheFirstMSRIntoASecondMSR ()));
+
+    msdlService->
+      appendPassToService (
+        mfPassDescription::create (
+          mfPassIDKind::kMfPassID_4,
+          gLanguage->convertTheSecondMSRIntoAnLPSR ()));
+
+    msdlService->
+      appendPassToService (
+        mfPassDescription::create (
+          mfPassIDKind::kMfPassID_5,
+          gLanguage->convertTheLPSRIntoLilyPondCode ()));
+
+    pGlobalServicesMap [mfServiceKind::kMfService_msdl] = msdlService;
+  }
+
+  // JMI v0.9.67 mfsl ??? ischeme ???
 }
 
 

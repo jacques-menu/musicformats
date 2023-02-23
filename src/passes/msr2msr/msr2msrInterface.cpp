@@ -50,11 +50,11 @@ namespace MusicFormats
 
 //_______________________________________________________________________________
 S_msrScore translateMsrToMsr (
-  S_msrScore           originalMsrScore,
-  const S_msrOahGroup& msrOpts,
-  S_msr2msrOahGroup    msr2msrOpts,
-  mfPassIDKind         passIDKind,
-  const std::string&   passDescription)
+  const S_msrScore&        originalMsrScore,
+  const S_msrOahGroup&     msrOpts,
+  const S_msr2msrOahGroup& msr2msrOpts,
+  mfPassIDKind             passIDKind,
+  const std::string&       passDescription)
 {
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
@@ -148,13 +148,13 @@ S_msrScore translateMsrToMsr (
   // display the resulting second MSR score if requested
   // ------------------------------------------------------
 
-  if (gGlobalMsrOahGroup->getDisplaySecondMsr ()) {
+  if (gMsrOahGroup->getDisplaySecondMsr ()) {
     displayMsrScore (
       resultingNewMsrScore,
       gLanguage->displayTheSecondMSRAsText ());
   }
 
-  if (gGlobalMsrOahGroup->getDisplaySecondMsrFull ()) {
+  if (gMsrOahGroup->getDisplaySecondMsrFull ()) {
     displayMsrScoreFull (
       resultingNewMsrScore,
       gLanguage->displayTheSecondMSRAsText ());
@@ -163,22 +163,22 @@ S_msrScore translateMsrToMsr (
   // display the populated MSR score summary if requested
   // ------------------------------------------------------
 
-  if (gGlobalMsrOahGroup->getDisplaySecondMsrSummary ()) {
+  if (gMsrOahGroup->getDisplaySecondMsrSummary ()) {
     // display the score summary
     displayMsrScoreSummary (
       resultingNewMsrScore,
-      gGlobalMsrOahGroup,
+      gMsrOahGroup,
       gLanguage->displayASummaryOfTheSecondMSR ());
   }
 
   // display the populated MSR score names if requested
   // ------------------------------------------------------
 
-  if (gGlobalMsrOahGroup->getDisplaySecondMsrNames ()) {
+  if (gMsrOahGroup->getDisplaySecondMsrNames ()) {
     // display the score name
     displayMsrScoreNames (
       resultingNewMsrScore,
-      gGlobalMsrOahGroup,
+      gMsrOahGroup,
       gLanguage->displayTheNamesInTheSecondMSR ());
   }
   return resultingNewMsrScore;
@@ -186,12 +186,12 @@ S_msrScore translateMsrToMsr (
 
 //_______________________________________________________________________________
 S_msrScore translateMsrToMsrAlongPathToVoice (
-  S_msrScore           originalMsrScore,
-  const S_msrOahGroup& msrOpts,
-  S_msr2msrOahGroup    msr2msrOpts,
-  mfPassIDKind         passIDKind,
-  const std::string    passDescription,
-  S_msrPathToVoice     pathToVoice)
+  const S_msrScore&        originalMsrScore,
+  const S_msrOahGroup&     msrOpts,
+  const S_msr2msrOahGroup& msr2msrOpts,
+  mfPassIDKind             passIDKind,
+  const std::string        passDescription,
+  const S_msrPathToVoice&  pathToVoice)
 {
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
@@ -286,13 +286,13 @@ S_msrScore translateMsrToMsrAlongPathToVoice (
   // display the resulting new MSR score if requested
   // ------------------------------------------------------
 
-  if (gGlobalMsrOahGroup->getDisplaySecondMsr ()) {
+  if (gMsrOahGroup->getDisplaySecondMsr ()) {
     displayMsrScore (
       resultingNewMsrScore,
       gLanguage->displayTheSecondMSRAsText ());
   }
 
-  if (gGlobalMsrOahGroup->getDisplaySecondMsrFull ()) {
+  if (gMsrOahGroup->getDisplaySecondMsrFull ()) {
     displayMsrScoreFull (
       resultingNewMsrScore,
       gLanguage->displayTheSecondMSRAsText ());
@@ -301,22 +301,22 @@ S_msrScore translateMsrToMsrAlongPathToVoice (
   // display the resulting new MSR score summary if requested
   // ------------------------------------------------------
 
-  if (gGlobalMsrOahGroup->getDisplaySecondMsrSummary ()) {
+  if (gMsrOahGroup->getDisplaySecondMsrSummary ()) {
     // display the score summary
     displayMsrScoreSummary (
       resultingNewMsrScore,
-      gGlobalMsrOahGroup,
+      gMsrOahGroup,
       gLanguage->displayASummaryOfTheSecondMSR ());
   }
 
   // display the populated MSR score names if requested
   // ------------------------------------------------------
 
-  if (gGlobalMsrOahGroup->getDisplaySecondMsrNames ()) {
+  if (gMsrOahGroup->getDisplaySecondMsrNames ()) {
     // display the score name
     displayMsrScoreNames (
       resultingNewMsrScore,
-      gGlobalMsrOahGroup,
+      gMsrOahGroup,
       gLanguage->displayTheNamesInTheSecondMSR ());
   }
   return resultingNewMsrScore;

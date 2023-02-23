@@ -18,9 +18,12 @@
 #include "mfInitialization.h" // for languages, before early options handling
 
 #include "mfBool.h"
+#include "mfInitialization.h"
 #include "mfMusicformatsErrors.h"
-#include "mfcComponents.h"
+#include "mfServices.h"
 #include "mfTiming.h"
+
+#include "mfcComponents.h"
 
 #include "waeInterface.h"
 #include "oahWae.h"
@@ -103,71 +106,15 @@ EXP int xml2ly (
 
   // initialize common things
   // ------------------------------------------------------
+
   initializeMusicFormats ();
 
-
-#include "mfServices.h"
-
-  S_mfService xml2lyService =
-    mfService::create (serviceName);
-
-//     This multi-pass converter basically performs 5 passes:
-//         Pass 1:  reads the contents of MusicXMLFile or stdin ('-')
-//                  and converts it to a MusicXML tree;
-//         Pass 2a: converts that MusicXML tree into
-//                  a first Music Score Representation (MSR) skeleton;
-//         Pass 2b: populates the first MSR skeleton from the MusicXML tree
-//                  to get a full MSR;
-//         Pass 3:  converts the first MSR into a second MSR to apply options
-//         Pass 4:  converts the second MSR into a
-//                  LilyPond Score Representation (LPSR);
-//         Pass 5:  converts the LPSR to LilyPond code
-//                  and writes it to standard output.
-
-  xml2lyService->
-    appendPassToService (
-      mfPassDescription::create (
-        mfPassIDKind::kMfPassID_1,
-        gLanguage->createAnMXSRFromAMusicXMLStream ()));
-
-//   gLog << "--------------" << std::endl;
-//
-//   gLog <<
-//     "xml2lyService::print ()" <<
-//     std::endl;
-//
-//   ++gIndenter;
-//   gLog <<
-//     xml2lyService <<
-//     std::endl;
-//   --gIndenter;
-//
-//   gLog << "--------------" << std::endl;
-//
-//   gLog <<
-//     "xml2lyService::printServiceForAboutOption ()" <<
-//     std::endl;
-//
-//   ++gIndenter;
-//   xml2lyService-> printServiceForAboutOption (gLog);
-//   --gIndenter;
-//
-//   gLog << "--------------" << std::endl;
-//
-//   gLog <<
-//     "xml2lyService::fetchServicePassDescriptionsAsString ()" <<
-//     std::endl;
-//
-//   ++gIndenter;
-//   gLog <<
-//     xml2lyService-> fetchServicePassDescriptionsAsString () <<
-//     std::endl;
-//   --gIndenter;
-//
-//   gLog << "--------------" << std::endl;
+  initializeWAE ();
 
   // register xml2ly as current service
-  setGlobalService (xml2lyService);
+  // ------------------------------------------------------
+
+  setGlobalService (mfServiceKind::kMfService_xml2ly);
 
   // apply early options if any
   // ------------------------------------------------------
@@ -184,7 +131,7 @@ EXP int xml2ly (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       serviceName << " xml2ly()" <<
@@ -301,7 +248,7 @@ EXP int xml2ly (
     std::string separator =
       "%--------------------------------------------------------------";
 
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       serviceName << ": " <<
@@ -432,7 +379,7 @@ EXP int xml2ly (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getEarlyTracePasses ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "The command line options and arguments have been analyzed" <<

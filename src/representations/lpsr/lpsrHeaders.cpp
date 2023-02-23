@@ -99,8 +99,8 @@ size_t lpsrHeader::maxLilypondVariablesNamesLength ()
 void lpsrHeader::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
-		std::stringstream ss;
+  if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% ==> lpsrHeader::acceptIn ()" <<
@@ -118,7 +118,7 @@ void lpsrHeader::acceptIn (basevisitor* v)
         S_lpsrHeader elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
+        if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -137,8 +137,8 @@ void lpsrHeader::acceptIn (basevisitor* v)
 void lpsrHeader::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
-		std::stringstream ss;
+  if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% ==> lpsrHeader::acceptOut ()" <<
@@ -156,7 +156,7 @@ void lpsrHeader::acceptOut (basevisitor* v)
         S_lpsrHeader elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
+        if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -226,7 +226,7 @@ void lpsrHeader::print (std::ostream& os) const
   if (fLilypondDedication.size ()) {
     os << std::left <<
       std::setw (fieldWidth) <<
-      "fLilypondDedication" << ": " <<
+      "fLilypondDedication" << "= " <<
       fLilypondDedication <<
       std::endl;
 
@@ -236,7 +236,7 @@ void lpsrHeader::print (std::ostream& os) const
   if (fLilypondPiece.size ()) {
     os << std::left <<
       std::setw (fieldWidth) <<
-      "fLilypondPiece" << ": " <<
+      "fLilypondPiece" << "= " <<
       fLilypondPiece <<
       std::endl;
 
@@ -246,7 +246,7 @@ void lpsrHeader::print (std::ostream& os) const
   if (fLilypondOpus.size ()) {
     os << std::left <<
       std::setw (fieldWidth) <<
-      "fLilypondOpus" << ": " <<
+      "fLilypondOpus" << "= " <<
       fLilypondOpus <<
       std::endl;
 
@@ -256,7 +256,7 @@ void lpsrHeader::print (std::ostream& os) const
   if (fLilypondTitle.size ()) {
     os << std::left <<
       std::setw (fieldWidth) <<
-      "fLilypondTitle" << ": " <<
+      "fLilypondTitle" << "= " <<
       fLilypondTitle <<
       std::endl;
 
@@ -266,7 +266,7 @@ void lpsrHeader::print (std::ostream& os) const
   if (fLilypondSubTitle.size ()) {
     os << std::left <<
       std::setw (fieldWidth) <<
-      "fLilypondSubTitle" << ": " <<
+      "fLilypondSubTitle" << "= " <<
       fLilypondSubTitle <<
       std::endl;
 
@@ -276,7 +276,7 @@ void lpsrHeader::print (std::ostream& os) const
   if (fLilypondSubSubTitle.size ()) {
     os << std::left <<
       std::setw (fieldWidth) <<
-      "fLilypondSubSubTitle" << ": " <<
+      "fLilypondSubSubTitle" << "= " <<
       fLilypondSubSubTitle <<
       std::endl;
 
@@ -286,7 +286,7 @@ void lpsrHeader::print (std::ostream& os) const
   if (fLilypondInstrument.size ()) {
     os << std::left <<
       std::setw (fieldWidth) <<
-      "fLilypondInstrument" << ": " <<
+      "fLilypondInstrument" << "= " <<
       fLilypondInstrument <<
       std::endl;
 
@@ -296,7 +296,7 @@ void lpsrHeader::print (std::ostream& os) const
   if (fLilypondMeter.size ()) {
     os << std::left <<
       std::setw (fieldWidth) <<
-      "fLilypondMeter" << ": " <<
+      "fLilypondMeter" << "= " <<
       fLilypondMeter <<
       std::endl;
 
@@ -306,7 +306,7 @@ void lpsrHeader::print (std::ostream& os) const
   if (fLilypondCopyright.size ()) {
     os << std::left <<
       std::setw (fieldWidth) <<
-      "fLilypondCopyright" << ": " <<
+      "fLilypondCopyright" << "= " <<
       fLilypondCopyright <<
       std::endl;
 
@@ -316,7 +316,7 @@ void lpsrHeader::print (std::ostream& os) const
   if (fLilypondTagline.size ()) {
     os << std::left <<
       std::setw (fieldWidth) <<
-      "fLilypondTagline" << ": " <<
+      "fLilypondTagline" << "= " <<
       fLilypondTagline <<
       std::endl;
 
@@ -371,7 +371,7 @@ void lpsrHeader::appendRight (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceIdentification ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending right \"" <<
@@ -395,7 +395,7 @@ void lpsrHeader::appendComposer (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceIdentification ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending composer \"" <<
@@ -419,7 +419,7 @@ void lpsrHeader::appendArranger (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceIdentification ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending arranger \"" <<
@@ -443,7 +443,7 @@ void lpsrHeader::appendLyricist (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceIdentification ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending lyricist \"" <<
@@ -467,7 +467,7 @@ void lpsrHeader::appendPoet (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceIdentification ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending poet \"" <<
@@ -490,7 +490,7 @@ void lpsrHeader::removeAllPoets (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceIdentification ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Removing all poets from lpsrHeader" <<
@@ -512,7 +512,7 @@ void lpsrHeader::appendTranslator (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceIdentification ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending translator \"" <<
@@ -536,7 +536,7 @@ void lpsrHeader::appendArtist (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceIdentification ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending artist \"" <<
@@ -560,7 +560,7 @@ void lpsrHeader::appendSoftware (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceIdentification ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending software \"" <<

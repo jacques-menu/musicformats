@@ -125,7 +125,7 @@ void msr2lpsrTranslator::visitStart (S_msrBarLine& elt)
 #endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -191,7 +191,7 @@ Such a newborn clone is created and used this way in \method{}{}:
 void msr2lpsrTranslator::visitStart (S_msrTuplet& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -415,7 +415,7 @@ Then there are \methodName{visitStart} and/or \methodName{visitEnd} methods to h
 void msr2msrTranslator::visitStart (S_msrIdentification& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
 		std::stringstream ss;
 
     ss <<
@@ -451,7 +451,7 @@ void msr2msrTranslator::visitEnd (S_msrIdentification& elt)
   --gIndenter;
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
 		std::stringstream ss;
 
     ss <<

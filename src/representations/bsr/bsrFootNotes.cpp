@@ -54,8 +54,8 @@ bsrFootNotes::~bsrFootNotes ()
 void bsrFootNotes::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
-		std::stringstream ss;
+  if (gBsrOahGroup->getTraceBsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% --> End visiting bsrTranscriptionNotesElement" <<
@@ -74,7 +74,7 @@ void bsrFootNotes::acceptIn (basevisitor* v)
         S_bsrFootNotes elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
+        if (gBsrOahGroup->getTraceBsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -93,8 +93,8 @@ void bsrFootNotes::acceptIn (basevisitor* v)
 void bsrFootNotes::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
-		std::stringstream ss;
+  if (gBsrOahGroup->getTraceBsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% --> End visiting bsrTranscriptionNotesElement" <<
@@ -113,7 +113,7 @@ void bsrFootNotes::acceptOut (basevisitor* v)
         S_bsrFootNotes elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
+        if (gBsrOahGroup->getTraceBsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -155,7 +155,7 @@ void bsrFootNotes::print (std::ostream& os) const
 
   size_t footNotesElementsListSize = fFootNotesElementsList.size ();
 
-  if (footNotesElementsListSize || gGlobalBsrOahGroup->getDisplayBsrFull ()) {
+  if (footNotesElementsListSize || gBsrOahGroup->getDisplayBsrFull ()) {
     os <<
       std::setw (fieldWidth) <<
       "footNotesElementsList" << ": " <<

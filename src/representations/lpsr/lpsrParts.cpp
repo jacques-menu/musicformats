@@ -408,8 +408,8 @@ void lpsrPartBlock::appendFiguredBassContextToPartBlock (
 void lpsrPartBlock::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
-		std::stringstream ss;
+  if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% ==> lpsrPartBlock::acceptIn ()" <<
@@ -427,7 +427,7 @@ void lpsrPartBlock::acceptIn (basevisitor* v)
         S_lpsrPartBlock elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
+        if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -446,8 +446,8 @@ void lpsrPartBlock::acceptIn (basevisitor* v)
 void lpsrPartBlock::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
-		std::stringstream ss;
+  if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% ==> lpsrPartBlock::acceptOut ()" <<
@@ -465,7 +465,7 @@ void lpsrPartBlock::acceptOut (basevisitor* v)
         S_lpsrPartBlock elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
+        if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -484,8 +484,8 @@ void lpsrPartBlock::acceptOut (basevisitor* v)
 void lpsrPartBlock::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
-		std::stringstream ss;
+  if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% ==> lpsrPartBlock::browseData ()" <<
@@ -508,8 +508,8 @@ void lpsrPartBlock::browseData (basevisitor* v)
   } // for
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
-		std::stringstream ss;
+  if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% <== lpsrPartBlock::browseData ()" <<

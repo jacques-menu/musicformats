@@ -106,13 +106,13 @@ void msrPart::initializePart ()
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceParts ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating part \"" << asString () << "\"" <<
       std::endl;
 
-    gGlobalMsrOahGroup->displayMsrOahValues (40); // JMI
+    gMsrOahGroup->displayMsrOahValues (40); // JMI
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -123,9 +123,9 @@ void msrPart::initializePart ()
   // is this part name in the part renaming map?
   std::map<std::string, std::string>::const_iterator
     it =
-      gGlobalMsrOahGroup->getMsrPartsRenamingMap ().find (fPartID);
+      gMsrOahGroup->getMsrPartsRenamingMap ().find (fPartID);
 
-  if (it != gGlobalMsrOahGroup->getMsrPartsRenamingMap ().end ()) {
+  if (it != gMsrOahGroup->getMsrPartsRenamingMap ().end ()) {
     // yes, rename the part accordinglingly
     std::string newMsrPartName = (*it).second;
 
@@ -157,8 +157,8 @@ void msrPart::initializePart ()
   // multiple full-bar rests
   fPartContainsMultipleFullBarRests = false;
 
-  // current measure position
-  fPartMeasurePosition = msrWholeNotes (0, 1);
+  // drawing measure position
+  fPartDrawingMeasurePosition = msrWholeNotes (0, 1);
 
   // part shortest note wholeNotes
   fPartShortestNoteWholeNotes = msrWholeNotes (INT_MAX, 1);
@@ -168,7 +168,7 @@ void msrPart::initializePart ()
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceParts ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating part \"" << asString () << "\"" <<
@@ -201,7 +201,7 @@ S_msrPart msrPart::createPartNewbornClone (const S_msrPartGroup& partGroupClone)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceParts ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating a newborn clone of part " <<
@@ -269,7 +269,7 @@ void msrPart::registerStaffInPart (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceStaves ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Registering staff \"" <<
@@ -360,13 +360,13 @@ void msrPart::registerStaffInPart (
   } // switch
 }
 
-void msrPart::setPartMeasurePosition (
+void msrPart::setPartDrawingMeasurePosition (
   int             inputLineNumber,
   const msrWholeNotes& measurePosition)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasurePositions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Setting part current measure position to " <<
@@ -398,19 +398,19 @@ void msrPart::setPartMeasurePosition (
       ss.str ());
   }
 
-  fPartMeasurePosition =
+  fPartDrawingMeasurePosition =
     measurePosition;
 }
 
-void msrPart::incrementPartMeasurePosition (
+void msrPart::incrementPartDrawingMeasurePosition (
   int             inputLineNumber,
   const msrWholeNotes& wholeNotes)
 {
-  fPartMeasurePosition += wholeNotes;
+  fPartDrawingMeasurePosition += wholeNotes;
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasurePositions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Incrementing part current measure position by " <<
@@ -418,7 +418,7 @@ void msrPart::incrementPartMeasurePosition (
       " in part " <<
       getPartCombinedName () <<
       ", thus setting it to " <<
-      fPartMeasurePosition <<
+      fPartDrawingMeasurePosition <<
       std::endl;
 
     gWaeHandler->waeTrace (
@@ -428,13 +428,13 @@ void msrPart::incrementPartMeasurePosition (
 #endif // MF_TRACE_IS_ENABLED
 }
 
-void msrPart::decrementPartMeasurePosition (
+void msrPart::decrementPartDrawingMeasurePosition (
   int             inputLineNumber,
   const msrWholeNotes& wholeNotes)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasurePositions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Decrementing part current measure position by " <<
@@ -449,9 +449,9 @@ void msrPart::decrementPartMeasurePosition (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  fPartMeasurePosition -= wholeNotes;
+  fPartDrawingMeasurePosition -= wholeNotes;
 
-  if (fPartMeasurePosition.getNumerator () < 0) {
+  if (fPartDrawingMeasurePosition.getNumerator () < 0) {
     std::stringstream ss;
 
     ss <<
@@ -460,7 +460,7 @@ void msrPart::decrementPartMeasurePosition (
       " in part " <<
       getPartCombinedName () <<
       " since that sets it to " <<
-      fPartMeasurePosition <<
+      fPartDrawingMeasurePosition <<
       ", which is negative ";
 
     msrInternalError (
@@ -472,11 +472,11 @@ void msrPart::decrementPartMeasurePosition (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasurePositions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "The new part current measure position is " <<
-      fPartMeasurePosition <<
+      fPartDrawingMeasurePosition <<
       " in part " <<
       getPartCombinedName () <<
       std::endl;
@@ -495,9 +495,9 @@ void msrPart::setPartShortestNoteWholeNotes (
   if (
     gTraceOahGroup->getTraceNotes ()
       ||
-    gGlobalMsrOahGroup->getTraceMsrNotesDurations ()
+    gMsrOahGroup->getTraceMsrNotesDurations ()
   ) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Setting the shortest note wholeNotes of part \"" <<
@@ -522,9 +522,9 @@ void msrPart::setPartShortestNoteTupletFactor (
   if (
     gTraceOahGroup->getTraceNotes ()
       ||
-    gGlobalMsrOahGroup->getTraceMsrNotesDurations ()
+    gMsrOahGroup->getTraceMsrNotesDurations ()
   ) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Setting the shortest note tuplet factor of part " <<
@@ -547,7 +547,7 @@ void msrPart::assignSequentialNumbersToRegularVoicesInPart (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceParts () || gTraceOahGroup->getTraceVoices ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Assigning sequential numbers to the staves in part \"" <<
@@ -576,15 +576,15 @@ void msrPart::setPartMsrName (const std::string& partMsrName)
   // is this part name in the part renaming map?
   std::map<std::string, std::string>::const_iterator
     it =
-      gGlobalMsrOahGroup->getMsrPartsRenamingMap ().find (fPartMsrName);
+      gMsrOahGroup->getMsrPartsRenamingMap ().find (fPartMsrName);
 
-  if (it != gGlobalMsrOahGroup->getMsrPartsRenamingMap ().end ()) {
+  if (it != gMsrOahGroup->getMsrPartsRenamingMap ().end ()) {
     // yes, rename the part accordinglingly
     fPartMsrName = (*it).second;
 
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceParts ()) {
-  		std::stringstream ss;
+      std::stringstream ss;
 
         ss <<
         "Setting part name of " << getPartCombinedName () <<
@@ -603,7 +603,7 @@ void msrPart::setPartMsrName (const std::string& partMsrName)
 
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceParts ()) {
-  		std::stringstream ss;
+      std::stringstream ss;
 
         ss <<
         "Keeping partID \"" << partMsrName <<
@@ -653,7 +653,7 @@ void msrPart::createAMeasureAndAppendItToPart (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasures ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating measure '" <<
@@ -693,7 +693,7 @@ void msrPart::setNextMeasureNumberInPart (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasures ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Setting next measure number to '" <<
@@ -734,7 +734,7 @@ msrWholeNotes msrPart::fetchPartMeasuresWholeNotessVectorAt (
 
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceWholeNotes ()) {
-  		std::stringstream ss;
+      std::stringstream ss;
 
         ss <<
         "fetchPartMeasuresWholeNotessVectorAt() in part \"" <<
@@ -822,7 +822,7 @@ void msrPart::registerShortestNoteInPartIfRelevant (const S_msrNote& note)
 
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceNotes ()) {
-  		std::stringstream ss;
+      std::stringstream ss;
 
         ss <<
         "The new shortest note in part \"" << getPartCombinedName () << "\"" <<
@@ -847,7 +847,7 @@ void msrPart::setPartNumberOfMeasures (size_t partNumberOfMeasures)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasures ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Setting the number of measures in part " <<
@@ -867,7 +867,7 @@ void msrPart::setPartNumberOfMeasures (size_t partNumberOfMeasures)
   if (partNumberOfMeasures > fPartMeasuresWholeNotessVectorSize) {
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceMeasures ()) {
-  		std::stringstream ss;
+      std::stringstream ss;
 
       ss <<
         "Resizing fPartMeasuresWholeNotessVector in part " << // JMI ???
@@ -899,7 +899,7 @@ void msrPart::registerOrdinalMeasureNumberWholeNotes (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasures ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Registering the whole notes duration of the measure with ordinal number '" <<
@@ -919,14 +919,14 @@ void msrPart::registerOrdinalMeasureNumberWholeNotes (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasures ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "===> fPartMeasuresWholeNotessVector contents: " <<
       std::endl;
     for (msrWholeNotes rat : fPartMeasuresWholeNotessVector) {
       ++gIndenter;
-  		std::stringstream ss;
+      std::stringstream ss;
 
     ss <<
         rat <<
@@ -957,7 +957,7 @@ void msrPart::registerOrdinalMeasureNumberWholeNotes (
     // allow for polymetrics in non-MusicXML contexts? JMI
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceMeasures ()) {
-  		std::stringstream ss;
+      std::stringstream ss;
 
       ss <<
         "The measure with ordinal number " <<
@@ -984,7 +984,7 @@ void msrPart::registerOrdinalMeasureNumberWholeNotes (
 
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceMeasures ()) {
-  		std::stringstream ss;
+      std::stringstream ss;
 
         ss <<
         "The measure with ordinal number " <<
@@ -1008,8 +1008,8 @@ void msrPart::appendStaffDetailsToPart (
   const S_msrStaffDetails& staffDetails)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceStaffDetails ()) {
-		std::stringstream ss;
+  if (gTraceOahGroup->getTraceStavesDetails ()) {
+    std::stringstream ss;
 
     ss <<
       "Appending staff details\"" <<
@@ -1035,7 +1035,7 @@ void msrPart::appendClefToPart (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceClefs ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending clef '" <<
@@ -1071,7 +1071,7 @@ void msrPart::appendKeyToPart (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceKeys ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending key " <<
@@ -1114,7 +1114,7 @@ void msrPart::appendTimeSignatureToPart (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceTimeSignatures ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending time signature '" <<
@@ -1157,7 +1157,7 @@ void msrPart::appendTimeSignatureToPartClone (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceTimeSignatures ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending time signature '" <<
@@ -1190,7 +1190,7 @@ void msrPart::appendTempoToPart (
 {
  #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceTempos ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending tempo " << tempo->asString () <<
@@ -1216,7 +1216,7 @@ void msrPart::appendRehearsalMarkToPart (
 {
  #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceRehearsalMarks ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending rehearsal mark " << rehearsalMark->asString () <<
@@ -1243,7 +1243,7 @@ void msrPart::appendLineBreakToPart (
 {
  #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceLineBreaks ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending line break " << lineBreak->asString () <<
@@ -1269,7 +1269,7 @@ void msrPart::appendPageBreakToPart (
 {
  #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTracePageBreaks ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending page break " << pageBreak->asString () <<
@@ -1296,7 +1296,7 @@ void msrPart::insertHiddenMeasureAndBarLineInPartClone (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasures ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Inserting hidden measure and barLine at position " <<
@@ -1329,7 +1329,7 @@ void msrPart::appendTranspositionToPart (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceTranspositions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending transposition \"" <<
@@ -1366,7 +1366,7 @@ void msrPart::handleRepeatStartInPart (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceRepeats ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Handling a repeat start in part \"" <<
@@ -1399,7 +1399,7 @@ void msrPart::handleRepeatEndInPart (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceRepeats ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Handling a repeat end in part \"" <<
@@ -1433,7 +1433,7 @@ void msrPart::handleRepeatEndingStartInPart (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceRepeats ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Handling a repeat ending start in part \"" <<
@@ -1467,7 +1467,7 @@ void msrPart::handleRepeatEndingEndInPart (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceRepeats ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Handling a " <<
@@ -1507,7 +1507,7 @@ void msrPart::finalizeRepeatEndInPart (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceRepeats ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Finalizing a repeat upon its end in part \"" <<
@@ -1611,7 +1611,7 @@ void msrPart::appendMultipleFullBarRestsToPart (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMultipleFullBarRests ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending a multiple full-bar rest for " <<
@@ -1645,7 +1645,7 @@ void msrPart::replicateLastAppendedMeasureInPart (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMultipleFullBarRests ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Replicating last appended measure in part " <<
@@ -1674,7 +1674,7 @@ void msrPart::addEmptyMeasuresToPart (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMultipleFullBarRests ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Adding " <<
@@ -1708,7 +1708,7 @@ void msrPart::appendPendingMultipleFullBarRestsToPart (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMultipleFullBarRests ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending the pending multiple rest to part " <<
@@ -1735,7 +1735,7 @@ void msrPart::appendMultipleFullBarRestsCloneToPart (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMultipleFullBarRests ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending multiple rest '" <<
@@ -1763,7 +1763,7 @@ void msrPart::appendBarLineToPart (
 {
  #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceBarLines ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending barLine " << barLine->asString () <<
@@ -1808,7 +1808,7 @@ S_msrStaff msrPart::addStaffToPartByItsNumber (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceStaves ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Adding " <<
@@ -1858,7 +1858,7 @@ S_msrStaff msrPart::addHarmoniesStaffToPart (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceStaves ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Adding harmonies staff " <<
@@ -1911,7 +1911,7 @@ S_msrStaff msrPart::addHFiguredBassStaffToPart (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceStaves ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Adding figured bass staff " <<
@@ -1963,7 +1963,7 @@ void msrPart::addStaffToPartCloneByItsNumber (const S_msrStaff& staff)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceStaves ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Adding staff \"" << staff->getStaffName () <<
@@ -2120,7 +2120,7 @@ S_msrVoice msrPart::createPartFiguredBassVoice (
     msrPart::K_PART_FIGURED_BASS_STAFF_NUMBER;
 
   if (gTraceOahGroup->getTraceFiguredBasses ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating figured bass staff for part \"" <<
@@ -2146,7 +2146,7 @@ S_msrVoice msrPart::createPartFiguredBassVoice (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceFiguredBasses ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating figured bass voice for part \"" <<
@@ -2199,7 +2199,7 @@ void msrPart::appendFiguredBassToPart (
       // append the figured bass to the part figured bass voice
 #ifdef MF_TRACE_IS_ENABLED
       if (gTraceOahGroup->getTraceFiguredBasses ()) {
-    		std::stringstream ss;
+        std::stringstream ss;
 
     ss <<
           "Appending figured bass " <<
@@ -2261,7 +2261,7 @@ void msrPart::appendFiguredBassToPartClone (
       // append the figured bass to the part figured bass voice
 #ifdef MF_TRACE_IS_ENABLED
       if (gTraceOahGroup->getTraceFiguredBasses ()) {
-    		std::stringstream ss;
+        std::stringstream ss;
 
     ss <<
           "Appending figured bass " <<
@@ -2314,7 +2314,7 @@ void msrPart::appendScordaturaToPart (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceParts ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending scordatura '" <<
@@ -2342,7 +2342,7 @@ void msrPart::appendAccordionRegistrationToPart (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceParts ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending accordion registration '" <<
@@ -2370,7 +2370,7 @@ void msrPart::appendHarpPedalsTuningToPart (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceParts ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending harp pedals tuning '" <<
@@ -2409,7 +2409,7 @@ void msrPart::addSkipGraceNotesGroupAheadOfVoicesClonesIfNeeded (
       ||
     gTraceOahGroup->getTraceParts ()
     ) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "addSkipGraceNotesGroupAheadOfVoicesClonesIfNeeded () in " <<
@@ -2447,7 +2447,7 @@ void msrPart::handleBackupInPart (
   const msrWholeNotes& backupStepLength)
 {
   // account for backup in part
-  decrementPartMeasurePosition (
+  decrementPartDrawingMeasurePosition (
     inputLineNumber,
     backupStepLength);
 }
@@ -2457,7 +2457,7 @@ void msrPart::finalizeLastAppendedMeasureInPart (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasures ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Finalizing last appended measure in part " <<
@@ -2473,8 +2473,8 @@ void msrPart::finalizeLastAppendedMeasureInPart (
 
   ++gIndenter;
 
-  // reset current measure position
-  fPartMeasurePosition = msrWholeNotes (0, 1);
+  // reset drawing measure position
+  fPartDrawingMeasurePosition = msrWholeNotes (0, 1);
 
   // finalize current measure in all staves
   for (S_msrStaff staff : fPartAllStavesList) {
@@ -2548,7 +2548,7 @@ void msrPart::finalizePart (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceParts ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Finalizing part " <<
@@ -2607,7 +2607,7 @@ void msrPart::finalizePartClone (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceParts ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Finalizing part clone " <<
@@ -2648,7 +2648,7 @@ void msrPart::finalizePartAndAllItsMeasures (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceParts ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Finalizing all the measures of part \"" <<
@@ -2682,7 +2682,7 @@ void msrPart::collectPartMeasuresSlices (
       partAllStavesListSize =
         fPartAllStavesList.size ();
 
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Collecting the measures slices of part \"" <<
@@ -2721,7 +2721,7 @@ void msrPart::collectPartMeasuresSlices (
   for (S_msrStaff staff : fPartAllStavesList) {
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceMeasuresSlices ()) {
-  		std::stringstream ss;
+      std::stringstream ss;
 
         ss <<
         "---> staff \"" <<
@@ -2768,7 +2768,7 @@ void msrPart::collectPartMeasuresSlices (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasuresSlices ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "fPartMeasuresSlicesSequence:" <<
@@ -2787,7 +2787,7 @@ void msrPart::collectPartMeasuresSlices (
 void msrPart::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -2806,8 +2806,8 @@ void msrPart::acceptIn (basevisitor* v)
         S_msrPart elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-      		std::stringstream ss;
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
+          std::stringstream ss;
 
           ss <<
             "% ==> Launching msrPart::visitStart ()" <<
@@ -2825,7 +2825,7 @@ void msrPart::acceptIn (basevisitor* v)
 void msrPart::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -2844,8 +2844,8 @@ void msrPart::acceptOut (basevisitor* v)
         S_msrPart elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-      		std::stringstream ss;
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
+          std::stringstream ss;
 
           ss <<
             "% ==> Launching msrPart::visitEnd ()" <<
@@ -2863,7 +2863,7 @@ void msrPart::acceptOut (basevisitor* v)
 void msrPart::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -2877,8 +2877,8 @@ void msrPart::browseData (basevisitor* v)
 #endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED // JMI
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) { // JMI TEMP
-		std::stringstream ss;
+  if (gMsrOahGroup->getTraceMsrVisitors ()) { // JMI TEMP
+    std::stringstream ss;
 
     ss <<
       "++++++++ fPartAllStavesList.size(): " <<
@@ -2887,7 +2887,7 @@ void msrPart::browseData (basevisitor* v)
 
     if (fPartAllStavesList.size ()) {
       for (S_msrStaff staff : fPartAllStavesList) {
-    		std::stringstream ss;
+        std::stringstream ss;
 
         ss <<
           std::endl <<
@@ -2904,7 +2904,7 @@ void msrPart::browseData (basevisitor* v)
 
     if (fPartNonHarmoniesNorFiguredBassStavesList.size ()) {
       for (S_msrStaff staff : fPartNonHarmoniesNorFiguredBassStavesList) {
-    		std::stringstream ss;
+        std::stringstream ss;
 
         ss <<
           std::endl <<
@@ -3081,8 +3081,8 @@ void msrPart::printFull (std::ostream& os) const
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fPartMeasurePosition" << ": " <<
-    fPartMeasurePosition <<
+    "fPartDrawingMeasurePosition" << ": " <<
+    fPartDrawingMeasurePosition <<
     std::endl <<
 
     std::setw (fieldWidth) <<
@@ -3381,12 +3381,12 @@ void msrPart::printFull (std::ostream& os) const
           break;
 
         case msrStaffKind::kStaffKindHarmonies:
-    // JMI      if (gGlobalMsrOahGroup->getShowHarmoniesVoices ()) {}
+    // JMI      if (gMsrOahGroup->getShowHarmoniesVoices ()) {}
           os << staff;
           break;
 
         case msrStaffKind::kStaffKindFiguredBass:
-    // JMI      if (gGlobalMsrOahGroup->getShowFiguredBassVoices ()) {}
+    // JMI      if (gMsrOahGroup->getShowFiguredBassVoices ()) {}
           os << staff;
           break;
 
@@ -3664,8 +3664,8 @@ void msrPart::printSummary (std::ostream& os) const
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fPartMeasurePosition" << ": " <<
-    fPartMeasurePosition <<
+    "fPartDrawingMeasurePosition" << ": " <<
+    fPartDrawingMeasurePosition <<
     std::endl;
 
   // print all the staves

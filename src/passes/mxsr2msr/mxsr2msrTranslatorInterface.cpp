@@ -44,7 +44,7 @@ namespace MusicFormats
 
 //_______________________________________________________________________________
 void populateMsrSkeletonFromMxsr (
-  Sxmlelement        theMxsr,
+  const Sxmlelement& theMxsr,
   S_msrScore         scoreSkeletonToBePopulated,
   mfPassIDKind       passIDKind,
   const std::string& passDescription)
@@ -124,13 +124,13 @@ void populateMsrSkeletonFromMxsr (
   // display the populated MSR score if requested
   // ------------------------------------------------------
 
-  if (gGlobalMsrOahGroup->getDisplayFirstMsr ()) {
+  if (gMsrOahGroup->getDisplayFirstMsr ()) {
     displayMsrScore (
       scoreSkeletonToBePopulated,
       gLanguage->displayTheFirstMSRAsText ());
   }
 
-  if (gGlobalMsrOahGroup->getDisplayFirstMsrFull ()) {
+  if (gMsrOahGroup->getDisplayFirstMsrFull ()) {
     displayMsrScoreFull (
       scoreSkeletonToBePopulated,
       gLanguage->displayTheFirstMSRAsText ());
@@ -139,22 +139,22 @@ void populateMsrSkeletonFromMxsr (
   // display the populated MSR score summary if requested
   // ------------------------------------------------------
 
-  if (gGlobalMsrOahGroup->getDisplayFirstMsrSummary ()) {
+  if (gMsrOahGroup->getDisplayFirstMsrSummary ()) {
     // display the score summary
     displayMsrScoreSummary (
       scoreSkeletonToBePopulated,
-      gGlobalMsrOahGroup,
+      gMsrOahGroup,
       gLanguage->displayASummaryOfTheFirstMSR ());
   }
 
   // display the populated MSR score names if requested
   // ------------------------------------------------------
 
-  if (gGlobalMsrOahGroup->getDisplayFirstMsrNames ()) {
+  if (gMsrOahGroup->getDisplayFirstMsrNames ()) {
     // display the score name
     displayMsrScoreNames (
       scoreSkeletonToBePopulated,
-      gGlobalMsrOahGroup,
+      gMsrOahGroup,
       gLanguage->displayTheNamesInTheFirstMSR ());
   }
 }

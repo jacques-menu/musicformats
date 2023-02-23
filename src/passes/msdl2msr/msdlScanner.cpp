@@ -170,7 +170,7 @@ void msdlScanner::populateInputString (std::istream& inputStream)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (fTraceTokensDetails) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Populating the input std::string" <<
@@ -200,7 +200,7 @@ void msdlScanner::populateInputString (std::istream& inputStream)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (fTraceTokensDetails) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "inputStringSize: " << fInputStringSize <<
@@ -243,7 +243,7 @@ char msdlScanner::fetchNextCharacter ()
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (fTraceTokensDetails) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "--> fetchNextCharacter()" <<
@@ -285,7 +285,7 @@ char msdlScanner::fetchNextCharacter ()
 
 #ifdef MF_TRACE_IS_ENABLED
   if (fTraceTokensDetails) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "<-- fetchNextCharacter() returns: " <<
@@ -309,7 +309,7 @@ void msdlScanner::handleEndOfLine (const std::string& context)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (fTraceTokensDetails) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "--> handleEndOfLine(): " <<
@@ -332,7 +332,7 @@ void msdlScanner::handleEndOfLine (const std::string& context)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (fTraceTokensDetails) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "<-- handleEndOfLine(): " <<
@@ -361,7 +361,7 @@ msdlTokenKind msdlScanner::fetchNextToken (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (fTraceTokens) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       std::endl <<
@@ -706,7 +706,7 @@ msdlTokenKind msdlScanner::fetchNextToken (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (fTraceTokens) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       std::endl <<
@@ -963,7 +963,7 @@ void msdlScanner::acceptAName ()
 
 #ifdef MF_TRACE_IS_ENABLED
   if (fTraceTokensDetails) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Accepting a name" <<
@@ -1009,7 +1009,7 @@ void msdlScanner::acceptAName ()
 
 #ifdef MF_TRACE_IS_ENABLED
   if (fTraceTokensDetails) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "--- acceptAName()" <<
@@ -1030,7 +1030,7 @@ void msdlScanner::acceptAName ()
 
 #ifdef MF_TRACE_IS_ENABLED
   if (fTraceTokensDetails) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "--- acceptAName()" <<
@@ -1136,7 +1136,7 @@ void msdlScanner::acceptAName ()
 
 #ifdef MF_TRACE_IS_ENABLED
   if (fTraceTokensDetails) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Accepting a name, found: \"" << nameString << "\"" <<
@@ -1163,7 +1163,7 @@ void msdlScanner::acceptAnInteger ()
 
 #ifdef MF_TRACE_IS_ENABLED
   if (fTraceTokensDetails) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Accepting an integer" <<
@@ -1221,7 +1221,7 @@ void msdlScanner::acceptAnInteger ()
 
 #ifdef MF_TRACE_IS_ENABLED
   if (fTraceTokensDetails) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Accepting an integer, found: \"" << integerString << "\"" <<
@@ -1248,7 +1248,7 @@ void msdlScanner::acceptAString ()
 
 #ifdef MF_TRACE_IS_ENABLED
   if (fTraceTokensDetails) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       std::endl <<
@@ -1278,7 +1278,7 @@ void msdlScanner::acceptAString ()
   while (! endOfStringHasBeenReached) {
 #ifdef MF_TRACE_IS_ENABLED
   if (fTraceTokensDetails) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "--- acceptAString()" <<
@@ -1438,7 +1438,7 @@ void msdlScanner::acceptAString ()
 
 #ifdef MF_TRACE_IS_ENABLED
   if (fTraceTokensDetails) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       std::endl <<
@@ -1541,14 +1541,14 @@ void msdlScanner::scanAllTheInputAtOnce (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (fTraceTokensDetails) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "==> scanAllTheInputAtOnce()";
   }
 
   if (fTraceTokensDetails) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ", ignoreSeparatorTokens: " <<
@@ -1642,7 +1642,7 @@ void msdlScanner::scanAllTheInputAtOnce (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (fTraceTokensDetails) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       std::endl <<
@@ -1666,7 +1666,7 @@ void msdlScanner::translateAllTheInputToKeywordsLanguage (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (fTraceTokens) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "==> translateAllTheInputToKeywordsLanguage()" <<
@@ -1777,7 +1777,7 @@ void msdlScanner::translateAllTheInputToKeywordsLanguage (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (fTraceTokens) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       std::endl <<
@@ -1799,7 +1799,7 @@ void msdlScanner::scanWholeInputAtOnce ()
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (fTraceTokensDetails) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "==> scanWholeInputAtOnce()" <<

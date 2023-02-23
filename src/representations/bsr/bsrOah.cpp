@@ -108,7 +108,7 @@ void bsrFacSimileKindAtom::applyAtomWithValue (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "==> oahAtom is of type 'bsrFacSimileKindAtom'" <<
@@ -120,14 +120,14 @@ void bsrFacSimileKindAtom::applyAtomWithValue (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-	fSelected = true;
+  fSelected = true;
 }
 
 void bsrFacSimileKindAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> bsrFacSimileKindAtom::acceptIn ()" <<
@@ -165,7 +165,7 @@ void bsrFacSimileKindAtom::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> bsrFacSimileKindAtom::acceptOut ()" <<
@@ -203,7 +203,7 @@ void bsrFacSimileKindAtom::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> bsrFacSimileKindAtom::browseData ()" <<
@@ -279,8 +279,8 @@ void bsrFacSimileKindAtom::displayAtomWithVariableOptionsValues (
     case oahEarlyOptionKind::kEarlyOptionNo:
       break;
     case oahEarlyOptionKind::kEarlyOptionYes:
-			os <<
-				", early";
+      os <<
+        ", early";
       break;
   } // switch
   if (fSelected) {
@@ -352,7 +352,7 @@ void bsrTextsLanguageAtom::applyAtomWithValue (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "==> oahAtom is of type 'bsrTextsLanguageAtom'" <<
@@ -364,14 +364,14 @@ void bsrTextsLanguageAtom::applyAtomWithValue (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-	fSelected = true;
+  fSelected = true;
 }
 
 void bsrTextsLanguageAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> bsrTextsLanguageAtom::acceptIn ()" <<
@@ -409,7 +409,7 @@ void bsrTextsLanguageAtom::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> bsrTextsLanguageAtom::acceptOut ()" <<
@@ -447,7 +447,7 @@ void bsrTextsLanguageAtom::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> bsrTextsLanguageAtom::browseData ()" <<
@@ -522,8 +522,8 @@ void bsrTextsLanguageAtom::displayAtomWithVariableOptionsValues (
     case oahEarlyOptionKind::kEarlyOptionNo:
       break;
     case oahEarlyOptionKind::kEarlyOptionYes:
-			os <<
-				", early";
+      os <<
+        ", early";
       break;
   } // switch
   if (fSelected) {
@@ -545,8 +545,6 @@ std::ostream& operator << (std::ostream& os, const S_bsrTextsLanguageAtom& elt)
 }
 
 //_______________________________________________________________________________
-S_bsrOahGroup gGlobalBsrOahGroup;
-
 S_bsrOahGroup bsrOahGroup::create ()
 {
   bsrOahGroup* o = new bsrOahGroup ();
@@ -833,7 +831,7 @@ void bsrOahGroup::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> bsrOahGroup::acceptIn ()" <<
@@ -871,7 +869,7 @@ void bsrOahGroup::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> bsrOahGroup::acceptOut ()" <<
@@ -909,7 +907,7 @@ void bsrOahGroup::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> bsrOahGroup::browseData ()" <<
@@ -1007,12 +1005,21 @@ std::ostream& operator << (std::ostream& os, const S_bsrOahGroup& elt)
   return os;
 }
 
+//________________________________________________________________________
+// hidden global BSR OAH group ariable
+EXP S_bsrOahGroup pGlobalBsrOahGroup;
+
+EXP S_bsrOahGroup getGlobalBsrOahGroup ()
+{
+  return pGlobalBsrOahGroup;
+}
+
 //______________________________________________________________________________
 S_bsrOahGroup createGlobalBsrOahGroup ()
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating global BSR OAH group" <<
@@ -1025,15 +1032,15 @@ S_bsrOahGroup createGlobalBsrOahGroup ()
 #endif // MF_TRACE_IS_ENABLED
 
   // protect library against multiple initializations
-  if (! gGlobalBsrOahGroup) {
+  if (! pGlobalBsrOahGroup) {
     // create the bsr variables
-    gGlobalBsrOahGroup =
+    pGlobalBsrOahGroup =
       bsrOahGroup::create ();
-    assert (gGlobalBsrOahGroup != 0);
+    assert (pGlobalBsrOahGroup != 0);
   }
 
   // return the global OAH group
-  return gGlobalBsrOahGroup;
+  return pGlobalBsrOahGroup;
 }
 
 

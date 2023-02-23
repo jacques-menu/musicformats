@@ -13,8 +13,8 @@
 #define ___msrGraceNotesGroups___
 
 #include "msrElements.h"
+#include "msrNotesDurations.h"
 #include "msrTypesForwardDeclarations.h"
-#include "msrWholeNotes.h"
 
 
 namespace MusicFormats
@@ -46,7 +46,7 @@ class EXP msrGraceNotesGroup : public msrElement
                             msrGraceNotesGroupKind graceNotesGroupKind,
                             Bool                   graceNotesGroupIsSlashed,
                             Bool                   graceNotesGroupIsBeamed,
-                            const std::string&          graceNotesGroupMeasureNumber);
+                            const std::string&     graceNotesGroupMeasureNumber);
 
     SMARTP<msrGraceNotesGroup> createGraceNotesGroupNewbornClone ();
 
@@ -64,7 +64,7 @@ class EXP msrGraceNotesGroup : public msrElement
                             msrGraceNotesGroupKind graceNotesGroupKind,
                             Bool                   graceNotesGroupIsSlashed,
                             Bool                   graceNotesGroupIsBeamed,
-                            const std::string&          graceNotesGroupMeasureNumber);
+                            const std::string&     graceNotesGroupMeasureNumber);
 
     virtual               ~msrGraceNotesGroup ();
 
@@ -122,8 +122,8 @@ class EXP msrGraceNotesGroup : public msrElement
 
     // measure positions
     void                  setGraceNotesGroupElementsMeasurePositions (
-                            const S_msrMeasure& measure,
-                            const msrWholeNotes&     measurePosition);
+                            const S_msrMeasure&  measure,
+                            const msrWholeNotes& measurePosition);
 
   public:
 

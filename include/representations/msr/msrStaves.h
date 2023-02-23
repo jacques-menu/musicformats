@@ -132,7 +132,7 @@ class EXP msrStaff : public msrElement
     void                  setStaffShortestNoteWholeNotes (
                             const msrWholeNotes& wholeNotes);
 
-    msrWholeNotes          getStaffShortestNoteWholeNotes () const
+    msrWholeNotes         getStaffShortestNoteWholeNotes () const
                               { return fStaffShortestNoteWholeNotes; }
 
     void                  setStaffShortestNoteTupletFactor (
@@ -422,7 +422,7 @@ class EXP msrStaff : public msrElement
 
     // fStaffShortestNoteWholeNotes and fStaffShortestNoteTupletFactor
     // are used in the time-oriented handling of staff measures slices
-    msrWholeNotes          fStaffShortestNoteWholeNotes;
+    msrWholeNotes         fStaffShortestNoteWholeNotes;
     msrTupletFactor       fStaffShortestNoteTupletFactor;
 
     // measures flat vector

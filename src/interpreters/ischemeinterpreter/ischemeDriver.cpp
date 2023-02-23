@@ -58,7 +58,7 @@ ischemeDriver::ischemeDriver ()
       gLog << "Reading standard input" << endl;
     }
 #endif // MF_TRACE_IS_ENABLED
-	}
+  }
 
   else {
     // iScheme data comes from a file
@@ -69,7 +69,7 @@ ischemeDriver::ischemeDriver ()
         endl;
     }
 #endif // MF_TRACE_IS_ENABLED
-	}
+  }
 
   // get the options values as bool,
   // since Bool is unknown to Flex and Bison-generated code
@@ -870,7 +870,7 @@ mfMusicformatsErrorKind ischemeDriver::launchIschemeService_Pass2 ()
     } // for
   }
 
-	return result;
+  return result;
 }
 
 Bool ischemeDriver::applySelectOptionsFinally ()

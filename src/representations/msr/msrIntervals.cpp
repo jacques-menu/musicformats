@@ -7305,7 +7305,7 @@ msrQuarterTonesPitchKind noteAtIntervalFromQuarterTonesPitch (
           "Sorry, computing intervals from quartertones pitch '" <<
           msrQuarterTonesPitchKindAsStringInLanguage (
             quarterTonesPitchKind,
-            gGlobalMsrOahGroup->
+            gMsrOahGroup->
               getMsrQuarterTonesPitchesLanguageKind ()) <<
           '(' << msrQuarterTonesPitchKindAsString (quarterTonesPitchKind) << ")" <<
           "' is not supported"

@@ -78,7 +78,7 @@ msrBarNumberCheck::msrBarNumberCheck (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasuresNumbers ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating a bar number check" <<
@@ -132,7 +132,7 @@ void msrBarNumberCheck::setBarNumberCheckUpLinkToMeasure (
 void msrBarNumberCheck::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -151,7 +151,7 @@ void msrBarNumberCheck::acceptIn (basevisitor* v)
         S_msrBarNumberCheck elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -170,7 +170,7 @@ void msrBarNumberCheck::acceptIn (basevisitor* v)
 void msrBarNumberCheck::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -189,7 +189,7 @@ void msrBarNumberCheck::acceptOut (basevisitor* v)
         S_msrBarNumberCheck elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<

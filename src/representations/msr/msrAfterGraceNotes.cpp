@@ -84,7 +84,7 @@ S_msrAfterGraceNotesGroupContents msrAfterGraceNotesGroupContents::createAfterGr
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceGraceNotes ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating a newborn clone of after grace notes group" <<
@@ -128,8 +128,8 @@ void msrAfterGraceNotesGroupContents::appendNoteToAfterGraceNotesGroupContents (
 void msrAfterGraceNotesGroupContents::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% ==> msrAfterGraceNotesGroupContents::acceptIn ()" <<
@@ -147,7 +147,7 @@ void msrAfterGraceNotesGroupContents::acceptIn (basevisitor* v)
         S_msrAfterGraceNotesGroupContents elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -166,8 +166,8 @@ void msrAfterGraceNotesGroupContents::acceptIn (basevisitor* v)
 void msrAfterGraceNotesGroupContents::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% ==> msrAfterGraceNotesGroupContents::acceptOut ()" <<
@@ -185,7 +185,7 @@ void msrAfterGraceNotesGroupContents::acceptOut (basevisitor* v)
         S_msrAfterGraceNotesGroupContents elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -357,7 +357,7 @@ S_msrAfterGraceNotesGroup msrAfterGraceNotesGroup::createAfterGraceNotesGroupNew
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceGraceNotes ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating a newborn clone of after grace notes group '" <<
@@ -406,8 +406,8 @@ void msrAfterGraceNotesGroup::appendNoteToAfterGraceNotesGroupContents (
 void msrAfterGraceNotesGroup::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% ==> msrAfterGraceNotesGroup::acceptIn ()" <<
@@ -425,7 +425,7 @@ void msrAfterGraceNotesGroup::acceptIn (basevisitor* v)
         S_msrAfterGraceNotesGroup elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -444,8 +444,8 @@ void msrAfterGraceNotesGroup::acceptIn (basevisitor* v)
 void msrAfterGraceNotesGroup::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% ==> msrAfterGraceNotesGroup::acceptOut ()" <<
@@ -463,7 +463,7 @@ void msrAfterGraceNotesGroup::acceptOut (basevisitor* v)
         S_msrAfterGraceNotesGroup elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<

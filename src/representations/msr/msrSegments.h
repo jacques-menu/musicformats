@@ -107,7 +107,7 @@ class EXP msrSegment : public msrVoiceElement
     void                  setSegmentShortestNoteWholeNotes (
                             const msrWholeNotes& wholeNotes);
 
-    msrWholeNotes          getSegmentShortestNoteWholeNotes () const
+    msrWholeNotes         getSegmentShortestNoteWholeNotes () const
                               { return fSegmentShortestNoteWholeNotes; }
 
     void                  setSegmentShortestNoteTupletFactor (
@@ -275,7 +275,7 @@ class EXP msrSegment : public msrVoiceElement
 
     void                  appendNoteToSegment (
                             const S_msrNote& note,
-                            const msrWholeNotes& partMeasurePosition);
+                            const msrWholeNotes& partDrawingMeasurePosition);
 
     void                  appendNoteToSegmentClone (const S_msrNote& note);
 
@@ -449,7 +449,7 @@ class EXP msrSegment : public msrVoiceElement
     // fPartShortestNoteWholeNotes and fPartShortestNoteTupletFactor
     // are used to compute a number of divisions per quarter note
     // if needed, such as when generating MusicXML from MSR
-    msrWholeNotes              fSegmentShortestNoteWholeNotes;
+    msrWholeNotes         fSegmentShortestNoteWholeNotes;
     msrTupletFactor       fSegmentShortestNoteTupletFactor;
     */
 

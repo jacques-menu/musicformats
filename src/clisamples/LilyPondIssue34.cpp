@@ -108,11 +108,11 @@ void enforceSomeOptions (
   // ------------------------------------------------------
 
 /*
-  gGlobalMsrOahGroup->setTraceMsr ();
-  gGlobalMsrOahGroup->setTraceMsrVisitors ();
-  gGlobalMsrOahGroup->setDisplayMsr ();
+  gMsrOahGroup->setTraceMsr ();
+  gMsrOahGroup->setTraceMsrVisitors ();
+  gMsrOahGroup->setDisplayMsr ();
 
-  gGlobalMsrOahGroup->setTraceMsrNotesDurations ();
+  gMsrOahGroup->setTraceMsrNotesDurations ();
 */
 
   // generate code dependant specific options
@@ -128,9 +128,9 @@ void enforceSomeOptions (
       // ------------------------------------------------------
 
 /*
-      gGlobalLpsrOahGroup->setTraceLpsr ();
-      gGlobalLpsrOahGroup->setTraceLpsrVisitors ();
-      gGlobalLpsrOahGroup->setDisplayLpsr ();
+      gLpsrOahGroup->setTraceLpsr ();
+      gLpsrOahGroup->setTraceLpsrVisitors ();
+      gLpsrOahGroup->setDisplayLpsr ();
 */
 
       // lpsr2lilypond
@@ -147,8 +147,8 @@ void enforceSomeOptions (
       // ------------------------------------------------------
 
 /*
-      gGlobalBsrOahGroup->setTraceBsr ();
-      //  gGlobalBsrOahGroup->setTraceBsrVisitors ();
+      gBsrOahGroup->setTraceBsr ();
+      //  gBsrOahGroup->setTraceBsrVisitors ();
 */
 
       // bsr2braille
@@ -218,7 +218,7 @@ int main (int argc, char*  argv[])
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       serviceName << " main()" <<
@@ -244,7 +244,7 @@ int main (int argc, char*  argv[])
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "==> multiGenerationOutputKind: " <<
@@ -478,7 +478,7 @@ int main (int argc, char*  argv[])
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "==> generationAPIKind: " <<
@@ -502,7 +502,7 @@ int main (int argc, char*  argv[])
     std::string separator =
       "%--------------------------------------------------------------";
 
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       std::endl <<

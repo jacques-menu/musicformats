@@ -60,7 +60,7 @@ S_mfcLibraryComponent createLibraryComponent ()
 
 #ifdef MF_TRACE_IS_ENABLED
     if (gEarlyOptions.getTraceEarlyOptions ()) {
-	  	std::stringstream ss;
+      std::stringstream ss;
 
       ss <<
         "Creating the MusicFormats library component" <<

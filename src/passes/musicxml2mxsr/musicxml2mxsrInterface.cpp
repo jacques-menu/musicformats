@@ -498,7 +498,7 @@ void checkSXMLFile (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceEncoding ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "% MusicXML data uses " <<
@@ -1056,7 +1056,7 @@ Sxmlelement convertMusicXMLToMxsr ( // JMI UNUSED SAX ???
     std::string separator =
       "%--------------------------------------------------------------";
 
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "convertMusicXMLToMxsr(): " <<

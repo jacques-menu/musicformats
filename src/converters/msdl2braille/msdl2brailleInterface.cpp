@@ -188,7 +188,7 @@ mfMusicformatsErrorKind convertMsdlStream2brailleWithHandler (
     secondMsrScore =
       translateMsrToMsr (
         firstMsrScore,
-        gGlobalMsrOahGroup,
+        gMsrOahGroup,
         gGlobalMsr2msrOahGroup,
         mfPassIDKind::kMfPassID_2,
         gLanguage->convertTheFirstMSRIntoASecondMSR ());
@@ -229,8 +229,8 @@ mfMusicformatsErrorKind convertMsdlStream2brailleWithHandler (
       firstBsrScore =
         translateMsrToBsr (
           secondMsrScore,
-          gGlobalMsrOahGroup,
-          gGlobalBsrOahGroup,
+          gMsrOahGroup,
+          gBsrOahGroup,
           mfPassIDKind::kMfPassID_3,
           "Create a first BSR from the MSR");
     }
@@ -246,19 +246,19 @@ mfMusicformatsErrorKind convertMsdlStream2brailleWithHandler (
     // display the first BSR score if requested
     // ------------------------------------------------------
 
-    if (gGlobalBsrOahGroup->getDisplayFirstBsr ()) {
+    if (gBsrOahGroup->getDisplayFirstBsr ()) {
       displayBsrScore (
         firstBsrScore,
-        gGlobalMsrOahGroup,
-        gGlobalBsrOahGroup,
+        gMsrOahGroup,
+        gBsrOahGroup,
         gLanguage->displayTheFirstMSRAsText ());
     }
 
-    if (gGlobalBsrOahGroup->getDisplayFirstBsrFull ()) {
+    if (gBsrOahGroup->getDisplayFirstBsrFull ()) {
       displayBsrScoreFull (
         firstBsrScore,
-        gGlobalMsrOahGroup,
-        gGlobalBsrOahGroup,
+        gMsrOahGroup,
+        gBsrOahGroup,
         gLanguage->displayTheFirstMSRAsText ());
     }
   }
@@ -290,7 +290,7 @@ mfMusicformatsErrorKind convertMsdlStream2brailleWithHandler (
       finalizedBsrScore =
         translateBsrToFinalizedBsr (
           firstBsrScore,
-          gGlobalBsrOahGroup,
+          gBsrOahGroup,
           mfPassIDKind::kMfPassID_4,
           "Create the finalized BSR from the first BSR");
     }
@@ -306,19 +306,19 @@ mfMusicformatsErrorKind convertMsdlStream2brailleWithHandler (
     // display the finalized BSR score if requested
     // ------------------------------------------------------
 
-    if (gGlobalBsrOahGroup->getDisplaySecondBsr ()) {
+    if (gBsrOahGroup->getDisplaySecondBsr ()) {
       displayBsrScore (
         finalizedBsrScore,
-        gGlobalMsrOahGroup,
-        gGlobalBsrOahGroup,
+        gMsrOahGroup,
+        gBsrOahGroup,
         gLanguage->displayTheFinalizedBSRAsText ());
     }
 
-    if (gGlobalBsrOahGroup->getDisplaySecondBsrFull ()) {
+    if (gBsrOahGroup->getDisplaySecondBsrFull ()) {
       displayBsrScoreFull (
         finalizedBsrScore,
-        gGlobalMsrOahGroup,
-        gGlobalBsrOahGroup,
+        gMsrOahGroup,
+        gBsrOahGroup,
         gLanguage->displayTheFinalizedBSRAsText ());
     }
   }
@@ -377,7 +377,7 @@ mfMusicformatsErrorKind convertMsdlStream2brailleWithHandler (
       try {
         translateBsrToBraille (
           finalizedBsrScore,
-          gGlobalBsrOahGroup,
+          gBsrOahGroup,
           mfPassIDKind::kMfPassID_5,
           "Convert the finalized BSR into braille",
           out);
@@ -441,7 +441,7 @@ mfMusicformatsErrorKind convertMsdlStream2brailleWithHandler (
       try {
         translateBsrToBraille (
           finalizedBsrScore,
-          gGlobalBsrOahGroup,
+          gBsrOahGroup,
           mfPassIDKind::kMfPassID_4,
           "Convert the finalized BSR into braille",
           brailleCodeFileOutputStream);
@@ -505,7 +505,7 @@ mfMusicformatsErrorKind convertMsdlStream2brailleWithOptionsAndArguments (
   // ------------------------------------------------------
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       handlerOptionsAndArguments;
@@ -526,7 +526,7 @@ mfMusicformatsErrorKind convertMsdlStream2brailleWithOptionsAndArguments (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       serviceName << " main()" <<

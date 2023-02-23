@@ -291,7 +291,7 @@ void mfMultiGenerationOutputKindAtom::setImplicitVariable (std::ostream& os)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "==> handling atom '" <<
@@ -319,14 +319,14 @@ void mfMultiGenerationOutputKindAtom::setImplicitVariable (std::ostream& os)
     fMultiGenerationOutputKindVariable = fMultiGenerationOutputKindValue;
   }
 
-	fSelected = true;
+  fSelected = true;
 }
 
 void mfMultiGenerationOutputKindAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> mfMultiGenerationOutputKindAtom::acceptIn ()" <<
@@ -364,7 +364,7 @@ void mfMultiGenerationOutputKindAtom::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> mfMultiGenerationOutputKindAtom::acceptOut ()" <<
@@ -402,7 +402,7 @@ void mfMultiGenerationOutputKindAtom::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> mfMultiGenerationOutputKindAtom::browseData ()" <<
@@ -484,8 +484,8 @@ void mfMultiGenerationOutputKindAtom::displayAtomWithVariableOptionsValues (
     case oahEarlyOptionKind::kEarlyOptionNo:
       break;
     case oahEarlyOptionKind::kEarlyOptionYes:
-			os <<
-				", early";
+      os <<
+        ", early";
       break;
   } // switch
   if (fSelected) {
@@ -625,7 +625,7 @@ void mfMultiGenerationOahGroup::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> mfMultiGenerationOahGroup::acceptIn ()" <<
@@ -663,7 +663,7 @@ void mfMultiGenerationOahGroup::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> mfMultiGenerationOahGroup::acceptOut ()" <<
@@ -701,7 +701,7 @@ void mfMultiGenerationOahGroup::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> mfMultiGenerationOahGroup::browseData ()" <<
@@ -760,7 +760,7 @@ S_multiGenerationOahGroup createGlobalMultiGenerationOahGroup ()
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating multi generator OAH group" <<

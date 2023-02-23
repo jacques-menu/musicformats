@@ -91,7 +91,7 @@ Usage: msdl2lilypond [option]* [MSDLFile] [option]*
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Initializing msdl2lilypond insider options handler \"" <<
@@ -184,7 +184,7 @@ void msdl2lilypondInsiderHandler::createTheMsdl2lyPrefixes ()
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating the msdl2lilypond prefixes" <<
@@ -204,7 +204,7 @@ void msdl2lilypondInsiderHandler::createTheMsdl2lyOptionGroups (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating the msdl2lilypond insider option groups" <<
@@ -248,10 +248,6 @@ void msdl2lilypondInsiderHandler::createTheMsdl2lyOptionGroups (
   // initialize the library
   // ------------------------------------------------------
 
-  initializeMusicFormats ();
-
-  initializeWAE ();
-
   initializeMSR ();
   initializeLPSR ();
 
@@ -285,7 +281,7 @@ void msdl2lilypondInsiderHandler::createTheMsdl2lyOptionGroups (
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptionsDetails ()) {
     // print the options handler initial state
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "msdl2lilypondInsiderHandler has been initialized as:" <<
@@ -317,7 +313,7 @@ void msdl2lilypondInsiderHandler::checkOptionsAndArguments () const
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "checking options and arguments from argc/argv in \"" <<
@@ -352,13 +348,13 @@ void msdl2lilypondInsiderHandler::enforceHandlerQuietness ()
   gGlobalMsdl2lyInsiderOahGroup->
     enforceGroupQuietness ();
 
-  gGlobalMsrOahGroup->
+  gMsrOahGroup->
     enforceGroupQuietness ();
 
   gGlobalMsr2lpsrOahGroup->
     enforceGroupQuietness ();
 
-  gGlobalLpsrOahGroup->
+  gLpsrOahGroup->
     enforceGroupQuietness ();
 
   gGlobalLpsr2lilypondOahGroup->
@@ -378,7 +374,7 @@ void msdl2lilypondInsiderOahGroup::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> msdl2lilypondInsiderOahGroup::acceptIn ()" <<
@@ -416,7 +412,7 @@ void msdl2lilypondInsiderOahGroup::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> msdl2lilypondInsiderOahGroup::acceptOut ()" <<
@@ -454,7 +450,7 @@ void msdl2lilypondInsiderOahGroup::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> msdl2lilypondInsiderOahGroup::browseData ()" <<
@@ -646,7 +642,7 @@ S_msdl2lilypondInsiderOahGroup createGlobalMsdl2lyInsiderOahGroup ()
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating global msdl2lilypond OAH group" <<

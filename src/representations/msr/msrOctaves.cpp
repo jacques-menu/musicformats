@@ -530,7 +530,7 @@ S_msrSemiTonesPitchAndOctave msrSemiTonesPitchAndOctave::createFromString (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "There are " << smSize << " matches" <<
@@ -558,7 +558,7 @@ S_msrSemiTonesPitchAndOctave msrSemiTonesPitchAndOctave::createFromString (
 
 #ifdef MF_TRACE_IS_ENABLED
     if (gEarlyOptions.getTraceEarlyOptions ()) {
-	  	std::stringstream ss;
+      std::stringstream ss;
 
       ss <<
         "--> pitch = \"" << pitch << "\", " <<
@@ -586,7 +586,7 @@ S_msrSemiTonesPitchAndOctave msrSemiTonesPitchAndOctave::createFromString (
 
 #ifdef MF_TRACE_IS_ENABLED
     if (gEarlyOptions.getTraceEarlyOptions ()) {
-	  	std::stringstream ss;
+      std::stringstream ss;
 
       ss <<
         "--> semiTonesPitchKind = \"" <<
@@ -1035,7 +1035,7 @@ S_msrQuarterTonesPitchAndOctave msrQuarterTonesPitchAndOctave::createFromString 
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "There are " << smSize << " matches" <<
@@ -1063,7 +1063,7 @@ S_msrQuarterTonesPitchAndOctave msrQuarterTonesPitchAndOctave::createFromString 
 
 #ifdef MF_TRACE_IS_ENABLED
     if (gEarlyOptions.getTraceEarlyOptions ()) {
-	  	std::stringstream ss;
+      std::stringstream ss;
 
       ss <<
         "--> pitch = \"" << pitch << "\", " <<
@@ -1080,7 +1080,7 @@ S_msrQuarterTonesPitchAndOctave msrQuarterTonesPitchAndOctave::createFromString 
     msrQuarterTonesPitchKind
       quarterTonesPitchKind =
         quarterTonesPitchKindFromString (
-          gGlobalMsrOahGroup->
+          gMsrOahGroup->
             getMsrQuarterTonesPitchesLanguageKind (),
           pitch);
 
@@ -1093,7 +1093,7 @@ S_msrQuarterTonesPitchAndOctave msrQuarterTonesPitchAndOctave::createFromString 
 
 #ifdef MF_TRACE_IS_ENABLED
     if (gEarlyOptions.getTraceEarlyOptions ()) {
-	  	std::stringstream ss;
+      std::stringstream ss;
 
       ss <<
         "--> quarterTonesPitchKind = \"" <<

@@ -309,7 +309,7 @@ void msrMarginsGroup::setBottomMargin (
 /* JMI
 void msrMarginsGroup::acceptIn (basevisitor* v) {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -328,7 +328,7 @@ void msrMarginsGroup::acceptIn (basevisitor* v) {
         S_msrMarginsGroup elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -340,7 +340,7 @@ void msrMarginsGroup::acceptIn (basevisitor* v) {
 
 void msrMarginsGroup::acceptOut (basevisitor* v) {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -359,7 +359,7 @@ void msrMarginsGroup::acceptOut (basevisitor* v) {
         S_msrMarginsGroup elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<

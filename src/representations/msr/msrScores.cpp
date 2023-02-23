@@ -96,7 +96,7 @@ S_msrScore msrScore::createScoreNewbornClone ()
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceScores ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating a newborn clone of a score" <<
@@ -193,7 +193,7 @@ void msrScore::appendCreditToScore (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceCredits ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending credit '" <<
@@ -218,7 +218,7 @@ S_msrPart msrScore::fetchPartFromScoreByItsPartID (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTracePartGroupsDetails ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "fetchPartFromScoreByItsPartID(" << partID << "), fPartGroupsList contains:" <<
@@ -310,7 +310,7 @@ S_msrPartGroup msrScore::fetchScorePartGroup ( JMI
 void msrScore::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -329,7 +329,7 @@ void msrScore::acceptIn (basevisitor* v)
         S_msrScore elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -348,7 +348,7 @@ void msrScore::acceptIn (basevisitor* v)
 void msrScore::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -367,7 +367,7 @@ void msrScore::acceptOut (basevisitor* v)
         S_msrScore elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -386,7 +386,7 @@ void msrScore::acceptOut (basevisitor* v)
 void msrScore::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -456,8 +456,8 @@ void msrScore::browseData (basevisitor* v)
   } // for
 
 #ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% <== msrScore::browseData ()" <<
@@ -779,10 +779,10 @@ void msrScore::print(std::ostream& os) const
 void msrScore::printSummary (std::ostream& os) const
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalLpsrOahGroup->getDisplayLpsr ()) {
+  if (gLpsrOahGroup->getDisplayLpsr ()) {
     os << "MSR score summary";
   }
-  else if (gGlobalLpsrOahGroup->getDisplayLpsr ()) { // JMI
+  else if (gLpsrOahGroup->getDisplayLpsr ()) { // JMI
     os << "MSR full score";
   }
   else {

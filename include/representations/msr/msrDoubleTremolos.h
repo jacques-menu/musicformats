@@ -15,7 +15,7 @@
 #include "msrMeasureElements.h"
 #include "msrPlacements.h"
 #include "msrTypesForwardDeclarations.h"
-#include "msrWholeNotes.h"
+// #include "msrWholeNotes.h"
 
 
 namespace MusicFormats
@@ -151,7 +151,7 @@ class EXP msrDoubleTremolo : public msrMeasureElement
 
     // double tremolo elements duration
 
-    msrWholeNotes          getDoubleTremoloElementsNotesDuration () const
+    msrWholeNotes         getDoubleTremoloElementsNotesDuration () const
                               { return fDoubleTremoloElementsWholeNotes; }
 
     // double tremolo number of repeats
@@ -240,8 +240,8 @@ class EXP msrDoubleTremolo : public msrMeasureElement
 
     // sounding whole notes JMI
     // the same as the displayed divisions of both members
-// JMI    msrWholeNotes            fDoubleTremoloSoundingWholeNotes;
-    msrWholeNotes          fDoubleTremoloSoundingWholeNotes;
+// JMI    msrWholeNotes           fDoubleTremoloSoundingWholeNotes;
+    msrWholeNotes         fDoubleTremoloSoundingWholeNotes;
 
     msrDoubleTremoloKind  fDoubleTremoloKind;
 
@@ -250,7 +250,7 @@ class EXP msrDoubleTremolo : public msrMeasureElement
 
     int                   fDoubleTremoloMarksNumber;
 
-    msrWholeNotes          fDoubleTremoloElementsWholeNotes;
+    msrWholeNotes         fDoubleTremoloElementsWholeNotes;
 
     int                   fDoubleTremoloNumberOfRepeats;
 

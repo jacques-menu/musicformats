@@ -135,7 +135,7 @@ bsrTimeSignatureItem::bsrTimeSignatureItem (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceTimeSignatures ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating time signature item" <<
@@ -189,7 +189,7 @@ void bsrTimeSignatureItem::appendBeatsNumber (int beatsNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceTimeSignatures ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending beat number '" <<
@@ -210,7 +210,7 @@ void bsrTimeSignatureItem::setTimeSignatureBeatValue (int timeSignatureBeatValue
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceTimeSignatures ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Setting beat value to '" <<
@@ -240,8 +240,8 @@ int bsrTimeSignatureItem::getTimeSignatureBeatsNumber () const
 void bsrTimeSignatureItem::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
-		std::stringstream ss;
+  if (gBsrOahGroup->getTraceBsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% --> End visiting bsrTranscriptionNotesElement" <<
@@ -260,7 +260,7 @@ void bsrTimeSignatureItem::acceptIn (basevisitor* v)
         S_bsrTimeSignatureItem elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
+        if (gBsrOahGroup->getTraceBsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -279,8 +279,8 @@ void bsrTimeSignatureItem::acceptIn (basevisitor* v)
 void bsrTimeSignatureItem::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
-		std::stringstream ss;
+  if (gBsrOahGroup->getTraceBsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% --> End visiting bsrTranscriptionNotesElement" <<
@@ -299,7 +299,7 @@ void bsrTimeSignatureItem::acceptOut (basevisitor* v)
         S_bsrTimeSignatureItem elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
+        if (gBsrOahGroup->getTraceBsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -412,7 +412,7 @@ bsrTimeSignature::bsrTimeSignature (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceTimeSignatures ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating bsrTimeSignatures '" <<
@@ -435,7 +435,7 @@ void bsrTimeSignature::appendTimeSignatureItem (S_bsrTimeSignatureItem timeSigna
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceTimeSignatures ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending time signature item '" <<
@@ -804,8 +804,8 @@ int bsrTimeSignature::fetchCellsNumber() const
 void bsrTimeSignature::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
-		std::stringstream ss;
+  if (gBsrOahGroup->getTraceBsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% --> End visiting bsrTranscriptionNotesElement" <<
@@ -824,7 +824,7 @@ void bsrTimeSignature::acceptIn (basevisitor* v)
         S_bsrTimeSignature elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
+        if (gBsrOahGroup->getTraceBsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -843,8 +843,8 @@ void bsrTimeSignature::acceptIn (basevisitor* v)
 void bsrTimeSignature::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
-		std::stringstream ss;
+  if (gBsrOahGroup->getTraceBsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% --> End visiting bsrTranscriptionNotesElement" <<
@@ -863,7 +863,7 @@ void bsrTimeSignature::acceptOut (basevisitor* v)
         S_bsrTimeSignature elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
+        if (gBsrOahGroup->getTraceBsrVisitors ()) {
           std::stringstream ss;
 
           ss <<

@@ -290,11 +290,11 @@ class EXP msrHarmony : public msrMeasureElement
                             const std::string&       harmonyKindText,
                             int                      harmonyInversion,
                             msrQuarterTonesPitchKind harmonyBassQuarterTonesPitchKind,
-                            const msrWholeNotes&          harmonySoundingWholeNotes,
-                            const msrWholeNotes&          harmonyDisplayWholeNotes,
+                            const msrWholeNotes&     harmonySoundingWholeNotes,
+                            const msrWholeNotes&     harmonyDisplayWholeNotes,
                             int                      harmoniesStaffNumber,
                             const msrTupletFactor&   harmonyTupletFactor,
-                            const msrWholeNotes&          harmonyWholeNotesOffset);
+                            const msrWholeNotes&     harmonyWholeNotesOffset);
 
     SMARTP<msrHarmony> createHarmonyNewbornClone (
                             const S_msrVoice& containingVoice);
@@ -315,11 +315,11 @@ class EXP msrHarmony : public msrMeasureElement
                             const std::string&       harmonyKindText,
                             int                      harmonyInversion,
                             msrQuarterTonesPitchKind harmonyBassQuarterTonesPitchKind,
-                            const msrWholeNotes&          harmonySoundingWholeNotes,
-                            const msrWholeNotes&          harmonyDisplayWholeNotes,
+                            const msrWholeNotes&     harmonySoundingWholeNotes,
+                            const msrWholeNotes&     harmonyDisplayWholeNotes,
                             int                      harmoniesStaffNumber,
                             const msrTupletFactor&   harmonyTupletFactor,
-                            const msrWholeNotes&          harmonyWholeNotesOffset);
+                            const msrWholeNotes&     harmonyWholeNotesOffset);
 
     virtual               ~msrHarmony ();
 
@@ -362,14 +362,14 @@ class EXP msrHarmony : public msrMeasureElement
                             const msrWholeNotes& wholeNotes)
                               { fHarmonyDisplayWholeNotes = wholeNotes; }
 
-    msrWholeNotes          getHarmonyDisplayWholeNotes () const
+    msrWholeNotes         getHarmonyDisplayWholeNotes () const
                               { return fHarmonyDisplayWholeNotes; }
 
     // offset
     void                  setHarmonyWholeNotesOffset (msrWholeNotes offset)
                               { fHarmonyWholeNotesOffset = offset; }
 
-    msrWholeNotes          getHarmonyWholeNotesOffset () const
+    msrWholeNotes         getHarmonyWholeNotesOffset () const
                               { return fHarmonyWholeNotesOffset; }
 
     // root
@@ -453,6 +453,7 @@ class EXP msrHarmony : public msrMeasureElement
     // ------------------------------------------------------
 
     std::string           asString () const override;
+    std::string           asShortStringForMeasuresSlices () const override;
 
     void                  print (std::ostream& os) const override;
 
@@ -468,10 +469,10 @@ class EXP msrHarmony : public msrMeasureElement
     S_msrVoice            fHarmoniesUpLinkToVoice; // for use in harmonies voices JMI
 
     // whole notes
-    msrWholeNotes          fHarmonyDisplayWholeNotes;
+    msrWholeNotes         fHarmonyDisplayWholeNotes;
 
     // offset
-    msrWholeNotes          fHarmonyWholeNotesOffset;
+    msrWholeNotes         fHarmonyWholeNotesOffset;
 
     // root
     msrQuarterTonesPitchKind

@@ -164,7 +164,7 @@ class EXP mfslInput : public smartable
                               { return fInputNameKind; }
 
     const std::set<std::string>&
-    									    getNamesSet () const
+                          getNamesSet () const
                               { return fNamesSet; }
 
     S_mfslOptionsBlock    getInputOptionsBlockForName (
@@ -327,7 +327,7 @@ class EXP mfslCaseInputStatement : public smartable
                               { return fCaseInputInput; }
 
     const list<std::string>&
-    									    getCaseInputCurrentNamesList () const
+                          getCaseInputCurrentNamesList () const
                               { return fCaseInputCurrentNamesList; }
 
     void                  clearCaseInputCurrentNamesList ()
@@ -433,7 +433,7 @@ class EXP mfslChoice : public smartable
                               { return fChoiceLabelKind; }
 
     const std::set<std::string>&
-    									    getLabelsSet () const
+                          getLabelsSet () const
                               { return fLabelsSet; }
 
     std::string           getChoiceDefaultLabel () const

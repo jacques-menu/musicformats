@@ -1483,7 +1483,7 @@ class EXP mxsr2msrTranslator :
     // in MusicXML, they precede the note and
     // may occur when no current voice exists
     std::list<S_msrEyeGlasses>
-    	    										fPendingEyeGlassesList;
+                              fPendingEyeGlassesList;
 
     void                      attachPendingEyeGlassesToNote (
                                 const S_msrNote& note);
@@ -1551,7 +1551,7 @@ class EXP mxsr2msrTranslator :
     int                       fCurrentMetronomeNoteNormalNotes;
     std::string               fCurrentMetronomeNoteNormalType; // JMI ???
 
-    msrWholeNotes              fCurrentMetronomeNoteWholeNotesFromMetronomeType;
+    msrWholeNotes         fCurrentMetronomeNoteWholeNotesFromMetronomeType;
 
     S_msrTempoTuplet          fCurrentMetronomeTuplet;
     Bool                      fOnGoingMetronomeTuplet;
@@ -1610,7 +1610,7 @@ class EXP mxsr2msrTranslator :
     // (they precede the note in MusicXML and
     // may occur when no current voice exists)
     std::list<S_msrOctaveShift>
-    											    fPendingOctaveShiftsList;
+                              fPendingOctaveShiftsList;
     void                      attachPendingOctaveShiftsToNote (
                                 const S_msrNote& note);
 
@@ -1624,7 +1624,7 @@ class EXP mxsr2msrTranslator :
     // in MusicXML, they precede the note and
     // may occur when no current voice exists
     std::list<S_msrScordatura>
-    										      fPendingScordaturasList;
+                              fPendingScordaturasList;
 
     void                      attachPendingScordaturasToNote (
                                 const S_msrNote& note);
@@ -1730,7 +1730,7 @@ class EXP mxsr2msrTranslator :
 
     int                       fCurrentHarmoniesStaffNumber;
 
-    msrWholeNotes              fCurrentHarmonyWholeNotesOffset;
+    msrWholeNotes         fCurrentHarmonyWholeNotesOffset;
 
     Bool                      fOnGoingHarmony;
 
@@ -1752,8 +1752,8 @@ class EXP mxsr2msrTranslator :
     int                       fCurrentFigureNumber;
     msrBassFigureSuffixKind   fCurrentFigureSuffixKind;
 
-    msrWholeNotes              fCurrentFiguredBassSoundingWholeNotes;
-    msrWholeNotes              fCurrentFiguredBassDisplayWholeNotes;
+    msrWholeNotes         fCurrentFiguredBassSoundingWholeNotes;
+    msrWholeNotes         fCurrentFiguredBassDisplayWholeNotes;
 
     msrFiguredBassParenthesesKind
                               fCurrentFiguredBassParenthesesKind;
@@ -1897,13 +1897,13 @@ class EXP mxsr2msrTranslator :
 
     // note sound
     msrQuarterTonesPitchKind  fCurrentNoteQuarterTonesPitchKind;
-    msrWholeNotes              fCurrentNoteSoundingWholeNotesFromNotesDuration;
-    msrWholeNotes              fCurrentNoteSoundingWholeNotes;
+    msrWholeNotes         fCurrentNoteSoundingWholeNotesFromNotesDuration;
+    msrWholeNotes         fCurrentNoteSoundingWholeNotes;
 
     // note display
     msrQuarterTonesPitchKind  fCurrentNoteQuarterTonesDisplayPitchKind;
-    msrWholeNotes              fCurrentNoteDisplayWholeNotesFromType;
-    msrWholeNotes              fCurrentNoteDisplayWholeNotes;
+    msrWholeNotes         fCurrentNoteDisplayWholeNotesFromType;
+    msrWholeNotes         fCurrentNoteDisplayWholeNotes;
 
     // augmentation dots
     int                       fCurrentNoteDotsNumber;
@@ -1990,7 +1990,7 @@ class EXP mxsr2msrTranslator :
     // ------------------------------------------------------
 
     std::list<S_msrArticulation>
-    											    fCurrentArticulations;
+                              fCurrentArticulations;
 
     void                      attachCurrentArticulationsToNote (
                                 const S_msrNote& note);
@@ -2009,9 +2009,9 @@ class EXP mxsr2msrTranslator :
     // ------------------------------------------------------
 
     std::list<S_msrDynamic>
-                            	fPendingDynamicxList;
+                              fPendingDynamicxList;
     std::list<S_msrOtherDynamic>
-    												  fPendingOtherDynamicxList;
+                              fPendingOtherDynamicxList;
     std::list<S_msrWords>     fPendingWordsList;
     std::list<S_msrSlur>      fPendingSlursList;
     std::list<S_msrLigature>
@@ -2307,7 +2307,7 @@ class EXP mxsr2msrTranslator :
 
     std::list<S_msrTuplet>    fTupletsStack;
     void                      displayTupletsStack (
-    														const std::string& context);
+                                const std::string& context);
 
     Bool                      fCurrentATupletStopIsPending;
 

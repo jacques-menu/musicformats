@@ -103,8 +103,8 @@ lpsrContext::~lpsrContext ()
 void lpsrContext::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
-		std::stringstream ss;
+  if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% ==> lpsrContext::acceptIn ()" <<
@@ -122,7 +122,7 @@ void lpsrContext::acceptIn (basevisitor* v)
         S_lpsrContext elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
+        if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -141,8 +141,8 @@ void lpsrContext::acceptIn (basevisitor* v)
 void lpsrContext::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
-		std::stringstream ss;
+  if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% ==> lpsrContext::acceptOut ()" <<
@@ -160,7 +160,7 @@ void lpsrContext::acceptOut (basevisitor* v)
         S_lpsrContext elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
+        if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -262,8 +262,8 @@ lpsrChordNamesContext::~lpsrChordNamesContext ()
 void lpsrChordNamesContext::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
-		std::stringstream ss;
+  if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% ==> lpsrChordNamesContext::acceptIn ()" <<
@@ -281,7 +281,7 @@ void lpsrChordNamesContext::acceptIn (basevisitor* v)
         S_lpsrChordNamesContext elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
+        if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -300,8 +300,8 @@ void lpsrChordNamesContext::acceptIn (basevisitor* v)
 void lpsrChordNamesContext::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
-		std::stringstream ss;
+  if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% ==> lpsrChordNamesContext::acceptOut ()" <<
@@ -319,7 +319,7 @@ void lpsrChordNamesContext::acceptOut (basevisitor* v)
         S_lpsrChordNamesContext elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
+        if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -449,8 +449,8 @@ lpsrFiguredBassContext::~lpsrFiguredBassContext ()
 void lpsrFiguredBassContext::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
-		std::stringstream ss;
+  if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% ==> lpsrFiguredBassContext::acceptIn ()" <<
@@ -468,7 +468,7 @@ void lpsrFiguredBassContext::acceptIn (basevisitor* v)
         S_lpsrFiguredBassContext elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
+        if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -487,8 +487,8 @@ void lpsrFiguredBassContext::acceptIn (basevisitor* v)
 void lpsrFiguredBassContext::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
-		std::stringstream ss;
+  if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% ==> lpsrFiguredBassContext::acceptOut ()" <<
@@ -506,7 +506,7 @@ void lpsrFiguredBassContext::acceptOut (basevisitor* v)
         S_lpsrFiguredBassContext elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
+        if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
           std::stringstream ss;
 
           ss <<

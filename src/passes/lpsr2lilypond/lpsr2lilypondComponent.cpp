@@ -25,7 +25,7 @@ S_mfcPassComponent createLpsr2lilypondComponent ()
 
 #ifdef MF_TRACE_IS_ENABLED
     if (gEarlyOptions.getEarlyTraceComponents ()) {
-	  	std::stringstream ss;
+      std::stringstream ss;
 
       ss <<
         "Creating the lpsr2lilypond pass component" <<

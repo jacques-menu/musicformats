@@ -52,8 +52,8 @@ lpsrUseVoiceCommand::~lpsrUseVoiceCommand ()
 void lpsrUseVoiceCommand::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
-		std::stringstream ss;
+  if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% ==> lpsrUseVoiceCommand::acceptIn ()" <<
@@ -71,7 +71,7 @@ void lpsrUseVoiceCommand::acceptIn (basevisitor* v)
         S_lpsrUseVoiceCommand elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
+        if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -90,8 +90,8 @@ void lpsrUseVoiceCommand::acceptIn (basevisitor* v)
 void lpsrUseVoiceCommand::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
-		std::stringstream ss;
+  if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% ==> lpsrUseVoiceCommand::acceptOut ()" <<
@@ -109,7 +109,7 @@ void lpsrUseVoiceCommand::acceptOut (basevisitor* v)
         S_lpsrUseVoiceCommand elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
+        if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
           std::stringstream ss;
 
           ss <<

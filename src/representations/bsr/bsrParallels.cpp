@@ -46,8 +46,8 @@ bsrParallel::bsrParallel (
 bsrParallel::~bsrParallel ()
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalBsrOahGroup->getTraceParallels ()) {
-		std::stringstream ss;
+  if (gBsrOahGroup->getTraceParallels ()) {
+    std::stringstream ss;
 
     ss <<
       "Creating bsrParallel '" <<
@@ -66,8 +66,8 @@ bsrParallel::~bsrParallel ()
 void bsrParallel::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
-		std::stringstream ss;
+  if (gBsrOahGroup->getTraceBsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% --> End visiting bsrTranscriptionNotesElement" <<
@@ -86,7 +86,7 @@ void bsrParallel::acceptIn (basevisitor* v)
         S_bsrParallel elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
+        if (gBsrOahGroup->getTraceBsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -105,8 +105,8 @@ void bsrParallel::acceptIn (basevisitor* v)
 void bsrParallel::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
-		std::stringstream ss;
+  if (gBsrOahGroup->getTraceBsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% --> End visiting bsrTranscriptionNotesElement" <<
@@ -125,7 +125,7 @@ void bsrParallel::acceptOut (basevisitor* v)
         S_bsrParallel elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
+        if (gBsrOahGroup->getTraceBsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -196,7 +196,7 @@ void bsrParallel::print (std::ostream& os) const
   // print the parallel elements if any
   size_t parallelElementsListSize = fParallelElementsList.size ();
 
-  if (parallelElementsListSize || gGlobalBsrOahGroup->getDisplayBsrFull ()) {
+  if (parallelElementsListSize || gBsrOahGroup->getDisplayBsrFull ()) {
     os <<
       std::setw (fieldWidth) <<
       "fParallelElementsList";

@@ -25,7 +25,7 @@ S_mfcRepresentationComponent createMxsrRepresentationComponent ()
 
 #ifdef MF_TRACE_IS_ENABLED
     if (gEarlyOptions.getEarlyTraceComponents ()) {
-	  	std::stringstream ss;
+      std::stringstream ss;
 
       ss <<
         "Creating the MXSR format component" <<

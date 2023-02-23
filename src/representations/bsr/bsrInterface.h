@@ -31,16 +31,16 @@ namespace MusicFormats
 
 //_______________________________________________________________________________
 EXP void displayBsrScore (
-  S_bsrScore    bsrScore,
-  S_msrOahGroup msrOpts,
-  S_bsrOahGroup bsrOpts,
-  const std::string& passDescription);
+  const S_bsrScore&    bsrScore,
+  const S_msrOahGroup& msrOpts,
+  const S_bsrOahGroup& bsrOpts,
+  const std::string&   passDescription);
 
 EXP void displayBsrScoreFull (
-  S_bsrScore    bsrScore,
-  S_msrOahGroup msrOpts,
-  S_bsrOahGroup bsrOpts,
-  const std::string& passDescription);
+  const S_bsrScore&    bsrScore,
+  const S_msrOahGroup& msrOpts,
+  const S_bsrOahGroup& bsrOpts,
+  const std::string&   passDescription);
 
 // parts
 // ------------------------------------------------------

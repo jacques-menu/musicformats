@@ -14,6 +14,8 @@
 
 #include <map>
 
+#include "mfIndentedTextOutput.h"
+
 #include "msrPitches.h"
 
 
@@ -33,6 +35,9 @@ EXP std::string msrQuarterTonesPitchesLanguageKindAsString (
   msrQuarterTonesPitchesLanguageKind languageKind);
 
 std::ostream& operator << (std::ostream& os, const msrQuarterTonesPitchesLanguageKind& elt);
+
+EXP mfIndentedStringStream& operator << (
+  mfIndentedStringStream& iss, const msrQuarterTonesPitchesLanguageKind& elt);
 
 msrQuarterTonesPitchesLanguageKind msrQuarterTonesPitchesLanguageKindFromString (
   const std::string& theString);

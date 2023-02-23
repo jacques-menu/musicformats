@@ -80,7 +80,7 @@ mfRational::mfRational (const std::string &theString)
 
 #ifdef MF_TRACE_IS_ENABLED
     if (false) {
-	  	std::stringstream ss;
+      std::stringstream ss;
 
       ss <<
         "--> numerator = \"" << numerator << "\", " <<
@@ -140,8 +140,8 @@ mfRational::~mfRational ()
 mfRational mfRational::inverse () const
 {
   mfRational
-  	result (
-    	fDenominator, fNumerator);
+    result (
+      fDenominator, fNumerator);
 
   result.rationalise ();
 
@@ -151,8 +151,8 @@ mfRational mfRational::inverse () const
 mfRational mfRational::opposite () const
 {
   mfRational
-  	result (
-    	-fNumerator, fDenominator);
+    result (
+      -fNumerator, fDenominator);
 
   result.rationalise ();
 
@@ -162,9 +162,9 @@ mfRational mfRational::opposite () const
 mfRational mfRational::operator + (const mfRational &rat) const
 {
   mfRational
-  	result (
-    	fNumerator * rat.fDenominator + rat.fNumerator * fDenominator,
-   	  fDenominator * rat.fDenominator);
+    result (
+      fNumerator * rat.fDenominator + rat.fNumerator * fDenominator,
+       fDenominator * rat.fDenominator);
 
   result.rationalise ();
 
@@ -174,9 +174,9 @@ mfRational mfRational::operator + (const mfRational &rat) const
 mfRational mfRational::operator - (const mfRational &rat) const
 {
   mfRational
-  	result (
-    	fNumerator * rat.fDenominator - rat.fNumerator * fDenominator,
-    	fDenominator * rat.fDenominator);
+    result (
+      fNumerator * rat.fDenominator - rat.fNumerator * fDenominator,
+      fDenominator * rat.fDenominator);
 
   result.rationalise ();
 
@@ -186,9 +186,9 @@ mfRational mfRational::operator - (const mfRational &rat) const
 mfRational mfRational::operator * (const mfRational &rat) const
 {
   mfRational
-  	result (
-    	fNumerator * rat.fNumerator,
-    	fDenominator * rat.fDenominator);
+    result (
+      fNumerator * rat.fNumerator,
+      fDenominator * rat.fDenominator);
 
   result.rationalise ();
 
@@ -198,9 +198,9 @@ mfRational mfRational::operator * (const mfRational &rat) const
 mfRational mfRational::operator / (const mfRational &rat) const
 {
   mfRational
-  	result (
-  		fNumerator * rat.fDenominator,
-  		fDenominator * rat.fNumerator);
+    result (
+      fNumerator * rat.fDenominator,
+      fDenominator * rat.fNumerator);
 
   result.rationalise ();
 
@@ -210,9 +210,9 @@ mfRational mfRational::operator / (const mfRational &rat) const
 mfRational mfRational::operator * (int num) const
 {
   mfRational
-  	result (
-    	fNumerator * num,
-    	fDenominator);
+    result (
+      fNumerator * num,
+      fDenominator);
 
   result.rationalise ();
 
@@ -222,7 +222,7 @@ mfRational mfRational::operator * (int num) const
 mfRational mfRational::operator / (int num) const
 {
   mfRational
-  	result (
+    result (
       fNumerator,
       fDenominator * num);
 

@@ -189,8 +189,8 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
     theLpsrScore =
       translateMsrToLpsr (
         theMsrScore,
-        gGlobalMsrOahGroup,
-        gGlobalLpsrOahGroup,
+        gMsrOahGroup,
+        gLpsrOahGroup,
         mfPassIDKind::kMfPassID_2,
         "Convert the MSR into an LPSR",
         createMsdl2lilypondConverterComponent ());
@@ -264,8 +264,8 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
     try {
       translateLpsrToLilypond (
         theLpsrScore,
-        gGlobalMsrOahGroup,
-        gGlobalLpsrOahGroup,
+        gMsrOahGroup,
+        gLpsrOahGroup,
         mfPassIDKind::kMfPassID_3,
         gLanguage->convertTheLPSRIntoLilyPondCode (),
         lilypondStandardOutputStream);
@@ -340,8 +340,8 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
     try {
       translateLpsrToLilypond (
         theLpsrScore,
-        gGlobalMsrOahGroup,
-        gGlobalLpsrOahGroup,
+        gMsrOahGroup,
+        gLpsrOahGroup,
         mfPassIDKind::kMfPassID_4,
         gLanguage->convertTheLPSRIntoLilyPondCode (),
         lilypondFileOutputStream);
@@ -405,7 +405,7 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
 #ifdef MF_TRACE_IS_ENABLED
 #ifdef ENFORCE_TRACE_OAH
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       handlerOptionsAndArguments;
@@ -427,7 +427,7 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       serviceName << " main()" <<

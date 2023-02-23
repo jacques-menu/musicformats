@@ -193,9 +193,9 @@ class EXP msrTuplet : public msrTupletElement
                               { return fTupletFactor; }
 
     // member notes durations
-    msrWholeNotes          getMemberNotesSoundingWholeNotes () const
+    msrWholeNotes         getMemberNotesSoundingWholeNotes () const
                               { return fMemberNotesSoundingWholeNotes; }
-    msrWholeNotes          getMemberNotesDisplayWholeNotes () const
+    msrWholeNotes         getMemberNotesDisplayWholeNotes () const
                               { return fMemberNotesDisplayWholeNotes; }
 
     // elements
@@ -204,7 +204,7 @@ class EXP msrTuplet : public msrTupletElement
                               { return fTupletElementsList; }
 
     // tuplet durations
-    msrWholeNotes          getTupletDisplayWholeNotes () const
+    msrWholeNotes         getTupletDisplayWholeNotes () const
                               { return fTupletDisplayWholeNotes; }
 
   public:
@@ -292,11 +292,11 @@ class EXP msrTuplet : public msrTupletElement
     msrTupletFactor       fTupletFactor;
 
     // member notes durations
-    msrWholeNotes          fMemberNotesSoundingWholeNotes;
-    msrWholeNotes          fMemberNotesDisplayWholeNotes;
+    msrWholeNotes         fMemberNotesSoundingWholeNotes;
+    msrWholeNotes         fMemberNotesDisplayWholeNotes;
 
     // display whole notes
-    msrWholeNotes          fTupletDisplayWholeNotes;
+    msrWholeNotes         fTupletDisplayWholeNotes;
 
     // elements
     std::list<S_msrTupletElement>

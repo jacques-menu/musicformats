@@ -55,8 +55,8 @@ lpsrBookBlockElement::~lpsrBookBlockElement ()
 void lpsrBookBlockElement::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
-		std::stringstream ss;
+  if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% ==> lpsrBookBlockElement::acceptIn ()" <<
@@ -74,7 +74,7 @@ void lpsrBookBlockElement::acceptIn (basevisitor* v)
         S_lpsrBookBlockElement elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
+        if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -93,8 +93,8 @@ void lpsrBookBlockElement::acceptIn (basevisitor* v)
 void lpsrBookBlockElement::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
-		std::stringstream ss;
+  if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% ==> lpsrBookBlockElement::acceptOut ()" <<
@@ -112,7 +112,7 @@ void lpsrBookBlockElement::acceptOut (basevisitor* v)
         S_lpsrBookBlockElement elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
+        if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -131,8 +131,8 @@ void lpsrBookBlockElement::acceptOut (basevisitor* v)
 void lpsrBookBlockElement::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
-		std::stringstream ss;
+  if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% ==> lpsrBookBlockElement::browseData ()" <<
@@ -163,8 +163,8 @@ void lpsrBookBlockElement::browseData (basevisitor* v)
 */
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
-		std::stringstream ss;
+  if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% <== lpsrBookBlockElement::browseData ()" <<
@@ -256,7 +256,7 @@ void lpsrScoreBlock::appendPartGroupBlockToScoreBlock (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTracePartGroups ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending part group block " <<
@@ -283,7 +283,7 @@ void lpsrScoreBlock::appendVoiceUseToParallelMusicBLock (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceVoices ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending the use of voice \"" <<
@@ -308,7 +308,7 @@ void lpsrScoreBlock::appendLyricsUseToParallelMusicBLock (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceLyrics ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending the use of stanza " <<
@@ -330,8 +330,8 @@ void lpsrScoreBlock::appendLyricsUseToParallelMusicBLock (
 void lpsrScoreBlock::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
-		std::stringstream ss;
+  if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% ==> lpsrScoreBlock::acceptIn ()" <<
@@ -349,7 +349,7 @@ void lpsrScoreBlock::acceptIn (basevisitor* v)
         S_lpsrScoreBlock elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
+        if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -368,8 +368,8 @@ void lpsrScoreBlock::acceptIn (basevisitor* v)
 void lpsrScoreBlock::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
-		std::stringstream ss;
+  if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% ==> lpsrScoreBlock::acceptOut ()" <<
@@ -387,7 +387,7 @@ void lpsrScoreBlock::acceptOut (basevisitor* v)
         S_lpsrScoreBlock elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
+        if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -406,8 +406,8 @@ void lpsrScoreBlock::acceptOut (basevisitor* v)
 void lpsrScoreBlock::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
-		std::stringstream ss;
+  if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% ==> lpsrScoreBlock::browseData ()" <<
@@ -449,8 +449,8 @@ void lpsrScoreBlock::browseData (basevisitor* v)
   }
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
-		std::stringstream ss;
+  if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% <== lpsrScoreBlock::browseData ()" <<
@@ -521,7 +521,7 @@ void lpsrBookPartBlock::appendPartGroupBlockToBookPartBlock (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTracePartGroups ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending part group block " <<
@@ -548,7 +548,7 @@ void lpsrBookPartBlock::appendVoiceUseToParallelMusicBLock (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceVoices ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending the use of voice \"" <<
@@ -573,7 +573,7 @@ void lpsrBookPartBlock::appendLyricsUseToParallelMusicBLock (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceLyrics ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending the use of stanza " <<
@@ -595,8 +595,8 @@ void lpsrBookPartBlock::appendLyricsUseToParallelMusicBLock (
 void lpsrBookPartBlock::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
-		std::stringstream ss;
+  if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% ==> lpsrBookPartBlock::acceptIn ()" <<
@@ -614,7 +614,7 @@ void lpsrBookPartBlock::acceptIn (basevisitor* v)
         S_lpsrBookPartBlock elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
+        if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -633,8 +633,8 @@ void lpsrBookPartBlock::acceptIn (basevisitor* v)
 void lpsrBookPartBlock::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
-		std::stringstream ss;
+  if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% ==> lpsrBookPartBlock::acceptOut ()" <<
@@ -652,7 +652,7 @@ void lpsrBookPartBlock::acceptOut (basevisitor* v)
         S_lpsrBookPartBlock elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
+        if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -671,8 +671,8 @@ void lpsrBookPartBlock::acceptOut (basevisitor* v)
 void lpsrBookPartBlock::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
-		std::stringstream ss;
+  if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% ==> lpsrBookPartBlock::browseData ()" <<
@@ -691,8 +691,8 @@ void lpsrBookPartBlock::browseData (basevisitor* v)
   }
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
-		std::stringstream ss;
+  if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% <== lpsrBookPartBlock::browseData ()" <<
@@ -765,7 +765,7 @@ void lpsrBookBlock::appendPartGroupBlockToBlock (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTracePartGroups ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending part group block " <<
@@ -792,8 +792,8 @@ void lpsrBookBlock::appendBookBlockElementToBookBlockElementsList (
 {
 /* JMI
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalLpsrOahGroup->getTraceLpsrBlocks ()) {
-		std::stringstream ss;
+  if (gLpsrOahGroup->getTraceLpsrBlocks ()) {
+    std::stringstream ss;
 
     ss <<
       "Appending book block element  " <<
@@ -815,8 +815,8 @@ void lpsrBookBlock::appendLpsrScoreBlockToBookBlockElementsList (
   const S_lpsrScoreBlock& scoreBlock)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalLpsrOahGroup->getTraceLpsrBlocks ()) {
-		std::stringstream ss;
+  if (gLpsrOahGroup->getTraceLpsrBlocks ()) {
+    std::stringstream ss;
 
     ss <<
       "Appending score block element  " <<
@@ -838,8 +838,8 @@ void lpsrBookBlock::appendLpsrBookPartBlockToBookBlockElementsList (
   const S_lpsrBookPartBlock& bookPartBlock)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalLpsrOahGroup->getTraceLpsrBlocks ()) {
-		std::stringstream ss;
+  if (gLpsrOahGroup->getTraceLpsrBlocks ()) {
+    std::stringstream ss;
 
     ss <<
       "Appending book part block element  " <<
@@ -863,7 +863,7 @@ void lpsrBookBlock::appendVoiceUseToParallelMusicBLock (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceVoices ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending the use of voice \"" <<
@@ -888,7 +888,7 @@ void lpsrBookBlock::appendLyricsUseToParallelMusicBLock (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceLyrics ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending the use of stanza " <<
@@ -910,8 +910,8 @@ void lpsrBookBlock::appendLyricsUseToParallelMusicBLock (
 void lpsrBookBlock::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
-		std::stringstream ss;
+  if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% ==> lpsrBookBlock::acceptIn ()" <<
@@ -929,7 +929,7 @@ void lpsrBookBlock::acceptIn (basevisitor* v)
         S_lpsrBookBlock elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
+        if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -948,8 +948,8 @@ void lpsrBookBlock::acceptIn (basevisitor* v)
 void lpsrBookBlock::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
-		std::stringstream ss;
+  if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% ==> lpsrBookBlock::acceptOut ()" <<
@@ -967,7 +967,7 @@ void lpsrBookBlock::acceptOut (basevisitor* v)
         S_lpsrBookBlock elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
+        if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -986,8 +986,8 @@ void lpsrBookBlock::acceptOut (basevisitor* v)
 void lpsrBookBlock::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
-		std::stringstream ss;
+  if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% ==> lpsrBookBlock::browseData ()" <<
@@ -1022,8 +1022,8 @@ void lpsrBookBlock::browseData (basevisitor* v)
   }
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
-		std::stringstream ss;
+  if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% <== lpsrBookBlock::browseData ()" <<

@@ -196,7 +196,7 @@ void ischemeInterpreterInsiderHandler::createTheIschemeInterpreterOptionGroups (
   // initialize the library
   // ------------------------------------------------------
 
-  initializeWAE ();
+  // JMI ??? v0.9.67
 
   // initialize options handling, phase 2
   // ------------------------------------------------------

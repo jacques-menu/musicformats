@@ -16,7 +16,7 @@
 
 #include "msrElements.h"
 #include "msrNotesDurations.h"
-#include "msrWholeNotes.h"
+// #include "msrWholeNotes.h"
 
 
 namespace MusicFormats
@@ -90,16 +90,7 @@ class EXP msrDivisions : public msrElement
     std::string           divisionsAsMsrString (
                             int  inputLineNumber,
                             int  divisions);
-/* JMI
-    std::string           wholeNotesAsMsrString (
-                            int      inputLineNumber,
-                            const msrWholeNotes& wholeNotes,
-                            int&     numberOfDotsNeeded);
 
-    std::string           wholeNotesAsMsrString (
-                            int      inputLineNumber,
-                            const msrWholeNotes& wholeNotes);
-*/
     std::string           tupletDivisionsAsMsrString (
                             int inputLineNumber,
                             int divisions,

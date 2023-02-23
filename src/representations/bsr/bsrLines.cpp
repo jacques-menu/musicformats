@@ -60,8 +60,8 @@ bsrLine::bsrLine (
   fASpaceIsNeededInLine = true;
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalBsrOahGroup->getTraceLines ()) {
-		std::stringstream ss;
+  if (gBsrOahGroup->getTraceLines ()) {
+    std::stringstream ss;
 
     ss <<
       "Creating bsrLine '" <<
@@ -83,8 +83,8 @@ bsrLine::~bsrLine ()
 S_bsrLine bsrLine::createLineNewbornClone ()
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalBsrOahGroup->getTraceLines ()) {
-		std::stringstream ss;
+  if (gBsrOahGroup->getTraceLines ()) {
+    std::stringstream ss;
 
     ss <<
       "Creating a newborn clone of line " <<
@@ -185,7 +185,7 @@ void bsrLine::insertElementBeforeLastElementOfLine (
 void bsrLine::appendSpacesToLine (S_bsrSpaces spaces)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalBsrOahGroup->getTraceSpaces () || gGlobalBsrOahGroup->getTraceLines ()) {
+  if (gBsrOahGroup->getTraceSpaces () || gBsrOahGroup->getTraceLines ()) {
     gLog <<
       "Appending spaces '" <<
       spaces->asShortString () <<
@@ -203,7 +203,7 @@ void bsrLine::appendKeyToLine (S_bsrKey key)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceKeys ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending key " <<
@@ -222,7 +222,7 @@ void bsrLine::appendTimeSignatureToLine (S_bsrTimeSignature timeSignature)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceTimeSignatures ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending time signature '" <<
@@ -242,7 +242,7 @@ void bsrLine::insertTimeBeforeLastElementOfLine (S_bsrTimeSignature timeSignatur
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceTimeSignatures ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Inserting time signature '" <<
@@ -262,7 +262,7 @@ void bsrLine::appendTempoToLine (S_bsrTempo tempo)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceTempos ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending tempo " <<
@@ -280,7 +280,7 @@ void bsrLine::appendTempoToLine (S_bsrTempo tempo)
 void bsrLine::appendMeasureToLine (S_bsrMeasure measure)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMeasures () || gGlobalBsrOahGroup->getTraceLines ()) {
+  if (gTraceOahGroup->getTraceMeasures () || gBsrOahGroup->getTraceLines ()) {
     gLog <<
       "Appending measure '" <<
       measure->asShortString () <<
@@ -346,7 +346,7 @@ void bsrLine::appendNoteToLine (S_bsrNote note)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceNotes ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending note '" <<
@@ -419,8 +419,8 @@ int bsrLine::fetchCellsNumber () const
 void bsrLine::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
-		std::stringstream ss;
+  if (gBsrOahGroup->getTraceBsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% --> End visiting bsrTranscriptionNotesElement" <<
@@ -439,7 +439,7 @@ void bsrLine::acceptIn (basevisitor* v)
         S_bsrLine elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
+        if (gBsrOahGroup->getTraceBsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -458,8 +458,8 @@ void bsrLine::acceptIn (basevisitor* v)
 void bsrLine::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
-		std::stringstream ss;
+  if (gBsrOahGroup->getTraceBsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% --> End visiting bsrTranscriptionNotesElement" <<
@@ -478,7 +478,7 @@ void bsrLine::acceptOut (basevisitor* v)
         S_bsrLine elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
+        if (gBsrOahGroup->getTraceBsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -575,7 +575,7 @@ void bsrLine::print (std::ostream& os) const
   os << std::endl;
 
   // print the line contents if any
-  if (lineContentsListSize || gGlobalBsrOahGroup->getDisplayBsrFull ()) {
+  if (lineContentsListSize || gBsrOahGroup->getDisplayBsrFull ()) {
     os <<
 //      std::setw (fieldWidth) <<
       "LineContentsList" <<

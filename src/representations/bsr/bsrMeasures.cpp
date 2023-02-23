@@ -55,7 +55,7 @@ bsrMeasure::bsrMeasure (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasures ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating bsrMeasure '" <<
@@ -78,7 +78,7 @@ S_bsrMeasure bsrMeasure::createMeasureNewbornClone ()
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasures ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating a newborn clone of measure " <<
@@ -114,7 +114,7 @@ void bsrMeasure::appendClefToMeasure (S_bsrClef clef)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceClefs ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending clef '" <<
@@ -133,7 +133,7 @@ void bsrMeasure::appendBarLineToMeasure (S_bsrBarLine barLine)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceBarLines ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending barLine " <<
@@ -151,7 +151,7 @@ void bsrMeasure::appendBarLineToMeasure (S_bsrBarLine barLine)
 void bsrMeasure::appendNumberToMeasure (S_bsrNumber number)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalBsrOahGroup->getTraceNumbers ()) {
+  if (gBsrOahGroup->getTraceNumbers ()) {
     gLog <<
       "Appending number '" <<
       number->asShortString () <<
@@ -168,7 +168,7 @@ void bsrMeasure::appendNumberToMeasure (S_bsrNumber number)
 void bsrMeasure::appendWordsToMeasure (S_bsrWords words)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalBsrOahGroup->getTraceNumbers ()) {
+  if (gBsrOahGroup->getTraceNumbers ()) {
     gLog <<
       "Appending words '" <<
       words->asShortString () <<
@@ -186,7 +186,7 @@ void bsrMeasure::appendNoteToMeasure (S_bsrNote note)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceNotes ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending note '" <<
@@ -205,7 +205,7 @@ void bsrMeasure::appendDynamicToMeasure (S_bsrDynamic dynamic)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceDynamics ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending dynamic '" <<
@@ -247,8 +247,8 @@ int bsrMeasure::fetchCellsNumber () const
 void bsrMeasure::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
-		std::stringstream ss;
+  if (gBsrOahGroup->getTraceBsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% --> End visiting bsrTranscriptionNotesElement" <<
@@ -267,7 +267,7 @@ void bsrMeasure::acceptIn (basevisitor* v)
         S_bsrMeasure elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
+        if (gBsrOahGroup->getTraceBsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -286,8 +286,8 @@ void bsrMeasure::acceptIn (basevisitor* v)
 void bsrMeasure::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
-		std::stringstream ss;
+  if (gBsrOahGroup->getTraceBsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% --> End visiting bsrTranscriptionNotesElement" <<
@@ -306,7 +306,7 @@ void bsrMeasure::acceptOut (basevisitor* v)
         S_bsrMeasure elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
+        if (gBsrOahGroup->getTraceBsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -414,7 +414,7 @@ void bsrMeasure::print (std::ostream& os) const
   // print the measure elements if any
   size_t measureElementsListSize = fMeasureLineElementsList.size ();
 
-  if (measureElementsListSize || gGlobalBsrOahGroup->getDisplayBsrFull ()) {
+  if (measureElementsListSize || gBsrOahGroup->getDisplayBsrFull ()) {
     os <<
 //      std::setw (fieldWidth) <<
       "MeasureElementsList" <<

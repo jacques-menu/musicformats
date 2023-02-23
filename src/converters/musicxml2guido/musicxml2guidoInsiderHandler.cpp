@@ -81,7 +81,7 @@ Usage: xml2gmn [[option]* [MusicXMLFile|-] [[option]*
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Initializing \"" <<
@@ -143,7 +143,7 @@ void xml2gmnInsiderHandler::createTheXml2gmnPrefixes ()
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptionsDetails ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating the xml2gmn prefixes in \"" <<
@@ -166,7 +166,7 @@ void xml2gmnInsiderHandler::createTheXml2gmnOptionGroups (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptionsDetails ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating the \"" <<
@@ -179,10 +179,6 @@ void xml2gmnInsiderHandler::createTheXml2gmnOptionGroups (
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
-
-  // initialize common things
-  // ------------------------------------------------------
-  initializeMusicFormats ();
 
   // initialize options handling, phase 1
   // ------------------------------------------------------
@@ -213,8 +209,6 @@ void xml2gmnInsiderHandler::createTheXml2gmnOptionGroups (
 
   // initialize the library
   // ------------------------------------------------------
-
-  initializeWAE ();
 
   initializeMSR ();
 
@@ -262,7 +256,7 @@ void xml2gmnInsiderHandler::checkOptionsAndArguments () const
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptionsDetails ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Checking options and arguments from argc/argv in \"" <<
@@ -284,7 +278,7 @@ std::string xml2gmnInsiderHandler::fetchOutputFileNameFromTheOptions () const
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptionsDetails ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Fetching the output file name from the options in OAH handler \"" <<
@@ -443,7 +437,7 @@ void xml2gmnInsiderHandler::enforceHandlerQuietness ()
   gGlobalMxsr2msrOahGroup->
     enforceGroupQuietness ();
 
-  gGlobalMsrOahGroup->
+  gMsrOahGroup->
     enforceGroupQuietness ();
 
   gGlobalMsr2mxsrOahGroup->
@@ -499,7 +493,7 @@ void xml2gmnInsiderOahGroup::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> xml2gmnInsiderOahGroup::acceptIn ()" <<
@@ -537,7 +531,7 @@ void xml2gmnInsiderOahGroup::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> xml2gmnInsiderOahGroup::acceptOut ()" <<
@@ -575,7 +569,7 @@ void xml2gmnInsiderOahGroup::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> xml2gmnInsiderOahGroup::browseData ()" <<
@@ -824,7 +818,7 @@ S_xml2gmnInsiderOahGroup createGlobalXml2gmnOahGroup ()
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating global xml2gmn OAH group" <<

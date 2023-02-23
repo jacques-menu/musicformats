@@ -22,7 +22,7 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 EXP void translateMxsrToMusicXML (
-  Sxmlelement        theMxsr,
+  const Sxmlelement& theMxsr,
   std::string        outputFileName,
   std::ostream&      err,
   mfPassIDKind       passIDKind,

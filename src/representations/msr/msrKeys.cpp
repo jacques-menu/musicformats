@@ -87,7 +87,7 @@ msrHumdrumScotKeyItem::msrHumdrumScotKeyItem (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceKeys ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating Humdrum/Scot key item" <<
@@ -129,7 +129,7 @@ void msrHumdrumScotKeyItem::setKeyItemDiatonicPitchKind (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceKeys ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Setting Humdrum/Scot key item diatonic pitch to '" <<
@@ -151,7 +151,7 @@ void msrHumdrumScotKeyItem::setKeyItemAlterationKind (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceKeys ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Setting Humdrum/Scot key item alteration to '" <<
@@ -172,7 +172,7 @@ void msrHumdrumScotKeyItem::setKeyItemOctaveKind (msrOctaveKind keyOctaveKind)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceKeys ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Setting Humdrum/Scot key item octave to '" <<
@@ -192,7 +192,7 @@ void msrHumdrumScotKeyItem::setKeyItemOctaveKind (msrOctaveKind keyOctaveKind)
 void msrHumdrumScotKeyItem::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -211,7 +211,7 @@ void msrHumdrumScotKeyItem::acceptIn (basevisitor* v)
         S_msrHumdrumScotKeyItem elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -230,7 +230,7 @@ void msrHumdrumScotKeyItem::acceptIn (basevisitor* v)
 void msrHumdrumScotKeyItem::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -249,7 +249,7 @@ void msrHumdrumScotKeyItem::acceptOut (basevisitor* v)
         S_msrHumdrumScotKeyItem elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -434,7 +434,7 @@ msrKey::msrKey ( // for traditional keys
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceKeys ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating traditional key '" <<
@@ -459,7 +459,7 @@ msrKey::msrKey ( // for Humdrum/Scot keys
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceKeys ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating Humdrum/Scot key '" <<
@@ -566,7 +566,7 @@ void msrKey::appendHumdrumScotKeyItem (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceKeys ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Append item '" <<
@@ -600,7 +600,7 @@ S_msrKey msrKey::createTraditionalKeyFromString (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceNotes ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating traditional key from string \"" <<
@@ -624,7 +624,7 @@ S_msrKey msrKey::createTraditionalKeyFromString (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "regularExpression = " <<
@@ -646,7 +646,7 @@ S_msrKey msrKey::createTraditionalKeyFromString (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "There are " << smSize << " matches" <<
@@ -692,7 +692,7 @@ S_msrKey msrKey::createTraditionalKeyFromString (
   msrQuarterTonesPitchKind
     keyQuarterTonesTonicPitchKind =
       quarterTonesPitchKindFromString (
-        gGlobalMsrOahGroup->
+        gMsrOahGroup->
           getMsrQuarterTonesPitchesLanguageKind (),
         keyTonic);
 
@@ -705,7 +705,7 @@ S_msrKey msrKey::createTraditionalKeyFromString (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "keyTonic = \"" <<
@@ -746,7 +746,7 @@ S_msrKey msrKey::createTraditionalKeyFromString (
 void msrKey::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -765,7 +765,7 @@ void msrKey::acceptIn (basevisitor* v)
         S_msrKey elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -784,7 +784,7 @@ void msrKey::acceptIn (basevisitor* v)
 void msrKey::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -803,7 +803,7 @@ void msrKey::acceptOut (basevisitor* v)
         S_msrKey elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -836,7 +836,7 @@ std::string msrKey::asString () const
       ss <<
         msrQuarterTonesPitchKindAsStringInLanguage (
           fKeyTonicQuarterTonesPitchKind,
-          gGlobalMsrOahGroup->
+          gMsrOahGroup->
             getMsrQuarterTonesPitchesLanguageKind ()) <<
         ' ' <<
         fModeKind;
@@ -869,7 +869,7 @@ std::string msrKey::asShortStringForMeasuresSlices () const
       ss <<
         msrQuarterTonesPitchKindAsStringInLanguage (
           fKeyTonicQuarterTonesPitchKind,
-          gGlobalMsrOahGroup->
+          gMsrOahGroup->
             getMsrQuarterTonesPitchesLanguageKind ()) <<
         ' ' <<
         fModeKind;
@@ -903,7 +903,7 @@ void msrKey::print (std::ostream& os) const
         ' ' <<
         msrQuarterTonesPitchKindAsStringInLanguage (
           fKeyTonicQuarterTonesPitchKind,
-          gGlobalMsrOahGroup->
+          gMsrOahGroup->
             getMsrQuarterTonesPitchesLanguageKind ()) <<
         ' ' <<
         fModeKind <<

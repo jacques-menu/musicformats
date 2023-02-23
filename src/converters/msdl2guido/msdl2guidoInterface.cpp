@@ -184,7 +184,7 @@ mfMusicformatsErrorKind convertMsdlStream2guidoWithHandler (
     secondMsrScore =
       translateMsrToMsr (
         firstMsrScore,
-        gGlobalMsrOahGroup,
+        gMsrOahGroup,
         gGlobalMsr2msrOahGroup,
         mfPassIDKind::kMfPassID_2,
         gLanguage->convertTheFirstMSRIntoASecondMSR ());
@@ -207,7 +207,7 @@ mfMusicformatsErrorKind convertMsdlStream2guidoWithHandler (
     theMxsr =
       translateMsrToMxsr (
         secondMsrScore,
-        gGlobalMsrOahGroup,
+        gMsrOahGroup,
         mfPassIDKind::kMfPassID_3,
         "Convert the second MSR into an MXSR",
         mfTimingItemKind::kMandatory);
@@ -295,7 +295,7 @@ mfMusicformatsErrorKind convertMsdlStream2guidoWithOptionsAndArguments (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       serviceName << " main()" <<

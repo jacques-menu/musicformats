@@ -196,7 +196,7 @@ msrPartGroup::msrPartGroup (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTracePartGroups ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "--------------------------------------------" <<
@@ -275,7 +275,7 @@ msrPartGroup::msrPartGroup (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTracePartGroups ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "--------------------------------------------" <<
@@ -301,7 +301,7 @@ S_msrPartGroup msrPartGroup::createPartGroupNewbornClone (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTracePartGroups ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "--------------------------------------------" <<
@@ -500,7 +500,7 @@ S_msrPart msrPartGroup::appendPartToPartGroupByItsPartID (
   // register it in this part group
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTracePartGroups ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending part " <<
@@ -526,7 +526,7 @@ S_msrPart msrPartGroup::appendPartToPartGroupByItsPartID (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTracePartGroupsDetails ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       std::endl <<
@@ -588,7 +588,7 @@ void msrPartGroup::appendPartToPartGroup (S_msrPart part)
   // register part in this part group
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTracePartGroups ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Adding part " <<
@@ -622,7 +622,7 @@ void msrPartGroup::removePartFromPartGroup (
   // register part in this part group
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTracePartGroups ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Removing part " <<
@@ -689,7 +689,7 @@ void msrPartGroup::prependSubPartGroupToPartGroup (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTracePartGroups ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Prepending (sub-)part group " << partGroup->getPartGroupNumber () <<
@@ -715,7 +715,7 @@ void msrPartGroup::appendSubPartGroupToPartGroup (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTracePartGroups ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending (sub-)part group " << partGroup->getPartGroupNumber () <<
@@ -898,7 +898,7 @@ S_msrPart msrPartGroup::fetchPartFromPartGroupByItsPartID (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTracePartGroupsDetails ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "fetchPartFromPartGroupByItsPartID(" << partID <<
@@ -1054,7 +1054,7 @@ void msrPartGroup::registerVoiceInPartGroupAllVoicesList (
 void msrPartGroup::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -1073,7 +1073,7 @@ void msrPartGroup::acceptIn (basevisitor* v)
         S_msrPartGroup elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -1092,7 +1092,7 @@ void msrPartGroup::acceptIn (basevisitor* v)
 void msrPartGroup::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -1111,7 +1111,7 @@ void msrPartGroup::acceptOut (basevisitor* v)
         S_msrPartGroup elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -1130,7 +1130,7 @@ void msrPartGroup::acceptOut (basevisitor* v)
 void msrPartGroup::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -1150,8 +1150,8 @@ void msrPartGroup::browseData (basevisitor* v)
   } // for
 
 #ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% <== msrPartGroup::browseData ()" <<

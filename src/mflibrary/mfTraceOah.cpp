@@ -65,7 +65,7 @@ traceOahGroup::~traceOahGroup ()
 void traceOahGroup::createTheTracePrefixes (const S_oahHandler& handler)
 {
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating the OAH trace prefixes" <<
@@ -2068,10 +2068,10 @@ R"(Staves)",
   S_oahThreeBooleansAtom
     traceStaffDetailsBooleanAtom =
       oahThreeBooleansAtom::create (
-        "trace-staff-details", "tstd",
+        "trace-staves-details", "tstavesd",
 R"(Staff details)",
-        "fTraceStaffDetails",
-        fTraceStaffDetails,
+        "fTraceStavesDetails",
+        fTraceStavesDetails,
         traceStavesBooleanAtom,
         fTracePassesBooleanAtom);
 
@@ -2158,7 +2158,7 @@ R"()",
     traceNotesDurationsBooleanAtom =
       oahTwoBooleansAtomWithTracePasses::create ( // JMI trace too??? v0.9.67
         "trace-notes-durations", "tndurs",
-R"(NotesDurations)",
+R"(Notes durations)",
         "fTraceNotesDurations",
         fTraceNotesDurations,
         fTracePassesBooleanAtom);
@@ -2240,7 +2240,7 @@ This option implies '-tnotes, -trace-notes'.)",
   S_oahTwoBooleansAtomWithTracePasses
     traceWholeNotesBooleanAtom =
       oahTwoBooleansAtomWithTracePasses::create (
-        "trace-whole-notes", "twn",
+        "trace-whole-notes", "twn", // JMI v0.9.67 SUPERFLOUS with trace-notes-durations ???
 R"(Whole notes computations (quite verbose)...)",
         "fTraceWholeNotes",
         fTraceWholeNotes,
@@ -2661,7 +2661,7 @@ void traceOahGroup::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> traceOahGroup::acceptIn ()" <<
@@ -2699,7 +2699,7 @@ void traceOahGroup::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> traceOahGroup::acceptOut ()" <<
@@ -2737,7 +2737,7 @@ void traceOahGroup::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> traceOahGroup::browseData ()" <<
@@ -3190,8 +3190,8 @@ void traceOahGroup::displayTraceOahValues (int fieldWidth)
     std::endl <<
 
     // staff details
-    std::setw (fieldWidth) << "fTraceStaffDetails" << ": " <<
-    fTraceStaffDetails <<
+    std::setw (fieldWidth) << "fTraceStavesDetails" << ": " <<
+    fTraceStavesDetails <<
     std::endl <<
 
     // scordaturas
@@ -3277,7 +3277,7 @@ S_traceOahGroup createGlobalTraceOahGroup (
   const S_oahHandler& handler)
 {
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating global trace OAH group" <<

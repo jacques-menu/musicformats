@@ -318,7 +318,7 @@ class EXP msrVoice : public msrElement
     void                  setVoiceShortestNoteWholeNotes (
                             const msrWholeNotes& wholeNotes);
 
-    msrWholeNotes          getVoiceShortestNoteWholeNotes () const
+    msrWholeNotes         getVoiceShortestNoteWholeNotes () const
                               { return fVoiceShortestNoteWholeNotes; }
 
     void                  setVoiceShortestNoteTupletFactor (
@@ -359,7 +359,7 @@ class EXP msrVoice : public msrElement
                             int             inputLineNumber,
                             const msrWholeNotes& wholeNotes);
 
-    msrWholeNotes          getWholeNotesSinceLastRegularMeasureEnd () const
+    msrWholeNotes         getWholeNotesSinceLastRegularMeasureEnd () const
                               { return fWholeNotesSinceLastRegularMeasureEnd; }
 
     // incomplete measures after repeats detection
@@ -889,7 +889,7 @@ class EXP msrVoice : public msrElement
                                 fCurrentVoicePosition += delta;
                               }
 
-    msrWholeNotes          getCurrentVoicePosition () const
+    msrWholeNotes         getCurrentVoicePosition () const
                               { return fCurrentVoicePosition; }
 
     const msrMoment&      getCurrentVoiceMoment () const
@@ -1131,7 +1131,7 @@ class EXP msrVoice : public msrElement
 
     // regular measure ends detection
 
-    msrWholeNotes          fWholeNotesSinceLastRegularMeasureEnd;
+    msrWholeNotes         fWholeNotesSinceLastRegularMeasureEnd;
 
      // stanzas
 
@@ -1166,7 +1166,7 @@ class EXP msrVoice : public msrElement
     // fVoiceShortestNoteWholeNotes and fVoiceShortestNoteTupletFactor
     // are used to compute a number of divisions per quarter note
     // if needed, such as when generating MusicXML from MSR
-    msrWholeNotes          fVoiceShortestNoteWholeNotes;
+    msrWholeNotes         fVoiceShortestNoteWholeNotes;
     msrTupletFactor       fVoiceShortestNoteTupletFactor;
 
     // repeats
@@ -1412,7 +1412,7 @@ class EXP msrVoice : public msrElement
 
     // current voice position
 
-    msrWholeNotes          fCurrentVoicePosition;
+    msrWholeNotes         fCurrentVoicePosition;
     msrMoment             fCurrentVoiceMoment;
 
     // voice finalization

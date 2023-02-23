@@ -164,7 +164,7 @@ class EXP ischemeInput : public smartable
                               { return fInputNameKind; }
 
     const std::set<std::string>&
-    											getNamesSet () const
+                          getNamesSet () const
                               { return fNamesSet; }
 
     S_ischemeOptionsBlock getInputOptionsBlockForName (
@@ -432,7 +432,7 @@ class EXP ischemeChoice : public smartable
                               { return fChoiceLabelKind; }
 
     const std::set<std::string>&
-    									    getLabelsSet () const
+                          getLabelsSet () const
                               { return fLabelsSet; }
 
     std::string           getChoiceDefaultLabel () const
@@ -489,7 +489,7 @@ class EXP ischemeChoice : public smartable
 
     std::string           fChoiceLabel;
     ischemeChoiceLabelKind
-    									    fChoiceLabelKind;
+                          fChoiceLabelKind;
 
     std::set<std::string> fLabelsSet;
 
@@ -606,7 +606,7 @@ class EXP ischemeCaseChoiceStatement : public smartable
                               { return fCaseChoice; }
 
     const list<std::string>&
-    									    getCaseCurrentLabelsList () const
+                          getCaseCurrentLabelsList () const
                               { return fCaseCurrentLabelsList; }
 
     void                  clearCaseCurrentLabelsList ()

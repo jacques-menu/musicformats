@@ -49,10 +49,10 @@ namespace MusicFormats
 
 //_______________________________________________________________________________
 S_msrScore translateMxsrToMsrSkeleton (
-  Sxmlelement        theMxsr,
-  S_msrOahGroup&     msrOpts,
-  mfPassIDKind       passIDKind,
-  const std::string& passDescription)
+  const Sxmlelement&   theMxsr,
+  const S_msrOahGroup& msrOpts,
+  mfPassIDKind         passIDKind,
+  const std::string&   passDescription)
 {
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
@@ -106,7 +106,7 @@ S_msrScore translateMxsrToMsrSkeleton (
     skeletonBuilder.getMsrScore ();
 
   // display the first MSR score skeleton if requested
-  if (gGlobalMsrOahGroup->getDisplayMsrSkeleton ()) {
+  if (gMsrOahGroup->getDisplayMsrSkeleton ()) {
     displayMsrScore (
       scoreSkeleton,
       gLanguage->displayTheFirstMSRSkeletonAsText ());
@@ -157,7 +157,7 @@ S_msrScore translateMxsrToMsrSkeleton (
 // //_______________________________________________________________________________
 // void displayMsrScoreSkeleton ( // UNUSED JMI v0.9.66
 //   S_msrOahGroup&     msrOpts,
-//   S_msrScore         theMsrScore,
+//   const S_msrScore&  theMsrScore,
 // //   mfPassIDKind       passIDKind,
 //   const std::string& passIDKind,
 //   const std::string& passDescription)
@@ -193,7 +193,7 @@ S_msrScore translateMxsrToMsrSkeleton (
 //   clock_t endClock = clock ();
 //
 //   gGlobalTimingItemsList.appendTimingItem (
-// 		 mfPassIDKind::kMfPassID_OptionsAndArgumentsHandling,
+//      mfPassIDKind::kMfPassID_OptionsAndArgumentsHandling,
 //     gLanguage->displayTheFirstMSRSkeletonAsText (), // JMI ??? v0.9.66
 //     mfTimingItemKind::kOptional,
 //     startClock,

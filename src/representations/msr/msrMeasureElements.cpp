@@ -60,8 +60,8 @@ msrMeasureElement::~msrMeasureElement ()
 {}
 
 void msrMeasureElement::setSoundingWholeNotes (
-  const msrWholeNotes&    wholeNotes,
-  const std::string& context)
+  const msrWholeNotes& wholeNotes,
+  const std::string&   context)
 {
   doSetSoundingWholeNotes (
     wholeNotes,
@@ -69,8 +69,8 @@ void msrMeasureElement::setSoundingWholeNotes (
 }
 
 void msrMeasureElement::doSetSoundingWholeNotes (
-  const msrWholeNotes&    wholeNotes,
-  const std::string& context)
+  const msrWholeNotes& wholeNotes,
+  const std::string&   context)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceWholeNotes ()) {
@@ -84,10 +84,11 @@ void msrMeasureElement::doSetSoundingWholeNotes (
     gLog <<
       "==> Setting measure element sounding whole notes of " <<
       asString () <<
-      " to 'WHOLE_NOTES " << wholeNotes << // JMI v0.9.66
-      "' in measure '" <<
-      upLinkToMeasure->getMeasureNumber () <<
-      "', context: \"" <<
+      " to " << wholeNotes << // JMI v0.9.66
+//       " in measure '" << // JMI TOO EARLY v0.9.67
+//       upLinkToMeasure->getMeasureNumber () <<
+//       "', context: \"" <<
+      ", context: \"" <<
       context <<
       "\"" <<
       std::endl;
@@ -102,15 +103,23 @@ void msrMeasureElement::doSetSoundingWholeNotes (
     __FILE__, __LINE__,
     wholeNotes != K_WHOLE_NOTES_UNKNOWN,
     "wholeNotes == K_WHOLE_NOTES_UNKNOWN");
+
+  msrWholeNotes
+    infinitelyDottesLonga (8, 1);
+
+  mfAssert (
+    __FILE__, __LINE__,
+    wholeNotes < infinitelyDottesLonga,
+    "wholeNotes >= infinitelyDottesLonga");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fSoundingWholeNotes = wholeNotes;
 }
 
 void msrMeasureElement::setMeasurePosition (
-  const S_msrMeasure& measure,
-  const msrWholeNotes&     measurePosition,
-  const std::string&  context)
+  const S_msrMeasure&  measure,
+  const msrWholeNotes& measurePosition,
+  const std::string&   context)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasurePositions ()) {
@@ -119,7 +128,7 @@ void msrMeasureElement::setMeasurePosition (
     getMeasureElementUpLinkToMeasure (
       upLinkToMeasure);
 
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Setting measure position of " <<
@@ -193,8 +202,8 @@ bool msrMeasureElement::compareMeasureElementsByIncreasingMeasurePosition (
 }
 
 void msrMeasureElement::setVoicePosition (
-  const msrWholeNotes&    voicePosition,
-  const std::string& context)
+  const msrWholeNotes& voicePosition,
+  const std::string&   context)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceVoicePositions ()) {
@@ -203,7 +212,7 @@ void msrMeasureElement::setVoicePosition (
     getMeasureElementUpLinkToMeasure (
       upLinkToMeasure);
 
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Setting voice position of " <<
@@ -238,7 +247,7 @@ void msrMeasureElement::setVoicePosition (
     getMeasureElementUpLinkToMeasure (
       upLinkToMeasure);
 
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Setting measure element voice position of " <<
@@ -320,8 +329,8 @@ void msrMeasureElement::setVoicePosition (
 void msrMeasureElement::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% ==> msrMeasureElement::acceptIn ()" <<
@@ -339,7 +348,7 @@ void msrMeasureElement::acceptIn (basevisitor* v)
         S_msrMeasureElement elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -358,8 +367,8 @@ void msrMeasureElement::acceptIn (basevisitor* v)
 void msrMeasureElement::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% ==> msrMeasureElement::acceptOut ()" <<
@@ -377,7 +386,7 @@ void msrMeasureElement::acceptOut (basevisitor* v)
         S_msrMeasureElement elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<

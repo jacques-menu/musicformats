@@ -88,7 +88,7 @@ void lpsrPitchesLanguageAtom::applyAtomWithValue (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "==> oahAtom is of type 'lpsrPitchesLanguageAtom'" <<
@@ -105,7 +105,7 @@ void lpsrPitchesLanguageAtom::applyAtomWithValue (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "==> oahAtom is of type 'lpsrPitchesLanguageAtom'" <<
@@ -149,14 +149,14 @@ void lpsrPitchesLanguageAtom::applyAtomWithValue (
   setMsrQuarterTonesPitchesLanguageKindVariable (
     (*it).second);
 
-	fSelected = true;
+  fSelected = true;
 }
 
 void lpsrPitchesLanguageAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> lpsrPitchesLanguageAtom::acceptIn ()" <<
@@ -194,7 +194,7 @@ void lpsrPitchesLanguageAtom::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> lpsrPitchesLanguageAtom::acceptOut ()" <<
@@ -232,7 +232,7 @@ void lpsrPitchesLanguageAtom::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> lpsrPitchesLanguageAtom::browseData ()" <<
@@ -251,8 +251,7 @@ std::string lpsrPitchesLanguageAtom::asShortNamedOptionString () const
 
   ss <<
     '-' << fShortName << ' ' <<
-    msrQuarterTonesPitchesLanguageKindAsString (
-      fMsrQuarterTonesPitchesLanguageKindVariable);
+    fMsrQuarterTonesPitchesLanguageKindVariable;
 
   return ss.str ();
 }
@@ -263,8 +262,7 @@ std::string lpsrPitchesLanguageAtom::asActualLongNamedOptionString () const
 
   ss <<
     '-' << fLongName << ' ' <<
-    msrQuarterTonesPitchesLanguageKindAsString (
-      fMsrQuarterTonesPitchesLanguageKindVariable);
+    fMsrQuarterTonesPitchesLanguageKindVariable;
 
   return ss.str ();
 }
@@ -289,8 +287,7 @@ void lpsrPitchesLanguageAtom::print (std::ostream& os) const
     std::endl <<
     std::setw (fieldWidth) <<
     "fMsrQuarterTonesPitchesLanguageKindVariable" << ": " <<
-    msrQuarterTonesPitchesLanguageKindAsString (
-      fMsrQuarterTonesPitchesLanguageKindVariable) <<
+    fMsrQuarterTonesPitchesLanguageKindVariable <<
     std::endl;
 
   --gIndenter;
@@ -304,14 +301,13 @@ void lpsrPitchesLanguageAtom::displayAtomWithVariableOptionsValues (
     std::setw (valueFieldWidth) <<
     fVariableName <<
     ": " <<
-    msrQuarterTonesPitchesLanguageKindAsString (
-      fMsrQuarterTonesPitchesLanguageKindVariable);
+    fMsrQuarterTonesPitchesLanguageKindVariable;
   switch (fEarlyOptionKind) {
     case oahEarlyOptionKind::kEarlyOptionNo:
       break;
     case oahEarlyOptionKind::kEarlyOptionYes:
-			os <<
-				", early";
+      os <<
+        ", early";
       break;
   } // switch
   if (fSelected) {
@@ -381,7 +377,7 @@ void lpsrChordsLanguageAtom::applyAtomWithValue (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "==> oahAtom is of type 'lpsrChordsLanguageAtom'" <<
@@ -398,7 +394,7 @@ void lpsrChordsLanguageAtom::applyAtomWithValue (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "==> oahAtom is of type 'lpsrChordsLanguageAtom'" <<
@@ -440,14 +436,14 @@ void lpsrChordsLanguageAtom::applyAtomWithValue (
   setLpsrChordsLanguageKindVariable (
     (*it).second);
 
-	fSelected = true;
+  fSelected = true;
 }
 
 void lpsrChordsLanguageAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> lpsrChordsLanguageAtom::acceptIn ()" <<
@@ -485,7 +481,7 @@ void lpsrChordsLanguageAtom::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> lpsrChordsLanguageAtom::acceptOut ()" <<
@@ -523,7 +519,7 @@ void lpsrChordsLanguageAtom::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> lpsrChordsLanguageAtom::browseData ()" <<
@@ -598,8 +594,8 @@ void lpsrChordsLanguageAtom::displayAtomWithVariableOptionsValues (
     case oahEarlyOptionKind::kEarlyOptionNo:
       break;
     case oahEarlyOptionKind::kEarlyOptionYes:
-			os <<
-				", early";
+      os <<
+        ", early";
       break;
   } // switch
   if (fSelected) {
@@ -669,7 +665,7 @@ void lpsrStaffInstrumentNameAtom::applyAtomWithValue (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "==> oahAtom is of type 'lpsrStaffInstrumentNameAtom'" <<
@@ -686,7 +682,7 @@ void lpsrStaffInstrumentNameAtom::applyAtomWithValue (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "==> oahAtom is of type 'lpsrStaffInstrumentNameAtom'" <<
@@ -713,7 +709,7 @@ void lpsrStaffInstrumentNameAtom::applyAtomWithValue (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "There are " << smSize << " matches" <<
@@ -759,7 +755,7 @@ void lpsrStaffInstrumentNameAtom::applyAtomWithValue (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "--> partName = \"" << partName << "\", " <<
@@ -793,14 +789,14 @@ void lpsrStaffInstrumentNameAtom::applyAtomWithValue (
     fStringToStringMapVariable [partName] = partInstrumentName;
   }
 
-	fSelected = true;
+  fSelected = true;
 }
 
 void lpsrStaffInstrumentNameAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> lpsrStaffInstrumentNameAtom::acceptIn ()" <<
@@ -838,7 +834,7 @@ void lpsrStaffInstrumentNameAtom::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> lpsrStaffInstrumentNameAtom::acceptOut ()" <<
@@ -876,7 +872,7 @@ void lpsrStaffInstrumentNameAtom::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> lpsrStaffInstrumentNameAtom::browseData ()" <<
@@ -1095,7 +1091,7 @@ void lpsrTransposeAtom::applyAtomWithValue (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "==> oahAtom is of type 'lpsrTransposeAtom'" <<
@@ -1112,7 +1108,7 @@ void lpsrTransposeAtom::applyAtomWithValue (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "==> oahAtom is of type 'lpsrTransposeAtom'" <<
@@ -1135,14 +1131,14 @@ void lpsrTransposeAtom::applyAtomWithValue (
   setSemiTonesPitchAndOctaveVariable (
     semiTonesPitchAndOctave);
 
-	fSelected = true;
+  fSelected = true;
 }
 
 void lpsrTransposeAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> lpsrTransposeAtom::acceptIn ()" <<
@@ -1180,7 +1176,7 @@ void lpsrTransposeAtom::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> lpsrTransposeAtom::acceptOut ()" <<
@@ -1218,7 +1214,7 @@ void lpsrTransposeAtom::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> lpsrTransposeAtom::browseData ()" <<
@@ -1317,8 +1313,6 @@ std::ostream& operator << (std::ostream& os, const S_lpsrTransposeAtom& elt)
 }
 
 //_______________________________________________________________________________
-S_lpsrOahGroup gGlobalLpsrOahGroup;
-
 S_lpsrOahGroup lpsrOahGroup::create ()
 {
   lpsrOahGroup* o = new lpsrOahGroup ();
@@ -2214,7 +2208,7 @@ void lpsrOahGroup::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> lpsrOahGroup::acceptIn ()" <<
@@ -2252,7 +2246,7 @@ void lpsrOahGroup::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> lpsrOahGroup::acceptOut ()" <<
@@ -2290,7 +2284,7 @@ void lpsrOahGroup::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> lpsrOahGroup::browseData ()" <<
@@ -2521,8 +2515,7 @@ void lpsrOahGroup::displayLpsrOahValues (int fieldWidth)
 
   gLog << std::left <<
     std::setw (fieldWidth) << "fLpsrQuarterTonesPitchesLanguageKind" << ": " <<
-    msrQuarterTonesPitchesLanguageKindAsString (
-      fLpsrQuarterTonesPitchesLanguageKind) <<
+    fLpsrQuarterTonesPitchesLanguageKind <<
     std::endl <<
 
     std::setw (fieldWidth) << "fLpsrChordsLanguageKind" << ": " <<
@@ -2571,12 +2564,21 @@ std::ostream& operator << (std::ostream& os, const S_lpsrOahGroup& elt)
   return os;
 }
 
+//________________________________________________________________________
+// hidden global LPSR OAH group ariable
+EXP S_lpsrOahGroup pGlobalLpsrOahGroup;
+
+EXP S_lpsrOahGroup getGlobalLpsrOahGroup ()
+{
+  return pGlobalLpsrOahGroup;
+}
+
 //______________________________________________________________________________
 S_lpsrOahGroup createGlobalLpsrOahGroup ()
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating global LPSR OAH group" <<
@@ -2589,15 +2591,15 @@ S_lpsrOahGroup createGlobalLpsrOahGroup ()
 #endif // MF_TRACE_IS_ENABLED
 
   // protect library against multiple initializations
-  if (! gGlobalLpsrOahGroup) {
+  if (! pGlobalLpsrOahGroup) {
     // create the global options group
-    gGlobalLpsrOahGroup =
+    pGlobalLpsrOahGroup =
       lpsrOahGroup::create ();
-    assert (gGlobalLpsrOahGroup != 0);
+    assert (pGlobalLpsrOahGroup != 0);
   }
 
   // return the global OAH group
-  return gGlobalLpsrOahGroup;
+  return pGlobalLpsrOahGroup;
 }
 
 

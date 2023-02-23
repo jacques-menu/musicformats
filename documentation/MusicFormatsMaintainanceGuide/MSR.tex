@@ -523,16 +523,16 @@ void msrTransposition::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fTranspositionDiatonic" << " = " << fTranspositionDiatonic <<
+    "fTranspositionDiatonic" << ": " << fTranspositionDiatonic <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fTranspositionChromatic" << " = " << fTranspositionChromatic <<
+    "fTranspositionChromatic" << ": " << fTranspositionChromatic <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fTranspositionOctaveChange" << " = " << fTranspositionOctaveChange <<
+    "fTranspositionOctaveChange" << ": " << fTranspositionOctaveChange <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fTranspositionDouble" << " = " << fTranspositionDouble <<
+    "fTranspositionDouble" << ": " << fTranspositionDouble <<
     std::endl << std::endl;
 
   --gIndenter;
@@ -920,7 +920,7 @@ class EXP msrTempoTuplet : public msrElement
       msrTempoTupletBracketKind    tempoTupletBracketKind,
       msrTempoTupletShowNumberKind tempoTupletShowNumberKind,
       msrTupletFactor              tempoTupletFactor,
-      msrWholeNotes                 memberNotesDisplayWholeNotes);
+      msrWholeNotes            memberNotesDisplayWholeNotes);
 
   protected:
 
@@ -933,7 +933,7 @@ class EXP msrTempoTuplet : public msrElement
       msrTempoTupletBracketKind    tempoTupletBracketKind,
       msrTempoTupletShowNumberKind tempoTupletShowNumberKind,
       msrTupletFactor              tempoTupletFactor,
-      msrWholeNotes                 memberNotesDisplayWholeNotes);
+      msrWholeNotes            memberNotesDisplayWholeNotes);
 
 		// ... ... ...
 

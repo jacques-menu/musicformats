@@ -118,8 +118,8 @@ lpsrSchemeVariable::~lpsrSchemeVariable ()
 void lpsrSchemeVariable::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
-		std::stringstream ss;
+  if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% ==> lpsrSchemeVariable::acceptIn ()" <<
@@ -137,7 +137,7 @@ void lpsrSchemeVariable::acceptIn (basevisitor* v)
         S_lpsrSchemeVariable elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
+        if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -156,8 +156,8 @@ void lpsrSchemeVariable::acceptIn (basevisitor* v)
 void lpsrSchemeVariable::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
-		std::stringstream ss;
+  if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% ==> lpsrSchemeVariable::acceptOut ()" <<
@@ -175,7 +175,7 @@ void lpsrSchemeVariable::acceptOut (basevisitor* v)
         S_lpsrSchemeVariable elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
+        if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -285,8 +285,8 @@ lpsrSchemeFunction::~lpsrSchemeFunction ()
 void lpsrSchemeFunction::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
-		std::stringstream ss;
+  if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% ==> lpsrSchemeFunction::acceptIn ()" <<
@@ -304,7 +304,7 @@ void lpsrSchemeFunction::acceptIn (basevisitor* v)
         S_lpsrSchemeFunction elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
+        if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -323,8 +323,8 @@ void lpsrSchemeFunction::acceptIn (basevisitor* v)
 void lpsrSchemeFunction::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
-		std::stringstream ss;
+  if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% ==> lpsrSchemeFunction::acceptOut ()" <<
@@ -342,7 +342,7 @@ void lpsrSchemeFunction::acceptOut (basevisitor* v)
         S_lpsrSchemeFunction elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
+        if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
           std::stringstream ss;
 
           ss <<

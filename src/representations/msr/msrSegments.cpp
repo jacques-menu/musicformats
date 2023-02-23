@@ -93,7 +93,7 @@ void msrSegment::initializeSegment ()
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceSegments ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Initializing new segment '" <<
@@ -128,7 +128,7 @@ void msrSegment::setSegmentFirstMeasure (
       ||
     gTraceOahGroup->getTraceMeasures ()
   ) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Setting segment first measure to ";
@@ -165,7 +165,7 @@ void msrSegment::setSegmentLastMeasure (
       ||
     gTraceOahGroup->getTraceMeasures ()
   ) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Setting segment last measure to ";
@@ -250,7 +250,7 @@ S_msrSegment msrSegment::createSegmentNewbornClone (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceSegments ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating a newborn clone of segment " <<
@@ -291,7 +291,7 @@ S_msrSegment msrSegment::createSegmentDeepClone (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceSegments ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating a deep clone of segment " <<
@@ -362,7 +362,7 @@ S_msrSegment msrSegment::createSegmentDeepClone (
   else {
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceSegments ()) {
-	  	std::stringstream ss;
+      std::stringstream ss;
 
       ss <<
         "There are no measures in segment to be deep copied" <<
@@ -390,9 +390,9 @@ void msrSegment::setSegmentShortestNoteWholeNotes (
   if (
     gTraceOahGroup->getTraceNotes ()
       ||
-    gGlobalMsrOahGroup->getTraceMsrNotesDurations ()
+    gMsrOahGroup->getTraceMsrNotesDurations ()
   ) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Setting the shortest note wholeNotes of segment " <<
@@ -417,9 +417,9 @@ void msrSegment::setSegmentShortestNoteTupletFactor (
   if (
     gTraceOahGroup->getTraceNotes ()
       ||
-    gGlobalMsrOahGroup->getTraceMsrNotesDurations ()
+    gMsrOahGroup->getTraceMsrNotesDurations ()
   ) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Setting the shortest note tuplet factor of segment " <<
@@ -529,7 +529,7 @@ S_msrMeasure msrSegment::createAMeasureAndAppendItToSegment (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasures ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating and appending a measure '" << measureNumber <<
@@ -568,7 +568,7 @@ S_msrMeasure msrSegment::createAMeasureAndAppendItToSegment (
   // create a measure
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasures ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating measure '" << measureNumber <<
@@ -597,7 +597,7 @@ S_msrMeasure msrSegment::createAMeasureAndAppendItToSegment (
   // set measure end input line number JMI v0.9.66 to be done in appendMeasureToSegment() ???
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasures ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Setting end line number of measure number '" << // JMI
@@ -643,7 +643,7 @@ void msrSegment::setNextMeasureNumberInSegment (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasures ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Setting next measure number to '" << nextMeasureNumber <<
@@ -696,7 +696,7 @@ void msrSegment::appendMusicXMLPrintLayoutToSegment (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMusicXMLPrintLayouts ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending print layout " << musicXMLPrintLayout->asString () <<
@@ -758,7 +758,7 @@ void msrSegment::appendClefToSegment  (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceClefs ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending clef '" << clef->asString () <<
@@ -820,7 +820,7 @@ void msrSegment::prependClefToSegment  (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceClefs ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Prepending clef '" << clef->asString () <<
@@ -1004,7 +1004,7 @@ void msrSegment::appendKeyToSegment (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceKeys ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending key " << key->asString () <<
@@ -1040,7 +1040,7 @@ void msrSegment::appendTimeSignatureToSegment (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceTimeSignatures ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending time signature:" <<
@@ -1085,7 +1085,7 @@ void msrSegment::appendTimeSignatureToSegmentClone (
   const S_msrTimeSignature& timeSignature){
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceTimeSignatures ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending time signature:" <<
@@ -1132,7 +1132,7 @@ void msrSegment::insertHiddenMeasureAndBarLineInSegmentClone (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasures ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Inserting hidden measure and barLine at position " <<
@@ -1241,7 +1241,7 @@ void msrSegment::appendFiguredBassToSegment (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceFiguredBasses ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending figured bass " <<
@@ -1282,7 +1282,7 @@ void msrSegment::appendFiguredBassToSegmentClone (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceFiguredBasses ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending figured bass " <<
@@ -1314,7 +1314,7 @@ void msrSegment::appendSegnoToSegment (const S_msrSegno& segno)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceSegnos ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending segno " <<
@@ -1349,7 +1349,7 @@ void msrSegment::appendCodaToSegment (const S_msrCoda& coda)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceCodas ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending coda " <<
@@ -1385,7 +1385,7 @@ void msrSegment::appendEyeGlassesToSegment (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceEyeGlasses ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending eyeGlasses " <<
@@ -1420,7 +1420,7 @@ void msrSegment::appendPedalToSegment (const S_msrPedal& pedal)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTracePedals ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending pedal " <<
@@ -1456,7 +1456,7 @@ void msrSegment::appendDampToSegment (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceDamps ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending damp " <<
@@ -1492,7 +1492,7 @@ void msrSegment::appendDampAllToSegment (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceDampAlls ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending damp all " <<
@@ -1528,7 +1528,7 @@ void msrSegment::appendTranspositionToSegment (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceTranspositions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending transposition " <<
@@ -1567,11 +1567,11 @@ void msrSegment::appendStaffDetailsToSegment (
     staffDetails->getInputLineNumber ();
 
   if (
-    gTraceOahGroup->getTraceStaffDetails ()
+    gTraceOahGroup->getTraceStavesDetails ()
       ||
     gTraceOahGroup->getTraceSegments ()
   ) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending staff details " <<
@@ -1590,7 +1590,7 @@ void msrSegment::appendStaffDetailsToSegment (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (
-    gTraceOahGroup->getTraceStaffDetails ()
+    gTraceOahGroup->getTraceStavesDetails ()
       ||
     gTraceOahGroup->getTraceSegments ()
   ) {
@@ -1615,7 +1615,7 @@ void msrSegment::appendStaffDetailsToSegment (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (
-    gTraceOahGroup->getTraceStaffDetails ()
+    gTraceOahGroup->getTraceStavesDetails ()
       ||
     gTraceOahGroup->getTraceSegments ()
   ) {
@@ -1634,7 +1634,7 @@ void msrSegment::appendLineBreakToSegment (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceLineBreaks ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending break " <<
@@ -1671,7 +1671,7 @@ void msrSegment::appendPageBreakToSegment (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTracePageBreaks ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending break " <<
@@ -1707,7 +1707,7 @@ void msrSegment::appendBarNumberCheckToSegment (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceBarNumberChecks ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending bar number check " <<
@@ -1743,7 +1743,7 @@ void msrSegment::appendTempoToSegment (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceTempos ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending tempo " <<
@@ -1781,7 +1781,7 @@ void msrSegment::appendRehearsalMarkToSegment (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceRehearsalMarks ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending rehearsalMark " <<
@@ -1817,7 +1817,7 @@ void msrSegment::appendOctaveShiftToSegment (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceOctaveShifts ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending octave shift '" <<
@@ -1854,7 +1854,7 @@ void msrSegment::appendScordaturaToSegment (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceScordaturas ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending scordatura XXX " <<
@@ -1892,7 +1892,7 @@ void msrSegment::appendAccordionRegistrationToSegment (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceSegments ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending accordion registration " <<
@@ -1931,7 +1931,7 @@ void msrSegment::appendHarpPedalsTuningToSegment (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceSegments ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending staff pedals tuning " <<
@@ -1970,7 +1970,7 @@ void msrSegment::padUpToMeasurePositionInSegment (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasurePositions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Padding up to whole notes '" << wholeNotes <<
@@ -2047,7 +2047,7 @@ void msrSegment::backupByWholeNotesStepLengthInSegment (
       ||
     gTraceOahGroup->getTraceMeasures ()
   ) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Backup by a '" <<
@@ -2082,7 +2082,7 @@ void msrSegment::appendPaddingNoteToSegment (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceNotes ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending padding note" <<
@@ -2134,7 +2134,7 @@ void msrSegment::appendMeasureToSegment (const S_msrMeasure& measure)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasures ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending measure '" << measureNumber <<
@@ -2233,7 +2233,7 @@ void msrSegment::prependMeasureToSegment (const S_msrMeasure& measure)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasures ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Prepending measure " << measureNumber <<
@@ -2296,7 +2296,7 @@ void msrSegment::appendMultipleFullBarRestsToSegment (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceBarLines ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending multiple full-bar rests " << multipleFullBarRests->asString () <<
@@ -2321,7 +2321,7 @@ void msrSegment::prependBarLineToSegment (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceBarLines ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Prepending barLine " << barLine->asString () <<
@@ -2357,7 +2357,7 @@ void msrSegment::appendBarLineToSegment (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceBarLines ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending barLine " << barLine->asString () <<
@@ -2393,7 +2393,7 @@ void msrSegment::appendBarCheckToSegment (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceBarChecks ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending bar check " << barCheck->asString () <<
@@ -2424,7 +2424,7 @@ void msrSegment::appendVoiceStaffChangeToSegment (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceStaffChanges ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending voice staff change " <<
@@ -2456,7 +2456,7 @@ void msrSegment::appendVoiceStaffChangeToSegment (
 
 void msrSegment::appendNoteToSegment (
   const S_msrNote&       note,
-  const msrWholeNotes& partMeasurePosition)
+  const msrWholeNotes& partDrawingMeasurePosition)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceNotes ()) {
@@ -2477,7 +2477,7 @@ void msrSegment::appendNoteToSegment (
   fSegmentLastMeasure->
     appendNoteToMeasure (
       note,
-      partMeasurePosition);
+      partDrawingMeasurePosition);
 }
 
 void msrSegment::appendNoteToSegmentClone (const S_msrNote& note)
@@ -2491,7 +2491,7 @@ void msrSegment::appendDoubleTremoloToSegment ( // JMI
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceTremolos ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending double tremolo " <<
@@ -2641,7 +2641,7 @@ void msrSegment::removeNoteFromSegment (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceNotes ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Removing note " <<
@@ -2692,7 +2692,7 @@ void msrSegment::removeElementFromSegment (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceSegments ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Removing element " <<
@@ -2739,7 +2739,7 @@ S_msrMeasure msrSegment::fetchLastMeasureFromSegment (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasures ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Fetching last measure from segment '" <<
@@ -2808,7 +2808,7 @@ S_msrMeasure msrSegment::removeLastMeasureFromSegment (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasures ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Removing last measure from segment '" <<
@@ -2949,7 +2949,7 @@ S_msrMeasure msrSegment::removeLastMeasureFromSegment (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasures ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "The removed measure contains:" <<
@@ -2981,7 +2981,7 @@ void msrSegment::finalizeAllTheMeasuresOfSegment ( // superflous JMI ???
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceVoices ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Finalizing all the measures of segment '" <<
@@ -3007,7 +3007,7 @@ void msrSegment::finalizeAllTheMeasuresOfSegment ( // superflous JMI ???
 void msrSegment::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -3026,7 +3026,7 @@ void msrSegment::acceptIn (basevisitor* v)
         S_msrSegment elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -3045,7 +3045,7 @@ void msrSegment::acceptIn (basevisitor* v)
 void msrSegment::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -3064,7 +3064,7 @@ void msrSegment::acceptOut (basevisitor* v)
         S_msrSegment elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -3083,7 +3083,7 @@ void msrSegment::acceptOut (basevisitor* v)
 void msrSegment::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -3103,8 +3103,8 @@ void msrSegment::browseData (basevisitor* v)
   } // for
 
 #ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% <== msrSegment::browseData ()" <<

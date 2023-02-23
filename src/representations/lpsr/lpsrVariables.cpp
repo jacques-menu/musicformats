@@ -49,8 +49,8 @@ lpsrVariableUseCommand::~lpsrVariableUseCommand()
 void lpsrVariableUseCommand::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
-		std::stringstream ss;
+  if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% ==> lpsrVariableUseCommand::acceptIn()" <<
@@ -68,7 +68,7 @@ void lpsrVariableUseCommand::acceptIn (basevisitor* v)
         S_lpsrVariableUseCommand elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
+        if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -87,8 +87,8 @@ void lpsrVariableUseCommand::acceptIn (basevisitor* v)
 void lpsrVariableUseCommand::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
-		std::stringstream ss;
+  if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% ==> lpsrVariableUseCommand::acceptOut()" <<
@@ -106,7 +106,7 @@ void lpsrVariableUseCommand::acceptOut (basevisitor* v)
         S_lpsrVariableUseCommand elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
+        if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
           std::stringstream ss;
 
           ss <<

@@ -52,7 +52,7 @@ namespace MusicFormats
 
 //_______________________________________________________________________________
 EXP mfMusicformatsErrorKind msrScore2lilypondWithHandler (
-  S_msrScore          theMsrScore,
+  const S_msrScore&   theMsrScore,
   mfPassIDKind        passID_A,
   std::string         passDescription_A,
   mfPassIDKind        passID_B,
@@ -63,7 +63,7 @@ EXP mfMusicformatsErrorKind msrScore2lilypondWithHandler (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Translating an MSR score to LilyPond in \"" <<
@@ -97,8 +97,8 @@ EXP mfMusicformatsErrorKind msrScore2lilypondWithHandler (
       theLpsrScore =
         translateMsrToLpsr (
           theMsrScore,
-          gGlobalMsrOahGroup,
-          gGlobalLpsrOahGroup,
+          gMsrOahGroup,
+          gLpsrOahGroup,
           passID_A,
           passDescription_A,
           createMsr2lilypondConverterComponent ());
@@ -160,8 +160,8 @@ EXP mfMusicformatsErrorKind msrScore2lilypondWithHandler (
       try {
         translateLpsrToLilypond (
           theLpsrScore,
-          gGlobalMsrOahGroup,
-          gGlobalLpsrOahGroup,
+          gMsrOahGroup,
+          gLpsrOahGroup,
           passID_B,
           passDescription_B,
           lilypondStandardOutputStream);
@@ -236,8 +236,8 @@ EXP mfMusicformatsErrorKind msrScore2lilypondWithHandler (
       try {
         translateLpsrToLilypond (
           theLpsrScore,
-          gGlobalMsrOahGroup,
-          gGlobalLpsrOahGroup,
+          gMsrOahGroup,
+          gLpsrOahGroup,
           passID_B,
           passDescription_B,
           lilypondFileOutputStream);

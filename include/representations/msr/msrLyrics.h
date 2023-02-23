@@ -171,7 +171,7 @@ class EXP msrSyllable : public msrMeasureElement
                               { return fSyllableStanzaNumber; }
 
     // syllable whole notes
-    msrWholeNotes          getSyllableWholeNotes () const
+    msrWholeNotes         getSyllableWholeNotes () const
                               { return fSyllableWholeNotes; }
 
     // syllable tuplet factor
@@ -249,7 +249,7 @@ class EXP msrSyllable : public msrMeasureElement
     std::string           fSyllableStanzaNumber;
 
     // syllable whole notes
-    msrWholeNotes          fSyllableWholeNotes;
+    msrWholeNotes         fSyllableWholeNotes;
 
     // syllable tuplet factor
     msrTupletFactor       fSyllableTupletFactor;
@@ -440,12 +440,12 @@ class EXP msrStanza : public msrElement
 
     // contents
     std::vector<S_msrSyllable>
-    										  fSyllables;
+                          fSyllables;
 
     Bool                  fStanzaTextPresent;
 
     // measure whole notes
-    msrWholeNotes          fStanzaMeasureWholeNotes;
+    msrWholeNotes         fStanzaMeasureWholeNotes;
 };
 typedef SMARTP<msrStanza> S_msrStanza;
 EXP std::ostream& operator << (std::ostream& os, const S_msrStanza& elt);

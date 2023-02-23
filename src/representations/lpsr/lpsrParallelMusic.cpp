@@ -89,8 +89,8 @@ lpsrParallelMusicBLock::~lpsrParallelMusicBLock ()
 void lpsrParallelMusicBLock::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
-		std::stringstream ss;
+  if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% ==> lpsrParallelMusicBLock::acceptIn ()" <<
@@ -108,7 +108,7 @@ void lpsrParallelMusicBLock::acceptIn (basevisitor* v)
         S_lpsrParallelMusicBLock elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
+        if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -127,8 +127,8 @@ void lpsrParallelMusicBLock::acceptIn (basevisitor* v)
 void lpsrParallelMusicBLock::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
-		std::stringstream ss;
+  if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% ==> lpsrParallelMusicBLock::acceptOut ()" <<
@@ -146,7 +146,7 @@ void lpsrParallelMusicBLock::acceptOut (basevisitor* v)
         S_lpsrParallelMusicBLock elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
+        if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -165,8 +165,8 @@ void lpsrParallelMusicBLock::acceptOut (basevisitor* v)
 void lpsrParallelMusicBLock::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
-		std::stringstream ss;
+  if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% ==> lpsrParallelMusicBLock::browseData ()" <<
@@ -190,8 +190,8 @@ void lpsrParallelMusicBLock::browseData (basevisitor* v)
   } // for
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
-		std::stringstream ss;
+  if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% <== lpsrParallelMusicBLock::browseData ()" <<

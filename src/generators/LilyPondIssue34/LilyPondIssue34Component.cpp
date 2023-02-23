@@ -87,7 +87,7 @@ S_mfcGeneratorComponent createLilyPondIssue34GeneratorComponent ()
 
 #ifdef MF_TRACE_IS_ENABLED
     if (gEarlyOptions.getTraceEarlyOptions ()) {
-	  	std::stringstream ss;
+      std::stringstream ss;
 
       ss <<
         "Creating the LilyPondIssue34 component" <<

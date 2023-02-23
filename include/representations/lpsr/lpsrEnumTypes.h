@@ -20,7 +20,7 @@
 #include "msrNotesDurations.h"
 #include "msrOctaves.h"
 #include "msrPitchesNames.h"
-#include "msrWholeNotes.h"
+// #include "msrWholeNotes.h"
 
 
 namespace MusicFormats
@@ -114,36 +114,36 @@ void initializeLpsrChordsLanguageKindsMap ();
 // whole notes
 //______________________________________________________________________________
 std::string wholeNotesAsLilypondString (
-  int             inputLineNumber,
+  int                  inputLineNumber,
   const msrWholeNotes& wholeNotes,
-  int&            dotsNumber);
+  int&                 dotsNumber);
 
 std::string wholeNotesAsLilypondString (
-  int             inputLineNumber,
+  int                  inputLineNumber,
   const msrWholeNotes& wholeNotes);
 
 // dotted durations
 //______________________________________________________________________________
 
 std::string dottedNotesDurationAsLilypondString (
-  int               inputLineNumber,
+  int                    inputLineNumber,
   msrDottedNotesDuration dottedNotesDuration);
 
 std::string dottedNotesDurationAsLilypondStringWithoutBackSlash (
-  int               inputLineNumber,
+  int                    inputLineNumber,
   msrDottedNotesDuration dottedNotesDuration);
 
 // rests measures
 //______________________________________________________________________________
 std::string multipleFullBarRestsWholeNoteAsLilypondString (
-  int             inputLineNumber,
+  int                  inputLineNumber,
   const msrWholeNotes& wholeNotes);
 
 // texts lists
 //______________________________________________________________________________
 EXP void writeTextsListAsLilypondString (
   const std::list<std::string>& textsList,
-  std::ostream&            os);
+  std::ostream&                 os);
 
 // pitches and octaves
 //______________________________________________________________________________

@@ -51,7 +51,7 @@ S_msrDivisions msrDivisions::createDivisionsNewbornClone ()
 {
 #ifdef MF_TRACE_IS_ENABLED
  if (gGlobalMxsrOahGroup->getTraceDivisions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating a newborn clone of divisions '" <<
@@ -97,7 +97,7 @@ void msrDivisions::initializeDivisions ()
       &&
    ! gEarlyOptions.getEarlyQuietOption ()
   ) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Initializing divisions" <<
@@ -279,7 +279,7 @@ std::string msrDivisions::divisionsAsMsrString (
   if (gGlobalMxsrOahGroup->getTraceDivisions ()) {
     const int fieldWidth = 16;
 
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
      "--> divisionsAsMsrString ():" <<
@@ -391,9 +391,9 @@ std::string msrDivisions::divisionsAsMsrString (
     if (remainingDivisions < nextDivisionsInList) {
       // the suffix is a multiplication factor
       mfRational
-      	r (
-        	divisions,
-        	baseNotesDurationDivisions);
+        r (
+          divisions,
+          baseNotesDurationDivisions);
 
 #ifdef MF_TRACE_IS_ENABLED
       if (gGlobalMxsrOahGroup->getTraceDivisions ()) {
@@ -487,7 +487,7 @@ std::string msrDivisions::divisionsAsMsrString (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceDivisions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "<-- divisionsAsMsrString (): returns " << result <<
@@ -544,7 +544,7 @@ std::string tupletWholeNotesAsMsrString (
 void msrDivisions::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -563,7 +563,7 @@ void msrDivisions::acceptIn (basevisitor* v)
         S_msrDivisions elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -582,7 +582,7 @@ void msrDivisions::acceptIn (basevisitor* v)
 void msrDivisions::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -601,7 +601,7 @@ void msrDivisions::acceptOut (basevisitor* v)
         S_msrDivisions elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<

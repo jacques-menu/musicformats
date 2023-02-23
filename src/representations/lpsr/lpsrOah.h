@@ -860,7 +860,12 @@ class EXP lpsrOahGroup : public oahGroup
 typedef SMARTP<lpsrOahGroup> S_lpsrOahGroup;
 EXP std::ostream& operator << (std::ostream& os, const S_lpsrOahGroup& elt);
 
-EXP extern S_lpsrOahGroup gGlobalLpsrOahGroup;
+//______________________________________________________________________________
+// hidden global LPSR OAH group variable
+EXP S_lpsrOahGroup getGlobalLpsrOahGroup ();
+
+// a handy shortcut
+#define gLpsrOahGroup getGlobalLpsrOahGroup ()
 
 //______________________________________________________________________________
 EXP S_lpsrOahGroup createGlobalLpsrOahGroup ();
