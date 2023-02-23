@@ -77,7 +77,7 @@ void msrBeatRepeatElement::appendSegmentToBeatRepeatElementsList ( // JMI ???
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceVoices ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending segment '" << segment <<
@@ -110,7 +110,7 @@ void msrBeatRepeatElement::appendBeatRepeatToBeatRepeatElementsList (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceVoices ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending beatRepeat '" << beatRepeat <<
@@ -143,7 +143,7 @@ void msrBeatRepeatElement::appendVoiceElementToBeatRepeatElementsList (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceVoices ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending voice element '" << voiceElement <<
@@ -253,7 +253,7 @@ S_msrNote msrBeatRepeatElement::fetchBeatRepeatElementFirstNonGraceNote () const
 void msrBeatRepeatElement::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -272,7 +272,7 @@ void msrBeatRepeatElement::acceptIn (basevisitor* v)
         S_msrBeatRepeatElement elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -291,7 +291,7 @@ void msrBeatRepeatElement::acceptIn (basevisitor* v)
 void msrBeatRepeatElement::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -310,7 +310,7 @@ void msrBeatRepeatElement::acceptOut (basevisitor* v)
         S_msrBeatRepeatElement elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -523,7 +523,7 @@ void msrBeatRepeatPattern::setBeatRepeatPatternSegment (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceBeatRepeats ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Setting measures repeat pattern segment containing " <<
@@ -570,7 +570,7 @@ int msrBeatRepeatPattern::fetchMeasuresNumber () const
 void msrBeatRepeatPattern::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -589,7 +589,7 @@ void msrBeatRepeatPattern::acceptIn (basevisitor* v)
         S_msrBeatRepeatPattern elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -608,7 +608,7 @@ void msrBeatRepeatPattern::acceptIn (basevisitor* v)
 void msrBeatRepeatPattern::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -627,7 +627,7 @@ void msrBeatRepeatPattern::acceptOut (basevisitor* v)
         S_msrBeatRepeatPattern elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -646,7 +646,7 @@ void msrBeatRepeatPattern::acceptOut (basevisitor* v)
 void msrBeatRepeatPattern::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -768,7 +768,7 @@ void msrBeatRepeatReplicas::setBeatRepeatReplicasSegment (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceBeatRepeats ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Setting measures repeat replicas segment containing " <<
@@ -815,7 +815,7 @@ int msrBeatRepeatReplicas::fetchMeasuresNumber () const
 void msrBeatRepeatReplicas::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -834,7 +834,7 @@ void msrBeatRepeatReplicas::acceptIn (basevisitor* v)
         S_msrBeatRepeatReplicas elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -853,7 +853,7 @@ void msrBeatRepeatReplicas::acceptIn (basevisitor* v)
 void msrBeatRepeatReplicas::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -872,7 +872,7 @@ void msrBeatRepeatReplicas::acceptOut (basevisitor* v)
         S_msrBeatRepeatReplicas elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -891,7 +891,7 @@ void msrBeatRepeatReplicas::acceptOut (basevisitor* v)
 void msrBeatRepeatReplicas::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -1035,7 +1035,7 @@ S_msrBeatRepeat msrBeatRepeat::createBeatRepeatNewbornClone (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceBeatRepeats ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating a newborn clone of measures repeat '" <<
@@ -1073,7 +1073,7 @@ void msrBeatRepeat::setBeatRepeatPattern (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceBeatRepeats ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Setting measures repeat pattern containing " <<
@@ -1110,7 +1110,7 @@ void msrBeatRepeat::setBeatRepeatReplicas (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceBeatRepeats ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Setting measures repeat replicas containing " <<
@@ -1194,7 +1194,7 @@ int msrBeatRepeat::fetchBeatRepeatReplicasMeasuresNumber () const
 void msrBeatRepeat::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -1213,7 +1213,7 @@ void msrBeatRepeat::acceptIn (basevisitor* v)
         S_msrBeatRepeat elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -1232,7 +1232,7 @@ void msrBeatRepeat::acceptIn (basevisitor* v)
 void msrBeatRepeat::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -1251,7 +1251,7 @@ void msrBeatRepeat::acceptOut (basevisitor* v)
         S_msrBeatRepeat elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -1270,7 +1270,7 @@ void msrBeatRepeat::acceptOut (basevisitor* v)
 void msrBeatRepeat::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -1301,7 +1301,7 @@ void msrBeatRepeat::browseData (basevisitor* v)
 
   if (inhibitBeatRepeatReplicasBrowsing) {
 #ifdef MF_TRACE_IS_ENABLED
-    if (gGlobalMsrOahGroup->getTraceMsrVisitors () || gTraceOahGroup->getTraceBeatRepeats ()) {
+    if (gMsrOahGroup->getTraceMsrVisitors () || gTraceOahGroup->getTraceBeatRepeats ()) {
       gLog <<
         "% ==> visiting measures repeat replicas is inhibited" <<
         std::endl;

@@ -14,8 +14,8 @@
 
 #include <list>
 
+#include "msrNotesDurations.h"
 #include "msrSegmentElements.h"
-#include "msrWholeNotes.h"
 
 
 namespace MusicFormats
@@ -86,7 +86,7 @@ class EXP msrMultipleFullBarRests : public msrSegmentElement
     int                   getMultipleFullBarRestsLastMeasurePuristMeasureNumber () const
                               { return fMultipleFullBarRestsLastMeasurePuristNumber; }
 
-    msrWholeNotes          fetchMultipleFullBarRestsMeasureSoundingNotes () const;
+    msrWholeNotes         fetchMultipleFullBarRestsMeasureSoundingNotes () const;
                             // don't simply multiply duration by number,
                             // may help pin-point errors in representation
   public:

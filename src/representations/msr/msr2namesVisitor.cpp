@@ -70,7 +70,7 @@ void msr2namesVisitor::printNamesFromMsrScore (
 void msr2namesVisitor::visitStart (S_msrScore& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -97,8 +97,8 @@ void msr2namesVisitor::visitEnd (S_msrScore& elt)
   --gIndenter;
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "--> End visiting msrScore" <<
@@ -154,7 +154,7 @@ void msr2namesVisitor::visitEnd (S_msrScore& elt)
 void msr2namesVisitor::visitStart (S_msrPartGroup& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -213,8 +213,8 @@ void msr2namesVisitor::visitEnd (S_msrPartGroup& elt)
   --gIndenter;
 
 #ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "--> End visiting msrPartGroup" <<
@@ -231,7 +231,7 @@ void msr2namesVisitor::visitEnd (S_msrPartGroup& elt)
 void msr2namesVisitor::visitStart (S_msrPart& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -296,8 +296,8 @@ void msr2namesVisitor::visitEnd (S_msrPart& elt)
   --gIndenter;
 
 #ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "--> End visiting msrPart" <<
@@ -314,7 +314,7 @@ void msr2namesVisitor::visitEnd (S_msrPart& elt)
 void msr2namesVisitor::visitStart (S_msrStaff& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -372,8 +372,8 @@ void msr2namesVisitor::visitEnd (S_msrStaff& elt)
   --gIndenter;
 
 #ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "--> End visiting msrStaff" <<
@@ -392,7 +392,7 @@ void msr2namesVisitor::visitEnd (S_msrStaff& elt)
 void msr2namesVisitor::visitStart (S_msrVoice& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -439,8 +439,8 @@ void msr2namesVisitor::visitEnd (S_msrVoice& elt)
   --gIndenter;
 
 #ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "--> End visiting msrVoice" <<

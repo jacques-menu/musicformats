@@ -43,7 +43,7 @@ void lpsrOah2manPage::visitStart (S_lpsrScoreOutputKindAtom& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       std::endl <<
@@ -79,7 +79,7 @@ void lpsrOah2manPage::visitEnd (S_lpsrScoreOutputKindAtom& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       std::endl <<
@@ -100,7 +100,7 @@ void lpsrOah2manPage::visitStart (S_lpsrPitchesLanguageAtom& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       std::endl <<
@@ -136,7 +136,7 @@ void lpsrOah2manPage::visitEnd (S_lpsrPitchesLanguageAtom& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       std::endl <<
@@ -156,7 +156,7 @@ void lpsrOah2manPage::visitStart (S_lpsrChordsLanguageAtom& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       std::endl <<
@@ -192,7 +192,7 @@ void lpsrOah2manPage::visitEnd (S_lpsrChordsLanguageAtom& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       std::endl <<
@@ -212,7 +212,7 @@ void lpsrOah2manPage::visitStart (S_lpsrTransposeAtom& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       std::endl <<
@@ -248,7 +248,7 @@ void lpsrOah2manPage::visitEnd (S_lpsrTransposeAtom& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       std::endl <<

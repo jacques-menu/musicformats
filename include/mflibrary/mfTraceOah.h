@@ -189,8 +189,8 @@ class EXP traceOahGroup : public oahGroup
     Bool                  getTraceStaves () const
                               { return fTraceStaves; }
     // staff details
-    Bool                  getTraceStaffDetails () const
-                              { return fTraceStaffDetails; }
+    Bool                  getTraceStavesDetails () const
+                              { return fTraceStavesDetails; }
     // staff changes
     Bool                  getTraceStaffChanges () const
                               { return fTraceStaffChanges; }
@@ -830,7 +830,7 @@ class EXP traceOahGroup : public oahGroup
     // staves
     Bool                  fTraceStaves;
     // staff details
-    Bool                  fTraceStaffDetails;
+    Bool                  fTraceStavesDetails;
     // staff changes
     Bool                  fTraceStaffChanges;
     // voices

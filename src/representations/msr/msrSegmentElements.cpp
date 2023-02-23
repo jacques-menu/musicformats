@@ -62,7 +62,7 @@ void msrSegmentElement::setSegmentElementSoundingWholeNotes (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceWholeNotes ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Setting measure element sounding whole notes of " <<
@@ -95,8 +95,8 @@ void msrSegmentElement::setSegmentElementSoundingWholeNotes (
 void msrSegmentElement::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% ==> msrSegmentElement::acceptIn ()" <<
@@ -114,7 +114,7 @@ void msrSegmentElement::acceptIn (basevisitor* v)
         S_msrSegmentElement elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -133,8 +133,8 @@ void msrSegmentElement::acceptIn (basevisitor* v)
 void msrSegmentElement::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% ==> msrSegmentElement::acceptOut ()" <<
@@ -152,7 +152,7 @@ void msrSegmentElement::acceptOut (basevisitor* v)
         S_msrSegmentElement elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<

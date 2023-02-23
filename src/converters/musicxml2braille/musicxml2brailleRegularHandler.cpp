@@ -73,7 +73,7 @@ xml2brlRegularHandler::xml2brlRegularHandler (
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptionsDetails ()) {
     // print the options handler initial state
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "xml2brlRegularHandler \"" <<
@@ -95,7 +95,7 @@ void xml2brlRegularHandler::createRegularHandlerGroups ()
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating the regular handler groups for \"" <<
@@ -174,7 +174,7 @@ void xml2brlRegularHandler::createRegularHandlerGroups ()
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "All the regular handler groups for \"" <<
@@ -265,10 +265,8 @@ void xml2brlRegularHandler::createOahRegularGroup ()
   registerAtomInRegularSubgroup ("display-msr2-summary", subGroup);
 
   registerAtomInRegularSubgroup ("display-bsr1", subGroup);
-  registerAtomInRegularSubgroup ("display-bsr1", subGroup);
   registerAtomInRegularSubgroup ("display-bsr1-full", subGroup);
 
-  registerAtomInRegularSubgroup ("display-bsr2", subGroup);
   registerAtomInRegularSubgroup ("display-bsr2", subGroup);
   registerAtomInRegularSubgroup ("display-bsr2-full", subGroup);
 
@@ -1371,7 +1369,7 @@ void xml2brlRegularHandler::checkOptionsAndArguments () const
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "checking options and arguments from argc/argv in \"" <<

@@ -133,8 +133,8 @@ std::ostream& operator << (std::ostream& os, const msrArticulationKind& elt)
 void msrArticulation::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% ==> msrArticulation::acceptIn ()" <<
@@ -152,7 +152,7 @@ void msrArticulation::acceptIn (basevisitor* v)
         S_msrArticulation elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -171,8 +171,8 @@ void msrArticulation::acceptIn (basevisitor* v)
 void msrArticulation::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% ==> msrArticulation::acceptOut ()" <<
@@ -190,7 +190,7 @@ void msrArticulation::acceptOut (basevisitor* v)
         S_msrArticulation elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -274,8 +274,8 @@ msrFermata::~msrFermata ()
 void msrFermata::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% ==> msrFermata::acceptIn ()" <<
@@ -293,7 +293,7 @@ void msrFermata::acceptIn (basevisitor* v)
         S_msrFermata elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -312,8 +312,8 @@ void msrFermata::acceptIn (basevisitor* v)
 void msrFermata::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% ==> msrFermata::acceptOut ()" <<
@@ -331,7 +331,7 @@ void msrFermata::acceptOut (basevisitor* v)
         S_msrFermata elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -477,8 +477,8 @@ std::string msrArpeggiato::arpeggiatoDirectionKindAsString () const
 void msrArpeggiato::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% ==> msrArpeggiato::acceptIn ()" <<
@@ -496,7 +496,7 @@ void msrArpeggiato::acceptIn (basevisitor* v)
         S_msrArpeggiato elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -515,8 +515,8 @@ void msrArpeggiato::acceptIn (basevisitor* v)
 void msrArpeggiato::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% ==> msrArpeggiato::acceptOut ()" <<
@@ -534,7 +534,7 @@ void msrArpeggiato::acceptOut (basevisitor* v)
         S_msrArpeggiato elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -649,8 +649,8 @@ std::ostream& operator << (std::ostream& os, const msrNonArpeggiatoTypeKind& elt
 void msrNonArpeggiato::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% ==> msrNonArpeggiato::acceptIn ()" <<
@@ -668,7 +668,7 @@ void msrNonArpeggiato::acceptIn (basevisitor* v)
         S_msrNonArpeggiato elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -687,8 +687,8 @@ void msrNonArpeggiato::acceptIn (basevisitor* v)
 void msrNonArpeggiato::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% ==> msrNonArpeggiato::acceptOut ()" <<
@@ -705,7 +705,7 @@ void msrNonArpeggiato::acceptOut (basevisitor* v)
         S_msrNonArpeggiato elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<

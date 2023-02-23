@@ -110,8 +110,8 @@ S_bsrCellsList bsrPageHeading::buildCellsList () const
 void bsrPageHeading::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
-		std::stringstream ss;
+  if (gBsrOahGroup->getTraceBsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% --> End visiting bsrTranscriptionNotesElement" <<
@@ -130,7 +130,7 @@ void bsrPageHeading::acceptIn (basevisitor* v)
         S_bsrPageHeading elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
+        if (gBsrOahGroup->getTraceBsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -149,8 +149,8 @@ void bsrPageHeading::acceptIn (basevisitor* v)
 void bsrPageHeading::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
-		std::stringstream ss;
+  if (gBsrOahGroup->getTraceBsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% --> End visiting bsrTranscriptionNotesElement" <<
@@ -169,7 +169,7 @@ void bsrPageHeading::acceptOut (basevisitor* v)
         S_bsrPageHeading elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
+        if (gBsrOahGroup->getTraceBsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -188,8 +188,8 @@ void bsrPageHeading::acceptOut (basevisitor* v)
 void bsrPageHeading::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
-		std::stringstream ss;
+  if (gBsrOahGroup->getTraceBsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% --> End visiting bsrTranscriptionNotesElement" <<
@@ -209,8 +209,8 @@ void bsrPageHeading::browseData (basevisitor* v)
   }
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
-		std::stringstream ss;
+  if (gBsrOahGroup->getTraceBsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% --> End visiting bsrTranscriptionNotesElement" <<

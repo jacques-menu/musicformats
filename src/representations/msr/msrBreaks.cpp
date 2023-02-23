@@ -99,7 +99,7 @@ msrLineBreak::msrLineBreak (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceLineBreaks ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Constructing a break before measure " << fNextBarNumber <<
@@ -152,7 +152,7 @@ void msrLineBreak::setLineBreakUpLinkToMeasure (
 void msrLineBreak::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -171,7 +171,7 @@ void msrLineBreak::acceptIn (basevisitor* v)
         S_msrLineBreak elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -190,7 +190,7 @@ void msrLineBreak::acceptIn (basevisitor* v)
 void msrLineBreak::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -209,7 +209,7 @@ void msrLineBreak::acceptOut (basevisitor* v)
         S_msrLineBreak elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -316,7 +316,7 @@ msrPageBreak::msrPageBreak (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTracePageBreaks ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Constructing a page break" <<
@@ -371,7 +371,7 @@ void msrPageBreak::setPageBreakUpLinkToMeasure (
 void msrPageBreak::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -390,7 +390,7 @@ void msrPageBreak::acceptIn (basevisitor* v)
         S_msrPageBreak elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -409,7 +409,7 @@ void msrPageBreak::acceptIn (basevisitor* v)
 void msrPageBreak::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -428,7 +428,7 @@ void msrPageBreak::acceptOut (basevisitor* v)
         S_msrPageBreak elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<

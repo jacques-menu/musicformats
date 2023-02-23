@@ -19,7 +19,7 @@
 #include "mfStringsHandling.h"
 
 #include "msrMeasuresSlices.h"
-#include "msrWholeNotes.h"
+// #include "msrWholeNotes.h"
 
 #include "oahOah.h"
 
@@ -319,7 +319,7 @@ S_msrMeasuresSlice msrMeasuresSlice::createMeasuresSliceShallowCopy ()
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasuresSlices ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating a shallow copy of measures slice " <<
@@ -360,7 +360,7 @@ void msrMeasuresSlice::appendMeasureToMeasureSlice (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasuresSlices ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending measure " <<
@@ -384,7 +384,7 @@ void msrMeasuresSlice::appendSliceMeasuresFrom (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasuresSlices ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending measures from measures slice " <<
@@ -447,7 +447,7 @@ void msrMeasuresSlice::collectNonSkipNotesFromMeasuresSliceMeasures ()
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasuresSlices ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Collecting the notes from the measures slices in " <<
@@ -572,7 +572,7 @@ void msrMeasuresSlice::buildTheSimutaneousNotesChunksList ()
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasuresSlices ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Building the simultaneous notes chunks list in " <<
@@ -645,7 +645,7 @@ void msrMeasuresSlice::identifySoloNotesAndRestsInMeasuresSlice ()
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasuresSlices ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Identifying solo notes and rests in measures slice " <<
@@ -1150,7 +1150,7 @@ S_msrMeasuresSlicesSequence msrMeasuresSlicesSequence::createMeasuresSlicesSeque
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasuresSlices ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating a shallow copy of measures slices sequence " <<
@@ -1192,7 +1192,7 @@ void msrMeasuresSlicesSequence::appendMeasuresSliceToSequence (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasuresSlices ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending measures slice " <<
@@ -1221,7 +1221,7 @@ S_msrMeasuresSlicesSequence msrMeasuresSlicesSequence::mergeWithMeasuresSlicesSe
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasuresSlices ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Merging measures slices sequence " <<
@@ -1241,7 +1241,7 @@ S_msrMeasuresSlicesSequence msrMeasuresSlicesSequence::mergeWithMeasuresSlicesSe
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasuresSlices ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "---> sequenceSize: " <<
@@ -1279,7 +1279,7 @@ S_msrMeasuresSlicesSequence msrMeasuresSlicesSequence::mergeWithMeasuresSlicesSe
 
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceMeasuresSlices ()) {
-	  	std::stringstream ss;
+      std::stringstream ss;
 
       ss <<
         "mergeWithMeasuresSlicesSequence()" <<
@@ -1368,7 +1368,7 @@ S_msrMeasuresSlicesSequence msrMeasuresSlicesSequence::mergeWithMeasuresSlicesSe
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasuresSlices ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "---> mergeWithMeasuresSlicesSequence()" <<
@@ -1389,7 +1389,7 @@ void msrMeasuresSlicesSequence::identifySoloNotesAndRests ()
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasuresSlices ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Identifying solo notes and rests in measures slices sequence " <<

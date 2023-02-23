@@ -122,15 +122,15 @@ int lpsrNumberOfDots (int n)
 
 //_______________________________________________________________________________
 std::string wholeNotesAsLilypondString (
-  int             inputLineNumber,
+  int                  inputLineNumber,
   const msrWholeNotes& wholeNotes,
-  int&            dotsNumber)
+  int&                 dotsNumber)
 {
   // this algorithm is inspired by musicxml2ly
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceWholeNotes ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "--> wholeNotesAsLilypondString() 1 -------------------------------------" <<
@@ -151,7 +151,7 @@ std::string wholeNotesAsLilypondString (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceWholeNotes ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "--> numerator:   " << numerator <<
@@ -215,7 +215,7 @@ std::string wholeNotesAsLilypondString (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceWholeNotesDetails ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
 //       "--> rationalHasBeenSimplified: " <<
@@ -246,7 +246,7 @@ std::string wholeNotesAsLilypondString (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceWholeNotesDetails ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "--> numeratorDots " << ": " << numeratorDots <<
@@ -374,7 +374,7 @@ std::string wholeNotesAsLilypondString (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceWholeNotesDetails ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "--> denominatorNotesDurationLog" << ": " <<
@@ -430,7 +430,7 @@ std::string wholeNotesAsLilypondString (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceWholeNotesDetails ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "--> numerator" << ": " <<
@@ -532,7 +532,7 @@ std::string wholeNotesAsLilypondString (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceWholeNotes ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "--> numerator " << ": " <<
@@ -600,7 +600,7 @@ std::string wholeNotesAsLilypondString (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceWholeNotesDetails ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "--> wholeNotesAsLilypondString() 2 -------------------------------------" <<
@@ -621,7 +621,7 @@ std::string wholeNotesAsLilypondString (
 }
 
 std::string wholeNotesAsLilypondString (
-  int             inputLineNumber,
+  int                  inputLineNumber,
   const msrWholeNotes& wholeNotes)
 {
   int dotsNumber; // not used
@@ -635,7 +635,7 @@ std::string wholeNotesAsLilypondString (
 
 //_______________________________________________________________________________
 std::string dottedNotesDurationAsLilypondString (
-  int               inputLineNumber,
+  int                    inputLineNumber,
   msrDottedNotesDuration dottedNotesDuration)
 {
   return
@@ -646,7 +646,7 @@ std::string dottedNotesDurationAsLilypondString (
 }
 
 std::string dottedNotesDurationAsLilypondStringWithoutBackSlash (
-  int               inputLineNumber,
+  int                    inputLineNumber,
   msrDottedNotesDuration dottedNotesDuration)
 {
   std::string result =
@@ -664,7 +664,7 @@ std::string dottedNotesDurationAsLilypondStringWithoutBackSlash (
 
 //_______________________________________________________________________________
 std::string multipleFullBarRestsWholeNoteAsLilypondString (
-  int             inputLineNumber,
+  int                  inputLineNumber,
   const msrWholeNotes& wholeNotes)
 {
   std::stringstream ss;
@@ -694,7 +694,7 @@ std::string multipleFullBarRestsWholeNoteAsLilypondString (
 //_______________________________________________________________________________
 void writeTextsListAsLilypondString (
   const std::list<std::string>& textsList,
-  std::ostream&            os)
+  std::ostream&                 os)
 {
   std::string contents;
 

@@ -298,7 +298,7 @@ void initializeMSDLBasicTypes ()
         &&
      ! gEarlyOptions.getEarlyQuietOption ()
     ) {
-	  	std::stringstream ss;
+      std::stringstream ss;
 
       ss <<
         "Initializing MSDL basic types handling" <<

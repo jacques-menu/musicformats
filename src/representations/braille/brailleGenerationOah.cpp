@@ -97,7 +97,7 @@ void brailleOutputKindAtom::setImplicitVariable (std::ostream& os)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "==> handling atom '" <<
@@ -125,14 +125,14 @@ void brailleOutputKindAtom::setImplicitVariable (std::ostream& os)
     fBrailleOutputKindVariable = fBrailleOutputKindValue;
   }
 
-	fSelected = true;
+  fSelected = true;
 }
 
 void brailleOutputKindAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> brailleOutputKindAtom::acceptIn ()" <<
@@ -170,7 +170,7 @@ void brailleOutputKindAtom::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> brailleOutputKindAtom::acceptOut ()" <<
@@ -208,7 +208,7 @@ void brailleOutputKindAtom::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> brailleOutputKindAtom::browseData ()" <<
@@ -291,8 +291,8 @@ void brailleOutputKindAtom::displayAtomWithVariableOptionsValues (
     case oahEarlyOptionKind::kEarlyOptionNo:
       break;
     case oahEarlyOptionKind::kEarlyOptionYes:
-			os <<
-				", early";
+      os <<
+        ", early";
       break;
   } // switch
   if (fSelected) {
@@ -360,7 +360,7 @@ void brailleUTFKindAtom::applyAtomWithValue (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "==> handling atom '" << fetchNames () << "; which is of type 'brailleUTFKindAtom'" <<
@@ -404,7 +404,7 @@ void brailleUTFKindAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> brailleUTFKindAtom::acceptIn ()" <<
@@ -442,7 +442,7 @@ void brailleUTFKindAtom::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> brailleUTFKindAtom::acceptOut ()" <<
@@ -480,7 +480,7 @@ void brailleUTFKindAtom::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> brailleUTFKindAtom::browseData ()" <<
@@ -557,8 +557,8 @@ void brailleUTFKindAtom::displayAtomWithVariableOptionsValues (
     case oahEarlyOptionKind::kEarlyOptionNo:
       break;
     case oahEarlyOptionKind::kEarlyOptionYes:
-			os <<
-				", early";
+      os <<
+        ", early";
       break;
   } // switch
   if (fSelected) {
@@ -626,7 +626,7 @@ void brailleByteOrderingKindAtom::applyAtomWithValue (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "==> handling atom '" << fetchNames () << "; which is of type 'brailleByteOrderingKindAtom'" <<
@@ -670,7 +670,7 @@ void brailleByteOrderingKindAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> brailleByteOrderingKindAtom::acceptIn ()" <<
@@ -708,7 +708,7 @@ void brailleByteOrderingKindAtom::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> brailleByteOrderingKindAtom::acceptOut ()" <<
@@ -746,7 +746,7 @@ void brailleByteOrderingKindAtom::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> brailleByteOrderingKindAtom::browseData ()" <<
@@ -823,8 +823,8 @@ void brailleByteOrderingKindAtom::displayAtomWithVariableOptionsValues (
     case oahEarlyOptionKind::kEarlyOptionNo:
       break;
     case oahEarlyOptionKind::kEarlyOptionYes:
-			os <<
-				", early";
+      os <<
+        ", early";
       break;
   } // switch
   if (fSelected) {
@@ -1169,7 +1169,7 @@ void brailleGenerationOahGroup::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> brailleGenerationOahGroup::acceptIn ()" <<
@@ -1207,7 +1207,7 @@ void brailleGenerationOahGroup::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> brailleGenerationOahGroup::acceptOut ()" <<
@@ -1245,7 +1245,7 @@ void brailleGenerationOahGroup::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> brailleGenerationOahGroup::browseData ()" <<
@@ -1329,7 +1329,7 @@ S_brailleGenerationOahGroup createGlobalBrailleGenerationOahGroup ()
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating global bsr2braille OAH group" <<

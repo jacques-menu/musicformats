@@ -482,7 +482,7 @@ S_msrMargin msrPageLayout::getSingleBottomMargin () const
 void msrPageLayout::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -501,7 +501,7 @@ void msrPageLayout::acceptIn (basevisitor* v)
         S_msrPageLayout elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -520,7 +520,7 @@ void msrPageLayout::acceptIn (basevisitor* v)
 void msrPageLayout::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -539,7 +539,7 @@ void msrPageLayout::acceptOut (basevisitor* v)
         S_msrPageLayout elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -691,7 +691,7 @@ msrSystemLayout::~msrSystemLayout ()
 void msrSystemLayout::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -710,7 +710,7 @@ void msrSystemLayout::acceptIn (basevisitor* v)
         S_msrSystemLayout elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -729,7 +729,7 @@ void msrSystemLayout::acceptIn (basevisitor* v)
 void msrSystemLayout::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -748,7 +748,7 @@ void msrSystemLayout::acceptOut (basevisitor* v)
         S_msrSystemLayout elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -885,7 +885,7 @@ msrSystemDividers::~msrSystemDividers ()
 void msrSystemDividers::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -904,7 +904,7 @@ void msrSystemDividers::acceptIn (basevisitor* v)
         S_msrSystemDividers elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -923,7 +923,7 @@ void msrSystemDividers::acceptIn (basevisitor* v)
 void msrSystemDividers::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -942,7 +942,7 @@ void msrSystemDividers::acceptOut (basevisitor* v)
         S_msrSystemDividers elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -1033,7 +1033,7 @@ msrStaffLayout::~msrStaffLayout ()
 void msrStaffLayout::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -1052,7 +1052,7 @@ void msrStaffLayout::acceptIn (basevisitor* v)
         S_msrStaffLayout elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -1071,7 +1071,7 @@ void msrStaffLayout::acceptIn (basevisitor* v)
 void msrStaffLayout::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -1090,7 +1090,7 @@ void msrStaffLayout::acceptOut (basevisitor* v)
         S_msrStaffLayout elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -1184,7 +1184,7 @@ msrMeasureLayout::~msrMeasureLayout ()
 void msrMeasureLayout::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -1203,7 +1203,7 @@ void msrMeasureLayout::acceptIn (basevisitor* v)
         S_msrMeasureLayout elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -1222,7 +1222,7 @@ void msrMeasureLayout::acceptIn (basevisitor* v)
 void msrMeasureLayout::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -1241,7 +1241,7 @@ void msrMeasureLayout::acceptOut (basevisitor* v)
         S_msrMeasureLayout elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -1327,7 +1327,7 @@ msrLineWidth::msrLineWidth (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMusicXMLPrintLayouts ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating a print layout " <<
@@ -1349,7 +1349,7 @@ msrLineWidth::~msrLineWidth ()
 void msrLineWidth::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -1368,7 +1368,7 @@ void msrLineWidth::acceptIn (basevisitor* v)
         S_msrLineWidth elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -1387,7 +1387,7 @@ void msrLineWidth::acceptIn (basevisitor* v)
 void msrLineWidth::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -1406,7 +1406,7 @@ void msrLineWidth::acceptOut (basevisitor* v)
         S_msrLineWidth elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -1512,7 +1512,7 @@ msrNoteSize::msrNoteSize (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMusicXMLPrintLayouts ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating a print layout " <<
@@ -1534,7 +1534,7 @@ msrNoteSize::~msrNoteSize ()
 void msrNoteSize::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -1553,7 +1553,7 @@ void msrNoteSize::acceptIn (basevisitor* v)
         S_msrNoteSize elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -1572,7 +1572,7 @@ void msrNoteSize::acceptIn (basevisitor* v)
 void msrNoteSize::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -1591,7 +1591,7 @@ void msrNoteSize::acceptOut (basevisitor* v)
         S_msrNoteSize elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -1684,7 +1684,7 @@ msrDistance::msrDistance (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMusicXMLPrintLayouts ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating a print layout " <<
@@ -1706,7 +1706,7 @@ msrDistance::~msrDistance ()
 void msrDistance::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -1725,7 +1725,7 @@ void msrDistance::acceptIn (basevisitor* v)
         S_msrDistance elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -1744,7 +1744,7 @@ void msrDistance::acceptIn (basevisitor* v)
 void msrDistance::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -1763,7 +1763,7 @@ void msrDistance::acceptOut (basevisitor* v)
         S_msrDistance elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -1856,7 +1856,7 @@ msrGlyph::msrGlyph (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMusicXMLPrintLayouts ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating a print layout " <<
@@ -1878,7 +1878,7 @@ msrGlyph::~msrGlyph ()
 void msrGlyph::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -1897,7 +1897,7 @@ void msrGlyph::acceptIn (basevisitor* v)
         S_msrGlyph elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -1916,7 +1916,7 @@ void msrGlyph::acceptIn (basevisitor* v)
 void msrGlyph::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -1935,7 +1935,7 @@ void msrGlyph::acceptOut (basevisitor* v)
         S_msrGlyph elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -2028,7 +2028,7 @@ msrOtherAppearance::msrOtherAppearance (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMusicXMLPrintLayouts ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating a print layout " <<
@@ -2050,7 +2050,7 @@ msrOtherAppearance::~msrOtherAppearance ()
 void msrOtherAppearance::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -2069,7 +2069,7 @@ void msrOtherAppearance::acceptIn (basevisitor* v)
         S_msrOtherAppearance elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -2088,7 +2088,7 @@ void msrOtherAppearance::acceptIn (basevisitor* v)
 void msrOtherAppearance::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -2107,7 +2107,7 @@ void msrOtherAppearance::acceptOut (basevisitor* v)
         S_msrOtherAppearance elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -2194,7 +2194,7 @@ msrAppearance::msrAppearance (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMusicXMLPrintLayouts ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating an appearance" <<
@@ -2213,7 +2213,7 @@ msrAppearance::~msrAppearance ()
 void msrAppearance::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -2232,7 +2232,7 @@ void msrAppearance::acceptIn (basevisitor* v)
         S_msrAppearance elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -2251,7 +2251,7 @@ void msrAppearance::acceptIn (basevisitor* v)
 void msrAppearance::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -2270,7 +2270,7 @@ void msrAppearance::acceptOut (basevisitor* v)
         S_msrAppearance elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<

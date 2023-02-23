@@ -15,7 +15,7 @@
 #include "msrTypesForwardDeclarations.h"
 
 #include "msrElements.h"
-#include "msrWholeNotes.h"
+#include "msrNotesDurations.h"
 
 
 namespace MusicFormats
@@ -53,10 +53,10 @@ class EXP msrMeasureElement : public msrElement
                             S_msrMeasure& upLinkToMeasure) const = 0;
 
     void                  setSoundingWholeNotes (
-                            const msrWholeNotes&    wholeNotes,
-                            const std::string& context);
+                            const msrWholeNotes& wholeNotes,
+                            const std::string&   context);
 
-    msrWholeNotes          getSoundingWholeNotes () const
+    msrWholeNotes         getSoundingWholeNotes () const
                               { return fSoundingWholeNotes; }
 
     // this method is overridden in sub-classes such as those for
@@ -67,30 +67,30 @@ class EXP msrMeasureElement : public msrElement
     // such occurrence are more explicit when debugging
     // the computations of measure positions
     virtual void          setMeasurePosition (
-                            const S_msrMeasure& measure,
-                            const msrWholeNotes&     measurePosition,
-                            const std::string&  context);
+                            const S_msrMeasure&  measure,
+                            const msrWholeNotes& measurePosition,
+                            const std::string&   context);
 
-    msrWholeNotes          getMeasurePosition () const
+    msrWholeNotes         getMeasurePosition () const
                               { return fMeasurePosition; }
 
     void                  setVoicePosition (
-                            const msrWholeNotes&    voicePosition,
-                            const std::string& context);
+                            const msrWholeNotes& voicePosition,
+                            const std::string&   context);
 
-    msrWholeNotes          getVoicePosition () const
+    msrWholeNotes         getVoicePosition () const
                               { return fVoicePosition; }
 
 //     void                  setMeasureMoment (
-//                             const msrMoment& measureMoment,
-//                             const std::string&         context);
+//                             const msrMoment&   measureMoment,
+//                             const std::string& context);
 //
 //     const msrMoment&      getMeasureMoment () const
 //                               { return fMeasureMoment; }
 //
 //     void                  setVoiceMoment (
-//                             const msrMoment& voiceMoment,
-//                             const std::string&         context);
+//                             const msrMoment&   voiceMoment,
+//                             const std::string& context);
 //
 //     const msrMoment&      getVoiceMoment () const
 //                               { return fVoiceMoment; }
@@ -132,18 +132,18 @@ class EXP msrMeasureElement : public msrElement
     // ------------------------------------------------------
 
     void                  doSetSoundingWholeNotes (
-                            const msrWholeNotes&    wholeNotes,
-                            const std::string& context);
+                            const msrWholeNotes& wholeNotes,
+                            const std::string&   context);
 
   protected:
 
     // protected fields
     // ------------------------------------------------------
 
-    msrWholeNotes              fSoundingWholeNotes;
+    msrWholeNotes         fSoundingWholeNotes;
 
-    msrWholeNotes              fMeasurePosition;
-    msrWholeNotes              fVoicePosition;
+    msrWholeNotes         fMeasurePosition;
+    msrWholeNotes         fVoicePosition;
 
 //     msrMoment             fMeasureMoment;
 //     msrMoment             fVoiceMoment;

@@ -54,7 +54,7 @@ namespace MusicFormats
 
 //_______________________________________________________________________________
 EXP mfMusicformatsErrorKind msrScore2musicxmlWithHandler (
-  S_msrScore          theMsrScore,
+  const S_msrScore&   theMsrScore,
   mfPassIDKind        passID_A,
   std::string         passDescription_A,
   mfPassIDKind        passID_B,
@@ -67,7 +67,7 @@ EXP mfMusicformatsErrorKind msrScore2musicxmlWithHandler (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Translating an MSR score to MusicXML in \"" <<
@@ -99,7 +99,7 @@ EXP mfMusicformatsErrorKind msrScore2musicxmlWithHandler (
     secondMsrScore =
       translateMsrToMsr (
         theMsrScore,
-        gGlobalMsrOahGroup,
+        gMsrOahGroup,
         gGlobalMsr2msrOahGroup,
         passID_A,
         passDescription_A);
@@ -122,7 +122,7 @@ EXP mfMusicformatsErrorKind msrScore2musicxmlWithHandler (
     theMxsr =
       translateMsrToMxsr (
         secondMsrScore,
-        gGlobalMsrOahGroup,
+        gMsrOahGroup,
         passID_B,
         passDescription_B,
         mfTimingItemKind::kMandatory);
@@ -138,7 +138,7 @@ EXP mfMusicformatsErrorKind msrScore2musicxmlWithHandler (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsr ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       std::endl <<

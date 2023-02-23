@@ -95,7 +95,7 @@ Usage: xml2ly [[option]* [MusicXMLFile|-] [[option]*
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Initializing xml2ly insider options handler \"" <<
@@ -203,7 +203,7 @@ void xml2lyInsiderHandler::createTheXml2lyPrefixes ()
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptionsDetails ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating the xml2ly prefixes" <<
@@ -224,7 +224,7 @@ void xml2lyInsiderHandler::createTheXml2lyOptionGroups (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptionsDetails ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating the xml2ly insider option groups" <<
@@ -237,10 +237,6 @@ void xml2lyInsiderHandler::createTheXml2lyOptionGroups (
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
-
-  // initialize common things
-  // ------------------------------------------------------
-  initializeMusicFormats ();
 
   // initialize options handling, phase 1
   // ------------------------------------------------------
@@ -271,8 +267,6 @@ void xml2lyInsiderHandler::createTheXml2lyOptionGroups (
 
   // initialize the library
   // ------------------------------------------------------
-
-  initializeWAE ();
 
   initializeMSR ();
   initializeLPSR ();
@@ -322,7 +316,7 @@ void xml2lyInsiderHandler::createTheXml2lyOptionGroups (
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptionsDetails ()) {
     // print the options handler initial state
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "musicxml2lilypondInsiderInsiderHandler has been initialized as:" <<
@@ -355,7 +349,7 @@ void xml2lyInsiderHandler::checkOptionsAndArguments () const
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptionsDetails ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Checking options and arguments from argc/argv in \"" <<
@@ -377,7 +371,7 @@ std::string xml2lyInsiderHandler::fetchOutputFileNameFromTheOptions () const
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptionsDetails ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Fetching the output file name from the options in OAH handler \"" <<
@@ -536,13 +530,13 @@ void xml2lyInsiderHandler::enforceHandlerQuietness ()
   gGlobalMxsr2msrOahGroup->
     enforceGroupQuietness ();
 
-  gGlobalMsrOahGroup->
+  gMsrOahGroup->
     enforceGroupQuietness ();
 
   gGlobalMsr2lpsrOahGroup->
     enforceGroupQuietness ();
 
-  gGlobalLpsrOahGroup->
+  gLpsrOahGroup->
     enforceGroupQuietness ();
 
   gGlobalLpsr2lilypondOahGroup->
@@ -565,7 +559,7 @@ void xml2lyInsiderOahGroup::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> xml2lyInsiderOahGroup::acceptIn ()" <<
@@ -603,7 +597,7 @@ void xml2lyInsiderOahGroup::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> xml2lyInsiderOahGroup::acceptOut ()" <<
@@ -641,7 +635,7 @@ void xml2lyInsiderOahGroup::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> xml2lyInsiderOahGroup::browseData ()" <<
@@ -925,7 +919,7 @@ S_xml2lyInsiderOahGroup createGlobalXml2lyInsiderOahGroup ()
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating global xml2ly OAH group" <<

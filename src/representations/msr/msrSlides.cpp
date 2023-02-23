@@ -96,7 +96,7 @@ S_msrSlide msrSlide::createSlideNewbornClone ()
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceSlides ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating a newborn clone of slide '" <<
@@ -125,7 +125,7 @@ S_msrSlide msrSlide::createSlideNewbornClone ()
 void msrSlide::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -144,7 +144,7 @@ void msrSlide::acceptIn (basevisitor* v)
         S_msrSlide elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -163,7 +163,7 @@ void msrSlide::acceptIn (basevisitor* v)
 void msrSlide::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -182,7 +182,7 @@ void msrSlide::acceptOut (basevisitor* v)
         S_msrSlide elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<

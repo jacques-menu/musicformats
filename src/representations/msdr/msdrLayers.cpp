@@ -48,7 +48,7 @@ msdrLayer::msdrLayer (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceVoices ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating MSDR music \"" << asString () << "\"" <<
@@ -104,8 +104,8 @@ void msdrLayer::addNoteToLayer (
 void msdrLayer::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% ==> msdrLayer::acceptIn ()" <<
@@ -123,7 +123,7 @@ void msdrLayer::acceptIn (basevisitor* v)
         S_msdrLayer elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -142,8 +142,8 @@ void msdrLayer::acceptIn (basevisitor* v)
 void msdrLayer::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% ==> msdrLayer::acceptOut ()" <<
@@ -161,7 +161,7 @@ void msdrLayer::acceptOut (basevisitor* v)
         S_msdrLayer elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -180,8 +180,8 @@ void msdrLayer::acceptOut (basevisitor* v)
 void msdrLayer::browseData (basevisitor* v)
 {
 /* JMI
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% ==> msdrLayer::browseData ()" <<
@@ -230,8 +230,8 @@ void msdrLayer::browseData (basevisitor* v)
   }
 
 #ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% <== msdrLayer::browseData ()" <<

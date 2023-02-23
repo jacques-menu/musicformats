@@ -281,7 +281,7 @@ if (false) // JMI
   fCurrentVoiceMeasuresCounter = -1;
 
   // durations
-  fLastMetWholeNotes = msrWholeNotes (0, 1);
+  fLastMetWholeNotes = msrWholeNotes (-1, 1); // JMI v0.9.67
 
   // notes
   fCurrentNotePrinObjectKind =
@@ -650,7 +650,7 @@ std::string lpsr2lilypondTranslator::lilypondOctaveInRelativeEntryMode (
   if (gTraceOahGroup->getTraceNotesOctaveEntry ()) {
     int fieldWidth = 28;
 
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss << std::left <<
       "lilypondOctaveInRelativeEntryMode() 1" <<
@@ -701,7 +701,7 @@ std::string lpsr2lilypondTranslator::lilypondOctaveInRelativeEntryMode (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceNotesOctaveEntry ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "lilypondOctaveInRelativeEntryMode() 2" <<
@@ -745,7 +745,7 @@ std::string lpsr2lilypondTranslator::lilypondOctaveInFixedEntryMode (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceNotesOctaveEntry ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "% noteAbsoluteOctave = " <<
@@ -884,7 +884,7 @@ std::string lpsr2lilypondTranslator::stringTuningAsLilypondString (
         stringTuning->
           getStringTuningNumber ();
 
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       std::endl <<
@@ -908,7 +908,7 @@ std::string lpsr2lilypondTranslator::stringTuningAsLilypondString (
       "%msrQuarterTonesPitchKindAsString: " <<
       msrQuarterTonesPitchKindAsStringInLanguage (
         quarterTonesPitchKind,
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getLpsrQuarterTonesPitchesLanguageKind ()) <<
       std::endl << std::endl;
 
@@ -923,7 +923,7 @@ std::string lpsr2lilypondTranslator::stringTuningAsLilypondString (
   ss <<
     msrQuarterTonesPitchKindAsStringInLanguage (
       quarterTonesPitchKind,
-      gGlobalLpsrOahGroup->
+      gLpsrOahGroup->
         getLpsrQuarterTonesPitchesLanguageKind ()) <<
 
     absoluteOctaveAsLilypondString (
@@ -963,7 +963,7 @@ std::stringstream ss;
     noteQuarterTonesPitchKindAsString =
       msrQuarterTonesPitchKindAsStringInLanguage (
         noteQuarterTonesPitchKind,
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getLpsrQuarterTonesPitchesLanguageKind ());
 
   // get the note quarter tones display pitch
@@ -977,7 +977,7 @@ std::stringstream ss;
     quarterTonesDisplayPitchKindAsString =
       msrQuarterTonesPitchKindAsStringInLanguage (
         noteQuarterTonesDisplayPitchKind,
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getLpsrQuarterTonesPitchesLanguageKind ());
 
   // generate the pitch
@@ -999,7 +999,7 @@ std::stringstream ss;
 
     int fieldWidth = 39;
 
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss << std::left <<
       "notePitchAsLilypondString() 1" <<
@@ -1136,8 +1136,8 @@ std::stringstream ss;
 }
 
 //________________________________________________________________________
-std::string lpsr2lilypondTranslator::wholeNotesAsLilypondString (
-  int                 inputLineNumber,
+std::string lpsr2lilypondTranslator::durationAsLilypondStringIfItShouldBeGenerated (
+  int                  inputLineNumber,
   const msrWholeNotes& wholeNotes)
 {
   std::string result; // JMI v0.9.66
@@ -1241,7 +1241,7 @@ std::string lpsr2lilypondTranslator::pitchedRestAsLilypondString (
     noteQuarterTonesPitchKindAsString =
       msrQuarterTonesPitchKindAsStringInLanguage (
         noteQuarterTonesPitchKind,
-        gGlobalLpsrOahGroup->getLpsrQuarterTonesPitchesLanguageKind ());
+        gLpsrOahGroup->getLpsrQuarterTonesPitchesLanguageKind ());
 
   // get the note quarter tones display pitch
   msrQuarterTonesPitchKind
@@ -1254,7 +1254,7 @@ std::string lpsr2lilypondTranslator::pitchedRestAsLilypondString (
     quarterTonesDisplayPitchKindAsString =
       msrQuarterTonesPitchKindAsStringInLanguage (
         noteQuarterTonesDisplayPitchKind,
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getLpsrQuarterTonesPitchesLanguageKind ());
 
   // generate the display pitch
@@ -1333,7 +1333,7 @@ std::string lpsr2lilypondTranslator::pitchedRestAsLilypondString (
 
   // generate the skip duration
   ss <<
-    wholeNotesAsLilypondString (
+    durationAsLilypondStringIfItShouldBeGenerated (
       noteInputLineNumber,
       note->
         getSoundingWholeNotes ());
@@ -1608,7 +1608,7 @@ void lpsr2lilypondTranslator::generateStemIfNeededAndUpdateCurrentStemKind (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceStems ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "--> generateStemIfNeededAndUpdateCurrentStemKind" <<
@@ -1638,9 +1638,9 @@ void lpsr2lilypondTranslator::generateStemIfNeededAndUpdateCurrentStemKind (
     ) {
 #ifdef MF_TRACE_IS_ENABLED
       if (gTraceOahGroup->getTraceStems ()) {
-				std::stringstream ss;
+        std::stringstream ss;
 
-				ss <<
+        ss <<
           "--> fCurrentStemKind switches from " <<
           msrStemKindAsString (fCurrentStemKind) <<
           " to " <<
@@ -2200,7 +2200,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteRestInMeasure (
       } // switch
 
       fLilypondCodeStream <<
-        wholeNotesAsLilypondString (
+        durationAsLilypondStringIfItShouldBeGenerated (
           inputLineNumber,
           noteSoundingWholeNotes);
 
@@ -2238,7 +2238,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteRestInMeasure (
       } // switch
 
       fLilypondCodeStream <<
-        wholeNotesAsLilypondString (
+        durationAsLilypondStringIfItShouldBeGenerated (
           inputLineNumber,
           noteSoundingWholeNotes);
 
@@ -2332,7 +2332,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteSkipInMeasure (
 
   // generate the skip duration
   fLilypondCodeStream <<
-    wholeNotesAsLilypondString (
+    durationAsLilypondStringIfItShouldBeGenerated (
       inputLineNumber,
       note->
         getSoundingWholeNotes ());
@@ -2403,7 +2403,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteUnpitchedInMeasure (
 
   // generate the note duration
   fLilypondCodeStream <<
-    wholeNotesAsLilypondString (
+    durationAsLilypondStringIfItShouldBeGenerated (
       inputLineNumber,
       noteSoundingWholeNotes);
 
@@ -2571,7 +2571,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteRegularInTuplet (
 
   // generate the note display duration
   fLilypondCodeStream <<
-    wholeNotesAsLilypondString (
+    durationAsLilypondStringIfItShouldBeGenerated (
       inputLineNumber,
       note->
         getNoteDisplayWholeNotes ());
@@ -2653,7 +2653,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteRestInTuplet (
 
   // generate the note display duration
   fLilypondCodeStream <<
-    wholeNotesAsLilypondString (
+    durationAsLilypondStringIfItShouldBeGenerated (
       inputLineNumber,
       note->
         getNoteDisplayWholeNotes ());
@@ -2737,7 +2737,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteUnpitchedInTuplet (
 
   // generate the note (display) duration
   fLilypondCodeStream <<
-    wholeNotesAsLilypondString (
+    durationAsLilypondStringIfItShouldBeGenerated (
       inputLineNumber,
       note->
         getNoteDisplayWholeNotes ());
@@ -2886,7 +2886,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteSkipInGraceNotesGroup (
 
   // generate the skip duration
   fLilypondCodeStream <<
-    wholeNotesAsLilypondString (
+    durationAsLilypondStringIfItShouldBeGenerated (
       inputLineNumber,
       note->
         getNoteDisplayWholeNotes ());
@@ -3045,7 +3045,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteInTupletInGraceNotesGroup (
 
   // generate the note display duration
   fLilypondCodeStream <<
-    wholeNotesAsLilypondString (
+    durationAsLilypondStringIfItShouldBeGenerated (
       inputLineNumber,
       note->
         getNoteDisplayWholeNotes ());
@@ -3132,7 +3132,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteInDoubleTremolo (
 
   // generate the note duration
   fLilypondCodeStream <<
-    wholeNotesAsLilypondString (
+    durationAsLilypondStringIfItShouldBeGenerated (
       inputLineNumber,
       note->getSoundingWholeNotes ());
 
@@ -3393,7 +3393,7 @@ void lpsr2lilypondTranslator::generateNoteArticulation (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceArticulations ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "generateNoteArticulation()" <<
@@ -3516,10 +3516,10 @@ void lpsr2lilypondTranslator::generateNoteArticulation (
       break;
     case msrArticulationKind::kArticulationCaesura:
     /* JMI v0.9.66
-			fLilypondCodeStream <<
-				std::endl <<
+      fLilypondCodeStream <<
+        std::endl <<
 R"(\once\override BreathingSign.text = \markup {\musicglyph #"scripts.caesura.straight"} \breathe)" <<
-				std::endl;
+        std::endl;
      */
       fLilypondCodeStream <<
         std::endl <<
@@ -3655,7 +3655,7 @@ void lpsr2lilypondTranslator::generateChordArticulation (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceArticulations ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "generateChordArticulation()" <<
@@ -3712,10 +3712,10 @@ void lpsr2lilypondTranslator::generateChordArticulation (
       break;
     case msrArticulationKind::kArticulationCaesura:
     /* JMI v0.9.66
-			fLilypondCodeStream <<
-				std::endl <<
+      fLilypondCodeStream <<
+        std::endl <<
 R"(\once\override BreathingSign.text = \markup {\musicglyph #"scripts.caesura.straight"} \breathe)" <<
-				std::endl;
+        std::endl;
      */
       fLilypondCodeStream <<
         std::endl <<
@@ -4631,7 +4631,7 @@ std::string lpsr2lilypondTranslator::singleTremoloNotesDurationAsLilypondString 
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceTremolos ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "singleTremoloNotesDurationAsLilypondString()" <<
@@ -4735,7 +4735,7 @@ std::string lpsr2lilypondTranslator::harmonyAsLilypondString (
     msrQuarterTonesPitchKindAsStringInLanguage (
       harmony->
         getHarmonyRootQuarterTonesPitchKind (),
-      gGlobalMsrOahGroup->
+      gMsrOahGroup->
         getMsrQuarterTonesPitchesLanguageKind ());
 
   // generate harmony duration
@@ -4746,7 +4746,7 @@ std::string lpsr2lilypondTranslator::harmonyAsLilypondString (
   if (harmonyTupletFactor.isEqualToOne ()) {
     // use harmony sounding whole notes
     ss <<
-      wholeNotesAsLilypondString (
+      durationAsLilypondStringIfItShouldBeGenerated (
         inputLineNumber,
         harmony->
           getSoundingWholeNotes ());
@@ -4754,7 +4754,7 @@ std::string lpsr2lilypondTranslator::harmonyAsLilypondString (
   else {
     // use harmony display whole notes and tuplet factor
     ss <<
-      wholeNotesAsLilypondString (
+      durationAsLilypondStringIfItShouldBeGenerated (
         inputLineNumber,
         harmony->
           getHarmonyDisplayWholeNotes ()) <<
@@ -5045,7 +5045,7 @@ in all of them, the C and A# in theory want to fan out to B (the dominant).  Thi
       '/' <<
       msrQuarterTonesPitchKindAsStringInLanguage (
         harmonyBassQuarterTonesPitchKind,
-        gGlobalMsrOahGroup->
+        gMsrOahGroup->
           getMsrQuarterTonesPitchesLanguageKind ());
   }
 
@@ -5201,7 +5201,7 @@ std::string lpsr2lilypondTranslator::figuredBassAsLilypondString (
   if (figuredBassTupletFactor.isEqualToOne ()) { // JMI ???
     // use figured bass element sounding whole notes
     ss <<
-      wholeNotesAsLilypondString (
+      durationAsLilypondStringIfItShouldBeGenerated (
         inputLineNumber,
         figuredBass->
           getSoundingWholeNotes ());
@@ -5209,7 +5209,7 @@ std::string lpsr2lilypondTranslator::figuredBassAsLilypondString (
   else {
     // use figured bass element display whole notes and tuplet factor
     ss <<
-      wholeNotesAsLilypondString (
+      durationAsLilypondStringIfItShouldBeGenerated (
         inputLineNumber,
         figuredBass->
           getFiguredBassDisplayWholeNotes ()) <<
@@ -5431,7 +5431,7 @@ void lpsr2lilypondTranslator::generateInputLineNumberAndOrMeasurePositionAsAComm
 
 //________________________________________________________________________
 std::string lpsr2lilypondTranslator::generateAColumnForMarkup (
-  const std::string&    theString,
+  const std::string&       theString,
   lilypondMarkupColumnKind columnKind)
 {
   std::stringstream ss;
@@ -5485,7 +5485,7 @@ std::string lpsr2lilypondTranslator::generateAColumnForMarkup (
 
 //________________________________________________________________________
 std::string lpsr2lilypondTranslator::generateMultilineMarkup (
-  const std::string&    theString,
+  const std::string&       theString,
   lilypondMarkupColumnKind columnKind)
 {
   std::stringstream ss;
@@ -5538,7 +5538,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrScore& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateLpsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -5550,7 +5550,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrScore& elt)
       ss <<
         "% --> Start visiting lpsrScore" <<
         ", line " << elt->getInputLineNumber () <<
-				std::endl;
+        std::endl;
 
       if (traceLpsrVisitors) {
         gLog << ss.str ();
@@ -5613,7 +5613,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrScore& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateLpsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -5656,7 +5656,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrIdentification& elt) // JMI
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -5688,7 +5688,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrIdentification& elt) // JMI
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -5742,7 +5742,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrSchemeVariable& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateLpsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -5811,7 +5811,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrSchemeVariable& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateLpsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -5865,7 +5865,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrHeader& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateLpsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -5918,7 +5918,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrHeader& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateLpsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -5974,7 +5974,7 @@ void lpsr2lilypondTranslator::generateLilypondVersion ()
         ? gGlobalLpsr2lilypondOahGroup->
             getLilypondVersion ()
         : gGlobalLpsr2lilypondOahGroup->
-           getLilypondVersionDefaultValue ();
+           getLilypondVersionMinimumValue ();
 
   fLilypondCodeStream <<
     "\\version \"" <<
@@ -6056,12 +6056,9 @@ void lpsr2lilypondTranslator::generateHeader (S_lpsrHeader header)
   size_t fieldWidth = 0;
 
   for (
-    std::list<std::pair<std::string, std::string> >::const_iterator i =
-      nameStringValuePairsList.begin ();
-    i != nameStringValuePairsList.end ();
-    ++i
+    std::pair<std::string, std::string> thePair : nameStringValuePairsList
   ) {
-    std::string name = (*i).first;
+    std::string name = thePair.first;
 
     size_t nameSize = name.size ();
 
@@ -6082,17 +6079,14 @@ void lpsr2lilypondTranslator::generateHeader (S_lpsrHeader header)
 
   // generate the name-value pairs
   for (
-    std::list<std::pair<std::string, std::string> >::const_iterator i =
-      nameStringValuePairsList.begin ();
-    i != nameStringValuePairsList.end ();
-    ++i
+    std::pair<std::string, std::string> thePair : nameStringValuePairsList
   ) {
-    std::string name  = (*i).first;
-    std::string value = (*i).second;
+    std::string name  = thePair.first;
+    std::string value = thePair.second;
 
     fLilypondCodeStream << std::left <<
       std::setw (fieldWidth) <<
-      name << " = " <<
+      name << "= " <<
       generateStringAsLilypondMarkupOrDoubleQuotedString (
         value) <<
       std::endl;
@@ -6538,7 +6532,7 @@ void lpsr2lilypondTranslator::createLilypondHeaderStringValuePairs (
 
   // title
   // JMI
-  if (gGlobalMsrOahGroup->getUseFilenameAsWorkCreditTypeTitle ()) {
+  if (gMsrOahGroup->getUseFilenameAsWorkCreditTypeTitle ()) {
     nameStringValuePairsList.push_back (
       std::make_pair (
         "title",
@@ -7001,7 +6995,7 @@ void lpsr2lilypondTranslator::fetchLengthValuesFromPaperPageSize (
   // paper height
   Bool
     paperHeightHasBeenSet =
-      gGlobalLpsrOahGroup->
+      gLpsrOahGroup->
         getPaperHeightAtom ()->
           getSelected (),
     doGeneratePaperHeight =
@@ -7010,7 +7004,7 @@ void lpsr2lilypondTranslator::fetchLengthValuesFromPaperPageSize (
   if (doGeneratePaperHeight) {
     msrLength
       paperHeight =
-        gGlobalLpsrOahGroup->getPaperHeight ();
+        gLpsrOahGroup->getPaperHeight ();
 
     nameLengthValuePairsList.push_back (
       std::make_pair (
@@ -7021,7 +7015,7 @@ void lpsr2lilypondTranslator::fetchLengthValuesFromPaperPageSize (
   // paper width
   Bool
     paperWidthHasBeenSet =
-      gGlobalLpsrOahGroup->
+      gLpsrOahGroup->
         getPaperWidthAtom ()->
           getSelected (),
     doGeneratePaperWidth =
@@ -7030,7 +7024,7 @@ void lpsr2lilypondTranslator::fetchLengthValuesFromPaperPageSize (
   if (doGeneratePaperWidth) {
     msrLength
       paperWidth =
-        gGlobalLpsrOahGroup->getPaperWidth ();
+        gLpsrOahGroup->getPaperWidth ();
 
     nameLengthValuePairsList.push_back (
       std::make_pair (
@@ -7044,7 +7038,7 @@ void lpsr2lilypondTranslator::fetchOnOffValuesFromLpsrOptionsGroup (
   std::list<std::pair<std::string, Bool> >& nameBooleanValuePairsList)
 {
   // ragged-last
-  if (gGlobalLpsrOahGroup->getRaggedLastAtom ()->getSelected ()) {
+  if (gLpsrOahGroup->getRaggedLastAtom ()->getSelected ()) {
     mfOnOffKind
       raggedLast =
         paper->getRaggedLast ();
@@ -7064,7 +7058,7 @@ void lpsr2lilypondTranslator::fetchOnOffValuesFromLpsrOptionsGroup (
   }
 
   // ragged-bottom
-  if (gGlobalLpsrOahGroup->getRaggedBottomAtom ()->getSelected ()) {
+  if (gLpsrOahGroup->getRaggedBottomAtom ()->getSelected ()) {
     mfOnOffKind
       raggedBottom =
         paper->getRaggedBottom ();
@@ -7084,7 +7078,7 @@ void lpsr2lilypondTranslator::fetchOnOffValuesFromLpsrOptionsGroup (
   }
 
   // ragged-last-bottom
-  if (gGlobalLpsrOahGroup->getRaggedLastBottomAtom ()->getSelected ()) {
+  if (gLpsrOahGroup->getRaggedLastBottomAtom ()->getSelected ()) {
     mfOnOffKind
       raggedLastBottom =
         paper->getRaggedLastBottom ();
@@ -7104,7 +7098,7 @@ void lpsr2lilypondTranslator::fetchOnOffValuesFromLpsrOptionsGroup (
   }
 
   // ragged-right
-  if (gGlobalLpsrOahGroup->getRaggedRightAtom ()->getSelected ()) {
+  if (gLpsrOahGroup->getRaggedRightAtom ()->getSelected ()) {
     mfOnOffKind
       raggedRight =
         paper->getRaggedRight ();
@@ -7138,7 +7132,7 @@ void lpsr2lilypondTranslator::generatePaperPageSize (
   // paper height
   Bool
     paperHeightHasBeenSet =
-      gGlobalLpsrOahGroup->
+      gLpsrOahGroup->
         getPaperHeightAtom ()->
           getSelected (),
     doGeneratePaperHeight =
@@ -7151,7 +7145,7 @@ void lpsr2lilypondTranslator::generatePaperPageSize (
 
     msrLength
       paperHeight =
-        gGlobalLpsrOahGroup->getPaperHeight ();
+        gLpsrOahGroup->getPaperHeight ();
 
     fLilypondCodeStream << std::left <<
       std::setw (fieldWidth) <<
@@ -7164,7 +7158,7 @@ void lpsr2lilypondTranslator::generatePaperPageSize (
   // paper width
   Bool
     paperWidthHasBeenSet =
-      gGlobalLpsrOahGroup->
+      gLpsrOahGroup->
         getPaperWidthAtom ()->
           getSelected (),
     doGeneratePaperWidth =
@@ -7177,7 +7171,7 @@ void lpsr2lilypondTranslator::generatePaperPageSize (
 
     msrLength
       paperWidth =
-        gGlobalLpsrOahGroup->getPaperWidth ();
+        gLpsrOahGroup->getPaperWidth ();
 
     fLilypondCodeStream << std::left <<
       std::setw (fieldWidth) <<
@@ -7202,7 +7196,7 @@ void lpsr2lilypondTranslator::generatePaperMargins (
   // left margin
   Bool
     leftMarginHasBeenSet =
-      gGlobalLpsrOahGroup->
+      gLpsrOahGroup->
         getPaperLeftMarginAtom ()->
           getSelected (),
     doGenerateLeftMargin =
@@ -7215,7 +7209,7 @@ void lpsr2lilypondTranslator::generatePaperMargins (
 
     msrLength
       leftMargin =
-        gGlobalLpsrOahGroup->getPaperLeftMargin ();
+        gLpsrOahGroup->getPaperLeftMargin ();
 
     fLilypondCodeStream << std::left <<
       std::setw (fieldWidth) <<
@@ -7228,7 +7222,7 @@ void lpsr2lilypondTranslator::generatePaperMargins (
   // right margin
   Bool
     rightMarginHasBeenSet =
-      gGlobalLpsrOahGroup->
+      gLpsrOahGroup->
         getPaperRightMarginAtom ()->
           getSelected (),
     doGenerateRightMargin =
@@ -7241,7 +7235,7 @@ void lpsr2lilypondTranslator::generatePaperMargins (
 
     msrLength
       rightMargin =
-        gGlobalLpsrOahGroup->getPaperRightMargin ();
+        gLpsrOahGroup->getPaperRightMargin ();
 
     fLilypondCodeStream << std::left <<
       std::setw (fieldWidth) <<
@@ -7254,7 +7248,7 @@ void lpsr2lilypondTranslator::generatePaperMargins (
   // top margin
   Bool
     topMarginHasBeenSet =
-      gGlobalLpsrOahGroup->
+      gLpsrOahGroup->
         getPaperTopMarginAtom ()->
           getSelected (),
     doGenerateTopMargin =
@@ -7267,7 +7261,7 @@ void lpsr2lilypondTranslator::generatePaperMargins (
 
     msrLength
       topMargin =
-        gGlobalLpsrOahGroup->getPaperTopMargin ();
+        gLpsrOahGroup->getPaperTopMargin ();
 
     fLilypondCodeStream << std::left <<
       std::setw (fieldWidth) <<
@@ -7280,7 +7274,7 @@ void lpsr2lilypondTranslator::generatePaperMargins (
   // bottom margin
   Bool
     bottomMarginHasBeenSet =
-      gGlobalLpsrOahGroup->
+      gLpsrOahGroup->
         getPaperBottomMarginAtom ()->
           getSelected (),
     doGenerateBottomMargin =
@@ -7293,7 +7287,7 @@ void lpsr2lilypondTranslator::generatePaperMargins (
 
     msrLength
       bottomMargin =
-        gGlobalLpsrOahGroup->getPaperBottomMargin ();
+        gLpsrOahGroup->getPaperBottomMargin ();
 
     fLilypondCodeStream << std::left <<
       std::setw (fieldWidth) <<
@@ -7668,7 +7662,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrPaper& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateLpsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -7708,7 +7702,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrPaper& elt) // superflous ??? JMI
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateLpsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -7745,7 +7739,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrLayout& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateLpsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -7859,7 +7853,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrLayout& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateLpsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -7987,7 +7981,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrBookBlock& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateLpsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -8031,7 +8025,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrBookBlock& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateLpsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -8086,7 +8080,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrScoreBlock& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateLpsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -8126,7 +8120,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrScoreBlock& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateLpsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -8178,7 +8172,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrBookPartBlock& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateLpsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -8218,7 +8212,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrBookPartBlock& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateLpsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -8267,7 +8261,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrParallelMusicBLock& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateLpsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -8323,7 +8317,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrParallelMusicBLock& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateLpsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -8381,7 +8375,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrPartGroupBlock& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateLpsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -8666,7 +8660,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrPartGroupBlock& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateLpsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -8738,7 +8732,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrPartBlock& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateLpsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -8851,7 +8845,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrPartBlock& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateLpsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -8907,7 +8901,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrStaffBlock& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateLpsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -9012,7 +9006,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrStaffBlock& elt)
     if (
       partName.size ()
         ||
-      gGlobalLpsrOahGroup->
+      gLpsrOahGroup->
         getLpsrStavesInstrumentsNamesMapAtom ()->
           getSelected ()
     ) {
@@ -9023,13 +9017,13 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrStaffBlock& elt)
 
       // fetch the staff instrument name
       if (
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getLpsrStavesInstrumentsNamesMapAtom ()->
             getSelected ()
       ) {
         const std::map<std::string, std::string>&
           lpsrStavesInstrumentsNamesMap =
-            gGlobalLpsrOahGroup->
+            gLpsrOahGroup->
               getLpsrStavesInstrumentsNamesMap ();
 
 if (true)
@@ -9156,7 +9150,7 @@ if (true)
           msrQuarterTonesPitchKindAsStringInLanguage (
             staffTuning->
               getStaffTuningQuarterTonesPitchKind (),
-            gGlobalLpsrOahGroup->
+            gLpsrOahGroup->
               getLpsrQuarterTonesPitchesLanguageKind ()) <<
 
           absoluteOctaveAsLilypondString (
@@ -9237,7 +9231,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrStaffBlock& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateLpsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -9290,7 +9284,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrNewStaffgroupBlock& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateLpsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -9328,7 +9322,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrNewStaffgroupBlock& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateLpsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -9367,7 +9361,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrNewStaffBlock& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateLpsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -9401,7 +9395,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrNewStaffBlock& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateLpsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -9437,7 +9431,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrUseVoiceCommand& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateLpsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -9577,7 +9571,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrUseVoiceCommand& elt)
   // should a transposition be generated?
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceTranspositions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       std::endl <<
@@ -9646,9 +9640,9 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrUseVoiceCommand& elt)
     // generate the transposition
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceTranspositions ()) {
-			std::stringstream ss;
+      std::stringstream ss;
 
-			ss <<
+      ss <<
         std::endl <<
         "Generating a voice transposition for " <<
         semiTonesPitchAndOctave->asString () <<
@@ -9670,7 +9664,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrUseVoiceCommand& elt)
     std::string
       semiTonesPitchAndOctaveAsLilypondString =
         msrSemiTonesPitchAndOctaveAsLilypondString (
-          gGlobalLpsrOahGroup->getLpsrQuarterTonesPitchesLanguageKind (),
+          gLpsrOahGroup->getLpsrQuarterTonesPitchesLanguageKind (),
           semiTonesPitchAndOctave);
 
     fLilypondCodeStream <<
@@ -9728,7 +9722,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrUseVoiceCommand& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateLpsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -9761,7 +9755,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrNewLyricsBlock& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateLpsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -9837,7 +9831,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrNewLyricsBlock& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateLpsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -9874,7 +9868,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrVariableUseCommand& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateLpsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -9908,7 +9902,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrVariableUseCommand& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateLpsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -9943,7 +9937,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrChordNamesContext& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateLpsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -10024,7 +10018,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrChordNamesContext& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateLpsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -10057,7 +10051,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrFiguredBassContext& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateLpsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -10147,7 +10141,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrFiguredBassContext& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateLpsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -10180,7 +10174,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrBarCommand& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateLpsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -10212,7 +10206,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrBarCommand& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateLpsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -10245,7 +10239,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrComment& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateLpsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -10284,7 +10278,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrComment& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateLpsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -10317,7 +10311,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrSchemeFunction& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateLpsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -10358,7 +10352,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrSchemeFunction& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateLpsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -10392,7 +10386,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrMelismaCommand& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateLpsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -10433,7 +10427,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrMelismaCommand& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateLpsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -10467,7 +10461,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrScore& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -10499,7 +10493,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrScore& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -10532,7 +10526,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrScaling& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -10564,7 +10558,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrScaling& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -10597,7 +10591,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrPageLayout& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -10652,7 +10646,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrPageLayout& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -10685,7 +10679,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrSystemLayout& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -10717,7 +10711,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrSystemLayout& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -10750,7 +10744,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrStaffLayout& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -10782,7 +10776,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrStaffLayout& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -10815,7 +10809,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrAppearance& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -10847,7 +10841,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrAppearance& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -10880,7 +10874,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrCredit& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -10912,7 +10906,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrCredit& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -10944,7 +10938,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrCreditWords& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -10976,7 +10970,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrCreditWords& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -11009,7 +11003,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrPartGroup& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -11022,7 +11016,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrPartGroup& elt)
         "% --> Start visiting msrPartGroup" <<
         elt->asShortString () <<
         ", line " << elt->getInputLineNumber () <<
-				std::endl;
+        std::endl;
 
       ss << // JMI v0.9.67
         elt->getPartGroupCombinedName () <<
@@ -11046,7 +11040,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrPartGroup& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -11084,7 +11078,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrPart& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -11112,7 +11106,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrPart& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceParts ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
 //       std::endl <<
@@ -11139,7 +11133,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrPart& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -11176,7 +11170,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrStaff& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -11212,7 +11206,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrStaff& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -11248,7 +11242,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrStaffTuning& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -11291,7 +11285,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrStaffTuning& elt)
     for ( ; ; ) {
       fLilypondCodeStream <<
         msrQuarterTonesPitchAsString (
-          gGlobalLpsrOahGroup->getLpsrQuarterTonesPitchesLanguage (),
+          gLpsrOahGroup->getLpsrQuarterTonesPitchesLanguage (),
  // JMI            elt->getInputLineNumber (),
           ((*i)->getStaffTuningQuarterTonesPitch ())) <<
  // JMI       char (tolower ((*i)->getStaffTuningStep ())) <<
@@ -11315,7 +11309,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrStaffDetails& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -11362,7 +11356,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrVoice& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -11391,7 +11385,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrVoice& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceVoices ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
 //       std::endl <<
@@ -11428,7 +11422,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrVoice& elt)
             fLilypondCodeStream <<
               ' ' <<
               msrSemiTonesPitchAndOctaveAsLilypondString (
-                gGlobalLpsrOahGroup->
+                gLpsrOahGroup->
                   getLpsrQuarterTonesPitchesLanguageKind (),
                 gGlobalLpsr2lilypondOahGroup->
                   getRelativeOctaveEntrySemiTonesPitchAndOctave ());
@@ -11444,7 +11438,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrVoice& elt)
           fLilypondCodeStream <<
             "\\fixed " <<
             msrSemiTonesPitchAndOctaveAsLilypondString (
-              gGlobalLpsrOahGroup->
+              gLpsrOahGroup->
                 getLpsrQuarterTonesPitchesLanguageKind (),
               gGlobalLpsr2lilypondOahGroup->
                 getFixedOctaveEntrySemiTonesPitchAndOctave ());
@@ -11498,7 +11492,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrVoice& elt)
     fLilypondCodeStream <<
       "\\language \"" <<
       msrQuarterTonesPitchesLanguageKindAsLilypondString (
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getLpsrQuarterTonesPitchesLanguageKind ()) <<
       "\"" <<
       std::endl;
@@ -11507,14 +11501,14 @@ void lpsr2lilypondTranslator::visitStart (S_msrVoice& elt)
   // chords language?
   if (! gGlobalLpsr2lilypondOahGroup->getUseLilypondDefaultLanguages ()) { // JMI HasBeenSet???
     if (
-      gGlobalLpsrOahGroup->getLpsrChordsLanguageKind ()
+      gLpsrOahGroup->getLpsrChordsLanguageKind ()
         !=
       lpsrChordsLanguageKind::kChordsIgnatzek
     ) {
       fLilypondCodeStream <<
         "\\" <<
         lpsrChordsLanguageKindAsString (
-          gGlobalLpsrOahGroup->
+          gLpsrOahGroup->
             getLpsrChordsLanguageKind ()) <<
         "Chords" <<
         std::endl;
@@ -11535,9 +11529,9 @@ void lpsr2lilypondTranslator::visitStart (S_msrVoice& elt)
     // yes, center the boxed bar number
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceMeasuresNumbers ()) {
-			std::stringstream ss;
+      std::stringstream ss;
 
-			ss <<
+      ss <<
         std::endl <<
         "Centering boxed LilyPond measure numbers" <<
         ", line " << elt->getInputLineNumber () << " ===-->" <<
@@ -11650,7 +11644,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrVoice& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -11746,7 +11740,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrVoiceStaffChange& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -11798,7 +11792,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrHarmony& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -11835,17 +11829,17 @@ void lpsr2lilypondTranslator::visitStart (S_msrHarmony& elt)
   /* JMI v0.9.66
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceHarmonies ()) {
-			std::stringstream ss;
+      std::stringstream ss;
 
-			ss <<
+      ss <<
         "%{ fOnGoingNotesStack.size () S_msrHarmony JMI " <<
         elt->asString () <<
         " %}" <<
         std::endl;
 
-			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
-				ss.str ());
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
 */
@@ -11879,7 +11873,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrFrame& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -11927,7 +11921,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrFiguredBass& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -11971,7 +11965,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrFiguredBass& elt)
 
     case msrVoiceKind::kVoiceKindDynamics:
     case msrVoiceKind::kVoiceKindHarmonies:
-    	break;
+      break;
 
     case msrVoiceKind::kVoiceKindFiguredBass:
       doHandleFiguredBass = true;
@@ -11979,41 +11973,41 @@ void lpsr2lilypondTranslator::visitStart (S_msrFiguredBass& elt)
   } // switch
 
   if (doHandleFiguredBass) {
-		fCurrentFiguredBass = elt;
+    fCurrentFiguredBass = elt;
 
-		if (fOnGoingNotesStack.size () > 0) {
-	#ifdef MF_TRACE_IS_ENABLED
-			if (gTraceOahGroup->getTraceFiguredBasses ()) {
-				fLilypondCodeStream <<
-					"%{ fOnGoingNotesStack.size () S_msrFiguredBass JMI " <<
-					fCurrentFiguredBass->asString () <<
-					" %}" <<
-					std::endl;
-			}
-	#endif // MF_TRACE_IS_ENABLED
-		}
+    if (fOnGoingNotesStack.size () > 0) {
+  #ifdef MF_TRACE_IS_ENABLED
+      if (gTraceOahGroup->getTraceFiguredBasses ()) {
+        fLilypondCodeStream <<
+          "%{ fOnGoingNotesStack.size () S_msrFiguredBass JMI " <<
+          fCurrentFiguredBass->asString () <<
+          " %}" <<
+          std::endl;
+      }
+  #endif // MF_TRACE_IS_ENABLED
+    }
 
-		else if (fOnGoingChord) { // JMI
-		}
+    else if (fOnGoingChord) { // JMI
+    }
 
-		else if (fOnGoingFiguredBassVoice) {
-			fLilypondCodeStream <<
-				figuredBassAsLilypondString (elt) <<
-				' ';
+    else if (fOnGoingFiguredBassVoice) {
+      fLilypondCodeStream <<
+        figuredBassAsLilypondString (elt) <<
+        ' ';
 
-			// generate the input line number as comment if relevant
-			if (
-				gGlobalLpsr2lilypondOahGroup->getInputLineNumbers ()
-					||
-				gGlobalLpsr2lilypondOahGroup->getGenerateMeasurePositions ()
-			) {
-				generateInputLineNumberAndOrMeasurePositionAsAComment (
-					fCurrentFiguredBass);
-			}
-		}
+      // generate the input line number as comment if relevant
+      if (
+        gGlobalLpsr2lilypondOahGroup->getInputLineNumbers ()
+          ||
+        gGlobalLpsr2lilypondOahGroup->getGenerateMeasurePositions ()
+      ) {
+        generateInputLineNumberAndOrMeasurePositionAsAComment (
+          fCurrentFiguredBass);
+      }
+    }
 
-		fCurrentFiguredBassFiguresCounter = 0;
-	}
+    fCurrentFiguredBassFiguresCounter = 0;
+  }
 }
 
 void lpsr2lilypondTranslator::visitStart (S_msrBassFigure& elt)
@@ -12023,7 +12017,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrBassFigure& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -12157,7 +12151,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrFiguredBass& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -12197,7 +12191,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrFiguredBass& elt)
     if (figuredBassTupletFactor.isEqualToOne ()) {
       // use figured bass sounding whole notes
       fLilypondCodeStream <<
-        wholeNotesAsLilypondString (
+        durationAsLilypondStringIfItShouldBeGenerated (
           inputLineNumber,
           elt->
             getFiguredBassSoundingWholeNotes ());
@@ -12205,7 +12199,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrFiguredBass& elt)
     else {
       // use figured bass display whole notes and tuplet factor
       fLilypondCodeStream <<
-        wholeNotesAsLilypondString (
+        durationAsLilypondStringIfItShouldBeGenerated (
           inputLineNumber,
           elt->
             getFiguredBassDisplayWholeNotes ()) <<
@@ -12226,7 +12220,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrSegment& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -12272,7 +12266,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrSegment& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -12340,7 +12334,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -12468,7 +12462,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasures ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
 //       std::endl <<
@@ -12854,7 +12848,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMeasure& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -12886,7 +12880,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMeasure& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasures ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
 //       std::endl <<
@@ -13095,7 +13089,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrStanza& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -13161,7 +13155,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrStanza& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -13211,7 +13205,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrSyllable& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -13563,7 +13557,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrSyllable& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -13598,7 +13592,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrClef& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -13782,7 +13776,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrClef& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -13817,7 +13811,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrKey& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -13876,7 +13870,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrKey& elt)
                 "\\key " <<
                 msrQuarterTonesPitchKindAsStringInLanguage (
                   elt->getKeyTonicQuarterTonesPitchKind (),
-                  gGlobalLpsrOahGroup->
+                  gLpsrOahGroup->
                     getLpsrQuarterTonesPitchesLanguageKind ());
 
                 msrModeKind
@@ -13990,7 +13984,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrKey& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -14025,7 +14019,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrTimeSignature& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -14242,7 +14236,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrTimeSignature& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -14276,7 +14270,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrTransposition& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -14736,7 +14730,7 @@ If the double element is present, it indicates that the music is doubled one oct
     transpositionPitchKindAsString =
       msrQuarterTonesPitchKindAsStringInLanguage (
         transpositionPitchKind,
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getLpsrQuarterTonesPitchesLanguageKind ());
 
   std::string
@@ -14785,7 +14779,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrTransposition& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -14818,7 +14812,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrTempo& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -15327,7 +15321,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrTempoNotesRelationshipElements& e
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -15365,7 +15359,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrTempoNotesRelationshipElements& elt
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -15404,7 +15398,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrTempoNote& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -15443,7 +15437,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrTempoTuplet& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -15485,7 +15479,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrTempoTuplet& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -15520,7 +15514,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrTempo& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -15553,7 +15547,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrArticulation& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -15588,7 +15582,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrArticulation& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -15621,7 +15615,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrFermata& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -15698,7 +15692,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrFermata& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -15731,7 +15725,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrArpeggiato& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -15766,7 +15760,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrArpeggiato& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -15799,7 +15793,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrNonArpeggiato& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -15834,7 +15828,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrNonArpeggiato& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -15867,7 +15861,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrTechnical& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -15902,7 +15896,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrTechnical& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -15935,7 +15929,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrTechnicalWithInteger& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -15972,7 +15966,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrTechnicalWithInteger& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -16005,7 +15999,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrTechnicalWithFloat& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -16042,7 +16036,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrTechnicalWithFloat& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -16075,7 +16069,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrTechnicalWithString& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -16110,7 +16104,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrTechnicalWithString& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -16143,7 +16137,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrOrnament& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -16178,7 +16172,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrOrnament& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -16211,7 +16205,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrGlissando& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -16246,7 +16240,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrGlissando& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -16279,7 +16273,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrSlide& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -16314,7 +16308,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrSlide& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -16347,7 +16341,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrSingleTremolo& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -16382,7 +16376,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrSingleTremolo& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -16415,7 +16409,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrDoubleTremolo& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -16485,7 +16479,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrDoubleTremolo& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -16524,7 +16518,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrDynamic& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -16556,7 +16550,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrDynamic& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -16589,7 +16583,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrOtherDynamic& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -16621,7 +16615,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrOtherDynamic& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -16654,7 +16648,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrWords& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -16686,7 +16680,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrWords& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -16719,7 +16713,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrSlur& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -16752,7 +16746,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrSlur& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -16786,7 +16780,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrChordSlurLink& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -16819,7 +16813,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrChordSlurLink& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -16854,7 +16848,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrLigature& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -16886,7 +16880,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrLigature& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -16919,7 +16913,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrCrescDecresc& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -16962,7 +16956,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrCrescDecresc& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -16995,7 +16989,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrWedge& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -17027,7 +17021,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrWedge& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -17593,7 +17587,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrGraceNotesGroup& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -17634,7 +17628,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrGraceNotesGroup& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -17670,7 +17664,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrChordGraceNotesGroupLink& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -17705,7 +17699,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrChordGraceNotesGroupLink& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -17741,7 +17735,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrAfterGraceNotesGroup& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -17778,7 +17772,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrAfterGraceNotesGroupContents& elt
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -17819,7 +17813,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrAfterGraceNotesGroupContents& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -17855,7 +17849,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrAfterGraceNotesGroup& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -17980,7 +17974,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrNote& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -18081,7 +18075,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrNote& elt)
         case msrNoteKind::kNoteInChordInGraceNotesGroup:
 #ifdef MF_TRACE_IS_ENABLED
           if (
-            gGlobalLpsrOahGroup->getTraceLpsrVisitors ()
+            gLpsrOahGroup->getTraceLpsrVisitors ()
               ||
             gTraceOahGroup->getTraceGraceNotes ()
           ) {
@@ -18128,7 +18122,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrNote& elt)
 
             if (inhibitMultipleFullBarRestsBrowsing) {
               if (
-                gGlobalLpsrOahGroup->getTraceLpsrVisitors ()
+                gLpsrOahGroup->getTraceLpsrVisitors ()
                   ||
                 gTraceOahGroup->getTraceMultipleFullBarRests ()) {
                 gLog <<
@@ -18138,7 +18132,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrNote& elt)
 
   #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceNotesDetails ()) {
-	  	std::stringstream ss;
+      std::stringstream ss;
 
       ss <<
         "% ==> returning from visitStart (S_msrNote&)" <<
@@ -18153,7 +18147,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrNote& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
           if (
-            gGlobalLpsrOahGroup->getTraceLpsrVisitors ()
+            gLpsrOahGroup->getTraceLpsrVisitors ()
               ||
             gTraceOahGroup->getTraceMultipleFullBarRests ()
           ) {
@@ -18171,7 +18165,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrNote& elt)
         if (elt->getNoteShortcutUpLinkToGraceNotesGroup ()) {
 #ifdef MF_TRACE_IS_ENABLED
           if (
-            gGlobalLpsrOahGroup->getTraceLpsrVisitors ()
+            gLpsrOahGroup->getTraceLpsrVisitors ()
               ||
             gTraceOahGroup->getTraceNotes ()
           ) {
@@ -18190,7 +18184,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrNote& elt)
       case msrNoteKind::kNoteSkipInGraceNotesGroup:
 #ifdef MF_TRACE_IS_ENABLED
           if (
-            gGlobalLpsrOahGroup->getTraceLpsrVisitors ()
+            gLpsrOahGroup->getTraceLpsrVisitors ()
               ||
             gTraceOahGroup->getTraceGraceNotes ()
           ) {
@@ -18207,7 +18201,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrNote& elt)
       case msrNoteKind::kNoteInChordInGraceNotesGroup:
 #ifdef MF_TRACE_IS_ENABLED
           if (
-            gGlobalLpsrOahGroup->getTraceLpsrVisitors ()
+            gLpsrOahGroup->getTraceLpsrVisitors ()
               ||
             gTraceOahGroup->getTraceGraceNotes ()
           ) {
@@ -19100,7 +19094,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrNote& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -19173,7 +19167,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrNote& elt)
         if (elt->getNoteShortcutUpLinkToGraceNotesGroup ()) {
 #ifdef MF_TRACE_IS_ENABLED
           if (
-            gGlobalLpsrOahGroup->getTraceLpsrVisitors ()
+            gLpsrOahGroup->getTraceLpsrVisitors ()
               ||
             gTraceOahGroup->getTraceNotes ()
           ) {
@@ -19191,7 +19185,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrNote& elt)
       case msrNoteKind::kNoteSkipInGraceNotesGroup:
 #ifdef MF_TRACE_IS_ENABLED
           if (
-            gGlobalLpsrOahGroup->getTraceLpsrVisitors ()
+            gLpsrOahGroup->getTraceLpsrVisitors ()
               ||
             gTraceOahGroup->getTraceGraceNotes ()) {
             gLog <<
@@ -19885,7 +19879,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrOctaveShift& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -19917,7 +19911,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrOctaveShift& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -19950,7 +19944,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrAccordionRegistration& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -20021,7 +20015,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrHarpPedalsTuning& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -20088,7 +20082,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrStem& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -20120,7 +20114,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrStem& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -20153,7 +20147,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrBeam& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -20185,7 +20179,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrBeam& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -20244,8 +20238,8 @@ void lpsr2lilypondTranslator::generateCodeForOctaveShiftBeforeNote (
       break;
 
     case msrOctaveShiftKind::kOctaveShiftStop:
-			fLilypondCodeStream <<
-				"\\ottava #0 ";
+      fLilypondCodeStream <<
+        "\\ottava #0 ";
       break;
 
     case msrOctaveShiftKind::kOctaveShiftContinue:
@@ -20272,8 +20266,8 @@ void lpsr2lilypondTranslator::generateCodeForOctaveShiftAfterNote ( // JMI USELE
       break;
 
     case msrOctaveShiftKind::kOctaveShiftStop:
-// 			fLilypondCodeStream <<
-// 				"\\ottava #0 ";
+//       fLilypondCodeStream <<
+//         "\\ottava #0 ";
       break;
 
     case msrOctaveShiftKind::kOctaveShiftContinue:
@@ -21314,7 +21308,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrChord& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -21395,7 +21389,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrChord& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -21466,7 +21460,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrTuplet& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -21648,7 +21642,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrTuplet& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -21722,7 +21716,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrTie& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -21773,7 +21767,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrTie& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -21806,7 +21800,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrSegno& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -21838,7 +21832,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrHiddenMeasureAndBarLine& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -21881,7 +21875,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrCoda& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -21914,7 +21908,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrEyeGlasses& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -21949,7 +21943,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrScordatura& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -22041,7 +22035,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrPedal& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -22113,7 +22107,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrDamp& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -22148,7 +22142,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrDampAll& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -22184,7 +22178,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrBarLine& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -22387,7 +22381,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrBarLine& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -22424,7 +22418,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrBarCheck& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -22507,7 +22501,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrBarCheck& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -22543,7 +22537,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrBarNumberCheck& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -22625,7 +22619,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrBarNumberCheck& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -22658,7 +22652,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrLineBreak& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -22728,7 +22722,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrLineBreak& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -22761,7 +22755,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrPageBreak& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -22815,7 +22809,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrPageBreak& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -22848,7 +22842,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrRepeat& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -22925,7 +22919,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrRepeat& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -22987,7 +22981,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrRepeatCommonPart& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -23019,7 +23013,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrRepeatCommonPart& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -23052,7 +23046,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrRepeatEnding& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -23188,7 +23182,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrRepeatEnding& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -23299,7 +23293,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrRehearsalMark& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -23385,7 +23379,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrRehearsalMark& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -23418,7 +23412,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasureRepeat& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -23503,7 +23497,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMeasureRepeat& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -23554,7 +23548,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasureRepeatPattern& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -23585,7 +23579,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMeasureRepeatPattern& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -23616,7 +23610,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasureRepeatReplicas& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -23663,7 +23657,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMeasureRepeatReplicas& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -23697,7 +23691,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMultipleFullBarRests& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -23766,7 +23760,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMultipleFullBarRests& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -23803,7 +23797,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMultipleFullBarRests& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMultipleFullBarRests ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       std::endl <<
@@ -23824,7 +23818,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMultipleFullBarRests& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMultipleFullBarRests ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       std::endl <<
@@ -23848,7 +23842,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMultipleFullBarRests& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMultipleFullBarRests ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       std::endl <<
@@ -23929,7 +23923,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMidiTempo& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       traceMidi =
         gTraceOahGroup->
@@ -24004,7 +23998,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMidiTempo& elt)
   {
     Bool
       traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->

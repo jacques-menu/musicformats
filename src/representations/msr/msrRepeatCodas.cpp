@@ -81,7 +81,7 @@ S_msrRepeatCoda msrRepeatCoda::createRepeatCodaNewbornClone (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceRepeats ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating a newborn clone of a " <<
@@ -125,7 +125,7 @@ S_msrRepeatCoda msrRepeatCoda::createRepeatCodaDeepClone (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceRepeats ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating a newborn clone of a " <<
@@ -183,7 +183,7 @@ void msrRepeatCoda::appendElementToRepeatCoda (
 void msrRepeatCoda::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -202,7 +202,7 @@ void msrRepeatCoda::acceptIn (basevisitor* v)
         S_msrRepeatCoda elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -221,7 +221,7 @@ void msrRepeatCoda::acceptIn (basevisitor* v)
 void msrRepeatCoda::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -240,7 +240,7 @@ void msrRepeatCoda::acceptOut (basevisitor* v)
         S_msrRepeatCoda elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<

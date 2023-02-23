@@ -29,28 +29,28 @@ S_msrScore createScore ();
 
 //_______________________________________________________________________________
 void displayMsrScore (
-  S_msrScore          theMsrScore,
+  const S_msrScore&   theMsrScore,
   const std::string&  passDescription);
 
 void displayMsrScoreFull (
-  S_msrScore          theMsrScore,
+  const S_msrScore&   theMsrScore,
   const std::string&  passDescription);
 
 //______________________________________________________________________________
 EXP void displayMsrScoreSummary (
-  S_msrScore          theMsrScore,
-  S_msrOahGroup&      msrOpts,
-  const std::string&  passDescription);
+  S_msrScore           theMsrScore,
+  const S_msrOahGroup& msrOpts,
+  const std::string&   passDescription);
 
 //______________________________________________________________________________
 EXP void displayMsrScoreNames (
-  S_msrScore          theMsrScore,
-  S_msrOahGroup&      msrOpts,
-  const std::string&  passDescription);
+  S_msrScore           theMsrScore,
+  const S_msrOahGroup& msrOpts,
+  const std::string&   passDescription);
 
 //_______________________________________________________________________________
 void displayMsrScoreSlices (
-  S_msrScore         theMsrScore,
+  const S_msrScore&  theMsrScore,
   const std::string& passDescription);
 
 // parts

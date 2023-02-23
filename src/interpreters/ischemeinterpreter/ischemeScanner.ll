@@ -34,7 +34,7 @@
 #include "ischemeInterpreterInterface.h"
 
 #ifdef WIN32
-	#include "mfSystemInterface.h" // for isatty()
+  #include "mfSystemInterface.h" // for isatty()
 
   #define YY_NO_UNISTD_H
 #endif // WIN32
@@ -596,7 +596,7 @@ mfMusicformatsErrorKind launchIschemeInterpreter ()
   // parse the script
   int
     parseResult =
-  	  theDriver.parseInput_Pass1 ();
+      theDriver.parseInput_Pass1 ();
 
   // launch the service
   if (parseResult != 0) {
@@ -609,5 +609,5 @@ mfMusicformatsErrorKind launchIschemeInterpreter ()
       theDriver.launchIschemeService_Pass2 ();
   }
 
-	return result;
+  return result;
 }

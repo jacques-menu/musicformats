@@ -59,7 +59,7 @@ EXP S_mfcConverterComponent createMusicxml2lilypondConverterComponent ()
 
 #ifdef MF_TRACE_IS_ENABLED
     if (gEarlyOptions.getEarlyTraceComponents ()) {
-	  	std::stringstream ss;
+      std::stringstream ss;
 
       ss <<
         "Creating the musicxml2lilypond component" <<

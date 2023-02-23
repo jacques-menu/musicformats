@@ -61,7 +61,7 @@ class msrNoteEvent : public smartable
     // set and get
     // ------------------------------------------------------
 
-    msrWholeNotes          getNoteEventMeasurePosition () const
+    msrWholeNotes         getNoteEventMeasurePosition () const
                               { return fNoteEventMeasurePosition; }
 
     S_msrNote             getNoteEventNote () const
@@ -93,7 +93,7 @@ class msrNoteEvent : public smartable
     // private fields
     // ------------------------------------------------------
 
-    msrWholeNotes          fNoteEventMeasurePosition;
+    msrWholeNotes         fNoteEventMeasurePosition;
     S_msrNote             fNoteEventNote;
     msrNoteEventKind      fNoteEventKind;
 };
@@ -126,7 +126,7 @@ class msrSimultaneousNotesChunk : public smartable
     // set and get
     // ------------------------------------------------------
 
-    msrWholeNotes          getChunkMeasurePosition () const
+    msrWholeNotes         getChunkMeasurePosition () const
                               { return fChunkMeasurePosition; }
 
     const std::list<S_msrNote>&
@@ -134,7 +134,7 @@ class msrSimultaneousNotesChunk : public smartable
                               { return fChunkNotesList; }
 
 
-    msrWholeNotes          getChunkNotesDurationWholeNotes () const
+    msrWholeNotes         getChunkNotesDurationWholeNotes () const
                               { return fChunkNotesDurationWholeNotes; }
 
   public:
@@ -164,9 +164,9 @@ class msrSimultaneousNotesChunk : public smartable
     // private fields
     // ------------------------------------------------------
 
-    msrWholeNotes          fChunkMeasurePosition;
+    msrWholeNotes         fChunkMeasurePosition;
     std::list<S_msrNote>  fChunkNotesList;
-    msrWholeNotes          fChunkNotesDurationWholeNotes;
+    msrWholeNotes         fChunkNotesDurationWholeNotes;
 };
 typedef SMARTP<msrSimultaneousNotesChunk> S_msrSimultaneousNotesChunk;
 EXP std::ostream& operator << (std::ostream& os, const S_msrSimultaneousNotesChunk& elt);
@@ -276,7 +276,7 @@ class EXP msrMeasuresSlice : public smartable
 
     // the measures in the slice
     std::vector<S_msrMeasure>
-    										  fSliceMeasuresVector;
+                          fSliceMeasuresVector;
 
     // notes flat list
     std::list<S_msrNote>  fSliceNotesFlatList;

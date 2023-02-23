@@ -74,7 +74,7 @@ S_msrVoiceStaffChange msrVoiceStaffChange::createStaffChangeNewbornClone ()
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceStaffChanges ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating a newborn clone of voice staff change '" <<
@@ -131,7 +131,7 @@ void msrVoiceStaffChange::setVoiceStaffChangeUpLinkToMeasure (
 void msrVoiceStaffChange::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -150,7 +150,7 @@ void msrVoiceStaffChange::acceptIn (basevisitor* v)
         S_msrVoiceStaffChange elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -169,7 +169,7 @@ void msrVoiceStaffChange::acceptIn (basevisitor* v)
 void msrVoiceStaffChange::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -188,7 +188,7 @@ void msrVoiceStaffChange::acceptOut (basevisitor* v)
         S_msrVoiceStaffChange elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<

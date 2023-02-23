@@ -83,7 +83,7 @@ msrBarCheck::msrBarCheck (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasuresNumbers ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating a bar check without next bar number" <<
@@ -111,7 +111,7 @@ msrBarCheck::msrBarCheck (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasuresNumbers ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating a bar check" <<
@@ -166,7 +166,7 @@ void msrBarCheck::setNextBarPuristNumber (int puristNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasuresNumbers ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Setting bar check next bar number to '" <<
@@ -186,8 +186,8 @@ void msrBarCheck::setNextBarPuristNumber (int puristNumber)
 void msrBarCheck::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% ==> msrBarCheck::acceptIn ()" <<
@@ -205,7 +205,7 @@ void msrBarCheck::acceptIn (basevisitor* v)
         S_msrBarCheck elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -224,7 +224,7 @@ void msrBarCheck::acceptIn (basevisitor* v)
 void msrBarCheck::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -243,7 +243,7 @@ void msrBarCheck::acceptOut (basevisitor* v)
         S_msrBarCheck elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<

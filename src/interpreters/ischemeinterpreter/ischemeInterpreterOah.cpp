@@ -334,50 +334,50 @@ void ischemeInterpreterOahGroup::printIschemeInterpreterOahValues (
   ++gIndenter;
 
   gLog << left <<
-    setw (fieldWidth) << "fTraceScanning" << " : " <<
+    setw (fieldWidth) << "fTraceScanning" << ": " <<
       fTraceScanning <<
       endl <<
-    setw (fieldWidth) << "fDisplayTokens" << " : " <<
+    setw (fieldWidth) << "fDisplayTokens" << ": " <<
       fDisplayTokens <<
       endl <<
 
-    setw (fieldWidth) << "fTraceParsing" << " : " <<
+    setw (fieldWidth) << "fTraceParsing" << ": " <<
       fTraceParsing <<
       endl <<
 
-    setw (fieldWidth) << "fDisplayServiceAndInput" << " : " <<
+    setw (fieldWidth) << "fDisplayServiceAndInput" << ": " <<
       fDisplayServiceAndInput <<
       endl <<
 
-    setw (fieldWidth) << "fDisplayOptions" << " : " <<
+    setw (fieldWidth) << "fDisplayOptions" << ": " <<
       fDisplayOptions <<
       endl <<
 
-    setw (fieldWidth) << "fTraceInputs" << " : " <<
+    setw (fieldWidth) << "fTraceInputs" << ": " <<
       fTraceInputs <<
       endl <<
-    setw (fieldWidth) << "fTraceCaseInputStatements" << " : " <<
+    setw (fieldWidth) << "fTraceCaseInputStatements" << ": " <<
       fTraceCaseInputStatements <<
       endl <<
 
-    setw (fieldWidth) << "fTraceChoices" << " : " <<
+    setw (fieldWidth) << "fTraceChoices" << ": " <<
       fTraceChoices <<
       endl <<
-    setw (fieldWidth) << "fTraceCaseChoiceStatements" << " : " <<
+    setw (fieldWidth) << "fTraceCaseChoiceStatements" << ": " <<
       fTraceCaseChoiceStatements <<
       endl <<
 
-    setw (fieldWidth) << "fTraceCaseChoiceStatements" << " : " <<
+    setw (fieldWidth) << "fTraceCaseChoiceStatements" << ": " <<
       fTraceCaseChoiceStatements <<
       endl <<
-    setw (fieldWidth) << "fTraceCaseInputStatements" << " : " <<
+    setw (fieldWidth) << "fTraceCaseInputStatements" << ": " <<
       fTraceCaseInputStatements <<
       endl <<
-    setw (fieldWidth) << "fNoLaunch" << " : " <<
+    setw (fieldWidth) << "fNoLaunch" << ": " <<
       fNoLaunch <<
       endl <<
 
-    setw (fieldWidth) << "fTraceOptionsBlocks" << " : " <<
+    setw (fieldWidth) << "fTraceOptionsBlocks" << ": " <<
       fTraceOptionsBlocks <<
       endl;
 
@@ -400,7 +400,7 @@ void ischemeInterpreterOahGroup::printIschemeInterpreterOahValues (
   if (fSelectChoiceToLabelsMultiMap.size ()) {
     for (pair<std::string, std::string> thePair : fSelectChoiceToLabelsMultiMap) {
       gLog <<
-        thePair.first << " : " << thePair.second <<
+        thePair.first << ": " << thePair.second <<
         endl;
     } // for
   }

@@ -65,7 +65,7 @@ void msr2brailleManPageGenerateAtom::applyValueLessAtom (std::ostream& os)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "==> option '" << fetchNames () << "' is a msr2brailleManPageGenerateAtom" <<
@@ -84,7 +84,7 @@ void msr2brailleManPageGenerateAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> msr2brailleManPageGenerateAtom::acceptIn ()" <<
@@ -122,7 +122,7 @@ void msr2brailleManPageGenerateAtom::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> msr2brailleManPageGenerateAtom::acceptOut ()" <<
@@ -160,7 +160,7 @@ void msr2brailleManPageGenerateAtom::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> msr2brailleManPageGenerateAtom::browseData ()" <<
@@ -326,7 +326,7 @@ void msr2brailleManPageOahGroup::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> msr2brailleManPageOahGroup::acceptIn ()" <<
@@ -364,7 +364,7 @@ void msr2brailleManPageOahGroup::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> msr2brailleManPageOahGroup::acceptOut ()" <<
@@ -402,7 +402,7 @@ void msr2brailleManPageOahGroup::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> msr2brailleManPageOahGroup::browseData ()" <<
@@ -447,7 +447,7 @@ S_msr2brailleManPageOahGroup createGlobalXml2brailleManPageOahHandler (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating global xml2blrManPage OAH group" <<

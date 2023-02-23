@@ -5,19 +5,23 @@
 service : xml2ly;
 
 # the input file
-input : "harmonies/SingleHarmony.xml";
+# input : "backup/SimpleBackup.xml";
+
+# input : "harmonies/SingleHarmony.xml";
 # input : "harmonies/Harmonies.xml";
+input : "harmonies/SeveralOffsetHarmoniesOnAGivenNote.xml";
+
 # input : "figuredbass/FiguredBass.xml";
 
 # output file
   -auto-output-file-name
 
 # tracing
-  -trace-passes
+#   -trace-passes
   -lilypond-generation-infos
 
 # quit
-  -quit-after-pass-2b
+#   -quit-after-pass-2b
 
 # display
   -dmsr1

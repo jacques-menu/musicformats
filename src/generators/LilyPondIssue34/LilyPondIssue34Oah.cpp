@@ -204,7 +204,7 @@ void LilyPondIssue34OahGroup::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> LilyPondIssue34OahGroup::acceptIn ()" <<
@@ -242,7 +242,7 @@ void LilyPondIssue34OahGroup::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> LilyPondIssue34OahGroup::acceptOut ()" <<
@@ -280,7 +280,7 @@ void LilyPondIssue34OahGroup::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> LilyPondIssue34OahGroup::browseData ()" <<
@@ -354,7 +354,7 @@ S_LilyPondIssue34OahGroup createGlobalLilyPondIssue34OahGroup ()
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating global LilyPondIssue34 OAH group" <<

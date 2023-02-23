@@ -53,8 +53,8 @@ lpsrNewLyricsBlock::~lpsrNewLyricsBlock ()
 void lpsrNewLyricsBlock::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
-		std::stringstream ss;
+  if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% ==> lpsrNewLyricsBlock::acceptIn ()" <<
@@ -72,7 +72,7 @@ void lpsrNewLyricsBlock::acceptIn (basevisitor* v)
         S_lpsrNewLyricsBlock elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
+        if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -91,8 +91,8 @@ void lpsrNewLyricsBlock::acceptIn (basevisitor* v)
 void lpsrNewLyricsBlock::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
-		std::stringstream ss;
+  if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% ==> lpsrNewLyricsBlock::acceptOut ()" <<
@@ -110,7 +110,7 @@ void lpsrNewLyricsBlock::acceptOut (basevisitor* v)
         S_lpsrNewLyricsBlock elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
+        if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
           std::stringstream ss;
 
           ss <<

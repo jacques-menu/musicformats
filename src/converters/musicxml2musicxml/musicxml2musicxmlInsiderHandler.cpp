@@ -80,7 +80,7 @@ Usage: xml2xml [[option]* [MusicXMLFile|-] [[option]*
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Initializing \"" <<
@@ -141,7 +141,7 @@ void xml2xmlInsiderHandler::createTheXml2xmlPrefixes ()
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptionsDetails ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating the xml2xml prefixes in \"" <<
@@ -164,7 +164,7 @@ void xml2xmlInsiderHandler::createTheXml2xmlOptionGroups (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptionsDetails ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating the \"" <<
@@ -208,10 +208,6 @@ void xml2xmlInsiderHandler::createTheXml2xmlOptionGroups (
   // initialize the library
   // ------------------------------------------------------
 
-  initializeMusicFormats ();
-
-  initializeWAE ();
-
   initializeMSR ();
 
   // initialize options handling, phase 2
@@ -254,7 +250,7 @@ void xml2xmlInsiderHandler::checkOptionsAndArguments () const
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptionsDetails ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Checking options and arguments from argc/argv in \"" <<
@@ -276,7 +272,7 @@ std::string xml2xmlInsiderHandler::fetchOutputFileNameFromTheOptions () const
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptionsDetails ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Fetching the output file name from the options in OAH handler \"" <<
@@ -435,7 +431,7 @@ void xml2xmlInsiderHandler::enforceHandlerQuietness ()
   gGlobalMxsr2msrOahGroup->
     enforceGroupQuietness ();
 
-  gGlobalMsrOahGroup->
+  gMsrOahGroup->
     enforceGroupQuietness ();
 
   gGlobalMsr2mxsrOahGroup->
@@ -491,7 +487,7 @@ void xml2xmlInsiderOahGroup::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> xml2xmlInsiderOahGroup::acceptIn ()" <<
@@ -529,7 +525,7 @@ void xml2xmlInsiderOahGroup::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> xml2xmlInsiderOahGroup::acceptOut ()" <<
@@ -567,7 +563,7 @@ void xml2xmlInsiderOahGroup::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> xml2xmlInsiderOahGroup::browseData ()" <<
@@ -774,7 +770,7 @@ S_xml2xmlInsiderOahGroup createGlobalXml2xmlOahGroup ()
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating global xml2xml OAH group" <<

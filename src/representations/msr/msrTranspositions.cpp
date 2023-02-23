@@ -90,7 +90,7 @@ msrTransposition::msrTransposition (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceTranspositions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating transpose '" <<
@@ -162,7 +162,7 @@ Bool msrTransposition::isEqualTo (
 void msrTransposition::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -181,7 +181,7 @@ void msrTransposition::acceptIn (basevisitor* v)
         S_msrTransposition elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -200,7 +200,7 @@ void msrTransposition::acceptIn (basevisitor* v)
 void msrTransposition::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -219,7 +219,7 @@ void msrTransposition::acceptOut (basevisitor* v)
         S_msrTransposition elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<

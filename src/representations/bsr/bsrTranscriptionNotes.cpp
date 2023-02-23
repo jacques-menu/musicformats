@@ -66,8 +66,8 @@ S_bsrCellsList bsrTranscriptionNotesElement::buildCellsList () const
 void bsrTranscriptionNotesElement::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
-		std::stringstream ss;
+  if (gBsrOahGroup->getTraceBsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% --> End visiting bsrTranscriptionNotesElement" <<
@@ -86,7 +86,7 @@ void bsrTranscriptionNotesElement::acceptIn (basevisitor* v)
         S_bsrTranscriptionNotesElement elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
+        if (gBsrOahGroup->getTraceBsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -105,8 +105,8 @@ void bsrTranscriptionNotesElement::acceptIn (basevisitor* v)
 void bsrTranscriptionNotesElement::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
-		std::stringstream ss;
+  if (gBsrOahGroup->getTraceBsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% --> End visiting bsrTranscriptionNotesElement" <<
@@ -125,7 +125,7 @@ void bsrTranscriptionNotesElement::acceptOut (basevisitor* v)
         S_bsrTranscriptionNotesElement elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
+        if (gBsrOahGroup->getTraceBsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -210,8 +210,8 @@ bsrTranscriptionNotes::~bsrTranscriptionNotes ()
 void bsrTranscriptionNotes::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
-		std::stringstream ss;
+  if (gBsrOahGroup->getTraceBsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% --> End visiting bsrTranscriptionNotesElement" <<
@@ -230,7 +230,7 @@ void bsrTranscriptionNotes::acceptIn (basevisitor* v)
         S_bsrTranscriptionNotes elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
+        if (gBsrOahGroup->getTraceBsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -249,8 +249,8 @@ void bsrTranscriptionNotes::acceptIn (basevisitor* v)
 void bsrTranscriptionNotes::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
-		std::stringstream ss;
+  if (gBsrOahGroup->getTraceBsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% --> End visiting bsrTranscriptionNotesElement" <<
@@ -269,7 +269,7 @@ void bsrTranscriptionNotes::acceptOut (basevisitor* v)
         S_bsrTranscriptionNotes elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
+        if (gBsrOahGroup->getTraceBsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -312,7 +312,7 @@ void bsrTranscriptionNotes::print (std::ostream& os) const
   size_t transcriptionNotesElementsListSize =
     fTranscriptionNotesElementsList.size ();
 
-  if (transcriptionNotesElementsListSize || gGlobalBsrOahGroup->getDisplayBsrFull ()) {
+  if (transcriptionNotesElementsListSize || gBsrOahGroup->getDisplayBsrFull ()) {
     os <<
       std::setw (fieldWidth) <<
       "transcriptionNotesElementsList" << ": " <<

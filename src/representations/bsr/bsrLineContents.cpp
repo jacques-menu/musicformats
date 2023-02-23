@@ -70,8 +70,8 @@ bsrLineContents::~bsrLineContents ()
 S_bsrLineContents bsrLineContents::createLineNewbornClone ()
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalBsrOahGroup->getTraceLines ()) {
-		std::stringstream ss;
+  if (gBsrOahGroup->getTraceLines ()) {
+    std::stringstream ss;
 
     ss <<
       "Creating a newborn clone of line " <<
@@ -124,7 +124,7 @@ void bsrLineContents::insertLineElementBeforeLastElementOfLineContents (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasures ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Inserting line element '" <<
@@ -209,8 +209,8 @@ int bsrLineContents::fetchCellsNumber () const
 void bsrLineContents::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
-		std::stringstream ss;
+  if (gBsrOahGroup->getTraceBsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% --> End visiting bsrTranscriptionNotesElement" <<
@@ -229,7 +229,7 @@ void bsrLineContents::acceptIn (basevisitor* v)
         S_bsrLineContents elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
+        if (gBsrOahGroup->getTraceBsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -248,8 +248,8 @@ void bsrLineContents::acceptIn (basevisitor* v)
 void bsrLineContents::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
-		std::stringstream ss;
+  if (gBsrOahGroup->getTraceBsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% --> End visiting bsrTranscriptionNotesElement" <<
@@ -268,7 +268,7 @@ void bsrLineContents::acceptOut (basevisitor* v)
         S_bsrLineContents elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
+        if (gBsrOahGroup->getTraceBsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -372,7 +372,7 @@ void bsrLineContents::print (std::ostream& os) const
   os << std::endl;
 
   // print the line elements if any
-  if (lineElementsListSize || gGlobalBsrOahGroup->getDisplayBsrFull ()) {
+  if (lineElementsListSize || gBsrOahGroup->getDisplayBsrFull ()) {
     os <<
 //      std::setw (fieldWidth) <<
       "LineContentsLineElementsList" <<

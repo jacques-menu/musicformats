@@ -63,7 +63,7 @@ void xml2gmnManPageGenerateAtom::applyValueLessAtom (std::ostream& os)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "==> option '" << fetchNames () << "' is a xml2gmnManPageGenerateAtom" <<
@@ -82,7 +82,7 @@ void xml2gmnManPageGenerateAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> xml2gmnManPageGenerateAtom::acceptIn ()" <<
@@ -120,7 +120,7 @@ void xml2gmnManPageGenerateAtom::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> xml2gmnManPageGenerateAtom::acceptOut ()" <<
@@ -158,7 +158,7 @@ void xml2gmnManPageGenerateAtom::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> xml2gmnManPageGenerateAtom::browseData ()" <<
@@ -337,7 +337,7 @@ void xml2gmnManPageOahGroup::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> xml2gmnManPageOahGroup::acceptIn ()" <<
@@ -375,7 +375,7 @@ void xml2gmnManPageOahGroup::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> xml2gmnManPageOahGroup::acceptOut ()" <<
@@ -413,7 +413,7 @@ void xml2gmnManPageOahGroup::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> xml2gmnManPageOahGroup::browseData ()" <<
@@ -458,7 +458,7 @@ S_xml2gmnManPageOahGroup createGlobalXml2gmnManPageOahGroupHandler (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating global xml2gmnManPage OAH group" <<

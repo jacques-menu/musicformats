@@ -43,7 +43,7 @@ void harmoniesExtraOah2manPage::visitStart (S_extraDisplayAllHarmoniesStructures
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       std::endl <<
@@ -79,7 +79,7 @@ void harmoniesExtraOah2manPage::visitEnd (S_extraDisplayAllHarmoniesStructuresAt
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       std::endl <<
@@ -99,7 +99,7 @@ void harmoniesExtraOah2manPage::visitStart (S_extraDisplayAllHarmoniesContentsAt
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       std::endl <<
@@ -135,7 +135,7 @@ void harmoniesExtraOah2manPage::visitEnd (S_extraDisplayAllHarmoniesContentsAtom
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       std::endl <<
@@ -155,7 +155,7 @@ void harmoniesExtraOah2manPage::visitStart (S_extraDisplayHarmonyDetailsAtom& el
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       std::endl <<
@@ -191,7 +191,7 @@ void harmoniesExtraOah2manPage::visitEnd (S_extraDisplayHarmonyDetailsAtom& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       std::endl <<
@@ -211,7 +211,7 @@ void harmoniesExtraOah2manPage::visitStart (S_extraDisplayHarmonyAnalysisAtom& e
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       std::endl <<
@@ -247,7 +247,7 @@ void harmoniesExtraOah2manPage::visitEnd (S_extraDisplayHarmonyAnalysisAtom& elt
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       std::endl <<

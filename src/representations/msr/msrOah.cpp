@@ -88,7 +88,7 @@ void msrPitchesLanguageAtom::applyAtomWithValue (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "==> oahAtom is of type 'msrPitchesLanguageAtom'" <<
@@ -105,7 +105,7 @@ void msrPitchesLanguageAtom::applyAtomWithValue (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "==> oahAtom is of type 'msrPitchesLanguageAtom'" <<
@@ -149,14 +149,14 @@ void msrPitchesLanguageAtom::applyAtomWithValue (
   setMsrQuarterTonesPitchesLanguageKindVariable (
     (*it).second);
 
-	fSelected = true;
+  fSelected = true;
 }
 
 void msrPitchesLanguageAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> msrPitchesLanguageAtom::acceptIn ()" <<
@@ -194,7 +194,7 @@ void msrPitchesLanguageAtom::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> msrPitchesLanguageAtom::acceptOut ()" <<
@@ -232,7 +232,7 @@ void msrPitchesLanguageAtom::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> msrPitchesLanguageAtom::browseData ()" <<
@@ -251,8 +251,7 @@ std::string msrPitchesLanguageAtom::asShortNamedOptionString () const
 
   ss <<
     '-' << fShortName << ' ' <<
-    msrQuarterTonesPitchesLanguageKindAsString (
-      fMsrQuarterTonesPitchesLanguageKindVariable);
+    fMsrQuarterTonesPitchesLanguageKindVariable;
 
   return ss.str ();
 }
@@ -263,8 +262,7 @@ std::string msrPitchesLanguageAtom::asActualLongNamedOptionString () const
 
   ss <<
     '-' << fLongName << ' ' <<
-    msrQuarterTonesPitchesLanguageKindAsString (
-      fMsrQuarterTonesPitchesLanguageKindVariable);
+    fMsrQuarterTonesPitchesLanguageKindVariable;
 
   return ss.str ();
 }
@@ -289,8 +287,7 @@ void msrPitchesLanguageAtom::print (std::ostream& os) const
     std::endl <<
     std::setw (fieldWidth) <<
     "fMsrQuarterTonesPitchesLanguageKindVariable" << ": " <<
-    msrQuarterTonesPitchesLanguageKindAsString (
-      fMsrQuarterTonesPitchesLanguageKindVariable) <<
+    fMsrQuarterTonesPitchesLanguageKindVariable <<
     std::endl;
 
   --gIndenter;
@@ -304,14 +301,13 @@ void msrPitchesLanguageAtom::displayAtomWithVariableOptionsValues (
     std::setw (valueFieldWidth) <<
     fVariableName <<
     ": " <<
-    msrQuarterTonesPitchesLanguageKindAsString (
-      fMsrQuarterTonesPitchesLanguageKindVariable);
+    fMsrQuarterTonesPitchesLanguageKindVariable;
   switch (fEarlyOptionKind) {
     case oahEarlyOptionKind::kEarlyOptionNo:
       break;
     case oahEarlyOptionKind::kEarlyOptionYes:
-			os <<
-				", early";
+      os <<
+        ", early";
       break;
   } // switch
   if (fSelected) {
@@ -383,7 +379,7 @@ void msrRenamePartAtom::applyAtomWithValue (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "==> oahAtom is of type 'msrRenamePartAtom'" <<
@@ -400,7 +396,7 @@ void msrRenamePartAtom::applyAtomWithValue (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "==> oahAtom is of type 'msrRenamePartAtom'" <<
@@ -427,7 +423,7 @@ void msrRenamePartAtom::applyAtomWithValue (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "There are " << smSize << " matches" <<
@@ -473,7 +469,7 @@ void msrRenamePartAtom::applyAtomWithValue (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "--> oldPartName = \"" << oldPartName << "\", " <<
@@ -507,14 +503,14 @@ void msrRenamePartAtom::applyAtomWithValue (
     fStringToStringMapVariable [oldPartName] = newPartName;
   }
 
-	fSelected = true;
+  fSelected = true;
 }
 
 void msrRenamePartAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> msrRenamePartAtom::acceptIn ()" <<
@@ -552,7 +548,7 @@ void msrRenamePartAtom::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> msrRenamePartAtom::acceptOut ()" <<
@@ -590,7 +586,7 @@ void msrRenamePartAtom::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> msrRenamePartAtom::browseData ()" <<
@@ -746,7 +742,7 @@ std::ostream& operator << (std::ostream& os, const S_msrRenamePartAtom& elt)
 }
 
 //_______________________________________________________________________________
-S_msrOahGroup gGlobalMsrOahGroup;
+S_msrOahGroup gMsrOahGroup;
 
 S_msrOahGroup msrOahGroup::create ()
 {
@@ -1268,7 +1264,7 @@ void msrOahGroup::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> msrOahGroup::acceptIn ()" <<
@@ -1306,7 +1302,7 @@ void msrOahGroup::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> msrOahGroup::acceptOut ()" <<
@@ -1344,7 +1340,7 @@ void msrOahGroup::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> msrOahGroup::browseData ()" <<
@@ -1430,8 +1426,7 @@ void msrOahGroup::displayMsrOahValues (int valueFieldWidth)
 
   gLog << std::left <<
     std::setw (valueFieldWidth) << "msrPitchesLanguage" << ": " <<
-    msrQuarterTonesPitchesLanguageKindAsString (
-      fMsrQuarterTonesPitchesLanguageKind) <<
+    fMsrQuarterTonesPitchesLanguageKind <<
     std::endl;
 
   --gIndenter;
@@ -1551,12 +1546,21 @@ std::ostream& operator << (std::ostream& os, const S_msrOahGroup& elt)
   return os;
 }
 
+//________________________________________________________________________
+// hidden global OAH OAH group ariable
+EXP S_msrOahGroup pGlobalMsrOahGroup;
+
+EXP S_msrOahGroup getGlobalMsrOahGroup ()
+{
+  return pGlobalMsrOahGroup;
+}
+
 //______________________________________________________________________________
 S_msrOahGroup createGlobalMsrOahGroup ()
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating global MSR OAH group" <<
@@ -1569,15 +1573,15 @@ S_msrOahGroup createGlobalMsrOahGroup ()
 #endif // MF_TRACE_IS_ENABLED
 
   // protect library against multiple initializations
-  if (! gGlobalMsrOahGroup) {
-    // create the global options group
-    gGlobalMsrOahGroup =
+  if (! pGlobalMsrOahGroup) {
+    // create the global MSR OAH options group
+    pGlobalMsrOahGroup =
       msrOahGroup::create ();
-    assert (gGlobalMsrOahGroup != 0);
+    assert (pGlobalMsrOahGroup != 0);
   }
 
-  // return the global OAH group
-  return gGlobalMsrOahGroup;
+  // return it
+  return pGlobalMsrOahGroup;
 }
 
 

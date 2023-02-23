@@ -29,11 +29,11 @@ typedef SMARTP<bsrScore> S_bsrScore;
 
 //_______________________________________________________________________________
 EXP S_bsrScore translateMsrToBsr (
-  S_msrScore         originalMsrScore,
-  S_msrOahGroup      msrOpts,
-  S_bsrOahGroup      bsrOpts,
-  mfPassIDKind       passIDKind,
-  const std::string& passDescription);
+  const S_msrScore&    originalMsrScore,
+  const S_msrOahGroup& msrOpts,
+  const S_bsrOahGroup& bsrOpts,
+  mfPassIDKind         passIDKind,
+  const std::string&   passDescription);
 
 
 }

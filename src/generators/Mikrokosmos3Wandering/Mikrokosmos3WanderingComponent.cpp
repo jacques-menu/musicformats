@@ -85,7 +85,7 @@ S_mfcGeneratorComponent createMikrokosmos3WanderingGeneratorComponent ()
 
 #ifdef MF_TRACE_IS_ENABLED
     if (gEarlyOptions.getTraceEarlyOptions ()) {
-	  	std::stringstream ss;
+      std::stringstream ss;
 
       ss <<
         "Crerating the Mikrokosmos3Wandering component" <<

@@ -140,7 +140,7 @@ R"(
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Initializing \"" <<
@@ -352,7 +352,7 @@ void msdlConverterInsiderHandler::createTheMsdlConverterPrefixes ()
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating the msdlConverter prefixes in \"" <<
@@ -376,7 +376,7 @@ void msdlConverterInsiderHandler::createTheMsdlConverterOptionGroups (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating the \"" <<
@@ -423,8 +423,6 @@ void msdlConverterInsiderHandler::createTheMsdlConverterOptionGroups (
 
   // initialize the library
   // ------------------------------------------------------
-
-  initializeWAE ();
 
   initializeMSR (); // used whatever the output kind
 
@@ -572,7 +570,7 @@ void msdlConverterInsiderHandler::checkOptionsAndArguments () const
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "checking options and arguments from argc/argv in \"" <<
@@ -603,7 +601,7 @@ std::string msdlConverterInsiderHandler::fetchOutputFileNameFromTheOptions () co
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Fetching the output file name from the options in OAH handler \"" <<
@@ -639,7 +637,7 @@ std::string msdlConverterInsiderHandler::fetchOutputFileNameFromTheOptions () co
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "msdlConverterInsiderHandler::fetchOutputFileNameFromTheOptions()" <<
@@ -843,7 +841,7 @@ std::string msdlConverterInsiderHandler::fetchOutputFileNameFromTheOptions () co
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "outputFileName: " <<
@@ -874,7 +872,7 @@ void msdlConverterInsiderHandler::enforceHandlerQuietness ()
   gGlobalmsdlConverterInsiderOahGroup->
     enforceGroupQuietness ();
 
-  gGlobalMsrOahGroup->
+  gMsrOahGroup->
     enforceGroupQuietness ();
 
   gGlobalMsr2mxsrOahGroup->
@@ -930,7 +928,7 @@ void msdlConverterInsiderOahGroup::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> msdlConverterInsiderOahGroup::acceptIn ()" <<
@@ -968,7 +966,7 @@ void msdlConverterInsiderOahGroup::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> msdlConverterInsiderOahGroup::acceptOut ()" <<
@@ -1006,7 +1004,7 @@ void msdlConverterInsiderOahGroup::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> msdlConverterInsiderOahGroup::browseData ()" <<
@@ -1160,7 +1158,7 @@ S_msdlConverterInsiderOahGroup createGlobalmsdlConverterInsiderOahGroup ()
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating global msdlConverter insider OAH group" <<

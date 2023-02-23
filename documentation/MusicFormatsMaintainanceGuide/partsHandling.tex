@@ -27,7 +27,7 @@ Parts are presented at \sectionRef{Parts}.
 void msrPart::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -41,7 +41,7 @@ void msrPart::browseData (basevisitor* v)
 #endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED // JMI
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) { // JMI TEMP
+  if (gMsrOahGroup->getTraceMsrVisitors ()) { // JMI TEMP
     gLog <<
       "++++++++ fPartAllStavesList.size(): " <<
       fPartAllStavesList.size () <<

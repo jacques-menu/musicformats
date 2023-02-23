@@ -123,8 +123,8 @@ lpsrPaper::~lpsrPaper ()
 void lpsrPaper::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
-		std::stringstream ss;
+  if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% ==> lpsrPaper::acceptIn ()" <<
@@ -142,7 +142,7 @@ void lpsrPaper::acceptIn (basevisitor* v)
         S_lpsrPaper elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
+        if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -161,8 +161,8 @@ void lpsrPaper::acceptIn (basevisitor* v)
 void lpsrPaper::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
-		std::stringstream ss;
+  if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% ==> lpsrPaper::acceptOut ()" <<
@@ -180,7 +180,7 @@ void lpsrPaper::acceptOut (basevisitor* v)
         S_lpsrPaper elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
+        if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -199,8 +199,8 @@ void lpsrPaper::acceptOut (basevisitor* v)
 void lpsrPaper::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
-		std::stringstream ss;
+  if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% ==> lpsrPaper::browseData ()" <<
@@ -225,8 +225,8 @@ void lpsrPaper::browseData (basevisitor* v)
   }
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
-		std::stringstream ss;
+  if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% <== lpsrPaper::browseData ()" <<

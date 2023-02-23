@@ -27,7 +27,7 @@
 #include "msrRepeats.h"
 #include "msrStems.h"
 #include "msrTupletFactors.h"
-#include "msrWholeNotes.h"
+// #include "msrWholeNotes.h"
 
 #include "lpsrContexts.h"
 
@@ -777,10 +777,10 @@ class EXP lpsr2lilypondTranslator :
     // markups
 
     std::string           generateAColumnForMarkup (
-                            const std::string&         theString,
+                            const std::string&       theString,
                             lilypondMarkupColumnKind columnKind);
     std::string           generateMultilineMarkup (
-                            const std::string&         theString,
+                            const std::string&       theString,
                             lilypondMarkupColumnKind columnKind);
 
     // octaves
@@ -796,10 +796,10 @@ class EXP lpsr2lilypondTranslator :
 
     // durations
 
-    msrWholeNotes          fLastMetWholeNotes;
+    msrWholeNotes         fLastMetWholeNotes;
 
-    std::string           wholeNotesAsLilypondString (
-                            int                 inputLineNumber,
+    std::string           durationAsLilypondStringIfItShouldBeGenerated (
+                            int                  inputLineNumber,
                             const msrWholeNotes& wholeNotes);
 
     std::string           msrNotesDurationKindAsLilypondString (

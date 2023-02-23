@@ -64,7 +64,7 @@ void msdl2guidoManPageGenerateAtom::applyValueLessAtom (std::ostream& os)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "==> option '" << fetchNames () << "' is a msdl2guidoManPageGenerateAtom" <<
@@ -83,7 +83,7 @@ void msdl2guidoManPageGenerateAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> msdl2guidoManPageGenerateAtom::acceptIn ()" <<
@@ -121,7 +121,7 @@ void msdl2guidoManPageGenerateAtom::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> msdl2guidoManPageGenerateAtom::acceptOut ()" <<
@@ -159,7 +159,7 @@ void msdl2guidoManPageGenerateAtom::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> msdl2guidoManPageGenerateAtom::browseData ()" <<
@@ -338,7 +338,7 @@ void msdl2guidoManPageOahGroup::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> msdl2guidoManPageOahGroup::acceptIn ()" <<
@@ -376,7 +376,7 @@ void msdl2guidoManPageOahGroup::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> msdl2guidoManPageOahGroup::acceptOut ()" <<
@@ -414,7 +414,7 @@ void msdl2guidoManPageOahGroup::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> msdl2guidoManPageOahGroup::browseData ()" <<
@@ -459,7 +459,7 @@ S_msdl2guidoManPageOahGroup createGlobalMsdl2gmnManPageOahGroupHandler (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating global msdl2guidoManPage OAH group" <<

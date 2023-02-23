@@ -84,7 +84,7 @@ if (true) // for tests JMI
     finalizePartAndAllItsMeasures (
       __LINE__);
 
-  if (gGlobalMsrOahGroup->getDisplayMsr ()) { // JMI CAFE
+  if (gMsrOahGroup->getDisplayMsr ()) { // JMI CAFE
 /* JMI
     gLog <<
       "___PART___" <<

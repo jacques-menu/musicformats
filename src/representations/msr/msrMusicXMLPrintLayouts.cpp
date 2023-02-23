@@ -63,7 +63,7 @@ msrMusicXMLPrintLayout::msrMusicXMLPrintLayout (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMusicXMLPrintLayouts ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating a print layout " <<
@@ -138,7 +138,7 @@ S_msrMeasure msrMusicXMLPrintLayout::getMusicXMLPrintLayoutUpLinkToMeasure () co
 void msrMusicXMLPrintLayout::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -157,7 +157,7 @@ void msrMusicXMLPrintLayout::acceptIn (basevisitor* v)
         S_msrMusicXMLPrintLayout elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -176,7 +176,7 @@ void msrMusicXMLPrintLayout::acceptIn (basevisitor* v)
 void msrMusicXMLPrintLayout::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -195,7 +195,7 @@ void msrMusicXMLPrintLayout::acceptOut (basevisitor* v)
         S_msrMusicXMLPrintLayout elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<

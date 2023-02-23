@@ -16,9 +16,11 @@
 #endif // WIN32
 
 #include "mfBool.h"
+#include "mfInitialization.h"
 #include "mfMusicformatsErrors.h"
-#include "mfcComponents.h"
 #include "mfTiming.h"
+
+#include "mfcComponents.h"
 
 #include "waeInterface.h"
 #include "oahWae.h"
@@ -89,7 +91,18 @@ EXP int xml2gmn (
 
   createTheGlobalIndentedOstreams (std::cout, std::cerr);
 
-  // apply early options if any
+  // initialize common things
+  // ------------------------------------------------------
+
+  initializeMusicFormats ();
+
+  initializeWAE ();
+
+  // register xml2gmn as current service
+  // ------------------------------------------------------
+
+  setGlobalService (mfServiceKind::kMfService_xml2gmn);
+
   // ------------------------------------------------------
 
   gEarlyOptions.applyEarlyOptionsIfPresentInArgcArgv (
@@ -104,7 +117,7 @@ EXP int xml2gmn (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       serviceName << " xml2gmn()" <<
@@ -215,7 +228,7 @@ EXP int xml2gmn (
     std::string separator =
       "%--------------------------------------------------------------";
 
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       serviceName << ": " <<
@@ -345,7 +358,7 @@ EXP int xml2gmn (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getEarlyTracePasses ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "The command line options and arguments have been analyzed" <<

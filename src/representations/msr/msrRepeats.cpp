@@ -96,7 +96,7 @@ void msrRepeatCommonPart::appendSegmentToRepeatCommonPart (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceSegments ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending segment '" <<
@@ -130,7 +130,7 @@ void msrRepeatCommonPart::appendRepeatToRepeatCommonPart (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceRepeats ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending repeat '" <<
@@ -165,7 +165,7 @@ void msrRepeatCommonPart::appendMeasureRepeatToRepeatCommonPart (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasureRepeats ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending measures repeat '" <<
@@ -199,7 +199,7 @@ void msrRepeatCommonPart::appendMultipleFullBarRestsToRepeatCommonPart (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMultipleFullBarRests ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending multiple full-bar rests " <<
@@ -233,7 +233,7 @@ void msrRepeatCommonPart::appendVoiceElementToRepeatCommonPart (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceRepeats ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending voice element '" <<
@@ -344,7 +344,7 @@ S_msrNote msrRepeatCommonPart::fetchRepeatCommonPartFirstNonGraceNote () const
 void msrRepeatCommonPart::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -363,7 +363,7 @@ void msrRepeatCommonPart::acceptIn (basevisitor* v)
         S_msrRepeatCommonPart elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -382,7 +382,7 @@ void msrRepeatCommonPart::acceptIn (basevisitor* v)
 void msrRepeatCommonPart::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -401,7 +401,7 @@ void msrRepeatCommonPart::acceptOut (basevisitor* v)
         S_msrRepeatCommonPart elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -627,7 +627,7 @@ void msrRepeatEnding::appendSegmentToRepeatEnding (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceVoices ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending segment '" << segment <<
@@ -660,7 +660,7 @@ void msrRepeatEnding::appendRepeatToRepeatEnding (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceVoices ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending repeat '" << repeat <<
@@ -693,7 +693,7 @@ void msrRepeatEnding::appendMeasureRepeatToRepeatEnding (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceVoices ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending measures repeat '" <<
@@ -727,7 +727,7 @@ void msrRepeatEnding::appendMultipleFullBarRestsToRepeatEnding (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceVoices ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending multiple full-bar rests " <<
@@ -761,7 +761,7 @@ void msrRepeatEnding::appendVoiceElementToRepeatEnding (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceVoices ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending voice element '" << voiceElement <<
@@ -790,7 +790,7 @@ void msrRepeatEnding::appendVoiceElementToRepeatEnding (
 void msrRepeatEnding::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -809,7 +809,7 @@ void msrRepeatEnding::acceptIn (basevisitor* v)
         S_msrRepeatEnding elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -828,7 +828,7 @@ void msrRepeatEnding::acceptIn (basevisitor* v)
 void msrRepeatEnding::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -847,7 +847,7 @@ void msrRepeatEnding::acceptOut (basevisitor* v)
         S_msrRepeatEnding elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -1135,7 +1135,7 @@ S_msrRepeat msrRepeat::createRepeatNewbornClone (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceRepeats ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating a newborn clone of a repeat" <<
@@ -1181,7 +1181,7 @@ void msrRepeat::setRepeatCommonPart (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceRepeats ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Setting repeat common part containing " <<
@@ -1219,7 +1219,7 @@ void msrRepeat::addRepeatEndingToRepeat (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceRepeats ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Adding ending '" <<
@@ -1376,7 +1376,7 @@ void msrRepeat::appendSegmentToRepeat (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceRepeats ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending segment '" <<
@@ -1462,7 +1462,7 @@ void msrRepeat::appendRepeatToRepeat (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceRepeats ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending repeat '" <<
@@ -1548,7 +1548,7 @@ void msrRepeat::appendMeasureRepeatToRepeat (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceRepeats ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending measures repeat '" <<
@@ -1634,7 +1634,7 @@ void msrRepeat::appendMultipleFullBarRestsToRepeat (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceRepeats ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending multiple full-bar rests " <<
@@ -1728,7 +1728,7 @@ S_msrNote msrRepeat::fetchRepeatFirstNonGraceNote () const
 void msrRepeat::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -1747,7 +1747,7 @@ void msrRepeat::acceptIn (basevisitor* v)
         S_msrRepeat elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -1766,7 +1766,7 @@ void msrRepeat::acceptIn (basevisitor* v)
 void msrRepeat::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -1785,7 +1785,7 @@ void msrRepeat::acceptOut (basevisitor* v)
         S_msrRepeat elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<

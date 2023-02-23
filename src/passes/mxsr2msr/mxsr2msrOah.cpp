@@ -84,7 +84,7 @@ void msrReplaceClefAtom::applyAtomWithValue (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "==> oahAtom is of type 'msrReplaceClefAtom'" <<
@@ -101,7 +101,7 @@ void msrReplaceClefAtom::applyAtomWithValue (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "--> theString = \"" << theString << "\", " <<
@@ -128,7 +128,7 @@ void msrReplaceClefAtom::applyAtomWithValue (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "There are " << smSize << " matches" <<
@@ -171,7 +171,7 @@ void msrReplaceClefAtom::applyAtomWithValue (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "--> originalClefName = \"" << originalClefName << "\", " <<
@@ -219,14 +219,14 @@ void msrReplaceClefAtom::applyAtomWithValue (
       destinationClefKind;
   }
 
-	fSelected = true;
+  fSelected = true;
 }
 
 void msrReplaceClefAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> msrReplaceClefAtom::acceptIn ()" <<
@@ -264,7 +264,7 @@ void msrReplaceClefAtom::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> msrReplaceClefAtom::acceptOut ()" <<
@@ -302,7 +302,7 @@ void msrReplaceClefAtom::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> msrReplaceClefAtom::browseData ()" <<
@@ -1641,7 +1641,7 @@ void mxsr2msrOahGroup::checkGroupOptionsConsistency ()
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Checking the consistency of mxsr2msrOahGroup group \"" <<
@@ -1999,7 +1999,7 @@ void mxsr2msrOahGroup::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> mxsr2msrOahGroup::acceptIn ()" <<
@@ -2037,7 +2037,7 @@ void mxsr2msrOahGroup::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> mxsr2msrOahGroup::acceptOut ()" <<
@@ -2075,7 +2075,7 @@ void mxsr2msrOahGroup::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> mxsr2msrOahGroup::browseData ()" <<
@@ -2564,7 +2564,7 @@ S_mxsr2msrOahGroup createGlobalMxsr2msrOahGroup (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating global mxsr2msr OAH group" <<

@@ -23,20 +23,20 @@ namespace MusicFormats
 
 //_______________________________________________________________________________
 S_msrScore translateMsrToMsr (
-  S_msrScore           originalMsrScore,
-  const S_msrOahGroup& msrOpts,
-  S_msr2msrOahGroup    msr2msrOpts,
-  mfPassIDKind         passIDKind,
-  const std::string&   passDescription);
+  const S_msrScore&        originalMsrScore,
+  const S_msrOahGroup&     msrOpts,
+  const S_msr2msrOahGroup& msr2msrOpts,
+  mfPassIDKind             passIDKind,
+  const std::string&       passDescription);
 
 //_______________________________________________________________________________
 S_msrScore translateMsrToMsrAlongPathToVoice (
-  S_msrScore           originalMsrScore,
-  const S_msrOahGroup& msrOpts,
-  S_msr2msrOahGroup    msr2msrOpts,
-  mfPassIDKind         passIDKind,
-  const std::string    passDescription,
-  S_msrPathToVoice     pathToVoice);
+  const S_msrScore&        originalMsrScore,
+  const S_msrOahGroup&     msrOpts,
+  const S_msr2msrOahGroup& msr2msrOpts,
+  mfPassIDKind             passIDKind,
+  const std::string        passDescription,
+  const S_msrPathToVoice&  pathToVoice);
 
 
 }

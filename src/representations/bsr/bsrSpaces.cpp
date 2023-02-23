@@ -61,8 +61,8 @@ bsrSpaces::~bsrSpaces ()
 void bsrSpaces::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
-		std::stringstream ss;
+  if (gBsrOahGroup->getTraceBsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% --> End visiting bsrTranscriptionNotesElement" <<
@@ -81,7 +81,7 @@ void bsrSpaces::acceptIn (basevisitor* v)
         S_bsrSpaces elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
+        if (gBsrOahGroup->getTraceBsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -105,8 +105,8 @@ int bsrSpaces::fetchCellsNumber () const
 void bsrSpaces::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
-		std::stringstream ss;
+  if (gBsrOahGroup->getTraceBsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% --> End visiting bsrTranscriptionNotesElement" <<
@@ -125,7 +125,7 @@ void bsrSpaces::acceptOut (basevisitor* v)
         S_bsrSpaces elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
+        if (gBsrOahGroup->getTraceBsrVisitors ()) {
           std::stringstream ss;
 
           ss <<

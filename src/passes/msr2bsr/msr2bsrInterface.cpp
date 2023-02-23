@@ -48,11 +48,11 @@ namespace MusicFormats
 
 //_______________________________________________________________________________
 S_bsrScore translateMsrToBsr (
-  S_msrScore         originalMsrScore,
-  S_msrOahGroup      msrOpts,
-  S_bsrOahGroup      bsrOpts,
-  mfPassIDKind       passIDKind,
-  const std::string& passDescription)
+  const S_msrScore&    originalMsrScore,
+  const S_msrOahGroup& msrOpts,
+  const S_bsrOahGroup& bsrOpts,
+  mfPassIDKind         passIDKind,
+  const std::string&   passDescription)
 {
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check

@@ -63,7 +63,7 @@ void msr2lilypondManPageGenerateAtom::applyValueLessAtom (std::ostream& os)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "==> option '" << fetchNames () << "' is a msr2lilypondManPageGenerateAtom" <<
@@ -82,7 +82,7 @@ void msr2lilypondManPageGenerateAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> msr2lilypondManPageGenerateAtom::acceptIn ()" <<
@@ -120,7 +120,7 @@ void msr2lilypondManPageGenerateAtom::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> msr2lilypondManPageGenerateAtom::acceptOut ()" <<
@@ -158,7 +158,7 @@ void msr2lilypondManPageGenerateAtom::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> msr2lilypondManPageGenerateAtom::browseData ()" <<
@@ -337,7 +337,7 @@ void msr2lilypondManPageOahGroup::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> msr2lilypondManPageOahGroup::acceptIn ()" <<
@@ -375,7 +375,7 @@ void msr2lilypondManPageOahGroup::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> msr2lilypondManPageOahGroup::acceptOut ()" <<
@@ -413,7 +413,7 @@ void msr2lilypondManPageOahGroup::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> msr2lilypondManPageOahGroup::browseData ()" <<
@@ -458,7 +458,7 @@ S_msr2lilypondManPageOahGroup createGlobalMsr2lilypondManPageOahGroup (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating global msr2lilypondManpage OAH group" <<

@@ -56,12 +56,12 @@ S_msrNote msrNote::create (
   msrQuarterTonesPitchKind   noteQuarterTonesPitchKind,
   msrOctaveKind              noteOctaveKind,
 
-  const msrWholeNotes&            noteSoundingWholeNotes,
-  const msrWholeNotes&            noteDisplayWholeNotes,
+  const msrWholeNotes&       noteSoundingWholeNotes,
+  const msrWholeNotes&       noteDisplayWholeNotes,
 
   int                        noteDotsNumber,
 
-  msrNotesDurationKind            noteGraphicNotesDurationKind,
+  msrNotesDurationKind       noteGraphicNotesDurationKind,
 
   msrQuarterTonesPitchKind   noteQuarterTonesDisplayPitchKind,
   msrOctaveKind              noteDisplayOctaveKind,
@@ -118,12 +118,12 @@ msrNote::msrNote (
   msrQuarterTonesPitchKind   noteQuarterTonesPitchKind,
   msrOctaveKind              noteOctaveKind,
 
-  const msrWholeNotes&            noteSoundingWholeNotes,
-  const msrWholeNotes&            noteDisplayWholeNotes,
+  const msrWholeNotes&       noteSoundingWholeNotes,
+  const msrWholeNotes&       noteDisplayWholeNotes,
 
   int                        noteDotsNumber,
 
-  msrNotesDurationKind            noteGraphicNotesDurationKind,
+  msrNotesDurationKind       noteGraphicNotesDurationKind,
 
   msrQuarterTonesPitchKind   noteQuarterTonesDisplayPitchKind,
   msrOctaveKind              noteDisplayOctaveKind,
@@ -214,7 +214,7 @@ void msrNote::initializeNote ()
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceNotesDetails ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       std::endl <<
@@ -222,7 +222,7 @@ void msrNote::initializeNote ()
       ", kind: ";
     if (fNoteKind == msrNoteKind::kNote_UNKNOWN)
       ss <<
-        "not yet known";
+        "kNote_UNKNOWN";
     else
       ss << fNoteKind;
     ss <<
@@ -236,122 +236,121 @@ void msrNote::initializeNote ()
     ss <<
       std::left <<
         std::setw (fieldWidth) <<
-        "fNoteQuarterTonesPitchKind" << " = " <<
+        "fNoteQuarterTonesPitchKind" << ": " <<
         msrQuarterTonesPitchKindAsStringInLanguage (
           fNoteQuarterTonesPitchKind,
-          gGlobalMsrOahGroup->
+          gMsrOahGroup->
             getMsrQuarterTonesPitchesLanguageKind ()) <<
         std::endl;
 
     ss <<
       std::left <<
         std::setw (fieldWidth) <<
-        "fSoundingWholeNotes" << " = " <<
+        "fSoundingWholeNotes" << ": " <<
         fSoundingWholeNotes <<
-        std::endl;
-
-    ss <<
+        std::endl <<
       std::left <<
         std::setw (fieldWidth) <<
-        "fNoteDisplayWholeNotes" << " = " <<
+        "fNoteDisplayWholeNotes" << ": " <<
         fNoteDisplayWholeNotes <<
         std::endl;
 
     ss <<
       std::left <<
         std::setw (fieldWidth) <<
-        "fNoteDotsNumber" << " = " <<
+        "fNoteOctaveKind" << ": " <<
+        fNoteOctaveKind <<
+        std::endl <<
+      std::left <<
+        std::setw (fieldWidth) <<
+        "fNoteDisplayOctaveKind" << ": " <<
+        fNoteDisplayOctaveKind <<
+        std::endl;
+
+    ss <<
+      std::left <<
+        std::setw (fieldWidth) <<
+        "fNoteDotsNumber" << ": " <<
         fNoteDotsNumber <<
         std::endl <<
 
       std::left <<
         std::setw (fieldWidth) <<
-        "fNoteGraphicNotesDurationKind" << " = " <<
-        fNoteGraphicNotesDurationKind;
-
-    ss <<
-      std::left <<
-        std::setw (fieldWidth) <<
-        "fNoteTupletFactor" << " = " <<
-        fNoteTupletFactor <<
+        "fNoteGraphicNotesDurationKind" << ": " <<
+        fNoteGraphicNotesDurationKind <<
         std::endl;
 
     ss <<
-      std::endl <<
-
       std::left <<
         std::setw (fieldWidth) <<
-        "fNoteOctaveKind" << " = " <<
-        fNoteOctaveKind <<
-        std::endl <<
+        "fNoteTupletFactor" << ": " <<
+        fNoteTupletFactor.asString () <<
+        std::endl;
 
+    ss <<
       std::left <<
         std::setw (fieldWidth) <<
-        "fNoteDisplayOctaveKind" << " = " <<
-        fNoteDisplayOctaveKind <<
-        std::endl <<
-
-      std::left <<
-        std::setw (fieldWidth) <<
-        "fNoteIsACueNoteKind" << " = " <<
+        "fNoteIsACueNoteKind" << ": " <<
          fNoteIsACueNoteKind <<
         std::endl <<
 
       std::left <<
         std::setw (fieldWidth) <<
-        "fNotePrintObjectKind" << " = " <<
+        "fNotePrintObjectKind" << ": " <<
          fNotePrintObjectKind <<
         std::endl <<
 
       std::left <<
         std::setw (fieldWidth) <<
-        "fNoteHeadKind" << " = " <<
+        "fNoteHeadKind" << ": " <<
          fNoteHeadKind <<
         std::endl <<
       std::left <<
         std::setw (fieldWidth) <<
-        "fNoteHeadFilledKind" << " = " <<
+        "fNoteHeadFilledKind" << ": " <<
          fNoteHeadFilledKind <<
         std::endl <<
       std::left <<
         std::setw (fieldWidth) <<
-        "fNoteHeadParenthesesKind" << " = " <<
+        "fNoteHeadParenthesesKind" << ": " <<
          fNoteHeadParenthesesKind <<
         std::endl <<
 
       std::left <<
         std::setw (fieldWidth) <<
-        "fNoteAccidentalKind" << " = " <<
+        "fNoteAccidentalKind" << ": " <<
         fNoteAccidentalKind <<
         std::endl <<
       std::left <<
         std::setw (fieldWidth) <<
-        "fNoteEditorialAccidentalKind" << " = " <<
+        "fNoteEditorialAccidentalKind" << ": " <<
         fNoteEditorialAccidentalKind <<
         std::endl <<
       std::left <<
         std::setw (fieldWidth) <<
-        "fNoteCautionaryAccidentalKind" << " = " <<
+        "fNoteCautionaryAccidentalKind" << ": " <<
         fNoteCautionaryAccidentalKind <<
         std::endl <<
 
       std::left <<
         std::setw (fieldWidth) <<
-        "fNoteBelongsToAChord" << " = " <<
+        "fNoteBelongsToAChord" << ": " <<
          fNoteBelongsToAChord <<
         std::endl <<
 
       std::left <<
         std::setw (fieldWidth) <<
-        "fNoteBelongsToATuplet" << " = " <<
+        "fNoteBelongsToATuplet" << ": " <<
          fNoteBelongsToATuplet <<
-        std::endl << std::endl <<
+        std::endl <<
 
       std::left <<
         std::setw (fieldWidth) <<
-        "fNoteOccupiesAFullMeasure" << " = " <<
+        "fNoteOccupiesAFullMeasure" << ": " <<
          fNoteOccupiesAFullMeasure <<
-        std::endl << std::endl;
+        std::endl;
+
+		ss << std::endl;
 
     --gIndenter;
 
@@ -401,7 +400,7 @@ void msrNote::setNoteUpLinkToMeasure (
   if (gTraceOahGroup->getTraceWholeNotes ()) {
     ++gIndenter;
 
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "==> Setting the uplink to measure of note " <<
@@ -558,7 +557,7 @@ S_msrVoice msrNote::fetchNoteUpLinkToVoice () const
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceNotes ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "--> fetchNoteUpLinkToVoice() for note: " <<
@@ -697,7 +696,7 @@ void msrNote::setNoteKind (msrNoteKind noteKind)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceNotes ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Setting the kind of note " <<
@@ -728,7 +727,7 @@ S_msrNote msrNote::createNoteNewbornClone (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceNotes ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating a newborn clone of note " <<
@@ -936,7 +935,7 @@ S_msrNote msrNote::createNoteDeepClone (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceNotes ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating a deep clone of note " <<
@@ -1446,11 +1445,11 @@ S_msrNote msrNote::createNoteDeepClone (
 }
 
 S_msrNote msrNote::createRestNote (
-  int                inputLineNumber,
-  const std::string& noteMeasureNumber,
-  const msrWholeNotes&    soundingWholeNotes,
-  const msrWholeNotes&    displayWholeNotes,
-  int                dotsNumber)
+  int                  inputLineNumber,
+  const std::string&   noteMeasureNumber,
+  const msrWholeNotes& soundingWholeNotes,
+  const msrWholeNotes& displayWholeNotes,
+  int                  dotsNumber)
 {
   msrNote * o =
     new msrNote (
@@ -1485,7 +1484,7 @@ S_msrNote msrNote::createRestNote (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceRestNotes ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating rest note " <<
@@ -1503,11 +1502,11 @@ S_msrNote msrNote::createRestNote (
 }
 
 S_msrNote msrNote::createSkipNote (
-  int                inputLineNumber,
-  const std::string& noteMeasureNumber,
-  const msrWholeNotes&    soundingWholeNotes,
-  const msrWholeNotes&    displayWholeNotes,
-  int                dotsNumber)
+  int                  inputLineNumber,
+  const std::string&   noteMeasureNumber,
+  const msrWholeNotes& soundingWholeNotes,
+  const msrWholeNotes& displayWholeNotes,
+  int                  dotsNumber)
 {
   msrNote * o =
     new msrNote (
@@ -1542,7 +1541,7 @@ S_msrNote msrNote::createSkipNote (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceSkipNotes ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating skip note " <<
@@ -1560,11 +1559,11 @@ S_msrNote msrNote::createSkipNote (
 }
 
 S_msrNote msrNote::createGraceSkipNote (
-  int                inputLineNumber,
-  const std::string& noteMeasureNumber,
-  const msrWholeNotes&    soundingWholeNotes,
-  const msrWholeNotes&    displayWholeNotes,
-  int                dotsNumber)
+  int                  inputLineNumber,
+  const std::string&   noteMeasureNumber,
+  const msrWholeNotes& soundingWholeNotes,
+  const msrWholeNotes& displayWholeNotes,
+  int                  dotsNumber)
 {
   msrNote * o =
     new msrNote (
@@ -1599,7 +1598,7 @@ S_msrNote msrNote::createGraceSkipNote (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceSkipNotes ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating grace skip note " <<
@@ -1618,12 +1617,12 @@ S_msrNote msrNote::createGraceSkipNote (
 
 //________________________________________________________________________
 S_msrNote msrNote::createRestNoteWithOctave (
-  int                inputLineNumber,
-  const std::string& noteMeasureNumber,
-  msrOctaveKind      noteOctave,
-  const msrWholeNotes&    soundingWholeNotes,
-  const msrWholeNotes&    displayWholeNotes,
-  int                dotsNumber)
+  int                  inputLineNumber,
+  const std::string&   noteMeasureNumber,
+  msrOctaveKind        noteOctave,
+  const msrWholeNotes& soundingWholeNotes,
+  const msrWholeNotes& displayWholeNotes,
+  int                  dotsNumber)
 {
   msrNote * o =
     new msrNote (
@@ -1658,7 +1657,7 @@ S_msrNote msrNote::createRestNoteWithOctave (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceRestNotes ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating rest note " <<
@@ -1677,12 +1676,12 @@ S_msrNote msrNote::createRestNoteWithOctave (
 
 //________________________________________________________________________
 S_msrNote msrNote::createSkipNoteWithOctave (
-  int                inputLineNumber,
-  const std::string& noteMeasureNumber,
-  msrOctaveKind      noteOctave,
-  const msrWholeNotes&    soundingWholeNotes,
-  const msrWholeNotes&    displayWholeNotes,
-  int                dotsNumber)
+  int                  inputLineNumber,
+  const std::string&   noteMeasureNumber,
+  msrOctaveKind        noteOctave,
+  const msrWholeNotes& soundingWholeNotes,
+  const msrWholeNotes& displayWholeNotes,
+  int                  dotsNumber)
 {
   msrNote * o =
     new msrNote (
@@ -1717,7 +1716,7 @@ S_msrNote msrNote::createSkipNoteWithOctave (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceSkipNotes ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating skip note with octave " <<
@@ -1740,8 +1739,8 @@ S_msrNote msrNote::createRegularNote (
   const std::string&       noteMeasureNumber,
   msrQuarterTonesPitchKind quarterTonesPitchKind,
   msrOctaveKind            noteOctaveKind,
-  const msrWholeNotes&          soundingWholeNotes,
-  const msrWholeNotes&          displayWholeNotes,
+  const msrWholeNotes&     soundingWholeNotes,
+  const msrWholeNotes&     displayWholeNotes,
   int                      dotsNumber)
 {
   msrNote * o =
@@ -1777,7 +1776,7 @@ S_msrNote msrNote::createRegularNote (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceNotes ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating regular note " <<
@@ -1806,7 +1805,7 @@ S_msrNote msrNote::createRestFromString (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceNotes ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating rest from string \"" <<
@@ -1834,7 +1833,7 @@ S_msrNote msrNote::createRestFromString (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "regularExpression = " <<
@@ -1856,7 +1855,7 @@ S_msrNote msrNote::createRestFromString (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "There are " << smSize << " matches" <<
@@ -1898,7 +1897,7 @@ S_msrNote msrNote::createRestFromString (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "restNotesDuration = \"" <<
@@ -1935,7 +1934,7 @@ S_msrNote msrNote::createRestFromString (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "notesNotesDurationKindFromMslpString = " <<
@@ -1971,7 +1970,7 @@ S_msrNote msrNote::createSkipFromString (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceNotes ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating skip from string \"" <<
@@ -1999,7 +1998,7 @@ S_msrNote msrNote::createSkipFromString (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "regularExpression = " <<
@@ -2021,7 +2020,7 @@ S_msrNote msrNote::createSkipFromString (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "There are " << smSize << " matches" <<
@@ -2063,7 +2062,7 @@ S_msrNote msrNote::createSkipFromString (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "skipNotesDuration = \"" <<
@@ -2100,7 +2099,7 @@ S_msrNote msrNote::createSkipFromString (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "notesNotesDurationKindFromMslpString = " <<
@@ -2137,7 +2136,7 @@ S_msrNote msrNote::createNoteFromString (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceNotes ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating note from string \"" <<
@@ -2170,7 +2169,7 @@ S_msrNote msrNote::createNoteFromString (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "regularExpression = " <<
@@ -2192,7 +2191,7 @@ S_msrNote msrNote::createNoteFromString (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "There are " << smSize << " matches" <<
@@ -2236,7 +2235,7 @@ S_msrNote msrNote::createNoteFromString (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "notePitch = \"" <<
@@ -2272,7 +2271,7 @@ S_msrNote msrNote::createNoteFromString (
   msrQuarterTonesPitchKind
     quarterTonesPitchKind =
       quarterTonesPitchKindFromString (
-        gGlobalMsrOahGroup->
+        gMsrOahGroup->
           getMsrQuarterTonesPitchesLanguageKind (),
         notePitch);
 
@@ -2298,7 +2297,7 @@ S_msrNote msrNote::createNoteFromString (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "quarterTonesPitchKind = " <<
@@ -2379,7 +2378,7 @@ S_msrNote msrNote::createNoteFromSemiTonesPitchAndOctave (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceNotesOctaveEntry ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating note " <<
@@ -2411,7 +2410,7 @@ void msrNote::setMeasurePosition (
     getMeasureElementUpLinkToMeasure (
       upLinkToMeasure);
 
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Setting measure position of " <<
@@ -2488,7 +2487,7 @@ void msrNote::setNoteAttachedElementsMeasurePosition (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceFiguredBasses ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "fNoteFiguredBassesList.size (): " <<
@@ -2545,7 +2544,7 @@ std::string msrNote::noteSoundingWholeNotesAsMsrString () const
         fSoundingWholeNotes);
 
   return result;
-  }
+}
 
 std::string msrNote::noteDisplayWholeNotesAsMsrString () const
 {
@@ -2593,7 +2592,7 @@ void msrNote::setNoteBelongsToAChord ()
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceChords ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Setting note " <<
@@ -2639,7 +2638,7 @@ void msrNote::determineTupletMemberSoundingFromDisplayWholeNotes (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceTuplets ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Determining tuplet sounding from display whole notes" <<
@@ -2667,7 +2666,7 @@ void msrNote::determineTupletMemberSoundingFromDisplayWholeNotes (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceTuplets ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "The result is: '" <<
@@ -2686,7 +2685,7 @@ void msrNote::appendBeamToNote (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceBeams ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Adding beam " <<
@@ -2718,7 +2717,7 @@ void msrNote::appendArticulationToNote (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceArticulations ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Adding articulation " <<
@@ -2741,7 +2740,7 @@ void msrNote::appendSpannerToNote (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceSpanners ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending spanner '" <<
@@ -2787,7 +2786,7 @@ void msrNote::appendTechnicalToNote (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceTechnicals ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Adding technical " <<
@@ -2812,7 +2811,7 @@ void msrNote::appendTechnicalWithIntegerToNote (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceTechnicals ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Adding technical with integer " <<
@@ -2838,7 +2837,7 @@ void msrNote::appendTechnicalWithFloatToNote (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceTechnicals ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Adding technical with float " <<
@@ -2864,7 +2863,7 @@ void msrNote::appendTechnicalWithStringToNote (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceTechnicals ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Adding technical with string'" <<
@@ -2890,7 +2889,7 @@ void msrNote::appendOrnamentToNote (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceOrnaments ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Adding ornament '" <<
@@ -2941,7 +2940,7 @@ void msrNote::appendGlissandoToNote (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceGlissandos ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Adding glissando " <<
@@ -2965,7 +2964,7 @@ void msrNote::appendSlideToNote (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceSlides ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Adding slide " <<
@@ -2989,7 +2988,7 @@ void msrNote::setNoteGraceNotesGroupBefore (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceGraceNotes ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Attaching grace notes group '" <<
@@ -3019,7 +3018,7 @@ void msrNote::setNoteGraceNotesGroupAfter (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceGraceNotes ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Attaching grace notes group '" <<
@@ -3049,7 +3048,7 @@ void msrNote::setNoteAfterGraceNotesGroup (S_msrGraceNotesGroup afterGraceNotesG
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceGraceNotes ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Attaching afterGraceNotesGroup '" << afterGraceNotesGroup->asString () <<
@@ -3073,7 +3072,7 @@ void msrNote::setNoteSingleTremolo (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceTremolos ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Adding singleTremolo " <<
@@ -3098,7 +3097,7 @@ void msrNote::appendDynamicToNote (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceDynamics ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Attaching dynamic " <<
@@ -3133,7 +3132,7 @@ void msrNote::appendSlurToNote (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceSlurs ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Adding slur '" << slur <<
@@ -3154,7 +3153,7 @@ void msrNote::appendLigatureToNote (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceLigatures ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending ligature " << ligature << " to note " << asString () <<
@@ -3228,7 +3227,7 @@ void msrNote::appendPedalToNote (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTracePedals ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending pedal " << pedal << " to note " << asString () <<
@@ -3299,7 +3298,7 @@ void msrNote::appendSlashToNote (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceSlashes ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending slash '" <<
@@ -3340,7 +3339,7 @@ void msrNote::appendDalSegnoToNote (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceDalSegnos ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending dal segno " <<
@@ -3395,7 +3394,7 @@ void msrNote::appendScordaturaToNote (
 // {
 // #ifdef MF_TRACE_IS_ENABLED
 //   if (gTraceOahGroup->getTraceMeasurePositions ()) {
-// 		std::stringstream ss;
+//     std::stringstream ss;
 //
 //     ss <<
 //       "Assigning note voice position of " <<
@@ -3421,7 +3420,7 @@ void msrNote::appendScordaturaToNote (
 //   // set measure element voice position
 // #ifdef MF_TRACE_IS_ENABLED
 //   if (gTraceOahGroup->getTraceMeasurePositions ()) {
-// 		std::stringstream ss;
+//     std::stringstream ss;
 //
 //     ss <<
 //       "Setting note voice position of " <<
@@ -3444,7 +3443,7 @@ void msrNote::appendScordaturaToNote (
 //
 // #ifdef MF_TRACE_IS_ENABLED
 //   if (gTraceOahGroup->getTraceMeasurePositions ()) {
-// 		 std::stringstream ss;
+//      std::stringstream ss;
 //
 //     ss <<
 //       "Position in voice becomes " <<
@@ -3477,7 +3476,7 @@ S_msrDynamic msrNote::removeFirstDynamics () // JMI
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceDynamics ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Removing first dynamic from note '" <<
@@ -3508,7 +3507,7 @@ S_msrWedge msrNote::removeFirstWedge () // JMI
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceWedges ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Removing first wedge from note '" <<
@@ -3539,7 +3538,7 @@ void msrNote::appendSyllableToNote (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceLyrics ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending syllable " <<
@@ -3598,7 +3597,7 @@ void msrNote::appendFiguredBassToNote (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceFiguredBasses ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Append figured bass " <<
@@ -3632,7 +3631,7 @@ void msrNote::appendFiguredBassToNote (
 void msrNote::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -3651,7 +3650,7 @@ void msrNote::acceptIn (basevisitor* v)
         S_msrNote elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -3670,7 +3669,7 @@ void msrNote::acceptIn (basevisitor* v)
 void msrNote::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -3689,7 +3688,7 @@ void msrNote::acceptOut (basevisitor* v)
         S_msrNote elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -3723,7 +3722,7 @@ void msrNote::browseData (basevisitor* v)
       if (inhibitGraceNotesGroupsBeforeBrowsing) {
 #ifdef MF_TRACE_IS_ENABLED
         if (
-          gGlobalMsrOahGroup->getTraceMsrVisitors ()
+          gMsrOahGroup->getTraceMsrVisitors ()
             ||
           gTraceOahGroup->getTraceNotes ()
             ||
@@ -4148,7 +4147,7 @@ void msrNote::browseData (basevisitor* v)
       if (inhibitGraceNotesGroupsAfterBrowsing) {
 #ifdef MF_TRACE_IS_ENABLED
         if (
-          gGlobalMsrOahGroup->getTraceMsrVisitors ()
+          gMsrOahGroup->getTraceMsrVisitors ()
             ||
           gTraceOahGroup->getTraceNotes ()
             ||
@@ -4179,6 +4178,8 @@ std::string msrNote::notePitchAsString () const
 {
   std::stringstream ss;
 
+	// ss << "======> notePitchAsString()" << std::endl;
+
   switch (fNoteKind) {
     case msrNoteKind::kNote_UNKNOWN:
     case msrNoteKind::kNoteRestInMeasure:
@@ -4195,13 +4196,13 @@ std::string msrNote::notePitchAsString () const
       ss <<
         msrQuarterTonesPitchKindAsStringInLanguage (
           fNoteQuarterTonesPitchKind,
-          gGlobalMsrOahGroup->
+          gMsrOahGroup->
             getMsrQuarterTonesPitchesLanguageKind ());
       break;
 
     case msrNoteKind::kNoteUnpitchedInMeasure:
     case msrNoteKind::kNoteUnpitchedInTuplet:
-      ss << "unpitched ";
+      ss << "unpitched";
       break;
   } // switch
 
@@ -4212,10 +4213,12 @@ std::string msrNote::noteDisplayPitchKindAsString () const
 {
   std::stringstream ss;
 
+// 	// ss << "======> noteDisplayPitchKindAsString()" << std::endl;
+
   ss <<
     msrQuarterTonesPitchKindAsStringInLanguage (
       fNoteQuarterTonesDisplayPitchKind,
-      gGlobalMsrOahGroup->
+      gMsrOahGroup->
         getMsrQuarterTonesPitchesLanguageKind ());
 
   return ss.str ();
@@ -4247,7 +4250,7 @@ std::string msrNote::noteDiatonicPitchKindAsString (
 {
   return
     msrDiatonicPitchKindAsStringInLanguage (
-      gGlobalMsrOahGroup->getMsrQuarterTonesPitchesLanguageKind (),
+      gMsrOahGroup->getMsrQuarterTonesPitchesLanguageKind (),
       noteDiatonicPitchKind (
         fInputLineNumber));
 }
@@ -4306,6 +4309,8 @@ std::string msrNote::asShortStringWithRawWholeNotes () const
       break;
 
     case msrNoteKind::kNoteRegularInMeasure:
+			// ss << "======> asShortStringWithRawWholeNotes()" << std::endl;
+
       ss <<
         "kNoteRegularInMeasure" <<
         notePitchAsString () <<
@@ -4528,6 +4533,8 @@ std::string msrNote::asShortString () const
 
     case msrNoteKind::kNoteRegularInMeasure:
       {
+			// ss << "======> asShortString()" << std::endl;
+
         ss <<
           "kNoteRegularInMeasure" <<
           ", " <<
@@ -4815,6 +4822,8 @@ std::string msrNote::asMinimalString () const
 
     case msrNoteKind::kNoteRegularInMeasure:
       {
+				// ss << "======> asMinimalString()" << std::endl;
+
         ss <<
           "kNoteRegularInMeasure" <<
           ", " <<
@@ -5059,8 +5068,12 @@ std::string msrNote::soundingNoteEssentialsAsString () const
 
   std::stringstream ss;
 
+// 	ss << "======> msrNote::soundingNoteEssentialsAsString()" << std::endl;
+//
+// 	print (gLog);
+
   ss <<
-    "noteSoundingWholeNotes " <<
+    "sounding: " <<
     notePitchAsString () <<
     noteSoundingWholeNotesAsMsrString ();
 
@@ -5069,10 +5082,12 @@ std::string msrNote::soundingNoteEssentialsAsString () const
   } // for
 
   ss <<
-    ' ' <<
+    '-' <<
     fNoteOctaveKind <<
 //     ",++++ " << // JMI KAKA v0.9.66
     noteComplementsAsString ();
+
+// 	ss << "<====== msrNote::soundingNoteEssentialsAsString(), return " << ss.str () << std::endl;
 
   return ss.str ();
 }
@@ -5160,9 +5175,11 @@ std::string msrNote::asString () const
 {
   std::stringstream ss;
 
+// 	ss << "======> msrNote::asString()" << std::endl;
+
   ss <<
-    "[Note" <<
-    ", fNoteKind: ";
+    "[Note, ";
+//     ", fNoteKind: "; // JMI v0.9.67
 
   switch (fNoteKind) {
     case msrNoteKind::kNote_UNKNOWN:
@@ -5196,56 +5213,58 @@ std::string msrNote::asString () const
 
     case msrNoteKind::kNoteSkipInMeasure:
       ss <<
-        "kNoteSkipInMeasure: " <<
+        "kNoteSkipInMeasure, " <<
         nonSoundingNoteEssentialsAsString ();
       break;
 
     case msrNoteKind::kNoteUnpitchedInMeasure:
       ss <<
-        "kNoteUnpitchedInMeasure: " <<
+        "kNoteUnpitchedInMeasure, " <<
         nonSoundingNoteEssentialsAsString ();
       break;
 
     case msrNoteKind::kNoteRegularInMeasure:
+			ss << "======> msrNote::asString() - " << std::endl;
+
       ss <<
-        "kNoteRegularInMeasure: " <<
+        "kNoteRegularInMeasure, " <<
         soundingNoteEssentialsAsString ();
       break;
 
     case msrNoteKind::kNoteInDoubleTremolo:
       ss <<
-        "kNoteInDoubleTremolo: " <<
+        "kNoteInDoubleTremolo, " <<
         soundingNoteEssentialsAsString ();
       break;
 
     case msrNoteKind::kNoteRegularInGraceNotesGroup:
       ss <<
-        "kNoteRegularInGraceNotesGroup: " <<
+        "kNoteRegularInGraceNotesGroup, " <<
         nonSoundingNoteEssentialsAsString ();
       break;
 
     case msrNoteKind::kNoteSkipInGraceNotesGroup:
       ss <<
-        "kNoteSkipInGraceNotesGroup: " <<
+        "kNoteSkipInGraceNotesGroup, " <<
         nonSoundingNoteEssentialsAsString ();
       break;
 
     case msrNoteKind::kNoteInChordInGraceNotesGroup:
       ss <<
-        "kNoteInChordInGraceNotesGroup " <<
+        "kNoteInChordInGraceNotesGroup, " <<
         nonSoundingNoteEssentialsAsString () <<
-        ", fNoteTupletFactor " << fNoteTupletFactor.asString ();
+        ", fNoteTupletFactor: " << fNoteTupletFactor.asString ();
       break;
 
     case msrNoteKind::kNoteRegularInChord:
       ss <<
-        "kNoteRegularInChord: " <<
+        "kNoteRegularInChord, " <<
         soundingNoteEssentialsAsString ();
       break;
 
     case msrNoteKind::kNoteRegularInTuplet:
       ss <<
-        "kNoteRegularInTuplet: " <<
+        "kNoteRegularInTuplet, " <<
         soundingNoteEssentialsAsString ();
 /* JMI
         noteUpLinkToPart ()->
@@ -5259,13 +5278,13 @@ std::string msrNote::asString () const
 
     case msrNoteKind::kNoteRestInTuplet:
       ss <<
-        "kNoteRestInTuplet: " <<
+        "kNoteRestInTuplet, " <<
         nonSoundingNoteEssentialsAsString ();
       break;
 
     case msrNoteKind::kNoteInTupletInGraceNotesGroup:
       ss <<
-        "kNoteInTupletInGraceNotesGroup " <<
+        "kNoteInTupletInGraceNotesGroup, " <<
         nonSoundingNoteEssentialsAsString ();
 /* JMI
         noteUpLinkToPart ()->
@@ -5277,12 +5296,12 @@ std::string msrNote::asString () const
             */
 
       ss <<
-        ", fNoteTupletFactor " << fNoteTupletFactor.asString ();
+        ", fNoteTupletFactor: " << fNoteTupletFactor.asString ();
       break;
 
     case msrNoteKind::kNoteUnpitchedInTuplet:
       ss <<
-        "kNoteUnpitchedInTuplet: " <<
+        "kNoteUnpitchedInTuplet, " <<
         noteSoundingWholeNotesAsMsrString ();
 /* JMI
         noteUpLinkToPart ()->
@@ -5293,7 +5312,7 @@ std::string msrNote::asString () const
             fNoteShortcutUpLinkToTuplet->getTupletNormalNotes ())
             */
       ss <<
-        ", noteTupletFactor " << fNoteTupletFactor.asString ();
+        ", noteTupletFactor: " << fNoteTupletFactor.asString ();
       break;
   } // switch
 
@@ -5374,7 +5393,7 @@ std::string msrNote::asShortStringForMeasuresSlices () const
 
     case msrNoteKind::kNoteRestInMeasure:
       ss <<
-        "kNoteRestInMeasure: ";
+        "kNoteRestInMeasure, ";
 
       if (fNoteOccupiesAFullMeasure) {
         ss <<
@@ -5404,50 +5423,50 @@ std::string msrNote::asShortStringForMeasuresSlices () const
 
     case msrNoteKind::kNoteUnpitchedInMeasure:
       ss <<
-        "unpitched :" <<
+        "unpitched, " <<
         nonSoundingNoteEssentialsAsStringForMeasuresSlices ();
       break;
 
     case msrNoteKind::kNoteRegularInMeasure:
       ss <<
-       "kNoteRegularInMeasure: " <<
+       "kNoteRegularInMeasure, " <<
         soundingNoteEssentialsAsStringForMeasuresSlices ();
       break;
 
     case msrNoteKind::kNoteInDoubleTremolo:
       ss <<
-        "kNoteInDoubleTremolo: " <<
+        "kNoteInDoubleTremolo, " <<
         soundingNoteEssentialsAsStringForMeasuresSlices ();
       break;
 
     case msrNoteKind::kNoteRegularInGraceNotesGroup:
       ss <<
-        "kNoteRegularInGraceNotesGroup: " <<
+        "kNoteRegularInGraceNotesGroup, " <<
         nonSoundingNoteEssentialsAsStringForMeasuresSlices ();
       break;
 
     case msrNoteKind::kNoteSkipInGraceNotesGroup:
       ss <<
-        "kNoteSkipInGraceNotesGroup :" <<
+        "kNoteSkipInGraceNotesGroup, " <<
         nonSoundingNoteEssentialsAsStringForMeasuresSlices ();
       break;
 
     case msrNoteKind::kNoteInChordInGraceNotesGroup:
       ss <<
-        "kNoteInChordInGraceNotesGroup: " <<
+        "kNoteInChordInGraceNotesGroup, " <<
         soundingNoteEssentialsAsStringForMeasuresSlices () <<
         ", noteTupletFactor " << fNoteTupletFactor.asString ();
       break;
 
     case msrNoteKind::kNoteRegularInChord:
       ss <<
-       "kNoteRegularInChord: " <<
+       "kNoteRegularInChord, " <<
         soundingNoteEssentialsAsStringForMeasuresSlices ();
       break;
 
     case msrNoteKind::kNoteRegularInTuplet:
       ss <<
-        "kNoteRegularInTuplet: " <<
+        "kNoteRegularInTuplet, " <<
         soundingNoteEssentialsAsStringForMeasuresSlices ();
 /* JMI
         noteUpLinkToPart ()->
@@ -5461,13 +5480,13 @@ std::string msrNote::asShortStringForMeasuresSlices () const
 
     case msrNoteKind::kNoteRestInTuplet:
       ss <<
-        "kNoteRestInTuplet: " <<
+        "kNoteRestInTuplet, " <<
         soundingNoteEssentialsAsStringForMeasuresSlices ();
       break;
 
     case msrNoteKind::kNoteInTupletInGraceNotesGroup:
       ss <<
-        "kNoteInTupletInGraceNotesGroup: " <<
+        "kNoteInTupletInGraceNotesGroup, " <<
         soundingNoteEssentialsAsStringForMeasuresSlices ();
 /* JMI
         noteUpLinkToPart ()->
@@ -5484,7 +5503,7 @@ std::string msrNote::asShortStringForMeasuresSlices () const
 
     case msrNoteKind::kNoteUnpitchedInTuplet:
       ss <<
-        "kNoteUnpitchedInTuplet: " <<
+        "kNoteUnpitchedInTuplet, " <<
         noteSoundingWholeNotesAsMsrString ();
 /* JMI
         noteUpLinkToPart ()->
@@ -5510,8 +5529,8 @@ std::string msrNote::noteEssentialsAsSting () const
 {
   std::stringstream ss;
 
-  ss <<
-    "fNoteKind: ";
+//   ss <<
+//     "fNoteKind: "; // JMI v0.9.67
 
   switch (fNoteKind) {
     case msrNoteKind::kNote_UNKNOWN:
@@ -5521,7 +5540,7 @@ std::string msrNote::noteEssentialsAsSting () const
 
     case msrNoteKind::kNoteRestInMeasure:
       ss <<
-        "kNoteRestInMeasure: ";
+        "kNoteRestInMeasure, ";
 
       if (fNoteOccupiesAFullMeasure) {
         ss <<
@@ -5538,56 +5557,58 @@ std::string msrNote::noteEssentialsAsSting () const
 
     case msrNoteKind::kNoteSkipInMeasure:
       ss <<
-        "kNoteSkipInMeasure: " <<
+        "kNoteSkipInMeasure, " <<
         nonSoundingNoteEssentialsAsString ();
       break;
 
     case msrNoteKind::kNoteUnpitchedInMeasure:
       ss <<
-        "kNoteUnpitchedInMeasure: " <<
+        "kNoteUnpitchedInMeasure, " <<
         nonSoundingNoteEssentialsAsString ();
       break;
 
     case msrNoteKind::kNoteRegularInMeasure:
+			// ss << "======> noteEssentialsAsSting()" << std::endl;
+
       ss <<
-        "kNoteRegularInMeasure: " <<
+        "kNoteRegularInMeasure, " <<
         soundingNoteEssentialsAsString ();
       break;
 
     case msrNoteKind::kNoteInDoubleTremolo:
       ss <<
-        "kNoteInDoubleTremolo: " <<
+        "kNoteInDoubleTremolo, " <<
         soundingNoteEssentialsAsString ();
       break;
 
     case msrNoteKind::kNoteRegularInGraceNotesGroup:
       ss <<
-        "kNoteRegularInGraceNotesGroup " <<
+        "kNoteRegularInGraceNotesGroup, " <<
         nonSoundingNoteEssentialsAsString ();
       break;
 
     case msrNoteKind::kNoteSkipInGraceNotesGroup:
       ss <<
-        "kNoteSkipInGraceNotesGroup: " <<
+        "kNoteSkipInGraceNotesGroup, " <<
         nonSoundingNoteEssentialsAsString ();
       break;
 
     case msrNoteKind::kNoteInChordInGraceNotesGroup:
       ss <<
-        "kNoteInChordInGraceNotesGroup: " <<
+        "kNoteInChordInGraceNotesGroup, " <<
         nonSoundingNoteEssentialsAsString () <<
         ", fNoteTupletFactor " << fNoteTupletFactor.asString ();
       break;
 
     case msrNoteKind::kNoteRegularInChord:
       ss <<
-        "kNoteRegularInChord: " <<
+        "kNoteRegularInChord, " <<
         soundingNoteEssentialsAsString ();
       break;
 
     case msrNoteKind::kNoteRegularInTuplet:
       ss <<
-        "kNoteRegularInTuplet: " <<
+        "kNoteRegularInTuplet, " <<
         soundingNoteEssentialsAsString ();
 /* JMI
         noteUpLinkToPart ()->
@@ -5601,13 +5622,13 @@ std::string msrNote::noteEssentialsAsSting () const
 
     case msrNoteKind::kNoteRestInTuplet:
       ss <<
-        "kNoteRestInTuplet: " <<
+        "kNoteRestInTuplet, " <<
         nonSoundingNoteEssentialsAsString ();
       break;
 
     case msrNoteKind::kNoteInTupletInGraceNotesGroup:
       ss <<
-        "kNoteInTupletInGraceNotesGroup " <<
+        "kNoteInTupletInGraceNotesGroup, " <<
         nonSoundingNoteEssentialsAsString ();
 /* JMI
         noteUpLinkToPart ()->
@@ -5624,7 +5645,7 @@ std::string msrNote::noteEssentialsAsSting () const
 
     case msrNoteKind::kNoteUnpitchedInTuplet:
       ss <<
-        "kNoteUnpitchedInTuplet: " <<
+        "kNoteUnpitchedInTuplet, " <<
         noteSoundingWholeNotesAsMsrString ();
 /* JMI
         noteUpLinkToPart ()->
@@ -5644,6 +5665,8 @@ std::string msrNote::noteEssentialsAsSting () const
 
 void msrNote::printFull (std::ostream& os) const
 {
+	os << "======> msrNote::printFull()" << std::endl;
+
   os <<
     "[Note" <<
     ", " <<
@@ -5664,7 +5687,12 @@ void msrNote::printFull (std::ostream& os) const
     std::setw (fieldWidth) <<
     "fSoundingWholeNotes" << ": " <<
     fSoundingWholeNotes <<
+    std::endl <<
+    std::setw (fieldWidth) <<
+    "fNoteOccupiesAFullMeasure" << ": " <<
+    fNoteOccupiesAFullMeasure <<
     std::endl;
+
 
   os << std::left <<
     std::setw (fieldWidth) <<
@@ -5740,12 +5768,6 @@ void msrNote::printFull (std::ostream& os) const
     std::setw (fieldWidth) <<
     "fNoteBelongsToATuplet" << ": " <<
     fNoteBelongsToATuplet <<
-    std::endl;
-
-  os << std::left <<
-    std::setw (fieldWidth) <<
-    "fNoteOccupiesAFullMeasure" << ": " <<
-    fNoteOccupiesAFullMeasure <<
     std::endl;
 
   os << std::left <<
@@ -7356,6 +7378,8 @@ void msrNote::printFull (std::ostream& os) const
 
 void msrNote::print (std::ostream& os) const
 {
+// 	os << "======> msrNote::print()" << std::endl;
+
   os <<
     "[Note" <<
     ", " <<

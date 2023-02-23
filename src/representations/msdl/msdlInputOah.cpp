@@ -90,7 +90,7 @@ void msdlKeywordsLanguageAtom::applyAtomWithValue (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "==> oahAtom is of type 'msdlKeywordsLanguageAtom'" <<
@@ -107,7 +107,7 @@ void msdlKeywordsLanguageAtom::applyAtomWithValue (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "==> oahAtom is of type 'msdlKeywordsLanguageAtom'" <<
@@ -149,14 +149,14 @@ void msdlKeywordsLanguageAtom::applyAtomWithValue (
   setMsdlKeywordsLanguageKindVariable (
     (*it).second);
 
-	fSelected = true;
+  fSelected = true;
 }
 
 void msdlKeywordsLanguageAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> msdlKeywordsLanguageAtom::acceptIn ()" <<
@@ -194,7 +194,7 @@ void msdlKeywordsLanguageAtom::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> msdlKeywordsLanguageAtom::acceptOut ()" <<
@@ -232,7 +232,7 @@ void msdlKeywordsLanguageAtom::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> msdlKeywordsLanguageAtom::browseData ()" <<
@@ -309,8 +309,8 @@ void msdlKeywordsLanguageAtom::displayAtomWithVariableOptionsValues (
     case oahEarlyOptionKind::kEarlyOptionNo:
       break;
     case oahEarlyOptionKind::kEarlyOptionYes:
-			os <<
-				", early";
+      os <<
+        ", early";
       break;
   } // switch
   if (fSelected) {
@@ -425,14 +425,14 @@ void oahDisplayMsdlKeywordsInLanguageAtom::applyAtomWithValue (
 
   --gIndenter;
 
-	fSelected = true;
+  fSelected = true;
 }
 
 void oahDisplayMsdlKeywordsInLanguageAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> oahDisplayMsdlKeywordsInLanguageAtom::acceptIn ()" <<
@@ -470,7 +470,7 @@ void oahDisplayMsdlKeywordsInLanguageAtom::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> oahDisplayMsdlKeywordsInLanguageAtom::acceptOut ()" <<
@@ -508,7 +508,7 @@ void oahDisplayMsdlKeywordsInLanguageAtom::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> oahDisplayMsdlKeywordsInLanguageAtom::browseData ()" <<
@@ -663,14 +663,14 @@ void oahDisplayMsdlTokensInLanguageAtom::applyAtomWithValue (
 
   --gIndenter;
 
-	fSelected = true;
+  fSelected = true;
 }
 
 void oahDisplayMsdlTokensInLanguageAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> oahDisplayMsdlTokensInLanguageAtom::acceptIn ()" <<
@@ -708,7 +708,7 @@ void oahDisplayMsdlTokensInLanguageAtom::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> oahDisplayMsdlTokensInLanguageAtom::acceptOut ()" <<
@@ -746,7 +746,7 @@ void oahDisplayMsdlTokensInLanguageAtom::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> oahDisplayMsdlTokensInLanguageAtom::browseData ()" <<
@@ -856,7 +856,7 @@ void msdlCommentsTypeAtom::applyAtomWithValue (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "==> oahAtom is of type 'msdlCommentsTypeAtom'" <<
@@ -873,7 +873,7 @@ void msdlCommentsTypeAtom::applyAtomWithValue (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "==> oahAtom is of type 'msdlCommentsTypeAtom'" <<
@@ -915,14 +915,14 @@ void msdlCommentsTypeAtom::applyAtomWithValue (
   setMsdlCommentsTypeKindVariable (
     (*it).second);
 
-	fSelected = true;
+  fSelected = true;
 }
 
 void msdlCommentsTypeAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> msdlCommentsTypeAtom::acceptIn ()" <<
@@ -960,7 +960,7 @@ void msdlCommentsTypeAtom::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> msdlCommentsTypeAtom::acceptOut ()" <<
@@ -998,7 +998,7 @@ void msdlCommentsTypeAtom::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> msdlCommentsTypeAtom::browseData ()" <<
@@ -1075,8 +1075,8 @@ void msdlCommentsTypeAtom::displayAtomWithVariableOptionsValues (
     case oahEarlyOptionKind::kEarlyOptionNo:
       break;
     case oahEarlyOptionKind::kEarlyOptionYes:
-			os <<
-				", early";
+      os <<
+        ", early";
       break;
   } // switch
   if (fSelected) {
@@ -1147,7 +1147,7 @@ void msdlUserLanguageAtom::applyAtomWithValue (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "==> oahAtom is of type 'msdlUserLanguageAtom'" <<
@@ -1164,7 +1164,7 @@ void msdlUserLanguageAtom::applyAtomWithValue (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "==> oahAtom is of type 'msdlUserLanguageAtom'" <<
@@ -1208,14 +1208,14 @@ void msdlUserLanguageAtom::applyAtomWithValue (
   setMsdlUserLanguageKindVariable (
     (*it).second);
 
-	fSelected = true;
+  fSelected = true;
 }
 
 void msdlUserLanguageAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> msdlUserLanguageAtom::acceptIn ()" <<
@@ -1253,7 +1253,7 @@ void msdlUserLanguageAtom::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> msdlUserLanguageAtom::acceptOut ()" <<
@@ -1291,7 +1291,7 @@ void msdlUserLanguageAtom::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> msdlUserLanguageAtom::browseData ()" <<
@@ -1371,8 +1371,8 @@ void msdlUserLanguageAtom::displayAtomWithVariableOptionsValues (
     case oahEarlyOptionKind::kEarlyOptionNo:
       break;
     case oahEarlyOptionKind::kEarlyOptionYes:
-			os <<
-				", early";
+      os <<
+        ", early";
       break;
   } // switch
   if (fSelected) {
@@ -1443,7 +1443,7 @@ void msdlPitchesLanguageAtom::applyAtomWithValue (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "==> oahAtom is of type 'msdlPitchesLanguageAtom'" <<
@@ -1460,7 +1460,7 @@ void msdlPitchesLanguageAtom::applyAtomWithValue (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "==> oahAtom is of type 'msdlPitchesLanguageAtom'" <<
@@ -1504,14 +1504,14 @@ void msdlPitchesLanguageAtom::applyAtomWithValue (
   setMsrQuarterTonesPitchesLanguageKindVariable (
     (*it).second);
 
-	fSelected = true;
+  fSelected = true;
 }
 
 void msdlPitchesLanguageAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> msdlPitchesLanguageAtom::acceptIn ()" <<
@@ -1549,7 +1549,7 @@ void msdlPitchesLanguageAtom::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> msdlPitchesLanguageAtom::acceptOut ()" <<
@@ -1587,7 +1587,7 @@ void msdlPitchesLanguageAtom::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> msdlPitchesLanguageAtom::browseData ()" <<
@@ -1606,8 +1606,7 @@ std::string msdlPitchesLanguageAtom::asShortNamedOptionString () const
 
   ss <<
     '-' << fShortName << ' ' <<
-    msrQuarterTonesPitchesLanguageKindAsString (
-      fMsrQuarterTonesPitchesLanguageKindVariable);
+    fMsrQuarterTonesPitchesLanguageKindVariable;
 
   return ss.str ();
 }
@@ -1618,8 +1617,7 @@ std::string msdlPitchesLanguageAtom::asActualLongNamedOptionString () const
 
   ss <<
     '-' << fLongName << ' ' <<
-    msrQuarterTonesPitchesLanguageKindAsString (
-      fMsrQuarterTonesPitchesLanguageKindVariable);
+    fMsrQuarterTonesPitchesLanguageKindVariable;
 
   return ss.str ();
 }
@@ -1644,8 +1642,7 @@ void msdlPitchesLanguageAtom::print (std::ostream& os) const
     std::endl <<
     std::setw (fieldWidth) <<
     "fMsrQuarterTonesPitchesLanguageKindVariable" << ": " <<
-    msrQuarterTonesPitchesLanguageKindAsString (
-      fMsrQuarterTonesPitchesLanguageKindVariable) <<
+    fMsrQuarterTonesPitchesLanguageKindVariable <<
     std::endl;
 
   --gIndenter;
@@ -1659,14 +1656,13 @@ void msdlPitchesLanguageAtom::displayAtomWithVariableOptionsValues (
     std::setw (valueFieldWidth) <<
     fVariableName <<
     ": " <<
-    msrQuarterTonesPitchesLanguageKindAsString (
-      fMsrQuarterTonesPitchesLanguageKindVariable);
+    fMsrQuarterTonesPitchesLanguageKindVariable;
   switch (fEarlyOptionKind) {
     case oahEarlyOptionKind::kEarlyOptionNo:
       break;
     case oahEarlyOptionKind::kEarlyOptionYes:
-			os <<
-				", early";
+      os <<
+        ", early";
       break;
   } // switch
   if (fSelected) {
@@ -1951,7 +1947,7 @@ void msdlInputOahGroup::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> msdlInputOahGroup::acceptIn ()" <<
@@ -1989,7 +1985,7 @@ void msdlInputOahGroup::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> msdlInputOahGroup::acceptOut ()" <<
@@ -2027,7 +2023,7 @@ void msdlInputOahGroup::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> msdlInputOahGroup::browseData ()" <<
@@ -2078,8 +2074,7 @@ void msdlInputOahGroup::displayMsdlInputOahValues (int fieldWidth)
 
   gLog << std::left <<
     std::setw (fieldWidth) << "msdlQuarterTonesPitchesLanguage" << ": \"" <<
-    msrQuarterTonesPitchesLanguageKindAsString (
-      fMsdlQuarterTonesPitchesLanguageKind) <<
+    fMsdlQuarterTonesPitchesLanguageKind <<
     "\"" <<
     std::endl <<
 
@@ -2110,7 +2105,7 @@ S_msdlInputOahGroup createGlobalMsdlInputOahGroup (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating global MSDR OAH group" <<

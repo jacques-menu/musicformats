@@ -51,8 +51,8 @@ lpsrLayout::~lpsrLayout ()
 void lpsrLayout::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
-		std::stringstream ss;
+  if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% ==> lpsrLayout::acceptIn ()" <<
@@ -70,7 +70,7 @@ void lpsrLayout::acceptIn (basevisitor* v)
         S_lpsrLayout elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
+        if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -89,8 +89,8 @@ void lpsrLayout::acceptIn (basevisitor* v)
 void lpsrLayout::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
-		std::stringstream ss;
+  if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% ==> lpsrLayout::acceptOut ()" <<
@@ -108,7 +108,7 @@ void lpsrLayout::acceptOut (basevisitor* v)
         S_lpsrLayout elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
+        if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
           std::stringstream ss;
 
           ss <<

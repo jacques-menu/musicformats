@@ -80,7 +80,7 @@ Usage: msr2guido [[option]* [MusicXMLFile|-] [[option]*
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Initializing \"" <<
@@ -141,7 +141,7 @@ void msr2guidoInsiderHandler::createTheMsr2guidoPrefixes ()
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating the msr2guido prefixes in \"" <<
@@ -164,7 +164,7 @@ void msr2guidoInsiderHandler::createTheMsr2guidoOptionGroups (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating the \"" <<
@@ -208,10 +208,6 @@ void msr2guidoInsiderHandler::createTheMsr2guidoOptionGroups (
   // initialize the library
   // ------------------------------------------------------
 
-  initializeMusicFormats ();
-
-  initializeWAE ();
-
   initializeMSR ();
 
   // initialize options handling, phase 2
@@ -247,7 +243,7 @@ void msr2guidoInsiderHandler::checkOptionsAndArguments () const
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "checking options and arguments from argc/argv in \"" <<
@@ -269,7 +265,7 @@ std::string msr2guidoInsiderHandler::fetchOutputFileNameFromTheOptions () const
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Fetching the output file name from the options in OAH handler \"" <<
@@ -422,7 +418,7 @@ void msr2guidoInsiderHandler::enforceHandlerQuietness ()
   gGlobalMsr2guidoInsiderOahGroup->
     enforceGroupQuietness ();
 
-  gGlobalMsrOahGroup->
+  gMsrOahGroup->
     enforceGroupQuietness ();
 
   gGlobalMsr2mxsrOahGroup->
@@ -478,7 +474,7 @@ void msr2guidoInsiderOahGroup::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> msr2guidoInsiderOahGroup::acceptIn ()" <<
@@ -516,7 +512,7 @@ void msr2guidoInsiderOahGroup::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> msr2guidoInsiderOahGroup::acceptOut ()" <<
@@ -554,7 +550,7 @@ void msr2guidoInsiderOahGroup::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> msr2guidoInsiderOahGroup::browseData ()" <<
@@ -723,7 +719,7 @@ S_msr2guidoInsiderOahGroup createGlobalMsr2guidoOahGroup ()
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating global msr2guido OAH group" <<

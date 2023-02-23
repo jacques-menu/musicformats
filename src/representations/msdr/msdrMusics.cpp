@@ -46,7 +46,7 @@ msdrMusic::msdrMusic (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceVoices ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating MSDR music \"" << asString () << "\"" <<
@@ -81,8 +81,8 @@ void msdrMusic::addMeasureToMusic (
 void msdrMusic::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% ==> msdrMusic::acceptIn ()" <<
@@ -100,7 +100,7 @@ void msdrMusic::acceptIn (basevisitor* v)
         S_msdrMusic elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -119,8 +119,8 @@ void msdrMusic::acceptIn (basevisitor* v)
 void msdrMusic::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% ==> msdrMusic::acceptOut ()" <<
@@ -138,7 +138,7 @@ void msdrMusic::acceptOut (basevisitor* v)
         S_msdrMusic elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -157,8 +157,8 @@ void msdrMusic::acceptOut (basevisitor* v)
 void msdrMusic::browseData (basevisitor* v)
 {
 /* JMI
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% ==> msdrMusic::browseData ()" <<
@@ -207,8 +207,8 @@ void msdrMusic::browseData (basevisitor* v)
   }
 
 #ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% <== msdrMusic::browseData ()" <<

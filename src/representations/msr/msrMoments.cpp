@@ -28,8 +28,8 @@ namespace MusicFormats
 // constants
 const msrMoment
   msrMoment::K_MOMENT_UNKNOWN (
-  	K_MEASURE_POSITION_UNKNOWN,
-  	K_MEASURE_POSITION_UNKNOWN);
+    K_MEASURE_POSITION_UNKNOWN,
+    K_MEASURE_POSITION_UNKNOWN);
 
 msrMoment::msrMoment ()
 {

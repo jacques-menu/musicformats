@@ -22,7 +22,7 @@
 #include "msrPlacements.h"
 #include "msrSpanners.h"
 #include "msrTupletFactors.h"
-#include "msrWholeNotes.h"
+// #include "msrWholeNotes.h"
 
 
 namespace MusicFormats
@@ -683,25 +683,25 @@ class EXP msr2mxsrTranslator :
     Sxmlelement               fScoreDefaultsAppearanceElement;
 
   void                        populateAppearanceLineWidths (
-                                Sxmlelement                      appearanceElement,
+                                const Sxmlelement&               appearanceElement,
                                 const std::list<S_msrLineWidth>& lineWidthsList);
 
   void                        populateAppearanceNoteSizes (
-                                Sxmlelement                     appearanceElement,
+                                const Sxmlelement&              appearanceElement,
                                 const std::list<S_msrNoteSize>& noteSizesList);
 
   void                        populateAppearanceDistances (
-                                Sxmlelement                     appearanceElement,
+                                const Sxmlelement&              appearanceElement,
                                 const std::list<S_msrDistance>& distancesList);
 
   void                        populateAppearanceGlyphs (
-                                Sxmlelement                  appearanceElement,
+                                const Sxmlelement&           appearanceElement,
                                 const std::list<S_msrGlyph>& glyphsList);
 
   void                        populateAppearanceOtherAppearances (
-                                Sxmlelement       appearanceElement,
+                                const Sxmlelement& appearanceElement,
                                 const std::list<S_msrOtherAppearance>&
-                                                  otherAppearancesList);
+                                                   otherAppearancesList);
 
     // credits
     // ------------------------------------------------------
@@ -719,7 +719,7 @@ class EXP msr2mxsrTranslator :
 
     // divisions
     // ------------------------------------------------------
-    msrWholeNotes          fPartShortestNoteWholeNotes;
+    msrWholeNotes         fPartShortestNoteWholeNotes;
     msrTupletFactor           fPartShortestNoteTupletFactor;
 
     int                       fDivisionsPerQuarterNote;
@@ -864,9 +864,9 @@ class EXP msr2mxsrTranslator :
     // backup and forward
     // ------------------------------------------------------
 
-    msrWholeNotes              fCurrentMeasurePosition;
+    msrWholeNotes         fCurrentMeasurePosition;
 
-    msrWholeNotes              fCurrentCumulatedSkipsNotesDurations;
+    msrWholeNotes         fCurrentCumulatedSkipsNotesDurations;
     int                       fCurrentCumulatedSkipsStaffNumber;
     int                       fCurrentCumulatedSkipsVoiceNumber;
 

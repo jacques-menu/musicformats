@@ -89,7 +89,7 @@ void msr2brailleRegularHandler::createRegularHandlerGroups ()
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating the regular handler groups for \"" <<
@@ -159,7 +159,7 @@ void msr2brailleRegularHandler::createRegularHandlerGroups ()
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "All the regular handler groups for \"" <<
@@ -250,10 +250,8 @@ void msr2brailleRegularHandler::createOahRegularGroup ()
   registerAtomInRegularSubgroup ("display-msr2-summary", subGroup);
 
   registerAtomInRegularSubgroup ("display-bsr1", subGroup);
-  registerAtomInRegularSubgroup ("display-bsr1", subGroup);
   registerAtomInRegularSubgroup ("display-bsr1-full", subGroup);
 
-  registerAtomInRegularSubgroup ("display-bsr2", subGroup);
   registerAtomInRegularSubgroup ("display-bsr2", subGroup);
   registerAtomInRegularSubgroup ("display-bsr2-full", subGroup);
 
@@ -1297,7 +1295,7 @@ void msr2brailleRegularHandler::checkOptionsAndArguments () const
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "checking options and arguments from argc/argv in \"" <<

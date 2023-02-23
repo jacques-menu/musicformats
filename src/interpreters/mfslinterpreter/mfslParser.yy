@@ -252,9 +252,9 @@ OptionalScriptElementsSeq
 ;
 
 ScriptElementsSeq
-	: ScriptElement
+  : ScriptElement
 
-	| ScriptElementsSeq ScriptElement
+  | ScriptElementsSeq ScriptElement
 ;
 
 ScriptElement
@@ -341,7 +341,7 @@ ChoiceDeclaration
 
         if (drv.getTraceCaseChoiceStatements ()) {
           gLog <<
-            "====> choice " << choiceName << " : " << "..." <<
+            "====> choice " << choiceName << ": " << "..." <<
             ", line " << drv.getScannerLocation () <<
             endl;
         }

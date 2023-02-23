@@ -65,8 +65,8 @@ std::string oahElementValueKindAsString (
 
 std::ostream& operator << (std::ostream& os, const oahElementValueKind& elt)
 {
-	os << oahElementValueKindAsString (elt);
-	return os;
+  os << oahElementValueKindAsString (elt);
+  return os;
 }
 
 std::string oahElementVisibilityKindAsString (
@@ -97,8 +97,8 @@ std::string oahElementVisibilityKindAsString (
 
 std::ostream& operator << (std::ostream& os, const oahElementVisibilityKind& elt)
 {
-	os << oahElementVisibilityKindAsString (elt);
-	return os;
+  os << oahElementVisibilityKindAsString (elt);
+  return os;
 }
 
 std::string oahElementHelpOnlyKindAsString (
@@ -120,8 +120,8 @@ std::string oahElementHelpOnlyKindAsString (
 
 std::ostream& operator << (std::ostream& os, const oahElementHelpOnlyKind& elt)
 {
-	os << oahElementHelpOnlyKindAsString (elt);
-	return os;
+  os << oahElementHelpOnlyKindAsString (elt);
+  return os;
 }
 
 //______________________________________________________________________________
@@ -149,7 +149,7 @@ oahFindStringMatch::oahFindStringMatch (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating oahFindStringMatch" <<

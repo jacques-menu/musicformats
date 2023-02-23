@@ -26,7 +26,7 @@ namespace MusicFormats
 
 //_______________________________________________________________________________
 EXP mfMusicformatsErrorKind msrScore2musicxmlWithHandler (
-  S_msrScore          theMsrScore,
+  const S_msrScore&   theMsrScore,
   mfPassIDKind        passID_A,
   std::string         passDescription_A,
   mfPassIDKind        passID_B,

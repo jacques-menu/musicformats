@@ -23,7 +23,7 @@
 
 #include "msrWae.h"
 
-#include "msrWholeNotes.h"
+// #include "msrWholeNotes.h"
 
 #include "oahOah.h"
 #include "waeOah.h"
@@ -98,7 +98,7 @@ S_msrScore createScore ()
 
 //_______________________________________________________________________________
 void displayMsrScore (
-  S_msrScore         theMsrScore,
+  const S_msrScore&  theMsrScore,
   const std::string& passDescription)
 {
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
@@ -135,7 +135,7 @@ void displayMsrScore (
   clock_t endClock = clock ();
 
   gGlobalTimingItemsList.appendTimingItem (
-		mfPassIDKind::kMfPassID_DisplayPass,
+    mfPassIDKind::kMfPassID_DisplayPass,
     passDescription,
     mfTimingItemKind::kOptional,
     startClock,
@@ -161,7 +161,7 @@ void displayMsrScore (
 
 //_______________________________________________________________________________
 void displayMsrScoreFull (
-  S_msrScore         theMsrScore,
+  const S_msrScore&  theMsrScore,
   const std::string& passDescription)
 {
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
@@ -200,7 +200,7 @@ void displayMsrScoreFull (
   clock_t endClock = clock ();
 
   gGlobalTimingItemsList.appendTimingItem (
-		mfPassIDKind::kMfPassID_DisplayPass,
+    mfPassIDKind::kMfPassID_DisplayPass,
     passDescription,
     mfTimingItemKind::kOptional,
     startClock,
@@ -226,9 +226,9 @@ void displayMsrScoreFull (
 
 //_______________________________________________________________________________
 void displayMsrScoreSummary (
-  S_msrScore          theMsrScore,
-  S_msrOahGroup&      msrOpts,
-  const std::string&  passDescription)
+  S_msrScore           theMsrScore,
+  const S_msrOahGroup& msrOpts,
+  const std::string&   passDescription)
 {
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
@@ -270,7 +270,7 @@ void displayMsrScoreSummary (
   clock_t endClock = clock ();
 
   gGlobalTimingItemsList.appendTimingItem (
-		mfPassIDKind::kMfPassID_DisplayPass,
+    mfPassIDKind::kMfPassID_DisplayPass,
     passDescription,
     mfTimingItemKind::kOptional,
     startClock,
@@ -279,9 +279,9 @@ void displayMsrScoreSummary (
 
 //_______________________________________________________________________________
 void displayMsrScoreNames (
-  S_msrScore          theMsrScore,
-  S_msrOahGroup&      msrOpts,
-  const std::string&  passDescription)
+  S_msrScore           theMsrScore,
+  const S_msrOahGroup& msrOpts,
+  const std::string&   passDescription)
 {
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
@@ -321,7 +321,7 @@ void displayMsrScoreNames (
   clock_t endClock = clock ();
 
   gGlobalTimingItemsList.appendTimingItem (
-		mfPassIDKind::kMfPassID_DisplayPass,
+    mfPassIDKind::kMfPassID_DisplayPass,
     passDescription,
     mfTimingItemKind::kOptional,
     startClock,
@@ -330,7 +330,7 @@ void displayMsrScoreNames (
 
 //_______________________________________________________________________________
 void displayMsrScoreSlices (
-  S_msrScore         theMsrScore,
+  const S_msrScore&  theMsrScore,
   const std::string& passDescription)
 {
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
@@ -370,7 +370,7 @@ void displayMsrScoreSlices (
   clock_t endClock = clock ();
 
   gGlobalTimingItemsList.appendTimingItem (
-		mfPassIDKind::kMfPassID_DisplayPass,
+    mfPassIDKind::kMfPassID_DisplayPass,
     passDescription,
     mfTimingItemKind::kOptional,
     startClock,

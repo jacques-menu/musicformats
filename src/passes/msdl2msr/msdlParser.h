@@ -21,7 +21,7 @@
 #include "msrScores.h"
 #include "msrStaves.h"
 #include "msrVoices.h"
-#include "msrWholeNotes.h"
+// #include "msrWholeNotes.h"
 
 #include "msdlTokens.h"
 
@@ -229,8 +229,8 @@ class msdlParser : public smartable
                             const S_msrNote& note);
 
     // note
-    msrWholeNotes          fCurrentNoteSoundingWholeNotes;
-    msrWholeNotes          fCurrentNoteDisplayWholeNotes;
+    msrWholeNotes         fCurrentNoteSoundingWholeNotes;
+    msrWholeNotes         fCurrentNoteDisplayWholeNotes;
     int                   fCurrentNoteDotsNumber;
 
     // private score building methods

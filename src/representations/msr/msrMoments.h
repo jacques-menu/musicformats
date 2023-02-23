@@ -19,6 +19,8 @@
 
 #include "mfBool.h"
 
+#include "msrNotesDurations.h"
+
 
 namespace MusicFormats
 {
@@ -58,13 +60,13 @@ class EXP msrMoment
     void                  setWrittenPositionInMeseasure (msrWholeNotes position)
                               { fWrittenPositionInMeseasure = position; }
 
-    msrWholeNotes              getWrittenPositionInMeseasure () const
+    msrWholeNotes         getWrittenPositionInMeseasure () const
                               { return fWrittenPositionInMeseasure; }
 
     void                  setSoundingRelativeOffset (msrWholeNotes offset)
                               { fSoundingRelativeOffset = offset; }
 
-    msrWholeNotes              getSoundingRelativeOffset () const
+    msrWholeNotes         getSoundingRelativeOffset () const
                               { return fSoundingRelativeOffset; }
 
   public:
@@ -112,8 +114,8 @@ class EXP msrMoment
     // private fields
     // ------------------------------------------------------
 
-    msrWholeNotes          fWrittenPositionInMeseasure;
-    msrWholeNotes          fSoundingRelativeOffset;
+    msrWholeNotes         fWrittenPositionInMeseasure;
+    msrWholeNotes         fSoundingRelativeOffset;
 };
 EXP std::ostream& operator << (std::ostream& os, const msrMoment& elt);
 

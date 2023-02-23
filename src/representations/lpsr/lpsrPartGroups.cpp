@@ -50,8 +50,8 @@ lpsrPartGroupBlock::~lpsrPartGroupBlock ()
 void lpsrPartGroupBlock::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
-		std::stringstream ss;
+  if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% ==> lpsrPartGroupBlock::acceptIn ()" <<
@@ -69,7 +69,7 @@ void lpsrPartGroupBlock::acceptIn (basevisitor* v)
         S_lpsrPartGroupBlock elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
+        if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -88,8 +88,8 @@ void lpsrPartGroupBlock::acceptIn (basevisitor* v)
 void lpsrPartGroupBlock::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
-		std::stringstream ss;
+  if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% ==> lpsrPartGroupBlock::acceptOut ()" <<
@@ -107,7 +107,7 @@ void lpsrPartGroupBlock::acceptOut (basevisitor* v)
         S_lpsrPartGroupBlock elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
+        if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -126,8 +126,8 @@ void lpsrPartGroupBlock::acceptOut (basevisitor* v)
 void lpsrPartGroupBlock::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
-		std::stringstream ss;
+  if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% ==> lpsrPartGroupBlock::browseData ()" <<
@@ -150,8 +150,8 @@ void lpsrPartGroupBlock::browseData (basevisitor* v)
   } // for
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
-		std::stringstream ss;
+  if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% <== lpsrPartGroupBlock::browseData ()" <<

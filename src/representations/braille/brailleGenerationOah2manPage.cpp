@@ -44,7 +44,7 @@ void brailleGenerationOah2manPage::visitStart (S_brailleOutputKindAtom& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       std::endl <<
@@ -79,7 +79,7 @@ void brailleGenerationOah2manPage::visitEnd (S_brailleOutputKindAtom& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       std::endl <<
@@ -99,7 +99,7 @@ void brailleGenerationOah2manPage::visitStart (S_brailleUTFKindAtom& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       std::endl <<
@@ -134,7 +134,7 @@ void brailleGenerationOah2manPage::visitEnd (S_brailleUTFKindAtom& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       std::endl <<
@@ -154,7 +154,7 @@ void brailleGenerationOah2manPage::visitStart (S_brailleByteOrderingKindAtom& el
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       std::endl <<
@@ -189,7 +189,7 @@ void brailleGenerationOah2manPage::visitEnd (S_brailleByteOrderingKindAtom& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       std::endl <<

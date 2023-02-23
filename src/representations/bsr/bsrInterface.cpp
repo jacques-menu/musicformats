@@ -35,10 +35,10 @@ namespace MusicFormats
 
 //_______________________________________________________________________________
 void displayBsrScore (
-  S_bsrScore    bsrScore,
-  S_msrOahGroup msrOpts,
-  S_bsrOahGroup bsrOpts,
-  const std::string& passDescription)
+  const S_bsrScore&    bsrScore,
+  const S_msrOahGroup& msrOpts,
+  const S_bsrOahGroup& bsrOpts,
+  const std::string&   passDescription)
 {
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
@@ -73,7 +73,7 @@ void displayBsrScore (
   clock_t endClock = clock ();
 
   gGlobalTimingItemsList.appendTimingItem (
-		mfPassIDKind::kMfPassID_DisplayPass,
+    mfPassIDKind::kMfPassID_DisplayPass,
     gLanguage->displayTheBSRAsText (), // JMI ??? v0.9.66
     mfTimingItemKind::kOptional,
     startClock,
@@ -82,10 +82,10 @@ void displayBsrScore (
 
 //_______________________________________________________________________________
 void displayBsrScoreFull (
-  S_bsrScore    bsrScore,
-  S_msrOahGroup msrOpts,
-  S_bsrOahGroup bsrOpts,
-  const std::string& passDescription)
+  const S_bsrScore&    bsrScore,
+  const S_msrOahGroup& msrOpts,
+  const S_bsrOahGroup& bsrOpts,
+  const std::string&   passDescription)
 {
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
@@ -122,7 +122,7 @@ void displayBsrScoreFull (
   clock_t endClock = clock ();
 
   gGlobalTimingItemsList.appendTimingItem (
-		mfPassIDKind::kMfPassID_DisplayPass,
+    mfPassIDKind::kMfPassID_DisplayPass,
     gLanguage->displayTheBSRAsText ()
       + ", " +
     gLanguage->fullVersion (),

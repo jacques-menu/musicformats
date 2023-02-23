@@ -492,7 +492,7 @@ std::string msdlKeywordKindAsMsdlString (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsdl2msrOahGroup->getTraceTokensDetails ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "--> msdlKeywordKindAsMsdlString()" <<
@@ -556,7 +556,7 @@ std::string msdlKeywordKindAsMsdlString (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsdl2msrOahGroup->getTraceTokensDetails ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "<-- msdlKeywordKindAsMsdlString()" <<
@@ -667,7 +667,7 @@ msdlKeywordKind msdlKeywordKindFromString (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsdl2msrOahGroup->getTraceTokensDetails ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "--> msdlKeywordKindFromString()" <<
@@ -731,7 +731,7 @@ msdlKeywordKind msdlKeywordKindFromString (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsdl2msrOahGroup->getTraceTokensDetails ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "<-- msdlKeywordKindFromString()" <<
@@ -840,7 +840,7 @@ void initializeMSDLKeywords ()
         &&
      ! gEarlyOptions.getEarlyQuietOption ()
     ) {
-	  	std::stringstream ss;
+      std::stringstream ss;
 
       ss <<
         "Initializing MSDL keywords" <<

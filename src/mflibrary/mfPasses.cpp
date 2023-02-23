@@ -24,7 +24,6 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-
 std::map<std::string, mfPassIDKind>
   gGlobalMusicFormatsPassIDKindsMap;
 
@@ -117,7 +116,7 @@ mfPassIDKind mfPassIDKindFromString (const std::string& theString)
         theString);
 
   if (it == gGlobalMusicFormatsPassIDKindsMap.end ()) {
-    // no, keywords passID kind is unknown in the map
+    // no, passID kind is unknown in the map
     std::stringstream ss;
 
     ss <<
@@ -192,7 +191,6 @@ std::string availableMusicFormatsPassIDKinds (size_t namesListMaxLength)
   return ss.str ();
 }
 
-
 void initializeMusicFormatsPassIDKindsMap ()
 {
   // protect library against multiple initializations
@@ -248,7 +246,7 @@ void initializeMusicFormatsPassIDs ()
         &&
       ! gEarlyOptions.getEarlyQuietOption ()
     ) {
-	  	std::stringstream ss;
+      std::stringstream ss;
 
       ss <<
         "Initializing MusicFormats passIDs" <<

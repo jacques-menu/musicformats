@@ -16,9 +16,12 @@
 #endif // WIN32
 
 #include "mfBool.h"
+#include "mfInitialization.h"
+#include "mfMultiGenerationOah.h"
 #include "mfMusicformatsErrors.h"
-#include "mfcComponents.h"
 #include "mfTiming.h"
+
+#include "mfcComponents.h"
 
 #include "waeInterface.h"
 #include "oahWae.h"
@@ -27,12 +30,12 @@
 
 #include "oahEarlyOptions.h"
 
-#include "musicxml2lilypondInsiderHandler.h"
-#include "musicxml2lilypondRegularHandler.h"
+#include "msdlConverterInsiderHandler.h"
+#include "msdlConverterRegularHandler.h"
 
-#include "musicxml2lilypondInterface.h"
+#include "musicxml2lilypondInterface.h" // JMI ??? v0.9.67
 
-#include "xml2lyInterface.h"
+#include "msdlInterface.h"
 
 #include "waeHandlers.h"
 
@@ -99,6 +102,18 @@ EXP int msdl (
 //     "getGlobalMusicFormatsVersionNumberAndDate (): " << getGlobalMusicFormatsVersionNumberAndDate () <<
 //     std::endl;
 
+  // initialize common things
+  // ------------------------------------------------------
+
+  initializeMusicFormats ();
+
+  initializeWAE ();
+
+  // register msdl as current service
+  // ------------------------------------------------------
+
+  setGlobalService (mfServiceKind::kMfService_msdl);
+
   // apply early options if any
   // ------------------------------------------------------
 
@@ -114,10 +129,10 @@ EXP int msdl (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
-      serviceName << " xml2ly()" <<
+      serviceName << " msdl()" <<
       ", insiderOption: " << insiderOption <<
       std::endl;
 
@@ -133,15 +148,15 @@ EXP int msdl (
   S_oahHandler handler;
 
   try {
-    // create an xml2ly insider OAH handler
+    // create an msdl insider OAH handler
     // ------------------------------------------------------
 
-    const S_xml2lyInsiderHandler&
+    const S_msdlConverterInsiderHandler&
       insiderOahHandler =
-        xml2lyInsiderHandler::create (
+        msdlConverterInsiderHandler::create (
           serviceName,
           serviceName + " insider OAH handler with argc/argv",
-          oahHandlerUsedThruKind::kHandlerUsedThruArgcArgv);
+          mfMultiGenerationOutputKind::kGeneration_UNKNOWN); // JMI ??? v0.9.67
 
     // the OAH handler to be used, a regular handler is the default
     // ------------------------------------------------------
@@ -150,16 +165,17 @@ EXP int msdl (
       gEarlyOptions.getEarlyInsiderOption ();
 
     if (insiderOption) {
-      // use the insider xml2ly OAH handler
+      // use the insider msdl OAH handler
       handler = insiderOahHandler;
     }
     else {
-      // create a regular xml2ly OAH handler
+      // create a regular msdl OAH handler
       handler =
-        xml2lyRegularHandler::create (
+        msdlConverterRegularHandler::create (
           serviceName,
           serviceName + " regular OAH handler with argc/argv",
-          insiderOahHandler);
+          insiderOahHandler,
+          mfMultiGenerationOutputKind::kGeneration_UNKNOWN); // JMI ??? v0.9.67
     }
 
     // create the global run data
@@ -231,7 +247,7 @@ EXP int msdl (
     std::string separator =
       "%--------------------------------------------------------------";
 
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       serviceName << ": " <<
@@ -362,7 +378,7 @@ EXP int msdl (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getEarlyTracePasses ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "The command line options and arguments have been analyzed" <<

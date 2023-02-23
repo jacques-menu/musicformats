@@ -93,7 +93,7 @@ void xml2gmnRegularHandler::createRegularHandlerGroups ()
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating the regular handler groups for \"" <<
@@ -170,7 +170,7 @@ void xml2gmnRegularHandler::createRegularHandlerGroups ()
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "All the regular handler groups for \"" <<
@@ -1295,7 +1295,7 @@ void xml2gmnRegularHandler::checkOptionsAndArguments () const
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "checking options and arguments from argc/argv in \"" <<

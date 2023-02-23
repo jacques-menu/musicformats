@@ -75,7 +75,7 @@ void displayLpsrScore (
   clock_t endClock = clock ();
 
   gGlobalTimingItemsList.appendTimingItem (
-		mfPassIDKind::kMfPassID_DisplayPass,
+    mfPassIDKind::kMfPassID_DisplayPass,
     gLanguage->displayTheLPSRAsText (),
     mfTimingItemKind::kOptional,
     startClock,
@@ -126,7 +126,7 @@ void displayLpsrScoreFull (
   clock_t endClock = clock ();
 
   gGlobalTimingItemsList.appendTimingItem (
-		mfPassIDKind::kMfPassID_DisplayPass,
+    mfPassIDKind::kMfPassID_DisplayPass,
     gLanguage->displayTheLPSRAsText ()
       + ", " +
     gLanguage->fullVersion (),

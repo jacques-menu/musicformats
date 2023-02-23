@@ -82,7 +82,7 @@ void msrIgnorePartAtom::applyAtomWithValue (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "==> oahAtom is of type 'msrIgnorePartAtom'" <<
@@ -100,7 +100,7 @@ void msrIgnorePartAtom::applyAtomWithValue (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "--> partName = \"" << partName << "\", " <<
@@ -134,14 +134,14 @@ void msrIgnorePartAtom::applyAtomWithValue (
     fStringSetVariable.insert (partName);
   }
 
-	fSelected = true;
+  fSelected = true;
 }
 
 void msrIgnorePartAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> msrIgnorePartAtom::acceptIn ()" <<
@@ -179,7 +179,7 @@ void msrIgnorePartAtom::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> msrIgnorePartAtom::acceptOut ()" <<
@@ -217,7 +217,7 @@ void msrIgnorePartAtom::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> msrIgnorePartAtom::browseData ()" <<
@@ -419,7 +419,7 @@ void msrKeepPartAtom::applyAtomWithValue (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "==> oahAtom is of type 'msrKeepPartAtom'" <<
@@ -437,7 +437,7 @@ void msrKeepPartAtom::applyAtomWithValue (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "--> partName = \"" << partName << "\", " <<
@@ -471,14 +471,14 @@ void msrKeepPartAtom::applyAtomWithValue (
     fStringSetVariable.insert (partName);
   }
 
-	fSelected = true;
+  fSelected = true;
 }
 
 void msrKeepPartAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> msrKeepPartAtom::acceptIn ()" <<
@@ -516,7 +516,7 @@ void msrKeepPartAtom::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> msrKeepPartAtom::acceptOut ()" <<
@@ -554,7 +554,7 @@ void msrKeepPartAtom::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> msrKeepPartAtom::browseData ()" <<
@@ -1068,7 +1068,7 @@ void msr2msrOahGroup::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> msr2msrOahGroup::acceptIn ()" <<
@@ -1106,7 +1106,7 @@ void msr2msrOahGroup::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> msr2msrOahGroup::acceptOut ()" <<
@@ -1144,7 +1144,7 @@ void msr2msrOahGroup::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> msr2msrOahGroup::browseData ()" <<
@@ -1307,7 +1307,7 @@ S_msr2msrOahGroup createGlobalMsr2msrOahGroup ()
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating global msr2msr OAH group" <<

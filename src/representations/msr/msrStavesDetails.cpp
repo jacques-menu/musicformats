@@ -153,8 +153,8 @@ msrStaffTuning::~ msrStaffTuning ()
 S_msrStaffTuning msrStaffTuning::createStaffTuningNewbornClone ()
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceStaffDetails ()) {
-		std::stringstream ss;
+  if (gTraceOahGroup->getTraceStavesDetails ()) {
+    std::stringstream ss;
 
     ss <<
       "Creating a newborn clone of staff tuning '" <<
@@ -182,7 +182,7 @@ S_msrStaffTuning msrStaffTuning::createStaffTuningNewbornClone ()
 void msrStaffTuning::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -201,7 +201,7 @@ void msrStaffTuning::acceptIn (basevisitor* v)
         S_msrStaffTuning elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -220,7 +220,7 @@ void msrStaffTuning::acceptIn (basevisitor* v)
 void msrStaffTuning::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -239,7 +239,7 @@ void msrStaffTuning::acceptOut (basevisitor* v)
         S_msrStaffTuning elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -267,7 +267,7 @@ std::string msrStaffTuning::asString () const
     ", fStaffTuningQuarterTonesPitchKind: " <<
     msrQuarterTonesPitchKindAsStringInLanguage (
       fStaffTuningQuarterTonesPitchKind,
-      gGlobalMsrOahGroup->
+      gMsrOahGroup->
         getMsrQuarterTonesPitchesLanguageKind ()) <<
     ", fStaffTuningOctaveKind: " <<
     fStaffTuningOctaveKind <<
@@ -297,7 +297,7 @@ void msrStaffTuning::print (std::ostream& os) const
     "fStaffTuningQuarterTonesPitchKind" << ": " <<
     msrQuarterTonesPitchKindAsStringInLanguage (
       fStaffTuningQuarterTonesPitchKind,
-      gGlobalMsrOahGroup->
+      gMsrOahGroup->
         getMsrQuarterTonesPitchesLanguageKind ()) <<
     std::endl <<
     std::setw (fieldWidth) <<
@@ -416,7 +416,7 @@ void msrStaffDetails::setStaffDetailsUpLinkToMeasure (
 void msrStaffDetails::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -435,7 +435,7 @@ void msrStaffDetails::acceptIn (basevisitor* v)
         S_msrStaffDetails elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -454,7 +454,7 @@ void msrStaffDetails::acceptIn (basevisitor* v)
 void msrStaffDetails::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -473,7 +473,7 @@ void msrStaffDetails::acceptOut (basevisitor* v)
         S_msrStaffDetails elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<

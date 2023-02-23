@@ -913,7 +913,7 @@ namespace mfsl {
 
         if (drv.getTraceCaseChoiceStatements ()) {
           gLog <<
-            "====> choice " << choiceName << " : " << "..." <<
+            "====> choice " << choiceName << ": " << "..." <<
             ", line " << drv.getScannerLocation () <<
             endl;
         }

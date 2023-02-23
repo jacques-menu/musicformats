@@ -145,7 +145,7 @@ class EXP msrChord : public msrTupletElement
     void                  setChordDisplayWholeNotes (
                             const msrWholeNotes& wholeNotes);
 
-    msrWholeNotes          getChordDisplayWholeNotes () const
+    msrWholeNotes         getChordDisplayWholeNotes () const
                              { return fChordDisplayWholeNotes; }
 
     // graphic duration
@@ -549,7 +549,7 @@ class EXP msrChord : public msrTupletElement
     // as do all the other elements in this vector
 
     // display whole notes
-    msrWholeNotes          fChordDisplayWholeNotes;
+    msrWholeNotes         fChordDisplayWholeNotes;
 
     // graphic duration is needed for grace notes,
     // since they don't have any note (sounding) duration

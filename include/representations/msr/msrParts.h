@@ -215,26 +215,26 @@ class EXP msrPart : public msrPartGroupElement
 
     // part measure position
 
-    void                  setPartMeasurePosition (
+    void                  setPartDrawingMeasurePosition (
                             int             inputLineNumber,
                             const msrWholeNotes& measurePosition);
 
-    void                  incrementPartMeasurePosition (
+    void                  incrementPartDrawingMeasurePosition (
                             int             inputLineNumber,
                             const msrWholeNotes& wholeNotes);
-    void                  decrementPartMeasurePosition (
+    void                  decrementPartDrawingMeasurePosition (
                             int             inputLineNumber,
                             const msrWholeNotes& wholeNotes);
 
-    msrWholeNotes          getPartMeasurePosition () const
-                              { return fPartMeasurePosition; }
+    msrWholeNotes         getPartDrawingMeasurePosition () const
+                              { return fPartDrawingMeasurePosition; }
 
     // part shortest note
 
     void                  setPartShortestNoteWholeNotes (
                             const msrWholeNotes& wholeNotes);
 
-    msrWholeNotes          getPartShortestNoteWholeNotes () const
+    msrWholeNotes         getPartShortestNoteWholeNotes () const
                               { return fPartShortestNoteWholeNotes; }
 
     void                  setPartShortestNoteTupletFactor (
@@ -269,7 +269,7 @@ class EXP msrPart : public msrPartGroupElement
 
     // whole notes durations
 
-    msrWholeNotes          fetchPartMeasuresWholeNotessVectorAt (
+    msrWholeNotes         fetchPartMeasuresWholeNotessVectorAt (
                             int inputLineNumber,
                             int indexValue) const;
 
@@ -584,7 +584,7 @@ class EXP msrPart : public msrPartGroupElement
     size_t                fPartNumberOfMeasures;
 
     std::vector<msrWholeNotes>
-    										  fPartMeasuresWholeNotessVector; // SUPERFLOUS ??? JMI v0.9.66
+                          fPartMeasuresWholeNotessVector; // SUPERFLOUS ??? JMI v0.9.66
 
     // clef, key, time signature
 
@@ -599,7 +599,7 @@ class EXP msrPart : public msrPartGroupElement
     // fPartShortestNoteWholeNotes and fPartShortestNoteTupletFactor
     // are used to compute a number of divisions per quarter note
     // if needed, such as when generating MusicXML from MSR
-    msrWholeNotes          fPartShortestNoteWholeNotes;
+    msrWholeNotes         fPartShortestNoteWholeNotes;
     msrTupletFactor       fPartShortestNoteTupletFactor;
 
     // transposition
@@ -703,9 +703,9 @@ class EXP msrPart : public msrPartGroupElement
 
     S_msrStaffDetails     fCurrentPartStaffDetails;
 
-    // measure position
+    // drawing measure position, for mxsr2msr
 
-    msrWholeNotes          fPartMeasurePosition;
+    msrWholeNotes         fPartDrawingMeasurePosition;
 };
 typedef SMARTP<msrPart> S_msrPart;
 EXP std::ostream& operator << (std::ostream& os, const S_msrPart& elt);

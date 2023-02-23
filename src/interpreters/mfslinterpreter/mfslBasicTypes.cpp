@@ -120,12 +120,12 @@ void mfslOptionsBlock::print (std::ostream& os) const
 
   os << left <<
     setw (fieldWidth) <<
-    "fOptionsBlockName" << " : " << fOptionsBlockName <<
+    "fOptionsBlockName" << ": " << fOptionsBlockName <<
     endl;
 
   // print the options blocks options name and value vector
   gLog <<
-    "fOptionsBlockOptionsVector" << " : " <<
+    "fOptionsBlockOptionsVector" << ": " <<
     endl;
 
   ++gIndenter;
@@ -688,7 +688,7 @@ void mfslInput::print (std::ostream& os) const
     endl <<
 
     setw (fieldWidth) <<
-    "fInputNameKind" << " : " << fInputNameKind << "" <<
+    "fInputNameKind" << ": " << fInputNameKind << "" <<
     endl <<
     setw (fieldWidth) <<
     "fInputName" << " : \"" << fInputName << "\"" <<
@@ -1546,7 +1546,7 @@ void mfslChoice::print (std::ostream& os) const
     endl <<
 
     setw (fieldWidth) <<
-    "fChoiceLabelKind" << " : " << fChoiceLabelKind << "" <<
+    "fChoiceLabelKind" << ": " << fChoiceLabelKind << "" <<
     endl <<
     setw (fieldWidth) <<
     "fChoiceLabel" << " : \"" << fChoiceLabel << "\"" <<
@@ -2004,7 +2004,7 @@ void mfslCaseChoiceStatement::print (std::ostream& os) const
 
   os << left <<
     setw (fieldWidth) <<
-    "fCaseChoice " << " : " <<
+    "fCaseChoice " << ": " <<
     endl;
 
   ++gIndenter;
@@ -2014,7 +2014,7 @@ void mfslCaseChoiceStatement::print (std::ostream& os) const
 
   os <<
     setw (fieldWidth) <<
-    "fCaseUnusedLabels" << " : " <<
+    "fCaseUnusedLabels" << ": " <<
     endl;
 
   ++gIndenter;
@@ -2207,7 +2207,7 @@ void mfslCaseInputStatement::print (std::ostream& os) const
 
   os << left <<
     setw (fieldWidth) <<
-    "fCaseInputInput " << " : " <<
+    "fCaseInputInput " << ": " <<
     endl;
 
   ++gIndenter;
@@ -2217,7 +2217,7 @@ void mfslCaseInputStatement::print (std::ostream& os) const
 
   os <<
     setw (fieldWidth) <<
-    "fCaseInputUnusedNames" << " : " <<
+    "fCaseInputUnusedNames" << ": " <<
     endl;
 
   ++gIndenter;

@@ -89,7 +89,7 @@ S_msrBook msrBook::createBookNewbornClone ()
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceBooks ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating a newborn clone of a score" <<
@@ -197,7 +197,7 @@ void msrBook::appendCreditToBook (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceCredits ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending credit '" <<
@@ -221,7 +221,7 @@ void msrBook::fetchIdentificationFromCreditsIfAny ( // THROW AWAY JMI ??? v0.9.6
   if (
     fIdentification->getIdentificationWorkCreditTypeTitle ().size ()
       &&
-    gGlobalMsrOahGroup->getUseFilenameAsWorkCreditTypeTitle ()
+    gMsrOahGroup->getUseFilenameAsWorkCreditTypeTitle ()
   ) {
     std::string
       inputSourceName =
@@ -397,7 +397,7 @@ S_msrBookElement msrBook::fetchBookElement (
 void msrBook::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -416,7 +416,7 @@ void msrBook::acceptIn (basevisitor* v)
         S_msrBook elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -435,7 +435,7 @@ void msrBook::acceptIn (basevisitor* v)
 void msrBook::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -454,7 +454,7 @@ void msrBook::acceptOut (basevisitor* v)
         S_msrBook elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -473,7 +473,7 @@ void msrBook::acceptOut (basevisitor* v)
 void msrBook::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -543,8 +543,8 @@ void msrBook::browseData (basevisitor* v)
   } // for
 
 #ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% <== msrBook::browseData ()" <<

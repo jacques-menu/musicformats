@@ -491,9 +491,9 @@ S_msrStaff mxsr2msrTranslator::fetchStaffFromCurrentPart (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceStaves ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "Fetching staff " <<
       staffNumber <<
       " from current part" <<
@@ -542,9 +542,9 @@ S_msrStaff mxsr2msrTranslator::fetchStaffFromCurrentPart (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceStaves ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> fetchStaffFromCurrentPart returns " <<
       staff->getStaffName () <<
       std::endl;
@@ -566,9 +566,9 @@ S_msrVoice mxsr2msrTranslator::fetchVoiceFromCurrentPart (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceVoices ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "Fetching voice " <<
       voiceNumber <<
       " in staff " <<
@@ -605,9 +605,9 @@ S_msrVoice mxsr2msrTranslator::fetchVoiceFromCurrentPart (
   if (! voice) {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceVoices ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       staff <<
       std::endl;
 
@@ -641,9 +641,9 @@ S_msrVoice mxsr2msrTranslator::fetchVoiceFromCurrentPart (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceVoices ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> fetchVoiceFromCurrentPart() returns " <<
       voice->getVoiceName () <<
       std::endl;
@@ -665,9 +665,9 @@ S_msrVoice mxsr2msrTranslator::fetchFirstVoiceFromCurrentPart (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceVoices ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "Fetching first voice in staff " <<
       staffNumber <<
       " from current part" <<
@@ -722,9 +722,9 @@ S_msrVoice mxsr2msrTranslator::fetchFirstVoiceFromCurrentPart (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceVoices ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> fetchVoiceFromCurrentPart() returns " <<
       voice->getVoiceName () <<
       std::endl;
@@ -743,9 +743,9 @@ void mxsr2msrTranslator::visitStart (S_millimeters& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_millimeters" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
@@ -763,9 +763,9 @@ void mxsr2msrTranslator::visitStart (S_tenths& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_tenths" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
@@ -786,9 +786,9 @@ void mxsr2msrTranslator::visitEnd (S_scaling& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> End visiting S_scaling" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -809,9 +809,9 @@ void mxsr2msrTranslator::visitEnd (S_scaling& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceGeometry ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "There are " << fCurrentTenths <<
       " tenths for " <<  fCurrentMillimeters <<
       std::endl;
@@ -835,9 +835,9 @@ void mxsr2msrTranslator::visitStart (S_system_layout& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_system_layout" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -863,9 +863,9 @@ void mxsr2msrTranslator::visitEnd (S_system_layout& elt)
     elt->getInputLineNumber ();
 
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> End visiting S_system_layout" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -903,9 +903,9 @@ void mxsr2msrTranslator::visitStart (S_system_margins& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_system_margins" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
@@ -931,9 +931,9 @@ void mxsr2msrTranslator::visitStart (S_system_distance& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_system_distance" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
@@ -970,9 +970,9 @@ void mxsr2msrTranslator::visitStart (S_top_system_distance& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_top_system_distance" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -1009,9 +1009,9 @@ void mxsr2msrTranslator::visitEnd (S_system_margins& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> End visiting S_system_margins" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -1038,9 +1038,9 @@ void mxsr2msrTranslator::visitStart (S_system_dividers& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_system_dividers" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
@@ -1072,9 +1072,9 @@ void mxsr2msrTranslator::visitStart (S_left_divider& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_left_divider" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -1104,9 +1104,9 @@ void mxsr2msrTranslator::visitStart (S_right_divider& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_right_divider" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -1137,9 +1137,9 @@ void mxsr2msrTranslator::visitStart (S_notations& elt)
     elt->getInputLineNumber ();
 
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_notations" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -1160,9 +1160,9 @@ void mxsr2msrTranslator::visitStart (S_other_notation& elt)
     elt->getInputLineNumber ();
 
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_other_notation" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -1184,9 +1184,9 @@ void mxsr2msrTranslator::visitStart (S_page_layout& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_page_layout" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -1209,9 +1209,9 @@ void mxsr2msrTranslator::visitEnd (S_page_layout& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> End visiting S_page_layout" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
@@ -1238,9 +1238,9 @@ void mxsr2msrTranslator::visitStart (S_page_height& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_page_height" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
@@ -1273,9 +1273,9 @@ void mxsr2msrTranslator::visitStart (S_page_width& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_page_width" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
@@ -1311,9 +1311,9 @@ void mxsr2msrTranslator::visitStart (S_page_margins& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_page_margins" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -1393,9 +1393,9 @@ void mxsr2msrTranslator::visitEnd (S_page_margins& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> End visiting S_page_margins" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
@@ -1421,9 +1421,9 @@ void mxsr2msrTranslator::visitStart (S_left_margin& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_left_margin" <<
       ", " << leftMargin << " tenths" <<
       ", line " << inputLineNumber <<
@@ -1477,9 +1477,9 @@ void mxsr2msrTranslator::visitStart (S_right_margin& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_right_margin" <<
       ", " << rightMargin << " tenths" <<
        ", line " << inputLineNumber <<
@@ -1529,9 +1529,9 @@ void mxsr2msrTranslator::visitStart (S_top_margin& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_top_margin" <<
       ", " << topMargin << " tenths" <<
       ", line " << inputLineNumber <<
@@ -1572,9 +1572,9 @@ void mxsr2msrTranslator::visitStart (S_bottom_margin& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_bottom_margin" <<
       ", " << bottomMargin << " tenths" <<
       ", line " << inputLineNumber <<
@@ -1614,9 +1614,9 @@ void mxsr2msrTranslator::visitStart (S_staff_layout& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_staff_layout" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -1667,9 +1667,9 @@ void mxsr2msrTranslator::visitEnd (S_staff_layout& elt)
     elt->getInputLineNumber ();
 
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> End visiting S_staff_layout" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -1693,9 +1693,9 @@ void mxsr2msrTranslator::visitStart (S_staff_distance& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_staff_distance" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -1733,9 +1733,9 @@ void mxsr2msrTranslator::visitStart (S_measure_layout& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_measure_layout" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -1761,9 +1761,9 @@ void mxsr2msrTranslator::visitEnd (S_measure_layout& elt)
     elt->getInputLineNumber ();
 
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> End visiting S_measure_layout" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -1787,9 +1787,9 @@ void mxsr2msrTranslator::visitStart (S_measure_distance& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_measure_distance" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -1827,9 +1827,9 @@ void mxsr2msrTranslator::visitStart (S_appearance& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_appearance" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -1950,9 +1950,9 @@ void mxsr2msrTranslator::visitEnd (S_appearance& elt)
     elt->getInputLineNumber ();
 
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> End visiting S_appearance" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -1976,9 +1976,9 @@ void mxsr2msrTranslator::visitStart (S_line_width& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_line_width" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -2101,9 +2101,9 @@ void mxsr2msrTranslator::visitStart (S_note_size& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_note_size" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -2192,9 +2192,9 @@ void mxsr2msrTranslator::visitStart (S_distance& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_distance" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -2282,9 +2282,9 @@ void mxsr2msrTranslator::visitStart (S_glyph& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_glyph" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -2394,9 +2394,9 @@ void mxsr2msrTranslator::visitStart (S_other_appearance& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_other_appearance" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -2429,9 +2429,9 @@ void mxsr2msrTranslator::visitStart (S_part& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_part" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -2450,9 +2450,9 @@ void mxsr2msrTranslator::visitStart (S_part& elt)
       ||
     gEarlyOptions.getEarlyTracePasses ()
   ) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
 //       std::endl <<
       "<!--=== part \"" << partID << "\"" <<
       ", line " << inputLineNumber << " ===-->" <<
@@ -2534,9 +2534,9 @@ void mxsr2msrTranslator::visitStart (S_part& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceParts ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--------------------------------------------" <<
       std::endl <<
       "Analyzing part " <<
@@ -2558,7 +2558,7 @@ void mxsr2msrTranslator::visitStart (S_part& elt)
   fPreviousNoteMusicXMLStaffNumber = msrStaff::K_STAFF_NUMBER_UNKNOWN;
   fCurrentMusicXMLStaffNumber      = msrStaff::K_STAFF_NUMBER_UNKNOWN;
 
-	// voice numbers
+  // voice numbers
   fCurrentMusicXMLVoiceNumber = msrVoice::K_VOICE_NUMBER_UNKNOWN;
 
   // staff change detection
@@ -2595,9 +2595,9 @@ void mxsr2msrTranslator::visitEnd (S_part& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> End visiting S_part" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -2613,7 +2613,7 @@ void mxsr2msrTranslator::visitEnd (S_part& elt)
 /*
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceParts ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Analyzing part " <<
@@ -2747,9 +2747,9 @@ void mxsr2msrTranslator::visitStart (S_attributes& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_attributes" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
@@ -2768,9 +2768,9 @@ void mxsr2msrTranslator::visitEnd (S_attributes& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> End visiting S_attributes" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -2822,9 +2822,9 @@ void mxsr2msrTranslator::visitStart (S_divisions& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_divisions" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -2852,7 +2852,7 @@ void mxsr2msrTranslator::visitStart (S_divisions& elt)
   // set current part's divisions per quarter note
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceDivisions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     if (fCurrentDivisionsPerQuarterNote == 1) {
       ss <<
@@ -2892,9 +2892,9 @@ void mxsr2msrTranslator::visitStart (S_clef& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_clef" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -2933,9 +2933,9 @@ void mxsr2msrTranslator::visitStart (S_sign& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_sign" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
@@ -2953,9 +2953,9 @@ void mxsr2msrTranslator::visitStart (S_line& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_line" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
@@ -2976,9 +2976,9 @@ void mxsr2msrTranslator::visitStart (S_clef_octave_change& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_clef_octave_change" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -3013,9 +3013,9 @@ void mxsr2msrTranslator::visitEnd (S_clef& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> End visiting S_clef" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -3255,9 +3255,9 @@ void mxsr2msrTranslator::visitEnd (S_clef& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceClefs ()) {
-			std::stringstream ss;
+      std::stringstream ss;
 
-			ss <<
+      ss <<
         "Replace clef " <<
         msrClefKindAsString (clefKind) <<
         " by " <<
@@ -3265,9 +3265,9 @@ void mxsr2msrTranslator::visitEnd (S_clef& elt)
         ", line " << inputLineNumber <<
         std::endl;
 
-			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
-				ss.str ());
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -3307,9 +3307,9 @@ void mxsr2msrTranslator::visitStart (S_key& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_key" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -3354,9 +3354,9 @@ void mxsr2msrTranslator::visitStart (S_cancel& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_cancel" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
@@ -3374,9 +3374,9 @@ void mxsr2msrTranslator::visitStart (S_fifths& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_fifths" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
@@ -3399,9 +3399,9 @@ void mxsr2msrTranslator::visitStart (S_mode& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_mode" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -3465,9 +3465,9 @@ void mxsr2msrTranslator::visitStart (S_key_step& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_key_step" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -3524,9 +3524,9 @@ void mxsr2msrTranslator::visitStart (S_key_alter& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_key_alter" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -3583,9 +3583,9 @@ void mxsr2msrTranslator::visitStart (S_key_octave& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_key_octave" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -3678,9 +3678,9 @@ void mxsr2msrTranslator::visitEnd (S_key& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> End visiting S_key" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -3884,9 +3884,9 @@ void mxsr2msrTranslator::visitStart (S_time& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_time" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -3946,9 +3946,9 @@ void mxsr2msrTranslator::visitStart (S_beats& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_beats" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
@@ -3969,9 +3969,9 @@ void mxsr2msrTranslator::visitStart (S_beat_type& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_beat_type" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -4032,9 +4032,9 @@ void mxsr2msrTranslator::visitStart (S_senza_misura& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_senza_misura" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
@@ -4055,9 +4055,9 @@ void mxsr2msrTranslator::visitStart (S_interchangeable& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_interchangeable" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -4152,9 +4152,9 @@ void mxsr2msrTranslator::visitStart (S_time_relation& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_time_relation" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -4218,9 +4218,9 @@ void mxsr2msrTranslator::visitEnd (S_time& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> End visiting S_time" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -4295,9 +4295,9 @@ void mxsr2msrTranslator::visitStart (S_score_instrument& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_score_instrument" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
@@ -4361,9 +4361,9 @@ void mxsr2msrTranslator::visitStart (S_instrument_name& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_instrument_name" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
@@ -4385,9 +4385,9 @@ void mxsr2msrTranslator::visitStart (S_solo& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_solo" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
@@ -4409,9 +4409,9 @@ void mxsr2msrTranslator::visitStart (S_instruments& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_instruments" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
@@ -4471,9 +4471,9 @@ void mxsr2msrTranslator::visitStart (S_transpose& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_transpose" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
@@ -4496,9 +4496,9 @@ void mxsr2msrTranslator::visitStart (S_diatonic& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_diatonic" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
@@ -4516,9 +4516,9 @@ void mxsr2msrTranslator::visitStart (S_chromatic& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_chromatic" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
@@ -4536,9 +4536,9 @@ void mxsr2msrTranslator::visitStart (S_octave_change& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting octave_change" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
@@ -4556,9 +4556,9 @@ void mxsr2msrTranslator::visitStart (S_double& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting double" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
@@ -4586,9 +4586,9 @@ void mxsr2msrTranslator::visitEnd (S_transpose& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> End visiting S_transpose" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -4690,9 +4690,9 @@ void mxsr2msrTranslator::visitStart (S_direction& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_direction" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -4728,9 +4728,9 @@ void mxsr2msrTranslator::visitEnd (S_direction& elt)
     elt->getInputLineNumber ();
 
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> End visiting S_direction" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -4804,9 +4804,9 @@ void mxsr2msrTranslator::visitStart (S_direction_type& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_direction_type" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -4832,9 +4832,9 @@ void mxsr2msrTranslator::visitEnd (S_direction_type& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> End visiting S_direction_type" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
@@ -4856,9 +4856,9 @@ void mxsr2msrTranslator::visitStart (S_offset& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_offset" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -4916,18 +4916,18 @@ void mxsr2msrTranslator::visitStart (S_offset& elt)
   else if (fOnGoingHarmony) {
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceHarmonies ()) {
-			std::stringstream ss;
+      std::stringstream ss;
 
-			ss <<
+      ss <<
         "Harmony offset \"" << offsetValue << "\"" <<
         ", represents = \'" <<
        offsetWholeNotesFromNotesDuration <<
        "\' whole notes" <<
         std::endl;
 
-			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
-				ss.str ());
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -4944,9 +4944,9 @@ void mxsr2msrTranslator::visitStart (S_other_direction& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_direction" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -4977,9 +4977,9 @@ void mxsr2msrTranslator::visitStart (S_sound& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_sound" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -5023,9 +5023,9 @@ void mxsr2msrTranslator::visitEnd (S_sound& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> End visiting S_sound" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
@@ -5045,9 +5045,9 @@ void mxsr2msrTranslator::visitStart (S_octave_shift& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_octave_shift" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -5149,17 +5149,17 @@ void mxsr2msrTranslator::visitStart (S_octave_shift& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceOctaveShifts ()) {
-			std::stringstream ss;
+      std::stringstream ss;
 
-			ss <<
+      ss <<
         "Creating octave shift " <<
         octaveShift->asString () <<
         ", line " << inputLineNumber <<
         std::endl;
 
-			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
-				ss.str ());
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -5175,9 +5175,9 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_words" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -5406,9 +5406,9 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
           ||
         gTraceOahGroup->getTraceTempos ()
       ) {
-				std::stringstream ss;
+        std::stringstream ss;
 
-				ss <<
+        ss <<
           "Converting words \"" <<
           wordsValue <<
           "\" to an MSR tempo" <<
@@ -5417,9 +5417,9 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
           ", line " << inputLineNumber <<
           std::endl;
 
-			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
-				ss.str ());
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -5449,9 +5449,9 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
           ||
         gTraceOahGroup->getTraceRehearsalMarks ()
       ) {
-				std::stringstream ss;
+        std::stringstream ss;
 
-				ss <<
+        ss <<
           "Converting words \"" <<
           wordsValue <<
           "\" to an MSR rehearsal mark" <<
@@ -5460,9 +5460,9 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
           ", line " << inputLineNumber <<
           std::endl;
 
-			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
-				ss.str ());
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -5490,9 +5490,9 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
           ||
         gTraceOahGroup->getTraceSegnos ()
       ) {
-				std::stringstream ss;
+        std::stringstream ss;
 
-				ss <<
+        ss <<
           "Converting words \"" <<
           wordsValue <<
           "\" to an MSR segno" <<
@@ -5501,9 +5501,9 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
           ", line " << inputLineNumber <<
           std::endl;
 
-			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
-				ss.str ());
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -5529,9 +5529,9 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
       if (gTraceOahGroup->getTraceWords ()) {
-				std::stringstream ss;
+        std::stringstream ss;
 
-				ss <<
+        ss <<
           "Converting words '" <<
           wordsValue <<
           "' to an MSR dal segno '" <<
@@ -5542,9 +5542,9 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
           ", line " << inputLineNumber <<
           std::endl;
 
-				gWaeHandler->waeTrace (
-					__FILE__, __LINE__,
-					ss.str ());
+        gWaeHandler->waeTrace (
+          __FILE__, __LINE__,
+          ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -5573,9 +5573,9 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
           ||
         gTraceOahGroup->getTraceDalSegnos ()
       ) {
-				std::stringstream ss;
+        std::stringstream ss;
 
-				ss <<
+        ss <<
           "Converting words '" <<
           wordsValue <<
           "' to an MSR dal segno '" <<
@@ -5586,9 +5586,9 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
           ", line " << inputLineNumber <<
           std::endl;
 
-				gWaeHandler->waeTrace (
-					__FILE__, __LINE__,
-					ss.str ());
+        gWaeHandler->waeTrace (
+          __FILE__, __LINE__,
+          ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -5613,9 +5613,9 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
       if (gTraceOahGroup->getTraceWords ()) {
-				std::stringstream ss;
+        std::stringstream ss;
 
-				ss <<
+        ss <<
           "Converting words '" <<
           wordsValue <<
           "' to an MSR dal segno '" <<
@@ -5626,9 +5626,9 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
           ", line " << inputLineNumber <<
           std::endl;
 
-				gWaeHandler->waeTrace (
-					__FILE__, __LINE__,
-					ss.str ());
+        gWaeHandler->waeTrace (
+          __FILE__, __LINE__,
+          ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -5656,9 +5656,9 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
           ||
         gTraceOahGroup->getTraceCodas ()
       ) {
-				std::stringstream ss;
+        std::stringstream ss;
 
-				ss <<
+        ss <<
           "Converting words '" <<
           wordsValue <<
           "' to an MSR coda first '" <<
@@ -5669,9 +5669,9 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
           ", line " << inputLineNumber <<
           std::endl;
 
-				gWaeHandler->waeTrace (
-					__FILE__, __LINE__,
-					ss.str ());
+        gWaeHandler->waeTrace (
+          __FILE__, __LINE__,
+          ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -5700,9 +5700,9 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
           ||
         gTraceOahGroup->getTraceCodas ()
       ) {
-				std::stringstream ss;
+        std::stringstream ss;
 
-				ss <<
+        ss <<
           "Converting words '" <<
           wordsValue <<
           "' to an MSR coda second '" <<
@@ -5713,9 +5713,9 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
           ", line " << inputLineNumber <<
           std::endl;
 
-				gWaeHandler->waeTrace (
-					__FILE__, __LINE__,
-					ss.str ());
+        gWaeHandler->waeTrace (
+          __FILE__, __LINE__,
+          ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -5735,9 +5735,9 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
           ||
         gTraceOahGroup->getTraceCrescDecrescs ()
       ) {
-				std::stringstream ss;
+        std::stringstream ss;
 
-				ss <<
+        ss <<
           "Converting words \"" <<
           wordsValue <<
           "\" to an MSR cresc" <<
@@ -5746,9 +5746,9 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
           ", line " << inputLineNumber <<
           std::endl;
 
-				gWaeHandler->waeTrace (
-					__FILE__, __LINE__,
-					ss.str ());
+        gWaeHandler->waeTrace (
+          __FILE__, __LINE__,
+          ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -5758,16 +5758,16 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
       // create an msrCrescDecresc
 #ifdef MF_TRACE_IS_ENABLED
       if (gTraceOahGroup->getTraceCrescDecrescs ()) {
-				std::stringstream ss;
+        std::stringstream ss;
 
-				ss <<
+        ss <<
           "Creating an msrCrescDecresc crescendo" <<
           ", line " << inputLineNumber <<
           std::endl;
 
-				gWaeHandler->waeTrace (
-					__FILE__, __LINE__,
-					ss.str ());
+        gWaeHandler->waeTrace (
+          __FILE__, __LINE__,
+          ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -5793,9 +5793,9 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
           ||
         gTraceOahGroup->getTraceCrescDecrescs ()
       ) {
-				std::stringstream ss;
+        std::stringstream ss;
 
-				ss <<
+        ss <<
           "Converting words \"" <<
           wordsValue <<
           "\" to an MSR decresc" <<
@@ -5804,9 +5804,9 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
           ", line " << inputLineNumber <<
           std::endl;
 
-				gWaeHandler->waeTrace (
-					__FILE__, __LINE__,
-					ss.str ());
+        gWaeHandler->waeTrace (
+          __FILE__, __LINE__,
+          ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -5816,16 +5816,16 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
       // create an msrCrescDecresc
 #ifdef MF_TRACE_IS_ENABLED
       if (gTraceOahGroup->getTraceCrescDecrescs ()) {
-				std::stringstream ss;
+        std::stringstream ss;
 
-				ss <<
+        ss <<
           "Creating an msrCrescDecresc decrescendo" <<
           ", line " << inputLineNumber <<
           std::endl;
 
-				gWaeHandler->waeTrace (
-					__FILE__, __LINE__,
-					ss.str ());
+        gWaeHandler->waeTrace (
+          __FILE__, __LINE__,
+          ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -5846,9 +5846,9 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
       // create the words
 #ifdef MF_TRACE_IS_ENABLED
       if (gTraceOahGroup->getTraceWords ()) {
-				std::stringstream ss;
+        std::stringstream ss;
 
-				ss <<
+        ss <<
           "Creating words \"" << wordsValue << "\"" <<
           ", placement = \"" <<
           msrPlacementKindAsString (
@@ -5857,9 +5857,9 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
           ", line " << inputLineNumber <<
           std::endl;
 
-				gWaeHandler->waeTrace (
-					__FILE__, __LINE__,
-					ss.str ());
+        gWaeHandler->waeTrace (
+          __FILE__, __LINE__,
+          ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -5907,9 +5907,9 @@ void mxsr2msrTranslator::visitStart (S_accordion_registration& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_accordion_registration" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
@@ -5943,9 +5943,9 @@ void mxsr2msrTranslator::visitStart (S_accordion_high& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_accordion_high" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
@@ -5968,9 +5968,9 @@ void mxsr2msrTranslator::visitStart (S_accordion_middle& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_accordion_middle" <<
        ", line " << inputLineNumber <<
      std::endl;
@@ -6002,9 +6002,9 @@ void mxsr2msrTranslator::visitStart (S_accordion_low& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_accordion_low" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
@@ -6027,9 +6027,9 @@ void mxsr2msrTranslator::visitEnd (S_accordion_registration& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> End visiting S_accordion_registration" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -6075,9 +6075,9 @@ void mxsr2msrTranslator::visitStart (S_metronome& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_metronome" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -6155,9 +6155,9 @@ void mxsr2msrTranslator::visitStart (S_beat_unit& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_beat_unit" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -6206,9 +6206,9 @@ void mxsr2msrTranslator::visitStart (S_beat_unit_dot& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_beat_unit_dot" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -6240,9 +6240,9 @@ void mxsr2msrTranslator::visitStart (S_per_minute& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_per_minute" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
@@ -6260,9 +6260,9 @@ void mxsr2msrTranslator::visitStart (S_metronome_note& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_metronome_note" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
@@ -6283,9 +6283,9 @@ void mxsr2msrTranslator::visitStart (S_metronome_type& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_metronome_type" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -6309,9 +6309,9 @@ void mxsr2msrTranslator::visitStart (S_metronome_dot& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_metronome_dot" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
@@ -6332,9 +6332,9 @@ void mxsr2msrTranslator::visitStart (S_metronome_beam& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_metronome_beam" <<
       ", line " << inputLineNumber <<
      std::endl;
@@ -6405,16 +6405,16 @@ void mxsr2msrTranslator::attachCurrentMetronomeBeamsToMetronomeNote (
         ||
       gTraceOahGroup->getTraceBeams ()
     ) {
-			std::stringstream ss;
+      std::stringstream ss;
 
-			ss <<
+      ss <<
         "Attaching current beams to tempoNote " <<
         tempoNote->asString () <<
         std::endl;
 
-			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
-				ss.str ());
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -6429,17 +6429,17 @@ void mxsr2msrTranslator::attachCurrentMetronomeBeamsToMetronomeNote (
           ||
         gTraceOahGroup->getTraceBeams ()
       ) {
-				std::stringstream ss;
+        std::stringstream ss;
 
-				ss <<
+        ss <<
           "Attaching beam '" <<
           beam->asString () <<
           "' to tempoNote '" << tempoNote->asString () << "'" <<
           std::endl;
 
-				gWaeHandler->waeTrace (
-					__FILE__, __LINE__,
-					ss.str ());
+        gWaeHandler->waeTrace (
+          __FILE__, __LINE__,
+          ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -6459,9 +6459,9 @@ void mxsr2msrTranslator::visitEnd (S_metronome_note& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> End visiting S_metronome_note" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -6556,9 +6556,9 @@ void mxsr2msrTranslator::visitStart (S_metronome_relation& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_metronome_relation" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -6598,9 +6598,9 @@ void mxsr2msrTranslator::visitStart (S_metronome_tuplet& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_metronome_tuplet" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -6715,9 +6715,9 @@ void mxsr2msrTranslator::visitStart (S_metronome_tuplet& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceTempos ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "fCurrentTempoTupletTypeKind: " <<
       fCurrentTempoTupletTypeKind <<
       "fCurrentTempoTupletBracketKind: " <<
@@ -6739,9 +6739,9 @@ void mxsr2msrTranslator::visitStart (S_normal_dot& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_normal_dot" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
@@ -6762,9 +6762,9 @@ void mxsr2msrTranslator::visitEnd (S_metronome_tuplet& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> End visiting S_metronome_tuplet" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -6843,9 +6843,9 @@ void mxsr2msrTranslator::visitEnd (S_metronome& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> End visiting S_metronome" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -6945,9 +6945,9 @@ void mxsr2msrTranslator::visitEnd (S_metronome& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceTempos ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "Creating tempo '" <<
       fCurrentMetronomeTempo->asString () <<
       "'" <<
@@ -7062,9 +7062,9 @@ void mxsr2msrTranslator::visitStart (S_staves& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_direction" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
@@ -7084,9 +7084,9 @@ void mxsr2msrTranslator::visitStart (S_staff& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_staff" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -7121,9 +7121,9 @@ void mxsr2msrTranslator::visitStart (S_staff& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceStaves ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> S_staff, fCurrentMusicXMLStaffNumber: " <<
       fCurrentMusicXMLStaffNumber <<
       std::endl <<
@@ -7177,9 +7177,9 @@ void mxsr2msrTranslator::visitStart (S_staff_details& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_staff_details" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -7274,12 +7274,12 @@ void mxsr2msrTranslator::visitStart (S_staff_details& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceStaves ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "Handling staff details:" <<
       std::endl <<
-      gTab << "StaffDetailsStaffNumber" << " = " <<
+      gTab << "StaffDetailsStaffNumber" << ": " <<
       fStaffDetailsStaffNumber <<
       std::endl;
 
@@ -7320,9 +7320,9 @@ void mxsr2msrTranslator::visitStart (S_staff_type& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_staff_type" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -7382,9 +7382,9 @@ void mxsr2msrTranslator::visitStart (S_staff_lines& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_staff_lines" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
@@ -7402,9 +7402,9 @@ void mxsr2msrTranslator::visitStart (S_staff_tuning& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_staff_tuning" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
@@ -7431,9 +7431,9 @@ void mxsr2msrTranslator::visitStart (S_tuning_step& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_tuning_step" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -7485,9 +7485,9 @@ void mxsr2msrTranslator::visitStart (S_tuning_octave& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_tuning_octave" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -7535,9 +7535,9 @@ void mxsr2msrTranslator::visitStart (S_tuning_alter& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_tuning_alter" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -7598,9 +7598,9 @@ void mxsr2msrTranslator::visitEnd (S_staff_tuning& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> End visiting S_staff_tuning" <<
        ", line " << inputLineNumber <<
      std::endl;
@@ -7623,10 +7623,10 @@ void mxsr2msrTranslator::visitEnd (S_staff_tuning& elt)
 
   // create the staff tuning
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceStaffDetails ()) {
-		std::stringstream ss;
+  if (gTraceOahGroup->getTraceStavesDetails ()) {
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "Creating staff tuning:" <<
       std::endl;
 
@@ -7636,30 +7636,30 @@ void mxsr2msrTranslator::visitEnd (S_staff_tuning& elt)
 
     gLog << std::left <<
       std::setw (fieldWidth) <<
-      "fCurrentStaffTuningLine" << " = " <<
+      "fCurrentStaffTuningLine" << ": " <<
       fCurrentStaffTuningLine <<
       std::endl <<
       std::setw (fieldWidth) <<
-      "fCurrentStaffTuningDiatonicPitch" << " = " <<
+      "fCurrentStaffTuningDiatonicPitch" << ": " <<
       msrDiatonicPitchKindAsStringInLanguage (
-        gGlobalMsrOahGroup->
+        gMsrOahGroup->
           getMsrQuarterTonesPitchesLanguageKind (),
         fCurrentStaffTuningDiatonicPitchKind) <<
       std::endl <<
       std::setw (fieldWidth) <<
-      "fCurrentStaffTuningAlteration" << " = " <<
+      "fCurrentStaffTuningAlteration" << ": " <<
       msrAlterationKindAsString (
         fCurrentStaffTuningAlterationKind) <<
       std::endl <<
       std::setw (fieldWidth) <<
-      "quarterTonesPitch" << " = " <<
+      "quarterTonesPitch" << ": " <<
       msrQuarterTonesPitchKindAsStringInLanguage (
         quarterTonesPitchKind,
-        gGlobalMsrOahGroup->
+        gMsrOahGroup->
           getMsrQuarterTonesPitchesLanguageKind ()) <<
       std::endl <<
       std::setw (fieldWidth) <<
-      "currentStaffTuningOctaveKind" << " = " <<
+      "currentStaffTuningOctaveKind" << ": " <<
       msrOctaveKindAsString (fCurrentStaffTuningOctaveKind) <<
       std::endl;
 
@@ -7692,9 +7692,9 @@ void mxsr2msrTranslator::visitStart (S_voice& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_staff_details" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -7707,9 +7707,9 @@ void mxsr2msrTranslator::visitStart (S_voice& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceVoices ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
 //       std::endl <<
       "<!--=== voice \"" << "elt->getVoiceName ()" << "\"" <<
       ", line " << elt->getInputLineNumber () << " ===-->" <<
@@ -7761,9 +7761,9 @@ void mxsr2msrTranslator::visitStart (S_backup& elt)
     elt->getInputLineNumber ();
 
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_backup" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -7784,18 +7784,18 @@ void mxsr2msrTranslator::visitEnd (S_backup& elt)
 
 /*
 <!--
-	The backup and forward elements are required to coordinate
-	multiple voices in one part, including music on multiple
-	staves. The forward element is generally used within voices
-	and staves, while the backup element is generally used to
-	move between voices and staves. Thus the backup element
-	does not include voice or staff elements. NotesDuration values
-	should always be positive, and should not cross measure
-	boundaries or mid-measure changes in the divisions value.
+  The backup and forward elements are required to coordinate
+  multiple voices in one part, including music on multiple
+  staves. The forward element is generally used within voices
+  and staves, while the backup element is generally used to
+  move between voices and staves. Thus the backup element
+  does not include voice or staff elements. NotesDuration values
+  should always be positive, and should not cross measure
+  boundaries or mid-measure changes in the divisions value.
 -->
 <!ELEMENT backup (duration, %editorial;)>
 <!ELEMENT forward
-	(duration, %editorial-voice;, staff?)>
+  (duration, %editorial-voice;, staff?)>
 
       <backup>
         <duration>8</duration>
@@ -7804,9 +7804,9 @@ void mxsr2msrTranslator::visitEnd (S_backup& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> End visiting S_backup" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -7819,9 +7819,9 @@ void mxsr2msrTranslator::visitEnd (S_backup& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceBackup ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "Backup by " <<
       mfSingularOrPlural (
         fCurrentBackupDivisions, "division", "divisions") <<
@@ -7844,11 +7844,11 @@ void mxsr2msrTranslator::visitEnd (S_backup& elt)
         fCurrentBackupDivisions,
         fCurrentDivisionsPerQuarterNote * 4); // hence a whole note
 
-	// update current measure position
-	fCurrentPart->
-		decrementPartMeasurePosition (
-			inputLineNumber,
-			backupStepLength);
+  // update current measure position
+  fCurrentPart->
+    decrementPartDrawingMeasurePosition (
+      inputLineNumber,
+      backupStepLength);
 
   // reset notes staff numbers
 //   fPreviousNoteMusicXMLStaffNumber = msrStaff::K_STAFF_NUMBER_UNKNOWN;
@@ -7868,13 +7868,13 @@ void mxsr2msrTranslator::visitEnd (S_backup& elt)
 //______________________________________________________________________________
 void mxsr2msrTranslator::visitStart (S_forward& elt)
 {
-	int inputLineNumber = elt->getInputLineNumber ();
+  int inputLineNumber = elt->getInputLineNumber ();
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_forward" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -7895,9 +7895,9 @@ void mxsr2msrTranslator::visitEnd (S_forward& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> End visiting S_forward" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -7910,18 +7910,18 @@ void mxsr2msrTranslator::visitEnd (S_forward& elt)
 
 /*
 <!--
-	The backup and forward elements are required to coordinate
-	multiple voices in one part, including music on multiple
-	staves. The forward element is generally used within voices
-	and staves, while the backup element is generally used to
-	move between voices and staves. Thus the backup element
-	does not include voice or staff elements. NotesDuration values
-	should always be positive, and should not cross measure
-	boundaries or mid-measure changes in the divisions value.
+  The backup and forward elements are required to coordinate
+  multiple voices in one part, including music on multiple
+  staves. The forward element is generally used within voices
+  and staves, while the backup element is generally used to
+  move between voices and staves. Thus the backup element
+  does not include voice or staff elements. NotesDuration values
+  should always be positive, and should not cross measure
+  boundaries or mid-measure changes in the divisions value.
 -->
 <!ELEMENT backup (duration, %editorial;)>
 <!ELEMENT forward
-	(duration, %editorial-voice;, staff?)>
+  (duration, %editorial-voice;, staff?)>
 
       <forward>
         <duration>4</duration>
@@ -7934,9 +7934,9 @@ void mxsr2msrTranslator::visitEnd (S_forward& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceForward ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "Handling forward <<< " << fCurrentBackupDivisions << " divisions >>>" <<
       ", fCurrentForwardStaffNumber: " <<
       fCurrentForwardStaffNumber <<
@@ -7958,11 +7958,11 @@ void mxsr2msrTranslator::visitEnd (S_forward& elt)
         fCurrentForwardDivisions,
         fCurrentDivisionsPerQuarterNote * 4); // hence a whole note
 
-	// update current measure position
-	fCurrentPart->
-		incrementPartMeasurePosition (
-			inputLineNumber,
-			forwardStepLength);
+  // account for forwardStepLength wholeNotes in the part current measure position
+  fCurrentPart->
+    incrementPartDrawingMeasurePosition (
+      inputLineNumber,
+      forwardStepLength);
 
   // the staff number if any should be positive
   if (fCurrentForwardStaffNumber <= 0) {
@@ -8010,18 +8010,18 @@ void mxsr2msrTranslator::visitEnd (S_forward& elt)
 
   // compute the forward step length
 #ifdef MF_TRACE_IS_ENABLED
-	if (gGlobalMxsrOahGroup->getTraceForward ()) {
-		std::stringstream ss;
+  if (gGlobalMxsrOahGroup->getTraceForward ()) {
+    std::stringstream ss;
 
-		ss <<
-			"--> current forward divisions: " <<
-			fCurrentForwardDivisions <<
-			std::endl;
+    ss <<
+      "--> current forward divisions: " <<
+      fCurrentForwardDivisions <<
+      std::endl;
 
-		gWaeHandler->waeTrace (
-			__FILE__, __LINE__,
-			ss.str ());
-	}
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
 #endif // MF_TRACE_IS_ENABLED
 
   // append a padding note to the voice to be forwarded
@@ -8045,9 +8045,9 @@ void mxsr2msrTranslator::visitStart (S_tied& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_tied" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -8213,9 +8213,9 @@ void mxsr2msrTranslator::visitStart (S_slur& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_slur" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -8461,9 +8461,9 @@ void mxsr2msrTranslator::visitStart (S_slur& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
       if (gTraceOahGroup->getTraceSlurs ()) {
-				std::stringstream ss;
+        std::stringstream ss;
 
-				ss <<
+        ss <<
           "visitStart (S_slur&)"
           ", slurNumber: " <<
           slurNumber <<
@@ -8475,9 +8475,9 @@ void mxsr2msrTranslator::visitStart (S_slur& elt)
             slurLineTypeKind) <<
           std::endl;
 
-				gWaeHandler->waeTrace (
-					__FILE__, __LINE__,
-					ss.str ());
+        gWaeHandler->waeTrace (
+          __FILE__, __LINE__,
+          ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -8519,9 +8519,9 @@ void mxsr2msrTranslator::visitStart (S_bracket& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_bracket" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -8813,9 +8813,9 @@ void mxsr2msrTranslator::visitStart (S_wedge& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_wedge" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -8946,9 +8946,9 @@ void mxsr2msrTranslator::visitStart (S_lyric& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_lyric" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -8976,17 +8976,17 @@ void mxsr2msrTranslator::visitStart (S_lyric& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceLyrics ()) {
-			std::stringstream ss;
+      std::stringstream ss;
 
-			ss <<
+      ss <<
         "Setting fCurrentStanzaNumber to " <<
         fCurrentStanzaNumber <<
         ", line " << inputLineNumber <<
         std::endl;
 
-			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
-				ss.str ());
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -9006,17 +9006,17 @@ void mxsr2msrTranslator::visitStart (S_lyric& elt)
       // lyrics names are not so frequent after all...
 #ifdef MF_TRACE_IS_ENABLED
       if (gTraceOahGroup->getTraceLyrics ()) {
-				std::stringstream ss;
+        std::stringstream ss;
 
-				ss <<
+        ss <<
           "Lyric name is empty, using \"" <<
           msrStanza::K_STANZA_NAME_UNKNOWN <<
           "\" by default" <<
           std::endl;
 
-				gWaeHandler->waeTrace (
-					__FILE__, __LINE__,
-					ss.str ());
+        gWaeHandler->waeTrace (
+          __FILE__, __LINE__,
+          ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -9025,17 +9025,17 @@ void mxsr2msrTranslator::visitStart (S_lyric& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceLyrics ()) {
-			std::stringstream ss;
+      std::stringstream ss;
 
-			ss <<
+      ss <<
         "Setting fCurrentStanzaName to \"" <<
         fCurrentStanzaName <<
         "\", line " << inputLineNumber <<
         std::endl;
 
-			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
-				ss.str ());
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -9074,9 +9074,9 @@ void mxsr2msrTranslator::visitStart (S_syllabic& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_syllabic" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -9128,9 +9128,9 @@ void mxsr2msrTranslator::visitStart (S_text& elt)
     elt->getInputLineNumber ();
 
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_text" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -9152,9 +9152,9 @@ void mxsr2msrTranslator::visitStart (S_text& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceLyrics ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "textValue = \"" << textValue << "\"" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -9208,9 +9208,9 @@ void mxsr2msrTranslator::visitStart (S_elision& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_elision" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
@@ -9242,9 +9242,9 @@ void mxsr2msrTranslator::visitStart (S_extend& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_extend" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -9308,9 +9308,9 @@ void mxsr2msrTranslator::visitEnd (S_lyric& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> End visiting S_lyric" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -9417,16 +9417,16 @@ void mxsr2msrTranslator::visitEnd (S_lyric& elt)
       gLog << std::left <<
         std::endl <<
         std::setw (fieldWidth) <<
-        "fCurrentSyllableExtendKind" << " = " <<
+        "fCurrentSyllableExtendKind" << ": " <<
         msrSyllableExtendKindAsString (
           fCurrentSyllableExtendKind) <<
         std::endl <<
         std::setw (fieldWidth) <<
-        "fCurrentNoteIsARest" << " = " <<
+        "fCurrentNoteIsARest" << ": " <<
         fCurrentNoteIsARest <<
         std::endl <<
         std::setw (fieldWidth) <<
-        "fCurrentRestIsAMeasureRest" << " = " <<
+        "fCurrentRestIsAMeasureRest" << ": " <<
         fCurrentRestIsAMeasureRest <<
         std::endl;
 
@@ -9453,21 +9453,21 @@ void mxsr2msrTranslator::visitEnd (S_lyric& elt)
 
       gLog << std::left <<
         std::setw (fieldWidth) <<
-        "fOnGoingSlur" << " = " <<
+        "fOnGoingSlur" << ": " <<
         fOnGoingSlur <<
         std::endl <<
         std::setw (fieldWidth) <<
-        "fOnGoingSlurHasStanza" << " = " <<
+        "fOnGoingSlurHasStanza" << ": " <<
         fOnGoingSlurHasStanza <<
         std::endl;
 
       gLog << std::left <<
         std::setw (fieldWidth) <<
-        "fOnGoingLigature" << " = " <<
+        "fOnGoingLigature" << ": " <<
         fOnGoingLigature <<
         std::endl <<
         std::setw (fieldWidth) <<
-        "fOnGoingLigatureHasStanza" << " = " <<
+        "fOnGoingLigatureHasStanza" << ": " <<
         fOnGoingLigatureHasStanza <<
         std::endl;
 
@@ -9504,7 +9504,7 @@ void mxsr2msrTranslator::visitEnd (S_lyric& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceLyrics ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "==> visitEnd (S_lyric&), fCurrentSyllableKind: " <<
@@ -9571,9 +9571,9 @@ void mxsr2msrTranslator::visitEnd (S_lyric& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceLyrics ()) {
-			std::stringstream ss;
+      std::stringstream ss;
 
-			ss <<
+      ss <<
         "Creating a syllable '" <<
         msrSyllableKindAsString (
           fCurrentSyllableKind) <<
@@ -9597,9 +9597,9 @@ void mxsr2msrTranslator::visitEnd (S_lyric& elt)
         ", line " << inputLineNumber <<
         std::endl;
 
-			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
-				ss.str ());
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -9658,9 +9658,9 @@ void mxsr2msrTranslator::visitStart (S_measure& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_measure" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -9676,9 +9676,9 @@ void mxsr2msrTranslator::visitStart (S_measure& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasuresDetails ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "==> visitStart (S_measure" <<
       ", fPartMeasuresCounter = '" <<
         fPartMeasuresCounter <<
@@ -9705,9 +9705,9 @@ void mxsr2msrTranslator::visitStart (S_measure& elt)
       ||
     gEarlyOptions.getEarlyTracePasses ()
   ) {
-			std::stringstream ss;
+      std::stringstream ss;
 
-			ss <<
+      ss <<
 //       std::endl <<
       "<!--=== " <<
       "part \"" << fCurrentPart->getPartName () << "\"" <<
@@ -9807,11 +9807,11 @@ void mxsr2msrTranslator::visitStart (S_measure& elt)
     }
   }
 
-	// reset the part measure position
-	fCurrentPart->
-	  setPartMeasurePosition (
-	  	inputLineNumber,
-	  	msrWholeNotes (0, 1));
+  // reset the part measure position
+  fCurrentPart->
+    setPartDrawingMeasurePosition (
+      inputLineNumber,
+      msrWholeNotes (0, 1));
 
   // forget about the current non-grace note JMI HERE???
 // JMI  fCurrentNonGraceNote = nullptr;
@@ -9848,8 +9848,8 @@ void mxsr2msrTranslator::visitStart (S_measure& elt)
       // yes, activate detailed trace for it
       gGlobalMxsr2msrOahGroup = gGlobalMxsr2msrOahWithDetailedTrace;
       gServiceRunData  = gGlobalCurrentServiceRunDataWithDetailedTrace;
-      gGlobalMsrOahGroup      = gGlobalMsrOahWithDetailedTrace;
-      gGlobalLpsrOahGroup     = gGlobalLpsrOahWithDetailedTrace;
+      gMsrOahGroup      = gGlobalMsrOahWithDetailedTrace;
+      gLpsrOahGroup     = gGlobalLpsrOahWithDetailedTrace;
       gGlobalLpsr2lilypondOahGroup = gGlobalLilypondOahWithDetailedTrace;
     }
   }
@@ -9864,9 +9864,9 @@ void mxsr2msrTranslator::visitEnd (S_measure& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> End visiting S_measure" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -9903,9 +9903,9 @@ void mxsr2msrTranslator::visitEnd (S_measure& elt)
   if (fPendingGraceNotesGroup) {
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceGraceNotes ()) {
-			std::stringstream ss;
+      std::stringstream ss;
 
-			ss <<
+      ss <<
         std::endl <<
         "fCurrentGraceNotes IS NOT NULL at the end of measure '" << // JMI
         elt->getAttributeValue ("number") <<
@@ -9917,9 +9917,9 @@ void mxsr2msrTranslator::visitEnd (S_measure& elt)
         fCurrentPart <<
         std::endl;
 
-			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
-				ss.str ());
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -10003,9 +10003,9 @@ void mxsr2msrTranslator::visitEnd (S_measure& elt)
       // fCurrentMeasureNumber is to be replicated,
 #ifdef MF_TRACE_IS_ENABLED
       if (gTraceOahGroup->getTraceMultipleFullBarRests ()) {
-				std::stringstream ss;
+        std::stringstream ss;
 
-				ss <<
+        ss <<
           std::endl <<
           "Replicating meaure " <<
           fCurrentMeasureNumber <<
@@ -10013,9 +10013,9 @@ void mxsr2msrTranslator::visitEnd (S_measure& elt)
           fCurrentPart->getPartCombinedName () <<
           std::endl;
 
-				gWaeHandler->waeTrace (
-					__FILE__, __LINE__,
-					ss.str ());
+        gWaeHandler->waeTrace (
+          __FILE__, __LINE__,
+          ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -10067,9 +10067,9 @@ void mxsr2msrTranslator::visitEnd (S_measure& elt)
           fCurrentPart->getPartCombinedName () <<
           std::endl;
 
-				gWaeHandler->waeTrace (
-					__FILE__, __LINE__,
-					ss.str ());
+        gWaeHandler->waeTrace (
+          __FILE__, __LINE__,
+          ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -10203,9 +10203,9 @@ void mxsr2msrTranslator::visitStart (S_print& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_print" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -10297,16 +10297,16 @@ Staff spacing between multiple staves is measured in
       // create a line break
 #ifdef MF_TRACE_IS_ENABLED
       if (gTraceOahGroup->getTraceLineBreaks ()) {
-				std::stringstream ss;
+        std::stringstream ss;
 
-				ss <<
+        ss <<
           "Creating a line break, " <<
           "line: " << inputLineNumber <<
           std::endl;
 
-				gWaeHandler->waeTrace (
-					__FILE__, __LINE__,
-					ss.str ());
+        gWaeHandler->waeTrace (
+          __FILE__, __LINE__,
+          ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -10414,9 +10414,9 @@ void mxsr2msrTranslator::visitEnd (S_print& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> End visiting S_print" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -10449,16 +10449,16 @@ void mxsr2msrTranslator::visitStart (S_measure_numbering& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
-			"--> Start visiting S_measure_numbering" <<
-			 ", line " << elt->getInputLineNumber () <<
-			std::endl;
+    ss <<
+      "--> Start visiting S_measure_numbering" <<
+       ", line " << elt->getInputLineNumber () <<
+      std::endl;
 
-		gWaeHandler->waeTrace (
-			__FILE__, __LINE__,
-			ss.str ());
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -10473,9 +10473,9 @@ void mxsr2msrTranslator::visitStart (S_barline& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_barline" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -10545,9 +10545,9 @@ void mxsr2msrTranslator::visitStart (S_bar_style& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_bar_style" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -10628,9 +10628,9 @@ void mxsr2msrTranslator::visitStart (S_segno& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_segno" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -10678,9 +10678,9 @@ void mxsr2msrTranslator::visitStart (S_coda& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_coda" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -10757,9 +10757,9 @@ void mxsr2msrTranslator::visitStart (S_eyeglasses& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_eyeglasses" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -10801,9 +10801,9 @@ void mxsr2msrTranslator::visitStart (S_pedal& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_pedal" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -10936,9 +10936,9 @@ void mxsr2msrTranslator::visitStart (S_ending& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_ending" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -11021,9 +11021,9 @@ void mxsr2msrTranslator::visitStart (S_repeat& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_repeat" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -11126,9 +11126,9 @@ void mxsr2msrTranslator::visitEnd (S_barline& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> End visiting S_barline" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -11165,7 +11165,7 @@ void mxsr2msrTranslator::visitEnd (S_barline& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceBarLines ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating barLine in part " <<
@@ -11434,9 +11434,9 @@ void mxsr2msrTranslator::visitStart (S_note& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_note" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -11503,7 +11503,7 @@ Controls whether or not spacing is left for an invisible note or object. It is u
 
   fCurrentNoteOctave = msrOctaveKind::kOctave_UNKNOWN;
 
-  fCurrentNoteSoundingWholeNotes             = msrWholeNotes (0, 1);
+  fCurrentNoteSoundingWholeNotes                  = msrWholeNotes (0, 1);
   fCurrentNoteSoundingWholeNotesFromNotesDuration = msrWholeNotes (0, 1);
 
   fCurrentDisplayDiatonicPitchKind      = msrDiatonicPitchKind::kDiatonicPitch_UNKNOWN;
@@ -11653,9 +11653,9 @@ void mxsr2msrTranslator::visitStart (S_step& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_step" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -11684,9 +11684,9 @@ void mxsr2msrTranslator::visitStart (S_alter& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_alter" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -11725,9 +11725,9 @@ void mxsr2msrTranslator::visitStart (S_octave& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_octave" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -11768,9 +11768,9 @@ void mxsr2msrTranslator::visitStart (S_duration& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_duration" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -11785,9 +11785,9 @@ void mxsr2msrTranslator::visitStart (S_duration& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceNotesDurations ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "NotesDuration: " << duration <<
       ", fOnGoingBackup: " << fOnGoingBackup <<
       ", fOnGoingForward: " << fOnGoingForward <<
@@ -11813,16 +11813,16 @@ void mxsr2msrTranslator::visitStart (S_duration& elt)
   else if (fOnGoingNote) {
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceNotesDetails ()) {
-			std::stringstream ss;
+      std::stringstream ss;
 
-			ss <<
+      ss <<
         "fCurrentDivisionsPerQuarterNote: " <<
         fCurrentDivisionsPerQuarterNote <<
         std::endl;
 
-			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
-				ss.str ());
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -11834,16 +11834,16 @@ void mxsr2msrTranslator::visitStart (S_duration& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceNotesDetails ()) {
-			std::stringstream ss;
+      std::stringstream ss;
 
-			ss <<
+      ss <<
         "fCurrentNoteSoundingWholeNotesFromNotesDuration: " <<
         fCurrentNoteSoundingWholeNotesFromNotesDuration <<
         std::endl;
 
-			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
-				ss.str ());
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -11858,16 +11858,16 @@ void mxsr2msrTranslator::visitStart (S_duration& elt)
   else if (fOnGoingFiguredBass) {
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceFiguredBasses ()) {
-			std::stringstream ss;
+      std::stringstream ss;
 
-			ss <<
+      ss <<
         "fCurrentDivisionsPerQuarterNote: " <<
         fCurrentDivisionsPerQuarterNote <<
         std::endl;
 
-			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
-				ss.str ());
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -11879,16 +11879,16 @@ void mxsr2msrTranslator::visitStart (S_duration& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceFiguredBasses ()) {
-			std::stringstream ss;
+      std::stringstream ss;
 
-			ss <<
+      ss <<
         "fCurrentFiguredBassSoundingWholeNotes: " <<
         fCurrentFiguredBassSoundingWholeNotes <<
         std::endl;
 
-			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
-				ss.str ());
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -11900,16 +11900,16 @@ void mxsr2msrTranslator::visitStart (S_duration& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceFiguredBasses ()) {
-			std::stringstream ss;
+      std::stringstream ss;
 
-			ss <<
+      ss <<
         "fCurrentFiguredBassDisplayWholeNotes: " <<
         fCurrentFiguredBassDisplayWholeNotes <<
         std::endl;
 
-			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
-				ss.str ());
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
   }
@@ -11933,9 +11933,9 @@ void mxsr2msrTranslator::visitStart (S_instrument& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_instrument" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
@@ -11981,9 +11981,9 @@ void mxsr2msrTranslator::visitStart (S_dot& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_dot" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
@@ -12004,9 +12004,9 @@ void mxsr2msrTranslator::visitStart (S_type& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_type" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -12077,9 +12077,9 @@ void mxsr2msrTranslator::visitStart (S_notehead& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_notehead" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -12223,9 +12223,9 @@ void mxsr2msrTranslator::visitStart (S_accidental& elt) // JMI
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_accidental" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -12399,9 +12399,9 @@ void mxsr2msrTranslator::visitStart (S_stem& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_stem" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -12476,9 +12476,9 @@ void mxsr2msrTranslator::visitStart (S_beam& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_beam" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -12546,9 +12546,9 @@ void mxsr2msrTranslator::visitStart (S_measure_style& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_measure_style" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
@@ -12569,9 +12569,9 @@ void mxsr2msrTranslator::visitStart (S_beat_repeat& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_beat_repeat" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -12622,9 +12622,9 @@ void mxsr2msrTranslator::visitStart (S_measure_repeat& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_measure_repeat" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -12666,9 +12666,9 @@ void mxsr2msrTranslator::visitStart (S_measure_repeat& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasureRepeats ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "Creating measures repeat from its first measures" <<
       "in part " <<
       fCurrentPart->getPartCombinedName () <<
@@ -12698,9 +12698,9 @@ void mxsr2msrTranslator::visitStart (S_measure_repeat& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasureRepeats ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "Appending measures repeat " <<
       "to part " <<
       fCurrentPart->getPartCombinedName () <<
@@ -12806,9 +12806,9 @@ void mxsr2msrTranslator::visitStart (S_multiple_rest& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_multiple_rest" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -12872,9 +12872,9 @@ void mxsr2msrTranslator::visitStart (S_slash& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_slash" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -12950,9 +12950,9 @@ void mxsr2msrTranslator::visitStart (S_slash_type& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_slash_type" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -12990,9 +12990,9 @@ void mxsr2msrTranslator::visitStart (S_slash_type& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceSlashes ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "slashType: \"" <<
       slashType <<
       "\"" <<
@@ -13013,9 +13013,9 @@ void mxsr2msrTranslator::visitStart (S_slash_dot& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_slash_dot" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
@@ -13036,9 +13036,9 @@ void mxsr2msrTranslator::visitEnd (S_slash& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> End visiting S_slash" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -13065,9 +13065,9 @@ void mxsr2msrTranslator::visitStart (S_articulations& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_articulations" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
@@ -13086,9 +13086,9 @@ void mxsr2msrTranslator::visitStart (S_accent& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_accent" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -13129,9 +13129,9 @@ void mxsr2msrTranslator::visitStart (S_breath_mark& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_breath_mark" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -13172,9 +13172,9 @@ void mxsr2msrTranslator::visitStart (S_caesura& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_caesura" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -13215,9 +13215,9 @@ void mxsr2msrTranslator::visitStart (S_spiccato& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_spiccato" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -13258,9 +13258,9 @@ void mxsr2msrTranslator::visitStart (S_staccato& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_staccato" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -13301,9 +13301,9 @@ void mxsr2msrTranslator::visitStart (S_staccatissimo& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_staccatissimo" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -13344,9 +13344,9 @@ void mxsr2msrTranslator::visitStart (S_stress& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_stress" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -13387,9 +13387,9 @@ void mxsr2msrTranslator::visitStart (S_unstress& elt)
 
  #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_unstress" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -13430,9 +13430,9 @@ void mxsr2msrTranslator::visitStart (S_detached_legato& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_detached_legato" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -13473,9 +13473,9 @@ void mxsr2msrTranslator::visitStart (S_strong_accent& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_strong_accent" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -13517,9 +13517,9 @@ void mxsr2msrTranslator::visitStart (S_tenuto& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_tenuto" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -13562,9 +13562,9 @@ void mxsr2msrTranslator::visitStart (S_doit& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_doit" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -13605,9 +13605,9 @@ void mxsr2msrTranslator::visitStart (S_falloff& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_falloff" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -13648,9 +13648,9 @@ void mxsr2msrTranslator::visitStart (S_plop& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_plop" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -13691,9 +13691,9 @@ void mxsr2msrTranslator::visitStart (S_scoop& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_scoop" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -13731,9 +13731,9 @@ void mxsr2msrTranslator::visitEnd (S_articulations& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> End visiting S_articulations" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
@@ -13755,9 +13755,9 @@ void mxsr2msrTranslator::visitStart (S_arpeggiate& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_arpeggiate" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -13829,9 +13829,9 @@ void mxsr2msrTranslator::visitStart (S_non_arpeggiate& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_non_arpeggiate" << // JMI
       ", line " << inputLineNumber <<
       std::endl;
@@ -13906,9 +13906,9 @@ void mxsr2msrTranslator::visitStart (S_technical& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_technical" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
@@ -13926,9 +13926,9 @@ void mxsr2msrTranslator::visitEnd (S_technical& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_technical" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
@@ -13949,9 +13949,9 @@ void mxsr2msrTranslator::visitStart (S_arrow& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_arrow" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -13987,9 +13987,9 @@ void mxsr2msrTranslator::visitStart (S_bend_alter& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_bend_alter" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
@@ -14007,9 +14007,9 @@ void mxsr2msrTranslator::visitStart (S_bend& elt) // JMI
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_bend" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
@@ -14028,9 +14028,9 @@ void mxsr2msrTranslator::visitEnd (S_bend& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_bend" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -14071,9 +14071,9 @@ void mxsr2msrTranslator::visitStart (S_double_tongue& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_double_tongue" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -14112,9 +14112,9 @@ void mxsr2msrTranslator::visitStart (S_down_bow& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_down_bow" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -14153,9 +14153,9 @@ void mxsr2msrTranslator::visitStart (S_fingering& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_fingering" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -14218,9 +14218,9 @@ void mxsr2msrTranslator::visitStart (S_fingernails& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_fingernails" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -14259,9 +14259,9 @@ void mxsr2msrTranslator::visitStart (S_fret& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_fret" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -14323,9 +14323,9 @@ void mxsr2msrTranslator::visitStart (S_hammer_on& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_hammer_on" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -14394,9 +14394,9 @@ void mxsr2msrTranslator::visitStart (S_handbell& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_handbell" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -14439,9 +14439,9 @@ void mxsr2msrTranslator::visitStart (S_harmonic& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_harmonic" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -14491,9 +14491,9 @@ void mxsr2msrTranslator::visitStart (S_heel& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_heel" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -14532,9 +14532,9 @@ void mxsr2msrTranslator::visitStart (S_hole& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_hole" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -14573,9 +14573,9 @@ void mxsr2msrTranslator::visitStart (S_open_string& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_open_string" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -14614,9 +14614,9 @@ void mxsr2msrTranslator::visitStart (S_other_technical& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_other_technical" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -14659,9 +14659,9 @@ void mxsr2msrTranslator::visitStart (S_pluck& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_pluck" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -14704,9 +14704,9 @@ void mxsr2msrTranslator::visitStart (S_pull_off& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_pull_off" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -14775,9 +14775,9 @@ void mxsr2msrTranslator::visitStart (S_snap_pizzicato& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_snap_pizzicato" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -14816,9 +14816,9 @@ void mxsr2msrTranslator::visitStart (S_stopped& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_stopped" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -14857,9 +14857,9 @@ void mxsr2msrTranslator::visitStart (S_string& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_string" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -14952,9 +14952,9 @@ void mxsr2msrTranslator::visitStart (S_tap& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_tap" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -14993,9 +14993,9 @@ void mxsr2msrTranslator::visitStart (S_thumb_position& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_thumb_position" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -15034,9 +15034,9 @@ void mxsr2msrTranslator::visitStart (S_toe& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_toe" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -15075,9 +15075,9 @@ void mxsr2msrTranslator::visitStart (S_triple_tongue& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_triple_tongue" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -15116,9 +15116,9 @@ void mxsr2msrTranslator::visitStart (S_up_bow& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_up_bow" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -15158,9 +15158,9 @@ void mxsr2msrTranslator::visitStart (S_fermata& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_fermata" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -15250,9 +15250,9 @@ void mxsr2msrTranslator::visitStart (S_ornaments& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_ornaments" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
@@ -15271,9 +15271,9 @@ void mxsr2msrTranslator::visitStart (S_tremolo& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting tremolo" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -15426,9 +15426,9 @@ void mxsr2msrTranslator::visitStart (S_tremolo& elt)
       // in attachCurrentSingleTremoloToNote()
 #ifdef MF_TRACE_IS_ENABLED
       if (gTraceOahGroup->getTraceTremolos ()) {
-				std::stringstream ss;
+        std::stringstream ss;
 
-				ss <<
+        ss <<
           "Creating a single tremolo" <<
           ", line " << inputLineNumber <<
           ", " <<
@@ -15439,9 +15439,9 @@ void mxsr2msrTranslator::visitStart (S_tremolo& elt)
             singleTremoloPlacementKind) <<
           std::endl;
 
-				gWaeHandler->waeTrace (
-					__FILE__, __LINE__,
-					ss.str ());
+        gWaeHandler->waeTrace (
+          __FILE__, __LINE__,
+          ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -15466,9 +15466,9 @@ void mxsr2msrTranslator::visitStart (S_tremolo& elt)
         // create a double tremolo start
 #ifdef MF_TRACE_IS_ENABLED
         if (gTraceOahGroup->getTraceTremolos ()) {
-					std::stringstream ss;
+          std::stringstream ss;
 
-					ss <<
+          ss <<
             "Creating a double tremolo" <<
             ", line " << inputLineNumber <<
             ", " <<
@@ -15514,9 +15514,9 @@ void mxsr2msrTranslator::visitStart (S_tremolo& elt)
       if (fCurrentDoubleTremolo) {
 #ifdef MF_TRACE_IS_ENABLED
         if (gTraceOahGroup->getTraceTremolos ()) {
-					std::stringstream ss;
+          std::stringstream ss;
 
-					ss <<
+          ss <<
             "Meeting a double tremolo stop" <<
             ", line " << inputLineNumber <<
             std::endl;
@@ -15554,9 +15554,9 @@ void mxsr2msrTranslator::visitStart (S_trill_mark& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_trill_mark" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -15599,9 +15599,9 @@ void mxsr2msrTranslator::visitStart (S_dashes& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_dashes" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -15679,9 +15679,9 @@ void mxsr2msrTranslator::visitStart (S_wavy_line& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_wavy_line" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -15797,9 +15797,9 @@ void mxsr2msrTranslator::visitStart (S_turn& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_turn" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -15840,9 +15840,9 @@ void mxsr2msrTranslator::visitStart (S_inverted_turn& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_inverted_turn" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -15883,9 +15883,9 @@ void mxsr2msrTranslator::visitStart (S_delayed_turn& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_delayed_turn" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -15926,9 +15926,9 @@ void mxsr2msrTranslator::visitStart (S_delayed_inverted_turn& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_delayed_inverted_turn" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -15969,9 +15969,9 @@ void mxsr2msrTranslator::visitStart (S_vertical_turn& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_vertical_turn" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -16012,9 +16012,9 @@ void mxsr2msrTranslator::visitStart (S_mordent& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_mordent" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -16055,9 +16055,9 @@ void mxsr2msrTranslator::visitStart (S_inverted_mordent& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_inverted_mordent" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -16098,9 +16098,9 @@ void mxsr2msrTranslator::visitStart (S_schleifer& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_schleifer" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -16141,9 +16141,9 @@ void mxsr2msrTranslator::visitStart (S_shake& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_shake" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -16184,9 +16184,9 @@ void mxsr2msrTranslator::visitStart (S_accidental_mark& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_accidental_mark" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -16400,9 +16400,9 @@ void mxsr2msrTranslator::visitEnd (S_ornaments& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> End visiting S_ornaments" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
@@ -16422,9 +16422,9 @@ void mxsr2msrTranslator::visitStart( S_f& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_f" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -16469,9 +16469,9 @@ void mxsr2msrTranslator::visitStart( S_ff& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_ff" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -16516,9 +16516,9 @@ void mxsr2msrTranslator::visitStart( S_fff& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_fff" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -16563,9 +16563,9 @@ void mxsr2msrTranslator::visitStart( S_ffff& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_ffff" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -16610,9 +16610,9 @@ void mxsr2msrTranslator::visitStart( S_fffff& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_fffff" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -16657,9 +16657,9 @@ void mxsr2msrTranslator::visitStart( S_ffffff& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_ffffff" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -16705,9 +16705,9 @@ void mxsr2msrTranslator::visitStart( S_p& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_p" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -16752,9 +16752,9 @@ void mxsr2msrTranslator::visitStart( S_pp& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_pp" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -16799,9 +16799,9 @@ void mxsr2msrTranslator::visitStart( S_ppp& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_ppp" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -16846,9 +16846,9 @@ void mxsr2msrTranslator::visitStart( S_pppp& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_pppp" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -16893,9 +16893,9 @@ void mxsr2msrTranslator::visitStart( S_ppppp& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_ppppp" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -16940,9 +16940,9 @@ void mxsr2msrTranslator::visitStart( S_pppppp& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_pppppp" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -16989,9 +16989,9 @@ void mxsr2msrTranslator::visitStart( S_mf& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_mf" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -17036,9 +17036,9 @@ void mxsr2msrTranslator::visitStart( S_mp& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_mp" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -17084,9 +17084,9 @@ void mxsr2msrTranslator::visitStart( S_fp& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_fp" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -17132,9 +17132,9 @@ void mxsr2msrTranslator::visitStart( S_fz& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_fz" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -17180,9 +17180,9 @@ void mxsr2msrTranslator::visitStart( S_pf& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_pf" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -17228,9 +17228,9 @@ void mxsr2msrTranslator::visitStart( S_rf& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_rf" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -17276,9 +17276,9 @@ void mxsr2msrTranslator::visitStart( S_sf& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_sf" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -17324,9 +17324,9 @@ void mxsr2msrTranslator::visitStart( S_rfz& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_rfz" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -17372,9 +17372,9 @@ void mxsr2msrTranslator::visitStart( S_sfz& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_sfz" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -17420,9 +17420,9 @@ void mxsr2msrTranslator::visitStart( S_sfp& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_sfp" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -17468,9 +17468,9 @@ void mxsr2msrTranslator::visitStart( S_sfpp& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_sfpp" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -17516,9 +17516,9 @@ void mxsr2msrTranslator::visitStart( S_sffz& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_sffz" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -17564,9 +17564,9 @@ void mxsr2msrTranslator::visitStart( S_sfzp& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_sfzp" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -17612,9 +17612,9 @@ void mxsr2msrTranslator::visitStart( S_n& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_n" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -17660,9 +17660,9 @@ void mxsr2msrTranslator::visitStart( S_other_dynamics& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_other_dynamics" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -17727,9 +17727,9 @@ void mxsr2msrTranslator::visitStart( S_damper_pedal& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_damper_pedal" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -17797,9 +17797,9 @@ void mxsr2msrTranslator::visitStart( S_soft_pedal& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_soft_pedal" <<
        ", line " << inputLineNumber <<
      std::endl;
@@ -17836,9 +17836,9 @@ void mxsr2msrTranslator::visitStart( S_sostenuto_pedal& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_sostenuto_pedal" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -17878,9 +17878,9 @@ void mxsr2msrTranslator::visitStart (S_cue& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_cue" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
@@ -17902,9 +17902,9 @@ void mxsr2msrTranslator::visitStart (S_grace& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_grace" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -17965,9 +17965,9 @@ void mxsr2msrTranslator::visitStart (S_chord& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_chord" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
@@ -17992,9 +17992,9 @@ void mxsr2msrTranslator::visitStart (S_time_modification& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_time_modification" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
@@ -18018,9 +18018,9 @@ void mxsr2msrTranslator::visitStart (S_actual_notes& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_actual_notes" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -18038,16 +18038,16 @@ void mxsr2msrTranslator::visitStart (S_actual_notes& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceTuplets ()) {
-			std::stringstream ss;
+      std::stringstream ss;
 
-			ss <<
+      ss <<
         "fCurrentNoteActualNotes: " <<
         fCurrentNoteActualNotes <<
         std::endl;
 
-			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
-				ss.str ());
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -18067,16 +18067,16 @@ void mxsr2msrTranslator::visitStart (S_actual_notes& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceTempos ()) {
-			std::stringstream ss;
+      std::stringstream ss;
 
-			ss <<
+      ss <<
         "fCurrentMetronomeNoteActualNotes: " <<
         fCurrentMetronomeNoteActualNotes <<
         std::endl;
 
-			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
-				ss.str ());
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
   }
@@ -18103,9 +18103,9 @@ void mxsr2msrTranslator::visitStart (S_normal_notes& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_normal_notes" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -18123,16 +18123,16 @@ void mxsr2msrTranslator::visitStart (S_normal_notes& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceTuplets ()) {
-			std::stringstream ss;
+      std::stringstream ss;
 
-			ss <<
+      ss <<
         "fCurrentNoteNormalNotes: " <<
         fCurrentNoteNormalNotes <<
         std::endl;
 
-			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
-				ss.str ());
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -18152,16 +18152,16 @@ void mxsr2msrTranslator::visitStart (S_normal_notes& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceTempos ()) {
-			std::stringstream ss;
+      std::stringstream ss;
 
-			ss <<
+      ss <<
         "fCurrentMetronomeNoteNormalNotes: " <<
         fCurrentMetronomeNoteNormalNotes <<
         std::endl;
 
-			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
-				ss.str ());
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
   }
@@ -18188,9 +18188,9 @@ void mxsr2msrTranslator::visitStart (S_normal_type& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_normal_type" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -18206,16 +18206,16 @@ void mxsr2msrTranslator::visitStart (S_normal_type& elt)
   if (fOnGoingNote) {
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceTuplets ()) {
-			std::stringstream ss;
+      std::stringstream ss;
 
-			ss <<
+      ss <<
         "normalTypeString: " <<
         normalTypeString <<
         std::endl;
 
-			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
-				ss.str ());
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -18240,16 +18240,16 @@ void mxsr2msrTranslator::visitStart (S_normal_type& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceTempos ()) {
-			std::stringstream ss;
+      std::stringstream ss;
 
-			ss <<
+      ss <<
         "fCurrentMetronomeNoteNormalType: " <<
         fCurrentMetronomeNoteNormalType <<
         std::endl;
 
-			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
-				ss.str ());
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -18278,9 +18278,9 @@ void mxsr2msrTranslator::visitStart (S_tuplet& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_tuplet" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -18383,16 +18383,16 @@ void mxsr2msrTranslator::visitStart (S_tuplet& elt)
     if      (tupletType == "start") {
 #ifdef MF_TRACE_IS_ENABLED
       if (gTraceOahGroup->getTraceTuplets ()) {
-				std::stringstream ss;
+        std::stringstream ss;
 
-				ss <<
+        ss <<
           "--> There is a tuplet start (kTupletTypeStart)" <<
           ", line " << inputLineNumber <<
           std::endl;
 
-				gWaeHandler->waeTrace (
-					__FILE__, __LINE__,
-					ss.str ());
+        gWaeHandler->waeTrace (
+          __FILE__, __LINE__,
+          ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -18401,16 +18401,16 @@ void mxsr2msrTranslator::visitStart (S_tuplet& elt)
     else if (tupletType == "continue") {
 #ifdef MF_TRACE_IS_ENABLED
       if (gTraceOahGroup->getTraceTuplets ()) {
-				std::stringstream ss;
+        std::stringstream ss;
 
-				ss <<
+        ss <<
           "--> There is a tuplet continue (kTupletTypeContinue)" <<
           ", line " << inputLineNumber <<
           std::endl;
 
-				gWaeHandler->waeTrace (
-					__FILE__, __LINE__,
-					ss.str ());
+        gWaeHandler->waeTrace (
+          __FILE__, __LINE__,
+          ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -18431,9 +18431,9 @@ void mxsr2msrTranslator::visitStart (S_tuplet& elt)
         // possible if the note is a tremolo
 #ifdef MF_TRACE_IS_ENABLED
         if (gTraceOahGroup->getTraceTuplets ()) {
-					std::stringstream ss;
+          std::stringstream ss;
 
-					ss <<
+          ss <<
             "--> There is a tuplet stop right after a tuplet start for tuplet nummber " << fCurrentTupletNumber <<
             " (kTupletTypeStartAndStopInARow)" <<
             ", line " << inputLineNumber <<
@@ -18451,9 +18451,9 @@ void mxsr2msrTranslator::visitStart (S_tuplet& elt)
         // this is a 'regular' tuplet stop
 #ifdef MF_TRACE_IS_ENABLED
         if (gTraceOahGroup->getTraceTuplets ()) {
-					std::stringstream ss;
+          std::stringstream ss;
 
-					ss <<
+          ss <<
             "--> There is a tuplet stop (kTupletTypeStop)" <<
             ", line " << inputLineNumber <<
             std::endl;
@@ -18539,9 +18539,9 @@ void mxsr2msrTranslator::visitStart (S_tuplet& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceTuplets ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "fCurrentTupletNumber: " <<
       fCurrentTupletNumber <<
       ", fCurrentTupletTypeKind: " <<
@@ -18571,9 +18571,9 @@ void mxsr2msrTranslator::visitStart (S_tuplet_actual& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_tuplet_actual" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
@@ -18591,9 +18591,9 @@ void mxsr2msrTranslator::visitEnd (S_tuplet_actual& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> End visiting S_tuplet_actual" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
@@ -18611,9 +18611,9 @@ void mxsr2msrTranslator::visitStart (S_tuplet_normal& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_tuplet_normal" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
@@ -18631,9 +18631,9 @@ void mxsr2msrTranslator::visitEnd (S_tuplet_normal& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> End visiting S_tuplet_normal" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
@@ -18654,9 +18654,9 @@ void mxsr2msrTranslator::visitStart (S_tuplet_number& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_tuplet_number" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -18688,9 +18688,9 @@ void mxsr2msrTranslator::visitStart (S_tuplet_number& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceTuplets ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "tuplet number (not handled): " <<
       tupletNumberValue <<
       std::endl;
@@ -18709,9 +18709,9 @@ void mxsr2msrTranslator::visitStart (S_tuplet_type& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_tuplet_type" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -18743,9 +18743,9 @@ void mxsr2msrTranslator::visitStart (S_tuplet_type& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceTuplets ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "tuplet type (not handled): " <<
       tupletTypeValue <<
       std::endl;
@@ -18764,9 +18764,9 @@ void mxsr2msrTranslator::visitStart (S_tuplet_dot& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_tuplet_dot" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -18802,9 +18802,9 @@ void mxsr2msrTranslator::visitStart (S_glissando& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_glissando" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -18879,9 +18879,9 @@ void mxsr2msrTranslator::visitStart (S_glissando& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceGlissandos ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "glissandoNumber: " <<  glissandoNumber <<
       "glissandoType: " << glissandoTypeKind <<
       "glissandoLineType: " << glissandoLineTypeKind <<
@@ -18907,9 +18907,9 @@ void mxsr2msrTranslator::visitStart (S_glissando& elt)
   // register glissando in this visitor
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceGlissandos ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "Appending glissando '" <<
       glissando->asString () <<
       "' to the glissandos pending list" <<
@@ -18932,9 +18932,9 @@ void mxsr2msrTranslator::visitStart (S_slide& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_slide" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -19009,9 +19009,9 @@ void mxsr2msrTranslator::visitStart (S_slide& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceSlides ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "slideNumber: " <<
       slideNumber <<
       "slideType: " <<
@@ -19039,9 +19039,9 @@ void mxsr2msrTranslator::visitStart (S_slide& elt)
   // register glissando in this visitor
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceSlides ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "Appending slide '" <<
       slide->asString () <<
       "' to the slides pending list" <<
@@ -19064,9 +19064,9 @@ void mxsr2msrTranslator::visitStart (S_rest& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_rest" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -19143,9 +19143,9 @@ void mxsr2msrTranslator::visitStart (S_display_step& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_display_step" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -19179,9 +19179,9 @@ void mxsr2msrTranslator::visitStart (S_display_octave& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_display_octave" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -19219,9 +19219,9 @@ void mxsr2msrTranslator::visitEnd (S_unpitched& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> End visiting S_unpitched" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
@@ -19250,9 +19250,9 @@ S_msrChord mxsr2msrTranslator::createChordFromItsFirstNote (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceChords ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> creating a chord from its first note '" <<
       chordFirstNote->asShortString () <<
       ", in voice \"" << voice->getVoiceName () << "\"" <<
@@ -19280,9 +19280,9 @@ S_msrChord mxsr2msrTranslator::createChordFromItsFirstNote (
   // register note as first member of chord
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceChords ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "Adding first note " <<
       chordFirstNote->
         asShortString () <<
@@ -19360,7 +19360,7 @@ void mxsr2msrTranslator::registerVoiceCurrentChordInMap (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceChords ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Registering chord '" <<
@@ -19461,9 +19461,9 @@ void mxsr2msrTranslator::finalizeCurrentChord (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceChords ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "Finalizing current chord START:" <<
       std::endl <<
       fCurrentChord <<
@@ -19483,9 +19483,9 @@ void mxsr2msrTranslator::finalizeCurrentChord (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceChords ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "Finalizing current chord END: " <<
       std::endl <<
       fCurrentChord <<
@@ -19549,18 +19549,18 @@ void mxsr2msrTranslator::copyNoteArticulationsToChord (
   for (const S_msrArticulation& articulation : noteArticulations) {
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceArticulations ()) {
-			std::stringstream ss;
+      std::stringstream ss;
 
-			ss <<
+      ss <<
         "Copying articulation '" <<
         articulation->getArticulationKind () <<
         "' from note " << note->asString () <<
         " to chord" <<
         std::endl;
 
-			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
-				ss.str ());
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -19583,7 +19583,7 @@ void mxsr2msrTranslator::copyNoteTechnicalsToChord (
   for (S_msrTechnical technical : noteTechnicals) {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceTechnicals ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Copying technical '" <<
@@ -19641,18 +19641,18 @@ void mxsr2msrTranslator::copyNoteTechnicalWithFloatsToChord (
   for (S_msrTechnicalWithFloat technicalWithFloat : noteTechnicalWithFloats) {
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceTechnicals ()) {
-			std::stringstream ss;
+      std::stringstream ss;
 
-			ss <<
+      ss <<
         "Copying technical '" <<
         technicalWithFloat->getTechnicalWithFloatKind () <<
         "' from note " << note->asString () <<
         " to chord" <<
         std::endl;
 
-			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
-				ss.str ());
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -19675,18 +19675,18 @@ void mxsr2msrTranslator::copyNoteTechnicalWithStringsToChord (
   for (S_msrTechnicalWithString technicalWithString : noteTechnicalWithStrings) {
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceTechnicals ()) {
-			std::stringstream ss;
+      std::stringstream ss;
 
-			ss <<
+      ss <<
         "Copying technical '" <<
         technicalWithString->getTechnicalWithStringKind () <<
         "' from note " << note->asString () <<
         " to chord" <<
         std::endl;
 
-			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
-				ss.str ());
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -19709,18 +19709,18 @@ void mxsr2msrTranslator::copyNoteOrnamentsToChord (
   for (S_msrOrnament ornament : noteOrnaments) {
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceOrnaments ()) {
-			std::stringstream ss;
+      std::stringstream ss;
 
-			ss <<
+      ss <<
         "Copying ornament '" <<
         msrOrnamentKindAsString (ornament->getOrnamentKind ()) <<
         "' from note " << note->asString () <<
         " to chord" <<
         std::endl;
 
-			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
-				ss.str ());
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -19744,18 +19744,18 @@ void mxsr2msrTranslator::copyNoteSpannersToChord (
   for (S_msrSpanner spanner : noteSpanners) {
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceSpanners ()) {
-			std::stringstream ss;
+      std::stringstream ss;
 
-			ss <<
+      ss <<
         "Copying spanner '" <<
         spanner->getSpannerKind () <<
         "' from note " << note->asString () <<
         " to chord" <<
         std::endl;
 
-			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
-				ss.str ());
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -19779,18 +19779,18 @@ void mxsr2msrTranslator::copyNoteSingleTremoloToChord (
   if (noteSingleTremolo) {
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceTremolos ()) {
-			std::stringstream ss;
+      std::stringstream ss;
 
-			ss <<
+      ss <<
         "Copying singleTremolo '" <<
         noteSingleTremolo->asString () <<
         "' from note " << note->asString () <<
         " to chord" <<
         std::endl;
 
-			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
-				ss.str ());
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -19820,18 +19820,18 @@ void mxsr2msrTranslator::copyNoteDynamicsToChord (
 
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceDynamics ()) {
-			std::stringstream ss;
+      std::stringstream ss;
 
-			ss <<
+      ss <<
         "Copying dynamics '" <<
         msrDynamicKindAsString ((*i)->getDynamicKind ()) <<
         "' from note " << note->asString () <<
         " to chord" <<
         std::endl;
 
-			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
-				ss.str ());
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -19861,18 +19861,18 @@ void mxsr2msrTranslator::copyNoteOtherDynamicsToChord (
 
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceDynamics ()) {
-			std::stringstream ss;
+      std::stringstream ss;
 
-			ss <<
+      ss <<
         "Copying other dynamics '" <<
         (*i)->asString () <<
         "' from note " << note->asString () <<
         " to chord" <<
         std::endl;
 
-			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
-				ss.str ());
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -19902,18 +19902,18 @@ void mxsr2msrTranslator::copyNoteWordsToChord (
 
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceWords ()) {
-			std::stringstream ss;
+      std::stringstream ss;
 
-			ss <<
+      ss <<
         "Copying words '" <<
         (*i)->asString () <<
         "' from note " << note->asString () <<
         " to chord" <<
         std::endl;
 
-			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
-				ss.str ());
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -19937,18 +19937,18 @@ void mxsr2msrTranslator::copyNoteStemToChord (
   if (noteStem) {
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceStems ()) {
-			std::stringstream ss;
+      std::stringstream ss;
 
-			ss <<
+      ss <<
         "Copying stem '" <<
         noteStem->asString () <<
         "' from note " << note->asString () <<
         " to chord" <<
         std::endl;
 
-			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
-				ss.str ());
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -19986,9 +19986,9 @@ void mxsr2msrTranslator::copyNoteBeamsToChord (
         " to chord" <<
         std::endl;
 
-			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
-				ss.str ());
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -19998,7 +19998,7 @@ void mxsr2msrTranslator::copyNoteBeamsToChord (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceBeams ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "==> AFTER copying beams to chord:" <<
@@ -20037,18 +20037,18 @@ void mxsr2msrTranslator::appendNoteBeamsLinksToChord (
 
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceBeams ()) {
-			std::stringstream ss;
+      std::stringstream ss;
 
-			ss <<
+      ss <<
         "Adding beam link of '" <<
         beam->asString () <<
         "' from note " << note->asString () <<
         " to chord" <<
         std::endl;
 
-			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
-				ss.str ());
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -20067,7 +20067,7 @@ void mxsr2msrTranslator::appendNoteBeamsLinksToChord (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceBeams ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "==> AFTER appending note's beams links to chord:" <<
@@ -20099,18 +20099,18 @@ void mxsr2msrTranslator::copyNoteTieToChord (
   if (noteTie) {
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceTies ()) {
-			std::stringstream ss;
+      std::stringstream ss;
 
-			ss <<
+      ss <<
         "Appending tie '" <<
         noteTie->asString () <<
         "' from note " << note->asString () <<
         " to chord" <<
         std::endl;
 
-			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
-				ss.str ());
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -20119,10 +20119,10 @@ void mxsr2msrTranslator::copyNoteTieToChord (
   }
 
 #ifdef MF_TRACE_IS_ENABLED
-	if (gTraceOahGroup->getTraceTies ()) {
-		std::stringstream ss;
+  if (gTraceOahGroup->getTraceTies ()) {
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "==> AFTER appending tie to chord:" <<
       std::endl;
 
@@ -20134,9 +20134,9 @@ void mxsr2msrTranslator::copyNoteTieToChord (
 
     --gIndenter;
 
-		gWaeHandler->waeTrace (
-			__FILE__, __LINE__,
-			ss.str ());
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }
@@ -20170,9 +20170,9 @@ void mxsr2msrTranslator::copyNoteSlursToChord (
         " to chord" <<
         std::endl;
 
-			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
-				ss.str ());
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -20204,18 +20204,18 @@ void mxsr2msrTranslator::appendNoteSlursLinksToChord (
 
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceSlurs ()) {
-			std::stringstream ss;
+      std::stringstream ss;
 
-			ss <<
+      ss <<
         "Adding slur link of '" <<
         slur->asString () <<
         "' from note " << note->asString () <<
         " to chord" <<
         std::endl;
 
-			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
-				ss.str ());
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -20234,7 +20234,7 @@ void mxsr2msrTranslator::appendNoteSlursLinksToChord (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceSlurs ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "==> AFTER appending note's slurs links to chord:" <<
@@ -20266,18 +20266,18 @@ void mxsr2msrTranslator::copyNoteLigaturesToChord (
   for (S_msrLigature ligature : noteLigatures) {
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceLigatures ()) {
-			std::stringstream ss;
+      std::stringstream ss;
 
-			ss <<
+      ss <<
         "Copying ligature '" <<
         ligature->getLigatureKind () <<
         "' from note " << note->asString () <<
         " to chord" <<
         std::endl;
 
-			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
-				ss.str ());
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -20302,18 +20302,18 @@ void mxsr2msrTranslator::copyNotePedalsToChord (
   for (S_msrPedal pedal : notePedals) {
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTracePedals ()) {
-			std::stringstream ss;
+      std::stringstream ss;
 
-			ss <<
+      ss <<
         "Copying pedal '" <<
         pedal->asString () <<
         "' from note " << note->asString () <<
         " to chord" << chord->asString () <<
         std::endl;
 
-			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
-				ss.str ());
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -20343,18 +20343,18 @@ void mxsr2msrTranslator::copyNoteSlashesToChord (
 
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceSlashes ()) {
-			std::stringstream ss;
+      std::stringstream ss;
 
-			ss <<
+      ss <<
         "Copying slash '" <<
         (*i)->asString () <<
         "' from note " << note->asString () <<
         " to chord" <<
         std::endl;
 
-			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
-				ss.str ());
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -20385,18 +20385,18 @@ void mxsr2msrTranslator::copyNoteWedgesToChord (
 
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceWedges ()) {
-			std::stringstream ss;
+      std::stringstream ss;
 
-			ss <<
+      ss <<
         "Copying wedges '" <<
         msrWedgeKindAsString (wedge->getWedgeKind ()) <<
         "' from note " << note->asString () <<
         " to chord" <<
         std::endl;
 
-			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
-				ss.str ());
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -20426,18 +20426,18 @@ void mxsr2msrTranslator::copyNoteSegnosToChord (
 
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceSegnos ()) {
-			std::stringstream ss;
+      std::stringstream ss;
 
-			ss <<
+      ss <<
         "Copying segno '" <<
         (*i)->asShortString () <<
         "' from note " << note->asString () <<
         " to chord" <<
         std::endl;
 
-			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
-				ss.str ());
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -20467,18 +20467,18 @@ void mxsr2msrTranslator::copyNoteDalSegnosToChord (
 
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceDalSegnos ()) {
-			std::stringstream ss;
+      std::stringstream ss;
 
-			ss <<
+      ss <<
         "Copying dal degno '" <<
         (*i)->asShortString () <<
         "' from note " << note->asString () <<
         " to chord" <<
         std::endl;
 
-			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
-				ss.str ());
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -20508,18 +20508,18 @@ void mxsr2msrTranslator::copyNoteCodasToChord (
 
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceCodas ()) {
-			std::stringstream ss;
+      std::stringstream ss;
 
-			ss <<
+      ss <<
         "Copying coda '" <<
         (*i)->asShortString () <<
         "' from note " << note->asString () <<
         " to chord" <<
         std::endl;
 
-			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
-				ss.str ());
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -20543,18 +20543,18 @@ void mxsr2msrTranslator::copyNoteOctaveShiftToChord (
   if (noteOctaveShift) {
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceOctaveShifts ()) {
-			std::stringstream ss;
+      std::stringstream ss;
 
-			ss <<
+      ss <<
         "Copying octave shift '" <<
         noteOctaveShift->asString () <<
         "' from note " << note->asString () <<
         " to chord" <<
         std::endl;
 
-			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
-				ss.str ());
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -20577,7 +20577,7 @@ void mxsr2msrTranslator::copyNoteGraceNotesGroupsToChord (
   if (graceNotesGroupBefore) {
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceGraceNotes ()) {
-	  	std::stringstream ss;
+      std::stringstream ss;
 
       ss <<
         "Copying grace notes group before '" <<
@@ -20587,9 +20587,9 @@ void mxsr2msrTranslator::copyNoteGraceNotesGroupsToChord (
         "'" <<
         std::endl;
 
-			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
-				ss.str ());
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -20605,7 +20605,7 @@ void mxsr2msrTranslator::copyNoteGraceNotesGroupsToChord (
   if (graceNotesGroupAfter) {
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceGraceNotes ()) {
-	  	std::stringstream ss;
+      std::stringstream ss;
 
       ss <<
         "Copying grace notes group after '" <<
@@ -20615,9 +20615,9 @@ void mxsr2msrTranslator::copyNoteGraceNotesGroupsToChord (
         "'" <<
         std::endl;
 
-			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
-				ss.str ());
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -20642,9 +20642,9 @@ void mxsr2msrTranslator::addNoteGraceNotesGroupsLinksToChord (
   if (graceNotesGroupBefore) {
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceGraceNotes ()) {
-			std::stringstream ss;
+      std::stringstream ss;
 
-			ss <<
+      ss <<
         "Adding grace notes group link before '" <<
         graceNotesGroupBefore->asShortString () <<
         "' from note " << note->asString () <<
@@ -20652,9 +20652,9 @@ void mxsr2msrTranslator::addNoteGraceNotesGroupsLinksToChord (
         "'" <<
         std::endl;
 
-			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
-				ss.str ());
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -20681,9 +20681,9 @@ void mxsr2msrTranslator::addNoteGraceNotesGroupsLinksToChord (
   if (graceNotesGroupAfter) {
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceGraceNotes ()) {
-			std::stringstream ss;
+      std::stringstream ss;
 
-			ss <<
+      ss <<
         "Adding grace notes group link after '" <<
         graceNotesGroupAfter->asShortString () <<
         "' from note " << note->asString () <<
@@ -20691,9 +20691,9 @@ void mxsr2msrTranslator::addNoteGraceNotesGroupsLinksToChord (
         "'" <<
         std::endl;
 
-			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
-				ss.str ());
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -20731,41 +20731,41 @@ void mxsr2msrTranslator::copyNoteHarmoniesToChord (
 
 #ifdef MF_TRACE_IS_ENABLED
       if (gTraceOahGroup->getTraceHarmonies ()) {
-				mfIndentedStringStream iss;
+        mfIndentedStringStream iss;
 
-				iss <<
+        iss <<
           "Copying harmony:" <<
           '\n';
 
-				++gIndenter;
-				iss <<
+        ++gIndenter;
+        iss <<
           harmony->asString () <<
           '\n';
-				--gIndenter;
+        --gIndenter;
 
-				iss <<
+        iss <<
           "from note:" <<
-					'\n';
+          '\n';
 
-				++gIndenter;
-				iss <<
-					note->asString () <<
-					'\n';
-				--gIndenter;
+        ++gIndenter;
+        iss <<
+          note->asString () <<
+          '\n';
+        --gIndenter;
 
-				iss <<
+        iss <<
           "to chord:" <<
-					'\n';
+          '\n';
 
-				++gIndenter;
-				iss <<
+        ++gIndenter;
+        iss <<
           chord->asString () <<
           '\n';
-				--gIndenter;
+        --gIndenter;
 
-				gWaeHandler->waeTrace (
-					__FILE__, __LINE__,
-					iss.str ());
+        gWaeHandler->waeTrace (
+          __FILE__, __LINE__,
+          iss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -20867,9 +20867,9 @@ void mxsr2msrTranslator::createAndPushTupletUponItsFirstNote (
   // create a tuplet
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceTuplets ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "Creating a '" <<
       fCurrentNoteActualNotes <<
       '/' <<
@@ -20927,9 +20927,9 @@ void mxsr2msrTranslator::createAndPushTupletUponItsFirstNote (
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceTuplets ()) {
     // only after appendNoteToTuplet() has set the note's uplink to tuplet
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "Adding first note " <<
       firstNote->
         asShortString () <<
@@ -20953,9 +20953,9 @@ void mxsr2msrTranslator::createAndPushTupletUponItsFirstNote (
   // register tuplet in this visitor
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceTuplets ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "++> pushing tuplet '" <<
       tuplet->asString () <<
       "' to tuplets stack" <<
@@ -21013,9 +21013,9 @@ void mxsr2msrTranslator::finalizeTupletAndPopItFromTupletsStack (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceTuplets ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "mxsr2msrTranslator::finalizeTupletAndPopItFromTupletsStack(), " <<
       "line " << inputLineNumber <<
       std::endl;
@@ -21057,7 +21057,7 @@ void mxsr2msrTranslator::finalizeTupletAndPopItFromTupletsStack (
   // add lastNote to the tuplet
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceTuplets ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "==> adding last note " << lastNote->asString () <<
@@ -21077,9 +21077,9 @@ void mxsr2msrTranslator::finalizeTupletAndPopItFromTupletsStack (
   // pop from the tuplets stack
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceTuplets ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "Popping tuplet:" <<
       std::endl;
     ++gIndenter;
@@ -21164,16 +21164,16 @@ void mxsr2msrTranslator::attachCurrentArticulationsToNote (
 
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceArticulations ()) {
-			std::stringstream ss;
+      std::stringstream ss;
 
-			ss <<
+      ss <<
         "Attaching current articulations to note " <<
         note->asString () <<
         std::endl;
 
-			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
-				ss.str ());
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -21184,17 +21184,17 @@ void mxsr2msrTranslator::attachCurrentArticulationsToNote (
 
 #ifdef MF_TRACE_IS_ENABLED
       if (gTraceOahGroup->getTraceNotes ()) {
-				std::stringstream ss;
+        std::stringstream ss;
 
-				ss <<
+        ss <<
           "Attaching articulation '" <<
           art->getArticulationKind () <<
           "' to note " << note->asString () <<
           std::endl;
 
-				gWaeHandler->waeTrace (
-					__FILE__, __LINE__,
-					ss.str ());
+        gWaeHandler->waeTrace (
+          __FILE__, __LINE__,
+          ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -21216,16 +21216,16 @@ void mxsr2msrTranslator::attachCurrentTechnicalsToNote (
 
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceTechnicals ()) {
-			std::stringstream ss;
+      std::stringstream ss;
 
-			ss <<
+      ss <<
         "Attaching current technicals to note " <<
         note->asString () <<
         std::endl;
 
-			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
-				ss.str ());
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -21236,17 +21236,17 @@ void mxsr2msrTranslator::attachCurrentTechnicalsToNote (
 
 #ifdef MF_TRACE_IS_ENABLED
       if (gTraceOahGroup->getTraceTechnicals ()) {
-				std::stringstream ss;
+        std::stringstream ss;
 
-				ss <<
+        ss <<
           "Attaching technical '" <<
           tech->asString () <<
           "' to note " << note->asString () <<
           std::endl;
 
-				gWaeHandler->waeTrace (
-					__FILE__, __LINE__,
-					ss.str ());
+        gWaeHandler->waeTrace (
+          __FILE__, __LINE__,
+          ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -21268,16 +21268,16 @@ void mxsr2msrTranslator::attachCurrentTechnicalWithIntegersToNote (
 
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceTechnicals ()) {
-			std::stringstream ss;
+      std::stringstream ss;
 
-			ss <<
+      ss <<
         "Attaching current technical with integers to note " <<
         note->asString () <<
         std::endl;
 
-			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
-				ss.str ());
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -21288,17 +21288,17 @@ void mxsr2msrTranslator::attachCurrentTechnicalWithIntegersToNote (
 
 #ifdef MF_TRACE_IS_ENABLED
       if (gTraceOahGroup->getTraceTechnicals ()) {
-				std::stringstream ss;
+        std::stringstream ss;
 
-				ss <<
+        ss <<
           "Attaching technical with integer '" <<
           tech->asString () <<
           "' to note " << note->asString () <<
           std::endl;
 
-				gWaeHandler->waeTrace (
-					__FILE__, __LINE__,
-					ss.str ());
+        gWaeHandler->waeTrace (
+          __FILE__, __LINE__,
+          ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -21320,16 +21320,16 @@ void mxsr2msrTranslator::attachCurrentTechnicalWithFloatsToNote (
 
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceTechnicals ()) {
-			std::stringstream ss;
+      std::stringstream ss;
 
-			ss <<
+      ss <<
         "Attaching current technical with floats to note " <<
         note->asString () <<
         std::endl;
 
-			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
-				ss.str ());
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -21340,17 +21340,17 @@ void mxsr2msrTranslator::attachCurrentTechnicalWithFloatsToNote (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceTechnicals ()) {
-				std::stringstream ss;
+        std::stringstream ss;
 
-				ss <<
+        ss <<
           "Attaching technical with integer '" <<
           tech->asString () <<
           "' to note " << note->asString () <<
           std::endl;
 
-				gWaeHandler->waeTrace (
-					__FILE__, __LINE__,
-					ss.str ());
+        gWaeHandler->waeTrace (
+          __FILE__, __LINE__,
+          ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -21372,16 +21372,16 @@ void mxsr2msrTranslator::attachCurrentTechnicalWithStringsToNote (
 
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceTechnicals ()) {
-			std::stringstream ss;
+      std::stringstream ss;
 
-			ss <<
+      ss <<
         "Attaching current technical with strings to note " <<
         note->asString () <<
         std::endl;
 
-			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
-				ss.str ());
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -21392,17 +21392,17 @@ void mxsr2msrTranslator::attachCurrentTechnicalWithStringsToNote (
 
 #ifdef MF_TRACE_IS_ENABLED
       if (gTraceOahGroup->getTraceTechnicals ()) {
-				std::stringstream ss;
+        std::stringstream ss;
 
-				ss <<
+        ss <<
           "Attaching technical with std::string '" <<
           tech->asString () <<
           "' to note " << note->asString () <<
           std::endl;
 
-				gWaeHandler->waeTrace (
-					__FILE__, __LINE__,
-					ss.str ());
+        gWaeHandler->waeTrace (
+          __FILE__, __LINE__,
+          ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -21424,16 +21424,16 @@ void mxsr2msrTranslator::attachCurrentOrnamentsToNote (
 
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceOrnaments ()) {
-			std::stringstream ss;
+      std::stringstream ss;
 
-			ss <<
+      ss <<
         "Attaching current ornaments to note " <<
         note->asString () <<
         std::endl;
 
-			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
-				ss.str ());
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -21444,17 +21444,17 @@ void mxsr2msrTranslator::attachCurrentOrnamentsToNote (
 
 #ifdef MF_TRACE_IS_ENABLED
       if (gTraceOahGroup->getTraceNotes ()) {
-				std::stringstream ss;
+        std::stringstream ss;
 
-				ss <<
+        ss <<
           "Attaching ornament '" <<
           msrOrnamentKindAsString (ornament->getOrnamentKind ()) <<
           "' to note " << note->asString () <<
           std::endl;
 
-			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
-				ss.str ());
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -21476,16 +21476,16 @@ void mxsr2msrTranslator::attachCurrentSpannersToNote (
 
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceSpanners ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
         "Attaching current spanners to note " <<
         note->asString () <<
         std::endl;
 
-			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
-				ss.str ());
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -21605,16 +21605,16 @@ void mxsr2msrTranslator::attachCurrentSingleTremoloToNote (
 
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceNotes ()) {
-			std::stringstream ss;
+      std::stringstream ss;
 
-			ss <<
+      ss <<
         "Attaching current singleTremolo to note " <<
         note->asString () <<
         std::endl;
 
-			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
-				ss.str ());
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -21646,9 +21646,9 @@ void mxsr2msrTranslator::attachCurrentArticulationsToChord ( // JMI
         chord->asString () <<
         std::endl;
 
-			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
-				ss.str ());
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -21665,9 +21665,9 @@ void mxsr2msrTranslator::attachCurrentArticulationsToChord ( // JMI
           " to chord " << chord <<
           std::endl;
 
-			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
-				ss.str ());
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -21692,9 +21692,9 @@ void mxsr2msrTranslator::attachCurrentOrnamentsToChord ( // JMI
         chord->asString () <<
         std::endl;
 
-			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
-				ss.str ());
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -21711,9 +21711,9 @@ void mxsr2msrTranslator::attachCurrentOrnamentsToChord ( // JMI
           chord <<
           std::endl;
 
-			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
-				ss.str ());
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -21732,17 +21732,17 @@ void mxsr2msrTranslator::attachPendingTemposToVoice (
   if (fPendingTemposList.size ()) {
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceTempos ()) {
-			std::stringstream ss;
+      std::stringstream ss;
 
-			ss <<
+      ss <<
         "Attaching pending tempos to voice \""  <<
         voice->getVoiceName () <<
         "\"" <<
         std::endl;
 
-			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
-				ss.str ());
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -21766,17 +21766,17 @@ void mxsr2msrTranslator::attachPendingTemposToPart (
   if (fPendingTemposList.size ()) {
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceTempos ()) {
-			std::stringstream ss;
+      std::stringstream ss;
 
-			ss <<
+      ss <<
         "Attaching pending tempos to part \""  <<
         part->getPartName () <<
         "\"" <<
         std::endl;
 
-			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
-				ss.str ());
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -21800,17 +21800,17 @@ void mxsr2msrTranslator::attachPendingBarLinesToVoice (
   if (fPendingBarLinesList.size ()) {
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceBarLines ()) {
-			std::stringstream ss;
+      std::stringstream ss;
 
-			ss <<
+      ss <<
         "Attaching pending barlines to voice \""  <<
         voice->getVoiceName () <<
         "\"" <<
         std::endl;
 
-			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
-				ss.str ());
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -21837,17 +21837,17 @@ void mxsr2msrTranslator::attachPendingBarLinesToPart (
   if (fPendingBarLinesList.size ()) {
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceBarLines ()) {
-			std::stringstream ss;
+      std::stringstream ss;
 
-			ss <<
+      ss <<
         "Attaching pending barlines to part \""  <<
         part->getPartName () <<
         "\"" <<
         std::endl;
 
-			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
-				ss.str ());
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -21874,17 +21874,17 @@ void mxsr2msrTranslator::attachPendingRehearsalMarksToVoice (
   if (fPendingRehearsalMarksList.size ()) {
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceRehearsalMarks ()) {
-			std::stringstream ss;
+      std::stringstream ss;
 
-			ss <<
+      ss <<
         "Attaching pending rehearsals to voice \""  <<
         voice->getVoiceName () <<
         "\"" <<
         std::endl;
 
-			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
-				ss.str ());
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -21908,17 +21908,17 @@ void mxsr2msrTranslator::attachPendingRehearsalMarksToPart (
   if (fPendingRehearsalMarksList.size ()) {
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceRehearsalMarks ()) {
-			std::stringstream ss;
+      std::stringstream ss;
 
-			ss <<
+      ss <<
         "Attaching pending rehearsals to part \""  <<
         part->getPartName () <<
         "\"" <<
         std::endl;
 
-			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
-				ss.str ());
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -21942,17 +21942,17 @@ void mxsr2msrTranslator::attachLineBreaksToVoice (
   if (fPendingLineBreaksList.size ()) {
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceLineBreaks ()) {
-			std::stringstream ss;
+      std::stringstream ss;
 
-			ss <<
+      ss <<
         "Attaching pending line breaks to voice \""  <<
         voice->getVoiceName () <<
         "\"" <<
         std::endl;
 
-			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
-				ss.str ());
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -21978,17 +21978,17 @@ void mxsr2msrTranslator::attachLineBreaksToPart (
   if (fPendingLineBreaksList.size ()) {
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceLineBreaks ()) {
-			std::stringstream ss;
+      std::stringstream ss;
 
-			ss <<
+      ss <<
         "Attaching pending line breaks to part \""  <<
         part->getPartName () <<
         "\"" <<
         std::endl;
 
-			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
-				ss.str ());
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -22014,17 +22014,17 @@ void mxsr2msrTranslator::attachPageBreaksToVoice (
   if (fPendingPageBreaksList.size ()) {
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTracePageBreaks ()) {
-			std::stringstream ss;
+      std::stringstream ss;
 
-			ss <<
+      ss <<
         "Attaching pending page breaks to voice \""  <<
         voice->getVoiceName () <<
         "\"" <<
         std::endl;
 
-			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
-				ss.str ());
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -22050,17 +22050,17 @@ void mxsr2msrTranslator::attachPageBreaksToPart (
   if (fPendingPageBreaksList.size ()) {
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTracePageBreaks ()) {
-			std::stringstream ss;
+      std::stringstream ss;
 
-			ss <<
+      ss <<
         "Attaching pending page breaks to part \""  <<
         part->getPartName () <<
         "\"" <<
         std::endl;
 
-			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
-				ss.str ());
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -22087,16 +22087,16 @@ void mxsr2msrTranslator::attachPendingSegnosToNote (
   if (fPendingSegnosList.size ()) {
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceSegnos ()) {
-			std::stringstream ss;
+      std::stringstream ss;
 
-			ss <<
+      ss <<
         "Attaching pending segno to note " <<
         note->asString () <<
         std::endl;
 
-			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
-				ss.str ());
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -22121,16 +22121,16 @@ void mxsr2msrTranslator::attachPendingDalSegnosToNote (
   if (fPendingDalSegnosList.size ()) {
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceDalSegnos ()) {
-			std::stringstream ss;
+      std::stringstream ss;
 
-			ss <<
+      ss <<
         "Attaching pending dal segno to note " <<
         note->asString () <<
         std::endl;
 
-			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
-				ss.str ());
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -22154,16 +22154,16 @@ void mxsr2msrTranslator::attachPendingDalSegnosToChord (
   if (fPendingDalSegnosList.size ()) {
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceDalSegnos ()) {
-			std::stringstream ss;
+      std::stringstream ss;
 
-			ss <<
+      ss <<
         "Attaching pending dal segno to chord " <<
         chord->asString () <<
         std::endl;
 
-			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
-				ss.str ());
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -22188,16 +22188,16 @@ void mxsr2msrTranslator::attachPendingCodasToNote (
   if (fPendingCodasList.size ()) {
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceCodas ()) {
-			std::stringstream ss;
+      std::stringstream ss;
 
-			ss <<
+      ss <<
         "Attaching pending codas to note " <<
         note->asString () <<
         std::endl;
 
-			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
-				ss.str ());
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -22222,16 +22222,16 @@ void mxsr2msrTranslator::attachPendingCrescDecrescsToNote (
   if (fPendinCrescDecrescsList.size ()) {
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceCrescDecrescs ()) {
-			std::stringstream ss;
+      std::stringstream ss;
 
-			ss <<
+      ss <<
         "Attaching pending crescDecresc to note " <<
         note->asString () <<
         std::endl;
 
-			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
-				ss.str ());
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -22256,16 +22256,16 @@ void mxsr2msrTranslator::attachPendingEyeGlassesToNote (
   if (fPendingEyeGlassesList.size ()) {
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceEyeGlasses ()) {
-			std::stringstream ss;
+      std::stringstream ss;
 
-			ss <<
+      ss <<
         "Attaching pending eyeglasses to note " <<
         note->asString () <<
         std::endl;
 
-			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
-				ss.str ());
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -22290,16 +22290,16 @@ void mxsr2msrTranslator::attachPendingDampsToNote (
   if (fPendingDampsList.size ()) {
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceDamps ()) {
-			std::stringstream ss;
+      std::stringstream ss;
 
-			ss <<
+      ss <<
         "Attaching pending damps to note " <<
         note->asString () <<
         std::endl;
 
-			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
-				ss.str ());
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -22324,16 +22324,16 @@ void mxsr2msrTranslator::attachPendingDampAllsToNote (
   if (fPendingDampAllsList.size ()) {
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceDampAlls ()) {
-			std::stringstream ss;
+      std::stringstream ss;
 
-			ss <<
+      ss <<
         "Attaching pending damp alls to note " <<
         note->asString () <<
         std::endl;
 
-			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
-				ss.str ());
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -22358,16 +22358,16 @@ void mxsr2msrTranslator::attachPendingOctaveShiftsToNote (
   if (fPendingOctaveShiftsList.size ()) {
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceOctaveShifts ()) {
-			std::stringstream ss;
+      std::stringstream ss;
 
-			ss <<
+      ss <<
         "Attaching pending octave shifts to note " <<
         note->asString () <<
         std::endl;
 
-			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
-				ss.str ());
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -22402,16 +22402,16 @@ void mxsr2msrTranslator::attachPendingScordaturasToNote (
   if (fPendingScordaturasList.size ()) {
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceScordaturas ()) {
-			std::stringstream ss;
+      std::stringstream ss;
 
-			ss <<
+      ss <<
         "Attaching pending scordaturas to note " <<
         note->asString () <<
         std::endl;
 
-			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
-				ss.str ());
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -22438,16 +22438,16 @@ void mxsr2msrTranslator::attachPendingDynamicsToNote (
 
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceDynamics ()) {
-			std::stringstream ss;
+      std::stringstream ss;
 
-			ss <<
+      ss <<
         "Attaching pending dynamics to note " <<
         note->asString () <<
         std::endl;
 
-			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
-				ss.str ());
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -22510,16 +22510,16 @@ void mxsr2msrTranslator::attachPendingOtherDynamicsToNote (
 
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceDynamics ()) {
-			std::stringstream ss;
+      std::stringstream ss;
 
-			ss <<
+      ss <<
         "Attaching pending other dynamics to note " <<
         note->asString () <<
         std::endl;
 
-			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
-				ss.str ());
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -22582,16 +22582,16 @@ void mxsr2msrTranslator::attachPendingWordsToNote (
 
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceWords ()) {
-			std::stringstream ss;
+      std::stringstream ss;
 
-			ss <<
+      ss <<
         "Attaching pending words to note " <<
         note->asString () <<
         std::endl;
 
-			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
-				ss.str ());
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -22654,16 +22654,16 @@ void mxsr2msrTranslator::attachPendingBeamsToNote (
 
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceBeams ()) {
-			std::stringstream ss;
+      std::stringstream ss;
 
-			ss <<
+      ss <<
         "Attaching pending beams to note " <<
         note->asString () <<
         std::endl;
 
-			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
-				ss.str ());
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -22726,16 +22726,16 @@ void mxsr2msrTranslator::attachPendingSlursToNote (
 
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceSlurs ()) {
-			std::stringstream ss;
+      std::stringstream ss;
 
-			ss <<
+      ss <<
         "Attaching pending slurs to note " <<
         note->asString () <<
         std::endl;
 
-			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
-				ss.str ());
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -22795,9 +22795,9 @@ void mxsr2msrTranslator::attachPendingLigaturesToNote (
   if (numberOfLigatures) {
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceLigatures ()) {
-			std::stringstream ss;
+      std::stringstream ss;
 
-			ss <<
+      ss <<
         "Attaching " <<
         mfSingularOrPlural (
           numberOfLigatures,
@@ -22806,9 +22806,9 @@ void mxsr2msrTranslator::attachPendingLigaturesToNote (
         note->asString () <<
         std::endl;
 
-			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
-				ss.str ());
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -22942,7 +22942,7 @@ void mxsr2msrTranslator::attachPendingLigaturesToNote (
 //               getSegmentUpLinkToVoice ();
 //
 // #ifdef MF_SANITY_CHECKS_ARE_ENABLED
-// 				sanity check
+//         sanity check
 //         mfAssert (
 //           __FILE__, __LINE__,
 //           noteVoice != nullptr,
@@ -22994,16 +22994,16 @@ void mxsr2msrTranslator::attachPendingPedalsToNote (
 
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTracePedals ()) {
-			std::stringstream ss;
+      std::stringstream ss;
 
-			ss <<
+      ss <<
         "Attaching pending pedals to note " <<
         note->asString () <<
         std::endl;
 
-			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
-				ss.str ());
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -23062,16 +23062,16 @@ void mxsr2msrTranslator::attachPendingSlashesToNote (
 
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceSlashes ()) {
-			std::stringstream ss;
+      std::stringstream ss;
 
-			ss <<
+      ss <<
         "Attaching pending slashes to note " <<
         note->asString () <<
         std::endl;
 
-			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
-				ss.str ());
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -23130,16 +23130,16 @@ void mxsr2msrTranslator::attachPendingWedgesToNote (
 
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceWedges ()) {
-			std::stringstream ss;
+      std::stringstream ss;
 
-			ss <<
+      ss <<
         "Attaching pending wedges to note " <<
         note->asString () <<
         std::endl;
 
-			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
-				ss.str ());
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -23200,16 +23200,16 @@ void mxsr2msrTranslator::attachPendingGlissandosToNote (
   if (fPendingGlissandosList.size ()) {
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceGlissandos ()) {
-			std::stringstream ss;
+      std::stringstream ss;
 
-			ss <<
+      ss <<
         "Attaching pending glissandos to note " <<
         note->asString () <<
         std::endl;
 
-			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
-				ss.str ());
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -23321,16 +23321,16 @@ void mxsr2msrTranslator::attachPendingSlidesToNote (
   if (fPendingSlidesList.size ()) {
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceSlides ()) {
-			std::stringstream ss;
+      std::stringstream ss;
 
-			ss <<
+      ss <<
         "Attaching pending slides to note " <<
         note->asString () <<
         std::endl;
 
-			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
-				ss.str ());
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -23674,7 +23674,7 @@ S_msrNote mxsr2msrTranslator::createNote (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceNotes ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Gathered note informations:" <<
@@ -23686,7 +23686,7 @@ S_msrNote mxsr2msrTranslator::createNote (
 
     gLog << std::left <<
       std::setw (fieldWidth) <<
-      "CurrentNoteSoundingWholeNotesFromNotesDuration" << " = " <<
+      "fCurrentNoteSoundingWholeNotesFromNotesDuration" << ": " <<
       fCurrentNoteSoundingWholeNotesFromNotesDuration <<
       std::endl <<
       std::setw (fieldWidth) <<
@@ -23699,59 +23699,59 @@ S_msrNote mxsr2msrTranslator::createNote (
         fCurrentNoteDotsNumber <<
       std::endl <<
       std::setw (fieldWidth) <<
-      "fCurrentNoteDisplayWholeNotesFromType" << " = " <<
+      "fCurrentNoteDisplayWholeNotesFromType" << ": " <<
       fCurrentNoteDisplayWholeNotesFromType <<
       std::endl <<
 
       std::setw (fieldWidth) <<
-      "fCurrentNoteIsARest" << " = " <<
+      "fCurrentNoteIsARest" << ": " <<
       fCurrentNoteIsARest <<
       std::endl <<
 
       std::setw (fieldWidth) <<
-      "fCurrentDivisionsPerQuarterNote" << " = " <<
+      "fCurrentDivisionsPerQuarterNote" << ": " <<
       fCurrentDivisionsPerQuarterNote <<
       std::endl <<
 
       std::setw (fieldWidth) <<
-      "fCurrentNotePrintObjectKind" << " = " <<
+      "fCurrentNotePrintObjectKind" << ": " <<
       fCurrentNotePrintObjectKind <<
       std::endl <<
 
       std::setw (fieldWidth) <<
-      "fCurrentNoteRGB" << " = " <<
+      "fCurrentNoteRGB" << ": " <<
       fCurrentNoteRGB <<
       std::endl <<
       std::setw (fieldWidth) <<
-      "fCurrentNoteAlpha" << " = " <<
+      "fCurrentNoteAlpha" << ": " <<
       fCurrentNoteAlpha <<
       std::endl <<
 
       std::setw (fieldWidth) <<
-      "fCurrentMusicXMLStaffNumber =" << " = " <<
+      "fCurrentMusicXMLStaffNumber =" << ": " <<
       fCurrentMusicXMLStaffNumber <<
       std::endl <<
       std::setw (fieldWidth) <<
-      "fCurrentMusicXMLStaffNumber" << " = " <<
+      "fCurrentMusicXMLStaffNumber" << ": " <<
       fCurrentMusicXMLStaffNumber <<
       std::endl <<
 
       std::setw (fieldWidth) <<
-      "fCurrentStaffNumberToInsertInto" << " = " <<
+      "fCurrentStaffNumberToInsertInto" << ": " <<
       fCurrentStaffNumberToInsertInto <<
       std::endl <<
       std::setw (fieldWidth) <<
-      "fPreviousNoteMusicXMLStaffNumber" << " = " <<
+      "fPreviousNoteMusicXMLStaffNumber" << ": " <<
       fPreviousNoteMusicXMLStaffNumber <<
       std::endl <<
 
       std::setw (fieldWidth) <<
-      "fCurrentMusicXMLVoiceNumber" << " = " <<
+      "fCurrentMusicXMLVoiceNumber" << ": " <<
       fCurrentMusicXMLVoiceNumber <<
       std::endl <<
 
       std::setw (fieldWidth) <<
-      "inputLineNumber" << " = " <<
+      "inputLineNumber" << ": " <<
       inputLineNumber <<
       std::endl << std::endl;
 
@@ -23885,7 +23885,7 @@ S_msrNote mxsr2msrTranslator::createNote (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceNotesDetails ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating note:" <<
@@ -24075,7 +24075,7 @@ void mxsr2msrTranslator::populateNoteAfterNoteItselfIsHandled (
           getPartHarmoniesVoice ();
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
-  	// sanity check
+    // sanity check
     mfAssert (
       __FILE__, __LINE__,
       voiceToInsertHarmoniesInto != nullptr,
@@ -24099,7 +24099,7 @@ void mxsr2msrTranslator::populateNoteAfterNoteItselfIsHandled (
           getPartFiguredBassVoice ();
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
-  	// sanity check
+    // sanity check
     mfAssert (
       __FILE__, __LINE__,
       voiceToInsertFiguredBassesInto != nullptr,
@@ -24148,9 +24148,9 @@ void mxsr2msrTranslator::createAStaffChangeIfNecessary (
 
 #ifdef MF_TRACE_IS_ENABLED
       if (gTraceOahGroup->getTraceStaffChanges ()) {
-				std::stringstream ss;
+        std::stringstream ss;
 
-				ss <<
+        ss <<
           "*** There is staff change for chord member note '" <<
           newNote->asShortString () <<
           "' in voice \"" <<
@@ -24162,9 +24162,9 @@ void mxsr2msrTranslator::createAStaffChangeIfNecessary (
           ", line " << inputLineNumber <<
           std::endl;
 
-			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
-				ss.str ());
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -24183,9 +24183,9 @@ void mxsr2msrTranslator::createAStaffChangeIfNecessary (
 
 #ifdef MF_TRACE_IS_ENABLED
       if (gTraceOahGroup->getTraceStaffChanges ()) {
-				std::stringstream ss;
+        std::stringstream ss;
 
-				ss <<
+        ss <<
           "*** There is staff change for note '" <<
           newNote->asShortString () <<
           "' in voice \"" <<
@@ -24197,9 +24197,9 @@ void mxsr2msrTranslator::createAStaffChangeIfNecessary (
           ", line " << inputLineNumber <<
           std::endl;
 
-			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
-				ss.str ());
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -24285,9 +24285,9 @@ void mxsr2msrTranslator::handleNoteItself (
   // finalizing current chord if relevant
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceChords ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> fCurrentNoteBelongsToAChord: " <<
       fCurrentNoteBelongsToAChord <<
       "--> fOnGoingChord: " <<
@@ -24377,7 +24377,7 @@ void mxsr2msrTranslator::attachPendingGraceNotesGroupToNoteIfRelevant (
     }
 
     if (gTraceOahGroup->getTraceGraceNotes ()) {
-	  	std::stringstream ss;
+      std::stringstream ss;
 
       ss <<
         std::endl <<
@@ -24469,9 +24469,9 @@ void mxsr2msrTranslator::handleBackup (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceBackup ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "Handling pending backup" <<
       ", fCurrentBackupDivisions: " <<
       fCurrentBackupDivisions <<
@@ -24488,9 +24488,9 @@ void mxsr2msrTranslator::handleBackup (
   // fetch current voice
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceOctaveShifts ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> handleBackup()" <<
       ", fCurrentStaffNumberToInsertInto: " <<
       fCurrentStaffNumberToInsertInto <<
@@ -24542,9 +24542,9 @@ void mxsr2msrTranslator::visitEnd (S_note& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> End visiting S_note" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -24651,9 +24651,9 @@ void mxsr2msrTranslator::visitEnd (S_note& elt)
   if (fCurrentStaffNumberToInsertInto == msrStaff::K_STAFF_NUMBER_UNKNOWN) {
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceNotes () || gTraceOahGroup->getTraceStaffChanges ()) {
-			std::stringstream ss;
+      std::stringstream ss;
 
-			ss <<
+      ss <<
         "==> setting fCurrentStaffNumberToInsertInto to " <<
         fCurrentMusicXMLStaffNumber <<
         ", in voice \"" <<
@@ -24662,9 +24662,9 @@ void mxsr2msrTranslator::visitEnd (S_note& elt)
         ", line " << inputLineNumber <<
         std::endl;
 
-			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
-				ss.str ());
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -24673,9 +24673,9 @@ void mxsr2msrTranslator::visitEnd (S_note& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceNotes () || gTraceOahGroup->getTraceStaffChanges ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "==> fetching voice to insert note into" <<
       ", fCurrentStaffNumberToInsertInto: " <<
       fCurrentStaffNumberToInsertInto <<
@@ -24712,9 +24712,9 @@ void mxsr2msrTranslator::visitEnd (S_note& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceNotes () || gTraceOahGroup->getTraceStaffChanges ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "==> is there a staff change?" <<
       " fCurrentStaffNumberToInsertInto: " <<
       fCurrentStaffNumberToInsertInto <<
@@ -24753,9 +24753,9 @@ void mxsr2msrTranslator::visitEnd (S_note& elt)
   // tuplets or chords to be appended to the voice
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceNotes () || gTraceOahGroup->getTraceStaffChanges ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "==> fetching voice to insert harmonies, figured bass elements and/or frames into" <<
       ", fCurrentStaffNumberToInsertInto: " <<
       fCurrentStaffNumberToInsertInto <<
@@ -24844,10 +24844,10 @@ void mxsr2msrTranslator::handlePendingHarmonies (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceHarmoniesDetails ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
-			"handlePendingHarmonies(), newNote: " <<
+    ss <<
+      "handlePendingHarmonies(), newNote: " <<
       std::endl;
     ++gIndenter;
     gLog <<
@@ -24871,9 +24871,9 @@ void mxsr2msrTranslator::handlePendingHarmonies (
 
  #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceHarmonies ()) {
-			std::stringstream ss;
+      std::stringstream ss;
 
-			ss <<
+      ss <<
         "handlePendingHarmonies(), " <<
         ", newNoteSoundingWholeNotes: " << newNoteSoundingWholeNotes <<
         ", newNoteDisplayWholeNotes: " << newNoteDisplayWholeNotes <<
@@ -24881,9 +24881,9 @@ void mxsr2msrTranslator::handlePendingHarmonies (
         newNote->getInputLineNumber () <<
         std::endl;
 
-			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
-				ss.str ());
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -24913,17 +24913,17 @@ void mxsr2msrTranslator::handlePendingHarmonies (
     // set the harmony's sounding whole notes
     // JMI v0.9.67 NOT if there are several harmonies with offsets on the same note -- HARMFUL!
     msrWholeNotes
-    	harmonySoundingWholeNotes =
-    		newNoteSoundingWholeNotes,
+      harmonySoundingWholeNotes =
+        newNoteSoundingWholeNotes,
       harmonyWholeNotesOffset =
-      	harmony->
-      		getHarmonyWholeNotesOffset ();
+        harmony->
+          getHarmonyWholeNotesOffset ();
 
  #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceHarmonies ()) {
-			std::stringstream ss;
+      std::stringstream ss;
 
-			ss <<
+      ss <<
         "handlePendingHarmonies(), " <<
         ", harmonySoundingWholeNotes: " << harmonySoundingWholeNotes <<
         ", harmonyWholeNotesOffset: " << harmonyWholeNotesOffset <<
@@ -24931,9 +24931,9 @@ void mxsr2msrTranslator::handlePendingHarmonies (
         newNote->getInputLineNumber () <<
         std::endl;
 
-			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
-				ss.str ());
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -24966,7 +24966,7 @@ void mxsr2msrTranslator::handlePendingHarmonies (
           getPartHarmoniesVoice ();
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
-  	// sanity check
+    // sanity check
     mfAssert (
       __FILE__, __LINE__,
       partHarmoniesVoice != nullptr,
@@ -25076,7 +25076,7 @@ void mxsr2msrTranslator::handlePendingFiguredBasses (
             getPartFiguredBassVoice ();
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
-  	// sanity check
+    // sanity check
     mfAssert (
       __FILE__, __LINE__,
       partFiguredBassVoice != nullptr,
@@ -25126,16 +25126,16 @@ void mxsr2msrTranslator::handleNonChordNorTupletNoteOrRest (
 
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceNotes ()) { // JMI
-			std::stringstream ss;
+      std::stringstream ss;
 
-			ss <<
+      ss <<
         "handleNonChordNorTupletNoteOrRest(), fCurrentNonGraceNote: " <<
         fCurrentNonGraceNote->asShortString () <<
         std::endl;
 
-			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
-				ss.str ());
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -25193,7 +25193,7 @@ void mxsr2msrTranslator::handleNonChordNorTupletNoteOrRest (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceNotes ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Handling non-chord, non-tuplet note or rest " <<
@@ -25224,7 +25224,7 @@ void mxsr2msrTranslator::handleNonChordNorTupletNoteOrRest (
       std::endl;
 
     if (gTraceOahGroup->getTraceNotesDetails ()) {
-	  	std::stringstream ss;
+      std::stringstream ss;
 
       ss <<
         std::setw (fieldWidth) << "fPendingGraceNotesGroup" << ": " <<
@@ -25269,18 +25269,18 @@ void mxsr2msrTranslator::handleNonChordNorTupletNoteOrRest (
 
 #ifdef MF_TRACE_IS_ENABLED
       if (gTraceOahGroup->getTraceGraceNotes ()) {
-				std::stringstream ss;
+        std::stringstream ss;
 
-				ss <<
+        ss <<
           "Creating grace notes for note '" <<
           newNote->asString () <<
           "' in voice \"" <<
           currentVoice->getVoiceName () << "\"" <<
           std::endl;
 
-				gWaeHandler->waeTrace (
-					__FILE__, __LINE__,
-					ss.str ());
+        gWaeHandler->waeTrace (
+          __FILE__, __LINE__,
+          ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -25334,9 +25334,9 @@ void mxsr2msrTranslator::handleNonChordNorTupletNoteOrRest (
     // append newNote to the current grace notes
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceGraceNotes ()) {
-			std::stringstream ss;
+      std::stringstream ss;
 
-			ss <<
+      ss <<
         "Appending note " <<
         newNote->asString () <<
         " to grace notes in voice \"" <<
@@ -25344,9 +25344,9 @@ void mxsr2msrTranslator::handleNonChordNorTupletNoteOrRest (
         "\", line " << inputLineNumber <<
         std::endl;
 
-			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
-				ss.str ());
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -25367,9 +25367,9 @@ void mxsr2msrTranslator::handleNonChordNorTupletNoteOrRest (
         // append newNote to the current voice
 #ifdef MF_TRACE_IS_ENABLED
         if (gTraceOahGroup->getTraceNotes ()) {
-					std::stringstream ss;
+          std::stringstream ss;
 
-					ss <<
+          ss <<
             "Appending single tremolo " <<
             newNote->asString () <<
             ", line " << newNote->getInputLineNumber () <<
@@ -25395,9 +25395,9 @@ void mxsr2msrTranslator::handleNonChordNorTupletNoteOrRest (
         // register newNote as first element of the current double tremolo
 #ifdef MF_TRACE_IS_ENABLED
         if (gTraceOahGroup->getTraceNotes ()) {
-					std::stringstream ss;
+          std::stringstream ss;
 
-					ss <<
+          ss <<
             "Setting regular note '" <<
             newNote->asString () <<
             "', line " << newNote->getInputLineNumber () <<
@@ -25422,9 +25422,9 @@ void mxsr2msrTranslator::handleNonChordNorTupletNoteOrRest (
         // register newNote as second element of the current double tremolo
 #ifdef MF_TRACE_IS_ENABLED
         if (gTraceOahGroup->getTraceNotes ()) {
-					std::stringstream ss;
+          std::stringstream ss;
 
-					ss <<
+          ss <<
             "Setting regular note '" <<
             newNote->asString () <<
             "', line " << newNote->getInputLineNumber () <<
@@ -25461,9 +25461,9 @@ void mxsr2msrTranslator::handleNonChordNorTupletNoteOrRest (
     // append newNote to the current voice
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceNotes ()) {
-			std::stringstream ss;
+      std::stringstream ss;
 
-			ss <<
+      ss <<
         "Appending regular note or rest " <<
         newNote->asString () <<
         ", line " << newNote->getInputLineNumber () <<
@@ -25472,9 +25472,9 @@ void mxsr2msrTranslator::handleNonChordNorTupletNoteOrRest (
         "\"" <<
         std::endl;
 
-			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
-				ss.str ());
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -25543,7 +25543,7 @@ void mxsr2msrTranslator::handleLyricsForNoteAfterNoteItselfIsHandled (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceLyrics ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Handling lyrics for note '" <<
@@ -25563,25 +25563,25 @@ void mxsr2msrTranslator::handleLyricsForNoteAfterNoteItselfIsHandled (
       "newNote" << " = \"" << newNote->asShortString () << "\"" <<
       std::endl <<
       std::setw (fieldWidth) <<
-      "fLastHandledNoteInVoiceHasLyrics" << " = " <<
+      "fLastHandledNoteInVoiceHasLyrics" << ": " <<
       fLastHandledNoteInVoiceHasLyrics <<
       std::endl <<
       std::setw (fieldWidth) <<
-      "fCurrentSyllableExtendKind" << "" << " = " <<
+      "fCurrentSyllableExtendKind" << "" << ": " <<
       msrSyllableExtendKindAsString (
         fCurrentSyllableExtendKind) <<
       std::endl <<
       std::setw (fieldWidth) <<
-      "fOnGoingSyllableExtend" << " = " <<
+      "fOnGoingSyllableExtend" << ": " <<
       fOnGoingSyllableExtend <<
       std::endl <<
 
       std::setw (fieldWidth) <<
-      "fCurrentNoteHasLyrics" << " = " <<
+      "fCurrentNoteHasLyrics" << ": " <<
       fCurrentNoteHasLyrics <<
       std::endl <<
       std::setw (fieldWidth) <<
-      "fASkipSyllableHasBeenGeneratedForcurrentNote" << " = " <<
+      "fASkipSyllableHasBeenGeneratedForcurrentNote" << ": " <<
       fASkipSyllableHasBeenGeneratedForcurrentNote <<
       std::endl <<
 
@@ -25608,17 +25608,17 @@ void mxsr2msrTranslator::handleLyricsForNoteAfterNoteItselfIsHandled (
     // newNote has lyrics attached to it
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceLyricsDetails ()) {
-			std::stringstream ss;
+      std::stringstream ss;
 
-			ss <<
+      ss <<
         "Note '" <<
         newNote->asShortString () <<
         "' has lyrics attached to it" << " ***" <<
         std::endl;
 
-			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
-				ss.str ());
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -25760,7 +25760,7 @@ void mxsr2msrTranslator::handleNoteBelongingToAChord (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceChords ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Handling a note belonging to a chord" <<
@@ -25814,9 +25814,9 @@ void mxsr2msrTranslator::handleNoteBelongingToAChord (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceChords ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       std::endl <<
       "***==> fCurrentStaffNumberToInsertInto: " <<
       fCurrentStaffNumberToInsertInto <<
@@ -25854,9 +25854,9 @@ void mxsr2msrTranslator::handleNoteBelongingToAChord (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceChords ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "Handling a chord member note" <<
       ", currentVoice = \"" <<
       currentVoice->getVoiceName () <<
@@ -26216,9 +26216,9 @@ void mxsr2msrTranslator::handleNoteBelongingToAChord (
   // register newChordNote as another member of chord
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceChords ()) {
-			std::stringstream ss;
+      std::stringstream ss;
 
-			ss <<
+      ss <<
         "Adding another note " <<
         newChordNote->asString() <<
         ", line " << inputLineNumber <<
@@ -26226,9 +26226,9 @@ void mxsr2msrTranslator::handleNoteBelongingToAChord (
         currentVoice->getVoiceName () <<
         std::endl;
 
-			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
-				ss.str ());
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
   }
@@ -26259,18 +26259,18 @@ void mxsr2msrTranslator::handlePendingTupletStopIfAny (
     // in case the last element is a chord
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceTuplets ()) {
-			std::stringstream ss;
+      std::stringstream ss;
 
-			ss <<
+      ss <<
         "--> kTupletTypeStart: handling pending tuplet stop, note '" <<
         note->
           asShortString () <<
         "', line " << inputLineNumber <<
         std::endl;
 
-			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
-				ss.str ());
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -26313,9 +26313,9 @@ void mxsr2msrTranslator::handleNoteBelongingToATuplet (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceTuplets ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "Handling a note belonging to a tuplet" <<
       ", note: " <<
       note->
@@ -26340,9 +26340,9 @@ void mxsr2msrTranslator::handleNoteBelongingToATuplet (
       {
 #ifdef MF_TRACE_IS_ENABLED
         if (gTraceOahGroup->getTraceTuplets ()) {
-					std::stringstream ss;
+          std::stringstream ss;
 
-					ss <<
+          ss <<
             "--> kTupletTypeStart: note = '" <<
             note->
               asShortString () <<
@@ -26657,9 +26657,9 @@ void mxsr2msrTranslator::handleNoteBelongingToATuplet (
       {
 #ifdef MF_TRACE_IS_ENABLED
         if (gTraceOahGroup->getTraceTuplets ()) {
-					std::stringstream ss;
+          std::stringstream ss;
 
-					ss <<
+          ss <<
             "--> kTupletTypeStartAndStopInARow: note = '" <<
             note->
               asShortString () <<
@@ -26745,9 +26745,9 @@ void mxsr2msrTranslator::handleNoteBelongingToAChordInATuplet (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceTuplets ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "Handling a note belonging to a chord in a tuplet" <<
       ", newChordNote: " <<
       newChordNote->
@@ -26851,7 +26851,7 @@ void mxsr2msrTranslator::handleNoteBelongingToAChordInATuplet (
 
 #ifdef MF_TRACE_IS_ENABLED
     if (false) { // JMI
-	  	std::stringstream ss;
+      std::stringstream ss;
 
       ss <<
         "&&&&&&&&&&&&&&&&&& currentVoice (" <<
@@ -26861,18 +26861,18 @@ void mxsr2msrTranslator::handleNoteBelongingToAChordInATuplet (
         currentVoice <<
         std::endl;
 
-			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
-				ss.str ());
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
     // add chord to the current tuplet instead of tupletLastNote
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceChords () || gTraceOahGroup->getTraceTuplets ()) {
-			std::stringstream ss;
+      std::stringstream ss;
 
-			ss <<
+      ss <<
         "Adding chord '" <<
         fCurrentChord->asString () <<
         "' to stack top tuplet '" <<
@@ -26880,9 +26880,9 @@ void mxsr2msrTranslator::handleNoteBelongingToAChordInATuplet (
         "', line " << inputLineNumber <<
         std::endl;
 
-			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
-				ss.str ());
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -26905,9 +26905,9 @@ void mxsr2msrTranslator::handleNoteBelongingToAChordInATuplet (
   // register note as another member of chord
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceChords ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "Adding another note " <<
       newChordNote->
         asShortString () <<
@@ -26959,9 +26959,9 @@ void mxsr2msrTranslator::handleNoteBelongingToAChordInAGraceNotesGroup (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceChords () || gTraceOahGroup->getTraceGraceNotes ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "Handling a note belonging to a chord in grace notes" <<
       ", newChordNote is '" <<
       newChordNote->
@@ -27033,18 +27033,18 @@ void mxsr2msrTranslator::handleNoteBelongingToAChordInAGraceNotesGroup (
 
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceChords () || gTraceOahGroup->getTraceGraceNotes ()) {
-			std::stringstream ss;
+      std::stringstream ss;
 
-			ss <<
+      ss <<
         "The grace notes chord's first note is '" <<
         chordFirstNote->
           asShortString () <<
         "'" <<
         std::endl;
 
-			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
-				ss.str ());
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -27110,9 +27110,9 @@ void mxsr2msrTranslator::handleNoteBelongingToAChordInAGraceNotesGroup (
   // register note as another member of chord
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceChords ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "Adding another note " <<
       newChordNote->
         asShortString () <<
@@ -27148,7 +27148,7 @@ void mxsr2msrTranslator::handleTupletsPendingOnTupletsStack (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceTuplets ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Handling tuplets pending on tuplet stack" <<
@@ -27246,9 +27246,9 @@ void mxsr2msrTranslator::handleRepeatStart (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceRepeats ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "Handling repeat start" <<
     /* JMI
       ", measure '" <<
@@ -27294,9 +27294,9 @@ void mxsr2msrTranslator::handleRepeatEnd (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceRepeats ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "Handling a repeat end in part " <<
       fCurrentPart->getPartCombinedName () <<
       ", fCurrentMeasureNumber: \"" << fCurrentMeasureNumber <<
@@ -27336,9 +27336,9 @@ void mxsr2msrTranslator::handleRepeatEndingStart (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceRepeats ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "Handling a repeat ending start in part " <<
       fCurrentPart->getPartCombinedName () <<
       ", line " << inputLineNumber <<
@@ -27352,9 +27352,9 @@ void mxsr2msrTranslator::handleRepeatEndingStart (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceRepeatsDetails ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       std::endl << std::endl <<
       "****************** handleRepeatEndingStart()" <<
       ", line " << inputLineNumber <<
@@ -27371,9 +27371,9 @@ void mxsr2msrTranslator::handleRepeatEndingStart (
   // handle the repeat ending
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceRepeats ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "Handling a repeat ending upon its start in part " <<
       fCurrentPart->getPartCombinedName () <<
       ", line " << inputLineNumber <<
@@ -27404,9 +27404,9 @@ void mxsr2msrTranslator::handleRepeatHookedEndingEnd (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceRepeats ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "Handling a repeat hooked ending end in part " <<
       fCurrentPart->getPartCombinedName () <<
       ", line " << inputLineNumber <<
@@ -27420,9 +27420,9 @@ void mxsr2msrTranslator::handleRepeatHookedEndingEnd (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceRepeatsDetails ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       std::endl << std::endl <<
       "****************** handleRepeatHookedEndingEnd()" <<
       ", line " << inputLineNumber <<
@@ -27443,9 +27443,9 @@ void mxsr2msrTranslator::handleRepeatHookedEndingEnd (
   // create a hooked repeat ending from the current segment
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceRepeats ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "Handling a hooked repeat ending in part " <<
       fCurrentPart->getPartCombinedName () <<
       ", line " << inputLineNumber <<
@@ -27483,9 +27483,9 @@ void mxsr2msrTranslator::handleRepeatHooklessEndingEnd (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceRepeats ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "Handling a repeat hookless ending end in part " <<
       fCurrentPart->getPartCombinedName () <<
       ", line " << inputLineNumber <<
@@ -27499,9 +27499,9 @@ void mxsr2msrTranslator::handleRepeatHooklessEndingEnd (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceRepeatsDetails ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       std::endl << std::endl <<
       "****************** handleRepeatHooklessEndingEnd()" <<
       ", line " << inputLineNumber <<
@@ -27522,9 +27522,9 @@ void mxsr2msrTranslator::handleRepeatHooklessEndingEnd (
   // create a hookless repeat ending from the current segment
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceRepeats ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "Handling a hookless repeat ending in part " <<
       fCurrentPart->getPartCombinedName () <<
       ", line " << inputLineNumber <<
@@ -27551,9 +27551,9 @@ void mxsr2msrTranslator::visitStart (S_rehearsal& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_rehearsal" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -27612,9 +27612,9 @@ void mxsr2msrTranslator::visitStart (S_rehearsal& elt)
   // create a rehearsalMark
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceRehearsalMarks ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "Creating rehearsalMark \"" << rehearsalValue << "\"" <<
       " in part " <<
       fCurrentPart->getPartCombinedName () <<
@@ -27646,9 +27646,9 @@ void mxsr2msrTranslator::visitStart (S_harmony& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_harmony" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -27696,9 +27696,9 @@ void mxsr2msrTranslator::visitStart (S_root& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_root" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -27728,9 +27728,9 @@ void mxsr2msrTranslator::visitStart (S_root_step& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_root_step" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -27760,9 +27760,9 @@ void mxsr2msrTranslator::visitStart (S_root_alter& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_root_alter" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -27801,9 +27801,9 @@ void mxsr2msrTranslator::visitStart (S_kind& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_kind" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -28031,9 +28031,9 @@ void mxsr2msrTranslator::visitStart (S_inversion& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_inversion" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
@@ -28059,9 +28059,9 @@ void mxsr2msrTranslator::visitStart (S_bass& elt)
     elt->getInputLineNumber ();
 
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_bass" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -28080,9 +28080,9 @@ void mxsr2msrTranslator::visitStart (S_bass_step& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_bass_step" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -28112,9 +28112,9 @@ void mxsr2msrTranslator::visitStart (S_bass_alter& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_bass_alter" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -28153,9 +28153,9 @@ void mxsr2msrTranslator::visitStart (S_degree& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_degree" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -28182,16 +28182,16 @@ void mxsr2msrTranslator::visitStart (S_degree_value& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_degree_value" <<
-			 ", line " << elt->getInputLineNumber () <<
-			std::endl;
+       ", line " << elt->getInputLineNumber () <<
+      std::endl;
 
-		gWaeHandler->waeTrace (
-			__FILE__, __LINE__,
-			ss.str ());
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -28205,9 +28205,9 @@ void mxsr2msrTranslator::visitStart (S_degree_alter& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_degree_alter" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -28246,9 +28246,9 @@ void mxsr2msrTranslator::visitStart (S_degree_type& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_degree_type" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -28290,9 +28290,9 @@ void mxsr2msrTranslator::visitEnd (S_degree& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> End visiting S_degree" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -28324,9 +28324,9 @@ void mxsr2msrTranslator::visitEnd (S_harmony& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> End visiting S_harmony" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -28372,7 +28372,7 @@ void mxsr2msrTranslator::visitEnd (S_harmony& elt)
     ss <<
       "harmony root and bass notes are both equal to '" <<
       msrDiatonicPitchKindAsStringInLanguage (
-        gGlobalMsrOahGroup->getMsrQuarterTonesPitchesLanguageKind (),
+        gMsrOahGroup->getMsrQuarterTonesPitchesLanguageKind (),
         diatonicPitchKindFromQuarterTonesPitchKind (
           inputLineNumber,
           fCurrentHarmonyRootQuarterTonesPitchKind)) <<
@@ -28390,17 +28390,17 @@ void mxsr2msrTranslator::visitEnd (S_harmony& elt)
   if (gGlobalMxsr2msrOahGroup->getIgnoreHarmonies ()) {
  #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceHarmonies ()) {
-			std::stringstream ss;
+      std::stringstream ss;
 
-			ss <<
+      ss <<
         "Ignoring harmony" <<
         ", line " <<
         inputLineNumber <<
         std::endl;
 
-			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
-				ss.str ());
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
   }
@@ -28408,9 +28408,9 @@ void mxsr2msrTranslator::visitEnd (S_harmony& elt)
    // create the harmony
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceHarmoniesDetails ()) {
-			std::stringstream ss;
+      std::stringstream ss;
 
-			ss <<
+      ss <<
         "Creating a harmony" <<
         ", line " << inputLineNumber << ":" <<
         std::endl;
@@ -28420,65 +28420,65 @@ void mxsr2msrTranslator::visitEnd (S_harmony& elt)
       const int fieldWidth = 32;
 
       gLog << std::left <<
-        std::setw (fieldWidth) << "fCurrentPart" << " = " <<
+        std::setw (fieldWidth) << "fCurrentPart" << ": " <<
         fCurrentPart->getPartCombinedName () <<
         std::endl <<
         /* JMI
-        std::setw (fieldWidth) << "harmoniesVoice" << " = " <<
+        std::setw (fieldWidth) << "harmoniesVoice" << ": " <<
         harmoniesVoice->getVoiceName () <<
         std::endl <<
         */
 
-        std::setw (fieldWidth) << "fCurrentHarmonyRootDiatonicPitch" << " = " <<
+        std::setw (fieldWidth) << "fCurrentHarmonyRootDiatonicPitch" << ": " <<
         msrDiatonicPitchKindAsStringInLanguage (
-          gGlobalMsrOahGroup->getMsrQuarterTonesPitchesLanguageKind (),
+          gMsrOahGroup->getMsrQuarterTonesPitchesLanguageKind (),
           fCurrentHarmonyRootDiatonicPitchKind) <<
         std::endl <<
-        std::setw (fieldWidth) << "fCurrentHarmonyRootAlteration" << " = " <<
+        std::setw (fieldWidth) << "fCurrentHarmonyRootAlteration" << ": " <<
         msrAlterationKindAsString(
           fCurrentHarmonyRootAlterationKind) <<
         std::endl <<
 
-        std::setw (fieldWidth) << "fCurrentHarmonyKind" << " = " <<
+        std::setw (fieldWidth) << "fCurrentHarmonyKind" << ": " <<
         msrHarmonyKindAsString (
           fCurrentHarmonyKind) <<
         std::endl <<
-        std::setw (fieldWidth) << "fCurrentHarmonyKindText" << " = " <<
+        std::setw (fieldWidth) << "fCurrentHarmonyKindText" << ": " <<
         fCurrentHarmonyKindText <<
         std::endl <<
 
-        std::setw (fieldWidth) << "fCurrentHarmonyInversion" << " = " <<
+        std::setw (fieldWidth) << "fCurrentHarmonyInversion" << ": " <<
         fCurrentHarmonyInversion <<
         std::endl <<
 
-        std::setw (fieldWidth) << "fCurrentHarmonyBassDiatonicPitch" << " = " <<
+        std::setw (fieldWidth) << "fCurrentHarmonyBassDiatonicPitch" << ": " <<
         msrDiatonicPitchKindAsStringInLanguage (
-          gGlobalMsrOahGroup->getMsrQuarterTonesPitchesLanguageKind (),
+          gMsrOahGroup->getMsrQuarterTonesPitchesLanguageKind (),
           fCurrentHarmonyBassDiatonicPitchKind) <<
         std::endl <<
 
-        std::setw (fieldWidth) << "fCurrentHarmonyBassAlteration" << " = " <<
+        std::setw (fieldWidth) << "fCurrentHarmonyBassAlteration" << ": " <<
         msrAlterationKindAsString(
           fCurrentHarmonyBassAlterationKind) <<
         std::endl <<
 
-        std::setw (fieldWidth) << "fCurrentNoteSoundingWholeNotes" << " = " <<
+        std::setw (fieldWidth) << "fCurrentNoteSoundingWholeNotes" << ": " <<
         fCurrentNoteSoundingWholeNotes <<
         std::endl <<
 
-        std::setw (fieldWidth) << "fCurrentHarmoniesStaffNumber" << " = " <<
+        std::setw (fieldWidth) << "fCurrentHarmoniesStaffNumber" << ": " <<
         fCurrentHarmoniesStaffNumber <<
         std::endl <<
 
-        std::setw (fieldWidth) << "fCurrentHarmonyWholeNotesOffset" << " = " <<
+        std::setw (fieldWidth) << "fCurrentHarmonyWholeNotesOffset" << ": " <<
         fCurrentHarmonyWholeNotesOffset <<
         std::endl;
 
       --gIndenter;
 
-			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
-				ss.str ());
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -28559,9 +28559,9 @@ void mxsr2msrTranslator::visitStart (S_frame& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_frame" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -28652,9 +28652,9 @@ void mxsr2msrTranslator::visitStart (S_frame_strings& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_frame_strings" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
@@ -28672,9 +28672,9 @@ void mxsr2msrTranslator::visitStart (S_frame_frets& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_frame_frets" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
@@ -28692,9 +28692,9 @@ void mxsr2msrTranslator::visitStart (S_first_fret& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_first_fret" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
@@ -28720,9 +28720,9 @@ void mxsr2msrTranslator::visitStart (S_frame_note& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_frame_note" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
@@ -28748,9 +28748,9 @@ void mxsr2msrTranslator::visitStart (S_barre& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_barre" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -28795,9 +28795,9 @@ void mxsr2msrTranslator::visitEnd (S_frame_note& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_frame_note" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -28831,9 +28831,9 @@ void mxsr2msrTranslator::visitEnd (S_frame& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> End visiting S_frame" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -28880,9 +28880,9 @@ void mxsr2msrTranslator::visitStart (S_figured_bass& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_figured_bass" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -28941,9 +28941,9 @@ void mxsr2msrTranslator::visitStart (S_figure& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_figure" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
@@ -28962,9 +28962,9 @@ void mxsr2msrTranslator::visitStart (S_prefix& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_prefix" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -29024,9 +29024,9 @@ void mxsr2msrTranslator::visitStart (S_figure_number& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_figure_number" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -29060,9 +29060,9 @@ void mxsr2msrTranslator::visitStart (S_suffix& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_suffix" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -29124,9 +29124,9 @@ void mxsr2msrTranslator::visitEnd (S_figure& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> End visiting S_figure" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -29159,9 +29159,9 @@ void mxsr2msrTranslator::visitEnd (S_figured_bass& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> End visiting S_figured_bass" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -29175,9 +29175,9 @@ void mxsr2msrTranslator::visitEnd (S_figured_bass& elt)
   // create the figured bass element
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceFiguredBasses ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "Creating a figured bass" <<
       ", line " << inputLineNumber << ":" <<
       std::endl;
@@ -29233,9 +29233,9 @@ void mxsr2msrTranslator::visitStart (S_harp_pedals& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_harp_pedals" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -29311,9 +29311,9 @@ void mxsr2msrTranslator::visitStart (S_harp_pedals& elt)
   // create the harp pedals tuning
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceHarpPedalsTunings ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "Creating harp pedals tuning:" <<
       std::endl;
 
@@ -29337,9 +29337,9 @@ void mxsr2msrTranslator::visitStart (S_pedal_tuning& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_pedal_tuning" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
@@ -29358,9 +29358,9 @@ void mxsr2msrTranslator::visitStart (S_pedal_step& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_pedal_step" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -29390,9 +29390,9 @@ void mxsr2msrTranslator::visitStart (S_pedal_alter& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_pedal_alter" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -29431,9 +29431,9 @@ void mxsr2msrTranslator::visitEnd (S_pedal_tuning& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> End visiting S_pedal_tuning" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -29459,7 +29459,7 @@ void mxsr2msrTranslator::visitEnd (S_pedal_tuning& elt)
       std::setw (fieldWidth) <<
       "fCurrentHarpPedalDiatonicPitch" << ": " <<
       msrDiatonicPitchKindAsStringInLanguage (
-        gGlobalMsrOahGroup->getMsrQuarterTonesPitchesLanguageKind (),
+        gMsrOahGroup->getMsrQuarterTonesPitchesLanguageKind (),
         fCurrentHarpPedalDiatonicPitchKind) <<
       std::endl <<
       std::setw (fieldWidth) <<
@@ -29486,9 +29486,9 @@ void mxsr2msrTranslator::visitStart( S_damp& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_damp" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -29526,9 +29526,9 @@ void mxsr2msrTranslator::visitStart( S_damp_all& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_damp_all" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -29564,9 +29564,9 @@ void mxsr2msrTranslator::visitStart (S_capo& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_capo" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
@@ -29584,9 +29584,9 @@ void mxsr2msrTranslator::visitStart (S_staff_size& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_staff_size" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
@@ -29608,9 +29608,9 @@ void mxsr2msrTranslator::visitEnd (S_staff_details& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> End visiting S_staff_details" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -29623,25 +29623,25 @@ void mxsr2msrTranslator::visitEnd (S_staff_details& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceStaves ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     const int fieldWidth = 29;
 
     ss << std::left <<
       std::setw (fieldWidth) <<
-      "fCurrentStaffLinesNumber" << " = " <<
+      "fCurrentStaffLinesNumber" << ": " <<
       fCurrentStaffLinesNumber <<
       std::endl <<
       std::setw (fieldWidth) <<
-      "fStaffDetailsStaffNumber" << " = " <<
+      "fStaffDetailsStaffNumber" << ": " <<
       fStaffDetailsStaffNumber <<
       std::endl <<
       std::setw (fieldWidth) <<
-      "fCurrentStaffDetailsCapo" << " = " <<
+      "fCurrentStaffDetailsCapo" << ": " <<
       fCurrentStaffDetailsCapo <<
       std::endl <<
       std::setw (fieldWidth) <<
-      "fCurrentStaffDetailsStaffSize" << " = " <<
+      "fCurrentStaffDetailsStaffSize" << ": " <<
       fCurrentStaffDetailsStaffSize <<
       std::endl;
 
@@ -29688,9 +29688,9 @@ void mxsr2msrTranslator::visitStart (S_scordatura& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_scordatura" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -29734,9 +29734,9 @@ void mxsr2msrTranslator::visitStart (S_accord& elt)
     elt->getInputLineNumber ();
 
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_accord" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -29775,9 +29775,9 @@ void mxsr2msrTranslator::visitEnd (S_accord& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> End visiting S_accord" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -29811,9 +29811,9 @@ void mxsr2msrTranslator::visitEnd (S_scordatura& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> End visiting S_scordatura" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
@@ -29836,9 +29836,9 @@ void mxsr2msrTranslator::visitStart (S_instrument_sound& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_instrument_sound" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
@@ -29855,9 +29855,9 @@ void mxsr2msrTranslator::visitStart (S_virtual_instrument& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_virtual_instrument" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
@@ -29874,9 +29874,9 @@ void mxsr2msrTranslator::visitStart (S_midi_device& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_midi_device" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
@@ -29897,9 +29897,9 @@ void mxsr2msrTranslator::visitStart (S_midi_instrument& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
-		ss <<
+    ss <<
       "--> Start visiting S_midi_instrument" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
@@ -29937,10 +29937,10 @@ void mxsr2msrTranslator::visitStart (S_midi_instrument& elt)
       const int fieldWidth = 31;
 
       gLog << std::left <<
-        std::setw (fieldWidth) << "fCurrentPart" << " = " <<
+        std::setw (fieldWidth) << "fCurrentPart" << ": " <<
         fCurrentPart->getPartCombinedName () <<
         std::endl <<
-        std::setw (fieldWidth) << "fCurrentFiguredBassSoundingWholeNotes" << " = " <<
+        std::setw (fieldWidth) << "fCurrentFiguredBassSoundingWholeNotes" << ": " <<
         fCurrentFiguredBassSoundingWholeNotes <<
         std::endl;
 
@@ -30009,11 +30009,11 @@ part-symbol
       " we have:" <<
       std::endl <<
       std::setw (fieldWidth) <<
-      "--> fCurrentMusicXMLStaffNumber" << " = " <<
+      "--> fCurrentMusicXMLStaffNumber" << ": " <<
       fCurrentMusicXMLStaffNumber <<
       std::endl <<
       std::setw (fieldWidth) <<
-      "--> fCurrentMusicXMLVoiceNumber" << " = " <<
+      "--> fCurrentMusicXMLVoiceNumber" << ": " <<
       fCurrentMusicXMLVoiceNumber <<
       std::endl <<
       std::setw (fieldWidth) <<
@@ -30045,10 +30045,10 @@ part-symbol
     const int fieldWidth = 27;
 
     gLog << std::left <<
-      std::setw (fieldWidth) << "--> fCurrentMusicXMLStaffNumber" << " = " <<
+      std::setw (fieldWidth) << "--> fCurrentMusicXMLStaffNumber" << ": " <<
       fCurrentMusicXMLStaffNumber <<
       std::endl <<
-      std::setw (fieldWidth) << "--> fCurrentMusicXMLVoiceNumber" << " = " <<
+      std::setw (fieldWidth) << "--> fCurrentMusicXMLVoiceNumber" << ": " <<
       fCurrentMusicXMLVoiceNumber <<
       std::endl <<
       std::setw (fieldWidth) << "--> current voice" << " = \"" <<

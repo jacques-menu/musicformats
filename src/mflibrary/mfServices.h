@@ -26,6 +26,42 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
+enum class mfServiceKind {
+  // a given pass may have different IDs depending on the service
+  kMfService_UNKNOWN,
+
+  kMfService_xml2ly,
+  kMfService_xml2brl,
+  kMfService_xml2xml,
+  kMfService_xml2gmn,
+
+  kMfService_msdl,
+  kMfService_mfsl,
+
+  kMfService_ischeme
+};
+
+std::string mfServiceKindAsString (
+  mfServiceKind serviceKind);
+
+std::ostream& operator << (std::ostream& os, const mfServiceKind elt);
+
+EXP mfIndentedStringStream& operator << (
+  mfIndentedStringStream& iss, const mfServiceKind& elt);
+
+mfServiceKind mfServiceKindFromString (
+  const std::string& theString);
+
+extern std::map<std::string, mfServiceKind>
+  gGlobalMusicFormatsServiceKindsMap;
+
+std::string availableMusicFormatsServiceKinds (size_t namesListMaxLength);
+
+void initializeMusicFormatsServiceKindsMap ();
+
+void initializeMusicFormatsServices ();
+
+//______________________________________________________________________________
 class EXP mfService : public smartable
 {
   public:
@@ -223,7 +259,7 @@ EXP std::ostream& operator << (std::ostream& os, const S_mfServiceRunData& elt);
 
 //________________________________________________________________________
 // hidden global service variable
-EXP void setGlobalService (S_mfService service);
+EXP void setGlobalService (mfServiceKind serviceKind);
 
 EXP S_mfService getGlobalService ();
 
@@ -237,6 +273,9 @@ EXP S_mfServiceRunData getGlobalServiceRunData ();
 
 // a handy shortcut
 #define gServiceRunData getGlobalServiceRunData ()
+
+//________________________________________________________________________
+EXP void initializeServices ();
 
 
 }

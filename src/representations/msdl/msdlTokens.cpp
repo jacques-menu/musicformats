@@ -299,7 +299,7 @@ std::string msdlTokenKindAsMsdlString (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsdl2msrOahGroup->getTraceTokens ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "==> msdlTokenKindAsMsdlString()" <<
@@ -712,7 +712,7 @@ S_msdlTokenKindsSet msdlTokenKindsSet::createClone ()
 
 #ifdef MF_TRACE_IS_ENABLED
   if (false && gGlobalMsdl2msrOahGroup->getTraceTokens ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "<== createClone()" <<
@@ -911,7 +911,7 @@ EXP S_msdlTokenKindsSet operator+ (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (false && gGlobalMsdl2msrOahGroup->getTraceTokens ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "<== S_msdlTokenKindsSet operator+()" <<
@@ -939,7 +939,7 @@ EXP S_msdlTokenKindsSet operator+ (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (false && gGlobalMsdl2msrOahGroup->getTraceTokens ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "<== S_msdlTokenKindsSet operator+()" <<
@@ -1628,7 +1628,7 @@ std::string msdlToken::asMsdlString (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMsdl2msrOahGroup->getTraceTokens ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "==> asMsdlString()" <<

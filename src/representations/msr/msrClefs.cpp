@@ -418,7 +418,7 @@ S_msrClef msrClef::createClefFromString (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceNotes ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating clef from string \"" <<
@@ -440,7 +440,7 @@ S_msrClef msrClef::createClefFromString (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "regularExpression = " <<
@@ -462,7 +462,7 @@ S_msrClef msrClef::createClefFromString (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "There are " << smSize << " matches" <<
@@ -511,7 +511,7 @@ S_msrClef msrClef::createClefFromString (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "clefName = \"" <<
@@ -606,7 +606,7 @@ Bool msrClef::isEqualTo (S_msrClef otherClef) const
 void msrClef::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -625,7 +625,7 @@ void msrClef::acceptIn (basevisitor* v)
         S_msrClef elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -644,7 +644,7 @@ void msrClef::acceptIn (basevisitor* v)
 void msrClef::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -663,7 +663,7 @@ void msrClef::acceptOut (basevisitor* v)
         S_msrClef elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<

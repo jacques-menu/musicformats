@@ -95,7 +95,7 @@ msdlParser::msdlParser (std::istream& inputStream)
 
   // pitches language
   fPitchesLanguageKind =
-    gGlobalMsrOahGroup->
+    gMsrOahGroup->
       getMsrQuarterTonesPitchesLanguageKind ();
 
   // pitches octaves
@@ -420,7 +420,7 @@ void msdlParser::fetchNextToken ()
 
 #ifdef MF_TRACE_IS_ENABLED
   if (fTraceSyntax) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       std::endl <<
@@ -1018,7 +1018,7 @@ void msdlParser::createIdentificationIfNeeded (int inputLineNumber)
 
 #ifdef MF_TRACE_IS_ENABLED
     if (fTraceSyntax) {
-	  	std::stringstream ss;
+      std::stringstream ss;
 
       ss <<
         "--- createIdentificationIfNeeded()" <<
@@ -1418,7 +1418,7 @@ void msdlParser::parse ()
 
 #ifdef MF_TRACE_IS_ENABLED
     if (fTraceSyntax) {
-	  	std::stringstream ss;
+      std::stringstream ss;
 
       ss <<
         "==> parse()" <<
@@ -1467,7 +1467,7 @@ void msdlParser::parse ()
 #endif // MF_TRACE_IS_ENABLED
 
     // should we display the MSR score?
-    if (gGlobalMsrOahGroup->getDisplayMsr ()) { // JMI CAFE
+    if (gMsrOahGroup->getDisplayMsr ()) { // JMI CAFE
       gLog <<
         std::endl <<
         "*** Built MSR score: ***" <<
@@ -1583,7 +1583,7 @@ void msdlParser::Identification (S_msdlTokenKindsSet stopperTokensSet)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (fTraceSyntax) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       std::endl <<
@@ -1635,7 +1635,7 @@ void msdlParser::Identification (S_msdlTokenKindsSet stopperTokensSet)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (fTraceSyntax) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       std::endl <<
@@ -1664,7 +1664,7 @@ void msdlParser::Title (S_msdlTokenKindsSet stopperTokensSet)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (fTraceSyntax) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       std::endl <<
@@ -1695,7 +1695,7 @@ void msdlParser::Title (S_msdlTokenKindsSet stopperTokensSet)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (fTraceSyntax) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "=== Title()" <<
@@ -1727,7 +1727,7 @@ void msdlParser::Title (S_msdlTokenKindsSet stopperTokensSet)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (fTraceSyntax) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       std::endl <<
@@ -1756,7 +1756,7 @@ void msdlParser::Composer (S_msdlTokenKindsSet stopperTokensSet)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (fTraceSyntax) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       std::endl <<
@@ -1788,7 +1788,7 @@ void msdlParser::Composer (S_msdlTokenKindsSet stopperTokensSet)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (fTraceSyntax) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "=== Composer()" <<
@@ -1820,7 +1820,7 @@ void msdlParser::Composer (S_msdlTokenKindsSet stopperTokensSet)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (fTraceSyntax) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "=================================================================" <<
@@ -1848,7 +1848,7 @@ void msdlParser::Opus (S_msdlTokenKindsSet stopperTokensSet)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (fTraceSyntax) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       std::endl <<
@@ -1880,7 +1880,7 @@ void msdlParser::Opus (S_msdlTokenKindsSet stopperTokensSet)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (fTraceSyntax) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "=== Opus()" <<
@@ -1912,7 +1912,7 @@ void msdlParser::Opus (S_msdlTokenKindsSet stopperTokensSet)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (fTraceSyntax) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       std::endl <<
@@ -1949,7 +1949,7 @@ void msdlParser::Identifier (S_msdlTokenKindsSet stopperTokensSet)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (fTraceSyntax) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       std::endl <<
@@ -1975,7 +1975,7 @@ void msdlParser::Identifier (S_msdlTokenKindsSet stopperTokensSet)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (fTraceSyntax) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       std::endl <<
@@ -2004,7 +2004,7 @@ void msdlParser::Pitches (S_msdlTokenKindsSet stopperTokensSet)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (fTraceSyntax) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       std::endl <<
@@ -2068,7 +2068,7 @@ void msdlParser::Pitches (S_msdlTokenKindsSet stopperTokensSet)
         ss <<
           "=== Pitches()" <<
           ", fPitchesLanguageKind: \"" <<
-          msrQuarterTonesPitchesLanguageKindAsString (fPitchesLanguageKind) <<
+          fPitchesLanguageKind <<
           "\"" <<
           std::endl;
 
@@ -2090,7 +2090,7 @@ void msdlParser::Pitches (S_msdlTokenKindsSet stopperTokensSet)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (fTraceSyntax) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       std::endl <<
@@ -2119,7 +2119,7 @@ void msdlParser::Octaves (S_msdlTokenKindsSet stopperTokensSet)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (fTraceSyntax) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       std::endl <<
@@ -2183,7 +2183,7 @@ void msdlParser::Octaves (S_msdlTokenKindsSet stopperTokensSet)
         ss <<
           "=== Octaves()" <<
           ", fPitchesLanguageKind: \"" <<
-          msrQuarterTonesPitchesLanguageKindAsString (fPitchesLanguageKind) <<
+          fPitchesLanguageKind <<
           "\"" <<
           std::endl;
 
@@ -2205,7 +2205,7 @@ void msdlParser::Octaves (S_msdlTokenKindsSet stopperTokensSet)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (fTraceSyntax) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       std::endl <<
@@ -2234,7 +2234,7 @@ void msdlParser::PitchesLanguage (S_msdlTokenKindsSet stopperTokensSet)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (fTraceSyntax) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       std::endl <<
@@ -2260,7 +2260,7 @@ void msdlParser::PitchesLanguage (S_msdlTokenKindsSet stopperTokensSet)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (fTraceSyntax) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       std::endl <<
@@ -2289,7 +2289,7 @@ void msdlParser::PitchesOctaveEntry (S_msdlTokenKindsSet stopperTokensSet)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (fTraceSyntax) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       std::endl <<
@@ -2315,7 +2315,7 @@ void msdlParser::PitchesOctaveEntry (S_msdlTokenKindsSet stopperTokensSet)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (fTraceSyntax) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       std::endl <<
@@ -2344,7 +2344,7 @@ void msdlParser::Anacrusis (S_msdlTokenKindsSet stopperTokensSet)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (fTraceSyntax) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       std::endl <<
@@ -2371,7 +2371,7 @@ void msdlParser::Anacrusis (S_msdlTokenKindsSet stopperTokensSet)
 //  if (fCurrentTokenKind == msdlTokenKind::kTokenAnacrusis) {
 #ifdef MF_TRACE_IS_ENABLED
     if (fTraceSyntax) {
-	  	std::stringstream ss;
+      std::stringstream ss;
 
       ss <<
         "=== Anacrusis()" <<
@@ -2396,7 +2396,7 @@ void msdlParser::Anacrusis (S_msdlTokenKindsSet stopperTokensSet)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (fTraceSyntax) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       std::endl <<
@@ -2425,7 +2425,7 @@ void msdlParser::Structure (S_msdlTokenKindsSet stopperTokensSet)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (fTraceSyntax) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       std::endl <<
@@ -2480,7 +2480,7 @@ void msdlParser::Structure (S_msdlTokenKindsSet stopperTokensSet)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (fTraceSyntax) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       std::endl <<
@@ -2509,7 +2509,7 @@ void msdlParser::Book (S_msdlTokenKindsSet stopperTokensSet)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (fTraceSyntax) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       std::endl <<
@@ -2565,7 +2565,7 @@ void msdlParser::Book (S_msdlTokenKindsSet stopperTokensSet)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (fTraceSyntax) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       std::endl <<
@@ -2594,7 +2594,7 @@ void msdlParser::Score (S_msdlTokenKindsSet stopperTokensSet)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (fTraceSyntax) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       std::endl <<
@@ -2647,7 +2647,7 @@ void msdlParser::Score (S_msdlTokenKindsSet stopperTokensSet)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (fTraceSyntax) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       std::endl <<
@@ -2676,7 +2676,7 @@ void msdlParser::PartGroup (S_msdlTokenKindsSet stopperTokensSet)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (fTraceSyntax) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       std::endl <<
@@ -2726,7 +2726,7 @@ void msdlParser::PartGroup (S_msdlTokenKindsSet stopperTokensSet)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (fTraceSyntax) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       std::endl <<
@@ -2755,7 +2755,7 @@ void msdlParser::Part (S_msdlTokenKindsSet stopperTokensSet)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (fTraceSyntax) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       std::endl <<
@@ -2802,7 +2802,7 @@ void msdlParser::Part (S_msdlTokenKindsSet stopperTokensSet)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (fTraceSyntax) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       std::endl <<
@@ -2831,7 +2831,7 @@ void msdlParser::Music (S_msdlTokenKindsSet stopperTokensSet)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (fTraceSyntax) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       std::endl <<
@@ -2865,7 +2865,7 @@ void msdlParser::Music (S_msdlTokenKindsSet stopperTokensSet)
 
 #ifdef MF_TRACE_IS_ENABLED
     if (fTraceSyntax) {
-	  	std::stringstream ss;
+      std::stringstream ss;
 
       ss <<
         "=== Music()" <<
@@ -2917,7 +2917,7 @@ void msdlParser::Music (S_msdlTokenKindsSet stopperTokensSet)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (fTraceSyntax) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "=================================================================" <<
@@ -2945,7 +2945,7 @@ void msdlParser::Fragment (S_msdlTokenKindsSet stopperTokensSet)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (fTraceSyntax) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       std::endl <<
@@ -3035,7 +3035,7 @@ void msdlParser::Fragment (S_msdlTokenKindsSet stopperTokensSet)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (fTraceSyntax) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       std::endl <<
@@ -3064,7 +3064,7 @@ void msdlParser::MeasuresSequence (S_msdlTokenKindsSet stopperTokensSet)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (fTraceSyntax) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       std::endl <<
@@ -3100,7 +3100,7 @@ void msdlParser::MeasuresSequence (S_msdlTokenKindsSet stopperTokensSet)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (fTraceSyntax) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "<-- MeasuresSequence()" <<
@@ -3128,7 +3128,7 @@ void msdlParser::Measure (S_msdlTokenKindsSet stopperTokensSet)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (fTraceSyntax) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       std::endl <<
@@ -3182,7 +3182,7 @@ void msdlParser::Measure (S_msdlTokenKindsSet stopperTokensSet)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (fTraceSyntax) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "<-- Measure()" <<
@@ -3210,7 +3210,7 @@ void msdlParser::MeasureNumber (S_msdlTokenKindsSet stopperTokensSet)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (fTraceSyntax) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       std::endl <<
@@ -3246,7 +3246,7 @@ void msdlParser::MeasureNumber (S_msdlTokenKindsSet stopperTokensSet)
 
 #ifdef MF_TRACE_IS_ENABLED
     if (fTraceSyntax) {
-	  	std::stringstream ss;
+      std::stringstream ss;
 
       ss <<
         "=== MeasureNumber()" <<
@@ -3276,7 +3276,7 @@ void msdlParser::MeasureNumber (S_msdlTokenKindsSet stopperTokensSet)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (fTraceSyntax) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       std::endl <<
@@ -3305,7 +3305,7 @@ void msdlParser::Clef (S_msdlTokenKindsSet stopperTokensSet)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (fTraceSyntax) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       std::endl <<
@@ -3333,7 +3333,7 @@ void msdlParser::Clef (S_msdlTokenKindsSet stopperTokensSet)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (fTraceSyntax) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "<-- Clef()" <<
@@ -3361,7 +3361,7 @@ void msdlParser::Key (S_msdlTokenKindsSet stopperTokensSet)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (fTraceSyntax) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       std::endl <<
@@ -3389,7 +3389,7 @@ void msdlParser::Key (S_msdlTokenKindsSet stopperTokensSet)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (fTraceSyntax) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "<-- Key()" <<
@@ -3417,7 +3417,7 @@ void msdlParser::Time (S_msdlTokenKindsSet stopperTokensSet)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (fTraceSyntax) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       std::endl <<
@@ -3445,7 +3445,7 @@ void msdlParser::Time (S_msdlTokenKindsSet stopperTokensSet)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (fTraceSyntax) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "<-- Time()" <<
@@ -3473,7 +3473,7 @@ void msdlParser::Note (S_msdlTokenKindsSet stopperTokensSet)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (fTraceSyntax) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       std::endl <<
@@ -3510,7 +3510,7 @@ void msdlParser::Note (S_msdlTokenKindsSet stopperTokensSet)
 
 #ifdef MF_TRACE_IS_ENABLED
     if (fTraceSyntax) {
-	  	std::stringstream ss;
+      std::stringstream ss;
 
       ss <<
         "=== Note()" <<
@@ -3530,7 +3530,7 @@ void msdlParser::Note (S_msdlTokenKindsSet stopperTokensSet)
 
 #ifdef MF_TRACE_IS_ENABLED
     if (false) { // JMI
-	  	std::stringstream ss;
+      std::stringstream ss;
 
       ss <<
         "=== Note()" <<
@@ -3552,7 +3552,7 @@ void msdlParser::Note (S_msdlTokenKindsSet stopperTokensSet)
   // is there an octave indication?
 #ifdef MF_TRACE_IS_ENABLED
   if (false) { // JMI
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       std::endl <<
@@ -3579,7 +3579,7 @@ void msdlParser::Note (S_msdlTokenKindsSet stopperTokensSet)
   // fetch the note duration?
 #ifdef MF_TRACE_IS_ENABLED
   if (false) { // JMI
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       std::endl <<
@@ -3625,7 +3625,7 @@ void msdlParser::Note (S_msdlTokenKindsSet stopperTokensSet)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (fTraceSyntax) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "=== Note()" <<
@@ -3650,7 +3650,7 @@ void msdlParser::Note (S_msdlTokenKindsSet stopperTokensSet)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (fTraceSyntax) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "<-- Note()" <<
@@ -3678,7 +3678,7 @@ void msdlParser::Pitch (S_msdlTokenKindsSet stopperTokensSet)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (fTraceSyntax) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       std::endl <<
@@ -3708,7 +3708,7 @@ void msdlParser::Pitch (S_msdlTokenKindsSet stopperTokensSet)
 
 #ifdef MF_TRACE_IS_ENABLED
     if (fTraceSyntax) {
-	  	std::stringstream ss;
+      std::stringstream ss;
 
       ss <<
         "=== Pitch()" <<
@@ -3733,7 +3733,7 @@ void msdlParser::Pitch (S_msdlTokenKindsSet stopperTokensSet)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (fTraceSyntax) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "<-- Pitch()" <<
@@ -3763,7 +3763,7 @@ msrOctaveKind msdlParser::OctaveIndication (S_msdlTokenKindsSet stopperTokensSet
 
 #ifdef MF_TRACE_IS_ENABLED
   if (fTraceSyntax) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       std::endl <<
@@ -3809,7 +3809,7 @@ msrOctaveKind msdlParser::OctaveIndication (S_msdlTokenKindsSet stopperTokensSet
 
 #ifdef MF_TRACE_IS_ENABLED
     if (fTraceSyntax) {
-	  	std::stringstream ss;
+      std::stringstream ss;
 
       ss <<
         "=== OctaveIndication()" <<
@@ -3848,7 +3848,7 @@ msrOctaveKind msdlParser::OctaveIndication (S_msdlTokenKindsSet stopperTokensSet
 
 #ifdef MF_TRACE_IS_ENABLED
     if (fTraceSyntax) {
-	  	std::stringstream ss;
+      std::stringstream ss;
 
       ss <<
         "=== OctaveIndication()" <<
@@ -3869,7 +3869,7 @@ msrOctaveKind msdlParser::OctaveIndication (S_msdlTokenKindsSet stopperTokensSet
 
 #ifdef MF_TRACE_IS_ENABLED
   if (fTraceSyntax) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "<-- OctaveIndication()" <<
@@ -3899,7 +3899,7 @@ void msdlParser::NoteNotesDuration (S_msdlTokenKindsSet stopperTokensSet)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (fTraceSyntax) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       std::endl <<
@@ -4031,7 +4031,7 @@ void msdlParser::NoteNotesDuration (S_msdlTokenKindsSet stopperTokensSet)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (fTraceSyntax) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "<-- NoteNotesDuration()" <<

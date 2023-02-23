@@ -189,7 +189,7 @@ msrBassFigure::msrBassFigure (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceFiguredBasses ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating bass figure " <<
@@ -211,7 +211,7 @@ S_msrBassFigure msrBassFigure::createFigureNewbornClone (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceFiguredBasses ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating a newborn clone of bass figure " <<
@@ -249,7 +249,7 @@ S_msrBassFigure msrBassFigure::createFigureDeepClone (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceFiguredBasses ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating a deep clone of bass figure " <<
@@ -285,7 +285,7 @@ S_msrBassFigure msrBassFigure::createFigureDeepClone (
 void msrBassFigure::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -304,7 +304,7 @@ void msrBassFigure::acceptIn (basevisitor* v)
         S_msrBassFigure elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -323,7 +323,7 @@ void msrBassFigure::acceptIn (basevisitor* v)
 void msrBassFigure::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -342,7 +342,7 @@ void msrBassFigure::acceptOut (basevisitor* v)
         S_msrBassFigure elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -513,7 +513,7 @@ msrFiguredBass::msrFiguredBass (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceFiguredBasses ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating figuredBass " <<
@@ -535,7 +535,7 @@ S_msrFiguredBass msrFiguredBass::createFiguredBassNewbornClone (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceFiguredBasses ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating a newborn clone of figured bass " <<
@@ -578,7 +578,7 @@ S_msrFiguredBass msrFiguredBass::createFiguredBassDeepClone ()
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceFiguredBasses ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating a deep clone of figuredBass " <<
@@ -621,7 +621,7 @@ void msrFiguredBass::setFiguredBassUpLinkToNote (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceFiguredBasses ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "==> Setting the uplink to note of figured bass " <<
@@ -681,7 +681,7 @@ void msrFiguredBass::appendFigureToFiguredBass (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceFiguredBasses ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending bass figure " << bassFigure->asString () <<
@@ -702,7 +702,7 @@ void msrFiguredBass::appendFigureToFiguredBass (
 void msrFiguredBass::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -721,7 +721,7 @@ void msrFiguredBass::acceptIn (basevisitor* v)
         S_msrFiguredBass elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -740,7 +740,7 @@ void msrFiguredBass::acceptIn (basevisitor* v)
 void msrFiguredBass::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -759,7 +759,7 @@ void msrFiguredBass::acceptOut (basevisitor* v)
         S_msrFiguredBass elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -853,6 +853,101 @@ std::string msrFiguredBass::asString () const
       ss << ' ';
     } // for
   ss << ']';
+  }
+
+  // print the figured bass measure position
+  ss <<
+    ", measurePosition: " << fMeasurePosition;
+
+/* JMI
+  if (fFiguredBassUpLinkToPart) { // JMI ???
+    ss <<
+      ":" <<
+      wholeNotesAsMsrString (
+        fInputLineNumber,
+        fFiguredBassSoundingWholeNotes);
+  }
+*/
+
+  // print the figured bass voice position
+//   ss <<
+//     ", voicePosition: " << fVoicePosition;
+
+  ss <<
+    ", line " << fInputLineNumber <<
+    ']';
+
+  return ss.str ();
+}
+
+std::string msrFiguredBass::asShortStringForMeasuresSlices () const
+{
+  std::stringstream ss;
+
+  ss <<
+    "[FiguredBass" <<
+    ", " << std::hex << std::showbase << this << std::dec <<
+    ", fMeasurePosition: " <<
+    fMeasurePosition <<
+    ", fSoundingWholeNotes: " <<
+    wholeNotesAsMsrString (
+      fInputLineNumber,
+      fSoundingWholeNotes) <<
+    ", fFiguredBassDisplayWholeNotes: " <<
+    wholeNotesAsMsrString (
+      fInputLineNumber,
+      fFiguredBassDisplayWholeNotes);
+
+  ss <<
+    ", fFiguredBassUpLinkToNote: ";
+    if (fFiguredBassUpLinkToNote) {
+      ss <<
+        fFiguredBassUpLinkToNote->asString ();
+    }
+    else {
+      ss << "[NONE]";
+    }
+
+  ss <<
+    ", fFiguredBassUpLinkToMeasure: ";
+    if (fFiguredBassUpLinkToMeasure) {
+      ss <<
+        fFiguredBassUpLinkToMeasure->getMeasureNumber ();
+    }
+    else {
+      ss << "[NONE]";
+    }
+
+  ss <<
+    ", fFiguredBassUpLinkToVoice" << ": ";
+  if (fFiguredBassUpLinkToVoice) {
+    ss << fFiguredBassUpLinkToVoice->asString ();
+  }
+  else {
+    ss << "[NONE]";
+  }
+  ss << std::endl;
+
+  ss <<
+    ", fFiguredBassParenthesesKind: " <<
+    fFiguredBassParenthesesKind <<
+
+    ", fFiguredBassTupletFactor: " <<
+    fFiguredBassTupletFactor.asString ();
+
+  if (fFiguredBassFiguresList.size ()) {
+    ss << ", fFiguredBassFiguresList: [";
+
+    std::list<S_msrBassFigure>::const_iterator
+      iBegin = fFiguredBassFiguresList.begin (),
+      iEnd   = fFiguredBassFiguresList.end (),
+      i      = iBegin;
+
+    for ( ; ; ) {
+      ss << (*i)->asString ();
+      if (++i == iEnd) break;
+      ss << ' ';
+    } // for
   }
 
   // print the figured bass measure position

@@ -31,7 +31,7 @@ S_mfcRepresentationComponent createMsrRepresentationComponent ()
 
 #ifdef MF_TRACE_IS_ENABLED
     if (gEarlyOptions.getEarlyTraceComponents ()) {
-	  	std::stringstream ss;
+      std::stringstream ss;
 
       ss <<
         "Initializing MSR format component" <<

@@ -18,15 +18,15 @@ namespace MusicFormats
 
 //_______________________________________________________________________________
 EXP S_msrScore translateMxsrToMsrSkeleton (
-  Sxmlelement        theMxsr,
-  S_msrOahGroup&     msrOpts,
-  mfPassIDKind       passIDKind,
-  const std::string& passDescription);
+  const Sxmlelement&   theMxsr,
+  const S_msrOahGroup& msrOpts,
+  mfPassIDKind         passIDKind,
+  const std::string&   passDescription);
 
 //_______________________________________________________________________________
 // EXP void displayMsrScoreSkeleton ( // UNUSED JMI v0.9.66
 //   S_msrOahGroup&     msrOpts,
-//   S_msrScore         theMsrScore,
+//   const S_msrScore&  theMsrScore,
 //   mfPassIDKind       passIDKind,
 //   const std::string& passDescription);
 

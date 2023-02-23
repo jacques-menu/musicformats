@@ -25,7 +25,7 @@ S_mfcPassComponent createMsdl2msrComponent ()
 
 #ifdef MF_TRACE_IS_ENABLED
     if (gEarlyOptions.getEarlyTraceComponents ()) {
-	  	std::stringstream ss;
+      std::stringstream ss;
 
       ss <<
         "Creating the msdl2msr pass component" <<

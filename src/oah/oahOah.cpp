@@ -75,7 +75,7 @@ void languageOahAtom::applyAtomWithValue (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Handling option name '" <<
@@ -100,7 +100,7 @@ void languageOahAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> languageOahAtom::acceptIn ()" <<
@@ -138,7 +138,7 @@ void languageOahAtom::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> languageOahAtom::acceptOut ()" <<
@@ -176,7 +176,7 @@ void languageOahAtom::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> languageOahAtom::browseData ()" <<
@@ -223,8 +223,8 @@ void languageOahAtom::displayAtomWithVariableOptionsValues (
     case oahEarlyOptionKind::kEarlyOptionNo:
       break;
     case oahEarlyOptionKind::kEarlyOptionYes:
-			os <<
-				", early";
+      os <<
+        ", early";
       break;
   } // switch
   if (fSelected) {
@@ -277,7 +277,7 @@ void insiderOahAtom::applyValueLessAtom (std::ostream& os)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "==> option '" << fetchNames () << "' is a insiderOahAtom" <<
@@ -293,14 +293,14 @@ void insiderOahAtom::applyValueLessAtom (std::ostream& os)
 
   // do nothing more, choosing the insider OAH handler has been done already
 
-	fSelected = true;
+  fSelected = true;
 }
 
 void insiderOahAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> insiderOahAtom::acceptIn ()" <<
@@ -338,7 +338,7 @@ void insiderOahAtom::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> insiderOahAtom::acceptOut ()" <<
@@ -376,7 +376,7 @@ void insiderOahAtom::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> insiderOahAtom::browseData ()" <<
@@ -416,8 +416,8 @@ void insiderOahAtom::displayAtomWithVariableOptionsValues (
     case oahEarlyOptionKind::kEarlyOptionNo:
       break;
     case oahEarlyOptionKind::kEarlyOptionYes:
-			os <<
-				", early";
+      os <<
+        ", early";
       break;
   } // switch
   if (fSelected) {
@@ -470,7 +470,7 @@ void regularOahAtom::applyValueLessAtom (std::ostream& os)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "==> option '" << fetchNames () << "' is a regularOahAtom" <<
@@ -486,14 +486,14 @@ void regularOahAtom::applyValueLessAtom (std::ostream& os)
 
   // do nothing more, choosing the regular OAH handler has been done already
 
-	fSelected = true;
+  fSelected = true;
 }
 
 void regularOahAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> regularOahAtom::acceptIn ()" <<
@@ -531,7 +531,7 @@ void regularOahAtom::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> regularOahAtom::acceptOut ()" <<
@@ -569,7 +569,7 @@ void regularOahAtom::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> regularOahAtom::browseData ()" <<
@@ -609,8 +609,8 @@ void regularOahAtom::displayAtomWithVariableOptionsValues (
     case oahEarlyOptionKind::kEarlyOptionNo:
       break;
     case oahEarlyOptionKind::kEarlyOptionYes:
-			os <<
-				", early";
+      os <<
+        ", early";
       break;
   } // switch
   if (fSelected) {
@@ -678,7 +678,7 @@ void passIDOahAtom::applyAtomWithValue (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Handling option name '" <<
@@ -703,7 +703,7 @@ void passIDOahAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> passIDOahAtom::acceptIn ()" <<
@@ -741,7 +741,7 @@ void passIDOahAtom::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> passIDOahAtom::acceptOut ()" <<
@@ -779,7 +779,7 @@ void passIDOahAtom::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> passIDOahAtom::browseData ()" <<
@@ -820,8 +820,8 @@ void passIDOahAtom::displayAtomWithVariableOptionsValues (
     case oahEarlyOptionKind::kEarlyOptionNo:
       break;
     case oahEarlyOptionKind::kEarlyOptionYes:
-			os <<
-				", early";
+      os <<
+        ", early";
       break;
   } // switch
   if (fSelected) {
@@ -1301,7 +1301,7 @@ void oahOahGroup::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "% ==> oahOahGroup::acceptIn ()" <<
@@ -1339,7 +1339,7 @@ void oahOahGroup::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "% ==> oahOahGroup::acceptOut ()" <<
@@ -1377,7 +1377,7 @@ void oahOahGroup::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "% ==> oahOahGroup::browseData ()" <<
@@ -1489,7 +1489,7 @@ S_oahOahGroup createGlobalOahOahGroup (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating global global OAH group" <<
@@ -1503,7 +1503,7 @@ S_oahOahGroup createGlobalOahOahGroup (
 
   // protect library against multiple initializations
   if (! pGlobalOahOahGroup) {
-    // create the global options group
+    // create the global OAH options group
     pGlobalOahOahGroup =
       oahOahGroup::create (
         serviceName);

@@ -16,9 +16,11 @@
 #endif // WIN32
 
 #include "mfBool.h"
+#include "mfInitialization.h"
 #include "mfMusicformatsErrors.h"
-#include "mfcComponents.h"
 #include "mfTiming.h"
+
+#include "mfcComponents.h"
 
 #include "waeInterface.h"
 #include "oahWae.h"
@@ -27,12 +29,12 @@
 
 #include "oahEarlyOptions.h"
 
-#include "musicxml2lilypondInsiderHandler.h"
-#include "musicxml2lilypondRegularHandler.h"
+#include "musicxml2lilypondInterface.h" // JMI OUT_OF_CONTEXT v0.9.63
 
-#include "musicxml2lilypondInterface.h"
+#include "mfslInterpreterInsiderHandler.h"
+#include "mfslInterpreterRegularHandler.h"
 
-#include "xml2lyInterface.h"
+#include "mfslInterface.h"
 
 #include "waeHandlers.h"
 
@@ -99,6 +101,18 @@ EXP int mfsl (
 //     "getGlobalMusicFormatsVersionNumberAndDate (): " << getGlobalMusicFormatsVersionNumberAndDate () <<
 //     std::endl;
 
+  // initialize common things
+  // ------------------------------------------------------
+
+  initializeMusicFormats ();
+
+  initializeWAE ();
+
+  // register mfsl as current service
+  // ------------------------------------------------------
+
+  setGlobalService (mfServiceKind::kMfService_mfsl);
+
   // apply early options if any
   // ------------------------------------------------------
 
@@ -114,10 +128,10 @@ EXP int mfsl (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
-      serviceName << " xml2ly()" <<
+      serviceName << " mfsl()" <<
       ", insiderOption: " << insiderOption <<
       std::endl;
 
@@ -133,15 +147,16 @@ EXP int mfsl (
   S_oahHandler handler;
 
   try {
-    // create an xml2ly insider OAH handler
+    // create an mfsl insider OAH handler
     // ------------------------------------------------------
 
-    const S_xml2lyInsiderHandler&
+    const S_mfslInterpreterInsiderHandler&
       insiderOahHandler =
-        xml2lyInsiderHandler::create (
+        mfslInterpreterInsiderHandler::create (
           serviceName,
-          serviceName + " insider OAH handler with argc/argv",
-          oahHandlerUsedThruKind::kHandlerUsedThruArgcArgv);
+          serviceName + " insider OAH handler with argc/argv"); // JMI v0.9.67
+//           serviceName + " insider OAH handler with argc/argv",
+//           oahHandlerUsedThruKind::kHandlerUsedThruArgcArgv);
 
     // the OAH handler to be used, a regular handler is the default
     // ------------------------------------------------------
@@ -150,13 +165,13 @@ EXP int mfsl (
       gEarlyOptions.getEarlyInsiderOption ();
 
     if (insiderOption) {
-      // use the insider xml2ly OAH handler
+      // use the insider mfsl OAH handler
       handler = insiderOahHandler;
     }
     else {
-      // create a regular xml2ly OAH handler
+      // create a regular mfsl OAH handler
       handler =
-        xml2lyRegularHandler::create (
+        mfslInterpreterRegularHandler::create (
           serviceName,
           serviceName + " regular OAH handler with argc/argv",
           insiderOahHandler);
@@ -231,7 +246,7 @@ EXP int mfsl (
     std::string separator =
       "%--------------------------------------------------------------";
 
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       serviceName << ": " <<
@@ -362,7 +377,7 @@ EXP int mfsl (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getEarlyTracePasses ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "The command line options and arguments have been analyzed" <<

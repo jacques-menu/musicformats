@@ -25,7 +25,7 @@ S_mfcPassComponent createMxsr2guidoComponent ()
 
 #ifdef MF_TRACE_IS_ENABLED
     if (gEarlyOptions.getEarlyTraceComponents ()) {
-	  	std::stringstream ss;
+      std::stringstream ss;
 
       ss <<
         "Initializing mxsr2guido pass component" <<

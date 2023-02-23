@@ -42,7 +42,7 @@ void msrOah2manPage::visitStart (S_msrRenamePartAtom& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       std::endl <<
@@ -78,7 +78,7 @@ void msrOah2manPage::visitEnd (S_msrRenamePartAtom& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       std::endl <<
@@ -98,7 +98,7 @@ void msrOah2manPage::visitStart (S_msrIgnorePartAtom& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       std::endl <<
@@ -134,7 +134,7 @@ void msrOah2manPage::visitEnd (S_msrIgnorePartAtom& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       std::endl <<
@@ -154,7 +154,7 @@ void msrOah2manPage::visitStart (S_msrKeepPartAtom& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       std::endl <<
@@ -190,7 +190,7 @@ void msrOah2manPage::visitEnd (S_msrKeepPartAtom& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       std::endl <<
@@ -210,7 +210,7 @@ void msrOah2manPage::visitStart (S_msrPitchesLanguageAtom& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       std::endl <<
@@ -246,7 +246,7 @@ void msrOah2manPage::visitEnd (S_msrPitchesLanguageAtom& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       std::endl <<

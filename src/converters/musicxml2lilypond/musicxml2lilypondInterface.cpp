@@ -77,7 +77,7 @@ static mfMusicformatsErrorKind sxmlFile2lilypondWithHandler (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsr ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       std::endl <<
@@ -131,7 +131,7 @@ static mfMusicformatsErrorKind sxmlFile2lilypondWithHandler (
     firstMsrScore =
       translateMxsrToMsrSkeleton (
         theMxsr,
-        gGlobalMsrOahGroup,
+        gMsrOahGroup,
         mfPassIDKind::kMfPassID_2a,
         gLanguage->createAnMSRSqueletonFromTheMXSR ());
   }
@@ -211,7 +211,7 @@ if (false) { // JMI
       secondMsrScore =
         translateMsrToMsrAlongPathToVoice (
           firstMsrScore,
-          gGlobalMsrOahGroup,
+          gMsrOahGroup,
           gGlobalMsr2msrOahGroup,
           mfPassIDKind::kMfPassID_3,
           gLanguage->convertTheFirstMSRIntoASecondMSR (),
@@ -222,7 +222,7 @@ else {
     secondMsrScore =
       translateMsrToMsr (
         firstMsrScore,
-        gGlobalMsrOahGroup,
+        gMsrOahGroup,
         gGlobalMsr2msrOahGroup,
         mfPassIDKind::kMfPassID_3,
         gLanguage->convertTheFirstMSRIntoASecondMSR ());
@@ -263,8 +263,8 @@ else {
     theLpsrScore =
       translateMsrToLpsr (
         secondMsrScore,
-        gGlobalMsrOahGroup,
-        gGlobalLpsrOahGroup,
+        gMsrOahGroup,
+        gLpsrOahGroup,
         mfPassIDKind::kMfPassID_4,
         gLanguage->convertTheSecondMSRIntoAnLPSR (),
         createMusicxml2lilypondConverterComponent ());
@@ -324,8 +324,8 @@ else {
     try {
       translateLpsrToLilypond (
         theLpsrScore,
-        gGlobalMsrOahGroup,
-        gGlobalLpsrOahGroup,
+        gMsrOahGroup,
+        gLpsrOahGroup,
         mfPassIDKind::kMfPassID_5,
         gLanguage->convertTheLPSRIntoLilyPondCode (),
         lilypondStandardOutputStream);
@@ -400,8 +400,8 @@ else {
     try {
       translateLpsrToLilypond (
         theLpsrScore,
-        gGlobalMsrOahGroup,
-        gGlobalLpsrOahGroup,
+        gMsrOahGroup,
+        gLpsrOahGroup,
         mfPassIDKind::kMfPassID_5,
         gLanguage->convertTheLPSRIntoLilyPondCode (),
         lilypondFileOutputStream);
@@ -486,7 +486,7 @@ static mfMusicformatsErrorKind xmlFile2lilypondWithOptionsAndArguments (
   // ------------------------------------------------------
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       handlerOptionsAndArguments;
@@ -507,7 +507,7 @@ static mfMusicformatsErrorKind xmlFile2lilypondWithOptionsAndArguments (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       serviceName << " main()" <<

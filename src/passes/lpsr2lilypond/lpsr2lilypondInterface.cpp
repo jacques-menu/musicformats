@@ -168,8 +168,8 @@ EXP void translateLpsrToLilypondWithHandler (
     try {
       translateLpsrToLilypond (
         theLpsrScore,
-        gGlobalMsrOahGroup,
-        gGlobalLpsrOahGroup,
+        gMsrOahGroup,
+        gLpsrOahGroup,
         passIDKind,
         passDescription,
         lilypondStandardOutputStream);
@@ -241,8 +241,8 @@ EXP void translateLpsrToLilypondWithHandler (
     try {
       translateLpsrToLilypond (
         theLpsrScore,
-        gGlobalMsrOahGroup,
-        gGlobalLpsrOahGroup,
+        gMsrOahGroup,
+        gLpsrOahGroup,
         passIDKind,
         passDescription,
         lilypondFileOutputStream);

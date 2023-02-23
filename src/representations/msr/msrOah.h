@@ -487,7 +487,12 @@ class EXP msrOahGroup : public oahGroup
 typedef SMARTP<msrOahGroup> S_msrOahGroup;
 EXP std::ostream& operator << (std::ostream& os, const S_msrOahGroup& elt);
 
-EXP extern S_msrOahGroup gGlobalMsrOahGroup;
+//______________________________________________________________________________
+// hidden global MSR OAH group variable
+EXP S_msrOahGroup getGlobalMsrOahGroup ();
+
+// a handy shortcut
+#define gMsrOahGroup getGlobalMsrOahGroup ()
 
 //______________________________________________________________________________
 EXP S_msrOahGroup createGlobalMsrOahGroup ();

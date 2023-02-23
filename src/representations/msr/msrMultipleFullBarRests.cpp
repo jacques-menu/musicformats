@@ -35,9 +35,9 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 S_msrMultipleFullBarRests msrMultipleFullBarRests::create (
-	int                 inputLineNumber,
-	int                 multipleFullBarRestsNumber,
-	const S_msrSegment& upLinkToSegment)
+  int                 inputLineNumber,
+  int                 multipleFullBarRestsNumber,
+  const S_msrSegment& upLinkToSegment)
 {
   msrMultipleFullBarRests* o =
     new msrMultipleFullBarRests (
@@ -49,9 +49,9 @@ S_msrMultipleFullBarRests msrMultipleFullBarRests::create (
 }
 
 S_msrMultipleFullBarRests msrMultipleFullBarRests::create (
-	int                 inputLineNumber,
-	const S_msrMeasure& restMeasureClone,
-	const S_msrSegment& upLinkToSegment)
+  int                 inputLineNumber,
+  const S_msrMeasure& restMeasureClone,
+  const S_msrSegment& upLinkToSegment)
 {
   msrMultipleFullBarRests* o =
     new msrMultipleFullBarRests (
@@ -63,9 +63,9 @@ S_msrMultipleFullBarRests msrMultipleFullBarRests::create (
 }
 
 msrMultipleFullBarRests::msrMultipleFullBarRests (
-	int                 inputLineNumber,
-	int                 multipleFullBarRestsNumber,
-	const S_msrSegment& upLinkToSegment)
+  int                 inputLineNumber,
+  int                 multipleFullBarRestsNumber,
+  const S_msrSegment& upLinkToSegment)
     : msrSegmentElement (inputLineNumber)
 {
   fMultipleFullBarRestsUpLinkToSegment = upLinkToSegment;
@@ -76,9 +76,9 @@ msrMultipleFullBarRests::msrMultipleFullBarRests (
 }
 
 msrMultipleFullBarRests::msrMultipleFullBarRests (
-	int                 inputLineNumber,
-	const S_msrMeasure& restMeasureClone,
-	const S_msrSegment& upLinkToSegment)
+  int                 inputLineNumber,
+  const S_msrMeasure& restMeasureClone,
+  const S_msrSegment& upLinkToSegment)
     : msrSegmentElement (inputLineNumber)
 {
   fMultipleFullBarRestsUpLinkToSegment = upLinkToSegment;
@@ -96,7 +96,7 @@ S_msrMultipleFullBarRests msrMultipleFullBarRests::createMultipleFullBarRestsNew
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMultipleFullBarRests ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating a newborn clone of multiple full-bar rests '" <<
@@ -150,7 +150,7 @@ void msrMultipleFullBarRests::setMultipleFullBarRestsNextMeasureNumber (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMultipleFullBarRests ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Setting multiple full-bar rests next measure number to '" <<
@@ -225,7 +225,7 @@ void msrMultipleFullBarRests::setMultipleFullBarRestsLastMeasurePuristMeasureNum
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMultipleFullBarRests ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Setting multiple full-bar rests last measure purist number to '" <<
@@ -271,7 +271,7 @@ void msrMultipleFullBarRests::appendMeasureToMultipleFullBarRests (
 //         measureClone);
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMultipleFullBarRests ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending measure "<<
@@ -321,7 +321,7 @@ void msrMultipleFullBarRests::appendMeasureToMultipleFullBarRests (
 void msrMultipleFullBarRests::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -340,7 +340,7 @@ void msrMultipleFullBarRests::acceptIn (basevisitor* v)
         S_msrMultipleFullBarRests elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -359,7 +359,7 @@ void msrMultipleFullBarRests::acceptIn (basevisitor* v)
 void msrMultipleFullBarRests::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -378,7 +378,7 @@ void msrMultipleFullBarRests::acceptOut (basevisitor* v)
         S_msrMultipleFullBarRests elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -397,7 +397,7 @@ void msrMultipleFullBarRests::acceptOut (basevisitor* v)
 void msrMultipleFullBarRests::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -419,8 +419,8 @@ void msrMultipleFullBarRests::browseData (basevisitor* v)
   } // for
 
 #ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% <== msrMultipleFullBarRests::browseData ()" <<

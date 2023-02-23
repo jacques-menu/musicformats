@@ -55,8 +55,8 @@ lpsrNewStaffgroupBlock::~lpsrNewStaffgroupBlock ()
 void lpsrNewStaffgroupBlock::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
-		std::stringstream ss;
+  if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% ==> lpsrNewStaffgroupBlock::acceptIn ()" <<
@@ -74,7 +74,7 @@ void lpsrNewStaffgroupBlock::acceptIn (basevisitor* v)
         S_lpsrNewStaffgroupBlock elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
+        if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -93,8 +93,8 @@ void lpsrNewStaffgroupBlock::acceptIn (basevisitor* v)
 void lpsrNewStaffgroupBlock::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
-		std::stringstream ss;
+  if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% ==> lpsrNewStaffgroupBlock::acceptOut ()" <<
@@ -112,7 +112,7 @@ void lpsrNewStaffgroupBlock::acceptOut (basevisitor* v)
         S_lpsrNewStaffgroupBlock elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
+        if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -178,8 +178,8 @@ lpsrNewStaffTuningBlock::~lpsrNewStaffTuningBlock ()
 void lpsrNewStaffTuningBlock::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
-		std::stringstream ss;
+  if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% ==> lpsrNewStaffTuningBlock::acceptIn ()" <<
@@ -197,7 +197,7 @@ void lpsrNewStaffTuningBlock::acceptIn (basevisitor* v)
         S_lpsrNewStaffTuningBlock elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
+        if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -216,8 +216,8 @@ void lpsrNewStaffTuningBlock::acceptIn (basevisitor* v)
 void lpsrNewStaffTuningBlock::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
-		std::stringstream ss;
+  if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% ==> lpsrNewStaffTuningBlock::acceptOut ()" <<
@@ -235,7 +235,7 @@ void lpsrNewStaffTuningBlock::acceptOut (basevisitor* v)
         S_lpsrNewStaffTuningBlock elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
+        if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -294,8 +294,8 @@ lpsrNewStaffBlock::~lpsrNewStaffBlock ()
 void lpsrNewStaffBlock::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
-		std::stringstream ss;
+  if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% ==> lpsrNewStaffBlock::acceptIn ()" <<
@@ -313,7 +313,7 @@ void lpsrNewStaffBlock::acceptIn (basevisitor* v)
         S_lpsrNewStaffBlock elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
+        if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -332,8 +332,8 @@ void lpsrNewStaffBlock::acceptIn (basevisitor* v)
 void lpsrNewStaffBlock::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
-		std::stringstream ss;
+  if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% ==> lpsrNewStaffBlock::acceptOut ()" <<
@@ -351,7 +351,7 @@ void lpsrNewStaffBlock::acceptOut (basevisitor* v)
         S_lpsrNewStaffBlock elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
+        if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -453,8 +453,8 @@ void lpsrStaffBlock::appendLyricsUseToStaffBlock (const S_msrStanza& stanza)
 void lpsrStaffBlock::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
-		std::stringstream ss;
+  if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% ==> lpsrStaffBlock::acceptIn ()" <<
@@ -472,7 +472,7 @@ void lpsrStaffBlock::acceptIn (basevisitor* v)
         S_lpsrStaffBlock elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
+        if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -491,8 +491,8 @@ void lpsrStaffBlock::acceptIn (basevisitor* v)
 void lpsrStaffBlock::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
-		std::stringstream ss;
+  if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% ==> lpsrStaffBlock::acceptOut ()" <<
@@ -510,7 +510,7 @@ void lpsrStaffBlock::acceptOut (basevisitor* v)
         S_lpsrStaffBlock elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
+        if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -529,8 +529,8 @@ void lpsrStaffBlock::acceptOut (basevisitor* v)
 void lpsrStaffBlock::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
-		std::stringstream ss;
+  if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% ==> lpsrStaffBlock::browseData ()" <<
@@ -553,8 +553,8 @@ void lpsrStaffBlock::browseData (basevisitor* v)
   } // for
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
-		std::stringstream ss;
+  if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% <== lpsrStaffBlock::browseData ()" <<

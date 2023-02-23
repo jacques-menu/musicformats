@@ -256,7 +256,7 @@ The default is 'DEFAULT_VALUE'.)",
             availableQuarterTonesPitchesLanguageKinds (K_MF_NAMES_LIST_MAX_LENGTH)),
           std::regex ("DEFAULT_VALUE"),
           msrQuarterTonesPitchesLanguageKindAsString (
-            msrQuarterTonesPitchesLanguageKindDefaultValue)),
+          	msrQuarterTonesPitchesLanguageKindDefaultValue)),
         "LANGUAGE",
         "msdlPitchesLanguage",
         fMsdlQuarterTonesPitchesLanguageKind));
@@ -443,7 +443,7 @@ void msdl2msrOahGroup::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> msdl2msrOahGroup::acceptIn ()" <<
@@ -481,7 +481,7 @@ void msdl2msrOahGroup::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> msdl2msrOahGroup::acceptOut ()" <<
@@ -519,7 +519,7 @@ void msdl2msrOahGroup::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> msdl2msrOahGroup::browseData ()" <<
@@ -603,8 +603,7 @@ void msdl2msrOahGroup::printMsdl2msrValues (int fieldWidth)
       std::endl <<
 
     std::setw (fieldWidth) << "fMsdlQuarterTonesPitchesLanguageKind" << ": " <<
-      msrQuarterTonesPitchesLanguageKindAsString (
-        fMsdlQuarterTonesPitchesLanguageKind) <<
+			fMsdlQuarterTonesPitchesLanguageKind <<
       std::endl;
 
   --gIndenter;
@@ -673,7 +672,7 @@ S_msdl2msrOahGroup createGlobalMsdl2msrOahGroup ()
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating global msdl2msr OAH group" <<

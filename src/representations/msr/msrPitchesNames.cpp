@@ -1719,6 +1719,11 @@ std::string msrQuarterTonesPitchKindAsStringInLanguage (
   msrQuarterTonesPitchKind           quarterTonesPitchKind,
   msrQuarterTonesPitchesLanguageKind languageKind)
 {
+// 	gLog << "======> msrQuarterTonesPitchKindAsStringInLanguage()" << std::endl;
+//
+//   gLog << "quarterTonesPitchKind: " << quarterTonesPitchKind << std::endl;
+//   gLog << "languageKind: " << languageKind << std::endl;
+
   std::string result;
 
   switch (languageKind) {
@@ -1762,6 +1767,8 @@ std::string msrQuarterTonesPitchKindAsStringInLanguage (
       result = pArabicPitchesNamesMap [quarterTonesPitchKind];
       break;
   } // switch
+
+// 	gLog << "<====== msrNote::soundingNoteEssentialsAsString(), result " << result << std::endl;
 
   return result;
 }
@@ -1855,7 +1862,19 @@ std::string msrQuarterTonesPitchesLanguageKindAsString (
   return result;
 }
 
-//______________________________________________________________________________
+std::ostream& operator << (std::ostream& os, const msrQuarterTonesPitchesLanguageKind& elt)
+{
+  os << msrQuarterTonesPitchesLanguageKindAsString (elt);
+  return os;
+}
+
+EXP mfIndentedStringStream& operator << (
+  mfIndentedStringStream& iss, const msrQuarterTonesPitchKind& elt)
+{
+  iss << msrQuarterTonesPitchKindAsString (elt);
+  return iss;
+}
+
 msrQuarterTonesPitchKind quarterTonesPitchKindFromString (
   msrQuarterTonesPitchesLanguageKind languageKind,
   const std::string&            quarterTonesPitchName)

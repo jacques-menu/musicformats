@@ -54,8 +54,8 @@ bsrPage::bsrPage (
   fLinesPerPage = linesPerPage;
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalBsrOahGroup->getTracePages ()) {
-		std::stringstream ss;
+  if (gBsrOahGroup->getTracePages ()) {
+    std::stringstream ss;
 
     ss <<
       "Creating bsrPage '" <<
@@ -77,8 +77,8 @@ bsrPage::~bsrPage ()
 S_bsrPage bsrPage::createPageNewbornClone ()
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalBsrOahGroup->getTracePages ()) {
-		std::stringstream ss;
+  if (gBsrOahGroup->getTracePages ()) {
+    std::stringstream ss;
 
     ss <<
       "Creating a newborn clone of page " <<
@@ -123,8 +123,8 @@ int bsrPage::fetchLineContentsNumber () const
 void bsrPage::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
-		std::stringstream ss;
+  if (gBsrOahGroup->getTraceBsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% --> End visiting bsrTranscriptionNotesElement" <<
@@ -143,7 +143,7 @@ void bsrPage::acceptIn (basevisitor* v)
         S_bsrPage elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
+        if (gBsrOahGroup->getTraceBsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -162,8 +162,8 @@ void bsrPage::acceptIn (basevisitor* v)
 void bsrPage::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
-		std::stringstream ss;
+  if (gBsrOahGroup->getTraceBsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% --> End visiting bsrTranscriptionNotesElement" <<
@@ -182,7 +182,7 @@ void bsrPage::acceptOut (basevisitor* v)
         S_bsrPage elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
+        if (gBsrOahGroup->getTraceBsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -256,7 +256,7 @@ void bsrPage::print (std::ostream& os) const
   // print the page elements if any
   size_t pageElementsListSize = fPageElementsList.size ();
 
-  if (pageElementsListSize || gGlobalBsrOahGroup->getDisplayBsrFull ()) {
+  if (pageElementsListSize || gBsrOahGroup->getDisplayBsrFull ()) {
     os <<
 //      std::setw (fieldWidth) <<
       "PageElementsList" <<

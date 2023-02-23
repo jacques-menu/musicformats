@@ -161,7 +161,7 @@ S_msrHarmonyInterval msrHarmonyInterval::intervalDifference (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceExtraHarmonies ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       std::endl <<
@@ -194,7 +194,7 @@ S_msrHarmonyInterval msrHarmonyInterval::intervalDifference (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceExtraHarmonies ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "--> normalized operands are '" <<
@@ -259,7 +259,7 @@ S_msrHarmonyInterval msrHarmonyInterval::intervalDifference (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceExtraHarmonies ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "--> permuteRelativeOctaves = " <<
@@ -1443,7 +1443,7 @@ S_msrHarmonyInterval msrHarmonyInterval::intervalDifference (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceExtraHarmonies ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "--> base resultIntervalKind = '" <<
@@ -1482,7 +1482,7 @@ S_msrHarmonyInterval msrHarmonyInterval::intervalDifference (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceExtraHarmonies ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "--> result = '" <<
@@ -2638,7 +2638,7 @@ S_msrHarmonyInterval msrHarmonyInterval::intervalSum (
 /* JMI
 void msrHarmonyInterval::acceptIn (basevisitor* v) {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -2657,7 +2657,7 @@ void msrHarmonyInterval::acceptIn (basevisitor* v) {
         S_msrHarmonyInterval elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -2669,7 +2669,7 @@ void msrHarmonyInterval::acceptIn (basevisitor* v) {
 
 void msrHarmonyInterval::acceptOut (basevisitor* v) {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -2688,7 +2688,7 @@ void msrHarmonyInterval::acceptOut (basevisitor* v) {
         S_msrHarmonyInterval elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -3758,7 +3758,7 @@ int msrHarmonyDegree::harmonyDegreeAsSemitones () const
 void msrHarmonyDegree::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -3777,7 +3777,7 @@ void msrHarmonyDegree::acceptIn (basevisitor* v)
         S_msrHarmonyDegree elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -3796,7 +3796,7 @@ void msrHarmonyDegree::acceptIn (basevisitor* v)
 void msrHarmonyDegree::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -3815,7 +3815,7 @@ void msrHarmonyDegree::acceptOut (basevisitor* v)
         S_msrHarmonyDegree elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -4061,7 +4061,7 @@ void msrHarmonyContents::printAllHarmoniesContents (
     "All the known harmonies contents with diatonic root '" <<
     msrQuarterTonesPitchKindAsStringInLanguage (
       rootQuarterTonesPitchKind,
-      gGlobalLpsrOahGroup->
+      gLpsrOahGroup->
         getLpsrQuarterTonesPitchesLanguageKind ()) <<
       /* JMI
     "' (" <<
@@ -4069,9 +4069,8 @@ void msrHarmonyContents::printAllHarmoniesContents (
     ")" <<
     */
     "' in language '" <<
-    msrQuarterTonesPitchesLanguageKindAsString (
-      gGlobalLpsrOahGroup->
-        getLpsrQuarterTonesPitchesLanguageKind ()) <<
+    gLpsrOahGroup->
+      getLpsrQuarterTonesPitchesLanguageKind () <<
     "' 'are:" <<
     std::endl << std::endl;
 
@@ -4135,7 +4134,7 @@ void msrHarmonyContents::printAllHarmoniesContents (
           std::setw (fieldWidth2) <<
           msrQuarterTonesPitchKindAsStringInLanguage (
             noteQuarterTonesPitchKind,
-            gGlobalLpsrOahGroup->
+            gLpsrOahGroup->
               getLpsrQuarterTonesPitchesLanguageKind ()) <<
           ": " <<
           msrIntervalKindAsString (intervalKind) <<
@@ -4158,7 +4157,7 @@ void msrHarmonyContents::printAllHarmoniesContents (
 /* JMI
 void msrHarmonyContents::acceptIn (basevisitor* v) {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -4177,7 +4176,7 @@ void msrHarmonyContents::acceptIn (basevisitor* v) {
         S_msrHarmonyContents elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -4189,7 +4188,7 @@ void msrHarmonyContents::acceptIn (basevisitor* v) {
 
 void msrHarmonyContents::acceptOut (basevisitor* v) {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -4208,7 +4207,7 @@ void msrHarmonyContents::acceptOut (basevisitor* v) {
         S_msrHarmonyContents elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -4296,11 +4295,11 @@ S_msrHarmony msrHarmony::create (
   const std::string&       harmonyKindText,
   int                      harmonyInversion,
   msrQuarterTonesPitchKind harmonyBassQuarterTonesPitchKind,
-  const msrWholeNotes&          harmonySoundingWholeNotes,
-  const msrWholeNotes&          harmonyDisplayWholeNotes,
+  const msrWholeNotes&     harmonySoundingWholeNotes,
+  const msrWholeNotes&     harmonyDisplayWholeNotes,
   int                      harmoniesStaffNumber,
   const msrTupletFactor&   harmonyTupletFactor,
-  const msrWholeNotes&          harmonyWholeNotesOffset)
+  const msrWholeNotes&     harmonyWholeNotesOffset)
 {
   msrHarmony* o =
     new msrHarmony (
@@ -4328,11 +4327,11 @@ msrHarmony::msrHarmony (
   const std::string&       harmonyKindText,
   int                      harmonyInversion,
   msrQuarterTonesPitchKind harmonyBassQuarterTonesPitchKind,
-  const msrWholeNotes&          harmonySoundingWholeNotes,
-  const msrWholeNotes&          harmonyDisplayWholeNotes,
+  const msrWholeNotes&     harmonySoundingWholeNotes,
+  const msrWholeNotes&     harmonyDisplayWholeNotes,
   int                      harmoniesStaffNumber,
   const msrTupletFactor&   harmonyTupletFactor,
-  const msrWholeNotes&          harmonyWholeNotesOffset)
+  const msrWholeNotes&     harmonyWholeNotesOffset)
     : msrMeasureElement (
         inputLineNumber),
       fHarmonyTupletFactor (
@@ -4408,7 +4407,7 @@ msrHarmony::msrHarmony (
           "' is not compatible with bass quaternotes pitch '" <<
           msrQuarterTonesPitchKindAsStringInLanguage (
             fHarmonyBassQuarterTonesPitchKind,
-            gGlobalMsrOahGroup->
+            gMsrOahGroup->
               getMsrQuarterTonesPitchesLanguageKind ()) <<
           "'";
 
@@ -4583,7 +4582,7 @@ void msrHarmony::setHarmonyTupletFactor (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceTuplets ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Setting the tuplet factor of harmony " <<
@@ -4720,7 +4719,7 @@ void msrHarmony::setHarmonyFrame (const S_msrFrame& frame)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceFrames ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Setting harmony " << asShortString ()  <<
@@ -4780,7 +4779,7 @@ void msrHarmony::incrementHarmonySoundingWholeNotes (
 void msrHarmony::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -4799,7 +4798,7 @@ void msrHarmony::acceptIn (basevisitor* v)
         S_msrHarmony elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -4818,7 +4817,7 @@ void msrHarmony::acceptIn (basevisitor* v)
 void msrHarmony::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -4837,7 +4836,7 @@ void msrHarmony::acceptOut (basevisitor* v)
         S_msrHarmony elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -4887,7 +4886,7 @@ std::string msrHarmony::asString () const
     ", fHarmonyRootQuarterTonesPitchKind: " <<
     msrQuarterTonesPitchKindAsStringInLanguage (
       fHarmonyRootQuarterTonesPitchKind,
-      gGlobalMsrOahGroup->
+      gMsrOahGroup->
         getMsrQuarterTonesPitchesLanguageKind ()) <<
     ", fHarmonyKind: " <<
     fHarmonyKind;
@@ -4957,7 +4956,7 @@ std::string msrHarmony::asString () const
       ", fHarmonyBassQuarterTonesPitchKind: " <<
     msrQuarterTonesPitchKindAsStringInLanguage (
       fHarmonyBassQuarterTonesPitchKind,
-      gGlobalMsrOahGroup->
+      gMsrOahGroup->
         getMsrQuarterTonesPitchesLanguageKind ());
   }
 
@@ -5006,6 +5005,90 @@ std::string msrHarmony::asString () const
   return ss.str ();
 }
 
+std::string msrHarmony::asShortStringForMeasuresSlices () const
+{
+  std::stringstream ss;
+
+  ss <<
+    "[Harmony" <<
+    ", " << std::hex << std::showbase << this << std::dec <<
+    ", fMeasurePosition: " <<
+    fMeasurePosition <<
+    ", fHarmonyRootQuarterTonesPitchKind: " <<
+    msrQuarterTonesPitchKindAsStringInLanguage (
+      fHarmonyRootQuarterTonesPitchKind,
+      gMsrOahGroup->
+        getMsrQuarterTonesPitchesLanguageKind ()) <<
+    ", fHarmonyKind: " <<
+    fHarmonyKind;
+
+  // print the harmony uplink to note
+  ss <<
+    ", fHarmonyUpLinkToNote: ";
+  if (fHarmonyUpLinkToNote) {
+    ss <<
+      fHarmonyUpLinkToNote->asString ();
+  }
+  else {
+    ss << "[NONE]";
+  }
+
+  ss <<
+    ", fHarmonyUpLinkToMeasure: ";
+    if (fHarmonyUpLinkToMeasure) {
+      ss <<
+        fHarmonyUpLinkToMeasure->asString ();
+    }
+    else {
+      ss << "[NONE]";
+    }
+
+//   ss <<
+//     ", fHarmonyUpLinkToVoice: ";
+//     if (fHarmonyUpLinkToVoice) {
+//       ss <<
+//         fHarmonyUpLinkToVoice->asString ();
+//     }
+//     else {
+//       ss << "[NONE]";
+//     }
+
+  ss <<
+  // print the harmony bass voice position
+//   os <<
+//     std::setw (fieldWidth) <<
+//     "fVoicePosition" << ": " <<
+//     fVoicePosition <<
+//     std::endl;
+
+    ", fSoundingWholeNotes: " <<
+    fSoundingWholeNotes <<
+    ", fHarmonyDisplayWholeNotes: " <<
+    fHarmonyDisplayWholeNotes <<
+
+    ", fHarmonyWholeNotesOffset: " <<
+    fHarmonyWholeNotesOffset <<
+    ", fMeasurePosition: " <<
+    fMeasurePosition <<
+
+    ", fHarmonyKindText: \"" <<
+    fHarmonyKindText << "\"";
+
+  ss << ", fHarmonyInversion: ";
+  if (fHarmonyInversion == K_HARMONY_INVERSION_NONE) {
+    ss << "[NONE]";
+  }
+  else {
+    ss << fHarmonyInversion;
+  }
+
+  ss <<
+    ", line " << fInputLineNumber <<
+    ']';
+
+  return ss.str ();
+}
+
 void msrHarmony::print (std::ostream& os) const
 {
   os <<
@@ -5038,7 +5121,7 @@ void msrHarmony::print (std::ostream& os) const
     "fHarmonyRootQuarterTonesPitchKind" << ": " <<
     msrQuarterTonesPitchKindAsStringInLanguage (
       fHarmonyRootQuarterTonesPitchKind,
-      gGlobalMsrOahGroup->
+      gMsrOahGroup->
         getMsrQuarterTonesPitchesLanguageKind ()) <<
     std::endl <<
     std::setw (fieldWidth) <<
@@ -5063,7 +5146,7 @@ void msrHarmony::print (std::ostream& os) const
     "fHarmonyBassQuarterTonesPitchKind" << ": " <<
     msrQuarterTonesPitchKindAsStringInLanguage (
       fHarmonyBassQuarterTonesPitchKind,
-      gGlobalMsrOahGroup->
+      gMsrOahGroup->
         getMsrQuarterTonesPitchesLanguageKind ()) <<
     std::endl;
 
@@ -5234,7 +5317,7 @@ void printHarmonyDetails (
     rootQuarterTonesPitchKindAsString =
       msrQuarterTonesPitchKindAsStringInLanguage (
         rootQuarterTonesPitchKind,
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getLpsrQuarterTonesPitchesLanguageKind ());
 
   std::string
@@ -5372,7 +5455,7 @@ void printHarmonyDetails (
           std::setw (fieldWidth2) <<
           msrQuarterTonesPitchKindAsStringInLanguage (
             noteQuarterTonesPitchKind,
-            gGlobalLpsrOahGroup->
+            gLpsrOahGroup->
               getLpsrQuarterTonesPitchesLanguageKind ()) <<
             /* JMI
           ", octave " << relativeOctave <<
@@ -5413,7 +5496,7 @@ void printHarmonyAnalysis (
     rootQuarterTonesPitchKindAsString =
       msrQuarterTonesPitchKindAsStringInLanguage (
         rootQuarterTonesPitchKind,
-        gGlobalLpsrOahGroup->
+        gLpsrOahGroup->
           getLpsrQuarterTonesPitchesLanguageKind ());
 
   std::string
@@ -5541,7 +5624,7 @@ void printHarmonyAnalysis (
             std::setw (fieldWidth2) <<
             msrQuarterTonesPitchKindAsStringInLanguage (
               noteQuarterTonesPitchKind,
-              gGlobalLpsrOahGroup->
+              gLpsrOahGroup->
                 getLpsrQuarterTonesPitchesLanguageKind ()) <<
             ": " <<
             msrIntervalKindAsString (intervalKind) <<
@@ -5673,7 +5756,7 @@ void printHarmonyAnalysis (
               std::setw (fieldWidth1) <<
               msrQuarterTonesPitchKindAsStringInLanguage (
                 noteQuarterTonesPitchKind1,
-                gGlobalLpsrOahGroup->
+                gLpsrOahGroup->
                   getLpsrQuarterTonesPitchesLanguageKind ()) <<
 
               " -> " <<
@@ -5681,7 +5764,7 @@ void printHarmonyAnalysis (
               std::setw (fieldWidth1) <<
               msrQuarterTonesPitchKindAsStringInLanguage (
                 noteQuarterTonesPitchKind2,
-                gGlobalLpsrOahGroup->
+                gLpsrOahGroup->
                   getLpsrQuarterTonesPitchesLanguageKind ()) <<
 
               ": " <<
@@ -6680,7 +6763,7 @@ void msrHarmonyStructure::appendHarmonyIntervalToHarmonyStructure (
 /* JMI
 void msrHarmonyStructure::acceptIn (basevisitor* v) {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -6699,7 +6782,7 @@ void msrHarmonyStructure::acceptIn (basevisitor* v) {
         S_msrHarmonyStructure elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -6711,7 +6794,7 @@ void msrHarmonyStructure::acceptIn (basevisitor* v) {
 
 void msrHarmonyStructure::acceptOut (basevisitor* v) {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -6730,7 +6813,7 @@ void msrHarmonyStructure::acceptOut (basevisitor* v) {
         S_msrHarmonyStructure elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<

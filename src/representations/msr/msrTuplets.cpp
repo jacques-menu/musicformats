@@ -132,7 +132,7 @@ msrTuplet::msrTuplet (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceTuplets ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating tuplet:" <<
@@ -158,7 +158,7 @@ S_msrTuplet msrTuplet::createTupletNewbornClone ()
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceTuplets ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating a newborn clone of tuplet " <<
@@ -273,7 +273,7 @@ void msrTuplet::setTupletUpLinkToMeasure (
   if (gTraceOahGroup->getTraceWholeNotes ()) {
     ++gIndenter;
 
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "==> Setting the uplink to measure of tuplet " <<
@@ -306,7 +306,7 @@ void msrTuplet::appendNoteToTuplet (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceTuplets ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending note " <<
@@ -374,7 +374,7 @@ void msrTuplet::appendChordToTuplet (const S_msrChord& chord)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceTuplets ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending chord " <<
@@ -420,7 +420,7 @@ void msrTuplet::appendTupletToTuplet (const S_msrTuplet& tuplet)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceTuplets ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending tuplet " <<
@@ -466,7 +466,7 @@ void msrTuplet::appendTupletToTupletClone (const S_msrTuplet& tuplet)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceTuplets ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending tuplet " <<
@@ -541,7 +541,7 @@ S_msrNote msrTuplet::removeFirstNoteFromTuplet (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceTuplets ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Removing first note from tuplet " <<
@@ -652,7 +652,7 @@ S_msrNote msrTuplet::removeLastNoteFromTuplet (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceTuplets ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Removing last note from tuplet " <<
@@ -718,7 +718,7 @@ S_msrNote msrTuplet::removeLastNoteFromTuplet (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceTuplets ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "This last note from tuplet " <<
@@ -748,7 +748,7 @@ void msrTuplet::setMeasurePosition (
     getMeasureElementUpLinkToMeasure (
       upLinkToMeasure);
 
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Setting measure position of " <<
@@ -789,7 +789,7 @@ void msrTuplet::setTupletMembersMeasurePositions (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasurePositions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Setting tuplet members measure positions of " << asString () <<
@@ -896,7 +896,7 @@ void msrTuplet::unapplySoundingFactorToTupletMembers (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceTuplets ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "unapplySoundingFactorToTupletMembers ()" <<
@@ -941,7 +941,7 @@ void msrTuplet::finalizeTuplet (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceTuplets ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Finalizing tuplet " <<
@@ -966,7 +966,7 @@ void msrTuplet::finalizeTuplet (
 void msrTuplet::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -985,7 +985,7 @@ void msrTuplet::acceptIn (basevisitor* v)
         S_msrTuplet elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -1004,7 +1004,7 @@ void msrTuplet::acceptIn (basevisitor* v)
 void msrTuplet::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
       std::stringstream ss;
 
       ss <<
@@ -1023,7 +1023,7 @@ void msrTuplet::acceptOut (basevisitor* v)
         S_msrTuplet elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<

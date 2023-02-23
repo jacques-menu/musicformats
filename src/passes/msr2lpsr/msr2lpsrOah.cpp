@@ -82,7 +82,7 @@ void msr2lpsrScoreOutputKindAtom::applyAtomWithValue (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "==> oahAtom is of type 'msr2lpsrScoreOutputKindAtom'" <<
@@ -99,7 +99,7 @@ void msr2lpsrScoreOutputKindAtom::applyAtomWithValue (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "==> oahAtom is of type 'msr2lpsrScoreOutputKindAtom'" <<
@@ -143,14 +143,14 @@ void msr2lpsrScoreOutputKindAtom::applyAtomWithValue (
   setLpsrScoreOutputKindVariable (
     (*it).second);
 
-	fSelected = true;
+  fSelected = true;
 }
 
 void msr2lpsrScoreOutputKindAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> msr2lpsrScoreOutputKindAtom::acceptIn ()" <<
@@ -188,7 +188,7 @@ void msr2lpsrScoreOutputKindAtom::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> msr2lpsrScoreOutputKindAtom::acceptOut ()" <<
@@ -226,7 +226,7 @@ void msr2lpsrScoreOutputKindAtom::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> msr2lpsrScoreOutputKindAtom::browseData ()" <<
@@ -303,8 +303,8 @@ void msr2lpsrScoreOutputKindAtom::displayAtomWithVariableOptionsValues (
     case oahEarlyOptionKind::kEarlyOptionNo:
       break;
     case oahEarlyOptionKind::kEarlyOptionYes:
-			os <<
-				", early";
+      os <<
+        ", early";
       break;
   } // switch
   if (fSelected) {
@@ -493,7 +493,7 @@ void msr2lpsrOahGroup::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> msr2lpsrOahGroup::acceptIn ()" <<
@@ -531,7 +531,7 @@ void msr2lpsrOahGroup::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> msr2lpsrOahGroup::acceptOut ()" <<
@@ -569,7 +569,7 @@ void msr2lpsrOahGroup::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> msr2lpsrOahGroup::browseData ()" <<
@@ -644,7 +644,7 @@ S_msr2lpsrOahGroup createGlobalMsr2lpsrOahGroup ()
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating global msr2lpsr OAH group" <<

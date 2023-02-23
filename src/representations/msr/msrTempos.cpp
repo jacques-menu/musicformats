@@ -79,7 +79,7 @@ void msrTempoNote::appendBeamToTempoNote (const S_msrBeam& beam)
 void msrTempoNote::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -98,7 +98,7 @@ void msrTempoNote::acceptIn (basevisitor* v)
         S_msrTempoNote elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -117,7 +117,7 @@ void msrTempoNote::acceptIn (basevisitor* v)
 void msrTempoNote::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -136,7 +136,7 @@ void msrTempoNote::acceptOut (basevisitor* v)
         S_msrTempoNote elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -247,7 +247,7 @@ S_msrTempoTuplet msrTempoTuplet::create (
   msrTempoTupletBracketKind    tempoTupletBracketKind,
   msrTempoTupletShowNumberKind tempoTupletShowNumberKind,
   const msrTupletFactor&       tempoTupletFactor,
-  const msrWholeNotes&          memberNotesDisplayWholeNotes)
+  const msrWholeNotes&         memberNotesDisplayWholeNotes)
 {
   msrTempoTuplet* o =
     new msrTempoTuplet (
@@ -267,7 +267,7 @@ msrTempoTuplet::msrTempoTuplet (
   msrTempoTupletBracketKind    tempoTupletBracketKind,
   msrTempoTupletShowNumberKind tempoTupletShowNumberKind,
   const msrTupletFactor&       tempoTupletFactor,
-  const msrWholeNotes&          memberNotesDisplayWholeNotes)
+  const msrWholeNotes&         memberNotesDisplayWholeNotes)
     : msrElement (inputLineNumber)
 {
   fTempoTupletNumber = tempoTupletNumber;
@@ -283,7 +283,7 @@ msrTempoTuplet::msrTempoTuplet (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceTempos ()){
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating tempo tuplet '" <<
@@ -380,7 +380,7 @@ void msrTempoTuplet::addTempoNoteToTempoTuplet (S_msrTempoNote tempoNote)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceTempos ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Adding tempoNote '" <<
@@ -415,7 +415,7 @@ void msrTempoTuplet::addTempoTupletToTempoTuplet (S_msrTempoTuplet tempoTuplet)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceTempos ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Adding tempoTuplet '" <<
@@ -461,7 +461,7 @@ void msrTempoTuplet::removeFirstNoteFromTempoTuplet (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceTempos ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Removing first tempoNote '" <<
@@ -540,7 +540,7 @@ void msrTempoTuplet::applyDisplayFactorToTempoTupletMembers ()
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceTempos ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "% ==> applyDisplayFactorToTempoTupletMembers ()" <<
@@ -564,7 +564,7 @@ void msrTempoTuplet::unapplySoundingFactorToTempoTupletMembers (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceTempos ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "unapplySoundingFactorToTempoTupletMembers ()" <<
@@ -594,7 +594,7 @@ void msrTempoTuplet::unapplySoundingFactorToTempoTupletMembers (
 void msrTempoTuplet::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -613,7 +613,7 @@ void msrTempoTuplet::acceptIn (basevisitor* v)
         S_msrTempoTuplet elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -632,7 +632,7 @@ void msrTempoTuplet::acceptIn (basevisitor* v)
 void msrTempoTuplet::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -651,7 +651,7 @@ void msrTempoTuplet::acceptOut (basevisitor* v)
         S_msrTempoTuplet elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -917,7 +917,7 @@ void msrTempoNotesRelationshipElements::addElementToTempoNotesRelationshipElemen
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceTempos ()){
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Adding element '" <<
@@ -937,7 +937,7 @@ void msrTempoNotesRelationshipElements::addElementToTempoNotesRelationshipElemen
 void msrTempoNotesRelationshipElements::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -956,7 +956,7 @@ void msrTempoNotesRelationshipElements::acceptIn (basevisitor* v)
         S_msrTempoNotesRelationshipElements elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -975,7 +975,7 @@ void msrTempoNotesRelationshipElements::acceptIn (basevisitor* v)
 void msrTempoNotesRelationshipElements::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -994,7 +994,7 @@ void msrTempoNotesRelationshipElements::acceptOut (basevisitor* v)
         S_msrTempoNotesRelationshipElements elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -1436,7 +1436,7 @@ void msrTempo::setTempoUpLinkToMeasure (
 void msrTempo::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -1455,7 +1455,7 @@ void msrTempo::acceptIn (basevisitor* v)
         S_msrTempo elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -1474,7 +1474,7 @@ void msrTempo::acceptIn (basevisitor* v)
 void msrTempo::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -1493,7 +1493,7 @@ void msrTempo::acceptOut (basevisitor* v)
         S_msrTempo elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<

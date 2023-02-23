@@ -82,7 +82,7 @@ Usage: msdl2braille [option]* [MSDLFile] [option]*
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Initializing msdl2braille insider options handler \"" <<
@@ -148,7 +148,7 @@ void msdl2brailleInsiderHandler::createTheMsdl2brlPrefixes ()
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating the msdl2braille prefixes" <<
@@ -169,7 +169,7 @@ void msdl2brailleInsiderHandler::createTheMsdl2brlOptionGroups (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating the msdl2braille insider option groups" <<
@@ -213,10 +213,6 @@ void msdl2brailleInsiderHandler::createTheMsdl2brlOptionGroups (
   // initialize the library
   // ------------------------------------------------------
 
-  initializeMusicFormats ();
-
-  initializeWAE ();
-
   initializeMSR ();
   initializeBSR ();
 
@@ -252,7 +248,7 @@ void msdl2brailleInsiderHandler::createTheMsdl2brlOptionGroups (
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptionsDetails ()) {
     // print the options handler initial state
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "msdl2brailleInsiderHandler has been initialized as:" <<
@@ -275,7 +271,7 @@ void msdl2brailleInsiderHandler::checkOptionsAndArguments () const
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "checking options and arguments from argc/argv in \"" <<
@@ -313,13 +309,13 @@ void msdl2brailleInsiderHandler::enforceHandlerQuietness ()
   gGlobalMsdl2brlInsiderOahGroup->
     enforceGroupQuietness ();
 
-  gGlobalMsrOahGroup->
+  gMsrOahGroup->
     enforceGroupQuietness ();
 
   gGlobalMsr2bsrOahGroup->
     enforceGroupQuietness ();
 
-  gGlobalBsrOahGroup->
+  gBsrOahGroup->
     enforceGroupQuietness ();
 
   gGlobalBrailleGenerationOahGroup->
@@ -342,7 +338,7 @@ void msdl2brailleInsiderOahGroup::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> msdl2brailleInsiderOahGroup::acceptIn ()" <<
@@ -380,7 +376,7 @@ void msdl2brailleInsiderOahGroup::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> msdl2brailleInsiderOahGroup::acceptOut ()" <<
@@ -418,7 +414,7 @@ void msdl2brailleInsiderOahGroup::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> msdl2brailleInsiderOahGroup::browseData ()" <<
@@ -662,7 +658,7 @@ S_msdl2brailleInsiderOahGroup createGlobalMsdl2brlOahGroup (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating global msdl2braille OAH group" <<

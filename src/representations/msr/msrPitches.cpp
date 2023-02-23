@@ -308,7 +308,7 @@ msrSemiTonesPitchKind semiTonesPitchKindFromString (
   msrQuarterTonesPitchKind
     quarterTonesPitchKind =
       quarterTonesPitchKindFromString (
-        gGlobalMsrOahGroup->
+        gMsrOahGroup->
           getMsrQuarterTonesPitchesLanguageKind (),
         theString);
 

@@ -31,7 +31,7 @@
 #include "msrRehearsalMarks.h"
 #include "msrTempos.h"
 #include "msrVoiceStaffChanges.h"
-#include "msrWholeNotes.h"
+// #include "msrWholeNotes.h"
 
 #include "oahOah.h"
 
@@ -105,7 +105,7 @@ void msrMeasure::initializeMeasure ()
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasures ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Initializing measure '" <<
@@ -278,7 +278,7 @@ S_msrMeasure msrMeasure::createMeasureNewbornClone (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasures ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating a newborn clone of measure " <<
@@ -370,7 +370,7 @@ S_msrMeasure msrMeasure::createMeasureDeepClone (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasures ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating a deep clone of measure " <<
@@ -456,7 +456,7 @@ S_msrMeasure msrMeasure::createMeasureDeepClone (
   if (numberOfMeasureElements) {
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceMeasures ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
         mfSingularOrPluralWithoutNumber (
@@ -586,7 +586,7 @@ S_msrMeasure msrMeasure::createMeasureCopyWithNotesOnly (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasures ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating a copy with notes only of measure " <<
@@ -783,9 +783,9 @@ void msrMeasure::setMeasureShortestNoteWholeNotes (
   if (
     gTraceOahGroup->getTraceNotes ()
       ||
-    gGlobalMsrOahGroup->getTraceMsrNotesDurations ()
+    gMsrOahGroup->getTraceMsrNotesDurations ()
   ) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Setting the shortest note duration of measure " <<
@@ -810,9 +810,9 @@ void msrMeasure::setMeasureShortestNoteTupletFactor (
   if (
     gTraceOahGroup->getTraceNotes ()
       ||
-    gGlobalMsrOahGroup->getTraceMsrNotesDurations ()
+    gMsrOahGroup->getTraceMsrNotesDurations ()
   ) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Setting the shortest note tuplet factor of measure " <<
@@ -1003,9 +1003,9 @@ void msrMeasure::setMeasurePuristNumber (
 //         "\", line " << inputLineNumber <<
 //         std::endl;
 //
-// 			 gWaeHandler->waeTrace (
-// 		  	 __FILE__, __LINE__,
-// 			   ss.str ());
+//        gWaeHandler->waeTrace (
+//          __FILE__, __LINE__,
+//          ss.str ());
 //      }
 // #endif // MF_TRACE_IS_ENABLED
 //
@@ -1028,7 +1028,7 @@ void msrMeasure::appendMeasureElementToMeasure (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasures ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending element " <<
@@ -1085,7 +1085,7 @@ void msrMeasure::insertElementInMeasureBeforeIterator (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasures ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Inserting element " <<
@@ -1158,7 +1158,7 @@ void msrMeasure::appendElementAtTheEndOfMeasure (
       ||
     gTraceOahGroup->getTraceBarLines ()
   ) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending element " <<
@@ -1185,7 +1185,7 @@ void msrMeasure::appendElementAtTheEndOfMeasure (
     // JMI ??? v0.9.63
     typedef std::list<S_msrMeasureElement>::iterator iter_type;
 
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       std::endl <<
@@ -1358,7 +1358,7 @@ void msrMeasure::appendElementAtTheEndOfMeasure (
   if (gTraceOahGroup->getTraceMeasuresDetails ()) {
     typedef std::list<S_msrMeasureElement>::iterator iter_type;
 
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       std::endl <<
@@ -1389,7 +1389,7 @@ void msrMeasure::insertElementAtMeasurePosition (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasurePositions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Inserting element " <<
@@ -1427,9 +1427,9 @@ void msrMeasure::insertElementAtMeasurePosition (
         currentElement = (*i);
 
       msrWholeNotes
-      	currentMeasurePosition =
-        	currentElement->
-          	getMeasurePosition ();
+        currentMeasurePosition =
+          currentElement->
+            getMeasurePosition ();
 
       if (measurePosition == currentMeasurePosition) {
         // insert elem in the measure elements list before (*i)
@@ -1521,7 +1521,7 @@ void msrMeasure::setNextMeasureNumber (const std::string& nextMeasureNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasures ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Setting next measure number to '" <<
@@ -1551,7 +1551,7 @@ void msrMeasure::setMeasureIsFirstInVoice ()
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasures ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Setting measure " <<
@@ -1588,7 +1588,7 @@ void msrMeasure::setFullMeasureWholeNotes (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceWholeNotes ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Setting full whole notes duration of measure " <<
@@ -1613,7 +1613,7 @@ void msrMeasure::setMeasureWholeNotes (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceWholeNotes ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Setting measure whole notes duration of  " <<
@@ -1659,7 +1659,7 @@ void msrMeasure::incrementMeasureWholeNotes (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceWholeNotes ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Incrementing whole notes duration of measure " <<
@@ -1703,7 +1703,7 @@ void msrMeasure::setMeasureKind (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasurePositions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Setting measure kind of measure " <<
@@ -1821,7 +1821,7 @@ void msrMeasure::appendMusicXMLPrintLayoutToMeasure (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMusicXMLPrintLayouts ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending print layout " << musicXMLPrintLayout->asString () <<
@@ -1851,7 +1851,7 @@ void msrMeasure::appendClefToMeasure (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceClefs ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending clef " << clef->asString () <<
@@ -1878,7 +1878,7 @@ void msrMeasure::appendKeyToMeasure (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceKeys ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending key " << key->asString () <<
@@ -1913,7 +1913,7 @@ void msrMeasure::appendTimeSignatureToMeasure (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceTimeSignatures ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending time signature '" <<
@@ -1967,7 +1967,7 @@ void msrMeasure::appendTimeSignatureToMeasureClone (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceTimeSignatures ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending time signature:" <<
@@ -2011,7 +2011,7 @@ void msrMeasure::insertHiddenMeasureAndBarLineInMeasureClone (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasures ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Inserting hidden measure and barLine at position " <<
@@ -2065,7 +2065,7 @@ void msrMeasure::setFullMeasureWholeNotesFromTime (
       ||
     gTraceOahGroup->getTraceTimeSignatures ()
   ) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Setting measure full measure whole notes from time signature:" <<
@@ -2221,7 +2221,7 @@ void msrMeasure::appendTranspositionToMeasure (
         fMeasureUpLinkToSegment->
           getSegmentUpLinkToVoice ();
 
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending transposition " <<
@@ -2287,7 +2287,7 @@ void msrMeasure::appendBarLineToMeasure (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceBarLines ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending barLine " <<
@@ -2373,20 +2373,20 @@ void msrMeasure::appendVoiceStaffChangeToMeasure (
 
 void msrMeasure::appendNoteToMeasure (
   const S_msrNote& note,
-  const msrWholeNotes&  partMeasurePosition)
+  const msrWholeNotes&  partDrawingMeasurePosition)
 {
   int inputLineNumber =
     note->getInputLineNumber ();
 
   msrWholeNotes
     positionsDelta =
-      partMeasurePosition
+      partDrawingMeasurePosition
         -
       fMeasureWholeNotes;
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceNotes ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending note " << note->asShortString () <<
@@ -2397,8 +2397,8 @@ void msrMeasure::appendNoteToMeasure (
         getSegmentUpLinkToVoice ()->
           getVoiceName () <<
       "\"" <<
-      ", partMeasurePosition: " <<
-      partMeasurePosition <<
+      ", partDrawingMeasurePosition: " <<
+      partDrawingMeasurePosition <<
       ", fMeasureWholeNotes: " <<
       fMeasureWholeNotes <<
       ", positionsDelta: " <<
@@ -2447,8 +2447,8 @@ void msrMeasure::appendNoteToMeasure (
     std::stringstream ss;
 
     ss <<
-      "partMeasurePosition " <<
-      partMeasurePosition <<
+      "partDrawingMeasurePosition " <<
+      partDrawingMeasurePosition <<
       " is smaller than fMeasureWholeNotes " <<
       fMeasureWholeNotes <<
       "' in measure " <<
@@ -2460,8 +2460,8 @@ void msrMeasure::appendNoteToMeasure (
       "\"" <<
       ", fMeasureWholeNotes " <<
       fMeasureWholeNotes <<
-      ", partMeasurePosition " <<
-      partMeasurePosition <<
+      ", partDrawingMeasurePosition " <<
+      partDrawingMeasurePosition <<
       ", positionsDelta " << positionsDelta <<
       ", line " << inputLineNumber;
 
@@ -2538,7 +2538,7 @@ void msrMeasure::appendNoteOrPaddingToMeasure (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceNotes ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending note or padding '" << note->asShortString () <<
@@ -2621,7 +2621,7 @@ void msrMeasure::accountForTupletMemberNoteNotesDurationInMeasure ( // JMI v0.9.
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasurePositions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Accounting for the duration of tuplet member note " <<
@@ -2669,7 +2669,7 @@ void msrMeasure::appendPaddingNoteAtTheEndOfMeasure (const S_msrNote& note)
     note->getInputLineNumber ();
 
   if (gTraceOahGroup->getTraceMeasurePositions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending padding note " << note->asString () <<
@@ -2738,7 +2738,7 @@ void msrMeasure::appendNoteToMeasureClone (const S_msrNote& note)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceNotes ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending note '" << note->asShortString () <<
@@ -2813,7 +2813,7 @@ void msrMeasure::appendDoubleTremoloToMeasure (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceTremolos ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending double tremolo '" <<
@@ -2853,7 +2853,7 @@ void msrMeasure::appendChordToMeasure (const S_msrChord& chord)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceChords ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending chord '" << chord->asString () <<
@@ -2906,7 +2906,7 @@ void msrMeasure::appendTupletToMeasure (const S_msrTuplet& tuplet)
     tuplet->getInputLineNumber ();
 
   if (gTraceOahGroup->getTraceTuplets ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending tuplet " << tuplet->asString () <<
@@ -3046,7 +3046,7 @@ void msrMeasure::appendFiguredBassToMeasure (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceFiguredBasses ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending figured bass " << figuredBass->asString () <<
@@ -3098,7 +3098,7 @@ void msrMeasure::appendFiguredBassToMeasureClone (
     figuredBass->getInputLineNumber ();
 
   if (gTraceOahGroup->getTraceFiguredBasses ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending figured bass " << figuredBass->asString () <<
@@ -3143,7 +3143,7 @@ S_msrNote msrMeasure::createPaddingSkipNoteForVoice (
       ||
     gTraceOahGroup->getTraceVoices ()
   ) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating a padding note for voice \"" <<
@@ -3195,7 +3195,7 @@ S_msrNote msrMeasure::createPaddingSkipNoteForVoice (
 //   if (gTraceOahGroup->getTraceMeasurePositions ()) {
 //     this->print (gLog);
 //
-// 	 	 std::stringstream ss;
+//       std::stringstream ss;
 //
 //     ss <<
 //       "Padding from measure whole notes '" <<
@@ -3273,7 +3273,7 @@ S_msrNote msrMeasure::createPaddingSkipNoteForVoice (
 //   else if (fMeasureWholeNotes == measurePositionToPadUpTo) {
 // #ifdef MF_TRACE_IS_ENABLED
 //     if (gTraceOahGroup->getTraceNotes ()) {
-// 		std::stringstream ss;
+//     std::stringstream ss;
 //
 //     ss <<
 //         "No need to pad from measure whole notes '" <<
@@ -3332,7 +3332,7 @@ void msrMeasure::padUpToMeasurePositionInMeasure (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasurePositions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Padding up to position '" <<
@@ -3447,7 +3447,7 @@ void msrMeasure::padUpToPositionAtTheEndOfTheMeasure (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasurePositions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Padding up from position " <<
@@ -3527,7 +3527,7 @@ void msrMeasure::padUpToPositionAtTheEndOfTheMeasure (
 
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceMeasurePositions ()) {
-	  	std::stringstream ss;
+      std::stringstream ss;
 
       ss <<
         "Appending padding note " << paddingNote->asString () <<
@@ -3632,7 +3632,7 @@ void msrMeasure::appendPaddingSkipNoteToMeasure (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasurePositions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending padding skip note" <<
@@ -3729,7 +3729,7 @@ void msrMeasure::appendStaffDetailsToMeasure (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceStaves ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending staff details '" << staffDetails->asShortString () <<
@@ -3781,7 +3781,7 @@ void msrMeasure::removeNoteFromMeasure (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceNotes ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Removing note '" <<
@@ -3836,7 +3836,7 @@ void msrMeasure::removeNoteFromMeasure (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceNotes ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       std::endl << std::endl <<
@@ -3887,7 +3887,7 @@ void msrMeasure::removeElementFromMeasure (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasures ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Removing element:" <<
@@ -3966,7 +3966,7 @@ void msrMeasure::appendNoteToMeasureNotesFlatList (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasuresSlices ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Appending note " <<
@@ -4045,7 +4045,7 @@ void msrMeasure::determineMeasureKindAndPuristNumber (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasures ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Determining the measure kind and purist number of measure " <<
@@ -4497,7 +4497,7 @@ void msrMeasure::finalizeRegularMeasure (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasures ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Finalizing regular measure " <<
@@ -4528,7 +4528,7 @@ void msrMeasure::finalizeRegularMeasure (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasures ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "===> measureWholeNotesFromPartMeasuresVector: " <<
@@ -6276,7 +6276,7 @@ void msrMeasure::finalizeFiguredBassMeasure (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceFiguredBasses ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Finalizing figured bass measure " <<
@@ -6542,7 +6542,7 @@ void msrMeasure::finalizeMeasureClone (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasures ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Finalizing measure clone " <<
@@ -6790,7 +6790,7 @@ void msrMeasure::finalizeMeasureClone (
 void msrMeasure::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -6809,7 +6809,7 @@ void msrMeasure::acceptIn (basevisitor* v)
         S_msrMeasure elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -6828,7 +6828,7 @@ void msrMeasure::acceptIn (basevisitor* v)
 void msrMeasure::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -6847,7 +6847,7 @@ void msrMeasure::acceptOut (basevisitor* v)
         S_msrMeasure elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -6866,7 +6866,7 @@ void msrMeasure::acceptOut (basevisitor* v)
 void msrMeasure::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -6890,8 +6890,8 @@ void msrMeasure::browseData (basevisitor* v)
   } // for
 
 #ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-		std::stringstream ss;
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% <== msrMeasure::browseData ()" <<

@@ -70,7 +70,7 @@ static mfMusicformatsErrorKind xmlFile2guidoWithHandler (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsr ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       std::endl <<
@@ -124,7 +124,7 @@ static mfMusicformatsErrorKind xmlFile2guidoWithHandler (
     firstMsrScore =
       translateMxsrToMsrSkeleton (
         originalMxsr,
-        gGlobalMsrOahGroup,
+        gMsrOahGroup,
         mfPassIDKind::kMfPassID_2a,
         "Create the skeleton of the first MSR from the originalMxsr");
   }
@@ -194,7 +194,7 @@ static mfMusicformatsErrorKind xmlFile2guidoWithHandler (
     secondMsrScore =
       translateMsrToMsr (
         firstMsrScore,
-        gGlobalMsrOahGroup,
+        gMsrOahGroup,
         gGlobalMsr2msrOahGroup,
         mfPassIDKind::kMfPassID_3,
         gLanguage->convertTheFirstMSRIntoASecondMSR ());
@@ -231,7 +231,7 @@ static mfMusicformatsErrorKind xmlFile2guidoWithHandler (
     secondMxsr =
       translateMsrToMxsr (
         secondMsrScore,
-        gGlobalMsrOahGroup,
+        gMsrOahGroup,
         mfPassIDKind::kMfPassID_4,
         "Convert the second MSR into an MXSR",
         mfTimingItemKind::kMandatory);
@@ -322,7 +322,7 @@ static mfMusicformatsErrorKind xmlFile2guidoWithOptionsAndArguments (
   // ------------------------------------------------------
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       handlerOptionsAndArguments;
@@ -343,7 +343,7 @@ static mfMusicformatsErrorKind xmlFile2guidoWithOptionsAndArguments (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       serviceName << " main()" <<

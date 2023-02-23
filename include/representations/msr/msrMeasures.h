@@ -124,7 +124,7 @@ class EXP msrMeasure : public msrSegmentElement
     void                  setFullMeasureWholeNotes (
                             const msrWholeNotes& wholeNotes);
 
-    msrWholeNotes          getFullMeasureWholeNotes () const
+    msrWholeNotes         getFullMeasureWholeNotes () const
                               {  return fFullMeasureWholeNotes; }
 
     void                  setMeasureWholeNotes (
@@ -134,7 +134,7 @@ class EXP msrMeasure : public msrSegmentElement
                             int             inputLineNumber,
                             const msrWholeNotes& wholeNotesDelta);
 
-    msrWholeNotes          getMeasureWholeNotes () const
+    msrWholeNotes         getMeasureWholeNotes () const
                               { return fMeasureWholeNotes; }
 
     // measure kind
@@ -188,7 +188,7 @@ class EXP msrMeasure : public msrSegmentElement
     void                  setMeasureShortestNoteWholeNotes (
                             const msrWholeNotes& duration);
 
-    msrWholeNotes          getMeasureShortestNoteWholeNotes () const
+    msrWholeNotes         getMeasureShortestNoteWholeNotes () const
                               { return fMeasureShortestNoteWholeNotes; }
 
     void                  setMeasureShortestNoteTupletFactor (
@@ -245,7 +245,7 @@ class EXP msrMeasure : public msrSegmentElement
 //     void                  incrementMeasureVoicePosition (
 //                             const msrWholeNotes& wholeNotesDelta);
 
-    msrWholeNotes          getMeasureVoicePosition () const
+    msrWholeNotes         getMeasureVoicePosition () const
                               { return fMeasureVoicePosition; }
 
     void                  setMeasureVoiceMoment (
@@ -427,7 +427,7 @@ class EXP msrMeasure : public msrSegmentElement
 
     void                  appendNoteToMeasure (
                             const S_msrNote& note,
-                            const msrWholeNotes&  partMeasurePosition);
+                            const msrWholeNotes&  partDrawingMeasurePosition);
 
     void                  appendNoteOrPaddingToMeasure (
                             const S_msrNote& note);
@@ -643,7 +643,7 @@ class EXP msrMeasure : public msrSegmentElement
 
     // measure lengthes, in whole notes
 
-    msrWholeNotes          fFullMeasureWholeNotes;
+    msrWholeNotes         fFullMeasureWholeNotes;
                             // meaningfull only
                             // when there is a time signature,
                             // but not for cadenzas
@@ -671,7 +671,7 @@ class EXP msrMeasure : public msrSegmentElement
 
     // measure lengthes, in whole notes
 
-    msrWholeNotes          fMeasureWholeNotes;
+    msrWholeNotes         fMeasureWholeNotes;
                             // this increases when musical elements
                             // are appended to the measure
 
@@ -692,7 +692,7 @@ class EXP msrMeasure : public msrSegmentElement
     // fPartShortestNoteWholeNotes and fPartShortestNoteTupletFactor
     // are used to compute a number of divisions per quarter note
     // if needed, such as when generating MusicXML from MSR
-    msrWholeNotes              fMeasureShortestNoteWholeNotes;
+    msrWholeNotes         fMeasureShortestNoteWholeNotes;
     msrTupletFactor       fMeasureShortestNoteTupletFactor;
 */
 
@@ -731,7 +731,7 @@ class EXP msrMeasure : public msrSegmentElement
                           fMeasureRepeatContextKind;
 
     // voice position
-    msrWholeNotes          fMeasureVoicePosition;
+    msrWholeNotes         fMeasureVoicePosition;
     msrMoment             fMeasureVoiceMoment;
 
     // notes flat list
@@ -815,7 +815,7 @@ class EXP msrMeasure : public msrSegmentElement
 
     void                  insertElementAtMeasurePosition (
                             int                        inputLineNumber,
-                            const msrWholeNotes&            measurePosition,
+                            const msrWholeNotes&       measurePosition,
                             const S_msrMeasureElement& elem);
 
     void                  handleEmptyMeasure (

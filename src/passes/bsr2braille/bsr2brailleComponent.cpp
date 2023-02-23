@@ -25,7 +25,7 @@ S_mfcPassComponent createBsr2brailleComponent ()
 
 #ifdef MF_TRACE_IS_ENABLED
     if (gEarlyOptions.getEarlyTraceComponents ()) {
-	  	std::stringstream ss;
+      std::stringstream ss;
 
       ss <<
         "Creating the bsr2braille pass component" <<

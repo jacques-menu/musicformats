@@ -17,7 +17,7 @@
 #include "msrMeasures.h"
 #include "msrTypesForwardDeclarations.h"
 #include "msrTupletFactors.h"
-#include "msrWholeNotes.h"
+// #include "msrWholeNotes.h"
 
 
 namespace MusicFormats
@@ -251,7 +251,7 @@ class EXP msrFiguredBass : public msrMeasureElement
                                 fFiguredBassDisplayWholeNotes = wholeNotes;
                               }
 
-    msrWholeNotes          getFiguredBassDisplayWholeNotes () const
+    msrWholeNotes         getFiguredBassDisplayWholeNotes () const
                               { return fFiguredBassDisplayWholeNotes; }
 
     msrFiguredBassParenthesesKind
@@ -293,6 +293,7 @@ class EXP msrFiguredBass : public msrMeasureElement
     // ------------------------------------------------------
 
     std::string           asString () const override;
+    std::string           asShortStringForMeasuresSlices () const override;
 
     void                  print (std::ostream& os) const override;
 
@@ -307,7 +308,7 @@ class EXP msrFiguredBass : public msrMeasureElement
     S_msrNote             fFiguredBassUpLinkToNote;
     S_msrVoice            fFiguredBassUpLinkToVoice; // for use in figured bass voices JMI v0.9.66
 
-    msrWholeNotes          fFiguredBassDisplayWholeNotes;
+    msrWholeNotes         fFiguredBassDisplayWholeNotes;
 
     msrFiguredBassParenthesesKind
                           fFiguredBassParenthesesKind;

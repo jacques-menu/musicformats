@@ -91,7 +91,7 @@ Usage: msr2lilypond [[option]* [MusicXMLFile|-] [[option]*
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Initializing msr2lilypond insider options handler \"" <<
@@ -185,7 +185,7 @@ void msr2lilypondInsiderHandler::createTheMsr2lilypondPrefixes ()
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating the msr2lilypond prefixes" <<
@@ -206,7 +206,7 @@ void msr2lilypondInsiderHandler::createTheMsr2lilypondOptionGroups (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating the msr2lilypond insider option groups" <<
@@ -250,10 +250,6 @@ void msr2lilypondInsiderHandler::createTheMsr2lilypondOptionGroups (
   // initialize the library
   // ------------------------------------------------------
 
-  initializeMusicFormats ();
-
-  initializeWAE ();
-
   initializeMSR ();
   initializeLPSR ();
 
@@ -287,7 +283,7 @@ void msr2lilypondInsiderHandler::createTheMsr2lilypondOptionGroups (
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptionsDetails ()) {
     // print the options handler initial state
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "msr2lilypondInsiderHandler has been initialized as:" <<
@@ -320,7 +316,7 @@ void msr2lilypondInsiderHandler::checkOptionsAndArguments () const
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "checking options and arguments from argc/argv in \"" <<
@@ -342,7 +338,7 @@ std::string msr2lilypondInsiderHandler::fetchOutputFileNameFromTheOptions () con
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Fetching the output file name from the options in OAH handler \"" <<
@@ -495,13 +491,13 @@ void msr2lilypondInsiderHandler::enforceHandlerQuietness ()
   gGlobalMsr2lilypondInsiderOahGroup->
     enforceGroupQuietness ();
 
-  gGlobalMsrOahGroup->
+  gMsrOahGroup->
     enforceGroupQuietness ();
 
   gGlobalMsr2lpsrOahGroup->
     enforceGroupQuietness ();
 
-  gGlobalLpsrOahGroup->
+  gLpsrOahGroup->
     enforceGroupQuietness ();
 
   gGlobalLpsr2lilypondOahGroup->
@@ -524,7 +520,7 @@ void msr2lilypondInsiderOahGroup::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> msr2lilypondInsiderOahGroup::acceptIn ()" <<
@@ -562,7 +558,7 @@ void msr2lilypondInsiderOahGroup::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> msr2lilypondInsiderOahGroup::acceptOut ()" <<
@@ -600,7 +596,7 @@ void msr2lilypondInsiderOahGroup::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> msr2lilypondInsiderOahGroup::browseData ()" <<
@@ -747,7 +743,7 @@ S_msr2lilypondInsiderOahGroup createGlobalMsr2lilypondInsiderOahGroup ()
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating global msr2lilypond OAH group" <<

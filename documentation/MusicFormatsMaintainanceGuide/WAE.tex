@@ -37,8 +37,8 @@ A typical use of exceptions in \lpsrToLilypond{lpsr2lilypondInterface.cpp} is:
     try {
       translateLpsrToLilypond (
         theLpsrScore,
-        gGlobalMsrOahGroup,
-        gGlobalLpsrOahGroup,
+        gMsrOahGroup,
+        gLpsrOahGroup,
         passIDKind,
         passDescription,
         lilypondStandardOutputStream);

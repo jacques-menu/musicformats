@@ -1057,8 +1057,8 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
     S_oahStringAtom       getLilypondVersionAtom () const
                               { return fLilypondVersionAtom; }
 
-    std::string           getLilypondVersionDefaultValue () const
-                              { return fLilypondVersionDefaultValue; }
+    std::string           getLilypondVersionMinimumValue () const
+                              { return fLilypondVersionMinimumValue; }
     // score notation
     // --------------------------------------
 
@@ -1757,7 +1757,7 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
     std::string           fLilypondVersion;
     S_oahStringAtom       fLilypondVersionAtom;
 
-    std::string           fLilypondVersionDefaultValue;
+    std::string           fLilypondVersionMinimumValue;
 
     // score notation
     // --------------------------------------

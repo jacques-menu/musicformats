@@ -44,10 +44,10 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 S_ischemeInterpreterRegularHandler ischemeInterpreterRegularHandler::create (
-	const std::string& serviceName,
-	const std::string& handlerHeader,
-	S_ischemeInterpreterInsiderHandler
-										 insiderOahHandler)
+  const std::string& serviceName,
+  const std::string& handlerHeader,
+  S_ischemeInterpreterInsiderHandler
+                     insiderOahHandler)
 {
   // create the regular handler
   ischemeInterpreterRegularHandler* o = new
@@ -61,10 +61,10 @@ S_ischemeInterpreterRegularHandler ischemeInterpreterRegularHandler::create (
 }
 
 ischemeInterpreterRegularHandler::ischemeInterpreterRegularHandler (
-	const std::string& serviceName,
-	const std::string& handlerHeader,
-	S_ischemeInterpreterInsiderHandler
-										 insiderOahHandler)
+  const std::string& serviceName,
+  const std::string& handlerHeader,
+  S_ischemeInterpreterInsiderHandler
+                     insiderOahHandler)
   : oahRegularHandler (
       serviceName,
       handlerHeader,

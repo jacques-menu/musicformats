@@ -77,11 +77,11 @@ float msrScaling::fetchGlobalStaffSize () const
 
   /* JMI
   const float optionsGlobalStaffSize =
-      gGlobalLpsrOahGroup->getGlobalStaffSize ();
+      gLpsrOahGroup->getGlobalStaffSize ();
 
   const Bool
     staffGlobalSizeHasBeenSet =
-      gGlobalLpsrOahGroup->getStaffGlobalSizeHasBeenSet ();
+      gLpsrOahGroup->getStaffGlobalSizeHasBeenSet ();
 
   float result = 0.0;
 
@@ -103,7 +103,7 @@ float msrScaling::fetchGlobalStaffSize () const
 #ifdef MF_TRACE_IS_ENABLED
     const float
       optionsStaffGlobalSizeDefaultValue =
-        gGlobalLpsrOahGroup->getStaffGlobalSizeDefaultValue ();
+        gLpsrOahGroup->getStaffGlobalSizeDefaultValue ();
 
     if (gTraceOahGroup->getTraceGeometry ()) {
       gLog <<
@@ -183,7 +183,7 @@ float msrScaling::fetchGlobalStaffSize () const
 void msrScaling::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -202,7 +202,7 @@ void msrScaling::acceptIn (basevisitor* v)
         S_msrScaling elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -221,7 +221,7 @@ void msrScaling::acceptIn (basevisitor* v)
 void msrScaling::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -240,7 +240,7 @@ void msrScaling::acceptOut (basevisitor* v)
         S_msrScaling elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<

@@ -34,7 +34,7 @@ namespace MusicFormats
 
 //_______________________________________________________________________________
 void translateBsrToBraille (
-  const S_bsrScore     originalBsrScore,
+  const S_bsrScore&    originalBsrScore,
   const S_bsrOahGroup& bsrOpts,
   mfPassIDKind         passIDKind,
   const std::string&   passDescription,

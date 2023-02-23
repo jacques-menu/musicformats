@@ -49,8 +49,8 @@ lpsrBarNumberCheck::~lpsrBarNumberCheck ()
 void lpsrBarNumberCheck::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
-		std::stringstream ss;
+  if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% ==> lpsrBarNumberCheck::acceptIn ()" <<
@@ -68,7 +68,7 @@ void lpsrBarNumberCheck::acceptIn (basevisitor* v)
         S_lpsrBarNumberCheck elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
+        if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -87,8 +87,8 @@ void lpsrBarNumberCheck::acceptIn (basevisitor* v)
 void lpsrBarNumberCheck::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
-		std::stringstream ss;
+  if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% ==> lpsrBarNumberCheck::acceptOut ()" <<
@@ -106,7 +106,7 @@ void lpsrBarNumberCheck::acceptOut (basevisitor* v)
         S_lpsrBarNumberCheck elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
+        if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -166,8 +166,8 @@ lpsrBarCommand::~lpsrBarCommand ()
 void lpsrBarCommand::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
-		std::stringstream ss;
+  if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% ==> lpsrBarCommand::acceptIn ()" <<
@@ -185,7 +185,7 @@ void lpsrBarCommand::acceptIn (basevisitor* v)
         S_lpsrBarCommand elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
+        if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -204,8 +204,8 @@ void lpsrBarCommand::acceptIn (basevisitor* v)
 void lpsrBarCommand::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
-		std::stringstream ss;
+  if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% ==> lpsrBarCommand::acceptOut ()" <<
@@ -223,7 +223,7 @@ void lpsrBarCommand::acceptOut (basevisitor* v)
         S_lpsrBarCommand elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
+        if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
           std::stringstream ss;
 
           ss <<

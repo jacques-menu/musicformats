@@ -477,7 +477,7 @@ void lpsr2lilypondTranslator::generateLilypondVersion ()
         ? gGlobalLpsr2lilypondOahGroup->
             getLilypondVersion ()
         : gGlobalLpsr2lilypondOahGroup->
-           getLilypondVersionDefaultValue ();
+           getLilypondVersionMinimumValue ();
 
   fLilypondCodeStream <<
     "\\version \"" <<
@@ -487,14 +487,14 @@ void lpsr2lilypondTranslator::generateLilypondVersion ()
 }
 \end{lstlisting}
 
-The default \lily\ version number is \code{2.22.0}. Another can be selected with the \optionNameBoth{lilypond-version}{lpv} option:
+The minimum \lily\ version number is \code{2.24.0}. Another can be selected with the \optionNameBoth{lilypond-version}{lpv} option:
 \begin{lstlisting}[language=Terminal]
 jacquesmenu@macmini > xml2ly -find lilypond-version
 1 occurrence of string "lilypond-version" has been found:
    1:
     -lilypond-version, -lpv
     Set the Lilypond '\version' to STRING in the Lilypond code.
-                    The default is '2.22.0'.
+                    The default is '2.24.0'.
 \end{lstlisting}
 
 
@@ -1722,7 +1722,7 @@ void oahOahGroup::printOahOahValues (int valueFieldWidth)
   ++gIndenter;
 
   gLog << std::left <<
-    std::setw (valueFieldWidth) << "fReverseNamesDisplayOrder" << " : " <<
+    std::setw (valueFieldWidth) << "fReverseNamesDisplayOrder" << ": " <<
     fReverseNamesDisplayOrder <<
     std::endl <<
 

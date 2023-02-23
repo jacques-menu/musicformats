@@ -298,101 +298,101 @@ lpsrScore::lpsrScore (
   // populate the paper
 
   // geometry
-//   if (gGlobalLpsrOahGroup->getPaperWidthAtom ()->getSelected ()) {
+//   if (gLpsrOahGroup->getPaperWidthAtom ()->getSelected ()) {
 //     fScorePaper->
 //       setPaperWidth (
-//         gGlobalLpsrOahGroup->getPaperWidth ());
+//         gLpsrOahGroup->getPaperWidth ());
 //   }
 //
-//   if (gGlobalLpsrOahGroup->getPaperHeightAtom ()->getSelected ()) {
+//   if (gLpsrOahGroup->getPaperHeightAtom ()->getSelected ()) {
 //     fScorePaper->
 //       setPaperHeight (
-//         gGlobalLpsrOahGroup->getPaperHeight ());
+//         gLpsrOahGroup->getPaperHeight ());
 //   }
 //
-//   if (gGlobalLpsrOahGroup->getPaperHorizontalShiftAtom ()->getSelected ()) {
+//   if (gLpsrOahGroup->getPaperHorizontalShiftAtom ()->getSelected ()) {
 //     fScorePaper->
 //       setTopMargin (
-//         gGlobalLpsrOahGroup->getTopMargin ());
+//         gLpsrOahGroup->getTopMargin ());
 //   }
 //
-//   if (gGlobalLpsrOahGroup->getPaperHorizontalShiftAtom ()->getSelected ()) {
+//   if (gLpsrOahGroup->getPaperHorizontalShiftAtom ()->getSelected ()) {
 //     fScorePaper->
 //       setBottomMargin (
-//         gGlobalLpsrOahGroup->getBottomMargin ());
+//         gLpsrOahGroup->getBottomMargin ());
 //   }
 //
-//   if (gGlobalLpsrOahGroup->getPaperHorizontalShiftAtom ()->getSelected ()) {
+//   if (gLpsrOahGroup->getPaperHorizontalShiftAtom ()->getSelected ()) {
 //     fScorePaper->
 //       setLeftMargin (
-//         gGlobalLpsrOahGroup->getLeftMargin ());
+//         gLpsrOahGroup->getLeftMargin ());
 //   }
 //
-//   if (gGlobalLpsrOahGroup->getPaperHorizontalShiftAtom ()->getSelected ()) {
+//   if (gLpsrOahGroup->getPaperHorizontalShiftAtom ()->getSelected ()) {
 //     fScorePaper->
 //       setRightMargin (
-//         gGlobalLpsrOahGroup->getRightMargin ());
+//         gLpsrOahGroup->getRightMargin ());
 //   }
 
   // indents
-  if (gGlobalLpsrOahGroup->getPaperHorizontalShiftAtom ()->getSelected ()) {
+  if (gLpsrOahGroup->getPaperHorizontalShiftAtom ()->getSelected ()) {
     fScorePaper->
       setHorizontalShift (
         msrLength::create (
-          gGlobalLpsrOahGroup->getPaperHorizontalShift ().getLengthUnitKind (),
-          gGlobalLpsrOahGroup->getPaperHorizontalShift ().getLengthValue ()));
+          gLpsrOahGroup->getPaperHorizontalShift ().getLengthUnitKind (),
+          gLpsrOahGroup->getPaperHorizontalShift ().getLengthValue ()));
   }
 
-  if (gGlobalLpsrOahGroup->getPaperIndentAtom ()->getSelected ()) {
+  if (gLpsrOahGroup->getPaperIndentAtom ()->getSelected ()) {
     fScorePaper->
       setIndent (
         msrLength::create (
-          gGlobalLpsrOahGroup->getPaperIndent ().getLengthUnitKind (),
-          gGlobalLpsrOahGroup->getPaperIndent ().getLengthValue ()));
+          gLpsrOahGroup->getPaperIndent ().getLengthUnitKind (),
+          gLpsrOahGroup->getPaperIndent ().getLengthValue ()));
   }
 
-  if (gGlobalLpsrOahGroup->getPaperShortIndentAtom ()->getSelected ()) {
+  if (gLpsrOahGroup->getPaperShortIndentAtom ()->getSelected ()) {
     fScorePaper->
       setShortIndent (
         msrLength::create (
-          gGlobalLpsrOahGroup->getPaperShortIndent ().getLengthUnitKind (),
-          gGlobalLpsrOahGroup->getPaperShortIndent ().getLengthValue ()));
+          gLpsrOahGroup->getPaperShortIndent ().getLengthUnitKind (),
+          gLpsrOahGroup->getPaperShortIndent ().getLengthValue ()));
   }
 
   // spaces
-  if (gGlobalLpsrOahGroup->getMarkupSystemSpacingPaddingAtom ()->getSelected ()) {
+  if (gLpsrOahGroup->getMarkupSystemSpacingPaddingAtom ()->getSelected ()) {
     fScorePaper->
       setMarkupSystemSpacingPadding (
         msrLength::create (
-          gGlobalLpsrOahGroup->getMarkupSystemSpacingPadding ().getLengthUnitKind (),
-          gGlobalLpsrOahGroup->getMarkupSystemSpacingPadding ().getLengthValue ()));
+          gLpsrOahGroup->getMarkupSystemSpacingPadding ().getLengthUnitKind (),
+          gLpsrOahGroup->getMarkupSystemSpacingPadding ().getLengthValue ()));
   }
 
-  if (gGlobalLpsrOahGroup->getBetweenSystemSpaceAtom ()->getSelected ()) {
+  if (gLpsrOahGroup->getBetweenSystemSpaceAtom ()->getSelected ()) {
     fScorePaper->
       setBetweenSystemSpace (
         msrLength::create (
-          gGlobalLpsrOahGroup->getBetweenSystemSpace ().getLengthUnitKind (),
-          gGlobalLpsrOahGroup->getBetweenSystemSpace ().getLengthValue ()));
+          gLpsrOahGroup->getBetweenSystemSpace ().getLengthUnitKind (),
+          gLpsrOahGroup->getBetweenSystemSpace ().getLengthValue ()));
   }
 
-  if (gGlobalLpsrOahGroup->getPageTopSpacingAtom ()->getSelected ()) {
+  if (gLpsrOahGroup->getPageTopSpacingAtom ()->getSelected ()) {
     fScorePaper->
       setPageTopSpacing (
         msrLength::create (
-          gGlobalLpsrOahGroup->getPageTopSpacing ().getLengthUnitKind (),
-          gGlobalLpsrOahGroup->getPageTopSpacing ().getLengthValue ()));
+          gLpsrOahGroup->getPageTopSpacing ().getLengthUnitKind (),
+          gLpsrOahGroup->getPageTopSpacing ().getLengthValue ()));
   }
 
   // counts
-  if (gGlobalLpsrOahGroup->getPageCountAtom ()->getSelected ()) {
+  if (gLpsrOahGroup->getPageCountAtom ()->getSelected ()) {
     fScorePaper->
-      setPageCount (gGlobalLpsrOahGroup->getPageCount ());
+      setPageCount (gLpsrOahGroup->getPageCount ());
   }
 
-  if (gGlobalLpsrOahGroup->getSystemCountAtom ()->getSelected ()) {
+  if (gLpsrOahGroup->getSystemCountAtom ()->getSelected ()) {
     fScorePaper->
-      setSystemCount (gGlobalLpsrOahGroup->getSystemCount ());
+      setSystemCount (gLpsrOahGroup->getSystemCount ());
   }
 
   // conversion date
@@ -503,8 +503,8 @@ R"(
 )";
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
-		std::stringstream ss;
+  if (gLpsrOahGroup->getTraceSchemeFunctions ()) {
+    std::stringstream ss;
 
     ss <<
       "Including Jianpu definition file '" << schemeModulesName << "'" <<
@@ -556,8 +556,8 @@ R"(
 )";
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
-		std::stringstream ss;
+  if (gLpsrOahGroup->getTraceSchemeFunctions ()) {
+    std::stringstream ss;
 
     ss <<
       "Using Scheme modules '" << schemeModulesName << "'" <<
@@ -624,8 +624,8 @@ R"(
 
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
-		std::stringstream ss;
+  if (gLpsrOahGroup->getTraceSchemeFunctions ()) {
+    std::stringstream ss;
 
     ss <<
       "Including Jianpu definition file '" << schemeModulesName << "'" <<
@@ -692,8 +692,8 @@ tongue =
 )";
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
-		std::stringstream ss;
+  if (gLpsrOahGroup->getTraceSchemeFunctions ()) {
+    std::stringstream ss;
 
     ss <<
       "Creating Scheme function '" << schemeFunctionName << "'" <<
@@ -754,8 +754,8 @@ editorialAccidental =
 )";
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
-		std::stringstream ss;
+  if (gLpsrOahGroup->getTraceSchemeFunctions ()) {
+    std::stringstream ss;
 
     ss <<
       "Creating Scheme function '" << schemeFunctionName << "'" <<
@@ -813,8 +813,8 @@ ffffff = #(make-dynamic-script "ffffff")
 )";
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
-		std::stringstream ss;
+  if (gLpsrOahGroup->getTraceSchemeFunctions ()) {
+    std::stringstream ss;
 
     ss <<
       "Creating Scheme function '" << schemeFunctionName << "'" <<
@@ -920,8 +920,8 @@ tupletsCurvedBrackets = {
 )";
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
-		std::stringstream ss;
+  if (gLpsrOahGroup->getTraceSchemeFunctions ()) {
+    std::stringstream ss;
 
     ss <<
       "Creating Scheme function '" << schemeFunctionName << "'" <<
@@ -981,8 +981,8 @@ after =
 )";
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
-		std::stringstream ss;
+  if (gLpsrOahGroup->getTraceSchemeFunctions ()) {
+    std::stringstream ss;
 
     ss <<
       "Creating Scheme function '" << schemeFunctionName << "'" <<
@@ -1100,8 +1100,8 @@ tempoNotesRelationship =
 )!";
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
-		std::stringstream ss;
+  if (gLpsrOahGroup->getTraceSchemeFunctions ()) {
+    std::stringstream ss;
 
     ss <<
       "Creating Scheme function '" << schemeFunctionName << "'" <<
@@ -1299,8 +1299,8 @@ glissandoTextOff = \revert Glissando.stencil
 )";
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
-		std::stringstream ss;
+  if (gLpsrOahGroup->getTraceSchemeFunctions ()) {
+    std::stringstream ss;
 
     ss <<
       "Creating Scheme functions for '" << schemeFunctionName << "'" <<
@@ -1374,8 +1374,8 @@ otherDynamic =
 )";
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
-		std::stringstream ss;
+  if (gLpsrOahGroup->getTraceSchemeFunctions ()) {
+    std::stringstream ss;
 
     ss <<
       "Creating Scheme functions for '" << schemeFunctionName << "'" <<
@@ -1701,8 +1701,8 @@ schleifer =
 )";
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
-		std::stringstream ss;
+  if (gLpsrOahGroup->getTraceSchemeFunctions ()) {
+    std::stringstream ss;
 
     ss <<
       "Creating Scheme functions for '" << schemeFunctionName << "'" <<
@@ -1779,8 +1779,8 @@ scoopBelow = \once \override NoteHead #'stencil = #scoop-below-stencil
 )";
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
-		std::stringstream ss;
+  if (gLpsrOahGroup->getTraceSchemeFunctions ()) {
+    std::stringstream ss;
 
     ss <<
       "Creating Scheme functions for '" << schemeFunctionName << "'" <<
@@ -1848,8 +1848,8 @@ damp = \markup {
 )!";
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
-		std::stringstream ss;
+  if (gLpsrOahGroup->getTraceSchemeFunctions ()) {
+    std::stringstream ss;
 
     ss <<
       "Creating Scheme function '" << schemeFunctionName << "'" <<
@@ -1911,8 +1911,8 @@ dampAll = \markup
 )!";
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
-		std::stringstream ss;
+  if (gLpsrOahGroup->getTraceSchemeFunctions ()) {
+    std::stringstream ss;
 
     ss <<
       "Creating Scheme function '" << schemeFunctionName << "'" <<
@@ -1979,8 +1979,8 @@ whiteNoteHeads =
 )!";
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
-		std::stringstream ss;
+  if (gLpsrOahGroup->getTraceSchemeFunctions ()) {
+    std::stringstream ss;
 
     ss <<
       "Creating Scheme function '" << schemeFunctionName << "'" <<
@@ -2040,8 +2040,8 @@ boxAroundNextBarNumber = {
 )!";
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
-		std::stringstream ss;
+  if (gLpsrOahGroup->getTraceSchemeFunctions ()) {
+    std::stringstream ss;
 
     ss <<
       "Creating Scheme function '" << schemeFunctionName << "'" <<
@@ -2141,8 +2141,8 @@ R"(
   schemeFunctionCode = ss.str ();
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
-		std::stringstream ss;
+  if (gLpsrOahGroup->getTraceSchemeFunctions ()) {
+    std::stringstream ss;
 
     ss <<
       "Creating Scheme function '" << schemeFunctionName << "'" <<
@@ -2224,8 +2224,8 @@ R"(
   schemeFunctionCode = ss.str ();
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
-		std::stringstream ss;
+  if (gLpsrOahGroup->getTraceSchemeFunctions ()) {
+    std::stringstream ss;
 
     ss <<
       "Creating Scheme function '" << schemeFunctionName << "'" <<
@@ -2289,8 +2289,8 @@ R"(
   schemeFunctionCode = ss.str ();
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
-		std::stringstream ss;
+  if (gLpsrOahGroup->getTraceSchemeFunctions ()) {
+    std::stringstream ss;
 
     ss <<
       "Creating Scheme function '" << schemeFunctionName << "'" <<
@@ -2423,8 +2423,8 @@ R"(
   schemeFunctionCode = ss.str ();
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
-		std::stringstream ss;
+  if (gLpsrOahGroup->getTraceSchemeFunctions ()) {
+    std::stringstream ss;
 
     ss <<
       "Creating Scheme function '" << schemeFunctionName << "'" <<
@@ -2545,8 +2545,8 @@ R"(
   schemeFunctionCode = ss.str ();
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
-		std::stringstream ss;
+  if (gLpsrOahGroup->getTraceSchemeFunctions ()) {
+    std::stringstream ss;
 
     ss <<
       "Creating Scheme function '" << schemeFunctionName << "'" <<
@@ -2644,8 +2644,8 @@ R"(
   schemeFunctionCode = ss.str ();
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
-		std::stringstream ss;
+  if (gLpsrOahGroup->getTraceSchemeFunctions ()) {
+    std::stringstream ss;
 
     ss <<
       "Creating Scheme function '" << schemeFunctionName << "'" <<
@@ -2726,8 +2726,8 @@ R"(
   schemeFunctionCode = ss.str ();
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
-		std::stringstream ss;
+  if (gLpsrOahGroup->getTraceSchemeFunctions ()) {
+    std::stringstream ss;
 
     ss <<
       "Creating Scheme function '" << schemeFunctionName << "'" <<
@@ -2779,8 +2779,8 @@ R"(
 )";
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
-		std::stringstream ss;
+  if (gLpsrOahGroup->getTraceSchemeFunctions ()) {
+    std::stringstream ss;
 
     ss <<
       "Creating Scheme functions for '" << schemeFunctionName << "'" <<
@@ -2823,8 +2823,8 @@ R"(
 )";
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
-		std::stringstream ss;
+  if (gLpsrOahGroup->getTraceSchemeFunctions ()) {
+    std::stringstream ss;
 
     ss <<
       "Creating Scheme functions for '" << schemeFunctionName << "'" <<
@@ -2880,8 +2880,8 @@ void lpsrScore::appendLyricsUseToStoreCommand (const S_msrStanza& stanza)
 void lpsrScore::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
-		std::stringstream ss;
+  if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% ==> lpsrScore::acceptIn ()" <<
@@ -2899,7 +2899,7 @@ void lpsrScore::acceptIn (basevisitor* v)
         S_lpsrScore elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
+        if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -2918,8 +2918,8 @@ void lpsrScore::acceptIn (basevisitor* v)
 void lpsrScore::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
-		std::stringstream ss;
+  if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% ==> lpsrScore::acceptOut ()" <<
@@ -2937,7 +2937,7 @@ void lpsrScore::acceptOut (basevisitor* v)
         S_lpsrScore elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
+        if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
@@ -2956,8 +2956,8 @@ void lpsrScore::acceptOut (basevisitor* v)
 void lpsrScore::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
-		std::stringstream ss;
+  if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% ==> lpsrScore::browseData ()" <<
@@ -3058,8 +3058,8 @@ void lpsrScore::browseData (basevisitor* v)
   }
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
-		std::stringstream ss;
+  if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
+    std::stringstream ss;
 
     ss <<
       "% <== lpsrScore::browseData ()" <<

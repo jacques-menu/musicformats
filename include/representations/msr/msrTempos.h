@@ -23,7 +23,7 @@
 #include "msrNotesDurations.h"
 #include "msrPlacements.h"
 #include "msrTupletFactors.h"
-#include "msrWholeNotes.h"
+// #include "msrWholeNotes.h"
 #include "msrWords.h"
 
 
@@ -60,7 +60,7 @@ class EXP msrTempoNote : public msrElement
     // set and get
     // ------------------------------------------------------
 
-    msrWholeNotes          getTempoNoteWholeNotes () const
+    msrWholeNotes         getTempoNoteWholeNotes () const
                               { return fTempoNoteWholeNotes; }
 
     const std::list<S_msrBeam>&
@@ -98,7 +98,7 @@ class EXP msrTempoNote : public msrElement
     // private fields
     // ------------------------------------------------------
 
-    msrWholeNotes          fTempoNoteWholeNotes;
+    msrWholeNotes         fTempoNoteWholeNotes;
 
     std::list<S_msrBeam>  fTempoNoteBeams;
 
@@ -121,7 +121,7 @@ class EXP msrTempoTuplet : public msrElement
                             msrTempoTupletBracketKind    tempoTupletBracketKind,
                             msrTempoTupletShowNumberKind tempoTupletShowNumberKind,
                             const msrTupletFactor&       tempoTupletFactor,
-                            const msrWholeNotes&          memberNotesDisplayWholeNotes);
+                            const msrWholeNotes&     memberNotesDisplayWholeNotes);
 
   protected:
 
@@ -134,7 +134,7 @@ class EXP msrTempoTuplet : public msrElement
                             msrTempoTupletBracketKind    tempoTupletBracketKind,
                             msrTempoTupletShowNumberKind tempoTupletShowNumberKind,
                             const msrTupletFactor&       tempoTupletFactor,
-                            const msrWholeNotes&          memberNotesDisplayWholeNotes);
+                            const msrWholeNotes&     memberNotesDisplayWholeNotes);
 
     virtual               ~msrTempoTuplet ();
 
@@ -158,14 +158,14 @@ class EXP msrTempoTuplet : public msrElement
                           getTempoTupletFactor () const
                               { return fTempoTupletFactor; }
 
-    msrWholeNotes          getMemberNotesDisplayWholeNotes () const
+    msrWholeNotes         getMemberNotesDisplayWholeNotes () const
                               { return fMemberNotesDisplayWholeNotes; }
 
     const std::list<S_msrElement>&
                           getTempoTupletElements () const
                               { return fTempoTupletElements; }
 
-    msrWholeNotes          getTempoTupletDisplayWholeNotes () const
+    msrWholeNotes         getTempoTupletDisplayWholeNotes () const
                               { return fTempoTupletDisplayWholeNotes; }
 
   public:
@@ -226,9 +226,9 @@ class EXP msrTempoTuplet : public msrElement
 
     msrTupletFactor       fTempoTupletFactor;
 
-    msrWholeNotes          fMemberNotesDisplayWholeNotes;
+    msrWholeNotes         fMemberNotesDisplayWholeNotes;
 
-    msrWholeNotes          fTempoTupletDisplayWholeNotes;
+    msrWholeNotes         fTempoTupletDisplayWholeNotes;
 
     std::list<S_msrElement>
                           fTempoTupletElements;

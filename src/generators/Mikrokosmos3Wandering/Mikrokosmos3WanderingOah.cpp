@@ -204,7 +204,7 @@ void Mikrokosmos3WanderingOahGroup::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> Mikrokosmos3WanderingOahGroup::acceptIn ()" <<
@@ -242,7 +242,7 @@ void Mikrokosmos3WanderingOahGroup::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> Mikrokosmos3WanderingOahGroup::acceptOut ()" <<
@@ -280,7 +280,7 @@ void Mikrokosmos3WanderingOahGroup::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> Mikrokosmos3WanderingOahGroup::browseData ()" <<
@@ -354,7 +354,7 @@ S_Mikrokosmos3WanderingOahGroup createGlobalMikrokosmos3WanderingOahGroup ()
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating global Mikrokosmos3Wandering OAH group" <<

@@ -195,10 +195,10 @@ class EXP oahFindableElement : public smartable
 
     virtual void          print (std::ostream& os) const = 0;
     virtual void          printFull (std::ostream& os) const
-    													{ print (os); }
+                              { print (os); }
 
     virtual const std::string
-    											containingFindableElementAsString () const = 0;
+                          containingFindableElementAsString () const = 0;
 
   private:
 
@@ -398,16 +398,16 @@ EXP std::ostream& operator << (std::ostream& os, const oahElement& elt);
 
 //______________________________________________________________________________
 /*
-	Because the set needs a comparison functor to work with. JMI v0.9.66
+  Because the set needs a comparison functor to work with. JMI v0.9.66
 
-	If you don't specify one, it will make a default-constructed one.
-	In this case, since you're using a function-pointer type,
-	the default-constructed one will be a null pointer, which can't be called;
-	so instead, you have to provide the correct function pointer at run time.
+  If you don't specify one, it will make a default-constructed one.
+  In this case, since you're using a function-pointer type,
+  the default-constructed one will be a null pointer, which can't be called;
+  so instead, you have to provide the correct function pointer at run time.
 
-	A better approach might be to use a function class type (a.k.a. functor type);
-	then the function call can be resolved at compile time,
-	and a default-constructed object will do the right thing.
+  A better approach might be to use a function class type (a.k.a. functor type);
+  then the function call can be resolved at compile time,
+  and a default-constructed object will do the right thing.
 */
 
 struct compareOahElements {

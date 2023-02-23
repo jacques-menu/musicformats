@@ -66,7 +66,7 @@ class EXP msdlConverterRegularHandler : public oahRegularHandler
                             mfMultiGenerationOutputKind value)
                               { fMultiGenerationOutputKind = value; }
     mfMultiGenerationOutputKind
-    									    getMultiGenerationOutputKind () const
+                          getMultiGenerationOutputKind () const
                               { return fMultiGenerationOutputKind; }
 
   public:

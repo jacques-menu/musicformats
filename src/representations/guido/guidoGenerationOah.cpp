@@ -139,7 +139,7 @@ void guidoGenerationOahGroup::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> guidoGenerationOahGroup::acceptIn ()" <<
@@ -177,7 +177,7 @@ void guidoGenerationOahGroup::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> guidoGenerationOahGroup::acceptOut ()" <<
@@ -215,7 +215,7 @@ void guidoGenerationOahGroup::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       ".\\\" ==> guidoGenerationOahGroup::browseData ()" <<
@@ -279,7 +279,7 @@ S_guidoGenerationOahGroup createGlobalGuidoGenerationOahGroup ()
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-		std::stringstream ss;
+    std::stringstream ss;
 
     ss <<
       "Creating global generators insider OAH group" <<
