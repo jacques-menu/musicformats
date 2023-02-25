@@ -1366,10 +1366,12 @@ A stave contains at most 4 numbered voices, stored in:
 \begin{lstlisting}[language=CPlusPlus]
     // the mapping of all the voices in the staff,
     // including harmonies and figured bass voices
-    std::map<int, S_msrVoice>  fStaffVoiceNumbersToAllVoicesMap;
+    std::map<int, S_msrVoice>
+                          fStaffVoiceNumbersToAllVoicesMap;
 
     // the mapping of voice numbers to regular voices
-    std::map<int, S_msrVoice>  fStaffVoiceNumbersToRegularVoicesMap;
+    std::map<int, S_msrVoice>
+                          fStaffVoiceNumbersToRegularVoicesMap;
 
     // we need to handle the regular voice specifically
     // to assign them sequencing numbers from 1 to gMaxStaffVoices,

@@ -210,10 +210,15 @@ mxsr2msrTranslator::mxsr2msrTranslator (
 
   fCurrentHarmonyRootDiatonicPitchKind = msrDiatonicPitchKind::kDiatonicPitch_UNKNOWN;
   fCurrentHarmonyRootAlterationKind    = msrAlterationKind::kAlteration_UNKNOWN;
+
+  fCurrentHarmonyFunctionText          = "";
+
   fCurrentHarmonyKind                  = msrHarmonyKind::kHarmony_UNKNOWN;
   fCurrentHarmonyKindText              = "";
+
   fCurrentHarmonyBassDiatonicPitchKind = msrDiatonicPitchKind::kDiatonicPitch_UNKNOWN;
   fCurrentHarmonyBassAlterationKind    = msrAlterationKind::kAlteration_UNKNOWN;
+
   fCurrentHarmonyDegreeValue           = -1;
   fCurrentHarmonyDegreeAlterationKind  = msrAlterationKind::kAlteration_UNKNOWN;
 
@@ -3414,7 +3419,7 @@ void mxsr2msrTranslator::visitStart (S_mode& elt)
 
   std::string mode = elt->getValue();
 
-  if       (mode == "[NONE]") {
+  if       (mode == "none") {
     fCurrentModeKind = msrModeKind::kMode_UNKNOWN;
   }
   else if  (mode == "major") {
@@ -4111,7 +4116,7 @@ void mxsr2msrTranslator::visitStart (S_interchangeable& elt)
   fCurrentInterchangeableSeparatorKind =
     msrTimeSignatureSeparatorKind::kTimeSignatureSeparatorNone; // default value
 
-  if       (interchangeableSymbol == "[NONE]") {
+  if       (interchangeableSymbol == "none") {
     fCurrentInterchangeableSeparatorKind = msrTimeSignatureSeparatorKind::kTimeSignatureSeparatorNone;
   }
   else  if (interchangeableSymbol == "horizontal") {
@@ -8595,7 +8600,7 @@ void mxsr2msrTranslator::visitStart (S_bracket& elt)
   else if (ligatureLineEndValue == "arrow") {
     ligatureLineEndKind = msrLigatureLineEndKind::kLigatureLineEndArrow;
   }
-  else if (ligatureLineEndValue == "[NONE]") {
+  else if (ligatureLineEndValue == "none") {
     ligatureLineEndKind = msrLigatureLineEndKind::kLigatureLineEndNone;
   }
   else {
@@ -10605,7 +10610,7 @@ void mxsr2msrTranslator::visitStart (S_bar_style& elt)
     fCurrentBarLineStyleKind =
       msrBarLineStyleKind::kBarLineStyleShort;
   }
-  else if (barStyle == "[NONE]") {
+  else if (barStyle == "none") {
     fCurrentBarLineStyleKind =
       msrBarLineStyleKind::kBarLineStyleNone;
   }
@@ -11074,7 +11079,7 @@ void mxsr2msrTranslator::visitStart (S_repeat& elt)
       msrBarLineRepeatWingedKind::kBarLineRepeatWingedNone; // default value
 
     if (winged.size ()) {
-      if       (winged == "[NONE]") {
+      if       (winged == "none") {
         fCurrentBarLineRepeatWingedKind =
           msrBarLineRepeatWingedKind::kBarLineRepeatWingedNone;
       }
@@ -12127,7 +12132,7 @@ void mxsr2msrTranslator::visitStart (S_notehead& elt)
       fCurrentNoteHeadKind = msrNoteHeadKind::kNoteHeadLeftTriangle; }
     else if (noteHead == "rectangle") {
       fCurrentNoteHeadKind = msrNoteHeadKind::kNoteHeadRectangle; }
-    else if (noteHead == "[NONE]") {
+    else if (noteHead == "none") {
       fCurrentNoteHeadKind = msrNoteHeadKind::kNoteHeadNone; }
     else if (noteHead == "do") {
       fCurrentNoteHeadKind = msrNoteHeadKind::kNoteHeadDo; }
@@ -12441,7 +12446,7 @@ void mxsr2msrTranslator::visitStart (S_stem& elt)
   else if (stem == "down")
     stemKind = msrStemKind::kStemDown;
 
-  else if (stem == "[NONE]")
+  else if (stem == "none")
     stemKind = msrStemKind::kStemNeutral;
 
   else if (stem == "double")
@@ -18523,7 +18528,7 @@ void mxsr2msrTranslator::visitStart (S_tuplet& elt)
     else if (tupletShowType == "both") {
       fCurrentTupletShowTypeKind = msrTupletShowTypeKind::kTupletShowTypeBoth;
     }
-    else if (tupletShowType == "[NONE]") {
+    else if (tupletShowType == "none") {
       fCurrentTupletShowTypeKind = msrTupletShowTypeKind::kTupletShowTypeNone;
     }
     else {
@@ -19332,7 +19337,7 @@ S_msrChord mxsr2msrTranslator::createChordFromItsFirstNote (
     }
     else {
       gLog <<
-        "[NONE]";
+        "none";
     }
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -27204,7 +27209,7 @@ void mxsr2msrTranslator::displayLastHandledTupletInVoiceMap (const std::string& 
 
   if (! fLastHandledTupletInVoiceMap.size ()) {
     gLog <<
-      " [NONE]" <<
+      " none" <<
       std::endl;
   }
 
@@ -27573,7 +27578,7 @@ void mxsr2msrTranslator::visitStart (S_rehearsal& elt)
     rehearsalKind =
       msrRehearsalMarkKind::kRehearsalMarkNone; // default value
 
-  if      (rehearsalEnclosure == "[NONE]") {
+  if      (rehearsalEnclosure == "none") {
     rehearsalKind = msrRehearsalMarkKind::kRehearsalMarkNone;
   }
   else if (rehearsalEnclosure == "rectangle") {
@@ -27676,11 +27681,17 @@ void mxsr2msrTranslator::visitStart (S_harmony& elt)
 
   fCurrentHarmonyRootDiatonicPitchKind = msrDiatonicPitchKind::kDiatonicPitch_UNKNOWN;
   fCurrentHarmonyRootAlterationKind    = msrAlterationKind::kAlterationNatural;
+
+  fCurrentHarmonyFunctionText          = "";
+
   fCurrentHarmonyKind                  = msrHarmonyKind::kHarmony_UNKNOWN;
   fCurrentHarmonyKindText              = "";
+
   fCurrentHarmonyInversion             = K_HARMONY_INVERSION_NONE;
+
   fCurrentHarmonyBassDiatonicPitchKind = msrDiatonicPitchKind::kDiatonicPitch_UNKNOWN;
   fCurrentHarmonyBassAlterationKind    = msrAlterationKind::kAlterationNatural;
+
   fCurrentHarmonyDegreeValue           = -1;
   fCurrentHarmonyDegreeAlterationKind  = msrAlterationKind::kAlterationNatural;
 
@@ -27794,6 +27805,29 @@ void mxsr2msrTranslator::visitStart (S_root_alter& elt)
   }
 }
 
+void mxsr2msrTranslator::visitStart (S_function& elt)
+{
+  int inputLineNumber =
+    elt->getInputLineNumber ();
+
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+    std::stringstream ss;
+
+    ss <<
+      "--> Start visiting S_function" <<
+      ", line " << inputLineNumber <<
+      std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  std::string fCurrentHarmonyFunctionText = elt->getValue ();
+}
+
 void mxsr2msrTranslator::visitStart (S_kind& elt)
 {
   int inputLineNumber =
@@ -27817,96 +27851,97 @@ void mxsr2msrTranslator::visitStart (S_kind& elt)
   // harmony kind
   // ----------------------------------
 
-  std::string kind = elt->getValue ();
+  std::string kindValue = elt->getValue ();
 
   fCurrentHarmonyKindText =
     elt->getAttributeValue ("text");
 
-  // check harmony kind
-  if      (kind == "major")
+  // check harmony kindValue
+  if      (kindValue == "major")
     fCurrentHarmonyKind = msrHarmonyKind::kHarmonyMajor;
-  else if (kind == "minor")
+  else if (kindValue == "minor")
     fCurrentHarmonyKind = msrHarmonyKind::kHarmonyMinor;
-  else if (kind == "augmented")
+  else if (kindValue == "augmented")
     fCurrentHarmonyKind = msrHarmonyKind::kHarmonyAugmented;
-  else if (kind == "diminished")
+  else if (kindValue == "diminished")
     fCurrentHarmonyKind = msrHarmonyKind::kHarmonyDiminished;
 
-  else if (kind == "dominant")
+  else if (kindValue == "dominant")
     fCurrentHarmonyKind = msrHarmonyKind::kHarmonyDominant;
-  else if (kind == "major-seventh")
+  else if (kindValue == "major-seventh")
     fCurrentHarmonyKind = msrHarmonyKind::kHarmonyMajorSeventh;
-  else if (kind == "minor-seventh")
+  else if (kindValue == "minor-seventh")
     fCurrentHarmonyKind = msrHarmonyKind::kHarmonyMinorSeventh;
-  else if (kind == "diminished-seventh")
+  else if (kindValue == "diminished-seventh")
     fCurrentHarmonyKind = msrHarmonyKind::kHarmonyDiminishedSeventh;
 
-  else if (kind == "augmented-seventh")
+  else if (kindValue == "augmented-seventh")
     fCurrentHarmonyKind = msrHarmonyKind::kHarmonyAugmentedSeventh;
-  else if (kind == "half-diminished")
+  else if (kindValue == "half-diminished")
     fCurrentHarmonyKind = msrHarmonyKind::kHarmonyHalfDiminished;
-  else if (kind == "major-minor")
+  else if (kindValue == "major-minor")
     fCurrentHarmonyKind = msrHarmonyKind::kHarmonyMinorMajorSeventh;
 
-  else if (kind == "major-sixth")
+  else if (kindValue == "major-sixth")
     fCurrentHarmonyKind = msrHarmonyKind::kHarmonyMajorSixth;
-  else if (kind == "minor-sixth")
+  else if (kindValue == "minor-sixth")
     fCurrentHarmonyKind = msrHarmonyKind::kHarmonyMinorSixth;
 
-  else if (kind == "dominant-ninth")
+  else if (kindValue == "dominant-ninth")
     fCurrentHarmonyKind = msrHarmonyKind::kHarmonyDominantNinth;
-  else if (kind == "major-ninth")
+  else if (kindValue == "major-ninth")
     fCurrentHarmonyKind = msrHarmonyKind::kHarmonyMajorNinth;
-  else if (kind == "minor-ninth")
+  else if (kindValue == "minor-ninth")
     fCurrentHarmonyKind = msrHarmonyKind::kHarmonyMinorNinth;
 
-  else if (kind == "dominant-11th")
+  else if (kindValue == "dominant-11th")
     fCurrentHarmonyKind = msrHarmonyKind::kHarmonyDominantEleventh;
-  else if (kind == "major-11th")
+  else if (kindValue == "major-11th")
     fCurrentHarmonyKind = msrHarmonyKind::kHarmonyMajorEleventh;
-  else if (kind == "minor-11th")
+  else if (kindValue == "minor-11th")
     fCurrentHarmonyKind = msrHarmonyKind::kHarmonyMinorEleventh;
 
-  else if (kind == "dominant-13th")
+  else if (kindValue == "dominant-13th")
     fCurrentHarmonyKind = msrHarmonyKind::kHarmonyDominantThirteenth;
-  else if (kind == "major-13th")
+  else if (kindValue == "major-13th")
     fCurrentHarmonyKind = msrHarmonyKind::kHarmonyMajorThirteenth;
-  else if (kind == "minor-13th")
+  else if (kindValue == "minor-13th")
     fCurrentHarmonyKind = msrHarmonyKind::kHarmonyMinorThirteenth;
 
-  else if (kind == "suspended-second")
+  else if (kindValue == "suspended-second")
     fCurrentHarmonyKind = msrHarmonyKind::kHarmonySuspendedSecond;
-  else if (kind == "suspended-fourth")
+  else if (kindValue == "suspended-fourth")
     fCurrentHarmonyKind = msrHarmonyKind::kHarmonySuspendedFourth;
 
-  else if (kind == "Neapolitan")
+  else if (kindValue == "Neapolitan")
     fCurrentHarmonyKind = msrHarmonyKind::kHarmonyNeapolitan;
-  else if (kind == "Italian")
+  else if (kindValue == "Italian")
     fCurrentHarmonyKind = msrHarmonyKind::kHarmonyItalian;
-  else if (kind == "French")
+  else if (kindValue == "French")
     fCurrentHarmonyKind = msrHarmonyKind::kHarmonyFrench;
-  else if (kind == "German")
+  else if (kindValue == "German")
     fCurrentHarmonyKind = msrHarmonyKind::kHarmonyGerman;
 
-  else if (kind == "pedal")
+  else if (kindValue == "pedal")
     fCurrentHarmonyKind = msrHarmonyKind::kHarmonyPedal;
-  else if (kind == "power")
+  else if (kindValue == "power")
     fCurrentHarmonyKind = msrHarmonyKind::kHarmonyPower;
-  else if (kind == "Tristan")
+  else if (kindValue == "Tristan")
     fCurrentHarmonyKind = msrHarmonyKind::kHarmonyTristan;
-  else if (kind == "other")
+  else if (kindValue == "other")
     fCurrentHarmonyKind = msrHarmonyKind::kHarmonyOther;
-  else if (kind == "[NONE]") {
+
+  else if (kindValue == "none") {
     fCurrentHarmonyKind = msrHarmonyKind::kHarmonyNone;
   }
 
   else {
-    if (kind.size ()) {
+    if (kindValue.size ()) {
       mxsr2msrError (
         gServiceRunData->getInputSourceName (),
         inputLineNumber,
         __FILE__, __LINE__,
-        "harmony kind \"" + kind + "\" os unknown");
+        "harmony kind \"" + kindValue + "\" os unknown");
     }
     else {
       mxsr2msrWarning (
@@ -27923,7 +27958,7 @@ void mxsr2msrTranslator::visitStart (S_kind& elt)
 
   std::string kindUseSymbols = elt->getAttributeValue ("use-symbols");
 
-/* JMI
+/* JMI v0.9.67
   if      (kindUseSymbols == "yes")
     fCurrentTupletTypeKind = msrTuplet::kStartTuplet; // JMI
   else if (kindUseSymbols == "no")
@@ -27950,7 +27985,7 @@ void mxsr2msrTranslator::visitStart (S_kind& elt)
 
   std::string kindStackDegrees = elt->getAttributeValue ("stack-degrees");
 
-/* JMI
+/* JMI v0.9.67
   if      (kindStackDegrees == "yes")
     fCurrentTupletTypeKind = msrTuplet::kStartTuplet; // JMI
   else if (kindStackDegrees == "no")
@@ -27977,7 +28012,7 @@ void mxsr2msrTranslator::visitStart (S_kind& elt)
 
   std::string kindParenthesesDegrees = elt->getAttributeValue ("parentheses-degrees");
 
-/* JMI
+/* JMI v0.9.67
   if      (kindParenthesesDegrees == "yes")
     fCurrentTupletTypeKind = msrTuplet::kStartTuplet; // JMI
   else if (kindParenthesesDegrees == "no")
@@ -28004,7 +28039,7 @@ void mxsr2msrTranslator::visitStart (S_kind& elt)
 
   std::string kindBracketDegrees = elt->getAttributeValue ("bracket-degrees");
 
-/* JMI
+/* JMI v0.9.67
   if      (kindBracketDegrees == "yes")
     fCurrentTupletTypeKind = msrTuplet::kStartTuplet; // JMI
   else if (kindBracketDegrees == "no")
@@ -28439,9 +28474,12 @@ void mxsr2msrTranslator::visitEnd (S_harmony& elt)
           fCurrentHarmonyRootAlterationKind) <<
         std::endl <<
 
+        std::setw (fieldWidth) << "fCurrentHarmonyFunctionText" << ": " <<
+        fCurrentHarmonyFunctionText <<
+        std::endl <<
+
         std::setw (fieldWidth) << "fCurrentHarmonyKind" << ": " <<
-        msrHarmonyKindAsString (
-          fCurrentHarmonyKind) <<
+        fCurrentHarmonyKind <<
         std::endl <<
         std::setw (fieldWidth) << "fCurrentHarmonyKindText" << ": " <<
         fCurrentHarmonyKindText <<
@@ -28492,6 +28530,8 @@ void mxsr2msrTranslator::visitEnd (S_harmony& elt)
 
           fCurrentHarmonyKind,
           fCurrentHarmonyKindText,
+
+          fCurrentHarmonyFunctionText,
 
           fCurrentHarmonyInversion,
 

@@ -596,11 +596,11 @@ void lpsrScore::addCustomShortBarLineSchemeFunctionToScore ()
 {
   std::string
     schemeModulesName =
-      "curstom short barLine Scheme function",
+      "custom short barLine Scheme function",
 
     schemeModulesDescription =
 R"(
-% The function needed to produce curstom short barLines.
+% The function needed to produce custom short barLines.
 )",
 
     schemeModulesCode =

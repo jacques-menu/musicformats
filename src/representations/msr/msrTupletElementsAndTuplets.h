@@ -23,6 +23,7 @@
 namespace MusicFormats
 {
 
+//______________________________________________________________________________
 class EXP msrTupletElement : public msrMeasureElement
 {
   public:
@@ -78,27 +79,27 @@ class EXP msrTuplet : public msrTupletElement
     static SMARTP<msrTuplet> create (
                             int                     inputLineNumber,
                             const S_msrMeasure&     upLinkToMeasure,
-                            const std::string&           tupletMeasureNumber,
+                            const std::string&      tupletMeasureNumber,
                             int                     tupletNumber,
                             msrTupletBracketKind    tupletBracketKind,
                             msrTupletLineShapeKind  tupletLineShapeKind,
                             msrTupletShowNumberKind tupletShowNumberKind,
                             msrTupletShowTypeKind   tupletShowTypeKind,
                             const msrTupletFactor&  tupletFactor,
-                            const msrWholeNotes&         memberNotesSoundingWholeNotes,
-                            const msrWholeNotes&         memberNotesDisplayWholeNotes);
+                            const msrWholeNotes&    memberNotesSoundingWholeNotes,
+                            const msrWholeNotes&    memberNotesDisplayWholeNotes);
 
     static SMARTP<msrTuplet> create (
                             int                     inputLineNumber,
-                            const std::string&           tupletMeasureNumber,
+                            const std::string&      tupletMeasureNumber,
                             int                     tupletNumber,
                             msrTupletBracketKind    tupletBracketKind,
                             msrTupletLineShapeKind  tupletLineShapeKind,
                             msrTupletShowNumberKind tupletShowNumberKind,
                             msrTupletShowTypeKind   tupletShowTypeKind,
                             const msrTupletFactor&  tupletFactor,
-                            const msrWholeNotes&         memberNotesSoundingWholeNotes,
-                            const msrWholeNotes&         memberNotesDisplayWholeNotes);
+                            const msrWholeNotes&    memberNotesSoundingWholeNotes,
+                            const msrWholeNotes&    memberNotesDisplayWholeNotes);
 
     SMARTP<msrTuplet> createTupletNewbornClone ();
 
@@ -112,15 +113,15 @@ class EXP msrTuplet : public msrTupletElement
                           msrTuplet (
                             int                     inputLineNumber,
                             const S_msrMeasure&     upLinkToMeasure,
-                            const std::string&           tupletMeasureNumber,
+                            const std::string&      tupletMeasureNumber,
                             int                     tupletNumber,
                             msrTupletBracketKind    tupletBracketKind,
                             msrTupletLineShapeKind  tupletLineShapeKind,
                             msrTupletShowNumberKind tupletShowNumberKind,
                             msrTupletShowTypeKind   tupletShowTypeKind,
                             const msrTupletFactor&  tupletFactor,
-                            const msrWholeNotes&         memberNotesSoundingWholeNotes,
-                            const msrWholeNotes&         memberNotesDisplayWholeNotes);
+                            const msrWholeNotes&    memberNotesSoundingWholeNotes,
+                            const msrWholeNotes&    memberNotesDisplayWholeNotes);
 
     virtual               ~msrTuplet ();
 

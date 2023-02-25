@@ -281,7 +281,7 @@ if (false) // JMI
   fCurrentVoiceMeasuresCounter = -1;
 
   // durations
-  fLastMetWholeNotes = msrWholeNotes (-1, 1); // JMI v0.9.67
+  fLastMetWholeNotes = K_WHOLE_NOTES_UNKNOWN; // JMI v0.9.67
 
   // notes
   fCurrentNotePrinObjectKind =

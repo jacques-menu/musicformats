@@ -22,16 +22,99 @@ The useful options here are:
 \item \optionBoth{trace-harmonies}{tharms}
 \item \optionBoth{display-msr1-skeleton}{dmsrskel}
 \item \optionBoth{display-msr1}{dmsr1}
+\item \optionBoth{display-msr1-full}{dmsr1full}
 \item \optionBoth{display-msr2}{dmsr2}
-\item \optionBoth{display-lpsr-2}{dlpsr}
+\item \optionBoth{display-msr2-full}{dmsr2ull}
+\item \optionBoth{display-lpsr}{dlpsr}
+\item \optionBoth{display-lpsr-full}{dlpsrull}
 \end{itemize}
 
-Harmonies need special treatment since we need to determine their position in a harmony  voice. This is different than \mxml, where they are simply \drawn\ at the current music position, so to say.
+% -------------------------------------------------------------------------
+\section{Harmonies in MusicXML}
+% -------------------------------------------------------------------------
 
-They are handled this way:
+In the \mxml\ view of music scores, harmonies are simply \drawn\ at the current music position, so to say.
+
+The \markupName{harmony} markup occurs at the measure level in \mxml, as notes do, but they apply at the part level, even though this is not explictly stated, since there is no staff nor voice information associated with them:
+\begin{lstlisting}[language=Terminal]
+<!--
+	The harmony elements are based on Humdrum's **harm
+	encoding, extended to support chord symbols in popular
+	music as well as functional harmony analysis in classical
+	music.
+	
+	If there are alternate harmonies possible, this can be
+	specified using multiple harmony elements differentiated
+	by type. Explicit harmonies have all note present in the
+	music; implied have some notes missing but implied;
+	alternate represents alternate analyses. 
+	
+	The harmony object may be used for analysis or for
+	chord symbols. The print-object attribute controls
+	whether or not anything is printed due to the harmony
+	element. The print-frame attribute controls printing
+	of a frame or fretboard diagram. The print-style entity
+	sets the default for the harmony, but individual elements
+	can override this with their own print-style values.
+	
+	A harmony element can contain many stacked chords (e.g.
+	V of II). A sequence of harmony-chord entities is used
+	for this type of secondary function, where V of II would
+	be represented by a harmony-chord with a V function
+	followed by a harmony-chord with a II function.
+-->
+<!ENTITY % harmony-chord "((root | function), kind,
+	inversion?, bass?, degree*)">
+
+<!ELEMENT harmony ((%harmony-chord;)+, frame?, 
+	offset?, %editorial;, staff?)>
+<!ATTLIST harmony
+    type (explicit | implied | alternate) #IMPLIED
+    %print-object;
+    print-frame  %yes-no; #IMPLIED
+    %print-style;
+    %placement;
+    %optional-unique-id;
+>
+\end{lstlisting}
+
+The harmony \markup{function}, defined in \mxml, is a string. It is stored in the \class{msrHarmony}, but nothing more. No example of that is present in \mxmlfiles, actually.
+\begin{lstlisting}[language=Terminal]
+The <function> element represents classical functional harmony with an indication like I, II, III rather than C, D, E. It represents the Roman numeral part of a functional harmony rather than the complete function itself. It has been deprecated as of MusicXML 4.0 in favor of the <numeral> element.
+\end{lstlisting}
+
+The \mxml\ 4.0 \markup{numeral} markup is described at \url{https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/numeral/}.
+Examples are:
+\begin{lstlisting}[language=MusicXML]
+<harmony default-y="-80">
+   <numeral>
+      <numeral-root text="IV">4</numeral-root>
+   </numeral>
+   <inversion>1</inversion>
+</harmony>
+
+<harmony default-y="20">
+   <numeral>
+      <numeral-root text="III">3</numeral-root>
+      <numeral-alter location="left">-1</numeral-alter>
+   </numeral>
+   <kind halign="center" text="">major</kind>
+</harmony>
+\end{lstlisting}
+
+
+% -------------------------------------------------------------------------
+\section{Harmonies in MSR}
+% -------------------------------------------------------------------------
+
+Harmonies need special treatment since we need to determine their position in a harmony \className{msrVoice}, taking 
+\code{offset}s if any into account.
+
+Harmonies are handled this way, using \denorm:
 \begin{itemize}
-\item harmonies are stored in \class{msrNote}:
-\item they are also stored in \class{msrPart}, \class{msrChord} and \class{msrTuplet} (\denorm);
+\item harmonies are attached to \className{msrNote} instances, 
+\item they are placed in specific \className{msrVoice} instances, whose \field{fVoiceKind} contains \code{msrVoiceKind::kVoiceKindHarmonies};
+\item there are also attached to \className{msrNote}, \className{msrChord} and \className{msrTuplet} (\denorm);
 \end{itemize}
 
 In \class{msrNote}, there is:
@@ -61,14 +144,17 @@ In \class{msrNote}, there is:
 % -------------------------------------------------------------------------
 
 Every \class{msrVoice} instance in \mf\ belongs to an \class{msrStaff} instance. Staves are created specifically to hold harmonies voices, using specific numbers defined in \msr{msrParts.h}:
+ 
+Since a voice belongs to a \className{msrStaff} in MSR, there are \className{msrStave} instance to contain them, 
+ 
 \begin{lstlisting}[language=CPlusPlus]
   public:
 
     // constants
     // ------------------------------------------------------
 
-    #define msrPart::K_PART_HARMONIES_STAFF_NUMBER       10
-    #define msrPart::K_PART_HARMONIES_VOICE_NUMBER       11
+    static const int K_PART_HARMONIES_STAFF_NUMBER;
+    static const int K_PART_HARMONIES_VOICE_NUMBER;
 \end{lstlisting}
 
 In \class{msrStaff}, there is:
@@ -83,8 +169,8 @@ In \class{msrStaff}, there is:
    // harmonies
 
     S_msrVoice            createPartHarmoniesVoice (
-                            int    inputLineNumber,
-                            std::string currentMeasureNumber);
+                            int                inputLineNumber,
+                            const std::string& currentMeasureNumber);
 
     void                  appendHarmonyToPart (
                             const S_msrVoice&  harmonySupplierVoice,
@@ -187,7 +273,7 @@ This is done in \mxsrToMsr{}.
 
 The MSR score skeleton created in \mxsrToMsrBoth{mxsr2msrSkeletonBuilder} contains the part groups, parts, staves and voices, as well as the number of measures. The voices do not contain any music elements yet.
 
-A harmoniy belongs to a \musicXmlMarkup{part} in \mxml, but we sometimes need to have it attached to a note. When visiting an \smartPointerType{S_harmony} element, \field{mxsr2msrSkeletonBuilder}{fThereAreHarmoniesToBeAttachedToCurrentNote} it used to account for that:%%%JMI
+A harmony belongs to a \musicXmlMarkup{part} in \mxml, but we sometimes need to have it attached to a note. When visiting an \smartPointerType{S_harmony} element, \field{mxsr2msrSkeletonBuilder}{fThereAreHarmoniesToBeAttachedToCurrentNote} it used to account for that:%%%JMI
 \begin{lstlisting}[language=CPlusPlus]
 void mxsr2msrSkeletonBuilder::visitStart ( S_harmony& elt )
 {
@@ -282,15 +368,6 @@ S_msrVoice mxsr2msrSkeletonBuilder::createPartHarmoniesVoiceIfNotYetDone (
   return partHarmoniesVoice;
 }
 \end{lstlisting}
-
-
-% -------------------------------------------------------------------------
-\section{Translating harmonies from MXSR to MSR}%%%JMI
-% -------------------------------------------------------------------------
-
-This is done in \mxsrToMsr{}.
-
-This is where the \class{msrHarmony} instances are created.
 
 
 % -------------------------------------------------------------------------

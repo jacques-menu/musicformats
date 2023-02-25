@@ -102,6 +102,8 @@ void waeError (
     sourceCodeLineNumber,
     message);
 
+abort (); // JMI v0.9.67
+
   throw mfException (message);
 }
 
@@ -121,6 +123,8 @@ void waeError (
     sourceCodeLineNumber,
     message);
 
+abort (); // JMI v0.9.67
+
   throw mfException (message);
 }
 
@@ -137,7 +141,7 @@ void waeErrorWithException (
     sourceCodeLineNumber,
     message);
 
-abort (); // JMI
+abort (); // JMI v0.9.67
 
   throw *except;
 }

@@ -64,6 +64,11 @@ class EXP msrWholeNotes
 {
   public:
 
+    // constants
+    // ------------------------------------------------------
+
+    static const int K_WHOLE_NOTES_NUMERATOR_UNKNOWN;
+
     // constructors/destructor
     // ------------------------------------------------------
 
@@ -76,7 +81,6 @@ class EXP msrWholeNotes
                           msrWholeNotes (const std::string &theString);
 
     virtual               ~msrWholeNotes ();
-
 
   public:
 
@@ -173,7 +177,7 @@ class EXP msrWholeNotes
 
     std::string           asString () const;
 
-    std::string           asFractionString () const;
+//     std::string           asFractionString () const;
 
     void                  print (std::ostream& os) const;
 
@@ -194,7 +198,7 @@ class EXP msrWholeNotes
     long int              fDenominator;
 
     // Used by rationalise()
-    long int gcd(long int a, long int b);
+    long int              gcd(long int a, long int b);
 };
 EXP std::ostream& operator << (std::ostream& os, const msrWholeNotes& wholeNotes);
 EXP mfIndentedStringStream& operator << (

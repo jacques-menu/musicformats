@@ -46,8 +46,8 @@ S_msrTuplet msrTuplet::create (
   msrTupletShowNumberKind tupletShowNumberKind,
   msrTupletShowTypeKind   tupletShowTypeKind,
   const msrTupletFactor&  tupletFactor,
-  const msrWholeNotes&         memberNotesSoundingWholeNotes,
-  const msrWholeNotes&         memberNotesDisplayWholeNotes)
+  const msrWholeNotes&    memberNotesSoundingWholeNotes,
+  const msrWholeNotes&    memberNotesDisplayWholeNotes)
 {
   msrTuplet* o =
     new msrTuplet (
@@ -75,8 +75,8 @@ S_msrTuplet msrTuplet::create (
   msrTupletShowNumberKind tupletShowNumberKind,
   msrTupletShowTypeKind   tupletShowTypeKind,
   const msrTupletFactor&  tupletFactor,
-  const msrWholeNotes&         memberNotesSoundingWholeNotes,
-  const msrWholeNotes&         memberNotesDisplayWholeNotes)
+  const msrWholeNotes&    memberNotesSoundingWholeNotes,
+  const msrWholeNotes&    memberNotesDisplayWholeNotes)
 {
   return
     msrTuplet::create (
@@ -103,8 +103,8 @@ msrTuplet::msrTuplet (
   msrTupletShowNumberKind tupletShowNumberKind,
   msrTupletShowTypeKind   tupletShowTypeKind,
   const msrTupletFactor&  tupletFactor,
-  const msrWholeNotes&         memberNotesSoundingWholeNotes,
-  const msrWholeNotes&         memberNotesDisplayWholeNotes)
+  const msrWholeNotes&    memberNotesSoundingWholeNotes,
+  const msrWholeNotes&    memberNotesDisplayWholeNotes)
     : msrTupletElement (
         inputLineNumber)
 {
