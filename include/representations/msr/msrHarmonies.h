@@ -288,6 +288,7 @@ class EXP msrHarmony : public msrMeasureElement
                             msrQuarterTonesPitchKind harmonyRootQuarterTonesPitchKind,
                             msrHarmonyKind           harmonyKind,
                             const std::string&       harmonyKindText,
+                            const std::string&       harmonyFunctionText,
                             int                      harmonyInversion,
                             msrQuarterTonesPitchKind harmonyBassQuarterTonesPitchKind,
                             const msrWholeNotes&     harmonySoundingWholeNotes,
@@ -313,6 +314,7 @@ class EXP msrHarmony : public msrMeasureElement
                             msrQuarterTonesPitchKind harmonyRootQuarterTonesPitchKind,
                             msrHarmonyKind           harmonyKind,
                             const std::string&       harmonyKindText,
+                            const std::string&       harmonyFunctionText,
                             int                      harmonyInversion,
                             msrQuarterTonesPitchKind harmonyBassQuarterTonesPitchKind,
                             const msrWholeNotes&     harmonySoundingWholeNotes,
@@ -384,10 +386,9 @@ class EXP msrHarmony : public msrMeasureElement
     std::string           getHarmonyKindText () const
                               { return fHarmonyKindText; }
 
-    // degrees
-    const std::list<S_msrHarmonyDegree>&
-                          getHarmonyDegreesList () const
-                              { return fHarmonyDegreesList; }
+    // function
+    std::string           getHarmonyFunctionText () const
+                              { return fHarmonyFunctionText; }
 
     // inversion
     int                   getHarmonyInversion () const
@@ -397,6 +398,11 @@ class EXP msrHarmony : public msrMeasureElement
     msrQuarterTonesPitchKind
                           getHarmonyBassQuarterTonesPitchKind () const
                               { return fHarmonyBassQuarterTonesPitchKind; }
+
+    // degrees
+    const std::list<S_msrHarmonyDegree>&
+                          getHarmonyDegreesList () const
+                              { return fHarmonyDegreesList; }
 
     // staff
     void                  setHarmoniesStaffNumber (
@@ -434,7 +440,7 @@ class EXP msrHarmony : public msrMeasureElement
                               }
 
     void                  incrementHarmonySoundingWholeNotes (
-                            int             inputLineNumber,
+                            int                  inputLineNumber,
                             const msrWholeNotes& wholeNotesDelta);
 
   public:
@@ -481,6 +487,9 @@ class EXP msrHarmony : public msrMeasureElement
     // kind
     msrHarmonyKind        fHarmonyKind;
     std::string           fHarmonyKindText;
+
+    // function
+    std::string           fHarmonyFunctionText;
 
     // inversion
     int                   fHarmonyInversion;

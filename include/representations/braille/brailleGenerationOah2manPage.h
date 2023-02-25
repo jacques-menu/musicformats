@@ -40,14 +40,14 @@ class EXP brailleGenerationOah2manPage : virtual public oah2manPage,
 
   protected:
 
-    virtual void          visitStart (S_brailleOutputKindAtom& elt);
-    virtual void          visitEnd   (S_brailleOutputKindAtom& elt);
+    virtual void              visitStart (S_brailleOutputKindAtom& elt);
+    virtual void              visitEnd   (S_brailleOutputKindAtom& elt);
 
-    virtual void          visitStart (S_brailleUTFKindAtom& elt);
-    virtual void          visitEnd   (S_brailleUTFKindAtom& elt);
+    virtual void              visitStart (S_brailleUTFKindAtom& elt);
+    virtual void              visitEnd   (S_brailleUTFKindAtom& elt);
 
-    virtual void          visitStart (S_brailleByteOrderingKindAtom& elt);
-    virtual void          visitEnd   (S_brailleByteOrderingKindAtom& elt);
+    virtual void              visitStart (S_brailleByteOrderingKindAtom& elt);
+    virtual void              visitEnd   (S_brailleByteOrderingKindAtom& elt);
 };
 typedef SMARTP<brailleGenerationOah2manPage> S_brailleGenerationOah2manPage;
 

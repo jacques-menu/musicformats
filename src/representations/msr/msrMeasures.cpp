@@ -1608,7 +1608,7 @@ void msrMeasure::setFullMeasureWholeNotes (
 }
 
 void msrMeasure::setMeasureWholeNotes (
-  int             inputLineNumber,
+  int                  inputLineNumber,
   const msrWholeNotes& wholeNotes)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -1635,12 +1635,11 @@ void msrMeasure::setMeasureWholeNotes (
 #endif // MF_TRACE_IS_ENABLED
 
   // set measure whole notes
-  fMeasureWholeNotes =
-    wholeNotes;
+  fMeasureWholeNotes = wholeNotes;
 }
 
 void msrMeasure::incrementMeasureWholeNotes (
-  int             inputLineNumber,
+  int                  inputLineNumber,
   const msrWholeNotes& wholeNotesDelta)
 {
 // #ifdef MF_SANITY_CHECKS_ARE_ENABLED
@@ -2006,7 +2005,7 @@ void msrMeasure::appendTimeSignatureToMeasureClone (
 }
 
 void msrMeasure::insertHiddenMeasureAndBarLineInMeasureClone (
-  int             inputLineNumber,
+  int                  inputLineNumber,
   const msrWholeNotes& measurePosition)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -2986,6 +2985,14 @@ void msrMeasure::appendHarmonyToMeasure (const S_msrHarmony& harmony)
   ++gIndenter;
 
   // DON't add a paddingNote now, this will be done in () JMI v0.9.67
+//   msrWholeNotes
+//     measurePosition =
+//       fFullMeasureWholeNotes - backupTargetMeasurePosition;
+//
+//   // pad up to it
+//   padUpToMeasurePositionInMeasure (
+//     inputLineNumber,
+//     measurePosition);
 
   // append harmony to the measure elements list
   appendMeasureElementToMeasure (harmony);
@@ -3133,9 +3140,9 @@ void msrMeasure::appendFiguredBassToMeasureClone (
 }
 
 S_msrNote msrMeasure::createPaddingSkipNoteForVoice (
-  int             inputLineNumber,
+  int                  inputLineNumber,
   const msrWholeNotes& duration,
-  const S_msrVoice&      voice)
+  const S_msrVoice&    voice)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (
@@ -3321,7 +3328,7 @@ S_msrNote msrMeasure::createPaddingSkipNoteForVoice (
 // }
 //
 void msrMeasure::padUpToMeasurePositionInMeasure (
-  int             inputLineNumber,
+  int                  inputLineNumber,
   const msrWholeNotes& measurePositionToPadUpTo)
 {
   // fetch the voice
@@ -3436,7 +3443,7 @@ void msrMeasure::padUpToMeasurePositionInMeasure (
 }
 
 void msrMeasure::padUpToPositionAtTheEndOfTheMeasure (
-  int             inputLineNumber,
+  int                  inputLineNumber,
   const msrWholeNotes& measurePositionToPadUpTo)
 {
   // fetch the voice
@@ -3566,7 +3573,7 @@ void msrMeasure::padUpToPositionAtTheEndOfTheMeasure (
 }
 
 void msrMeasure::backupByWholeNotesStepLengthInMeasure ( // JMI USELESS ??? v0.9.66
-  int             inputLineNumber,
+  int                  inputLineNumber,
   const msrWholeNotes& backupTargetMeasurePosition)
 {
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
@@ -3627,7 +3634,7 @@ void msrMeasure::backupByWholeNotesStepLengthInMeasure ( // JMI USELESS ??? v0.9
 }
 
 void msrMeasure::appendPaddingSkipNoteToMeasure (
-  int             inputLineNumber,
+  int                  inputLineNumber,
   const msrWholeNotes& forwardStepLength)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -4273,11 +4280,11 @@ void msrMeasure::handleRegularMeasure (
 }
 
 void msrMeasure::handleIncompleteMeasure (
-  int               inputLineNumber,
-  const S_msrVoice& voice,
+  int                  inputLineNumber,
+  const S_msrVoice&    voice,
   msrMeasureRepeatContextKind
-                    measureRepeatContextKind,
-  const msrWholeNotes&   newWholeNotesSinceLastRegularMeasureEnd)
+                       measureRepeatContextKind,
+  const msrWholeNotes& newWholeNotesSinceLastRegularMeasureEnd)
 {
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceMeasures ()) {
@@ -4873,51 +4880,51 @@ void msrMeasure::handleASubsequentHarmonyInAHarmoniesMeasure (
     measurePositionToPadUpTo =
       measurePositionFollowingPreviousHarmony;
 
-//   // is a padding skip note needed?
-//   if (measurePositionToPadUpTo.getNumerator () != 0) {
-//     // create a padding skip note
-//     S_msrNote
-//       skipNote =
-//         createPaddingSkipNoteForVoice (
-//           inputLineNumber,
-//           measurePositionToPadUpTo,
-//           voice);
-//
-//     // insert skipNote before currentHarmony in the measure's elements list
-// #ifdef MF_TRACE_IS_ENABLED
-//     if (gTraceOahGroup->getTraceHarmonies ()) {
-//       std::stringstream ss;
-//
-//       ss <<
-//         "Inserting first padding note " <<
-//         skipNote->asString () <<
-//         " before currentHarmony " <<
-//         currentHarmony->asString () <<
-//         " in voice \"" <<
-//         voice->getVoiceName () <<
-//         "\", line " << inputLineNumber <<
-//         std::endl;
-//
-//       gWaeHandler->waeTrace (
-//         __FILE__, __LINE__,
-//         ss.str ());
-//     }
-// #endif // MF_TRACE_IS_ENABLED
-//
-//     // insert skipNote in the measure elements list before (*i)
-// //     insertElementInMeasureBeforeIterator (
-// //       inputLineNumber,
-// //       i,
-// //       skipNote);
-//
-// #ifdef MF_TRACE_IS_ENABLED
-//     if (gTraceOahGroup->getTraceHarmoniesDetails ()) {
-//       displayMeasure (
-//         inputLineNumber,
-//         "handleTheFirstHarmonyInAHarmoniesMeasure() 2");
-//     }
-// #endif // MF_TRACE_IS_ENABLED
-//   }
+  // is a padding skip note needed?
+  if (measurePositionToPadUpTo.getNumerator () != 0) {
+    // create a padding skip note
+    S_msrNote
+      skipNote =
+        createPaddingSkipNoteForVoice (
+          inputLineNumber,
+          measurePositionToPadUpTo,
+          voice);
+
+    // insert skipNote before currentHarmony in the measure's elements list
+#ifdef MF_TRACE_IS_ENABLED
+    if (gTraceOahGroup->getTraceHarmonies ()) {
+      std::stringstream ss;
+
+      ss <<
+        "Inserting first padding note " <<
+        skipNote->asString () <<
+        " before currentHarmony " <<
+        currentHarmony->asString () <<
+        " in voice \"" <<
+        voice->getVoiceName () <<
+        "\", line " << inputLineNumber <<
+        std::endl;
+
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
+    }
+#endif // MF_TRACE_IS_ENABLED
+
+    // insert skipNote in the measure elements list before (*i)
+//     insertElementInMeasureBeforeIterator (
+//       inputLineNumber,
+//       i,
+//       skipNote);
+
+#ifdef MF_TRACE_IS_ENABLED
+    if (gTraceOahGroup->getTraceHarmoniesDetails ()) {
+      displayMeasure (
+        inputLineNumber,
+        "handleTheFirstHarmonyInAHarmoniesMeasure() 2");
+    }
+#endif // MF_TRACE_IS_ENABLED
+  }
 
   // update the previous harmony sounding whole notes duration if relevant
   // to 'fill the gap' to the current harmony

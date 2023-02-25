@@ -1020,6 +1020,9 @@ std::ostream& operator << (std::ostream& os, const msrDottedNotesDuration& elt)
 }
 
 //______________________________________________________________________________
+// constant
+const int msrWholeNotes::K_WHOLE_NOTES_NUMERATOR_UNKNOWN = -33;
+
 msrWholeNotes::msrWholeNotes (
   long int num,
   long int denom)
@@ -1414,23 +1417,32 @@ std::string msrWholeNotes::asString () const
 {
   std::stringstream ss;
 
-  ss << '[' << fNumerator << '/' << fDenominator << ']';
+  ss << "[msrWholeNotes ";
+
+  if (fNumerator == msrWholeNotes::K_WHOLE_NOTES_NUMERATOR_UNKNOWN ) {
+    ss << "UNKNOWN";
+  }
+  else {
+    ss << fNumerator << '/' << fDenominator;
+  }
+
+  ss << ']';
 
   return ss.str ();
 }
 
-std::string msrWholeNotes::asFractionString () const
-{
-  std::stringstream ss;
-
-  ss << fNumerator << '/' << fDenominator;
-
-  return ss.str ();
-}
+// std::string msrWholeNotes::asFractionString () const
+// {
+//   std::stringstream ss;
+//
+//   ss << fNumerator << '/' << fDenominator;
+//
+//   return ss.str ();
+// }
 
 void msrWholeNotes::print (std::ostream& os) const
 {
-  os << "[msrWholeNotes " << fNumerator << '/' << fDenominator << ']';
+  os << asString () << std::endl;
 }
 
 std::ostream& operator << (std::ostream& os, const msrWholeNotes& wholeNotes)
@@ -1933,7 +1945,9 @@ std::string multipleFullBarRestsWholeNotesAsMsrString (
 }
 
 //______________________________________________________________________________
-EXP const msrWholeNotes K_WHOLE_NOTES_UNKNOWN (-444, 1);
+EXP const msrWholeNotes
+  K_WHOLE_NOTES_UNKNOWN (
+    msrWholeNotes::K_WHOLE_NOTES_NUMERATOR_UNKNOWN, 1);
 
 //______________________________________________________________________________
 void testWholeNotes ()

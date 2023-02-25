@@ -52,32 +52,32 @@ class EXP lpsr2lilypondOah2manPage : virtual public oah2manPage,
 
   protected:
 
-    virtual void          visitStart (S_lilypondScoreOutputKindAtom& elt);
-    virtual void          visitEnd   (S_lilypondScoreOutputKindAtom& elt);
+    virtual void              visitStart (S_lilypondScoreOutputKindAtom& elt);
+    virtual void              visitEnd   (S_lilypondScoreOutputKindAtom& elt);
 
-    virtual void          visitStart (S_lilypondTransposePartNameAtom& elt);
-    virtual void          visitEnd   (S_lilypondTransposePartNameAtom& elt);
+    virtual void              visitStart (S_lilypondTransposePartNameAtom& elt);
+    virtual void              visitEnd   (S_lilypondTransposePartNameAtom& elt);
 
-    virtual void          visitStart (S_lilypondAbsoluteOctaveEntryAtom& elt);
-    virtual void          visitEnd   (S_lilypondAbsoluteOctaveEntryAtom& elt);
+    virtual void              visitStart (S_lilypondAbsoluteOctaveEntryAtom& elt);
+    virtual void              visitEnd   (S_lilypondAbsoluteOctaveEntryAtom& elt);
 
-    virtual void          visitStart (S_lilypondRelativeOctaveEntryAtom& elt);
-    virtual void          visitEnd   (S_lilypondRelativeOctaveEntryAtom& elt);
+    virtual void              visitStart (S_lilypondRelativeOctaveEntryAtom& elt);
+    virtual void              visitEnd   (S_lilypondRelativeOctaveEntryAtom& elt);
 
-    virtual void          visitStart (S_lilypondFixedOctaveEntryAtom& elt);
-    virtual void          visitEnd   (S_lilypondFixedOctaveEntryAtom& elt);
+    virtual void              visitStart (S_lilypondFixedOctaveEntryAtom& elt);
+    virtual void              visitEnd   (S_lilypondFixedOctaveEntryAtom& elt);
 
-    virtual void          visitStart (S_lilypondAccidentalStyleKindAtom& elt);
-    virtual void          visitEnd   (S_lilypondAccidentalStyleKindAtom& elt);
+    virtual void              visitStart (S_lilypondAccidentalStyleKindAtom& elt);
+    virtual void              visitEnd   (S_lilypondAccidentalStyleKindAtom& elt);
 
-    virtual void          visitStart (S_lilypondChordsDisplayAtom& elt);
-    virtual void          visitEnd   (S_lilypondChordsDisplayAtom& elt);
+    virtual void              visitStart (S_lilypondChordsDisplayAtom& elt);
+    virtual void              visitEnd   (S_lilypondChordsDisplayAtom& elt);
 
-    virtual void          visitStart (S_lilypondLyricsNotesDurationsKindAtom& elt);
-    virtual void          visitEnd   (S_lilypondLyricsNotesDurationsKindAtom& elt);
+    virtual void              visitStart (S_lilypondLyricsNotesDurationsKindAtom& elt);
+    virtual void              visitEnd   (S_lilypondLyricsNotesDurationsKindAtom& elt);
 
-    virtual void          visitStart (S_oahMidiTempoAtom& elt);
-    virtual void          visitEnd   (S_oahMidiTempoAtom& elt);
+    virtual void              visitStart (S_oahMidiTempoAtom& elt);
+    virtual void              visitEnd   (S_oahMidiTempoAtom& elt);
 };
 typedef SMARTP<lpsr2lilypondOah2manPage> S_lpsr2lilypondOah2manPage;
 

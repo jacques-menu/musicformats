@@ -128,10 +128,10 @@ class EXP msrMeasure : public msrSegmentElement
                               {  return fFullMeasureWholeNotes; }
 
     void                  setMeasureWholeNotes (
-                            int             inputLineNumber,
+                            int                  inputLineNumber,
                             const msrWholeNotes& wholeNotes);
     void                  incrementMeasureWholeNotes (
-                            int             inputLineNumber,
+                            int                  inputLineNumber,
                             const msrWholeNotes& wholeNotesDelta);
 
     msrWholeNotes         getMeasureWholeNotes () const
@@ -296,24 +296,24 @@ class EXP msrMeasure : public msrSegmentElement
     // backup and padding
 
     S_msrNote             createPaddingSkipNoteForVoice (
-                            int             inputLineNumber,
+                            int                  inputLineNumber,
                             const msrWholeNotes& duration,
-                            const S_msrVoice&      voice);
+                            const S_msrVoice&    voice);
 
     void                  padUpToMeasurePositionInMeasure (
-                            int             inputLineNumber,
+                            int                  inputLineNumber,
                             const msrWholeNotes& measurePositionToPadUpTo);
 
     void                  padUpToPositionAtTheEndOfTheMeasure (
-                            int             inputLineNumber,
+                            int                  inputLineNumber,
                             const msrWholeNotes& measurePositionToPadUpTo);
 
     void                  backupByWholeNotesStepLengthInMeasure (
-                            int             inputLineNumber,
+                            int                  inputLineNumber,
                             const msrWholeNotes& backupTargetMeasurePosition);
 
     void                  appendPaddingSkipNoteToMeasure (
-                            int             inputLineNumber,
+                            int                  inputLineNumber,
                             const msrWholeNotes& forwardStepLength);
 
     // print layout
@@ -349,7 +349,7 @@ class EXP msrMeasure : public msrSegmentElement
     // dal segno
 
     void                  insertHiddenMeasureAndBarLineInMeasureClone (
-                            int             inputLineNumber,
+                            int                  inputLineNumber,
                             const msrWholeNotes& measurePosition);
 
     // transposition
@@ -779,7 +779,7 @@ class EXP msrMeasure : public msrSegmentElement
                                                     i,
                             const S_msrFiguredBass& previousFiguredBass,
                             const S_msrFiguredBass& currentFiguredBass,
-                            const msrWholeNotes&         currentFiguredBassMeasurePosition);
+                            const msrWholeNotes&    currentFiguredBassMeasurePosition);
 
     void                  handleSubsequentFiguredBassInFiguredBassMeasure (
                             int                     inputLineNumber,
@@ -788,7 +788,7 @@ class EXP msrMeasure : public msrSegmentElement
                                                     i,
                             const S_msrFiguredBass& previousFiguredBass,
                             const S_msrFiguredBass& currentFiguredBass,
-                            const msrWholeNotes&         currentFiguredBassMeasurePosition);
+                            const msrWholeNotes&    currentFiguredBassMeasurePosition);
 
     void                  postHandleCurrentFiguredBassInFiguredBassMeasure (
                             int                     inputLineNumber,
@@ -827,11 +827,11 @@ class EXP msrMeasure : public msrSegmentElement
                             const S_msrVoice& voice);
 
     void                  handleIncompleteMeasure (
-                            int               inputLineNumber,
-                            const S_msrVoice& voice,
+                            int                  inputLineNumber,
+                            const S_msrVoice&    voice,
                             msrMeasureRepeatContextKind
-                                              measureRepeatContextKind,
-                            const msrWholeNotes&   newWholeNotesSinceLastRegularMeasureEnd);
+                                                 measureRepeatContextKind,
+                            const msrWholeNotes& newWholeNotesSinceLastRegularMeasureEnd);
 
     void                  handleOverFullMeasure (
                             int               inputLineNumber,

@@ -33,8 +33,8 @@ const msrMoment
 
 msrMoment::msrMoment ()
 {
-  fWrittenPositionInMeseasure = msrWholeNotes (-1, 1);
-  fSoundingRelativeOffset     = msrWholeNotes (-1, 1);
+  fWrittenPositionInMeseasure = K_WHOLE_NOTES_UNKNOWN;
+  fSoundingRelativeOffset     = K_WHOLE_NOTES_UNKNOWN;
 }
 
 msrMoment::msrMoment (

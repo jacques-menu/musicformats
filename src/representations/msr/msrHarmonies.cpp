@@ -4293,6 +4293,7 @@ S_msrHarmony msrHarmony::create (
   msrQuarterTonesPitchKind harmonyRootQuarterTonesPitchKind,
   msrHarmonyKind           harmonyKind,
   const std::string&       harmonyKindText,
+  const std::string&       harmonyFunctionText,
   int                      harmonyInversion,
   msrQuarterTonesPitchKind harmonyBassQuarterTonesPitchKind,
   const msrWholeNotes&     harmonySoundingWholeNotes,
@@ -4308,6 +4309,7 @@ S_msrHarmony msrHarmony::create (
       harmonyRootQuarterTonesPitchKind,
       harmonyKind,
       harmonyKindText,
+      harmonyFunctionText,
       harmonyInversion,
       harmonyBassQuarterTonesPitchKind,
       harmonySoundingWholeNotes,
@@ -4325,6 +4327,7 @@ msrHarmony::msrHarmony (
   msrQuarterTonesPitchKind harmonyRootQuarterTonesPitchKind,
   msrHarmonyKind           harmonyKind,
   const std::string&       harmonyKindText,
+  const std::string&       harmonyFunctionText,
   int                      harmonyInversion,
   msrQuarterTonesPitchKind harmonyBassQuarterTonesPitchKind,
   const msrWholeNotes&     harmonySoundingWholeNotes,
@@ -4342,6 +4345,8 @@ msrHarmony::msrHarmony (
 
   fHarmonyKind     = harmonyKind;
   fHarmonyKindText = harmonyKindText;
+
+  fHarmonyFunctionText = harmonyFunctionText;
 
   fHarmonyInversion = harmonyInversion;
 
@@ -4478,6 +4483,7 @@ S_msrHarmony msrHarmony::createHarmonyNewbornClone (
         fHarmonyRootQuarterTonesPitchKind,
         fHarmonyKind,
         fHarmonyKindText,
+        fHarmonyFunctionText,
         fHarmonyInversion,
         fHarmonyBassQuarterTonesPitchKind,
         fSoundingWholeNotes,
@@ -4529,7 +4535,9 @@ S_msrHarmony msrHarmony::createHarmonyDeepClone (
         fInputLineNumber,
         gNullMeasure, // set later in setMeasureElementUpLinkToMeasure()
         fHarmonyRootQuarterTonesPitchKind,
-        fHarmonyKind, fHarmonyKindText,
+        fHarmonyKind,
+        fHarmonyKindText,
+        fHarmonyFunctionText,
         fHarmonyInversion,
         fHarmonyBassQuarterTonesPitchKind,
 // JMI        fHarmonySoundingWholeNotes,
@@ -4736,7 +4744,7 @@ void msrHarmony::setHarmonyFrame (const S_msrFrame& frame)
 }
 
 void msrHarmony::incrementHarmonySoundingWholeNotes (
-  int             inputLineNumber,
+  int                  inputLineNumber,
   const msrWholeNotes& wholeNotesDelta)
 {
   // compute currentHarmony's future sounding whole notes
@@ -4941,7 +4949,10 @@ std::string msrHarmony::asString () const
     fMeasurePosition <<
 
     ", fHarmonyKindText: \"" <<
-    fHarmonyKindText << "\"";
+    fHarmonyKindText << "\"" <<
+
+    ", fHarmonyFunctionText: \"" <<
+    fHarmonyFunctionText << "\"";
 
   ss << ", fHarmonyInversion: ";
   if (fHarmonyInversion == K_HARMONY_INVERSION_NONE) {

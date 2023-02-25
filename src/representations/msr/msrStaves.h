@@ -413,10 +413,12 @@ class EXP msrStaff : public msrElement
 
     // the mapping of all the voices in the staff,
     // including harmonies and figured bass voices
-    std::map<int, S_msrVoice>  fStaffVoiceNumbersToAllVoicesMap;
+    std::map<int, S_msrVoice>
+                          fStaffVoiceNumbersToAllVoicesMap;
 
     // the mapping of voice numbers to regular voices
-    std::map<int, S_msrVoice>  fStaffVoiceNumbersToRegularVoicesMap;
+    std::map<int, S_msrVoice>
+                          fStaffVoiceNumbersToRegularVoicesMap;
 
     // part shortest note
 
@@ -513,7 +515,7 @@ class EXP msrStaff : public msrElement
 
     // transposition
 
-    S_msrTransposition        getStaffCurrentTransposition () const
+    S_msrTransposition    getStaffCurrentTransposition () const
                               { return fStaffCurrentTransposition; }
 
     // voices ordering in staves

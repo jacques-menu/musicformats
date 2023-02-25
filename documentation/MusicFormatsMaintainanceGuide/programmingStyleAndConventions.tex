@@ -257,7 +257,7 @@ They are performed to ensure that the formats in \mf\ are consistent, to avoid u
           getPartHarmoniesVoice ();
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
-  // sanity check
+  	// sanity check
 		mfAssert (
 			__FILE__, __LINE__,
 			voiceToInsertHarmoniesInto != nullptr,
@@ -1341,29 +1341,52 @@ void msrHarmonyStructure::printAllHarmoniesStructures (std::ostream& os)
 % -------------------------------------------------------------------------
 
 \mf\ uses rationals for notes sounding and display whole notes and measure positionss, among others.
-class   {\tt mfRational} is defined by \libmusicxml\ in \libBoth{mfRational}:
+\Class {mfRational} is defined by \libmusicxml\ in \libBoth{mfRational}:
 \begin{lstlisting}[language=CPlusPlus]
 class EXP mfRational {
+	// ... ... ...
+	
+  private:
 
-   private:
+    // private fields
+    // ------------------------------------------------------
 
-        long int fNumerator;
-        long int fDenominator;
+    long int              fNumerator;
+    long int              fDenominator;
 
-        // Used by rationalise()
-        long int gcd(long int a, long int b);
-
-    public:
-
-        mfRational(long int num = 0, long int denom = 1);
-        mfRational(const mfRational& d);
-        mfRational(const std::string &str);
+    // used by rationalise()
+    long int              gcd(long int a, long int b);
 
 	// ... ... ...
 };
 \end{lstlisting}
 
 Rationals are not used, however, for tuplets factors, see .
+
+
+% -------------------------------------------------------------------------
+\section{Don't mix pure and typed scalar types}
+% -------------------------------------------------------------------------
+
+A whole notes value is described by \class{msrWholeNotes}, defined in \msrBoth{msrNotesDurations}. It contains a numerator and denominator, as \class{msrRational} does, but those types are distinct, since an \className{msrWholeNotes} instance is a fraction of a whole note, note a mere typeless fraction.
+
+\mf\ uses \className{msrWholeNotes} instances for notes sounding and display whole notes values;
+
+For the same reason, \class{msrTupletFactor}, defined in \msrBoth{msrTupletFactors}, is used with specifically named fields:
+\begin{lstlisting}[language=CPlusPlus]
+class EXP msrTupletFactor
+{
+	// ... ... ...
+	
+  private:
+
+    // private fields
+    // ------------------------------------------------------
+
+    int                   fTupletActualNotes;
+    int                   fTupletNormalNotes;
+};
+\end{lstlisting}
 
 
 % -------------------------------------------------------------------------

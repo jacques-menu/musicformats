@@ -125,7 +125,7 @@ msrDoubleTremolo::msrDoubleTremolo (
   fDoubleTremoloPlacementKind  = doubleTremoloPlacementKind;
 
   fDoubleTremoloSoundingWholeNotes =
-    msrWholeNotes (-1, 1); // will be set later
+    K_WHOLE_NOTES_UNKNOWN; // will be set later
 
   fDoubleTremoloNumberOfRepeats = -1; // will be set later
 }

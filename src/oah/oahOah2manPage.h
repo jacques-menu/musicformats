@@ -36,8 +36,8 @@ class EXP oahOah2manPage : virtual public oah2manPage,
 
   protected:
 
-    virtual void          visitStart (S_oahOptionalValuesStyleKindAtom& elt);
-    virtual void          visitEnd   (S_oahOptionalValuesStyleKindAtom& elt);
+    virtual void              visitStart (S_oahOptionalValuesStyleKindAtom& elt);
+    virtual void              visitEnd   (S_oahOptionalValuesStyleKindAtom& elt);
 };
 typedef SMARTP<oahOah2manPage> S_oahOah2manPage;
 */
