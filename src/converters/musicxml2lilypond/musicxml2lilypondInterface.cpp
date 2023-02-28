@@ -289,7 +289,7 @@ else {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
     err <<
-      "xmlFile2lilypond() outputFileName = \"" <<
+      "xmlFile2lilypond() outputFileName: \"" <<
       outputFileName <<
       "\"" <<
       std::endl;

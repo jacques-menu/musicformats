@@ -448,6 +448,11 @@ class EXP msrPart : public msrPartGroupElement
                             int                inputLineNumber,
                             const std::string& currentMeasureNumber);
 
+    void                  appendHarmonyToPart (
+                            int                  inputLineNumber,
+                            const S_msrHarmony&  harmony,
+                            const msrWholeNotes& measurePositionToAppendAt);
+
     // figured bass
 
     S_msrVoice            createPartFiguredBassVoice (
@@ -455,8 +460,13 @@ class EXP msrPart : public msrPartGroupElement
                             const std::string& currentMeasureNumber);
 
     void                  appendFiguredBassToPart (
-                            const S_msrVoice&       figuredBassSupplierVoice,
-                            const S_msrFiguredBass& figuredBass);
+                            int                     inputLineNumber,
+                            const S_msrFiguredBass& figuredBass,
+                            const msrWholeNotes&    measurePositionToAppendAt);
+
+//     void                  appendFiguredBassToPart (
+//                             const S_msrVoice&       figuredBassSupplierVoice,
+//                             const S_msrFiguredBass& figuredBass);
 
     void                  appendFiguredBassToPartClone (
                             const S_msrVoice&       figuredBassSupplierVoice,

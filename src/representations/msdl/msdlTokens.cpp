@@ -1320,7 +1320,7 @@ std::string msdlTokenDescription::asString () const
 
   ss <<
     "[MSDL tokenDescription" <<
-    ", tokenDescriptionKind = " <<
+    ", tokenDescriptionKind: " <<
     fTokenDescriptionKind <<
     ": ";
 

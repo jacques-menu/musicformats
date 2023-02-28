@@ -42,13 +42,13 @@ The \markupName{harmony} markup occurs at the measure level in \mxml, as notes d
 	encoding, extended to support chord symbols in popular
 	music as well as functional harmony analysis in classical
 	music.
-	
+
 	If there are alternate harmonies possible, this can be
 	specified using multiple harmony elements differentiated
 	by type. Explicit harmonies have all note present in the
 	music; implied have some notes missing but implied;
-	alternate represents alternate analyses. 
-	
+	alternate represents alternate analyses.
+
 	The harmony object may be used for analysis or for
 	chord symbols. The print-object attribute controls
 	whether or not anything is printed due to the harmony
@@ -56,7 +56,7 @@ The \markupName{harmony} markup occurs at the measure level in \mxml, as notes d
 	of a frame or fretboard diagram. The print-style entity
 	sets the default for the harmony, but individual elements
 	can override this with their own print-style values.
-	
+
 	A harmony element can contain many stacked chords (e.g.
 	V of II). A sequence of harmony-chord entities is used
 	for this type of secondary function, where V of II would
@@ -66,7 +66,7 @@ The \markupName{harmony} markup occurs at the measure level in \mxml, as notes d
 <!ENTITY % harmony-chord "((root | function), kind,
 	inversion?, bass?, degree*)">
 
-<!ELEMENT harmony ((%harmony-chord;)+, frame?, 
+<!ELEMENT harmony ((%harmony-chord;)+, frame?,
 	offset?, %editorial;, staff?)>
 <!ATTLIST harmony
     type (explicit | implied | alternate) #IMPLIED
@@ -107,12 +107,12 @@ Examples are:
 \section{Harmonies in MSR}
 % -------------------------------------------------------------------------
 
-Harmonies need special treatment since we need to determine their position in a harmony \className{msrVoice}, taking 
+Harmonies need special treatment since we need to determine their position in a harmony \className{msrVoice}, taking
 \code{offset}s if any into account.
 
 Harmonies are handled this way, using \denorm:
 \begin{itemize}
-\item harmonies are attached to \className{msrNote} instances, 
+\item harmonies are attached to \className{msrNote} instances,
 \item they are placed in specific \className{msrVoice} instances, whose \field{fVoiceKind} contains \code{msrVoiceKind::kVoiceKindHarmonies};
 \item there are also attached to \className{msrNote}, \className{msrChord} and \className{msrTuplet} (\denorm);
 \end{itemize}
@@ -144,9 +144,9 @@ In \class{msrNote}, there is:
 % -------------------------------------------------------------------------
 
 Every \class{msrVoice} instance in \mf\ belongs to an \class{msrStaff} instance. Staves are created specifically to hold harmonies voices, using specific numbers defined in \msr{msrParts.h}:
- 
-Since a voice belongs to a \className{msrStaff} in MSR, there are \className{msrStave} instance to contain them, 
- 
+
+Since a voice belongs to a \className{msrStaff} in MSR, there are \className{msrStave} instance to contain them,
+
 \begin{lstlisting}[language=CPlusPlus]
   public:
 
@@ -1060,11 +1060,11 @@ void lpsr2lilypondTranslator::visitStart (S_msrHarmony& elt)
         "% --> Start visiting msrHarmony '" <<
         elt->asString () <<
         "'" <<
-        ", fOnGoingNotesStack.size () = " <<
+        ", fOnGoingNotesStack.size (): \"" <<
         fOnGoingNotesStack.size () <<
-        ", fOnGoingChord = " <<
+        ", fOnGoingChord: \"" <<
         fOnGoingChord <<
-        ", fOnGoingHarmoniesVoice = " <<
+        ", fOnGoingHarmoniesVoice: \"" <<
         fOnGoingHarmoniesVoice <<
         ", line " << elt->getInputLineNumber () <<
       std::endl;

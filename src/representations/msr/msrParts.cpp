@@ -992,7 +992,7 @@ void msrPart::registerOrdinalMeasureNumberWholeNotes (
         " is now registered with a duration of " <<
         wholeNotes <<
         " in part " << getPartCombinedName () <<
-        ", fPartMeasuresWholeNotessVector.size () = " <<
+        ", fPartMeasuresWholeNotessVector.size (): " <<
         fPartMeasuresWholeNotessVector.size () <<
         std::endl;
 
@@ -2095,6 +2095,36 @@ S_msrVoice msrPart::createPartHarmoniesVoice (
   return fPartHarmoniesVoice;
 }
 
+void msrPart::appendHarmonyToPart (
+  int                  inputLineNumber,
+  const S_msrHarmony&  harmony,
+  const msrWholeNotes& measurePositionToAppendAt)
+{
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceHarmonies ()) {
+    std::stringstream ss;
+
+    ss <<
+      "Appending harmony \"" <<
+      harmony->asString () <<
+      "\" to part " <<
+      getPartCombinedName () <<
+      ", line " << inputLineNumber <<
+      std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  fPartHarmoniesVoice->
+    appendHarmonyToVoice (
+      inputLineNumber,
+      harmony,
+      measurePositionToAppendAt);
+}
+
 S_msrVoice msrPart::createPartFiguredBassVoice (
   int                inputLineNumber,
   const std::string& currentMeasureNumber)
@@ -2186,66 +2216,99 @@ S_msrVoice msrPart::createPartFiguredBassVoice (
 }
 
 void msrPart::appendFiguredBassToPart (
-  const S_msrVoice&       figuredBassSupplierVoice,
-  const S_msrFiguredBass& figuredBass)
+  int                     inputLineNumber,
+  const S_msrFiguredBass& figuredBass,
+  const msrWholeNotes&    measurePositionToAppendAt)
 {
-  int inputLineNumber =
-    figuredBass->getInputLineNumber ();
-
-  ++gIndenter;
-
-  switch (figuredBassSupplierVoice->getVoiceKind ()) {
-    case msrVoiceKind::kVoiceKindRegular:
-      // append the figured bass to the part figured bass voice
 #ifdef MF_TRACE_IS_ENABLED
-      if (gTraceOahGroup->getTraceFiguredBasses ()) {
-        std::stringstream ss;
+  if (gTraceOahGroup->getTraceFiguredBasses ()) {
+    std::stringstream ss;
 
     ss <<
-          "Appending figured bass " <<
-          figuredBass->asString () <<
-          " to part " <<
-          getPartCombinedName () <<
-          ", line " << inputLineNumber <<
-          std::endl;
+      "Appending figured bass \"" <<
+      figuredBass->asString () <<
+      "\" to part " <<
+      getPartCombinedName () <<
+      ", line " << figuredBass->getInputLineNumber () <<
+      std::endl;
 
-        gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
-          ss.str ());
-      }
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
 #endif // MF_TRACE_IS_ENABLED
 
-      fPartFiguredBassVoice->
-        appendFiguredBassToVoice (figuredBass);
-      break;
-
-    case msrVoiceKind::kVoiceKindDynamics:
-      break;
-
-    case msrVoiceKind::kVoiceKindHarmonies:
-    case msrVoiceKind::kVoiceKindFiguredBass:
-      {
-        std::stringstream ss;
-
-        ss <<
-          "figured bass cannot by appended to part by " <<
-          msrVoiceKindAsString (
-            figuredBassSupplierVoice->getVoiceKind ()) <<
-          " voice \" " <<
-          figuredBassSupplierVoice->getVoiceName () <<
-          "\"";
-
-        msrInternalError (
-          gServiceRunData->getInputSourceName (),
-          inputLineNumber,
-          __FILE__, __LINE__,
-          ss.str ());
-      }
-      break;
-  } // switch
-
-  --gIndenter;
+  fPartFiguredBassVoice->
+    appendFiguredBassToVoice (
+      inputLineNumber,
+      figuredBass,
+      measurePositionToAppendAt);
 }
+
+// void msrPart::appendFiguredBassToPart (
+//   const S_msrVoice&       figuredBassSupplierVoice,
+//   const S_msrFiguredBass& figuredBass)
+// {
+//   int inputLineNumber =
+//     figuredBass->getInputLineNumber ();
+//
+//   ++gIndenter;
+//
+//   switch (figuredBassSupplierVoice->getVoiceKind ()) {
+//     case msrVoiceKind::kVoiceKindRegular:
+//       // append the figured bass to the part figured bass voice
+// #ifdef MF_TRACE_IS_ENABLED
+//       if (gTraceOahGroup->getTraceFiguredBasses ()) {
+//         std::stringstream ss;
+//
+//     ss <<
+//           "Appending figured bass " <<
+//           figuredBass->asString () <<
+//           " to part " <<
+//           getPartCombinedName () <<
+//           ", line " << inputLineNumber <<
+//           std::endl;
+//
+//         gWaeHandler->waeTrace (
+//           __FILE__, __LINE__,
+//           ss.str ());
+//       }
+// #endif // MF_TRACE_IS_ENABLED
+//
+//       fPartFiguredBassVoice->
+//         appendFiguredBassToVoice (
+//           inputLineNumber,
+//           figuredBass,
+//           measurePositionToAppendAt);
+//       break;
+//
+//     case msrVoiceKind::kVoiceKindDynamics:
+//       break;
+//
+//     case msrVoiceKind::kVoiceKindHarmonies:
+//     case msrVoiceKind::kVoiceKindFiguredBass:
+//       {
+//         std::stringstream ss;
+//
+//         ss <<
+//           "figured bass cannot by appended to part by " <<
+//           msrVoiceKindAsString (
+//             figuredBassSupplierVoice->getVoiceKind ()) <<
+//           " voice \" " <<
+//           figuredBassSupplierVoice->getVoiceName () <<
+//           "\"";
+//
+//         msrInternalError (
+//           gServiceRunData->getInputSourceName (),
+//           inputLineNumber,
+//           __FILE__, __LINE__,
+//           ss.str ());
+//       }
+//       break;
+//   } // switch
+//
+//   --gIndenter;
+// }
 
 void msrPart::appendFiguredBassToPartClone (
   const S_msrVoice&       figuredBassSupplierVoice,
@@ -2955,9 +3018,9 @@ std::string msrPart::asString () const
 
   ss <<
     "Part" <<
-    ", partID = \"" <<
+    ", partID: \"" <<
     fPartID <<
-    "\", partName = \"" <<
+    "\", partName: \"" <<
     fPartName <<
     "\", partMsrName: " << fPartMsrName <<
     fPartName <<

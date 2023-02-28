@@ -2,6 +2,7 @@
 <!DOCTYPE score-partwise PUBLIC "-//Recordare//DTD MusicXML 2.0 Partwise//EN"
                                 "http://www.musicxml.org/dtds/partwise.dtd">
 <score-partwise version="3.0">
+  <movement-title>SATB Example</movement-title>
   <identification>
     <encoding>
       <software>Frescobaldi 2.19.0</software>
@@ -205,6 +206,9 @@
         <voice>2</voice>
         <type>quarter</type>
       </note>
+      <barline location="right">
+        <bar-style>light-heavy</bar-style>
+        </barline>
     </measure>
   </part>
   <part id="P2">
@@ -420,6 +424,9 @@
         <voice>2</voice>
         <type>quarter</type>
       </note>
+      <barline location="right">
+        <bar-style>light-heavy</bar-style>
+        </barline>
     </measure>
   </part>
 </score-partwise>

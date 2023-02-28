@@ -191,7 +191,7 @@ EXP mfMusicformatsErrorKind msrScore2brailleWithHandler (
 #ifdef MF_TRACE_IS_ENABLED
       if (gEarlyOptions.getTraceEarlyOptions ()) {
         err <<
-          "xmlFile2braille() outputFileName = \"" <<
+          "xmlFile2braille() outputFileName: \"" <<
           outputFileName <<
           "\"" <<
           std::endl;

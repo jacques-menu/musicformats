@@ -1280,7 +1280,7 @@ R"()",
   S_oahCommonPrefixBooleansAtom
     instrumentsMultiplexBooleansAtom =
       oahCommonPrefixBooleansAtom::create (
-        "trace-in-instruments", "tii",
+        "trace-in-instruments", "tiinstr", // JMI v0.9.67 NOT CLEAR
         "Trace SHORT_NAME/LONG_NAME in instruments.",
         "SHORT_NAME",
         "LONG_NAME",
@@ -1290,6 +1290,21 @@ R"()",
   subGroup->
     appendAtomToSubGroup (
       instrumentsMultiplexBooleansAtom);
+
+  // instruments
+
+  S_oahTwoBooleansAtom
+    traceInstrumentsBooleanAtom =
+      oahTwoBooleansAtom::create (
+        "trace-instruments", "tinstr",
+R"(Instruments)",
+        "fTraceInstruments",
+        fTraceInstruments,
+        fTracePassesBooleanAtom);
+
+  subGroup->
+    appendAtomToSubGroup (
+      traceInstrumentsBooleanAtom);
 
   // frames
 
@@ -3152,6 +3167,11 @@ void traceOahGroup::displayTraceOahValues (int fieldWidth)
     std::endl <<
     std::setw (fieldWidth) << "fTraceFiguredBassesDetails" << ": " <<
     fTraceFiguredBassesDetails <<
+    std::endl <<
+
+    // instruments
+    std::setw (fieldWidth) << "fTraceInstruments" << ": " <<
+    fTraceInstruments <<
     std::endl <<
 
     // frames

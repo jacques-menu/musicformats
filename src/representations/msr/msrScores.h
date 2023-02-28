@@ -41,7 +41,7 @@ class EXP msrScore : public msrBookElement
     // ------------------------------------------------------
 
     static SMARTP<msrScore> create (
-                            int           inputLineNumber,
+                            int                inputLineNumber,
                             const std::string& scoreName);
 
     SMARTP<msrScore> createScoreNewbornClone ();
@@ -52,7 +52,7 @@ class EXP msrScore : public msrBookElement
     // ------------------------------------------------------
 
                           msrScore (
-                            int           inputLineNumber,
+                            int                inputLineNumber,
                             const std::string& scoreName);
 
     virtual               ~msrScore ();
@@ -158,8 +158,8 @@ class EXP msrScore : public msrBookElement
                               { return fScoreNumberOfMeasures; }
 
     void                  setScoreLastMeasureNumber (
-                            std::string measureNumbe)
-                              {fScoreLastMeasureNumber = measureNumbe; }
+                            std::string measureNumber)
+                              {fScoreLastMeasureNumber = measureNumber; }
 
     std::string           getScoreLastMeasureNumber () const
                               { return fScoreLastMeasureNumber; }

@@ -589,10 +589,10 @@ S_msrSemiTonesPitchAndOctave msrSemiTonesPitchAndOctave::createFromString (
       std::stringstream ss;
 
       ss <<
-        "--> semiTonesPitchKind = \"" <<
+        "--> semiTonesPitchKind: \"" <<
         msrSemiTonesPitchKindAsString (
           semiTonesPitchKind) << "\", " <<
-        "--> octaveKind = " <<
+        "--> octaveKind: " <<
         msrOctaveKindAsString (octaveKind) <<
         std::endl;
 
@@ -1096,7 +1096,7 @@ S_msrQuarterTonesPitchAndOctave msrQuarterTonesPitchAndOctave::createFromString 
       std::stringstream ss;
 
       ss <<
-        "--> quarterTonesPitchKind = \"" <<
+        "--> quarterTonesPitchKind: \"" <<
           msrQuarterTonesPitchKindAsString (
             quarterTonesPitchKind) <<
         "\", " <<

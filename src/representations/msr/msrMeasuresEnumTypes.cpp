@@ -37,6 +37,9 @@ std::string msrMeasureKindAsString (
     case msrMeasureKind::kMeasureKindIncompleteStandalone:
       result = "kMeasureKindIncompleteStandalone";
       break;
+    case msrMeasureKind::kMeasureKindIncompleteLastMeasure:
+      result = "kMeasureKindIncompleteLastMeasure";
+      break;
     case msrMeasureKind::kMeasureKindIncompleteLastInRepeatCommonPart:
       result = "kMeasureKindIncompleteLastInRepeatCommonPart";
       break;
@@ -100,6 +103,9 @@ std::string msrMeasureKindasShortStringForMeasuresSlices (
       break;
     case msrMeasureKind::kMeasureKindIncompleteStandalone:
       result = "kMeasureKindIncompleteStandalone";
+      break;
+    case msrMeasureKind::kMeasureKindIncompleteLastMeasure:
+      result = "kMeasureKindIncompleteLastMeasure";
       break;
     case msrMeasureKind::kMeasureKindIncompleteLastInRepeatCommonPart:
       result = "kMeasureKindIncompleteLastInRepeatCommonPart";

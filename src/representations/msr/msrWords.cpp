@@ -164,7 +164,7 @@ void msrWords::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif        
+#endif
         p->visitEnd (elem);
   }
 }
@@ -221,7 +221,7 @@ std::string msrWords::asString () const
     "Words" <<
     ", line " << fInputLineNumber <<
     ' ' <<
-    fWordsContents << ", placement = " <<
+    fWordsContents << ", placement: " <<
     msrPlacementKindAsString (fWordsPlacementKind);
 
   return ss.str ();

@@ -375,7 +375,7 @@ std::string xml2gmnInsiderHandler::fetchOutputFileNameFromTheOptions () const
         std::stringstream ss;
 
         ss <<
-          "xml2gmnInsiderHandler::fetchOutputFileNameFromTheOptions(): outputFileName 1 = \"" <<
+          "xml2gmnInsiderHandler::fetchOutputFileNameFromTheOptions(): outputFileName 1: \"" <<
           outputFileName <<
           "\"" <<
           std::endl;
@@ -394,7 +394,7 @@ std::string xml2gmnInsiderHandler::fetchOutputFileNameFromTheOptions () const
         std::stringstream ss;
 
         ss <<
-          "xml2gmnInsiderHandler::fetchOutputFileNameFromTheOptions(): outputFileName 2 = " <<
+          "xml2gmnInsiderHandler::fetchOutputFileNameFromTheOptions(): outputFileName 2: \"" <<
           outputFileName <<
           "\"" <<
           std::endl;

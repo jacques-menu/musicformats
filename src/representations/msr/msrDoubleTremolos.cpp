@@ -145,11 +145,11 @@ void msrDoubleTremolo::setDoubleTremoloUpLinkToMeasure (
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceWholeNotes ()) {
+  if (gTraceOahGroup->getTraceTremolos ()) {
     ++gIndenter;
 
     gLog <<
-      "==> Setting the uplink to measure of double tremolo " <<
+      "Setting the uplink to measure of double tremolo " <<
       asString () <<
       " to measure " << measure->asString () <<
       "' in measure '" <<
@@ -414,13 +414,13 @@ void msrDoubleTremolo::setDoubleTremoloNoteFirstElement (const S_msrNote& note)
     ss <<
       "cannot handle numberOfRepeatsAsRational.getDenominator () != 1" <<
       std::endl <<
-      "numberOfRepeatsAsRational = " <<
+      "numberOfRepeatsAsRational: " <<
       numberOfRepeatsAsRational <<
       std::endl <<
-      "fDoubleTremoloSoundingWholeNotes = '" <<
+      "fDoubleTremoloSoundingWholeNotes: '" <<
       fDoubleTremoloSoundingWholeNotes << "'" <<
       std::endl <<
-      "fDoubleTremoloElementsWholeNotes = '" <<
+      "fDoubleTremoloElementsWholeNotes: '" <<
       fDoubleTremoloElementsWholeNotes << "'" <<
       std::endl <<
       "line " << inputLineNumber;
@@ -442,9 +442,9 @@ void msrDoubleTremolo::setDoubleTremoloNoteFirstElement (const S_msrNote& note)
     ss <<
       "Setting notes double tremolo number of repeats to '" <<
       fDoubleTremoloNumberOfRepeats <<
-      "', fDoubleTremoloSoundingWholeNotes = '" <<
+      "', fDoubleTremoloSoundingWholeNotes: '" <<
       fDoubleTremoloSoundingWholeNotes << "'" <<
-      ", fDoubleTremoloElementsWholeNotes = '" <<
+      ", fDoubleTremoloElementsWholeNotes: '" <<
       fDoubleTremoloElementsWholeNotes << "'" <<
       "', line " << inputLineNumber <<
       std::endl;
@@ -504,11 +504,11 @@ void msrDoubleTremolo::setDoubleTremoloNoteSecondElement (
 
     ss <<
       "Checking notes double tremolo second note duration" <<
-      ", doubleTremoloNumberOfRepeats = '" <<
+      ", doubleTremoloNumberOfRepeats: '" <<
       fDoubleTremoloNumberOfRepeats <<
-      "', doubleTremoloSoundingWholeNotes = '" <<
+      "', doubleTremoloSoundingWholeNotes: '" <<
       fDoubleTremoloSoundingWholeNotes <<
-      "', doubleTremoloElementsNotesDuration = '" <<
+      "', doubleTremoloElementsNotesDuration: '" <<
       fDoubleTremoloElementsWholeNotes << "'" <<
       "', line " << inputLineNumber <<
       std::endl;

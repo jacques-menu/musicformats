@@ -125,7 +125,7 @@ EXP mfMusicformatsErrorKind msrScore2lilypondWithHandler (
 #ifdef MF_TRACE_IS_ENABLED
     if (gEarlyOptions.getTraceEarlyOptions ()) {
       err <<
-        "xmlFile2lilypond() outputFileName = \"" <<
+        "xmlFile2lilypond() outputFileName: \"" <<
         outputFileName <<
         "\"" <<
         std::endl;
@@ -261,9 +261,9 @@ EXP mfMusicformatsErrorKind msrScore2lilypondWithHandler (
           gLanguage->closingLilypondFile (outputFileName) <<
           std::endl;
 
-//     gWaeHandler->waeTrace ( JMI v0.9.67
-//       __FILE__, __LINE__,
-//       ss.str ());
+        gWaeHandler->waeTrace ( // JMI v0.9.67
+          __FILE__, __LINE__,
+          ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
 

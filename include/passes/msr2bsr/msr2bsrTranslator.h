@@ -255,7 +255,7 @@ class EXP msr2bsrTranslator :
     S_msrNote                 fRelativeOctaveReference;
                                 // contains absolute octave
 
-    bsrNoteOctaveIsNeeded     brailleOctaveMarkInNeeded (const S_msrNote& note);
+    bsrNoteOctaveIsNeeded     brailleOctaveMarkIfNeeded (const S_msrNote& note);
 
 
 /*

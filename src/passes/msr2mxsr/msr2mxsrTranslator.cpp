@@ -633,7 +633,7 @@ void msr2mxsrTranslator::appendNoteToMeasure (
     std::stringstream ss;
 
     ss <<
-      "--> appendNoteToMeasure(), note = " <<
+      "--> appendNoteToMeasure(), note: " <<
       ", note: " << mxmlelementAsString (note) <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -3396,7 +3396,7 @@ void msr2mxsrTranslator::visitStart (S_msrMeasure& elt)
     ss <<
       "--> Start visiting msrMeasure '" <<
       measureNumber <<
-      "', measurePuristNumber = '" <<
+      "', measurePuristNumber: '" <<
       measurePuristNumber <<
       "', line " << inputLineNumber <<
       std::endl;
@@ -3572,9 +3572,9 @@ void msr2mxsrTranslator::visitEnd (S_msrMeasure& elt)
     ss <<
       "--> End visiting msrMeasure '" <<
       measureNumber <<
-      "', nextMeasureNumber = '" <<
+      "', nextMeasureNumber: '" <<
       nextMeasureNumber <<
-      "', measurePuristNumber = '" <<
+      "', measurePuristNumber: '" <<
       measurePuristNumber <<
       "', line " << inputLineNumber <<
       std::endl;
@@ -4767,7 +4767,7 @@ void msr2mxsrTranslator::visitStart (S_msrTempo& elt)
 
       fOutputStream <<
         std::endl <<
-        "\" = \"" <<
+        "\": \"" <<
         std::endl;
 
       fOutputStream <<
@@ -5066,7 +5066,7 @@ void msr2mxsrTranslator:: appendNoteWedges (
     std::stringstream ss;
 
     ss <<
-      "--> appendNoteWedges, theMsrNote = " <<
+      "--> appendNoteWedges, theMsrNote: " <<
       theMsrNote->asShortString () <<
       std::endl;
 
@@ -5128,7 +5128,7 @@ void msr2mxsrTranslator::appendNoteDynamics (
     std::stringstream ss;
 
     ss <<
-      "--> appendNoteDynamics, theMsrNote = " <<
+      "--> appendNoteDynamics, theMsrNote: " <<
       theMsrNote->asShortString () <<
       std::endl;
 
@@ -5293,7 +5293,7 @@ void msr2mxsrTranslator::appendABackupToMeasure (
     std::stringstream ss;
 
     ss <<
-      "Creating a backup element, theMsrNote = " <<
+      "Creating a backup element, theMsrNote: " <<
       theMsrNote->asShortString () <<
 
       ", previousNoteMeasurePosition: " <<
@@ -5404,7 +5404,7 @@ void msr2mxsrTranslator:: appendAForwardToMeasure (
     std::stringstream ss;
 
     ss <<
-      "Creating a forward element, note = " <<
+      "Creating a forward element, note: " <<
       theMsrNote->asShortString () <<
       ", forwardNotesDurationDivisions: " << forwardNotesDurationDivisions <<
       ", line " << inputLineNumber <<
@@ -5495,7 +5495,7 @@ void msr2mxsrTranslator:: appendABackupOrForwardToMeasureIfNeeded (
     std::stringstream ss;
 
     ss <<
-      "Appending a backup or forward to measure if needed, theMsrNote = " <<
+      "Appending a backup or forward to measure if needed, theMsrNote: " <<
       theMsrNote->asShortString () <<
       ", fCurrentCumulatedSkipsNotesDurations: " << fCurrentCumulatedSkipsNotesDurations <<
       ", previousMSRNote: ";
@@ -5544,7 +5544,7 @@ void msr2mxsrTranslator:: appendABackupOrForwardToMeasureIfNeeded (
     std::stringstream ss;
 
     ss <<
-      "--> appendABackupOrForwardToMeasureIfNeeded(1), theMsrNote = " <<
+      "--> appendABackupOrForwardToMeasureIfNeeded(1), theMsrNote: " <<
       theMsrNote->asShortString () <<
       ", fCurrentCumulatedSkipsNotesDurations: " << fCurrentCumulatedSkipsNotesDurations <<
       ", noteStaffNumber: " << noteStaffNumber <<
@@ -5617,7 +5617,7 @@ fCurrentCumulatedSkipsVoiceNumber
             gGlobalMxsrOahGroup->getTraceForward ()
           ) {
             gLog <<
-              "--> appendABackupOrForwardToMeasureIfNeeded(2), note = " <<
+              "--> appendABackupOrForwardToMeasureIfNeeded(2), note: " <<
               theMsrNote->asShortString () <<
               ", noteMeasurePosition: " << noteMeasurePosition <<
               ", positionAfterNoteInMeasure: " << positionAfterNoteInMeasure <<
@@ -5665,7 +5665,7 @@ void msr2mxsrTranslator:: populateNoteDirections (
     std::stringstream ss;
 
     ss <<
-      "--> populateNoteDirections, theMsrNote = " <<
+      "--> populateNoteDirections, theMsrNote: " <<
       theMsrNote->asShortString () <<
       std::endl;
 
@@ -5703,7 +5703,7 @@ void msr2mxsrTranslator:: appendNoteOrnaments (
     std::stringstream ss;
 
     ss <<
-      "--> appendNoteOrnaments, theMsrNote = " <<
+      "--> appendNoteOrnaments, theMsrNote: " <<
       theMsrNote->asShortString () <<
       std::endl;
 
@@ -5822,7 +5822,7 @@ void msr2mxsrTranslator:: appendNoteTechnicals (
     std::stringstream ss;
 
     ss <<
-      "--> appendNoteTechnicals, theMsrNote = " <<
+      "--> appendNoteTechnicals, theMsrNote: " <<
       theMsrNote->asShortString () <<
       std::endl;
 
@@ -5932,7 +5932,7 @@ void msr2mxsrTranslator:: appendNoteTechnicalWithIntegers (
     std::stringstream ss;
 
     ss <<
-      "--> appendNoteTechnicalWithIntegers, theMsrNote = " <<
+      "--> appendNoteTechnicalWithIntegers, theMsrNote: " <<
       theMsrNote->asShortString () <<
       std::endl;
 
@@ -6016,7 +6016,7 @@ void msr2mxsrTranslator:: appendNoteTechnicalWithFloats (
     std::stringstream ss;
 
     ss <<
-      "--> appendNoteTechnicalWithFloats, theMsrNote = " <<
+      "--> appendNoteTechnicalWithFloats, theMsrNote: " <<
       theMsrNote->asShortString () <<
       std::endl;
 
@@ -6090,7 +6090,7 @@ void msr2mxsrTranslator:: appendNoteTechnicalWithStrings (
     std::stringstream ss;
 
     ss <<
-      "--> appendNoteTechnicalWithStrings, theMsrNote = " <<
+      "--> appendNoteTechnicalWithStrings, theMsrNote: " <<
       theMsrNote->asShortString () <<
       std::endl;
 
@@ -6173,7 +6173,7 @@ void msr2mxsrTranslator:: appendNoteArticulations (
     std::stringstream ss;
 
     ss <<
-      "--> appendNoteArticulations, theMsrNote = " <<
+      "--> appendNoteArticulations, theMsrNote: " <<
       theMsrNote->asShortString () <<
       std::endl;
 
@@ -6322,7 +6322,7 @@ void msr2mxsrTranslator:: appendNoteTieIfAny (
     std::stringstream ss;
 
     ss <<
-      "--> appendNoteTieIfAny, theMsrNote = " <<
+      "--> appendNoteTieIfAny, theMsrNote: " <<
       theMsrNote->asShortString () <<
       std::endl;
 
@@ -6377,7 +6377,7 @@ void msr2mxsrTranslator:: appendNoteSlursIfAny (
     std::stringstream ss;
 
     ss <<
-      "--> appendNoteSlursIfAny, theMsrNote = " <<
+      "--> appendNoteSlursIfAny, theMsrNote: " <<
       theMsrNote->asShortString () <<
       std::endl;
 
@@ -6466,7 +6466,7 @@ void msr2mxsrTranslator:: appendNoteTupletIfRelevant (
     std::stringstream ss;
 
     ss <<
-      "--> appendNoteTupletIfRelevant, theMsrNote = " <<
+      "--> appendNoteTupletIfRelevant, theMsrNote: " <<
       theMsrNote->asShortString () <<
       std::endl;
 
@@ -6563,7 +6563,7 @@ void msr2mxsrTranslator:: appendNoteSpannersBeforeNote (
     std::stringstream ss;
 
     ss <<
-      "--> appendNoteSpannersBeforeNote, theMsrNote = " <<
+      "--> appendNoteSpannersBeforeNote, theMsrNote: " <<
       theMsrNote->asShortString () <<
       std::endl;
 
@@ -6676,7 +6676,7 @@ void msr2mxsrTranslator:: appendNoteSpannersAfterNote (
     std::stringstream ss;
 
     ss <<
-      "--> appendNoteSpannersAfterNote, theMsrNote = " <<
+      "--> appendNoteSpannersAfterNote, theMsrNote: " <<
       theMsrNote->asShortString () <<
       std::endl;
 
@@ -6786,7 +6786,7 @@ void msr2mxsrTranslator:: appendStemToNote (
     std::stringstream ss;
 
     ss <<
-      "--> appendStemToNote, theMsrNote = " <<
+      "--> appendStemToNote, theMsrNote: " <<
       theMsrNote->asShortString () <<
       std::endl;
 
@@ -6836,7 +6836,7 @@ void msr2mxsrTranslator::appendBeamsToNote (
     std::stringstream ss;
 
     ss <<
-      "--> appendBeamsToNote, theMsrNote = " <<
+      "--> appendBeamsToNote, theMsrNote: " <<
       theMsrNote->asShortString () <<
       std::endl;
 
@@ -6907,7 +6907,7 @@ void msr2mxsrTranslator:: appendStaffToNoteIfRelevant (
     std::stringstream ss;
 
     ss <<
-      "--> appendStaffToNoteIfRelevant(), theMsrNote = " <<
+      "--> appendStaffToNoteIfRelevant(), theMsrNote: " <<
       theMsrNote->asShortString () <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -6971,7 +6971,7 @@ void msr2mxsrTranslator::appendVoiceToNoteIfRelevant (
     std::stringstream ss;
 
     ss <<
-      "--> appendVoiceToNoteIfRelevant(), theMsrNote = " <<
+      "--> appendVoiceToNoteIfRelevant(), theMsrNote: " <<
       theMsrNote->asShortString () <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -7030,7 +7030,7 @@ void msr2mxsrTranslator:: appendNoteNotationsToNote (
     std::stringstream ss;
 
     ss <<
-      "--> appendNoteNotationsToNote, theMsrNote = " <<
+      "--> appendNoteNotationsToNote, theMsrNote: " <<
       theMsrNote->asShortString () <<
       std::endl;
 
@@ -7084,7 +7084,7 @@ void msr2mxsrTranslator:: appendNoteLyricsToNote (
     std::stringstream ss;
 
     ss <<
-      "--> appendNoteLyricsToNote, theMsrNote = " <<
+      "--> appendNoteLyricsToNote, theMsrNote: " <<
       theMsrNote->asShortString () <<
       std::endl;
 
@@ -7256,7 +7256,7 @@ void msr2mxsrTranslator::appendBasicsToNote (
     std::stringstream ss;
 
     ss <<
-      "--> appendBasicsToNote(), theMsrNote = " <<
+      "--> appendBasicsToNote(), theMsrNote: " <<
       theMsrNote->asShortString () <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -7444,7 +7444,7 @@ void msr2mxsrTranslator::appendNotesDurationToNoteIfRelevant (
     std::stringstream ss;
 
     ss <<
-      "--> appendNotesDurationToNoteIfRelevant(1), theMsrNote = " <<
+      "--> appendNotesDurationToNoteIfRelevant(1), theMsrNote: " <<
       theMsrNote->asShortString () <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -7605,7 +7605,7 @@ void msr2mxsrTranslator::appendTimeModificationToNoteIfRelevant (
     std::stringstream ss;
 
     ss <<
-      "--> appendTimeModificationToNoteIfRelevant(), theMsrNote = " <<
+      "--> appendTimeModificationToNoteIfRelevant(), theMsrNote: " <<
       theMsrNote->asShortString () <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -7686,7 +7686,7 @@ void msr2mxsrTranslator::appendMsrNoteToMesureIfRelevant (
     std::stringstream ss;
 
     ss <<
-      "--> appendMsrNoteToMesureIfRelevant, theMsrNote = " <<
+      "--> appendMsrNoteToMesureIfRelevant, theMsrNote: " <<
       theMsrNote->asShortString () <<
       std::endl;
 

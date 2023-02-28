@@ -897,7 +897,7 @@ S_msrTimeSignature msrTimeSignature::createTimeFromString (
     std::stringstream ss;
 
     ss <<
-      "regularExpression = " <<
+      "regularExpression: " <<
       regularExpression <<
       std::endl;
 
@@ -959,12 +959,12 @@ S_msrTimeSignature msrTimeSignature::createTimeFromString (
     std::stringstream ss;
 
     ss <<
-      "beatsNumber = \"" <<
+      "beatsNumber: \"" <<
       beatsNumber <<
       "\"" <<
       std::endl <<
 
-      "beatsNotesDuration = \"" <<
+      "beatsNotesDuration: \"" <<
       beatsNotesDuration <<
       "\"" <<
       std::endl;
@@ -994,10 +994,10 @@ S_msrTimeSignature msrTimeSignature::createTimeFromString (
     std::stringstream ss;
 
     ss <<
-      "integerBeatsNumber = " <<
+      "integerBeatsNumber: " <<
       integerBeatsNumber <<
       std::endl <<
-      "integerValue = " <<
+      "integerValue: " <<
       integerValue <<
       std::endl;
 
@@ -1047,11 +1047,11 @@ void msrTimeSignature::setTimeSignatureUpLinkToMeasure (
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceWholeNotes ()) {
+  if (gTraceOahGroup->getTraceTimeSignatures ()) {
     ++gIndenter;
 
     gLog <<
-      "==> Setting the uplink to measure of time signature " <<
+      "Setting the uplink to measure of time signature " <<
       asString () <<
       " to measure " << measure->asString () <<
       "' in measure '" <<
@@ -1122,7 +1122,7 @@ msrWholeNotes msrTimeSignature::timeSignatureWholeNotesPerMeasure () const
 /* JMI
     gLog <<
       std::endl << std::endl <<
-      "result1 = " <<
+      "result1: " <<
       result.getNumerator () <<
       '/' <<
       result.getDenominator () <<
@@ -1139,7 +1139,7 @@ msrWholeNotes msrTimeSignature::timeSignatureWholeNotesPerMeasure () const
 /* JMI
       gLog <<
         std::endl << std::endl <<
-        "result2 = " <<
+        "result2: " <<
         result.getNumerator () <<
         '/' <<
         result.getDenominator () <<
@@ -1374,7 +1374,7 @@ void msrTimeSignature::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "timeSignatureSymbolKind" << ": " <<
+    "fTimeSignatureSymbolKind" << ": " <<
     msrTimeSignatureSymbolKindAsString (fTimeSignatureSymbolKind) <<
     std::endl <<
     std::setw (fieldWidth) <<
@@ -1382,7 +1382,7 @@ void msrTimeSignature::print (std::ostream& os) const
     fTimeIsCompound <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "timeSignatureItemsVector.size()" << ": " <<
+    "fTimeSignatureItemsVector.size()" << ": " <<
     mfSingularOrPlural (
       fTimeSignatureItemsVector.size (), "item", "items") <<
     std::endl <<
@@ -1407,7 +1407,6 @@ void msrTimeSignature::print (std::ostream& os) const
 
     --gIndenter;
   }
-
   else {
     os <<
       " [NONE]" <<
@@ -1429,6 +1428,13 @@ std::ostream& operator << (std::ostream& os, const S_msrTimeSignature& elt)
   }
 
   return os;
+}
+
+EXP mfIndentedStringStream& operator << (
+  mfIndentedStringStream& iss, const S_msrTimeSignature& elt)
+{
+  iss << elt->asString ();
+  return iss;
 }
 
 

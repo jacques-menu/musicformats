@@ -485,11 +485,11 @@ void msrKey::setKeyUpLinkToMeasure (
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceWholeNotes ()) {
+  if (gTraceOahGroup->getTraceKeys ()) {
     ++gIndenter;
 
     gLog <<
-      "==> Setting the uplink to measure of key " <<
+      "Setting the uplink to measure of key " <<
       asString () <<
       " to measure " << measure->asString () <<
       "' in measure '" <<
@@ -627,7 +627,7 @@ S_msrKey msrKey::createTraditionalKeyFromString (
     std::stringstream ss;
 
     ss <<
-      "regularExpression = " <<
+      "regularExpression: " <<
       regularExpression <<
       std::endl;
 
@@ -708,19 +708,19 @@ S_msrKey msrKey::createTraditionalKeyFromString (
     std::stringstream ss;
 
     ss <<
-      "keyTonic = \"" <<
+      "keyTonic: \"" <<
       keyTonic <<
       "\"" <<
       std::endl <<
-      "keyQuarterTonesTonicPitchKind = \"" <<
+      "keyQuarterTonesTonicPitchKind: \"" <<
       msrQuarterTonesPitchKindAsString (keyQuarterTonesTonicPitchKind) <<
       "\"" <<
       std::endl <<
-      "keyMode = \"" <<
+      "keyMode: \"" <<
       keyMode <<
       "\"" <<
       std::endl <<
-      "keyModeKind = \"" <<
+      "keyModeKind: \"" <<
       keyModeKind <<
       "\"" <<
       std::endl;

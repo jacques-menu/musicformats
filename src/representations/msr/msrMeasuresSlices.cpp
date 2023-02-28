@@ -89,10 +89,10 @@ bool msrNoteEvent::compareNotesEventsByIncreasingMeasurePosition (
   msrWholeNotes
     firstMeasurePosition =
       first->
-        getNoteEventMeasurePosition (),
+        fNoteEventMeasurePosition,
     secondMeasurePosition =
       second->
-        getNoteEventMeasurePosition ();
+        fNoteEventMeasurePosition;
 
   S_msrNote
     firstNote =

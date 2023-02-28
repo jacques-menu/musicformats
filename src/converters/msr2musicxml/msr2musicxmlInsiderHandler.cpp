@@ -361,7 +361,7 @@ std::string msr2musicxmlInsiderHandler::fetchOutputFileNameFromTheOptions () con
         std::stringstream ss;
 
         ss <<
-          "msr2musicxmlInsiderHandler::fetchOutputFileNameFromTheOptions(): outputFileName 1 = \"" <<
+          "msr2musicxmlInsiderHandler::fetchOutputFileNameFromTheOptions(): outputFileName 1: \"" <<
           outputFileName <<
           "\"" <<
           std::endl;
@@ -380,7 +380,7 @@ std::string msr2musicxmlInsiderHandler::fetchOutputFileNameFromTheOptions () con
         std::stringstream ss;
 
         ss <<
-          "msr2musicxmlInsiderHandler::fetchOutputFileNameFromTheOptions(): outputFileName 2 = " <<
+          "msr2musicxmlInsiderHandler::fetchOutputFileNameFromTheOptions(): outputFileName 2 :" <<
           outputFileName <<
           "\"" <<
           std::endl;

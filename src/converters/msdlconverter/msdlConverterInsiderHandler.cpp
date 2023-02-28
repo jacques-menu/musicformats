@@ -716,7 +716,7 @@ std::string msdlConverterInsiderHandler::fetchOutputFileNameFromTheOptions () co
         std::stringstream ss;
 
         ss <<
-          "msdlConverterInsiderHandler::fetchOutputFileNameFromTheOptions(): outputFileName 1 = \"" <<
+          "msdlConverterInsiderHandler::fetchOutputFileNameFromTheOptions(): outputFileName 1: \"" <<
           outputFileName <<
           "\"" <<
           std::endl;
@@ -732,7 +732,7 @@ std::string msdlConverterInsiderHandler::fetchOutputFileNameFromTheOptions () co
         std::stringstream ss;
 
         ss <<
-          "msdlConverterInsiderHandler::fetchOutputFileNameFromTheOptions(): outputFileName 2 = " <<
+          "msdlConverterInsiderHandler::fetchOutputFileNameFromTheOptions(): outputFileName 2: " <<
           outputFileName <<
           "\"" <<
           std::endl;

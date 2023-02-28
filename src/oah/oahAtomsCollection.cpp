@@ -10,7 +10,7 @@
 */
 
 #include <iomanip>      // std::setw, std::setprecision, ...
-
+#include <map>
 #include <regex>
 
 #include "mfStaticSettings.h"
@@ -8155,7 +8155,7 @@ void oahRationalAtom::applyAtomWithValue (
       std::stringstream ss;
 
       ss <<
-        "rationalValue = " <<
+        "rationalValue: " <<
         rationalValue <<
         std::endl;
 
@@ -9008,7 +9008,7 @@ void oahIntSetElementAtom::applyAtomWithValue (
     std::stringstream ss;
 
     ss <<
-      "lilypondMeasureNumber = " <<
+      "lilypondMeasureNumber: " <<
       lilypondMeasureNumber <<
       std::endl;
 
@@ -9729,10 +9729,10 @@ void oahStringToIntMapElementAtom::applyAtomWithValue (
     std::stringstream ss;
 
     ss <<
-      "musicxmlMeasureNumber = " <<
+      "musicxmlMeasureNumber: " <<
       musicxmlMeasureNumber <<
       std::endl <<
-      "lilypondMeasureNumber = " <<
+      "lilypondMeasureNumber: " <<
       lilypondMeasureNumber <<
       std::endl;
 
@@ -10124,10 +10124,10 @@ void oahStringToStringMapElementAtom::applyAtomWithValue (
     std::stringstream ss;
 
     ss <<
-      "key = " <<
+      "key: " <<
       key <<
       std::endl <<
-      "value = " <<
+      "value: " <<
       value <<
       std::endl;
 
@@ -10523,10 +10523,10 @@ void oahStringToStringMultiMapElementAtom::applyAtomWithValue (
     std::stringstream ss;
 
     ss <<
-      "key = " <<
+      "key: " <<
       key <<
       std::endl <<
-      "value = " <<
+      "value: " <<
       value <<
       std::endl;
 
@@ -12349,10 +12349,10 @@ void oahMidiTempoAtom::applyAtomWithValue (
     std::stringstream ss;
 
     ss <<
-      "midiTempoNotesDuration  = " <<
+      "midiTempoNotesDuration: " <<
       midiTempoNotesDuration <<
       std::endl <<
-      "midiTempoPerSecond = " <<
+      "midiTempoPerSecond: " <<
       midiTempoPerSecond <<
       std::endl;
 

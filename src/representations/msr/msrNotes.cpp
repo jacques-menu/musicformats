@@ -403,7 +403,7 @@ void msrNote::setNoteUpLinkToMeasure (
     std::stringstream ss;
 
     ss <<
-      "==> Setting the uplink to measure of note " <<
+      "Setting the uplink to measure of note " <<
       asString () <<
       " to measure " << measure->asString () <<
       "' in measure '" <<
@@ -1836,7 +1836,7 @@ S_msrNote msrNote::createRestFromString (
     std::stringstream ss;
 
     ss <<
-      "regularExpression = " <<
+      "regularExpression: " <<
       regularExpression <<
       std::endl;
 
@@ -1900,16 +1900,16 @@ S_msrNote msrNote::createRestFromString (
     std::stringstream ss;
 
     ss <<
-      "restNotesDuration = \"" <<
+      "restNotesDuration: \"" <<
       restNotesDuration <<
       "\"" <<
       std::endl <<
 
-      "restDots = \"" <<
+      "restDots: \"" <<
       restDots <<
       "\"" <<
       std::endl <<
-      "dotsNumber = " <<
+      "dotsNumber: " <<
       dotsNumber <<
       std::endl;
 
@@ -1937,7 +1937,7 @@ S_msrNote msrNote::createRestFromString (
     std::stringstream ss;
 
     ss <<
-      "notesNotesDurationKindFromMslpString = " <<
+      "notesNotesDurationKindFromMslpString: " <<
       notesNotesDurationKindFromMslpString <<
       std::endl;
 
@@ -2001,7 +2001,7 @@ S_msrNote msrNote::createSkipFromString (
     std::stringstream ss;
 
     ss <<
-      "regularExpression = " <<
+      "regularExpression: " <<
       regularExpression <<
       std::endl;
 
@@ -2065,16 +2065,16 @@ S_msrNote msrNote::createSkipFromString (
     std::stringstream ss;
 
     ss <<
-      "skipNotesDuration = \"" <<
+      "skipNotesDuration: \"" <<
       skipNotesDuration <<
       "\"" <<
       std::endl <<
 
-      "skipDots = \"" <<
+      "skipDots: \"" <<
       skipDots <<
       "\"" <<
       std::endl <<
-      "dotsNumber = " <<
+      "dotsNumber: " <<
       dotsNumber <<
       std::endl;
 
@@ -2102,7 +2102,7 @@ S_msrNote msrNote::createSkipFromString (
     std::stringstream ss;
 
     ss <<
-      "notesNotesDurationKindFromMslpString = " <<
+      "notesNotesDurationKindFromMslpString: " <<
       notesNotesDurationKindFromMslpString <<
       std::endl;
 
@@ -2172,7 +2172,7 @@ S_msrNote msrNote::createNoteFromString (
     std::stringstream ss;
 
     ss <<
-      "regularExpression = " <<
+      "regularExpression: " <<
       regularExpression <<
       std::endl;
 
@@ -2238,26 +2238,26 @@ S_msrNote msrNote::createNoteFromString (
     std::stringstream ss;
 
     ss <<
-      "notePitch = \"" <<
+      "notePitch: \"" <<
       notePitch <<
       "\"" <<
       std::endl <<
 
-      "noteOctaveIndication = \"" <<
+      "noteOctaveIndication: \"" <<
       noteOctaveIndication <<
       "\"" <<
       std::endl <<
 
-      "noteNotesDuration = \"" <<
+      "noteNotesDuration: \"" <<
       noteNotesDuration <<
       "\"" <<
       std::endl <<
 
-      "noteDots = \"" <<
+      "noteDots: \"" <<
       noteDots <<
       "\"" <<
       std::endl <<
-      "dotsNumber = " <<
+      "dotsNumber: " <<
       dotsNumber <<
       std::endl;
 
@@ -2300,13 +2300,13 @@ S_msrNote msrNote::createNoteFromString (
     std::stringstream ss;
 
     ss <<
-      "quarterTonesPitchKind = " <<
+      "quarterTonesPitchKind: " <<
       quarterTonesPitchKind <<
       std::endl <<
-      "octaveKind = " <<
+      "octaveKind: " <<
       octaveKind <<
       std::endl <<
-      "notesNotesDurationKindFromMslpString = " <<
+      "notesNotesDurationKindFromMslpString: " <<
       notesNotesDurationKindFromMslpString <<
       std::endl;
 
@@ -2462,7 +2462,7 @@ void msrNote::setNoteAttachedElementsMeasurePosition (
     std::stringstream ss;
 
     ss <<
-      "fNoteHarmoniesList.size (): " <<
+      "setNoteAttachedElementsMeasurePosition(), fNoteHarmoniesList.size (): " <<
       fNoteHarmoniesList.size () <<
       std::endl;
 
@@ -3466,9 +3466,9 @@ bool msrNote::compareNotesByIncreasingMeasurePosition (
 {
   return
     bool (
-      first->getMeasurePosition ()
+      first->fMeasurePosition
         <
-      second->getMeasurePosition ()
+      second->fMeasurePosition
     );
 }
 
@@ -3592,41 +3592,41 @@ void msrNote::appendHarmonyToNote (
 //     setHarmonyUpLinkToNote (this);
 }
 
-void msrNote::appendFiguredBassToNote (
-  const S_msrFiguredBass& figuredBass)
-{
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceFiguredBasses ()) {
-    std::stringstream ss;
-
-    ss <<
-      "Append figured bass " <<
-      figuredBass->asString () <<
-      " to the figured bass list of " <<
-      asString () <<
-      ", line " << fInputLineNumber <<
-      std::endl;
-
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-  // set the figured bass's whole notes duration
-  // change the figured bass whole notes if it belongs to a tuplet ??? utf8.xml JMI v0.9.66
-  // JMI v0.9.67 NOT if there are several figured basses with offsets on the same note -- HARMFUL!
-  figuredBass->
-    setSoundingWholeNotes (
-      fSoundingWholeNotes,
-      "appendFiguredBassToNote()");
-
-  fNoteFiguredBassesList.push_back (figuredBass);
-
-//   // register this note as the figured bass upLink // JMI v0.9.66 JMI v0.9.66 JMI v0.9.66 MERDUM
+// void msrNote::appendFiguredBassToNote (
+//   const S_msrFiguredBass& figuredBass)
+// {
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gTraceOahGroup->getTraceFiguredBasses ()) {
+//     std::stringstream ss;
+//
+//     ss <<
+//       "Append figured bass " <<
+//       figuredBass->asString () <<
+//       " to the figured bass list of " <<
+//       asString () <<
+//       ", line " << fInputLineNumber <<
+//       std::endl;
+//
+//     gWaeHandler->waeTrace (
+//       __FILE__, __LINE__,
+//       ss.str ());
+//   }
+// #endif // MF_TRACE_IS_ENABLED
+//
+//   // set the figured bass's whole notes duration
+//   // change the figured bass whole notes if it belongs to a tuplet ??? utf8.xml JMI v0.9.66
+//   // JMI v0.9.67 NOT if there are several figured basses with offsets on the same note -- HARMFUL!
 //   figuredBass->
-//     setFiguredBassUpLinkToNote (this);
-}
+//     setSoundingWholeNotes (
+//       fSoundingWholeNotes,
+//       "appendFiguredBassToNote()");
+//
+//   fNoteFiguredBassesList.push_back (figuredBass);
+//
+// //   // register this note as the figured bass upLink // JMI v0.9.66 JMI v0.9.66 JMI v0.9.66 MERDUM
+// //   figuredBass->
+// //     setFiguredBassUpLinkToNote (this);
+// }
 
 void msrNote::acceptIn (basevisitor* v)
 {
@@ -5224,7 +5224,7 @@ std::string msrNote::asString () const
       break;
 
     case msrNoteKind::kNoteRegularInMeasure:
-			ss << "======> msrNote::asString() - " << std::endl;
+// 			ss << "======> msrNote::asString() - " << std::endl;
 
       ss <<
         "kNoteRegularInMeasure, " <<

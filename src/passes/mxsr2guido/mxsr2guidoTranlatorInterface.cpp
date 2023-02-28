@@ -98,7 +98,7 @@ void translateMxsrToGuido (
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
     err <<
-      "xmlFile2gmn() outputFileName = \"" <<
+      "xmlFile2gmn() outputFileName: \"" <<
       outputFileName <<
       "\"" <<
       std::endl;

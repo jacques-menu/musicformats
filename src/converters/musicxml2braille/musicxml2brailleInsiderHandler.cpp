@@ -412,7 +412,7 @@ std::string xml2brlInsiderHandler::fetchOutputFileNameFromTheOptions () const
         std::stringstream ss;
 
         ss <<
-          "xml2brlInsiderHandler::fetchOutputFileNameFromTheOptions(): outputFileName 1 = \"" <<
+          "xml2brlInsiderHandler::fetchOutputFileNameFromTheOptions(): outputFileName 1: \"" <<
           outputFileName <<
           "\"" <<
           std::endl;
@@ -478,7 +478,7 @@ std::string xml2brlInsiderHandler::fetchOutputFileNameFromTheOptions () const
         std::stringstream ss;
 
         ss <<
-          "xml2brlInsiderHandler::fetchOutputFileNameFromTheOptions(): outputFileName 2 = " <<
+          "xml2brlInsiderHandler::fetchOutputFileNameFromTheOptions(): outputFileName 2: \"" <<
           outputFileName <<
           "\"" <<
           std::endl;
@@ -510,7 +510,7 @@ std::string xml2brlInsiderHandler::fetchOutputFileNameFromTheOptions () const
         std::stringstream ss;
 
         ss <<
-          "xml2brlInsiderHandler::fetchOutputFileNameFromTheOptions(): outputFileName 3 = " <<
+          "xml2brlInsiderHandler::fetchOutputFileNameFromTheOptions(): outputFileName 3: \"" <<
           outputFileName <<
           "\"" <<
           std::endl;

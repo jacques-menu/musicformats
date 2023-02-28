@@ -2965,10 +2965,10 @@ void msr2lpsrTranslator::visitStart (S_msrFiguredBass& elt)
       setFiguredBassUpLinkToNote (
         fCurrentNonGraceNoteClone);
 
-    // append the figured bass to the current non-grace note clone
-    fCurrentNonGraceNoteClone->
-      appendFiguredBassToNote (
-        fCurrentFiguredBassClone);
+//     // append the figured bass to the current non-grace note clone
+//     fCurrentNonGraceNoteClone->
+//       appendFiguredBassToNote (
+//         fCurrentFiguredBassClone);
 
     // don't append the figured bass to the part figured bass,  JMI ???
     // this will be done below
@@ -3091,7 +3091,7 @@ void msr2lpsrTranslator::visitStart (S_msrMeasure& elt)
     ss <<
       "--> Start visiting msrMeasure '" <<
       measureNumber <<
-      "', measurePuristNumber = '" <<
+      "', measurePuristNumber: '" <<
       measurePuristNumber <<
       "', line " << inputLineNumber <<
       std::endl;
@@ -3240,9 +3240,9 @@ void msr2lpsrTranslator::visitEnd (S_msrMeasure& elt)
     ss <<
       "--> End visiting msrMeasure '" <<
       measureNumber <<
-      "', nextMeasureNumber = '" <<
+      "', nextMeasureNumber: '" <<
       nextMeasureNumber <<
-      "', measurePuristNumber = '" <<
+      "', measurePuristNumber: '" <<
       measurePuristNumber <<
       "', line " << inputLineNumber <<
       std::endl;
@@ -3380,12 +3380,15 @@ void msr2lpsrTranslator::visitEnd (S_msrMeasure& elt)
       } // switch
       break;
 
+    case msrMeasureKind::kMeasureKindIncompleteLastMeasure:
+      break;
+
     case msrMeasureKind::kMeasureKindOvercomplete:
       doCreateABarCheckAndABarNumberCheck = true;
       break;
 
     case msrMeasureKind::kMeasureKindCadenza:
-      doCreateABarCheckAndABarNumberCheck = true;
+      doCreateABarCheckAndABarNumberCheck = false; // JMI v0.9.67
       break;
 
     case msrMeasureKind::kMeasureKindMusicallyEmpty:
@@ -3425,7 +3428,7 @@ void msr2lpsrTranslator::visitEnd (S_msrMeasure& elt)
 //         ss <<
 //           "fCurrentMultipleFullBarRestsClone is null upon multiple full-bar rest end" <<
 //           measureNumber <<
-//           "', measurePuristNumber = '" <<
+//           "', measurePuristNumber: '" <<
 //           measurePuristNumber <<
 //           "', line " << inputLineNumber;
 //
@@ -6237,7 +6240,7 @@ void msr2lpsrTranslator::visitEnd (S_msrNote& elt)
     std::stringstream ss;
 
     ss <<
-      "FAA fCurrentNonGraceNoteClone = " <<
+      "FAA fCurrentNonGraceNoteClone: " <<
       std::endl;
     if (fCurrentNonGraceNoteClone) {
       ss <<
@@ -6250,7 +6253,7 @@ void msr2lpsrTranslator::visitEnd (S_msrNote& elt)
     }
 
     ss <<
-      "FAA fCurrentGraceNoteClone = " <<
+      "FAA fCurrentGraceNoteClone: " <<
       std::endl;
     if (fCurrentGraceNoteClone) {
       ss <<
@@ -6450,7 +6453,7 @@ void msr2lpsrTranslator::visitEnd (S_msrNote& elt)
     case msrNoteKind::kNoteSkipInGraceNotesGroup:
     /* JMI
       gLog <<
-        "fOnGoingGraceNotesGroup = " <<
+        "fOnGoingGraceNotesGroup: " <<
         fOnGoingGraceNotesGroup <<
         std::endl;
         */

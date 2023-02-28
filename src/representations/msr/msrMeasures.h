@@ -300,7 +300,11 @@ class EXP msrMeasure : public msrSegmentElement
                             const msrWholeNotes& duration,
                             const S_msrVoice&    voice);
 
-    void                  padUpToMeasurePositionInMeasure (
+//     void                  padUpToMeasurePositionInMeasure (
+//                             int                  inputLineNumber,
+//                             const msrWholeNotes& measurePositionToPadUpTo);
+
+    void                  padUpToMeasurePosition (
                             int                  inputLineNumber,
                             const msrWholeNotes& measurePositionToPadUpTo);
 
@@ -340,7 +344,7 @@ class EXP msrMeasure : public msrSegmentElement
     void                  appendTimeSignatureToMeasure (
                             const S_msrTimeSignature& timeSignature);
 
-    void                  setFullMeasureWholeNotesFromTime (
+    void                  setFullMeasureWholeNotesFromTimeSignature (
                             const S_msrTimeSignature& timeSignature);
 
     void                  appendTimeSignatureToMeasureClone (
@@ -459,7 +463,9 @@ class EXP msrMeasure : public msrSegmentElement
     // harmonies
 
     void                  appendHarmonyToMeasure (
-                            const S_msrHarmony& harmony);
+                            int                  inputLineNumber,
+                            const S_msrHarmony&  harmony,
+                            const msrWholeNotes& measurePositionToAppendAt);
 
     void                  appendHarmonyToMeasureClone (
                             const S_msrHarmony& harmony);
@@ -475,7 +481,9 @@ class EXP msrMeasure : public msrSegmentElement
     // figured bass
 
     void                  appendFiguredBassToMeasure (
-                            const S_msrFiguredBass& figuredBass);
+                            int                     inputLineNumber,
+                            const S_msrFiguredBass& figuredBass,
+                            const msrWholeNotes&    measurePositionToAppendAt);
 
     void                  appendFiguredBassToMeasureClone (
                             const S_msrFiguredBass& figuredBass);
@@ -790,7 +798,7 @@ class EXP msrMeasure : public msrSegmentElement
                             const S_msrFiguredBass& currentFiguredBass,
                             const msrWholeNotes&    currentFiguredBassMeasurePosition);
 
-    void                  postHandleCurrentFiguredBassInFiguredBassMeasure (
+    void                  handleTheLastFiguredBassInFiguredBassMeasure (
                             int                     inputLineNumber,
                             const S_msrVoice&       voice,
                             const S_msrFiguredBass& currentFiguredBass);

@@ -226,6 +226,8 @@ mxsr2msrTranslator::mxsr2msrTranslator (
 
   fCurrentHarmonyWholeNotesOffset = msrWholeNotes (0, 1);
 
+  fCurrentFiguredBassWholeNotesDuration = msrWholeNotes (0, 1);
+
   // figured bass handling
   fFiguredBassVoicesCounter = 0;
 
@@ -5855,7 +5857,7 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
 
         ss <<
           "Creating words \"" << wordsValue << "\"" <<
-          ", placement = \"" <<
+          ", placement: \"" <<
           msrPlacementKindAsString (
             fCurrentDirectionPlacementKind) <<
           "\"" <<
@@ -9437,21 +9439,21 @@ void mxsr2msrTranslator::visitEnd (S_lyric& elt)
 
       gLog << std::left <<
         std::setw (fieldWidth) <<
-        "fCurrentTieKind" << " = \"" <<
+        "fCurrentTieKind" << ": \"" <<
         msrTieKindAsString (fCurrentTieKind) <<
         "\"" <<
         std::endl;
 
       gLog << std::left <<
         std::setw (fieldWidth) <<
-        "fCurrentSlurTypeKind" << " = \"" <<
+        "fCurrentSlurTypeKind" << ": \"" <<
         msrSlurTypeKindAsString (fCurrentSlurTypeKind) <<
         "\"" <<
         std::endl;
 
       gLog << std::left <<
         std::setw (fieldWidth) <<
-        "fCurrentLigatureKind" << " = \"" <<
+        "fCurrentLigatureKind" << ": \"" <<
         fCurrentLigatureKind <<
         "\"" <<
         std::endl;
@@ -9478,7 +9480,7 @@ void mxsr2msrTranslator::visitEnd (S_lyric& elt)
 
       gLog << std::left <<
         std::setw (fieldWidth) <<
-        "fFirstSyllableInSlurKind" << " = \"" <<
+        "fFirstSyllableInSlurKind" << ": \"" <<
         msrSyllableKindAsString (
           fFirstSyllableInSlurKind) <<
         "\"" <<
@@ -9486,7 +9488,7 @@ void mxsr2msrTranslator::visitEnd (S_lyric& elt)
 
       gLog << std::left <<
         std::setw (fieldWidth) <<
-        "fFirstSyllableInLigatureKind" << " = \"" <<
+        "fFirstSyllableInLigatureKind" << ": \"" <<
         msrSyllableKindAsString (
           fFirstSyllableInLigatureKind) <<
         "\"" <<
@@ -9494,7 +9496,7 @@ void mxsr2msrTranslator::visitEnd (S_lyric& elt)
 
       gLog << std::left <<
         std::setw (fieldWidth) <<
-        "fCurrentSyllableKind" << " = \"" <<
+        "fCurrentSyllableKind" << ": \"" <<
         msrSyllableKindAsString (
           fCurrentSyllableKind) <<
         "\"" <<
@@ -9595,7 +9597,7 @@ void mxsr2msrTranslator::visitEnd (S_lyric& elt)
         " sounding from duration, " <<
          fCurrentNoteDisplayWholeNotesFromType <<
         ", display from type" <<
-        ", syllabic = \"" <<
+        ", syllabic: \"" <<
         msrSyllableKindAsString (
           fCurrentSyllableKind) << "\"" <<
         ", in stanza " << stanza->getStanzaName () <<
@@ -9685,9 +9687,9 @@ void mxsr2msrTranslator::visitStart (S_measure& elt)
 
     ss <<
       "==> visitStart (S_measure" <<
-      ", fPartMeasuresCounter = '" <<
+      ", fPartMeasuresCounter: '" <<
         fPartMeasuresCounter <<
-      "', fCurrentMeasureNumber = '" <<
+      "', fCurrentMeasureNumber: '" <<
         fCurrentMeasureNumber <<
       "', line " << inputLineNumber <<
       ", in part \"" <<
@@ -9936,10 +9938,10 @@ void mxsr2msrTranslator::visitEnd (S_measure& elt)
       ss <<
         "cannot find voice to insert after grace notes group into: " <<
         "chordFirstNote is null" <<
-        ", fCurrentStaffNumberToInsertInto = " <<
+        ", fCurrentStaffNumberToInsertInto: " <<
         fCurrentStaffNumberToInsertInto <<
         std::endl <<
-        ", fCurrentMusicXMLVoiceNumber = " <<
+        ", fCurrentMusicXMLVoiceNumber: " <<
         fCurrentMusicXMLVoiceNumber;
 
       mxsr2msrInternalError (
@@ -11584,7 +11586,7 @@ Controls whether or not spacing is left for an invisible note or object. It is u
     elt->getAttributeValue ("print-object");
 
 //   gLog << // JMI TEST v0.9.65
-//     "fCurrentNotePrintObjectKind = " <<
+//     "fCurrentNotePrintObjectKind: " <<
 //     fCurrentNotePrintObjectKind <<
 //     std::endl;
 
@@ -11876,8 +11878,8 @@ void mxsr2msrTranslator::visitStart (S_duration& elt)
     }
 #endif // MF_TRACE_IS_ENABLED
 
-    // set current figured bass sounding whole notes
-    fCurrentFiguredBassSoundingWholeNotes =
+    // set current figured bass duration
+    fCurrentFiguredBassWholeNotesDuration =
       msrWholeNotes (
         duration,
         fCurrentDivisionsPerQuarterNote * 4); // hence a whole note
@@ -11887,29 +11889,8 @@ void mxsr2msrTranslator::visitStart (S_duration& elt)
       std::stringstream ss;
 
       ss <<
-        "fCurrentFiguredBassSoundingWholeNotes: " <<
-        fCurrentFiguredBassSoundingWholeNotes <<
-        std::endl;
-
-      gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
-        ss.str ());
-    }
-#endif // MF_TRACE_IS_ENABLED
-
-    // set current figured bass display whole notes
-    fCurrentFiguredBassDisplayWholeNotes =
-      msrWholeNotes (
-        duration,
-        fCurrentDivisionsPerQuarterNote * 4); // hence a whole note
-
-#ifdef MF_TRACE_IS_ENABLED
-    if (gTraceOahGroup->getTraceFiguredBasses ()) {
-      std::stringstream ss;
-
-      ss <<
-        "fCurrentFiguredBassDisplayWholeNotes: " <<
-        fCurrentFiguredBassDisplayWholeNotes <<
+        "fCurrentFiguredBassWholeNotesDuration: " <<
+        fCurrentFiguredBassWholeNotesDuration <<
         std::endl;
 
       gWaeHandler->waeTrace (
@@ -23255,9 +23236,9 @@ void mxsr2msrTranslator::attachPendingGlissandosToNote (
               if (gTraceOahGroup->getTraceGlissandos ()) {
                 gLog <<
                   "--> attachPendingGlissandosToNote()"
-                  ", voiceStanzasMap.size () = " <<
+                  ", voiceStanzasMap.size (): " <<
                   voiceStanzasMap.size () <<
-                  ", fCurrentNoteHasLyrics = " <<
+                  ", fCurrentNoteHasLyrics: " <<
                   fCurrentNoteHasLyrics <<
                   ", line " << inputLineNumber <<
                   std::endl;
@@ -23376,9 +23357,9 @@ void mxsr2msrTranslator::attachPendingSlidesToNote (
               if (gTraceOahGroup->getTraceSlides ()) {
                 gLog <<
                   "--> attachPendingSlidesToNote()"
-                  ", voiceStanzasMap.size () = " <<
+                  ", voiceStanzasMap.size (): " <<
                   voiceStanzasMap.size () <<
-                  ", fCurrentNoteHasLyrics = " <<
+                  ", fCurrentNoteHasLyrics: " <<
                   fCurrentNoteHasLyrics <<
                   ", line " << inputLineNumber <<
                   std::endl;
@@ -23607,14 +23588,14 @@ S_msrNote mxsr2msrTranslator::createNote (
           std::endl <<
           "(1):" <<
           std::endl <<
-          "fCurrentNoteGraphicNotesDurationKind = " <<
+          "fCurrentNoteGraphicNotesDurationKind: " <<
           msrNotesDurationKindAsString (
             fCurrentNoteGraphicNotesDurationKind) <<
           std::endl <<
-          "fCurrentNoteDisplayWholeNotesFromType = " <<
+          "fCurrentNoteDisplayWholeNotesFromType: " <<
           fCurrentNoteDisplayWholeNotesFromType <<
           std::endl <<
-          "fCurrentNoteDotsNumber = " <<
+          "fCurrentNoteDotsNumber: " <<
           fCurrentNoteDotsNumber <<
           std::endl << std::endl;
       }
@@ -23643,13 +23624,13 @@ S_msrNote mxsr2msrTranslator::createNote (
               std::endl <<
               "(2):" <<
               std::endl <<
-              "fCurrentNoteDisplayWholeNotesFromType = " <<
+              "fCurrentNoteDisplayWholeNotesFromType: " <<
               fCurrentNoteDisplayWholeNotesFromType <<
               std::endl <<
-              "wholeNotesIncrement = " <<
+              "wholeNotesIncrement: " <<
               wholeNotesIncrement <<
               std::endl <<
-              "dots = " <<
+              "dots: " <<
               dots <<
               std::endl << std::endl;
           }
@@ -23663,14 +23644,14 @@ S_msrNote mxsr2msrTranslator::createNote (
           std::endl <<
           "(3):" <<
           std::endl <<
-          "fCurrentNoteGraphicNotesDurationKind = " <<
+          "fCurrentNoteGraphicNotesDurationKind: " <<
           msrNotesDurationKindAsString (
             fCurrentNoteGraphicNotesDurationKind) <<
           std::endl <<
-          "fCurrentNoteDisplayWholeNotesFromType = " <<
+          "fCurrentNoteDisplayWholeNotesFromType: " <<
           fCurrentNoteDisplayWholeNotesFromType <<
           std::endl <<
-          "fCurrentNoteDotsNumber = " <<
+          "fCurrentNoteDotsNumber: " <<
           fCurrentNoteDotsNumber <<
           std::endl << std::endl;
       }
@@ -24071,25 +24052,26 @@ void mxsr2msrTranslator::populateNoteAfterNoteItselfIsHandled (
   // only now because <lyric> follows <glissando> and <slide> in MusicXML JMI ???
   attachPendingNoteLevelElementsToNote (newNote);
 
-  // handle the pending harmonies if any
+  // handle the pending harmonies if any JMI HARMFULL
   if (fPendingHarmoniesList.size ()) {
-    // get voice to insert harmonies into
-    S_msrVoice
-      voiceToInsertHarmoniesInto =
-        fCurrentPart->
-          getPartHarmoniesVoice ();
-
-#ifdef MF_SANITY_CHECKS_ARE_ENABLED
-    // sanity check
-    mfAssert (
-      __FILE__, __LINE__,
-      voiceToInsertHarmoniesInto != nullptr,
-      "voiceToInsertHarmoniesInto is null");
-#endif // MF_SANITY_CHECKS_ARE_ENABLED
+//     // get voice to insert harmonies into
+//     S_msrVoice
+//       voiceToInsertHarmoniesInto =
+//         fCurrentPart->
+//           getPartHarmoniesVoice ();
+//
+// #ifdef MF_SANITY_CHECKS_ARE_ENABLED
+//     // sanity check
+//     mfAssert (
+//       __FILE__, __LINE__,
+//       voiceToInsertHarmoniesInto != nullptr,
+//       "voiceToInsertHarmoniesInto is null");
+// #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
     handlePendingHarmonies (
-      newNote,
-      voiceToInsertHarmoniesInto);
+      newNote);
+//       newNote,
+//       voiceToInsertHarmoniesInto);
 
     // reset harmony counter
     fHarmoniesVoicesCounter = 0;
@@ -24097,23 +24079,24 @@ void mxsr2msrTranslator::populateNoteAfterNoteItselfIsHandled (
 
   // handle the pending figured bass elements if any
   if (fPendingFiguredBassesList.size ()) {
-    // get voice to insert figured bass elements into
-    S_msrVoice
-      voiceToInsertFiguredBassesInto =
-        fCurrentPart->
-          getPartFiguredBassVoice ();
-
-#ifdef MF_SANITY_CHECKS_ARE_ENABLED
-    // sanity check
-    mfAssert (
-      __FILE__, __LINE__,
-      voiceToInsertFiguredBassesInto != nullptr,
-      "voiceToInsertFiguredBassesInto is null");
-#endif // MF_SANITY_CHECKS_ARE_ENABLED
+//     // get voice to insert figured bass elements into
+//     S_msrVoice
+//       voiceToInsertFiguredBassesInto =
+//         fCurrentPart->
+//           getPartFiguredBassVoice ();
+//
+// #ifdef MF_SANITY_CHECKS_ARE_ENABLED
+//     // sanity check
+//     mfAssert (
+//       __FILE__, __LINE__,
+//       voiceToInsertFiguredBassesInto != nullptr,
+//       "voiceToInsertFiguredBassesInto is null");
+// #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
     handlePendingFiguredBasses (
-      newNote,
-      voiceToInsertFiguredBassesInto);
+      newNote);
+//       newNote,
+//       voiceToInsertFiguredBassesInto);
 
     // reset figured bass counter
     fFiguredBassVoicesCounter = 0;
@@ -24334,18 +24317,18 @@ void mxsr2msrTranslator::handleNoteItself (
       " as last note found in voice " <<
       voiceToInsertInto->getVoiceName () <<
       std::endl <<
-      "-->  fCurrentMusicXMLStaffNumber = " <<
+      "-->  fCurrentMusicXMLStaffNumber: " <<
       fCurrentMusicXMLStaffNumber <<
       std::endl <<
-      "--> fCurrentMusicXMLVoiceNumber  = " <<
+      "--> fCurrentMusicXMLVoiceNumber : " <<
       fCurrentMusicXMLVoiceNumber <<
       std::endl <<
       / * JMI
-      "--> staff name  = " <<
+      "--> staff name : " <<
       staff->getStaffName () <<
       std::endl <<
       * /
-      "--> voice name  = " <<
+      "--> voice name : " <<
       voiceToInsertInto->getVoiceName () <<
       std::endl;
       */
@@ -24450,10 +24433,10 @@ void mxsr2msrTranslator::attachPendingGraceNotesGroupToNoteIfRelevant (
       ss <<
         "cannot find voice to insert after grace notes group into: " <<
         "chordFirstNote is null" <<
-        ", fCurrentStaffNumberToInsertInto = " <<
+        ", fCurrentStaffNumberToInsertInto: " <<
         fCurrentStaffNumberToInsertInto <<
         std::endl <<
-        ", fCurrentMusicXMLVoiceNumber = " <<
+        ", fCurrentMusicXMLVoiceNumber: " <<
         fCurrentMusicXMLVoiceNumber;
 
       mxsr2msrInternalError (
@@ -24659,7 +24642,7 @@ void mxsr2msrTranslator::visitEnd (S_note& elt)
       std::stringstream ss;
 
       ss <<
-        "==> setting fCurrentStaffNumberToInsertInto to " <<
+        "Setting fCurrentStaffNumberToInsertInto to " <<
         fCurrentMusicXMLStaffNumber <<
         ", in voice \"" <<
         currentNoteVoice->getVoiceName () <<
@@ -24839,26 +24822,113 @@ void mxsr2msrTranslator::visitEnd (S_note& elt)
     voiceToInsertNoteInto,
     newNote);
 
+  // forget about newNote's harmonies if any
+  fPendingHarmoniesList.clear ();
+
+  // forget about newNote's figured basses if any
+  fPendingFiguredBassesList.clear ();
+
   fOnGoingNote = false;
 }
 
 //______________________________________________________________________________
 void mxsr2msrTranslator::handlePendingHarmonies (
-  const S_msrNote&  newNote,
-  const S_msrVoice& voiceToInsertInto)
+  const S_msrNote& newNote)
 {
+  switch (fPendingHarmoniesList.size ()) {
+    case 0:
+      break;
+
+    case 1:
+      handlePendingSingleHarmony (
+        newNote,
+        fPendingHarmoniesList.front ());
+      break;
+
+    default:
+      handlePendingMultipleHarmonies (newNote);
+      break;
+  } //switch
+}
+
+void mxsr2msrTranslator::handlePendingSingleHarmony (
+  const S_msrNote&    newNote,
+  const S_msrHarmony& harmony)
+{
+  // set harmony's sounding whole notes
+  harmony->
+    setHarmonySoundingWholeNotes (
+      newNote->getSoundingWholeNotes (),
+      "handlePendingSingleHarmony()");
+
+  // set harmony's display whole notes
+  harmony->
+    setHarmonyDisplayWholeNotes ( // JMI useless??? v0.9.66
+      newNote->getNoteDisplayWholeNotes ());
+
+  // set harmony's tuplet factor
+  harmony->
+    setHarmonyTupletFactor (
+      msrTupletFactor (
+        fCurrentNoteActualNotes,
+        fCurrentNoteNormalNotes));
+
+  // append harmony to fCurrentPart
+  fCurrentPart->
+    appendHarmonyToPart (
+      newNote->getInputLineNumber (),
+      harmony,
+      newNote->getMeasurePosition ());
+}
+
+void mxsr2msrTranslator::handlePendingMultipleHarmonies (
+  const S_msrNote& newNote)
+{
+  int inputLineNumber =
+    newNote->getInputLineNumber ();
+
+  msrWholeNotes
+    newNoteSoundingWholeNotes =
+      newNote->
+        getSoundingWholeNotes (),
+    newNoteDisplayWholeNotes =
+      newNote->
+        getNoteDisplayWholeNotes ();
+
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceHarmoniesDetails ()) {
+  if (gTraceOahGroup->getTraceHarmonies ()) {
     std::stringstream ss;
 
     ss <<
-      "handlePendingHarmonies(), newNote: " <<
+      "Handling the " <<
+      fPendingHarmoniesList.size () <<
+      " pending harmonies for note " <<
+      newNote->asShortString () <<
+      ", newNoteSoundingWholeNotes: " << newNoteSoundingWholeNotes <<
+      ", newNoteDisplayWholeNotes: " << newNoteDisplayWholeNotes <<
+      ", line " << inputLineNumber <<
       std::endl;
-    ++gIndenter;
-    gLog <<
-      newNote <<
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
+
+    displayPendingHarmoniesList ("handlePendingMultipleHarmonies() 1");
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceHarmonies ()) {
+    std::stringstream ss;
+
+    ss <<
+      "Sorting the " <<
+      fPendingHarmoniesList.size () <<
+      " harmonies for note " <<
+      newNote->asShortString () <<
+      " in offset relative order '" <<
+      ", line " << inputLineNumber <<
       std::endl;
-    --gIndenter;
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -24866,74 +24936,54 @@ void mxsr2msrTranslator::handlePendingHarmonies (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  msrWholeNotes
-    newNoteSoundingWholeNotes =
-      newNote->
-        getSoundingWholeNotes (),
-    newNoteDisplayWholeNotes =
-      newNote->
-        getNoteDisplayWholeNotes ();
+  fPendingHarmoniesList.sort (
+    msrHarmony::compareHarmoniesByIncreasingOffset);
 
- #ifdef MF_TRACE_IS_ENABLED
-    if (gTraceOahGroup->getTraceHarmonies ()) {
-      std::stringstream ss;
-
-      ss <<
-        "handlePendingHarmonies(), " <<
-        ", newNoteSoundingWholeNotes: " << newNoteSoundingWholeNotes <<
-        ", newNoteDisplayWholeNotes: " << newNoteDisplayWholeNotes <<
-        ", line " <<
-        newNote->getInputLineNumber () <<
-        std::endl;
-
-      gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
-        ss.str ());
-    }
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceHarmonies ()) {
+    displayPendingHarmoniesList ("handlePendingMultipleHarmonies() 2");
+  }
 #endif // MF_TRACE_IS_ENABLED
 
-  while (fPendingHarmoniesList.size ()) { // recompute at each iteration
-    S_msrHarmony
-      harmony =
-        fPendingHarmoniesList.front ();
+  // compute the sounding whole notes of each harmony except the last one in the list
+  S_msrHarmony
+    previousHarmony;
 
-     // register this note as the harmony's note upLink
-    harmony->
-      setHarmonyUpLinkToNote (newNote);
+  msrWholeNotes
+    currentNoteRelativePosition =
+      msrWholeNotes (0, 1),
+    previousWholeNotesOffset =
+      msrWholeNotes (0, 1);
 
-   /*
-       MusicXML harmonies don't have a duration,
-       and MSR could follow this line, but LilyPond needs one...
-       So:
-         - we register all harmonies with the duration of the next note
-         - they will be sorted by position in the measure in finalizeMeasure(),
-           at which time their duration may be shortened
-           so that the offsets values are enforced
-           and they don't overflow the measure
-      It is VITAL that harmonies measures be finalized
-      AFTER the corresponding measure in the regular voice,
-      since the current sounding whole notes of the latter is needed for that
-    */
-
-    // set the harmony's sounding whole notes
-    // JMI v0.9.67 NOT if there are several harmonies with offsets on the same note -- HARMFUL!
+  for (S_msrHarmony currentHarmony : fPendingHarmoniesList) {
+    // get currentHarmony's whole notes offset
     msrWholeNotes
-      harmonySoundingWholeNotes =
-        newNoteSoundingWholeNotes,
       harmonyWholeNotesOffset =
-        harmony->
+        currentHarmony->
           getHarmonyWholeNotesOffset ();
 
- #ifdef MF_TRACE_IS_ENABLED
+    // compute the offset delta
+    msrWholeNotes
+      offsetDelta =
+        harmonyWholeNotesOffset - previousWholeNotesOffset;
+
+    // compute the currentHarmony's sounding whole notes
+    // as a fraction of newNoteSoundingWholeNotes
+    msrWholeNotes
+      harmonySoundingWholeNotes;
+
+#ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceHarmonies ()) {
       std::stringstream ss;
 
       ss <<
-        "handlePendingHarmonies(), " <<
+        "handlePendingHarmony, " <<
         ", harmonySoundingWholeNotes: " << harmonySoundingWholeNotes <<
         ", harmonyWholeNotesOffset: " << harmonyWholeNotesOffset <<
+        ", previousWholeNotesOffset: " << previousWholeNotesOffset <<
+        ", offsetDelta: " << offsetDelta <<
         ", line " <<
-        newNote->getInputLineNumber () <<
+        inputLineNumber <<
         std::endl;
 
       gWaeHandler->waeTrace (
@@ -24942,79 +24992,134 @@ void mxsr2msrTranslator::handlePendingHarmonies (
     }
 #endif // MF_TRACE_IS_ENABLED
 
-    harmony->
-      setSoundingWholeNotes (
-        newNoteSoundingWholeNotes,
+    // set the previous harmony's sounding whole notes
+    previousHarmony->
+      setHarmonySoundingWholeNotes (
+        harmonySoundingWholeNotes,
         "mxsr2msrTranslator::handlePendingHarmonies()");
 
-    // set the harmony's display whole notes JMI useless??? v0.9.66
-    harmony->
+    // remember the currentHarmony's whole notes offset
+    previousWholeNotesOffset = harmonyWholeNotesOffset;
+
+    // set the currentHarmony's display whole notes JMI useless??? v0.9.66
+    currentHarmony->
       setHarmonyDisplayWholeNotes (
         newNoteDisplayWholeNotes);
 
-    // set the harmony's tuplet factor
-    harmony->
+    // set the currentHarmony's tuplet factor // JMI v0.9.67
+    currentHarmony->
       setHarmonyTupletFactor (
         msrTupletFactor (
           fCurrentNoteActualNotes,
           fCurrentNoteNormalNotes));
 
-    // append the harmony to newNote's harmonies list
-    newNote->
-      appendHarmonyToNote (
-        harmony);
+    // append currentHarmony to fCurrentPart
+    fCurrentPart->
+      appendHarmonyToPart (
+        newNote->getInputLineNumber (),
+        currentHarmony,
+        newNote->getMeasurePosition ());
 
-    // get the part harmonies voice for the current voice
-    S_msrVoice
-      partHarmoniesVoice =
-        fCurrentPart->
-          getPartHarmoniesVoice ();
+    // take the harmony into account
+    previousHarmony = currentHarmony;
 
-#ifdef MF_SANITY_CHECKS_ARE_ENABLED
-    // sanity check
-    mfAssert (
-      __FILE__, __LINE__,
-      partHarmoniesVoice != nullptr,
-      "partHarmoniesVoice is null");
-#endif // MF_SANITY_CHECKS_ARE_ENABLED
+    currentNoteRelativePosition +=
+      harmonySoundingWholeNotes;
+  } // for
 
-    // set the harmony's voice upLink
-    // only now that we know which harmonies voice will contain it
-    harmony->
-      setHarmoniesUpLinkToVoice (
-        partHarmoniesVoice);
+  // set the sounding whole notes of the last harmony in the list
+  previousHarmony->
+    setHarmonyDisplayWholeNotes (
+      newNoteDisplayWholeNotes - currentNoteRelativePosition);
 
-//* JMI VIRER v0.9.66
-    // append the harmony to the part harmonies voice
-    partHarmoniesVoice->
-      appendHarmonyToVoice (
-        harmony);
-//*/
-    // don't append the harmony to the part harmonies voice,
-    // this will be done when the note itself is appended to the voice
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceHarmonies ()) {
+    displayPendingHarmoniesList ("handlePendingMultipleHarmonies() 3");
+  }
+#endif // MF_TRACE_IS_ENABLED
+}
 
-    // remove the harmony from the list
-    fPendingHarmoniesList.pop_front ();
-  } // while
+void mxsr2msrTranslator:: displayPendingHarmoniesList (
+  std::string context)
+{
+  gLog <<
+    std::endl <<
+    ">>> +++++++++++++++++++++++++++++++++++++++++++++++++++++ >>>" <<
+    std::endl <<
+    "Pending harmonies list -- " <<
+    context <<
+    ':' <<
+    std::endl;
+
+  ++gIndenter;
+
+  for (S_msrHarmony harmony : fPendingHarmoniesList) {
+    gLog << harmony->asString () << std::endl;
+  } // for
+
+  --gIndenter;
+
+  gLog <<
+    "<<< +++++++++++++++++++++++++++++++++++++++++++++++++++++ <<<" <<
+    std::endl <<
+    std::endl;
 }
 
 //______________________________________________________________________________
 void mxsr2msrTranslator::handlePendingFiguredBasses (
-  const S_msrNote&  newNote,
-  const S_msrVoice& voiceToInsertInto)
+  const S_msrNote& newNote)
 {
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceFiguredBassesDetails ()) {
-    gLog <<
-      "handlePendingFiguredBasses(), newNote: " <<
-      std::endl;
-    ++gIndenter;
-    gLog <<
-      newNote <<
-      std::endl;
-    --gIndenter;
-  }
-#endif // MF_TRACE_IS_ENABLED
+  switch (fPendingFiguredBassesList.size ()) {
+    case 0:
+      break;
+
+    case 1:
+      handlePendingSingleFiguredBass (
+        newNote,
+        fPendingFiguredBassesList.front ());
+      break;
+
+    default:
+      handlePendingMultipleFiguredBasses (newNote);
+      break;
+  } //switch
+}
+
+void mxsr2msrTranslator::handlePendingSingleFiguredBass (
+  const S_msrNote&        newNote,
+  const S_msrFiguredBass& figuredBass)
+{
+  // set figuredBass's sounding whole notes
+  figuredBass->
+    setFiguredBassSoundingWholeNotes (
+      newNote->getSoundingWholeNotes (),
+      "handlePendingSingleFiguredBass ()");
+
+  // set figuredBass's display whole notes
+  figuredBass->
+    setFiguredBassDisplayWholeNotes ( // JMI useless??? v0.9.66
+      newNote->getNoteDisplayWholeNotes ());
+
+  // set figuredBass's tuplet factor
+  figuredBass->
+    setFiguredBassTupletFactor (
+      msrTupletFactor (
+        fCurrentNoteActualNotes,
+        fCurrentNoteNormalNotes));
+
+  // append figuredBass to fCurrentPart
+  fCurrentPart->
+    appendFiguredBassToPart (
+      newNote->getInputLineNumber (),
+      figuredBass,
+      newNote->getMeasurePosition ());
+}
+
+void mxsr2msrTranslator::handlePendingMultipleFiguredBasses (
+  const S_msrNote& newNote)
+{
+  int inputLineNumber =
+    newNote->getInputLineNumber ();
 
   msrWholeNotes
     newNoteSoundingWholeNotes =
@@ -25024,88 +25129,138 @@ void mxsr2msrTranslator::handlePendingFiguredBasses (
       newNote->
         getNoteDisplayWholeNotes ();
 
-  while (fPendingFiguredBassesList.size ()) { // recompute at each iteration
-    S_msrFiguredBass
-      figuredBass =
-        fPendingFiguredBassesList.front ();
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceFiguredBasses ()) {
+    std::stringstream ss;
 
-    /*
-       MusicXML figured bass elements don't have a duration,
-       and MSR could follow this line, but LilyPond needs one...
-       So:
-         - we register all figured bass elements with the duration of the next note
-         - they will be sorted by position in the measure in finalizeMeasure(),
-           at which time their duration may be shortened
-           so that the offsets values are enforced
-           and they don't overflow the measure
-      It is VITAL that figured bass elements measures be finalized
-      AFTER the corresponding measure in the regular voice,
-      since the current sounding whole notes of the latter is needed for that
-    */
+    ss <<
+      "Handling the " <<
+      fPendingHarmoniesList.size () <<
+      " pending figured basses for note " <<
+      newNote->asShortString () <<
+      ", newNoteSoundingWholeNotes: " << newNoteSoundingWholeNotes <<
+      ", newNoteDisplayWholeNotes: " << newNoteDisplayWholeNotes <<
+      ", line " << inputLineNumber <<
+      std::endl;
 
-    // set the figured bass sounding whole notes
-    // JMI v0.9.67 NOT if there are several figured basses with offsets on the same note -- HARMFUL!
-    figuredBass->
-      setSoundingWholeNotes (
-        newNoteSoundingWholeNotes,
-        "mxsr2msrTranslator::handlePendingFiguredBasses()");
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
 
-    // set the figured bass element's display whole notes JMI useless??? v0.9.66
-    figuredBass->
+    displayPendingFiguredBassesList ("handlePendingMultipleFiguredBasses() 1");
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  // compute the sounding whole notes of each figured bass in the list
+//   S_msrFiguredBass
+//     previousFiguredBass;
+
+//   msrWholeNotes
+//     currentNoteRelativePosition =
+//       msrWholeNotes (0, 1),
+//     previousWholeNotesDuration =
+//       msrWholeNotes (0, 1);
+
+  for (S_msrFiguredBass currentFiguredBass : fPendingFiguredBassesList) {
+    // get currentFiguredBass's whole notes duration
+    msrWholeNotes
+      figuredBassWholeNotesDuration =
+        currentFiguredBass->
+          getFiguredBassWholeNotesDuration ();
+
+    // compute the currentFiguredBass's sounding whole notes
+    // as a fraction of newNoteSoundingWholeNotes
+    msrWholeNotes
+      figuredBassSoundingWholeNotes;
+
+#ifdef MF_TRACE_IS_ENABLED
+    if (gTraceOahGroup->getTraceFiguredBasses ()) {
+      std::stringstream ss;
+
+      ss <<
+        "handlePendingFiguredBass, " <<
+        ", figuredBassSoundingWholeNotes: " << figuredBassSoundingWholeNotes <<
+        ", figuredBassWholeNotesDuration: " << figuredBassWholeNotesDuration <<
+//         ", previousWholeNotesDuration: " << previousWholeNotesDuration <<
+        ", line " <<
+        inputLineNumber <<
+        std::endl;
+
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
+    }
+#endif // MF_TRACE_IS_ENABLED
+
+//     set the previous figuredBass's sounding whole notes
+//     previousFiguredBass->
+//       setFiguredBassSoundingWholeNotes (
+//         figuredBassSoundingWholeNotes,
+//         "mxsr2msrTranslator::handlePendingHarmonies()");
+
+    // set currentFiguredBass's sounding whole notes
+    currentFiguredBass->
+      setFiguredBassSoundingWholeNotes (
+        figuredBassSoundingWholeNotes,
+        "mxsr2msrTranslator::handlePendingHarmonies()");
+
+//     // remember the currentFiguredBass's whole notes duration
+//     previousWholeNotesDuration = figuredBassWholeNotesDuration;
+
+    // set the currentFiguredBass's display whole notes JMI useless??? v0.9.66
+    currentFiguredBass->
       setFiguredBassDisplayWholeNotes (
         newNoteDisplayWholeNotes);
 
-    // set the figured bass element's tuplet factor
-    figuredBass->
+    // set the currentFiguredBass's tuplet factor // JMI v0.9.67
+    currentFiguredBass->
       setFiguredBassTupletFactor (
         msrTupletFactor (
           fCurrentNoteActualNotes,
           fCurrentNoteNormalNotes));
 
-    // register this note as the figured bass element note upLink
-    figuredBass->
-      setFiguredBassUpLinkToNote (newNote);
+    // append currentFiguredBass to fCurrentPart
+    fCurrentPart->
+      appendFiguredBassToPart (
+        newNote->getInputLineNumber (),
+        currentFiguredBass,
+        newNote->getMeasurePosition ());
 
-    // append the figured bass to newNote's figured bass elements list
-    newNote->
-      appendFiguredBassToNote (
-        figuredBass);
+    // take the figuredBass into account
+//     previousFiguredBass = currentFiguredBass;
 
-//* JMI
-    // get the figured bass voice for the current voice
-    S_msrVoice
-      partFiguredBassVoice =
-//         voiceToInsertInto->
-//           fetchVoiceUpLinkToPart ()-> // JMI v0.9.66
-        fCurrentPart->
-            getPartFiguredBassVoice ();
+//     currentNoteRelativePosition +=
+//       figuredBassSoundingWholeNotes;
+  } // for
 
-#ifdef MF_SANITY_CHECKS_ARE_ENABLED
-    // sanity check
-    mfAssert (
-      __FILE__, __LINE__,
-      partFiguredBassVoice != nullptr,
-      "partFiguredBassVoice is null");
-#endif // MF_SANITY_CHECKS_ARE_ENABLED
+//   // set the sounding whole notes of the last figuredBass in the list // JMI v0.9.67
+//   previousFiguredBass->
+//     setFiguredBassDisplayWholeNotes (
+//       newNoteDisplayWholeNotes - currentNoteRelativePosition);
 
-    // set the figuredBass's voice upLink
-    // only now that we know which figured bass voice will contain it
-    figuredBass->
-      setFiguredBassUpLinkToVoice (
-        partFiguredBassVoice);
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceFiguredBasses ()) {
+    displayPendingHarmoniesList ("handlePendingMultipleFiguredBasses() 3");
+  }
+#endif // MF_TRACE_IS_ENABLED
+}
 
-    // append the figured bass to the figured bass voice for the current voice
-    partFiguredBassVoice->
-      appendFiguredBassToVoice (
-        figuredBass);
-//*/
+void mxsr2msrTranslator:: displayPendingFiguredBassesList (
+  std::string context)
+{
+  gLog <<
+    "Pending figured basses list -- " <<
+    context <<
+    ':' <<
+    std::endl;
 
-    // don't append the figured bass to the part figured bass voice
-    // before the note itself has been appended to the voice
+  ++gIndenter;
 
-    // remove the figured bass from the list
-    fPendingFiguredBassesList.pop_front ();
-  } // while
+  for (S_msrFiguredBass figuredBass : fPendingFiguredBassesList) {
+    gLog << figuredBass->asString () << std::endl;
+  } // for
+
+  --gIndenter;
 }
 
 //______________________________________________________________________________
@@ -25203,7 +25358,7 @@ void mxsr2msrTranslator::handleNonChordNorTupletNoteOrRest (
     ss <<
       "Handling non-chord, non-tuplet note or rest " <<
        newNote->asShortString () << // NO, would lead to infinite recursion ??? JMI
-      ", currentVoice = \"" <<
+      ", currentVoice: \"" <<
       currentVoice->getVoiceName () <<
       "\", line " << inputLineNumber <<
       ":" <<
@@ -25863,7 +26018,7 @@ void mxsr2msrTranslator::handleNoteBelongingToAChord (
 
     ss <<
       "Handling a chord member note" <<
-      ", currentVoice = \"" <<
+      ", currentVoice: \"" <<
       currentVoice->getVoiceName () <<
       "\", fOnGoingChord: " <<
       fOnGoingChord <<
@@ -26348,7 +26503,7 @@ void mxsr2msrTranslator::handleNoteBelongingToATuplet (
           std::stringstream ss;
 
           ss <<
-            "--> kTupletTypeStart: note = '" <<
+            "--> kTupletTypeStart: note: '" <<
             note->
               asShortString () <<
             "', line " << inputLineNumber <<
@@ -26665,7 +26820,7 @@ void mxsr2msrTranslator::handleNoteBelongingToATuplet (
           std::stringstream ss;
 
           ss <<
-            "--> kTupletTypeStartAndStopInARow: note = '" <<
+            "--> kTupletTypeStartAndStopInARow: note: '" <<
             note->
               asShortString () <<
             "', line " << inputLineNumber <<
@@ -27697,6 +27852,8 @@ void mxsr2msrTranslator::visitStart (S_harmony& elt)
 
   fCurrentHarmonyWholeNotesOffset = msrWholeNotes (0, 1);
 
+  fCurrentFiguredBassWholeNotesDuration = msrWholeNotes (0, 1);
+
   fOnGoingHarmony = true;
 }
 
@@ -28510,6 +28667,10 @@ void mxsr2msrTranslator::visitEnd (S_harmony& elt)
 
         std::setw (fieldWidth) << "fCurrentHarmonyWholeNotesOffset" << ": " <<
         fCurrentHarmonyWholeNotesOffset <<
+        std::endl <<
+
+        std::setw (fieldWidth) << "fCurrentFiguredBassWholeNotesDuration" << ": " <<
+        fCurrentFiguredBassWholeNotesDuration <<
         std::endl;
 
       --gIndenter;
@@ -28537,10 +28698,10 @@ void mxsr2msrTranslator::visitEnd (S_harmony& elt)
 
           fCurrentHarmonyBassQuarterTonesPitchKind,
 
-          msrWholeNotes (1, 1),            // harmonySoundingWholeNotes,
-                                      // will be set upon next note handling
-          msrWholeNotes (1, 1),            // harmonyDisplayWholeNotes,
-                                      // will be set upon next note handling
+          K_WHOLE_NOTES_UNKNOWN,      // harmonySoundingWholeNotes,
+                                      // will be set in handlePendingHarmonies()
+          K_WHOLE_NOTES_UNKNOWN,      // harmonyDisplayWholeNotes,
+                                      // will be set in handlePendingHarmonies()
           fCurrentHarmoniesStaffNumber,
           msrTupletFactor (1, 1),     // will be set upon next note handling
           fCurrentHarmonyWholeNotesOffset);
@@ -28584,7 +28745,7 @@ void mxsr2msrTranslator::visitEnd (S_harmony& elt)
       harmony->setHarmonyFrame (fCurrentFrame);
     }
 
-    // append the harmony to the pending harmonies list
+    // append harmony to the pending harmonies list
     fPendingHarmoniesList.push_back (harmony);
   }
 
@@ -29238,6 +29399,7 @@ void mxsr2msrTranslator::visitEnd (S_figured_bass& elt)
         inputLineNumber,
         fCurrentFiguredBassSoundingWholeNotes,
         fCurrentFiguredBassDisplayWholeNotes,
+        fCurrentFiguredBassWholeNotesDuration,
         fCurrentFiguredBassParenthesesKind,
         msrTupletFactor (1, 1)); // will be set upon next note handling
 
@@ -29258,7 +29420,7 @@ void mxsr2msrTranslator::visitEnd (S_figured_bass& elt)
     // forget about those pending figures
     fPendingFiguredBassFiguresList.clear ();
 
-    // append the figured bass element to the pending figured bass elements list
+    // append figuredBass to the pending figured basses list
     fPendingFiguredBassesList.push_back (figuredBass);
   }
 
@@ -30004,6 +30166,7 @@ void mxsr2msrTranslator::visitStart (S_midi_instrument& elt)
           inputLineNumber,
           fCurrentPart,
           fCurrentFiguredBassSoundingWholeNotes,
+          fFiguredBassWholeNotesDuration,
           fCurrentFiguredBassParenthesesKind);
 
     // attach pending figures to the figured bass
@@ -30057,7 +30220,7 @@ part-symbol
       fCurrentMusicXMLVoiceNumber <<
       std::endl <<
       std::setw (fieldWidth) <<
-      "--> current voice" << " = \"" <<
+      "--> current voice" << ": \"" <<
       currentVoice->getVoiceName () << "\"" <<
       std::endl <<
       "<==" <<
@@ -30091,7 +30254,7 @@ part-symbol
       std::setw (fieldWidth) << "--> fCurrentMusicXMLVoiceNumber" << ": " <<
       fCurrentMusicXMLVoiceNumber <<
       std::endl <<
-      std::setw (fieldWidth) << "--> current voice" << " = \"" <<
+      std::setw (fieldWidth) << "--> current voice" << ": \"" <<
       currentVoice->getVoiceName () << "\"" <<
       std::endl;
 

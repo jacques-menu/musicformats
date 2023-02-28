@@ -369,7 +369,7 @@ std::string xml2xmlInsiderHandler::fetchOutputFileNameFromTheOptions () const
         std::stringstream ss;
 
         ss <<
-          "xml2xmlInsiderHandler::fetchOutputFileNameFromTheOptions(): outputFileName 1 = \"" <<
+          "xml2xmlInsiderHandler::fetchOutputFileNameFromTheOptions(): outputFileName 1: \"" <<
           outputFileName <<
           "\"" <<
           std::endl;
@@ -388,7 +388,7 @@ std::string xml2xmlInsiderHandler::fetchOutputFileNameFromTheOptions () const
         std::stringstream ss;
 
         ss <<
-          "xml2xmlInsiderHandler::fetchOutputFileNameFromTheOptions(): outputFileName 2 = " <<
+          "xml2xmlInsiderHandler::fetchOutputFileNameFromTheOptions(): outputFileName 2: " <<
           outputFileName <<
           "\"" <<
           std::endl;

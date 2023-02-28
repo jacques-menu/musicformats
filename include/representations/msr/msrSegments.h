@@ -140,9 +140,9 @@ class EXP msrSegment : public msrVoiceElement
 
     // backup and padding
 
-    void                  padUpToMeasurePositionInSegment (
-                            int             inputLineNumber,
-                            const msrWholeNotes& wholeNotes);
+//     void                  padUpToMeasurePositionInSegment (
+//                             int             inputLineNumber,
+//                             const msrWholeNotes& wholeNotes);
 
     void                  backupByWholeNotesStepLengthInSegment (
                             int     inputLineNumber,
@@ -245,7 +245,9 @@ class EXP msrSegment : public msrVoiceElement
     // harmonies
 
     void                  appendHarmonyToSegment (
-                            const S_msrHarmony& harmony);
+                            int                  inputLineNumber,
+                            const S_msrHarmony&  harmony,
+                            const msrWholeNotes& measurePositionToAppendAt);
 
     void                  appendHarmonyToSegmentClone (
                             const S_msrHarmony& harmony);
@@ -261,7 +263,9 @@ class EXP msrSegment : public msrVoiceElement
     // figured bass
 
     void                  appendFiguredBassToSegment (
-                            const S_msrFiguredBass& figuredBass);
+                            int                     inputLineNumber,
+                            const S_msrFiguredBass& figuredBass,
+                            const msrWholeNotes&    measurePositionToAppendAt);
 
     void                  appendFiguredBassToSegmentClone (
                             const S_msrFiguredBass& figuredBass);

@@ -53,9 +53,9 @@ S_msrBarNumberCheck msrBarNumberCheck::create (
 }
 
 S_msrBarNumberCheck msrBarNumberCheck::create (
-  int                 inputLineNumber,
-  const std::string&  nextBarOriginalNumber,
-  int                 nextBarPuristNumber)
+  int                inputLineNumber,
+  const std::string& nextBarOriginalNumber,
+  int                nextBarPuristNumber)
 {
   return
     msrBarNumberCheck::create (
@@ -111,11 +111,11 @@ void msrBarNumberCheck::setBarNumberCheckUpLinkToMeasure (
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceWholeNotes ()) {
+  if (gTraceOahGroup->getTraceBarNumberChecks ()) {
     ++gIndenter;
 
     gLog <<
-      "==> Setting the uplink to measure of bar number check " <<
+      "Setting the uplink to measure of bar number check " <<
       asString () <<
       " to measure " << measure->asString () <<
       "' in measure '" <<

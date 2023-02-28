@@ -1837,7 +1837,7 @@ void msr2bsrTranslator::visitEnd (S_msrTempo& elt)
 }
 
 //________________________________________________________________________
-bsrNoteOctaveIsNeeded msr2bsrTranslator::brailleOctaveMarkInNeeded (
+bsrNoteOctaveIsNeeded msr2bsrTranslator::brailleOctaveMarkIfNeeded (
   const S_msrNote& note)
 {
   bsrNoteOctaveIsNeeded
@@ -1907,48 +1907,48 @@ bsrNoteOctaveIsNeeded msr2bsrTranslator::brailleOctaveMarkInNeeded (
 /*
       std::setw (fieldWidth) <<
       "% referenceDiatonicPitch" <<
-      " = " <<
+      ": " <<
       referenceDiatonicPitch <<
       std::endl <<
 */
       std::setw (fieldWidth) <<
       "% fRelativeOctaveReference" <<
-      " = " <<
+      ": " <<
       fRelativeOctaveReference->asShortString () <<
       std::endl <<
       std::setw (fieldWidth) <<
       "% note" <<
-      " = " <<
+      ": " <<
       note->asShortString () <<
       std::endl <<
       std::setw (fieldWidth) <<
       "% referenceDiatonicPitchAsString" <<
-      " = " <<
+      ": " <<
       referenceDiatonicPitchKindAsString <<
       std::endl <<
       std::setw (fieldWidth) <<
       "% referenceAbsoluteOctaveKind" <<
-       " = " <<
+       ": " <<
       msrOctaveKindAsString (referenceAbsoluteOctaveKind) <<
       std::endl <<
       std::setw (fieldWidth) <<
       "% noteAbsoluteOctaveKind" <<
-       " = " <<
+       ": " <<
       msrOctaveKindAsString (noteAbsoluteOctaveKind) <<
       std::endl << std::endl <<
       std::setw (fieldWidth) <<
       "% referenceAboluteDiatonicOrdinal" <<
-      " = " <<
+      ": " <<
       referenceAboluteDiatonicOrdinal <<
       std::endl <<
       std::setw (fieldWidth) <<
       "% noteAboluteDiatonicOrdinal" <<
-      " = " <<
+      ": " <<
       noteAboluteDiatonicOrdinal <<
       std::endl <<
       std::setw (fieldWidth) <<
       "% noteAboluteDiatonicOrdinal - referenceAboluteDiatonicOrdinal" <<
-      " = " <<
+      ": " <<
       noteAboluteDiatonicOrdinal - referenceAboluteDiatonicOrdinal <<
       std::endl <<
       std::setw (fieldWidth) <<
@@ -2551,7 +2551,7 @@ void msr2bsrTranslator::createBsrForNote (const S_msrNote& note)
   else if (fRelativeOctaveReference) {
     // analyye relationship to relative octave reference
     noteOctaveIsNeeded =
-      brailleOctaveMarkInNeeded (note);
+      brailleOctaveMarkIfNeeded (note);
   }
 
   // register note's octave kind
@@ -2679,11 +2679,11 @@ void msr2bsrTranslator::createBsrForNote (const S_msrNote& note)
     std::stringstream ss;
 
     ss <<
-      "--> fCurrentNoteValueSizeKind = " <<
+      "--> fCurrentNoteValueSizeKind: " <<
       bsrNoteValueSizeKindAsString (fCurrentNoteValueSizeKind) <<
-      ", noteValueSizeKind = " <<
+      ", noteValueSizeKind: " <<
       bsrNoteValueSizeKindAsString (noteValueSizeKind) <<
-      ", noteOctaveIsNeeded = " <<
+      ", noteOctaveIsNeeded: " <<
       bsrNoteOctaveIsNeededAsString (noteOctaveIsNeeded) <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -2696,7 +2696,7 @@ void msr2bsrTranslator::createBsrForNote (const S_msrNote& note)
 
   if (false && noteValueSizeKind != fCurrentNoteValueSizeKind) { // JMI
     gLog <<
-      "--> note = '" <<
+      "--> note: '" <<
       bNote->asShortString () <<
       "', needs a note value size sign" <<
       std::endl;
@@ -3461,87 +3461,6 @@ void msr2bsrTranslator::visitEnd (S_msrMeasure& elt)
   finalizeCurrentMeasureClone ( // JMI
     inputLineNumber,
     elt); // original measure
-
-  Bool doCreateABarCheck (false); // JMI
-
-  switch (elt->getMeasureKind ()) {
-
-    case msrMeasureKind::kMeasureKindUnknown:
-      {
-        std::stringstream ss;
-
-        ss <<
-          "measure '" << measureNumber <<
-          "' in voice \"" <<
-          elt->
-            fetchMeasureUpLinkToVoice ()->
-              getVoiceName () <<
-          "\" is of unknown kind in msr2bsrTranslator";
-
-      // JMI  msrInternalError (
-        msrInternalWarning (
-          gServiceRunData->getInputSourceName (),
-          inputLineNumber,
-  //        __FILE__, __LINE__,
-          ss.str ());
-      }
-      break;
-
-    case msrMeasureKind::kMeasureKindRegular:
-      doCreateABarCheck = true;
-      break;
-
-    case msrMeasureKind::kMeasureKindAnacrusis:
-      doCreateABarCheck = true;
-      break;
-
-    case msrMeasureKind::kMeasureKindIncompleteStandalone:
-      doCreateABarCheck = true;
-      break;
-    case msrMeasureKind::kMeasureKindIncompleteLastInRepeat:
-      doCreateABarCheck = true;
-      break;
-    case msrMeasureKind::kMeasureKindIncompleteAfterRepeat:
-      doCreateABarCheck = true;
-      break;
-
-    case msrMeasureKind::kMeasureKindOvercomplete:
-      doCreateABarCheck = true;
-      break;
-
-    case msrMeasureKind::kMeasureKindCadenza:
-      doCreateABarCheck = true;
-      break;
-
-    case msrMeasureKind::kMeasureKindEmpty:
-      // JMI
-      break;
-  } // switch
-
-  if (doCreateABarCheck) {
-    // create a bar check without next bar number,
-    // it will be set upon visitStart (S_msrMeasure&)
-    // for the next measure
-    fLastBarCheck =
-      msrBarCheck::create (
-        inputLineNumber);
-
-           / * JMI
-  gLog <<
-    std::endl <<
-    "***********" <<
-    std::endl << std::endl;
-  fCurrentPartClone->print (gLog);
-  gLog <<
-    "***********" <<
-    std::endl << std::endl;
-    * /
-/ * JMI
-    // append it to the current voice clone
-    fCurrentVoiceClone->
-      appendBarCheckToVoice (fLastBarCheck);
-      * /
-  }
 }
 
 //________________________________________________________________________
@@ -5435,7 +5354,7 @@ void msr2bsrTranslator::visitEnd (S_msrNote& elt)
     std::stringstream ss;
 
     ss <<
-      "FAA fCurrentNonGraceNoteClone = " <<
+      "FAA fCurrentNonGraceNoteClone: " <<
       std::endl;
     if (fCurrentNonGraceNoteClone) {
       gLog <<
@@ -5448,7 +5367,7 @@ void msr2bsrTranslator::visitEnd (S_msrNote& elt)
     }
 
     gLog <<
-      "FAA fCurrentGraceNoteClone = " <<
+      "FAA fCurrentGraceNoteClone: " <<
       std::endl;
     if (fCurrentGraceNoteClone) {
       gLog <<
@@ -5624,7 +5543,7 @@ void msr2bsrTranslator::visitEnd (S_msrNote& elt)
     case msrNoteKind::kNoteSkipInGraceNotesGroup:
     / * JMI
       gLog <<
-        "fOnGoingGraceNotesGroup = " <<
+        "fOnGoingGraceNotesGroup: " <<
         fOnGoingGraceNotesGroup <<
         std::endl;
         * /

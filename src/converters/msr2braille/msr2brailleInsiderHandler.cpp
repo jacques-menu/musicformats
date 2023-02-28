@@ -392,7 +392,7 @@ std::string msr2brailleInsiderHandler::fetchOutputFileNameFromTheOptions () cons
         std::stringstream ss;
 
         ss <<
-          "msr2brailleInsiderHandler::fetchOutputFileNameFromTheOptions(): outputFileName 1 = \"" <<
+          "msr2brailleInsiderHandler::fetchOutputFileNameFromTheOptions(): outputFileName 1: \"" <<
           outputFileName <<
           "\"" <<
           std::endl;
@@ -458,7 +458,7 @@ std::string msr2brailleInsiderHandler::fetchOutputFileNameFromTheOptions () cons
         std::stringstream ss;
 
         ss <<
-          "msr2brailleInsiderHandler::fetchOutputFileNameFromTheOptions(): outputFileName 2 = " <<
+          "msr2brailleInsiderHandler::fetchOutputFileNameFromTheOptions(): outputFileName 2: \"" <<
           outputFileName <<
           "\"" <<
           std::endl;
@@ -490,7 +490,7 @@ std::string msr2brailleInsiderHandler::fetchOutputFileNameFromTheOptions () cons
         std::stringstream ss;
 
         ss <<
-          "msr2brailleInsiderHandler::fetchOutputFileNameFromTheOptions(): outputFileName 3 = " <<
+          "msr2brailleInsiderHandler::fetchOutputFileNameFromTheOptions(): outputFileName 3: \"" <<
           outputFileName <<
           "\"" <<
           std::endl;

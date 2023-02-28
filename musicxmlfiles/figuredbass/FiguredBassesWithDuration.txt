@@ -1,0 +1,70 @@
+<figured-bass>
+   <figure>
+      <prefix>flat</prefix>
+      <figure-number>7</figure-number>
+   </figure>
+</figured-bass>
+
+<figured-bass default-y="-80">
+   <figure>
+      <figure-number>6</figure-number>
+      <suffix>natural</suffix>
+   </figure>
+</figured-bass>
+
+<measure number="74">
+   <figured-bass default-y="-80">
+      <figure>
+         <prefix>flat</prefix>
+         <figure-number>7</figure-number>
+         <extend type="start"/>
+      </figure>
+   </figured-bass>
+   <note default-x="109">
+      <pitch>
+         <step>B</step>
+         <octave>2</octave>
+      </pitch>
+      <duration>4</duration>
+      <voice>1</voice>
+      <type>half</type>
+      <stem default-y="10.5">up</stem>
+   </note>
+   <figured-bass>
+      <figure>
+         <extend type="stop"/>
+      </figure>
+   </figured-bass>
+   <note default-x="175">
+      <pitch>
+         <step>D</step>
+         <octave>3</octave>
+      </pitch>
+      <duration>2</duration>
+      <voice>1</voice>
+      <type>quarter</type>
+      <stem default-y="-55">down</stem>
+   </note>
+</measure>
+
+
+
+Jason Leung  • Jan 10, 2015 - 01:48
+Status (old)	closed	⇒	active
+Some features for figured bass mentioned in the [trunk] article still have not been implemented for MusicXML:
+
+#3: Figures that change ‘mid-way’ needs to be handled with duration tags
+#4: Extension/continuation lines should distinguish “start”, “continue”, and “stop” – useful because MuseScore displays each type differently
+The figured bass entry in the MusicXML 3.0 documentation recommends the following (paraphrased):
+
+Duration should be used when the figure is shorter than the note, e.g., when a figure changes ‘mid-way’
+Extend should be used when there is an extension line
+The current version (Beta 1.0, see below) does the following instead:
+
+No support for duration information; figures that change ‘mid-way’ are lost
+Extend when the figure is longer than the note; multiple figures with different-length continuation lines are not supported/possible
+I should have a patch ready within the next couple weeks.
+
+Version Number: MuseScore 2 Beta 1.0 (revision 1efc609)
+Operating System: Mac OS X 10.9.5
+

@@ -4447,16 +4447,16 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_note& elt)
     std::stringstream ss;
 
     ss <<
-      "--> S_note, fCurrentStaffMusicXMLNumber = " <<
+      "--> S_note, fCurrentStaffMusicXMLNumber: " <<
       fCurrentStaffMusicXMLNumber <<
       std::endl <<
-      "--> S_note, current staff name  = " <<
+      "--> S_note, current staff name: " <<
       staff->getStaffName() <<
       std::endl <<
-      "--> S_note, fCurrentVoiceMusicXMLNumber        = " <<
+      "--> S_note, fCurrentVoiceMusicXMLNumber: " <<
       fCurrentVoiceMusicXMLNumber <<
       std::endl <<
-      "--> S_note, current noteVoice name  = " <<
+      "--> S_note, current noteVoice name: " <<
       noteVoice->getVoiceName() <<
       std::endl;
 
