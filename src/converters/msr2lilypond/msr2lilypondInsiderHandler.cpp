@@ -435,7 +435,7 @@ std::string msr2lilypondInsiderHandler::fetchOutputFileNameFromTheOptions () con
         std::stringstream ss;
 
         ss <<
-          "msr2lilypondInsiderHandler::fetchOutputFileNameFromTheOptions(): outputFileName 1 = \"" <<
+          "msr2lilypondInsiderHandler::fetchOutputFileNameFromTheOptions(): outputFileName 1: \"" <<
           outputFileName <<
           "\"" <<
           std::endl;
@@ -454,7 +454,7 @@ std::string msr2lilypondInsiderHandler::fetchOutputFileNameFromTheOptions () con
         std::stringstream ss;
 
         ss <<
-          "msr2lilypondInsiderHandler::fetchOutputFileNameFromTheOptions(): outputFileName 2 = " <<
+          "msr2lilypondInsiderHandler::fetchOutputFileNameFromTheOptions(): outputFileName 2: \"" <<
           outputFileName <<
           "\"" <<
           std::endl;

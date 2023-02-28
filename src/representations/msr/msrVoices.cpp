@@ -837,7 +837,7 @@ S_msrVoice msrVoice::createVoiceDeepClone (
 
     ss <<
       "****" <<
-      " BEFORE deepClone = " <<
+      " BEFORE deepClone: " <<
       std::endl;
 
     print (gLog);
@@ -1065,7 +1065,7 @@ S_msrVoice msrVoice::createVoiceDeepClone (
 
     ss <<
       "****" <<
-      " AFTER deepClone = " <<
+      " AFTER deepClone: " <<
       std::endl <<
       deepClone <<
       std::endl <<
@@ -1270,7 +1270,7 @@ void msrVoice::setNextMeasureNumberInVoice (
 
       ss <<
         "There is a multiple full-bar rests waiting for its next measure number" <<
-        ", fVoiceRemainingMultipleFullBarRests = " <<
+        ", fVoiceRemainingMultipleFullBarRests: " <<
         fVoiceRemainingMultipleFullBarRests <<
         "' in voice \"" <<
         fVoiceName << "\"" <<
@@ -2502,11 +2502,10 @@ void msrVoice::registerNoteAsVoiceLastAppendedNote (const S_msrNote& note)
 }
 
 void msrVoice::appendHarmonyToVoice (
-  const S_msrHarmony& harmony)
+  int                  inputLineNumber,
+  const S_msrHarmony&  harmony,
+  const msrWholeNotes& measurePositionToAppendAt)
 {
-  int inputLineNumber =
-    harmony->getInputLineNumber ();
-
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceHarmonies ()) {
     std::stringstream ss;
@@ -2523,19 +2522,13 @@ void msrVoice::appendHarmonyToVoice (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  ++gIndenter;
-
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   switch (fVoiceKind) {
     case msrVoiceKind::kVoiceKindHarmonies:
-      appendHarmonyToHarmoniesVoice (
-        harmony);
       break;
 
-    case msrVoiceKind::kVoiceKindDynamics:
-      break;
-
+    case msrVoiceKind::kVoiceKindDynamics: // JMI ??? v0.9.67
     case msrVoiceKind::kVoiceKindRegular:
     case msrVoiceKind::kVoiceKindFiguredBass:
       {
@@ -2558,16 +2551,23 @@ void msrVoice::appendHarmonyToVoice (
   } // switch
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
+  ++gIndenter;
+
+  // append harmony to the harmonies voice
+  appendHarmonyToHarmoniesVoice (
+    inputLineNumber,
+    harmony,
+    measurePositionToAppendAt);
+
   --gIndenter;
 }
 
 void msrVoice::appendHarmonyToHarmoniesVoice (
-  const S_msrHarmony& harmony)
+  int                  inputLineNumber,
+  const S_msrHarmony&  harmony,
+  const msrWholeNotes& measurePositionToAppendAt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  int inputLineNumber =
-    harmony->getInputLineNumber ();
-
   if (gTraceOahGroup->getTraceHarmonies ()) {
     std::stringstream ss;
 
@@ -2587,51 +2587,20 @@ void msrVoice::appendHarmonyToHarmoniesVoice (
 
   // append the harmony to the voice last segment
   fVoiceLastSegment->
-    appendHarmonyToSegment (harmony);
+    appendHarmonyToSegment (
+      inputLineNumber,
+      harmony,
+      measurePositionToAppendAt);
+
+  --gIndenter;
 
   // register harmony
   ++fVoiceActualHarmoniesCounter;
   fMusicHasBeenInsertedInVoice = true;
-
-  --gIndenter;
 }
 
-void msrVoice::appendFiguredBassToFiguredBassVoice (
-  const S_msrFiguredBass& figuredBass)
-{
-#ifdef MF_TRACE_IS_ENABLED
-  int inputLineNumber =
-    figuredBass->getInputLineNumber ();
-
-  if (gTraceOahGroup->getTraceHarmonies ()) {
-    std::stringstream ss;
-
-    ss <<
-      "Appending figured bass " << figuredBass->asString () <<
-      " to figured bass voice \"" << getVoiceName () << "\"" <<
-      ", line " << inputLineNumber <<
-      std::endl;
-
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-  ++gIndenter;
-
-  // append the figuredBass to the voice last segment
-  fVoiceLastSegment->
-    appendFiguredBassToSegment (figuredBass);
-
-  // register harmony
-  ++fVoiceActualFiguredBassesCounter;
-  fMusicHasBeenInsertedInVoice = true;
-
-  --gIndenter;
-}
-
-void msrVoice::appendHarmonyToVoiceClone (const S_msrHarmony& harmony)
+void msrVoice::appendHarmonyToVoiceClone (
+  const S_msrHarmony& harmony)
 {
   int inputLineNumber =
     harmony->getInputLineNumber ();
@@ -2690,11 +2659,10 @@ void msrVoice::appendHarmonyToVoiceClone (const S_msrHarmony& harmony)
 }
 
 void msrVoice::appendFiguredBassToVoice (
-  const S_msrFiguredBass& figuredBass)
+  int                     inputLineNumber,
+  const S_msrFiguredBass& figuredBass,
+  const msrWholeNotes&    measurePositionToAppendAt)
 {
-  int inputLineNumber =
-    figuredBass->getInputLineNumber ();
-
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceFiguredBasses ()) {
     std::stringstream ss;
@@ -2711,18 +2679,14 @@ void msrVoice::appendFiguredBassToVoice (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  ++gIndenter;
-
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   switch (fVoiceKind) {
     case msrVoiceKind::kVoiceKindFiguredBass:
-      appendFiguredBassToFiguredBassVoice (
-        figuredBass);
       break;
 
     case msrVoiceKind::kVoiceKindDynamics:
-      break;
+      break; // JMI v0.9.67
 
     case msrVoiceKind::kVoiceKindRegular:
     case msrVoiceKind::kVoiceKindHarmonies:
@@ -2746,7 +2710,52 @@ void msrVoice::appendFiguredBassToVoice (
   } // switch
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
+  ++gIndenter;
+
+  // append figuredBass to the figured basses voice
+  appendFiguredBassToFiguredBassVoice (
+    inputLineNumber,
+    figuredBass,
+    measurePositionToAppendAt);
+
   --gIndenter;
+}
+
+void msrVoice::appendFiguredBassToFiguredBassVoice (
+  int                     inputLineNumber,
+  const S_msrFiguredBass& figuredBass,
+  const msrWholeNotes&    measurePositionToAppendAt)
+{
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceHarmonies ()) {
+    std::stringstream ss;
+
+    ss <<
+      "Appending figured bass " << figuredBass->asString () <<
+      " to figured bass voice \"" << getVoiceName () << "\"" <<
+      ", line " << inputLineNumber <<
+      std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  ++gIndenter;
+
+  // append the figuredBass to the voice last segment
+  fVoiceLastSegment->
+    appendFiguredBassToSegment (
+      inputLineNumber,
+      figuredBass,
+      measurePositionToAppendAt);
+
+  --gIndenter;
+
+  // register harmony
+  ++fVoiceActualFiguredBassesCounter;
+  fMusicHasBeenInsertedInVoice = true;
 }
 
 void msrVoice::appendFiguredBassToVoiceClone (
@@ -2808,58 +2817,58 @@ void msrVoice::appendFiguredBassToVoiceClone (
   --gIndenter;
 }
 
-void msrVoice::padUpToMeasurePositionInVoice (
-  int             inputLineNumber,
-  const msrWholeNotes& wholeNotesMeasurePosition)
-{
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMeasurePositions ()) {
-    std::stringstream ss;
-
-    ss <<
-      "Padding up to measure position '" <<
-      wholeNotesMeasurePosition <<
-      "' whole notes in voice \"" <<
-      getVoiceName () <<
-      "\", line " << inputLineNumber <<
-      std::endl;
-
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-  ++gIndenter;
-
-#ifdef MF_SANITY_CHECKS_ARE_ENABLED
-  // sanity check
-  mfAssert (
-    __FILE__, __LINE__,
-    fVoiceLastSegment != nullptr,
-    "fVoiceLastSegment is null");
-#endif // MF_SANITY_CHECKS_ARE_ENABLED
-
-  // pad up the voice's last segment
-  fVoiceLastSegment->
-    padUpToMeasurePositionInSegment (
-      inputLineNumber,
-      wholeNotesMeasurePosition);
-
-  // pad up the voice's stanzas // JMI ???
-  if (fVoiceStanzasMap.size ()) {
-    for (std::pair<std::string, S_msrStanza> thePair : fVoiceStanzasMap) {
-      const S_msrStanza& stanza = thePair.second;
-
-      stanza->
-        padUpToMeasureWholeNotesInStanza (
-          inputLineNumber,
-          wholeNotesMeasurePosition);
-    } // for
-  }
-
-  --gIndenter;
-}
+// void msrVoice::padUpToMeasurePositionInVoice (
+//   int             inputLineNumber,
+//   const msrWholeNotes& wholeNotesMeasurePosition)
+// {
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gTraceOahGroup->getTraceMeasurePositions ()) {
+//     std::stringstream ss;
+//
+//     ss <<
+//       "Padding up to measure position '" <<
+//       wholeNotesMeasurePosition <<
+//       "' whole notes in voice \"" <<
+//       getVoiceName () <<
+//       "\", line " << inputLineNumber <<
+//       std::endl;
+//
+//     gWaeHandler->waeTrace (
+//       __FILE__, __LINE__,
+//       ss.str ());
+//   }
+// #endif // MF_TRACE_IS_ENABLED
+//
+//   ++gIndenter;
+//
+// #ifdef MF_SANITY_CHECKS_ARE_ENABLED
+//   // sanity check
+//   mfAssert (
+//     __FILE__, __LINE__,
+//     fVoiceLastSegment != nullptr,
+//     "fVoiceLastSegment is null");
+// #endif // MF_SANITY_CHECKS_ARE_ENABLED
+//
+//   // pad up the voice's last segment
+//   fVoiceLastSegment->
+//     padUpToMeasurePositionInSegment (
+//       inputLineNumber,
+//       wholeNotesMeasurePosition);
+//
+//   // pad up the voice's stanzas // JMI ???
+//   if (fVoiceStanzasMap.size ()) {
+//     for (std::pair<std::string, S_msrStanza> thePair : fVoiceStanzasMap) {
+//       const S_msrStanza& stanza = thePair.second;
+//
+//       stanza->
+//         padUpToMeasureWholeNotesInStanza (
+//           inputLineNumber,
+//           wholeNotesMeasurePosition);
+//     } // for
+//   }
+//
+//   --gIndenter;
+// }
 
 void msrVoice::backupByWholeNotesStepLengthInVoice (
   int             inputLineNumber,
@@ -3327,49 +3336,50 @@ void msrVoice::appendNoteToVoice (const S_msrNote& note)
       break;
   } // switch
 
-  // are there harmonies attached to this note? // BLARK
-  const std::list<S_msrHarmony>&
-    noteHarmoniesList =
-      note->
-        getNoteHarmoniesList ();
-
-  if (noteHarmoniesList.size ()) {
-    // get the current part's harmonies voice
-    S_msrVoice
-      partHarmoniesVoice =
-        part->
-          getPartHarmoniesVoice ();
-
-    for (S_msrHarmony harmony : noteHarmoniesList) {
-      // append the harmony to the part harmonies voice,
-      // only now that the note has been handled
-      partHarmoniesVoice->
-        appendHarmonyToVoice (
-          harmony);
-    } // for
-  }
-
-  // are there figured bass elements attached to this note?
-  const std::list<S_msrFiguredBass>&
-    noteFiguredBassesList =
-      note->
-        getNoteFiguredBassesList ();
-
-  if (noteFiguredBassesList.size ()) {
-    // get the current part's figured bass voice
-    S_msrVoice
-      partFiguredBassVoice =
-        part->
-          getPartFiguredBassVoice ();
-
-    std::list<S_msrFiguredBass>::const_iterator i;
-    for (S_msrFiguredBass figuredBass : noteFiguredBassesList) {
-      // append the figured bass element to the part figured bass voice
-      partFiguredBassVoice->
-        appendFiguredBassToVoice (
-          figuredBass);
-    } // for
-  }
+//   // are there harmonies attached to this note? // BLARK HARMFUL
+//   const std::list<S_msrHarmony>&
+//     noteHarmoniesList =
+//       note->
+//         getNoteHarmoniesList ();
+//
+//   if (noteHarmoniesList.size ()) {
+//     // get the current part's harmonies voice
+//     S_msrVoice
+//       partHarmoniesVoice =
+//         part->
+//           getPartHarmoniesVoice ();
+//
+//     for (S_msrHarmony harmony : noteHarmoniesList) {
+//       // append the harmony to the part harmonies voice,
+//       // only now that the note has been handled
+//       partHarmoniesVoice->
+//         appendHarmonyToVoice (
+//           inputLineNumber,
+//           harmony);
+//     } // for
+//   }
+//
+//   // are there figured bass elements attached to this note?
+//   const std::list<S_msrFiguredBass>&
+//     noteFiguredBassesList =
+//       note->
+//         getNoteFiguredBassesList ();
+//
+//   if (noteFiguredBassesList.size ()) {
+//     // get the current part's figured bass voice
+//     S_msrVoice
+//       partFiguredBassVoice =
+//         part->
+//           getPartFiguredBassVoice ();
+//
+//     std::list<S_msrFiguredBass>::const_iterator i;
+//     for (S_msrFiguredBass figuredBass : noteFiguredBassesList) {
+//       // append the figured bass element to the part figured bass voice
+//       partFiguredBassVoice->
+//         appendFiguredBassToVoice (
+//           figuredBass);
+//     } // for
+//   }
 
   --gIndenter;
 }
@@ -12053,11 +12063,6 @@ void msrVoice::printFull (std::ostream& os) const
 
     ++gIndenter;
 
-    std::list<S_msrVoiceElement>::const_iterator
-      iBegin = fVoiceInitialElementsList.begin (),
-      iEnd   = fVoiceInitialElementsList.end (),
-      i      = iBegin;
-
     for (
       std::list<S_msrVoiceElement>::const_iterator i =
         fVoiceInitialElementsList.begin ();
@@ -12068,7 +12073,7 @@ void msrVoice::printFull (std::ostream& os) const
 
       // print the element
       os << voiceElement;
-      if (++i == iEnd) break;
+      if (++i == fVoiceInitialElementsList.end ()) break; //JMI v0.9.67ts
       os << std::endl;
     } // for
 

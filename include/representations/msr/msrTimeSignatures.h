@@ -302,6 +302,9 @@ class EXP msrTimeSignature : public msrMeasureElement
 };
 typedef SMARTP<msrTimeSignature> S_msrTimeSignature;
 EXP std::ostream& operator << (std::ostream& os, const S_msrTimeSignature& elt);
+EXP mfIndentedStringStream& operator << (
+  mfIndentedStringStream& iss, const S_msrTimeSignature& elt);
+
 
 
 }

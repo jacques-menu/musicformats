@@ -349,7 +349,7 @@ mfMusicformatsErrorKind convertMsdlStream2brailleWithHandler (
 #ifdef MF_TRACE_IS_ENABLED
       if (gEarlyOptions.getTraceEarlyOptions ()) {
         err <<
-          "convertMsdlStream2brailleWithHandler() outputFileName = \"" <<
+          "convertMsdlStream2brailleWithHandler() outputFileName: \"" <<
           outputFileName <<
           "\"" <<
           std::endl;
@@ -462,7 +462,7 @@ mfMusicformatsErrorKind convertMsdlStream2brailleWithHandler (
 
         ss <<
           std::endl <<
-          gLanguage->openingMusicXMLFileForWriting (outputFileName) <<
+          gLanguage->closingMusicXMLFile (outputFileName) <<
           std::endl;
 
         gWaeHandler->waeTrace (

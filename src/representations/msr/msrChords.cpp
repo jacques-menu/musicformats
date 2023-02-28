@@ -92,7 +92,7 @@ S_msrChord msrChord::create (
       "Creating a chord" <<
       ", chordSoundingWholeNotes: " << chordSoundingWholeNotes <<
       ", chordDisplayWholeNotes: " << chordDisplayWholeNotes <<
-      ", chordGraphicNotesDuration = " <<
+      ", chordGraphicNotesDuration: " <<
       msrNotesDurationKindAsString (chordGraphicNotesDurationKind) <<
       std::endl;
 
@@ -126,7 +126,7 @@ S_msrChord msrChord::create (
       "Creating a chord" <<
       ", chordSoundingWholeNotes: " << chordSoundingWholeNotes <<
       ", chordDisplayWholeNotes: " << chordDisplayWholeNotes <<
-      ", chordGraphicNotesDuration = " <<
+      ", chordGraphicNotesDuration: " <<
       msrNotesDurationKindAsString (chordGraphicNotesDurationKind) <<
       std::endl;
 
@@ -322,13 +322,13 @@ void msrChord::setChordUpLinkToMeasure (
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceWholeNotes ()) {
+  if (gTraceOahGroup->getTraceChords ()) {
     ++gIndenter;
 
     std::stringstream ss;
 
     ss <<
-      "==> Setting the uplink to measure of chord " <<
+      "Setting the uplink to measure of chord " <<
       asString () <<
       " to measure " << measure->asString () <<
       "' in measure '" <<
@@ -1222,7 +1222,7 @@ void msrChord::finalizeChord (
       asString () <<
       "', line " << inputLineNumber <<
       std::endl <<
-      "fMeasurePosition = " <<
+      "fMeasurePosition: " <<
       std::endl <<
       fMeasurePosition <<
       std::endl;

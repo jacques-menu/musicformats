@@ -1167,7 +1167,10 @@ void msrSegment::insertHiddenMeasureAndBarLineInSegmentClone (
   --gIndenter;
 }
 
-void msrSegment::appendHarmonyToSegment (const S_msrHarmony& harmony)
+void msrSegment::appendHarmonyToSegment (
+  int                  inputLineNumber,
+  const S_msrHarmony&  harmony,
+  const msrWholeNotes& measurePositionToAppendAt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceHarmonies ()) {
@@ -1186,21 +1189,20 @@ void msrSegment::appendHarmonyToSegment (const S_msrHarmony& harmony)
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
-
-  int inputLineNumber =
-    harmony->getInputLineNumber ();
-
-  ++gIndenter;
-
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   assertSegmentLastMeasureIsNotNull (
     inputLineNumber);
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
+  ++gIndenter;
+
   // append harmony to this segment
   fSegmentLastMeasure->
-    appendHarmonyToMeasure (harmony);
+    appendHarmonyToMeasure (
+      inputLineNumber,
+      harmony,
+      measurePositionToAppendAt);
 
   --gIndenter;
 }
@@ -1237,7 +1239,9 @@ void msrSegment::appendHarmonyToSegmentClone (const S_msrHarmony& harmony)
 }
 
 void msrSegment::appendFiguredBassToSegment (
-  const S_msrFiguredBass& figuredBass)
+  int                     inputLineNumber,
+  const S_msrFiguredBass& figuredBass,
+  const msrWholeNotes&    measurePositionToAppendAt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceFiguredBasses ()) {
@@ -1258,21 +1262,20 @@ void msrSegment::appendFiguredBassToSegment (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  int inputLineNumber =
-    figuredBass->getInputLineNumber ();
-
-  ++gIndenter;
-
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   assertSegmentLastMeasureIsNotNull (
     inputLineNumber);
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
+  ++gIndenter;
+
   // append figuredBass to this segment
   fSegmentLastMeasure->
     appendFiguredBassToMeasure (
-      figuredBass);
+      inputLineNumber,
+      figuredBass,
+      measurePositionToAppendAt);
 
   --gIndenter;
 }
@@ -1964,77 +1967,77 @@ void msrSegment::appendHarpPedalsTuningToSegment (
   --gIndenter;
 }
 
-void msrSegment::padUpToMeasurePositionInSegment (
-  int             inputLineNumber,
-  const msrWholeNotes& wholeNotes)
-{
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMeasurePositions ()) {
-    std::stringstream ss;
-
-    ss <<
-      "Padding up to whole notes '" << wholeNotes <<
-      "' in segment '" <<
-      fSegmentAbsoluteNumber <<
-      ", segmentDebugNumber: '" <<
-      fSegmentDebugNumber <<
-      " in voice \"" <<
-      fSegmentUpLinkToVoice->getVoiceName () <<
-      "\", line " << inputLineNumber <<
-      std::endl;
-
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-  if (false && fSegmentMeasuresFlatList.size () == 0) { // JMI
-    std::stringstream ss;
-
-    ss <<
-      "fSegmentMeasuresFlatList is empty"  <<
-      " in segment '" <<
-      fSegmentAbsoluteNumber <<
-      ", segmentDebugNumber: '" <<
-      fSegmentDebugNumber <<
-      " in voice \"" <<
-      fSegmentUpLinkToVoice->getVoiceName () <<
-      "\"";
-
-    gLog <<
-      "fSegmentUpLinkToVoice:" <<
-      std::endl;
-    ++gIndenter;
-    gLog <<
-      fSegmentUpLinkToVoice <<
-      std::endl;
-    --gIndenter;
-
-    gLog <<
-      "Part:" <<
-      std::endl;
-    ++gIndenter;
-    gLog <<
-      fSegmentUpLinkToVoice->fetchVoiceUpLinkToPart () <<
-      std::endl;
-    --gIndenter;
-
-    msrInternalError (
-      gServiceRunData->getInputSourceName (),
-      inputLineNumber,
-      __FILE__, __LINE__,
-      ss.str ());
-  }
-
-  if (fSegmentMeasuresFlatList.size ()) { // JMI BOFBOF
-    // pad last measure up to to this actual wholes notes
-    fSegmentLastMeasure->
-      padUpToMeasurePositionInMeasure (
-        inputLineNumber,
-        wholeNotes);
-  }
-}
+// void msrSegment::padUpToMeasurePositionInSegment (
+//   int             inputLineNumber,
+//   const msrWholeNotes& wholeNotes)
+// {
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gTraceOahGroup->getTraceMeasurePositions ()) {
+//     std::stringstream ss;
+//
+//     ss <<
+//       "Padding up to whole notes '" << wholeNotes <<
+//       "' in segment '" <<
+//       fSegmentAbsoluteNumber <<
+//       ", segmentDebugNumber: '" <<
+//       fSegmentDebugNumber <<
+//       " in voice \"" <<
+//       fSegmentUpLinkToVoice->getVoiceName () <<
+//       "\", line " << inputLineNumber <<
+//       std::endl;
+//
+//     gWaeHandler->waeTrace (
+//       __FILE__, __LINE__,
+//       ss.str ());
+//   }
+// #endif // MF_TRACE_IS_ENABLED
+//
+//   if (false && fSegmentMeasuresFlatList.size () == 0) { // JMI
+//     std::stringstream ss;
+//
+//     ss <<
+//       "fSegmentMeasuresFlatList is empty"  <<
+//       " in segment '" <<
+//       fSegmentAbsoluteNumber <<
+//       ", segmentDebugNumber: '" <<
+//       fSegmentDebugNumber <<
+//       " in voice \"" <<
+//       fSegmentUpLinkToVoice->getVoiceName () <<
+//       "\"";
+//
+//     gLog <<
+//       "fSegmentUpLinkToVoice:" <<
+//       std::endl;
+//     ++gIndenter;
+//     gLog <<
+//       fSegmentUpLinkToVoice <<
+//       std::endl;
+//     --gIndenter;
+//
+//     gLog <<
+//       "Part:" <<
+//       std::endl;
+//     ++gIndenter;
+//     gLog <<
+//       fSegmentUpLinkToVoice->fetchVoiceUpLinkToPart () <<
+//       std::endl;
+//     --gIndenter;
+//
+//     msrInternalError (
+//       gServiceRunData->getInputSourceName (),
+//       inputLineNumber,
+//       __FILE__, __LINE__,
+//       ss.str ());
+//   }
+//
+//   if (fSegmentMeasuresFlatList.size ()) { // JMI BOFBOF v0.9.67
+//     // pad last measure up to to this actual wholes notes
+//     fSegmentLastMeasure->
+//       padUpToMeasurePositionInMeasure (
+//         inputLineNumber,
+//         wholeNotes);
+//   }
+// }
 
 void msrSegment::backupByWholeNotesStepLengthInSegment (
   int     inputLineNumber,

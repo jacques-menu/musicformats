@@ -629,7 +629,7 @@ int main (int argc, char*  argv[])
       gLog <<
         serviceName << ", " <<
         mfMultiGenerationOutputKindAsString (multiGenerationOutputKind) <<
-        ", err = " <<
+        ", err: \"" <<
         mfMusicFormatsErrorAsString (err) <<
         std::endl;
     }

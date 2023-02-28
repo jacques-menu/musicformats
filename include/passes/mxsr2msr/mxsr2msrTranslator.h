@@ -1121,6 +1121,11 @@ class EXP mxsr2msrTranslator :
 
     S_msrScore                fMsrScore;
 
+    // part handling
+    // ------------------------------------------------------
+
+    S_msrPart                 fCurrentPart;
+
     // divisions per quarter note
     // ------------------------------------------------------
 
@@ -1187,11 +1192,6 @@ class EXP mxsr2msrTranslator :
     S_msrMusicXMLPrintLayout  fCurrentMusicXMLPrintLayout;
 
     Bool                      fOnGoingPrint;
-
-    // part handling
-    // ------------------------------------------------------
-
-    S_msrPart                 fCurrentPart;
 
     // measures
     // ------------------------------------------------------
@@ -1704,9 +1704,21 @@ class EXP mxsr2msrTranslator :
 
     std::list<S_msrHarmony>
                               fPendingHarmoniesList;
+
     void                      handlePendingHarmonies (
-                                const S_msrNote&  newNote,
-                                const S_msrVoice& voiceToInsertInto);
+                                const S_msrNote& newNote);
+
+    void                      handlePendingSingleHarmony (
+                                const S_msrNote&    newNote,
+                                const S_msrHarmony& harmony);
+
+    void                      handlePendingMultipleHarmonies (
+                                const S_msrNote& newNote);
+//                                 const S_msrNote&  newNote,
+//                                 const S_msrVoice& voiceToInsertInto);
+
+    void                      displayPendingHarmoniesList (
+                                std::string context);
 
     int                       fCurrentHarmonyInputLineNumber;
 
@@ -1745,11 +1757,24 @@ class EXP mxsr2msrTranslator :
     // ------------------------------------------------------
 
     int                       fFiguredBassVoicesCounter;
+
     std::list<S_msrFiguredBass>
                               fPendingFiguredBassesList;
+
     void                      handlePendingFiguredBasses (
-                                const S_msrNote&  newNote,
-                                const S_msrVoice& voiceToInsertInto);
+                                const S_msrNote&  newNote);
+
+    void                      handlePendingSingleFiguredBass (
+                                const S_msrNote&        newNote,
+                                const S_msrFiguredBass& figuredBass);
+
+    void                      handlePendingMultipleFiguredBasses (
+                                const S_msrNote& newNote);
+
+    void                      displayPendingFiguredBassesList (
+                                std::string context);
+
+    msrWholeNotes             fCurrentFiguredBassWholeNotesDuration;
 
     Bool                      fOnGoingFiguredBass;
 

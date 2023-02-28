@@ -88,11 +88,11 @@ void msrStringTuning::setStringTuningUpLinkToMeasure (
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceWholeNotes ()) {
+  if (gTraceOahGroup->getTraceInstruments ()) {
     ++gIndenter;
 
     gLog <<
-      "==> Setting the uplink to measure of string tuning " <<
+      "Setting the uplink to measure of string tuning " <<
       asString () <<
       " to measure " << measure->asString () <<
       "' in measure '" <<
@@ -269,11 +269,11 @@ void msrScordatura::setScordaturaUpLinkToMeasure (
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceWholeNotes ()) {
+  if (gTraceOahGroup->getTraceInstruments ()) {
     ++gIndenter;
 
     gLog <<
-      "==> Setting the uplink to measure of scordatura " <<
+      "Setting the uplink to measure of scordatura " <<
       asString () <<
       " to measure " << measure->asString () <<
       "' in measure '" <<
@@ -479,11 +479,11 @@ void msrAccordionRegistration::setAccordionRegistrationUpLinkToMeasure (
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceWholeNotes ()) {
+  if (gTraceOahGroup->getTraceInstruments ()) {
     ++gIndenter;
 
     gLog <<
-      "==> Setting the uplink to measure of accordion registration " <<
+      "Setting the uplink to measure of accordion registration " <<
       asString () <<
       " to measure " << measure->asString () <<
       "' in measure '" <<
@@ -701,11 +701,11 @@ void msrHarpPedalsTuning::setHarpPedalsTuningUpLinkToMeasure (
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceWholeNotes ()) {
+  if (gTraceOahGroup->getTraceInstruments ()) {
     ++gIndenter;
 
     gLog <<
-      "==> Setting the uplink to measure of harp pedals tuning " <<
+      "Setting the uplink to measure of harp pedals tuning " <<
       asString () <<
       " to measure " << measure->asString () <<
       "' in measure '" <<
@@ -984,11 +984,11 @@ void msrPedal::setPedalUpLinkToMeasure (
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceWholeNotes ()) {
+  if (gTraceOahGroup->getTraceInstruments ()) {
     ++gIndenter;
 
     gLog <<
-      "==> Setting the uplink to measure of pedal " <<
+      "Setting the uplink to measure of pedal " <<
       asString () <<
       " to measure " << measure->asString () <<
       "' in measure '" <<
@@ -1227,11 +1227,11 @@ void msrDamp::setDampUpLinkToMeasure (
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceWholeNotes ()) {
+  if (gTraceOahGroup->getTraceInstruments ()) {
     ++gIndenter;
 
     gLog <<
-      "==> Setting the uplink to measure of damp " <<
+      "Setting the uplink to measure of damp " <<
       asString () <<
       " to measure " << measure->asString () <<
       "' in measure '" <<
@@ -1388,11 +1388,11 @@ void msrDampAll::setDampAllUpLinkToMeasure (
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceWholeNotes ()) {
+  if (gTraceOahGroup->getTraceInstruments ()) {
     ++gIndenter;
 
     gLog <<
-      "==> Setting the uplink to measure of dampAll " <<
+      "Setting the uplink to measure of dampAll " <<
       asString () <<
       " to measure " << measure->asString () <<
       "' in measure '" <<

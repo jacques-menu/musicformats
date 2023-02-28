@@ -443,7 +443,7 @@ S_msrClef msrClef::createClefFromString (
     std::stringstream ss;
 
     ss <<
-      "regularExpression = " <<
+      "regularExpression: " <<
       regularExpression <<
       std::endl;
 
@@ -514,7 +514,7 @@ S_msrClef msrClef::createClefFromString (
     std::stringstream ss;
 
     ss <<
-      "clefName = \"" <<
+      "clefName: \"" <<
       clefName <<
       "\"" <<
       std::endl;
@@ -548,11 +548,11 @@ void msrClef::setClefUpLinkToMeasure (
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceWholeNotes ()) {
+  if (gTraceOahGroup->getTraceClefs ()) {
     ++gIndenter;
 
     gLog <<
-      "==> Setting the uplink to measure of clef " <<
+      "Setting the uplink to measure of clef " <<
       asString () <<
       " to measure " << measure->asString () <<
       "' in measure '" <<

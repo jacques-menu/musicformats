@@ -27,6 +27,7 @@ enum class msrMeasureKind {
   kMeasureKindRegular,
   kMeasureKindAnacrusis,
   kMeasureKindIncompleteStandalone,
+  kMeasureKindIncompleteLastMeasure,
   kMeasureKindIncompleteLastInRepeatCommonPart,
   kMeasureKindIncompleteLastInRepeatHookedEnding,
   kMeasureKindIncompleteLastInRepeatHooklessEnding,

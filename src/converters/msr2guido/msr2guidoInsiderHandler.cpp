@@ -362,7 +362,7 @@ std::string msr2guidoInsiderHandler::fetchOutputFileNameFromTheOptions () const
         std::stringstream ss;
 
         ss <<
-          "msr2guidoInsiderHandler::fetchOutputFileNameFromTheOptions(): outputFileName 1 = \"" <<
+          "msr2guidoInsiderHandler::fetchOutputFileNameFromTheOptions(): outputFileName 1: \"" <<
           outputFileName <<
           "\"" <<
           std::endl;
@@ -381,7 +381,7 @@ std::string msr2guidoInsiderHandler::fetchOutputFileNameFromTheOptions () const
         std::stringstream ss;
 
         ss <<
-          "msr2guidoInsiderHandler::fetchOutputFileNameFromTheOptions(): outputFileName 2 = " <<
+          "msr2guidoInsiderHandler::fetchOutputFileNameFromTheOptions(): outputFileName 2: \"" <<
           outputFileName <<
           "\"" <<
           std::endl;

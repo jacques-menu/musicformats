@@ -117,11 +117,11 @@ void msrCoda::setCodaUpLinkToMeasure (
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceWholeNotes ()) {
+  if (gTraceOahGroup->getTraceCodas ()) {
     ++gIndenter;
 
     gLog <<
-      "==> Setting the uplink to measure of coda " <<
+      "Setting the uplink to measure of coda " <<
       asString () <<
       " to measure " << measure->asString () <<
       "' in measure '" <<

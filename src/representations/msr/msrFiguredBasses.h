@@ -166,21 +166,23 @@ class EXP msrFiguredBass : public msrMeasureElement
                             const S_msrMeasure& upLinkToMeasure);
 
     static SMARTP<msrFiguredBass> create (
-                            int                 inputLineNumber);
+                            int inputLineNumber);
 
     static SMARTP<msrFiguredBass> create (
                             int                    inputLineNumber,
                             const S_msrMeasure&    upLinkToMeasure,
-                            const msrWholeNotes&        figuredBassSoundingWholeNotes,
-                            const msrWholeNotes&        figuredBassDisplayWholeNotes,
+                            const msrWholeNotes&   figuredBassSoundingWholeNotes,
+                            const msrWholeNotes&   figuredBassDisplayWholeNotes,
+                            const msrWholeNotes&   figuredBassWholeNotesDuration,
                             msrFiguredBassParenthesesKind
                                                    figuredBassParenthesesKind,
                             const msrTupletFactor& figuredBassTupletFactor);
 
     static SMARTP<msrFiguredBass> create (
                             int                    inputLineNumber,
-                            const msrWholeNotes&        figuredBassSoundingWholeNotes,
-                            const msrWholeNotes&        figuredBassDisplayWholeNotes,
+                            const msrWholeNotes&   figuredBassSoundingWholeNotes,
+                            const msrWholeNotes&   figuredBassDisplayWholeNotes,
+                            const msrWholeNotes&   figuredBassWholeNotesDuration,
                             msrFiguredBassParenthesesKind
                                                    figuredBassParenthesesKind,
                             const msrTupletFactor& figuredBassTupletFactor);
@@ -198,8 +200,9 @@ class EXP msrFiguredBass : public msrMeasureElement
                           msrFiguredBass (
                             int                    inputLineNumber,
                             const S_msrMeasure&    upLinkToMeasure,
-                            const msrWholeNotes&        figuredBassSoundingWholeNotes,
-                            const msrWholeNotes&        figuredBassDisplayWholeNotes,
+                            const msrWholeNotes&   figuredBassSoundingWholeNotes,
+                            const msrWholeNotes&   figuredBassDisplayWholeNotes,
+                            const msrWholeNotes&   figuredBassWholeNotesDuration,
                             msrFiguredBassParenthesesKind
                                                    figuredBassParenthesesKind,
                             const msrTupletFactor& figuredBassTupletFactor);
@@ -211,7 +214,7 @@ class EXP msrFiguredBass : public msrMeasureElement
     // set and get
     // ------------------------------------------------------
 
-    // uplink to measure
+    // uplinks
     void                  setMeasureElementUpLinkToMeasure (
                             const S_msrMeasure& measure) override
                               { setFiguredBassUpLinkToMeasure (measure); }
@@ -245,6 +248,11 @@ class EXP msrFiguredBass : public msrMeasureElement
 */
 
     // whole notes
+    void                  setFiguredBassSoundingWholeNotes (
+                            const msrWholeNotes& wholeNotes,
+                            const std::string&   context)
+                              { setSoundingWholeNotes (wholeNotes, context); }
+
     void                  setFiguredBassDisplayWholeNotes (
                             const msrWholeNotes& wholeNotes)
                               {
@@ -254,14 +262,21 @@ class EXP msrFiguredBass : public msrMeasureElement
     msrWholeNotes         getFiguredBassDisplayWholeNotes () const
                               { return fFiguredBassDisplayWholeNotes; }
 
+    // duration
+    msrWholeNotes         getFiguredBassWholeNotesDuration () const
+                              { return fFiguredBassWholeNotesDuration; }
+
+    // parentheses
     msrFiguredBassParenthesesKind
                           getFiguredBassParenthesesKind () const
                               { return fFiguredBassParenthesesKind; }
 
+    // bass figures list
     const std::list<S_msrBassFigure>&
                           getFiguredBassFiguresList () const
                               { return fFiguredBassFiguresList;  }
 
+    // bruplet factor
     void                  setFiguredBassTupletFactor (
                             const msrTupletFactor& tupletFactor)
                               { fFiguredBassTupletFactor = tupletFactor; }
@@ -273,6 +288,10 @@ class EXP msrFiguredBass : public msrMeasureElement
 
     // public services
     // ------------------------------------------------------
+
+    static bool           compareFiguredBassesByIncreasingDuration (
+                            const SMARTP<msrFiguredBass>& first,
+                            const SMARTP<msrFiguredBass>& second);
 
     void                  appendFigureToFiguredBass (
                             const S_msrBassFigure& bassFigure);
@@ -308,7 +327,11 @@ class EXP msrFiguredBass : public msrMeasureElement
     S_msrNote             fFiguredBassUpLinkToNote;
     S_msrVoice            fFiguredBassUpLinkToVoice; // for use in figured bass voices JMI v0.9.66
 
+    // whole notes
     msrWholeNotes         fFiguredBassDisplayWholeNotes;
+
+    // duration
+    msrWholeNotes         fFiguredBassWholeNotesDuration;
 
     msrFiguredBassParenthesesKind
                           fFiguredBassParenthesesKind;

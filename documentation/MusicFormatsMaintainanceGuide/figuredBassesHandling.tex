@@ -22,18 +22,64 @@ The useful options here are:
 \item \optionBoth{trace-figured-bass}{tfigbass}
 \item \optionBoth{display-msr1-skeleton}{dmsrskel}
 
-\item \optionBoth{display-msr1-short}{dmsr1short}
-\item \optionBoth{display-msr1}{dmsr1}, an alias for the one above
+\item \optionBoth{display-msr1}{dmsr1}
 \item \optionBoth{display-msr1-full}{dmsr1full}
 
-\item \optionBoth{display-msr2-short}{dmsr2short}
-\item \optionBoth{display-msr2}{dmsr2}, an alias for the one above
+\item \optionBoth{display-msr2}{dmsr2}
 \item \optionBoth{display-msr2-full}{dmsr2full}
 
-\item \optionBoth{display-lpsr-short}{dlpsrshort}
-\item \optionBoth{display-lpsr}{dlpsr}, an alias for the one above
+\item \optionBoth{display-lpsr}{dlpsr}
 \item \optionBoth{display-lpsr-full}{dlpsrfull}
 \end{itemize}
+
+
+% -------------------------------------------------------------------------
+\section{Figured bass in MusicXML}
+% -------------------------------------------------------------------------
+
+In the \mxml\ view of figured bass, figured bass elements are simply \drawn\ at the current music position, so to say.
+\begin{lstlisting}[language=Terminal]
+<!--
+	Figured bass elements take their position from the first
+	regular note (not a grace note or chord note) that follows
+	in score order. The optional duration element is used to
+	indicate changes of figures under a note.
+
+	Figures are ordered from top to bottom. A figure-number is
+	a number. Values for prefix and suffix include plus and
+	the accidental values sharp, flat, natural, double-sharp,
+	flat-flat, and sharp-sharp. Suffixes include both symbols
+	that come after the figure number and those that overstrike
+	the figure number. The suffix values slash, back-slash, and
+	vertical are used for slashed numbers indicating chromatic
+	alteration. The orientation and display of the slash usually
+	depends on the figure number. The prefix and suffix elements
+	may contain additional values for symbols specific to
+	particular figured bass styles. The value of parentheses
+	is "no" if not present.
+-->
+<!ELEMENT figured-bass (figure+, duration?, %editorial;)>
+<!ATTLIST figured-bass
+    %print-style;
+    %printout;
+    parentheses %yes-no; #IMPLIED
+    %optional-unique-id;
+>
+<!ELEMENT figure
+	(prefix?, figure-number?, suffix?, extend?, %editorial;)>
+<!ELEMENT prefix (#PCDATA)>
+<!ATTLIST prefix
+    %print-style;
+>
+<!ELEMENT figure-number (#PCDATA)>
+<!ATTLIST figure-number
+    %print-style;
+>
+<!ELEMENT suffix (#PCDATA)>
+<!ATTLIST suffix
+    %print-style;
+>
+\end{lstlisting}
 
 
 % -------------------------------------------------------------------------

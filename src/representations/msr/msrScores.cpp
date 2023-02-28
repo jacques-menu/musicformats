@@ -41,7 +41,7 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 S_msrScore msrScore::create (
-  int           inputLineNumber,
+  int                inputLineNumber,
   const std::string& scoreName)
 {
   msrScore* o =
@@ -53,7 +53,7 @@ S_msrScore msrScore::create (
 }
 
 msrScore::msrScore (
-  int           inputLineNumber,
+  int                inputLineNumber,
   const std::string& scoreName)
     : msrBookElement (inputLineNumber)
 {

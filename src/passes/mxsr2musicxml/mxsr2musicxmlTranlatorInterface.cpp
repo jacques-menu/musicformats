@@ -82,7 +82,7 @@ EXP void translateMxsrToMusicXML (
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
     err <<
-      "translateMxsrToMusicXML() outputFileName = \"" <<
+      "translateMxsrToMusicXML() outputFileName: \"" <<
       outputFileName <<
       "\"" <<
       std::endl;
@@ -102,7 +102,7 @@ EXP void translateMxsrToMusicXML (
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
     err <<
-      "xmlFile2musicxml() outputFileName = \"" <<
+      "xmlFile2musicxml() outputFileName: \"" <<
       outputFileName <<
       "\"" <<
       std::endl;

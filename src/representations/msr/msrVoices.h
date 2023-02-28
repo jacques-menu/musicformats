@@ -445,9 +445,9 @@ class EXP msrVoice : public msrElement
 
     // backup and padding
 
-    void                  padUpToMeasurePositionInVoice (
-                            int             inputLineNumber,
-                            const msrWholeNotes& wholeNotesMeasurePosition);
+//     void                  padUpToMeasurePositionInVoice (
+//                             int             inputLineNumber,
+//                             const msrWholeNotes& wholeNotesMeasurePosition);
 
     void                  backupByWholeNotesStepLengthInVoice (
                             int             inputLineNumber,
@@ -566,7 +566,9 @@ class EXP msrVoice : public msrElement
     // harmonies
 
     void                  appendHarmonyToVoice (
-                            const S_msrHarmony& harmony);
+                            int                  inputLineNumber,
+                            const S_msrHarmony&  harmony,
+                            const msrWholeNotes& measurePositionToAppendAt);
 
     void                  appendHarmonyToVoiceClone (
                             const S_msrHarmony& harmony);
@@ -574,7 +576,9 @@ class EXP msrVoice : public msrElement
     // figured bass
 
     void                  appendFiguredBassToVoice (
-                            const S_msrFiguredBass& figuredBass);
+                            int                     inputLineNumber,
+                            const S_msrFiguredBass& figuredBass,
+                            const msrWholeNotes&    measurePositionToAppendAt);
 
     void                  appendFiguredBassToVoiceClone (
                             const S_msrFiguredBass& figuredBass);
@@ -936,12 +940,16 @@ class EXP msrVoice : public msrElement
     // harmonies
 
     void                  appendHarmonyToHarmoniesVoice (
-                            const S_msrHarmony& harmony);
+                            int                  inputLineNumber,
+                            const S_msrHarmony&  harmony,
+                            const msrWholeNotes& measurePositionToAppendAt);
 
     // figured bass elements
 
     void                  appendFiguredBassToFiguredBassVoice (
-                            const S_msrFiguredBass& figuredBass);
+                            int                     inputLineNumber,
+                            const S_msrFiguredBass& figuredBass,
+                            const msrWholeNotes&    measurePositionToAppendAt);
 
     // repeats
 

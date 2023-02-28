@@ -1041,7 +1041,7 @@ msrWholeNotes::msrWholeNotes (
   rationalise ();
 }
 
-msrWholeNotes::msrWholeNotes(const msrWholeNotes& wholeNotes)
+msrWholeNotes::msrWholeNotes (const msrWholeNotes& wholeNotes)
 {
   fNumerator   = wholeNotes.fNumerator;
   fDenominator = wholeNotes.fDenominator;

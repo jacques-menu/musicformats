@@ -632,6 +632,7 @@ void msrMeasure::finalizeRegularMeasure (
     case msrMeasureKind::kMeasureKindAnacrusis:
     case msrMeasureKind::kMeasureKindRegular:
     case msrMeasureKind::kMeasureKindIncompleteStandalone: // JMI
+    case msrMeasureKind::kMeasureKindIncompleteLastMeasure: // JMI
     case msrMeasureKind::kMeasureKindIncompleteLastInRepeatCommonPart: // JMI
     case msrMeasureKind::kMeasureKindIncompleteLastInRepeatHookedEnding: // JMI
     case msrMeasureKind::kMeasureKindIncompleteLastInRepeatHooklessEnding: // JMI
@@ -766,9 +767,9 @@ void msrMeasure::finalizeHarmonyMeasure (
     std::stringstream ss;
 
     ss <<
-      "fMeasureOrdinalNumberInVoice = " <<
+      "fMeasureOrdinalNumberInVoice: \"" <<
       fMeasureOrdinalNumberInVoice <<
-      ", harmoniesPartNumberOfMeasures = " <<
+      ", harmoniesPartNumberOfMeasures: \"" <<
       harmoniesPartNumberOfMeasures <<
       std::endl;
 
@@ -882,9 +883,9 @@ void msrMeasure::finalizeFiguredBassMeasure (
     std::stringstream ss;
 
     ss <<
-      "fMeasureOrdinalNumberInVoice = " <<
+      "fMeasureOrdinalNumberInVoice: \"" <<
       fMeasureOrdinalNumberInVoice <<
-      ", figuredBassPartNumberOfMeasures = " <<
+      ", figuredBassPartNumberOfMeasures: \"" <<
       figuredBassPartNumberOfMeasures <<
       std::endl;
 

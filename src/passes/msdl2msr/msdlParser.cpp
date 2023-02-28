@@ -1189,23 +1189,23 @@ std::string msdlParser::lilypondOctaveInRelativeEntryMode (
 
       std::setw (fieldWidth) <<
       "% noteAboluteDiatonicOrdinal" <<
-      " = " <<
+      ": " <<
       noteAboluteDiatonicOrdinal <<
       std::endl <<
 
       std::setw (fieldWidth) <<
       "% referenceDiatonicPitchAsString" <<
-      " = " <<
+      ": " <<
       referenceDiatonicPitchKindAsString <<
       std::endl <<
       std::setw (fieldWidth) <<
       "% referenceAbsoluteOctave" <<
-       " = " <<
+      ": " <<
       msrOctaveKindAsString (referenceAbsoluteOctave) <<
       std::endl <<
       std::setw (fieldWidth) <<
       "% referenceAboluteDiatonicOrdinal" <<
-      " = " <<
+      ": " <<
       referenceAboluteDiatonicOrdinal <<
       std::endl << std::endl;
 
@@ -1285,11 +1285,11 @@ std::string msdlParser::lilypondOctaveInFixedEntryMode (
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceNotesOctaveEntry ()) {
     gLog << std::left <<
-      "% noteAbsoluteOctave = " <<
+      "% noteAbsoluteOctave: " <<
       msrOctaveKindAsString (noteAbsoluteOctave) <<
-      ", referenceAbsoluteOctave = " <<
+      ", referenceAbsoluteOctave: " <<
       msrOctaveKindAsString (referenceAbsoluteOctave) <<
-      ", referenceAbsoluteOctave = " <<
+      ", referenceAbsoluteOctave: " <<
       absoluteOctavesDifference <<
       std::endl;
 

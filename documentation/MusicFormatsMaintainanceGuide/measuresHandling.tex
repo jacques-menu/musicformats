@@ -130,7 +130,7 @@ void msrMeasure::appendElementToMeasure (const S_msrMeasureElement& elem)
       " in voice \"" <<
       fetchMeasureUpLinkToVoice ()->
         getVoiceName () <<
-      "\", currentMeasureWholeNotes = " <<
+      "\", currentMeasureWholeNotes: \"" <<
       fCurrentMeasureWholeNotes <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -183,7 +183,7 @@ void msrMeasure::appendHarmonyToMeasure (const S_msrHarmony& harmony)
       fMeasureUpLinkToSegment->
         getSegmentUpLinkToVoice ()->
           getVoiceName () <<
-      "\", currentMeasureWholeNotes = " <<
+      "\", currentMeasureWholeNotes: \"" <<
       fCurrentMeasureWholeNotes <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -240,7 +240,7 @@ void msrMeasure::appendHarmonyToMeasureClone (const S_msrHarmony& harmony)
       fMeasureUpLinkToSegment->
         getSegmentUpLinkToVoice ()->
           getVoiceName () <<
-      "\", currentMeasureWholeNotes = " <<
+      "\", currentMeasureWholeNotes: \"" <<
       fCurrentMeasureWholeNotes <<
       ", line " << inputLineNumber <<
       std::endl;

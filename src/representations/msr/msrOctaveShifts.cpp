@@ -93,11 +93,11 @@ void msrOctaveShift::setOctaveShiftUpLinkToMeasure (
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceWholeNotes ()) {
+  if (gTraceOahGroup->getTraceOctaveShifts ()) {
     ++gIndenter;
 
     gLog <<
-      "==> Setting the uplink to measure of octave shift " <<
+      "Setting the uplink to measure of octave shift " <<
       asString () <<
       " to measure " << measure->asString () <<
       "' in measure '" <<

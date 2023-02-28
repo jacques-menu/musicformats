@@ -131,11 +131,11 @@ void msrLineBreak::setLineBreakUpLinkToMeasure (
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceWholeNotes ()) {
+  if (gTraceOahGroup->getTraceLineBreaks ()) {
     ++gIndenter;
 
     gLog <<
-      "==> Setting the uplink to measure of line break " <<
+      "Setting the uplink to measure of line break " <<
       asString () <<
       " to measure " << measure->asString () <<
       "' in measure '" <<
@@ -350,11 +350,11 @@ void msrPageBreak::setPageBreakUpLinkToMeasure (
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceWholeNotes ()) {
+  if (gTraceOahGroup->getTracePageBreaks ()) {
     ++gIndenter;
 
     gLog <<
-      "==> Setting the uplink to measure of page break " <<
+      "Setting the uplink to measure of page break " <<
       asString () <<
       " to measure " << measure->asString () <<
       "' in measure '" <<

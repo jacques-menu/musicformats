@@ -282,6 +282,18 @@ S_msrBassFigure msrBassFigure::createFigureDeepClone (
   return deepClone;
 }
 
+bool msrFiguredBass::compareFiguredBassesByIncreasingDuration (
+  const SMARTP<msrFiguredBass>& first,
+  const SMARTP<msrFiguredBass>& second)
+{
+  return
+    bool (
+      first->fFiguredBassWholeNotesDuration
+        <
+      second->fFiguredBassWholeNotesDuration
+    );
+}
+
 void msrBassFigure::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -416,6 +428,7 @@ S_msrFiguredBass msrFiguredBass::create (
       upLinkToMeasure,
       msrWholeNotes (0, 1),           // figuredBassSoundingWholeNotes
       msrWholeNotes (0, 1),           // figuredBassDisplayWholeNotes
+      msrWholeNotes (0, 1),           // fFiguredBassWholeNotesDuration
       msrFiguredBassParenthesesKind::kFiguredBassParenthesesNo,
       msrTupletFactor (1, 1));
   assert (o != nullptr);
@@ -423,7 +436,7 @@ S_msrFiguredBass msrFiguredBass::create (
 }
 
 S_msrFiguredBass msrFiguredBass::create (
-  int                 inputLineNumber)
+  int inputLineNumber)
 {
   return
      msrFiguredBass::create (
@@ -434,8 +447,9 @@ S_msrFiguredBass msrFiguredBass::create (
 S_msrFiguredBass msrFiguredBass::create (
   int                    inputLineNumber,
   const S_msrMeasure&    upLinkToMeasure,
-  const msrWholeNotes&        figuredBassSoundingWholeNotes,
-  const msrWholeNotes&        figuredBassDisplayWholeNotes,
+  const msrWholeNotes&   figuredBassSoundingWholeNotes,
+  const msrWholeNotes&   figuredBassDisplayWholeNotes,
+  const msrWholeNotes&   figuredBassWholeNotesDuration,
   msrFiguredBassParenthesesKind
                          figuredBassParenthesesKind,
   const msrTupletFactor& figuredBassTupletFactor)
@@ -446,6 +460,7 @@ S_msrFiguredBass msrFiguredBass::create (
       upLinkToMeasure,
       figuredBassSoundingWholeNotes,
       figuredBassDisplayWholeNotes,
+      figuredBassWholeNotesDuration,
       figuredBassParenthesesKind,
       figuredBassTupletFactor);
   assert (o != nullptr);
@@ -454,8 +469,9 @@ S_msrFiguredBass msrFiguredBass::create (
 
 S_msrFiguredBass msrFiguredBass::create (
   int                    inputLineNumber,
-  const msrWholeNotes&        figuredBassSoundingWholeNotes,
-  const msrWholeNotes&        figuredBassDisplayWholeNotes,
+  const msrWholeNotes&   figuredBassSoundingWholeNotes,
+  const msrWholeNotes&   figuredBassDisplayWholeNotes,
+  const msrWholeNotes&   figuredBassWholeNotesDuration,
   msrFiguredBassParenthesesKind
                          figuredBassParenthesesKind,
   const msrTupletFactor& figuredBassTupletFactor)
@@ -466,6 +482,7 @@ S_msrFiguredBass msrFiguredBass::create (
       gNullMeasure, // set later in setMeasureElementUpLinkToMeasure()
       figuredBassSoundingWholeNotes,
       figuredBassDisplayWholeNotes,
+      figuredBassWholeNotesDuration,
       figuredBassParenthesesKind,
       figuredBassTupletFactor);
 }
@@ -473,8 +490,9 @@ S_msrFiguredBass msrFiguredBass::create (
 msrFiguredBass::msrFiguredBass (
   int                    inputLineNumber,
   const S_msrMeasure&    upLinkToMeasure,
-  const msrWholeNotes&        figuredBassSoundingWholeNotes,
-  const msrWholeNotes&        figuredBassDisplayWholeNotes,
+  const msrWholeNotes&   figuredBassSoundingWholeNotes,
+  const msrWholeNotes&   figuredBassDisplayWholeNotes,
+  const msrWholeNotes&   figuredBassWholeNotesDuration,
   msrFiguredBassParenthesesKind
                          figuredBassParenthesesKind,
   const msrTupletFactor& figuredBassTupletFactor)
@@ -503,6 +521,9 @@ msrFiguredBass::msrFiguredBass (
 
   fFiguredBassDisplayWholeNotes =
     figuredBassDisplayWholeNotes;
+
+  fFiguredBassWholeNotesDuration =
+    figuredBassWholeNotesDuration;
 
   fFiguredBassParenthesesKind =
     figuredBassParenthesesKind;
@@ -562,8 +583,9 @@ S_msrFiguredBass msrFiguredBass::createFiguredBassNewbornClone (
       msrFiguredBass::create (
         fInputLineNumber,
         gNullMeasure, // set later in setMeasureElementUpLinkToMeasure()
-        fSoundingWholeNotes,
+        fSoundingWholeNotes, // JMI v0.9.67
         fFiguredBassDisplayWholeNotes,
+        fFiguredBassWholeNotesDuration,
         fFiguredBassParenthesesKind,
         fFiguredBassTupletFactor);
 
@@ -605,8 +627,9 @@ S_msrFiguredBass msrFiguredBass::createFiguredBassDeepClone ()
       msrFiguredBass::create (
         fInputLineNumber,
         gNullMeasure, // set later in setMeasureElementUpLinkToMeasure()
-        fSoundingWholeNotes,
+        fSoundingWholeNotes, // JMI v0.9.67
         fFiguredBassDisplayWholeNotes,
+        fFiguredBassWholeNotesDuration,
         fFiguredBassParenthesesKind,
         fFiguredBassTupletFactor);
 
@@ -624,7 +647,7 @@ void msrFiguredBass::setFiguredBassUpLinkToNote (
     std::stringstream ss;
 
     ss <<
-      "==> Setting the uplink to note of figured bass " <<
+      "Setting the uplink to note of figured bass " <<
       asString () <<
       " to note " << note->asString () <<
       std::endl;
@@ -662,7 +685,7 @@ void msrFiguredBass::setFiguredBassUpLinkToMeasure (
     ++gIndenter;
 
     gLog <<
-      "==> Setting the uplink to measure of figured bass " <<
+      "Setting the uplink to measure of figured bass " <<
       asString () <<
       " to measure " << measure->asString () <<
       "' in measure '" <<

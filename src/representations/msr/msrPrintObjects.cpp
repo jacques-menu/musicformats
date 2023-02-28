@@ -32,7 +32,7 @@ msrPrintObjectKind msrPrintObjectKindFromString (
       msrPrintObjectKind::kPrintObjectNone; // default value JMI v0.9.65
 
 //   gLog << // JMI TEST JMI v0.9.65
-//     "printObjectString = " <<
+//     "printObjectString: " <<
 //     printObjectString <<
 //     std::endl;
 

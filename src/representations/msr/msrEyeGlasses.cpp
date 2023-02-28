@@ -79,11 +79,11 @@ void msrEyeGlasses::setEyeGlassesUpLinkToMeasure (
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceWholeNotes ()) {
+  if (gTraceOahGroup->getTraceEyeGlasses ()) {
     ++gIndenter;
 
     gLog <<
-      "==> Setting the uplink to measure of eyeglasses " <<
+      "Setting the uplink to measure of eyeglasses " <<
       asString () <<
       " to measure " << measure->asString () <<
       "' in measure '" <<

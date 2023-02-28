@@ -128,11 +128,11 @@ void initializeHarmonyKinds ();
 
 //________________________________________________________________________
 template< typename T >
-class   EnumTrueHarmonies
+class EnumTrueHarmonies
 {
   public:
 
-    class   Iterator
+    class Iterator
     {
       public:
 
@@ -360,6 +360,11 @@ class EXP msrHarmony : public msrMeasureElement
                              { return fHarmoniesUpLinkToVoice; }
 
     // whole notes
+    void                  setHarmonySoundingWholeNotes (
+                            const msrWholeNotes& wholeNotes,
+                            const std::string&   context)
+                              { setSoundingWholeNotes (wholeNotes, context); }
+
     void                  setHarmonyDisplayWholeNotes (
                             const msrWholeNotes& wholeNotes)
                               { fHarmonyDisplayWholeNotes = wholeNotes; }
@@ -431,6 +436,10 @@ class EXP msrHarmony : public msrMeasureElement
 
     // public services
     // ------------------------------------------------------
+
+    static bool           compareHarmoniesByIncreasingOffset (
+                            const SMARTP<msrHarmony>& first,
+                            const SMARTP<msrHarmony>& second);
 
     void                  appendHarmonyDegreeToHarmony (
                             const S_msrHarmonyDegree& harmonyDegree)

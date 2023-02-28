@@ -681,9 +681,9 @@ S_msrVoice msrStaff::createRegularVoiceInStaffByItsNumber (
       voiceNumber <<
       " overflows it" <<
       std::endl <<
-      ", fStaffRegularVoicesCounter = " <<
+      ", fStaffRegularVoicesCounter: " <<
       fStaffRegularVoicesCounter <<
-      ", msrStaff::sStaffMaxRegularVoices = " <<
+      ", msrStaff::sStaffMaxRegularVoices: " <<
       msrStaff::sStaffMaxRegularVoices <<
       std::endl;
 
@@ -1432,7 +1432,7 @@ S_msrVoice msrStaff::fetchFirstRegularVoiceFromStaff (
     std::stringstream ss;
 
     ss <<
-      "--> result = \"" <<
+      "--> result: \"" <<
       result->getVoiceName () <<
       "\"" <<
       std::endl;
@@ -1500,9 +1500,9 @@ void msrStaff::registerVoiceInStaff (
           std::endl <<
           "the voice named \"" << voice->getVoiceName () << "\" overflows it" <<
           std::endl <<
-          ", fStaffRegularVoicesCounter = " <<
+          ", fStaffRegularVoicesCounter: " <<
           fStaffRegularVoicesCounter <<
-          ", msrStaff::sStaffMaxRegularVoices = " <<
+          ", msrStaff::sStaffMaxRegularVoices: " <<
           msrStaff::sStaffMaxRegularVoices <<
           std::endl;
 
@@ -1601,9 +1601,9 @@ void msrStaff::registerPartLevelVoiceInStaff (
           std::endl <<
           "the voice named \"" << voice->getVoiceName () << "\" overflows it" <<
           std::endl <<
-          ", fStaffRegularVoicesCounter = " <<
+          ", fStaffRegularVoicesCounter: " <<
           fStaffRegularVoicesCounter <<
-          ", msrStaff::sStaffMaxRegularVoices = " <<
+          ", msrStaff::sStaffMaxRegularVoices: " <<
           msrStaff::sStaffMaxRegularVoices <<
           std::endl;
 
@@ -1735,9 +1735,9 @@ void msrStaff::registerVoiceInStaffClone (
           std::endl <<
           "the voice named \"" << voice->getVoiceName () << "\" overflows it" <<
           std::endl <<
-          ", fStaffRegularVoicesCounter = " <<
+          ", fStaffRegularVoicesCounter: " <<
           fStaffRegularVoicesCounter <<
-          ", msrStaff::sStaffMaxRegularVoices = " <<
+          ", msrStaff::sStaffMaxRegularVoices: " <<
           msrStaff::sStaffMaxRegularVoices <<
           std::endl;
 

@@ -482,7 +482,7 @@ std::string lpsr2lilypondTranslator::absoluteOctaveAsLilypondString (
   if (gTraceOahGroup->getTraceNotes ()) {
     fLilypondCodeStream <<
       std::endl <<
-      "%{ absoluteOctaveKind = " <<
+      "%{ absoluteOctaveKind: " <<
       msrOctaveKindAsString (absoluteOctaveKind) <<
       " %} " <<
       std::endl;
@@ -748,11 +748,11 @@ std::string lpsr2lilypondTranslator::lilypondOctaveInFixedEntryMode (
     std::stringstream ss;
 
     ss <<
-      "% noteAbsoluteOctave = " <<
+      "% noteAbsoluteOctave: " <<
       msrOctaveKindAsString (noteAbsoluteOctave) <<
-      ", referenceAbsoluteOctave = " <<
+      ", referenceAbsoluteOctave: " <<
       msrOctaveKindAsString (referenceAbsoluteOctave) <<
-      ", referenceAbsoluteOctave = " <<
+      ", referenceAbsoluteOctave: " <<
       absoluteOctavesDifference <<
       std::endl;
 
@@ -888,21 +888,21 @@ std::string lpsr2lilypondTranslator::stringTuningAsLilypondString (
 
     ss <<
       std::endl <<
-      "%getStringTuningNumber = " <<
+      "%getStringTuningNumber: " <<
       getStringTuningNumber <<
       std::endl <<
-      "%stringTuningDiatonicPitchKind = " <<
+      "%stringTuningDiatonicPitchKind: " <<
       msrDiatonicPitchKindAsString (
         stringTuningDiatonicPitchKind) <<
       std::endl <<
-      "%stringTuningAlterationKind = " <<
+      "%stringTuningAlterationKind: " <<
       alterationKindAsLilypondString (
         stringTuningAlterationKind) <<
       std::endl <<
-      "%stringTuningOctave = " <<
+      "%stringTuningOctave: " <<
       msrOctaveKindAsString (stringTuningOctave) <<
       std::endl <<
-      "%quarterTonesPitchKind = " <<
+      "%quarterTonesPitchKind: " <<
       msrQuarterTonesPitchKindAsString (quarterTonesPitchKind) <<
       std::endl <<
       "%msrQuarterTonesPitchKindAsString: " <<
@@ -1612,9 +1612,9 @@ void lpsr2lilypondTranslator::generateStemIfNeededAndUpdateCurrentStemKind (
 
     ss <<
       "--> generateStemIfNeededAndUpdateCurrentStemKind" <<
-      ", stem = " <<
+      ", stem: " <<
       stem->asShortString () <<
-      ", fCurrentStemKind = " <<
+      ", fCurrentStemKind: " <<
       msrStemKindAsString (fCurrentStemKind) <<
       std::endl;
 
@@ -11805,11 +11805,11 @@ void lpsr2lilypondTranslator::visitStart (S_msrHarmony& elt)
         "% --> Start visiting msrHarmony '" <<
         elt->asString () <<
         "'" <<
-        ", fOnGoingNotesStack.size () = " <<
+        ", fOnGoingNotesStack.size (): " <<
         fOnGoingNotesStack.size () <<
-        ", fOnGoingChord = " <<
+        ", fOnGoingChord: " <<
         fOnGoingChord <<
-        ", fOnGoingHarmoniesVoice = " <<
+        ", fOnGoingHarmoniesVoice: " <<
         fOnGoingHarmoniesVoice <<
         ", line " << elt->getInputLineNumber () <<
       std::endl;
@@ -11934,11 +11934,11 @@ void lpsr2lilypondTranslator::visitStart (S_msrFiguredBass& elt)
         "% --> Start visiting msrFiguredBass '" <<
         elt->asString () <<
         "'" <<
-        ", fOnGoingNotesStack.size () = " <<
+        ", fOnGoingNotesStack.size (): " <<
         fOnGoingNotesStack.size () <<
-        ", fOnGoingChord = " <<
+        ", fOnGoingChord: " <<
         fOnGoingChord <<
-        ", fOnGoingFiguredBassVoice = " <<
+        ", fOnGoingFiguredBassVoice: " <<
         fOnGoingFiguredBassVoice <<
         ", line " << elt->getInputLineNumber () <<
       std::endl;
@@ -12514,7 +12514,11 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
       // keep fCurrentVoiceMeasuresCounter at 0
       break;
 
-    case msrMeasureKind::kMeasureKindIncompleteStandalone: // JMI v0.9.63
+    case msrMeasureKind::kMeasureKindIncompleteStandalone:
+      ++fCurrentVoiceMeasuresCounter;
+      break;
+
+    case msrMeasureKind::kMeasureKindIncompleteLastMeasure:
       ++fCurrentVoiceMeasuresCounter;
       break;
 
@@ -12631,6 +12635,25 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
       }
       break;
 
+    case msrMeasureKind::kMeasureKindIncompleteLastMeasure:
+      if (
+        elt->getMeasureIsFirstInVoice ()
+          &&
+        elt->fetchMeasureUpLinkToScore ()->getScoreNumberOfMeasures () > 1
+      ) {
+        // don't generate '\partial' at the beginning of a voice
+        std::string
+          upbeatNotesDuration =
+            wholeNotesAsLilypondString (
+              inputLineNumber,
+              elt->getMeasureWholeNotes ());
+
+        fLilypondCodeStream <<
+          "\\partial " << upbeatNotesDuration <<
+          std::endl;
+      }
+      break;
+
     case msrMeasureKind::kMeasureKindIncompleteLastInRepeatCommonPart:
     case msrMeasureKind::kMeasureKindIncompleteLastInRepeatHookedEnding:
     case msrMeasureKind::kMeasureKindIncompleteLastInRepeatHooklessEnding:
@@ -12662,15 +12685,15 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
             ", line: " << inputLineNumber <<
             std::endl <<
             std::setw (fieldWidth) <<
-            "% measureWholeNotes = " <<
+            "% measureWholeNotes: " <<
             measureWholeNotes <<
             std::endl <<
             std::setw (fieldWidth) <<
-            "% fullMeasureWholeNotes = " <<
+            "% fullMeasureWholeNotes: " <<
             fullMeasureWholeNotes <<
             std::endl <<
             std::setw (fieldWidth) <<
-            "% ratioToFullMeasureWholeNotes = " <<
+            "% ratioToFullMeasureWholeNotes: " <<
             ratioToFullMeasureWholeNotes <<
             std::endl << std::endl;
         }
@@ -12921,6 +12944,9 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMeasure& elt)
         break;
 
       case msrMeasureKind::kMeasureKindIncompleteStandalone:
+        break;
+
+      case msrMeasureKind::kMeasureKindIncompleteLastMeasure:
         break;
 
       case msrMeasureKind::kMeasureKindIncompleteLastInRepeatCommonPart:
@@ -15940,7 +15966,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrTechnicalWithInteger& elt)
 
       ss <<
         "% --> Start visiting msrTechnicalWithInteger" <<
-        ", fOnGoingChord = " <<
+        ", fOnGoingChord: " <<
         fOnGoingChord <<
         ", line " << elt->getInputLineNumber () <<
       std::endl;
@@ -16010,7 +16036,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrTechnicalWithFloat& elt)
 
       ss <<
         "% --> Start visiting msrTechnicalWithFloat" <<
-        ", fOnGoingChord = " <<
+        ", fOnGoingChord: " <<
         fOnGoingChord <<
         ", line " << elt->getInputLineNumber () <<
       std::endl;
@@ -16447,19 +16473,19 @@ void lpsr2lilypondTranslator::visitStart (S_msrDoubleTremolo& elt)
     ++gIndenter;
 
     fLilypondCodeStream <<
-      "% doubleTremoloSoundingWholeNotes = " <<
+      "% doubleTremoloSoundingWholeNotes: " <<
       elt->getSoundingWholeNotes () <<
       std::endl <<
 
-      "% gdoubleTremoloElementsNotesDuration = " <<
+      "% gdoubleTremoloElementsNotesDuration: " <<
       elt->getDoubleTremoloElementsNotesDuration () <<
       std::endl <<
 
-      "% doubleTremoloMarksNumber = " <<
+      "% doubleTremoloMarksNumber: " <<
       elt->getDoubleTremoloMarksNumber () <<
       std::endl <<
 
-      "% numberOfRepeats = " <<
+      "% numberOfRepeats: \"" <<
       numberOfRepeats <<
       std::endl;
 
@@ -17343,7 +17369,7 @@ void lpsr2lilypondTranslator::generateGraceNotesGroup (
 {
   /*
     1. no slash, no slur: \grace
-    2. slash and slur: \acciaccatura, LilyPond will slur it JMI
+    2. slash and slur:    \acciaccatura, LilyPond will slur it JMI
     3. slash but no slur: \slashedGrace
     4. no slash but slur: \appoggiatura, LilyPond will slur it JMI
   */
@@ -22487,7 +22513,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrBarCheck& elt)
     if (gGlobalLpsr2lilypondOahGroup->getOriginalMeasureNumbers ()) {
       // generate the original MusicXML measure number as a comment
       fLilypondCodeStream <<
-        " % omn: " << elt->getNextBarOriginalNumber () << " %}";
+        " % nbon: " << elt->getNextBarOriginalNumber () << " %}";
     }
 
     fLilypondCodeStream <<
@@ -22690,7 +22716,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrLineBreak& elt)
   if (gGlobalLpsr2lilypondOahGroup->getOriginalMeasureNumbers ()) {
     // generate the original MusicXML measure number as a comment
     fLilypondCodeStream <<
-      " (omn: " << elt->getInputLineNumber () << ")";
+      " (line " << elt->getInputLineNumber () << ")";
   }
 
   // enforce a line break here, not using \myLineBreak,
@@ -23246,7 +23272,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrRepeatEnding& elt)
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceRepeats ()) {
     fLilypondCodeStream <<
-      "% ===**** fRepeatDescrsStack.back () = '" <<
+      "% ===**** fRepeatDescrsStack.back (): '" <<
       fRepeatDescrsStack.back ()->asString () <<
       "'" <<
       std::endl;
@@ -23886,7 +23912,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMultipleFullBarRests& elt)
     if (gGlobalLpsr2lilypondOahGroup->getOriginalMeasureNumbers ()) {
       // generate the original MusicXML measure number as a comment
       fLilypondCodeStream <<
-        " (mxml3: " << measureElement->getInputLineNumber () << ")";
+        " (line: " << measureElement->getInputLineNumber () << ")";
     }
 */
 
@@ -23973,7 +23999,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMidiTempo& elt)
   fLilypondCodeStream <<
     "\\tempo " <<
     elt->getMidiTempoNotesDuration () << // BLARK
-    " = " <<
+    "= " <<
     elt->getMidiTempoPerSecond () <<
     std::endl;
 
@@ -24060,7 +24086,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMidiTempo& elt)
   }
   fLilypondCodeStream << std::left <<
     std::setw (fieldWidth) <<
-    "left-margin = " <<
+    "left-margin: " <<
     std::setprecision (3) << leftMarginValue <<
     leftMarginUnitString <<
     std::endl;
@@ -24097,7 +24123,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMidiTempo& elt)
   }
   fLilypondCodeStream << std::left <<
     std::setw (fieldWidth) <<
-    "right-margin = " <<
+    "right-margin: " <<
     std::setprecision (3) << rightMarginValue <<
     rightMarginUnitString <<
     std::endl;
@@ -24134,7 +24160,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMidiTempo& elt)
   }
   fLilypondCodeStream << std::left <<
     std::setw (fieldWidth) <<
-    "top-margin = " <<
+    "top-margin: " <<
     std::setprecision (3) << topMarginValue <<
     topMarginUnitString <<
     std::endl;
@@ -24171,7 +24197,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMidiTempo& elt)
   }
   fLilypondCodeStream << std::left <<
     std::setw (fieldWidth) <<
-    "bottom-margin = " <<
+    "bottom-margin: " <<
     std::setprecision (3) << bottomMarginValue <<
     bottomMarginUnitString <<
     std::endl;

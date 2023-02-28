@@ -2423,10 +2423,10 @@ void lilypondChordsDisplayAtom::applyAtomWithValue (
     std::stringstream ss;
 
     ss <<
-      "FAA chordContents  = " <<
+      "FAA chordContents: \"" <<
       chordContents <<
       std::endl <<
-      "chordsDisplaycode = " <<
+      "chordsDisplaycode: " <<
       chordsDisplaycode <<
       std::endl;
 
@@ -5590,7 +5590,7 @@ void lpsr2lilypondOahGroup::displayAtomWithVariableOptionsValues (
     std::stringstream ss;
 
     ss << std::left <<
-      std::setw (valueFieldWidth) << "part names transposition" << ": ";
+      std::setw (valueFieldWidth) << "fPartNamesTranspositionMap" << ": ";
 
     if (! fPartNamesTranspositionMap.size ()) {
       ss << "[NONE]";
@@ -5604,7 +5604,7 @@ void lpsr2lilypondOahGroup::displayAtomWithVariableOptionsValues (
       ) {
         ss <<
           "Part name \"" << ((*i).first) <<
-          "\" = " <<
+          "\": \"" <<
           ((*i).second->asString ()) <<
           "\" ";
       } // for
@@ -5635,7 +5635,7 @@ void lpsr2lilypondOahGroup::displayAtomWithVariableOptionsValues (
       ) {
         ss <<
           "Part ID \"" << ((*i).first) <<
-          "\" = " <<
+          "\": " <<
           ((*i).second->asString ()) <<
           "\" ";
       } // for
@@ -7002,10 +7002,10 @@ void lilypondBreakPageAfterMeasureNumberAtom::applyAtomWithValue (
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
     os <<
-      "musicxmlMeasureNumber  = " <<
+      "musicxmlMeasureNumber: " <<
       musicxmlMeasureNumber <<
       std::endl <<
-      "lilypondMeasureNumber = " <<
+      "lilypondMeasureNumber: " <<
       lilypondMeasureNumber <<
       std::endl;
 

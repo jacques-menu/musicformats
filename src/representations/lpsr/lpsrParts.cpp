@@ -537,22 +537,22 @@ void lpsrPartBlock::print (std::ostream& os) const
   const int fieldWidth = 28;
 
   os << std::left <<
-    std::setw (fieldWidth) << std::string ("") + "partName" << " = \"" <<
+    std::setw (fieldWidth) << std::string ("") + "partName" << ": \"" <<
     fPart->getPartName () << "\"" <<
     std::endl <<
-    std::setw (fieldWidth) << std::string ("") + "partID" << " = \"" <<
+    std::setw (fieldWidth) << std::string ("") + "partID" << ": \"" <<
     fPart->getPartID () << "\"" <<
     std::endl <<
 
-    std::setw (fieldWidth) << std::string ("") + "partAbbreviation" << " = \"" <<
+    std::setw (fieldWidth) << std::string ("") + "partAbbreviation" << ": \"" <<
     fPart->getPartAbbreviation () << "\"" <<
     std::endl <<
 
-    std::setw (fieldWidth) << "partBlockInstrumentName" << " = \"" <<
+    std::setw (fieldWidth) << "partBlockInstrumentName" << ": \"" <<
     fPartBlockInstrumentName <<
     "\"" <<
     std::endl <<
-    std::setw (fieldWidth) << "partBlockShortInstrumentName" << " = \"" <<
+    std::setw (fieldWidth) << "partBlockShortInstrumentName" << ": \"" <<
     fPartBlockShortInstrumentName <<
     "\"" <<
     std::endl;

@@ -229,7 +229,7 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
     err <<
-      "msdlStream2lilypond() outputFileName = \"" <<
+      "msdlStream2lilypond() outputFileName: \"" <<
       outputFileName <<
       "\"" <<
       std::endl;

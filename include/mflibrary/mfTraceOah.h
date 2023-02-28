@@ -340,7 +340,7 @@ class EXP traceOahGroup : public oahGroup
     // --------------------------------------
 
     // transpositions
-    void                  setTraceTraceTranspositions ()
+    void                  setTraceTranspositions ()
                               { fTraceTranspositions = true; }
     Bool                  getTraceTranspositions () const
                               { return fTraceTranspositions; }
@@ -669,6 +669,12 @@ class EXP traceOahGroup : public oahGroup
 
     // instruments
     // --------------------------------------
+
+    // instruments
+    void                  setTraceInstruments ()
+                              { fTraceInstruments = true; }
+    Bool                  getTraceInstruments () const
+                              { return fTraceInstruments; }
 
     // frames
     void                  setTraceFrames ()
@@ -1072,6 +1078,8 @@ class EXP traceOahGroup : public oahGroup
     // instruments
     // --------------------------------------
 
+    // instruments
+    Bool                  fTraceInstruments;
     // frames
     Bool                  fTraceFrames;
     // scordaturas

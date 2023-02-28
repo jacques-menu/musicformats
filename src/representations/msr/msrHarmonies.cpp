@@ -262,11 +262,11 @@ S_msrHarmonyInterval msrHarmonyInterval::intervalDifference (
     std::stringstream ss;
 
     ss <<
-      "--> permuteRelativeOctaves = " <<
+      "--> permuteRelativeOctaves: " <<
       permuteRelativeOctaves <<
-      ", invertInterval = " <<
+      ", invertInterval: " <<
       invertInterval <<
-      ", resultRelativeOctave = " <<
+      ", resultRelativeOctave: " <<
       resultRelativeOctave <<
       std::endl;
 
@@ -1446,7 +1446,7 @@ S_msrHarmonyInterval msrHarmonyInterval::intervalDifference (
     std::stringstream ss;
 
     ss <<
-      "--> base resultIntervalKind = '" <<
+      "--> base resultIntervalKind: '" <<
       msrIntervalKindAsString (resultIntervalKind) <<
       "'" <<
       std::endl;
@@ -1485,7 +1485,7 @@ S_msrHarmonyInterval msrHarmonyInterval::intervalDifference (
     std::stringstream ss;
 
     ss <<
-      "--> result = '" <<
+      "--> result: '" <<
       result->asShortString () <<
       "'" <<
       std::endl << std::endl;
@@ -4567,11 +4567,11 @@ void msrHarmony::setHarmonyUpLinkToMeasure (
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceWholeNotes ()) {
+  if (gTraceOahGroup->getTraceHarmonies ()) {
     ++gIndenter;
 
     gLog <<
-      "==> Setting the uplink to measure of harmony " <<
+      "Setting the uplink to measure of harmony " <<
       asString () <<
       " to measure " << measure->asString () <<
       "' in measure '" <<
@@ -4617,7 +4617,7 @@ void msrHarmony::setHarmonyUpLinkToNote (
     std::stringstream ss;
 
     ss <<
-      "==> Setting the uplink to note of harmony " <<
+      "Setting the uplink to note of harmony " <<
       asString () <<
       " to note " << note->asString () <<
       std::endl;
@@ -4678,7 +4678,7 @@ void msrHarmony::setHarmonyUpLinkToNote (
 //       "), context: \"" <<
 //       context <<
 //       "\"" <<
-//       "', harmonyWholeNotesOffset = " <<
+//       "', harmonyWholeNotesOffset: " <<
 //       fHarmonyWholeNotesOffset <<
 //       std::endl;
 //   }
@@ -4782,6 +4782,18 @@ void msrHarmony::incrementHarmonySoundingWholeNotes (
   setSoundingWholeNotes (
     augmentedSoundingWholeNotes,
     "incrementHarmonySoundingWholeNotes()");
+}
+
+bool msrHarmony::compareHarmoniesByIncreasingOffset (
+  const SMARTP<msrHarmony>& first,
+  const SMARTP<msrHarmony>& second)
+{
+  return
+    bool (
+      first->fHarmonyWholeNotesOffset
+        <
+      second->fHarmonyWholeNotesOffset
+    );
 }
 
 void msrHarmony::acceptIn (basevisitor* v)
@@ -4888,7 +4900,7 @@ std::string msrHarmony::asString () const
 
   ss <<
     "[Harmony" <<
-    ", " << std::hex << std::showbase << this << std::dec <<
+//     ", " << std::hex << std::showbase << this << std::dec << // JMI HEX ADDRESS
     ", fMeasurePosition: " <<
     fMeasurePosition <<
     ", fHarmonyRootQuarterTonesPitchKind: " <<
@@ -5022,7 +5034,7 @@ std::string msrHarmony::asShortStringForMeasuresSlices () const
 
   ss <<
     "[Harmony" <<
-    ", " << std::hex << std::showbase << this << std::dec <<
+//     ", " << std::hex << std::showbase << this << std::dec << // JMI HEX ADDRESS
     ", fMeasurePosition: " <<
     fMeasurePosition <<
     ", fHarmonyRootQuarterTonesPitchKind: " <<
@@ -5115,16 +5127,16 @@ void msrHarmony::print (std::ostream& os) const
   os <<
     std::setw (fieldWidth) <<
     "fMeasurePosition" << ": " <<
-    fMeasurePosition <<
+    fMeasurePosition.asString () <<
     std::endl <<
 
     std::setw (fieldWidth) <<
     "fSoundingWholeNotes" << ": " <<
-    fSoundingWholeNotes <<
+    fSoundingWholeNotes.asString () <<
     std::endl <<
     std::setw (fieldWidth) <<
     "fHarmonyDisplayWholeNotes" << ": " <<
-    fHarmonyDisplayWholeNotes <<
+    fHarmonyDisplayWholeNotes.asString () <<
     std::endl;
 
   os << std::left <<
@@ -5143,7 +5155,8 @@ void msrHarmony::print (std::ostream& os) const
   // print the harmony whole notes offset
   os <<
     std::setw (fieldWidth) <<
-    "fHarmonyWholeNotesOffset" << ": " << fHarmonyWholeNotesOffset <<
+    "fHarmonyWholeNotesOffset" << ": " <<
+    fHarmonyWholeNotesOffset.asString () <<
     std::endl;
 
   os <<
@@ -6893,9 +6906,9 @@ S_msrHarmonyStructure msrHarmonyStructure::invertHarmonyStructure (int inversion
     std::stringstream ss;
 
     ss <<
-      "==> invertHarmonyStructure (), inversion = " <<
+      "==> invertHarmonyStructure (), inversion: " <<
       inversion <<
-      ", original harmonyStructureIntervalsSize = " <<
+      ", original harmonyStructureIntervalsSize: " <<
       harmonyStructureIntervalsSize <<
       std::endl;
 

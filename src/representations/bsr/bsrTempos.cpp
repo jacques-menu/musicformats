@@ -503,7 +503,7 @@ std::string bsrTempo::asDebugString () const
 
         ss <<
           tempoBeatUnit.asString () <<
-          " = " <<
+          ": " <<
           fMsrTempo->getTempoPerMinute () <<
           "/mn";
       }

@@ -317,6 +317,19 @@ class EXP msrNote : public msrTupletElement
                           getNoteHeadParenthesesKind () const
                               { return fNoteHeadParenthesesKind; }
 
+    // whole notes
+    void                  setNoteSoundingWholeNotes (
+                            const msrWholeNotes& wholeNotes,
+                            const std::string&   context)
+                              { setSoundingWholeNotes (wholeNotes, context); }
+
+    void                  setNoteDisplayWholeNotes (
+                            const msrWholeNotes& wholeNotes)
+                              { fNoteDisplayWholeNotes = wholeNotes; }
+
+    msrWholeNotes         getNoteDisplayWholeNotes () const
+                              { return fNoteDisplayWholeNotes; }
+
     // accidentals
 
     void                  setNoteAccidentalKind (
@@ -357,13 +370,6 @@ class EXP msrNote : public msrTupletElement
     msrQuarterTonesPitchKind
                           getNoteQuarterTonesDisplayPitchKind () const
                               { return fNoteQuarterTonesDisplayPitchKind; }
-
-    void                  setNoteDisplayWholeNotes (
-                            const msrWholeNotes& wholeNotes)
-                              { fNoteDisplayWholeNotes = wholeNotes; }
-
-    msrWholeNotes         getNoteDisplayWholeNotes () const
-                              { return fNoteDisplayWholeNotes; }
 
     // dots
 
@@ -468,8 +474,8 @@ class EXP msrNote : public msrTupletElement
                               { return fNoteHarmoniesList; }
 
     // figured bass
-    void                  appendFiguredBassToNote (
-                            const S_msrFiguredBass& figuredBass);
+//     void                  appendFiguredBassToNote (
+//                             const S_msrFiguredBass& figuredBass);
 
     const std::list<S_msrFiguredBass>&
                           getNoteFiguredBassesList () const

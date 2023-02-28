@@ -171,7 +171,7 @@ std::string msrTempoNote::asString () const
   ss <<
     "Tempo note" <<
     ", tempoNoteWholeNotes: " << fTempoNoteWholeNotes <<
-    ", tempoNoteBelongsToATuplet = " <<
+    ", tempoNoteBelongsToATuplet: " <<
     fTempoNoteBelongsToATuplet;
 
   return ss.str ();
@@ -549,7 +549,7 @@ void msrTempoTuplet::applyDisplayFactorToTempoTupletMembers ()
     ++gIndenter;
 
     gLog <<
-      "% fTempoTupletFactor = " <<
+      "% fTempoTupletFactor: " <<
       fTempoTupletFactor <<
       std::endl << std::endl;
 
@@ -573,12 +573,12 @@ void msrTempoTuplet::unapplySoundingFactorToTempoTupletMembers (
     ++gIndenter;
 
     gLog <<
-      "% fTempoTupletFactor = " <<
+      "% fTempoTupletFactor: " <<
       fTempoTupletFactor <<
       std::endl <<
-      "% containingTempoTupletActualNotes = " <<
+      "% containingTempoTupletActualNotes: " <<
       containingTempoTupletActualNotes <<
-      ", containingTempoTupletNormalNotes = " <<
+      ", containingTempoTupletNormalNotes: " <<
       containingTempoTupletNormalNotes <<
       std::endl << std::endl;
 
@@ -1415,11 +1415,11 @@ void msrTempo::setTempoUpLinkToMeasure (
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceWholeNotes ()) {
+  if (gTraceOahGroup->getTraceTempos ()) {
     ++gIndenter;
 
     gLog <<
-      "==> Setting the uplink to measure of tempo " <<
+      "Setting the uplink to measure of tempo " <<
       asString () <<
       " to measure " << measure->asString () <<
       "' in measure '" <<
@@ -1619,7 +1619,7 @@ std::string msrTempo::asShortStringForMeasuresSlices () const
 
   ss <<
     fTempoBeatUnit.asString () <<
-    " = " <<
+    ": " <<
     fTempoPerMinute;
 //     ", tempoParenthesizedKind: "  <<
 //     msrTempoParenthesizedKindAsString (fTempoParenthesizedKind) <<

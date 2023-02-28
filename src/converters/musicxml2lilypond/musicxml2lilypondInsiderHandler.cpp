@@ -468,7 +468,7 @@ std::string xml2lyInsiderHandler::fetchOutputFileNameFromTheOptions () const
         std::stringstream ss;
 
         ss <<
-          "musicxml2lilypondInsiderInsiderHandler::fetchOutputFileNameFromTheOptions(): outputFileName 1 = \"" <<
+          "musicxml2lilypondInsiderInsiderHandler::fetchOutputFileNameFromTheOptions(): outputFileName 1: \"" <<
           outputFileName <<
           "\"" <<
           std::endl;
@@ -487,7 +487,7 @@ std::string xml2lyInsiderHandler::fetchOutputFileNameFromTheOptions () const
         std::stringstream ss;
 
         ss <<
-          "musicxml2lilypondInsiderInsiderHandler::fetchOutputFileNameFromTheOptions(): outputFileName 2 = " <<
+          "musicxml2lilypondInsiderInsiderHandler::fetchOutputFileNameFromTheOptions(): outputFileName 2: " <<
           outputFileName <<
           "\"" <<
           std::endl;

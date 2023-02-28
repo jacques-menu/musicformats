@@ -1763,10 +1763,10 @@ void msr2msrTranslator::visitStart (S_msrFiguredBass& elt)
       setFiguredBassUpLinkToNote (
         fCurrentNonGraceNoteClone);
 
-    // register the figured bass in the current non-grace note clone
-    fCurrentNonGraceNoteClone->
-      appendFiguredBassToNote (
-        fCurrentFiguredBassClone);
+//     // register the figured bass in the current non-grace note clone
+//     fCurrentNonGraceNoteClone->
+//       appendFiguredBassToNote (
+//         fCurrentFiguredBassClone);
 
     // don't append the figured bass to the part figured bass, JMI ??? v0.9.66
     // this will be done below
@@ -1875,7 +1875,7 @@ void msr2msrTranslator::visitStart (S_msrMeasure& elt)
     ss <<
       "--> Start visiting msrMeasure '" <<
       measureNumber <<
-      "', measurePuristNumber = '" <<
+      "', measurePuristNumber: '" <<
       measurePuristNumber <<
       "', line " << inputLineNumber <<
       std::endl;
@@ -2033,9 +2033,9 @@ void msr2msrTranslator::visitEnd (S_msrMeasure& elt)
     ss <<
       "--> End visiting msrMeasure '" <<
       measureNumber <<
-      "', nextMeasureNumber = '" <<
+      "', nextMeasureNumber: '" <<
       nextMeasureNumber <<
-      "', measurePuristNumber = '" <<
+      "', measurePuristNumber: '" <<
       measurePuristNumber <<
       "', line " << inputLineNumber <<
       std::endl;
@@ -2148,7 +2148,7 @@ void msr2msrTranslator::visitEnd (S_msrMeasure& elt)
 //         ss <<
 //           "fCurrentMultipleFullBarRests is null upon multiple full-bar rest end" <<
 //           measureNumber <<
-//           "', measurePuristNumber = '" <<
+//           "', measurePuristNumber: '" <<
 //           measurePuristNumber <<
 //           "', line " << inputLineNumber;
 //
@@ -2163,50 +2163,6 @@ void msr2msrTranslator::visitEnd (S_msrMeasure& elt)
 //     }
   }
 
-  // bar checks and bar numbers check are already present in fVisitedMsrScore
-  // and handled in the corresponding visitStart() and visitEnd() methods
-  doCreateABarCheck = false; // JMI v0.9.66
-
-  if (doCreateABarCheck) {
-    // create a bar check
-    int voiceCurrentMeasurePuristNumber =
-      fCurrentVoiceClone->
-        getVoiceCurrentMeasurePuristNumber ();
-
-    fLastBarCheck =
-      msrBarCheck::createWithNextBarPuristNumber (
-        inputLineNumber,
-        fCurrentMeasureClone,
-        nextMeasureNumber,
-        voiceCurrentMeasurePuristNumber);
-
-    // append it to the current voice clone
-    fCurrentVoiceClone->
-      appendBarCheckToVoice (fLastBarCheck);
-
-    // create a bar number check
-    // should NOT be done in cadenza, SEE TO IT JMI
-    S_msrBarNumberCheck
-      barNumberCheck_ =
-        msrBarNumberCheck::create (
-          inputLineNumber,
-          fCurrentMeasureClone,
-          nextMeasureNumber,
-          voiceCurrentMeasurePuristNumber);
-
-    // append it to the current voice clone
-    fCurrentVoiceClone->
-      appendBarNumberCheckToVoice (barNumberCheck_);
-  }
-
-  // should a page break be inserted?
-//   gLog << // JMI
-//     "==> measureNumber = \"" <<
-//     measureNumber <<
-//     "\"" <<
-//     ", line " << inputLineNumber <<
-//     std::endl;
-
   // is this measureNumber in the parts ignore IDs set?
   if (gGlobalMsr2msrOahGroup->getInserPageBreakAfterMeasureSet ().size ()) {
     std::set<std::string>::iterator
@@ -2216,7 +2172,7 @@ void msr2msrTranslator::visitEnd (S_msrMeasure& elt)
 
     if (it != gGlobalMsr2msrOahGroup->getInserPageBreakAfterMeasureSet ().end ()) {
       gLog <<
-        "==> adding a page break after measureNumber = \"" <<
+        "==> adding a page break after measureNumber: \"" <<
         measureNumber <<
         "\"" <<
         ", line " << inputLineNumber <<
@@ -4729,7 +4685,7 @@ void msr2msrTranslator::visitStart (S_msrNote& elt)
         std::stringstream ss;
 
         ss <<
-          "===> fCurrentNonGraceNoteClone = " <<
+          "===> fCurrentNonGraceNoteClone: " <<
           fCurrentNonGraceNoteClone->asString () <<
           std::endl;
 
@@ -4848,7 +4804,7 @@ void msr2msrTranslator::visitEnd (S_msrNote& elt)
     }
 
     gLog <<
-      "FAA fCurrentGraceNoteClone = " <<
+      "FAA fCurrentGraceNoteClone: " <<
       std::endl;
     if (fCurrentGraceNoteClone) {
       gLog <<
@@ -5049,7 +5005,7 @@ void msr2msrTranslator::visitEnd (S_msrNote& elt)
     case msrNoteKind::kNoteSkipInGraceNotesGroup:
     /* JMI
       gLog <<
-        "fOnGoingGraceNotesGroup = " <<
+        "fOnGoingGraceNotesGroup: " <<
         fOnGoingGraceNotesGroup <<
         std::endl;
         */
