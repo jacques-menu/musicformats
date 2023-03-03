@@ -270,69 +270,92 @@ void waeHandler::waeTrace (
   int                inputLineNumber,
   const std::string& message)
 {
-  mfPassIDKind
-    earlyTraceOnlyPass =
-      gEarlyOptions.getEarlyTraceOnlyPass (),
-    globalCurrentPassIDKind =
-      getGlobalCurrentPassIDKind ();
+  // should the current pass be traced?
 
-//   os <<
-//     "--> earlyTraceOnlyPass:      " << earlyTraceOnlyPass << std::endl <<
-//     "--> globalCurrentPassIDKind: " << globalCurrentPassIDKind << std::endl <<
-//     std::endl;
+  Bool doTraceCurrentPass;
 
-  // should we actually produce the trace?
-  Bool doTrace;
+  {
+    mfPassIDKind
+      earlyTraceOnlyPass =
+        gEarlyOptions.getEarlyTraceOnlyPass (),
+      globalCurrentPassIDKind =
+        getGlobalCurrentPassIDKind ();
 
-  switch (earlyTraceOnlyPass) {
-    case mfPassIDKind::kMfPassID_UNKNOWN:
-      os <<
-        "waeHandler::waeTrace: " <<
-        "fEarlyTraceOnlyPass = " << earlyTraceOnlyPass <<
-        std::endl;
-      break;
+  //   os <<
+  //     "--> earlyTraceOnlyPass:      " << earlyTraceOnlyPass << std::endl <<
+  //     "--> globalCurrentPassIDKind: " << globalCurrentPassIDKind << std::endl <<
+  //     std::endl;
 
-    case mfPassIDKind::kMfPassID_ALL:
-      doTrace = true;
-      break;
+    switch (earlyTraceOnlyPass) {
+      case mfPassIDKind::kMfPassID_UNKNOWN:
+        os <<
+          "waeHandler::waeTrace: " <<
+          "fEarlyTraceOnlyPass = " << earlyTraceOnlyPass <<
+          std::endl;
+        break;
 
-//     case mfPassIDKind::kMfPassID_OptionsAndArgumentsHandling:
-//       break;
-//
-//     case mfPassIDKind::kMfPassID_1:
-//       break;
-//
-//     case mfPassIDKind::kMfPassID_2:
-//       break;
-//     case mfPassIDKind::kMfPassID_2a:
-//       break;
-//     case mfPassIDKind::kMfPassID_2b:
-//       break;
-//
-//     case mfPassIDKind::kMfPassID_3:
-//       break;
-//     case mfPassIDKind::kMfPassID_3a:
-//       break;
-//     case mfPassIDKind::kMfPassID_3b:
-//       break;
-//
-//     case mfPassIDKind::kMfPassID_4:
-//       break;
-//     case mfPassIDKind::kMfPassID_4a:
-//       break;
-//     case mfPassIDKind::kMfPassID_4b:
-//       break;
-//
-//     case mfPassIDKind::kMfPassID_5:
-//       break;
+      case mfPassIDKind::kMfPassID_ALL:
+        doTraceCurrentPass = true;
+        break;
 
-    default:
-      doTrace =
-        earlyTraceOnlyPass == globalCurrentPassIDKind;
-  } // switch
+  //     case mfPassIDKind::kMfPassID_OptionsAndArgumentsHandling:
+  //       break;
+  //
+  //     case mfPassIDKind::kMfPassID_1:
+  //       break;
+  //
+  //     case mfPassIDKind::kMfPassID_2:
+  //       break;
+  //     case mfPassIDKind::kMfPassID_2a:
+  //       break;
+  //     case mfPassIDKind::kMfPassID_2b:
+  //       break;
+  //
+  //     case mfPassIDKind::kMfPassID_3:
+  //       break;
+  //     case mfPassIDKind::kMfPassID_3a:
+  //       break;
+  //     case mfPassIDKind::kMfPassID_3b:
+  //       break;
+  //
+  //     case mfPassIDKind::kMfPassID_4:
+  //       break;
+  //     case mfPassIDKind::kMfPassID_4a:
+  //       break;
+  //     case mfPassIDKind::kMfPassID_4b:
+  //       break;
+  //
+  //     case mfPassIDKind::kMfPassID_5:
+  //       break;
+
+      default:
+        doTraceCurrentPass =
+          earlyTraceOnlyPass == globalCurrentPassIDKind;
+    } // switch
+  }
+
+  Bool doTraceCurrentMeasure;
+
+  {
+    S_oahStringAtom
+      traceOnlyMeasurerNumbeOahAtom =
+         gTraceOahGroup->getTraceOnlyMeasurerNumbeOahAtom ();
+
+    if (traceOnlyMeasurerNumbeOahAtom->getSelected ()) {
+      doTraceCurrentMeasure =
+        gServiceRunData->getCurrentMeasureNumber ()
+          ==
+        traceOnlyMeasurerNumbeOahAtom->getStringVariable ();
+    }
+    else {
+      doTraceCurrentMeasure = true;
+    }
+  }
+
+
 
   // do trace if relevant
-  if (doTrace) {
+  if (doTraceCurrentPass && doTraceCurrentMeasure) {
     ++gIndenter;
 
 //     '[' << context << "] " <<

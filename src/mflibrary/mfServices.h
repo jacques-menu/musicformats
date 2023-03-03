@@ -208,6 +208,13 @@ class EXP mfServiceRunData : public smartable
     std::string           getRunDateYYYYMMDD () const
                               { return fRunDateYYYYMMDD; }
 
+    // measures
+    const std::string     getCurrentMeasureNumber () const
+                              { return fCurrentMeasureNumber; }
+
+    void                  setCurrentMeasureNumber (const std::string measureNumber)
+                              { fCurrentMeasureNumber = measureNumber; }
+
   public:
 
     // public services
@@ -246,6 +253,9 @@ class EXP mfServiceRunData : public smartable
     // run date
     std::string           fRunDateFull;
     std::string           fRunDateYYYYMMDD;
+
+    // measures
+    std::string           fCurrentMeasureNumber;
 
   private:
 

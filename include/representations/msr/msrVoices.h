@@ -570,6 +570,11 @@ class EXP msrVoice : public msrElement
                             const S_msrHarmony&  harmony,
                             const msrWholeNotes& measurePositionToAppendAt);
 
+    void                  appendHarmoniesListToVoice (
+                            int                            inputLineNumber,
+                            const std::list<S_msrHarmony>& harmoniesList,
+                            const msrWholeNotes&           measurePositionToAppendAt);
+
     void                  appendHarmonyToVoiceClone (
                             const S_msrHarmony& harmony);
 
@@ -579,6 +584,11 @@ class EXP msrVoice : public msrElement
                             int                     inputLineNumber,
                             const S_msrFiguredBass& figuredBass,
                             const msrWholeNotes&    measurePositionToAppendAt);
+
+    void                  appendFiguredBassesListToVoice (
+                            int                                inputLineNumber,
+                            const std::list<S_msrFiguredBass>& figuredBasssesList,
+                            const msrWholeNotes&               measurePositionToAppendAt);
 
     void                  appendFiguredBassToVoiceClone (
                             const S_msrFiguredBass& figuredBass);
@@ -936,20 +946,6 @@ class EXP msrVoice : public msrElement
     void                  moveVoiceLastSegmentToInitialVoiceElementsIfRelevant (
                             int                inputLineNumber,
                             const std::string& context);
-
-    // harmonies
-
-    void                  appendHarmonyToHarmoniesVoice (
-                            int                  inputLineNumber,
-                            const S_msrHarmony&  harmony,
-                            const msrWholeNotes& measurePositionToAppendAt);
-
-    // figured bass elements
-
-    void                  appendFiguredBassToFiguredBassVoice (
-                            int                     inputLineNumber,
-                            const S_msrFiguredBass& figuredBass,
-                            const msrWholeNotes&    measurePositionToAppendAt);
 
     // repeats
 

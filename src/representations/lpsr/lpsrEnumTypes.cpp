@@ -191,11 +191,11 @@ std::string wholeNotesAsLilypondString (
 
     std::string message = s1.str ();
 
-    lpsrError (
-//    lpsrWarning ( // JMI v0.9.67
+//     lpsrError (
+   lpsrWarning ( // JMI v0.9.67
       gServiceRunData->getInputSourceName (),
       inputLineNumber,
-     __FILE__, __LINE__,
+//      __FILE__, __LINE__,
       message);
 
     std::stringstream s2;

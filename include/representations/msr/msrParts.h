@@ -453,6 +453,11 @@ class EXP msrPart : public msrPartGroupElement
                             const S_msrHarmony&  harmony,
                             const msrWholeNotes& measurePositionToAppendAt);
 
+    void                  appendHarmoniesListToPart (
+                            int                            inputLineNumber,
+                            const std::list<S_msrHarmony>& harmoniesList,
+                            const msrWholeNotes&           measurePositionToAppendAt);
+
     // figured bass
 
     S_msrVoice            createPartFiguredBassVoice (
@@ -464,7 +469,12 @@ class EXP msrPart : public msrPartGroupElement
                             const S_msrFiguredBass& figuredBass,
                             const msrWholeNotes&    measurePositionToAppendAt);
 
-//     void                  appendFiguredBassToPart (
+    void                  appendFiguredBassesListToPart (
+                            int                                inputLineNumber,
+                            const std::list<S_msrFiguredBass>& figuredBasssesList,
+                            const msrWholeNotes&               measurePositionToAppendAt);
+
+//     void                  appendFiguredBassToPart ( // JMI v0.9.67 HARMFUL
 //                             const S_msrVoice&       figuredBassSupplierVoice,
 //                             const S_msrFiguredBass& figuredBass);
 

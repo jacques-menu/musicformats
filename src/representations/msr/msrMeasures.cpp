@@ -2944,6 +2944,46 @@ void msrMeasure::appendTupletToMeasure (const S_msrTuplet& tuplet)
   --gIndenter;
 }
 
+void msrMeasure::appendHarmonyToMeasureWithoutPadUp (
+  int                  inputLineNumber,
+  const S_msrHarmony&  harmony)
+{
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceHarmonies ()) {
+    std::stringstream ss;
+
+    ss <<
+      "Appending harmony " << harmony->asString () <<
+      " without padUp to measure " <<
+      this->asShortString () <<
+      " in segment '" <<
+      fMeasureUpLinkToSegment->getSegmentAbsoluteNumber () <<
+      "' in voice \"" <<
+      fMeasureUpLinkToSegment->
+        getSegmentUpLinkToVoice ()->
+          getVoiceName () <<
+      "\", measureWholeNotes: " <<
+      fMeasureWholeNotes <<
+      ", line " << inputLineNumber <<
+      std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  ++gIndenter;
+
+  // append harmony to the measure elements list
+  appendMeasureElementToMeasure (harmony);
+
+  // this measure contains music
+  fMeasureContainsMusic = true;
+
+  --gIndenter;
+}
+
 void msrMeasure::appendHarmonyToMeasure (
   int                  inputLineNumber,
   const S_msrHarmony&  harmony,
@@ -2965,8 +3005,7 @@ void msrMeasure::appendHarmonyToMeasure (
           getVoiceName () <<
       "\", measureWholeNotes: " <<
       fMeasureWholeNotes <<
-      ", measurePositionToAppendAt: " <<
-      measurePositionToAppendAt <<
+      ", measurePositionToAppendAt: " << measurePositionToAppendAt <<
       ", line " << inputLineNumber <<
       std::endl;
 
@@ -2984,10 +3023,61 @@ void msrMeasure::appendHarmonyToMeasure (
     measurePositionToAppendAt);
 
   // append harmony to the measure elements list
-  appendMeasureElementToMeasure (harmony);
+  appendHarmonyToMeasureWithoutPadUp (
+    inputLineNumber,
+    harmony);
 
   // this measure contains music
   fMeasureContainsMusic = true;
+
+  --gIndenter;
+}
+
+void msrMeasure::appendHarmoniesListToMeasure (
+  int                            inputLineNumber,
+  const std::list<S_msrHarmony>& harmoniesList,
+  const msrWholeNotes&           measurePositionToAppendAt)
+{
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceHarmonies ()) {
+    std::stringstream ss;
+
+    ss <<
+      "Appending harmonies list " << // JMI v0.9.67 harmoniesList HARMFUL <<
+      " to measure " <<
+      this->asShortString () <<
+      " in segment '" <<
+      fMeasureUpLinkToSegment->getSegmentAbsoluteNumber () <<
+      "' in voice \"" <<
+      fMeasureUpLinkToSegment->
+        getSegmentUpLinkToVoice ()->
+          getVoiceName () <<
+      "\", measureWholeNotes: " <<
+      fMeasureWholeNotes <<
+      ", measurePositionToAppendAt: " << measurePositionToAppendAt <<
+      ", line " << inputLineNumber <<
+      std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  ++gIndenter;
+
+  // pad up to measurePositionToAppendAt only once
+  padUpToMeasurePosition (
+    inputLineNumber,
+    measurePositionToAppendAt);
+
+  // append the harmonies to the measure elements list without padUp
+  for (S_msrHarmony harmony : harmoniesList) {
+    appendHarmonyToMeasure (
+      inputLineNumber,
+      harmony,
+      inputLineNumber);
+  } // for
 
   --gIndenter;
 }
@@ -3034,6 +3124,44 @@ void msrMeasure::appendHarmonyToMeasureClone (
   --gIndenter;
 }
 
+void msrMeasure::appendFiguredBassToMeasureWithoutPadUp (
+  int                     inputLineNumber,
+  const S_msrFiguredBass& figuredBass)
+{
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceFiguredBasses ()) {
+    std::stringstream ss;
+
+    ss <<
+      "Appending figured bass " << figuredBass->asString () <<
+      " to measure without padUp" <<
+      this->asShortString () <<
+      " in voice \"" <<
+      fMeasureUpLinkToSegment->
+        getSegmentUpLinkToVoice ()->
+          getVoiceName () <<
+      "\", measureWholeNotes: " <<
+      fMeasureWholeNotes <<
+      ", line " << inputLineNumber <<
+      std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  ++gIndenter;
+
+  // append harmony to the measure elements list
+  appendMeasureElementToMeasure (figuredBass);
+
+  // this measure contains music
+  fMeasureContainsMusic = true;
+
+  --gIndenter;
+}
+
 void msrMeasure::appendFiguredBassToMeasure (
   int                     inputLineNumber,
   const S_msrFiguredBass& figuredBass,
@@ -3053,8 +3181,7 @@ void msrMeasure::appendFiguredBassToMeasure (
           getVoiceName () <<
       "\", measureWholeNotes: " <<
       fMeasureWholeNotes <<
-      ", measurePositionToAppendAt: " <<
-      measurePositionToAppendAt <<
+      ", measurePositionToAppendAt: " << measurePositionToAppendAt <<
       ", line " << inputLineNumber <<
       std::endl;
 
@@ -3072,10 +3199,57 @@ void msrMeasure::appendFiguredBassToMeasure (
     measurePositionToAppendAt);
 
   // append harmony to the measure elements list
-  appendMeasureElementToMeasure (figuredBass);
+  appendFiguredBassToMeasureWithoutPadUp (
+    inputLineNumber,
+    figuredBass);
 
-  // this measure contains music
-  fMeasureContainsMusic = true;
+  --gIndenter;
+}
+
+void msrMeasure::appendFiguredBassesListToMeasure (
+  int                                inputLineNumber,
+  const std::list<S_msrFiguredBass>& figuredBasssesList,
+  const msrWholeNotes&               measurePositionToAppendAt)
+{
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceFiguredBasses ()) {
+    std::stringstream ss;
+
+    ss <<
+      "Appending figured basses list " << // JMI v0.9.67 figuredBasssesList HARMFUL <<
+      " to measure " <<
+      this->asShortString () <<
+      " in segment '" <<
+      fMeasureUpLinkToSegment->getSegmentAbsoluteNumber () <<
+      "' in voice \"" <<
+      fMeasureUpLinkToSegment->
+        getSegmentUpLinkToVoice ()->
+          getVoiceName () <<
+      "\", measureWholeNotes: " <<
+      fMeasureWholeNotes <<
+      ", measurePositionToAppendAt: " << measurePositionToAppendAt <<
+      ", line " << inputLineNumber <<
+      std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  ++gIndenter;
+
+  // pad up to measurePositionToAppendAt only once
+  padUpToMeasurePosition (
+    inputLineNumber,
+    measurePositionToAppendAt);
+
+  // append the figured basses to the measure elements list without padUp
+  for (S_msrFiguredBass figuredBass : figuredBasssesList) {
+    appendFiguredBassToMeasureWithoutPadUp (
+      inputLineNumber,
+      figuredBass);
+  } // for
 
   --gIndenter;
 }
@@ -3321,7 +3495,13 @@ void msrMeasure::padUpToMeasurePosition (
         getSegmentUpLinkToVoice ();
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMeasurePositions ()) {
+  if (
+    gTraceOahGroup->getTraceMeasurePositions ()
+      ||
+    gTraceOahGroup->getTraceHarmonies ()
+      ||
+    gTraceOahGroup->getTraceFiguredBasses ()
+  ) {
     std::stringstream ss;
 
     ss <<
@@ -4291,9 +4471,23 @@ void msrMeasure::handleIncompleteMeasure (
       scoreNumberOfMeasures =
         fetchMeasureUpLinkToScore ()->getScoreNumberOfMeasures ();
 
-    gLog << "=====> scoreNumberOfMeasures: " << scoreNumberOfMeasures << std::endl;
+#ifdef MF_TRACE_IS_ENABLED
+    if (gTraceOahGroup->getTraceMeasures ()) {
+      std::stringstream ss;
 
-    if (scoreNumberOfMeasures = 1) {
+    gLog <<
+      "=====> handleIncompleteMeasure() -- scoreNumberOfMeasures: " <<
+      scoreNumberOfMeasures <<
+      std::endl;
+
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
+    }
+#endif // MF_TRACE_IS_ENABLED
+
+
+    if (scoreNumberOfMeasures == 1) {
       setMeasureKind (msrMeasureKind::kMeasureKindIncompleteLastMeasure);
     }
     else {
@@ -5111,10 +5305,11 @@ void msrMeasure::handleTheLastHarmonyInAHarmoniesMeasure (
       " overflows the current measure " <<
       asString ();
 
-    msrInternalError (
+    msrInternalWarning (
+//     msrInternalError (
       gServiceRunData->getInputSourceName (),
       inputLineNumber,
-      __FILE__, __LINE__,
+//       __FILE__, __LINE__,
       ss.str ());
 
 //     // compute currentHarmony's future sounding whole notes
@@ -6015,107 +6210,109 @@ void msrMeasure::finalizeTheFiguredBassesInAFiguredBassMeasure (
 
       if (++i == iEnd) break;
 
-      if (
-        // figured bass?
-        // don't assign currentFiguredBass here yet,
-        // this would set it to nullptr if there's anything else
-        // after the last figured bass in the voice
-        S_msrFiguredBass
-          figuredBass =
-            dynamic_cast<msrFiguredBass*>(&(*measureElement))
-      ) {
-        currentFiguredBass = figuredBass;
+      if (false) {
+        if (
+          // figured bass?
+          // don't assign currentFiguredBass here yet,
+          // this would set it to nullptr if there's anything else
+          // after the last figured bass in the voice
+          S_msrFiguredBass
+            figuredBass =
+              dynamic_cast<msrFiguredBass*>(&(*measureElement))
+        ) {
+          currentFiguredBass = figuredBass;
 
-        // handle the currentFiguredBass
-#ifdef MF_TRACE_IS_ENABLED
-        if (gTraceOahGroup->getTraceHarmonies ()) {
-          std::stringstream ss;
+          // handle the currentFiguredBass
+  #ifdef MF_TRACE_IS_ENABLED
+          if (gTraceOahGroup->getTraceHarmonies ()) {
+            std::stringstream ss;
 
-          ss <<
-            "finalizeTheFiguredBassesInAFiguredBassMeasure() 3" <<
-            ", currentFiguredBass: ";
-            ++gIndenter;
             ss <<
-              currentFiguredBass->asString () <<
+              "finalizeTheFiguredBassesInAFiguredBassMeasure() 3" <<
+              ", currentFiguredBass: ";
+              ++gIndenter;
+              ss <<
+                currentFiguredBass->asString () <<
+                std::endl;
+              --gIndenter;
+
+            gWaeHandler->waeTrace (
+              __FILE__, __LINE__,
+              ss.str ());
+          }
+  #endif // MF_TRACE_IS_ENABLED
+
+          // its position in the measure should take it's offset into account
+          msrWholeNotes
+            currentFiguredBassMeasurePosition =
+              currentFiguredBass->
+                getMeasurePosition ();
+
+          // get the currentFiguredBass's note uplink
+          S_msrNote
+            currentFiguredBassUpLinkToNote  =
+              currentFiguredBass->
+                getFiguredBassUpLinkToNote ();
+
+  #ifdef MF_TRACE_IS_ENABLED
+          // get the currentFiguredBass's note uplink position in the measure
+          msrWholeNotes
+            currentFiguredBassUpLinkToNoteMeasurePosition =
+              currentFiguredBassUpLinkToNote->
+                getMeasurePosition ();
+
+          if (gTraceOahGroup->getTraceHarmonies () ) {
+            std::stringstream ss;
+
+            ss <<
+              "finalizeTheFiguredBassesInAFiguredBassMeasure() 4" <<
+              ", previousFiguredBass: ";
+
+            if (previousFiguredBass) {
+              ss <<
+                previousFiguredBass->asString ();
+            }
+            else {
+              ss << "[NONE]";
+            }
+
+            ss <<
+              ", currentFiguredBassMeasurePosition: " <<
+              currentFiguredBassMeasurePosition <<
+              ", currentFiguredBassUpLinkToNoteMeasurePosition: " <<
+              currentFiguredBassUpLinkToNoteMeasurePosition <<
               std::endl;
-            --gIndenter;
 
-          gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
-            ss.str ());
-        }
-#endif // MF_TRACE_IS_ENABLED
-
-        // its position in the measure should take it's offset into account
-        msrWholeNotes
-          currentFiguredBassMeasurePosition =
-            currentFiguredBass->
-              getMeasurePosition ();
-
-        // get the currentFiguredBass's note uplink
-        S_msrNote
-          currentFiguredBassUpLinkToNote  =
-            currentFiguredBass->
-              getFiguredBassUpLinkToNote ();
-
-#ifdef MF_TRACE_IS_ENABLED
-        // get the currentFiguredBass's note uplink position in the measure
-        msrWholeNotes
-          currentFiguredBassUpLinkToNoteMeasurePosition =
-            currentFiguredBassUpLinkToNote->
-              getMeasurePosition ();
-
-        if (gTraceOahGroup->getTraceHarmonies () ) {
-          std::stringstream ss;
-
-          ss <<
-            "finalizeTheFiguredBassesInAFiguredBassMeasure() 4" <<
-            ", previousFiguredBass: ";
-
-          if (previousFiguredBass) {
-            ss <<
-              previousFiguredBass->asString ();
+            gWaeHandler->waeTrace (
+              __FILE__, __LINE__,
+              ss.str ());
           }
+  #endif // MF_TRACE_IS_ENABLED
+
+          if (! previousFiguredBass) {
+            handleFirstFiguredBassInFiguredBassMeasure (
+              inputLineNumber,
+              voice,
+              i,
+              previousFiguredBass,
+              currentFiguredBass,
+              currentFiguredBassMeasurePosition);
+          }
+
           else {
-            ss << "[NONE]";
+            handleSubsequentFiguredBassInFiguredBassMeasure (
+              inputLineNumber,
+              voice,
+              i,
+              previousFiguredBass,
+              currentFiguredBass,
+              currentFiguredBassMeasurePosition);
           }
 
-          ss <<
-            ", currentFiguredBassMeasurePosition: " <<
-            currentFiguredBassMeasurePosition <<
-            ", currentFiguredBassUpLinkToNoteMeasurePosition: " <<
-            currentFiguredBassUpLinkToNoteMeasurePosition <<
-            std::endl;
-
-          gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
-            ss.str ());
+          previousFiguredBass = currentFiguredBass;
         }
-#endif // MF_TRACE_IS_ENABLED
-
-        if (! previousFiguredBass) {
-          handleFirstFiguredBassInFiguredBassMeasure (
-            inputLineNumber,
-            voice,
-            i,
-            previousFiguredBass,
-            currentFiguredBass,
-            currentFiguredBassMeasurePosition);
-        }
-
-        else {
-          handleSubsequentFiguredBassInFiguredBassMeasure (
-            inputLineNumber,
-            voice,
-            i,
-            previousFiguredBass,
-            currentFiguredBass,
-            currentFiguredBassMeasurePosition);
-        }
-
-        previousFiguredBass = currentFiguredBass;
-      }
-    } // while
+      } // while
+    }
 
     if (currentFiguredBass) {
       handleTheLastFiguredBassInFiguredBassMeasure (

@@ -173,7 +173,7 @@ class EXP msrFiguredBass : public msrMeasureElement
                             const S_msrMeasure&    upLinkToMeasure,
                             const msrWholeNotes&   figuredBassSoundingWholeNotes,
                             const msrWholeNotes&   figuredBassDisplayWholeNotes,
-                            const msrWholeNotes&   figuredBassWholeNotesDuration,
+//                             const msrWholeNotes&   figuredBassWholeNotesDuration,
                             msrFiguredBassParenthesesKind
                                                    figuredBassParenthesesKind,
                             const msrTupletFactor& figuredBassTupletFactor);
@@ -182,7 +182,7 @@ class EXP msrFiguredBass : public msrMeasureElement
                             int                    inputLineNumber,
                             const msrWholeNotes&   figuredBassSoundingWholeNotes,
                             const msrWholeNotes&   figuredBassDisplayWholeNotes,
-                            const msrWholeNotes&   figuredBassWholeNotesDuration,
+//                             const msrWholeNotes&   figuredBassWholeNotesDuration,
                             msrFiguredBassParenthesesKind
                                                    figuredBassParenthesesKind,
                             const msrTupletFactor& figuredBassTupletFactor);
@@ -202,7 +202,7 @@ class EXP msrFiguredBass : public msrMeasureElement
                             const S_msrMeasure&    upLinkToMeasure,
                             const msrWholeNotes&   figuredBassSoundingWholeNotes,
                             const msrWholeNotes&   figuredBassDisplayWholeNotes,
-                            const msrWholeNotes&   figuredBassWholeNotesDuration,
+//                             const msrWholeNotes&   figuredBassWholeNotesDuration,
                             msrFiguredBassParenthesesKind
                                                    figuredBassParenthesesKind,
                             const msrTupletFactor& figuredBassTupletFactor);
@@ -262,9 +262,9 @@ class EXP msrFiguredBass : public msrMeasureElement
     msrWholeNotes         getFiguredBassDisplayWholeNotes () const
                               { return fFiguredBassDisplayWholeNotes; }
 
-    // duration
-    msrWholeNotes         getFiguredBassWholeNotesDuration () const
-                              { return fFiguredBassWholeNotesDuration; }
+//     // duration
+//     msrWholeNotes         getFiguredBassWholeNotesDuration () const
+//                               { return fFiguredBassWholeNotesDuration; }
 
     // parentheses
     msrFiguredBassParenthesesKind
@@ -289,9 +289,9 @@ class EXP msrFiguredBass : public msrMeasureElement
     // public services
     // ------------------------------------------------------
 
-    static bool           compareFiguredBassesByIncreasingDuration (
-                            const SMARTP<msrFiguredBass>& first,
-                            const SMARTP<msrFiguredBass>& second);
+//     static bool           compareFiguredBassesByIncreasingDuration (
+//                             const SMARTP<msrFiguredBass>& first,
+//                             const SMARTP<msrFiguredBass>& second);
 
     void                  appendFigureToFiguredBass (
                             const S_msrBassFigure& bassFigure);
@@ -330,8 +330,8 @@ class EXP msrFiguredBass : public msrMeasureElement
     // whole notes
     msrWholeNotes         fFiguredBassDisplayWholeNotes;
 
-    // duration
-    msrWholeNotes         fFiguredBassWholeNotesDuration;
+//     // duration
+//     msrWholeNotes         fFiguredBassWholeNotesDuration;
 
     msrFiguredBassParenthesesKind
                           fFiguredBassParenthesesKind;

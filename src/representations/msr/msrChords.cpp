@@ -78,11 +78,11 @@ std::ostream& operator << (std::ostream& os, const msrChordInKind& elt)
 
 //______________________________________________________________________________
 S_msrChord msrChord::create (
-  int                 inputLineNumber,
-  const S_msrMeasure& upLinkToMeasure,
-  const msrWholeNotes&     chordSoundingWholeNotes,
-  const msrWholeNotes&     chordDisplayWholeNotes,
-  msrNotesDurationKind     chordGraphicNotesDurationKind)
+  int                  inputLineNumber,
+  const S_msrMeasure&  upLinkToMeasure,
+  const msrWholeNotes& chordSoundingWholeNotes,
+  const msrWholeNotes& chordDisplayWholeNotes,
+  msrNotesDurationKind chordGraphicNotesDurationKind)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceChords ()) {
@@ -113,7 +113,7 @@ S_msrChord msrChord::create (
 }
 
 S_msrChord msrChord::create (
-  int             inputLineNumber,
+  int                  inputLineNumber,
   const msrWholeNotes& chordSoundingWholeNotes,
   const msrWholeNotes& chordDisplayWholeNotes,
   msrNotesDurationKind chordGraphicNotesDurationKind)
@@ -145,11 +145,11 @@ S_msrChord msrChord::create (
 }
 
 msrChord::msrChord (
-  int                 inputLineNumber,
-  const S_msrMeasure& upLinkToMeasure,
-  const msrWholeNotes&     chordSoundingWholeNotes,
-  const msrWholeNotes&     chordDisplayWholeNotes,
-  msrNotesDurationKind     chordGraphicNotesDurationKind)
+  int                  inputLineNumber,
+  const S_msrMeasure&  upLinkToMeasure,
+  const msrWholeNotes& chordSoundingWholeNotes,
+  const msrWholeNotes& chordDisplayWholeNotes,
+  msrNotesDurationKind chordGraphicNotesDurationKind)
     : msrTupletElement (
         inputLineNumber)
 {
@@ -544,8 +544,8 @@ void msrChord::setMeasurePosition (
 }
 
 void msrChord::setChordMembersMeasurePosition (
-  const S_msrMeasure& measure,
-  const msrWholeNotes&     measurePosition)
+  const S_msrMeasure&  measure,
+  const msrWholeNotes& measurePosition)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasurePositions ()) {

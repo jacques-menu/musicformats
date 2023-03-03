@@ -2109,6 +2109,7 @@ void msrPart::appendHarmonyToPart (
       harmony->asString () <<
       "\" to part " <<
       getPartCombinedName () <<
+      ", measurePositionToAppendAt: " << measurePositionToAppendAt <<
       ", line " << inputLineNumber <<
       std::endl;
 
@@ -2122,6 +2123,69 @@ void msrPart::appendHarmonyToPart (
     appendHarmonyToVoice (
       inputLineNumber,
       harmony,
+      measurePositionToAppendAt);
+}
+
+void msrPart::appendHarmoniesListToPart (
+  int                            inputLineNumber,
+  const std::list<S_msrHarmony>& harmoniesList,
+  const msrWholeNotes&           measurePositionToAppendAt)
+{
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceHarmonies ()) {
+    std::stringstream ss;
+
+    ss <<
+      "Appending figured basses list \"" <<
+//       figuredBasssesList->asString () << // JMI v0.9.67 HARMFUL
+      "\" to part " <<
+      getPartCombinedName () <<
+      ", measurePositionToAppendAt: " << measurePositionToAppendAt <<
+      ", line " << inputLineNumber <<
+      std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  fPartHarmoniesVoice->
+    appendHarmoniesListToVoice (
+      inputLineNumber,
+      harmoniesList,
+      measurePositionToAppendAt);
+}
+
+void msrPart::appendFiguredBassesListToPart (
+  int                                inputLineNumber,
+  const std::list<S_msrFiguredBass>& figuredBasssesList,
+  const msrWholeNotes&               measurePositionToAppendAt)
+{
+
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceHarmonies ()) {
+    std::stringstream ss;
+
+    ss <<
+      "Appending figured basses list \"" <<
+//       figuredBasssesList->asString () << // JMI v0.9.67 HARMFUL
+      "\" to part " <<
+      getPartCombinedName () <<
+      ", measurePositionToAppendAt: " << measurePositionToAppendAt <<
+      ", line " << inputLineNumber <<
+      std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  fPartHarmoniesVoice->
+    appendFiguredBassesListToVoice (
+      inputLineNumber,
+      figuredBasssesList,
       measurePositionToAppendAt);
 }
 
@@ -2229,6 +2293,7 @@ void msrPart::appendFiguredBassToPart (
       figuredBass->asString () <<
       "\" to part " <<
       getPartCombinedName () <<
+      ", measurePositionToAppendAt: " << measurePositionToAppendAt <<
       ", line " << figuredBass->getInputLineNumber () <<
       std::endl;
 
@@ -2278,8 +2343,7 @@ void msrPart::appendFiguredBassToPart (
 //       fPartFiguredBassVoice->
 //         appendFiguredBassToVoice (
 //           inputLineNumber,
-//           figuredBass,
-//           measurePositionToAppendAt);
+//           figuredBass);
 //       break;
 //
 //     case msrVoiceKind::kVoiceKindDynamics:

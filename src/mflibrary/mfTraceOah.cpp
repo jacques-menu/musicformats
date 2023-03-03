@@ -1795,6 +1795,20 @@ R"(Measures details)",
     addBooleanAtom (
       traceMeasuresDetailsBooleanAtom);
 
+  // measure numbers
+
+  fTraceOnlyMeasurerNumbeOahAtom =
+    oahStringAtom::create (
+      "trace-only-measure-number", "tomn",
+R"(Restrict the production of trace information to measure NUMBER)",
+      "NUMBER",
+      "fTraceOnlyMeasureNumber",
+      fTraceOnlyMeasureNumber);
+
+  subGroup->
+    appendAtomToSubGroup (
+      fTraceOnlyMeasurerNumbeOahAtom);
+
   // measure positions
 
   S_oahTwoBooleansAtomWithTracePasses

@@ -1895,7 +1895,7 @@ class EXP oahStringAtom : public oahAtomStoringAValue
     // protected fields
     // ------------------------------------------------------
 
-    std::string&               fStringVariable;
+    std::string&          fStringVariable;
 };
 typedef SMARTP<oahStringAtom> S_oahStringAtom;
 EXP std::ostream& operator << (std::ostream& os, const S_oahStringAtom& elt);

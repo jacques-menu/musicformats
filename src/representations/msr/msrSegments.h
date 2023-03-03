@@ -249,6 +249,11 @@ class EXP msrSegment : public msrVoiceElement
                             const S_msrHarmony&  harmony,
                             const msrWholeNotes& measurePositionToAppendAt);
 
+    void                  appendHarmoniesListToSegment (
+                            int                            inputLineNumber,
+                            const std::list<S_msrHarmony>& harmoniesList,
+                            const msrWholeNotes&           measurePositionToAppendAt);
+
     void                  appendHarmonyToSegmentClone (
                             const S_msrHarmony& harmony);
 
@@ -266,6 +271,11 @@ class EXP msrSegment : public msrVoiceElement
                             int                     inputLineNumber,
                             const S_msrFiguredBass& figuredBass,
                             const msrWholeNotes&    measurePositionToAppendAt);
+
+    void                  appendFiguredBassesListToSegment (
+                            int                                inputLineNumber,
+                            const std::list<S_msrFiguredBass>& figuredBasssesList,
+                            const msrWholeNotes&               measurePositionToAppendAt);
 
     void                  appendFiguredBassToSegmentClone (
                             const S_msrFiguredBass& figuredBass);

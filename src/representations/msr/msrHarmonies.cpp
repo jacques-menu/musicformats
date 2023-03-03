@@ -4907,9 +4907,39 @@ std::string msrHarmony::asString () const
     msrQuarterTonesPitchKindAsStringInLanguage (
       fHarmonyRootQuarterTonesPitchKind,
       gMsrOahGroup->
-        getMsrQuarterTonesPitchesLanguageKind ()) <<
+        getMsrQuarterTonesPitchesLanguageKind ());
+
+  ss <<
     ", fHarmonyKind: " <<
     fHarmonyKind;
+
+  ss <<
+    ", fHarmonyKindText: \"" <<
+    fHarmonyKindText << "\"";
+
+  ss <<
+    ", fHarmonyFunctionText: \"" <<
+    fHarmonyFunctionText << "\"";
+
+  ss <<
+    ", fHarmonyWholeNotesOffset: " <<
+    fHarmonyWholeNotesOffset;
+
+  ss <<
+  // print the harmony bass voice position
+//   os <<
+//     std::setw (fieldWidth) <<
+//     "fVoicePosition" << ": " <<
+//     fVoicePosition <<
+//     std::endl;
+
+    ", fSoundingWholeNotes: " <<
+    fSoundingWholeNotes <<
+    ", fHarmonyDisplayWholeNotes: " <<
+    fHarmonyDisplayWholeNotes <<
+
+    ", fMeasurePosition: " <<
+    fMeasurePosition;
 
   // print the harmony uplink to note
   ss <<
@@ -4943,30 +4973,7 @@ std::string msrHarmony::asString () const
 //     }
 
   ss <<
-  // print the harmony bass voice position
-//   os <<
-//     std::setw (fieldWidth) <<
-//     "fVoicePosition" << ": " <<
-//     fVoicePosition <<
-//     std::endl;
-
-    ", fSoundingWholeNotes: " <<
-    fSoundingWholeNotes <<
-    ", fHarmonyDisplayWholeNotes: " <<
-    fHarmonyDisplayWholeNotes <<
-
-    ", fHarmonyWholeNotesOffset: " <<
-    fHarmonyWholeNotesOffset <<
-    ", fMeasurePosition: " <<
-    fMeasurePosition <<
-
-    ", fHarmonyKindText: \"" <<
-    fHarmonyKindText << "\"" <<
-
-    ", fHarmonyFunctionText: \"" <<
-    fHarmonyFunctionText << "\"";
-
-  ss << ", fHarmonyInversion: ";
+    ", fHarmonyInversion: ";
   if (fHarmonyInversion == K_HARMONY_INVERSION_NONE) {
     ss << "[NONE]";
   }
@@ -5056,17 +5063,7 @@ std::string msrHarmony::asShortStringForMeasuresSlices () const
     ss << "[NONE]";
   }
 
-  ss <<
-    ", fHarmonyUpLinkToMeasure: ";
-    if (fHarmonyUpLinkToMeasure) {
-      ss <<
-        fHarmonyUpLinkToMeasure->asString ();
-    }
-    else {
-      ss << "[NONE]";
-    }
-
-//   ss <<
+//   ss << JMI v0.9.67
 //     ", fHarmonyUpLinkToVoice: ";
 //     if (fHarmonyUpLinkToVoice) {
 //       ss <<
@@ -5076,26 +5073,40 @@ std::string msrHarmony::asShortStringForMeasuresSlices () const
 //       ss << "[NONE]";
 //     }
 
-  ss <<
   // print the harmony bass voice position
-//   os <<
+//   ss <<
 //     std::setw (fieldWidth) <<
 //     "fVoicePosition" << ": " <<
 //     fVoicePosition <<
 //     std::endl;
 
+  ss <<
     ", fSoundingWholeNotes: " <<
     fSoundingWholeNotes <<
     ", fHarmonyDisplayWholeNotes: " <<
-    fHarmonyDisplayWholeNotes <<
+    fHarmonyDisplayWholeNotes;
 
+  ss <<
     ", fHarmonyWholeNotesOffset: " <<
-    fHarmonyWholeNotesOffset <<
-    ", fMeasurePosition: " <<
-    fMeasurePosition <<
+    fHarmonyWholeNotesOffset;
 
+  ss <<
+    ", fMeasurePosition: " <<
+    fMeasurePosition;
+
+  ss <<
     ", fHarmonyKindText: \"" <<
     fHarmonyKindText << "\"";
+
+  ss <<
+    ", fHarmonyUpLinkToMeasure: ";
+  if (fHarmonyUpLinkToMeasure) {
+    ss <<
+      fHarmonyUpLinkToMeasure->asString ();
+  }
+  else {
+    ss << "[NONE]";
+  }
 
   ss << ", fHarmonyInversion: ";
   if (fHarmonyInversion == K_HARMONY_INVERSION_NONE) {
@@ -5123,13 +5134,42 @@ void msrHarmony::print (std::ostream& os) const
 
   const int fieldWidth = 44;
 
-  // print the harmony measure position
-  os <<
+  os << std::left <<
     std::setw (fieldWidth) <<
-    "fMeasurePosition" << ": " <<
-    fMeasurePosition.asString () <<
-    std::endl <<
+    "fHarmonyRootQuarterTonesPitchKind" << ": " <<
+    msrQuarterTonesPitchKindAsStringInLanguage (
+      fHarmonyRootQuarterTonesPitchKind,
+      gMsrOahGroup->
+        getMsrQuarterTonesPitchesLanguageKind ()) <<
+    std::endl;
 
+  os << std::left <<
+    std::setw (fieldWidth) <<
+    "fHarmonyKind" << ": " <<
+    fHarmonyKind <<
+    std::endl;
+
+  os << std::left <<
+    std::setw (fieldWidth) <<
+    "fHarmonyKindText" << ": \"" <<
+    fHarmonyKindText <<
+    "\"" <<
+    std::endl;
+
+  os << std::left <<
+    std::setw (fieldWidth) <<
+    "fHarmonyFunctionText" << ": \"" <<
+    fHarmonyFunctionText <<
+    "\"" <<
+    std::endl;
+
+  os << std::left <<
+    std::setw (fieldWidth) <<
+    "fHarmonyWholeNotesOffset" << ": " <<
+    fHarmonyWholeNotesOffset.asString () <<
+    std::endl;
+
+  os << std::left <<
     std::setw (fieldWidth) <<
     "fSoundingWholeNotes" << ": " <<
     fSoundingWholeNotes.asString () <<
@@ -5139,33 +5179,14 @@ void msrHarmony::print (std::ostream& os) const
     fHarmonyDisplayWholeNotes.asString () <<
     std::endl;
 
+  // print the harmony measure position
+  os <<
+    std::setw (fieldWidth) <<
+    "fMeasurePosition" << ": " <<
+    fMeasurePosition.asString () <<
+    std::endl;
+
   os << std::left <<
-    std::setw (fieldWidth) <<
-    "fHarmonyRootQuarterTonesPitchKind" << ": " <<
-    msrQuarterTonesPitchKindAsStringInLanguage (
-      fHarmonyRootQuarterTonesPitchKind,
-      gMsrOahGroup->
-        getMsrQuarterTonesPitchesLanguageKind ()) <<
-    std::endl <<
-    std::setw (fieldWidth) <<
-    "fHarmonyKind" << ": " <<
-    fHarmonyKind <<
-    std::endl;
-
-  // print the harmony whole notes offset
-  os <<
-    std::setw (fieldWidth) <<
-    "fHarmonyWholeNotesOffset" << ": " <<
-    fHarmonyWholeNotesOffset.asString () <<
-    std::endl;
-
-  os <<
-    std::setw (fieldWidth) <<
-    "fHarmonyKindText" << ": \"" <<
-    fHarmonyKindText <<
-    "\"" <<
-    std::endl <<
-
     std::setw (fieldWidth) <<
     "fHarmonyBassQuarterTonesPitchKind" << ": " <<
     msrQuarterTonesPitchKindAsStringInLanguage (
