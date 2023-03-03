@@ -65,7 +65,7 @@ void msrSegmentElement::setSegmentElementSoundingWholeNotes (
     std::stringstream ss;
 
     ss <<
-      "Setting measure element sounding whole notes of " <<
+      "Setting segment element sounding whole notes of " <<
       asString () <<
       " to '" << wholeNotes <<
 //       "' in measure '" <<

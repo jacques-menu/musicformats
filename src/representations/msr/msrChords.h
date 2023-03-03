@@ -65,17 +65,17 @@ class EXP msrChord : public msrTupletElement
   public:
 
     static SMARTP<msrChord> create (
-                            int                 inputLineNumber,
-                            const S_msrMeasure& upLinkToMeasure,
-                            const msrWholeNotes&     chordSoundingWholeNotes,
-                            const msrWholeNotes&     chordDisplayWholeNotes,
-                            msrNotesDurationKind     chordGraphicNotesDurationKind);
+                            int                  inputLineNumber,
+                            const S_msrMeasure&  upLinkToMeasure,
+                            const msrWholeNotes& chordSoundingWholeNotes,
+                            const msrWholeNotes& chordDisplayWholeNotes,
+                            msrNotesDurationKind chordGraphicNotesDurationKind);
 
     static SMARTP<msrChord> create (
-                            int                 inputLineNumber,
-                            const msrWholeNotes&     chordSoundingWholeNotes,
-                            const msrWholeNotes&     chordDisplayWholeNotes,
-                            msrNotesDurationKind     chordGraphicNotesDurationKind);
+                            int                  inputLineNumber,
+                            const msrWholeNotes& chordSoundingWholeNotes,
+                            const msrWholeNotes& chordDisplayWholeNotes,
+                            msrNotesDurationKind chordGraphicNotesDurationKind);
 
     // creation from MusicXML
     // ------------------------------------------------------
@@ -89,11 +89,11 @@ class EXP msrChord : public msrTupletElement
     // ------------------------------------------------------
 
                           msrChord (
-                            int                 inputLineNumber,
-                            const S_msrMeasure& upLinkToMeasure,
-                            const msrWholeNotes&     chordSoundingWholeNotes,
-                            const msrWholeNotes&     chordDisplayWholeNotes,
-                            msrNotesDurationKind     chordGraphicNotesDurationKind);
+                            int                  inputLineNumber,
+                            const S_msrMeasure&  upLinkToMeasure,
+                            const msrWholeNotes& chordSoundingWholeNotes,
+                            const msrWholeNotes& chordDisplayWholeNotes,
+                            msrNotesDurationKind chordGraphicNotesDurationKind);
 
     virtual               ~msrChord ();
 
@@ -356,13 +356,13 @@ class EXP msrChord : public msrTupletElement
     // measure positions
     // this override calls setChordMembersMeasurePosition()
     void                  setMeasurePosition (
-                            const S_msrMeasure& measure,
-                            const msrWholeNotes&     measurePosition,
-                            const std::string&  context) override;
+                            const S_msrMeasure&  measure,
+                            const msrWholeNotes& measurePosition,
+                            const std::string&   context) override;
 
     void                  setChordMembersMeasurePosition (
-                            const S_msrMeasure& measure,
-                            const msrWholeNotes&     measurePosition);
+                            const S_msrMeasure&  measure,
+                            const msrWholeNotes& measurePosition);
 
   public:
 

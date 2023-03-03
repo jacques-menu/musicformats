@@ -97,21 +97,21 @@ void msrMeasureElement::doSetSoundingWholeNotes (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-// #ifdef MF_SANITY_CHECKS_ARE_ENABLED
-//   // sanity check // NO JMI v0.9.67
-//   mfAssert (
-//     __FILE__, __LINE__,
-//     wholeNotes != K_WHOLE_NOTES_UNKNOWN,
-//     "wholeNotes == K_WHOLE_NOTES_UNKNOWN");
-//
-//   msrWholeNotes
-//     infinitelyDottesLonga (8, 1);
-//
-//   mfAssert (
-//     __FILE__, __LINE__,
-//     wholeNotes < infinitelyDottesLonga,
-//     "wholeNotes >= infinitelyDottesLonga");
-// #endif // MF_SANITY_CHECKS_ARE_ENABLED
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
+  // sanity check // NO JMI v0.9.67
+  mfAssert (
+    __FILE__, __LINE__,
+    wholeNotes != K_WHOLE_NOTES_UNKNOWN,
+    "wholeNotes == K_WHOLE_NOTES_UNKNOWN");
+
+  msrWholeNotes
+    infinitelyDottesLonga (8, 1);
+
+  mfAssert (
+    __FILE__, __LINE__,
+    wholeNotes < infinitelyDottesLonga,
+    "wholeNotes >= infinitelyDottesLonga");
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fSoundingWholeNotes = wholeNotes;
 }

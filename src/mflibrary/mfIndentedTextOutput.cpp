@@ -273,7 +273,7 @@ void mfOutputIndenter::printMultiLineStringInATable (
   while (getline (inputStream, line)) {
     ++ lineCounter;
     if (lineCounter > 1) {
-      // this is a multiline string's line after the first one,
+      // this is a multi-line string's line after the first one,
       // write spaces before it up to columnStart
       os << std::left <<
         mfReplicateChar (' ', columnStart);

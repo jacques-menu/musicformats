@@ -12,6 +12,8 @@
 #ifndef ___msrMeasures___
 #define ___msrMeasures___
 
+#include <list>
+
 #include "msrMeasuresEnumTypes.h"
 #include "msrMeasureElements.h"
 #include "msrMusicXMLPrintLayouts.h"
@@ -467,6 +469,15 @@ class EXP msrMeasure : public msrSegmentElement
                             const S_msrHarmony&  harmony,
                             const msrWholeNotes& measurePositionToAppendAt);
 
+    void                  appendHarmonyToMeasureWithoutPadUp (
+                            int                  inputLineNumber,
+                            const S_msrHarmony&  harmony);
+
+    void                  appendHarmoniesListToMeasure (
+                            int                            inputLineNumber,
+                            const std::list<S_msrHarmony>& harmoniesList,
+                            const msrWholeNotes&           measurePositionToAppendAt);
+
     void                  appendHarmonyToMeasureClone (
                             const S_msrHarmony& harmony);
 
@@ -484,6 +495,15 @@ class EXP msrMeasure : public msrSegmentElement
                             int                     inputLineNumber,
                             const S_msrFiguredBass& figuredBass,
                             const msrWholeNotes&    measurePositionToAppendAt);
+
+    void                  appendFiguredBassToMeasureWithoutPadUp (
+                            int                     inputLineNumber,
+                            const S_msrFiguredBass& figuredBass);
+
+    void                  appendFiguredBassesListToMeasure (
+                            int                                inputLineNumber,
+                            const std::list<S_msrFiguredBass>& figuredBasssesList,
+                            const msrWholeNotes&               measurePositionToAppendAt);
 
     void                  appendFiguredBassToMeasureClone (
                             const S_msrFiguredBass& figuredBass);

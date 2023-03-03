@@ -232,6 +232,9 @@ class EXP traceOahGroup : public oahGroup
     Bool                  getTraceMeasuresDetails () const
                               { return fTraceMeasuresDetails; }
 
+    S_oahStringAtom       getTraceOnlyMeasurerNumbeOahAtom () const
+                              { return fTraceOnlyMeasurerNumbeOahAtom; }
+
     std::set<int>         getTraceDetailedMeasureNumbersSet () const
                               { return fTraceDetailedMeasureNumbersSet; }
 
@@ -849,19 +852,24 @@ class EXP traceOahGroup : public oahGroup
 
     Bool                  fTraceMusicXMLPrintLayouts;
 
-    // segments and measures
+    // segments
     // --------------------------------------
 
-    // segments
     Bool                  fTraceSegments;
     Bool                  fTraceSegmentsDetails;
+
     // measures
+    // --------------------------------------
+
     Bool                  fTraceMeasuresNumbers;
 
     Bool                  fTraceMeasures;
     Bool                  fTraceMeasuresDetails;
 
-    std::set<int>         fTraceDetailedMeasureNumbersSet;
+    S_oahStringAtom       fTraceOnlyMeasurerNumbeOahAtom;
+    std::string           fTraceOnlyMeasureNumber;
+
+    std::set<int>         fTraceDetailedMeasureNumbersSet; // JMI v0.9.67
 
 
     // positions

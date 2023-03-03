@@ -1182,6 +1182,8 @@ void msrSegment::appendHarmonyToSegment (
       " in voice \"" <<
       fSegmentUpLinkToVoice->getVoiceName () <<
       "\"" <<
+      ", measurePositionToAppendAt: " << measurePositionToAppendAt <<
+      ", line " << inputLineNumber <<
       std::endl;
 
     gWaeHandler->waeTrace (
@@ -1205,6 +1207,40 @@ void msrSegment::appendHarmonyToSegment (
       measurePositionToAppendAt);
 
   --gIndenter;
+}
+
+void msrSegment::appendHarmoniesListToSegment (
+  int                            inputLineNumber,
+  const std::list<S_msrHarmony>& harmoniesList,
+  const msrWholeNotes&           measurePositionToAppendAt)
+{
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceHarmonies ()) {
+    std::stringstream ss;
+
+    ss <<
+      "Appending figured basses list \"" <<
+//       figuredBasssesList->asString () << // JMI v0.9.67 HARMFUL
+      " to segment " << asString () <<
+      " in voice \"" <<
+      fSegmentUpLinkToVoice->getVoiceName () <<
+      "\"" <<
+      ", measurePositionToAppendAt: " << measurePositionToAppendAt <<
+      ", line " << inputLineNumber <<
+      std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  // append the harmonies to this segment
+  fSegmentLastMeasure->
+    appendHarmoniesListToMeasure(
+      inputLineNumber,
+      harmoniesList,
+      measurePositionToAppendAt);
 }
 
 void msrSegment::appendHarmonyToSegmentClone (const S_msrHarmony& harmony)
@@ -1254,6 +1290,8 @@ void msrSegment::appendFiguredBassToSegment (
       " in voice \"" <<
       fSegmentUpLinkToVoice->getVoiceName () <<
       "\"" <<
+      ", measurePositionToAppendAt: " << measurePositionToAppendAt <<
+      ", line " << inputLineNumber <<
       std::endl;
 
     gWaeHandler->waeTrace (
@@ -1278,6 +1316,41 @@ void msrSegment::appendFiguredBassToSegment (
       measurePositionToAppendAt);
 
   --gIndenter;
+}
+
+void msrSegment::appendFiguredBassesListToSegment (
+  int                                inputLineNumber,
+  const std::list<S_msrFiguredBass>& figuredBasssesList,
+  const msrWholeNotes&               measurePositionToAppendAt)
+{
+
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceFiguredBasses ()) {
+    std::stringstream ss;
+
+    ss <<
+      "Appending figured basses list \"" <<
+//       figuredBasssesList->asString () << // JMI v0.9.67 HARMFUL
+      " to segment " << asString () <<
+      " in voice \"" <<
+      fSegmentUpLinkToVoice->getVoiceName () <<
+      "\"" <<
+      ", measurePositionToAppendAt: " << measurePositionToAppendAt <<
+      ", line " << inputLineNumber <<
+      std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  // append the figured basses to this segment
+  fSegmentLastMeasure->
+    appendFiguredBassesListToMeasure (
+      inputLineNumber,
+      figuredBasssesList,
+      measurePositionToAppendAt);
 }
 
 void msrSegment::appendFiguredBassToSegmentClone (

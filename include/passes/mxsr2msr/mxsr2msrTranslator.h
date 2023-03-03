@@ -1774,8 +1774,6 @@ class EXP mxsr2msrTranslator :
     void                      displayPendingFiguredBassesList (
                                 std::string context);
 
-    msrWholeNotes             fCurrentFiguredBassWholeNotesDuration;
-
     Bool                      fOnGoingFiguredBass;
 
     int                       fCurrentFiguredBassInputLineNumber;
@@ -1786,6 +1784,8 @@ class EXP mxsr2msrTranslator :
 
     msrWholeNotes             fCurrentFiguredBassSoundingWholeNotes;
     msrWholeNotes             fCurrentFiguredBassDisplayWholeNotes;
+
+//     msrWholeNotes             fCurrentFiguredBassWholeNotesDuration;
 
     msrFiguredBassParenthesesKind
                               fCurrentFiguredBassParenthesesKind;
