@@ -22,7 +22,11 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-// #define DEBUG_INDENTER
+#define DEBUG_INDENTER
+
+#ifdef DEBUG_INDENTER
+  #include "waeHandlers.h"
+#endif
 
 //______________________________________________________________________________
 mfOutputIndenter::mfOutputIndenter (std::string spacer)
@@ -45,7 +49,7 @@ mfOutputIndenter& mfOutputIndenter::operator++ ()
 {
 #ifdef DEBUG_INDENTER
   gLog <<
-    "% Incrementing INDENTER: " << fIndentation <<
+    "% >>>>> Incrementing INDENTER: " << fIndentation <<
     std::endl;
 #endif // DEBUG_INDENTER
 
@@ -53,7 +57,7 @@ mfOutputIndenter& mfOutputIndenter::operator++ ()
 
 #ifdef DEBUG_INDENTER
   gLog <<
-    "% INDENTER: " << fIndentation <<
+    "% ===== INDENTER: " << fIndentation <<
     std::endl;
 #endif // DEBUG_INDENTER
 
@@ -65,7 +69,7 @@ mfOutputIndenter& mfOutputIndenter::operator-- ()
 {
 #ifdef DEBUG_INDENTER
   gLog <<
-    "% Decrementing INDENTER: " << fIndentation <<
+    "% <<<<< Decrementing INDENTER: " << fIndentation <<
     std::endl;
 #endif // DEBUG_INDENTER
 
@@ -88,12 +92,12 @@ mfOutputIndenter& mfOutputIndenter::operator-- ()
 #ifdef DEBUG_INDENTER
   else {
     gLog <<
-      "% INDENTER: " << fIndentation <<
+      "% ===== INDENTER: " << fIndentation <<
       std::endl;
 
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
+//     gWaeHandler->waeTrace (
+//       __FILE__, __LINE__,
+//       ss.str ());
   }
 #endif // DEBUG_INDENTER
 
@@ -139,9 +143,9 @@ mfOutputIndenter mfOutputIndenter::mfOutputIndenter::operator-- (int)
       "% INDENTER: " << fIndentation <<
       std::endl;
 
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
+//     gWaeHandler->waeTrace (
+//       __FILE__, __LINE__,
+//       ss.str ());
   }
 #endif // DEBUG_INDENTER
 
@@ -172,9 +176,9 @@ mfOutputIndenter& mfOutputIndenter::increment (int value)
       "% INDENTER: " << fIndentation <<
       std::endl;
 
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
+//     gWaeHandler->waeTrace (
+//       __FILE__, __LINE__,
+//       ss.str ());
   }
 #endif // DEBUG_INDENTER
 
@@ -205,9 +209,9 @@ mfOutputIndenter& mfOutputIndenter::decrement (int value)
       "% INDENTER: " << fIndentation <<
       std::endl;
 
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
+//     gWaeHandler->waeTrace (
+//       __FILE__, __LINE__,
+//       ss.str ());
   }
 #endif // DEBUG_INDENTER
 

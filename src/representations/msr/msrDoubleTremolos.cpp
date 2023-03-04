@@ -237,7 +237,7 @@ S_msrDoubleTremolo msrDoubleTremolo::createDoubleTremoloNewbornClone (
 //       "Setting measure element measure position of double tremolo " <<
 //       asString () <<
 //       " to " <<
-//       measurePosition <<
+//       measurePosition.asString () <<
 //       " (was " <<
 //       fMeasurePosition <<
 //       ") in measure " <<
@@ -527,7 +527,7 @@ void msrDoubleTremolo::setDoubleTremoloNoteSecondElement (
 
     ss <<
       "attempt to set notes double tremolo whole notes both to " <<
-      fDoubleTremoloSoundingWholeNotes << " (existing)" <<
+      fDoubleTremoloSoundingWholeNotes.asString () << " (existing)" <<
       " and " <<
       expectedDoubleTremoloSoundingWholeNotes <<
       " on note second element:" <<
@@ -603,7 +603,7 @@ void msrDoubleTremolo::setDoubleTremoloChordFirstElement (
 
       ss <<
         "attempt to set chord double tremolo sounding whole notes both to " <<
-        fDoubleTremoloSoundingWholeNotes << " (existing)" <<
+        fDoubleTremoloSoundingWholeNotes.asString () << " (existing)" <<
         " and " <<
         expectedDoubleTremoloSoundingWholeNotes <<
         " on chord first element:" <<
@@ -667,7 +667,7 @@ void msrDoubleTremolo::setDoubleTremoloChordSecondElement (const S_msrChord& cho
 
      ss <<
         "attempt to set double tremolo whole notes both to " <<
-        fDoubleTremoloSoundingWholeNotes << " (existing)" <<
+        fDoubleTremoloSoundingWholeNotes.asString () << " (existing)" <<
         " and " <<
         chordDisplayWholeNotes <<
         " on chord second element:" << " (chord)" <<

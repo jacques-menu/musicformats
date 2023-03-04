@@ -387,7 +387,7 @@ void msrSyllable:: setSyllableNextMeasurePuristNumber (
 //     gLog <<
 //       "Setting syllable's measure position of " << asString () <<
 //       " to " <<
-//       measurePosition <<
+//       measurePosition.asString () <<
 //       " (was " <<
 //       fMeasurePosition <<
 //       ") in measure " <<
@@ -1317,7 +1317,7 @@ S_msrSyllable msrStanza::appendMeasureEndSyllableToStanza (
         msrSyllableKind::kSyllableMeasureEnd,
         msrSyllableExtendKind::kSyllableExtendNone,
         fStanzaNumber,
-        0, // wholeNotes
+        msrWholeNotes (0, 1),
         msrTupletFactor (),
         this);
 
@@ -1413,7 +1413,7 @@ S_msrSyllable msrStanza::appendLineBreakSyllableToStanza (
         msrSyllableKind::kSyllableLineBreak,
         msrSyllableExtendKind::kSyllableExtendNone,
         fStanzaNumber,
-        0, // whole notes
+        msrWholeNotes (0, 1),
         msrTupletFactor (),
         this);
 
@@ -1462,7 +1462,7 @@ S_msrSyllable msrStanza::appendPageBreakSyllableToStanza (
         msrSyllableKind::kSyllablePageBreak,
         msrSyllableExtendKind::kSyllableExtendNone,
         fStanzaNumber,
-        0, // whole notes
+        msrWholeNotes (0, 1),
         msrTupletFactor (),
         this);
 

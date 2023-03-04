@@ -362,12 +362,11 @@ class EXP msrHarmony : public msrMeasureElement
     // whole notes
     void                  setHarmonySoundingWholeNotes (
                             const msrWholeNotes& wholeNotes,
-                            const std::string&   context)
-                              { setSoundingWholeNotes (wholeNotes, context); }
+                            const std::string&   context);
 
-    void                  setHarmonyDisplayWholeNotes (
-                            const msrWholeNotes& wholeNotes)
-                              { fHarmonyDisplayWholeNotes = wholeNotes; }
+    void                  setHarmonyDisplayWholeNotes ( // JMI useless??? v0.9.67
+                            const msrWholeNotes& wholeNotes,
+                            const std::string&   context);
 
     msrWholeNotes         getHarmonyDisplayWholeNotes () const
                               { return fHarmonyDisplayWholeNotes; }
@@ -448,9 +447,9 @@ class EXP msrHarmony : public msrMeasureElement
                                   harmonyDegree);
                               }
 
-    void                  incrementHarmonySoundingWholeNotes (
-                            int                  inputLineNumber,
-                            const msrWholeNotes& wholeNotesDelta);
+//     void                  incrementHarmonySoundingWholeNotes (
+//                             int                  inputLineNumber,
+//                             const msrWholeNotes& wholeNotesDelta);
 
   public:
 
