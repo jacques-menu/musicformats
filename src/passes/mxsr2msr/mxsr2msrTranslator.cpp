@@ -4621,10 +4621,12 @@ void mxsr2msrTranslator::visitEnd (S_transpose& elt)
     std::stringstream ss;
 
     ss <<
-      "fTransposition: augmenting chromatic " <<
+      "Transpose: augmenting chromatic " <<
       fCurrentTransposeChromatic <<
-      " to " << auxTransposeChromatic <<
-      " and decrementing octave change by " << octaveOffset;
+      " to " <<
+      auxTransposeChromatic <<
+      " and decrementing octave change by " <<
+      octaveOffset;
 
     mxsr2msrWarning (
       gServiceRunData->getInputSourceName (),
@@ -24863,8 +24865,9 @@ void mxsr2msrTranslator::handlePendingSingleHarmony (
 
   // set harmony's display whole notes
   harmony->
-    setHarmonyDisplayWholeNotes ( // JMI useless??? v0.9.66
-      newNote->getNoteDisplayWholeNotes ());
+    setHarmonyDisplayWholeNotes (
+      newNote->getNoteDisplayWholeNotes (),
+      "handlePendingSingleHarmony()");
 
   // set harmony's tuplet factor
   harmony->
@@ -24973,7 +24976,9 @@ void mxsr2msrTranslator::handlePendingMultipleHarmonies (
     currentNoteRelativePosition =
       msrWholeNotes (0, 1);
 
-  // let's go!
+  // let's go for the first to the next to last harmonies in the list
+  // ----------------------------------------------
+
   for (S_msrHarmony currentHarmony : fPendingHarmoniesList) {
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceHarmonies ()) {
@@ -25040,7 +25045,7 @@ void mxsr2msrTranslator::handlePendingMultipleHarmonies (
       previousHarmony->
         setHarmonySoundingWholeNotes (
           currentHarmonySoundingWholeNotes,
-          "mxsr2msrTranslator::handlePendingMultipleHarmonies() 1");
+          "mxsr2msrTranslator::handlePendingMultipleHarmonies() 1, first to next to last harmony");
 
       // remember the currentHarmony's whole notes offset as previous
       previousWholeNotesOffsetInTheLoop = currentHarmonyWholeNotesOffset;
@@ -25049,7 +25054,8 @@ void mxsr2msrTranslator::handlePendingMultipleHarmonies (
     // set the currentHarmony's display whole notes JMI useless??? v0.9.66
     currentHarmony->
       setHarmonyDisplayWholeNotes (
-        newNoteDisplayWholeNotes);
+        newNoteDisplayWholeNotes,
+        "mxsr2msrTranslator::handlePendingMultipleHarmonies() 1, first to next to last harmony");
 
     // set the currentHarmony's tuplet factor // JMI v0.9.67
     currentHarmony->
@@ -25072,6 +25078,9 @@ void mxsr2msrTranslator::handlePendingMultipleHarmonies (
     // go one list element ahead
     previousHarmony = currentHarmony;
   } // for
+
+  // let's go for the last harmony in the list
+  // ----------------------------------------------
 
   // here, previousHarmony contains the last one in the list
   S_msrHarmony
@@ -25105,7 +25114,7 @@ void mxsr2msrTranslator::handlePendingMultipleHarmonies (
   // compute the offset delta
   msrWholeNotes
     offsetDelta =
-      lastHarmonyWholeNotesOffset - previousWholeNotesOffsetInTheLoop;
+      newNoteSoundingWholeNotes - previousWholeNotesOffsetInTheLoop;
 
   // compute the lastHarmony's sounding whole notes
   // as a fraction of newNoteSoundingWholeNotes
@@ -25143,12 +25152,13 @@ void mxsr2msrTranslator::handlePendingMultipleHarmonies (
   lastHarmony->
     setHarmonySoundingWholeNotes (
       lastHarmonySoundingWholeNotes,
-      "mxsr2msrTranslator::handlePendingMultipleHarmonies() 2");
+      "mxsr2msrTranslator::handlePendingMultipleHarmonies() 2, last harmony in the list");
 
   // set the display whole notes of the last harmony in the list
   lastHarmony->
     setHarmonyDisplayWholeNotes (
-      lastHarmonySoundingWholeNotes); // JMI v0.9.67
+      newNoteDisplayWholeNotes,
+      "mxsr2msrTranslator::handlePendingMultipleHarmonies() 2, last harmony in the list");
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceHarmonies ()) {
@@ -25276,16 +25286,6 @@ void mxsr2msrTranslator::handlePendingMultipleFiguredBasses (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  // compute the sounding whole notes of each figured bass in the list
-//   S_msrFiguredBass
-//     previousFiguredBass;
-
-//   msrWholeNotes
-//     currentNoteRelativePosition =
-//       msrWholeNotes (0, 1),
-//     previousWholeNotesDuration =
-//       msrWholeNotes (0, 1);
-
   for (S_msrFiguredBass currentFiguredBass : fPendingFiguredBassesList) {
     // get currentFiguredBass's whole notes duration
     msrWholeNotes
@@ -25307,7 +25307,6 @@ void mxsr2msrTranslator::handlePendingMultipleFiguredBasses (
         "handlePendingFiguredBass, " <<
         ", figuredBassSoundingWholeNotes: " << figuredBassSoundingWholeNotes <<
         ", figuredBassWholeNotesDuration: " << figuredBassWholeNotesDuration <<
-//         ", previousWholeNotesDuration: " << previousWholeNotesDuration <<
         ", line " <<
         inputLineNumber <<
         std::endl;
@@ -25318,22 +25317,13 @@ void mxsr2msrTranslator::handlePendingMultipleFiguredBasses (
     }
 #endif // MF_TRACE_IS_ENABLED
 
-//     set the previous figuredBass's sounding whole notes
-//     previousFiguredBass->
-//       setFiguredBassSoundingWholeNotes (
-//         figuredBassSoundingWholeNotes,
-//         "mxsr2msrTranslator::handlePendingMultipleHarmonies()");
-
     // set currentFiguredBass's sounding whole notes
     currentFiguredBass->
       setFiguredBassSoundingWholeNotes (
         figuredBassSoundingWholeNotes,
         "mxsr2msrTranslator::handlePendingMultipleHarmonies() 3");
 
-//     // remember the currentFiguredBass's whole notes duration
-//     previousWholeNotesDuration = figuredBassWholeNotesDuration;
-
-    // set the currentFiguredBass's display whole notes JMI useless??? v0.9.66
+    // set the currentFiguredBass's display whole notes
     currentFiguredBass->
       setFiguredBassDisplayWholeNotes (
         newNoteDisplayWholeNotes);
@@ -25344,25 +25334,7 @@ void mxsr2msrTranslator::handlePendingMultipleFiguredBasses (
         msrTupletFactor (
           fCurrentNoteActualNotes,
           fCurrentNoteNormalNotes));
-
-//     // append currentFiguredBass to fCurrentPart
-//     fCurrentPart->
-//       appendFiguredBassToPart (
-//         newNote->getInputLineNumber (),
-//         currentFiguredBass,
-//         newNote->getMeasurePosition ());
-
-    // take the figuredBass into account
-//     previousFiguredBass = currentFiguredBass;
-
-//     currentNoteRelativePosition +=
-//       figuredBassSoundingWholeNotes;
   } // for
-
-//   // set the sounding whole notes of the last figuredBass in the list // JMI v0.9.67
-//   previousFiguredBass->
-//     setFiguredBassDisplayWholeNotes (
-//       newNoteDisplayWholeNotes - currentNoteRelativePosition);
 
   // append the figured basses list to current part
   fCurrentPart->

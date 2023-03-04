@@ -238,7 +238,7 @@ S_msrChord msrChord::createChordNewbornClone (
 //       "Setting chord's measure position of " <<
 //       asString () <<
 //       " to " <<
-//       measurePosition <<
+//       measurePosition.asString () <<
 //       " (was " <<
 //       fMeasurePosition <<
 //       ") in measure " <<

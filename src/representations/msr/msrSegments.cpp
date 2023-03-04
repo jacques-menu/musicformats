@@ -398,7 +398,7 @@ void msrSegment::setSegmentShortestNoteWholeNotes (
       "Setting the shortest note wholeNotes of segment " <<
       fSegmentAbsoluteNumber <<
       " to " <<
-      wholeNotes <<
+      wholeNotes.asString () <<
       std::endl;
 
     gWaeHandler->waeTrace (

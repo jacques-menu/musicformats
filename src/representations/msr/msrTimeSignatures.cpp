@@ -1399,10 +1399,8 @@ void msrTimeSignature::print (std::ostream& os) const
       iEnd   = fTimeSignatureItemsVector.end (),
       i      = iBegin;
 
-    for ( ; ; ) {
-      os << (*i);
-      if (++i == iEnd) break;
- // JMI     os << std::endl;
+    for (S_msrTimeSignatureItem timeSignatureItem : fTimeSignatureItemsVector ) {
+      os << timeSignatureItem;
     } // for
 
     --gIndenter;

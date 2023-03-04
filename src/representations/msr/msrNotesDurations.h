@@ -72,9 +72,16 @@ class EXP msrWholeNotes
     // constructors/destructor
     // ------------------------------------------------------
 
+/*
+  supplying an int when an msrWholeNotes value is expected
+  can lead to nasty, hard to locate bugs (this occurrend once...),
+  so there is no constructor with 1 'int' argument
+*/
+                          msrWholeNotes ();
+
                           msrWholeNotes (
-                            long int num   = 0,
-                            long int denom = 1);
+                            long int num,
+                            long int denom);
 
                           msrWholeNotes (const msrWholeNotes& wholeNotes);
 
@@ -123,22 +130,22 @@ class EXP msrWholeNotes
 
     mfRational            operator / (const msrWholeNotes &wholeNotes) const;
 
-    msrWholeNotes&         operator += (const msrWholeNotes &wholeNotes);
-    msrWholeNotes&         operator -= (const msrWholeNotes &wholeNotes);
+    msrWholeNotes&        operator += (const msrWholeNotes &wholeNotes);
+    msrWholeNotes&        operator -= (const msrWholeNotes &wholeNotes);
 
     //! Useful for notes with dots.
-    msrWholeNotes&         operator *= (const mfRational &rat);
-    msrWholeNotes&         operator /= (const mfRational &rat);
+    msrWholeNotes&        operator *= (const mfRational &rat);
+    msrWholeNotes&        operator /= (const mfRational &rat);
     // (i.e. wholeNotes * 3/2 or wholeNotes * 7/4)
 
-    msrWholeNotes&         operator *= (long int num)
+    msrWholeNotes&        operator *= (long int num)
                               { fNumerator *= num; return *this; }
-    msrWholeNotes&         operator /= (long int num)
+    msrWholeNotes&        operator /= (long int num)
                               { fDenominator *= num; return *this; }
 
     // assignment
 
-    msrWholeNotes&         operator = (const msrWholeNotes& wholeNotes);
+    msrWholeNotes&        operator = (const msrWholeNotes& wholeNotes);
 
     // comparisons
     Bool                  operator >  (const msrWholeNotes &wholeNotes) const;

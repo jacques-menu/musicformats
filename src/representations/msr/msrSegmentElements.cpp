@@ -61,7 +61,7 @@ void msrSegmentElement::setSegmentElementSoundingWholeNotes (
   const std::string&   context)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceWholeNotes ()) {
+  if (gTraceOahGroup->getTraceNoteDurations ()) {
     std::stringstream ss;
 
     ss <<

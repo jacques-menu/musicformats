@@ -1320,7 +1320,7 @@ void msrVoice::incrementVoiceCurrentMeasurePuristNumber (
   int           inputLineNumber,
   const std::string& context)
 {
-  if (fVoiceCurrentMeasurePuristNumber < 0) {
+  if (fVoiceCurrentMeasurePuristNumber < 0) { // JMI v0.9.67
     fVoiceCurrentMeasurePuristNumber = 0;
 
     fVoiceFirstMeasurePuristNumber =
@@ -1335,11 +1335,12 @@ void msrVoice::incrementVoiceCurrentMeasurePuristNumber (
     std::stringstream ss;
 
     ss <<
-      "Incrementing voice current measure purist number to '" <<
+      "Incrementing the voice current measure purist number of voice " <<
+      " \"" << getVoiceName () << "\"" <<
+      " to " <<
       fVoiceCurrentMeasurePuristNumber <<
-      "' (" << context << ")" <<
-      " in voice \"" << getVoiceName () << "\"" <<
-      "', line " << inputLineNumber <<
+      " (" << context << ")" <<
+      ", line " << inputLineNumber <<
       std::endl;
 
     gWaeHandler->waeTrace (
@@ -2879,7 +2880,7 @@ void msrVoice::backupByWholeNotesStepLengthInVoice (
   const msrWholeNotes& backupTargetMeasurePosition)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceWholeNotes ()) {
+  if (gTraceOahGroup->getTraceNoteDurations ()) {
     std::stringstream ss;
 
     ss <<

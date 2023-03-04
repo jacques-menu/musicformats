@@ -3527,7 +3527,7 @@ if (false) { // JMI
       ss <<
         "--> setting previous note  to nullptr at " <<
         elt->asString () <<
-        " at beginning of measure '" <<
+        " at the beginning of measure '" <<
         elt->getMeasurePuristNumber () <<
         "', line " << inputLineNumber <<
         std::endl;

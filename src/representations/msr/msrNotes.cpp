@@ -397,7 +397,7 @@ void msrNote::setNoteUpLinkToMeasure (
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceWholeNotes ()) {
+  if (gTraceOahGroup->getTraceNoteDurations ()) {
     ++gIndenter;
 
     std::stringstream ss;

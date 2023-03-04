@@ -4555,6 +4555,56 @@ S_msrHarmony msrHarmony::createHarmonyDeepClone (
   return deepClone;
 }
 
+void msrHarmony::setHarmonySoundingWholeNotes (
+  const msrWholeNotes& wholeNotes,
+  const std::string&   context)
+{
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceHarmoniesDetails ()) {
+    std::stringstream ss;
+
+    ss <<
+      "Setting the harmony sounding whole notes of " <<
+      asString () <<
+      " to " <<
+      wholeNotes.asString () <<
+      ", context: " << context <<
+      std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  setSoundingWholeNotes (wholeNotes, context);
+}
+
+void msrHarmony::setHarmonyDisplayWholeNotes (
+  const msrWholeNotes& wholeNotes,
+  const std::string&   context)
+{
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceHarmoniesDetails ()) {
+    std::stringstream ss;
+
+    ss <<
+      "Setting the harmony display whole notes of " <<
+      asString () <<
+      " to " <<
+      wholeNotes.asString () <<
+      ", context: " << context <<
+      std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  fHarmonyDisplayWholeNotes = wholeNotes;
+}
+
 void msrHarmony::setHarmonyUpLinkToMeasure (
   const S_msrMeasure& measure)
 {
@@ -4670,7 +4720,7 @@ void msrHarmony::setHarmonyUpLinkToNote (
 //       " to " <<
 //       measurePosition <<
 //       " (was " <<
-//       fMeasurePosition <<
+//       fMeasurePosition.asString () <<
 //       ") in measure " <<
 //       measure->asShortString () <<
 //       " (measureElementMeasureNumber: " <<
@@ -4743,46 +4793,46 @@ void msrHarmony::setHarmonyFrame (const S_msrFrame& frame)
   fHarmonyFrame = frame;
 }
 
-void msrHarmony::incrementHarmonySoundingWholeNotes (
-  int                  inputLineNumber,
-  const msrWholeNotes& wholeNotesDelta)
-{
-  // compute currentHarmony's future sounding whole notes
-  msrWholeNotes
-    augmentedSoundingWholeNotes =
-      fSoundingWholeNotes
-        +
-      wholeNotesDelta;
-
-  // extend currentHarmony's sounding whole notes
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceHarmonies ()) {
-    std::stringstream ss;
-
-    ss <<
-      "Extending the sounding whole notes of harmony " <<
-      asString () <<
-      " from " <<
-      fSoundingWholeNotes <<
-      " to " <<
-      augmentedSoundingWholeNotes <<
-      " to fill measure " <<
-      this->asShortString () <<
-      " in voice \"" <<
-      fHarmoniesUpLinkToVoice->getVoiceName () <<
-      "\", line " << inputLineNumber <<
-      std::endl;
-
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-  setSoundingWholeNotes (
-    augmentedSoundingWholeNotes,
-    "incrementHarmonySoundingWholeNotes()");
-}
+// void msrHarmony::incrementHarmonySoundingWholeNotes (
+//   int                  inputLineNumber,
+//   const msrWholeNotes& wholeNotesDelta)
+// {
+//   // compute currentHarmony's future sounding whole notes
+//   msrWholeNotes
+//     augmentedSoundingWholeNotes =
+//       fSoundingWholeNotes
+//         +
+//       wholeNotesDelta;
+//
+//   // extend currentHarmony's sounding whole notes
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gTraceOahGroup->getTraceHarmonies ()) {
+//     std::stringstream ss;
+//
+//     ss <<
+//       "Extending the sounding whole notes of harmony " <<
+//       asString () <<
+//       " from " <<
+//       fSoundingWholeNotes <<
+//       " to " <<
+//       augmentedSoundingWholeNotes.asString () <<
+//       " to fill measure " <<
+//       this->asShortString () <<
+//       " in voice \"" <<
+//       fHarmoniesUpLinkToVoice->getVoiceName () <<
+//       "\", line " << inputLineNumber <<
+//       std::endl;
+//
+//     gWaeHandler->waeTrace (
+//       __FILE__, __LINE__,
+//       ss.str ());
+//   }
+// #endif // MF_TRACE_IS_ENABLED
+//
+//   setSoundingWholeNotes (
+//     augmentedSoundingWholeNotes,
+//     "incrementHarmonySoundingWholeNotes()");
+// }
 
 bool msrHarmony::compareHarmoniesByIncreasingOffset (
   const SMARTP<msrHarmony>& first,
@@ -4901,8 +4951,6 @@ std::string msrHarmony::asString () const
   ss <<
     "[Harmony" <<
 //     ", " << std::hex << std::showbase << this << std::dec << // JMI HEX ADDRESS
-    ", fMeasurePosition: " <<
-    fMeasurePosition <<
     ", fHarmonyRootQuarterTonesPitchKind: " <<
     msrQuarterTonesPitchKindAsStringInLanguage (
       fHarmonyRootQuarterTonesPitchKind,
@@ -4923,7 +4971,7 @@ std::string msrHarmony::asString () const
 
   ss <<
     ", fHarmonyWholeNotesOffset: " <<
-    fHarmonyWholeNotesOffset;
+    fHarmonyWholeNotesOffset.asString ();
 
   ss <<
   // print the harmony bass voice position
@@ -4934,12 +4982,12 @@ std::string msrHarmony::asString () const
 //     std::endl;
 
     ", fSoundingWholeNotes: " <<
-    fSoundingWholeNotes <<
+    fSoundingWholeNotes.asString () <<
     ", fHarmonyDisplayWholeNotes: " <<
-    fHarmonyDisplayWholeNotes <<
+    fHarmonyDisplayWholeNotes.asString () <<
 
     ", fMeasurePosition: " <<
-    fMeasurePosition;
+    fMeasurePosition.asString ();
 
   // print the harmony uplink to note
   ss <<

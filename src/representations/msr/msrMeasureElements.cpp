@@ -73,7 +73,7 @@ void msrMeasureElement::doSetSoundingWholeNotes (
   const std::string&   context)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceWholeNotes ()) {
+  if (gTraceOahGroup->getTraceNoteDurations ()) {
     ++gIndenter;
 
     S_msrMeasure upLinkToMeasure;
@@ -81,10 +81,12 @@ void msrMeasureElement::doSetSoundingWholeNotes (
     getMeasureElementUpLinkToMeasure (
       upLinkToMeasure);
 
-    gLog <<
-      "Setting measure element sounding whole notes of " <<
+    std::stringstream ss;
+
+    ss <<
+      "Setting the measure element sounding whole notes of " <<
       asString () <<
-      " to " << wholeNotes << // JMI v0.9.66
+      " to " << wholeNotes.asString () << // JMI v0.9.66
 //       " in measure '" << // JMI TOO EARLY v0.9.67
 //       upLinkToMeasure->getMeasureNumber () <<
 //       "', context: \"" <<
@@ -93,25 +95,31 @@ void msrMeasureElement::doSetSoundingWholeNotes (
       "\"" <<
       std::endl;
 
+    if (wholeNotes == msrWholeNotes (114, 1)) abort ();
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
+
     --gIndenter;
   }
 #endif // MF_TRACE_IS_ENABLED
 
-#ifdef MF_SANITY_CHECKS_ARE_ENABLED
-  // sanity check // NO JMI v0.9.67
-  mfAssert (
-    __FILE__, __LINE__,
-    wholeNotes != K_WHOLE_NOTES_UNKNOWN,
-    "wholeNotes == K_WHOLE_NOTES_UNKNOWN");
-
-  msrWholeNotes
-    infinitelyDottesLonga (8, 1);
-
-  mfAssert (
-    __FILE__, __LINE__,
-    wholeNotes < infinitelyDottesLonga,
-    "wholeNotes >= infinitelyDottesLonga");
-#endif // MF_SANITY_CHECKS_ARE_ENABLED
+// #ifdef MF_SANITY_CHECKS_ARE_ENABLED // JMI v0.9.67
+//   // sanity check // NO JMI v0.9.67
+//   mfAssert (
+//     __FILE__, __LINE__,
+//     wholeNotes != K_WHOLE_NOTES_UNKNOWN,
+//     "wholeNotes == K_WHOLE_NOTES_UNKNOWN");
+//
+//   msrWholeNotes
+//     infinitelyDottesLonga (8, 1);
+//
+//   mfAssert (
+//     __FILE__, __LINE__,
+//     wholeNotes < infinitelyDottesLonga,
+//     "wholeNotes >= infinitelyDottesLonga");
+// #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fSoundingWholeNotes = wholeNotes;
 }
@@ -131,7 +139,7 @@ void msrMeasureElement::setMeasurePosition (
     std::stringstream ss;
 
     ss <<
-      "Setting measure position of " <<
+      "Setting the measure element measure position of " <<
       asString () <<
       " to '" << measurePosition <<
       "' (was '" <<
@@ -215,7 +223,7 @@ void msrMeasureElement::setVoicePosition (
     std::stringstream ss;
 
     ss <<
-      "Setting voice position of " <<
+      "Setting the voice position of " <<
       asString () <<
       " to '" << voicePosition <<
       "' in measure '" <<
@@ -250,7 +258,7 @@ void msrMeasureElement::setVoicePosition (
     std::stringstream ss;
 
     ss <<
-      "Setting measure element voice position of " <<
+      "Setting the measure element voice position of " <<
       asString () <<
       " to '" << voicePosition <<
       "' in measure '" <<
@@ -275,8 +283,10 @@ void msrMeasureElement::setVoicePosition (
 // {
 // #ifdef MF_TRACE_IS_ENABLED
 //   if (gTraceOahGroup->getTraceMeasureMoments ()) {
-//     gLog <<
-//       "Setting measure element measure moment of " <<
+//     std::stringstream ss;
+//
+//     ss <<
+//       "Setting the measure element measure moment of " <<
 //       asString () <<
 //       " to '" << measureMoment <<
 //       "' (was '" <<
@@ -290,6 +300,10 @@ void msrMeasureElement::setVoicePosition (
 //       context <<
 //       "\"" <<
 //       std::endl;
+//
+//     gWaeHandler->waeTrace (
+//       __FILE__, __LINE__,
+//       ss.str ());
 //   }
 // #endif // MF_TRACE_IS_ENABLED
 //
@@ -302,8 +316,10 @@ void msrMeasureElement::setVoicePosition (
 // {
 // #ifdef MF_TRACE_IS_ENABLED
 //   if (gTraceOahGroup->getTraceMeasureMoments ()) {
-//     gLog <<
-//       "Setting measure element voice moment of " <<
+//     std::stringstream ss;
+//
+//     ss <<
+//       "Setting the measure element voice moment of " <<
 //       asString () <<
 //       " to '" << voiceMoment <<
 //       "' in measure '" <<
@@ -312,6 +328,10 @@ void msrMeasureElement::setVoicePosition (
 //       context <<
 //       "\"" <<
 //       std::endl;
+//
+//     gWaeHandler->waeTrace (
+//       __FILE__, __LINE__,
+//       ss.str ());
 //   }
 // #endif // MF_TRACE_IS_ENABLED
 //

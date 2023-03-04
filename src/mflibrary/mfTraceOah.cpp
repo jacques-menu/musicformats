@@ -2267,39 +2267,39 @@ This option implies '-tnotes, -trace-notes'.)",
   // whole notes
 
   S_oahTwoBooleansAtomWithTracePasses
-    traceWholeNotesBooleanAtom =
+    traceNoteDurationsBooleanAtom =
       oahTwoBooleansAtomWithTracePasses::create (
         "trace-whole-notes", "twn", // JMI v0.9.67 SUPERFLOUS with trace-notes-durations ???
 R"(Whole notes computations (quite verbose)...)",
-        "fTraceWholeNotes",
-        fTraceWholeNotes,
+        "fTraceNoteDurations",
+        fTraceNoteDurations,
         fTracePassesBooleanAtom);
 
   subGroup->
     appendAtomToSubGroup (
-      traceWholeNotesBooleanAtom);
+      traceNoteDurationsBooleanAtom);
   notesMultiplexBooleansAtom->
     addBooleanAtom (
-      traceWholeNotesBooleanAtom);
+      traceNoteDurationsBooleanAtom);
 
   // whole notes details
 
   S_oahThreeBooleansAtom
-    traceWholeNotesDetailsBooleanAtom =
+    traceNoteDurationsDetailsBooleanAtom =
       oahThreeBooleansAtom::create (
         "trace-whole-notes-details", "twnd",
 R"(Whole notes computations details (event more verbose)...)",
-        "fTraceWholeNotesDetails",
-        fTraceWholeNotesDetails,
-        traceWholeNotesBooleanAtom,
+        "fTraceNoteDurationsDetails",
+        fTraceNoteDurationsDetails,
+        traceNoteDurationsBooleanAtom,
         fTracePassesBooleanAtom);
 
   subGroup->
     appendAtomToSubGroup (
-      traceWholeNotesDetailsBooleanAtom);
+      traceNoteDurationsDetailsBooleanAtom);
   notesMultiplexBooleansAtom->
     addBooleanAtom (
-      traceWholeNotesDetailsBooleanAtom);
+      traceNoteDurationsDetailsBooleanAtom);
 
   // rest notes
 
@@ -3042,11 +3042,11 @@ void traceOahGroup::displayTraceOahValues (int fieldWidth)
     std::setw (fieldWidth) << "fTraceNotesDetails" << ": " <<
     fTraceNotesDetails <<
     std::endl <<
-    std::setw (fieldWidth) << "fTraceWholeNotes" << ": " <<
-    fTraceWholeNotes <<
+    std::setw (fieldWidth) << "fTraceNoteDurations" << ": " <<
+    fTraceNoteDurations <<
     std::endl <<
-    std::setw (fieldWidth) << "fTraceWholeNotesDetails" << ": " <<
-    fTraceWholeNotesDetails <<
+    std::setw (fieldWidth) << "fTraceNoteDurationsDetails" << ": " <<
+    fTraceNoteDurationsDetails <<
     std::endl <<
     std::setw (fieldWidth) << "fTraceRestNotes" << ": " <<
     fTraceRestNotes <<

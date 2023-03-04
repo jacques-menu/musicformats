@@ -370,7 +370,7 @@ void msrPart::setPartDrawingMeasurePosition (
 
     ss <<
       "Setting part current measure position to " <<
-      measurePosition <<
+      measurePosition.asString () <<
       " in part " <<
       getPartCombinedName () <<
       std::endl;
@@ -413,12 +413,12 @@ void msrPart::incrementPartDrawingMeasurePosition (
     std::stringstream ss;
 
     ss <<
-      "Incrementing part current measure position by " <<
-      wholeNotes <<
-      " in part " <<
+      "Incrementing the current measure position of part " <<
       getPartCombinedName () <<
+      " by " <<
+      wholeNotes.asString () <<
       ", thus setting it to " <<
-      fPartDrawingMeasurePosition <<
+      fPartDrawingMeasurePosition.asString () <<
       std::endl;
 
     gWaeHandler->waeTrace (
@@ -460,7 +460,7 @@ void msrPart::decrementPartDrawingMeasurePosition (
       " in part " <<
       getPartCombinedName () <<
       " since that sets it to " <<
-      fPartDrawingMeasurePosition <<
+      fPartDrawingMeasurePosition.asString () <<
       ", which is negative ";
 
     msrInternalError (
@@ -503,7 +503,7 @@ void msrPart::setPartShortestNoteWholeNotes (
       "Setting the shortest note wholeNotes of part \"" <<
       fPartName <<
       "\" to " <<
-      wholeNotes <<
+      wholeNotes.asString () <<
       std::endl;
 
     gWaeHandler->waeTrace (
@@ -733,7 +733,7 @@ msrWholeNotes msrPart::fetchPartMeasuresWholeNotessVectorAt (
       fPartMeasuresWholeNotessVector.size ();
 
 #ifdef MF_TRACE_IS_ENABLED
-    if (gTraceOahGroup->getTraceWholeNotes ()) {
+    if (gTraceOahGroup->getTraceNoteDurations ()) {
       std::stringstream ss;
 
         ss <<
