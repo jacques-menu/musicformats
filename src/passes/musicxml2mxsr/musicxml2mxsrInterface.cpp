@@ -417,26 +417,26 @@ void checkDesiredEncoding (
     }
 
     else {
-      std::stringstream ss;
-
-      ss <<
-        "this file is encoded in " <<
-        encoding <<
-        ", you should convert it to " <<
-        desiredEncoding <<
-        " encoding prior to running xml2ly" <<
-        ", for example with iconv or using a text editor" <<
-        ", in which case " <<
-        encoding <<
-        " should be replaced by " <<
-        desiredEncoding <<
-        " manually" <<
-        " - handling it as is";
-
-      musicxml2mxsrWarning (
-        gServiceRunData->getInputSourceName (),
-        1, // inputLineNumber,
-        ss.str ());
+//       std::stringstream ss;
+//
+//       ss <<
+//         "this file is encoded in " <<
+//         encoding <<
+//         ", you may wich to convert it to " <<
+//         desiredEncoding <<
+//         " encoding prior to running xml2ly" <<
+//         ", for example with iconv or using a text editor" <<
+//         ", in which case " <<
+//         encoding <<
+//         " should be replaced by " <<
+//         desiredEncoding <<
+//         " manually" <<
+//         " - handling it as is";
+//
+//       musicxml2mxsrWarning ( // JMI v0.9.67 NOT OK for Windows users
+//         gServiceRunData->getInputSourceName (),
+//         1, // inputLineNumber,
+//         ss.str ());
     }
   }
 }

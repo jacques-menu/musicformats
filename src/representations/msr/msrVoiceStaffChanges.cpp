@@ -9,8 +9,6 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include "mfStaticSettings.h"
-
 #include "visitor.h"
 
 #include "mfStaticSettings.h"
@@ -37,13 +35,13 @@ S_msrVoiceStaffChange msrVoiceStaffChange::create (
   const S_msrMeasure& upLinkToMeasure,
   const S_msrStaff&   staffToChangeTo)
 {
-  msrVoiceStaffChange* o =
+  msrVoiceStaffChange* obj =
     new msrVoiceStaffChange (
       inputLineNumber,
       upLinkToMeasure,
       staffToChangeTo);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 S_msrVoiceStaffChange msrVoiceStaffChange::create (
@@ -231,7 +229,7 @@ std::ostream& operator << (std::ostream& os, const S_msrVoiceStaffChange& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

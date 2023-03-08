@@ -62,13 +62,13 @@ THe \oahRepr\ options are very easy to use. They are inspired by \Main{GNU} opti
 \item all options have a long name, and some have a complementary short name.
  The latter is not provided if the long name is short enough, such as \optionName{jianpu}, \optionName{cubase}, \optionName{ambitus} or \optionName{custos}.\\
     Short and long names can be used and mixed at will in the \CLI\ and in option vectors (\API).
-    Apart from very common options such as \optionName{o}, the short names are meant for interactive use. This document uses only long name, which are more explicit in general;
+    Apart from very common options such as \optionName{obj}, the short names are meant for interactive use. This document uses only long name, which are more explicit in general;
 
-\item some short option names are supplied as is usual in open sotfware, such as \optionName{h} (help), and \optionName{o} (output file name):
+\item some short option names are supplied as is usual in open sotfware, such as \optionName{h} (help), and \optionName{obj} (output file name):
 \begin{lstlisting}[language=Terminal]
-jacquesmenu@macmini > xml2ly -query o
---- Help for atom "o" in subgroup "Files"
-    -output-file-name, -o FILENAME
+jacquesmenu@macmini > xml2ly -query obj
+--- Help for atom "obj" in subgroup "Files"
+    -output-file-name, -obj FILENAME
           Write output to file FILENAME instead of standard output.
 \end{lstlisting}
 
@@ -183,7 +183,7 @@ a default value is used if none is provided by the user, such as \optionNameBoth
 \begin{lstlisting}[language=Terminal]
 jacquesmenu@macmini > xml2ly -name-help=output-file-name
 --- Help for atom "output-file-name" in subgroup "Files"
-    -output-file-name, -o FILENAME
+    -output-file-name, -obj FILENAME
           Write output to file FILENAME instead of standard output.
 \end{lstlisting}
 
@@ -314,7 +314,7 @@ jacquesmenu@macmini > xml2ly -query query
 \begin{lstlisting}[language=Terminal]
 jacquesmenu@macmini > xml2ly -query output-file-name
 --- Help for atom "output-file-name" in subgroup "Files"
-    -output-file-name, -o FILENAME
+    -output-file-name, -obj FILENAME
           Write output to file FILENAME instead of standard output.
 \end{lstlisting}
 
@@ -322,7 +322,7 @@ Another option exists to obtain the same result: \optionNameBoth{name-help}{nh} 
 \begin{lstlisting}[language=Terminal]
 jacquesmenu@macmini > xml2ly -name-help=output-file-name
 --- Help for atom "output-file-name" in subgroup "Files"
-    -output-file-name, -o FILENAME
+    -output-file-name, -obj FILENAME
           Write output to file FILENAME instead of standard output.
 \end{lstlisting}
 
@@ -356,7 +356,7 @@ jacquesmenu@macmini > xml2ly -find output-file-name
 2 occurrences of string "output-file-name" have been found:
    1:
     Atom in subgroup "Files" in group "Files group"
-    -output-file-name, -o
+    -output-file-name, -obj
     Write output to file FILENAME instead of standard output.
 
    2:
@@ -399,7 +399,7 @@ xml2ly options usage:
   The options can be placed in any order,
   provided the values immediately follow the atoms that need them.
 
-  Using options that attempt to create files, such as '-o, -output-file-name',
+  Using options that attempt to create files, such as '-obj, -output-file-name',
   leads to an error if the environment is read-only access,
   as is the case of https://libmusicxml.grame.fr .
 \end{lstlisting}

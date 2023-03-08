@@ -13,19 +13,15 @@
 #include <sstream>
 #include <iomanip>      // std::setw, std::setprecision, ...
 
-#include "mfStaticSettings.h"
-
 #include "elements.h"
 #include "factory.h"
 #include "xml.h"
 #include "xmlfile.h"
 
-#include "mfAssert.h"
-
 #include "mfStaticSettings.h"
 
+#include "mfAssert.h"
 #include "mfLibraryComponent.h"
-
 #include "mfServices.h"
 #include "mfServices.h"
 
@@ -37,7 +33,6 @@
 #include "msr2mxsrWae.h"
 
 #include "oahOah.h"
-// #include "oahEarlyOptions.h"
 
 #include "mxsrOah.h"
 
@@ -326,8 +321,8 @@ std::string msr2mxsrTranslator::msrModeKindAsMusicXMLString (
   std::string result;
 
   switch (modeKind) {
-    case msrModeKind::kMode_UNKNOWN:
-      result = "kMode_UNKNOWN";
+    case msrModeKind::kMode_UNKNOWN_:
+      result = "kMode_UNKNOWN_";
       break;
     case msrModeKind::kModeMajor:
       result = "major";
@@ -368,7 +363,7 @@ std::string msr2mxsrTranslator::msrPlacementKindAsMusicXMLString (
   std::string result;
 
   switch (placementKind) {
-    case msrPlacementKind::kPlacement_UNKNOWN:
+    case msrPlacementKind::kPlacement_UNKNOWN_:
       result = "";
       break;
     case msrPlacementKind::kPlacementAbove:
@@ -389,7 +384,7 @@ std::string msr2mxsrTranslator::msrSpannerTypeKindAsMusicXMLString (
   std::string result;
 
   switch (spannerTypeKind) {
-    case msrSpannerTypeKind::kSpannerType_UNKNOWN:
+    case msrSpannerTypeKind::kSpannerType_UNKNOWN_:
       // should not occur
       break;
     case msrSpannerTypeKind::kSpannerTypeStart:
@@ -509,7 +504,7 @@ void msr2mxsrTranslator::createMxmlAttributesElementAndAppendItToMeasure ()
   if (fKeyElement) {
     // append key to the current measure attributes element
 #ifdef MF_TRACE_IS_ENABLED
-    if (gTraceOahGroup->getTraceKeys ()) { // CAFE
+    if (gTraceOahGroup->getTraceKeys ()) { // v0.9.67
       gLog <<
         "--> createMxmlAttributesElementAndAppendItToMeasure() 2" <<
         ", fKeyElement: ";
@@ -524,7 +519,7 @@ void msr2mxsrTranslator::createMxmlAttributesElementAndAppendItToMeasure ()
 
   if (fTimeElement) {
 #ifdef MF_TRACE_IS_ENABLED
-    if (gTraceOahGroup->getTraceTimeSignatures ()) { // CAFE
+    if (gTraceOahGroup->getTraceTimeSignatures ()) { // v0.9.67
       gLog <<
         "--> createMxmlAttributesElementAndAppendItToMeasure() 2" <<
         ", fTimeElement: ";
@@ -722,7 +717,7 @@ void msr2mxsrTranslator::appendToNoteNotationsOrnaments (
     // append it to fCurrentNoteNotationsElement
     appendToNoteNotations (
       fCurrentNoteNotationsOrnamentsElement,
-      msrPlacementKind::kPlacement_UNKNOWN); // no placement for '<ornaments/>', only <trill-mark> has JMI ???
+      msrPlacementKind::kPlacement_UNKNOWN_); // no placement for '<ornaments/>', only <trill-mark> has JMI ???
   }
 
   // set elem's "placement" attribute if relevant
@@ -1907,8 +1902,8 @@ void msr2mxsrTranslator::populateAppearanceLineWidths (
     std::string lineWidthTypeString;
 
     switch (lineWidthTypeKind) {
-      case msrLineWidthTypeKind::kLineWidthType_UNKNOWN:
-        lineWidthTypeString = "kLineWidthType_UNKNOWN";
+      case msrLineWidthTypeKind::kLineWidthType_UNKNOWN_:
+        lineWidthTypeString = "kLineWidthType_UNKNOWN_";
         break;
       case msrLineWidthTypeKind::kLineWidthTypeBeam:
         lineWidthTypeString = "beam";
@@ -2010,8 +2005,8 @@ void msr2mxsrTranslator::populateAppearanceNoteSizes (
     std::string noteSizeTypeString;
 
     switch (noteSizeTypeKind) {
-      case msrNoteSizeTypeKind::kNoteSizeType_UNKNOWN:
-        noteSizeTypeString = "msrNoteKind::kNoteSizeType_UNKNOWN";
+      case msrNoteSizeTypeKind::kNoteSizeType_UNKNOWN_:
+        noteSizeTypeString = "msrNoteKind::kNoteSizeType_UNKNOWN_";
         break;
       case msrNoteSizeTypeKind::kNoteSizeTypeCue:
         noteSizeTypeString = "cue";
@@ -2065,8 +2060,8 @@ void msr2mxsrTranslator::populateAppearanceDistances (
     std::string distanceTypeString;
 
     switch (distanceTypeKind) {
-      case msrDistanceTypeKind::kDistanceType_UNKNOWN:
-        distanceTypeString = "kDistanceType_UNKNOWN";
+      case msrDistanceTypeKind::kDistanceType_UNKNOWN_:
+        distanceTypeString = "kDistanceType_UNKNOWN_";
         break;
       case msrDistanceTypeKind::kDistanceTypeHyphen:
         distanceTypeString = "hyphen";
@@ -2117,8 +2112,8 @@ void msr2mxsrTranslator::populateAppearanceGlyphs (
     std::string glyphTypeString;
 
     switch (glyphTypeKind) {
-      case msrGlyphTypeKind::kGlyphType_UNKNOWN:
-        glyphTypeString = "kGlyphType_UNKNOWN";
+      case msrGlyphTypeKind::kGlyphType_UNKNOWN_:
+        glyphTypeString = "kGlyphType_UNKNOWN_";
         break;
       case msrGlyphTypeKind::kGlyphTypeQuarterRest:
         glyphTypeString = "quarter-rest";
@@ -2206,8 +2201,8 @@ void msr2mxsrTranslator::populateAppearanceOtherAppearances (
     std::string otherAppearanceTypeString;
 
     switch (otherAppearanceTypeKind) {
-      case msrOtherAppearanceTypeKind::kOtherAppearanceType_UNKNOWN:
-        otherAppearanceTypeString = "kOtherAppearanceType_UNKNOWN";
+      case msrOtherAppearanceTypeKind::kOtherAppearanceType_UNKNOWN_:
+        otherAppearanceTypeString = "kOtherAppearanceType_UNKNOWN_";
         break;
     } // switch
 
@@ -2931,7 +2926,7 @@ if (false) // JMI
 
     ss <<
       "--> partShortestNoteWholeNotes: " <<
-      fPartShortestNoteWholeNotes <<
+      fPartShortestNoteWholeNotes.asString () <<
       std::endl <<
       "--> divisionsPerQuarterNoteAsRational: " <<
       divisionsPerQuarterNoteAsRational <<
@@ -3767,12 +3762,12 @@ void msr2mxsrTranslator::visitStart (S_msrClef& elt)
 
     // populate clefElement
     switch (elt->getClefKind ()) {
-      case msrClefKind::kClef_UNKNOWN:
+      case msrClefKind::kClef_UNKNOWN_:
         {
           clefElement->push (
             createMxmlelement (
               k_sign,
-              "[NONE]"));
+              "[NULL]"));
         }
         break;
       case msrClefKind::kClefTreble:
@@ -4126,7 +4121,7 @@ void msr2mxsrTranslator::visitStart (S_msrKey& elt)
         fCurrentPartKey;
     }
     else {
-      gLog << "[NONE]";
+      gLog << "[NULL]";
     }
 
     gLog <<
@@ -4172,15 +4167,15 @@ void msr2mxsrTranslator::visitStart (S_msrKey& elt)
       case msrKeyKind::kKeyTraditional:
         {
           // compute the number of fifths
-          const int K_FIFTHS_NUMBER_UNKNOWN = -94;
-          int       fifthsNumber = K_FIFTHS_NUMBER_UNKNOWN;
+          const int K_FIFTHS_NUMBER_UNKNOWN_ = -94;
+          int       fifthsNumber = K_FIFTHS_NUMBER_UNKNOWN_;
 
           msrQuarterTonesPitchKind
             keyTonicQuarterTonesPitchKind =
               elt->getKeyTonicQuarterTonesPitchKind ();
 
           switch (keyTonicQuarterTonesPitchKind) {
-            case msrQuarterTonesPitchKind::kQTP_UNKNOWN:
+            case msrQuarterTonesPitchKind::kQTP_UNKNOWN_:
             case msrQuarterTonesPitchKind::kQTP_Rest:
             case msrQuarterTonesPitchKind::kQTP_Skip:
               // should not occur
@@ -4264,7 +4259,7 @@ void msr2mxsrTranslator::visitStart (S_msrKey& elt)
               break;
           } // switch
 
-          if (fifthsNumber != K_FIFTHS_NUMBER_UNKNOWN) {
+          if (fifthsNumber != K_FIFTHS_NUMBER_UNKNOWN_) {
             // populate the key element
             fKeyElement->push (
               createMxmlIntegerElement (
@@ -4276,7 +4271,7 @@ void msr2mxsrTranslator::visitStart (S_msrKey& elt)
                 elt->getModeKind (); // JMI should be major by default???
 
             switch (modeKind) {
-              case msrModeKind::kMode_UNKNOWN:
+              case msrModeKind::kMode_UNKNOWN_:
                 break;
               default:
                 fKeyElement->push (
@@ -4353,7 +4348,7 @@ void msr2mxsrTranslator::visitStart (S_msrTimeSignature& elt)
         fCurrentPartTimeSignature;
     }
     else {
-      gLog << "[NONE]";
+      gLog << "[NULL]";
     }
 
     gLog <<
@@ -4549,7 +4544,7 @@ void msr2mxsrTranslator::visitStart (S_msrTempo& elt)
       elt->getTempoPlacementKind ();
 
   switch (elt->getTempoKind ()) {
-    case msrTempoKBeatUnitsKind::kTempoBeatUnits_UNKNOWN:
+    case msrTempoKBeatUnitsKind::kTempoBeatUnits_UNKNOWN_:
       break;
 
     case msrTempoKBeatUnitsKind::kTempoBeatUnitsWordsOnly:
@@ -5236,7 +5231,7 @@ void msr2mxsrTranslator::appendNoteDynamics (
         case msrDynamicKind::kDynamicN:
           subElementID = k_n;
           break;
-        case msrDynamicKind::kDynamic_UNKNOWN:
+        case msrDynamicKind::kDynamic_UNKNOWN_:
           ; // should not occur
           break;
       } // switch
@@ -5297,14 +5292,14 @@ void msr2mxsrTranslator::appendABackupToMeasure (
       theMsrNote->asShortString () <<
 
       ", previousNoteMeasurePosition: " <<
-      previousNoteMeasurePosition <<
+      previousNoteMeasurePosition.asString () <<
       ", previousNoteSoundingWholeNotes: " <<
-      previousNoteSoundingWholeNotes <<
+      previousNoteSoundingWholeNotes.asString () <<
 
       ", theMsrNoteMeasurePosition: " <<
-      theMsrNoteMeasurePosition <<
+      theMsrNoteMeasurePosition.asString () <<
       ", theMsrNoteSoundingWholeNotes: " <<
-      theMsrNoteSoundingWholeNotes <<
+      theMsrNoteSoundingWholeNotes.asString () <<
 
       ", backupNotesDuration: " << backupNotesDuration <<
       ", backupNotesDurationDivisions: " << backupNotesDurationDivisions <<
@@ -5339,14 +5334,14 @@ void msr2mxsrTranslator::appendABackupToMeasure (
       "Backup" <<
 
       ", previousNoteMeasurePosition: " <<
-      previousNoteMeasurePosition <<
+      previousNoteMeasurePosition.asString () <<
       ", previousNoteSoundingWholeNotes: " <<
-      previousNoteSoundingWholeNotes <<
+      previousNoteSoundingWholeNotes.asString () <<
 
       ", theMsrNoteMeasurePosition: " <<
-      theMsrNoteMeasurePosition <<
+      theMsrNoteMeasurePosition.asString () <<
       ", theMsrNoteSoundingWholeNotes: " <<
-      theMsrNoteSoundingWholeNotes <<
+      theMsrNoteSoundingWholeNotes.asString () <<
 
       ", backupNotesDuration: " << backupNotesDuration <<
       ", backupNotesDurationDivisions: " << backupNotesDurationDivisions <<
@@ -5504,7 +5499,7 @@ void msr2mxsrTranslator:: appendABackupOrForwardToMeasureIfNeeded (
         fPreviousMSRNote->asShortString ();
     }
     else {
-      ss << "[NONE]";
+      ss << "[NULL]";
     }
 
     ss <<
@@ -5555,7 +5550,7 @@ void msr2mxsrTranslator:: appendABackupOrForwardToMeasureIfNeeded (
         fPreviousMSRNote->asShortString ();
     }
     else {
-      ss << "[NONE]";
+      ss << "[NULL]";
     }
 
     ss <<
@@ -5619,9 +5614,9 @@ fCurrentCumulatedSkipsVoiceNumber
             gLog <<
               "--> appendABackupOrForwardToMeasureIfNeeded(2), note: " <<
               theMsrNote->asShortString () <<
-              ", noteMeasurePosition: " << noteMeasurePosition <<
-              ", positionAfterNoteInMeasure: " << positionAfterNoteInMeasure <<
-              ", fCurrentMeasurePosition: " << fCurrentMeasurePosition <<
+              ", noteMeasurePosition: " << noteMeasurePosition.asString () <<
+              ", positionAfterNoteInMeasure: " << positionAfterNoteInMeasure.asString () <<
+              ", fCurrentMeasurePosition: " << fCurrentMeasurePosition.asString () <<
               ", line " << inputLineNumber <<
               std::endl;
           }
@@ -6209,7 +6204,7 @@ void msr2mxsrTranslator:: appendNoteArticulations (
     */
 
       switch (articulationKind) {
-        case msrArticulationKind::kArticulation_UNKNOWN:
+        case msrArticulationKind::kArticulation_UNKNOWN_:
           // JMI ???
           break;
 
@@ -6274,7 +6269,7 @@ void msr2mxsrTranslator:: appendNoteArticulations (
 
       // append it to the current note notations articulations element
       switch (articulationKind) {
-        case msrArticulationKind::kArticulation_UNKNOWN:
+        case msrArticulationKind::kArticulation_UNKNOWN_:
           // JMI ???
           break;
 
@@ -6417,7 +6412,7 @@ void msr2mxsrTranslator:: appendNoteSlursIfAny (
       std::string slurTypeString;
 
       switch (slurTypeKind) {
-        case msrSlurTypeKind::kSlurType_UNKNOWN:
+        case msrSlurTypeKind::kSlurType_UNKNOWN_:
           break;
         case msrSlurTypeKind::kSlurTypeRegularStart:
           slurTypeString = "start";
@@ -6477,7 +6472,7 @@ void msr2mxsrTranslator:: appendNoteTupletIfRelevant (
 #endif // MF_TRACE_IS_ENABLED
 
   switch (theMsrNote->getNoteKind ()) {
-    case msrNoteKind::kNote_UNKNOWN:
+    case msrNoteKind::kNote_UNKNOWN_:
     case msrNoteKind::kNoteRestInMeasure:
     case msrNoteKind::kNoteSkipInMeasure:
     case msrNoteKind::kNoteUnpitchedInMeasure:
@@ -6533,7 +6528,7 @@ void msr2mxsrTranslator:: appendNoteTupletIfRelevant (
           // append it to the current note notations elements
           appendToNoteNotations (
             tupletElement,
-            msrPlacementKind::kPlacement_UNKNOWN);
+            msrPlacementKind::kPlacement_UNKNOWN_);
         }
       }
       break;
@@ -6601,7 +6596,7 @@ void msr2mxsrTranslator:: appendNoteSpannersBeforeNote (
           break;
         case msrSpannerTypeKind::kSpannerTypeContinue:
           break;
-        case msrSpannerTypeKind::kSpannerType_UNKNOWN:
+        case msrSpannerTypeKind::kSpannerType_UNKNOWN_:
           // should not occur
           break;
       } // switch
@@ -6712,7 +6707,7 @@ void msr2mxsrTranslator:: appendNoteSpannersAfterNote (
           break;
         case msrSpannerTypeKind::kSpannerTypeContinue:
           break;
-        case msrSpannerTypeKind::kSpannerType_UNKNOWN:
+        case msrSpannerTypeKind::kSpannerType_UNKNOWN_:
           // should not occur
           break;
       } // switch
@@ -6806,7 +6801,7 @@ void msr2mxsrTranslator:: appendStemToNote (
 
     switch (stemKind) {
       case msrStemKind::kStemNeutral:
-        stemString = "[NONE]";
+        stemString = "[NULL]";
         break;
       case msrStemKind::kStemUp:
         stemString = "up";
@@ -6865,7 +6860,7 @@ void msr2mxsrTranslator::appendBeamsToNote (
       std::string beamString;
 
       switch (beamKind) {
-        case msrBeamKind::kBeam_UNKNOWN:
+        case msrBeamKind::kBeam_UNKNOWN_:
           break;
         case msrBeamKind::kBeamBegin:
           beamString = "begin";
@@ -6938,7 +6933,7 @@ void msr2mxsrTranslator:: appendStaffToNoteIfRelevant (
     }
     else {
       gLog <<
-        "[NONE]";
+        "[NULL]";
     }
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -7000,7 +6995,7 @@ void msr2mxsrTranslator::appendVoiceToNoteIfRelevant (
     }
     else {
       gLog <<
-        "[NONE]";
+        "[NULL]";
     }
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -7335,7 +7330,7 @@ void msr2mxsrTranslator::appendBasicsToNote (
 
   // append the step and pitch or rest sub elements
   switch (noteKind) {
-    case msrNoteKind::kNote_UNKNOWN:
+    case msrNoteKind::kNote_UNKNOWN_:
       break;
 
     case msrNoteKind::kNoteRestInMeasure:
@@ -7474,11 +7469,11 @@ void msr2mxsrTranslator::appendNotesDurationToNoteIfRelevant (
 
     ss <<
       "---> noteKind: " << msrNoteKindAsString (noteKind) <<
-      ", noteSoundingWholeNotes: " << noteSoundingWholeNotes <<
-      ", noteDisplayWholeNotes: " << noteDisplayWholeNotes <<
+      ", noteSoundingWholeNotes: " << noteSoundingWholeNotes.asString () <<
+      ", noteDisplayWholeNotes: " << noteDisplayWholeNotes.asString () <<
       ", noteTupletFactor: " << theMsrNote->getNoteTupletFactor ().asRational () <<
       ", divisionsPerQuarterNote: " << fDivisionsPerQuarterNote <<
-      ", partShortestNoteWholeNotes: " << fPartShortestNoteWholeNotes <<
+      ", partShortestNoteWholeNotes: " << fPartShortestNoteWholeNotes.asString () <<
       ", fDivisionsMultiplyingFactor: " << fDivisionsMultiplyingFactor <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -7492,7 +7487,7 @@ void msr2mxsrTranslator::appendNotesDurationToNoteIfRelevant (
   Bool doAppendNotesDuration (false);
 
   switch (noteKind) {
-    case msrNoteKind::kNote_UNKNOWN:
+    case msrNoteKind::kNote_UNKNOWN_:
       break;
 
     case msrNoteKind::kNoteSkipInMeasure:
@@ -7622,7 +7617,7 @@ void msr2mxsrTranslator::appendTimeModificationToNoteIfRelevant (
 
   // append the time modification if relevant
   switch (noteKind) {
-    case msrNoteKind::kNote_UNKNOWN:
+    case msrNoteKind::kNote_UNKNOWN_:
       break;
 
     case msrNoteKind::kNoteRestInMeasure:
@@ -7703,7 +7698,7 @@ void msr2mxsrTranslator::appendMsrNoteToMesureIfRelevant (
   Bool doGenerateNote (true);
 
   switch (theMsrNote->getNoteKind ()) {
-    case msrNoteKind::kNote_UNKNOWN:
+    case msrNoteKind::kNote_UNKNOWN_:
       break;
     case msrNoteKind::kNoteRestInMeasure:
       break;
@@ -7763,7 +7758,7 @@ void msr2mxsrTranslator::appendMsrNoteToMesureIfRelevant (
     Bool doGenerateType (true);
 
     switch (theMsrNote->getNoteKind ()) {
-      case msrNoteKind::kNote_UNKNOWN:
+      case msrNoteKind::kNote_UNKNOWN_:
         break;
 
       case msrNoteKind::kNoteRestInMeasure:
@@ -8104,7 +8099,7 @@ void msr2mxsrTranslator::visitEnd (S_msrNote& elt)
   Bool doRememberThisNote (false);
 
   switch (elt->getNoteKind ()) {
-    case msrNoteKind::kNote_UNKNOWN:
+    case msrNoteKind::kNote_UNKNOWN_:
       break;
 
     case msrNoteKind::kNoteRestInMeasure:
@@ -8869,7 +8864,7 @@ void msr2mxsrTranslator::visitStart (S_msrSyllable& elt)
           words =
             msrWords::create (
               inputLineNumber,
-              msrPlacementKind::kPlacement_UNKNOWN,                // default value
+              msrPlacementKind::kPlacement_UNKNOWN_,                // default value
               wordsValue,
               msrJustifyKind::kJustifyNone,                  // default value
               msrHorizontalAlignmentKind::kHorizontalAlignmentNone,      // default value
@@ -9781,7 +9776,7 @@ void msr2mxsrTranslator::visitStart (S_msrDynamic& elt)
       case msrDynamicKind::kDynamicSFFZ:
       case msrDynamicKind::kDynamicSFZP:
       case msrDynamicKind::kDynamicN:
-      case msrDynamicKind::kDynamic_UNKNOWN:
+      case msrDynamicKind::kDynamic_UNKNOWN_:
         knownToLilyPondNatively = false;
 
       default:

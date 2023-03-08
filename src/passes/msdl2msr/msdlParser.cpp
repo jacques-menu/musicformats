@@ -15,8 +15,6 @@
 
 #include "mfStaticSettings.h"
 
-#include "mfStaticSettings.h"
-
 #include "mfAssert.h"
 #include "mfConstants.h"
 #include "mfStringsHandling.h"
@@ -48,11 +46,11 @@ namespace MusicFormats
 //________________________________________________________________________
 S_msdlParser msdlParser::create (std::istream& inputStream)
 {
-  msdlParser* o =
+  msdlParser* obj =
     new msdlParser (
       inputStream);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 msdlParser::msdlParser (std::istream& inputStream)
@@ -1074,7 +1072,7 @@ void msdlParser::setCurrentOctaveEntryReference ()
 
       fCurrentOctaveEntryReference =
         msrNote::createNoteFromSemiTonesPitchAndOctave (
-          K_MF_INPUT_LINE_UNKNOWN,
+          K_MF_INPUT_LINE_UNKNOWN_,
           gGlobalLpsr2lilypondOahGroup->getFixedOctaveEntrySemiTonesPitchAndOctave ());
       break;
   } // switch
@@ -1088,7 +1086,7 @@ void msdlParser::setCurrentOctaveEntryReference ()
     // option '-rel, -relative' has been used:
     fCurrentOctaveEntryReference =
       msrNote::createNoteFromSemiTonesPitchAndOctave (
-        K_MF_INPUT_LINE_UNKNOWN,
+        K_MF_INPUT_LINE_UNKNOWN_,
         gGlobalLpsr2lilypondOahGroup->
           getRelativeOctaveEntrySemiTonesPitchAndOctave ());
   }
@@ -3497,7 +3495,7 @@ void msdlParser::Note (S_msdlTokenKindsSet stopperTokensSet)
 
   // there should be a pitch name
   msrQuarterTonesPitchKind
-    noteQuarterTonesPitchKind = msrQuarterTonesPitchKind::kQTP_UNKNOWN;
+    noteQuarterTonesPitchKind = msrQuarterTonesPitchKind::kQTP_UNKNOWN_;
 
   if (checkMandatoryTokenKind (
     __FILE__, __LINE__,
@@ -3642,7 +3640,7 @@ void msdlParser::Note (S_msdlTokenKindsSet stopperTokensSet)
   fCurrentMeasure->
     appendNoteOrPaddingToMeasure (note);
 
- --gIndenter;
+  --gIndenter;
 
   if (stopperTokensSet->getTokenKindsSetSize ()) {
     fMsdlTokensSetsStack.pop_front ();
@@ -3755,7 +3753,7 @@ void msdlParser::Pitch (S_msdlTokenKindsSet stopperTokensSet)
 
 msrOctaveKind msdlParser::OctaveIndication (S_msdlTokenKindsSet stopperTokensSet)
 {
-  msrOctaveKind result = msrOctaveKind::kOctave_UNKNOWN;
+  msrOctaveKind result = msrOctaveKind::kOctave_UNKNOWN_;
 
   if (stopperTokensSet->getTokenKindsSetSize ()) {
     fMsdlTokensSetsStack.push_front (stopperTokensSet);
@@ -3918,7 +3916,7 @@ void msdlParser::NoteNotesDuration (S_msdlTokenKindsSet stopperTokensSet)
   ++gIndenter;
 
   // there should be an integer or a name such as "maxima"
-  msrNotesDurationKind notesNotesDurationKind = msrNotesDurationKind::kNotesDuration_UNKNOWN;
+  msrNotesDurationKind notesNotesDurationKind = msrNotesDurationKind::kNotesDuration_UNKNOWN_;
 
   if (
     checkOptionalTokenKindsSet (
@@ -3986,7 +3984,7 @@ void msdlParser::NoteNotesDuration (S_msdlTokenKindsSet stopperTokensSet)
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
     switch (notesNotesDurationKind) {
-      case msrNotesDurationKind::kNotesDuration_UNKNOWN:
+      case msrNotesDurationKind::kNotesDuration_UNKNOWN_:
         fParserWaeHandler->
           malformedNoteNotesDuration ();
         break;
@@ -4035,8 +4033,8 @@ void msdlParser::NoteNotesDuration (S_msdlTokenKindsSet stopperTokensSet)
 
     ss <<
       "<-- NoteNotesDuration()" <<
-      ", fCurrentNoteSoundingWholeNotes: " << fCurrentNoteSoundingWholeNotes <<
-      ", fCurrentNoteDisplayWholeNotes: " << fCurrentNoteDisplayWholeNotes <<
+      ", fCurrentNoteSoundingWholeNotes: " << fCurrentNoteSoundingWholeNotes.asString () <<
+      ", fCurrentNoteDisplayWholeNotes: " << fCurrentNoteDisplayWholeNotes.asString () <<
       ", fCurrentNoteDotsNumber: " << fCurrentNoteDotsNumber <<
       std::endl;
 

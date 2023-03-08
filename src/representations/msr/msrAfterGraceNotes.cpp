@@ -9,8 +9,6 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include "mfStaticSettings.h"
-
 #include "visitor.h"
 
 #include "mfStaticSettings.h"
@@ -37,12 +35,12 @@ S_msrAfterGraceNotesGroupContents msrAfterGraceNotesGroupContents::create (
   int               inputLineNumber,
   const S_msrVoice& afterGraceNotesGroupContentsUpLinkToVoice)
 {
-  msrAfterGraceNotesGroupContents* o =
+  msrAfterGraceNotesGroupContents* obj =
     new msrAfterGraceNotesGroupContents (
       inputLineNumber,
       afterGraceNotesGroupContentsUpLinkToVoice);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 msrAfterGraceNotesGroupContents::msrAfterGraceNotesGroupContents (
@@ -279,7 +277,7 @@ std::ostream& operator << (std::ostream& os, const S_msrAfterGraceNotesGroupCont
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -292,14 +290,14 @@ S_msrAfterGraceNotesGroup msrAfterGraceNotesGroup::create (
   Bool         afterGraceNotesGroupIsSlashed,
   const S_msrVoice&   afterGraceNotesGroupUpLinkToVoice)
 {
-  msrAfterGraceNotesGroup* o =
+  msrAfterGraceNotesGroup* obj =
     new msrAfterGraceNotesGroup (
       inputLineNumber,
       afterGraceNotesGroupElement,
       afterGraceNotesGroupIsSlashed,
       afterGraceNotesGroupUpLinkToVoice);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 msrAfterGraceNotesGroup::msrAfterGraceNotesGroup (
@@ -546,7 +544,7 @@ std::ostream& operator << (std::ostream& os, const S_msrAfterGraceNotesGroup& el
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

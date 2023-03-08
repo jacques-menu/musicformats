@@ -11,20 +11,15 @@
 
 #include <climits>      // INT_MIN, INT_MAX
 
-#include "mfStaticSettings.h"
-
 #include "visitor.h"
-
-
-#include "msrWae.h"
 
 #include "mfStaticSettings.h"
 
 #include "mfAssert.h"
-
 #include "mfServices.h"
-
 #include "mfStringsHandling.h"
+
+#include "msrWae.h"
 
 #include "oahOah.h"
 
@@ -189,12 +184,12 @@ S_msrRepeatDescr msrRepeatDescr::create (
   int                repeatDescrStartInputLineNumber,
   const S_msrRepeat& repeatDescrRepeat)
 {
-  msrRepeatDescr* o = new
+  msrRepeatDescr* obj = new
     msrRepeatDescr (
       repeatDescrStartInputLineNumber,
       repeatDescrRepeat);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 msrRepeatDescr::msrRepeatDescr (
@@ -245,7 +240,7 @@ std::ostream& operator << (std::ostream& os, const S_msrRepeatDescr& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -253,7 +248,7 @@ std::ostream& operator << (std::ostream& os, const S_msrRepeatDescr& elt)
 
 //______________________________________________________________________________
 // constants
-const int msrVoice::K_VOICE_NUMBER_UNKNOWN                 = -96;
+const int msrVoice::K_VOICE_NUMBER_UNKNOWN_                 = -96;
 const int msrVoice::K_VOICE_HARMONIES_VOICE_BASE_NUMBER    =  20;
 const int msrVoice::K_VOICE_FIGURED_BASS_VOICE_BASE_NUMBER =  40;
 
@@ -265,15 +260,15 @@ S_msrVoice msrVoice::create (
                     voiceCreateInitialLastSegmentKind,
   const S_msrStaff& voiceUpLinkToStaff)
 {
-  msrVoice* o =
+  msrVoice* obj =
     new msrVoice (
       inputLineNumber,
       voiceKind,
       voiceNumber,
       voiceCreateInitialLastSegmentKind,
       voiceUpLinkToStaff);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 S_msrVoice msrVoice::createRegularVoice (
@@ -1215,7 +1210,7 @@ void msrVoice::setVoiceLastAppendedMeasure (
         measure->asString ();
     }
     else {
-      gLog << "[NONE]";
+      gLog << "[NULL]";
     }
 
     gLog <<
@@ -1417,7 +1412,7 @@ void msrVoice::setWholeNotesSinceLastRegularMeasureEnd (
 
     ss <<
       "Setting voice whole notes since last regular measure end to '" <<
-      wholeNotes <<
+      wholeNotes.asString () <<
   // JMI    "' (" << context << ")" <<
       " in voice \"" << getVoiceName () << "\"" <<
       "', line " << inputLineNumber <<
@@ -2221,7 +2216,7 @@ void msrVoice::insertHiddenMeasureAndBarLineInVoiceClone (
 
     ss <<
       "Inserting hidden measure and barLine at position " <<
-      measurePosition <<
+      measurePosition.asString () <<
       "' to voice clone \"" << getVoiceName () << "\"" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -2381,7 +2376,7 @@ void msrVoice::setVoiceShortestNoteWholeNotes (
         "The new shortest note wholeNotes in voice \"" <<
         getVoiceName () <<
         "\" becomes " <<
-        wholeNotes <<
+        wholeNotes.asString () <<
         std::endl;
 
       gWaeHandler->waeTrace (
@@ -2567,8 +2562,6 @@ void msrVoice::appendHarmonyToVoice (
   // register harmony
   ++fVoiceActualHarmoniesCounter;
   fMusicHasBeenInsertedInVoice = true;
-
-  --gIndenter;
 }
 
 void msrVoice::appendHarmoniesListToVoice (
@@ -2581,9 +2574,8 @@ void msrVoice::appendHarmoniesListToVoice (
     std::stringstream ss;
 
     ss <<
-      "Appending figured basses list \"" <<
-//       figuredBasssesList->asString () << // JMI v0.9.67 HARMFUL
-      " to voice \"" << getVoiceName () << "\"" <<
+      "Appending harmonies list to voice \"" << // JMI v0.9.67 HARMFUL
+      getVoiceName () <<
       "\"" <<
       ", measurePositionToAppendAt: " << measurePositionToAppendAt <<
       ", line " << inputLineNumber <<
@@ -2832,7 +2824,7 @@ void msrVoice::appendFiguredBassToVoiceClone (
 //
 //     ss <<
 //       "Padding up to measure position '" <<
-//       wholeNotesMeasurePosition <<
+//       wholeNotesMeasurePosition.asString () <<
 //       "' whole notes in voice \"" <<
 //       getVoiceName () <<
 //       "\", line " << inputLineNumber <<
@@ -2885,7 +2877,7 @@ void msrVoice::backupByWholeNotesStepLengthInVoice (
 
     ss <<
       "Backup by a '" <<
-      backupTargetMeasurePosition <<
+      backupTargetMeasurePosition.asString () <<
       "' whole notes step length in voice \"" <<
       getVoiceName () <<
       "\", line " << inputLineNumber <<
@@ -3285,7 +3277,7 @@ void msrVoice::appendNoteToVoice (const S_msrNote& note)
   // register whether music (i.e. not just skips)
   // has been inserted into the voice
   switch (note->getNoteKind ()) {
-    case msrNoteKind::kNote_UNKNOWN:
+    case msrNoteKind::kNote_UNKNOWN_:
       break;
 
     case msrNoteKind::kNoteRestInMeasure:
@@ -3382,7 +3374,7 @@ void msrVoice::appendNoteToVoiceClone (const S_msrNote& note) {
   // register whether music (i.e. not just skips)
   // has been inserted into the voice
   switch (note->getNoteKind ()) {
-    case msrNoteKind::kNote_UNKNOWN:
+    case msrNoteKind::kNote_UNKNOWN_:
       break;
 
     case msrNoteKind::kNoteRestInMeasure:
@@ -3581,9 +3573,9 @@ void msrVoice::addGraceNotesGroupBeforeAheadOfVoiceIfNeeded (
     std::stringstream ss;
 
     ss <<
-      "Adding grace notes '" <<
+      "Adding grace notes " <<
       graceNotesGroup->asString () <<
-      "' ahead of voice \"" << getVoiceName () << "\"" <<
+      " ahead of voice \"" << getVoiceName () << "\"" <<
       std::endl;
 
     gWaeHandler->waeTrace (
@@ -4256,7 +4248,7 @@ void msrVoice::displayVoiceMeasureRepeat (
   }
   else {
     gLog <<
-      "[NONE]" <<
+      "[NULL]" <<
       std::endl;
   }
 
@@ -4395,7 +4387,7 @@ void msrVoice::displayVoiceMultipleFullBarRests (
   }
   else {
     gLog <<
-      "[NONE]" <<
+      "[NULL]" <<
       std::endl;
   }
 
@@ -4571,7 +4563,7 @@ void msrVoice::moveVoiceLastSegmentToRepeatCommonPart (
     }
     else {
       gLog <<
-        "[NONE]";
+        "[NULL]";
     }
 
     gLog <<
@@ -5050,9 +5042,9 @@ void msrVoice::handleVoiceLevelRepeatStart (
               getVoiceName () <<
               "\"" <<
               ", measureWholeNotes: " <<
-              measureWholeNotes <<
+              measureWholeNotes.asString () <<
               ", fullMeasureWholeNotes: " <<
-              fullMeasureWholeNotes <<
+              fullMeasureWholeNotes.asString () <<
               ", line " << inputLineNumber <<
               std::endl;
           }
@@ -11032,8 +11024,8 @@ void msrVoice::finalizeVoice (
       "--> in voice \"" <<
       getVoiceName () <<
       "\"" <<
-      ", fVoiceShortestNoteWholeNotes: " << fVoiceShortestNoteWholeNotes <<
-      ", partShortestNoteWholeNotes: " << partShortestNoteWholeNotes <<
+      ", fVoiceShortestNoteWholeNotes: " << fVoiceShortestNoteWholeNotes.asString () <<
+      ", partShortestNoteWholeNotes: " << partShortestNoteWholeNotes.asString () <<
       std::endl;
 
     gWaeHandler->waeTrace (
@@ -11192,8 +11184,8 @@ void msrVoice::finalizeVoiceAndAllItsMeasures (
       "--> in voice \"" <<
       getVoiceName () <<
       "\"" <<
-      ", fVoiceShortestNoteWholeNotes: " << fVoiceShortestNoteWholeNotes <<
-      ", partShortestNoteWholeNotes: " << partShortestNoteWholeNotes <<
+      ", fVoiceShortestNoteWholeNotes: " << fVoiceShortestNoteWholeNotes.asString () <<
+      ", partShortestNoteWholeNotes: " << partShortestNoteWholeNotes.asString () <<
       std::endl;
 
     gWaeHandler->waeTrace (
@@ -11354,7 +11346,7 @@ void msrVoice::checkBeamNumber (S_msrBeam beam, S_msrNote note)
       fVoiceBeamNumbersStack.size ();
 
   switch (beamKind) {
-    case msrBeamKind::kBeam_UNKNOWN:
+    case msrBeamKind::kBeam_UNKNOWN_:
       {
         std::stringstream ss;
 
@@ -11822,7 +11814,7 @@ void msrVoice::printFull (std::ostream& os) const
       fVoiceFirstClef;
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
   os << std::left <<
     std::setw (fieldWidth) << "fVoiceCurrentClef" << ": ";
@@ -11831,7 +11823,7 @@ void msrVoice::printFull (std::ostream& os) const
       fVoiceCurrentClef;
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   os << std::left <<
@@ -11841,7 +11833,7 @@ void msrVoice::printFull (std::ostream& os) const
       fVoiceCurrentKey;
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   os << std::left <<
@@ -11856,7 +11848,7 @@ void msrVoice::printFull (std::ostream& os) const
     --gIndenter;
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -11870,7 +11862,7 @@ void msrVoice::printFull (std::ostream& os) const
   }
   else {
     os <<
-      "[NONE]";
+      "[NULL]";
   }
   os << std::endl;
 
@@ -11883,14 +11875,14 @@ void msrVoice::printFull (std::ostream& os) const
   }
   else {
     os <<
-      "[NONE]";
+      "[NULL]";
   }
   os << std::endl;
 //
 
   os << std::left <<
     std::setw (fieldWidth) << "fVoiceShortestNoteWholeNotes" << ": " <<
-    fVoiceShortestNoteWholeNotes <<
+    fVoiceShortestNoteWholeNotes.asString () <<
     std::endl <<
     std::setw (fieldWidth) << "fVoiceShortestNoteTupletFactor" << ": " <<
     std::endl;
@@ -11934,7 +11926,7 @@ void msrVoice::printFull (std::ostream& os) const
     }
   else {
     os <<
-      "[NONE]";
+      "[NULL]";
   }
   os << std::endl;
 
@@ -11949,7 +11941,7 @@ void msrVoice::printFull (std::ostream& os) const
     }
   else {
     os <<
-      "[NONE]";
+      "[NULL]";
   }
   os << std::endl;
 
@@ -11964,7 +11956,7 @@ void msrVoice::printFull (std::ostream& os) const
     }
   else {
     os <<
-      "[NONE]";
+      "[NULL]";
   }
   os << std::endl;
 
@@ -11984,7 +11976,7 @@ void msrVoice::printFull (std::ostream& os) const
     }
     else {
       os <<
-        "[NONE]";
+        "[NULL]";
     }
     os << std::endl;
   }
@@ -11999,7 +11991,7 @@ void msrVoice::printFull (std::ostream& os) const
   }
   else {
     os <<
-      "[NONE]" <<
+      "[NULL]" <<
       std::endl;
   }
 
@@ -12061,7 +12053,7 @@ void msrVoice::printFull (std::ostream& os) const
   }
   else {
     os <<
-      "[NONE]" <<
+      "[NULL]" <<
       std::endl;
   }
 
@@ -12122,7 +12114,7 @@ void msrVoice::print (std::ostream& os) const
   }
   else {
     os <<
-      "[NONE]";
+      "[NULL]";
   }
   os << std::endl;
 
@@ -12136,7 +12128,7 @@ void msrVoice::print (std::ostream& os) const
   }
   else {
     os <<
-      "[NONE]";
+      "[NULL]";
   }
   os << std::endl;
 
@@ -12284,7 +12276,7 @@ std::ostream& operator << (std::ostream& os, const S_msrVoice& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

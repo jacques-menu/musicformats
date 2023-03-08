@@ -38,13 +38,13 @@ S_extraDisplayAllHarmoniesStructuresAtom extraDisplayAllHarmoniesStructuresAtom:
   const std::string& longName,
   const std::string& description)
 {
-  extraDisplayAllHarmoniesStructuresAtom* o = new
+  extraDisplayAllHarmoniesStructuresAtom* obj = new
     extraDisplayAllHarmoniesStructuresAtom (
       longName,
       shortName,
       description);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 extraDisplayAllHarmoniesStructuresAtom::extraDisplayAllHarmoniesStructuresAtom (
@@ -223,7 +223,7 @@ std::ostream& operator << (std::ostream& os, const S_extraDisplayAllHarmoniesStr
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -238,7 +238,7 @@ S_extraDisplayAllHarmoniesContentsAtom extraDisplayAllHarmoniesContentsAtom::cre
   const std::string& variableName,
   std::string&       stringVariable)
 {
-  extraDisplayAllHarmoniesContentsAtom* o = new
+  extraDisplayAllHarmoniesContentsAtom* obj = new
     extraDisplayAllHarmoniesContentsAtom (
       longName,
       shortName,
@@ -246,8 +246,8 @@ S_extraDisplayAllHarmoniesContentsAtom extraDisplayAllHarmoniesContentsAtom::cre
       valueSpecification,
       variableName,
       stringVariable);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 extraDisplayAllHarmoniesContentsAtom::extraDisplayAllHarmoniesContentsAtom (
@@ -512,7 +512,7 @@ std::ostream& operator << (std::ostream& os, const S_extraDisplayAllHarmoniesCon
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -527,7 +527,7 @@ S_extraDisplayHarmonyDetailsAtom extraDisplayHarmonyDetailsAtom::create (
   const std::string& variableName,
   std::string&       stringVariable)
 {
-  extraDisplayHarmonyDetailsAtom* o = new
+  extraDisplayHarmonyDetailsAtom* obj = new
     extraDisplayHarmonyDetailsAtom (
       longName,
       shortName,
@@ -535,8 +535,8 @@ S_extraDisplayHarmonyDetailsAtom extraDisplayHarmonyDetailsAtom::create (
       valueSpecification,
       variableName,
       stringVariable);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 extraDisplayHarmonyDetailsAtom::extraDisplayHarmonyDetailsAtom (
@@ -879,7 +879,7 @@ S_extraDisplayHarmonyAnalysisAtom extraDisplayHarmonyAnalysisAtom::create (
   const std::string& variableName,
   std::string&       stringVariable)
 {
-  extraDisplayHarmonyAnalysisAtom* o = new
+  extraDisplayHarmonyAnalysisAtom* obj = new
     extraDisplayHarmonyAnalysisAtom (
       longName,
       shortName,
@@ -887,8 +887,8 @@ S_extraDisplayHarmonyAnalysisAtom extraDisplayHarmonyAnalysisAtom::create (
       valueSpecification,
       variableName,
       stringVariable);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 extraDisplayHarmonyAnalysisAtom::extraDisplayHarmonyAnalysisAtom (
@@ -1120,7 +1120,7 @@ void extraDisplayHarmonyAnalysisAtom::applyAtomWithValue (
       msrHarmonyKindFromString (
         harmonyName);
 
-  if (harmonyKind == msrHarmonyKind::kHarmony_UNKNOWN) {
+  if (harmonyKind == msrHarmonyKind::kHarmony_UNKNOWN_) {
     std::stringstream ss;
 
     ss <<
@@ -1261,9 +1261,9 @@ void extraDisplayHarmonyAnalysisAtom::displayAtomWithVariableOptionsValues (
 
 S_harmoniesExtraOahGroup harmoniesExtraOahGroup::create ()
 {
-  harmoniesExtraOahGroup* o = new harmoniesExtraOahGroup ();
-  assert (o != nullptr);
-  return o;
+  harmoniesExtraOahGroup* obj = new harmoniesExtraOahGroup ();
+  assert (obj != nullptr);
+  return obj;
 }
 
 harmoniesExtraOahGroup::harmoniesExtraOahGroup ()
@@ -1547,7 +1547,7 @@ std::ostream& operator << (std::ostream& os, const S_harmoniesExtraOahGroup& elt
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

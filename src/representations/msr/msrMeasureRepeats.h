@@ -203,7 +203,7 @@ EXP std::ostream& operator << (std::ostream& os, const S_msrMeasureRepeatReplica
 // data types
 
 enum class msrMeasureRepeatKind {
-  kMeasureRepeat_UNKNOWN,
+  kMeasureRepeat_UNKNOWN_,
   kMeasureRepeatStart, kMeasureRepeatStop
 };
 

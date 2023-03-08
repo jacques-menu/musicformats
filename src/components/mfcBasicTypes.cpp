@@ -22,7 +22,6 @@
 #include "mfStringsHandling.h"
 #include "mfIndentedTextOutput.h"
 
-// #include "msrWholeNotes.h"
 
 #include "oahEarlyOptions.h"
 
@@ -69,9 +68,9 @@ void crackVersionNumber ( // JMI ??? v0.9.66
 
     ss <<
       "There are " << smSize << " matches" <<
-      " for version std::string '" << theString <<
-      "' with std::regex '" << regularExpression <<
-      "'" <<
+      " for version std::string \"" << theString <<
+      "\" with std::regex \"" << regularExpression <<
+      '\"' <<
       std::endl <<
       smSize << " elements: ";
 
@@ -134,7 +133,7 @@ void crackVersionNumber ( // JMI ??? v0.9.66
       ss <<
         "There are " << smSize << " matches" <<
         " for chord details std::string '" << theString <<
-        "' with std::regex '" << regularExpression <<
+        "\" with std::regex '" << regularExpression <<
         "'" <<
         std::endl <<
         smSize << " elements: ";
@@ -184,7 +183,7 @@ void crackVersionNumber ( // JMI ??? v0.9.66
 
       ss <<
         "version number argument '" << theString <<
-        "' is ill-formed";
+        "\" is ill-formed";
 
       oahError (ss.str ());
     }
@@ -343,14 +342,14 @@ S_mfcVersionNumber mfcVersionNumber::create (
   int                patchNumber,
   const std::string& preRelease)
 {
-  mfcVersionNumber* o =
+  mfcVersionNumber* obj =
     new mfcVersionNumber (
       majorNumber,
       minorNumber,
       patchNumber,
       preRelease);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 mfcVersionNumber::mfcVersionNumber (
@@ -421,7 +420,7 @@ S_mfcVersionNumber mfcVersionNumber::createFromString (
     ss <<
       "There are " << smSize << " matches" <<
       " for version std::string '" << theString <<
-      "' with std::regex '" << regularExpression <<
+      "\" with std::regex '" << regularExpression <<
       "'" <<
       std::endl <<
       smSize << " elements: ";
@@ -735,7 +734,7 @@ std::ostream& operator << (std::ostream& os, const S_mfcVersionNumber& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -747,13 +746,13 @@ S_mfcVersionDescr mfcVersionDescr::create (
   const std::string&            versionDate,
   const std::list<std::string>& versionDescriptionItems)
 {
-  mfcVersionDescr* o =
+  mfcVersionDescr* obj =
     new mfcVersionDescr (
       versionNumber,
       versionDate,
       versionDescriptionItems);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 mfcVersionDescr::mfcVersionDescr (
@@ -822,7 +821,7 @@ std::ostream& operator << (std::ostream& os, const S_mfcVersionDescr& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -845,10 +844,10 @@ S_mfcVersionsHistory mfcVersionsHistory::create ()
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  mfcVersionsHistory* o =
+  mfcVersionsHistory* obj =
     new mfcVersionsHistory ();
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 mfcVersionsHistory::mfcVersionsHistory ()
@@ -929,7 +928,7 @@ std::ostream& operator << (std::ostream& os, const S_mfcVersionsHistory& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -983,12 +982,12 @@ S_mfcComponent mfcComponent::create (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  mfcComponent* o =
+  mfcComponent* obj =
     new mfcComponent (
       componentName,
       componentKind);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 */
 
@@ -1136,7 +1135,7 @@ std::ostream& operator << (std::ostream& os, const S_mfcComponent& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -1161,11 +1160,11 @@ S_mfcOahComponent mfcOahComponent::create (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  mfcOahComponent* o =
+  mfcOahComponent* obj =
     new mfcOahComponent (
       formatName);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 mfcOahComponent::mfcOahComponent (
@@ -1200,7 +1199,7 @@ std::ostream& operator << (std::ostream& os, const S_mfcOahComponent& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -1225,11 +1224,11 @@ S_mfcRepresentationComponent mfcRepresentationComponent::create (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  mfcRepresentationComponent* o =
+  mfcRepresentationComponent* obj =
     new mfcRepresentationComponent (
       formatName);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 mfcRepresentationComponent::mfcRepresentationComponent (
@@ -1264,7 +1263,7 @@ std::ostream& operator << (std::ostream& os, const S_mfcRepresentationComponent&
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -1289,11 +1288,11 @@ S_mfcPassComponent mfcPassComponent::create (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  mfcPassComponent* o =
+  mfcPassComponent* obj =
     new mfcPassComponent (
       passName);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 mfcPassComponent::mfcPassComponent (
@@ -1328,7 +1327,7 @@ std::ostream& operator << (std::ostream& os, const S_mfcPassComponent& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -1394,14 +1393,14 @@ S_mfcMultiComponent mfcMultiComponent::create (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  mfcMultiComponent* o =
+  mfcMultiComponent* obj =
     new mfcMultiComponent (
       multiComponentName,
       componentKind,
       componentEntropicityKind,
       componentUsedFromTheCLIKind);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 */
 
@@ -2010,7 +2009,7 @@ std::ostream& operator << (std::ostream& os, const S_mfcMultiComponent& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -2039,13 +2038,13 @@ S_mfcGeneratorComponent mfcGeneratorComponent::create (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  mfcGeneratorComponent* o =
+  mfcGeneratorComponent* obj =
     new mfcGeneratorComponent (
       generatorName,
       componentEntropicityKind,
       componentUsedFromTheCLIKind);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 mfcGeneratorComponent::mfcGeneratorComponent (
@@ -2086,7 +2085,7 @@ std::ostream& operator << (std::ostream& os, const S_mfcGeneratorComponent& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -2115,13 +2114,13 @@ S_mfcConverterComponent mfcConverterComponent::create (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  mfcConverterComponent* o =
+  mfcConverterComponent* obj =
     new mfcConverterComponent (
       converterName,
       componentEntropicityKind,
       componentUsedFromTheCLIKind);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 mfcConverterComponent::mfcConverterComponent (
@@ -2162,7 +2161,7 @@ std::ostream& operator << (std::ostream& os, const S_mfcConverterComponent& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -2191,13 +2190,13 @@ S_mfcLibraryComponent mfcLibraryComponent::create (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  mfcLibraryComponent* o =
+  mfcLibraryComponent* obj =
     new mfcLibraryComponent (
       libraryVersionsName,
       componentEntropicityKind,
       componentUsedFromTheCLIKind);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 mfcLibraryComponent::mfcLibraryComponent (
@@ -2464,7 +2463,7 @@ std::ostream& operator << (std::ostream& os, const S_mfcLibraryComponent& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

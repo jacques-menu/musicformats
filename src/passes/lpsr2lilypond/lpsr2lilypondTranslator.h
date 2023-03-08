@@ -27,7 +27,6 @@
 #include "msrRepeats.h"
 #include "msrStems.h"
 #include "msrTupletFactors.h"
-// #include "msrWholeNotes.h"
 
 #include "lpsrContexts.h"
 

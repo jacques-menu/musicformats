@@ -37,9 +37,9 @@ S_mxsrOahGroup gGlobalMxsrOahGroup;
 
 S_mxsrOahGroup mxsrOahGroup::create ()
 {
-  mxsrOahGroup* o = new mxsrOahGroup ();
-  assert (o != nullptr);
-  return o;
+  mxsrOahGroup* obj = new mxsrOahGroup ();
+  assert (obj != nullptr);
+  return obj;
 }
 
 mxsrOahGroup::mxsrOahGroup ()
@@ -337,7 +337,7 @@ std::ostream& operator << (std::ostream& os, const S_mxsrOahGroup& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

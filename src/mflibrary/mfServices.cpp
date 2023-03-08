@@ -40,8 +40,8 @@ std::string mfServiceKindAsString (
 
   // these strings are used in the command line options
   switch (serviceKind) {
-    case mfServiceKind::kMfService_UNKNOWN:
-      result = "*kMfService_UNKNOWN*";
+    case mfServiceKind::kMfService_UNKNOWN_:
+      result = "*kMfService_UNKNOWN_*";
       break;
 
     case mfServiceKind::kMfService_xml2ly:
@@ -92,7 +92,7 @@ EXP mfIndentedStringStream& operator << (
 mfServiceKind mfServiceKindFromString (const std::string& theString)
 {
   mfServiceKind result =
-    mfServiceKind::kMfService_UNKNOWN;
+    mfServiceKind::kMfService_UNKNOWN_;
 
   std::map<std::string, mfServiceKind>::const_iterator
     it =
@@ -243,11 +243,11 @@ void initializeMusicFormatsServices ()
 S_mfService mfService::create (
   const std::string& serviceName)
 {
-  mfService* o = new
+  mfService* obj = new
     mfService (
       serviceName);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 mfService::mfService (
@@ -444,23 +444,23 @@ void mfService::printServiceForAboutOption (std::ostream& os) const
 S_mfServiceRunData mfServiceRunData::create (
   const std::string& serviceName)
 {
-  mfServiceRunData* o = new
+  mfServiceRunData* obj = new
     mfServiceRunData (
       serviceName);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 // S_mfServiceRunData mfServiceRunData::create (
 //   const std::string& serviceName,
 //   S_oahHandler  runOahHandler)
 // {
-//   mfServiceRunData* o = new
+//   mfServiceRunData* obj = new
 //     mfServiceRunData (
 //       serviceName,
 //       runOahHandler);
-//   assert (o != nullptr);
-//   return o;
+//   assert (obj != nullptr);
+//   return obj;
 // }
 
 mfServiceRunData::mfServiceRunData (

@@ -9,8 +9,6 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include "mfStaticSettings.h"
-
 #include "visitor.h"
 
 #include "msrWae.h"
@@ -49,7 +47,7 @@ S_msrTuplet msrTuplet::create (
   const msrWholeNotes&    memberNotesSoundingWholeNotes,
   const msrWholeNotes&    memberNotesDisplayWholeNotes)
 {
-  msrTuplet* o =
+  msrTuplet* obj =
     new msrTuplet (
       inputLineNumber,
       upLinkToMeasure,
@@ -62,8 +60,8 @@ S_msrTuplet msrTuplet::create (
       tupletFactor,
       memberNotesSoundingWholeNotes,
       memberNotesDisplayWholeNotes);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 S_msrTuplet msrTuplet::create (
@@ -110,7 +108,7 @@ msrTuplet::msrTuplet (
 {
   fTupletUpLinkToMeasure = upLinkToMeasure;
 
-  fTupletKind = msrTupletInKind::kTupletIn_UNKNOWN;
+  fTupletKind = msrTupletInKind::kTupletIn_UNKNOWN_;
 
   fTupletNumber = tupletNumber;
 
@@ -135,14 +133,8 @@ msrTuplet::msrTuplet (
     std::stringstream ss;
 
     ss <<
-      "Creating tuplet:" <<
-      std::endl;
-
-    ++gIndenter;
-
-    this->print (gLog);
-
-    --gIndenter;
+      "Creating tuplet " <<
+      asString ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -208,7 +200,7 @@ S_msrTuplet msrTuplet::createTupletNewbornClone ()
 //   S_msrMeasure result;
 //
 //   switch (fTupletKind) {
-//     case msrTupletInKind::kTupletIn_UNKNOWN:
+//     case msrTupletInKind::kTupletIn_UNKNOWN_:
 //       break;
 //
 //     case msrTupletInKind::kTupletInMeasure:
@@ -232,7 +224,7 @@ S_msrTuplet msrTuplet::createTupletNewbornClone ()
 //   S_msrTuplet result;
 //
 //   switch (fTupletKind) {
-//     case msrTupletInKind::kTupletIn_UNKNOWN:
+//     case msrTupletInKind::kTupletIn_UNKNOWN_:
 //       break;
 //
 //     case msrTupletInKind::kTupletInMeasure:
@@ -751,11 +743,12 @@ void msrTuplet::setMeasurePosition (
     std::stringstream ss;
 
     ss <<
-      "Setting measure position of " <<
+      "Setting the measure position of " <<
       asString () <<
-      " to '" << measurePosition <<
-      "' (was '" <<
-      fMeasurePosition <<
+      " to " <<
+      measurePosition.asString () <<
+      " (was '" <<
+      fMeasurePosition.asString () <<
       "') in measure " <<
       measure->asShortString () <<
       " (measureElementMeasureNumber: " <<
@@ -793,9 +786,8 @@ void msrTuplet::setTupletMembersMeasurePositions (
 
     ss <<
       "Setting tuplet members measure positions of " << asString () <<
-      " to '" <<
-      measurePosition <<
-      "'" <<
+      " to " <<
+      measurePosition.asString () <<
       std::endl;
 
     gWaeHandler->waeTrace (
@@ -811,8 +803,8 @@ void msrTuplet::setTupletMembersMeasurePositions (
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
-    measurePosition != K_MEASURE_POSITION_UNKNOWN,
-    "measurePosition == K_MEASURE_POSITION_UNKNOWN");
+    measurePosition != K_MEASURE_POSITION_UNKNOWN_,
+    "measurePosition == K_MEASURE_POSITION_UNKNOWN_");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // set tuplet's measure position
@@ -1060,7 +1052,7 @@ std::string msrTuplet::asString () const
     "[Tuplet" <<
     ", tupletKind: " << fTupletKind <<
     fTupletFactor.asString () <<
-    ' ' << fSoundingWholeNotes << " tupletSoundingWholeNotes" <<
+    ' ' << fSoundingWholeNotes.asString () << " tupletSoundingWholeNotes" <<
     ", measure ' " <<
     ", line " << fInputLineNumber;
 
@@ -1071,17 +1063,12 @@ std::string msrTuplet::asString () const
       fTupletUpLinkToMeasure->getMeasureNumber ();
   }
   else {
-    ss << "[UNKNOWN]";
+    ss << "[UNKNOWN_MEASURE_NUMBER]";
   }
 
   ss <<
-    ", fMeasurePosition: ";
-  if (fMeasurePosition.getNumerator () < 0) {
-    ss << "???";
-  }
-  else {
-    ss << fMeasurePosition;
-  }
+    ", fMeasurePosition: " <<
+    fMeasurePosition.asString ();
 
   ss << '[';
 
@@ -1150,26 +1137,26 @@ void msrTuplet::printFull (std::ostream& os) const
   os << std::left <<
     std::setw (fieldWidth) <<
     "fMeasurePosition" << ": " <<
-    fMeasurePosition <<
+    fMeasurePosition.asString () <<
     std::endl <<
     std::setw (fieldWidth) <<
     "fSoundingWholeNotes" << ": " <<
-    fSoundingWholeNotes <<
+    fSoundingWholeNotes.asString () <<
     std::endl <<
 
     std::setw (fieldWidth) <<
     "fMemberNotesSoundingWholeNotes" << ": " <<
-    fMemberNotesSoundingWholeNotes <<
+    fMemberNotesSoundingWholeNotes.asString () <<
     std::endl <<
 
     std::setw (fieldWidth) <<
     "fMemberNotesDisplayWholeNotes" << ": " <<
-    fMemberNotesDisplayWholeNotes <<
+    fMemberNotesDisplayWholeNotes.asString () <<
     std::endl <<
 
     std::setw (fieldWidth) <<
     "fTupletDisplayWholeNotes" << ": " <<
-    fTupletDisplayWholeNotes <<
+    fTupletDisplayWholeNotes.asString () <<
     std::endl <<
 
     std::setw (fieldWidth) <<
@@ -1250,7 +1237,7 @@ void msrTuplet::printFull (std::ostream& os) const
       fTupletUpLinkToMeasure->asShortString ();
   }
   else {
-    os << "[NONE]";
+    os << "[NULL]";
   }
   os << std::endl;
 
@@ -1262,7 +1249,7 @@ void msrTuplet::printFull (std::ostream& os) const
       fTupletShortcutUpLinkToTuplet->asShortString ();
   }
   else {
-    os << "[NONE]";
+    os << "[NULL]";
   }
   os << std::endl;
 
@@ -1296,25 +1283,25 @@ void msrTuplet::print (std::ostream& os) const
     std::setw (fieldWidth) <<
     std::setw (fieldWidth) <<
     "fMeasurePosition" << ": " <<
-    fMeasurePosition <<
+    fMeasurePosition.asString () <<
     std::endl <<
     std::setw (fieldWidth) <<
     "fSoundingWholeNotes" << ": " <<
-    fSoundingWholeNotes <<
+    fSoundingWholeNotes.asString () <<
     std::endl <<
 
     std::setw (fieldWidth) <<
     "fTupletDisplayWholeNotes" << ": " <<
-    fTupletDisplayWholeNotes <<
+    fTupletDisplayWholeNotes.asString () <<
     std::endl <<
 
     std::setw (fieldWidth) <<
     "fMemberNotesSoundingWholeNotes" << ": " <<
-    fMemberNotesSoundingWholeNotes <<
+    fMemberNotesSoundingWholeNotes.asString () <<
     std::endl <<
     std::setw (fieldWidth) <<
     "fMemberNotesDisplayWholeNotes" << ": " <<
-    fMemberNotesDisplayWholeNotes <<
+    fMemberNotesDisplayWholeNotes.asString () <<
     std::endl <<
 
     std::setw (fieldWidth) <<
@@ -1334,7 +1321,7 @@ void msrTuplet::print (std::ostream& os) const
         fTupletUpLinkToMeasure->getMeasureNumber ();
     }
     else {
-      os << "[UNKNOWN]";
+      os << "[UNKNOWN_MEASURE_NUMBER]";
     }
   os << std::endl;
 
@@ -1373,7 +1360,7 @@ void msrTuplet::print (std::ostream& os) const
       fTupletUpLinkToMeasure->asShortString ();
   }
   else {
-    os << "[NONE]";
+    os << "[NULL]";
   }
   os << std::endl;
 
@@ -1385,7 +1372,7 @@ void msrTuplet::print (std::ostream& os) const
       fTupletShortcutUpLinkToTuplet->asShortString ();
   }
   else {
-    os << "[NONE]";
+    os << "[NULL]";
   }
   os << std::endl;
 
@@ -1400,7 +1387,7 @@ std::ostream& operator << (std::ostream& os, const S_msrTuplet& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

@@ -31,11 +31,11 @@ S_msrOrnament msrOrnament::create (
   msrOrnamentKind  ornamentKind,
   msrPlacementKind ornamentPlacementKind)
 {
-  msrOrnament* o =
+  msrOrnament* obj =
     new msrOrnament (
       inputLineNumber, ornamentKind, ornamentPlacementKind);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 msrOrnament::msrOrnament (
@@ -242,7 +242,7 @@ std::ostream& operator << (std::ostream& os, const S_msrOrnament& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

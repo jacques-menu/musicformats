@@ -197,7 +197,7 @@ static mfMusicformatsErrorKind sxmlFile2lilypondWithHandler (
   S_msrScore secondMsrScore;
 
   try {
-if (false) { // JMI
+if (false) { // JMI v0.9.67
     for (const S_msrVoice& voice: firstMsrScore->getScoreAllVoicesList ()) {
       gLog <<
         "===> firstMsrScore voice: " << voice->getVoiceName () <<

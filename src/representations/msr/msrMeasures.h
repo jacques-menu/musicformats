@@ -772,16 +772,16 @@ class EXP msrMeasure : public msrSegmentElement
     // ------------------------------------------------------
 
     // harmonies
-    void                  handleTheFirstHarmonyInAHarmoniesMeasure (
-                            int                 inputLineNumber,
-                            const S_msrVoice&   voice,
-                            const S_msrHarmony& currentHarmony);
-
-    void                  handleASubsequentHarmonyInAHarmoniesMeasure (
-                            int                 inputLineNumber,
-                            const S_msrVoice&   voice,
-                            const S_msrHarmony& previousHarmony,
-                            const S_msrHarmony& currentHarmony);
+//     void                  handleTheFirstHarmonyInAHarmoniesMeasure (
+//                             int                 inputLineNumber,
+//                             const S_msrVoice&   voice,
+//                             const S_msrHarmony& currentHarmony);
+//
+//     void                  handleASubsequentHarmonyInAHarmoniesMeasure (
+//                             int                 inputLineNumber,
+//                             const S_msrVoice&   voice,
+//                             const S_msrHarmony& previousHarmony,
+//                             const S_msrHarmony& currentHarmony);
 
     void                  handleTheLastHarmonyInAHarmoniesMeasure (
                             int                 inputLineNumber,
@@ -792,12 +792,12 @@ class EXP msrMeasure : public msrSegmentElement
                             int                inputLineNumber,
                             const std::string& context);
 
-    void                  finalizeHarmonyInAHarmoniesMeasure (
-                            int                 inputLineNumber,
-                            const S_msrVoice&   voice,
-                            const S_msrHarmony& previousHarmony,
-                            const S_msrHarmony& currentHarmony,
-                            const std::string&  context);
+//     void                  finalizeHarmonyInAHarmoniesMeasure (
+//                             int                 inputLineNumber,
+//                             const S_msrVoice&   voice,
+//                             const S_msrHarmony& previousHarmony,
+//                             const S_msrHarmony& currentHarmony,
+//                             const std::string&  context);
 
     // figurd bass
     void                  handleFirstFiguredBassInFiguredBassMeasure (

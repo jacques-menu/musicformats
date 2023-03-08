@@ -424,10 +424,10 @@ The creation of the instances in \wae{waeHandlers.cpp} is done with:
 \begin{lstlisting}[language=CPlusPlus]
 S_waeHandler waeHandler::create ()
 {
-  waeHandler* o =
+  waeHandler* obj =
     new waeHandler ();
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 \end{lstlisting}
 
@@ -489,7 +489,7 @@ The following rules apply:
 \item all enumeration constants start with '{\tt k}'. common prefixes are used to help locate all occurences of constants of the given type in a text editor, as:
 \begin{lstlisting}[language=CPlusPlus]
 enum class msrBassFigurePrefixKind {
-  kBassFigurePrefix_UNKNOWN,
+  kBassFigurePrefix_UNKNOWN_,
   kBassFigurePrefixDoubleFlat, kBassFigurePrefixFlat, kBassFigurePrefixFlatFlat,
   kBassFigurePrefixNatural,
   kBassFigurePrefixSharpSharp, kBassFigurePrefixSharp, kBassFigurePrefixDoubleSharp
@@ -651,7 +651,7 @@ void oahValueFittedAtom::applyValueLessAtom (std::ostream& os)
 
 and:
 \begin{lstlisting}[language=CPlusPlus]
-    case msrPedalTypeKind::kPedalType_UNKNOWN:
+    case msrPedalTypeKind::kPedalType_UNKNOWN_:
       {
         // should not occur
 
@@ -886,7 +886,7 @@ They are used for:
 \begin{itemize}
 \item classes methods such as \method{msrTie}{create}, \method{msrTempo}{createTempoPerMinute} and \method{msrTemp}{msrTempoBeatUnitsKindAsString};
 
-\item classes constant fields such as \constant{msrStanza}{K_STANZA_NUMBER_UNKNOWN}, to be prefered to C-style {\tt \#define} preprocessor specifications for type safety;
+\item classes constant fields such as \constant{msrStanza}{K_STANZA_NUMBER_UNKNOWN_}, to be prefered to C-style {\tt \#define} preprocessor specifications for type safety;
 
 \item functions of methods remanent variables such as \functionPrivateVariable{pPrivateThisMethodHasBeenRun} in \function{initializeMsrGenerationAPI};
 
@@ -943,7 +943,7 @@ All \enumType s use the \CPlusplus\ '{\tt enum class}' feature, such as:
 
 \begin{lstlisting}[language=CPlusPlus]
 enum class msrSlurTypeKind {
-  kSlurType_UNKNOWN,
+  kSlurType_UNKNOWN_,
 
   kSlurTypeRegularStart, kSlurTypePhrasingStart,
   kSlurTypeContinue,
@@ -955,9 +955,9 @@ This prevents enumeration constants name conflicts across \enumType s, and quali
 
 Many enumerations names end in '{\tt Kind}', which is a way distinguish them from rather similar classes names in some cases.
 
-Enumeration constants in the form {\tt k*_UNKNOWN} are used to indicate a value that \MainIt{has not been set yet}. There are always the first on in the corresponding enumeration, to benefit from the the \CPlusplus\ implicit \initialization\  to the the equivalent of 0.
+Enumeration constants in the form {\tt k*_UNKNOWN_} are used to indicate a value that \MainIt{has not been set yet}. There are always the first on in the corresponding enumeration, to benefit from the the \CPlusplus\ implicit \initialization\  to the the equivalent of 0.
 
-An enumeration constant may end in '{\tt None}', meaning that {\tt "[NONE]"} is actually a possible value for the corresponding type:
+An enumeration constant may end in '{\tt None}', meaning that {\tt "none"} is actually a possible value for the corresponding type:
 \begin{lstlisting}[language=CPlusPlus]
     // repeat winged
     enum class msrBarLineRepeatWingedKind {
@@ -980,7 +980,7 @@ void mxsr2msrTranslator::visitStart ( S_repeat& elt )
       msrBarLineRepeatWingedKind::kBarLineRepeatWingedNone; // default value
 
     if (winged.size ()) {
-      if       (winged == "[NONE]") {
+      if       (winged == "none") {
         fCurrentBarLineRepeatWingedKind =
           msrBarLineRepeatWingedKind::kBarLineRepeatWingedNone;
       }
@@ -1021,7 +1021,7 @@ void mxsr2msrTranslator::visitStart ( S_repeat& elt )
 The \mf\ \enumType s come with a \code{$<$$<$} operator to display their values in a user friendly way, such as \type{msrChordInKind} in \msrBoth{msrBasicTypes}:
 \begin{lstlisting}[language=CPlusPlus]
 enum class msrChordInKind {
-  kChordIn_UNKNOWN,
+  kChordIn_UNKNOWN_,
 
   kChordInMeasure,
   kChordInTuplet,
@@ -1042,8 +1042,8 @@ std::string msrChordInKindAsString (
   std::string result;
 
   switch (chordInKind) {
-    case msrChordInKind::kChordIn_UNKNOWN:
-      result = "kChordIn_UNKNOWN";
+    case msrChordInKind::kChordIn_UNKNOWN_:
+      result = "kChordIn_UNKNOWN_";
       break;
     case msrChordInKind::kChordInMeasure:
       result = "kChordInMeasure";
@@ -1187,7 +1187,7 @@ This is done for \enumType{msrHarmonyKind} in \msr{msrBasicTypes.h}:
 // harmonies
 //______________________________________________________________________________
 enum class msrHarmonyKind {
-  kHarmony_UNKNOWN,
+  kHarmony_UNKNOWN_,
 
   // MusicXML harmonies
 
@@ -1205,7 +1205,7 @@ enum class msrHarmonyKind {
   // aliases
   // ------------------------------------
 
-  AllFirst = kHarmony_UNKNOWN,
+  AllFirst = kHarmony_UNKNOWN_,
   AllLast  = kHarmonyNone,
 
 	// ... ... ...
@@ -1345,7 +1345,7 @@ void msrHarmonyStructure::printAllHarmoniesStructures (std::ostream& os)
 \begin{lstlisting}[language=CPlusPlus]
 class EXP mfRational {
 	// ... ... ...
-	
+
   private:
 
     // private fields
@@ -1377,7 +1377,7 @@ For the same reason, \class{msrTupletFactor}, defined in \msrBoth{msrTupletFacto
 class EXP msrTupletFactor
 {
 	// ... ... ...
-	
+
   private:
 
     // private fields
@@ -1600,7 +1600,7 @@ Each \enumType comes with an \functionName{*AsString()} function\index{functions
 // placement
 //______________________________________________________________________________
 enum class msrPlacementKind {
-  kPlacement_UNKNOWN,
+  kPlacement_UNKNOWN_,
 
   kPlacementAbove, kPlacementBelow
 };
@@ -1613,7 +1613,7 @@ msrPlacementKind msrPlacementKindFromString (
   int    inputLineNumber,
   std::string placementString)
 {
-  msrPlacementKind result = msrPlacementKind::kPlacement_UNKNOWN; // default value
+  msrPlacementKind result = msrPlacementKind::kPlacement_UNKNOWN_; // default value
 
   if      (placementString == "above")
     result = msrPlacementKind::kPlacementAbove;
@@ -1646,7 +1646,7 @@ std::string msrPlacementKindAsString (
   std::string result;
 
   switch (placementKind) {
-    case msrPlacementKind::kPlacement_UNKNOWN:
+    case msrPlacementKind::kPlacement_UNKNOWN_:
       result = "noPlacement";
       break;
     case msrPlacementKind::kPlacementAbove:
@@ -1713,7 +1713,7 @@ S_msrScore msr2msrTranslator::translateMsrToMsr (
   // create the resulting MSR score
   fResultingNewMsrScore =
     msrScore::create (
-      K_MF_INPUT_LINE_UNKNOWN,
+      K_MF_INPUT_LINE_UNKNOWN_,
       "msrScore::create()");
 
   // create a msrScore browser

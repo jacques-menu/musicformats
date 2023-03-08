@@ -35,9 +35,9 @@ S_displayOahGroup gGlobalDisplayOahGroup;
 
 S_displayOahGroup displayOahGroup::create ()
 {
-  displayOahGroup* o = new displayOahGroup ();
-  assert (o != nullptr);
-  return o;
+  displayOahGroup* obj = new displayOahGroup ();
+  assert (obj != nullptr);
+  return obj;
 }
 
 displayOahGroup::displayOahGroup ()
@@ -294,8 +294,6 @@ void displayOahGroup::displayAtomWithVariableOptionsValues (
     std::setw (valueFieldWidth) << "fDisplayCPUusage" << ": " <<
     fDisplayCPUusage <<
     std::endl;
-
-  --gIndenter;
 }
 
 //______________________________________________________________________________
@@ -357,7 +355,7 @@ std::ostream& operator << (std::ostream& os, const S_displayOahGroup& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

@@ -54,12 +54,12 @@ mfAssertException::mfAssertException (
 S_mfAssertException mfAssertException::create (
   std::string const& exceptionDescription)
 {
-  mfAssertException* o = new
+  mfAssertException* obj = new
     mfAssertException (
       exceptionDescription);
-  assert (o!=0);
+  assert (obj!=0);
 
-  return o;
+  return obj;
 }
 
 

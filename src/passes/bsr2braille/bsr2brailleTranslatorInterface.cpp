@@ -13,8 +13,6 @@
 
 #include "mfStaticSettings.h"
 
-#include "mfStaticSettings.h"
-
 #include "mfAssert.h"
 #include "mfTiming.h"
 

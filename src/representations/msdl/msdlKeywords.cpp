@@ -119,7 +119,7 @@ std::string msdlKeywordsLanguageKindAsString (
   std::string result;
 
   switch (languageKind) {
-    case msdlKeywordsLanguageKind::kKeywordsLanguage_UNKNOWN: // default value
+    case msdlKeywordsLanguageKind::kKeywordsLanguage_UNKNOWN_: // default value
       result = "*noKeywordsLanguage*";
       break;
 
@@ -405,7 +405,7 @@ std::string msdlKeywordKindAsString (
   std::string result;
 
   switch (keywordKind) {
-    case msdlKeywordKind::kKeyword_UNKNOWN:
+    case msdlKeywordKind::kKeyword_UNKNOWN_:
       result = "*noKeywordKind*";
       break;
 
@@ -512,7 +512,7 @@ std::string msdlKeywordKindAsMsdlString (
 
   // select the relevant keywords names map
   switch (languageKind) {
-    case msdlKeywordsLanguageKind::kKeywordsLanguage_UNKNOWN:
+    case msdlKeywordsLanguageKind::kKeywordsLanguage_UNKNOWN_:
       // should not occur
       break;
 
@@ -575,7 +575,7 @@ std::string msdlKeywordKindAsMsdlString (
 msdlKeywordKind msdlKeywordKindFromTokenKind (
   msdlTokenKind tokenKind)
 {
-  msdlKeywordKind result = msdlKeywordKind::kKeyword_UNKNOWN;
+  msdlKeywordKind result = msdlKeywordKind::kKeyword_UNKNOWN_;
 
   switch (tokenKind) {
     // language-dependent keywords
@@ -681,13 +681,13 @@ msdlKeywordKind msdlKeywordKindFromString (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  msdlKeywordKind result = msdlKeywordKind::kKeyword_UNKNOWN;
+  msdlKeywordKind result = msdlKeywordKind::kKeyword_UNKNOWN_;
 
   std::map<msdlKeywordKind, std::string> *keywordsNamesMapPTR = nullptr;
 
   // select the relevant keywords names map
   switch (languageKind) {
-    case msdlKeywordsLanguageKind::kKeywordsLanguage_UNKNOWN:
+    case msdlKeywordsLanguageKind::kKeywordsLanguage_UNKNOWN_:
       // should not occur
       break;
 
@@ -758,7 +758,7 @@ std::string availableKeywordsInLanguage (
 
   // select the relevant keywords names map
   switch (keywordsLanguageKind) {
-    case msdlKeywordsLanguageKind::kKeywordsLanguage_UNKNOWN:
+    case msdlKeywordsLanguageKind::kKeywordsLanguage_UNKNOWN_:
       // should not occur
       break;
 

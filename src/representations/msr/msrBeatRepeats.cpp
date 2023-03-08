@@ -11,8 +11,6 @@
 
 #include <iomanip>
 
-#include "mfStaticSettings.h"
-
 #include "visitor.h"
 
 #include "mfStaticSettings.h"
@@ -43,12 +41,12 @@ S_msrBeatRepeatElement msrBeatRepeatElement::create (
   int                 inputLineNumber,
   const S_msrBeatRepeat& upLinkToBeatRepeat)
 {
-  msrBeatRepeatElement* o =
+  msrBeatRepeatElement* obj =
     new msrBeatRepeatElement (
       inputLineNumber,
       upLinkToBeatRepeat);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 msrBeatRepeatElement::msrBeatRepeatElement (
@@ -479,7 +477,7 @@ std::ostream& operator << (std::ostream& os, const S_msrBeatRepeatElement& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -491,12 +489,12 @@ S_msrBeatRepeatPattern msrBeatRepeatPattern::create (
   int                 inputLineNumber,
   const S_msrBeatRepeat& upLinkToBeatRepeat)
 {
-  msrBeatRepeatPattern* o =
+  msrBeatRepeatPattern* obj =
     new msrBeatRepeatPattern (
       inputLineNumber,
       upLinkToBeatRepeat);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 msrBeatRepeatPattern::msrBeatRepeatPattern (
@@ -725,7 +723,7 @@ std::ostream& operator << (std::ostream& os, const S_msrBeatRepeatPattern& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -736,12 +734,12 @@ S_msrBeatRepeatReplicas msrBeatRepeatReplicas::create (
   int                 inputLineNumber,
   const S_msrBeatRepeat& upLinkToBeatRepeat)
 {
-  msrBeatRepeatReplicas* o =
+  msrBeatRepeatReplicas* obj =
     new msrBeatRepeatReplicas (
       inputLineNumber,
       upLinkToBeatRepeat);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 msrBeatRepeatReplicas::msrBeatRepeatReplicas (
@@ -970,7 +968,7 @@ std::ostream& operator << (std::ostream& os, const S_msrBeatRepeatReplicas& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -983,14 +981,14 @@ S_msrBeatRepeat msrBeatRepeat::create (
   int        beatRepeatSlashesNumber,
   const S_msrVoice& upLinkToVoice)
 {
-  msrBeatRepeat* o =
+  msrBeatRepeat* obj =
     new msrBeatRepeat (
       inputLineNumber,
       beatRepeatMeasuresNumber,
       beatRepeatSlashesNumber,
       upLinkToVoice);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 msrBeatRepeat::msrBeatRepeat (
@@ -1347,8 +1345,8 @@ std::string msrBeatRepeatKindAsString (
   std::string result;
 
   switch (beatRepeatKind) {
-    case msrBeatRepeatKind::kBeatRepeat_UNKNOWN:
-      result = "kBeatRepeat_UNKNOWN";
+    case msrBeatRepeatKind::kBeatRepeat_UNKNOWN_:
+      result = "kBeatRepeat_UNKNOWN_";
       break;
     case msrBeatRepeatKind::kBeatRepeatStart:
       result = "kBeatRepeatStart";
@@ -1522,7 +1520,7 @@ std::ostream& operator << (std::ostream& os, const S_msrBeatRepeat& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

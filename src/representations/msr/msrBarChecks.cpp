@@ -13,11 +13,7 @@
 #include <iostream>
 #include <sstream>
 
-#include "mfStaticSettings.h"
-
 #include "visitor.h"
-
-#include "mfAssert.h"
 
 #include "mfStaticSettings.h"
 
@@ -42,12 +38,12 @@ S_msrBarCheck msrBarCheck::create (
   int                 inputLineNumber,
   const S_msrMeasure& upLinkToMeasure)
 {
-  msrBarCheck* o =
+  msrBarCheck* obj =
     new msrBarCheck (
       inputLineNumber,
       upLinkToMeasure);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 S_msrBarCheck msrBarCheck::create (
@@ -65,14 +61,14 @@ S_msrBarCheck msrBarCheck::createWithNextBarPuristNumber ( // JMI superflous??? 
   const std::string&  nextBarOriginalNumber,
   int                 nextBarPuristNumber)
 {
-  msrBarCheck* o =
+  msrBarCheck* obj =
     new msrBarCheck (
       inputLineNumber,
       upLinkToMeasure,
       nextBarOriginalNumber,
       nextBarPuristNumber);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 msrBarCheck::msrBarCheck (
@@ -287,7 +283,7 @@ std::ostream& operator << (std::ostream& os, const S_msrBarCheck& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

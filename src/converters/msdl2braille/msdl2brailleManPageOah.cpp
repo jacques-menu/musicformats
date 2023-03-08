@@ -33,14 +33,14 @@ S_msdl2brailleManPageGenerateAtom msdl2brailleManPageGenerateAtom::create (
   const std::string&  description,
   const S_oahVisitor& theOahVisitor)
 {
-  msdl2brailleManPageGenerateAtom* o = new
+  msdl2brailleManPageGenerateAtom* obj = new
     msdl2brailleManPageGenerateAtom (
       longName,
       shortName,
       description,
       theOahVisitor);
-  assert (o!=0);
-  return o;
+  assert (obj!=0);
+  return obj;
 }
 
 msdl2brailleManPageGenerateAtom::msdl2brailleManPageGenerateAtom (
@@ -211,7 +211,7 @@ std::ostream& operator << (std::ostream& os, const S_msdl2brailleManPageGenerate
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -223,11 +223,11 @@ S_msdl2brailleManPageOahGroup gGlobalMsdl2brlManPageOahGroup;
 S_msdl2brailleManPageOahGroup msdl2brailleManPageOahGroup::create (
   const S_oahVisitor& theOah2manPage)
 {
-  msdl2brailleManPageOahGroup* o =
+  msdl2brailleManPageOahGroup* obj =
     new msdl2brailleManPageOahGroup (
       theOah2manPage);
-  assert (o!=0);
-  return o;
+  assert (obj!=0);
+  return obj;
 }
 
 msdl2brailleManPageOahGroup::msdl2brailleManPageOahGroup (
@@ -433,7 +433,7 @@ std::ostream& operator << (std::ostream& os, const S_msdl2brailleManPageOahGroup
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

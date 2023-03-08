@@ -13,8 +13,6 @@
 #include <sstream>
 #include <iomanip>      // std::setw, std::setprecision, ...
 
-#include "mfStaticSettings.h"
-
 #include "visitor.h"
 
 #include "mfStaticSettings.h"
@@ -42,14 +40,14 @@ S_msrBarNumberCheck msrBarNumberCheck::create (
   const std::string&  nextBarOriginalNumber,
   int                 nextBarPuristNumber)
 {
-  msrBarNumberCheck* o =
+  msrBarNumberCheck* obj =
     new msrBarNumberCheck (
       inputLineNumber,
       upLinkToMeasure,
       nextBarOriginalNumber,
       nextBarPuristNumber);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 S_msrBarNumberCheck msrBarNumberCheck::create (
@@ -233,7 +231,7 @@ std::ostream& operator << (std::ostream& os, const S_msrBarNumberCheck& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

@@ -35,10 +35,10 @@ S_bsrScore bsrScore::create (
   int            inputLineNumber,
   const S_msrScore&     theMsrScore)
 {
-  bsrScore* o = new bsrScore (
+  bsrScore* obj = new bsrScore (
     inputLineNumber, theMsrScore);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 bsrScore::bsrScore (

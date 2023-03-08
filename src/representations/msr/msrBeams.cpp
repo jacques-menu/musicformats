@@ -36,8 +36,8 @@ std::string msrBeamKindAsString (
   std::string result;
 
   switch (beamKind) {
-    case msrBeamKind::kBeam_UNKNOWN:
-      result = "kBeam_UNKNOWN";
+    case msrBeamKind::kBeam_UNKNOWN_:
+      result = "kBeam_UNKNOWN_";
       break;
     case msrBeamKind::kBeamBegin:
       result = "kBeamBegin";
@@ -71,11 +71,11 @@ S_msrBeam msrBeam::create (
   int         number,
   msrBeamKind beamKind)
 {
-  msrBeam* o =
+  msrBeam* obj =
     new msrBeam (
       inputLineNumber, number, beamKind);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 msrBeam::msrBeam (
@@ -211,7 +211,7 @@ std::ostream& operator << (std::ostream& os, const S_msrBeam& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

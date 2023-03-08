@@ -18,10 +18,10 @@ namespace MusicFormats
 //_______________________________________________________________________________
 S_languageFrench languageFrench::create ()
 {
-  languageFrench* o =
+  languageFrench* obj =
     new languageFrench ();
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 languageFrench::languageFrench ()
@@ -53,7 +53,7 @@ std::ostream& operator << (std::ostream& os, const S_languageFrench& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -67,8 +67,8 @@ std::string languageFrench::passIDKindAsString (mfPassIDKind passIDKind) const
   std::string result;
 
   switch (passIDKind) {
-    case mfPassIDKind::kMfPassID_UNKNOWN:
-      result = "*Passe kMfPassID_UNKNOWN*";
+    case mfPassIDKind::kMfPassID_UNKNOWN_:
+      result = "*Passe kMfPassID_UNKNOWN_*";
       break;
 
     case mfPassIDKind::kMfPassID_ALL:

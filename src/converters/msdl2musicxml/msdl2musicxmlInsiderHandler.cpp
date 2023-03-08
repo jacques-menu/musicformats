@@ -52,13 +52,13 @@ S_msdl2musicxmlInsiderHandler msdl2musicxmlInsiderHandler::create (
   const std::string& handlerHeader)
 {
   // create the insider handler
-  msdl2musicxmlInsiderHandler* o = new
+  msdl2musicxmlInsiderHandler* obj = new
     msdl2musicxmlInsiderHandler (
       serviceName,
       handlerHeader);
-  assert (o!=0);
+  assert (obj!=0);
 
-  return o;
+  return obj;
 }
 
 msdl2musicxmlInsiderHandler::msdl2musicxmlInsiderHandler (
@@ -318,7 +318,7 @@ void msdl2musicxmlInsiderOahGroup::checkGroupOptionsConsistency ()
     std::stringstream ss;
 
     ss <<
-      "msdl2musicxmlInsiderOahGroup: a MusicXML output file name must be selected with '-o, -output-file-name";
+      "msdl2musicxmlInsiderOahGroup: a MusicXML output file name must be selected with '-obj, -output-file-name";
 
     oahError (ss.str ());
   }
@@ -482,7 +482,7 @@ std::ostream& operator << (std::ostream& os, const S_msdl2musicxmlInsiderHandler
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -493,10 +493,10 @@ S_msdl2musicxmlInsiderOahGroup gGlobalMsdl2xmlInsiderOahGroup;
 
 S_msdl2musicxmlInsiderOahGroup msdl2musicxmlInsiderOahGroup::create ()
 {
-  msdl2musicxmlInsiderOahGroup* o = new msdl2musicxmlInsiderOahGroup ();
-  assert (o!=0);
+  msdl2musicxmlInsiderOahGroup* obj = new msdl2musicxmlInsiderOahGroup ();
+  assert (obj!=0);
 
-  return o;
+  return obj;
 }
 
 msdl2musicxmlInsiderOahGroup::msdl2musicxmlInsiderOahGroup ()

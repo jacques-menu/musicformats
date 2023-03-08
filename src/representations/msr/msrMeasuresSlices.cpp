@@ -19,7 +19,6 @@
 #include "mfStringsHandling.h"
 
 #include "msrMeasuresSlices.h"
-// #include "msrWholeNotes.h"
 
 #include "oahOah.h"
 
@@ -56,13 +55,13 @@ S_msrNoteEvent msrNoteEvent::create (
   const S_msrNote& noteEventNote,
   msrNoteEventKind noteEventKind)
 {
-  msrNoteEvent* o = new
+  msrNoteEvent* obj = new
     msrNoteEvent (
       noteEventMeasurePosition,
       noteEventNote,
       noteEventKind);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 msrNoteEvent::msrNoteEvent (
@@ -154,7 +153,7 @@ std::string msrNoteEvent::asString () const
 
   ss <<
     "[NoteEvent" <<
-    " @:" << fNoteEventMeasurePosition <<
+    " @:" << fNoteEventMeasurePosition.asString () <<
     ' ' <<
     fNoteEventNote->asShortStringForMeasuresSlices () <<
     ' ';
@@ -196,7 +195,7 @@ std::ostream& operator << (std::ostream& os, const S_msrNoteEvent& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -206,11 +205,11 @@ std::ostream& operator << (std::ostream& os, const S_msrNoteEvent& elt)
 S_msrSimultaneousNotesChunk msrSimultaneousNotesChunk::create (
   const msrWholeNotes& chunkMeasurePosition)
 {
-  msrSimultaneousNotesChunk* o = new
+  msrSimultaneousNotesChunk* obj = new
     msrSimultaneousNotesChunk (
       chunkMeasurePosition);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 msrSimultaneousNotesChunk::msrSimultaneousNotesChunk (
@@ -243,7 +242,7 @@ std::string msrSimultaneousNotesChunk::asString () const
 
   ss <<
     "[msrSimultaneousNotesChunk" <<
-    " @:" << fChunkMeasurePosition <<
+    " @:" << fChunkMeasurePosition.asString () <<
     ", " <<
     mfSingularOrPlural (
       chunkNotesListSize, "note", "notes") <<
@@ -284,7 +283,7 @@ std::ostream& operator << (std::ostream& os, const S_msrSimultaneousNotesChunk& 
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -295,12 +294,12 @@ S_msrMeasuresSlice msrMeasuresSlice::create (
   const std::string& measureNumber,
   int           puristMeasureNumber)
 {
-  msrMeasuresSlice* o =
+  msrMeasuresSlice* obj =
     new msrMeasuresSlice (
       measureNumber,
       puristMeasureNumber);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 msrMeasuresSlice::msrMeasuresSlice (
@@ -1092,7 +1091,7 @@ std::ostream& operator << (std::ostream& os, const S_msrMeasuresSlice& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -1102,23 +1101,23 @@ std::ostream& operator << (std::ostream& os, const S_msrMeasuresSlice& elt)
 S_msrMeasuresSlicesSequence msrMeasuresSlicesSequence::create (
   const std::string& measuresOrigin)
 {
-  msrMeasuresSlicesSequence* o =
+  msrMeasuresSlicesSequence* obj =
     new msrMeasuresSlicesSequence (
       measuresOrigin);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 S_msrMeasuresSlicesSequence msrMeasuresSlicesSequence::create (
   const std::string& measuresOrigin,
   int           measuresNumber)
 {
-  msrMeasuresSlicesSequence* o =
+  msrMeasuresSlicesSequence* obj =
     new msrMeasuresSlicesSequence (
       measuresOrigin,
       measuresNumber);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 msrMeasuresSlicesSequence::msrMeasuresSlicesSequence (
@@ -1493,7 +1492,7 @@ std::ostream& operator << (std::ostream& os, const S_msrMeasuresSlicesSequence& 
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

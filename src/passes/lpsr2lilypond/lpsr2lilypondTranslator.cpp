@@ -16,8 +16,10 @@
 #include "mfStaticSettings.h"
 
 #include "mfAssert.h"
+#include "mfConstants.h"
 #include "mfServices.h"
 #include "mfStringsHandling.h"
+#include "mfIndentedTextOutput.h"
 
 #include "msrAfterGraceNotes.h"
 #include "msrArticulations.h"
@@ -45,11 +47,6 @@
 #include "waeInterface.h"
 #include "lpsr2lilypondWae.h"
 
-#include "mfStaticSettings.h"
-
-#include "mfConstants.h"
-#include "mfIndentedTextOutput.h"
-
 #include "oahOah.h"
 
 #include "lpsr2lilypondOah.h"
@@ -72,12 +69,12 @@ S_lpsrRepeatDescr lpsrRepeatDescr::create (
   const S_msrRepeat& repeat,
   int         repeatEndingsNumber)
 {
-  lpsrRepeatDescr* o = new
+  lpsrRepeatDescr* obj = new
     lpsrRepeatDescr (
       repeat,
       repeatEndingsNumber);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 lpsrRepeatDescr::lpsrRepeatDescr (
@@ -137,7 +134,7 @@ std::ostream& operator << (std::ostream& os, const S_lpsrRepeatDescr& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -207,7 +204,7 @@ if (false) // JMI
 
   // inhibit the browsing of measures repeat replicas,
   // since Lilypond only needs the measure number
-// if (false) // JMI CAFE
+// if (false) // JMI v0.9.67
 //   fVisitedLpsrScore->
 //     getMsrScore ()->
 //       setInhibitMultipleFullBarRestsBrowsing ();
@@ -242,7 +239,7 @@ if (false) // JMI
 
       fCurrentOctaveEntryReference =
         msrNote::createNoteFromSemiTonesPitchAndOctave (
-          K_MF_INPUT_LINE_UNKNOWN,
+          K_MF_INPUT_LINE_UNKNOWN_,
           gGlobalLpsr2lilypondOahGroup->
             getFixedOctaveEntrySemiTonesPitchAndOctave ());
       break;
@@ -281,7 +278,7 @@ if (false) // JMI
   fCurrentVoiceMeasuresCounter = -1;
 
   // durations
-  fLastMetWholeNotes = K_WHOLE_NOTES_UNKNOWN; // JMI v0.9.67
+  fLastMetWholeNotes = K_WHOLE_NOTES_UNKNOWN_; // JMI v0.9.67
 
   // notes
   fCurrentNotePrinObjectKind =
@@ -296,7 +293,7 @@ if (false) // JMI
 
   // spanners
   fCurrentSpannerPlacementKind =
-    msrPlacementKind::kPlacement_UNKNOWN;
+    msrPlacementKind::kPlacement_UNKNOWN_;
 
   // part group blocks
   fNumberOfPartGroupBlocks = -1;
@@ -327,7 +324,7 @@ void lpsr2lilypondTranslator::setCurrentOctaveEntryReferenceFromTheLilypondOah (
     // option '-rel, -relative' has been used:
     fCurrentOctaveEntryReference =
       msrNote::createNoteFromSemiTonesPitchAndOctave (
-        K_MF_INPUT_LINE_UNKNOWN,
+        K_MF_INPUT_LINE_UNKNOWN_,
         gGlobalLpsr2lilypondOahGroup->
           getRelativeOctaveEntrySemiTonesPitchAndOctave ());
   }
@@ -367,8 +364,8 @@ std::string lpsr2lilypondTranslator::msrModeKindAsLilypondString (
   std::string result;
 
   switch (modeKind) {
-    case msrModeKind::kMode_UNKNOWN:
-      result = "kMode_UNKNOWN";
+    case msrModeKind::kMode_UNKNOWN_:
+      result = "kMode_UNKNOWN_";
       break;
     case msrModeKind::kModeMajor:
       result = "\\major";
@@ -491,7 +488,7 @@ std::string lpsr2lilypondTranslator::absoluteOctaveAsLilypondString (
 
   // generate LilyPond absolute octave
   switch (absoluteOctaveKind) {
-    case msrOctaveKind::kOctave_UNKNOWN:
+    case msrOctaveKind::kOctave_UNKNOWN_:
       {
         std::stringstream ss;
 
@@ -584,7 +581,7 @@ std::string lpsr2lilypondTranslator::alterationKindAsLilypondString (
     case msrAlterationKind::kAlterationTripleSharp:
       result = "TRIPLE-SHARP";
       break;
-    case msrAlterationKind::kAlteration_UNKNOWN:
+    case msrAlterationKind::kAlteration_UNKNOWN_:
       result = "alteration???";
       break;
   } // switch
@@ -1170,7 +1167,7 @@ std::string lpsr2lilypondTranslator::msrNotesDurationKindAsLilypondString (
   std::string result;
 
   switch (notesNotesDurationKind) {
-    case msrNotesDurationKind::kNotesDuration_UNKNOWN:
+    case msrNotesDurationKind::kNotesDuration_UNKNOWN_:
       result = "noNotesDuration";
       break;
 
@@ -1934,7 +1931,7 @@ void lpsr2lilypondTranslator::generateCodeForNote (
 
   // generate the code for the note proper
   switch (note->getNoteKind ()) {
-    case msrNoteKind::kNote_UNKNOWN:
+    case msrNoteKind::kNote_UNKNOWN_:
       break;
 
     // in measures
@@ -2184,7 +2181,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteRestInMeasure (
 
     // generate the rest name and duration
     if (note->getNoteOccupiesAFullMeasure ()) {
-      // take voice kind into account JMI shouldn't be necessary?
+      // take voice kind into account shouldn't be necessary? JMI v0.9.67
       switch (noteVoice->getVoiceKind ()) {
         case msrVoiceKind::kVoiceKindRegular:
         case msrVoiceKind::kVoiceKindDynamics:
@@ -2223,17 +2220,36 @@ void lpsr2lilypondTranslator::generateCodeForNoteRestInMeasure (
       // note does not occupy a full measure
       // take voice kind into account JMI shouldn't be necessary?
 
-      switch (noteVoice->getVoiceKind ()) {
-        case msrVoiceKind::kVoiceKindRegular:
-        case msrVoiceKind::kVoiceKindDynamics:
+//       switch (noteVoice->getVoiceKind ()) {
+//         case msrVoiceKind::kVoiceKindRegular:
+//         case msrVoiceKind::kVoiceKindDynamics:
+//           fLilypondCodeStream <<
+//             "r";
+//           break;
+//
+//         case msrVoiceKind::kVoiceKindHarmonies:
+//         case msrVoiceKind::kVoiceKindFiguredBass:
+//           fLilypondCodeStream <<
+//             "s";
+//           break;
+//       } // switch
+
+      msrPrintObjectKind
+        notePrintObjectKind =
+          note->getNotePrintObjectKind ();
+
+      switch (notePrintObjectKind) {
+        case msrPrintObjectKind::kPrintObjectNone:
+          fLilypondCodeStream <<
+            "{% msrPrintObjectKind::kPrintObjectNone ??? %}";
+          break;
+        case msrPrintObjectKind::kPrintObjectYes:
           fLilypondCodeStream <<
             "r";
           break;
-
-        case msrVoiceKind::kVoiceKindHarmonies:
-        case msrVoiceKind::kVoiceKindFiguredBass:
+        case msrPrintObjectKind::kPrintObjectNo:
           fLilypondCodeStream <<
-            "s";
+            "\\once\\omit Rest r";
           break;
       } // switch
 
@@ -2272,7 +2288,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteRestInMeasure (
           // generate the multiplying factor
           fLilypondCodeStream << // JMI
             "*" <<
-            noteSoundingWholeNotes <<
+            noteSoundingWholeNotes.asString () <<
             "";
         }
       }
@@ -3207,7 +3223,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteWords (
         std::stringstream ss;
 
         switch (wordsPlacementKind) {
-          case msrPlacementKind::kPlacement_UNKNOWN:
+          case msrPlacementKind::kPlacement_UNKNOWN_:
             ss << "-";
             break;
           case msrPlacementKind::kPlacementAbove:
@@ -3412,7 +3428,7 @@ void lpsr2lilypondTranslator::generateNoteArticulation (
 
   // generate note articulation preamble if any
   switch (articulation->getArticulationKind ()) {
-    case msrArticulationKind::kArticulation_UNKNOWN:
+    case msrArticulationKind::kArticulation_UNKNOWN_:
        break;
 
     case msrArticulationKind::kArticulationAccent:
@@ -3488,7 +3504,7 @@ void lpsr2lilypondTranslator::generateNoteArticulation (
 //
 //       default:
         switch (articulation->getArticulationPlacementKind ()) {
-          case msrPlacementKind::kPlacement_UNKNOWN:
+          case msrPlacementKind::kPlacement_UNKNOWN_:
             fLilypondCodeStream << "-";
             break;
 
@@ -3504,7 +3520,7 @@ void lpsr2lilypondTranslator::generateNoteArticulation (
 
   // generate note articulation itself
   switch (articulationKind) {
-    case msrArticulationKind::kArticulation_UNKNOWN:
+    case msrArticulationKind::kArticulation_UNKNOWN_:
       fLilypondCodeStream << ">";
       break;
 
@@ -3631,7 +3647,7 @@ R"(\once\override BreathingSign.text = \markup {\musicglyph #"scripts.caesura.st
       break;
     case msrArticulationKind::kArticulationScoop:
       switch (articulation->getArticulationPlacementKind ()) {
-        case msrPlacementKind::kPlacement_UNKNOWN:
+        case msrPlacementKind::kPlacement_UNKNOWN_:
           fLilypondCodeStream <<
             "\\scoopAbove"; // JMI v0.9.63 meaningfull default ???
           break;
@@ -3675,7 +3691,7 @@ void lpsr2lilypondTranslator::generateChordArticulation (
       articulation->getArticulationKind ();
 
   switch (articulation->getArticulationPlacementKind ()) { // JMI v0.9.62
-    case msrPlacementKind::kPlacement_UNKNOWN:
+    case msrPlacementKind::kPlacement_UNKNOWN_:
       fLilypondCodeStream << "-";
       break;
 
@@ -3685,7 +3701,7 @@ void lpsr2lilypondTranslator::generateChordArticulation (
 
     case msrPlacementKind::kPlacementBelow:
       switch (articulationKind) {
-        case msrArticulationKind::kArticulation_UNKNOWN:
+        case msrArticulationKind::kArticulation_UNKNOWN_:
           break;
 
         case msrArticulationKind::kArticulationAccent:
@@ -3701,7 +3717,7 @@ void lpsr2lilypondTranslator::generateChordArticulation (
   } // switch
 
   switch (articulationKind) {
-    case msrArticulationKind::kArticulation_UNKNOWN:
+    case msrArticulationKind::kArticulation_UNKNOWN_:
       break;
 
     case msrArticulationKind::kArticulationAccent:
@@ -3826,7 +3842,7 @@ R"(\once\override BreathingSign.text = \markup {\musicglyph #"scripts.caesura.st
       break;
     case msrArticulationKind::kArticulationScoop:
       switch (articulation->getArticulationPlacementKind ()) {
-        case msrPlacementKind::kPlacement_UNKNOWN:
+        case msrPlacementKind::kPlacement_UNKNOWN_:
           fLilypondCodeStream <<
             "\\scoopAbove"; // JMI v0.9.63 ???
           break;
@@ -4148,7 +4164,7 @@ void lpsr2lilypondTranslator::generateOrnament (
 
     case msrOrnamentKind::kOrnamentAccidentalKind:
       switch (ornament->getOrnamentPlacementKind ()) {
-        case msrPlacementKind::kPlacement_UNKNOWN:
+        case msrPlacementKind::kPlacement_UNKNOWN_:
           fLilypondCodeStream << "-";
           break;
         case msrPlacementKind::kPlacementAbove:
@@ -4300,7 +4316,7 @@ void lpsr2lilypondTranslator::generateCodeForSpannerBeforeNote (
           break;
         case msrSpannerTypeKind::kSpannerTypeContinue:
           break;
-        case msrSpannerTypeKind::kSpannerType_UNKNOWN:
+        case msrSpannerTypeKind::kSpannerType_UNKNOWN_:
           break;
       } // switch
       break;
@@ -4323,7 +4339,7 @@ void lpsr2lilypondTranslator::generateCodeForSpannerBeforeNote (
           break;
         case msrSpannerTypeKind::kSpannerTypeContinue:
           break;
-        case msrSpannerTypeKind::kSpannerType_UNKNOWN:
+        case msrSpannerTypeKind::kSpannerType_UNKNOWN_:
           break;
       } // switch
 
@@ -4333,7 +4349,7 @@ void lpsr2lilypondTranslator::generateCodeForSpannerBeforeNote (
 
       if (spannerPlacementKind != fCurrentSpannerPlacementKind) {
         switch (spannerPlacementKind) {
-          case msrPlacementKind::kPlacement_UNKNOWN:
+          case msrPlacementKind::kPlacement_UNKNOWN_:
             break;
           case msrPlacementKind::kPlacementAbove:
             fLilypondCodeStream <<
@@ -4402,7 +4418,7 @@ void lpsr2lilypondTranslator::generateCodeForSpannerAfterNote (
       break;
     case msrSpannerTypeKind::kSpannerTypeContinue:
       break;
-    case msrSpannerTypeKind::kSpannerType_UNKNOWN:
+    case msrSpannerTypeKind::kSpannerType_UNKNOWN_:
       break;
   } // switch
 
@@ -4425,7 +4441,7 @@ void lpsr2lilypondTranslator::generateCodeForSpannerAfterNote (
 
         case msrSpannerTypeKind::kSpannerTypeContinue:
           break;
-        case msrSpannerTypeKind::kSpannerType_UNKNOWN:
+        case msrSpannerTypeKind::kSpannerType_UNKNOWN_:
           break;
       } // switch
       break;
@@ -4474,7 +4490,7 @@ void lpsr2lilypondTranslator::generateCodeForSpannerAfterNote (
           break;
         case msrSpannerTypeKind::kSpannerTypeContinue:
           break;
-        case msrSpannerTypeKind::kSpannerType_UNKNOWN:
+        case msrSpannerTypeKind::kSpannerType_UNKNOWN_:
           break;
       } // switch
       break;
@@ -4561,7 +4577,7 @@ std::string lpsr2lilypondTranslator::harpPedalTuningAsLilypondString (
     case msrAlterationKind::kAlterationTripleSharp:
       result = "%{ tripleSharp %} ";
       break;
-    case msrAlterationKind::kAlteration_UNKNOWN:
+    case msrAlterationKind::kAlteration_UNKNOWN_:
       result = "alteration???";
       break;
   } // switch
@@ -4669,7 +4685,7 @@ std::string lpsr2lilypondTranslator::harmonyDegreeAlterationKindAsLilypondString
   std::string result;
 
   switch (harmonyDegreeAlterationKind) {
-    case msrAlterationKind::kAlteration_UNKNOWN:
+    case msrAlterationKind::kAlteration_UNKNOWN_:
       result = "?";
       break;
     case msrAlterationKind::kAlterationTripleFlat:
@@ -4764,7 +4780,7 @@ std::string lpsr2lilypondTranslator::harmonyAsLilypondString (
 
   // generate harmony kind
   switch (harmony->getHarmonyKind ()) {
-    case msrHarmonyKind::kHarmony_UNKNOWN:
+    case msrHarmonyKind::kHarmony_UNKNOWN_:
       ss << "Harmony???";
       break;
 
@@ -4936,13 +4952,7 @@ in all of them, the C and A# in theory want to fan out to B (the dominant).  Thi
     Bool thereAreDegreesToBeRemoved (false);
 
     // generate degrees to be added if any first
-    for (
-      std::list<S_msrHarmonyDegree>::const_iterator i = harmonyDegreesList.begin ();
-      i != harmonyDegreesList.end ();
-      ++i
-    ) {
-      S_msrHarmonyDegree harmonyDegree = (*i);
-
+    for (S_msrHarmonyDegree harmonyDegree : harmonyDegreesList) {
       // get harmony degree information
       int
         harmonyDegreeValue =
@@ -4962,7 +4972,7 @@ in all of them, the C and A# in theory want to fan out to B (the dominant).  Thi
       switch (harmonyDegreeTypeKind) {
         case msrHarmonyDegreeTypeKind::kHarmonyDegreeTypeAdd:
           ss <<
-      // JMI ???      "." <<
+            "." << // JMI ??? v0.9.67
             harmonyDegreeValue <<
             harmonyDegreeAlterationKindAsLilypondString (
               harmonyDegreeAlterationKind);
@@ -5039,7 +5049,7 @@ in all of them, the C and A# in theory want to fan out to B (the dominant).  Thi
   if (
     harmonyBassQuarterTonesPitchKind
       !=
-    msrQuarterTonesPitchKind::kQTP_UNKNOWN
+    msrQuarterTonesPitchKind::kQTP_UNKNOWN_
   ) {
     ss <<
       '/' <<
@@ -5096,7 +5106,7 @@ std::string lpsr2lilypondTranslator::figureAsLilypondString (
 
   // handle the bass figure prefix
   switch (bassFigure->getFigurePrefixKind ()) {
-    case msrBassFigurePrefixKind::kBassFigurePrefix_UNKNOWN:
+    case msrBassFigurePrefixKind::kBassFigurePrefix_UNKNOWN_:
       break;
     case msrBassFigurePrefixKind::kBassFigurePrefixDoubleFlat:
       ss << "--";
@@ -5123,7 +5133,7 @@ std::string lpsr2lilypondTranslator::figureAsLilypondString (
 
   // handle the bass figure suffix
   switch (bassFigure->getFigureSuffixKind ()) {
-    case msrBassFigureSuffixKind::kBassFigureSuffix_UNKNOWN:
+    case msrBassFigureSuffixKind::kBassFigureSuffix_UNKNOWN_:
       break;
     case msrBassFigureSuffixKind::kBassFigureSuffixDoubleFlat:
       ss << "double flat";
@@ -12075,7 +12085,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrBassFigure& elt)
 
     // handle the bass figure prefix
     switch (elt->getFigurePrefixKind ()) {
-      case msrBassFigurePrefixKind::kBassFigurePrefix_UNKNOWN:
+      case msrBassFigurePrefixKind::kBassFigurePrefix_UNKNOWN_:
         break;
       case msrBassFigurePrefixKind::kBassFigurePrefixDoubleFlat:
         fLilypondCodeStream << "--";
@@ -12102,7 +12112,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrBassFigure& elt)
 
     // handle the bass figure suffix
     switch (elt->getFigureSuffixKind ()) {
-      case msrBassFigureSuffixKind::kBassFigureSuffix_UNKNOWN:
+      case msrBassFigureSuffixKind::kBassFigureSuffix_UNKNOWN_:
         break;
       case msrBassFigureSuffixKind::kBassFigureSuffixDoubleFlat:
         fLilypondCodeStream << "double flat";
@@ -12686,15 +12696,15 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
             std::endl <<
             std::setw (fieldWidth) <<
             "% measureWholeNotes: " <<
-            measureWholeNotes <<
+            measureWholeNotes.asString () <<
             std::endl <<
             std::setw (fieldWidth) <<
             "% fullMeasureWholeNotes: " <<
-            fullMeasureWholeNotes <<
+            fullMeasureWholeNotes.asString () <<
             std::endl <<
             std::setw (fieldWidth) <<
             "% ratioToFullMeasureWholeNotes: " <<
-            ratioToFullMeasureWholeNotes <<
+            ratioToFullMeasureWholeNotes.asString () <<
             std::endl << std::endl;
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -13695,12 +13705,12 @@ void lpsr2lilypondTranslator::visitStart (S_msrClef& elt)
       }
     }
 
-    if (clefKind != msrClefKind::kClef_UNKNOWN) {
+    if (clefKind != msrClefKind::kClef_UNKNOWN_) {
       fLilypondCodeStream <<
         "\\clef ";
 
       switch (clefKind) {
-        case msrClefKind::kClef_UNKNOWN:
+        case msrClefKind::kClef_UNKNOWN_:
           break;
         case msrClefKind::kClefTreble:
           fLilypondCodeStream << "\"treble\"";
@@ -13901,10 +13911,10 @@ void lpsr2lilypondTranslator::visitStart (S_msrKey& elt)
 
                 msrModeKind
                   modeKind         = elt->getModeKind (),
-                  modeKindToBeUsed = msrModeKind::kMode_UNKNOWN;
+                  modeKindToBeUsed = msrModeKind::kMode_UNKNOWN_;
 
                 switch (modeKind) {
-                  case msrModeKind::kMode_UNKNOWN:
+                  case msrModeKind::kMode_UNKNOWN_:
                     modeKindToBeUsed = msrModeKind::kModeMajor; // JMI
                     break;
                   default:
@@ -14344,7 +14354,7 @@ If the double element is present, it indicates that the music is doubled one oct
 
   // determine transposition pitch
   msrQuarterTonesPitchKind
-    transpositionPitchKind = msrQuarterTonesPitchKind::kQTP_UNKNOWN;
+    transpositionPitchKind = msrQuarterTonesPitchKind::kQTP_UNKNOWN_;
 
   switch (transposeChromatic) {
     case -11:
@@ -14864,7 +14874,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrTempo& elt)
 #endif // MF_TRACE_IS_ENABLED
 
   switch (elt->getTempoPlacementKind ()) {
-    case msrPlacementKind::kPlacement_UNKNOWN:
+    case msrPlacementKind::kPlacement_UNKNOWN_:
       break;
     case msrPlacementKind::kPlacementAbove:
       // by default, so nothing to do
@@ -14877,7 +14887,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrTempo& elt)
     } // switch
 
   switch (elt->getTempoKind ()) {
-    case msrTempoKBeatUnitsKind::kTempoBeatUnits_UNKNOWN:
+    case msrTempoKBeatUnitsKind::kTempoBeatUnits_UNKNOWN_:
       break;
 
     case msrTempoKBeatUnitsKind::kTempoBeatUnitsWordsOnly:
@@ -15672,7 +15682,7 @@ Articulations can be attached to rests as well as notes but they cannot be attac
 
 /* JMI
   switch (elt->getArticulationPlacement ()) {
-    case msrPlacementKind::kPlacement_UNKNOWN:
+    case msrPlacementKind::kPlacement_UNKNOWN_:
       // nothing needed JMI
       break;
     case msrPlacementKind::kPlacementAbove:
@@ -17158,7 +17168,7 @@ void lpsr2lilypondTranslator::generateNoteBeams (
         case msrBeamKind::kBeamBackwardHook:
           break;
 
-        case msrBeamKind::kBeam_UNKNOWN:
+        case msrBeamKind::kBeam_UNKNOWN_:
           break;
       } // switch
     } // for
@@ -17201,7 +17211,7 @@ void lpsr2lilypondTranslator::generateNoteSlurDirection (
 #endif // MF_TRACE_IS_ENABLED
 
       switch (slur->getSlurPlacementKind ()) {
-        case msrPlacementKind::kPlacement_UNKNOWN:
+        case msrPlacementKind::kPlacement_UNKNOWN_:
           break;
         case msrPlacementKind::kPlacementAbove:
           fLilypondCodeStream << "\\slurUp ";
@@ -17255,7 +17265,7 @@ void lpsr2lilypondTranslator::generateNoteSlurs (
       */
 
       switch (slur->getSlurTypeKind ()) {
-        case msrSlurTypeKind::kSlurType_UNKNOWN:
+        case msrSlurTypeKind::kSlurType_UNKNOWN_:
           break;
 
         case msrSlurTypeKind::kSlurTypeRegularStart:
@@ -17304,7 +17314,7 @@ void lpsr2lilypondTranslator::generateNoteSlurs (
           }
 
           switch (slur->getSlurPlacementKind ()) {
-            case msrPlacementKind::kPlacement_UNKNOWN:
+            case msrPlacementKind::kPlacement_UNKNOWN_:
               break;
             case msrPlacementKind::kPlacementAbove:
             case msrPlacementKind::kPlacementBelow:
@@ -18046,7 +18056,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrNote& elt)
     }
     else {
       switch (elt->getNoteKind ()) {
-        case msrNoteKind::kNote_UNKNOWN:
+        case msrNoteKind::kNote_UNKNOWN_:
           break;
 
         // in measures
@@ -18662,7 +18672,7 @@ void lpsr2lilypondTranslator::generateNoteSlashes (
       S_msrSlash slash = (*i);
 
       switch (slash->getSlashTypeKind ()) {
-        case msrSlashTypeKind::kSlashType_UNKNOWN:
+        case msrSlashTypeKind::kSlashType_UNKNOWN_:
           break;
 
         case msrSlashTypeKind::kSlashTypeStart:
@@ -18681,7 +18691,7 @@ void lpsr2lilypondTranslator::generateNoteSlashes (
       } // switch
 
       switch (slash->getUseDotsKind ()) {
-        case msrUseDotsKind::kUseDots_UNKNOWN:
+        case msrUseDotsKind::kUseDots_UNKNOWN_:
           break;
 
         case msrUseDotsKind::kUseDotsYes:
@@ -18700,7 +18710,7 @@ void lpsr2lilypondTranslator::generateNoteSlashes (
       } // switch
 
       switch (slash->getSlashUseStemsKind ()) {
-        case msrSlashUseStemsKind::kSlashUseStems_UNKNOWN:
+        case msrSlashUseStemsKind::kSlashUseStems_UNKNOWN_:
           break;
 
         case msrSlashUseStemsKind::kSlashUseStemsYes:
@@ -19070,7 +19080,7 @@ void lpsr2lilypondTranslator::generateNoteTechnicalsWithStrings (
               break;
             case msrTechnicalTypeKind::kTechnicalTypeStop:
               break;
-            case msrTechnicalTypeKind::kTechnicalType_UNKNOWN:
+            case msrTechnicalTypeKind::kTechnicalType_UNKNOWN_:
               break;
           } // switch
           break;
@@ -19102,7 +19112,7 @@ void lpsr2lilypondTranslator::generateNoteTechnicalsWithStrings (
               break;
             case msrTechnicalTypeKind::kTechnicalTypeStop:
               break;
-            case msrTechnicalTypeKind::kTechnicalType_UNKNOWN:
+            case msrTechnicalTypeKind::kTechnicalType_UNKNOWN_:
               break;
           } // switch
           break;
@@ -19374,7 +19384,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrNote& elt)
         technicalAsLilypondString ((*i));
 
       switch ((*i)->getTechnicalPlacementKind ()) {
-        case msrPlacementKind::kPlacement_UNKNOWN:
+        case msrPlacementKind::kPlacement_UNKNOWN_:
           break;
         case msrPlacementKind::kPlacementAbove:
           fLilypondCodeStream << "^";
@@ -19417,7 +19427,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrNote& elt)
                 technicalWithInteger);
 
             switch (technicalWithInteger->getTechnicalWithIntegerPlacementKind ()) {
-              case msrPlacementKind::kPlacement_UNKNOWN:
+              case msrPlacementKind::kPlacement_UNKNOWN_:
                 break;
               case msrPlacementKind::kPlacementAbove:
                 fLilypondCodeStream << "^";
@@ -19462,7 +19472,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrNote& elt)
                 technicalWithFloat);
 
             switch (technicalWithFloat->getTechnicalWithFloatPlacementKind ()) {
-              case msrPlacementKind::kPlacement_UNKNOWN:
+              case msrPlacementKind::kPlacement_UNKNOWN_:
                 break;
               case msrPlacementKind::kPlacementAbove:
                 fLilypondCodeStream << "^";
@@ -19495,7 +19505,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrNote& elt)
         technicalWithStringAsLilypondString ((*i));
 
       switch ((*i)->getTechnicalWithStringPlacementKind ()) {
-        case msrPlacementKind::kPlacement_UNKNOWN:
+        case msrPlacementKind::kPlacement_UNKNOWN_:
           break;
         case msrPlacementKind::kPlacementAbove:
           fLilypondCodeStream << "^";
@@ -19545,7 +19555,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrNote& elt)
           dynamic = (*i);
 
         switch (dynamic->getDynamicPlacementKind ()) {
-          case msrPlacementKind::kPlacement_UNKNOWN:
+          case msrPlacementKind::kPlacement_UNKNOWN_:
      // JMI       fLilypondCodeStream << "-3";
             break;
           case msrPlacementKind::kPlacementAbove:
@@ -19579,7 +19589,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrNote& elt)
           otherDynamic = (*i);
 
         switch (otherDynamic->getOtherDynamicPlacementKind ()) {
-          case msrPlacementKind::kPlacement_UNKNOWN:
+          case msrPlacementKind::kPlacement_UNKNOWN_:
             fLilypondCodeStream << "-";
             break;
           case msrPlacementKind::kPlacementAbove:
@@ -19655,7 +19665,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrNote& elt)
 
         case msrWedgeKind::kWedgeCrescendo:
           switch (wedge->getWedgePlacementKind ()) {
-            case msrPlacementKind::kPlacement_UNKNOWN:
+            case msrPlacementKind::kPlacement_UNKNOWN_:
               break;
             case msrPlacementKind::kPlacementAbove:
               fLilypondCodeStream <<
@@ -19672,7 +19682,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrNote& elt)
 
         case msrWedgeKind::kWedgeDecrescendo:
           switch (wedge->getWedgePlacementKind ()) {
-            case msrPlacementKind::kPlacement_UNKNOWN:
+            case msrPlacementKind::kPlacement_UNKNOWN_:
               break;
             case msrPlacementKind::kPlacementAbove:
               fLilypondCodeStream <<
@@ -20890,7 +20900,7 @@ void lpsr2lilypondTranslator::generateCodeRightAfterChordContents (
         ornament = (*i);
 
       switch (ornament->getOrnamentPlacementKind ()) {
-        case msrPlacementKind::kPlacement_UNKNOWN:
+        case msrPlacementKind::kPlacement_UNKNOWN_:
           fLilypondCodeStream << "-";
           break;
         case msrPlacementKind::kPlacementAbove:
@@ -20921,7 +20931,7 @@ void lpsr2lilypondTranslator::generateCodeRightAfterChordContents (
         dynamic = (*i);
 
       switch (dynamic->getDynamicPlacementKind ()) {
-        case msrPlacementKind::kPlacement_UNKNOWN:
+        case msrPlacementKind::kPlacement_UNKNOWN_:
           fLilypondCodeStream << "-";
           break;
         case msrPlacementKind::kPlacementAbove:
@@ -20953,7 +20963,7 @@ void lpsr2lilypondTranslator::generateCodeRightAfterChordContents (
         otherDynamic = (*i);
 
       switch (otherDynamic->getOtherDynamicPlacementKind ()) {
-        case msrPlacementKind::kPlacement_UNKNOWN:
+        case msrPlacementKind::kPlacement_UNKNOWN_:
           fLilypondCodeStream << "-";
           break;
         case msrPlacementKind::kPlacementAbove:
@@ -21013,7 +21023,7 @@ void lpsr2lilypondTranslator::generateCodeRightAfterChordContents (
         (*i)->getWordsContents ();
 
       switch (wordsPlacementKind) {
-        case msrPlacementKind::kPlacement_UNKNOWN:
+        case msrPlacementKind::kPlacement_UNKNOWN_:
           // should not occur
           break;
         case msrPlacementKind::kPlacementAbove:
@@ -21070,7 +21080,7 @@ void lpsr2lilypondTranslator::generateCodeRightAfterChordContents (
         case msrBeamKind::kBeamBackwardHook:
           break;
 
-        case msrBeamKind::kBeam_UNKNOWN:
+        case msrBeamKind::kBeam_UNKNOWN_:
           break;
       } // switch
     } // for
@@ -21093,7 +21103,7 @@ void lpsr2lilypondTranslator::generateCodeRightAfterChordContents (
       S_msrSlur originalSlur = chordSlurLink->getOriginalSlur ();
 
       switch (originalSlur->getSlurTypeKind ()) {
-        case msrSlurTypeKind::kSlurType_UNKNOWN:
+        case msrSlurTypeKind::kSlurType_UNKNOWN_:
           break;
 
         case msrSlurTypeKind::kSlurTypeRegularStart:
@@ -22089,7 +22099,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrPedal& elt)
   fLilypondCodeStream << std::endl;
 
   switch (elt->getPedalTypeKind ()) {
-    case msrPedalTypeKind::kPedalType_UNKNOWN:
+    case msrPedalTypeKind::kPedalType_UNKNOWN_:
       {
         // should not occur
         std::stringstream ss;
@@ -22377,7 +22387,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrBarLine& elt)
       // LilyPond will take care of displaying the repeat
       break;
 
-    case msrBarLineCategoryKind::kBarLineCategory_UNKNOWN:
+    case msrBarLineCategoryKind::kBarLineCategory_UNKNOWN_:
       {
         std::stringstream ss;
 
@@ -23347,7 +23357,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrRehearsalMark& elt)
   fLilypondCodeStream << std::endl;
 
   switch (elt->getRehearsalMarkPlacementKind ()) {
-    case msrPlacementKind::kPlacement_UNKNOWN:
+    case msrPlacementKind::kPlacement_UNKNOWN_:
       break;
     case msrPlacementKind::kPlacementAbove:
       break;
@@ -23982,7 +23992,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMidiTempo& elt)
       "%{" <<
       std::endl;
 
-     ++gIndenter;
+    ++gIndenter;
   }
 
   fLilypondCodeStream <<

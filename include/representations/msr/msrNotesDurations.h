@@ -25,7 +25,7 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 enum class msrNotesDurationKind {
-  kNotesDuration_UNKNOWN,
+  kNotesDuration_UNKNOWN_,
 
   // from longest to shortest for the algorithms
   kNotesDurationMaxima, kNotesDurationLonga, kNotesDurationBreve,
@@ -67,7 +67,7 @@ class EXP msrWholeNotes
     // constants
     // ------------------------------------------------------
 
-    static const int K_WHOLE_NOTES_NUMERATOR_UNKNOWN;
+    static const int K_WHOLE_NOTES_NUMERATOR_UNKNOWN_;
 
     // constructors/destructor
     // ------------------------------------------------------
@@ -222,7 +222,7 @@ EXP msrWholeNotes msrNotesDurationKindAsWholeNotes (
 EXP msrNotesDurationKind wholeNotesAsNotesDurationKind (msrWholeNotes wholeNotes);
 
 //______________________________________________________________________________
-EXP extern const msrWholeNotes K_WHOLE_NOTES_UNKNOWN;
+EXP extern const msrWholeNotes K_WHOLE_NOTES_UNKNOWN_;
 
 //______________________________________________________________________________
 std::string wholeNotesAndDotsNumberAsMsrString ( // JMI v0.9.67

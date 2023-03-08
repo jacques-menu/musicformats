@@ -43,7 +43,7 @@ class EXP Bool
     // copy constructor
     // ------------------------------------------------------
 
-                          Bool (const Bool& obj);
+                          Bool (const Bool& theBool);
 
 public:
 

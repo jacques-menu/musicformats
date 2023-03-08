@@ -400,12 +400,12 @@ void mxsr2msrTranslator::visitStart ( S_harmony& elt )
 
   fCurrentHarmonyInputLineNumber       = inputLineNumber;
 
-  fCurrentHarmonyRootDiatonicPitchKind = msrDiatonicPitchKind::kDiatonicPitch_UNKNOWN;
+  fCurrentHarmonyRootDiatonicPitchKind = msrDiatonicPitchKind::kDiatonicPitch_UNKNOWN_;
   fCurrentHarmonyRootAlterationKind    = msrAlterationKind::kAlterationNatural;
-  fCurrentHarmonyKind                  = msrHarmonyKind::kHarmony_UNKNOWN;
+  fCurrentHarmonyKind                  = msrHarmonyKind::kHarmony_UNKNOWN_;
   fCurrentHarmonyKindText              = "";
   fCurrentHarmonyInversion             = K_HARMONY_INVERSION_NONE;
-  fCurrentHarmonyBassDiatonicPitchKind = msrDiatonicPitchKind::kDiatonicPitch_UNKNOWN;
+  fCurrentHarmonyBassDiatonicPitchKind = msrDiatonicPitchKind::kDiatonicPitch_UNKNOWN_;
   fCurrentHarmonyBassAlterationKind    = msrAlterationKind::kAlterationNatural;
   fCurrentHarmonyDegreeValue           = -1;
   fCurrentHarmonyDegreeAlterationKind  = msrAlterationKind::kAlterationNatural;

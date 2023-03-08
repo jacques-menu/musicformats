@@ -37,7 +37,7 @@ S_languageOahAtom languageOahAtom::create (
   const std::string& variableName,
   mfLanguageKind&    languageKindVariable)
 {
-  languageOahAtom* o = new
+  languageOahAtom* obj = new
     languageOahAtom (
       longName,
       shortName,
@@ -45,8 +45,8 @@ S_languageOahAtom languageOahAtom::create (
       valueSpecification,
       variableName,
       languageKindVariable);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 languageOahAtom::languageOahAtom (
@@ -239,7 +239,7 @@ std::ostream& operator << (std::ostream& os, const S_languageOahAtom& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -251,13 +251,13 @@ S_insiderOahAtom insiderOahAtom::create (
   const std::string& shortName,
   const std::string& description)
 {
-  insiderOahAtom* o = new
+  insiderOahAtom* obj = new
     insiderOahAtom (
       longName,
       shortName,
       description);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 insiderOahAtom::insiderOahAtom (
@@ -432,7 +432,7 @@ std::ostream& operator << (std::ostream& os, const S_insiderOahAtom& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -444,13 +444,13 @@ S_regularOahAtom regularOahAtom::create (
   const std::string& shortName,
   const std::string& description)
 {
-  regularOahAtom* o = new
+  regularOahAtom* obj = new
     regularOahAtom (
       longName,
       shortName,
       description);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 regularOahAtom::regularOahAtom (
@@ -625,7 +625,7 @@ std::ostream& operator << (std::ostream& os, const S_regularOahAtom& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -640,7 +640,7 @@ S_passIDOahAtom passIDOahAtom::create (
   const std::string& variableName,
   mfPassIDKind&      passIDKind)
 {
-  passIDOahAtom* o = new
+  passIDOahAtom* obj = new
     passIDOahAtom (
       longName,
       shortName,
@@ -648,8 +648,8 @@ S_passIDOahAtom passIDOahAtom::create (
       valueSpecification,
       variableName,
       passIDKind);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 passIDOahAtom::passIDOahAtom (
@@ -836,7 +836,7 @@ std::ostream& operator << (std::ostream& os, const S_passIDOahAtom& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -846,10 +846,10 @@ std::ostream& operator << (std::ostream& os, const S_passIDOahAtom& elt)
 S_oahOahGroup oahOahGroup::create (
   const std::string& serviceName)
 {
-  oahOahGroup* o = new oahOahGroup (
+  oahOahGroup* obj = new oahOahGroup (
     serviceName);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 oahOahGroup::oahOahGroup (
@@ -1468,7 +1468,7 @@ std::ostream& operator << (std::ostream& os, const S_oahOahGroup& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

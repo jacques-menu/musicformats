@@ -22,7 +22,6 @@
 #include "msrPlacements.h"
 #include "msrSpanners.h"
 #include "msrTupletFactors.h"
-// #include "msrWholeNotes.h"
 
 
 namespace MusicFormats

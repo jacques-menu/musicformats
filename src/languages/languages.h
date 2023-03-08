@@ -26,7 +26,7 @@ namespace MusicFormats
 // the MusicFormats languages
 //______________________________________________________________________________
 enum class mfLanguageKind {
-  kMusicFormatsLanguage_UNKNOWN,
+  kMusicFormatsLanguage_UNKNOWN_,
 
   kMusicFormatsLanguageEnglish, // MusicFormats default
   kMusicFormatsLanguageFrench,

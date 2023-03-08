@@ -37,11 +37,11 @@ S_bsrLine bsrLine::create (
   int printLineNumber,
   int cellsPerLine)
 {
-  bsrLine* o =
+  bsrLine* obj =
     new bsrLine (
       inputLineNumber, printLineNumber, cellsPerLine);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 bsrLine::bsrLine (
@@ -614,7 +614,7 @@ std::ostream& operator << (std::ostream& os, const S_bsrLine& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

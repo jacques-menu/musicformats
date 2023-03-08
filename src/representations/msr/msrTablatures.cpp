@@ -45,15 +45,15 @@ S_msrFrameNote msrFrameNote::create (
   int              frameNoteFingering,
   msrBarreTypeKind frameNoteBarreTypeKind)
 {
-  msrFrameNote* o =
+  msrFrameNote* obj =
     new msrFrameNote (
       inputLineNumber,
       frameNoteStringNumber,
       frameNoteFretNumber,
       frameNoteFingering,
       frameNoteBarreTypeKind);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 msrFrameNote::msrFrameNote (
@@ -248,7 +248,7 @@ std::ostream& operator << (std::ostream& os, const S_msrFrameNote& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -261,14 +261,14 @@ S_msrFrame msrFrame::create (
   int frameFretsNumber,
   int frameFirstFretNumber)
 {
-  msrFrame* o =
+  msrFrame* obj =
     new msrFrame (
       inputLineNumber,
       frameStringsNumber,
       frameFretsNumber,
       frameFirstFretNumber);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 msrFrame::msrFrame (
@@ -610,7 +610,7 @@ std::ostream& operator << (std::ostream& os, const S_msrFrame& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

@@ -36,10 +36,10 @@ namespace MusicFormats
 S_traceOahGroup traceOahGroup::create (
   const S_oahHandler& handler)
 {
-  traceOahGroup* o = new traceOahGroup (
+  traceOahGroup* obj = new traceOahGroup (
     handler);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 traceOahGroup::traceOahGroup (
@@ -1814,7 +1814,7 @@ R"(Restrict the production of trace information to measure NUMBER)",
   S_oahTwoBooleansAtomWithTracePasses
     traceMeasurePositionsBooleanAtom =
       oahTwoBooleansAtomWithTracePasses::create (
-        "trace-measure-positions", "tmp",
+        "trace-measure-positions", "tmeapos",
 R"(Measure positions)",
         "fTraceMeasurePositions",
         fTraceMeasurePositions,
@@ -2360,7 +2360,7 @@ R"(Notes octave entry)",
   S_oahTwoBooleansAtomWithTracePasses
     traceGraceNotesBooleanAtom =
       oahTwoBooleansAtomWithTracePasses::create (
-        "trace-gracenotes", "tgraces",
+        "trace-grace-notes", "tgraces",
 R"(Grace notes)",
         "fTraceGraceNotes",
         fTraceGraceNotes,
@@ -3291,7 +3291,7 @@ std::ostream& operator << (std::ostream& os, const S_traceOahGroup& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

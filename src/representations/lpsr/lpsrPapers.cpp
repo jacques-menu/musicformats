@@ -37,13 +37,13 @@ S_lpsrPaper lpsrPaper::create (
   const S_msrScaling&    scaling,
   const S_msrPageLayout& pageLayout)
 {
-  lpsrPaper* o =
+  lpsrPaper* obj =
     new lpsrPaper (
       inputLineNumber,
       scaling,
       pageLayout);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 lpsrPaper::lpsrPaper (
@@ -531,7 +531,7 @@ void lpsrPaper::print (std::ostream& os) const
   os << std::left <<
     std::setw (fieldWidth) <<
     "fPageCount" << ": ";
-  if (fPageCount) {
+  if (fPageCount > 0) {
     os << fPageCount;
   }
   else {
@@ -542,7 +542,7 @@ void lpsrPaper::print (std::ostream& os) const
   os << std::left <<
     std::setw (fieldWidth) <<
     "fSystemCount" << ": ";
-  if (fSystemCount) {
+  if (fSystemCount > 0) {
     os << fSystemCount;
   }
   else {

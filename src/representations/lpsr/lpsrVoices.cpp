@@ -30,12 +30,12 @@ S_lpsrUseVoiceCommand lpsrUseVoiceCommand::create (
   int        inputLineNumber,
   const S_msrVoice& voice)
 {
-  lpsrUseVoiceCommand* o =
+  lpsrUseVoiceCommand* obj =
     new lpsrUseVoiceCommand (
       inputLineNumber,
       voice);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 lpsrUseVoiceCommand::lpsrUseVoiceCommand (

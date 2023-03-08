@@ -34,9 +34,9 @@ June 9, 2022
 \end{lstlisting}
 Note that \file{MusicFormatsVersionNumber.txt} should not end with an end of line, since that would disturb the creation of the PDF documentation files with \LaTeX;
 
-These informations can be displayed with \scripts{ShowMusicFormatsVersion.bash}:
+These informations can be displayed with \devtools{ShowMusicFormatsVersion.bash}:
 \begin{lstlisting}[language=Terminal]
-jacquesmenu@macmini: ~/musicformats-git-dev > scripts/ShowMusicFormatsVersion.bash
+jacquesmenu@macmini: ~/musicformats-git-dev > devtools/ShowMusicFormatsVersion.bash
 Version number:
 0.9.63Version date:
 June 9, 2022
@@ -45,7 +45,7 @@ June 9, 2022
 
 \item (re-)create the up-to-date documentation with:
 \begin{lstlisting}[language=TerminalSmall]
-jacquesmenu@macmini: ~/musicformats-git-dev > scripts/CreateDocumentationPDFs.bash
+jacquesmenu@macmini: ~/musicformats-git-dev > devtools/CreateDocumentationPDFs.bash
 \end{lstlisting}
 
 
@@ -120,7 +120,7 @@ total 8
 
 \item create the releases in the local \mf\ \repo\ clone:
 \begin{lstlisting}[language=TerminalSmall]
-jacquesmenu@macmini: ~/musicformats-git-dev > scripts/MakeMusicFormatsDistributions.bash
+jacquesmenu@macmini: ~/musicformats-git-dev > devtools/MakeMusicFormatsDistributions.bash
 ... ... ...
 ----------------------------------------------
 ==> final distrib contents:
@@ -215,9 +215,9 @@ jacquesmenu@macmini: ~/musicformats-git-dev > git branch
 
 \item create a new version number and date, for example:
 \begin{lstlisting}[language=TerminalSmall]
-jacquesmenu@macmini: ~/musicformats-git-dev > scripts/SetMusicFormatsVersionNumber. bash 0.9.64
--bash: scripts/SetMusicFormatsVersionNumber.: No such file or directory
-jacquesmenu@macmini: ~/musicformats-git-dev > scripts/SetMusicFormatsVersionNumber.bash 0.9.64
+jacquesmenu@macmini: ~/musicformats-git-dev > devtools/SetMusicFormatsVersionNumber. bash 0.9.64
+-bash: devtools/SetMusicFormatsVersionNumber.: No such file or directory
+jacquesmenu@macmini: ~/musicformats-git-dev > devtools/SetMusicFormatsVersionNumber.bash 0.9.64
 ==> PWD is:
 /Users/jacquesmenu/musicformats-git-dev
 
@@ -235,7 +235,7 @@ jacquesmenu@macmini: ~/musicformats-git-dev > scripts/SetMusicFormatsVersionNumb
 \end{lstlisting}
 
 \begin{lstlisting}[language=Terminal]
-jacquesmenu@macmini: ~/musicformats-git-dev > scripts/SetMusicFormatsVersionDate.bash "June 9, 2022"
+jacquesmenu@macmini: ~/musicformats-git-dev > devtools/SetMusicFormatsVersionDate.bash "June 9, 2022"
 ==> PWD is:
 /Users/jacquesmenu/musicformats-git-dev
 
@@ -255,7 +255,7 @@ June 9, 2022
 
 Check the result with:
 \begin{lstlisting}[language=Terminal]
-jacquesmenu@macmini: ~/musicformats-git-dev > scripts/ShowMusicFormatsVersion.bash
+jacquesmenu@macmini: ~/musicformats-git-dev > devtools/ShowMusicFormatsVersion.bash
 Version number:
 0.9.64Version date:
 June 9, 2022

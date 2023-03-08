@@ -50,14 +50,14 @@ S_mfslInterpreterRegularHandler mfslInterpreterRegularHandler::create (
                      insiderOahHandler)
 {
   // create the regular handler
-  mfslInterpreterRegularHandler* o = new
+  mfslInterpreterRegularHandler* obj = new
     mfslInterpreterRegularHandler (
       serviceName,
       handlerHeader,
       insiderOahHandler);
-  assert (o != nullptr);
+  assert (obj != nullptr);
 
-  return o;
+  return obj;
 }
 
 mfslInterpreterRegularHandler::mfslInterpreterRegularHandler (

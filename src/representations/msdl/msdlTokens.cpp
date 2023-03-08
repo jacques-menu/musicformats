@@ -38,7 +38,7 @@ std::string msdlTokenKindAsString (
   std::stringstream ss;
 
   switch (tokenKind) {
-    case msdlTokenKind::kToken_UNKNOWN:
+    case msdlTokenKind::kToken_UNKNOWN_:
       ss << "*noToken*";
       break;
 
@@ -316,7 +316,7 @@ std::string msdlTokenKindAsMsdlString (
   std::string result;
 
   switch (tokenKind) {
-    case msdlTokenKind::kToken_UNKNOWN:
+    case msdlTokenKind::kToken_UNKNOWN_:
       result = "*NoToken*";
       break;
 
@@ -488,11 +488,11 @@ std::string msdlTokenKindAsMsdlString (
 msdlTokenKind msdlTokenKindFromKeywordKind (
   msdlKeywordKind keywordKind)
 {
-  msdlTokenKind result = msdlTokenKind::kToken_UNKNOWN;
+  msdlTokenKind result = msdlTokenKind::kToken_UNKNOWN_;
 
   switch (keywordKind) {
-    case msdlKeywordKind::kKeyword_UNKNOWN:
-      result = msdlTokenKind::kToken_UNKNOWN;
+    case msdlKeywordKind::kKeyword_UNKNOWN_:
+      result = msdlTokenKind::kToken_UNKNOWN_;
       break;
 
     case msdlKeywordKind::kKeywordTitle:
@@ -582,7 +582,7 @@ std::string existingTokensInLanguage (
 
   // select the relevant keywords names map
   switch (keywordsLanguageKind) {
-    case msdlKeywordsLanguageKind::kKeywordsLanguage_UNKNOWN:
+    case msdlKeywordsLanguageKind::kKeywordsLanguage_UNKNOWN_:
       // should not occur
       break;
 
@@ -665,32 +665,32 @@ std::string existingTokensInLanguage (
 S_msdlTokenKindsSet msdlTokenKindsSet::create ()
 {
   // create the set
-  msdlTokenKindsSet* o = new
+  msdlTokenKindsSet* obj = new
     msdlTokenKindsSet ();
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 S_msdlTokenKindsSet msdlTokenKindsSet::create (
   std::initializer_list<msdlTokenKind> elements)
 {
   // create the set
-  msdlTokenKindsSet* o = new
+  msdlTokenKindsSet* obj = new
     msdlTokenKindsSet (
       elements);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 S_msdlTokenKindsSet msdlTokenKindsSet::create (
   msdlTokenKindsSet &tokenKindsSet)
 {
   // create the set
-  msdlTokenKindsSet* o = new
+  msdlTokenKindsSet* obj = new
     msdlTokenKindsSet (
       tokenKindsSet);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 S_msdlTokenKindsSet msdlTokenKindsSet::createClone ()
@@ -847,7 +847,7 @@ std::ostream& operator << (std::ostream& os, const S_msdlTokenKindsSet& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -986,10 +986,10 @@ EXP S_msdlTokenKindsSet operator- (
 //_______________________________________________________________________________
 S_msdlTokenDescription msdlTokenDescription::create ()
 {
-  msdlTokenDescription* o =
+  msdlTokenDescription* obj =
     new msdlTokenDescription ();
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 msdlTokenDescription::msdlTokenDescription ()
@@ -1000,7 +1000,7 @@ msdlTokenDescription::~msdlTokenDescription ()
 
 msdlKeywordKind msdlTokenDescription::getKeywordKind () const
 {
-  msdlKeywordKind result = msdlKeywordKind::kKeyword_UNKNOWN;
+  msdlKeywordKind result = msdlKeywordKind::kKeyword_UNKNOWN_;
 
   switch (fTokenDescriptionKind) {
     case msdlTokenDescriptionKind::kTokenKeyword:
@@ -1390,7 +1390,7 @@ std::ostream& operator << (std::ostream& os, const msdlTokenDescription& elt)
 
 //_______________________________________________________________________________
 msdlToken::msdlToken ()
-    : fTokenKind (msdlTokenKind::kToken_UNKNOWN)
+    : fTokenKind (msdlTokenKind::kToken_UNKNOWN_)
 {
   initializeToken ();
 }
@@ -1464,7 +1464,7 @@ std::string msdlToken::asString () const
     ' ';
 
   switch (fTokenKind) {
-    case msdlTokenKind::kToken_UNKNOWN:
+    case msdlTokenKind::kToken_UNKNOWN_:
       // should not occur
       break;
 
@@ -1645,7 +1645,7 @@ std::string msdlToken::asMsdlString (
   std::stringstream ss;
 
   switch (fTokenKind) {
-    case msdlTokenKind::kToken_UNKNOWN:
+    case msdlTokenKind::kToken_UNKNOWN_:
       // should not occur
       break;
 
@@ -1826,7 +1826,7 @@ void msdlToken::print (std::ostream& os) const
     std::endl;
 
   switch (fTokenKind) {
-    case msdlTokenKind::kToken_UNKNOWN:
+    case msdlTokenKind::kToken_UNKNOWN_:
       // should not occur
       break;
 
@@ -1991,10 +1991,10 @@ std::ostream& operator << (std::ostream& os, const msdlToken& elt)
 //_______________________________________________________________________________
 S_msdlTokensList msdlTokensList::create ()
 {
-  msdlTokensList* o =
+  msdlTokensList* obj =
     new msdlTokensList ();
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 msdlTokensList::msdlTokensList ()
@@ -2062,7 +2062,7 @@ std::ostream& operator << (std::ostream& os, const S_msdlTokensList& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

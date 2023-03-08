@@ -11,8 +11,6 @@
 
 #include <map>
 
-// #include "mfWaeInterface.h"
-
 #include "mfConstants.h"
 #include "mfIndentedTextOutput.h"
 #include "mfPasses.h"
@@ -34,8 +32,8 @@ std::string mfPassIDKindAsString (
 
   // these strings are used in the command line options
   switch (passIDKind) {
-    case mfPassIDKind::kMfPassID_UNKNOWN:
-      result = "*kMfPassID_UNKNOWN*";
+    case mfPassIDKind::kMfPassID_UNKNOWN_:
+      result = "*kMfPassID_UNKNOWN_*";
       break;
 
     case mfPassIDKind::kMfPassID_ALL:
@@ -108,7 +106,7 @@ EXP mfIndentedStringStream& operator << (
 mfPassIDKind mfPassIDKindFromString (const std::string& theString)
 {
   mfPassIDKind result =
-    mfPassIDKind::kMfPassID_UNKNOWN;
+    mfPassIDKind::kMfPassID_UNKNOWN_;
 
   std::map<std::string, mfPassIDKind>::const_iterator
     it =
@@ -272,12 +270,12 @@ S_mfPassDescription mfPassDescription::create (
   mfPassIDKind passIDKind,
   std::string  passDescription)
 {
-  mfPassDescription* o =
+  mfPassDescription* obj =
     new mfPassDescription (
       passIDKind,
       passDescription);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 mfPassDescription::mfPassDescription (

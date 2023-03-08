@@ -25,24 +25,24 @@ namespace MusicFormats
 //______________________________________________________________________________
 S_msrPathToVoice msrPathToVoice::createFromVoice (const S_msrVoice& voice)
 {
-  msrPathToVoice* o =
+  msrPathToVoice* obj =
     new msrPathToVoice ();
-  assert (o != nullptr);
+  assert (obj != nullptr);
 
-  o->initializeFromVoice (voice);
+  obj->initializeFromVoice (voice);
 
-  return o;
+  return obj;
 }
 
 S_msrPathToVoice msrPathToVoice::createFromStaff (const S_msrStaff& staff)
 {
-  msrPathToVoice* o =
+  msrPathToVoice* obj =
     new msrPathToVoice ();
-  assert (o != nullptr);
+  assert (obj != nullptr);
 
-  o->initializeFromStaff (staff);
+  obj->initializeFromStaff (staff);
 
-  return o;
+  return obj;
 }
 
 msrPathToVoice::msrPathToVoice ()
@@ -311,7 +311,7 @@ std::ostream& operator << (std::ostream& os, const S_msrPathToVoice& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

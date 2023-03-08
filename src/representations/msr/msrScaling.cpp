@@ -37,13 +37,13 @@ S_msrScaling msrScaling::create (
   float millimeters,
   float tenths)
 {
-  msrScaling* o =
+  msrScaling* obj =
     new msrScaling (
       inputLineNumber,
       millimeters,
       tenths);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 msrScaling::msrScaling (
@@ -290,7 +290,7 @@ std::ostream& operator << (std::ostream& os, const S_msrScaling& elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

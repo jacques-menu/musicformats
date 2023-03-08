@@ -34,11 +34,11 @@ S_bsrBarLine bsrBarLine::create (
   int            inputLineNumber,
   bsrBarLineKind barLineKind)
 {
-  bsrBarLine* o =
+  bsrBarLine* obj =
     new bsrBarLine (
       inputLineNumber, barLineKind);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 bsrBarLine::bsrBarLine (
@@ -308,7 +308,7 @@ std::ostream& operator << (std::ostream& os, const S_bsrBarLine& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

@@ -59,13 +59,13 @@ S_xml2brlInsiderHandler xml2brlInsiderHandler::create (
   const std::string& handlerHeader)
 {
   // create the insider handler
-  xml2brlInsiderHandler* o = new
+  xml2brlInsiderHandler* obj = new
     xml2brlInsiderHandler (
       serviceName,
       handlerHeader);
-  assert (o!=0);
+  assert (obj!=0);
 
-  return o;
+  return obj;
 }
 
 xml2brlInsiderHandler::xml2brlInsiderHandler (
@@ -353,7 +353,7 @@ std::string xml2brlInsiderHandler::fetchOutputFileNameFromTheOptions () const
 
   if (outputFileNameHasBeenSet) {
     if (autoOutputFileNameHasBeenSet) {
-      // '-o, -output-file-name' has been selected
+      // '-obj, -output-file-name' has been selected
       // '-aofn, -auto-output-file-name' has been selected
       std::stringstream ss;
 
@@ -368,7 +368,7 @@ std::string xml2brlInsiderHandler::fetchOutputFileNameFromTheOptions () const
       oahError (ss.str ());
     }
     else {
-      // '-o, -output-file-name' has been selected
+      // '-obj, -output-file-name' has been selected
       // '-aofn, -auto-output-file-name' has NOT been selected
       outputFileName =
         outputFileNameStringAtom->
@@ -378,7 +378,7 @@ std::string xml2brlInsiderHandler::fetchOutputFileNameFromTheOptions () const
 
   else {
     if (autoOutputFileNameHasBeenSet) {
-      // '-o, -output-file-name' has NOT been selected
+      // '-obj, -output-file-name' has NOT been selected
       // '-aofn, -auto-output-file-name' has been selected
       std::string
         inputSourceName =
@@ -523,7 +523,7 @@ std::string xml2brlInsiderHandler::fetchOutputFileNameFromTheOptions () const
     }
 
     else {
-      // '-o, -output-file-name' has NOT been selected
+      // '-obj, -output-file-name' has NOT been selected
       // '-aofn, -auto-output-file-name' has NOT been selected
       // nothing to do
     }
@@ -725,7 +725,7 @@ std::ostream& operator << (std::ostream& os, const S_xml2brlInsiderHandler& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -738,12 +738,12 @@ S_xml2brlInsiderOahGroup xml2brlInsiderOahGroup::create (
   const std::string& serviceName,
   const std::string& handlerHeader)
 {
-  xml2brlInsiderOahGroup* o = new xml2brlInsiderOahGroup (
+  xml2brlInsiderOahGroup* obj = new xml2brlInsiderOahGroup (
     serviceName,
     handlerHeader);
-  assert (o!=0);
+  assert (obj!=0);
 
-  return o;
+  return obj;
 }
 
 xml2brlInsiderOahGroup::xml2brlInsiderOahGroup (

@@ -56,13 +56,13 @@ S_msr2brailleInsiderHandler msr2brailleInsiderHandler::create (
   const std::string& handlerHeader)
 {
   // create the insider handler
-  msr2brailleInsiderHandler* o = new
+  msr2brailleInsiderHandler* obj = new
     msr2brailleInsiderHandler (
       serviceName,
       handlerHeader);
-  assert (o!=0);
+  assert (obj!=0);
 
-  return o;
+  return obj;
 }
 
 msr2brailleInsiderHandler::msr2brailleInsiderHandler (
@@ -333,7 +333,7 @@ std::string msr2brailleInsiderHandler::fetchOutputFileNameFromTheOptions () cons
 
   if (outputFileNameHasBeenSet) {
     if (autoOutputFileNameHasBeenSet) {
-      // '-o, -output-file-name' has been selected
+      // '-obj, -output-file-name' has been selected
       // '-aofn, -auto-output-file-name' has been selected
       std::stringstream ss;
 
@@ -348,7 +348,7 @@ std::string msr2brailleInsiderHandler::fetchOutputFileNameFromTheOptions () cons
       oahError (ss.str ());
     }
     else {
-      // '-o, -output-file-name' has been selected
+      // '-obj, -output-file-name' has been selected
       // '-aofn, -auto-output-file-name' has NOT been selected
       outputFileName =
         outputFileNameStringAtom->
@@ -358,7 +358,7 @@ std::string msr2brailleInsiderHandler::fetchOutputFileNameFromTheOptions () cons
 
   else {
     if (autoOutputFileNameHasBeenSet) {
-      // '-o, -output-file-name' has NOT been selected
+      // '-obj, -output-file-name' has NOT been selected
       // '-aofn, -auto-output-file-name' has been selected
       std::string
         inputSourceName =
@@ -503,7 +503,7 @@ std::string msr2brailleInsiderHandler::fetchOutputFileNameFromTheOptions () cons
     }
 
     else {
-      // '-o, -output-file-name' has NOT been selected
+      // '-obj, -output-file-name' has NOT been selected
       // '-aofn, -auto-output-file-name' has NOT been selected
       // nothing to do
     }
@@ -699,7 +699,7 @@ std::ostream& operator << (std::ostream& os, const S_msr2brailleInsiderHandler& 
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -712,12 +712,12 @@ S_msr2brailleInsiderOahGroup msr2brailleInsiderOahGroup::create (
   const std::string& serviceName,
   const std::string& handlerHeader)
 {
-  msr2brailleInsiderOahGroup* o = new msr2brailleInsiderOahGroup (
+  msr2brailleInsiderOahGroup* obj = new msr2brailleInsiderOahGroup (
     serviceName,
     handlerHeader);
-  assert (o!=0);
+  assert (obj!=0);
 
-  return o;
+  return obj;
 }
 
 msr2brailleInsiderOahGroup::msr2brailleInsiderOahGroup (

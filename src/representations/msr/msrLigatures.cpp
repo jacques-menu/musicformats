@@ -40,7 +40,7 @@ S_msrLigature msrLigature::create (
   msrLineTypeKind        ligatureLineTypeKind,
   msrPlacementKind       ligaturePlacementKind)
 {
-  msrLigature* o =
+  msrLigature* obj =
     new msrLigature (
       inputLineNumber,
       ligatureNumber,
@@ -48,8 +48,8 @@ S_msrLigature msrLigature::create (
       ligatureLineEndKind,
       ligatureLineTypeKind,
       ligaturePlacementKind);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 msrLigature::msrLigature (
@@ -280,7 +280,7 @@ std::ostream& operator << (std::ostream& os, const S_msrLigature& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

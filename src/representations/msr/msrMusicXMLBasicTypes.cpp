@@ -116,8 +116,8 @@ std::string msrOtherAppearanceTypeKindAsString (
   std::string result;
 
   switch (otherAppearanceTypeKind) {
-    case msrOtherAppearanceTypeKind::kOtherAppearanceType_UNKNOWN:
-      result = "kOtherAppearanceType_UNKNOWN";
+    case msrOtherAppearanceTypeKind::kOtherAppearanceType_UNKNOWN_:
+      result = "kOtherAppearanceType_UNKNOWN_";
       break;
   } // switch
 
@@ -136,8 +136,8 @@ std::string msrLineWidthTypeKindAsString (
   std::string result;
 
   switch (lineWidthTypeKind) {
-    case msrLineWidthTypeKind::kLineWidthType_UNKNOWN:
-      result = "kLineWidthType_UNKNOWN";
+    case msrLineWidthTypeKind::kLineWidthType_UNKNOWN_:
+      result = "kLineWidthType_UNKNOWN_";
       break;
     case msrLineWidthTypeKind::kLineWidthTypeBeam:
       result = "kLineWidthTypeBeam";
@@ -213,8 +213,8 @@ std::string msrNoteSizeTypeKindAsString (
   std::string result;
 
   switch (noteSizeTypeKind) {
-    case msrNoteSizeTypeKind::kNoteSizeType_UNKNOWN:
-      result = "kNoteSizeType_UNKNOWN";
+    case msrNoteSizeTypeKind::kNoteSizeType_UNKNOWN_:
+      result = "kNoteSizeType_UNKNOWN_";
       break;
     case msrNoteSizeTypeKind::kNoteSizeTypeCue:
       result = "kNoteSizeTypeCue";
@@ -242,8 +242,8 @@ std::string msrDistanceTypeKindAsString (
   std::string result;
 
   switch (distanceTypeKind) {
-    case msrDistanceTypeKind::kDistanceType_UNKNOWN:
-      result = "kDistanceType_UNKNOWN";
+    case msrDistanceTypeKind::kDistanceType_UNKNOWN_:
+      result = "kDistanceType_UNKNOWN_";
       break;
     case msrDistanceTypeKind::kDistanceTypeHyphen:
       result = "kDistanceTypeHyphen";
@@ -268,8 +268,8 @@ std::string msrGlyphTypeKindAsString (
   std::string result;
 
   switch (glyphTypeKind) {
-    case msrGlyphTypeKind::kGlyphType_UNKNOWN:
-      result = "kGlyphType_UNKNOWN";
+    case msrGlyphTypeKind::kGlyphType_UNKNOWN_:
+      result = "kGlyphType_UNKNOWN_";
       break;
     case msrGlyphTypeKind::kGlyphTypeQuarterRest:
       result = "kGlyphTypeQuarterRest";
@@ -328,11 +328,11 @@ std::ostream& operator << (std::ostream& os, const msrGlyphTypeKind& elt)
 S_msrPageLayout msrPageLayout::create (
   int inputLineNumber)
 {
-  msrPageLayout* o =
+  msrPageLayout* obj =
     new msrPageLayout (
       inputLineNumber);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 msrPageLayout::msrPageLayout (
@@ -550,7 +550,7 @@ void msrPageLayout::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif        
+#endif
         p->visitEnd (elem);
   }
 }
@@ -606,7 +606,7 @@ void msrPageLayout::print (std::ostream& os) const
       os << fPageHeight;
     }
     else {
-      os << "[NONE]";
+      os << "[NULL]";
     }
   os << std::endl;
 
@@ -617,7 +617,7 @@ void msrPageLayout::print (std::ostream& os) const
       os << fPageWidth;
     }
     else {
-      os << "[NONE]";
+      os << "[NULL]";
     }
   os << std::endl;
 
@@ -629,7 +629,7 @@ void msrPageLayout::print (std::ostream& os) const
       os << fOddMarginsGroup;
     }
     else {
-      os << "[NONE]" << std::endl;
+      os << "[NULL]" << std::endl;
     }
 
   os << std::left <<
@@ -639,7 +639,7 @@ void msrPageLayout::print (std::ostream& os) const
       os << fEvenMarginsGroup;
     }
     else {
-      os << "[NONE]" << std::endl;
+      os << "[NULL]" << std::endl;
     }
 
   os << std::left <<
@@ -649,7 +649,7 @@ void msrPageLayout::print (std::ostream& os) const
       os << fBothMarginsGroup;
     }
     else {
-      os << "[NONE]" << std::endl;
+      os << "[NULL]" << std::endl;
     }
 
   --gIndenter;
@@ -663,7 +663,7 @@ std::ostream& operator << (std::ostream& os, const S_msrPageLayout& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -673,11 +673,11 @@ std::ostream& operator << (std::ostream& os, const S_msrPageLayout& elt)
 S_msrSystemLayout msrSystemLayout::create (
   int inputLineNumber)
 {
-  msrSystemLayout* o =
+  msrSystemLayout* obj =
     new msrSystemLayout (
       inputLineNumber);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 msrSystemLayout::msrSystemLayout (
@@ -759,7 +759,7 @@ void msrSystemLayout::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif        
+#endif
         p->visitEnd (elem);
   }
 }
@@ -805,7 +805,7 @@ void msrSystemLayout::print (std::ostream& os) const
       os << fLeftMargin;
     }
     else {
-      os << "[NONE]";
+      os << "[NULL]";
     }
   os << std::endl;
 
@@ -816,7 +816,7 @@ void msrSystemLayout::print (std::ostream& os) const
       os << fRightMargin;
     }
     else {
-      os << "[NONE]";
+      os << "[NULL]";
     }
   os << std::endl;
 
@@ -828,7 +828,7 @@ void msrSystemLayout::print (std::ostream& os) const
       os << fSystemDistance;
     }
     else {
-      os << "[NONE]";
+      os << "[NULL]";
     }
   os << std::endl;
 
@@ -839,7 +839,7 @@ void msrSystemLayout::print (std::ostream& os) const
       os << fTopSystemDistance;
     }
     else {
-      os << "[NONE]";
+      os << "[NULL]";
     }
   os << std::endl;
 
@@ -854,7 +854,7 @@ std::ostream& operator << (std::ostream& os, const S_msrSystemLayout& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -864,11 +864,11 @@ std::ostream& operator << (std::ostream& os, const S_msrSystemLayout& elt)
 S_msrSystemDividers msrSystemDividers::create (
   int inputLineNumber)
 {
-  msrSystemDividers* o =
+  msrSystemDividers* obj =
     new msrSystemDividers (
       inputLineNumber);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 msrSystemDividers::msrSystemDividers (
@@ -953,7 +953,7 @@ void msrSystemDividers::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif        
+#endif
         p->visitEnd (elem);
   }
 }
@@ -1000,7 +1000,7 @@ std::ostream& operator << (std::ostream& os, const S_msrSystemDividers& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -1011,12 +1011,12 @@ S_msrStaffLayout msrStaffLayout::create (
   int inputLineNumber,
   int staffNumber)
 {
-  msrStaffLayout* o =
+  msrStaffLayout* obj =
     new msrStaffLayout (
       inputLineNumber,
       staffNumber);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 msrStaffLayout::msrStaffLayout (
@@ -1101,7 +1101,7 @@ void msrStaffLayout::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif        
+#endif
         p->visitEnd (elem);
   }
 }
@@ -1156,7 +1156,7 @@ std::ostream& operator << (std::ostream& os, const S_msrStaffLayout& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -1166,11 +1166,11 @@ std::ostream& operator << (std::ostream& os, const S_msrStaffLayout& elt)
 S_msrMeasureLayout msrMeasureLayout::create (
   int inputLineNumber)
 {
-  msrMeasureLayout* o =
+  msrMeasureLayout* obj =
     new msrMeasureLayout (
       inputLineNumber);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 msrMeasureLayout::msrMeasureLayout (
@@ -1252,7 +1252,7 @@ void msrMeasureLayout::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif        
+#endif
         p->visitEnd (elem);
   }
 }
@@ -1298,7 +1298,7 @@ std::ostream& operator << (std::ostream& os, const S_msrMeasureLayout& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -1310,13 +1310,13 @@ S_msrLineWidth msrLineWidth::create (
   msrLineWidthTypeKind lineWidthTypeKind,
   const S_msrLength&   lineWidthValue)
 {
-  msrLineWidth* o =
+  msrLineWidth* obj =
     new msrLineWidth (
       inputLineNumber,
       lineWidthTypeKind,
       lineWidthValue);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 msrLineWidth::msrLineWidth (
@@ -1417,7 +1417,7 @@ void msrLineWidth::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif        
+#endif
         p->visitEnd (elem);
   }
 }
@@ -1437,7 +1437,7 @@ std::string msrLineWidth::asString () const
       ss << fLineWidthValue->asString();
     }
     else {
-      ss << "[NONE]";
+      ss << "[NULL]";
     }
   ss <<
     ", line " << fInputLineNumber <<
@@ -1468,7 +1468,7 @@ void msrLineWidth::print (std::ostream& os) const
       os << fLineWidthValue;
     }
     else {
-      os << "[NONE]";
+      os << "[NULL]";
     }
   os << std::endl;
 
@@ -1483,7 +1483,7 @@ std::ostream& operator << (std::ostream& os, const S_msrLineWidth& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -1495,13 +1495,13 @@ S_msrNoteSize msrNoteSize::create (
   msrNoteSizeTypeKind noteSizeTypeKind,
   float               noteSizeValue)
 {
-  msrNoteSize* o =
+  msrNoteSize* obj =
     new msrNoteSize (
       inputLineNumber,
       noteSizeTypeKind,
       noteSizeValue);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 msrNoteSize::msrNoteSize (
@@ -1602,7 +1602,7 @@ void msrNoteSize::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif        
+#endif
         p->visitEnd (elem);
   }
 }
@@ -1655,7 +1655,7 @@ std::ostream& operator << (std::ostream& os, const S_msrNoteSize& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -1667,13 +1667,13 @@ S_msrDistance msrDistance::create (
   msrDistanceTypeKind distanceTypeKind,
   S_msrLength         distanceValue)
 {
-  msrDistance* o =
+  msrDistance* obj =
     new msrDistance (
       inputLineNumber,
       distanceTypeKind,
       distanceValue);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 msrDistance::msrDistance (
@@ -1774,7 +1774,7 @@ void msrDistance::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif        
+#endif
         p->visitEnd (elem);
   }
 }
@@ -1827,7 +1827,7 @@ std::ostream& operator << (std::ostream& os, const S_msrDistance& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -1839,13 +1839,13 @@ S_msrGlyph msrGlyph::create (
   msrGlyphTypeKind glyphTypeKind,
   const std::string&    glyphValue)
 {
-  msrGlyph* o =
+  msrGlyph* obj =
     new msrGlyph (
       inputLineNumber,
       glyphTypeKind,
       glyphValue);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 msrGlyph::msrGlyph (
@@ -1946,7 +1946,7 @@ void msrGlyph::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif        
+#endif
         p->visitEnd (elem);
   }
 }
@@ -1999,7 +1999,7 @@ std::ostream& operator << (std::ostream& os, const S_msrGlyph& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -2011,13 +2011,13 @@ S_msrOtherAppearance msrOtherAppearance::create (
   msrOtherAppearanceTypeKind otherAppearanceTypeKind,
   const std::string&    otherAppearanceValue)
 {
-  msrOtherAppearance* o =
+  msrOtherAppearance* obj =
     new msrOtherAppearance (
       inputLineNumber,
       otherAppearanceTypeKind,
       otherAppearanceValue);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 msrOtherAppearance::msrOtherAppearance (
@@ -2118,7 +2118,7 @@ void msrOtherAppearance::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif        
+#endif
         p->visitEnd (elem);
   }
 }
@@ -2171,7 +2171,7 @@ std::ostream& operator << (std::ostream& os, const S_msrOtherAppearance& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -2181,11 +2181,11 @@ std::ostream& operator << (std::ostream& os, const S_msrOtherAppearance& elt)
 S_msrAppearance msrAppearance::create (
   int inputLineNumber)
 {
-  msrAppearance* o =
+  msrAppearance* obj =
     new msrAppearance (
       inputLineNumber);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 msrAppearance::msrAppearance (
@@ -2281,7 +2281,7 @@ void msrAppearance::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif        
+#endif
         p->visitEnd (elem);
   }
 }
@@ -2500,7 +2500,7 @@ std::ostream& operator << (std::ostream& os, const S_msrAppearance& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

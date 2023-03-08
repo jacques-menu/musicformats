@@ -34,8 +34,8 @@ std::string msrSpannerTypeKindAsString (
   std::string result;
 
   switch (spannerTypeKind) {
-    case msrSpannerTypeKind::kSpannerType_UNKNOWN:
-      result = "kSpannerType_UNKNOWN";
+    case msrSpannerTypeKind::kSpannerType_UNKNOWN_:
+      result = "kSpannerType_UNKNOWN_";
       break;
     case msrSpannerTypeKind::kSpannerTypeStart:
       result = "kSpannerTypeStart";
@@ -66,7 +66,7 @@ S_msrSpanner msrSpanner::create (
   msrPlacementKind   spannerPlacementKind,
   const S_msrNote&   spannerUpLinkToNote)
 {
-  msrSpanner* o =
+  msrSpanner* obj =
     new msrSpanner (
       inputLineNumber,
       spannerNumber,
@@ -74,8 +74,8 @@ S_msrSpanner msrSpanner::create (
       spannerTypeKind,
       spannerPlacementKind,
       spannerUpLinkToNote);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 msrSpanner::msrSpanner (
@@ -294,7 +294,7 @@ void msrSpanner::print (std::ostream& os) const
   }
   else {
     os <<
-    ": " << "[NONE]" <<
+    ": " << "[NULL]" <<
     std::endl;
   }
 
@@ -309,7 +309,7 @@ std::ostream& operator << (std::ostream& os, const S_msrSpanner& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

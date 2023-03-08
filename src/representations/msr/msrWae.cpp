@@ -35,12 +35,12 @@ msrException::msrException (
 S_msrException msrException::create (
   std::string const& exceptionDescription)
 {
-  msrException* o = new
+  msrException* obj = new
     msrException (
       exceptionDescription);
-  assert (o!=0);
+  assert (obj!=0);
 
-  return o;
+  return obj;
 }
 
 msrInternalException::msrInternalException (
@@ -51,12 +51,12 @@ msrInternalException::msrInternalException (
 S_msrInternalException msrInternalException::create (
   std::string const& exceptionDescription)
 {
-  msrInternalException* o = new
+  msrInternalException* obj = new
     msrInternalException (
       exceptionDescription);
-  assert (o!=0);
+  assert (obj!=0);
 
-  return o;
+  return obj;
 }
 
 msrUnsupportedException::msrUnsupportedException (
@@ -67,12 +67,12 @@ msrUnsupportedException::msrUnsupportedException (
 S_msrUnsupportedException msrUnsupportedException::create (
   std::string const& exceptionDescription)
 {
-  msrUnsupportedException* o = new
+  msrUnsupportedException* obj = new
     msrUnsupportedException (
       exceptionDescription);
-  assert (o!=0);
+  assert (obj!=0);
 
-  return o;
+  return obj;
 }
 
 //______________________________________________________________________________

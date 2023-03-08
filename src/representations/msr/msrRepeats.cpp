@@ -9,19 +9,15 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include "mfStaticSettings.h"
-
 #include "visitor.h"
 
+#include "mfStaticSettings.h"
+
 #include "mfAssert.h"
-
 #include "mfServices.h"
-
 #include "mfStringsHandling.h"
 
 #include "msrWae.h"
-
-#include "mfStaticSettings.h"
 
 #include "msrRepeatsEnumTypes.h"
 #include "msrRepeats.h"
@@ -62,12 +58,12 @@ S_msrRepeatCommonPart msrRepeatCommonPart::create (
   int         inputLineNumber,
   const S_msrRepeat& upLinkToRepeat)
 {
-  msrRepeatCommonPart* o =
+  msrRepeatCommonPart* obj =
     new msrRepeatCommonPart (
       inputLineNumber,
       upLinkToRepeat);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 msrRepeatCommonPart::msrRepeatCommonPart (
@@ -577,7 +573,7 @@ std::ostream& operator << (std::ostream& os, const S_msrRepeatCommonPart& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -590,14 +586,14 @@ S_msrRepeatEnding msrRepeatEnding::create (
   msrRepeatEndingKind repeatEndingKind,
   const S_msrRepeat&  upLinkToRepeat)
 {
-  msrRepeatEnding* o =
+  msrRepeatEnding* obj =
     new msrRepeatEnding (
       inputLineNumber,
       repeatEndingNumber,
       repeatEndingKind,
       upLinkToRepeat);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 msrRepeatEnding::msrRepeatEnding (
@@ -896,7 +892,7 @@ std::string msrRepeatEnding::asString () const
 //   }
 //   else {
 //     ss <<
-//       "[NONE]";
+//       "[NULL]";
 //   }
 
   ss <<
@@ -1081,7 +1077,7 @@ std::ostream& operator << (std::ostream& os, const S_msrRepeatEnding& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -1093,13 +1089,13 @@ S_msrRepeat msrRepeat::create (
   int        repeatTimes,
   const S_msrVoice& upLinkToVoice)
 {
-  msrRepeat* o =
+  msrRepeat* obj =
     new msrRepeat (
       inputLineNumber,
       repeatTimes,
       upLinkToVoice);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 msrRepeat::msrRepeat (
@@ -1862,7 +1858,7 @@ std::string msrRepeat::asShortString () const
   }
   else {
     ss <<
-      "[NONE]";
+      "[NULL]";
   }
 
   int repeatEndingsNumber =
@@ -1908,7 +1904,7 @@ std::string msrRepeat::asString () const
   }
   else {
     ss <<
-      "[NONE]";
+      "[NULL]";
   }
 
   int endingsNumber =
@@ -2009,7 +2005,7 @@ void msrRepeat::printFull (std::ostream& os) const
       fImmediatelyPrecedingRepeat->asShortString ();
   }
   else {
-    os << "[NONE]";
+    os << "[NULL]";
   }
   os << std::endl << std::endl;
 
@@ -2021,7 +2017,7 @@ void msrRepeat::printFull (std::ostream& os) const
       fImmediatelyFollowingRepeat->asShortString ();
   }
   else {
-    os << "[NONE]";
+    os << "[NULL]";
   }
   os << std::endl << std::endl;
 
@@ -2035,7 +2031,7 @@ void msrRepeat::printFull (std::ostream& os) const
       std::endl;
   }
   else {
-    os << "[NONE]";
+    os << "[NULL]";
   }
   os << std::endl << std::endl;
 
@@ -2045,7 +2041,7 @@ void msrRepeat::printFull (std::ostream& os) const
 
   os <<
     "fRepeatEndings: ";
-  if (endingsNumber) {
+  if (endingsNumber > 0) {
     os << '(' << endingsNumber << ")";
   }
   else {
@@ -2104,7 +2100,7 @@ void msrRepeat::print (std::ostream& os) const
     --gIndenter;
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   // short print the repeat endings
@@ -2151,7 +2147,7 @@ std::ostream& operator << (std::ostream& os, const S_msrRepeat& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

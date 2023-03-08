@@ -14,16 +14,14 @@
 
 #include <fstream>
 
+#include "mfStaticSettings.h"
+
 #include "mfServices.h"
 #include "mfStringsHandling.h"
 #include "mfTiming.h"
 
 #include "waeInterface.h"
 #include "oahWae.h"
-
-#include "mfStaticSettings.h"
-
-#include "mfServices.h"
 
 #include "libmusicxml.h" // for mfMusicformatsErrorKind
 
@@ -117,7 +115,7 @@ static void catchSignals () {}
 //   // ------------------------------------------------------
 //
 //   switch (multiGenerationOutputKind) {
-//     case mfMultiGenerationOutputKind::kGeneration_UNKNOWN:
+//     case mfMultiGenerationOutputKind::kGeneration_UNKNOWN_:
 //       // should not occur
 //       break;
 //
@@ -189,7 +187,7 @@ mfMusicformatsErrorKind generateCodeFromStandardInput (
   mfMusicformatsErrorKind result = mfMusicformatsErrorKind::kMusicformatsError_NONE;
 
   switch (multiGenerationOutputKind) {
-    case mfMultiGenerationOutputKind::kGeneration_UNKNOWN:
+    case mfMultiGenerationOutputKind::kGeneration_UNKNOWN_:
       // should not occur, unless the run is a pure help one
       break;
 
@@ -248,7 +246,7 @@ mfMusicformatsErrorKind generateCodeFromAFile (
   mfMusicformatsErrorKind result = mfMusicformatsErrorKind::kMusicformatsError_NONE;
 
   switch (multiGenerationOutputKind) {
-    case mfMultiGenerationOutputKind::kGeneration_UNKNOWN:
+    case mfMultiGenerationOutputKind::kGeneration_UNKNOWN_:
       // should not occur, unless the run is a pure help one
       break;
 
@@ -371,7 +369,7 @@ int main (int argc, char*  argv[])
 #endif // MF_TRACE_IS_ENABLED
 
   switch (multiGenerationOutputKind) {
-    case mfMultiGenerationOutputKind::kGeneration_UNKNOWN:
+    case mfMultiGenerationOutputKind::kGeneration_UNKNOWN_:
       // wait until after help options have been handled
       // before issuing an error message
       break;
@@ -465,7 +463,7 @@ int main (int argc, char*  argv[])
   // ------------------------------------------------------
 
   switch (multiGenerationOutputKind) {
-    case mfMultiGenerationOutputKind::kGeneration_UNKNOWN:
+    case mfMultiGenerationOutputKind::kGeneration_UNKNOWN_:
       {
         std::stringstream ss;
 

@@ -38,14 +38,14 @@ S_xml2xmlRegularHandler xml2xmlRegularHandler::create (
                     insiderOahHandler)
 {
   // create the regular handler
-  xml2xmlRegularHandler* o = new
+  xml2xmlRegularHandler* obj = new
     xml2xmlRegularHandler (
       serviceName,
       handlerHeader,
       insiderOahHandler);
-  assert (o!=0);
+  assert (obj!=0);
 
-  return o;
+  return obj;
 }
 
 xml2xmlRegularHandler::xml2xmlRegularHandler (
@@ -1369,7 +1369,7 @@ std::ostream& operator << (std::ostream& os, const S_xml2xmlRegularHandler& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

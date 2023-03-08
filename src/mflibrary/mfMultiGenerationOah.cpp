@@ -52,8 +52,8 @@ std::string mfMultiGenerationOutputKindAsString (
   std::string result;
 
   switch (multiGenerationOutputKind) {
-    case mfMultiGenerationOutputKind::kGeneration_UNKNOWN:
-      result = "*UNKNOWN*";
+    case mfMultiGenerationOutputKind::kGeneration_UNKNOWN_:
+      result = "*kGeneration_UNKNOWN_*";
       break;
     case mfMultiGenerationOutputKind::kGenerationLilypond:
       result = "LilyPond";
@@ -86,7 +86,7 @@ EXP mfMultiGenerationOutputKind mfMultiGenerationOutputKindFromString (
 {
   mfMultiGenerationOutputKind
     result =
-      mfMultiGenerationOutputKind::kGeneration_UNKNOWN;
+      mfMultiGenerationOutputKind::kGeneration_UNKNOWN_;
 
   if      (theString == K_GENERATED_OUTPUT_KIND_LIlYPOND_NAME) {
     result = mfMultiGenerationOutputKind::kGenerationLilypond;
@@ -179,7 +179,7 @@ EXP mfMultiGenerationOutputKind fetchGeneratedOutputKindFromRunData ()
 {
   mfMultiGenerationOutputKind
     result =
-      mfMultiGenerationOutputKind::kGeneration_UNKNOWN;
+      mfMultiGenerationOutputKind::kGeneration_UNKNOWN_;
 //
 //   // analyze the options
 //   const std::vector<oahOption>&
@@ -208,9 +208,9 @@ EXP mfMultiGenerationOutputKind fetchGeneratedOutputKindFromRunData ()
 //           mfMultiGenerationOutputKindFromString (
 //             optionNameWithoutDash);
 //
-//       if (newMultiGenerationOutputKind != mfMultiGenerationOutputKind::kGeneration_UNKNOWN) {
+//       if (newMultiGenerationOutputKind != mfMultiGenerationOutputKind::kGeneration_UNKNOWN_) {
 //         // yes, optionNameWithoutDash is a multi generators output kind
-//         if (result != mfMultiGenerationOutputKind::kGeneration_UNKNOWN) {
+//         if (result != mfMultiGenerationOutputKind::kGeneration_UNKNOWN_) {
 //           std::stringstream ss;
 //
 //           ss <<
@@ -249,7 +249,7 @@ S_mfMultiGenerationOutputKindAtom mfMultiGenerationOutputKindAtom::create (
   mfMultiGenerationOutputKind
                      multiGenerationOutputKindValue)
 {
-  mfMultiGenerationOutputKindAtom* o = new
+  mfMultiGenerationOutputKindAtom* obj = new
     mfMultiGenerationOutputKindAtom (
       longName,
       shortName,
@@ -257,8 +257,8 @@ S_mfMultiGenerationOutputKindAtom mfMultiGenerationOutputKindAtom::create (
       variableName,
       multiGenerationOutputKindVariable,
       multiGenerationOutputKindValue);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 mfMultiGenerationOutputKindAtom::mfMultiGenerationOutputKindAtom (
@@ -281,7 +281,7 @@ mfMultiGenerationOutputKindAtom::mfMultiGenerationOutputKindAtom (
       multiGenerationOutputKindValue)
 {
   fMultiGenerationOutputKindVariable =
-    mfMultiGenerationOutputKind::kGeneration_UNKNOWN;
+    mfMultiGenerationOutputKind::kGeneration_UNKNOWN_;
 }
 
 mfMultiGenerationOutputKindAtom::~mfMultiGenerationOutputKindAtom ()
@@ -500,7 +500,7 @@ std::ostream& operator << (std::ostream& os, const S_mfMultiGenerationOutputKind
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -511,9 +511,9 @@ S_multiGenerationOahGroup gGlobalMultiGenerationOahGroup;
 
 S_multiGenerationOahGroup mfMultiGenerationOahGroup::create ()
 {
-  mfMultiGenerationOahGroup* o = new mfMultiGenerationOahGroup ();
-  assert (o != nullptr);
-  return o;
+  mfMultiGenerationOahGroup* obj = new mfMultiGenerationOahGroup ();
+  assert (obj != nullptr);
+  return obj;
 }
 
 mfMultiGenerationOahGroup::mfMultiGenerationOahGroup ()
@@ -611,7 +611,7 @@ R"(Generate Guido code as output.)",
 //______________________________________________________________________________
 void mfMultiGenerationOahGroup::enforceGroupQuietness ()
 {
-  fMultiGenerationOutputKindAtom = mfMultiGenerationOutputKind::kGeneration_UNKNOWN;
+  fMultiGenerationOutputKindAtom = mfMultiGenerationOutputKind::kGeneration_UNKNOWN_;
 }
 
 //______________________________________________________________________________
@@ -749,7 +749,7 @@ std::ostream& operator << (std::ostream& os, const S_multiGenerationOahGroup& el
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

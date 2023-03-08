@@ -50,7 +50,7 @@ namespace MusicFormats
 //     // copy constructor
 //     // ------------------------------------------------------
 //
-//                           mfMultiLineString (const mfMultiLineString& obj);
+//                           mfMultiLineString (const mfMultiLineString& theMultiLineString);
 //
 // public:
 //

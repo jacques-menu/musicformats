@@ -38,9 +38,9 @@ S_msrGeneratorsOahGroup gGlobalMsrGeneratorsOahGroup;
 
 S_msrGeneratorsOahGroup msrGeneratorsOahGroup::create ()
 {
-  msrGeneratorsOahGroup* o = new msrGeneratorsOahGroup ();
-  assert (o != nullptr);
-  return o;
+  msrGeneratorsOahGroup* obj = new msrGeneratorsOahGroup ();
+  assert (obj != nullptr);
+  return obj;
 }
 
 msrGeneratorsOahGroup::msrGeneratorsOahGroup ()
@@ -252,7 +252,7 @@ std::ostream& operator << (std::ostream& os, const S_msrGeneratorsOahGroup& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

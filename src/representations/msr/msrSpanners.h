@@ -32,7 +32,7 @@ std::string msrSpannerKindAsString (
 std::ostream& operator << (std::ostream& os, const msrSpannerKind& elt);
 
 enum class msrSpannerTypeKind {
-  kSpannerType_UNKNOWN,
+  kSpannerType_UNKNOWN_,
   kSpannerTypeStart, kSpannerTypeContinue, kSpannerTypeStop
 };
 

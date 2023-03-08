@@ -30,12 +30,12 @@ bsr2brailleException::bsr2brailleException (
 S_bsr2brailleException bsr2brailleException::create (
   std::string const& exceptionDescription)
 {
-  bsr2brailleException* o = new
+  bsr2brailleException* obj = new
     bsr2brailleException (
       exceptionDescription);
-  assert (o!=0);
+  assert (obj!=0);
 
-  return o;
+  return obj;
 }
 
 bsr2brailleInternalException::bsr2brailleInternalException (
@@ -46,12 +46,12 @@ bsr2brailleInternalException::bsr2brailleInternalException (
 S_bsr2brailleInternalException bsr2brailleInternalException::create (
   std::string const& exceptionDescription)
 {
-  bsr2brailleInternalException* o = new
+  bsr2brailleInternalException* obj = new
     bsr2brailleInternalException (
       exceptionDescription);
-  assert (o!=0);
+  assert (obj!=0);
 
-  return o;
+  return obj;
 }
 
 //______________________________________________________________________________

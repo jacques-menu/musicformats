@@ -13,8 +13,6 @@
 #include <sstream>
 #include <iomanip>      // std::setw, std::setprecision, ...
 
-#include "mfStaticSettings.h"
-
 #include "visitor.h"
 
 #include "msrWae.h"
@@ -46,15 +44,15 @@ S_msrStringTuning msrStringTuning::create (
   msrAlterationKind    stringTuningAlterationKind,
   msrOctaveKind        stringTuningOctaveKind)
 {
-  msrStringTuning* o =
+  msrStringTuning* obj =
     new msrStringTuning (
       inputLineNumber,
       stringTuningNumber,
       stringTuningDiatonicPitchKind,
       stringTuningAlterationKind,
       stringTuningOctaveKind);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 msrStringTuning::msrStringTuning (
@@ -219,7 +217,7 @@ std::ostream& operator << (std::ostream& os, const S_msrStringTuning& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -230,12 +228,12 @@ S_msrScordatura msrScordatura::create (
   int                 inputLineNumber,
   const S_msrMeasure& upLinkToMeasure)
 {
-  msrScordatura* o =
+  msrScordatura* obj =
     new msrScordatura (
       inputLineNumber,
       upLinkToMeasure);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 S_msrScordatura msrScordatura::create (
@@ -412,7 +410,7 @@ std::ostream& operator << (std::ostream& os, const S_msrScordatura& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -426,13 +424,13 @@ S_msrAccordionRegistration msrAccordionRegistration::create (
   int           middleDotsNumber,
   int           lowDotsNumber)
 {
-  msrAccordionRegistration* o =
+  msrAccordionRegistration* obj =
     new msrAccordionRegistration (
       inputLineNumber,
       upLinkToMeasure,
       highDotsNumber, middleDotsNumber, lowDotsNumber);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 S_msrAccordionRegistration msrAccordionRegistration::create (
@@ -605,7 +603,7 @@ std::ostream& operator << (std::ostream& os, const S_msrAccordionRegistration& e
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -616,12 +614,12 @@ S_msrHarpPedalsTuning msrHarpPedalsTuning::create (
   int                 inputLineNumber,
   const S_msrMeasure& upLinkToMeasure)
 {
-  msrHarpPedalsTuning* o =
+  msrHarpPedalsTuning* obj =
     new msrHarpPedalsTuning (
       inputLineNumber,
       upLinkToMeasure);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 S_msrHarpPedalsTuning msrHarpPedalsTuning::create (
@@ -915,7 +913,7 @@ std::ostream& operator << (std::ostream& os, const S_msrHarpPedalsTuning& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -929,15 +927,15 @@ S_msrPedal msrPedal::create (
   msrPedalLineKind pedalLineKind,
   msrPedalSignKind pedalSignKind)
 {
-  msrPedal* o =
+  msrPedal* obj =
     new msrPedal (
       inputLineNumber,
       upLinkToMeasure,
       pedalTypeKind,
       pedalLineKind,
       pedalSignKind);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 S_msrPedal msrPedal::create (
@@ -1087,8 +1085,8 @@ std::string msrPedalTypeKindAsString (
   std::string result;
 
   switch (pedalTypeKind) {
-    case msrPedalTypeKind::kPedalType_UNKNOWN:
-      result = "kPedalType_UNKNOWN";
+    case msrPedalTypeKind::kPedalType_UNKNOWN_:
+      result = "kPedalType_UNKNOWN_";
       break;
     case msrPedalTypeKind::kPedalTypeStart:
       result = "kPedalTypeStart";
@@ -1177,7 +1175,7 @@ std::ostream& operator << (std::ostream& os, const S_msrPedal& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -1188,12 +1186,12 @@ S_msrDamp msrDamp::create (
   int                 inputLineNumber,
   const S_msrMeasure& upLinkToMeasure)
 {
-  msrDamp* o =
+  msrDamp* obj =
     new msrDamp (
       inputLineNumber,
       upLinkToMeasure);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 S_msrDamp msrDamp::create (
@@ -1338,7 +1336,7 @@ std::ostream& operator << (std::ostream& os, const S_msrDamp& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -1349,12 +1347,12 @@ S_msrDampAll msrDampAll::create (
   int                 inputLineNumber,
   const S_msrMeasure& upLinkToMeasure)
 {
-  msrDampAll* o =
+  msrDampAll* obj =
     new msrDampAll (
       inputLineNumber,
       upLinkToMeasure);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 S_msrDampAll msrDampAll::create (
@@ -1499,7 +1497,7 @@ std::ostream& operator << (std::ostream& os, const S_msrDampAll& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

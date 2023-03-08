@@ -11,8 +11,6 @@
 
 #include <iomanip>
 
-#include "mfStaticSettings.h"
-
 #include "visitor.h"
 
 #include "mfStaticSettings.h"
@@ -65,8 +63,8 @@ std::string msrBassFigurePrefixKindAsString (
   std::string result;
 
   switch (figurePrefixKind) {
-    case msrBassFigurePrefixKind::kBassFigurePrefix_UNKNOWN:
-      result = "kBassFigurePrefix_UNKNOWN";
+    case msrBassFigurePrefixKind::kBassFigurePrefix_UNKNOWN_:
+      result = "kBassFigurePrefix_UNKNOWN_";
       break;
     case msrBassFigurePrefixKind::kBassFigurePrefixDoubleFlat:
       result = "kBassFigurePrefixDoubleFlat";
@@ -106,8 +104,8 @@ std::string msrBassFigureSuffixKindAsString (
   std::string result;
 
   switch (figureSuffixKind) {
-    case msrBassFigureSuffixKind::kBassFigureSuffix_UNKNOWN:
-      result = "kBassFigureSuffix_UNKNOWN";
+    case msrBassFigureSuffixKind::kBassFigureSuffix_UNKNOWN_:
+      result = "kBassFigureSuffix_UNKNOWN_";
       break;
     case msrBassFigureSuffixKind::kBassFigureSuffixDoubleFlat:
       result = "kBassFigureSuffixDoubleFlat";
@@ -152,15 +150,15 @@ S_msrBassFigure msrBassFigure::create (
   int                     figureNumber,
   msrBassFigureSuffixKind figureSuffixKind)
 {
-  msrBassFigure* o =
+  msrBassFigure* obj =
     new msrBassFigure (
       inputLineNumber,
       figureUpLinkToPart,
       figurePrefixKind,
       figureNumber,
       figureSuffixKind);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 msrBassFigure::msrBassFigure (
@@ -411,7 +409,7 @@ std::ostream& operator << (std::ostream& os, const S_msrBassFigure& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -422,7 +420,7 @@ S_msrFiguredBass msrFiguredBass::create (
   int                 inputLineNumber,
   const S_msrMeasure& upLinkToMeasure)
 {
-  msrFiguredBass* o =
+  msrFiguredBass* obj =
     new msrFiguredBass (
       inputLineNumber,
       upLinkToMeasure,
@@ -431,8 +429,8 @@ S_msrFiguredBass msrFiguredBass::create (
 //       msrWholeNotes (0, 1),           // fFiguredBassWholeNotesDuration
       msrFiguredBassParenthesesKind::kFiguredBassParenthesesNo,
       msrTupletFactor (1, 1));
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 S_msrFiguredBass msrFiguredBass::create (
@@ -454,7 +452,7 @@ S_msrFiguredBass msrFiguredBass::create (
                          figuredBassParenthesesKind,
   const msrTupletFactor& figuredBassTupletFactor)
 {
-  msrFiguredBass* o =
+  msrFiguredBass* obj =
     new msrFiguredBass (
       inputLineNumber,
       upLinkToMeasure,
@@ -463,8 +461,8 @@ S_msrFiguredBass msrFiguredBass::create (
 //       figuredBassWholeNotesDuration,
       figuredBassParenthesesKind,
       figuredBassTupletFactor);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 S_msrFiguredBass msrFiguredBass::create (
@@ -815,7 +813,7 @@ std::string msrFiguredBass::asString () const
     "[FiguredBass" <<
     ", " << std::hex << std::showbase << this << std::dec <<
     ", fMeasurePosition: " <<
-    fMeasurePosition <<
+    fMeasurePosition.asString () <<
     ", fSoundingWholeNotes: " <<
     wholeNotesAsMsrString (
       fInputLineNumber,
@@ -832,7 +830,7 @@ std::string msrFiguredBass::asString () const
         fFiguredBassUpLinkToNote->asString ();
     }
     else {
-      ss << "[NONE]";
+      ss << "[NULL]";
     }
 
   ss <<
@@ -842,7 +840,7 @@ std::string msrFiguredBass::asString () const
         fFiguredBassUpLinkToMeasure->getMeasureNumber ();
     }
     else {
-      ss << "[NONE]";
+      ss << "[NULL]";
     }
 
   ss <<
@@ -851,7 +849,7 @@ std::string msrFiguredBass::asString () const
     ss << fFiguredBassUpLinkToVoice->asString ();
   }
   else {
-    ss << "[NONE]";
+    ss << "[NULL]";
   }
   ss << std::endl;
 
@@ -911,7 +909,7 @@ std::string msrFiguredBass::asShortStringForMeasuresSlices () const
     "[FiguredBass" <<
     ", " << std::hex << std::showbase << this << std::dec <<
     ", fMeasurePosition: " <<
-    fMeasurePosition <<
+    fMeasurePosition.asString () <<
     ", fSoundingWholeNotes: " <<
     wholeNotesAsMsrString (
       fInputLineNumber,
@@ -928,7 +926,7 @@ std::string msrFiguredBass::asShortStringForMeasuresSlices () const
         fFiguredBassUpLinkToNote->asString ();
     }
     else {
-      ss << "[NONE]";
+      ss << "[NULL]";
     }
 
   ss <<
@@ -938,7 +936,7 @@ std::string msrFiguredBass::asShortStringForMeasuresSlices () const
         fFiguredBassUpLinkToMeasure->getMeasureNumber ();
     }
     else {
-      ss << "[NONE]";
+      ss << "[NULL]";
     }
 
   ss <<
@@ -947,7 +945,7 @@ std::string msrFiguredBass::asShortStringForMeasuresSlices () const
     ss << fFiguredBassUpLinkToVoice->asString ();
   }
   else {
-    ss << "[NONE]";
+    ss << "[NULL]";
   }
   ss << std::endl;
 
@@ -1012,17 +1010,17 @@ void msrFiguredBass::print (std::ostream& os) const
   os << std::left <<
     std::setw (fieldWidth) <<
     "fMeasurePosition" << ": " <<
-    fMeasurePosition <<
+    fMeasurePosition.asString () <<
     std::endl <<
 
     std::setw (fieldWidth) <<
     "fSoundingWholeNotes" << ": " <<
-    fSoundingWholeNotes <<
+    fSoundingWholeNotes.asString () <<
     std::endl <<
 
     std::setw (fieldWidth) <<
     "fFiguredBassDisplayWholeNotes" << ": " <<
-    fFiguredBassDisplayWholeNotes <<
+    fFiguredBassDisplayWholeNotes.asString () <<
     std::endl;
 
   os <<
@@ -1032,7 +1030,7 @@ void msrFiguredBass::print (std::ostream& os) const
     os << fFiguredBassUpLinkToNote->asString ();
   }
   else {
-    os << "[NONE]";
+    os << "[NULL]";
   }
   os << std::endl;
 
@@ -1043,7 +1041,7 @@ void msrFiguredBass::print (std::ostream& os) const
     os << fFiguredBassUpLinkToMeasure->asString ();
   }
   else {
-    os << "[NONE]";
+    os << "[NULL]";
   }
   os << std::endl;
 
@@ -1054,7 +1052,7 @@ void msrFiguredBass::print (std::ostream& os) const
     os << fFiguredBassUpLinkToVoice->asString ();
   }
   else {
-    os << "[NONE]";
+    os << "[NULL]";
   }
   os << std::endl;
 
@@ -1089,7 +1087,7 @@ void msrFiguredBass::print (std::ostream& os) const
   // print the figured bass measure position
   os <<
     std::setw (fieldWidth) <<
-    "fMeasurePosition" << ": " << fMeasurePosition <<
+    "fMeasurePosition" << ": " << fMeasurePosition.asString () <<
     std::endl;
 
 //   // print the figured bass voice position
@@ -1109,7 +1107,7 @@ std::ostream& operator << (std::ostream& os, const S_msrFiguredBass& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

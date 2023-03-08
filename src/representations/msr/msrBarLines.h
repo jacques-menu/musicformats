@@ -83,7 +83,7 @@ std::ostream& operator << (std::ostream& os, const msrBarLineEndingTypeKind& elt
 
 // category
 enum class msrBarLineCategoryKind {
-  kBarLineCategory_UNKNOWN,
+  kBarLineCategory_UNKNOWN_,
 
   kBarLineCategoryStandalone,
 

@@ -25,8 +25,6 @@
 
 #include "msr2msrWae.h"
 
-#include "mfStaticSettings.h"
-
 #include "oahOah.h"
 #include "waeOah.h"
 

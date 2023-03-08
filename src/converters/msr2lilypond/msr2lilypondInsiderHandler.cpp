@@ -59,14 +59,14 @@ S_msr2lilypondInsiderHandler msr2lilypondInsiderHandler::create (
   oahHandlerUsedThruKind  handlerUsedThruKind)
 {
   // create the insider handler
-  msr2lilypondInsiderHandler* o = new
+  msr2lilypondInsiderHandler* obj = new
     msr2lilypondInsiderHandler (
       serviceName,
       handlerHeader,
       handlerUsedThruKind);
-  assert (o!=0);
+  assert (obj!=0);
 
-  return o;
+  return obj;
 }
 
 msr2lilypondInsiderHandler::msr2lilypondInsiderHandler (
@@ -376,7 +376,7 @@ std::string msr2lilypondInsiderHandler::fetchOutputFileNameFromTheOptions () con
 
   if (outputFileNameHasBeenSet) {
     if (autoOutputFileNameHasBeenSet) {
-      // '-o, -output-file-name' has been selected
+      // '-obj, -output-file-name' has been selected
       // '-aofn, -auto-output-file-name' has been selected
       std::stringstream ss;
 
@@ -391,7 +391,7 @@ std::string msr2lilypondInsiderHandler::fetchOutputFileNameFromTheOptions () con
       oahError (ss.str ());
     }
     else {
-      // '-o, -output-file-name' has been selected
+      // '-obj, -output-file-name' has been selected
       // '-aofn, -auto-output-file-name' has NOT been selected
       outputFileName =
         outputFileNameStringAtom->
@@ -401,7 +401,7 @@ std::string msr2lilypondInsiderHandler::fetchOutputFileNameFromTheOptions () con
 
   else {
     if (autoOutputFileNameHasBeenSet) {
-      // '-o, -output-file-name' has NOT been selected
+      // '-obj, -output-file-name' has NOT been selected
       // '-aofn, -auto-output-file-name' has been selected
       std::string
         inputSourceName =
@@ -467,7 +467,7 @@ std::string msr2lilypondInsiderHandler::fetchOutputFileNameFromTheOptions () con
     }
 
     else {
-      // '-o, -output-file-name' has NOT been selected
+      // '-obj, -output-file-name' has NOT been selected
       // '-aofn, -auto-output-file-name' has NOT been selected
       // nothing to do
     }
@@ -663,7 +663,7 @@ std::ostream& operator << (std::ostream& os, const S_msr2lilypondInsiderHandler&
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -674,10 +674,10 @@ S_msr2lilypondInsiderOahGroup gGlobalMsr2lilypondInsiderOahGroup;
 
 S_msr2lilypondInsiderOahGroup msr2lilypondInsiderOahGroup::create ()
 {
-  msr2lilypondInsiderOahGroup* o = new msr2lilypondInsiderOahGroup ();
-  assert (o!=0);
+  msr2lilypondInsiderOahGroup* obj = new msr2lilypondInsiderOahGroup ();
+  assert (obj!=0);
 
-  return o;
+  return obj;
 }
 
 msr2lilypondInsiderOahGroup::msr2lilypondInsiderOahGroup ()

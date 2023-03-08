@@ -11,11 +11,11 @@
 
 #include <iostream>
 
-#include "mfStaticSettings.h"
-
 #include "xml.h"
 #include "xmlfile.h"
 #include "xmlreader.h"
+
+#include "mfStaticSettings.h"
 
 #include "mfAssert.h"
 #include "mfServices.h"
@@ -26,8 +26,6 @@
 #include "lpsrScores.h"
 
 #include "msr2lpsrWae.h"
-
-#include "mfStaticSettings.h"
 
 #include "oahOah.h"
 #include "waeOah.h"

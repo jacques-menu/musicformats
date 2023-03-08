@@ -37,9 +37,9 @@ namespace MusicFormats
 //_______________________________________________________________________________
 S_waeOahGroup waeOahGroup::create ()
 {
-  waeOahGroup* o = new waeOahGroup ();
-  assert (o != nullptr);
-  return o;
+  waeOahGroup* obj = new waeOahGroup ();
+  assert (obj != nullptr);
+  return obj;
 }
 
 waeOahGroup::waeOahGroup ()
@@ -245,7 +245,7 @@ void waeOahGroup::displayWaeOahValues (int fieldWidth)
   --gIndenter;
 
 
-  --gIndenter;
+--gIndenter;
 }
 
 std::ostream& operator << (std::ostream& os, const S_waeOahGroup& elt)
@@ -254,7 +254,7 @@ std::ostream& operator << (std::ostream& os, const S_waeOahGroup& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

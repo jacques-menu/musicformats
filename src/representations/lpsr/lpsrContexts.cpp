@@ -75,14 +75,14 @@ S_lpsrContext lpsrContext::create (
   lpsrContextTypeKind     contextTypeKind,
   const std::string&      contextName)
 {
-  lpsrContext* o =
+  lpsrContext* obj =
     new lpsrContext (
       inputLineNumber,
       contextUseExistingKind,
       contextTypeKind,
       contextName);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 lpsrContext::lpsrContext (
@@ -228,14 +228,14 @@ S_lpsrChordNamesContext lpsrChordNamesContext::create (
   const std::string&      contextName,
   const S_msrVoice&       contextVoice)
 {
-  lpsrChordNamesContext* o =
+  lpsrChordNamesContext* obj =
     new lpsrChordNamesContext (
       inputLineNumber,
       contextUseExistingKind,
       contextName,
       contextVoice);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 lpsrChordNamesContext::lpsrChordNamesContext (
@@ -402,7 +402,7 @@ std::ostream& operator << (std::ostream& os, const S_lpsrChordNamesContext& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -415,14 +415,14 @@ S_lpsrFiguredBassContext lpsrFiguredBassContext::create (
   const std::string&      contextName,
   const S_msrStaff&       contextStaff)
 {
-  lpsrFiguredBassContext* o =
+  lpsrFiguredBassContext* obj =
     new lpsrFiguredBassContext (
       inputLineNumber,
       contextUseExistingKind,
       contextName,
       contextStaff);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 lpsrFiguredBassContext::lpsrFiguredBassContext (
@@ -589,7 +589,7 @@ std::ostream& operator << (std::ostream& os, const S_lpsrFiguredBassContext& elt
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

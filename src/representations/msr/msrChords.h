@@ -47,7 +47,7 @@ namespace MusicFormats
 //______________________________________________________________________________
 
 enum class msrChordInKind {
-  kChordIn_UNKNOWN,
+  kChordIn_UNKNOWN_,
 
   kChordInMeasure,
   kChordInTuplet,

@@ -37,7 +37,7 @@ std::string msrKeyKindAsString (
 std::ostream& operator << (std::ostream& os, const msrKeyKind& elt);
 
 enum class msrModeKind {
-  kMode_UNKNOWN,
+  kMode_UNKNOWN_,
 
   kModeMajor, kModeMinor,
   kModeIonian, kModeDorian, kModePhrygian, kModeLydian,

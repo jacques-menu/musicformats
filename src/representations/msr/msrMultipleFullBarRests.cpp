@@ -39,13 +39,13 @@ S_msrMultipleFullBarRests msrMultipleFullBarRests::create (
   int                 multipleFullBarRestsNumber,
   const S_msrSegment& upLinkToSegment)
 {
-  msrMultipleFullBarRests* o =
+  msrMultipleFullBarRests* obj =
     new msrMultipleFullBarRests (
       inputLineNumber,
       multipleFullBarRestsNumber,
       upLinkToSegment);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 S_msrMultipleFullBarRests msrMultipleFullBarRests::create (
@@ -53,13 +53,13 @@ S_msrMultipleFullBarRests msrMultipleFullBarRests::create (
   const S_msrMeasure& restMeasureClone,
   const S_msrSegment& upLinkToSegment)
 {
-  msrMultipleFullBarRests* o =
+  msrMultipleFullBarRests* obj =
     new msrMultipleFullBarRests (
       inputLineNumber,
       restMeasureClone,
       upLinkToSegment);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 msrMultipleFullBarRests::msrMultipleFullBarRests (
@@ -453,7 +453,7 @@ std::string msrMultipleFullBarRests::asString () const
       "fMultipleFullBarRestsUpLinkToSegment->asString ()"; // KAKA
   }
   else {
-    ss << "[NONE]";
+    ss << "[NULL]";
   }
 
   ss <<
@@ -521,7 +521,7 @@ void msrMultipleFullBarRests::print (std::ostream& os) const
       "\"";
   }
   else {
-    os << "[NONE]";
+    os << "[NULL]";
   }
   os << std::endl;
 
@@ -560,7 +560,7 @@ void msrMultipleFullBarRests::print (std::ostream& os) const
     --gIndenter;
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   os << std::endl;
@@ -596,7 +596,7 @@ std::ostream& operator << (std::ostream& os, const S_msrMultipleFullBarRests& el
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

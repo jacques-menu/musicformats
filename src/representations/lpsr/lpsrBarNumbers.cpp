@@ -28,11 +28,11 @@ S_lpsrBarNumberCheck lpsrBarNumberCheck::create (
   int inputLineNumber,
   int nextBarNumber)
 {
-  lpsrBarNumberCheck* o =
+  lpsrBarNumberCheck* obj =
     new lpsrBarNumberCheck (
       inputLineNumber, nextBarNumber);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 lpsrBarNumberCheck::lpsrBarNumberCheck (
@@ -138,7 +138,7 @@ std::ostream& operator << (std::ostream& os, const S_lpsrBarNumberCheck& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -148,11 +148,11 @@ std::ostream& operator << (std::ostream& os, const S_lpsrBarNumberCheck& elt)
 S_lpsrBarCommand lpsrBarCommand::create (
   int inputLineNumber)
 {
-  lpsrBarCommand* o =
+  lpsrBarCommand* obj =
     new lpsrBarCommand (
       inputLineNumber);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 lpsrBarCommand::lpsrBarCommand (

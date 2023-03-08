@@ -32,12 +32,12 @@ mfOahException::mfOahException (
 S_mfOahException mfOahException::create (
   std::string const& exceptionDescription)
 {
-  mfOahException* o = new
+  mfOahException* obj = new
     mfOahException (
       exceptionDescription);
-  assert (o!=0);
+  assert (obj!=0);
 
-  return o;
+  return obj;
 }
 
 //______________________________________________________________________________

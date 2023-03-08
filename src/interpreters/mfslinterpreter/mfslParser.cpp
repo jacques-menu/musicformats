@@ -486,9 +486,9 @@ namespace mfsl {
   }
 
   void
-  parser::set_debug_stream (std::ostream& o)
+  parser::set_debug_stream (std::ostream& obj)
   {
-    yycdebug_ = &o;
+    yycdebug_ = &obj;
   }
 
 

@@ -9,19 +9,16 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include "mfStaticSettings.h"
-
 #include "visitor.h"
 
-#include "mfAssert.h"
+#include "mfStaticSettings.h"
 
+#include "mfAssert.h"
 #include "mfConstants.h"
 #include "mfServices.h"
 #include "mfStringsHandling.h"
 
 #include "msrWae.h"
-
-#include "mfStaticSettings.h"
 
 #include "msrPartGroups.h"
 
@@ -55,7 +52,7 @@ S_msrPartGroup msrPartGroup::create (
   const S_msrPartGroup&    partGroupUpLinkToPartGroup,
   const S_msrScore&        partGroupUpLinkToScore)
 {
-  msrPartGroup* o =
+  msrPartGroup* obj =
     new msrPartGroup (
       inputLineNumber,
       partGroupNumber,
@@ -70,8 +67,8 @@ S_msrPartGroup msrPartGroup::create (
       partGroupBarLineKind,
       partGroupUpLinkToPartGroup,
       partGroupUpLinkToScore);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 S_msrPartGroup msrPartGroup::createImplicitPartGroup (
@@ -84,9 +81,9 @@ S_msrPartGroup msrPartGroup::createImplicitPartGroup (
   msrPartGroupBarLineKind  partGroupBarLineKind,
   const S_msrScore&        partGroupUpLinkToScore)
 {
-  msrPartGroup* o =
+  msrPartGroup* obj =
     new msrPartGroup (
-      K_MF_INPUT_LINE_UNKNOWN,
+      K_MF_INPUT_LINE_UNKNOWN_,
       partGroupNumber,
       partGroupAbsoluteNumber,
       partGroupName,
@@ -100,13 +97,13 @@ S_msrPartGroup msrPartGroup::createImplicitPartGroup (
       nullptr,                            // partGroupUpLinkToPartGroup,
                                           // will be set below
       partGroupUpLinkToScore);
-  assert (o != nullptr);
+  assert (obj != nullptr);
 
   // the implicit part group it the top-most one:
   // set its group upLink to point to itself
-  o->fPartGroupUpLinkToPartGroup = o;
+  obj->fPartGroupUpLinkToPartGroup = obj;
 
-  return o;
+  return obj;
 }
 
 S_msrPartGroup msrPartGroup::create (
@@ -117,7 +114,7 @@ S_msrPartGroup msrPartGroup::create (
   const S_msrPartGroup&    partGroupUpLinkToPartGroup,
   const S_msrScore&        partGroupUpLinkToScore)
 {
-  msrPartGroup* o =
+  msrPartGroup* obj =
     new msrPartGroup (
       inputLineNumber,
       partGroupNumber,
@@ -125,8 +122,8 @@ S_msrPartGroup msrPartGroup::create (
       partGroupName,
       partGroupUpLinkToPartGroup,
       partGroupUpLinkToScore);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 msrPartGroup::msrPartGroup (
@@ -1313,7 +1310,7 @@ void msrPartGroup::printFull (std::ostream& os) const
       "\"";
   }
   else {
-    os << "[NONE]";
+    os << "[NULL]";
   }
   os << std::endl;
 
@@ -1386,7 +1383,7 @@ void msrPartGroup::printFull (std::ostream& os) const
     --gIndenter;
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   os << std::endl << std::endl;
@@ -1533,7 +1530,7 @@ std::ostream& operator << (std::ostream& os, const S_msrPartGroup& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

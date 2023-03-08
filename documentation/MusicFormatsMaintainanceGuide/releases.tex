@@ -274,9 +274,9 @@ For \MacOS, there is no \directoryName{lib} directory, since the executables in 
 
 The hierarchy in the \directoryName{musicformats-*-distrib} directories comes from the \mf\ \repo\ untouched, which is not convenient for the users.
 
-Their contents is thus re-structured by \scripts{MakeMusicFormatsDistributions.bash}:
+Their contents is thus re-structured by \devtools{MakeMusicFormatsDistributions.bash}:
 \begin{lstlisting}[language=Terminal]
-jacquesmenu@macmini: ~/musicformats-git-dev > scripts/MakeMusicFormatsDistributions.bash
+jacquesmenu@macmini: ~/musicformats-git-dev > devtools/MakeMusicFormatsDistributions.bash
 ... ... ...
 
 ==> final distrib contents:
@@ -348,7 +348,7 @@ From version 11 (\Main{Catalina}) on, though, the executables you get are not ex
 
 The trouble is that these executables are in {\it \quarantine} by default. To make them usable, they have to quit quarantine and explicitly be made executable.
 
-This is done this way using \code{chmod} and \code{xattr} in \scripts{MakeMusicFormatsDistributions.bash}:
+This is done this way using \code{chmod} and \code{xattr} in \devtools{MakeMusicFormatsDistributions.bash}:
 \begin{lstlisting}[language=Terminal]
   # make the executables actually executable
   chmod +x bin/*

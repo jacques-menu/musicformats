@@ -49,7 +49,7 @@ S_msrPitchesLanguageAtom msrPitchesLanguageAtom::create (
   msrQuarterTonesPitchesLanguageKind&
                      quarterTonesPitchesLanguageKind)
 {
-  msrPitchesLanguageAtom* o = new
+  msrPitchesLanguageAtom* obj = new
     msrPitchesLanguageAtom (
       longName,
       shortName,
@@ -57,8 +57,8 @@ S_msrPitchesLanguageAtom msrPitchesLanguageAtom::create (
       valueSpecification,
       variableName,
       quarterTonesPitchesLanguageKind);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 msrPitchesLanguageAtom::msrPitchesLanguageAtom (
@@ -322,7 +322,7 @@ std::ostream& operator << (std::ostream& os, const S_msrPitchesLanguageAtom& elt
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -338,7 +338,7 @@ S_msrRenamePartAtom msrRenamePartAtom::create (
   std::map<std::string, std::string>&
                      stringToStringMapVariable)
 {
-  msrRenamePartAtom* o = new
+  msrRenamePartAtom* obj = new
     msrRenamePartAtom (
       longName,
       shortName,
@@ -346,8 +346,8 @@ S_msrRenamePartAtom msrRenamePartAtom::create (
       valueSpecification,
       variableName,
       stringToStringMapVariable);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 msrRenamePartAtom::msrRenamePartAtom (
@@ -735,7 +735,7 @@ std::ostream& operator << (std::ostream& os, const S_msrRenamePartAtom& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -746,9 +746,9 @@ S_msrOahGroup gMsrOahGroup;
 
 S_msrOahGroup msrOahGroup::create ()
 {
-  msrOahGroup* o = new msrOahGroup ();
-  assert (o != nullptr);
-  return o;
+  msrOahGroup* obj = new msrOahGroup ();
+  assert (obj != nullptr);
+  return obj;
 }
 
 msrOahGroup::msrOahGroup ()
@@ -1540,7 +1540,7 @@ std::ostream& operator << (std::ostream& os, const S_msrOahGroup& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

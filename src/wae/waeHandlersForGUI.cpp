@@ -29,10 +29,10 @@ namespace MusicFormats
 //_______________________________________________________________________________
 S_waeHandlerForGUI waeHandlerForGUI::create ()
 {
-  waeHandlerForGUI* o =
+  waeHandlerForGUI* obj =
     new waeHandlerForGUI ();
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 waeHandlerForGUI::waeHandlerForGUI ()
@@ -339,7 +339,7 @@ std::ostream& operator << (std::ostream& os, const S_waeHandlerForGUI& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

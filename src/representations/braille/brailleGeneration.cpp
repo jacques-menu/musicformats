@@ -111,12 +111,12 @@ S_bsrBrailleGenerator bsrBrailleGenerator::create (
   bsrByteOrderingKind byteOrderingKind,
   std::ostream&            brailleOutputStream)
 {
-  bsrBrailleGenerator* o =
+  bsrBrailleGenerator* obj =
     new bsrBrailleGenerator (
       byteOrderingKind,
       brailleOutputStream);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 */
 
@@ -188,7 +188,7 @@ std::ostream& operator << (std::ostream& os, const S_bsrBrailleGenerator& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -198,11 +198,11 @@ std::ostream& operator << (std::ostream& os, const S_bsrBrailleGenerator& elt)
 S_bsrAsciiBrailleGenerator bsrAsciiBrailleGenerator::create (
   std::ostream& brailleOutputStream)
 {
-  bsrAsciiBrailleGenerator* o =
+  bsrAsciiBrailleGenerator* obj =
     new bsrAsciiBrailleGenerator (
       brailleOutputStream);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 bsrAsciiBrailleGenerator::bsrAsciiBrailleGenerator (
@@ -356,7 +356,7 @@ std::ostream& operator << (std::ostream& os, const S_bsrAsciiBrailleGenerator& e
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -367,12 +367,12 @@ S_bsrUTF8BrailleGenerator bsrUTF8BrailleGenerator::create (
   bsrByteOrderingKind byteOrderingKind,
   std::ostream&            brailleOutputStream)
 {
-  bsrUTF8BrailleGenerator* o =
+  bsrUTF8BrailleGenerator* obj =
     new bsrUTF8BrailleGenerator (
       byteOrderingKind,
       brailleOutputStream);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 bsrUTF8BrailleGenerator::bsrUTF8BrailleGenerator (
@@ -554,7 +554,7 @@ std::ostream& operator << (std::ostream& os, const S_bsrUTF8BrailleGenerator& el
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -565,12 +565,12 @@ S_bsrUTF8DebugBrailleGenerator bsrUTF8DebugBrailleGenerator::create (
   bsrByteOrderingKind byteOrderingKind,
   std::ostream&            brailleOutputStream)
 {
-  bsrUTF8DebugBrailleGenerator* o =
+  bsrUTF8DebugBrailleGenerator* obj =
     new bsrUTF8DebugBrailleGenerator (
       byteOrderingKind,
       brailleOutputStream);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 bsrUTF8DebugBrailleGenerator::bsrUTF8DebugBrailleGenerator (
@@ -677,7 +677,7 @@ std::ostream& operator << (std::ostream& os, const S_bsrUTF8DebugBrailleGenerato
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -688,12 +688,12 @@ S_bsrUTF16BigEndianBrailleGenerator bsrUTF16BigEndianBrailleGenerator::create (
   bsrByteOrderingKind byteOrderingKind,
   std::ostream&            brailleOutputStream)
 {
-  bsrUTF16BigEndianBrailleGenerator* o =
+  bsrUTF16BigEndianBrailleGenerator* obj =
     new bsrUTF16BigEndianBrailleGenerator (
       byteOrderingKind,
       brailleOutputStream);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 bsrUTF16BigEndianBrailleGenerator::bsrUTF16BigEndianBrailleGenerator (
@@ -898,7 +898,7 @@ std::ostream& operator << (std::ostream& os, const S_bsrUTF16BigEndianBrailleGen
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -909,12 +909,12 @@ S_bsrUTF16SmallEndianBrailleGenerator bsrUTF16SmallEndianBrailleGenerator::creat
   bsrByteOrderingKind byteOrderingKind,
   std::ostream&            brailleOutputStream)
 {
-  bsrUTF16SmallEndianBrailleGenerator* o =
+  bsrUTF16SmallEndianBrailleGenerator* obj =
     new bsrUTF16SmallEndianBrailleGenerator (
       byteOrderingKind,
       brailleOutputStream);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 bsrUTF16SmallEndianBrailleGenerator::bsrUTF16SmallEndianBrailleGenerator (
@@ -1121,7 +1121,7 @@ std::ostream& operator << (std::ostream& os, const S_bsrUTF16SmallEndianBrailleG
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

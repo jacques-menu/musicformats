@@ -11,8 +11,6 @@
 
 #include "oahEarlyOptions.h"
 
-// #include "language.h"
-
 #include "waeInterface.h"
 
 #include "waeOah.h"

@@ -18,10 +18,10 @@ namespace MusicFormats
 //_______________________________________________________________________________
 S_languageGerman languageGerman::create ()
 {
-  languageGerman* o =
+  languageGerman* obj =
     new languageGerman ();
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 languageGerman::languageGerman ()
@@ -53,7 +53,7 @@ std::ostream& operator << (std::ostream& os, const S_languageGerman& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -68,8 +68,8 @@ std::ostream& operator << (std::ostream& os, const S_languageGerman& elt)
 //   std::string result;
 //
 //   switch (passIDKind) {
-//     case mfPassIDKind::kMfPassID_UNKNOWN:
-//       result = "*Pass kMfPassID_UNKNOWN*";
+//     case mfPassIDKind::kMfPassID_UNKNOWN_:
+//       result = "*Pass kMfPassID_UNKNOWN_*";
 //       break;
 //
 //     case mfPassIDKind::kMfPassID_ALL:

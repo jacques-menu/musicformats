@@ -121,12 +121,12 @@ S_msrMargin msrMargin::create (
   msrMarginTypeKind marginTypeKind,
   msrLength         marginLength)
 {
-  msrMargin * o =
+  msrMargin * obj =
     new msrMargin (
       marginTypeKind,
       marginLength);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 msrMargin::msrMargin (
@@ -167,7 +167,7 @@ std::ostream& operator << (std::ostream& os, const S_msrMargin& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -178,11 +178,11 @@ std::ostream& operator << (std::ostream& os, const S_msrMargin& elt)
 S_msrMarginsGroup msrMarginsGroup::create (
   msrMarginTypeKind marginTypeKind)
 {
-  msrMarginsGroup * o =
+  msrMarginsGroup * obj =
     new msrMarginsGroup (
       marginTypeKind);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 msrMarginsGroup::msrMarginsGroup (
@@ -410,7 +410,7 @@ void msrMarginsGroup::print (std::ostream& os) const
       os << fLeftMargin;
     }
     else {
-      os << "[NONE]";
+      os << "[NULL]";
     }
   os << std::endl;
 
@@ -421,7 +421,7 @@ void msrMarginsGroup::print (std::ostream& os) const
       os << fRightMargin;
     }
     else {
-      os << "[NONE]";
+      os << "[NULL]";
     }
   os << std::endl;
 
@@ -432,7 +432,7 @@ void msrMarginsGroup::print (std::ostream& os) const
       os << fTopMargin;
     }
     else {
-      os << "[NONE]";
+      os << "[NULL]";
     }
   os << std::endl;
 
@@ -443,7 +443,7 @@ void msrMarginsGroup::print (std::ostream& os) const
       os << fBottomMargin;
     }
     else {
-      os << "[NONE]";
+      os << "[NULL]";
     }
   os << std::endl;
 
@@ -456,7 +456,7 @@ std::ostream& operator << (std::ostream& os, const S_msrMarginsGroup& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

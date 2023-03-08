@@ -11,16 +11,12 @@
 
 #include <climits>      // INT_MIN, INT_MAX
 
-#include "mfStaticSettings.h"
-
 #include "visitor.h"
 
 #include "mfStaticSettings.h"
 
 #include "mfAssert.h"
-
 #include "mfServices.h"
-
 #include "mfStringsHandling.h"
 
 #include "msrBarLines.h"
@@ -49,7 +45,7 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 // constant
-const int msrStaff::K_STAFF_NUMBER_UNKNOWN = -99;
+const int msrStaff::K_STAFF_NUMBER_UNKNOWN_ = -99;
 
 // global variable
 int msrStaff::sStaffMaxRegularVoices = 4;
@@ -60,14 +56,14 @@ S_msrStaff msrStaff::create (
   int          staffNumber,
   const S_msrPart& staffUpLinkToPart)
 {
-  msrStaff* o =
+  msrStaff* obj =
     new msrStaff (
       inputLineNumber,
       staffKind,
       staffNumber,
       staffUpLinkToPart);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 msrStaff::msrStaff (
@@ -840,7 +836,7 @@ void msrStaff::setStaffShortestNoteWholeNotes (
         "The new shortest note wholeNotes in staff \"" <<
         fStaffName <<
         "\" becomes " <<
-        wholeNotes <<
+        wholeNotes.asString () <<
         std::endl;
 
       gWaeHandler->waeTrace (
@@ -2147,7 +2143,7 @@ void msrStaff::insertHiddenMeasureAndBarLineInStaffClone (
 
     ss <<
       "Inserting hidden measure and barLine at position " <<
-      measurePosition <<
+      measurePosition.asString () <<
       "' in staff clone \"" <<
       fStaffName <<
       "\" in part " <<
@@ -3587,7 +3583,7 @@ void msrStaff::printFull (std::ostream& os) const
   // staff shortest note
   os << std::left <<
     std::setw (fieldWidth) << "fStaffShortestNoteWholeNotes" << ": " <<
-    fStaffShortestNoteWholeNotes <<
+    fStaffShortestNoteWholeNotes.asString () <<
     std::endl <<
     std::setw (fieldWidth) << "fStaffShortestNoteTupletFactor" << ": " <<
     fStaffShortestNoteTupletFactor <<
@@ -3607,7 +3603,7 @@ void msrStaff::printFull (std::ostream& os) const
         "'";
     }
     else {
-      os << "[NONE]";
+      os << "[NULL]";
     }
 
     os << std::endl;
@@ -3629,7 +3625,7 @@ void msrStaff::printFull (std::ostream& os) const
     }
     else {
       os <<
-        "[NONE]";
+        "[NULL]";
     }
 
     os << std::endl;
@@ -3651,7 +3647,7 @@ void msrStaff::printFull (std::ostream& os) const
     }
     else {
       os <<
-        "[NONE]";
+        "[NULL]";
     }
 
     os << std::endl;
@@ -3668,7 +3664,8 @@ void msrStaff::printFull (std::ostream& os) const
     else {
       os << std::left <<
         std::setw (fieldWidth) <<
-        "fCurrentStaffStaffDetails" << ": " << "[NONE]";
+        "fCurrentStaffStaffDetails" <<
+        ": " << "[NULL]";
     }
     os << std::endl;
   }
@@ -3911,7 +3908,7 @@ void msrStaff::printFull (std::ostream& os) const
     --gIndenter;
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
   os << std::endl;
 
@@ -4093,7 +4090,7 @@ std::ostream& operator << (std::ostream& os, const S_msrStaff& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

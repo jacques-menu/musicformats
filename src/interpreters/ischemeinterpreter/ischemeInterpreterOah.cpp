@@ -35,9 +35,9 @@ S_ischemeInterpreterOahGroup gGlobalIschemeInterpreterOahGroup;
 
 S_ischemeInterpreterOahGroup ischemeInterpreterOahGroup::create ()
 {
-  ischemeInterpreterOahGroup* o = new ischemeInterpreterOahGroup ();
-  assert (o != nullptr);
-  return o;
+  ischemeInterpreterOahGroup* obj = new ischemeInterpreterOahGroup ();
+  assert (obj != nullptr);
+  return obj;
 }
 
 ischemeInterpreterOahGroup::ischemeInterpreterOahGroup ()

@@ -20,8 +20,6 @@
 
 #include "lpsr2lilypondWae.h"
 
-#include "mfStaticSettings.h"
-
 #include "lpsr2lilypondOah.h"
 
 #include "oahEarlyOptions.h"

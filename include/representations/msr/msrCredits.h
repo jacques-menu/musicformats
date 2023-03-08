@@ -26,7 +26,7 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 enum class msrCreditTypeKind {
-  kCreditType_UNKNOWN,
+  kCreditType_UNKNOWN_,
   kCreditTypeNumber,
   kCreditTypeTitle, kCreditTypeSubtitle,
   kCreditTypeComposer, kCreditTypeArranger, kCreditTypeLyricist,

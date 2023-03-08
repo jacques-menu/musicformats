@@ -13,8 +13,6 @@
 #include <sstream>
 #include <iomanip>      // std::setw, std::setprecision, ...
 
-#include "mfStaticSettings.h"
-
 #include "visitor.h"
 
 #include "mfStaticSettings.h"
@@ -55,12 +53,12 @@ S_msrHiddenMeasureAndBarLine msrHiddenMeasureAndBarLine::create (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  msrHiddenMeasureAndBarLine* o =
+  msrHiddenMeasureAndBarLine* obj =
     new msrHiddenMeasureAndBarLine (
       inputLineNumber,
       upLinkToMeasure);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 S_msrHiddenMeasureAndBarLine msrHiddenMeasureAndBarLine::create (
@@ -197,7 +195,7 @@ std::string msrHiddenMeasureAndBarLine::asString () const
 
   ss <<
     "HiddenMeasureAndBarLine" <<
-    ", measurePosition: " << fMeasurePosition <<
+    ", measurePosition: " << fMeasurePosition.asString () <<
     ", line " << fInputLineNumber;
 
   return ss.str ();
@@ -214,7 +212,7 @@ std::ostream& operator << (std::ostream& os, const S_msrHiddenMeasureAndBarLine&
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

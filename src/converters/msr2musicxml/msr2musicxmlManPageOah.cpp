@@ -33,14 +33,14 @@ S_msr2musicxmlManPageGenerateAtom msr2musicxmlManPageGenerateAtom::create (
   const std::string&  description,
   const S_oahVisitor& theOahVisitor)
 {
-  msr2musicxmlManPageGenerateAtom* o = new
+  msr2musicxmlManPageGenerateAtom* obj = new
     msr2musicxmlManPageGenerateAtom (
       longName,
       shortName,
       description,
       theOahVisitor);
-  assert (o!=0);
-  return o;
+  assert (obj!=0);
+  return obj;
 }
 
 msr2musicxmlManPageGenerateAtom::msr2musicxmlManPageGenerateAtom (
@@ -211,7 +211,7 @@ std::ostream& operator << (std::ostream& os, const S_msr2musicxmlManPageGenerate
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -223,10 +223,10 @@ S_msr2musicxmlManPageOahGroup gGlobalMsr2musicxmlManPageOahGroup;
 S_msr2musicxmlManPageOahGroup msr2musicxmlManPageOahGroup::create (
   const S_oahVisitor& theOah2manPage)
 {
-  msr2musicxmlManPageOahGroup* o = new msr2musicxmlManPageOahGroup (
+  msr2musicxmlManPageOahGroup* obj = new msr2musicxmlManPageOahGroup (
     theOah2manPage);
-  assert (o!=0);
-  return o;
+  assert (obj!=0);
+  return obj;
 }
 
 msr2musicxmlManPageOahGroup::msr2musicxmlManPageOahGroup (
@@ -446,7 +446,7 @@ std::ostream& operator << (std::ostream& os, const S_msr2musicxmlManPageOahGroup
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

@@ -1200,8 +1200,10 @@ class EXP mxsr2msrTranslator :
     // since measure numbers are actually strings
 
     int                       fPartMeasuresCounter;
+
     std::string               fScoreFirstMeasureNumber;
     std::string               fPartFirstMeasureNumber;
+
     std::string               fCurrentMeasureNumber;
 
     // measure end line number
@@ -1973,7 +1975,7 @@ class EXP mxsr2msrTranslator :
     // for the previous and current notes:
     // a staff change occurs when they are different,
     // but the note itself keeps its staff number in that case
-    int                       fCurrentStaffNumberToInsertInto;
+//     int                       fCurrentStaffNumberToInsertInto;
 
     // cross staff chords
     int                       fCurrentChordStaffNumber;
@@ -1992,8 +1994,8 @@ class EXP mxsr2msrTranslator :
 
     // notes
     void                      handleNoteItself (
-                                int               inputLineNumber,
-                                const S_msrNote&  newNote);
+                                int              inputLineNumber,
+                                const S_msrNote& newNote);
 
     // detailed notes handling
     void                      handleNonChordNorTupletNoteOrRest (
@@ -2311,6 +2313,8 @@ class EXP mxsr2msrTranslator :
 
     Bool                      fCurrentNoteHasATimeModification;
 
+    Bool                      fOnGoingTuplet;
+
     int                       fCurrentNoteActualNotes;
     int                       fCurrentNoteNormalNotes;
     msrNotesDurationKind      fCurrentNoteNormalTypeNotesDuration;
@@ -2337,6 +2341,18 @@ class EXP mxsr2msrTranslator :
     int                       fCurrentTempoTupletNumber;
 
     Bool                      fCurrentNoteBelongsToATuplet;
+
+    /*
+      the measure position of a harmony is that of the next note
+      after it in the MusicXML data,
+      which can be the first note of a top-level tuplet
+
+      we should memoize it because the latter note measure position
+      will be known when the tuplet is appended to the current part,
+      which occurs only after the whole tuplet contents has be analyzed
+    */
+    S_msrNote                 fCurrentTopLevelTupletFirstNote;
+    S_msrTuplet               fCurrentTopLevelTuplet;
 
     std::list<S_msrTuplet>    fTupletsStack;
     void                      displayTupletsStack (

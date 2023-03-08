@@ -74,7 +74,7 @@ Recognizing the structure of repeat relies on the attributes of the barLines. Th
 \begin{lstlisting}[language=CPlusPlus]
     // category
     enum class msrBarLineCategoryKind {
-      kBarLineCategory_UNKNOWN,
+      kBarLineCategory_UNKNOWN_,
 
       kBarLineCategoryStandalone,
 
@@ -173,7 +173,7 @@ void mxsr2msrTranslator::visitEnd ( S_barline& elt )
         fCurrentBarLineEndingTypeKind,
         fCurrentBarLineEndingNumber,
         fCurrentBarLineTimes,
-        msrBarLineCategoryKind::kBarLineCategory_UNKNOWN, // will be set afterwards
+        msrBarLineCategoryKind::kBarLineCategory_UNKNOWN_, // will be set afterwards
         fCurrentBarLineHasSegnoKind,
         fCurrentBarLineHasCodaKind,
         fCurrentBarLineRepeatWingedKind);

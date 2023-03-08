@@ -13,8 +13,6 @@
 #include <sstream>
 #include <iomanip>      // std::setw, std::setprecision, ...
 
-#include "mfStaticSettings.h"
-
 #include "visitor.h"
 
 #include "mfStaticSettings.h"
@@ -66,14 +64,14 @@ S_msrCoda msrCoda::create (
   int                 staffNumber,
   msrCodaKind         codaKind)
 {
-  msrCoda* o =
+  msrCoda* obj =
     new msrCoda (
       inputLineNumber,
       upLinkToMeasure,
       staffNumber,
       codaKind);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 S_msrCoda msrCoda::create (
@@ -239,7 +237,7 @@ std::ostream& operator << (std::ostream& os, const S_msrCoda& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

@@ -27,14 +27,14 @@ namespace MusicFormats
 //______________________________________________________________________________
 // constants
 const msrMoment
-  msrMoment::K_MOMENT_UNKNOWN (
-    K_MEASURE_POSITION_UNKNOWN,
-    K_MEASURE_POSITION_UNKNOWN);
+  msrMoment::K_MOMENT_UNKNOWN_ (
+    K_MEASURE_POSITION_UNKNOWN_,
+    K_MEASURE_POSITION_UNKNOWN_);
 
 msrMoment::msrMoment ()
 {
-  fWrittenPositionInMeseasure = K_WHOLE_NOTES_UNKNOWN;
-  fSoundingRelativeOffset     = K_WHOLE_NOTES_UNKNOWN;
+  fWrittenPositionInMeseasure = K_WHOLE_NOTES_UNKNOWN_;
+  fSoundingRelativeOffset     = K_WHOLE_NOTES_UNKNOWN_;
 }
 
 msrMoment::msrMoment (

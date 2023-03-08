@@ -25,8 +25,6 @@
 #include "mxsr2guidoWae.h"
 #include "guidoWae.h" // JMI SAXOSAXO ???
 
-#include "mfStaticSettings.h"
-
 #include "oahOah.h"
 #include "waeOah.h"
 

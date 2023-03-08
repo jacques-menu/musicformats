@@ -13,19 +13,15 @@
 #include <iomanip>      // std::setw, std::setprecision, ...
 #include <algorithm>    // for_each
 
-#include "mfStaticSettings.h"
-
 #include "visitor.h"
 
+#include "mfStaticSettings.h"
+
 #include "mfAssert.h"
-
 #include "mfServices.h"
-
 #include "mfStringsHandling.h"
 
 #include "msrWae.h"
-
-#include "mfStaticSettings.h"
 
 #include "msrBarLines.h"
 #include "msrBreaks.h"
@@ -61,13 +57,13 @@ S_msrPart msrPart::create (
   const std::string&   partID,
   const S_msrPartGroup partUpLinkToPartGroup)
 {
-  msrPart* o =
+  msrPart* obj =
     new msrPart (
       inputLineNumber,
       partID,
       partUpLinkToPartGroup);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 msrPart::msrPart (
@@ -386,7 +382,7 @@ void msrPart::setPartDrawingMeasurePosition (
 
     ss <<
       "cannot set part current measure position to " <<
-      measurePosition <<
+      measurePosition.asString () <<
       " in part " <<
       getPartCombinedName () <<
       " since it is negative";
@@ -438,7 +434,7 @@ void msrPart::decrementPartDrawingMeasurePosition (
 
     ss <<
       "Decrementing part current measure position by " <<
-      wholeNotes <<
+      wholeNotes.asString () <<
       " in part " <<
       getPartCombinedName () <<
       std::endl;
@@ -456,7 +452,7 @@ void msrPart::decrementPartDrawingMeasurePosition (
 
     ss <<
       "cannot decrement part current measure position by " <<
-      wholeNotes <<
+      wholeNotes.asString () <<
       " in part " <<
       getPartCombinedName () <<
       " since that sets it to " <<
@@ -476,7 +472,7 @@ void msrPart::decrementPartDrawingMeasurePosition (
 
     ss <<
       "The new part current measure position is " <<
-      fPartDrawingMeasurePosition <<
+      fPartDrawingMeasurePosition.asString () <<
       " in part " <<
       getPartCombinedName () <<
       std::endl;
@@ -905,7 +901,7 @@ void msrPart::registerOrdinalMeasureNumberWholeNotes (
       "Registering the whole notes duration of the measure with ordinal number '" <<
       measureOrdinalNumber <<
       "' as " <<
-      wholeNotes <<
+      wholeNotes.asString () <<
       " in part " << getPartCombinedName () <<
       ", measureOrdinalNumber: " << measureOrdinalNumber <<
       ", line " << inputLineNumber <<
@@ -965,7 +961,7 @@ void msrPart::registerOrdinalMeasureNumberWholeNotes (
         " was known with a whole notes duration of " <<
         currentValue <<
         ", now registering it with a duration of " <<
-        wholeNotes <<
+        wholeNotes.asString () <<
         " in part " << getPartCombinedName () <<
         std::endl;
 
@@ -990,7 +986,7 @@ void msrPart::registerOrdinalMeasureNumberWholeNotes (
         "The measure with ordinal number " <<
         measureOrdinalNumber <<
         " is now registered with a duration of " <<
-        wholeNotes <<
+        wholeNotes.asString () <<
         " in part " << getPartCombinedName () <<
         ", fPartMeasuresWholeNotessVector.size (): " <<
         fPartMeasuresWholeNotessVector.size () <<
@@ -1300,7 +1296,7 @@ void msrPart::insertHiddenMeasureAndBarLineInPartClone (
 
     ss <<
       "Inserting hidden measure and barLine at position " <<
-      measurePosition <<
+      measurePosition.asString () <<
       "' in part clone " << getPartCombinedName () <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -2105,9 +2101,9 @@ void msrPart::appendHarmonyToPart (
     std::stringstream ss;
 
     ss <<
-      "Appending harmony \"" <<
+      "Appending harmony " <<
       harmony->asString () <<
-      "\" to part " <<
+      " to part " <<
       getPartCombinedName () <<
       ", measurePositionToAppendAt: " << measurePositionToAppendAt <<
       ", line " << inputLineNumber <<
@@ -2136,9 +2132,7 @@ void msrPart::appendHarmoniesListToPart (
     std::stringstream ss;
 
     ss <<
-      "Appending figured basses list \"" <<
-//       figuredBasssesList->asString () << // JMI v0.9.67 HARMFUL
-      "\" to part " <<
+      "Appending harmonies list to part " << // JMI v0.9.67 HARMFUL
       getPartCombinedName () <<
       ", measurePositionToAppendAt: " << measurePositionToAppendAt <<
       ", line " << inputLineNumber <<
@@ -2748,7 +2742,7 @@ void msrPart::finalizePartClone (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-// JMI CAFE ???
+// JMI v0.9.67 ???
     // sort the staves to have harmonies above and figured bass below the part
     fPartAllStavesList.sort (
       compareStavesToHaveFiguredBassesBelowCorrespondingPart);
@@ -3150,7 +3144,7 @@ void msrPart::printFull (std::ostream& os) const
       fPartUpLinkToPartGroup->getPartGroupCombinedName ();
   }
   else {
-    os << "[NONE]";
+    os << "[NULL]";
   }
   os << std::endl;
 
@@ -3209,7 +3203,7 @@ void msrPart::printFull (std::ostream& os) const
 
     std::setw (fieldWidth) <<
     "fPartDrawingMeasurePosition" << ": " <<
-    fPartDrawingMeasurePosition <<
+    fPartDrawingMeasurePosition.asString () <<
     std::endl <<
 
     std::setw (fieldWidth) <<
@@ -3225,7 +3219,7 @@ void msrPart::printFull (std::ostream& os) const
         fPartHarmoniesStaff->asShortString ();
     }
     else {
-      os << "[NONE]";
+      os << "[NULL]";
     }
   os << std::endl;
 
@@ -3237,7 +3231,7 @@ void msrPart::printFull (std::ostream& os) const
         fPartHarmoniesVoice->asShortString ();
     }
     else {
-      os << "[NONE]";
+      os << "[NULL]";
     }
   os << std::endl;
 
@@ -3249,7 +3243,7 @@ void msrPart::printFull (std::ostream& os) const
         fPartFiguredBassStaff->asShortString ();
     }
     else {
-      os << "[NONE]";
+      os << "[NULL]";
     }
   os << std::endl;
 
@@ -3261,7 +3255,7 @@ void msrPart::printFull (std::ostream& os) const
         fPartFiguredBassVoice->asShortString ();
     }
     else {
-      os << "[NONE]";
+      os << "[NULL]";
     }
   os << std::endl;
 
@@ -3280,7 +3274,7 @@ void msrPart::printFull (std::ostream& os) const
     }
     else {
       os <<
-        "[NONE]";
+        "[NULL]";
     }
 
     os << std::endl;
@@ -3302,7 +3296,7 @@ void msrPart::printFull (std::ostream& os) const
     }
     else {
       os <<
-        "[NONE]";
+        "[NULL]";
     }
 
     os << std::endl;
@@ -3323,7 +3317,7 @@ void msrPart::printFull (std::ostream& os) const
         "'";
     }
     else {
-      os << "[NONE]";
+      os << "[NULL]";
     }
 
     os << std::endl;
@@ -3332,7 +3326,7 @@ void msrPart::printFull (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) << "fPartShortestNoteWholeNotes" << ": " <<
-    fPartShortestNoteWholeNotes <<
+    fPartShortestNoteWholeNotes.asString () <<
     std::endl;
 
   os << std::left <<
@@ -3363,7 +3357,7 @@ void msrPart::printFull (std::ostream& os) const
     --gIndenter;
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   // print the regular staves list
@@ -3386,7 +3380,7 @@ void msrPart::printFull (std::ostream& os) const
     --gIndenter;
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   // print the non harmonies nor figured bass staves list
@@ -3447,7 +3441,7 @@ void msrPart::printFull (std::ostream& os) const
     --gIndenter;
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   os << std::endl;
@@ -3464,7 +3458,7 @@ void msrPart::printFull (std::ostream& os) const
     --gIndenter;
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   os << std::endl;
@@ -3546,7 +3540,7 @@ void msrPart::printFull (std::ostream& os) const
     --gIndenter;
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   --gIndenter;
@@ -3579,7 +3573,7 @@ void msrPart::print (std::ostream& os) const
       fPartUpLinkToPartGroup->getPartGroupCombinedName ();
   }
   else {
-    os << "[NONE]";
+    os << "[NULL]";
   }
   os << std::endl;
 */
@@ -3613,7 +3607,7 @@ void msrPart::print (std::ostream& os) const
         fPartHarmoniesStaff->asShortString ();
     }
     else {
-      os << "[NONE]";
+      os << "[NULL]";
     }
   os << std::endl;
 
@@ -3625,7 +3619,7 @@ void msrPart::print (std::ostream& os) const
         fPartHarmoniesVoice->asShortString ();
     }
     else {
-      os << "[NONE]";
+      os << "[NULL]";
     }
   os << std::endl;
 
@@ -3637,7 +3631,7 @@ void msrPart::print (std::ostream& os) const
         fPartFiguredBassStaff->asShortString ();
     }
     else {
-      os << "[NONE]";
+      os << "[NULL]";
     }
   os << std::endl;
 
@@ -3649,7 +3643,7 @@ void msrPart::print (std::ostream& os) const
         fPartFiguredBassVoice->asShortString ();
     }
     else {
-      os << "[NONE]";
+      os << "[NULL]";
     }
   os << std::endl;
 
@@ -3792,7 +3786,7 @@ void msrPart::printSummary (std::ostream& os) const
 
     std::setw (fieldWidth) <<
     "fPartDrawingMeasurePosition" << ": " <<
-    fPartDrawingMeasurePosition <<
+    fPartDrawingMeasurePosition.asString () <<
     std::endl;
 
   // print all the staves
@@ -3874,7 +3868,7 @@ std::ostream& operator << (std::ostream& os, const S_msrPart& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

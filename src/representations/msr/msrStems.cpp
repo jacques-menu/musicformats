@@ -31,11 +31,11 @@ S_msrStem msrStem::create (
   int         inputLineNumber,
   msrStemKind stemKind)
 {
-  msrStem* o =
+  msrStem* obj =
     new msrStem (
       inputLineNumber, stemKind);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 msrStem::msrStem (
@@ -176,7 +176,7 @@ std::ostream& operator << (std::ostream& os, const S_msrStem& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

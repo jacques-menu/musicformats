@@ -31,10 +31,10 @@ namespace MusicFormats
 /* this class is purely virtual
 S_msdlScannerWaeHandler msdlScannerWaeHandler::create ()
 {
-  msdlScannerWaeHandler* o =
+  msdlScannerWaeHandler* obj =
     new msdlScannerWaeHandler ();
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 */
 
@@ -67,7 +67,7 @@ std::ostream& operator << (std::ostream& os, const S_msdlScannerWaeHandler& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -76,10 +76,10 @@ std::ostream& operator << (std::ostream& os, const S_msdlScannerWaeHandler& elt)
 //_______________________________________________________________________________
 S_msdlScannerWaeHandlerEnglish msdlScannerWaeHandlerEnglish::create ()
 {
-  msdlScannerWaeHandlerEnglish* o =
+  msdlScannerWaeHandlerEnglish* obj =
     new msdlScannerWaeHandlerEnglish ();
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 msdlScannerWaeHandlerEnglish::msdlScannerWaeHandlerEnglish ()
@@ -180,7 +180,7 @@ std::ostream& operator << (std::ostream& os, const S_msdlScannerWaeHandlerEnglis
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -189,10 +189,10 @@ std::ostream& operator << (std::ostream& os, const S_msdlScannerWaeHandlerEnglis
 //_______________________________________________________________________________
 S_msdlScannerWaeHandlerFrench msdlScannerWaeHandlerFrench::create ()
 {
-  msdlScannerWaeHandlerFrench* o =
+  msdlScannerWaeHandlerFrench* obj =
     new msdlScannerWaeHandlerFrench ();
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 msdlScannerWaeHandlerFrench::msdlScannerWaeHandlerFrench ()
@@ -293,7 +293,7 @@ std::ostream& operator << (std::ostream& os, const S_msdlScannerWaeHandlerFrench
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -302,10 +302,10 @@ std::ostream& operator << (std::ostream& os, const S_msdlScannerWaeHandlerFrench
 //_______________________________________________________________________________
 S_msdlScannerWaeHandlerItalian msdlScannerWaeHandlerItalian::create ()
 {
-  msdlScannerWaeHandlerItalian* o =
+  msdlScannerWaeHandlerItalian* obj =
     new msdlScannerWaeHandlerItalian ();
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 msdlScannerWaeHandlerItalian::msdlScannerWaeHandlerItalian ()
@@ -406,7 +406,7 @@ std::ostream& operator << (std::ostream& os, const S_msdlScannerWaeHandlerItalia
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -415,10 +415,10 @@ std::ostream& operator << (std::ostream& os, const S_msdlScannerWaeHandlerItalia
 //_______________________________________________________________________________
 S_msdlScannerWaeHandlerGerman msdlScannerWaeHandlerGerman::create ()
 {
-  msdlScannerWaeHandlerGerman* o =
+  msdlScannerWaeHandlerGerman* obj =
     new msdlScannerWaeHandlerGerman ();
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 msdlScannerWaeHandlerGerman::msdlScannerWaeHandlerGerman ()
@@ -520,7 +520,7 @@ std::ostream& operator << (std::ostream& os, const S_msdlScannerWaeHandlerGerman
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -529,10 +529,10 @@ std::ostream& operator << (std::ostream& os, const S_msdlScannerWaeHandlerGerman
 //_______________________________________________________________________________
 S_msdlScannerWaeHandlerSpanish msdlScannerWaeHandlerSpanish::create ()
 {
-  msdlScannerWaeHandlerSpanish* o =
+  msdlScannerWaeHandlerSpanish* obj =
     new msdlScannerWaeHandlerSpanish ();
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 msdlScannerWaeHandlerSpanish::msdlScannerWaeHandlerSpanish ()
@@ -634,7 +634,7 @@ std::ostream& operator << (std::ostream& os, const S_msdlScannerWaeHandlerSpanis
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -643,10 +643,10 @@ std::ostream& operator << (std::ostream& os, const S_msdlScannerWaeHandlerSpanis
 //_______________________________________________________________________________
 S_msdlScannerWaeHandlerDutch msdlScannerWaeHandlerDutch::create ()
 {
-  msdlScannerWaeHandlerDutch* o =
+  msdlScannerWaeHandlerDutch* obj =
     new msdlScannerWaeHandlerDutch ();
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 msdlScannerWaeHandlerDutch::msdlScannerWaeHandlerDutch ()
@@ -748,7 +748,7 @@ std::ostream& operator << (std::ostream& os, const S_msdlScannerWaeHandlerDutch&
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

@@ -46,9 +46,9 @@ S_msdl2msrOahGroup gGlobalMsdl2msrOahGroup;
 
 S_msdl2msrOahGroup msdl2msrOahGroup::create ()
 {
-  msdl2msrOahGroup* o = new msdl2msrOahGroup ();
-  assert (o != nullptr);
-  return o;
+  msdl2msrOahGroup* obj = new msdl2msrOahGroup ();
+  assert (obj != nullptr);
+  return obj;
 }
 
 msdl2msrOahGroup::msdl2msrOahGroup ()
@@ -333,7 +333,7 @@ when performing lexical analysis of the whole input at once.)",
 
   // MSDL keywords translation language
 
-  fMsdlKeywordsConversionLanguageKind = msdlKeywordsLanguageKind::kKeywordsLanguage_UNKNOWN;
+  fMsdlKeywordsConversionLanguageKind = msdlKeywordsLanguageKind::kKeywordsLanguage_UNKNOWN_;
 
   subGroup->
     appendAtomToSubGroup (
@@ -661,7 +661,7 @@ std::ostream& operator << (std::ostream& os, const S_msdl2msrOahGroup& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

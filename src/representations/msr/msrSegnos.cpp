@@ -13,8 +13,6 @@
 #include <sstream>
 #include <iomanip>      // std::setw, std::setprecision, ...
 
-#include "mfStaticSettings.h"
-
 #include "visitor.h"
 
 #include "mfStaticSettings.h"
@@ -71,13 +69,13 @@ S_msrSegno msrSegno::create (
   const S_msrMeasure& upLinkToMeasure,
   int                 staffNumber)
 {
-  msrSegno* o =
+  msrSegno* obj =
     new msrSegno (
       inputLineNumber,
       upLinkToMeasure,
       staffNumber);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 S_msrSegno msrSegno::create (
@@ -236,7 +234,7 @@ std::ostream& operator << (std::ostream& os, const S_msrSegno& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -250,15 +248,15 @@ S_msrDalSegno msrDalSegno::create (
   const std::string&  dalSegnoString,
   int                 staffNumber)
 {
-  msrDalSegno* o =
+  msrDalSegno* obj =
     new msrDalSegno (
       inputLineNumber,
       upLinkToMeasure,
       dalSegnoKind,
       dalSegnoString,
       staffNumber);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 S_msrDalSegno msrDalSegno::create (
@@ -413,7 +411,7 @@ std::string msrDalSegno::asString () const
     ", dalSegnoKind: " << msrDalSegnoKindAsString (fDalSegnoKind) <<
     ", dalSegnoString: \"" << fDalSegnoString << "\"" <<
     ", staffNumber: " << fStaffNumber <<
-    ", measurePosition: " << fMeasurePosition <<
+    ", measurePosition: " << fMeasurePosition.asString () <<
     ", line " << fInputLineNumber <<
     ']';
 
@@ -441,7 +439,7 @@ void msrDalSegno::print (std::ostream& os) const
     "staffNumber" << ": " << fStaffNumber <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "measurePosition" << ": " << fMeasurePosition <<
+    "measurePosition" << ": " << fMeasurePosition.asString () <<
     std::endl <<
 //     std::setw (fieldWidth) <<
 //     "voicePosition" << ": " << fVoicePosition <<
@@ -461,7 +459,7 @@ std::ostream& operator << (std::ostream& os, const S_msrDalSegno& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

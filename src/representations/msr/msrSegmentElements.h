@@ -12,7 +12,7 @@
 #ifndef ___msrSegmentElements___
 #define ___msrSegmentElements___
 
-#include "mfRational.h"
+// #include "msrNoteDurations.h"
 
 #include "msrElements.h"
 
@@ -34,9 +34,7 @@ class EXP msrSegmentElement : public msrElement
     // constants
     // ------------------------------------------------------
 
-    static const std::string K_MEASURE_NUMBER_UNKNOWN;
-
-    static const mfRational K_WHOLE_NOTES_UNKNOWN;
+    static const std::string K_MEASURE_NUMBER_UNKNOWN_;
 
   protected:
 
@@ -53,12 +51,12 @@ class EXP msrSegmentElement : public msrElement
     // set and get
     // ------------------------------------------------------
 
-    void                  setSegmentElementSoundingWholeNotes (
-                            const mfRational& wholeNotes,
-                            const std::string&   context);
+//     void                  setSegmentElementSoundingWholeNotes (
+//                             const msrWholeNotes& wholeNotes,
+//                             const std::string&   context);
 
-    mfRational              getSegmentElementSoundingWholeNotes () const
-                              { return fSegmentElementSoundingWholeNotes; }
+//     mfWholeNotes            getSegmentElementSoundingWholeNotes () const
+//                               { return fSegmentElementSoundingWholeNotes; }
 
 //     void                  setSegmentElementMeasureNumber (
 //                             const std::string& measurePosition)
@@ -69,14 +67,14 @@ class EXP msrSegmentElement : public msrElement
 //     std::string           getSegmentElementMeasureNumber () const
 //                               { return fSegmentElementMeasureNumber; }
 //
-//     mfRational              getSegmentElementMeasurePosition () const
+//     msrWholeNotes              getSegmentElementMeasurePosition () const
 //                               { return fSegmentElementMeasurePosition; }
 //
 //     void                  setSegmentElementVoicePosition (
-//                             const mfRational& voicePosition,
+//                             const msrWholeNotes& voicePosition,
 //                             const std::string&   context);
 //
-//     mfRational              getSegmentElementVoicePosition () const
+//     msrWholeNotes              getSegmentElementVoicePosition () const
 //                               { return fSegmentElementVoicePosition; }
 //
 //     void                  setSegmentElementMeasureMoment (
@@ -106,7 +104,7 @@ class EXP msrSegmentElement : public msrElement
 //                             const SMARTP<msrSegmentElement>& second);
 //
 //     virtual void          assignSegmentElementVoicePosition (
-//                             mfRational&     voicePosition,
+//                             msrWholeNotes&     voicePosition,
 //                             const std::string& context);
 
   public:
@@ -141,12 +139,12 @@ class EXP msrSegmentElement : public msrElement
       to allow for separate *.h files, C++ constraint
     */
 
-    mfRational              fSegmentElementSoundingWholeNotes;
+//     mfWholeNotes              fSegmentElementSoundingWholeNotes;
 
 //     std::string           fSegmentElementMeasureNumber;
 //
-//     mfRational              fSegmentElementMeasurePosition;
-//     mfRational              fSegmentElementVoicePosition;
+//     msrWholeNotes              fSegmentElementMeasurePosition;
+//     msrWholeNotes              fSegmentElementVoicePosition;
 //
 //     msrMoment             fSegmentElementMeasureMoment;
 //     msrMoment             fSegmentElementVoiceMoment;

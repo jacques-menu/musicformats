@@ -43,9 +43,9 @@ S_Mikrokosmos3WanderingOahGroup gGlobalMikrokosmos3WanderingOahGroup;
 
 S_Mikrokosmos3WanderingOahGroup Mikrokosmos3WanderingOahGroup::create ()
 {
-  Mikrokosmos3WanderingOahGroup* o = new Mikrokosmos3WanderingOahGroup ();
-  assert (o != nullptr);
-  return o;
+  Mikrokosmos3WanderingOahGroup* obj = new Mikrokosmos3WanderingOahGroup ();
+  assert (obj != nullptr);
+  return obj;
 }
 
 Mikrokosmos3WanderingOahGroup::Mikrokosmos3WanderingOahGroup ()
@@ -59,7 +59,7 @@ R"(These options control the way Mikrokosmos3Wandering works.)",
     msrGenerationAPIKind::kMsrFunctionsAPIKind;
 
   fMultiGenerationOutputKind =
-    mfMultiGenerationOutputKind::kGeneration_UNKNOWN;
+    mfMultiGenerationOutputKind::kGeneration_UNKNOWN_;
 
   // initialize it
   initializeMikrokosmos3WanderingOahGroup ();
@@ -126,7 +126,7 @@ void Mikrokosmos3WanderingOahGroup::initializeMultiGenerationOutputOptions () //
 //
 //   const mfMultiGenerationOutputKind
 //     multiGenerationKindDefaultValue =
-//       mfMultiGenerationOutputKind::kGeneration_UNKNOWN; // default value
+//       mfMultiGenerationOutputKind::kGeneration_UNKNOWN_; // default value
 //
 //   fMultiGenerationOutputKindAtom =
 //     mfMultiGenerationOutputKindAtom::create (
@@ -176,7 +176,7 @@ void Mikrokosmos3WanderingOahGroup::enforceGroupQuietness ()
 void Mikrokosmos3WanderingOahGroup::checkGroupOptionsConsistency ()
 {
   switch (fMultiGenerationOutputKind) {
-    case mfMultiGenerationOutputKind::kGeneration_UNKNOWN:
+    case mfMultiGenerationOutputKind::kGeneration_UNKNOWN_:
       {
         std::stringstream ss;
 
@@ -343,7 +343,7 @@ std::ostream& operator << (std::ostream& os, const S_Mikrokosmos3WanderingOahGro
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

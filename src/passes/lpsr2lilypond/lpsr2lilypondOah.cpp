@@ -71,7 +71,7 @@ S_lilypondScoreOutputKindAtom lilypondScoreOutputKindAtom::create (
   const std::string&   variableName,
   lpsrScoreOutputKind& lilypondScoreOutputKindVariable)
 {
-  lilypondScoreOutputKindAtom* o = new
+  lilypondScoreOutputKindAtom* obj = new
     lilypondScoreOutputKindAtom (
       longName,
       shortName,
@@ -79,8 +79,8 @@ S_lilypondScoreOutputKindAtom lilypondScoreOutputKindAtom::create (
       valueSpecification,
       variableName,
       lilypondScoreOutputKindVariable);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 lilypondScoreOutputKindAtom::lilypondScoreOutputKindAtom (
@@ -301,7 +301,7 @@ std::ostream& operator << (std::ostream& os, const S_lilypondScoreOutputKindAtom
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -317,7 +317,7 @@ S_lilypondTransposePartNameAtom lilypondTransposePartNameAtom::create (
   std::map<std::string, S_msrSemiTonesPitchAndOctave>&
                 stringToMsrSemiTonesPitchAndOctaveMapVariable)
 {
-  lilypondTransposePartNameAtom* o = new
+  lilypondTransposePartNameAtom* obj = new
     lilypondTransposePartNameAtom (
       longName,
       shortName,
@@ -325,8 +325,8 @@ S_lilypondTransposePartNameAtom lilypondTransposePartNameAtom::create (
       valueSpecification,
       variableName,
       stringToMsrSemiTonesPitchAndOctaveMapVariable);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 lilypondTransposePartNameAtom::lilypondTransposePartNameAtom (
@@ -465,7 +465,7 @@ void lilypondTransposePartNameAtom::applyAtomWithValue (
   else {
     fStringToMsrSemiTonesPitchAndOctaveMapVariable [partName] =
       msrSemiTonesPitchAndOctave::createFromString (
-        K_MF_INPUT_LINE_UNKNOWN,
+        K_MF_INPUT_LINE_UNKNOWN_,
         destinationPitchName);
   }
 
@@ -714,7 +714,7 @@ std::ostream& operator << (std::ostream& os, const S_lilypondTransposePartNameAt
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -730,7 +730,7 @@ S_lilypondTransposePartIDAtom lilypondTransposePartIDAtom::create (
   std::map<std::string, S_msrSemiTonesPitchAndOctave>&
                 stringToMsrSemiTonesPitchAndOctaveMapVariable)
 {
-  lilypondTransposePartIDAtom* o = new
+  lilypondTransposePartIDAtom* obj = new
     lilypondTransposePartIDAtom (
       longName,
       shortName,
@@ -738,8 +738,8 @@ S_lilypondTransposePartIDAtom lilypondTransposePartIDAtom::create (
       valueSpecification,
       variableName,
       stringToMsrSemiTonesPitchAndOctaveMapVariable);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 lilypondTransposePartIDAtom::lilypondTransposePartIDAtom (
@@ -875,7 +875,7 @@ void lilypondTransposePartIDAtom::applyAtomWithValue (
   else {
     fStringToMsrSemiTonesPitchAndOctaveMapVariable [partID] =
       msrSemiTonesPitchAndOctave::createFromString (
-        K_MF_INPUT_LINE_UNKNOWN,
+        K_MF_INPUT_LINE_UNKNOWN_,
         destinationPitchName);
   }
 
@@ -1124,7 +1124,7 @@ std::ostream& operator << (std::ostream& os, const S_lilypondTransposePartIDAtom
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -1135,12 +1135,12 @@ S_msrOctaveEntryVariable msrOctaveEntryVariable::create (
   const std::string&      variableName,
   msrOctaveEntryKind octaveEntryKind)
 {
-  msrOctaveEntryVariable* o = new
+  msrOctaveEntryVariable* obj = new
     msrOctaveEntryVariable (
       variableName,
       octaveEntryKind);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 msrOctaveEntryVariable::msrOctaveEntryVariable (
@@ -1221,15 +1221,15 @@ S_lilypondAbsoluteOctaveEntryAtom lilypondAbsoluteOctaveEntryAtom::create (
   const std::string&      variableName,
   msrOctaveEntryVariable& octaveEntryKindVariable)
 {
-  lilypondAbsoluteOctaveEntryAtom* o = new
+  lilypondAbsoluteOctaveEntryAtom* obj = new
     lilypondAbsoluteOctaveEntryAtom (
       longName,
       shortName,
       description,
       variableName,
       octaveEntryKindVariable);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 lilypondAbsoluteOctaveEntryAtom::lilypondAbsoluteOctaveEntryAtom (
@@ -1406,7 +1406,7 @@ void lilypondAbsoluteOctaveEntryAtom::displayAtomWithVariableOptionsValues (
   std::ostream& os,
   int           valueFieldWidth) const
 {
-//   os << std::left << // JMI CAFE
+//   os << std::left << // JMI v0.9.67
 //     std::setw (valueFieldWidth) <<
 //     fOctaveEntryKindVariable.getVariableName () <<
 //     ": " <<
@@ -1426,7 +1426,7 @@ S_lilypondRelativeOctaveEntryAtom lilypondRelativeOctaveEntryAtom::create (
   S_msrSemiTonesPitchAndOctave&
                      lilypondRelativeOctaveEntryVariable)
 {
-  lilypondRelativeOctaveEntryAtom* o = new
+  lilypondRelativeOctaveEntryAtom* obj = new
     lilypondRelativeOctaveEntryAtom (
       longName,
       shortName,
@@ -1435,8 +1435,8 @@ S_lilypondRelativeOctaveEntryAtom lilypondRelativeOctaveEntryAtom::create (
       variableName,
       octaveEntryKindVariable,
       lilypondRelativeOctaveEntryVariable);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 lilypondRelativeOctaveEntryAtom::lilypondRelativeOctaveEntryAtom (
@@ -1530,7 +1530,7 @@ void lilypondRelativeOctaveEntryAtom::applyAtomWithValue (
   // set relative octave reference value
   setRelativeOctaveEntryVariableValue (
     msrSemiTonesPitchAndOctave::createFromString (
-      K_MF_INPUT_LINE_UNKNOWN,
+      K_MF_INPUT_LINE_UNKNOWN_,
       theString));
 
   fSelected = true;
@@ -1692,7 +1692,7 @@ void lilypondRelativeOctaveEntryAtom::displayAtomWithVariableOptionsValues (
     --gIndenter;
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 }
 
@@ -1702,7 +1702,7 @@ std::ostream& operator << (std::ostream& os, const S_lilypondRelativeOctaveEntry
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -1720,7 +1720,7 @@ S_lilypondFixedOctaveEntryAtom lilypondFixedOctaveEntryAtom::create (
   S_msrSemiTonesPitchAndOctave&
                      lilypondFixedOctaveEntryVariable)
 {
-  lilypondFixedOctaveEntryAtom* o = new
+  lilypondFixedOctaveEntryAtom* obj = new
     lilypondFixedOctaveEntryAtom (
       longName,
       shortName,
@@ -1729,8 +1729,8 @@ S_lilypondFixedOctaveEntryAtom lilypondFixedOctaveEntryAtom::create (
       variableName,
       octaveEntryKindVariable,
       lilypondFixedOctaveEntryVariable);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 lilypondFixedOctaveEntryAtom::lilypondFixedOctaveEntryAtom (
@@ -1785,7 +1785,7 @@ void lilypondFixedOctaveEntryAtom::applyAtomWithValue (
   // set fixed octave reference value
   setFixedOctaveEntryVariableValue (
     msrSemiTonesPitchAndOctave::createFromString (
-      K_MF_INPUT_LINE_UNKNOWN,
+      K_MF_INPUT_LINE_UNKNOWN_,
       theString));
 
   fSelected = true;
@@ -1947,7 +1947,7 @@ void lilypondFixedOctaveEntryAtom::displayAtomWithVariableOptionsValues (
     --gIndenter;
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 }
 
@@ -1957,7 +1957,7 @@ std::ostream& operator << (std::ostream& os, const S_lilypondFixedOctaveEntryAto
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -1973,7 +1973,7 @@ S_lilypondAccidentalStyleKindAtom lilypondAccidentalStyleKindAtom::create (
   lpsrAccidentalStyleKind&
                 lilypondAccidentalStyleKindVariable)
 {
-  lilypondAccidentalStyleKindAtom* o = new
+  lilypondAccidentalStyleKindAtom* obj = new
     lilypondAccidentalStyleKindAtom (
       longName,
       shortName,
@@ -1981,8 +1981,8 @@ S_lilypondAccidentalStyleKindAtom lilypondAccidentalStyleKindAtom::create (
       valueSpecification,
       variableName,
       lilypondAccidentalStyleKindVariable);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 lilypondAccidentalStyleKindAtom::lilypondAccidentalStyleKindAtom (
@@ -2249,7 +2249,7 @@ std::ostream& operator << (std::ostream& os, const S_lilypondAccidentalStyleKind
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -2265,7 +2265,7 @@ S_lilypondChordsDisplayAtom lilypondChordsDisplayAtom::create (
   std::list<std::pair<std::string, std::string> >&
                         lilypondChordsDisplayVariable)
 {
-  lilypondChordsDisplayAtom* o = new
+  lilypondChordsDisplayAtom* obj = new
     lilypondChordsDisplayAtom (
       longName,
       shortName,
@@ -2273,8 +2273,8 @@ S_lilypondChordsDisplayAtom lilypondChordsDisplayAtom::create (
       valueSpecification,
       variableName,
       lilypondChordsDisplayVariable);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 lilypondChordsDisplayAtom::lilypondChordsDisplayAtom (
@@ -2677,7 +2677,7 @@ std::ostream& operator << (std::ostream& os, const S_lilypondChordsDisplayAtom& 
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -2693,7 +2693,7 @@ S_lilypondLyricsNotesDurationsKindAtom lilypondLyricsNotesDurationsKindAtom::cre
   lpsrLyricsNotesDurationsKind&
                     lilypondLyricsNotesDurationsKindVariable)
 {
-  lilypondLyricsNotesDurationsKindAtom* o = new
+  lilypondLyricsNotesDurationsKindAtom* obj = new
     lilypondLyricsNotesDurationsKindAtom (
       longName,
       shortName,
@@ -2701,8 +2701,8 @@ S_lilypondLyricsNotesDurationsKindAtom lilypondLyricsNotesDurationsKindAtom::cre
       valueSpecification,
       variableName,
       lilypondLyricsNotesDurationsKindVariable);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 lilypondLyricsNotesDurationsKindAtom::lilypondLyricsNotesDurationsKindAtom (
@@ -2972,7 +2972,7 @@ std::ostream& operator << (std::ostream& os, const S_lilypondLyricsNotesDuration
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -2988,7 +2988,7 @@ S_lilypondDynamicsTextSpannersStyleKindAtom lilypondDynamicsTextSpannersStyleKin
   lpsrDynamicsTextSpannersStyleKind&
                     lilypondDynamicsTextSpannersStyleKindVariable)
 {
-  lilypondDynamicsTextSpannersStyleKindAtom* o = new
+  lilypondDynamicsTextSpannersStyleKindAtom* obj = new
     lilypondDynamicsTextSpannersStyleKindAtom (
       longName,
       shortName,
@@ -2996,8 +2996,8 @@ S_lilypondDynamicsTextSpannersStyleKindAtom lilypondDynamicsTextSpannersStyleKin
       valueSpecification,
       variableName,
       lilypondDynamicsTextSpannersStyleKindVariable);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 lilypondDynamicsTextSpannersStyleKindAtom::lilypondDynamicsTextSpannersStyleKindAtom (
@@ -3257,7 +3257,7 @@ std::ostream& operator << (std::ostream& os, const S_lilypondDynamicsTextSpanner
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -3268,9 +3268,9 @@ S_lpsr2lilypondOahGroup gGlobalLpsr2lilypondOahGroup;
 
 S_lpsr2lilypondOahGroup lpsr2lilypondOahGroup::create ()
 {
-  lpsr2lilypondOahGroup* o = new lpsr2lilypondOahGroup ();
-  assert (o != nullptr);
-  return o;
+  lpsr2lilypondOahGroup* obj = new lpsr2lilypondOahGroup ();
+  assert (obj != nullptr);
+  return obj;
 }
 
 lpsr2lilypondOahGroup::lpsr2lilypondOahGroup ()
@@ -3786,7 +3786,7 @@ R"()",
   // auto-voices
   // --------------------------------------
 
-if (false) // JMI CAFE
+if (false) // JMI v0.9.67
   subGroup->
     appendAtomToSubGroup (
       oahBooleanAtom::create (
@@ -6823,7 +6823,7 @@ std::ostream& operator << (std::ostream& os, const S_lpsr2lilypondOahGroup& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -6872,7 +6872,7 @@ S_lilypondBreakPageAfterMeasureNumberAtom lilypondBreakPageAfterMeasureNumberAto
   const std::string& variableName,
   std::set<std::string>&  S_lilypondAbsoluteOctaveEntryAtomtringSetVariable)
 {
-  lilypondBreakPageAfterMeasureNumberAtom* o = new
+  lilypondBreakPageAfterMeasureNumberAtom* obj = new
     lilypondBreakPageAfterMeasureNumberAtom (
       longName,
       shortName,
@@ -6880,8 +6880,8 @@ S_lilypondBreakPageAfterMeasureNumberAtom lilypondBreakPageAfterMeasureNumberAto
       valueSpecification,
       variableName,
       fStringSetVariable);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 lilypondBreakPageAfterMeasureNumberAtom::lilypondBreakPageAfterMeasureNumberAtom (
@@ -7101,7 +7101,7 @@ std::ostream& operator << (std::ostream& os, const S_lilypondBreakPageAfterMeasu
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

@@ -37,9 +37,9 @@ S_outputFileOahGroup gGlobalOutputFileOahGroup;
 
 S_outputFileOahGroup outputFileOahGroup::create ()
 {
-  outputFileOahGroup* o = new outputFileOahGroup ();
-  assert (o != nullptr);
-  return o;
+  outputFileOahGroup* obj = new outputFileOahGroup ();
+  assert (obj != nullptr);
+  return obj;
 }
 
 outputFileOahGroup::outputFileOahGroup ()
@@ -260,7 +260,7 @@ std::ostream& operator << (std::ostream& os, const S_outputFileOahGroup& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

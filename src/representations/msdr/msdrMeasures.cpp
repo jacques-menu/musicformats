@@ -34,12 +34,12 @@ S_msdrMeasure msdrMeasure::create (
   int           inputLineNumber,
   const std::string& measureNumber)
 {
-  msdrMeasure* o =
+  msdrMeasure* obj =
     new msdrMeasure (
       inputLineNumber,
       measureNumber);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 msdrMeasure::msdrMeasure (
@@ -438,7 +438,7 @@ std::ostream& operator << (std::ostream& os, const S_msdrMeasure& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

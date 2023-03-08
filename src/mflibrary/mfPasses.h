@@ -32,7 +32,7 @@ namespace MusicFormats
 //______________________________________________________________________________
 enum class mfPassIDKind {
   // a given pass may have different IDs depending on the service
-  kMfPassID_UNKNOWN,
+  kMfPassID_UNKNOWN_,
 
   kMfPassID_ALL, // default value for passes trace
 

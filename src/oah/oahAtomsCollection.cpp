@@ -13,12 +13,7 @@
 #include <map>
 #include <regex>
 
-#include "mfStaticSettings.h"
-
 #include "visitor.h"
-
-#include "mfStringsHandling.h"
-#include "oahWae.h"
 
 #include "mfStaticSettings.h"
 
@@ -27,6 +22,7 @@
 #include "mfStringsHandling.h"
 
 #include "oahOah.h"
+#include "oahWae.h"
 
 #include "oahEarlyOptions.h"
 
@@ -49,14 +45,14 @@ S_oahValueLessAtomAlias oahValueLessAtomAlias::create (
   const std::string&        description,
   const S_oahValueLessAtom& originalValueLessAtom)
 {
-  oahValueLessAtomAlias* o = new
+  oahValueLessAtomAlias* obj = new
     oahValueLessAtomAlias (
       longName,
       shortName,
       description,
       originalValueLessAtom);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 oahValueLessAtomAlias::oahValueLessAtomAlias (
@@ -227,7 +223,7 @@ std::ostream& operator << (std::ostream& os, const S_oahValueLessAtomAlias& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -240,14 +236,14 @@ S_oahValueFittedAtomAlias oahValueFittedAtomAlias::create (
   const std::string&          description,
   const S_oahValueFittedAtom& originalValueFittedAtom)
 {
-  oahValueFittedAtomAlias* o = new
+  oahValueFittedAtomAlias* obj = new
     oahValueFittedAtomAlias (
       longName,
       shortName,
       description,
       originalValueFittedAtom);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 oahValueFittedAtomAlias::oahValueFittedAtomAlias (
@@ -421,7 +417,7 @@ std::ostream& operator << (std::ostream& os, const S_oahValueFittedAtomAlias& el
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -433,13 +429,13 @@ S_oahMacroAtom oahMacroAtom::create (
   const std::string& shortName,
   const std::string& description)
 {
-  oahMacroAtom* o = new
+  oahMacroAtom* obj = new
     oahMacroAtom (
       longName,
       shortName,
       description);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 oahMacroAtom::oahMacroAtom (
@@ -735,7 +731,7 @@ std::ostream& operator << (std::ostream& os, const S_oahMacroAtom& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -748,14 +744,14 @@ S_oahOptionsUsageAtom oahOptionsUsageAtom::create (
   const std::string& description,
   const std::string& serviceName)
 {
-  oahOptionsUsageAtom* o = new
+  oahOptionsUsageAtom* obj = new
     oahOptionsUsageAtom (
       longName,
       shortName,
       description,
       serviceName);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 oahOptionsUsageAtom::oahOptionsUsageAtom (
@@ -836,7 +832,7 @@ such as '-t=voices,meas' for '-tvoices, -tmeas'.
 The options can be placed in any order,
 provided the values immediately follow the atoms that need them.
 
-Using options that attempt to create files, such as '-output-file-name, -o',
+Using options that attempt to create files, such as '-output-file-name, -obj',
 leads to an error if the environment is read-only access,
 as is the case of https://libmusicxml.grame.fr .)",
         std::regex ("OPTION_NAME_HELP_NAMES"),
@@ -969,7 +965,7 @@ std::ostream& operator << (std::ostream& os, const S_oahOptionsUsageAtom& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -982,14 +978,14 @@ S_oahHelpAtom oahHelpAtom::create (
   const std::string& description,
   const std::string& serviceName)
 {
-  oahHelpAtom* o = new
+  oahHelpAtom* obj = new
     oahHelpAtom (
       longName,
       shortName,
       description,
       serviceName);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 oahHelpAtom::oahHelpAtom (
@@ -1159,7 +1155,7 @@ std::ostream& operator << (std::ostream& os, const S_oahHelpAtom& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -1172,14 +1168,14 @@ S_oahHelpSummaryAtom oahHelpSummaryAtom::create (
   const std::string& description,
   const std::string& serviceName)
 {
-  oahHelpSummaryAtom* o = new
+  oahHelpSummaryAtom* obj = new
     oahHelpSummaryAtom (
       longName,
       shortName,
       description,
       serviceName);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 oahHelpSummaryAtom::oahHelpSummaryAtom (
@@ -1349,7 +1345,7 @@ std::ostream& operator << (std::ostream& os, const S_oahHelpSummaryAtom& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -1362,14 +1358,14 @@ S_oahAboutAtom oahAboutAtom::create (
   const std::string& description,
   const std::string& serviceName)
 {
-  oahAboutAtom* o = new
+  oahAboutAtom* obj = new
     oahAboutAtom (
       longName,
       shortName,
       description,
       serviceName);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 oahAboutAtom::oahAboutAtom (
@@ -1537,7 +1533,7 @@ std::ostream& operator << (std::ostream& os, const S_oahAboutAtom& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -1575,15 +1571,15 @@ S_oahVersionAtom oahVersionAtom::create (
   const std::string&  serviceName,
   oahVersionKind      versionKind)
 {
-  oahVersionAtom* o = new
+  oahVersionAtom* obj = new
     oahVersionAtom (
       longName,
       shortName,
       description,
       serviceName,
       versionKind);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 oahVersionAtom::oahVersionAtom (
@@ -1793,7 +1789,7 @@ std::ostream& operator << (std::ostream& os, const S_oahVersionAtom& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -1806,14 +1802,14 @@ S_oahLibraryVersionAtom oahLibraryVersionAtom::create (
   const std::string& description,
   const std::string& serviceName)
 {
-  oahLibraryVersionAtom* o = new
+  oahLibraryVersionAtom* obj = new
     oahLibraryVersionAtom (
       longName,
       shortName,
       description,
       serviceName);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 oahLibraryVersionAtom::oahLibraryVersionAtom (
@@ -1993,7 +1989,7 @@ std::ostream& operator << (std::ostream& os, const S_oahLibraryVersionAtom& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -2006,14 +2002,14 @@ S_oahHistoryAtom oahHistoryAtom::create (
   const std::string& description,
   const std::string& serviceName)
 {
-  oahHistoryAtom* o = new
+  oahHistoryAtom* obj = new
     oahHistoryAtom (
       longName,
       shortName,
       description,
       serviceName);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 oahHistoryAtom::oahHistoryAtom (
@@ -2193,7 +2189,7 @@ std::ostream& operator << (std::ostream& os, const S_oahHistoryAtom& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -2206,14 +2202,14 @@ S_oahLibraryHistoryAtom oahLibraryHistoryAtom::create (
   const std::string& description,
   const std::string& serviceName)
 {
-  oahLibraryHistoryAtom* o = new
+  oahLibraryHistoryAtom* obj = new
     oahLibraryHistoryAtom (
       longName,
       shortName,
       description,
       serviceName);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 oahLibraryHistoryAtom::oahLibraryHistoryAtom (
@@ -2393,7 +2389,7 @@ std::ostream& operator << (std::ostream& os, const S_oahLibraryHistoryAtom& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -2406,14 +2402,14 @@ S_oahContactAtom oahContactAtom::create (
   const std::string& description,
   const std::string& serviceName)
 {
-  oahContactAtom* o = new
+  oahContactAtom* obj = new
     oahContactAtom (
       longName,
       shortName,
       description,
       serviceName);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 oahContactAtom::oahContactAtom (
@@ -2587,7 +2583,7 @@ std::ostream& operator << (std::ostream& os, const S_oahContactAtom& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -2600,14 +2596,14 @@ S_oahDisplayPrefixes oahDisplayPrefixes::create (
   const std::string& description,
   const std::string& serviceName)
 {
-  oahDisplayPrefixes* o = new
+  oahDisplayPrefixes* obj = new
     oahDisplayPrefixes (
       longName,
       shortName,
       description,
       serviceName);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 oahDisplayPrefixes::oahDisplayPrefixes (
@@ -2779,7 +2775,7 @@ std::ostream& operator << (std::ostream& os, const S_oahDisplayPrefixes& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -2792,14 +2788,14 @@ S_oahDisplaySingleCharacterOptions oahDisplaySingleCharacterOptions::create (
   const std::string& description,
   const std::string& serviceName)
 {
-  oahDisplaySingleCharacterOptions* o = new
+  oahDisplaySingleCharacterOptions* obj = new
     oahDisplaySingleCharacterOptions (
       longName,
       shortName,
       description,
       serviceName);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 oahDisplaySingleCharacterOptions::oahDisplaySingleCharacterOptions (
@@ -2971,7 +2967,7 @@ std::ostream& operator << (std::ostream& os, const S_oahDisplaySingleCharacterOp
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -2986,7 +2982,7 @@ S_oahOnOffAtom oahOnOffAtom::create (
   const std::string& variableName,
   mfOnOffKind&       onOffKindVariable)
 {
-  oahOnOffAtom* o = new
+  oahOnOffAtom* obj = new
     oahOnOffAtom (
       longName,
       shortName,
@@ -2994,8 +2990,8 @@ S_oahOnOffAtom oahOnOffAtom::create (
       valueSpecification,
       variableName,
       onOffKindVariable);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 oahOnOffAtom::oahOnOffAtom (
@@ -3246,7 +3242,7 @@ std::ostream& operator << (std::ostream& os, const S_oahOnOffAtom& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -3260,15 +3256,15 @@ S_oahBooleanAtom oahBooleanAtom::create (
   const std::string& variableName,
   Bool&              booleanVariable)
 {
-  oahBooleanAtom* o = new
+  oahBooleanAtom* obj = new
     oahBooleanAtom (
       longName,
       shortName,
       description,
       variableName,
       booleanVariable);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 oahBooleanAtom::oahBooleanAtom (
@@ -3495,7 +3491,7 @@ std::ostream& operator << (std::ostream& os, const S_oahBooleanAtom& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -3509,15 +3505,15 @@ S_oahBooleanAtomWithTracePasses oahBooleanAtomWithTracePasses::create (
   const std::string& variableName,
   Bool&              booleanVariable)
 {
-  oahBooleanAtomWithTracePasses* o = new
+  oahBooleanAtomWithTracePasses* obj = new
     oahBooleanAtomWithTracePasses (
       longName,
       shortName,
       description,
       variableName,
       booleanVariable);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 oahBooleanAtomWithTracePasses::oahBooleanAtomWithTracePasses (
@@ -3713,7 +3709,7 @@ std::ostream& operator << (std::ostream& os, const S_oahBooleanAtomWithTracePass
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -3728,7 +3724,7 @@ S_oahTwoBooleansAtom oahTwoBooleansAtom::create (
   Bool&                   booleanVariable,
   const S_oahBooleanAtom& secondBooleanAtom)
 {
-  oahTwoBooleansAtom* o = new
+  oahTwoBooleansAtom* obj = new
     oahTwoBooleansAtom (
       longName,
       shortName,
@@ -3736,8 +3732,8 @@ S_oahTwoBooleansAtom oahTwoBooleansAtom::create (
       variableName,
       booleanVariable,
       secondBooleanAtom);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 oahTwoBooleansAtom::oahTwoBooleansAtom (
@@ -3974,7 +3970,7 @@ std::ostream& operator << (std::ostream& os, const S_oahTwoBooleansAtom& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -3989,7 +3985,7 @@ S_oahTwoBooleansAtomWithTracePasses oahTwoBooleansAtomWithTracePasses::create (
   Bool&                   booleanVariable,
   const S_oahBooleanAtom& secondBooleanAtom)
 {
-  oahTwoBooleansAtomWithTracePasses* o = new
+  oahTwoBooleansAtomWithTracePasses* obj = new
     oahTwoBooleansAtomWithTracePasses (
       longName,
       shortName,
@@ -3997,8 +3993,8 @@ S_oahTwoBooleansAtomWithTracePasses oahTwoBooleansAtomWithTracePasses::create (
       variableName,
       booleanVariable,
       secondBooleanAtom);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 oahTwoBooleansAtomWithTracePasses::oahTwoBooleansAtomWithTracePasses (
@@ -4205,7 +4201,7 @@ std::ostream& operator << (std::ostream& os, const S_oahTwoBooleansAtomWithTrace
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -4221,7 +4217,7 @@ S_oahThreeBooleansAtom oahThreeBooleansAtom::create (
   const S_oahBooleanAtom& secondBooleanAtom,
   const S_oahBooleanAtom& thirdBooleanAtom)
 {
-  oahThreeBooleansAtom* o = new
+  oahThreeBooleansAtom* obj = new
     oahThreeBooleansAtom (
       longName,
       shortName,
@@ -4230,8 +4226,8 @@ S_oahThreeBooleansAtom oahThreeBooleansAtom::create (
       booleanVariable,
       secondBooleanAtom,
       thirdBooleanAtom);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 oahThreeBooleansAtom::oahThreeBooleansAtom (
@@ -4474,7 +4470,7 @@ std::ostream& operator << (std::ostream& os, const S_oahThreeBooleansAtom& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -4490,7 +4486,7 @@ S_oahThreeBooleansAtomWithTracePasses oahThreeBooleansAtomWithTracePasses::creat
   const S_oahBooleanAtom& secondBooleanAtom,
   const S_oahBooleanAtom& thirdBooleanAtom)
 {
-  oahThreeBooleansAtomWithTracePasses* o = new
+  oahThreeBooleansAtomWithTracePasses* obj = new
     oahThreeBooleansAtomWithTracePasses (
       longName,
       shortName,
@@ -4499,8 +4495,8 @@ S_oahThreeBooleansAtomWithTracePasses oahThreeBooleansAtomWithTracePasses::creat
       booleanVariable,
       secondBooleanAtom,
       thirdBooleanAtom);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 oahThreeBooleansAtomWithTracePasses::oahThreeBooleansAtomWithTracePasses (
@@ -4709,7 +4705,7 @@ std::ostream& operator << (std::ostream& os, const S_oahThreeBooleansAtomWithTra
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -4721,13 +4717,13 @@ S_oahCombinedBooleansAtom oahCombinedBooleansAtom::create (
   const std::string& shortName,
   const std::string& description)
 {
-  oahCombinedBooleansAtom* o = new
+  oahCombinedBooleansAtom* obj = new
     oahCombinedBooleansAtom (
       longName,
       shortName,
       description);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 oahCombinedBooleansAtom::oahCombinedBooleansAtom (
@@ -5186,7 +5182,7 @@ std::ostream& operator << (std::ostream& os, const S_oahCombinedBooleansAtom& el
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -5201,7 +5197,7 @@ S_oahIntegerAtom oahIntegerAtom::create (
   const std::string& variableName,
   int&               integerVariable)
 {
-  oahIntegerAtom* o = new
+  oahIntegerAtom* obj = new
     oahIntegerAtom (
       longName,
       shortName,
@@ -5209,8 +5205,8 @@ S_oahIntegerAtom oahIntegerAtom::create (
       valueSpecification,
       variableName,
       integerVariable);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 oahIntegerAtom::oahIntegerAtom (
@@ -5488,7 +5484,7 @@ std::ostream& operator << (std::ostream& os, const S_oahIntegerAtom& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -5504,7 +5500,7 @@ S_oahTwoIntegersAtom oahTwoIntegersAtom::create (
   int&               integerVariable,
   int&               integerSecondaryVariable)
 {
-  oahTwoIntegersAtom* o = new
+  oahTwoIntegersAtom* obj = new
     oahTwoIntegersAtom (
       longName,
       shortName,
@@ -5513,8 +5509,8 @@ S_oahTwoIntegersAtom oahTwoIntegersAtom::create (
       variableName,
       integerVariable,
       integerSecondaryVariable);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 oahTwoIntegersAtom::oahTwoIntegersAtom (
@@ -5819,7 +5815,7 @@ std::ostream& operator << (std::ostream& os, const S_oahTwoIntegersAtom& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -5834,7 +5830,7 @@ S_oahFloatAtom oahFloatAtom::create (
   const std::string& variableName,
   float&             floatVariable)
 {
-  oahFloatAtom* o = new
+  oahFloatAtom* obj = new
     oahFloatAtom (
       longName,
       shortName,
@@ -5842,8 +5838,8 @@ S_oahFloatAtom oahFloatAtom::create (
       valueSpecification,
       variableName,
       floatVariable);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 oahFloatAtom::oahFloatAtom (
@@ -6123,7 +6119,7 @@ std::ostream& operator << (std::ostream& os, const S_oahFloatAtom& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -6138,7 +6134,7 @@ S_oahStringAtom oahStringAtom::create (
   const std::string& variableName,
   std::string&       stringVariable)
 {
-  oahStringAtom* o = new
+  oahStringAtom* obj = new
     oahStringAtom (
       longName,
       shortName,
@@ -6146,8 +6142,8 @@ S_oahStringAtom oahStringAtom::create (
       valueSpecification,
       variableName,
       stringVariable);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 oahStringAtom::oahStringAtom (
@@ -6369,7 +6365,7 @@ std::ostream& operator << (std::ostream& os, const S_oahStringAtom& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -6383,15 +6379,15 @@ S_oahFactorizedStringAtom oahFactorizedStringAtom::create (
   const std::string& atomNameDescriptor,
   const std::string& stringValueDescriptor)
 {
-  oahFactorizedStringAtom* o = new
+  oahFactorizedStringAtom* obj = new
     oahFactorizedStringAtom (
       longName,
       shortName,
       description,
       atomNameDescriptor,
       stringValueDescriptor);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 oahFactorizedStringAtom::oahFactorizedStringAtom (
@@ -6808,7 +6804,7 @@ std::ostream& operator << (std::ostream& os, const S_oahFactorizedStringAtom& el
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -6825,7 +6821,7 @@ S_oahDefaultedStringAtom oahDefaultedStringAtom::create (
   std::string&       stringVariable,
   const std::string& defaultStringValue)
 {
-  oahDefaultedStringAtom* o = new
+  oahDefaultedStringAtom* obj = new
     oahDefaultedStringAtom (
       longName,
       shortName,
@@ -6834,8 +6830,8 @@ S_oahDefaultedStringAtom oahDefaultedStringAtom::create (
       variableName,
       stringVariable,
       defaultStringValue);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 */
 
@@ -7102,7 +7098,7 @@ std::ostream& operator << (std::ostream& os, const S_oahDefaultedStringAtom& elt
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -7118,7 +7114,7 @@ S_oahCommonPrefixBooleansAtom oahCommonPrefixBooleansAtom::create (
   const S_oahPrefix& shortNamesPrefix,
   const S_oahPrefix& longNamesPrefix)
 {
-  oahCommonPrefixBooleansAtom* o = new
+  oahCommonPrefixBooleansAtom* obj = new
     oahCommonPrefixBooleansAtom (
       longName,
       shortName,
@@ -7127,8 +7123,8 @@ S_oahCommonPrefixBooleansAtom oahCommonPrefixBooleansAtom::create (
       longSuffixDescriptor,
       shortNamesPrefix,
       longNamesPrefix);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 oahCommonPrefixBooleansAtom::oahCommonPrefixBooleansAtom (
@@ -7569,7 +7565,7 @@ void oahCommonPrefixBooleansAtom::print (std::ostream& os) const
     os << fShortNamesPrefix;
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   os << std::left <<
@@ -7579,7 +7575,7 @@ void oahCommonPrefixBooleansAtom::print (std::ostream& os) const
     os << fLongNamesPrefix;
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   os << std::left <<
@@ -7764,7 +7760,7 @@ std::ostream& operator << (std::ostream& os, const S_oahCommonPrefixBooleansAtom
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -7780,7 +7776,7 @@ S_oahRegexAtom oahRegexAtom::create ( // JMI UNUSED as of v0.9.66
   std::string&       stringVariable,
   const std::string& regexString)
 {
-  oahRegexAtom* o = new
+  oahRegexAtom* obj = new
     oahRegexAtom (
       longName,
       shortName,
@@ -7789,8 +7785,8 @@ S_oahRegexAtom oahRegexAtom::create ( // JMI UNUSED as of v0.9.66
       variableName,
       stringVariable,
       regexString);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 oahRegexAtom::oahRegexAtom (
@@ -8043,7 +8039,7 @@ std::ostream& operator << (std::ostream& os, const S_oahRegexAtom& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -8058,7 +8054,7 @@ S_oahRationalAtom oahRationalAtom::create (
   const std::string& variableName,
   mfRational&          rationalVariable)
 {
-  oahRationalAtom* o = new
+  oahRationalAtom* obj = new
     oahRationalAtom (
       longName,
       shortName,
@@ -8066,8 +8062,8 @@ S_oahRationalAtom oahRationalAtom::create (
       valueSpecification,
       variableName,
       rationalVariable);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 oahRationalAtom::oahRationalAtom (
@@ -8348,7 +8344,7 @@ std::ostream& operator << (std::ostream& os, const S_oahRationalAtom& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -8363,7 +8359,7 @@ S_oahNaturalNumbersSetElementAtom oahNaturalNumbersSetElementAtom::create (
   const std::string& variableName,
   std::set<int>&     naturalNumbersSetVariable)
 {
-  oahNaturalNumbersSetElementAtom* o = new
+  oahNaturalNumbersSetElementAtom* obj = new
     oahNaturalNumbersSetElementAtom (
       longName,
       shortName,
@@ -8371,8 +8367,8 @@ S_oahNaturalNumbersSetElementAtom oahNaturalNumbersSetElementAtom::create (
       valueSpecification,
       variableName,
       naturalNumbersSetVariable);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 oahNaturalNumbersSetElementAtom::oahNaturalNumbersSetElementAtom (
@@ -8646,7 +8642,7 @@ std::ostream& operator << (std::ostream& os, const S_oahNaturalNumbersSetElement
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -8661,7 +8657,7 @@ S_oahColorRGBAtom oahColorRGBAtom::create (
   const std::string& variableName,
   msrColorRGB&       colorRGBVariable)
 {
-  oahColorRGBAtom* o = new
+  oahColorRGBAtom* obj = new
     oahColorRGBAtom (
       longName,
       shortName,
@@ -8669,8 +8665,8 @@ S_oahColorRGBAtom oahColorRGBAtom::create (
       valueSpecification,
       variableName,
       colorRGBVariable);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 oahColorRGBAtom::oahColorRGBAtom (
@@ -8878,7 +8874,7 @@ std::ostream& operator << (std::ostream& os, const S_oahColorRGBAtom& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -8893,7 +8889,7 @@ S_oahIntSetElementAtom oahIntSetElementAtom::create (
   const std::string& variableName,
   std::set<int>&     intSetVariable)
 {
-  oahIntSetElementAtom* o = new
+  oahIntSetElementAtom* obj = new
     oahIntSetElementAtom (
       longName,
       shortName,
@@ -8901,8 +8897,8 @@ S_oahIntSetElementAtom oahIntSetElementAtom::create (
       valueSpecification,
       variableName,
       intSetVariable);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 oahIntSetElementAtom::oahIntSetElementAtom (
@@ -9245,7 +9241,7 @@ std::ostream& operator << (std::ostream& os, const S_oahIntSetElementAtom& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -9260,7 +9256,7 @@ S_oahStringSetElementAtom oahStringSetElementAtom::create (
   const std::string&     variableName,
   std::set<std::string>& stringSetVariable)
 {
-  oahStringSetElementAtom* o = new
+  oahStringSetElementAtom* obj = new
     oahStringSetElementAtom (
       longName,
       shortName,
@@ -9268,8 +9264,8 @@ S_oahStringSetElementAtom oahStringSetElementAtom::create (
       valueSpecification,
       variableName,
       stringSetVariable);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 oahStringSetElementAtom::oahStringSetElementAtom (
@@ -9576,7 +9572,7 @@ std::ostream& operator << (std::ostream& os, const S_oahStringSetElementAtom& el
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -9591,7 +9587,7 @@ S_oahStringToIntMapElementAtom oahStringToIntMapElementAtom::create (
   const std::string&     variableName,
   std::map<std::string, int>& stringToIntMapVariable)
 {
-  oahStringToIntMapElementAtom* o = new
+  oahStringToIntMapElementAtom* obj = new
     oahStringToIntMapElementAtom (
       longName,
       shortName,
@@ -9599,8 +9595,8 @@ S_oahStringToIntMapElementAtom oahStringToIntMapElementAtom::create (
       valueSpecification,
       variableName,
       stringToIntMapVariable);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 oahStringToIntMapElementAtom::oahStringToIntMapElementAtom (
@@ -9976,7 +9972,7 @@ std::ostream& operator << (std::ostream& os, const S_oahStringToIntMapElementAto
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -9991,7 +9987,7 @@ S_oahStringToStringMapElementAtom oahStringToStringMapElementAtom::create (
   const std::string&                  variableName,
   std::map<std::string, std::string>& stringToStringMapVariable)
 {
-  oahStringToStringMapElementAtom* o = new
+  oahStringToStringMapElementAtom* obj = new
     oahStringToStringMapElementAtom (
       longName,
       shortName,
@@ -9999,8 +9995,8 @@ S_oahStringToStringMapElementAtom oahStringToStringMapElementAtom::create (
       valueSpecification,
       variableName,
       stringToStringMapVariable);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 oahStringToStringMapElementAtom::oahStringToStringMapElementAtom (
@@ -10375,7 +10371,7 @@ std::ostream& operator << (std::ostream& os, const S_oahStringToStringMapElement
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -10390,7 +10386,7 @@ S_oahStringToStringMultiMapElementAtom oahStringToStringMultiMapElementAtom::cre
   const std::string&                       variableName,
   std::multimap<std::string, std::string>& stringToStringMultiMapVariable)
 {
-  oahStringToStringMultiMapElementAtom* o = new
+  oahStringToStringMultiMapElementAtom* obj = new
     oahStringToStringMultiMapElementAtom (
       longName,
       shortName,
@@ -10398,8 +10394,8 @@ S_oahStringToStringMultiMapElementAtom oahStringToStringMultiMapElementAtom::cre
       valueSpecification,
       variableName,
       stringToStringMultiMapVariable);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 oahStringToStringMultiMapElementAtom::oahStringToStringMultiMapElementAtom (
@@ -10775,7 +10771,7 @@ std::ostream& operator << (std::ostream& os, const S_oahStringToStringMultiMapEl
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -10792,7 +10788,7 @@ S_oahStringAndIntegerAtom oahStringAndIntegerAtom::create (
   const std::string& integerVariableName,
   int&               integerVariable)
 {
-  oahStringAndIntegerAtom* o = new
+  oahStringAndIntegerAtom* obj = new
     oahStringAndIntegerAtom (
       longName,
       shortName,
@@ -10802,8 +10798,8 @@ S_oahStringAndIntegerAtom oahStringAndIntegerAtom::create (
       stringVariable,
       integerVariableName,
       integerVariable);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 oahStringAndIntegerAtom::oahStringAndIntegerAtom (
@@ -11150,7 +11146,7 @@ std::ostream& operator << (std::ostream& os, const S_oahStringAndIntegerAtom& el
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -11167,7 +11163,7 @@ S_oahStringAndTwoIntegersAtom oahStringAndTwoIntegersAtom::create ( // UNUSED JM
   int&                primaryIntegerVariable,
   int&                secondaryIntegerVariable)
 {
-  oahStringAndTwoIntegersAtom* o = new
+  oahStringAndTwoIntegersAtom* obj = new
     oahStringAndTwoIntegersAtom (
       longName,
       shortName,
@@ -11177,8 +11173,8 @@ S_oahStringAndTwoIntegersAtom oahStringAndTwoIntegersAtom::create ( // UNUSED JM
       stringVariable,
       primaryIntegerVariable,
       secondaryIntegerVariable);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 oahStringAndTwoIntegersAtom::oahStringAndTwoIntegersAtom (
@@ -11558,7 +11554,7 @@ std::ostream& operator << (std::ostream& os, const S_oahStringAndTwoIntegersAtom
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -11573,7 +11569,7 @@ S_oahLengthUnitKindAtom oahLengthUnitKindAtom::create (
   const std::string& variableName,
   msrLengthUnitKind& lengthUnitKindVariable)
 {
-  oahLengthUnitKindAtom* o = new
+  oahLengthUnitKindAtom* obj = new
     oahLengthUnitKindAtom (
       longName,
       shortName,
@@ -11581,8 +11577,8 @@ S_oahLengthUnitKindAtom oahLengthUnitKindAtom::create (
       valueSpecification,
       variableName,
       lengthUnitKindVariable);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 oahLengthUnitKindAtom::oahLengthUnitKindAtom (
@@ -11846,7 +11842,7 @@ std::ostream& operator << (std::ostream& os, const S_oahLengthUnitKindAtom& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -11861,7 +11857,7 @@ S_oahLengthAtom oahLengthAtom::create (
   const std::string& variableName,
   msrLength&         lengthVariable)
 {
-  oahLengthAtom* o = new
+  oahLengthAtom* obj = new
     oahLengthAtom (
       longName,
       shortName,
@@ -11869,8 +11865,8 @@ S_oahLengthAtom oahLengthAtom::create (
       valueSpecification,
       variableName,
       lengthVariable);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 oahLengthAtom::oahLengthAtom (
@@ -12179,7 +12175,7 @@ std::ostream& operator << (std::ostream& os, const S_oahLengthAtom& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -12194,7 +12190,7 @@ S_oahMidiTempoAtom oahMidiTempoAtom::create (
   const std::string& variableName,
   msrMidiTempo&      midiTempoVariable)
 {
-  oahMidiTempoAtom* o = new
+  oahMidiTempoAtom* obj = new
     oahMidiTempoAtom (
       longName,
       shortName,
@@ -12202,8 +12198,8 @@ S_oahMidiTempoAtom oahMidiTempoAtom::create (
       valueSpecification,
       variableName,
       midiTempoVariable);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 oahMidiTempoAtom::oahMidiTempoAtom (
@@ -12539,7 +12535,7 @@ std::ostream& operator << (std::ostream& os, const S_oahMidiTempoAtom& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -12555,7 +12551,7 @@ S_oahOptionNameHelpAtom oahOptionNameHelpAtom::create (
   std::string&       stringVariable,
   const std::string& defaultOptionName)
 {
-  oahOptionNameHelpAtom* o = new
+  oahOptionNameHelpAtom* obj = new
     oahOptionNameHelpAtom (
       longName,
       shortName,
@@ -12564,8 +12560,8 @@ S_oahOptionNameHelpAtom oahOptionNameHelpAtom::create (
       variableName,
       stringVariable,
       defaultOptionName);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 oahOptionNameHelpAtom::oahOptionNameHelpAtom (
@@ -12772,7 +12768,7 @@ std::ostream& operator << (std::ostream& os, const S_oahOptionNameHelpAtom& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -12786,15 +12782,15 @@ S_oahQueryOptionNameAtom oahQueryOptionNameAtom::create (
   const std::string& valueSpecification,
   const std::string& serviceName)
 {
-  oahQueryOptionNameAtom* o = new
+  oahQueryOptionNameAtom* obj = new
     oahQueryOptionNameAtom (
       longName,
       shortName,
       description,
       valueSpecification,
       serviceName);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 oahQueryOptionNameAtom::oahQueryOptionNameAtom (
@@ -12985,7 +12981,7 @@ std::ostream& operator << (std::ostream& os, const S_oahQueryOptionNameAtom& elt
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -12996,12 +12992,12 @@ S_oahFindStringResult oahFindStringResult::create (
   const std::string&  theString,
   const S_oahElement& theElement)
 {
-  oahFindStringResult* o = new
+  oahFindStringResult* obj = new
     oahFindStringResult (
       theString,
       theElement);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 oahFindStringResult::oahFindStringResult (
@@ -13056,7 +13052,7 @@ std::ostream& operator << (std::ostream& os, const S_oahFindStringResult& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -13070,15 +13066,15 @@ S_oahFindStringAtom oahFindStringAtom::create (
   const std::string& valueSpecification,
   const std::string& serviceName)
 {
-  oahFindStringAtom* o = new
+  oahFindStringAtom* obj = new
     oahFindStringAtom (
       longName,
       shortName,
       description,
       valueSpecification,
       serviceName);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 oahFindStringAtom::oahFindStringAtom (
@@ -13361,7 +13357,7 @@ std::ostream& operator << (std::ostream& os, const S_oahFindStringAtom& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -13375,15 +13371,15 @@ S_oahIncludeOptionsAndArgumentsFileAtom oahIncludeOptionsAndArgumentsFileAtom::c
   const std::string& valueSpecification,
   const std::string& serviceName)
 {
-  oahIncludeOptionsAndArgumentsFileAtom* o = new
+  oahIncludeOptionsAndArgumentsFileAtom* obj = new
     oahIncludeOptionsAndArgumentsFileAtom (
       longName,
       shortName,
       description,
       valueSpecification,
       serviceName);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 oahIncludeOptionsAndArgumentsFileAtom::oahIncludeOptionsAndArgumentsFileAtom (
@@ -13576,7 +13572,7 @@ std::ostream& operator << (std::ostream& os, const S_oahIncludeOptionsAndArgumen
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

@@ -38,14 +38,14 @@ S_msdl2musicxmlRegularHandler msdl2musicxmlRegularHandler::create (
                     insiderOahHandler)
 {
   // create the regular handler
-  msdl2musicxmlRegularHandler* o = new
+  msdl2musicxmlRegularHandler* obj = new
     msdl2musicxmlRegularHandler (
       serviceName,
       handlerHeader,
       insiderOahHandler);
-  assert (o!=0);
+  assert (obj!=0);
 
-  return o;
+  return obj;
 }
 
 msdl2musicxmlRegularHandler::msdl2musicxmlRegularHandler (
@@ -1307,7 +1307,7 @@ std::ostream& operator << (std::ostream& os, const S_msdl2musicxmlRegularHandler
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

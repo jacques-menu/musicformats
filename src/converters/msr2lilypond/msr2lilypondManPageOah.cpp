@@ -33,14 +33,14 @@ S_msr2lilypondManPageGenerateAtom msr2lilypondManPageGenerateAtom::create (
   const std::string&  description,
   const S_oahVisitor& theOahVisitor)
 {
-  msr2lilypondManPageGenerateAtom* o = new
+  msr2lilypondManPageGenerateAtom* obj = new
     msr2lilypondManPageGenerateAtom (
       longName,
       shortName,
       description,
       theOahVisitor);
-  assert (o!=0);
-  return o;
+  assert (obj!=0);
+  return obj;
 }
 
 msr2lilypondManPageGenerateAtom::msr2lilypondManPageGenerateAtom (
@@ -211,7 +211,7 @@ std::ostream& operator << (std::ostream& os, const S_msr2lilypondManPageGenerate
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -223,10 +223,10 @@ S_msr2lilypondManPageOahGroup gGlobalMsr2lilypondManPageOahGroup;
 S_msr2lilypondManPageOahGroup msr2lilypondManPageOahGroup::create (
   const S_oahVisitor& theOah2manPage)
 {
-  msr2lilypondManPageOahGroup* o = new msr2lilypondManPageOahGroup (
+  msr2lilypondManPageOahGroup* obj = new msr2lilypondManPageOahGroup (
     theOah2manPage);
-  assert (o!=0);
-  return o;
+  assert (obj!=0);
+  return obj;
 }
 
 msr2lilypondManPageOahGroup::msr2lilypondManPageOahGroup (
@@ -446,7 +446,7 @@ std::ostream& operator << (std::ostream& os, const S_msr2lilypondManPageOahGroup
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

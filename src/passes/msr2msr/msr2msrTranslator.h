@@ -709,7 +709,7 @@ class EXP msr2msrTranslator :
 
     void                      displayPartHiddenMeasureAndBarLineDescrList ();
 
-    void                      handlePartHiddenMeasureAndBarLineDescrList ();
+    void                      handlePartHiddenMeasureAndBarLineDescrList (); // SUPERFLOUS JMI ??? v0.9.67
 
 
     // harmonies

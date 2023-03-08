@@ -51,14 +51,14 @@ S_msdlConverterRegularHandler msdlConverterRegularHandler::create (
                      multiGenerationOutputKind)
 {
   // create the regular handler
-  msdlConverterRegularHandler* o = new
+  msdlConverterRegularHandler* obj = new
     msdlConverterRegularHandler (
       serviceName,
       handlerHeader,
       insiderOahHandler,
       multiGenerationOutputKind);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 msdlConverterRegularHandler::msdlConverterRegularHandler (
@@ -147,7 +147,7 @@ void msdlConverterRegularHandler::createRegularHandlerGroups ()
   */
 
   switch (fMultiGenerationOutputKind) {
-    case mfMultiGenerationOutputKind::kGeneration_UNKNOWN:
+    case mfMultiGenerationOutputKind::kGeneration_UNKNOWN_:
       // should not occur, unless the run is a pure help one
       break;
 
@@ -529,7 +529,7 @@ void msdlConverterRegularHandler::createOahRegularGroup ()
 
   // atoms from the insider handler depending on the generated output kind
   switch (fMultiGenerationOutputKind) {
-    case mfMultiGenerationOutputKind::kGeneration_UNKNOWN:
+    case mfMultiGenerationOutputKind::kGeneration_UNKNOWN_:
       // should not occur, unless the run is a pure help one
       break;
 
@@ -1526,7 +1526,7 @@ std::ostream& operator << (std::ostream& os, const S_msdlConverterRegularHandler
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

@@ -32,11 +32,11 @@ namespace MusicFormats
 S_bsrMusicHeading bsrMusicHeading::create (
   int inputLineNumber)
 {
-  bsrMusicHeading* o =
+  bsrMusicHeading* obj =
     new bsrMusicHeading (
       inputLineNumber);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 bsrMusicHeading::bsrMusicHeading (
@@ -228,7 +228,7 @@ std::string bsrMusicHeading::asString () const
   }
   else {
     ss <<
-      "[NONE]";
+      "[NULL]";
   }
 
   ss <<
@@ -240,7 +240,7 @@ std::string bsrMusicHeading::asString () const
   }
   else {
     ss <<
-      "[NONE]";
+      "[NULL]";
   }
 
   ss <<
@@ -252,7 +252,7 @@ std::string bsrMusicHeading::asString () const
   }
   else {
     ss <<
-      "[NONE]";
+      "[NULL]";
   }
 
   ss <<
@@ -308,7 +308,7 @@ void bsrMusicHeading::print (std::ostream& os) const
   }
   else {
     os <<
-      "[NONE]" <<
+      "[NULL]" <<
       std::endl;
   }
 
@@ -326,7 +326,7 @@ void bsrMusicHeading::print (std::ostream& os) const
   }
   else {
     os <<
-      "[NONE]" <<
+      "[NULL]" <<
       std::endl;
   }
 
@@ -344,7 +344,7 @@ void bsrMusicHeading::print (std::ostream& os) const
   }
   else {
     os <<
-      "[NONE]" <<
+      "[NULL]" <<
       std::endl;
   }
 
@@ -366,7 +366,7 @@ std::ostream& operator << (std::ostream& os, const S_bsrMusicHeading& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

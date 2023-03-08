@@ -59,7 +59,7 @@ std::ostream& operator << (std::ostream& os, const msrTechnicalAccidentalMarkKin
 */
 
 enum class msrTechnicalTypeKind { // JMI ???
-  kTechnicalType_UNKNOWN,
+  kTechnicalType_UNKNOWN_,
   kTechnicalTypeStart, kTechnicalTypeStop
 };
 

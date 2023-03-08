@@ -40,11 +40,11 @@ S_msrDivisions msrDivisions::create (
   int inputLineNumber,
   int divisionsPerQuarterNote)
 {
-  msrDivisions* o =
+  msrDivisions* obj =
     new msrDivisions (
       inputLineNumber, divisionsPerQuarterNote);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 S_msrDivisions msrDivisions::createDivisionsNewbornClone ()
@@ -643,7 +643,7 @@ std::ostream& operator << (std::ostream& os, const S_msrDivisions& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

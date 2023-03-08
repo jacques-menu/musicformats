@@ -29,12 +29,12 @@ S_lpsrNewLyricsBlock lpsrNewLyricsBlock::create (
   const S_msrStanza& stanza,
   const S_msrVoice&  voice)
 {
-  lpsrNewLyricsBlock* o =
+  lpsrNewLyricsBlock* obj =
     new lpsrNewLyricsBlock (
       inputLineNumber,
       stanza, voice);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 lpsrNewLyricsBlock::lpsrNewLyricsBlock (

@@ -22,8 +22,6 @@
 
 #include "lpsrWae.h"
 
-#include "mfStaticSettings.h"
-
 #include "oahEarlyOptions.h"
 
 #include "oahOah.h"

@@ -36,11 +36,11 @@ S_bsrTranscriptionNotesElement bsrTranscriptionNotesElement::create (
   int           inputLineNumber,
   const std::string& transcriptionNoteText)
 {
-  bsrTranscriptionNotesElement* o =
+  bsrTranscriptionNotesElement* obj =
     new bsrTranscriptionNotesElement (
       inputLineNumber, transcriptionNoteText);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 bsrTranscriptionNotesElement::bsrTranscriptionNotesElement (
@@ -179,7 +179,7 @@ std::ostream& operator << (std::ostream& os, const S_bsrTranscriptionNotesElemen
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -189,11 +189,11 @@ std::ostream& operator << (std::ostream& os, const S_bsrTranscriptionNotesElemen
 S_bsrTranscriptionNotes bsrTranscriptionNotes::create (
   int inputLineNumber)
 {
-  bsrTranscriptionNotes* o =
+  bsrTranscriptionNotes* obj =
     new bsrTranscriptionNotes (
       inputLineNumber);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 bsrTranscriptionNotes::bsrTranscriptionNotes (
@@ -351,7 +351,7 @@ std::ostream& operator << (std::ostream& os, const S_bsrTranscriptionNotes& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

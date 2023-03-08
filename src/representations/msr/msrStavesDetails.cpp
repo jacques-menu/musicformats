@@ -13,8 +13,6 @@
 #include <sstream>
 #include <iomanip>      // std::setw, std::setprecision, ...
 
-#include "mfStaticSettings.h"
-
 #include "visitor.h"
 
 #include "mfStaticSettings.h"
@@ -125,14 +123,14 @@ S_msrStaffTuning msrStaffTuning::create (
   msrQuarterTonesPitchKind staffTuningQuarterTonesPitchKind,
   msrOctaveKind            staffTuningOctaveKind)
 {
-  msrStaffTuning* o =
+  msrStaffTuning* obj =
     new msrStaffTuning (
       inputLineNumber,
       staffTuningLineNumber,
       staffTuningQuarterTonesPitchKind,
       staffTuningOctaveKind);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 msrStaffTuning::msrStaffTuning (
@@ -316,7 +314,7 @@ std::ostream& operator << (std::ostream& os, const S_msrStaffTuning& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -331,7 +329,7 @@ S_msrStaffDetails msrStaffDetails::create (
   msrPrintObjectKind  printObjectKind,
   msrPrintSpacingKind printSpacingKind)
 {
-  msrStaffDetails* o =
+  msrStaffDetails* obj =
     new msrStaffDetails (
       inputLineNumber,
       upLinkToMeasure,
@@ -339,8 +337,8 @@ S_msrStaffDetails msrStaffDetails::create (
       showFretsKind,
       printObjectKind,
       printSpacingKind);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 S_msrStaffDetails msrStaffDetails::create (
@@ -602,7 +600,7 @@ std::ostream& operator << (std::ostream& os, const S_msrStaffDetails& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

@@ -37,11 +37,11 @@ namespace MusicFormats
 S_lpsrNewStaffgroupBlock lpsrNewStaffgroupBlock::create (
   int inputLineNumber)
 {
-  lpsrNewStaffgroupBlock* o =
+  lpsrNewStaffgroupBlock* obj =
     new lpsrNewStaffgroupBlock (
       inputLineNumber);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 lpsrNewStaffgroupBlock::lpsrNewStaffgroupBlock (
@@ -157,11 +157,11 @@ S_lpsrNewStaffTuningBlock lpsrNewStaffTuningBlock::create (
   int                     inputLineNumber,
   const S_msrStaffTuning& staffTuning)
 {
-  lpsrNewStaffTuningBlock* o =
+  lpsrNewStaffTuningBlock* obj =
     new lpsrNewStaffTuningBlock (
       inputLineNumber, staffTuning);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 lpsrNewStaffTuningBlock::lpsrNewStaffTuningBlock (
@@ -276,11 +276,11 @@ std::ostream& operator << (std::ostream& os, const S_lpsrNewStaffTuningBlock& ns
 S_lpsrNewStaffBlock lpsrNewStaffBlock::create (
   int inputLineNumber)
 {
-  lpsrNewStaffBlock* o =
+  lpsrNewStaffBlock* obj =
     new lpsrNewStaffBlock (
       inputLineNumber);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 lpsrNewStaffBlock::lpsrNewStaffBlock (
@@ -395,10 +395,10 @@ std::ostream& operator << (std::ostream& os, const S_lpsrNewStaffBlock& nstf)
 S_lpsrStaffBlock lpsrStaffBlock::create (
   const S_msrStaff& staff)
 {
-  lpsrStaffBlock* o = new lpsrStaffBlock (
+  lpsrStaffBlock* obj = new lpsrStaffBlock (
     staff);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 lpsrStaffBlock::lpsrStaffBlock (

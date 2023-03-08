@@ -41,7 +41,7 @@ typedef SMARTP<msrHarmony> S_msrHarmony;
 // harmonies
 //______________________________________________________________________________
 enum class msrHarmonyKind {
-  kHarmony_UNKNOWN,
+  kHarmony_UNKNOWN_,
 
   // MusicXML harmonies
 
@@ -91,7 +91,7 @@ enum class msrHarmonyKind {
   // aliases
   // ------------------------------------
 
-  AllFirst = kHarmony_UNKNOWN,
+  AllFirst = kHarmony_UNKNOWN_,
   AllLast  = kHarmonyNone,
 
   TrueHarmoniesFirst = kHarmonyMajor,
@@ -787,7 +787,7 @@ class EXP msrHarmonyContents : public smartable
                             int inversionNumber);
 
     static void           printAllHarmoniesContents (
-                            std::ostream&              os,
+                            std::ostream&         os,
                             msrSemiTonesPitchKind semiTonesPitchKind);
 
   public:
@@ -824,12 +824,12 @@ EXP std::ostream& operator << (std::ostream& os, const S_msrHarmonyContents& elt
 // harmonies details and analysis
 //______________________________________________________________________________
 void printHarmonyDetails (
-  std::ostream&              os,
+  std::ostream&         os,
   msrSemiTonesPitchKind rootSemiTonesPitchKind,
   msrHarmonyKind        harmonyKind);
 
 void printHarmonyAnalysis (
-  std::ostream&              os,
+  std::ostream&         os,
   msrSemiTonesPitchKind rootSemiTonesPitchKind,
   msrHarmonyKind        harmonyKind,
   int                   inversion);

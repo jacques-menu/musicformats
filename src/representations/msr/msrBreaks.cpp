@@ -12,8 +12,6 @@
 #include <iostream>
 #include <sstream>
 
-#include "mfStaticSettings.h"
-
 #include "visitor.h"
 
 #include "mfStaticSettings.h"
@@ -60,14 +58,14 @@ S_msrLineBreak msrLineBreak::create (
   msrUserSelectedLineBreakKind
                       userSelectedLineBreakKind)
 {
-  msrLineBreak* o =
+  msrLineBreak* obj =
     new msrLineBreak (
       inputLineNumber,
       upLinkToMeasure,
       nextBarNumber,
       userSelectedLineBreakKind);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 S_msrLineBreak msrLineBreak::create (
@@ -254,7 +252,7 @@ std::ostream& operator << (std::ostream& os, const S_msrLineBreak& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -285,13 +283,13 @@ S_msrPageBreak msrPageBreak::create (
   msrUserSelectedPageBreakKind
                       userSelectedPageBreakKind)
 {
-  msrPageBreak* o =
+  msrPageBreak* obj =
     new msrPageBreak (
       inputLineNumber,
       upLinkToMeasure,
       userSelectedPageBreakKind);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 S_msrPageBreak msrPageBreak::create (
@@ -472,7 +470,7 @@ std::ostream& operator << (std::ostream& os, const S_msrPageBreak& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

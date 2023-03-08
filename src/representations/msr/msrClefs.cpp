@@ -52,8 +52,8 @@ std::string msrClefKindAsString (
   std::string result;
 
   switch (clefKind) {
-    case msrClefKind::kClef_UNKNOWN:
-      result = "kClef_UNKNOWN";
+    case msrClefKind::kClef_UNKNOWN_:
+      result = "kClef_UNKNOWN_";
       break;
     case msrClefKind::kClefTreble:
       result = "kClefTreble";
@@ -139,7 +139,7 @@ msrClefKind msrClefKindFromString (
   int           inputLineNumber,
   const std::string& clefString)
 {
-  msrClefKind result = msrClefKind::kClef_UNKNOWN;
+  msrClefKind result = msrClefKind::kClef_UNKNOWN_;
 
   if      (clefString == "treble")
     result = msrClefKind::kClefTreble;
@@ -366,14 +366,14 @@ S_msrClef msrClef::create (
   msrClefKind         clefKind,
   int                 clefStaffNumber)
 {
-  msrClef* o =
+  msrClef* obj =
     new msrClef (
       inputLineNumber,
       upLinkToMeasure,
       clefKind,
       clefStaffNumber);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 S_msrClef msrClef::create (
@@ -721,7 +721,7 @@ std::ostream& operator << (std::ostream& os, const S_msrClef& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

@@ -366,7 +366,7 @@ char \X6B (1 3     )  # 107   k  latin small letter k
 char \X6C (123     )  # 108   l  latin small letter l
 char \X6D (1 34    )  # 109   m  latin small letter m
 char \X6E (1 345   )  # 110   n  latin small letter n
-char \X6F (1 3 5   )  # 111   o  latin small letter o
+char \X6F (1 3 5   )  # 111   obj  latin small letter obj
 char \X70 (1234    )  # 112   p  latin small letter p
 char \X71 (12345   )  # 113   q  latin small letter q
 char \X72 (123 5   )  # 114   r  latin small letter r
@@ -397,7 +397,7 @@ char \X4B (1 3   7 )  #  75   K  latin capital letter k
 char \X4C (123   7 )  #  76   L  latin capital letter l
 char \X4D (1 34  7 )  #  77   M  latin capital letter m
 char \X4E (1 345 7 )  #  78   N  latin capital letter n
-char \X4F (1 3 5 7 )  #  79   O  latin capital letter o
+char \X4F (1 3 5 7 )  #  79   O  latin capital letter obj
 char \X50 (1234  7 )  #  80   P  latin capital letter p
 char \X51 (12345 7 )  #  81   Q  latin capital letter q
 char \X52 (123 5 7 )  #  82   R  latin capital letter r
@@ -569,12 +569,12 @@ char \X9F (   456 8)  # 159  ~_  application program command
 char \XC2 ( 2    78)  # 194   ?  latin capital letter a with circumflex
 char \XCA ( 23   78)  # 202   ?  latin capital letter e with circumflex
 char \XCE ( 2  5 78)  # 206   ?  latin capital letter i with circumflex
-char \XD4 ( 2  5678)  # 212   ?  latin capital letter o with circumflex
+char \XD4 ( 2  5678)  # 212   ?  latin capital letter obj with circumflex
 char \XDB ( 2   678)  # 219   ?  latin capital letter u with circumflex
 char \XE2 ( 2     8)  # 226   ?  latin small letter a with circumflex
 char \XEA ( 23    8)  # 234   ?  latin small letter e with circumflex
 char \XEE ( 2  5  8)  # 238   ?  latin small letter i with circumflex
-char \XF4 ( 2  56 8)  # 244   ?  latin small letter o with circumflex
+char \XF4 ( 2  56 8)  # 244   ?  latin small letter obj with circumflex
 char \XFB ( 2   6 8)  # 251   ?  latin small letter u with circumflex
 
 # The 5 letters with a grave accent (`) use the [6-0] dot combinations:
@@ -583,12 +583,12 @@ char \XFB ( 2   6 8)  # 251   ?  latin small letter u with circumflex
 char \XC0 ( 23 5 78)  # 192   ?  latin capital letter a with grave
 char \XC8 ( 23 5678)  # 200   ?  latin capital letter e with grave
 char \XCC ( 23  678)  # 204   ?  latin capital letter i with grave
-char \XD2 (  3 5 78)  # 210   ?  latin capital letter o with grave
+char \XD2 (  3 5 78)  # 210   ?  latin capital letter obj with grave
 char \XD9 (  3 5678)  # 217   ?  latin capital letter u with grave
 char \XE0 ( 23 5  8)  # 224   ?  latin small letter a with grave
 char \XE8 ( 23 56 8)  # 232   ?  latin small letter e with grave
 char \XEC ( 23  6 8)  # 236   ?  latin small letter i with grave
-char \XF2 (  3 5  8)  # 242   ?  latin small letter o with grave
+char \XF2 (  3 5  8)  # 242   ?  latin small letter obj with grave
 char \XF9 (  3 56 8)  # 249   ?  latin small letter u with grave
 
 # The 6 letters with an acute accent (') use the [a-f] dot combinations with
@@ -598,13 +598,13 @@ char \XF9 (  3 56 8)  # 249   ?  latin small letter u with grave
 char \XC1 (1    678)  # 193   ?  latin capital letter a with acute
 char \XC9 (12   678)  # 201   ?  latin capital letter e with acute
 char \XCD (1  4 678)  # 205   ?  latin capital letter i with acute
-char \XD3 (1  45678)  # 211   ?  latin capital letter o with acute
+char \XD3 (1  45678)  # 211   ?  latin capital letter obj with acute
 char \XDA (1   5678)  # 218   ?  latin capital letter u with acute
 char \XDD (12 4 678)  # 221   ?  latin capital letter y with acute
 char \XE1 (1    6 8)  # 225   ?  latin small letter a with acute
 char \XE9 (12   6 8)  # 233   ?  latin small letter e with acute
 char \XED (1  4 6 8)  # 237   ?  latin small letter i with acute
-char \XF3 (1  456 8)  # 243   ?  latin small letter o with acute
+char \XF3 (1  456 8)  # 243   ?  latin small letter obj with acute
 char \XFA (1   56 8)  # 250   ?  latin small letter u with acute
 char \XFD (12 4 6 8)  # 253   ?  latin small letter y with acute
 
@@ -616,12 +616,12 @@ char \XFD (12 4 6 8)  # 253   ?  latin small letter y with acute
 char \XC4 (1234 678)  # 196   ?  latin capital letter a with diaeresis
 char \XCB (12345678)  # 203   ?  latin capital letter e with diaeresis
 char \XCF (123 5678)  # 207   ?  latin capital letter i with diaeresis
-char \XD6 ( 234 678)  # 214   ?  latin capital letter o with diaeresis
+char \XD6 ( 234 678)  # 214   ?  latin capital letter obj with diaeresis
 char \XDC ( 2345678)  # 220   ?  latin capital letter u with diaeresis
 char \XE4 (1234 6 8)  # 228   ?  latin small letter a with diaeresis
 char \XEB (123456 8)  # 235   ?  latin small letter e with diaeresis
 char \XEF (123 56 8)  # 239   ?  latin small letter i with diaeresis
-char \XF6 ( 234 6 8)  # 246   ?  latin small letter o with diaeresis
+char \XF6 ( 234 6 8)  # 246   ?  latin small letter obj with diaeresis
 char \XFC ( 23456 8)  # 252   ?  latin small letter u with diaeresis
 char \XFF (  3456 8)  # 255   ?  latin small letter y with diaeresis
 
@@ -637,19 +637,19 @@ char \XDF (  345678)  # 223   ?  latin small letter sharp s
      #Hex    Dots       Dec Char Description
 char \XC3 (    5 78)  # 195   ?  latin capital letter a with tilde
 char \XD1 (   4 678)  # 209   ?  latin capital letter n with tilde
-char \XD5 (    5678)  # 213   ?  latin capital letter o with tilde
+char \XD5 (    5678)  # 213   ?  latin capital letter obj with tilde
 char \XC5 (  345 78)  # 197   ?  latin capital letter a with ring above
 char \XC7 (  34 678)  # 199   ?  latin capital letter c with cedilla
-char \XD8 (  34  78)  # 216   ?  latin capital letter o with stroke
+char \XD8 (  34  78)  # 216   ?  latin capital letter obj with stroke
 char \XC6 (  3   78)  # 198   ?  latin capital letter ae
 char \XD0 (     678)  # 208   ?  latin capital letter eth
 char \XDE (  3  678)  # 222   ?  latin capital letter thorn
 char \XE3 (    5  8)  # 227   ?  latin small letter a with tilde
 char \XF1 (   4 6 8)  # 241   ?  latin small letter n with tilde
-char \XF5 (    56 8)  # 245   ?  latin small letter o with tilde
+char \XF5 (    56 8)  # 245   ?  latin small letter obj with tilde
 char \XE5 (  345  8)  # 229   ?  latin small letter a with ring above
 char \XE7 (  34 6 8)  # 231   ?  latin small letter c with cedilla
-char \XF8 (  34   8)  # 248   ?  latin small letter o with stroke
+char \XF8 (  34   8)  # 248   ?  latin small letter obj with stroke
 char \XE6 (  3    8)  # 230   ?  latin small letter ae
 char \XF0 (     6 8)  # 240   ?  latin small letter eth
 char \XFE (  3  6 8)  # 254   ?  latin small letter thorn

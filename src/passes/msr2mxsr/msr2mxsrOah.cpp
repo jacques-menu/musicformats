@@ -40,9 +40,9 @@ S_msr2mxsrOahGroup gGlobalMsr2mxsrOahGroup;
 
 S_msr2mxsrOahGroup msr2mxsrOahGroup::create ()
 {
-  msr2mxsrOahGroup* o = new msr2mxsrOahGroup ();
-  assert (o != nullptr);
-  return o;
+  msr2mxsrOahGroup* obj = new msr2mxsrOahGroup ();
+  assert (obj != nullptr);
+  return obj;
 }
 
 msr2mxsrOahGroup::msr2mxsrOahGroup ()
@@ -330,7 +330,7 @@ std::ostream& operator << (std::ostream& os, const S_msr2mxsrOahGroup& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

@@ -2,6 +2,8 @@
 # Makefile for testing the musicformats library' xml2ly (or musicxml2ly, by the way)
 #
 
+# SHELL := bash
+
 xmlfiles          = $(shell find . -name "*.xml")
 xmllily           = $(shell find . -name "*.xml")
 
@@ -34,6 +36,7 @@ LILYPOND  ?= /opt/local/bin/lilypond
 .PHONY: lilyignored lily
 .DELETE_ON_ERROR:
 
+#########################################################################
 all:
 	@echo "XML2LY   = $(XML2LY)"
 	@echo "OPTIONS  = $(OPTIONS)"
@@ -75,12 +78,7 @@ all:
 
 	@$(MAKE) pdflily
 
-clean:
-	@[ ! -d lilypond ] || rm -r lilypond
-	@[ ! -d pdflily ]  || rm -r pdflily
-	@[ ! -d pnglilyv ] || rm -r pnglily
-	rm *.ly *.pdf *.midi
-
+#########################################################################
 help:
 	@echo "Makefile for converting MusicXML files to LilyPond scores."
 	@echo "Supplied as part of the MusicFormats library, thanks to Dom Fober for providing it."
@@ -97,7 +95,9 @@ help:
 	@echo "  'pslily'        : converts the output of 'lily' target to ps  in folder pslily"
 	@echo "  'epslily'       : converts the output of 'lily' target to eps in folder epslily"
 	@echo
-	@echo "  'clean'         : removes the sub-folders containing the results"
+	@echo "  'check'         : displays which files failed to be translated into folder pdflily"
+	@echo
+	@echo "  'clean'         : removes the xml2ly-generated files in this folder and its sub-folders"
 	@echo
 	@echo "Make variables:"
 	@echo "  XML2LY=/path/to/xml2ly"
@@ -107,6 +107,38 @@ help:
 	@echo
 	@echo "  OPTIONS=..."
 	@echo "  By default, OPTIONS contains '-q' (quiet mode), for use by xml2ly."
+
+#########################################################################
+clean:
+	@[ ! -d lilypond ] || rm -r lilypond
+	@[ ! -d pdflily ]  || rm -r pdflily
+	@[ ! -d pnglilyv ] || rm -r pnglily
+	rm *.ly *.pdf *.midi
+
+#########################################################################
+# https://www.gnu.org/software/make/manual/html_node/Foreach-Function.html
+
+MUSICXML_FILES        := @ls *.xml
+MUSICXML_FILES_NUMBER := @(ls -sal *.xml | wc -l)
+
+check:
+	@printf "%s %s " "There are"
+	@(ls -sal *.xml | wc -l)
+	@printf " MusicXML files"
+	@(ls -sal *.xml)
+	@echo
+	@printf "There are "
+	@(ls -sal lilypond/*.ly | wc -l)
+	@printf " LilyPond files"
+	@(ls -sal lilypond/*.ly)
+	@echo
+	@printf "There are "
+	@(ls -sal pdflily/*.pdf | wc -l)
+	@printf " PDF files"
+	@(ls -sal pdflily/*.pdf)
+	@echo
+	@echo "Files not translated:"
+	$(foreach FILE,$(MUSICXML_FILES),@echo $(FILE))
 
 #########################################################################
 lily:
@@ -170,11 +202,11 @@ pdflily:
 	@echo
 
 	@echo "Contents of lilypond sub-folder:"
-	@[[ -d lilypond ]] &&  ls -sal lilypond/*.ly
+	@[[ -d lilypond ]] && ls -sal lilypond/*.ly
 	@echo
 
 	@echo "Contents of pdflily sub-folder:"
-	@[[ -d pdflily ]] &&  ls -sal pdflily/*.pdf
+	@[[ -d pdflily ]] && ls -sal pdflily/*.pdf
 dopdflily: $(pdflily)
 
 pdflilyclean:
@@ -244,7 +276,7 @@ lilypond/%.ly: ./%.xml
 
 #lilyignored/%.ly: ./%.xml
 #	@[ -d $(@D) ] || mkdir -p $(@D)
-#	$(XML2LY) -q -o $@ $<  || true
+#	$(XML2LY) -q -o $@ $< || true
 
 #########################################################################
 # rules for lilypond with pdf output
@@ -280,6 +312,6 @@ epslily/%.eps: lilypond/%.ly
 # rules for xml output validation
 %.outly: %.ly
 	$(eval tmp := $(patsubst %, %, $<))
-	@[ -f  $(tmp) ] || echo $< : new file
-	@diff $<  $(tmp) 2>/dev/null >/dev/null || ([ -f  $(tmp) ] && echo "open -t $< $(patsubst %, %, $<) # to check changes"; true)
+	@[ -f $(tmp) ] || echo $< : new file
+	@diff $< $(tmp) 2>/dev/null >/dev/null || ([ -f $(tmp) ] && echo "open -t $< $(patsubst %, %, $<) # to check changes"; true)
 

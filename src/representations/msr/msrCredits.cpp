@@ -36,8 +36,8 @@ std::string msrCreditTypeKindAsString (
   std::string result;
 
   switch (creditTypeKind) {
-    case msrCreditTypeKind::kCreditType_UNKNOWN:
-      result = "kCreditType_UNKNOWN";
+    case msrCreditTypeKind::kCreditType_UNKNOWN_:
+      result = "kCreditType_UNKNOWN_";
       break;
     case msrCreditTypeKind::kCreditTypeNumber:
       result = "kCreditTypeNumber";
@@ -92,7 +92,7 @@ S_msrCreditWords msrCreditWords::create (
   msrVerticalAlignmentKind   creditWordsVerticalAlignmentKind,
   msrXMLLangKind             creditWordsXMLLang)
 {
-  msrCreditWords* o =
+  msrCreditWords* obj =
     new msrCreditWords (
       inputLineNumber,
       creditWordsContents,
@@ -106,8 +106,8 @@ S_msrCreditWords msrCreditWords::create (
       creditWordsHorizontalAlignmentKind,
       creditWordsVerticalAlignmentKind,
       creditWordsXMLLang);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 msrCreditWords::msrCreditWords (
@@ -303,7 +303,7 @@ std::ostream& operator << (std::ostream& os, const S_msrCreditWords& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -314,11 +314,11 @@ S_msrCredit msrCredit::create (
   int inputLineNumber,
   int creditPageNumber)
 {
-  msrCredit* o =
+  msrCredit* obj =
     new msrCredit (
       inputLineNumber, creditPageNumber);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 msrCredit::msrCredit (
@@ -328,7 +328,7 @@ msrCredit::msrCredit (
 {
   fCreditPageNumber = creditPageNumber;
 
-  fCreditTypeKind = msrCreditTypeKind::kCreditType_UNKNOWN;  // default value
+  fCreditTypeKind = msrCreditTypeKind::kCreditType_UNKNOWN_;  // default value
 }
 
 msrCredit::~msrCredit ()
@@ -503,7 +503,7 @@ std::ostream& operator << (std::ostream& os, const S_msrCredit& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

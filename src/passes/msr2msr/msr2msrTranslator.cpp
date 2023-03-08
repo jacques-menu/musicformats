@@ -38,8 +38,6 @@
 
 #include "msr2msrWae.h"
 
-#include "mfStaticSettings.h"
-
 #include "msr2msrComponent.h"
 
 #include "msr2msrTranslator.h"
@@ -64,12 +62,12 @@ S_msrHiddenMeasureAndBarLineDescr msrHiddenMeasureAndBarLineDescr::create (
   int           inputLineNumber,
   S_msrDalSegno dalSegno)
 {
-  msrHiddenMeasureAndBarLineDescr* o = new
+  msrHiddenMeasureAndBarLineDescr* obj = new
     msrHiddenMeasureAndBarLineDescr (
       inputLineNumber,
       dalSegno);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 msrHiddenMeasureAndBarLineDescr::msrHiddenMeasureAndBarLineDescr (
@@ -116,7 +114,7 @@ std::ostream& operator << (std::ostream& os, const S_msrHiddenMeasureAndBarLineD
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -147,7 +145,7 @@ S_msrScore msr2msrTranslator::translateMsrToMsr (
   // create the resulting MSR score
   fResultingNewMsrScore =
     msrScore::create (
-      K_MF_INPUT_LINE_UNKNOWN,
+      K_MF_INPUT_LINE_UNKNOWN_,
       "msrScore::create()");
 
   // create a msrScore browser
@@ -186,7 +184,7 @@ S_msrScore msr2msrTranslator::translateMsrToMsrAlongPathToVoice (
   // create the resulting MSR score
   fResultingNewMsrScore =
     msrScore::create (
-      K_MF_INPUT_LINE_UNKNOWN,
+      K_MF_INPUT_LINE_UNKNOWN_,
       "msrScore::create()");
 
   // create a msrScore browser
@@ -2329,7 +2327,7 @@ void msr2msrTranslator::visitStart (S_msrSyllable& elt)
 //           words =
 //             msrWords::create (
 //               inputLineNumber,
-//               msrPlacementKind::kPlacement_UNKNOWN,                      // default value
+//               msrPlacementKind::kPlacement_UNKNOWN_,                      // default value
 //               wordsValue,
 //               msrJustifyKind::kJustifyNone,                         // default value
 //               msrHorizontalAlignmentKind::kHorizontalAlignmentNone, // default value
@@ -3207,7 +3205,7 @@ void msr2msrTranslator::visitStart (S_msrSpanner& elt)
       break;
     case msrSpannerTypeKind::kSpannerTypeContinue:
       break;
-    case msrSpannerTypeKind::kSpannerType_UNKNOWN:
+    case msrSpannerTypeKind::kSpannerType_UNKNOWN_:
       break;
   } // switch
 
@@ -4181,11 +4179,10 @@ void msr2msrTranslator::visitStart (S_msrGraceNotesGroup& elt)
       std::stringstream ss;
 
       ss <<
-        "Creating a clone of grace notes group '" <<
-        elt->asShortString () <<
-        "' and attaching it to clone note '" <<
+        "Creating a clone of grace notes group " <<
+        elt->asString () <<
+        " and attaching it to clone note " <<
         fCurrentNonGraceNoteClone->asShortString () <<
-        "'" <<
         std::endl;
 
         gWaeHandler->waeTrace (
@@ -4223,13 +4220,13 @@ void msr2msrTranslator::visitStart (S_msrGraceNotesGroup& elt)
     if (fOnGoingNotesStack.size ()) {
       switch (elt->getGraceNotesGroupKind ()) {
         case msrGraceNotesGroupKind::kGraceNotesGroupBefore:
-      //    fCurrentNonGraceNoteClone-> JMI
+      //    fCurrentNonGraceNoteClone-> JMI v0.9.67
           fOnGoingNotesStack.front ()->
             setNoteGraceNotesGroupBefore (
               fCurrentGraceNotesGroupClone);
           break;
         case msrGraceNotesGroupKind::kGraceNotesGroupAfter:
-      //    fCurrentNonGraceNoteClone-> JMI
+      //    fCurrentNonGraceNoteClone-> JMI v0.9.67
           fOnGoingNotesStack.front ()->
             setNoteGraceNotesGroupAfter (
               fCurrentGraceNotesGroupClone);
@@ -4266,13 +4263,13 @@ void msr2msrTranslator::visitStart (S_msrGraceNotesGroup& elt)
       "fCurrentNonGraceNoteClone: ";
 
     if (fCurrentNonGraceNoteClone) {
-      gLog << fCurrentNonGraceNoteClone;
+      ss << fCurrentNonGraceNoteClone;
     }
     else {
-      gLog <<
+      ss <<
         "[NONE]";
     }
-    gLog << std::endl;
+    ss << std::endl;
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -4331,7 +4328,7 @@ void msr2msrTranslator::visitStart (S_msrGraceNotesGroup& elt)
 #endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (false && gTraceOahGroup->getTraceGraceNotes ()) { // JMI
+  if (false && gTraceOahGroup->getTraceGraceNotes ()) { // JMI v0.9.67
     std::stringstream ss;
 
     ss <<
@@ -4365,7 +4362,7 @@ void msr2msrTranslator::visitStart (S_msrGraceNotesGroup& elt)
 
   if (originalVoiceFirstNonGraceNote) { // JMI
     if (noteNotesGroupIsAttachedTo == originalVoiceFirstNonGraceNote) {
-    // don't createSkipGraceNotesGroupClone() is there's only a single voice JMI
+    // don't createSkipGraceNotesGroupClone() is there's only a single voice JMI ??? v0.9.67
 
       // issue #34 in LilyPond should be worked around by creating
       // skip grace notes in the other voices of the part
@@ -4376,9 +4373,9 @@ void msr2msrTranslator::visitStart (S_msrGraceNotesGroup& elt)
           std::stringstream ss;
 
           ss <<
-            "Creating a skip clone of grace notes group '" <<
+            "Creating a skip clone of grace notes group " <<
             elt->asShortString () <<
-            "' to work around LilyPond issue #34" << // JMI ???
+            " to work around LilyPond issue #34" << // JMI ??? v0.9.67
             std::endl;
 
           gWaeHandler->waeTrace (
@@ -4824,7 +4821,7 @@ void msr2msrTranslator::visitEnd (S_msrNote& elt)
 
   switch (noteKind) {
 
-    case msrNoteKind::kNote_UNKNOWN:
+    case msrNoteKind::kNote_UNKNOWN_:
       break;
 
     case msrNoteKind::kNoteRestInMeasure:
@@ -5010,17 +5007,17 @@ void msr2msrTranslator::visitEnd (S_msrNote& elt)
         std::endl;
         */
 
-      if (!fOnGoingGraceNotesGroup) { // JMI v0.9.66
+      if (fOnGoingGraceNotesGroup) { // JMI v0.9.66
 #ifdef MF_TRACE_IS_ENABLED
         if (gTraceOahGroup->getTraceGraceNotes ()) {
           std::stringstream ss;
 
           ss <<
-            "Appending grace note '" <<
+            "Appending grace note " <<
             fCurrentGraceNoteClone->asShortString () <<
-            "' to the grace notes group'" <<
+            " to the grace notes group " <<
             fCurrentGraceNotesGroupClone->asShortString () <<
-            "' in voice \"" <<
+            " in voice \"" <<
             fCurrentVoiceClone->getVoiceName () << "\"" <<
             std::endl;
 

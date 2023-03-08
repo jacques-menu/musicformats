@@ -13,8 +13,6 @@
 #include <sstream>
 #include <iomanip>      // std::setw, std::setprecision, ...
 
-#include "mfStaticSettings.h"
-
 #include "visitor.h"
 
 #include "mfStaticSettings.h"
@@ -48,13 +46,13 @@ S_msrTempoNote msrTempoNote::create (
   const msrWholeNotes& tempoNoteWholeNotes,
   Bool            tempoNoteBelongsToATuplet)
 {
-  msrTempoNote * o =
+  msrTempoNote * obj =
     new msrTempoNote (
       inputLineNumber,
       tempoNoteWholeNotes,
       tempoNoteBelongsToATuplet);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 msrTempoNote::msrTempoNote (
@@ -170,7 +168,7 @@ std::string msrTempoNote::asString () const
 
   ss <<
     "Tempo note" <<
-    ", tempoNoteWholeNotes: " << fTempoNoteWholeNotes <<
+    ", tempoNoteWholeNotes: " << fTempoNoteWholeNotes.asString () <<
     ", tempoNoteBelongsToATuplet: " <<
     fTempoNoteBelongsToATuplet;
 
@@ -190,7 +188,7 @@ void msrTempoNote::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "tempoNoteWholeNotes" << ": " << fTempoNoteWholeNotes <<
+    "tempoNoteWholeNotes" << ": " << fTempoNoteWholeNotes.asString () <<
     std::endl <<
     std::setw (fieldWidth) <<
     "tempoNoteBelongsToATuplet" << ": " <<
@@ -234,7 +232,7 @@ std::ostream& operator << (std::ostream& os, const S_msrTempoNote& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -249,7 +247,7 @@ S_msrTempoTuplet msrTempoTuplet::create (
   const msrTupletFactor&       tempoTupletFactor,
   const msrWholeNotes&         memberNotesDisplayWholeNotes)
 {
-  msrTempoTuplet* o =
+  msrTempoTuplet* obj =
     new msrTempoTuplet (
       inputLineNumber,
       tempoTupletNumber,
@@ -257,8 +255,8 @@ S_msrTempoTuplet msrTempoTuplet::create (
       tempoTupletShowNumberKind,
       tempoTupletFactor,
       memberNotesDisplayWholeNotes);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 msrTempoTuplet::msrTempoTuplet (
@@ -686,7 +684,7 @@ std::string msrTempoTuplet::asString () const
   ss <<
     "TempoTuplet " <<
     fTempoTupletFactor <<
-    ' ' << fTempoTupletDisplayWholeNotes << " display whole notes" <<
+    ' ' << fTempoTupletDisplayWholeNotes.asString () << " display whole notes" <<
     ":";
 
   ss << '[';
@@ -739,7 +737,7 @@ std::string msrTempoTuplet::asString () const
   ss <<
     "TempoTuplet " <<
     fTempoTupletFactor <<
-    ' ' << fTempoTupletSoundingWholeNotes << " tempo tuplet sounding whole notes" <<
+    ' ' << fTempoTupletSoundingWholeNotes.asString () << " tempo tuplet sounding whole notes" <<
     " measure '" <<
     fTempoTupletMeasureNumber <<
     "':";
@@ -809,7 +807,7 @@ void msrTempoTuplet::print (std::ostream& os) const
     mfSingularOrPlural (
       fTempoTupletElements.size (), "element", "elements") <<
     ", display whole notes: " <<
-    fTempoTupletDisplayWholeNotes <<
+    fTempoTupletDisplayWholeNotes.asString () <<
     ", line " << fInputLineNumber <<
     std::endl;
 
@@ -829,7 +827,7 @@ void msrTempoTuplet::print (std::ostream& os) const
     std::endl <<
     std::setw (fieldWidth) <<
     "MemberNotesDisplayWholeNotes" << ": " <<
-    fMemberNotesDisplayWholeNotes <<
+    fMemberNotesDisplayWholeNotes.asString () <<
     std::endl << std::endl;
 
 /* JMI ???
@@ -840,7 +838,7 @@ void msrTempoTuplet::print (std::ostream& os) const
     os << "???)";
   }
   else {
-    os << fTempoTupletMeasurePosition << ")";
+    os << fTempoTupletMeasurePosition.asString () << ")";
   }
   os << std::endl;
     */
@@ -880,7 +878,7 @@ std::ostream& operator << (std::ostream& os, const S_msrTempoTuplet& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -892,12 +890,12 @@ S_msrTempoNotesRelationshipElements msrTempoNotesRelationshipElements::create (
   msrTempoNotesRelationshipElementsKind
            tempoNotesRelationshipElementsKind)
 {
-  msrTempoNotesRelationshipElements * o =
+  msrTempoNotesRelationshipElements * obj =
     new msrTempoNotesRelationshipElements (
       inputLineNumber,
       tempoNotesRelationshipElementsKind);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 msrTempoNotesRelationshipElements::msrTempoNotesRelationshipElements (
@@ -1082,23 +1080,23 @@ void msrTempoNotesRelationshipElements::print (std::ostream& os) const
     std::setw (fieldWidth) <<
     "tempoNotesRelationshipElementsList";
 
-    if (fTempoNotesRelationshipElementsList.size ()) {
-      ++gIndenter;
+  if (fTempoNotesRelationshipElementsList.size ()) {
+    ++gIndenter;
 
-      os << std::endl;
+    os << std::endl;
 
-      std::list<S_msrElement>::const_iterator
-        iBegin = fTempoNotesRelationshipElementsList.begin (),
-        iEnd   = fTempoNotesRelationshipElementsList.end (),
-        i      = iBegin;
+    std::list<S_msrElement>::const_iterator
+      iBegin = fTempoNotesRelationshipElementsList.begin (),
+      iEnd   = fTempoNotesRelationshipElementsList.end (),
+      i      = iBegin;
 
-      for ( ; ; ) {
-        os << (*i);
-        if (++i == iEnd) break;
-        // os << std::endl;
-      } // for
+    for ( ; ; ) {
+      os << (*i);
+      if (++i == iEnd) break;
+      // os << std::endl;
+    } // for
 
-      --gIndenter;
+    --gIndenter;
   }
   else {
     os <<
@@ -1117,7 +1115,7 @@ std::ostream& operator << (std::ostream& os, const S_msrTempoNotesRelationshipEl
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -1132,15 +1130,15 @@ S_msrTempo msrTempo::createTempoWordsOnly (
                     tempoParenthesizedKind,
   msrPlacementKind  tempoPlacementKind)
 {
-  msrTempo* o =
+  msrTempo* obj =
     new msrTempo (
       inputLineNumber,
       upLinkToMeasure,
       tempoWords,
       tempoParenthesizedKind,
       tempoPlacementKind);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 S_msrTempo msrTempo::createTempoWordsOnly (
@@ -1168,7 +1166,7 @@ S_msrTempo msrTempo::createTempoPerMinute (
                     tempoParenthesizedKind,
   msrPlacementKind  tempoPlacementKind)
 {
-  msrTempo* o =
+  msrTempo* obj =
     new msrTempo (
       inputLineNumber,
       upLinkToMeasure,
@@ -1176,8 +1174,8 @@ S_msrTempo msrTempo::createTempoPerMinute (
       tempoPerMinute,
       tempoParenthesizedKind,
       tempoPlacementKind);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 S_msrTempo msrTempo::createTempoPerMinute (
@@ -1207,7 +1205,7 @@ S_msrTempo msrTempo::createTempoBeatUnitEquivalent (
                     tempoParenthesizedKind,
   msrPlacementKind  tempoPlacementKind)
 {
-  msrTempo* o =
+  msrTempo* obj =
     new msrTempo (
       inputLineNumber,
       upLinkToMeasure,
@@ -1215,8 +1213,8 @@ S_msrTempo msrTempo::createTempoBeatUnitEquivalent (
       tempoEquivalentBeatUnit,
       tempoParenthesizedKind,
       tempoPlacementKind);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 S_msrTempo msrTempo::createTempoBeatUnitEquivalent (
@@ -1250,7 +1248,7 @@ S_msrTempo msrTempo::createTempoNotesRelationship (
                     tempoParenthesizedKind,
   msrPlacementKind  tempoPlacementKind)
 {
-  msrTempo* o =
+  msrTempo* obj =
     new msrTempo (
       inputLineNumber,
       upLinkToMeasure,
@@ -1259,8 +1257,8 @@ S_msrTempo msrTempo::createTempoNotesRelationship (
       tempoNotesRelationshipRightElements,
       tempoParenthesizedKind,
       tempoPlacementKind);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 S_msrTempo msrTempo::createTempoNotesRelationship (
@@ -1512,7 +1510,7 @@ void msrTempo::acceptOut (basevisitor* v)
 void msrTempo::browseData (basevisitor* v)
 {
   switch (fTempoKind) {
-    case msrTempoKBeatUnitsKind::kTempoBeatUnits_UNKNOWN:
+    case msrTempoKBeatUnitsKind::kTempoBeatUnits_UNKNOWN_:
       break;
 
     case msrTempoKBeatUnitsKind::kTempoBeatUnitsWordsOnly:
@@ -1716,7 +1714,7 @@ void msrTempo::printFull (std::ostream& os) const
     --gIndenter;
   }
   else {
-    os << ": " << "[NONE]" <<
+    os << ": " << "[NULL]" <<
     std::endl;
   }
 
@@ -1743,7 +1741,7 @@ void msrTempo::printFull (std::ostream& os) const
     --gIndenter;
   }
   else {
-    os << ": " << "[NONE]" <<
+    os << ": " << "[NULL]" <<
     std::endl;
   }
 
@@ -1770,7 +1768,7 @@ std::ostream& operator << (std::ostream& os, const S_msrTempo& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

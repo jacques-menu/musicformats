@@ -43,7 +43,7 @@ S_msrReplaceClefAtom msrReplaceClefAtom::create (
   std::map<msrClefKind, msrClefKind>&
                     clefKindToClefKindMapVariable)
 {
-  msrReplaceClefAtom* o = new
+  msrReplaceClefAtom* obj = new
     msrReplaceClefAtom (
       longName,
       shortName,
@@ -51,8 +51,8 @@ S_msrReplaceClefAtom msrReplaceClefAtom::create (
       valueSpecification,
       variableName,
       clefKindToClefKindMapVariable);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 msrReplaceClefAtom::msrReplaceClefAtom (
@@ -188,7 +188,7 @@ void msrReplaceClefAtom::applyAtomWithValue (
   msrClefKind
     originalClefKind =
       msrClefKindFromString (
-        K_MF_INPUT_LINE_UNKNOWN,
+        K_MF_INPUT_LINE_UNKNOWN_,
         originalClefName);
 
   std::map<msrClefKind, msrClefKind>::iterator
@@ -212,7 +212,7 @@ void msrReplaceClefAtom::applyAtomWithValue (
     msrClefKind
       destinationClefKind =
         msrClefKindFromString (
-          K_MF_INPUT_LINE_UNKNOWN,
+          K_MF_INPUT_LINE_UNKNOWN_,
           destinationClefName);
 
     fClefKindToClefKindMapVariable [originalClefKind] =
@@ -455,7 +455,7 @@ std::ostream& operator << (std::ostream& os, const S_msrReplaceClefAtom& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -468,10 +468,10 @@ S_mxsr2msrOahGroup gGlobalMxsr2msrOahGroup;
 S_mxsr2msrOahGroup mxsr2msrOahGroup::create (
   const S_oahHandler& handler)
 {
-  mxsr2msrOahGroup* o = new mxsr2msrOahGroup (
+  mxsr2msrOahGroup* obj = new mxsr2msrOahGroup (
     handler);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 mxsr2msrOahGroup::mxsr2msrOahGroup (
@@ -2552,7 +2552,7 @@ std::ostream& operator << (std::ostream& os, const S_mxsr2msrOahGroup& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

@@ -32,11 +32,11 @@ S_bsrDynamic bsrDynamic::create (
   int             inputLineNumber,
   msrDynamicKind dynamicKind)
 {
-  bsrDynamic* o =
+  bsrDynamic* obj =
     new bsrDynamic (
       inputLineNumber, dynamicKind);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 bsrDynamic::bsrDynamic (
@@ -219,7 +219,7 @@ S_bsrCellsList bsrDynamic::buildCellsList () const
           bsrCellsList::create (
             fInputLineNumber, kCellS, kCellF, kCellF, kCellZ));
       break;
-    case msrDynamicKind::kDynamic_UNKNOWN:
+    case msrDynamicKind::kDynamic_UNKNOWN_:
       result =
         bsrCellsList::create (fInputLineNumber);
   } // switch
@@ -378,7 +378,7 @@ std::ostream& operator << (std::ostream& os, const S_bsrDynamic& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

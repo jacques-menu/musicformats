@@ -43,14 +43,14 @@ S_Mikrokosmos3WanderingRegularHandler Mikrokosmos3WanderingRegularHandler::creat
   mfMultiGenerationOutputKind multiGenerationOutputKind)
 {
   // create the regular handler
-  Mikrokosmos3WanderingRegularHandler* o = new
+  Mikrokosmos3WanderingRegularHandler* obj = new
     Mikrokosmos3WanderingRegularHandler (
       serviceName,
       handlerHeader,
       insiderOahHandler,
       multiGenerationOutputKind);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 Mikrokosmos3WanderingRegularHandler::Mikrokosmos3WanderingRegularHandler (
@@ -145,7 +145,7 @@ void Mikrokosmos3WanderingRegularHandler::createRegularHandlerGroups ()
   */
 
   switch (fMultiGenerationOutputKind) {
-    case mfMultiGenerationOutputKind::kGeneration_UNKNOWN:
+    case mfMultiGenerationOutputKind::kGeneration_UNKNOWN_:
       // should not occur, unless the run is a pure help one
       break;
 
@@ -521,7 +521,7 @@ void Mikrokosmos3WanderingRegularHandler::createOahRegularGroup ()
 
   // atoms from the insider handler depending on the generated output kind
   switch (fMultiGenerationOutputKind) {
-    case mfMultiGenerationOutputKind::kGeneration_UNKNOWN:
+    case mfMultiGenerationOutputKind::kGeneration_UNKNOWN_:
       // should not occur, unless the run is a pure help one
       break;
 
@@ -1505,7 +1505,7 @@ std::ostream& operator << (std::ostream& os, const S_Mikrokosmos3WanderingRegula
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

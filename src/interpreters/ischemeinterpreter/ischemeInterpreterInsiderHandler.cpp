@@ -47,13 +47,13 @@ S_ischemeInterpreterInsiderHandler ischemeInterpreterInsiderHandler::create (
   const std::string& handlerHeader)
 {
   // create the insider handler
-  ischemeInterpreterInsiderHandler* o = new
+  ischemeInterpreterInsiderHandler* obj = new
     ischemeInterpreterInsiderHandler (
       serviceName,
       handlerHeader);
-  assert (o != nullptr);
+  assert (obj != nullptr);
 
-  return o;
+  return obj;
 }
 
 ischemeInterpreterInsiderHandler::ischemeInterpreterInsiderHandler (
@@ -276,7 +276,7 @@ void ischemeInterpreterInsiderOahGroup::checkGroupOptionsConsistency ()
     stringstream s;
 
     s <<
-      "ischemeInterpreterInsiderOahGroup: a MusicXML output file name must be chosen with '-o, -output-file-name";
+      "ischemeInterpreterInsiderOahGroup: a MusicXML output file name must be chosen with '-obj, -output-file-name";
 
     oahError (s.str ());
   }
@@ -422,10 +422,10 @@ S_ischemeInterpreterInsiderOahGroup gGlobalIschemeInterpreterInsiderOahGroup;
 
 S_ischemeInterpreterInsiderOahGroup ischemeInterpreterInsiderOahGroup::create ()
 {
-  ischemeInterpreterInsiderOahGroup* o = new ischemeInterpreterInsiderOahGroup ();
-  assert (o != nullptr);
+  ischemeInterpreterInsiderOahGroup* obj = new ischemeInterpreterInsiderOahGroup ();
+  assert (obj != nullptr);
 
-  return o;
+  return obj;
 }
 
 ischemeInterpreterInsiderOahGroup::ischemeInterpreterInsiderOahGroup ()

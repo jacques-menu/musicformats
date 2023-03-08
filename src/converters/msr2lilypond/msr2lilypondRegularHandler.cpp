@@ -40,14 +40,14 @@ S_msr2lilypondRegularHandler msr2lilypondRegularHandler::create (
                     insiderOahHandler)
 {
   // create the regular handler
-  msr2lilypondRegularHandler* o = new
+  msr2lilypondRegularHandler* obj = new
     msr2lilypondRegularHandler (
       serviceName,
       handlerHeader,
       insiderOahHandler);
-  assert (o!=0);
+  assert (obj!=0);
 
-  return o;
+  return obj;
 }
 
 msr2lilypondRegularHandler::msr2lilypondRegularHandler (
@@ -1745,7 +1745,7 @@ std::ostream& operator << (std::ostream& os, const S_msr2lilypondRegularHandler&
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

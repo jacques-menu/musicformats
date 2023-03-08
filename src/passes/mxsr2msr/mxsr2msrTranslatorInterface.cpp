@@ -11,8 +11,6 @@
 
 #include <iostream>
 
-#include "mfStaticSettings.h"
-
 #include "xml.h"
 #include "xmlfile.h"
 #include "xmlreader.h"

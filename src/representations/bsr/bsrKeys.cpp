@@ -72,11 +72,11 @@ S_bsrKey bsrKey::create (
   bsrKeyKind   keyKind,
   size_t numberOfAlterations)
 {
-  bsrKey* o =
+  bsrKey* obj =
     new bsrKey (
       inputLineNumber, keyKind, numberOfAlterations);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 bsrKey::bsrKey (
@@ -416,7 +416,7 @@ std::ostream& operator << (std::ostream& os, const S_bsrKey& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

@@ -29,23 +29,23 @@ namespace MusicFormats
 S_bsrCellsList bsrCellsList::create (
   int         inputLineNumber)
 {
-  bsrCellsList* o =
+  bsrCellsList* obj =
     new bsrCellsList (
       inputLineNumber);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 S_bsrCellsList bsrCellsList::create (
   int         inputLineNumber,
   bsrCellKind cellKind1)
 {
-  bsrCellsList* o =
+  bsrCellsList* obj =
     new bsrCellsList (
       inputLineNumber,
       cellKind1);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 S_bsrCellsList bsrCellsList::create (
@@ -53,12 +53,12 @@ S_bsrCellsList bsrCellsList::create (
   bsrCellKind cellKind1,
   bsrCellKind cellKind2)
 {
-  bsrCellsList* o =
+  bsrCellsList* obj =
     new bsrCellsList (
       inputLineNumber,
       cellKind1, cellKind2);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 S_bsrCellsList bsrCellsList::create (
@@ -67,12 +67,12 @@ S_bsrCellsList bsrCellsList::create (
   bsrCellKind cellKind2,
   bsrCellKind cellKind3)
 {
-  bsrCellsList* o =
+  bsrCellsList* obj =
     new bsrCellsList (
       inputLineNumber,
       cellKind1, cellKind2, cellKind3);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 S_bsrCellsList bsrCellsList::create (
@@ -82,12 +82,12 @@ S_bsrCellsList bsrCellsList::create (
   bsrCellKind cellKind3,
   bsrCellKind cellKind4)
 {
-  bsrCellsList* o =
+  bsrCellsList* obj =
     new bsrCellsList (
       inputLineNumber,
       cellKind1, cellKind2, cellKind3, cellKind4);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 S_bsrCellsList bsrCellsList::create (
@@ -98,12 +98,12 @@ S_bsrCellsList bsrCellsList::create (
   bsrCellKind cellKind4,
   bsrCellKind cellKind5)
 {
-  bsrCellsList* o =
+  bsrCellsList* obj =
     new bsrCellsList (
       inputLineNumber,
       cellKind1, cellKind2, cellKind3, cellKind4, cellKind5);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 S_bsrCellsList bsrCellsList::create (
@@ -115,12 +115,12 @@ S_bsrCellsList bsrCellsList::create (
   bsrCellKind cellKind5,
   bsrCellKind cellKind6)
 {
-  bsrCellsList* o =
+  bsrCellsList* obj =
     new bsrCellsList (
       inputLineNumber,
       cellKind1, cellKind2, cellKind3, cellKind4, cellKind5, cellKind6);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 bsrCellsList::bsrCellsList (
@@ -404,7 +404,7 @@ std::ostream& operator << (std::ostream& os, const S_bsrCellsList& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

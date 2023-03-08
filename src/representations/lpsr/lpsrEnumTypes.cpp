@@ -15,14 +15,12 @@
 
 #include "mfStaticSettings.h"
 
-#include "lpsrWae.h"
-
-#include "mfStaticSettings.h"
-
 #include "mfServices.h"
 #include "mfStringsHandling.h"
 
 #include "lpsrEnumTypes.h"
+
+#include "lpsrWae.h"
 
 #include "oahOah.h"
 #include "waeOah.h"
@@ -134,7 +132,7 @@ std::string wholeNotesAsLilypondString (
 
     ss <<
       "--> wholeNotesAsLilypondString() 1 -------------------------------------" <<
-      ", wholeNotes: " << wholeNotes <<
+      ", wholeNotes: " << wholeNotes.asString () <<
       ", dotsNumber: " << dotsNumber <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -171,7 +169,7 @@ std::string wholeNotesAsLilypondString (
 
     ss <<
      "%{ZERO_LENGTH: " <<
-     wholeNotes << // JMI
+     wholeNotes.asString () << // JMI
      ", line " <<
      inputLineNumber <<
      " %}";
@@ -222,7 +220,7 @@ std::string wholeNotesAsLilypondString (
 //      rationalHasBeenSimplified <<
 //       std::endl <<
       "--> integralNumberOfWholeNotes: " <<
-      integralNumberOfWholeNotes <<
+      integralNumberOfWholeNotes.asString () <<
       std::endl << std::endl;
 
     gWaeHandler->waeTrace (
@@ -1236,7 +1234,7 @@ std::string msrSemiTonesPitchAndOctaveAsLilypondString (
   ss << (*pitchesNamesMapPTR) [quarterTonesPitchKind];
 
   switch (semiTonesPitchAndOctave->getOctaveKind ()) {
-    case msrOctaveKind::kOctave_UNKNOWN:
+    case msrOctaveKind::kOctave_UNKNOWN_:
       ss << "*** noOctave ***";
       break;
     case msrOctaveKind::kOctave0:
@@ -1351,7 +1349,7 @@ lpsrDynamicsTextSpannersStyleKind lpsrDynamicsTextSpannersStyleKindFromString (
   lpsrDynamicsTextSpannersStyleKind result =
     lpsrDynamicsTextSpannersStyleKind::kDynamicsTextSpannersStyleNone;
 
-  if      (dynamicsTextSpannersStyleKindString == "[NONE]")
+  if      (dynamicsTextSpannersStyleKindString == "none")
     result =
       lpsrDynamicsTextSpannersStyleKind::kDynamicsTextSpannersStyleNone;
   else if (dynamicsTextSpannersStyleKindString == "dashed-line")
@@ -1389,7 +1387,7 @@ void initializeLpsrDynamicsTextSpannersStyleKindsMap ()
 
   // no CamelCase here, these strings are used in the command line options
 
-  pLpsrDynamicsTextSpannersStyleKindsMap ["[NONE]"] =
+  pLpsrDynamicsTextSpannersStyleKindsMap ["none"] =
     lpsrDynamicsTextSpannersStyleKind::kDynamicsTextSpannersStyleNone;
   pLpsrDynamicsTextSpannersStyleKindsMap ["dashed-line"] =
     lpsrDynamicsTextSpannersStyleKind::kDynamicsTextSpannersStyleDashedLine;

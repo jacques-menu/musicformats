@@ -27,11 +27,11 @@ namespace MusicFormats
 S_bsrElement bsrElement::create (
   int inputLineNumber)
 {
-  bsrElement* o =
+  bsrElement* obj =
     new bsrElement (
       inputLineNumber);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 bsrElement::bsrElement (
@@ -147,7 +147,7 @@ std::ostream& operator << (std::ostream& os, const S_bsrElement& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

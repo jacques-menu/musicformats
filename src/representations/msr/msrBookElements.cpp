@@ -30,7 +30,7 @@ std::ostream& operator << (std::ostream& os, const S_msrBookElement& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
   
   return os;
