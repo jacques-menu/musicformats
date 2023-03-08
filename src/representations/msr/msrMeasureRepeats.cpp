@@ -11,8 +11,6 @@
 
 #include <iomanip>
 
-#include "mfStaticSettings.h"
-
 #include "visitor.h"
 
 #include "mfStaticSettings.h"
@@ -42,12 +40,12 @@ S_msrMeasureRepeatElement msrMeasureRepeatElement::create (
   int                 inputLineNumber,
   const S_msrMeasureRepeat& upLinkToMeasureRepeat)
 {
-  msrMeasureRepeatElement* o =
+  msrMeasureRepeatElement* obj =
     new msrMeasureRepeatElement (
       inputLineNumber,
       upLinkToMeasureRepeat);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 msrMeasureRepeatElement::msrMeasureRepeatElement (
@@ -390,7 +388,7 @@ void msrMeasureRepeatElement::printFull (std::ostream& os) const
   }
   os << std::endl;
 
-  if (elementsNumber) {
+  if (elementsNumber > 0) {
     os << std::endl;
 
     ++gIndenter;
@@ -437,7 +435,7 @@ void msrMeasureRepeatElement::print (std::ostream& os) const
 
   os <<
     "repeatElementsList: ";
-  if (elementsNumber) {
+  if (elementsNumber > 0) {
     os <<
       '(' <<
       mfSingularOrPlural (
@@ -478,7 +476,7 @@ std::ostream& operator << (std::ostream& os, const S_msrMeasureRepeatElement& el
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -490,12 +488,12 @@ S_msrMeasureRepeatPattern msrMeasureRepeatPattern::create (
   int                 inputLineNumber,
   const S_msrMeasureRepeat& upLinkToMeasureRepeat)
 {
-  msrMeasureRepeatPattern* o =
+  msrMeasureRepeatPattern* obj =
     new msrMeasureRepeatPattern (
       inputLineNumber,
       upLinkToMeasureRepeat);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 msrMeasureRepeatPattern::msrMeasureRepeatPattern (
@@ -724,7 +722,7 @@ std::ostream& operator << (std::ostream& os, const S_msrMeasureRepeatPattern& el
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -735,12 +733,12 @@ S_msrMeasureRepeatReplicas msrMeasureRepeatReplicas::create (
   int                 inputLineNumber,
   const S_msrMeasureRepeat& upLinkToMeasureRepeat)
 {
-  msrMeasureRepeatReplicas* o =
+  msrMeasureRepeatReplicas* obj =
     new msrMeasureRepeatReplicas (
       inputLineNumber,
       upLinkToMeasureRepeat);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 msrMeasureRepeatReplicas::msrMeasureRepeatReplicas (
@@ -969,7 +967,7 @@ std::ostream& operator << (std::ostream& os, const S_msrMeasureRepeatReplicas& e
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -982,14 +980,14 @@ S_msrMeasureRepeat msrMeasureRepeat::create (
   int        measureRepeatSlashesNumber,
   const S_msrVoice& upLinkToVoice)
 {
-  msrMeasureRepeat* o =
+  msrMeasureRepeat* obj =
     new msrMeasureRepeat (
       inputLineNumber,
       measureRepeatMeasuresNumber,
       measureRepeatSlashesNumber,
       upLinkToVoice);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 msrMeasureRepeat::msrMeasureRepeat (
@@ -1499,7 +1497,7 @@ std::ostream& operator << (std::ostream& os, const S_msrMeasureRepeat& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

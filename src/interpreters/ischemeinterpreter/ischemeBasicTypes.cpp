@@ -11,8 +11,6 @@
 
 #include <iomanip>      // setw()), set::precision(), ...
 
-// #include <stddef>       // size_t JMI
-
 #include "mfAssert.h"
 #include "mfBool.h"
 #include "mfStringsHandling.h"
@@ -37,11 +35,11 @@ using namespace MusicFormats;
 S_ischemeOptionsBlock ischemeOptionsBlock::create (
   const std::string& optionsBlockName)
 {
-  ischemeOptionsBlock* o =
+  ischemeOptionsBlock* obj =
     new ischemeOptionsBlock (
       optionsBlockName);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 ischemeOptionsBlock::ischemeOptionsBlock (
@@ -184,11 +182,11 @@ std::ostream& operator<< (std::ostream& os, const ischemeInputNameKind& elt)
 S_ischemeInput ischemeInput::create (
   const std::string& inputName)
 {
-  ischemeInput* o =
+  ischemeInput* obj =
     new ischemeInput (
       inputName);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 ischemeInput::ischemeInput (
@@ -771,10 +769,10 @@ std::ostream& operator<< (std::ostream& os, const S_ischemeInput& elt)
 //_______________________________________________________________________________
 S_ischemeInputsTable ischemeInputsTable::create ()
 {
-  ischemeInputsTable* o =
+  ischemeInputsTable* obj =
     new ischemeInputsTable ();
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 ischemeInputsTable::ischemeInputsTable ()
@@ -1005,11 +1003,11 @@ std::ostream& operator<< (std::ostream& os, const ischemeChoiceLabelKind& elt)
 S_ischemeChoice ischemeChoice::create (
   const std::string& choiceName)
 {
-  ischemeChoice* o =
+  ischemeChoice* obj =
     new ischemeChoice (
       choiceName);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 ischemeChoice::ischemeChoice (
@@ -1634,10 +1632,10 @@ std::ostream& operator<< (std::ostream& os, const S_ischemeChoice& elt)
 //_______________________________________________________________________________
 S_ischemeChoicesTable ischemeChoicesTable::create ()
 {
-  ischemeChoicesTable* o =
+  ischemeChoicesTable* obj =
     new ischemeChoicesTable ();
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 ischemeChoicesTable::ischemeChoicesTable ()
@@ -1842,12 +1840,12 @@ S_ischemeCaseChoiceStatement ischemeCaseChoiceStatement::create (
   S_ischemeChoice caseChoice,
   ischemeDriver&  drv)
 {
-  ischemeCaseChoiceStatement* o =
+  ischemeCaseChoiceStatement* obj =
     new ischemeCaseChoiceStatement (
       caseChoice,
       drv);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 ischemeCaseChoiceStatement::ischemeCaseChoiceStatement (
@@ -2045,12 +2043,12 @@ S_ischemeCaseInputStatement ischemeCaseInputStatement::create (
   S_ischemeInput caseInput,
   ischemeDriver& drv)
 {
-  ischemeCaseInputStatement* o =
+  ischemeCaseInputStatement* obj =
     new ischemeCaseInputStatement (
       caseInput,
       drv);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 ischemeCaseInputStatement::ischemeCaseInputStatement (

@@ -11,10 +11,6 @@
 
 #include "mfStaticSettings.h"
 
-#include "bsr2bsrWae.h"
-
-#include "mfStaticSettings.h"
-
 #include "mfAssert.h"
 #include "mfServices.h"
 #include "mfTiming.h"
@@ -23,6 +19,8 @@
 #include "waeOah.h"
 
 #include "oahEarlyOptions.h"
+
+#include "bsr2bsrWae.h"
 
 #include "brailleGenerationOah.h"
 

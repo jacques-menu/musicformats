@@ -20,8 +20,6 @@
 
 #include "bsrWae.h"
 
-#include "mfStaticSettings.h"
-
 #include "oahEarlyOptions.h"
 
 #include "oahOah.h"

@@ -35,11 +35,11 @@ S_bsrPagination bsrPagination::create (
   int printPageNumber,
   int braillePageNumber)
 {
-  bsrPagination* o =
+  bsrPagination* obj =
     new bsrPagination (
       inputLineNumber, printPageNumber, braillePageNumber);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 bsrPagination::bsrPagination (
@@ -243,7 +243,7 @@ std::ostream& operator << (std::ostream& os, const S_bsrPagination& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

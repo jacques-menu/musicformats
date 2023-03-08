@@ -34,14 +34,14 @@ S_oahInsiderHandler oahInsiderHandler::create (
   const std::string&      handlerUsage)
 {
   // create the insider handler
-  oahInsiderHandler* o = new
+  oahInsiderHandler* obj = new
     oahInsiderHandler (
       serviceName,
       handlerHeader,
       handlerDescription,
       handlerUsage);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 */
 
@@ -137,7 +137,7 @@ std::ostream& operator << (std::ostream& os, const S_oahInsiderHandler& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

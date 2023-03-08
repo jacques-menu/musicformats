@@ -13,8 +13,6 @@
 #include <sstream>
 #include <iomanip>      // std::setw, std::setprecision, ...
 
-#include "mfStaticSettings.h"
-
 #include "visitor.h"
 
 #include "mfStaticSettings.h"
@@ -42,14 +40,14 @@ S_msrOctaveShift msrOctaveShift::create (
   msrOctaveShiftKind octaveShiftKind,
   int                octaveShiftSize)
 {
-  msrOctaveShift* o =
+  msrOctaveShift* obj =
     new msrOctaveShift (
       inputLineNumber,
       upLinkToMeasure,
       octaveShiftKind,
       octaveShiftSize);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 S_msrOctaveShift msrOctaveShift::create (
@@ -247,7 +245,7 @@ std::ostream& operator << (std::ostream& os, const S_msrOctaveShift& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

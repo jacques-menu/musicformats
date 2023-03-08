@@ -29,10 +29,10 @@ namespace MusicFormats
 S_LilyPondIssue34Generator LilyPondIssue34Generator::create ()
 {
   // create the insider handler
-  LilyPondIssue34Generator* o = new
+  LilyPondIssue34Generator* obj = new
     LilyPondIssue34Generator ();
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 LilyPondIssue34Generator::LilyPondIssue34Generator ()

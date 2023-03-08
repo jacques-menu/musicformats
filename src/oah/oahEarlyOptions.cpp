@@ -859,7 +859,7 @@ void oahEarlyOptions::print (std::ostream& os) const
     --gIndenter;
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
 #ifdef MF_TRACE_IS_ENABLED

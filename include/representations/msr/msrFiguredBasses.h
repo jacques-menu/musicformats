@@ -17,7 +17,6 @@
 #include "msrMeasures.h"
 #include "msrTypesForwardDeclarations.h"
 #include "msrTupletFactors.h"
-// #include "msrWholeNotes.h"
 
 
 namespace MusicFormats
@@ -26,7 +25,7 @@ namespace MusicFormats
 //______________________________________________________________________________
 // data types
 enum class msrBassFigurePrefixKind {
-  kBassFigurePrefix_UNKNOWN,
+  kBassFigurePrefix_UNKNOWN_,
   kBassFigurePrefixDoubleFlat, kBassFigurePrefixFlat, kBassFigurePrefixFlatFlat,
   kBassFigurePrefixNatural,
   kBassFigurePrefixSharpSharp, kBassFigurePrefixSharp, kBassFigurePrefixDoubleSharp
@@ -38,7 +37,7 @@ std::string msrBassFigurePrefixKindAsString (
 std::ostream& operator << (std::ostream& os,const msrBassFigurePrefixKind& elt);
 
 enum class msrBassFigureSuffixKind {
-  kBassFigureSuffix_UNKNOWN,
+  kBassFigureSuffix_UNKNOWN_,
   kBassFigureSuffixDoubleFlat, kBassFigureSuffixFlat, kBassFigureSuffixFlatFlat,
   kBassFigureSuffixNatural,
   kBassFigureSuffixSharpSharp, kBassFigureSuffixSharp, kBassFigureSuffixDoubleSharp,

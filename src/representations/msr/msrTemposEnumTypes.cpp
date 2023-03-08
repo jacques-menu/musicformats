@@ -22,8 +22,8 @@ std::string msrTempoBeatUnitsKindAsString (
   std::string result;
 
   switch (tempoKind) {
-    case msrTempoKBeatUnitsKind::kTempoBeatUnits_UNKNOWN:
-      result = "kTempoBeatUnits_UNKNOWN";
+    case msrTempoKBeatUnitsKind::kTempoBeatUnits_UNKNOWN_:
+      result = "kTempoBeatUnits_UNKNOWN_";
       break;
     case msrTempoKBeatUnitsKind::kTempoBeatUnitsWordsOnly:
       result = "kTempoBeatUnitsWordsOnly";

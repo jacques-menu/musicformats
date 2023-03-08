@@ -13,17 +13,15 @@
 #include <regex>
 #include <sstream>
 
-#include "mfStaticSettings.h"
-
 #include "visitor.h"
+
+#include "mfStaticSettings.h"
 
 #include "mfAssert.h"
 #include "mfServices.h"
 #include "mfStringsHandling.h"
 
 #include "msrWae.h"
-
-#include "mfStaticSettings.h"
 
 #include "msrPitchesNames.h"
 #include "msrIntervals.h"
@@ -74,11 +72,11 @@ std::ostream& operator << (std::ostream& os, const msrKeyKind& elt)
 S_msrHumdrumScotKeyItem msrHumdrumScotKeyItem::create (
   int inputLineNumber)
 {
-  msrHumdrumScotKeyItem* o =
+  msrHumdrumScotKeyItem* obj =
     new msrHumdrumScotKeyItem (
       inputLineNumber);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 msrHumdrumScotKeyItem::msrHumdrumScotKeyItem (
@@ -100,9 +98,9 @@ msrHumdrumScotKeyItem::msrHumdrumScotKeyItem (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  fKeyDiatonicPitchKind = msrDiatonicPitchKind::kDiatonicPitch_UNKNOWN;
-  fKeyAlterationKind    = msrAlterationKind::kAlteration_UNKNOWN;
-  fKeyOctaveKind        = msrOctaveKind::kOctave_UNKNOWN;
+  fKeyDiatonicPitchKind = msrDiatonicPitchKind::kDiatonicPitch_UNKNOWN_;
+  fKeyAlterationKind    = msrAlterationKind::kAlteration_UNKNOWN_;
+  fKeyOctaveKind        = msrOctaveKind::kOctave_UNKNOWN_;
 }
 
 msrHumdrumScotKeyItem::~msrHumdrumScotKeyItem ()
@@ -314,7 +312,7 @@ std::ostream& operator << (std::ostream& os, const S_msrHumdrumScotKeyItem& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -328,15 +326,15 @@ S_msrKey msrKey::createTraditional (
   msrModeKind              modeKind,
   int                      keyCancel)
 {
-  msrKey* o =
+  msrKey* obj =
     new msrKey (
       inputLineNumber,
       upLinkToMeasure,
       keyTonicQuarterTonesPitchKind,
       modeKind,
       keyCancel);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 S_msrKey msrKey::createTraditional (
@@ -358,12 +356,12 @@ S_msrKey msrKey::createHumdrumScot ( // for Humdrum/Scot keys
   int                 inputLineNumber,
   const S_msrMeasure& upLinkToMeasure)
 {
-  msrKey* o =
+  msrKey* obj =
     new msrKey (
       inputLineNumber,
       upLinkToMeasure);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 S_msrKey msrKey::createHumdrumScot ( // for Humdrum/Scot keys
@@ -400,7 +398,7 @@ msrKey::msrKey ( // for traditional keys
   fKeyTonicQuarterTonesPitchKind = keyTonicQuarterTonesPitchKind;
 
   switch (fModeKind) {
-    case msrModeKind::kMode_UNKNOWN:
+    case msrModeKind::kMode_UNKNOWN_:
       break;
     case msrModeKind::kModeMajor:
       break;
@@ -578,7 +576,7 @@ void msrKey::appendHumdrumScotKeyItem (
 #endif // MF_TRACE_IS_ENABLED
 
   // have key items octaves been specified?
-  if (item->getKeyItemOctaveKind () != msrOctaveKind::kOctave_UNKNOWN) {
+  if (item->getKeyItemOctaveKind () != msrOctaveKind::kOctave_UNKNOWN_) {
     fKeyItemsOctavesAreSpecified = true;
   }
 
@@ -957,7 +955,7 @@ std::ostream& operator << (std::ostream& os, const S_msrKey& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

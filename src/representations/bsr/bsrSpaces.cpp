@@ -32,11 +32,11 @@ S_bsrSpaces bsrSpaces::create (
   int inputLineNumber,
   int numberOfSpaces)
 {
-  bsrSpaces* o =
+  bsrSpaces* obj =
     new bsrSpaces (
       inputLineNumber, numberOfSpaces);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 bsrSpaces::bsrSpaces (
@@ -200,7 +200,7 @@ std::ostream& operator << (std::ostream& os, const S_bsrSpaces& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

@@ -22,8 +22,6 @@
 
 #include "msr2lpsrWae.h"
 
-#include "mfStaticSettings.h"
-
 #include "msr2lpsrComponent.h"
 
 #include "msrAfterGraceNotes.h"
@@ -40,7 +38,6 @@
 #include "msrTechnicals.h"
 #include "msrTempos.h"
 #include "msrVoiceStaffChanges.h"
-// #include "msrWholeNotes.h"
 
 #include "lpsrBookBlockElements.h"
 #include "lpsrContexts.h"
@@ -498,20 +495,20 @@ S_lpsrScore msr2lpsrTranslator::translateMsrToLpsr (
   // create another MSR score component of the LPSR score
   fCurrentMsrScoreClone =
     msrScore::create (
-      K_MF_INPUT_LINE_UNKNOWN,
+      K_MF_INPUT_LINE_UNKNOWN_,
       "msrScore::create()");
 
   // create the resulting LPSR score
   fResultingLpsr =
     lpsrScore::create (
-      K_MF_INPUT_LINE_UNKNOWN,
+      K_MF_INPUT_LINE_UNKNOWN_,
       fCurrentMsrScoreClone,
       multiComponent);
 
   // create the current book block
   fCurrentLpsrBookBlock =
     lpsrBookBlock::create (
-      K_MF_INPUT_LINE_UNKNOWN);
+      K_MF_INPUT_LINE_UNKNOWN_);
 
   // set its header to that of the visited LPSR score JMI ???
   fCurrentLpsrBookBlock->
@@ -534,7 +531,7 @@ S_lpsrScore msr2lpsrTranslator::translateMsrToLpsr (
         // create the current score block
         fCurrentScoreBlock =
           lpsrScoreBlock::create (
-            K_MF_INPUT_LINE_UNKNOWN);
+            K_MF_INPUT_LINE_UNKNOWN_);
 
         // append it to the book block elements list
         fCurrentLpsrBookBlock->
@@ -1467,7 +1464,7 @@ void msr2lpsrTranslator::visitStart (S_msrCredit& elt)
     creditTypeKind = elt->getCreditTypeKind ();
 
   switch (creditTypeKind) {
-    case msrCreditTypeKind::kCreditType_UNKNOWN:
+    case msrCreditTypeKind::kCreditType_UNKNOWN_:
       break;
 
     case msrCreditTypeKind::kCreditTypeNumber:
@@ -2296,7 +2293,7 @@ void msr2lpsrTranslator::visitStart (S_msrStaff& elt)
               // create the current score block
               fCurrentScoreBlock =
                 lpsrScoreBlock::create (
-                  K_MF_INPUT_LINE_UNKNOWN);
+                  K_MF_INPUT_LINE_UNKNOWN_);
 
               // append it to the book block elements list
               fCurrentLpsrBookBlock->
@@ -2477,7 +2474,7 @@ void msr2lpsrTranslator::visitStart (S_msrVoice& elt)
             fCurrentVoiceClone);
 
         if (
-          true || fCurrentVoiceOriginal->getMusicHasBeenInsertedInVoice () // superfluous test ??? JMI CAFE  // JMI v0.9.66
+          true || fCurrentVoiceOriginal->getMusicHasBeenInsertedInVoice () // superfluous test ??? JMI v0.9.67
         ) {
           // append the voice clone to the LPSR score elements list
           fResultingLpsr ->
@@ -3308,7 +3305,7 @@ void msr2lpsrTranslator::visitEnd (S_msrMeasure& elt)
           ss <<
             "--> kMeasureKindRegular" <<
             ", fullMeasureWholeNotes: " <<
-            fullMeasureWholeNotes <<
+            fullMeasureWholeNotes.asString () <<
             "', wholeNotesPerMeasure: " <<
             wholeNotesPerMeasure <<
             std::endl;
@@ -3346,7 +3343,7 @@ void msr2lpsrTranslator::visitEnd (S_msrMeasure& elt)
           ss <<
             "--> kMeasureKindAnacrusis" <<
             ", fullMeasureWholeNotes: " <<
-            fullMeasureWholeNotes <<
+            fullMeasureWholeNotes.asString () <<
             "', wholeNotesPerMeasure: " <<
             wholeNotesPerMeasure <<
             std::endl;
@@ -3622,7 +3619,7 @@ void msr2lpsrTranslator::visitStart (S_msrSyllable& elt)
           words =
             msrWords::create (
               inputLineNumber,
-              msrPlacementKind::kPlacement_UNKNOWN,                // default value
+              msrPlacementKind::kPlacement_UNKNOWN_,                // default value
               wordsValue,
               msrJustifyKind::kJustifyNone,                  // default value
               msrHorizontalAlignmentKind::kHorizontalAlignmentNone,      // default value
@@ -3893,7 +3890,7 @@ void msr2lpsrTranslator::visitStart (S_msrTempo& elt)
 #endif // MF_TRACE_IS_ENABLED
 
   switch (elt->getTempoKind ()) {
-    case msrTempoKBeatUnitsKind::kTempoBeatUnits_UNKNOWN:
+    case msrTempoKBeatUnitsKind::kTempoBeatUnits_UNKNOWN_:
       break;
 
     case msrTempoKBeatUnitsKind::kTempoBeatUnitsWordsOnly:
@@ -4601,7 +4598,7 @@ void msr2lpsrTranslator::visitStart (S_msrSpanner& elt)
       break;
     case msrSpannerTypeKind::kSpannerTypeContinue:
       break;
-    case msrSpannerTypeKind::kSpannerType_UNKNOWN:
+    case msrSpannerTypeKind::kSpannerType_UNKNOWN_:
       break;
   } // switch
 
@@ -4931,7 +4928,7 @@ void msr2lpsrTranslator::visitStart (S_msrDynamic& elt)
       case msrDynamicKind::kDynamicSFFZ:
       case msrDynamicKind::kDynamicSFZP:
       case msrDynamicKind::kDynamicN:
-      case msrDynamicKind::kDynamic_UNKNOWN:
+      case msrDynamicKind::kDynamic_UNKNOWN_:
         knownToLilyPondNatively = false;
 
       default:
@@ -5643,11 +5640,10 @@ void msr2lpsrTranslator::visitStart (S_msrGraceNotesGroup& elt)
       std::stringstream ss;
 
       ss <<
-        "Creating a clone of grace notes group '" <<
+        "Creating a clone of grace notes group " <<
         elt->asShortString () <<
-        "' and attaching it to clone note '" <<
+        " and attaching it to clone note " <<
         fCurrentNonGraceNoteClone->asShortString () <<
-        "'" <<
         std::endl;
 
       gWaeHandler->waeTrace (
@@ -5837,9 +5833,9 @@ void msr2lpsrTranslator::visitStart (S_msrGraceNotesGroup& elt)
           std::stringstream ss;
 
           ss <<
-            "Creating a skip clone of grace notes group '" <<
+            "Creating a skip clone of grace notes group " <<
             elt->asShortString () <<
-            "' to work around LilyPond issue #34" <<
+            " to work around LilyPond issue #34" <<
             std::endl;
 
           gWaeHandler->waeTrace (
@@ -6273,7 +6269,7 @@ void msr2lpsrTranslator::visitEnd (S_msrNote& elt)
 
   switch (noteKind) {
 
-    case msrNoteKind::kNote_UNKNOWN:
+    case msrNoteKind::kNote_UNKNOWN_:
       break;
 
     case msrNoteKind::kNoteRestInMeasure:
@@ -6464,9 +6460,9 @@ void msr2lpsrTranslator::visitEnd (S_msrNote& elt)
           std::stringstream ss;
 
           ss <<
-            "Appending grace note '" <<
+            "Appending grace note " <<
             fCurrentGraceNoteClone->asShortString () <<
-            "' to the grace notes group'" <<
+            " to the grace notes group " <<
             fCurrentGraceNotesGroupClone->asShortString () <<
             "' in voice \"" <<
             fCurrentVoiceClone->getVoiceName () << "\"" <<

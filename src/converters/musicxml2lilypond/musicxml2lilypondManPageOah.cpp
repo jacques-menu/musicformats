@@ -35,14 +35,14 @@ S_xml2lyManPageGenerateAtom xml2lyManPageGenerateAtom::create (
   const std::string&  description,
   const S_oahVisitor& theOahVisitor)
 {
-  xml2lyManPageGenerateAtom* o = new
+  xml2lyManPageGenerateAtom* obj = new
     xml2lyManPageGenerateAtom (
       longName,
       shortName,
       description,
       theOahVisitor);
-  assert (o!=0);
-  return o;
+  assert (obj!=0);
+  return obj;
 }
 
 xml2lyManPageGenerateAtom::xml2lyManPageGenerateAtom (
@@ -213,7 +213,7 @@ std::ostream& operator << (std::ostream& os, const S_xml2lyManPageGenerateAtom& 
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -225,10 +225,10 @@ S_xml2lyManPageOahGroup gGlobalXml2lyManPageOahGroup;
 S_xml2lyManPageOahGroup xml2lyManPageOahGroup::create (
   const S_oahVisitor& theOah2manPage)
 {
-  xml2lyManPageOahGroup* o = new xml2lyManPageOahGroup (
+  xml2lyManPageOahGroup* obj = new xml2lyManPageOahGroup (
     theOah2manPage);
-  assert (o!=0);
-  return o;
+  assert (obj!=0);
+  return obj;
 }
 
 xml2lyManPageOahGroup::xml2lyManPageOahGroup (
@@ -448,7 +448,7 @@ std::ostream& operator << (std::ostream& os, const S_xml2lyManPageOahGroup& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

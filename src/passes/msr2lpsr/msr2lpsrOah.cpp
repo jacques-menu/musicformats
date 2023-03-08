@@ -15,14 +15,14 @@
 
 #include "visitor.h"
 
-#include "oahWae.h"
-
 #include "mfStaticSettings.h"
 
 #include "mfConstants.h"
 #include "mfStringsHandling.h"
 
 #include "oahOah.h"
+#include "oahWae.h"
+
 
 #include "msrOah.h"
 #include "msr2lpsrOah.h"
@@ -44,7 +44,7 @@ S_msr2lpsrScoreOutputKindAtom msr2lpsrScoreOutputKindAtom::create (
   const std::string&   variableName,
   lpsrScoreOutputKind& lpsrScoreOutputKindVariable)
 {
-  msr2lpsrScoreOutputKindAtom* o = new
+  msr2lpsrScoreOutputKindAtom* obj = new
     msr2lpsrScoreOutputKindAtom (
       longName,
       shortName,
@@ -52,8 +52,8 @@ S_msr2lpsrScoreOutputKindAtom msr2lpsrScoreOutputKindAtom::create (
       valueSpecification,
       variableName,
       lpsrScoreOutputKindVariable);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 msr2lpsrScoreOutputKindAtom::msr2lpsrScoreOutputKindAtom (
@@ -319,7 +319,7 @@ std::ostream& operator << (std::ostream& os, const S_msr2lpsrScoreOutputKindAtom
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -331,9 +331,9 @@ S_msr2lpsrOahGroup gGlobalMsr2lpsrOahGroup;
 
 S_msr2lpsrOahGroup msr2lpsrOahGroup::create ()
 {
-  msr2lpsrOahGroup* o = new msr2lpsrOahGroup ();
-  assert (o != nullptr);
-  return o;
+  msr2lpsrOahGroup* obj = new msr2lpsrOahGroup ();
+  assert (obj != nullptr);
+  return obj;
 }
 
 msr2lpsrOahGroup::msr2lpsrOahGroup ()
@@ -633,7 +633,7 @@ std::ostream& operator << (std::ostream& os, const S_msr2lpsrOahGroup& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

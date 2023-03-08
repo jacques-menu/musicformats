@@ -69,11 +69,11 @@ std::string msdlIgnoreSeparatorTokensKindAsString (
 //________________________________________________________________________
 S_msdlScanner msdlScanner::create (std::istream& inputStream)
 {
-  msdlScanner* o =
+  msdlScanner* obj =
     new msdlScanner (
       inputStream);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 msdlScanner::msdlScanner (std::istream& inputStream)
@@ -642,7 +642,7 @@ msdlTokenKind msdlScanner::fetchNextToken (
       case msdlTokenKind::k_TokenEOF:
         break;
 
-      case msdlTokenKind::kToken_UNKNOWN:
+      case msdlTokenKind::kToken_UNKNOWN_:
         // should not occur
         break;
 
@@ -1045,7 +1045,7 @@ void msdlScanner::acceptAName ()
 #endif // MF_TRACE_IS_ENABLED
 
   switch (keyWordKind) {
-    case msdlKeywordKind::kKeyword_UNKNOWN: // no, it is a name
+    case msdlKeywordKind::kKeyword_UNKNOWN_: // no, it is a name
       fCurrentTokenKind = msdlTokenKind::kTokenName;
       fCurrentTokenDescription.setString (nameString);
       break;
@@ -1576,7 +1576,7 @@ void msdlScanner::scanAllTheInputAtOnce (
     int numberOfTokens = 0;
 
     try {
-      msdlTokenKind tokenKind = msdlTokenKind::kToken_UNKNOWN;
+      msdlTokenKind tokenKind = msdlTokenKind::kToken_UNKNOWN_;
 
       // fetch the first input character
       fetchNextCharacter ();
@@ -1704,7 +1704,7 @@ void msdlScanner::translateAllTheInputToKeywordsLanguage (
   int numberOfTokens = 0;
 
   try {
-    msdlTokenKind tokenKind = msdlTokenKind::kToken_UNKNOWN;
+    msdlTokenKind tokenKind = msdlTokenKind::kToken_UNKNOWN_;
 
     // fetch the first input character
     fetchNextCharacter ();
@@ -1753,8 +1753,6 @@ void msdlScanner::translateAllTheInputToKeywordsLanguage (
 
         ++gIndenter;
         gLog << fCurrentToken << std::endl;
-        --gIndenter;
-
         --gIndenter;
       }
 #endif // MF_TRACE_IS_ENABLED
@@ -1849,7 +1847,7 @@ void msdlScanner::scanWholeInputAtOnce ()
 
   // do the job
   switch (keywordsConversionLanguageKind) {
-    case msdlKeywordsLanguageKind::kKeywordsLanguage_UNKNOWN:
+    case msdlKeywordsLanguageKind::kKeywordsLanguage_UNKNOWN_:
       scanAllTheInputAtOnce (
         ignoreSeparatorTokensKind);
       break;

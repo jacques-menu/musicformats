@@ -14,8 +14,6 @@
 
 #include <regex>
 
-#include "mfStaticSettings.h"
-
 #include "visitor.h"
 
 #include "oahWae.h"
@@ -425,13 +423,13 @@ S_oahOptionOrArgument oahOptionOrArgument::create (
   const std::string&      first,
   const std::string&      second)
 {
-  oahOptionOrArgument* o = new
+  oahOptionOrArgument* obj = new
     oahOptionOrArgument (
       optionOrArgumentKind,
       first,
       second);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 oahOptionOrArgument::oahOptionOrArgument (
@@ -481,7 +479,7 @@ std::ostream& operator << (std::ostream& os, const S_oahOptionOrArgument& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -498,12 +496,12 @@ S_oahOption oahOption::create (
   const std::string& optionName,
   const std::string& optionValue)
 {
-  oahOption* o = new
+  oahOption* obj = new
     oahOption (
       optionName,
       optionValue);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 oahOption::oahOption (
@@ -569,7 +567,7 @@ std::ostream& operator << (std::ostream& os, const S_oahOption& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -628,10 +626,10 @@ void optionsNameAndValueVectorsPlusEquals (
 // //______________________________________________________________________________
 // S_oahOptionsNamesAndValuesVector oahOptionsNamesAndValuesVector::create ()
 // {
-//   oahOptionsNamesAndValuesVector* o = new
+//   oahOptionsNamesAndValuesVector* obj = new
 //     oahOptionsNamesAndValuesVector ();
-//   assert (o != nullptr);
-//   return o;
+//   assert (obj != nullptr);
+//   return obj;
 // }
 //
 // oahOptionsNamesAndValuesVector::oahOptionsNamesAndValuesVector ()
@@ -797,7 +795,7 @@ void optionsNameAndValueVectorsPlusEquals (
 //     elt->print (os);
 //   }
 //   else {
-//     os << "[NONE]" << std::endl;
+//     os << "[NULL]" << std::endl;
 //   }
 
 //   return os;
@@ -812,10 +810,10 @@ void optionsNameAndValueVectorsPlusEquals (
 //______________________________________________________________________________
 S_oahOptionsAndArguments oahOptionsAndArguments::create ()
 {
-  oahOptionsAndArguments* o = new
+  oahOptionsAndArguments* obj = new
     oahOptionsAndArguments ();
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 oahOptionsAndArguments::oahOptionsAndArguments ()
@@ -910,7 +908,7 @@ std::ostream& operator << (std::ostream& os, const S_oahOptionsAndArguments& elt
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -999,13 +997,13 @@ S_oahPrefix oahPrefix::create (
   const std::string& prefixErsatz,
   const std::string& prefixDescription)
 {
-  oahPrefix* o = new
+  oahPrefix* obj = new
     oahPrefix (
       prefixName,
       prefixErsatz,
       prefixDescription);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 oahPrefix::oahPrefix (
@@ -1242,7 +1240,7 @@ std::ostream& operator << (std::ostream& os, const S_oahPrefix& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -1256,14 +1254,14 @@ S_oahAtom oahAtom::create (
   const std::string&  description,
   oahElementValueKind atomValueExpectedKind)
 {
-  oahAtom* o = new
+  oahAtom* obj = new
     oahAtom (
       longName,
       shortName,
       description,
       atomValueExpectedKind);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 */
 
@@ -1357,7 +1355,7 @@ void oahAtom::appendAtomToElementsList (
   // should not have the same name as a prefix,
   // since this would create an ambiguity
   switch (fElementValueKind) {
-    case oahElementValueKind::kElementValue_UNKNOWN:
+    case oahElementValueKind::kElementValue_UNKNOWN_:
       handler->
         unknownOptionValueKindError (
           fetchNamesBetweenQuotes ());
@@ -1585,7 +1583,7 @@ std::ostream& operator << (std::ostream& os, const S_oahAtom& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -1598,13 +1596,13 @@ S_oahValueLessAtom oahValueLessAtom::create (
   const std::string& shortName,
   const std::string& description)
 {
-  oahValueLessAtom* o = new
+  oahValueLessAtom* obj = new
     oahValueLessAtom (
       longName,
       shortName,
       description);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 */
 
@@ -1752,7 +1750,7 @@ std::ostream& operator << (std::ostream& os, const S_oahValueLessAtom& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -1765,13 +1763,13 @@ S_oahValueFittedAtom oahValueFittedAtom::create (
   const std::string& shortName,
   const std::string& description)
 {
-  oahValueFittedAtom* o = new
+  oahValueFittedAtom* obj = new
     oahValueFittedAtom (
       longName,
       shortName,
       description);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 */
 
@@ -1931,7 +1929,7 @@ std::ostream& operator << (std::ostream& os, const S_oahValueFittedAtom& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -1945,14 +1943,14 @@ S_oahAtomImplicitlySettingAVariable oahAtomImplicitlySettingAVariable::create (
   const std::string& description,
   const std::string& variableName)
 {
-  oahAtomImplicitlySettingAVariable* o = new
+  oahAtomImplicitlySettingAVariable* obj = new
     oahAtomImplicitlySettingAVariable (
       longName,
       shortName,
       description,
       variableName);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 */
 
@@ -2175,7 +2173,7 @@ std::ostream& operator << (std::ostream& os, const S_oahAtomImplicitlySettingAVa
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -2189,13 +2187,13 @@ S_oahValueDefaultedAtom oahValueDefaultedAtom::create (
   const std::string& description,
   const std::string& defaultStringValue)
 {
-  oahValueDefaultedAtom* o = new
+  oahValueDefaultedAtom* obj = new
     oahValueDefaultedAtom (
       longName,
       shortName,
       description);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 */
 
@@ -2389,7 +2387,7 @@ oahValueDefaultedAtom::~oahValueDefaultedAtom ()
 //     elt->print (os);
 //   }
 //   else {
-//     os << "[NONE]" << std::endl;
+//     os << "[NULL]" << std::endl;
 //   }
 //
 //   return os;
@@ -2404,15 +2402,15 @@ S_oahAtomStoringAValue oahAtomStoringAValue::create (
   const std::string& valueSpecification,
   const std::string& variableName)
 {
-  oahAtomStoringAValue* o = new
+  oahAtomStoringAValue* obj = new
     oahAtomStoringAValue (
       longName,
       shortName,
       description,
       valueSpecification,
       variableName);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 */
 
@@ -2637,7 +2635,7 @@ std::ostream& operator << (std::ostream& os, const S_oahAtomStoringAValue& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -2651,14 +2649,14 @@ S_oahPureHelpValueLessAtom oahPureHelpValueLessAtom::create (
   const std::string& description,
   const std::string& serviceName)
 {
-  oahPureHelpValueLessAtom* o = new
+  oahPureHelpValueLessAtom* obj = new
     oahPureHelpValueLessAtom (
       longName,
       shortName,
       description,
       serviceName);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 */
 
@@ -2803,7 +2801,7 @@ std::ostream& operator << (std::ostream& os, const S_oahPureHelpValueLessAtom& e
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -2818,14 +2816,14 @@ S_oahPureHelpValueFittedAtom oahPureHelpValueFittedAtom::create (
   const std::string& valueSpecification,
   const std::string& serviceName)
 {
-  oahPureHelpValueFittedAtom* o = new
+  oahPureHelpValueFittedAtom* obj = new
     oahPureHelpValueFittedAtom (
       longName,
       shortName,
       description,
       serviceName);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 */
 
@@ -2995,7 +2993,7 @@ std::ostream& operator << (std::ostream& os, const S_oahPureHelpValueFittedAtom&
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -3010,7 +3008,7 @@ S_oahSubGroup oahSubGroup::create (
   oahElementVisibilityKind optionVisibilityKind,
   const S_oahGroup&        upLinkToGroup)
 {
-  oahSubGroup* o = new
+  oahSubGroup* obj = new
     oahSubGroup (
       subGroupHeader,
       longName,
@@ -3018,8 +3016,8 @@ S_oahSubGroup oahSubGroup::create (
       description,
       optionVisibilityKind,
       upLinkToGroup);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 S_oahSubGroup oahSubGroup::createWithNames (
@@ -3030,7 +3028,7 @@ S_oahSubGroup oahSubGroup::createWithNames (
   oahElementVisibilityKind optionVisibilityKind,
   const S_oahGroup&        upLinkToGroup)
 {
-  oahSubGroup* o = new
+  oahSubGroup* obj = new
     oahSubGroup (
       subGroupHeader,
       longName,
@@ -3038,8 +3036,8 @@ S_oahSubGroup oahSubGroup::createWithNames (
       description,
       optionVisibilityKind,
       upLinkToGroup);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 oahSubGroup::oahSubGroup (
@@ -3996,7 +3994,7 @@ std::ostream& operator << (std::ostream& os, const S_oahSubGroup& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -4010,15 +4008,15 @@ S_oahGroup oahGroup::create (
   const std::string&       description,
   oahElementVisibilityKind optionVisibilityKind)
 {
-  oahGroup* o = new
+  oahGroup* obj = new
     oahGroup (
       header,
       longName,
       shortName,
       description,
       optionVisibilityKind);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 S_oahGroup oahGroup::create (
@@ -4029,7 +4027,7 @@ S_oahGroup oahGroup::create (
   oahElementVisibilityKind optionVisibilityKind,
   const S_oahHandler&      groupUpLinkToHandler)
 {
-  oahGroup* o = new
+  oahGroup* obj = new
     oahGroup (
       header,
       longName,
@@ -4037,8 +4035,8 @@ S_oahGroup oahGroup::create (
       description,
       optionVisibilityKind,
       groupUpLinkToHandler);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 S_oahGroup oahGroup::createWithNames (
@@ -4048,15 +4046,15 @@ S_oahGroup oahGroup::createWithNames (
   const std::string&       description,
   oahElementVisibilityKind optionVisibilityKind)
 {
-  oahGroup* o = new
+  oahGroup* obj = new
     oahGroup (
       header,
       longName,
       shortName,
       description,
       optionVisibilityKind);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 S_oahGroup oahGroup::createWithNames (
@@ -4067,7 +4065,7 @@ S_oahGroup oahGroup::createWithNames (
   oahElementVisibilityKind optionVisibilityKind,
   const S_oahHandler&      groupUpLinkToHandler)
 {
-  oahGroup* o = new
+  oahGroup* obj = new
     oahGroup (
       header,
       longName,
@@ -4075,8 +4073,8 @@ S_oahGroup oahGroup::createWithNames (
       description,
       optionVisibilityKind,
       groupUpLinkToHandler);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 oahGroup::oahGroup (
@@ -5034,7 +5032,7 @@ std::ostream& operator << (std::ostream& os, const S_oahGroup& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -5062,14 +5060,14 @@ S_oahHandler oahHandler::create (
   const std::string& handlerDescription,
   const std::string& handlerUsage)
 {
-  oahHandler* o = new
+  oahHandler* obj = new
     oahHandler (
       serviceName,
       handlerHeader,
       handlerDescription,
       handlerUsage);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 */
 
@@ -6351,7 +6349,7 @@ void oahHandler::printFull (std::ostream& os) const
     --gIndenter;
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   // launch command
@@ -7289,7 +7287,7 @@ std::ostream& operator << (std::ostream& os, const S_oahHandler& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -7809,7 +7807,7 @@ void oahHandler::checkMissingPendingArgvValueFittedAtomValue (
     // checkMissingPendingArgvValueFittedAtomValue() should be replaced by the direct code
     // for oahElementValueKind::kElementValueFitted below
 //     switch (fPendingArgvValueFittedAtom->getElementValueKind ()) {
-//       case oahElementValueKind::kElementValue_UNKNOWN:
+//       case oahElementValueKind::kElementValue_UNKNOWN_:
 // //         unknownOptionValueKindError (
 // //           lastOptionNameFound);
 //         break;
@@ -9710,7 +9708,7 @@ oahElementHelpOnlyKind oahHandler::applyOptionsFromElementUsesList ()
             }
 
 //             switch (atomValueKind) {
-//               case oahElementValueKind::kElementValue_UNKNOWN:
+//               case oahElementValueKind::kElementValue_UNKNOWN_:
 //                 unknownOptionValueKindError (
 //                   valueFittedAtom->fetchNamesBetweenQuotes ());
 //                 break;
@@ -10280,7 +10278,7 @@ void oahHandler::handleKnownOptionsVectorAtom (
 #endif // MF_TRACE_IS_ENABLED
 
   switch (atom->getElementValueKind ()) {
-    case oahElementValueKind::kElementValue_UNKNOWN:
+    case oahElementValueKind::kElementValue_UNKNOWN_:
       unknownOptionValueKindError (
         optionNameUsed);
       break;
@@ -10359,7 +10357,7 @@ void oahHandler::handleKnownArgvAtom (
   }
 
   switch (atom->getElementValueKind ()) {
-    case oahElementValueKind::kElementValue_UNKNOWN:
+    case oahElementValueKind::kElementValue_UNKNOWN_:
       unknownOptionValueKindError (
         optionNameUsed);
       break;
@@ -11128,7 +11126,7 @@ void oahHandler::includeOptionsFromFile (
 
     --gIndenter;
 
-     if (inputStream.eof ()) break;
+    if (inputStream.eof ()) break;
   } // while
 
   //  print the options and arguments found

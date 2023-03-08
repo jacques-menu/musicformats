@@ -47,7 +47,6 @@
 #include "msrTupletElementsAndTuplets.h"
 #include "msrTupletElements.h"
 #include "msrTupletFactors.h"
-// #include "msrWholeNotes.h"
 
 
 namespace MusicFormats

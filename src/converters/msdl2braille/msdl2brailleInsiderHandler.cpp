@@ -55,13 +55,13 @@ S_msdl2brailleInsiderHandler msdl2brailleInsiderHandler::create (
   const std::string& handlerHeader)
 {
   // create the insider handler
-  msdl2brailleInsiderHandler* o = new
+  msdl2brailleInsiderHandler* obj = new
     msdl2brailleInsiderHandler (
       serviceName,
       handlerHeader);
-  assert (o!=0);
+  assert (obj!=0);
 
-  return o;
+  return obj;
 }
 
 msdl2brailleInsiderHandler::msdl2brailleInsiderHandler (
@@ -481,7 +481,7 @@ std::ostream& operator << (std::ostream& os, const S_msdl2brailleInsiderHandler&
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -494,12 +494,12 @@ S_msdl2brailleInsiderOahGroup msdl2brailleInsiderOahGroup::create (
   const std::string& serviceName,
   const std::string& handlerHeader)
 {
-  msdl2brailleInsiderOahGroup* o = new msdl2brailleInsiderOahGroup (
+  msdl2brailleInsiderOahGroup* obj = new msdl2brailleInsiderOahGroup (
     serviceName,
     handlerHeader);
-  assert (o!=0);
+  assert (obj!=0);
 
-  return o;
+  return obj;
 }
 
 msdl2brailleInsiderOahGroup::msdl2brailleInsiderOahGroup (

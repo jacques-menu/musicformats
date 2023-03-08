@@ -33,11 +33,11 @@ namespace MusicFormats
 S_bsrFootNotes bsrFootNotes::create (
   int inputLineNumber)
 {
-  bsrFootNotes* o =
+  bsrFootNotes* obj =
     new bsrFootNotes (
       inputLineNumber);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 bsrFootNotes::bsrFootNotes (
@@ -192,7 +192,7 @@ std::ostream& operator << (std::ostream& os, const S_bsrFootNotes& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

@@ -20,7 +20,6 @@
 #include "msrNotesDurations.h"
 #include "msrOctaves.h"
 #include "msrPitchesNames.h"
-// #include "msrWholeNotes.h"
 
 
 namespace MusicFormats

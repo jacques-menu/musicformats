@@ -30,12 +30,12 @@ bsr2bsrException::bsr2bsrException (
 S_bsr2bsrException bsr2bsrException::create (
   std::string const& exceptionDescription)
 {
-  bsr2bsrException* o = new
+  bsr2bsrException* obj = new
     bsr2bsrException (
       exceptionDescription);
-  assert (o!=0);
+  assert (obj!=0);
 
-  return o;
+  return obj;
 }
 
 bsr2finalizedBsrException::bsr2finalizedBsrException (
@@ -46,12 +46,12 @@ bsr2finalizedBsrException::bsr2finalizedBsrException (
 S_bsr2finalizedBsrException bsr2finalizedBsrException::create (
   std::string const& exceptionDescription)
 {
-  bsr2finalizedBsrException* o = new
+  bsr2finalizedBsrException* obj = new
     bsr2finalizedBsrException (
       exceptionDescription);
-  assert (o!=0);
+  assert (obj!=0);
 
-  return o;
+  return obj;
 }
 
 bsr2bsrInternalException::bsr2bsrInternalException (
@@ -62,12 +62,12 @@ bsr2bsrInternalException::bsr2bsrInternalException (
 S_bsr2bsrInternalException bsr2bsrInternalException::create (
   std::string const& exceptionDescription)
 {
-  bsr2bsrInternalException* o = new
+  bsr2bsrInternalException* obj = new
     bsr2bsrInternalException (
       exceptionDescription);
-  assert (o!=0);
+  assert (obj!=0);
 
-  return o;
+  return obj;
 }
 
 //______________________________________________________________________________

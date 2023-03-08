@@ -11,18 +11,16 @@
 
 #include <fstream>
 
-#include "mfStaticSettings.h"
-
 #include "xml.h"
 #include "xmlfile.h"
 #include "xmlreader.h"
-
-#include "mxsr2guidoWae.h"
 
 #include "mfStaticSettings.h"
 
 #include "mfAssert.h"
 #include "mfTiming.h"
+
+#include "mxsr2guidoWae.h"
 
 #include "guidoGenerationOah.h"
 

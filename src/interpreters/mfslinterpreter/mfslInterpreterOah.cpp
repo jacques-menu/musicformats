@@ -35,9 +35,9 @@ S_mfslInterpreterOahGroup gGlobalMfslInterpreterOahGroup;
 
 S_mfslInterpreterOahGroup mfslInterpreterOahGroup::create ()
 {
-  mfslInterpreterOahGroup* o = new mfslInterpreterOahGroup ();
-  assert (o != nullptr);
-  return o;
+  mfslInterpreterOahGroup* obj = new mfslInterpreterOahGroup ();
+  assert (obj != nullptr);
+  return obj;
 }
 
 mfslInterpreterOahGroup::mfslInterpreterOahGroup ()

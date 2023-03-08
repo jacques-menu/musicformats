@@ -52,14 +52,14 @@ S_mfTimingItem mfTimingItem::createTimingItem (
   clock_t            startClock,
   clock_t            endClock)
 {
-  mfTimingItem* o = new mfTimingItem (
+  mfTimingItem* obj = new mfTimingItem (
     activity,
     description,
     timingItemKind,
     startClock,
     endClock);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 mfTimingItem::mfTimingItem (
@@ -344,7 +344,7 @@ void mfTimingItemsList::doPrint (std::ostream& os) const
     totalsPrecision          = secondsPrecision;
 
   switch (gEarlyOptions.getEarlyLanguageKind ()) {
-    case mfLanguageKind::kMusicFormatsLanguage_UNKNOWN:
+    case mfLanguageKind::kMusicFormatsLanguage_UNKNOWN_:
       break;
     case mfLanguageKind::kMusicFormatsLanguageEnglish:
       totalClockWidth          = 11;

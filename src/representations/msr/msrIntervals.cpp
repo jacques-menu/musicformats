@@ -32,7 +32,7 @@ int msrIntervalKindAsSemiTones (
   int result = INT_MIN;
 
   switch (intervalKind) {
-    case msrIntervalKind::kInterval_UNKNOWN:
+    case msrIntervalKind::kInterval_UNKNOWN_:
       break;
 
     case msrIntervalKind::kIntervalDiminishedUnisson:
@@ -203,7 +203,7 @@ std::string msrIntervalKindAsString (
   std::string result;
 
   switch (intervalKind) {
-    case msrIntervalKind::kInterval_UNKNOWN:
+    case msrIntervalKind::kInterval_UNKNOWN_:
       result = "noInterval";
       break;
 
@@ -374,7 +374,7 @@ std::string msrIntervalAsShortString (
   std::string result;
 
   switch (intervalKind) {
-    case msrIntervalKind::kInterval_UNKNOWN:
+    case msrIntervalKind::kInterval_UNKNOWN_:
       result = "noInterval";
       break;
 
@@ -536,10 +536,10 @@ std::string msrIntervalAsShortString (
 msrIntervalKind invertIntervalKind (
   msrIntervalKind intervalKind)
 {
-  msrIntervalKind result = msrIntervalKind::kInterval_UNKNOWN;
+  msrIntervalKind result = msrIntervalKind::kInterval_UNKNOWN_;
 
   switch (intervalKind) {
-    case msrIntervalKind::kInterval_UNKNOWN:
+    case msrIntervalKind::kInterval_UNKNOWN_:
       break;
 
     case msrIntervalKind::kIntervalDiminishedUnisson:
@@ -703,7 +703,7 @@ int intervalKindAsSemitones (
   int result = INT_MIN;
 
   switch (intervalKind) {
-    case msrIntervalKind::kInterval_UNKNOWN:
+    case msrIntervalKind::kInterval_UNKNOWN_:
       break;
 
     case msrIntervalKind::kIntervalDiminishedUnisson:
@@ -1090,7 +1090,7 @@ msrSemiTonesPitchKind noteAtIntervalFromSemiTonesPitch (
 
     case msrSemiTonesPitchKind::kSTP_C_Flat:
       switch (intervalKind) {
-        case msrIntervalKind::kInterval_UNKNOWN:
+        case msrIntervalKind::kInterval_UNKNOWN_:
           break;
 
         case msrIntervalKind::kIntervalDiminishedUnisson:
@@ -1248,7 +1248,7 @@ msrSemiTonesPitchKind noteAtIntervalFromSemiTonesPitch (
 
     case msrSemiTonesPitchKind::kSTP_C_Natural:
       switch (intervalKind) {
-        case msrIntervalKind::kInterval_UNKNOWN:
+        case msrIntervalKind::kInterval_UNKNOWN_:
           break;
 
         case msrIntervalKind::kIntervalDiminishedUnisson:
@@ -1406,7 +1406,7 @@ msrSemiTonesPitchKind noteAtIntervalFromSemiTonesPitch (
 
     case msrSemiTonesPitchKind::kSTP_C_Sharp:
       switch (intervalKind) {
-        case msrIntervalKind::kInterval_UNKNOWN:
+        case msrIntervalKind::kInterval_UNKNOWN_:
           break;
 
         case msrIntervalKind::kIntervalDiminishedUnisson:
@@ -1564,7 +1564,7 @@ msrSemiTonesPitchKind noteAtIntervalFromSemiTonesPitch (
 
     case msrSemiTonesPitchKind::kSTP_D_Flat:
       switch (intervalKind) {
-        case msrIntervalKind::kInterval_UNKNOWN:
+        case msrIntervalKind::kInterval_UNKNOWN_:
           break;
 
         case msrIntervalKind::kIntervalDiminishedUnisson:
@@ -1722,7 +1722,7 @@ msrSemiTonesPitchKind noteAtIntervalFromSemiTonesPitch (
 
     case msrSemiTonesPitchKind::kSTP_D_Natural:
       switch (intervalKind) {
-        case msrIntervalKind::kInterval_UNKNOWN:
+        case msrIntervalKind::kInterval_UNKNOWN_:
           break;
 
         case msrIntervalKind::kIntervalDiminishedUnisson:
@@ -1880,7 +1880,7 @@ msrSemiTonesPitchKind noteAtIntervalFromSemiTonesPitch (
 
     case msrSemiTonesPitchKind::kSTP_D_Sharp:
       switch (intervalKind) {
-        case msrIntervalKind::kInterval_UNKNOWN:
+        case msrIntervalKind::kInterval_UNKNOWN_:
           break;
 
         case msrIntervalKind::kIntervalDiminishedUnisson:
@@ -2038,7 +2038,7 @@ msrSemiTonesPitchKind noteAtIntervalFromSemiTonesPitch (
 
     case msrSemiTonesPitchKind::kSTP_E_Flat:
       switch (intervalKind) {
-        case msrIntervalKind::kInterval_UNKNOWN:
+        case msrIntervalKind::kInterval_UNKNOWN_:
           break;
 
         case msrIntervalKind::kIntervalDiminishedUnisson:
@@ -2196,7 +2196,7 @@ msrSemiTonesPitchKind noteAtIntervalFromSemiTonesPitch (
 
     case msrSemiTonesPitchKind::kSTP_E_Natural:
       switch (intervalKind) {
-        case msrIntervalKind::kInterval_UNKNOWN:
+        case msrIntervalKind::kInterval_UNKNOWN_:
           break;
 
         case msrIntervalKind::kIntervalDiminishedUnisson:
@@ -2354,7 +2354,7 @@ msrSemiTonesPitchKind noteAtIntervalFromSemiTonesPitch (
 
     case msrSemiTonesPitchKind::kSTP_E_Sharp:
       switch (intervalKind) {
-        case msrIntervalKind::kInterval_UNKNOWN:
+        case msrIntervalKind::kInterval_UNKNOWN_:
           break;
 
         case msrIntervalKind::kIntervalDiminishedUnisson:
@@ -2512,7 +2512,7 @@ msrSemiTonesPitchKind noteAtIntervalFromSemiTonesPitch (
 
     case msrSemiTonesPitchKind::kSTP_F_Flat:
       switch (intervalKind) {
-        case msrIntervalKind::kInterval_UNKNOWN:
+        case msrIntervalKind::kInterval_UNKNOWN_:
           break;
 
         case msrIntervalKind::kIntervalDiminishedUnisson:
@@ -2670,7 +2670,7 @@ msrSemiTonesPitchKind noteAtIntervalFromSemiTonesPitch (
 
     case msrSemiTonesPitchKind::kSTP_F_Natural:
       switch (intervalKind) {
-        case msrIntervalKind::kInterval_UNKNOWN:
+        case msrIntervalKind::kInterval_UNKNOWN_:
           break;
 
         case msrIntervalKind::kIntervalDiminishedUnisson:
@@ -2828,7 +2828,7 @@ msrSemiTonesPitchKind noteAtIntervalFromSemiTonesPitch (
 
     case msrSemiTonesPitchKind::kSTP_F_Sharp:
       switch (intervalKind) {
-        case msrIntervalKind::kInterval_UNKNOWN:
+        case msrIntervalKind::kInterval_UNKNOWN_:
           break;
 
         case msrIntervalKind::kIntervalDiminishedUnisson:
@@ -2986,7 +2986,7 @@ msrSemiTonesPitchKind noteAtIntervalFromSemiTonesPitch (
 
     case msrSemiTonesPitchKind::kSTP_G_Flat:
       switch (intervalKind) {
-        case msrIntervalKind::kInterval_UNKNOWN:
+        case msrIntervalKind::kInterval_UNKNOWN_:
           break;
 
         case msrIntervalKind::kIntervalDiminishedUnisson:
@@ -3144,7 +3144,7 @@ msrSemiTonesPitchKind noteAtIntervalFromSemiTonesPitch (
 
     case msrSemiTonesPitchKind::kSTP_G_Natural:
       switch (intervalKind) {
-        case msrIntervalKind::kInterval_UNKNOWN:
+        case msrIntervalKind::kInterval_UNKNOWN_:
           break;
 
         case msrIntervalKind::kIntervalDiminishedUnisson:
@@ -3302,7 +3302,7 @@ msrSemiTonesPitchKind noteAtIntervalFromSemiTonesPitch (
 
     case msrSemiTonesPitchKind::kSTP_G_Sharp:
       switch (intervalKind) {
-        case msrIntervalKind::kInterval_UNKNOWN:
+        case msrIntervalKind::kInterval_UNKNOWN_:
           break;
 
         case msrIntervalKind::kIntervalDiminishedUnisson:
@@ -3460,7 +3460,7 @@ msrSemiTonesPitchKind noteAtIntervalFromSemiTonesPitch (
 
     case msrSemiTonesPitchKind::kSTP_A_Flat:
       switch (intervalKind) {
-        case msrIntervalKind::kInterval_UNKNOWN:
+        case msrIntervalKind::kInterval_UNKNOWN_:
           break;
 
         case msrIntervalKind::kIntervalDiminishedUnisson:
@@ -3618,7 +3618,7 @@ msrSemiTonesPitchKind noteAtIntervalFromSemiTonesPitch (
 
     case msrSemiTonesPitchKind::kSTP_A_Natural:
       switch (intervalKind) {
-        case msrIntervalKind::kInterval_UNKNOWN:
+        case msrIntervalKind::kInterval_UNKNOWN_:
           break;
 
         case msrIntervalKind::kIntervalDiminishedUnisson:
@@ -3776,7 +3776,7 @@ msrSemiTonesPitchKind noteAtIntervalFromSemiTonesPitch (
 
     case msrSemiTonesPitchKind::kSTP_A_Sharp:
       switch (intervalKind) {
-        case msrIntervalKind::kInterval_UNKNOWN:
+        case msrIntervalKind::kInterval_UNKNOWN_:
           break;
 
         case msrIntervalKind::kIntervalDiminishedUnisson:
@@ -3934,7 +3934,7 @@ msrSemiTonesPitchKind noteAtIntervalFromSemiTonesPitch (
 
     case msrSemiTonesPitchKind::kSTP_B_Flat:
       switch (intervalKind) {
-        case msrIntervalKind::kInterval_UNKNOWN:
+        case msrIntervalKind::kInterval_UNKNOWN_:
           break;
 
         case msrIntervalKind::kIntervalDiminishedUnisson:
@@ -4092,7 +4092,7 @@ msrSemiTonesPitchKind noteAtIntervalFromSemiTonesPitch (
 
     case msrSemiTonesPitchKind::kSTP_B_Natural:
       switch (intervalKind) {
-        case msrIntervalKind::kInterval_UNKNOWN:
+        case msrIntervalKind::kInterval_UNKNOWN_:
           break;
 
         case msrIntervalKind::kIntervalDiminishedUnisson:
@@ -4250,7 +4250,7 @@ msrSemiTonesPitchKind noteAtIntervalFromSemiTonesPitch (
 
     case msrSemiTonesPitchKind::kSTP_B_Sharp:
       switch (intervalKind) {
-        case msrIntervalKind::kInterval_UNKNOWN:
+        case msrIntervalKind::kInterval_UNKNOWN_:
           break;
 
         case msrIntervalKind::kIntervalDiminishedUnisson:
@@ -4435,11 +4435,11 @@ msrQuarterTonesPitchKind noteAtIntervalFromQuarterTonesPitch (
   msrIntervalKind          intervalKind,
   msrQuarterTonesPitchKind quarterTonesPitchKind)
 {
-  msrQuarterTonesPitchKind result = msrQuarterTonesPitchKind::kQTP_UNKNOWN;
+  msrQuarterTonesPitchKind result = msrQuarterTonesPitchKind::kQTP_UNKNOWN_;
 
   switch (quarterTonesPitchKind) {
-    case msrQuarterTonesPitchKind::kQTP_UNKNOWN:
-      result = msrQuarterTonesPitchKind::kQTP_UNKNOWN;
+    case msrQuarterTonesPitchKind::kQTP_UNKNOWN_:
+      result = msrQuarterTonesPitchKind::kQTP_UNKNOWN_;
       break;
 
     case msrQuarterTonesPitchKind::kQTP_C_Flat:
@@ -4447,7 +4447,7 @@ msrQuarterTonesPitchKind noteAtIntervalFromQuarterTonesPitch (
 
     case msrQuarterTonesPitchKind::kQTP_C_Natural:
       switch (intervalKind) {
-        case msrIntervalKind::kInterval_UNKNOWN:
+        case msrIntervalKind::kInterval_UNKNOWN_:
           break;
 
         case msrIntervalKind::kIntervalDiminishedUnisson:
@@ -4605,7 +4605,7 @@ msrQuarterTonesPitchKind noteAtIntervalFromQuarterTonesPitch (
 
     case msrQuarterTonesPitchKind::kQTP_C_Sharp:
       switch (intervalKind) {
-        case msrIntervalKind::kInterval_UNKNOWN:
+        case msrIntervalKind::kInterval_UNKNOWN_:
           break;
 
         case msrIntervalKind::kIntervalDiminishedUnisson:
@@ -4763,7 +4763,7 @@ msrQuarterTonesPitchKind noteAtIntervalFromQuarterTonesPitch (
 
     case msrQuarterTonesPitchKind::kQTP_D_Flat:
       switch (intervalKind) {
-        case msrIntervalKind::kInterval_UNKNOWN:
+        case msrIntervalKind::kInterval_UNKNOWN_:
           break;
 
         case msrIntervalKind::kIntervalDiminishedUnisson:
@@ -4921,7 +4921,7 @@ msrQuarterTonesPitchKind noteAtIntervalFromQuarterTonesPitch (
 
     case msrQuarterTonesPitchKind::kQTP_D_Natural:
       switch (intervalKind) {
-        case msrIntervalKind::kInterval_UNKNOWN:
+        case msrIntervalKind::kInterval_UNKNOWN_:
           break;
 
         case msrIntervalKind::kIntervalDiminishedUnisson:
@@ -5079,7 +5079,7 @@ msrQuarterTonesPitchKind noteAtIntervalFromQuarterTonesPitch (
 
     case msrQuarterTonesPitchKind::kQTP_D_Sharp:
       switch (intervalKind) {
-        case msrIntervalKind::kInterval_UNKNOWN:
+        case msrIntervalKind::kInterval_UNKNOWN_:
           break;
 
         case msrIntervalKind::kIntervalDiminishedUnisson:
@@ -5237,7 +5237,7 @@ msrQuarterTonesPitchKind noteAtIntervalFromQuarterTonesPitch (
 
     case msrQuarterTonesPitchKind::kQTP_E_Flat:
       switch (intervalKind) {
-        case msrIntervalKind::kInterval_UNKNOWN:
+        case msrIntervalKind::kInterval_UNKNOWN_:
           break;
 
         case msrIntervalKind::kIntervalDiminishedUnisson:
@@ -5395,7 +5395,7 @@ msrQuarterTonesPitchKind noteAtIntervalFromQuarterTonesPitch (
 
     case msrQuarterTonesPitchKind::kQTP_E_Natural:
       switch (intervalKind) {
-        case msrIntervalKind::kInterval_UNKNOWN:
+        case msrIntervalKind::kInterval_UNKNOWN_:
           break;
 
         case msrIntervalKind::kIntervalDiminishedUnisson:
@@ -5553,7 +5553,7 @@ msrQuarterTonesPitchKind noteAtIntervalFromQuarterTonesPitch (
 
     case msrQuarterTonesPitchKind::kQTP_E_Sharp:
       switch (intervalKind) {
-        case msrIntervalKind::kInterval_UNKNOWN:
+        case msrIntervalKind::kInterval_UNKNOWN_:
           break;
 
         case msrIntervalKind::kIntervalDiminishedUnisson:
@@ -5714,7 +5714,7 @@ msrQuarterTonesPitchKind noteAtIntervalFromQuarterTonesPitch (
 
     case msrQuarterTonesPitchKind::kQTP_F_Natural:
       switch (intervalKind) {
-        case msrIntervalKind::kInterval_UNKNOWN:
+        case msrIntervalKind::kInterval_UNKNOWN_:
           break;
 
         case msrIntervalKind::kIntervalDiminishedUnisson:
@@ -5872,7 +5872,7 @@ msrQuarterTonesPitchKind noteAtIntervalFromQuarterTonesPitch (
 
     case msrQuarterTonesPitchKind::kQTP_F_Sharp:
       switch (intervalKind) {
-        case msrIntervalKind::kInterval_UNKNOWN:
+        case msrIntervalKind::kInterval_UNKNOWN_:
           break;
 
         case msrIntervalKind::kIntervalDiminishedUnisson:
@@ -6030,7 +6030,7 @@ msrQuarterTonesPitchKind noteAtIntervalFromQuarterTonesPitch (
 
     case msrQuarterTonesPitchKind::kQTP_G_Flat:
       switch (intervalKind) {
-        case msrIntervalKind::kInterval_UNKNOWN:
+        case msrIntervalKind::kInterval_UNKNOWN_:
           break;
 
         case msrIntervalKind::kIntervalDiminishedUnisson:
@@ -6188,7 +6188,7 @@ msrQuarterTonesPitchKind noteAtIntervalFromQuarterTonesPitch (
 
     case msrQuarterTonesPitchKind::kQTP_G_Natural:
       switch (intervalKind) {
-        case msrIntervalKind::kInterval_UNKNOWN:
+        case msrIntervalKind::kInterval_UNKNOWN_:
           break;
 
         case msrIntervalKind::kIntervalDiminishedUnisson:
@@ -6346,7 +6346,7 @@ msrQuarterTonesPitchKind noteAtIntervalFromQuarterTonesPitch (
 
     case msrQuarterTonesPitchKind::kQTP_G_Sharp:
       switch (intervalKind) {
-        case msrIntervalKind::kInterval_UNKNOWN:
+        case msrIntervalKind::kInterval_UNKNOWN_:
           break;
 
         case msrIntervalKind::kIntervalDiminishedUnisson:
@@ -6504,7 +6504,7 @@ msrQuarterTonesPitchKind noteAtIntervalFromQuarterTonesPitch (
 
     case msrQuarterTonesPitchKind::kQTP_A_Flat:
       switch (intervalKind) {
-        case msrIntervalKind::kInterval_UNKNOWN:
+        case msrIntervalKind::kInterval_UNKNOWN_:
           break;
 
         case msrIntervalKind::kIntervalDiminishedUnisson:
@@ -6662,7 +6662,7 @@ msrQuarterTonesPitchKind noteAtIntervalFromQuarterTonesPitch (
 
     case msrQuarterTonesPitchKind::kQTP_A_Natural:
       switch (intervalKind) {
-        case msrIntervalKind::kInterval_UNKNOWN:
+        case msrIntervalKind::kInterval_UNKNOWN_:
           break;
 
         case msrIntervalKind::kIntervalDiminishedUnisson:
@@ -6823,7 +6823,7 @@ msrQuarterTonesPitchKind noteAtIntervalFromQuarterTonesPitch (
 
     case msrQuarterTonesPitchKind::kQTP_B_Flat:
       switch (intervalKind) {
-        case msrIntervalKind::kInterval_UNKNOWN:
+        case msrIntervalKind::kInterval_UNKNOWN_:
           break;
 
         case msrIntervalKind::kIntervalDiminishedUnisson:
@@ -6981,7 +6981,7 @@ msrQuarterTonesPitchKind noteAtIntervalFromQuarterTonesPitch (
 
     case msrQuarterTonesPitchKind::kQTP_B_Natural:
       switch (intervalKind) {
-        case msrIntervalKind::kInterval_UNKNOWN:
+        case msrIntervalKind::kInterval_UNKNOWN_:
           break;
 
         case msrIntervalKind::kIntervalDiminishedUnisson:
@@ -7139,7 +7139,7 @@ msrQuarterTonesPitchKind noteAtIntervalFromQuarterTonesPitch (
 
     case msrQuarterTonesPitchKind::kQTP_B_Sharp:
       switch (intervalKind) {
-        case msrIntervalKind::kInterval_UNKNOWN:
+        case msrIntervalKind::kInterval_UNKNOWN_:
           break;
 
         case msrIntervalKind::kIntervalDiminishedUnisson:
@@ -7326,7 +7326,7 @@ msrIntervalKind intervalBetweenSemiTonesPitches (
   msrSemiTonesPitchKind semiTonesPitch1,
   msrSemiTonesPitchKind semiTonesPitch2)
 {
-  msrIntervalKind result = msrIntervalKind::kInterval_UNKNOWN;
+  msrIntervalKind result = msrIntervalKind::kInterval_UNKNOWN_;
 
   msrSemiTonesPitchKind
     workSemiTonesPitch1 = semiTonesPitch1,

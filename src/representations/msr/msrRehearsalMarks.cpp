@@ -40,15 +40,15 @@ S_msrRehearsalMark msrRehearsalMark::create (
   const std::string&   rehearsalText,
   msrPlacementKind     rehearsalPlacementKind)
 {
-  msrRehearsalMark* o =
+  msrRehearsalMark* obj =
     new msrRehearsalMark (
       inputLineNumber,
       upLinkToMeasure,
       rehearsalKind,
       rehearsalText,
       rehearsalPlacementKind);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 S_msrRehearsalMark msrRehearsalMark::create (
@@ -257,7 +257,7 @@ std::ostream& operator << (std::ostream& os, const S_msrRehearsalMark& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

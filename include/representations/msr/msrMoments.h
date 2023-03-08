@@ -34,7 +34,7 @@ class EXP msrMoment
     // constants
     // ------------------------------------------------------
 
-    static const msrMoment K_MOMENT_UNKNOWN;
+    static const msrMoment K_MOMENT_UNKNOWN_;
 
   public:
 

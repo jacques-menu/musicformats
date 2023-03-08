@@ -46,13 +46,13 @@ S_mfslInterpreterInsiderHandler mfslInterpreterInsiderHandler::create (
   const std::string& handlerHeader)
 {
   // create the insider handler
-  mfslInterpreterInsiderHandler* o = new
+  mfslInterpreterInsiderHandler* obj = new
     mfslInterpreterInsiderHandler (
       serviceName,
       handlerHeader);
-  assert (o != nullptr);
+  assert (obj != nullptr);
 
-  return o;
+  return obj;
 }
 
 mfslInterpreterInsiderHandler::mfslInterpreterInsiderHandler (
@@ -274,7 +274,7 @@ void mfslInterpreterInsiderOahGroup::checkGroupOptionsConsistency ()
     stringstream s;
 
     s <<
-      "mfslInterpreterInsiderOahGroup: a MusicXML output file name must be chosen with '-o, -output-file-name";
+      "mfslInterpreterInsiderOahGroup: a MusicXML output file name must be chosen with '-obj, -output-file-name";
 
     oahError (s.str ());
   }
@@ -420,10 +420,10 @@ S_mfslInterpreterInsiderOahGroup gGlobalMfslInterpreterInsiderOahGroup;
 
 S_mfslInterpreterInsiderOahGroup mfslInterpreterInsiderOahGroup::create ()
 {
-  mfslInterpreterInsiderOahGroup* o = new mfslInterpreterInsiderOahGroup ();
-  assert (o != nullptr);
+  mfslInterpreterInsiderOahGroup* obj = new mfslInterpreterInsiderOahGroup ();
+  assert (obj != nullptr);
 
-  return o;
+  return obj;
 }
 
 mfslInterpreterInsiderOahGroup::mfslInterpreterInsiderOahGroup ()

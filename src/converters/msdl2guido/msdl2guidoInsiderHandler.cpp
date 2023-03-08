@@ -52,13 +52,13 @@ S_msdl2guidoInsiderHandler msdl2guidoInsiderHandler::create (
   const std::string& handlerHeader)
 {
   // create the insider handler
-  msdl2guidoInsiderHandler* o = new
+  msdl2guidoInsiderHandler* obj = new
     msdl2guidoInsiderHandler (
       serviceName,
       handlerHeader);
-  assert (o!=0);
+  assert (obj!=0);
 
-  return o;
+  return obj;
 }
 
 msdl2guidoInsiderHandler::msdl2guidoInsiderHandler (
@@ -316,7 +316,7 @@ void msdl2guidoInsiderOahGroup::checkGroupOptionsConsistency ()
     std::stringstream ss;
 
     ss <<
-      "msdl2guidoInsiderOahGroup: a MusicXML output file name must be selected with '-o, -output-file-name";
+      "msdl2guidoInsiderOahGroup: a MusicXML output file name must be selected with '-obj, -output-file-name";
 
     oahError (ss.str ());
   }
@@ -480,7 +480,7 @@ std::ostream& operator << (std::ostream& os, const S_msdl2guidoInsiderHandler& e
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -491,10 +491,10 @@ S_msdl2guidoInsiderOahGroup gGlobalMsdl2gmnInsiderOahGroup;
 
 S_msdl2guidoInsiderOahGroup msdl2guidoInsiderOahGroup::create ()
 {
-  msdl2guidoInsiderOahGroup* o = new msdl2guidoInsiderOahGroup ();
-  assert (o!=0);
+  msdl2guidoInsiderOahGroup* obj = new msdl2guidoInsiderOahGroup ();
+  assert (obj!=0);
 
-  return o;
+  return obj;
 }
 
 msdl2guidoInsiderOahGroup::msdl2guidoInsiderOahGroup ()

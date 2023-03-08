@@ -9,8 +9,6 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include "mfStaticSettings.h"
-
 #include "visitor.h"
 
 #include "mfStaticSettings.h"
@@ -37,13 +35,13 @@ S_msrRepeatCoda msrRepeatCoda::create (
   const S_msrSegment& repeatCodaSegment,
   const S_msrRepeat&  upLinkToRepeat)
 {
-  msrRepeatCoda* o =
+  msrRepeatCoda* obj =
     new msrRepeatCoda (
       inputLineNumber,
       repeatCodaSegment,
       upLinkToRepeat);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 msrRepeatCoda::msrRepeatCoda (
@@ -299,7 +297,7 @@ std::ostream& operator << (std::ostream& os, const S_msrRepeatCoda& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

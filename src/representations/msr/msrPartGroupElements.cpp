@@ -26,11 +26,11 @@ namespace MusicFormats
 S_msrPartGroupElement msrPartGroupElement::create (
   int inputLineNumber)
 {
-  msrPartGroupElement* o =
+  msrPartGroupElement* obj =
     new msrPartGroupElement (
       inputLineNumber);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 */
 
@@ -117,7 +117,7 @@ std::ostream& operator << (std::ostream& os, const S_msrPartGroupElement& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

@@ -32,10 +32,10 @@ namespace MusicFormats
 S_lpsrBookBlockElement lpsrBookBlockElement::create (
   int inputLineNumber)
 {
-  lpsrBookBlockElement* o = new lpsrBookBlockElement (
+  lpsrBookBlockElement* obj = new lpsrBookBlockElement (
     inputLineNumber);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 lpsrBookBlockElement::lpsrBookBlockElement (
@@ -192,10 +192,10 @@ std::ostream& operator << (std::ostream& os, const S_lpsrBookBlockElement& scr)
 S_lpsrScoreBlock lpsrScoreBlock::create (
   int inputLineNumber)
 {
-  lpsrScoreBlock* o = new lpsrScoreBlock (
+  lpsrScoreBlock* obj = new lpsrScoreBlock (
     inputLineNumber);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 lpsrScoreBlock::lpsrScoreBlock (
@@ -496,10 +496,10 @@ std::ostream& operator << (std::ostream& os, const S_lpsrScoreBlock& scr)
 S_lpsrBookPartBlock lpsrBookPartBlock::create (
   int inputLineNumber)
 {
-  lpsrBookPartBlock* o = new lpsrBookPartBlock (
+  lpsrBookPartBlock* obj = new lpsrBookPartBlock (
     inputLineNumber);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 lpsrBookPartBlock::lpsrBookPartBlock (
@@ -728,10 +728,10 @@ std::ostream& operator << (std::ostream& os, const S_lpsrBookPartBlock& scr)
 S_lpsrBookBlock lpsrBookBlock::create (
   int inputLineNumber)
 {
-  lpsrBookBlock* o = new lpsrBookBlock (
+  lpsrBookBlock* obj = new lpsrBookBlock (
     inputLineNumber);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 lpsrBookBlock::lpsrBookBlock (

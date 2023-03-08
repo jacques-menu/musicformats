@@ -42,7 +42,7 @@ S_msrIgnorePartAtom msrIgnorePartAtom::create (
   const std::string& variableName,
   std::set<std::string>&  stringSetVariable)
 {
-  msrIgnorePartAtom* o = new
+  msrIgnorePartAtom* obj = new
     msrIgnorePartAtom (
       longName,
       shortName,
@@ -50,8 +50,8 @@ S_msrIgnorePartAtom msrIgnorePartAtom::create (
       valueSpecification,
       variableName,
       stringSetVariable);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 msrIgnorePartAtom::msrIgnorePartAtom (
@@ -364,7 +364,7 @@ std::ostream& operator << (std::ostream& os, const S_msrIgnorePartAtom& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -379,7 +379,7 @@ S_msrKeepPartAtom msrKeepPartAtom::create (
   const std::string& variableName,
   std::set<std::string>&  stringSetVariable)
 {
-  msrKeepPartAtom* o = new
+  msrKeepPartAtom* obj = new
     msrKeepPartAtom (
       longName,
       shortName,
@@ -387,8 +387,8 @@ S_msrKeepPartAtom msrKeepPartAtom::create (
       valueSpecification,
       variableName,
       stringSetVariable);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 msrKeepPartAtom::msrKeepPartAtom (
@@ -701,7 +701,7 @@ std::ostream& operator << (std::ostream& os, const S_msrKeepPartAtom& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -713,9 +713,9 @@ S_msr2msrOahGroup gGlobalMsr2msrOahGroup;
 
 S_msr2msrOahGroup msr2msrOahGroup::create ()
 {
-  msr2msrOahGroup* o = new msr2msrOahGroup ();
-  assert (o != nullptr);
-  return o;
+  msr2msrOahGroup* obj = new msr2msrOahGroup ();
+  assert (obj != nullptr);
+  return obj;
 }
 
 msr2msrOahGroup::msr2msrOahGroup ()
@@ -1296,7 +1296,7 @@ std::ostream& operator << (std::ostream& os, const S_msr2msrOahGroup& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

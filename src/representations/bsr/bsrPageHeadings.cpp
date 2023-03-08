@@ -35,12 +35,12 @@ S_bsrPageHeading bsrPageHeading::create (
   const S_bsrPagination& pageHeadingPagination,
   int             pageHeadingNumber)
 {
-  bsrPageHeading* o =
+  bsrPageHeading* obj =
     new bsrPageHeading (
       inputLineNumber,
       pageHeadingTitle, pageHeadingPagination, pageHeadingNumber);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 bsrPageHeading::bsrPageHeading (
@@ -239,7 +239,7 @@ std::string bsrPageHeading::asString () const
   }
   else {
     ss <<
-      "[NONE]";
+      "[NULL]";
   }
 
   ss <<
@@ -297,7 +297,7 @@ void bsrPageHeading::print (std::ostream& os) const
   }
   else {
     os <<
-      ": " << "[NONE]" <<
+      ": " << "[NULL]" <<
     std::endl;
   }
 
@@ -315,7 +315,7 @@ std::ostream& operator << (std::ostream& os, const S_bsrPageHeading& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

@@ -114,8 +114,8 @@ std::string mfLanguageKindAsString (
   std::string result;
 
   switch (languageKind) {
-    case mfLanguageKind::kMusicFormatsLanguage_UNKNOWN:
-      result = "*kMusicFormatsLanguage_UNKNOWN*";
+    case mfLanguageKind::kMusicFormatsLanguage_UNKNOWN_:
+      result = "*kMusicFormatsLanguage_UNKNOWN_*";
       break;
     case mfLanguageKind::kMusicFormatsLanguageEnglish: // default value
       result = "english";
@@ -232,10 +232,10 @@ void initializeMusicFormatsLanguages ()
 /* this class is purely virtual
 S_language language::create ()
 {
-  language* o =
+  language* obj =
     new language ();
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 */
 
@@ -268,7 +268,7 @@ std::ostream& operator << (std::ostream& os, const S_language& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -282,8 +282,8 @@ std::string language::passIDKindAsString (mfPassIDKind passIDKind) const
   std::string result;
 
   switch (passIDKind) {
-    case mfPassIDKind::kMfPassID_UNKNOWN:
-      result = "*Pass kMfPassID_UNKNOWN*";
+    case mfPassIDKind::kMfPassID_UNKNOWN_:
+      result = "*Pass kMfPassID_UNKNOWN_*";
       break;
 
     case mfPassIDKind::kMfPassID_ALL:
@@ -779,12 +779,12 @@ S_language pGlobalLanguage =
 EXP void setGlobalLanguage (mfLanguageKind languageKind)
 {
   switch (languageKind) {
-    case mfLanguageKind::kMusicFormatsLanguage_UNKNOWN:
+    case mfLanguageKind::kMusicFormatsLanguage_UNKNOWN_:
       {
         std::stringstream ss;
 
         ss <<
-          "Attempt at setting fEarlyLanguageKind to kMusicFormatsLanguage_UNKNOWN" <<
+          "Attempt at setting fEarlyLanguageKind to kMusicFormatsLanguage_UNKNOWN_" <<
           std::endl;
 
         oahError (ss.str ());

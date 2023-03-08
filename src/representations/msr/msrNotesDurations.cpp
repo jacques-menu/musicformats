@@ -41,7 +41,7 @@ msrNotesDurationKind msrNotesDurationKindFromMusicXMLString (
   int                inputLineNumber,
   const std::string& durationString)
 {
-  msrNotesDurationKind result = msrNotesDurationKind::kNotesDuration_UNKNOWN;
+  msrNotesDurationKind result = msrNotesDurationKind::kNotesDuration_UNKNOWN_;
 
   if      (durationString == "maxima") {
     result = msrNotesDurationKind::kNotesDurationMaxima;
@@ -106,7 +106,7 @@ EXP msrNotesDurationKind msrNotesDurationKindFromInteger (
   int inputLineNumber,
   int durationInteger)
 {
-  msrNotesDurationKind result = msrNotesDurationKind::kNotesDuration_UNKNOWN;
+  msrNotesDurationKind result = msrNotesDurationKind::kNotesDuration_UNKNOWN_;
 
   switch (durationInteger) {
     case 1:
@@ -153,7 +153,7 @@ msrNotesDurationKind msrNotesDurationKindFromString (
   int                inputLineNumber,
   const std::string& durationString)
 {
-  msrNotesDurationKind result = msrNotesDurationKind::kNotesDuration_UNKNOWN;
+  msrNotesDurationKind result = msrNotesDurationKind::kNotesDuration_UNKNOWN_;
 
   if      (durationString == "maxima") {
     result = msrNotesDurationKind::kNotesDurationMaxima;
@@ -281,7 +281,7 @@ msrWholeNotes msrNotesDurationKindAsWholeNotes (msrNotesDurationKind notesNotesD
   msrWholeNotes result;
 
   switch (notesNotesDurationKind) {
-    case msrNotesDurationKind::kNotesDuration_UNKNOWN:
+    case msrNotesDurationKind::kNotesDuration_UNKNOWN_:
       result = msrWholeNotes (0, 1);
       break;
 
@@ -334,7 +334,7 @@ msrWholeNotes msrNotesDurationKindAsWholeNotes (msrNotesDurationKind notesNotesD
 
 msrNotesDurationKind wholeNotesAsNotesDurationKind (msrWholeNotes wholeNotes)
 {
-  msrNotesDurationKind result = msrNotesDurationKind::kNotesDuration_UNKNOWN;
+  msrNotesDurationKind result = msrNotesDurationKind::kNotesDuration_UNKNOWN_;
 
   if (wholeNotes.getNumerator () == 1) {
     switch (wholeNotes.getDenominator ()) {
@@ -400,7 +400,7 @@ std::string msrNotesDurationKindAsMusicXMLType (msrNotesDurationKind notesNotesD
   std::string result;
 
   switch (notesNotesDurationKind) {
-    case msrNotesDurationKind::kNotesDuration_UNKNOWN:
+    case msrNotesDurationKind::kNotesDuration_UNKNOWN_:
       result = "noNotesDuration";
       break;
 
@@ -457,8 +457,8 @@ std::string msrNotesDurationKindAsString_INTERNAL (
   std::string result;
 
   switch (notesNotesDurationKind) {
-    case msrNotesDurationKind::kNotesDuration_UNKNOWN:
-      result = "kNotesDuration_UNKNOWN";
+    case msrNotesDurationKind::kNotesDuration_UNKNOWN_:
+      result = "kNotesDuration_UNKNOWN_";
       break;
 
     case msrNotesDurationKind::kNotesDuration1024th:
@@ -514,7 +514,7 @@ std::string msrNotesDurationKindAsString (
   std::string result;
 
   switch (notesNotesDurationKind) {
-    case msrNotesDurationKind::kNotesDuration_UNKNOWN:
+    case msrNotesDurationKind::kNotesDuration_UNKNOWN_:
       result = "???NoNotesDuration???";
       break;
 
@@ -575,7 +575,7 @@ std::ostream& operator << (std::ostream& os, const msrNotesDurationKind& elt)
 //______________________________________________________________________________
 msrNotesDuration::msrNotesDuration ()
 {
-  fNotesDurationKind = msrNotesDurationKind::kNotesDuration_UNKNOWN;
+  fNotesDurationKind = msrNotesDurationKind::kNotesDuration_UNKNOWN_;
   fDotsNumber   = 0;
 }
 
@@ -847,7 +847,7 @@ int msrNumberOfDots (int n)
 //______________________________________________________________________________
 msrDottedNotesDuration::msrDottedNotesDuration ()
 {
-  fNotesDurationKind = msrNotesDurationKind::kNotesDuration_UNKNOWN;
+  fNotesDurationKind = msrNotesDurationKind::kNotesDuration_UNKNOWN_;
   fDotsNumber   = 0;
 }
 
@@ -1021,7 +1021,7 @@ std::ostream& operator << (std::ostream& os, const msrDottedNotesDuration& elt)
 
 //______________________________________________________________________________
 // constant
-const int msrWholeNotes::K_WHOLE_NOTES_NUMERATOR_UNKNOWN = -33;
+const int msrWholeNotes::K_WHOLE_NOTES_NUMERATOR_UNKNOWN_ = -33;
 
 msrWholeNotes::msrWholeNotes ()
 {
@@ -1425,8 +1425,8 @@ std::string msrWholeNotes::asString () const
 
   ss << "[msrWholeNotes ";
 
-  if (fNumerator == msrWholeNotes::K_WHOLE_NOTES_NUMERATOR_UNKNOWN ) {
-    ss << "UNKNOWN";
+  if (fNumerator == msrWholeNotes::K_WHOLE_NOTES_NUMERATOR_UNKNOWN_ ) {
+    ss << "UNKNOWN_WHOLE_NOTES";
   }
   else {
     ss << fNumerator << '/' << fDenominator;
@@ -1478,7 +1478,7 @@ std::string wholeNotesAndDotsNumberAsMsrString (
 
     ss <<
       "--> wholeNotesAndDotsNumberAsMsrString() 1 -------------------------------------" <<
-      ", wholeNotes: " << wholeNotes <<
+      ", wholeNotes: " << wholeNotes.asString () <<
       ", line " << inputLineNumber <<
       std::endl;
 
@@ -1541,7 +1541,7 @@ std::string wholeNotesAndDotsNumberAsMsrString (
 
     ss <<
       "--> integralNumberOfWholeNotes: " <<
-      integralNumberOfWholeNotes <<
+      integralNumberOfWholeNotes.asString () <<
       std::endl << std::endl;
 
     gWaeHandler->waeTrace (
@@ -1952,8 +1952,8 @@ std::string multipleFullBarRestsWholeNotesAsMsrString (
 
 //______________________________________________________________________________
 EXP const msrWholeNotes
-  K_WHOLE_NOTES_UNKNOWN (
-    msrWholeNotes::K_WHOLE_NOTES_NUMERATOR_UNKNOWN, 1);
+  K_WHOLE_NOTES_UNKNOWN_ (
+    msrWholeNotes::K_WHOLE_NOTES_NUMERATOR_UNKNOWN_, 1);
 
 //______________________________________________________________________________
 void testWholeNotes ()

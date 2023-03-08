@@ -21,9 +21,9 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-extern const std::string K_MEASURE_NUMBER_UNKNOWN;
+extern const std::string K_MEASURE_NUMBER_UNKNOWN_;
 
-extern const msrWholeNotes K_MEASURE_POSITION_UNKNOWN;
+extern const msrWholeNotes K_MEASURE_POSITION_UNKNOWN_;
 
 //______________________________________________________________________________
 // hidden global null measure variable

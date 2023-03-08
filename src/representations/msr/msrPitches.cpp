@@ -30,8 +30,8 @@ std::string msrDiatonicPitchKindAsString (
   std::string result;
 
   switch (diatonicPitchKind) {
-    case msrDiatonicPitchKind::kDiatonicPitch_UNKNOWN:
-      result = "kDiatonicPitch_UNKNOWN";
+    case msrDiatonicPitchKind::kDiatonicPitch_UNKNOWN_:
+      result = "kDiatonicPitch_UNKNOWN_";
       break;
 
     case msrDiatonicPitchKind::kDiatonicPitchA:
@@ -69,7 +69,7 @@ std::ostream& operator << (std::ostream& os, const msrDiatonicPitchKind& elt)
 msrDiatonicPitchKind msrDiatonicPitchKindFromChar (
   char diatonicNoteName)
 {
-  msrDiatonicPitchKind result = msrDiatonicPitchKind::kDiatonicPitch_UNKNOWN;
+  msrDiatonicPitchKind result = msrDiatonicPitchKind::kDiatonicPitch_UNKNOWN_;
 
   switch (diatonicNoteName) {
     case 'a':
@@ -121,7 +121,7 @@ msrAlterationKind msrAlterationKindFromMusicXMLAlter (
       +0.5      -0.5        +1.5       -1.5         +2.0        -2.0
 */
 
-  msrAlterationKind result = msrAlterationKind::kAlteration_UNKNOWN;
+  msrAlterationKind result = msrAlterationKind::kAlteration_UNKNOWN_;
 
   if      (alter == 0 ) {
     result = msrAlterationKind::kAlterationNatural;
@@ -176,7 +176,7 @@ float msrMusicXMLAlterFromAlterationKind (
   float result = -111.0;
 
   switch (alterationKind) {
-    case msrAlterationKind::kAlteration_UNKNOWN:
+    case msrAlterationKind::kAlteration_UNKNOWN_:
       break;
 
     case msrAlterationKind::kAlterationTripleFlat:
@@ -223,7 +223,7 @@ std::string msrAlterationKindAsString (
   std::string result;
 
   switch (alterationKind) {
-    case msrAlterationKind::kAlteration_UNKNOWN:
+    case msrAlterationKind::kAlteration_UNKNOWN_:
       result = "***noAlteration***";
       break;
 
@@ -679,12 +679,12 @@ msrQuarterTonesPitchKind msrSemiTonesPitchKindAsQuarterTonesPitchKind (
 {
   msrQuarterTonesPitchKind
     result =
-      msrQuarterTonesPitchKind::kQTP_UNKNOWN;
+      msrQuarterTonesPitchKind::kQTP_UNKNOWN_;
 
   /* JMI
   switch (semiTonesPitchKind) {
     case msrSemiTonesPitchKind::kSTP_NoSemiTonesPitch:
-      result = msrQuarterTonesPitchKind::kQTP_UNKNOWN;
+      result = msrQuarterTonesPitchKind::kQTP_UNKNOWN_;
       break;
 
     case msrSemiTonesPitchKind::kSTP_C_Natural: // msrSemiTonesPitchKind::kSTP_B_Sharp, msrSemiTonesPitchKind::kSTP_D_DoubleFlat
@@ -776,7 +776,7 @@ msrQuarterTonesPitchKind msrSemiTonesPitchKindAsQuarterTonesPitchKind (
   /* JMI
   switch (semiTonesPitchKind) {
     case msrSemiTonesPitchKind::kSTP_NoSemiTonesPitch:
-      result = msrQuarterTonesPitchKind::kQTP_UNKNOWN;
+      result = msrQuarterTonesPitchKind::kQTP_UNKNOWN_;
       break;
 
     case msrSemiTonesPitchKind::kSTP_C_Natural: // msrSemiTonesPitchKind::kSTP_B_Sharp, msrSemiTonesPitchKind::kSTP_D_DoubleFlat
@@ -874,9 +874,9 @@ void setDiatonicPitchAndAlterationKind (
   msrAlterationKind&       alterationKind)
 {
   switch (quarterTonesPitchKind) {
-    case msrQuarterTonesPitchKind::kQTP_UNKNOWN:
+    case msrQuarterTonesPitchKind::kQTP_UNKNOWN_:
       diatonicPitchKind = msrDiatonicPitchKind::kDiatonicPitchA; // any value would fit
-      alterationKind    = msrAlterationKind::kAlteration_UNKNOWN;
+      alterationKind    = msrAlterationKind::kAlteration_UNKNOWN_;
       break;
 
     case msrQuarterTonesPitchKind::kQTP_A_TripleFlat:
@@ -1196,7 +1196,7 @@ void setDiatonicPitchAndAlterationKind (
     case msrQuarterTonesPitchKind::kQTP_Rest:
     case msrQuarterTonesPitchKind::kQTP_Skip:
       diatonicPitchKind = msrDiatonicPitchKind::kDiatonicPitchA; // any value would fit JMI
-      alterationKind    = msrAlterationKind::kAlteration_UNKNOWN;
+      alterationKind    = msrAlterationKind::kAlteration_UNKNOWN_;
 
       break;
   } // switch
@@ -1208,7 +1208,7 @@ std::string msrQuarterTonesPitchKindAsString (
   std::string result;
 
   switch (quarterTonesPitchKind) {
-    case msrQuarterTonesPitchKind::kQTP_UNKNOWN:
+    case msrQuarterTonesPitchKind::kQTP_UNKNOWN_:
       result = "***noQuarterTonesPitch***";
       break;
 
@@ -1541,17 +1541,17 @@ msrQuarterTonesPitchKind quarterTonesPitchKindFromDiatonicPitchAndAlteration (
 {
   msrQuarterTonesPitchKind
     result =
-      msrQuarterTonesPitchKind::kQTP_UNKNOWN;
+      msrQuarterTonesPitchKind::kQTP_UNKNOWN_;
 
   switch (diatonicPitchKind) {
-    case msrDiatonicPitchKind::kDiatonicPitch_UNKNOWN:
+    case msrDiatonicPitchKind::kDiatonicPitch_UNKNOWN_:
       {
-        result = msrQuarterTonesPitchKind::kQTP_UNKNOWN;
+        result = msrQuarterTonesPitchKind::kQTP_UNKNOWN_;
         /* JMI
         std::stringstream ss;
 
         ss <<
-          "cannot convert msrDiatonicPitchKind::kDiatonicPitch_UNKNOWN to a quarter tones pitch"
+          "cannot convert msrDiatonicPitchKind::kDiatonicPitch_UNKNOWN_ to a quarter tones pitch"
           ", line: " << inputLineNumber;
 
         msrInternalError (
@@ -1598,7 +1598,7 @@ msrQuarterTonesPitchKind quarterTonesPitchKindFromDiatonicPitchAndAlteration (
         case msrAlterationKind::kAlterationTripleSharp:
           result = msrQuarterTonesPitchKind::kQTP_A_TripleSharp;
           break;
-        case msrAlterationKind::kAlteration_UNKNOWN:
+        case msrAlterationKind::kAlteration_UNKNOWN_:
           {
             std::stringstream ss;
 
@@ -1651,7 +1651,7 @@ msrQuarterTonesPitchKind quarterTonesPitchKindFromDiatonicPitchAndAlteration (
         case msrAlterationKind::kAlterationTripleSharp:
           result = msrQuarterTonesPitchKind::kQTP_B_TripleSharp;
           break;
-        case msrAlterationKind::kAlteration_UNKNOWN:
+        case msrAlterationKind::kAlteration_UNKNOWN_:
           {
             std::stringstream ss;
 
@@ -1706,7 +1706,7 @@ msrQuarterTonesPitchKind quarterTonesPitchKindFromDiatonicPitchAndAlteration (
         case msrAlterationKind::kAlterationTripleSharp:
           result = msrQuarterTonesPitchKind::kQTP_C_TripleSharp;
           break;
-        case msrAlterationKind::kAlteration_UNKNOWN:
+        case msrAlterationKind::kAlteration_UNKNOWN_:
           {
             std::stringstream ss;
 
@@ -1759,7 +1759,7 @@ msrQuarterTonesPitchKind quarterTonesPitchKindFromDiatonicPitchAndAlteration (
         case msrAlterationKind::kAlterationTripleSharp:
           result = msrQuarterTonesPitchKind::kQTP_D_TripleSharp;
           break;
-        case msrAlterationKind::kAlteration_UNKNOWN:
+        case msrAlterationKind::kAlteration_UNKNOWN_:
           {
             std::stringstream ss;
 
@@ -1812,7 +1812,7 @@ msrQuarterTonesPitchKind quarterTonesPitchKindFromDiatonicPitchAndAlteration (
         case msrAlterationKind::kAlterationTripleSharp:
           result = msrQuarterTonesPitchKind::kQTP_E_TripleSharp;
           break;
-        case msrAlterationKind::kAlteration_UNKNOWN:
+        case msrAlterationKind::kAlteration_UNKNOWN_:
           {
             std::stringstream ss;
 
@@ -1865,7 +1865,7 @@ msrQuarterTonesPitchKind quarterTonesPitchKindFromDiatonicPitchAndAlteration (
         case msrAlterationKind::kAlterationTripleSharp:
           result = msrQuarterTonesPitchKind::kQTP_F_TripleSharp;
           break;
-        case msrAlterationKind::kAlteration_UNKNOWN:
+        case msrAlterationKind::kAlteration_UNKNOWN_:
           {
             std::stringstream ss;
 
@@ -1918,7 +1918,7 @@ msrQuarterTonesPitchKind quarterTonesPitchKindFromDiatonicPitchAndAlteration (
         case msrAlterationKind::kAlterationTripleSharp:
           result = msrQuarterTonesPitchKind::kQTP_G_TripleSharp;
           break;
-        case msrAlterationKind::kAlteration_UNKNOWN:
+        case msrAlterationKind::kAlteration_UNKNOWN_:
           {
             std::stringstream ss;
 
@@ -1944,7 +1944,7 @@ msrDiatonicPitchKind diatonicPitchKindFromQuarterTonesPitchKind (
   int                      inputLineNumber,
   msrQuarterTonesPitchKind quarterTonesPitchKind)
 {
-  msrDiatonicPitchKind result = msrDiatonicPitchKind::kDiatonicPitch_UNKNOWN;
+  msrDiatonicPitchKind result = msrDiatonicPitchKind::kDiatonicPitch_UNKNOWN_;
 
   switch (quarterTonesPitchKind) {
     case msrQuarterTonesPitchKind::kQTP_A_TripleFlat:
@@ -2075,15 +2075,15 @@ msrDiatonicPitchKind diatonicPitchKindFromQuarterTonesPitchKind (
           ss.str ());
       }
 
-    case msrQuarterTonesPitchKind::kQTP_UNKNOWN:
+    case msrQuarterTonesPitchKind::kQTP_UNKNOWN_:
       {
-        result = msrDiatonicPitchKind::kDiatonicPitch_UNKNOWN;
+        result = msrDiatonicPitchKind::kDiatonicPitch_UNKNOWN_;
 
         /* JMI
         std::stringstream ss;
 
         ss <<
-          "cannot get the diatonic pitch of a msrQuarterTonesPitchKind::kQTP_UNKNOWN"
+          "cannot get the diatonic pitch of a msrQuarterTonesPitchKind::kQTP_UNKNOWN_"
           ", line: " << inputLineNumber;
 
         msrInternalError (
@@ -2102,7 +2102,7 @@ msrAlterationKind alterationKindFromQuarterTonesPitchKind (
   int                      inputLineNumber,
   msrQuarterTonesPitchKind quarterTonesPitchKind)
 {
-  msrAlterationKind result = msrAlterationKind::kAlteration_UNKNOWN;
+  msrAlterationKind result = msrAlterationKind::kAlteration_UNKNOWN_;
 
   switch (quarterTonesPitchKind) {
     case msrQuarterTonesPitchKind::kQTP_A_TripleFlat:
@@ -2245,15 +2245,15 @@ msrAlterationKind alterationKindFromQuarterTonesPitchKind (
           ss.str ());
       }
 
-    case msrQuarterTonesPitchKind::kQTP_UNKNOWN:
+    case msrQuarterTonesPitchKind::kQTP_UNKNOWN_:
       {
-        result = msrAlterationKind::kAlteration_UNKNOWN;
+        result = msrAlterationKind::kAlteration_UNKNOWN_;
 
         /* JMI
         std::stringstream ss;
 
         ss <<
-          "cannot get the diatonic pitch of a msrQuarterTonesPitchKind::kQTP_UNKNOWN"
+          "cannot get the diatonic pitch of a msrQuarterTonesPitchKind::kQTP_UNKNOWN_"
           ", line: " << inputLineNumber;
 
         msrInternalError (
@@ -2271,7 +2271,7 @@ msrAlterationKind alterationKindFromQuarterTonesPitchKind (
 msrQuarterTonesPitchKind quarterTonesPitchKindFromSemiTonesPitchKind (
   msrSemiTonesPitchKind semiTonesPitchKind)
 {
-  msrQuarterTonesPitchKind result = msrQuarterTonesPitchKind::kQTP_UNKNOWN;
+  msrQuarterTonesPitchKind result = msrQuarterTonesPitchKind::kQTP_UNKNOWN_;
 
   switch (semiTonesPitchKind) {
     case msrSemiTonesPitchKind::kSTP_NoSemiTonesPitch:
@@ -2441,7 +2441,7 @@ msrSemiTonesPitchKind semiTonesPitchKindFromQuarterTonesPitchKind (
   msrSemiTonesPitchKind result = msrSemiTonesPitchKind::kSTP_NoSemiTonesPitch;
 
     switch (quarterTonesPitchKind) {
-      case msrQuarterTonesPitchKind::kQTP_UNKNOWN:
+      case msrQuarterTonesPitchKind::kQTP_UNKNOWN_:
         break;
 
       case msrQuarterTonesPitchKind::kQTP_Rest:

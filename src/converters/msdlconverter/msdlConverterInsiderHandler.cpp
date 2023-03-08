@@ -105,23 +105,23 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 S_msdlConverterInsiderHandler msdlConverterInsiderHandler::create (
-  const std::string&     serviceName,
-  const std::string&     handlerHeader,
+  const std::string&          serviceName,
+  const std::string&          handlerHeader,
   mfMultiGenerationOutputKind multiGenerationOutputKind)
 {
   // create the insider handler
-  msdlConverterInsiderHandler* o = new
+  msdlConverterInsiderHandler* obj = new
     msdlConverterInsiderHandler (
       serviceName,
       handlerHeader,
       multiGenerationOutputKind);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 msdlConverterInsiderHandler::msdlConverterInsiderHandler (
-  const std::string&     serviceName,
-  const std::string&     handlerHeader,
+  const std::string&          serviceName,
+  const std::string&          handlerHeader,
   mfMultiGenerationOutputKind multiGenerationOutputKind)
   : oahInsiderHandler (
       serviceName,
@@ -187,7 +187,7 @@ R"(Usage: msdl [option]*
     std::endl;
 
   switch (multiGenerationOutputKind) {
-    case mfMultiGenerationOutputKind::kGeneration_UNKNOWN:
+    case mfMultiGenerationOutputKind::kGeneration_UNKNOWN_:
       ss <<
         "The help below is available whichever output is produced";
       break;
@@ -217,7 +217,7 @@ std::string msdlConverterInsiderHandler::msdlConverterAboutInformation (
   size_t passesNumber = 0;
 
   switch (multiGenerationOutputKind) {
-    case mfMultiGenerationOutputKind::kGeneration_UNKNOWN:
+    case mfMultiGenerationOutputKind::kGeneration_UNKNOWN_:
       // should not occur
       break;
 
@@ -245,7 +245,7 @@ std::string msdlConverterInsiderHandler::msdlConverterAboutInformation (
   std::string headPart;
 
   switch (multiGenerationOutputKind) {
-    case mfMultiGenerationOutputKind::kGeneration_UNKNOWN:
+    case mfMultiGenerationOutputKind::kGeneration_UNKNOWN_:
       // should only occur if the run is a pure help one
       {
         std::stringstream headPartStream;
@@ -283,7 +283,7 @@ R"(
   std::string specificPart;
 
   switch (multiGenerationOutputKind) {
-    case mfMultiGenerationOutputKind::kGeneration_UNKNOWN:
+    case mfMultiGenerationOutputKind::kGeneration_UNKNOWN_:
       // should not occur, unless the run is a pure help one
       break;
 
@@ -469,7 +469,7 @@ void msdlConverterInsiderHandler::createTheMsdlConverterOptionGroups (
   */
 
   switch (mfMultiGenerationOutputKind) {
-    case mfMultiGenerationOutputKind::kGeneration_UNKNOWN:
+    case mfMultiGenerationOutputKind::kGeneration_UNKNOWN_:
       // should not occur, unless the run is a pure help one
       break;
 
@@ -661,7 +661,7 @@ std::string msdlConverterInsiderHandler::fetchOutputFileNameFromTheOptions () co
 
   if (outputFileNameHasBeenSet) {
     if (autoOutputFileNameHasBeenSet) {
-      // '-o, -output-file-name' has been selected
+      // '-obj, -output-file-name' has been selected
       // '-aofn, -auto-output-file-name' has been selected
       std::stringstream ss;
 
@@ -676,7 +676,7 @@ std::string msdlConverterInsiderHandler::fetchOutputFileNameFromTheOptions () co
       oahError (ss.str ());
     }
     else {
-      // '-o, -output-file-name' has been selected
+      // '-obj, -output-file-name' has been selected
       // '-aofn, -auto-output-file-name' has NOT been selected
       outputFileName =
         outputFileNameStringAtom->
@@ -686,7 +686,7 @@ std::string msdlConverterInsiderHandler::fetchOutputFileNameFromTheOptions () co
 
   else {
     if (autoOutputFileNameHasBeenSet) {
-      // '-o, -output-file-name' has NOT been selected
+      // '-obj, -output-file-name' has NOT been selected
       // '-aofn, -auto-output-file-name' has been selected
       // determine output file base name
       if (inputSourceName == "-") {
@@ -745,7 +745,7 @@ std::string msdlConverterInsiderHandler::fetchOutputFileNameFromTheOptions () co
     }
 
     else {
-      // '-o, -output-file-name' has NOT been selected
+      // '-obj, -output-file-name' has NOT been selected
       // '-aofn, -auto-output-file-name' has NOT been selected
       outputFileName = inputSourceName; // will augmented below
     }
@@ -755,9 +755,9 @@ std::string msdlConverterInsiderHandler::fetchOutputFileNameFromTheOptions () co
   // and add the output file name suffix
   if (! outputFileNameHasBeenSet) {
     switch (fMultiGenerationOutputKind) {
-      case mfMultiGenerationOutputKind::kGeneration_UNKNOWN:
+      case mfMultiGenerationOutputKind::kGeneration_UNKNOWN_:
         // should not occur
-        outputFileName = "___kGeneration_UNKNOWN____";
+        outputFileName = "___kGeneration_UNKNOWN_____";
         break;
 
       case mfMultiGenerationOutputKind::kGenerationLilypond:
@@ -907,7 +907,7 @@ void msdlConverterInsiderOahGroup::checkGroupOptionsConsistency ()
     std::stringstream ss;
 
     ss <<
-      "msdlConverterInsiderOahGroup: a MusicXML output file name must be selected with '-o, -output-file-name";
+      "msdlConverterInsiderOahGroup: a MusicXML output file name must be selected with '-obj, -output-file-name";
 
     oahError (ss.str ());
   }
@@ -1071,7 +1071,7 @@ std::ostream& operator << (std::ostream& os, const S_msdlConverterInsiderHandler
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -1082,9 +1082,9 @@ S_msdlConverterInsiderOahGroup gGlobalmsdlConverterInsiderOahGroup;
 
 S_msdlConverterInsiderOahGroup msdlConverterInsiderOahGroup::create ()
 {
-  msdlConverterInsiderOahGroup* o = new msdlConverterInsiderOahGroup ();
-  assert (o != nullptr);
-  return o;
+  msdlConverterInsiderOahGroup* obj = new msdlConverterInsiderOahGroup ();
+  assert (obj != nullptr);
+  return obj;
 }
 
 msdlConverterInsiderOahGroup::msdlConverterInsiderOahGroup ()
@@ -1094,7 +1094,7 @@ msdlConverterInsiderOahGroup::msdlConverterInsiderOahGroup ()
 R"(Options that are used by msdlConverter are grouped here.)",
     oahElementVisibilityKind::kElementVisibilityWhole)
 {
-  fMultiGenerationOutputKind = mfMultiGenerationOutputKind::kGeneration_UNKNOWN;
+  fMultiGenerationOutputKind = mfMultiGenerationOutputKind::kGeneration_UNKNOWN_;
 
   initializemsdlConverterInsiderOahGroup ();
 }

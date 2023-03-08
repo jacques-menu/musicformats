@@ -12,14 +12,11 @@
 #include <climits>      // INT_MIN, INT_MAX
 #include <sstream>
 
-#include "mfStaticSettings.h"
-
 #include "visitor.h"
 
 #include "bsrWae.h"
 
 #include "mfStaticSettings.h"
-
 
 #include "mfAssert.h"
 #include "mfConstants.h"
@@ -112,7 +109,7 @@ S_bsrScore msr2bsrTranslator::translateMsrToBsr (
   // create the resulting BSR score
   fResultingBsr =
     bsrScore::create (
-      K_MF_INPUT_LINE_UNKNOWN,
+      K_MF_INPUT_LINE_UNKNOWN_,
       fVisitedMsrScore);
 
   // create a msrScore browser
@@ -936,7 +933,7 @@ void msr2bsrTranslator::visitStart (S_msrClef& elt)
     msrClefKind mClefKind = elt->getClefKind ();
 
     switch (mClefKind) {
-      case msrClefKind::kClef_UNKNOWN:
+      case msrClefKind::kClef_UNKNOWN_:
         bClefKind = bsrClefKind::kClefKindNone;
         break;
       case msrClefKind::kClefTreble:
@@ -1100,7 +1097,7 @@ void msr2bsrTranslator::visitStart (S_msrKey& elt)
 
         case msrSemiTonesPitchKind::kSTP_C_Natural:
           switch (mModeKind) {
-            case msrModeKind::kMode_UNKNOWN:
+            case msrModeKind::kMode_UNKNOWN_:
               break;
             case msrModeKind::kModeMajor:
               theBsrKeyKind = bsrKeyKind::kKeyKindNaturals;
@@ -1129,7 +1126,7 @@ void msr2bsrTranslator::visitStart (S_msrKey& elt)
 
         case msrSemiTonesPitchKind::kSTP_C_Sharp:
           switch (mModeKind) {
-            case msrModeKind::kMode_UNKNOWN:
+            case msrModeKind::kMode_UNKNOWN_:
               break;
             case msrModeKind::kModeMajor:
               theBsrKeyKind = bsrKeyKind::kKeyKindSharps;
@@ -1168,7 +1165,7 @@ void msr2bsrTranslator::visitStart (S_msrKey& elt)
 
         case msrSemiTonesPitchKind::kSTP_D_Flat:
           switch (mModeKind) {
-            case msrModeKind::kMode_UNKNOWN:
+            case msrModeKind::kMode_UNKNOWN_:
               break;
             case msrModeKind::kModeMajor:
               theBsrKeyKind = bsrKeyKind::kKeyKindFlats;
@@ -1197,7 +1194,7 @@ void msr2bsrTranslator::visitStart (S_msrKey& elt)
 
         case msrSemiTonesPitchKind::kSTP_D_Natural:
           switch (mModeKind) {
-            case msrModeKind::kMode_UNKNOWN:
+            case msrModeKind::kMode_UNKNOWN_:
               break;
             case msrModeKind::kModeMajor:
               theBsrKeyKind = bsrKeyKind::kKeyKindSharps;
@@ -1238,7 +1235,7 @@ void msr2bsrTranslator::visitStart (S_msrKey& elt)
 
         case msrSemiTonesPitchKind::kSTP_E_Flat:
           switch (mModeKind) {
-            case msrModeKind::kMode_UNKNOWN:
+            case msrModeKind::kMode_UNKNOWN_:
               break;
             case msrModeKind::kModeMajor:
               theBsrKeyKind = bsrKeyKind::kKeyKindFlats;
@@ -1267,7 +1264,7 @@ void msr2bsrTranslator::visitStart (S_msrKey& elt)
 
         case msrSemiTonesPitchKind::kSTP_E_Natural:
           switch (mModeKind) {
-            case msrModeKind::kMode_UNKNOWN:
+            case msrModeKind::kMode_UNKNOWN_:
               break;
             case msrModeKind::kModeMajor:
               theBsrKeyKind = bsrKeyKind::kKeyKindSharps;
@@ -1309,7 +1306,7 @@ void msr2bsrTranslator::visitStart (S_msrKey& elt)
 
         case msrSemiTonesPitchKind::kSTP_F_Natural:
           switch (mModeKind) {
-            case msrModeKind::kMode_UNKNOWN:
+            case msrModeKind::kMode_UNKNOWN_:
               break;
             case msrModeKind::kModeMajor:
               theBsrKeyKind = bsrKeyKind::kKeyKindFlats;
@@ -1338,7 +1335,7 @@ void msr2bsrTranslator::visitStart (S_msrKey& elt)
 
         case msrSemiTonesPitchKind::kSTP_F_Sharp:
           switch (mModeKind) {
-            case msrModeKind::kMode_UNKNOWN:
+            case msrModeKind::kMode_UNKNOWN_:
               break;
             case msrModeKind::kModeMajor:
               theBsrKeyKind = bsrKeyKind::kKeyKindSharps;
@@ -1379,7 +1376,7 @@ void msr2bsrTranslator::visitStart (S_msrKey& elt)
 
         case msrSemiTonesPitchKind::kSTP_G_Natural:
           switch (mModeKind) {
-            case msrModeKind::kMode_UNKNOWN:
+            case msrModeKind::kMode_UNKNOWN_:
               break;
             case msrModeKind::kModeMajor:
               theBsrKeyKind = bsrKeyKind::kKeyKindSharps;
@@ -1420,7 +1417,7 @@ void msr2bsrTranslator::visitStart (S_msrKey& elt)
 
         case msrSemiTonesPitchKind::kSTP_A_Flat:
           switch (mModeKind) {
-            case msrModeKind::kMode_UNKNOWN:
+            case msrModeKind::kMode_UNKNOWN_:
               break;
             case msrModeKind::kModeMajor:
               theBsrKeyKind = bsrKeyKind::kKeyKindFlats;
@@ -1449,7 +1446,7 @@ void msr2bsrTranslator::visitStart (S_msrKey& elt)
 
         case msrSemiTonesPitchKind::kSTP_A_Natural:
           switch (mModeKind) {
-            case msrModeKind::kMode_UNKNOWN:
+            case msrModeKind::kMode_UNKNOWN_:
               break;
             case msrModeKind::kModeMajor:
               theBsrKeyKind = bsrKeyKind::kKeyKindSharps;
@@ -1490,7 +1487,7 @@ void msr2bsrTranslator::visitStart (S_msrKey& elt)
 
         case msrSemiTonesPitchKind::kSTP_B_Flat:
           switch (mModeKind) {
-            case msrModeKind::kMode_UNKNOWN:
+            case msrModeKind::kMode_UNKNOWN_:
               break;
             case msrModeKind::kModeMajor:
               theBsrKeyKind = bsrKeyKind::kKeyKindFlats;
@@ -1519,7 +1516,7 @@ void msr2bsrTranslator::visitStart (S_msrKey& elt)
 
         case msrSemiTonesPitchKind::kSTP_B_Natural:
           switch (mModeKind) {
-            case msrModeKind::kMode_UNKNOWN:
+            case msrModeKind::kMode_UNKNOWN_:
               break;
             case msrModeKind::kModeMajor:
               theBsrKeyKind = bsrKeyKind::kKeyKindSharps;
@@ -2069,7 +2066,7 @@ void msr2bsrTranslator::createBsrForNote (const S_msrNote& note)
 
         {
           switch (wordsPlacementKind) {
-            case msrPlacementKind::kPlacement_UNKNOWN:
+            case msrPlacementKind::kPlacement_UNKNOWN_:
               break;
             case msrPlacementKind::kPlacementAbove:
               break;
@@ -2157,7 +2154,7 @@ void msr2bsrTranslator::createBsrForNote (const S_msrNote& note)
 
   if (note->fetchNoteIsARest ()) {
     switch (noteGraphicNotesDurationKind) {
-      case msrNotesDurationKind::kNotesDuration_UNKNOWN:
+      case msrNotesDurationKind::kNotesDuration_UNKNOWN_:
         break;
 
       case msrNotesDurationKind::kNotesDuration1024th:
@@ -2203,12 +2200,12 @@ void msr2bsrTranslator::createBsrForNote (const S_msrNote& note)
 
   else {
     switch (noteDiatonicPitchKind) {
-      case msrDiatonicPitchKind::kDiatonicPitch_UNKNOWN:
+      case msrDiatonicPitchKind::kDiatonicPitch_UNKNOWN_:
         break;
 
       case msrDiatonicPitchKind::kDiatonicPitchA:
         switch (noteGraphicNotesDurationKind) {
-          case msrNotesDurationKind::kNotesDuration_UNKNOWN:
+          case msrNotesDurationKind::kNotesDuration_UNKNOWN_:
             break;
 
           case msrNotesDurationKind::kNotesDuration1024th:
@@ -2254,7 +2251,7 @@ void msr2bsrTranslator::createBsrForNote (const S_msrNote& note)
 
       case msrDiatonicPitchKind::kDiatonicPitchB:
         switch (noteGraphicNotesDurationKind) {
-          case msrNotesDurationKind::kNotesDuration_UNKNOWN:
+          case msrNotesDurationKind::kNotesDuration_UNKNOWN_:
             break;
 
           case msrNotesDurationKind::kNotesDuration1024th:
@@ -2300,7 +2297,7 @@ void msr2bsrTranslator::createBsrForNote (const S_msrNote& note)
 
       case msrDiatonicPitchKind::kDiatonicPitchC:
         switch (noteGraphicNotesDurationKind) {
-          case msrNotesDurationKind::kNotesDuration_UNKNOWN:
+          case msrNotesDurationKind::kNotesDuration_UNKNOWN_:
             break;
 
           case msrNotesDurationKind::kNotesDuration1024th:
@@ -2346,7 +2343,7 @@ void msr2bsrTranslator::createBsrForNote (const S_msrNote& note)
 
       case msrDiatonicPitchKind::kDiatonicPitchD:
         switch (noteGraphicNotesDurationKind) {
-          case msrNotesDurationKind::kNotesDuration_UNKNOWN:
+          case msrNotesDurationKind::kNotesDuration_UNKNOWN_:
             break;
 
           case msrNotesDurationKind::kNotesDuration1024th:
@@ -2392,7 +2389,7 @@ void msr2bsrTranslator::createBsrForNote (const S_msrNote& note)
 
       case msrDiatonicPitchKind::kDiatonicPitchE:
         switch (noteGraphicNotesDurationKind) {
-          case msrNotesDurationKind::kNotesDuration_UNKNOWN:
+          case msrNotesDurationKind::kNotesDuration_UNKNOWN_:
             break;
 
           case msrNotesDurationKind::kNotesDuration1024th:
@@ -2438,7 +2435,7 @@ void msr2bsrTranslator::createBsrForNote (const S_msrNote& note)
 
       case msrDiatonicPitchKind::kDiatonicPitchF:
         switch (noteGraphicNotesDurationKind) {
-          case msrNotesDurationKind::kNotesDuration_UNKNOWN:
+          case msrNotesDurationKind::kNotesDuration_UNKNOWN_:
             break;
 
           case msrNotesDurationKind::kNotesDuration1024th:
@@ -2484,7 +2481,7 @@ void msr2bsrTranslator::createBsrForNote (const S_msrNote& note)
 
       case msrDiatonicPitchKind::kDiatonicPitchG:
         switch (noteGraphicNotesDurationKind) {
-          case msrNotesDurationKind::kNotesDuration_UNKNOWN:
+          case msrNotesDurationKind::kNotesDuration_UNKNOWN_:
             break;
 
           case msrNotesDurationKind::kNotesDuration1024th:
@@ -3365,7 +3362,7 @@ void msr2bsrTranslator::finalizeCurrentMeasureClone (
       "' in voice \"" << voice->getVoiceName () <<
       "\", line " << inputLineNumber <<
       std::endl <<
-      "measureWholeNotes: " << measureWholeNotes <<
+      "measureWholeNotes: " << measureWholeNotes.asString () <<
       std::endl;
 
     gWaeHandler->waeTrace (
@@ -3607,7 +3604,7 @@ void msr2bsrTranslator::visitStart (S_msrSyllable& elt)
           words =
             msrWords::create (
               inputLineNumber,
-              msrPlacementKind::kPlacement_UNKNOWN,                // default value
+              msrPlacementKind::kPlacement_UNKNOWN_,                // default value
               wordsValue,
               msrJustifyKind::kJustifyNone,                  // default value
               msrVerticalAlignmentKind::kVerticalAlignmentNone,        // default value
@@ -4202,7 +4199,7 @@ void msr2bsrTranslator::visitStart (S_msrSpanner& elt)
       break;
     case msrSpannerTypeKind::kSpannerTypeContinue:
       break;
-    case msrSpannerTypeKind::kSpannerType_UNKNOWN:
+    case msrSpannerTypeKind::kSpannerType_UNKNOWN_:
       break;
   } // switch
 
@@ -4792,11 +4789,10 @@ void msr2bsrTranslator::visitStart (S_msrGraceNotesGroup& elt)
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceNotes () || gTraceOahGroup->getTraceGraceNotes ()) {
       gLog <<
-        "Creating a clone of grace notes group '" <<
+        "Creating a clone of grace notes group " <<
         elt->asShortString () <<
-        "' and attaching it to clone note '" <<
+        " and attaching it to clone note " <<
         fCurrentNonGraceNoteClone->asShortString () <<
-        "'" <<
         std::endl;
       }
 #endif // MF_TRACE_IS_ENABLED
@@ -4959,9 +4955,9 @@ void msr2bsrTranslator::visitStart (S_msrGraceNotesGroup& elt)
           std::stringstream ss;
 
           ss <<
-            "Creating a skip clone of grace notes group '" <<
+            "Creating a skip clone of grace notes group " <<
             elt->asShortString () <<
-            "' to work around LilyPond issue #34" <<
+            " to work around LilyPond issue #34" <<
             std::endl;
 
           gWaeHandler->waeTrace (
@@ -5383,7 +5379,7 @@ void msr2bsrTranslator::visitEnd (S_msrNote& elt)
 
   switch (elt->getNoteKind ()) {
 
-    case msrNoteKind::kNote_UNKNOWN:
+    case msrNoteKind::kNote_UNKNOWN_:
       break;
 
     case msrNoteKind::kNoteRestInMeasure:
@@ -5567,9 +5563,9 @@ void msr2bsrTranslator::visitEnd (S_msrNote& elt)
           gLog <<
             "Appending grace note '" <<
             fCurrentGraceNoteClone->asShortString () <<
-            "' to the grace notes group'" <<
+            " to the grace notes group " <<
             fCurrentGraceNotesGroupClone->asShortString () <<
-            "' in voice \"" <<
+            " in voice \"" <<
             fCurrentVoiceClone->getVoiceName () << "\"" <<
             std::endl;
 

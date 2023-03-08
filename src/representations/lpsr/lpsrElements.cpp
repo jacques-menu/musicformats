@@ -27,11 +27,11 @@ namespace MusicFormats
 S_lpsrElement lpsrElement::create (
   int inputLineNumber)
 {
-  lpsrElement* o =
+  lpsrElement* obj =
     new lpsrElement (
       inputLineNumber);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 lpsrElement::lpsrElement (

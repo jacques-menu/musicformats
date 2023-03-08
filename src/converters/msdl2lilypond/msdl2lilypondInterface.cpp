@@ -26,8 +26,6 @@
 #include "msr2lpsrWae.h"
 #include "lpsr2lilypondWae.h"
 
-#include "mfStaticSettings.h"
-
 #include "lpsrScores.h"
 
 #include "msdl2lilypondComponent.h"

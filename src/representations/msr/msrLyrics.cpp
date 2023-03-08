@@ -11,19 +11,15 @@
 
 #include <iomanip>
 
-#include "mfStaticSettings.h"
-
 #include "visitor.h"
 
+#include "mfStaticSettings.h"
+
 #include "mfAssert.h"
-
 #include "mfServices.h"
-
 #include "mfStringsHandling.h"
 
 #include "msrWae.h"
-
-#include "mfStaticSettings.h"
 
 #include "msrMeasureConstants.h"
 
@@ -52,7 +48,7 @@ S_msrSyllable msrSyllable::create (
   const msrTupletFactor& syllableTupletFactor,
   const S_msrStanza&     syllableUpLinkToStanza)
 {
-  msrSyllable* o =
+  msrSyllable* obj =
     new msrSyllable (
       inputLineNumber,
       upLinkToMeasure,
@@ -62,8 +58,8 @@ S_msrSyllable msrSyllable::create (
       syllableWholeNotes,
       syllableTupletFactor,
       syllableUpLinkToStanza);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 S_msrSyllable msrSyllable::create (
@@ -98,7 +94,7 @@ S_msrSyllable msrSyllable::createWithNextMeasurePuristNumber ( // JMI superflous
   const S_msrStanza&     syllableUpLinkToStanza,
   int                    syllableNextMeasurePuristNumber)
 {
-  msrSyllable* o =
+  msrSyllable* obj =
     msrSyllable::create (
       inputLineNumber,
       upLinkToMeasure,
@@ -108,13 +104,13 @@ S_msrSyllable msrSyllable::createWithNextMeasurePuristNumber ( // JMI superflous
       syllableWholeNotes,
       syllableTupletFactor,
       syllableUpLinkToStanza);
-  assert (o != nullptr);
+  assert (obj != nullptr);
 
-  o->
+  obj->
     setSyllableNextMeasurePuristNumber (
       syllableNextMeasurePuristNumber);
 
-  return o;
+  return obj;
 }
 
 msrSyllable::msrSyllable (
@@ -389,7 +385,7 @@ void msrSyllable:: setSyllableNextMeasurePuristNumber (
 //       " to " <<
 //       measurePosition.asString () <<
 //       " (was " <<
-//       fMeasurePosition <<
+//       fMeasurePosition.asString () <<
 //       ") in measure " <<
 //       measure->asShortString () <<
 //       " (measureElementMeasureNumber: " <<
@@ -405,8 +401,8 @@ void msrSyllable:: setSyllableNextMeasurePuristNumber (
   // sanity check
 //   mfAssert (
 //     __FILE__, __LINE__,
-//     measurePosition != K_MEASURE_POSITION_UNKNOWN,
-//     "measurePosition == K_MEASURE_POSITION_UNKNOWN");
+//     measurePosition != K_MEASURE_POSITION_UNKNOWN_,
+//     "measurePosition == K_MEASURE_POSITION_UNKNOWN_");
 // #endif // MF_SANITY_CHECKS_ARE_ENABLED
 //
 //   // set syllable's measure position
@@ -569,7 +565,7 @@ std::string msrSyllable::syllableWholeNotesAsMsrString () const
 
   if (fSyllableUpLinkToNote) { // JMI
     switch (fSyllableUpLinkToNote->getNoteKind ()) {
-      case msrNoteKind::kNote_UNKNOWN:
+      case msrNoteKind::kNote_UNKNOWN_:
       case msrNoteKind::kNoteRestInMeasure:
       case msrNoteKind::kNoteUnpitchedInMeasure:
       case msrNoteKind::kNoteRegularInMeasure:
@@ -716,7 +712,7 @@ std::string msrSyllable::syllableUpLinkToNoteAsString () const
     result = fSyllableUpLinkToNote->asString ();
   }
   else {
-    result = "[NONE]";
+    result = "[NULL]";
   }
 
   return result;
@@ -774,7 +770,7 @@ std::string msrSyllable::asString () const
     "', syllableExtendKind: " <<
       fSyllableExtendKind <<
     ", fSyllableStanzaNumber: \"" << fSyllableStanzaNumber << "\"" <<
-    ", fSyllableWholeNotes: " << fSyllableWholeNotes <<
+    ", fSyllableWholeNotes: " << fSyllableWholeNotes.asString () <<
     ", fSyllableTupletFactor: " << fSyllableTupletFactor <<
     ", fSyllableNextMeasurePuristNumber: " << fSyllableNextMeasurePuristNumber <<
     ", line " << fInputLineNumber <<
@@ -817,7 +813,7 @@ std::string msrSyllable::asString () const
       fSyllableUpLinkToNote->asShortString ();
   }
   else {
-    ss << "[NONE]";
+    ss << "[NULL]";
   }
 
   ss <<
@@ -827,7 +823,7 @@ std::string msrSyllable::asString () const
       fSyllableUpLinkToStanza->getStanzaName ();
   }
   else {
-    ss << "[NONE]";
+    ss << "[NULL]";
   }
 
   return ss.str ();
@@ -874,7 +870,7 @@ void msrSyllable::print (std::ostream& os) const
 
     std::setw (fieldWidth) <<
     "fSyllableWholeNotes" << ": " <<
-    fSyllableWholeNotes <<
+    fSyllableWholeNotes.asString () <<
     std::endl <<
 
     std::setw (fieldWidth) <<
@@ -930,7 +926,7 @@ std::ostream& operator << (std::ostream& os, const S_msrSyllable& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -938,21 +934,21 @@ std::ostream& operator << (std::ostream& os, const S_msrSyllable& elt)
 
 //______________________________________________________________________________
 // constants
-const std::string msrStanza::K_STANZA_NUMBER_UNKNOWN = "-1";
-const std::string msrStanza::K_STANZA_NAME_UNKNOWN   = "Unknown stanza";
+const std::string msrStanza::K_STANZA_NUMBER_UNKNOWN_ = "-1";
+const std::string msrStanza::K_STANZA_NAME_UNKNOWN_   = "Unknown stanza";
 
 S_msrStanza msrStanza::create (
   int           inputLineNumber,
   const std::string& stanzaNumber,
   const S_msrVoice&    stanzaUpLinkToVoice)
 {
-  msrStanza* o =
+  msrStanza* obj =
     new msrStanza (
       inputLineNumber,
       stanzaNumber,
       stanzaUpLinkToVoice);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 msrStanza::msrStanza (
@@ -1208,7 +1204,7 @@ S_msrSyllable msrStanza::appendRestSyllableToStanza (
     ss <<
       "Appending 'Rest' syllable" <<
       " to stanza " << getStanzaName () <<
-      ", whole notes: " << wholeNotes <<
+      ", whole notes: " << wholeNotes.asString () <<
       ", line " << inputLineNumber <<
       std::endl;
 
@@ -1253,7 +1249,7 @@ S_msrSyllable msrStanza::appendSkipSyllableToStanza (
     ss <<
       "Appending 'Skip' syllable " <<
       " to stanza " << getStanzaName () <<
-      ", whole notes: " << wholeNotes <<
+      ", whole notes: " << wholeNotes.asString () <<
       ", line " << inputLineNumber <<
       std::endl;
 
@@ -1347,7 +1343,7 @@ S_msrSyllable msrStanza::appendMelismaSyllableToStanza (
       msrSyllableKindAsString (syllableKind) <<
       "' syllable" <<
       " to stanza " << getStanzaName () <<
-      ", whole notes: " << wholeNotes <<
+      ", whole notes: " << wholeNotes.asString () <<
       ", line " << inputLineNumber <<
       std::endl;
 
@@ -1681,7 +1677,7 @@ std::ostream& operator << (std::ostream& os, const S_msrStanza& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

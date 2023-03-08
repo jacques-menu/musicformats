@@ -25,7 +25,7 @@ namespace MusicFormats
 // ------------------------------------------------------
 
 enum class msrSlurTypeKind {
-  kSlurType_UNKNOWN,
+  kSlurType_UNKNOWN_,
 
   kSlurTypeRegularStart, kSlurTypeRegularContinue, kSlurTypeRegularStop,
 

@@ -13,8 +13,6 @@
 
 #include <regex>
 
-#include "mfStaticSettings.h"
-
 #include "tree_browser.h"
 
 #include "musicxmlWae.h"
@@ -53,14 +51,14 @@ S_mxmlPartGroupDescr mxmlPartGroupDescr::create (
   const S_msrPartGroup& partGroup,
   int            startPosition)
 {
-  mxmlPartGroupDescr* o = new
+  mxmlPartGroupDescr* obj = new
     mxmlPartGroupDescr (
       startInputLineNumber,
       partGroupNumber,
       partGroup,
       startPosition);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 mxmlPartGroupDescr::mxmlPartGroupDescr (
@@ -143,7 +141,7 @@ std::ostream& operator << (std::ostream& os, const S_mxmlPartGroupDescr& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -155,7 +153,7 @@ mxsr2msrSkeletonBuilder::mxsr2msrSkeletonBuilder ()
   // the MSR score we're building
   fMsrScore =
     msrScore::create (
-      K_MF_INPUT_LINE_UNKNOWN,
+      K_MF_INPUT_LINE_UNKNOWN_,
       "msrScore::create()");
 
   // score handling
@@ -180,8 +178,8 @@ mxsr2msrSkeletonBuilder::mxsr2msrSkeletonBuilder ()
   fPartNumberOfMeasures = 0;
 
   // lyrics handling
-  fCurrentStanzaNumber = msrStanza::K_STANZA_NUMBER_UNKNOWN; // JMI
-  fCurrentStanzaName = msrStanza::K_STANZA_NAME_UNKNOWN; // JMI
+  fCurrentStanzaNumber = msrStanza::K_STANZA_NUMBER_UNKNOWN_; // JMI
+  fCurrentStanzaName = msrStanza::K_STANZA_NAME_UNKNOWN_; // JMI
 
   // harmonies handling
 //   fThereAreHarmoniesToBeAttachedToCurrentNote = false;
@@ -2717,7 +2715,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_credit_type& elt)
 
   msrCreditTypeKind
     creditTypeKind =
-      msrCreditTypeKind::kCreditType_UNKNOWN; // default value
+      msrCreditTypeKind::kCreditType_UNKNOWN_; // default value
 
   if      (creditTypeValue == "page number")
     creditTypeKind = msrCreditTypeKind::kCreditTypeNumber;
@@ -3321,7 +3319,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_group_symbol& elt)
   else if (groupSymbol == "square")
     fCurrentPartGroupSymbolKind = msrPartGroupSymbolKind::kPartGroupSymbolSquare;
 
-  else if (groupSymbol == "[NONE]")
+  else if (groupSymbol == "none")
     fCurrentPartGroupSymbolKind = msrPartGroupSymbolKind::kPartGroupSymbolNone;
 
   else {
@@ -4401,8 +4399,8 @@ void mxsr2msrSkeletonBuilder::visitStart (S_note& elt)
   fCurrentVoiceMusicXMLNumber = 1;
 
   // lyrics
-  fCurrentStanzaNumber = msrStanza::K_STANZA_NUMBER_UNKNOWN;
-  fCurrentStanzaName = msrStanza::K_STANZA_NAME_UNKNOWN;
+  fCurrentStanzaNumber = msrStanza::K_STANZA_NUMBER_UNKNOWN_;
+  fCurrentStanzaName = msrStanza::K_STANZA_NAME_UNKNOWN_;
 
   fOnGoingNote = true;
 }
@@ -4605,7 +4603,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_lyric& elt)
 
         ss <<
           "lyric name is empty, using \"" <<
-          msrStanza::K_STANZA_NAME_UNKNOWN <<
+          msrStanza::K_STANZA_NAME_UNKNOWN_ <<
           "\" by default";
 
         musicxmlWarning (
@@ -4615,7 +4613,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_lyric& elt)
       }
 #endif // MF_TRACE_IS_ENABLED
 
-      fCurrentStanzaName = msrStanza::K_STANZA_NAME_UNKNOWN;
+      fCurrentStanzaName = msrStanza::K_STANZA_NAME_UNKNOWN_;
     }
 
     else {

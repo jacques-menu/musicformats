@@ -1087,7 +1087,7 @@ void msr2summaryVisitor::visitStart (S_msrNote& elt)
 #endif // MF_TRACE_IS_ENABLED
 
   switch (elt->getNoteKind ()) {
-    case msrNoteKind::kNote_UNKNOWN:
+    case msrNoteKind::kNote_UNKNOWN_:
       break;
     case msrNoteKind::kNoteRestInMeasure:
       ++fScoreRestNotesCounter;
@@ -1141,7 +1141,7 @@ void msr2summaryVisitor::visitEnd (S_msrNote& elt)
 #endif // MF_TRACE_IS_ENABLED
 
   switch (elt->getNoteKind ()) { // JMI
-    case msrNoteKind::kNote_UNKNOWN:
+    case msrNoteKind::kNote_UNKNOWN_:
       break;
     case msrNoteKind::kNoteRestInMeasure:
       break;

@@ -41,9 +41,9 @@ S_msdlConverterOahGroup gGlobalMsdlConverterOahGroup;
 
 S_msdlConverterOahGroup msdlConverterOahGroup::create ()
 {
-  msdlConverterOahGroup* o = new msdlConverterOahGroup ();
-  assert (o != nullptr);
-  return o;
+  msdlConverterOahGroup* obj = new msdlConverterOahGroup ();
+  assert (obj != nullptr);
+  return obj;
 }
 
 msdlConverterOahGroup::msdlConverterOahGroup ()
@@ -54,7 +54,7 @@ R"(These options control the way MSDL converter works.)",
     oahElementVisibilityKind::kElementVisibilityWhole)
 {
 /*
-  fMultiGenerationOutputKind = mfMultiGenerationOutputKind::kGeneration_UNKNOWN;
+  fMultiGenerationOutputKind = mfMultiGenerationOutputKind::kGeneration_UNKNOWN_;
 
   fBrailleUTFKind = bsrUTFKind::kUTF8; // default value
 
@@ -196,7 +196,7 @@ std::ostream& operator << (std::ostream& os, const S_msdlConverterOahGroup& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

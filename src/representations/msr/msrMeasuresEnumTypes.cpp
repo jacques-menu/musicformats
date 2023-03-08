@@ -202,8 +202,8 @@ std::string msrMeasureRepeatContextKindAsString (
   std::string result;
 
   switch (measureRepeatContextKind) {
-    case msrMeasureRepeatContextKind::kMeasureRepeatContext_UNKNOWN:
-      result = "kMeasureRepeatContext_UNKNOWN";
+    case msrMeasureRepeatContextKind::kMeasureRepeatContext_UNKNOWN_:
+      result = "kMeasureRepeatContext_UNKNOWN_";
       break;
     case msrMeasureRepeatContextKind::kMeasureRepeatContextNone:
       result = "kMeasureRepeatContextNone";
@@ -346,7 +346,7 @@ std::ostream& operator << (std::ostream& os, const msrMeasureEndRegularKind& elt
 //         "Reducing the sounding whole notes of harmony " <<
 //         previousHarmony->asString () <<
 //         " from " <<
-//         previousHarmonySoundingWholeNotes <<
+//         previousHarmonySoundingWholeNotes.asString () <<
 //         " to " <<
 //         reducedSoundingWholeNotes.asString () <<
 //         " in voice \"" <<

@@ -50,14 +50,14 @@ S_ischemeInterpreterRegularHandler ischemeInterpreterRegularHandler::create (
                      insiderOahHandler)
 {
   // create the regular handler
-  ischemeInterpreterRegularHandler* o = new
+  ischemeInterpreterRegularHandler* obj = new
     ischemeInterpreterRegularHandler (
       serviceName,
       handlerHeader,
       insiderOahHandler);
-  assert (o != nullptr);
+  assert (obj != nullptr);
 
-  return o;
+  return obj;
 }
 
 ischemeInterpreterRegularHandler::ischemeInterpreterRegularHandler (

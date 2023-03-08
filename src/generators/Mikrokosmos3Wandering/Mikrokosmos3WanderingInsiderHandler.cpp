@@ -84,13 +84,13 @@ S_Mikrokosmos3WanderingInsiderHandler Mikrokosmos3WanderingInsiderHandler::creat
                           multiGenerationOutputKind)
 {
   // create the insider handler
-  Mikrokosmos3WanderingInsiderHandler* o = new
+  Mikrokosmos3WanderingInsiderHandler* obj = new
     Mikrokosmos3WanderingInsiderHandler (
       serviceName,
       handlerHeader,
       multiGenerationOutputKind);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 Mikrokosmos3WanderingInsiderHandler::Mikrokosmos3WanderingInsiderHandler (
@@ -161,7 +161,7 @@ R"(Usage: Mikrokosmos3Wandering [option]*
     std::endl;
 
   switch (multiGenerationOutputKind) {
-    case mfMultiGenerationOutputKind::kGeneration_UNKNOWN:
+    case mfMultiGenerationOutputKind::kGeneration_UNKNOWN_:
       ss <<
         "The help below is available whichever output is produced";
       break;
@@ -191,7 +191,7 @@ std::string Mikrokosmos3WanderingInsiderHandler::Mikrokosmos3WanderingAboutInfor
   size_t passesNumber = 0;
 
   switch (multiGenerationOutputKind) {
-    case mfMultiGenerationOutputKind::kGeneration_UNKNOWN:
+    case mfMultiGenerationOutputKind::kGeneration_UNKNOWN_:
       // should not occur
       break;
 
@@ -219,7 +219,7 @@ std::string Mikrokosmos3WanderingInsiderHandler::Mikrokosmos3WanderingAboutInfor
   std::string headPart;
 
   switch (multiGenerationOutputKind) {
-    case mfMultiGenerationOutputKind::kGeneration_UNKNOWN:
+    case mfMultiGenerationOutputKind::kGeneration_UNKNOWN_:
       // should only occur if the run is a pure help one
       headPart =
 R"(What Mikrokosmos3Wandering does:
@@ -256,7 +256,7 @@ R"(
   std::string specificPart;
 
   switch (multiGenerationOutputKind) {
-    case mfMultiGenerationOutputKind::kGeneration_UNKNOWN:
+    case mfMultiGenerationOutputKind::kGeneration_UNKNOWN_:
       // should not occur, unless the run is a pure help one
       break;
 
@@ -423,7 +423,7 @@ void Mikrokosmos3WanderingInsiderHandler::createTheMikrokosmos3WanderingOptionGr
   */
 
   switch (mfMultiGenerationOutputKind) {
-    case mfMultiGenerationOutputKind::kGeneration_UNKNOWN:
+    case mfMultiGenerationOutputKind::kGeneration_UNKNOWN_:
       // should not occur, unless the run is a pure help one
       break;
 
@@ -588,7 +588,7 @@ std::string Mikrokosmos3WanderingInsiderHandler::fetchOutputFileNameFromTheOptio
   std::string outputFileName;
 
   if (outputFileNameHasBeenSet) {
-    // '-o, -output-file-name' has been selected
+    // '-obj, -output-file-name' has been selected
     outputFileName =
       outputFileNameStringAtom->
         getStringVariable ();
@@ -602,9 +602,9 @@ std::string Mikrokosmos3WanderingInsiderHandler::fetchOutputFileNameFromTheOptio
 
     // add the output file name suffix
     switch (fMultiGenerationOutputKind) {
-      case mfMultiGenerationOutputKind::kGeneration_UNKNOWN:
+      case mfMultiGenerationOutputKind::kGeneration_UNKNOWN_:
         // should not occur
-        outputFileName = "___kGeneration_UNKNOWN____";
+        outputFileName = "___kGeneration_UNKNOWN_____";
         break;
 
       case mfMultiGenerationOutputKind::kGenerationLilypond:
@@ -763,7 +763,7 @@ void Mikrokosmos3WanderingInsiderOahGroup::checkGroupOptionsConsistency ()
     std::stringstream ss;
 
     ss <<
-      "Mikrokosmos3WanderingInsiderOahGroup: a MusicXML output file name must be selected with '-o, -output-file-name";
+      "Mikrokosmos3WanderingInsiderOahGroup: a MusicXML output file name must be selected with '-obj, -output-file-name";
 
     oahError (ss.str ());
   }
@@ -927,7 +927,7 @@ std::ostream& operator << (std::ostream& os, const S_Mikrokosmos3WanderingInside
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -938,9 +938,9 @@ S_Mikrokosmos3WanderingInsiderOahGroup gGlobalMikrokosmos3WanderingInsiderOahGro
 
 S_Mikrokosmos3WanderingInsiderOahGroup Mikrokosmos3WanderingInsiderOahGroup::create ()
 {
-  Mikrokosmos3WanderingInsiderOahGroup* o = new Mikrokosmos3WanderingInsiderOahGroup ();
-  assert (o != nullptr);
-  return o;
+  Mikrokosmos3WanderingInsiderOahGroup* obj = new Mikrokosmos3WanderingInsiderOahGroup ();
+  assert (obj != nullptr);
+  return obj;
 }
 
 Mikrokosmos3WanderingInsiderOahGroup::Mikrokosmos3WanderingInsiderOahGroup ()
@@ -953,7 +953,7 @@ R"(Options that are used by Mikrokosmos3Wandering are grouped here.)",
 // JMI  fGenerationAPIKind = msrGenerationAPIKind::kMsrFunctionsAPIKind; // default value
   fGenerationAPIKind = msrGenerationAPIKind::kMsrStringsAPIKind; // default value
 
-  fMultiGenerationOutputKind = mfMultiGenerationOutputKind::kGeneration_UNKNOWN;
+  fMultiGenerationOutputKind = mfMultiGenerationOutputKind::kGeneration_UNKNOWN_;
 
   initializeMikrokosmos3WanderingInsiderOahGroup ();
 }

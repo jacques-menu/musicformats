@@ -24,8 +24,6 @@
 #include "msr2mxsrWae.h"
 #include "mxsr2musicxmlWae.h"
 
-#include "mfStaticSettings.h"
-
 #include "oahOah.h"
 #include "waeOah.h"
 

@@ -31,11 +31,11 @@ namespace MusicFormats
 S_lpsrLayout lpsrLayout::create (
   int inputLineNumber)
 {
-  lpsrLayout* o =
+  lpsrLayout* obj =
     new lpsrLayout (
       inputLineNumber);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 lpsrLayout::lpsrLayout (

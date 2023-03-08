@@ -23,7 +23,6 @@
 #include "msrNotesDurations.h"
 #include "msrPlacements.h"
 #include "msrTupletFactors.h"
-// #include "msrWholeNotes.h"
 #include "msrWords.h"
 
 

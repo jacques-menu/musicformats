@@ -99,8 +99,8 @@ std::string msrTechnicalTypeKindAsString (
   std::string result;
 
   switch (technicalTypeKind) {
-    case msrTechnicalTypeKind::kTechnicalType_UNKNOWN:
-      result = "kTechnicalType_UNKNOWN";
+    case msrTechnicalTypeKind::kTechnicalType_UNKNOWN_:
+      result = "kTechnicalType_UNKNOWN_";
       break;
     case msrTechnicalTypeKind::kTechnicalTypeStart:
       result = "kTechnicalTypeStart";
@@ -203,13 +203,13 @@ S_msrTechnical msrTechnical::create (
   msrTechnicalKind technicalKind,
   msrPlacementKind technicalPlacementKind)
 {
-  msrTechnical* o =
+  msrTechnical* obj =
     new msrTechnical (
       inputLineNumber,
       technicalKind,
       technicalPlacementKind);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 msrTechnical::msrTechnical (
@@ -328,7 +328,7 @@ std::ostream& operator << (std::ostream& os, const S_msrTechnical& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -341,14 +341,14 @@ S_msrTechnicalWithInteger msrTechnicalWithInteger::create (
   int                         technicalWithIntegerValue,
   msrPlacementKind            technicalWithIntegerPlacementKind)
 {
-  msrTechnicalWithInteger* o =
+  msrTechnicalWithInteger* obj =
     new msrTechnicalWithInteger (
       inputLineNumber,
       technicalWithIntegerKind,
       technicalWithIntegerValue,
       technicalWithIntegerPlacementKind);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 msrTechnicalWithInteger::msrTechnicalWithInteger (
@@ -493,7 +493,7 @@ std::ostream& operator << (std::ostream& os, const S_msrTechnicalWithInteger& el
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -506,14 +506,14 @@ S_msrTechnicalWithFloat msrTechnicalWithFloat::create (
   float                     technicalWithFloatValue,
   msrPlacementKind          technicalWithFloatPlacementKind)
 {
-  msrTechnicalWithFloat* o =
+  msrTechnicalWithFloat* obj =
     new msrTechnicalWithFloat (
       inputLineNumber,
       technicalWithFloatKind,
       technicalWithFloatValue,
       technicalWithFloatPlacementKind);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 msrTechnicalWithFloat::msrTechnicalWithFloat (
@@ -659,7 +659,7 @@ std::ostream& operator << (std::ostream& os, const S_msrTechnicalWithFloat& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -673,15 +673,15 @@ S_msrTechnicalWithString msrTechnicalWithString::create (
   const std::string&    technicalWithStringValue,
   msrPlacementKind           technicalWithStringPlacementKind)
 {
-  msrTechnicalWithString* o =
+  msrTechnicalWithString* obj =
     new msrTechnicalWithString (
       inputLineNumber,
       technicalWithStringKind,
       technicalWithStringTypeKind,
       technicalWithStringValue,
       technicalWithStringPlacementKind);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 msrTechnicalWithString::msrTechnicalWithString (
@@ -838,7 +838,7 @@ std::ostream& operator << (std::ostream& os, const S_msrTechnicalWithString& elt
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

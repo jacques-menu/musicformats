@@ -43,14 +43,14 @@ S_msdl2brailleRegularHandler msdl2brailleRegularHandler::create (
                     insiderOahHandler)
 {
   // create the regular handler
-  msdl2brailleRegularHandler* o = new
+  msdl2brailleRegularHandler* obj = new
     msdl2brailleRegularHandler (
       serviceName,
       handlerHeader,
       insiderOahHandler);
-  assert (o!=0);
+  assert (obj!=0);
 
-  return o;
+  return obj;
 }
 
 msdl2brailleRegularHandler::msdl2brailleRegularHandler (
@@ -1371,7 +1371,7 @@ std::ostream& operator << (std::ostream& os, const S_msdl2brailleRegularHandler&
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

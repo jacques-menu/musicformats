@@ -35,11 +35,11 @@ S_bsrPage bsrPage::create (
   int printPageNumber,
   int linesPerPage)
 {
-  bsrPage* o =
+  bsrPage* obj =
     new bsrPage (
       inputLineNumber, printPageNumber, linesPerPage);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 bsrPage::bsrPage (
@@ -295,7 +295,7 @@ std::ostream& operator << (std::ostream& os, const S_bsrPage& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

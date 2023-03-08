@@ -85,12 +85,12 @@ S_lpsrSchemeVariable lpsrSchemeVariable::create (
   const std::string&     comment,
   lpsrEndOfLineKind endOfLineKind)
 {
-  lpsrSchemeVariable* o =
+  lpsrSchemeVariable* obj =
     new lpsrSchemeVariable (
       inputLineNumber,
       commentedKind, variableName, value, comment, endOfLineKind);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 lpsrSchemeVariable::lpsrSchemeVariable (
@@ -259,12 +259,12 @@ S_lpsrSchemeFunction lpsrSchemeFunction::create (
   const std::string& functionDescription,
   const std::string& functionCode)
 {
-  lpsrSchemeFunction* o =
+  lpsrSchemeFunction* obj =
     new lpsrSchemeFunction (
       inputLineNumber,
       functionName, functionDescription, functionCode);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 lpsrSchemeFunction::lpsrSchemeFunction (

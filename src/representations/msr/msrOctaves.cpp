@@ -39,7 +39,7 @@ EXP int octaveNumberFromOctaveKind (msrOctaveKind octaveKind)
   int result = -2;
 
   switch (octaveKind) {
-    case msrOctaveKind::kOctave_UNKNOWN:
+    case msrOctaveKind::kOctave_UNKNOWN_:
       result = -1;
       break;
     case msrOctaveKind::kOctave0:
@@ -79,11 +79,11 @@ EXP int octaveNumberFromOctaveKind (msrOctaveKind octaveKind)
 
 msrOctaveKind octaveSucc (msrOctaveKind octaveKind)
 {
-  msrOctaveKind result = msrOctaveKind::kOctave_UNKNOWN;
+  msrOctaveKind result = msrOctaveKind::kOctave_UNKNOWN_;
 
   switch (octaveKind) {
-    case msrOctaveKind::kOctave_UNKNOWN:
-      result = msrOctaveKind::kOctave_UNKNOWN;
+    case msrOctaveKind::kOctave_UNKNOWN_:
+      result = msrOctaveKind::kOctave_UNKNOWN_;
       break;
     case msrOctaveKind::kOctave0:
       result = msrOctaveKind::kOctave1;
@@ -113,7 +113,7 @@ msrOctaveKind octaveSucc (msrOctaveKind octaveKind)
       result = msrOctaveKind::kOctave9;
       break;
     case msrOctaveKind::kOctave9:
-      result = msrOctaveKind::kOctave_UNKNOWN;
+      result = msrOctaveKind::kOctave_UNKNOWN_;
       break;
   } // switch
 
@@ -122,14 +122,14 @@ msrOctaveKind octaveSucc (msrOctaveKind octaveKind)
 
 msrOctaveKind octavePred (msrOctaveKind octaveKind)
 {
-  msrOctaveKind result = msrOctaveKind::kOctave_UNKNOWN;
+  msrOctaveKind result = msrOctaveKind::kOctave_UNKNOWN_;
 
   switch (octaveKind) {
-    case msrOctaveKind::kOctave_UNKNOWN:
-      result = msrOctaveKind::kOctave_UNKNOWN;
+    case msrOctaveKind::kOctave_UNKNOWN_:
+      result = msrOctaveKind::kOctave_UNKNOWN_;
       break;
     case msrOctaveKind::kOctave0:
-      result = msrOctaveKind::kOctave_UNKNOWN;
+      result = msrOctaveKind::kOctave_UNKNOWN_;
       break;
     case msrOctaveKind::kOctave1:
       result = msrOctaveKind::kOctave0;
@@ -201,7 +201,7 @@ msrOctaveKind msrOctaveKindFromNumber (
   int inputLineNumber,
   int octaveNumber)
 {
-  msrOctaveKind result = msrOctaveKind::kOctave_UNKNOWN;
+  msrOctaveKind result = msrOctaveKind::kOctave_UNKNOWN_;
 
   switch (octaveNumber) {
     case 0: result = msrOctaveKind::kOctave0; break;
@@ -318,7 +318,7 @@ std::string msrOctaveKindAsString (msrOctaveKind octaveKind)
   std::string result;
 
   switch (octaveKind) {
-    case msrOctaveKind::kOctave_UNKNOWN:
+    case msrOctaveKind::kOctave_UNKNOWN_:
       result = "*** noOctave ***]";
       break;
     case msrOctaveKind::kOctave0:
@@ -463,12 +463,12 @@ S_msrSemiTonesPitchAndOctave msrSemiTonesPitchAndOctave::create (
   msrSemiTonesPitchKind semiTonesPitchKind,
   msrOctaveKind         octaveKind)
 {
-  msrSemiTonesPitchAndOctave* o =
+  msrSemiTonesPitchAndOctave* obj =
     new msrSemiTonesPitchAndOctave (
       semiTonesPitchKind,
       octaveKind);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 msrSemiTonesPitchAndOctave::msrSemiTonesPitchAndOctave (
@@ -630,8 +630,8 @@ S_msrSemiTonesPitchAndOctave msrSemiTonesPitchAndOctave::createFromString (
 void msrSemiTonesPitchAndOctave::incrementOctaveKind ()
 {
   switch (fOctaveKind) {
-    case msrOctaveKind::kOctave_UNKNOWN:
-      fOctaveKind = msrOctaveKind::kOctave_UNKNOWN;
+    case msrOctaveKind::kOctave_UNKNOWN_:
+      fOctaveKind = msrOctaveKind::kOctave_UNKNOWN_;
       break;
     case msrOctaveKind::kOctave0:
       fOctaveKind = msrOctaveKind::kOctave1;
@@ -661,7 +661,7 @@ void msrSemiTonesPitchAndOctave::incrementOctaveKind ()
       fOctaveKind = msrOctaveKind::kOctave9;
       break;
     case msrOctaveKind::kOctave9:
-      fOctaveKind = msrOctaveKind::kOctave_UNKNOWN;
+      fOctaveKind = msrOctaveKind::kOctave_UNKNOWN_;
       break;
   } // switch
 }
@@ -669,11 +669,11 @@ void msrSemiTonesPitchAndOctave::incrementOctaveKind ()
 void msrSemiTonesPitchAndOctave::decrementOctaveKind ()
 {
   switch (fOctaveKind) {
-    case msrOctaveKind::kOctave_UNKNOWN:
-      fOctaveKind = msrOctaveKind::kOctave_UNKNOWN;
+    case msrOctaveKind::kOctave_UNKNOWN_:
+      fOctaveKind = msrOctaveKind::kOctave_UNKNOWN_;
       break;
     case msrOctaveKind::kOctave0:
-      fOctaveKind = msrOctaveKind::kOctave_UNKNOWN;
+      fOctaveKind = msrOctaveKind::kOctave_UNKNOWN_;
       break;
     case msrOctaveKind::kOctave1:
       fOctaveKind = msrOctaveKind::kOctave0;
@@ -750,7 +750,7 @@ std::ostream& operator << (std::ostream& os, const S_msrSemiTonesPitchAndOctave&
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -762,12 +762,12 @@ S_msrSemiTonesPitchAndAbsoluteOctave msrSemiTonesPitchAndAbsoluteOctave::create 
   msrSemiTonesPitchKind semiTonesPitchKind,
   int                   absoluteOctave)
 {
-  msrSemiTonesPitchAndAbsoluteOctave* o =
+  msrSemiTonesPitchAndAbsoluteOctave* obj =
     new msrSemiTonesPitchAndAbsoluteOctave (
       semiTonesPitchKind,
       absoluteOctave);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 msrSemiTonesPitchAndAbsoluteOctave::msrSemiTonesPitchAndAbsoluteOctave (
@@ -853,7 +853,7 @@ std::ostream& operator << (std::ostream& os, const S_msrSemiTonesPitchAndAbsolut
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -864,12 +864,12 @@ S_msrSemiTonesPitchAndRelativeOctave msrSemiTonesPitchAndRelativeOctave::create 
   msrSemiTonesPitchKind semiTonesPitchKind,
   int                   relativeOctave)
 {
-  msrSemiTonesPitchAndRelativeOctave* o =
+  msrSemiTonesPitchAndRelativeOctave* obj =
     new msrSemiTonesPitchAndRelativeOctave (
       semiTonesPitchKind,
       relativeOctave);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 msrSemiTonesPitchAndRelativeOctave::msrSemiTonesPitchAndRelativeOctave (
@@ -955,7 +955,7 @@ std::ostream& operator << (std::ostream& os, const S_msrSemiTonesPitchAndRelativ
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -968,12 +968,12 @@ S_msrQuarterTonesPitchAndOctave msrQuarterTonesPitchAndOctave::create (
   msrQuarterTonesPitchKind quarterTonesPitchKind,
   msrOctaveKind            octaveKind)
 {
-  msrQuarterTonesPitchAndOctave* o =
+  msrQuarterTonesPitchAndOctave* obj =
     new msrQuarterTonesPitchAndOctave (
       quarterTonesPitchKind,
       octaveKind);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 msrQuarterTonesPitchAndOctave::msrQuarterTonesPitchAndOctave (
@@ -1137,8 +1137,8 @@ S_msrQuarterTonesPitchAndOctave msrQuarterTonesPitchAndOctave::createFromString 
 void msrQuarterTonesPitchAndOctave::incrementOctaveKind ()
 {
   switch (fOctaveKind) {
-    case msrOctaveKind::kOctave_UNKNOWN:
-      fOctaveKind = msrOctaveKind::kOctave_UNKNOWN;
+    case msrOctaveKind::kOctave_UNKNOWN_:
+      fOctaveKind = msrOctaveKind::kOctave_UNKNOWN_;
       break;
     case msrOctaveKind::kOctave0:
       fOctaveKind = msrOctaveKind::kOctave1;
@@ -1168,7 +1168,7 @@ void msrQuarterTonesPitchAndOctave::incrementOctaveKind ()
       fOctaveKind = msrOctaveKind::kOctave9;
       break;
     case msrOctaveKind::kOctave9:
-      fOctaveKind = msrOctaveKind::kOctave_UNKNOWN;
+      fOctaveKind = msrOctaveKind::kOctave_UNKNOWN_;
       break;
   } // switch
 }
@@ -1176,11 +1176,11 @@ void msrQuarterTonesPitchAndOctave::incrementOctaveKind ()
 void msrQuarterTonesPitchAndOctave::decrementOctaveKind ()
 {
   switch (fOctaveKind) {
-    case msrOctaveKind::kOctave_UNKNOWN:
-      fOctaveKind = msrOctaveKind::kOctave_UNKNOWN;
+    case msrOctaveKind::kOctave_UNKNOWN_:
+      fOctaveKind = msrOctaveKind::kOctave_UNKNOWN_;
       break;
     case msrOctaveKind::kOctave0:
-      fOctaveKind = msrOctaveKind::kOctave_UNKNOWN;
+      fOctaveKind = msrOctaveKind::kOctave_UNKNOWN_;
       break;
     case msrOctaveKind::kOctave1:
       fOctaveKind = msrOctaveKind::kOctave0;
@@ -1257,7 +1257,7 @@ std::ostream& operator << (std::ostream& os, const S_msrQuarterTonesPitchAndOcta
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

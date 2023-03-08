@@ -464,8 +464,8 @@ void mxsr2msrTranslator::visitStart ( S_figured_bass& elt )
 
   fCurrentFigureNumber = -1;
 
-  fCurrentFigurePrefixKind = msrBassFigurePrefixKind::kBassFigurePrefix_UNKNOWN;
-  fCurrentFigureSuffixKind = msrBassFigureSuffixKind::kBassFigureSuffix_UNKNOWN;
+  fCurrentFigurePrefixKind = msrBassFigurePrefixKind::kBassFigurePrefix_UNKNOWN_;
+  fCurrentFigureSuffixKind = msrBassFigureSuffixKind::kBassFigureSuffix_UNKNOWN_;
 
   fCurrentFiguredBassSoundingWholeNotes = mfRational (0, 1);
   fCurrentFiguredBassDisplayWholeNotes  = mfRational (0, 1);

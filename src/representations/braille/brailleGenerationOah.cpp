@@ -57,7 +57,7 @@ S_brailleOutputKindAtom brailleOutputKindAtom::create (
   bsrBrailleOutputKind& brailleOutputKindVariable,
   bsrBrailleOutputKind  brailleOutputKindValue)
 {
-  brailleOutputKindAtom* o = new
+  brailleOutputKindAtom* obj = new
     brailleOutputKindAtom (
       longName,
       shortName,
@@ -65,8 +65,8 @@ S_brailleOutputKindAtom brailleOutputKindAtom::create (
       variableName,
       brailleOutputKindVariable,
       brailleOutputKindValue);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 brailleOutputKindAtom::brailleOutputKindAtom (
@@ -307,7 +307,7 @@ std::ostream& operator << (std::ostream& os, const S_brailleOutputKindAtom& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -322,7 +322,7 @@ S_brailleUTFKindAtom brailleUTFKindAtom::create (
   const std::string& variableName,
   bsrUTFKind&   brailleUTFKindVariable)
 {
-  brailleUTFKindAtom* o = new
+  brailleUTFKindAtom* obj = new
     brailleUTFKindAtom (
       longName,
       shortName,
@@ -330,8 +330,8 @@ S_brailleUTFKindAtom brailleUTFKindAtom::create (
       valueSpecification,
       variableName,
       brailleUTFKindVariable);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 brailleUTFKindAtom::brailleUTFKindAtom (
@@ -573,7 +573,7 @@ std::ostream& operator << (std::ostream& os, const S_brailleUTFKindAtom& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -588,7 +588,7 @@ S_brailleByteOrderingKindAtom brailleByteOrderingKindAtom::create (
   const std::string&   variableName,
   bsrByteOrderingKind& brailleByteOrderingKindVariable)
 {
-  brailleByteOrderingKindAtom* o = new
+  brailleByteOrderingKindAtom* obj = new
     brailleByteOrderingKindAtom (
       longName,
       shortName,
@@ -596,8 +596,8 @@ S_brailleByteOrderingKindAtom brailleByteOrderingKindAtom::create (
       valueSpecification,
       variableName,
       brailleByteOrderingKindVariable);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 brailleByteOrderingKindAtom::brailleByteOrderingKindAtom (
@@ -839,7 +839,7 @@ std::ostream& operator << (std::ostream& os, const S_brailleByteOrderingKindAtom
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -851,9 +851,9 @@ S_brailleGenerationOahGroup gGlobalBrailleGenerationOahGroup;
 
 S_brailleGenerationOahGroup brailleGenerationOahGroup::create ()
 {
-  brailleGenerationOahGroup* o = new brailleGenerationOahGroup ();
-  assert (o != nullptr);
-  return o;
+  brailleGenerationOahGroup* obj = new brailleGenerationOahGroup ();
+  assert (obj != nullptr);
+  return obj;
 }
 
 brailleGenerationOahGroup::brailleGenerationOahGroup ()
@@ -1318,7 +1318,7 @@ std::ostream& operator << (std::ostream& os, const S_brailleGenerationOahGroup& 
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

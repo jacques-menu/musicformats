@@ -89,10 +89,10 @@ This document contains technical information about the internal working of the c
 \section{Zsh vs Bash}
 % -------------------------------------------------------------------------
 
-Although the shell mentioned in the \mf\ user guide is Bash, most scripts and functions supplied for \mf\ maintainance are Zsh \Main{script}s.
+Although the shell mentioned in the \mf\ user guide is Bash, most scripts and shell functions supplied for \mf\ maintainance are Zsh \Main{script}s.
 This is because of the magical globbing pattern qualifier \code{**/} Zsh supplies, which makes \code{find} seldom needed.
 
-For example, in \scripts{ZshDefinitionsForMusicFormats.zsh}, adding the \folderName{include} folder alongside \srcFolder\ is done this way:
+For example, in \devtools{ZshDefinitionsForMusicFormats.zsh}, adding the \folderName{include} folder alongside \srcFolder\ is done this way:
 \begin{lstlisting}[language=Terminal]
 function addInclude ()
 {
@@ -114,6 +114,8 @@ function addInclude ()
 \end{lstlisting}
 
 This creates the same folders hierarchy as the one in \srcFolder, with only the \code{*.h} header files in it.
+
+Another useful tool is \devtools{CheckGIndenterUsage.cpp}, whose name is self-comprehensive.
 
 
 % -------------------------------------------------------------------------

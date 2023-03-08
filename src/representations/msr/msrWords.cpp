@@ -41,7 +41,7 @@ S_msrWords msrWords::create (
   msrXMLLangKind             wordsXMLLangKind,
   int                        wordsStaffNumber)
 {
-  msrWords* o =
+  msrWords* obj =
     new msrWords (
       inputLineNumber,
       wordsPlacementKind,
@@ -54,8 +54,8 @@ S_msrWords msrWords::create (
       wordsFontWeightKind,
       wordsXMLLangKind,
       wordsStaffNumber);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 msrWords::msrWords (
@@ -296,7 +296,7 @@ std::ostream& operator << (std::ostream& os, const S_msrWords& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

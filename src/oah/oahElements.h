@@ -33,7 +33,7 @@ EXP extern const int K_OAH_FIELD_WIDTH;
 // ------------------------------------------------------
 
 enum class oahElementValueKind {
-  kElementValue_UNKNOWN, // default value
+  kElementValue_UNKNOWN_, // default value
   kElementValueLess,     // i.e. -cpu, -minimal, -cubase, groups and subgroups elements
 //   kElementValueImplicit,  // for oahBoolean
   kElementValueFitted,   // i.e. -global-staff-size 30

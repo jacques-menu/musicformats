@@ -22,7 +22,7 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-#define DEBUG_INDENTER
+// #define DEBUG_INDENTER
 
 #ifdef DEBUG_INDENTER
   #include "waeHandlers.h"
@@ -82,10 +82,10 @@ mfOutputIndenter& mfOutputIndenter::operator-- ()
       std::endl << std::endl;
 
 #ifdef DEBUG_INDENTER
-    mfAssert (
-      __FILE__, __LINE__,
-      false,
-      "indentation has become negative");
+//     mfAssert (
+//       __FILE__, __LINE__,
+//       false,
+//       "indentation has become negative");
 #endif // DEBUG_INDENTER
   }
 
@@ -130,10 +130,10 @@ mfOutputIndenter mfOutputIndenter::mfOutputIndenter::operator-- (int)
       std::endl << std::endl;
 
 #ifdef DEBUG_INDENTER
-    mfAssert (
-      __FILE__, __LINE__,
-      false,
-      "indentation has become negative");
+//     mfAssert (
+//       __FILE__, __LINE__,
+//       false,
+//       "indentation has become negative");
 #endif // DEBUG_INDENTER
   }
 
@@ -163,10 +163,10 @@ mfOutputIndenter& mfOutputIndenter::increment (int value)
       std::endl << std::endl;
 
 #ifdef DEBUG_INDENTER
-    mfAssert (
-      __FILE__, __LINE__,
-      false,
-      "indentation has become negative");
+//     mfAssert (
+//       __FILE__, __LINE__,
+//       false,
+//       "indentation has become negative");
 #endif // DEBUG_INDENTER
   }
 
@@ -196,10 +196,10 @@ mfOutputIndenter& mfOutputIndenter::decrement (int value)
       std::endl << std::endl;
 
 #ifdef DEBUG_INDENTER
-    mfAssert (
-      __FILE__, __LINE__,
-      false,
-      "indentation has become negative");
+//     mfAssert (
+//       __FILE__, __LINE__,
+//       false,
+//       "indentation has become negative");
 #endif // DEBUG_INDENTER
   }
 

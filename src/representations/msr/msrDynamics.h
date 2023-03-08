@@ -25,7 +25,7 @@ namespace MusicFormats
 // data types
 
 enum class msrDynamicKind {
-  kDynamic_UNKNOWN,
+  kDynamic_UNKNOWN_,
 
   kDynamicF, kDynamicFF, kDynamicFFF,
   kDynamicFFFF, kDynamicFFFFF, kDynamicFFFFFF,

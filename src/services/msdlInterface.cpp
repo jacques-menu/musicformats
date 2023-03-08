@@ -156,7 +156,7 @@ EXP int msdl (
         msdlConverterInsiderHandler::create (
           serviceName,
           serviceName + " insider OAH handler with argc/argv",
-          mfMultiGenerationOutputKind::kGeneration_UNKNOWN); // JMI ??? v0.9.67
+          mfMultiGenerationOutputKind::kGeneration_UNKNOWN_); // JMI ??? v0.9.67
 
     // the OAH handler to be used, a regular handler is the default
     // ------------------------------------------------------
@@ -175,7 +175,7 @@ EXP int msdl (
           serviceName,
           serviceName + " regular OAH handler with argc/argv",
           insiderOahHandler,
-          mfMultiGenerationOutputKind::kGeneration_UNKNOWN); // JMI ??? v0.9.67
+          mfMultiGenerationOutputKind::kGeneration_UNKNOWN_); // JMI ??? v0.9.67
     }
 
     // create the global run data

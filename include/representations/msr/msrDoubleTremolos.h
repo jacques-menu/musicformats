@@ -15,7 +15,6 @@
 #include "msrMeasureElements.h"
 #include "msrPlacements.h"
 #include "msrTypesForwardDeclarations.h"
-// #include "msrWholeNotes.h"
 
 
 namespace MusicFormats
@@ -24,7 +23,7 @@ namespace MusicFormats
 // tremolo types
 //______________________________________________________________________________
 enum class msrDoubleTremoloTypeKind {
-  kDoubleTremoloType_UNKNOWN,
+  kDoubleTremoloType_UNKNOWN_,
   kDoubleTremoloTypeSingle, kDoubleTremoloTypeStart, kDoubleTremoloTypeStop
 };
 

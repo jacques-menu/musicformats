@@ -16,7 +16,6 @@
 
 #include "msrElements.h"
 #include "msrNotesDurations.h"
-// #include "msrWholeNotes.h"
 
 
 namespace MusicFormats

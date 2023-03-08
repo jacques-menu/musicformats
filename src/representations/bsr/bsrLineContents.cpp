@@ -48,12 +48,12 @@ S_bsrLineContents bsrLineContents::create (
   int                 inputLineNumber,
   bsrLineContentsKind lineContentsKind)
 {
-  bsrLineContents* o =
+  bsrLineContents* obj =
     new bsrLineContents (
       inputLineNumber,
       lineContentsKind);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 bsrLineContents::bsrLineContents (
@@ -434,7 +434,7 @@ std::ostream& operator << (std::ostream& os, const S_bsrLineContents& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

@@ -36,7 +36,7 @@ class EXP msrStaff : public msrElement
     // constants
     // ------------------------------------------------------
 
-    static const int K_STAFF_NUMBER_UNKNOWN;
+    static const int K_STAFF_NUMBER_UNKNOWN_;
 
     // creation from MusicXML
     // ------------------------------------------------------

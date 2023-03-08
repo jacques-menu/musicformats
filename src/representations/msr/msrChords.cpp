@@ -11,17 +11,13 @@
 
 #include <iomanip>
 
-#include "mfStaticSettings.h"
-
 #include "visitor.h"
+
+#include "mfStaticSettings.h"
 
 #include "mfAssert.h"
 #include "mfServices.h"
 #include "mfStringsHandling.h"
-
-#include "mfStaticSettings.h"
-
-#include "mfAssert.h"
 
 #include "msrArticulations.h"
 #include "msrGlissandos.h"
@@ -53,8 +49,8 @@ std::string msrChordInKindAsString (
   std::string result;
 
   switch (chordInKind) {
-    case msrChordInKind::kChordIn_UNKNOWN:
-      result = "kChordIn_UNKNOWN";
+    case msrChordInKind::kChordIn_UNKNOWN_:
+      result = "kChordIn_UNKNOWN_";
       break;
     case msrChordInKind::kChordInMeasure:
       result = "kChordInMeasure";
@@ -90,8 +86,8 @@ S_msrChord msrChord::create (
 
     ss <<
       "Creating a chord" <<
-      ", chordSoundingWholeNotes: " << chordSoundingWholeNotes <<
-      ", chordDisplayWholeNotes: " << chordDisplayWholeNotes <<
+      ", chordSoundingWholeNotes: " << chordSoundingWholeNotes.asString () <<
+      ", chordDisplayWholeNotes: " << chordDisplayWholeNotes.asString () <<
       ", chordGraphicNotesDuration: " <<
       msrNotesDurationKindAsString (chordGraphicNotesDurationKind) <<
       std::endl;
@@ -102,14 +98,14 @@ S_msrChord msrChord::create (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  msrChord* o =
+  msrChord* obj =
     new msrChord (
       inputLineNumber,
       upLinkToMeasure,
       chordSoundingWholeNotes, chordDisplayWholeNotes,
       chordGraphicNotesDurationKind);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 S_msrChord msrChord::create (
@@ -124,8 +120,8 @@ S_msrChord msrChord::create (
 
     ss <<
       "Creating a chord" <<
-      ", chordSoundingWholeNotes: " << chordSoundingWholeNotes <<
-      ", chordDisplayWholeNotes: " << chordDisplayWholeNotes <<
+      ", chordSoundingWholeNotes: " << chordSoundingWholeNotes.asString () <<
+      ", chordDisplayWholeNotes: " << chordDisplayWholeNotes.asString () <<
       ", chordGraphicNotesDuration: " <<
       msrNotesDurationKindAsString (chordGraphicNotesDurationKind) <<
       std::endl;
@@ -153,7 +149,7 @@ msrChord::msrChord (
     : msrTupletElement (
         inputLineNumber)
 {
-  fChordKind = msrChordInKind::kChordIn_UNKNOWN;
+  fChordKind = msrChordInKind::kChordIn_UNKNOWN_;
 
   fChordUpLinkToMeasure = upLinkToMeasure;
 
@@ -240,7 +236,7 @@ S_msrChord msrChord::createChordNewbornClone (
 //       " to " <<
 //       measurePosition.asString () <<
 //       " (was " <<
-//       fMeasurePosition <<
+//       fMeasurePosition.asString () <<
 //       ") in measure " <<
 //       measure->asShortString () <<
 //       " (measureElementMeasureNumber: " <<
@@ -256,8 +252,8 @@ S_msrChord msrChord::createChordNewbornClone (
 //   sanity check
 //   mfAssert (
 //     __FILE__, __LINE__,
-//     measurePosition != K_MEASURE_POSITION_UNKNOWN,
-//     "measurePosition == K_MEASURE_POSITION_UNKNOWN");
+//     measurePosition != K_MEASURE_POSITION_UNKNOWN_,
+//     "measurePosition == K_MEASURE_POSITION_UNKNOWN_");
 // #endif // MF_SANITY_CHECKS_ARE_ENABLED
 //
 //   // set chord's measure position
@@ -270,7 +266,7 @@ S_msrChord msrChord::createChordNewbornClone (
 //   S_msrMeasure result;
 //
 //   switch (fChordKind) {
-//     case msrChordInKind::kChordIn_UNKNOWN:
+//     case msrChordInKind::kChordIn_UNKNOWN_:
 //       break;
 //
 //     case msrChordInKind::kChordInMeasure:
@@ -357,7 +353,7 @@ S_msrTuplet msrChord::fetchChordUpLinkToTuplet () const
   S_msrTuplet result;
 
   switch (fChordKind) {
-    case msrChordInKind::kChordIn_UNKNOWN:
+    case msrChordInKind::kChordIn_UNKNOWN_:
       break;
 
     case msrChordInKind::kChordInMeasure:
@@ -386,7 +382,7 @@ S_msrGraceNotesGroup msrChord::fetchChordUpLinkToGraceNotesGroup () const
   S_msrGraceNotesGroup result;
 
   switch (fChordKind) {
-    case msrChordInKind::kChordIn_UNKNOWN:
+    case msrChordInKind::kChordIn_UNKNOWN_:
       break;
     case msrChordInKind::kChordInMeasure:
       break;
@@ -427,7 +423,7 @@ void msrChord::setChordDisplayWholeNotes (
 
     ss <<
       "Setting chord displayed whole notes to '" <<
-      wholeNotes <<
+      wholeNotes.asString () <<
       "' for chord '" <<
       asString () <<
       "'" <<
@@ -454,9 +450,9 @@ void msrChord::setChordGraceNotesGroupLinkBefore (
     ss <<
       "Setting chord grace notes groups before in " <<
       asString () <<
-      " to '" <<
+      " to " <<
       chordChordGraceNotesGroupLinkBefore->asShortString () <<
-      "', line " << inputLineNumber <<
+      ", line " << inputLineNumber <<
       std::endl;
 
     gWaeHandler->waeTrace (
@@ -481,9 +477,9 @@ void msrChord::setChordGraceNotesGroupLinkAfter (
     ss <<
       "Setting chord grace notes groups after in " <<
       asString () <<
-      " to '" <<
+      " to " <<
       chordChordGraceNotesGroupLinkAfter->asShortString () <<
-      "', line " << inputLineNumber <<
+      ", line " << inputLineNumber <<
       std::endl;
 
     gWaeHandler->waeTrace (
@@ -511,11 +507,12 @@ void msrChord::setMeasurePosition (
     std::stringstream ss;
 
     ss <<
-      "Setting measure position of " <<
+      "Setting the measure position of " <<
       asString () <<
-      " to '" << measurePosition <<
-      "' (was '" <<
-      fMeasurePosition <<
+      " to " <<
+      measurePosition.asString () <<
+      " (was '" <<
+      fMeasurePosition.asString () <<
       "') in measure " <<
       measure->asShortString () <<
       " (measureElementMeasureNumber: " <<
@@ -553,8 +550,8 @@ void msrChord::setChordMembersMeasurePosition (
 
     ss <<
       "Setting chord members measure positions of " << asString () <<
-      " to '" <<
-      measurePosition <<
+      " to " <<
+      measurePosition.asString () <<
       ", fChordNotesVector.size(): " << fChordNotesVector.size () <<
       std::endl;
 
@@ -1224,7 +1221,7 @@ void msrChord::finalizeChord (
       std::endl <<
       "fMeasurePosition: " <<
       std::endl <<
-      fMeasurePosition <<
+      fMeasurePosition.asString () <<
       std::endl;
 
     gWaeHandler->waeTrace (
@@ -1342,7 +1339,7 @@ void msrChord::browseData (basevisitor* v)
         std::stringstream ss;
 
         ss <<
-          "% ==> visiting grace notes groups before is inhibited" <<
+          "% ==> visiting grace notes groups 'before' is inhibited" <<
           std::endl;
 
         gWaeHandler->waeTrace (
@@ -1788,12 +1785,12 @@ void msrChord::printFull (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fMeasurePosition" << ": " << fMeasurePosition <<
+    "fMeasurePosition" << ": " << fMeasurePosition.asString () <<
     std::setw (fieldWidth) <<
-    "fSoundingWholeNotes" << ": " << fSoundingWholeNotes <<
+    "fSoundingWholeNotes" << ": " << fSoundingWholeNotes.asString () <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fChordDisplayWholeNotes" << ": " << fChordDisplayWholeNotes <<
+    "fChordDisplayWholeNotes" << ": " << fChordDisplayWholeNotes.asString () <<
     std::endl <<
     std::setw (fieldWidth) <<
     "getMeasureNumber()" << ": " <<
@@ -1814,7 +1811,7 @@ void msrChord::printFull (std::ostream& os) const
       fChordUpLinkToMeasure->asShortString ();
   }
   else {
-    os << "[NONE]";
+    os << "[NULL]";
   }
   os << std::endl;
 
@@ -1826,7 +1823,7 @@ void msrChord::printFull (std::ostream& os) const
       fChordShortcutUpLinkToTuplet->asShortString ();
   }
   else {
-    os << "[NONE]";
+    os << "[NULL]";
   }
   os << std::endl;
 
@@ -1857,7 +1854,7 @@ void msrChord::printFull (std::ostream& os) const
       os << gTab << fChordGraceNotesGroupLinkBefore;
     }
     else {
-      os << ": " << "[NONE]" << std::endl; // JMI TEST
+      os << ": " << "[NULL]" << std::endl; // JMI TEST
     }
   }
 
@@ -2582,11 +2579,11 @@ void msrChord::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
- // JMI   "chordSoundingWholeNotes" << ": " << fChordSoundingWholeNotes <<
-    "fSoundingWholeNotes" << ": " << fSoundingWholeNotes <<
+ // JMI   "chordSoundingWholeNotes" << ": " << fChordSoundingWholeNotes.asString () <<
+    "fSoundingWholeNotes" << ": " << fSoundingWholeNotes.asString () <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fChordDisplayWholeNotes" << ": " << fChordDisplayWholeNotes <<
+    "fChordDisplayWholeNotes" << ": " << fChordDisplayWholeNotes.asString () <<
     std::endl;
 
   os << std::left <<
@@ -2597,13 +2594,13 @@ void msrChord::print (std::ostream& os) const
         fChordUpLinkToMeasure->getMeasureNumber ();
     }
     else {
-      os << "[UNKNOWN]";
+      os << "[UNKNOWN_MEASURE_NUMBER]";
     }
   os << std::endl;
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fMeasurePosition" << ": " << fMeasurePosition <<
+    "fMeasurePosition" << ": " << fMeasurePosition.asString () <<
     std::endl <<
 //     std::setw (fieldWidth) <<
 //     "fVoicePosition" << ": " << fVoicePosition <<
@@ -3243,7 +3240,7 @@ void msrChord::print (std::ostream& os) const
     }
     else {
       os <<
-        "[NONE]";
+        "[NULL]";
     }
 
     --gIndenter;
@@ -3296,7 +3293,7 @@ void msrChord::print (std::ostream& os) const
       --gIndenter;
     }
     else {
-      os << ": " << "[NONE]" << std::endl; // JMI TEST
+      os << ": " << "[NULL]" << std::endl; // JMI TEST
     }
 //    os << std::endl;
   }
@@ -3313,7 +3310,7 @@ void msrChord::print (std::ostream& os) const
       --gIndenter;
     }
     else {
-      os << ": " << "[NONE]";
+      os << ": " << "[NULL]";
     }
     os << std::endl;
   }
@@ -3330,7 +3327,7 @@ void msrChord::print (std::ostream& os) const
       os << gTab << fChordGraceNotesGroupLinkAfter->asShortString ();
     }
     else {
-      os << ": " << "[NONE]";
+      os << ": " << "[NULL]";
     }
     os << std::endl;
   }
@@ -3346,7 +3343,7 @@ std::ostream& operator << (std::ostream& os, const S_msrChord& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -3358,13 +3355,13 @@ S_msrChordBeamLink msrChordBeamLink::create (
   const S_msrBeam&  originalBeam,
   const S_msrChord& upLinkToChord)
 {
-  msrChordBeamLink* o =
+  msrChordBeamLink* obj =
     new msrChordBeamLink (
       inputLineNumber,
       originalBeam,
       upLinkToChord);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 msrChordBeamLink::msrChordBeamLink (
@@ -3608,7 +3605,7 @@ std::ostream& operator << (std::ostream& os, const S_msrChordBeamLink& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -3620,13 +3617,13 @@ S_msrChordSlurLink msrChordSlurLink::create (
   const S_msrSlur&  originalSlur,
   const S_msrChord& upLinkToChord)
 {
-  msrChordSlurLink* o =
+  msrChordSlurLink* obj =
     new msrChordSlurLink (
       inputLineNumber,
       originalSlur,
       upLinkToChord);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 msrChordSlurLink::msrChordSlurLink (
@@ -3842,7 +3839,7 @@ std::ostream& operator << (std::ostream& os, const S_msrChordSlurLink& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -3854,13 +3851,13 @@ S_msrChordGraceNotesGroupLink msrChordGraceNotesGroupLink::create (
   const S_msrGraceNotesGroup& originalGraceNotesGroup,
   const S_msrChord&           upLinkToChord)
 {
-  msrChordGraceNotesGroupLink* o =
+  msrChordGraceNotesGroupLink* obj =
     new msrChordGraceNotesGroupLink (
       inputLineNumber,
       originalGraceNotesGroup,
       upLinkToChord);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 msrChordGraceNotesGroupLink::msrChordGraceNotesGroupLink (
@@ -4079,7 +4076,7 @@ std::ostream& operator << (std::ostream& os, const S_msrChordGraceNotesGroupLink
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

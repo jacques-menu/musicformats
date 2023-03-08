@@ -12,12 +12,12 @@
 % !TEX root = MusicFormatsMaintainanceGuide.tex
 
 % -------------------------------------------------------------------------
-\chapter{Maintenance scripts}\label{Maintenance scripts}
+\chapter{Maintenance tools}\label{Maintenance tools}
 % -------------------------------------------------------------------------
 
-They are located in \scriptsFolder\ and meant to facilitate the \mf\ maintenance activities:
+They are located in \devtoolsFolder\ and meant to facilitate the \mf\ maintenance activities:
 \begin{lstlisting}[language=Terminal]
-jacquesmenu@macstudio-1:/Volumes/JMI_Volume/JMI_Developpement/musicformats-git-dev/scripts > ls -sal
+jacquesmenu@macstudio-1:/Volumes/JMI_Volume/JMI_Developpement/musicformats-git-dev/devtools > ls -sal
 total 120
  0 drwxr-xr-x  12 jacquesmenu  staff    384 Feb 15 10:53 .
  0 drwxr-xr-x  31 jacquesmenu  staff    992 Feb 28 15:52 ..
@@ -37,7 +37,7 @@ total 120
 \section{Building the library}
 % -------------------------------------------------------------------------
 
-\scripts{BuildMusicFormats.zsh} executes \cmake, whose configuration is in \buildFolder:
+\devtools{BuildMusicFormats.zsh} executes \cmake, whose configuration is in \buildFolder:
 \begin{lstlisting}[language=Terminal]
 jacquesmenu@macstudio-1:/Volumes/JMI_Volume/JMI_Developpement/musicformats-git-dev/build > ls -sal
 total 992
@@ -61,7 +61,7 @@ total 992
 \section{Building the documenation}
 % -------------------------------------------------------------------------
 
-\scripts{CreateDocumentationPDFs.zsh} executes lives up to its name. The \LaTeX\ source files are in \docFolder:
+\devtools{CreateDocumentationPDFs.zsh} executes lives up to its name. The \LaTeX\ source files are in \docFolder:
 \begin{lstlisting}[language=Terminal]
 jacquesmenu@macstudio-1:/Volumes/JMI_Volume/JMI_Developpement/musicformats-git-dev/documentation > ll
 total 24
@@ -86,19 +86,19 @@ When modifying a documentation's structure information, i.e. chapter, section an
 \section{Releases creation}
 % -------------------------------------------------------------------------
 
-\scripts{CreateMusicFormatsReleases.zsh} lives up to its name too. 
+\devtools{CreateMusicFormatsReleases.zsh} lives up to its name too.
 
 
 % -------------------------------------------------------------------------
 \section{Checking source files contents}
 % -------------------------------------------------------------------------
 
-\scripts{LocateFilesContainingFirstAndNotSecond.zsh} helps to find superfluous \CPlusplus\ includes or other such checking tasks. 
+\devtools{LocateFilesContainingFirstAndNotSecond.zsh} helps to find superfluous \CPlusplus\ includes or other such checking tasks.
 
 
 % -------------------------------------------------------------------------
 \section{Handly ZSH functions and aliases}
 % -------------------------------------------------------------------------
 
-There are a couple of them in \scripts{ZshDefinitionsForMusicFormats.zsh}
+There are a couple of them in \devtools{ZshDefinitionsForMusicFormats.zsh}
 

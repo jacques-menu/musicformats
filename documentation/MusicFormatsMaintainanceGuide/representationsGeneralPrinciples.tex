@@ -308,13 +308,13 @@ S_msrTimeSignature msrTimeSignature::create (
   msrTimeSignatureSymbolKind
                 timeSignatureSymbolKind)
 {
-  msrTimeSignature* o =
+  msrTimeSignature* obj =
     new msrTimeSignature (
       inputLineNumber,
       upLinkToMeasure,
       timeSignatureSymbolKind);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 msrTimeSignature::msrTimeSignature (
@@ -362,10 +362,10 @@ This leads to the following in in \msdl{msdlScanner.cpp}:
 \begin{lstlisting}[language=CPlusPlus]
 S_msdlScanner msdlScanner::create (std::istream& inputStream)
 {
-  msdlScanner* o =
+  msdlScanner* obj =
     new msdlScanner (inputStream);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 msdlScanner::msdlScanner (std::istream& inputStream)
@@ -514,12 +514,12 @@ Usage:
       std::ostream&        theOStream,
       mfOutputIndenter& theIndenter)
     {
-      mfIndentedOstream* o = new mfIndentedOstream (
+      mfIndentedOstream* obj = new mfIndentedOstream (
         theOStream,
         theIndenter);
-      assert (o != nullptr);
+      assert (obj != nullptr);
 
-      return o;
+      return obj;
     }
 
     // constructors/destructor

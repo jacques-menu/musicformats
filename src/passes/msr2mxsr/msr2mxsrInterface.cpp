@@ -12,8 +12,6 @@
 #include <iostream>
 #include <fstream>      // std::ofstream, std::ofstream::open(), std::ofstream::close()
 
-#include "mfStaticSettings.h"
-
 #include "xml.h"
 #include "xmlfile.h"
 #include "xmlreader.h"
@@ -22,7 +20,6 @@
 
 #include "mfAssert.h"
 #include "mfTiming.h"
-
 
 #include "mxsrOah.h"
 

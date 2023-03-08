@@ -44,12 +44,12 @@ S_msrScore msrScore::create (
   int                inputLineNumber,
   const std::string& scoreName)
 {
-  msrScore* o =
+  msrScore* obj =
     new msrScore (
       inputLineNumber,
       scoreName);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 msrScore::msrScore (
@@ -964,7 +964,7 @@ std::ostream& operator << (std::ostream& os, const S_msrScore& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

@@ -139,7 +139,7 @@ S_msrGenerationAPIKindAtom msrGenerationAPIKindAtom::create (
   const std::string&    variableName,
   msrGenerationAPIKind& generationAPIKindVariable)
 {
-  msrGenerationAPIKindAtom* o = new
+  msrGenerationAPIKindAtom* obj = new
     msrGenerationAPIKindAtom (
       longName,
       shortName,
@@ -147,8 +147,8 @@ S_msrGenerationAPIKindAtom msrGenerationAPIKindAtom::create (
       valueSpecification,
       variableName,
       generationAPIKindVariable);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 msrGenerationAPIKindAtom::msrGenerationAPIKindAtom (
@@ -398,7 +398,7 @@ std::ostream& operator << (std::ostream& os, const S_msrGenerationAPIKindAtom& e
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

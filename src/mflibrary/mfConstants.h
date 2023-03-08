@@ -14,7 +14,6 @@
 
 #include "exports.h"
 
-// #include "msrWholeNotes.h"
 
 
 namespace MusicFormats
@@ -23,7 +22,7 @@ namespace MusicFormats
 // input line numbers
 //______________________________________________________________________________
 
-EXP extern const int K_MF_INPUT_LINE_UNKNOWN;
+EXP extern const int K_MF_INPUT_LINE_UNKNOWN_;
 
 // names lists max length
 // ------------------------------------------------------

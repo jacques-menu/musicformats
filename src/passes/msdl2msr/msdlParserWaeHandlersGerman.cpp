@@ -18,10 +18,10 @@ namespace MusicFormats
 //_______________________________________________________________________________
 S_msdlParserWaeHandlerGerman msdlParserWaeHandlerGerman::create ()
 {
-  msdlParserWaeHandlerGerman* o =
+  msdlParserWaeHandlerGerman* obj =
     new msdlParserWaeHandlerGerman ();
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 msdlParserWaeHandlerGerman::msdlParserWaeHandlerGerman ()
@@ -134,7 +134,7 @@ std::ostream& operator << (std::ostream& os, const S_msdlParserWaeHandlerGerman&
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

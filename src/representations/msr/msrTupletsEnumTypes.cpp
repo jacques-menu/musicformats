@@ -37,8 +37,8 @@ EXP std::string msrTupletInKindAsString (
   std::string result;
 
   switch (tupletInKind) {
-    case msrTupletInKind::kTupletIn_UNKNOWN:
-      result = "kTupletIn_UNKNOWN";
+    case msrTupletInKind::kTupletIn_UNKNOWN_:
+      result = "kTupletIn_UNKNOWN_";
       break;
     case msrTupletInKind::kTupletInMeasure:
       result = "kTupletInMeasure";
@@ -196,8 +196,8 @@ std::ostream& operator << (std::ostream& os, const msrTupletShowTypeKind& elt)
 //   std::string result;
 //
 //   switch (tupletInKind) {
-//     case msrTupletInKind::kTupletIn_UNKNOWN:
-//       result = "kTupletIn_UNKNOWN";
+//     case msrTupletInKind::kTupletIn_UNKNOWN_:
+//       result = "kTupletIn_UNKNOWN_";
 //       break;
 //     case msrTupletInKind::kTupletInMeasure:
 //       result = "kTupletInMeasure";

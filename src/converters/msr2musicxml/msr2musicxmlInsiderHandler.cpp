@@ -52,13 +52,13 @@ S_msr2musicxmlInsiderHandler msr2musicxmlInsiderHandler::create (
   const std::string& handlerHeader)
 {
   // create the insider handler
-  msr2musicxmlInsiderHandler* o = new
+  msr2musicxmlInsiderHandler* obj = new
     msr2musicxmlInsiderHandler (
       serviceName,
       handlerHeader);
-  assert (o!=0);
+  assert (obj!=0);
 
-  return o;
+  return obj;
 }
 
 msr2musicxmlInsiderHandler::msr2musicxmlInsiderHandler (
@@ -302,7 +302,7 @@ std::string msr2musicxmlInsiderHandler::fetchOutputFileNameFromTheOptions () con
 
   if (outputFileNameHasBeenSet) {
     if (autoOutputFileNameHasBeenSet) {
-      // '-o, -output-file-name' has been selected
+      // '-obj, -output-file-name' has been selected
       // '-aofn, -auto-output-file-name' has been selected
       std::stringstream ss;
 
@@ -317,7 +317,7 @@ std::string msr2musicxmlInsiderHandler::fetchOutputFileNameFromTheOptions () con
       oahError (ss.str ());
     }
     else {
-      // '-o, -output-file-name' has been selected
+      // '-obj, -output-file-name' has been selected
       // '-aofn, -auto-output-file-name' has NOT been selected
       outputFileName =
         outputFileNameStringAtom->
@@ -327,7 +327,7 @@ std::string msr2musicxmlInsiderHandler::fetchOutputFileNameFromTheOptions () con
 
   else {
     if (autoOutputFileNameHasBeenSet) {
-      // '-o, -output-file-name' has NOT been selected
+      // '-obj, -output-file-name' has NOT been selected
       // '-aofn, -auto-output-file-name' has been selected
       std::string
         inputSourceName =
@@ -393,7 +393,7 @@ std::string msr2musicxmlInsiderHandler::fetchOutputFileNameFromTheOptions () con
     }
 
     else {
-      // '-o, -output-file-name' has NOT been selected
+      // '-obj, -output-file-name' has NOT been selected
       // '-aofn, -auto-output-file-name' has NOT been selected
       // nothing to do
     }
@@ -452,7 +452,7 @@ void msr2musicxmlInsiderOahGroup::checkGroupOptionsConsistency ()
     std::stringstream ss;
 
     ss <<
-      "msr2musicxmlInsiderOahGroup: a MusicXML output file name must be selected with '-o, -output-file-name";
+      "msr2musicxmlInsiderOahGroup: a MusicXML output file name must be selected with '-obj, -output-file-name";
 
     oahError (ss.str ());
   }
@@ -616,7 +616,7 @@ std::ostream& operator << (std::ostream& os, const S_msr2musicxmlInsiderHandler&
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -627,10 +627,10 @@ S_msr2musicxmlInsiderOahGroup gGlobalMsr2musicxmlInsiderOahGroup;
 
 S_msr2musicxmlInsiderOahGroup msr2musicxmlInsiderOahGroup::create ()
 {
-  msr2musicxmlInsiderOahGroup* o = new msr2musicxmlInsiderOahGroup ();
-  assert (o!=0);
+  msr2musicxmlInsiderOahGroup* obj = new msr2musicxmlInsiderOahGroup ();
+  assert (obj!=0);
 
-  return o;
+  return obj;
 }
 
 msr2musicxmlInsiderOahGroup::msr2musicxmlInsiderOahGroup ()

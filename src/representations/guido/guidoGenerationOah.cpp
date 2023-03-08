@@ -39,9 +39,9 @@ S_guidoGenerationOahGroup gGlobalGuidoGenerationOahGroup;
 
 S_guidoGenerationOahGroup guidoGenerationOahGroup::create ()
 {
-  guidoGenerationOahGroup* o = new guidoGenerationOahGroup ();
-  assert (o != nullptr);
-  return o;
+  guidoGenerationOahGroup* obj = new guidoGenerationOahGroup ();
+  assert (obj != nullptr);
+  return obj;
 }
 
 guidoGenerationOahGroup::guidoGenerationOahGroup ()

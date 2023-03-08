@@ -27,7 +27,7 @@ namespace MusicFormats
 
 //________________________________________________________________________
 enum class msdlTokenKind {
-  kToken_UNKNOWN,
+  kToken_UNKNOWN_,
 
   k_TokenEOF,
 

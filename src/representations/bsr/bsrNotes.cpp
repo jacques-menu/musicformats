@@ -132,7 +132,7 @@ S_bsrNote bsrNote::create (
   bsrNoteOctaveIsNeeded noteOctaveIsNeeded,
   bsrAccidentalKind accidentalKind)
 {
-  bsrNote* o =
+  bsrNote* obj =
     new bsrNote (
       inputLineNumber,
       noteValueKind,
@@ -140,8 +140,8 @@ S_bsrNote bsrNote::create (
       noteOctaveKind,
       noteOctaveIsNeeded,
       accidentalKind);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 bsrNote::bsrNote (
@@ -1409,7 +1409,7 @@ std::ostream& operator << (std::ostream& os, const S_bsrNote& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

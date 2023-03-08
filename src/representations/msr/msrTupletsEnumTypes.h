@@ -23,7 +23,7 @@ namespace MusicFormats
 // data types
 
 enum class msrTupletInKind {
-  kTupletIn_UNKNOWN,
+  kTupletIn_UNKNOWN_,
   kTupletInMeasure,
   kTupletInTuplet
 };

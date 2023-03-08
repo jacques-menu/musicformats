@@ -38,14 +38,14 @@ S_msr2guidoRegularHandler msr2guidoRegularHandler::create (
                     insiderOahHandler)
 {
   // create the regular handler
-  msr2guidoRegularHandler* o = new
+  msr2guidoRegularHandler* obj = new
     msr2guidoRegularHandler (
       serviceName,
       handlerHeader,
       insiderOahHandler);
-  assert (o!=0);
+  assert (obj!=0);
 
-  return o;
+  return obj;
 }
 
 msr2guidoRegularHandler::msr2guidoRegularHandler (
@@ -1303,7 +1303,7 @@ std::ostream& operator << (std::ostream& os, const S_msr2guidoRegularHandler& el
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

@@ -11,8 +11,6 @@
 
 #include "mfStaticSettings.h"
 
-#include "mfStaticSettings.h"
-
 #include "mfAssert.h"
 #include "mfServices.h"
 #include "mfStringsHandling.h"
@@ -37,10 +35,10 @@ namespace MusicFormats
 S_lpsrPartBlock lpsrPartBlock::create (
   const S_msrPart& part)
 {
-  lpsrPartBlock* o = new lpsrPartBlock (
+  lpsrPartBlock* obj = new lpsrPartBlock (
     part);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 lpsrPartBlock::lpsrPartBlock (

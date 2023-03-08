@@ -34,8 +34,8 @@ std::string msrDynamicKindAsString (
   std::string result;
 
   switch (dynamicKind) {
-    case msrDynamicKind::kDynamic_UNKNOWN:
-      result = "*kDynamic_UNKNOWN*";
+    case msrDynamicKind::kDynamic_UNKNOWN_:
+      result = "*kDynamic_UNKNOWN_*";
       break;
 
     case msrDynamicKind::kDynamicF:
@@ -132,7 +132,7 @@ std::ostream& operator << (std::ostream& os, const msrDynamicKind& elt)
 
 msrDynamicKind dynamicFromString (const std::string& theString)
 {
-  msrDynamicKind result = msrDynamicKind::kDynamic_UNKNOWN;
+  msrDynamicKind result = msrDynamicKind::kDynamic_UNKNOWN_;
 
   if (theString == "f") {
     result = msrDynamicKind::kDynamicF;
@@ -225,13 +225,13 @@ S_msrDynamic msrDynamic::create (
   msrDynamicKind   dynamicKind,
   msrPlacementKind dynamicPlacementKind)
 {
-  msrDynamic* o =
+  msrDynamic* obj =
     new msrDynamic (
       inputLineNumber,
       dynamicKind,
       dynamicPlacementKind);
-    assert (o != nullptr);
-  return o;
+    assert (obj != nullptr);
+  return obj;
 }
 
 S_msrDynamic msrDynamic::createDynamicFromString (
@@ -374,7 +374,7 @@ std::ostream& operator << (std::ostream& os, const S_msrDynamic& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -386,13 +386,13 @@ S_msrOtherDynamic msrOtherDynamic::create (
   const std::string& otherDynamicString,
   msrPlacementKind   otherDynamicPlacementKind)
 {
-  msrOtherDynamic* o =
+  msrOtherDynamic* obj =
     new msrOtherDynamic (
       inputLineNumber,
       otherDynamicString,
       otherDynamicPlacementKind);
-    assert (o != nullptr);
-  return o;
+    assert (obj != nullptr);
+  return obj;
 }
 
 msrOtherDynamic::msrOtherDynamic (
@@ -515,7 +515,7 @@ std::ostream& operator << (std::ostream& os, const S_msrOtherDynamic& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -550,12 +550,12 @@ S_msrCrescDecresc msrCrescDecresc::create (
   int                 inputLineNumber,
   msrCrescDecrescKind crescDecrescKind)
 {
-  msrCrescDecresc* o =
+  msrCrescDecresc* obj =
     new msrCrescDecresc (
       inputLineNumber,
       crescDecrescKind);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 msrCrescDecresc::msrCrescDecresc (
@@ -664,7 +664,7 @@ std::ostream& operator << (std::ostream& os, const S_msrCrescDecresc& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -731,15 +731,15 @@ S_msrWedge msrWedge::create (
   msrLineTypeKind    wedgeLineTypeKind,
   msrPlacementKind   wedgePlacementKind)
 {
-  msrWedge* o =
+  msrWedge* obj =
     new msrWedge (
       inputLineNumber,
       wedgeKind,
       wedgeNienteKind,
       wedgeLineTypeKind,
       wedgePlacementKind);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 msrWedge::msrWedge (
@@ -877,7 +877,7 @@ std::ostream& operator << (std::ostream& os, const S_msrWedge& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

@@ -68,7 +68,7 @@ S_bsrFacSimileKindAtom bsrFacSimileKindAtom::create (
   const std::string&     variableName,
   bsrFacSimileKind  bsrFacSimileKindVariable)
 {
-  bsrFacSimileKindAtom* o = new
+  bsrFacSimileKindAtom* obj = new
     bsrFacSimileKindAtom (
       longName,
       shortName,
@@ -76,8 +76,8 @@ S_bsrFacSimileKindAtom bsrFacSimileKindAtom::create (
       valueSpecification,
       variableName,
       bsrFacSimileKindVariable);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 bsrFacSimileKindAtom::bsrFacSimileKindAtom (
@@ -295,7 +295,7 @@ std::ostream& operator << (std::ostream& os, const S_bsrFacSimileKindAtom& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -311,7 +311,7 @@ S_bsrTextsLanguageAtom bsrTextsLanguageAtom::create (
   bsrTextsLanguageKind&
                  bsrTextsLanguageKindVariable)
 {
-  bsrTextsLanguageAtom* o = new
+  bsrTextsLanguageAtom* obj = new
     bsrTextsLanguageAtom (
       longName,
       shortName,
@@ -319,8 +319,8 @@ S_bsrTextsLanguageAtom bsrTextsLanguageAtom::create (
       valueSpecification,
       variableName,
       bsrTextsLanguageKindVariable);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 bsrTextsLanguageAtom::bsrTextsLanguageAtom (
@@ -538,7 +538,7 @@ std::ostream& operator << (std::ostream& os, const S_bsrTextsLanguageAtom& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -547,9 +547,9 @@ std::ostream& operator << (std::ostream& os, const S_bsrTextsLanguageAtom& elt)
 //_______________________________________________________________________________
 S_bsrOahGroup bsrOahGroup::create ()
 {
-  bsrOahGroup* o = new bsrOahGroup ();
-  assert (o != nullptr);
-  return o;
+  bsrOahGroup* obj = new bsrOahGroup ();
+  assert (obj != nullptr);
+  return obj;
 }
 
 bsrOahGroup::bsrOahGroup ()
@@ -999,7 +999,7 @@ std::ostream& operator << (std::ostream& os, const S_bsrOahGroup& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

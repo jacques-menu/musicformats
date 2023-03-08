@@ -31,11 +31,11 @@ namespace MusicFormats
 S_bsrParallel bsrParallel::create (
   int inputLineNumber)
 {
-  bsrParallel* o =
+  bsrParallel* obj =
     new bsrParallel (
       inputLineNumber);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 bsrParallel::bsrParallel (
@@ -234,7 +234,7 @@ std::ostream& operator << (std::ostream& os, const S_bsrParallel& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

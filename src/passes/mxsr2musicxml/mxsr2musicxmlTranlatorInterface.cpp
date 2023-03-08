@@ -11,17 +11,17 @@
 
 #include <fstream>
 
-#include "mfStaticSettings.h"
+// #include .h"
 
 #include "xml.h"
 #include "xmlfile.h"
 #include "xmlreader.h"
 
+#include "mfStaticSettings.h"
+
 #include "mfTiming.h"
 
 #include "mxsr2musicxmlWae.h"
-
-#include "mfStaticSettings.h"
 
 #include "oahEarlyOptions.h"
 

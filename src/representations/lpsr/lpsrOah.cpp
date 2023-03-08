@@ -48,7 +48,7 @@ S_lpsrPitchesLanguageAtom lpsrPitchesLanguageAtom::create (
   msrQuarterTonesPitchesLanguageKind&
                     lpsrPitchesLanguageKindVariable)
 {
-  lpsrPitchesLanguageAtom* o = new
+  lpsrPitchesLanguageAtom* obj = new
     lpsrPitchesLanguageAtom (
       longName,
       shortName,
@@ -56,8 +56,8 @@ S_lpsrPitchesLanguageAtom lpsrPitchesLanguageAtom::create (
       valueSpecification,
       variableName,
       lpsrPitchesLanguageKindVariable);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 lpsrPitchesLanguageAtom::lpsrPitchesLanguageAtom (
@@ -322,7 +322,7 @@ std::ostream& operator << (std::ostream& os, const S_lpsrPitchesLanguageAtom& el
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -338,7 +338,7 @@ S_lpsrChordsLanguageAtom lpsrChordsLanguageAtom::create (
   lpsrChordsLanguageKind&
                     lpsrChordsLanguageKindVariable)
 {
-  lpsrChordsLanguageAtom* o = new
+  lpsrChordsLanguageAtom* obj = new
     lpsrChordsLanguageAtom (
       longName,
       shortName,
@@ -346,8 +346,8 @@ S_lpsrChordsLanguageAtom lpsrChordsLanguageAtom::create (
       valueSpecification,
       variableName,
       lpsrChordsLanguageKindVariable);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 lpsrChordsLanguageAtom::lpsrChordsLanguageAtom (
@@ -610,7 +610,7 @@ std::ostream& operator << (std::ostream& os, const S_lpsrChordsLanguageAtom& elt
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -625,7 +625,7 @@ S_lpsrStaffInstrumentNameAtom lpsrStaffInstrumentNameAtom::create (
   const std::string&    variableName,
   std::map<std::string, std::string>&  stringToStringMapVariable)
 {
-  lpsrStaffInstrumentNameAtom* o = new
+  lpsrStaffInstrumentNameAtom* obj = new
     lpsrStaffInstrumentNameAtom (
       longName,
       shortName,
@@ -633,8 +633,8 @@ S_lpsrStaffInstrumentNameAtom lpsrStaffInstrumentNameAtom::create (
       valueSpecification,
       variableName,
       stringToStringMapVariable);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 lpsrStaffInstrumentNameAtom::lpsrStaffInstrumentNameAtom (
@@ -1036,7 +1036,7 @@ std::ostream& operator << (std::ostream& os, const S_lpsrStaffInstrumentNameAtom
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -1052,7 +1052,7 @@ S_lpsrTransposeAtom lpsrTransposeAtom::create (
   S_msrSemiTonesPitchAndOctave&
                      semiTonesPitchAndOctaveVariable)
 {
-  lpsrTransposeAtom* o = new
+  lpsrTransposeAtom* obj = new
     lpsrTransposeAtom (
       longName,
       shortName,
@@ -1060,8 +1060,8 @@ S_lpsrTransposeAtom lpsrTransposeAtom::create (
       valueSpecification,
       variableName,
       semiTonesPitchAndOctaveVariable);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 lpsrTransposeAtom::lpsrTransposeAtom (
@@ -1124,7 +1124,7 @@ void lpsrTransposeAtom::applyAtomWithValue (
   S_msrSemiTonesPitchAndOctave
     semiTonesPitchAndOctave =
       msrSemiTonesPitchAndOctave::createFromString (
-        K_MF_INPUT_LINE_UNKNOWN,
+        K_MF_INPUT_LINE_UNKNOWN_,
         theString);
 
   // set the transpose atom variable value
@@ -1306,7 +1306,7 @@ std::ostream& operator << (std::ostream& os, const S_lpsrTransposeAtom& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -1315,9 +1315,9 @@ std::ostream& operator << (std::ostream& os, const S_lpsrTransposeAtom& elt)
 //_______________________________________________________________________________
 S_lpsrOahGroup lpsrOahGroup::create ()
 {
-  lpsrOahGroup* o = new lpsrOahGroup ();
-  assert (o != nullptr);
-  return o;
+  lpsrOahGroup* obj = new lpsrOahGroup ();
+  assert (obj != nullptr);
+  return obj;
 }
 
 lpsrOahGroup::lpsrOahGroup ()
@@ -2558,7 +2558,7 @@ std::ostream& operator << (std::ostream& os, const S_lpsrOahGroup& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

@@ -30,11 +30,11 @@ namespace MusicFormats
 S_bsrLineContentsElement bsrLineContentsElement::create (
   int inputLineNumber)
 {
-  bsrLineContentsElement* o =
+  bsrLineContentsElement* obj =
     new bsrLineContentsElement (
       inputLineNumber);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 */
 
@@ -181,7 +181,7 @@ std::ostream& operator << (std::ostream& os, const S_bsrLineContentsElement& elt
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

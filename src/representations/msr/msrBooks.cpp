@@ -37,12 +37,12 @@ S_msrBook msrBook::create (
   int           inputLineNumber,
   const std::string& bookName)
 {
-  msrBook* o =
+  msrBook* obj =
     new msrBook (
       inputLineNumber,
       bookName);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 msrBook::msrBook (
@@ -1082,7 +1082,7 @@ std::ostream& operator << (std::ostream& os, const S_msrBook& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

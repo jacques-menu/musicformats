@@ -43,7 +43,7 @@ ischemeScanner.cpp : $(MAKEFILE) ischemeScanner.ll
 
 
 ischemeParser.h ischemeParser.cpp : $(MAKEFILE) ischemeParser.yy
-  $(BISON) --defines=ischemeParser.h -o ischemeParser.cpp ischemeParser.yy
+  $(BISON) --defines=ischemeParser.h -obj ischemeParser.cpp ischemeParser.yy
 
 
 # clean

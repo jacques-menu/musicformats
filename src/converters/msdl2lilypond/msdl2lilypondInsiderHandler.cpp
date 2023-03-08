@@ -59,14 +59,14 @@ S_msdl2lilypondInsiderHandler msdl2lilypondInsiderHandler::create (
   oahHandlerUsedThruKind  handlerUsedThruKind)
 {
   // create the insider handler
-  msdl2lilypondInsiderHandler* o = new
+  msdl2lilypondInsiderHandler* obj = new
     msdl2lilypondInsiderHandler (
       serviceName,
       handlerHeader,
       handlerUsedThruKind);
-  assert (o!=0);
+  assert (obj!=0);
 
-  return o;
+  return obj;
 }
 
 msdl2lilypondInsiderHandler::msdl2lilypondInsiderHandler (
@@ -516,7 +516,7 @@ std::ostream& operator << (std::ostream& os, const S_msdl2lilypondInsiderHandler
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -527,10 +527,10 @@ S_msdl2lilypondInsiderOahGroup gGlobalMsdl2lyInsiderOahGroup;
 
 S_msdl2lilypondInsiderOahGroup msdl2lilypondInsiderOahGroup::create ()
 {
-  msdl2lilypondInsiderOahGroup* o = new msdl2lilypondInsiderOahGroup ();
-  assert (o!=0);
+  msdl2lilypondInsiderOahGroup* obj = new msdl2lilypondInsiderOahGroup ();
+  assert (obj!=0);
 
-  return o;
+  return obj;
 }
 
 msdl2lilypondInsiderOahGroup::msdl2lilypondInsiderOahGroup ()

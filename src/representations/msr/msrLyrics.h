@@ -269,8 +269,8 @@ class EXP msrStanza : public msrElement
     // constants
     // ------------------------------------------------------
 
-    static const std::string K_STANZA_NUMBER_UNKNOWN;
-    static const std::string K_STANZA_NAME_UNKNOWN;
+    static const std::string K_STANZA_NUMBER_UNKNOWN_;
+    static const std::string K_STANZA_NAME_UNKNOWN_;
 
     // creation from MusicXML
     // ------------------------------------------------------

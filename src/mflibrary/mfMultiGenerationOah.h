@@ -32,7 +32,7 @@ EXP extern const std::string K_GENERATED_OUTPUT_KIND_MIDI_NAME;
 
 //______________________________________________________________________________
 enum class mfMultiGenerationOutputKind {
-  kGeneration_UNKNOWN,
+  kGeneration_UNKNOWN_,
   kGenerationLilypond,
   kGenerationBraille,
   kGenerationMusicXML,

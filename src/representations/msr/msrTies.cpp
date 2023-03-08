@@ -64,13 +64,13 @@ S_msrTie msrTie::create (
   msrTieKind       tieKind,
   msrPlacementKind placementKind)
 {
-  msrTie* o =
+  msrTie* obj =
     new msrTie (
       inputLineNumber,
       tieKind,
       placementKind);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 S_msrTie msrTie::create (
@@ -81,7 +81,7 @@ S_msrTie msrTie::create (
     msrTie::create (
       inputLineNumber,
       tieKind,
-      msrPlacementKind::kPlacement_UNKNOWN);
+      msrPlacementKind::kPlacement_UNKNOWN_);
 }
 
 msrTie::msrTie (
@@ -199,7 +199,7 @@ std::ostream& operator << (std::ostream& os, const S_msrTie& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

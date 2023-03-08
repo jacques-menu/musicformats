@@ -159,7 +159,7 @@ class EXP msrVoice : public msrElement
     // constants
     // ------------------------------------------------------
 
-    static const int K_VOICE_NUMBER_UNKNOWN;
+    static const int K_VOICE_NUMBER_UNKNOWN_;
     static const int K_VOICE_HARMONIES_VOICE_BASE_NUMBER;
     static const int K_VOICE_FIGURED_BASS_VOICE_BASE_NUMBER;
 

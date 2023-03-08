@@ -27,7 +27,7 @@ msrPlacementKind msrPlacementKindFromString (
   int                inputLineNumber,
   const std::string& placementString)
 {
-  msrPlacementKind result = msrPlacementKind::kPlacement_UNKNOWN; // default value
+  msrPlacementKind result = msrPlacementKind::kPlacement_UNKNOWN_; // default value
 
   if      (placementString == "above")
     result = msrPlacementKind::kPlacementAbove;
@@ -58,8 +58,8 @@ std::string msrPlacementKindAsString (
   std::string result;
 
   switch (placementKind) {
-    case msrPlacementKind::kPlacement_UNKNOWN:
-      result = "kPlacement_UNKNOWN";
+    case msrPlacementKind::kPlacement_UNKNOWN_:
+      result = "kPlacement_UNKNOWN_";
       break;
     case msrPlacementKind::kPlacementAbove:
       result = "kPlacementAbove";

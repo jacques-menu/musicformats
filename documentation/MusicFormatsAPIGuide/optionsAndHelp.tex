@@ -46,11 +46,11 @@ THe \oahRepr\ options are very easy to use. They are inspired by \Main{GNU} opti
  The latter is not provided if the long name is short enough, such as \optionName{jianpu}, \optionName{cubase}, \optionName{ambitus} or \optionName{custos}.\\
     Short and long names can be used and mixed at will in the \CLI\ and in option vectors (\API);
 
-\item some short option names are supplied as is usually expected for open sotware, such as \optionName{h} (help), \optionName{a} (about), and \optionName{o} (output file name):
+\item some short option names are supplied as is usually expected for open sotware, such as \optionName{h} (help), \optionName{a} (about), and \optionName{obj} (output file name):
 \begin{lstlisting}[language=Terminal]
 jacquesmenu@macmini > xml2ly -query output-file-name
 --- Help for atom "output-file-name" in subgroup "Files"
-    -output-file-name, -o FILENAME
+    -output-file-name, -obj FILENAME
           Write output to file FILENAME instead of standard output.
 \end{lstlisting}
 
@@ -100,7 +100,7 @@ xml2ly options usage:
   The options can be placed in any order,
   provided the values immediately follow the atoms that need them.
 
-  Using options that attempt to create files, such as '-o, -output-file-name',
+  Using options that attempt to create files, such as '-obj, -output-file-name',
   leads to an error if the environment is read-only access,
   as is the case of https://libmusicxml.grame.fr .
 \end{lstlisting}
@@ -157,7 +157,7 @@ To summarize things up, it can be said that the regular mode offers a user-orien
 %  OutputFile (-help-output-file-group, -hofg):
 %  --------------------------
 %    Output file    (-help-output-file, -hof):
-%      -output-file-name, -o FILENAME
+%      -output-file-name, -obj FILENAME
 %            Write output to file FILENAME instead of standard output.
 %      -auto-output-file-name, -aofn
 %            This option can only be used when reading from a file.

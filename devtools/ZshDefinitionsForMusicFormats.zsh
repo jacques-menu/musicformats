@@ -1,3 +1,14 @@
+#
+#   MusicFormats Library
+#   Copyright (C) Jacques Menu 2016-2023
+#
+#   This Source Code Form is subject to the terms of the Mozilla Public
+#   License, v. 2.0. If a copy of the MPL was not distributed with this
+#   file, you can obtain one at http://mozilla.org/MPL/2.0/.
+#
+#   https://github.com/jacques-menu/musicformats
+#
+
 # These definitions can be used in your bash setup
 # and modified ad libitum to suit your needs.
 
@@ -25,10 +36,10 @@ MUSIC_FORMATS_DEV=${MY_WORK_DIR}/musicformats-git-dev
 alias mfdev="cd ${MUSIC_FORMATS_DEV}"
 alias mfd=mfdev
 
-# scripts
+# devtools
 #----------------------------------------------
 
-export PATH=${MUSIC_FORMATS_DEV}/scripts:$PATH
+export PATH=${MUSIC_FORMATS_DEV}/devtools:$PATH
 
 # working on dev branch
 #----------------------------------------------
@@ -49,8 +60,8 @@ LXML_INTERFACE_DIR=${LXML_SRC_DIR}/interface
 LANGUAGES_DIR=${MUSIC_FORMATS_DEV}/src/languages
 alias lang="cd ${LANGUAGES_DIR}"
 
-SCRIPTS_DIR=${MUSIC_FORMATS_DEV}/scripts
-alias skr="cd ${SCRIPTS_DIR}"
+DEVTOOLS_DIR=${MUSIC_FORMATS_DEV}/devtools
+alias tool="cd ${DEVTOOLS_DIR}"
 
 BUILD_DIR=${MUSIC_FORMATS_DEV}/build
 alias build="cd ${BUILD_DIR}"
@@ -135,7 +146,12 @@ alias msdr="cd ${SRC_DIR}/representations/msdr"
 #----------------------------------------------
 
 alias fxml="cd ${MXML_FILES_DIR}"
+
 alias bas="cd ${MXML_FILES_DIR}/basic"
+alias harm="cd ${MXML_FILES_DIR}/harmonies"
+alias fig="cd ${MXML_FILES_DIR}/figuredbass"
+alias grace="cd ${MXML_FILES_DIR}/gracenotes"
+
 alias f31="cd ${MXML_FILES_DIR}/xmlsamples3.1"
 alias unof="cd ${MXML_FILES_DIR}/UnofficialTestSuite"
 alias regr="cd ${MXML_FILES_DIR}/regression"
@@ -196,12 +212,12 @@ iscmd="cd ${ISCM_DIR}"
 # musicxml2ly
 #----------------------------------------------
 
-function m2lf ()
+function musix ()
 {
 #set -x
   DATE=$(date)
-#  EXECUTABLE=musicxml2ly
-  EXECUTABLE=musicxml2ly_2.23.0-1
+  EXECUTABLE=musicxml2ly
+#   EXECUTABLE=musicxml2ly_2.23.0-1
   LOG_FILE="z_test_${EXECUTABLE}.log"
   echo "Date: ${DATE}" 2>${LOG_FILE} 1>&2
   type ${EXECUTABLE} 2>${LOG_FILE} 1>&2
@@ -226,7 +242,7 @@ function m2lf ()
 }
 
 
-# build it
+# build MusicFormats
 #----------------------------------------------
 
 alias rmcache="cd ${BUILD_DIR}/libdir ; rm *"
@@ -234,11 +250,11 @@ alias rmcache="cd ${BUILD_DIR}/libdir ; rm *"
 #alias rmmakefiles="sudo rm -rf ./libdir/CMakeFiles"
 alias rmmakefiles="rm -rf ./libdir/CMakeFiles"
 
-function bit ()
+function bmf ()
 {
 #   set -x
   SCRIPT_NAME=BuildMusicFormats.zsh
-  SCRIPT=${SCRIPTS_DIR}/${SCRIPT_NAME}
+  SCRIPT=${DEVTOOLS_DIR}/${SCRIPT_NAME}
 
   LOGFILE_NAME=${SCRIPT_NAME}.log
   LOGFILE=${BUILD_DIR}/${LOGFILE_NAME}
@@ -275,10 +291,10 @@ function bit ()
 #   set +x
 }
 
-function cbit ()
+function cbmf ()
 {
 	clear
-	bit
+	bmf
 }
 
 alias cmakall='pushd . ; cd ${BUILD_DIR}/libdir; cmake .. -DALL=on -DAPPLEDEBUG=on ; popd'
@@ -295,7 +311,7 @@ function smvn ()
   LOGFILE=${MUSIC_FORMATS_DEV}/${SCRIPT_NAME}.log
   echo LOGFILE = ${LOGFILE}
 
-  ${SCRIPTS_DIR}/${SCRIPT_NAME} $@
+  ${DEVTOOLS_DIR}/${SCRIPT_NAME} $@
 
   echo
 
@@ -312,7 +328,7 @@ function smvd ()
   LOGFILE=${MUSIC_FORMATS_DEV}/${SCRIPT_NAME}.log
   echo LOGFILE = ${LOGFILE}
 
-  ${SCRIPTS_DIR}/${SCRIPT_NAME} $@
+  ${DEVTOOLS_DIR}/${SCRIPT_NAME} $@
 
   echo
 
@@ -329,7 +345,7 @@ function mmd ()
   LOGFILE=${MUSIC_FORMATS_DEV}/${SCRIPT_NAME}.log
   echo LOGFILE = ${LOGFILE}
 
-  ${SCRIPTS_DIR}/${SCRIPT_NAME} $@
+  ${DEVTOOLS_DIR}/${SCRIPT_NAME} $@
 
   echo
 
@@ -347,7 +363,7 @@ function cmd ()
   LOGFILE=${MUSIC_FORMATS_DEV}/${SCRIPT_NAME}.log
   echo LOGFILE = ${LOGFILE}
 
-  ${SCRIPTS_DIR}/${SCRIPT_NAME} $@
+  ${DEVTOOLS_DIR}/${SCRIPT_NAME} $@
 
   echo
 
@@ -402,31 +418,31 @@ function renam ()
 function grh ()
 {
 #  set -x
-  grep -r "$1" **/*.h
+  egrep -rn "$1" **/*.h
 }
 
 function grc ()
 {
 #  set -x
-  grep -r "$1" **/*.cpp
+  grep -rn "$1" **/*.cpp
 }
 
 function grx ()
 {
 #  set -x
-  grep -r "$1" **/*.xml
+  grep -rn "$1" **/*.xml
 }
 
 function grly ()
 {
 #  set -x
-  grep -r "$1" **/*.ly
+  grep -rn "$1" **/*.ly
 }
 
 function grt ()
 {
 #  set -x
-  grep -r "$1" **/*.tex
+  grep -rn "$1" **/*.tex
 }
 
 
@@ -796,7 +812,7 @@ alias gp='git push'
 alias gbi='git bisect'
 
 alias zrc='. ~/.zshrc'
-alias cpbashdefs='cp -p ~/local/BashDefinitionsForMusicFormats.zsh ${SCRIPTS_DIR}'
+alias cpbashdefs='cp -p ~/local/BashDefinitionsForMusicFormats.zsh ${DEVTOOLS_DIR}'
 
 function addAll ()
 {
@@ -809,7 +825,7 @@ function addAll ()
   addSrc
 
   addBuild
-  addScripts
+  addDevtools
   addInclude
 
   addDoc
@@ -849,12 +865,12 @@ function addBuild ()
   git add -f ${BUILD_DIR}/Makefile
 }
 
-function addScripts ()
+function addDevtools ()
 {
-  cp -p ${HOME}/JMI_ShellSettings/BashDefinitionsForMusicFormats.bash ${SCRIPTS_DIR}
-  cp -p ${HOME}/JMI_ShellSettings/ZshDefinitionsForMusicFormats.zsh ${SCRIPTS_DIR}
+  cp -p ${HOME}/JMI_ShellSettings/BashDefinitionsForMusicFormats.bash ${DEVTOOLS_DIR}
+  cp -p ${HOME}/JMI_ShellSettings/ZshDefinitionsForMusicFormats.zsh ${DEVTOOLS_DIR}
 
-  git add    ${SCRIPTS_DIR}
+  git add ${DEVTOOLS_DIR}
 }
 
 function addInclude ()

@@ -32,12 +32,12 @@ S_msdrMusic msdrMusic::create (
   int           inputLineNumber,
   const std::string& musicName)
 {
-  msdrMusic* o =
+  msdrMusic* obj =
     new msdrMusic (
       inputLineNumber,
       musicName);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 msdrMusic::msdrMusic (
@@ -435,7 +435,7 @@ std::ostream& operator << (std::ostream& os, const S_msdrMusic& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

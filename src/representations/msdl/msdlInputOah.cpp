@@ -51,7 +51,7 @@ S_msdlKeywordsLanguageAtom msdlKeywordsLanguageAtom::create (
   msdlKeywordsLanguageKind&
                     msdlKeywordsLanguageKindVariable)
 {
-  msdlKeywordsLanguageAtom* o = new
+  msdlKeywordsLanguageAtom* obj = new
     msdlKeywordsLanguageAtom (
       longName,
       shortName,
@@ -59,8 +59,8 @@ S_msdlKeywordsLanguageAtom msdlKeywordsLanguageAtom::create (
       valueSpecification,
       variableName,
       msdlKeywordsLanguageKindVariable);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 msdlKeywordsLanguageAtom::msdlKeywordsLanguageAtom (
@@ -325,7 +325,7 @@ std::ostream& operator << (std::ostream& os, const S_msdlKeywordsLanguageAtom& e
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -339,15 +339,15 @@ S_oahDisplayMsdlKeywordsInLanguageAtom oahDisplayMsdlKeywordsInLanguageAtom::cre
   const std::string& valueSpecification,
   const std::string& serviceName)
 {
-  oahDisplayMsdlKeywordsInLanguageAtom* o = new
+  oahDisplayMsdlKeywordsInLanguageAtom* obj = new
     oahDisplayMsdlKeywordsInLanguageAtom (
       longName,
       shortName,
       description,
       valueSpecification,
       serviceName);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 oahDisplayMsdlKeywordsInLanguageAtom::oahDisplayMsdlKeywordsInLanguageAtom (
@@ -563,7 +563,7 @@ std::ostream& operator << (std::ostream& os, const S_oahDisplayMsdlKeywordsInLan
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -577,15 +577,15 @@ S_oahDisplayMsdlTokensInLanguageAtom oahDisplayMsdlTokensInLanguageAtom::create 
   const std::string& valueSpecification,
   const std::string& serviceName)
 {
-  oahDisplayMsdlTokensInLanguageAtom* o = new
+  oahDisplayMsdlTokensInLanguageAtom* obj = new
     oahDisplayMsdlTokensInLanguageAtom (
       longName,
       shortName,
       description,
       valueSpecification,
       serviceName);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 oahDisplayMsdlTokensInLanguageAtom::oahDisplayMsdlTokensInLanguageAtom (
@@ -801,7 +801,7 @@ std::ostream& operator << (std::ostream& os, const S_oahDisplayMsdlTokensInLangu
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -817,7 +817,7 @@ S_msdlCommentsTypeAtom msdlCommentsTypeAtom::create (
   msdlCommentsTypeKind&
                     msdlCommentsTypeKindVariable)
 {
-  msdlCommentsTypeAtom* o = new
+  msdlCommentsTypeAtom* obj = new
     msdlCommentsTypeAtom (
       longName,
       shortName,
@@ -825,8 +825,8 @@ S_msdlCommentsTypeAtom msdlCommentsTypeAtom::create (
       valueSpecification,
       variableName,
       msdlCommentsTypeKindVariable);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 msdlCommentsTypeAtom::msdlCommentsTypeAtom (
@@ -1091,7 +1091,7 @@ std::ostream& operator << (std::ostream& os, const S_msdlCommentsTypeAtom& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -1107,7 +1107,7 @@ S_msdlUserLanguageAtom msdlUserLanguageAtom::create (
   msdlUserLanguageKind&
                     msdlUserLanguageKindVariable)
 {
-  msdlUserLanguageAtom* o = new
+  msdlUserLanguageAtom* obj = new
     msdlUserLanguageAtom (
       longName,
       shortName,
@@ -1115,8 +1115,8 @@ S_msdlUserLanguageAtom msdlUserLanguageAtom::create (
       valueSpecification,
       variableName,
       msdlUserLanguageKindVariable);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 msdlUserLanguageAtom::msdlUserLanguageAtom (
@@ -1387,7 +1387,7 @@ std::ostream& operator << (std::ostream& os, const S_msdlUserLanguageAtom& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -1403,7 +1403,7 @@ S_msdlPitchesLanguageAtom msdlPitchesLanguageAtom::create (
   msrQuarterTonesPitchesLanguageKind&
                     msdlPitchesLanguageKindVariable)
 {
-  msdlPitchesLanguageAtom* o = new
+  msdlPitchesLanguageAtom* obj = new
     msdlPitchesLanguageAtom (
       longName,
       shortName,
@@ -1411,8 +1411,8 @@ S_msdlPitchesLanguageAtom msdlPitchesLanguageAtom::create (
       valueSpecification,
       variableName,
       msdlPitchesLanguageKindVariable);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 msdlPitchesLanguageAtom::msdlPitchesLanguageAtom (
@@ -1677,7 +1677,7 @@ std::ostream& operator << (std::ostream& os, const S_msdlPitchesLanguageAtom& el
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -1689,10 +1689,10 @@ S_msdlInputOahGroup gGlobalMsdlInputOahGroup;
 S_msdlInputOahGroup msdlInputOahGroup::create (
   const std::string& serviceName)
 {
-  msdlInputOahGroup* o = new msdlInputOahGroup (
+  msdlInputOahGroup* obj = new msdlInputOahGroup (
     serviceName);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 msdlInputOahGroup::msdlInputOahGroup (
@@ -2093,7 +2093,7 @@ std::ostream& operator << (std::ostream& os, const S_msdlInputOahGroup& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

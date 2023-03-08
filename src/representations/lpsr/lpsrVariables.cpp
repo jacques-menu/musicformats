@@ -28,11 +28,11 @@ S_lpsrVariableUseCommand lpsrVariableUseCommand::create (
   int           inputLineNumber,
   const std::string& variableName)
 {
-  lpsrVariableUseCommand* o =
+  lpsrVariableUseCommand* obj =
     new lpsrVariableUseCommand (
       inputLineNumber, variableName);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 lpsrVariableUseCommand::lpsrVariableUseCommand (

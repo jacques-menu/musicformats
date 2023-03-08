@@ -34,11 +34,11 @@ S_bsrNumber bsrNumber::create (
   bsrNumberSignIsNeededKind
             numberSignIsNeededKind)
 {
-  bsrNumber* o =
+  bsrNumber* obj =
     new bsrNumber (
       inputLineNumber, numberValue, numberSignIsNeededKind);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 bsrNumber::bsrNumber (
@@ -324,7 +324,7 @@ std::ostream& operator << (std::ostream& os, const S_bsrNumber& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

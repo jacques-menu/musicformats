@@ -120,7 +120,7 @@ void enforceSomeOptions (
   // ------------------------------------------------------
 
   switch (multiGenerationOutputKind) {
-    case mfMultiGenerationOutputKind::kGeneration_UNKNOWN:
+    case mfMultiGenerationOutputKind::kGeneration_UNKNOWN_:
       // should not occur
       break;
 
@@ -259,7 +259,7 @@ int main (int argc, char*  argv[])
 #endif // MF_TRACE_IS_ENABLED
 
   switch (multiGenerationOutputKind) {
-    case mfMultiGenerationOutputKind::kGeneration_UNKNOWN:
+    case mfMultiGenerationOutputKind::kGeneration_UNKNOWN_:
       // wait until after help options have been handled
       // before issuing an error message
       break;
@@ -357,7 +357,7 @@ int main (int argc, char*  argv[])
   // ------------------------------------------------------
 
   switch (multiGenerationOutputKind) {
-    case mfMultiGenerationOutputKind::kGeneration_UNKNOWN:
+    case mfMultiGenerationOutputKind::kGeneration_UNKNOWN_:
       {
         std::stringstream ss;
 
@@ -558,7 +558,7 @@ int main (int argc, char*  argv[])
   mfMusicformatsErrorKind err = mfMusicformatsErrorKind::kMusicformatsError_NONE;
 
   switch (multiGenerationOutputKind) {
-    case mfMultiGenerationOutputKind::kGeneration_UNKNOWN:
+    case mfMultiGenerationOutputKind::kGeneration_UNKNOWN_:
       // should not occur, unless the run is a pure help one
       break;
 

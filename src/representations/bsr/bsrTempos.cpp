@@ -50,7 +50,7 @@ namespace MusicFormats
 //   std::string result;
 //
 //   switch (tempoKind) {
-//     case msrTempoKBeatUnitsKind::kTempoBeatUnits_UNKNOWN:
+//     case msrTempoKBeatUnitsKind::kTempoBeatUnits_UNKNOWN_:
 //       result = "_";
 //       break;
 //     case msrTempoKBeatUnitsKind::kTempoBeatUnitsWordsOnly:
@@ -75,11 +75,11 @@ S_bsrTempo bsrTempo::create (
   int        inputLineNumber,
   const S_msrTempo& mTempo)
 {
-  bsrTempo* o =
+  bsrTempo* obj =
     new bsrTempo (
       inputLineNumber, mTempo);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 bsrTempo::bsrTempo (
@@ -104,7 +104,7 @@ S_bsrCellsList bsrTempo::buildCellsList () const
 
   if (! gGlobalMsr2bsrOahGroup->getNoTempos ()) {
     switch (fMsrTempo->getTempoKind ()) {
-      case msrTempoKBeatUnitsKind::kTempoBeatUnits_UNKNOWN:
+      case msrTempoKBeatUnitsKind::kTempoBeatUnits_UNKNOWN_:
         break;
 
       case msrTempoKBeatUnitsKind::kTempoBeatUnitsWordsOnly:
@@ -152,7 +152,7 @@ S_bsrCellsList bsrTempo::buildCellsList () const
             noteValueKind = bsrNoteValueKind::kNoteValueNone;
 
           switch (notesNotesDurationKind) {
-            case msrNotesDurationKind::kNotesDuration_UNKNOWN:
+            case msrNotesDurationKind::kNotesDuration_UNKNOWN_:
               break;
 
             case msrNotesDurationKind::kNotesDuration1024th: // JMI
@@ -489,7 +489,7 @@ std::string bsrTempo::asDebugString () const
     "[TEMPO ";
 
   switch (fMsrTempo->getTempoKind ()) {
-    case msrTempoKBeatUnitsKind::kTempoBeatUnits_UNKNOWN:
+    case msrTempoKBeatUnitsKind::kTempoBeatUnits_UNKNOWN_:
       ss << "_";
       break;
     case msrTempoKBeatUnitsKind::kTempoBeatUnitsWordsOnly:
@@ -554,7 +554,7 @@ std::ostream& operator << (std::ostream& os, const S_bsrTempo& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

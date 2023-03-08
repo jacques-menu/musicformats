@@ -87,8 +87,8 @@ std::string msrStaffChangeKindAsString (
   std::string result;
 
   switch (staffChangeKind) {
-    case msrStaffChangeKind::kStaffChange_UNKNOWN:
-      result = "kStaffChange_UNKNOWN";
+    case msrStaffChangeKind::kStaffChange_UNKNOWN_:
+      result = "kStaffChange_UNKNOWN_";
       break;
     case msrStaffChangeKind::kStaffChangeChordMemberNote:
       result = "kStaffChangeChordMemberNote";

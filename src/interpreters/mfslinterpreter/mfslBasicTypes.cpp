@@ -11,8 +11,6 @@
 
 #include <iomanip>      // setw()), set::precision(), ...
 
-// #include <stddef>       // size_t JMI
-
 #include "mfAssert.h"
 #include "mfBool.h"
 #include "mfStringsHandling.h"
@@ -37,11 +35,11 @@ using namespace MusicFormats;
 S_mfslOptionsBlock mfslOptionsBlock::create (
   const std::string& optionsBlockName)
 {
-  mfslOptionsBlock* o =
+  mfslOptionsBlock* obj =
     new mfslOptionsBlock (
       optionsBlockName);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 mfslOptionsBlock::mfslOptionsBlock (
@@ -184,11 +182,11 @@ std::ostream& operator<< (std::ostream& os, const mfslInputNameKind& elt)
 S_mfslInput mfslInput::create (
   const std::string& inputName)
 {
-  mfslInput* o =
+  mfslInput* obj =
     new mfslInput (
       inputName);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 mfslInput::mfslInput (
@@ -771,10 +769,10 @@ std::ostream& operator<< (std::ostream& os, const S_mfslInput& elt)
 //_______________________________________________________________________________
 S_mfslInputsTable mfslInputsTable::create ()
 {
-  mfslInputsTable* o =
+  mfslInputsTable* obj =
     new mfslInputsTable ();
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 mfslInputsTable::mfslInputsTable ()
@@ -1005,11 +1003,11 @@ std::ostream& operator<< (std::ostream& os, const mfslChoiceLabelKind& elt)
 S_mfslChoice mfslChoice::create (
   const std::string& choiceName)
 {
-  mfslChoice* o =
+  mfslChoice* obj =
     new mfslChoice (
       choiceName);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 mfslChoice::mfslChoice (
@@ -1634,10 +1632,10 @@ std::ostream& operator<< (std::ostream& os, const S_mfslChoice& elt)
 //_______________________________________________________________________________
 S_mfslChoicesTable mfslChoicesTable::create ()
 {
-  mfslChoicesTable* o =
+  mfslChoicesTable* obj =
     new mfslChoicesTable ();
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 mfslChoicesTable::mfslChoicesTable ()
@@ -1842,12 +1840,12 @@ S_mfslCaseChoiceStatement mfslCaseChoiceStatement::create (
   S_mfslChoice caseChoice,
   mfslDriver&  drv)
 {
-  mfslCaseChoiceStatement* o =
+  mfslCaseChoiceStatement* obj =
     new mfslCaseChoiceStatement (
       caseChoice,
       drv);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 mfslCaseChoiceStatement::mfslCaseChoiceStatement (
@@ -2045,12 +2043,12 @@ S_mfslCaseInputStatement mfslCaseInputStatement::create (
   S_mfslInput caseInput,
   mfslDriver& drv)
 {
-  mfslCaseInputStatement* o =
+  mfslCaseInputStatement* obj =
     new mfslCaseInputStatement (
       caseInput,
       drv);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 mfslCaseInputStatement::mfslCaseInputStatement (

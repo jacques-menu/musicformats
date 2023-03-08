@@ -13,19 +13,15 @@
 #include <sstream>
 #include <iomanip>      // std::setw, std::setprecision, ...
 
-#include "mfStaticSettings.h"
-
 #include "visitor.h"
 
 #include "mfStaticSettings.h"
 
 #include "mfAssert.h"
-
+#include "msrMeasureConstants.h"
 #include "mfStringsHandling.h"
 
 #include "msrBarLines.h"
-
-#include "msrMeasureConstants.h"
 
 #include "oahOah.h"
 
@@ -52,7 +48,7 @@ S_msrBarLine msrBarLine::create (
   msrBarLineHasCodaKind         barLineHasCodaKind,
   msrBarLineRepeatWingedKind    barLineRepeatWingedKind)
 {
-  msrBarLine* o =
+  msrBarLine* obj =
     new msrBarLine (
       inputLineNumber,
       upLinkToMeasure,
@@ -66,8 +62,8 @@ S_msrBarLine msrBarLine::create (
       barLineHasSegnoKind,
       barLineHasCodaKind,
       barLineRepeatWingedKind);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 S_msrBarLine msrBarLine::create (
@@ -223,9 +219,8 @@ void msrBarLine::setBarLineCategory (
     ss <<
       "Setting barLine category of " <<
       this->asString () <<
-      " to '" <<
+      " to " <<
       msrBarLineCategoryKindAsString (barLineCategoryKind) <<
-      "'" <<
       std::endl;
 
     gWaeHandler->waeTrace (
@@ -379,8 +374,8 @@ std::string msrBarLineCategoryKindAsString (
   std::string result;
 
   switch (barLineCategoryKind) {
-    case msrBarLineCategoryKind::kBarLineCategory_UNKNOWN:
-      result = "kBarLineCategory_UNKNOWN";
+    case msrBarLineCategoryKind::kBarLineCategory_UNKNOWN_:
+      result = "kBarLineCategory_UNKNOWN_";
       break;
     case msrBarLineCategoryKind::kBarLineCategoryStandalone:
       result = "kBarLineCategoryStandalone";
@@ -626,7 +621,7 @@ std::string msrBarLine::asShortString () const
     ", measureNumber: " <<
     fBarLineUpLinkToMeasure->getMeasureNumber () <<
     ", fMeasurePosition " <<
-    fMeasurePosition <<
+    fMeasurePosition.asString () <<
 
 /* JMI
     ", " <<
@@ -666,7 +661,7 @@ std::string msrBarLine::asString () const
     "[BarLine " <<
     msrBarLineCategoryKindAsString (fBarLineCategoryKind) <<
     ", measureElementMeasureNumber: " << fBarLineUpLinkToMeasure->getMeasureNumber () <<
-    ", fMeasurePosition: " << fMeasurePosition <<
+    ", fMeasurePosition: " << fMeasurePosition.asString () <<
 
     ", " <<
     msrBarLineLocationKindAsString (fLocationKind) <<
@@ -724,13 +719,13 @@ void msrBarLine::printFull (std::ostream& os) const
       --gIndenter;
     }
     else {
-      os << "[NONE]" << std::endl;
+      os << "[NULL]" << std::endl;
     }
 
   os << std::left <<
     std::setw (fieldWidth) <<
     "fMeasurePosition" << ": " <<
-    fMeasurePosition <<
+    fMeasurePosition.asString () <<
     std::endl <<
 
     std::setw (fieldWidth) <<
@@ -806,7 +801,7 @@ void msrBarLine::print (std::ostream& os) const
     ", fBarLineCategoryKind: " << fBarLineCategoryKind <<
     fBarLineCategoryKind <<
     ", measureElementMeasureNumber: " << fBarLineUpLinkToMeasure->getMeasureNumber () <<
-    ", fMeasurePosition: " << fMeasurePosition <<
+    ", fMeasurePosition: " << fMeasurePosition.asString () <<
     ", line " << fInputLineNumber <<
     ']' <<
     std::endl;
@@ -818,7 +813,7 @@ std::ostream& operator << (std::ostream& os, const S_msrBarLine& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

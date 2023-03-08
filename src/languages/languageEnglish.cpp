@@ -18,10 +18,10 @@ namespace MusicFormats
 //_______________________________________________________________________________
 S_languageEnglish languageEnglish::create ()
 {
-  languageEnglish* o =
+  languageEnglish* obj =
     new languageEnglish ();
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 languageEnglish::languageEnglish ()
@@ -53,7 +53,7 @@ std::ostream& operator << (std::ostream& os, const S_languageEnglish& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

@@ -66,8 +66,8 @@ std::string msrSlashTypeKindAsString (
   std::string result;
 
   switch (slashTypeKind) {
-    case msrSlashTypeKind::kSlashType_UNKNOWN:
-      result = "kSlashType_UNKNOWN";
+    case msrSlashTypeKind::kSlashType_UNKNOWN_:
+      result = "kSlashType_UNKNOWN_";
       break;
     case msrSlashTypeKind::kSlashTypeStart:
       result = "kSlashTypeStart";
@@ -92,8 +92,8 @@ std::string msrUseDotsKindAsString (
   std::string result;
 
   switch (useDotsKind) {
-    case msrUseDotsKind::kUseDots_UNKNOWN:
-      result = "kUseDots_UNKNOWN";
+    case msrUseDotsKind::kUseDots_UNKNOWN_:
+      result = "kUseDots_UNKNOWN_";
       break;
     case msrUseDotsKind::kUseDotsYes:
       result = "kUseDotsYes";
@@ -118,8 +118,8 @@ std::string msrSlashUseStemsKindAsString (
   std::string result;
 
   switch (slashUseStemsKind) {
-    case msrSlashUseStemsKind::kSlashUseStems_UNKNOWN:
-      result = "kSlashUseStems_UNKNOWN";
+    case msrSlashUseStemsKind::kSlashUseStems_UNKNOWN_:
+      result = "kSlashUseStems_UNKNOWN_";
       break;
     case msrSlashUseStemsKind::kSlashUseStemsYes:
       result = "kSlashUseStemsYes";
@@ -145,14 +145,14 @@ S_msrSlash msrSlash::create (
   msrUseDotsKind  useDotsKind,
   msrSlashUseStemsKind slashUseStemsKind)
 {
-  msrSlash* o =
+  msrSlash* obj =
     new msrSlash (
       inputLineNumber,
       slashTypeKind,
       useDotsKind,
       slashUseStemsKind);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 msrSlash::msrSlash (
@@ -309,7 +309,7 @@ std::ostream& operator << (std::ostream& os, const S_msrSlash& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

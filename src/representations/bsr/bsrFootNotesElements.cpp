@@ -34,11 +34,11 @@ S_bsrFootNotesElement bsrFootNotesElement::create (
   int           inputLineNumber,
   const std::string& footNoteText)
 {
-  bsrFootNotesElement* o =
+  bsrFootNotesElement* obj =
     new bsrFootNotesElement (
       inputLineNumber, footNoteText);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 bsrFootNotesElement::bsrFootNotesElement (
@@ -171,7 +171,7 @@ std::ostream& operator << (std::ostream& os, const S_bsrFootNotesElement& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

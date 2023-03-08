@@ -186,21 +186,21 @@ std::ostream& operator << (std::ostream& os, const msrFontWeightKind& elt)
 S_msrFontSize msrFontSize::create (
   msrFontSizeKind fontSizeKind)
 {
-  msrFontSize * o =
+  msrFontSize * obj =
     new msrFontSize (
       fontSizeKind);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 S_msrFontSize msrFontSize::create (
   float numericFontSize)
 {
-  msrFontSize * o =
+  msrFontSize * obj =
     new msrFontSize (
       numericFontSize);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 msrFontSize::msrFontSize (
@@ -266,7 +266,7 @@ float msrFontSize::getFontNumericSize () const
 
         msrInternalError (
           gServiceRunData->getInputSourceName (),
-          K_MF_INPUT_LINE_UNKNOWN, // JMI
+          K_MF_INPUT_LINE_UNKNOWN_, // JMI
           __FILE__, __LINE__,
           ss.str ());
       }

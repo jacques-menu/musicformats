@@ -34,11 +34,11 @@ S_bsrClef bsrClef::create (
   int         inputLineNumber,
   bsrClefKind clefKind)
 {
-  bsrClef* o =
+  bsrClef* obj =
     new bsrClef (
       inputLineNumber, clefKind);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 bsrClef::bsrClef (
@@ -392,7 +392,7 @@ std::ostream& operator << (std::ostream& os, const S_bsrClef& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

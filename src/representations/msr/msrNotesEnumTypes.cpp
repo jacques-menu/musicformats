@@ -47,8 +47,8 @@ std::string msrNoteKindAsString (
   std::string result;
 
   switch (noteKind) {
-    case msrNoteKind::kNote_UNKNOWN:
-      result = "kNote_UNKNOWN";
+    case msrNoteKind::kNote_UNKNOWN_:
+      result = "kNote_UNKNOWN_";
       break;
 
     // in measures

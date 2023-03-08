@@ -28,8 +28,6 @@
 #include "bsr2bsrWae.h"
 #include "bsr2brailleWae.h"
 
-#include "mfStaticSettings.h"
-
 #include "oahOah.h"
 #include "waeOah.h"
 

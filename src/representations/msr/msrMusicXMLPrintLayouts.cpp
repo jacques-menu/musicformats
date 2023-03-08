@@ -9,21 +9,17 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include "mfStaticSettings.h"
-
 #include "visitor.h"
+
+#include "mfStaticSettings.h"
 
 #include "mfAssert.h"
 #include "mfIndentedTextOutput.h"
 #include "mfStringsHandling.h"
 
-#include "mfStaticSettings.h"
-
 #include "msrBrowsers.h"
 #include "msrMeasureConstants.h"
 #include "msrMusicXMLPrintLayouts.h"
-
-// #include "oahEarlyOptions.h"
 
 #include "msrOah.h"
 
@@ -38,12 +34,12 @@ S_msrMusicXMLPrintLayout msrMusicXMLPrintLayout::create (
   int                 inputLineNumber,
   const S_msrMeasure& upLinkToMeasure)
 {
-  msrMusicXMLPrintLayout* o =
+  msrMusicXMLPrintLayout* obj =
     new msrMusicXMLPrintLayout (
       inputLineNumber,
       upLinkToMeasure);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 S_msrMusicXMLPrintLayout msrMusicXMLPrintLayout::create (
@@ -272,7 +268,7 @@ void msrMusicXMLPrintLayout::printFull (std::ostream& os) const
       os << fPageLayout;
     }
     else {
-      os << "[NONE]" << std::endl;
+      os << "[NULL]" << std::endl;
     }
 
   os << std::left <<
@@ -282,7 +278,7 @@ void msrMusicXMLPrintLayout::printFull (std::ostream& os) const
       os << fSystemLayout;
     }
     else {
-      os << "[NONE]" << std::endl;
+      os << "[NULL]" << std::endl;
     }
 
   size_t
@@ -319,7 +315,7 @@ void msrMusicXMLPrintLayout::printFull (std::ostream& os) const
       os << fSystemDividers;
     }
     else {
-      os << "[NONE]" << std::endl;
+      os << "[NULL]" << std::endl;
     }
 
   os << std::left <<
@@ -366,7 +362,7 @@ std::ostream& operator << (std::ostream& os, const S_msrMusicXMLPrintLayout& elt
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

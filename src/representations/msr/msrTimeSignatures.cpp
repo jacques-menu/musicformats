@@ -13,19 +13,13 @@
 #include <iostream>
 #include <sstream>
 
-#include "mfStaticSettings.h"
-
 #include <regex>
 
 #include "visitor.h"
 
-#include "oahWae.h"
-#include "msrWae.h"
-
 #include "mfStaticSettings.h"
 
 #include "mfAssert.h"
-
 #include "mfServices.h"
 #include "mfStringsHandling.h"
 
@@ -38,6 +32,9 @@
 #include "oahOah.h"
 
 #include "msrOah.h"
+
+#include "oahWae.h"
+#include "msrWae.h"
 
 #include "waeHandlers.h"
 
@@ -159,11 +156,11 @@ std::ostream& operator << (std::ostream& os, const msrTimeSignatureRelationKind&
 S_msrTimeSignatureItem msrTimeSignatureItem::create (
   int inputLineNumber)
 {
-  msrTimeSignatureItem* o =
+  msrTimeSignatureItem* obj =
     new msrTimeSignatureItem (
       inputLineNumber);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 msrTimeSignatureItem::msrTimeSignatureItem (
@@ -474,7 +471,7 @@ std::ostream& operator << (std::ostream& os, const S_msrTimeSignatureItem& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -487,13 +484,13 @@ S_msrTimeSignature msrTimeSignature::create (
   msrTimeSignatureSymbolKind
                  timeSignatureSymbolKind)
 {
-  msrTimeSignature* o =
+  msrTimeSignature* obj =
     new msrTimeSignature (
       inputLineNumber,
       upLinkToMeasure,
       timeSignatureSymbolKind);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 S_msrTimeSignature msrTimeSignature::create (
@@ -1422,7 +1419,7 @@ std::ostream& operator << (std::ostream& os, const S_msrTimeSignature& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

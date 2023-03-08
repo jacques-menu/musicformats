@@ -62,14 +62,14 @@ S_xml2lyInsiderHandler xml2lyInsiderHandler::create (
   oahHandlerUsedThruKind handlerUsedThruKind)
 {
   // create the insider handler
-  xml2lyInsiderHandler* o = new
+  xml2lyInsiderHandler* obj = new
     xml2lyInsiderHandler (
       serviceName,
       handlerHeader,
       handlerUsedThruKind);
-  assert (o!=0);
+  assert (obj!=0);
 
-  return o;
+  return obj;
 }
 
 xml2lyInsiderHandler::xml2lyInsiderHandler (
@@ -409,7 +409,7 @@ std::string xml2lyInsiderHandler::fetchOutputFileNameFromTheOptions () const
 
   if (outputFileNameHasBeenSet) {
     if (autoOutputFileNameHasBeenSet) {
-      // '-o, -output-file-name' has been selected
+      // '-obj, -output-file-name' has been selected
       // '-aofn, -auto-output-file-name' has been selected
       std::stringstream ss;
 
@@ -424,7 +424,7 @@ std::string xml2lyInsiderHandler::fetchOutputFileNameFromTheOptions () const
       oahError (ss.str ());
     }
     else {
-      // '-o, -output-file-name' has been selected
+      // '-obj, -output-file-name' has been selected
       // '-aofn, -auto-output-file-name' has NOT been selected
       outputFileName =
         outputFileNameStringAtom->
@@ -434,7 +434,7 @@ std::string xml2lyInsiderHandler::fetchOutputFileNameFromTheOptions () const
 
   else {
     if (autoOutputFileNameHasBeenSet) {
-      // '-o, -output-file-name' has NOT been selected
+      // '-obj, -output-file-name' has NOT been selected
       // '-aofn, -auto-output-file-name' has been selected
       std::string
         inputSourceName =
@@ -500,7 +500,7 @@ std::string xml2lyInsiderHandler::fetchOutputFileNameFromTheOptions () const
     }
 
     else {
-      // '-o, -output-file-name' has NOT been selected
+      // '-obj, -output-file-name' has NOT been selected
       // '-aofn, -auto-output-file-name' has NOT been selected
       // nothing to do
     }
@@ -701,7 +701,7 @@ std::ostream& operator << (std::ostream& os, const S_xml2lyInsiderHandler& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -712,10 +712,10 @@ S_xml2lyInsiderOahGroup gGlobalXml2lyInsiderOahGroup;
 
 S_xml2lyInsiderOahGroup xml2lyInsiderOahGroup::create ()
 {
-  xml2lyInsiderOahGroup* o = new xml2lyInsiderOahGroup ();
-  assert (o!=0);
+  xml2lyInsiderOahGroup* obj = new xml2lyInsiderOahGroup ();
+  assert (obj!=0);
 
-  return o;
+  return obj;
 }
 
 xml2lyInsiderOahGroup::xml2lyInsiderOahGroup ()

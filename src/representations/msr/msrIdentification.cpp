@@ -33,11 +33,11 @@ namespace MusicFormats
 S_msrIdentification msrIdentification::create (
   int inputLineNumber)
 {
-  msrIdentification* o =
+  msrIdentification* obj =
     new msrIdentification (
       inputLineNumber);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 msrIdentification::msrIdentification (
@@ -948,7 +948,7 @@ std::ostream& operator << (std::ostream& os, const S_msrIdentification& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

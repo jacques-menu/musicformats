@@ -36,8 +36,8 @@ std::string msrSlurTypeKindAsString (
   std::stringstream ss;
 
   switch (slurTypeKind) {
-    case msrSlurTypeKind::kSlurType_UNKNOWN:
-      ss << "kSlurType_UNKNOWN";
+    case msrSlurTypeKind::kSlurType_UNKNOWN_:
+      ss << "kSlurType_UNKNOWN_";
       break;
 
     case msrSlurTypeKind::kSlurTypeRegularStart:
@@ -78,15 +78,15 @@ S_msrSlur msrSlur::create (
   msrLineTypeKind  slurLineTypeKind,
   msrPlacementKind slurPlacementKind)
 {
-  msrSlur* o =
+  msrSlur* obj =
     new msrSlur (
       inputLineNumber,
       slurNumber,
       slurTypeKind,
       slurLineTypeKind,
       slurPlacementKind);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 S_msrSlur msrSlur::create (
@@ -101,7 +101,7 @@ S_msrSlur msrSlur::create (
       slurNumber,
       slurTypeKind,
       slurLineTypeKind,
-      msrPlacementKind::kPlacement_UNKNOWN);
+      msrPlacementKind::kPlacement_UNKNOWN_);
 }
 
 msrSlur::msrSlur (
@@ -239,7 +239,7 @@ std::ostream& operator << (std::ostream& os, const S_msrSlur& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

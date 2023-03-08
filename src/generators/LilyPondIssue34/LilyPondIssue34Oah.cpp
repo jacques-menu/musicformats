@@ -43,9 +43,9 @@ S_LilyPondIssue34OahGroup gGlobalLilyPondIssue34OahGroup;
 
 S_LilyPondIssue34OahGroup LilyPondIssue34OahGroup::create ()
 {
-  LilyPondIssue34OahGroup* o = new LilyPondIssue34OahGroup ();
-  assert (o != nullptr);
-  return o;
+  LilyPondIssue34OahGroup* obj = new LilyPondIssue34OahGroup ();
+  assert (obj != nullptr);
+  return obj;
 }
 
 LilyPondIssue34OahGroup::LilyPondIssue34OahGroup ()
@@ -59,7 +59,7 @@ R"(These options control the way LilyPondIssue34 works.)",
     msrGenerationAPIKind::kMsrFunctionsAPIKind;
 
   fMultiGenerationOutputKind =
-    mfMultiGenerationOutputKind::kGeneration_UNKNOWN;
+    mfMultiGenerationOutputKind::kGeneration_UNKNOWN_;
 
   // initialize it
   initializeLilyPondIssue34OahGroup ();
@@ -126,7 +126,7 @@ void LilyPondIssue34OahGroup::initializeMultiGenerationOutputOptions ()
 //
 //   const mfMultiGenerationOutputKind
 //     multiGenerationKindDefaultValue =
-//       mfMultiGenerationOutputKind::kGeneration_UNKNOWN; // default value
+//       mfMultiGenerationOutputKind::kGeneration_UNKNOWN_; // default value
 //
 //   fMultiGenerationOutputKindAtom =
 //     mfMultiGenerationOutputKindAtom::create (
@@ -176,7 +176,7 @@ void LilyPondIssue34OahGroup::enforceGroupQuietness ()
 void LilyPondIssue34OahGroup::checkGroupOptionsConsistency ()
 {
   switch (fMultiGenerationOutputKind) {
-    case mfMultiGenerationOutputKind::kGeneration_UNKNOWN:
+    case mfMultiGenerationOutputKind::kGeneration_UNKNOWN_:
       {
         std::stringstream ss;
 
@@ -343,7 +343,7 @@ std::ostream& operator << (std::ostream& os, const S_LilyPondIssue34OahGroup& el
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

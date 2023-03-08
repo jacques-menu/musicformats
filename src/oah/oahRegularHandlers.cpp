@@ -14,14 +14,11 @@
 
 #include "mfStaticSettings.h"
 
-#include "oahWae.h"
-
-#include "mfStaticSettings.h"
-
 #include "mfAssert.h"
 #include "mfStringsHandling.h"
 
 #include "oahOah.h"
+#include "oahWae.h"
 
 #include "oahEarlyOptions.h"
 
@@ -41,13 +38,13 @@ S_oahRegularHandler oahRegularHandler::create (
   const S_oahHandler&      insiderOahHandler)
 {
   // create the regular handler
-  oahRegularHandler* o = new
+  oahRegularHandler* obj = new
     oahRegularHandler (
       serviceName,
       handlerHeader,
       insiderOahHandler);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 */
 
@@ -364,7 +361,7 @@ std::ostream& operator << (std::ostream& os, const S_oahRegularHandler& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

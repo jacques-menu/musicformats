@@ -28,7 +28,7 @@ namespace MusicFormats
 //______________________________________________________________________________
 enum class mfServiceKind {
   // a given pass may have different IDs depending on the service
-  kMfService_UNKNOWN,
+  kMfService_UNKNOWN_,
 
   kMfService_xml2ly,
   kMfService_xml2brl,

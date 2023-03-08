@@ -32,13 +32,13 @@ S_msrArticulation msrArticulation::create (
   msrArticulationKind articulationKind,
   msrPlacementKind    articulationPlacementKind)
 {
-  msrArticulation* o =
+  msrArticulation* obj =
     new msrArticulation (
       inputLineNumber,
       articulationKind,
       articulationPlacementKind);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 msrArticulation::msrArticulation (
@@ -61,8 +61,8 @@ std::string msrArticulationKindAsString (
   std::string result;
 
   switch (articulationKind) {
-    case msrArticulationKind::kArticulation_UNKNOWN:
-      result = "kArticulation_UNKNOWN";
+    case msrArticulationKind::kArticulation_UNKNOWN_:
+      result = "kArticulation_UNKNOWN_";
       break;
 
     case msrArticulationKind::kArticulationAccent:
@@ -234,7 +234,7 @@ std::ostream& operator << (std::ostream& os, const S_msrArticulation& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -246,13 +246,13 @@ S_msrFermata msrFermata::create (
   msrFermataShapeKind        fermataShapeKind,
   msrArticulationFermataType fermataTypeKind)
 {
-  msrFermata* o =
+  msrFermata* obj =
     new msrFermata (
       inputLineNumber,
       fermataShapeKind,
       fermataTypeKind);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 msrFermata::msrFermata (
@@ -262,7 +262,7 @@ msrFermata::msrFermata (
     : msrArticulation (
       inputLineNumber,
       msrArticulationKind::kArticulationFermata,
-      msrPlacementKind::kPlacement_UNKNOWN) // temporary, JMI TEMP
+      msrPlacementKind::kPlacement_UNKNOWN_) // temporary, JMI TEMP
 {
   fFermataShapeKind = fermataShapeKind;
   fFermataTypeKind  = fermataTypeKind;
@@ -427,7 +427,7 @@ std::ostream& operator << (std::ostream& os, const S_msrFermata& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -440,14 +440,14 @@ S_msrArpeggiato msrArpeggiato::create (
   msrDirectionKind arpeggiatoDirectionKind,
   int              arpeggiatoNumber)
 {
-  msrArpeggiato* o =
+  msrArpeggiato* obj =
     new msrArpeggiato (
       inputLineNumber,
       arpeggiatoPlacementKind,
       arpeggiatoDirectionKind,
       arpeggiatoNumber);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 msrArpeggiato::msrArpeggiato (
@@ -579,7 +579,7 @@ std::ostream& operator << (std::ostream& os, const S_msrArpeggiato& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -592,14 +592,14 @@ S_msrNonArpeggiato msrNonArpeggiato::create (
   msrNonArpeggiatoTypeKind nonArpeggiatoTypeKind,
   int                      nonArpeggiatoNumber)
 {
-  msrNonArpeggiato* o =
+  msrNonArpeggiato* obj =
     new msrNonArpeggiato (
       inputLineNumber,
       nonArpeggiatoPlacementKind,
       nonArpeggiatoTypeKind,
       nonArpeggiatoNumber);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 msrNonArpeggiato::msrNonArpeggiato (
@@ -750,7 +750,7 @@ std::ostream& operator << (std::ostream& os, const S_msrNonArpeggiato& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

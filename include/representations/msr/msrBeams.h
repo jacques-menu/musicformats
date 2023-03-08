@@ -42,7 +42,7 @@ namespace MusicFormats
 */
 
 enum class msrBeamKind {
-  kBeam_UNKNOWN,
+  kBeam_UNKNOWN_,
 
   kBeamBegin, kBeamContinue, kBeamEnd,
   kBeamForwardHook, kBeamBackwardHook

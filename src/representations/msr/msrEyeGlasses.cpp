@@ -13,8 +13,6 @@
 #include <sstream>
 #include <iomanip>      // std::setw, std::setprecision, ...
 
-#include "mfStaticSettings.h"
-
 #include "visitor.h"
 
 #include "mfStaticSettings.h"
@@ -40,12 +38,12 @@ S_msrEyeGlasses msrEyeGlasses::create (
   int                 inputLineNumber,
   const S_msrMeasure& upLinkToMeasure)
 {
-  msrEyeGlasses* o =
+  msrEyeGlasses* obj =
     new msrEyeGlasses (
       inputLineNumber,
       upLinkToMeasure);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 S_msrEyeGlasses msrEyeGlasses::create (
@@ -106,11 +104,11 @@ void msrEyeGlasses::setEyeGlassesUpLinkToMeasure (
 //   if (gTraceOahGroup->getTraceMeasurePositions ()) {
 //
 //     gLog <<
-//       "Setting measure element measure position of " <<
+//       "Setting the eyeglasses measure position of " <<
 //       asString () <<
-//       " to '" << measurePosition <<
-//       "' (was '" <<
-//       fEyeGlassesMeasurePosition <<
+//       " to " << measurePosition.asString () <<
+//       " (was '" <<
+//       fEyeGlassesMeasurePosition.asString () <<
 //       "') in measure " <<
 //       measure->asShortString () <<
 //       " (EyeGlassesMeasureNumber: " <<
@@ -126,8 +124,8 @@ void msrEyeGlasses::setEyeGlassesUpLinkToMeasure (
   // sanity check
 //   mfAssert (
 //     __FILE__, __LINE__,
-//     measurePosition != K_MEASURE_POSITION_UNKNOWN,
-//     "measurePosition == K_MEASURE_POSITION_UNKNOWN");
+//     measurePosition != K_MEASURE_POSITION_UNKNOWN_,
+//     "measurePosition == K_MEASURE_POSITION_UNKNOWN_");
 // #endif // MF_SANITY_CHECKS_ARE_ENABLED
 //
 //   // set measure element's measure position
@@ -261,7 +259,7 @@ std::ostream& operator << (std::ostream& os, const S_msrEyeGlasses& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

@@ -30,10 +30,10 @@ namespace MusicFormats
 S_Mikrokosmos3WanderingGenerator Mikrokosmos3WanderingGenerator::create ()
 {
   // create the insider handler
-  Mikrokosmos3WanderingGenerator* o = new
+  Mikrokosmos3WanderingGenerator* obj = new
     Mikrokosmos3WanderingGenerator ();
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 Mikrokosmos3WanderingGenerator::Mikrokosmos3WanderingGenerator ()

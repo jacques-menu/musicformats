@@ -206,13 +206,13 @@ Usage:
                             std::ostream&     theOStream,
                             mfOutputIndenter& theIndenter)
                               {
-                                mfIndentedOstream* o =
+                                mfIndentedOstream* obj =
                                   new mfIndentedOstream (
                                     theOStream,
                                     theIndenter);
-                                assert (o != nullptr);
+                                assert (obj != nullptr);
 
-                                return o;
+                                return obj;
                               }
 
     // constructors/destructor
@@ -283,11 +283,11 @@ Usage:
 
     static SMARTP<mfIndentedStringStream> create ()
                               {
-                                mfIndentedStringStream* o =
+                                mfIndentedStringStream* obj =
                                   new mfIndentedStringStream ();
-                                assert (o != nullptr);
+                                assert (obj != nullptr);
 
-                                return o;
+                                return obj;
                               }
 
     // constructors/destructor

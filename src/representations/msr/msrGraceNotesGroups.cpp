@@ -11,19 +11,15 @@
 
 #include <iomanip>
 
-#include "mfStaticSettings.h"
-
 #include "visitor.h"
 
+#include "mfStaticSettings.h"
+
 #include "mfAssert.h"
-
 #include "mfServices.h"
-
 #include "mfStringsHandling.h"
 
 #include "msrWae.h"
-
-#include "mfStaticSettings.h"
 
 #include "msrGraceNotesGroups.h"
 
@@ -47,15 +43,15 @@ S_msrGraceNotesGroup msrGraceNotesGroup::create (
   Bool                   graceNotesGroupIsBeamed,
   const std::string&     graceNotesGroupMeasureNumber)
 {
-  msrGraceNotesGroup* o =
+  msrGraceNotesGroup* obj =
     new msrGraceNotesGroup (
       inputLineNumber,
       graceNotesGroupKind,
       graceNotesGroupIsSlashed,
       graceNotesGroupIsBeamed,
       graceNotesGroupMeasureNumber);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 msrGraceNotesGroup::msrGraceNotesGroup (
@@ -91,9 +87,8 @@ S_msrGraceNotesGroup msrGraceNotesGroup::createGraceNotesGroupNewbornClone ()
     std::stringstream ss;
 
     ss <<
-      "Creating a newborn clone of grace notes group '" <<
+      "Creating a newborn clone of grace notes group " <<
       asShortString () <<
-      "'" <<
       std::endl;
 
     gWaeHandler->waeTrace (
@@ -174,9 +169,8 @@ S_msrGraceNotesGroup msrGraceNotesGroup::createSkipGraceNotesGroupClone ()
     std::stringstream ss;
 
     ss <<
-      "Creating a skip clone of grace notes group '" <<
+      "Creating a skip clone of grace notes group " <<
       asShortString () <<
-      "'" <<
       std::endl;
 
     gWaeHandler->waeTrace (
@@ -231,7 +225,7 @@ S_msrGraceNotesGroup msrGraceNotesGroup::createSkipGraceNotesGroupClone ()
         skip =
           msrNote::createGraceSkipNote (
             note->getInputLineNumber (),
-            note->getNoteUpLinkToMeasure ()->getMeasureNumber (),
+            "",                             // will be set afterwards v0.9.67
             note->getSoundingWholeNotes (), // 0/1 JMI v0.9.66
             note->getNoteDisplayWholeNotes (),
             note->getNoteDotsNumber ());
@@ -285,7 +279,7 @@ void msrGraceNotesGroup::appendNoteToGraceNotesGroup (const S_msrNote& note)
     ss <<
       "Appending note " <<
       note->asShortString () <<
-      " to grace notes group" <<
+      " to grace notes group " <<
       asShortString () <<
 //      " in voice \"" <<
 //      fGraceNotesGroupUpLinkToVoice->getVoiceName () <<
@@ -319,9 +313,9 @@ void msrGraceNotesGroup::appendChordToGraceNotesGroup (const S_msrChord& chord)
     ss <<
       "Appending chord " <<
       chord->asShortString () <<
-      " to grace notes group '" <<
+      " to grace notes group " <<
       asShortString () <<
-//      "' in voice \"" <<
+//      " in voice \"" <<
 //      fGraceNotesGroupUpLinkToVoice->getVoiceName () <<
 //      "\"" <<
       std::endl;
@@ -432,9 +426,8 @@ void msrGraceNotesGroup::setGraceNotesGroupElementsMeasurePositions (
 
     ss <<
       "Setting grace notes group elements' measure positions of " << asString () <<
-      " to '" <<
-      measurePosition <<
-      "'" <<
+      " to " <<
+      measurePosition.asString () <<
       std::endl;
 
     gWaeHandler->waeTrace (
@@ -690,7 +683,7 @@ void msrGraceNotesGroup::printFull (std::ostream& os) const
     }
     else {
       os <<
-        "[NONE]";
+        "[NULL]";
     }
   os << std::endl;
 
@@ -780,7 +773,7 @@ void msrGraceNotesGroup::print (std::ostream& os) const
     }
     else {
       os <<
-        "[NONE]";
+        "[NULL]";
     }
   os << std::endl;
 
@@ -852,7 +845,7 @@ std::ostream& operator << (std::ostream& os, const S_msrGraceNotesGroup& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

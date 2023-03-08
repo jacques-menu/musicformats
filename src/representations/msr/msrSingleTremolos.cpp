@@ -32,12 +32,12 @@ S_msrSingleTremolo msrSingleTremolo::create (
   int              singleTremoloMarksNumber,
   msrPlacementKind singleTremoloPlacementKind)
 {
-  msrSingleTremolo* o =
+  msrSingleTremolo* obj =
     new msrSingleTremolo (
       inputLineNumber,
       singleTremoloMarksNumber, singleTremoloPlacementKind);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 msrSingleTremolo::msrSingleTremolo (
@@ -163,7 +163,7 @@ std::ostream& operator << (std::ostream& os, const S_msrSingleTremolo& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

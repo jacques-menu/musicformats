@@ -67,12 +67,12 @@ S_lpsrParallelMusicBLock lpsrParallelMusicBLock::create (
   int                       inputLineNumber,
   lpsrElementsSeparatorKind elementsSeparatorKind)
 {
-  lpsrParallelMusicBLock* o =
+  lpsrParallelMusicBLock* obj =
     new lpsrParallelMusicBLock (
       inputLineNumber,
       elementsSeparatorKind);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 lpsrParallelMusicBLock::lpsrParallelMusicBLock (
@@ -233,7 +233,7 @@ std::ostream& operator << (std::ostream& os, const S_lpsrParallelMusicBLock& elt
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

@@ -9,19 +9,15 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include "mfStaticSettings.h"
-
 #include "visitor.h"
 
+#include "mfStaticSettings.h"
+
 #include "mfAssert.h"
-
 #include "mfServices.h"
-
 #include "mfStringsHandling.h"
 
 #include "msrWae.h"
-
-#include "mfStaticSettings.h"
 
 #include "msrBarChecks.h"
 #include "msrBarLines.h"
@@ -54,12 +50,12 @@ S_msrSegment msrSegment::create (
   int        inputLineNumber,
   const S_msrVoice& segmentUpLinkToVoice)
 {
-  msrSegment* o =
+  msrSegment* obj =
     new msrSegment (
       inputLineNumber,
       segmentUpLinkToVoice);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 msrSegment::msrSegment (
@@ -138,7 +134,7 @@ void msrSegment::setSegmentFirstMeasure (
         measure->asString ();
     }
     else {
-      ss << "[NONE]";
+      ss << "[NULL]";
     }
 
     ss <<
@@ -175,7 +171,7 @@ void msrSegment::setSegmentLastMeasure (
         measure->asString ();
     }
     else {
-      ss << "[NONE]";
+      ss << "[NULL]";
     }
 
     ss <<
@@ -1136,7 +1132,7 @@ void msrSegment::insertHiddenMeasureAndBarLineInSegmentClone (
 
     ss <<
       "Inserting hidden measure and barLine at position " <<
-      measurePosition <<
+      measurePosition.asString () <<
       "to segment clone " << asString () <<
       ", in voice \"" <<
       fSegmentUpLinkToVoice->getVoiceName () <<
@@ -1219,9 +1215,7 @@ void msrSegment::appendHarmoniesListToSegment (
     std::stringstream ss;
 
     ss <<
-      "Appending figured basses list \"" <<
-//       figuredBasssesList->asString () << // JMI v0.9.67 HARMFUL
-      " to segment " << asString () <<
+      "Appending harmonies list to segment " << // JMI v0.9.67 HARMFUL
       " in voice \"" <<
       fSegmentUpLinkToVoice->getVoiceName () <<
       "\"" <<
@@ -2049,7 +2043,7 @@ void msrSegment::appendHarpPedalsTuningToSegment (
 //     std::stringstream ss;
 //
 //     ss <<
-//       "Padding up to whole notes '" << wholeNotes <<
+//       "Padding up to whole notes '" << wholeNotes.asString () <<
 //       "' in segment '" <<
 //       fSegmentAbsoluteNumber <<
 //       ", segmentDebugNumber: '" <<
@@ -2127,7 +2121,7 @@ void msrSegment::backupByWholeNotesStepLengthInSegment (
 
     ss <<
       "Backup by a '" <<
-      backupTargetMeasurePosition <<
+      backupTargetMeasurePosition.asString () <<
       "' whole notes step length in segment '" <<
       fSegmentAbsoluteNumber <<
       ", segmentDebugNumber: '" <<
@@ -3319,7 +3313,7 @@ void msrSegment::printFull (std::ostream& os) const
   os << std::left <<
     std::setw (fieldWidth) <<
     "fSegmentShortestNoteWholeNotes" << ": " <<
-    fSegmentShortestNoteWholeNotes <<
+    fSegmentShortestNoteWholeNotes.asString () <<
     std::endl <<
     std::setw (fieldWidth) <<
     "fSegmentShortestNoteTupletFactor" << ": " <<
@@ -3336,7 +3330,7 @@ void msrSegment::printFull (std::ostream& os) const
     --gIndenter;
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   os <<
@@ -3348,7 +3342,7 @@ void msrSegment::printFull (std::ostream& os) const
     --gIndenter;
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   if (! fSegmentElementsList.size ()) {
@@ -3428,7 +3422,7 @@ std::ostream& operator << (std::ostream& os, const S_msrSegment& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

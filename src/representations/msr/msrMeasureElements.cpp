@@ -46,14 +46,14 @@ msrMeasureElement::msrMeasureElement (
   int inputLineNumber)
     : msrElement (inputLineNumber)
 //       fMeasureMoment (
-//         K_MEASURE_POSITION_UNKNOWN, K_MEASURE_POSITION_UNKNOWN),
+//         K_MEASURE_POSITION_UNKNOWN_, K_MEASURE_POSITION_UNKNOWN_),
 //       fVoiceMoment (
-//         K_MEASURE_POSITION_UNKNOWN, K_MEASURE_POSITION_UNKNOWN)
+//         K_MEASURE_POSITION_UNKNOWN_, K_MEASURE_POSITION_UNKNOWN_)
 {
   fSoundingWholeNotes = msrWholeNotes (0, 1),
 
-  fMeasurePosition = K_MEASURE_POSITION_UNKNOWN;
-  fVoicePosition   = K_MEASURE_POSITION_UNKNOWN;
+  fMeasurePosition = K_MEASURE_POSITION_UNKNOWN_;
+  fVoicePosition   = K_MEASURE_POSITION_UNKNOWN_;
 }
 
 msrMeasureElement::~msrMeasureElement ()
@@ -109,8 +109,8 @@ void msrMeasureElement::doSetSoundingWholeNotes (
 //   // sanity check // NO JMI v0.9.67
 //   mfAssert (
 //     __FILE__, __LINE__,
-//     wholeNotes != K_WHOLE_NOTES_UNKNOWN,
-//     "wholeNotes == K_WHOLE_NOTES_UNKNOWN");
+//     wholeNotes != K_WHOLE_NOTES_UNKNOWN_,
+//     "wholeNotes == K_WHOLE_NOTES_UNKNOWN_");
 //
 //   msrWholeNotes
 //     infinitelyDottesLonga (8, 1);
@@ -139,11 +139,12 @@ void msrMeasureElement::setMeasurePosition (
     std::stringstream ss;
 
     ss <<
-      "Setting the measure element measure position of " <<
+      "Setting the measure position of " <<
       asString () <<
-      " to '" << measurePosition <<
-      "' (was '" <<
-      fMeasurePosition <<
+      " to " <<
+      measurePosition.asString () <<
+      " (was '" <<
+      fMeasurePosition.asString () <<
       "') in measure " <<
       measure->asShortString () <<
       " (measureElementMeasureNumber: " <<
@@ -163,15 +164,15 @@ void msrMeasureElement::setMeasurePosition (
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
-    measurePosition != K_MEASURE_POSITION_UNKNOWN,
-    "measurePosition == K_MEASURE_POSITION_UNKNOWN");
+    measurePosition != K_MEASURE_POSITION_UNKNOWN_,
+    "measurePosition == K_MEASURE_POSITION_UNKNOWN_");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // set measure element's measure position
   fMeasurePosition = measurePosition;
 
 //   // compute measure element's voice position
-// // if (false) { // JMI CAFE v0.9.66
+// // if (false) { // JMI v0.9.67
 //   msrWholeNotes
 //     voicePosition =
 //       measure->
@@ -185,7 +186,7 @@ void msrMeasureElement::setMeasurePosition (
 //     context);
 // }
 
-  // update current voice position // JMI v0.9.66
+  // update current voice position // JMI v0.9.67
 //   S_msrVoice
 //     voice =
 //       measure->
@@ -225,8 +226,8 @@ void msrMeasureElement::setVoicePosition (
     ss <<
       "Setting the voice position of " <<
       asString () <<
-      " to '" << voicePosition <<
-      "' in measure '" <<
+      " to " << voicePosition <<
+      " in measure '" <<
       upLinkToMeasure->getMeasureNumber () <<
       "', context: \"" <<
       context <<
@@ -243,8 +244,8 @@ void msrMeasureElement::setVoicePosition (
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
-    voicePosition != K_MEASURE_POSITION_UNKNOWN,
-    "voicePosition == K_MEASURE_POSITION_UNKNOWN");
+    voicePosition != K_MEASURE_POSITION_UNKNOWN_,
+    "voicePosition == K_MEASURE_POSITION_UNKNOWN_");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // set measure element voice position
@@ -260,8 +261,8 @@ void msrMeasureElement::setVoicePosition (
     ss <<
       "Setting the measure element voice position of " <<
       asString () <<
-      " to '" << voicePosition <<
-      "' in measure '" <<
+      " to " << voicePosition <<
+      " in measure '" <<
       upLinkToMeasure->getMeasureNumber () <<
       "', context: \"" <<
       context <<
@@ -286,10 +287,10 @@ void msrMeasureElement::setVoicePosition (
 //     std::stringstream ss;
 //
 //     ss <<
-//       "Setting the measure element measure moment of " <<
+//       "Setting the measure moment of " <<
 //       asString () <<
-//       " to '" << measureMoment <<
-//       "' (was '" <<
+//       " to " << measureMoment <<
+//       " (was '" <<
 //       fMeasureMoment.asString () <<
 // //       "') " <<
 // //       in measure " << JMI v0.9.66
@@ -321,8 +322,8 @@ void msrMeasureElement::setVoicePosition (
 //     ss <<
 //       "Setting the measure element voice moment of " <<
 //       asString () <<
-//       " to '" << voiceMoment <<
-//       "' in measure '" <<
+//       " to " << voiceMoment <<
+//       " in measure '" <<
 //       getMeasureElementUpLinkToMeasure ()->getMeasureNumber () <<
 //       "', context: \"" <<
 //       context <<
@@ -339,8 +340,8 @@ void msrMeasureElement::setVoicePosition (
   // sanity check
 //   mfAssert (
 //     __FILE__, __LINE__,
-//     voiceMoment != msrMoment::K_MOMENT_UNKNOWN,
-//     "voiceMoment == msrMoment::K_MOMENT_UNKNOWN");
+//     voiceMoment != msrMoment::K_MOMENT_UNKNOWN_,
+//     "voiceMoment == msrMoment::K_MOMENT_UNKNOWN_");
 // #endif // MF_SANITY_CHECKS_ARE_ENABLED
 //
 //   fVoiceMoment = voiceMoment;
@@ -451,7 +452,7 @@ std::ostream& operator << (std::ostream& os, const S_msrMeasureElement& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

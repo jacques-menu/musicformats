@@ -120,11 +120,11 @@ std::string bsrTimeKindAsDebugString (
 S_bsrTimeSignatureItem bsrTimeSignatureItem::create (
   int inputLineNumber)
 {
-  bsrTimeSignatureItem* o =
+  bsrTimeSignatureItem* obj =
     new bsrTimeSignatureItem (
       inputLineNumber);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 bsrTimeSignatureItem::bsrTimeSignatureItem (
@@ -384,7 +384,7 @@ std::ostream& operator << (std::ostream& os, const S_bsrTimeSignatureItem& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -395,12 +395,12 @@ S_bsrTimeSignature bsrTimeSignature::create (
   int         inputLineNumber,
   bsrTimeSignatureKind timeKind)
 {
-  bsrTimeSignature* o =
+  bsrTimeSignature* obj =
     new bsrTimeSignature (
       inputLineNumber,
       timeKind);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 bsrTimeSignature::bsrTimeSignature (
@@ -976,7 +976,7 @@ std::ostream& operator << (std::ostream& os, const S_bsrTimeSignature& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

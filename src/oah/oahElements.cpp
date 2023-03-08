@@ -43,8 +43,8 @@ std::string oahElementValueKindAsString (
   std::string result;
 
   switch (elementValueKind) {
-    case oahElementValueKind::kElementValue_UNKNOWN:
-      result = "*kElementValue_UNKNOWN*";
+    case oahElementValueKind::kElementValue_UNKNOWN_:
+      result = "*kElementValue_UNKNOWN_*";
       break;
     case oahElementValueKind::kElementValueLess:
       result = "kElementValueLess";
@@ -130,13 +130,13 @@ S_oahFindStringMatch oahFindStringMatch::create (
   const std::string& foundString,
   const std::string& containingFindableElementInfo)
 {
-  oahFindStringMatch* o = new
+  oahFindStringMatch* obj = new
     oahFindStringMatch (
       elementName,
       foundString,
       containingFindableElementInfo);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 oahFindStringMatch::oahFindStringMatch (
@@ -197,7 +197,7 @@ std::ostream& operator << (std::ostream& os, const S_oahFindStringMatch& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -219,10 +219,10 @@ std::ostream& operator << (std::ostream& os, const oahFindStringMatch* elt)
 /* this class is purely virtual
 S_oahFindableElement oahFindableElement::create ()
 {
-  oahFindableElement* o =
+  oahFindableElement* obj =
     new oahFindableElement ();
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 */
 
@@ -243,7 +243,7 @@ std::ostream& operator << (std::ostream& os, const S_oahFindableElement& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -264,15 +264,15 @@ S_oahElement oahElement::create (
   oahElementValueKind      elementValueKind,
   oahElementVisibilityKind elementVisibilityKind)
 {
-  oahElement* o = new
+  oahElement* obj = new
     oahElement (
       longName,
       shortName,
       description,
       elementValueKind,
       elementVisibilityKind);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 */
 
@@ -302,7 +302,7 @@ oahElement::oahElement ()
   fDescription = "";
 
   fElementValueKind =
-    oahElementValueKind::kElementValue_UNKNOWN; // default value
+    oahElementValueKind::kElementValue_UNKNOWN_; // default value
 
   fElementHelpOnlyKind =
     oahElementHelpOnlyKind::kElementHelpOnlyNo; // default value
@@ -730,7 +730,7 @@ std::ostream& operator << (std::ostream& os, const S_oahElement& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -781,13 +781,13 @@ S_oahElementUse oahElementUse::create (
   const std::string& nameUsed,
   const std::string& valueUsed)
 {
-  oahElementUse* o =
+  oahElementUse* obj =
     new oahElementUse (
       elementUsed,
       nameUsed,
       valueUsed);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 oahElementUse::oahElementUse (
@@ -835,7 +835,7 @@ std::ostream& operator << (std::ostream& os, const S_oahElementUse& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

@@ -31,10 +31,10 @@ namespace MusicFormats
 S_lpsrPartGroupBlock lpsrPartGroupBlock::create (
   const S_msrPartGroup& partGroup)
 {
-  lpsrPartGroupBlock* o = new lpsrPartGroupBlock (
+  lpsrPartGroupBlock* obj = new lpsrPartGroupBlock (
     partGroup);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 lpsrPartGroupBlock::lpsrPartGroupBlock (

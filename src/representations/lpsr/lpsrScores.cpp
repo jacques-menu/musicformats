@@ -9,17 +9,13 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include "mfStaticSettings.h"
-
 #include "visitor.h"
 
 #include "mfStaticSettings.h"
 
-#include "mfLibraryComponent.h"
-
-#include "mfServices.h"
-
 #include "mfAssert.h"
+#include "mfLibraryComponent.h"
+#include "mfServices.h"
 #include "mfStringsHandling.h"
 
 #include "oahOah.h"
@@ -87,12 +83,12 @@ S_lpsrScore lpsrScore::create (
   const S_msrScore&   theMsrScore,
   const S_mfcMultiComponent& multiComponent)
 {
-  lpsrScore* o = new lpsrScore (
+  lpsrScore* obj = new lpsrScore (
     inputLineNumber,
     theMsrScore,
     multiComponent);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 lpsrScore::lpsrScore (

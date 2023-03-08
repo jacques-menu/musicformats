@@ -58,8 +58,8 @@
       </direction>
       <note default-x="103">
         <pitch>
-          <step>B</step>
-          <octave>5</octave>
+          <step>F</step>
+          <octave>4</octave>
         </pitch>
         <duration>8</duration>
         <voice>1</voice>
@@ -70,8 +70,8 @@
       <note default-x="103">
         <chord/>
         <pitch>
-          <step>B</step>
-          <octave>6</octave>
+          <step>C</step>
+          <octave>5</octave>
         </pitch>
         <duration>8</duration>
         <voice>1</voice>

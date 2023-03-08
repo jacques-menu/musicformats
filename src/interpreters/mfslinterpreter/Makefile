@@ -43,7 +43,7 @@ mfslScanner.cpp : $(MAKEFILE) mfslScanner.ll
 
 
 mfslParser.h mfslParser.cpp : $(MAKEFILE) mfslParser.yy
-  $(BISON) --defines=mfslParser.h -o mfslParser.cpp mfslParser.yy
+  $(BISON) --defines=mfslParser.h -obj mfslParser.cpp mfslParser.yy
 
 
 # clean

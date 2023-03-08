@@ -34,14 +34,14 @@ S_msdl2guidoManPageGenerateAtom msdl2guidoManPageGenerateAtom::create (
   const std::string&  description,
   const S_oahVisitor& theOahVisitor)
 {
-  msdl2guidoManPageGenerateAtom* o = new
+  msdl2guidoManPageGenerateAtom* obj = new
     msdl2guidoManPageGenerateAtom (
       longName,
       shortName,
       description,
       theOahVisitor);
-  assert (o!=0);
-  return o;
+  assert (obj!=0);
+  return obj;
 }
 
 msdl2guidoManPageGenerateAtom::msdl2guidoManPageGenerateAtom (
@@ -212,7 +212,7 @@ std::ostream& operator << (std::ostream& os, const S_msdl2guidoManPageGenerateAt
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -224,10 +224,10 @@ S_msdl2guidoManPageOahGroup gGlobalMsdl2gmnManPageOahGroup;
 S_msdl2guidoManPageOahGroup msdl2guidoManPageOahGroup::create (
   const S_oahVisitor& theOah2manPage)
 {
-  msdl2guidoManPageOahGroup* o = new msdl2guidoManPageOahGroup (
+  msdl2guidoManPageOahGroup* obj = new msdl2guidoManPageOahGroup (
     theOah2manPage);
-  assert (o!=0);
-  return o;
+  assert (obj!=0);
+  return obj;
 }
 
 msdl2guidoManPageOahGroup::msdl2guidoManPageOahGroup (
@@ -447,7 +447,7 @@ std::ostream& operator << (std::ostream& os, const S_msdl2guidoManPageOahGroup& 
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

@@ -84,13 +84,13 @@ S_LilyPondIssue34InsiderHandler LilyPondIssue34InsiderHandler::create (
                           multiGenerationOutputKind)
 {
   // create the insider handler
-  LilyPondIssue34InsiderHandler* o = new
+  LilyPondIssue34InsiderHandler* obj = new
     LilyPondIssue34InsiderHandler (
       serviceName,
       handlerHeader,
       multiGenerationOutputKind);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 LilyPondIssue34InsiderHandler::LilyPondIssue34InsiderHandler (
@@ -162,7 +162,7 @@ R"(Usage: LilyPondIssue34 [option]*
     std::endl;
 
   switch (multiGenerationOutputKind) {
-    case mfMultiGenerationOutputKind::kGeneration_UNKNOWN:
+    case mfMultiGenerationOutputKind::kGeneration_UNKNOWN_:
       ss <<
         "The help below is available whichever output is produced";
       break;
@@ -192,7 +192,7 @@ std::string LilyPondIssue34InsiderHandler::LilyPondIssue34AboutInformation (
   size_t passesNumber = 0;
 
   switch (multiGenerationOutputKind) {
-    case mfMultiGenerationOutputKind::kGeneration_UNKNOWN:
+    case mfMultiGenerationOutputKind::kGeneration_UNKNOWN_:
       // should not occur
       break;
 
@@ -220,7 +220,7 @@ std::string LilyPondIssue34InsiderHandler::LilyPondIssue34AboutInformation (
   std::string headPart;
 
   switch (multiGenerationOutputKind) {
-    case mfMultiGenerationOutputKind::kGeneration_UNKNOWN:
+    case mfMultiGenerationOutputKind::kGeneration_UNKNOWN_:
       // should only occur if the run is a pure help one
       headPart =
 R"(What LilyPondIssue34 does:
@@ -258,7 +258,7 @@ R"(
   std::string specificPart;
 
   switch (multiGenerationOutputKind) {
-    case mfMultiGenerationOutputKind::kGeneration_UNKNOWN:
+    case mfMultiGenerationOutputKind::kGeneration_UNKNOWN_:
       // should not occur, unless the run is a pure help one
       break;
 
@@ -425,7 +425,7 @@ void LilyPondIssue34InsiderHandler::createTheLilyPondIssue34OptionGroups (
   */
 
   switch (mfMultiGenerationOutputKind) {
-    case mfMultiGenerationOutputKind::kGeneration_UNKNOWN:
+    case mfMultiGenerationOutputKind::kGeneration_UNKNOWN_:
       // should not occur, unless the run is a pure help one
       break;
 
@@ -590,7 +590,7 @@ std::string LilyPondIssue34InsiderHandler::fetchOutputFileNameFromTheOptions () 
   std::string outputFileName;
 
   if (outputFileNameHasBeenSet) {
-    // '-o, -output-file-name' has been selected
+    // '-obj, -output-file-name' has been selected
     outputFileName =
       outputFileNameStringAtom->
         getStringVariable ();
@@ -604,9 +604,9 @@ std::string LilyPondIssue34InsiderHandler::fetchOutputFileNameFromTheOptions () 
 
     // add the output file name suffix
     switch (fMultiGenerationOutputKind) {
-      case mfMultiGenerationOutputKind::kGeneration_UNKNOWN:
+      case mfMultiGenerationOutputKind::kGeneration_UNKNOWN_:
         // should not occur
-        outputFileName = "___kGeneration_UNKNOWN____";
+        outputFileName = "___kGeneration_UNKNOWN_____";
         break;
 
       case mfMultiGenerationOutputKind::kGenerationLilypond:
@@ -765,7 +765,7 @@ void LilyPondIssue34InsiderOahGroup::checkGroupOptionsConsistency ()
     std::stringstream ss;
 
     ss <<
-      "LilyPondIssue34InsiderOahGroup: a MusicXML output file name must be selected with '-o, -output-file-name";
+      "LilyPondIssue34InsiderOahGroup: a MusicXML output file name must be selected with '-obj, -output-file-name";
 
     oahError (ss.str ());
   }
@@ -929,7 +929,7 @@ std::ostream& operator << (std::ostream& os, const S_LilyPondIssue34InsiderHandl
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -940,9 +940,9 @@ S_LilyPondIssue34InsiderOahGroup gGlobalLilyPondIssue34InsiderOahGroup;
 
 S_LilyPondIssue34InsiderOahGroup LilyPondIssue34InsiderOahGroup::create ()
 {
-  LilyPondIssue34InsiderOahGroup* o = new LilyPondIssue34InsiderOahGroup ();
-  assert (o != nullptr);
-  return o;
+  LilyPondIssue34InsiderOahGroup* obj = new LilyPondIssue34InsiderOahGroup ();
+  assert (obj != nullptr);
+  return obj;
 }
 
 LilyPondIssue34InsiderOahGroup::LilyPondIssue34InsiderOahGroup ()
@@ -955,7 +955,7 @@ R"(Options that are used by LilyPondIssue34 are grouped here.)",
 // JMI  fGenerationAPIKind = msrGenerationAPIKind::kMsrFunctionsAPIKind; // default value
   fGenerationAPIKind = msrGenerationAPIKind::kMsrStringsAPIKind; // default value
 
-  fMultiGenerationOutputKind = mfMultiGenerationOutputKind::kGeneration_UNKNOWN;
+  fMultiGenerationOutputKind = mfMultiGenerationOutputKind::kGeneration_UNKNOWN_;
 
   initializeLilyPondIssue34InsiderOahGroup ();
 }

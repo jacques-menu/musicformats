@@ -32,11 +32,11 @@ namespace MusicFormats
 S_lpsrHeader lpsrHeader::create (
   int inputLineNumber)
 {
-  lpsrHeader* o =
+  lpsrHeader* obj =
     new lpsrHeader (
       inputLineNumber);
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 lpsrHeader::lpsrHeader (
@@ -338,7 +338,7 @@ std::ostream& operator << (std::ostream& os, const S_lpsrHeader& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;
@@ -355,7 +355,7 @@ EXP mfIndentedStringStream& operator << (
     elt->print (iss.getStringstream ());
   }
   else {
-    iss.getStringstream () << "[NONE]" << '\n';
+    iss.getStringstream () << "[NULL]" << '\n';
   }
 
   return iss;

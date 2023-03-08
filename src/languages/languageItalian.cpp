@@ -18,10 +18,10 @@ namespace MusicFormats
 //_______________________________________________________________________________
 S_languageItalian languageItalian::create ()
 {
-  languageItalian* o =
+  languageItalian* obj =
     new languageItalian ();
-  assert (o != nullptr);
-  return o;
+  assert (obj != nullptr);
+  return obj;
 }
 
 languageItalian::languageItalian ()
@@ -53,7 +53,7 @@ std::ostream& operator << (std::ostream& os, const S_languageItalian& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

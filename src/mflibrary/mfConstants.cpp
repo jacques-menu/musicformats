@@ -18,7 +18,7 @@ namespace MusicFormats
 // input line numbers
 //______________________________________________________________________________
 
-const int K_MF_INPUT_LINE_UNKNOWN = 0;
+const int K_MF_INPUT_LINE_UNKNOWN_ = 0;
 
 // ------------------------------------------------------
 // names lists max length

@@ -11,14 +11,13 @@
 
 #include <climits>      // INT_MIN, INT_MAX
 
-#include "mfStaticSettings.h"
-
 #include "visitor.h"
 
+#include "mfAssert.h"
 #include "mfStaticSettings.h"
 
-#include "mfAssert.h"
 
+#include "msrNotesDurations.h"
 #include "msrSegmentElements.h"
 
 #include "oahOah.h"
@@ -33,64 +32,62 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 // constants
-const std::string   msrSegmentElement::K_MEASURE_NUMBER_UNKNOWN = "K_MEASURE_NUMBER_UNKNOWN";
-
-const mfRational msrSegmentElement::K_WHOLE_NOTES_UNKNOWN (-444444, 1);
+const std::string   msrSegmentElement::K_MEASURE_NUMBER_UNKNOWN_ = "K_MEASURE_NUMBER_UNKNOWN_";
 
 msrSegmentElement::msrSegmentElement (
   int inputLineNumber)
     : msrElement (inputLineNumber)
 //       fSegmentElementMeasureMoment (
-//         K_MEASURE_POSITION_UNKNOWN, K_MEASURE_POSITION_UNKNOWN),
+//         K_MEASURE_POSITION_UNKNOWN_, K_MEASURE_POSITION_UNKNOWN_),
 //       fSegmentElementVoiceMoment (
-//         K_MEASURE_POSITION_UNKNOWN, K_MEASURE_POSITION_UNKNOWN)
+//         K_MEASURE_POSITION_UNKNOWN_, K_MEASURE_POSITION_UNKNOWN_)
 {
-  fSegmentElementSoundingWholeNotes = mfRational (0, 1);
+//   fSegmentElementSoundingWholeNotes = mfRational (0, 1);
 
-//   fSegmentElementMeasureNumber = K_MEASURE_NUMBER_UNKNOWN;
+//   fSegmentElementMeasureNumber = K_MEASURE_NUMBER_UNKNOWN_;
 
-//   fSegmentElementMeasurePosition = K_MEASURE_POSITION_UNKNOWN;
-//   fSegmentElementVoicePosition   = K_MEASURE_POSITION_UNKNOWN;
+//   fSegmentElementMeasurePosition = K_MEASURE_POSITION_UNKNOWN_;
+//   fSegmentElementVoicePosition   = K_MEASURE_POSITION_UNKNOWN_;
 }
 
 msrSegmentElement::~msrSegmentElement ()
 {}
 
-void msrSegmentElement::setSegmentElementSoundingWholeNotes (
-  const mfRational& wholeNotes,
-  const std::string&   context)
-{
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceNoteDurations ()) {
-    std::stringstream ss;
-
-    ss <<
-      "Setting segment element sounding whole notes of " <<
-      asString () <<
-      " to '" << wholeNotes <<
-//       "' in measure '" <<
-//       fSegmentElementMeasureNumber <<
-      "', context: \"" <<
-      context <<
-      "\"" <<
-      std::endl;
-
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-#ifdef MF_SANITY_CHECKS_ARE_ENABLED
-  // sanity check
-  mfAssert (
-    __FILE__, __LINE__,
-    wholeNotes != K_WHOLE_NOTES_UNKNOWN,
-    "wholeNotes == K_WHOLE_NOTES_UNKNOWN");
-#endif // MF_SANITY_CHECKS_ARE_ENABLED
-
-  fSegmentElementSoundingWholeNotes = wholeNotes;
-}
+// void msrSegmentElement::setSegmentElementSoundingWholeNotes (
+//   const mfRational& wholeNotes,
+//   const std::string&   context)
+// {
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gTraceOahGroup->getTraceNoteDurations ()) {
+//     std::stringstream ss;
+//
+//     ss <<
+//       "Setting segment element sounding whole notes of " <<
+//       asString () <<
+//       " to " << wholeNotes.asString () <<
+// //       "' in measure '" <<
+// //       fSegmentElementMeasureNumber <<
+//       ", context: \"" <<
+//       context <<
+//       "\"" <<
+//       std::endl;
+//
+//     gWaeHandler->waeTrace (
+//       __FILE__, __LINE__,
+//       ss.str ());
+//   }
+// #endif // MF_TRACE_IS_ENABLED
+//
+// #ifdef MF_SANITY_CHECKS_ARE_ENABLED
+//   // sanity check
+//   mfAssert (
+//     __FILE__, __LINE__,
+//     wholeNotes != K_WHOLE_NOTES_UNKNOWN_,
+//     "wholeNotes == K_WHOLE_NOTES_UNKNOWN_");
+// #endif // MF_SANITY_CHECKS_ARE_ENABLED
+//
+//   fSegmentElementSoundingWholeNotes = wholeNotes;
+// }
 
 void msrSegmentElement::acceptIn (basevisitor* v)
 {
@@ -191,7 +188,7 @@ std::ostream& operator << (std::ostream& os, const S_msrSegmentElement& elt)
     elt->print (os);
   }
   else {
-    os << "[NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   return os;

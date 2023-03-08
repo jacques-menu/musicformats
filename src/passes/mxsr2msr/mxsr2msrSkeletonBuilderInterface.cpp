@@ -12,26 +12,22 @@
 #include <iostream>
 #include <sstream>
 
-#include "mfStaticSettings.h"
-
 #include "xml.h"
 #include "xmlfile.h"
 #include "xmlreader.h"
 
-#include "mxsr2msrWae.h"
-
 #include "mfStaticSettings.h"
 
 #include "mfAssert.h"
-
 #include "mfServices.h"
-
 #include "mfTiming.h"
 
 #include "oahOah.h"
 #include "waeOah.h"
 
 #include "oahEarlyOptions.h"
+
+#include "mxsr2msrWae.h"
 
 #include "msrInterface.h"
 
