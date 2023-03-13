@@ -203,14 +203,10 @@ class EXP msrWholeNotes
 
     long int              fNumerator;
     long int              fDenominator;
-
-    // Used by rationalise()
-    long int              gcd(long int a, long int b);
 };
 EXP std::ostream& operator << (std::ostream& os, const msrWholeNotes& wholeNotes);
 EXP mfIndentedStringStream& operator << (
   mfIndentedStringStream& iss, const msrWholeNotes& wholeNotes);
-
 
 EXP msrWholeNotes wholeNotesFromNotesDurationKindAndDotsNumber (
   msrNotesDurationKind notesNotesDurationKind,
@@ -239,9 +235,8 @@ std::string multipleFullBarRestsWholeNotesAsMsrString (
   const msrWholeNotes& wholeNotes);
 
 //______________________________________________________________________________
-EXP void testmWholeNotes ();
+EXP void testWholeNotes ();
 
-// durations
 //______________________________________________________________________________
 class EXP msrNotesDuration
 {
@@ -320,7 +315,6 @@ class EXP msrNotesDuration
 };
 EXP std::ostream& operator << (std::ostream& os, const msrNotesDuration& elt);
 
-// dotted durations
 //______________________________________________________________________________
 class EXP msrDottedNotesDuration
 {

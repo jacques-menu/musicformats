@@ -2642,11 +2642,11 @@ void msrMeasure::accountForTupletMemberNoteNotesDurationInMeasure ( // JMI v0.9.
 #endif // MF_TRACE_IS_ENABLED
 
   // set note's measure position JMI v0.9.66
-//   note->
-//     setMeasurePosition (
-//       this,
-//       fMeasureWholeNotes,
-//       "accountForTupletMemberNoteNotesDurationInMeasure()");
+  note->
+    setMeasurePosition (
+      this,
+      fMeasureWholeNotes,
+      "accountForTupletMemberNoteNotesDurationInMeasure()");
 
   // fetch note sounding whole notes
   msrWholeNotes
@@ -3030,6 +3030,13 @@ void msrMeasure::appendHarmonyToMeasure (
   padUpToMeasurePosition (
     inputLineNumber,
     measurePositionToAppendAt);
+
+  // set harmony's measure position JMI v0.9.67 OK NOT HARMFUL
+  harmony->
+    setMeasurePosition (
+      this,
+      measurePositionToAppendAt,
+      "appendHarmonyToMeasure()");
 
   // append harmony to the measure elements list
   appendHarmonyToMeasureWithoutPadUp (

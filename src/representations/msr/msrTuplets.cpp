@@ -553,7 +553,7 @@ S_msrNote msrTuplet::removeFirstNoteFromTuplet (
 
     if (
       S_msrNote note = dynamic_cast<msrNote*>(&(*firstTupletElement))
-      ) {
+    ) {
       fTupletElementsList.pop_front ();
       result = note;
     }
@@ -574,7 +574,8 @@ S_msrNote msrTuplet::removeFirstNoteFromTuplet (
     for (
       std::list<S_msrElement>::iterator i=fTupletElementsList.begin ();
       i!=fTupletElementsList.end ();
-      ++i) {
+      ++i
+    ) {
       if ((*i) == note) {
         // found note, erase it
         i = fTupletElementsList.erase (i);

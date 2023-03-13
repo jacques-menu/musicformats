@@ -2350,9 +2350,16 @@ class EXP mxsr2msrTranslator :
       we should memoize it because the latter note measure position
       will be known when the tuplet is appended to the current part,
       which occurs only after the whole tuplet contents has be analyzed
+
+      the elements in a tuplet, including the nested ones,
+      form a tree build along the way
+      each note therein however has an offset relative to
+      the first note of the top-level tuplet, computed linearly long the way
     */
     S_msrNote                 fCurrentTopLevelTupletFirstNote;
     S_msrTuplet               fCurrentTopLevelTuplet;
+
+    msrWholeNotes             fCurrentTopLevelTupletRelativeOffset;
 
     std::list<S_msrTuplet>    fTupletsStack;
     void                      displayTupletsStack (

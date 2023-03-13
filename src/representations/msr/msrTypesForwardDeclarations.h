@@ -117,8 +117,8 @@ typedef SMARTP<msrDoubleTremolo> S_msrDoubleTremolo;
 class   msrDynamic;
 typedef SMARTP<msrDynamic> S_msrDynamic;
 
-class   msrNotesDuration;
-typedef SMARTP<msrNotesDuration> S_msrNotesDuration;
+class   msrDottedNotesDuration;
+typedef SMARTP<msrDottedNotesDuration> S_msrDottedNotesDuration;
 
 class   msrEyeGlasses;
 typedef SMARTP<msrEyeGlasses> S_msrEyeGlasses;
@@ -209,6 +209,9 @@ typedef SMARTP<msrNonArpeggiato> S_msrNonArpeggiato;
 
 class   msrNote;
 typedef SMARTP<msrNote> S_msrNote;
+
+class   msrNotesDuration;
+typedef SMARTP<msrNotesDuration> S_msrNotesDuration;
 
 class   msrNoteSize;
 typedef SMARTP<msrNoteSize> S_msrNoteSize;

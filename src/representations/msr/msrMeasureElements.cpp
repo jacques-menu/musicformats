@@ -146,9 +146,19 @@ void msrMeasureElement::setMeasurePosition (
       " (was '" <<
       fMeasurePosition.asString () <<
       "') in measure " <<
-      measure->asShortString () <<
-      " (measureElementMeasureNumber: " <<
-      upLinkToMeasure->getMeasureNumber () <<
+      measure->asShortString ();
+
+    ss <<
+      " (measureElementMeasureNumber: ";
+    if (upLinkToMeasure) {
+      ss <<
+        upLinkToMeasure->getMeasureNumber ();
+    }
+    else {
+      ss << "UNKNOWN_MEASURE_NUMBER";
+    }
+
+    ss <<
       "), context: \"" <<
       context <<
       "\"" <<
