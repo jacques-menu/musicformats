@@ -20922,8 +20922,10 @@ void mxsr2msrTranslator::createAndPushTupletUponItsFirstNote (
 
   // register current top-level tuplet and its first note if relevant
   if (fTupletsStack.size () == 0) {
+    fCurrentTopLevelTuplet = tuplet;
     fCurrentTopLevelTupletFirstNote = firstNote;
-    fCurrentTopLevelTuplet          = tuplet;
+
+    fCurrentTopLevelTupletRelativeOffset = msrWholeNotes (0, 1);
 
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceTuplets ()) {
@@ -20931,10 +20933,10 @@ void mxsr2msrTranslator::createAndPushTupletUponItsFirstNote (
       std::stringstream ss;
 
       ss <<
-        "fCurrentTopLevelTupletFirstNote is now: " <<
+        "==> fCurrentTopLevelTupletFirstNote: " <<
         fCurrentTopLevelTupletFirstNote->asString () <<
         std::endl <<
-        "fCurrentTopLevelTuplet is now: " <<
+        "==> fCurrentTopLevelTuplet: " <<
         fCurrentTopLevelTuplet->asString () <<
         std::endl;
 
@@ -20978,14 +20980,13 @@ void mxsr2msrTranslator::createAndPushTupletUponItsFirstNote (
     appendTupletToVoice (tuplet);
 
 //
-/* JMI
+/* JMI v0.9.67
   // set note displayed divisions
   firstNote->
     applyTupletMemberDisplayFactor (
       fCurrentNoteActualNotes,
       fCurrentNoteNormalNotes);
   */
-
 
   // keep track of current tuplet in the current voice,
   // in case we learn later by <chord/> in the next note
@@ -21135,6 +21136,8 @@ void mxsr2msrTranslator::finalizeTupletAndPopItFromTupletsStack (
     }
 #endif // MF_TRACE_IS_ENABLED
 
+//     don't append the tuplet to the current voice here,
+//     that has been done on the tuplet's first note
 //     currentVoice->
 //       appendTupletToVoice (tuplet);
 
@@ -23761,89 +23764,91 @@ S_msrNote mxsr2msrTranslator::createNote (
       fCurrentNoteDisplayWholeNotesFromType;
   }
 
-  else if (
-    fCurrentDoubleTremoloTypeKind == msrDoubleTremoloTypeKind::kDoubleTremoloTypeStart
-      ||
-    fCurrentDoubleTremoloTypeKind == msrDoubleTremoloTypeKind::kDoubleTremoloTypeStop
-  ) {
-    // double tremolo note
-    if (fCurrentNoteGraphicNotesDurationKind == msrNotesDurationKind::kNotesDuration_UNKNOWN_) {
-      std::stringstream ss;
-
-      ss <<
-        "double tremolo note lacks a <type/>"; // JMI a completer
-
-      mxsr2msrError (
-        gServiceRunData->getInputSourceName (),
-        inputLineNumber,
-        __FILE__, __LINE__,
-        ss.str ());
-    }
-
-    // set current double tremolo note display whole notes
-    fCurrentNoteDisplayWholeNotes =
-      fCurrentNoteDisplayWholeNotesFromType;
-  }
-
-  else if (fCurrentNoteIsARest) {
-    // rest
-
-    // set current rest sounding and display whole notes
-    fCurrentNoteSoundingWholeNotes =
-      fCurrentNoteSoundingWholeNotesFromNotesDuration;
-
-    fCurrentNoteDisplayWholeNotes =
-      fCurrentNoteDisplayWholeNotesFromType;
-
-/* JMI
-    // set current note sounding and display whole notes
-    if (fCurrentNoteSoundingWholeNotesFromNotesDuration.getNumerator () == 0) {
-      // only <type /> was found, no <duration /> was specified
-      fCurrentNoteDisplayWholeNotes =
-        fCurrentNoteDisplayWholeNotesFromType;
-
-      fCurrentNoteSoundingWholeNotes =
-        fCurrentNoteDisplayWholeNotes; // same value by default
-    }
-    else {
-      // <duration /> was found
-      fCurrentNoteSoundingWholeNotes =
-        fCurrentNoteSoundingWholeNotesFromNotesDuration;
-
-      fCurrentNoteDisplayWholeNotes =
-        fCurrentNoteSoundingWholeNotes; // same value by default
-    }
-    */
-  }
-
   else {
-    // other note
+    if (
+      fCurrentDoubleTremoloTypeKind == msrDoubleTremoloTypeKind::kDoubleTremoloTypeStart
+        ||
+      fCurrentDoubleTremoloTypeKind == msrDoubleTremoloTypeKind::kDoubleTremoloTypeStop
+    ) {
+      // double tremolo note
+      if (fCurrentNoteGraphicNotesDurationKind == msrNotesDurationKind::kNotesDuration_UNKNOWN_) {
+        std::stringstream ss;
 
-    // set current note sounding and display whole notes
-    fCurrentNoteSoundingWholeNotes =
-      fCurrentNoteSoundingWholeNotesFromNotesDuration;
+        ss <<
+          "double tremolo note lacks a <type/>"; // JMI a completer
 
-    fCurrentNoteDisplayWholeNotes =
-      fCurrentNoteDisplayWholeNotesFromType;
+        mxsr2msrError (
+          gServiceRunData->getInputSourceName (),
+          inputLineNumber,
+          __FILE__, __LINE__,
+          ss.str ());
+      }
 
-    /* JMI
-    if (fCurrentNoteSoundingWholeNotesFromNotesDuration.getNumerator () == 0) {
-      // only <type /> was found, no <duration /> was specified
+      // set current double tremolo note display whole notes
       fCurrentNoteDisplayWholeNotes =
         fCurrentNoteDisplayWholeNotesFromType;
-
-      fCurrentNoteSoundingWholeNotes =
-        fCurrentNoteDisplayWholeNotes; // same value by default
     }
-    else {
-      // <duration /> was found
+
+    else if (fCurrentNoteIsARest) {
+      // rest
+
+      // set current rest sounding and display whole notes
       fCurrentNoteSoundingWholeNotes =
         fCurrentNoteSoundingWholeNotesFromNotesDuration;
 
       fCurrentNoteDisplayWholeNotes =
-        fCurrentNoteSoundingWholeNotes; // same value by default
+        fCurrentNoteDisplayWholeNotesFromType;
+
+  /* JMI
+      // set current note sounding and display whole notes
+      if (fCurrentNoteSoundingWholeNotesFromNotesDuration.getNumerator () == 0) {
+        // only <type /> was found, no <duration /> was specified
+        fCurrentNoteDisplayWholeNotes =
+          fCurrentNoteDisplayWholeNotesFromType;
+
+        fCurrentNoteSoundingWholeNotes =
+          fCurrentNoteDisplayWholeNotes; // same value by default
+      }
+      else {
+        // <duration /> was found
+        fCurrentNoteSoundingWholeNotes =
+          fCurrentNoteSoundingWholeNotesFromNotesDuration;
+
+        fCurrentNoteDisplayWholeNotes =
+          fCurrentNoteSoundingWholeNotes; // same value by default
+      }
+      */
     }
-    */
+
+    else {
+      // other note
+
+      // set current note sounding and display whole notes
+      fCurrentNoteSoundingWholeNotes =
+        fCurrentNoteSoundingWholeNotesFromNotesDuration;
+
+      fCurrentNoteDisplayWholeNotes =
+        fCurrentNoteDisplayWholeNotesFromType;
+
+      /* JMI
+      if (fCurrentNoteSoundingWholeNotesFromNotesDuration.getNumerator () == 0) {
+        // only <type /> was found, no <duration /> was specified
+        fCurrentNoteDisplayWholeNotes =
+          fCurrentNoteDisplayWholeNotesFromType;
+
+        fCurrentNoteSoundingWholeNotes =
+          fCurrentNoteDisplayWholeNotes; // same value by default
+      }
+      else {
+        // <duration /> was found
+        fCurrentNoteSoundingWholeNotes =
+          fCurrentNoteSoundingWholeNotesFromNotesDuration;
+
+        fCurrentNoteDisplayWholeNotes =
+          fCurrentNoteSoundingWholeNotes; // same value by default
+      }
+      */
+    }
   }
 
   // create the (new) note
@@ -23896,7 +23901,6 @@ S_msrNote mxsr2msrTranslator::createNote (
     --gIndenter;
   }
 #endif // MF_TRACE_IS_ENABLED
-
   return newNote;
 }
 
@@ -24809,23 +24813,57 @@ void mxsr2msrTranslator::visitEnd (S_note& elt)
 
   // handle the pending harmonies elements if any
   if (fPendingHarmoniesList.size ()) {
-    if (fTupletsStack.size () == 0) {
+//     if (fTupletsStack.size () == 0) {
       handlePendingHarmonies (
         newNote);
-    }
-    else {
-      // wait until the end of the top-level tuplet
-    }
+//     }
+//     else {
+//       // wait until the end of the top-level tuplet
+//     }
   }
 
   // handle the pending figured basses if any
   if (fPendingFiguredBassesList.size ()) {
-    if (fTupletsStack.size () == 0) {
+//     if (fTupletsStack.size () == 0) {
       handlePendingFiguredBasses (
         newNote);
-    }
-    else {
-      // wait until the end of the top-level tuplet
+//     }
+//     else {
+//       // wait until the end of the top-level tuplet
+//     }
+  }
+
+  // update current top-level tuplet relative offset if relevant
+  if (! fCurrentNoteIsAGraceNote) {
+//     if (fPendingHarmoniesList.size ()) {
+//     if (fTupletsStack.size ()) {
+    if (fCurrentTopLevelTuplet) {
+//     if (fCurrentTopLevelTupletFirstNote) {
+      fCurrentTopLevelTupletRelativeOffset +=
+        newNote->getSoundingWholeNotes ();
+//         fCurrentNoteSoundingWholeNotes;
+
+#ifdef MF_TRACE_IS_ENABLED
+      if (
+        gTraceOahGroup->getTraceTuplets ()
+          ||
+        gTraceOahGroup->getTraceHarmonies ()
+      ) {
+        std::stringstream ss;
+
+        ss <<
+          "==> fCurrentTopLevelTupletRelativeOffset becomes: " <<
+          fCurrentTopLevelTupletRelativeOffset.asString () <<
+          ", newNote" << newNote->asString () <<
+          std::endl;
+
+        gWaeHandler->waeTrace (
+          __FILE__, __LINE__,
+          ss.str ());
+
+        displayPendingHarmoniesList ("mxsr2msrTranslator::visitEnd (S_note& elt)");
+      }
+#endif // MF_TRACE_IS_ENABLED
     }
   }
 
@@ -24928,11 +24966,16 @@ void mxsr2msrTranslator::handlePendingSingleHarmony (
     }
     ss << std::endl;
 
+    ss <<
+      ", fCurrentTopLevelTupletRelativeOffset: " <<
+      fCurrentTopLevelTupletRelativeOffset.asString () <<
+      std::endl;
+
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
 
-    displayPendingHarmoniesList ("handlePendingSingleHarmony()");
+    displayPendingHarmoniesList ("handlePendingSingleHarmony() 1");
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -24940,13 +24983,13 @@ void mxsr2msrTranslator::handlePendingSingleHarmony (
   harmony->
     setHarmonySoundingWholeNotes (
       newNote->getSoundingWholeNotes (),
-      "handlePendingSingleHarmony() 1");
+      "handlePendingSingleHarmony() 2");
 
   // set harmony's display whole notes
   harmony->
     setHarmonyDisplayWholeNotes (
       newNote->getNoteDisplayWholeNotes (),
-      "handlePendingSingleHarmony() 2");
+      "handlePendingSingleHarmony() 3");
 
   // set harmony's tuplet factor
   harmony->
@@ -24955,59 +24998,82 @@ void mxsr2msrTranslator::handlePendingSingleHarmony (
         fCurrentNoteActualNotes,
         fCurrentNoteNormalNotes));
 
+  // get harmony's whole notes offset
+  msrWholeNotes
+    harmonyWholeNotesOffset =
+      harmony->
+        getHarmonyWholeNotesOffset ();
+
   // append harmony to fCurrentPart
   if (fCurrentTopLevelTuplet) {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceHarmonies ()) {
-    std::stringstream ss;
+    msrWholeNotes
+      currentTopLevelTupletMeasurePosition =
+        fCurrentTopLevelTuplet->getMeasurePosition ();
 
-    ss <<
-      "Appending the single pending harmony " <<
-      harmony->asString () <<
-      " for note " <<
-      newNote->asShortString () <<
-      " to part " <<
-      fCurrentPart->getPartCombinedName () <<
-      ", line " << inputLineNumber <<
-      std::endl;
+    // compute harmony's measure position
+    msrWholeNotes
+      harmonyMeasurePosition =
+        currentTopLevelTupletMeasurePosition
+          +
+        fCurrentTopLevelTupletRelativeOffset;
 
-    ss <<
-      "fCurrentTopLevelTupletFirstNote: ";
-    if (fCurrentTopLevelTupletFirstNote) {
+    if (gTraceOahGroup->getTraceHarmonies ()) {
+      std::stringstream ss;
+
       ss <<
-        fCurrentTopLevelTupletFirstNote->asString ();
-    }
-    else {
-      ss << "[NULL]";
-    }
-    ss << std::endl;
+        "Appending the single pending harmony " <<
+        harmony->asString () <<
+        ", fCurrentTopLevelTupletRelativeOffset: " <<
+        fCurrentTopLevelTupletRelativeOffset.asString () <<
+        ", harmonyMeasurePosition: " <<
+        harmonyMeasurePosition <<
+        ", for note " <<
+        newNote->asShortString () <<
+        " to part " <<
+        fCurrentPart->getPartCombinedName () <<
+        ", line " << inputLineNumber <<
+        std::endl;
 
-    ss <<
-      "fCurrentTopLevelTuplet: ";
-    if (fCurrentTopLevelTuplet) {
       ss <<
-        fCurrentTopLevelTuplet->asString ();
-    }
-    else {
-      ss << "[NULL]";
-    }
-    ss << std::endl;
+        "fCurrentTopLevelTupletFirstNote: ";
+      if (fCurrentTopLevelTupletFirstNote) {
+        ss <<
+          fCurrentTopLevelTupletFirstNote->asString ();
+      }
+      else {
+        ss << "[NULL]";
+      }
+      ss << std::endl;
 
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
+      ss <<
+        "fCurrentTopLevelTuplet: ";
+      if (fCurrentTopLevelTuplet) {
+        ss <<
+          fCurrentTopLevelTuplet->asString ();
+      }
+      else {
+        ss << "[NULL]";
+      }
+      ss << std::endl;
 
-//     displayPendingHarmoniesList ("handlePendingSingleHarmony()");
-  }
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
+
+  //     displayPendingHarmoniesList ("handlePendingSingleHarmony() 4");
+    }
 #endif // MF_TRACE_IS_ENABLED
 
     fCurrentPart->
       appendHarmonyToPart (
-        fCurrentTopLevelTupletFirstNote->getInputLineNumber (),
+        fCurrentTopLevelTuplet->getInputLineNumber (),
         harmony,
-        fCurrentTopLevelTupletFirstNote->getMeasurePosition ());
+        harmonyMeasurePosition);
   }
+
   else {
+    // harmony is at the voice level JMI v0.9.67
     fCurrentPart->
       appendHarmonyToPart (
         newNote->getInputLineNumber (),
@@ -25059,6 +25125,11 @@ void mxsr2msrTranslator::handlePendingMultipleHarmonies (
     else {
       ss << "[NULL]";
     }
+
+    ss <<
+      ", fCurrentTopLevelTupletRelativeOffset: " <<
+      fCurrentTopLevelTupletRelativeOffset.asString () <<
+      std::endl;
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -25327,6 +25398,8 @@ void mxsr2msrTranslator:: displayPendingHarmoniesList (
     std::endl <<
     "Pending harmonies list -- " <<
     context <<
+    ", ==> fCurrentTopLevelTupletRelativeOffset: " <<
+    fCurrentTopLevelTupletRelativeOffset.asString () <<
     ':' <<
     std::endl;
 
@@ -25778,145 +25851,149 @@ void mxsr2msrTranslator::handleNonChordNorTupletNoteOrRest (
       appendNoteToGraceNotesGroup (newNote);
   }
 
-  else if (fCurrentDoubleTremoloTypeKind != msrDoubleTremoloTypeKind::kDoubleTremoloType_UNKNOWN_) {
-    // newNote belongs to a tremolo
-
-    switch (fCurrentDoubleTremoloTypeKind) {
-      case msrDoubleTremoloTypeKind::kDoubleTremoloType_UNKNOWN_:
-        // just to avoid a compiler message
-        break;
-
-      case msrDoubleTremoloTypeKind::kDoubleTremoloTypeSingle:
-        // append newNote to the current voice
-#ifdef MF_TRACE_IS_ENABLED
-        if (gTraceOahGroup->getTraceNotes ()) {
-          std::stringstream ss;
-
-          ss <<
-            "Appending single tremolo " <<
-            newNote->asString () <<
-            ", line " << newNote->getInputLineNumber () <<
-            ", to voice \"" <<
-            currentVoice->getVoiceName () <<
-            "\"" <<
-            std::endl;
-
-          gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
-            ss.str ());
-        }
-#endif // MF_TRACE_IS_ENABLED
-
-        currentVoice->
-          appendNoteToVoice (newNote);
-
-        // fCurrentSingleTremolo is handled in
-        // attachCurrentSingleTremoloToNote()
-        break;
-
-      case msrDoubleTremoloTypeKind::kDoubleTremoloTypeStart:
-        // register newNote as first element of the current double tremolo
-#ifdef MF_TRACE_IS_ENABLED
-        if (gTraceOahGroup->getTraceNotes ()) {
-          std::stringstream ss;
-
-          ss <<
-            "Setting regular note '" <<
-            newNote->asString () <<
-            "', line " << newNote->getInputLineNumber () <<
-            ", as double tremolo first element" <<
-            " in voice \"" <<
-            currentVoice->getVoiceName () <<
-            "\"" <<
-            std::endl;
-
-          gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
-            ss.str ());
-        }
-#endif // MF_TRACE_IS_ENABLED
-
-        fCurrentDoubleTremolo->
-          setDoubleTremoloNoteFirstElement (
-            newNote);
-        break;
-
-      case msrDoubleTremoloTypeKind::kDoubleTremoloTypeStop:
-        // register newNote as second element of the current double tremolo
-#ifdef MF_TRACE_IS_ENABLED
-        if (gTraceOahGroup->getTraceNotes ()) {
-          std::stringstream ss;
-
-          ss <<
-            "Setting regular note '" <<
-            newNote->asString () <<
-            "', line " << newNote->getInputLineNumber () <<
-            ", as double tremolo second element" <<
-            " in voice \"" <<
-            currentVoice->getVoiceName () <<
-            "\"" <<
-            std::endl;
-
-          gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
-            ss.str ());
-        }
-#endif // MF_TRACE_IS_ENABLED
-
-        fCurrentDoubleTremolo->
-          setDoubleTremoloNoteSecondElement (
-            newNote);
-
-        // append current double tremolo to current voice
-        currentVoice->
-          appendDoubleTremoloToVoice (
-            fCurrentDoubleTremolo);
-
-        // forget about the current double tremolo
-       // fCurrentDoubleTremolo = 0; // JMI not if there's a chord in the double tremolo XXL BOF
-        break;
-    } // switch
-  }
-
   else {
-    // regular note or rest
+    if (
+      fCurrentDoubleTremoloTypeKind != msrDoubleTremoloTypeKind::kDoubleTremoloType_UNKNOWN_
+    ) {
+      // newNote belongs to a tremolo
 
-    // append newNote to the current voice
-#ifdef MF_TRACE_IS_ENABLED
-    if (gTraceOahGroup->getTraceNotes ()) {
-      std::stringstream ss;
+      switch (fCurrentDoubleTremoloTypeKind) {
+        case msrDoubleTremoloTypeKind::kDoubleTremoloType_UNKNOWN_:
+          // just to avoid a compiler message
+          break;
 
-      ss <<
-        "Appending regular note or rest " <<
-        newNote->asString () <<
-        ", line " << newNote->getInputLineNumber () <<
-        ", to voice \"" <<
-        currentVoice->getVoiceName () <<
-        "\"" <<
-        std::endl;
+        case msrDoubleTremoloTypeKind::kDoubleTremoloTypeSingle:
+          // append newNote to the current voice
+  #ifdef MF_TRACE_IS_ENABLED
+          if (gTraceOahGroup->getTraceNotes ()) {
+            std::stringstream ss;
 
-      gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
-        ss.str ());
+            ss <<
+              "Appending single tremolo " <<
+              newNote->asString () <<
+              ", line " << newNote->getInputLineNumber () <<
+              ", to voice \"" <<
+              currentVoice->getVoiceName () <<
+              "\"" <<
+              std::endl;
+
+            gWaeHandler->waeTrace (
+              __FILE__, __LINE__,
+              ss.str ());
+          }
+  #endif // MF_TRACE_IS_ENABLED
+
+          currentVoice->
+            appendNoteToVoice (newNote);
+
+          // fCurrentSingleTremolo is handled in
+          // attachCurrentSingleTremoloToNote()
+          break;
+
+        case msrDoubleTremoloTypeKind::kDoubleTremoloTypeStart:
+          // register newNote as first element of the current double tremolo
+  #ifdef MF_TRACE_IS_ENABLED
+          if (gTraceOahGroup->getTraceNotes ()) {
+            std::stringstream ss;
+
+            ss <<
+              "Setting regular note '" <<
+              newNote->asString () <<
+              "', line " << newNote->getInputLineNumber () <<
+              ", as double tremolo first element" <<
+              " in voice \"" <<
+              currentVoice->getVoiceName () <<
+              "\"" <<
+              std::endl;
+
+            gWaeHandler->waeTrace (
+              __FILE__, __LINE__,
+              ss.str ());
+          }
+  #endif // MF_TRACE_IS_ENABLED
+
+          fCurrentDoubleTremolo->
+            setDoubleTremoloNoteFirstElement (
+              newNote);
+          break;
+
+        case msrDoubleTremoloTypeKind::kDoubleTremoloTypeStop:
+          // register newNote as second element of the current double tremolo
+  #ifdef MF_TRACE_IS_ENABLED
+          if (gTraceOahGroup->getTraceNotes ()) {
+            std::stringstream ss;
+
+            ss <<
+              "Setting regular note '" <<
+              newNote->asString () <<
+              "', line " << newNote->getInputLineNumber () <<
+              ", as double tremolo second element" <<
+              " in voice \"" <<
+              currentVoice->getVoiceName () <<
+              "\"" <<
+              std::endl;
+
+            gWaeHandler->waeTrace (
+              __FILE__, __LINE__,
+              ss.str ());
+          }
+  #endif // MF_TRACE_IS_ENABLED
+
+          fCurrentDoubleTremolo->
+            setDoubleTremoloNoteSecondElement (
+              newNote);
+
+          // append current double tremolo to current voice
+          currentVoice->
+            appendDoubleTremoloToVoice (
+              fCurrentDoubleTremolo);
+
+          // forget about the current double tremolo
+         // fCurrentDoubleTremolo = 0; // JMI not if there's a chord in the double tremolo XXL BOF
+          break;
+      } // switch
     }
-#endif // MF_TRACE_IS_ENABLED
 
-    ++gIndenter;
+    else {
+      // regular note or rest
 
-    currentVoice->
-      appendNoteToVoice (newNote);
+      // append newNote to the current voice
+  #ifdef MF_TRACE_IS_ENABLED
+      if (gTraceOahGroup->getTraceNotes ()) {
+        std::stringstream ss;
 
-    if (false) { // XXL, syllable sans fSyllableNote assigne JMI
-      gLog <<
-        "&&&&&&&&&&&&&&&&&& currentVoice (" <<
-        currentVoice->getVoiceName () <<
-        ") contents &&&&&&&&&&&&&&&&&&" <<
-        std::endl <<
-        currentVoice <<
-        std::endl;
+        ss <<
+          "Appending regular note or rest " <<
+          newNote->asString () <<
+          ", line " << newNote->getInputLineNumber () <<
+          ", to voice \"" <<
+          currentVoice->getVoiceName () <<
+          "\"" <<
+          std::endl;
+
+        gWaeHandler->waeTrace (
+          __FILE__, __LINE__,
+          ss.str ());
+      }
+  #endif // MF_TRACE_IS_ENABLED
+
+      ++gIndenter;
+
+      currentVoice->
+        appendNoteToVoice (newNote);
+
+      if (false) { // XXL, syllable sans fSyllableNote assigne JMI
+        gLog <<
+          "&&&&&&&&&&&&&&&&&& currentVoice (" <<
+          currentVoice->getVoiceName () <<
+          ") contents &&&&&&&&&&&&&&&&&&" <<
+          std::endl <<
+          currentVoice <<
+          std::endl;
+      }
+
+      --gIndenter;
     }
-
-    --gIndenter;
   }
 
   // take care of slurs JMI ???

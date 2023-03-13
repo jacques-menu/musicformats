@@ -13,6 +13,7 @@
 #include <climits>      // INT_MIN, INT_MAX
 #include <iomanip>      // setw()), set::precision(), ...
 #include <regex>
+#include <numeric>      // gcd()
 
 #include <iostream>
 #include <sstream>
@@ -571,7 +572,6 @@ std::ostream& operator << (std::ostream& os, const msrNotesDurationKind& elt)
   return os;
 }
 
-// duration
 //______________________________________________________________________________
 msrNotesDuration::msrNotesDuration ()
 {
@@ -656,7 +656,7 @@ msrWholeNotes msrNotesDuration::dottedNotesDurationAsWholeNotes (
 msrWholeNotes msrNotesDuration::dottedNotesDurationAsWholeNotes_FOR_TEMPO (
   // used in lpsrEnumTypes, dottedNotesDurationAsLilypondStringWithoutBackSlash(),
   // called in lpsr2lilypondTranslator.cpp, visitStart (S_msrTempo& elt)
-  // JMI BUGGY, NEVER TESTED TEMP???
+  // JMI BUGGY, NEVER TESTED TEMP??? v0.9.67
   int inputLineNumber) const
 {
   // convert duration into whole notes
@@ -1342,30 +1342,9 @@ Bool msrWholeNotes::operator == (double num) const
 {
   return (toDouble() == num); }
 
-// gcd(a, b) calculates the gcd of a and b using Euclid's algorithm.
-long int msrWholeNotes::gcd (long int a1, long int b1)
-{
-  long int r;
-
-  long int a = labs (a1);
-  long int b = labs (b1);
-
-  if (! (a == 0) || (b == 0)) {
-    while (b > 0){
-      r = a % b;
-      a = b;
-      b = r;
-    } // while
-
-    return a;
-  }
-
-  return 1;
-}
-
 void msrWholeNotes::rationalise ()
 {
-  long int g = gcd (fNumerator, fDenominator);
+  long int g = std::gcd (fNumerator, fDenominator);
 
   fNumerator   /= g;
   fDenominator /= g;

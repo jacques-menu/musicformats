@@ -13,6 +13,7 @@
 #include <iostream>
 #include <regex>
 #include <sstream>
+#include <numeric>      // gcd()
 
 #include "mfStaticSettings.h"
 
@@ -329,30 +330,9 @@ Bool mfRational::operator == (double num) const
 {
   return (toDouble() == num); }
 
-// gcd(a, b) calculates the gcd of a and b using Euclid's algorithm.
-long int mfRational::gcd (long int a1, long int b1)
-{
-  long int r;
-
-  long int a = labs (a1);
-  long int b = labs (b1);
-
-  if (! (a == 0) || (b == 0)) {
-    while (b > 0){
-      r = a % b;
-      a = b;
-      b = r;
-    } // while
-
-    return a;
-  }
-
-  return 1;
-}
-
 void mfRational::rationalise ()
 {
-  long int g = gcd (fNumerator, fDenominator);
+  long int g = std::gcd (fNumerator, fDenominator);
 
   fNumerator   /= g;
   fDenominator /= g;

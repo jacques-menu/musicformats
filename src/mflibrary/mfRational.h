@@ -158,9 +158,6 @@ class EXP mfRational
 
     long int              fNumerator;
     long int              fDenominator;
-
-    // used by rationalise()
-    long int              gcd(long int a, long int b);
 };
 EXP std::ostream& operator << (std::ostream& os, const mfRational& rat);
 

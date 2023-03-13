@@ -35,7 +35,7 @@ The useful options here are:
 
 In the \mxml\ view of music scores, harmonies are simply \drawn\ at the current music position, so to say.
 
-The \markupName{harmony} markup occurs at the measure level in \mxml, as notes do, but they apply at the part level, even though this is not explictly stated, since there is no staff nor voice information associated with them:
+The \musicXmlMarkup{harmony} markup occurs at the measure level in \mxml, as notes do, but they apply at the part level, even though this is not explictly stated, since there is no staff nor voice information associated with them:
 \begin{lstlisting}[language=Terminal]
 <!--
 	The harmony elements are based on Humdrum's **harm
@@ -78,12 +78,12 @@ The \markupName{harmony} markup occurs at the measure level in \mxml, as notes d
 >
 \end{lstlisting}
 
-The harmony \markup{function}, defined in \mxml, is a string. It is stored in the \class{msrHarmony}, but nothing more. No example of that is present in \mxmlfiles, actually.
+The harmony \musicXmlMarkup{function}, defined in \mxml, is a string. It is stored in the \class{msrHarmony}, but nothing more. No example of that is present in the \mxml\ sample files this author could find, actually.
 \begin{lstlisting}[language=Terminal]
 The <function> element represents classical functional harmony with an indication like I, II, III rather than C, D, E. It represents the Roman numeral part of a functional harmony rather than the complete function itself. It has been deprecated as of MusicXML 4.0 in favor of the <numeral> element.
 \end{lstlisting}
 
-The \mxml\ 4.0 \markup{numeral} markup is described at \url{https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/numeral/}.
+The \mxml\ 4.0 \musicXmlMarkup{numeral} markup is described at \url{https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/numeral/}.
 Examples are:
 \begin{lstlisting}[language=MusicXML]
 <harmony default-y="-80">

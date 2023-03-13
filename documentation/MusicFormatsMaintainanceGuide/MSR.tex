@@ -703,7 +703,7 @@ enum class msrOctaveEntryKind {
 \section{NotesDurations}\label{NotesDurations}
 % -------------------------------------------------------------------------
 
-\mf\ represents durations with \enumType{msrNotesDurationKind}, defined in \msr{msrBasicTypes.h}:
+They are represented in MSR with the \enumType{msrNotesDurationKind} enumeration type, defined in \msr{msrBasicTypes.h}:
 \begin{lstlisting}[language=CPlusPlus]
 // durations
 //______________________________________________________________________________
@@ -716,6 +716,13 @@ enum class msrNotesDurationKind {
   kNotesDurationEighth, kNotesDuration16th, kNotesDuration32nd, kNotesDuration64th, kNotesDuration128th, kNotesDuration256th, kNotesDuration512th, kNotesDuration1024th
 };
 \end{lstlisting}
+
+\Class{msrDottedNotesDuration} contains:
+\begin{lstlisting}[language=CPlusPlus]
+    msrNotesDurationKind  fNotesDurationKind;
+    int                   fDotsNumber;
+\end{lstlisting}
+
 
 % -------------------------------------------------------------------------
 \section{Alterations}\label{Alterations}
@@ -767,31 +774,6 @@ enum class msrAccidentalKind {
 
   kAccidentalOther
 };
-\end{lstlisting}
-
-
-% -------------------------------------------------------------------------
-\section{NotesDurations}\label{NotesDurations}
-% -------------------------------------------------------------------------
-
-They are represented in MSR with the \enumType{msrNotesDurationKind} enumeration type, defined in \msr{msrBasicTypes.h}:
-\begin{lstlisting}[language=CPlusPlus]
-// durations
-//______________________________________________________________________________
-enum class msrNotesDurationKind {
-  kNotesDuration_UNKNOWN_,
-
-  // from longest to shortest for the algorithms
-  kNotesDurationMaxima, kNotesDurationLonga, kNotesDurationBreve, kNotesDurationWhole, kNotesDurationHalf,
-  kNotesDurationQuarter,
-  kNotesDurationEighth, kNotesDuration16th, kNotesDuration32nd, kNotesDuration64th, kNotesDuration128th, kNotesDuration256th, kNotesDuration512th, kNotesDuration1024th
-};
-\end{lstlisting}
-
-\Class{msrDottedNotesDuration} contains:
-\begin{lstlisting}[language=CPlusPlus]
-    msrNotesDurationKind  fNotesDurationKind;
-    int                   fDotsNumber;
 \end{lstlisting}
 
 
