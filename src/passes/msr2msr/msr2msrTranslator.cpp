@@ -151,6 +151,11 @@ S_msrScore msr2msrTranslator::translateMsrToMsr (
   // create a msrScore browser
   msrBrowser<msrScore> browser (this);
 
+  // set the parts browsing order
+  theMsrScore->
+    setStavesBrowingOrderKind (
+      msrStavesBrowingOrderKind::kStavesBrowingOrderHarmoniesRegularsFiguredBasses);
+
   // browse the visited score with the browser
   browser.browse (*fVisitedMsrScore);
 
@@ -1927,7 +1932,7 @@ void msr2msrTranslator::visitStart (S_msrMeasure& elt)
         fCurrentMeasureClone);
   }
 
-  // is this a full-bar rest? JMI KAKA
+  // is this a full-bar rest? JMI v0.9.67
 //   if (elt->getMeasureIsAFullBarRest ()) {
 //     // yes
 //

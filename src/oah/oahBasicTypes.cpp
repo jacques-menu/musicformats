@@ -1502,6 +1502,28 @@ void oahAtom::browseData (basevisitor* v)
 #endif // MF_TRACE_IS_ENABLED
 }
 
+// std::string oahAtom::asString (std::ostream& os) const // JMI v0.9.67
+// {
+//   stringstream ss;
+//
+//   ss <<
+//     "[Atom:" <<
+//     ']';
+//
+//   return ss.str ();
+// }
+
+void oahAtom::print (std::ostream& os) const
+{
+  const int fieldWidth = 19;
+
+  os <<
+    "Atom: ";
+
+  oahElement::printOahElementEssentials (
+    os, fieldWidth);
+}
+
 void oahAtom::printFull (std::ostream& os) const
 {
   const int fieldWidth = 19;
@@ -1521,17 +1543,6 @@ void oahAtom::printFull (std::ostream& os) const
     std::endl;
 
   --gIndenter;
-}
-
-void oahAtom::print (std::ostream& os) const
-{
-  const int fieldWidth = 19;
-
-  os <<
-    "Atom: ";
-
-  oahElement::printOahElementEssentials (
-    os, fieldWidth);
 }
 
 void oahAtom::printSummary (std::ostream& os) const
@@ -3399,6 +3410,17 @@ void oahSubGroup::browseData (basevisitor* v)
   }
 }
 
+// std::string oahSubGroup::asString (std::ostream& os) const // JMI v0.9.67
+// {
+//   stringstream ss;
+//
+//   ss <<
+//     "[SubGroup:" <<
+//     ']';
+//
+//   return ss.str ();
+// }
+
 void oahSubGroup::print (std::ostream& os) const
 {
   const int fieldWidth = 27;
@@ -3419,7 +3441,7 @@ void oahSubGroup::print (std::ostream& os) const
     std::endl << std::endl;
 
   os <<
-    "AtomsList (" <<
+    "fSubGroupAtomsList (" <<
     mfSingularOrPlural (
       fSubGroupAtomsList.size (), "atom",  "atoms") <<
     "):" <<
@@ -4499,6 +4521,17 @@ void oahGroup::browseData (basevisitor* v)
     } // for
   }
 }
+
+// std::string oahGroup::asString (std::ostream& os) const // JMI v0.9.67
+// {
+//   stringstream ss;
+//
+//   ss <<
+//     "[Group:" <<
+//     ']';
+//
+//   return ss.str ();
+// }
 
 void oahGroup::print (std::ostream& os) const
 {

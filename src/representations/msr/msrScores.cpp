@@ -40,6 +40,40 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
+std::string msrStavesBrowingOrderKindAsString (
+  msrStavesBrowingOrderKind stavesBrowingOrderKind)
+{
+  std::string result;
+
+  switch (stavesBrowingOrderKind) {
+    case msrStavesBrowingOrderKind::kStavesBrowingOrder_UNKNOWN_:
+      result = "kStavesBrowingOrder_UNKNOWN_";
+      break;
+
+    // MusicXML harmonies
+
+    case msrStavesBrowingOrderKind::kStavesBrowingOrderHarmoniesRegularsFiguredBasses:
+      result = "kStavesBrowingOrderHarmoniesRegularsFiguredBasses";
+      break;
+    case msrStavesBrowingOrderKind::kStavesBrowingOrderRegularsHarmoniesFiguredBasses:
+      result = "kStavesBrowingOrderRegularsHarmoniesFiguredBasses";
+      break;
+    case msrStavesBrowingOrderKind::kStavesBrowingOrderHarmoniesFiguredBassesRegulars:
+      result = "kStavesBrowingOrderHarmoniesFiguredBassesRegulars";
+      break;
+  } // switch
+
+  return result;
+}
+
+std::ostream& operator << (std::ostream& os, const msrStavesBrowingOrderKind& elt)
+{
+  os << msrStavesBrowingOrderKindAsString (elt);
+  return os;
+}
+
+
+//______________________________________________________________________________
 S_msrScore msrScore::create (
   int                inputLineNumber,
   const std::string& scoreName)
@@ -87,6 +121,10 @@ msrScore::msrScore (
 
   // multiple full-bar rests should be browsed by default
   fInhibitMultipleFullBarRestsBrowsing = false;
+
+   // staves browsing order
+  fStavesBrowingOrderKind =
+    msrStavesBrowingOrderKind::kStavesBrowingOrder_UNKNOWN_;
 }
 
 msrScore::~msrScore ()

@@ -33,6 +33,32 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
+enum class msrStavesBrowingOrderKind {
+  kStavesBrowingOrder_UNKNOWN_,
+
+  kStavesBrowingOrderHarmoniesRegularsFiguredBasses,
+  kStavesBrowingOrderRegularsHarmoniesFiguredBasses,
+  kStavesBrowingOrderHarmoniesFiguredBassesRegulars
+};
+
+std::string msrStavesBrowingOrderKindAsString (
+  msrStavesBrowingOrderKind stavesBrowingOrderKind);
+
+std::string msrStavesBrowingOrderKindAsShortString (
+  msrStavesBrowingOrderKind stavesBrowingOrderKind);
+
+std::ostream& operator << (std::ostream& os, const msrStavesBrowingOrderKind& elt);
+
+std::string msrStavesBrowingOrderKindShortName (
+  msrStavesBrowingOrderKind stavesBrowingOrderKind);
+
+EXP msrStavesBrowingOrderKind msrStavesBrowingOrderKindFromString (
+  const std::string& theString);
+
+std::string availableStavesBrowingOrderKinds (size_t namesListMaxLength);
+std::string availableStavesBrowingOrderKindsNames (size_t namesListMaxLength);
+
+//______________________________________________________________________________
 class EXP msrScore : public msrBookElement
 {
   public:
@@ -270,7 +296,17 @@ class EXP msrScore : public msrBookElement
                                   fInhibitMultipleFullBarRestsBrowsing;
                               };
 
-    // voices
+    // staves browsing order
+
+    void                  setStavesBrowingOrderKind (
+                            msrStavesBrowingOrderKind stavesBrowingOrderKind)
+                              { fStavesBrowingOrderKind = stavesBrowingOrderKind; }
+
+    msrStavesBrowingOrderKind
+                          getStavesBrowingOrderKind () const
+                              { return fStavesBrowingOrderKind; }
+
+    // score voices
 
     const std::list<S_msrVoice>&
                           getScoreAllVoicesList () const
@@ -410,7 +446,12 @@ class EXP msrScore : public msrBookElement
     // whereas LilyPond only needs the number of multiple full-bar rests
     Bool                  fInhibitMultipleFullBarRestsBrowsing;
 
-    // voices
+    // staves browsing order
+
+    msrStavesBrowingOrderKind
+                          fStavesBrowingOrderKind;
+
+    // score voices
 
     std::list<S_msrVoice> fScoreAllVoicesList;
 

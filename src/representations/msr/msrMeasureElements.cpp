@@ -73,7 +73,7 @@ void msrMeasureElement::doSetSoundingWholeNotes (
   const std::string&   context)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceNoteDurations ()) {
+  if (gTraceOahGroup->getTraceWholeNoteDurations ()) {
     ++gIndenter;
 
     S_msrMeasure upLinkToMeasure;

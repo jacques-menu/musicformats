@@ -1465,7 +1465,7 @@ void msdlParser::parse ()
 #endif // MF_TRACE_IS_ENABLED
 
     // should we display the MSR score?
-    if (gMsrOahGroup->getDisplayMsr ()) { // JMI CAFE
+    if (gMsrOahGroup->getDisplayMsr ()) { // JMI v0.9.67
       gLog <<
         std::endl <<
         "*** Built MSR score: ***" <<

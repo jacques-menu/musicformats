@@ -411,7 +411,7 @@ class EXP lilypondAbsoluteOctaveEntryAtom : public oahValueLessAtom
 
     void                  applyAtomWithValue (
                             const std::string& theString,
-                            std::ostream&      os); // JMI CAFE override ??? remove method ???
+                            std::ostream&      os); // JMI v0.9.67 override ??? remove method ???
                             // returns an error
 
   public:

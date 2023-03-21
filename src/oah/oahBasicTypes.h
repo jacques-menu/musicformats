@@ -553,6 +553,9 @@ class EXP oahAtom : public oahElement
     // print
     // ------------------------------------------------------
 
+//     virtual std::string   asString () const override;
+//     virtual std::string   asShortString () const;
+
     void                  print (std::ostream& os) const override;
     void                  printFull (std::ostream& os) const override;
 

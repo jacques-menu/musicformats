@@ -758,7 +758,7 @@ void msrPartGroup::printPartGroupElementsListFull (
             dynamic_cast<msrPartGroup*>(&(*element))
         ) {
         // this is a part group
-//         gLog << // KAKA
+//         gLog << // JMI v0.9.67
 //           nestedPartGroup->
 //             getPartGroupCombinedNameWithoutEndOfLines () <<
 //           std::endl;
@@ -837,7 +837,7 @@ void msrPartGroup::printPartGroupElementsList (
             dynamic_cast<msrPartGroup*>(&(*element))
         ) {
         // this is a part group
-//         gLog << // KAKA
+//         gLog << // JMI v0.9.67
 //           nestedPartGroup->
 //             getPartGroupCombinedNameWithoutEndOfLines () <<
 //           std::endl;

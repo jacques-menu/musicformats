@@ -1279,8 +1279,6 @@ class EXP mxsr2msrTranslator :
 
     int                       fCurrentMusicXMLVoiceNumber; // used throughout
 
-    // dal segnos
-    int                       fPreviousMusicXMLVoiceNumber;
     S_msrMeasureElement       fPreviousMeasureElement;
 
     S_msrVoice                fetchVoiceFromCurrentPart (
@@ -1290,6 +1288,26 @@ class EXP mxsr2msrTranslator :
 
     S_msrVoice                fetchFirstVoiceFromCurrentPart (
                                 int inputLineNumber);
+
+    // staff changes detection
+    // ------------------------------------------------------
+
+    // MusicXMl contains sequences of elements on one and the same staff,
+    // until a <backup/> or <forward/> markup may change the latter;
+    // we keep track of the current sequence staff number
+    // for the previous and current notes:
+    // a staff change occurs when they are different,
+    // but the note itself keeps its staff number in that case
+
+    int                       fPreviousNoteMusicXMLStaffNumber;
+    int                       fPreviousNoteMusicXMLVoiceNumber;
+
+    // cross staff chords
+    int                       fCurrentChordStaffNumber;
+    Bool                      fCurrentNoteIsCrossStaves;
+
+    msrStaffChangeKind        fCurrentStaffChangeKind;
+
 
     // clef handling
     // ------------------------------------------------------
@@ -1391,7 +1409,8 @@ class EXP mxsr2msrTranslator :
     // rehearsal marks remain pending until the next note:
     // in MusicXML, they precede the note and
     // may occur when no current voice exists
-    std::list<S_msrRehearsalMark>  fPendingRehearsalMarksList;
+    std::list<S_msrRehearsalMark>
+                              fPendingRehearsalMarksList;
 
     void                      attachPendingRehearsalMarksToVoice (
                                 const S_msrVoice& voice);
@@ -1964,25 +1983,6 @@ class EXP mxsr2msrTranslator :
 
     S_msrNote                 fCurrentNonGraceNote;
 
-    // staff
-    // notes always keep their initial staff number
-    int                       fPreviousNoteMusicXMLStaffNumber;
-
-    // staff changes
-    // MusicXMl contains sequences of elements on one and the same staff,
-    // until a <backup/> or <forward/> markup may change the latter;
-    // we keep track of the current sequence staff number
-    // for the previous and current notes:
-    // a staff change occurs when they are different,
-    // but the note itself keeps its staff number in that case
-//     int                       fCurrentStaffNumberToInsertInto;
-
-    // cross staff chords
-    int                       fCurrentChordStaffNumber;
-    Bool                      fCurrentNoteIsCrossStaves;
-
-    msrStaffChangeKind        fCurrentStaffChangeKind;
-
     // elements attached to the note
     S_msrStem                 fCurrentStem;
 
@@ -1996,6 +1996,9 @@ class EXP mxsr2msrTranslator :
     void                      handleNoteItself (
                                 int              inputLineNumber,
                                 const S_msrNote& newNote);
+
+    void                      attachPendingGraceNotesGroupToNoteIfRelevant (
+                                int inputLineNumber);
 
     // detailed notes handling
     void                      handleNonChordNorTupletNoteOrRest (
@@ -2212,7 +2215,8 @@ class EXP mxsr2msrTranslator :
     std::list<S_msrSpanner>   fCurrentSpannersList;
 
     void                      attachCurrentSpannersToNote (
-                                const S_msrNote& note);
+                                const S_msrNote&   note,
+                                const std::string& context);
 
     void                      copyNoteSpannersToChord (
                                 const S_msrNote&  note,
@@ -2449,21 +2453,20 @@ class EXP mxsr2msrTranslator :
     int                       fCurrentBackupDivisions;
     Bool                      fOnGoingBackup;
 
-    void                      handleBackup (
-                                int inputLineNumber);
-
-    void                      attachPendingGraceNotesGroupToNoteIfRelevant (
-                                int inputLineNumber);
+//     void                      handleBackup (
+//                                 int inputLineNumber);
 
     // forward handling
     // ------------------------------------------------------
 
     int                       fCurrentForwardDivisions;
+    Bool                      fOnGoingForward;
 
     int                       fCurrentForwardStaffNumber;
     int                       fCurrentForwardVoiceNumber;
 
-    Bool                      fOnGoingForward;
+//     void                      handleForward (
+//                                 int inputLineNumber);
 
 
     // current ongoing values display

@@ -163,7 +163,7 @@ class EXP msrSpanner : public msrElement
     // print
     // ------------------------------------------------------
 
-    std::string           asShortString () const override;
+    std::string           asString () const override;
 
     void                  print (std::ostream& os) const override;
 

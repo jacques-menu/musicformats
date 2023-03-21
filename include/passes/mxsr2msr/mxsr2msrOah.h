@@ -233,14 +233,14 @@ class EXP mxsr2msrOahGroup : public oahGroup
     // page and line breaks
     // --------------------------------------
 
-    Bool                  getIgnorePageBreaksInMusicXML () const
-                              { return fIgnorePageBreaksInMusicXML; }
+    Bool                  getIgnoreMusicXMLPageBreaks () const
+                              { return fIgnoreMusicXMLPageBreaks; }
 
     // line breaks
     // --------------------------------------
 
-    Bool                  getIgnoreLineBreaksInMusicXML () const
-                              { return fIgnoreLineBreaksInMusicXML; }
+    Bool                  getIgnoreMusicXMLLineBreaks () const
+                              { return fIgnoreMusicXMLLineBreaks; }
 
     // measures
     // --------------------------------------
@@ -615,12 +615,12 @@ class EXP mxsr2msrOahGroup : public oahGroup
     // page and line breaks
     // --------------------------------------
 
-    Bool                  fIgnorePageBreaksInMusicXML;
+    Bool                  fIgnoreMusicXMLPageBreaks;
 
     // line breaks
     // --------------------------------------
 
-    Bool                  fIgnoreLineBreaksInMusicXML;
+    Bool                  fIgnoreMusicXMLLineBreaks;
 
     // measures
     // --------------------------------------

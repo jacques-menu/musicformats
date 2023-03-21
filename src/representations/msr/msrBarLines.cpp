@@ -618,8 +618,16 @@ std::string msrBarLine::asShortString () const
   ss <<
     "[BarLine " <<
     msrBarLineCategoryKindAsString (fBarLineCategoryKind) <<
-    ", measureNumber: " <<
-    fBarLineUpLinkToMeasure->getMeasureNumber () <<
+    ", measureNumber: ";
+  if (fBarLineUpLinkToMeasure) {
+    ss <<
+      fBarLineUpLinkToMeasure->getMeasureNumber ();
+  }
+  else {
+    ss << "[UNKNOWN]";
+  }
+
+  ss <<
     ", fMeasurePosition " <<
     fMeasurePosition.asString () <<
 

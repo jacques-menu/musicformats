@@ -529,7 +529,7 @@ R"(
 void lpsrScore::setScmAndAccregSchemeModulesAreNeeded ()
 {
   if (! fScmAndAccregSchemeModulesAreNeeded) {
-    // KAKA addAccordionRegistrationSchemeModulesToScore (); // JMI
+    // JMI v0.9.67 addAccordionRegistrationSchemeModulesToScore (); // JMI
 
     fScmAndAccregSchemeModulesAreNeeded = true;
   }
@@ -1735,7 +1735,7 @@ void lpsrScore::setScoopSchemeFunctionIsNeeded ()
 
 void lpsrScore::addScoopSchemeFunctionToScore ()
 {
-  // JMI KAKA, check that scoops are up or down?
+  // JMI v0.9.67, check that scoops are up or down?
   std::string
     schemeFunctionName =
       "scoop_stencils",

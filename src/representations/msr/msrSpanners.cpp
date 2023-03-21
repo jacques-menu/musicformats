@@ -222,7 +222,7 @@ std::ostream& operator << (std::ostream& os, const msrSpannerKind& elt)
   return os;
 }
 
-std::string msrSpanner::asShortString () const
+std::string msrSpanner::asString () const
 {
   std::stringstream ss;
 
@@ -232,6 +232,9 @@ std::string msrSpanner::asShortString () const
     ", fSpannerKind: " << fSpannerKind <<
     ", fSpannerPlacementKind: " << fSpannerPlacementKind <<
     ", fSpannerTypeKind: " << fSpannerTypeKind <<
+    ", fSpannerBeginText: " << fSpannerBeginText <<
+    ", fSpannerMiddleText: " << fSpannerMiddleText <<
+    ", fSpannerEndText: " << fSpannerEndText <<
     ", line " << fInputLineNumber <<
     ']';
 

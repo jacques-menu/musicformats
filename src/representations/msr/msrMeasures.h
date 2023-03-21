@@ -312,7 +312,8 @@ class EXP msrMeasure : public msrSegmentElement
 
     void                  padUpToPositionAtTheEndOfTheMeasure (
                             int                  inputLineNumber,
-                            const msrWholeNotes& measurePositionToPadUpTo);
+                            const msrWholeNotes& measurePositionToPadUpTo,
+                            const std::string&   context);
 
     void                  backupByWholeNotesStepLengthInMeasure (
                             int                  inputLineNumber,
@@ -829,13 +830,14 @@ class EXP msrMeasure : public msrSegmentElement
 
     // measure elements
     void                  insertElementInMeasureBeforeIterator (
-                            int                                      inputLineNumber,
+                            int                        inputLineNumber,
                             std::list<S_msrMeasureElement>::iterator iter,
-                            const S_msrMeasureElement&               elem);
+                            const S_msrMeasureElement& elem);
 
     void                  insertElementInMeasureBeforeReverseIterator (
                             int                        inputLineNumber,
-                            std::list<S_msrMeasureElement>::reverse_iterator iter,
+                            std::list<S_msrMeasureElement>::reverse_iterator
+                                                       iter,
                             const S_msrMeasureElement& elem);
 
     void                  appendElementAtTheEndOfMeasure (

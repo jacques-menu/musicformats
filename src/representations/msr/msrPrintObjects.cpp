@@ -24,17 +24,12 @@ namespace MusicFormats
 // print object
 //______________________________________________________________________________
 msrPrintObjectKind msrPrintObjectKindFromString (
-  int           inputLineNumber,
+  int                inputLineNumber,
   const std::string& printObjectString)
 {
   msrPrintObjectKind
     result =
-      msrPrintObjectKind::kPrintObjectNone; // default value JMI v0.9.65
-
-//   gLog << // JMI TEST JMI v0.9.65
-//     "printObjectString: " <<
-//     printObjectString <<
-//     std::endl;
+      msrPrintObjectKind::kPrintObjectYes; // default value
 
   if      (printObjectString == "yes")
     result = msrPrintObjectKind::kPrintObjectYes;
@@ -65,9 +60,6 @@ std::string msrPrintObjectKindAsString (
   std::string result;
 
   switch (printObjectKind) {
-    case msrPrintObjectKind::kPrintObjectNone:
-      result = "kPrintObjectNone***";
-      break;
     case msrPrintObjectKind::kPrintObjectYes:
       result = "kPrintObjectYes";
       break;

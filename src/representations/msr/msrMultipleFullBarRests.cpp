@@ -410,7 +410,7 @@ void msrMultipleFullBarRests::browseData (basevisitor* v)
   }
 #endif // MF_TRACE_IS_ENABLED
 
- // JMI   if (! inhibitMultipleFullBarRestsBrowsing) { // KAKA
+ // JMI   if (! inhibitMultipleFullBarRestsBrowsing) { // JMI v0.9.67
   // browse the multiple full-bar rests measures
   for (S_msrMeasure measure : fFullBarRestsMeasuresList) {
     // browse the measure
@@ -450,7 +450,7 @@ std::string msrMultipleFullBarRests::asString () const
 
   if (fMultipleFullBarRestsUpLinkToSegment) {
     ss <<
-      "fMultipleFullBarRestsUpLinkToSegment->asString ()"; // KAKA
+      "fMultipleFullBarRestsUpLinkToSegment->asString ()"; // JMI v0.9.67
   }
   else {
     ss << "[NULL]";
@@ -555,7 +555,7 @@ void msrMultipleFullBarRests::print (std::ostream& os) const
     os << std::endl;
     ++gIndenter;
 
-    os << "fMultipleFullBarRestsUpLinkToSegment" << std::endl; // KAKA v0.9.66
+    os << "fMultipleFullBarRestsUpLinkToSegment" << std::endl; // JMI v0.9.67 v0.9.66
 
     --gIndenter;
   }

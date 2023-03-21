@@ -308,7 +308,12 @@ if (false) // JMI
   fStaffBlocksCounter          =  0;
 
   if (fVisitedLpsrScore) {
-    // browse a msrScore browser
+     // set the parts browsing order
+    theMsrScore->
+      setStavesBrowingOrderKind (
+        msrStavesBrowingOrderKind::kStavesBrowingOrderHarmoniesFiguredBassesRegulars);
+
+   // browse a msrScore browser
     lpsrBrowser<lpsrScore> browser (this);
     browser.browse (*fVisitedLpsrScore);
   }
@@ -2239,10 +2244,6 @@ void lpsr2lilypondTranslator::generateCodeForNoteRestInMeasure (
           note->getNotePrintObjectKind ();
 
       switch (notePrintObjectKind) {
-        case msrPrintObjectKind::kPrintObjectNone:
-          fLilypondCodeStream <<
-            "{% msrPrintObjectKind::kPrintObjectNone ??? %}";
-          break;
         case msrPrintObjectKind::kPrintObjectYes:
           fLilypondCodeStream <<
             "r";
@@ -4023,7 +4024,7 @@ void lpsr2lilypondTranslator::generateOrnament (
       }
       break;
 
-/* JMI
+/* JMI v0.9.67
     case msrOrnamentKind::kOrnamentDashes:
       if (! ornamentUpLinkToNote->getNoteWavyLineSpannerStart ()) {
         fLilypondCodeStream <<
@@ -4295,14 +4296,80 @@ void lpsr2lilypondTranslator::generateOrnament (
 
 //________________________________________________________________________
 void lpsr2lilypondTranslator::generateCodeForSpannerBeforeNote (
-  const S_msrSpanner& spanner)
+  const S_msrSpanner& spanner,
+  const S_msrNote     note)
 {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceSpanners ()) {
+    std::stringstream ss;
+
+    ss <<
+      "Generating code for spanner " <<
+      spanner->getSpannerKind () <<
+      " before note " <<
+      note->asString () <<
+      ", line " <<
+      spanner->getInputLineNumber () <<
+      std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
   msrSpannerTypeKind
     spannerTypeKind =
       spanner->getSpannerTypeKind ();
 
-  switch (spanner->getSpannerKind ()) {
+  // should tweaks be generated for the various spanner texts?
+  switch (spannerTypeKind) {
+    case msrSpannerTypeKind::kSpannerTypeStart:
+      {
+        // handle spanner begin text if not empty
+        std::string spannerBeginText = spanner->getSpannerBeginText ();
 
+        if (spannerBeginText.size ()) {
+          fLilypondCodeStream <<
+             "-\\tweak bound-details.left.text \\markup { \"" <<
+             spannerBeginText <<
+             "\" }" <<
+            std::endl;
+        }
+
+        // handle spanner middle text if not empty
+        std::string spannerMiddleText = spanner->getSpannerMiddleText ();
+
+        if (spannerMiddleText.size ()) {
+          fLilypondCodeStream <<
+             "\\TextSpannerWithCenteredText \"" << // JMI
+             spannerMiddleText <<
+             "\"" <<
+            std::endl;
+        }
+
+        // handle spanner end text if not empty
+        std::string spannerEndText = spanner->getSpannerEndText ();
+
+        if (spannerEndText.size ()) {
+          fLilypondCodeStream <<
+             "-\\tweak bound-details.right.text \\markup { \"" <<
+             spannerEndText <<
+             "\" }" <<
+            std::endl;
+        }
+      }
+      break;
+
+    case msrSpannerTypeKind::kSpannerTypeStop:
+      break;
+    case msrSpannerTypeKind::kSpannerTypeContinue:
+      break;
+    case msrSpannerTypeKind::kSpannerType_UNKNOWN_:
+      break;
+  } // switch
+
+  switch (spanner->getSpannerKind ()) {
     case msrSpannerKind::kSpannerDashes:
       switch (spannerTypeKind) {
         case msrSpannerTypeKind::kSpannerTypeStart:
@@ -4369,60 +4436,55 @@ void lpsr2lilypondTranslator::generateCodeForSpannerBeforeNote (
 
 //________________________________________________________________________
 void lpsr2lilypondTranslator::generateCodeForSpannerAfterNote (
-  const S_msrSpanner& spanner)
+  const S_msrSpanner& spanner,
+  const S_msrNote     note)
 {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceSpanners ()) {
+    std::stringstream ss;
+
+    ss <<
+      "Generating code for spanner " <<
+      spanner->getSpannerKind () <<
+      " after note " <<
+      note->asString () <<
+      ", line " <<
+      spanner->getInputLineNumber () <<
+      std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  // handling the spanner type kind // JMI ??? v0.9.67
   msrSpannerTypeKind
     spannerTypeKind =
       spanner->getSpannerTypeKind ();
 
-  // should tweaks be generated for the various spanner texts?
   switch (spannerTypeKind) {
     case msrSpannerTypeKind::kSpannerTypeStart:
-      {
-        // handle spanner begin text if not empty
-        std::string spannerBeginText = spanner->getSpannerBeginText ();
-
-        if (spannerBeginText.size ()) {
-          fLilypondCodeStream <<
-             "-\\tweak bound-details.left.text \\markup { \"" <<
-             spannerBeginText <<
-             "\" }" <<
-            std::endl;
-        }
-
-        // handle spanner middle text if not empty
-        std::string spannerMiddleText = spanner->getSpannerMiddleText ();
-
-        if (spannerMiddleText.size ()) {
-          fLilypondCodeStream <<
-             "\\TextSpannerWithCenteredText \"" << // JMI
-             spannerMiddleText <<
-             "\"" <<
-            std::endl;
-        }
-
-        // handle spanner end text if not empty
-        std::string spannerEndText = spanner->getSpannerEndText ();
-
-        if (spannerEndText.size ()) {
-          fLilypondCodeStream <<
-             "-\\tweak bound-details.right.text \\markup { \"" <<
-             spannerEndText <<
-             "\" }" <<
-            std::endl;
-        }
-      }
+      // JMI ??? v0.9.67
       break;
 
     case msrSpannerTypeKind::kSpannerTypeStop:
+      // JMI ??? v0.9.67
       break;
     case msrSpannerTypeKind::kSpannerTypeContinue:
+      // JMI ??? v0.9.67
       break;
     case msrSpannerTypeKind::kSpannerType_UNKNOWN_:
+      // JMI ??? v0.9.67
       break;
   } // switch
 
-  switch (spanner->getSpannerKind ()) {
+  // handling the spanner kind
+  msrSpannerKind
+    spannerKind =
+      spanner->getSpannerKind ();
+
+  switch (spannerKind) {
     case msrSpannerKind::kSpannerDashes:
       switch (spannerTypeKind) {
         case msrSpannerTypeKind::kSpannerTypeStart:
@@ -4469,7 +4531,7 @@ void lpsr2lilypondTranslator::generateCodeForSpannerAfterNote (
                   getSpannerSideLinkToOtherEnd ();
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
-  // sanity check
+            // sanity check
             mfAssert (
               __FILE__, __LINE__,
               spannerStartEnd != nullptr,
@@ -4477,14 +4539,53 @@ void lpsr2lilypondTranslator::generateCodeForSpannerAfterNote (
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
             // has the start end a trill ornament?
-            if (spannerStartEnd->getSpannerUpLinkToNote ()->getNoteTrillOrnament ()) {
-              fLilypondCodeStream <<
-                "\\stopTrillSpan ";
+            if (fPendingTrillSpannerForStop) { // JMI v0.9.67
+#ifdef MF_TRACE_IS_ENABLED
+              if (gTraceOahGroup->getTraceSpanners ()) {
+                std::stringstream ss;
+
+                ss <<
+                  "Generating code for pending spanner " <<
+                  fPendingTrillSpannerForStop->getSpannerKind () <<
+                  std::endl;
+
+                gWaeHandler->waeTrace (
+                  __FILE__, __LINE__,
+                  ss.str ());
+              }
+#endif // MF_TRACE_IS_ENABLED
+
+              if (spannerStartEnd->getSpannerUpLinkToNote ()->getNoteTrillOrnament ()) {
+                fLilypondCodeStream <<
+                  "\\stopTrillSpan %{ generateCodeForSpannerAfterNote() %} ";
+              }
+              else {
+                fLilypondCodeStream <<
+                  "\\stopTextSpan %{ generateCodeForSpannerAfterNote() %} ";
+              }
+
+              fPendingTrillSpannerForStop = nullptr;
             }
             else {
-              fLilypondCodeStream <<
-                "\\stopTextSpan ";
+#ifdef MF_TRACE_IS_ENABLED
+              if (gTraceOahGroup->getTraceSpanners ()) {
+                std::stringstream ss;
+
+                ss <<
+                  "Spanner " <<
+                  spanner->getSpannerKind () <<
+                  " becomes pending" <<
+                  std::endl;
+
+                gWaeHandler->waeTrace (
+                  __FILE__, __LINE__,
+                  ss.str ());
+              }
+#endif // MF_TRACE_IS_ENABLED
+
+              fPendingTrillSpannerForStop = spanner;
             }
+
             fOnGoingTrillSpanner = false;
           }
           break;
@@ -4495,22 +4596,6 @@ void lpsr2lilypondTranslator::generateCodeForSpannerAfterNote (
       } // switch
       break;
   } // switch
-
-/*
-\version "2.19.25"
-
-{
-  c' d' ees' fis'
-  \once \override TextSpanner.direction = #DOWN
-
-  \TextSpannerWithCenteredText "6\""
-  g' \startTextSpan
-  a' bes' c'' \stopTextSpan
-
-  \TextSpannerWithCenteredText "x3"
-  bes'\startTextSpan a' g' c' | r1 \stopTextSpan
-}
-*/
 }
 
 //________________________________________________________________________
@@ -5585,27 +5670,27 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrScore& elt)
   // global staff size
   generateGlobalStaffSize ();
 
-  // generate myBreak if relevant
-  if (! gGlobalLpsr2lilypondOahGroup->getIgnoreLpsrLineBreaks ()) {
-    fLilypondCodeStream <<
-      "% Pick your choice from the next two lines as needed" <<
-      std::endl <<
-      "%myBreak = { \\break }" <<
-      std::endl <<
-      "myBreak = {}" <<
-      std::endl << std::endl;
-  }
-
-  // generate myPageBreak if relevant
-  if (! gGlobalLpsr2lilypondOahGroup->getIgnoreLpsrPageBreaks ()) {
-    fLilypondCodeStream <<
-      "% Pick your choice from the next two lines as needed" <<
-      std::endl <<
-      "%myPageBreak = { \\pageBreak }" <<
-      std::endl <<
-      "myPageBreak = {}" <<
-      std::endl << std::endl;
-  }
+//   // generate myBreak if relevant JMI v0.9.67
+//   if (! gGlobalLpsr2lilypondOahGroup->getIgnoreLpsrLineBreaks ()) {
+//     fLilypondCodeStream <<
+//       "% Pick your choice from the next two lines as needed" <<
+//       std::endl <<
+//       "%myBreak = { \\break }" <<
+//       std::endl <<
+//       "myBreak = {}" <<
+//       std::endl << std::endl;
+//   }
+//
+//   // generate myPageBreak if relevant
+//   if (! gGlobalLpsr2lilypondOahGroup->getIgnoreLpsrPageBreaks ()) {
+//     fLilypondCodeStream <<
+//       "% Pick your choice from the next two lines as needed" <<
+//       std::endl <<
+//       "%myPageBreak = { \\pageBreak }" <<
+//       std::endl <<
+//       "myPageBreak = {}" <<
+//       std::endl << std::endl;
+//   }
 
   // generate a 'global' variable?
   if (gGlobalLpsr2lilypondOahGroup->getGlobal ()) {
@@ -11776,9 +11861,31 @@ void lpsr2lilypondTranslator::visitStart (S_msrVoiceStaffChange& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gTraceOahGroup->getTraceStaffChanges ()) { JMI v0.9.67
+//     std::stringstream ss;
+//
+//     ss <<
+//       "*** There is staff change for chord member note '" <<
+//       newNote->asShortString () <<
+//       "' in voice \"" <<
+//       voiceToInsertInto->getVoiceName () <<
+//       "\"" <<
+//       " from staff " << fPreviousNoteMusicXMLStaffNumber <<
+//       " to staff " << fCurrentMusicXMLStaffNumber <<
+//       ", \"" << staffToChangeTo->getStaffName () << "\"" <<
+//       ", line " << inputLineNumber <<
+//       std::endl;
+//
+//     gWaeHandler->waeTrace (
+//       __FILE__, __LINE__,
+//       ss.str ());
+//   }
+// #endif // MF_TRACE_IS_ENABLED
+
   fLilypondCodeStream <<
     std::endl <<
-    "\\change Staff=\"" <<
+    "\\change Staff = \"" <<
     elt->getStaffToChangeTo ()->getStaffName () <<
     "\"";
 
@@ -12477,8 +12584,18 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
     ss <<
 //       std::endl <<
       "<!--=== " <<
-      "part \"" << fCurrentPart->getPartName () << "\"" <<
-      " (partID \"" << fCurrentPart->getPartID () << "\")" <<
+      "part ";
+
+    if (fCurrentPart) {
+      ss <<
+        "\"" << fCurrentPart->getPartName () << "\"" <<
+        " (partID \"" << fCurrentPart->getPartID () << "\")";
+    }
+    else {
+      ss << "fCurrentPart is [NULL]";
+    }
+
+    ss <<
       ", measure \"" << measureNumber << "\"" <<
       ", measureEndRegularKind = '" << measureEndRegularKind <<
       ", measurePuristNumber = '" << measurePuristNumber <<
@@ -12918,13 +13035,23 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMeasure& elt)
     ss <<
 //       std::endl <<
       "<!--=== " <<
-      "part \"" << fCurrentPart->getPartName () << "\"" <<
-      " (partID \"" << fCurrentPart->getPartID () << "\")" <<
+      "part ";
+
+    if (fCurrentPart) {
+      ss <<
+        "\"" << fCurrentPart->getPartName () << "\"" <<
+        " (partID \"" << fCurrentPart->getPartID () << "\")";
+    }
+    else {
+      ss << "fCurrentPart is [NULL]";
+    }
+
+    ss <<
       ", measure \"" << measureNumber << "\"" <<
       ", measureEndRegularKind: " << measureEndRegularKind <<
-      ", measurePuristNumber: '" << measurePuristNumber << "'" <<
+      ", measurePuristNumber: " << measurePuristNumber << "'" <<
       ", fOnGoingMultipleFullBarRests: " << fOnGoingMultipleFullBarRests <<
-      "', line " << inputLineNumber <<
+      ", line " << inputLineNumber <<
       " ===-->" <<
       std::endl;
 
@@ -12933,6 +13060,52 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMeasure& elt)
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
+
+  // is there a pending trill spanner for stop?
+  if (fPendingTrillSpannerForStop) { // JMI v0.9.67
+#ifdef MF_TRACE_IS_ENABLED
+    if (gTraceOahGroup->getTraceSpanners ()) {
+      std::stringstream ss;
+
+      ss <<
+        "Generating code for pending spanner " <<
+        fPendingTrillSpannerForStop->getSpannerKind () <<
+        " upon the end of measure " <<
+        measureNumber <<
+        ", line " << inputLineNumber <<
+        std::endl;
+
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
+    }
+#endif // MF_TRACE_IS_ENABLED
+
+    // get spanner start end
+    S_msrSpanner
+      spannerStartEnd =
+        fPendingTrillSpannerForStop->
+          getSpannerSideLinkToOtherEnd ();
+
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
+    // sanity check
+    mfAssert (
+      __FILE__, __LINE__,
+      spannerStartEnd != nullptr,
+      "spannerStartEnd is null");
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
+
+    if (spannerStartEnd->getSpannerUpLinkToNote ()->getNoteTrillOrnament ()) {
+      fLilypondCodeStream <<
+        "\\stopTrillSpan %{ lpsr2lilypondTranslator::visitEnd (S_msrMeasure& elt) %} ";
+    }
+    else {
+      fLilypondCodeStream <<
+        "\\stopTextSpan %{ lpsr2lilypondTranslator::visitEnd (S_msrMeasure& elt) %} ";
+    }
+
+    fPendingTrillSpannerForStop = nullptr;
+  }
 
   if (! fOnGoingMultipleFullBarRests) {
     // handle the measure
@@ -17921,37 +18094,10 @@ void lpsr2lilypondTranslator::generateBeforeNoteSpannersIfAny (
       note->getNoteSpanners ();
 
   if (noteSpanners.size ()) {
-    std::list<S_msrSpanner>::const_iterator i;
-    for (
-      i=noteSpanners.begin ();
-      i!=noteSpanners.end ();
-      ++i
-    ) {
-      S_msrSpanner
-        spanner = (*i);
-
-      Bool doGenerateSpannerCode (true);
-
-      switch (spanner->getSpannerKind ()) {
-        case msrSpannerKind::kSpannerDashes:
-          break;
-        case msrSpannerKind::kSpannerWavyLine:
-          if (spanner->getSpannerUpLinkToNote ()->getNoteTrillOrnament ()) {
-            // don't generate anything, the trill will display the wavy line
-            doGenerateSpannerCode = false;
-          }
-          break;
-      } // switch
-
-      if (doGenerateSpannerCode) {
-        switch (spanner->getSpannerKind ()) {
-          case msrSpannerKind::kSpannerDashes:
-          case msrSpannerKind::kSpannerWavyLine:
-            break;
-        } // switch
-
-        generateCodeForSpannerBeforeNote (spanner);
-      }
+    for (S_msrSpanner spanner : noteSpanners) {
+      generateCodeForSpannerBeforeNote (
+        spanner,
+        note);
     } // for
   }
 }
@@ -17965,37 +18111,10 @@ void lpsr2lilypondTranslator::generateAfterNoteSpannersIfAny (
       note->getNoteSpanners ();
 
   if (noteSpanners.size ()) {
-    std::list<S_msrSpanner>::const_iterator i;
-    for (
-      i=noteSpanners.begin ();
-      i!=noteSpanners.end ();
-      ++i
-    ) {
-      S_msrSpanner
-        spanner = (*i);
-
-      Bool doGenerateSpannerCode (true);
-
-      switch (spanner->getSpannerKind ()) {
-        case msrSpannerKind::kSpannerDashes:
-          break;
-        case msrSpannerKind::kSpannerWavyLine:
-          if (spanner->getSpannerUpLinkToNote ()->getNoteTrillOrnament ()) {
-            // don't generate anything, the trill will display the wavy line
-            doGenerateSpannerCode = false;
-          }
-          break;
-      } // switch
-
-      if (doGenerateSpannerCode) {
-        switch (spanner->getSpannerKind ()) {
-          case msrSpannerKind::kSpannerDashes:
-          case msrSpannerKind::kSpannerWavyLine:
-            break;
-        } // switch
-
-        generateCodeForSpannerAfterNote (spanner);
-      }
+    for (S_msrSpanner spanner : noteSpanners) {
+      generateCodeForSpannerAfterNote (
+        spanner,
+        note);
     } // for
   }
 }
@@ -18346,9 +18465,6 @@ void lpsr2lilypondTranslator::visitStart (S_msrNote& elt)
 
   if (notePrintObjectKind != fCurrentNotePrinObjectKind) {
     switch (notePrintObjectKind) {
-      case msrPrintObjectKind::kPrintObjectNone:
-        // JMI
-        break;
       case msrPrintObjectKind::kPrintObjectYes:
         break;
       case msrPrintObjectKind::kPrintObjectNo:
@@ -19167,36 +19283,36 @@ void lpsr2lilypondTranslator::visitEnd (S_msrNote& elt)
     switch (elt->getNoteKind ()) {
       case msrNoteKind::kNoteRestInMeasure:
         // don't handle multiple full-bar restss, that's done in visitEnd (S_msrMultipleFullBarRests&)
-          if (elt->getNoteOccupiesAFullMeasure ()) {
-            Bool inhibitMultipleFullBarRestsBrowsing =
-              fVisitedLpsrScore->
-                getMsrScore ()->
-                  getInhibitMultipleFullBarRestsBrowsing ();
+        if (elt->getNoteOccupiesAFullMeasure ()) {
+          Bool inhibitMultipleFullBarRestsBrowsing =
+            fVisitedLpsrScore->
+              getMsrScore ()->
+                getInhibitMultipleFullBarRestsBrowsing ();
 
-            if (inhibitMultipleFullBarRestsBrowsing) {
+          if (inhibitMultipleFullBarRestsBrowsing) {
 #ifdef MF_TRACE_IS_ENABLED
-              if (
-                gTraceOahGroup->getTraceNotes ()
-                  ||
-                gTraceOahGroup->getTraceMultipleFullBarRests ()
-              ) {
-                gLog <<
-                  "% ==> end visiting multiple full-bar rests is ignored" <<
-                  std::endl;
-              }
-#endif // MF_TRACE_IS_ENABLED
-
-#ifdef MF_TRACE_IS_ENABLED
-              if (gTraceOahGroup->getTraceNotesDetails ()) {
-                gLog <<
-                  "% ==> returning from visitEnd (S_msrNote&)" <<
-                  std::endl;
-              }
-#endif // MF_TRACE_IS_ENABLED
-
-              noteIsToBeIgnored = true;
+            if (
+              gTraceOahGroup->getTraceNotes ()
+                ||
+              gTraceOahGroup->getTraceMultipleFullBarRests ()
+            ) {
+              gLog <<
+                "% ==> end visiting multiple full-bar rests is ignored" <<
+                std::endl;
             }
+#endif // MF_TRACE_IS_ENABLED
+
+#ifdef MF_TRACE_IS_ENABLED
+            if (gTraceOahGroup->getTraceNotesDetails ()) {
+              gLog <<
+                "% ==> returning from visitEnd (S_msrNote&)" <<
+                std::endl;
+            }
+#endif // MF_TRACE_IS_ENABLED
+
+            noteIsToBeIgnored = true;
           }
+        }
         break;
 
       case msrNoteKind::kNoteSkipInMeasure:
@@ -19534,7 +19650,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrNote& elt)
       S_msrOrnament
         ornament = (*i);
 
-      generateOrnament (ornament); // some ornaments are not yet supported
+      generateOrnament (ornament); // some ornaments are not yet supportedb JMI v0.9.67
     } // for
   }
 
@@ -22713,7 +22829,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrLineBreak& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  // enforce a page break here, not \myBreak // JMI
+  // generate a page break
   fLilypondCodeStream <<
     "\\break | % " << elt->getNextBarNumber ();
 

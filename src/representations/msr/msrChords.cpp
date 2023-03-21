@@ -802,11 +802,10 @@ void msrChord::appendSpannerToChord (
     std::stringstream ss;
 
     ss <<
-      "Appending spanner '" <<
-      span->getSpannerKind () <<
-      "' to chord '" <<
+      "Appending spanner " <<
+      span->asString () <<
+      " to chord " <<
       asString () <<
-      "'" <<
       std::endl;
 
     gWaeHandler->waeTrace (
