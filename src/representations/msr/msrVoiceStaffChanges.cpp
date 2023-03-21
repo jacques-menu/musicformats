@@ -210,10 +210,11 @@ std::string msrVoiceStaffChange::asString () const
   std::stringstream ss;
 
   ss <<
-    "VoiceStaffChange" <<
+    "[VoiceStaffChange" <<
     ", line " << fInputLineNumber <<
     ", " <<
-    "staffToChangeTo: \"" << fStaffToChangeTo->getStaffName () << "\"";
+    "staffToChangeTo: \"" << fStaffToChangeTo->getStaffName () << "\"" <<
+    ']';
 
   return ss.str ();
 }

@@ -274,8 +274,8 @@ class EXP msrPart : public msrPartGroupElement
                             int indexValue) const;
 
     void                  registerOrdinalMeasureNumberWholeNotes (
-                            int             inputLineNumber,
-                            int             measureOrdinalNumber,
+                            int                  inputLineNumber,
+                            int                  measureOrdinalNumber,
                             const msrWholeNotes& wholeNotes);
 
     // path shortest note
@@ -529,8 +529,9 @@ class EXP msrPart : public msrPartGroupElement
     std::string           asString () const override;
 
     void                  printPartMeasuresWholeNotessVector (
-                            std::ostream& os,
-                            int           fieldWidth) const;
+                            std::ostream&      os,
+                            int                fieldWidth, // USEFUL ??? JMI v0.9.67
+                            const std::string& context) const;
 
     void                  print (std::ostream& os) const override;
     void                  printFull (std::ostream& os) const override;
@@ -604,7 +605,7 @@ class EXP msrPart : public msrPartGroupElement
     size_t                fPartNumberOfMeasures;
 
     std::vector<msrWholeNotes>
-                          fPartMeasuresWholeNotessVector; // SUPERFLOUS ??? JMI v0.9.66
+                          fPartMeasuresWholeNotessVector;
 
     // clef, key, time signature
 

@@ -397,7 +397,7 @@ void msrNote::setNoteUpLinkToMeasure (
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceNoteDurations ()) {
+  if (gTraceOahGroup->getTraceWholeNoteDurations ()) {
     ++gIndenter;
 
     std::stringstream ss;
@@ -2743,9 +2743,9 @@ void msrNote::appendSpannerToNote (
     std::stringstream ss;
 
     ss <<
-      "Appending spanner '" <<
-      spanner->getSpannerKind () <<
-      "' to note " <<
+      "Appending spanner " <<
+      spanner->asString () <<
+      " to note " <<
       asString () <<
       std::endl;
 
@@ -4660,7 +4660,7 @@ std::string msrNote::asShortString () const
         fSoundingWholeNotes.asString () <<
         ", fNoteDisplayWholeNotes: " <<
         fNoteDisplayWholeNotes.asString () <<
-        /* JMI KAKA
+        /* JMI v0.9.67
         noteUpLinkToPart ()->
           tupletSoundingWholeNotesAsMsrString (
             fInputLineNumber,
@@ -4992,7 +4992,7 @@ std::string msrNote::asMinimalString () const
     ", line " << fInputLineNumber <<
     ']';
 
-  return ""; // JMI KAKA
+  return ""; // JMI v0.9.67
 
   return ss.str ();
 }
@@ -5084,7 +5084,7 @@ std::string msrNote::soundingNoteEssentialsAsString () const
   ss <<
     '-' <<
     fNoteOctaveKind <<
-//     ",++++ " << // JMI KAKA v0.9.66
+//     ",++++ " << // JMI v0.9.67 v0.9.66
     noteComplementsAsString ();
 
 // 	ss << "<====== msrNote::soundingNoteEssentialsAsString(), return " << ss.str () << std::endl;
@@ -5143,7 +5143,7 @@ std::string msrNote::nonSoundingNoteEssentialsAsString () const
   ss <<
     ", " <<
     fNoteOctaveKind <<
-    ",---- " << // JMI KAKA
+    ",---- " << // JMI v0.9.67
     noteComplementsAsString () <<
     ']';
 
@@ -5412,7 +5412,7 @@ std::string msrNote::asShortStringForMeasuresSlices () const
       }
 
 //       ss <<
-//         nonSoundingNoteEssentialsAsStringForMeasuresSlices (); JMI KAKA
+//         nonSoundingNoteEssentialsAsStringForMeasuresSlices (); JMI v0.9.67
       break;
 
     case msrNoteKind::kNoteSkipInMeasure:
@@ -5661,6 +5661,842 @@ std::string msrNote::noteEssentialsAsSting () const
   } // switch
 
   return ss.str ();
+}
+
+void msrNote::print (std::ostream& os) const
+{
+// 	os << "======> msrNote::print()" << std::endl;
+
+  os <<
+    "[Note " <<
+    noteEssentialsAsSting () <<
+    ", line " << fInputLineNumber <<
+    std::endl;
+
+  ++gIndenter;
+
+  const int fieldWidth = 44;
+
+  // print measure position and sounding whole notes
+  os << std::left <<
+    std::setw (fieldWidth) <<
+    "fMeasurePosition" << ": " <<
+    fMeasurePosition.asString () <<
+    std::endl <<
+    std::setw (fieldWidth) <<
+    "fSoundingWholeNotes" << ": " <<
+    fSoundingWholeNotes.asString () <<
+    std::endl;
+
+  // print position from beginning of voice
+//   os << std::left <<
+//     std::setw (fieldWidth) <<
+//     "fVoicePosition" << ": " <<
+//     fVoicePosition <<
+//     std::endl;
+
+  // print sounding and displayed whole notes
+  switch (fNoteKind) {
+    case msrNoteKind::kNote_UNKNOWN_:
+    case msrNoteKind::kNoteRestInMeasure:
+    case msrNoteKind::kNoteSkipInMeasure:
+    case msrNoteKind::kNoteUnpitchedInMeasure:
+    case msrNoteKind::kNoteRegularInMeasure:
+    case msrNoteKind::kNoteInDoubleTremolo:
+    case msrNoteKind::kNoteRegularInChord:
+      os << std::left <<
+        std::setw (fieldWidth) <<
+        "fNoteDisplayWholeNotes" << ": " <<
+        fNoteDisplayWholeNotes.asString () <<
+        std::endl;
+      break;
+
+    case msrNoteKind::kNoteRegularInGraceNotesGroup:
+    case msrNoteKind::kNoteInChordInGraceNotesGroup:
+      os <<
+        std::setw (fieldWidth) <<
+        "fNoteDisplayWholeNotes" << ": " <<
+        fNoteDisplayWholeNotes.asString () <<
+        std::endl;
+      break;
+
+    case msrNoteKind::kNoteSkipInGraceNotesGroup:
+      os << std::left <<
+        std::setw (fieldWidth) <<
+        "fNoteDisplayWholeNotes" << ": " <<
+        fNoteDisplayWholeNotes.asString () <<
+        std::endl <<
+        std::setw (fieldWidth) <<
+        "fNoteGraphicNotesDurationKind" << ": \"" <<
+        fNoteGraphicNotesDurationKind <<
+        "\"" <<
+        std::endl;
+      break;
+
+    case msrNoteKind::kNoteRegularInTuplet:
+    case msrNoteKind::kNoteRestInTuplet:
+    case msrNoteKind::kNoteInTupletInGraceNotesGroup:
+    case msrNoteKind::kNoteUnpitchedInTuplet:
+      os <<
+        std::setw (fieldWidth) <<
+        "fNoteDisplayWholeNotes" << ": " <<
+        fNoteDisplayWholeNotes.asString () <<
+        std::endl <<
+        std::setw (fieldWidth) <<
+        "tupletSoundingWholeNotes" << ": ";
+
+        if (fNoteShortcutUpLinkToTuplet) {
+          os <<
+            wholeNotesAsMsrString (
+              fInputLineNumber,
+              getNoteShortcutUpLinkToTuplet ()->
+                getSoundingWholeNotes ());
+        }
+        else {
+          os <<
+            "*** unknown yet ***";
+        }
+        os << std::endl;
+
+      os <<
+        std::setw (fieldWidth) <<
+        "fNoteTupletFactor" << ": " <<
+        std::endl;
+
+      ++gIndenter;
+        os <<
+          fNoteTupletFactor;
+      --gIndenter;
+      break;
+    } // switch
+
+  // print the octave shift if any
+  os << std::left <<
+    std::setw (fieldWidth) <<
+    "fNoteOctaveShift" << ": ";
+  if (fNoteOctaveShift) {
+    os << std::endl;
+    ++gIndenter;
+    os <<
+      fNoteOctaveShift;
+    --gIndenter;
+  }
+  else {
+    os << "[NULL]" << std::endl;
+  }
+
+  // print the stem if any
+  os << std::left <<
+    std::setw (fieldWidth) <<
+    "fNoteStem" << ": ";
+  if (fNoteStem) {
+    os << std::endl;
+    ++gIndenter;
+
+    os <<
+      fNoteStem;
+
+    --gIndenter;
+  }
+  else {
+    os << "[NULL]" << std::endl;
+  }
+
+  // print the grace notes group before if any
+  if (fNoteGraceNotesGroupBefore) {
+    os <<
+      std::setw (fieldWidth) <<
+      "fNoteGraceNotesGroupBefore";
+      os << std::endl;
+
+    ++gIndenter;
+
+    os << fNoteGraceNotesGroupBefore;
+
+    --gIndenter;
+  }
+
+//   // print the beams if any
+//   if (fNoteBeams.size ()) {
+//     os <<
+//       std::setw (fieldWidth) <<
+//       "fNoteBeams";
+//       os << std::endl;
+//
+//     ++gIndenter;
+//
+//     std::list<S_msrBeam>::const_iterator
+//       iBegin = fNoteBeams.begin (),
+//       iEnd   = fNoteBeams.end (),
+//       i      = iBegin;
+//     for ( ; ; ) {
+//       os << (*i);
+//       if (++i == iEnd) break;
+//       // no std::endl here;
+//     } // for
+//
+//     --gIndenter;
+//   }
+//
+//   // print the articulations if any
+//   if (fNoteArticulations.size ()) {
+//     os <<
+//       std::setw (fieldWidth) <<
+//       "fNoteArticulations";
+//       os << std::endl;
+//
+//     ++gIndenter;
+//
+//     std::list<S_msrArticulation>::const_iterator
+//       iBegin = fNoteArticulations.begin (),
+//       iEnd   = fNoteArticulations.end (),
+//       i      = iBegin;
+//     for ( ; ; ) {
+//       os << (*i);
+//       if (++i == iEnd) break;
+//       // no std::endl here;
+//     } // for
+//
+//     --gIndenter;
+//   }
+
+  // print the spanners if any
+  if (fNoteSpanners.size ()) {
+		os <<
+			std::setw (fieldWidth) <<
+			"fNoteSpanners";
+			os << std::endl;
+
+		++gIndenter;
+
+		std::list<S_msrSpanner>::const_iterator
+			iBegin = fNoteSpanners.begin (),
+			iEnd   = fNoteSpanners.end (),
+			i      = iBegin;
+		for ( ; ; ) {
+			os << (*i);
+			if (++i == iEnd) break;
+			// no std::endl here;
+		} // for
+
+		--gIndenter;
+  }
+
+//   // print the technicals if any
+//   if (fNoteTechnicals.size ()) {
+//     os <<
+//       std::setw (fieldWidth) <<
+//       "fNoteTechnicals";
+//       os << std::endl;
+//
+//     ++gIndenter;
+//
+//     std::list<S_msrTechnical>::const_iterator
+//       iBegin = fNoteTechnicals.begin (),
+//       iEnd   = fNoteTechnicals.end (),
+//       i      = iBegin;
+//     for ( ; ; ) {
+//       os << (*i);
+//       if (++i == iEnd) break;
+//       // no std::endl here;
+//     } // for
+//
+//     --gIndenter;
+//   }
+//
+//   // print the technicals with integer if any
+//   if (fNoteTechnicalWithIntegers.size ()) {
+//     os <<
+//       std::setw (fieldWidth) <<
+//       "fNoteTechnicalWithIntegers";
+//       os << std::endl;
+//
+//     ++gIndenter;
+//
+//     std::list<S_msrTechnicalWithInteger>::const_iterator
+//       iBegin = fNoteTechnicalWithIntegers.begin (),
+//       iEnd   = fNoteTechnicalWithIntegers.end (),
+//       i      = iBegin;
+//     for ( ; ; ) {
+//       os << (*i);
+//       if (++i == iEnd) break;
+//       // no std::endl here;
+//     } // for
+//
+//     --gIndenter;
+//   }
+//
+//   // print the technicals with float if any
+//   if (fNoteTechnicalWithFloats.size ()) {
+//     os <<
+//       std::setw (fieldWidth) <<
+//       "fNoteTechnicalWithFloats";
+//       os << std::endl;
+//
+//     ++gIndenter;
+//
+//     std::list<S_msrTechnicalWithFloat>::const_iterator
+//       iBegin = fNoteTechnicalWithFloats.begin (),
+//       iEnd   = fNoteTechnicalWithFloats.end (),
+//       i      = iBegin;
+//     for ( ; ; ) {
+//       os << (*i);
+//       if (++i == iEnd) break;
+//       // no std::endl here;
+//     } // for
+//
+//     --gIndenter;
+//   }
+//
+//   // print the technicals with string if any
+//   if (fNoteTechnicalWithStrings.size ()) {
+//     os <<
+//       std::setw (fieldWidth) <<
+//       "fNoteTechnicalWithStrings";
+//       os << std::endl;
+//
+//     ++gIndenter;
+//
+//     std::list<S_msrTechnicalWithString>::const_iterator
+//       iBegin = fNoteTechnicalWithStrings.begin (),
+//       iEnd   = fNoteTechnicalWithStrings.end (),
+//       i      = iBegin;
+//     for ( ; ; ) {
+//       os << (*i);
+//       if (++i == iEnd) break;
+//       // no std::endl here;
+//     } // for
+//
+//     --gIndenter;
+//   }
+//
+//   // print the ornaments if any
+//   if (fNoteOrnaments.size ()) {
+//     os <<
+//       std::setw (fieldWidth) <<
+//       "fNoteOrnaments";
+//       os << std::endl;
+//
+//     ++gIndenter;
+//
+//     std::list<S_msrOrnament>::const_iterator
+//       iBegin = fNoteOrnaments.begin (),
+//       iEnd   = fNoteOrnaments.end (),
+//       i      = iBegin;
+//     for ( ; ; ) {
+//       os << (*i);
+//       if (++i == iEnd) break;
+//       // no std::endl here;
+//     } // for
+//
+//     --gIndenter;
+//   }
+//
+//   // print the glissandos if any
+//   if (fNoteGlissandos.size ()) {
+//     os <<
+//       std::setw (fieldWidth) <<
+//       "fNoteGlissandos";
+//       os << std::endl;
+//
+//     ++gIndenter;
+//
+//     std::list<S_msrGlissando>::const_iterator
+//       iBegin = fNoteGlissandos.begin (),
+//       iEnd   = fNoteGlissandos.end (),
+//       i      = iBegin;
+//     for ( ; ; ) {
+//       os << (*i);
+//       if (++i == iEnd) break;
+//       // no std::endl here;
+//     } // for
+//
+//     --gIndenter;
+//   }
+//
+//   // print the slides if any
+//   if (fNoteSlides.size ()) {
+//     os <<
+//       std::setw (fieldWidth) <<
+//       "fNoteSlides";
+//       os << std::endl;
+//
+//     ++gIndenter;
+//
+//     std::list<S_msrSlide>::const_iterator
+//       iBegin = fNoteSlides.begin (),
+//       iEnd   = fNoteSlides.end (),
+//       i      = iBegin;
+//     for ( ; ; ) {
+//       os << (*i);
+//       if (++i == iEnd) break;
+//       // no std::endl here;
+//     } // for
+//
+//     --gIndenter;
+//   }
+//
+//   // print the singleTremolo if any
+//   if (fNoteSingleTremolo) {
+//     os <<
+//       std::setw (fieldWidth) <<
+//       "fNoteSingleTremolo";
+//       os << std::endl;
+//
+//     ++gIndenter;
+//
+//     os << fNoteSingleTremolo;
+//
+//     --gIndenter;
+//   }
+//
+//   // print the dynamics if any
+//   if (fNoteDynamics.size ()) {
+//     os <<
+//       std::setw (fieldWidth) <<
+//       "fNoteDynamics";
+//       os << std::endl;
+//
+//     ++gIndenter;
+//
+//     std::list<S_msrDynamic>::const_iterator
+//       iBegin = fNoteDynamics.begin (),
+//       iEnd   = fNoteDynamics.end (),
+//       i      = iBegin;
+//     for ( ; ; ) {
+//       os << (*i);
+//       if (++i == iEnd) break;
+//       // no std::endl here;
+//     } // for
+//
+//     --gIndenter;
+//   }
+//
+//   // print the other dynamics if any
+//   if (fNoteOtherDynamics.size ()) {
+//     os <<
+//       std::setw (fieldWidth) <<
+//       "fNoteOtherDynamics";
+//       os << std::endl;
+//
+//     ++gIndenter;
+//
+//     std::list<S_msrOtherDynamic>::const_iterator
+//       iBegin = fNoteOtherDynamics.begin (),
+//       iEnd   = fNoteOtherDynamics.end (),
+//       i      = iBegin;
+//     for ( ; ; ) {
+//       os << (*i);
+//       if (++i == iEnd) break;
+//       // no std::endl here;
+//     } // for
+//
+//     --gIndenter;
+//   }
+
+  // print the words if any
+  if (fNoteWords.size ()) {
+    os <<
+      std::setw (fieldWidth) <<
+      "fNoteWords";
+      os << std::endl;
+
+    ++gIndenter;
+
+    std::list<S_msrWords>::const_iterator
+      iBegin = fNoteWords.begin (),
+      iEnd   = fNoteWords.end (),
+      i      = iBegin;
+    for ( ; ; ) {
+      os << (*i);
+      if (++i == iEnd) break;
+      // no std::endl here;
+    } // for
+
+    --gIndenter;
+  }
+
+//   // print the slurs if any
+//   if (fNoteSlurs.size ()) {
+//     os <<
+//       std::setw (fieldWidth) <<
+//       "fNoteSlurs";
+//       os << std::endl;
+//
+//     ++gIndenter;
+//
+//     std::list<S_msrSlur>::const_iterator
+//       iBegin = fNoteSlurs.begin (),
+//       iEnd   = fNoteSlurs.end (),
+//       i      = iBegin;
+//     for ( ; ; ) {
+//       os << (*i);
+//       if (++i == iEnd) break;
+//       // no std::endl here;
+//     } // for
+//
+//     --gIndenter;
+//   }
+//
+//   // print the ligatures if any
+//   if (fNoteLigatures.size ()) {
+//     os <<
+//       std::setw (fieldWidth) <<
+//       "fNoteLigatures";
+//       os << std::endl;
+//
+//     ++gIndenter;
+//
+//     std::list<S_msrLigature>::const_iterator
+//       iBegin = fNoteLigatures.begin (),
+//       iEnd   = fNoteLigatures.end (),
+//       i      = iBegin;
+//     for ( ; ; ) {
+//       os << (*i);
+//       if (++i == iEnd) break;
+//       // no std::endl here;
+//     } // for
+//
+//     --gIndenter;
+//   }
+//
+//   // print the pedals if any
+//   if (fNotePedals.size ()) {
+//     os <<
+//       std::setw (fieldWidth) <<
+//       "fNotePedals";
+//       os << std::endl;
+//
+//     ++gIndenter;
+//
+//     std::list<S_msrPedal>::const_iterator
+//       iBegin = fNotePedals.begin (),
+//       iEnd   = fNotePedals.end (),
+//       i      = iBegin;
+//     for ( ; ; ) {
+//       os << (*i);
+//       if (++i == iEnd) break;
+//       // no std::endl here;
+//     } // for
+//
+//     --gIndenter;
+//   }
+//
+//   // print the slashes if any
+//   if (fNoteSlashes.size ()) {
+//     os <<
+//       std::setw (fieldWidth) <<
+//       "fNoteSlashes";
+//       os << std::endl;
+//
+//     ++gIndenter;
+//
+//     std::list<S_msrSlash>::const_iterator
+//       iBegin = fNoteSlashes.begin (),
+//       iEnd   = fNoteSlashes.end (),
+//       i      = iBegin;
+//     for ( ; ; ) {
+//       os << (*i);
+//       if (++i == iEnd) break;
+//       // no std::endl here;
+//     } // for
+//
+//     --gIndenter;
+//   }
+//
+//   // print the crescDecresc if any
+//   if (fNoteCrescDecrescs.size ()) {
+//     os <<
+//       std::setw (fieldWidth) <<
+//       "fNoteCrescDecrescs";
+//       os << std::endl;
+//
+//     ++gIndenter;
+//
+//     std::list<S_msrCrescDecresc>::const_iterator
+//       iBegin = fNoteCrescDecrescs.begin (),
+//       iEnd   = fNoteCrescDecrescs.end (),
+//       i      = iBegin;
+//     for ( ; ; ) {
+//       os << (*i);
+//       if (++i == iEnd) break;
+//       // no std::endl here;
+//     } // for
+//
+//     --gIndenter;
+//   }
+//
+//   // print the wedges if any
+//   if (fNoteWedges.size ()) {
+//     os <<
+//       std::setw (fieldWidth) <<
+//       "fNoteWedges";
+//       os << std::endl;
+//
+//     ++gIndenter;
+//
+//     std::list<S_msrWedge>::const_iterator
+//       iBegin = fNoteWedges.begin (),
+//       iEnd   = fNoteWedges.end (),
+//       i      = iBegin;
+//     for ( ; ; ) {
+//       os << (*i);
+//       if (++i == iEnd) break;
+//       // no std::endl here;
+//     } // for
+//
+//     --gIndenter;
+//   }
+//
+//   // print the segnos if any
+//   if (fNoteSegnos.size ()) {
+//     os <<
+//       std::setw (fieldWidth) <<
+//       "fNoteSegnos";
+//       os << std::endl;
+//
+//     ++gIndenter;
+//
+//     std::list<S_msrSegno>::const_iterator
+//       iBegin = fNoteSegnos.begin (),
+//       iEnd   = fNoteSegnos.end (),
+//       i      = iBegin;
+//     for ( ; ; ) {
+//       os << (*i);
+//       if (++i == iEnd) break;
+//       // no std::endl here;
+//     } // for
+//
+//     --gIndenter;
+//   }
+//
+//   // print the dal segnos if any
+//   if (fNoteDalSegnos.size ()) {
+//     os <<
+//       std::setw (fieldWidth) <<
+//       "fNoteDalSegnos";
+//       os << std::endl;
+//
+//     ++gIndenter;
+//
+//     std::list<S_msrDalSegno>::const_iterator
+//       iBegin = fNoteDalSegnos.begin (),
+//       iEnd   = fNoteDalSegnos.end (),
+//       i      = iBegin;
+//     for ( ; ; ) {
+//       os << (*i);
+//       if (++i == iEnd) break;
+//       // no std::endl here;
+//     } // for
+//
+//     --gIndenter;
+//   }
+//
+//   // print the codas if any
+//   if (fNoteCodas.size ()) {
+//     os <<
+//       std::setw (fieldWidth) <<
+//       "fNoteCodas";
+//       os << std::endl;
+//
+//     ++gIndenter;
+//
+//     std::list<S_msrCoda>::const_iterator
+//       iBegin = fNoteCodas.begin (),
+//       iEnd   = fNoteCodas.end (),
+//       i      = iBegin;
+//     for ( ; ; ) {
+//       os << (*i);
+//       if (++i == iEnd) break;
+//       // no std::endl here;
+//     } // for
+//
+//     --gIndenter;
+//   }
+//
+//   // print the eyeglasses if any
+//   if (fNoteEyeGlasses.size ()) {
+//     os <<
+//       std::setw (fieldWidth) <<
+//       "fNoteEyeGlasses";
+//       os << std::endl;
+//
+//     ++gIndenter;
+//
+//     std::list<S_msrEyeGlasses>::const_iterator
+//       iBegin = fNoteEyeGlasses.begin (),
+//       iEnd   = fNoteEyeGlasses.end (),
+//       i      = iBegin;
+//     for ( ; ; ) {
+//       os << (*i);
+//       if (++i == iEnd) break;
+//       // no std::endl here;
+//     } // for
+//
+//     --gIndenter;
+//   }
+//
+//   // print the damps if any
+//   if (fNoteDamps.size ()) {
+//     os <<
+//       std::setw (fieldWidth) <<
+//       "fNoteDamps";
+//       os << std::endl;
+//
+//     ++gIndenter;
+//
+//     std::list<S_msrDamp>::const_iterator
+//       iBegin = fNoteDamps.begin (),
+//       iEnd   = fNoteDamps.end (),
+//       i      = iBegin;
+//     for ( ; ; ) {
+//       os << (*i);
+//       if (++i == iEnd) break;
+//       // no std::endl here;
+//     } // for
+//
+//     --gIndenter;
+//   }
+//
+//   // print the dampAlls if any
+//   if (fNoteDampAlls.size ()) {
+//     os <<
+//       std::setw (fieldWidth) <<
+//       "fNoteDampAlls";
+//       os << std::endl;
+//
+//     ++gIndenter;
+//
+//     std::list<S_msrDampAll>::const_iterator
+//       iBegin = fNoteDampAlls.begin (),
+//       iEnd   = fNoteDampAlls.end (),
+//       i      = iBegin;
+//     for ( ; ; ) {
+//       os << (*i);
+//       if (++i == iEnd) break;
+//       // no std::endl here;
+//     } // for
+//
+//     --gIndenter;
+//   }
+//
+//   // print the scordaturas if any
+//   if (fNoteScordaturas.size ()) {
+//     os <<
+//       std::setw (fieldWidth) <<
+//       "fNoteScordaturas";
+//       os << std::endl;
+//
+//     ++gIndenter;
+//
+//     std::list<S_msrScordatura>::const_iterator
+//       iBegin = fNoteScordaturas.begin (),
+//       iEnd   = fNoteScordaturas.end (),
+//       i      = iBegin;
+//     for ( ; ; ) {
+//       os << (*i);
+//       if (++i == iEnd) break;
+//       // no std::endl here;
+//     } // for
+//
+//     --gIndenter;
+//   }
+
+  // print the harmonies associated to this note if any
+  if (fNoteHarmoniesList.size ()) {
+    os <<
+      std::setw (fieldWidth) <<
+      "fNoteHarmoniesList";
+      os << std::endl;
+
+    ++gIndenter;
+
+    std::list<S_msrHarmony>::const_iterator
+      iBegin = fNoteHarmoniesList.begin (),
+      iEnd   = fNoteHarmoniesList.end (),
+      i      = iBegin;
+    for ( ; ; ) {
+      S_msrHarmony
+        harmony = (*i);
+
+      os << harmony;
+
+      if (++i == iEnd) break;
+      // no std::endl here
+    } // for
+
+    --gIndenter;
+  }
+
+  // print the figured bass elements associated to this note if any
+  if (fNoteFiguredBassesList.size ()) {
+    os <<
+      std::setw (fieldWidth) <<
+      "fNoteFiguredBassesList";
+      os << std::endl;
+
+    ++gIndenter;
+
+    std::list<S_msrFiguredBass>::const_iterator
+      iBegin = fNoteFiguredBassesList.begin (),
+      iEnd   = fNoteFiguredBassesList.end (),
+      i      = iBegin;
+    for ( ; ; ) {
+      S_msrFiguredBass
+        figuredBass = (*i);
+
+      os << figuredBass;
+
+      if (++i == iEnd) break;
+      // no std::endl here
+    } // for
+
+    --gIndenter;
+  }
+
+  // print the syllables associated to this note if any
+  if (fNoteSyllables.size ()) {
+    os <<
+      std::setw (fieldWidth) <<
+      "fNoteSyllables";
+      os << std::endl;
+
+    ++gIndenter;
+
+    std::list<S_msrSyllable>::const_iterator
+      iBegin = fNoteSyllables.begin (),
+      iEnd   = fNoteSyllables.end (),
+      i      = iBegin;
+    for ( ; ; ) {
+      S_msrSyllable
+        syllable = (*i);
+
+      os << syllable;
+
+      if (++i == iEnd) break;
+      // no std::endl here
+    } // for
+
+    --gIndenter;
+  }
+
+  // print the after grace group notes after if any
+  if (fNoteGraceNotesGroupAfter) {
+    os <<
+      std::setw (fieldWidth) <<
+      "fNoteGraceNotesGroupAfter" <<
+      std::endl;
+
+    ++gIndenter;
+
+    os << fNoteGraceNotesGroupAfter;
+
+    --gIndenter;
+  }
+
+  --gIndenter;
+
+  os << ']' << std::endl;
 }
 
 void msrNote::printFull (std::ostream& os) const
@@ -6062,7 +6898,7 @@ void msrNote::printFull (std::ostream& os) const
         ?
           fNoteUpLinkToMeasure->
             getFullMeasureWholeNotes ()
-        : msrWholeNotes (0, 1); // JMI KAKA
+        : msrWholeNotes (0, 1); // JMI v0.9.67
 
   os << std::left <<
     std::setw (fieldWidth) <<
@@ -6408,7 +7244,7 @@ void msrNote::printFull (std::ostream& os) const
     case msrNoteKind::kNoteRestInTuplet:
     case msrNoteKind::kNoteInTupletInGraceNotesGroup:
     case msrNoteKind::kNoteUnpitchedInTuplet:
-      /* JMI KAKA
+      /* JMI v0.9.67
       os << std::left <<
         std::setw (fieldWidth) <<
         "fNoteTupletNoteGraphicNotesDurationAsMsrString" << ": \"" <<
@@ -7317,7 +8153,7 @@ void msrNote::printFull (std::ostream& os) const
 
       os << syllable;
 
-/* JMI KAKA
+/* JMI v0.9.67
       os <<
         syllable->getSyllableKind () <<
           syllable->getSyllableExtendKind () <<
@@ -7349,842 +8185,6 @@ void msrNote::printFull (std::ostream& os) const
     os << ": " <<
       "[NONE]" <<
       std::endl;
-  }
-
-  --gIndenter;
-
-  os << ']' << std::endl;
-}
-
-void msrNote::print (std::ostream& os) const
-{
-// 	os << "======> msrNote::print()" << std::endl;
-
-  os <<
-    "[Note " <<
-    noteEssentialsAsSting () <<
-    ", line " << fInputLineNumber <<
-    std::endl;
-
-  ++gIndenter;
-
-  const int fieldWidth = 44;
-
-  // print measure position and sounding whole notes
-  os << std::left <<
-    std::setw (fieldWidth) <<
-    "fMeasurePosition" << ": " <<
-    fMeasurePosition.asString () <<
-    std::endl <<
-    std::setw (fieldWidth) <<
-    "fSoundingWholeNotes" << ": " <<
-    fSoundingWholeNotes.asString () <<
-    std::endl;
-
-  // print position from beginning of voice
-//   os << std::left <<
-//     std::setw (fieldWidth) <<
-//     "fVoicePosition" << ": " <<
-//     fVoicePosition <<
-//     std::endl;
-
-  // print sounding and displayed whole notes
-  switch (fNoteKind) {
-    case msrNoteKind::kNote_UNKNOWN_:
-    case msrNoteKind::kNoteRestInMeasure:
-    case msrNoteKind::kNoteSkipInMeasure:
-    case msrNoteKind::kNoteUnpitchedInMeasure:
-    case msrNoteKind::kNoteRegularInMeasure:
-    case msrNoteKind::kNoteInDoubleTremolo:
-    case msrNoteKind::kNoteRegularInChord:
-      os << std::left <<
-        std::setw (fieldWidth) <<
-        "fNoteDisplayWholeNotes" << ": " <<
-        fNoteDisplayWholeNotes.asString () <<
-        std::endl;
-      break;
-
-    case msrNoteKind::kNoteRegularInGraceNotesGroup:
-    case msrNoteKind::kNoteInChordInGraceNotesGroup:
-      os <<
-        std::setw (fieldWidth) <<
-        "fNoteDisplayWholeNotes" << ": " <<
-        fNoteDisplayWholeNotes.asString () <<
-        std::endl;
-      break;
-
-    case msrNoteKind::kNoteSkipInGraceNotesGroup:
-      os << std::left <<
-        std::setw (fieldWidth) <<
-        "fNoteDisplayWholeNotes" << ": " <<
-        fNoteDisplayWholeNotes.asString () <<
-        std::endl <<
-        std::setw (fieldWidth) <<
-        "fNoteGraphicNotesDurationKind" << ": \"" <<
-        fNoteGraphicNotesDurationKind <<
-        "\"" <<
-        std::endl;
-      break;
-
-    case msrNoteKind::kNoteRegularInTuplet:
-    case msrNoteKind::kNoteRestInTuplet:
-    case msrNoteKind::kNoteInTupletInGraceNotesGroup:
-    case msrNoteKind::kNoteUnpitchedInTuplet:
-      os <<
-        std::setw (fieldWidth) <<
-        "fNoteDisplayWholeNotes" << ": " <<
-        fNoteDisplayWholeNotes.asString () <<
-        std::endl <<
-        std::setw (fieldWidth) <<
-        "tupletSoundingWholeNotes" << ": ";
-
-        if (fNoteShortcutUpLinkToTuplet) {
-          os <<
-            wholeNotesAsMsrString (
-              fInputLineNumber,
-              getNoteShortcutUpLinkToTuplet ()->
-                getSoundingWholeNotes ());
-        }
-        else {
-          os <<
-            "*** unknown yet ***";
-        }
-        os << std::endl;
-
-      os <<
-        std::setw (fieldWidth) <<
-        "fNoteTupletFactor" << ": " <<
-        std::endl;
-
-      ++gIndenter;
-        os <<
-          fNoteTupletFactor;
-      --gIndenter;
-      break;
-    } // switch
-
-  // print the octave shift if any
-  os << std::left <<
-    std::setw (fieldWidth) <<
-    "fNoteOctaveShift" << ": ";
-  if (fNoteOctaveShift) {
-    os << std::endl;
-    ++gIndenter;
-    os <<
-      fNoteOctaveShift;
-    --gIndenter;
-  }
-  else {
-    os << "[NULL]" << std::endl;
-  }
-
-  // print the stem if any
-  os << std::left <<
-    std::setw (fieldWidth) <<
-    "fNoteStem" << ": ";
-  if (fNoteStem) {
-    os << std::endl;
-    ++gIndenter;
-
-    os <<
-      fNoteStem;
-
-    --gIndenter;
-  }
-  else {
-    os << "[NULL]" << std::endl;
-  }
-
-  // print the grace notes group before if any
-  if (fNoteGraceNotesGroupBefore) {
-    os <<
-      std::setw (fieldWidth) <<
-      "fNoteGraceNotesGroupBefore";
-      os << std::endl;
-
-    ++gIndenter;
-
-    os << fNoteGraceNotesGroupBefore;
-
-    --gIndenter;
-  }
-
-//   // print the beams if any
-//   if (fNoteBeams.size ()) {
-//     os <<
-//       std::setw (fieldWidth) <<
-//       "fNoteBeams";
-//       os << std::endl;
-//
-//     ++gIndenter;
-//
-//     std::list<S_msrBeam>::const_iterator
-//       iBegin = fNoteBeams.begin (),
-//       iEnd   = fNoteBeams.end (),
-//       i      = iBegin;
-//     for ( ; ; ) {
-//       os << (*i);
-//       if (++i == iEnd) break;
-//       // no std::endl here;
-//     } // for
-//
-//     --gIndenter;
-//   }
-//
-//   // print the articulations if any
-//   if (fNoteArticulations.size ()) {
-//     os <<
-//       std::setw (fieldWidth) <<
-//       "fNoteArticulations";
-//       os << std::endl;
-//
-//     ++gIndenter;
-//
-//     std::list<S_msrArticulation>::const_iterator
-//       iBegin = fNoteArticulations.begin (),
-//       iEnd   = fNoteArticulations.end (),
-//       i      = iBegin;
-//     for ( ; ; ) {
-//       os << (*i);
-//       if (++i == iEnd) break;
-//       // no std::endl here;
-//     } // for
-//
-//     --gIndenter;
-//   }
-//
-//   // print the spanners if any
-//   if (fNoteSpanners.size ()) {
-//       os <<
-//         std::setw (fieldWidth) <<
-//         "fNoteSpanners";
-//         os << std::endl;
-//
-//       ++gIndenter;
-//
-//       std::list<S_msrSpanner>::const_iterator
-//         iBegin = fNoteSpanners.begin (),
-//         iEnd   = fNoteSpanners.end (),
-//         i      = iBegin;
-//       for ( ; ; ) {
-//         os << (*i);
-//         if (++i == iEnd) break;
-//         // no std::endl here;
-//       } // for
-//
-//       --gIndenter;
-//   }
-//
-//   // print the technicals if any
-//   if (fNoteTechnicals.size ()) {
-//     os <<
-//       std::setw (fieldWidth) <<
-//       "fNoteTechnicals";
-//       os << std::endl;
-//
-//     ++gIndenter;
-//
-//     std::list<S_msrTechnical>::const_iterator
-//       iBegin = fNoteTechnicals.begin (),
-//       iEnd   = fNoteTechnicals.end (),
-//       i      = iBegin;
-//     for ( ; ; ) {
-//       os << (*i);
-//       if (++i == iEnd) break;
-//       // no std::endl here;
-//     } // for
-//
-//     --gIndenter;
-//   }
-//
-//   // print the technicals with integer if any
-//   if (fNoteTechnicalWithIntegers.size ()) {
-//     os <<
-//       std::setw (fieldWidth) <<
-//       "fNoteTechnicalWithIntegers";
-//       os << std::endl;
-//
-//     ++gIndenter;
-//
-//     std::list<S_msrTechnicalWithInteger>::const_iterator
-//       iBegin = fNoteTechnicalWithIntegers.begin (),
-//       iEnd   = fNoteTechnicalWithIntegers.end (),
-//       i      = iBegin;
-//     for ( ; ; ) {
-//       os << (*i);
-//       if (++i == iEnd) break;
-//       // no std::endl here;
-//     } // for
-//
-//     --gIndenter;
-//   }
-//
-//   // print the technicals with float if any
-//   if (fNoteTechnicalWithFloats.size ()) {
-//     os <<
-//       std::setw (fieldWidth) <<
-//       "fNoteTechnicalWithFloats";
-//       os << std::endl;
-//
-//     ++gIndenter;
-//
-//     std::list<S_msrTechnicalWithFloat>::const_iterator
-//       iBegin = fNoteTechnicalWithFloats.begin (),
-//       iEnd   = fNoteTechnicalWithFloats.end (),
-//       i      = iBegin;
-//     for ( ; ; ) {
-//       os << (*i);
-//       if (++i == iEnd) break;
-//       // no std::endl here;
-//     } // for
-//
-//     --gIndenter;
-//   }
-//
-//   // print the technicals with string if any
-//   if (fNoteTechnicalWithStrings.size ()) {
-//     os <<
-//       std::setw (fieldWidth) <<
-//       "fNoteTechnicalWithStrings";
-//       os << std::endl;
-//
-//     ++gIndenter;
-//
-//     std::list<S_msrTechnicalWithString>::const_iterator
-//       iBegin = fNoteTechnicalWithStrings.begin (),
-//       iEnd   = fNoteTechnicalWithStrings.end (),
-//       i      = iBegin;
-//     for ( ; ; ) {
-//       os << (*i);
-//       if (++i == iEnd) break;
-//       // no std::endl here;
-//     } // for
-//
-//     --gIndenter;
-//   }
-//
-//   // print the ornaments if any
-//   if (fNoteOrnaments.size ()) {
-//     os <<
-//       std::setw (fieldWidth) <<
-//       "fNoteOrnaments";
-//       os << std::endl;
-//
-//     ++gIndenter;
-//
-//     std::list<S_msrOrnament>::const_iterator
-//       iBegin = fNoteOrnaments.begin (),
-//       iEnd   = fNoteOrnaments.end (),
-//       i      = iBegin;
-//     for ( ; ; ) {
-//       os << (*i);
-//       if (++i == iEnd) break;
-//       // no std::endl here;
-//     } // for
-//
-//     --gIndenter;
-//   }
-//
-//   // print the glissandos if any
-//   if (fNoteGlissandos.size ()) {
-//     os <<
-//       std::setw (fieldWidth) <<
-//       "fNoteGlissandos";
-//       os << std::endl;
-//
-//     ++gIndenter;
-//
-//     std::list<S_msrGlissando>::const_iterator
-//       iBegin = fNoteGlissandos.begin (),
-//       iEnd   = fNoteGlissandos.end (),
-//       i      = iBegin;
-//     for ( ; ; ) {
-//       os << (*i);
-//       if (++i == iEnd) break;
-//       // no std::endl here;
-//     } // for
-//
-//     --gIndenter;
-//   }
-//
-//   // print the slides if any
-//   if (fNoteSlides.size ()) {
-//     os <<
-//       std::setw (fieldWidth) <<
-//       "fNoteSlides";
-//       os << std::endl;
-//
-//     ++gIndenter;
-//
-//     std::list<S_msrSlide>::const_iterator
-//       iBegin = fNoteSlides.begin (),
-//       iEnd   = fNoteSlides.end (),
-//       i      = iBegin;
-//     for ( ; ; ) {
-//       os << (*i);
-//       if (++i == iEnd) break;
-//       // no std::endl here;
-//     } // for
-//
-//     --gIndenter;
-//   }
-//
-//   // print the singleTremolo if any
-//   if (fNoteSingleTremolo) {
-//     os <<
-//       std::setw (fieldWidth) <<
-//       "fNoteSingleTremolo";
-//       os << std::endl;
-//
-//     ++gIndenter;
-//
-//     os << fNoteSingleTremolo;
-//
-//     --gIndenter;
-//   }
-//
-//   // print the dynamics if any
-//   if (fNoteDynamics.size ()) {
-//     os <<
-//       std::setw (fieldWidth) <<
-//       "fNoteDynamics";
-//       os << std::endl;
-//
-//     ++gIndenter;
-//
-//     std::list<S_msrDynamic>::const_iterator
-//       iBegin = fNoteDynamics.begin (),
-//       iEnd   = fNoteDynamics.end (),
-//       i      = iBegin;
-//     for ( ; ; ) {
-//       os << (*i);
-//       if (++i == iEnd) break;
-//       // no std::endl here;
-//     } // for
-//
-//     --gIndenter;
-//   }
-//
-//   // print the other dynamics if any
-//   if (fNoteOtherDynamics.size ()) {
-//     os <<
-//       std::setw (fieldWidth) <<
-//       "fNoteOtherDynamics";
-//       os << std::endl;
-//
-//     ++gIndenter;
-//
-//     std::list<S_msrOtherDynamic>::const_iterator
-//       iBegin = fNoteOtherDynamics.begin (),
-//       iEnd   = fNoteOtherDynamics.end (),
-//       i      = iBegin;
-//     for ( ; ; ) {
-//       os << (*i);
-//       if (++i == iEnd) break;
-//       // no std::endl here;
-//     } // for
-//
-//     --gIndenter;
-//   }
-
-  // print the words if any
-  if (fNoteWords.size ()) {
-    os <<
-      std::setw (fieldWidth) <<
-      "fNoteWords";
-      os << std::endl;
-
-    ++gIndenter;
-
-    std::list<S_msrWords>::const_iterator
-      iBegin = fNoteWords.begin (),
-      iEnd   = fNoteWords.end (),
-      i      = iBegin;
-    for ( ; ; ) {
-      os << (*i);
-      if (++i == iEnd) break;
-      // no std::endl here;
-    } // for
-
-    --gIndenter;
-  }
-
-//   // print the slurs if any
-//   if (fNoteSlurs.size ()) {
-//     os <<
-//       std::setw (fieldWidth) <<
-//       "fNoteSlurs";
-//       os << std::endl;
-//
-//     ++gIndenter;
-//
-//     std::list<S_msrSlur>::const_iterator
-//       iBegin = fNoteSlurs.begin (),
-//       iEnd   = fNoteSlurs.end (),
-//       i      = iBegin;
-//     for ( ; ; ) {
-//       os << (*i);
-//       if (++i == iEnd) break;
-//       // no std::endl here;
-//     } // for
-//
-//     --gIndenter;
-//   }
-//
-//   // print the ligatures if any
-//   if (fNoteLigatures.size ()) {
-//     os <<
-//       std::setw (fieldWidth) <<
-//       "fNoteLigatures";
-//       os << std::endl;
-//
-//     ++gIndenter;
-//
-//     std::list<S_msrLigature>::const_iterator
-//       iBegin = fNoteLigatures.begin (),
-//       iEnd   = fNoteLigatures.end (),
-//       i      = iBegin;
-//     for ( ; ; ) {
-//       os << (*i);
-//       if (++i == iEnd) break;
-//       // no std::endl here;
-//     } // for
-//
-//     --gIndenter;
-//   }
-//
-//   // print the pedals if any
-//   if (fNotePedals.size ()) {
-//     os <<
-//       std::setw (fieldWidth) <<
-//       "fNotePedals";
-//       os << std::endl;
-//
-//     ++gIndenter;
-//
-//     std::list<S_msrPedal>::const_iterator
-//       iBegin = fNotePedals.begin (),
-//       iEnd   = fNotePedals.end (),
-//       i      = iBegin;
-//     for ( ; ; ) {
-//       os << (*i);
-//       if (++i == iEnd) break;
-//       // no std::endl here;
-//     } // for
-//
-//     --gIndenter;
-//   }
-//
-//   // print the slashes if any
-//   if (fNoteSlashes.size ()) {
-//     os <<
-//       std::setw (fieldWidth) <<
-//       "fNoteSlashes";
-//       os << std::endl;
-//
-//     ++gIndenter;
-//
-//     std::list<S_msrSlash>::const_iterator
-//       iBegin = fNoteSlashes.begin (),
-//       iEnd   = fNoteSlashes.end (),
-//       i      = iBegin;
-//     for ( ; ; ) {
-//       os << (*i);
-//       if (++i == iEnd) break;
-//       // no std::endl here;
-//     } // for
-//
-//     --gIndenter;
-//   }
-//
-//   // print the crescDecresc if any
-//   if (fNoteCrescDecrescs.size ()) {
-//     os <<
-//       std::setw (fieldWidth) <<
-//       "fNoteCrescDecrescs";
-//       os << std::endl;
-//
-//     ++gIndenter;
-//
-//     std::list<S_msrCrescDecresc>::const_iterator
-//       iBegin = fNoteCrescDecrescs.begin (),
-//       iEnd   = fNoteCrescDecrescs.end (),
-//       i      = iBegin;
-//     for ( ; ; ) {
-//       os << (*i);
-//       if (++i == iEnd) break;
-//       // no std::endl here;
-//     } // for
-//
-//     --gIndenter;
-//   }
-//
-//   // print the wedges if any
-//   if (fNoteWedges.size ()) {
-//     os <<
-//       std::setw (fieldWidth) <<
-//       "fNoteWedges";
-//       os << std::endl;
-//
-//     ++gIndenter;
-//
-//     std::list<S_msrWedge>::const_iterator
-//       iBegin = fNoteWedges.begin (),
-//       iEnd   = fNoteWedges.end (),
-//       i      = iBegin;
-//     for ( ; ; ) {
-//       os << (*i);
-//       if (++i == iEnd) break;
-//       // no std::endl here;
-//     } // for
-//
-//     --gIndenter;
-//   }
-//
-//   // print the segnos if any
-//   if (fNoteSegnos.size ()) {
-//     os <<
-//       std::setw (fieldWidth) <<
-//       "fNoteSegnos";
-//       os << std::endl;
-//
-//     ++gIndenter;
-//
-//     std::list<S_msrSegno>::const_iterator
-//       iBegin = fNoteSegnos.begin (),
-//       iEnd   = fNoteSegnos.end (),
-//       i      = iBegin;
-//     for ( ; ; ) {
-//       os << (*i);
-//       if (++i == iEnd) break;
-//       // no std::endl here;
-//     } // for
-//
-//     --gIndenter;
-//   }
-//
-//   // print the dal segnos if any
-//   if (fNoteDalSegnos.size ()) {
-//     os <<
-//       std::setw (fieldWidth) <<
-//       "fNoteDalSegnos";
-//       os << std::endl;
-//
-//     ++gIndenter;
-//
-//     std::list<S_msrDalSegno>::const_iterator
-//       iBegin = fNoteDalSegnos.begin (),
-//       iEnd   = fNoteDalSegnos.end (),
-//       i      = iBegin;
-//     for ( ; ; ) {
-//       os << (*i);
-//       if (++i == iEnd) break;
-//       // no std::endl here;
-//     } // for
-//
-//     --gIndenter;
-//   }
-//
-//   // print the codas if any
-//   if (fNoteCodas.size ()) {
-//     os <<
-//       std::setw (fieldWidth) <<
-//       "fNoteCodas";
-//       os << std::endl;
-//
-//     ++gIndenter;
-//
-//     std::list<S_msrCoda>::const_iterator
-//       iBegin = fNoteCodas.begin (),
-//       iEnd   = fNoteCodas.end (),
-//       i      = iBegin;
-//     for ( ; ; ) {
-//       os << (*i);
-//       if (++i == iEnd) break;
-//       // no std::endl here;
-//     } // for
-//
-//     --gIndenter;
-//   }
-//
-//   // print the eyeglasses if any
-//   if (fNoteEyeGlasses.size ()) {
-//     os <<
-//       std::setw (fieldWidth) <<
-//       "fNoteEyeGlasses";
-//       os << std::endl;
-//
-//     ++gIndenter;
-//
-//     std::list<S_msrEyeGlasses>::const_iterator
-//       iBegin = fNoteEyeGlasses.begin (),
-//       iEnd   = fNoteEyeGlasses.end (),
-//       i      = iBegin;
-//     for ( ; ; ) {
-//       os << (*i);
-//       if (++i == iEnd) break;
-//       // no std::endl here;
-//     } // for
-//
-//     --gIndenter;
-//   }
-//
-//   // print the damps if any
-//   if (fNoteDamps.size ()) {
-//     os <<
-//       std::setw (fieldWidth) <<
-//       "fNoteDamps";
-//       os << std::endl;
-//
-//     ++gIndenter;
-//
-//     std::list<S_msrDamp>::const_iterator
-//       iBegin = fNoteDamps.begin (),
-//       iEnd   = fNoteDamps.end (),
-//       i      = iBegin;
-//     for ( ; ; ) {
-//       os << (*i);
-//       if (++i == iEnd) break;
-//       // no std::endl here;
-//     } // for
-//
-//     --gIndenter;
-//   }
-//
-//   // print the dampAlls if any
-//   if (fNoteDampAlls.size ()) {
-//     os <<
-//       std::setw (fieldWidth) <<
-//       "fNoteDampAlls";
-//       os << std::endl;
-//
-//     ++gIndenter;
-//
-//     std::list<S_msrDampAll>::const_iterator
-//       iBegin = fNoteDampAlls.begin (),
-//       iEnd   = fNoteDampAlls.end (),
-//       i      = iBegin;
-//     for ( ; ; ) {
-//       os << (*i);
-//       if (++i == iEnd) break;
-//       // no std::endl here;
-//     } // for
-//
-//     --gIndenter;
-//   }
-//
-//   // print the scordaturas if any
-//   if (fNoteScordaturas.size ()) {
-//     os <<
-//       std::setw (fieldWidth) <<
-//       "fNoteScordaturas";
-//       os << std::endl;
-//
-//     ++gIndenter;
-//
-//     std::list<S_msrScordatura>::const_iterator
-//       iBegin = fNoteScordaturas.begin (),
-//       iEnd   = fNoteScordaturas.end (),
-//       i      = iBegin;
-//     for ( ; ; ) {
-//       os << (*i);
-//       if (++i == iEnd) break;
-//       // no std::endl here;
-//     } // for
-//
-//     --gIndenter;
-//   }
-
-  // print the harmonies associated to this note if any
-  if (fNoteHarmoniesList.size ()) {
-    os <<
-      std::setw (fieldWidth) <<
-      "fNoteHarmoniesList";
-      os << std::endl;
-
-    ++gIndenter;
-
-    std::list<S_msrHarmony>::const_iterator
-      iBegin = fNoteHarmoniesList.begin (),
-      iEnd   = fNoteHarmoniesList.end (),
-      i      = iBegin;
-    for ( ; ; ) {
-      S_msrHarmony
-        harmony = (*i);
-
-      os << harmony;
-
-      if (++i == iEnd) break;
-      // no std::endl here
-    } // for
-
-    --gIndenter;
-  }
-
-  // print the figured bass elements associated to this note if any
-  if (fNoteFiguredBassesList.size ()) {
-    os <<
-      std::setw (fieldWidth) <<
-      "fNoteFiguredBassesList";
-      os << std::endl;
-
-    ++gIndenter;
-
-    std::list<S_msrFiguredBass>::const_iterator
-      iBegin = fNoteFiguredBassesList.begin (),
-      iEnd   = fNoteFiguredBassesList.end (),
-      i      = iBegin;
-    for ( ; ; ) {
-      S_msrFiguredBass
-        figuredBass = (*i);
-
-      os << figuredBass;
-
-      if (++i == iEnd) break;
-      // no std::endl here
-    } // for
-
-    --gIndenter;
-  }
-
-  // print the syllables associated to this note if any
-  if (fNoteSyllables.size ()) {
-    os <<
-      std::setw (fieldWidth) <<
-      "fNoteSyllables";
-      os << std::endl;
-
-    ++gIndenter;
-
-    std::list<S_msrSyllable>::const_iterator
-      iBegin = fNoteSyllables.begin (),
-      iEnd   = fNoteSyllables.end (),
-      i      = iBegin;
-    for ( ; ; ) {
-      S_msrSyllable
-        syllable = (*i);
-
-      os << syllable;
-
-      if (++i == iEnd) break;
-      // no std::endl here
-    } // for
-
-    --gIndenter;
-  }
-
-  // print the after grace group notes after if any
-  if (fNoteGraceNotesGroupAfter) {
-    os <<
-      std::setw (fieldWidth) <<
-      "fNoteGraceNotesGroupAfter" <<
-      std::endl;
-
-    ++gIndenter;
-
-    os << fNoteGraceNotesGroupAfter;
-
-    --gIndenter;
   }
 
   --gIndenter;

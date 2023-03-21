@@ -788,7 +788,7 @@ class EXP msrVoice : public msrElement
 
     void                  appendMultipleFullBarRestsToVoice (
                             int inputLineNumber,
-                            int multipleFullBarRestsMeasuresNumber); // JMI USELESS??? KAKA
+                            int multipleFullBarRestsMeasuresNumber); // JMI USELESS??? JMI v0.9.67
 
     void                  appendMultipleFullBarRestsToVoice (
                             int                       inputLineNumber,

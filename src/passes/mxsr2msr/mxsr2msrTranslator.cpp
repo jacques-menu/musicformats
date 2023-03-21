@@ -115,18 +115,8 @@ mxsr2msrTranslator::mxsr2msrTranslator (
   fCurrentAccordAlterationKind    = msrAlterationKind::kAlteration_UNKNOWN_;
   fCurrentAccordOctaveKind        = msrOctaveKind::kOctave_UNKNOWN_;
 
-  // staff handling
-  fPreviousNoteMusicXMLStaffNumber = msrStaff::K_STAFF_NUMBER_UNKNOWN_;
-  fCurrentMusicXMLStaffNumber      = msrStaff::K_STAFF_NUMBER_UNKNOWN_;
-
-  // staff change detection
-//   fCurrentStaffNumberToInsertInto = 1; // default value JMI
-
-  // cross staff chords
-  fCurrentChordStaffNumber = msrStaff::K_STAFF_NUMBER_UNKNOWN_;
-
   // voice handling
-  fPreviousMusicXMLVoiceNumber = msrVoice::K_VOICE_NUMBER_UNKNOWN_;
+  fPreviousNoteMusicXMLVoiceNumber = msrVoice::K_VOICE_NUMBER_UNKNOWN_;
   fCurrentMusicXMLVoiceNumber  = msrVoice::K_VOICE_NUMBER_UNKNOWN_;
 
   // clef handling
@@ -263,7 +253,7 @@ mxsr2msrTranslator::mxsr2msrTranslator (
   fCurrentNoteAlterationKind    = msrAlterationKind::kAlteration_UNKNOWN_;
 
   // note print object kind
-  fCurrentNotePrintObjectKind = msrPrintObjectKind::kPrintObjectNone;
+  fCurrentNotePrintObjectKind = msrPrintObjectKind::kPrintObjectYes; // default value
 
   // note head
   fCurrentNoteHeadKind = msrNoteHeadKind::kNoteHeadNormal;
@@ -367,14 +357,21 @@ void mxsr2msrTranslator::initializeNoteData ()
     msrCautionaryAccidentalKind::kCautionaryAccidentalNo; // default value
 
   // current note staff number
+
   fCurrentMusicXMLStaffNumber = 1; // default value, it may be absent
 
   // current note voice number
-  fPreviousMusicXMLVoiceNumber = fCurrentMusicXMLVoiceNumber;
+
   fCurrentMusicXMLVoiceNumber  = 1; // default value, it may be absent
 
   // staff change detection
-  // fCurrentStaffNumberToInsertInto = 1; // JMI ???
+
+  fPreviousNoteMusicXMLStaffNumber = msrStaff::K_STAFF_NUMBER_UNKNOWN_;
+  fCurrentMusicXMLStaffNumber      = msrStaff::K_STAFF_NUMBER_UNKNOWN_;
+
+  fPreviousNoteMusicXMLVoiceNumber = msrStaff::K_STAFF_NUMBER_UNKNOWN_;
+
+  fCurrentChordStaffNumber = msrStaff::K_STAFF_NUMBER_UNKNOWN_;
 
   // tuplets
 
@@ -476,8 +473,8 @@ void mxsr2msrTranslator::checkStep (
 
     ss <<
       markup <<
-      " value '" << stepValue <<
-      "' should be a single letter from A to G";
+      " value " << stepValue <<
+      " should be a single letter from A to G";
 
       mxsr2msrError (
         gServiceRunData->getInputSourceName (),
@@ -531,8 +528,8 @@ S_msrStaff mxsr2msrTranslator::fetchStaffFromCurrentPart (
     std::stringstream ss;
 
     ss <<
-      "staff '" << staffNumber <<
-      "' not found in score skeleton's part " <<
+      "staff " << staffNumber <<
+      " not found in score skeleton's part " <<
       fCurrentPart->getPartCombinedName ();
 
     mxsr2msrInternalError (
@@ -623,11 +620,14 @@ S_msrVoice mxsr2msrTranslator::fetchVoiceFromCurrentPart (
     std::stringstream ss;
 
     ss <<
-      "voice '" << voiceNumber <<
-      "' not found in score skeleton's staff \"" <<
+      "voice " << voiceNumber <<
+      " not found in score skeleton's staff \"" <<
       staff->getStaffName () <<
       "\"";
-abort();
+
+    gLog << ss.str () << std::endl;
+    abort();
+
     mxsr2msrInternalError (
       gServiceRunData->getInputSourceName (),
       inputLineNumber,
@@ -2498,9 +2498,9 @@ void mxsr2msrTranslator::visitStart (S_part& elt)
       std::stringstream ss;
 
       ss <<
-        "part 'id' is empty, using '" <<
+        "part 'id' is empty, using " <<
         partID <<
-        "' since it is the only part in the <part-list />";
+        " since it is the only part in the <part-list />";
 
       mxsr2msrWarning (
         gServiceRunData->getInputSourceName (),
@@ -2565,7 +2565,6 @@ void mxsr2msrTranslator::visitStart (S_part& elt)
   fCurrentMusicXMLVoiceNumber = msrVoice::K_VOICE_NUMBER_UNKNOWN_;
 
   // staff change detection
-//   fCurrentStaffNumberToInsertInto = 1; // default value JMI v0.9.67 msrStaff::K_STAFF_NUMBER_UNKNOWN_;
 
   // cross staff chords
   fCurrentNoteIsCrossStaves = false; // needed ??? JMI
@@ -3451,7 +3450,7 @@ void mxsr2msrTranslator::visitStart (S_mode& elt)
     std::stringstream ss;
 
     ss <<
-      "mode '" << mode << "' is unknown";
+      "mode " << mode << " is unknown";
 
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
@@ -3560,8 +3559,8 @@ void mxsr2msrTranslator::visitStart (S_key_alter& elt)
     std::stringstream ss;
 
     ss <<
-      "key alter '" << keyAlter << "'"
-      "' should be -3, -2, -1.5, -1, -0.5, 0, +0.5, +1, +1.5, +2 or +3";
+      "key alter " << keyAlter <<
+      " should be -3, -2, -1.5, -1, -0.5, 0, +0.5, +1, +1.5, +2 or +3";
 
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
@@ -4760,10 +4759,10 @@ void mxsr2msrTranslator::visitEnd (S_direction& elt)
           std::stringstream ss;
 
           ss <<
-            "Attaching words '" <<
+            "Attaching words " <<
             words->asString () <<
-            "' to metronome tempo '" <<
-            fCurrentMetronomeTempo->asString () << "'" <<
+            " to metronome tempo " <<
+            fCurrentMetronomeTempo->asString () <<
             std::endl;
 
           gWaeHandler->waeTrace (
@@ -4925,9 +4924,9 @@ void mxsr2msrTranslator::visitStart (S_offset& elt)
 
       ss <<
         "Harmony offset \"" << offsetValue << "\"" <<
-        ", represents = \'" <<
+        ", represents = \"" <<
        offsetWholeNotesFromNotesDuration <<
-       "\' whole notes" <<
+       "\" whole notes" <<
         std::endl;
 
       gWaeHandler->waeTrace (
@@ -5418,7 +5417,7 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
           wordsValue <<
           "\" to an MSR tempo" <<
           ", fCurrentDirectionStaffNumber: " << fCurrentDirectionStaffNumber <<
-          ", fPreviousMusicXMLVoiceNumber: " << fPreviousMusicXMLVoiceNumber <<
+          ", fPreviousNoteMusicXMLVoiceNumber: " << fPreviousNoteMusicXMLVoiceNumber <<
           ", line " << inputLineNumber <<
           std::endl;
 
@@ -5461,7 +5460,7 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
           wordsValue <<
           "\" to an MSR rehearsal mark" <<
           ", fCurrentDirectionStaffNumber: " << fCurrentDirectionStaffNumber <<
-          ", fPreviousMusicXMLVoiceNumber: " << fPreviousMusicXMLVoiceNumber <<
+          ", fPreviousNoteMusicXMLVoiceNumber: " << fPreviousNoteMusicXMLVoiceNumber <<
           ", line " << inputLineNumber <<
           std::endl;
 
@@ -5502,7 +5501,7 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
           wordsValue <<
           "\" to an MSR segno" <<
           ", fCurrentDirectionStaffNumber: " << fCurrentDirectionStaffNumber <<
-          ", fPreviousMusicXMLVoiceNumber: " << fPreviousMusicXMLVoiceNumber <<
+          ", fPreviousNoteMusicXMLVoiceNumber: " << fPreviousNoteMusicXMLVoiceNumber <<
           ", line " << inputLineNumber <<
           std::endl;
 
@@ -5537,13 +5536,12 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
         std::stringstream ss;
 
         ss <<
-          "Converting words '" <<
+          "Converting words \"" <<
           wordsValue <<
-          "' to an MSR dal segno '" <<
+          "\" to an MSR dal segno " <<
           dalSegno->asString () <<
-          "'" <<
           ", fCurrentDirectionStaffNumber: " << fCurrentDirectionStaffNumber <<
-          ", fPreviousMusicXMLVoiceNumber: " << fPreviousMusicXMLVoiceNumber <<
+          ", fPreviousNoteMusicXMLVoiceNumber: " << fPreviousNoteMusicXMLVoiceNumber <<
           ", line " << inputLineNumber <<
           std::endl;
 
@@ -5581,13 +5579,12 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
         std::stringstream ss;
 
         ss <<
-          "Converting words '" <<
+          "Converting words " <<
           wordsValue <<
-          "' to an MSR dal segno '" <<
+          " to an MSR dal segno " <<
           dalSegno->asString () <<
-          "'" <<
           ", fCurrentDirectionStaffNumber: " << fCurrentDirectionStaffNumber <<
-          ", fPreviousMusicXMLVoiceNumber: " << fPreviousMusicXMLVoiceNumber <<
+          ", fPreviousNoteMusicXMLVoiceNumber: " << fPreviousNoteMusicXMLVoiceNumber <<
           ", line " << inputLineNumber <<
           std::endl;
 
@@ -5621,13 +5618,12 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
         std::stringstream ss;
 
         ss <<
-          "Converting words '" <<
+          "Converting words " <<
           wordsValue <<
-          "' to an MSR dal segno '" <<
+          " to an MSR dal segno " <<
           dalSegno->asString () <<
-          "'" <<
           ", fCurrentDirectionStaffNumber: " << fCurrentDirectionStaffNumber <<
-          ", fPreviousMusicXMLVoiceNumber: " << fPreviousMusicXMLVoiceNumber <<
+          ", fPreviousNoteMusicXMLVoiceNumber: " << fPreviousNoteMusicXMLVoiceNumber <<
           ", line " << inputLineNumber <<
           std::endl;
 
@@ -5664,13 +5660,12 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
         std::stringstream ss;
 
         ss <<
-          "Converting words '" <<
+          "Converting words " <<
           wordsValue <<
-          "' to an MSR coda first '" <<
+          " to an MSR coda first " <<
           coda->asString () <<
-          "'" <<
           ", fCurrentDirectionStaffNumber: " << fCurrentDirectionStaffNumber <<
-          ", fPreviousMusicXMLVoiceNumber: " << fPreviousMusicXMLVoiceNumber <<
+          ", fPreviousNoteMusicXMLVoiceNumber: " << fPreviousNoteMusicXMLVoiceNumber <<
           ", line " << inputLineNumber <<
           std::endl;
 
@@ -5708,13 +5703,12 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
         std::stringstream ss;
 
         ss <<
-          "Converting words '" <<
+          "Converting words " <<
           wordsValue <<
-          "' to an MSR coda second '" <<
+          " to an MSR coda second " <<
           coda->asString () <<
-          "'" <<
           ", fCurrentDirectionStaffNumber: " << fCurrentDirectionStaffNumber <<
-          ", fPreviousMusicXMLVoiceNumber: " << fPreviousMusicXMLVoiceNumber <<
+          ", fPreviousNoteMusicXMLVoiceNumber: " << fPreviousNoteMusicXMLVoiceNumber <<
           ", line " << inputLineNumber <<
           std::endl;
 
@@ -5747,7 +5741,7 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
           wordsValue <<
           "\" to an MSR cresc" <<
           ", fCurrentDirectionStaffNumber: " << fCurrentDirectionStaffNumber <<
-          ", fPreviousMusicXMLVoiceNumber: " << fPreviousMusicXMLVoiceNumber <<
+          ", fPreviousNoteMusicXMLVoiceNumber: " << fPreviousNoteMusicXMLVoiceNumber <<
           ", line " << inputLineNumber <<
           std::endl;
 
@@ -5805,7 +5799,7 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
           wordsValue <<
           "\" to an MSR decresc" <<
           ", fCurrentDirectionStaffNumber: " << fCurrentDirectionStaffNumber <<
-          ", fPreviousMusicXMLVoiceNumber: " << fPreviousMusicXMLVoiceNumber <<
+          ", fPreviousNoteMusicXMLVoiceNumber: " << fPreviousNoteMusicXMLVoiceNumber <<
           ", line " << inputLineNumber <<
           std::endl;
 
@@ -6437,9 +6431,9 @@ void mxsr2msrTranslator::attachCurrentMetronomeBeamsToMetronomeNote (
         std::stringstream ss;
 
         ss <<
-          "Attaching beam '" <<
+          "Attaching beam " <<
           beam->asString () <<
-          "' to tempoNote '" << tempoNote->asString () << "'" <<
+          " to tempoNote " << tempoNote->asString () <<
           std::endl;
 
         gWaeHandler->waeTrace (
@@ -6953,9 +6947,8 @@ void mxsr2msrTranslator::visitEnd (S_metronome& elt)
     std::stringstream ss;
 
     ss <<
-      "Creating tempo '" <<
+      "Creating tempo " <<
       fCurrentMetronomeTempo->asString () <<
-      "'" <<
       std::endl;
 
     gWaeHandler->waeTrace (
@@ -6985,10 +6978,10 @@ void mxsr2msrTranslator::visitEnd (S_metronome& elt)
           std::stringstream ss;
 
           ss <<
-            "Attaching words '" <<
+            "Attaching words " <<
             words->asString () <<
-            "' to tempo '" <<
-            fCurrentMetronomeTempo->asString () << "'" <<
+            " to tempo " <<
+            fCurrentMetronomeTempo->asString () <<
             std::endl;
 
           gWaeHandler->waeTrace (
@@ -7564,8 +7557,8 @@ void mxsr2msrTranslator::visitStart (S_tuning_alter& elt)
     std::stringstream ss;
 
     ss <<
-      "tuning alter '" << tuningAlter <<
-      "' should be -3, -2, -1.5, -1, -0.5, 0, +0.5, +1, +1.5, +2 or +3";
+      "tuning alter " << tuningAlter <<
+      " should be -3, -2, -1.5, -1, -0.5, 0, +0.5, +1, +1.5, +2 or +3";
 
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
@@ -7761,6 +7754,26 @@ void mxsr2msrTranslator::visitStart (S_voice& elt)
 //________________________________________________________________________
 void mxsr2msrTranslator::visitStart (S_backup& elt)
 {
+/*
+<!--
+  The backup and forward elements are required to coordinate
+  multiple voices in one part, including music on multiple
+  staves. The forward element is generally used within voices
+  and staves, while the backup element is generally used to
+  move between voices and staves. Thus the backup element
+  does not include voice or staff elements. NotesDuration values
+  should always be positive, and should not cross measure
+  boundaries or mid-measure changes in the divisions value.
+-->
+<!ELEMENT backup (duration, %editorial;)>
+<!ELEMENT forward
+  (duration, %editorial-voice;, staff?)>
+
+      <backup>
+        <duration>8</duration>
+      </backup>
+*/
+
 #ifdef MF_TRACE_IS_ENABLED
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -7786,26 +7799,6 @@ void mxsr2msrTranslator::visitEnd (S_backup& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
-
-/*
-<!--
-  The backup and forward elements are required to coordinate
-  multiple voices in one part, including music on multiple
-  staves. The forward element is generally used within voices
-  and staves, while the backup element is generally used to
-  move between voices and staves. Thus the backup element
-  does not include voice or staff elements. NotesDuration values
-  should always be positive, and should not cross measure
-  boundaries or mid-measure changes in the divisions value.
--->
-<!ELEMENT backup (duration, %editorial;)>
-<!ELEMENT forward
-  (duration, %editorial-voice;, staff?)>
-
-      <backup>
-        <duration>8</duration>
-      </backup>
-*/
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -7852,7 +7845,7 @@ void mxsr2msrTranslator::visitEnd (S_backup& elt)
       inputLineNumber,
       backupStepLength);
 
-  // reset notes staff numbers
+  // reset notes staff numbers // JMI v0.9.67
 //   fPreviousNoteMusicXMLStaffNumber = msrStaff::K_STAFF_NUMBER_UNKNOWN_;
 //   fCurrentMusicXMLStaffNumber      = msrStaff::K_STAFF_NUMBER_UNKNOWN_;
 
@@ -7862,7 +7855,6 @@ void mxsr2msrTranslator::visitEnd (S_backup& elt)
 
   // reset staff change detection
   // only now, it is used by handleBackup() v0.9.63 JMI ???
-//   fCurrentStaffNumberToInsertInto = msrStaff::K_STAFF_NUMBER_UNKNOWN_;
 
   fOnGoingBackup = false;
 }
@@ -7892,24 +7884,6 @@ void mxsr2msrTranslator::visitStart (S_forward& elt)
 
 void mxsr2msrTranslator::visitEnd (S_forward& elt)
 {
-  int inputLineNumber =
-    elt->getInputLineNumber ();
-
-#ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    std::stringstream ss;
-
-    ss <<
-      "--> End visiting S_forward" <<
-      ", line " << inputLineNumber <<
-      std::endl;
-
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-
 /*
 <!--
   The backup and forward elements are required to coordinate
@@ -7932,6 +7906,24 @@ void mxsr2msrTranslator::visitEnd (S_forward& elt)
       </forward>
 */
 
+  int inputLineNumber =
+    elt->getInputLineNumber ();
+
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+    std::stringstream ss;
+
+    ss <<
+      "--> End visiting S_forward" <<
+      ", line " << inputLineNumber <<
+      std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
   // the <staff /> element is present only in case of a staff change ???
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -7944,7 +7936,7 @@ void mxsr2msrTranslator::visitEnd (S_forward& elt)
       fCurrentForwardStaffNumber <<
       ", fCurrentForwardVoiceNumber: " <<
       fCurrentForwardVoiceNumber <<
-      "', line " << inputLineNumber <<
+      ", line " << inputLineNumber <<
       std::endl;
 
     gWaeHandler->waeTrace (
@@ -8033,8 +8025,6 @@ void mxsr2msrTranslator::visitEnd (S_forward& elt)
       forwardStepLength);
 
   // reset staff change detection
-  // fCurrentStaffNumberToInsertInto = 1; // default value JMI msrStaff::K_STAFF_NUMBER_UNKNOWN_;
-//   fCurrentStaffNumberToInsertInto = msrStaff::K_STAFF_NUMBER_UNKNOWN_; // JMI ??? no if forward is followed by backup???
 
   fOnGoingForward = false;
 }
@@ -8088,7 +8078,7 @@ void mxsr2msrTranslator::visitStart (S_tied& elt)
       if (tiedType.size ()) {
         std::stringstream ss;
 
-        ss << "tied type '" << fCurrentSlurType << "' inside a slur is unknown";
+        ss << "tied type \"" << fCurrentSlurType << "\" inside a slur is unknown";
 
         mxsr2msrError (
           gServiceRunData->getInputSourceName (),
@@ -8104,7 +8094,7 @@ void mxsr2msrTranslator::visitStart (S_tied& elt)
       if (tiedType.size ()) {
         std::stringstream ss;
 
-        ss << "tied type '" << fCurrentSlurType << "' inside a ligature is unknown";
+        ss << "tied type \"" << fCurrentSlurType << "\" inside a ligature is unknown";
 
         mxsr2msrError (
           gServiceRunData->getInputSourceName (),
@@ -8296,9 +8286,9 @@ void mxsr2msrTranslator::visitStart (S_slur& elt)
   #ifdef MF_TRACE_IS_ENABLED
               if (gTraceOahGroup->getTraceSlurs ()) {
                 gLog <<
-                  "The slur start '" <<
+" <<
                   containingSlur->asString () <<
-                  "' contains a nested slur, it is thus a phrasing slur start" <<
+                  " contains a nested slur, it is thus a phrasing slur start" <<
                   ", line " << inputLineNumber <<
                   std::endl;
               }
@@ -9570,7 +9560,7 @@ void mxsr2msrTranslator::visitEnd (S_lyric& elt)
       std::stringstream ss;
 
       ss <<
-        "Creating a syllable '" <<
+        "Creating a syllable \"" <<
         msrSyllableKindAsString (
           fCurrentSyllableKind) <<
         "\", fCurrentLyricTextsList = \"";
@@ -9676,11 +9666,11 @@ void mxsr2msrTranslator::visitStart (S_measure& elt)
 
     ss <<
       "==> visitStart (S_measure" <<
-      ", fPartMeasuresCounter: '" <<
-        fPartMeasuresCounter <<
-      "', fCurrentMeasureNumber: '" <<
+      ", fPartMeasuresCounter: " <<
+      fPartMeasuresCounter <<
+      ", fCurrentMeasureNumber: " <<
         fCurrentMeasureNumber <<
-      "', line " << inputLineNumber <<
+      ", line " << inputLineNumber <<
       ", in part \"" <<
       fCurrentPart->getPartCombinedName () << "\"" <<
       std::endl;
@@ -9744,11 +9734,11 @@ void mxsr2msrTranslator::visitStart (S_measure& elt)
         std::stringstream ss;
 
         ss <<
-          "measure numbering inconsistency: first measure numbers '" <<
+          "measure numbering inconsistency: first measure numbers " <<
           fScoreFirstMeasureNumber <<
-           "' and '" <<
+           " and " <<
           fPartFirstMeasureNumber <<
-          "' found";
+          " found";
 
         mxsr2msrError (
           gServiceRunData->getInputSourceName (),
@@ -9809,7 +9799,7 @@ void mxsr2msrTranslator::visitStart (S_measure& elt)
       inputLineNumber,
       msrWholeNotes (0, 1));
 
-  // forget about the current non-grace note JMI HERE???
+  // forget about the current non-grace note JMI v0.9.67???
 // JMI  fCurrentNonGraceNote = nullptr;
 
   ////////////////////////////////////////////////////////////////////
@@ -9828,9 +9818,8 @@ void mxsr2msrTranslator::visitStart (S_measure& elt)
   ////////////////////////////////////////////////////////////////////
 
   // reset staff change detection
-  fPreviousNoteMusicXMLStaffNumber = 1; // default value
-  fCurrentMusicXMLStaffNumber      = 1; // default value
-//   fCurrentStaffNumberToInsertInto  = 1; // default value JMI msrStaff::K_STAFF_NUMBER_UNKNOWN_;
+  fPreviousNoteMusicXMLStaffNumber = msrStaff::K_STAFF_NUMBER_UNKNOWN_; // default value
+  fCurrentMusicXMLStaffNumber      = msrStaff::K_STAFF_NUMBER_UNKNOWN_; // default value
 
 /* JMI
   // is this measure number in the debug set?
@@ -9903,9 +9892,8 @@ void mxsr2msrTranslator::visitEnd (S_measure& elt)
 
       ss <<
         std::endl <<
-        "fCurrentGraceNotes IS NOT NULL at the end of measure '" << // JMI
+        "fCurrentGraceNotes IS NOT NULL at the end of measure " << // JMI
         elt->getAttributeValue ("number") <<
-        "'" <<
         std::endl;
 
       ss <<
@@ -9975,7 +9963,9 @@ void mxsr2msrTranslator::visitEnd (S_measure& elt)
   }
 
   // attach the spanners if any to the note
-  attachCurrentSpannersToNote (noteToAttachTo);
+  attachCurrentSpannersToNote (
+    noteToAttachTo,
+    "mxsr2msrTranslator::visitEnd (S_measure& elt)");
 
   // finalize current measure in the part,
   // to add skips if necessary and set measure kind
@@ -10282,61 +10272,64 @@ Staff spacing between multiple staves is measured in
     fCurrentMusicXMLPrintLayout->setStaffSpacing (value);
   }
 
-  // handle 'new-system' if present
+  // handle 'new-system' if present and relevant
 
-  const std::string newSystem = elt->getAttributeValue ("new-system");
+  if (! gGlobalMxsr2msrOahGroup->getIgnoreMusicXMLLineBreaks ()) {
+    const std::string newSystem = elt->getAttributeValue ("new-system");
 
-  if (newSystem.size ()) {
-    fCurrentMusicXMLPrintLayout->setNewSystem ();
+    if (newSystem.size ()) {
+      fCurrentMusicXMLPrintLayout->setNewSystem ();
 
-    if (newSystem == "yes") {
-      // create a line break
-#ifdef MF_TRACE_IS_ENABLED
-      if (gTraceOahGroup->getTraceLineBreaks ()) {
+      if (newSystem == "yes") {
+        // create a line break
+  #ifdef MF_TRACE_IS_ENABLED
+        if (gTraceOahGroup->getTraceLineBreaks ()) {
+          std::stringstream ss;
+
+          ss <<
+            "Creating a line break, " <<
+            "line: " << inputLineNumber <<
+            std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
+        }
+  #endif // MF_TRACE_IS_ENABLED
+
+        S_msrLineBreak
+          lineBreak =
+            msrLineBreak::create (
+              inputLineNumber,
+              fCurrentMeasureNumber,
+              msrUserSelectedLineBreakKind::kUserSelectedLineBreakNo);
+
+        // append lineBreak to the pending line breaks
+        fPendingLineBreaksList.push_back (lineBreak);
+      }
+
+      else if (newSystem == "no") {
+        // ignore it
+      }
+
+      else {
         std::stringstream ss;
 
-        ss <<
-          "Creating a line break, " <<
-          "line: " << inputLineNumber <<
-          std::endl;
+        ss << "new-system \"" << newSystem <<
+        "\" is unknown in '<print />', should be 'yes', 'no' or empty";
 
-        gWaeHandler->waeTrace (
+        mxsr2msrError (
+          gServiceRunData->getInputSourceName (),
+          inputLineNumber,
           __FILE__, __LINE__,
           ss.str ());
       }
-#endif // MF_TRACE_IS_ENABLED
-
-      S_msrLineBreak
-        lineBreak =
-          msrLineBreak::create (
-            inputLineNumber,
-            fCurrentMeasureNumber,
-            msrUserSelectedLineBreakKind::kUserSelectedLineBreakNo);
-
-      // append lineBreak to the pending line breaks
-      fPendingLineBreaksList.push_back (lineBreak);
-    }
-
-    else if (newSystem == "no") {
-      // ignore it
-    }
-
-    else {
-      std::stringstream ss;
-
-      ss << "new-system \"" << newSystem <<
-      "\" is unknown in '<print />', should be 'yes', 'no' or empty";
-
-      mxsr2msrError (
-        gServiceRunData->getInputSourceName (),
-        inputLineNumber,
-        __FILE__, __LINE__,
-        ss.str ());
     }
   }
 
   // handle 'new-page' if present and relevant
-  if (! gGlobalMxsr2msrOahGroup->getIgnorePageBreaksInMusicXML ()) {
+
+  if (! gGlobalMxsr2msrOahGroup->getIgnoreMusicXMLPageBreaks ()) {
     const std::string newPage = elt->getAttributeValue ("new-page");
 
     if (newPage.size ()) {
@@ -10831,7 +10824,7 @@ void mxsr2msrTranslator::visitStart (S_pedal& elt)
   else {
     std::stringstream ss;
 
-    ss << "pedal type '" << type << "' is unknown";
+    ss << "pedal type " << type << " is unknown";
 
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
@@ -11698,8 +11691,8 @@ void mxsr2msrTranslator::visitStart (S_alter& elt)
     std::stringstream ss;
 
     ss <<
-      "alter '" << alter << "'"
-      "' should be -3, -2, -1.5, -1, -0.5, 0, +0.5, +1, +1.5, +2 or +3";
+      "alter " << alter <<
+      " should be -3, -2, -1.5, -1, -0.5, 0, +0.5, +1, +1.5, +2 or +3";
 
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
@@ -11735,8 +11728,8 @@ void mxsr2msrTranslator::visitStart (S_octave& elt)
     std::stringstream ss;
 
     ss <<
-      "octave number '" << octaveNumber <<
-      "' is not in the 0..9 range, '0' is assumed";
+      "octave number " << octaveNumber <<
+      " is not in the 0..9 range, '0' is assumed";
 
     mxsr2msrWarning (
       gServiceRunData->getInputSourceName (),
@@ -14863,8 +14856,8 @@ void mxsr2msrTranslator::visitStart (S_string& elt)
     stringIntegerValue = 0;
 
     ss <<
-      "std::string value \"" << stringValue <<
-      "\" is empoty, '" << stringIntegerValue << "' is assumed";
+      "string value \"" << stringValue <<
+      "\" is empty, " << stringIntegerValue << " is assumed";
 
     mxsr2msrWarning (
       gServiceRunData->getInputSourceName (),
@@ -15267,7 +15260,7 @@ void mxsr2msrTranslator::visitStart (S_tremolo& elt)
     tremoloMarksNumber = 1;
 
     ss <<
-      "--> tremolo value is missing, '" << tremoloMarksNumber << "' assumed";
+      "--> tremolo value is missing, " << tremoloMarksNumber << " assumed";
 
     mxsr2msrWarning (
       gServiceRunData->getInputSourceName (),
@@ -15582,7 +15575,7 @@ void mxsr2msrTranslator::visitStart (S_dashes& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
- // type : upright inverted  (Binchois20.xml) JMI
+ // type : upright inverted  (Binchois20.xml) JMI v0.9.67
 
   // number
 
@@ -15644,6 +15637,36 @@ void mxsr2msrTranslator::visitStart (S_dashes& elt)
 
 void mxsr2msrTranslator::visitStart (S_wavy_line& elt)
 {
+/*
+<!--
+	Fermata and wavy-line elements can be applied both to
+	notes and to barlines, so they are defined here. Wavy
+	lines are one way to indicate trills; when used with a
+	barline element, they should always have type="continue"
+	set. The fermata text content represents the shape of the
+	fermata sign and may be normal, angled, square,
+	double-angled, double-square, double-dot, half-curve,
+	curlew, or an empty string. An empty fermata element
+	represents a normal fermata. The fermata type is upright
+	if not specified.
+-->
+<!ELEMENT fermata  (#PCDATA)>
+<!ATTLIST fermata
+    type (upright | inverted) #IMPLIED
+    %print-style;
+    %optional-unique-id;
+>
+<!ELEMENT wavy-line EMPTY>
+<!ATTLIST wavy-line
+    type %start-stop-continue; #REQUIRED
+    number %number-level; #IMPLIED
+    %position;
+    %placement;
+    %color;
+    %trill-sound;
+>
+*/
+
   int inputLineNumber =
     elt->getInputLineNumber ();
 
@@ -15715,7 +15738,7 @@ void mxsr2msrTranslator::visitStart (S_wavy_line& elt)
         msrSpannerKind::kSpannerWavyLine,
         fWavyLineSpannerTypeKind,
         placementKind,
-        nullptr); // will be set later REMOVE??? JMI
+        nullptr); // will be set later REMOVE??? JMI v0.9.67
 
   switch (fWavyLineSpannerTypeKind) {
     case msrSpannerTypeKind::kSpannerTypeStart:
@@ -18880,9 +18903,9 @@ void mxsr2msrTranslator::visitStart (S_glissando& elt)
     std::stringstream ss;
 
     ss <<
-      "Appending glissando '" <<
+      "Appending glissando " <<
       glissando->asString () <<
-      "' to the glissandos pending list" <<
+      " to the glissandos pending list" <<
       std::endl;
 
     gWaeHandler->waeTrace (
@@ -19012,9 +19035,9 @@ void mxsr2msrTranslator::visitStart (S_slide& elt)
     std::stringstream ss;
 
     ss <<
-      "Appending slide '" <<
+      "Appending slide " <<
       slide->asString () <<
-      "' to the slides pending list" <<
+      " to the slides pending list" <<
       std::endl;
 
     gWaeHandler->waeTrace (
@@ -19168,8 +19191,8 @@ void mxsr2msrTranslator::visitStart (S_display_octave& elt)
     std::stringstream ss;
 
     ss <<
-      "display octave number '" << displayOctaveNumber <<
-      "' is not in the 0..9 range, '0' is assumed";
+      "display octave number " << displayOctaveNumber <<
+      " is not in the 0..9 range, '0' is assumed";
 
     mxsr2msrWarning (
       gServiceRunData->getInputSourceName (),
@@ -19223,7 +19246,7 @@ S_msrChord mxsr2msrTranslator::createChordFromItsFirstNote (
     std::stringstream ss;
 
     ss <<
-      "--> creating a chord from its first note '" <<
+      "--> creating a chord from its first note " <<
       chordFirstNote->asShortString () <<
       ", in voice \"" << voice->getVoiceName () << "\"" <<
       ", line " << inputLineNumber <<
@@ -19333,9 +19356,8 @@ void mxsr2msrTranslator::registerVoiceCurrentChordInMap (
     std::stringstream ss;
 
     ss <<
-      "Registering chord '" <<
+      "Registering chord " <<
       chord->asString () <<
-      "'" <<
       " as current chord in voice \"" <<
       voice->getVoiceName () <<
       "\", line " << inputLineNumber <<
@@ -19522,9 +19544,9 @@ void mxsr2msrTranslator::copyNoteArticulationsToChord (
       std::stringstream ss;
 
       ss <<
-        "Copying articulation '" <<
+        "Copying articulation " <<
         articulation->getArticulationKind () <<
-        "' from note " << note->asString () <<
+        " from note " << note->asString () <<
         " to chord" <<
         std::endl;
 
@@ -19556,9 +19578,9 @@ void mxsr2msrTranslator::copyNoteTechnicalsToChord (
     std::stringstream ss;
 
     ss <<
-      "Copying technical '" <<
+      "Copying technical " <<
       technical->getTechnicalKind () <<
-      "' from note " << note->asString () <<
+      " from note " << note->asString () <<
       " to chord" <<
       std::endl;
     }
@@ -19584,9 +19606,9 @@ void mxsr2msrTranslator::copyNoteTechnicalWithIntegersToChord (
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceTechnicals ()) {
       gLog <<
-        "Copying technical '" <<
+        "Copying technical " <<
         technicalWithInteger->getTechnicalWithIntegerKind () <<
-        "' from note " << note->asString () <<
+        " from note " << note->asString () <<
         " to chord" <<
         std::endl;
       }
@@ -19614,9 +19636,9 @@ void mxsr2msrTranslator::copyNoteTechnicalWithFloatsToChord (
       std::stringstream ss;
 
       ss <<
-        "Copying technical '" <<
+        "Copying technical " <<
         technicalWithFloat->getTechnicalWithFloatKind () <<
-        "' from note " << note->asString () <<
+        " from note " << note->asString () <<
         " to chord" <<
         std::endl;
 
@@ -19648,9 +19670,9 @@ void mxsr2msrTranslator::copyNoteTechnicalWithStringsToChord (
       std::stringstream ss;
 
       ss <<
-        "Copying technical '" <<
+        "Copying technical " <<
         technicalWithString->getTechnicalWithStringKind () <<
-        "' from note " << note->asString () <<
+        " from note " << note->asString () <<
         " to chord" <<
         std::endl;
 
@@ -19682,9 +19704,9 @@ void mxsr2msrTranslator::copyNoteOrnamentsToChord (
       std::stringstream ss;
 
       ss <<
-        "Copying ornament '" <<
+        "Copying ornament " <<
         msrOrnamentKindAsString (ornament->getOrnamentKind ()) <<
-        "' from note " << note->asString () <<
+        " from note " << note->asString () <<
         " to chord" <<
         std::endl;
 
@@ -19717,9 +19739,9 @@ void mxsr2msrTranslator::copyNoteSpannersToChord (
       std::stringstream ss;
 
       ss <<
-        "Copying spanner '" <<
+        "Copying spanner " <<
         spanner->getSpannerKind () <<
-        "' from note " << note->asString () <<
+        " from note " << note->asString () <<
         " to chord" <<
         std::endl;
 
@@ -19752,9 +19774,9 @@ void mxsr2msrTranslator::copyNoteSingleTremoloToChord (
       std::stringstream ss;
 
       ss <<
-        "Copying singleTremolo '" <<
+        "Copying singleTremolo " <<
         noteSingleTremolo->asString () <<
-        "' from note " << note->asString () <<
+        " from note " << note->asString () <<
         " to chord" <<
         std::endl;
 
@@ -19793,9 +19815,9 @@ void mxsr2msrTranslator::copyNoteDynamicsToChord (
       std::stringstream ss;
 
       ss <<
-        "Copying dynamics '" <<
+        "Copying dynamics " <<
         msrDynamicKindAsString ((*i)->getDynamicKind ()) <<
-        "' from note " << note->asString () <<
+        " from note " << note->asString () <<
         " to chord" <<
         std::endl;
 
@@ -19834,9 +19856,9 @@ void mxsr2msrTranslator::copyNoteOtherDynamicsToChord (
       std::stringstream ss;
 
       ss <<
-        "Copying other dynamics '" <<
+        "Copying other dynamics " <<
         (*i)->asString () <<
-        "' from note " << note->asString () <<
+        " from note " << note->asString () <<
         " to chord" <<
         std::endl;
 
@@ -19875,9 +19897,9 @@ void mxsr2msrTranslator::copyNoteWordsToChord (
       std::stringstream ss;
 
       ss <<
-        "Copying words '" <<
+        "Copying words " <<
         (*i)->asString () <<
-        "' from note " << note->asString () <<
+        " from note " << note->asString () <<
         " to chord" <<
         std::endl;
 
@@ -19910,9 +19932,9 @@ void mxsr2msrTranslator::copyNoteStemToChord (
       std::stringstream ss;
 
       ss <<
-        "Copying stem '" <<
+        "Copying stem " <<
         noteStem->asString () <<
-        "' from note " << note->asString () <<
+        " from note " << note->asString () <<
         " to chord" <<
         std::endl;
 
@@ -19950,9 +19972,9 @@ void mxsr2msrTranslator::copyNoteBeamsToChord (
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceBeams ()) {
       gLog <<
-        "Copying beam '" <<
+        "Copying beam " <<
         (*i)->asString () <<
-        "' from note " << note->asString () <<
+        " from note " << note->asString () <<
         " to chord" <<
         std::endl;
 
@@ -20010,9 +20032,9 @@ void mxsr2msrTranslator::appendNoteBeamsLinksToChord (
       std::stringstream ss;
 
       ss <<
-        "Adding beam link of '" <<
+        "Adding beam link of " <<
         beam->asString () <<
-        "' from note " << note->asString () <<
+        " from note " << note->asString () <<
         " to chord" <<
         std::endl;
 
@@ -20072,9 +20094,9 @@ void mxsr2msrTranslator::copyNoteTieToChord (
       std::stringstream ss;
 
       ss <<
-        "Appending tie '" <<
+        "Appending tie " <<
         noteTie->asString () <<
-        "' from note " << note->asString () <<
+        " from note " << note->asString () <<
         " to chord" <<
         std::endl;
 
@@ -20134,9 +20156,9 @@ void mxsr2msrTranslator::copyNoteSlursToChord (
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceSlurs ()) {
       gLog <<
-        "Copying slur '" <<
+        "Copying slur " <<
         (*i)->asString () <<
-        "' from note " << note->asString () <<
+        " from note " << note->asString () <<
         " to chord" <<
         std::endl;
 
@@ -20177,9 +20199,9 @@ void mxsr2msrTranslator::appendNoteSlursLinksToChord (
       std::stringstream ss;
 
       ss <<
-        "Adding slur link of '" <<
+        "Adding slur link of " <<
         slur->asString () <<
-        "' from note " << note->asString () <<
+        " from note " << note->asString () <<
         " to chord" <<
         std::endl;
 
@@ -20239,9 +20261,9 @@ void mxsr2msrTranslator::copyNoteLigaturesToChord (
       std::stringstream ss;
 
       ss <<
-        "Copying ligature '" <<
+        "Copying ligature " <<
         ligature->getLigatureKind () <<
-        "' from note " << note->asString () <<
+        " from note " << note->asString () <<
         " to chord" <<
         std::endl;
 
@@ -20275,9 +20297,9 @@ void mxsr2msrTranslator::copyNotePedalsToChord (
       std::stringstream ss;
 
       ss <<
-        "Copying pedal '" <<
+        "Copying pedal " <<
         pedal->asString () <<
-        "' from note " << note->asString () <<
+        " from note " << note->asString () <<
         " to chord" << chord->asString () <<
         std::endl;
 
@@ -20316,9 +20338,9 @@ void mxsr2msrTranslator::copyNoteSlashesToChord (
       std::stringstream ss;
 
       ss <<
-        "Copying slash '" <<
+        "Copying slash " <<
         (*i)->asString () <<
-        "' from note " << note->asString () <<
+        " from note " << note->asString () <<
         " to chord" <<
         std::endl;
 
@@ -20358,9 +20380,9 @@ void mxsr2msrTranslator::copyNoteWedgesToChord (
       std::stringstream ss;
 
       ss <<
-        "Copying wedges '" <<
+        "Copying wedges " <<
         msrWedgeKindAsString (wedge->getWedgeKind ()) <<
-        "' from note " << note->asString () <<
+        " from note " << note->asString () <<
         " to chord" <<
         std::endl;
 
@@ -20399,9 +20421,9 @@ void mxsr2msrTranslator::copyNoteSegnosToChord (
       std::stringstream ss;
 
       ss <<
-        "Copying segno '" <<
+        "Copying segno " <<
         (*i)->asShortString () <<
-        "' from note " << note->asString () <<
+        " from note " << note->asString () <<
         " to chord" <<
         std::endl;
 
@@ -20440,9 +20462,9 @@ void mxsr2msrTranslator::copyNoteDalSegnosToChord (
       std::stringstream ss;
 
       ss <<
-        "Copying dal degno '" <<
+        "Copying dal degno " <<
         (*i)->asShortString () <<
-        "' from note " << note->asString () <<
+        " from note " << note->asString () <<
         " to chord" <<
         std::endl;
 
@@ -20481,9 +20503,9 @@ void mxsr2msrTranslator::copyNoteCodasToChord (
       std::stringstream ss;
 
       ss <<
-        "Copying coda '" <<
+        "Copying coda " <<
         (*i)->asShortString () <<
-        "' from note " << note->asString () <<
+        " from note " << note->asString () <<
         " to chord" <<
         std::endl;
 
@@ -20516,9 +20538,9 @@ void mxsr2msrTranslator::copyNoteOctaveShiftToChord (
       std::stringstream ss;
 
       ss <<
-        "Copying octave shift '" <<
+        "Copying octave shift " <<
         noteOctaveShift->asString () <<
-        "' from note " << note->asString () <<
+        " from note " << note->asString () <<
         " to chord" <<
         std::endl;
 
@@ -20550,11 +20572,10 @@ void mxsr2msrTranslator::copyNoteGraceNotesGroupsToChord (
       std::stringstream ss;
 
       ss <<
-        "Copying grace notes group before '" <<
+        "Copying grace notes group before " <<
         graceNotesGroupBefore->asShortString () <<
-        "' from note " << note->asString () <<
-        " to chord '" << chord->asString () <<
-        "'" <<
+        " from note " << note->asString () <<
+        " to chord " << chord->asString () <<
         std::endl;
 
       gWaeHandler->waeTrace (
@@ -20578,11 +20599,10 @@ void mxsr2msrTranslator::copyNoteGraceNotesGroupsToChord (
       std::stringstream ss;
 
       ss <<
-        "Copying grace notes group after '" <<
+        "Copying grace notes group after " <<
         graceNotesGroupAfter->asShortString () <<
-        "' from note " << note->asString () <<
-        " to chord '" << chord->asString () <<
-        "'" <<
+        " from note " << note->asString () <<
+        " to chord " << chord->asString () <<
         std::endl;
 
       gWaeHandler->waeTrace (
@@ -20615,11 +20635,11 @@ void mxsr2msrTranslator::addNoteGraceNotesGroupsLinksToChord (
       std::stringstream ss;
 
       ss <<
-        "Adding grace notes group link before '" <<
+        "Adding grace notes group link before " <<
         graceNotesGroupBefore->asShortString () <<
-        "' from note " << note->asString () <<
-        " to chord '" << chord->asString () <<
-        "'" <<
+        " from note " << note->asString () <<
+        " to chord " << chord->asString () <<
+        "" <<
         std::endl;
 
       gWaeHandler->waeTrace (
@@ -20654,11 +20674,10 @@ void mxsr2msrTranslator::addNoteGraceNotesGroupsLinksToChord (
       std::stringstream ss;
 
       ss <<
-        "Adding grace notes group link after '" <<
+        "Adding grace notes group link after " <<
         graceNotesGroupAfter->asShortString () <<
-        "' from note " << note->asString () <<
-        " to chord '" << chord->asString () <<
-        "'" <<
+        " from note " << note->asString () <<
+        " to chord " << chord->asString () <<
         std::endl;
 
       gWaeHandler->waeTrace (
@@ -20953,9 +20972,9 @@ void mxsr2msrTranslator::createAndPushTupletUponItsFirstNote (
     std::stringstream ss;
 
     ss <<
-      "++> pushing tuplet '" <<
+      "++> pushing tuplet " <<
       tuplet->asString () <<
-      "' to tuplets stack" <<
+      " to tuplets stack" <<
       std::endl;
 
     gWaeHandler->waeTrace (
@@ -21107,11 +21126,10 @@ void mxsr2msrTranslator::finalizeTupletAndPopItFromTupletsStack (
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceTuplets ()) {
       gLog <<
-        "=== adding nested tuplet '" <<
+        "=== adding nested tuplet " <<
       tuplet->asString () <<
-        "' to current stack top tuplet '" <<
+        " to current stack top tuplet " <<
       fTupletsStack.front ()->asString () <<
-      "'" <<
       ", line " << inputLineNumber <<
       std::endl;
     }
@@ -21153,7 +21171,7 @@ void mxsr2msrTranslator::finalizeTupletAndPopItFromTupletsStack (
 //     fCurrentTopLevelTupletFirstNote = nullptr;
 //     fCurrentTopLevelTuplet = nullptr;
 
- // JMI BAD HERE   // the tuplet stop is not to be handled later
+ // JMI v0.9.67   // the tuplet stop is not to be handled later
  //   fCurrentATupletStopIsPending = false;
   }
 
@@ -21197,9 +21215,9 @@ void mxsr2msrTranslator::attachCurrentArticulationsToNote (
         std::stringstream ss;
 
         ss <<
-          "Attaching articulation '" <<
+          "Attaching articulation " <<
           art->getArticulationKind () <<
-          "' to note " << note->asString () <<
+          " to note " << note->asString () <<
           std::endl;
 
         gWaeHandler->waeTrace (
@@ -21249,9 +21267,9 @@ void mxsr2msrTranslator::attachCurrentTechnicalsToNote (
         std::stringstream ss;
 
         ss <<
-          "Attaching technical '" <<
+          "Attaching technical " <<
           tech->asString () <<
-          "' to note " << note->asString () <<
+          " to note " << note->asString () <<
           std::endl;
 
         gWaeHandler->waeTrace (
@@ -21301,9 +21319,9 @@ void mxsr2msrTranslator::attachCurrentTechnicalWithIntegersToNote (
         std::stringstream ss;
 
         ss <<
-          "Attaching technical with integer '" <<
+          "Attaching technical with integer " <<
           tech->asString () <<
-          "' to note " << note->asString () <<
+          " to note " << note->asString () <<
           std::endl;
 
         gWaeHandler->waeTrace (
@@ -21353,9 +21371,9 @@ void mxsr2msrTranslator::attachCurrentTechnicalWithFloatsToNote (
         std::stringstream ss;
 
         ss <<
-          "Attaching technical with integer '" <<
+          "Attaching technical with integer " <<
           tech->asString () <<
-          "' to note " << note->asString () <<
+          " to note " << note->asString () <<
           std::endl;
 
         gWaeHandler->waeTrace (
@@ -21405,9 +21423,9 @@ void mxsr2msrTranslator::attachCurrentTechnicalWithStringsToNote (
         std::stringstream ss;
 
         ss <<
-          "Attaching technical with std::string '" <<
+          "Attaching technical with std::string " <<
           tech->asString () <<
-          "' to note " << note->asString () <<
+          " to note " << note->asString () <<
           std::endl;
 
         gWaeHandler->waeTrace (
@@ -21457,9 +21475,9 @@ void mxsr2msrTranslator::attachCurrentOrnamentsToNote (
         std::stringstream ss;
 
         ss <<
-          "Attaching ornament '" <<
+          "Attaching ornament " <<
           msrOrnamentKindAsString (ornament->getOrnamentKind ()) <<
-          "' to note " << note->asString () <<
+          " to note " << note->asString () <<
           std::endl;
 
       gWaeHandler->waeTrace (
@@ -21479,19 +21497,22 @@ void mxsr2msrTranslator::attachCurrentOrnamentsToNote (
 
 //______________________________________________________________________________
 void mxsr2msrTranslator::attachCurrentSpannersToNote (
-  const S_msrNote& note)
+  const S_msrNote&   note,
+  const std::string& context)
 {
   // attach the current spanners if any to the note
   if (fCurrentSpannersList.size ()) {
 
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceSpanners ()) {
-    std::stringstream ss;
+      std::stringstream ss;
 
-    ss <<
-        "Attaching current spanners to note " <<
-        note->asString () <<
-        std::endl;
+      ss <<
+          "Attaching current spanners to note " <<
+          note->asString () <<
+          ", context: " << context <<
+          ", line " << note->getInputLineNumber () <<
+          std::endl;
 
       gWaeHandler->waeTrace (
         __FILE__, __LINE__,
@@ -21499,61 +21520,61 @@ void mxsr2msrTranslator::attachCurrentSpannersToNote (
     }
 #endif // MF_TRACE_IS_ENABLED
 
-    Bool doHandleSpanner (true);
-    Bool spannerStopMetForThisNote (false);
-
-    S_msrSpanner delayedStopSpanner;
+//     Bool doHandleSpanner (true);
+//     Bool spannerStopMetForThisNote (false);
+//
+//     S_msrSpanner delayedStopSpanner;
 
     while (fCurrentSpannersList.size ()) {
       S_msrSpanner
         spanner =
           fCurrentSpannersList.front();
 
-      switch (spanner->getSpannerKind ()) {
-        case msrSpannerKind::kSpannerDashes: // JMI
-          switch (spanner->getSpannerTypeKind ()) {
-            case msrSpannerTypeKind::kSpannerTypeStart:
-              spannerStopMetForThisNote = true;
-              break;
-            case msrSpannerTypeKind::kSpannerTypeStop:
-              doHandleSpanner =
-                ! spannerStopMetForThisNote;
-              break;
-            case msrSpannerTypeKind::kSpannerTypeContinue:
-              break;
-            case msrSpannerTypeKind::kSpannerType_UNKNOWN_:
-              // JMI ???
-              break;
-          } // switch
-          break;
+//       switch (spanner->getSpannerKind ()) {
+//         case msrSpannerKind::kSpannerDashes: // JMI
+//           switch (spanner->getSpannerTypeKind ()) {
+//             case msrSpannerTypeKind::kSpannerTypeStart:
+//               spannerStopMetForThisNote = true;
+//               break;
+//             case msrSpannerTypeKind::kSpannerTypeStop:
+//               doHandleSpanner =
+//                 ! spannerStopMetForThisNote;
+//               break;
+//             case msrSpannerTypeKind::kSpannerTypeContinue:
+//               break;
+//             case msrSpannerTypeKind::kSpannerType_UNKNOWN_:
+//               // JMI ???
+//               break;
+//           } // switch
+//           break;
+//
+//         case msrSpannerKind::kSpannerWavyLine:
+//           switch (spanner->getSpannerTypeKind ()) {
+//             case msrSpannerTypeKind::kSpannerTypeStart:
+//               spannerStopMetForThisNote = true;
+//               break;
+//             case msrSpannerTypeKind::kSpannerTypeStop:
+//               doHandleSpanner =
+//                 ! spannerStopMetForThisNote;
+//               break;
+//             case msrSpannerTypeKind::kSpannerTypeContinue:
+//               break;
+//             case msrSpannerTypeKind::kSpannerType_UNKNOWN_:
+//               // JMI ???
+//               break;
+//           } // switch
+//           break;
+//       } // switch
 
-        case msrSpannerKind::kSpannerWavyLine:
-          switch (spanner->getSpannerTypeKind ()) {
-            case msrSpannerTypeKind::kSpannerTypeStart:
-              spannerStopMetForThisNote = true;
-              break;
-            case msrSpannerTypeKind::kSpannerTypeStop:
-              doHandleSpanner =
-                ! spannerStopMetForThisNote;
-              break;
-            case msrSpannerTypeKind::kSpannerTypeContinue:
-              break;
-            case msrSpannerTypeKind::kSpannerType_UNKNOWN_:
-              // JMI ???
-              break;
-          } // switch
-          break;
-      } // switch
-
-      if (doHandleSpanner) {
+//       if (doHandleSpanner) {
 #ifdef MF_TRACE_IS_ENABLED
         if (gTraceOahGroup->getTraceSpanners ()) {
           std::stringstream ss;
 
           ss <<
-            "Attaching spanner '" <<
+            "Attaching spanner " <<
             spanner->asShortString () <<
-            "' to note " << note->asString () <<
+            " to note " << note->asString () <<
             std::endl;
 
           gWaeHandler->waeTrace (
@@ -21571,38 +21592,38 @@ void mxsr2msrTranslator::attachCurrentSpannersToNote (
 
         // forget about this spanner
         fCurrentSpannersList.pop_front ();
-      }
+//       }
 
-      else { // check it is the same spanner kind JMI
-#ifdef MF_TRACE_IS_ENABLED
-        if (gTraceOahGroup->getTraceSpanners ()) {
-          std::stringstream ss;
-
-          ss <<
-            "Spanner start amd stop on one and the same note' to note " <<
-            note->asString () <<
-            ", delaying 'stop' until next note" <<
-            std::endl;
-
-          gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
-            ss.str ());
-        }
-#endif // MF_TRACE_IS_ENABLED
-
-        // keep track of this stop spanner
-        delayedStopSpanner = spanner;
-
-        // forget about this spanner to avoid infinite loop
-        fCurrentSpannersList.pop_front ();
-      }
+//       else { // check it is the same spanner kind JMI
+// #ifdef MF_TRACE_IS_ENABLED
+//         if (gTraceOahGroup->getTraceSpanners ()) {
+//           std::stringstream ss;
+//
+//           ss <<
+//             "Spanner start amd stop on one and the same note' to note " <<
+//             note->asString () <<
+//             ", delaying 'stop' until next note" <<
+//             std::endl;
+//
+//           gWaeHandler->waeTrace (
+//             __FILE__, __LINE__,
+//             ss.str ());
+//         }
+// #endif // MF_TRACE_IS_ENABLED
+//
+//         // keep track of this stop spanner
+//         delayedStopSpanner = spanner;
+//
+//         // forget about this spanner to avoid infinite loop
+//         fCurrentSpannersList.pop_front ();
+//       }
     } // while
 
-    // append delayed stop spanner if any again to the list
-    if (delayedStopSpanner) {
-      fCurrentSpannersList.push_back (
-        delayedStopSpanner);
-    }
+//     // append delayed stop spanner if any again to the list
+//     if (delayedStopSpanner) {
+//       fCurrentSpannersList.push_back (
+//         delayedStopSpanner);
+//     }
   }
 }
 
@@ -22972,9 +22993,9 @@ void mxsr2msrTranslator::attachPendingLigaturesToNote (
               gLog <<
                 "Attaching pending ligature " <<
                 ligature->asString () <<
-                " to note '" <<
+                " to note " <<
                 note->asString () <<
-//                 "' in voice \"" <<
+//                 " in voice \"" <<
 //                 noteVoice->getVoiceName () <<
 //                 "\"" <<
                 ", line " << ligature->getInputLineNumber () <<
@@ -23276,9 +23297,9 @@ void mxsr2msrTranslator::attachPendingGlissandosToNote (
 #ifdef MF_TRACE_IS_ENABLED
               if (gTraceOahGroup->getTraceGlissandos ()) {
                 gLog <<
-                  "Attaching a skip syllable to note '" <<
+                  "Attaching a skip syllable to note " <<
                   note->asString () <<
-                  "' that has a glissando stop and no lyrics " <<
+                  " that has a glissando stop and no lyrics " <<
                   ", line " << inputLineNumber <<
                   std::endl;
               }
@@ -23396,9 +23417,9 @@ void mxsr2msrTranslator::attachPendingSlidesToNote (
 #ifdef MF_TRACE_IS_ENABLED
               if (gTraceOahGroup->getTraceSlides ()) {
                 gLog <<
-                  "Attaching a skip syllable to note '" <<
+                  "Attaching a skip syllable to note " <<
                   note->asString () <<
-                  "' that has a slide stop and no lyrics " <<
+                  " that has a slide stop and no lyrics " <<
                   ", line " << inputLineNumber <<
                   std::endl;
               }
@@ -24030,7 +24051,9 @@ void mxsr2msrTranslator::populateNoteBeforeNoteItselfIsHandled (
   attachCurrentOrnamentsToNote (newNote);
 
   // attach the spanners if any to the note
-  attachCurrentSpannersToNote (newNote);
+  attachCurrentSpannersToNote (
+    newNote,
+    "populateNoteBeforeNoteItselfIsHandled()");
 
   // attach the singleTremolo if any to the note
   attachCurrentSingleTremoloToNote (newNote);
@@ -24073,6 +24096,25 @@ void mxsr2msrTranslator::createAStaffChangeIfNecessary (
   const S_msrNote&  newNote,
   const S_msrVoice& voiceToInsertInto)
 {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceNotes () || gTraceOahGroup->getTraceStaffChanges ()) {
+    std::stringstream ss;
+
+    ss <<
+      "createAStaffChangeIfNecessary()" <<
+      ", newNote: " << newNote->asShortString () <<
+      ", fPreviousNoteMusicXMLStaffNumber: " << fPreviousNoteMusicXMLStaffNumber <<
+      ", fCurrentMusicXMLStaffNumber: " << fCurrentMusicXMLStaffNumber <<
+      ", voiceToInsertInto: " << voiceToInsertInto->getVoiceName () <<
+      ", line " << inputLineNumber <<
+      std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
   // is there a staff change?
   fCurrentStaffChangeKind = msrStaffChangeKind::kStaffChange_UNKNOWN_;
 
@@ -24103,9 +24145,9 @@ void mxsr2msrTranslator::createAStaffChangeIfNecessary (
         std::stringstream ss;
 
         ss <<
-          "*** There is staff change for chord member note '" <<
+          "*** There is staff change for chord member note " <<
           newNote->asShortString () <<
-          "' in voice \"" <<
+          ", voiceToInsertInto: " << voiceToInsertInto->getVoiceName () <<
           voiceToInsertInto->getVoiceName () <<
           "\"" <<
           " from staff " << fPreviousNoteMusicXMLStaffNumber <<
@@ -24122,8 +24164,8 @@ void mxsr2msrTranslator::createAStaffChangeIfNecessary (
 
       fCurrentStaffChangeKind = msrStaffChangeKind::kStaffChangeChordMemberNote;
 
-      // LilyPond doesn't support cross staff chords, JMI
-      // so place newNote in its 'official' staff
+//       LilyPond doesn't support cross staff chords, JMI v0.9.67
+//       so place newNote in its 'official' staff
     }
 
     else {
@@ -24138,14 +24180,14 @@ void mxsr2msrTranslator::createAStaffChangeIfNecessary (
         std::stringstream ss;
 
         ss <<
-          "*** There is staff change for note '" <<
+          "*** There is staff change for note " <<
           newNote->asShortString () <<
-          "' in voice \"" <<
+          ", voiceToInsertInto: \"" <<
           voiceToInsertInto->getVoiceName () <<
           "\"" <<
-          " from staff " << fPreviousNoteMusicXMLStaffNumber <<
-          " to staff " << fCurrentMusicXMLStaffNumber <<
-          ", \"" << staffToChangeTo->getStaffName () << "\"" <<
+          ", fPreviousNoteMusicXMLStaffNumber: " << fPreviousNoteMusicXMLStaffNumber <<
+          ", fCurrentMusicXMLStaffNumber: " << fCurrentMusicXMLStaffNumber <<
+//           ", \"" << staffToChangeTo->getStaffName () << "\"" <<
           ", line " << inputLineNumber <<
           std::endl;
 
@@ -24162,25 +24204,20 @@ void mxsr2msrTranslator::createAStaffChangeIfNecessary (
             inputLineNumber,
             staffToChangeTo);
 
-  /* JMI
-      // fetch the voice to insert into
+      // fetch the voice to insert into,
+      // keeping populating the staff the previous note belongs to
       S_msrVoice
-        voiceToInsertInto =
+        voiceToInsertInto2 =
           fetchVoiceFromCurrentPart (
             inputLineNumber,
-            fCurrentMusicXMLStaffNumber,
-            fCurrentMusicXMLVoiceNumber);
-*/
+            fPreviousNoteMusicXMLStaffNumber,
+            fPreviousNoteMusicXMLVoiceNumber);
 
       // append it to the current sequence voice
       // before the note itself is appended
-      voiceToInsertInto->
+      voiceToInsertInto2->
         appendVoiceStaffChangeToVoice (
           voiceStaffChange);
-
-      // the actual note staff is already stored in newNote,
-      // now fake its belonging to the current sequence staff
-   // JMI  BOFBOFBOF ??? fCurrentMusicXMLStaffNumber = fCurrentStaffNumberToInsertInto;
     }
   }
 }
@@ -24416,75 +24453,156 @@ void mxsr2msrTranslator::attachPendingGraceNotesGroupToNoteIfRelevant (
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::handleBackup (
-  int inputLineNumber)
-{
-#ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceBackup ()) {
-    std::stringstream ss;
+// void mxsr2msrTranslator::handleBackup (
+//   int inputLineNumber)
+// {
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gGlobalMxsrOahGroup->getTraceBackup ()) {
+//     std::stringstream ss;
+//
+//     ss <<
+//       "Handling pending backup" <<
+//       ", fCurrentBackupDivisions: " <<
+//       fCurrentBackupDivisions <<
+//       ", fCurrentNonGraceNote: " <<
+//       fCurrentNonGraceNote->asShortString () <<
+//       std::endl;
+//
+//     gWaeHandler->waeTrace (
+//       __FILE__, __LINE__,
+//       ss.str ());
+//   }
+// #endif // MF_TRACE_IS_ENABLED
+//
+//   // fetch current voice
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gTraceOahGroup->getTraceOctaveShifts ()) {
+//     std::stringstream ss;
+//
+//     ss <<
+//       "--> handleBackup()" <<
+//       ", fCurrentMusicXMLStaffNumber: " <<
+//       fCurrentMusicXMLStaffNumber <<
+//       ", fCurrentMusicXMLVoiceNumber: " <<
+//       fCurrentMusicXMLVoiceNumber <<
+//       ", line " << inputLineNumber <<
+//       std::endl;
+//
+//     gWaeHandler->waeTrace (
+//       __FILE__, __LINE__,
+//       ss.str ());
+//   }
+// #endif // MF_TRACE_IS_ENABLED
+//
+//   S_msrVoice
+//     currentVoice =
+//       fetchVoiceFromCurrentPart (
+//         inputLineNumber,
+//         fCurrentMusicXMLStaffNumber,
+//         fCurrentMusicXMLVoiceNumber);
+//
+//   // are there pending note level elements?
+//   attachPendingNoteLevelElementsToNote ( // JMI
+//     fCurrentNonGraceNote);
+//
+//   // is there a pending grace notes group?
+//   attachPendingGraceNotesGroupToNoteIfRelevant (
+//     inputLineNumber);
+//
+//   // are there pending spanners?
+//   attachCurrentSpannersToNote (
+//     fCurrentNonGraceNote,
+//     "handleBackup()");
+//
+//   // compute the backup step length
+//   msrWholeNotes
+//     backupStepLength =
+//       msrWholeNotes (
+//         fCurrentBackupDivisions,
+//         fCurrentDivisionsPerQuarterNote * 4); // hence a whole note
+//
+//   // let fCurrentPart handle the backup
+//   fCurrentPart->
+//     handleBackupInPart (
+//       inputLineNumber,
+//       backupStepLength);
+// }
 
-    ss <<
-      "Handling pending backup" <<
-      ", fCurrentBackupDivisions: " <<
-      fCurrentBackupDivisions <<
-      ", fCurrentNonGraceNote: " <<
-      fCurrentNonGraceNote->asShortString () <<
-      std::endl;
-
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-  // fetch current voice
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceOctaveShifts ()) {
-    std::stringstream ss;
-
-    ss <<
-      "--> handleBackup()" <<
-      ", fCurrentMusicXMLStaffNumber: " <<
-      fCurrentMusicXMLStaffNumber <<
-      ", fCurrentMusicXMLVoiceNumber: " <<
-      fCurrentMusicXMLVoiceNumber <<
-      ", line " << inputLineNumber <<
-      std::endl;
-
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-  S_msrVoice
-    currentVoice =
-      fetchVoiceFromCurrentPart (
-        inputLineNumber,
-        fCurrentMusicXMLStaffNumber,
-        fCurrentMusicXMLVoiceNumber);
-
-  // are there pending note level elements?
-  attachPendingNoteLevelElementsToNote ( // JMI
-    fCurrentNonGraceNote);
-
-  // is there a pending grace notes group?
-  attachPendingGraceNotesGroupToNoteIfRelevant (
-    inputLineNumber);
-
-  // compute the backup step length
-  msrWholeNotes
-    backupStepLength =
-      msrWholeNotes (
-        fCurrentBackupDivisions,
-        fCurrentDivisionsPerQuarterNote * 4); // hence a whole note
-
-  // let fCurrentPart handle the backup
-  fCurrentPart->
-    handleBackupInPart (
-      inputLineNumber,
-      backupStepLength);
-}
+//______________________________________________________________________________
+// void mxsr2msrTranslator::handleForward (
+//   int inputLineNumber)
+// {
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gGlobalMxsrOahGroup->getTraceBackup ()) {
+//     std::stringstream ss;
+//
+//     ss <<
+//       "Handling pending forward" <<
+//       ", fCurrentForwardDivisions: " <<
+//       fCurrentForwardDivisions <<
+//       ", fCurrentNonGraceNote: " <<
+//       fCurrentNonGraceNote->asShortString () <<
+//       std::endl;
+//
+//     gWaeHandler->waeTrace (
+//       __FILE__, __LINE__,
+//       ss.str ());
+//   }
+// #endif // MF_TRACE_IS_ENABLED
+//
+//   // fetch current voice
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gTraceOahGroup->getTraceOctaveShifts ()) {
+//     std::stringstream ss;
+//
+//     ss <<
+//       "--> handleForward()" <<
+//       ", fCurrentMusicXMLStaffNumber: " <<
+//       fCurrentMusicXMLStaffNumber <<
+//       ", fCurrentMusicXMLVoiceNumber: " <<
+//       fCurrentMusicXMLVoiceNumber <<
+//       ", line " << inputLineNumber <<
+//       std::endl;
+//
+//     gWaeHandler->waeTrace (
+//       __FILE__, __LINE__,
+//       ss.str ());
+//   }
+// #endif // MF_TRACE_IS_ENABLED
+//
+//   S_msrVoice
+//     currentVoice =
+//       fetchVoiceFromCurrentPart (
+//         inputLineNumber,
+//         fCurrentMusicXMLStaffNumber,
+//         fCurrentMusicXMLVoiceNumber);
+//
+//   // are there pending note level elements?
+//   attachPendingNoteLevelElementsToNote ( // JMI
+//     fCurrentNonGraceNote);
+//
+//   // is there a pending grace notes group?
+//   attachPendingGraceNotesGroupToNoteIfRelevant (
+//     inputLineNumber);
+//
+//   // are there pending spanners?
+//   attachCurrentSpannersToNote (
+//     fCurrentNonGraceNote,
+//     "handleForward()");
+//
+//   // compute the backup step length
+//   msrWholeNotes
+//     backupStepLength =
+//       msrWholeNotes (
+//         fCurrentBackupDivisions,
+//         fCurrentDivisionsPerQuarterNote * 4); // hence a whole note
+//
+//   // let fCurrentPart handle the backup
+//   fCurrentPart->
+//     handleBackupInPart (
+//       inputLineNumber,
+//       backupStepLength);
+// }
 
 //______________________________________________________________________________
 void mxsr2msrTranslator::visitEnd (S_note& elt)
@@ -24624,7 +24742,11 @@ void mxsr2msrTranslator::visitEnd (S_note& elt)
   }
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceNotes () || gTraceOahGroup->getTraceStaffChanges ()) {
+  if (
+    gTraceOahGroup->getTraceNotes ()
+      ||
+    gTraceOahGroup->getTraceStaffChanges ()
+  ) {
     std::stringstream ss;
 
     ss <<
@@ -24645,11 +24767,12 @@ void mxsr2msrTranslator::visitEnd (S_note& elt)
 #endif // MF_TRACE_IS_ENABLED
 
   // fetch voice to insert note into
+  // keeping populating the staff the previous note belongs to
   S_msrVoice
     voiceToInsertNoteInto =
       fetchVoiceFromCurrentPart (
         inputLineNumber,
-        fCurrentMusicXMLStaffNumber,
+        fCurrentMusicXMLStaffNumber, // fPreviousNoteMusicXMLStaffNumber, fCurrentMusicXMLStaffNumber
         fCurrentMusicXMLVoiceNumber);
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
@@ -24660,74 +24783,45 @@ void mxsr2msrTranslator::visitEnd (S_note& elt)
     "voiceToInsertNoteInto is null");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceNotes () || gTraceOahGroup->getTraceStaffChanges ()) {
-    std::stringstream ss;
-
-    ss <<
-      "==> is there a staff change?" <<
-      " fCurrentMusicXMLStaffNumber: " <<
-      fPreviousNoteMusicXMLStaffNumber <<
-      ", fCurrentMusicXMLStaffNumber: " <<
-      fCurrentMusicXMLStaffNumber <<
-      ", in voice \"" <<
-      voiceToInsertNoteInto->getVoiceName() <<
-      "\"" <<
-      /* JMI
-      ", fCurrentMusicXMLStaffNumber: " << fCurrentMusicXMLStaffNumber <<
-      ", in staff \"" <<
-      staff->getStaffName() <<
-      "\"" <<
-      */
-      ", line " << inputLineNumber <<
-      std::endl;
-
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-
   // create a staff change if necessary
   createAStaffChangeIfNecessary (
     inputLineNumber,
     newNote,
     voiceToInsertNoteInto);
 
-
-// HERE JMI BLARK
-  // attach the pre-pending elements if any to newNote,
-  // before the note itself is handled, because that may cause
-  // tuplets or chords to be appended to the voice
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceNotes () || gTraceOahGroup->getTraceStaffChanges ()) {
-    std::stringstream ss;
-
-    ss <<
-      "==> fetching voice to insert harmonies, figured bass elements and/or frames into" <<
-      ", fPreviousNoteMusicXMLStaffNumber: " <<
-      fPreviousNoteMusicXMLStaffNumber <<
-      ", fCurrentMusicXMLStaffNumber: " <<
-      fCurrentMusicXMLStaffNumber <<
-      ", fCurrentMusicXMLVoiceNumber: " <<
-      fCurrentMusicXMLVoiceNumber <<
-      ", line " << inputLineNumber <<
-      std::endl;
-
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-/* JMI
-  // fetch the staff from current part
-  S_msrStaff
-    staff =
-      fetchStaffFromCurrentPart (
-        inputLineNumber,
-        fCurrentMusicXMLStaffNumber);
-*/
+// // JMI v0.9.67
+//   // attach the pre-pending elements if any to newNote,
+//   // before the note itself is handled, because that may cause
+//   // tuplets or chords to be appended to the voice
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gTraceOahGroup->getTraceNotes () || gTraceOahGroup->getTraceStaffChanges ()) {
+//     std::stringstream ss;
+//
+//     ss <<
+//       "==> fetching voice to insert harmonies, figured bass elements and/or frames into" <<
+//       ", fPreviousNoteMusicXMLStaffNumber: " <<
+//       fPreviousNoteMusicXMLStaffNumber <<
+//       ", fCurrentMusicXMLStaffNumber: " <<
+//       fCurrentMusicXMLStaffNumber <<
+//       ", fCurrentMusicXMLVoiceNumber: " <<
+//       fCurrentMusicXMLVoiceNumber <<
+//       ", line " << inputLineNumber <<
+//       std::endl;
+//
+//     gWaeHandler->waeTrace (
+//       __FILE__, __LINE__,
+//       ss.str ());
+//   }
+// #endif // MF_TRACE_IS_ENABLED
+//
+// /* JMI
+//   // fetch the staff from current part
+//   S_msrStaff
+//     staff =
+//       fetchStaffFromCurrentPart (
+//         inputLineNumber,
+//         fCurrentMusicXMLStaffNumber);
+// */
 
   ////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////
@@ -25148,7 +25242,7 @@ void mxsr2msrTranslator::handlePendingMultipleHarmonies (
       fPendingHarmoniesList.size () <<
       " harmonies for note " <<
       newNote->asShortString () <<
-      " in offset relative order '" <<
+      " in offset relative order " <<
       ", line " << inputLineNumber <<
       std::endl;
 
@@ -25897,9 +25991,9 @@ void mxsr2msrTranslator::handleNonChordNorTupletNoteOrRest (
             std::stringstream ss;
 
             ss <<
-              "Setting regular note '" <<
+              "Setting regular note " <<
               newNote->asString () <<
-              "', line " << newNote->getInputLineNumber () <<
+              ", line " << newNote->getInputLineNumber () <<
               ", as double tremolo first element" <<
               " in voice \"" <<
               currentVoice->getVoiceName () <<
@@ -25924,9 +26018,9 @@ void mxsr2msrTranslator::handleNonChordNorTupletNoteOrRest (
             std::stringstream ss;
 
             ss <<
-              "Setting regular note '" <<
+              "Setting regular note " <<
               newNote->asString () <<
-              "', line " << newNote->getInputLineNumber () <<
+              ", line " << newNote->getInputLineNumber () <<
               ", as double tremolo second element" <<
               " in voice \"" <<
               currentVoice->getVoiceName () <<
@@ -26046,9 +26140,9 @@ void mxsr2msrTranslator::handleLyricsForNoteAfterNoteItselfIsHandled (
     std::stringstream ss;
 
     ss <<
-      "Handling lyrics for note '" <<
+      "Handling lyrics for note " <<
       newNote->asShortString () <<
-      "', line " << inputLineNumber <<
+      ", line " << inputLineNumber <<
       std::endl;
 
     ++gIndenter;
@@ -26111,9 +26205,9 @@ void mxsr2msrTranslator::handleLyricsForNoteAfterNoteItselfIsHandled (
       std::stringstream ss;
 
       ss <<
-        "Note '" <<
+        "Note " <<
         newNote->asShortString () <<
-        "' has lyrics attached to it" << " ***" <<
+        " has lyrics attached to it" << " ***" <<
         std::endl;
 
       gWaeHandler->waeTrace (
@@ -26326,7 +26420,7 @@ void mxsr2msrTranslator::handleNoteBelongingToAChord (
       fCurrentMusicXMLStaffNumber <<
       ", staffNumberToUse: " <<
       staffNumberToUse <<
-      "', line " << inputLineNumber <<
+      ", line " << inputLineNumber <<
       std::endl;
 
     gWaeHandler->waeTrace (
@@ -26545,7 +26639,7 @@ void mxsr2msrTranslator::handleNoteBelongingToAChord (
             fPreviousNoteMusicXMLStaffNumber <<
             ", fCurrentMusicXMLStaffNumber: " <<
             fCurrentMusicXMLStaffNumber <<
-            "', line " << inputLineNumber <<
+            ", line " << inputLineNumber <<
             std::endl;
 
           gWaeHandler->waeTrace (
@@ -26596,8 +26690,8 @@ void mxsr2msrTranslator::handleNoteBelongingToAChord (
 #ifdef MF_TRACE_IS_ENABLED
           if (gTraceOahGroup->getTraceNotes () || gTraceOahGroup->getTraceChords ()) {
             gLog <<
-              "Updating sounding divisions for double tremolo chord '" <<
-              "' " << chord->asString () <<
+              "Updating sounding divisions for double tremolo chord " <<
+              " " << chord->asString () <<
               " to " << chordFirstNoteSoundingWholeNotes.asString () <<
               " in voice \"" <<
               currentVoice->getVoiceName () <<
@@ -26630,9 +26724,9 @@ void mxsr2msrTranslator::handleNoteBelongingToAChord (
             std::stringstream ss;
 
             ss <<
-              "chord first note '" <<
+              "chord first note " <<
               chordFirstNote->asShortString () <<
-              "' belongs to a double tremolo, but is not marked as such";
+              " belongs to a double tremolo, but is not marked as such";
 
             mxsr2msrInternalError (
               gServiceRunData->getInputSourceName (),
@@ -26758,10 +26852,9 @@ void mxsr2msrTranslator::handlePendingTupletStopIfAny (
       std::stringstream ss;
 
       ss <<
-        "--> kTupletTypeStart: handling pending tuplet stop, note '" <<
-        note->
-          asShortString () <<
-        "', line " << inputLineNumber <<
+        "--> kTupletTypeStart: handling pending tuplet stop, note " <<
+        note->asShortString () <<
+        ", line " << inputLineNumber <<
         std::endl;
 
       gWaeHandler->waeTrace (
@@ -26839,10 +26932,9 @@ void mxsr2msrTranslator::handleNoteBelongingToATuplet (
           std::stringstream ss;
 
           ss <<
-            "--> kTupletTypeStart: note: '" <<
-            note->
-              asShortString () <<
-            "', line " << inputLineNumber <<
+            "--> kTupletTypeStart: note: " <<
+            note->asShortString () <<
+            ", line " << inputLineNumber <<
             std::endl;
 
           gWaeHandler->waeTrace (
@@ -26861,10 +26953,9 @@ void mxsr2msrTranslator::handleNoteBelongingToATuplet (
 #ifdef MF_TRACE_IS_ENABLED
           if (gTraceOahGroup->getTraceTuplets ()) {
             gLog <<
-              "--> kTupletTypeStart: handling pending tuplet stop, note '" <<
-              note->
-                asShortString () <<
-              "', line " << inputLineNumber <<
+              "--> kTupletTypeStart: handling pending tuplet stop, note " <<
+              note->asShortString () <<
+              ", line " << inputLineNumber <<
               std::endl;
           }
 #endif // MF_TRACE_IS_ENABLED
@@ -26899,12 +26990,11 @@ void mxsr2msrTranslator::handleNoteBelongingToATuplet (
 #ifdef MF_TRACE_IS_ENABLED
           if (gTraceOahGroup->getTraceTuplets ()) {
             gLog <<
-              "--> kTupletTypeContinue: adding tuplet member note '" <<
-              note->
-                asShortString () <<
-              "' to stack top tuplet '" <<
+              "--> kTupletTypeContinue: adding tuplet member note " <<
+              note->asShortString () <<
+              " to stack top tuplet " <<
               currentTuplet->asString () <<
-              "', line " << inputLineNumber <<
+              ", line " << inputLineNumber <<
               std::endl;
           }
 #endif // MF_TRACE_IS_ENABLED
@@ -26995,9 +27085,8 @@ void mxsr2msrTranslator::handleNoteBelongingToATuplet (
               if (gTraceOahGroup->getTraceTuplets ()) {
                 gLog <<
                   "--> kTupletTypeStop: adding outer-most tuplet member note " <<
-                  note->
-                    asShortString () <<
-                  "' to stack top tuplet '" <<
+                  note->asShortString () <<
+                  " to stack top tuplet " <<
                   currentTuplet->asString () <<
                   ", line " << inputLineNumber <<
                   std::endl;
@@ -27100,9 +27189,8 @@ void mxsr2msrTranslator::handleNoteBelongingToATuplet (
               if (gTraceOahGroup->getTraceTuplets ()) {
                 gLog <<
                   "--> kTupletTypeStop: adding nested tuplet member note " <<
-                  note->
-                    asShortString () <<
-                  "' to stack top tuplet '" <<
+                  note->asShortString () <<
+                  " to stack top tuplet " <<
                   currentTuplet->asString () <<
                   ", line " << inputLineNumber <<
                   std::endl;
@@ -27156,10 +27244,9 @@ void mxsr2msrTranslator::handleNoteBelongingToATuplet (
           std::stringstream ss;
 
           ss <<
-            "--> kTupletTypeStartAndStopInARow: note: '" <<
-            note->
-              asShortString () <<
-            "', line " << inputLineNumber <<
+            "--> kTupletTypeStartAndStopInARow: note: " <<
+            note->asShortString () <<
+            ", line " << inputLineNumber <<
             std::endl;
 
           gWaeHandler->waeTrace (
@@ -27369,11 +27456,11 @@ void mxsr2msrTranslator::handleNoteBelongingToAChordInATuplet (
       std::stringstream ss;
 
       ss <<
-        "Adding chord '" <<
+        "Adding chord " <<
         fCurrentChord->asString () <<
-        "' to stack top tuplet '" <<
+        " to stack top tuplet " <<
         currentTuplet->asString () <<
-        "', line " << inputLineNumber <<
+        ", line " << inputLineNumber <<
         std::endl;
 
       gWaeHandler->waeTrace (
@@ -27459,10 +27546,8 @@ void mxsr2msrTranslator::handleNoteBelongingToAChordInAGraceNotesGroup (
 
     ss <<
       "Handling a note belonging to a chord in grace notes" <<
-      ", newChordNote is '" <<
-      newChordNote->
-        asShortString () <<
-      "'" <<
+      ", newChordNote is " <<
+      newChordNote->asShortString () <<
       std::endl;
 
     gWaeHandler->waeTrace (
@@ -27532,10 +27617,9 @@ void mxsr2msrTranslator::handleNoteBelongingToAChordInAGraceNotesGroup (
       std::stringstream ss;
 
       ss <<
-        "The grace notes chord's first note is '" <<
-        chordFirstNote->
-          asShortString () <<
-        "'" <<
+        "The grace notes chord's first note is " <<
+        chordFirstNote->asShortString () <<
+        "" <<
         std::endl;
 
       gWaeHandler->waeTrace (
@@ -27745,9 +27829,9 @@ void mxsr2msrTranslator::handleRepeatStart (
     ss <<
       "Handling repeat start" <<
     /* JMI
-      ", measure '" <<
+      ", measure " <<
         barLine->getBarLineMeasureNumber () <<
-      "', position " <<
+      ", position " <<
       barLine->getBarLineMeasurePosition () <<
       */
       ", line " << inputLineNumber <<
@@ -28285,8 +28369,8 @@ void mxsr2msrTranslator::visitStart (S_root_alter& elt)
     std::stringstream ss;
 
     ss <<
-      "root alter '" << rootAlter << "'"
-      "' should be -3, -2, -1.5, -1, -0.5, 0, +0.5, +1, +1.5, +2 or +3";
+      "root alter " << rootAlter <<
+      " should be -3, -2, -1.5, -1, -0.5, 0, +0.5, +1, +1.5, +2 or +3";
 
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
@@ -28661,8 +28745,8 @@ void mxsr2msrTranslator::visitStart (S_bass_alter& elt)
     std::stringstream ss;
 
     ss <<
-      "bass alter '" << bassAlter << "'"
-      "' should be -3, -2, -1.5, -1, -0.5, 0, +0.5, +1, +1.5, +2 or +3";
+      "bass alter " << bassAlter <<
+      " should be -3, -2, -1.5, -1, -0.5, 0, +0.5, +1, +1.5, +2 or +3";
 
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
@@ -28754,8 +28838,8 @@ void mxsr2msrTranslator::visitStart (S_degree_alter& elt)
     std::stringstream ss;
 
     ss <<
-      "degree alter '" << degreeAlter << "'"
-      "' should be -3, -2, -1.5, -1, -0.5, 0, +0.5, +1, +1.5, +2 or +3";
+      "degree alter " << degreeAlter <<
+      " should be -3, -2, -1.5, -1, -0.5, 0, +0.5, +1, +1.5, +2 or +3";
 
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
@@ -28896,13 +28980,13 @@ void mxsr2msrTranslator::visitEnd (S_harmony& elt)
     std::stringstream ss;
 
     ss <<
-      "harmony root and bass notes are both equal to '" <<
+      "harmony root and bass notes are both equal to " <<
       msrDiatonicPitchKindAsStringInLanguage (
         gMsrOahGroup->getMsrQuarterTonesPitchesLanguageKind (),
         diatonicPitchKindFromQuarterTonesPitchKind (
           inputLineNumber,
           fCurrentHarmonyRootQuarterTonesPitchKind)) <<
-      "', ignoring the latter";
+      ", ignoring the latter";
 
     mxsr2msrWarning (
       gServiceRunData->getInputSourceName (),
@@ -29089,6 +29173,73 @@ void mxsr2msrTranslator::visitEnd (S_harmony& elt)
 //______________________________________________________________________________
 void mxsr2msrTranslator::visitStart (S_frame& elt)
 {
+/*
+<!--
+	The frame element represents a frame or fretboard diagram
+	used together with a chord symbol. The representation is
+	based on the NIFF guitar grid with additional information.
+	The frame-strings and frame-frets elements give the
+	overall size of the frame in vertical lines (strings) and
+	horizontal spaces (frets).
+
+	The frame element's unplayed attribute indicates what to
+	display above a string that has no associated frame-note
+	element. Typical values are x and the empty string. If the
+	attribute is not present, the display of the unplayed
+	string is application-defined.
+-->
+<!ELEMENT frame
+	(frame-strings, frame-frets, first-fret?, frame-note+)>
+<!ATTLIST frame
+    %position;
+    %color;
+    %halign;
+    %valign-image;
+    height  %tenths;  #IMPLIED
+    width   %tenths;  #IMPLIED
+    unplayed CDATA    #IMPLIED
+    %optional-unique-id;
+>
+<!ELEMENT frame-strings (#PCDATA)>
+<!ELEMENT frame-frets (#PCDATA)>
+
+<!--
+	The first-fret indicates which fret is shown in the top
+	space of the frame; it is fret 1 if the element is not
+	present. The optional text attribute indicates how this
+	is represented in the fret diagram, while the location
+	attribute indicates whether the text appears to the left
+	or right of the frame.
+-->
+<!ELEMENT first-fret (#PCDATA)>
+<!ATTLIST first-fret
+    text CDATA #IMPLIED
+    location %left-right; #IMPLIED
+>
+
+<!--
+	The frame-note element represents each note included in
+	the frame. The definitions for string, fret, and fingering
+	are found in the common.mod file. An open string will
+	have a fret value of 0, while a muted string will not be
+	associated with a frame-note element.
+-->
+<!ELEMENT frame-note (string, fret, fingering?, barre?)>
+
+<!--
+	The barre element indicates placing a finger over
+	multiple strings on a single fret. The type is "start"
+	for the lowest pitched string (e.g., the string with
+	the highest MusicXML number) and is "stop" for the
+	highest pitched string.
+-->
+<!ELEMENT barre EMPTY>
+<!ATTLIST barre
+    type %start-stop; #REQUIRED
+    %color;
+>
+*/
+
   int inputLineNumber =
     elt->getInputLineNumber ();
 
@@ -29168,8 +29319,8 @@ void mxsr2msrTranslator::visitStart (S_frame& elt)
     std::stringstream ss;
 
     ss <<
-      "degree alter '" << degreeAlter << "'"
-      "' should be -3, -2, -1.5, -1, -0.5, 0, +0.5, +1, +1.5, +2 or +3";
+      "degree alter " << degreeAlter <<
+      " should be -3, -2, -1.5, -1, -0.5, 0, +0.5, +1, +1.5, +2 or +3";
 
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
@@ -29578,8 +29729,8 @@ void mxsr2msrTranslator::visitStart (S_figure_number& elt)
     std::stringstream ss;
 
     ss <<
-      "figure-number '" << fCurrentFigureNumber <<
-      "' is greater that 13, that's strange...";
+      "figure-number " << fCurrentFigureNumber <<
+      " is greater that 13, that's strange...";
 
     mxsr2msrWarning (
       gServiceRunData->getInputSourceName (),
@@ -29949,8 +30100,8 @@ void mxsr2msrTranslator::visitStart (S_pedal_alter& elt)
     std::stringstream ss;
 
     ss <<
-      "pedal alter '" << pedalAlter << "'"
-      "' should be -3, -2, -1.5, -1, -0.5, 0, +0.5, +1, +1.5, +2 or +3";
+      "pedal alter " << pedalAlter <<
+      " should be -3, -2, -1.5, -1, -0.5, 0, +0.5, +1, +1.5, +2 or +3";
 
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
@@ -30460,6 +30611,538 @@ void mxsr2msrTranslator::visitStart (S_midi_instrument& elt)
 } // namespace
 
 
+/*
+
+print-object:
+
+<!--
+	The printout entity is based on MuseData print
+	suggestions. They allow a way to specify not to print
+	print an object (e.g. note or rest), its augmentation
+	dots, or its lyrics. This is especially useful for notes
+	that overlap in different voices, or for chord sheets
+	that contain lyrics and chords but no melody. For wholly
+	invisible notes, such as those providing sound-only data,
+	the attribute for print-spacing may be set to no so that
+	no space is left for this note. The print-spacing value
+	is only used if no note, dot, or lyric is being printed.
+
+	By default, all these attributes are set to yes. If
+	print-object is set to no, print-dot and print-lyric are
+	interpreted to also be set to no if they are not present.
+-->
+<!ENTITY % print-object
+	"print-object  %yes-no;  #IMPLIED">
+
+<!ENTITY % print-spacing
+	"print-spacing %yes-no;  #IMPLIED">
+
+<!ENTITY % printout
+	"%print-object;
+	 print-dot     %yes-no;  #IMPLIED
+	 %print-spacing;
+	 print-lyric   %yes-no;  #IMPLIED">
+
+
+
+
+<!--
+	The part-name-display and part-abbreviation-display
+	elements are used in both the score.mod and direction.mod
+	files. They allow more precise control of how part names
+	and abbreviations appear throughout a score. The
+	print-object attributes can be used to determine what,
+	if anything, is printed at the start of each system.
+	Formatting specified in the part-name-display and
+	part-abbreviation-display elements override the formatting
+	specified in the part-name and part-abbreviation elements,
+	respectively.
+-->
+<!ELEMENT part-name-display
+	((display-text | accidental-text)*)>
+<!ATTLIST part-name-display
+    %print-object;
+>
+<!ELEMENT part-abbreviation-display
+	((display-text | accidental-text)*)>
+<!ATTLIST part-abbreviation-display
+    %print-object;
+>
+
+
+
+<!--
+	The other-direction element is used to define any direction
+	symbols not yet in the MusicXML format. The smufl attribute
+	can be used to specify a particular direction symbol, allowing
+	application interoperability without requiring every SMuFL
+	glyph to have a MusicXML element equivalent. Using the
+	other-direction type without the smufl attribute allows
+	for extended representation, though without application
+	interoperability.
+-->
+<!ELEMENT other-direction (#PCDATA)>
+<!ATTLIST other-direction
+	%print-object;
+    %print-style-align;
+    %smufl;
+    %optional-unique-id;
+>
+
+
+
+	The harmony object may be used for analysis or for
+	chord symbols. The print-object attribute controls
+	whether or not anything is printed due to the harmony
+	element. The print-frame attribute controls printing
+	of a frame or fretboard diagram. The print-style entity
+	sets the default for the harmony, but individual elements
+	can override this with their own print-style values.
+
+
+
+<!--
+	A root is a pitch name like C, D, E, where a function
+	is an indication like I, II, III. Root is generally
+	used with pop chord symbols, function with classical
+	functional harmony. It is an either/or choice to avoid
+	data inconsistency. Function requires that the key be
+	specified in the encoding.
+
+	The root element has a root-step and optional root-alter
+	similar to the step and alter elements in a pitch, but
+	renamed to distinguish the different musical meanings.
+	The root-step text element indicates how the root should
+	appear in a score if not using the element contents.
+	In some chord styles, this will include the root-alter
+	information as well. In that case, the print-object
+	attribute of the root-alter element can be set to no.
+	The root-alter location attribute indicates whether
+	the alteration should appear to the left or the right
+	of the root-step; it is right by default.
+-->
+<!ELEMENT root (root-step, root-alter?)>
+<!ELEMENT root-step (#PCDATA)>
+<!ATTLIST root-step
+    text CDATA #IMPLIED
+    %print-style;
+>
+<!ELEMENT root-alter (#PCDATA)>
+<!ATTLIST root-alter
+    %print-object;
+    %print-style;
+    location %left-right; #IMPLIED
+>
+<!ELEMENT function (#PCDATA)>
+<!ATTLIST function
+    %print-style;
+>
+
+
+
+<!--
+	Bass is used to indicate a bass note in popular music
+	chord symbols, e.g. G/C. It is generally not used in
+	functional harmony, as inversion is generally not used
+	in pop chord symbols. As with root, it is divided into
+	step and alter elements, similar to pitches. The attributes
+	for bass-step and bass-alter work the same way as
+	the corresponding attributes for root-step and root-alter.
+-->
+<!ELEMENT bass (bass-step, bass-alter?)>
+<!ELEMENT bass-step (#PCDATA)>
+<!ATTLIST bass-step
+    text CDATA #IMPLIED
+    %print-style;
+>
+<!ELEMENT bass-alter (#PCDATA)>
+<!ATTLIST bass-alter
+    %print-object;
+    %print-style;
+    location (left | right) #IMPLIED
+>
+
+
+
+<!--
+	The degree element is used to add, alter, or subtract
+	individual notes in the chord. The degree-value element
+	is a number indicating the degree of the chord (1 for
+	the root, 3 for third, etc). The degree-alter element
+	is like the alter element in notes: 1 for sharp, -1 for
+	flat, etc. The degree-type element can be add, alter, or
+	subtract. If the degree-type is alter or subtract, the
+	degree-alter is relative to the degree already in the
+	chord based on its kind element. If the degree-type is
+	add, the degree-alter is relative to a dominant chord
+	(major and perfect intervals except for a minor
+	seventh). The print-object attribute can be used to
+	keep the degree from printing separately when it has
+	already taken into account in the text attribute of
+	the kind element. The plus-minus attribute is used to
+	indicate if plus and minus symbols should be used
+	instead of sharp and flat symbols to display the degree
+	alteration; it is no by default.
+
+	The degree-value and degree-type text attributes specify
+	how the value and type of the degree should be displayed
+	in a score. The degree-value symbol attribute indicates
+	that a symbol should be used in specifying the degree.
+	If the symbol attribute is present, the value of the text
+	attribute follows the symbol.
+
+	A harmony of kind "other" can be spelled explicitly by
+	using a series of degree elements together with a root.
+-->
+<!ELEMENT degree (degree-value, degree-alter, degree-type)>
+<!ATTLIST degree
+    %print-object;
+>
+<!ELEMENT degree-value (#PCDATA)>
+<!ATTLIST degree-value
+    symbol (major | minor | augmented |
+		diminished | half-diminished) #IMPLIED
+    text CDATA #IMPLIED
+    %print-style;
+>
+<!ELEMENT degree-alter (#PCDATA)>
+<!ATTLIST degree-alter
+    %print-style;
+    plus-minus %yes-no; #IMPLIED
+>
+<!ELEMENT degree-type (#PCDATA)>
+<!ATTLIST degree-type
+    text CDATA #IMPLIED
+    %print-style;
+>
+
+
+
+
+<!--
+	The system-dividers element indicates the presence or
+	absence of system dividers (also known as system separation
+	marks) between systems displayed on the same page. Dividers
+	on the left and right side of the page are controlled by
+	the left-divider and right-divider elements respectively.
+	The default vertical position is half the system-distance
+	value from the top of the system that is below the divider.
+	The default horizontal position is the left and right
+	system margin, respectively.
+
+	When used in the print element, the system-dividers element
+	affects the dividers that would appear between the current
+	system and the previous system.
+-->
+<!ELEMENT system-dividers (left-divider, right-divider)>
+<!ELEMENT left-divider EMPTY>
+<!ATTLIST left-divider
+    %print-object;
+    %print-style-align;
+>
+<!ELEMENT right-divider EMPTY>
+<!ATTLIST right-divider
+    %print-object;
+    %print-style-align;
+>
+
+
+
+<!--
+	The position and printout entities for printing suggestions
+	are defined in the common.mod file.
+
+	The print-leger attribute is used to indicate whether leger
+	lines are printed. Notes without leger lines are used to
+	indicate indeterminate high and low notes. By default, it
+	is set to yes. If print-object is set to no, print-leger
+	is interpreted to also be set to no if not present. This
+	attribute is ignored for rests.
+
+	The dynamics and end-dynamics attributes correspond to
+	MIDI 1.0's Note On and Note Off velocities, respectively.
+	They are expressed in terms of percentages of the default
+	forte value (90 for MIDI 1.0).
+
+	The attack and release attributes are used to alter the
+	starting and stopping time of the note from when it would
+	otherwise occur based on the flow of durations - information
+	that is specific to a performance. They are expressed in
+	terms of divisions, either positive or negative. A note that
+	starts a tie should not have a release attribute, and a note
+	that stops a tie should not have an attack attribute. The
+	attack and release attributes are independent of each other.
+	The attack attribute only changes the starting time of a
+	note, and the release attribute only changes the stopping
+	time of a note.
+
+	If a note is played only particular times through a repeat,
+	the time-only entity shows which times to play the note.
+
+	The pizzicato attribute is used when just this note is
+	sounded pizzicato, vs. the pizzicato element which changes
+	overall playback between pizzicato and arco.
+-->
+<!ATTLIST note
+    %print-style;
+    %printout;
+    print-leger %yes-no; #IMPLIED
+    dynamics CDATA #IMPLIED
+    end-dynamics CDATA #IMPLIED
+    attack CDATA #IMPLIED
+    release CDATA #IMPLIED
+    %time-only;
+    pizzicato %yes-no; #IMPLIED
+    %optional-unique-id;
+>
+
+
+
+<!--
+	Notations are musical notations, not XML notations. Multiple
+	notations are allowed in order to represent multiple editorial
+	levels. The print-object attribute, added in Version 3.0,
+	allows notations to represent details of performance technique,
+	such as fingerings, without having them appear in the score.
+-->
+<!ELEMENT notations
+	(%editorial;,
+	 (tied | slur | tuplet | glissando | slide |
+	  ornaments | technical | articulations | dynamics |
+	  fermata | arpeggiate | non-arpeggiate |
+	  accidental-mark | other-notation)*)>
+<!ATTLIST notations
+    %print-object;
+    %optional-unique-id;
+>
+
+
+
+<!--
+	The other-notation element is used to define any notations not
+	yet in the MusicXML format. It handles notations where more
+	specific extension elements such as other-dynamics and
+	other-technical are not appropriate. The smufl attribute can
+	be used to specify a particular notation, allowing application
+	interoperability without requiring every SMuFL glyph to have a
+	MusicXML element equivalent. Using the other-notation element
+	without the smufl attribute allows for extended representation,
+	though without application interoperability.
+-->
+<!ELEMENT other-notation (#PCDATA)>
+<!ATTLIST other-notation
+    type %start-stop-single; #REQUIRED
+    number %number-level; "1"
+    %print-object;
+    %print-style;
+    %placement;
+    %smufl;
+    %optional-unique-id;
+>
+
+
+
+<!--
+	The harmonic element indicates natural and artificial
+	harmonics. Natural harmonics usually notate the base
+	pitch rather than the sounding pitch. Allowing the type
+	of pitch to be specified, combined with controls for
+	appearance/playback differences, allows both the notation
+	and the sound to be represented. Artificial harmonics can
+	add a notated touching-pitch; the pitch or fret at which
+	the string is touched lightly to produce the harmonic.
+	Artificial pinch harmonics will usually not notate a
+	touching pitch. The attributes for the harmonic element
+	refer to the use of the circular harmonic symbol, typically
+	but not always used with natural harmonics.
+-->
+<!ELEMENT harmonic
+	((natural | artificial)?,
+	 (base-pitch | touching-pitch | sounding-pitch)?)>
+<!ATTLIST harmonic
+    %print-object;
+    %print-style;
+    %placement;
+>
+<!ELEMENT natural EMPTY>
+<!ELEMENT artificial EMPTY>
+<!ELEMENT base-pitch EMPTY>
+<!ELEMENT touching-pitch EMPTY>
+<!ELEMENT sounding-pitch EMPTY>
+
+<!--
+	The open-string element represents the zero-shaped
+	open string symbol.
+-->
+<!ELEMENT open-string EMPTY>
+<!ATTLIST open-string
+    %print-style;
+    %placement;
+>
+
+
+
+<!--
+	Text underlays for lyrics, based on Humdrum with support
+	for other formats. The lyric number indicates multiple
+	lines, though a name can be used as well (as in Finale's
+	verse/chorus/section specification). Word extensions are
+	represented using the extend element. Hyphenation is
+	indicated by the syllabic element, which can be single,
+	begin, end, or middle. These represent single-syllable
+	words, word-beginning syllables, word-ending syllables,
+	and mid-word syllables. Multiple syllables on a single
+	note are separated by elision elements. A hyphen in the
+	text element should only be used for an actual hyphenated
+	word. Two text elements that are not separated by an
+	elision element are part of the same syllable, but may have
+	different text formatting.
+
+	Humming and laughing representations are taken from
+	Humdrum. The end-line and end-paragraph elements come
+	from RP-017 for Standard MIDI File Lyric meta-events;
+	they help facilitate lyric display for Karaoke and
+	similar applications. Language names for text elements
+	come from ISO 639, with optional country subcodes from
+	ISO 3166. Justification is center by default; placement is
+	below by default. The print-object attribute can override
+	a note's print-lyric attribute in cases where only some
+	lyrics on a note are printed, as when lyrics for later verses
+	are printed in a block of text rather than with each note.
+	The time-only attribute precisely specifies which lyrics are
+	to be sung which time through a repeated section.
+-->
+<!ELEMENT lyric
+	((((syllabic?, text),
+	   (elision?, syllabic?, text)*, extend?) |
+	   extend | laughing | humming),
+	  end-line?, end-paragraph?, %editorial;)>
+<!ATTLIST lyric
+    number NMTOKEN #IMPLIED
+    name CDATA #IMPLIED
+    %justify;
+    %position;
+    %placement;
+    %color;
+    %print-object;
+    %time-only;
+    %optional-unique-id;
+>
+
+
+
+
+<!--
+	The part-name indicates the full name of the musical part.
+	The part-abbreviation indicates the abbreviated version of
+	the name of the musical part. The part-name will often
+	precede the first system, while the part-abbreviation will
+	precede the other systems. The formatting attributes for
+	these elements are deprecated in Version 2.0 in favor of
+	the new part-name-display and part-abbreviation-display
+	elements. These are defined in the common.mod file as they
+	are used in both the part-list and print elements. They
+	provide more complete formatting control for how part names
+	and abbreviations appear in a score.
+-->
+<!ELEMENT part-name (#PCDATA)>
+<!ATTLIST part-name
+    %print-style;
+    %print-object;
+    %justify;
+>
+<!ELEMENT part-abbreviation (#PCDATA)>
+<!ATTLIST part-abbreviation
+    %print-style;
+    %print-object;
+    %justify;
+>
+<!--
+	The part-group element indicates groupings of parts in the
+	score, usually indicated by braces and brackets. Braces
+	that are used for multi-staff parts should be defined in
+	the attributes element for that part. The part-group start
+	element appears before the first score-part in the group.
+	The part-group stop element appears after the last
+	score-part in the group.
+
+	The number attribute is used to distinguish overlapping
+	and nested part-groups, not the sequence of groups. As
+	with parts, groups can have a name and abbreviation.
+	Formatting attributes for group-name and group-abbreviation
+	are deprecated in Version 2.0 in favor of the new
+	group-name-display and group-abbreviation-display elements.
+	Formatting specified in the group-name-display and
+	group-abbreviation-display elements overrides formatting
+	specified in the group-name and group-abbreviation
+	elements, respectively.
+
+	The group-symbol element indicates how the symbol for
+	a group is indicated in the score. Values include none,
+	brace, line, bracket, and square; the default is none.
+	The group-barline element indicates if the group should
+	have common barlines. Values can be yes, no, or
+	Mensurstrich. The group-time element indicates that the
+	displayed time signatures should stretch across all parts
+	and staves in the group. Values for the child elements
+	are ignored at the stop of a group.
+
+	A part-group element is not needed for a single multi-staff
+	part. By default, multi-staff parts include a brace symbol
+	and (if appropriate given the bar-style) common barlines.
+	The symbol formatting for a multi-staff part can be more
+	fully specified using the part-symbol element, defined in
+	the attributes.mod file.
+-->
+<!ELEMENT part-group (group-name?, group-name-display?,
+	group-abbreviation?, group-abbreviation-display?,
+	group-symbol?, group-barline?, group-time?, %editorial;)>
+<!ATTLIST part-group
+    type %start-stop; #REQUIRED
+    number CDATA "1"
+>
+
+<!ELEMENT group-name (#PCDATA)>
+<!ATTLIST group-name
+    %print-style;
+    %justify;
+>
+<!ELEMENT group-name-display
+	((display-text | accidental-text)*)>
+<!ATTLIST group-name-display
+    %print-object;
+>
+<!ELEMENT group-abbreviation (#PCDATA)>
+<!ATTLIST group-abbreviation
+    %print-style;
+    %justify;
+>
+<!ELEMENT group-abbreviation-display
+	((display-text | accidental-text)*)>
+<!ATTLIST group-abbreviation-display
+    %print-object;
+>
+
+<!ELEMENT group-symbol (#PCDATA)>
+<!ATTLIST group-symbol
+    %position;
+    %color;
+>
+
+<!ELEMENT group-barline (#PCDATA)>
+<!ATTLIST group-barline
+    %color;
+>
+<!ELEMENT group-time EMPTY>
+
+
+
+
+
+*/
+
+
+
 /* JMI
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceFiguredBasses ()) {
@@ -30685,7 +31368,7 @@ The discontinue value is typically used for the last ending in a set, where ther
 //       wordsValue <<
 //       "\" to an MSR tempo" <<
 //       ", fCurrentDirectionStaffNumber: " << fCurrentDirectionStaffNumber <<
-//       ", fPreviousMusicXMLVoiceNumber: " << fPreviousMusicXMLVoiceNumber <<
+//       ", fPreviousNoteMusicXMLVoiceNumber: " << fPreviousNoteMusicXMLVoiceNumber <<
 //       ", line " << inputLineNumber <<
 //       std::endl;
 //   }
@@ -30718,7 +31401,7 @@ The discontinue value is typically used for the last ending in a set, where ther
 //           wordsValue <<
 //           "\" to an MSR rehearsal mark" <<
 //           ", fCurrentDirectionStaffNumber: " << fCurrentDirectionStaffNumber <<
-//           ", fPreviousMusicXMLVoiceNumber: " << fPreviousMusicXMLVoiceNumber <<
+//           ", fPreviousNoteMusicXMLVoiceNumber: " << fPreviousNoteMusicXMLVoiceNumber <<
 //           ", line " << inputLineNumber <<
 //           std::endl;
 //       }
@@ -30752,7 +31435,7 @@ The discontinue value is typically used for the last ending in a set, where ther
 //           wordsValue <<
 //           "\" to an MSR dal segno" <<
 //           ", fCurrentDirectionStaffNumber: " << fCurrentDirectionStaffNumber <<
-//           ", fPreviousMusicXMLVoiceNumber: " << fPreviousMusicXMLVoiceNumber <<
+//           ", fPreviousNoteMusicXMLVoiceNumber: " << fPreviousNoteMusicXMLVoiceNumber <<
 //           ", line " << inputLineNumber <<
 //           std::endl;
 //       }
@@ -30783,7 +31466,7 @@ The discontinue value is typically used for the last ending in a set, where ther
 //       wordsValue <<
 //       "\" to an MSR dal segno al fine" <<
 //       ", fCurrentDirectionStaffNumber: " << fCurrentDirectionStaffNumber <<
-//       ", fPreviousMusicXMLVoiceNumber: " << fPreviousMusicXMLVoiceNumber <<
+//       ", fPreviousNoteMusicXMLVoiceNumber: " << fPreviousNoteMusicXMLVoiceNumber <<
 //       ", line " << inputLineNumber <<
 //       std::endl;
 //   }
@@ -30817,7 +31500,7 @@ The discontinue value is typically used for the last ending in a set, where ther
 //       wordsValue <<
 //       "\" to an MSR dal segno al coda" <<
 //       ", fCurrentDirectionStaffNumber: " << fCurrentDirectionStaffNumber <<
-//       ", fPreviousMusicXMLVoiceNumber: " << fPreviousMusicXMLVoiceNumber <<
+//       ", fPreviousNoteMusicXMLVoiceNumber: " << fPreviousNoteMusicXMLVoiceNumber <<
 //       ", line " << inputLineNumber <<
 //       std::endl;
 //   }
@@ -30850,7 +31533,7 @@ The discontinue value is typically used for the last ending in a set, where ther
 //           wordsValue <<
 //           "\" to an MSR coda" <<
 //           ", fCurrentDirectionStaffNumber: " << fCurrentDirectionStaffNumber <<
-//           ", fPreviousMusicXMLVoiceNumber: " << fPreviousMusicXMLVoiceNumber <<
+//           ", fPreviousNoteMusicXMLVoiceNumber: " << fPreviousNoteMusicXMLVoiceNumber <<
 //           ", line " << inputLineNumber <<
 //           std::endl;
 //       }
@@ -30884,7 +31567,7 @@ The discontinue value is typically used for the last ending in a set, where ther
 //           wordsValue <<
 //           "\" to an MSR cresc" <<
 //           ", fCurrentDirectionStaffNumber: " << fCurrentDirectionStaffNumber <<
-//           ", fPreviousMusicXMLVoiceNumber: " << fPreviousMusicXMLVoiceNumber <<
+//           ", fPreviousNoteMusicXMLVoiceNumber: " << fPreviousNoteMusicXMLVoiceNumber <<
 //           ", line " << inputLineNumber <<
 //           std::endl;
 //       }
@@ -30917,7 +31600,7 @@ The discontinue value is typically used for the last ending in a set, where ther
 //           wordsValue <<
 //           "\" to an MSR decresc" <<
 //           ", fCurrentDirectionStaffNumber: " << fCurrentDirectionStaffNumber <<
-//           ", fPreviousMusicXMLVoiceNumber: " << fPreviousMusicXMLVoiceNumber <<
+//           ", fPreviousNoteMusicXMLVoiceNumber: " << fPreviousNoteMusicXMLVoiceNumber <<
 //           ", line " << inputLineNumber <<
 //           std::endl;
 //       }
@@ -30933,9 +31616,9 @@ The discontinue value is typically used for the last ending in a set, where ther
 // #ifdef MF_TRACE_IS_ENABLED
 //                 if (gTraceOahGroup->getTraceLigatures ()) {
 //                   gLog <<
-//                     "Attaching pending ligature above to note '" <<
+//                     "Attaching pending ligature above to note " <<
 //                     note->asString () <<
-//                     "' in voice \"" <<
+//                     " in voice \"" <<
 //                     noteVoice->getVoiceName () <<
 //                     "\"" <<
 //                     ", line " << ligature->getInputLineNumber () <<
@@ -30955,9 +31638,9 @@ The discontinue value is typically used for the last ending in a set, where ther
 // #ifdef MF_TRACE_IS_ENABLED
 //                 if (gTraceOahGroup->getTraceLigatures ()) {
 //                   gLog <<
-//                     "Attaching pending ligature below to note '" <<
+//                     "Attaching pending ligature below to note " <<
 //                     note->asString () <<
-//                     "' in voice \"" <<
+//                     " in voice \"" <<
 //                     noteVoice->getVoiceName () <<
 //                     "\"" <<
 //                     ", line " << ligature->getInputLineNumber () <<

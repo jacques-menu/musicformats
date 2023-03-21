@@ -19,7 +19,7 @@
 #exec > ${MUSIC_FORMATS_DEV_DIR}/$(basename $0).log 2>&1
 
 # the MusicFormats local repo
-MUSIC_FORMATS_DEV_DIR=${HOME}/musicformats-git-dev
+MUSIC_FORMATS_DEV_DIR=/Volumes/JMI_Volume/JMI_Developpement/musicformats-git-dev
 echo "--> MUSIC_FORMATS_DEV_DIR = ${MUSIC_FORMATS_DEV_DIR}"
 echo
 
@@ -34,7 +34,7 @@ echo "--> VERSION_NUMBER = ${VERSION_NUMBER}"
 DOWNLOADS_DIR=${HOME}/JMI_Downloads
 echo "--> DOWNLOADS_DIR = ${DOWNLOADS_DIR}"
 echo
-ls -sal "${DOWNLOADS_DIR}/musicformats-*"
+ls -sal "${DOWNLOADS_DIR}/musicformats-*-artifact"
 echo
 
 
@@ -140,6 +140,9 @@ echo "----------------------------------------------"
 echo "==> Let's go!"
 echo "----------------------------------------------"
 echo
+
+cd "${MUSIC_FORMATS_DEV_DIR}"
+
 
 echo "----------------------------------------------"
 echo "==> create the realeases:"

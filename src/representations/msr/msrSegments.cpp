@@ -2241,7 +2241,7 @@ void msrSegment::appendMeasureToSegment (const S_msrMeasure& measure)
       fSegmentUpLinkToVoice->getVoiceName () <<
       "\"";
 
-    msrInternalWarning ( // JMI KAKA v0.9.63
+    msrInternalWarning ( // JMI v0.9.67 v0.9.63
 //     msrInternalError (
       gServiceRunData->getInputSourceName (),
       inputLineNumber,
@@ -2950,7 +2950,7 @@ S_msrMeasure msrSegment::removeLastMeasureFromSegment (
   // we've got the result
   result = fSegmentLastMeasure;
 
-  // remove it from segment elements list too ??? JMI v0.9.63 KAKA
+  // remove it from segment elements list too ??? JMI v0.9.63 JMI v0.9.67
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasuresDetails ()) {
@@ -3040,7 +3040,7 @@ S_msrMeasure msrSegment::removeLastMeasureFromSegment (
 
   // don't forget about fSegmentLastMeasure now,
   // since it may be used and/or re-appended soon JMI v0.9.63
-//   setSegmentLastMeasure ( // KAKA
+//   setSegmentLastMeasure ( // JMI v0.9.67
 //     nullptr);
 
   return result;

@@ -326,7 +326,7 @@ class EXP oahElement : public oahFindableElement
                             const std::string& name);
 
     Bool                  findStringInFindableElement (
-                            const std::string&          lowerCaseString,
+                            const std::string&               lowerCaseString,
                             std::list<S_oahFindStringMatch>& foundMatchesList,
                             std::ostream&                    os) const override;
 
@@ -354,7 +354,7 @@ class EXP oahElement : public oahFindableElement
 
     std::string           asLongNamedOptionString () const;
 
-    virtual std::string   asString () const override;
+    virtual std::string   asString () const override; // JMI v0.9.67
     virtual std::string   asShortString () const;
 
     virtual void          printOptionHeader (std::ostream& os) const;

@@ -575,7 +575,7 @@ std::string oahElement::asLongNamedOptionString () const
   }
 }
 
-std::string oahElement::asShortString () const
+std::string oahElement::asShortString () const // JMI v0.9.67
 {
   std::stringstream ss;
 

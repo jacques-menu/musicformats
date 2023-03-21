@@ -127,7 +127,7 @@ std::string wholeNotesAsLilypondString (
   // this algorithm is inspired by musicxml2ly
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceNoteDurations ()) {
+  if (gTraceOahGroup->getTraceWholeNoteDurations ()) {
     std::stringstream ss;
 
     ss <<
@@ -148,7 +148,7 @@ std::string wholeNotesAsLilypondString (
     denominator  = wholeNotes.getDenominator ();
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceNoteDurations ()) {
+  if (gTraceOahGroup->getTraceWholeNoteDurations ()) {
     std::stringstream ss;
 
     ss <<
@@ -185,12 +185,12 @@ std::string wholeNotesAsLilypondString (
 
     s1 <<
       "numerator is not positive in wholeNotesAsLilypondString()" <<
-      ", wholeNotes: " << wholeNotes;
+      ", wholeNotes: " << wholeNotes.asString ();
 
     std::string message = s1.str ();
 
 //     lpsrError (
-   lpsrWarning ( // JMI v0.9.67
+    lpsrWarning ( // JMI v0.9.67
       gServiceRunData->getInputSourceName (),
       inputLineNumber,
 //      __FILE__, __LINE__,
@@ -212,7 +212,7 @@ std::string wholeNotesAsLilypondString (
     integralNumberOfWholeNotes = denominator == 1;
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceNoteDurationsDetails ()) {
+  if (gTraceOahGroup->getTraceWholeNoteDurationsDetails ()) {
     std::stringstream ss;
 
     ss <<
@@ -243,7 +243,7 @@ std::string wholeNotesAsLilypondString (
   int  numeratorDots = lpsrNumberOfDots (numerator);
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceNoteDurationsDetails ()) {
+  if (gTraceOahGroup->getTraceWholeNoteDurationsDetails ()) {
     std::stringstream ss;
 
     ss <<
@@ -336,7 +336,7 @@ std::string wholeNotesAsLilypondString (
     }
 
 #ifdef MF_TRACE_IS_ENABLED
-    if (gTraceOahGroup->getTraceNoteDurationsDetails ()) {
+    if (gTraceOahGroup->getTraceWholeNoteDurationsDetails ()) {
       std::stringstream ss;
 
       ss <<
@@ -371,7 +371,7 @@ std::string wholeNotesAsLilypondString (
   }
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceNoteDurationsDetails ()) {
+  if (gTraceOahGroup->getTraceWholeNoteDurationsDetails ()) {
     std::stringstream ss;
 
     ss <<
@@ -391,7 +391,7 @@ std::string wholeNotesAsLilypondString (
     // since dotted durations cannot be recognized otherwise
     // 6/1 thus becomes 3\breve, hence \longa.
 #ifdef MF_TRACE_IS_ENABLED
-    if (gTraceOahGroup->getTraceNoteDurationsDetails ()) {
+    if (gTraceOahGroup->getTraceWholeNoteDurationsDetails ()) {
       std::stringstream ss;
 
       ss <<
@@ -410,7 +410,7 @@ std::string wholeNotesAsLilypondString (
       denominatorNotesDurationLog -= 1;
 
 #ifdef MF_TRACE_IS_ENABLED
-      if (gTraceOahGroup->getTraceNoteDurationsDetails ()) {
+      if (gTraceOahGroup->getTraceWholeNoteDurationsDetails ()) {
         gLog <<
           "--> numerator" << ": " <<
           numerator <<
@@ -427,7 +427,7 @@ std::string wholeNotesAsLilypondString (
   }
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceNoteDurationsDetails ()) {
+  if (gTraceOahGroup->getTraceWholeNoteDurationsDetails ()) {
     std::stringstream ss;
 
     ss <<
@@ -455,7 +455,7 @@ std::string wholeNotesAsLilypondString (
     denominatorNotesDurationLog -= numeratorDots;
 
 #ifdef MF_TRACE_IS_ENABLED
-    if (gTraceOahGroup->getTraceNoteDurationsDetails ()) {
+    if (gTraceOahGroup->getTraceWholeNoteDurationsDetails ()) {
       std::stringstream ss;
 
       ss <<
@@ -471,7 +471,7 @@ std::string wholeNotesAsLilypondString (
   else {
     // set the multiplying factor
 #ifdef MF_TRACE_IS_ENABLED
-    if (gTraceOahGroup->getTraceNoteDurationsDetails ()) {
+    if (gTraceOahGroup->getTraceWholeNoteDurationsDetails ()) {
       std::stringstream ss;
 
       ss <<
@@ -493,7 +493,7 @@ std::string wholeNotesAsLilypondString (
     multiplyingFactor = numerator;
 
 #ifdef MF_TRACE_IS_ENABLED
-    if (gTraceOahGroup->getTraceNoteDurationsDetails ()) {
+    if (gTraceOahGroup->getTraceWholeNoteDurationsDetails ()) {
       std::stringstream ss;
 
       ss <<
@@ -514,7 +514,7 @@ std::string wholeNotesAsLilypondString (
       multiplyingFactor /= 2;
 
 #ifdef MF_TRACE_IS_ENABLED
-      if (gTraceOahGroup->getTraceNoteDurationsDetails ()) {
+      if (gTraceOahGroup->getTraceWholeNoteDurationsDetails ()) {
         gLog <<
           "--> denominatorNotesDurationLog" << ": " <<
           denominatorNotesDurationLog <<
@@ -529,7 +529,7 @@ std::string wholeNotesAsLilypondString (
   }
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceNoteDurations ()) {
+  if (gTraceOahGroup->getTraceWholeNoteDurations ()) {
     std::stringstream ss;
 
     ss <<
@@ -597,7 +597,7 @@ std::string wholeNotesAsLilypondString (
   std::string result = ss.str ();
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceNoteDurationsDetails ()) {
+  if (gTraceOahGroup->getTraceWholeNoteDurationsDetails ()) {
     std::stringstream ss;
 
     ss <<

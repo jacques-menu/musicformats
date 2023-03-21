@@ -185,7 +185,7 @@ void msrRepeatCommonPart::appendMeasureRepeatToRepeatCommonPart (
     "measureRepeat is null");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
-// KAKA  fRepeatCommonPartElementsList.push_back (measureRepeat); JMI v0.9.66
+// JMI v0.9.67  fRepeatCommonPartElementsList.push_back (measureRepeat); JMI v0.9.66
 }
 
 void msrRepeatCommonPart::appendMultipleFullBarRestsToRepeatCommonPart (
@@ -219,7 +219,7 @@ void msrRepeatCommonPart::appendMultipleFullBarRestsToRepeatCommonPart (
     "multipleFullBarRests is null");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
-//  KAKA fRepeatCommonPartElementsList.push_back (multipleFullBarRests);
+//  JMI v0.9.67 fRepeatCommonPartElementsList.push_back (multipleFullBarRests);
 }
 
 void msrRepeatCommonPart::appendVoiceElementToRepeatCommonPart (
@@ -713,7 +713,7 @@ void msrRepeatEnding::appendMeasureRepeatToRepeatEnding (
     "measureRepeat is null");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
-// KAKA  fRepeatEndingElementsList.push_back (measureRepeat);
+// JMI v0.9.67  fRepeatEndingElementsList.push_back (measureRepeat);
 }
 
 void msrRepeatEnding::appendMultipleFullBarRestsToRepeatEnding (
@@ -747,7 +747,7 @@ void msrRepeatEnding::appendMultipleFullBarRestsToRepeatEnding (
     "multipleFullBarRests is null");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
-//  KAKA fRepeatEndingElementsList.push_back (multipleFullBarRests);
+//  JMI v0.9.67 fRepeatEndingElementsList.push_back (multipleFullBarRests);
 }
 
 void msrRepeatEnding::appendVoiceElementToRepeatEnding (

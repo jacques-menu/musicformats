@@ -1654,7 +1654,7 @@ S_msrMeasure msrVoice::createAMeasureAndAppendItToVoice (
       msrMeasure::create (
         inputLineNumber,
         measureNumber,
-        fVoiceLastSegment); // JMI KAKA  v0.9.63 ???
+        fVoiceLastSegment); // JMI v0.9.67  v0.9.63 ???
 
     // set result's ordinal number
     result->
@@ -2338,7 +2338,7 @@ S_msrNote msrVoice::fetchVoiceFirstNonGraceNote () const
 
 //     else {
 // #ifdef MF_TRACE_IS_ENABLED
-//       if (true || gTraceOahGroup->getTraceMeasuresDetails ()) { // KAKA  // JMI v0.9.66
+//       if (true || gTraceOahGroup->getTraceMeasuresDetails ()) { // JMI v0.9.67  // JMI v0.9.66
 //         gLog <<
 //           "++++++++++ fetchVoiceFirstNonGraceNote(), this voice: ++++++++++" <<
 //           std::endl;
@@ -2872,7 +2872,7 @@ void msrVoice::backupByWholeNotesStepLengthInVoice (
   const msrWholeNotes& backupTargetMeasurePosition)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceNoteDurations ()) {
+  if (gTraceOahGroup->getTraceWholeNoteDurations ()) {
     std::stringstream ss;
 
     ss <<
@@ -3175,10 +3175,10 @@ void msrVoice::appendVoiceStaffChangeToVoice (
     std::stringstream ss;
 
     ss <<
-      "Appending voice staff change '" <<
+      "Appending voice staff change " <<
       voiceStaffChange->asString () <<
-      "' to voice " <<
-      " \"" << getVoiceName () << "\"" <<
+      " to voice " <<
+      "\"" << getVoiceName () << "\"" <<
       ", line " << inputLineNumber <<
       std::endl;
 
@@ -4762,7 +4762,7 @@ void msrVoice::appendRepeatToInitialVoiceElements (
 //   }
 // #endif // MF_TRACE_IS_ENABLED
 //
-// //   fVoiceInitialElementsList.push_back ( KAKA
+// //   fVoiceInitialElementsList.push_back ( JMI v0.9.67
 // //     multipleFullBarRests);
 // }
 
@@ -4791,7 +4791,7 @@ void msrVoice::appendMeasureRepeatToInitialVoiceElements (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-//   fVoiceInitialElementsList.push_back ( KAKA
+//   fVoiceInitialElementsList.push_back ( JMI v0.9.67
 //     measureRepeat);
 }
 
@@ -7845,7 +7845,7 @@ void msrVoice::appendMultipleFullBarRestsToVoice (
           msrMultipleFullBarRests::create (
             inputLineNumber,
             multipleFullBarRestsMeasuresNumber,
-            fVoiceLastSegment); // JMI ??? KAKA
+            fVoiceLastSegment); // JMI ??? JMI v0.9.67
 
 #ifdef MF_TRACE_IS_ENABLED
         if (gTraceOahGroup->getTraceMultipleFullBarRests ()) {
@@ -7933,7 +7933,7 @@ void msrVoice::appendMultipleFullBarRestsToVoice (
 //
 //         // this voice contails multiple full-bar rests
 //         this->setVoiceContainsMultipleFullBarRests (
-//           inputLineNumber); // KAKA
+//           inputLineNumber); // JMI v0.9.67
 //
 //         // keep the multiple full-bar rests pending
 
@@ -8321,7 +8321,7 @@ void msrVoice::appendPendingMultipleFullBarRestsToVoice (
         }
 #endif // MF_TRACE_IS_ENABLED
 //        fVoiceLastSegment->
-          // KAKA
+          // JMI v0.9.67
 
         // set current multiple full-bar rests last measure purist number
         fVoiceCurrentMultipleFullBarRests->
@@ -8441,7 +8441,7 @@ void msrVoice::handleMultipleFullBarRestsStartInVoiceClone (
       fVoiceCurrentMultipleFullBarRests =
         multipleFullBarRests->
           createMultipleFullBarRestsNewbornClone (
-            fVoiceLastSegment); // JMI ??? KAKA
+            fVoiceLastSegment); // JMI ??? JMI v0.9.67
 
       // this voice contails multiple full-bar rests
       this->setVoiceContainsMultipleFullBarRests (
@@ -10345,7 +10345,7 @@ void msrVoice::appendMeasureRepeatReplicaToVoice (
 //     "multipleFullBarRests is null");
 // #endif // MF_SANITY_CHECKS_ARE_ENABLED
 //
-// // KAKA  fVoiceInitialElementsList.push_back (multipleFullBarRests);
+// // JMI v0.9.67  fVoiceInitialElementsList.push_back (multipleFullBarRests);
 // }
 
 void msrVoice::appendMeasureRepeatToVoiceElementsList (
@@ -10377,7 +10377,7 @@ void msrVoice::appendMeasureRepeatToVoiceElementsList (
     "measureRepeat is null");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
-// KAKA  fVoiceInitialElementsList.push_back (measureRepeat);
+// JMI v0.9.67  fVoiceInitialElementsList.push_back (measureRepeat);
 }
 
 void msrVoice:: appendRepeatEndingCloneToVoice ( // JMI

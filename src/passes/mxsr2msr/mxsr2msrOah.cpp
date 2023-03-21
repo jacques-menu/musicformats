@@ -915,8 +915,8 @@ R"()",
       oahBooleanAtom::create (
         "ignore-musicxml-page-breaks", "imxmlpb",
 R"(Ignore page breaks in MusicXML data.)",
-        "fIgnorePageBreaksInMusicXML",
-        fIgnorePageBreaksInMusicXML));
+        "fIgnoreMusicXMLPageBreaks",
+        fIgnoreMusicXMLPageBreaks));
 
   // ignore MusicXML line breaks
   // --------------------------------------
@@ -926,8 +926,8 @@ R"(Ignore page breaks in MusicXML data.)",
       oahBooleanAtom::create (
         "ignore-musicxml-line-breaks", "imxmllb",
 R"(Ignore line breaks in MusicXML data.)",
-        "fIgnoreLineBreaksInMusicXML",
-        fIgnoreLineBreaksInMusicXML));
+        "fIgnoreMusicXMLLineBreaks",
+        fIgnoreMusicXMLLineBreaks));
 }
 
 void mxsr2msrOahGroup::initializeMeasuresOptions ()
@@ -2228,8 +2228,8 @@ void mxsr2msrOahGroup::printMxsr2msrValues (int valueFieldWidth)
   ++gIndenter;
 
   gLog << std::left <<
-    std::setw (valueFieldWidth) << "fIgnorePageBreaksInMusicXML" << ": " <<
-    fIgnorePageBreaksInMusicXML <<
+    std::setw (valueFieldWidth) << "fIgnoreMusicXMLPageBreaks" << ": " <<
+    fIgnoreMusicXMLPageBreaks <<
     std::endl <<
 
   --gIndenter;
@@ -2244,8 +2244,8 @@ void mxsr2msrOahGroup::printMxsr2msrValues (int valueFieldWidth)
   ++gIndenter;
 
   gLog << std::left <<
-    std::setw (valueFieldWidth) << "fIgnoreLineBreaksInMusicXML" << ": " <<
-    fIgnoreLineBreaksInMusicXML <<
+    std::setw (valueFieldWidth) << "fIgnoreMusicXMLLineBreaks" << ": " <<
+    fIgnoreMusicXMLLineBreaks <<
     std::endl <<
 
   --gIndenter;

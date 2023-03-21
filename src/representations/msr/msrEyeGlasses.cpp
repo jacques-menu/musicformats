@@ -132,7 +132,7 @@ void msrEyeGlasses::setEyeGlassesUpLinkToMeasure (
 //   fEyeGlassesMeasurePosition = measurePosition;
 //
 //   // compute measure element's voice position
-// // if (false) { // JMI CAFE v0.9.66
+// // if (false) { // JMI v0.9.67 v0.9.66
 //   mfRational
 //     voicePosition =
 //       measure->

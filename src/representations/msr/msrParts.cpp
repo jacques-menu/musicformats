@@ -729,7 +729,7 @@ msrWholeNotes msrPart::fetchPartMeasuresWholeNotessVectorAt (
       fPartMeasuresWholeNotessVector.size ();
 
 #ifdef MF_TRACE_IS_ENABLED
-    if (gTraceOahGroup->getTraceNoteDurations ()) {
+    if (gTraceOahGroup->getTraceWholeNoteDurations ()) {
       std::stringstream ss;
 
         ss <<
@@ -750,11 +750,11 @@ msrWholeNotes msrPart::fetchPartMeasuresWholeNotessVectorAt (
   // has this measureOrdinalNumber been registered already?
   try {
     msrWholeNotes
-      currentValue =
+      currentWholeNotesValue =
         fPartMeasuresWholeNotessVector.at (indexValue);
 
     // yes
-    result = currentValue;
+    result = currentWholeNotesValue;
   }
 
   catch (const std::out_of_range& e) {
@@ -889,8 +889,8 @@ void msrPart::setPartNumberOfMeasures (size_t partNumberOfMeasures)
 }
 
 void msrPart::registerOrdinalMeasureNumberWholeNotes (
-  int             inputLineNumber,
-  int             measureOrdinalNumber,
+  int                  inputLineNumber,
+  int                  measureOrdinalNumber,
   const msrWholeNotes& wholeNotes)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -915,23 +915,23 @@ void msrPart::registerOrdinalMeasureNumberWholeNotes (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasures ()) {
+    printPartMeasuresWholeNotessVector (
+      gLog,
+      40,
+      ", registerOrdinalMeasureNumberWholeNotes() 1");
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  size_t index = measureOrdinalNumber - 1;
+
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceMeasures ()) {
     std::stringstream ss;
 
     ss <<
-      "===> fPartMeasuresWholeNotessVector contents: " <<
-      std::endl;
-    for (msrWholeNotes rat : fPartMeasuresWholeNotessVector) {
-      ++gIndenter;
-      std::stringstream ss;
-
-    ss <<
-        rat <<
-        std::endl;
-      --gIndenter;
-    } // for
-
-    ss <<
-      "<==== end of fPartMeasuresWholeNotessVector contents " <<
+      "measureOrdinalNumber: " << measureOrdinalNumber <<
+      ", index: " << index <<
+      ", line " << inputLineNumber <<
       std::endl;
 
     gWaeHandler->waeTrace (
@@ -940,12 +940,10 @@ void msrPart::registerOrdinalMeasureNumberWholeNotes (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  size_t index = measureOrdinalNumber - 1;
-
   // has this measureOrdinalNumber been registered already?
   try {
     msrWholeNotes
-      currentValue =
+      currentWholeNotesValue =
         fPartMeasuresWholeNotessVector.at (index);
 
     // yes
@@ -959,7 +957,7 @@ void msrPart::registerOrdinalMeasureNumberWholeNotes (
         "The measure with ordinal number " <<
         measureOrdinalNumber <<
         " was known with a whole notes duration of " <<
-        currentValue <<
+        currentWholeNotesValue.asString () <<
         ", now registering it with a duration of " <<
         wholeNotes.asString () <<
         " in part " << getPartCombinedName () <<
@@ -970,34 +968,41 @@ void msrPart::registerOrdinalMeasureNumberWholeNotes (
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
-  }
-
-  catch (const std::out_of_range& e) {
-    // no
 
     fPartMeasuresWholeNotessVector [index] =
       wholeNotes;
+  }
+
+  catch (const std::out_of_range& e) {
+// #ifdef MF_TRACE_IS_ENABLED
+//     if (gTraceOahGroup->getTraceMeasures ()) { // JMI v0.9.67
+//       std::stringstream ss;
+//
+//         ss <<
+//         "The measure with ordinal number " <<
+//         measureOrdinalNumber <<
+//         " is now registered with a duration of " <<
+//         wholeNotes.asString () <<
+//         " in part " << getPartCombinedName () <<
+//         ", fPartMeasuresWholeNotessVector.size (): " <<
+//         fPartMeasuresWholeNotessVector.size () <<
+//         std::endl;
+//
+//       gWaeHandler->waeTrace (
+//         __FILE__, __LINE__,
+//         ss.str ());
+//     }
+// #endif // MF_TRACE_IS_ENABLED
+  }
 
 #ifdef MF_TRACE_IS_ENABLED
-    if (gTraceOahGroup->getTraceMeasures ()) {
-      std::stringstream ss;
-
-        ss <<
-        "The measure with ordinal number " <<
-        measureOrdinalNumber <<
-        " is now registered with a duration of " <<
-        wholeNotes.asString () <<
-        " in part " << getPartCombinedName () <<
-        ", fPartMeasuresWholeNotessVector.size (): " <<
-        fPartMeasuresWholeNotessVector.size () <<
-        std::endl;
-
-      gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
-        ss.str ());
-    }
-#endif // MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceMeasures ()) {
+    printPartMeasuresWholeNotessVector (
+      gLog,
+      40,
+      ", registerOrdinalMeasureNumberWholeNotes() 2");
   }
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void msrPart::appendStaffDetailsToPart (
@@ -2702,6 +2707,7 @@ void msrPart::finalizePart (
   else {
     // sort the staves to have harmonies above and
     // figured bass below the part
+    if (false) // JMI v0.9.67
     fPartAllStavesList.sort (
       compareStavesToHaveFiguredBassesBelowCorrespondingPart);
 
@@ -2744,6 +2750,7 @@ void msrPart::finalizePartClone (
 
 // JMI v0.9.67 ???
     // sort the staves to have harmonies above and figured bass below the part
+    if (false) // JMI v0.9.67
     fPartAllStavesList.sort (
       compareStavesToHaveFiguredBassesBelowCorrespondingPart);
 
@@ -3039,35 +3046,103 @@ void msrPart::browseData (basevisitor* v)
 
   /* don't enforce any order here, leave it to the client thru sorting ??? JMI v0.9.66 */
 
-  // browse the part harmonies staff if any right now, JMI
-  // to place it before the corresponding part
-  if (fPartHarmoniesStaff) {
-    msrBrowser<msrStaff> browser (v);
-    browser.browse (*fPartHarmoniesStaff);
-  }
+//   // browse the part harmonies staff if any right now, JMI
+//   // to place it before the corresponding part
+//   if (fPartHarmoniesStaff) {
+//     msrBrowser<msrStaff> browser (v);
+//     browser.browse (*fPartHarmoniesStaff);
+//   }
 
-  // browse all non harmonies and non figured bass staves
-  for (S_msrStaff staff : fPartNonHarmoniesNorFiguredBassStavesList) {
-    // browse the staff
-    msrBrowser<msrStaff> browser (v);
-    browser.browse (*staff);
-  } // for
+  switch (fetchPartUpLinkToScore ()->getStavesBrowingOrderKind ()) {
+    case msrStavesBrowingOrderKind::kStavesBrowingOrder_UNKNOWN_:
+      {
+        std::stringstream ss;
 
-  // browse the part figured bass staff if any only now, JMI
-  // to place it after the corresponding part
-  if (fPartFiguredBassStaff) {
-    msrBrowser<msrStaff> browser (v);
-    browser.browse (*fPartFiguredBassStaff);
-  }
+        ss <<
+          "staves browsing order is unknown in score, part: \"" <<
+          getPartCombinedName () <<
+          "\"" <<
+          ", line " << fInputLineNumber;
 
-//   // browse all the part staves JMI ---> this leads to 4 HelloWorld scores... v0.9.62
-//   for (S_msrStaff staff : fPartAllStavesList) {
-//     if (staff != fPartHarmoniesStaff && staff != fPartFiguredBassStaff) {
-//       // browse the staff
-//       msrBrowser<msrStaff> browser (v);
-//       browser.browse (*staff);
-//     }
-//   } // for
+        msrInternalError (
+          gServiceRunData->getInputSourceName (),
+          fInputLineNumber,
+          __FILE__, __LINE__,
+          ss.str ());
+      }
+      break;
+
+    // MusicXML harmonies
+
+    case msrStavesBrowingOrderKind::kStavesBrowingOrderHarmoniesRegularsFiguredBasses:
+      // browse the part harmonies staff if any right now, JMI
+      // to place it before the corresponding part
+      if (fPartHarmoniesStaff) {
+        msrBrowser<msrStaff> browser (v);
+        browser.browse (*fPartHarmoniesStaff);
+      }
+
+      // browse all non harmonies and non figured bass staves
+      for (S_msrStaff staff : fPartNonHarmoniesNorFiguredBassStavesList) {
+        // browse the staff
+        msrBrowser<msrStaff> browser (v);
+        browser.browse (*staff);
+      } // for
+
+      // browse the part figured bass staff if any only now, JMI
+      // to place it after the corresponding part
+      if (fPartFiguredBassStaff) {
+        msrBrowser<msrStaff> browser (v);
+        browser.browse (*fPartFiguredBassStaff);
+      }
+      break;
+
+    case msrStavesBrowingOrderKind::kStavesBrowingOrderRegularsHarmoniesFiguredBasses:
+      // browse all non harmonies and non figured bass staves
+      for (S_msrStaff staff : fPartNonHarmoniesNorFiguredBassStavesList) {
+        // browse the staff
+        msrBrowser<msrStaff> browser (v);
+        browser.browse (*staff);
+      } // for
+
+      // browse the part harmonies staff if any right now, JMI
+      // to place it before the corresponding part
+      if (fPartHarmoniesStaff) {
+        msrBrowser<msrStaff> browser (v);
+        browser.browse (*fPartHarmoniesStaff);
+      }
+
+      // browse the part figured bass staff if any only now, JMI
+      // to place it after the corresponding part
+      if (fPartFiguredBassStaff) {
+        msrBrowser<msrStaff> browser (v);
+        browser.browse (*fPartFiguredBassStaff);
+      }
+      break;
+
+    case msrStavesBrowingOrderKind::kStavesBrowingOrderHarmoniesFiguredBassesRegulars:
+      // browse the part harmonies staff if any right now, JMI
+      // to place it before the corresponding part
+      if (fPartHarmoniesStaff) {
+        msrBrowser<msrStaff> browser (v);
+        browser.browse (*fPartHarmoniesStaff);
+      }
+
+      // browse the part figured bass staff if any only now, JMI
+      // to place it after the corresponding part
+      if (fPartFiguredBassStaff) {
+        msrBrowser<msrStaff> browser (v);
+        browser.browse (*fPartFiguredBassStaff);
+      }
+
+      // browse all non harmonies and non figured bass staves
+      for (S_msrStaff staff : fPartNonHarmoniesNorFiguredBassStavesList) {
+        // browse the staff
+        msrBrowser<msrStaff> browser (v);
+        browser.browse (*staff);
+      } // for
+      break;
+  } // switch
 }
 
 std::string msrPart::asString () const
@@ -3089,12 +3164,14 @@ std::string msrPart::asString () const
 }
 
 void msrPart::printPartMeasuresWholeNotessVector (
-  std::ostream& os,
-  int           fieldWidth) const
+  std::ostream&      os,
+  int                fieldWidth,
+  const std::string& context) const
 {
-  os << std::left <<
-    std::setw (fieldWidth) <<
-    "fPartMeasuresWholeNotessVector" << ": " ;
+  os <<
+    "fPartMeasuresWholeNotessVector" <<
+    ", context: " << context <<
+    ": " ;
 
   if (fPartNumberOfMeasures == 0) {
     os << "[EMPTY]" << std::endl;
@@ -3105,12 +3182,12 @@ void msrPart::printPartMeasuresWholeNotessVector (
     ++gIndenter;
 
     for (size_t i = 0; i < fPartNumberOfMeasures; ++i) {
-      int j = i + 1; // indices start at 0
+      int ordinalNumber = i + 1; // indices start at 0
 
       os << std::left <<
-        "ordinal number " <<
+        "ordinalNumber " <<
         std::setw (3) << std::right <<
-        j << ": " <<
+        ordinalNumber << ": " <<
         std::setw (4) <<
         fPartMeasuresWholeNotessVector [ i ].toString () <<
         std::endl;
@@ -3466,7 +3543,8 @@ void msrPart::printFull (std::ostream& os) const
   // print the part measures whole notes durations vector
   printPartMeasuresWholeNotessVector (
     os,
-    fieldWidth);
+    fieldWidth,
+    "msrPart::printFull()");
 
   os << std::endl;
 
@@ -3650,7 +3728,8 @@ void msrPart::print (std::ostream& os) const
   // print the part measure' whole notes durations vector
   printPartMeasuresWholeNotessVector (
     os,
-    fieldWidth);
+    fieldWidth,
+    ", msrPart::print()");
 
   // print all the staves
   if (fPartAllStavesList.size ()) {

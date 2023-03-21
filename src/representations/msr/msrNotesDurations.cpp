@@ -1452,7 +1452,7 @@ std::string wholeNotesAndDotsNumberAsMsrString (
   int&                 dotsNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceNoteDurationsDetails ()) {
+  if (gTraceOahGroup->getTraceWholeNoteDurationsDetails ()) {
     std::stringstream ss;
 
     ss <<
@@ -1472,7 +1472,7 @@ std::string wholeNotesAndDotsNumberAsMsrString (
     denominator  = wholeNotes.getDenominator ();
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceNoteDurationsDetails ()) {
+  if (gTraceOahGroup->getTraceWholeNoteDurationsDetails ()) {
     std::stringstream ss;
 
     ss <<
@@ -1515,7 +1515,7 @@ std::string wholeNotesAndDotsNumberAsMsrString (
     integralNumberOfWholeNotes = denominator == 1;
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceNoteDurationsDetails ()) {
+  if (gTraceOahGroup->getTraceWholeNoteDurationsDetails ()) {
     std::stringstream ss;
 
     ss <<
@@ -1543,7 +1543,7 @@ std::string wholeNotesAndDotsNumberAsMsrString (
   int  numeratorDots = msrNumberOfDots (numerator);
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceNoteDurationsDetails ()) {
+  if (gTraceOahGroup->getTraceWholeNoteDurationsDetails ()) {
     std::stringstream ss;
 
     ss <<
@@ -1600,7 +1600,7 @@ std::string wholeNotesAndDotsNumberAsMsrString (
     }
 
 #ifdef MF_TRACE_IS_ENABLED
-    if (gTraceOahGroup->getTraceNoteDurationsDetails ()) {
+    if (gTraceOahGroup->getTraceWholeNoteDurationsDetails ()) {
       std::stringstream ss;
 
       ss <<
@@ -1627,7 +1627,7 @@ std::string wholeNotesAndDotsNumberAsMsrString (
   }
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceNoteDurationsDetails ()) {
+  if (gTraceOahGroup->getTraceWholeNoteDurationsDetails ()) {
     std::stringstream ss;
 
     ss <<
@@ -1647,7 +1647,7 @@ std::string wholeNotesAndDotsNumberAsMsrString (
     // since dotted durations cannot be recognized otherwise
     // 6/1 thus becomes 3 \breve, hence '\longa.'
 #ifdef MF_TRACE_IS_ENABLED
-    if (gTraceOahGroup->getTraceNoteDurationsDetails ()) {
+    if (gTraceOahGroup->getTraceWholeNoteDurationsDetails ()) {
       std::stringstream ss;
 
       ss <<
@@ -1666,7 +1666,7 @@ std::string wholeNotesAndDotsNumberAsMsrString (
       denominatorNotesDurationLog -= 1;
 
 #ifdef MF_TRACE_IS_ENABLED
-      if (gTraceOahGroup->getTraceNoteDurationsDetails ()) {
+      if (gTraceOahGroup->getTraceWholeNoteDurationsDetails ()) {
         gLog <<
           "--> numerator" << ": " <<
           numerator <<
@@ -1683,7 +1683,7 @@ std::string wholeNotesAndDotsNumberAsMsrString (
   }
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceNoteDurationsDetails ()) {
+  if (gTraceOahGroup->getTraceWholeNoteDurationsDetails ()) {
     std::stringstream ss;
 
     ss <<
@@ -1709,7 +1709,7 @@ std::string wholeNotesAndDotsNumberAsMsrString (
   if (numeratorDots >= 0 && denominatorNotesDurationLog >= numeratorDots) {
     // take the dots into account
 #ifdef MF_TRACE_IS_ENABLED
-    if (gTraceOahGroup->getTraceNoteDurationsDetails ()) {
+    if (gTraceOahGroup->getTraceWholeNoteDurationsDetails ()) {
       std::stringstream ss;
 
       ss <<
@@ -1725,7 +1725,7 @@ std::string wholeNotesAndDotsNumberAsMsrString (
     denominatorNotesDurationLog -= numeratorDots;
 
 #ifdef MF_TRACE_IS_ENABLED
-    if (gTraceOahGroup->getTraceNoteDurationsDetails ()) {
+    if (gTraceOahGroup->getTraceWholeNoteDurationsDetails ()) {
       std::stringstream ss;
 
       ss <<
@@ -1741,7 +1741,7 @@ std::string wholeNotesAndDotsNumberAsMsrString (
   else {
     // set the multiplying factor
 #ifdef MF_TRACE_IS_ENABLED
-    if (gTraceOahGroup->getTraceNoteDurationsDetails ()) {
+    if (gTraceOahGroup->getTraceWholeNoteDurationsDetails ()) {
       std::stringstream ss;
 
       ss <<
@@ -1763,7 +1763,7 @@ std::string wholeNotesAndDotsNumberAsMsrString (
     multiplyingFactor = numerator;
 
 #ifdef MF_TRACE_IS_ENABLED
-    if (gTraceOahGroup->getTraceNoteDurationsDetails ()) {
+    if (gTraceOahGroup->getTraceWholeNoteDurationsDetails ()) {
       std::stringstream ss;
 
       ss <<
@@ -1784,7 +1784,7 @@ std::string wholeNotesAndDotsNumberAsMsrString (
       multiplyingFactor /= 2;
 
 #ifdef MF_TRACE_IS_ENABLED
-      if (gTraceOahGroup->getTraceNoteDurationsDetails ()) {
+      if (gTraceOahGroup->getTraceWholeNoteDurationsDetails ()) {
         gLog <<
           "--> denominatorNotesDurationLog" << ": " <<
           denominatorNotesDurationLog <<
@@ -1799,7 +1799,7 @@ std::string wholeNotesAndDotsNumberAsMsrString (
   }
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceNoteDurationsDetails ()) {
+  if (gTraceOahGroup->getTraceWholeNoteDurationsDetails ()) {
     std::stringstream ss;
 
     ss <<
@@ -1867,7 +1867,7 @@ std::string wholeNotesAndDotsNumberAsMsrString (
   std::string result = ss.str ();
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceNoteDurationsDetails ()) {
+  if (gTraceOahGroup->getTraceWholeNoteDurationsDetails ()) {
     std::stringstream ss;
 
     ss <<

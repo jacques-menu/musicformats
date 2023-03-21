@@ -2258,6 +2258,44 @@ void mxsr2msrSkeletonBuilder::visitStart (S_relation& elt)
 //________________________________________________________________________
 void mxsr2msrSkeletonBuilder::visitStart (S_encoding& elt)
 {
+/*
+<!--
+	Encoding contains information about who did the digital
+	encoding, when, with what software, and in what aspects.
+	Standard type values for the encoder element are music,
+	words, and arrangement, but other types may be used. The
+	type attribute is only needed when there are multiple
+	encoder elements.
+
+	The supports element indicates if the encoding supports
+	a particular MusicXML element. This is recommended for
+	elements like beam, stem, and accidental, where the
+	absence of an element is ambiguous if you do not know
+	if the encoding supports that element. For Version 2.0,
+	the supports element is expanded to allow programs to
+	indicate support for particular attributes or particular
+	values. This lets applications communicate, for example,
+	that all system and/or page breaks are contained in the
+	MusicXML file.
+-->
+<!ELEMENT encoding ((encoding-date | encoder | software |
+	encoding-description | supports)*)>
+<!ELEMENT encoding-date %yyyy-mm-dd;>
+<!ELEMENT encoder (#PCDATA)>
+<!ATTLIST encoder
+    type CDATA #IMPLIED
+>
+<!ELEMENT software (#PCDATA)>
+<!ELEMENT encoding-description (#PCDATA)>
+<!ELEMENT supports EMPTY>
+<!ATTLIST supports
+    type %yes-no; #REQUIRED
+    element CDATA #REQUIRED
+    attribute CDATA #IMPLIED
+    value CDATA #IMPLIED
+>
+*/
+
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;

@@ -4398,8 +4398,7 @@ There can be several occurrences of this option.)",
   fIgnoreLpsrLineBreaksAtom =
     oahBooleanAtom::create (
       "ignore-lpsr-line-breaks", "ilplb",
-R"(Suppress the line breaks from the LPSR data - let LilyPond decide about them,
-and don't generate an empty \myBreak.)",
+R"(Suppress the line breaks from the LPSR data - let LilyPond decide about them.)",
       "fIgnoreLpsrLineBreaks",
       fIgnoreLpsrLineBreaks);
 

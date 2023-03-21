@@ -946,6 +946,10 @@ class EXP lpsr2lilypondTranslator :
 
     // ornaments
 
+    // in LilyPond, \stopTrillSpan should apply to the note following
+    // the one that holds it in MusicXML and in the MSR
+    S_msrSpanner          fPendingTrillSpannerForStop;
+
     void                  generateOrnament (
                             const S_msrOrnament& ornament);
 
@@ -964,9 +968,12 @@ class EXP lpsr2lilypondTranslator :
                             const S_msrNote& note);
 
     void                  generateCodeForSpannerBeforeNote (
-                            const S_msrSpanner& spanner);
+                            const S_msrSpanner& spanner,
+                            const S_msrNote     note);
+
     void                  generateCodeForSpannerAfterNote (
-                            const S_msrSpanner& spanner);
+                            const S_msrSpanner& spanner,
+                            const S_msrNote     note);
 
     // tuplets
 

@@ -22,7 +22,6 @@ namespace MusicFormats
 // print object
 //______________________________________________________________________________
 enum class msrPrintObjectKind {
-  kPrintObjectNone,
   kPrintObjectYes,
   kPrintObjectNo
 };
@@ -33,7 +32,7 @@ std::string msrPrintObjectKindAsString (
 std::ostream& operator << (std::ostream& os, const msrPrintObjectKind& elt);
 
 msrPrintObjectKind msrPrintObjectKindFromString (
-  int           inputLineNumber,
+  int                inputLineNumber,
   const std::string& printObjectString);
 
 

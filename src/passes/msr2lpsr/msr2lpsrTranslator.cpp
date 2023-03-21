@@ -547,6 +547,11 @@ S_lpsrScore msr2lpsrTranslator::translateMsrToLpsr (
   // create a msrScore browser
   msrBrowser<msrScore> browser (this);
 
+  // set the parts browsing order
+  theMsrScore->
+    setStavesBrowingOrderKind (
+      msrStavesBrowingOrderKind::kStavesBrowingOrderHarmoniesRegularsFiguredBasses);
+
   // browse the visited score with the browser
   browser.browse (*fVisitedMsrScore);
 

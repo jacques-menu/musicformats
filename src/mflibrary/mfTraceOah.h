@@ -420,10 +420,10 @@ class EXP traceOahGroup : public oahGroup
     Bool                  getTraceNotesDetails () const
                               { return fTraceNotesDetails; }
     // whole notes
-    Bool                  getTraceNoteDurations () const
-                              { return fTraceNoteDurations; }
-    Bool                  getTraceNoteDurationsDetails () const
-                              { return fTraceNoteDurationsDetails; }
+    Bool                  getTraceWholeNoteDurations () const
+                              { return fTraceWholeNoteDurations; }
+    Bool                  getTraceWholeNoteDurationsDetails () const
+                              { return fTraceWholeNoteDurationsDetails; }
 
     // skip notes
     void                  setTraceSkipNotes ()
@@ -968,8 +968,8 @@ class EXP traceOahGroup : public oahGroup
     // notes details
     Bool                  fTraceNotesDetails;
     // whole notes
-    Bool                  fTraceNoteDurations;
-    Bool                  fTraceNoteDurationsDetails;
+    Bool                  fTraceWholeNoteDurations;
+    Bool                  fTraceWholeNoteDurationsDetails;
     // skip notes
     Bool                  fTraceSkipNotes;
     // rest notes
