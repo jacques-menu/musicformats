@@ -29,13 +29,6 @@ namespace MusicFormats
 
 class EXP msrSegmentElement : public msrElement
 {
-  public:
-
-    // constants
-    // ------------------------------------------------------
-
-    static const std::string K_MEASURE_NUMBER_UNKNOWN_;
-
   protected:
 
     // constructors/destructor

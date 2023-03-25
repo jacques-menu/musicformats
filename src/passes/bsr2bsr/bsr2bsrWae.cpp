@@ -73,7 +73,7 @@ S_bsr2bsrInternalException bsr2bsrInternalException::create (
 //______________________________________________________________________________
 void bsr2bsrWarning (
   const std::string& inputSourceName,
-  int           inputLineNumber,
+  int                inputLineNumber,
   const std::string& message)
 {
   waeWarning (
@@ -85,9 +85,9 @@ void bsr2bsrWarning (
 
 void bsr2bsrInternalError (
   const std::string& inputSourceName,
-  int           inputLineNumber,
+  int                inputLineNumber,
   const std::string& sourceCodeFileName,
-  int           sourceCodeLineNumber,
+  int                sourceCodeLineNumber,
   const std::string& message)
 {
   gIndenter.resetToZero ();

@@ -60,34 +60,70 @@ typedef SMARTP<msrUnsupportedException> S_msrUnsupportedException;
 //______________________________________________________________________________
 EXP void msrWarning (
   const std::string& inputSourceName,
-  int           inputLineNumber,
+  int                inputLineNumber,
   const std::string& message);
 
+EXP void msrWarningWithMeasureInfo (
+  const std::string& inputSourceName,
+  int                inputLineNumber,
+  const std::string& message,
+  const std::string  measureNumber,
+  int                scoreMeasuresNumber);
+
+//______________________________________________________________________________
 EXP void msrError (
   const std::string& inputSourceName,
-  int           inputLineNumber,
+  int                inputLineNumber,
   const std::string& sourceCodeFileName,
-  int           sourceCodeLineNumber,
+  int                sourceCodeLineNumber,
   const std::string& message);
 
+EXP void msrErrorWithMeasureInfo (
+  const std::string& inputSourceName,
+  int                inputLineNumber,
+  const std::string& sourceCodeFileName,
+  int                sourceCodeLineNumber,
+  const std::string& message,
+  const std::string  measureNumber,
+  int                scoreMeasuresNumber);
+
+//______________________________________________________________________________
 EXP void msrUnsupported (
   const std::string& inputSourceName,
-  int           inputLineNumber,
+  int                inputLineNumber,
   const std::string& sourceCodeFileName,
-  int           sourceCodeLineNumber,
+  int                sourceCodeLineNumber,
   const std::string& message);
 
+//______________________________________________________________________________
 EXP void msrInternalWarning (
   const std::string& inputSourceName,
-  int           inputLineNumber,
+  int                inputLineNumber,
   const std::string& message);
 
+EXP void msrInternalWarningWithMeasureInfo (
+  const std::string& inputSourceName,
+  int                inputLineNumber,
+  const std::string& message,
+  const std::string  measureNumber,
+  int                scoreMeasuresNumber);
+
+//______________________________________________________________________________
 EXP void msrInternalError (
   const std::string& inputSourceName,
-  int           inputLineNumber,
+  int                inputLineNumber,
   const std::string& sourceCodeFileName,
-  int           sourceCodeLineNumber,
+  int                sourceCodeLineNumber,
   const std::string& message);
+
+EXP void msrInternalErrorWithMeasureInfo (
+  const std::string& inputSourceName,
+  int                inputLineNumber,
+  const std::string& sourceCodeFileName,
+  int                sourceCodeLineNumber,
+  const std::string& message,
+  const std::string  measureNumber,
+  int                scoreMeasuresNumber);
 
 
 }

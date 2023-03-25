@@ -21,11 +21,24 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
+// warnings
+
 EXP void waeWarning (
   const std::string& context,
   const std::string& inputSourceName,
   int                inputLineNumber,
   const std::string& message);
+
+EXP void waeWarningWithMeasureInfo (
+  const std::string& context,
+  const std::string& inputSourceName,
+  int                inputLineNumber,
+  const std::string& message,
+  const std::string  measureNumber,
+  int                scoreMeasuresNumber);
+
+//______________________________________________________________________________
+// internal warnings
 
 EXP void waeInternalWarning (
   const std::string& context,
@@ -33,12 +46,30 @@ EXP void waeInternalWarning (
   int                inputLineNumber,
   const std::string& message);
 
+EXP void waeInternalWarningWithMeasureInfo (
+  const std::string& context,
+  const std::string& inputSourceName,
+  int                inputLineNumber,
+  const std::string& message,
+  const std::string  measureNumber,
+  int                scoreMeasuresNumber);
+
 //______________________________________________________________________________
+// errors without exceptions
+
 EXP void waeErrorWithoutException (
   const std::string& context,
   const std::string& sourceCodeFileName,
   int                sourceCodeLineNumber,
   const std::string& message);
+
+EXP void waeErrorWithoutExceptionWithMeasureInfo (
+  const std::string& context,
+  const std::string& sourceCodeFileName,
+  int                sourceCodeLineNumber,
+  const std::string& message,
+  const std::string  measureNumber,
+  int                scoreMeasuresNumber);
 
 EXP void waeErrorWithoutException (
   const std::string& context,
@@ -48,19 +79,18 @@ EXP void waeErrorWithoutException (
   int                sourceCodeLineNumber,
   const std::string& message);
 
-EXP void waeError (
-  const std::string& context,
-  const std::string& sourceCodeFileName,
-  int                sourceCodeLineNumber,
-  const std::string& message);
-
-EXP void waeError (
+EXP void waeErrorWithoutExceptionWithMeasureInfo (
   const std::string& context,
   const std::string& inputSourceName,
   int                inputLineNumber,
   const std::string& sourceCodeFileName,
   int                sourceCodeLineNumber,
-  const std::string& message);
+  const std::string& message,
+  const std::string  measureNumber,
+  int                scoreMeasuresNumber);
+
+//______________________________________________________________________________
+// errors with exceptions
 
 EXP void waeErrorWithException (
   const std::string& context,
@@ -69,6 +99,15 @@ EXP void waeErrorWithException (
   const std::string& message,
   S_mfException      except);
 
+EXP void waeErrorWithExceptionWithMeasureInfo (
+  const std::string& context,
+  const std::string& sourceCodeFileName,
+  int                sourceCodeLineNumber,
+  const std::string& message,
+  S_mfException      except,
+  const std::string  measureNumber,
+  int                scoreMeasuresNumber);
+
 EXP void waeErrorWithException (
   const std::string& context,
   const std::string& inputSourceName,
@@ -78,7 +117,55 @@ EXP void waeErrorWithException (
   const std::string& message,
   S_mfException      except);
 
+EXP void waeErrorWithExceptionWithMeasureInfo (
+  const std::string& context,
+  const std::string& inputSourceName,
+  int                inputLineNumber,
+  const std::string& sourceCodeFileName,
+  int                sourceCodeLineNumber,
+  const std::string& message,
+  S_mfException      except,
+  const std::string  measureNumber,
+  int                scoreMeasuresNumber);
+
 //______________________________________________________________________________
+// errors
+
+EXP void waeError (
+  const std::string& context,
+  const std::string& sourceCodeFileName,
+  int                sourceCodeLineNumber,
+  const std::string& message);
+
+EXP void waeErrorWithMeasureInfo (
+  const std::string& context,
+  const std::string& sourceCodeFileName,
+  int                sourceCodeLineNumber,
+  const std::string& message,
+  const std::string  measureNumber,
+  int                scoreMeasuresNumber);
+
+EXP void waeError (
+  const std::string& context,
+  const std::string& inputSourceName,
+  int                inputLineNumber,
+  const std::string& sourceCodeFileName,
+  int                sourceCodeLineNumber,
+  const std::string& message);
+
+EXP void waeErrorWithMeasureInfo (
+  const std::string& context,
+  const std::string& inputSourceName,
+  int                inputLineNumber,
+  const std::string& sourceCodeFileName,
+  int                sourceCodeLineNumber,
+  const std::string& message,
+  const std::string  measureNumber,
+  int                scoreMeasuresNumber);
+
+//______________________________________________________________________________
+// internal errors
+
 EXP void waeInternalError (
   const std::string& context,
   const std::string& inputSourceName,
@@ -86,6 +173,16 @@ EXP void waeInternalError (
   const std::string& sourceCodeFileName,
   int                sourceCodeLineNumber,
   const std::string& message);
+
+EXP void waeInternalErrorWithMeasureInfo (
+  const std::string& context,
+  const std::string& inputSourceName,
+  int                inputLineNumber,
+  const std::string& sourceCodeFileName,
+  int                sourceCodeLineNumber,
+  const std::string& message,
+  const std::string  measureNumber,
+  int                scoreMeasuresNumber);
 
 EXP void waeInternalErrorWithException (
   const std::string& context,
@@ -95,6 +192,17 @@ EXP void waeInternalErrorWithException (
   int                sourceCodeLineNumber,
   const std::string& message,
   S_mfException      except);
+
+EXP void waeInternalErrorWithExceptionWithMeasureInfo (
+  const std::string& context,
+  const std::string& inputSourceName,
+  int                inputLineNumber,
+  const std::string& sourceCodeFileName,
+  int                sourceCodeLineNumber,
+  const std::string& message,
+  S_mfException      except,
+  const std::string  measureNumber,
+  int                scoreMeasuresNumber);
 
 //______________________________________________________________________________
 

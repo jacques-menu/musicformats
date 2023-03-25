@@ -21,19 +21,42 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
+// assert
+
 EXP void mfAssert (
   const std::string& sourceCodeFileName,
   int                sourceCodeLineNumber,
   Bool               condition,
   const std::string& messageIfFalse);
 
-EXP void mfAssertWithInputLocalisation (
+EXP void mfAssertWithMeasureInfo (
+  const std::string& sourceCodeFileName,
+  int                sourceCodeLineNumber,
+  Bool               condition,
+  const std::string& messageIfFalse,
+  const std::string  measureNumber,
+  int                scoreMeasuresNumber);
+
+//______________________________________________________________________________
+// assert with input location
+
+EXP void mfAssertWithInputLocation (
   const std::string& sourceCodeFileName,
   int                sourceCodeLineNumber,
   Bool               condition,
   const std::string& inputSourceName,
   int                inputLineNumber,
   const std::string& messageIfFalse);
+
+EXP void mfAssertWithInputLocationWithMeasureInfo (
+  const std::string& sourceCodeFileName,
+  int                sourceCodeLineNumber,
+  Bool               condition,
+  const std::string& inputSourceName,
+  int                inputLineNumber,
+  const std::string& messageIfFalse,
+  const std::string  measureNumber,
+  int                scoreMeasuresNumber);
 
 
 }

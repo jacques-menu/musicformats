@@ -78,7 +78,7 @@ S_msrUnsupportedException msrUnsupportedException::create (
 //______________________________________________________________________________
 void msrWarning (
   const std::string& inputSourceName,
-  int           inputLineNumber,
+  int                inputLineNumber,
   const std::string& message)
 {
   waeWarning (
@@ -88,11 +88,28 @@ void msrWarning (
     message);
 }
 
+void msrWarningWithMeasureInfo (
+  const std::string& inputSourceName,
+  int                inputLineNumber,
+  const std::string& message,
+  const std::string  measureNumber,
+  int                scoreMeasuresNumber)
+{
+  waeWarningWithMeasureInfo (
+    "MSR",
+    inputSourceName,
+    inputLineNumber,
+    message,
+    measureNumber,
+    scoreMeasuresNumber);
+}
+
+//______________________________________________________________________________
 void msrError (
   const std::string& inputSourceName,
-  int           inputLineNumber,
+  int                inputLineNumber,
   const std::string& sourceCodeFileName,
-  int           sourceCodeLineNumber,
+  int                sourceCodeLineNumber,
   const std::string& message)
 {
   waeError (
@@ -113,12 +130,41 @@ void msrError (
   }
 }
 
+void msrErrorWithMeasureInfo(
+  const std::string& inputSourceName,
+  int                inputLineNumber,
+  const std::string& sourceCodeFileName,
+  int                sourceCodeLineNumber,
+  const std::string& message,
+  const std::string  measureNumber,
+  int                scoreMeasuresNumber)
+{
+  waeErrorWithMeasureInfo (
+    "MSR",
+    inputSourceName,
+    inputLineNumber,
+    sourceCodeFileName,
+    sourceCodeLineNumber,
+    message,
+    measureNumber,
+    scoreMeasuresNumber);
+
+  if (! gWaeOahGroup->getDontShowErrors ()) {
+    if (! gWaeOahGroup->getDontQuitOnErrors ()) { // JMI
+      throw msrException (message);
+    }
+    else {
+      throw msrException (message);
+    }
+  }
+}
+
 //______________________________________________________________________________
 void msrUnsupported (
   const std::string& inputSourceName,
-  int           inputLineNumber,
+  int                inputLineNumber,
   const std::string& sourceCodeFileName,
-  int           sourceCodeLineNumber,
+  int                sourceCodeLineNumber,
   const std::string& message)
 {
   if (!
@@ -148,7 +194,7 @@ void msrUnsupported (
 //______________________________________________________________________________
 void msrInternalWarning (
   const std::string& inputSourceName,
-  int           inputLineNumber,
+  int                inputLineNumber,
   const std::string& message)
 {
   waeInternalWarning (
@@ -158,11 +204,28 @@ void msrInternalWarning (
     message);
 }
 
+void msrInternalWarningWithMeasureInfo (
+  const std::string& inputSourceName,
+  int                inputLineNumber,
+  const std::string& message,
+  const std::string  measureNumber,
+  int                scoreMeasuresNumber)
+{
+  waeInternalWarningWithMeasureInfo (
+    "MSR",
+    inputSourceName,
+    inputLineNumber,
+    message,
+    measureNumber,
+    scoreMeasuresNumber);
+}
+
+//______________________________________________________________________________
 void msrInternalError (
   const std::string& inputSourceName,
-  int           inputLineNumber,
+  int                inputLineNumber,
   const std::string& sourceCodeFileName,
-  int           sourceCodeLineNumber,
+  int                sourceCodeLineNumber,
   const std::string& message)
 {
   gIndenter.resetToZero ();
@@ -176,6 +239,36 @@ void msrInternalError (
     sourceCodeLineNumber,
     message,
     msrInternalException::create (message));
+
+#ifdef MF_ABORT_TO_DEBUG_ERRORS_IS_ENABLED
+  abort ();
+#endif // MF_ABORT_TO_DEBUG_ERRORS_IS_ENABLED
+
+  throw msrInternalException (message);
+}
+
+void msrInternalErrorWithMeasureInfo (
+  const std::string& inputSourceName,
+  int                inputLineNumber,
+  const std::string& sourceCodeFileName,
+  int                sourceCodeLineNumber,
+  const std::string& message,
+  const std::string  measureNumber,
+  int                scoreMeasuresNumber)
+{
+  gIndenter.resetToZero ();
+
+//  waeErrorWithoutException ( // JMI
+   waeErrorWithExceptionWithMeasureInfo (
+    "MSR INTERNAL",
+    inputSourceName,
+    inputLineNumber,
+    sourceCodeFileName,
+    sourceCodeLineNumber,
+    message,
+    msrInternalException::create (message),
+    measureNumber,
+    scoreMeasuresNumber);
 
 #ifdef MF_ABORT_TO_DEBUG_ERRORS_IS_ENABLED
   abort ();

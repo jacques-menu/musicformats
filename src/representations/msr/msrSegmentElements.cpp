@@ -31,9 +31,6 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-// constants
-const std::string   msrSegmentElement::K_MEASURE_NUMBER_UNKNOWN_ = "K_MEASURE_NUMBER_UNKNOWN_";
-
 msrSegmentElement::msrSegmentElement (
   int inputLineNumber)
     : msrElement (inputLineNumber)

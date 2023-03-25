@@ -29,6 +29,8 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
+// warnings
+
 void waeWarning (
   const std::string& context,
   const std::string& inputSourceName,
@@ -42,6 +44,27 @@ void waeWarning (
       inputLineNumber,
       message);
 }
+
+void waeWarningWithMeasureInfo (
+  const std::string& context,
+  const std::string& inputSourceName,
+  int                inputLineNumber,
+  const std::string& message,
+  const std::string  measureNumber,
+  int                scoreMeasuresNumber)
+{
+  gWaeHandler->
+    waeWarningWithMeasureInfo (
+      context,
+      inputSourceName,
+      inputLineNumber,
+      message,
+      measureNumber,
+      scoreMeasuresNumber);
+}
+
+//______________________________________________________________________________
+// internal warnings
 
 void waeInternalWarning (
   const std::string& context,
@@ -57,7 +80,27 @@ void waeInternalWarning (
       message);
 }
 
+void waeInternalWarningWithMeasureInfo (
+  const std::string& context,
+  const std::string& inputSourceName,
+  int                inputLineNumber,
+  const std::string& message,
+  const std::string  measureNumber,
+  int                scoreMeasuresNumber)
+{
+  gWaeHandler->
+    waeInternalWarningWithMeasureInfo (
+      context,
+      inputSourceName,
+      inputLineNumber,
+      message,
+      measureNumber,
+      scoreMeasuresNumber);
+}
+
 //______________________________________________________________________________
+// errors without exception
+
 void waeErrorWithoutException (
   const std::string& context,
   const std::string& sourceCodeFileName,
@@ -70,6 +113,24 @@ void waeErrorWithoutException (
       sourceCodeFileName,
       sourceCodeLineNumber,
       message);
+}
+
+void waeErrorWithoutExceptionWithMeasureInfo (
+  const std::string& context,
+  const std::string& sourceCodeFileName,
+  int                sourceCodeLineNumber,
+  const std::string& message,
+  const std::string  measureNumber,
+  int                scoreMeasuresNumber)
+{
+  gWaeHandler->
+    waeErrorWithoutExceptionWithMeasureInfo (
+      context,
+      sourceCodeFileName,
+      sourceCodeLineNumber,
+      message,
+      measureNumber,
+      scoreMeasuresNumber);
 }
 
 void waeErrorWithoutException (
@@ -90,56 +151,65 @@ void waeErrorWithoutException (
       message);
 }
 
-void waeError (
-  const std::string& context,
-  const std::string& sourceCodeFileName,
-  int                sourceCodeLineNumber,
-  const std::string& message)
-{
-  waeErrorWithoutException (
-    context,
-    sourceCodeFileName,
-    sourceCodeLineNumber,
-    message);
-
-abort (); // JMI v0.9.67
-
-  throw mfException (message);
-}
-
-void waeError (
+void waeErrorWithoutExceptionWithMeasureInfo (
   const std::string& context,
   const std::string& inputSourceName,
   int                inputLineNumber,
   const std::string& sourceCodeFileName,
   int                sourceCodeLineNumber,
-  const std::string& message)
+  const std::string& message,
+  const std::string  measureNumber,
+  int                scoreMeasuresNumber)
 {
-  waeErrorWithoutException (
-    context,
-    inputSourceName,
-    inputLineNumber,
-    sourceCodeFileName,
-    sourceCodeLineNumber,
-    message);
-
-abort (); // JMI v0.9.67
-
-  throw mfException (message);
+  gWaeHandler->
+    waeErrorWithoutExceptionWithMeasureInfo (
+      context,
+      inputSourceName,
+      inputLineNumber,
+      sourceCodeFileName,
+      sourceCodeLineNumber,
+      message,
+      measureNumber,
+      scoreMeasuresNumber);
 }
+
+// ------------------------------------------------------
+// errors with exception
 
 void waeErrorWithException (
   const std::string& context,
   const std::string& sourceCodeFileName,
   int                sourceCodeLineNumber,
   const std::string& message,
-  S_mfException except)
+  S_mfException      except)
 {
   waeErrorWithoutException (
     context,
     sourceCodeFileName,
     sourceCodeLineNumber,
     message);
+
+abort (); // JMI v0.9.67
+
+  throw *except;
+}
+
+void waeErrorWithExceptionWithMeasureInfo (
+  const std::string& context,
+  const std::string& sourceCodeFileName,
+  int                sourceCodeLineNumber,
+  const std::string& message,
+  S_mfException      except,
+  const std::string  measureNumber,
+  int                scoreMeasuresNumber)
+{
+  waeErrorWithoutExceptionWithMeasureInfo (
+    context,
+    sourceCodeFileName,
+    sourceCodeLineNumber,
+    message,
+    measureNumber,
+    scoreMeasuresNumber);
 
 abort (); // JMI v0.9.67
 
@@ -153,7 +223,7 @@ void waeErrorWithException (
   const std::string& sourceCodeFileName,
   int                sourceCodeLineNumber,
   const std::string& message,
-  S_mfException except)
+  S_mfException      except)
 {
   waeErrorWithoutException (
     context,
@@ -168,7 +238,35 @@ abort (); // JMI
   throw *except;
 }
 
+void waeErrorWithExceptionWithMeasureInfo (
+  const std::string& context,
+  const std::string& inputSourceName,
+  int                inputLineNumber,
+  const std::string& sourceCodeFileName,
+  int                sourceCodeLineNumber,
+  const std::string& message,
+  S_mfException      except,
+  const std::string  measureNumber,
+  int                scoreMeasuresNumber)
+{
+  waeErrorWithoutExceptionWithMeasureInfo (
+    context,
+    inputSourceName,
+    inputLineNumber,
+    sourceCodeFileName,
+    sourceCodeLineNumber,
+    message,
+    measureNumber,
+    scoreMeasuresNumber);
+
+abort (); // JMI
+
+  throw *except;
+}
+
 //______________________________________________________________________________
+// internal errors
+
 void waeInternalError (
   const std::string& context,
   const std::string& inputSourceName,
@@ -188,6 +286,29 @@ void waeInternalError (
   throw mfException (message);
 }
 
+void waeInternalErrorWithMeasureInfo (
+  const std::string& context,
+  const std::string& inputSourceName,
+  int                inputLineNumber,
+  const std::string& sourceCodeFileName,
+  int                sourceCodeLineNumber,
+  const std::string& message,
+  const std::string  measureNumber,
+  int                scoreMeasuresNumber)
+{
+  waeErrorWithoutExceptionWithMeasureInfo (
+    context,
+    inputSourceName,
+    inputLineNumber,
+    sourceCodeFileName,
+    sourceCodeLineNumber,
+    message,
+    measureNumber,
+    scoreMeasuresNumber);
+
+  throw mfException (message);
+}
+
 void waeInternalErrorWithException (
   const std::string& context,
   const std::string& inputSourceName,
@@ -195,7 +316,7 @@ void waeInternalErrorWithException (
   const std::string& sourceCodeFileName,
   int                sourceCodeLineNumber,
   const std::string& message,
-  S_mfException except)
+  S_mfException      except)
 {
   waeErrorWithoutException (
     context,
@@ -208,7 +329,120 @@ void waeInternalErrorWithException (
   throw *except;
 }
 
+void waeInternalErrorWithExceptionWithMeasureInfo (
+  const std::string& context,
+  const std::string& inputSourceName,
+  int                inputLineNumber,
+  const std::string& sourceCodeFileName,
+  int                sourceCodeLineNumber,
+  const std::string& message,
+  S_mfException      except,
+  const std::string  measureNumber,
+  int                scoreMeasuresNumber)
+{
+  waeErrorWithoutExceptionWithMeasureInfo (
+    context,
+    inputSourceName,
+    inputLineNumber,
+    sourceCodeFileName,
+    sourceCodeLineNumber,
+    message,
+    measureNumber,
+    scoreMeasuresNumber);
+
+  throw *except;
+}
+
+// ------------------------------------------------------
+// errors
+
+void waeError (
+  const std::string& context,
+  const std::string& sourceCodeFileName,
+  int                sourceCodeLineNumber,
+  const std::string& message)
+{
+  waeErrorWithoutException (
+    context,
+    sourceCodeFileName,
+    sourceCodeLineNumber,
+    message);
+
+abort (); // JMI v0.9.67
+
+  throw mfException (message);
+}
+
+void waeErrorWithMeasureInfo (
+  const std::string& context,
+  const std::string& sourceCodeFileName,
+  int                sourceCodeLineNumber,
+  const std::string& message,
+  const std::string  measureNumber,
+  int                scoreMeasuresNumber)
+{
+  waeErrorWithoutExceptionWithMeasureInfo (
+    context,
+    sourceCodeFileName,
+    sourceCodeLineNumber,
+    message,
+    measureNumber,
+    scoreMeasuresNumber);
+
+abort (); // JMI v0.9.67
+
+  throw mfException (message);
+}
+
+void waeError (
+  const std::string& context,
+  const std::string& inputSourceName,
+  int                inputLineNumber,
+  const std::string& sourceCodeFileName,
+  int                sourceCodeLineNumber,
+  const std::string& message)
+{
+  waeErrorWithoutException (
+    context,
+    inputSourceName,
+    inputLineNumber,
+    sourceCodeFileName,
+    sourceCodeLineNumber,
+    message);
+
+abort (); // JMI v0.9.67
+
+  throw mfException (message);
+}
+
+void waeErrorWithMeasureInfo (
+  const std::string& context,
+  const std::string& inputSourceName,
+  int                inputLineNumber,
+  const std::string& sourceCodeFileName,
+  int                sourceCodeLineNumber,
+  const std::string& message,
+  const std::string  measureNumber,
+  int                scoreMeasuresNumber)
+{
+  waeErrorWithoutExceptionWithMeasureInfo (
+    context,
+    inputSourceName,
+    inputLineNumber,
+    sourceCodeFileName,
+    sourceCodeLineNumber,
+    message,
+    measureNumber,
+    scoreMeasuresNumber);
+
+abort (); // JMI v0.9.67
+
+  throw mfException (message);
+}
+
 //______________________________________________________________________________
+// display input line numbers
+
 void displayWarningsAndErrorsInputLineNumbers ()
 {
   gWaeHandler->

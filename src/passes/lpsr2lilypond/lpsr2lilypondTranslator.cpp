@@ -12597,8 +12597,8 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
 
     ss <<
       ", measure \"" << measureNumber << "\"" <<
-      ", measureEndRegularKind = '" << measureEndRegularKind <<
-      ", measurePuristNumber = '" << measurePuristNumber <<
+      ", measureEndRegularKind: " << measureEndRegularKind <<
+      ", measurePuristNumber: " << measurePuristNumber <<
       ", fOnGoingMultipleFullBarRests: " << fOnGoingMultipleFullBarRests <<
       ", line " << inputLineNumber <<
       " ===-->" <<

@@ -21,7 +21,7 @@ namespace MusicFormats
 //______________________________________________________________________________
 void lpsr2lilypondWarning (
   const std::string& inputSourceName,
-  int           inputLineNumber,
+  int                inputLineNumber,
   const std::string& message)
 {
   waeWarning (
@@ -33,7 +33,7 @@ void lpsr2lilypondWarning (
 
 void lpsr2lilypondInternalWarning (
   const std::string& inputSourceName,
-  int           inputLineNumber,
+  int                inputLineNumber,
   const std::string& message)
 {
   waeInternalWarning (
@@ -45,9 +45,9 @@ void lpsr2lilypondInternalWarning (
 
 void lpsr2lilypondError (
   const std::string& inputSourceName,
-  int           inputLineNumber,
+  int                inputLineNumber,
   const std::string& sourceCodeFileName,
-  int           sourceCodeLineNumber,
+  int                sourceCodeLineNumber,
   const std::string& message)
 {
   waeError (
@@ -70,9 +70,9 @@ void lpsr2lilypondError (
 
 void lpsr2lilypondInternalError (
   const std::string& inputSourceName,
-  int           inputLineNumber,
+  int                inputLineNumber,
   const std::string& sourceCodeFileName,
-  int           sourceCodeLineNumber,
+  int                sourceCodeLineNumber,
   const std::string& message)
 {
   waeInternalError (

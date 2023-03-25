@@ -73,7 +73,7 @@ void translateMxsrToGuido (
       separator <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceToStream (
       err,
       __FILE__, __LINE__,
       ss.str ());

@@ -1,0 +1,4 @@
+cxla challenging/BeethovenNinthSymphonyTest.xml -t=passes --display-part-groups
+
+cxla challenging/BeethovenNinthSymphonyTest.xml -t=passes --display-part-groups -t=staves,backup,forward
+

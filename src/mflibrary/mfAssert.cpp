@@ -21,6 +21,8 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
+// assert
+
 void mfAssert (
   const std::string& sourceCodeFileName,
   int                sourceCodeLineNumber,
@@ -33,7 +35,8 @@ void mfAssert (
     gLog <<
       "#### mfAssert" <<
       ", " << sourceCodeFileName << ":" << sourceCodeLineNumber <<
-      " -- " << messageIfFalse <<
+      " -- " <<
+      messageIfFalse <<
       " - quitting." <<
       std::endl;
 
@@ -45,7 +48,38 @@ void mfAssert (
   }
 }
 
-void mfAssertWithInputLocalisation (
+void mfAssertWithMeasureInfo (
+  const std::string& sourceCodeFileName,
+  int                sourceCodeLineNumber,
+  Bool               condition,
+  const std::string& messageIfFalse,
+  const std::string  measureNumber,
+  int                scoreMeasuresNumber)
+{
+  if (! condition) {
+    gIndenter.resetToZero ();
+
+    gLog <<
+      "#### mfAssert" <<
+      ", " << sourceCodeFileName << ":" << sourceCodeLineNumber <<
+      " -- " <<
+      "measure " << measureNumber << '/' << scoreMeasuresNumber << ", " <<
+      messageIfFalse <<
+      " - quitting." <<
+      std::endl;
+
+#ifdef MF_ABORT_TO_DEBUG_ERRORS_IS_ENABLED
+  abort ();
+#endif // MF_ABORT_TO_DEBUG_ERRORS_IS_ENABLED
+
+    throw mfAssertException (messageIfFalse);
+  }
+}
+
+//______________________________________________________________________________
+// assert with input location
+
+void mfAssertWithInputLocation (
   const std::string& sourceCodeFileName,
   int                sourceCodeLineNumber,
   Bool               condition,
@@ -60,7 +94,39 @@ void mfAssertWithInputLocalisation (
       "#### mfAssert" <<
       ", " << inputSourceName << ":" << inputLineNumber <<
       ", " << sourceCodeFileName << ":" << sourceCodeLineNumber <<
-      " -- " << messageIfFalse <<
+      " -- " <<
+      messageIfFalse <<
+      " - quitting." <<
+      std::endl;
+
+#ifdef MF_ABORT_TO_DEBUG_ERRORS_IS_ENABLED
+  abort ();
+#endif // MF_ABORT_TO_DEBUG_ERRORS_IS_ENABLED
+
+    throw mfAssertException (messageIfFalse);
+  }
+}
+
+void mfAssertWithInputLocationWithMeasureInfo (
+  const std::string& sourceCodeFileName,
+  int                sourceCodeLineNumber,
+  Bool               condition,
+  const std::string& inputSourceName,
+  int                inputLineNumber,
+  const std::string& messageIfFalse,
+  const std::string  measureNumber,
+  int                scoreMeasuresNumber)
+{
+  if (! condition) {
+    gIndenter.resetToZero ();
+
+    gLog <<
+      "#### mfAssert" <<
+      ", " << inputSourceName << ":" << inputLineNumber <<
+      ", " << sourceCodeFileName << ":" << sourceCodeLineNumber <<
+      " -- " <<
+      "measure " << measureNumber << '/' << scoreMeasuresNumber << ", " <<
+      messageIfFalse <<
       " - quitting." <<
       std::endl;
 

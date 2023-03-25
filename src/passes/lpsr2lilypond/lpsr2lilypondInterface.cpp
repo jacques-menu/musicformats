@@ -200,7 +200,7 @@ EXP void translateLpsrToLilypondWithHandler (
     // open output file
 #ifdef MF_TRACE_IS_ENABLED
     if (gEarlyOptions.getEarlyTracePasses ()) {
-      gWaeHandler->waeTrace (
+      gWaeHandler->waeTraceToStream (
         err,
         __FILE__, __LINE__,
         gLanguage->openingLilypondFileForWriting (outputFileName));
