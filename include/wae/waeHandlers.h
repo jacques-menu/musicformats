@@ -55,7 +55,8 @@ class EXP waeHandler : public smartable
     // public services
     // ------------------------------------------------------
 
-    // warning and errors
+    // warnings
+    // ------------------------------------------------------
 
     virtual void          waeWarning (
                             const std::string& context,
@@ -63,18 +64,48 @@ class EXP waeHandler : public smartable
                             int                inputLineNumber,
                             const std::string& message);
 
+    virtual void          waeWarningWithMeasureInfo (
+                            const std::string& context,
+                            const std::string& inputSourceName,
+                            int                inputLineNumber,
+                            const std::string& message,
+                            const std::string  measureNumber,
+                            int                scoreMeasuresNumber);
+
+    // internal warnings
+    // ------------------------------------------------------
+
     virtual void          waeInternalWarning (
                             const std::string& context,
                             const std::string& inputSourceName,
                             int                inputLineNumber,
                             const std::string& message);
 
+    virtual void          waeInternalWarningWithMeasureInfo (
+                            const std::string& context,
+                            const std::string& inputSourceName,
+                            int                inputLineNumber,
+                            const std::string& message,
+                            const std::string  measureNumber,
+                            int                scoreMeasuresNumber);
+
+
+    // errors without exception
+    // ------------------------------------------------------
 
     virtual void          waeErrorWithoutException (
                             const std::string& context,
                             const std::string& sourceCodeFileName,
                             int                sourceCodeLineNumber,
                             const std::string& message);
+
+    virtual void          waeErrorWithoutExceptionWithMeasureInfo (
+                            const std::string& context,
+                            const std::string& sourceCodeFileName,
+                            int                sourceCodeLineNumber,
+                            const std::string& message,
+                            const std::string  measureNumber,
+                            int                scoreMeasuresNumber);
 
     virtual void          waeErrorWithoutException (
                             const std::string& context,
@@ -84,19 +115,18 @@ class EXP waeHandler : public smartable
                             int                sourceCodeLineNumber,
                             const std::string& message);
 
-    virtual void          waeError (
-                            const std::string& context,
-                            const std::string& sourceCodeFileName,
-                            int                sourceCodeLineNumber,
-                            const std::string& message);
-
-    virtual void          waeError (
+    virtual void          waeErrorWithoutExceptionWithMeasureInfo (
                             const std::string& context,
                             const std::string& inputSourceName,
                             int                inputLineNumber,
                             const std::string& sourceCodeFileName,
                             int                sourceCodeLineNumber,
-                            const std::string& message);
+                            const std::string& message,
+                            const std::string  measureNumber,
+                            int                scoreMeasuresNumber);
+
+    // errors with exception
+    // ------------------------------------------------------
 
     virtual void          waeErrorWithException (
                             const std::string& context,
@@ -105,6 +135,15 @@ class EXP waeHandler : public smartable
                             const std::string& message,
                             S_mfException      except);
 
+    virtual void          waeErrorWithExceptionWithMeasureInfo (
+                            const std::string& context,
+                            const std::string& sourceCodeFileName,
+                            int                sourceCodeLineNumber,
+                            const std::string& message,
+                            S_mfException      except,
+                            const std::string  measureNumber,
+                            int                scoreMeasuresNumber);
+
     virtual void          waeErrorWithException (
                             const std::string& context,
                             const std::string& inputSourceName,
@@ -114,14 +153,19 @@ class EXP waeHandler : public smartable
                             const std::string& message,
                             S_mfException      except);
 
-
-    virtual void          waeInternalError (
+    virtual void          waeErrorWithExceptionWithMeasureInfo (
                             const std::string& context,
                             const std::string& inputSourceName,
                             int                inputLineNumber,
                             const std::string& sourceCodeFileName,
                             int                sourceCodeLineNumber,
-                            const std::string& message);
+                            const std::string& message,
+                            S_mfException      except,
+                            const std::string  measureNumber,
+                            int                scoreMeasuresNumber);
+
+    // internal errors with exceptions
+    // ------------------------------------------------------
 
     virtual void          waeInternalErrorWithException (
                             const std::string& context,
@@ -131,6 +175,76 @@ class EXP waeHandler : public smartable
                             int                sourceCodeLineNumber,
                             const std::string& message,
                             S_mfException      except);
+
+    virtual void          waeInternalErrorWithExceptionWithMeasureInfo (
+                            const std::string& context,
+                            const std::string& inputSourceName,
+                            int                inputLineNumber,
+                            const std::string& sourceCodeFileName,
+                            int                sourceCodeLineNumber,
+                            const std::string& message,
+                            S_mfException      except,
+                            const std::string  measureNumber,
+                            int                scoreMeasuresNumber);
+
+    // errors
+    // ------------------------------------------------------
+
+    virtual void          waeError (
+                            const std::string& context,
+                            const std::string& sourceCodeFileName,
+                            int                sourceCodeLineNumber,
+                            const std::string& message);
+
+    virtual void          waeErrorWithMeasureInfo (
+                            const std::string& context,
+                            const std::string& sourceCodeFileName,
+                            int                sourceCodeLineNumber,
+                            const std::string& message,
+                            const std::string  measureNumber,
+                            int                scoreMeasuresNumber);
+
+    virtual void          waeError (
+                            const std::string& context,
+                            const std::string& inputSourceName,
+                            int                inputLineNumber,
+                            const std::string& sourceCodeFileName,
+                            int                sourceCodeLineNumber,
+                            const std::string& message);
+
+    virtual void          waeErrorWithMeasureInfo (
+                            const std::string& context,
+                            const std::string& inputSourceName,
+                            int                inputLineNumber,
+                            const std::string& sourceCodeFileName,
+                            int                sourceCodeLineNumber,
+                            const std::string& message,
+                            const std::string  measureNumber,
+                            int                scoreMeasuresNumber);
+
+    // internal errors
+    // ------------------------------------------------------
+
+    virtual void          waeInternalError (
+                            const std::string& context,
+                            const std::string& inputSourceName,
+                            int                inputLineNumber,
+                            const std::string& sourceCodeFileName,
+                            int                sourceCodeLineNumber,
+                            const std::string& message);
+
+    virtual void          waeInternalErrorWithMeasureInfo (
+                            const std::string& context,
+                            const std::string& inputSourceName,
+                            int                inputLineNumber,
+                            const std::string& sourceCodeFileName,
+                            int                sourceCodeLineNumber,
+                            const std::string& message,
+                            const std::string  measureNumber,
+                            int                scoreMeasuresNumber);
+
+    // display input line numbers
+    // ------------------------------------------------------
 
     virtual void          displayWarningsAndErrorsInputLineNumbers ();
 
@@ -143,12 +257,29 @@ class EXP waeHandler : public smartable
                             int                inputLineNumber,
                             const std::string& message);
 
-    virtual void          waeTrace (
+    virtual void          waeTraceWithMeasureInfo (
+//                             const std::string& context,
+                            const std::string& inputSourceName,
+                            int                inputLineNumber,
+                            const std::string& message,
+                            const std::string  measureNumber,
+                            int                scoreMeasuresNumber);
+
+    virtual void          waeTraceToStream (
 //                             const std::string& context,
                             std::ostream&      os,
                             const std::string& inputSourceName,
                             int                inputLineNumber,
                             const std::string& message);
+
+    virtual void          waeTraceToStreamWithMeasureInfo (
+//                             const std::string& context,
+                            std::ostream&      os,
+                            const std::string& inputSourceName,
+                            int                inputLineNumber,
+                            const std::string& message,
+                            const std::string  measureNumber,
+                            int                scoreMeasuresNumber);
 #endif // MF_TRACE_IS_ENABLED
 
     // print

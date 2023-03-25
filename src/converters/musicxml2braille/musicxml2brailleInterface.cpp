@@ -148,7 +148,7 @@ static mfMusicformatsErrorKind xmlFile2brailleWithHandler (
 
   if (gGlobalXml2brlInsiderOahGroup->getQuitAfterPass2a ()) {
 #ifdef MF_TRACE_IS_ENABLED
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceToStream (
       err,
       __FILE__, __LINE__,
       gLanguage->quittingAfterPass (mfPassIDKind::kMfPassID_2a));
@@ -181,7 +181,7 @@ static mfMusicformatsErrorKind xmlFile2brailleWithHandler (
 
   if (gGlobalXml2brlInsiderOahGroup->getQuitAfterPass2b ()) {
 #ifdef MF_TRACE_IS_ENABLED
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceToStream (
       err,
       __FILE__, __LINE__,
       gLanguage->quittingAfterPass (mfPassIDKind::kMfPassID_2b));
@@ -218,7 +218,7 @@ static mfMusicformatsErrorKind xmlFile2brailleWithHandler (
 
   if (gGlobalXml2brlInsiderOahGroup->getQuitAfterPass3 ()) {
 #ifdef MF_TRACE_IS_ENABLED
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceToStream (
       err,
       __FILE__, __LINE__,
       gLanguage->quittingAfterPass (mfPassIDKind::kMfPassID_3));

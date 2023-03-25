@@ -26,7 +26,7 @@ namespace MusicFormats
 //______________________________________________________________________________
 EXP void msdlWarning (
   const std::string& inputSourceName,
-  int           inputLineNumber,
+  int                inputLineNumber,
   const std::string& message)
 {
   waeWarning (
@@ -39,9 +39,9 @@ EXP void msdlWarning (
 
 EXP void msdlError (
   const std::string& inputSourceName,
-  int           inputLineNumber,
+  int                inputLineNumber,
   const std::string& sourceCodeFileName,
-  int           sourceCodeLineNumber,
+  int                sourceCodeLineNumber,
   const std::string& message)
 {
   waeError (
@@ -61,9 +61,9 @@ EXP void msdlError (
 
 EXP void msdlInternalError (
   const std::string& inputSourceName,
-  int           inputLineNumber,
+  int                inputLineNumber,
   const std::string& sourceCodeFileName,
-  int           sourceCodeLineNumber,
+  int                sourceCodeLineNumber,
   const std::string& message)
 {
   gIndenter.resetToZero ();

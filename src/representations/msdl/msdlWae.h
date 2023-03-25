@@ -114,21 +114,21 @@ typedef SMARTP<msdl2musicxmlException> S_msdl2musicxmlException;
 //______________________________________________________________________________
 EXP void msdlWarning (
   const std::string& inputSourceName,
-  int           inputLineNumber,
+  int                inputLineNumber,
   const std::string& message);
 
 EXP void msdlError (
   const std::string& inputSourceName,
-  int           inputLineNumber,
+  int                inputLineNumber,
   const std::string& sourceCodeFileName,
-  int           sourceCodeLineNumber,
+  int                sourceCodeLineNumber,
   const std::string& message);
 
 EXP void msdlInternalError (
   const std::string& inputSourceName,
-  int           inputLineNumber,
+  int                inputLineNumber,
   const std::string& sourceCodeFileName,
-  int           sourceCodeLineNumber,
+  int                sourceCodeLineNumber,
   const std::string& message);
 
 

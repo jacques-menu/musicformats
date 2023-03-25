@@ -190,6 +190,20 @@ S_msrScore msrScore::createScoreNewbornClone ()
   return newbornClone;
 }
 
+void msrScore::setScoreNumberOfMeasures (
+  int scoreNumberOfMeasures)
+{
+  fScoreNumberOfMeasures = scoreNumberOfMeasures;
+
+  // register the number of measures in the service run data
+  S_mfServiceRunData
+    serviceRunData =
+      gServiceRunData;
+
+  serviceRunData->
+    setScoreMeasuresNumber (fScoreNumberOfMeasures);
+}
+
 void msrScore::setScoreMasterVoice (
   const S_msrVoice& masterVoice)
 { fScoreMasterVoice = masterVoice; }

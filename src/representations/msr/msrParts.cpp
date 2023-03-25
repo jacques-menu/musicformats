@@ -729,22 +729,26 @@ msrWholeNotes msrPart::fetchPartMeasuresWholeNotessVectorAt (
       fPartMeasuresWholeNotessVector.size ();
 
 #ifdef MF_TRACE_IS_ENABLED
-    if (gTraceOahGroup->getTraceWholeNoteDurations ()) {
-      std::stringstream ss;
+  if (
+    gTraceOahGroup->getTraceWholeNoteDurations ()
+      ||
+    gTraceOahGroup->getTraceMeasurePositions ()
+  ) {
+    std::stringstream ss;
 
-        ss <<
-        "fetchPartMeasuresWholeNotessVectorAt() in part \"" <<
-        getPartCombinedName () <<
-        "\"" <<
-        ", partMeasuresWholeNotessVectorSize: " <<
-        partMeasuresWholeNotessVectorSize <<
-        ", indexValue: " << indexValue <<
-        std::endl;
+    ss <<
+      "fetchPartMeasuresWholeNotessVectorAt() in part \"" <<
+      getPartCombinedName () <<
+      "\"" <<
+      ", partMeasuresWholeNotessVectorSize: " <<
+      partMeasuresWholeNotessVectorSize <<
+      ", indexValue: " << indexValue <<
+      std::endl;
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
-    }
+  }
 #endif // MF_TRACE_IS_ENABLED
 
   // has this measureOrdinalNumber been registered already?
@@ -780,6 +784,26 @@ msrWholeNotes msrPart::fetchPartMeasuresWholeNotessVectorAt (
 
       result = msrWholeNotes (15, 8); // TEMP JMI v0.9.61
   }
+
+#ifdef MF_TRACE_IS_ENABLED
+  if (
+    gTraceOahGroup->getTraceWholeNoteDurations ()
+      ||
+    gTraceOahGroup->getTraceMeasurePositions ()
+  ) {
+    std::stringstream ss;
+
+    ss <<
+      "fetchPartMeasuresWholeNotessVectorAt() returns \"" <<
+      result.asString () <<
+      ", line " << inputLineNumber <<
+      std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
 
   return result;
 }
@@ -914,7 +938,11 @@ void msrPart::registerOrdinalMeasureNumberWholeNotes (
 #endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMeasures ()) {
+  if (
+    gTraceOahGroup->getTraceWholeNoteDurations ()
+      ||
+    gTraceOahGroup->getTraceMeasurePositions ()
+  ) {
     printPartMeasuresWholeNotessVector (
       gLog,
       40,
@@ -925,7 +953,11 @@ void msrPart::registerOrdinalMeasureNumberWholeNotes (
   size_t index = measureOrdinalNumber - 1;
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMeasures ()) {
+  if (
+    gTraceOahGroup->getTraceWholeNoteDurations ()
+      ||
+    gTraceOahGroup->getTraceMeasurePositions ()
+  ) {
     std::stringstream ss;
 
     ss <<
@@ -996,7 +1028,11 @@ void msrPart::registerOrdinalMeasureNumberWholeNotes (
   }
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMeasures ()) {
+  if (
+    gTraceOahGroup->getTraceWholeNoteDurations ()
+      ||
+    gTraceOahGroup->getTraceMeasurePositions ()
+  ) {
     printPartMeasuresWholeNotessVector (
       gLog,
       40,

@@ -33,21 +33,21 @@ typedef SMARTP<mxsr2guidoException> S_mxsr2guidoException;
 //______________________________________________________________________________
 EXP void mxsr2guidoWarning (
   const std::string& inputSourceName,
-  int           inputLineNumber,
+  int                inputLineNumber,
   const std::string& message);
 
 EXP void mxsr2guidoError (
   const std::string& inputSourceName,
-  int           inputLineNumber,
+  int                inputLineNumber,
   const std::string& sourceCodeFileName,
-  int           sourceCodeLineNumber,
+  int                sourceCodeLineNumber,
   const std::string& message);
 
 EXP void mxsr2guidoInternalError (
   const std::string& inputSourceName,
-  int           inputLineNumber,
+  int                inputLineNumber,
   const std::string& sourceCodeFileName,
-  int           sourceCodeLineNumber,
+  int                sourceCodeLineNumber,
   const std::string& message);
 
 

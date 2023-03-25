@@ -209,11 +209,17 @@ class EXP mfServiceRunData : public smartable
                               { return fRunDateYYYYMMDD; }
 
     // measures
+    void                  setCurrentMeasureNumber (const std::string measureNumber)
+                              { fCurrentMeasureNumber = measureNumber; }
+
     const std::string     getCurrentMeasureNumber () const
                               { return fCurrentMeasureNumber; }
 
-    void                  setCurrentMeasureNumber (const std::string measureNumber)
-                              { fCurrentMeasureNumber = measureNumber; }
+    void                  setScoreMeasuresNumber (int scoreMeasuresNumber)
+                              { fScoreMeasuresNumber = scoreMeasuresNumber; }
+
+    int                   getScoreMeasuresNumber () const
+                              { return fScoreMeasuresNumber; }
 
   public:
 
@@ -256,6 +262,7 @@ class EXP mfServiceRunData : public smartable
 
     // measures
     std::string           fCurrentMeasureNumber;
+    int                   fScoreMeasuresNumber;
 
   private:
 

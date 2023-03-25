@@ -57,7 +57,7 @@ S_bsr2brailleInternalException bsr2brailleInternalException::create (
 //______________________________________________________________________________
 void bsr2brailleWarning (
   const std::string& inputSourceName,
-  int           inputLineNumber,
+  int                inputLineNumber,
   const std::string& message)
 {
   waeWarning (
@@ -69,9 +69,9 @@ void bsr2brailleWarning (
 
 void bsr2brailleInternalError (
   const std::string& inputSourceName,
-  int           inputLineNumber,
+  int                inputLineNumber,
   const std::string& sourceCodeFileName,
-  int           sourceCodeLineNumber,
+  int                sourceCodeLineNumber,
   const std::string& message)
 {
   gIndenter.resetToZero ();

@@ -177,8 +177,7 @@ class EXP msrScore : public msrBookElement
 
     // measures
     void                  setScoreNumberOfMeasures (
-                            int scoreNumberOfMeasures)
-                              {fScoreNumberOfMeasures = scoreNumberOfMeasures; }
+                            int scoreNumberOfMeasures);
 
     int                   getScoreNumberOfMeasures () const
                               { return fScoreNumberOfMeasures; }

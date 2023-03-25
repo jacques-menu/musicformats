@@ -49,14 +49,14 @@ typedef SMARTP<bsr2brailleInternalException> S_bsr2brailleInternalException;
 //______________________________________________________________________________
 EXP void bsr2brailleWarning (
   const std::string& inputSourceName,
-  int           inputLineNumber,
+  int                inputLineNumber,
   const std::string& message);
 
 EXP void bsr2brailleInternalError (
   const std::string& inputSourceName,
-  int           inputLineNumber,
+  int                inputLineNumber,
   const std::string& sourceCodeFileName,
-  int           sourceCodeLineNumber,
+  int                sourceCodeLineNumber,
   const std::string& message);
 
 

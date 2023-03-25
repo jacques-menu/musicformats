@@ -32,6 +32,8 @@ build/lib/libmusicxml2.dylib
 *.aux
 *.toc
 
+*.zip
+
 lilypond
 pdflily
 

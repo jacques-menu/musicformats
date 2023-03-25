@@ -167,7 +167,7 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
 
   if (gGlobalMsdl2lyInsiderOahGroup->getQuitAfterPass1 ()) {
 #ifdef MF_TRACE_IS_ENABLED
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceToStream (
       err,
       __FILE__, __LINE__,
       gLanguage->quittingAfterPass (mfPassIDKind::kMfPassID_1));
@@ -207,7 +207,7 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
 
   if (gGlobalMsdl2lyInsiderOahGroup->getQuitAfterPass2b ()) {
 #ifdef MF_TRACE_IS_ENABLED
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceToStream (
       err,
       __FILE__, __LINE__,
       gLanguage->quittingAfterPass (mfPassIDKind::kMfPassID_2b));
@@ -540,7 +540,7 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
 //   // open input file
 // #ifdef MF_TRACE_IS_ENABLED
 //   if (gEarlyOptions.getEarlyTracePasses ()) {
-//     gWaeHandler->waeTrace (
+//     gWaeHandler->waeTraceToStream (
 //       err,
 //       __FILE__, __LINE__,
 //       gLanguage->openingLilypondFileForWriting (inputFileName));
@@ -585,7 +585,7 @@ mfMusicformatsErrorKind convertMsdlFile2lilypondWithHandler (
   // open input file
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getEarlyTracePasses ()) {
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceToStream (
       err,
       __FILE__, __LINE__,
       gLanguage->openingLilypondFileForWriting (inputFileName));

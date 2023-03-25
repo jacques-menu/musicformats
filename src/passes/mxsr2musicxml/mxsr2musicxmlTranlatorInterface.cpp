@@ -72,7 +72,7 @@ EXP void translateMxsrToMusicXML (
       separator <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceToStream (
       err,
       __FILE__, __LINE__,
       ss.str ());

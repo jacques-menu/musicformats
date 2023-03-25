@@ -14,6 +14,7 @@
 #include "mfStaticSettings.h"
 
 #include "mfConstants.h"
+#include "msrMeasureConstants.h"
 #include "mfServices.h"
 #include "mfStringsHandling.h"
 
@@ -474,6 +475,10 @@ mfServiceRunData::mfServiceRunData (
 
   // run date
   initializeRunDate ();
+
+  // measure numbers
+  fCurrentMeasureNumber = K_MEASURE_NUMBER_UNKNOWN_;
+  fScoreMeasuresNumber  = 0;
 }
 
 // mfServiceRunData::mfServiceRunData (

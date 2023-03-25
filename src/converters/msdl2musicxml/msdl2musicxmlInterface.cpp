@@ -166,7 +166,7 @@ EXP mfMusicformatsErrorKind convertMsdlStream2musicxmlWithHandler (
 
   if (false && gGlobalMsdl2xmlInsiderOahGroup->getQuitAfterPass1 ()) { // JMI
 #ifdef MF_TRACE_IS_ENABLED
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceToStream (
       err,
       __FILE__, __LINE__,
       gLanguage->quittingAfterPass (mfPassIDKind::kMfPassID_1));
@@ -409,7 +409,7 @@ EXP mfMusicformatsErrorKind convertMsdlFile2musicxmlWithOptionsAndArguments (
   // open input file
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getEarlyTracePasses ()) {
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceToStream (
       err,
       __FILE__, __LINE__,
       gLanguage->openingMusicXMLFileForWriting (inputFileName));
@@ -454,7 +454,7 @@ EXP mfMusicformatsErrorKind convertMsdlFile2musicxmlWithHandler (
   // open input file
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getEarlyTracePasses ()) {
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceToStream (
       err,
       __FILE__, __LINE__,
       gLanguage->openingMusicXMLFileForWriting (inputFileName));

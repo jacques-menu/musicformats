@@ -27,9 +27,9 @@ namespace MusicFormats
 //______________________________________________________________________________
 void msr2lpsrUnsupported (
   const std::string& inputSourceName,
-  int           inputLineNumber,
+  int                inputLineNumber,
   const std::string& sourceCodeFileName,
-  int           sourceCodeLineNumber,
+  int                sourceCodeLineNumber,
   const std::string& message)
 {
   if (!
@@ -59,7 +59,7 @@ void msr2lpsrUnsupported (
 //______________________________________________________________________________
 void msr2lpsrInternalWarning (
   const std::string& inputSourceName,
-  int           inputLineNumber,
+  int                inputLineNumber,
   const std::string& message)
 {
   waeInternalWarning (
@@ -71,9 +71,9 @@ void msr2lpsrInternalWarning (
 
 void msr2lpsrInternalError (
   const std::string& inputSourceName,
-  int           inputLineNumber,
+  int                inputLineNumber,
   const std::string& sourceCodeFileName,
-  int           sourceCodeLineNumber,
+  int                sourceCodeLineNumber,
   const std::string& message)
 {
   waeInternalError (
@@ -88,7 +88,7 @@ void msr2lpsrInternalError (
 //______________________________________________________________________________
 void msr2lpsrWarning (
   const std::string& inputSourceName,
-  int           inputLineNumber,
+  int                inputLineNumber,
   const std::string& message)
 {
   waeWarning (

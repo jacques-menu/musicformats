@@ -142,7 +142,7 @@ static mfMusicformatsErrorKind xmlFile2guidoWithHandler (
 
   if (gGlobalXml2gmnInsiderOahGroup->getQuitAfterPass2a ()) {
 #ifdef MF_TRACE_IS_ENABLED
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceToStream (
       err,
       __FILE__, __LINE__,
       gLanguage->quittingAfterPass (mfPassIDKind::kMfPassID_2a));
@@ -176,7 +176,7 @@ static mfMusicformatsErrorKind xmlFile2guidoWithHandler (
 
   if (gGlobalXml2gmnInsiderOahGroup->getQuitAfterPass2b ()) {
 #ifdef MF_TRACE_IS_ENABLED
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceToStream (
       err,
       __FILE__, __LINE__,
       gLanguage->quittingAfterPass (mfPassIDKind::kMfPassID_2b));
@@ -213,7 +213,7 @@ static mfMusicformatsErrorKind xmlFile2guidoWithHandler (
 
   if (gGlobalXml2gmnInsiderOahGroup->getQuitAfterPass3 ()) {
 #ifdef MF_TRACE_IS_ENABLED
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceToStream (
       err,
       __FILE__, __LINE__,
       gLanguage->quittingAfterPass (mfPassIDKind::kMfPassID_3));

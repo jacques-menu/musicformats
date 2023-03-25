@@ -24,7 +24,7 @@ namespace MusicFormats
 //______________________________________________________________________________
 void meiWarning (
   const std::string& inputSourceName,
-  int           inputLineNumber,
+  int                inputLineNumber,
   const std::string& message)
 {
   waeWarning (
@@ -36,9 +36,9 @@ void meiWarning (
 
 void meiError (
   const std::string& inputSourceName,
-  int           inputLineNumber,
+  int                inputLineNumber,
   const std::string& sourceCodeFileName,
-  int           sourceCodeLineNumber,
+  int                sourceCodeLineNumber,
   const std::string& message)
 {
   waeError (
@@ -58,9 +58,9 @@ void meiError (
 
 void meiInternalError (
   const std::string& inputSourceName,
-  int           inputLineNumber,
+  int                inputLineNumber,
   const std::string& sourceCodeFileName,
-  int           sourceCodeLineNumber,
+  int                sourceCodeLineNumber,
   const std::string& message)
 {
   gIndenter.resetToZero ();

@@ -587,9 +587,8 @@ class EXP msrMeasure : public msrSegmentElement
     // finalization
 
     void                  determineMeasureKindAndPuristNumber (
-                            int     inputLineNumber,
-                            msrMeasureRepeatContextKind
-                                    measureRepeatContextKind);
+                            int                         inputLineNumber,
+                            msrMeasureRepeatContextKind measureRepeatContextKind);
 
     void                  finalizeMeasure (
                             int                         inputLineNumber,

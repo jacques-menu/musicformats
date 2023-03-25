@@ -31,29 +31,69 @@ class EXP mxsr2msrException : public mfException
 typedef SMARTP<mxsr2msrException> S_mxsr2msrException;
 
 //______________________________________________________________________________
+// warnings
+
 EXP void mxsr2msrWarning (
   const std::string& inputSourceName,
-  int           inputLineNumber,
+  int                inputLineNumber,
   const std::string& message);
+
+EXP void mxsr2msrWarningWithMeasureInfo (
+  const std::string& inputSourceName,
+  int                inputLineNumber,
+  const std::string& message,
+  const std::string  measureNumber,
+  int                scoreMeasuresNumber);
+
+// internal warnings
 
 EXP void mxsr2msrInternalWarning (
   const std::string& inputSourceName,
-  int           inputLineNumber,
+  int                inputLineNumber,
   const std::string& message);
+
+EXP void mxsr2msrInternalWarningWithMeasureInfo (
+  const std::string& inputSourceName,
+  int                inputLineNumber,
+  const std::string& message,
+  const std::string  measureNumber,
+  int                scoreMeasuresNumber);
+
+// errors
 
 EXP void mxsr2msrError (
   const std::string& inputSourceName,
-  int           inputLineNumber,
+  int                inputLineNumber,
   const std::string& sourceCodeFileName,
-  int           sourceCodeLineNumber,
+  int                sourceCodeLineNumber,
   const std::string& message);
+
+EXP void mxsr2msrErrorWithMeasureInfo (
+  const std::string& inputSourceName,
+  int                inputLineNumber,
+  const std::string& sourceCodeFileName,
+  int                sourceCodeLineNumber,
+  const std::string& message,
+  const std::string  measureNumber,
+  int                scoreMeasuresNumber);
+
+// internal errors
 
 EXP void mxsr2msrInternalError (
   const std::string& inputSourceName,
-  int          inputLineNumber,
+  int                inputLineNumber,
   const std::string& sourceCodeFileName,
-  int           sourceCodeLineNumber,
+  int                sourceCodeLineNumber,
   const std::string& message);
+
+EXP void mxsr2msrInternalErrorWithMeasureInfo (
+  const std::string& inputSourceName,
+  int                inputLineNumber,
+  const std::string& sourceCodeFileName,
+  int                sourceCodeLineNumber,
+  const std::string& message,
+  const std::string  measureNumber,
+  int                scoreMeasuresNumber);
 
 
 }
