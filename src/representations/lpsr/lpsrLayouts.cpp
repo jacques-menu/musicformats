@@ -58,9 +58,11 @@ void lpsrLayout::acceptIn (basevisitor* v)
       "% ==> lpsrLayout::acceptIn ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -77,9 +79,11 @@ void lpsrLayout::acceptIn (basevisitor* v)
             "% ==> Launching lpsrLayout::visitStart ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
+//             gServiceRunData->getCurrentMeasureNumber (),
+//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
@@ -96,9 +100,11 @@ void lpsrLayout::acceptOut (basevisitor* v)
       "% ==> lpsrLayout::acceptOut ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -115,9 +121,11 @@ void lpsrLayout::acceptOut (basevisitor* v)
             "% ==> Launching lpsrLayout::visitEnd ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
+//             gServiceRunData->getCurrentMeasureNumber (),
+//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);

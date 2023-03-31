@@ -70,7 +70,7 @@ void msdl2guidoManPageGenerateAtom::applyValueLessAtom (std::ostream& os)
       "==> option '" << fetchNames () << "' is a msdl2guidoManPageGenerateAtom" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -89,7 +89,7 @@ void msdl2guidoManPageGenerateAtom::acceptIn (basevisitor* v)
       ".\\\" ==> msdl2guidoManPageGenerateAtom::acceptIn ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -108,7 +108,7 @@ void msdl2guidoManPageGenerateAtom::acceptIn (basevisitor* v)
             ".\\\" ==> Launching msdl2guidoManPageGenerateAtom::visitStart ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -127,7 +127,7 @@ void msdl2guidoManPageGenerateAtom::acceptOut (basevisitor* v)
       ".\\\" ==> msdl2guidoManPageGenerateAtom::acceptOut ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -146,7 +146,7 @@ void msdl2guidoManPageGenerateAtom::acceptOut (basevisitor* v)
             ".\\\" ==> Launching msdl2guidoManPageGenerateAtom::visitEnd ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -165,7 +165,7 @@ void msdl2guidoManPageGenerateAtom::browseData (basevisitor* v)
       ".\\\" ==> msdl2guidoManPageGenerateAtom::browseData ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -344,7 +344,7 @@ void msdl2guidoManPageOahGroup::acceptIn (basevisitor* v)
       ".\\\" ==> msdl2guidoManPageOahGroup::acceptIn ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -363,7 +363,7 @@ void msdl2guidoManPageOahGroup::acceptIn (basevisitor* v)
             ".\\\" ==> Launching msdl2guidoManPageOahGroup::visitStart ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -382,7 +382,7 @@ void msdl2guidoManPageOahGroup::acceptOut (basevisitor* v)
       ".\\\" ==> msdl2guidoManPageOahGroup::acceptOut ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -401,7 +401,7 @@ void msdl2guidoManPageOahGroup::acceptOut (basevisitor* v)
             ".\\\" ==> Launching msdl2guidoManPageOahGroup::visitEnd ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -420,7 +420,7 @@ void msdl2guidoManPageOahGroup::browseData (basevisitor* v)
       ".\\\" ==> msdl2guidoManPageOahGroup::browseData ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -465,7 +465,7 @@ S_msdl2guidoManPageOahGroup createGlobalMsdl2gmnManPageOahGroupHandler (
       "Creating global msdl2guidoManPage OAH group" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }

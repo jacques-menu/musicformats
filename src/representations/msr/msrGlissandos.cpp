@@ -104,9 +104,11 @@ S_msrGlissando msrGlissando::createGlissandoNewbornClone ()
       "'" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -132,9 +134,11 @@ void msrGlissando::acceptIn (basevisitor* v)
       "% ==> msrGlissando::acceptIn ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -151,9 +155,11 @@ void msrGlissando::acceptIn (basevisitor* v)
             "% ==> Launching msrGlissando::visitStart ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
+//             gServiceRunData->getCurrentMeasureNumber (),
+//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
@@ -170,9 +176,11 @@ void msrGlissando::acceptOut (basevisitor* v)
       "% ==> msrGlissando::acceptOut ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -189,9 +197,11 @@ void msrGlissando::acceptOut (basevisitor* v)
             "% ==> Launching msrGlissando::visitEnd ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
+//             gServiceRunData->getCurrentMeasureNumber (),
+//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif        
         p->visitEnd (elem);

@@ -135,7 +135,7 @@ void msrMeasure::appendElementToMeasure (const S_msrMeasureElement& elem)
       ", line " << inputLineNumber <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -188,7 +188,7 @@ void msrMeasure::appendHarmonyToMeasure (const S_msrHarmony& harmony)
       ", line " << inputLineNumber <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -245,7 +245,7 @@ void msrMeasure::appendHarmonyToMeasureClone (const S_msrHarmony& harmony)
       ", line " << inputLineNumber <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -319,7 +319,7 @@ void msrSegment::appendMeasureToSegment (const S_msrMeasure& measure)
       ", line " << measure->getInputLineNumber () <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -437,7 +437,7 @@ S_msrMeasure msrVoice::createAMeasureAndAppendItToVoice (
       "', line " << inputLineNumber <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }

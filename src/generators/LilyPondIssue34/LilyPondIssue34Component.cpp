@@ -93,7 +93,7 @@ S_mfcGeneratorComponent createLilyPondIssue34GeneratorComponent ()
         "Creating the LilyPondIssue34 component" <<
         std::endl;
 
-      gWaeHandler->waeTrace (
+      gWaeHandler->waeTraceWithoutLocationDetails (
         __FILE__, __LINE__,
         ss.str ());
     }

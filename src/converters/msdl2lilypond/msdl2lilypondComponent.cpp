@@ -60,7 +60,7 @@ S_mfcConverterComponent createMsdl2lilypondConverterComponent ()
         "Creating the msdl2lilypond component" <<
         std::endl;
 
-      gWaeHandler->waeTrace (
+      gWaeHandler->waeTraceWithoutLocationDetails (
         __FILE__, __LINE__,
         ss.str ());
     }

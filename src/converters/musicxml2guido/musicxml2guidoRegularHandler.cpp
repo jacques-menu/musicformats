@@ -101,7 +101,7 @@ void xml2gmnRegularHandler::createRegularHandlerGroups ()
       "\"" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -178,7 +178,7 @@ void xml2gmnRegularHandler::createRegularHandlerGroups ()
       "\" have been created" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1303,7 +1303,7 @@ void xml2gmnRegularHandler::checkOptionsAndArguments () const
       "\"" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }

@@ -36,20 +36,20 @@ void mxsr2msrWarning (
     message);
 }
 
-EXP void mxsr2msrWarningWithMeasureInfo (
+EXP void mxsr2msrWarningWithLocationDetails (
   const std::string& inputSourceName,
   int                inputLineNumber,
-  const std::string& message,
-  const std::string  measureNumber,
-  int                scoreMeasuresNumber)
+  const std::string& message)
+//   const std::string  measureNumber,
+//   int                scoreMeasuresNumber)
 {
-  waeWarningWithMeasureInfo (
+  waeWarningWithLocationDetails (
     "mxsr2msr",
     inputSourceName,
     inputLineNumber,
-    message,
-    measureNumber,
-    scoreMeasuresNumber);
+    message);
+//     measureNumber,
+//     scoreMeasuresNumber);
 }
 
 //______________________________________________________________________________
@@ -65,20 +65,20 @@ void mxsr2msrInternalWarning (
     message);
 }
 
-void mxsr2msrInternalWarningWithMeasureInfo (
+void mxsr2msrInternalWarningWithLocationDetails (
   const std::string& inputSourceName,
   int                inputLineNumber,
-  const std::string& message,
-  const std::string  measureNumber,
-  int                scoreMeasuresNumber)
+  const std::string& message)
+//   const std::string  measureNumber,
+//   int                scoreMeasuresNumber)
 {
-  waeInternalWarningWithMeasureInfo (
+  waeInternalWarningWithLocationDetails (
     "mxsr2msr",
     inputSourceName,
     inputLineNumber,
-    message,
-    measureNumber,
-    scoreMeasuresNumber);
+    message);
+//     measureNumber,
+//     scoreMeasuresNumber);
 }
 
 //______________________________________________________________________________
@@ -107,24 +107,24 @@ void mxsr2msrError (
   }
 }
 
-void mxsr2msrErrorWithMeasureInfo (
+void mxsr2msrErrorWithLocationDetails (
   const std::string& inputSourceName,
   int                inputLineNumber,
   const std::string& sourceCodeFileName,
   int                sourceCodeLineNumber,
-  const std::string& message,
-  const std::string  measureNumber,
-  int                scoreMeasuresNumber)
+  const std::string& message)
+//   const std::string  measureNumber,
+//   int                scoreMeasuresNumber)
 {
-  waeErrorWithMeasureInfo (
+  waeErrorWithLocationDetails (
     "mxsr2msr",
     inputSourceName,
     inputLineNumber,
     sourceCodeFileName,
     sourceCodeLineNumber,
-    message,
-    measureNumber,
-    scoreMeasuresNumber);
+    message);
+//     measureNumber,
+//     scoreMeasuresNumber);
 
   if (! gWaeOahGroup->getDontShowErrors ()) {
     if (! gWaeOahGroup->getDontQuitOnErrors ()) { // JMI
@@ -153,24 +153,24 @@ void mxsr2msrInternalError (
     message);
 }
 
-void mxsr2msrInternalErrorWithMeasureInfo (
+void mxsr2msrInternalErrorWithLocationDetails (
   const std::string& inputSourceName,
   int                inputLineNumber,
   const std::string& sourceCodeFileName,
   int                sourceCodeLineNumber,
-  const std::string& message,
-  const std::string  measureNumber,
-  int                scoreMeasuresNumber)
+  const std::string& message)
+//   const std::string  measureNumber,
+//   int                scoreMeasuresNumber)
 {
-  waeInternalErrorWithMeasureInfo (
+  waeInternalErrorWithLocationDetails (
     "mxsr2msr",
     inputSourceName,
     inputLineNumber,
     sourceCodeFileName,
     sourceCodeLineNumber,
-    message,
-    measureNumber,
-    scoreMeasuresNumber);
+    message);
+//     measureNumber,
+//     scoreMeasuresNumber);
 }
 
 

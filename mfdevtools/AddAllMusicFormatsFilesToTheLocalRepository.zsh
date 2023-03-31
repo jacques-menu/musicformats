@@ -11,7 +11,7 @@
 #   https://github.com/jacques-menu/musicformats
 #
 
-# set -x
+set -x
 
 # fetch the needed environment
 . ${HOME}/JMI_ShellSettings/ZshDefinitionsForMusicFormats.zsh
@@ -128,4 +128,4 @@ echo "Let's go!'"
 
 addAllToMusicFormatsLocalRepository
 
-# set +x
+set +x

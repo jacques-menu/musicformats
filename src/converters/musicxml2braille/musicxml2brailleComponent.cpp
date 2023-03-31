@@ -67,7 +67,7 @@ EXP S_mfcConverterComponent createMusicxml2brailleConverterComponent ()
         "Creating the musicxml2braille component" <<
         std::endl;
 
-      gWaeHandler->waeTrace (
+      gWaeHandler->waeTraceWithoutLocationDetails (
         __FILE__, __LINE__,
         ss.str ());
     }

@@ -114,7 +114,7 @@ void oahMacroAtom::applyValueLessAtom (std::ostream& os)
       "==> option '" << fetchNames () << "' is a oahMacroAtom" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }

@@ -101,7 +101,7 @@ void msr2musicxmlRegularHandler::createRegularHandlerGroups ()
       "\"" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -169,7 +169,7 @@ void msr2musicxmlRegularHandler::createRegularHandlerGroups ()
       "\" have been created" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1244,7 +1244,7 @@ void msr2musicxmlRegularHandler::checkOptionsAndArguments () const
       "\"" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }

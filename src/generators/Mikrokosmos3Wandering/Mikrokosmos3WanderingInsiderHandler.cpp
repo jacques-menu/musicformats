@@ -123,7 +123,7 @@ R"(
       "\" regular options handler" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -333,7 +333,7 @@ void Mikrokosmos3WanderingInsiderHandler::createTheMikrokosmos3WanderingPrefixes
       "\"" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -357,7 +357,7 @@ void Mikrokosmos3WanderingInsiderHandler::createTheMikrokosmos3WanderingOptionGr
       "\" insider option groups" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -519,7 +519,7 @@ void Mikrokosmos3WanderingInsiderHandler::checkOptionsAndArguments () const
       "\"" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -541,7 +541,7 @@ std::string Mikrokosmos3WanderingInsiderHandler::fetchOutputFileNameFromTheOptio
       "\"" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -579,7 +579,7 @@ std::string Mikrokosmos3WanderingInsiderHandler::fetchOutputFileNameFromTheOptio
       autoOutputFileNameHasBeenSet <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -701,7 +701,7 @@ std::string Mikrokosmos3WanderingInsiderHandler::fetchOutputFileNameFromTheOptio
       outputFileName <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -790,7 +790,7 @@ void Mikrokosmos3WanderingInsiderOahGroup::acceptIn (basevisitor* v)
       ".\\\" ==> Mikrokosmos3WanderingInsiderOahGroup::acceptIn ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -809,7 +809,7 @@ void Mikrokosmos3WanderingInsiderOahGroup::acceptIn (basevisitor* v)
             ".\\\" ==> Launching Mikrokosmos3WanderingInsiderOahGroup::visitStart ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -828,7 +828,7 @@ void Mikrokosmos3WanderingInsiderOahGroup::acceptOut (basevisitor* v)
       ".\\\" ==> Mikrokosmos3WanderingInsiderOahGroup::acceptOut ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -847,7 +847,7 @@ void Mikrokosmos3WanderingInsiderOahGroup::acceptOut (basevisitor* v)
             ".\\\" ==> Launching Mikrokosmos3WanderingInsiderOahGroup::visitEnd ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -866,7 +866,7 @@ void Mikrokosmos3WanderingInsiderOahGroup::browseData (basevisitor* v)
       ".\\\" ==> Mikrokosmos3WanderingInsiderOahGroup::browseData ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -973,7 +973,7 @@ void Mikrokosmos3WanderingInsiderOahGroup::initializeMikrokosmos3WanderingInside
       "\" group" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1038,7 +1038,7 @@ S_Mikrokosmos3WanderingInsiderOahGroup createGlobalMikrokosmos3WanderingInsiderO
       "Creating global Mikrokosmos3Wandering insider OAH group" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }

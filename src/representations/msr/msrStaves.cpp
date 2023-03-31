@@ -102,9 +102,11 @@ msrStaff::msrStaff (
       fStaffUpLinkToPart->getPartCombinedName () <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }
@@ -235,16 +237,18 @@ void msrStaff::initializeStaff ()
         std::stringstream ss;
 
         ss <<
-          "Appending part clef '" << clef->asString () <<
-          "' as initial clef to staff \"" <<
+          "Appending part clef " << clef->asString () <<
+          " as initial clef to staff \"" <<
           fStaffName <<
           "\" in part " <<
           fStaffUpLinkToPart->getPartCombinedName () <<
           std::endl;
 
-        gWaeHandler->waeTrace (
+        gWaeHandler->waeTraceWithLocationDetails (
           __FILE__, __LINE__,
           ss.str ());
+//           gServiceRunData->getCurrentMeasureNumber (),
+//           gServiceRunData->getScoreMeasuresNumber ());
       }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -273,9 +277,11 @@ void msrStaff::initializeStaff ()
           fStaffUpLinkToPart->getPartCombinedName () <<
           std::endl;
 
-        gWaeHandler->waeTrace (
+        gWaeHandler->waeTraceWithLocationDetails (
           __FILE__, __LINE__,
           ss.str ());
+//           gServiceRunData->getCurrentMeasureNumber (),
+//           gServiceRunData->getScoreMeasuresNumber ());
       }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -303,9 +309,11 @@ void msrStaff::initializeStaff ()
           fStaffUpLinkToPart->getPartCombinedName () <<
           std::endl;
 
-        gWaeHandler->waeTrace (
+        gWaeHandler->waeTraceWithLocationDetails (
           __FILE__, __LINE__,
           ss.str ());
+//           gServiceRunData->getCurrentMeasureNumber (),
+//           gServiceRunData->getScoreMeasuresNumber ());
       }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -345,9 +353,11 @@ S_msrStaff msrStaff::createStaffNewbornClone (
       "\"" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -455,9 +465,11 @@ void msrStaff::registerShortestNoteInStaffIfRelevant (const S_msrNote& note)
         " becomes " << note->asString () <<
         std::endl;
 
-      gWaeHandler->waeTrace (
+      gWaeHandler->waeTraceWithLocationDetails (
         __FILE__, __LINE__,
         ss.str ());
+//         gServiceRunData->getCurrentMeasureNumber (),
+//         gServiceRunData->getScoreMeasuresNumber ());
     }
 #endif // MF_TRACE_IS_ENABLED
   }
@@ -551,9 +563,11 @@ void msrStaff::createAMeasureAndAppendItToStaff (
       "', line " << inputLineNumber <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -591,9 +605,11 @@ void msrStaff::setNextMeasureNumberInStaff (
       "', line " << inputLineNumber <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -620,9 +636,11 @@ void msrStaff::setNextMeasureNumberInStaff (
         ", in voice \"" << voice->getVoiceName () << "\"" <<
         std::endl;
 
-      gWaeHandler->waeTrace (
+      gWaeHandler->waeTraceWithLocationDetails (
         __FILE__, __LINE__,
         ss.str ());
+//         gServiceRunData->getCurrentMeasureNumber (),
+//         gServiceRunData->getScoreMeasuresNumber ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -658,9 +676,11 @@ S_msrVoice msrStaff::createRegularVoiceInStaffByItsNumber (
  // JMI     " in part " << fStaffUpLinkToPart->getPartCombinedName () <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -760,9 +780,11 @@ S_msrVoice msrStaff::createRegularVoiceInStaffByItsNumber (
      // JMI     " in part " << fStaffUpLinkToPart->getPartCombinedName () <<
           std::endl;
 
-        gWaeHandler->waeTrace (
+        gWaeHandler->waeTraceWithLocationDetails (
           __FILE__, __LINE__,
           ss.str ());
+//           gServiceRunData->getCurrentMeasureNumber (),
+//           gServiceRunData->getScoreMeasuresNumber ());
       }
 #endif // MF_TRACE_IS_ENABLED
       break;
@@ -784,9 +806,11 @@ S_msrVoice msrStaff::createRegularVoiceInStaffByItsNumber (
      // JMI     " in part " << fStaffUpLinkToPart->getPartCombinedName () <<
           std::endl;
 
-        gWaeHandler->waeTrace (
+        gWaeHandler->waeTraceWithLocationDetails (
           __FILE__, __LINE__,
           ss.str ());
+//           gServiceRunData->getCurrentMeasureNumber (),
+//           gServiceRunData->getScoreMeasuresNumber ());
       }
 #endif // MF_TRACE_IS_ENABLED
       break;
@@ -839,9 +863,11 @@ void msrStaff::setStaffShortestNoteWholeNotes (
         wholeNotes.asString () <<
         std::endl;
 
-      gWaeHandler->waeTrace (
+      gWaeHandler->waeTraceWithLocationDetails (
         __FILE__, __LINE__,
         ss.str ());
+//         gServiceRunData->getCurrentMeasureNumber (),
+//         gServiceRunData->getScoreMeasuresNumber ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -862,9 +888,11 @@ void msrStaff::setStaffShortestNoteTupletFactor (
         noteTupletFactor <<
         std::endl;
 
-      gWaeHandler->waeTrace (
+      gWaeHandler->waeTraceWithLocationDetails (
         __FILE__, __LINE__,
         ss.str ());
+//         gServiceRunData->getCurrentMeasureNumber (),
+//         gServiceRunData->getScoreMeasuresNumber ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -883,9 +911,11 @@ void msrStaff::registerVoiceInStaffAllVoicesList (
       "\" in all voices list of staff " << fStaffName <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -978,9 +1008,11 @@ void msrStaff::registerVoiceByItsNumber (
       "\" in staff " << fStaffName <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1021,9 +1053,11 @@ void msrStaff::registerVoiceByItsNumber (
           ", line " << inputLineNumber <<
           std::endl;
 
-        gWaeHandler->waeTrace (
+        gWaeHandler->waeTraceWithLocationDetails (
           __FILE__, __LINE__,
           ss.str ());
+//           gServiceRunData->getCurrentMeasureNumber (),
+//           gServiceRunData->getScoreMeasuresNumber ());
       }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1046,9 +1080,11 @@ void msrStaff::registerVoiceByItsNumber (
           ", line " << inputLineNumber <<
           std::endl;
 
-        gWaeHandler->waeTrace (
+        gWaeHandler->waeTraceWithLocationDetails (
           __FILE__, __LINE__,
           ss.str ());
+//           gServiceRunData->getCurrentMeasureNumber (),
+//           gServiceRunData->getScoreMeasuresNumber ());
       }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1083,9 +1119,11 @@ void msrStaff::registerRegularVoiceByItsNumber (
       "'" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1174,9 +1212,11 @@ void msrStaff::registerHarmoniesVoiceByItsNumber (
       ", line " << inputLineNumber <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1203,9 +1243,11 @@ void msrStaff::registerFiguredBassVoiceByItsNumber (
       ", line " << inputLineNumber <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1234,9 +1276,11 @@ S_msrVoice msrStaff::fetchRegularVoiceFromStaffByItsNumber (
       ", line " << inputLineNumber <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1263,9 +1307,11 @@ S_msrVoice msrStaff::fetchRegularVoiceFromStaffByItsNumber (
           "'" <<
           std::endl;
 
-        gWaeHandler->waeTrace (
+        gWaeHandler->waeTraceWithLocationDetails (
           __FILE__, __LINE__,
           ss.str ());
+//           gServiceRunData->getCurrentMeasureNumber (),
+//           gServiceRunData->getScoreMeasuresNumber ());
       }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1291,9 +1337,11 @@ void msrStaff::assignSequentialNumbersToRegularVoicesInStaff (
       ", line " << inputLineNumber <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1339,9 +1387,11 @@ void msrStaff::assignSequentialNumbersToRegularVoicesInStaff (
           "\"" <<
           std::endl;
 
-        gWaeHandler->waeTrace (
+        gWaeHandler->waeTraceWithLocationDetails (
           __FILE__, __LINE__,
           ss.str ());
+//           gServiceRunData->getCurrentMeasureNumber (),
+//           gServiceRunData->getScoreMeasuresNumber ());
       }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1371,9 +1421,11 @@ S_msrVoice msrStaff::fetchFirstRegularVoiceFromStaff (
       ", line " << inputLineNumber <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1416,9 +1468,11 @@ S_msrVoice msrStaff::fetchFirstRegularVoiceFromStaff (
         result->asShortString () <<
         std::endl;
 
-      gWaeHandler->waeTrace (
+      gWaeHandler->waeTraceWithLocationDetails (
         __FILE__, __LINE__,
         ss.str ());
+//         gServiceRunData->getCurrentMeasureNumber (),
+//         gServiceRunData->getScoreMeasuresNumber ());
     }
 #endif // MF_TRACE_IS_ENABLED
   }
@@ -1433,9 +1487,11 @@ S_msrVoice msrStaff::fetchFirstRegularVoiceFromStaff (
       "\"" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1467,9 +1523,11 @@ void msrStaff::registerVoiceInStaff (
 // JMI       " in part " << fStaffUpLinkToPart->getPartCombinedName () <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1629,9 +1687,11 @@ void msrStaff::registerPartLevelVoiceInStaff (
 // JMI       " in part " << fStaffUpLinkToPart->getPartCombinedName () <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1706,9 +1766,11 @@ void msrStaff::registerVoiceInStaffClone (
 // JMI       " in part " << fStaffUpLinkToPart->getPartCombinedName () <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1783,16 +1845,18 @@ void msrStaff::appendClefToStaff  (
     std::stringstream ss;
 
     ss <<
-      "Appending clef '" << clef->asString () <<
-      "' to staff \"" <<
+      "Appending clef " << clef->asString () <<
+      " to staff \"" <<
       fStaffName <<
       "\" in part " <<
       fStaffUpLinkToPart->getPartCombinedName () <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1830,17 +1894,19 @@ void msrStaff::appendClefToStaff  (
       std::stringstream ss;
 
       ss <<
-        "Clef '" <<
+        "Clef " <<
         clef->asString () <<
-        "' ignored because it is already present in staff " <<
+        " ignored because it is already present in staff " <<
         fStaffName <<
         "\" in part " <<
         fStaffUpLinkToPart->getPartCombinedName () <<
         std::endl;
 
-      gWaeHandler->waeTrace (
+      gWaeHandler->waeTraceWithLocationDetails (
         __FILE__, __LINE__,
         ss.str ());
+//         gServiceRunData->getCurrentMeasureNumber (),
+//         gServiceRunData->getScoreMeasuresNumber ());
     }
 #endif // MF_TRACE_IS_ENABLED
   }
@@ -1862,9 +1928,11 @@ void msrStaff::appendKeyToStaff (S_msrKey  key)
       fStaffUpLinkToPart->getPartCombinedName () <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1897,9 +1965,11 @@ void msrStaff::appendKeyToStaff (S_msrKey  key)
             fStaffUpLinkToPart->getPartCombinedName () <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
+//             gServiceRunData->getCurrentMeasureNumber (),
+//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1935,9 +2005,11 @@ void msrStaff::appendTimeSignatureToStaff (
       "\"" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1970,9 +2042,11 @@ void msrStaff::appendTimeSignatureToStaff (
             fStaffUpLinkToPart->getPartCombinedName () <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
+//             gServiceRunData->getCurrentMeasureNumber (),
+//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -2009,9 +2083,11 @@ void msrStaff::appendTimeSignatureToStaffClone (
       fStaffUpLinkToPart->getPartCombinedName () <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -2042,9 +2118,11 @@ void msrStaff::appendTempoToStaff (
       fStaffName <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -2068,9 +2146,11 @@ void msrStaff::appendRehearsalMarkToStaff (
       fStaffName <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -2094,9 +2174,11 @@ void msrStaff::appendLineBreakToStaff  (
       fStaffName <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -2120,9 +2202,11 @@ void msrStaff::appendPageBreakToStaff (
       fStaffName <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -2151,9 +2235,11 @@ void msrStaff::insertHiddenMeasureAndBarLineInStaffClone (
       ", line " << inputLineNumber <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -2185,9 +2271,11 @@ void msrStaff::nestContentsIntoNewRepeatInStaff (
       fStaffUpLinkToPart->getPartCombinedName () <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -2214,9 +2302,11 @@ void msrStaff::handleRepeatStartInStaff (
       ", line " << inputLineNumber <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -2248,9 +2338,11 @@ void msrStaff::handleRepeatEndInStaff (
       ", line " << inputLineNumber <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -2282,9 +2374,11 @@ void msrStaff::handleRepeatEndingStartInStaff (
       ", line " << inputLineNumber <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -2320,9 +2414,11 @@ void msrStaff::handleRepeatEndingEndInStaff (
       ", line " << inputLineNumber <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -2357,9 +2453,11 @@ void msrStaff::finalizeRepeatEndInStaff (
       ", line " << inputLineNumber <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -2393,9 +2491,11 @@ void msrStaff::createMeasureRepeatFromItsFirstMeasuresInStaff (
       fStaffUpLinkToPart->getPartCombinedName () <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -2422,9 +2522,11 @@ void msrStaff::appendPendingMeasureRepeatToStaff (
       fStaffUpLinkToPart->getPartCombinedName () <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -2454,9 +2556,11 @@ void msrStaff::appendMultipleFullBarRestsToStaff (
       ", line " << inputLineNumber <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -2484,9 +2588,11 @@ void msrStaff::replicateLastAppendedMeasureInStaff (
       "\"" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -2520,9 +2626,11 @@ void msrStaff::addEmptyMeasuresToStaff (
       ", line " << inputLineNumber <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -2551,9 +2659,11 @@ void msrStaff::appendPendingMultipleFullBarRestsToStaff (
       fStaffUpLinkToPart->getPartCombinedName () <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -2580,9 +2690,11 @@ void msrStaff::appendMultipleFullBarRestsCloneToStaff (
       "\"" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -2609,9 +2721,11 @@ void msrStaff::appendRepeatCloneToStaff (
       fStaffUpLinkToPart->getPartCombinedName () <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -2637,9 +2751,11 @@ void msrStaff::appendRepeatEndingCloneToStaff (
       ", line " << repeatEndingClone->getInputLineNumber () <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -2669,9 +2785,11 @@ void msrStaff::appendBarLineToStaff (
       fStaffUpLinkToPart->getPartCombinedName () <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -2701,9 +2819,11 @@ void msrStaff::appendTranspositionToStaff (
       fStaffUpLinkToPart->getPartCombinedName () <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -2729,9 +2849,11 @@ void msrStaff::appendTranspositionToStaff (
           fStaffUpLinkToPart->getPartCombinedName () <<
           std::endl;
 
-        gWaeHandler->waeTrace (
+        gWaeHandler->waeTraceWithLocationDetails (
           __FILE__, __LINE__,
           ss.str ());
+//           gServiceRunData->getCurrentMeasureNumber (),
+//           gServiceRunData->getScoreMeasuresNumber ());
       }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -2764,9 +2886,11 @@ void msrStaff::appendStaffDetailsToStaff (
       fStaffUpLinkToPart->getPartCombinedName () <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -2808,9 +2932,11 @@ void msrStaff::appendStaffDetailsToStaff (
       fStaffUpLinkToPart->getPartCombinedName () <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -2873,9 +2999,11 @@ void msrStaff::finalizeLastAppendedMeasureInStaff (
       "\", line " << inputLineNumber <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -3059,9 +3187,11 @@ void msrStaff::finalizeStaff (int inputLineNumber)
       ", line " << inputLineNumber <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -3078,9 +3208,11 @@ void msrStaff::finalizeStaff (int inputLineNumber)
       ", line " << inputLineNumber <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -3112,9 +3244,11 @@ void msrStaff::collectStaffMeasuresIntoFlatListsVector (
       ", line " << inputLineNumber <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -3146,9 +3280,11 @@ void msrStaff::collectStaffMeasuresSlices (
       ", line " << inputLineNumber <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -3179,9 +3315,11 @@ void msrStaff::collectStaffMeasuresSlices (
         "\":" <<
         std::endl;
 
-      gWaeHandler->waeTrace (
+      gWaeHandler->waeTraceWithLocationDetails (
         __FILE__, __LINE__,
         ss.str ());
+//         gServiceRunData->getCurrentMeasureNumber (),
+//         gServiceRunData->getScoreMeasuresNumber ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -3259,9 +3397,11 @@ void msrStaff::acceptIn (basevisitor* v)
       "% ==> msrStaff::acceptIn ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -3278,9 +3418,11 @@ void msrStaff::acceptIn (basevisitor* v)
             "% ==> Launching msrStaff::visitStart ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
+//             gServiceRunData->getCurrentMeasureNumber (),
+//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
@@ -3297,9 +3439,11 @@ void msrStaff::acceptOut (basevisitor* v)
       "% ==> msrStaff::acceptOut ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -3316,9 +3460,11 @@ void msrStaff::acceptOut (basevisitor* v)
             "% ==> Launching msrStaff::visitEnd ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
+//             gServiceRunData->getCurrentMeasureNumber (),
+//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
@@ -3335,9 +3481,11 @@ void msrStaff::browseData (basevisitor* v)
       "% ==> msrStaff::browseData ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -3503,9 +3651,11 @@ void msrStaff::browseData (basevisitor* v)
             "\"" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
+//             gServiceRunData->getCurrentMeasureNumber (),
+//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
       }
@@ -3520,9 +3670,11 @@ void msrStaff::browseData (basevisitor* v)
       "% <== msrStaff::browseData ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }

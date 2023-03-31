@@ -47,17 +47,16 @@ std::string msrSyllableKindAsString (
 
 std::ostream& operator << (std::ostream& os, const msrSyllableKind& elt);
 
-enum class msrSyllableExtendKind {
-  kSyllableExtendNone,
-  kSyllableExtendEmpty,
-  kSyllableExtendSingle,
-  kSyllableExtendStart, kSyllableExtendContinue, kSyllableExtendStop
+enum class msrSyllableExtendTypeKind {
+  kSyllableExtendType_NONE,
+  kSyllableExtendTypeEmpty,
+  kSyllableExtendTypeStart, kSyllableExtendTypeContinue, kSyllableExtendTypeStop
 };
 
-std::string msrSyllableExtendKindAsString (
-  msrSyllableExtendKind syllableExtendKind);
+std::string msrSyllableExtendTypeKindAsString (
+  msrSyllableExtendTypeKind syllableExtendKind);
 
-std::ostream& operator << (std::ostream& os, const msrSyllableExtendKind& elt);
+std::ostream& operator << (std::ostream& os, const msrSyllableExtendTypeKind& elt);
 
 //______________________________________________________________________________
 class EXP msrSyllable : public msrMeasureElement
@@ -71,7 +70,7 @@ class EXP msrSyllable : public msrMeasureElement
                             int                    inputLineNumber,
                             const S_msrMeasure&          upLinkToMeasure,
                             msrSyllableKind        syllableKind,
-                            msrSyllableExtendKind  syllableExtendKind,
+                            msrSyllableExtendTypeKind  syllableExtendKind,
                             const std::string&          syllableStanzaNumber,
                             const msrWholeNotes&        syllableWholeNotes,
                             const msrTupletFactor& syllableTupletFactor,
@@ -80,7 +79,7 @@ class EXP msrSyllable : public msrMeasureElement
     static SMARTP<msrSyllable> create (
                             int                    inputLineNumber,
                             msrSyllableKind        syllableKind,
-                            msrSyllableExtendKind  syllableExtendKind,
+                            msrSyllableExtendTypeKind  syllableExtendKind,
                             const std::string&          syllableStanzaNumber,
                             const msrWholeNotes&        syllableWholeNotes,
                             const msrTupletFactor& syllableTupletFactor,
@@ -96,7 +95,7 @@ class EXP msrSyllable : public msrMeasureElement
                             int                    inputLineNumber,
                             const S_msrMeasure&          upLinkToMeasure,
                             msrSyllableKind        syllableKind,
-                            msrSyllableExtendKind  syllableExtendKind,
+                            msrSyllableExtendTypeKind  syllableExtendKind,
                             const std::string&          syllableStanzaNumber,
                             const msrWholeNotes&        syllableWholeNotes,
                             const msrTupletFactor& syllableTupletFactor,
@@ -112,7 +111,7 @@ class EXP msrSyllable : public msrMeasureElement
                             int                    inputLineNumber,
                             const S_msrMeasure&          upLinkToMeasure,
                             msrSyllableKind        syllableKind,
-                            msrSyllableExtendKind  syllableExtendKind,
+                            msrSyllableExtendTypeKind  syllableExtendKind,
                             const std::string&          syllableStanzaNumber,
                             const msrWholeNotes&        syllableWholeNotes,
                             const msrTupletFactor& syllableTupletFactor,
@@ -163,7 +162,7 @@ class EXP msrSyllable : public msrMeasureElement
                               { return fSyllableTextsList; }
 
     // extend kind
-    msrSyllableExtendKind getSyllableExtendKind () const
+    msrSyllableExtendTypeKind getSyllableExtendKind () const
                               { return fSyllableExtendKind; }
 
     // stanza number
@@ -243,7 +242,7 @@ class EXP msrSyllable : public msrMeasureElement
                           fSyllableTextsList;
 
     // extend kind
-    msrSyllableExtendKind fSyllableExtendKind;
+    msrSyllableExtendTypeKind fSyllableExtendKind;
 
     // stanza number, may contain non-digits
     std::string           fSyllableStanzaNumber;

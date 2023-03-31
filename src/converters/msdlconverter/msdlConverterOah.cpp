@@ -95,7 +95,7 @@ void msdlConverterOahGroup::acceptIn (basevisitor* v)
       ".\\\" ==> msdlConverterOahGroup::acceptIn ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -114,7 +114,7 @@ void msdlConverterOahGroup::acceptIn (basevisitor* v)
             ".\\\" ==> Launching msdlConverterOahGroup::visitStart ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -133,7 +133,7 @@ void msdlConverterOahGroup::acceptOut (basevisitor* v)
       ".\\\" ==> msdlConverterOahGroup::acceptOut ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -152,7 +152,7 @@ void msdlConverterOahGroup::acceptOut (basevisitor* v)
             ".\\\" ==> Launching msdlConverterOahGroup::visitEnd ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -171,7 +171,7 @@ void msdlConverterOahGroup::browseData (basevisitor* v)
       ".\\\" ==> msdlConverterOahGroup::browseData ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -213,7 +213,7 @@ S_msdlConverterOahGroup createGlobalMsdlConverterOahGroup ()
       "Creating global msdlConverter OAH group" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }

@@ -96,7 +96,7 @@ static mfMusicformatsErrorKind xmlFile2brailleWithHandler (
       "<!-- ----------------------------------------------------------- -->" <<
       std::endl << std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -335,7 +335,7 @@ static mfMusicformatsErrorKind xmlFile2brailleWithHandler (
           "\"" <<
           std::endl;
 
-//     gWaeHandler->waeTrace ( JMI v0.9.67
+//     gWaeHandler->waeTraceWithoutLocationDetails ( JMI v0.9.67
 //       __FILE__, __LINE__,
 //       ss.str ());
       }
@@ -348,7 +348,7 @@ static mfMusicformatsErrorKind xmlFile2brailleWithHandler (
           "xmlFile2braille() output goes to standard output" <<
           std::endl;
 
-//     gWaeHandler->waeTrace ( JMI v0.9.67
+//     gWaeHandler->waeTraceWithoutLocationDetails ( JMI v0.9.67
 //       __FILE__, __LINE__,
 //       ss.str ());
       }
@@ -382,7 +382,7 @@ static mfMusicformatsErrorKind xmlFile2brailleWithHandler (
           "\"" <<
           std::endl;
 
-//     gWaeHandler->waeTrace ( JMI v0.9.67
+//     gWaeHandler->waeTraceWithoutLocationDetails ( JMI v0.9.67
 //       __FILE__, __LINE__,
 //       ss.str ());
       }
@@ -396,7 +396,7 @@ static mfMusicformatsErrorKind xmlFile2brailleWithHandler (
           gLanguage->openingBrailleMusicFileForWriting (outputFileName) <<
           std::endl;
 
-//     gWaeHandler->waeTrace ( JMI v0.9.67
+//     gWaeHandler->waeTraceWithoutLocationDetails ( JMI v0.9.67
 //       __FILE__, __LINE__,
 //       ss.str ());
       }
@@ -450,7 +450,7 @@ static mfMusicformatsErrorKind xmlFile2brailleWithHandler (
           gLanguage->closingBrailleMusicFile (outputFileName) <<
           std::endl;
 
-        gWaeHandler->waeTrace (
+        gWaeHandler->waeTraceWithoutLocationDetails (
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -540,7 +540,7 @@ static mfMusicformatsErrorKind xmlFile2brailleWithOptionsAndArguments (
       ", insiderOption: " << insiderOption <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }

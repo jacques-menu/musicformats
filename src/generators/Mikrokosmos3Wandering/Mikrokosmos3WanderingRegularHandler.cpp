@@ -113,7 +113,7 @@ void Mikrokosmos3WanderingRegularHandler::createRegularHandlerGroups ()
       "\"" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -225,7 +225,7 @@ void Mikrokosmos3WanderingRegularHandler::createRegularHandlerGroups ()
       "\" have been created" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1444,7 +1444,7 @@ void Mikrokosmos3WanderingRegularHandler::checkOptionsAndArguments () const
       "\"" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }

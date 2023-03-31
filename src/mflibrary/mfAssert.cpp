@@ -48,13 +48,13 @@ void mfAssert (
   }
 }
 
-void mfAssertWithMeasureInfo (
+void mfAssertWithLocationDetails (
   const std::string& sourceCodeFileName,
   int                sourceCodeLineNumber,
   Bool               condition,
-  const std::string& messageIfFalse,
-  const std::string  measureNumber,
-  int                scoreMeasuresNumber)
+  const std::string& messageIfFalse)
+//   const std::string  measureNumber,
+//   int                scoreMeasuresNumber)
 {
   if (! condition) {
     gIndenter.resetToZero ();
@@ -62,8 +62,24 @@ void mfAssertWithMeasureInfo (
     gLog <<
       "#### mfAssert" <<
       ", " << sourceCodeFileName << ":" << sourceCodeLineNumber <<
-      " -- " <<
-      "measure " << measureNumber << '/' << scoreMeasuresNumber << ", " <<
+      " -- ";
+
+    if (gServiceRunData) {
+      gLog <<
+        "measure " <<
+        gServiceRunData->getCurrentMeasureNumber () <<
+        '/' <<
+        gServiceRunData->getScoreMeasuresNumber () <<
+        ", part " <<
+        gServiceRunData->getCurrentPartIDAndName () <<
+        ", staff " <<
+        gServiceRunData->getCurrentStaveNumber () <<
+        ", voice " <<
+        gServiceRunData->getCurrentVoiceNumber () <<
+        " - ";
+    }
+
+    gLog <<
       messageIfFalse <<
       " - quitting." <<
       std::endl;
@@ -107,15 +123,15 @@ void mfAssertWithInputLocation (
   }
 }
 
-void mfAssertWithInputLocationWithMeasureInfo (
+void mfAssertWithInputLocationWithLocationDetails (
   const std::string& sourceCodeFileName,
   int                sourceCodeLineNumber,
   Bool               condition,
   const std::string& inputSourceName,
   int                inputLineNumber,
-  const std::string& messageIfFalse,
-  const std::string  measureNumber,
-  int                scoreMeasuresNumber)
+  const std::string& messageIfFalse)
+//   const std::string  measureNumber,
+//   int                scoreMeasuresNumber)
 {
   if (! condition) {
     gIndenter.resetToZero ();
@@ -124,8 +140,24 @@ void mfAssertWithInputLocationWithMeasureInfo (
       "#### mfAssert" <<
       ", " << inputSourceName << ":" << inputLineNumber <<
       ", " << sourceCodeFileName << ":" << sourceCodeLineNumber <<
-      " -- " <<
-      "measure " << measureNumber << '/' << scoreMeasuresNumber << ", " <<
+      " -- ";
+
+    if (gServiceRunData) {
+      gLog <<
+        "measure " <<
+        gServiceRunData->getCurrentMeasureNumber () <<
+        '/' <<
+        gServiceRunData->getScoreMeasuresNumber () <<
+        ", part " <<
+        gServiceRunData->getCurrentPartIDAndName () <<
+        ", staff " <<
+        gServiceRunData->getCurrentStaveNumber () <<
+        ", voice " <<
+        gServiceRunData->getCurrentVoiceNumber () <<
+        " - ";
+    }
+
+    gLog <<
       messageIfFalse <<
       " - quitting." <<
       std::endl;

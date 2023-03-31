@@ -100,7 +100,7 @@ msrScore::msrScore (
       inputLineNumber);
 
   // number of measures
-  fScoreNumberOfMeasures = 0;
+  fScoreMeasuresNumber = 0;
 
   // part group names max length
   fScorePartGroupNamesMaxLength = 0;
@@ -140,9 +140,11 @@ S_msrScore msrScore::createScoreNewbornClone ()
       "Creating a newborn clone of a score" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -153,8 +155,8 @@ S_msrScore msrScore::createScoreNewbornClone ()
         fScoreName);
 
   // number of measures
-  newbornClone->fScoreNumberOfMeasures =
-    fScoreNumberOfMeasures;
+  newbornClone->fScoreMeasuresNumber =
+    fScoreMeasuresNumber;
 
   // part group names max length
 
@@ -190,10 +192,10 @@ S_msrScore msrScore::createScoreNewbornClone ()
   return newbornClone;
 }
 
-void msrScore::setScoreNumberOfMeasures (
-  int scoreNumberOfMeasures)
+void msrScore::setScoreMeasuresNumber (
+  int scoreMeasuresNumber)
 {
-  fScoreNumberOfMeasures = scoreNumberOfMeasures;
+  fScoreMeasuresNumber = scoreMeasuresNumber;
 
   // register the number of measures in the service run data
   S_mfServiceRunData
@@ -201,7 +203,8 @@ void msrScore::setScoreNumberOfMeasures (
       gServiceRunData;
 
   serviceRunData->
-    setScoreMeasuresNumber (fScoreNumberOfMeasures);
+    setScoreMeasuresNumber (
+      fScoreMeasuresNumber);
 }
 
 void msrScore::setScoreMasterVoice (
@@ -253,9 +256,11 @@ void msrScore::appendCreditToScore (
       "' to score" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -298,9 +303,11 @@ S_msrPart msrScore::fetchPartFromScoreByItsPartID (
       "<=- fetchPartFromScoreByItsPartID(" << partID << ")" <<
       std::endl << std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -369,9 +376,11 @@ void msrScore::acceptIn (basevisitor* v)
       "% ==> msrScore::acceptIn ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -388,9 +397,11 @@ void msrScore::acceptIn (basevisitor* v)
             "% ==> Launching msrScore::visitStart ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
+//             gServiceRunData->getCurrentMeasureNumber (),
+//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
@@ -407,9 +418,11 @@ void msrScore::acceptOut (basevisitor* v)
       "% ==> msrScore::acceptOut ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -426,9 +439,11 @@ void msrScore::acceptOut (basevisitor* v)
             "% ==> Launching msrScore::visitEnd ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
+//             gServiceRunData->getCurrentMeasureNumber (),
+//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
@@ -445,9 +460,11 @@ void msrScore::browseData (basevisitor* v)
       "% ==> msrScore::browseData ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -515,9 +532,11 @@ void msrScore::browseData (basevisitor* v)
       "% <== msrScore::browseData ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }
@@ -543,8 +562,8 @@ void msrScore::printFull (std::ostream& os) const
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fScoreNumberOfMeasures" << ": " <<
-    fScoreNumberOfMeasures <<
+    "fScoreMeasuresNumber" << ": " <<
+    fScoreMeasuresNumber <<
     std::endl <<
 
     std::setw (fieldWidth) <<
@@ -735,8 +754,8 @@ void msrScore::print(std::ostream& os) const
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fScoreNumberOfMeasures" << ": " <<
-    fScoreNumberOfMeasures <<
+    "fScoreMeasuresNumber" << ": " <<
+    fScoreMeasuresNumber <<
     std::endl;
 
   os << std::endl;
@@ -861,8 +880,8 @@ void msrScore::printSummary (std::ostream& os) const
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fScoreNumberOfMeasures" << ": " <<
-    fScoreNumberOfMeasures <<
+    "fScoreMeasuresNumber" << ": " <<
+    fScoreMeasuresNumber <<
     std::endl <<
 
     std::setw (fieldWidth) <<

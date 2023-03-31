@@ -92,7 +92,7 @@ void xml2lyRegularHandler::createRegularHandlerGroups ()
       "Creating the regular handler groups for \"" << fHandlerHeader << "\"" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -182,7 +182,7 @@ void xml2lyRegularHandler::createRegularHandlerGroups ()
       "\" have been created" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1750,7 +1750,7 @@ void xml2lyRegularHandler::checkOptionsAndArguments () const
       "\"" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }

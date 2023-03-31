@@ -88,7 +88,7 @@ void msrIgnorePartAtom::applyAtomWithValue (
       "==> oahAtom is of type 'msrIgnorePartAtom'" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -106,7 +106,7 @@ void msrIgnorePartAtom::applyAtomWithValue (
       "--> partName = \"" << partName << "\", " <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -147,7 +147,7 @@ void msrIgnorePartAtom::acceptIn (basevisitor* v)
       ".\\\" ==> msrIgnorePartAtom::acceptIn ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -166,7 +166,7 @@ void msrIgnorePartAtom::acceptIn (basevisitor* v)
             ".\\\" ==> Launching msrIgnorePartAtom::visitStart ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -185,7 +185,7 @@ void msrIgnorePartAtom::acceptOut (basevisitor* v)
       ".\\\" ==> msrIgnorePartAtom::acceptOut ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -204,7 +204,7 @@ void msrIgnorePartAtom::acceptOut (basevisitor* v)
             ".\\\" ==> Launching msrIgnorePartAtom::visitEnd ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -223,7 +223,7 @@ void msrIgnorePartAtom::browseData (basevisitor* v)
       ".\\\" ==> msrIgnorePartAtom::browseData ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -425,7 +425,7 @@ void msrKeepPartAtom::applyAtomWithValue (
       "==> oahAtom is of type 'msrKeepPartAtom'" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -443,7 +443,7 @@ void msrKeepPartAtom::applyAtomWithValue (
       "--> partName = \"" << partName << "\", " <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -484,7 +484,7 @@ void msrKeepPartAtom::acceptIn (basevisitor* v)
       ".\\\" ==> msrKeepPartAtom::acceptIn ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -503,7 +503,7 @@ void msrKeepPartAtom::acceptIn (basevisitor* v)
             ".\\\" ==> Launching msrKeepPartAtom::visitStart ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -522,7 +522,7 @@ void msrKeepPartAtom::acceptOut (basevisitor* v)
       ".\\\" ==> msrKeepPartAtom::acceptOut ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -541,7 +541,7 @@ void msrKeepPartAtom::acceptOut (basevisitor* v)
             ".\\\" ==> Launching msrKeepPartAtom::visitEnd ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -560,7 +560,7 @@ void msrKeepPartAtom::browseData (basevisitor* v)
       ".\\\" ==> msrKeepPartAtom::browseData ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1074,7 +1074,7 @@ void msr2msrOahGroup::acceptIn (basevisitor* v)
       ".\\\" ==> msr2msrOahGroup::acceptIn ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1093,7 +1093,7 @@ void msr2msrOahGroup::acceptIn (basevisitor* v)
             ".\\\" ==> Launching msr2msrOahGroup::visitStart ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -1112,7 +1112,7 @@ void msr2msrOahGroup::acceptOut (basevisitor* v)
       ".\\\" ==> msr2msrOahGroup::acceptOut ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1131,7 +1131,7 @@ void msr2msrOahGroup::acceptOut (basevisitor* v)
             ".\\\" ==> Launching msr2msrOahGroup::visitEnd ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -1150,7 +1150,7 @@ void msr2msrOahGroup::browseData (basevisitor* v)
       ".\\\" ==> msr2msrOahGroup::browseData ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1313,7 +1313,7 @@ S_msr2msrOahGroup createGlobalMsr2msrOahGroup ()
       "Creating global msr2msr OAH group" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }

@@ -117,7 +117,7 @@ void lilypondScoreOutputKindAtom::applyAtomWithValue (
       "==> oahAtom is of type 'lilypondScoreOutputKindAtom'" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -136,7 +136,7 @@ void lilypondScoreOutputKindAtom::acceptIn (basevisitor* v)
       ".\\\" ==> lilypondScoreOutputKindAtom::acceptIn ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -155,7 +155,7 @@ void lilypondScoreOutputKindAtom::acceptIn (basevisitor* v)
             ".\\\" ==> Launching lilypondScoreOutputKindAtom::visitStart ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -174,7 +174,7 @@ void lilypondScoreOutputKindAtom::acceptOut (basevisitor* v)
       ".\\\" ==> lilypondScoreOutputKindAtom::acceptOut ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -193,7 +193,7 @@ void lilypondScoreOutputKindAtom::acceptOut (basevisitor* v)
             ".\\\" ==> Launching lilypondScoreOutputKindAtom::visitEnd ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -212,7 +212,7 @@ void lilypondScoreOutputKindAtom::browseData (basevisitor* v)
       ".\\\" ==> lilypondScoreOutputKindAtom::browseData ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -362,7 +362,7 @@ void lilypondTransposePartNameAtom::applyAtomWithValue (
       "==> oahAtom is of type 'lilypondTransposePartNameAtom'" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -398,7 +398,7 @@ void lilypondTransposePartNameAtom::applyAtomWithValue (
       "'" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -439,7 +439,7 @@ void lilypondTransposePartNameAtom::applyAtomWithValue (
       "--> destinationPitchName = \"" << destinationPitchName << "\"" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -482,7 +482,7 @@ void lilypondTransposePartNameAtom::acceptIn (basevisitor* v)
       ".\\\" ==> lilypondTransposePartNameAtom::acceptIn ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -501,7 +501,7 @@ void lilypondTransposePartNameAtom::acceptIn (basevisitor* v)
             ".\\\" ==> Launching lilypondTransposePartNameAtom::visitStart ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -520,7 +520,7 @@ void lilypondTransposePartNameAtom::acceptOut (basevisitor* v)
       ".\\\" ==> lilypondTransposePartNameAtom::acceptOut ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -539,7 +539,7 @@ void lilypondTransposePartNameAtom::acceptOut (basevisitor* v)
             ".\\\" ==> Launching lilypondTransposePartNameAtom::visitEnd ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -558,7 +558,7 @@ void lilypondTransposePartNameAtom::browseData (basevisitor* v)
       ".\\\" ==> lilypondTransposePartNameAtom::browseData ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -775,7 +775,7 @@ void lilypondTransposePartIDAtom::applyAtomWithValue (
       "==> oahAtom is of type 'lilypondTransposePartIDAtom'" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -808,7 +808,7 @@ void lilypondTransposePartIDAtom::applyAtomWithValue (
       "'" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -849,7 +849,7 @@ void lilypondTransposePartIDAtom::applyAtomWithValue (
       "--> destinationPitchName = \"" << destinationPitchName << "\"" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -892,7 +892,7 @@ void lilypondTransposePartIDAtom::acceptIn (basevisitor* v)
       ".\\\" ==> lilypondTransposePartIDAtom::acceptIn ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -911,7 +911,7 @@ void lilypondTransposePartIDAtom::acceptIn (basevisitor* v)
             ".\\\" ==> Launching lilypondTransposePartIDAtom::visitStart ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -930,7 +930,7 @@ void lilypondTransposePartIDAtom::acceptOut (basevisitor* v)
       ".\\\" ==> lilypondTransposePartIDAtom::acceptOut ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -949,7 +949,7 @@ void lilypondTransposePartIDAtom::acceptOut (basevisitor* v)
             ".\\\" ==> Launching lilypondTransposePartIDAtom::visitEnd ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -968,7 +968,7 @@ void lilypondTransposePartIDAtom::browseData (basevisitor* v)
       ".\\\" ==> lilypondTransposePartIDAtom::browseData ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1260,7 +1260,7 @@ void lilypondAbsoluteOctaveEntryAtom::applyValueLessAtom (std::ostream& os)
       "' is a lilypondAbsoluteOctaveEntryAtom" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1283,7 +1283,7 @@ void lilypondAbsoluteOctaveEntryAtom::acceptIn (basevisitor* v)
       ".\\\" ==> lilypondAbsoluteOctaveEntryAtom::acceptIn ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1302,7 +1302,7 @@ void lilypondAbsoluteOctaveEntryAtom::acceptIn (basevisitor* v)
             ".\\\" ==> Launching lilypondAbsoluteOctaveEntryAtom::visitStart ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -1321,7 +1321,7 @@ void lilypondAbsoluteOctaveEntryAtom::acceptOut (basevisitor* v)
       ".\\\" ==> lilypondAbsoluteOctaveEntryAtom::acceptOut ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1340,7 +1340,7 @@ void lilypondAbsoluteOctaveEntryAtom::acceptOut (basevisitor* v)
             ".\\\" ==> Launching lilypondAbsoluteOctaveEntryAtom::visitEnd ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -1359,7 +1359,7 @@ void lilypondAbsoluteOctaveEntryAtom::browseData (basevisitor* v)
       ".\\\" ==> lilypondAbsoluteOctaveEntryAtom::browseData ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1476,7 +1476,7 @@ void lilypondRelativeOctaveEntryAtom::applyAtomWithValue (
       "==> oahAtom is of type 'lilypondRelativeOctaveEntryAtom'" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1546,7 +1546,7 @@ void lilypondRelativeOctaveEntryAtom::acceptIn (basevisitor* v)
       ".\\\" ==> lilypondRelativeOctaveEntryAtom::acceptIn ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1565,7 +1565,7 @@ void lilypondRelativeOctaveEntryAtom::acceptIn (basevisitor* v)
             ".\\\" ==> Launching lilypondRelativeOctaveEntryAtom::visitStart ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -1584,7 +1584,7 @@ void lilypondRelativeOctaveEntryAtom::acceptOut (basevisitor* v)
       ".\\\" ==> lilypondRelativeOctaveEntryAtom::acceptOut ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1603,7 +1603,7 @@ void lilypondRelativeOctaveEntryAtom::acceptOut (basevisitor* v)
             ".\\\" ==> Launching lilypondRelativeOctaveEntryAtom::visitEnd ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -1622,7 +1622,7 @@ void lilypondRelativeOctaveEntryAtom::browseData (basevisitor* v)
       ".\\\" ==> lilypondRelativeOctaveEntryAtom::browseData ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1770,7 +1770,7 @@ void lilypondFixedOctaveEntryAtom::applyAtomWithValue (
       "==> oahAtom is of type 'lilypondFixedOctaveEntryAtom'" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1801,7 +1801,7 @@ void lilypondFixedOctaveEntryAtom::acceptIn (basevisitor* v)
       ".\\\" ==> lilypondFixedOctaveEntryAtom::acceptIn ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1820,7 +1820,7 @@ void lilypondFixedOctaveEntryAtom::acceptIn (basevisitor* v)
             ".\\\" ==> Launching lilypondFixedOctaveEntryAtom::visitStart ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -1839,7 +1839,7 @@ void lilypondFixedOctaveEntryAtom::acceptOut (basevisitor* v)
       ".\\\" ==> lilypondFixedOctaveEntryAtom::acceptOut ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1858,7 +1858,7 @@ void lilypondFixedOctaveEntryAtom::acceptOut (basevisitor* v)
             ".\\\" ==> Launching lilypondFixedOctaveEntryAtom::visitEnd ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -1877,7 +1877,7 @@ void lilypondFixedOctaveEntryAtom::browseData (basevisitor* v)
       ".\\\" ==> lilypondFixedOctaveEntryAtom::browseData ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2018,7 +2018,7 @@ void lilypondAccidentalStyleKindAtom::applyAtomWithValue (
       "==> oahAtom is of type 'lilypondAccidentalStyleKindAtom'" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2035,7 +2035,7 @@ void lilypondAccidentalStyleKindAtom::applyAtomWithValue (
       "==> oahAtom is of type 'lilypondAccidentalStyleKindAtom'" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2085,7 +2085,7 @@ void lilypondAccidentalStyleKindAtom::acceptIn (basevisitor* v)
       ".\\\" ==> lilypondAccidentalStyleKindAtom::acceptIn ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2104,7 +2104,7 @@ void lilypondAccidentalStyleKindAtom::acceptIn (basevisitor* v)
             ".\\\" ==> Launching lilypondAccidentalStyleKindAtom::visitStart ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -2123,7 +2123,7 @@ void lilypondAccidentalStyleKindAtom::acceptOut (basevisitor* v)
       ".\\\" ==> lilypondAccidentalStyleKindAtom::acceptOut ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2142,7 +2142,7 @@ void lilypondAccidentalStyleKindAtom::acceptOut (basevisitor* v)
             ".\\\" ==> Launching lilypondAccidentalStyleKindAtom::visitEnd ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -2161,7 +2161,7 @@ void lilypondAccidentalStyleKindAtom::browseData (basevisitor* v)
       ".\\\" ==> lilypondAccidentalStyleKindAtom::browseData ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2310,7 +2310,7 @@ void lilypondChordsDisplayAtom::applyAtomWithValue (
       "==> oahAtom is of type 'lilypondChordsDisplayAtom'" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2362,7 +2362,7 @@ void lilypondChordsDisplayAtom::applyAtomWithValue (
       "==> oahAtom is of type 'lilypondChordsDisplayAtom'" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2449,7 +2449,7 @@ void lilypondChordsDisplayAtom::acceptIn (basevisitor* v)
       ".\\\" ==> lilypondChordsDisplayAtom::acceptIn ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2468,7 +2468,7 @@ void lilypondChordsDisplayAtom::acceptIn (basevisitor* v)
             ".\\\" ==> Launching lilypondChordsDisplayAtom::visitStart ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -2487,7 +2487,7 @@ void lilypondChordsDisplayAtom::acceptOut (basevisitor* v)
       ".\\\" ==> lilypondChordsDisplayAtom::acceptOut ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2506,7 +2506,7 @@ void lilypondChordsDisplayAtom::acceptOut (basevisitor* v)
             ".\\\" ==> Launching lilypondChordsDisplayAtom::visitEnd ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -2525,7 +2525,7 @@ void lilypondChordsDisplayAtom::browseData (basevisitor* v)
       ".\\\" ==> lilypondChordsDisplayAtom::browseData ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2738,7 +2738,7 @@ void lilypondLyricsNotesDurationsKindAtom::applyAtomWithValue (
       "==> oahAtom is of type 'lilypondLyricsNotesDurationsKindAtom'" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2755,7 +2755,7 @@ void lilypondLyricsNotesDurationsKindAtom::applyAtomWithValue (
       "==> oahAtom is of type 'lilypondLyricsNotesDurationsKindAtom'" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2805,7 +2805,7 @@ void lilypondLyricsNotesDurationsKindAtom::acceptIn (basevisitor* v)
       ".\\\" ==> lilypondLyricsNotesDurationsKindAtom::acceptIn ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2824,7 +2824,7 @@ void lilypondLyricsNotesDurationsKindAtom::acceptIn (basevisitor* v)
             ".\\\" ==> Launching lilypondLyricsNotesDurationsKindAtom::visitStart ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -2843,7 +2843,7 @@ void lilypondLyricsNotesDurationsKindAtom::acceptOut (basevisitor* v)
       ".\\\" ==> lilypondLyricsNotesDurationsKindAtom::acceptOut ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2862,7 +2862,7 @@ void lilypondLyricsNotesDurationsKindAtom::acceptOut (basevisitor* v)
             ".\\\" ==> Launching lilypondLyricsNotesDurationsKindAtom::visitEnd ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -2881,7 +2881,7 @@ void lilypondLyricsNotesDurationsKindAtom::browseData (basevisitor* v)
       ".\\\" ==> lilypondLyricsNotesDurationsKindAtom::browseData ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -3033,7 +3033,7 @@ void lilypondDynamicsTextSpannersStyleKindAtom::applyAtomWithValue (
       "==> oahAtom is of type 'lilypondDynamicsTextSpannersStyleKindAtom'" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -3050,7 +3050,7 @@ void lilypondDynamicsTextSpannersStyleKindAtom::applyAtomWithValue (
       "==> oahAtom is of type 'lilypondDynamicsTextSpannersStyleKindAtom'" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -3100,7 +3100,7 @@ void lilypondDynamicsTextSpannersStyleKindAtom::acceptIn (basevisitor* v)
       ".\\\" ==> lilypondDynamicsTextSpannersStyleKindAtom::acceptIn ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -3119,7 +3119,7 @@ void lilypondDynamicsTextSpannersStyleKindAtom::acceptIn (basevisitor* v)
             ".\\\" ==> Launching lilypondDynamicsTextSpannersStyleKindAtom::visitStart ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -3138,7 +3138,7 @@ void lilypondDynamicsTextSpannersStyleKindAtom::acceptOut (basevisitor* v)
       ".\\\" ==> lilypondDynamicsTextSpannersStyleKindAtom::acceptOut ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -3157,7 +3157,7 @@ void lilypondDynamicsTextSpannersStyleKindAtom::acceptOut (basevisitor* v)
             ".\\\" ==> Launching lilypondDynamicsTextSpannersStyleKindAtom::visitEnd ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -3176,7 +3176,7 @@ void lilypondDynamicsTextSpannersStyleKindAtom::browseData (basevisitor* v)
       ".\\\" ==> lilypondDynamicsTextSpannersStyleKindAtom::browseData ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -3343,6 +3343,17 @@ R"()",
 
 //  fScoreNotationKind =  lilypondScoreNotationKind::kNotationWestern;
     // default value
+
+  subGroup->
+    appendAtomToSubGroup (
+      oahBooleanAtom::create (
+        "lilyazz", "",
+R"(Generate the score using the LilyJazz font
+instead of the default Emmentaler font.
+This option needs lilyjazz.ily to be accessible to LilyPond
+(https://github.com/OpenLilyPondFonts/lilyjazz).)",
+        "fLilyJazz;",
+        fLilyJazz));
 
   subGroup->
     appendAtomToSubGroup (
@@ -5398,7 +5409,7 @@ void lpsr2lilypondOahGroup::acceptIn (basevisitor* v)
       ".\\\" ==> lpsr2lilypondOahGroup::acceptIn ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -5417,7 +5428,7 @@ void lpsr2lilypondOahGroup::acceptIn (basevisitor* v)
             ".\\\" ==> Launching lpsr2lilypondOahGroup::visitStart ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -5436,7 +5447,7 @@ void lpsr2lilypondOahGroup::acceptOut (basevisitor* v)
       ".\\\" ==> lpsr2lilypondOahGroup::acceptOut ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -5455,7 +5466,7 @@ void lpsr2lilypondOahGroup::acceptOut (basevisitor* v)
             ".\\\" ==> Launching lpsr2lilypondOahGroup::visitEnd ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -5474,7 +5485,7 @@ void lpsr2lilypondOahGroup::browseData (basevisitor* v)
       ".\\\" ==> lpsr2lilypondOahGroup::browseData ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -6206,6 +6217,11 @@ void lpsr2lilypondOahGroup::displayAtomWithVariableOptionsValues (
   ++gIndenter;
 
   os << std::left <<
+    std::setw (valueFieldWidth) << "fLilyJazz" << ": " <<
+      fLilyJazz <<
+      std::endl;
+
+  os << std::left <<
     std::setw (valueFieldWidth) << "fJianpu" << ": " <<
       fJianpu <<
       std::endl;
@@ -6787,6 +6803,11 @@ void lpsr2lilypondOahGroup::displayLilypondGenerationOahValues (int fieldWidth)
   ++gIndenter;
 
   gLog << std::left <<
+    std::setw (fieldWidth) << "fLilyJazz" << ": " <<
+      fLilyJazz <<
+      std::endl;
+
+  gLog << std::left <<
     std::setw (fieldWidth) << "fJianpu" << ": " <<
       fJianpu <<
       std::endl;
@@ -6839,7 +6860,7 @@ S_lpsr2lilypondOahGroup createGlobalLpsr2lilypondOahGroup ()
       "Initializing LilyPond OAH handling" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -6915,7 +6936,7 @@ void lilypondBreakPageAfterMeasureNumberAtom::applyAtomWithValue (
       "==> oahAtom is of type 'lilypondBreakPageAfterMeasureNumberAtom'" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -6932,7 +6953,7 @@ void lilypondBreakPageAfterMeasureNumberAtom::applyAtomWithValue (
       "==> oahAtom is of type 'lilypondBreakPageAfterMeasureNumberAtom'" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }

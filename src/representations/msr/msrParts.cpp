@@ -110,9 +110,11 @@ void msrPart::initializePart ()
 
     gMsrOahGroup->displayMsrOahValues (40); // JMI
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -134,7 +136,7 @@ void msrPart::initializePart ()
       newMsrPartName <<
       "\"";
 
-    msrWarning (
+    msrWarningWithLocationDetails (
       gServiceRunData->getInputSourceName (),
       fInputLineNumber,
       ss.str ());
@@ -170,9 +172,11 @@ void msrPart::initializePart ()
       "Creating part \"" << asString () << "\"" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }
@@ -204,9 +208,11 @@ S_msrPart msrPart::createPartNewbornClone (const S_msrPartGroup& partGroupClone)
       getPartCombinedName () <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -278,9 +284,11 @@ void msrPart::registerStaffInPart (
       getPartCombinedName () <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -319,7 +327,7 @@ void msrPart::registerStaffInPart (
           getPartCombinedName () <<
           ", line " << inputLineNumber;
 
-        msrInternalError ( // JMI ???
+        msrInternalErrorWithLocationDetails ( // JMI ???
           gServiceRunData->getInputSourceName (),
           inputLineNumber,
           __FILE__, __LINE__,
@@ -342,7 +350,7 @@ void msrPart::registerStaffInPart (
           getPartCombinedName () <<
           ", line " << inputLineNumber;
 
-        msrInternalError ( // JMI ???
+        msrInternalErrorWithLocationDetails ( // JMI ???
           gServiceRunData->getInputSourceName (),
           inputLineNumber,
           __FILE__, __LINE__,
@@ -371,9 +379,11 @@ void msrPart::setPartDrawingMeasurePosition (
       getPartCombinedName () <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -387,7 +397,7 @@ void msrPart::setPartDrawingMeasurePosition (
       getPartCombinedName () <<
       " since it is negative";
 
-    msrInternalError (
+    msrInternalErrorWithLocationDetails (
       gServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
@@ -417,9 +427,11 @@ void msrPart::incrementPartDrawingMeasurePosition (
       fPartDrawingMeasurePosition.asString () <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }
@@ -439,9 +451,11 @@ void msrPart::decrementPartDrawingMeasurePosition (
       getPartCombinedName () <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -459,7 +473,7 @@ void msrPart::decrementPartDrawingMeasurePosition (
       fPartDrawingMeasurePosition.asString () <<
       ", which is negative ";
 
-    msrInternalError (
+    msrInternalErrorWithLocationDetails (
       gServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
@@ -477,9 +491,11 @@ void msrPart::decrementPartDrawingMeasurePosition (
       getPartCombinedName () <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }
@@ -502,9 +518,11 @@ void msrPart::setPartShortestNoteWholeNotes (
       wholeNotes.asString () <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -529,9 +547,11 @@ void msrPart::setPartShortestNoteTupletFactor (
       noteTupletFactor <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -554,9 +574,11 @@ void msrPart::assignSequentialNumbersToRegularVoicesInPart (
       ", line " << inputLineNumber <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -587,9 +609,11 @@ void msrPart::setPartMsrName (const std::string& partMsrName)
         " to \"" << fPartMsrName << "\"" <<
          std::endl;
 
-      gWaeHandler->waeTrace (
+      gWaeHandler->waeTraceWithLocationDetails (
         __FILE__, __LINE__,
         ss.str ());
+//         gServiceRunData->getCurrentMeasureNumber (),
+//         gServiceRunData->getScoreMeasuresNumber ());
     }
 #endif // MF_TRACE_IS_ENABLED
   }
@@ -608,6 +632,36 @@ void msrPart::setPartMsrName (const std::string& partMsrName)
     }
 #endif // MF_TRACE_IS_ENABLED
   }
+}
+
+std::string msrPart::getPartIDAndName () const
+{
+  std::stringstream ss;
+
+  if (! fPartMsrName.size ()) {
+    ss <<
+      "[empty name]";
+  }
+  else {
+    ss <<
+     // JMI "\"" <<
+      fPartMsrName
+     // JMI << "\""
+      ;
+  }
+
+  ss <<
+    " (\"" << fPartID << "\"";
+
+  if (fPartName.size ()) {
+    ss <<
+      ", \"" << fPartName << "\"";
+  }
+
+  ss <<
+    ")";
+
+  return ss.str ();
 }
 
 std::string msrPart::getPartCombinedName () const
@@ -659,9 +713,11 @@ void msrPart::createAMeasureAndAppendItToPart (
       "', line " << inputLineNumber <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -699,9 +755,11 @@ void msrPart::setNextMeasureNumberInPart (
       "', line " << inputLineNumber <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -745,9 +803,11 @@ msrWholeNotes msrPart::fetchPartMeasuresWholeNotessVectorAt (
       ", indexValue: " << indexValue <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -775,8 +835,8 @@ msrWholeNotes msrPart::fetchPartMeasuresWholeNotessVectorAt (
       ", indexValue: " << indexValue << " is out of bounds" <<
       ", line " << inputLineNumber;
 
-//     msrInternalWarning (
-     msrInternalError (
+//     msrInternalWarningithLocationsDetails (
+     msrInternalErrorWithLocationDetails (
       gServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
@@ -799,9 +859,11 @@ msrWholeNotes msrPart::fetchPartMeasuresWholeNotessVectorAt (
       ", line " << inputLineNumber <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -849,9 +911,11 @@ void msrPart::registerShortestNoteInPartIfRelevant (const S_msrNote& note)
         " becomes " << note->asString () <<
         std::endl;
 
-      gWaeHandler->waeTrace (
+      gWaeHandler->waeTraceWithLocationDetails (
         __FILE__, __LINE__,
         ss.str ());
+//         gServiceRunData->getCurrentMeasureNumber (),
+//         gServiceRunData->getScoreMeasuresNumber ());
     }
 #endif // MF_TRACE_IS_ENABLED
   }
@@ -899,9 +963,11 @@ void msrPart::setPartNumberOfMeasures (size_t partNumberOfMeasures)
         " measures" <<
         std::endl;
 
-      gWaeHandler->waeTrace (
+      gWaeHandler->waeTraceWithLocationDetails (
         __FILE__, __LINE__,
         ss.str ());
+//         gServiceRunData->getCurrentMeasureNumber (),
+//         gServiceRunData->getScoreMeasuresNumber ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -931,9 +997,11 @@ void msrPart::registerOrdinalMeasureNumberWholeNotes (
       ", line " << inputLineNumber <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -966,9 +1034,11 @@ void msrPart::registerOrdinalMeasureNumberWholeNotes (
       ", line " << inputLineNumber <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -995,9 +1065,11 @@ void msrPart::registerOrdinalMeasureNumberWholeNotes (
         " in part " << getPartCombinedName () <<
         std::endl;
 
-      gWaeHandler->waeTrace (
+      gWaeHandler->waeTraceWithLocationDetails (
         __FILE__, __LINE__,
         ss.str ());
+//         gServiceRunData->getCurrentMeasureNumber (),
+//         gServiceRunData->getScoreMeasuresNumber ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1020,9 +1092,11 @@ void msrPart::registerOrdinalMeasureNumberWholeNotes (
 //         fPartMeasuresWholeNotessVector.size () <<
 //         std::endl;
 //
-//       gWaeHandler->waeTrace (
-//         __FILE__, __LINE__,
-//         ss.str ());
+//           gWaeHandler->waeTraceWithLocationDetails (
+//             __FILE__, __LINE__,
+//             ss.str (),
+//             gServiceRunData->getCurrentMeasureNumber (),
+//             gServiceRunData->getScoreMeasuresNumber ());
 //     }
 // #endif // MF_TRACE_IS_ENABLED
   }
@@ -1075,10 +1149,16 @@ void msrPart::appendClefToPart (
     std::stringstream ss;
 
     ss <<
-      "Appending clef '" <<
+      "Appending clef " <<
       clef->asString () <<
-      "' to part " << getPartCombinedName () <<
-    std::endl;
+      " to part " << getPartCombinedName () <<
+      std::endl;
+
+    gWaeHandler->waeTraceWithLocationDetails (
+      __FILE__, __LINE__,
+      ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1116,9 +1196,11 @@ void msrPart::appendKeyToPart (
       " to part " << getPartCombinedName () <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1159,9 +1241,11 @@ void msrPart::appendTimeSignatureToPart (
       "' to part " << getPartCombinedName () <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1202,9 +1286,11 @@ void msrPart::appendTimeSignatureToPartClone (
       "' to part clone " << getPartCombinedName () <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1235,9 +1321,11 @@ void msrPart::appendTempoToPart (
       getPartCombinedName () <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1261,9 +1349,11 @@ void msrPart::appendRehearsalMarkToPart (
       getPartCombinedName () <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1288,9 +1378,11 @@ void msrPart::appendLineBreakToPart (
       getPartCombinedName () <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1314,9 +1406,11 @@ void msrPart::appendPageBreakToPart (
       getPartCombinedName () <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1342,9 +1436,11 @@ void msrPart::insertHiddenMeasureAndBarLineInPartClone (
       ", line " << inputLineNumber <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1411,9 +1507,11 @@ void msrPart::handleRepeatStartInPart (
       "\", line " << inputLineNumber <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1445,9 +1543,11 @@ void msrPart::handleRepeatEndInPart (
       ", line " << inputLineNumber <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1479,9 +1579,11 @@ void msrPart::handleRepeatEndingStartInPart (
       ", line " << inputLineNumber <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1516,9 +1618,11 @@ void msrPart::handleRepeatEndingEndInPart (
       ", line " << inputLineNumber <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1553,9 +1657,11 @@ void msrPart::finalizeRepeatEndInPart (
       ", line " << inputLineNumber <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1659,9 +1765,11 @@ void msrPart::appendMultipleFullBarRestsToPart (
       ", line " << inputLineNumber <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1689,9 +1797,11 @@ void msrPart::replicateLastAppendedMeasureInPart (
       getPartCombinedName () <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1722,9 +1832,11 @@ void msrPart::addEmptyMeasuresToPart (
       ", " <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1752,9 +1864,11 @@ void msrPart::appendPendingMultipleFullBarRestsToPart (
       getPartCombinedName () <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1781,9 +1895,11 @@ void msrPart::appendMultipleFullBarRestsCloneToPart (
       getPartCombinedName () <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1808,9 +1924,11 @@ void msrPart::appendBarLineToPart (
       getPartCombinedName () <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1834,7 +1952,7 @@ S_msrStaff msrPart::addStaffToPartByItsNumber (
       " already exists in part " << getPartCombinedName () <<
       ", line " << inputLineNumber;
 
-    msrInternalError ( // JMI ???
+    msrInternalErrorWithLocationDetails ( // JMI ???
       gServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
@@ -1855,9 +1973,11 @@ S_msrStaff msrPart::addStaffToPartByItsNumber (
       ", line " << inputLineNumber <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1903,9 +2023,11 @@ S_msrStaff msrPart::addHarmoniesStaffToPart (
       ", line " << inputLineNumber <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1956,9 +2078,11 @@ S_msrStaff msrPart::addHFiguredBassStaffToPart (
       ", line " << inputLineNumber <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -2007,9 +2131,11 @@ void msrPart::addStaffToPartCloneByItsNumber (const S_msrStaff& staff)
       "\" to part clone " << getPartCombinedName () <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -2054,7 +2180,7 @@ S_msrVoice msrPart::createPartHarmoniesVoice (
       getPartCombinedName () <<
       "\" already has a harmonies voice";
 
-    msrInternalError (
+    msrInternalErrorWithLocationDetails (
       gServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
@@ -2077,9 +2203,11 @@ S_msrVoice msrPart::createPartHarmoniesVoice (
       ", line " << inputLineNumber <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -2103,9 +2231,11 @@ S_msrVoice msrPart::createPartHarmoniesVoice (
       ", line " << inputLineNumber <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -2150,9 +2280,11 @@ void msrPart::appendHarmonyToPart (
       ", line " << inputLineNumber <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -2179,9 +2311,11 @@ void msrPart::appendHarmoniesListToPart (
       ", line " << inputLineNumber <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -2211,9 +2345,11 @@ void msrPart::appendFiguredBassesListToPart (
       ", line " << inputLineNumber <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -2236,7 +2372,7 @@ S_msrVoice msrPart::createPartFiguredBassVoice (
       getPartCombinedName () <<
       "\" already has a figured bass voice";
 
-    msrInternalError (
+    msrInternalErrorWithLocationDetails (
       gServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
@@ -2259,9 +2395,11 @@ S_msrVoice msrPart::createPartFiguredBassVoice (
       ", line " << inputLineNumber <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -2285,9 +2423,11 @@ S_msrVoice msrPart::createPartFiguredBassVoice (
       ", line " << inputLineNumber <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -2332,9 +2472,11 @@ void msrPart::appendFiguredBassToPart (
       ", line " << figuredBass->getInputLineNumber () <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -2369,9 +2511,11 @@ void msrPart::appendFiguredBassToPart (
 //           ", line " << inputLineNumber <<
 //           std::endl;
 //
-//         gWaeHandler->waeTrace (
-//           __FILE__, __LINE__,
-//           ss.str ());
+//           gWaeHandler->waeTraceWithLocationDetails (
+//             __FILE__, __LINE__,
+//             ss.str (),
+//             gServiceRunData->getCurrentMeasureNumber (),
+//             gServiceRunData->getScoreMeasuresNumber ());
 //       }
 // #endif // MF_TRACE_IS_ENABLED
 //
@@ -2397,7 +2541,7 @@ void msrPart::appendFiguredBassToPart (
 //           figuredBassSupplierVoice->getVoiceName () <<
 //           "\"";
 //
-//         msrInternalError (
+//         msrInternalErrorWithLocationDetails (
 //           gServiceRunData->getInputSourceName (),
 //           inputLineNumber,
 //           __FILE__, __LINE__,
@@ -2433,9 +2577,11 @@ void msrPart::appendFiguredBassToPartClone (
           ", line " << inputLineNumber <<
           std::endl;
 
-        gWaeHandler->waeTrace (
+        gWaeHandler->waeTraceWithLocationDetails (
           __FILE__, __LINE__,
           ss.str ());
+//           gServiceRunData->getCurrentMeasureNumber (),
+//           gServiceRunData->getScoreMeasuresNumber ());
       }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -2459,7 +2605,7 @@ void msrPart::appendFiguredBassToPartClone (
           figuredBassSupplierVoice->getVoiceName () <<
           "\"";
 
-        msrInternalError (
+        msrInternalErrorWithLocationDetails (
           gServiceRunData->getInputSourceName (),
           inputLineNumber,
           __FILE__, __LINE__,
@@ -2485,9 +2631,11 @@ void msrPart::appendScordaturaToPart (
       getPartCombinedName () <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -2513,9 +2661,11 @@ void msrPart::appendAccordionRegistrationToPart (
       getPartCombinedName () <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -2541,9 +2691,11 @@ void msrPart::appendHarpPedalsTuningToPart (
       getPartCombinedName () <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -2579,9 +2731,11 @@ void msrPart::addSkipGraceNotesGroupAheadOfVoicesClonesIfNeeded (
       ", line " << inputLineNumber <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -2627,9 +2781,11 @@ void msrPart::finalizeLastAppendedMeasureInPart (
       ", line " << inputLineNumber <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -2718,9 +2874,11 @@ void msrPart::finalizePart (
       ", line " << inputLineNumber <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -2734,7 +2892,7 @@ void msrPart::finalizePart (
       getPartCombinedName () <<
       " appears in the part list, but doesn't contain any stave";
 
-    msrWarning (
+    msrWarningWithLocationDetails (
       gServiceRunData->getInputSourceName (),
       inputLineNumber,
       ss.str ());
@@ -2778,9 +2936,11 @@ void msrPart::finalizePartClone (
       ", line " << inputLineNumber <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -2820,9 +2980,11 @@ void msrPart::finalizePartAndAllItsMeasures (
       "\", line " << inputLineNumber <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -2860,9 +3022,11 @@ void msrPart::collectPartMeasuresSlices (
       ", line " << inputLineNumber <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -2893,9 +3057,11 @@ void msrPart::collectPartMeasuresSlices (
         "\":" <<
         std::endl;
 
-      gWaeHandler->waeTrace (
+      gWaeHandler->waeTraceWithLocationDetails (
         __FILE__, __LINE__,
         ss.str ());
+//         gServiceRunData->getCurrentMeasureNumber (),
+//         gServiceRunData->getScoreMeasuresNumber ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -2914,7 +3080,7 @@ void msrPart::collectPartMeasuresSlices (
         staff->getStaffName () <<
         "\" is null";
 
-      msrWarning (
+      msrWarningWithLocationDetails (
         gServiceRunData->getInputSourceName (),
         inputLineNumber,
         ss.str ());
@@ -2958,9 +3124,11 @@ void msrPart::acceptIn (basevisitor* v)
       "% ==> msrPart::acceptIn ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -2977,9 +3145,11 @@ void msrPart::acceptIn (basevisitor* v)
             "% ==> Launching msrPart::visitStart ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
+//             gServiceRunData->getCurrentMeasureNumber (),
+//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
@@ -2996,9 +3166,11 @@ void msrPart::acceptOut (basevisitor* v)
       "% ==> msrPart::acceptOut ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -3015,9 +3187,11 @@ void msrPart::acceptOut (basevisitor* v)
             "% ==> Launching msrPart::visitEnd ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
+//             gServiceRunData->getCurrentMeasureNumber (),
+//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
@@ -3034,9 +3208,11 @@ void msrPart::browseData (basevisitor* v)
       "% ==> msrPart::browseData ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -3100,7 +3276,7 @@ void msrPart::browseData (basevisitor* v)
           "\"" <<
           ", line " << fInputLineNumber;
 
-        msrInternalError (
+        msrInternalErrorWithLocationDetails (
           gServiceRunData->getInputSourceName (),
           fInputLineNumber,
           __FILE__, __LINE__,

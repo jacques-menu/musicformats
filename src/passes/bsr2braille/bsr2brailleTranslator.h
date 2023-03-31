@@ -145,22 +145,28 @@ class EXP bsr2brailleTranslator :
     // options
     // ------------------------------------------------------
 
-    S_bsrOahGroup         fBsrOahGroup;
+    S_bsrOahGroup             fBsrOahGroup;
 
     // the BSR score we're visiting
     // ------------------------------------------------------
 
-    S_bsrScore            fVisitedBsrScore;
+    S_bsrScore                fVisitedBsrScore;
+
+    // measures
+    // ------------------------------------------------------
+
+    std::string               fCurrentMeasureNumber;
+    S_msrMeasure              fCurrentMeasureClone;
 
     // the braille generator used
     // ------------------------------------------------------
 
-    S_bsrBrailleGenerator fBrailleGenerator;
+    S_bsrBrailleGenerator     fBrailleGenerator;
 
     // the output stream
     // ------------------------------------------------------
 
-    std::ostream&              fBrailleOutputStream;
+    std::ostream&             fBrailleOutputStream;
 };
 
 

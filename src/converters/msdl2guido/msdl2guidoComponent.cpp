@@ -57,7 +57,7 @@ S_mfcConverterComponent createMsdl2guidoConverterComponent ()
         "Creating the msdl2guido component" <<
         std::endl;
 
-      gWaeHandler->waeTrace (
+      gWaeHandler->waeTraceWithoutLocationDetails (
         __FILE__, __LINE__,
         ss.str ());
     }

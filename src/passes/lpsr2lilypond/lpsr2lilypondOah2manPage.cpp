@@ -48,7 +48,7 @@ void lpsr2lilypondOah2manPage::visitStart (S_lilypondScoreOutputKindAtom& elt)
       " \"" << elt->fetchNames () << "\"" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -83,7 +83,7 @@ void lpsr2lilypondOah2manPage::visitEnd (S_lilypondScoreOutputKindAtom& elt)
       " \"" << elt->fetchNames () << "\"" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -103,7 +103,7 @@ void lpsr2lilypondOah2manPage::visitStart (S_lilypondTransposePartNameAtom& elt)
       " \"" << elt->fetchNames () << "\"" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -138,7 +138,7 @@ void lpsr2lilypondOah2manPage::visitEnd (S_lilypondTransposePartNameAtom& elt)
       " \"" << elt->fetchNames () << "\"" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -158,7 +158,7 @@ void lpsr2lilypondOah2manPage::visitStart (S_lilypondAbsoluteOctaveEntryAtom& el
       " \"" << elt->fetchNames () << "\"" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -193,7 +193,7 @@ void lpsr2lilypondOah2manPage::visitEnd (S_lilypondAbsoluteOctaveEntryAtom& elt)
       " \"" << elt->fetchNames () << "\"" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -213,7 +213,7 @@ void lpsr2lilypondOah2manPage::visitStart (S_lilypondRelativeOctaveEntryAtom& el
       " \"" << elt->fetchNames () << "\"" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -248,7 +248,7 @@ void lpsr2lilypondOah2manPage::visitEnd (S_lilypondRelativeOctaveEntryAtom& elt)
       " \"" << elt->fetchNames () << "\"" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -268,7 +268,7 @@ void lpsr2lilypondOah2manPage::visitStart (S_lilypondFixedOctaveEntryAtom& elt)
       " \"" << elt->fetchNames () << "\"" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -303,7 +303,7 @@ void lpsr2lilypondOah2manPage::visitEnd (S_lilypondFixedOctaveEntryAtom& elt)
       " \"" << elt->fetchNames () << "\"" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -323,7 +323,7 @@ void lpsr2lilypondOah2manPage::visitStart (S_lilypondAccidentalStyleKindAtom& el
       " \"" << elt->fetchNames () << "\"" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -357,7 +357,7 @@ void lpsr2lilypondOah2manPage::visitEnd (S_lilypondAccidentalStyleKindAtom& elt)
       " \"" << elt->fetchNames () << "\"" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -377,7 +377,7 @@ void lpsr2lilypondOah2manPage::visitStart (S_lilypondChordsDisplayAtom& elt)
       " \"" << elt->fetchNames () << "\"" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -412,7 +412,7 @@ void lpsr2lilypondOah2manPage::visitEnd (S_lilypondChordsDisplayAtom& elt)
       " \"" << elt->fetchNames () << "\"" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -432,7 +432,7 @@ void lpsr2lilypondOah2manPage::visitStart (S_lilypondLyricsNotesDurationsKindAto
       " \"" << elt->fetchNames () << "\"" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -468,7 +468,7 @@ void lpsr2lilypondOah2manPage::visitEnd (S_lilypondLyricsNotesDurationsKindAtom&
       " \"" << elt->fetchNames () << "\"" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -488,7 +488,7 @@ void lpsr2lilypondOah2manPage::visitStart (S_oahMidiTempoAtom& elt)
       " \"" << elt->fetchNames () << "\"" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -523,7 +523,7 @@ void lpsr2lilypondOah2manPage::visitEnd (S_oahMidiTempoAtom& elt)
       " \"" << elt->fetchNames () << "\"" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }

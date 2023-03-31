@@ -108,7 +108,7 @@ mfMusicformatsErrorKind convertMsdlStream2brailleWithHandler (
         separator <<
         std::endl;
 
-//       gWaeHandler->waeTrace ( // JMI v0.9.67
+//       gWaeHandler->waeTraceWithoutLocationDetails ( // JMI v0.9.67
 //         __FILE__, __LINE__,
 //         ss.str ());
     }
@@ -352,7 +352,7 @@ mfMusicformatsErrorKind convertMsdlStream2brailleWithHandler (
           "\"" <<
           std::endl;
 
-//         gWaeHandler->waeTrace ( // JMI v0.9.67
+//         gWaeHandler->waeTraceWithoutLocationDetails ( // JMI v0.9.67
 //           __FILE__, __LINE__,
 //           ss.str ());
       }
@@ -365,7 +365,7 @@ mfMusicformatsErrorKind convertMsdlStream2brailleWithHandler (
           "convertMsdlStream2brailleWithHandler() output goes to standard output" <<
           std::endl;
 
-//         gWaeHandler->waeTrace ( // JMI v0.9.67
+//         gWaeHandler->waeTraceWithoutLocationDetails ( // JMI v0.9.67
 //           __FILE__, __LINE__,
 //           ss.str ());
       }
@@ -399,7 +399,7 @@ mfMusicformatsErrorKind convertMsdlStream2brailleWithHandler (
           "\"" <<
           std::endl;
 
-//         gWaeHandler->waeTrace ( // JMI v0.9.67
+//         gWaeHandler->waeTraceWithoutLocationDetails ( // JMI v0.9.67
 //           __FILE__, __LINE__,
 //           ss.str ());
       }
@@ -463,7 +463,7 @@ mfMusicformatsErrorKind convertMsdlStream2brailleWithHandler (
           gLanguage->closingMusicXMLFile (outputFileName) <<
           std::endl;
 
-        gWaeHandler->waeTrace (
+        gWaeHandler->waeTraceWithoutLocationDetails (
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -531,7 +531,7 @@ mfMusicformatsErrorKind convertMsdlStream2brailleWithOptionsAndArguments (
       ", insiderOption: " << insiderOption <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }

@@ -97,7 +97,7 @@ static mfMusicformatsErrorKind sxmlFile2lilypondWithHandler (
       "<!-- ----------------------------------------------------------- -->" <<
       std::endl << std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -294,7 +294,7 @@ else {
       "\"" <<
       std::endl;
 
-//     gWaeHandler->waeTrace ( JMI v0.9.67
+//     gWaeHandler->waeTraceWithoutLocationDetails ( JMI v0.9.67
 //       __FILE__, __LINE__,
 //       ss.str ());
   }
@@ -307,7 +307,7 @@ else {
         "xmlFile2lilypond() output goes to standard output" <<
         std::endl;
 
-//     gWaeHandler->waeTrace ( JMI v0.9.67
+//     gWaeHandler->waeTraceWithoutLocationDetails ( JMI v0.9.67
 //       __FILE__, __LINE__,
 //       ss.str ());
     }
@@ -349,7 +349,7 @@ else {
         "\"" <<
         std::endl;
 
-//     gWaeHandler->waeTrace ( JMI v0.9.67
+//     gWaeHandler->waeTraceWithoutLocationDetails ( JMI v0.9.67
 //       __FILE__, __LINE__,
 //       ss.str ());
     }
@@ -363,7 +363,7 @@ else {
         gLanguage->openingLilypondFileForWriting (outputFileName) <<
         std::endl;
 
-//     gWaeHandler->waeTrace ( JMI v0.9.67
+//     gWaeHandler->waeTraceWithoutLocationDetails ( JMI v0.9.67
 //       __FILE__, __LINE__,
 //       ss.str ());
     }
@@ -425,7 +425,7 @@ else {
         gLanguage->closingLilypondFile (outputFileName) <<
         std::endl;
 
-      gWaeHandler->waeTrace (
+      gWaeHandler->waeTraceWithoutLocationDetails (
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -514,7 +514,7 @@ static mfMusicformatsErrorKind xmlFile2lilypondWithOptionsAndArguments (
       ", insiderOption: " << insiderOption <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }

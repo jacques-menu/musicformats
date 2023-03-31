@@ -63,12 +63,12 @@ EXP void msrWarning (
   int                inputLineNumber,
   const std::string& message);
 
-EXP void msrWarningWithMeasureInfo (
+EXP void msrWarningWithLocationDetails (
   const std::string& inputSourceName,
   int                inputLineNumber,
-  const std::string& message,
-  const std::string  measureNumber,
-  int                scoreMeasuresNumber);
+  const std::string& message);
+//   const std::string  measureNumber,
+//   int                scoreMeasuresNumber);
 
 //______________________________________________________________________________
 EXP void msrError (
@@ -78,14 +78,14 @@ EXP void msrError (
   int                sourceCodeLineNumber,
   const std::string& message);
 
-EXP void msrErrorWithMeasureInfo (
+EXP void msrErrorWithLocationDetails (
   const std::string& inputSourceName,
   int                inputLineNumber,
   const std::string& sourceCodeFileName,
   int                sourceCodeLineNumber,
-  const std::string& message,
-  const std::string  measureNumber,
-  int                scoreMeasuresNumber);
+  const std::string& message);
+//   const std::string  measureNumber,
+//   int                scoreMeasuresNumber);
 
 //______________________________________________________________________________
 EXP void msrUnsupported (
@@ -101,12 +101,12 @@ EXP void msrInternalWarning (
   int                inputLineNumber,
   const std::string& message);
 
-EXP void msrInternalWarningWithMeasureInfo (
+EXP void msrInternalWarningWithLocationDetails (
   const std::string& inputSourceName,
   int                inputLineNumber,
-  const std::string& message,
-  const std::string  measureNumber,
-  int                scoreMeasuresNumber);
+  const std::string& message);
+//   const std::string  measureNumber,
+//   int                scoreMeasuresNumber);
 
 //______________________________________________________________________________
 EXP void msrInternalError (
@@ -116,14 +116,14 @@ EXP void msrInternalError (
   int                sourceCodeLineNumber,
   const std::string& message);
 
-EXP void msrInternalErrorWithMeasureInfo (
+EXP void msrInternalErrorWithLocationDetails (
   const std::string& inputSourceName,
   int                inputLineNumber,
   const std::string& sourceCodeFileName,
   int                sourceCodeLineNumber,
-  const std::string& message,
-  const std::string  measureNumber,
-  int                scoreMeasuresNumber);
+  const std::string& message);
+//   const std::string  measureNumber,
+//   int                scoreMeasuresNumber);
 
 
 }

@@ -69,7 +69,7 @@ void msdl2lilypondManPageGenerateAtom::applyValueLessAtom (std::ostream& os)
       "==> option '" << fetchNames () << "' is a msdl2lilypondManPageGenerateAtom" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -88,7 +88,7 @@ void msdl2lilypondManPageGenerateAtom::acceptIn (basevisitor* v)
       ".\\\" ==> msdl2lilypondManPageGenerateAtom::acceptIn ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -107,7 +107,7 @@ void msdl2lilypondManPageGenerateAtom::acceptIn (basevisitor* v)
             ".\\\" ==> Launching msdl2lilypondManPageGenerateAtom::visitStart ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -126,7 +126,7 @@ void msdl2lilypondManPageGenerateAtom::acceptOut (basevisitor* v)
       ".\\\" ==> msdl2lilypondManPageGenerateAtom::acceptOut ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -145,7 +145,7 @@ void msdl2lilypondManPageGenerateAtom::acceptOut (basevisitor* v)
             ".\\\" ==> Launching msdl2lilypondManPageGenerateAtom::visitEnd ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -164,7 +164,7 @@ void msdl2lilypondManPageGenerateAtom::browseData (basevisitor* v)
       ".\\\" ==> msdl2lilypondManPageGenerateAtom::browseData ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -343,7 +343,7 @@ void msdl2lilypondManPageOahGroup::acceptIn (basevisitor* v)
       ".\\\" ==> msdl2lilypondManPageOahGroup::acceptIn ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -362,7 +362,7 @@ void msdl2lilypondManPageOahGroup::acceptIn (basevisitor* v)
             ".\\\" ==> Launching msdl2lilypondManPageOahGroup::visitStart ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -381,7 +381,7 @@ void msdl2lilypondManPageOahGroup::acceptOut (basevisitor* v)
       ".\\\" ==> msdl2lilypondManPageOahGroup::acceptOut ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -400,7 +400,7 @@ void msdl2lilypondManPageOahGroup::acceptOut (basevisitor* v)
             ".\\\" ==> Launching msdl2lilypondManPageOahGroup::visitEnd ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -419,7 +419,7 @@ void msdl2lilypondManPageOahGroup::browseData (basevisitor* v)
       ".\\\" ==> msdl2lilypondManPageOahGroup::browseData ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -464,7 +464,7 @@ S_msdl2lilypondManPageOahGroup createGlobalMsdl2lyManPageOahGroup (
       "Creating global msdl2lilypondManpage OAH group" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }

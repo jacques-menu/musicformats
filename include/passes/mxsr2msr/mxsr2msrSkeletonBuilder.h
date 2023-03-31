@@ -611,7 +611,7 @@ class EXP mxsr2msrSkeletonBuilder :
 
     std::string               fCurrentMeasureNumber;
 
-    int                       fScoreNumberOfMeasures;
+    int                       fScoreMeasuresNumber;
     int                       fPartNumberOfMeasures;
 
 

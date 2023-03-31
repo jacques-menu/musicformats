@@ -70,7 +70,7 @@ void extraDisplayAllHarmoniesStructuresAtom::applyValueLessAtom (std::ostream& o
       "==> option '" << fetchNames () << "' is a extraDisplayAllHarmoniesStructuresAtom" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -106,7 +106,7 @@ void extraDisplayAllHarmoniesStructuresAtom::acceptIn (basevisitor* v)
       ".\\\" ==> extraDisplayAllHarmoniesStructuresAtom::acceptIn ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -125,7 +125,7 @@ void extraDisplayAllHarmoniesStructuresAtom::acceptIn (basevisitor* v)
             ".\\\" ==> Launching extraDisplayAllHarmoniesStructuresAtom::visitStart ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -144,7 +144,7 @@ void extraDisplayAllHarmoniesStructuresAtom::acceptOut (basevisitor* v)
       ".\\\" ==> extraDisplayAllHarmoniesStructuresAtom::acceptOut ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -163,7 +163,7 @@ void extraDisplayAllHarmoniesStructuresAtom::acceptOut (basevisitor* v)
             ".\\\" ==> Launching extraDisplayAllHarmoniesStructuresAtom::visitEnd ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -182,7 +182,7 @@ void extraDisplayAllHarmoniesStructuresAtom::browseData (basevisitor* v)
       ".\\\" ==> extraDisplayAllHarmoniesStructuresAtom::browseData ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -285,7 +285,7 @@ void extraDisplayAllHarmoniesContentsAtom::applyAtomWithValue (
       "==> oahAtom is of type 'extraDisplayAllHarmoniesContentsAtom'" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -303,7 +303,7 @@ void extraDisplayAllHarmoniesContentsAtom::applyAtomWithValue (
       ", theString = \"" << theString << "\"" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -391,7 +391,7 @@ void extraDisplayAllHarmoniesContentsAtom::acceptIn (basevisitor* v)
       ".\\\" ==> extraDisplayAllHarmoniesContentsAtom::acceptIn ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -410,7 +410,7 @@ void extraDisplayAllHarmoniesContentsAtom::acceptIn (basevisitor* v)
             ".\\\" ==> Launching extraDisplayAllHarmoniesContentsAtom::visitStart ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -429,7 +429,7 @@ void extraDisplayAllHarmoniesContentsAtom::acceptOut (basevisitor* v)
       ".\\\" ==> extraDisplayAllHarmoniesContentsAtom::acceptOut ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -448,7 +448,7 @@ void extraDisplayAllHarmoniesContentsAtom::acceptOut (basevisitor* v)
             ".\\\" ==> Launching extraDisplayAllHarmoniesContentsAtom::visitEnd ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -467,7 +467,7 @@ void extraDisplayAllHarmoniesContentsAtom::browseData (basevisitor* v)
       ".\\\" ==> extraDisplayAllHarmoniesContentsAtom::browseData ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -574,7 +574,7 @@ void extraDisplayHarmonyDetailsAtom::applyAtomWithValue (
       "==> oahAtom is of type 'extraDisplayHarmonyDetailsAtom'" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -591,7 +591,7 @@ void extraDisplayHarmonyDetailsAtom::applyAtomWithValue (
       ", theString = \"" << theString << "\"" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -623,7 +623,7 @@ void extraDisplayHarmonyDetailsAtom::applyAtomWithValue (
       "'" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -669,7 +669,7 @@ void extraDisplayHarmonyDetailsAtom::applyAtomWithValue (
       "--> harmonyName = \"" << harmonyName << "\"" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -764,7 +764,7 @@ void extraDisplayHarmonyDetailsAtom::acceptIn (basevisitor* v)
       ".\\\" ==> extraDisplayHarmonyDetailsAtom::acceptIn ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -783,7 +783,7 @@ void extraDisplayHarmonyDetailsAtom::acceptIn (basevisitor* v)
             ".\\\" ==> Launching extraDisplayHarmonyDetailsAtom::visitStart ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -802,7 +802,7 @@ void extraDisplayHarmonyDetailsAtom::acceptOut (basevisitor* v)
       ".\\\" ==> extraDisplayHarmonyDetailsAtom::acceptOut ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -821,7 +821,7 @@ void extraDisplayHarmonyDetailsAtom::acceptOut (basevisitor* v)
             ".\\\" ==> Launching extraDisplayHarmonyDetailsAtom::visitEnd ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -840,7 +840,7 @@ void extraDisplayHarmonyDetailsAtom::browseData (basevisitor* v)
       ".\\\" ==> extraDisplayHarmonyDetailsAtom::browseData ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -926,7 +926,7 @@ void extraDisplayHarmonyAnalysisAtom::applyAtomWithValue (
       "==> oahAtom is of type 'extraDisplayHarmonyAnalysisAtom'" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -944,7 +944,7 @@ void extraDisplayHarmonyAnalysisAtom::applyAtomWithValue (
       ", theString = \"" << theString << "\"" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -978,7 +978,7 @@ void extraDisplayHarmonyAnalysisAtom::applyAtomWithValue (
       "'" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1042,7 +1042,7 @@ void extraDisplayHarmonyAnalysisAtom::applyAtomWithValue (
       "--> inversion: " << inversion <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1151,7 +1151,7 @@ void extraDisplayHarmonyAnalysisAtom::acceptIn (basevisitor* v)
       ".\\\" ==> extraDisplayHarmonyAnalysisAtom::acceptIn ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1170,7 +1170,7 @@ void extraDisplayHarmonyAnalysisAtom::acceptIn (basevisitor* v)
             ".\\\" ==> Launching extraDisplayHarmonyAnalysisAtom::visitStart ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -1189,7 +1189,7 @@ void extraDisplayHarmonyAnalysisAtom::acceptOut (basevisitor* v)
       ".\\\" ==> extraDisplayHarmonyAnalysisAtom::acceptOut ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1208,7 +1208,7 @@ void extraDisplayHarmonyAnalysisAtom::acceptOut (basevisitor* v)
             ".\\\" ==> Launching extraDisplayHarmonyAnalysisAtom::visitEnd ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -1227,7 +1227,7 @@ void extraDisplayHarmonyAnalysisAtom::browseData (basevisitor* v)
       ".\\\" ==> extraDisplayHarmonyAnalysisAtom::browseData ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1440,7 +1440,7 @@ void harmoniesExtraOahGroup::acceptIn (basevisitor* v)
       ".\\\" ==> harmoniesExtraOahGroup::acceptIn ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1459,7 +1459,7 @@ void harmoniesExtraOahGroup::acceptIn (basevisitor* v)
             ".\\\" ==> Launching harmoniesExtraOahGroup::visitStart ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -1478,7 +1478,7 @@ void harmoniesExtraOahGroup::acceptOut (basevisitor* v)
       ".\\\" ==> harmoniesExtraOahGroup::acceptOut ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1497,7 +1497,7 @@ void harmoniesExtraOahGroup::acceptOut (basevisitor* v)
             ".\\\" ==> Launching harmoniesExtraOahGroup::visitEnd ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -1516,7 +1516,7 @@ void harmoniesExtraOahGroup::browseData (basevisitor* v)
       ".\\\" ==> harmoniesExtraOahGroup::browseData ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1573,7 +1573,7 @@ S_harmoniesExtraOahGroup createGlobalHarmoniesExtraOahGroup ()
       "Creating global extra OAH group" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }

@@ -69,7 +69,7 @@ oahRegularHandler::oahRegularHandler (
       "\"" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -97,7 +97,7 @@ void oahRegularHandler::initializeOahRegularHandler ()
       "\"" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -156,7 +156,7 @@ void oahRegularHandler::appendGroupToRegulalHandler (
       "\"" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -201,7 +201,7 @@ void oahRegularHandler::prependGroupToRegularHandler (
       "\"" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -248,7 +248,7 @@ void oahRegularHandler::registerAtomInRegularSubgroup (
         std::endl;
       --gIndenter;
 
-      gWaeHandler->waeTrace (
+      gWaeHandler->waeTraceWithoutLocationDetails (
         __FILE__, __LINE__,
         ss.str ());
     }

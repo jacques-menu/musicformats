@@ -2696,7 +2696,7 @@ void traceOahGroup::acceptIn (basevisitor* v)
       ".\\\" ==> traceOahGroup::acceptIn ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2715,7 +2715,7 @@ void traceOahGroup::acceptIn (basevisitor* v)
             ".\\\" ==> Launching traceOahGroup::visitStart ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -2734,7 +2734,7 @@ void traceOahGroup::acceptOut (basevisitor* v)
       ".\\\" ==> traceOahGroup::acceptOut ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2753,7 +2753,7 @@ void traceOahGroup::acceptOut (basevisitor* v)
             ".\\\" ==> Launching traceOahGroup::visitEnd ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -2772,7 +2772,7 @@ void traceOahGroup::browseData (basevisitor* v)
       ".\\\" ==> traceOahGroup::browseData ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }

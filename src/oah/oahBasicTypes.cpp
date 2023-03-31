@@ -1029,7 +1029,7 @@ void oahPrefix::acceptIn (basevisitor* v)
       ".\\\" ==> oahPrefix::acceptIn ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1048,7 +1048,7 @@ void oahPrefix::acceptIn (basevisitor* v)
             ".\\\" ==> Launching oahPrefix::visitStart ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -1067,7 +1067,7 @@ void oahPrefix::acceptOut (basevisitor* v)
       ".\\\" ==> oahPrefix::acceptOut ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1086,7 +1086,7 @@ void oahPrefix::acceptOut (basevisitor* v)
             ".\\\" ==> Launching oahPrefix::visitEnd ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -1105,7 +1105,7 @@ void oahPrefix::browseData (basevisitor* v)
       ".\\\" ==> oahPrefix::browseData ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1342,7 +1342,7 @@ void oahAtom::appendAtomToElementsList (
         "\"" <<
         std::endl;
 
-      gWaeHandler->waeTrace (
+      gWaeHandler->waeTraceWithoutLocationDetails (
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -1419,7 +1419,7 @@ void oahAtom::acceptIn (basevisitor* v)
       ".\\\" ==> oahAtom::acceptIn ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1438,7 +1438,7 @@ void oahAtom::acceptIn (basevisitor* v)
             ".\\\" ==> Launching oahAtom::visitStart ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -1457,7 +1457,7 @@ void oahAtom::acceptOut (basevisitor* v)
       ".\\\" ==> oahAtom::acceptOut ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1476,7 +1476,7 @@ void oahAtom::acceptOut (basevisitor* v)
             ".\\\" ==> Launching oahAtom::visitEnd ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -1495,7 +1495,7 @@ void oahAtom::browseData (basevisitor* v)
       ".\\\" ==> oahAtom::browseData ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1641,7 +1641,7 @@ void oahValueLessAtom::acceptIn (basevisitor* v)
       ".\\\" ==> oahValueLessAtom::acceptIn ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1660,7 +1660,7 @@ void oahValueLessAtom::acceptIn (basevisitor* v)
             ".\\\" ==> Launching oahValueLessAtom::visitStart ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -1679,7 +1679,7 @@ void oahValueLessAtom::acceptOut (basevisitor* v)
       ".\\\" ==> oahValueLessAtom::acceptOut ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1698,7 +1698,7 @@ void oahValueLessAtom::acceptOut (basevisitor* v)
             ".\\\" ==> Launching oahValueLessAtom::visitEnd ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -1717,7 +1717,7 @@ void oahValueLessAtom::browseData (basevisitor* v)
       ".\\\" ==> oahValueLessAtom::browseData ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1808,7 +1808,7 @@ void oahValueFittedAtom::acceptIn (basevisitor* v)
       ".\\\" ==> oahValueFittedAtom::acceptIn ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1827,7 +1827,7 @@ void oahValueFittedAtom::acceptIn (basevisitor* v)
             ".\\\" ==> Launching oahValueFittedAtom::visitStart ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -1846,7 +1846,7 @@ void oahValueFittedAtom::acceptOut (basevisitor* v)
       ".\\\" ==> oahValueFittedAtom::acceptOut ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1865,7 +1865,7 @@ void oahValueFittedAtom::acceptOut (basevisitor* v)
             ".\\\" ==> Launching oahValueFittedAtom::visitEnd ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -1884,7 +1884,7 @@ void oahValueFittedAtom::browseData (basevisitor* v)
       ".\\\" ==> oahValueFittedAtom::browseData ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1991,7 +1991,7 @@ void oahAtomImplicitlySettingAVariable::acceptIn (basevisitor* v)
       ".\\\" ==> oahAtomImplicitlySettingAVariable::acceptIn ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2010,7 +2010,7 @@ void oahAtomImplicitlySettingAVariable::acceptIn (basevisitor* v)
             ".\\\" ==> Launching oahAtomImplicitlySettingAVariable::visitStart ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -2029,7 +2029,7 @@ void oahAtomImplicitlySettingAVariable::acceptOut (basevisitor* v)
       ".\\\" ==> oahAtomImplicitlySettingAVariable::acceptOut ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2048,7 +2048,7 @@ void oahAtomImplicitlySettingAVariable::acceptOut (basevisitor* v)
             ".\\\" ==> Launching oahAtomImplicitlySettingAVariable::visitEnd ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -2067,7 +2067,7 @@ void oahAtomImplicitlySettingAVariable::browseData (basevisitor* v)
       ".\\\" ==> oahAtomImplicitlySettingAVariable::browseData ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2454,7 +2454,7 @@ void oahAtomStoringAValue::acceptIn (basevisitor* v)
       ".\\\" ==> oahAtomStoringAValue::acceptIn ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2473,7 +2473,7 @@ void oahAtomStoringAValue::acceptIn (basevisitor* v)
             ".\\\" ==> Launching oahAtomStoringAValue::visitStart ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -2492,7 +2492,7 @@ void oahAtomStoringAValue::acceptOut (basevisitor* v)
       ".\\\" ==> oahAtomStoringAValue::acceptOut ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2511,7 +2511,7 @@ void oahAtomStoringAValue::acceptOut (basevisitor* v)
             ".\\\" ==> Launching oahAtomStoringAValue::visitEnd ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -2530,7 +2530,7 @@ void oahAtomStoringAValue::browseData (basevisitor* v)
       ".\\\" ==> oahAtomStoringAValue::browseData ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2700,7 +2700,7 @@ void oahPureHelpValueLessAtom::acceptIn (basevisitor* v)
       ".\\\" ==> oahPureHelpValueLessAtom::acceptIn ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2719,7 +2719,7 @@ void oahPureHelpValueLessAtom::acceptIn (basevisitor* v)
             ".\\\" ==> Launching oahPureHelpValueLessAtom::visitStart ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -2738,7 +2738,7 @@ void oahPureHelpValueLessAtom::acceptOut (basevisitor* v)
       ".\\\" ==> oahPureHelpValueLessAtom::acceptOut ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2757,7 +2757,7 @@ void oahPureHelpValueLessAtom::acceptOut (basevisitor* v)
             ".\\\" ==> Launching oahPureHelpValueLessAtom::visitEnd ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -2776,7 +2776,7 @@ void oahPureHelpValueLessAtom::browseData (basevisitor* v)
       ".\\\" ==> oahPureHelpValueLessAtom::browseData ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2870,7 +2870,7 @@ void oahPureHelpValueFittedAtom::acceptIn (basevisitor* v)
       ".\\\" ==> oahPureHelpValueFittedAtom::acceptIn ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2889,7 +2889,7 @@ void oahPureHelpValueFittedAtom::acceptIn (basevisitor* v)
             ".\\\" ==> Launching oahPureHelpValueFittedAtom::visitStart ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -2908,7 +2908,7 @@ void oahPureHelpValueFittedAtom::acceptOut (basevisitor* v)
       ".\\\" ==> oahPureHelpValueFittedAtom::acceptOut ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2927,7 +2927,7 @@ void oahPureHelpValueFittedAtom::acceptOut (basevisitor* v)
             ".\\\" ==> Launching oahPureHelpValueFittedAtom::visitEnd ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -2946,7 +2946,7 @@ void oahPureHelpValueFittedAtom::browseData (basevisitor* v)
       ".\\\" ==> oahPureHelpValueFittedAtom::browseData ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -3106,7 +3106,7 @@ void oahSubGroup::appendSubGroupToElementsList (
       "\"" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -3153,7 +3153,7 @@ void oahSubGroup::registerNamesInSubGroupToTheNamesToElementsMap (
       "\"" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -3260,7 +3260,7 @@ void oahSubGroup::applySubGroup (std::ostream& os)
       ", which is a oahSubGroup" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -3304,7 +3304,7 @@ void oahSubGroup::acceptIn (basevisitor* v)
       ".\\\" ==> oahSubGroup::acceptIn ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -3323,7 +3323,7 @@ void oahSubGroup::acceptIn (basevisitor* v)
             ".\\\" ==> Launching oahSubGroup::visitStart ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -3342,7 +3342,7 @@ void oahSubGroup::acceptOut (basevisitor* v)
       ".\\\" ==> oahSubGroup::acceptOut ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -3361,7 +3361,7 @@ void oahSubGroup::acceptOut (basevisitor* v)
             ".\\\" ==> Launching oahSubGroup::visitEnd ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -3381,7 +3381,7 @@ void oahSubGroup::browseData (basevisitor* v)
       ", " << fSubGroupHeader <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -4169,7 +4169,7 @@ void oahGroup::appendGroupToElementsList (
       "\"" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -4225,7 +4225,7 @@ void oahGroup::registerNamesInGroupToTheNamesToElementsMap (
       "\"" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -4319,7 +4319,7 @@ void oahGroup::applyGroup (std::ostream& os)
       "', which is a oahGroup" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -4384,7 +4384,7 @@ void oahGroup::checkGroupSubGroupsOptionsConsistency ()
       "\"" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -4423,7 +4423,7 @@ void oahGroup::acceptIn (basevisitor* v)
       ".\\\" ==> oahGroup::acceptIn ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -4442,7 +4442,7 @@ void oahGroup::acceptIn (basevisitor* v)
             ".\\\" ==> Launching oahGroup::visitStart ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -4461,7 +4461,7 @@ void oahGroup::acceptOut (basevisitor* v)
       ".\\\" ==> oahGroup::acceptOut ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -4480,7 +4480,7 @@ void oahGroup::acceptOut (basevisitor* v)
             ".\\\" ==> Launching oahGroup::visitEnd ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -4500,7 +4500,7 @@ void oahGroup::browseData (basevisitor* v)
       ", " << fGroupHeader <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -5140,7 +5140,7 @@ void oahHandler::initializeHandler ()
       "\"" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -5231,7 +5231,7 @@ void oahHandler::registerElementNamesInHandler (
         "\"" <<
         std::endl;
 
-      gWaeHandler->waeTrace (
+      gWaeHandler->waeTraceWithoutLocationDetails (
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -5415,7 +5415,7 @@ void oahHandler::registerNamesInHandlerToTheNamesToElementsMap ()
       "\" in its names to elements map" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -5453,7 +5453,7 @@ void oahHandler::registerNamesInHandlerToTheNamesToElementsMap ()
         "\" have been registered in the names to elements map" <<
         std::endl;
 
-      gWaeHandler->waeTrace (
+      gWaeHandler->waeTraceWithoutLocationDetails (
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -5481,7 +5481,7 @@ void oahHandler::appendElementToElementsList (
         "\"" <<
         std::endl;
 
-      gWaeHandler->waeTrace (
+      gWaeHandler->waeTraceWithoutLocationDetails (
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -5563,7 +5563,7 @@ void oahHandler::checkOptionsAndArgumentsConsistency ()
         fHandlerServiceName <<
         std::endl;
 
-      gWaeHandler->waeTrace (
+      gWaeHandler->waeTraceWithoutLocationDetails (
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -5584,7 +5584,7 @@ void oahHandler::createTheCommonPrefixes ()
       "\"" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -5642,7 +5642,7 @@ void oahHandler::checkNoInputSourceInArgumentsVector () const
       "\"" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -5736,7 +5736,7 @@ void oahHandler::checkNoOrOneInputSourceInArgumentsVector () const
       "\"" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -5857,7 +5857,7 @@ void oahHandler::checkSingleInputSourceInArgumentsVector () const
       "\"" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -5971,7 +5971,7 @@ void oahHandler::setOahHandlerFoundAHelpOption (
       context <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -6006,7 +6006,7 @@ void oahHandler::checkHandlerOptionsConsistency ()
       "\"" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -6202,7 +6202,7 @@ void oahHandler::acceptIn (basevisitor* v)
       ".\\\" ==> oahHandler::acceptIn ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -6221,7 +6221,7 @@ void oahHandler::acceptIn (basevisitor* v)
             ".\\\" ==> Launching oahHandler::visitStart ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -6240,7 +6240,7 @@ void oahHandler::acceptOut (basevisitor* v)
       ".\\\" ==> oahHandler::acceptOut ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -6259,7 +6259,7 @@ void oahHandler::acceptOut (basevisitor* v)
             ".\\\" ==> Launching oahHandler::visitEnd ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -6278,7 +6278,7 @@ void oahHandler::browseData (basevisitor* v)
       ".\\\" ==> oahHandler::browseData ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -6662,7 +6662,7 @@ void oahHandler::printHandlerAndGroupAndSubGroupSpecificHelp (
       "oahHandler::printHandlerAndGroupAndSubGroupSpecificHelp" <<
       std::endl;
 
-//     gWaeHandler->waeTrace ( JMI v0.9.67
+//     gWaeHandler->waeTraceWithoutLocationDetails ( JMI v0.9.67
 //       __FILE__, __LINE__,
 //       ss.str ());
   }
@@ -6711,7 +6711,7 @@ void oahHandler::printNameIntrospectiveHelp (
       "\"" <<
       std::endl;
 
-//     gWaeHandler->waeTrace ( JMI v0.9.67
+//     gWaeHandler->waeTraceWithoutLocationDetails ( JMI v0.9.67
 //       __FILE__, __LINE__,
 //       ss.str ());
   }
@@ -6924,7 +6924,7 @@ Bool oahHandler::findStringInFindableElement (
       "\"" <<
       std::endl;
 
-//     gWaeHandler->waeTrace ( JMI v0.9.67
+//     gWaeHandler->waeTraceWithoutLocationDetails ( JMI v0.9.67
 //       __FILE__, __LINE__,
 //       ss.str ());
   }
@@ -7017,7 +7017,7 @@ void oahHandler::includeOptionsFileInHandler (
       "\"" <<
       std::endl;
 
-//     gWaeHandler->waeTrace ( JMI v0.9.67
+//     gWaeHandler->waeTraceWithoutLocationDetails ( JMI v0.9.67
 //       __FILE__, __LINE__,
 //       ss.str ());
   }
@@ -7026,7 +7026,7 @@ void oahHandler::includeOptionsFileInHandler (
   // open options file
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getEarlyTracePasses ()) {
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       gLanguage->openingOptionsFileForReading (optionsFileName));
   }
@@ -7060,7 +7060,7 @@ void oahHandler::includeOptionsFileInHandler (
   // close options file
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getEarlyTracePasses ()) {
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       gLanguage->closingOptionsFile (optionsFileName));
   }
@@ -7112,7 +7112,7 @@ void oahHandler::printHandlerOptionsValues (
       " in the command line" <<
       std::endl;
 
-//     gWaeHandler->waeTrace ( JMI v0.9.67
+//     gWaeHandler->waeTraceWithoutLocationDetails ( JMI v0.9.67
 //       __FILE__, __LINE__,
 //       ss.str ());
   }
@@ -7218,7 +7218,7 @@ void oahHandler::printHandlerOptionsValuesAll (
       " in the command line" <<
       std::endl;
 
-//     gWaeHandler->waeTrace ( JMI v0.9.67
+//     gWaeHandler->waeTraceWithoutLocationDetails ( JMI v0.9.67
 //       __FILE__, __LINE__,
 //       ss.str ());
   }
@@ -7349,7 +7349,7 @@ void oahHandler::registerPrefixInHandler (
       "\"" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -7424,7 +7424,7 @@ void oahHandler::appendGroupToHandler (
       "\"" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -7465,7 +7465,7 @@ void oahHandler::prependGroupToHandler (
       "\"" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -7803,7 +7803,7 @@ void oahHandler::checkMissingPendingArgvValueFittedAtomValue (
         fElementValueKind) <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -7897,7 +7897,7 @@ void oahHandler::checkMissingPendingArgvValueFittedAtomValue (
         "\"" <<
         std::endl;
 
-      gWaeHandler->waeTrace (
+      gWaeHandler->waeTraceWithoutLocationDetails (
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -7919,7 +7919,7 @@ void oahHandler::checkMissingPendingArgvValueFittedAtomValue (
         "\"" <<
         std::endl;
 
-      gWaeHandler->waeTrace (
+      gWaeHandler->waeTraceWithoutLocationDetails (
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -7952,7 +7952,7 @@ void oahHandler::registerOahElementUse (
       ", valueUsed: \"" << valueUsed << "\"" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -7995,7 +7995,7 @@ void oahHandler::registerOahElementUse (
         " leads to include this options and arguments file now" <<
         std::endl;
 
-      gWaeHandler->waeTrace (
+      gWaeHandler->waeTraceWithoutLocationDetails (
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -8052,7 +8052,7 @@ void oahHandler::registerOahElementUseInLaunchCommand (
       " in command line" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -8225,7 +8225,7 @@ void oahHandler::handleOptionPrefixName (
       ", stringAfterEqualsSign = \"" << stringAfterEqualsSign << "\"" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -8303,7 +8303,7 @@ void oahHandler::handleOptionPrefixName (
             "\"" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -8347,7 +8347,7 @@ Bool oahHandler::isNameASingleCharacterOptionsCluster (
       "\" is a single-character options cluster" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -8381,7 +8381,7 @@ Bool oahHandler::isNameASingleCharacterOptionsCluster (
         "Considering single-character '" << singleCharacterString << "'" <<
         std::endl;
 
-      gWaeHandler->waeTrace (
+      gWaeHandler->waeTraceWithoutLocationDetails (
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -8475,7 +8475,7 @@ Bool oahHandler::isNameASingleCharacterOptionsCluster (
       "optionNameSize: " << optionNameSize <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -8523,7 +8523,7 @@ Bool oahHandler::isNameASingleCharacterOptionsCluster (
         "\" is no single-character options cluster" <<
         std::endl;
 
-      gWaeHandler->waeTrace (
+      gWaeHandler->waeTraceWithoutLocationDetails (
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -8561,7 +8561,7 @@ void oahHandler::handleNameContainingEqualSign (
       ", stringAfterEqualsSign = \"" << stringAfterEqualsSign << "\"" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -8585,7 +8585,7 @@ void oahHandler::handleNameContainingEqualSign (
         "\" is a prefix" <<
         std::endl;
 
-      gWaeHandler->waeTrace (
+      gWaeHandler->waeTraceWithoutLocationDetails (
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -8625,7 +8625,7 @@ void oahHandler::handleNameContainingEqualSign (
             "\" is a stringWithDefaultValueAtom" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -8671,7 +8671,7 @@ void oahHandler::handleOptionsVectorOptionName (
       "\"" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -8738,7 +8738,7 @@ std::string oahHandler::handleArgvOptionName (
       "\"" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -8781,7 +8781,7 @@ std::string oahHandler::handleArgvOptionName (
           "\"" << currentOptionName << "\" is a double-dashed option" <<
           std::endl;
 
-        gWaeHandler->waeTrace (
+        gWaeHandler->waeTraceWithoutLocationDetails (
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -8801,7 +8801,7 @@ std::string oahHandler::handleArgvOptionName (
         "\"" << currentOptionName << "\" is a single-dashed option" <<
         std::endl;
 
-      gWaeHandler->waeTrace (
+      gWaeHandler->waeTraceWithoutLocationDetails (
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -8833,7 +8833,7 @@ void oahHandler::handleOptionNameAndValueAtTopOahLevel (
       optionValue << ']' <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -8946,7 +8946,7 @@ void oahHandler::handleArgvOptionValueOrArgument (
         "\" in argv is \"" << theString << "\"" <<
         std::endl;
 
-      gWaeHandler->waeTrace (
+      gWaeHandler->waeTraceWithoutLocationDetails (
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -8983,7 +8983,7 @@ void oahHandler::handleArgvOptionValueOrArgument (
         "handleArgvOptionValueOrArgument() Forgetting about the pending value-fitted atom" <<
         std::endl;
 
-      gWaeHandler->waeTrace (
+      gWaeHandler->waeTraceWithoutLocationDetails (
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -9004,7 +9004,7 @@ void oahHandler::handleArgvOptionValueOrArgument (
           "\"" << theString << "\" is an argument" <<
           std::endl;
 
-        gWaeHandler->waeTrace (
+        gWaeHandler->waeTraceWithoutLocationDetails (
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -9075,7 +9075,7 @@ oahElementHelpOnlyKind oahHandler::handleOptionsFromOptionsAndArguments (
       ", serviceName: " << serviceName <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -9111,7 +9111,7 @@ oahElementHelpOnlyKind oahHandler::handleOptionsFromOptionsAndArguments (
       oahElementHelpOnlyKindAsString (result) <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -9154,7 +9154,7 @@ oahElementHelpOnlyKind oahHandler::handleOptionsAndArgumentsFromArgcArgv (
       "\"" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -9207,7 +9207,7 @@ oahElementHelpOnlyKind oahHandler::handleOptionsAndArgumentsFromArgcArgv (
       ", fHandlerServiceName: " << fHandlerServiceName <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -9235,7 +9235,7 @@ oahElementHelpOnlyKind oahHandler::handleOptionsAndArgumentsFromArgcArgv (
       oahElementHelpOnlyKindAsString (result) <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -9267,7 +9267,7 @@ void oahHandler::createElementUsesListFromOptionsAndArguments (
       "\"" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -9390,7 +9390,7 @@ void oahHandler::createElementUsesListFromArgcArgv (
         "\"" <<
         std::endl;
 
-      gWaeHandler->waeTrace (
+      gWaeHandler->waeTraceWithoutLocationDetails (
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -9463,7 +9463,7 @@ void oahHandler::createElementUsesListFromArgcArgv (
       ']' <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -9485,7 +9485,7 @@ void oahHandler::createElementUsesListFromArgcArgv (
       "\"" << currentString << "\" is the '-' stdin indicator" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -9500,7 +9500,7 @@ void oahHandler::createElementUsesListFromArgcArgv (
               currentString << " is an argument" <<
               std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -9521,7 +9521,7 @@ void oahHandler::createElementUsesListFromArgcArgv (
             currentString << " is an option name" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -9577,7 +9577,7 @@ oahElementHelpOnlyKind oahHandler::applyOptionsFromElementUsesList ()
       fHandlerHeader << "\"" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -9658,7 +9658,7 @@ oahElementHelpOnlyKind oahHandler::applyOptionsFromElementUsesList ()
       "'" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -9957,7 +9957,7 @@ void oahHandler::handleKnownOptionsVectorElement (
       "\"" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -9976,7 +9976,7 @@ void oahHandler::handleKnownOptionsVectorElement (
       element->getDescription () <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -10015,7 +10015,7 @@ void oahHandler::handleKnownOptionsVectorElement (
       "\" in fHandlerCommandLineElementsMultiset" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -10088,7 +10088,7 @@ void oahHandler::handleKnownOptionsVectorElement (
         "\", handling the latter" <<
         std::endl;
 
-      gWaeHandler->waeTrace (
+      gWaeHandler->waeTraceWithoutLocationDetails (
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -10142,7 +10142,7 @@ void oahHandler::handleKnownArgvElement (
       "\"" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -10161,7 +10161,7 @@ void oahHandler::handleKnownArgvElement (
       element->getDescription () <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -10256,7 +10256,7 @@ void oahHandler::handleKnownArgvElement (
         "\", handling the latter" <<
         std::endl;
 
-      gWaeHandler->waeTrace (
+      gWaeHandler->waeTraceWithoutLocationDetails (
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -10304,7 +10304,7 @@ void oahHandler::handleKnownOptionsVectorAtom (
       "\"" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -10368,7 +10368,7 @@ void oahHandler::handleKnownArgvAtom (
       "\"" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -10454,7 +10454,7 @@ void oahHandler::handleUnknownOptionName (
       "\"" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -10563,7 +10563,7 @@ void oahHandler::handleOptionNameCommon (
       "\"" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -10600,7 +10600,7 @@ void oahHandler::handleOptionNameCommon (
       "\"" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -10779,7 +10779,7 @@ void oahHandler::includeOptionsAndArgumentsFile (
       "\"" <<
       std::endl;
 
-//     gWaeHandler->waeTrace ( JMI v0.9.67
+//     gWaeHandler->waeTraceWithoutLocationDetails ( JMI v0.9.67
 //       __FILE__, __LINE__,
 //       ss.str ());
   }
@@ -10812,7 +10812,7 @@ void oahHandler::includeOptionsAndArgumentsFile (
   // open options and arguments file
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       gLanguage->openingIncludeFileForReading (includeFileName));
   }
@@ -10871,7 +10871,7 @@ void oahHandler::includeOptionsFromFile (
       "==> includeOptionsFromFile()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -10891,7 +10891,7 @@ void oahHandler::includeOptionsFromFile (
         "==> currentLine: [" << currentLine << ']' <<
         std::endl;
 
-      gWaeHandler->waeTrace (
+      gWaeHandler->waeTraceWithoutLocationDetails (
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -10910,7 +10910,7 @@ void oahHandler::includeOptionsFromFile (
           "--> currentLine with comment: [" << currentLine << ']' <<
           std::endl;
 
-        gWaeHandler->waeTrace (
+        gWaeHandler->waeTraceWithoutLocationDetails (
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -10928,7 +10928,7 @@ void oahHandler::includeOptionsFromFile (
           "--> currentLine without comment: [" << currentLine << ']' <<
           std::endl;
 
-        gWaeHandler->waeTrace (
+        gWaeHandler->waeTraceWithoutLocationDetails (
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -10947,7 +10947,7 @@ void oahHandler::includeOptionsFromFile (
           "--> trimmed currentLine: [" << currentLine << ']' <<
           std::endl;
 
-        gWaeHandler->waeTrace (
+        gWaeHandler->waeTraceWithoutLocationDetails (
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -10968,7 +10968,7 @@ void oahHandler::includeOptionsFromFile (
             "--> option found: [" << currentLine << ']' <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -11146,7 +11146,7 @@ void oahHandler::includeOptionsFromFile (
             "Found argument [" << currentLine << ']' <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -11238,7 +11238,7 @@ EXP void convertArgcArgvToOptionsAndArguments ( // JMIJMIJMI
         "--> minorNumberValue = \"" << minorNumberValue << "\"" <<
         std::endl;
 
-      gWaeHandler->waeTrace (
+      gWaeHandler->waeTraceWithoutLocationDetails (
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -11283,7 +11283,7 @@ EXP void convertArgcArgvToOptionsAndArguments ( // JMIJMIJMI
 
         ss << std::endl;
 
-        gWaeHandler->waeTrace (
+        gWaeHandler->waeTraceWithoutLocationDetails (
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -11305,7 +11305,7 @@ EXP void convertArgcArgvToOptionsAndArguments ( // JMIJMIJMI
           "--> majorNumberValue = \"" << majorNumberValue << "\", " <<
           std::endl;
 
-        gWaeHandler->waeTrace (
+        gWaeHandler->waeTraceWithoutLocationDetails (
           __FILE__, __LINE__,
           ss.str ());
       }

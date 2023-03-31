@@ -208,6 +208,27 @@ class EXP mfServiceRunData : public smartable
     std::string           getRunDateYYYYMMDD () const
                               { return fRunDateYYYYMMDD; }
 
+    // parts
+    void                  setCurrentPartIDAndName (const std::string partIDAndName)
+                              { fCurrentPartIDAndName = partIDAndName; }
+
+    const std::string     getCurrentPartIDAndName () const
+                              { return fCurrentPartIDAndName; }
+
+    // staves
+    void                  setCurrentStaveNumber (int staveNumber)
+                              { fCurrentStaveNumber = staveNumber; }
+
+    int                   getCurrentStaveNumber () const
+                              { return fCurrentStaveNumber; }
+
+    // voices
+    void                  setCurrentVoiceNumber (int voiceNumber)
+                              { fCurrentVoiceNumber = voiceNumber; }
+
+    int                   getCurrentVoiceNumber () const
+                              { return fCurrentVoiceNumber; }
+
     // measures
     void                  setCurrentMeasureNumber (const std::string measureNumber)
                               { fCurrentMeasureNumber = measureNumber; }
@@ -259,6 +280,15 @@ class EXP mfServiceRunData : public smartable
     // run date
     std::string           fRunDateFull;
     std::string           fRunDateYYYYMMDD;
+
+    // parts
+    std::string           fCurrentPartIDAndName;
+
+    // staves
+    int                   fCurrentStaveNumber;
+
+    // voices
+    int                   fCurrentVoiceNumber;
 
     // measures
     std::string           fCurrentMeasureNumber;

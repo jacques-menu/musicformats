@@ -138,7 +138,7 @@ class   msdlScanner : public smartable
     msdlUserLanguageKind  fUserLanguageKind;
 
     // input stream
-    std::istream&              fInputStream;
+    std::istream&         fInputStream;
     Bool                  fInputIsEmpty;
 
     // input std::string

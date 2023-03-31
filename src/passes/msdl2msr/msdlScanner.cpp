@@ -176,7 +176,7 @@ void msdlScanner::populateInputString (std::istream& inputStream)
       "Populating the input std::string" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -210,7 +210,7 @@ void msdlScanner::populateInputString (std::istream& inputStream)
       "\"" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -261,7 +261,7 @@ char msdlScanner::fetchNextCharacter ()
       fCurrentPositionInLine <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -292,7 +292,7 @@ char msdlScanner::fetchNextCharacter ()
       currentCharacterAsString () <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -319,7 +319,7 @@ void msdlScanner::handleEndOfLine (const std::string& context)
       ", fCurrentPositionInLine: " << fCurrentPositionInLine <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -342,7 +342,7 @@ void msdlScanner::handleEndOfLine (const std::string& context)
       ", fCurrentPositionInLine: " << fCurrentPositionInLine <<
       std::endl << std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -629,7 +629,7 @@ msdlTokenKind msdlScanner::fetchNextToken (
         fCurrentToken.asString () <<
         std::endl;
 
-      gWaeHandler->waeTrace (
+      gWaeHandler->waeTraceWithoutLocationDetails (
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -677,7 +677,7 @@ msdlTokenKind msdlScanner::fetchNextToken (
         "--- fetchNextToken(): onceMore: " << onceMore <<
         std::endl;
 
-      gWaeHandler->waeTrace (
+      gWaeHandler->waeTraceWithoutLocationDetails (
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -803,7 +803,7 @@ void msdlScanner::handlePercent ()
             fCurrentPositionInInput <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -892,7 +892,7 @@ void msdlScanner::handleSlash ()
             fCurrentPositionInInput <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -971,7 +971,7 @@ void msdlScanner::acceptAName ()
       nameStartPositionInInput <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1016,7 +1016,7 @@ void msdlScanner::acceptAName ()
       ", nameString: \"" << nameString << "\"" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1038,7 +1038,7 @@ void msdlScanner::acceptAName ()
       ", keyWordKind: \"" << msdlKeywordKindAsString (keyWordKind) << "\"" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1142,7 +1142,7 @@ void msdlScanner::acceptAName ()
       "Accepting a name, found: \"" << nameString << "\"" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1171,7 +1171,7 @@ void msdlScanner::acceptAnInteger ()
       integerStartPositionInInput <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1227,7 +1227,7 @@ void msdlScanner::acceptAnInteger ()
       "Accepting an integer, found: \"" << integerString << "\"" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1256,7 +1256,7 @@ void msdlScanner::acceptAString ()
       ", stringStartPositionInInput: " << stringStartPositionInInput <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1294,7 +1294,7 @@ void msdlScanner::acceptAString ()
       fCurrentPositionInLine <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1445,7 +1445,7 @@ void msdlScanner::acceptAString ()
       "Accepting a std::string, found: \"" << theString << "\"" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1470,7 +1470,7 @@ std::string msdlScanner::currentLocationAsString () const
       ", fCurrentPositionInInput:" << fCurrentPositionInInput <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1513,7 +1513,7 @@ std::string msdlScanner::currentLocationAsString () const
       "|" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1649,7 +1649,7 @@ void msdlScanner::scanAllTheInputAtOnce (
       "<== scanAllTheInputAtOnce()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1674,7 +1674,7 @@ void msdlScanner::translateAllTheInputToKeywordsLanguage (
       msdlKeywordsLanguageKindAsString (keywordsConversionLanguage) <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1782,7 +1782,7 @@ void msdlScanner::translateAllTheInputToKeywordsLanguage (
       "<== translateAllTheInputToKeywordsLanguage()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1803,7 +1803,7 @@ void msdlScanner::scanWholeInputAtOnce ()
       "==> scanWholeInputAtOnce()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }

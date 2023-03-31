@@ -69,7 +69,7 @@ void xml2xmlManPageGenerateAtom::applyValueLessAtom (std::ostream& os)
       "==> option '" << fetchNames () << "' is a xml2xmlManPageGenerateAtom" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -88,7 +88,7 @@ void xml2xmlManPageGenerateAtom::acceptIn (basevisitor* v)
       ".\\\" ==> xml2xmlManPageGenerateAtom::acceptIn ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -107,7 +107,7 @@ void xml2xmlManPageGenerateAtom::acceptIn (basevisitor* v)
             ".\\\" ==> Launching xml2xmlManPageGenerateAtom::visitStart ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -126,7 +126,7 @@ void xml2xmlManPageGenerateAtom::acceptOut (basevisitor* v)
       ".\\\" ==> xml2xmlManPageGenerateAtom::acceptOut ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -145,7 +145,7 @@ void xml2xmlManPageGenerateAtom::acceptOut (basevisitor* v)
             ".\\\" ==> Launching xml2xmlManPageGenerateAtom::visitEnd ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -164,7 +164,7 @@ void xml2xmlManPageGenerateAtom::browseData (basevisitor* v)
       ".\\\" ==> xml2xmlManPageGenerateAtom::browseData ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -343,7 +343,7 @@ void xml2xmlManPageOahGroup::acceptIn (basevisitor* v)
       ".\\\" ==> xml2xmlManPageOahGroup::acceptIn ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -362,7 +362,7 @@ void xml2xmlManPageOahGroup::acceptIn (basevisitor* v)
             ".\\\" ==> Launching xml2xmlManPageOahGroup::visitStart ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -381,7 +381,7 @@ void xml2xmlManPageOahGroup::acceptOut (basevisitor* v)
       ".\\\" ==> xml2xmlManPageOahGroup::acceptOut ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -400,7 +400,7 @@ void xml2xmlManPageOahGroup::acceptOut (basevisitor* v)
             ".\\\" ==> Launching xml2xmlManPageOahGroup::visitEnd ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -419,7 +419,7 @@ void xml2xmlManPageOahGroup::browseData (basevisitor* v)
       ".\\\" ==> xml2xmlManPageOahGroup::browseData ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -464,7 +464,7 @@ S_xml2xmlManPageOahGroup createGlobalXml2xmlManPageOahGroupHandler (
       "Creating global xml2xmlManPage OAH group" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }

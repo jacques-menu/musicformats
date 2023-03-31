@@ -90,7 +90,7 @@ static mfMusicformatsErrorKind xmlFile2guidoWithHandler (
       "<!-- ----------------------------------------------------------- -->" <<
       std::endl << std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -350,7 +350,7 @@ static mfMusicformatsErrorKind xmlFile2guidoWithOptionsAndArguments (
       ", insiderOption: " << insiderOption <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }

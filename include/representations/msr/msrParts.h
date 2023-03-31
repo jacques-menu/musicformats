@@ -140,6 +140,8 @@ class EXP msrPart : public msrPartGroupElement
     std::string           getPartAbbreviationDisplayText () const
                               { return fPartAbbreviationDisplayText; }
 
+    std::string           getPartIDAndName () const;
+
     std::string           getPartCombinedName () const;
 
     void                  setPartInstrumentNamesMaxLengthes ();

@@ -74,7 +74,7 @@ void translateLpsrToLilypond (
       separator <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -136,7 +136,7 @@ EXP void translateLpsrToLilypondWithHandler (
       "\"" <<
       std::endl;
 
-//     gWaeHandler->waeTrace ( JMI v0.9.67
+//     gWaeHandler->waeTraceWithoutLocationDetails ( JMI v0.9.67
 //       __FILE__, __LINE__,
 //       ss.str ());
   }
@@ -149,7 +149,7 @@ EXP void translateLpsrToLilypondWithHandler (
         "xmlFile2lilypond() output goes to standard output" <<
         std::endl;
 
-//     gWaeHandler->waeTrace ( JMI v0.9.67
+//     gWaeHandler->waeTraceWithoutLocationDetails ( JMI v0.9.67
 //       __FILE__, __LINE__,
 //       ss.str ());
     }
@@ -191,7 +191,7 @@ EXP void translateLpsrToLilypondWithHandler (
         "\"" <<
         std::endl;
 
-//     gWaeHandler->waeTrace ( JMI v0.9.67
+//     gWaeHandler->waeTraceWithoutLocationDetails ( JMI v0.9.67
 //       __FILE__, __LINE__,
 //       ss.str ());
     }
@@ -264,7 +264,7 @@ EXP void translateLpsrToLilypondWithHandler (
         gLanguage->closingLilypondFile (outputFileName) <<
         std::endl;
 
-      gWaeHandler->waeTrace (
+      gWaeHandler->waeTraceWithoutLocationDetails (
         __FILE__, __LINE__,
         ss.str ());
     }

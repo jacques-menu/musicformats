@@ -69,7 +69,7 @@ void msdl2brailleManPageGenerateAtom::applyValueLessAtom (std::ostream& os)
       "==> option '" << fetchNames () << "' is a msdl2brailleManPageGenerateAtom" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -88,7 +88,7 @@ void msdl2brailleManPageGenerateAtom::acceptIn (basevisitor* v)
       ".\\\" ==> msdl2brailleManPageGenerateAtom::acceptIn ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -107,7 +107,7 @@ void msdl2brailleManPageGenerateAtom::acceptIn (basevisitor* v)
             ".\\\" ==> Launching msdl2brailleManPageGenerateAtom::visitStart ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -126,7 +126,7 @@ void msdl2brailleManPageGenerateAtom::acceptOut (basevisitor* v)
       ".\\\" ==> msdl2brailleManPageGenerateAtom::acceptOut ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -145,7 +145,7 @@ void msdl2brailleManPageGenerateAtom::acceptOut (basevisitor* v)
             ".\\\" ==> Launching msdl2brailleManPageGenerateAtom::visitEnd ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -164,7 +164,7 @@ void msdl2brailleManPageGenerateAtom::browseData (basevisitor* v)
       ".\\\" ==> msdl2brailleManPageGenerateAtom::browseData ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -330,7 +330,7 @@ void msdl2brailleManPageOahGroup::acceptIn (basevisitor* v)
       ".\\\" ==> msdl2brailleManPageOahGroup::acceptIn ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -349,7 +349,7 @@ void msdl2brailleManPageOahGroup::acceptIn (basevisitor* v)
             ".\\\" ==> Launching msdl2brailleManPageOahGroup::visitStart ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -368,7 +368,7 @@ void msdl2brailleManPageOahGroup::acceptOut (basevisitor* v)
       ".\\\" ==> msdl2brailleManPageOahGroup::acceptOut ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -387,7 +387,7 @@ void msdl2brailleManPageOahGroup::acceptOut (basevisitor* v)
             ".\\\" ==> Launching msdl2brailleManPageOahGroup::visitEnd ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -406,7 +406,7 @@ void msdl2brailleManPageOahGroup::browseData (basevisitor* v)
       ".\\\" ==> msdl2brailleManPageOahGroup::browseData ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -451,7 +451,7 @@ S_msdl2brailleManPageOahGroup createGlobalMsdl2brlManPageOahHandler (
       "Creating global msdl2blrManPage OAH group" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }

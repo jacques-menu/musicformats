@@ -42,7 +42,7 @@ void initializeMusicFormats ()
         "Initializing MusicFormats" <<
         std::endl;
 
-      gWaeHandler->waeTrace (
+      gWaeHandler->waeTraceWithoutLocationDetails (
         __FILE__, __LINE__,
         ss.str ());
     }

@@ -99,7 +99,7 @@ Usage: msdl2lilypond [option]* [MSDLFile] [option]*
       "\"" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -190,7 +190,7 @@ void msdl2lilypondInsiderHandler::createTheMsdl2lyPrefixes ()
       "Creating the msdl2lilypond prefixes" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -212,7 +212,7 @@ void msdl2lilypondInsiderHandler::createTheMsdl2lyOptionGroups (
       "\"" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -321,7 +321,7 @@ void msdl2lilypondInsiderHandler::checkOptionsAndArguments () const
       "\"" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -380,7 +380,7 @@ void msdl2lilypondInsiderOahGroup::acceptIn (basevisitor* v)
       ".\\\" ==> msdl2lilypondInsiderOahGroup::acceptIn ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -399,7 +399,7 @@ void msdl2lilypondInsiderOahGroup::acceptIn (basevisitor* v)
             ".\\\" ==> Launching msdl2lilypondInsiderOahGroup::visitStart ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -418,7 +418,7 @@ void msdl2lilypondInsiderOahGroup::acceptOut (basevisitor* v)
       ".\\\" ==> msdl2lilypondInsiderOahGroup::acceptOut ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -437,7 +437,7 @@ void msdl2lilypondInsiderOahGroup::acceptOut (basevisitor* v)
             ".\\\" ==> Launching msdl2lilypondInsiderOahGroup::visitEnd ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -456,7 +456,7 @@ void msdl2lilypondInsiderOahGroup::browseData (basevisitor* v)
       ".\\\" ==> msdl2lilypondInsiderOahGroup::browseData ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -558,7 +558,7 @@ void msdl2lilypondInsiderOahGroup::initializeMsdl2lyInsiderOahGroup ()
       "\" group" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -648,7 +648,7 @@ S_msdl2lilypondInsiderOahGroup createGlobalMsdl2lyInsiderOahGroup ()
       "Creating global msdl2lilypond OAH group" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }

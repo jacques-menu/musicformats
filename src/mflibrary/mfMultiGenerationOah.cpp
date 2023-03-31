@@ -299,7 +299,7 @@ void mfMultiGenerationOutputKindAtom::setImplicitVariable (std::ostream& os)
       "; which is of type 'mfMultiGenerationOutputKindAtom'" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -332,7 +332,7 @@ void mfMultiGenerationOutputKindAtom::acceptIn (basevisitor* v)
       ".\\\" ==> mfMultiGenerationOutputKindAtom::acceptIn ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -351,7 +351,7 @@ void mfMultiGenerationOutputKindAtom::acceptIn (basevisitor* v)
             ".\\\" ==> Launching mfMultiGenerationOutputKindAtom::visitStart ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -370,7 +370,7 @@ void mfMultiGenerationOutputKindAtom::acceptOut (basevisitor* v)
       ".\\\" ==> mfMultiGenerationOutputKindAtom::acceptOut ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -389,7 +389,7 @@ void mfMultiGenerationOutputKindAtom::acceptOut (basevisitor* v)
             ".\\\" ==> Launching mfMultiGenerationOutputKindAtom::visitEnd ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -408,7 +408,7 @@ void mfMultiGenerationOutputKindAtom::browseData (basevisitor* v)
       ".\\\" ==> mfMultiGenerationOutputKindAtom::browseData ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -631,7 +631,7 @@ void mfMultiGenerationOahGroup::acceptIn (basevisitor* v)
       ".\\\" ==> mfMultiGenerationOahGroup::acceptIn ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -650,7 +650,7 @@ void mfMultiGenerationOahGroup::acceptIn (basevisitor* v)
             ".\\\" ==> Launching mfMultiGenerationOahGroup::visitStart ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -669,7 +669,7 @@ void mfMultiGenerationOahGroup::acceptOut (basevisitor* v)
       ".\\\" ==> mfMultiGenerationOahGroup::acceptOut ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -688,7 +688,7 @@ void mfMultiGenerationOahGroup::acceptOut (basevisitor* v)
             ".\\\" ==> Launching mfMultiGenerationOahGroup::visitEnd ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -707,7 +707,7 @@ void mfMultiGenerationOahGroup::browseData (basevisitor* v)
       ".\\\" ==> mfMultiGenerationOahGroup::browseData ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -766,7 +766,7 @@ S_multiGenerationOahGroup createGlobalMultiGenerationOahGroup ()
       "Creating multi generator OAH group" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }

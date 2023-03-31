@@ -123,7 +123,7 @@ R"(
       "\" regular options handler" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -335,7 +335,7 @@ void LilyPondIssue34InsiderHandler::createTheLilyPondIssue34Prefixes ()
       "\"" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -359,7 +359,7 @@ void LilyPondIssue34InsiderHandler::createTheLilyPondIssue34OptionGroups (
       "\" insider option groups" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -521,7 +521,7 @@ void LilyPondIssue34InsiderHandler::checkOptionsAndArguments () const
       "\"" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -543,7 +543,7 @@ std::string LilyPondIssue34InsiderHandler::fetchOutputFileNameFromTheOptions () 
       "\"" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -581,7 +581,7 @@ std::string LilyPondIssue34InsiderHandler::fetchOutputFileNameFromTheOptions () 
       autoOutputFileNameHasBeenSet <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -703,7 +703,7 @@ std::string LilyPondIssue34InsiderHandler::fetchOutputFileNameFromTheOptions () 
       outputFileName <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -792,7 +792,7 @@ void LilyPondIssue34InsiderOahGroup::acceptIn (basevisitor* v)
       ".\\\" ==> LilyPondIssue34InsiderOahGroup::acceptIn ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -811,7 +811,7 @@ void LilyPondIssue34InsiderOahGroup::acceptIn (basevisitor* v)
             ".\\\" ==> Launching LilyPondIssue34InsiderOahGroup::visitStart ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -830,7 +830,7 @@ void LilyPondIssue34InsiderOahGroup::acceptOut (basevisitor* v)
       ".\\\" ==> LilyPondIssue34InsiderOahGroup::acceptOut ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -849,7 +849,7 @@ void LilyPondIssue34InsiderOahGroup::acceptOut (basevisitor* v)
             ".\\\" ==> Launching LilyPondIssue34InsiderOahGroup::visitEnd ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -868,7 +868,7 @@ void LilyPondIssue34InsiderOahGroup::browseData (basevisitor* v)
       ".\\\" ==> LilyPondIssue34InsiderOahGroup::browseData ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -975,7 +975,7 @@ void LilyPondIssue34InsiderOahGroup::initializeLilyPondIssue34InsiderOahGroup ()
       "\" group" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1040,7 +1040,7 @@ S_LilyPondIssue34InsiderOahGroup createGlobalLilyPondIssue34InsiderOahGroup ()
       "Creating global LilyPondIssue34 insider OAH group" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }

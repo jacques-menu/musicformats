@@ -83,7 +83,7 @@ void oahEarlyOptions::setEarlyLanguageKind (
       languageKind <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -108,7 +108,7 @@ void oahEarlyOptions::setEarlyInsiderOption ()
       "Setting fEarlyInsiderOption" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -152,7 +152,7 @@ void oahEarlyOptions::setEarlyQuietOption ()
       "Setting fEarlyQuietOption" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -173,7 +173,7 @@ void oahEarlyOptions::setEarlyMultiGenerationOutputKind (
       "Setting fEarlyMultiGenerationOutputKind" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -198,7 +198,7 @@ void oahEarlyOptions::appendEarlyIncludeFileName (std::string includeFileName)
       ']' <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -238,7 +238,7 @@ void oahEarlyOptions::setEarlyOahVerboseMode ()
       "Setting fEarlyOahVerboseMode" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -261,7 +261,7 @@ void oahEarlyOptions::setEarlyTraceOah ()
       "Setting fEarlyTraceOah" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -284,7 +284,7 @@ void oahEarlyOptions::setEarlyTraceOahDetails ()
       "Setting fEarlyTraceOahDetails" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -307,7 +307,7 @@ void oahEarlyOptions::setEarlyTraceComponents ()
       "Setting fEarlyTraceComponents" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -377,7 +377,7 @@ Bool oahEarlyOptions::isEarlyOptionRecognized (
         "' has been recognized early" <<
         std::endl;
 
-      gWaeHandler->waeTrace (
+      gWaeHandler->waeTraceWithoutLocationDetails (
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -590,7 +590,7 @@ void oahEarlyOptions::applyEarlyOptionsIfPresentInArgcArgv (
           "'" <<
           std::endl;
 
-        gWaeHandler->waeTrace (
+        gWaeHandler->waeTraceWithoutLocationDetails (
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -641,7 +641,7 @@ void oahEarlyOptions::applyEarlyOptionsIfPresentInArgcArgv (
           "'" <<
           std::endl;
 
-        gWaeHandler->waeTrace (
+        gWaeHandler->waeTraceWithoutLocationDetails (
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -745,7 +745,7 @@ void oahEarlyOptions::applyEarlyOptionsIfPresentInOptionsAndArguments (
             "'" <<
             std::endl;
 
-        gWaeHandler->waeTrace (
+        gWaeHandler->waeTraceWithoutLocationDetails (
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -796,7 +796,7 @@ void oahEarlyOptions::applyEarlyOptionsIfPresentInOptionsAndArguments (
           "'" <<
           std::endl;
 
-        gWaeHandler->waeTrace (
+        gWaeHandler->waeTraceWithoutLocationDetails (
           __FILE__, __LINE__,
           ss.str ());
       }

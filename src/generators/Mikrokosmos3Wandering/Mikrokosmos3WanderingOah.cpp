@@ -210,7 +210,7 @@ void Mikrokosmos3WanderingOahGroup::acceptIn (basevisitor* v)
       ".\\\" ==> Mikrokosmos3WanderingOahGroup::acceptIn ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -229,7 +229,7 @@ void Mikrokosmos3WanderingOahGroup::acceptIn (basevisitor* v)
             ".\\\" ==> Launching Mikrokosmos3WanderingOahGroup::visitStart ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -248,7 +248,7 @@ void Mikrokosmos3WanderingOahGroup::acceptOut (basevisitor* v)
       ".\\\" ==> Mikrokosmos3WanderingOahGroup::acceptOut ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -267,7 +267,7 @@ void Mikrokosmos3WanderingOahGroup::acceptOut (basevisitor* v)
             ".\\\" ==> Launching Mikrokosmos3WanderingOahGroup::visitEnd ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -286,7 +286,7 @@ void Mikrokosmos3WanderingOahGroup::browseData (basevisitor* v)
       ".\\\" ==> Mikrokosmos3WanderingOahGroup::browseData ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -360,7 +360,7 @@ S_Mikrokosmos3WanderingOahGroup createGlobalMikrokosmos3WanderingOahGroup ()
       "Creating global Mikrokosmos3Wandering OAH group" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }

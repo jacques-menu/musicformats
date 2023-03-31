@@ -50,7 +50,7 @@ void oahOah2manPage::visitStart (S_oahOptionalValuesStyleKindAtom& elt)
       " \"" << elt->fetchNames () << "\"" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -86,7 +86,7 @@ void oahOah2manPage::visitEnd (S_oahOptionalValuesStyleKindAtom& elt)
       " \"" << elt->fetchNames () << "\"" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }

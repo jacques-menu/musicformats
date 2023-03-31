@@ -64,7 +64,7 @@ The source code contains many instances of trace code, such as:
       "Creating voice \"" << asString () << "\"" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }

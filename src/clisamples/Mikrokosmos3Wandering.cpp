@@ -226,7 +226,7 @@ int main (int argc, char*  argv[])
       ", insiderOption: " << insiderOption <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -252,7 +252,7 @@ int main (int argc, char*  argv[])
       mfMultiGenerationOutputKindAsString (multiGenerationOutputKind) <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -487,7 +487,7 @@ int main (int argc, char*  argv[])
       msrGenerationAPIKindAsString (theGenerationAPIKind) <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -519,7 +519,7 @@ int main (int argc, char*  argv[])
       separator <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
