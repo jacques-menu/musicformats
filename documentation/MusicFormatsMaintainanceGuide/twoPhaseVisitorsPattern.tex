@@ -64,7 +64,7 @@ void msrWords::acceptIn (basevisitor* v)
       "% ==> msrWords::acceptIn ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -83,7 +83,7 @@ void msrWords::acceptIn (basevisitor* v)
             "% ==> Launching msrWords::visitStart ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -201,7 +201,7 @@ void mxsr2msrTranslator::visitStart ( S_millimeters& elt )
       ", line " << elt->getInputLineNumber () <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -221,7 +221,7 @@ void mxsr2msrTranslator::visitStart ( S_tenths& elt )
       ", line " << elt->getInputLineNumber () <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -244,7 +244,7 @@ void mxsr2msrTranslator::visitEnd ( S_scaling& elt)
       ", line " << inputLineNumber <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -265,7 +265,7 @@ void mxsr2msrTranslator::visitEnd ( S_scaling& elt)
       " tenths for " <<  fCurrentMillimeters <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -440,7 +440,7 @@ void msrNote::browseData (basevisitor* v)
             "% ==> visiting grace notes groups 'before' is inhibited" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -503,7 +503,7 @@ void msrStaff::browseData (basevisitor* v)
             "\"" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
         }

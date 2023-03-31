@@ -31,7 +31,7 @@ S_mfcPassComponent createLpsr2lilypondComponent ()
         "Creating the lpsr2lilypond pass component" <<
         std::endl;
 
-      gWaeHandler->waeTrace (
+      gWaeHandler->waeTraceWithoutLocationDetails (
         __FILE__, __LINE__,
         ss.str ());
     }

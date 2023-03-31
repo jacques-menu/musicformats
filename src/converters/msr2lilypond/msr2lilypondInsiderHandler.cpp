@@ -99,7 +99,7 @@ Usage: msr2lilypond [[option]* [MusicXMLFile|-] [[option]*
       "\"" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -191,7 +191,7 @@ void msr2lilypondInsiderHandler::createTheMsr2lilypondPrefixes ()
       "Creating the msr2lilypond prefixes" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -214,7 +214,7 @@ void msr2lilypondInsiderHandler::createTheMsr2lilypondOptionGroups (
       "\"" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -324,7 +324,7 @@ void msr2lilypondInsiderHandler::checkOptionsAndArguments () const
       "\"" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -346,7 +346,7 @@ std::string msr2lilypondInsiderHandler::fetchOutputFileNameFromTheOptions () con
       "\"" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -440,7 +440,7 @@ std::string msr2lilypondInsiderHandler::fetchOutputFileNameFromTheOptions () con
           "\"" <<
           std::endl;
 
-        gWaeHandler->waeTrace (
+        gWaeHandler->waeTraceWithoutLocationDetails (
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -459,7 +459,7 @@ std::string msr2lilypondInsiderHandler::fetchOutputFileNameFromTheOptions () con
           "\"" <<
           std::endl;
 
-        gWaeHandler->waeTrace (
+        gWaeHandler->waeTraceWithoutLocationDetails (
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -526,7 +526,7 @@ void msr2lilypondInsiderOahGroup::acceptIn (basevisitor* v)
       ".\\\" ==> msr2lilypondInsiderOahGroup::acceptIn ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -545,7 +545,7 @@ void msr2lilypondInsiderOahGroup::acceptIn (basevisitor* v)
             ".\\\" ==> Launching msr2lilypondInsiderOahGroup::visitStart ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -564,7 +564,7 @@ void msr2lilypondInsiderOahGroup::acceptOut (basevisitor* v)
       ".\\\" ==> msr2lilypondInsiderOahGroup::acceptOut ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -583,7 +583,7 @@ void msr2lilypondInsiderOahGroup::acceptOut (basevisitor* v)
             ".\\\" ==> Launching msr2lilypondInsiderOahGroup::visitEnd ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -602,7 +602,7 @@ void msr2lilypondInsiderOahGroup::browseData (basevisitor* v)
       ".\\\" ==> msr2lilypondInsiderOahGroup::browseData ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -749,7 +749,7 @@ S_msr2lilypondInsiderOahGroup createGlobalMsr2lilypondInsiderOahGroup ()
       "Creating global msr2lilypond OAH group" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }

@@ -88,7 +88,7 @@ Usage: xml2xml [[option]* [MusicXMLFile|-] [[option]*
       "\" regular options handler" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -149,7 +149,7 @@ void xml2xmlInsiderHandler::createTheXml2xmlPrefixes ()
       "\"" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -172,7 +172,7 @@ void xml2xmlInsiderHandler::createTheXml2xmlOptionGroups (
       "\" insider option groups" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -258,7 +258,7 @@ void xml2xmlInsiderHandler::checkOptionsAndArguments () const
       "\"" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -280,7 +280,7 @@ std::string xml2xmlInsiderHandler::fetchOutputFileNameFromTheOptions () const
       "\"" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -374,7 +374,7 @@ std::string xml2xmlInsiderHandler::fetchOutputFileNameFromTheOptions () const
           "\"" <<
           std::endl;
 
-        gWaeHandler->waeTrace (
+        gWaeHandler->waeTraceWithoutLocationDetails (
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -393,7 +393,7 @@ std::string xml2xmlInsiderHandler::fetchOutputFileNameFromTheOptions () const
           "\"" <<
           std::endl;
 
-        gWaeHandler->waeTrace (
+        gWaeHandler->waeTraceWithoutLocationDetails (
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -493,7 +493,7 @@ void xml2xmlInsiderOahGroup::acceptIn (basevisitor* v)
       ".\\\" ==> xml2xmlInsiderOahGroup::acceptIn ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -512,7 +512,7 @@ void xml2xmlInsiderOahGroup::acceptIn (basevisitor* v)
             ".\\\" ==> Launching xml2xmlInsiderOahGroup::visitStart ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -531,7 +531,7 @@ void xml2xmlInsiderOahGroup::acceptOut (basevisitor* v)
       ".\\\" ==> xml2xmlInsiderOahGroup::acceptOut ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -550,7 +550,7 @@ void xml2xmlInsiderOahGroup::acceptOut (basevisitor* v)
             ".\\\" ==> Launching xml2xmlInsiderOahGroup::visitEnd ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -569,7 +569,7 @@ void xml2xmlInsiderOahGroup::browseData (basevisitor* v)
       ".\\\" ==> xml2xmlInsiderOahGroup::browseData ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -776,7 +776,7 @@ S_xml2xmlInsiderOahGroup createGlobalXml2xmlOahGroup ()
       "Creating global xml2xml OAH group" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }

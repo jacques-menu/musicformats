@@ -95,7 +95,7 @@ mfOutputIndenter& mfOutputIndenter::operator-- ()
       "% ===== INDENTER: " << fIndentation <<
       std::endl;
 
-//     gWaeHandler->waeTrace (
+//     gWaeHandler->waeTraceWithoutLocationDetails (
 //       __FILE__, __LINE__,
 //       ss.str ());
   }
@@ -143,7 +143,7 @@ mfOutputIndenter mfOutputIndenter::mfOutputIndenter::operator-- (int)
       "% INDENTER: " << fIndentation <<
       std::endl;
 
-//     gWaeHandler->waeTrace (
+//     gWaeHandler->waeTraceWithoutLocationDetails (
 //       __FILE__, __LINE__,
 //       ss.str ());
   }
@@ -176,7 +176,7 @@ mfOutputIndenter& mfOutputIndenter::increment (int value)
       "% INDENTER: " << fIndentation <<
       std::endl;
 
-//     gWaeHandler->waeTrace (
+//     gWaeHandler->waeTraceWithoutLocationDetails (
 //       __FILE__, __LINE__,
 //       ss.str ());
   }
@@ -209,7 +209,7 @@ mfOutputIndenter& mfOutputIndenter::decrement (int value)
       "% INDENTER: " << fIndentation <<
       std::endl;
 
-//     gWaeHandler->waeTrace (
+//     gWaeHandler->waeTraceWithoutLocationDetails (
 //       __FILE__, __LINE__,
 //       ss.str ());
   }

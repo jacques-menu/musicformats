@@ -303,9 +303,11 @@ std::ostream& operator << (std::ostream& os, const msrMeasureEndRegularKind& elt
 //         "\", line " << inputLineNumber <<
 //         std::endl;
 //
-//       gWaeHandler->waeTrace (
-//         __FILE__, __LINE__,
-//         ss.str ());
+//           gWaeHandler->waeTraceWithLocationDetails (
+//             __FILE__, __LINE__,
+//             ss.str (),
+//             gServiceRunData->getCurrentMeasureNumber (),
+//             gServiceRunData->getScoreMeasuresNumber ());
 //     }
 // #endif // MF_TRACE_IS_ENABLED
 //
@@ -354,9 +356,11 @@ std::ostream& operator << (std::ostream& os, const msrMeasureEndRegularKind& elt
 //         "\", line " << inputLineNumber <<
 //         std::endl;
 //
-//       gWaeHandler->waeTrace (
-//         __FILE__, __LINE__,
-//         ss.str ());
+//           gWaeHandler->waeTraceWithLocationDetails (
+//             __FILE__, __LINE__,
+//             ss.str (),
+//             gServiceRunData->getCurrentMeasureNumber (),
+//             gServiceRunData->getScoreMeasuresNumber ());
 //     }
 // #endif // MF_TRACE_IS_ENABLED
 //

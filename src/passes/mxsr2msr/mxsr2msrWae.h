@@ -38,12 +38,12 @@ EXP void mxsr2msrWarning (
   int                inputLineNumber,
   const std::string& message);
 
-EXP void mxsr2msrWarningWithMeasureInfo (
+EXP void mxsr2msrWarningWithLocationDetails (
   const std::string& inputSourceName,
   int                inputLineNumber,
-  const std::string& message,
-  const std::string  measureNumber,
-  int                scoreMeasuresNumber);
+  const std::string& message);
+//   const std::string  measureNumber,
+//   int                scoreMeasuresNumber);
 
 // internal warnings
 
@@ -52,12 +52,12 @@ EXP void mxsr2msrInternalWarning (
   int                inputLineNumber,
   const std::string& message);
 
-EXP void mxsr2msrInternalWarningWithMeasureInfo (
+EXP void mxsr2msrInternalWarningWithLocationDetails (
   const std::string& inputSourceName,
   int                inputLineNumber,
-  const std::string& message,
-  const std::string  measureNumber,
-  int                scoreMeasuresNumber);
+  const std::string& message);
+//   const std::string  measureNumber,
+//   int                scoreMeasuresNumber);
 
 // errors
 
@@ -68,14 +68,14 @@ EXP void mxsr2msrError (
   int                sourceCodeLineNumber,
   const std::string& message);
 
-EXP void mxsr2msrErrorWithMeasureInfo (
+EXP void mxsr2msrErrorWithLocationDetails (
   const std::string& inputSourceName,
   int                inputLineNumber,
   const std::string& sourceCodeFileName,
   int                sourceCodeLineNumber,
-  const std::string& message,
-  const std::string  measureNumber,
-  int                scoreMeasuresNumber);
+  const std::string& message);
+//   const std::string  measureNumber,
+//   int                scoreMeasuresNumber);
 
 // internal errors
 
@@ -86,14 +86,14 @@ EXP void mxsr2msrInternalError (
   int                sourceCodeLineNumber,
   const std::string& message);
 
-EXP void mxsr2msrInternalErrorWithMeasureInfo (
+EXP void mxsr2msrInternalErrorWithLocationDetails (
   const std::string& inputSourceName,
   int                inputLineNumber,
   const std::string& sourceCodeFileName,
   int                sourceCodeLineNumber,
-  const std::string& message,
-  const std::string  measureNumber,
-  int                scoreMeasuresNumber);
+  const std::string& message);
+//   const std::string  measureNumber,
+//   int                scoreMeasuresNumber);
 
 
 }

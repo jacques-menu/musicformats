@@ -176,11 +176,11 @@ class EXP msrScore : public msrBookElement
                               { return fCreditsList; }
 
     // measures
-    void                  setScoreNumberOfMeasures (
-                            int scoreNumberOfMeasures);
+    void                  setScoreMeasuresNumber (
+                            int scoreMeasuresNumber);
 
-    int                   getScoreNumberOfMeasures () const
-                              { return fScoreNumberOfMeasures; }
+    int                   getScoreMeasuresNumber () const
+                              { return fScoreMeasuresNumber; }
 
     void                  setScoreLastMeasureNumber (
                             std::string measureNumber)
@@ -405,7 +405,7 @@ class EXP msrScore : public msrBookElement
 
     // measures
 
-    int                   fScoreNumberOfMeasures;
+    int                   fScoreMeasuresNumber;
     std::string           fScoreLastMeasureNumber;
 
     // multiple full-bar rests

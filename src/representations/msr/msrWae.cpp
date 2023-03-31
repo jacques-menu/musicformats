@@ -88,20 +88,20 @@ void msrWarning (
     message);
 }
 
-void msrWarningWithMeasureInfo (
+void msrWarningWithLocationDetails (
   const std::string& inputSourceName,
   int                inputLineNumber,
-  const std::string& message,
-  const std::string  measureNumber,
-  int                scoreMeasuresNumber)
+  const std::string& message)
+//   const std::string  measureNumber,
+//   int                scoreMeasuresNumber)
 {
-  waeWarningWithMeasureInfo (
+  waeWarningWithLocationDetails (
     "MSR",
     inputSourceName,
     inputLineNumber,
-    message,
-    measureNumber,
-    scoreMeasuresNumber);
+    message);
+//     measureNumber,
+//     scoreMeasuresNumber);
 }
 
 //______________________________________________________________________________
@@ -130,24 +130,24 @@ void msrError (
   }
 }
 
-void msrErrorWithMeasureInfo(
+void msrErrorWithLocationDetails(
   const std::string& inputSourceName,
   int                inputLineNumber,
   const std::string& sourceCodeFileName,
   int                sourceCodeLineNumber,
-  const std::string& message,
-  const std::string  measureNumber,
-  int                scoreMeasuresNumber)
+  const std::string& message)
+//   const std::string  measureNumber,
+//   int                scoreMeasuresNumber)
 {
-  waeErrorWithMeasureInfo (
+  waeErrorWithLocationDetails (
     "MSR",
     inputSourceName,
     inputLineNumber,
     sourceCodeFileName,
     sourceCodeLineNumber,
-    message,
-    measureNumber,
-    scoreMeasuresNumber);
+    message);
+//     measureNumber,
+//     scoreMeasuresNumber);
 
   if (! gWaeOahGroup->getDontShowErrors ()) {
     if (! gWaeOahGroup->getDontQuitOnErrors ()) { // JMI
@@ -204,20 +204,20 @@ void msrInternalWarning (
     message);
 }
 
-void msrInternalWarningWithMeasureInfo (
+void msrInternalWarningWithLocationDetails (
   const std::string& inputSourceName,
   int                inputLineNumber,
-  const std::string& message,
-  const std::string  measureNumber,
-  int                scoreMeasuresNumber)
+  const std::string& message)
+//   const std::string  measureNumber,
+//   int                scoreMeasuresNumber)
 {
-  waeInternalWarningWithMeasureInfo (
+  waeInternalWarningWithLocationDetails (
     "MSR",
     inputSourceName,
     inputLineNumber,
-    message,
-    measureNumber,
-    scoreMeasuresNumber);
+    message);
+//     measureNumber,
+//     scoreMeasuresNumber);
 }
 
 //______________________________________________________________________________
@@ -247,28 +247,28 @@ void msrInternalError (
   throw msrInternalException (message);
 }
 
-void msrInternalErrorWithMeasureInfo (
+void msrInternalErrorWithLocationDetails (
   const std::string& inputSourceName,
   int                inputLineNumber,
   const std::string& sourceCodeFileName,
   int                sourceCodeLineNumber,
-  const std::string& message,
-  const std::string  measureNumber,
-  int                scoreMeasuresNumber)
+  const std::string& message)
+//   const std::string  measureNumber,
+//   int                scoreMeasuresNumber)
 {
   gIndenter.resetToZero ();
 
 //  waeErrorWithoutException ( // JMI
-   waeErrorWithExceptionWithMeasureInfo (
+   waeErrorWithExceptionWithLocationDetails (
     "MSR INTERNAL",
     inputSourceName,
     inputLineNumber,
     sourceCodeFileName,
     sourceCodeLineNumber,
     message,
-    msrInternalException::create (message),
-    measureNumber,
-    scoreMeasuresNumber);
+    msrInternalException::create (message));
+//     measureNumber,
+//     scoreMeasuresNumber);
 
 #ifdef MF_ABORT_TO_DEBUG_ERRORS_IS_ENABLED
   abort ();

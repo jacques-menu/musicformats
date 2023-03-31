@@ -42,7 +42,7 @@ S_msrSyllable msrSyllable::create (
   int                    inputLineNumber,
   const S_msrMeasure&    upLinkToMeasure,
   msrSyllableKind        syllableKind,
-  msrSyllableExtendKind  syllableExtendKind,
+  msrSyllableExtendTypeKind  syllableExtendKind,
   const std::string&     syllableStanzaNumber,
   const msrWholeNotes&        syllableWholeNotes,
   const msrTupletFactor& syllableTupletFactor,
@@ -65,7 +65,7 @@ S_msrSyllable msrSyllable::create (
 S_msrSyllable msrSyllable::create (
   int                    inputLineNumber,
   msrSyllableKind        syllableKind,
-  msrSyllableExtendKind  syllableExtendKind,
+  msrSyllableExtendTypeKind  syllableExtendKind,
   const std::string&     syllableStanzaNumber,
   const msrWholeNotes&        syllableWholeNotes,
   const msrTupletFactor& syllableTupletFactor,
@@ -87,7 +87,7 @@ S_msrSyllable msrSyllable::createWithNextMeasurePuristNumber ( // JMI superflous
   int                    inputLineNumber,
   const S_msrMeasure&    upLinkToMeasure,
   msrSyllableKind        syllableKind,
-  msrSyllableExtendKind  syllableExtendKind,
+  msrSyllableExtendTypeKind  syllableExtendKind,
   const std::string&     syllableStanzaNumber,
   const msrWholeNotes&        syllableWholeNotes,
   const msrTupletFactor& syllableTupletFactor,
@@ -117,7 +117,7 @@ msrSyllable::msrSyllable (
   int                    inputLineNumber,
   const S_msrMeasure&    upLinkToMeasure,
   msrSyllableKind        syllableKind,
-  msrSyllableExtendKind  syllableExtendKind,
+  msrSyllableExtendTypeKind  syllableExtendKind,
   const std::string&     syllableStanzaNumber,
   const msrWholeNotes&        syllableWholeNotes,
   const msrTupletFactor& syllableTupletFactor,
@@ -185,9 +185,11 @@ S_msrSyllable msrSyllable::createSyllableNewbornClone (
       "'" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -244,9 +246,11 @@ S_msrSyllable msrSyllable::createSyllableDeepClone (
       "'" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -332,9 +336,11 @@ void msrSyllable:: setSyllableNextMeasurePuristNumber (
       fSyllableNextMeasurePuristNumber <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -423,9 +429,11 @@ void msrSyllable::appendLyricTextToSyllable (const std::string& text)
       "'" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -490,9 +498,11 @@ void msrSyllable::acceptIn (basevisitor* v)
       "% ==> msrSyllable::acceptIn ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -509,9 +519,11 @@ void msrSyllable::acceptIn (basevisitor* v)
             "% ==> Launching msrSyllable::visitStart ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
+//             gServiceRunData->getCurrentMeasureNumber (),
+//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
@@ -528,9 +540,11 @@ void msrSyllable::acceptOut (basevisitor* v)
       "% ==> msrSyllable::acceptOut ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -547,9 +561,11 @@ void msrSyllable::acceptOut (basevisitor* v)
             "% ==> Launching msrSyllable::visitEnd ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
+//             gServiceRunData->getCurrentMeasureNumber (),
+//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
@@ -669,38 +685,35 @@ std::ostream& operator << (std::ostream& os, const msrSyllableKind& elt)
   return os;
 }
 
-std::string msrSyllableExtendKindAsString (
-  msrSyllableExtendKind syllableExtendKind)
+std::string msrSyllableExtendTypeKindAsString (
+  msrSyllableExtendTypeKind syllableExtendKind)
 {
   std::string result;
 
   switch (syllableExtendKind) {
-    case msrSyllableExtendKind::kSyllableExtendNone:
-      result = "kSyllableExtendNone";
+    case msrSyllableExtendTypeKind::kSyllableExtendType_NONE:
+      result = "kSyllableExtendType_NONE";
       break;
-    case msrSyllableExtendKind::kSyllableExtendEmpty:
-      result = "kSyllableExtendEmpty";
+    case msrSyllableExtendTypeKind::kSyllableExtendTypeEmpty:
+      result = "kSyllableExtendTypeEmpty";
       break;
-    case msrSyllableExtendKind::kSyllableExtendSingle:
-      result = "kSyllableExtendSingle";
+    case msrSyllableExtendTypeKind::kSyllableExtendTypeStart:
+      result = "kSyllableExtendTypeStart";
       break;
-    case msrSyllableExtendKind::kSyllableExtendStart:
-      result = "kSyllableExtendStart";
+    case msrSyllableExtendTypeKind::kSyllableExtendTypeContinue:
+      result = "kSyllableExtendTypeContinue";
       break;
-    case msrSyllableExtendKind::kSyllableExtendContinue:
-      result = "kSyllableExtendContinue";
-      break;
-    case msrSyllableExtendKind::kSyllableExtendStop:
-      result = "kSyllableExtendStop";
+    case msrSyllableExtendTypeKind::kSyllableExtendTypeStop:
+      result = "kSyllableExtendTypeStop";
       break;
   } // switch
 
   return result;
 }
 
-std::ostream& operator << (std::ostream& os, const msrSyllableExtendKind& elt)
+std::ostream& operator << (std::ostream& os, const msrSyllableExtendTypeKind& elt)
 {
-  os << msrSyllableExtendKindAsString (elt);
+  os << msrSyllableExtendTypeKindAsString (elt);
   return os;
 }
 
@@ -858,7 +871,7 @@ void msrSyllable::print (std::ostream& os) const
     std::endl <<
     std::setw (fieldWidth) <<
     "syllableExtendKind" << ": " <<
-    msrSyllableExtendKindAsString (
+    msrSyllableExtendTypeKindAsString (
       fSyllableExtendKind) <<
     std::endl <<
 
@@ -993,9 +1006,11 @@ void msrStanza::initializeStanza ()
       "Initializing stanza " << getStanzaName () <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1022,9 +1037,11 @@ S_msrStanza msrStanza::createStanzaNewbornClone (
       "\"" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1077,9 +1094,11 @@ S_msrStanza msrStanza::createStanzaDeepClone (
       "\"" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1138,9 +1157,11 @@ void msrStanza::appendSyllableToStanza (
       "' to stanza " << getStanzaName () <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1208,9 +1229,11 @@ S_msrSyllable msrStanza::appendRestSyllableToStanza (
       ", line " << inputLineNumber <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1223,7 +1246,7 @@ S_msrSyllable msrStanza::appendRestSyllableToStanza (
         inputLineNumber,
         gNullMeasure, // set later in setMeasureElementUpLinkToMeasure()
         msrSyllableKind::kSyllableSkipRestNote,
-        msrSyllableExtendKind::kSyllableExtendNone,
+        msrSyllableExtendTypeKind::kSyllableExtendType_NONE,
         fStanzaNumber,
         wholeNotes,
         msrTupletFactor (),
@@ -1253,9 +1276,11 @@ S_msrSyllable msrStanza::appendSkipSyllableToStanza (
       ", line " << inputLineNumber <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1268,7 +1293,7 @@ S_msrSyllable msrStanza::appendSkipSyllableToStanza (
         inputLineNumber,
         gNullMeasure, // set later in setMeasureElementUpLinkToMeasure()
         msrSyllableKind::kSyllableSkipRestNote,
-        msrSyllableExtendKind::kSyllableExtendNone,
+        msrSyllableExtendTypeKind::kSyllableExtendType_NONE,
         fStanzaNumber,
         wholeNotes,
         msrTupletFactor (),
@@ -1296,9 +1321,11 @@ S_msrSyllable msrStanza::appendMeasureEndSyllableToStanza (
       ", line " << inputLineNumber <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1311,7 +1338,7 @@ S_msrSyllable msrStanza::appendMeasureEndSyllableToStanza (
         inputLineNumber,
         gNullMeasure, // set later in setMeasureElementUpLinkToMeasure()
         msrSyllableKind::kSyllableMeasureEnd,
-        msrSyllableExtendKind::kSyllableExtendNone,
+        msrSyllableExtendTypeKind::kSyllableExtendType_NONE,
         fStanzaNumber,
         msrWholeNotes (0, 1),
         msrTupletFactor (),
@@ -1347,9 +1374,11 @@ S_msrSyllable msrStanza::appendMelismaSyllableToStanza (
       ", line " << inputLineNumber <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1362,7 +1391,7 @@ S_msrSyllable msrStanza::appendMelismaSyllableToStanza (
         inputLineNumber,
         gNullMeasure, // set later in setMeasureElementUpLinkToMeasure()
         syllableKind,
-        msrSyllableExtendKind::kSyllableExtendNone,
+        msrSyllableExtendTypeKind::kSyllableExtendType_NONE,
         fStanzaNumber,
         wholeNotes,
         msrTupletFactor (),
@@ -1392,9 +1421,11 @@ S_msrSyllable msrStanza::appendLineBreakSyllableToStanza (
       ", line " << inputLineNumber <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1407,7 +1438,7 @@ S_msrSyllable msrStanza::appendLineBreakSyllableToStanza (
         inputLineNumber,
         gNullMeasure, // set later in setMeasureElementUpLinkToMeasure()
         msrSyllableKind::kSyllableLineBreak,
-        msrSyllableExtendKind::kSyllableExtendNone,
+        msrSyllableExtendTypeKind::kSyllableExtendType_NONE,
         fStanzaNumber,
         msrWholeNotes (0, 1),
         msrTupletFactor (),
@@ -1441,9 +1472,11 @@ S_msrSyllable msrStanza::appendPageBreakSyllableToStanza (
       ", line " << inputLineNumber <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1456,7 +1489,7 @@ S_msrSyllable msrStanza::appendPageBreakSyllableToStanza (
         inputLineNumber,
         gNullMeasure, // set later in setMeasureElementUpLinkToMeasure()
         msrSyllableKind::kSyllablePageBreak,
-        msrSyllableExtendKind::kSyllableExtendNone,
+        msrSyllableExtendTypeKind::kSyllableExtendType_NONE,
         fStanzaNumber,
         msrWholeNotes (0, 1),
         msrTupletFactor (),
@@ -1501,9 +1534,11 @@ void msrStanza::appendPaddingNoteToStanza (
       "\", line " << inputLineNumber <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1524,9 +1559,11 @@ void msrStanza::acceptIn (basevisitor* v)
       "% ==> msrStanza::acceptIn ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1543,9 +1580,11 @@ void msrStanza::acceptIn (basevisitor* v)
             "% ==> Launching msrStanza::visitStart ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
+//             gServiceRunData->getCurrentMeasureNumber (),
+//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
@@ -1562,9 +1601,11 @@ void msrStanza::acceptOut (basevisitor* v)
       "% ==> msrStanza::acceptOut ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1581,9 +1622,11 @@ void msrStanza::acceptOut (basevisitor* v)
             "% ==> Launching msrStanza::visitEnd ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
+//             gServiceRunData->getCurrentMeasureNumber (),
+//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
@@ -1600,9 +1643,11 @@ void msrStanza::browseData (basevisitor* v)
       "% ==> msrStanza::browseData ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1626,9 +1671,11 @@ void msrStanza::browseData (basevisitor* v)
       "% <== msrStanza::browseData ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }

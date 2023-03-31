@@ -225,7 +225,7 @@ void initializeMusicFormatsServices ()
         "Initializing MusicFormats services" <<
         std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -475,6 +475,15 @@ mfServiceRunData::mfServiceRunData (
 
   // run date
   initializeRunDate ();
+
+  // parts
+  fCurrentPartIDAndName = "???";
+
+  // staves
+  fCurrentStaveNumber = msrStaff::K_STAFF_NUMBER_UNKNOWN_;
+
+  // voices
+  fCurrentVoiceNumber = msrVoice::K_VOICE_NUMBER_UNKNOWN_;
 
   // measure numbers
   fCurrentMeasureNumber = K_MEASURE_NUMBER_UNKNOWN_;

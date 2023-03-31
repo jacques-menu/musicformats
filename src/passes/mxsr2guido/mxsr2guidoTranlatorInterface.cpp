@@ -101,7 +101,7 @@ void translateMxsrToGuido (
       "\"" <<
       std::endl;
 
-//     gWaeHandler->waeTrace ( JMI v0.9.67
+//     gWaeHandler->waeTraceWithoutLocationDetails ( JMI v0.9.67
 //       __FILE__, __LINE__,
 //       ss.str ());
   }
@@ -114,7 +114,7 @@ void translateMxsrToGuido (
         "xmlFile2gmn() output goes to standard output" <<
         std::endl;
 
-//     gWaeHandler->waeTrace ( JMI v0.9.67
+//     gWaeHandler->waeTraceWithoutLocationDetails ( JMI v0.9.67
 //       __FILE__, __LINE__,
 //       ss.str ());
     }
@@ -135,7 +135,7 @@ void translateMxsrToGuido (
         "\"" <<
         std::endl;
 
-//     gWaeHandler->waeTrace ( JMI v0.9.67
+//     gWaeHandler->waeTraceWithoutLocationDetails ( JMI v0.9.67
 //       __FILE__, __LINE__,
 //       ss.str ());
     }
@@ -151,7 +151,7 @@ void translateMxsrToGuido (
         gLanguage->openingGuidoFileForWriting (outputFileName) <<
         std::endl;
 
-//     gWaeHandler->waeTrace ( JMI v0.9.67
+//     gWaeHandler->waeTraceWithoutLocationDetails ( JMI v0.9.67
 //       __FILE__, __LINE__,
 //       ss.str ());
     }
@@ -190,7 +190,7 @@ void translateMxsrToGuido (
         gLanguage->closingGuidoFile (outputFileName) <<
         std::endl;
 
-      gWaeHandler->waeTrace (
+      gWaeHandler->waeTraceWithoutLocationDetails (
         __FILE__, __LINE__,
         ss.str ());
     }

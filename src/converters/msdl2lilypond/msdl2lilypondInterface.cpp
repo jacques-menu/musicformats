@@ -106,7 +106,7 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
         separator <<
         std::endl;
 
-//     gWaeHandler->waeTrace ( JMI v0.9.67
+//     gWaeHandler->waeTraceWithoutLocationDetails ( JMI v0.9.67
 //       __FILE__, __LINE__,
 //       ss.str ());
     }
@@ -232,7 +232,7 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
       "\"" <<
       std::endl;
 
-//     gWaeHandler->waeTrace ( JMI v0.9.67
+//     gWaeHandler->waeTraceWithoutLocationDetails ( JMI v0.9.67
 //       __FILE__, __LINE__,
 //       ss.str ());
   }
@@ -245,7 +245,7 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
         "msdlStream2lilypond() output goes to standard output" <<
         std::endl;
 
-//     gWaeHandler->waeTrace ( JMI v0.9.67
+//     gWaeHandler->waeTraceWithoutLocationDetails ( JMI v0.9.67
 //       __FILE__, __LINE__,
 //       ss.str ());
     }
@@ -287,7 +287,7 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
         "\"" <<
         std::endl;
 
-//     gWaeHandler->waeTrace ( JMI v0.9.67
+//     gWaeHandler->waeTraceWithoutLocationDetails ( JMI v0.9.67
 //       __FILE__, __LINE__,
 //       ss.str ());
     }
@@ -301,7 +301,7 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
         gLanguage->openingLilypondFileForWriting (outputFileName) <<
         std::endl;
 
-//     gWaeHandler->waeTrace ( JMI v0.9.67
+//     gWaeHandler->waeTraceWithoutLocationDetails ( JMI v0.9.67
 //       __FILE__, __LINE__,
 //       ss.str ());
     }
@@ -363,7 +363,7 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
         gLanguage->closingLilypondFile (outputFileName) <<
         std::endl;
 
-      gWaeHandler->waeTrace (
+      gWaeHandler->waeTraceWithoutLocationDetails (
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -432,7 +432,7 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
       ", insiderOption: " << insiderOption <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }

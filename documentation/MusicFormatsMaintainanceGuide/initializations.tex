@@ -43,7 +43,7 @@ S_generalOahGroup createGlobalGeneralOahGroup ()
       "Creating global general OAH group" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -132,7 +132,7 @@ void initializeMsrBasicTypes ()
         "Initializing MSR basic types handling" <<
         std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }

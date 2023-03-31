@@ -56,7 +56,7 @@ S_mfcConverterComponent createMsr2musicxmlConverterComponent ()
         "Creating the msr2musicxml component" <<
         std::endl;
 
-      gWaeHandler->waeTrace (
+      gWaeHandler->waeTraceWithoutLocationDetails (
         __FILE__, __LINE__,
         ss.str ());
     }

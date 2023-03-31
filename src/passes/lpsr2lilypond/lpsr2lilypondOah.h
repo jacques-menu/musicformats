@@ -1062,6 +1062,11 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
     // score notation
     // --------------------------------------
 
+    void                  setLilyJazz ()
+                              { fLilyJazz = true; }
+    Bool                  getLilyJazz () const
+                              { return fLilyJazz; }
+
     void                  setJianpu ()
                               { fJianpu = true; }
     Bool                  getJianpu () const
@@ -1763,6 +1768,8 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
     // --------------------------------------
 
     // lilypondScoreNotationKind     fScoreNotationKind; JMI ???
+    Bool                  fLilyJazz;
+
     Bool                  fJianpu;
 
     // lyluatex output

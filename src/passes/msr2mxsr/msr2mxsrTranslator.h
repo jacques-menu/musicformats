@@ -262,12 +262,12 @@ class EXP msr2mxsrTranslator :
 {
   public:
 
-                          msr2mxsrTranslator (
-                            const S_msrScore& visitedMsrScore);
+                              msr2mxsrTranslator (
+                                const S_msrScore& visitedMsrScore);
 
-    virtual               ~msr2mxsrTranslator ();
+    virtual                   ~msr2mxsrTranslator ();
 
-    Sxmlelement           translateMsrToMxsr ();
+    Sxmlelement               translateMsrToMxsr ();
 
   protected:
 
@@ -718,7 +718,7 @@ class EXP msr2mxsrTranslator :
 
     // divisions
     // ------------------------------------------------------
-    msrWholeNotes         fPartShortestNoteWholeNotes;
+    msrWholeNotes             fPartShortestNoteWholeNotes;
     msrTupletFactor           fPartShortestNoteTupletFactor;
 
     int                       fDivisionsPerQuarterNote;
@@ -795,6 +795,7 @@ class EXP msr2mxsrTranslator :
     // measures
     // ------------------------------------------------------
 
+    std::string               fCurrentMeasureNumber;
     S_msrMeasure              fCurrentMSRMeasure;
 
     Sxmlelement               fCurrentMeasureElement;

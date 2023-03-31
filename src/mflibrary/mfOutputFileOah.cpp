@@ -138,7 +138,7 @@ void outputFileOahGroup::acceptIn (basevisitor* v)
       ".\\\" ==> outputFileOahGroup::acceptIn ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -157,7 +157,7 @@ void outputFileOahGroup::acceptIn (basevisitor* v)
             ".\\\" ==> Launching outputFileOahGroup::visitStart ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -176,7 +176,7 @@ void outputFileOahGroup::acceptOut (basevisitor* v)
       ".\\\" ==> outputFileOahGroup::acceptOut ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -195,7 +195,7 @@ void outputFileOahGroup::acceptOut (basevisitor* v)
             ".\\\" ==> Launching outputFileOahGroup::visitEnd ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -214,7 +214,7 @@ void outputFileOahGroup::browseData (basevisitor* v)
       ".\\\" ==> outputFileOahGroup::browseData ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -277,7 +277,7 @@ S_outputFileOahGroup createGlobalOutputFileOahGroup ()
       "Creating global outputFile OAH group" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }

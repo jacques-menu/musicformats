@@ -88,6 +88,11 @@ class EXP lpsrScore : public lpsrElement
     // files includes
     // ---------------------
 
+    void                  setLilyJazzFontFileIncludeIsNeeded ();
+
+    Bool                  getLilyJazzFontFileIncludeIsNeeded () const
+                              { return fLilyJazzFontFileIncludeIsNeeded; }
+
     void                  setJianpuFileIncludeIsNeeded ();
 
     Bool                  getJianpuFileIncludeIsNeeded () const
@@ -331,6 +336,8 @@ class EXP lpsrScore : public lpsrElement
 
     // files includes
 
+    void                  addLilyJazzFontFileIncludeToScore ();
+
     void                  addJianpuFileIncludeToScore ();
 
     // Scheme modules
@@ -459,6 +466,8 @@ class EXP lpsrScore : public lpsrElement
     S_lpsrScoreBlock      fScoreScoreBlock; // JMI ???
 
     // files includes
+    Bool                  fLilyJazzFontFileIncludeIsNeeded;
+
     Bool                  fJianpuFileIncludeIsNeeded;
 
     // Scheme modules

@@ -88,7 +88,7 @@ void msr2lpsrScoreOutputKindAtom::applyAtomWithValue (
       "==> oahAtom is of type 'msr2lpsrScoreOutputKindAtom'" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -105,7 +105,7 @@ void msr2lpsrScoreOutputKindAtom::applyAtomWithValue (
       "==> oahAtom is of type 'msr2lpsrScoreOutputKindAtom'" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -156,7 +156,7 @@ void msr2lpsrScoreOutputKindAtom::acceptIn (basevisitor* v)
       ".\\\" ==> msr2lpsrScoreOutputKindAtom::acceptIn ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -175,7 +175,7 @@ void msr2lpsrScoreOutputKindAtom::acceptIn (basevisitor* v)
             ".\\\" ==> Launching msr2lpsrScoreOutputKindAtom::visitStart ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -194,7 +194,7 @@ void msr2lpsrScoreOutputKindAtom::acceptOut (basevisitor* v)
       ".\\\" ==> msr2lpsrScoreOutputKindAtom::acceptOut ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -213,7 +213,7 @@ void msr2lpsrScoreOutputKindAtom::acceptOut (basevisitor* v)
             ".\\\" ==> Launching msr2lpsrScoreOutputKindAtom::visitEnd ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -232,7 +232,7 @@ void msr2lpsrScoreOutputKindAtom::browseData (basevisitor* v)
       ".\\\" ==> msr2lpsrScoreOutputKindAtom::browseData ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -499,7 +499,7 @@ void msr2lpsrOahGroup::acceptIn (basevisitor* v)
       ".\\\" ==> msr2lpsrOahGroup::acceptIn ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -518,7 +518,7 @@ void msr2lpsrOahGroup::acceptIn (basevisitor* v)
             ".\\\" ==> Launching msr2lpsrOahGroup::visitStart ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -537,7 +537,7 @@ void msr2lpsrOahGroup::acceptOut (basevisitor* v)
       ".\\\" ==> msr2lpsrOahGroup::acceptOut ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -556,7 +556,7 @@ void msr2lpsrOahGroup::acceptOut (basevisitor* v)
             ".\\\" ==> Launching msr2lpsrOahGroup::visitEnd ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -575,7 +575,7 @@ void msr2lpsrOahGroup::browseData (basevisitor* v)
       ".\\\" ==> msr2lpsrOahGroup::browseData ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -650,7 +650,7 @@ S_msr2lpsrOahGroup createGlobalMsr2lpsrOahGroup ()
       "Creating global msr2lpsr OAH group" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }

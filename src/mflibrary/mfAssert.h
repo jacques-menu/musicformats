@@ -29,13 +29,13 @@ EXP void mfAssert (
   Bool               condition,
   const std::string& messageIfFalse);
 
-EXP void mfAssertWithMeasureInfo (
+EXP void mfAssertWithLocationDetails (
   const std::string& sourceCodeFileName,
   int                sourceCodeLineNumber,
   Bool               condition,
-  const std::string& messageIfFalse,
-  const std::string  measureNumber,
-  int                scoreMeasuresNumber);
+  const std::string& messageIfFalse);
+//   const std::string  measureNumber,
+//   int                scoreMeasuresNumber);
 
 //______________________________________________________________________________
 // assert with input location
@@ -48,15 +48,15 @@ EXP void mfAssertWithInputLocation (
   int                inputLineNumber,
   const std::string& messageIfFalse);
 
-EXP void mfAssertWithInputLocationWithMeasureInfo (
+EXP void mfAssertWithInputLocationWithLocationDetails (
   const std::string& sourceCodeFileName,
   int                sourceCodeLineNumber,
   Bool               condition,
   const std::string& inputSourceName,
   int                inputLineNumber,
-  const std::string& messageIfFalse,
-  const std::string  measureNumber,
-  int                scoreMeasuresNumber);
+  const std::string& messageIfFalse);
+//   const std::string  measureNumber,
+//   int                scoreMeasuresNumber);
 
 
 }

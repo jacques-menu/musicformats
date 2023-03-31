@@ -148,7 +148,7 @@ R"(
       "\" regular options handler" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -360,7 +360,7 @@ void msdlConverterInsiderHandler::createTheMsdlConverterPrefixes ()
       "\"" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -384,7 +384,7 @@ void msdlConverterInsiderHandler::createTheMsdlConverterOptionGroups (
       "\" insider option groups" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -578,7 +578,7 @@ void msdlConverterInsiderHandler::checkOptionsAndArguments () const
       "\"" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -609,7 +609,7 @@ std::string msdlConverterInsiderHandler::fetchOutputFileNameFromTheOptions () co
       "\"" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -647,7 +647,7 @@ std::string msdlConverterInsiderHandler::fetchOutputFileNameFromTheOptions () co
       autoOutputFileNameHasBeenSet <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -721,7 +721,7 @@ std::string msdlConverterInsiderHandler::fetchOutputFileNameFromTheOptions () co
           "\"" <<
           std::endl;
 
-        gWaeHandler->waeTrace (
+        gWaeHandler->waeTraceWithoutLocationDetails (
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -737,7 +737,7 @@ std::string msdlConverterInsiderHandler::fetchOutputFileNameFromTheOptions () co
           "\"" <<
           std::endl;
 
-        gWaeHandler->waeTrace (
+        gWaeHandler->waeTraceWithoutLocationDetails (
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -848,7 +848,7 @@ std::string msdlConverterInsiderHandler::fetchOutputFileNameFromTheOptions () co
       outputFileName <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -934,7 +934,7 @@ void msdlConverterInsiderOahGroup::acceptIn (basevisitor* v)
       ".\\\" ==> msdlConverterInsiderOahGroup::acceptIn ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -953,7 +953,7 @@ void msdlConverterInsiderOahGroup::acceptIn (basevisitor* v)
             ".\\\" ==> Launching msdlConverterInsiderOahGroup::visitStart ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -972,7 +972,7 @@ void msdlConverterInsiderOahGroup::acceptOut (basevisitor* v)
       ".\\\" ==> msdlConverterInsiderOahGroup::acceptOut ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -991,7 +991,7 @@ void msdlConverterInsiderOahGroup::acceptOut (basevisitor* v)
             ".\\\" ==> Launching msdlConverterInsiderOahGroup::visitEnd ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -1010,7 +1010,7 @@ void msdlConverterInsiderOahGroup::browseData (basevisitor* v)
       ".\\\" ==> msdlConverterInsiderOahGroup::browseData ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1115,7 +1115,7 @@ void msdlConverterInsiderOahGroup::initializemsdlConverterInsiderOahGroup ()
       "\" group" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1164,7 +1164,7 @@ S_msdlConverterInsiderOahGroup createGlobalmsdlConverterInsiderOahGroup ()
       "Creating global msdlConverter insider OAH group" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }

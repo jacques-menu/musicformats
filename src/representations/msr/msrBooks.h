@@ -143,10 +143,10 @@ class EXP msrBook : public msrElement
 
     // measures
     void                  setBookNumberOfMeasures (
-                            int scoreNumberOfMeasures)
+                            int scoreMeasuresNumber)
                               {
                                 fBookNumberOfMeasures =
-                                  scoreNumberOfMeasures;
+                                  scoreMeasuresNumber;
                               }
 
     int                   getBookNumberOfMeasures () const

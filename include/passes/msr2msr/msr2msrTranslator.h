@@ -688,6 +688,7 @@ class EXP msr2msrTranslator :
     // measures
     // ------------------------------------------------------
 
+    std::string               fCurrentMeasureNumber;
     S_msrMeasure              fCurrentMeasureClone;
 
     // multiple full-bar rests compression

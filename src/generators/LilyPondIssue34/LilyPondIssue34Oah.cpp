@@ -210,7 +210,7 @@ void LilyPondIssue34OahGroup::acceptIn (basevisitor* v)
       ".\\\" ==> LilyPondIssue34OahGroup::acceptIn ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -229,7 +229,7 @@ void LilyPondIssue34OahGroup::acceptIn (basevisitor* v)
             ".\\\" ==> Launching LilyPondIssue34OahGroup::visitStart ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -248,7 +248,7 @@ void LilyPondIssue34OahGroup::acceptOut (basevisitor* v)
       ".\\\" ==> LilyPondIssue34OahGroup::acceptOut ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -267,7 +267,7 @@ void LilyPondIssue34OahGroup::acceptOut (basevisitor* v)
             ".\\\" ==> Launching LilyPondIssue34OahGroup::visitEnd ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -286,7 +286,7 @@ void LilyPondIssue34OahGroup::browseData (basevisitor* v)
       ".\\\" ==> LilyPondIssue34OahGroup::browseData ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -360,7 +360,7 @@ S_LilyPondIssue34OahGroup createGlobalLilyPondIssue34OahGroup ()
       "Creating global LilyPondIssue34 OAH group" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }

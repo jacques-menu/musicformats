@@ -1261,7 +1261,7 @@ class EXP mxsr2msrTranslator :
     msrAlterationKind         fCurrentStaffTuningAlterationKind;
     msrOctaveKind             fCurrentStaffTuningOctaveKind;
 
-   S_msrStaffDetails          fCurrentStaffDetails;
+    S_msrStaffDetails         fCurrentStaffDetails;
 
     Bool                      fOnGoingStaffTuning;
 
@@ -1369,7 +1369,7 @@ class EXP mxsr2msrTranslator :
     void                      createAStaffChangeIfNecessary (
                                 int               inputLineNumber,
                                 const S_msrNote&  newNote,
-                                const S_msrVoice& voiceToInsertInto);
+                                const S_msrVoice& voiceToInsertNoteInto);
 
 
     // transpose handling
@@ -1699,8 +1699,9 @@ class EXP mxsr2msrTranslator :
     std::list<std::string>
                               fCurrentLyricTextsList;
 
-    msrSyllableExtendKind     fCurrentSyllableExtendKind;
-    Bool                      fOnGoingSyllableExtend;
+    msrSyllableExtendTypeKind
+                              fCurrentSyllableExtendKind;
+//     Bool                      fOnGoingSyllableExtend;
 
     std::string               fCurrentStanzaNumber;
     std::string               fCurrentStanzaName;

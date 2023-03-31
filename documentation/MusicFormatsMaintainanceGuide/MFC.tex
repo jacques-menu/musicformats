@@ -395,7 +395,7 @@ S_mfcRepresentationComponent EXP createMsrRepresentationComponent ()
         "Initializing MSR format component" <<
         std::endl;
 
-      gWaeHandler->waeTrace (
+      gWaeHandler->waeTraceWithoutLocationDetails (
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -459,7 +459,7 @@ S_mfcConverterComponent EXP createMusicxml2brailleConverterComponent ()
         "Creating the musicxml2braille component" <<
         std::endl;
 
-      gWaeHandler->waeTrace (
+      gWaeHandler->waeTraceWithoutLocationDetails (
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -551,7 +551,7 @@ S_mfcLibraryComponent EXP createLibraryComponent ()
         "Creating the  MFC library component" <<
         std::endl;
 
-      gWaeHandler->waeTrace (
+      gWaeHandler->waeTraceWithoutLocationDetails (
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -909,7 +909,7 @@ void oahVersionAtom::applyValueLessAtom (std::ostream& os)
       "==> option '" << fetchNames () << "' is a oahVersionAtom" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }

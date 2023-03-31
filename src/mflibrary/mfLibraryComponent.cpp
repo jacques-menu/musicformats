@@ -70,7 +70,7 @@ S_mfcLibraryComponent createLibraryComponent ()
         getGlobalMusicFormatsVersionDate <<
         std::endl;
 
-      gWaeHandler->waeTrace (
+      gWaeHandler->waeTraceWithoutLocationDetails (
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -368,7 +368,7 @@ S_mfcLibraryComponent createLibraryComponent ()
           mfcVersionNumber::createFromString ("0.9.67"),
           "February 6, 2023",
           std::list<std::string> {
-            "Switched to using gWaeHandler->waeTrace() instead of gLog for trace messages",
+            "Switched to using gWaeHandler->waeTraceWithoutLocationDetails() instead of gLog for trace messages",
             "Moved language files to the new 'src/languages' folder",
             "Made global variables private with set()/get() methods",
             "Added mfAssertWithInputLocation() to mflibrary"

@@ -64,7 +64,7 @@ S_mfcConverterComponent createMsdl2brailleConverterComponent ()
         "Creating the msdl2braille component" <<
         std::endl;
 
-      gWaeHandler->waeTrace (
+      gWaeHandler->waeTraceWithoutLocationDetails (
         __FILE__, __LINE__,
         ss.str ());
     }

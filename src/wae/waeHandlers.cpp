@@ -63,13 +63,13 @@ void waeHandler::waeWarning (
   }
 }
 
-void waeHandler::waeWarningWithMeasureInfo (
+void waeHandler::waeWarningWithLocationDetails (
   const std::string& context,
   const std::string& inputSourceName,
   int                inputLineNumber,
-  const std::string& message,
-  const std::string  measureNumber,
-  int                scoreMeasuresNumber)
+  const std::string& message)
+//   const std::string  measureNumber,
+//   int                scoreMeasuresNumber)
 {
   if (! gEarlyOptions.getEarlyQuietOption ()) {
     int saveIndent = gIndenter.getIndentation ();
@@ -77,9 +77,26 @@ void waeHandler::waeWarningWithMeasureInfo (
     gIndenter.resetToZero ();
 
     gLog <<
-      "*** " << context << " warning ***" <<
-      inputSourceName << ":" << inputLineNumber << ": " <<
-      "measure " << measureNumber << '/' << scoreMeasuresNumber << ", " <<
+      "*** " << context << " warning *** " <<
+      inputSourceName << ":" << inputLineNumber << ": ";
+
+    if (gServiceRunData) {
+      gLog <<
+        message <<
+        " - measure " <<
+        gServiceRunData->getCurrentMeasureNumber () <<
+        '/' <<
+        gServiceRunData->getScoreMeasuresNumber () <<
+        ", part " <<
+        gServiceRunData->getCurrentPartIDAndName () <<
+        ", staff " <<
+        gServiceRunData->getCurrentStaveNumber () <<
+        ", voice " <<
+        gServiceRunData->getCurrentVoiceNumber () <<
+        " - ";
+    }
+
+    gLog <<
       message <<
       std::endl;
 
@@ -116,13 +133,13 @@ void waeHandler::waeInternalWarning (
   }
 }
 
-void waeHandler::waeInternalWarningWithMeasureInfo (
+void waeHandler::waeInternalWarningWithLocationDetails (
   const std::string& context,
   const std::string& inputSourceName,
   int                inputLineNumber,
-  const std::string& message,
-  const std::string  measureNumber,
-  int                scoreMeasuresNumber)
+  const std::string& message)
+//   const std::string  measureNumber,
+//   int                scoreMeasuresNumber)
 {
   if (! gEarlyOptions.getEarlyQuietOption ()) {
     int saveIndent = gIndenter.getIndentation ();
@@ -131,8 +148,25 @@ void waeHandler::waeInternalWarningWithMeasureInfo (
 
     gLog <<
       "*** " << context << " INTERNAL warning ***" <<
-      inputSourceName << ":" << inputLineNumber << ": " <<
-      "measure " << measureNumber << '/' << scoreMeasuresNumber << ", " <<
+      inputSourceName << ":" << inputLineNumber << ": ";
+
+    if (gServiceRunData) {
+      gLog <<
+        message <<
+        " - measure " <<
+        gServiceRunData->getCurrentMeasureNumber () <<
+        '/' <<
+        gServiceRunData->getScoreMeasuresNumber () <<
+        ", part " <<
+        gServiceRunData->getCurrentPartIDAndName () <<
+        ", staff " <<
+        gServiceRunData->getCurrentStaveNumber () <<
+        ", voice " <<
+        gServiceRunData->getCurrentVoiceNumber () <<
+        " - ";
+    }
+
+    gLog <<
       message <<
       std::endl;
 
@@ -174,13 +208,13 @@ void waeHandler::waeErrorWithoutException (
   }
 }
 
-void waeHandler::waeErrorWithoutExceptionWithMeasureInfo (
+void waeHandler::waeErrorWithoutExceptionWithLocationDetails (
   const std::string& context,
   const std::string& sourceCodeFileName,
   int                sourceCodeLineNumber,
-  const std::string& message,
-  const std::string  measureNumber,
-  int                scoreMeasuresNumber)
+  const std::string& message)
+//   const std::string  measureNumber,
+//   int                scoreMeasuresNumber)
 {
   if (! gEarlyOptions.getEarlyQuietOption ()) {
     if (gOahOahGroup->getDisplaySourceCodePositions ()) {
@@ -195,8 +229,25 @@ void waeHandler::waeErrorWithoutExceptionWithMeasureInfo (
       gIndenter.resetToZero ();
 
       gLog <<
-        "### " << context << " ERROR ###" <<
-        "measure " << measureNumber << '/' << scoreMeasuresNumber << ", " <<
+        "### " << context << " ERROR ### ";
+
+      if (gServiceRunData) {
+        gLog <<
+          message <<
+          " - measure " <<
+          gServiceRunData->getCurrentMeasureNumber () <<
+          '/' <<
+          gServiceRunData->getScoreMeasuresNumber () <<
+          ", part " <<
+          gServiceRunData->getCurrentPartIDAndName () <<
+          ", staff " <<
+          gServiceRunData->getCurrentStaveNumber () <<
+          ", voice " <<
+          gServiceRunData->getCurrentVoiceNumber () <<
+          " - ";
+      }
+
+      gLog <<
         message <<
         std::endl;
 
@@ -239,15 +290,15 @@ void waeHandler::waeErrorWithoutException (
   }
 }
 
-void waeHandler::waeErrorWithoutExceptionWithMeasureInfo (
+void waeHandler::waeErrorWithoutExceptionWithLocationDetails (
   const std::string& context,
   const std::string& inputSourceName,
   int                inputLineNumber,
   const std::string& sourceCodeFileName,
   int                sourceCodeLineNumber,
-  const std::string& message,
-  const std::string  measureNumber,
-  int                scoreMeasuresNumber)
+  const std::string& message)
+//   const std::string  measureNumber,
+//   int                scoreMeasuresNumber)
 {
   if (! gEarlyOptions.getEarlyQuietOption ()) {
     if (gOahOahGroup->getDisplaySourceCodePositions ()) {
@@ -263,8 +314,25 @@ void waeHandler::waeErrorWithoutExceptionWithMeasureInfo (
 
       gLog <<
         "### " << context << " ERROR ###" <<
-        inputSourceName << ":" << inputLineNumber << ": " <<
-        "measure " << measureNumber << '/' << scoreMeasuresNumber << ", " <<
+        inputSourceName << ":" << inputLineNumber << ": ";
+
+    if (gServiceRunData) {
+      gLog <<
+        message <<
+        " - measure " <<
+        gServiceRunData->getCurrentMeasureNumber () <<
+        '/' <<
+        gServiceRunData->getScoreMeasuresNumber () <<
+        ", part " <<
+        gServiceRunData->getCurrentPartIDAndName () <<
+        ", staff " <<
+        gServiceRunData->getCurrentStaveNumber () <<
+        ", voice " <<
+        gServiceRunData->getCurrentVoiceNumber () <<
+        " - ";
+    }
+
+    gLog <<
         message <<
         std::endl;
 
@@ -297,22 +365,22 @@ abort (); // JMI
   throw *except;
 }
 
-void waeHandler::waeErrorWithExceptionWithMeasureInfo (
+void waeHandler::waeErrorWithExceptionWithLocationDetails (
   const std::string& context,
   const std::string& sourceCodeFileName,
   int                sourceCodeLineNumber,
   const std::string& message,
-  S_mfException      except,
-  const std::string  measureNumber,
-  int                scoreMeasuresNumber)
+  S_mfException      except)
+//   const std::string  measureNumber,
+//   int                scoreMeasuresNumber)
 {
-  this->waeErrorWithoutExceptionWithMeasureInfo (
+  this->waeErrorWithoutExceptionWithLocationDetails (
     context,
     sourceCodeFileName,
     sourceCodeLineNumber,
-    message,
-    measureNumber,
-    scoreMeasuresNumber);
+    message);
+//     measureNumber,
+//     scoreMeasuresNumber);
 
 abort (); // JMI
 
@@ -341,26 +409,26 @@ abort (); // JMI
   throw *except;
 }
 
-void waeHandler::waeErrorWithExceptionWithMeasureInfo (
+void waeHandler::waeErrorWithExceptionWithLocationDetails (
   const std::string& context,
   const std::string& inputSourceName,
   int                inputLineNumber,
   const std::string& sourceCodeFileName,
   int                sourceCodeLineNumber,
   const std::string& message,
-  S_mfException      except,
-  const std::string  measureNumber,
-  int                scoreMeasuresNumber)
+  S_mfException      except)
+//   const std::string  measureNumber,
+//   int                scoreMeasuresNumber)
 {
-  this->waeErrorWithoutExceptionWithMeasureInfo (
+  this->waeErrorWithoutExceptionWithLocationDetails (
     context,
     inputSourceName,
     inputLineNumber,
     sourceCodeFileName,
     sourceCodeLineNumber,
-    message,
-    measureNumber,
-    scoreMeasuresNumber);
+    message);
+//     measureNumber,
+//     scoreMeasuresNumber);
 
 abort (); // JMI
 
@@ -385,21 +453,21 @@ void waeHandler::waeError (
   throw mfException (message);
 }
 
-void waeHandler::waeErrorWithMeasureInfo (
+void waeHandler::waeErrorWithLocationDetails (
   const std::string& context,
   const std::string& sourceCodeFileName,
   int                sourceCodeLineNumber,
-  const std::string& message,
-  const std::string  measureNumber,
-  int                scoreMeasuresNumber)
+  const std::string& message)
+//   const std::string  measureNumber,
+//   int                scoreMeasuresNumber)
 {
-  this->waeErrorWithoutExceptionWithMeasureInfo (
+  this->waeErrorWithoutExceptionWithLocationDetails (
     context,
     sourceCodeFileName,
     sourceCodeLineNumber,
-    message,
-    measureNumber,
-    scoreMeasuresNumber);
+    message);
+//     measureNumber,
+//     scoreMeasuresNumber);
 
   throw mfException (message);
 }
@@ -423,25 +491,25 @@ void waeHandler::waeError (
   throw mfException (message);
 }
 
-void waeHandler::waeErrorWithMeasureInfo (
+void waeHandler::waeErrorWithLocationDetails (
   const std::string& context,
   const std::string& inputSourceName,
   int                inputLineNumber,
   const std::string& sourceCodeFileName,
   int                sourceCodeLineNumber,
-  const std::string& message,
-  const std::string  measureNumber,
-  int                scoreMeasuresNumber)
+  const std::string& message)
+//   const std::string  measureNumber,
+//   int                scoreMeasuresNumber)
 {
-  this->waeErrorWithoutExceptionWithMeasureInfo (
+  this->waeErrorWithoutExceptionWithLocationDetails (
     context,
     inputSourceName,
     inputLineNumber,
     sourceCodeFileName,
     sourceCodeLineNumber,
-    message,
-    measureNumber,
-    scoreMeasuresNumber);
+    message);
+//     measureNumber,
+//     scoreMeasuresNumber);
 
   throw mfException (message);
 }
@@ -468,25 +536,25 @@ void waeHandler::waeInternalError (
   throw mfException (message);
 }
 
-void waeHandler::waeInternalErrorWithMeasureInfo (
+void waeHandler::waeInternalErrorWithLocationDetails (
   const std::string& context,
   const std::string& inputSourceName,
   int                inputLineNumber,
   const std::string& sourceCodeFileName,
   int                sourceCodeLineNumber,
-  const std::string& message,
-  const std::string  measureNumber,
-  int                scoreMeasuresNumber)
+  const std::string& message)
+//   const std::string  measureNumber,
+//   int                scoreMeasuresNumber)
 {
-  this->waeErrorWithoutExceptionWithMeasureInfo (
+  this->waeErrorWithoutExceptionWithLocationDetails (
     context,
     inputSourceName,
     inputLineNumber,
     sourceCodeFileName,
     sourceCodeLineNumber,
-    message,
-    measureNumber,
-    scoreMeasuresNumber);
+    message);
+//     measureNumber,
+//     scoreMeasuresNumber);
 
   throw mfException (message);
 }
@@ -511,26 +579,26 @@ void waeHandler::waeInternalErrorWithException (
   throw *except;
 }
 
-void waeHandler::waeInternalErrorWithExceptionWithMeasureInfo (
+void waeHandler::waeInternalErrorWithExceptionWithLocationDetails (
   const std::string& context,
   const std::string& inputSourceName,
   int                inputLineNumber,
   const std::string& sourceCodeFileName,
   int                sourceCodeLineNumber,
   const std::string& message,
-  S_mfException      except,
-  const std::string  measureNumber,
-  int                scoreMeasuresNumber)
+  S_mfException      except)
+//   const std::string  measureNumber,
+//   int                scoreMeasuresNumber)
 {
-  this->waeErrorWithoutExceptionWithMeasureInfo (
+  this->waeErrorWithoutExceptionWithLocationDetails (
     context,
     inputSourceName,
     inputLineNumber,
     sourceCodeFileName,
     sourceCodeLineNumber,
-    message,
-    measureNumber,
-    scoreMeasuresNumber);
+    message);
+//     measureNumber,
+//     scoreMeasuresNumber);
 
   throw *except;
 }
@@ -564,7 +632,7 @@ void waeHandler::waeTraceToStream (
     switch (earlyTraceOnlyPass) {
       case mfPassIDKind::kMfPassID_UNKNOWN_:
         os <<
-          "waeHandler::waeTrace: " <<
+          "waeHandler::waeTraceWithoutLocationDetails: " <<
           "fEarlyTraceOnlyPass = " << earlyTraceOnlyPass <<
           std::endl;
         break;
@@ -632,7 +700,8 @@ void waeHandler::waeTraceToStream (
     ++gIndenter;
 
 //     '[' << context << "] " <<
-//     inputSourceName << ":" << inputLineNumber << ": " <<
+    os <<
+      inputSourceName << ":" << inputLineNumber << ": ";
 
     // message can be a multi-line string
     gIndenter.indentMultiLineString (
@@ -644,18 +713,17 @@ void waeHandler::waeTraceToStream (
   }
 }
 
-void waeHandler::waeTraceToStreamWithMeasureInfo (
+void waeHandler::waeTraceToStreamWithLocationDetails (
 //    const std::string& context,
   std::ostream&      os,
   const std::string& inputSourceName,
   int                inputLineNumber,
-  const std::string& message,
-  const std::string  measureNumber,
-  int                scoreMeasuresNumber)
+  const std::string& message)
+//   const std::string  measureNumber,
+//   int                scoreMeasuresNumber)
 {
   // should the current pass be traced?
-
-  Bool doTraceCurrentPass;
+  Bool doTraceCurrentPass (false);
 
   {
     mfPassIDKind
@@ -672,7 +740,7 @@ void waeHandler::waeTraceToStreamWithMeasureInfo (
     switch (earlyTraceOnlyPass) {
       case mfPassIDKind::kMfPassID_UNKNOWN_:
         os <<
-          "waeHandler::waeTrace: " <<
+          "waeHandler::waeTraceToStreamWithLocationDetails: " <<
           "fEarlyTraceOnlyPass = " << earlyTraceOnlyPass <<
           std::endl;
         break;
@@ -687,6 +755,7 @@ void waeHandler::waeTraceToStreamWithMeasureInfo (
     } // switch
   }
 
+  // should the current measure be traced?
   Bool doTraceCurrentMeasure;
 
   {
@@ -709,26 +778,43 @@ void waeHandler::waeTraceToStreamWithMeasureInfo (
   if (doTraceCurrentPass && doTraceCurrentMeasure) {
     ++gIndenter;
 
+    std::stringstream ss;
+
 //     '[' << context << "] " <<
-//     inputSourceName << ":" << inputLineNumber << ": " <<
+    ss <<
+      inputSourceName << ":" << inputLineNumber << ": ";
 
-    // message can be a multi-line string
-    mfIndentedStringStream iss;
-
-    iss <<
-      "measure " << measureNumber << '/' << scoreMeasuresNumber << ", " <<
+//     message can be a multi-line string JMI ???
+    ss <<
       message <<
-      '\n';
+      std::endl;
 
-    gIndenter.indentMultiLineString (
-      iss.str (),
-      os);
+    if (gServiceRunData) {
+      ss <<
+        message <<
+        " - measure " <<
+        gServiceRunData->getCurrentMeasureNumber () <<
+        '/' <<
+        gServiceRunData->getScoreMeasuresNumber () <<
+        ", part " <<
+        gServiceRunData->getCurrentPartIDAndName () <<
+        ", staff " <<
+        gServiceRunData->getCurrentStaveNumber () <<
+        ", voice " <<
+        gServiceRunData->getCurrentVoiceNumber () <<
+        " - ";
+    }
+
+    os << ss.str ();
+//     gIndenter.indentMultiLineString (
+//       iss.str (),
+//       os);
 
     --gIndenter;
   }
 }
 
-void waeHandler::waeTrace (
+void waeHandler::waeTraceWithoutLocationDetails (
 //   const std::string& context,
   const std::string& inputSourceName,
   int                inputLineNumber,
@@ -741,21 +827,21 @@ void waeHandler::waeTrace (
     message);
 }
 
-void waeHandler::waeTraceWithMeasureInfo (
+void waeHandler::waeTraceWithLocationDetails (
 //   const std::string& context,
   const std::string& inputSourceName,
   int                inputLineNumber,
-  const std::string& message,
-  const std::string  measureNumber,
-  int                scoreMeasuresNumber)
+  const std::string& message)
+//   const std::string  measureNumber,
+//   int                scoreMeasuresNumber)
 {
-  this->waeTraceToStreamWithMeasureInfo (
+  this->waeTraceToStreamWithLocationDetails (
     gLog,
     inputSourceName,
     inputLineNumber,
-    message,
-    measureNumber,
-    scoreMeasuresNumber);
+    message);
+//     measureNumber,
+//     scoreMeasuresNumber);
 }
 
 #endif // MF_TRACE_IS_ENABLED

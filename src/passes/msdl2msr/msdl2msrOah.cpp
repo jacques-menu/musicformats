@@ -449,7 +449,7 @@ void msdl2msrOahGroup::acceptIn (basevisitor* v)
       ".\\\" ==> msdl2msrOahGroup::acceptIn ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -468,7 +468,7 @@ void msdl2msrOahGroup::acceptIn (basevisitor* v)
             ".\\\" ==> Launching msdl2msrOahGroup::visitStart ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -487,7 +487,7 @@ void msdl2msrOahGroup::acceptOut (basevisitor* v)
       ".\\\" ==> msdl2msrOahGroup::acceptOut ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -506,7 +506,7 @@ void msdl2msrOahGroup::acceptOut (basevisitor* v)
             ".\\\" ==> Launching msdl2msrOahGroup::visitEnd ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -525,7 +525,7 @@ void msdl2msrOahGroup::browseData (basevisitor* v)
       ".\\\" ==> msdl2msrOahGroup::browseData ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -678,7 +678,7 @@ S_msdl2msrOahGroup createGlobalMsdl2msrOahGroup ()
       "Creating global msdl2msr OAH group" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }

@@ -687,7 +687,7 @@ void mxsr2msrTranslator::visitEnd ( S_accordion_registration& elt )
       ", line " << inputLineNumber <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -913,7 +913,7 @@ void initializeBSR ()
         "Initializing BSR basic types handling" <<
         std::endl;
 
-      gWaeHandler->waeTrace (
+      gWaeHandler->waeTraceWithoutLocationDetails (
         __FILE__, __LINE__,
         ss.str ());
     }

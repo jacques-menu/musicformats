@@ -136,42 +136,43 @@ class EXP bsr2bsrFinalizer :
 
     // the MSR score we're relying on
     // ------------------------------------------------------
-    S_msrScore            fBaseMsrScore;
+    S_msrScore                fBaseMsrScore;
 
     // the BSR score we're visiting
     // ------------------------------------------------------
-    S_bsrScore            fVisitedBsrScore;
+    S_bsrScore                fVisitedBsrScore;
 
     // the BSR score we're building
     // ------------------------------------------------------
-    S_bsrScore            fBsrScore;
+    S_bsrScore                fBsrScore;
 
     // pages & lines
     // ------------------------------------------------------
 
-    S_bsrPage             fCurrentPage;
-    S_bsrLine             fCurrentLine;
+    S_bsrPage                 fCurrentPage;
+    S_bsrLine                 fCurrentLine;
 
     // headings
     // ------------------------------------------------------
 
-    S_bsrPageHeading      fCurrentPageHeading;
-    S_bsrMusicHeading     fCurrentMusicHeading;
+    S_bsrPageHeading          fCurrentPageHeading;
+    S_bsrMusicHeading         fCurrentMusicHeading;
 
     // foot notes
     // ------------------------------------------------------
 
-    S_bsrFootNotes        fCurrentFootNotes;
+    S_bsrFootNotes            fCurrentFootNotes;
 
     // measures
     // ------------------------------------------------------
 
-    S_bsrMeasure          fCurrentMeasure;
+    std::string               fCurrentMeasureNumber;
+    S_bsrMeasure              fCurrentMeasure;
 
     // options
     // ------------------------------------------------------
 
-    S_bsrOahGroup         fBsrOahGroup;
+    S_bsrOahGroup            fBsrOahGroup;
 };
 
 

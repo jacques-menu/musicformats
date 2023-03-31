@@ -2,7 +2,7 @@
 <!DOCTYPE score-partwise PUBLIC "-//Recordare//DTD MusicXML 3.1 Partwise//EN" "http://www.musicxml.org/dtds/partwise.dtd">
 <score-partwise version="3.1">
   <work>
-    <work-title>SlurToAnotherStaff.xml</work-title>
+    <work-title>Slur To Another Staff Once</work-title>
     </work>
   <identification>
     <encoding>
@@ -41,7 +41,7 @@
     </defaults>
   <credit page="1">
     <credit-type>title</credit-type>
-    <credit-words default-x="600" default-y="1612.29" justify="center" valign="top" font-size="22">SlurToAnotherStaff once</credit-words>
+    <credit-words default-x="600" default-y="1612.29" justify="center" valign="top" font-size="22">Slur To Another Staff Once</credit-words>
     </credit>
   <part-list>
     <score-part id="P1">

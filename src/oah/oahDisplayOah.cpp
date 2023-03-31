@@ -178,7 +178,7 @@ void displayOahGroup::acceptIn (basevisitor* v)
       "% ==> displayOahGroup::acceptIn ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -197,7 +197,7 @@ void displayOahGroup::acceptIn (basevisitor* v)
             "% ==> Launching displayOahGroup::visitStart ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -216,7 +216,7 @@ void displayOahGroup::acceptOut (basevisitor* v)
       "% ==> displayOahGroup::acceptOut ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -235,7 +235,7 @@ void displayOahGroup::acceptOut (basevisitor* v)
             "% ==> Launching displayOahGroup::visitEnd ()" <<
             std::endl;
 
-          gWaeHandler->waeTrace (
+          gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -254,7 +254,7 @@ void displayOahGroup::browseData (basevisitor* v)
       "% ==> displayOahGroup::browseData ()" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -372,7 +372,7 @@ S_displayOahGroup createGlobalDisplayOahGroup ()
       "Creating global global OAH group" <<
       std::endl;
 
-    gWaeHandler->waeTrace (
+    gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
   }
