@@ -118,7 +118,7 @@ void msrPart::initializePart ()
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  // is this part name in the part renaming map?
+  // is this part name in the MSR part renaming map?
   std::map<std::string, std::string>::const_iterator
     it =
       gMsrOahGroup->getMsrPartsRenamingMap ().find (fPartID);
@@ -144,8 +144,10 @@ void msrPart::initializePart ()
     fPartMsrName = newMsrPartName;
   }
   else {
-    // coin the name from the argument
+    // coin the names from the argument
     fPartMsrName =
+      "Part_"+fPartID;
+    fPartAlphabeticName =
       "Part_"+mfStringNumbersToEnglishWords (fPartID);
   }
 
@@ -236,6 +238,9 @@ S_msrPart msrPart::createPartNewbornClone (const S_msrPartGroup& partGroupClone)
 
   newbornClone->fPartName =
     fPartName;
+  newbornClone->fPartAlphabeticName =
+    fPartAlphabeticName;
+
   newbornClone->fPartNameDisplayText =
     fPartNameDisplayText;
 
@@ -670,7 +675,7 @@ std::string msrPart::getPartCombinedName () const
 
   if (! fPartMsrName.size ()) {
     ss <<
-      "[empty name]";
+      "[empty part name]";
   }
   else {
     ss <<
@@ -3367,9 +3372,11 @@ std::string msrPart::asString () const
     fPartID <<
     "\", partName: \"" <<
     fPartName <<
-    "\", partMsrName: " << fPartMsrName <<
+    "\", fPartAlphabeticName: \"" <<
+    fPartAlphabeticName <<
+    "\", fPartMsrName: " << fPartMsrName <<
     fPartName <<
-    "\", partStaves: " << fPartAllStavesList.size () <<
+    "\", partAllStaves: " << fPartAllStavesList.size () <<
     ", line " << fInputLineNumber;
 
   return ss.str ();
@@ -3442,9 +3449,14 @@ void msrPart::printFull (std::ostream& os) const
     "fPartID" << ": \"" <<
     fPartID << "\"" <<
     std::endl <<
+
     std::setw (fieldWidth) <<
     "fPartName" << ": \"" <<
     fPartName << "\"" <<
+    std::endl <<
+    std::setw (fieldWidth) <<
+    "fPartAlphabeticName" << ": \"" <<
+    fPartAlphabeticName << "\"" <<
     std::endl <<
 
     std::setw (fieldWidth) <<
@@ -3878,6 +3890,10 @@ void msrPart::print (std::ostream& os) const
     "fPartName" << ": \"" <<
     fPartName << "\"" <<
     std::endl <<
+    std::setw (fieldWidth) <<
+    "fPartAlphabeticName" << ": \"" <<
+    fPartAlphabeticName << "\"" <<
+    std::endl <<
 
     std::setw (fieldWidth) <<
     "fPartMsrName" << ": \"" <<
@@ -4026,9 +4042,14 @@ void msrPart::printSummary (std::ostream& os) const
     "fPartID" << ": \"" <<
     fPartID << "\"" <<
     std::endl <<
+
     std::setw (fieldWidth) <<
     "fPartName" << ": \"" <<
     fPartName << "\"" <<
+    std::endl <<
+    std::setw (fieldWidth) <<
+    "fPartAlphabeticName" << ": \"" <<
+    fPartAlphabeticName << "\"" <<
     std::endl <<
 
 

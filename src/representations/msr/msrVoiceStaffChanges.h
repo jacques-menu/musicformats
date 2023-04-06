@@ -65,13 +65,13 @@ class EXP msrVoiceStaffChange : public msrMeasureElement
 
     void                  getMeasureElementUpLinkToMeasure (
                             S_msrMeasure& upLinkToMeasure) const override
-                            { upLinkToMeasure = getVoiceStaffChangeUpLinkToMeasure (); }
+                              { upLinkToMeasure = getVoiceStaffChangeUpLinkToMeasure (); }
 
     void                  setVoiceStaffChangeUpLinkToMeasure (
                             const S_msrMeasure& measure);
 
     S_msrMeasure          getVoiceStaffChangeUpLinkToMeasure () const
-                            { return fVoiceStaffChangeUpLinkToMeasure; }
+                              { return fVoiceStaffChangeUpLinkToMeasure; }
 
     S_msrStaff            getStaffToChangeTo () const
                               { return fStaffToChangeTo; }

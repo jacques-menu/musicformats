@@ -115,11 +115,16 @@ void msrStaff::initializeStaff ()
 {
   fStaffRegularVoicesCounter = 0;
 
-  // set staff name
+  // set staff names
   switch (fStaffKind) {
     case msrStaffKind::kStaffKindRegular:
       fStaffName =
         fStaffUpLinkToPart->getPartMsrName () +
+        "_Staff_" +
+        std::to_string (fStaffNumber);
+
+      fStaffAlphabeticName =
+        fStaffUpLinkToPart->getPartAlphabeticName () +
         "_Staff_" +
         mfInt2EnglishWord (fStaffNumber);
       break;
@@ -127,13 +132,18 @@ void msrStaff::initializeStaff ()
     case msrStaffKind::kStaffKindTablature:
       fStaffName =
         fStaffUpLinkToPart->getPartMsrName () +
-        "_Tablature_" +
-        mfInt2EnglishWord (fStaffNumber);
+        "_Tablature_Staff";
+      fStaffAlphabeticName =
+        fStaffUpLinkToPart->getPartAlphabeticName () +
+        "_Tablature_Staff";
       break;
 
     case msrStaffKind::kStaffKindHarmonies:
       fStaffName =
         fStaffUpLinkToPart->getPartMsrName () +
+        "_HARMONIES_Staff";
+      fStaffAlphabeticName =
+        fStaffUpLinkToPart->getPartAlphabeticName () +
         "_HARMONIES_Staff";
       break;
 
@@ -141,17 +151,26 @@ void msrStaff::initializeStaff ()
       fStaffName =
         fStaffUpLinkToPart->getPartMsrName () +
         "_FIGURED_BASS_Staff";
+      fStaffAlphabeticName =
+        fStaffUpLinkToPart->getPartAlphabeticName () +
+        "_FIGURED_BASS_Staff";
       break;
 
     case msrStaffKind::kStaffKindDrum:
       fStaffName =
         fStaffUpLinkToPart->getPartMsrName () +
         "_DRUM_Staff";
+      fStaffAlphabeticName =
+        fStaffUpLinkToPart->getPartAlphabeticName () +
+        "_DRUM_Staff";
       break;
 
     case msrStaffKind::kStaffKindRythmic:
       fStaffName =
         fStaffUpLinkToPart->getPartMsrName () +
+        "_RYTHMIC_Staff";
+      fStaffAlphabeticName =
+        fStaffUpLinkToPart->getPartAlphabeticName () +
         "_RYTHMIC_Staff";
       break;
   } // switch
@@ -379,6 +398,8 @@ S_msrStaff msrStaff::createStaffNewbornClone (
 
   newbornClone->fStaffName =
     fStaffName;
+  newbornClone->fStaffAlphabeticName =
+    fStaffAlphabeticName;
 
   newbornClone->fStaffNumber =
     fStaffNumber;
@@ -3701,6 +3722,7 @@ void msrStaff::printFull (std::ostream& os) const
 {
   os <<
     "[Staff \"" << fStaffName <<
+    "\", fStaffAlphabeticName: " << fStaffAlphabeticName <<
     "\", fStaffKind: " <<
     msrStaffKindAsStringForPrint (fStaffKind) <<
     "\", fStaffNumber: " <<
@@ -4091,6 +4113,7 @@ void msrStaff::print (std::ostream& os) const
 {
   os <<
     "[Staff \"" << fStaffName <<
+    "\", fStaffAlphabeticName: " << fStaffAlphabeticName <<
     "\", fStaffKind: " <<
     msrStaffKindAsStringForPrint (fStaffKind) <<
     "\", fStaffNumber: " <<

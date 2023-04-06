@@ -1201,38 +1201,6 @@ class EXP mxsr2msrTranslator :
     Bool                      fOnGoingPrint;
 
 
-    // clef handling
-    // ------------------------------------------------------
-
-    int                       fCurrentClefStaffNumber;
-    std::string               fCurrentClefSign;
-    int                       fCurrentClefLine;
-    int                       fCurrentClefOctaveChange;
-
-
-    // key handling
-    // ------------------------------------------------------
-
-    msrKeyKind                fCurrentKeyKind;
-
-    // traditional
-    int                       fCurrentKeyStaffNumber;
-    int                       fCurrentKeyFifths;
-    int                       fCurrentKeyCancelFifths;
-    msrModeKind               fCurrentModeKind;
-
-    S_msrKey                  handleTraditionalKey (
-                                int inputLineNumber);
-
-    // Humdrum-Scot
-    S_msrHumdrumScotKeyItem   fCurrentHumdrumScotKeyItem;
-    std::vector<S_msrHumdrumScotKeyItem>
-                              fCurrentHumdrumScotKeyItemsVector;
-
-    S_msrKey                  handleHumdrumScotKey (
-                                int inputLineNumber);
-
-
     // measures
     // ------------------------------------------------------
 
@@ -1346,7 +1314,7 @@ class EXP mxsr2msrTranslator :
     int                       fPreviousNoteMusicXMLStaffNumber;
 //     int                       fPreviousNoteMusicXMLVoiceNumber;
 
-    void                      populateCurrentNote (
+    void                      handleCurrentNoteItself (
                                 int inputLineNumber);
 
     // detailed notes handling
@@ -1393,6 +1361,38 @@ class EXP mxsr2msrTranslator :
 		void											displayStaffAndVoiceInformation (
                                 int               inputLineNumber,
 																const std::string context);
+
+
+    // clef handling
+    // ------------------------------------------------------
+
+    int                       fCurrentClefStaffNumber;
+    std::string               fCurrentClefSign;
+    int                       fCurrentClefLine;
+    int                       fCurrentClefOctaveChange;
+
+
+    // key handling
+    // ------------------------------------------------------
+
+    msrKeyKind                fCurrentKeyKind;
+
+    // traditional
+    int                       fCurrentKeyStaffNumber;
+    int                       fCurrentKeyFifths;
+    int                       fCurrentKeyCancelFifths;
+    msrModeKind               fCurrentModeKind;
+
+    S_msrKey                  handleTraditionalKey (
+                                int inputLineNumber);
+
+    // Humdrum-Scot
+    S_msrHumdrumScotKeyItem   fCurrentHumdrumScotKeyItem;
+    std::vector<S_msrHumdrumScotKeyItem>
+                              fCurrentHumdrumScotKeyItemsVector;
+
+    S_msrKey                  handleHumdrumScotKey (
+                                int inputLineNumber);
 
 
     // harmonies and figured bass elements are pending

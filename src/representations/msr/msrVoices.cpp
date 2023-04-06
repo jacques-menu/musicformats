@@ -450,7 +450,7 @@ void msrVoice::setRegularVoiceStaffSequentialNumber (
 
     ss <<
       "Setting the regular voice staff sequential number of voice \"" <<
-      getVoiceName () <<
+      fVoiceName <<
       "\" to " << regularVoiceStaffSequentialNumber <<
       std::endl;
 
@@ -466,7 +466,7 @@ void msrVoice::setRegularVoiceStaffSequentialNumber (
     regularVoiceStaffSequentialNumber;
 }
 
-void msrVoice::setVoiceNameFromNumber (
+void msrVoice::setVoiceNamesFromNumber (
   int inputLineNumber,
   int voiceNumber)
 {
@@ -475,7 +475,7 @@ void msrVoice::setVoiceNameFromNumber (
     std::stringstream ss;
 
     ss <<
-      "Setting the name of '" <<
+      "Setting the names of '" <<
       msrVoiceKindAsString (fVoiceKind) <<
       "' voice from voice number '" << voiceNumber <<
       "'" <<
@@ -494,6 +494,10 @@ void msrVoice::setVoiceNameFromNumber (
       fVoiceName =
         fVoiceUpLinkToStaff->getStaffName () +
         "_Voice_" +
+        std::to_string (voiceNumber);
+      fVoiceAlphabeticName =
+        fVoiceUpLinkToStaff->getStaffAlphabeticName () +
+        "_Voice_" +
         mfInt2EnglishWord (voiceNumber);
       break;
 
@@ -503,19 +507,15 @@ void msrVoice::setVoiceNameFromNumber (
     case msrVoiceKind::kVoiceKindHarmonies:
       fVoiceName =
         fVoiceUpLinkToStaff->getStaffName () +
-        "_Voice_" +
-        mfInt2EnglishWord (
-          voiceNumber) + // JMI - msrVoice::K_VOICE_HARMONIES_VOICE_BASE_NUMBER) +
-          "_HARMONIES";
+        "_HARMONIES_Voice";
+      fVoiceAlphabeticName = fVoiceName;
       break;
 
     case msrVoiceKind::kVoiceKindFiguredBass:
       fVoiceName =
         fVoiceUpLinkToStaff->getStaffName () +
-        "_Voice_" +
-        mfInt2EnglishWord (
-          voiceNumber) + // JMI - msrVoice::K_VOICE_FIGURED_BASS_VOICE_BASE_NUMBER) +
-          "_FIGURED_BASS";
+        "_FIGURED_BASS_Voice";
+      fVoiceAlphabeticName = fVoiceName;
       break;
   } // switch
 
@@ -524,8 +524,10 @@ void msrVoice::setVoiceNameFromNumber (
     std::stringstream ss;
 
     ss <<
-      "The resulting voice name is \"" <<
+      "The resulting voice names are \"" <<
       fVoiceName <<
+      "\" and " <<
+      fVoiceAlphabeticName <<
       "\"" <<
       std::endl;
 
@@ -556,7 +558,7 @@ void msrVoice::initializeVoice (
       : fVoiceNumber;
 
   // set voice name
-  setVoiceNameFromNumber (
+  setVoiceNamesFromNumber (
     fInputLineNumber,
     voiceNumber);
 
@@ -731,8 +733,8 @@ void msrVoice::changeVoiceIdentity ( // after a deep clone is created
     std::stringstream ss;
 
     ss <<
-      "Changing identity of voice \"" <<
-      getVoiceName () <<
+      "Changing the identity of voice \"" <<
+      fVoiceName <<
       "\"" <<
       ", number: " << voiceNumber <<
       std::endl;
@@ -754,7 +756,7 @@ void msrVoice::changeVoiceIdentity ( // after a deep clone is created
     voiceNumber);
 
   // set its name
-  setVoiceNameFromNumber (
+  setVoiceNamesFromNumber (
     fInputLineNumber,
     voiceNumber);
 }
@@ -768,7 +770,7 @@ S_msrVoice msrVoice::createVoiceNewbornClone (
 
     ss <<
       "Creating a newborn clone of voice \"" <<
-      getVoiceName () <<
+      fVoiceName <<
       "\"" <<
       std::endl;
 
@@ -821,7 +823,7 @@ S_msrVoice msrVoice::createVoiceDeepClone (
 
     ss <<
       "Creating a deep clone of voice \"" <<
-      getVoiceName () <<
+      fVoiceName <<
       "\"" <<
       ", to be placed in containing staff \"" <<
       containingStaff->getStaffName () << "\"" <<
@@ -892,7 +894,7 @@ S_msrVoice msrVoice::createVoiceDeepClone (
 /* JMI
   // set voice name // JMI
   deepClone->
-    setVoiceNameFromNumber (
+    setVoiceNamesFromNumber (
       fInputLineNumber,
       voiceNumber);
 */
@@ -946,7 +948,7 @@ S_msrVoice msrVoice::createVoiceDeepClone (
         "There are " <<
         numberOfInitialElements <<
         " initial elements in voice \"" <<
-        getVoiceName () <<
+        fVoiceName <<
         "\"" <<
         std::endl;
 
@@ -988,7 +990,7 @@ S_msrVoice msrVoice::createVoiceDeepClone (
 
         ss <<
           "voice  \"" <<
-          getVoiceName () <<
+          fVoiceName <<
           "\" initial elements element should be a repeat or a segment";
 
         msrInternalError (
@@ -1012,7 +1014,7 @@ S_msrVoice msrVoice::createVoiceDeepClone (
 
       ss <<
         "There are no initial elements in voice \"" <<
-        getVoiceName () <<
+        fVoiceName <<
         "\" to be deep copied" <<
         std::endl;
 
@@ -1044,7 +1046,7 @@ S_msrVoice msrVoice::createVoiceDeepClone (
 
       ss <<
         "There is no last segment in voice \"" <<
-        getVoiceName () <<
+        fVoiceName <<
         "\" to be deep copied" <<
         std::endl;
 
@@ -1275,7 +1277,7 @@ void msrVoice::setNextMeasureNumberInVoice (
     ss <<
       "Setting next measure number to '" <<
       nextMeasureNumber <<
-      ", in voice \"" << getVoiceName () << "\"" <<
+      ", in voice \"" << fVoiceName << "\"" <<
       "', line " << inputLineNumber <<
       std::endl;
 
@@ -1373,7 +1375,7 @@ void msrVoice::incrementVoiceCurrentMeasurePuristNumber (
 
     ss <<
       "Incrementing the voice current measure purist number of voice " <<
-      " \"" << getVoiceName () << "\"" <<
+      " \"" << fVoiceName << "\"" <<
       " to " <<
       fVoiceCurrentMeasurePuristNumber <<
       " (" << context << ")" <<
@@ -1399,7 +1401,7 @@ void msrVoice::setVoiceFirstMeasure (
     ss <<
       "Measure " <<
       measure->asShortString () <<
-      " is the first measure in  voice \"" << getVoiceName () << "\"" <<
+      " is the first measure in  voice \"" << fVoiceName << "\"" <<
       "', line " << measure->getInputLineNumber () <<
       std::endl;
 
@@ -1425,7 +1427,7 @@ void msrVoice::appendMeasureCloneToVoiceClone (
     ss <<
       "Appending measure clone '" <<
       measureClone->asShortString () <<
-      "' to voice '" << getVoiceName () << "\"" <<
+      "' to voice '" << fVoiceName << "\"" <<
       "', line " << inputLineNumber <<
       std::endl;
 
@@ -1462,7 +1464,7 @@ void msrVoice::setWholeNotesSinceLastRegularMeasureEnd (
       "Setting voice whole notes since last regular measure end to '" <<
       wholeNotes.asString () <<
   // JMI    "' (" << context << ")" <<
-      " in voice \"" << getVoiceName () << "\"" <<
+      " in voice \"" << fVoiceName << "\"" <<
       "', line " << inputLineNumber <<
       std::endl;
 
@@ -1491,7 +1493,7 @@ void msrVoice::setCurrentVoiceRepeatPhaseKind (
       msrVoiceRepeatPhaseKindAsString (
         afterRepeatComponentPhaseKind) <<
  // JMI     "' (" << context << ")" <<
-      " in voice \"" << getVoiceName () << "\"" <<
+      " in voice \"" << fVoiceName << "\"" <<
       "', line " << inputLineNumber <<
       std::endl;
 
@@ -1517,7 +1519,7 @@ void msrVoice::createNewLastSegmentForVoice (
 
     ss <<
       "Creating a new last segment for voice \"" <<
-      getVoiceName () <<
+      fVoiceName <<
       "\" (" << context << ")" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -1582,7 +1584,7 @@ void msrVoice::createNewLastSegmentFromItsFirstMeasureForVoice (
       "' from its first measure '" <<
       firstMeasure->getMeasureNumber () <<
       "' for voice \"" <<
-      getVoiceName () <<
+      fVoiceName <<
       "\" (" << context << ")" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -1640,7 +1642,7 @@ S_msrMeasure msrVoice::createAMeasureAndAppendItToVoice (
     ss <<
       "Creating measure '" <<
       measureNumber <<
-      "' and appending it to voice \"" << getVoiceName () << "\"" <<
+      "' and appending it to voice \"" << fVoiceName << "\"" <<
       "', line " << inputLineNumber <<
       std::endl;
 
@@ -1660,7 +1662,7 @@ S_msrMeasure msrVoice::createAMeasureAndAppendItToVoice (
     false
       &&
     (
-      fCallsCounter == 2 && getVoiceName ()
+      fCallsCounter == 2 && fVoiceName
         ==
       "Part_POne_HARMONIES_Staff_Voice_Eleven_HARMONIES"
     )
@@ -1696,7 +1698,7 @@ S_msrMeasure msrVoice::createAMeasureAndAppendItToVoice (
     ss <<
       "Creating a measure with number '" <<
       measureNumber <<
-      "' in voice \"" << getVoiceName () << "\"" <<
+      "' in voice \"" << fVoiceName << "\"" <<
       "', line " << inputLineNumber <<
       std::endl;
 
@@ -1730,7 +1732,7 @@ S_msrMeasure msrVoice::createAMeasureAndAppendItToVoice (
       " to current multiple full-bar rests " <<
       fVoiceCurrentMultipleFullBarRests->asString () <<
       "in voice \"" <<
-      getVoiceName () << "\"" <<
+      fVoiceName << "\"" <<
       "', line " << inputLineNumber <<
       std::endl;
 
@@ -1793,7 +1795,7 @@ S_msrVoice msrVoice::createRegularVoiceHarmoniesVoice (
 
     ss <<
       "Voice \"" <<
-      getVoiceName () <<
+      fVoiceName <<
       "\" already has a harmonies voice";
 
     msrInternalError (
@@ -1813,7 +1815,7 @@ S_msrVoice msrVoice::createRegularVoiceHarmoniesVoice (
 
     ss <<
       "Creating harmonies voice for regular voice \"" <<
-      getVoiceName () <<
+      fVoiceName <<
       "\" with voice number " <<
       regularVoiceHarmoniesVoiceNumber <<
       ", line " << inputLineNumber <<
@@ -1857,7 +1859,7 @@ S_msrVoice msrVoice::createRegularVoiceHarmoniesVoice (
 //
 //     ss <<
 //       "Voice \"" <<
-//       getVoiceName () <<
+//       fVoiceName <<
 //       "\" already has a figured bass voice";
 //
 //     msrInternalError (
@@ -1875,7 +1877,7 @@ S_msrVoice msrVoice::createRegularVoiceHarmoniesVoice (
 //   if (gTraceOahGroup->getTraceFiguredBasses ()) {
 //     gLog <<
 //       "Creating figured bass voice for regular voice \"" <<
-//       getVoiceName () <<
+//       fVoiceName <<
 //       "\" with voice number " <<
 //       regularVoiceFiguredBassVoiceNumber <<
 //       ", line " << inputLineNumber <<
@@ -1914,7 +1916,7 @@ S_msrStanza msrVoice::addStanzaToVoiceByItsNumber (
     ss <<
       "stanza " << stanzaNumber <<
       " already exists in voice \"" <<
-      getVoiceName () << "\"" <<
+      fVoiceName << "\"" <<
       ", line " << inputLineNumber <<
       std::endl;
 
@@ -1954,7 +1956,7 @@ void msrVoice::addStanzaToVoice (const S_msrStanza& stanza)
     ss <<
       "Adding stanza " << stanza->getStanzaName () <<
       " (" << stanzaNumber <<
-      ") to voice \"" << getVoiceName () << "\"" <<
+      ") to voice \"" << fVoiceName << "\"" <<
       std::endl;
 
     gWaeHandler->waeTraceWithLocationDetails (
@@ -1983,7 +1985,7 @@ void msrVoice::addStanzaToVoiceWithoutCatchUp (const S_msrStanza& stanza)
     ss <<
       "Adding stanza " << stanza->getStanzaName () <<
       " (" << stanzaNumber <<
-      ") to voice \"" << getVoiceName () << "\"" <<
+      ") to voice \"" << fVoiceName << "\"" <<
       std::endl;
 
     gWaeHandler->waeTraceWithLocationDetails (
@@ -2022,7 +2024,7 @@ S_msrStanza msrVoice::createStanzaInVoiceIfNotYetDone (
         "Creating stanza" <<
         " number " << stanzaNumber <<
         ", name \"" << stanzaName << "\"" <<
-        ", in voice \"" << getVoiceName () << "\"" <<
+        ", in voice \"" << fVoiceName << "\"" <<
         ", line " << inputLineNumber <<
         ", fVoiceStanzasMap.size (): " << fVoiceStanzasMap.size () <<
         std::endl;
@@ -2077,7 +2079,7 @@ S_msrStanza msrVoice::fetchStanzaInVoice (
       "Stanza" <<
       " number " << stanzaNumber <<
       ", name \"" << stanzaName << "\"" <<
-      ", not found in voice \"" << getVoiceName () << "\"" <<
+      ", not found in voice \"" << fVoiceName << "\"" <<
       ", line " << inputLineNumber <<
       ", fVoiceStanzasMap.size (): " << fVoiceStanzasMap.size () <<
       std::endl;
@@ -2122,7 +2124,7 @@ void msrVoice::appendMusicXMLPrintLayoutToVoice (
 
     ss <<
       "Appending print layout '" << musicXMLPrintLayout->asString () <<
-      "' to voice \"" << getVoiceName () << "\"" <<
+      "' to voice \"" << fVoiceName << "\"" <<
       std::endl;
 
     gWaeHandler->waeTraceWithLocationDetails (
@@ -2150,7 +2152,7 @@ void msrVoice::appendClefToVoice  (
 
     ss <<
       "Appending clef " << clef->asString () <<
-      " to voice \"" << getVoiceName () << "\"" <<
+      " to voice \"" << fVoiceName << "\"" <<
       std::endl;
 
     gWaeHandler->waeTraceWithLocationDetails (
@@ -2191,7 +2193,7 @@ void msrVoice::appendKeyToVoice (
 
     ss <<
       "Appending key " << key->asString () <<
-      " to voice \"" << getVoiceName () << "\"" <<
+      " to voice \"" << fVoiceName << "\"" <<
       std::endl;
 
     gWaeHandler->waeTraceWithLocationDetails (
@@ -2230,7 +2232,7 @@ void msrVoice::appendTimeSignatureToVoice (
 
     ss <<
       "Appending time signature '" << timeSignature->asString () <<
-      "' to voice \"" << getVoiceName () << "\"" <<
+      "' to voice \"" << fVoiceName << "\"" <<
       std::endl;
 
     gWaeHandler->waeTraceWithLocationDetails (
@@ -2262,7 +2264,7 @@ void msrVoice::appendTimeSignatureToVoiceClone (
 
     ss <<
       "Appending time signature '" << timeSignature->asString () <<
-      "' to voice clone \"" << getVoiceName () << "\"" <<
+      "' to voice clone \"" << fVoiceName << "\"" <<
       std::endl;
 
     gWaeHandler->waeTraceWithLocationDetails (
@@ -2296,7 +2298,7 @@ void msrVoice::insertHiddenMeasureAndBarLineInVoiceClone (
     ss <<
       "Inserting hidden measure and barLine at position " <<
       measurePosition.asString () <<
-      "' to voice clone \"" << getVoiceName () << "\"" <<
+      "' to voice clone \"" << fVoiceName << "\"" <<
       ", line " << inputLineNumber <<
       std::endl;
 
@@ -2433,7 +2435,7 @@ S_msrNote msrVoice::fetchVoiceFirstNonGraceNote () const
 //
 //       ss <<
 //         "there is no first measure in the first segment in voice \"" << // JMI v0.9.63  // JMI v0.9.66
-//         getVoiceName () <<
+//         fVoiceName <<
 //         "\", since the latter is empty";
 //
 //       msrInternalError (
@@ -2455,7 +2457,7 @@ void msrVoice::setVoiceShortestNoteWholeNotes (
 
       ss <<
         "The new shortest note wholeNotes in voice \"" <<
-        getVoiceName () <<
+        fVoiceName <<
         "\" becomes " <<
         wholeNotes.asString () <<
         std::endl;
@@ -2480,7 +2482,7 @@ void msrVoice::setVoiceShortestNoteTupletFactor (
 
       ss <<
         "The new shortest note tuplet factor in part \"" <<
-        getVoiceName () <<
+        fVoiceName <<
         "\" becomes " <<
         noteTupletFactor <<
         std::endl;
@@ -2543,7 +2545,7 @@ void msrVoice::registerShortestNoteInVoiceIfRelevant (const S_msrNote& note)
       std::stringstream ss;
 
       ss <<
-        "The new shortest note in voice \"" << getVoiceName () << "\"" <<
+        "The new shortest note in voice \"" << fVoiceName << "\"" <<
         " becomes " << note->asString () <<
         std::endl;
 
@@ -2595,7 +2597,7 @@ void msrVoice::appendHarmonyToVoice (
 
     ss <<
       "Appending harmony " << harmony->asString () <<
-      " to voice \"" << getVoiceName () << "\"" <<
+      " to voice \"" << fVoiceName << "\"" <<
       ", measurePositionToAppendAt: " << measurePositionToAppendAt <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -2624,7 +2626,7 @@ void msrVoice::appendHarmonyToVoice (
           "cannot append a harmony to " <<
           msrVoiceKindAsString (fVoiceKind) <<
           " voice \"" <<
-          getVoiceName () <<
+          fVoiceName <<
           "\"";
 
         msrInternalError (
@@ -2664,7 +2666,7 @@ void msrVoice::appendHarmoniesListToVoice (
 
     ss <<
       "Appending harmonies list to voice \"" << // JMI v0.9.67 HARMFUL
-      getVoiceName () <<
+      fVoiceName <<
       "\"" <<
       ", measurePositionToAppendAt: " << measurePositionToAppendAt <<
       ", line " << inputLineNumber <<
@@ -2698,7 +2700,7 @@ void msrVoice::appendHarmonyToVoiceClone (
 
     ss <<
       "Appending harmony " << harmony->asString () <<
-      " to voice clone \"" << getVoiceName () << "\"" <<
+      " to voice clone \"" << fVoiceName << "\"" <<
       ", line " << inputLineNumber <<
       std::endl;
 
@@ -2732,7 +2734,7 @@ void msrVoice::appendHarmonyToVoiceClone (
           "cannot append a harmony to " <<
           msrVoiceKindAsString (fVoiceKind) <<
           " voice clone \"" <<
-          getVoiceName () <<
+          fVoiceName <<
           "\"";
 
         msrInternalError (
@@ -2758,7 +2760,7 @@ void msrVoice::appendFiguredBassToVoice (
 
     ss <<
       "Appending figured bass " << figuredBass->asString () <<
-      " to voice \"" << getVoiceName () << "\"" <<
+      " to voice \"" << fVoiceName << "\"" <<
       ", line " << inputLineNumber <<
       std::endl;
 
@@ -2788,7 +2790,7 @@ void msrVoice::appendFiguredBassToVoice (
           "cannot append a figured bass to " <<
           msrVoiceKindAsString (fVoiceKind) <<
           " voice \"" <<
-          getVoiceName () <<
+          fVoiceName <<
           "\"";
 
         msrInternalError (
@@ -2830,7 +2832,7 @@ void msrVoice::appendFiguredBassesListToVoice (
     ss <<
       "Appending figured basses list \"" <<
 //       figuredBasssesList->asString () << // JMI v0.9.67 HARMFUL
-      " to voice \"" << getVoiceName () << "\"" <<
+      " to voice \"" << fVoiceName << "\"" <<
       "\"" <<
       ", measurePositionToAppendAt: " << measurePositionToAppendAt <<
       ", line " << inputLineNumber <<
@@ -2864,7 +2866,7 @@ void msrVoice::appendFiguredBassToVoiceClone (
 
     ss <<
       "Appending figured bass " << figuredBass->asString () <<
-      " to voice clone \"" << getVoiceName () << "\"" <<
+      " to voice clone \"" << fVoiceName << "\"" <<
       ", line " << inputLineNumber <<
       std::endl;
 
@@ -2898,7 +2900,7 @@ void msrVoice::appendFiguredBassToVoiceClone (
           "cannot append a figured bass to " <<
           msrVoiceKindAsString (fVoiceKind) <<
           " voice clone \"" <<
-          getVoiceName () <<
+          fVoiceName <<
           "\"";
 
         msrInternalError (
@@ -2925,7 +2927,7 @@ void msrVoice::appendFiguredBassToVoiceClone (
 //       "Padding up to measure position '" <<
 //       wholeNotesMeasurePosition.asString () <<
 //       "' whole notes in voice \"" <<
-//       getVoiceName () <<
+//       fVoiceName <<
 //       "\", line " << inputLineNumber <<
 //       std::endl;
 //
@@ -2980,7 +2982,7 @@ void msrVoice::backupByWholeNotesStepLengthInVoice (
       "Backup by a '" <<
       backupTargetMeasurePosition.asString () <<
       "' whole notes step length in voice \"" <<
-      getVoiceName () <<
+      fVoiceName <<
       "\", line " << inputLineNumber <<
       std::endl;
 
@@ -3028,7 +3030,7 @@ void msrVoice::appendPaddingNoteToVoice (
       ", forwardStepLength: " <<
       forwardStepLength <<
       ", to voice \"" <<
-      getVoiceName () <<
+      fVoiceName <<
       "\",line " << inputLineNumber <<
       std::endl;
 
@@ -3080,7 +3082,7 @@ void msrVoice::appendTranspositionToVoice (
     ss <<
       "Appending transposition '" <<
       transposition->asString () <<
-      "' to voice \"" << getVoiceName () << "\"" <<
+      "' to voice \"" << fVoiceName << "\"" <<
       std::endl;
 
     gWaeHandler->waeTraceWithLocationDetails (
@@ -3105,7 +3107,7 @@ void msrVoice::appendStaffDetailsToVoice (
     ss <<
       "Appending staff details '" <<
       staffDetails->asShortString () <<
-      "' to voice \"" << getVoiceName () << "\"" <<
+      "' to voice \"" << fVoiceName << "\"" <<
       std::endl;
 
     gWaeHandler->waeTraceWithLocationDetails (
@@ -3139,7 +3141,7 @@ void msrVoice::appendTempoToVoice (
       "Appending tempo " <<
       tempo->asShortString () <<
       " to voice \"" <<
-      getVoiceName () << "\"" <<
+      fVoiceName << "\"" <<
       std::endl;
 
     gWaeHandler->waeTraceWithLocationDetails (
@@ -3165,7 +3167,7 @@ void msrVoice::appendOctaveShiftToVoice (
       "Appending octave shift '" <<
       octaveShift->getOctaveShiftKind () <<
       "', size: " << octaveShift->getOctaveShiftSize () <<
-      "' to voice \"" << getVoiceName () << "\"" <<
+      "' to voice \"" << fVoiceName << "\"" <<
       std::endl;
 
     gWaeHandler->waeTraceWithLocationDetails (
@@ -3190,7 +3192,7 @@ void msrVoice::appendScordaturaToVoice (
     ss <<
       "Appending scordatura '" <<
       scordatura->asString () <<
-      "' to voice \"" << getVoiceName () << "\"" <<
+      "' to voice \"" << fVoiceName << "\"" <<
       std::endl;
 
     gWaeHandler->waeTraceWithLocationDetails (
@@ -3216,7 +3218,7 @@ void msrVoice::appendAccordionRegistrationToVoice (
     ss <<
       "Appending accordion registration '" <<
       accordionRegistration->asString () <<
-      "' to voice \"" << getVoiceName () << "\"" <<
+      "' to voice \"" << fVoiceName << "\"" <<
       std::endl;
 
     gWaeHandler->waeTraceWithLocationDetails (
@@ -3243,7 +3245,7 @@ void msrVoice::appendHarpPedalsTuningToVoice (
     ss <<
       "Appending harp pedals tuning '" <<
       harpPedalsTuning->asString () <<
-      "' to voice \"" << getVoiceName () << "\"" <<
+      "' to voice \"" << fVoiceName << "\"" <<
       std::endl;
 
     gWaeHandler->waeTraceWithLocationDetails (
@@ -3268,7 +3270,7 @@ void msrVoice::appendRehearsalMarkToVoice (
 
     ss <<
       "Appending rehearsalMark '" << rehearsalMark->getRehearsalMarkText () <<
-      "' to voice \"" << getVoiceName () << "\"" <<
+      "' to voice \"" << fVoiceName << "\"" <<
       std::endl;
 
     gWaeHandler->waeTraceWithLocationDetails (
@@ -3299,7 +3301,7 @@ void msrVoice::appendVoiceStaffChangeToVoice (
       "Appending voice staff change " <<
       voiceStaffChange->asString () <<
       " to voice " <<
-      "\"" << getVoiceName () << "\"" <<
+      "\"" << fVoiceName << "\"" <<
       ", line " << inputLineNumber <<
       std::endl;
 
@@ -3333,7 +3335,7 @@ void msrVoice::appendNoteToVoice (const S_msrNote& note)
     ss <<
       "Appending note " <<
       note->asShortString () <<
-      " to voice \"" << getVoiceName () << "\"" <<
+      " to voice \"" << fVoiceName << "\"" <<
       ", line " << inputLineNumber <<
       std::endl;
 
@@ -3474,7 +3476,7 @@ void msrVoice::appendNoteToVoiceClone (const S_msrNote& note) {
     ss <<
       "Appending note '" <<
       note->asShortString () <<
-      "' to voice clone \"" << getVoiceName () << "\"" <<
+      "' to voice clone \"" << fVoiceName << "\"" <<
       ", line " << inputLineNumber <<
       std::endl;
 
@@ -3569,7 +3571,7 @@ void msrVoice::appendDoubleTremoloToVoice (
     ss <<
       "Appending double tremolo '" <<
       doubleTremolo->asShortString () <<
-      "' to voice \"" << getVoiceName () << "\"" <<
+      "' to voice \"" << fVoiceName << "\"" <<
       std::endl;
 
     gWaeHandler->waeTraceWithLocationDetails (
@@ -3594,7 +3596,7 @@ void msrVoice::appendChordToVoice (const S_msrChord& chord)
 
     ss <<
       "Appending chord '" << chord->asString () <<
-      "' to voice \"" << getVoiceName () << "\"" <<
+      "' to voice \"" << fVoiceName << "\"" <<
       std::endl;
 
     gWaeHandler->waeTraceWithLocationDetails (
@@ -3666,7 +3668,7 @@ void msrVoice::appendTupletToVoice (const S_msrTuplet& tuplet)
 
     ss <<
       "Appending tuplet " << tuplet->asString () <<
-      " to voice \"" << getVoiceName () << "\"" <<
+      " to voice \"" << fVoiceName << "\"" <<
       std::endl;
 
     gWaeHandler->waeTraceWithLocationDetails (
@@ -3708,7 +3710,7 @@ void msrVoice::addGraceNotesGroupBeforeAheadOfVoiceIfNeeded (
     ss <<
       "Adding grace notes " <<
       graceNotesGroup->asString () <<
-      " ahead of voice \"" << getVoiceName () << "\"" <<
+      " ahead of voice \"" << fVoiceName << "\"" <<
       std::endl;
 
     gWaeHandler->waeTraceWithLocationDetails (
@@ -3770,7 +3772,7 @@ void msrVoice::addGraceNotesGroupBeforeAheadOfVoiceIfNeeded (
       ss <<
         "Attaching grace notes before '" <<
         graceNotesGroup->asString () <<
-        "' to the first chord of voice \"" << getVoiceName () <<
+        "' to the first chord of voice \"" << fVoiceName <<
         "\", i.e. '" <<
         firstNoteShortcutUpLinkToChord->asShortString () <<
         "'" <<
@@ -3814,7 +3816,7 @@ void msrVoice::addGraceNotesGroupBeforeAheadOfVoiceIfNeeded (
       ss <<
         "Attaching grace notes before '" <<
         graceNotesGroup->asString () <<
-        "' to the first note of voice \"" << getVoiceName () <<
+        "' to the first note of voice \"" << fVoiceName <<
         "\", i.e. '" <<
         voiceFirstNote->asShortString () <<
         "'" <<
@@ -3846,7 +3848,7 @@ void msrVoice::appendAfterGraceNotesToVoice (
 
     ss <<
       "Appending after grace notes " << // JMI AfterGraceNotes <<
-      " to voice \"" << getVoiceName () << "\"" <<
+      " to voice \"" << fVoiceName << "\"" <<
       std::endl;
 
     gWaeHandler->waeTraceWithLocationDetails (
@@ -3872,7 +3874,7 @@ void msrVoice::prependAfterGraceNotesToVoice (
 
     ss <<
       "Prepending after grace notes " << // JMI AfterGraceNotes <<
-      " to voice \"" << getVoiceName () << "\"" <<
+      " to voice \"" << fVoiceName << "\"" <<
       std::endl;
 
     gWaeHandler->waeTraceWithLocationDetails (
@@ -3940,7 +3942,7 @@ void msrVoice::appendBarCheckToVoice (
       "Appending bar check " <<
       barCheck->asString () <<
       " to voice \"" <<
-      getVoiceName () <<
+      fVoiceName <<
       "\"" <<
       std::endl;
 
@@ -3966,7 +3968,7 @@ void msrVoice::appendBarNumberCheckToVoice (
     ss <<
       "Appending barnumber check " <<
       barNumberCheck->asString () <<
-      " to voice \"" << getVoiceName () <<  "\"" <<
+      " to voice \"" << fVoiceName <<  "\"" <<
       std::endl;
 
     gWaeHandler->waeTraceWithLocationDetails (
@@ -3990,7 +3992,7 @@ void msrVoice::appendLineBreakToVoice  (
 
     ss <<
       "Appending line break '" << lineBreak->asString () <<
-      "' to voice \"" << getVoiceName () << "\"" <<
+      "' to voice \"" << fVoiceName << "\"" <<
       std::endl;
 
     gWaeHandler->waeTraceWithLocationDetails (
@@ -4025,7 +4027,7 @@ void msrVoice::appendPageBreakToVoice (
 
     ss <<
       "Appending page break '" << pageBreak->asString () <<
-      "' to voice \"" << getVoiceName () << "\"" <<
+      "' to voice \"" << fVoiceName << "\"" <<
       std::endl;
 
     gWaeHandler->waeTraceWithLocationDetails (
@@ -4047,7 +4049,7 @@ void msrVoice::prependOtherElementToVoice (const S_msrMeasureElement& elem) {
 
     ss <<
       "Prepending other element '" << elem <<
-      "' to voice \"" << getVoiceName () << "\"" <<
+      "' to voice \"" << fVoiceName << "\"" <<
       std::endl;
 
     gWaeHandler->waeTraceWithLocationDetails (
@@ -4069,7 +4071,7 @@ void msrVoice::appendOtherElementToVoice (const S_msrMeasureElement& elem) {
 
     ss <<
       "Appending other element '" << elem <<
-      "' to voice \"" << getVoiceName () << "\"" <<
+      "' to voice \"" << fVoiceName << "\"" <<
       std::endl;
 
     gWaeHandler->waeTraceWithLocationDetails (
@@ -4160,7 +4162,7 @@ void msrVoice::pushRepeatOntoRepeatDescrsStack (
       "Pushing repeat '" <<
       repeat->asShortString () <<
       "' onto the repeats stack in voice \"" <<
-      getVoiceName () <<
+      fVoiceName <<
       "\"" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -4237,7 +4239,7 @@ void msrVoice::popRepeatFromRepeatDescrsStack (
       "Popping repeat '" <<
       repeat->asString () <<
       "' from the repeat stack in voice \"" <<
-      getVoiceName () <<
+      fVoiceName <<
       "\" (" << context << ")" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -4497,9 +4499,9 @@ void msrVoice::displayVoiceMeasuresFlatList (
 
     ++gIndenter;
 
-    int counter = 0;
+//     int counter = 0;
     for (S_msrMeasure measure :fVoiceMeasuresFlatList) {
-      ++counter;
+//       ++counter;
 
       // print the measure
 // #ifdef MF_TRACE_IS_ENABLED
@@ -4582,7 +4584,7 @@ S_msrRepeat msrVoice::createARepeatAndStackIt (
 
     ss <<
       "Creating a repeat and stacking it in voice \"" <<
-      getVoiceName () <<
+      fVoiceName <<
       "\"" <<
       " (" << context << ")" <<
       ", line " << inputLineNumber <<
@@ -4631,7 +4633,7 @@ S_msrRepeat msrVoice::createARepeatCloneAndStackIt (
 
     ss <<
       "Creating a repeat clone and stacking it in voice clone \"" <<
-      getVoiceName () <<
+      fVoiceName <<
       "\"" <<
       " (" << context << ")" <<
       ", line " << inputLineNumber <<
@@ -4676,7 +4678,7 @@ void msrVoice::moveVoiceInitialElementsToRepeatCommonPart (
         "initial element",
         "initial elements") <<
       " in voice \"" <<
-      getVoiceName () <<
+      fVoiceName <<
       "\" to repeat common part '" <<
       repeatCommonPart->asShortString () <<
       "' (" << context << ")" <<
@@ -4738,7 +4740,7 @@ void msrVoice::moveVoiceLastSegmentToRepeatCommonPart (
       repeatCommonPart->asShortString () <<
       "' (" << context << ")" <<
       "' in voice \"" <<
-      getVoiceName () <<
+      fVoiceName <<
       "\"" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -4837,7 +4839,7 @@ void msrVoice::moveVoiceLastSegmentToRepeatEnding (
       "Moving the voice last segment to repeat ending '" <<
       repeatEnding->asShortString () <<
       "' in voice \"" <<
-      getVoiceName () <<
+      fVoiceName <<
       "\"" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -4876,7 +4878,7 @@ void msrVoice::appendRepeatToInitialVoiceElements (
       "Appending repeat '" <<
       repeat->asString () <<
       "' to the initial elements in voice \"" <<
-      getVoiceName () <<
+      fVoiceName <<
       "\" (" << context << ")" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -4928,7 +4930,7 @@ void msrVoice::appendRepeatToInitialVoiceElements (
 //       "Appending multiple full-bar rests " <<
 //       multipleFullBarRests->asString () <<
 //       " to the initial elements in voice \"" <<
-//       getVoiceName () <<
+//       fVoiceName <<
 //       "\" (" << context << ")" <<
 //       ", line " << inputLineNumber <<
 //       std::endl;
@@ -4953,7 +4955,7 @@ void msrVoice::appendMeasureRepeatToInitialVoiceElements (
       "Appending measures repeat '" <<
       measureRepeat->asString () <<
       "' to the initial elements in voice \"" <<
-      getVoiceName () <<
+      fVoiceName <<
       "\" (" << context << ")" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -4983,7 +4985,7 @@ void msrVoice::appendVoiceLastSegmentToInitialVoiceElements (
       "Appending voice last segment '" <<
       fVoiceLastSegment->asString () <<
       "' to the initial elements in voice \"" <<
-      getVoiceName () <<
+      fVoiceName <<
       "\" (" << context << ")" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -5019,7 +5021,7 @@ void msrVoice::moveVoiceLastSegmentToInitialVoiceElementsIfRelevant (
           "Moving voice last segment '" <<
           fVoiceLastSegment->asString () <<
           "' to the initial elements in voice \"" <<
-          getVoiceName () <<
+          fVoiceName <<
           "\" (" << context << ")" <<
           ", line " << inputLineNumber <<
           std::endl;
@@ -5063,7 +5065,7 @@ void msrVoice::moveVoiceLastSegmentToInitialVoiceElementsIfRelevant (
           "Voice last segment '" <<
           fVoiceLastSegment->asString () <<
           "' contains no measure, not moved to the initial elements in voice \"" <<
-          getVoiceName () <<
+          fVoiceName <<
           "\" (" << context << ")" <<
           ", line " << inputLineNumber <<
           std::endl;
@@ -5087,7 +5089,7 @@ void msrVoice::moveVoiceLastSegmentToInitialVoiceElementsIfRelevant (
         "Voice last segment '" <<
         fVoiceLastSegment->asString () <<
         "' is null, not moved to the initial elements in voice \"" <<
-        getVoiceName () <<
+        fVoiceName <<
         "\" (" << context << ")" <<
         ", line " << inputLineNumber <<
         std::endl;
@@ -5116,7 +5118,7 @@ void msrVoice::appendRepeatCloneToInitialVoiceElements (
       "Appending repeat cLone '" <<
       repeatCLone->asString () <<
       "' to the initial elements in voice \"" <<
-      getVoiceName () <<
+      fVoiceName <<
       "\" (" << context << ")" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -5142,7 +5144,7 @@ void msrVoice::handleVoiceLevelRepeatStart (
 
     ss <<
       "Handling a voice-level repeat start in voice \"" <<
-      getVoiceName () <<
+      fVoiceName <<
       ", line " << inputLineNumber <<
       std::endl;
 
@@ -5226,7 +5228,7 @@ void msrVoice::handleVoiceLevelRepeatStart (
               "Splitting measure '" <<
               lastMeasureInLastSegment->asShortString () <<
               "' upon a repeat start in voice \"" <<
-              getVoiceName () <<
+              fVoiceName <<
               "\"" <<
               ", measureWholeNotes: " <<
               measureWholeNotes.asString () <<
@@ -5297,7 +5299,7 @@ void msrVoice::handleVoiceLevelRepeatStart (
 
           ss <<
             "Removing the last measure in voice \"" <<
-            getVoiceName () <<
+            fVoiceName <<
             "\"" <<
             " (voice level start)" <<
             ", line " << inputLineNumber <<
@@ -5368,7 +5370,7 @@ void msrVoice::handleVoiceLevelRepeatStart (
 
     ss <<
       "Creating a repeat common part upon its start in voice \"" <<
-      getVoiceName () <<
+      fVoiceName <<
       "\"" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -5417,7 +5419,7 @@ void msrVoice::handleNestedRepeatStartInVoice (
 
     ss <<
       "Handling a nested repeat start in voice \"" <<
-      getVoiceName () <<
+      fVoiceName <<
       "\"" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -5448,7 +5450,7 @@ void msrVoice::handleRepeatStartInVoice (
 
     ss <<
       "Handling repeat start in voice \"" <<
-      getVoiceName () <<
+      fVoiceName <<
       "\"" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -5512,7 +5514,7 @@ void msrVoice::handleVoiceLevelRepeatEndWithoutStart (
 
     ss <<
       "Handling a voice-level repeat end without start in voice \"" <<
-      getVoiceName () <<
+      fVoiceName <<
       "\"" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -5559,7 +5561,7 @@ void msrVoice::handleVoiceLevelRepeatEndWithoutStart (
 
     ss <<
       "Creating a repeat upon its end in voice \"" <<
-      getVoiceName () <<
+      fVoiceName <<
       "\"" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -5588,7 +5590,7 @@ void msrVoice::handleVoiceLevelRepeatEndWithoutStart (
 
     ss <<
       "Creating a repeat common part upon its end in voice \"" <<
-      getVoiceName () <<
+      fVoiceName <<
       "\"" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -5641,7 +5643,7 @@ void msrVoice::handleVoiceLevelRepeatEndWithoutStart (
 
     ss <<
       "Appending the voice last segment in voice \"" <<
-      getVoiceName () <<
+      fVoiceName <<
       "\" to the new voice-level repeat common part" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -5698,7 +5700,7 @@ void msrVoice::handleVoiceLevelContainingRepeatEndWithoutStart (
 
     ss <<
       "Handling a voice-level rcontaining epeat end without start in voice \"" <<
-      getVoiceName () <<
+      fVoiceName <<
       "\"" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -5745,7 +5747,7 @@ void msrVoice::handleVoiceLevelContainingRepeatEndWithoutStart (
 
     ss <<
       "Creating a repeat upon its end in voice \"" <<
-      getVoiceName () <<
+      fVoiceName <<
       "\"" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -5774,7 +5776,7 @@ void msrVoice::handleVoiceLevelContainingRepeatEndWithoutStart (
 
     ss <<
       "Creating a repeat common part upon its end in voice \"" <<
-      getVoiceName () <<
+      fVoiceName <<
       "\"" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -5838,7 +5840,7 @@ void msrVoice::handleVoiceLevelContainingRepeatEndWithoutStart (
 
     ss <<
       "Appending the voice last segment in voice \"" <<
-      getVoiceName () <<
+      fVoiceName <<
       "\" to the new voice-level repeat common part" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -5897,7 +5899,7 @@ void msrVoice::handleVoiceLevelRepeatEndWithStart (
 
     ss <<
       "Handling a voice-level repeat end with start in voice \"" <<
-      getVoiceName () <<
+      fVoiceName <<
       "\"" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -5971,7 +5973,7 @@ void msrVoice::handleVoiceLevelRepeatEndWithStart (
 
     ss <<
       "Creating a repeat common part upon repeat end in voice \"" <<
-      getVoiceName () <<
+      fVoiceName <<
       "\"" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -6002,7 +6004,7 @@ void msrVoice::handleVoiceLevelRepeatEndWithStart (
 
     ss <<
       "Moving the voice last segment in voice \"" <<
-      getVoiceName () <<
+      fVoiceName <<
       "\" to the current voice-level repeat common part" <<
       " and forget about it" <<
       ", line " << inputLineNumber <<
@@ -6063,7 +6065,7 @@ void msrVoice::handleNestedRepeatEndInVoice (
 
     ss <<
       "Handling a nested repeat end in voice \"" <<
-      getVoiceName () <<
+      fVoiceName <<
       "\"" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -6122,7 +6124,7 @@ void msrVoice::handleNestedRepeatEndInVoice (
         "Splitting measure '" <<
         voiceLastMeasure->asShortString () <<
         "' upon a repeat end in voice \"" <<
-        getVoiceName () <<
+        fVoiceName <<
         "\"" <<
         ", line " << inputLineNumber <<
         std::endl;
@@ -6274,7 +6276,7 @@ void msrVoice::handleVoiceLevelRepeatEndingStartWithoutExplicitStart (
 
     ss <<
       "Handling a voice-level repeat ending start without explicit start in voice \"" <<
-      getVoiceName () <<
+      fVoiceName <<
       "\"" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -6312,7 +6314,7 @@ void msrVoice::handleVoiceLevelRepeatEndingStartWithoutExplicitStart (
 
     s1 <<
       "Creating a voice-level repeat upon its first ending in voice \"" <<
-      getVoiceName () <<
+      fVoiceName <<
       "\"" <<
       ", line " << inputLineNumber;
 
@@ -6330,7 +6332,7 @@ void msrVoice::handleVoiceLevelRepeatEndingStartWithoutExplicitStart (
 
       ss <<
         "Creating a repeat common part upon its end in voice \"" <<
-        getVoiceName () <<
+        fVoiceName <<
         "\"" <<
         ", line " << inputLineNumber <<
         std::endl;
@@ -6361,7 +6363,7 @@ void msrVoice::handleVoiceLevelRepeatEndingStartWithoutExplicitStart (
 
     ss <<
       "Fetching the last measure in voice \"" <<
-      getVoiceName () <<
+      fVoiceName <<
       "\"" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -6398,7 +6400,7 @@ void msrVoice::handleVoiceLevelRepeatEndingStartWithoutExplicitStart (
 
       ss <<
         "Removing the last measure in voice \"" <<
-        getVoiceName () <<
+        fVoiceName <<
         "\"" <<
         " (voice level ending without explicit start)" <<
         ", line " << inputLineNumber <<
@@ -6424,7 +6426,7 @@ void msrVoice::handleVoiceLevelRepeatEndingStartWithoutExplicitStart (
 
     s2 <<
       "Moving the voice last segment to the repeat common part in voice \"" <<
-      getVoiceName () <<
+      fVoiceName <<
       "\"" <<
       ", line " << inputLineNumber;
 
@@ -6516,7 +6518,7 @@ void msrVoice::handleVoiceLevelRepeatEndingStartWithExplicitStart (
 
     ss <<
       "Handling a voice-level repeat ending start with explicit start in voice \"" <<
-      getVoiceName () <<
+      fVoiceName <<
       "\"" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -6565,7 +6567,7 @@ void msrVoice::handleVoiceLevelRepeatEndingStartWithExplicitStart (
 
     ss <<
       "Fetching the last measure of the last segment in voice \"" <<
-      getVoiceName () <<
+      fVoiceName <<
       "\"" <<
       ", line " << inputLineNumber <<
       ", it is:" <<
@@ -6598,7 +6600,7 @@ void msrVoice::handleVoiceLevelRepeatEndingStartWithExplicitStart (
 
       ss <<
         "Removing the last measure in voice \"" <<
-        getVoiceName () <<
+        fVoiceName <<
         "\"" <<
         " (voice level ending with explicit start)" <<
         ", line " << inputLineNumber <<
@@ -6624,7 +6626,7 @@ void msrVoice::handleVoiceLevelRepeatEndingStartWithExplicitStart (
 
     s2 <<
       "Moving the voice last segment to the repeat common part in voice \"" <<
-      getVoiceName () <<
+      fVoiceName <<
       "\"" <<
       ", line " << inputLineNumber;
 
@@ -6758,7 +6760,7 @@ void msrVoice::handleNestedRepeatEndingStartInVoice (
 
     ss <<
       "Handling a nested repeat ending start voice \"" <<
-      getVoiceName () <<
+      fVoiceName <<
       "\"" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -6783,7 +6785,7 @@ void msrVoice::handleRepeatEndingStartInVoice (
 
     ss <<
       "Handling a repeat ending start in voice \"" <<
-      getVoiceName () <<
+      fVoiceName <<
       "\"" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -6899,7 +6901,7 @@ void msrVoice::handleRepeatEndingStartInVoiceClone (
 
           ss <<
             "Handling a repeat ending upon its start in voice clone \"" <<
-            getVoiceName () <<
+            fVoiceName <<
             "\"" <<
             ", line " << inputLineNumber <<
             std::endl;
@@ -7008,7 +7010,7 @@ void msrVoice::handleRepeatEndingStartInVoiceClone (
               if (gTraceOahGroup->getTraceRepeats ()) {
                 gLog <<
                   "Moving the voice last segment to the repeat common part in voice clone \"" <<
-                  getVoiceName () <<
+                  fVoiceName <<
                   "\"" <<
                   ", line " << inputLineNumber <<
                   std::endl;
@@ -7274,7 +7276,7 @@ void msrVoice::createMeasureRepeatFromItsFirstMeasures (
   if (gTraceOahGroup->getTraceMeasureRepeatsDetails ()) {
     gLog <<
       "Creating a measures repeat from its first measure in voice \"" <<
-      getVoiceName () <<
+      fVoiceName <<
       "\"" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -7472,7 +7474,7 @@ void msrVoice::appendMultipleFullBarRestsToVoice (
       "Appending multiple full-bar rests " <<
       multipleFullBarRests->asShortString () <<
       " to voice \"" <<
-      getVoiceName () <<
+      fVoiceName <<
       "\"" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -7548,7 +7550,7 @@ void msrVoice::appendMeasureRepeatToVoice (
       "Appending measures repeat '" <<
       measureRepeat->asShortString () <<
       "' to voice \"" <<
-      getVoiceName () <<
+      fVoiceName <<
       "\"" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -7609,7 +7611,7 @@ void msrVoice::appendPendingMeasureRepeatToVoice (
   if (gTraceOahGroup->getTraceMeasureRepeatsDetails ()) {
     gLog <<
       "Appending pending measures repeat to voice \"" <<
-      getVoiceName () <<
+      fVoiceName <<
       "\"" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -7732,7 +7734,7 @@ void msrVoice::appendPendingMeasureRepeatToVoice (
 
     ss <<
       "Setting pending measures repeat replicas segment in voice \"" <<
-      getVoiceName () <<
+      fVoiceName <<
       "\"" <<
       std::endl;
 
@@ -7807,7 +7809,7 @@ void msrVoice::appendPendingMeasureRepeatToVoice (
   if (gTraceOahGroup->getTraceMeasureRepeatsDetails ()) {
     gLog <<
       "Appending pending measures repeat to voice \"" <<
-      getVoiceName () <<
+      fVoiceName <<
       "\"" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -7828,7 +7830,7 @@ void msrVoice::createMeasureRepeatAndAppendItToVoiceClone (
   if (gTraceOahGroup->getTraceMeasureRepeatsDetails ()) {
     gLog <<
       "Creating measures repeat and appending it to voice clone \"" <<
-      getVoiceName () <<
+      fVoiceName <<
       "\"" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -7866,7 +7868,7 @@ void msrVoice::createMeasureRepeatAndAppendItToVoiceClone (
 
           ss <<
             "Creating and appending a measures repeat in voice \"" <<
-            getVoiceName () <<
+            fVoiceName <<
             "\"" <<
             ", line " << inputLineNumber <<
             std::endl;
@@ -7893,7 +7895,7 @@ void msrVoice::createMeasureRepeatAndAppendItToVoiceClone (
 
           ss <<
             "Creating a measures repeat pattern from current last segment in voice \"" <<
-            getVoiceName () <<
+            fVoiceName <<
             "\"" <<
             ", line " << inputLineNumber <<
             std::endl;
@@ -7927,7 +7929,7 @@ void msrVoice::createMeasureRepeatAndAppendItToVoiceClone (
 
           ss <<
             "Setting repeat common part in voice \"" <<
-            getVoiceName () <<
+            fVoiceName <<
             "\"" <<
             std::endl;
 
@@ -7974,7 +7976,7 @@ void msrVoice::createMeasureRepeatAndAppendItToVoiceClone (
   if (gTraceOahGroup->getTraceMeasureRepeatsDetails ()) {
     gLog <<
       "Creating measures repeat and appending it to voice clone \"" <<
-      getVoiceName () <<
+      fVoiceName <<
       "\"" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -7995,7 +7997,7 @@ void msrVoice::setVoiceContainsMultipleFullBarRests (
 
     ss <<
       "Voice \"" <<
-      getVoiceName () <<
+      fVoiceName <<
       "\"" <<
       ", line " << inputLineNumber <<
       ", contains multiple full-bar rests" <<
@@ -8021,7 +8023,7 @@ void msrVoice::setVoiceContainsMeasureRepeats (
 
     ss <<
       "Voice \"" <<
-      getVoiceName () <<
+      fVoiceName <<
       "\"" <<
       ", line " << inputLineNumber <<
       ", contains measure repeats" <<
@@ -8052,7 +8054,7 @@ void msrVoice::appendMultipleFullBarRestsToVoice (
       mfSingularOrPlural (
         multipleFullBarRestsMeasuresNumber, "measure", "measures") <<
       " to voice \"" <<
-      getVoiceName () <<
+      fVoiceName <<
       "\"" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -8122,7 +8124,7 @@ void msrVoice::appendMultipleFullBarRestsToVoice (
             mfSingularOrPlural (
               multipleFullBarRestsMeasuresNumber, "measure", "measures") <<
             " in voice \"" <<
-            getVoiceName () <<
+            fVoiceName <<
             "\"" <<
             ", line " << inputLineNumber <<
             std::endl;
@@ -8148,7 +8150,7 @@ void msrVoice::appendMultipleFullBarRestsToVoice (
             "Appending multiple full-bar rest " <<
             fVoiceCurrentMultipleFullBarRests->asString () <<
             " to the last segment of voice \"" <<
-            getVoiceName () <<
+            fVoiceName <<
             "\"" <<
             ", line " << inputLineNumber <<
             std::endl;
@@ -8285,7 +8287,7 @@ void msrVoice::replicateLastAppendedMeasureInVoice (
         " as measure " <<
         lastAppendedMeasureClone->getMeasureNumber () <<
         " in voice \"" <<
-        getVoiceName () <<
+        fVoiceName <<
         "\"" <<
         std::endl;
 #endif // MF_TRACE_IS_ENABLED
@@ -8326,7 +8328,7 @@ void msrVoice::addEmptyMeasuresToVoice (
       mfSingularOrPlural (
         emptyMeasuresNumber, "empty measure", "empty measures") <<
       " to voice \"" <<
-      getVoiceName () <<
+      fVoiceName <<
       "\"" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -8575,7 +8577,7 @@ void msrVoice::appendPendingMultipleFullBarRestsToVoice (
           "Appending current multiple full-bar rests " <<
           fVoiceCurrentMultipleFullBarRests->asShortString () <<
           " to voice \"" <<
-          getVoiceName () <<
+          fVoiceName <<
           "\"" <<
           ", line " << inputLineNumber <<
           std::endl;
@@ -8615,7 +8617,7 @@ void msrVoice::appendPendingMultipleFullBarRestsToVoice (
             "Appending current multiple full-bar rests " <<
             fVoiceCurrentMultipleFullBarRests->asShortString () <<
             " to the last segment of voice \"" <<
-            getVoiceName () <<
+            fVoiceName <<
             "\"" <<
             ", line " << inputLineNumber <<
             std::endl;
@@ -8668,7 +8670,7 @@ void msrVoice::handleMultipleFullBarRestsStartInVoiceClone (
 
     ss <<
       "Handling multiple full-bar rests start in voice clone \"" <<
-      getVoiceName () <<
+      fVoiceName <<
       ", line " << inputLineNumber <<
       std::endl;
 
@@ -8779,7 +8781,7 @@ void msrVoice::handleMultipleFullBarRestsEndInVoiceClone (
 
     ss <<
       "Handling multiple full-bar rests end in voice clone \"" <<
-      getVoiceName () <<
+      fVoiceName <<
       ", line " << inputLineNumber <<
       std::endl;
 
@@ -8873,7 +8875,7 @@ void msrVoice::appendMultipleFullBarRestsCloneToVoiceClone (
             "Appending multiple full-bar rests clone " <<
             multipleFullBarRestsClone->asString () <<
             " to voice clone \"" <<
-            getVoiceName () << "\"" <<
+            fVoiceName << "\"" <<
             ", line " << inputLineNumber <<
             std::endl;
         }
@@ -8948,7 +8950,7 @@ void msrVoice::appendRepeatCloneToVoiceClone (
       "Appending repeat clone '" <<
       repeatCLone->asString () <<
       "' to voice clone \"" <<
-      getVoiceName () <<  "\"" <<
+      fVoiceName <<  "\"" <<
       std::endl;
 
     gWaeHandler->waeTraceWithLocationDetails (
@@ -8990,7 +8992,7 @@ void msrVoice::appendRepeatCloneToVoiceClone (
 
           ss <<
             "Pushing repeat clone as the new current repeat in voice \"" <<
-            getVoiceName () <<
+            fVoiceName <<
             "\"" <<
             std::endl;
 
@@ -9038,7 +9040,7 @@ void msrVoice::handleMeasureRepeatStartInVoiceClone (
 
     ss <<
       "Handling measures repeat start in voice clone \"" <<
-      getVoiceName () <<
+      fVoiceName <<
       "\"" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -9128,7 +9130,7 @@ void msrVoice::handleMeasureRepeatEndInVoiceClone (
 
     ss <<
       "Handling measures repeat end in voice clone \"" <<
-      getVoiceName () <<
+      fVoiceName <<
       ", line " << inputLineNumber <<
       std::endl;
 
@@ -9204,7 +9206,7 @@ void msrVoice::handleMeasureRepeatPatternStartInVoiceClone (
 
     ss <<
       "Handling measures repeat start in voice clone \"" <<
-      getVoiceName () <<
+      fVoiceName <<
       "\", line " << inputLineNumber <<
       std::endl;
 
@@ -9249,7 +9251,7 @@ void msrVoice::handleMeasureRepeatPatternStartInVoiceClone (
 
     ss <<
       "Creating a measures repeat pattern upon its start in voice \"" <<
-      getVoiceName () <<
+      fVoiceName <<
       "\"" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -9293,7 +9295,7 @@ void msrVoice::handleMeasureRepeatPatternEndInVoiceClone (
 
     ss <<
       "Handling measures repeat end in voice clone \"" <<
-      getVoiceName () <<
+      fVoiceName <<
       ", line " << inputLineNumber <<
       std::endl;
 
@@ -9365,7 +9367,7 @@ void msrVoice::handleMeasureRepeatReplicasStartInVoiceClone (
 
     ss <<
       "Handling measures repeat start in voice clone \"" <<
-      getVoiceName () <<
+      fVoiceName <<
       "\", line " << inputLineNumber <<
       std::endl;
 
@@ -9410,7 +9412,7 @@ void msrVoice::handleMeasureRepeatReplicasStartInVoiceClone (
 
     ss <<
       "Creating a measures repeat replicas upon its start in voice \"" <<
-      getVoiceName () <<
+      fVoiceName <<
       "\"" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -9454,7 +9456,7 @@ void msrVoice::handleMeasureRepeatReplicasEndInVoiceClone (
 
     ss <<
       "Handling measures repeat end in voice clone \"" <<
-      getVoiceName () <<
+      fVoiceName <<
       ", line " << inputLineNumber <<
       std::endl;
 
@@ -9545,7 +9547,7 @@ void msrVoice::appendMeasureRepeatCloneToVoiceClone (
             "Appending measures repeat clone '" <<
             measureRepeatClone->asString () <<
             "' to voice clone \"" <<
-            getVoiceName () << "\"" <<
+            fVoiceName << "\"" <<
             ", line " << inputLineNumber <<
             std::endl;
         }
@@ -9618,7 +9620,7 @@ void msrVoice::handleHookedRepeatEndingEndInVoice (
 
     ss <<
       "Handling a hooked repeat ending in voice \"" <<
-      getVoiceName () <<  "\"" <<
+      fVoiceName <<  "\"" <<
       ", line " << inputLineNumber <<
       std::endl;
 
@@ -9745,7 +9747,7 @@ void msrVoice::handleHooklessRepeatEndingEndInVoice (
 
     ss <<
       "Handling a hookless repeat ending in voice \"" <<
-      getVoiceName () <<  "\"" <<
+      fVoiceName <<  "\"" <<
       ", line " << inputLineNumber <<
       std::endl;  }
 #endif // MF_TRACE_IS_ENABLED
@@ -9922,7 +9924,7 @@ void msrVoice::handleRepeatCommonPartStartInVoiceClone (
 
     ss <<
       "Handling a repeat common part start in voice clone \"" <<
-      getVoiceName () <<  "\"" <<
+      fVoiceName <<  "\"" <<
       ", line " << inputLineNumber <<
       std::endl;
 
@@ -9973,7 +9975,7 @@ void msrVoice::handleRepeatCommonPartStartInVoiceClone (
 
     ss <<
       "Creating a repeat common part upon its start in voice \"" <<
-      getVoiceName () <<
+      fVoiceName <<
       "\"" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -10017,7 +10019,7 @@ void msrVoice::handleRepeatCommonPartEndInVoiceClone (
 
     ss <<
       "Handling a repeat common part end in voice clone \"" <<
-      getVoiceName () <<  "\"" <<
+      fVoiceName <<  "\"" <<
       ", line " << inputLineNumber <<
       std::endl;
 
@@ -10104,7 +10106,7 @@ void msrVoice::handleHookedRepeatEndingEndInVoiceClone (
 
     ss <<
       "Handling a hooked repeat ending in voice clone \"" <<
-      getVoiceName () <<  "\"" <<
+      fVoiceName <<  "\"" <<
       ", line " << inputLineNumber <<
       std::endl;
 
@@ -10202,7 +10204,7 @@ void msrVoice::handleHooklessRepeatEndingEndInVoiceClone (
 
     ss <<
       "Handling a hookless repeat ending in voice clone \"" <<
-      getVoiceName () <<  "\"" <<
+      fVoiceName <<  "\"" <<
       ", line " << inputLineNumber <<
       std::endl;
 
@@ -10340,7 +10342,7 @@ void msrVoice::handleRepeatStartInVoiceClone (
 
     ss <<
       "Handling repeat start in voice clone \"" <<
-      getVoiceName () <<
+      fVoiceName <<
       "\"" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -10405,7 +10407,7 @@ void msrVoice::handleRepeatStartInVoiceClone (
 
         ss <<
           "Creating a repeat upon its start in voice clone \"" <<
-          getVoiceName () <<
+          fVoiceName <<
           "\"" <<
           ", line " << inputLineNumber <<
           std::endl;
@@ -10447,7 +10449,7 @@ void msrVoice::handleRepeatEndInVoiceClone (
 
     ss <<
       "Handling a repeat end in voice clone \"" <<
-      getVoiceName () <<
+      fVoiceName <<
       "\"" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -10594,7 +10596,7 @@ void msrVoice::appendMeasureRepeatReplicaToVoice (
 
           ss <<
             "Appending a measures repeat replica to voice \"" <<
-            getVoiceName () <<  "\"" <<
+            fVoiceName <<  "\"" <<
             ", line " << inputLineNumber <<
             std::endl;
 
@@ -10830,7 +10832,7 @@ void msrVoice::prependBarLineToVoice (
     ss <<
       "Prepending barLine '" <<
       barLine->asString () <<
-      "' to voice \"" << getVoiceName () << "\"" <<
+      "' to voice \"" << fVoiceName << "\"" <<
       ":" <<
       std::endl;
 
@@ -10860,7 +10862,7 @@ void msrVoice::appendBarLineToVoice (
     ss <<
       "Appending barLine " <<
       barLine->asString () <<
-      " to voice \"" << getVoiceName () << "\"" <<
+      " to voice \"" << fVoiceName << "\"" <<
       ":" <<
       std::endl;
 
@@ -10894,7 +10896,7 @@ void msrVoice::appendSegnoToVoice (const S_msrSegno& segno)
     std::stringstream ss;
 
     ss <<
-      "Appending a segno to voice \"" << getVoiceName () << "\"" <<
+      "Appending a segno to voice \"" << fVoiceName << "\"" <<
       std::endl;
 
     gWaeHandler->waeTraceWithLocationDetails (
@@ -10923,7 +10925,7 @@ void msrVoice::appendCodaToVoice (const S_msrCoda& coda)
     std::stringstream ss;
 
     ss <<
-      "Appending a coda to voice \"" << getVoiceName () << "\"" <<
+      "Appending a coda to voice \"" << fVoiceName << "\"" <<
       ":" <<
       std::endl;
 
@@ -10954,7 +10956,7 @@ void msrVoice::appendEyeGlassesToVoice (
     std::stringstream ss;
 
     ss <<
-      "Appending a eyeGlasses to voice \"" << getVoiceName () << "\"" <<
+      "Appending a eyeGlasses to voice \"" << fVoiceName << "\"" <<
       std::endl;
 
     gWaeHandler->waeTraceWithLocationDetails (
@@ -10983,7 +10985,7 @@ void msrVoice::appendPedalToVoice (const S_msrPedal& pedal)
     std::stringstream ss;
 
     ss <<
-      "Appending a pedal to voice \"" << getVoiceName () << "\"" <<
+      "Appending a pedal to voice \"" << fVoiceName << "\"" <<
       std::endl;
 
     gWaeHandler->waeTraceWithLocationDetails (
@@ -11013,7 +11015,7 @@ void msrVoice::appendDampToVoice (
     std::stringstream ss;
 
     ss <<
-      "Appending a damp to voice \"" << getVoiceName () << "\"" <<
+      "Appending a damp to voice \"" << fVoiceName << "\"" <<
       std::endl;
 
     gWaeHandler->waeTraceWithLocationDetails (
@@ -11043,7 +11045,7 @@ void msrVoice::appendDampAllToVoice (
     std::stringstream ss;
 
     ss <<
-      "Appending a damp all to voice \"" << getVoiceName () << "\"" <<
+      "Appending a damp all to voice \"" << fVoiceName << "\"" <<
       std::endl;
 
     gWaeHandler->waeTraceWithLocationDetails (
@@ -11075,7 +11077,7 @@ S_msrElement msrVoice::removeLastElementFromVoice (  // JMI
 
     ss <<
       "Removing last note" <<
-      " from voice " << getVoiceName () <<
+      " from voice " << fVoiceName <<
       std::endl;
 
     gWaeHandler->waeTraceWithLocationDetails (
@@ -11103,7 +11105,7 @@ void msrVoice::removeNoteFromVoice (
     ss <<
       "Removing note '" <<
       note->asShortString () <<
-      "' from voice \"" << getVoiceName () << "\"" <<
+      "' from voice \"" << fVoiceName << "\"" <<
       std::endl;
 
     gWaeHandler->waeTraceWithLocationDetails (
@@ -11144,7 +11146,7 @@ void msrVoice::removeElementFromVoice (
     ss <<
       "Removing element '" <<
       element->asShortString () <<
-      "' from voice \"" << getVoiceName () << "\"" <<
+      "' from voice \"" << fVoiceName << "\"" <<
       std::endl;
 
     gWaeHandler->waeTraceWithLocationDetails (
@@ -11174,7 +11176,7 @@ S_msrMeasure msrVoice::removeLastMeasureFromVoice (
 
     ss <<
       "Removing last measure from voice \"" <<
-      getVoiceName () <<
+      fVoiceName <<
       "\"" <<
       std::endl;
 
@@ -11211,7 +11213,7 @@ void msrVoice::finalizeLastAppendedMeasureInVoice (
 
     ss <<
       "Finalizing last appended measure in voice \"" <<
-      getVoiceName () <<
+      fVoiceName <<
       "\"" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -11309,7 +11311,7 @@ void msrVoice:: collectVoiceMeasuresIntoFlatList (
 
       ss <<
         "Collecting measures from the initial elements into voice \"" <<
-        getVoiceName () <<
+        fVoiceName <<
         "s measures flat list" <<
         ", line " << inputLineNumber <<
         std::endl;
@@ -11331,7 +11333,7 @@ void msrVoice:: collectVoiceMeasuresIntoFlatList (
 
       ss <<
         "Collecting measures from the last segment into voice \"" <<
-        getVoiceName () <<
+        fVoiceName <<
         "s measures flat list" <<
         ", line " << inputLineNumber <<
         std::endl;
@@ -11366,7 +11368,7 @@ void msrVoice::finalizeVoice (
 
     ss <<
       "Finalizing voice \"" <<
-      getVoiceName () <<
+      fVoiceName <<
       "\", line " << inputLineNumber <<
       std::endl;
   }
@@ -11409,7 +11411,7 @@ void msrVoice::finalizeVoice (
 
     ss <<
       "--> in voice \"" <<
-      getVoiceName () <<
+      fVoiceName <<
       "\"" <<
       ", fVoiceShortestNoteWholeNotes: " << fVoiceShortestNoteWholeNotes.asString () <<
       ", partShortestNoteWholeNotes: " << partShortestNoteWholeNotes.asString () <<
@@ -11447,7 +11449,7 @@ void msrVoice::finalizeVoice (
 
     ss <<
       "Voice \"" <<
-      getVoiceName () <<
+      fVoiceName <<
       "\" is totally empty, no contents ever specified for it" <<
       std::endl;
 
@@ -11528,7 +11530,7 @@ void msrVoice::finalizeVoiceAndAllItsMeasures (
 
     ss <<
       "Finalizing voice \"" <<
-      getVoiceName () <<
+      fVoiceName <<
       "\", line " << inputLineNumber <<
       std::endl;
   }
@@ -11571,7 +11573,7 @@ void msrVoice::finalizeVoiceAndAllItsMeasures (
 
     ss <<
       "--> in voice \"" <<
-      getVoiceName () <<
+      fVoiceName <<
       "\"" <<
       ", fVoiceShortestNoteWholeNotes: " << fVoiceShortestNoteWholeNotes.asString () <<
       ", partShortestNoteWholeNotes: " << partShortestNoteWholeNotes.asString () <<
@@ -11607,7 +11609,7 @@ void msrVoice::finalizeVoiceAndAllItsMeasures (
 
     ss <<
       "Voice \"" <<
-      getVoiceName () <<
+      fVoiceName <<
       "\" is totally empty, no contents ever specified for it" <<
       std::endl;
 
@@ -11686,7 +11688,7 @@ void msrVoice::finalizeVoiceAndAllItsMeasures (
 
     ss <<
       "Finalizing all the measures of voice \"" <<
-      getVoiceName () <<
+      fVoiceName <<
       "\", line " << inputLineNumber <<
       std::endl;
 
@@ -12059,10 +12061,10 @@ std::string msrVoice::asShortString () const
   std::stringstream ss;
 
   ss <<
-    "[Voice \"" << getVoiceName () << "\", " <<
+    "[Voice \"" << fVoiceName << "\", " <<
     msrVoiceKindAsString (fVoiceKind) <<
 //     msrVoiceKindAsStringForPrint (fVoiceKind) << // JMI
-    " voice \"" << getVoiceName () <<
+    " voice \"" << fVoiceName <<
     "\", fVoiceNumber '" <<
     fVoiceNumber <<
     ", line " << fInputLineNumber <<
@@ -12076,7 +12078,11 @@ std::string msrVoice::asString () const
   std::stringstream ss;
 
   ss <<
-    "[Voice \"" << getVoiceName () << "\", " <<
+    "[Voice \"" << fVoiceName <<
+//     msrVoiceKindAsStringForPrint (fVoiceKind) <<
+    "\", \"" <<
+    fVoiceAlphabeticName <<
+    ", " <<
     msrVoiceKindAsString (fVoiceKind) <<
      ", " <<
     mfSingularOrPlural (
@@ -12097,7 +12103,7 @@ void msrVoice::displayVoice (
   gLog <<
     std::endl <<
     "*********>> Displaying voice \"" <<
-    getVoiceName () <<
+    fVoiceName <<
     "\" (" << context << ")" <<
     ", line " << inputLineNumber <<
     " contains:" <<
@@ -12136,9 +12142,10 @@ void msrVoice::displayVoiceRepeatsStackMultipleFullBarRestsMeasureRepeatAndVoice
 void msrVoice::printFull (std::ostream& os) const
 {
   os <<
-    '[' <<
-    msrVoiceKindAsStringForPrint (fVoiceKind) <<
-    " voice \"" << getVoiceName () <<
+    "[Voice \"" << fVoiceName <<
+//     msrVoiceKindAsStringForPrint (fVoiceKind) <<
+    "\", \"" <<
+    fVoiceAlphabeticName <<
     "\", fVoiceNumber '" <<
     fVoiceNumber <<
     ", line " << fInputLineNumber <<
@@ -12265,7 +12272,7 @@ void msrVoice::printFull (std::ostream& os) const
     std::setw (fieldWidth) << "fRegularVoiceForwardLinkToHarmoniesVoice" << ": ";
   if (fRegularVoiceForwardLinkToHarmoniesVoice) {
     os <<
-      fRegularVoiceForwardLinkToHarmoniesVoice->getVoiceName ();
+      fRegularVoiceForwardLinkToHarmoniesVoice->fVoiceName;
   }
   else {
     os <<
@@ -12278,7 +12285,7 @@ void msrVoice::printFull (std::ostream& os) const
     std::setw (fieldWidth) << "fRegularVoiceForwardLinkToFiguredBassVoice" << ": ";
   if (fRegularVoiceForwardLinkToFiguredBassVoice) {
     os <<
-      fRegularVoiceForwardLinkToFiguredBassVoice->getVoiceName ();
+      fRegularVoiceForwardLinkToFiguredBassVoice->fVoiceName;
   }
   else {
     os <<
@@ -12498,9 +12505,10 @@ void msrVoice::printFull (std::ostream& os) const
 void msrVoice::print (std::ostream& os) const
 {
   os <<
-    '[' <<
-    msrVoiceKindAsStringForPrint (fVoiceKind) <<
-    " voice \"" << getVoiceName () <<
+    "[Voice \"" << fVoiceName <<
+//     msrVoiceKindAsStringForPrint (fVoiceKind) <<
+    "\", \"" <<
+    fVoiceAlphabeticName <<
     "\", fVoiceNumber '" <<
     fVoiceNumber <<
     "'" <<
@@ -12517,7 +12525,7 @@ void msrVoice::print (std::ostream& os) const
     "fRegularVoiceForwardLinkToHarmoniesVoice" << ": ";
   if (fRegularVoiceForwardLinkToHarmoniesVoice) {
     os <<
-      fRegularVoiceForwardLinkToHarmoniesVoice->getVoiceName ();
+      fRegularVoiceForwardLinkToHarmoniesVoice->fVoiceName;
   }
   else {
     os <<
@@ -12531,7 +12539,7 @@ void msrVoice::print (std::ostream& os) const
     "fRegularVoiceForwardLinkToFiguredBassVoice" << ": ";
   if (fRegularVoiceForwardLinkToFiguredBassVoice) {
     os <<
-      fRegularVoiceForwardLinkToFiguredBassVoice->getVoiceName ();
+      fRegularVoiceForwardLinkToFiguredBassVoice->fVoiceName;
   }
   else {
     os <<

@@ -91,7 +91,7 @@ class EXP msrPart : public msrPartGroupElement
     int                   getPartAbsoluteNumber () const
                               { return fPartAbsoluteNumber; }
 
-    // ID and name
+    // part ID and names
 
     void                  setPartID (const std::string& partID)
                               { fPartID = partID; }
@@ -110,22 +110,19 @@ class EXP msrPart : public msrPartGroupElement
     std::string           getPartName () const
                               { return fPartName; }
 
+    std::string           getPartAlphabeticName () const
+                              { return fPartAlphabeticName; }
+
     void                  setPartNameDisplayText (
                             const std::string& partNameDisplayText)
-                              {
-                                fPartNameDisplayText =
-                                  partNameDisplayText;
-                              }
+                              { fPartNameDisplayText = partNameDisplayText; }
 
     std::string           getPartNameDisplayText () const
                               { return fPartNameDisplayText; }
 
     void                  setPartAbbreviation (
                             const std::string& partAbbreviation)
-                              {
-                                fPartAbbreviation =
-                                  partAbbreviation;
-                              }
+                              { fPartAbbreviation = partAbbreviation; }
 
     std::string           getPartAbbreviation () const
                               { return fPartAbbreviation; }
@@ -551,7 +548,7 @@ class EXP msrPart : public msrPartGroupElement
 
     S_msrPartGroup        fPartUpLinkToPartGroup;
 
-    // part ID and name
+    // part ID and names
 
     std::string           fPartID; // native
 
@@ -561,6 +558,8 @@ class EXP msrPart : public msrPartGroupElement
                             // coined in constructor
 
     std::string           fPartName; // from '<part-name/>'
+    std::string           fPartAlphabeticName; // from '<part-name/>'
+
     std::string           fPartNameDisplayText;
 
     std::string           fPartAbbreviation;

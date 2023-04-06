@@ -1701,7 +1701,7 @@ void msdlScanner::translateAllTheInputToKeywordsLanguage (
     return;
   }
 
-  int numberOfTokens = 0;
+//   int numberOfTokens = 0; JMI v0.9.67
 
   try {
     msdlTokenKind tokenKind = msdlTokenKind::kToken_UNKNOWN_;
@@ -1712,7 +1712,7 @@ void msdlScanner::translateAllTheInputToKeywordsLanguage (
     do { // loop till end of stream
       // fetch the next token
       tokenKind = fetchNextToken (msdlIgnoreSeparatorTokensKind::kIgnoreSeparatorTokensNo);
-      ++numberOfTokens;
+//       ++numberOfTokens;
 
 #ifdef MF_TRACE_IS_ENABLED
       if (fTraceTokens) {

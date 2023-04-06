@@ -264,14 +264,17 @@ class EXP msrVoice : public msrElement
     int                   getRegularVoiceStaffSequentialNumber () const
                               { return fRegularVoiceStaffSequentialNumber; }
 
-    // voice name
+    // voice names
 
-    void                  setVoiceNameFromNumber (
+    void                  setVoiceNamesFromNumber (
                             int inputLineNumber,
                             int voiceNumber);
 
     std::string           getVoiceName () const
                               { return fVoiceName; }
+
+    std::string           getVoiceAlphabeticName () const
+                              { return fVoiceAlphabeticName; }
 
     // harmonies
 
@@ -1194,6 +1197,7 @@ class EXP msrVoice : public msrElement
     // voice name
 
     std::string           fVoiceName;
+    std::string           fVoiceAlphabeticName;
 
   public:
 

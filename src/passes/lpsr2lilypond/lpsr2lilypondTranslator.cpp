@@ -1471,7 +1471,7 @@ void lpsr2lilypondTranslator::generateNoteLigatures (
                 "Ligature vertical flipping factore for note '" <<
                 note->asString () <<
                 "' in voice \"" <<
-                noteVoice->getVoiceName () <<
+                noteVoice->getVoiceAlphabeticName () <<
                 "\" is " <<
                 ligatureVerticalFlippingFactor <<
                 ", line " << ligature->getInputLineNumber () <<
@@ -5103,13 +5103,13 @@ in all of them, the C and A# in theory want to fan out to B (the dominant).  Thi
     if (thereAreDegreesToBeRemoved) {
       ss << "^";
 
-      int counter = 0;
+//       int counter = 0; // JMI v0.9.67
       for (
         std::list<S_msrHarmonyDegree>::const_iterator i = harmonyDegreesList.begin ();
         i != harmonyDegreesList.end ();
         ++i
       ) {
-        ++counter;
+//         ++counter;
 
         S_msrHarmonyDegree
           harmonyDegree = (*i);
@@ -6900,7 +6900,7 @@ std::string lpsr2lilypondTranslator::generateStringAsLilypondMarkupOrDoubleQuote
   }
   else {
     result =
-      mfDoubleQuoteString (value); // JMI  extensive tests???
+      mfDoubleQuoteString (value);
   }
 
   return result;
@@ -8885,7 +8885,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrPartBlock& elt)
 
     std::string
       partName =
-        part->getPartName (),
+        part->getPartAlphabeticName (),
       partAbbreviation =
         part->getPartAbbreviation ();
 
@@ -9083,7 +9083,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrStaffBlock& elt)
 
   fLilypondCodeStream <<
     " = \"" <<
-    staff->getStaffName () <<
+    staff->getStaffAlphabeticName () <<
     "\"";
 
   fLilypondCodeStream << std::endl;
@@ -9104,16 +9104,17 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrStaffBlock& elt)
   // if the containing part contains several of them
   if (staffUpLinkToPart->getPartStaveNumbersToStavesMap ().size () == 1) {
     // get the part upLink name to be used
-    std::string partName =
-      staffUpLinkToPart->
-        getPartNameDisplayText ();
+    std::string
+      partName =
+        staffUpLinkToPart->
+          getPartNameDisplayText ();
 
 // JMI    gLog << "--> partName: \"" << partName << "\"" << std::endl;
 
     if (partName.size () == 0) {
       partName =
         staffUpLinkToPart->
-          getPartName ();
+          getPartAlphabeticName ();
     }
 
 // JMI    gLog << "--> partName: \"" << partName << "\"" << std::endl;
@@ -9324,7 +9325,7 @@ R"(  \override LedgerLineSpanner.stencil = #MyLedgerLineSpannerPrint
     fLilypondCodeStream << std::left <<
         std::setw (commentFieldWidth) <<
         "<<" <<
-        " % staff \"" << staff->getStaffName () << "\"";
+        " % staff \"" << staff->getStaffAlphabeticName () << "\"";
   }
   else {
     fLilypondCodeStream <<
@@ -9379,7 +9380,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrStaffBlock& elt)
     fLilypondCodeStream << std::left <<
       std::setw (commentFieldWidth) << ">>" <<
       "% staff " <<
-      elt->getStaff ()->getStaffName ();
+      elt->getStaff ()->getStaffAlphabeticName ();
   }
   else {
     fLilypondCodeStream <<
@@ -9622,7 +9623,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrUseVoiceCommand& elt)
 // if (voice->getStaffRelativeVoiceNumber () > 0) { JMI
   fLilypondCodeStream <<
     "\\context " << voiceContextName << " = \"" <<
-    voice->getVoiceName () << "\" <<" <<
+    voice->getVoiceAlphabeticName () << "\" <<" <<
      std::endl;
 
   ++gIndenter;
@@ -9682,8 +9683,9 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrUseVoiceCommand& elt)
   S_msrPart part =
     staff-> getStaffUpLinkToPart ();
 
-  std::string partName =
-    part->getPartName ();
+  std::string
+    partName =
+      part->getPartAlphabeticName ();
 
   // should a transposition be generated?
 #ifdef MF_TRACE_IS_ENABLED
@@ -9827,7 +9829,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrUseVoiceCommand& elt)
 
   // generate voice name
   fLilypondCodeStream <<
-    "\\" << voice->getVoiceName () << std::endl;
+    "\\" << voice->getVoiceAlphabeticName () << std::endl;
 
   --gIndenter;
 
@@ -9929,7 +9931,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrNewLyricsBlock& elt)
     switch (gGlobalLpsr2lilypondOahGroup->getLyricsNotesDurationsKind ()) {
       case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsImplicit:
         fLilypondCodeStream <<
-          "\\lyricsto \"" << elt->getVoice ()->getVoiceName () << "\" {" <<
+          "\\lyricsto \"" << elt->getVoice ()->getVoiceAlphabeticName () << "\" {" <<
           "\\" << stanza->getStanzaName () <<
           '}' <<
           std::endl;
@@ -11313,7 +11315,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrStaff& elt)
 
       ss <<
         "% --> Start visiting msrStaff \"" <<
-        elt->getStaffName () <<
+        elt->getStaffAlphabeticName () <<
         "\"" <<
         ", line " << elt->getInputLineNumber () <<
       std::endl;
@@ -11358,7 +11360,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrStaff& elt)
 
       ss <<
         "% --> End visiting msrStaff \"" <<
-        elt->getStaffName () <<
+        elt->getStaffAlphabeticName () <<
         "\"" <<
         ", line " << elt->getInputLineNumber () <<
       std::endl;
@@ -11508,7 +11510,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrVoice& elt)
 
       ss <<
         "% --> Start visiting msrVoice \"" <<
-        elt->getVoiceName () <<
+        elt->getVoiceAlphabeticName () <<
         "\"" <<
         ", line " << elt->getInputLineNumber () <<
       std::endl;
@@ -11530,7 +11532,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrVoice& elt)
 
     ss <<
 //       std::endl <<
-      "<!--=== voice \"" << elt->getVoiceName () << "\"" <<
+      "<!--=== voice \"" << elt->getVoiceAlphabeticName () << "\"" <<
       ", line " << elt->getInputLineNumber () << " ===-->" <<
       std::endl;
 
@@ -11555,7 +11557,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrVoice& elt)
       fCurrentVoice->getVoiceNumber ());
 
   fLilypondCodeStream <<
-    fCurrentVoice->getVoiceName () <<
+    fCurrentVoice->getVoiceAlphabeticName () <<
     " = ";
 
   // generate the beginning of the voice definition
@@ -11810,7 +11812,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrVoice& elt)
 
       ss <<
         "% --> End visiting msrVoice \"" <<
-        elt->getVoiceName () <<
+        elt->getVoiceAlphabeticName () <<
         "\"" <<
         ", line " << elt->getInputLineNumber () <<
       std::endl;
@@ -11927,13 +11929,13 @@ void lpsr2lilypondTranslator::visitStart (S_msrVoiceStaffChange& elt)
 //
 //     ss <<
 //       "*** There is staff change for chord member note '" <<
-//       newNote->asShortString () <<
+//       fCurrentNote->asShortString () <<
 //       "' in voice \"" <<
-//       voiceToInsertInto->getVoiceName () <<
+//       voiceToInsertInto->getPartAlphabeticName () <<
 //       "\"" <<
 //       " from staff " << fPreviousNoteMusicXMLStaffNumber <<
 //       " to staff " << fCurrentMusicXMLStaffNumber <<
-//       ", \"" << staffToChangeTo->getStaffName () << "\"" <<
+//       ", \"" << staffToChangeTo->getStaffAlphabeticName () << "\"" <<
 //       ", line " << inputLineNumber <<
 //       std::endl;
 //
@@ -11946,7 +11948,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrVoiceStaffChange& elt)
   fLilypondCodeStream <<
     std::endl <<
     "\\change Staff = \"" <<
-    elt->getStaffToChangeTo ()->getStaffName () <<
+    elt->getStaffToChangeTo ()->getStaffAlphabeticName () <<
     "\"";
 
   // generate the input line number as comment if relevant
@@ -12658,7 +12660,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
 
     if (fCurrentPart) {
       ss <<
-        "\"" << fCurrentPart->getPartName () << "\"" <<
+        "\"" << fCurrentPart->getPartAlphabeticName () << "\"" <<
         " (partID \"" << fCurrentPart->getPartID () << "\")";
     }
     else {
@@ -13107,7 +13109,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMeasure& elt)
 
     if (fCurrentPart) {
       ss <<
-        "\"" << fCurrentPart->getPartName () << "\"" <<
+        "\"" << fCurrentPart->getPartAlphabeticName () << "\"" <<
         " (partID \"" << fCurrentPart->getPartID () << "\")";
     }
     else {
@@ -13417,8 +13419,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrStanza& elt)
         // to draw hyphenated lines and extenders under melismata correctly
         "\\set associatedVoice = #\"" <<
         elt->
-          getStanzaUpLinkToVoice ()->
-            getVoiceName () <<
+          getStanzaUpLinkToVoice ()->getVoiceAlphabeticName () <<
         "\"" <<
         std::endl <<
         "\\set ignoreMelismata = ##t" <<
@@ -15018,10 +15019,10 @@ If the double element is present, it indicates that the music is doubled one oct
       "Handlling transpose '" <<
       elt->transposeAsString () <<
       "' ignored because it is already present in voice \"" <<
-      fCurrentVoice->getVoiceName () <<
+      fCurrentVoice->getVoiceAlphabeticName () <<
       "\"" <<
       / * JMI
-      getStaffName () <<
+      getStaffAlphabeticName () <<
       "\" in part " <<
       fStaffUpLinkToPart->getPartCombinedName () <<
       * /
@@ -18842,7 +18843,7 @@ void lpsr2lilypondTranslator::generateNoteScordaturas (
         "\\new Staff \\with { alignAboveContext = \"" <<
         note->
           fetchUpLinkToNoteToStaff ()->
-            getStaffName () <<
+            getStaffAlphabeticName () <<
         "\" } {" <<
         std::endl;
 
@@ -21872,11 +21873,12 @@ void lpsr2lilypondTranslator::visitStart (S_msrTuplet& elt)
     case msrTupletShowTypeKind::kTupletShowTypeActual:
       fLilypondCodeStream <<
      // JMI ???   "\\once \\override TupletNumber.text = #(tuplet-number::append-note-wrapper tuplet-number::calc-fraction-text \"" <<
-        "\\once \\override TupletNumber.text = #(tuplet-number::append-note-wrapper tuplet-number::calc-denominator-text \"" <<
-        wholeNotesAsLilypondString (
+        "\\once \\override TupletNumber.text = #(tuplet-number::append-note-wrapper tuplet-number::calc-denominator-text #{ " <<
+//         wholeNotesAsLilypondMakeDuration ( // JMI v0.9.67
+        wholeNotesAsLilypondString ( // JMI v0.9.67
           inputLineNumber,
           memberNoteDisplayWholeNotes) <<
-        "\")" <<
+        " #})" <<
         std::endl;
       break;
     case msrTupletShowTypeKind::kTupletShowTypeBoth:

@@ -1017,73 +1017,61 @@ std::string mfQuoteStringIfNonAlpha (
 }
 
 //______________________________________________________________________________
-std::string mfDoubleQuoteString (
+std::string mfDoubleQuoteStringContentsOnly (
   const std::string& theString)
 {
   std::string result;
 
   if (theString.size ()) {
     for (char const &theChar : theString) {
-      if (
-        ((theChar >= 'a') && (theChar))
-          ||
-        ((theChar) && (theChar))
-      ) {
-        // theChar is a letter
-        result += theChar;
+      if (theChar == '"') {
+        result += "\\\"";
       }
-
       else {
-        // theChar is not a letter
-        if (theChar == ' ') {
-          result += ' '; // TEMP JMI
-        }
-        else if (theChar == '"') {
-          result += "\\\"";
-        }
-        else {
-          result += theChar;
-        }
+        result += theChar;
       }
     } // for
   }
 
-  return "\"" + result + "\"";
+  return result;
+
+//   std::ostringstream ss;
+//
+//   ss << std::quoted (theString);
+//
+//   return ss.str();
+}
+
+std::string mfDoubleQuoteString (
+  const std::string& theString)
+{
+  return "\"" + mfDoubleQuoteStringContentsOnly (theString) + "\"";
 }
 
 //______________________________________________________________________________
-std::string mfQuoteString (
+std::string mfSingleQuoteStringContentsOnly (
   const std::string& theString)
 {
   std::string result;
 
   if (theString.size ()) {
     for (char const& theChar : theString) {
-      if (
-        ((theChar >= 'a') && (theChar <= 'z'))
-          ||
-        ((theChar >= 'A') && (theChar <= 'Z'))
-      ) {
-        // theChar is a letter
-        result += theChar;
+      if (theChar == '\'') {
+        result += "\\\'";
       }
-
       else {
-        // theChar is not a letter
-        if (theChar == ' ') {
-          result += ' '; // TEMP JMI
-        }
-        else if (theChar == '\'') {
-          result += "\\\'";
-        }
-        else {
-          result += theChar;
-        }
+        result += theChar;
       }
     } // for
   }
 
-  return "'" + result + "'";
+  return result;
+}
+
+std::string mfSingleQuoteString (
+  const std::string& theString)
+{
+  return "'" + mfSingleQuoteStringContentsOnly (theString) + "'";
 }
 
 //______________________________________________________________________________

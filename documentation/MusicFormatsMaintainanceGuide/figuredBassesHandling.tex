@@ -604,10 +604,10 @@ void mxsr2msrTranslator::handlePendingFiguredBasses (
 
   mfRational
     newNoteSoundingWholeNotes =
-      newNote->
+      fCurrentNote->
         getSoundingWholeNotes (),
     newNoteDisplayWholeNotes =
-      newNote->
+      fCurrentNote->
         getNoteDisplayWholeNotes ();
 
   while (fPendingFiguredBassesList.size ()) { // recompute at each iteration
@@ -641,7 +641,7 @@ void mxsr2msrTranslator::handlePendingFiguredBasses (
           fCurrentNoteNormalNotes));
 
     // append the figured bass to newNote
-    newNote->
+    fCurrentNote->
       appendFiguredBassToNote (
         figuredBass);
 

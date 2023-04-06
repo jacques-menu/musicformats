@@ -1417,11 +1417,6 @@ void msrTimeSignature::print (std::ostream& os) const
 
     ++gIndenter;
 
-    std::vector<S_msrTimeSignatureItem>::const_iterator
-      iBegin = fTimeSignatureItemsVector.begin (),
-      iEnd   = fTimeSignatureItemsVector.end (),
-      i      = iBegin;
-
     for (S_msrTimeSignatureItem timeSignatureItem : fTimeSignatureItemsVector ) {
       os << timeSignatureItem;
     } // for
