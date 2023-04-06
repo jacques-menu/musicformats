@@ -302,8 +302,12 @@ std::string mfQuoteStringIfNonAlpha (
 
 std::string mfDoubleQuoteString (
   const std::string& theString);
+std::string mfDoubleQuoteStringContentsOnly (
+  const std::string& theString);
 
-std::string mfQuoteString (
+std::string mfSingleQuoteString (
+  const std::string& theString);
+std::string mfSingleQuoteStringContentsOnly (
   const std::string& theString);
 
 std::string mfStringToLowerCase (

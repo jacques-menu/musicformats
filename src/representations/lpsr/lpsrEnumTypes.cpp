@@ -119,6 +119,17 @@ int lpsrNumberOfDots (int n)
 }
 
 //_______________________________________________________________________________
+// std::string wholeNotesAsLilypondMakeDurationArguments (
+//   int                  inputLineNumber,
+//   const msrWholeNotes& wholeNotes)
+// {
+//   return
+//     wholeNotes.asString () +
+//     ' ' +
+//     std::to_string (dotsNumber);
+// }
+
+//_______________________________________________________________________________
 std::string wholeNotesAsLilypondString (
   int                  inputLineNumber,
   const msrWholeNotes& wholeNotes,

@@ -85,13 +85,16 @@ class EXP msrStaff : public msrElement
     msrStaffKind          getStaffKind () const
                               { return fStaffKind; }
 
-    // staff number and name
+    // staff number and names
 
     int                   getStaffNumber () const
                               { return fStaffNumber; }
 
     std::string           getStaffName () const
                               { return fStaffName; }
+
+    std::string           getStaffAlphabeticName () const
+                              { return fStaffAlphabeticName; }
 
     std::string           getStaffInstrumentName () const
                               { return fStaffInstrumentName; }
@@ -382,8 +385,9 @@ class EXP msrStaff : public msrElement
 
     S_msrPart             fStaffUpLinkToPart;
 
-    // staff name
+    // staff names
     std::string           fStaffName;
+    std::string           fStaffAlphabeticName;
 
     // staff kind
     msrStaffKind          fStaffKind;

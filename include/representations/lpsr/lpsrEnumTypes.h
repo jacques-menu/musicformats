@@ -110,7 +110,13 @@ std::string availableLpsrChordsLanguageKinds (size_t namesListMaxLength);
 
 void initializeLpsrChordsLanguageKindsMap ();
 
-// whole notes
+// whole notes as LilyPond 'make-duration'
+//______________________________________________________________________________
+// std::string wholeNotesAsLilypondMakeDurationArguments (
+//   int                  inputLineNumber,
+//   const msrWholeNotes& wholeNotes);
+
+// whole notes as LilyPond strings
 //______________________________________________________________________________
 std::string wholeNotesAsLilypondString (
   int                  inputLineNumber,

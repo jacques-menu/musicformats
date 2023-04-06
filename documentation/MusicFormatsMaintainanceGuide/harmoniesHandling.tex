@@ -572,10 +572,10 @@ void mxsr2msrTranslator::handlePendingHarmonies (
 
   mfRational
     newNoteSoundingWholeNotes =
-      newNote->
+      fCurrentNote->
         getSoundingWholeNotes (),
     newNoteDisplayWholeNotes =
-      newNote->
+      fCurrentNote->
         getNoteDisplayWholeNotes ();
 
   while (fPendingHarmoniesList.size ()) { // recompute at each iteration
@@ -616,7 +616,7 @@ void mxsr2msrTranslator::handlePendingHarmonies (
           fCurrentNoteNormalNotes));
 
     // attach the harmony to newNote
-    newNote->
+    fCurrentNote->
       appendHarmonyToNote (
         harmony);
 

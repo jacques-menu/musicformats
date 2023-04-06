@@ -4683,16 +4683,6 @@ std::string msrNote::asShortString () const
           voice =
             fetchNoteUpLinkToVoice ();
 
-        ss <<
-          ", voiceNumber: ";
-        if (voice) {
-          ss <<
-            voice->getVoiceNumber ();
-        }
-        else {
-          ss << "[NULL]";
-        }
-
         S_msrStaff
           staff;
 
@@ -4707,6 +4697,16 @@ std::string msrNote::asShortString () const
         if (staff) {
           ss <<
             staff->getStaffNumber ();
+        }
+        else {
+          ss << "[NULL]";
+        }
+
+        ss <<
+          ", voiceNumber: ";
+        if (voice) {
+          ss <<
+            voice->getVoiceNumber ();
         }
         else {
           ss << "[NULL]";

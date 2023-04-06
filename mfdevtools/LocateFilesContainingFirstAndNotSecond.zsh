@@ -65,7 +65,7 @@ do
   if [[ (${FIRST_OCCURRENCES_NBR} -gt 0) && (${SECOND_OCCURRENCES_NBR} -eq 0) ]]
   then
     echo
-    echo "==> CHECK ${FILE}!"
+    echo "==> CHECK ${FILE} !"
     echo "      ${FIRST_OCCURRENCES_NBR} "${FIRST}", ${SECOND_OCCURRENCES_NBR} ${SECOND}"
     echo
   fi
