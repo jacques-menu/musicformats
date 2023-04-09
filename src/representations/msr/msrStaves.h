@@ -14,13 +14,12 @@
 
 #include "msrElements.h"
 
-#include "msrClefs.h"
-#include "msrKeys.h"
+// #include "msrClefKeyTimeSignatureGroup.h"
+#include "msrClefsKeysTimeSignatures.h"
 #include "msrRepeats.h"
 #include "msrRepeatsEnumTypes.h"
 #include "msrStavesDetails.h"
 #include "msrStavesEnumTypes.h"
-#include "msrTimeSignatures.h"
 #include "msrTranspositions.h"
 #include "msrTupletFactors.h"
 
@@ -178,15 +177,26 @@ class EXP msrStaff : public msrElement
 
     // clef, key, time signature
 
+//     void                  appendClefKeyTimeSignatureGroupToStaff (
+//                             const S_msrClefKeyTimeSignatureGroup& clefKeyTimeSignatureGroup);
+
     void                  appendClefToStaff (
+                            int              groupInputLineNumber,
                             const S_msrClef& clef);
 
-    void                  appendKeyToStaff (S_msrKey  key);
+    void                  appendKeyToStaff (
+                            int             groupInputLineNumber,
+                            const S_msrKey& key);
 
     void                  appendTimeSignatureToStaff (
+                            int                       groupInputLineNumber,
                             const S_msrTimeSignature& timeSignature);
-    void                  appendTimeSignatureToStaffClone (
-                            const S_msrTimeSignature& timeSignature);
+
+//     void                  appendTimeSignatureToStaffClone (
+//                             const S_msrTimeSignature& timeSignature);
+
+    void                  appendClefKeyTimeSignatureGroupToStaffClone (
+                            const S_msrClefKeyTimeSignatureGroup& clefKeyTimeSignatureGroup);
 
     // tempo
 
@@ -553,6 +563,9 @@ class EXP msrStaff : public msrElement
     S_msrKey              fStaffCurrentKey;
 
     S_msrTimeSignature    fStaffCurrentTimeSignature;
+
+    S_msrClefKeyTimeSignatureGroup
+                          fCurrentClefKeyTimeSignatureGroup;
 
     // staff details
 

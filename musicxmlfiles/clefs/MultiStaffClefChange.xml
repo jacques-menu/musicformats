@@ -3,7 +3,7 @@
                                 "http://www.musicxml.org/dtds/partwise.dtd">
 <score-partwise version="3.0">
   <work>
-    <work-title>Clef change</work-title>
+    <work-title>Multi-Staff Clef Change</work-title>
   </work>
   <identification>
     <creator type="composer">Ludwig van Beethoven</creator>
@@ -64,7 +64,7 @@
     <lyric-font font-family="Times New Roman" font-size="10"/>
   </defaults>
   <credit page="1">
-    <credit-words default-x="680" default-y="1678" font-size="24" justify="center" valign="top">Clef change</credit-words>
+    <credit-words default-x="680" default-y="1678" font-size="24" justify="center" valign="top">Multi-Staff Clef Change</credit-words>
     <credit-words font-size="24" font-weight="bold" xml:space="preserve"> 
 </credit-words>
     <credit-words font-size="14" font-weight="normal">Op. 98</credit-words>

@@ -14,6 +14,8 @@
 
 #include <list>
 
+// #include "msrClefKeyTimeSignatureGroup.h"
+#include "msrClefsKeysTimeSignatures.h"
 #include "msrMeasuresEnumTypes.h"
 #include "msrMeasureElements.h"
 #include "msrMusicXMLPrintLayouts.h"
@@ -332,6 +334,11 @@ class EXP msrMeasure : public msrSegmentElement
                           getMeasureMusicXMLPrintLayout () const
                               { return fMeasureMusicXMLPrintLayout; }
 
+    // clef, key, time signature
+
+    void                  appendClefKeyTimeSignatureGroupToMeasure (
+                            const S_msrClefKeyTimeSignatureGroup& clefKeyTimeSignatureGroup);
+
     // clefs
 
     void                  appendClefToMeasure (
@@ -554,10 +561,10 @@ class EXP msrMeasure : public msrSegmentElement
 
     // other elements
 
-    void                  prependOtherElementToMeasure (
-                            const S_msrMeasureElement& elem);
-    void                  appendOtherElementToMeasure (
-                            const S_msrMeasureElement& elem);
+//     void                  prependOtherElementToMeasure (
+//                             const S_msrMeasureElement& elem);
+//     void                  appendOtherElementToMeasure (
+//                             const S_msrMeasureElement& elem);
 
     // last element of measure
 

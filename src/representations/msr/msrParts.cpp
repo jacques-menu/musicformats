@@ -1146,7 +1146,53 @@ void msrPart::appendStaffDetailsToPart (
   } // for
 }
 
+// void msrPart::appendClefKeyTimeSignatureGroupToPart (
+//   const S_msrClefKeyTimeSignatureGroup& clefKeyTimeSignatureGroup)
+// {
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gTraceOahGroup->getTraceClefs ()) {
+//     std::stringstream ss;
+//
+//     ss <<
+//       "Appending clefKeyTimeSignatureGroup " <<
+//       clefKeyTimeSignatureGroup->asString () <<
+//       " to part " << getPartCombinedName () <<
+//       std::endl;
+//
+//     gWaeHandler->waeTraceWithLocationDetails (
+//       __FILE__, __LINE__,
+//       ss.str ());
+// //       gServiceRunData->getCurrentMeasureNumber (),
+// //       gServiceRunData->getScoreMeasuresNumber ());
+//   }
+// #endif // MF_TRACE_IS_ENABLED
+//
+//   ++gIndenter;
+//
+//   // append clefKeyTimeSignatureGroup to part-level staves if any
+//   if (fPartHarmoniesStaff) {
+//     fPartHarmoniesStaff->
+//       appendClefKeyTimeSignatureGroupToStaff (
+//         clefKeyTimeSignatureGroup);
+//   }
+//   if (fPartFiguredBassStaff) {
+//     fPartFiguredBassStaff->
+//       appendClefKeyTimeSignatureGroupToStaff (
+//         clefKeyTimeSignatureGroup);
+//   }
+//
+//   // append clef to regular staves
+//   for (S_msrStaff staff : fPartRegularStavesList) {
+//     staff->
+//       appendClefKeyTimeSignatureGroupToStaff (
+//         clefKeyTimeSignatureGroup);
+//   } // for
+//
+//   --gIndenter;
+// }
+
 void msrPart::appendClefToPart (
+  int              groupInputLineNumber,
   const S_msrClef& clef)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -1157,6 +1203,7 @@ void msrPart::appendClefToPart (
       "Appending clef " <<
       clef->asString () <<
       " to part " << getPartCombinedName () <<
+      ", groupInputLineNumber: " << groupInputLineNumber <<
       std::endl;
 
     gWaeHandler->waeTraceWithLocationDetails (
@@ -1172,23 +1219,30 @@ void msrPart::appendClefToPart (
   // append clef to part-level staves if any
   if (fPartHarmoniesStaff) {
     fPartHarmoniesStaff->
-      appendClefToStaff (clef);
+      appendClefToStaff (
+        groupInputLineNumber,
+        clef);
   }
   if (fPartFiguredBassStaff) {
     fPartFiguredBassStaff->
-      appendClefToStaff (clef);
+      appendClefToStaff (
+        groupInputLineNumber,
+        clef);
   }
 
   // append clef to regular staves
   for (S_msrStaff staff : fPartRegularStavesList) {
     staff->
-      appendClefToStaff (clef);
+      appendClefToStaff (
+        groupInputLineNumber,
+        clef);
   } // for
 
   --gIndenter;
 }
 
 void msrPart::appendKeyToPart (
+  int             groupInputLineNumber,
   const S_msrKey& key)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -1199,6 +1253,7 @@ void msrPart::appendKeyToPart (
       "Appending key " <<
       key->asString () <<
       " to part " << getPartCombinedName () <<
+      ", groupInputLineNumber: " << groupInputLineNumber <<
       std::endl;
 
     gWaeHandler->waeTraceWithLocationDetails (
@@ -1217,23 +1272,30 @@ void msrPart::appendKeyToPart (
   // append key to part-level staves if any
   if (fPartHarmoniesStaff) {
     fPartHarmoniesStaff->
-      appendKeyToStaff (key);
+      appendKeyToStaff (
+        groupInputLineNumber,
+        key);
   }
   if (fPartFiguredBassStaff) {
     fPartFiguredBassStaff->
-      appendKeyToStaff (key);
+      appendKeyToStaff (
+        groupInputLineNumber,
+        key);
   }
 
   // append key to regular staves
   for (S_msrStaff staff : fPartRegularStavesList) {
     staff->
-      appendKeyToStaff (key);
+      appendKeyToStaff (
+        groupInputLineNumber,
+        key);
   } // for
 
   --gIndenter;
 }
 
 void msrPart::appendTimeSignatureToPart (
+  int                       groupInputLineNumber,
   const S_msrTimeSignature& timeSignature)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -1241,9 +1303,10 @@ void msrPart::appendTimeSignatureToPart (
     std::stringstream ss;
 
     ss <<
-      "Appending time signature '" <<
+      "Appending time signature " <<
       timeSignature->asString () <<
-      "' to part " << getPartCombinedName () <<
+      " to part " << getPartCombinedName () <<
+      ", groupInputLineNumber: " << groupInputLineNumber <<
       std::endl;
 
     gWaeHandler->waeTraceWithLocationDetails (
@@ -1262,33 +1325,74 @@ void msrPart::appendTimeSignatureToPart (
   // append timeSignature to part-level staves if any
   if (fPartHarmoniesStaff) {
     fPartHarmoniesStaff->
-      appendTimeSignatureToStaff (timeSignature);
+      appendTimeSignatureToStaff (
+        groupInputLineNumber,
+        timeSignature);
   }
   if (fPartFiguredBassStaff) {
     fPartFiguredBassStaff->
-      appendTimeSignatureToStaff (timeSignature);
+      appendTimeSignatureToStaff (
+        groupInputLineNumber,
+        timeSignature);
   }
 
   // append timeSignature to regular staves
   for (S_msrStaff staff : fPartRegularStavesList) {
     staff->
-      appendTimeSignatureToStaff (timeSignature);
+      appendTimeSignatureToStaff (
+        groupInputLineNumber,
+        timeSignature);
   } // for
 
   --gIndenter;
 }
 
-void msrPart::appendTimeSignatureToPartClone (
-  const S_msrTimeSignature& timeSignature)
+// void msrPart::appendTimeSignatureToPartClone (
+//   const S_msrTimeSignature& timeSignature)
+// {
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gTraceOahGroup->getTraceTimeSignatures ()) {
+//     std::stringstream ss;
+//
+//     ss <<
+//       "Appending time signature " <<
+//       timeSignature->asString () <<
+//       " to part clone " << getPartCombinedName () <<
+//       std::endl;
+//
+//     gWaeHandler->waeTraceWithLocationDetails (
+//       __FILE__, __LINE__,
+//       ss.str ());
+// //       gServiceRunData->getCurrentMeasureNumber (),
+// //       gServiceRunData->getScoreMeasuresNumber ());
+//   }
+// #endif // MF_TRACE_IS_ENABLED
+//
+//   // set part time signature
+//   fPartCurrentTimeSignature = timeSignature;
+//
+//   ++gIndenter;
+//
+//   // propagate it to regular staves
+//   for (S_msrStaff staff : fPartRegularStavesList) {
+//     staff->
+//       appendTimeSignatureToStaffClone (timeSignature);
+//   } // for
+//
+//   --gIndenter;
+// }
+
+void msrPart::appendClefKeyTimeSignatureGroupToPartClone (
+  const S_msrClefKeyTimeSignatureGroup& clefKeyTimeSignatureGroup)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceTimeSignatures ()) {
     std::stringstream ss;
 
     ss <<
-      "Appending time signature '" <<
-      timeSignature->asString () <<
-      "' to part clone " << getPartCombinedName () <<
+      "Appending clefKeyTimeSignatureGroup " <<
+      clefKeyTimeSignatureGroup->asString () <<
+      " to part clone " << getPartCombinedName () <<
       std::endl;
 
     gWaeHandler->waeTraceWithLocationDetails (
@@ -1299,15 +1403,15 @@ void msrPart::appendTimeSignatureToPartClone (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  // set part time signature
-  fPartCurrentTimeSignature = timeSignature;
+//   // set part time signature
+//   fPartCurrentTimeSignature = timeSignature;
 
   ++gIndenter;
 
   // propagate it to regular staves
   for (S_msrStaff staff : fPartRegularStavesList) {
     staff->
-      appendTimeSignatureToStaffClone (timeSignature);
+      appendClefKeyTimeSignatureGroupToStaffClone (clefKeyTimeSignatureGroup);
   } // for
 
   --gIndenter;

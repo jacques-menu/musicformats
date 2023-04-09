@@ -59,7 +59,7 @@ mxsr2msrTranslator::mxsr2msrTranslator (
 
   // scaling handling
   fCurrentMillimeters = -1;
-  fCurrentTenths      = -1;
+  fCurrentTenths = -1;
 
   // page layout
   fCurrentPageMarginsTypeKind = msrMarginTypeKind::kMarginBoth; // default value
@@ -69,7 +69,7 @@ mxsr2msrTranslator::mxsr2msrTranslator (
 
   // measure style handling
   fCurrentSlashTypeKind = msrSlashTypeKind::kSlashType_UNKNOWN_;
-  fCurrentUseDotsKind   = msrUseDotsKind::kUseDots_UNKNOWN_;
+  fCurrentUseDotsKind = msrUseDotsKind::kUseDots_UNKNOWN_;
   fCurrentSlashUseStemsKind = msrSlashUseStemsKind::kSlashUseStems_UNKNOWN_;
 
   fCurrentBeatRepeatSlashes = -1;
@@ -116,8 +116,10 @@ mxsr2msrTranslator::mxsr2msrTranslator (
   fCurrentAccordOctaveKind        = msrOctaveKind::kOctave_UNKNOWN_;
 
   // voice handling
-//   fPreviousNoteMusicXMLVoiceNumber = msrVoice::K_VOICE_NUMBER_UNKNOWN_;
   fCurrentMusicXMLVoiceNumber = msrVoice::K_VOICE_NUMBER_UNKNOWN_;
+
+
+  fCurrentAttributesInputLineNumber = -1; // JMI v0.9.67 K_LINE_NUMBER_UNKNOWN_
 
   // clef handling
   fCurrentClefStaffNumber = msrStaff::K_STAFF_NUMBER_UNKNOWN_;
@@ -386,55 +388,24 @@ void mxsr2msrTranslator::displayStaffAndVoiceInformation (
 
 	ss <<
 		context <<
-		", fCurrentNote: " << fCurrentNote->asShortString () <<
+		", fCurrentNote: ";
+
+	if (fCurrentNote) {
+	  ss << fCurrentNote->asShortString ();
+	}
+	else {
+	  ss << "[NULL]";
+	}
+
+	ss <<
 		", fPreviousNoteMusicXMLStaffNumber: " << fPreviousNoteMusicXMLStaffNumber <<
 		", fCurrentMusicXMLStaffNumber: " << fCurrentMusicXMLStaffNumber;
 
 	ss <<
-		", fCurrentNoteStaff: ";
-	if (fCurrentNoteStaff) {
+		", fCurrentRecipientVoice: ";
+	if (fCurrentRecipientVoice) {
 		ss <<
-			fCurrentNoteStaff->getStaffName ();
-	}
-	else {
-		ss << "[NULL]";
-	}
-
-// 	ss <<
-// 		", fPreviousNoteStaff: ";
-// 	if (fPreviousNoteStaff) {
-// 		ss <<
-// 			fPreviousNoteStaff->getStaffName ();
-// 	}
-// 	else {
-// 		ss << "[NULL]";
-// 	}
-
-	ss <<
-		", fCurrentNoteVoice: ";
-	if (fCurrentNoteVoice) {
-		ss <<
-			fCurrentNoteVoice->getVoiceName ();
-	}
-	else {
-		ss << "[NULL]";
-	}
-
-// 	ss <<
-// 		", fPreviousNoteVoice: ";
-// 	if (fPreviousNoteVoice) {
-// 		ss <<
-// 			fPreviousNoteVoice->getVoiceName ();
-// 	}
-// 	else {
-// 		ss << "[NULL]";
-// 	}
-
-	ss <<
-		", fCurrentVoiceToAppendTo: ";
-	if (fCurrentVoiceToAppendTo) {
-		ss <<
-			fCurrentVoiceToAppendTo->getVoiceName ();
+			fCurrentRecipientVoice->getVoiceName ();
 	}
 	else {
 		ss << "[NULL]";
@@ -2842,8 +2813,8 @@ void mxsr2msrTranslator::visitEnd (S_part& elt)
   // sanity check
   mfAssertWithLocationDetails (
     __FILE__, __LINE__,
-    fCurrentNoteVoice != nullptr,
-    "fCurrentNoteVoice is null");
+    fCurrentRecipientVoice != nullptr,
+    "fCurrentRecipientVoice is null");
 //     fCurrentMeasureNumber,
 //     fMsrScore->getScoreMeasuresNumber ());
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -2852,7 +2823,7 @@ void mxsr2msrTranslator::visitEnd (S_part& elt)
   // can now be appended to the latter's voice
   // prior to the note itself
   attachPendingVoiceLevelElementsToVoice (
-    fCurrentNoteVoice);
+    fCurrentRecipientVoice);
 
   attachPendingPartLevelElementsToPart (
     fCurrentPart);
@@ -2946,13 +2917,16 @@ void mxsr2msrTranslator::visitEnd (S_part& elt)
 //________________________________________________________________________
 void mxsr2msrTranslator::visitStart (S_attributes& elt)
 {
+  int inputLineNumber =
+    elt->getInputLineNumber ();
+
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
       "--> Start visiting S_attributes" <<
-      ", line " << elt->getInputLineNumber () <<
+      ", line " << inputLineNumber <<
       std::endl;
 
     gWaeHandler->waeTraceWithLocationDetails (
@@ -2962,6 +2936,12 @@ void mxsr2msrTranslator::visitStart (S_attributes& elt)
 //       fMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
+
+  // the clef, key and time signagure inside one and the same <attribute /> markup
+  // are recognized as such by the latter's input line number, which they share
+  fCurrentAttributesInputLineNumber = inputLineNumber;
+
+  fOnGoingClefKeyTimeSignatureGroup = true;
 }
 
 void mxsr2msrTranslator::visitEnd (S_attributes& elt)
@@ -3017,6 +2997,8 @@ void mxsr2msrTranslator::visitEnd (S_attributes& elt)
       appendTimeSignatureToPart (fCurrentTimeSignature);
       */
   }
+
+  fOnGoingClefKeyTimeSignatureGroup = true;
 }
 
 //______________________________________________________________________________
@@ -3516,9 +3498,15 @@ void mxsr2msrTranslator::visitEnd (S_clef& elt)
         fCurrentClefStaffNumber);
 
   // register clef in part or staff
+/*
+  The optional number attribute refers to staff numbers within the part,
+	from top to bottom on the system. A value of 1 is assumed if not present.
+*/
   if (fCurrentClefStaffNumber == 0) {
     fCurrentPart->
-      appendClefToPart (clef); // JMI v0.9.67 CLEF
+      appendClefToPart (
+        fCurrentAttributesInputLineNumber,
+        clef);
   }
   else {
     S_msrStaff
@@ -3528,7 +3516,9 @@ void mxsr2msrTranslator::visitEnd (S_clef& elt)
           fCurrentClefStaffNumber);
 
     staff->
-      appendClefToStaff (clef); // JMI v0.9.67 CLEF
+      appendClefToStaff (
+        fCurrentAttributesInputLineNumber,
+        clef);
   }
 }
 
@@ -3964,9 +3954,16 @@ void mxsr2msrTranslator::visitEnd (S_key& elt)
   } // switch
 
   // register key in part or staff
+/*
+  The optional number attribute refers to staff numbers,
+	from top to bottom on the system. If absent, the key
+	signature applies to all staves in the part.
+*/
   if (fCurrentKeyStaffNumber == 0)
     fCurrentPart->
-      appendKeyToPart (key);
+      appendKeyToPart (
+        fCurrentAttributesInputLineNumber,
+        key);
 
   else {
     S_msrStaff
@@ -3976,7 +3973,9 @@ void mxsr2msrTranslator::visitEnd (S_key& elt)
           fCurrentKeyStaffNumber);
 
     staff->
-      appendKeyToStaff (key);
+      appendKeyToStaff (
+        fCurrentAttributesInputLineNumber,
+        key);
   }
 }
 
@@ -4545,9 +4544,17 @@ void mxsr2msrTranslator::visitEnd (S_time& elt)
   }
 
   // register time in part or staff
+/*
+  The optional number attribute refers to staff
+	numbers within the part, from top to bottom on the system.
+	If absent, the time signature applies to all staves in the
+	part.
+*/
   if (fCurrentTimeStaffNumber == 0)
     fCurrentPart->
-      appendTimeSignatureToPart (fCurrentTimeSignature);
+      appendTimeSignatureToPart (
+        fCurrentAttributesInputLineNumber,
+        fCurrentTimeSignature);
 
   else {
     S_msrStaff
@@ -4557,7 +4564,9 @@ void mxsr2msrTranslator::visitEnd (S_time& elt)
           fCurrentTimeStaffNumber);
 
     staff->
-      appendTimeSignatureToStaff (fCurrentTimeSignature);
+      appendTimeSignatureToStaff (
+        fCurrentAttributesInputLineNumber,
+        fCurrentTimeSignature);
   }
 }
 
@@ -5760,7 +5769,6 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
           wordsValue <<
           "\" to an MSR tempo" <<
           ", fCurrentDirectionStaffNumber: " << fCurrentDirectionStaffNumber <<
-//           ", fPreviousNoteMusicXMLVoiceNumber: " << fPreviousNoteMusicXMLVoiceNumber <<
           ", line " << inputLineNumber <<
           std::endl;
 
@@ -5805,7 +5813,6 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
           wordsValue <<
           "\" to an MSR rehearsal mark" <<
           ", fCurrentDirectionStaffNumber: " << fCurrentDirectionStaffNumber <<
-//           ", fPreviousNoteMusicXMLVoiceNumber: " << fPreviousNoteMusicXMLVoiceNumber <<
           ", line " << inputLineNumber <<
           std::endl;
 
@@ -5848,7 +5855,6 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
           wordsValue <<
           "\" to an MSR segno" <<
           ", fCurrentDirectionStaffNumber: " << fCurrentDirectionStaffNumber <<
-//           ", fPreviousNoteMusicXMLVoiceNumber: " << fPreviousNoteMusicXMLVoiceNumber <<
           ", line " << inputLineNumber <<
           std::endl;
 
@@ -5890,7 +5896,6 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
           "\" to an MSR dal segno " <<
           dalSegno->asString () <<
           ", fCurrentDirectionStaffNumber: " << fCurrentDirectionStaffNumber <<
-//           ", fPreviousNoteMusicXMLVoiceNumber: " << fPreviousNoteMusicXMLVoiceNumber <<
           ", line " << inputLineNumber <<
           std::endl;
 
@@ -5935,7 +5940,6 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
           " to an MSR dal segno " <<
           dalSegno->asString () <<
           ", fCurrentDirectionStaffNumber: " << fCurrentDirectionStaffNumber <<
-//           ", fPreviousNoteMusicXMLVoiceNumber: " << fPreviousNoteMusicXMLVoiceNumber <<
           ", line " << inputLineNumber <<
           std::endl;
 
@@ -5976,7 +5980,6 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
           " to an MSR dal segno " <<
           dalSegno->asString () <<
           ", fCurrentDirectionStaffNumber: " << fCurrentDirectionStaffNumber <<
-//           ", fPreviousNoteMusicXMLVoiceNumber: " << fPreviousNoteMusicXMLVoiceNumber <<
           ", line " << inputLineNumber <<
           std::endl;
 
@@ -6020,7 +6023,6 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
           " to an MSR coda first " <<
           coda->asString () <<
           ", fCurrentDirectionStaffNumber: " << fCurrentDirectionStaffNumber <<
-//           ", fPreviousNoteMusicXMLVoiceNumber: " << fPreviousNoteMusicXMLVoiceNumber <<
           ", line " << inputLineNumber <<
           std::endl;
 
@@ -6065,7 +6067,6 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
           " to an MSR coda second " <<
           coda->asString () <<
           ", fCurrentDirectionStaffNumber: " << fCurrentDirectionStaffNumber <<
-//           ", fPreviousNoteMusicXMLVoiceNumber: " << fPreviousNoteMusicXMLVoiceNumber <<
           ", line " << inputLineNumber <<
           std::endl;
 
@@ -6100,7 +6101,6 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
           wordsValue <<
           "\" to an MSR cresc" <<
           ", fCurrentDirectionStaffNumber: " << fCurrentDirectionStaffNumber <<
-//           ", fPreviousNoteMusicXMLVoiceNumber: " << fPreviousNoteMusicXMLVoiceNumber <<
           ", line " << inputLineNumber <<
           std::endl;
 
@@ -6162,7 +6162,6 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
           wordsValue <<
           "\" to an MSR decresc" <<
           ", fCurrentDirectionStaffNumber: " << fCurrentDirectionStaffNumber <<
-//           ", fPreviousNoteMusicXMLVoiceNumber: " << fPreviousNoteMusicXMLVoiceNumber <<
           ", line " << inputLineNumber <<
           std::endl;
 
@@ -8330,14 +8329,14 @@ void mxsr2msrTranslator::visitEnd (S_backup& elt)
 
   // reset notes staff numbers // JMI v0.9.67
   fPreviousNoteMusicXMLStaffNumber = msrStaff::K_STAFF_NUMBER_UNKNOWN_;
-  fCurrentMusicXMLStaffNumber      = msrStaff::K_STAFF_NUMBER_UNKNOWN_;
+  fCurrentMusicXMLStaffNumber = msrStaff::K_STAFF_NUMBER_UNKNOWN_;
 
   // handle the backup right now:
 //   handleBackup (
 //     inputLineNumber);
 
   // reset staff change detection
-  fCurrentVoiceToAppendTo = nullptr;
+  fCurrentRecipientVoice = nullptr;
 
   fOnGoingBackup = false;
 }
@@ -8535,7 +8534,7 @@ void mxsr2msrTranslator::visitEnd (S_forward& elt)
       forwardStepLength);
 
   // reset staff change detection
-  fCurrentVoiceToAppendTo = voiceToBeForwardedTo;
+  fCurrentRecipientVoice = voiceToBeForwardedTo;
 
   fOnGoingForward = false;
 }
@@ -20379,7 +20378,7 @@ S_msrChord mxsr2msrTranslator::createChordFromItsFirstNote (
     ss <<
       "--> creating a chord from its first note " <<
       chordFirstNote->asShortString () <<
-      ", fCurrentNoteVoice: \"" << fCurrentNoteVoice->getVoiceName () << "\"" <<
+      ", fCurrentRecipientVoice: \"" << fCurrentRecipientVoice->getVoiceName () << "\"" <<
       ", line " << inputLineNumber <<
       std::endl;
 
@@ -20427,7 +20426,7 @@ S_msrChord mxsr2msrTranslator::createChordFromItsFirstNote (
   chord->
     addFirstNoteToChord (
       chordFirstNote,
-      fCurrentNoteVoice);
+      fCurrentRecipientVoice);
 
   // set chordFirstNote's kind
   chordFirstNote->
@@ -25466,11 +25465,11 @@ Bool mxsr2msrTranslator::isThereAStaffChange (
           ", line " << inputLineNumber <<
           std::endl;
 
-      gWaeHandler->waeTraceWithLocationDetails (
-        __FILE__, __LINE__,
-        ss.str ());
-//         fCurrentMeasureNumber,
-//         fMsrScore->getScoreMeasuresNumber ());
+        gWaeHandler->waeTraceWithLocationDetails (
+          __FILE__, __LINE__,
+          ss.str ());
+  //         fCurrentMeasureNumber,
+  //         fMsrScore->getScoreMeasuresNumber ());
       }
 
       displayStaffAndVoiceInformation (
@@ -25487,7 +25486,7 @@ Bool mxsr2msrTranslator::isThereAStaffChange (
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::populateCurrentNote (
+void mxsr2msrTranslator::populateCurrentNoteAndAppendItToCurrentRecipientVoice (
   int inputLineNumber)
 {
   // handle the note itself
@@ -25580,7 +25579,7 @@ void mxsr2msrTranslator::populateCurrentNote (
       "--> STORING " <<
       fCurrentNote->asShortString () <<
       " as last note found in voice " <<
-      fCurrentNoteVoice->getVoiceName () <<
+      fCurrentRecipientVoice->getVoiceName () <<
       std::endl <<
       "-->  fCurrentMusicXMLStaffNumber: " <<
       fCurrentMusicXMLStaffNumber <<
@@ -25594,7 +25593,7 @@ void mxsr2msrTranslator::populateCurrentNote (
       std::endl <<
       * /
       "--> voice name : " <<
-      fCurrentNoteVoice->getVoiceName () <<
+      fCurrentRecipientVoice->getVoiceName () <<
       std::endl;
       */
   }
@@ -25651,7 +25650,7 @@ void mxsr2msrTranslator::attachPendingGraceNotesGroupToNoteIfRelevant (
 //       noteToAttachTo =
 //       /*
 //       // JMI might prove not precise enough???
-//   //      fVoicesLastMetNoteMap [fCurrentNoteVoice];
+//   //      fVoicesLastMetNoteMap [fCurrentRecipientVoice];
 //         fVoicesLastMetNoteMap [
 //           std::make_pair (
 //             fCurrentMusicXMLStaffNumber,
@@ -25959,43 +25958,26 @@ void mxsr2msrTranslator::visitEnd (S_note& elt)
     createNote (
       inputLineNumber);
 
-  // remember the previous note's staff
-//   fPreviousNoteStaff = fCurrentNoteStaff;
-
-  // fetch the current note's staff
-	fCurrentNoteStaff =
-		fetchStaffFromCurrentPart (
-			inputLineNumber,
-			fCurrentMusicXMLStaffNumber);
-
-  // remember the previous note's voice
-//   fPreviousNoteVoice = fCurrentNoteVoice;
-
-  // fetch the current note's voice
-	fCurrentNoteVoice =
-		fetchVoiceFromCurrentPart (
-			inputLineNumber,
-			fCurrentMusicXMLStaffNumber,
-			fCurrentMusicXMLVoiceNumber);
-
-#ifdef MF_SANITY_CHECKS_ARE_ENABLED
-  // sanity check
-  mfAssertWithLocationDetails (
-    __FILE__, __LINE__,
-    fCurrentNoteVoice != nullptr,
-    "fCurrentNoteVoice is null");
-//     fCurrentMeasureNumber,
-//     fMsrScore->getScoreMeasuresNumber ());
-#endif // MF_SANITY_CHECKS_ARE_ENABLED
-
+  // remember current note as the previous measure element // JMI v0.9.67 LATER???
   fPreviousMeasureElement = fCurrentNote;
 
+  // set fCurrentRecipientVoice if no other note precedes this one,
+  // or a backup of forward markup precedes it
+  if (! fCurrentRecipientVoice) {
+    // fetch the voice to append the note to
+    fCurrentRecipientVoice =
+      fetchVoiceFromCurrentPart (
+        inputLineNumber,
+        fCurrentMusicXMLStaffNumber,
+        fCurrentMusicXMLVoiceNumber);
+  }
+
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssertWithLocationDetails (
     __FILE__, __LINE__,
-    fCurrentNoteVoice != nullptr,
-    "fCurrentNoteVoice is null");
+    fCurrentRecipientVoice != nullptr,
+    "fCurrentRecipientVoice is null");
 //     fCurrentMeasureNumber,
 //     fMsrScore->getScoreMeasuresNumber ());
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -26004,18 +25986,51 @@ void mxsr2msrTranslator::visitEnd (S_note& elt)
   // can now be appended to the latter's voice
   // prior to the note itself
   attachPendingVoiceLevelElementsToVoice (
-    fCurrentNoteVoice);
+    fCurrentRecipientVoice);
 
   attachPendingPartLevelElementsToPart (
     fCurrentPart);
 
   ////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////
-  // populate the current note
+  // is there a staff change?
   ////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////
 
-  populateCurrentNote (inputLineNumber);
+  if (isThereAStaffChange (inputLineNumber)) {
+    // yes, KEEP APPENDING MUSIC TO fCurrentRecipientVoice, NO CHANGE ACTUALLY!
+
+    // fetch the current note's staff
+    S_msrStaff
+      currentNoteStaff =
+        fetchStaffFromCurrentPart (
+          inputLineNumber,
+          fCurrentMusicXMLStaffNumber);
+
+    // create the voice staff change
+    S_msrVoiceStaffChange
+      voiceStaffChange =
+        msrVoiceStaffChange::create (
+          inputLineNumber,
+          currentNoteStaff);
+
+    // append it to the previous note's voice
+    // before the note itself is appended
+    fCurrentRecipientVoice->
+      appendVoiceStaffChangeToVoice (
+        voiceStaffChange);
+  }
+  else {
+    // no, KEEP APPENDING MUSIC TO fCurrentRecipientVoice TOO...
+  }
+
+  ////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////
+  // populate and append the current note
+  ////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////
+
+  populateCurrentNoteAndAppendItToCurrentRecipientVoice (inputLineNumber);
 
   // set current staff number to insert into if needed JMI ???
   if (fCurrentMusicXMLStaffNumber == msrStaff::K_STAFF_NUMBER_UNKNOWN_) {
@@ -26031,7 +26046,7 @@ void mxsr2msrTranslator::visitEnd (S_note& elt)
         "Setting fCurrentMusicXMLStaffNumber to " <<
         fCurrentMusicXMLStaffNumber <<
         ", in voice \"" <<
-        fCurrentNoteVoice->getVoiceName () <<
+        fCurrentRecipientVoice->getVoiceName () <<
         "\"" <<
         ", line " << inputLineNumber <<
         std::endl;
@@ -26075,41 +26090,6 @@ void mxsr2msrTranslator::visitEnd (S_note& elt)
   // are all fCurrentNote uplinks set alright ??? JMI v0.9.67
   populateCurrentNoteBeforeItIsHandled (inputLineNumber);
 
-
-  // remember fCurrentVoiceToAppendTo
-  S_msrVoice
-    saveVoiceToAppendTo = fCurrentVoiceToAppendTo;
-
-  // set fCurrentVoiceToAppendTo if no other note precedes this one
-  if (! fCurrentVoiceToAppendTo) {
-    fCurrentVoiceToAppendTo = fCurrentNoteVoice;
-  }
-
-  // is there a staff change?
-  if (isThereAStaffChange (inputLineNumber)) {
-    // yes, KEEP APPENDING MUSIC TO fCurrentVoiceToAppendTo, NO CHANGE ACTUALLY!
-
-    // create the voice staff change
-    S_msrVoiceStaffChange
-      voiceStaffChange =
-        msrVoiceStaffChange::create (
-          inputLineNumber,
-          fCurrentNoteStaff);
-
-    // append it to the previous note's voice
-    // before the note itself is appended
-    fCurrentVoiceToAppendTo->
-      appendVoiceStaffChangeToVoice (
-        voiceStaffChange);
-  }
-  else {
-    // no, KEEP APPENDING MUSIC TO fCurrentVoiceToAppendTo TOO...
-
-    // restore fCurrentVoiceToAppendTo
-//     fCurrentVoiceToAppendTo = saveVoiceToAppendTo;
-  }
-
-
 // // JMI v0.9.67
 //   // attach the pre-pending elements if any to fCurrentNote,
 //   // before the note itself is handled, because that may cause
@@ -26120,8 +26100,6 @@ void mxsr2msrTranslator::visitEnd (S_note& elt)
 //
 //     ss <<
 //       "==> fetching voice to insert harmonies, figured bass elements and/or frames into" <<
-//       ", fPreviousNoteMusicXMLStaffNumber: " <<
-//       fPreviousNoteMusicXMLStaffNumber <<
 //       ", fCurrentMusicXMLStaffNumber: " <<
 //       fCurrentMusicXMLStaffNumber <<
 //       ", fCurrentMusicXMLVoiceNumber: " <<
@@ -26153,7 +26131,7 @@ void mxsr2msrTranslator::visitEnd (S_note& elt)
   ////////////////////////////////////////////////////////////////////
 
   // CAUTION JMI v0.9.66
-  // permuted the order of populateNote() and populateCurrentNote()
+  // permuted the order of populateNote() and populateCurrentNoteAndAppendItToCurrentRecipientVoice()
   // to have fCurrentNote's harmonies list already populated if relevant
   // when fCurrentNote is appended to the voice,
   // so as to compute the harmonies positions in the measure.
@@ -26167,7 +26145,7 @@ void mxsr2msrTranslator::visitEnd (S_note& elt)
 //   ////////////////////////////////////////////////////////////////////
 //   ////////////////////////////////////////////////////////////////////
 //
-//   populateCurrentNote (inputLineNumber);
+//   populateCurrentNoteAndAppendItToCurrentRecipientVoice (inputLineNumber);
 
   ////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////
@@ -27112,8 +27090,8 @@ void mxsr2msrTranslator::handleNonChordNorTupletNoteOrRest ()
     ss <<
       "Handling non-chord, non-tuplet note or rest " <<
        fCurrentNote->asShortString () << // NO, would lead to infinite recursion ??? JMI
-      ", fCurrentNoteVoice: \"" <<
-      fCurrentNoteVoice->getVoiceName () <<
+      ", fCurrentRecipientVoice: \"" <<
+      fCurrentRecipientVoice->getVoiceName () <<
       "\", line " << inputLineNumber <<
       ":" <<
       std::endl;
@@ -27128,7 +27106,7 @@ void mxsr2msrTranslator::handleNonChordNorTupletNoteOrRest ()
 
     gLog << std::left <<
       std::setw (fieldWidth) << "voice" << ": \"" <<
-      fCurrentNoteVoice->getVoiceName () << "\"" <<
+      fCurrentRecipientVoice->getVoiceName () << "\"" <<
       std::endl <<
       std::setw (fieldWidth) << "line:" << ": " <<
       inputLineNumber <<
@@ -27189,7 +27167,7 @@ void mxsr2msrTranslator::handleNonChordNorTupletNoteOrRest ()
           "Creating grace notes for note " <<
           fCurrentNote->asString () <<
           " in voice \"" <<
-          fCurrentNoteVoice->getVoiceName () << "\"" <<
+          fCurrentRecipientVoice->getVoiceName () << "\"" <<
           std::endl;
 
         gWaeHandler->waeTraceWithLocationDetails (
@@ -27219,7 +27197,7 @@ void mxsr2msrTranslator::handleNonChordNorTupletNoteOrRest ()
       // register that last handled note if any is followed by grace notes
       S_msrNote
         lastHandledNoteInVoice =
-          fCurrentNoteVoice->
+          fCurrentRecipientVoice->
             getVoiceLastAppendedNote ();
 
       if (lastHandledNoteInVoice) {
@@ -27230,7 +27208,7 @@ void mxsr2msrTranslator::handleNonChordNorTupletNoteOrRest ()
 
       // append the grace notes to the current voice // NO JMI
       /*
-      fCurrentNoteVoice->
+      fCurrentRecipientVoice->
         appendGraceNotesToVoice (
           fCurrentGraceNotes);
         //  */
@@ -27239,7 +27217,7 @@ void mxsr2msrTranslator::handleNonChordNorTupletNoteOrRest ()
     // register that last handled note if any is followed by grace notes JMI ???
     S_msrNote
       lastHandledNoteInVoice =
-        fCurrentNoteVoice->
+        fCurrentRecipientVoice->
           getVoiceLastAppendedNote ();
 
     if (lastHandledNoteInVoice) {
@@ -27256,7 +27234,7 @@ void mxsr2msrTranslator::handleNonChordNorTupletNoteOrRest ()
         "Appending note " <<
         fCurrentNote->asString () <<
         " to grace notes group in voice \"" <<
-        fCurrentNoteVoice->getVoiceName () <<
+        fCurrentRecipientVoice->getVoiceName () <<
         "\", line " << inputLineNumber <<
         std::endl;
 
@@ -27296,7 +27274,7 @@ void mxsr2msrTranslator::handleNonChordNorTupletNoteOrRest ()
               fCurrentNote->asString () <<
               ", line " << fCurrentNote->getInputLineNumber () <<
               ", to voice \"" <<
-              fCurrentNoteVoice->getVoiceName () <<
+              fCurrentRecipientVoice->getVoiceName () <<
               "\"" <<
               std::endl;
 
@@ -27308,7 +27286,7 @@ void mxsr2msrTranslator::handleNonChordNorTupletNoteOrRest ()
           }
   #endif // MF_TRACE_IS_ENABLED
 
-          fCurrentVoiceToAppendTo->
+          fCurrentRecipientVoice->
             appendNoteToVoice (fCurrentNote);
 
           // fCurrentSingleTremolo is handled in
@@ -27327,7 +27305,7 @@ void mxsr2msrTranslator::handleNonChordNorTupletNoteOrRest ()
               ", line " << fCurrentNote->getInputLineNumber () <<
               ", as double tremolo first element" <<
               " in voice \"" <<
-              fCurrentNoteVoice->getVoiceName () <<
+              fCurrentRecipientVoice->getVoiceName () <<
               "\"" <<
               std::endl;
 
@@ -27356,7 +27334,7 @@ void mxsr2msrTranslator::handleNonChordNorTupletNoteOrRest ()
               ", line " << fCurrentNote->getInputLineNumber () <<
               ", as double tremolo second element" <<
               " in voice \"" <<
-              fCurrentNoteVoice->getVoiceName () <<
+              fCurrentRecipientVoice->getVoiceName () <<
               "\"" <<
               std::endl;
 
@@ -27373,7 +27351,7 @@ void mxsr2msrTranslator::handleNonChordNorTupletNoteOrRest ()
               fCurrentNote);
 
           // append current double tremolo to current voice
-          fCurrentNoteVoice->
+          fCurrentRecipientVoice->
             appendDoubleTremoloToVoice (
               fCurrentDoubleTremolo);
 
@@ -27386,7 +27364,7 @@ void mxsr2msrTranslator::handleNonChordNorTupletNoteOrRest ()
     else {
       // regular note or rest
 
-      // append fCurrentNote to the current voice
+      // append fCurrentNote to the current voice to append to
   #ifdef MF_TRACE_IS_ENABLED
       if (gTraceOahGroup->getTraceNotes ()) {
         std::stringstream ss;
@@ -27396,7 +27374,7 @@ void mxsr2msrTranslator::handleNonChordNorTupletNoteOrRest ()
           fCurrentNote->asString () <<
           ", line " << fCurrentNote->getInputLineNumber () <<
           ", to voice \"" <<
-          fCurrentNoteVoice->getVoiceName () <<
+          fCurrentRecipientVoice->getVoiceName () <<
           "\"" <<
           std::endl;
 
@@ -27410,15 +27388,16 @@ void mxsr2msrTranslator::handleNonChordNorTupletNoteOrRest ()
 
       ++gIndenter;
 
-      fCurrentNoteVoice->appendNoteToVoice (fCurrentNote);
+      fCurrentRecipientVoice->
+        appendNoteToVoice (fCurrentNote);
 
       if (false) { // XXL, syllable sans fSyllableNote assigne JMI
         gLog <<
-          "&&&&&&&&&&&&&&&&&& fCurrentNoteVoice (" <<
-          fCurrentNoteVoice->getVoiceName () <<
+          "&&&&&&&&&&&&&&&&&& fCurrentRecipientVoice (" <<
+          fCurrentRecipientVoice->getVoiceName () <<
           ") contents &&&&&&&&&&&&&&&&&&" <<
           std::endl <<
-          fCurrentNoteVoice <<
+          fCurrentRecipientVoice <<
           std::endl;
       }
 
@@ -27485,7 +27464,7 @@ void mxsr2msrTranslator::handleLyricsForCurrentNoteAfterItfIsHandled ()
 
     gLog <<
       std::setw (fieldWidth) <<
-      "fCurrentNoteVoice" << " = \"" << fCurrentNoteVoice->getVoiceName () <<"\"" <<
+      "fCurrentRecipientVoice" << " = \"" << fCurrentRecipientVoice->getVoiceName () <<"\"" <<
       std::endl <<
       std::setw (fieldWidth) <<
       "fCurrentNote" << " = \"" << fCurrentNote->asShortString () << "\"" <<
@@ -27598,7 +27577,7 @@ void mxsr2msrTranslator::handleLyricsForCurrentNoteAfterItfIsHandled ()
         // get the current note voice's stanzas map
         const std::map<std::string, S_msrStanza>&
           voiceStanzasMap =
-            fCurrentNoteVoice->
+            fCurrentRecipientVoice->
               getVoiceStanzasMap ();
 
         for (
@@ -27742,8 +27721,8 @@ void mxsr2msrTranslator::handleNoteBelongingToAChord (
   // sanity check
   mfAssertWithLocationDetails (
     __FILE__, __LINE__,
-    fCurrentNoteVoice != nullptr,
-    "fCurrentNoteVoice is null");
+    fCurrentRecipientVoice != nullptr,
+    "fCurrentRecipientVoice is null");
 //     fCurrentMeasureNumber,
 //     fMsrScore->getScoreMeasuresNumber ());
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -27754,8 +27733,8 @@ void mxsr2msrTranslator::handleNoteBelongingToAChord (
 
     ss <<
       "Handling a chord member note" <<
-      ", fCurrentNoteVoice: \"" <<
-      fCurrentNoteVoice->getVoiceName () <<
+      ", fCurrentRecipientVoice: \"" <<
+      fCurrentRecipientVoice->getVoiceName () <<
       "\", fOnGoingChord: " <<
       fOnGoingChord <<
       ", line " << inputLineNumber <<
@@ -27813,14 +27792,14 @@ void mxsr2msrTranslator::handleNoteBelongingToAChord (
 
     S_msrNote
       chordFirstNote =
-  //      fVoicesLastMetNoteMap [fCurrentNoteVoice]; // JMI v0.9.67
+  //      fVoicesLastMetNoteMap [fCurrentRecipientVoice]; // JMI v0.9.67
         fVoicesLastMetNoteMap [
           std::make_pair (
             fCurrentMusicXMLStaffNumber,
             fCurrentMusicXMLVoiceNumber)
           ];
       /*
-        fCurrentNoteVoice->
+        fCurrentRecipientVoice->
           getVoiceLastAppendedNote (); ??? JMI
           */
 
@@ -27915,7 +27894,7 @@ void mxsr2msrTranslator::handleNoteBelongingToAChord (
             "Removing chord first note " <<
             chordFirstNote->asShortString () <<
             ", line " << inputLineNumber <<
-            ", from voice \"" << fCurrentNoteVoice->getVoiceName () << "\"" <<
+            ", from voice \"" << fCurrentRecipientVoice->getVoiceName () << "\"" <<
             ", line " << inputLineNumber <<
             std::endl;
 
@@ -27959,7 +27938,7 @@ void mxsr2msrTranslator::handleNoteBelongingToAChord (
         }
 #endif // MF_TRACE_IS_ENABLED
 
-        fCurrentNoteVoice->
+        fCurrentRecipientVoice->
           removeNoteFromVoice (
             inputLineNumber,
             chordFirstNote);
@@ -27972,7 +27951,7 @@ void mxsr2msrTranslator::handleNoteBelongingToAChord (
           ss <<
             "Appending chord " << fCurrentChord->asString () <<
             " to voice \"" <<
-            fCurrentNoteVoice->getVoiceName () <<
+            fCurrentRecipientVoice->getVoiceName () <<
             "\"" <<
             std::endl;
 
@@ -27984,7 +27963,7 @@ void mxsr2msrTranslator::handleNoteBelongingToAChord (
         }
 #endif // MF_TRACE_IS_ENABLED
 
-        fCurrentNoteVoice->
+        fCurrentRecipientVoice->
           appendChordToVoice (
             fCurrentChord);
         break;
@@ -28007,7 +27986,7 @@ void mxsr2msrTranslator::handleNoteBelongingToAChord (
               " " << chord->asString () <<
               " to " << chordFirstNoteSoundingWholeNotes.asString () <<
               " in voice \"" <<
-              fCurrentNoteVoice->getVoiceName () <<
+              fCurrentRecipientVoice->getVoiceName () <<
               "\"" <<
               std::endl;
           }
@@ -28065,7 +28044,7 @@ void mxsr2msrTranslator::handleNoteBelongingToAChord (
             "Removing chord first note " <<
             chordFirstNote->asShortString () <<
             ", line " << inputLineNumber <<
-            ", from voice \"" << fCurrentNoteVoice->getVoiceName () << "\"" <<
+            ", from voice \"" << fCurrentRecipientVoice->getVoiceName () << "\"" <<
             ", line " << inputLineNumber <<
             std::endl;
 
@@ -28077,7 +28056,7 @@ void mxsr2msrTranslator::handleNoteBelongingToAChord (
         }
 #endif // MF_TRACE_IS_ENABLED
 
-        fCurrentNoteVoice->
+        fCurrentRecipientVoice->
           removeNoteFromVoice (
             inputLineNumber,
             chordFirstNote);
@@ -28111,8 +28090,8 @@ void mxsr2msrTranslator::handleNoteBelongingToAChord (
     if (gTraceOahGroup->getTraceChords ()) {
       gLog <<
         "is newChordNote in the same chord but in another voice?" <<
-        ", fCurrentNoteVoice: " <<
-        fCurrentNoteVoice->getVoiceName () <<
+        ", fCurrentRecipientVoice: " <<
+        fCurrentRecipientVoice->getVoiceName () <<
         std::endl;
 
       printVoicesCurrentChordMap ();
@@ -28130,7 +28109,7 @@ void mxsr2msrTranslator::handleNoteBelongingToAChord (
         newChordNote->asString() <<
         ", line " << inputLineNumber <<
         " to current chord in voice " <<
-        fCurrentNoteVoice->getVoiceName () <<
+        fCurrentRecipientVoice->getVoiceName () <<
         std::endl;
 
       gWaeHandler->waeTraceWithLocationDetails (
@@ -28146,7 +28125,7 @@ void mxsr2msrTranslator::handleNoteBelongingToAChord (
   fCurrentChord->
     addAnotherNoteToChord (
       newChordNote,
-      fCurrentNoteVoice);
+      fCurrentRecipientVoice);
 
   // copy newChordNote's elements if any to the current chord
   copyNoteElementsToChord (
@@ -28329,7 +28308,7 @@ void mxsr2msrTranslator::handleNoteBelongingToATuplet (
           currentTuplet->
             appendNoteToTuplet (
               note,
-              fCurrentNoteVoice);
+              fCurrentRecipientVoice);
 
 #ifdef MF_TRACE_IS_ENABLED
           if (gTraceOahGroup->getTraceTupletsDetails ()) {
@@ -28419,7 +28398,7 @@ void mxsr2msrTranslator::handleNoteBelongingToATuplet (
               currentTuplet->
                 appendNoteToTuplet (
                   note,
-                  fCurrentNoteVoice);
+                  fCurrentRecipientVoice);
 
 #ifdef MF_TRACE_IS_ENABLED
               if (gTraceOahGroup->getTraceTupletsDetails ()) {
@@ -28515,7 +28494,7 @@ void mxsr2msrTranslator::handleNoteBelongingToATuplet (
               currentTuplet->
                 appendNoteToTuplet (
                   note,
-                  fCurrentNoteVoice);
+                  fCurrentRecipientVoice);
 
 #ifdef MF_TRACE_IS_ENABLED
               if (gTraceOahGroup->getTraceTupletsDetails ()) {
@@ -28712,12 +28691,12 @@ void mxsr2msrTranslator::handleNoteBelongingToAChordInATuplet (
 /* JMI
     S_msrNote
       tupletLastNote =
-  //      fVoicesLastMetNoteMap [fCurrentNoteVoice];
+  //      fVoicesLastMetNoteMap [fCurrentRecipientVoice];
         fVoicesLastMetNoteMap [
           std::make_pair (fCurrentMusicXMLStaffNumber, fCurrentMusicXMLVoiceNumber)
           ];
 
-    fCurrentNoteVoice->
+    fCurrentRecipientVoice->
       removeNoteFromVoice (
         inputLineNumber,
         tupletLastNote);
@@ -28742,11 +28721,11 @@ void mxsr2msrTranslator::handleNoteBelongingToAChordInATuplet (
       std::stringstream ss;
 
       ss <<
-        "&&&&&&&&&&&&&&&&&& fCurrentNoteVoice (" <<
-        fCurrentNoteVoice->getVoiceName () <<
+        "&&&&&&&&&&&&&&&&&& fCurrentRecipientVoice (" <<
+        fCurrentRecipientVoice->getVoiceName () <<
         ") contents &&&&&&&&&&&&&&&&&&" <<
         std::endl <<
-        fCurrentNoteVoice <<
+        fCurrentRecipientVoice <<
         std::endl;
 
       gWaeHandler->waeTraceWithLocationDetails (
@@ -28805,7 +28784,7 @@ void mxsr2msrTranslator::handleNoteBelongingToAChordInATuplet (
         asShortString () <<
       ", line " << inputLineNumber <<
       " to current chord in voice " <<
-      fCurrentNoteVoice->getVoiceName () <<
+      fCurrentRecipientVoice->getVoiceName () <<
       std::endl;
 
     gWaeHandler->waeTraceWithLocationDetails (
@@ -28819,7 +28798,7 @@ void mxsr2msrTranslator::handleNoteBelongingToAChordInATuplet (
   fCurrentChord->
     addAnotherNoteToChord (
       newChordNote,
-      fCurrentNoteVoice);
+      fCurrentRecipientVoice);
 
   // copy newChordNote's elements if any to the chord
   copyNoteElementsToChord (
@@ -28898,7 +28877,7 @@ void mxsr2msrTranslator::handleNoteBelongingToAChordInAGraceNotesGroup (
 
       // fetch last handled note for this voice
       chordFirstNote =
-        fCurrentNoteVoice->
+        fCurrentRecipientVoice->
           getVoiceLastAppendedNote ();
 
       if (! chordFirstNote) {
@@ -28952,11 +28931,11 @@ void mxsr2msrTranslator::handleNoteBelongingToAChordInAGraceNotesGroup (
 
     if (false) {
       gLog <<
-        "&&&&&&&&&&&&&&&&&& fCurrentNoteVoice (" <<
-        fCurrentNoteVoice->getVoiceName () <<
+        "&&&&&&&&&&&&&&&&&& fCurrentRecipientVoice (" <<
+        fCurrentRecipientVoice->getVoiceName () <<
         ") contents &&&&&&&&&&&&&&&&&&" <<
         std::endl <<
-        fCurrentNoteVoice <<
+        fCurrentRecipientVoice <<
         std::endl << std::endl;
     }
 
@@ -28968,7 +28947,7 @@ void mxsr2msrTranslator::handleNoteBelongingToAChordInAGraceNotesGroup (
     }
     else {
       // append current chord to pending voice JMI ???
-      fCurrentNoteVoice->
+      fCurrentRecipientVoice->
         appendChordToVoice (
           fCurrentChord);
     }
@@ -29009,7 +28988,7 @@ void mxsr2msrTranslator::handleNoteBelongingToAChordInAGraceNotesGroup (
         asShortString () <<
       ", line " << inputLineNumber <<
       " to current chord in voice " <<
-      fCurrentNoteVoice->getVoiceName () <<
+      fCurrentRecipientVoice->getVoiceName () <<
       std::endl;
 
     gWaeHandler->waeTraceWithLocationDetails (
@@ -29023,7 +29002,7 @@ void mxsr2msrTranslator::handleNoteBelongingToAChordInAGraceNotesGroup (
   fCurrentChord->
     addAnotherNoteToChord (
       newChordNote,
-      fCurrentNoteVoice);
+      fCurrentRecipientVoice);
 
   // copy newChordNote's elements if any to the chord
   copyNoteElementsToChord (
@@ -32652,7 +32631,7 @@ print-object:
     // append the figured bass to the current part
     fCurrentPart->
       appendFiguredBassToPart (
-        fCurrentNoteVoice,
+        fCurrentRecipientVoice,
         figuredBass);
     */
 
@@ -32819,7 +32798,6 @@ The discontinue value is typically used for the last ending in a set, where ther
 //       wordsValue <<
 //       "\" to an MSR tempo" <<
 //       ", fCurrentDirectionStaffNumber: " << fCurrentDirectionStaffNumber <<
-//       ", fPreviousNoteMusicXMLVoiceNumber: " << fPreviousNoteMusicXMLVoiceNumber <<
 //       ", line " << inputLineNumber <<
 //       std::endl;
 //   }
@@ -32852,7 +32830,6 @@ The discontinue value is typically used for the last ending in a set, where ther
 //           wordsValue <<
 //           "\" to an MSR rehearsal mark" <<
 //           ", fCurrentDirectionStaffNumber: " << fCurrentDirectionStaffNumber <<
-//           ", fPreviousNoteMusicXMLVoiceNumber: " << fPreviousNoteMusicXMLVoiceNumber <<
 //           ", line " << inputLineNumber <<
 //           std::endl;
 //       }
@@ -32886,7 +32863,6 @@ The discontinue value is typically used for the last ending in a set, where ther
 //           wordsValue <<
 //           "\" to an MSR dal segno" <<
 //           ", fCurrentDirectionStaffNumber: " << fCurrentDirectionStaffNumber <<
-//           ", fPreviousNoteMusicXMLVoiceNumber: " << fPreviousNoteMusicXMLVoiceNumber <<
 //           ", line " << inputLineNumber <<
 //           std::endl;
 //       }
@@ -32917,7 +32893,6 @@ The discontinue value is typically used for the last ending in a set, where ther
 //       wordsValue <<
 //       "\" to an MSR dal segno al fine" <<
 //       ", fCurrentDirectionStaffNumber: " << fCurrentDirectionStaffNumber <<
-//       ", fPreviousNoteMusicXMLVoiceNumber: " << fPreviousNoteMusicXMLVoiceNumber <<
 //       ", line " << inputLineNumber <<
 //       std::endl;
 //   }
@@ -32951,7 +32926,6 @@ The discontinue value is typically used for the last ending in a set, where ther
 //       wordsValue <<
 //       "\" to an MSR dal segno al coda" <<
 //       ", fCurrentDirectionStaffNumber: " << fCurrentDirectionStaffNumber <<
-//       ", fPreviousNoteMusicXMLVoiceNumber: " << fPreviousNoteMusicXMLVoiceNumber <<
 //       ", line " << inputLineNumber <<
 //       std::endl;
 //   }
@@ -32984,7 +32958,6 @@ The discontinue value is typically used for the last ending in a set, where ther
 //           wordsValue <<
 //           "\" to an MSR coda" <<
 //           ", fCurrentDirectionStaffNumber: " << fCurrentDirectionStaffNumber <<
-//           ", fPreviousNoteMusicXMLVoiceNumber: " << fPreviousNoteMusicXMLVoiceNumber <<
 //           ", line " << inputLineNumber <<
 //           std::endl;
 //       }
@@ -33018,7 +32991,6 @@ The discontinue value is typically used for the last ending in a set, where ther
 //           wordsValue <<
 //           "\" to an MSR cresc" <<
 //           ", fCurrentDirectionStaffNumber: " << fCurrentDirectionStaffNumber <<
-//           ", fPreviousNoteMusicXMLVoiceNumber: " << fPreviousNoteMusicXMLVoiceNumber <<
 //           ", line " << inputLineNumber <<
 //           std::endl;
 //       }
@@ -33051,7 +33023,6 @@ The discontinue value is typically used for the last ending in a set, where ther
 //           wordsValue <<
 //           "\" to an MSR decresc" <<
 //           ", fCurrentDirectionStaffNumber: " << fCurrentDirectionStaffNumber <<
-//           ", fPreviousNoteMusicXMLVoiceNumber: " << fPreviousNoteMusicXMLVoiceNumber <<
 //           ", line " << inputLineNumber <<
 //           std::endl;
 //       }

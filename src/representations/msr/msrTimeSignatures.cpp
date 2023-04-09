@@ -27,7 +27,7 @@
 
 #include "msrMeasureConstants.h"
 
-#include "msrTimeSignatures.h"
+#include "msrClefsKeysTimeSignatures.h"
 
 #include "oahOah.h"
 
@@ -1268,7 +1268,7 @@ std::string msrTimeSignature::asString () const
   std::stringstream ss;
 
   ss <<
-    "[Time" <<
+    "[TimeSignatureItem" <<
     ", timeSignatureSymbolKind: " <<
     msrTimeSignatureSymbolKindAsString (fTimeSignatureSymbolKind) <<
     ", fTimeIsCompound: " <<
@@ -1387,7 +1387,7 @@ std::string msrTimeSignature::asShortStringForMeasuresSlices () const
 void msrTimeSignature::print (std::ostream& os) const
 {
   os <<
-    "[Time" <<
+    "[TimeSignatureItem" <<
     ", line "  << fInputLineNumber <<
     std::endl;
 

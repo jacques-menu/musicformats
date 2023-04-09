@@ -16,6 +16,8 @@
 
 #include "msrTypesForwardDeclarations.h"
 
+// #include "msrClefKeyTimeSignatureGroup.h"
+#include "msrClefsKeysTimeSignatures.h"
 #include "msrPartGroups.h"
 #include "msrRepeatsEnumTypes.h"
 #include "msrStavesEnumTypes.h"
@@ -34,11 +36,11 @@ class EXP msrPart : public msrPartGroupElement
     // constants
     // ------------------------------------------------------
 
-    static const int K_PART_HARMONIES_STAFF_NUMBER;
-    static const int K_PART_HARMONIES_VOICE_NUMBER;
+    static const int      K_PART_HARMONIES_STAFF_NUMBER;
+    static const int      K_PART_HARMONIES_VOICE_NUMBER;
 
-    static const int K_PART_FIGURED_BASS_STAFF_NUMBER;
-    static const int K_PART_FIGURED_BASS_VOICE_NUMBER;
+    static const int      K_PART_FIGURED_BASS_STAFF_NUMBER;
+    static const int      K_PART_FIGURED_BASS_VOICE_NUMBER;
 
   public:
 
@@ -297,16 +299,26 @@ class EXP msrPart : public msrPartGroupElement
 
     // clef, key, time signature
 
+//     void                  appendClefKeyTimeSignatureGroupToPart (
+//                             const S_msrClefKeyTimeSignatureGroup& clefKeyTimeSignatureGroup);
+
     void                  appendClefToPart (
+                            int              groupInputLineNumber,
                             const S_msrClef& clef);
 
     void                  appendKeyToPart (
+                            int             groupInputLineNumber,
                             const S_msrKey& key);
 
     void                  appendTimeSignatureToPart (
+                            int                       groupInputLineNumber,
                             const S_msrTimeSignature& timeSignature);
-    void                  appendTimeSignatureToPartClone (
-                            const S_msrTimeSignature& timeSignature);
+
+//     void                  appendTimeSignatureToPartClone (
+//                             const S_msrTimeSignature& timeSignature);
+
+    void                  appendClefKeyTimeSignatureGroupToPartClone (
+                            const S_msrClefKeyTimeSignatureGroup& clefKeyTimeSignatureGroup);
 
     // tempo
 

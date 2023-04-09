@@ -271,7 +271,9 @@ void msrStaff::initializeStaff ()
       }
 #endif // MF_TRACE_IS_ENABLED
 
-      appendClefToStaff (clef); // JMI
+      appendClefToStaff (
+        0, // JMI v0.9.67, groupInputLineNumber
+        clef);
     }
   }
 
@@ -304,7 +306,9 @@ void msrStaff::initializeStaff ()
       }
 #endif // MF_TRACE_IS_ENABLED
 
-      appendKeyToStaff (key);
+      appendKeyToStaff (
+        0, // JMI v0.9.67, groupInputLineNumber
+        key);
     }
   }
 
@@ -1858,7 +1862,86 @@ void msrStaff::registerVoiceInStaffClone (
   --gIndenter;
 }
 
+// void msrStaff::appendClefKeyTimeSignatureGroupToStaff  (
+//   const S_msrClefKeyTimeSignatureGroup& ClefKeyTimeSignatureGroup)
+// {
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gTraceOahGroup->getTraceClefKeyTimeSignatureGroups ()) {
+//     std::stringstream ss;
+//
+//     ss <<
+//       "Appending ClefKeyTimeSignatureGroup " << ClefKeyTimeSignatureGroup->asString () <<
+//       " to staff \"" <<
+//       fStaffName <<
+//       "\" in part " <<
+//       fStaffUpLinkToPart->getPartCombinedName () <<
+//       std::endl;
+//
+//     gWaeHandler->waeTraceWithLocationDetails (
+//       __FILE__, __LINE__,
+//       ss.str ());
+// //       gServiceRunData->getCurrentMeasureNumber (),
+// //       gServiceRunData->getScoreMeasuresNumber ());
+//   }
+// #endif // MF_TRACE_IS_ENABLED
+//
+//   ++gIndenter;
+//
+//   // append ClefKeyTimeSignatureGroup to the staff,
+//   // unless we should ignore redundant clefs
+//   // and a clef equal to the current clef is found
+//   Bool doAppendClefKeyTimeSignatureGroupToStaff (true);
+//
+//   if (fStaffCurrentClef) {
+//     if (
+//       gGlobalMxsr2msrOahGroup->getIgnoreRedundantClefs ()
+//         &&
+//       clef->isEqualTo (fStaffCurrentClef)
+//     ) {
+//       doAppendClefToStaff = false;
+//     }
+//   }
+//
+//   if (doAppendClefToStaff) {
+//     // register clef as current staff clef
+//     fStaffCurrentClef = clef;
+//
+//     // cascade ClefKeyTimeSignatureGroup to all voices
+//     for (const S_msrVoice& voice : fStaffAllVoicesList) {
+//       voice->
+//         appendClefKeyTimeSignatureGroupToVoice (clef);
+//     } // for
+//   }
+//
+//   else {
+// #ifdef MF_TRACE_IS_ENABLED
+//     if (gTraceOahGroup->getTraceClefs ()) {
+//       std::stringstream ss;
+//
+//       ss <<
+//         "Clef " <<
+//         clef->asString () <<
+//         " ignored because it is already present in staff " <<
+//         fStaffName <<
+//         "\" in part " <<
+//         fStaffUpLinkToPart->getPartCombinedName () <<
+//         std::endl;
+//
+//       gWaeHandler->waeTraceWithLocationDetails (
+//         __FILE__, __LINE__,
+//         ss.str ());
+// //         gServiceRunData->getCurrentMeasureNumber (),
+// //         gServiceRunData->getScoreMeasuresNumber ());
+//     }
+// #endif // MF_TRACE_IS_ENABLED
+//   }
+//
+//   --gIndenter;
+// }
+//
+
 void msrStaff::appendClefToStaff  (
+  int              groupInputLineNumber,
   const S_msrClef& clef)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -1899,43 +1982,71 @@ void msrStaff::appendClefToStaff  (
   }
 
   if (doAppendClefToStaff) {
+    S_msrClefKeyTimeSignatureGroup
+      clefKeyTimeSignatureGroupToBeUsed;
+
+    if (
+      fCurrentClefKeyTimeSignatureGroup
+        &&
+      groupInputLineNumber
+        ==
+      fCurrentClefKeyTimeSignatureGroup->getGroupInputLineNumber ()
+    ) {
+      clefKeyTimeSignatureGroupToBeUsed = fCurrentClefKeyTimeSignatureGroup;
+    }
+
+    if (! clefKeyTimeSignatureGroupToBeUsed) {
+      // create a new msrClefKeyTimeSignatureGroup
+      clefKeyTimeSignatureGroupToBeUsed =
+        msrClefKeyTimeSignatureGroup::create (
+          clef->getInputLineNumber (),
+          groupInputLineNumber);
+    }
+
+    // register clef in clefKeyTimeSignatureGroupToBeUsed
+    clefKeyTimeSignatureGroupToBeUsed->
+      setClef (clef);
+
     // register clef as current staff clef
-    fStaffCurrentClef = clef;
+    fStaffCurrentClef = clef; // JMI v0.9.67
 
     // cascade clef to all voices
     for (const S_msrVoice& voice : fStaffAllVoicesList) {
       voice->
-        appendClefToVoice (clef);
+        appendClefKeyTimeSignatureGroupToVoice (
+          clefKeyTimeSignatureGroupToBeUsed);
     } // for
   }
 
-  else {
-#ifdef MF_TRACE_IS_ENABLED
-    if (gTraceOahGroup->getTraceClefs ()) {
-      std::stringstream ss;
-
-      ss <<
-        "Clef " <<
-        clef->asString () <<
-        " ignored because it is already present in staff " <<
-        fStaffName <<
-        "\" in part " <<
-        fStaffUpLinkToPart->getPartCombinedName () <<
-        std::endl;
-
-      gWaeHandler->waeTraceWithLocationDetails (
-        __FILE__, __LINE__,
-        ss.str ());
-//         gServiceRunData->getCurrentMeasureNumber (),
-//         gServiceRunData->getScoreMeasuresNumber ());
-    }
-#endif // MF_TRACE_IS_ENABLED
-  }
+//   else {
+// #ifdef MF_TRACE_IS_ENABLED
+//     if (gTraceOahGroup->getTraceClefs ()) {
+//       std::stringstream ss;
+//
+//       ss <<
+//         "Clef " <<
+//         clef->asString () <<
+//         " ignored because it is already present in staff " <<
+//         fStaffName <<
+//         "\" in part " <<
+//         fStaffUpLinkToPart->getPartCombinedName () <<
+//         std::endl;
+//
+//       gWaeHandler->waeTraceWithLocationDetails (
+//         __FILE__, __LINE__,
+//         ss.str ());
+// //         gServiceRunData->getCurrentMeasureNumber (),
+// //         gServiceRunData->getScoreMeasuresNumber ());
+//     }
+// #endif // MF_TRACE_IS_ENABLED
+//   }
 
   --gIndenter;
 }
 
-void msrStaff::appendKeyToStaff (S_msrKey  key)
+void msrStaff::appendKeyToStaff (
+  int              groupInputLineNumber,
+  const S_msrKey&  key)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceKeys ()) {
@@ -2000,13 +2111,39 @@ void msrStaff::appendKeyToStaff (S_msrKey  key)
   }
 
   if (doAppendKeyToStaff) {
+    S_msrClefKeyTimeSignatureGroup
+      clefKeyTimeSignatureGroupToBeUsed;
+
+    if (
+      fCurrentClefKeyTimeSignatureGroup
+        &&
+      groupInputLineNumber
+        ==
+      fCurrentClefKeyTimeSignatureGroup->getGroupInputLineNumber ()
+    ) {
+      clefKeyTimeSignatureGroupToBeUsed = fCurrentClefKeyTimeSignatureGroup;
+    }
+
+    if (! clefKeyTimeSignatureGroupToBeUsed) {
+      // create a new msrClefKeyTimeSignatureGroup
+      clefKeyTimeSignatureGroupToBeUsed =
+        msrClefKeyTimeSignatureGroup::create (
+          key->getInputLineNumber (),
+          groupInputLineNumber);
+    }
+
+    // register key in clefKeyTimeSignatureGroupToBeUsed
+    clefKeyTimeSignatureGroupToBeUsed->
+      setKey (key);
+
     // register key as current staff key
     fStaffCurrentKey = key;
 
     // cascade it to all voices
     for (const S_msrVoice& voice : fStaffAllVoicesList) {
       voice->
-        appendKeyToVoice (key);
+        appendClefKeyTimeSignatureGroupToVoice (
+          clefKeyTimeSignatureGroupToBeUsed);
     } // for
   }
 
@@ -2014,7 +2151,9 @@ void msrStaff::appendKeyToStaff (S_msrKey  key)
 }
 
 void msrStaff::appendTimeSignatureToStaff (
-  const S_msrTimeSignature& timeSignature){
+  int                       groupInputLineNumber,
+  const S_msrTimeSignature& timeSignature)
+{
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceTimeSignatures ()) {
     std::stringstream ss;
@@ -2077,27 +2216,54 @@ void msrStaff::appendTimeSignatureToStaff (
   }
 
   if (doAppendTimeToStaff) {
+    S_msrClefKeyTimeSignatureGroup
+      clefKeyTimeSignatureGroupToBeUsed;
+
+    if (
+      fCurrentClefKeyTimeSignatureGroup
+        &&
+      groupInputLineNumber
+        ==
+      fCurrentClefKeyTimeSignatureGroup->getGroupInputLineNumber ()
+    ) {
+      clefKeyTimeSignatureGroupToBeUsed = fCurrentClefKeyTimeSignatureGroup;
+    }
+
+    if (! clefKeyTimeSignatureGroupToBeUsed) {
+      // create a new msrClefKeyTimeSignatureGroup
+      clefKeyTimeSignatureGroupToBeUsed =
+        msrClefKeyTimeSignatureGroup::create (
+          timeSignature->getInputLineNumber (),
+          groupInputLineNumber);
+    }
+
+    // register time signature in clefKeyTimeSignatureGroupToBeUsed
+    clefKeyTimeSignatureGroupToBeUsed->
+      setTimeSignature (timeSignature);
+
     // register timeSignature as current staff time signature
     fStaffCurrentTimeSignature = timeSignature;
 
     // cascade it to all voices
     for (const S_msrVoice& voice : fStaffAllVoicesList) {
       voice->
-        appendTimeSignatureToVoice (timeSignature);
+        appendClefKeyTimeSignatureGroupToVoice (
+          clefKeyTimeSignatureGroupToBeUsed);
     } // for
   }
 
   --gIndenter;
 }
 
-void msrStaff::appendTimeSignatureToStaffClone (
-  const S_msrTimeSignature& timeSignature){
+void msrStaff::appendClefKeyTimeSignatureGroupToStaffClone (
+  const S_msrClefKeyTimeSignatureGroup& clefKeyTimeSignatureGroup){
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceTimeSignatures ()) {
     std::stringstream ss;
 
     ss <<
-      "Appending time '" << timeSignature->asString () <<
+      "Appending clefKeyTimeSignatureGroup '" <<
+      clefKeyTimeSignatureGroup->asString () <<
       "' to staff clone \"" <<
       fStaffName <<
       "\" in part " <<
@@ -2114,17 +2280,57 @@ void msrStaff::appendTimeSignatureToStaffClone (
 
   ++gIndenter;
 
-  // set staff time signature
-  fStaffCurrentTimeSignature = timeSignature;
+//   // set staff time signature
+//   fStaffCurrentTimeSignature = timeSignature;
 
   // cascade it to all voices
   for (const S_msrVoice& voice : fStaffAllVoicesList) {
     voice->
-      appendTimeSignatureToVoiceClone (timeSignature);
+      appendClefKeyTimeSignatureGroupToVoice (
+        clefKeyTimeSignatureGroup);
   } // for
 
   --gIndenter;
 }
+
+// void msrStaff::appendTimeSignatureToStaffClone (
+//   const S_msrTimeSignature& timeSignature){
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gTraceOahGroup->getTraceTimeSignatures ()) {
+//     std::stringstream ss;
+//
+//     ss <<
+//       "Appending time '" << timeSignature->asString () <<
+//       "' to staff clone \"" <<
+//       fStaffName <<
+//       "\" in part " <<
+//       fStaffUpLinkToPart->getPartCombinedName () <<
+//       std::endl;
+//
+//     gWaeHandler->waeTraceWithLocationDetails (
+//       __FILE__, __LINE__,
+//       ss.str ());
+// //       gServiceRunData->getCurrentMeasureNumber (),
+// //       gServiceRunData->getScoreMeasuresNumber ());
+//   }
+// #endif // MF_TRACE_IS_ENABLED
+//
+//   ++gIndenter;
+//
+// //   fCurrentClefKeyTimeSignatureGroup->
+// //     setTimeSignature (fCurrentTimeSignature);
+//
+//   // set staff time signature
+//   fStaffCurrentTimeSignature = timeSignature;
+//
+//   // cascade it to all voices
+//   for (const S_msrVoice& voice : fStaffAllVoicesList) {
+//     voice->
+//       appendTimeSignatureToVoice (timeSignature);
+//   } // for
+//
+//   --gIndenter;
+// }
 
 void msrStaff::appendTempoToStaff (
   const S_msrTempo& tempo)

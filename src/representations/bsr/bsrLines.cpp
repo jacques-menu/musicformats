@@ -229,9 +229,9 @@ void bsrLine::appendTimeSignatureToLine (S_bsrTimeSignature timeSignature)
     std::stringstream ss;
 
     ss <<
-      "Appending time signature '" <<
+      "Appending time signature " <<
       timeSignature->asShortString () <<
-      "' to line '" <<
+      " to line '" <<
       asString () <<
       "'" <<
       std::endl;

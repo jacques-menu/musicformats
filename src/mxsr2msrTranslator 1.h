@@ -1344,10 +1344,10 @@ class EXP mxsr2msrTranslator :
 
     // a staff change occurs when the staff number changes,
     // in which case both the staff change element and the note
-    // remain in the same voice, hence fCurrentVoiceToAppendTo,
+    // remain in the same voice, hence fCurrentRecipientVoice,
     // which doesnt change in case of a staff change
 
-    S_msrVoice                fCurrentVoiceToAppendTo;
+    S_msrVoice                fCurrentRecipientVoice;
 
     msrStaffChangeKind        fCurrentStaffChangeKind;
     Bool                      fCurrentNoteIsCrossStaves;

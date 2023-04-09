@@ -161,17 +161,18 @@ class EXP msr2msrTranslator :
   public visitor<S_msrStanza>,
   public visitor<S_msrSyllable>,
 
-  // clefs
+  // clef, key and time signature handling
 
-  public visitor<S_msrClef>,
+  public visitor<S_msrClefKeyTimeSignatureGroup>,
+//   public visitor<S_msrClef>,
 
   // keys
 
-  public visitor<S_msrKey>,
+//   public visitor<S_msrKey>,
 
   // time signatures
 
-  public visitor<S_msrTimeSignature>,
+//   public visitor<S_msrTimeSignature>,
 
   // transposition
 
@@ -403,14 +404,17 @@ class EXP msr2msrTranslator :
     virtual void              visitStart (S_msrSyllable& elt);
     virtual void              visitEnd   (S_msrSyllable& elt);
 
-    virtual void              visitStart (S_msrClef& elt);
-    virtual void              visitEnd   (S_msrClef& elt);
+    virtual void              visitStart (S_msrClefKeyTimeSignatureGroup& elt);
+    virtual void              visitEnd   (S_msrClefKeyTimeSignatureGroup& elt);
 
-    virtual void              visitStart (S_msrKey& elt);
-    virtual void              visitEnd   (S_msrKey& elt);
-
-    virtual void              visitStart (S_msrTimeSignature& elt);
-    virtual void              visitEnd   (S_msrTimeSignature& elt);
+//     virtual void              visitStart (S_msrClef& elt);
+//     virtual void              visitEnd   (S_msrClef& elt);
+//
+//     virtual void              visitStart (S_msrKey& elt);
+//     virtual void              visitEnd   (S_msrKey& elt);
+//
+//     virtual void              visitStart (S_msrTimeSignature& elt);
+//     virtual void              visitEnd   (S_msrTimeSignature& elt);
 
     virtual void              visitStart (S_msrTransposition& elt);
     virtual void              visitEnd   (S_msrTransposition& elt);

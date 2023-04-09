@@ -660,7 +660,7 @@ void msr2mxsrTranslator::appendNoteToMeasure (
   appendNoteSpannersAfterNote (theMsrNote);
 }
 
-void msr2mxsrTranslator::appendOtherToMeasure (
+void msr2mxsrTranslator::appendOtherMusicXMLElementToMeasure (
   Sxmlelement elem)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -671,7 +671,7 @@ void msr2mxsrTranslator::appendOtherToMeasure (
     std::stringstream ss;
 
     ss <<
-      "--> appendOtherToMeasure()" <<
+      "--> appendOtherMusicXMLElementToMeasure()" <<
       ", elem: " << mxmlelementAsString (elem) <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -5452,7 +5452,7 @@ void msr2mxsrTranslator::appendABackupToMeasure (
     Sxmlelement comment = createMxmlelement (kComment, ss.str ());
 
     // append it to the current measure element
-    appendOtherToMeasure (comment);
+    appendOtherMusicXMLElementToMeasure (comment);
   }
 
   // create a backup element
@@ -5463,7 +5463,7 @@ void msr2mxsrTranslator::appendABackupToMeasure (
     createMxmlIntegerElement (k_duration, backupNotesDurationDivisions));
 
   // append it to the current measure element
-  appendOtherToMeasure (backupElement);
+  appendOtherMusicXMLElementToMeasure (backupElement);
 
   // reset the cumulated skip durations informations
   fCurrentCumulatedSkipsNotesDurations = msrWholeNotes (0, 1);
@@ -5548,7 +5548,7 @@ void msr2mxsrTranslator:: appendAForwardToMeasure (
     Sxmlelement comment = createMxmlelement (kComment, ss.str ());
 
     // append it to the current measure element
-    appendOtherToMeasure (comment);
+    appendOtherMusicXMLElementToMeasure (comment);
   }
 
   // create a forward element
@@ -5567,7 +5567,7 @@ void msr2mxsrTranslator:: appendAForwardToMeasure (
     createMxmlIntegerElement (k_staff, noteStaffNumber));
 
   // append it to the current measure element
-  appendOtherToMeasure (forwardElement);
+  appendOtherMusicXMLElementToMeasure (forwardElement);
 
   // reset the cumulated skip durations informations
   fCurrentCumulatedSkipsNotesDurations = msrWholeNotes (0, 1);
@@ -8060,7 +8060,7 @@ void msr2mxsrTranslator::appendMsrNoteToMesureIfRelevant (
         Sxmlelement comment = createMxmlelement (kComment, ss.str ());
 
         // append it to the current measure element
-        appendOtherToMeasure (comment);
+        appendOtherMusicXMLElementToMeasure (comment);
       }
 
       // append theMsrNote to the current measure element
@@ -8439,7 +8439,7 @@ void msr2mxsrTranslator::visitStart (S_msrBarLine& elt)
     barLineElement->push (barStyleElement);
 
     // append the barLine element to the measure element
-    appendOtherToMeasure (barLineElement);
+    appendOtherMusicXMLElementToMeasure (barLineElement);
   }
 }
 

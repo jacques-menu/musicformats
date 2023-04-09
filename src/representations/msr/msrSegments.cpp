@@ -779,15 +779,16 @@ void msrSegment::appendMusicXMLPrintLayoutToSegment (
   --gIndenter;
 }
 
-void msrSegment::appendClefToSegment  (
-  const S_msrClef& clef)
+void msrSegment::appendClefKeyTimeSignatureGroupToSegment  (
+  const S_msrClefKeyTimeSignatureGroup& clefKeyTimeSignatureGroup)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceClefs ()) {
+  if (gTraceOahGroup->getTraceClefKeyTimeSignatureGroups ()) {
     std::stringstream ss;
 
     ss <<
-      "Appending clef " << clef->asString () <<
+      "Appending clefKeyTimeSignatureGroup " <<
+      clefKeyTimeSignatureGroup->asString () <<
       " to segment " << asString () <<
       ", in voice \"" <<
       fSegmentUpLinkToVoice->getVoiceName () <<
@@ -830,292 +831,357 @@ void msrSegment::appendClefToSegment  (
 
     msrInternalError (
       gServiceRunData->getInputSourceName (),
-       clef->getInputLineNumber (),
+       clefKeyTimeSignatureGroup->getInputLineNumber (),
       __FILE__, __LINE__,
       ss.str ());
   }
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
-  // register clef in segments's current measure
+  // register clefKeyTimeSignatureGroup in segments's current measure
   fSegmentLastMeasure->
-    appendClefToMeasure (clef);
+    appendClefKeyTimeSignatureGroupToMeasure (
+      clefKeyTimeSignatureGroup);
 
   --gIndenter;
 }
 
-void msrSegment::prependClefToSegment  (
-  const S_msrClef& clef) // JMI
-{
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceClefs ()) {
-    std::stringstream ss;
-
-    ss <<
-      "Prepending clef " << clef->asString () <<
-      " to segment " << asString () <<
-      ", in voice \"" <<
-      fSegmentUpLinkToVoice->getVoiceName () <<
-      "\"" <<
-      std::endl;
-
-    gWaeHandler->waeTraceWithLocationDetails (
-      __FILE__, __LINE__,
-      ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
-
-    abort ();
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-  ++gIndenter;
-
-#ifdef MF_SANITY_CHECKS_ARE_ENABLED
-  // sanity check
-  if (fSegmentElementsList.size () == 0) {
-    std::stringstream ss;
-
-    ss <<
-      "fSegmentElementsList is empty"  <<
-      " in segment '" <<
-      fSegmentAbsoluteNumber <<
-      ", fSegmentDebugNumber: '" <<
-      fSegmentDebugNumber <<
-      "' in voice \"" <<
-      fSegmentUpLinkToVoice->getVoiceName () <<
-      "\"";
-
-    gLog <<
-      "fSegmentUpLinkToVoice:" <<
-      std::endl;
-    ++gIndenter;
-    gLog <<
-      fSegmentUpLinkToVoice <<
-      std::endl;
-    --gIndenter;
-
-    msrInternalError (
-      gServiceRunData->getInputSourceName (),
-      clef->getInputLineNumber (),
-      __FILE__, __LINE__,
-      ss.str ());
-  }
-#endif // MF_SANITY_CHECKS_ARE_ENABLED
-
-  // register clef in segments's current measure
-
-  S_msrSegmentElement
-    segmentElementsListFirstElement =
-      fSegmentElementsList.front ();
-
-  if (
-    // measure?
-
-    S_msrMeasure
-      measure =
-        dynamic_cast<msrMeasure*>(&(*segmentElementsListFirstElement))
-  ) {
-    // prepend the clef to the first measure
-    fSegmentFirstMeasure->
-      appendClefToMeasure (clef);
-  }
-
-  else if (
-    // full-bar rest?
-
-    S_msrMultipleFullBarRests
-      multipleFullBarRests =
-        dynamic_cast<msrMultipleFullBarRests*>(&(*segmentElementsListFirstElement))
-  ) {
-    const std::list<S_msrMeasure>&
-      fullBarRestsMeasuresList =
-        multipleFullBarRests->
-          getFullBarRestsMeasuresList ();
-
-    if (fullBarRestsMeasuresList.size ()) {
-      S_msrMeasure
-        fullBarRestsMeasuresListFirstMeasure = // JMI v0.9.64 ???
-          fullBarRestsMeasuresList.front ();
-
-      // prepend the clef to the full-bar rest first measure
-      fullBarRestsMeasuresListFirstMeasure->
-        appendClefToMeasure (clef);
-    }
-
-    else {
-      std::stringstream ss;
-
-      ss <<
-        "attempt at prepending clef " <<
-        clef->asShortString () <<
-        " to segment " <<
-        this->asString () <<
-        " which is not a measure nor a full-bar rest" <<
-        ", in voice \"" <<
-        fSegmentUpLinkToVoice->getVoiceName () <<
-        "\"" <<
-        "', line " << fInputLineNumber; // JMI v0.9.64
-
-      msrInternalError ( // JMI v0.9.64 ???
-        gServiceRunData->getInputSourceName (),
-        fInputLineNumber,
-        __FILE__, __LINE__,
-        ss.str ());
-    }
-  }
-
-//   if (segmentElementsListFirstElement == fSegmentFirstMeasure) {
+// void msrSegment::appendClefToSegment  (
+//   const S_msrClef& clef)
+// {
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gTraceOahGroup->getTraceClefs ()) {
+//     std::stringstream ss;
+//
+//     ss <<
+//       "Appending clef " << clef->asString () <<
+//       " to segment " << asString () <<
+//       ", in voice \"" <<
+//       fSegmentUpLinkToVoice->getVoiceName () <<
+//       "\"" <<
+//       std::endl;
+//
+//     gWaeHandler->waeTraceWithLocationDetails (
+//       __FILE__, __LINE__,
+//       ss.str ());
+// //       gServiceRunData->getCurrentMeasureNumber (),
+// //       gServiceRunData->getScoreMeasuresNumber ());
 //   }
-  else {
-    std::stringstream ss;
-
-    ss <<
-      "attempt at prepending clef " <<
-      clef->asShortString () <<
-      " to segment " <<
-      this->asString () <<
-      " which is not a measure nor a full-bar rest" <<
-      ", in voice \"" <<
-      fSegmentUpLinkToVoice->getVoiceName () <<
-      "\"" <<
-      "', line " << fInputLineNumber; // JMI v0.9.64
-
-    gWaeHandler->waeTraceWithLocationDetails (
-      __FILE__, __LINE__,
-      ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
-
-    gLog << "THIS:" << std::endl;
-    gLog << "----------------------------" << std::endl;
-    ++gIndenter;
-    gLog << this;
-    --gIndenter;
-
-    gLog << std::endl;
-
-    gLog << "fSegmentFirstMeasure:" << std::endl;
-    gLog << "----------------------------" << std::endl;
-    ++gIndenter;
-    gLog << fSegmentFirstMeasure;
-    --gIndenter;
-
-    gLog << std::endl;
-
-    gLog << "fSegmentLastMeasure:" << std::endl;
-    gLog << "----------------------------" << std::endl;
-    ++gIndenter;
-    gLog << fSegmentLastMeasure;
-    --gIndenter;
-
-    gLog << std::endl;
-
-    gLog << "segmentElementsListLastElement:" << std::endl;
-    gLog << "----------------------------" << std::endl;
-    ++gIndenter;
-    gLog << segmentElementsListFirstElement;
-    --gIndenter;
-
-//     abort (); // JMI v0.9.67 HARMFUL
-
-    msrInternalError ( // JMI v0.9.64 ???
-      gServiceRunData->getInputSourceName (),
-      fInputLineNumber,
-      __FILE__, __LINE__,
-      ss.str ());
-  }
-
-//   fSegmentMeasuresFlatList.front ()-> JMI v0.9.64
+// #endif // MF_TRACE_IS_ENABLED
+//
+//   ++gIndenter;
+//
+// #ifdef MF_SANITY_CHECKS_ARE_ENABLED
+//   // sanity check
+//   if (fSegmentElementsList.size () == 0) {
+//     std::stringstream ss;
+//
+//     ss <<
+//       "fSegmentElementsList is empty"  <<
+//       " in segment '" <<
+//       fSegmentAbsoluteNumber <<
+//       ", segmentDebugNumber: '" <<
+//       fSegmentDebugNumber <<
+//       "' in voice \"" <<
+//       fSegmentUpLinkToVoice->getVoiceName () <<
+//       "\"";
+//
+//     gLog <<
+//       "fSegmentUpLinkToVoice:" <<
+//       std::endl;
+//     ++gIndenter;
+//     gLog <<
+//       fSegmentUpLinkToVoice <<
+//       std::endl;
+//     --gIndenter;
+//
+//     msrInternalError (
+//       gServiceRunData->getInputSourceName (),
+//        clef->getInputLineNumber (),
+//       __FILE__, __LINE__,
+//       ss.str ());
+//   }
+// #endif // MF_SANITY_CHECKS_ARE_ENABLED
+//
+//   // register clef in segments's current measure
+//   fSegmentLastMeasure->
 //     appendClefToMeasure (clef);
-
-  --gIndenter;
-}
-
-void msrSegment::appendKeyToSegment (
-  const S_msrKey& key)
-{
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceKeys ()) {
-    std::stringstream ss;
-
-    ss <<
-      "Appending key " << key->asString () <<
-      " to segment " << asString () <<
-    ", in voice \"" <<
-    fSegmentUpLinkToVoice->getVoiceName () <<
-    "\"" <<
-      std::endl;
-
-    gWaeHandler->waeTraceWithLocationDetails (
-      __FILE__, __LINE__,
-      ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-#ifdef MF_SANITY_CHECKS_ARE_ENABLED
-  // sanity check
-  assertSegmentLastMeasureIsNotNull (
-    key->getInputLineNumber ());
-#endif // MF_SANITY_CHECKS_ARE_ENABLED
-
-  ++gIndenter;
-
-  // register key in segments's current measure
-  fSegmentLastMeasure->
-    appendKeyToMeasure (key);
-
-  --gIndenter;
-}
-
-void msrSegment::appendTimeSignatureToSegment (
-  const S_msrTimeSignature& timeSignature)
-{
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceTimeSignatures ()) {
-    std::stringstream ss;
-
-    ss <<
-      "Appending time signature:" <<
-      std::endl;
-
-    ++gIndenter;
-
-    gLog <<
-      timeSignature;
-
-    --gIndenter;
-
-    gLog <<
-      "to segment " << asString () <<
-      ", in voice \"" <<
-      fSegmentUpLinkToVoice->getVoiceName () <<
-      "\"" <<
-      std::endl;
-
-    gWaeHandler->waeTraceWithLocationDetails (
-      __FILE__, __LINE__,
-      ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-#ifdef MF_SANITY_CHECKS_ARE_ENABLED
-  // sanity check
-  assertSegmentLastMeasureIsNotNull (
-    timeSignature->getInputLineNumber ());
-#endif // MF_SANITY_CHECKS_ARE_ENABLED
-
-  ++gIndenter;
-
-  // append timeSignature to segments's current measure
-  fSegmentLastMeasure->
-    appendTimeSignatureToMeasure (timeSignature);
-
-  --gIndenter;
-}
+//
+//   --gIndenter;
+// }
+//
+// void msrSegment::prependClefToSegment  (
+//   const S_msrClef& clef) // JMI
+// {
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gTraceOahGroup->getTraceClefs ()) {
+//     std::stringstream ss;
+//
+//     ss <<
+//       "Prepending clef " << clef->asString () <<
+//       " to segment " << asString () <<
+//       ", in voice \"" <<
+//       fSegmentUpLinkToVoice->getVoiceName () <<
+//       "\"" <<
+//       std::endl;
+//
+//     gWaeHandler->waeTraceWithLocationDetails (
+//       __FILE__, __LINE__,
+//       ss.str ());
+// //       gServiceRunData->getCurrentMeasureNumber (),
+// //       gServiceRunData->getScoreMeasuresNumber ());
+//
+//     abort ();
+//   }
+// #endif // MF_TRACE_IS_ENABLED
+//
+//   ++gIndenter;
+//
+// #ifdef MF_SANITY_CHECKS_ARE_ENABLED
+//   // sanity check
+//   if (fSegmentElementsList.size () == 0) {
+//     std::stringstream ss;
+//
+//     ss <<
+//       "fSegmentElementsList is empty"  <<
+//       " in segment '" <<
+//       fSegmentAbsoluteNumber <<
+//       ", fSegmentDebugNumber: '" <<
+//       fSegmentDebugNumber <<
+//       "' in voice \"" <<
+//       fSegmentUpLinkToVoice->getVoiceName () <<
+//       "\"";
+//
+//     gLog <<
+//       "fSegmentUpLinkToVoice:" <<
+//       std::endl;
+//     ++gIndenter;
+//     gLog <<
+//       fSegmentUpLinkToVoice <<
+//       std::endl;
+//     --gIndenter;
+//
+//     msrInternalError (
+//       gServiceRunData->getInputSourceName (),
+//       clef->getInputLineNumber (),
+//       __FILE__, __LINE__,
+//       ss.str ());
+//   }
+// #endif // MF_SANITY_CHECKS_ARE_ENABLED
+//
+//   // register clef in segments's current measure
+//
+//   S_msrSegmentElement
+//     segmentElementsListFirstElement =
+//       fSegmentElementsList.front ();
+//
+//   if (
+//     // measure?
+//
+//     S_msrMeasure
+//       measure =
+//         dynamic_cast<msrMeasure*>(&(*segmentElementsListFirstElement))
+//   ) {
+//     // prepend the clef to the first measure
+//     fSegmentFirstMeasure->
+//       appendClefToMeasure (clef);
+//   }
+//
+//   else if (
+//     // full-bar rest?
+//
+//     S_msrMultipleFullBarRests
+//       multipleFullBarRests =
+//         dynamic_cast<msrMultipleFullBarRests*>(&(*segmentElementsListFirstElement))
+//   ) {
+//     const std::list<S_msrMeasure>&
+//       fullBarRestsMeasuresList =
+//         multipleFullBarRests->
+//           getFullBarRestsMeasuresList ();
+//
+//     if (fullBarRestsMeasuresList.size ()) {
+//       S_msrMeasure
+//         fullBarRestsMeasuresListFirstMeasure = // JMI v0.9.64 ???
+//           fullBarRestsMeasuresList.front ();
+//
+//       // prepend the clef to the full-bar rest first measure
+//       fullBarRestsMeasuresListFirstMeasure->
+//         appendClefToMeasure (clef);
+//     }
+//
+//     else {
+//       std::stringstream ss;
+//
+//       ss <<
+//         "attempt at prepending clef " <<
+//         clef->asShortString () <<
+//         " to segment " <<
+//         this->asString () <<
+//         " which is not a measure nor a full-bar rest" <<
+//         ", in voice \"" <<
+//         fSegmentUpLinkToVoice->getVoiceName () <<
+//         "\"" <<
+//         "', line " << fInputLineNumber; // JMI v0.9.64
+//
+//       msrInternalError ( // JMI v0.9.64 ???
+//         gServiceRunData->getInputSourceName (),
+//         fInputLineNumber,
+//         __FILE__, __LINE__,
+//         ss.str ());
+//     }
+//   }
+//
+// //   if (segmentElementsListFirstElement == fSegmentFirstMeasure) {
+// //   }
+//   else {
+//     std::stringstream ss;
+//
+//     ss <<
+//       "attempt at prepending clef " <<
+//       clef->asShortString () <<
+//       " to segment " <<
+//       this->asString () <<
+//       " which is not a measure nor a full-bar rest" <<
+//       ", in voice \"" <<
+//       fSegmentUpLinkToVoice->getVoiceName () <<
+//       "\"" <<
+//       "', line " << fInputLineNumber; // JMI v0.9.64
+//
+//     gWaeHandler->waeTraceWithLocationDetails (
+//       __FILE__, __LINE__,
+//       ss.str ());
+// //       gServiceRunData->getCurrentMeasureNumber (),
+// //       gServiceRunData->getScoreMeasuresNumber ());
+//
+//     gLog << "THIS:" << std::endl;
+//     gLog << "----------------------------" << std::endl;
+//     ++gIndenter;
+//     gLog << this;
+//     --gIndenter;
+//
+//     gLog << std::endl;
+//
+//     gLog << "fSegmentFirstMeasure:" << std::endl;
+//     gLog << "----------------------------" << std::endl;
+//     ++gIndenter;
+//     gLog << fSegmentFirstMeasure;
+//     --gIndenter;
+//
+//     gLog << std::endl;
+//
+//     gLog << "fSegmentLastMeasure:" << std::endl;
+//     gLog << "----------------------------" << std::endl;
+//     ++gIndenter;
+//     gLog << fSegmentLastMeasure;
+//     --gIndenter;
+//
+//     gLog << std::endl;
+//
+//     gLog << "segmentElementsListLastElement:" << std::endl;
+//     gLog << "----------------------------" << std::endl;
+//     ++gIndenter;
+//     gLog << segmentElementsListFirstElement;
+//     --gIndenter;
+//
+// //     abort (); // JMI v0.9.67 HARMFUL
+//
+//     msrInternalError ( // JMI v0.9.64 ???
+//       gServiceRunData->getInputSourceName (),
+//       fInputLineNumber,
+//       __FILE__, __LINE__,
+//       ss.str ());
+//   }
+//
+// //   fSegmentMeasuresFlatList.front ()-> JMI v0.9.64
+// //     appendClefToMeasure (clef);
+//
+//   --gIndenter;
+// }
+//
+// void msrSegment::appendKeyToSegment (
+//   const S_msrKey& key)
+// {
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gTraceOahGroup->getTraceKeys ()) {
+//     std::stringstream ss;
+//
+//     ss <<
+//       "Appending key " << key->asString () <<
+//       " to segment " << asString () <<
+//     ", in voice \"" <<
+//     fSegmentUpLinkToVoice->getVoiceName () <<
+//     "\"" <<
+//       std::endl;
+//
+//     gWaeHandler->waeTraceWithLocationDetails (
+//       __FILE__, __LINE__,
+//       ss.str ());
+// //       gServiceRunData->getCurrentMeasureNumber (),
+// //       gServiceRunData->getScoreMeasuresNumber ());
+//   }
+// #endif // MF_TRACE_IS_ENABLED
+//
+// #ifdef MF_SANITY_CHECKS_ARE_ENABLED
+//   // sanity check
+//   assertSegmentLastMeasureIsNotNull (
+//     key->getInputLineNumber ());
+// #endif // MF_SANITY_CHECKS_ARE_ENABLED
+//
+//   ++gIndenter;
+//
+//   // register key in segments's current measure
+//   fSegmentLastMeasure->
+//     appendKeyToMeasure (key);
+//
+//   --gIndenter;
+// }
+//
+// void msrSegment::appendTimeSignatureToSegment (
+//   const S_msrTimeSignature& timeSignature)
+// {
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gTraceOahGroup->getTraceTimeSignatures ()) {
+//     std::stringstream ss;
+//
+//     ss <<
+//       "Appending time signature:" <<
+//       std::endl;
+//
+//     ++gIndenter;
+//
+//     gLog <<
+//       timeSignature;
+//
+//     --gIndenter;
+//
+//     gLog <<
+//       "to segment " << asString () <<
+//       ", in voice \"" <<
+//       fSegmentUpLinkToVoice->getVoiceName () <<
+//       "\"" <<
+//       std::endl;
+//
+//     gWaeHandler->waeTraceWithLocationDetails (
+//       __FILE__, __LINE__,
+//       ss.str ());
+// //       gServiceRunData->getCurrentMeasureNumber (),
+// //       gServiceRunData->getScoreMeasuresNumber ());
+//   }
+// #endif // MF_TRACE_IS_ENABLED
+//
+// #ifdef MF_SANITY_CHECKS_ARE_ENABLED
+//   // sanity check
+//   assertSegmentLastMeasureIsNotNull (
+//     timeSignature->getInputLineNumber ());
+// #endif // MF_SANITY_CHECKS_ARE_ENABLED
+//
+//   ++gIndenter;
+//
+//   // append timeSignature to segments's current measure
+//   fSegmentLastMeasure->
+//     appendTimeSignatureToMeasure (timeSignature);
+//
+//   --gIndenter;
+// }
 
 void msrSegment::appendTimeSignatureToSegmentClone (
   const S_msrTimeSignature& timeSignature){
@@ -2767,31 +2833,31 @@ void msrSegment::prependAfterGraceNotesToSegment (
 }
 */
 
-void msrSegment::prependOtherElementToSegment (
-  const S_msrMeasureElement& elem)
-{
-#ifdef MF_SANITY_CHECKS_ARE_ENABLED
-  // sanity check
-  assertSegmentLastMeasureIsNotNull (
-    elem->getInputLineNumber ());
-#endif // MF_SANITY_CHECKS_ARE_ENABLED
+// void msrSegment::prependOtherElementToSegment (
+//   const S_msrMeasureElement& elem)
+// {
+// #ifdef MF_SANITY_CHECKS_ARE_ENABLED
+//   // sanity check
+//   assertSegmentLastMeasureIsNotNull (
+//     elem->getInputLineNumber ());
+// #endif // MF_SANITY_CHECKS_ARE_ENABLED
+//
+//   fSegmentLastMeasure->
+//     prependOtherElementToMeasure (elem);
+// }
 
-  fSegmentLastMeasure->
-    prependOtherElementToMeasure (elem);
-}
-
-void msrSegment::appendOtherElementToSegment (
-  const S_msrMeasureElement& elem)
-{
-#ifdef MF_SANITY_CHECKS_ARE_ENABLED
-  // sanity check
-  assertSegmentLastMeasureIsNotNull (
-    elem->getInputLineNumber ());
-#endif // MF_SANITY_CHECKS_ARE_ENABLED
-
-  fSegmentLastMeasure->
-    appendOtherElementToMeasure (elem);
-}
+// void msrSegment::appendOtherElementToSegment (
+//   const S_msrMeasureElement& elem)
+// {
+// #ifdef MF_SANITY_CHECKS_ARE_ENABLED
+//   // sanity check
+//   assertSegmentLastMeasureIsNotNull (
+//     elem->getInputLineNumber ());
+// #endif // MF_SANITY_CHECKS_ARE_ENABLED
+//
+//   fSegmentLastMeasure->
+//     appendOtherElementToMeasure (elem);
+// }
 
 /* JMI
 S_msrElement msrSegment::removeLastElementFromSegment (

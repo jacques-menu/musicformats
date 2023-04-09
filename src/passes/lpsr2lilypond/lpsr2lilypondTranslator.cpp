@@ -308,12 +308,16 @@ if (false) // JMI
   fStaffBlocksCounter          =  0;
 
   if (fVisitedLpsrScore) {
-     // set the parts browsing order
+    // set the parts browsing order
     theMsrScore->
       setStavesBrowingOrderKind (
         msrStavesBrowingOrderKind::kStavesBrowingOrderHarmoniesFiguredBassesRegulars);
 
-   // browse a msrScore browser
+    // set the clefKeyTimeSignature browsing order to musician's order
+    setClefKeyTimeSignatureOrderKind (
+        msrClefKeyTimeSignatureOrderKind::kClefKeyTimeSignatureOrderClefKeyTimeSignature);
+
+    // browse a msrScore browser
     lpsrBrowser<lpsrScore> browser (this);
     browser.browse (*fVisitedLpsrScore);
   }
@@ -13852,6 +13856,75 @@ void lpsr2lilypondTranslator::visitEnd (S_msrSyllable& elt)
 
       if (generateMsrVisitingInformation) {
         fLilypondCodeStream << ss.str ();
+      }
+    }
+  }
+#endif // MF_TRACE_IS_ENABLED
+}
+
+//________________________________________________________________________
+void lpsr2lilypondTranslator::visitStart (S_msrClefKeyTimeSignatureGroup& elt)
+{
+#ifdef MF_TRACE_IS_ENABLED
+  {
+    Bool
+      traceLpsrVisitors =
+        gLpsrOahGroup->
+          getTraceLpsrVisitors (),
+      generateMsrVisitingInformation =
+        gGlobalLpsr2lilypondOahGroup->
+          getGenerateLpsrVisitingInformation ();
+
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
+      std::stringstream ss;
+
+      ss <<
+        "% --> Start visiting msrClefKeyTimeSignatureGroup '" <<
+        elt->asString () <<
+        "'" <<
+        ", line " << elt->getInputLineNumber () <<
+      std::endl;
+
+      if (traceLpsrVisitors) {
+        gLog << ss.str ();
+      }
+
+      if (generateMsrVisitingInformation) {
+//         fLilypondCodeStream << ss.str ();
+      }
+    }
+  }
+#endif // MF_TRACE_IS_ENABLED
+}
+
+void lpsr2lilypondTranslator::visitEnd (S_msrClefKeyTimeSignatureGroup& elt)
+{
+#ifdef MF_TRACE_IS_ENABLED
+  {
+    Bool
+      traceLpsrVisitors =
+        gLpsrOahGroup->
+          getTraceLpsrVisitors (),
+      generateMsrVisitingInformation =
+        gGlobalLpsr2lilypondOahGroup->
+          getGenerateLpsrVisitingInformation ();
+
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
+      std::stringstream ss;
+
+      ss <<
+        "% --> End visiting msrClefKeyTimeSignatureGroup '" <<
+        elt->asString () <<
+        "'" <<
+        ", line " << elt->getInputLineNumber () <<
+      std::endl;
+
+      if (traceLpsrVisitors) {
+        gLog << ss.str ();
+      }
+
+      if (generateMsrVisitingInformation) {
+//         fLilypondCodeStream << ss.str ();
       }
     }
   }

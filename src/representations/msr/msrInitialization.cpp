@@ -9,7 +9,7 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include "msrClefs.h"
+#include "msrClefsKeysTimeSignatures.h"
 #include "msrHarmonies.h"
 #include "msrInitialization.h"
 #include "msrLengths.h"

@@ -14,15 +14,26 @@
 
 #include "msrVoiceElements.h"
 
+// #include "msrClefKeyTimeSignatureGroup.h"
+#include "msrClefsKeysTimeSignatures.h"
+// #include "msrClefsKeysTimeSignatures.h"
+// #include "msrClefsKeysTimeSignatures.h"
 #include "msrEyeGlasses.h"
 #include "msrLyrics.h"
 #include "msrMeasures.h"
 #include "msrMoments.h"
 #include "msrMultipleFullBarRests.h"
+// #include "msrClefsKeysTimeSignatures.h"
 
 
 namespace MusicFormats
 {
+
+//______________________________________________________________________________
+// PRE-declarations for class mutual dependencies
+
+class   msrClefKeyTimeSignatureGroup;
+typedef SMARTP<msrClefKeyTimeSignatureGroup> S_msrClefKeyTimeSignatureGroup;
 
 //______________________________________________________________________________
 class EXP msrSegment : public msrVoiceElement
@@ -181,16 +192,21 @@ class EXP msrSegment : public msrVoiceElement
 
     // clef, key, time signature
 
-    void                  appendClefToSegment (
-                            const S_msrClef& clef);
-    void                  prependClefToSegment (
-                            const S_msrClef& clef);
+    void                  appendClefKeyTimeSignatureGroupToSegment (
+                            const S_msrClefKeyTimeSignatureGroup&
+                              clefKeyTimeSignatureGroup);
 
-    void                  appendKeyToSegment (
-                            const S_msrKey& key);
+//     void                  appendClefToSegment (
+//                             const S_msrClef& clef);
+//     void                  prependClefToSegment (
+//                             const S_msrClef& clef);
+//
+//     void                  appendKeyToSegment (
+//                             const S_msrKey& key);
+//
+//     void                  appendTimeSignatureToSegment (
+//                             const S_msrTimeSignature& timeSignature);
 
-    void                  appendTimeSignatureToSegment (
-                            const S_msrTimeSignature& timeSignature);
     void                  appendTimeSignatureToSegmentClone (
                             const S_msrTimeSignature& timeSignature);
 
@@ -373,10 +389,10 @@ class EXP msrSegment : public msrVoiceElement
 
     // other elements
 
-    void                  prependOtherElementToSegment (
-                            const S_msrMeasureElement& elem);
-    void                  appendOtherElementToSegment (
-                            const S_msrMeasureElement& elem);
+//     void                  prependOtherElementToSegment (
+//                             const S_msrMeasureElement& elem);
+//     void                  appendOtherElementToSegment (
+//                             const S_msrMeasureElement& elem);
 
     // removing elements
 

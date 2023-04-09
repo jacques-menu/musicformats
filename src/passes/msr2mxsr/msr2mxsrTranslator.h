@@ -18,7 +18,7 @@
 #include "visitor.h"
 #include "xml.h"
 
-#include "msrKeys.h"
+#include "msrClefsKeysTimeSignatures.h"
 #include "msrPlacements.h"
 #include "msrSpanners.h"
 #include "msrTupletFactors.h"
@@ -803,7 +803,7 @@ class EXP msr2mxsrTranslator :
     std::map<std::string, Sxmlelement>
                               fPartMeasureNumbersToElementsMap;
 
-    void                      appendOtherToMeasure (
+    void                      appendOtherMusicXMLElementToMeasure (
                                 Sxmlelement elem);
 
     // the measure attributes element
