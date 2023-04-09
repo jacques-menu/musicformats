@@ -14,7 +14,7 @@
 
 #include "mfStaticSettings.h"
 
-#include "msrClefs.h"
+#include "msrClefsKeysTimeSignatures.h"
 #include "msrSegnos.h"
 
 #include "oahAtomsCollection.h"

@@ -268,8 +268,18 @@ class EXP traceOahGroup : public oahGroup
                               { return fTraceMeasuresSlicesDetails; }
 
 
-    // clefs to tempos
+    // clef, key, time signature
     // --------------------------------------
+
+    Bool                  getTraceClefKeyTimeSignatureGroups () const
+                              {
+                                return
+                                  getTraceClefs ()
+                                    ||
+                                  getTraceKeys ()
+                                    ||
+                                  getTraceTimeSignatures ();
+                              }
 
     // clefs
     void                  setTraceClefs ()
@@ -291,6 +301,11 @@ class EXP traceOahGroup : public oahGroup
                               { fTraceTimeSignatures = true; }
     Bool                  getTraceTimeSignatures () const
                               { return fTraceTimeSignatures; }
+
+
+    // tempos
+    // --------------------------------------
+
     // tempos
     void                  setTraceTempos ()
                               { fTraceTempos = true; }

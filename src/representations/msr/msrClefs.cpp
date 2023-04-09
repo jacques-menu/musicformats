@@ -24,7 +24,7 @@
 
 #include "msrWae.h"
 
-#include "msrClefs.h"
+#include "msrClefsKeysTimeSignatures.h"
 
 #include "oahOah.h"
 

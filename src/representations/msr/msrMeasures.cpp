@@ -1938,10 +1938,45 @@ void msrMeasure::appendMusicXMLPrintLayoutToMeasure (
 #endif // MF_TRACE_IS_ENABLED
 
   // append it to the measure elements list
-  prependOtherElementToMeasure (musicXMLPrintLayout);
+//   prependOtherElementToMeasure (musicXMLPrintLayout); // JMI v0.9.67
+  appendMeasureElementToMeasure (musicXMLPrintLayout);
+
+  // this measure contains music
+  fMeasureContainsMusic = true;
 
   // register it for MusicXML generation from MSR
   fMeasureMusicXMLPrintLayout = musicXMLPrintLayout;
+}
+
+void msrMeasure::appendClefKeyTimeSignatureGroupToMeasure (
+  const S_msrClefKeyTimeSignatureGroup& clefKeyTimeSignatureGroup)
+{
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceClefKeyTimeSignatureGroups ()) {
+    std::stringstream ss;
+
+    ss <<
+      "Appending clefKeyTimeSignatureGroup " <<
+      clefKeyTimeSignatureGroup->asString () <<
+      " to measure " <<
+      this->asShortString () <<
+      ", in voice \"" <<
+      fetchMeasureUpLinkToVoice ()->
+        getVoiceName () <<
+      "\"" <<
+      std::endl;
+
+    gWaeHandler->waeTraceWithLocationDetails (
+      __FILE__, __LINE__,
+      ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  // append it to the measure elements list
+  appendMeasureElementToMeasure (
+    clefKeyTimeSignatureGroup);
 }
 
 void msrMeasure::appendClefToMeasure (
@@ -2019,7 +2054,7 @@ void msrMeasure::appendTimeSignatureToMeasure (
     std::stringstream ss;
 
     ss <<
-      "Appending time signature '" <<
+      "Appending time signature " <<
       std::endl;
 
     ++gIndenter;
@@ -2030,7 +2065,7 @@ void msrMeasure::appendTimeSignatureToMeasure (
     --gIndenter;
 
     ss <<
-      "' to measure " <<
+      " to measure " <<
       this->asShortString ()<<
       " in voice \"" <<
       fMeasureUpLinkToSegment->
@@ -4147,23 +4182,23 @@ void msrMeasure::appendBarNumberCheckToMeasure (
   appendMeasureElementToMeasure (barNumberCheck);
 }
 
-void msrMeasure::prependOtherElementToMeasure (
-  const S_msrMeasureElement& elem)
-{
-  fMeasureElementsList.push_front (elem); // JMI
-
-  // this measure contains music
-  fMeasureContainsMusic = true;
-}
-
-void msrMeasure::appendOtherElementToMeasure  (
-  const S_msrMeasureElement& elem)
-{
-  appendMeasureElementToMeasure (elem);
-
-  // this measure contains music
-  fMeasureContainsMusic = true;
-}
+// void msrMeasure::prependOtherElementToMeasure (
+//   const S_msrMeasureElement& elem)
+// {
+//   fMeasureElementsList.push_front (elem); // JMI
+//
+//   // this measure contains music
+//   fMeasureContainsMusic = true;
+// }
+//
+// void msrMeasure::appendOtherElementToMeasure  (
+//   const S_msrMeasureElement& elem)
+// {
+//   appendMeasureElementToMeasure (elem);
+//
+//   // this measure contains music
+//   fMeasureContainsMusic = true;
+// }
 
 void msrMeasure::removeNoteFromMeasure (
   int              inputLineNumber,

@@ -1201,6 +1201,15 @@ class EXP mxsr2msrTranslator :
     Bool                      fOnGoingPrint;
 
 
+    // clef, key and time signature handling
+    // ------------------------------------------------------
+
+    S_msrClefKeyTimeSignatureGroup
+                              fCurrentClefKeyTimeSignatureGroup;
+    int                       fCurrentAttributesInputLineNumber;
+
+    Bool                      fOnGoingClefKeyTimeSignatureGroup;
+
     // clef handling
     // ------------------------------------------------------
 
@@ -1232,6 +1241,30 @@ class EXP mxsr2msrTranslator :
     S_msrKey                  handleHumdrumScotKey (
                                 int inputLineNumber);
 
+
+    // time signatures handling
+    // ------------------------------------------------------
+
+    msrTimeSignatureSymbolKind
+                              fCurrentTimeSignatureSymbolKind;
+
+    int                       fCurrentTimeStaffNumber;
+    std::string               fCurrentTimeSignatureBeats;
+    Bool                      fCurrentTimeSenzaMisura;
+
+    std::vector<S_msrTimeSignatureItem>
+                              fCurrentTimeSignatureItemsVector;
+
+    S_msrTimeSignature        fCurrentTimeSignature;
+
+    msrTimeSignatureSymbolKind
+                              fCurrentInterchangeableSymbolKind;
+    msrTimeSignatureSeparatorKind
+                              fCurrentInterchangeableSeparatorKind;
+    msrTimeSignatureRelationKind
+                              fCurrentInterchangeableRelationKind;
+
+    Bool                      fOnGoingInterchangeable;
 
     // measures
     // ------------------------------------------------------
@@ -1336,17 +1369,10 @@ class EXP mxsr2msrTranslator :
     // ------------------------------------------------------
 
     S_msrNote                 fCurrentNote;
-    S_msrStaff                fCurrentNoteStaff;
-    S_msrVoice                fCurrentNoteVoice;
-
-//     S_msrNote                 fPreviousNote;
-//     S_msrStaff                fPreviousNoteStaff;
-//     S_msrVoice                fPreviousNoteVoice;
 
     int                       fPreviousNoteMusicXMLStaffNumber;
-//     int                       fPreviousNoteMusicXMLVoiceNumber;
 
-    void                      populateCurrentNote (
+    void                      populateCurrentNoteAndAppendItToCurrentRecipientVoice (
                                 int inputLineNumber);
 
     // detailed notes handling
@@ -1376,10 +1402,10 @@ class EXP mxsr2msrTranslator :
 
     // a staff change occurs when the staff number changes,
     // in which case both the staff change element and the note
-    // remain in the same voice, hence fCurrentVoiceToAppendTo,
+    // remain in the same voice, hence fCurrentRecipientVoice,
     // which doesnt change in case of a staff change
 
-    S_msrVoice                fCurrentVoiceToAppendTo;
+    S_msrVoice                fCurrentRecipientVoice;
 
     msrStaffChangeKind        fCurrentStaffChangeKind;
     Bool                      fCurrentNoteIsCrossStaves;
@@ -1703,30 +1729,6 @@ class EXP mxsr2msrTranslator :
 
     Bool                      fOnGoingAccord;
 
-
-    // time handling
-    // ------------------------------------------------------
-
-    msrTimeSignatureSymbolKind
-                              fCurrentTimeSignatureSymbolKind;
-
-    int                       fCurrentTimeStaffNumber;
-    std::string               fCurrentTimeSignatureBeats;
-    Bool                      fCurrentTimeSenzaMisura;
-
-    std::vector<S_msrTimeSignatureItem>
-                              fCurrentTimeSignatureItemsVector;
-
-    S_msrTimeSignature        fCurrentTimeSignature;
-
-    msrTimeSignatureSymbolKind
-                              fCurrentInterchangeableSymbolKind;
-    msrTimeSignatureSeparatorKind
-                              fCurrentInterchangeableSeparatorKind;
-    msrTimeSignatureRelationKind
-                              fCurrentInterchangeableRelationKind;
-
-    Bool                      fOnGoingInterchangeable;
 
 
     // lyrics handling

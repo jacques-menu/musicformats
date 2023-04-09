@@ -20,7 +20,7 @@
 #include "msrDirections.h"
 #include "msrHiddenMeasureAndBarLines.h"
 #include "msrInstruments.h"
-#include "msrKeys.h"
+#include "msrClefsKeysTimeSignatures.h"
 #include "msrPitchesNames.h"
 #include "msrPlacements.h"
 #include "msrPrintObjects.h"
@@ -233,6 +233,7 @@ class EXP lpsr2lilypondTranslator :
 
   // clefs
 
+  public visitor<S_msrClefKeyTimeSignatureGroup>,
   public visitor<S_msrClef>,
 
   // keys
@@ -551,6 +552,10 @@ class EXP lpsr2lilypondTranslator :
 
     virtual void              visitStart (S_msrSyllable& elt);
     virtual void              visitEnd   (S_msrSyllable& elt);
+
+    // clefs
+    virtual void              visitStart (S_msrClefKeyTimeSignatureGroup& elt);
+    virtual void              visitEnd   (S_msrClefKeyTimeSignatureGroup& elt);
 
     // clefs
     virtual void              visitStart (S_msrClef& elt);
