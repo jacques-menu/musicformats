@@ -14,6 +14,7 @@
 
 #include <list>
 #include <map>
+#include <vector>
 
 #include "msrMeasureElements.h"
 
