@@ -115,7 +115,7 @@ class EXP msr2lpsrTranslator :
 
   // time signatures
 
-//   public visitor<S_msrTimeSignature>,
+  public visitor<S_msrTimeSignature>,
 
   // transposition
 
@@ -347,14 +347,14 @@ class EXP msr2lpsrTranslator :
     virtual void              visitStart (S_msrClefKeyTimeSignatureGroup& elt);
     virtual void              visitEnd   (S_msrClefKeyTimeSignatureGroup& elt);
 
-//     virtual void              visitStart (S_msrClef& elt);
-//     virtual void              visitEnd   (S_msrClef& elt);
-//
-//     virtual void              visitStart (S_msrKey& elt);
-//     virtual void              visitEnd   (S_msrKey& elt);
-//
-//     virtual void              visitStart (S_msrTimeSignature& elt);
-//     virtual void              visitEnd   (S_msrTimeSignature& elt);
+    virtual void              visitStart (S_msrClef& elt);
+    virtual void              visitEnd   (S_msrClef& elt);
+
+    virtual void              visitStart (S_msrKey& elt);
+    virtual void              visitEnd   (S_msrKey& elt);
+
+    virtual void              visitStart (S_msrTimeSignature& elt);
+    virtual void              visitEnd   (S_msrTimeSignature& elt);
 
     virtual void              visitStart (S_msrTransposition& elt);
     virtual void              visitEnd   (S_msrTransposition& elt);
@@ -665,6 +665,12 @@ class EXP msr2lpsrTranslator :
     S_msrVoice                fCurrentVoiceOriginal;
     std::map<S_msrNote, S_msrNote>
                               fVoiceNotesMap; // JMI
+
+    // clef, key, time signature
+    // ------------------------------------------------------
+
+    S_msrClefKeyTimeSignatureGroup
+                              fCurrentClefKeyTimeSignatureGroup;
 
     // dal segnos
     // ------------------------------------------------------

@@ -319,7 +319,7 @@ R"(Transpositions (<transpose/> in MusicXML, \transposition in LilyPond))",
   S_oahTwoBooleansAtom
     traceOctaveShiftsAtom =
       oahTwoBooleansAtom::create (
-        "trace-octaves-shifts", "toctshifts",
+        "trace-octave-shifts", "toctshifts",
 R"(Octave shifts (<octave-shift/> in MusicXML, \ottava in LilyPond))",
         "fTraceOctaveShifts",
         fTraceOctaveShifts,
@@ -672,7 +672,7 @@ R"(Keys details)",
   S_oahTwoBooleansAtom
     traceTimeSignaturesAtom =
       oahTwoBooleansAtom::create (
-        "trace-times-signatures", "ttimesigs",
+        "trace-time-signatures", "ttimesigs",
 R"(Times)",
         "fTraceTimeSignatures",
         fTraceTimeSignatures,

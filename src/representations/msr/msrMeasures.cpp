@@ -148,7 +148,7 @@ void msrMeasure::initializeMeasure ()
   S_msrTimeSignature
     staffCurrentTimeSignature =
       upLinkToStaff->
-        getStaffCurrentTime ();
+        getStaffCurrentTimeSignature ();
 
   if (staffCurrentTimeSignature) {
     setFullMeasureWholeNotesFromTimeSignature (

@@ -2110,7 +2110,8 @@ void msrVoice::setVoiceCurrentKey (
 };
 
 void msrVoice::setVoiceCurrentTimeSignature (
-  const S_msrTimeSignature& timeSignature){
+  const S_msrTimeSignature& timeSignature
+){
   fVoiceCurrentTimeSignature = timeSignature;
 };
 

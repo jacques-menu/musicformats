@@ -118,7 +118,7 @@ mxsr2msrTranslator::mxsr2msrTranslator (
   // voice handling
   fCurrentMusicXMLVoiceNumber = msrVoice::K_VOICE_NUMBER_UNKNOWN_;
 
-
+  // attributes
   fCurrentAttributesInputLineNumber = -1; // JMI v0.9.67 K_LINE_NUMBER_UNKNOWN_
 
   // clef handling
@@ -135,7 +135,22 @@ mxsr2msrTranslator::mxsr2msrTranslator (
   fCurrentKeyCancelFifths = -37;
   fCurrentModeKind = msrModeKind::kMode_UNKNOWN_;
 
-  // time handling
+//   // time handling
+//   // time signature is crucially needed for measures management,
+//   // we cannot stay without any,
+//   // and there may be none in the MusicXML data
+//
+//   // create the default 4/4 time
+//   fCurrentTimeSignature =
+//     msrTimeSignature::createFourQuartersTime (
+//       0); // inputLineNumber
+//
+// //   // register time in staff
+// //   fCurrentPart->
+// //     appendTimeSignatureToPart ( // JMI v0.9.67
+// //       0, // groupInputLineNumber
+// //       fCurrentTimeSignature);
+
   fCurrentTimeSignatureSymbolKind =
     msrTimeSignatureSymbolKind::kTimeSignatureSymbolNone; // default value
 
@@ -2982,22 +2997,6 @@ void mxsr2msrTranslator::visitEnd (S_attributes& elt)
         fCurrentDivisionsPerQuarterNote);
   }
 
-  // JMI and if there's no <attributes/> ???
-  // time is crucially needed for measures management,
-  // we cannot stay without any
-  if (! fCurrentTimeSignature) {
-    /* JMI
-    // create the default 4/4 time
-    fCurrentTimeSignature =
-      msrTimeSignature::createFourQuartersTime (
-        inputLineNumber);
-
-    // register time in staff
-    fCurrentPart->
-      appendTimeSignatureToPart (fCurrentTimeSignature);
-      */
-  }
-
   fOnGoingClefKeyTimeSignatureGroup = true;
 }
 
@@ -5401,57 +5400,62 @@ void mxsr2msrTranslator::visitStart (S_octave_shift& elt)
   // size
 
   std::string octaveShiftSizeString = elt->getAttributeValue ("size");
-  int    octaveShiftSize = 8;
 
-  if (! octaveShiftSizeString.size ()) {
-    std::stringstream ss;
+  int octaveShiftSize;
 
-    ss <<
-      "octave shift size absent, assuming 8";
+  std::istringstream inputStream (octaveShiftSizeString);
 
-    mxsr2msrWarningWithLocationDetails (
-      gServiceRunData->getInputSourceName (),
-      inputLineNumber,
-      ss.str ());
-//       fCurrentMeasureNumber,
-//       fMsrScore->getScoreMeasuresNumber ());
-  }
+  inputStream >> octaveShiftSize;
 
-  else {
-    std::istringstream inputStream (octaveShiftSizeString);
-
-    inputStream >> octaveShiftSize;
-
-    if (
-      octaveShiftSize != 8
-        &&
-      octaveShiftSize != 15
-      /* JMI allow larger values???
-        &&
-      octaveShiftSize != 22
-        &&
-      octaveShiftSize != 27
-      */
-      ) {
-      std::stringstream ss;
-
-      ss <<
-        "octave-shift size \"" << octaveShiftSize <<
-    // JMI    "\" should be 8, 15, 22 or 27";
-        "\" is wrong, should be 8 or 15, replaced by 8";
-
-  // JMI    mxsr2msrError (
-      mxsr2msrWarningWithLocationDetails (
-        gServiceRunData->getInputSourceName (),
-        inputLineNumber,
-   //     __FILE__, __LINE__,
-        ss.str ());
-//         fCurrentMeasureNumber,
-//         fMsrScore->getScoreMeasuresNumber ());
-    }
-
-    octaveShiftSize = 8;
-  }
+//   if (! octaveShiftSizeString.size ()) { // JMI v0.9.67
+//     std::stringstream ss;
+//
+//     ss <<
+//       "octave shift size absent, assuming 8";
+//
+//     mxsr2msrWarningWithLocationDetails (
+//       gServiceRunData->getInputSourceName (),
+//       inputLineNumber,
+//       ss.str ());
+// //       fCurrentMeasureNumber,
+// //       fMsrScore->getScoreMeasuresNumber ());
+//   }
+//
+//   else {
+//     std::istringstream inputStream (octaveShiftSizeString);
+//
+//     inputStream >> octaveShiftSize;
+//
+//     if (
+//       octaveShiftSize != 8
+//         &&
+//       octaveShiftSize != 15
+//       /* JMI allow larger values???
+//         &&
+//       octaveShiftSize != 22
+//         &&
+//       octaveShiftSize != 27
+//       */
+//     ) {
+//       std::stringstream ss;
+//
+//       ss <<
+//         "octave-shift size \"" << octaveShiftSize <<
+//     // JMI    "\" should be 8, 15, 22 or 27";
+//         "\" is wrong, should be 8 or 15, replaced by 8";
+//
+//   // JMI    mxsr2msrError (
+//       mxsr2msrWarningWithLocationDetails (
+//         gServiceRunData->getInputSourceName (),
+//         inputLineNumber,
+//    //     __FILE__, __LINE__,
+//         ss.str ());
+// //         fCurrentMeasureNumber,
+// //         fMsrScore->getScoreMeasuresNumber ());
+//     }
+//
+//     octaveShiftSize = 8;
+//   }
 
   // type
 
@@ -25470,11 +25474,11 @@ Bool mxsr2msrTranslator::isThereAStaffChange (
           ss.str ());
   //         fCurrentMeasureNumber,
   //         fMsrScore->getScoreMeasuresNumber ());
-      }
 
-      displayStaffAndVoiceInformation (
-        inputLineNumber,
-        "isThereAStaffChange() 3");
+        displayStaffAndVoiceInformation (
+          inputLineNumber,
+          "isThereAStaffChange() 3");
+      }
 
 #endif // MF_TRACE_IS_ENABLED
     }

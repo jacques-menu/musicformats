@@ -518,7 +518,7 @@ void msrStaff::setStaffCurrentKey (
   fStaffCurrentKey = key;
 };
 
-void msrStaff::setStaffCurrentTime (
+void msrStaff::setStaffCurrentTimeSignature (
   const S_msrTimeSignature& timeSignature){
   fStaffCurrentTimeSignature = time;
 };
@@ -2280,8 +2280,8 @@ void msrStaff::appendClefKeyTimeSignatureGroupToStaffClone (
 
   ++gIndenter;
 
-//   // set staff time signature
-//   fStaffCurrentTimeSignature = timeSignature;
+  // set staff time signature
+  fCurrentClefKeyTimeSignatureGroup = clefKeyTimeSignatureGroup;
 
   // cascade it to all voices
   for (const S_msrVoice& voice : fStaffAllVoicesList) {

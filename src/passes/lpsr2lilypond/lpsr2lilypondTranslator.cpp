@@ -9936,14 +9936,14 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrNewLyricsBlock& elt)
       case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsImplicit:
         fLilypondCodeStream <<
           "\\lyricsto \"" << elt->getVoice ()->getVoiceAlphabeticName () << "\" {" <<
-          "\\" << stanza->getStanzaName () <<
+          "\\" << stanza->getStanzaAlphabeticName () <<
           '}' <<
           std::endl;
         break;
       case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsExplicit:
         // no \lyricsto in that case
         fLilypondCodeStream <<
-          "\\" << stanza->getStanzaName () <<
+          "\\" << stanza->getStanzaAlphabeticName () <<
           std::endl;
         break;
     } // switch
@@ -13412,7 +13412,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrStanza& elt)
 
     if (fGenerateCodeForOngoingNonEmptyStanza) {
       fLilypondCodeStream <<
-        elt->getStanzaName () << " = " << "\\lyricmode {" <<
+        elt->getStanzaAlphabeticName () << " = " << "\\lyricmode {" <<
         std::endl;
 
       ++gIndenter; // decremented in visitEnd (S_msrStanza& elt)
@@ -22216,7 +22216,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrHiddenMeasureAndBarLine& elt)
 
   fLilypondCodeStream <<
     "\\HiddenMeasureAndBarLine " <<
-    "\\time 4/4";
+    "\\time 4/4"; // JMI ??? v0.9.67
 
   if (gGlobalLpsr2lilypondOahGroup->getInputLineNumbers ()) {
     fLilypondCodeStream <<
