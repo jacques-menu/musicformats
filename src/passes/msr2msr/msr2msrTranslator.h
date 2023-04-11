@@ -407,14 +407,14 @@ class EXP msr2msrTranslator :
     virtual void              visitStart (S_msrClefKeyTimeSignatureGroup& elt);
     virtual void              visitEnd   (S_msrClefKeyTimeSignatureGroup& elt);
 
-//     virtual void              visitStart (S_msrClef& elt);
-//     virtual void              visitEnd   (S_msrClef& elt);
-//
-//     virtual void              visitStart (S_msrKey& elt);
-//     virtual void              visitEnd   (S_msrKey& elt);
-//
-//     virtual void              visitStart (S_msrTimeSignature& elt);
-//     virtual void              visitEnd   (S_msrTimeSignature& elt);
+    virtual void              visitStart (S_msrClef& elt);
+    virtual void              visitEnd   (S_msrClef& elt);
+
+    virtual void              visitStart (S_msrKey& elt);
+    virtual void              visitEnd   (S_msrKey& elt);
+
+    virtual void              visitStart (S_msrTimeSignature& elt);
+    virtual void              visitEnd   (S_msrTimeSignature& elt);
 
     virtual void              visitStart (S_msrTransposition& elt);
     virtual void              visitEnd   (S_msrTransposition& elt);
@@ -705,6 +705,12 @@ class EXP msr2msrTranslator :
     // ------------------------------------------------------
     S_msrBarCheck             fLastBarCheck;
 
+
+    // clef, key, time signature
+    // ------------------------------------------------------
+
+    S_msrClefKeyTimeSignatureGroup
+                              fCurrentClefKeyTimeSignatureGroup;
 
     // dal segnos
     // ------------------------------------------------------

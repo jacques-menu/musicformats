@@ -151,6 +151,15 @@ void msrPart::initializePart ()
       "Part_"+mfStringNumbersToEnglishWords (fPartID);
   }
 
+  // time signature is crucially needed for measure positions determination:
+  // we cannot stay without any,
+  // and there may be none in the MusicXML data, so:
+
+  // set a default 4/4 time
+  fPartCurrentTimeSignature =
+    msrTimeSignature::createFourQuartersTime (
+      0); // inputLineNumber
+
   // initialize part's number of measures
   fPartNumberOfMeasures = 0;
 

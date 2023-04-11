@@ -476,10 +476,10 @@ class EXP msrStaff : public msrElement
     S_msrKey              getStaffCurrentKey  () const
                               { return fStaffCurrentKey; }
 
-    void                  setStaffCurrentTime (
+    void                  setStaffCurrentTimeSignature (
                             const S_msrTimeSignature& timeSignature);
 
-    S_msrTimeSignature    getStaffCurrentTime () const
+    S_msrTimeSignature    getStaffCurrentTimeSignature () const
                               { return fStaffCurrentTimeSignature; }
 
     // finalization

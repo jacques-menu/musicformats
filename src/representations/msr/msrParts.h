@@ -145,18 +145,6 @@ class EXP msrPart : public msrPartGroupElement
 
     void                  setPartInstrumentNamesMaxLengthes ();
 
-    // measures
-
-    void                  setPartNumberOfMeasures (
-                            size_t partNumberOfMeasures);
-
-    const size_t          getPartNumberOfMeasures () const
-                              { return fPartNumberOfMeasures; }
-
-    const std::vector<msrWholeNotes>&
-                          getPartMeasuresWholeNotessVector () const
-                              { return fPartMeasuresWholeNotessVector; }
-
     // instrument name
 
     void                  setPartInstrumentName (
@@ -175,6 +163,53 @@ class EXP msrPart : public msrPartGroupElement
 
     std::string           getPartInstrumentAbbreviation () const
                               { return fPartInstrumentAbbreviation; }
+
+    // measure number
+
+    void                  setPartCurrentMeasureNumber (
+                            const std::string& measureNumber)
+                              {
+                                fPartCurrentMeasureNumber =
+                                  measureNumber;
+                              }
+
+    const std::string     getPartCurrentMeasureNumber () const
+                              { return fPartCurrentMeasureNumber; }
+
+    // clef, key, time signature
+
+    S_msrClef             getPartCurrentClef () const
+                              { return fPartCurrentClef; }
+
+    S_msrKey              getPartCurrentKey  () const
+                              { return fPartCurrentKey; }
+
+    void                  setPartCurrentTimeSignature (
+                            const S_msrTimeSignature& timeSignature)
+                              { fPartCurrentTimeSignature = time; }
+
+    S_msrTimeSignature    getPartCurrentTimeSignature () const
+                              { return fPartCurrentTimeSignature; }
+
+    // transposition
+
+    S_msrTransposition    getPartCurrentTransposition () const
+                              { return fPartCurrentTransposition; }
+
+    // staff details
+
+    S_msrStaffDetails     getCurrentPartStaffDetails () const
+                              { return fCurrentPartStaffDetails; }
+
+    void                  setPartNumberOfMeasures (
+                            size_t partNumberOfMeasures);
+
+    const size_t          getPartNumberOfMeasures () const
+                              { return fPartNumberOfMeasures; }
+
+    const std::vector<msrWholeNotes>&
+                          getPartMeasuresWholeNotessVector () const
+                              { return fPartMeasuresWholeNotessVector; }
 
     // harmonies staff and voice
 
@@ -244,7 +279,6 @@ class EXP msrPart : public msrPartGroupElement
     const msrTupletFactor&
                           getPartShortestNoteTupletFactor () const
                               { return fPartShortestNoteTupletFactor; }
-
 
     // measures slices sequence
 
@@ -657,43 +691,6 @@ class EXP msrPart : public msrPartGroupElement
 
     // public work services
     // ------------------------------------------------------
-
-    // measure number
-
-    void                  setPartCurrentMeasureNumber (
-                            const std::string& measureNumber)
-                              {
-                                fPartCurrentMeasureNumber =
-                                  measureNumber;
-                              }
-
-    const std::string     getPartCurrentMeasureNumber () const
-                              { return fPartCurrentMeasureNumber; }
-
-    // clef, key, time signature
-
-    S_msrClef             getPartCurrentClef () const
-                              { return fPartCurrentClef; }
-
-    S_msrKey              getPartCurrentKey  () const
-                              { return fPartCurrentKey; }
-
-    void                  setPartCurrentTime (
-                            const S_msrTimeSignature& timeSignature)
-                              { fPartCurrentTimeSignature = time; }
-
-    S_msrTimeSignature    getPartCurrentTime () const
-                              { return fPartCurrentTimeSignature; }
-
-    // transposition
-
-    S_msrTransposition    getPartCurrentTransposition () const
-                              { return fPartCurrentTransposition; }
-
-    // staff details
-
-    S_msrStaffDetails     getCurrentPartStaffDetails () const
-                              { return fCurrentPartStaffDetails; }
 
     // finalization
 

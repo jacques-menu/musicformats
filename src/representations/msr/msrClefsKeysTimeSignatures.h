@@ -202,10 +202,6 @@ class EXP msrClef : public msrMeasureElement
 typedef SMARTP<msrClef> S_msrClef;
 EXP std::ostream& operator << (std::ostream& os, const S_msrClef& elt);
 
-
-
-
-
 // keys
 //______________________________________________________________________________
 
@@ -430,7 +426,6 @@ class EXP msrKey : public msrMeasureElement
     const std::vector<S_msrHumdrumScotKeyItem>&
                           getHumdrumScotKeyItemsVector () const
                               { return fHumdrumScotKeyItemsVector; }
-
 
   public:
 
@@ -821,6 +816,8 @@ class EXP msrClefKeyTimeSignatureGroup : public msrMeasureElement
     static SMARTP<msrClefKeyTimeSignatureGroup> create (
                             int inputLineNumber,
                             int groupInputLineNumber);
+
+    SMARTP<msrClefKeyTimeSignatureGroup> createClefKeyTimeSignatureGroupNewbornClone ();
 
   protected:
 

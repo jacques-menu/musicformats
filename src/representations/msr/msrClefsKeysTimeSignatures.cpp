@@ -241,10 +241,69 @@ msrClefKeyTimeSignatureGroup::msrClefKeyTimeSignatureGroup (
   fGroupInputLineNumber = groupInputLineNumber;
 
   fGroupItemsNumber = 0;
+
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceClefKeyTimeSignatureGroups ()) {
+    std::stringstream ss;
+
+    ss <<
+      "Creating an msrClefKeyTimeSignatureGroup" <<
+      ", groupInputLineNumber: " << groupInputLineNumber <<
+      ", line " << inputLineNumber <<
+      std::endl;
+
+    gWaeHandler->waeTraceWithLocationDetails (
+      __FILE__, __LINE__,
+      ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
+  }
+#endif // MF_TRACE_IS_ENABLED
 }
 
 msrClefKeyTimeSignatureGroup::~msrClefKeyTimeSignatureGroup ()
 {}
+
+S_msrClefKeyTimeSignatureGroup msrClefKeyTimeSignatureGroup::createClefKeyTimeSignatureGroupNewbornClone ()
+{
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceClefKeyTimeSignatureGroups ()) {
+    std::stringstream ss;
+
+    ss <<
+      "Creating a newborn clone of msrClefKeyTimeSignatureGroup " <<
+      asString () <<
+      std::endl;
+
+    gWaeHandler->waeTraceWithLocationDetails (
+      __FILE__, __LINE__,
+      ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  S_msrClefKeyTimeSignatureGroup
+    newbornClone =
+      msrClefKeyTimeSignatureGroup::create (
+        fInputLineNumber,
+        fGroupItemsNumber);
+
+  // JMI ??? v0.9.67
+  if (fClef)
+  newbornClone->
+    setClef (fClef);
+
+  if (fKey)
+  newbornClone->
+    setKey (fKey);
+
+  if (fTimeSignature)
+  newbornClone->
+    setTimeSignature (fTimeSignature);
+
+  return newbornClone;
+}
 
 void msrClefKeyTimeSignatureGroup::setClefKeyTimeSignatureGroupUpLinkToMeasure (
   const S_msrMeasure& measure)
@@ -278,6 +337,42 @@ void msrClefKeyTimeSignatureGroup::setClefKeyTimeSignatureGroupUpLinkToMeasure (
 
 void msrClefKeyTimeSignatureGroup::setClef (const S_msrClef& clef)
 {
+  if (! clef) {
+    gLog <<
+      __FILE__ <<
+      ":" <<
+      __LINE__ <<
+      ", " <<
+      "clef is null" <<
+      std::endl;
+    abort ();
+  }
+
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
+  // sanity check
+  mfAssert (
+    __FILE__, __LINE__,
+    clef != nullptr,
+    "clef is null");
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
+
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceClefKeyTimeSignatureGroups ()) {
+    std::stringstream ss;
+
+    ss <<
+      "Setting the msrClefKeyTimeSignatureGroup clef to " <<
+      clef->asString () <<
+      std::endl;
+
+    gWaeHandler->waeTraceWithLocationDetails (
+      __FILE__, __LINE__,
+      ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
   if (fClef) {
     --fGroupItemsNumber;
   }
@@ -296,6 +391,31 @@ S_msrClef msrClefKeyTimeSignatureGroup::getClef () const
 
 void msrClefKeyTimeSignatureGroup::setKey (const S_msrKey& key)
 {
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
+  // sanity check
+  mfAssert (
+    __FILE__, __LINE__,
+    key != nullptr,
+    "key is null");
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
+
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceClefKeyTimeSignatureGroups ()) {
+    std::stringstream ss;
+
+    ss <<
+      "Setting the msrClefKeyTimeSignatureGroup key to " <<
+      key->asString () <<
+      std::endl;
+
+    gWaeHandler->waeTraceWithLocationDetails (
+      __FILE__, __LINE__,
+      ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
   if (key) {
     --fGroupItemsNumber;
   }
@@ -315,6 +435,31 @@ S_msrKey msrClefKeyTimeSignatureGroup::getKey () const
 void msrClefKeyTimeSignatureGroup::setTimeSignature (
   const S_msrTimeSignature& timeSignature)
 {
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
+  // sanity check
+  mfAssert (
+    __FILE__, __LINE__,
+    timeSignature != nullptr,
+    "timeSignature is null");
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
+
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceClefKeyTimeSignatureGroups ()) {
+    std::stringstream ss;
+
+    ss <<
+      "Setting the msrClefKeyTimeSignatureGroup time signature to " <<
+      timeSignature->asString () <<
+      std::endl;
+
+    gWaeHandler->waeTraceWithLocationDetails (
+      __FILE__, __LINE__,
+      ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
   if (timeSignature) {
     --fGroupItemsNumber;
   }
@@ -423,6 +568,23 @@ void msrClefKeyTimeSignatureGroup::browseData (basevisitor* v)
 
     ss <<
       "% ==> msrClefKeyTimeSignatureGroup::browseData ()" <<
+      std::endl;
+
+    gWaeHandler->waeTraceWithLocationDetails (
+      __FILE__, __LINE__,
+      ss.str ());
+//       gServiceRunData->getCurrentMeasureNumber (),
+//       gServiceRunData->getScoreMeasuresNumber ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceClefKeyTimeSignatureGroups ()) {
+    std::stringstream ss;
+
+    ss <<
+      "--> msrClefKeyTimeSignatureGroup::browseData(),  this: " <<
+      asString () <<
       std::endl;
 
     gWaeHandler->waeTraceWithLocationDetails (

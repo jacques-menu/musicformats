@@ -2566,7 +2566,8 @@ void msr2msrTranslator::visitStart (S_msrClefKeyTimeSignatureGroup& elt)
     std::stringstream ss;
 
     ss <<
-      "--> Start visiting msrClefKeyTimeSignatureGroup" <<
+      "--> Start visiting msrClefKeyTimeSignatureGroup " <<
+      elt->asString () <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
 
@@ -2578,8 +2579,18 @@ void msr2msrTranslator::visitStart (S_msrClefKeyTimeSignatureGroup& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
+  // create an msrClefKeyTimeSignatureGroup clone
+  fCurrentClefKeyTimeSignatureGroup =
+    elt->createClefKeyTimeSignatureGroupNewbornClone ();
+
+  // append it to the current voice clone
   fCurrentVoiceClone->
-    appendClefKeyTimeSignatureGroupToVoice (elt);
+    appendClefKeyTimeSignatureGroupToVoice (
+      fCurrentClefKeyTimeSignatureGroup);
+
+  fCurrentStaffClone->
+    appendClefKeyTimeSignatureGroupToStaffClone (
+      fCurrentClefKeyTimeSignatureGroup);
 }
 
 void msr2msrTranslator::visitEnd (S_msrClefKeyTimeSignatureGroup& elt)
@@ -2602,138 +2613,158 @@ void msr2msrTranslator::visitEnd (S_msrClefKeyTimeSignatureGroup& elt)
 #endif // MF_TRACE_IS_ENABLED
 }
 
-// //________________________________________________________________________
-// void msr2msrTranslator::visitStart (S_msrClef& elt)
-// {
-// #ifdef MF_TRACE_IS_ENABLED
-//   if (gMsrOahGroup->getTraceMsrVisitors ()) {
-//     std::stringstream ss;
-//
-//     ss <<
-//       "--> Start visiting msrClef" <<
-//       ", line " << elt->getInputLineNumber () <<
-//       std::endl;
-//
-//     gWaeHandler->waeTraceWithLocationDetails (
-//       __FILE__, __LINE__,
-//       ss.str ());
-// //       fCurrentMeasureNumber,
-// //       fVisitedMsrScore->getScoreMeasuresNumber ());
-//   }
-// #endif // MF_TRACE_IS_ENABLED
-//
-//   fCurrentVoiceClone->
-//     appendClefToVoice (elt);
-// }
-//
-// void msr2msrTranslator::visitEnd (S_msrClef& elt)
-// {
-// #ifdef MF_TRACE_IS_ENABLED
-//   if (gMsrOahGroup->getTraceMsrVisitors ()) {
-//     std::stringstream ss;
-//
-//     ss <<
-//       "--> End visiting msrClef" <<
-//       ", line " << elt->getInputLineNumber () <<
-//       std::endl;
-//
-//     gWaeHandler->waeTraceWithLocationDetails (
-//       __FILE__, __LINE__,
-//       ss.str ());
-// //       fCurrentMeasureNumber,
-// //       fVisitedMsrScore->getScoreMeasuresNumber ());
-//   }
-// #endif // MF_TRACE_IS_ENABLED
-// }
-//
-// //________________________________________________________________________
-// void msr2msrTranslator::visitStart (S_msrKey& elt)
-// {
-// #ifdef MF_TRACE_IS_ENABLED
-//   if (gMsrOahGroup->getTraceMsrVisitors ()) {
-//     std::stringstream ss;
-//
-//     ss <<
-//       "--> Start visiting msrKey" <<
-//       ", line " << elt->getInputLineNumber () <<
-//       std::endl;
-//
-//     gWaeHandler->waeTraceWithLocationDetails (
-//       __FILE__, __LINE__,
-//       ss.str ());
-// //       fCurrentMeasureNumber,
-// //       fVisitedMsrScore->getScoreMeasuresNumber ());
-//   }
-// #endif // MF_TRACE_IS_ENABLED
-//
-//   fCurrentVoiceClone->
-//     appendKeyToVoice (elt);
-// }
-//
-// void msr2msrTranslator::visitEnd (S_msrKey& elt)
-// {
-// #ifdef MF_TRACE_IS_ENABLED
-//   if (gMsrOahGroup->getTraceMsrVisitors ()) {
-//     std::stringstream ss;
-//
-//     ss <<
-//       "--> End visiting msrKey" <<
-//       ", line " << elt->getInputLineNumber () <<
-//       std::endl;
-//
-//     gWaeHandler->waeTraceWithLocationDetails (
-//       __FILE__, __LINE__,
-//       ss.str ());
-// //       fCurrentMeasureNumber,
-// //       fVisitedMsrScore->getScoreMeasuresNumber ());
-//   }
-// #endif // MF_TRACE_IS_ENABLED
-// }
-//
-// //________________________________________________________________________
-// void msr2msrTranslator::visitStart (S_msrTimeSignature& elt)
-// {
-// #ifdef MF_TRACE_IS_ENABLED
-//   if (gMsrOahGroup->getTraceMsrVisitors ()) {
-//     std::stringstream ss;
-//
-//     ss <<
-//       "--> Start visiting msrTimeSignature" <<
-//       ", line " << elt->getInputLineNumber () <<
-//       std::endl;
-//
-//     gWaeHandler->waeTraceWithLocationDetails (
-//       __FILE__, __LINE__,
-//       ss.str ());
-// //       fCurrentMeasureNumber,
-// //       fVisitedMsrScore->getScoreMeasuresNumber ());
-//   }
-// #endif // MF_TRACE_IS_ENABLED
-//
-//   // append time to voice clone
-//   fCurrentVoiceClone->
-//     appendTimeSignatureToVoice (elt);
-// }
-//
-// void msr2msrTranslator::visitEnd (S_msrTimeSignature& elt)
-// {
-// #ifdef MF_TRACE_IS_ENABLED
-//   if (gMsrOahGroup->getTraceMsrVisitors ()) {
-//     std::stringstream ss;
-//
-//     ss <<
-//       "--> End visiting msrTimeSignature" <<
-//       ", line " << elt->getInputLineNumber () <<
-//       std::endl;
-//
-//     gWaeHandler->waeTraceWithLocationDetails (
-//       __FILE__, __LINE__,
-//       ss.str ());
-// //       fCurrentMeasureNumber,
-// //       fVisitedMsrScore->getScoreMeasuresNumber ());
-//   }
-// #endif // MF_TRACE_IS_ENABLED
-// }
+//________________________________________________________________________
+void msr2msrTranslator::visitStart (S_msrClef& elt)
+{
+#ifdef MF_TRACE_IS_ENABLED
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
+    std::stringstream ss;
+
+    ss <<
+      "--> Start visiting msrClef " <<
+      elt->asString () <<
+      ", line " << elt->getInputLineNumber () <<
+      std::endl;
+
+    gWaeHandler->waeTraceWithLocationDetails (
+      __FILE__, __LINE__,
+      ss.str ());
+//       fCurrentMeasureNumber,
+//       fVisitedMsrScore->getScoreMeasuresNumber ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  // store clef in fCurrentClefKeyTimeSignatureGroup
+  fCurrentClefKeyTimeSignatureGroup->
+    setClef (elt);
+
+  fCurrentStaffClone->
+    appendClefToStaff (
+      fCurrentClefKeyTimeSignatureGroup->getGroupInputLineNumber (),
+      elt);
+}
+
+void msr2msrTranslator::visitEnd (S_msrClef& elt)
+{
+#ifdef MF_TRACE_IS_ENABLED
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
+    std::stringstream ss;
+
+    ss <<
+      "--> End visiting msrClef" <<
+      ", line " << elt->getInputLineNumber () <<
+      std::endl;
+
+    gWaeHandler->waeTraceWithLocationDetails (
+      __FILE__, __LINE__,
+      ss.str ());
+//       fCurrentMeasureNumber,
+//       fVisitedMsrScore->getScoreMeasuresNumber ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+}
+
+//________________________________________________________________________
+void msr2msrTranslator::visitStart (S_msrKey& elt)
+{
+#ifdef MF_TRACE_IS_ENABLED
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
+    std::stringstream ss;
+
+    ss <<
+      "--> Start visiting msrKey " <<
+      elt->asString () <<
+      ", line " << elt->getInputLineNumber () <<
+      std::endl;
+
+    gWaeHandler->waeTraceWithLocationDetails (
+      __FILE__, __LINE__,
+      ss.str ());
+//       fCurrentMeasureNumber,
+//       fVisitedMsrScore->getScoreMeasuresNumber ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  // store key in fCurrentClefKeyTimeSignatureGroup
+  fCurrentClefKeyTimeSignatureGroup->
+    setKey (elt);
+
+  fCurrentStaffClone->
+    appendKeyToStaff (
+      fCurrentClefKeyTimeSignatureGroup->getGroupInputLineNumber (),
+      elt);
+}
+
+void msr2msrTranslator::visitEnd (S_msrKey& elt)
+{
+#ifdef MF_TRACE_IS_ENABLED
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
+    std::stringstream ss;
+
+    ss <<
+      "--> End visiting msrKey" <<
+      ", line " << elt->getInputLineNumber () <<
+      std::endl;
+
+    gWaeHandler->waeTraceWithLocationDetails (
+      __FILE__, __LINE__,
+      ss.str ());
+//       fCurrentMeasureNumber,
+//       fVisitedMsrScore->getScoreMeasuresNumber ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+}
+
+//________________________________________________________________________
+void msr2msrTranslator::visitStart (S_msrTimeSignature& elt)
+{
+#ifdef MF_TRACE_IS_ENABLED
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
+    std::stringstream ss;
+
+    ss <<
+      "--> Start visiting msrTimeSignature" <<
+      elt->asString () <<
+      ", line " << elt->getInputLineNumber () <<
+      std::endl;
+
+    gWaeHandler->waeTraceWithLocationDetails (
+      __FILE__, __LINE__,
+      ss.str ());
+//       fCurrentMeasureNumber,
+//       fVisitedMsrScore->getScoreMeasuresNumber ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  // store time signature in fCurrentClefKeyTimeSignatureGroup
+  fCurrentClefKeyTimeSignatureGroup->
+    setTimeSignature (elt);
+
+  fCurrentStaffClone->
+    appendTimeSignatureToStaff (
+      fCurrentClefKeyTimeSignatureGroup->getGroupInputLineNumber (),
+      elt);
+}
+
+void msr2msrTranslator::visitEnd (S_msrTimeSignature& elt)
+{
+#ifdef MF_TRACE_IS_ENABLED
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
+    std::stringstream ss;
+
+    ss <<
+      "--> End visiting msrTimeSignature" <<
+      ", line " << elt->getInputLineNumber () <<
+      std::endl;
+
+    gWaeHandler->waeTraceWithLocationDetails (
+      __FILE__, __LINE__,
+      ss.str ());
+//       fCurrentMeasureNumber,
+//       fVisitedMsrScore->getScoreMeasuresNumber ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+}
 
 //________________________________________________________________________
 void msr2msrTranslator::visitStart (S_msrTransposition& elt)
