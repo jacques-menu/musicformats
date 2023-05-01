@@ -61,8 +61,7 @@ void msrWords::acceptIn (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrWords::acceptIn ()" <<
-      std::endl;
+      "% ==> msrWords::acceptIn ()";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -80,8 +79,7 @@ void msrWords::acceptIn (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrWords::visitStart ()" <<
-            std::endl;
+            "% ==> Launching msrWords::visitStart ()";
 
           gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
@@ -198,8 +196,7 @@ void mxsr2msrTranslator::visitStart ( S_millimeters& elt )
 
 		ss <<
       "--> Start visiting S_millimeters" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -218,8 +215,7 @@ void mxsr2msrTranslator::visitStart ( S_tenths& elt )
 
 		ss <<
       "--> Start visiting S_tenths" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -241,8 +237,7 @@ void mxsr2msrTranslator::visitEnd ( S_scaling& elt)
 
 		ss <<
       "--> End visiting S_scaling" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -262,8 +257,7 @@ void mxsr2msrTranslator::visitEnd ( S_scaling& elt)
   if (gTraceOahGroup->getTraceGeometry ()) {
     gLog <<
       "There are " << fCurrentTenths <<
-      " tenths for " <<  fCurrentMillimeters <<
-      std::endl;
+      " tenths for " <<  fCurrentMillimeters;
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -437,8 +431,7 @@ void msrNote::browseData (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> visiting grace notes groups 'before' is inhibited" <<
-            std::endl;
+            "% ==> visiting grace notes groups 'before' is inhibited";
 
           gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
@@ -500,8 +493,7 @@ void msrStaff::browseData (basevisitor* v)
           ss <<
             "Ignoring voice \"" <<
             voiceName <<
-            "\"" <<
-            std::endl;
+            "\"";
 
           gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,

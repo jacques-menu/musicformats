@@ -67,14 +67,11 @@ void msrSingleTremolo::acceptIn (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrSingleTremolo::acceptIn ()" <<
-      std::endl;
+      "% ==> msrSingleTremolo::acceptIn ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -88,14 +85,11 @@ void msrSingleTremolo::acceptIn (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrSingleTremolo::visitStart ()" <<
-            std::endl;
+            "% ==> Launching msrSingleTremolo::visitStart ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
@@ -109,14 +103,11 @@ void msrSingleTremolo::acceptOut (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrSingleTremolo::acceptOut ()" <<
-      std::endl;
+      "% ==> msrSingleTremolo::acceptOut ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -130,14 +121,11 @@ void msrSingleTremolo::acceptOut (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrSingleTremolo::visitEnd ()" <<
-            std::endl;
+            "% ==> Launching msrSingleTremolo::visitEnd ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif        
         p->visitEnd (elem);

@@ -86,8 +86,7 @@ S_msrScore translateMsrToMsr (
       gTab <<
       gLanguage->passIDKindAsString (passIDKind) << ": " << passDescription <<
       std::endl <<
-      separator <<
-      std::endl;
+      separator;
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -223,8 +222,7 @@ S_msrScore translateMsrToMsrAlongPathToVoice (
       gTab <<
       gLanguage->passIDKindAsString (passIDKind) << ": " << passDescription <<
       std::endl <<
-      separator <<
-      std::endl;
+      separator;
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,

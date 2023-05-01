@@ -32,8 +32,7 @@ S_mfcOahComponent createOahComponent ()
       std::stringstream ss;
 
       ss <<
-        "Creating the OAH component" <<
-        std::endl;
+        "Creating the OAH component";
 
       gWaeHandler->waeTraceWithoutLocationDetails (
         __FILE__, __LINE__,

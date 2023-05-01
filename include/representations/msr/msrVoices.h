@@ -167,13 +167,6 @@ class EXP msrVoice : public msrElement
 {
   public:
 
-    // constants
-    // ------------------------------------------------------
-
-    static const int K_VOICE_NUMBER_UNKNOWN_;
-    static const int K_VOICE_HARMONIES_VOICE_BASE_NUMBER;
-    static const int K_VOICE_FIGURED_BASS_VOICE_BASE_NUMBER;
-
     // creation from MusicXML
     // ------------------------------------------------------
 
@@ -487,7 +480,7 @@ class EXP msrVoice : public msrElement
     // dal segno
 
     void                  insertHiddenMeasureAndBarLineInVoiceClone (
-                            int             inputLineNumber,
+                            int                  inputLineNumber,
                             const msrWholeNotes& measurePosition);
 
     // notes
@@ -748,10 +741,9 @@ class EXP msrVoice : public msrElement
                             int inputLineNumber);
 
     void                  handleRepeatEndingEndInVoice (
-                            int                inputLineNumber,
-                            const std::string& repeatEndingNumber, // may be "1, 2"
-                            msrRepeatEndingKind
-                                               repeatEndingKind);
+                            int                 inputLineNumber,
+                            const std::string&  repeatEndingNumber, // may be "1, 2"
+                            msrRepeatEndingKind repeatEndingKind);
 
     void                  handleRepeatCommonPartStartInVoiceClone (
                             int inputLineNumber);
@@ -760,16 +752,14 @@ class EXP msrVoice : public msrElement
                             int inputLineNumber);
 
     void                  handleRepeatEndingStartInVoiceClone (
-                            int                inputLineNumber,
-                            msrRepeatEndingKind
-                                               repeatEndingKind,
-                            const std::string& repeatEndingNumber); // may be "1, 2"
+                            int                 inputLineNumber,
+                            msrRepeatEndingKind repeatEndingKind,
+                            const std::string&  repeatEndingNumber); // may be "1, 2"
 
     void                  handleRepeatEndingEndInVoiceClone (
-                            int                inputLineNumber,
-                            const std::string& repeatEndingNumber, // may be "1, 2"
-                            msrRepeatEndingKind
-                                               repeatEndingKind);
+                            int                 inputLineNumber,
+                            const std::string&  repeatEndingNumber, // may be "1, 2"
+                            msrRepeatEndingKind repeatEndingKind);
 
     void                  handleSegmentCloneEndInVoiceClone (
                             int                 inputLineNumber,
@@ -786,14 +776,14 @@ class EXP msrVoice : public msrElement
                             int inputLineNumber);
 
     void                  handleRepeatStartInVoiceClone (
-                            int         inputLineNumber,
+                            int                inputLineNumber,
                             const S_msrRepeat& repeat);
 
     void                  handleRepeatEndInVoiceClone (
                             int inputLineNumber);
 
     void                  appendRepeatCloneToVoiceClone (
-                            int         inputLineNumber,
+                            int                inputLineNumber,
                             const S_msrRepeat& repeatCLone);
 
     void                  appendRepeatEndingCloneToVoice (
@@ -809,7 +799,7 @@ class EXP msrVoice : public msrElement
                             int multipleFullBarRestsMeasuresNumber); // JMI USELESS??? JMI v0.9.67
 
     void                  appendMultipleFullBarRestsToVoice (
-                            int                       inputLineNumber,
+                            int                              inputLineNumber,
                             const S_msrMultipleFullBarRests& multipleFullBarRests);
 
     void                  replicateLastAppendedMeasureInVoice (
@@ -825,7 +815,7 @@ class EXP msrVoice : public msrElement
                             int inputLineNumber);
 
     void                  handleMultipleFullBarRestsStartInVoiceClone (
-                            int                       inputLineNumber,
+                            int                              inputLineNumber,
                             const S_msrMultipleFullBarRests& multipleFullBarRests);
 
     void                  handleMultipleFullBarRestsEndInVoiceClone (
@@ -838,7 +828,7 @@ class EXP msrVoice : public msrElement
 //                             int inputLineNumber);
 
     void                  appendMultipleFullBarRestsCloneToVoiceClone ( // JMI ???
-                            int                       inputLineNumber,
+                            int                              inputLineNumber,
                             const S_msrMultipleFullBarRests& multipleFullBarRestsClone);
 
     // measure repeats
@@ -855,7 +845,7 @@ class EXP msrVoice : public msrElement
                             int beatRepeatSlashesNumber);
 
     void                  appendMeasureRepeatToVoice (
-                            int                inputLineNumber,
+                            int                       inputLineNumber,
                             const S_msrMeasureRepeat& beatRepeat);
 
     void                  appendPendingMeasureRepeatToVoice (
@@ -867,7 +857,7 @@ class EXP msrVoice : public msrElement
                             int beatRepeatSlashesNumber);
 
     void                  handleMeasureRepeatStartInVoiceClone (
-                            int                inputLineNumber,
+                            int                       inputLineNumber,
                             const S_msrMeasureRepeat& beatRepeat);
 
     void                  handleMeasureRepeatEndInVoiceClone (
@@ -886,7 +876,7 @@ class EXP msrVoice : public msrElement
                             int inputLineNumber);
 
     void                  appendMeasureRepeatCloneToVoiceClone ( // JMI ???
-                            int                inputLineNumber,
+                            int                       inputLineNumber,
                             const S_msrMeasureRepeat& beatRepeatClone);
 
     // stanzas

@@ -89,14 +89,11 @@ S_msrChord msrChord::create (
       ", chordSoundingWholeNotes: " << chordSoundingWholeNotes.asString () <<
       ", chordDisplayWholeNotes: " << chordDisplayWholeNotes.asString () <<
       ", chordGraphicNotesDuration: " <<
-      msrNotesDurationKindAsString (chordGraphicNotesDurationKind) <<
-      std::endl;
+      msrNotesDurationKindAsString (chordGraphicNotesDurationKind);
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -125,14 +122,11 @@ S_msrChord msrChord::create (
       ", chordSoundingWholeNotes: " << chordSoundingWholeNotes.asString () <<
       ", chordDisplayWholeNotes: " << chordDisplayWholeNotes.asString () <<
       ", chordGraphicNotesDuration: " <<
-      msrNotesDurationKindAsString (chordGraphicNotesDurationKind) <<
-      std::endl;
+      msrNotesDurationKindAsString (chordGraphicNotesDurationKind);
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -182,14 +176,11 @@ S_msrChord msrChord::createChordNewbornClone (
     ss <<
       "Creating a newborn clone of chord '" <<
       asString () <<
-      "'" <<
-      std::endl;
+      "'";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -342,8 +333,6 @@ void msrChord::setChordUpLinkToMeasure (
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -434,14 +423,11 @@ void msrChord::setChordDisplayWholeNotes (
       wholeNotes.asString () <<
       "' for chord '" <<
       asString () <<
-      "'" <<
-      std::endl;
+      "'";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -462,14 +448,11 @@ void msrChord::setChordGraceNotesGroupLinkBefore (
       asString () <<
       " to " <<
       chordChordGraceNotesGroupLinkBefore->asShortString () <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -491,14 +474,11 @@ void msrChord::setChordGraceNotesGroupLinkAfter (
       asString () <<
       " to " <<
       chordChordGraceNotesGroupLinkAfter->asShortString () <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -533,14 +513,11 @@ void msrChord::setMeasurePosition (
       upLinkToMeasure->getMeasureNumber () <<
       "), context: \"" <<
       context <<
-      "\"" <<
-      std::endl;
+      "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -568,14 +545,11 @@ void msrChord::setChordMembersMeasurePosition (
       "Setting chord members measure positions of " << asString () <<
       " to " <<
       measurePosition.asString () <<
-      ", fChordNotesVector.size(): " << fChordNotesVector.size () <<
-      std::endl;
+      ", fChordNotesVector.size(): " << fChordNotesVector.size ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -628,14 +602,11 @@ void msrChord::addFirstNoteToChord (
       note->asString () <<
       "' to chord '" <<
       asString () <<
-      "'" <<
-      std::endl;
+      "'";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -693,14 +664,11 @@ void msrChord::addAnotherNoteToChord (
       note->asShortString () <<
       "' to chord '" <<
       asString () <<
-      "'" <<
-      std::endl;
+      "'";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -760,14 +728,11 @@ void msrChord::appendDalSegnoToChord (
       "Appending dal segno " <<
       dalSegno->asShortString () <<
       " to chord " <<
-      asShortString () <<
-      std::endl;
+      asShortString ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -795,14 +760,11 @@ void msrChord::appendArticulationToChord (
     ss <<
       "Appending articulation '" <<
       art->getArticulationKind () <<
-      "' to chord" <<
-      std::endl;
+      "' to chord";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -831,14 +793,11 @@ void msrChord::appendSpannerToChord (
       "Appending spanner " <<
       span->asString () <<
       " to chord " <<
-      asString () <<
-      std::endl;
+      asString ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -855,14 +814,11 @@ void msrChord::setChordSingleTremolo (
     ss <<
       "Adding singleTremolo '" <<
       trem->asString () <<
-      "' to chord" <<
-      std::endl;
+      "' to chord";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -895,14 +851,11 @@ void msrChord::appendTechnicalToChord (
     ss <<
       "Appending technical '" <<
       tech->asString () <<
-      "' to chord" <<
-      std::endl;
+      "' to chord";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -935,14 +888,11 @@ void msrChord::appendTechnicalWithIntegerToChord (
     ss <<
       "Appending technical with integer '" <<
       tech->asString () <<
-      "' to chord" <<
-      std::endl;
+      "' to chord";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -975,14 +925,11 @@ void msrChord::appendTechnicalWithFloatToChord (
     ss <<
       "Appending technical with integer '" <<
       tech->asString () <<
-      "' to chord" <<
-      std::endl;
+      "' to chord";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1015,14 +962,11 @@ void msrChord::appendTechnicalWithStringToChord (
     ss <<
       "Appending technical with string '" <<
       tech->asString () <<
-      "' to chord" <<
-      std::endl;
+      "' to chord";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1050,14 +994,11 @@ void msrChord::appendOrnamentToChord (
     ss <<
       "Appending ornament '" <<
       msrOrnamentKindAsString (orn->getOrnamentKind ()) <<
-      "' to chord" <<
-      std::endl;
+      "' to chord";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1085,14 +1026,11 @@ void msrChord::appendGlissandoToChord (
     ss <<
       "Appending glissando '" <<
       gliss->asString () <<
-      "' to chord" <<
-      std::endl;
+      "' to chord";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1124,14 +1062,11 @@ void msrChord::appendSlideToChord (
     ss <<
       "Appending slide '" <<
       slide->asString () <<
-      "' to chord" <<
-      std::endl;
+      "' to chord";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1147,14 +1082,11 @@ void msrChord::appendChordSlurLinkToChord (
 
     ss <<
       "Adding slur link '" << chordSlurLink->asString() <<
-      "' to chord '" << asString () << "'" <<
-      std::endl;
+      "' to chord '" << asString () << "'";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1170,14 +1102,11 @@ void msrChord::appendStemToChord (
 
     ss <<
       "Adding stem '" << stem->asString() <<
-      "' to chord '" << asString () << "'" <<
-      std::endl;
+      "' to chord '" << asString () << "'";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1220,14 +1149,11 @@ void msrChord::appendBeamToChord (const S_msrBeam& beam)
     ss <<
       "Appending beam '" <<
       beam->asString () <<
-      "' to chord" <<
-      std::endl;
+      "' to chord";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1244,14 +1170,11 @@ void msrChord::appendChordBeamLinkToChord (
 
     ss <<
       "Adding beam link '" << chordBeamLink->asString() <<
-      "' to chord '" << asString () << "'" <<
-      std::endl;
+      "' to chord '" << asString () << "'";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1272,14 +1195,11 @@ void msrChord::finalizeChord (
       std::endl <<
       "fMeasurePosition: " <<
       std::endl <<
-      fMeasurePosition.asString () <<
-      std::endl;
+      fMeasurePosition.asString ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1297,14 +1217,11 @@ void msrChord::acceptIn (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrChord::acceptIn ()" <<
-      std::endl;
+      "% ==> msrChord::acceptIn ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1318,14 +1235,11 @@ void msrChord::acceptIn (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrChord::visitStart ()" <<
-            std::endl;
+            "% ==> Launching msrChord::visitStart ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
@@ -1339,14 +1253,11 @@ void msrChord::acceptOut (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrChord::acceptOut ()" <<
-      std::endl;
+      "% ==> msrChord::acceptOut ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1360,14 +1271,11 @@ void msrChord::acceptOut (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrChord::visitEnd ()" <<
-            std::endl;
+            "% ==> Launching msrChord::visitEnd ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
@@ -1406,8 +1314,6 @@ void msrChord::browseData (basevisitor* v)
         gWaeHandler->waeTraceWithLocationDetails (
           __FILE__, __LINE__,
           ss.str ());
-//           gServiceRunData->getCurrentMeasureNumber (),
-//           gServiceRunData->getScoreMeasuresNumber ());
       }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1830,7 +1736,7 @@ void msrChord::printFull (std::ostream& os) const
     chordMeasureFullLength =
       fChordUpLinkToMeasure
         ? fChordUpLinkToMeasure->
-            getFullMeasureWholeNotes ()
+            getFullMeasureCurrentWholeNotesDuration ()
         : msrWholeNotes (0, 1); // JMI
 
   os <<
@@ -2625,7 +2531,7 @@ void msrChord::print (std::ostream& os) const
     chordMeasureFullLength =
       fChordUpLinkToMeasure
         ? fChordUpLinkToMeasure->
-            getFullMeasureWholeNotes ()
+            getFullMeasureCurrentWholeNotesDuration ()
         : msrWholeNotes (0, 1); // JMI
 
   os <<
@@ -3463,14 +3369,11 @@ S_msrChordBeamLink msrChordBeamLink::createBeamNewbornClone ()
     ss <<
       "Creating a newborn clone of grace notes group link '" <<
       asShortString () <<
-      "'" <<
-      std::endl;
+      "'";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -3501,14 +3404,11 @@ void msrChordBeamLink::acceptIn (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrChordBeamLink::acceptIn ()" <<
-      std::endl;
+      "% ==> msrChordBeamLink::acceptIn ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -3522,14 +3422,11 @@ void msrChordBeamLink::acceptIn (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrChordBeamLink::visitStart ()" <<
-            std::endl;
+            "% ==> Launching msrChordBeamLink::visitStart ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
@@ -3543,14 +3440,11 @@ void msrChordBeamLink::acceptOut (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrChordBeamLink::acceptOut ()" <<
-      std::endl;
+      "% ==> msrChordBeamLink::acceptOut ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -3564,14 +3458,11 @@ void msrChordBeamLink::acceptOut (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrChordBeamLink::visitEnd ()" <<
-            std::endl;
+            "% ==> Launching msrChordBeamLink::visitEnd ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
@@ -3735,14 +3626,11 @@ S_msrChordSlurLink msrChordSlurLink::createSlurNewbornClone ()
     ss <<
       "Creating a newborn clone of grace notes group link '" <<
       asShortString () <<
-      "'" <<
-      std::endl;
+      "'";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -3773,14 +3661,11 @@ void msrChordSlurLink::acceptIn (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrChordSlurLink::acceptIn ()" <<
-      std::endl;
+      "% ==> msrChordSlurLink::acceptIn ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -3794,14 +3679,11 @@ void msrChordSlurLink::acceptIn (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrChordSlurLink::visitStart ()" <<
-            std::endl;
+            "% ==> Launching msrChordSlurLink::visitStart ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
@@ -3815,14 +3697,11 @@ void msrChordSlurLink::acceptOut (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrChordSlurLink::acceptOut ()" <<
-      std::endl;
+      "% ==> msrChordSlurLink::acceptOut ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -3836,14 +3715,11 @@ void msrChordSlurLink::acceptOut (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrChordSlurLink::visitEnd ()" <<
-            std::endl;
+            "% ==> Launching msrChordSlurLink::visitEnd ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
@@ -3979,14 +3855,11 @@ S_msrChordGraceNotesGroupLink msrChordGraceNotesGroupLink::createChordGraceNotes
     ss <<
       "Creating a newborn clone of grace notes group link '" <<
       asShortString () <<
-      "'" <<
-      std::endl;
+      "'";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -4017,14 +3890,11 @@ void msrChordGraceNotesGroupLink::acceptIn (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrChordGraceNotesGroupLink::acceptIn ()" <<
-      std::endl;
+      "% ==> msrChordGraceNotesGroupLink::acceptIn ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -4038,14 +3908,11 @@ void msrChordGraceNotesGroupLink::acceptIn (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrChordGraceNotesGroupLink::visitStart ()" <<
-            std::endl;
+            "% ==> Launching msrChordGraceNotesGroupLink::visitStart ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
@@ -4059,14 +3926,11 @@ void msrChordGraceNotesGroupLink::acceptOut (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrChordGraceNotesGroupLink::acceptOut ()" <<
-      std::endl;
+      "% ==> msrChordGraceNotesGroupLink::acceptOut ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -4080,14 +3944,11 @@ void msrChordGraceNotesGroupLink::acceptOut (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrChordGraceNotesGroupLink::visitEnd ()" <<
-            std::endl;
+            "% ==> Launching msrChordGraceNotesGroupLink::visitEnd ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);

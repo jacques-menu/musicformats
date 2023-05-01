@@ -69,8 +69,7 @@ EXP void translateMxsrToMusicXML (
       gTab <<
       gLanguage->passIDKindAsString (passIDKind) << ": " << passDescription <<
       std::endl <<
-      separator <<
-      std::endl;
+      separator;
 
     gWaeHandler->waeTraceToStream (
       err,

@@ -57,14 +57,11 @@ void msrIdentification::setIdentificationWorkNumber (
     std::stringstream ss;
 
     ss <<
-      "Setting workNumber to \"" << val << "\"" <<
-      std::endl;
+      "Setting workNumber to \"" << val << "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -80,14 +77,11 @@ void msrIdentification::setIdentificationWorkCreditTypeTitle (
     std::stringstream ss;
 
     ss <<
-      "Setting workCreditTypeTitle to \"" << val << "\"" <<
-      std::endl;
+      "Setting workCreditTypeTitle to \"" << val << "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -103,14 +97,11 @@ void msrIdentification::setIdentificationOpus (
     std::stringstream ss;
 
     ss <<
-      "Setting opus to \"" << val << "\"" <<
-      std::endl;
+      "Setting opus to \"" << val << "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -126,14 +117,11 @@ void msrIdentification::setIdentificationMovementNumber (
     std::stringstream ss;
 
     ss <<
-      "Setting movementNumber to \"" << val << "\"" <<
-      std::endl;
+      "Setting movementNumber to \"" << val << "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -149,14 +137,11 @@ void msrIdentification::setIdentificationMovementTitle (
     std::stringstream ss;
 
     ss <<
-      "Setting movementTitle to \"" << val << "\"" <<
-      std::endl;
+      "Setting movementTitle to \"" << val << "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -172,14 +157,11 @@ void msrIdentification::setIdentificationEncodingDate (
     std::stringstream ss;
 
     ss <<
-      "Setting encodingDate to \"" << val << "\"" <<
-      std::endl;
+      "Setting encodingDate to \"" << val << "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -195,14 +177,11 @@ void msrIdentification::setIdentificationMiscellaneousField (
     std::stringstream ss;
 
     ss <<
-      "Setting miscellaneousField to \"" << val << "\"" <<
-      std::endl;
+      "Setting miscellaneousField to \"" << val << "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -218,14 +197,11 @@ void msrIdentification::setIdentificationScoreInstrument (
     std::stringstream ss;
 
     ss <<
-      "Setting scoreInstrument to \"" << val << "\"" <<
-      std::endl;
+      "Setting scoreInstrument to \"" << val << "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -241,14 +217,11 @@ void msrIdentification::appendComposer (
     std::stringstream ss;
 
     ss <<
-      "Appending composer \"" << value << "\"" <<
-      std::endl;
+      "Appending composer \"" << value << "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -264,14 +237,11 @@ void msrIdentification::appendLyricist (
     std::stringstream ss;
 
     ss <<
-      "Appending lyricist \"" << value << "\"" <<
-      std::endl;
+      "Appending lyricist \"" << value << "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -287,14 +257,11 @@ void msrIdentification::appendArranger (
     std::stringstream ss;
 
     ss <<
-      "Appending arranger \"" << value << "\"" <<
-      std::endl;
+      "Appending arranger \"" << value << "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -310,14 +277,11 @@ void msrIdentification::appendPoet (
     std::stringstream ss;
 
     ss <<
-      "Appending poet \"" << value << "\"" <<
-      std::endl;
+      "Appending poet \"" << value << "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -333,14 +297,11 @@ void msrIdentification::appendTranslator (
     std::stringstream ss;
 
     ss <<
-      "Appending translator \"" << value << "\"" <<
-      std::endl;
+      "Appending translator \"" << value << "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -356,14 +317,11 @@ void msrIdentification::appendArtist (
     std::stringstream ss;
 
     ss <<
-      "Appending artist \"" << value << "\"" <<
-      std::endl;
+      "Appending artist \"" << value << "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -379,14 +337,11 @@ void msrIdentification::appendSoftware (
     std::stringstream ss;
 
     ss <<
-      "Appending software \"" << value << "\"" <<
-      std::endl;
+      "Appending software \"" << value << "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -402,14 +357,11 @@ void msrIdentification::appendRight (
     std::stringstream ss;
 
     ss <<
-      "Appending right \"" << value << "\"" <<
-      std::endl;
+      "Appending right \"" << value << "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -425,14 +377,11 @@ void msrIdentification::appendSource (
     std::stringstream ss;
 
     ss <<
-      "Appendings source \"" << value << "\"" <<
-      std::endl;
+      "Appendings source \"" << value << "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -448,14 +397,11 @@ void msrIdentification::appendRelation (
     std::stringstream ss;
 
     ss <<
-      "Appending relation \"" << value << "\"" <<
-      std::endl;
+      "Appending relation \"" << value << "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -618,14 +564,11 @@ void msrIdentification::acceptIn (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrIdentification::acceptIn ()" <<
-      std::endl;
+      "% ==> msrIdentification::acceptIn ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -639,14 +582,11 @@ void msrIdentification::acceptIn (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrIdentification::visitStart ()" <<
-            std::endl;
+            "% ==> Launching msrIdentification::visitStart ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
@@ -660,14 +600,11 @@ void msrIdentification::acceptOut (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrIdentification::acceptOut ()" <<
-      std::endl;
+      "% ==> msrIdentification::acceptOut ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -681,14 +618,11 @@ void msrIdentification::acceptOut (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrIdentification::visitEnd ()" <<
-            std::endl;
+            "% ==> Launching msrIdentification::visitEnd ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif        
         p->visitEnd (elem);

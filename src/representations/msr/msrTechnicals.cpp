@@ -233,14 +233,11 @@ void msrTechnical::acceptIn (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrTechnical::acceptIn ()" <<
-      std::endl;
+      "% ==> msrTechnical::acceptIn ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -254,14 +251,11 @@ void msrTechnical::acceptIn (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrTechnical::visitStart ()" <<
-            std::endl;
+            "% ==> Launching msrTechnical::visitStart ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
@@ -275,14 +269,11 @@ void msrTechnical::acceptOut (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrTechnical::acceptOut ()" <<
-      std::endl;
+      "% ==> msrTechnical::acceptOut ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -296,14 +287,11 @@ void msrTechnical::acceptOut (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrTechnical::visitEnd ()" <<
-            std::endl;
+            "% ==> Launching msrTechnical::visitEnd ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif        
         p->visitEnd (elem);
@@ -383,14 +371,11 @@ void msrTechnicalWithInteger::acceptIn (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrTechnicalWithInteger::acceptIn ()" <<
-      std::endl;
+      "% ==> msrTechnicalWithInteger::acceptIn ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -404,14 +389,11 @@ void msrTechnicalWithInteger::acceptIn (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrTechnicalWithInteger::visitStart ()" <<
-            std::endl;
+            "% ==> Launching msrTechnicalWithInteger::visitStart ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
@@ -425,14 +407,11 @@ void msrTechnicalWithInteger::acceptOut (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrTechnicalWithInteger::acceptOut ()" <<
-      std::endl;
+      "% ==> msrTechnicalWithInteger::acceptOut ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -446,14 +425,11 @@ void msrTechnicalWithInteger::acceptOut (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrTechnicalWithInteger::visitEnd ()" <<
-            std::endl;
+            "% ==> Launching msrTechnicalWithInteger::visitEnd ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif        
         p->visitEnd (elem);
@@ -556,14 +532,11 @@ void msrTechnicalWithFloat::acceptIn (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrTechnicalWithFloat::acceptIn ()" <<
-      std::endl;
+      "% ==> msrTechnicalWithFloat::acceptIn ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -577,14 +550,11 @@ void msrTechnicalWithFloat::acceptIn (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrTechnicalWithFloat::visitStart ()" <<
-            std::endl;
+            "% ==> Launching msrTechnicalWithFloat::visitStart ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
@@ -598,14 +568,11 @@ void msrTechnicalWithFloat::acceptOut (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrTechnicalWithFloat::acceptOut ()" <<
-      std::endl;
+      "% ==> msrTechnicalWithFloat::acceptOut ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -619,14 +586,11 @@ void msrTechnicalWithFloat::acceptOut (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrTechnicalWithFloat::visitEnd ()" <<
-            std::endl;
+            "% ==> Launching msrTechnicalWithFloat::visitEnd ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif        
         p->visitEnd (elem);
@@ -735,14 +699,11 @@ void msrTechnicalWithString::acceptIn (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrTechnicalWithString::acceptIn ()" <<
-      std::endl;
+      "% ==> msrTechnicalWithString::acceptIn ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -756,14 +717,11 @@ void msrTechnicalWithString::acceptIn (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrTechnicalWithString::visitStart ()" <<
-            std::endl;
+            "% ==> Launching msrTechnicalWithString::visitStart ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
@@ -777,14 +735,11 @@ void msrTechnicalWithString::acceptOut (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrTechnicalWithString::acceptOut ()" <<
-      std::endl;
+      "% ==> msrTechnicalWithString::acceptOut ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -798,14 +753,11 @@ void msrTechnicalWithString::acceptOut (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrTechnicalWithString::visitEnd ()" <<
-            std::endl;
+            "% ==> Launching msrTechnicalWithString::visitEnd ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif        
         p->visitEnd (elem);

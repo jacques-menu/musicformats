@@ -322,14 +322,11 @@ S_msrMeasuresSlice msrMeasuresSlice::createMeasuresSliceShallowCopy ()
 
     ss <<
       "Creating a shallow copy of measures slice " <<
-      this->asShortString () <<
-      std::endl;
+      this->asShortString ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -367,14 +364,11 @@ void msrMeasuresSlice::appendMeasureToMeasureSlice (
       "Appending measure " <<
       measure->asShortStringForMeasuresSlices () <<
       " to measures slice " <<
-      asShortStringForMeasuresSlices () <<
-      std::endl;
+      asShortStringForMeasuresSlices ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -393,14 +387,11 @@ void msrMeasuresSlice::appendSliceMeasuresFrom (
       "Appending measures from measures slice " <<
       otherSlice->asShortStringForMeasuresSlices () <<
       " to measures slice " <<
-      asShortStringForMeasuresSlices () <<
-      std::endl;
+      asShortStringForMeasuresSlices ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -456,14 +447,11 @@ void msrMeasuresSlice::collectNonSkipNotesFromMeasuresSliceMeasures ()
 
     ss <<
       "Collecting the notes from the measures slices in " <<
-      asShortStringForMeasuresSlices () <<
-      std::endl;
+      asShortStringForMeasuresSlices ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -503,8 +491,6 @@ void msrMeasuresSlice::collectNonSkipNotesFromMeasuresSliceMeasures ()
         gWaeHandler->waeTraceWithLocationDetails (
           __FILE__, __LINE__,
           ss.str ());
-//           gServiceRunData->getCurrentMeasureNumber (),
-//           gServiceRunData->getScoreMeasuresNumber ());
       }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -585,14 +571,11 @@ void msrMeasuresSlice::buildTheSimutaneousNotesChunksList ()
 
     ss <<
       "Building the simultaneous notes chunks list in " <<
-      asShortStringForMeasuresSlices () <<
-      std::endl;
+      asShortStringForMeasuresSlices ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -660,14 +643,11 @@ void msrMeasuresSlice::identifySoloNotesAndRestsInMeasuresSlice ()
 
     ss <<
       "Identifying solo notes and rests in measures slice " <<
-      asShortStringForMeasuresSlices () <<
-      std::endl;
+      asShortStringForMeasuresSlices ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1167,14 +1147,11 @@ S_msrMeasuresSlicesSequence msrMeasuresSlicesSequence::createMeasuresSlicesSeque
 
     ss <<
       "Creating a shallow copy of measures slices sequence " <<
-      this->asShortString () <<
-      std::endl;
+      this->asShortString ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1213,14 +1190,11 @@ void msrMeasuresSlicesSequence::appendMeasuresSliceToSequence (
       "Appending measures slice " <<
       measuresSlice->asShortStringForMeasuresSlices () <<
       " to measures slices sequence " <<
-      asShortStringForMeasuresSlices () <<
-      std::endl;
+      asShortStringForMeasuresSlices ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1244,14 +1218,11 @@ S_msrMeasuresSlicesSequence msrMeasuresSlicesSequence::mergeWithMeasuresSlicesSe
       "Merging measures slices sequence " <<
       asShortStringForMeasuresSlices () <<
       " with " <<
-      otherMeasuresSlicesSequence->asShortStringForMeasuresSlices () <<
-      std::endl;
+      otherMeasuresSlicesSequence->asShortStringForMeasuresSlices ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1264,14 +1235,11 @@ S_msrMeasuresSlicesSequence msrMeasuresSlicesSequence::mergeWithMeasuresSlicesSe
 
     ss <<
       "---> sequenceSize: " <<
-      sequenceSize <<
-      std::endl;
+      sequenceSize;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1305,14 +1273,11 @@ S_msrMeasuresSlicesSequence msrMeasuresSlicesSequence::mergeWithMeasuresSlicesSe
       ss <<
         "mergeWithMeasuresSlicesSequence()" <<
         ", otherSequenceSize: " <<
-        otherSequenceSize <<
-        std::endl;
+        otherSequenceSize;
 
       gWaeHandler->waeTraceWithLocationDetails (
         __FILE__, __LINE__,
         ss.str ());
-//         gServiceRunData->getCurrentMeasureNumber (),
-//         gServiceRunData->getScoreMeasuresNumber ());
     }
 #endif // MF_TRACE_IS_ENABLED
 

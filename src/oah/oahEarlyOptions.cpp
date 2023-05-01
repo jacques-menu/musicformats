@@ -80,8 +80,7 @@ void oahEarlyOptions::setEarlyLanguageKind (
 
     ss <<
       "Setting fEarlyLanguageKind to " <<
-      languageKind <<
-      std::endl;
+      languageKind;
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -105,8 +104,7 @@ void oahEarlyOptions::setEarlyInsiderOption ()
     std::stringstream ss;
 
     ss <<
-      "Setting fEarlyInsiderOption" <<
-      std::endl;
+      "Setting fEarlyInsiderOption";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -149,8 +147,7 @@ void oahEarlyOptions::setEarlyQuietOption ()
     std::stringstream ss;
 
     ss <<
-      "Setting fEarlyQuietOption" <<
-      std::endl;
+      "Setting fEarlyQuietOption";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -170,8 +167,7 @@ void oahEarlyOptions::setEarlyMultiGenerationOutputKind (
     std::stringstream ss;
 
     ss <<
-      "Setting fEarlyMultiGenerationOutputKind" <<
-      std::endl;
+      "Setting fEarlyMultiGenerationOutputKind";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -195,8 +191,7 @@ void oahEarlyOptions::appendEarlyIncludeFileName (std::string includeFileName)
     ss <<
       "Appending fEarlyIncludeFileName [" <<
       includeFileName <<
-      ']' <<
-      std::endl;
+      ']';
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -235,8 +230,7 @@ void oahEarlyOptions::setEarlyOahVerboseMode ()
     std::stringstream ss;
 
     ss <<
-      "Setting fEarlyOahVerboseMode" <<
-      std::endl;
+      "Setting fEarlyOahVerboseMode";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -258,8 +252,7 @@ void oahEarlyOptions::setEarlyTraceOah ()
     std::stringstream ss;
 
     ss <<
-      "Setting fEarlyTraceOah" <<
-      std::endl;
+      "Setting fEarlyTraceOah";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -281,8 +274,7 @@ void oahEarlyOptions::setEarlyTraceOahDetails ()
     std::stringstream ss;
 
     ss <<
-      "Setting fEarlyTraceOahDetails" <<
-      std::endl;
+      "Setting fEarlyTraceOahDetails";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -304,8 +296,7 @@ void oahEarlyOptions::setEarlyTraceComponents ()
     std::stringstream ss;
 
     ss <<
-      "Setting fEarlyTraceComponents" <<
-      std::endl;
+      "Setting fEarlyTraceComponents";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -374,8 +365,7 @@ Bool oahEarlyOptions::isEarlyOptionRecognized (
       ss <<
         "Option '-" <<
         optionName <<
-        "' has been recognized early" <<
-        std::endl;
+        "' has been recognized early";
 
       gWaeHandler->waeTraceWithoutLocationDetails (
         __FILE__, __LINE__,
@@ -587,7 +577,7 @@ void oahEarlyOptions::applyEarlyOptionsIfPresentInArgcArgv (
           "argumentIsAnOption, " <<
           serviceName << " main()" <<
           ", argumentWithoutDash: '" << argumentWithoutDash <<
-          "'" <<
+          '\'' <<
           std::endl;
 
         gWaeHandler->waeTraceWithoutLocationDetails (
@@ -638,7 +628,7 @@ void oahEarlyOptions::applyEarlyOptionsIfPresentInArgcArgv (
           argumentWithoutDashStartsWithAPrefix <<
           ", argumentWithoutDashToBeUsed: '" <<
           argumentWithoutDashToBeUsed <<
-          "'" <<
+          '\'' <<
           std::endl;
 
         gWaeHandler->waeTraceWithoutLocationDetails (
@@ -742,7 +732,7 @@ void oahEarlyOptions::applyEarlyOptionsIfPresentInOptionsAndArguments (
             "argumentIsAnOption, " <<
             "??? serviceName" << " main()" <<
             ", argumentWithoutDash: '" << argumentWithoutDash <<
-            "'" <<
+            '\'' <<
             std::endl;
 
         gWaeHandler->waeTraceWithoutLocationDetails (
@@ -793,7 +783,7 @@ void oahEarlyOptions::applyEarlyOptionsIfPresentInOptionsAndArguments (
           argumentWithoutDashStartsWithAPrefix <<
           ", argumentWithoutDashToBeUsed: '" <<
           argumentWithoutDashToBeUsed <<
-          "'" <<
+          '\'' <<
           std::endl;
 
         gWaeHandler->waeTraceWithoutLocationDetails (

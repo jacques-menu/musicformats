@@ -133,8 +133,7 @@ EXP int msdl (
 
     ss <<
       serviceName << " msdl()" <<
-      ", insiderOption: " << insiderOption <<
-      std::endl;
+      ", insiderOption: " << insiderOption;
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -254,8 +253,7 @@ EXP int msdl (
       "inputSourceName = \"" << inputSourceName << "\"" <<
       ", outputFileName = \"" << outputFileName << "\"" <<
       std::endl <<
-      separator <<
-      std::endl;
+      separator;
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -381,8 +379,7 @@ EXP int msdl (
     std::stringstream ss;
 
     ss <<
-      "The command line options and arguments have been analyzed" <<
-      std::endl;
+      "The command line options and arguments have been analyzed";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,

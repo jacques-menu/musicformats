@@ -72,8 +72,6 @@ msrSegmentElement::~msrSegmentElement ()
 //       gWaeHandler->waeTraceWithLocationDetails (
 //         __FILE__, __LINE__,
 //         ss.str (),
-//         gServiceRunData->getCurrentMeasureNumber (),
-//         gServiceRunData->getScoreMeasuresNumber ());
 //   }
 // #endif // MF_TRACE_IS_ENABLED
 //
@@ -95,14 +93,11 @@ void msrSegmentElement::acceptIn (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrSegmentElement::acceptIn ()" <<
-      std::endl;
+      "% ==> msrSegmentElement::acceptIn ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -116,14 +111,11 @@ void msrSegmentElement::acceptIn (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrSegmentElement::visitStart ()" <<
-            std::endl;
+            "% ==> Launching msrSegmentElement::visitStart ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
@@ -137,14 +129,11 @@ void msrSegmentElement::acceptOut (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrSegmentElement::acceptOut ()" <<
-      std::endl;
+      "% ==> msrSegmentElement::acceptOut ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -158,14 +147,11 @@ void msrSegmentElement::acceptOut (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrSegmentElement::visitEnd ()" <<
-            std::endl;
+            "% ==> Launching msrSegmentElement::visitEnd ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);

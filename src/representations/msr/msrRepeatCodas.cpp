@@ -83,14 +83,11 @@ S_msrRepeatCoda msrRepeatCoda::createRepeatCodaNewbornClone (
 
     ss <<
       "Creating a newborn clone of a " <<
-      asString () <<
-      std::endl;
+      asString ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -129,14 +126,11 @@ S_msrRepeatCoda msrRepeatCoda::createRepeatCodaDeepClone (
 
     ss <<
       "Creating a newborn clone of a " <<
-      asString () <<
-      std::endl;
+      asString ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -189,14 +183,11 @@ void msrRepeatCoda::acceptIn (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrRepeatCoda::acceptIn ()" <<
-      std::endl;
+      "% ==> msrRepeatCoda::acceptIn ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -210,14 +201,11 @@ void msrRepeatCoda::acceptIn (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrRepeatCoda::visitStart ()" <<
-            std::endl;
+            "% ==> Launching msrRepeatCoda::visitStart ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
@@ -231,14 +219,11 @@ void msrRepeatCoda::acceptOut (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrRepeatCoda::acceptOut ()" <<
-      std::endl;
+      "% ==> msrRepeatCoda::acceptOut ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -252,14 +237,11 @@ void msrRepeatCoda::acceptOut (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrRepeatCoda::visitEnd ()" <<
-            std::endl;
+            "% ==> Launching msrRepeatCoda::visitEnd ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);

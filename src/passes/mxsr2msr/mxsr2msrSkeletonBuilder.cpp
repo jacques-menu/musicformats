@@ -85,7 +85,7 @@ std::string mxmlPartGroupDescr::partGroupDescrAsString () const
   std::stringstream ss;
 
   ss <<
-    "'" <<
+    '\'' <<
     fPartGroupNumber <<
     "' -=> " <<
     fPartGroup->getPartGroupCombinedName ();
@@ -677,8 +677,7 @@ void mxsr2msrSkeletonBuilder::registerPartGroupDescrAsStarted (
       "Registering part group descr '" <<
       partGroupDescr->getPartGroupDescrCombinedName () <<
       " as started" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -974,8 +973,7 @@ void mxsr2msrSkeletonBuilder::registerPartGroupDescrAsStopped (
       "Registering part group descr '" <<
       partGroupDescr->getPartGroupDescrCombinedName () <<
       " as stopped" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -1018,8 +1016,7 @@ void mxsr2msrSkeletonBuilder::handlePartGroupStart (
     ss <<
       "Creating part group with number '" <<
       fCurrentPartGroupNumber <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -1069,8 +1066,7 @@ void mxsr2msrSkeletonBuilder::handlePartGroupStart (
       "Adding part group descr for '" << fCurrentPartGroupNumber <<
       "' to visitor's part groups data" <<
       ", fCurrentPartsPosition: " << fCurrentPartsPosition <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -1166,8 +1162,7 @@ void mxsr2msrSkeletonBuilder::doNestPartGroupDescrInItsContainer (
       "' to " <<
       containingPartGroup->
         getPartGroupCombinedName () <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -1191,8 +1186,7 @@ void mxsr2msrSkeletonBuilder::doNestPartGroupDescrInItsContainer (
       "' to " <<
       containingPartGroup->
         getPartGroupCombinedName () <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -1232,8 +1226,7 @@ void mxsr2msrSkeletonBuilder::createImplicitPartGroup ()
     ss <<
       "Creating an implicit part group with number '" <<
       fCurrentPartGroupNumber <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -1264,8 +1257,7 @@ void mxsr2msrSkeletonBuilder::createImplicitPartGroup ()
       fImplicitPartGroup->getPartGroupNumber () <<
       "' to MSR score" <<
       ", fCurrentPartsPosition: " << fCurrentPartsPosition <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -1295,8 +1287,7 @@ void mxsr2msrSkeletonBuilder::createImplicitPartGroup ()
       fCurrentPartGroupNumber <<
       "' to the part groups data" <<
       ", fCurrentPartsPosition: " << fCurrentPartsPosition <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -1326,8 +1317,7 @@ void mxsr2msrSkeletonBuilder::doPartGroupsNestingAndPartsAllocation (
     std::stringstream ss;
 
     ss <<
-      "doPartGroupsNestingAndPartsAllocation:" <<
-      std::endl;
+      "doPartGroupsNestingAndPartsAllocation:";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -1840,8 +1830,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_score_partwise& elt)
 
     ss <<
       "--> Start visiting S_score_partwise" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -1854,8 +1843,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_score_partwise& elt)
     std::stringstream ss;
 
     ss <<
-      "Analysing the score partwise" <<
-      std::endl;
+      "Analysing the score partwise";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -1877,8 +1865,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_score_partwise& elt)
 
     ss <<
       "--> End visiting S_score_partwise" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -1916,8 +1903,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_work_number& elt)
 
     ss <<
       "--> Start visiting S_work_number" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -1942,8 +1928,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_work_title& elt)
 
     ss <<
       "--> Start visiting S_work_title" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -1970,8 +1955,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_opus& elt)
 
     ss <<
       "--> Start visiting S_opus" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -1998,8 +1982,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_movement_number& elt)
 
     ss <<
       "--> Start visiting S_movement_number" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -2024,8 +2007,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_movement_title& elt)
 
     ss <<
       "--> Start visiting S_movement_title" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -2059,8 +2041,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_identification& elt)
 
     ss <<
       "--> Start visiting S_identification" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -2080,8 +2061,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_identification& elt)
 
     ss <<
       "--> End visiting S_identification" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -2101,8 +2081,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_creator& elt)
 
     ss <<
       "--> Start visiting S_creator" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -2190,8 +2169,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_rights& elt)
 
     ss <<
       "--> Start visiting S_rights" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -2220,8 +2198,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_source& elt)
 
     ss <<
       "--> Start visiting S_source" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -2252,8 +2229,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_relation& elt)
 
     ss <<
       "--> Start visiting S_relation" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -2320,8 +2296,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_encoding& elt)
 
     ss <<
       "--> Start visiting S_encoding" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -2335,8 +2310,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_encoding& elt)
 
     ss <<
       "*** Analysing S_encoding ***" <<
-      ", " << elt->getValue () <<
-      std::endl;
+      ", " << elt->getValue ();
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -2358,8 +2332,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_encoding& elt)
 
     ss <<
       "--> End visiting S_encoding" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -2379,8 +2352,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_encoding_date& elt)
 
     ss <<
       "--> Start visiting S_encoding_date" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -2405,8 +2377,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_encoder& elt)
 
     ss <<
       "--> Start visiting S_encoder" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -2433,8 +2404,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_software& elt)
 
     ss <<
       "--> Start visiting S_software" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -2473,8 +2443,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_software& elt)
           std::stringstream ss;
 
           ss <<
-            "Setting '-cubase' option" <<
-            std::endl;
+            "Setting '-cubase' option";
 
           gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
@@ -2507,8 +2476,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_encoding_description& elt)
 
     ss <<
       "--> Start visiting S_encoding_description" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -2535,8 +2503,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_supports& elt)
 
     ss <<
       "--> Start visiting S_supports" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -2564,8 +2531,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_miscellaneous& elt)
 
     ss <<
       "--> Start visiting S_miscellaneous" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -2598,8 +2564,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_miscellaneous& elt)
 
     ss <<
       "--> End visiting S_miscellaneous" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -2620,8 +2585,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_miscellaneous_field& elt)
 
     ss <<
       "--> Start visiting S_miscellaneous_field" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -2724,8 +2688,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_credit& elt)
 
     ss <<
       "--> Start visiting S_credit" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -2758,8 +2721,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_credit_type& elt)
 
     ss <<
       "--> Start visiting S_credit_type" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -2809,8 +2771,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_credit_symbol& elt)
 
     ss <<
       "--> Start visiting S_credit_symbol" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -2830,8 +2791,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_credit_image& elt)
 
     ss <<
       "--> Start visiting S_credit_image" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -2851,8 +2811,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_credit_words& elt)
 
     ss <<
       "--> Start visiting S_credit_words" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -2986,8 +2945,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_credit& elt)
 
     ss <<
       "--> End visiting S_credit" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -3008,8 +2966,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_part_list& elt)
 
     ss <<
       "--> Start visiting S_part_list" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -3022,8 +2979,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_part_list& elt)
     std::stringstream ss;
 
     ss <<
-      "Analysing part list" <<
-      std::endl;
+      "Analysing part list";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -3045,8 +3001,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_part_list& elt)
 
     ss <<
       "--> End visiting S_part_list" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -3114,8 +3069,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_part_group& elt)
 
     ss <<
       "--> Start visiting S_part_group" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -3191,8 +3145,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_group_name& elt)
 
     ss <<
       "--> Start visiting S_group_name" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -3214,8 +3167,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_group_name_display& elt)
 
     ss <<
       "--> Start visiting S_group_name_display" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -3245,8 +3197,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_group_name_display& elt)
 
     ss <<
       "--> End visiting S_group_name_display" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -3268,8 +3219,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_display_text& elt)
 
     ss <<
       "--> Start visiting S_display_text" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -3306,8 +3256,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_accidental_text& elt)
 
     ss <<
       "--> Start visiting S_accidental_text" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -3326,8 +3275,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_group_abbreviation& elt)
 
     ss <<
       "--> Start visiting S_group_abbreviation" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -3349,8 +3297,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_group_symbol& elt)
 
     ss <<
       "--> Start visiting S_group_symbol" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -3409,8 +3356,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_group_barline& elt)
 
     ss <<
       "--> Start visiting S_group_barline" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -3451,8 +3397,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_part_group& elt)
 
     ss <<
       "--> End visiting S_part_group" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -3471,8 +3416,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_part_group& elt)
       msrPartGroupTypeKindAsString (
         fCurrentPartGroupTypeKind) << "\""  <<
       ", fCurrentPartsPosition: " << fCurrentPartsPosition <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -3517,8 +3461,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_score_part& elt)
 
     ss <<
       "--> Start visiting S_score_part" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -3535,8 +3478,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_score_part& elt)
     ss <<
       "Found part name \"" << fCurrentScorePartID << "\"" <<
       " in part list" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -3593,8 +3535,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_part_name& elt)
 
     ss <<
       "--> Start visiting S_part_name" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -3631,8 +3572,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_part_name_display& elt)
 
     ss <<
       "--> Start visiting S_part_name_display" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -3651,8 +3591,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_part_name_display& elt)
 
     ss <<
       "--> End visiting S_part_name_display" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -3674,8 +3613,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_part_abbreviation& elt)
 
     ss <<
       "--> Start visiting S_part_abbreviation" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -3705,8 +3643,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_part_abbreviation_display& elt)
 
     ss <<
       "--> Start visiting S_part_abbreviation_display" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -3725,8 +3662,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_part_abbreviation_display& elt)
 
     ss <<
       "--> End visiting S_part_abbreviation_display" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -3745,8 +3681,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_instrument_name& elt)
 
     ss <<
       "--> Start visiting S_instrument_name" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -3765,8 +3700,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_instrument_abbreviation& elt)
 
     ss <<
       "--> Start visiting S_instrument_abbreviation" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -3788,8 +3722,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_score_part& elt)
 
     ss <<
       "--> End visiting S_score_part" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -3830,8 +3763,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_score_part& elt)
       "--------------------------------------------" <<
       std::endl <<
       "Creating part \"" << scorePartID << "\"" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -3900,8 +3832,7 @@ void mxsr2msrSkeletonBuilder::registerPart (
       part->getPartCombinedName () <<
       " in the parts data" <<
       ", partPosition: " << partPosition <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -3936,8 +3867,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_part& elt)
 
     ss <<
       "--> Start visiting S_part" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -3962,8 +3892,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_part& elt)
       " partID \"" << fCurrentPartID << "\"" <<
 //       "partName \"" << fCurrentPartName << "\"" << JMI from fPartGroupElementsList ??? v0.9.67
       ", line " << inputLineNumber <<
-      " ===-->" <<
-      std::endl;
+      " ===-->";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -4040,8 +3969,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_part& elt)
       std::endl <<
       "--------------------------------------------" <<
       std::endl <<
-      "Analyzing part \"" << fCurrentPartID << "\" -- start" <<
-      std::endl;
+      "Analyzing part \"" << fCurrentPartID << "\" -- start";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -4079,8 +4007,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_part& elt)
 
     ss <<
       "--> End visiting S_part" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -4095,8 +4022,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_part& elt)
     ss <<
       "Analyzing part \"" << fCurrentPartID << "\" -- end" <<
       std::endl <<
-      "--------------------------------------------" <<
-      std::endl;
+      "--------------------------------------------";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -4159,8 +4085,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_staves& elt)
 
     ss <<
       "--> Start visiting S_direction" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -4191,8 +4116,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_staves& elt)
     } // switch
 
     ss <<
-      " in part " << fCurrentPart->getPartCombinedName() <<
-      std::endl;
+      " in part " << fCurrentPart->getPartCombinedName();
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -4235,8 +4159,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_staff& elt)
 
     ss <<
       "--> Start visiting S_staff" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -4247,7 +4170,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_staff& elt)
   fCurrentStaffMusicXMLNumber = int(*elt);
 
   // the staff number should be positive
-  if (fCurrentStaffMusicXMLNumber <= 0) {
+  if (fCurrentStaffMusicXMLNumber == K_STAFF_NUMBER_UNKNOWN_) {
     std::stringstream ss;
 
     ss <<
@@ -4277,8 +4200,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_voice& elt)
 
     ss <<
       "--> Start visiting S_voice" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -4295,8 +4217,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_voice& elt)
       "<!--=== "
       "voice \"" << "elt->getVoiceName ()" << "\"" <<
       ", line " << elt->getInputLineNumber () <<
-      " ===-->" <<
-      std::endl;
+      " ===-->";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -4330,8 +4251,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_measure& elt)
 
     ss <<
       "--> Start visiting S_measure" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -4362,8 +4282,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_measure& elt)
       " (partID \"" << fCurrentPartID << "\")" <<
       ", measure \"" << fCurrentMeasureNumber << "\"" <<
       ", line " << inputLineNumber <<
-      " ===-->" <<
-      std::endl;
+      " ===-->";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -4394,8 +4313,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_measure& elt)
 
     ss <<
       "--> End visiting S_measure" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -4418,8 +4336,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_print& elt)
 
     ss <<
       "--> Start visiting S_print" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -4438,8 +4355,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_print& elt)
 
     ss <<
       "--> End visiting S_print" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -4459,8 +4375,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_note& elt)
 
     ss <<
       "--> Start visiting S_note" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -4492,8 +4407,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_note& elt)
 
     ss <<
       "--> End visiting S_note" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -4531,8 +4445,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_note& elt)
       fCurrentVoiceMusicXMLNumber <<
       std::endl <<
       "--> S_note, current noteVoice name: " <<
-      noteVoice->getVoiceName() <<
-      std::endl;
+      noteVoice->getVoiceName();
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -4617,8 +4530,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_lyric& elt)
 
     ss <<
       "--> Start visiting S_lyric" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -4728,8 +4640,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_lyric& elt)
 
     ss <<
       "--> End visiting S_lyric" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -4805,8 +4716,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_harmony& elt)
     ss <<
       "--> Start visiting S_harmony" <<
       ", harmoniesVoicesCounter: " << fHarmoniesVoicesCounter <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -4835,8 +4745,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_figured_bass& elt)
     ss <<
       "--> Start visiting S_figured_bass" <<
       ", figuredBassVoicesCounter: " << fFiguredBassVoicesCounter <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,

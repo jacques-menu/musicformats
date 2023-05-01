@@ -93,14 +93,11 @@ void lpsrParallelMusicBLock::acceptIn (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> lpsrParallelMusicBLock::acceptIn ()" <<
-      std::endl;
+      "% ==> lpsrParallelMusicBLock::acceptIn ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -114,14 +111,11 @@ void lpsrParallelMusicBLock::acceptIn (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching lpsrParallelMusicBLock::visitStart ()" <<
-            std::endl;
+            "% ==> Launching lpsrParallelMusicBLock::visitStart ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
@@ -135,14 +129,11 @@ void lpsrParallelMusicBLock::acceptOut (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> lpsrParallelMusicBLock::acceptOut ()" <<
-      std::endl;
+      "% ==> lpsrParallelMusicBLock::acceptOut ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -156,14 +147,11 @@ void lpsrParallelMusicBLock::acceptOut (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching lpsrParallelMusicBLock::visitEnd ()" <<
-            std::endl;
+            "% ==> Launching lpsrParallelMusicBLock::visitEnd ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
@@ -177,14 +165,11 @@ void lpsrParallelMusicBLock::browseData (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> lpsrParallelMusicBLock::browseData ()" <<
-      std::endl;
+      "% ==> lpsrParallelMusicBLock::browseData ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -204,14 +189,11 @@ void lpsrParallelMusicBLock::browseData (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% <== lpsrParallelMusicBLock::browseData ()" <<
-      std::endl;
+      "% <== lpsrParallelMusicBLock::browseData ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }

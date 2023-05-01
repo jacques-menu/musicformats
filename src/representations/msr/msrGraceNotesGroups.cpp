@@ -88,14 +88,11 @@ S_msrGraceNotesGroup msrGraceNotesGroup::createGraceNotesGroupNewbornClone ()
 
     ss <<
       "Creating a newborn clone of grace notes group " <<
-      asShortString () <<
-      std::endl;
+      asShortString ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -172,14 +169,11 @@ S_msrGraceNotesGroup msrGraceNotesGroup::createSkipGraceNotesGroupClone ()
 
     ss <<
       "Creating a skip clone of grace notes group " <<
-      asShortString () <<
-      std::endl;
+      asShortString ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -222,8 +216,6 @@ S_msrGraceNotesGroup msrGraceNotesGroup::createSkipGraceNotesGroupClone ()
         gWaeHandler->waeTraceWithLocationDetails (
           __FILE__, __LINE__,
           ss.str ());
-//           gServiceRunData->getCurrentMeasureNumber (),
-//           gServiceRunData->getScoreMeasuresNumber ());
       }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -286,17 +278,14 @@ void msrGraceNotesGroup::appendNoteToGraceNotesGroup (const S_msrNote& note)
       "Appending note " <<
       note->asShortString () <<
       " to grace notes group " <<
-      asShortString () <<
+      asShortString ();
 //      " in voice \"" <<
 //      fGraceNotesGroupUpLinkToVoice->getVoiceName () <<
-//      "\"" <<
-      std::endl;
+//      "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -322,17 +311,14 @@ void msrGraceNotesGroup::appendChordToGraceNotesGroup (const S_msrChord& chord)
       "Appending chord " <<
       chord->asShortString () <<
       " to grace notes group " <<
-      asShortString () <<
+      asShortString ();
 //      " in voice \"" <<
 //      fGraceNotesGroupUpLinkToVoice->getVoiceName () <<
-//      "\"" <<
-      std::endl;
+//      "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -351,17 +337,14 @@ S_msrNote msrGraceNotesGroup::removeLastNoteFromGraceNotesGroup (
 
     ss <<
       "Removing last note from grace notes group " <<
-      asShortString () <<
+      asShortString ();
 //      " in voice \"" <<
 //      fGraceNotesGroupUpLinkToVoice->getVoiceName () <<
-//      "\"" <<
-      std::endl;
+//      "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -380,14 +363,11 @@ S_msrNote msrGraceNotesGroup::removeLastNoteFromGraceNotesGroup (
     ss <<
       "Removing last note from grace notes '" <<
       asString () <<
-      "'" <<
-      std::endl;
+      "'";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -416,14 +396,11 @@ S_msrNote msrGraceNotesGroup::removeLastNoteFromGraceNotesGroup (
       asString () <<
       "' turns out to be '" <<
       result->asShortString () <<
-      "'" <<
-      std::endl;
+      "'";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -443,14 +420,11 @@ void msrGraceNotesGroup::setGraceNotesGroupElementsMeasurePositions (
     ss <<
       "Setting grace notes group elements' measure positions of " << asString () <<
       " to " <<
-      measurePosition.asString () <<
-      std::endl;
+      measurePosition.asString ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -533,14 +507,11 @@ void msrGraceNotesGroup::acceptIn (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrGraceNotesGroup::acceptIn ()" <<
-      std::endl;
+      "% ==> msrGraceNotesGroup::acceptIn ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -554,14 +525,11 @@ void msrGraceNotesGroup::acceptIn (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrGraceNotesGroup::visitStart ()" <<
-            std::endl;
+            "% ==> Launching msrGraceNotesGroup::visitStart ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
@@ -575,14 +543,11 @@ void msrGraceNotesGroup::acceptOut (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrGraceNotesGroup::acceptOut ()" <<
-      std::endl;
+      "% ==> msrGraceNotesGroup::acceptOut ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -596,14 +561,11 @@ void msrGraceNotesGroup::acceptOut (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrGraceNotesGroup::visitEnd ()" <<
-            std::endl;
+            "% ==> Launching msrGraceNotesGroup::visitEnd ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);

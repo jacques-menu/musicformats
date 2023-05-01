@@ -44,14 +44,11 @@ S_msrHiddenMeasureAndBarLine msrHiddenMeasureAndBarLine::create (
 
     ss <<
       "Creating hiddenMeasureAndBarLine" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -119,14 +116,11 @@ void msrHiddenMeasureAndBarLine::acceptIn (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrHiddenMeasureAndBarLine::acceptIn ()" <<
-      std::endl;
+      "% ==> msrHiddenMeasureAndBarLine::acceptIn ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -140,14 +134,11 @@ void msrHiddenMeasureAndBarLine::acceptIn (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrHiddenMeasureAndBarLine::visitStart ()" <<
-            std::endl;
+            "% ==> Launching msrHiddenMeasureAndBarLine::visitStart ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
@@ -161,14 +152,11 @@ void msrHiddenMeasureAndBarLine::acceptOut (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrHiddenMeasureAndBarLine::acceptOut ()" <<
-      std::endl;
+      "% ==> msrHiddenMeasureAndBarLine::acceptOut ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -182,14 +170,11 @@ void msrHiddenMeasureAndBarLine::acceptOut (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrHiddenMeasureAndBarLine::visitEnd ()" <<
-            std::endl;
+            "% ==> Launching msrHiddenMeasureAndBarLine::visitEnd ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);

@@ -195,8 +195,7 @@ void msr2mxsrOahGroup::acceptIn (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> msr2mxsrOahGroup::acceptIn ()" <<
-      std::endl;
+      ".\\\" ==> msr2mxsrOahGroup::acceptIn ()";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -214,8 +213,7 @@ void msr2mxsrOahGroup::acceptIn (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            ".\\\" ==> Launching msr2mxsrOahGroup::visitStart ()" <<
-            std::endl;
+            ".\\\" ==> Launching msr2mxsrOahGroup::visitStart ()";
 
           gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
@@ -233,8 +231,7 @@ void msr2mxsrOahGroup::acceptOut (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> msr2mxsrOahGroup::acceptOut ()" <<
-      std::endl;
+      ".\\\" ==> msr2mxsrOahGroup::acceptOut ()";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -252,8 +249,7 @@ void msr2mxsrOahGroup::acceptOut (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            ".\\\" ==> Launching msr2mxsrOahGroup::visitEnd ()" <<
-            std::endl;
+            ".\\\" ==> Launching msr2mxsrOahGroup::visitEnd ()";
 
           gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
@@ -271,8 +267,7 @@ void msr2mxsrOahGroup::browseData (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> msr2mxsrOahGroup::browseData ()" <<
-      std::endl;
+      ".\\\" ==> msr2mxsrOahGroup::browseData ()";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -344,8 +339,7 @@ S_msr2mxsrOahGroup createGlobalMsr2mxsrOahGroup ()
     std::stringstream ss;
 
     ss <<
-      "Creating global msr2mxsr OAH group" <<
-      std::endl;
+      "Creating global msr2mxsr OAH group";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,

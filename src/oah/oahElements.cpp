@@ -155,8 +155,7 @@ oahFindStringMatch::oahFindStringMatch (
       "Creating oahFindStringMatch" <<
       ", fFoundString: " << fFoundString <<
       ", fContainingFindableElementInfo: " <<
-      fContainingFindableElementInfo <<
-      std::endl;
+      fContainingFindableElementInfo;
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -429,9 +428,9 @@ std::string oahElement::fetchNamesBetweenQuotes () const
   std::stringstream ss;
 
   ss <<
-    "'" <<
+    '\'' <<
     fetchNames () <<
-    "'";
+    '\'';
 
   return ss.str ();
 }
@@ -585,7 +584,7 @@ std::string oahElement::asShortString () const // JMI v0.9.67
     ss << ", " << fShortName;
   }
 
-  ss << "'" ;
+  ss << '\'' ;
 
   return ss.str ();
 }

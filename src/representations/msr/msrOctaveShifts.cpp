@@ -116,14 +116,11 @@ void msrOctaveShift::acceptIn (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrOctaveShift::acceptIn ()" <<
-      std::endl;
+      "% ==> msrOctaveShift::acceptIn ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -137,14 +134,11 @@ void msrOctaveShift::acceptIn (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrOctaveShift::visitStart ()" <<
-            std::endl;
+            "% ==> Launching msrOctaveShift::visitStart ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
@@ -158,14 +152,11 @@ void msrOctaveShift::acceptOut (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrOctaveShift::acceptOut ()" <<
-      std::endl;
+      "% ==> msrOctaveShift::acceptOut ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -179,14 +170,11 @@ void msrOctaveShift::acceptOut (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrOctaveShift::visitEnd ()" <<
-            std::endl;
+            "% ==> Launching msrOctaveShift::visitEnd ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);

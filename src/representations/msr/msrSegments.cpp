@@ -98,14 +98,11 @@ void msrSegment::initializeSegment ()
       fSegmentDebugNumber <<
       "', in voice \"" <<
       fSegmentUpLinkToVoice->getVoiceName () <<
-      "\", line " << fInputLineNumber <<
-      std::endl;
+      "\", line " << fInputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -142,14 +139,11 @@ void msrSegment::setSegmentFirstMeasure (
     ss <<
       " in segment " <<
       asString () <<
-      ", line " << fInputLineNumber <<
-      std::endl;
+      ", line " << fInputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -181,14 +175,11 @@ void msrSegment::setSegmentLastMeasure (
     ss <<
       " in segment " <<
       asString () <<
-      ", line " << fInputLineNumber <<
-      std::endl;
+      ", line " << fInputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -256,14 +247,11 @@ S_msrSegment msrSegment::createSegmentNewbornClone (
 
     ss <<
       "Creating a newborn clone of segment " <<
-      asString () <<
-      std::endl;
+      asString ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -299,14 +287,11 @@ S_msrSegment msrSegment::createSegmentDeepClone (
 
     ss <<
       "Creating a deep clone of segment " <<
-      asString () <<
-      std::endl;
+      asString ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -342,14 +327,11 @@ S_msrSegment msrSegment::createSegmentDeepClone (
       ss <<
         "There are " <<
         segmentElementsListSize <<
-        " measure elements in segment to be deep copied" <<
-        std::endl;
+        " measure elements in segment to be deep copied";
 
       gWaeHandler->waeTraceWithLocationDetails (
         __FILE__, __LINE__,
         ss.str ());
-//         gServiceRunData->getCurrentMeasureNumber (),
-//         gServiceRunData->getScoreMeasuresNumber ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -373,14 +355,11 @@ S_msrSegment msrSegment::createSegmentDeepClone (
       std::stringstream ss;
 
       ss <<
-        "There are no measures in segment to be deep copied" <<
-        std::endl;
+        "There are no measures in segment to be deep copied";
 
       gWaeHandler->waeTraceWithLocationDetails (
         __FILE__, __LINE__,
         ss.str ());
-//         gServiceRunData->getCurrentMeasureNumber (),
-//         gServiceRunData->getScoreMeasuresNumber ());
     }
 #endif // MF_TRACE_IS_ENABLED
   }
@@ -408,14 +387,11 @@ void msrSegment::setSegmentShortestNoteWholeNotes (
       "Setting the shortest note wholeNotes of segment " <<
       fSegmentAbsoluteNumber <<
       " to " <<
-      wholeNotes.asString () <<
-      std::endl;
+      wholeNotes.asString ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -437,14 +413,11 @@ void msrSegment::setSegmentShortestNoteTupletFactor (
       "Setting the shortest note tuplet factor of segment " <<
       fSegmentAbsoluteNumber <<
       " to " <<
-      noteTupletFactor <<
-      std::endl;
+      noteTupletFactor;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -551,14 +524,11 @@ S_msrMeasure msrSegment::createAMeasureAndAppendItToSegment (
       " in voice \"" <<
       fSegmentUpLinkToVoice->getVoiceName () <<
       "\"" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -594,14 +564,11 @@ S_msrMeasure msrSegment::createAMeasureAndAppendItToSegment (
       "\"" <<
       ", measureFirstInSegmentKind: " <<
       measureFirstInSegmentKind <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -621,21 +588,18 @@ S_msrMeasure msrSegment::createAMeasureAndAppendItToSegment (
       "Setting end line number of measure number '" << // JMI
       measureNumber <<
       "' to " <<
-      previousMeasureEndInputLineNumber <<
+      previousMeasureEndInputLineNumber;
 //       " in segment '" << // JMI
 //       fMeasureUpLinkToSegment->getSegmentAbsoluteNumber () <<
 //       "' in voice \"" <<
 //       fMeasureUpLinkToSegment->
 //         getSegmentUpLinkToVoice ()->
 //           getVoiceName () <<
-//       "\"" <<
-      std::endl;
+//       "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -671,14 +635,11 @@ void msrSegment::setNextMeasureNumberInSegment (
       "'in voice \"" <<
       fSegmentUpLinkToVoice->getVoiceName () <<
       "\"" <<
-      "' line " << inputLineNumber <<
-      std::endl;
+      "' line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -696,14 +657,11 @@ void msrSegment::setNextMeasureNumberInSegment (
         " in voice \"" <<
         fSegmentUpLinkToVoice->getVoiceName () <<
         "\"" <<
-        ", line " << inputLineNumber <<
-        std::endl;
+        ", line " << inputLineNumber;
 
       gWaeHandler->waeTraceWithLocationDetails (
         __FILE__, __LINE__,
         ss.str ());
-//         gServiceRunData->getCurrentMeasureNumber (),
-//         gServiceRunData->getScoreMeasuresNumber ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -727,14 +685,11 @@ void msrSegment::appendMusicXMLPrintLayoutToSegment (
       " to segment " << asString () <<
       ", in voice \"" <<
       fSegmentUpLinkToVoice->getVoiceName () <<
-      "\"" <<
-      std::endl;
+      "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -792,14 +747,11 @@ void msrSegment::appendClefKeyTimeSignatureGroupToSegment  (
       " to segment " << asString () <<
       ", in voice \"" <<
       fSegmentUpLinkToVoice->getVoiceName () <<
-      "\"" <<
-      std::endl;
+      "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -863,8 +815,6 @@ void msrSegment::appendClefKeyTimeSignatureGroupToSegment  (
 //     gWaeHandler->waeTraceWithLocationDetails (
 //       __FILE__, __LINE__,
 //       ss.str ());
-// //       gServiceRunData->getCurrentMeasureNumber (),
-// //       gServiceRunData->getScoreMeasuresNumber ());
 //   }
 // #endif // MF_TRACE_IS_ENABLED
 //
@@ -927,8 +877,6 @@ void msrSegment::appendClefKeyTimeSignatureGroupToSegment  (
 //     gWaeHandler->waeTraceWithLocationDetails (
 //       __FILE__, __LINE__,
 //       ss.str ());
-// //       gServiceRunData->getCurrentMeasureNumber (),
-// //       gServiceRunData->getScoreMeasuresNumber ());
 //
 //     abort ();
 //   }
@@ -1049,8 +997,6 @@ void msrSegment::appendClefKeyTimeSignatureGroupToSegment  (
 //     gWaeHandler->waeTraceWithLocationDetails (
 //       __FILE__, __LINE__,
 //       ss.str ());
-// //       gServiceRunData->getCurrentMeasureNumber (),
-// //       gServiceRunData->getScoreMeasuresNumber ());
 //
 //     gLog << "THIS:" << std::endl;
 //     gLog << "----------------------------" << std::endl;
@@ -1115,8 +1061,6 @@ void msrSegment::appendClefKeyTimeSignatureGroupToSegment  (
 //     gWaeHandler->waeTraceWithLocationDetails (
 //       __FILE__, __LINE__,
 //       ss.str ());
-// //       gServiceRunData->getCurrentMeasureNumber (),
-// //       gServiceRunData->getScoreMeasuresNumber ());
 //   }
 // #endif // MF_TRACE_IS_ENABLED
 //
@@ -1163,8 +1107,6 @@ void msrSegment::appendClefKeyTimeSignatureGroupToSegment  (
 //     gWaeHandler->waeTraceWithLocationDetails (
 //       __FILE__, __LINE__,
 //       ss.str ());
-// //       gServiceRunData->getCurrentMeasureNumber (),
-// //       gServiceRunData->getScoreMeasuresNumber ());
 //   }
 // #endif // MF_TRACE_IS_ENABLED
 //
@@ -1204,14 +1146,11 @@ void msrSegment::appendTimeSignatureToSegmentClone (
       "to segment clone " << asString () <<
       ", in voice \"" <<
       fSegmentUpLinkToVoice->getVoiceName () <<
-      "\"" <<
-      std::endl;
+      "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1245,14 +1184,11 @@ void msrSegment::insertHiddenMeasureAndBarLineInSegmentClone (
       ", in voice \"" <<
       fSegmentUpLinkToVoice->getVoiceName () <<
       "\"" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1289,14 +1225,11 @@ void msrSegment::appendHarmonyToSegment (
       fSegmentUpLinkToVoice->getVoiceName () <<
       "\"" <<
       ", measurePositionToAppendAt: " << measurePositionToAppendAt <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
@@ -1332,14 +1265,11 @@ void msrSegment::appendHarmoniesListToSegment (
       fSegmentUpLinkToVoice->getVoiceName () <<
       "\"" <<
       ", measurePositionToAppendAt: " << measurePositionToAppendAt <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1362,14 +1292,11 @@ void msrSegment::appendHarmonyToSegmentClone (const S_msrHarmony& harmony)
       " to segment clone " << asString () <<
       "' in voice clone \"" <<
       fSegmentUpLinkToVoice->getVoiceName () <<
-      "\"" <<
-      std::endl;
+      "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1401,14 +1328,11 @@ void msrSegment::appendFiguredBassToSegment (
       fSegmentUpLinkToVoice->getVoiceName () <<
       "\"" <<
       ", measurePositionToAppendAt: " << measurePositionToAppendAt <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1448,14 +1372,11 @@ void msrSegment::appendFiguredBassesListToSegment (
       fSegmentUpLinkToVoice->getVoiceName () <<
       "\"" <<
       ", measurePositionToAppendAt: " << measurePositionToAppendAt <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1480,14 +1401,11 @@ void msrSegment::appendFiguredBassToSegmentClone (
       " to segment clone " << asString () <<
       "' in voice clone \"" <<
       fSegmentUpLinkToVoice->getVoiceName () <<
-      "\"" <<
-      std::endl;
+      "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1513,14 +1431,11 @@ void msrSegment::appendSegnoToSegment (const S_msrSegno& segno)
       " to segment " << asString () <<
       "' in voice \"" <<
       fSegmentUpLinkToVoice->getVoiceName () <<
-      "\"" <<
-      std::endl;
+      "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1550,14 +1465,11 @@ void msrSegment::appendCodaToSegment (const S_msrCoda& coda)
       " to segment " << asString () <<
       "' in voice \"" <<
       fSegmentUpLinkToVoice->getVoiceName () <<
-      "\"" <<
-      std::endl;
+      "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1588,14 +1500,11 @@ void msrSegment::appendEyeGlassesToSegment (
       " to segment " << asString () <<
       "' in voice \"" <<
       fSegmentUpLinkToVoice->getVoiceName () <<
-      "\"" <<
-      std::endl;
+      "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1625,14 +1534,11 @@ void msrSegment::appendPedalToSegment (const S_msrPedal& pedal)
       " to segment " << asString () <<
       "' in voice \"" <<
       fSegmentUpLinkToVoice->getVoiceName () <<
-      "\"" <<
-      std::endl;
+      "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1663,14 +1569,11 @@ void msrSegment::appendDampToSegment (
       " to segment " << asString () <<
       "' in voice \"" <<
       fSegmentUpLinkToVoice->getVoiceName () <<
-      "\"" <<
-      std::endl;
+      "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1701,14 +1604,11 @@ void msrSegment::appendDampAllToSegment (
       " to segment " << asString () <<
       "' in voice \"" <<
       fSegmentUpLinkToVoice->getVoiceName () <<
-      "\"" <<
-      std::endl;
+      "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1739,14 +1639,11 @@ void msrSegment::appendTranspositionToSegment (
       " to segment " << asString () <<
       "' in voice \"" <<
       fSegmentUpLinkToVoice->getVoiceName () <<
-      "\"" <<
-      std::endl;
+      "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1785,14 +1682,11 @@ void msrSegment::appendStaffDetailsToSegment (
       " to segment " << asString () <<
       " in voice \"" <<
       fSegmentUpLinkToVoice->getVoiceName () <<
-      "\" line " << inputLineNumber <<
-      std::endl;
+      "\" line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1850,14 +1744,11 @@ void msrSegment::appendLineBreakToSegment (
       " to segment " << asString () <<
       " in voice \"" <<
       fSegmentUpLinkToVoice->getVoiceName () <<
-      "\"" <<
-      std::endl;
+      "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1888,14 +1779,11 @@ void msrSegment::appendPageBreakToSegment (
       " to segment " << asString () <<
       "' in voice \"" <<
       fSegmentUpLinkToVoice->getVoiceName () <<
-      "\"" <<
-      std::endl;
+      "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1926,14 +1814,11 @@ void msrSegment::appendBarNumberCheckToSegment (
       " to segment " << asString () <<
       "' in voice \"" <<
       fSegmentUpLinkToVoice->getVoiceName () <<
-      "\"" <<
-      std::endl;
+      "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1966,14 +1851,11 @@ void msrSegment::appendTempoToSegment (
       asString () <<
       " in voice \"" <<
       fSegmentUpLinkToVoice->getVoiceName () <<
-      "\"" <<
-      std::endl;
+      "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -2004,14 +1886,11 @@ void msrSegment::appendRehearsalMarkToSegment (
       " to segment " << asString () <<
       "' in voice \"" <<
       fSegmentUpLinkToVoice->getVoiceName () <<
-      "\"" <<
-      std::endl;
+      "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -2043,14 +1922,11 @@ void msrSegment::appendOctaveShiftToSegment (
       "' to segment " << asString () <<
       " in voice \"" <<
       fSegmentUpLinkToVoice->getVoiceName () <<
-      "\"" <<
-      std::endl;
+      "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -2082,14 +1958,11 @@ void msrSegment::appendScordaturaToSegment (
       " to segment " << asString () <<
       " in voice \"" <<
       fSegmentUpLinkToVoice->getVoiceName () <<
-      "\"" <<
-      std::endl;
+      "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -2122,14 +1995,11 @@ void msrSegment::appendAccordionRegistrationToSegment (
       " to segment " << asString () <<
       " in voice \"" <<
       fSegmentUpLinkToVoice->getVoiceName () <<
-      "\"" <<
-      std::endl;
+      "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -2163,14 +2033,11 @@ void msrSegment::appendHarpPedalsTuningToSegment (
       " to segment " << asString () <<
       " in voice \"" <<
       fSegmentUpLinkToVoice->getVoiceName () <<
-      "\"" <<
-      std::endl;
+      "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -2212,8 +2079,6 @@ void msrSegment::appendHarpPedalsTuningToSegment (
 //       gWaeHandler->waeTraceWithLocationDetails (
 //         __FILE__, __LINE__,
 //         ss.str (),
-//         gServiceRunData->getCurrentMeasureNumber (),
-//         gServiceRunData->getScoreMeasuresNumber ());
 //   }
 // #endif // MF_TRACE_IS_ENABLED
 //
@@ -2286,14 +2151,11 @@ void msrSegment::backupByWholeNotesStepLengthInSegment (
       fSegmentDebugNumber <<
       "' in voice \"" <<
       fSegmentUpLinkToVoice->getVoiceName () <<
-      "\", line " << inputLineNumber <<
-      std::endl;
+      "\", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -2324,14 +2186,11 @@ void msrSegment::appendPaddingNoteToSegment (
       fSegmentDebugNumber <<
       "' in voice \"" <<
       fSegmentUpLinkToVoice->getVoiceName () <<
-      "\", line " << inputLineNumber <<
-      std::endl;
+      "\", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -2383,14 +2242,11 @@ void msrSegment::appendMeasureToSegment (const S_msrMeasure& measure)
       "' in voice \"" <<
       fSegmentUpLinkToVoice->getVoiceName () <<
       "\"" <<
-      ", line " << measure->getInputLineNumber () <<
-      std::endl;
+      ", line " << measure->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -2488,14 +2344,11 @@ void msrSegment::prependMeasureToSegment (const S_msrMeasure& measure)
       " in voice \"" <<
       fSegmentUpLinkToVoice->getVoiceName () <<
       "\"," <<
-      ", line " << measure->getInputLineNumber () <<
-      std::endl;
+      ", line " << measure->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -2539,14 +2392,11 @@ void msrSegment::appendMultipleFullBarRestsToSegment (
       " to segment " << asString () <<
       " in voice \"" <<
       fSegmentUpLinkToVoice->getVoiceName () <<
-      "\"" <<
-      std::endl;
+      "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -2566,14 +2416,11 @@ void msrSegment::prependBarLineToSegment (
       "' to segment '" << asString () <<
       " in voice \"" <<
       fSegmentUpLinkToVoice->getVoiceName () <<
-      "\"" <<
-      std::endl;
+      "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -2604,14 +2451,11 @@ void msrSegment::appendBarLineToSegment (
       " to segment " << asString () <<
       " in voice \"" <<
       fSegmentUpLinkToVoice->getVoiceName () <<
-      "\"" <<
-      std::endl;
+      "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -2642,14 +2486,11 @@ void msrSegment::appendBarCheckToSegment (
       " to segment " << asString () <<
       " in voice \"" <<
       fSegmentUpLinkToVoice->getVoiceName () <<
-      "\"," <<
-      std::endl;
+      "\",";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -2674,14 +2515,11 @@ void msrSegment::appendVoiceStaffChangeToSegment (
       "Appending voice staff change " <<
       voiceStaffChange->asString () <<
       " to segment " << asString () <<
-      ", line " << voiceStaffChange->getInputLineNumber () <<
-      std::endl;
+      ", line " << voiceStaffChange->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -2745,14 +2583,11 @@ void msrSegment::appendDoubleTremoloToSegment ( // JMI
       " to segment " << asString () <<
       " in voice \"" <<
       fSegmentUpLinkToVoice->getVoiceName () <<
-      "\"" <<
-      std::endl;
+      "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -2895,14 +2730,11 @@ void msrSegment::removeNoteFromSegment (
       "Removing note " <<
       note->asString () <<
       " from segment " <<
-      asString () <<
-      std::endl;
+      asString ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -2948,14 +2780,11 @@ void msrSegment::removeElementFromSegment (
       "Removing element " <<
       element->asString () <<
       " from segment '" <<
-      asString () <<
-      std::endl;
+      asString ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -2999,14 +2828,11 @@ S_msrMeasure msrSegment::fetchLastMeasureFromSegment (
       ", segmentDebugNumber: '" <<
       fSegmentDebugNumber <<
       " (" << context << ")" <<
-      "', line " << inputLineNumber <<
-      std::endl;
+      "', line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -3070,14 +2896,11 @@ S_msrMeasure msrSegment::removeLastMeasureFromSegment (
       "', segmentDebugNumber: '" <<
       fSegmentDebugNumber <<
       "' (" << context << ")" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -3242,14 +3065,11 @@ void msrSegment::finalizeAllTheMeasuresOfSegment ( // superflous JMI ???
     ss <<
       "Finalizing all the measures of segment '" <<
       fSegmentAbsoluteNumber <<
-      "', line " << inputLineNumber <<
-      std::endl;
+      "', line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -3269,14 +3089,11 @@ void msrSegment::acceptIn (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrSegment::acceptIn ()" <<
-      std::endl;
+      "% ==> msrSegment::acceptIn ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -3290,14 +3107,11 @@ void msrSegment::acceptIn (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrSegment::visitStart ()" <<
-            std::endl;
+            "% ==> Launching msrSegment::visitStart ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
@@ -3311,14 +3125,11 @@ void msrSegment::acceptOut (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrSegment::acceptOut ()" <<
-      std::endl;
+      "% ==> msrSegment::acceptOut ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -3332,14 +3143,11 @@ void msrSegment::acceptOut (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrSegment::visitEnd ()" <<
-            std::endl;
+            "% ==> Launching msrSegment::visitEnd ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
@@ -3353,14 +3161,11 @@ void msrSegment::browseData (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrSegment::browseData ()" <<
-      std::endl;
+      "% ==> msrSegment::browseData ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -3375,14 +3180,11 @@ void msrSegment::browseData (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% <== msrSegment::browseData ()" <<
-      std::endl;
+      "% <== msrSegment::browseData ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }

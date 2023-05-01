@@ -145,14 +145,11 @@ std::string wholeNotesAsLilypondString (
       "--> wholeNotesAsLilypondString() 1 -------------------------------------" <<
       ", wholeNotes: " << wholeNotes.asString () <<
       ", dotsNumber: " << dotsNumber <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -173,8 +170,6 @@ std::string wholeNotesAsLilypondString (
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -204,11 +199,11 @@ std::string wholeNotesAsLilypondString (
 
     std::string message = s1.str ();
 
-//     lpsrError (
-    lpsrWarning ( // JMI v0.9.67
+    lpsrError ( // JMI v0.9.68
+//     lpsrWarning (
       gServiceRunData->getInputSourceName (),
       inputLineNumber,
-//      __FILE__, __LINE__,
+     __FILE__, __LINE__,
       message);
 
     std::stringstream s2;
@@ -241,8 +236,6 @@ std::string wholeNotesAsLilypondString (
 //     gWaeHandler->waeTraceWithLocationDetails (
 //       __FILE__, __LINE__,
 //       ss.str (),
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
@@ -273,8 +266,6 @@ std::string wholeNotesAsLilypondString (
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -404,8 +395,6 @@ std::string wholeNotesAsLilypondString (
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -420,14 +409,11 @@ std::string wholeNotesAsLilypondString (
 
       ss <<
         "--> integralNumberOfWholeNotes,"
-        " bringing the faction to be less that 2" <<
-        std::endl;
+        " bringing the faction to be less that 2";
 
       gWaeHandler->waeTraceWithLocationDetails (
         __FILE__, __LINE__,
         ss.str ());
-//         gServiceRunData->getCurrentMeasureNumber (),
-//         gServiceRunData->getScoreMeasuresNumber ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -470,8 +456,6 @@ std::string wholeNotesAsLilypondString (
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -503,14 +487,11 @@ std::string wholeNotesAsLilypondString (
       std::stringstream ss;
 
       ss <<
-        "--> setting the multiplying factor" <<
-        std::endl;
+        "--> setting the multiplying factor";
 
       gWaeHandler->waeTraceWithLocationDetails (
         __FILE__, __LINE__,
         ss.str ());
-//         gServiceRunData->getCurrentMeasureNumber (),
-//         gServiceRunData->getScoreMeasuresNumber ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -579,8 +560,6 @@ std::string wholeNotesAsLilypondString (
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -635,14 +614,11 @@ std::string wholeNotesAsLilypondString (
     ss <<
       "--> wholeNotesAsLilypondString() 2 -------------------------------------" <<
      ", result: \"" << result << "\"" <<
-      ", numeratorDots" << ": " << numeratorDots <<
-      std::endl;
+      ", numeratorDots" << ": " << numeratorDots;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 

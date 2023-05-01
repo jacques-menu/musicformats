@@ -67,8 +67,7 @@ S_mfcLibraryComponent createLibraryComponent ()
         ", " <<
         getGlobalMusicFormatsVersionNumber <<
         ", " <<
-        getGlobalMusicFormatsVersionDate <<
-        std::endl;
+        getGlobalMusicFormatsVersionDate;
 
       gWaeHandler->waeTraceWithoutLocationDetails (
         __FILE__, __LINE__,

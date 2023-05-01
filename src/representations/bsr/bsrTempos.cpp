@@ -245,7 +245,7 @@ S_bsrCellsList bsrTempo::buildCellsList () const
               "There are " << smSize << " matches" <<
               " for mfRational string '" << tempoPerMinuteString <<
               "' with std::regex '" << regularExpression <<
-              "'" <<
+              '\'' <<
               std::endl;
 
             for (unsigned i = 0; i < smSize; ++i) {
@@ -289,7 +289,7 @@ S_bsrCellsList bsrTempo::buildCellsList () const
                 "There are " << smSize << " matches" <<
                 " for mfRational string '" << tempoPerMinuteString <<
                 "' with std::regex '" << regularExpression <<
-                "'" <<
+                '\'' <<
                 std::endl;
 
               for (unsigned i = 0; i < smSize; ++i) {
@@ -392,14 +392,11 @@ void bsrTempo::acceptIn (basevisitor* v)
 
     ss <<
       "% --> End visiting bsrTranscriptionNotesElement" <<
-      "% ==> bsrTempo::acceptIn ()" <<
-      std::endl;
+      "% ==> bsrTempo::acceptIn ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -413,14 +410,11 @@ void bsrTempo::acceptIn (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching bsrTempo::visitStart ()" <<
-            std::endl;
+            "% ==> Launching bsrTempo::visitStart ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
@@ -435,14 +429,11 @@ void bsrTempo::acceptOut (basevisitor* v)
 
     ss <<
       "% --> End visiting bsrTranscriptionNotesElement" <<
-      "% ==> bsrTempo::acceptOut ()" <<
-      std::endl;
+      "% ==> bsrTempo::acceptOut ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -456,14 +447,11 @@ void bsrTempo::acceptOut (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching bsrTempo::visitEnd ()" <<
-            std::endl;
+            "% ==> Launching bsrTempo::visitEnd ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);

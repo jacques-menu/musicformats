@@ -296,8 +296,7 @@ void mfMultiGenerationOutputKindAtom::setImplicitVariable (std::ostream& os)
     ss <<
       "==> handling atom '" <<
       fetchNames () <<
-      "; which is of type 'mfMultiGenerationOutputKindAtom'" <<
-      std::endl;
+      "; which is of type 'mfMultiGenerationOutputKindAtom'";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -329,8 +328,7 @@ void mfMultiGenerationOutputKindAtom::acceptIn (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> mfMultiGenerationOutputKindAtom::acceptIn ()" <<
-      std::endl;
+      ".\\\" ==> mfMultiGenerationOutputKindAtom::acceptIn ()";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -348,8 +346,7 @@ void mfMultiGenerationOutputKindAtom::acceptIn (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            ".\\\" ==> Launching mfMultiGenerationOutputKindAtom::visitStart ()" <<
-            std::endl;
+            ".\\\" ==> Launching mfMultiGenerationOutputKindAtom::visitStart ()";
 
           gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
@@ -367,8 +364,7 @@ void mfMultiGenerationOutputKindAtom::acceptOut (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> mfMultiGenerationOutputKindAtom::acceptOut ()" <<
-      std::endl;
+      ".\\\" ==> mfMultiGenerationOutputKindAtom::acceptOut ()";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -386,8 +382,7 @@ void mfMultiGenerationOutputKindAtom::acceptOut (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            ".\\\" ==> Launching mfMultiGenerationOutputKindAtom::visitEnd ()" <<
-            std::endl;
+            ".\\\" ==> Launching mfMultiGenerationOutputKindAtom::visitEnd ()";
 
           gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
@@ -405,8 +400,7 @@ void mfMultiGenerationOutputKindAtom::browseData (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> mfMultiGenerationOutputKindAtom::browseData ()" <<
-      std::endl;
+      ".\\\" ==> mfMultiGenerationOutputKindAtom::browseData ()";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -628,8 +622,7 @@ void mfMultiGenerationOahGroup::acceptIn (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> mfMultiGenerationOahGroup::acceptIn ()" <<
-      std::endl;
+      ".\\\" ==> mfMultiGenerationOahGroup::acceptIn ()";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -647,8 +640,7 @@ void mfMultiGenerationOahGroup::acceptIn (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            ".\\\" ==> Launching mfMultiGenerationOahGroup::visitStart ()" <<
-            std::endl;
+            ".\\\" ==> Launching mfMultiGenerationOahGroup::visitStart ()";
 
           gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
@@ -666,8 +658,7 @@ void mfMultiGenerationOahGroup::acceptOut (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> mfMultiGenerationOahGroup::acceptOut ()" <<
-      std::endl;
+      ".\\\" ==> mfMultiGenerationOahGroup::acceptOut ()";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -685,8 +676,7 @@ void mfMultiGenerationOahGroup::acceptOut (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            ".\\\" ==> Launching mfMultiGenerationOahGroup::visitEnd ()" <<
-            std::endl;
+            ".\\\" ==> Launching mfMultiGenerationOahGroup::visitEnd ()";
 
           gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
@@ -704,8 +694,7 @@ void mfMultiGenerationOahGroup::browseData (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> mfMultiGenerationOahGroup::browseData ()" <<
-      std::endl;
+      ".\\\" ==> mfMultiGenerationOahGroup::browseData ()";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -763,8 +752,7 @@ S_multiGenerationOahGroup createGlobalMultiGenerationOahGroup ()
     std::stringstream ss;
 
     ss <<
-      "Creating multi generator OAH group" <<
-      std::endl;
+      "Creating multi generator OAH group";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,

@@ -82,14 +82,11 @@ msrBarCheck::msrBarCheck (
     std::stringstream ss;
 
     ss <<
-      "Creating a bar check without next bar number" <<
-      std::endl;
+      "Creating a bar check without next bar number";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -117,14 +114,11 @@ msrBarCheck::msrBarCheck (
       nextBarOriginalNumber <<
       " and next bar purist number '" <<
       fNextBarPuristNumber <<
-      "'" <<
-      std::endl;
+      "'";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }
@@ -171,14 +165,11 @@ void msrBarCheck::setNextBarPuristNumber (int puristNumber)
     ss <<
       "Setting bar check next bar number to '" <<
       puristNumber <<
-      "'" <<
-      std::endl;
+      "'";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -192,14 +183,11 @@ void msrBarCheck::acceptIn (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrBarCheck::acceptIn ()" <<
-      std::endl;
+      "% ==> msrBarCheck::acceptIn ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -213,14 +201,11 @@ void msrBarCheck::acceptIn (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrBarCheck::visitStart ()" <<
-            std::endl;
+            "% ==> Launching msrBarCheck::visitStart ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
@@ -234,14 +219,11 @@ void msrBarCheck::acceptOut (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrBarCheck::acceptOut ()" <<
-      std::endl;
+      "% ==> msrBarCheck::acceptOut ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -255,14 +237,11 @@ void msrBarCheck::acceptOut (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrBarCheck::visitEnd ()" <<
-            std::endl;
+            "% ==> Launching msrBarCheck::visitEnd ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);

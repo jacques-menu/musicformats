@@ -187,14 +187,11 @@ void msrScaling::acceptIn (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrScaling::acceptIn ()" <<
-      std::endl;
+      "% ==> msrScaling::acceptIn ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -208,14 +205,11 @@ void msrScaling::acceptIn (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrScaling::visitStart ()" <<
-            std::endl;
+            "% ==> Launching msrScaling::visitStart ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
@@ -229,14 +223,11 @@ void msrScaling::acceptOut (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrScaling::acceptOut ()" <<
-      std::endl;
+      "% ==> msrScaling::acceptOut ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -250,14 +241,11 @@ void msrScaling::acceptOut (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrScaling::visitEnd ()" <<
-            std::endl;
+            "% ==> Launching msrScaling::visitEnd ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif        
         p->visitEnd (elem);

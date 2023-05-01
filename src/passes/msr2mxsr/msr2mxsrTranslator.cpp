@@ -119,14 +119,11 @@ int msr2mxsrTranslator::wholeNotesAsDivisions (
     ss <<
       "--> durationAsRational: " <<
       durationAsRational <<
-      "--> line " << inputLineNumber <<
-      std::endl;
+      "--> line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -469,14 +466,11 @@ void msr2mxsrTranslator::createMxmlAttributesElementAndAppendItToMeasure ()
     std::stringstream ss;
 
     ss <<
-      "--> createMxmlAttributesElementAndAppendItToMeasure() 1" <<
-      std::endl;
+      "--> createMxmlAttributesElementAndAppendItToMeasure() 1";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -634,14 +628,11 @@ void msr2mxsrTranslator::appendNoteToMeasure (
     ss <<
       "--> appendNoteToMeasure(), note: " <<
       ", note: " << mxmlelementAsString (note) <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -673,14 +664,11 @@ void msr2mxsrTranslator::appendOtherMusicXMLElementToMeasure (
     ss <<
       "--> appendOtherMusicXMLElementToMeasure()" <<
       ", elem: " << mxmlelementAsString (elem) <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -809,14 +797,11 @@ void msr2mxsrTranslator::visitStart (S_msrScore& elt)
 
     ss <<
       "--> Start visiting msrScore" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -903,14 +888,11 @@ void msr2mxsrTranslator::visitEnd (S_msrScore& elt)
 
     ss <<
       "--> End visiting msrScore" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1081,14 +1063,11 @@ void msr2mxsrTranslator::visitStart (S_msrIdentification& elt)
 
     ss <<
       "--> Start visiting msrIdentification" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1436,14 +1415,11 @@ void msr2mxsrTranslator::visitEnd (S_msrIdentification& elt)
 
     ss <<
       "--> End visiting msrIdentification" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1494,14 +1470,11 @@ void msr2mxsrTranslator::visitStart (S_msrScaling& elt)
 
     ss <<
       "--> Start visiting msrScaling" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1551,14 +1524,11 @@ void msr2mxsrTranslator::visitEnd (S_msrScaling& elt)
 
     ss <<
       "--> End visiting msrScaling" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }
@@ -1572,14 +1542,11 @@ void msr2mxsrTranslator::visitStart (S_msrPageLayout& elt)
 
     ss <<
       "--> Start visiting msrPageLayout" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1638,14 +1605,11 @@ void msr2mxsrTranslator::visitEnd (S_msrPageLayout& elt)
 
     ss <<
       "--> End visiting msrPageLayout" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }
@@ -1659,14 +1623,11 @@ void msr2mxsrTranslator::visitStart (S_msrSystemLayout& elt)
 
     ss <<
       "--> Start visiting msrSystemLayout" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1739,14 +1700,11 @@ void msr2mxsrTranslator::visitEnd (S_msrSystemLayout& elt)
 
     ss <<
       "--> End visiting msrSystemLayout" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }
@@ -1760,14 +1718,11 @@ void msr2mxsrTranslator::visitStart (S_msrStaffLayout& elt)
 
     ss <<
       "--> Start visiting msrStaffLayout" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1820,14 +1775,11 @@ void msr2mxsrTranslator::visitEnd (S_msrStaffLayout& elt)
 
     ss <<
       "--> End visiting msrStaffLayout" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }
@@ -1841,14 +1793,11 @@ void msr2mxsrTranslator::visitStart (S_msrMeasureLayout& elt)
 
     ss <<
       "--> Start visiting msrMeasureLayout" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1892,14 +1841,11 @@ void msr2mxsrTranslator::visitEnd (S_msrMeasureLayout& elt)
 
     ss <<
       "--> End visiting msrMeasureLayout" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }
@@ -2260,14 +2206,11 @@ void msr2mxsrTranslator::visitStart (S_msrAppearance& elt)
 
     ss <<
       "--> Start visiting msrAppearance" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -2332,14 +2275,11 @@ void msr2mxsrTranslator::visitEnd (S_msrAppearance& elt)
 
     ss <<
       "--> End visiting msrAppearance" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }
@@ -2353,14 +2293,11 @@ void msr2mxsrTranslator::visitStart (S_msrCredit& elt)
 
     ss <<
       "--> Start visiting msrCredit" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -2383,14 +2320,11 @@ void msr2mxsrTranslator::visitEnd (S_msrCredit& elt)
 
     ss <<
       "--> End visiting msrCredit" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -2406,14 +2340,11 @@ void msr2mxsrTranslator::visitStart (S_msrCreditWords& elt)
 
     ss <<
       "--> Start visiting msrCreditWords" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -2581,14 +2512,11 @@ void msr2mxsrTranslator::visitEnd (S_msrCreditWords& elt)
 
     ss <<
       "--> End visiting msrCreditWords" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }
@@ -2606,14 +2534,11 @@ void msr2mxsrTranslator::visitStart (S_msrPartGroup& elt)
     ss <<
       "--> Start visiting msrPartGroup " <<
       elt->getPartGroupCombinedName () <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -2872,14 +2797,11 @@ if (false) // JMI
     ss <<
       std::endl <<
       "<!--=== part \"" << partCombinedName << "\"" <<
-      ", line " << inputLineNumber << " ===-->" <<
-      std::endl;
+      ", line " << inputLineNumber << " ===-->";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -2995,14 +2917,11 @@ if (false) // JMI
       fDivisionsPerQuarterNote <<
       std::endl <<
       "--> divisionsMultiplyingFactor: " <<
-      fDivisionsMultiplyingFactor <<
-      std::endl;
+      fDivisionsMultiplyingFactor;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -3051,14 +2970,11 @@ void msr2mxsrTranslator::visitEnd (S_msrPart& elt)
     ss <<
       "--> End visiting msrPart " <<
       elt->getPartCombinedName () <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -3214,14 +3130,11 @@ void msr2mxsrTranslator::visitEnd (S_msrStaff& elt)
     ss <<
       "--> End visiting S_msrStaff \"" <<
       elt->getStaffName () << "\"" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -3286,14 +3199,11 @@ void msr2mxsrTranslator::visitStart (S_msrVoice& elt)
     ss <<
       std::endl <<
       "<!--=== voice \"" << elt->getVoiceName () << "\"" <<
-      ", line " << elt->getInputLineNumber () << " ===-->" <<
-      std::endl;
+      ", line " << elt->getInputLineNumber () << " ===-->";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -3311,14 +3221,11 @@ void msr2mxsrTranslator::visitEnd (S_msrVoice& elt)
     ss <<
       "--> End visiting msrVoice \"" <<
       elt->getVoiceName () << "\"" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -3356,7 +3263,7 @@ void msr2mxsrTranslator::visitStart (S_msrSegment& elt)
 
     ss <<
       "--> Start visiting msrSegment '" <<
-      elt->getSegmentAbsoluteNumber () << "'" <<
+      elt->getSegmentAbsoluteNumber () << '\'' <<
       ", line " << inputLineNumber <<
       std::endl;
 
@@ -3399,7 +3306,7 @@ void msr2mxsrTranslator::visitEnd (S_msrSegment& elt)
 
     ss <<
       "--> End visiting msrSegment '" <<
-      elt->getSegmentAbsoluteNumber () << "'" <<
+      elt->getSegmentAbsoluteNumber () << '\'' <<
       ", line " << inputLineNumber <<
       std::endl;
 
@@ -3482,14 +3389,11 @@ void msr2mxsrTranslator::visitStart (S_msrMeasure& elt)
 //      fCurrentVoiceClone->getVoiceName () <<
 //       "\"" <<
       ", line " << inputLineNumber <<
-      " ===-->" <<
-      std::endl;
+      " ===-->";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -3587,14 +3491,11 @@ if (false) { // JMI
         elt->asString () <<
         " at the beginning of measure '" <<
         elt->getMeasurePuristNumber () <<
-        "', line " << inputLineNumber <<
-        std::endl;
+        "', line " << inputLineNumber;
 
       gWaeHandler->waeTraceWithLocationDetails (
         __FILE__, __LINE__,
         ss.str ());
-//         fCurrentMeasureNumber,
-//         fVisitedMsrScore->getScoreMeasuresNumber ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -3632,14 +3533,11 @@ void msr2mxsrTranslator::visitEnd (S_msrMeasure& elt)
       nextMeasureNumber <<
       "', measurePuristNumber: '" <<
       measurePuristNumber <<
-      "', line " << inputLineNumber <<
-      std::endl;
+      "', line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -3667,14 +3565,11 @@ void msr2mxsrTranslator::visitStart (S_msrMusicXMLPrintLayout& elt)
 
     ss <<
       "--> Start visiting msrMusicXMLPrintLayout '" <<
-      "', line " << inputLineNumber <<
-      std::endl;
+      "', line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -3687,14 +3582,11 @@ void msr2mxsrTranslator::visitStart (S_msrMusicXMLPrintLayout& elt)
 //      "', voice \"" <<
 //      fCurrentVoiceClone->getVoiceName () <<
       "\"" <<
-      ", line " << inputLineNumber << " ===-->" <<
-      std::endl;
+      ", line " << inputLineNumber << " ===-->";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -3747,14 +3639,11 @@ void msr2mxsrTranslator::visitEnd (S_msrMusicXMLPrintLayout& elt)
 
     ss <<
       "--> End visiting msrMusicXMLPrintLayout '" <<
-      "', line " << inputLineNumber <<
-      std::endl;
+      "', line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -3774,14 +3663,11 @@ void msr2mxsrTranslator::visitStart (S_msrClef& elt)
     ss <<
       "--> Start visiting msrClef " <<
       elt->asString () <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -4162,14 +4048,11 @@ void msr2mxsrTranslator::visitEnd (S_msrClef& elt)
     ss <<
       "--> End visiting msrClef" <<
       elt->asString () <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }
@@ -4198,14 +4081,11 @@ void msr2mxsrTranslator::visitStart (S_msrKey& elt)
     }
 
     gLog <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -4396,14 +4276,11 @@ void msr2mxsrTranslator::visitEnd (S_msrKey& elt)
     ss <<
       "--> End visiting msrKey" <<
       elt->asString () <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }
@@ -4429,14 +4306,11 @@ void msr2mxsrTranslator::visitStart (S_msrTimeSignature& elt)
     }
 
     gLog <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -4571,14 +4445,11 @@ void msr2mxsrTranslator::visitEnd (S_msrTimeSignature& elt)
     ss <<
       "--> End visiting msrTimeSignature" <<
       elt->asString () <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }
@@ -4596,14 +4467,11 @@ void msr2mxsrTranslator::visitStart (S_msrTempo& elt)
     ss <<
       "--> Start visiting msrTempo" <<
       elt->asString () <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -4958,14 +4826,11 @@ void msr2mxsrTranslator::visitEnd (S_msrTempo& elt)
 
     ss <<
       "--> End visiting msrTempo" <<
-      elt->asString () <<
-      std::endl;
+      elt->asString ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }
@@ -4982,14 +4847,11 @@ void msr2mxsrTranslator::visitStart (S_msrChord& elt)
 
     ss <<
       "--> Start visiting msrChord" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -5026,14 +4888,11 @@ void msr2mxsrTranslator::visitEnd (S_msrChord& elt)
 
     ss <<
       "--> End visiting msrChord" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -5074,14 +4933,11 @@ void msr2mxsrTranslator::visitStart (S_msrTuplet& elt)
 
     ss <<
       "--> Start visiting msrTuplet" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -5115,14 +4971,11 @@ void msr2mxsrTranslator::visitEnd (S_msrTuplet& elt)
 
     ss <<
       "--> End visiting msrTuplet" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -5155,14 +5008,11 @@ void msr2mxsrTranslator:: appendNoteWedges (
 
     ss <<
       "--> appendNoteWedges, theMsrNote: " <<
-      theMsrNote->asShortString () <<
-      std::endl;
+      theMsrNote->asShortString ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -5219,14 +5069,11 @@ void msr2mxsrTranslator::appendNoteDynamics (
 
     ss <<
       "--> appendNoteDynamics, theMsrNote: " <<
-      theMsrNote->asShortString () <<
-      std::endl;
+      theMsrNote->asShortString ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -5401,14 +5248,11 @@ void msr2mxsrTranslator::appendABackupToMeasure (
       ", backupNotesDuration: " << backupNotesDuration <<
       ", backupNotesDurationDivisions: " << backupNotesDurationDivisions <<
 
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -5501,14 +5345,11 @@ void msr2mxsrTranslator:: appendAForwardToMeasure (
       "Creating a forward element, note: " <<
       theMsrNote->asShortString () <<
       ", forwardNotesDurationDivisions: " << forwardNotesDurationDivisions <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -5604,14 +5445,11 @@ void msr2mxsrTranslator:: appendABackupOrForwardToMeasureIfNeeded (
     }
 
     ss <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -5659,14 +5497,11 @@ void msr2mxsrTranslator:: appendABackupOrForwardToMeasureIfNeeded (
     ss <<
       ", previousMSRNoteStaffNumber: " << previousMSRNoteStaffNumber <<
       ", previousMSRNoteVoiceNumber: " << previousMSRNoteVoiceNumber <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -5766,14 +5601,11 @@ void msr2mxsrTranslator:: populateNoteDirections (
 
     ss <<
       "--> populateNoteDirections, theMsrNote: " <<
-      theMsrNote->asShortString () <<
-      std::endl;
+      theMsrNote->asShortString ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -5806,14 +5638,11 @@ void msr2mxsrTranslator:: appendNoteOrnaments (
 
     ss <<
       "--> appendNoteOrnaments, theMsrNote: " <<
-      theMsrNote->asShortString () <<
-      std::endl;
+      theMsrNote->asShortString ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -5927,14 +5756,11 @@ void msr2mxsrTranslator:: appendNoteTechnicals (
 
     ss <<
       "--> appendNoteTechnicals, theMsrNote: " <<
-      theMsrNote->asShortString () <<
-      std::endl;
+      theMsrNote->asShortString ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -6039,14 +5865,11 @@ void msr2mxsrTranslator:: appendNoteTechnicalWithIntegers (
 
     ss <<
       "--> appendNoteTechnicalWithIntegers, theMsrNote: " <<
-      theMsrNote->asShortString () <<
-      std::endl;
+      theMsrNote->asShortString ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -6125,14 +5948,11 @@ void msr2mxsrTranslator:: appendNoteTechnicalWithFloats (
 
     ss <<
       "--> appendNoteTechnicalWithFloats, theMsrNote: " <<
-      theMsrNote->asShortString () <<
-      std::endl;
+      theMsrNote->asShortString ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -6201,14 +6021,11 @@ void msr2mxsrTranslator:: appendNoteTechnicalWithStrings (
 
     ss <<
       "--> appendNoteTechnicalWithStrings, theMsrNote: " <<
-      theMsrNote->asShortString () <<
-      std::endl;
+      theMsrNote->asShortString ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -6286,14 +6103,11 @@ void msr2mxsrTranslator:: appendNoteArticulations (
 
     ss <<
       "--> appendNoteArticulations, theMsrNote: " <<
-      theMsrNote->asShortString () <<
-      std::endl;
+      theMsrNote->asShortString ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -6437,14 +6251,11 @@ void msr2mxsrTranslator:: appendNoteTieIfAny (
 
     ss <<
       "--> appendNoteTieIfAny, theMsrNote: " <<
-      theMsrNote->asShortString () <<
-      std::endl;
+      theMsrNote->asShortString ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -6494,14 +6305,11 @@ void msr2mxsrTranslator:: appendNoteSlursIfAny (
 
     ss <<
       "--> appendNoteSlursIfAny, theMsrNote: " <<
-      theMsrNote->asShortString () <<
-      std::endl;
+      theMsrNote->asShortString ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -6585,14 +6393,11 @@ void msr2mxsrTranslator:: appendNoteTupletIfRelevant (
 
     ss <<
       "--> appendNoteTupletIfRelevant, theMsrNote: " <<
-      theMsrNote->asShortString () <<
-      std::endl;
+      theMsrNote->asShortString ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -6684,14 +6489,11 @@ void msr2mxsrTranslator:: appendNoteSpannersBeforeNote (
 
     ss <<
       "--> appendNoteSpannersBeforeNote, theMsrNote: " <<
-      theMsrNote->asShortString () <<
-      std::endl;
+      theMsrNote->asShortString ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -6799,14 +6601,11 @@ void msr2mxsrTranslator:: appendNoteSpannersAfterNote (
 
     ss <<
       "--> appendNoteSpannersAfterNote, theMsrNote: " <<
-      theMsrNote->asShortString () <<
-      std::endl;
+      theMsrNote->asShortString ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -6911,14 +6710,11 @@ void msr2mxsrTranslator:: appendStemToNote (
 
     ss <<
       "--> appendStemToNote, theMsrNote: " <<
-      theMsrNote->asShortString () <<
-      std::endl;
+      theMsrNote->asShortString ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -6963,14 +6759,11 @@ void msr2mxsrTranslator::appendBeamsToNote (
 
     ss <<
       "--> appendBeamsToNote, theMsrNote: " <<
-      theMsrNote->asShortString () <<
-      std::endl;
+      theMsrNote->asShortString ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -7037,14 +6830,11 @@ void msr2mxsrTranslator:: appendStaffToNoteIfRelevant (
     ss <<
       "--> appendStaffToNoteIfRelevant(), theMsrNote: " <<
       theMsrNote->asShortString () <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -7103,14 +6893,11 @@ void msr2mxsrTranslator::appendVoiceToNoteIfRelevant (
     ss <<
       "--> appendVoiceToNoteIfRelevant(), theMsrNote: " <<
       theMsrNote->asShortString () <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -7163,14 +6950,11 @@ void msr2mxsrTranslator:: appendNoteNotationsToNote (
 
     ss <<
       "--> appendNoteNotationsToNote, theMsrNote: " <<
-      theMsrNote->asShortString () <<
-      std::endl;
+      theMsrNote->asShortString ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -7219,14 +7003,11 @@ void msr2mxsrTranslator:: appendNoteLyricsToNote (
 
     ss <<
       "--> appendNoteLyricsToNote, theMsrNote: " <<
-      theMsrNote->asShortString () <<
-      std::endl;
+      theMsrNote->asShortString ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -7392,14 +7173,11 @@ void msr2mxsrTranslator::appendBasicsToNote (
     ss <<
       "--> appendBasicsToNote(), theMsrNote: " <<
       theMsrNote->asShortString () <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -7439,14 +7217,11 @@ void msr2mxsrTranslator::appendBasicsToNote (
       "-->  noteOctaveKind: " <<
       msrOctaveKindAsString (noteOctaveKind) <<
       "-->  noteDiatonicPitchKind: " <<
-      msrDiatonicPitchKindAsString (noteDiatonicPitchKind) <<
-      std::endl;
+      msrDiatonicPitchKindAsString (noteDiatonicPitchKind);
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -7584,14 +7359,11 @@ void msr2mxsrTranslator::appendNotesDurationToNoteIfRelevant (
     ss <<
       "--> appendNotesDurationToNoteIfRelevant(1), theMsrNote: " <<
       theMsrNote->asShortString () <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -7620,14 +7392,11 @@ void msr2mxsrTranslator::appendNotesDurationToNoteIfRelevant (
       ", divisionsPerQuarterNote: " << fDivisionsPerQuarterNote <<
       ", partShortestNoteWholeNotes: " << fPartShortestNoteWholeNotes.asString () <<
       ", fDivisionsMultiplyingFactor: " << fDivisionsMultiplyingFactor <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -7689,14 +7458,11 @@ void msr2mxsrTranslator::appendNotesDurationToNoteIfRelevant (
       ss <<
         "---> soundingNotesDurationAsRational: " <<
         soundingNotesDurationAsRational <<
-        "--> line " << inputLineNumber <<
-        std::endl;
+        "--> line " << inputLineNumber;
 
       gWaeHandler->waeTraceWithLocationDetails (
         __FILE__, __LINE__,
         ss.str ());
-//         fCurrentMeasureNumber,
-//         fVisitedMsrScore->getScoreMeasuresNumber ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -7727,14 +7493,11 @@ void msr2mxsrTranslator::appendNotesDurationToNoteIfRelevant (
       ss <<
         std::endl <<
         "--> appendNotesDurationToNoteIfRelevant(2): " <<
-        theMsrNote <<
-        std::endl;
+        theMsrNote;
 
       gWaeHandler->waeTraceWithLocationDetails (
         __FILE__, __LINE__,
         ss.str ());
-//         fCurrentMeasureNumber,
-//         fVisitedMsrScore->getScoreMeasuresNumber ());
     }
 #endif // MF_TRACE_IS_ENABLED
   }
@@ -7753,14 +7516,11 @@ void msr2mxsrTranslator::appendTimeModificationToNoteIfRelevant (
     ss <<
       "--> appendTimeModificationToNoteIfRelevant(), theMsrNote: " <<
       theMsrNote->asShortString () <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -7835,14 +7595,11 @@ void msr2mxsrTranslator::appendMsrNoteToMesureIfRelevant (
 
     ss <<
       "--> appendMsrNoteToMesureIfRelevant, theMsrNote: " <<
-      theMsrNote->asShortString () <<
-      std::endl;
+      theMsrNote->asShortString ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -7976,14 +7733,11 @@ void msr2mxsrTranslator::appendMsrNoteToMesureIfRelevant (
 
       ss <<
         "-->  noteDotsNumber: " << noteDotsNumber <<
-        "--> line " << inputLineNumber <<
-        std::endl;
+        "--> line " << inputLineNumber;
 
       gWaeHandler->waeTraceWithLocationDetails (
         __FILE__, __LINE__,
         ss.str ());
-//         fCurrentMeasureNumber,
-//         fVisitedMsrScore->getScoreMeasuresNumber ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -8088,14 +7842,11 @@ void msr2mxsrTranslator::visitStart (S_msrGraceNotesGroup& elt)
 
     ss <<
       "--> Start visiting msrGraceNotesGroup" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -8127,14 +7878,11 @@ void msr2mxsrTranslator::visitEnd (S_msrGraceNotesGroup& elt)
 
     ss <<
       "--> End visiting msrGraceNotesGroup" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -8198,7 +7946,7 @@ void msr2mxsrTranslator::visitStart (S_msrNote& elt)
     ss <<
       "--> Start visiting msrNote '" <<
       elt->asString () <<
-      "'" <<
+      '\'' <<
       ", line " << inputLineNumber <<
       std::endl;
 
@@ -8244,14 +7992,11 @@ void msr2mxsrTranslator::visitEnd (S_msrNote& elt)
     ss <<
       "--> End visiting msrNote " <<
       elt->asString () <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -8315,14 +8060,11 @@ void msr2mxsrTranslator::visitEnd (S_msrNote& elt)
         "--> remembering note " <<
         elt->asString () <<
         " as previous note" <<
-        ", line " << inputLineNumber <<
-        std::endl;
+        ", line " << inputLineNumber;
 
       gWaeHandler->waeTraceWithLocationDetails (
         __FILE__, __LINE__,
         ss.str ());
-//         fCurrentMeasureNumber,
-//         fVisitedMsrScore->getScoreMeasuresNumber ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -8355,14 +8097,11 @@ void msr2mxsrTranslator::visitStart (S_msrBarLine& elt)
 
     ss <<
       "--> Start visiting msrBarLine" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -8451,14 +8190,11 @@ void msr2mxsrTranslator::visitEnd (S_msrBarLine& elt)
 
     ss <<
       "--> End visiting msrBarLine" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }
@@ -8474,14 +8210,11 @@ void msr2mxsrTranslator::visitStart (S_msrStaffLinesNumber& elt)
 
     ss <<
       "--> Start visiting msrStaffLinesNumber" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -8500,14 +8233,11 @@ void msr2mxsrTranslator::visitStart (S_msrStaffTuning& elt)
 
     ss <<
       "--> Start visiting msrStaffTuning" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -8526,14 +8256,11 @@ void msr2mxsrTranslator::visitStart (S_msrStaffDetails& elt)
 
     ss <<
       "--> Start visiting msrStaffDetails" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -8548,14 +8275,11 @@ void msr2mxsrTranslator::visitEnd (S_msrStaffDetails& elt)
 
     ss <<
       "--> End visiting msrStaffDetails" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -8576,15 +8300,12 @@ void msr2mxsrTranslator::visitStart (S_msrVoiceStaffChange& elt)
 
     ss <<
       "--> Start visiting msrVoiceStaffChange '" <<
-      elt->asString () << "'" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      elt->asString () << '\'' <<
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -8613,14 +8334,11 @@ void msr2mxsrTranslator::visitStart (S_msrHarmony& elt)
       ", fOnGoingNonGraceNote: " << fOnGoingNonGraceNote <<
       ", fOnGoingHarmoniesVoice: " << fOnGoingHarmoniesVoice <<
       ", fOnGoingHarmony: " << fOnGoingHarmony <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -8707,14 +8425,11 @@ void msr2mxsrTranslator::visitStart (S_msrHarmonyDegree& elt)
       ", fOnGoingNonGraceNote: " << fOnGoingNonGraceNote <<
       ", fOnGoingHarmoniesVoice: " << fOnGoingHarmoniesVoice <<
       ", fOnGoingHarmony: " << fOnGoingHarmony <<
-      "', line " << elt->getInputLineNumber () <<
-      std::endl;
+      "', line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -8733,15 +8448,12 @@ void msr2mxsrTranslator::visitEnd (S_msrHarmony& elt)
     ss <<
       "--> End visiting msrHarmony '" <<
       elt->asString () <<
-      "'" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      '\'' <<
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -8759,15 +8471,12 @@ void msr2mxsrTranslator::visitStart (S_msrFrame& elt)
     ss <<
       "--> Start visiting msrFrame '" <<
       elt->asString () <<
-      "'" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      '\'' <<
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -8802,16 +8511,13 @@ void msr2mxsrTranslator::visitStart (S_msrFiguredBass& elt)
     ss <<
       "--> Start visiting msrFiguredBass '" <<
       elt->asString () <<
-      "'" <<
+      '\'' <<
       ", fOnGoingFiguredBassVoice: " << fOnGoingFiguredBassVoice <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -8869,15 +8575,12 @@ void msr2mxsrTranslator::visitStart (S_msrBassFigure& elt)
     ss <<
       "--> Start visiting msrBassFigure '" <<
       elt->asString () <<
-      "'" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      '\'' <<
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -8896,15 +8599,12 @@ void msr2mxsrTranslator::visitEnd (S_msrFiguredBass& elt)
     ss <<
       "--> End visiting msrFiguredBass '" <<
       elt->asString () <<
-      "'" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      '\'' <<
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -8924,14 +8624,11 @@ void msr2mxsrTranslator::visitStart (S_msrStanza& elt)
       "--> Start visiting msrStanza \"" <<
       elt->getStanzaName () <<
       "\"" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -8970,14 +8667,11 @@ void msr2mxsrTranslator::visitEnd (S_msrStanza& elt)
       "--> End visiting msrStanza \"" <<
       elt->getStanzaName () <<
       "\"" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -8999,14 +8693,11 @@ void msr2mxsrTranslator::visitStart (S_msrSyllable& elt)
 
     ss <<
       "--> Start visiting msrSyllable" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -9049,15 +8740,12 @@ void msr2mxsrTranslator::visitStart (S_msrSyllable& elt)
             wordsValue <<
             "' into words for note '" <<
             fCurrentNonGraceNoteClone->asShortString () <<
-            "'" <<
-      // JMI      fCurrentSyllableClone->asString () <<
-            std::endl;
+            '\'' <<
+      // JMI      fCurrentSyllableClone->asString ();
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             fCurrentMeasureNumber,
-//             fVisitedMsrScore->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -9087,14 +8775,11 @@ void msr2mxsrTranslator::visitStart (S_msrSyllable& elt)
             words->asShortString () <<
             "' to note '" <<
             fCurrentNonGraceNoteClone->asShortString () <<
-            "'" <<
-            std::endl;
+            "'";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             fCurrentMeasureNumber,
-//             fVisitedMsrScore->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         fCurrentNonGraceNoteClone->
@@ -9144,14 +8829,11 @@ void msr2mxsrTranslator::visitEnd (S_msrSyllable& elt)
 
     ss <<
       "--> End visiting msrSyllable" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }
@@ -9165,14 +8847,11 @@ void msr2mxsrTranslator::visitStart (S_msrTransposition& elt)
 
     ss <<
       "--> Start visiting msrTransposition" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -9189,14 +8868,11 @@ void msr2mxsrTranslator::visitEnd (S_msrTransposition& elt)
 
     ss <<
       "--> End visiting msrTransposition" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }
@@ -9210,14 +8886,11 @@ void msr2mxsrTranslator::visitStart (S_msrRehearsalMark& elt)
 
     ss <<
       "--> Start visiting msrRehearsalMark" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -9233,14 +8906,11 @@ void msr2mxsrTranslator::visitEnd (S_msrRehearsalMark& elt)
 
     ss <<
       "--> End visiting msrRehearsalMark" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }
@@ -9254,14 +8924,11 @@ void msr2mxsrTranslator::visitStart (S_msrFermata& elt)
 
     ss <<
       "--> Start visiting msrFermata" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -9295,14 +8962,11 @@ void msr2mxsrTranslator::visitStart (S_msrArpeggiato& elt)
 
     ss <<
       "--> Start visiting msrArpeggiato" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -9336,14 +9000,11 @@ void msr2mxsrTranslator::visitStart (S_msrNonArpeggiato& elt)
 
     ss <<
       "--> Start visiting msrNonArpeggiato" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -9381,14 +9042,11 @@ void msr2mxsrTranslator::visitStart (S_msrTechnical& elt)
 
     ss <<
       "--> Start visiting msrTechnical" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -9463,14 +9121,11 @@ void msr2mxsrTranslator::visitEnd (S_msrTechnical& elt)
 
     ss <<
       "--> End visiting msrTechnical" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }
@@ -9484,14 +9139,11 @@ void msr2mxsrTranslator::visitStart (S_msrTechnicalWithInteger& elt)
 
     ss <<
       "--> Start visiting msrTechnicalWithInteger" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -9526,14 +9178,11 @@ void msr2mxsrTranslator::visitEnd (S_msrTechnicalWithInteger& elt)
 
     ss <<
       "--> End visiting msrTechnicalWithInteger" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }
@@ -9547,14 +9196,11 @@ void msr2mxsrTranslator::visitStart (S_msrTechnicalWithFloat& elt)
 
     ss <<
       "--> Start visiting msrTechnicalWithFloat" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -9589,14 +9235,11 @@ void msr2mxsrTranslator::visitEnd (S_msrTechnicalWithFloat& elt)
 
     ss <<
       "--> End visiting msrTechnicalWithFloat" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }
@@ -9610,14 +9253,11 @@ void msr2mxsrTranslator::visitStart (S_msrTechnicalWithString& elt)
 
     ss <<
       "--> Start visiting msrTechnicalWithString" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -9663,14 +9303,11 @@ void msr2mxsrTranslator::visitEnd (S_msrTechnicalWithString& elt)
 
     ss <<
       "--> End visiting msrTechnicalWithString" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }
@@ -9684,14 +9321,11 @@ void msr2mxsrTranslator::visitStart (S_msrOrnament& elt)
 
     ss <<
       "--> Start visiting msrOrnament" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -9726,14 +9360,11 @@ void msr2mxsrTranslator::visitEnd (S_msrOrnament& elt)
 
     ss <<
       "--> End visiting msrOrnament" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }
@@ -9747,14 +9378,11 @@ void msr2mxsrTranslator::visitStart (S_msrGlissando& elt)
 
     ss <<
       "--> Start visiting msrGlissando" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -9795,14 +9423,11 @@ void msr2mxsrTranslator::visitEnd (S_msrGlissando& elt)
 
     ss <<
       "--> End visiting msrGlissando" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }
@@ -9816,14 +9441,11 @@ void msr2mxsrTranslator::visitStart (S_msrSlide& elt)
 
     ss <<
       "--> Start visiting msrSlide" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -9858,14 +9480,11 @@ void msr2mxsrTranslator::visitEnd (S_msrSlide& elt)
 
     ss <<
       "--> End visiting msrSlide" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }
@@ -9879,14 +9498,11 @@ void msr2mxsrTranslator::visitStart (S_msrSingleTremolo& elt)
 
     ss <<
       "--> Start visiting msrSingleTremolo" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -9921,14 +9537,11 @@ void msr2mxsrTranslator::visitEnd (S_msrSingleTremolo& elt)
 
     ss <<
       "--> End visiting msrSingleTremolo" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }
@@ -9942,14 +9555,11 @@ void msr2mxsrTranslator::visitStart (S_msrDoubleTremolo& elt)
 
     ss <<
       "--> Start visiting msrDoubleTremolo" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -9974,14 +9584,11 @@ void msr2mxsrTranslator::visitEnd (S_msrDoubleTremolo& elt)
 
     ss <<
       "--> End visiting msrSingleTremolo" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -10005,14 +9612,11 @@ void msr2mxsrTranslator::visitStart (S_msrDynamic& elt)
 
     ss <<
       "--> Start visiting msrDynamic" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -10075,14 +9679,11 @@ void msr2mxsrTranslator::visitEnd (S_msrDynamic& elt)
 
     ss <<
       "--> End visiting msrDynamic" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }
@@ -10096,14 +9697,11 @@ void msr2mxsrTranslator::visitStart (S_msrOtherDynamic& elt)
 
     ss <<
       "--> Start visiting msrOtherDynamic" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -10142,14 +9740,11 @@ void msr2mxsrTranslator::visitEnd (S_msrOtherDynamic& elt)
 
     ss <<
       "--> End visiting msrOtherDynamic" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }
@@ -10166,14 +9761,11 @@ void msr2mxsrTranslator::visitStart (S_msrWords& elt)
 
     ss <<
       "--> Start visiting msrWords" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -10195,13 +9787,12 @@ void msr2mxsrTranslator::visitStart (S_msrWords& elt)
           elt->asShortString () <<
           "' to tempo '" <<
           tempo->asShortString () <<
-          "'" <<
+          '\'' <<
           std::endl;
 
         gWaeHandler->waeTraceWithLocationDetails (
           __FILE__, __LINE__,
-          ss.str ()fCurrentMeasureNumber,
-          fVisitedMsrScore->getScoreMeasuresNumber ());
+          ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -10229,13 +9820,12 @@ void msr2mxsrTranslator::visitStart (S_msrWords& elt)
           elt->asShortString () <<
           "' to rehearsal mark '" <<
           rehearsalMark->asShortString () <<
-          "'" <<
+          '\'' <<
           std::endl;
 
         gWaeHandler->waeTraceWithLocationDetails (
           __FILE__, __LINE__,
-          ss.str ()fCurrentMeasureNumber,
-          fVisitedMsrScore->getScoreMeasuresNumber ());
+          ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -10284,14 +9874,11 @@ void msr2mxsrTranslator::visitStart (S_msrWords& elt)
             elt->asShortString () <<
             "' to dal segno element '" <<
             dalSegno->asShortString () <<
-            "'" <<
-            std::endl;
+            "'";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             fCurrentMeasureNumber,
-//             fVisitedMsrScore->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -10344,14 +9931,11 @@ void msr2mxsrTranslator::visitEnd (S_msrWords& elt)
 
     ss <<
       "--> End visiting msrWords" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }
@@ -10365,14 +9949,11 @@ void msr2mxsrTranslator::visitStart (S_msrSlur& elt)
 
     ss <<
       "--> Start visiting msrSlur" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -10429,14 +10010,11 @@ void msr2mxsrTranslator::visitEnd (S_msrSlur& elt)
 
     ss <<
       "--> End visiting msrSlur" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }
@@ -10450,14 +10028,11 @@ void msr2mxsrTranslator::visitStart (S_msrLigature& elt)
 
     ss <<
       "--> Start visiting msrLigature" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -10492,14 +10067,11 @@ void msr2mxsrTranslator::visitEnd (S_msrLigature& elt)
 
     ss <<
       "--> End visiting msrLigature" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }
@@ -10513,14 +10085,11 @@ void msr2mxsrTranslator::visitStart (S_msrSlash& elt)
 
     ss <<
       "--> Start visiting msrSlash" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -10556,14 +10125,11 @@ void msr2mxsrTranslator::visitStart (S_msrCrescDecresc& elt)
 
     ss <<
       "--> Start visiting msrCrescDecresc" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -10598,14 +10164,11 @@ void msr2mxsrTranslator::visitEnd (S_msrCrescDecresc& elt)
 
     ss <<
       "--> End visiting msrCrescDecresc" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }
@@ -10619,14 +10182,11 @@ void msr2mxsrTranslator::visitStart (S_msrWedge& elt)
 
     ss <<
       "--> Start visiting msrWedge" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -10661,14 +10221,11 @@ void msr2mxsrTranslator::visitEnd (S_msrWedge& elt)
 
     ss <<
       "--> End visiting msrWedge" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }
@@ -10682,14 +10239,11 @@ void msr2mxsrTranslator::visitStart (S_msrWedge& elt)
 
     ss <<
       "--> Start visiting msrWedge" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -10724,14 +10278,11 @@ void msr2mxsrTranslator::visitEnd (S_msrWedge& elt)
 
     ss <<
       "--> End visiting msrWedge" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }
@@ -10748,14 +10299,11 @@ void msr2mxsrTranslator::visitStart (S_msrOctaveShift& elt)
 
     ss <<
       "--> Start visiting msrOctaveShift" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -10790,14 +10338,11 @@ void msr2mxsrTranslator::visitEnd (S_msrOctaveShift& elt)
 
     ss <<
       "--> End visiting msrOctaveShift" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }
@@ -10811,14 +10356,11 @@ void msr2mxsrTranslator::visitStart (S_msrAccordionRegistration& elt)
 
     ss <<
       "--> Start visiting msrAccordionRegistration" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -10840,14 +10382,11 @@ void msr2mxsrTranslator::visitStart (S_msrHarpPedalsTuning& elt)
 
     ss <<
       "--> Start visiting msrHarpPedalsTuning" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -10865,14 +10404,11 @@ void msr2mxsrTranslator::visitStart (S_msrStem& elt)
 
     ss <<
       "--> Start visiting msrStem" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -10907,14 +10443,11 @@ void msr2mxsrTranslator::visitEnd (S_msrStem& elt)
 
     ss <<
       "--> End visiting msrStem" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }
@@ -10932,14 +10465,11 @@ void msr2mxsrTranslator::visitStart (S_msrBeam& elt)
       std::endl;
 
 // JMI      ", fOnGoingNonGraceNote: " << fOnGoingNonGraceNote <<
-// JMI      ", fOnGoingChord: " << fOnGoingChord <<
-      std::endl;
+// JMI      ", fOnGoingChord: " << fOnGoingChord;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -10969,14 +10499,11 @@ void msr2mxsrTranslator::visitEnd (S_msrBeam& elt)
 
     ss <<
       "--> End visiting msrBeam" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }
@@ -10990,14 +10517,11 @@ void msr2mxsrTranslator::visitStart (S_msrTie& elt)
 
     ss <<
       "--> Start visiting msrTie" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -11032,14 +10556,11 @@ void msr2mxsrTranslator::visitEnd (S_msrTie& elt)
 
     ss <<
       "--> End visiting msrTie" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }
@@ -11053,14 +10574,11 @@ void msr2mxsrTranslator::visitStart (S_msrSegno& elt)
 
     ss <<
       "--> Start visiting msrSegno" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -11100,14 +10618,11 @@ void msr2mxsrTranslator::visitStart (S_msrDalSegno& elt)
 
     ss <<
       "--> Start visiting msrDalSegno" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -11144,14 +10659,11 @@ void msr2mxsrTranslator::visitStart (S_msrCoda& elt)
 
     ss <<
       "--> Start visiting msrCoda" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -11189,14 +10701,11 @@ void msr2mxsrTranslator::visitStart (S_msrEyeGlasses& elt)
 
     ss <<
       "--> Start visiting eyeGlasses" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -11212,14 +10721,11 @@ void msr2mxsrTranslator::visitStart (S_msrScordatura& elt)
 
     ss <<
       "--> Start visiting scordatura" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -11235,14 +10741,11 @@ void msr2mxsrTranslator::visitStart (S_msrPedal& elt)
 
     ss <<
       "--> Start visiting pedal" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -11258,14 +10761,11 @@ void msr2mxsrTranslator::visitStart (S_msrDamp& elt)
 
     ss <<
       "--> Start visiting damp" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -11285,14 +10785,11 @@ void msr2mxsrTranslator::visitStart (S_msrDampAll& elt)
 
     ss <<
       "--> Start visiting dampAll" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -11315,14 +10812,11 @@ void msr2mxsrTranslator::visitStart (S_msrBarCheck& elt)
       "--> Start visiting msrBarCheck" <<
       ", nextBarNumber: " <<
       elt->getNextBarPuristNumber () <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -11338,14 +10832,11 @@ void msr2mxsrTranslator::visitEnd (S_msrBarCheck& elt)
 
     ss <<
       "--> End visiting msrBarCheck" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }
@@ -11359,14 +10850,11 @@ void msr2mxsrTranslator::visitStart (S_msrBarNumberCheck& elt)
 
     ss <<
       "--> Start visiting msrBarNumberCheck" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -11382,14 +10870,11 @@ void msr2mxsrTranslator::visitEnd (S_msrBarNumberCheck& elt)
 
     ss <<
       "--> End visiting msrBarNumberCheck" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }
@@ -11403,14 +10888,11 @@ void msr2mxsrTranslator::visitStart (S_msrLineBreak& elt)
 
     ss <<
       "--> Start visiting msrLineBreak" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -11426,14 +10908,11 @@ void msr2mxsrTranslator::visitEnd (S_msrLineBreak& elt)
 
     ss <<
       "--> End visiting msrLineBreak" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }
@@ -11447,14 +10926,11 @@ void msr2mxsrTranslator::visitStart (S_msrPageBreak& elt)
 
     ss <<
       "--> Start visiting msrPageBreak" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -11470,14 +10946,11 @@ void msr2mxsrTranslator::visitEnd (S_msrPageBreak& elt)
 
     ss <<
       "--> End visiting msrPageBreak" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }
@@ -11494,14 +10967,11 @@ void msr2mxsrTranslator::visitStart (S_msrRepeat& elt)
 
     ss <<
       "--> Start visiting msrRepeat" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -11512,14 +10982,11 @@ void msr2mxsrTranslator::visitStart (S_msrRepeat& elt)
     ss <<
       "Handling repeat start in voice clone \"" <<
       fCurrentVoiceClone->getVoiceName () <<
-      "\"" <<
-      std::endl;
+      "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -11540,14 +11007,11 @@ void msr2mxsrTranslator::visitEnd (S_msrRepeat& elt)
 
     ss <<
       "--> End visiting msrRepeat" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -11560,14 +11024,11 @@ void msr2mxsrTranslator::visitEnd (S_msrRepeat& elt)
       fCurrentVoiceClone->getVoiceName () <<
 //      "\" in part \"" <<
 //      fCurrentPartClone->getPartCombinedName () <<
-      "\"" <<
-      std::endl;
+      "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -11588,14 +11049,11 @@ void msr2mxsrTranslator::visitStart (S_msrRepeatCommonPart& elt)
 
     ss <<
       "--> Start visiting msrRepeatCommonPart" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -11615,14 +11073,11 @@ void msr2mxsrTranslator::visitEnd (S_msrRepeatCommonPart& elt)
 
     ss <<
       "--> End visiting msrRepeatCommonPart" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -11643,14 +11098,11 @@ void msr2mxsrTranslator::visitStart (S_msrRepeatEnding& elt)
 
     ss <<
       "--> Start visiting msrRepeatEnding" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -11662,14 +11114,11 @@ void msr2mxsrTranslator::visitStart (S_msrRepeatEnding& elt)
     ss <<
       "Handling a repeat ending start in voice clone \"" <<
       fCurrentVoiceClone->getVoiceName () <<
-      "\"" <<
-      std::endl;
+      "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -11691,14 +11140,11 @@ void msr2mxsrTranslator::visitEnd (S_msrRepeatEnding& elt)
 
     ss <<
       "--> End visiting msrRepeatEnding" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -11710,14 +11156,11 @@ void msr2mxsrTranslator::visitEnd (S_msrRepeatEnding& elt)
     ss <<
       "Handling a repeat ending end in voice clone \"" <<
       fCurrentVoiceClone->getVoiceName () <<
-      "\"" <<
-      std::endl;
+      "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -11740,14 +11183,11 @@ void msr2mxsrTranslator::visitStart (S_msrMultipleFullBarRests& elt)
 
     ss <<
       "--> Start visiting msrMultipleFullBarRests" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -11760,14 +11200,11 @@ void msr2mxsrTranslator::visitStart (S_msrMultipleFullBarRests& elt)
     ss <<
       "Handling multiple rest start in voice clone \"" <<
       fCurrentVoiceClone->getVoiceName () <<
-      "\"" <<
-      std::endl;
+      "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -11788,14 +11225,11 @@ void msr2mxsrTranslator::visitEnd (S_msrMultipleFullBarRests& elt)
 
     ss <<
       "--> End visiting msrMultipleFullBarRests" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -11808,14 +11242,11 @@ void msr2mxsrTranslator::visitEnd (S_msrMultipleFullBarRests& elt)
     ss <<
       "Handling multiple rest start in voice clone \"" <<
       fCurrentVoiceClone->getVoiceName () <<
-      "\"" <<
-      std::endl;
+      "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -11836,14 +11267,11 @@ void msr2mxsrTranslator::visitStart (S_msrMeasureRepeat& elt)
 
     ss <<
       "--> Start visiting msrMeasureRepeat" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -11856,14 +11284,11 @@ void msr2mxsrTranslator::visitStart (S_msrMeasureRepeat& elt)
     ss <<
       "Handling measures repeat start in voice clone \"" <<
       fCurrentVoiceClone->getVoiceName () <<
-      "\"" <<
-      std::endl;
+      "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -11884,14 +11309,11 @@ void msr2mxsrTranslator::visitEnd (S_msrMeasureRepeat& elt)
 
     ss <<
       "--> End visiting msrMeasureRepeat" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -11906,14 +11328,11 @@ void msr2mxsrTranslator::visitEnd (S_msrMeasureRepeat& elt)
     ss <<
       "Setting current last segment as measures repeat pattern segment in voice \"" <<
       fCurrentVoiceClone->getVoiceName () <<
-      "\"" <<
-      std::endl;
+      "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 * /
@@ -11925,14 +11344,11 @@ void msr2mxsrTranslator::visitEnd (S_msrMeasureRepeat& elt)
     ss <<
       "Handling measures repeat end in voice clone \"" <<
       fCurrentVoiceClone->getVoiceName () <<
-      "\"" <<
-      std::endl;
+      "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -11953,14 +11369,11 @@ void msr2mxsrTranslator::visitStart (S_msrMeasureRepeatPattern& elt)
 
     ss <<
       "--> Start visiting msrMeasureRepeatPattern" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -11991,14 +11404,11 @@ void msr2mxsrTranslator::visitEnd (S_msrMeasureRepeatPattern& elt)
 
     ss <<
       "--> End visiting msrMeasureRepeatPattern" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -12030,14 +11440,11 @@ void msr2mxsrTranslator::visitStart (S_msrMeasureRepeatReplicas& elt)
 
     ss <<
       "--> Start visiting msrMeasureRepeatReplicas" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -12068,14 +11475,11 @@ void msr2mxsrTranslator::visitEnd (S_msrMeasureRepeatReplicas& elt)
 
     ss <<
       "--> End visiting S_msrMeasureRepeatReplicas" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -12105,14 +11509,11 @@ void msr2mxsrTranslator::visitStart (S_msrMidiTempo& elt)
 
     ss <<
       "--> Start visiting msrMidiTempo" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }
@@ -12125,14 +11526,11 @@ void msr2mxsrTranslator::visitEnd (S_msrMidiTempo& elt)
 
     ss <<
       "--> End visiting msrMidiTempo" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fVisitedMsrScore->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }

@@ -85,8 +85,7 @@ mfRational::mfRational (const std::string &theString)
 
       ss <<
         "--> numerator = \"" << numerator << "\", " <<
-        "--> denominator = \"" << denominator << "\"" <<
-        std::endl;
+        "--> denominator = \"" << denominator << "\"";
 
       gWaeHandler->waeTraceWithoutLocationDetails (
         __FILE__, __LINE__,

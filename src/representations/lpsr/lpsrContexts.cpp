@@ -70,31 +70,31 @@ std::ostream& operator << (std::ostream& os, const lpsrContextUseExistingKind& e
 
 //______________________________________________________________________________
 S_lpsrContext lpsrContext::create (
-  int                     inputLineNumber,
+  int                        inputLineNumber,
   lpsrContextUseExistingKind contextUseExistingKind,
-  lpsrContextTypeKind     contextTypeKind,
-  const std::string&      contextName)
+  lpsrContextTypeKind        contextTypeKind,
+  const std::string&         contextAlphabeticName)
 {
   lpsrContext* obj =
     new lpsrContext (
       inputLineNumber,
       contextUseExistingKind,
       contextTypeKind,
-      contextName);
+      contextAlphabeticName);
   assert (obj != nullptr);
   return obj;
 }
 
 lpsrContext::lpsrContext (
-  int                     inputLineNumber,
+  int                        inputLineNumber,
   lpsrContextUseExistingKind contextUseExistingKind,
-  lpsrContextTypeKind     contextTypeKind,
-  const std::string&      contextName)
+  lpsrContextTypeKind        contextTypeKind,
+  const std::string&         contextAlphabeticName)
     : lpsrElement (inputLineNumber)
 {
   fContextUseExistingKind = contextUseExistingKind;
   fContextTypeKind = contextTypeKind;
-  fContextName = contextName;
+  fContextAlphabeticName = contextAlphabeticName;
 }
 
 lpsrContext::~lpsrContext ()
@@ -107,14 +107,11 @@ void lpsrContext::acceptIn (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> lpsrContext::acceptIn ()" <<
-      std::endl;
+      "% ==> lpsrContext::acceptIn ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -128,14 +125,11 @@ void lpsrContext::acceptIn (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching lpsrContext::visitStart ()" <<
-            std::endl;
+            "% ==> Launching lpsrContext::visitStart ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
@@ -149,14 +143,11 @@ void lpsrContext::acceptOut (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> lpsrContext::acceptOut ()" <<
-      std::endl;
+      "% ==> lpsrContext::acceptOut ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -170,14 +161,11 @@ void lpsrContext::acceptOut (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching lpsrContext::visitEnd ()" <<
-            std::endl;
+            "% ==> Launching lpsrContext::visitEnd ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
@@ -194,8 +182,8 @@ void lpsrContext::print (std::ostream& os) const
     ", fContextTypeKind: " << fContextTypeKind <<
     ", fContextUseExistingKind: " << fContextUseExistingKind;
 
-  if (fContextName.size ()) {
-    os << ' ' << fContextName;
+  if (fContextAlphabeticName.size ()) {
+    os << ' ' << fContextAlphabeticName;
   }
   os << std::endl;
 
@@ -231,35 +219,35 @@ void lpsrContext::print (std::ostream& os) const
 
 //______________________________________________________________________________
 S_lpsrChordNamesContext lpsrChordNamesContext::create (
-  int                     inputLineNumber,
+  int                        inputLineNumber,
   lpsrContextUseExistingKind contextUseExistingKind,
-  const std::string&      contextName,
-  const S_msrVoice&       contextVoice)
+  const std::string&         contextAlphabeticName,
+  const S_msrVoice&          contextVoice)
 {
   lpsrChordNamesContext* obj =
     new lpsrChordNamesContext (
       inputLineNumber,
       contextUseExistingKind,
-      contextName,
+      contextAlphabeticName,
       contextVoice);
   assert (obj != nullptr);
   return obj;
 }
 
 lpsrChordNamesContext::lpsrChordNamesContext (
-  int                     inputLineNumber,
+  int                        inputLineNumber,
   lpsrContextUseExistingKind contextUseExistingKind,
-  const std::string&      contextName,
-  const S_msrVoice&       contextVoice)
+  const std::string&         contextAlphabeticName,
+  const S_msrVoice&          contextVoice)
     : lpsrContext (
       inputLineNumber,
       contextUseExistingKind,
       lpsrContextTypeKind::kContextChordNames,
-      contextName)
+      contextAlphabeticName)
 {
   fContextUseExistingKind = contextUseExistingKind;
 
-  fContextName = contextName;
+  fContextAlphabeticName = contextAlphabeticName;
 
   fContextVoice = contextVoice;
 }
@@ -274,14 +262,11 @@ void lpsrChordNamesContext::acceptIn (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> lpsrChordNamesContext::acceptIn ()" <<
-      std::endl;
+      "% ==> lpsrChordNamesContext::acceptIn ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -295,14 +280,11 @@ void lpsrChordNamesContext::acceptIn (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching lpsrChordNamesContext::visitStart ()" <<
-            std::endl;
+            "% ==> Launching lpsrChordNamesContext::visitStart ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
@@ -316,14 +298,11 @@ void lpsrChordNamesContext::acceptOut (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> lpsrChordNamesContext::acceptOut ()" <<
-      std::endl;
+      "% ==> lpsrChordNamesContext::acceptOut ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -337,14 +316,11 @@ void lpsrChordNamesContext::acceptOut (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching lpsrChordNamesContext::visitEnd ()" <<
-            std::endl;
+            "% ==> Launching lpsrChordNamesContext::visitEnd ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
@@ -376,7 +352,7 @@ void lpsrChordNamesContext::print (std::ostream& os) const
       fContextUseExistingKind) <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "contextName" << ": \"" << fContextName << "\"" <<
+    "contextAlphabeticName" << ": \"" << fContextAlphabeticName << "\"" <<
     std::endl <<
     std::setw (fieldWidth) <<
     "contextVoice" << ": \"" << fContextVoice->getVoiceName () << "\"" <<
@@ -426,35 +402,35 @@ std::ostream& operator << (std::ostream& os, const S_lpsrChordNamesContext& elt)
 
 //______________________________________________________________________________
 S_lpsrFiguredBassContext lpsrFiguredBassContext::create (
-  int                     inputLineNumber,
+  int                        inputLineNumber,
   lpsrContextUseExistingKind contextUseExistingKind,
-  const std::string&      contextName,
-  const S_msrStaff&       contextStaff)
+  const std::string&         contextAlphabeticName,
+  const S_msrStaff&          contextStaff)
 {
   lpsrFiguredBassContext* obj =
     new lpsrFiguredBassContext (
       inputLineNumber,
       contextUseExistingKind,
-      contextName,
+      contextAlphabeticName,
       contextStaff);
   assert (obj != nullptr);
   return obj;
 }
 
 lpsrFiguredBassContext::lpsrFiguredBassContext (
-  int                     inputLineNumber,
+  int                        inputLineNumber,
   lpsrContextUseExistingKind contextUseExistingKind,
-  const std::string&      contextName,
-  const S_msrStaff&       contextStaff)
+  const std::string&         contextAlphabeticName,
+  const S_msrStaff&          contextStaff)
     : lpsrContext (
       inputLineNumber,
       contextUseExistingKind,
       lpsrContextTypeKind::kContextFiguredBass,
-      contextName)
+      contextAlphabeticName)
 {
   fContextUseExistingKind = contextUseExistingKind;
 
-  fContextName = contextName;
+  fContextAlphabeticName = contextAlphabeticName;
 
   fContextStaff = contextStaff;
 }
@@ -469,14 +445,11 @@ void lpsrFiguredBassContext::acceptIn (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> lpsrFiguredBassContext::acceptIn ()" <<
-      std::endl;
+      "% ==> lpsrFiguredBassContext::acceptIn ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -490,14 +463,11 @@ void lpsrFiguredBassContext::acceptIn (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching lpsrFiguredBassContext::visitStart ()" <<
-            std::endl;
+            "% ==> Launching lpsrFiguredBassContext::visitStart ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
@@ -511,14 +481,11 @@ void lpsrFiguredBassContext::acceptOut (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> lpsrFiguredBassContext::acceptOut ()" <<
-      std::endl;
+      "% ==> lpsrFiguredBassContext::acceptOut ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -532,14 +499,11 @@ void lpsrFiguredBassContext::acceptOut (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching lpsrFiguredBassContext::visitEnd ()" <<
-            std::endl;
+            "% ==> Launching lpsrFiguredBassContext::visitEnd ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
@@ -571,7 +535,7 @@ void lpsrFiguredBassContext::print (std::ostream& os) const
       fContextUseExistingKind) <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fContextName" << ": \"" << fContextName << "\"" <<
+    "fContextAlphabeticName" << ": \"" << fContextAlphabeticName << "\"" <<
     std::endl <<
     std::setw (fieldWidth) <<
     "contextStaff" << ": \"" << fContextStaff->getStaffName () << "\"" <<

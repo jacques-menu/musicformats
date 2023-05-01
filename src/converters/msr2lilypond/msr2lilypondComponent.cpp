@@ -57,8 +57,7 @@ S_mfcConverterComponent createMsr2lilypondConverterComponent ()
       std::stringstream ss;
 
       ss <<
-        "Creating the msr2lilypond component" <<
-        std::endl;
+        "Creating the msr2lilypond component";
 
       gWaeHandler->waeTraceWithoutLocationDetails (
         __FILE__, __LINE__,

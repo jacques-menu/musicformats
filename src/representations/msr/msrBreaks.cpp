@@ -104,14 +104,11 @@ msrLineBreak::msrLineBreak (
       ", fUserSelectedLineBreakKind: " <<
       msrUserSelectedLineBreakKindAsString (
         fUserSelectedLineBreakKind) <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }
@@ -156,14 +153,11 @@ void msrLineBreak::acceptIn (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrLineBreak::acceptIn ()" <<
-      std::endl;
+      "% ==> msrLineBreak::acceptIn ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -177,14 +171,11 @@ void msrLineBreak::acceptIn (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrLineBreak::visitStart ()" <<
-            std::endl;
+            "% ==> Launching msrLineBreak::visitStart ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
@@ -198,14 +189,11 @@ void msrLineBreak::acceptOut (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrLineBreak::acceptOut ()" <<
-      std::endl;
+      "% ==> msrLineBreak::acceptOut ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -219,14 +207,11 @@ void msrLineBreak::acceptOut (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrLineBreak::visitEnd ()" <<
-            std::endl;
+            "% ==> Launching msrLineBreak::visitEnd ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
@@ -331,14 +316,11 @@ msrPageBreak::msrPageBreak (
       ", fUserSelectedPageBreakKind: " <<
       msrUserSelectedPageBreakKindAsString (
         fUserSelectedPageBreakKind) <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -385,14 +367,11 @@ void msrPageBreak::acceptIn (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrPageBreak::acceptIn ()" <<
-      std::endl;
+      "% ==> msrPageBreak::acceptIn ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -406,14 +385,11 @@ void msrPageBreak::acceptIn (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrPageBreak::visitStart ()" <<
-            std::endl;
+            "% ==> Launching msrPageBreak::visitStart ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
@@ -427,14 +403,11 @@ void msrPageBreak::acceptOut (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrPageBreak::acceptOut ()" <<
-      std::endl;
+      "% ==> msrPageBreak::acceptOut ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -448,14 +421,11 @@ void msrPageBreak::acceptOut (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrPageBreak::visitEnd ()" <<
-            std::endl;
+            "% ==> Launching msrPageBreak::visitEnd ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);

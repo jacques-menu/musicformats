@@ -191,14 +191,11 @@ msrBassFigure::msrBassFigure (
 
     ss <<
       "Creating bass figure " <<
-      asString () <<
-      std::endl;
+      asString ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }
@@ -215,14 +212,11 @@ S_msrBassFigure msrBassFigure::createFigureNewbornClone (
 
     ss <<
       "Creating a newborn clone of bass figure " <<
-      asString () <<
-      std::endl;
+      asString ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -255,14 +249,11 @@ S_msrBassFigure msrBassFigure::createFigureDeepClone (
 
     ss <<
       "Creating a deep clone of bass figure " <<
-      asString () <<
-      std::endl;
+      asString ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -305,14 +296,11 @@ void msrBassFigure::acceptIn (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrBassFigure::acceptIn ()" <<
-      std::endl;
+      "% ==> msrBassFigure::acceptIn ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -326,14 +314,11 @@ void msrBassFigure::acceptIn (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrBassFigure::visitStart ()" <<
-            std::endl;
+            "% ==> Launching msrBassFigure::visitStart ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
@@ -347,14 +332,11 @@ void msrBassFigure::acceptOut (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrBassFigure::acceptOut ()" <<
-      std::endl;
+      "% ==> msrBassFigure::acceptOut ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -368,14 +350,11 @@ void msrBassFigure::acceptOut (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrBassFigure::visitEnd ()" <<
-            std::endl;
+            "% ==> Launching msrBassFigure::visitEnd ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
@@ -550,14 +529,11 @@ msrFiguredBass::msrFiguredBass (
 
     ss <<
       "Creating figuredBass " <<
-      asString () <<
-      std::endl;
+      asString ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }
@@ -575,14 +551,11 @@ S_msrFiguredBass msrFiguredBass::createFiguredBassNewbornClone (
     ss <<
       "Creating a newborn clone of figured bass " <<
       asShortString () <<
-      ", line " << fInputLineNumber <<
-      std::endl;
+      ", line " << fInputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -621,14 +594,11 @@ S_msrFiguredBass msrFiguredBass::createFiguredBassDeepClone ()
     ss <<
       "Creating a deep clone of figuredBass " <<
       asString () <<
-      ", line " << fInputLineNumber <<
-      std::endl;
+      ", line " << fInputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -667,14 +637,11 @@ void msrFiguredBass::setFiguredBassUpLinkToNote (
     ss <<
       "Setting the uplink to note of figured bass " <<
       asString () <<
-      " to note " << note->asString () <<
-      std::endl;
+      " to note " << note->asString ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -730,14 +697,11 @@ void msrFiguredBass::appendFigureToFiguredBass (
       "Appending bass figure " << bassFigure->asString () <<
       " to figured-bass element '" <<
       asString () <<
-      "'" <<
-      std::endl;
+      "'";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -751,14 +715,11 @@ void msrFiguredBass::acceptIn (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrFiguredBass::acceptIn ()" <<
-      std::endl;
+      "% ==> msrFiguredBass::acceptIn ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -772,14 +733,11 @@ void msrFiguredBass::acceptIn (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrFiguredBass::visitStart ()" <<
-            std::endl;
+            "% ==> Launching msrFiguredBass::visitStart ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
@@ -793,14 +751,11 @@ void msrFiguredBass::acceptOut (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrFiguredBass::acceptOut ()" <<
-      std::endl;
+      "% ==> msrFiguredBass::acceptOut ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -814,14 +769,11 @@ void msrFiguredBass::acceptOut (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrFiguredBass::visitEnd ()" <<
-            std::endl;
+            "% ==> Launching msrFiguredBass::visitEnd ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);

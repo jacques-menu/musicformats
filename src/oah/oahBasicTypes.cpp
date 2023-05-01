@@ -1026,8 +1026,7 @@ void oahPrefix::acceptIn (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> oahPrefix::acceptIn ()" <<
-      std::endl;
+      ".\\\" ==> oahPrefix::acceptIn ()";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -1045,8 +1044,7 @@ void oahPrefix::acceptIn (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            ".\\\" ==> Launching oahPrefix::visitStart ()" <<
-            std::endl;
+            ".\\\" ==> Launching oahPrefix::visitStart ()";
 
           gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
@@ -1064,8 +1062,7 @@ void oahPrefix::acceptOut (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> oahPrefix::acceptOut ()" <<
-      std::endl;
+      ".\\\" ==> oahPrefix::acceptOut ()";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -1083,8 +1080,7 @@ void oahPrefix::acceptOut (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            ".\\\" ==> Launching oahPrefix::visitEnd ()" <<
-            std::endl;
+            ".\\\" ==> Launching oahPrefix::visitEnd ()";
 
           gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
@@ -1102,8 +1098,7 @@ void oahPrefix::browseData (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> oahPrefix::browseData ()" <<
-      std::endl;
+      ".\\\" ==> oahPrefix::browseData ()";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -1339,8 +1334,7 @@ void oahAtom::appendAtomToElementsList (
         fetchNamesBetweenQuotes () <<
         " in handler \"" <<
         handler->getHandlerHeader () <<
-        "\"" <<
-        std::endl;
+        "\"";
 
       gWaeHandler->waeTraceWithoutLocationDetails (
         __FILE__, __LINE__,
@@ -1416,8 +1410,7 @@ void oahAtom::acceptIn (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> oahAtom::acceptIn ()" <<
-      std::endl;
+      ".\\\" ==> oahAtom::acceptIn ()";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -1435,8 +1428,7 @@ void oahAtom::acceptIn (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            ".\\\" ==> Launching oahAtom::visitStart ()" <<
-            std::endl;
+            ".\\\" ==> Launching oahAtom::visitStart ()";
 
           gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
@@ -1454,8 +1446,7 @@ void oahAtom::acceptOut (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> oahAtom::acceptOut ()" <<
-      std::endl;
+      ".\\\" ==> oahAtom::acceptOut ()";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -1473,8 +1464,7 @@ void oahAtom::acceptOut (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            ".\\\" ==> Launching oahAtom::visitEnd ()" <<
-            std::endl;
+            ".\\\" ==> Launching oahAtom::visitEnd ()";
 
           gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
@@ -1492,8 +1482,7 @@ void oahAtom::browseData (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> oahAtom::browseData ()" <<
-      std::endl;
+      ".\\\" ==> oahAtom::browseData ()";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -1638,8 +1627,7 @@ void oahValueLessAtom::acceptIn (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> oahValueLessAtom::acceptIn ()" <<
-      std::endl;
+      ".\\\" ==> oahValueLessAtom::acceptIn ()";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -1657,8 +1645,7 @@ void oahValueLessAtom::acceptIn (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            ".\\\" ==> Launching oahValueLessAtom::visitStart ()" <<
-            std::endl;
+            ".\\\" ==> Launching oahValueLessAtom::visitStart ()";
 
           gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
@@ -1676,8 +1663,7 @@ void oahValueLessAtom::acceptOut (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> oahValueLessAtom::acceptOut ()" <<
-      std::endl;
+      ".\\\" ==> oahValueLessAtom::acceptOut ()";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -1695,8 +1681,7 @@ void oahValueLessAtom::acceptOut (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            ".\\\" ==> Launching oahValueLessAtom::visitEnd ()" <<
-            std::endl;
+            ".\\\" ==> Launching oahValueLessAtom::visitEnd ()";
 
           gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
@@ -1714,8 +1699,7 @@ void oahValueLessAtom::browseData (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> oahValueLessAtom::browseData ()" <<
-      std::endl;
+      ".\\\" ==> oahValueLessAtom::browseData ()";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -1805,8 +1789,7 @@ void oahValueFittedAtom::acceptIn (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> oahValueFittedAtom::acceptIn ()" <<
-      std::endl;
+      ".\\\" ==> oahValueFittedAtom::acceptIn ()";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -1824,8 +1807,7 @@ void oahValueFittedAtom::acceptIn (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            ".\\\" ==> Launching oahValueFittedAtom::visitStart ()" <<
-            std::endl;
+            ".\\\" ==> Launching oahValueFittedAtom::visitStart ()";
 
           gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
@@ -1843,8 +1825,7 @@ void oahValueFittedAtom::acceptOut (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> oahValueFittedAtom::acceptOut ()" <<
-      std::endl;
+      ".\\\" ==> oahValueFittedAtom::acceptOut ()";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -1862,8 +1843,7 @@ void oahValueFittedAtom::acceptOut (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            ".\\\" ==> Launching oahValueFittedAtom::visitEnd ()" <<
-            std::endl;
+            ".\\\" ==> Launching oahValueFittedAtom::visitEnd ()";
 
           gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
@@ -1881,8 +1861,7 @@ void oahValueFittedAtom::browseData (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> oahValueFittedAtom::browseData ()" <<
-      std::endl;
+      ".\\\" ==> oahValueFittedAtom::browseData ()";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -1988,8 +1967,7 @@ void oahAtomImplicitlySettingAVariable::acceptIn (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> oahAtomImplicitlySettingAVariable::acceptIn ()" <<
-      std::endl;
+      ".\\\" ==> oahAtomImplicitlySettingAVariable::acceptIn ()";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -2007,8 +1985,7 @@ void oahAtomImplicitlySettingAVariable::acceptIn (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            ".\\\" ==> Launching oahAtomImplicitlySettingAVariable::visitStart ()" <<
-            std::endl;
+            ".\\\" ==> Launching oahAtomImplicitlySettingAVariable::visitStart ()";
 
           gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
@@ -2026,8 +2003,7 @@ void oahAtomImplicitlySettingAVariable::acceptOut (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> oahAtomImplicitlySettingAVariable::acceptOut ()" <<
-      std::endl;
+      ".\\\" ==> oahAtomImplicitlySettingAVariable::acceptOut ()";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -2045,8 +2021,7 @@ void oahAtomImplicitlySettingAVariable::acceptOut (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            ".\\\" ==> Launching oahAtomImplicitlySettingAVariable::visitEnd ()" <<
-            std::endl;
+            ".\\\" ==> Launching oahAtomImplicitlySettingAVariable::visitEnd ()";
 
           gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
@@ -2064,8 +2039,7 @@ void oahAtomImplicitlySettingAVariable::browseData (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> oahAtomImplicitlySettingAVariable::browseData ()" <<
-      std::endl;
+      ".\\\" ==> oahAtomImplicitlySettingAVariable::browseData ()";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -2451,8 +2425,7 @@ void oahAtomStoringAValue::acceptIn (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> oahAtomStoringAValue::acceptIn ()" <<
-      std::endl;
+      ".\\\" ==> oahAtomStoringAValue::acceptIn ()";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -2470,8 +2443,7 @@ void oahAtomStoringAValue::acceptIn (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            ".\\\" ==> Launching oahAtomStoringAValue::visitStart ()" <<
-            std::endl;
+            ".\\\" ==> Launching oahAtomStoringAValue::visitStart ()";
 
           gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
@@ -2489,8 +2461,7 @@ void oahAtomStoringAValue::acceptOut (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> oahAtomStoringAValue::acceptOut ()" <<
-      std::endl;
+      ".\\\" ==> oahAtomStoringAValue::acceptOut ()";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -2508,8 +2479,7 @@ void oahAtomStoringAValue::acceptOut (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            ".\\\" ==> Launching oahAtomStoringAValue::visitEnd ()" <<
-            std::endl;
+            ".\\\" ==> Launching oahAtomStoringAValue::visitEnd ()";
 
           gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
@@ -2527,8 +2497,7 @@ void oahAtomStoringAValue::browseData (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> oahAtomStoringAValue::browseData ()" <<
-      std::endl;
+      ".\\\" ==> oahAtomStoringAValue::browseData ()";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -2697,8 +2666,7 @@ void oahPureHelpValueLessAtom::acceptIn (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> oahPureHelpValueLessAtom::acceptIn ()" <<
-      std::endl;
+      ".\\\" ==> oahPureHelpValueLessAtom::acceptIn ()";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -2716,8 +2684,7 @@ void oahPureHelpValueLessAtom::acceptIn (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            ".\\\" ==> Launching oahPureHelpValueLessAtom::visitStart ()" <<
-            std::endl;
+            ".\\\" ==> Launching oahPureHelpValueLessAtom::visitStart ()";
 
           gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
@@ -2735,8 +2702,7 @@ void oahPureHelpValueLessAtom::acceptOut (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> oahPureHelpValueLessAtom::acceptOut ()" <<
-      std::endl;
+      ".\\\" ==> oahPureHelpValueLessAtom::acceptOut ()";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -2754,8 +2720,7 @@ void oahPureHelpValueLessAtom::acceptOut (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            ".\\\" ==> Launching oahPureHelpValueLessAtom::visitEnd ()" <<
-            std::endl;
+            ".\\\" ==> Launching oahPureHelpValueLessAtom::visitEnd ()";
 
           gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
@@ -2773,8 +2738,7 @@ void oahPureHelpValueLessAtom::browseData (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> oahPureHelpValueLessAtom::browseData ()" <<
-      std::endl;
+      ".\\\" ==> oahPureHelpValueLessAtom::browseData ()";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -2867,8 +2831,7 @@ void oahPureHelpValueFittedAtom::acceptIn (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> oahPureHelpValueFittedAtom::acceptIn ()" <<
-      std::endl;
+      ".\\\" ==> oahPureHelpValueFittedAtom::acceptIn ()";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -2886,8 +2849,7 @@ void oahPureHelpValueFittedAtom::acceptIn (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            ".\\\" ==> Launching oahPureHelpValueFittedAtom::visitStart ()" <<
-            std::endl;
+            ".\\\" ==> Launching oahPureHelpValueFittedAtom::visitStart ()";
 
           gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
@@ -2905,8 +2867,7 @@ void oahPureHelpValueFittedAtom::acceptOut (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> oahPureHelpValueFittedAtom::acceptOut ()" <<
-      std::endl;
+      ".\\\" ==> oahPureHelpValueFittedAtom::acceptOut ()";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -2924,8 +2885,7 @@ void oahPureHelpValueFittedAtom::acceptOut (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            ".\\\" ==> Launching oahPureHelpValueFittedAtom::visitEnd ()" <<
-            std::endl;
+            ".\\\" ==> Launching oahPureHelpValueFittedAtom::visitEnd ()";
 
           gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
@@ -2943,8 +2903,7 @@ void oahPureHelpValueFittedAtom::browseData (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> oahPureHelpValueFittedAtom::browseData ()" <<
-      std::endl;
+      ".\\\" ==> oahPureHelpValueFittedAtom::browseData ()";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -3103,8 +3062,7 @@ void oahSubGroup::appendSubGroupToElementsList (
       fSubGroupHeader <<
       "\" in the elements list in handler \"" <<
       handler->getHandlerHeader () <<
-      "\"" <<
-      std::endl;
+      "\"";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -3150,8 +3108,7 @@ void oahSubGroup::registerNamesInSubGroupToTheNamesToElementsMap (
       fSubGroupHeader <<
       "\" in the names to elements map in handler \"" <<
       handler->getHandlerHeader () <<
-      "\"" <<
-      std::endl;
+      "\"";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -3257,8 +3214,7 @@ void oahSubGroup::applySubGroup (std::ostream& os)
     ss <<
       "Applying element " <<
       fetchNames () <<
-      ", which is a oahSubGroup" <<
-      std::endl;
+      ", which is a oahSubGroup";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -3301,8 +3257,7 @@ void oahSubGroup::acceptIn (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> oahSubGroup::acceptIn ()" <<
-      std::endl;
+      ".\\\" ==> oahSubGroup::acceptIn ()";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -3320,8 +3275,7 @@ void oahSubGroup::acceptIn (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            ".\\\" ==> Launching oahSubGroup::visitStart ()" <<
-            std::endl;
+            ".\\\" ==> Launching oahSubGroup::visitStart ()";
 
           gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
@@ -3339,8 +3293,7 @@ void oahSubGroup::acceptOut (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> oahSubGroup::acceptOut ()" <<
-      std::endl;
+      ".\\\" ==> oahSubGroup::acceptOut ()";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -3358,8 +3311,7 @@ void oahSubGroup::acceptOut (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            ".\\\" ==> Launching oahSubGroup::visitEnd ()" <<
-            std::endl;
+            ".\\\" ==> Launching oahSubGroup::visitEnd ()";
 
           gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
@@ -3378,8 +3330,7 @@ void oahSubGroup::browseData (basevisitor* v)
 
     ss <<
       ".\\\" ==> oahSubGroup::browseData ()" <<
-      ", " << fSubGroupHeader <<
-      std::endl;
+      ", " << fSubGroupHeader;
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -3400,7 +3351,7 @@ void oahSubGroup::browseData (basevisitor* v)
       /* JMI ???
       gLog <<
         ".\\\" ==> Going to browse atom" <<
-        " '" << atom->fetchNames () << "'" <<
+        " '" << atom->fetchNames () << '\'' <<
         std::endl;
         */
 
@@ -4166,8 +4117,7 @@ void oahGroup::appendGroupToElementsList (
       fGroupHeader <<
       "\" to elements list in handler \"" <<
       handler->getHandlerHeader () <<
-      "\"" <<
-      std::endl;
+      "\"";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -4222,8 +4172,7 @@ void oahGroup::registerNamesInGroupToTheNamesToElementsMap (
       fGroupHeader <<
       "\" in the names to elements map in handler \"" <<
       handler->getHandlerHeader () <<
-      "\"" <<
-      std::endl;
+      "\"";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -4316,8 +4265,7 @@ void oahGroup::applyGroup (std::ostream& os)
     ss <<
       "Applying element '" <<
       fetchNames () <<
-      "', which is a oahGroup" <<
-      std::endl;
+      "', which is a oahGroup";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -4381,8 +4329,7 @@ void oahGroup::checkGroupSubGroupsOptionsConsistency ()
     ss <<
       "Checking the consistency of OAH group \"" <<
       fGroupHeader <<
-      "\"" <<
-      std::endl;
+      "\"";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -4420,8 +4367,7 @@ void oahGroup::acceptIn (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> oahGroup::acceptIn ()" <<
-      std::endl;
+      ".\\\" ==> oahGroup::acceptIn ()";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -4439,8 +4385,7 @@ void oahGroup::acceptIn (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            ".\\\" ==> Launching oahGroup::visitStart ()" <<
-            std::endl;
+            ".\\\" ==> Launching oahGroup::visitStart ()";
 
           gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
@@ -4458,8 +4403,7 @@ void oahGroup::acceptOut (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> oahGroup::acceptOut ()" <<
-      std::endl;
+      ".\\\" ==> oahGroup::acceptOut ()";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -4477,8 +4421,7 @@ void oahGroup::acceptOut (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            ".\\\" ==> Launching oahGroup::visitEnd ()" <<
-            std::endl;
+            ".\\\" ==> Launching oahGroup::visitEnd ()";
 
           gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
@@ -4497,8 +4440,7 @@ void oahGroup::browseData (basevisitor* v)
 
     ss <<
       ".\\\" ==> oahGroup::browseData ()" <<
-      ", " << fGroupHeader <<
-      std::endl;
+      ", " << fGroupHeader;
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -5137,8 +5079,7 @@ void oahHandler::initializeHandler ()
       fHandlerHeader <<
       "\" for \"" <<
       fHandlerServiceName <<
-      "\"" <<
-      std::endl;
+      "\"";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -5228,8 +5169,7 @@ void oahHandler::registerElementNamesInHandler (
         element->fetchNamesBetweenQuotes () <<
         " in handler \"" <<
         fHandlerHeader <<
-        "\"" <<
-        std::endl;
+        "\"";
 
       gWaeHandler->waeTraceWithoutLocationDetails (
         __FILE__, __LINE__,
@@ -5412,8 +5352,7 @@ void oahHandler::registerNamesInHandlerToTheNamesToElementsMap ()
     ss <<
       "Registering the names in handler \"" <<
       fHandlerHeader <<
-      "\" in its names to elements map" <<
-      std::endl;
+      "\" in its names to elements map";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -5450,8 +5389,7 @@ void oahHandler::registerNamesInHandlerToTheNamesToElementsMap ()
       ss <<
         "All the names in handler \"" <<
         fHandlerHeader <<
-        "\" have been registered in the names to elements map" <<
-        std::endl;
+        "\" have been registered in the names to elements map";
 
       gWaeHandler->waeTraceWithoutLocationDetails (
         __FILE__, __LINE__,
@@ -5478,8 +5416,7 @@ void oahHandler::appendElementToElementsList (
         fHandlerServiceName <<
         "\" handler \"" <<
         fHandlerHeader <<
-        "\"" <<
-        std::endl;
+        "\"";
 
       gWaeHandler->waeTraceWithoutLocationDetails (
         __FILE__, __LINE__,
@@ -5560,8 +5497,7 @@ void oahHandler::checkOptionsAndArgumentsConsistency ()
 
       ss <<
         "There are no arguments to " <<
-        fHandlerServiceName <<
-        std::endl;
+        fHandlerServiceName;
 
       gWaeHandler->waeTraceWithoutLocationDetails (
         __FILE__, __LINE__,
@@ -5581,8 +5517,7 @@ void oahHandler::createTheCommonPrefixes ()
     ss <<
       "Creating the common prefixes in \"" <<
       fHandlerHeader <<
-      "\"" <<
-      std::endl;
+      "\"";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -5639,8 +5574,7 @@ void oahHandler::checkNoInputSourceInArgumentsVector () const
     ss <<
       "Checking no input source in argument vector in \"" <<
       fHandlerHeader <<
-      "\"" <<
-      std::endl;
+      "\"";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -5733,8 +5667,7 @@ void oahHandler::checkNoOrOneInputSourceInArgumentsVector () const
     ss <<
       "Checking no or one input source in argument vector in \"" <<
       fHandlerHeader <<
-      "\"" <<
-      std::endl;
+      "\"";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -5854,8 +5787,7 @@ void oahHandler::checkSingleInputSourceInArgumentsVector () const
     ss <<
       "Checking single input source in argument vector in \"" <<
       fHandlerHeader <<
-      "\"" <<
-      std::endl;
+      "\"";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -5968,8 +5900,7 @@ void oahHandler::setOahHandlerFoundAHelpOption (
       "Setting oahHandlerFoundAHelpOption in handler \"" <<
       fHandlerHeader <<
       "\", context: " <<
-      context <<
-      std::endl;
+      context;
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -6003,8 +5934,7 @@ void oahHandler::checkHandlerOptionsConsistency ()
       fHandlerServiceName <<
       "\" handler \"" <<
       fHandlerHeader <<
-      "\"" <<
-      std::endl;
+      "\"";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -6199,8 +6129,7 @@ void oahHandler::acceptIn (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> oahHandler::acceptIn ()" <<
-      std::endl;
+      ".\\\" ==> oahHandler::acceptIn ()";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -6218,8 +6147,7 @@ void oahHandler::acceptIn (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            ".\\\" ==> Launching oahHandler::visitStart ()" <<
-            std::endl;
+            ".\\\" ==> Launching oahHandler::visitStart ()";
 
           gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
@@ -6237,8 +6165,7 @@ void oahHandler::acceptOut (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> oahHandler::acceptOut ()" <<
-      std::endl;
+      ".\\\" ==> oahHandler::acceptOut ()";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -6256,8 +6183,7 @@ void oahHandler::acceptOut (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            ".\\\" ==> Launching oahHandler::visitEnd ()" <<
-            std::endl;
+            ".\\\" ==> Launching oahHandler::visitEnd ()";
 
           gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
@@ -6275,8 +6201,7 @@ void oahHandler::browseData (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> oahHandler::browseData ()" <<
-      std::endl;
+      ".\\\" ==> oahHandler::browseData ()";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -7346,8 +7271,7 @@ void oahHandler::registerPrefixInHandler (
       prefix->fetchPrefixNames () <<
       " in handler \"" <<
       fHandlerHeader <<
-      "\"" <<
-      std::endl;
+      "\"";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -7421,8 +7345,7 @@ void oahHandler::appendGroupToHandler (
       group->getGroupHeader () <<
       "\" to handler \"" <<
       fHandlerHeader <<
-      "\"" <<
-      std::endl;
+      "\"";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -7462,8 +7385,7 @@ void oahHandler::prependGroupToHandler (
       group->getGroupHeader () <<
       "\" to handler \"" <<
       fHandlerHeader <<
-      "\"" <<
-      std::endl;
+      "\"";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -7800,8 +7722,7 @@ void oahHandler::checkMissingPendingArgvValueFittedAtomValue (
         fHandlerOptionalValuesStyleKind) <<
       ", fElementValueKind: " <<
       oahElementValueKindAsString (
-        fElementValueKind) <<
-      std::endl;
+        fElementValueKind);
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -7894,8 +7815,7 @@ void oahHandler::checkMissingPendingArgvValueFittedAtomValue (
       ss <<
         "Forgetting about the pending argv value-fitted atom when handling atom name \"" <<
         lastOptionNameFound <<
-        "\"" <<
-        std::endl;
+        "\"";
 
       gWaeHandler->waeTraceWithoutLocationDetails (
         __FILE__, __LINE__,
@@ -7916,8 +7836,7 @@ void oahHandler::checkMissingPendingArgvValueFittedAtomValue (
       ss <<
         "No argv value-fitted atom is pending when handling atom name \"" <<
         lastOptionNameFound <<
-        "\"" <<
-        std::endl;
+        "\"";
 
       gWaeHandler->waeTraceWithoutLocationDetails (
         __FILE__, __LINE__,
@@ -7949,8 +7868,7 @@ void oahHandler::registerOahElementUse (
       "Registering element use " <<
       elementUsed->fetchNamesBetweenQuotes () <<
       ", nameUsed: \"" << nameUsed << "\"" <<
-      ", valueUsed: \"" << valueUsed << "\"" <<
-      std::endl;
+      ", valueUsed: \"" << valueUsed << "\"";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -7992,8 +7910,7 @@ void oahHandler::registerOahElementUse (
         elementUsed->fetchNamesBetweenQuotes () <<
         ", nameUsed: \"" << nameUsed << "\"" <<
         ", valueUsed: \"" << valueUsed << "\"" <<
-        " leads to include this options and arguments file now" <<
-        std::endl;
+        " leads to include this options and arguments file now";
 
       gWaeHandler->waeTraceWithoutLocationDetails (
         __FILE__, __LINE__,
@@ -8049,8 +7966,7 @@ void oahHandler::registerOahElementUseInLaunchCommand (
       elementUsed->fetchNamesBetweenQuotes () <<
       ", nameUsed: \"" << nameUsed << "\"" <<
       ", valueUsed: \"" << valueUsed << "\"" <<
-      " in command line" <<
-      std::endl;
+      " in command line";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -8222,8 +8138,7 @@ void oahHandler::handleOptionPrefixName (
       "Handling option prefix name \"" <<
       prefixName <<
       ", equalsSignPosition = \"" << equalsSignPosition << "\"" <<
-      ", stringAfterEqualsSign = \"" << stringAfterEqualsSign << "\"" <<
-      std::endl;
+      ", stringAfterEqualsSign = \"" << stringAfterEqualsSign << "\"";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -8300,8 +8215,7 @@ void oahHandler::handleOptionPrefixName (
           ss <<
             "Expanding option \"" << singleOptionName <<
             "\" to \"" << uncontractedOptionName <<
-            "\"" <<
-            std::endl;
+            "\"";
 
           gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
@@ -8344,8 +8258,7 @@ Bool oahHandler::isNameASingleCharacterOptionsCluster (
     ss <<
       "Checking whether optionName \"" <<
       optionName <<
-      "\" is a single-character options cluster" <<
-      std::endl;
+      "\" is a single-character options cluster";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -8378,8 +8291,7 @@ Bool oahHandler::isNameASingleCharacterOptionsCluster (
       std::stringstream ss;
 
       ss <<
-        "Considering single-character '" << singleCharacterString << "'" <<
-        std::endl;
+        "Considering single-character '" << singleCharacterString << '\'';
 
       gWaeHandler->waeTraceWithoutLocationDetails (
         __FILE__, __LINE__,
@@ -8472,8 +8384,7 @@ Bool oahHandler::isNameASingleCharacterOptionsCluster (
     std::stringstream ss;
 
     ss <<
-      "optionNameSize: " << optionNameSize <<
-      std::endl;
+      "optionNameSize: " << optionNameSize;
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -8520,8 +8431,7 @@ Bool oahHandler::isNameASingleCharacterOptionsCluster (
       ss <<
         "OptionName \"" <<
         optionName <<
-        "\" is no single-character options cluster" <<
-        std::endl;
+        "\" is no single-character options cluster";
 
       gWaeHandler->waeTraceWithoutLocationDetails (
         __FILE__, __LINE__,
@@ -8558,8 +8468,7 @@ void oahHandler::handleNameContainingEqualSign (
       "\" that contains an  equal sign at position " <<
       equalsSignPosition <<
       ", stringBeforeEqualsSign = \"" << stringBeforeEqualsSign <<
-      ", stringAfterEqualsSign = \"" << stringAfterEqualsSign << "\"" <<
-      std::endl;
+      ", stringAfterEqualsSign = \"" << stringAfterEqualsSign << "\"";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -8582,8 +8491,7 @@ void oahHandler::handleNameContainingEqualSign (
       ss <<
         "Option name \"" <<
         stringBeforeEqualsSign <<
-        "\" is a prefix" <<
-        std::endl;
+        "\" is a prefix";
 
       gWaeHandler->waeTraceWithoutLocationDetails (
         __FILE__, __LINE__,
@@ -8622,8 +8530,7 @@ void oahHandler::handleNameContainingEqualSign (
           ss <<
             "Option \"" <<
             stringBeforeEqualsSign <<
-            "\" is a stringWithDefaultValueAtom" <<
-            std::endl;
+            "\" is a stringWithDefaultValueAtom";
 
           gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
@@ -8668,8 +8575,7 @@ void oahHandler::handleOptionsVectorOptionName (
       optionName <<
       "\" with value \"" <<
       valueUsed <<
-      "\"" <<
-      std::endl;
+      "\"";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -8735,8 +8641,7 @@ std::string oahHandler::handleArgvOptionName (
     ss <<
       "Handling argv option name \"" <<
       optionName <<
-      "\"" <<
-      std::endl;
+      "\"";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -8798,8 +8703,7 @@ std::string oahHandler::handleArgvOptionName (
       std::stringstream ss;
 
       ss <<
-        "\"" << currentOptionName << "\" is a single-dashed option" <<
-        std::endl;
+        "\"" << currentOptionName << "\" is a single-dashed option";
 
       gWaeHandler->waeTraceWithoutLocationDetails (
         __FILE__, __LINE__,
@@ -8830,8 +8734,7 @@ void oahHandler::handleOptionNameAndValueAtTopOahLevel (
       "Handling options and arguments element [" <<
       optionName <<
       "] [" <<
-      optionValue << ']' <<
-      std::endl;
+      optionValue << ']';
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -8943,8 +8846,7 @@ void oahHandler::handleArgvOptionValueOrArgument (
         fNameUsedForPendingArgvValueFittedAtom <<
         "\" under the name \"" <<
         fNameUsedForPendingArgvValueFittedAtom <<
-        "\" in argv is \"" << theString << "\"" <<
-        std::endl;
+        "\" in argv is \"" << theString << "\"";
 
       gWaeHandler->waeTraceWithoutLocationDetails (
         __FILE__, __LINE__,
@@ -8980,8 +8882,7 @@ void oahHandler::handleArgvOptionValueOrArgument (
       std::stringstream ss;
 
       ss <<
-        "handleArgvOptionValueOrArgument() Forgetting about the pending value-fitted atom" <<
-        std::endl;
+        "handleArgvOptionValueOrArgument() Forgetting about the pending value-fitted atom";
 
       gWaeHandler->waeTraceWithoutLocationDetails (
         __FILE__, __LINE__,
@@ -9072,8 +8973,7 @@ oahElementHelpOnlyKind oahHandler::handleOptionsFromOptionsAndArguments (
 
     ss <<
       "Initializing handler component" <<
-      ", serviceName: " << serviceName <<
-      std::endl;
+      ", serviceName: " << serviceName;
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -9108,8 +9008,7 @@ oahElementHelpOnlyKind oahHandler::handleOptionsFromOptionsAndArguments (
 
     ss <<
       "Result oahElementHelpOnlyKind: " <<
-      oahElementHelpOnlyKindAsString (result) <<
-      std::endl;
+      oahElementHelpOnlyKindAsString (result);
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -9151,8 +9050,7 @@ oahElementHelpOnlyKind oahHandler::handleOptionsAndArgumentsFromArgcArgv (
       fHandlerHeader <<
       "\" for \"" <<
       fHandlerServiceName <<
-      "\"" <<
-      std::endl;
+      "\"";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -9204,8 +9102,7 @@ oahElementHelpOnlyKind oahHandler::handleOptionsAndArgumentsFromArgcArgv (
 
     ss <<
       "Initializing handler component" <<
-      ", fHandlerServiceName: " << fHandlerServiceName <<
-      std::endl;
+      ", fHandlerServiceName: " << fHandlerServiceName;
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -9232,8 +9129,7 @@ oahElementHelpOnlyKind oahHandler::handleOptionsAndArgumentsFromArgcArgv (
 
     ss <<
       "result oahElementHelpOnlyKind: " <<
-      oahElementHelpOnlyKindAsString (result) <<
-      std::endl;
+      oahElementHelpOnlyKindAsString (result);
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -9264,8 +9160,7 @@ void oahHandler::createElementUsesListFromOptionsAndArguments (
     ss <<
       "Creating atom uses list from options and arguments in \"" <<
       fHandlerHeader <<
-      "\"" <<
-      std::endl;
+      "\"";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -9387,8 +9282,7 @@ void oahHandler::createElementUsesListFromArgcArgv (
       ss <<
         "Creating atom uses list from argc/argv in \"" <<
         fHandlerHeader <<
-        "\"" <<
-        std::endl;
+        "\"";
 
       gWaeHandler->waeTraceWithoutLocationDetails (
         __FILE__, __LINE__,
@@ -9460,8 +9354,7 @@ void oahHandler::createElementUsesListFromArgcArgv (
       n <<
       ": [" <<
       currentString <<
-      ']' <<
-      std::endl;
+      ']';
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -9482,8 +9375,7 @@ void oahHandler::createElementUsesListFromArgcArgv (
     std::stringstream ss;
 
     ss <<
-      "\"" << currentString << "\" is the '-' stdin indicator" <<
-      std::endl;
+      "\"" << currentString << "\" is the '-' stdin indicator";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -9518,8 +9410,7 @@ void oahHandler::createElementUsesListFromArgcArgv (
           std::stringstream ss;
 
           ss <<
-            currentString << " is an option name" <<
-            std::endl;
+            currentString << " is an option name";
 
           gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
@@ -9574,8 +9465,7 @@ oahElementHelpOnlyKind oahHandler::applyOptionsFromElementUsesList ()
 
     ss <<
       "Applying options from elements uses list in \"" <<
-      fHandlerHeader << "\"" <<
-      std::endl;
+      fHandlerHeader << "\"";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -9655,8 +9545,7 @@ oahElementHelpOnlyKind oahHandler::applyOptionsFromElementUsesList ()
     ss <<
       "Its atomValueExpectedKind is '" <<
       oahElementValueKindAsString (atomValueExpectedKind) <<
-      "'" <<
-      std::endl;
+      '\'';
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -9954,8 +9843,7 @@ void oahHandler::handleKnownOptionsVectorElement (
       element->fetchNamesBetweenQuotes () <<
       " under name \"" <<
       optionNameUsed <<
-      "\"" <<
-      std::endl;
+      "\"";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -9973,8 +9861,7 @@ void oahHandler::handleKnownOptionsVectorElement (
       "\" is described by: " <<
       std::endl <<
       gTab <<
-      element->getDescription () <<
-      std::endl;
+      element->getDescription ();
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -9999,8 +9886,7 @@ void oahHandler::handleKnownOptionsVectorElement (
         "\" is already present in the options vector";
 
       oahWarning (ss.str ());
-      // JMIJMIJMI
-      //abort();
+      //abort (); // JMIJMIJMI v0.9.68
     }
   }
 
@@ -10012,8 +9898,7 @@ void oahHandler::handleKnownOptionsVectorElement (
     ss <<
       "Inserting \"" <<
       element->fetchNamesBetweenQuotes () <<
-      "\" in fHandlerCommandLineElementsMultiset" <<
-      std::endl;
+      "\" in fHandlerCommandLineElementsMultiset";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -10085,8 +9970,7 @@ void oahHandler::handleKnownOptionsVectorElement (
       ss <<
         "Atom name \"" << optionNameUsed << "\" is a alias for \"" <<
         originalValueLessAtom->asString () <<
-        "\", handling the latter" <<
-        std::endl;
+        "\", handling the latter";
 
       gWaeHandler->waeTraceWithoutLocationDetails (
         __FILE__, __LINE__,
@@ -10139,8 +10023,7 @@ void oahHandler::handleKnownArgvElement (
       element->fetchNamesBetweenQuotes () <<
       " under name \"" <<
       optionNameUsed <<
-      "\"" <<
-      std::endl;
+      "\"";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -10158,8 +10041,7 @@ void oahHandler::handleKnownArgvElement (
       " is described by: " <<
       std::endl <<
       gTab <<
-      element->getDescription () <<
-      std::endl;
+      element->getDescription ();
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -10253,8 +10135,7 @@ void oahHandler::handleKnownArgvElement (
       ss <<
         "Atom name \"" << optionNameUsed << "\" is a alias for \"" <<
         originalValueLessAtom->asString () <<
-        "\", handling the latter" <<
-        std::endl;
+        "\", handling the latter";
 
       gWaeHandler->waeTraceWithoutLocationDetails (
         __FILE__, __LINE__,
@@ -10301,8 +10182,7 @@ void oahHandler::handleKnownOptionsVectorAtom (
       atom->fetchNamesBetweenQuotes () <<
       " under name \"" <<
       optionNameUsed <<
-      "\"" <<
-      std::endl;
+      "\"";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -10365,8 +10245,7 @@ void oahHandler::handleKnownArgvAtom (
       atom->fetchNamesBetweenQuotes () <<
       " under name \"" <<
       optionNameUsed <<
-      "\"" <<
-      std::endl;
+      "\"";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -10451,8 +10330,7 @@ void oahHandler::handleUnknownOptionName (
     ss <<
       "Handling unknown option name \"" <<
       optionName <<
-      "\"" <<
-      std::endl;
+      "\"";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -10560,8 +10438,7 @@ void oahHandler::handleOptionNameCommon (
     ss <<
       "Common handling of option name \"" <<
       optionName <<
-      "\"" <<
-      std::endl;
+      "\"";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -10597,8 +10474,7 @@ void oahHandler::handleOptionNameCommon (
       optionName <<
       "\" which is known to handler \"" <<
       fHandlerHeader <<
-      "\"" <<
-      std::endl;
+      "\"";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -10676,7 +10552,7 @@ void oahHandler::handleOptionNameCommon (
 //             "argumentIsAnOption, " <<
 //             serviceName << " main()" <<
 //             ", argumentWithoutDash: '" << argumentWithoutDash <<
-//             "'" <<
+//             '\'' <<
 //             std::endl;
 //         }
 //
@@ -10707,7 +10583,7 @@ void oahHandler::handleOptionNameCommon (
 //             argumentWithoutDashStartsWithAPrefix <<
 //             ", argumentWithoutDashToBeUsed: '" <<
 //             argumentWithoutDashToBeUsed <<
-//             "'" <<
+//             '\'' <<
 //             std::endl;
 //         }
 //
@@ -10868,8 +10744,7 @@ void oahHandler::includeOptionsFromFile (
     std::stringstream ss;
 
     ss <<
-      "==> includeOptionsFromFile()" <<
-      std::endl;
+      "==> includeOptionsFromFile()";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -10888,8 +10763,7 @@ void oahHandler::includeOptionsFromFile (
       std::stringstream ss;
 
       ss <<
-        "==> currentLine: [" << currentLine << ']' <<
-        std::endl;
+        "==> currentLine: [" << currentLine << ']';
 
       gWaeHandler->waeTraceWithoutLocationDetails (
         __FILE__, __LINE__,
@@ -10965,8 +10839,7 @@ void oahHandler::includeOptionsFromFile (
           std::stringstream ss;
 
           ss <<
-            "--> option found: [" << currentLine << ']' <<
-            std::endl;
+            "--> option found: [" << currentLine << ']';
 
           gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
@@ -11143,8 +11016,7 @@ void oahHandler::includeOptionsFromFile (
           std::stringstream ss;
 
           ss <<
-            "Found argument [" << currentLine << ']' <<
-            std::endl;
+            "Found argument [" << currentLine << ']';
 
           gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
@@ -11208,7 +11080,7 @@ EXP void convertArgcArgvToOptionsAndArguments ( // JMIJMIJMI
       "There are " << smSize << " matches" <<
       " for version string '" << theString <<
       "' with std::regex '" << regularExpression <<
-      "'" <<
+      '\'' <<
       std::endl <<
       smSize << " elements: ";
 
@@ -11235,8 +11107,7 @@ EXP void convertArgcArgvToOptionsAndArguments ( // JMIJMIJMI
       ss <<
         "--> generationNumberValue = \"" << generationNumberValue << "\", " <<
         "--> majorNumberValue = \"" << majorNumberValue << "\", " <<
-        "--> minorNumberValue = \"" << minorNumberValue << "\"" <<
-        std::endl;
+        "--> minorNumberValue = \"" << minorNumberValue << "\"";
 
       gWaeHandler->waeTraceWithoutLocationDetails (
         __FILE__, __LINE__,
@@ -11272,7 +11143,7 @@ EXP void convertArgcArgvToOptionsAndArguments ( // JMIJMIJMI
         "There are " << smSize << " matches" <<
         " for chord details string '" << theString <<
         "' with std::regex '" << regularExpression <<
-        "'" <<
+        '\'' <<
         std::endl <<
         smSize << " elements: ";
 

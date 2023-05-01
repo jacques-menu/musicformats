@@ -184,14 +184,11 @@ void msrGenerationAPIKindAtom::applyAtomWithValue (
 
     ss <<
       "==> handling atom '" << fetchNames () << "; which is of type 'msrGenerationAPIKindAtom'" <<
-      " with value \"" << theString << "\"" <<
-      std::endl;
+      " with value \"" << theString << "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -236,14 +233,11 @@ void msrGenerationAPIKindAtom::acceptIn (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> msrGenerationAPIKindAtom::acceptIn ()" <<
-      std::endl;
+      ".\\\" ==> msrGenerationAPIKindAtom::acceptIn ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -257,14 +251,11 @@ void msrGenerationAPIKindAtom::acceptIn (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            ".\\\" ==> Launching msrGenerationAPIKindAtom::visitStart ()" <<
-            std::endl;
+            ".\\\" ==> Launching msrGenerationAPIKindAtom::visitStart ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
@@ -278,14 +269,11 @@ void msrGenerationAPIKindAtom::acceptOut (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> msrGenerationAPIKindAtom::acceptOut ()" <<
-      std::endl;
+      ".\\\" ==> msrGenerationAPIKindAtom::acceptOut ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -299,14 +287,11 @@ void msrGenerationAPIKindAtom::acceptOut (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            ".\\\" ==> Launching msrGenerationAPIKindAtom::visitEnd ()" <<
-            std::endl;
+            ".\\\" ==> Launching msrGenerationAPIKindAtom::visitEnd ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
@@ -320,14 +305,11 @@ void msrGenerationAPIKindAtom::browseData (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> msrGenerationAPIKindAtom::browseData ()" <<
-      std::endl;
+      ".\\\" ==> msrGenerationAPIKindAtom::browseData ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }

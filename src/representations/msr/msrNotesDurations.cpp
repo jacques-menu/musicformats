@@ -232,14 +232,11 @@ EXP msrWholeNotes wholeNotesFromNotesDurationKindAndDotsNumber (
     ss <<
       "=== wholeNotesFromNotesDurationKindAndDotsNumber()" <<
       ", (int) notesNotesDurationKind: " << (int) notesNotesDurationKind <<
-      ", result: " << result <<
-      std::endl;
+      ", result: " << result;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -263,14 +260,11 @@ EXP msrWholeNotes wholeNotesFromNotesDurationKindAndDotsNumber (
       "=== wholeNotesFromNotesDurationKindAndDotsNumber()" <<
       ", dots: " << dots <<
       ", result: " << result <<
-      ", increment: " << increment <<
-      std::endl;
+      ", increment: " << increment;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -612,14 +606,11 @@ msrWholeNotes msrNotesDuration::dottedNotesDurationAsWholeNotes (
     ss <<
       "=== dottedNotesDurationAsWholeNotes()" <<
       ", (int) fNotesDurationKind: " << (int) fNotesDurationKind <<
-      ", result: " << result <<
-      std::endl;
+      ", result: " << result;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -643,14 +634,11 @@ msrWholeNotes msrNotesDuration::dottedNotesDurationAsWholeNotes (
       "=== dottedNotesDurationAsWholeNotes()" <<
       ", dots: " << dots <<
       ", result: " << result <<
-      ", increment: " << increment <<
-      std::endl;
+      ", increment: " << increment;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -680,14 +668,11 @@ msrWholeNotes msrNotesDuration::dottedNotesDurationAsWholeNotes_FOR_TEMPO (
     ss <<
       "=== dottedNotesDurationAsWholeNotes_FOR_TEMPO()" <<
       ", result: " << result <<
-      "\"" <<
-      std::endl;
+      "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -707,14 +692,11 @@ msrWholeNotes msrNotesDuration::dottedNotesDurationAsWholeNotes_FOR_TEMPO (
       "=== dottedNotesDurationAsWholeNotes_FOR_TEMPO()" <<
       ", dots: " << dots <<
       ", result: " << result <<
-      "\"" <<
-      std::endl;
+      "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -892,14 +874,11 @@ msrWholeNotes msrDottedNotesDuration::dottedNotesDurationAsWholeNotes (
     ss <<
       "=== dottedNotesDurationAsWholeNotes()" <<
       ", (int) fNotesDurationKind: " << (int) fNotesDurationKind <<
-      ", result: " << result <<
-      std::endl;
+      ", result: " << result;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -923,14 +902,11 @@ msrWholeNotes msrDottedNotesDuration::dottedNotesDurationAsWholeNotes (
       "=== dottedNotesDurationAsWholeNotes()" <<
       ", dots: " << dots <<
       ", result: " << result <<
-      ", increment: " << increment <<
-      std::endl;
+      ", increment: " << increment;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -960,14 +936,11 @@ msrWholeNotes msrDottedNotesDuration::dottedNotesDurationAsWholeNotes_FOR_TEMPO 
     ss <<
       "=== dottedNotesDurationAsWholeNotes_FOR_TEMPO()" <<
       ", result: " << result <<
-      "\"" <<
-      std::endl;
+      "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -987,14 +960,11 @@ msrWholeNotes msrDottedNotesDuration::dottedNotesDurationAsWholeNotes_FOR_TEMPO 
       "=== dottedNotesDurationAsWholeNotes_FOR_TEMPO()" <<
       ", dots: " << dots <<
       ", result: " << result <<
-      "\"" <<
-      std::endl;
+      "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1102,14 +1072,11 @@ msrWholeNotes::msrWholeNotes (const std::string &theString)
 
       ss <<
         "--> numewholeNotesor = \"" << numewholeNotesor << "\", " <<
-        "--> denominator = \"" << denominator << "\"" <<
-        std::endl;
+        "--> denominator = \"" << denominator << "\"";
 
       gWaeHandler->waeTraceWithLocationDetails (
         __FILE__, __LINE__,
         ss.str ());
-//         gServiceRunData->getCurrentMeasureNumber (),
-//         gServiceRunData->getScoreMeasuresNumber ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1480,14 +1447,11 @@ std::string wholeNotesAndDotsNumberAsMsrString (
     ss <<
       "--> wholeNotesAndDotsNumberAsMsrString() 1 -------------------------------------" <<
       ", wholeNotes: " << wholeNotes.asString () <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1508,8 +1472,6 @@ std::string wholeNotesAndDotsNumberAsMsrString (
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1552,8 +1514,6 @@ std::string wholeNotesAndDotsNumberAsMsrString (
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1581,8 +1541,6 @@ std::string wholeNotesAndDotsNumberAsMsrString (
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1668,8 +1626,6 @@ std::string wholeNotesAndDotsNumberAsMsrString (
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1684,14 +1640,11 @@ std::string wholeNotesAndDotsNumberAsMsrString (
 
       ss <<
         "--> integralNumberOfWholeNotes,"
-        " bringing the faction to be less that 2" <<
-        std::endl;
+        " bringing the faction to be less that 2";
 
       gWaeHandler->waeTraceWithLocationDetails (
         __FILE__, __LINE__,
         ss.str ());
-//         gServiceRunData->getCurrentMeasureNumber (),
-//         gServiceRunData->getScoreMeasuresNumber ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1734,8 +1687,6 @@ std::string wholeNotesAndDotsNumberAsMsrString (
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1749,14 +1700,11 @@ std::string wholeNotesAndDotsNumberAsMsrString (
       std::stringstream ss;
 
       ss <<
-        "--> taking the dots into account" <<
-        std::endl;
+        "--> taking the dots into account";
 
       gWaeHandler->waeTraceWithLocationDetails (
         __FILE__, __LINE__,
         ss.str ());
-//         gServiceRunData->getCurrentMeasureNumber (),
-//         gServiceRunData->getScoreMeasuresNumber ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1783,14 +1731,11 @@ std::string wholeNotesAndDotsNumberAsMsrString (
       std::stringstream ss;
 
       ss <<
-        "--> setting the multiplying factor" <<
-        std::endl;
+        "--> setting the multiplying factor";
 
       gWaeHandler->waeTraceWithLocationDetails (
         __FILE__, __LINE__,
         ss.str ());
-//         gServiceRunData->getCurrentMeasureNumber (),
-//         gServiceRunData->getScoreMeasuresNumber ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1859,8 +1804,6 @@ std::string wholeNotesAndDotsNumberAsMsrString (
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1915,14 +1858,11 @@ std::string wholeNotesAndDotsNumberAsMsrString (
     ss <<
       "--> wholeNotesAndDotsNumberAsMsrString() 2 -------------------------------------" <<
      ", result: \"" << result << "\"" <<
-      ", numeratorDots" << ": " << numeratorDots <<
-      std::endl;
+      ", numeratorDots" << ": " << numeratorDots;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 

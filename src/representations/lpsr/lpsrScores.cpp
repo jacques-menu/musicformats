@@ -507,14 +507,11 @@ R"(
     std::stringstream ss;
 
     ss <<
-      "Including LilyJazz definition file '" << schemeModulesName << "'" <<
-      std::endl;
+      "Including LilyJazz definition file '" << schemeModulesName << "'";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -563,14 +560,11 @@ R"(
     std::stringstream ss;
 
     ss <<
-      "Including Jianpu definition file '" << schemeModulesName << "'" <<
-      std::endl;
+      "Including Jianpu definition file '" << schemeModulesName << "'";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -618,14 +612,11 @@ R"(
     std::stringstream ss;
 
     ss <<
-      "Using Scheme modules '" << schemeModulesName << "'" <<
-      std::endl;
+      "Using Scheme modules '" << schemeModulesName << "'";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -688,14 +679,11 @@ R"(
     std::stringstream ss;
 
     ss <<
-      "Including Jianpu definition file '" << schemeModulesName << "'" <<
-      std::endl;
+      "Including Jianpu definition file '" << schemeModulesName << "'";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -758,14 +746,11 @@ tongue =
     std::stringstream ss;
 
     ss <<
-      "Creating Scheme function '" << schemeFunctionName << "'" <<
-      std::endl;
+      "Creating Scheme function '" << schemeFunctionName << "'";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -822,14 +807,11 @@ editorialAccidental =
     std::stringstream ss;
 
     ss <<
-      "Creating Scheme function '" << schemeFunctionName << "'" <<
-      std::endl;
+      "Creating Scheme function '" << schemeFunctionName << "'";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -883,14 +865,11 @@ ffffff = #(make-dynamic-script "ffffff")
     std::stringstream ss;
 
     ss <<
-      "Creating Scheme function '" << schemeFunctionName << "'" <<
-      std::endl;
+      "Creating Scheme function '" << schemeFunctionName << "'";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -992,14 +971,11 @@ tupletsCurvedBrackets = {
     std::stringstream ss;
 
     ss <<
-      "Creating Scheme function '" << schemeFunctionName << "'" <<
-      std::endl;
+      "Creating Scheme function '" << schemeFunctionName << "'";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1055,14 +1031,11 @@ after =
     std::stringstream ss;
 
     ss <<
-      "Creating Scheme function '" << schemeFunctionName << "'" <<
-      std::endl;
+      "Creating Scheme function '" << schemeFunctionName << "'";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1176,14 +1149,11 @@ tempoNotesRelationship =
     std::stringstream ss;
 
     ss <<
-      "Creating Scheme function '" << schemeFunctionName << "'" <<
-      std::endl;
+      "Creating Scheme function '" << schemeFunctionName << "'";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1377,14 +1347,11 @@ glissandoTextOff = \revert Glissando.stencil
     std::stringstream ss;
 
     ss <<
-      "Creating Scheme functions for '" << schemeFunctionName << "'" <<
-      std::endl;
+      "Creating Scheme functions for '" << schemeFunctionName << "'";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1454,14 +1421,11 @@ otherDynamic =
     std::stringstream ss;
 
     ss <<
-      "Creating Scheme functions for '" << schemeFunctionName << "'" <<
-      std::endl;
+      "Creating Scheme functions for '" << schemeFunctionName << "'";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1783,14 +1747,11 @@ schleifer =
     std::stringstream ss;
 
     ss <<
-      "Creating Scheme functions for '" << schemeFunctionName << "'" <<
-      std::endl;
+      "Creating Scheme functions for '" << schemeFunctionName << "'";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1863,14 +1824,11 @@ scoopBelow = \once \override NoteHead #'stencil = #scoop-below-stencil
     std::stringstream ss;
 
     ss <<
-      "Creating Scheme functions for '" << schemeFunctionName << "'" <<
-      std::endl;
+      "Creating Scheme functions for '" << schemeFunctionName << "'";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1934,14 +1892,11 @@ damp = \markup {
     std::stringstream ss;
 
     ss <<
-      "Creating Scheme function '" << schemeFunctionName << "'" <<
-      std::endl;
+      "Creating Scheme function '" << schemeFunctionName << "'";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1999,14 +1954,11 @@ dampAll = \markup
     std::stringstream ss;
 
     ss <<
-      "Creating Scheme function '" << schemeFunctionName << "'" <<
-      std::endl;
+      "Creating Scheme function '" << schemeFunctionName << "'";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -2069,14 +2021,11 @@ whiteNoteHeads =
     std::stringstream ss;
 
     ss <<
-      "Creating Scheme function '" << schemeFunctionName << "'" <<
-      std::endl;
+      "Creating Scheme function '" << schemeFunctionName << "'";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -2132,14 +2081,11 @@ boxAroundNextBarNumber = {
     std::stringstream ss;
 
     ss <<
-      "Creating Scheme function '" << schemeFunctionName << "'" <<
-      std::endl;
+      "Creating Scheme function '" << schemeFunctionName << "'";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -2235,14 +2181,11 @@ R"(
     std::stringstream ss;
 
     ss <<
-      "Creating Scheme function '" << schemeFunctionName << "'" <<
-      std::endl;
+      "Creating Scheme function '" << schemeFunctionName << "'";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -2320,14 +2263,11 @@ R"(
     std::stringstream ss;
 
     ss <<
-      "Creating Scheme function '" << schemeFunctionName << "'" <<
-      std::endl;
+      "Creating Scheme function '" << schemeFunctionName << "'";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -2387,14 +2327,11 @@ R"(
     std::stringstream ss;
 
     ss <<
-      "Creating Scheme function '" << schemeFunctionName << "'" <<
-      std::endl;
+      "Creating Scheme function '" << schemeFunctionName << "'";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -2523,14 +2460,11 @@ R"(
     std::stringstream ss;
 
     ss <<
-      "Creating Scheme function '" << schemeFunctionName << "'" <<
-      std::endl;
+      "Creating Scheme function '" << schemeFunctionName << "'";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -2647,14 +2581,11 @@ R"(
     std::stringstream ss;
 
     ss <<
-      "Creating Scheme function '" << schemeFunctionName << "'" <<
-      std::endl;
+      "Creating Scheme function '" << schemeFunctionName << "'";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -2748,14 +2679,11 @@ R"(
     std::stringstream ss;
 
     ss <<
-      "Creating Scheme function '" << schemeFunctionName << "'" <<
-      std::endl;
+      "Creating Scheme function '" << schemeFunctionName << "'";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -2832,14 +2760,11 @@ R"(
     std::stringstream ss;
 
     ss <<
-      "Creating Scheme function '" << schemeFunctionName << "'" <<
-      std::endl;
+      "Creating Scheme function '" << schemeFunctionName << "'";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -2887,14 +2812,11 @@ R"(
     std::stringstream ss;
 
     ss <<
-      "Creating Scheme functions for '" << schemeFunctionName << "'" <<
-      std::endl;
+      "Creating Scheme functions for '" << schemeFunctionName << "'";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -2933,14 +2855,11 @@ R"(
     std::stringstream ss;
 
     ss <<
-      "Creating Scheme functions for '" << schemeFunctionName << "'" <<
-      std::endl;
+      "Creating Scheme functions for '" << schemeFunctionName << "'";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -2992,14 +2911,11 @@ void lpsrScore::acceptIn (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> lpsrScore::acceptIn ()" <<
-      std::endl;
+      "% ==> lpsrScore::acceptIn ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -3013,14 +2929,11 @@ void lpsrScore::acceptIn (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching lpsrScore::visitStart ()" <<
-            std::endl;
+            "% ==> Launching lpsrScore::visitStart ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
@@ -3034,14 +2947,11 @@ void lpsrScore::acceptOut (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> lpsrScore::acceptOut ()" <<
-      std::endl;
+      "% ==> lpsrScore::acceptOut ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -3055,14 +2965,11 @@ void lpsrScore::acceptOut (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching lpsrScore::visitEnd ()" <<
-            std::endl;
+            "% ==> Launching lpsrScore::visitEnd ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
@@ -3076,14 +2983,11 @@ void lpsrScore::browseData (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> lpsrScore::browseData ()" <<
-      std::endl;
+      "% ==> lpsrScore::browseData ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -3180,14 +3084,11 @@ void lpsrScore::browseData (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% <== lpsrScore::browseData ()" <<
-      std::endl;
+      "% <== lpsrScore::browseData ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }

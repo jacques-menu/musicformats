@@ -207,8 +207,7 @@ void LilyPondIssue34OahGroup::acceptIn (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> LilyPondIssue34OahGroup::acceptIn ()" <<
-      std::endl;
+      ".\\\" ==> LilyPondIssue34OahGroup::acceptIn ()";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -226,8 +225,7 @@ void LilyPondIssue34OahGroup::acceptIn (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            ".\\\" ==> Launching LilyPondIssue34OahGroup::visitStart ()" <<
-            std::endl;
+            ".\\\" ==> Launching LilyPondIssue34OahGroup::visitStart ()";
 
           gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
@@ -245,8 +243,7 @@ void LilyPondIssue34OahGroup::acceptOut (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> LilyPondIssue34OahGroup::acceptOut ()" <<
-      std::endl;
+      ".\\\" ==> LilyPondIssue34OahGroup::acceptOut ()";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -264,8 +261,7 @@ void LilyPondIssue34OahGroup::acceptOut (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            ".\\\" ==> Launching LilyPondIssue34OahGroup::visitEnd ()" <<
-            std::endl;
+            ".\\\" ==> Launching LilyPondIssue34OahGroup::visitEnd ()";
 
           gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
@@ -283,8 +279,7 @@ void LilyPondIssue34OahGroup::browseData (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> LilyPondIssue34OahGroup::browseData ()" <<
-      std::endl;
+      ".\\\" ==> LilyPondIssue34OahGroup::browseData ()";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -357,8 +352,7 @@ S_LilyPondIssue34OahGroup createGlobalLilyPondIssue34OahGroup ()
     std::stringstream ss;
 
     ss <<
-      "Creating global LilyPondIssue34 OAH group" <<
-      std::endl;
+      "Creating global LilyPondIssue34 OAH group";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,

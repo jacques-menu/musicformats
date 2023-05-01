@@ -284,8 +284,7 @@ void mxsr2msrSkeletonBuilder::visitStart ( S_harmony& elt )
 		ss <<
       "--> Start visiting S_harmony" <<
       ", harmoniesVoicesCounter = " << fHarmoniesVoicesCounter <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -387,8 +386,7 @@ void mxsr2msrTranslator::visitStart ( S_harmony& elt )
 
 		ss <<
       "--> Start visiting S_harmony" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -434,8 +432,7 @@ void mxsr2msrTranslator::visitEnd ( S_harmony& elt )
       gLog <<
         "Ignoring harmony" <<
         ", line " <<
-        inputLineNumber <<
-        std::endl;
+        inputLineNumber;
 
       gWaeHandler->waeTraceWithoutLocationDetails (
         __FILE__, __LINE__,
@@ -671,8 +668,7 @@ void msrNote::appendHarmonyToNote (const S_msrHarmony& harmony)
       harmony->asString () <<
       " to the harmonies list of " <<
       asString () <<
-      ", line " << fInputLineNumber <<
-      std::endl;
+      ", line " << fInputLineNumber;
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -714,7 +710,7 @@ void mxsr2msrTranslator::copyNoteHarmoniesToChord (
           harmony->asString () <<
           "' from note " << note->asString () <<
           " to chord '" << chord->asString () <<
-          "'" <<
+          '\'' <<
           std::endl;
 
         gWaeHandler->waeTraceWithoutLocationDetails (
@@ -789,8 +785,7 @@ void msr2msrTranslator::visitStart (S_msrHarmony& elt)
       ", fOnGoingChord: " << fOnGoingChord <<
       ", fOnGoingHarmoniesVoice: " << fOnGoingHarmoniesVoice <<
       ", fOnGoingHarmony: " << fOnGoingHarmony <<
-      "', line " << elt->getInputLineNumber () <<
-      std::endl;
+      "', line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -883,9 +878,8 @@ void msr2msrTranslator::visitEnd (S_msrHarmony& elt)
     ss <<
       "--> End visiting msrHarmony '" <<
       elt->asString () <<
-      "'" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      '\'' <<
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -921,8 +915,7 @@ void msr2lpsrTranslator::visitStart (S_msrHarmony& elt)
       ", onGoingChord: " << fOnGoingChord <<
       ", onGoingHarmoniesVoice: " << fOnGoingHarmoniesVoice <<
       ", onGoingHarmony: " << fOnGoingHarmony <<
-      "', line " << elt->getInputLineNumber () <<
-      std::endl;
+      "', line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -1017,9 +1010,8 @@ void msr2lpsrTranslator::visitEnd (S_msrHarmony& elt)
     ss <<
       "--> End visiting msrHarmony '" <<
       elt->asString () <<
-      "'" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      '\'' <<
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -1059,7 +1051,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrHarmony& elt)
       ss <<
         "% --> Start visiting msrHarmony '" <<
         elt->asString () <<
-        "'" <<
+        '\'' <<
         ", fOnGoingNotesStack.size (): \"" <<
         fOnGoingNotesStack.size () <<
         ", fOnGoingChord: \"" <<
@@ -1087,8 +1079,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrHarmony& elt)
       fLilypondCodeStream <<
         "%{ fOnGoingNotesStack.size () S_msrHarmony JMI " <<
         elt->asString () <<
-        " %}" <<
-        std::endl;
+        " %}";
 
       gWaeHandler->waeTraceWithoutLocationDetails (
         __FILE__, __LINE__,

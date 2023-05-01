@@ -62,8 +62,7 @@ EXP S_mfcConverterComponent createMusicxml2lilypondConverterComponent ()
       std::stringstream ss;
 
       ss <<
-        "Creating the musicxml2lilypond component" <<
-        std::endl;
+        "Creating the musicxml2lilypond component";
 
       gWaeHandler->waeTraceWithoutLocationDetails (
         __FILE__, __LINE__,

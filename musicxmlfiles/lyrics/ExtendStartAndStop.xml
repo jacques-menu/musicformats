@@ -2,14 +2,14 @@
 <!DOCTYPE score-partwise PUBLIC "-//Recordare//DTD MusicXML 2.0 Partwise//EN"
                                 "http://www.musicxml.org/dtds/partwise.dtd">
 <score-partwise version="2.0">
-  <movement-title>越後獅子</movement-title>
+  <movement-title>Extend Start And Stop</movement-title>
   <defaults>
     <scaling>
       <millimeters>7.2319</millimeters>
       <tenths>40</tenths>
     </scaling>
     <lyric-font font-family="ＭＳ ゴシック" font-size="10.25" name="verse"/>
-    <lyric-language name="verse" xml:lang="ja"/>  
+    <lyric-language name="verse" xml:lang="ja"/>
   </defaults>
   <part-list>
     <score-part id="P1">

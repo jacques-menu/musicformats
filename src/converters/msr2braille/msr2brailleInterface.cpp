@@ -73,8 +73,7 @@ EXP mfMusicformatsErrorKind msrScore2brailleWithHandler (
     ss <<
       "Translating an MSR score to braille in \"" <<
       handler->getHandlerHeader () <<
-      "\"" <<
-      std::endl;
+      "\"";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,

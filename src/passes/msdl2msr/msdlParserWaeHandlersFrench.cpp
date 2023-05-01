@@ -66,7 +66,7 @@ void msdlParserWaeHandlerFrench::unexpectedToken (
   gLog <<
     "### " << context << ": " <<
     "terminal inattendu: " <<
-    "'" << theToken.asString () <<  "'" <<
+    '\'' << theToken.asString () <<  '\'' <<
     " ###" <<
     std::endl;
 }
@@ -78,7 +78,7 @@ void msdlParserWaeHandlerFrench::ignoringToken (
   gLog <<
     "### " << context << ": " <<
     "on ignore le terminal: " <<
-    "'" << theToken.asString () <<  "'" <<
+    '\'' << theToken.asString () <<  '\'' <<
     " ###" <<
     std::endl;
 }

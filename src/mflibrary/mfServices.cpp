@@ -480,10 +480,10 @@ mfServiceRunData::mfServiceRunData (
   fCurrentPartIDAndName = "???";
 
   // staves
-  fCurrentStaveNumber = msrStaff::K_STAFF_NUMBER_UNKNOWN_;
+  fCurrentStaveNumber = K_STAFF_NUMBER_UNKNOWN_;
 
   // voices
-  fCurrentVoiceNumber = msrVoice::K_VOICE_NUMBER_UNKNOWN_;
+  fCurrentVoiceNumber = K_VOICE_NUMBER_UNKNOWN_;
 
   // measure numbers
   fCurrentMeasureNumber = K_MEASURE_NUMBER_UNKNOWN_;

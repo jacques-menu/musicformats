@@ -101,14 +101,11 @@ S_msrGlissando msrGlissando::createGlissandoNewbornClone ()
     ss <<
       "Creating a newborn clone of glissando '" <<
       asString () <<
-      "'" <<
-      std::endl;
+      "'";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -131,14 +128,11 @@ void msrGlissando::acceptIn (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrGlissando::acceptIn ()" <<
-      std::endl;
+      "% ==> msrGlissando::acceptIn ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -152,14 +146,11 @@ void msrGlissando::acceptIn (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrGlissando::visitStart ()" <<
-            std::endl;
+            "% ==> Launching msrGlissando::visitStart ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
@@ -173,14 +164,11 @@ void msrGlissando::acceptOut (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrGlissando::acceptOut ()" <<
-      std::endl;
+      "% ==> msrGlissando::acceptOut ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -194,14 +182,11 @@ void msrGlissando::acceptOut (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrGlissando::visitEnd ()" <<
-            std::endl;
+            "% ==> Launching msrGlissando::visitEnd ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif        
         p->visitEnd (elem);

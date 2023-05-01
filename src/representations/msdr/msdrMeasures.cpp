@@ -51,14 +51,11 @@ msdrMeasure::msdrMeasure (
     std::stringstream ss;
 
     ss <<
-      "Creating MSDR music \"" << asString () << "\"" <<
-      std::endl;
+      "Creating MSDR music \"" << asString () << "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -89,14 +86,11 @@ void msdrMeasure::acceptIn (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msdrMeasure::acceptIn ()" <<
-      std::endl;
+      "% ==> msdrMeasure::acceptIn ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -110,14 +104,11 @@ void msdrMeasure::acceptIn (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msdrMeasure::visitStart ()" <<
-            std::endl;
+            "% ==> Launching msdrMeasure::visitStart ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
@@ -131,14 +122,11 @@ void msdrMeasure::acceptOut (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msdrMeasure::acceptOut ()" <<
-      std::endl;
+      "% ==> msdrMeasure::acceptOut ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -152,14 +140,11 @@ void msdrMeasure::acceptOut (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msdrMeasure::visitEnd ()" <<
-            std::endl;
+            "% ==> Launching msdrMeasure::visitEnd ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
@@ -173,14 +158,11 @@ void msdrMeasure::browseData (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msdrMeasure::browseData ()" <<
-      std::endl;
+      "% ==> msdrMeasure::browseData ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -225,14 +207,11 @@ void msdrMeasure::browseData (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% <== msdrMeasure::browseData ()" <<
-      std::endl;
+      "% <== msdrMeasure::browseData ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
   */
 }

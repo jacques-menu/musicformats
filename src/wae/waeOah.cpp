@@ -130,8 +130,7 @@ void waeOahGroup::acceptIn (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> waeOahGroup::acceptIn ()" <<
-      std::endl;
+      ".\\\" ==> waeOahGroup::acceptIn ()";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -149,8 +148,7 @@ void waeOahGroup::acceptIn (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            ".\\\" ==> Launching waeOahGroup::visitStart ()" <<
-            std::endl;
+            ".\\\" ==> Launching waeOahGroup::visitStart ()";
 
           gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
@@ -168,8 +166,7 @@ void waeOahGroup::acceptOut (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> waeOahGroup::acceptOut ()" <<
-      std::endl;
+      ".\\\" ==> waeOahGroup::acceptOut ()";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -187,8 +184,7 @@ void waeOahGroup::acceptOut (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            ".\\\" ==> Launching waeOahGroup::visitEnd ()" <<
-            std::endl;
+            ".\\\" ==> Launching waeOahGroup::visitEnd ()";
 
           gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
@@ -206,8 +202,7 @@ void waeOahGroup::browseData (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> waeOahGroup::browseData ()" <<
-      std::endl;
+      ".\\\" ==> waeOahGroup::browseData ()";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -277,8 +272,7 @@ S_waeOahGroup createGlobalWaeOahGroup ()
     std::stringstream ss;
 
     ss <<
-      "Creating global wae OAH group" <<
-      std::endl;
+      "Creating global wae OAH group";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,

@@ -41,14 +41,11 @@ void initializeMSR ()
       std::stringstream ss;
 
       ss <<
-        "Initializing MSR" <<
-        std::endl;
+        "Initializing MSR";
 
       gWaeHandler->waeTraceWithLocationDetails (
         __FILE__, __LINE__,
         ss.str ());
-//         gServiceRunData->getCurrentMeasureNumber (),
-//         gServiceRunData->getScoreMeasuresNumber ());
     }
 #endif // MF_TRACE_IS_ENABLED
 

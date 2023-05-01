@@ -359,8 +359,7 @@ Bool msdlParser::isCurrentTokenKindInSetsStack (const std::string& context)
         tokensSetsStackSize, "set", "sets") <<
       "):" <<
       ", fCurrentToken: " << currentTokenAsString () <<
-      " [" << context << ']' <<
-      std::endl;
+      " [" << context << ']';
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -423,8 +422,7 @@ void msdlParser::fetchNextToken ()
     ss <<
       std::endl <<
       "*** fetchNextToken()" <<
-      ", fCurrentToken: " << currentTokenAsString () <<
-      std::endl;
+      ", fCurrentToken: " << currentTokenAsString ();
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -452,8 +450,7 @@ Bool msdlParser::checkMandatoryTokenKind (
       "-->checkMandatoryTokenKind()" <<
       ", @" << mfBaseName (fileName) << ":" << lineNumber <<
       ", tokenKind: " << msdlTokenKindAsString (tokenKind) <<
-      " [" << context << ']' <<
-      std::endl;
+      " [" << context << ']';
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -522,8 +519,7 @@ Bool msdlParser::checkMandatoryTokenKind (
       "<-- checkMandatoryTokenKind()" <<
       ", context: [" << context << ']' <<
       ", tokenKind: " << msdlTokenKindAsString (tokenKind) <<
-      ", result: " << result <<
-      std::endl;
+      ", result: " << result;
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -554,8 +550,7 @@ Bool msdlParser:: checkMandatoryTokenKindsSet (
       ", @" << mfBaseName (fileName) << ":" << lineNumber <<
       ", context: [" << context << ']' <<
       ", fCurrentToken: " << currentTokenAsString () <<
-      ", tokenKindsSet: " << tokenKindsSet->asString () <<
-      std::endl;
+      ", tokenKindsSet: " << tokenKindsSet->asString ();
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -622,8 +617,7 @@ Bool msdlParser:: checkMandatoryTokenKindsSet (
       "<-- checkMandatoryTokenKindsSet()" <<
       ", context: [" << context << ']' <<
       ", tokenKindsSet: " << tokenKindsSet->asString () <<
-      ", result: " << result <<
-      std::endl;
+      ", result: " << result;
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -650,11 +644,10 @@ Bool msdlParser::checkOptionalTokenKind (
 
     ss <<
       std::endl <<
-      "-->checkOptionalTokenKind()" <<
+      "--> checkOptionalTokenKind()" <<
       ", @" << mfBaseName (fileName) << ":" << lineNumber <<
-      ", tokenKind: " << msdlTokenKindAsString (tokenKind) <<
-  //    " context: " << context <<
-      std::endl;
+      ", tokenKind: " << msdlTokenKindAsString (tokenKind);
+  //    " context: " << context;
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -741,8 +734,7 @@ Bool msdlParser::checkOptionalTokenKind (
       "<-- checkOptionalTokenKind()" <<
       ", tokenKind: " << msdlTokenKindAsString (tokenKind) <<
   //    ", context: " << context <<
-      ", result: " << result <<
-      std::endl;
+      ", result: " << result;
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -773,8 +765,7 @@ Bool msdlParser:: checkOptionalTokenKindsSet (
       ", @" << mfBaseName (fileName) << ":" << lineNumber <<
       ", context: [" << context << ']' <<
       ", fCurrentToken: " << currentTokenAsString () <<
-      ", tokenKindsSet: " << tokenKindsSet->asString () <<
-      std::endl;
+      ", tokenKindsSet: " << tokenKindsSet->asString ();
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -845,8 +836,7 @@ Bool msdlParser:: checkOptionalTokenKindsSet (
       "<-- checkOptionalTokenKindsSet()" <<
       ", context: [" << context << ']' <<
       ", tokenKindsSet: " << tokenKindsSet->asString () <<
-      ", result: " << result <<
-      std::endl;
+      ", result: " << result;
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -1020,8 +1010,7 @@ void msdlParser::createIdentificationIfNeeded (int inputLineNumber)
 
       ss <<
         "--- createIdentificationIfNeeded()" <<
-        ", RunDate: " << RunDate <<
-        std::endl;
+        ", RunDate: " << RunDate;
 
       gWaeHandler->waeTraceWithoutLocationDetails (
         __FILE__, __LINE__,
@@ -1106,7 +1095,7 @@ void msdlParser::setCurrentOctaveEntryReference ()
 
     if (fCurrentOctaveEntryReference) {
       gLog <<
-        "'" <<
+        '\'' <<
         fCurrentOctaveEntryReference->asString () <<
         "'";
     }
@@ -1288,8 +1277,7 @@ std::string msdlParser::lilypondOctaveInFixedEntryMode (
       ", referenceAbsoluteOctave: " <<
       msrOctaveKindAsString (referenceAbsoluteOctave) <<
       ", referenceAbsoluteOctave: " <<
-      absoluteOctavesDifference <<
-      std::endl;
+      absoluteOctavesDifference;
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -1419,8 +1407,7 @@ void msdlParser::parse ()
       std::stringstream ss;
 
       ss <<
-        "==> parse()" <<
-        std::endl;
+        "==> parse()";
 
       gWaeHandler->waeTraceWithoutLocationDetails (
         __FILE__, __LINE__,
@@ -1640,8 +1627,7 @@ void msdlParser::Identification (S_msdlTokenKindsSet stopperTokensSet)
       "<-- Identification()" <<
       ", fCurrentToken: " << currentTokenAsString () <<
       std::endl <<
-      "=================================================================" <<
-      std::endl;
+      "=================================================================";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -1697,8 +1683,7 @@ void msdlParser::Title (S_msdlTokenKindsSet stopperTokensSet)
 
     ss <<
       "=== Title()" <<
-      ", title: \"" << title << "\"" <<
-      std::endl;
+      ", title: \"" << title << "\"";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -1732,8 +1717,7 @@ void msdlParser::Title (S_msdlTokenKindsSet stopperTokensSet)
       "<-- Title()" <<
       ", fCurrentToken: " << currentTokenAsString () <<
       std::endl <<
-      "=================================================================" <<
-      std::endl;
+      "=================================================================";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -1790,8 +1774,7 @@ void msdlParser::Composer (S_msdlTokenKindsSet stopperTokensSet)
 
     ss <<
       "=== Composer()" <<
-      ", composer: \"" << composer << "\"" <<
-      std::endl;
+      ", composer: \"" << composer << "\"";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -1824,8 +1807,7 @@ void msdlParser::Composer (S_msdlTokenKindsSet stopperTokensSet)
       "=================================================================" <<
       std::endl <<
       "<-- Composer()" <<
-      ", fCurrentToken: " << currentTokenAsString () <<
-      std::endl;
+      ", fCurrentToken: " << currentTokenAsString ();
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -1882,8 +1864,7 @@ void msdlParser::Opus (S_msdlTokenKindsSet stopperTokensSet)
 
     ss <<
       "=== Opus()" <<
-      ", opus: \"" << opus << "\"" <<
-      std::endl;
+      ", opus: \"" << opus << "\"";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -1917,8 +1898,7 @@ void msdlParser::Opus (S_msdlTokenKindsSet stopperTokensSet)
       "<-- Opus()" <<
       ", fCurrentToken: " << currentTokenAsString () <<
       std::endl <<
-      "=================================================================" <<
-      std::endl;
+      "=================================================================";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -1980,8 +1960,7 @@ void msdlParser::Identifier (S_msdlTokenKindsSet stopperTokensSet)
       "<-- Identifier()" <<
       ", fCurrentToken: " << currentTokenAsString () <<
       std::endl <<
-      "=================================================================" <<
-      std::endl;
+      "=================================================================";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -2095,8 +2074,7 @@ void msdlParser::Pitches (S_msdlTokenKindsSet stopperTokensSet)
       "<-- Pitches()" <<
       ", fCurrentToken: " << currentTokenAsString () <<
       std::endl <<
-      "=================================================================" <<
-      std::endl;
+      "=================================================================";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -2210,8 +2188,7 @@ void msdlParser::Octaves (S_msdlTokenKindsSet stopperTokensSet)
       "<-- Pitches()" <<
       ", fCurrentToken: " << currentTokenAsString () <<
       std::endl <<
-      "=================================================================" <<
-      std::endl;
+      "=================================================================";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -2265,8 +2242,7 @@ void msdlParser::PitchesLanguage (S_msdlTokenKindsSet stopperTokensSet)
       "<-- PitchesLanguage()" <<
       ", fCurrentToken: " << currentTokenAsString () <<
       std::endl <<
-      "=================================================================" <<
-      std::endl;
+      "=================================================================";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -2320,8 +2296,7 @@ void msdlParser::PitchesOctaveEntry (S_msdlTokenKindsSet stopperTokensSet)
       "<-- PitchesOctaveEntry()" <<
       ", fCurrentToken: " << currentTokenAsString () <<
       std::endl <<
-      "=================================================================" <<
-      std::endl;
+      "=================================================================";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -2373,8 +2348,7 @@ void msdlParser::Anacrusis (S_msdlTokenKindsSet stopperTokensSet)
 
       ss <<
         "=== Anacrusis()" <<
-        ", anacrusis: present" <<
-        std::endl;
+        ", anacrusis: present";
 
       gWaeHandler->waeTraceWithoutLocationDetails (
         __FILE__, __LINE__,
@@ -2401,8 +2375,7 @@ void msdlParser::Anacrusis (S_msdlTokenKindsSet stopperTokensSet)
       "<-- Anacrusis()" <<
       ", fCurrentToken: " << currentTokenAsString () <<
       std::endl <<
-      "=================================================================" <<
-      std::endl;
+      "=================================================================";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -2485,8 +2458,7 @@ void msdlParser::Structure (S_msdlTokenKindsSet stopperTokensSet)
       "<-- Structure()" <<
       ", fCurrentToken: " << currentTokenAsString () <<
       std::endl <<
-      "=================================================================" <<
-      std::endl;
+      "=================================================================";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -2570,8 +2542,7 @@ void msdlParser::Book (S_msdlTokenKindsSet stopperTokensSet)
       "<-- Book()" <<
       ", fCurrentToken: " << currentTokenAsString () <<
       std::endl <<
-      "=================================================================" <<
-      std::endl;
+      "=================================================================";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -2652,8 +2623,7 @@ void msdlParser::Score (S_msdlTokenKindsSet stopperTokensSet)
       "<-- Score()" <<
       ", fCurrentToken: " << currentTokenAsString () <<
       std::endl <<
-      "=================================================================" <<
-      std::endl;
+      "=================================================================";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -2731,8 +2701,7 @@ void msdlParser::PartGroup (S_msdlTokenKindsSet stopperTokensSet)
       "<-- PartGroup()" <<
       ", fCurrentToken: " << currentTokenAsString () <<
       std::endl <<
-      "=================================================================" <<
-      std::endl;
+      "=================================================================";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -2807,8 +2776,7 @@ void msdlParser::Part (S_msdlTokenKindsSet stopperTokensSet)
       "<-- Part()" <<
       ", fCurrentToken: " << currentTokenAsString () <<
       std::endl <<
-      "=================================================================" <<
-      std::endl;
+      "=================================================================";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -2867,8 +2835,7 @@ void msdlParser::Music (S_msdlTokenKindsSet stopperTokensSet)
 
       ss <<
         "=== Music()" <<
-        ", musicName: \"" << musicName << "\"" <<
-        std::endl;
+        ", musicName: \"" << musicName << "\"";
 
       gWaeHandler->waeTraceWithoutLocationDetails (
         __FILE__, __LINE__,
@@ -2921,8 +2888,7 @@ void msdlParser::Music (S_msdlTokenKindsSet stopperTokensSet)
       "=================================================================" <<
       std::endl <<
       "<-- Music()" <<
-      ", fCurrentToken: " << currentTokenAsString () <<
-      std::endl;
+      ", fCurrentToken: " << currentTokenAsString ();
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -3040,8 +3006,7 @@ void msdlParser::Fragment (S_msdlTokenKindsSet stopperTokensSet)
       "<-- Fragment()" <<
       ", fCurrentToken: " << currentTokenAsString () <<
       std::endl <<
-      "=================================================================" <<
-      std::endl;
+      "=================================================================";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -3104,8 +3069,7 @@ void msdlParser::MeasuresSequence (S_msdlTokenKindsSet stopperTokensSet)
       "<-- MeasuresSequence()" <<
       ", fCurrentToken: " << currentTokenAsString () <<
       std::endl <<
-      "=================================================================" <<
-      std::endl;
+      "=================================================================";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -3186,8 +3150,7 @@ void msdlParser::Measure (S_msdlTokenKindsSet stopperTokensSet)
       "<-- Measure()" <<
       ", fCurrentToken: " << currentTokenAsString () <<
       std::endl <<
-      "=================================================================" <<
-      std::endl;
+      "=================================================================";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -3248,8 +3211,7 @@ void msdlParser::MeasureNumber (S_msdlTokenKindsSet stopperTokensSet)
 
       ss <<
         "=== MeasureNumber()" <<
-        ", measureNumber: \"" << measureNumber << "\"" <<
-        std::endl;
+        ", measureNumber: \"" << measureNumber << "\"";
 
       gWaeHandler->waeTraceWithoutLocationDetails (
         __FILE__, __LINE__,
@@ -3281,8 +3243,7 @@ void msdlParser::MeasureNumber (S_msdlTokenKindsSet stopperTokensSet)
       "<-- MeasureNumber()" <<
       ", fCurrentToken: " << currentTokenAsString () <<
       std::endl <<
-      "=================================================================" <<
-      std::endl;
+      "=================================================================";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -3337,8 +3298,7 @@ void msdlParser::Clef (S_msdlTokenKindsSet stopperTokensSet)
       "<-- Clef()" <<
       ", fCurrentToken: " << currentTokenAsString () <<
       std::endl <<
-      "=================================================================" <<
-      std::endl;
+      "=================================================================";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -3393,8 +3353,7 @@ void msdlParser::Key (S_msdlTokenKindsSet stopperTokensSet)
       "<-- Key()" <<
       ", fCurrentToken: " << currentTokenAsString () <<
       std::endl <<
-      "=================================================================" <<
-      std::endl;
+      "=================================================================";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -3449,8 +3408,7 @@ void msdlParser::Time (S_msdlTokenKindsSet stopperTokensSet)
       "<-- Time()" <<
       ", fCurrentToken: " << currentTokenAsString () <<
       std::endl <<
-      "=================================================================" <<
-      std::endl;
+      "=================================================================";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -3512,8 +3470,7 @@ void msdlParser::Note (S_msdlTokenKindsSet stopperTokensSet)
 
       ss <<
         "=== Note()" <<
-        ", pitchName: \"" << pitchName << "\"" <<
-        std::endl;
+        ", pitchName: \"" << pitchName << "\"";
 
       gWaeHandler->waeTraceWithoutLocationDetails (
         __FILE__, __LINE__,
@@ -3534,8 +3491,7 @@ void msdlParser::Note (S_msdlTokenKindsSet stopperTokensSet)
         "=== Note()" <<
         ", noteQuarterTonesPitchKind: \"" <<
         msrQuarterTonesPitchKindAsString (noteQuarterTonesPitchKind) <<
-        "\"" <<
-        std::endl;
+        "\"";
 
       gWaeHandler->waeTraceWithoutLocationDetails (
         __FILE__, __LINE__,
@@ -3557,8 +3513,7 @@ void msdlParser::Note (S_msdlTokenKindsSet stopperTokensSet)
       "=================================================================" <<
       std::endl <<
       "------------------->>>>>>>>>>>>>>>> Note()" <<
-      ", fCurrentToken: " << currentTokenAsString () <<
-      std::endl;
+      ", fCurrentToken: " << currentTokenAsString ();
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -3584,8 +3539,7 @@ void msdlParser::Note (S_msdlTokenKindsSet stopperTokensSet)
       "=================================================================" <<
       std::endl <<
       "----------->>>>>>>>> Note()" <<
-      ", fCurrentToken: " << currentTokenAsString () <<
-      std::endl;
+      ", fCurrentToken: " << currentTokenAsString ();
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -3627,8 +3581,7 @@ void msdlParser::Note (S_msdlTokenKindsSet stopperTokensSet)
 
     ss <<
       "=== Note()" <<
-      ", note: " << note->asString () <<
-      std::endl;
+      ", note: " << note->asString ();
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -3654,8 +3607,7 @@ void msdlParser::Note (S_msdlTokenKindsSet stopperTokensSet)
       "<-- Note()" <<
       ", fCurrentToken: " << currentTokenAsString () <<
       std::endl <<
-      "=================================================================" <<
-      std::endl;
+      "=================================================================";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -3710,8 +3662,7 @@ void msdlParser::Pitch (S_msdlTokenKindsSet stopperTokensSet)
 
       ss <<
         "=== Pitch()" <<
-        ", pitchName: \"" << pitchName << "\"" <<
-        std::endl;
+        ", pitchName: \"" << pitchName << "\"";
 
       gWaeHandler->waeTraceWithoutLocationDetails (
         __FILE__, __LINE__,
@@ -3737,8 +3688,7 @@ void msdlParser::Pitch (S_msdlTokenKindsSet stopperTokensSet)
       "<-- Pitch()" <<
       ", fCurrentToken: " << currentTokenAsString () <<
       std::endl <<
-      "=================================================================" <<
-      std::endl;
+      "=================================================================";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -3812,8 +3762,7 @@ msrOctaveKind msdlParser::OctaveIndication (S_msdlTokenKindsSet stopperTokensSet
       ss <<
         "=== OctaveIndication()" <<
         ", commasCounter: " << commasCounter <<
-        ", quotesCounter: " << quotesCounter <<
-        std::endl;
+        ", quotesCounter: " << quotesCounter;
 
       gWaeHandler->waeTraceWithoutLocationDetails (
         __FILE__, __LINE__,
@@ -3850,8 +3799,7 @@ msrOctaveKind msdlParser::OctaveIndication (S_msdlTokenKindsSet stopperTokensSet
 
       ss <<
         "=== OctaveIndication()" <<
-        ", result: " << msrOctaveKindAsString (result) <<
-        std::endl;
+        ", result: " << msrOctaveKindAsString (result);
 
       gWaeHandler->waeTraceWithoutLocationDetails (
         __FILE__, __LINE__,
@@ -3873,8 +3821,7 @@ msrOctaveKind msdlParser::OctaveIndication (S_msdlTokenKindsSet stopperTokensSet
       "<-- OctaveIndication()" <<
       ", fCurrentToken: " << currentTokenAsString () <<
       std::endl <<
-      "=================================================================" <<
-      std::endl;
+      "=================================================================";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -4035,8 +3982,7 @@ void msdlParser::NoteNotesDuration (S_msdlTokenKindsSet stopperTokensSet)
       "<-- NoteNotesDuration()" <<
       ", fCurrentNoteSoundingWholeNotes: " << fCurrentNoteSoundingWholeNotes.asString () <<
       ", fCurrentNoteDisplayWholeNotes: " << fCurrentNoteDisplayWholeNotes.asString () <<
-      ", fCurrentNoteDotsNumber: " << fCurrentNoteDotsNumber <<
-      std::endl;
+      ", fCurrentNoteDotsNumber: " << fCurrentNoteDotsNumber;
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,

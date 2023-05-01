@@ -65,7 +65,7 @@ void msdlParserWaeHandlerEnglish::unexpectedToken (
   gLog <<
     "### " << context << ": " <<
     "unexpected token: " <<
-    "'" << theToken.asString () <<  "'" <<
+    '\'' << theToken.asString () <<  '\'' <<
     " ###" <<
     std::endl;
 }
@@ -77,7 +77,7 @@ void msdlParserWaeHandlerEnglish::ignoringToken (
   gLog <<
     "### " << context << ": " <<
     "ignoring token: " <<
-    "'" << theToken.asString () <<  "'" <<
+    '\'' << theToken.asString () <<  '\'' <<
     " ###" <<
     std::endl;
 }

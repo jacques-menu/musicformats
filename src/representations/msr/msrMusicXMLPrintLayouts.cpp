@@ -62,14 +62,11 @@ msrMusicXMLPrintLayout::msrMusicXMLPrintLayout (
     std::stringstream ss;
 
     ss <<
-      "Creating a print layout " <<
-      std::endl;
+      "Creating a print layout ";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -140,14 +137,11 @@ void msrMusicXMLPrintLayout::acceptIn (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrMusicXMLPrintLayout::acceptIn ()" <<
-      std::endl;
+      "% ==> msrMusicXMLPrintLayout::acceptIn ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -161,14 +155,11 @@ void msrMusicXMLPrintLayout::acceptIn (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrMusicXMLPrintLayout::visitStart ()" <<
-            std::endl;
+            "% ==> Launching msrMusicXMLPrintLayout::visitStart ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
@@ -182,14 +173,11 @@ void msrMusicXMLPrintLayout::acceptOut (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrMusicXMLPrintLayout::acceptOut ()" <<
-      std::endl;
+      "% ==> msrMusicXMLPrintLayout::acceptOut ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -203,14 +191,11 @@ void msrMusicXMLPrintLayout::acceptOut (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrMusicXMLPrintLayout::visitEnd ()" <<
-            std::endl;
+            "% ==> Launching msrMusicXMLPrintLayout::visitEnd ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);

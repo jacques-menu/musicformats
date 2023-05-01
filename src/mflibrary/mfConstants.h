@@ -24,6 +24,19 @@ namespace MusicFormats
 
 EXP extern const int K_MF_INPUT_LINE_UNKNOWN_;
 
+// staff numbers
+// ------------------------------------------------------
+
+EXP extern const int K_STAFF_NUMBER_UNKNOWN_;
+
+// voice numbers
+// ------------------------------------------------------
+
+EXP extern const int K_VOICE_NUMBER_UNKNOWN_;
+
+EXP extern const int K_VOICE_HARMONIES_VOICE_BASE_NUMBER;
+EXP extern const int K_VOICE_FIGURED_BASS_VOICE_BASE_NUMBER;
+
 // names lists max length
 // ------------------------------------------------------
 

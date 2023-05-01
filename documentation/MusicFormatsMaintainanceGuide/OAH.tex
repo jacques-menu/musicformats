@@ -323,8 +323,7 @@ void lilypondFixedOctaveEntryAtom::applyAtomWithValue (
 		std::stringstream ss;
 
     ss <<
-      "==> oahAtom is of type 'lilypondFixedOctaveEntryAtom'" <<
-      std::endl;
+      "==> oahAtom is of type 'lilypondFixedOctaveEntryAtom'";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -407,8 +406,7 @@ void oahIntegerAtom::setIntegerVariable (int value)
       fetchNames () <<
       "' integer variable to '" <<
       value <<
-      "'" <<
-      std::endl;
+      "'";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -1852,8 +1850,7 @@ void oahHistoryAtom::applyValueLessAtom (std::ostream& os)
 		std::stringstream ss;
 
     ss <<
-      "==> option '" << fetchNames () << "' is a oahHistoryAtom" <<
-      std::endl;
+      "==> option '" << fetchNames () << "' is a oahHistoryAtom";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,

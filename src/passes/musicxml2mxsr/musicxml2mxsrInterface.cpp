@@ -117,7 +117,7 @@ std::string uncompressMXLFile (
   gLog <<
     "The compressed file name is '" <<
     mxlFileName <<
-    "'" <<
+    '\'' <<
     std::endl << std::endl;
 
   std::string uncompressedFileName;
@@ -332,7 +332,7 @@ std::string uncompressMXLFile (
                 gLog <<
                   "The uncompressed file name is '" <<
                   uncompressedFileName <<
-                  "'" <<
+                  '\'' <<
                   std::endl << std::endl;
               }
             }
@@ -503,8 +503,7 @@ void checkSXMLFile (
     ss <<
       "% MusicXML data uses " <<
       encoding <<
-      " encoding" <<
-      std::endl;
+      " encoding";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -545,8 +544,7 @@ SXMLFile createSXMLFileFromFile (
       std::endl <<
       gTab <<
       std::endl <<
-      separator <<
-      std::endl;
+      separator;
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -625,8 +623,7 @@ SXMLFile createSXMLFileFromFd (
       gTab <<
       gLanguage->passIDKindAsString (passIDKind) << ": " << passDescription <<
       std::endl <<
-      separator <<
-      std::endl;
+      separator;
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -698,8 +695,7 @@ SXMLFile createSXMLFileFromString (
 
       ss <<
         std::endl <<
-        "Reading MusicXML data from a string " << buffer.size () << " characters long" <<
-        std::endl;
+        "Reading MusicXML data from a string " << buffer.size () << " characters long";
 
       gWaeHandler->waeTraceWithoutLocationDetails (
         __FILE__, __LINE__,
@@ -764,8 +760,7 @@ EXP Sxmlelement musicxmlFile2mxsr (
       gTab <<
       passIDKind << ": building the MXSR from \"" << fileNameAsString << "\"" <<
       std::endl <<
-      separator <<
-      std::endl;
+      separator;
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -874,8 +869,7 @@ EXP Sxmlelement musicxmlFd2mxsr (
       gTab <<
       passIDKind << ": building the MXSR from standard input" <<
       std::endl <<
-      separator <<
-      std::endl;
+      separator;
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -1005,8 +999,7 @@ EXP Sxmlelement musicxmlString2mxsr ( // JMI UNUSED SAX ???
       gTab <<
       passIDKind << "building the MXSR from a buffer" <<
       std::endl <<
-      separator <<
-      std::endl;
+      separator;
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -1063,8 +1056,7 @@ Sxmlelement convertMusicXMLToMxsr ( // JMI UNUSED SAX ???
       "inputSourceName: \"" << inputSourceName << "\"" <<
       ", passIDKind: \"" << passIDKind << "\"" <<
       std::endl <<
-      separator <<
-      std::endl;
+      separator;
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,

@@ -58,10 +58,10 @@ class EXP lpsrContext : public lpsrElement
     // ------------------------------------------------------
 
     static SMARTP<lpsrContext> create (
-                            int                     inputLineNumber,
+                            int                        inputLineNumber,
                             lpsrContextUseExistingKind contextUseExistingKind,
-                            lpsrContextTypeKind     contextTypeKind,
-                            const std::string&           contextName);
+                            lpsrContextTypeKind        contextTypeKind,
+                            const std::string&         contextAlphabeticName);
 
   protected:
 
@@ -69,10 +69,10 @@ class EXP lpsrContext : public lpsrElement
     // ------------------------------------------------------
 
                           lpsrContext (
-                            int                     inputLineNumber,
+                            int                        inputLineNumber,
                             lpsrContextUseExistingKind contextUseExistingKind,
-                            lpsrContextTypeKind     contextTypeKind,
-                            const std::string&      contextName);
+                            lpsrContextTypeKind        contextTypeKind,
+                            const std::string&         contextAlphabeticName);
 
     virtual               ~lpsrContext ();
 
@@ -88,8 +88,8 @@ class EXP lpsrContext : public lpsrElement
     lpsrContextTypeKind   getContextTypeKind () const
                               { return fContextTypeKind; }
 
-    std::string           getContextName () const
-                              { return fContextName; }
+    std::string           getContextAlphabeticName () const
+                              { return fContextAlphabeticName; }
 
   public:
 
@@ -135,7 +135,8 @@ class EXP lpsrContext : public lpsrElement
     lpsrContextUseExistingKind
                           fContextUseExistingKind;
     lpsrContextTypeKind   fContextTypeKind;
-    std::string           fContextName;
+
+    std::string           fContextAlphabeticName;
 
     std::list<S_msrElement>
                           fContextElementsList;
@@ -152,10 +153,10 @@ class EXP lpsrChordNamesContext : public lpsrContext
     // ------------------------------------------------------
 
     static SMARTP<lpsrChordNamesContext> create (
-                            int                     inputLineNumber,
+                            int                        inputLineNumber,
                             lpsrContextUseExistingKind contextUseExistingKind,
-                            const std::string&      contextName,
-                            const S_msrVoice&       contextVoice);
+                            const std::string&         contextAlphabeticName,
+                            const S_msrVoice&          contextVoice);
 
   protected:
 
@@ -163,10 +164,10 @@ class EXP lpsrChordNamesContext : public lpsrContext
     // ------------------------------------------------------
 
                           lpsrChordNamesContext (
-                            int                     inputLineNumber,
+                            int                        inputLineNumber,
                             lpsrContextUseExistingKind contextUseExistingKind,
-                            const std::string&      contextName,
-                            const S_msrVoice&       contextVoice);
+                            const std::string&         contextAlphabeticName,
+                            const S_msrVoice&          contextVoice);
 
     virtual               ~lpsrChordNamesContext ();
 
@@ -219,10 +220,10 @@ class EXP lpsrFiguredBassContext : public lpsrContext
     // ------------------------------------------------------
 
     static SMARTP<lpsrFiguredBassContext> create (
-                            int                     inputLineNumber,
+                            int                        inputLineNumber,
                             lpsrContextUseExistingKind contextUseExistingKind,
-                            const std::string&           contextName,
-                            const S_msrStaff&       contextStaff);
+                            const std::string&        contextAlphabeticName,
+                            const S_msrStaff&         contextStaff);
 
   protected:
 
@@ -230,10 +231,10 @@ class EXP lpsrFiguredBassContext : public lpsrContext
     // ------------------------------------------------------
 
                           lpsrFiguredBassContext (
-                            int                     inputLineNumber,
+                            int                        inputLineNumber,
                             lpsrContextUseExistingKind contextUseExistingKind,
-                            const std::string&           contextName,
-                            const S_msrStaff&       contextStaff);
+                            const std::string&         contextAlphabeticName,
+                            const S_msrStaff&          contextStaff);
 
     virtual               ~lpsrFiguredBassContext ();
 

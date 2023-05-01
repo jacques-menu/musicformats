@@ -96,8 +96,7 @@ Usage: msr2lilypond [[option]* [MusicXMLFile|-] [[option]*
     ss <<
       "Initializing msr2lilypond insider options handler \"" <<
       fHandlerHeader <<
-      "\"" <<
-      std::endl;
+      "\"";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -188,8 +187,7 @@ void msr2lilypondInsiderHandler::createTheMsr2lilypondPrefixes ()
     std::stringstream ss;
 
     ss <<
-      "Creating the msr2lilypond prefixes" <<
-      std::endl;
+      "Creating the msr2lilypond prefixes";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -211,8 +209,7 @@ void msr2lilypondInsiderHandler::createTheMsr2lilypondOptionGroups (
     ss <<
       "Creating the msr2lilypond insider option groups" <<
       fHandlerHeader <<
-      "\"" <<
-      std::endl;
+      "\"";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -321,8 +318,7 @@ void msr2lilypondInsiderHandler::checkOptionsAndArguments () const
     ss <<
       "checking options and arguments from argc/argv in \"" <<
       fHandlerHeader <<
-      "\"" <<
-      std::endl;
+      "\"";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -343,8 +339,7 @@ std::string msr2lilypondInsiderHandler::fetchOutputFileNameFromTheOptions () con
     ss <<
       "Fetching the output file name from the options in OAH handler \"" <<
       fHandlerHeader <<
-      "\"" <<
-      std::endl;
+      "\"";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -523,8 +518,7 @@ void msr2lilypondInsiderOahGroup::acceptIn (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> msr2lilypondInsiderOahGroup::acceptIn ()" <<
-      std::endl;
+      ".\\\" ==> msr2lilypondInsiderOahGroup::acceptIn ()";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -542,8 +536,7 @@ void msr2lilypondInsiderOahGroup::acceptIn (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            ".\\\" ==> Launching msr2lilypondInsiderOahGroup::visitStart ()" <<
-            std::endl;
+            ".\\\" ==> Launching msr2lilypondInsiderOahGroup::visitStart ()";
 
           gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
@@ -561,8 +554,7 @@ void msr2lilypondInsiderOahGroup::acceptOut (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> msr2lilypondInsiderOahGroup::acceptOut ()" <<
-      std::endl;
+      ".\\\" ==> msr2lilypondInsiderOahGroup::acceptOut ()";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -580,8 +572,7 @@ void msr2lilypondInsiderOahGroup::acceptOut (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            ".\\\" ==> Launching msr2lilypondInsiderOahGroup::visitEnd ()" <<
-            std::endl;
+            ".\\\" ==> Launching msr2lilypondInsiderOahGroup::visitEnd ()";
 
           gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
@@ -599,8 +590,7 @@ void msr2lilypondInsiderOahGroup::browseData (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> msr2lilypondInsiderOahGroup::browseData ()" <<
-      std::endl;
+      ".\\\" ==> msr2lilypondInsiderOahGroup::browseData ()";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -746,8 +736,7 @@ S_msr2lilypondInsiderOahGroup createGlobalMsr2lilypondInsiderOahGroup ()
     std::stringstream ss;
 
     ss <<
-      "Creating global msr2lilypond OAH group" <<
-      std::endl;
+      "Creating global msr2lilypond OAH group";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,

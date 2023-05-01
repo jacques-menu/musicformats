@@ -82,8 +82,7 @@ S_mfcConverterComponent createMsdlConverterConverterComponent ()
     std::stringstream ss;
 
     ss <<
-      "Creating the msdlConverter component" <<
-      std::endl;
+      "Creating the msdlConverter component";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,

@@ -122,14 +122,11 @@ void msrRehearsalMark::acceptIn (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrRehearsalMark::acceptIn ()" <<
-      std::endl;
+      "% ==> msrRehearsalMark::acceptIn ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -143,14 +140,11 @@ void msrRehearsalMark::acceptIn (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrRehearsalMark::visitStart ()" <<
-            std::endl;
+            "% ==> Launching msrRehearsalMark::visitStart ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
@@ -164,14 +158,11 @@ void msrRehearsalMark::acceptOut (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrRehearsalMark::acceptOut ()" <<
-      std::endl;
+      "% ==> msrRehearsalMark::acceptOut ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -185,14 +176,11 @@ void msrRehearsalMark::acceptOut (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrRehearsalMark::visitEnd ()" <<
-            std::endl;
+            "% ==> Launching msrRehearsalMark::visitEnd ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);

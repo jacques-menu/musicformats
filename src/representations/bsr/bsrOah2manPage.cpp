@@ -49,14 +49,11 @@ void bsrOah2manPage::visitStart (S_bsrFacSimileKindAtom& elt)
     ss <<
       std::endl <<
       ".\\\" --> Start visiting bsrFacSimileKindAtom" <<
-      " \"" << elt->fetchNames () << "\"" <<
-      std::endl;
+      " \"" << elt->fetchNames () << "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -86,14 +83,11 @@ void bsrOah2manPage::visitEnd (S_bsrFacSimileKindAtom& elt)
     ss <<
       std::endl <<
       ".\\\" --> End visiting bsrFacSimileKindAtom" <<
-      " \"" << elt->fetchNames () << "\"" <<
-      std::endl;
+      " \"" << elt->fetchNames () << "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }
@@ -108,14 +102,11 @@ void bsrOah2manPage::visitStart (S_bsrTextsLanguageAtom& elt)
     ss <<
       std::endl <<
       ".\\\" --> Start visiting bsrTextsLanguageAtom" <<
-      " \"" << elt->fetchNames () << "\"" <<
-      std::endl;
+      " \"" << elt->fetchNames () << "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -145,14 +136,11 @@ void bsrOah2manPage::visitEnd (S_bsrTextsLanguageAtom& elt)
     ss <<
       std::endl <<
       ".\\\" --> End visiting bsrTextsLanguageAtom" <<
-      " \"" << elt->fetchNames () << "\"" <<
-      std::endl;
+      " \"" << elt->fetchNames () << "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }

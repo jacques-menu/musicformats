@@ -20,6 +20,19 @@ namespace MusicFormats
 
 const int K_MF_INPUT_LINE_UNKNOWN_ = 0;
 
+// staff numbers
+// ------------------------------------------------------
+
+const int K_STAFF_NUMBER_UNKNOWN_ = -99;
+
+// voice numbers
+// ------------------------------------------------------
+
+const int K_VOICE_NUMBER_UNKNOWN_ = -96;
+
+const int K_VOICE_HARMONIES_VOICE_BASE_NUMBER = 20;
+const int K_VOICE_FIGURED_BASS_VOICE_BASE_NUMBER = 40;
+
 // ------------------------------------------------------
 // names lists max length
 

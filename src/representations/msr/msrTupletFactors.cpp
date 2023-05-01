@@ -79,7 +79,7 @@ std::string msrTupletFactor::asFractionString () const
 void msrTupletFactor::print (std::ostream& os) const
 {
   os <<
-    "TupletFactor" <<
+    "[TupletFactor" <<
     std::endl;
 
   ++gIndenter;
@@ -95,6 +95,8 @@ void msrTupletFactor::print (std::ostream& os) const
     std::endl;
 
   --gIndenter;
+
+  os << ']' << std::endl;
 };
 
 std::ostream& operator << (std::ostream& os, const msrTupletFactor& elt)

@@ -68,8 +68,7 @@ EXP mfMusicformatsErrorKind msrScore2lilypondWithHandler (
     ss <<
       "Translating an MSR score to LilyPond in \"" <<
       handler->getHandlerHeader () <<
-      "\"" <<
-      std::endl;
+      "\"";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,

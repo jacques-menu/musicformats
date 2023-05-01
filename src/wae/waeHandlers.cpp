@@ -78,22 +78,20 @@ void waeHandler::waeWarningWithLocationDetails (
 
     gLog <<
       "*** " << context << " warning *** " <<
-      inputSourceName << ":" << inputLineNumber << ": ";
-
-    gLog <<
-      message.substr (0, message.size () - 1); // there is an end of string
+      mfBaseName (inputSourceName) << ":" << inputLineNumber << ": " <<
+      message;
 
     if (gServiceRunData) {
       gLog <<
-        " - measure " <<
+        " -- measure " <<
         gServiceRunData->getCurrentMeasureNumber () <<
         '/' <<
         gServiceRunData->getScoreMeasuresNumber () <<
-        ", part " <<
+        ", part: " <<
         gServiceRunData->getCurrentPartIDAndName () <<
-        ", staff " <<
+        ", staff: " <<
         gServiceRunData->getCurrentStaveNumber () <<
-        ", voice " <<
+        ", voice: " <<
         gServiceRunData->getCurrentVoiceNumber ();
     }
 
@@ -121,7 +119,7 @@ void waeHandler::waeInternalWarning (
 
     gLog <<
       "*** " << context << " INTERNAL warning *** " <<
-      inputSourceName << ":" << inputLineNumber << ": " <<
+      mfBaseName (inputSourceName) << ":" << inputLineNumber << ": " <<
       message <<
       std::endl;
 
@@ -146,23 +144,21 @@ void waeHandler::waeInternalWarningWithLocationDetails (
     gIndenter.resetToZero ();
 
     gLog <<
-      "*** " << context << " INTERNAL warning ***" <<
-      inputSourceName << ":" << inputLineNumber << ": ";
-
-    gLog <<
-      message.substr (0, message.size () - 1); // there is an end of string
+      "*** " << context << " INTERNAL warning *** " <<
+      mfBaseName (inputSourceName) << ":" << inputLineNumber << ": " <<
+      message;
 
     if (gServiceRunData) {
       gLog <<
-        " - measure " <<
+        " -- measure " <<
         gServiceRunData->getCurrentMeasureNumber () <<
         '/' <<
         gServiceRunData->getScoreMeasuresNumber () <<
-        ", part " <<
+        ", part: " <<
         gServiceRunData->getCurrentPartIDAndName () <<
-        ", staff " <<
+        ", staff: " <<
         gServiceRunData->getCurrentStaveNumber () <<
-        ", voice " <<
+        ", voice: " <<
         gServiceRunData->getCurrentVoiceNumber ();
     }
 
@@ -185,24 +181,25 @@ void waeHandler::waeErrorWithoutException (
   const std::string& message)
 {
   if (! gEarlyOptions.getEarlyQuietOption ()) {
+    int saveIndent = gIndenter.getIndentation ();
+
+    gIndenter.resetToZero ();
+
     if (gOahOahGroup->getDisplaySourceCodePositions ()) {
       gLog <<
         mfBaseName (sourceCodeFileName) << ":" << sourceCodeLineNumber <<
+        " --FOO 1 -- " <<
         ' ';
     }
 
     if (! gWaeOahGroup->getDontShowErrors ()) {
-      int saveIndent = gIndenter.getIndentation ();
-
-      gIndenter.resetToZero ();
-
       gLog <<
         "### " << context << " ERROR ### " <<
         message <<
         std::endl;
-
-      gIndenter.setIndentation (saveIndent);
     }
+
+    gIndenter.setIndentation (saveIndent);
   }
 }
 
@@ -215,41 +212,41 @@ void waeHandler::waeErrorWithoutExceptionWithLocationDetails (
 //   int                scoreMeasuresNumber)
 {
   if (! gEarlyOptions.getEarlyQuietOption ()) {
+    int saveIndent = gIndenter.getIndentation ();
+
+    gIndenter.resetToZero ();
+
     if (gOahOahGroup->getDisplaySourceCodePositions ()) {
       gLog <<
         mfBaseName (sourceCodeFileName) << ":" << sourceCodeLineNumber <<
+        " --FOO 2 -- " <<
         ' ';
     }
 
     if (! gWaeOahGroup->getDontShowErrors ()) {
-      int saveIndent = gIndenter.getIndentation ();
-
-      gIndenter.resetToZero ();
-
       gLog <<
-        "### " << context << " ERROR ### ";
-
-      gLog <<
-        message.substr (0, message.size () - 1); // there is an end of string
+        "### " << context << " ERROR ### " <<
+//         mfBaseName (sourceCodeFileName) << ":" << sourceCodeLineNumber << ": " <<
+        message;
 
       if (gServiceRunData) {
         gLog <<
-          " - measure " <<
+          " -- measure " <<
           gServiceRunData->getCurrentMeasureNumber () <<
           '/' <<
           gServiceRunData->getScoreMeasuresNumber () <<
-          ", part " <<
+          ", part: " <<
           gServiceRunData->getCurrentPartIDAndName () <<
-          ", staff " <<
+          ", staff: " <<
           gServiceRunData->getCurrentStaveNumber () <<
-          ", voice " <<
+          ", voice: " <<
           gServiceRunData->getCurrentVoiceNumber ();
       }
 
       gLog << std::endl << std::endl;
-
-      gIndenter.setIndentation (saveIndent);
     }
+
+    gIndenter.setIndentation (saveIndent);
   }
 }
 
@@ -262,28 +259,29 @@ void waeHandler::waeErrorWithoutException (
   const std::string& message)
 {
   if (! gEarlyOptions.getEarlyQuietOption ()) {
+    int saveIndent = gIndenter.getIndentation ();
+
+    gIndenter.resetToZero ();
+
     if (gOahOahGroup->getDisplaySourceCodePositions ()) {
       gLog <<
         mfBaseName (sourceCodeFileName) << ":" << sourceCodeLineNumber <<
+        " --FOO 3 -- " <<
         ' ';
     }
 
     if (! gWaeOahGroup->getDontShowErrors ()) {
-      int saveIndent = gIndenter.getIndentation ();
-
-      gIndenter.resetToZero ();
-
       gLog <<
         "### " << context << " ERROR ### " <<
-        inputSourceName << ":" << inputLineNumber << ": " <<
+        mfBaseName (inputSourceName) << ":" << inputLineNumber << ": " <<
         message <<
         std::endl;
-
-      gIndenter.setIndentation (saveIndent);
 
       fErrorsInputLineNumbers.insert (
         inputLineNumber);
     }
+
+    gIndenter.setIndentation (saveIndent);
   }
 }
 
@@ -298,45 +296,44 @@ void waeHandler::waeErrorWithoutExceptionWithLocationDetails (
 //   int                scoreMeasuresNumber)
 {
   if (! gEarlyOptions.getEarlyQuietOption ()) {
+    int saveIndent = gIndenter.getIndentation ();
+
+    gIndenter.resetToZero ();
+
     if (gOahOahGroup->getDisplaySourceCodePositions ()) {
       gLog <<
         mfBaseName (sourceCodeFileName) << ":" << sourceCodeLineNumber <<
+        " --FOO 4 -- " <<
         ' ';
     }
 
     if (! gWaeOahGroup->getDontShowErrors ()) {
-      int saveIndent = gIndenter.getIndentation ();
-
-      gIndenter.resetToZero ();
-
       gLog <<
-        "### " << context << " ERROR ###" <<
-        inputSourceName << ":" << inputLineNumber << ": ";
-
-      gLog <<
-        message.substr (0, message.size () - 1); // there is an end of string
+        "### " << context << " ERROR ### " <<
+        mfBaseName (inputSourceName) << ":" << inputLineNumber << ": " <<
+        message;
 
       if (gServiceRunData) {
         gLog <<
-          " - measure " <<
+          " -- measure " <<
           gServiceRunData->getCurrentMeasureNumber () <<
           '/' <<
           gServiceRunData->getScoreMeasuresNumber () <<
-          ", part " <<
+          ", part: " <<
           gServiceRunData->getCurrentPartIDAndName () <<
-          ", staff " <<
+          ", staff: " <<
           gServiceRunData->getCurrentStaveNumber () <<
-          ", voice " <<
+          ", voice: " <<
           gServiceRunData->getCurrentVoiceNumber ();
       }
 
       gLog << std::endl << std::endl;
 
-      gIndenter.setIndentation (saveIndent);
-
       fErrorsInputLineNumbers.insert (
         inputLineNumber);
     }
+
+    gIndenter.setIndentation (saveIndent);
   }
 }
 
@@ -352,6 +349,28 @@ void waeHandler::waeErrorWithException (
 {
   this->waeErrorWithoutException (
     context,
+    sourceCodeFileName,
+    sourceCodeLineNumber,
+    message);
+
+abort (); // JMI
+
+  throw *except;
+}
+
+void waeHandler::waeErrorWithException (
+  const std::string& context,
+  const std::string& inputSourceName,
+  int                inputLineNumber,
+  const std::string& sourceCodeFileName,
+  int                sourceCodeLineNumber,
+  const std::string& message,
+  S_mfException      except)
+{
+  this->waeErrorWithoutException (
+    context,
+    inputSourceName,
+    inputLineNumber,
     sourceCodeFileName,
     sourceCodeLineNumber,
     message);
@@ -377,28 +396,6 @@ void waeHandler::waeErrorWithExceptionWithLocationDetails (
     message);
 //     measureNumber,
 //     scoreMeasuresNumber);
-
-abort (); // JMI
-
-  throw *except;
-}
-
-void waeHandler::waeErrorWithException (
-  const std::string& context,
-  const std::string& inputSourceName,
-  int                inputLineNumber,
-  const std::string& sourceCodeFileName,
-  int                sourceCodeLineNumber,
-  const std::string& message,
-  S_mfException      except)
-{
-  this->waeErrorWithoutException (
-    context,
-    inputSourceName,
-    inputLineNumber,
-    sourceCodeFileName,
-    sourceCodeLineNumber,
-    message);
 
 abort (); // JMI
 
@@ -695,9 +692,9 @@ void waeHandler::waeTraceToStream (
   if (doTraceCurrentPass && doTraceCurrentMeasure) {
     ++gIndenter;
 
-//     '[' << context << "] " <<
+//     '[' << context << "] " << JMI v0.9.68
     os <<
-      inputSourceName << ":" << inputLineNumber << ": ";
+      mfBaseName (inputSourceName) << ":" << inputLineNumber << ": ";
 
     // message can be a multi-line string
     gIndenter.indentMultiLineString (
@@ -774,33 +771,28 @@ void waeHandler::waeTraceToStreamWithLocationDetails (
   if (doTraceCurrentPass && doTraceCurrentMeasure) {
     ++gIndenter;
 
-    std::stringstream ss;
-
-//     '[' << context << "] " <<
-    ss <<
-      inputSourceName << ":" << inputLineNumber << ": ";
-
-//     message can be a multi-line string JMI ???
-    ss <<
-      message.substr (0, message.size () - 1); // there is an end of string
+//     '[' << context << "] " << JMI v0.9.68
+    os <<
+      mfBaseName (inputSourceName) << ":" << inputLineNumber << ": " <<
+      message;
 
     if (gServiceRunData) {
-      ss <<
-        " - measure " <<
+      os <<
+        " -- measure " <<
         gServiceRunData->getCurrentMeasureNumber () <<
         '/' <<
         gServiceRunData->getScoreMeasuresNumber () <<
-        ", part " <<
+        ", part: " <<
         gServiceRunData->getCurrentPartIDAndName () <<
-        ", staff " <<
+        ", staff: " <<
         gServiceRunData->getCurrentStaveNumber () <<
-        ", voice " <<
+        ", voice: " <<
         gServiceRunData->getCurrentVoiceNumber ();
     }
 
     os << std::endl << std::endl;
 
-    os << ss.str ();
+//     os << ss.str ();
 //     gIndenter.indentMultiLineString (
 //       iss.str (),
 //       os);
@@ -844,7 +836,6 @@ void waeHandler::waeTraceWithLocationDetails (
 //______________________________________________________________________________
 void waeHandler::displayWarningsAndErrorsInputLineNumbers ()
 {
-
   gIndenter.resetToZero ();
 
   size_t warningsInputLineNumbersSize =

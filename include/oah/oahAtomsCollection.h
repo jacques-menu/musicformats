@@ -184,7 +184,7 @@ EXP std::ostream& operator << (std::ostream& os, const S_oahValueFittedAtomAlias
 class EXP oahMacroAtom : public oahValueLessAtom
 {
 /*
-  a list of atoms
+  a list of value-less atoms to be applied as a unit
 */
 
   public:

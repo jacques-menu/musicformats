@@ -223,8 +223,7 @@ int main (int argc, char*  argv[])
 
     ss <<
       serviceName << " main()" <<
-      ", insiderOption: " << insiderOption <<
-      std::endl;
+      ", insiderOption: " << insiderOption;
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -249,8 +248,7 @@ int main (int argc, char*  argv[])
 
     ss <<
       "==> multiGenerationOutputKind: " <<
-      mfMultiGenerationOutputKindAsString (multiGenerationOutputKind) <<
-      std::endl;
+      mfMultiGenerationOutputKindAsString (multiGenerationOutputKind);
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -364,11 +362,11 @@ int main (int argc, char*  argv[])
         ss <<
           serviceName <<
           " needs the output kind to be suplied thru one of the options" <<
-          " '-" << K_GENERATED_OUTPUT_KIND_GUIDO_NAME << "'" <<
-          ", '-" << K_GENERATED_OUTPUT_KIND_LIlYPOND_NAME << "'" <<
-          ", '-" << K_GENERATED_OUTPUT_KIND_BRAILLE_NAME << "'" <<
-          ", '-" << K_GENERATED_OUTPUT_KIND_MUSICXML_NAME << "'" <<
-          " or '-" << K_GENERATED_OUTPUT_KIND_MIDI_NAME << "'" <<
+          " '-" << K_GENERATED_OUTPUT_KIND_GUIDO_NAME << '\'' <<
+          ", '-" << K_GENERATED_OUTPUT_KIND_LIlYPOND_NAME << '\'' <<
+          ", '-" << K_GENERATED_OUTPUT_KIND_BRAILLE_NAME << '\'' <<
+          ", '-" << K_GENERATED_OUTPUT_KIND_MUSICXML_NAME << '\'' <<
+          " or '-" << K_GENERATED_OUTPUT_KIND_MIDI_NAME << '\'' <<
           ", otherwise the run is a pure help one";
 
         oahWarning (ss.str ());
@@ -484,8 +482,7 @@ int main (int argc, char*  argv[])
 
     ss <<
       "==> generationAPIKind: " <<
-      msrGenerationAPIKindAsString (theGenerationAPIKind) <<
-      std::endl;
+      msrGenerationAPIKindAsString (theGenerationAPIKind);
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -516,8 +513,7 @@ int main (int argc, char*  argv[])
       "Creating the MSR score with the " <<
       msrGenerationAPIKindAsString (theGenerationAPIKind) <<
       std::endl <<
-      separator <<
-      std::endl;
+      separator;
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
