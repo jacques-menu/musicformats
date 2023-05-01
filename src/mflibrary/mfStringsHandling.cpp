@@ -478,6 +478,10 @@ std::string mfStringNumbersToEnglishWords (std::string theString)
     }
   } // for
 
+//   gLog << JMI v0.9.68
+//     "mfStringNumbersToEnglishWords(): result = " << result <<
+//     std::endl;
+
   return result;
 };
 
@@ -884,7 +888,7 @@ std::pair<std::string, std::string> mfExtractNamesPairFromString (
       // found an empty name1
       gLog <<
         "### ERROR: the first name before the " << separator <<
-        " separator is empty in '" << theString << "'" <<
+        " separator is empty in '" << theString << '\'' <<
         std::endl;
     }
 
@@ -892,7 +896,7 @@ std::pair<std::string, std::string> mfExtractNamesPairFromString (
       gLog <<
         "### ERROR: the " << separator <<
         " separator is missing in std::string '" <<
-        theString << "'" <<
+        theString << '\'' <<
         std::endl;
     else
       // overtake the separator
@@ -915,7 +919,7 @@ std::pair<std::string, std::string> mfExtractNamesPairFromString (
         gLog <<
           "### ERROR: the " << separator <<
           " separator occurs more than once in std::string '" <<
-          theString << "'" <<
+          theString << '\'' <<
           std::endl;
         break;
       }
@@ -930,7 +934,7 @@ std::pair<std::string, std::string> mfExtractNamesPairFromString (
       // found an empty name2
       gLog <<
         "### ERROR: the second name after the " << separator <<
-        " separator is empty in '" << theString << "'" <<
+        " separator is empty in '" << theString << '\'' <<
         std::endl;
     }
   }
@@ -1009,7 +1013,7 @@ std::string mfQuoteStringIfNonAlpha (
   }
 
   if (stringShouldBeQuoted) {
-    return "'" + result + "'";
+    return "'" + result + '\'';
   }
   else {
     return result;
@@ -1071,7 +1075,7 @@ std::string mfSingleQuoteStringContentsOnly (
 std::string mfSingleQuoteString (
   const std::string& theString)
 {
-  return "'" + mfSingleQuoteStringContentsOnly (theString) + "'";
+  return "'" + mfSingleQuoteStringContentsOnly (theString) + '\'';
 }
 
 //______________________________________________________________________________
@@ -1590,37 +1594,45 @@ void mfSplitHTMLStringContainingEndOfLines (
 //______________________________________________________________________________
 std::string mfBaseName (const std::string& filename)
 {
-  if (! filename.size ()) {
-      return {};
+  std::string result;
+
+  size_t filenameSize = filename.size ();
+
+  if (filename.size ()) {
+    size_t lastSeparatorPosition = filename.find_last_of ("/\\");
+
+    if (lastSeparatorPosition == std::string::npos) {
+      result = filename;
+    }
+    else {
+      result = filename.substr (
+        lastSeparatorPosition + 1,
+        filenameSize - lastSeparatorPosition - 1);
+    }
   }
 
-  auto len   = filename.length ();
-  auto index = filename.find_last_of ("/\\");
+//   if (index + 1 >= len) {
+//     --len;
+//     index = filename.substr (0, len).find_last_of ("/\\");
+//
+//     if (len == 0) {
+//       return filename;
+//     }
+//
+//     if (index == 0) {
+//       return filename.substr (1, len - 1);
+//     }
+//
+//     if (index == std::string::npos) {
+//       return filename.substr (0, len);
+//     }
+//
+//     return filename.substr (index + 1, len - index - 1);
+//   }
+//
+//   return filename.substr (index + 1, len - index);
 
-  if (index == std::string::npos) {
-      return filename;
-  }
-
-  if (index + 1 >= len) {
-    --len;
-    index = filename.substr (0, len).find_last_of ("/\\");
-
-    if (len == 0) {
-      return filename;
-    }
-
-    if (index == 0) {
-      return filename.substr (1, len - 1);
-    }
-
-    if (index == std::string::npos) {
-      return filename.substr (0, len);
-    }
-
-    return filename.substr (index + 1, len - index - 1);
-  }
-
-  return filename.substr (index + 1, len - index);
+  return result;
 }
 
 //______________________________________________________________________________

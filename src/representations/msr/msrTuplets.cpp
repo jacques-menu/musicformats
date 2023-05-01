@@ -139,8 +139,6 @@ msrTuplet::msrTuplet (
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }
@@ -156,14 +154,11 @@ S_msrTuplet msrTuplet::createTupletNewbornClone ()
 
     ss <<
       "Creating a newborn clone of tuplet " <<
-      asString () <<
-      std::endl;
+      asString ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -284,8 +279,6 @@ void msrTuplet::setTupletUpLinkToMeasure (
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -311,14 +304,11 @@ void msrTuplet::appendNoteToTuplet (
       note->asShortString () <<
       // the information is missing to display it the normal way
       " to tuplet " <<
-      asString () <<
-      std::endl;
+      asString ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -380,14 +370,11 @@ void msrTuplet::appendChordToTuplet (const S_msrChord& chord)
       "Appending chord " <<
       chord->asString () <<
       " to tuplet " <<
-      asString () <<
-      std::endl;
+      asString ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -428,14 +415,11 @@ void msrTuplet::appendTupletToTuplet (const S_msrTuplet& tuplet)
       "Appending tuplet " <<
       tuplet->asString () <<
       " to tuplet " <<
-      asString () <<
-      std::endl;
+      asString ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -476,14 +460,11 @@ void msrTuplet::appendTupletToTupletClone (const S_msrTuplet& tuplet)
       "Appending tuplet " <<
       tuplet->asString () <<
       " to tuplet clone " <<
-      asString () <<
-      std::endl;
+      asString ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -551,14 +532,11 @@ S_msrNote msrTuplet::removeFirstNoteFromTuplet (
 
     ss <<
       "Removing first note from tuplet " <<
-      asString () <<
-      std::endl;
+      asString ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -665,14 +643,11 @@ S_msrNote msrTuplet::removeLastNoteFromTuplet (
 
     ss <<
       "Removing last note from tuplet " <<
-      asString () <<
-      std::endl;
+      asString ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -735,14 +710,11 @@ S_msrNote msrTuplet::removeLastNoteFromTuplet (
       "This last note from tuplet " <<
       asString () <<
       " turns out to be " <<
-      result->asShortString () <<
-      std::endl;
+      result->asShortString ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -776,14 +748,11 @@ void msrTuplet::setMeasurePosition (
       upLinkToMeasure->getMeasureNumber () <<
       "), context: \"" <<
       context <<
-      "\"" <<
-      std::endl;
+      "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -808,16 +777,13 @@ void msrTuplet::setTupletMembersMeasurePositions (
     std::stringstream ss;
 
     ss <<
-      "Setting tuplet members measure positions of " << asString () <<
+      "Setting tuplet members measure position of " << asString () <<
       " to " <<
-      measurePosition.asString () <<
-      std::endl;
+      measurePosition.asString ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -932,8 +898,6 @@ void msrTuplet::unapplySoundingFactorToTupletMembers (
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -965,14 +929,11 @@ void msrTuplet::finalizeTuplet (
     ss <<
       "Finalizing tuplet " <<
       asString () <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -991,14 +952,11 @@ void msrTuplet::acceptIn (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrTuplet::acceptIn ()" <<
-      std::endl;
+      "% ==> msrTuplet::acceptIn ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1012,14 +970,11 @@ void msrTuplet::acceptIn (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrTuplet::visitStart ()" <<
-            std::endl;
+            "% ==> Launching msrTuplet::visitStart ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
@@ -1033,14 +988,11 @@ void msrTuplet::acceptOut (basevisitor* v)
       std::stringstream ss;
 
       ss <<
-      "% ==> msrTuplet::acceptOut ()" <<
-      std::endl;
+      "% ==> msrTuplet::acceptOut ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1054,14 +1006,11 @@ void msrTuplet::acceptOut (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrTuplet::visitEnd ()" <<
-            std::endl;
+            "% ==> Launching msrTuplet::visitEnd ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
@@ -1362,6 +1311,8 @@ void msrTuplet::print (std::ostream& os) const
     }
   os << std::endl;
 
+  os << std::endl;
+
   os << std::left <<
     std::setw (fieldWidth) <<
     "fTupletElementsList" << ": ";
@@ -1389,6 +1340,8 @@ void msrTuplet::print (std::ostream& os) const
     os << "[EMPTY]" << std::endl;
   }
 
+  os << std::endl;
+
   os << std::left <<
     std::setw (fieldWidth) <<
     "fTupletUpLinkToMeasure" << ": ";
@@ -1413,9 +1366,9 @@ void msrTuplet::print (std::ostream& os) const
   }
   os << std::endl;
 
-  os << ']' << std::endl;
-
   --gIndenter;
+
+  os << ']' << std::endl;
 }
 
 std::ostream& operator << (std::ostream& os, const S_msrTuplet& elt)

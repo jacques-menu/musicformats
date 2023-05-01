@@ -32,14 +32,11 @@ S_mfcRepresentationComponent createBsrRepresentationComponent ()
       std::stringstream ss;
 
       ss <<
-        "Creating the BSR component" <<
-        std::endl;
+        "Creating the BSR component";
 
       gWaeHandler->waeTraceWithLocationDetails (
         __FILE__, __LINE__,
         ss.str ());
-//         gServiceRunData->getCurrentMeasureNumber (),
-//         gServiceRunData->getScoreMeasuresNumber ());
     }
 #endif // MF_TRACE_IS_ENABLED
 

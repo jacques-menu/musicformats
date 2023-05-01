@@ -66,8 +66,7 @@ void msr2lilypondManPageGenerateAtom::applyValueLessAtom (std::ostream& os)
     std::stringstream ss;
 
     ss <<
-      "==> option '" << fetchNames () << "' is a msr2lilypondManPageGenerateAtom" <<
-      std::endl;
+      "==> option '" << fetchNames () << "' is a msr2lilypondManPageGenerateAtom";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -85,8 +84,7 @@ void msr2lilypondManPageGenerateAtom::acceptIn (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> msr2lilypondManPageGenerateAtom::acceptIn ()" <<
-      std::endl;
+      ".\\\" ==> msr2lilypondManPageGenerateAtom::acceptIn ()";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -104,8 +102,7 @@ void msr2lilypondManPageGenerateAtom::acceptIn (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            ".\\\" ==> Launching msr2lilypondManPageGenerateAtom::visitStart ()" <<
-            std::endl;
+            ".\\\" ==> Launching msr2lilypondManPageGenerateAtom::visitStart ()";
 
           gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
@@ -123,8 +120,7 @@ void msr2lilypondManPageGenerateAtom::acceptOut (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> msr2lilypondManPageGenerateAtom::acceptOut ()" <<
-      std::endl;
+      ".\\\" ==> msr2lilypondManPageGenerateAtom::acceptOut ()";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -142,8 +138,7 @@ void msr2lilypondManPageGenerateAtom::acceptOut (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            ".\\\" ==> Launching msr2lilypondManPageGenerateAtom::visitEnd ()" <<
-            std::endl;
+            ".\\\" ==> Launching msr2lilypondManPageGenerateAtom::visitEnd ()";
 
           gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
@@ -161,8 +156,7 @@ void msr2lilypondManPageGenerateAtom::browseData (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> msr2lilypondManPageGenerateAtom::browseData ()" <<
-      std::endl;
+      ".\\\" ==> msr2lilypondManPageGenerateAtom::browseData ()";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -340,8 +334,7 @@ void msr2lilypondManPageOahGroup::acceptIn (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> msr2lilypondManPageOahGroup::acceptIn ()" <<
-      std::endl;
+      ".\\\" ==> msr2lilypondManPageOahGroup::acceptIn ()";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -359,8 +352,7 @@ void msr2lilypondManPageOahGroup::acceptIn (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            ".\\\" ==> Launching msr2lilypondManPageOahGroup::visitStart ()" <<
-            std::endl;
+            ".\\\" ==> Launching msr2lilypondManPageOahGroup::visitStart ()";
 
           gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
@@ -378,8 +370,7 @@ void msr2lilypondManPageOahGroup::acceptOut (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> msr2lilypondManPageOahGroup::acceptOut ()" <<
-      std::endl;
+      ".\\\" ==> msr2lilypondManPageOahGroup::acceptOut ()";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -397,8 +388,7 @@ void msr2lilypondManPageOahGroup::acceptOut (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            ".\\\" ==> Launching msr2lilypondManPageOahGroup::visitEnd ()" <<
-            std::endl;
+            ".\\\" ==> Launching msr2lilypondManPageOahGroup::visitEnd ()";
 
           gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
@@ -416,8 +406,7 @@ void msr2lilypondManPageOahGroup::browseData (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> msr2lilypondManPageOahGroup::browseData ()" <<
-      std::endl;
+      ".\\\" ==> msr2lilypondManPageOahGroup::browseData ()";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -461,8 +450,7 @@ S_msr2lilypondManPageOahGroup createGlobalMsr2lilypondManPageOahGroup (
     std::stringstream ss;
 
     ss <<
-      "Creating global msr2lilypondManpage OAH group" <<
-      std::endl;
+      "Creating global msr2lilypondManpage OAH group";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,

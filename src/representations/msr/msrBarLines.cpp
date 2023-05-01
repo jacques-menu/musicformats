@@ -220,14 +220,11 @@ void msrBarLine::setBarLineCategory (
       "Setting barLine category of " <<
       this->asString () <<
       " to " <<
-      msrBarLineCategoryKindAsString (barLineCategoryKind) <<
-      std::endl;
+      msrBarLineCategoryKindAsString (barLineCategoryKind);
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -269,14 +266,11 @@ void msrBarLine::acceptIn (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrBarLine::acceptIn ()" <<
-      std::endl;
+      "% ==> msrBarLine::acceptIn ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -290,14 +284,11 @@ void msrBarLine::acceptIn (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrBarLine::visitStart ()" <<
-            std::endl;
+            "% ==> Launching msrBarLine::visitStart ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
@@ -311,14 +302,11 @@ void msrBarLine::acceptOut (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrBarLine::acceptOut ()" <<
-      std::endl;
+      "% ==> msrBarLine::acceptOut ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -332,14 +320,11 @@ void msrBarLine::acceptOut (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrBarLine::visitEnd ()" <<
-            std::endl;
+            "% ==> Launching msrBarLine::visitEnd ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);

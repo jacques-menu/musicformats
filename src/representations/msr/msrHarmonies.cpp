@@ -76,14 +76,11 @@ msrHarmonyInterval::msrHarmonyInterval (
     ss <<
       "==> Creating harmony item '" <<
       harmonyIntervalAsString () <<
-      "'" <<
-      std::endl;
+      "'";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }
@@ -169,14 +166,11 @@ S_msrHarmonyInterval msrHarmonyInterval::intervalDifference (
       asShortString () <<
       "' and '" <<
       otherHarmonyInterval->asShortString () <<
-      "'" <<
-      std::endl;
+      "'";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -203,14 +197,11 @@ S_msrHarmonyInterval msrHarmonyInterval::intervalDifference (
       operand1->asShortString () <<
       "' and '" <<
       operand2->asShortString () <<
-      "'" <<
-      std::endl;
+      "'";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -271,14 +262,11 @@ S_msrHarmonyInterval msrHarmonyInterval::intervalDifference (
       ", invertInterval: " <<
       invertInterval <<
       ", resultRelativeOctave: " <<
-      resultRelativeOctave <<
-      std::endl;
+      resultRelativeOctave;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1454,14 +1442,11 @@ S_msrHarmonyInterval msrHarmonyInterval::intervalDifference (
     ss <<
       "--> base resultIntervalKind: '" <<
       msrIntervalKindAsString (resultIntervalKind) <<
-      "'" <<
-      std::endl;
+      "'";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1495,14 +1480,12 @@ S_msrHarmonyInterval msrHarmonyInterval::intervalDifference (
     ss <<
       "--> result: '" <<
       result->asShortString () <<
-      "'" <<
+      '\'' <<
       std::endl << std::endl;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -2652,14 +2635,11 @@ void msrHarmonyInterval::acceptIn (basevisitor* v) {
     std::stringstream ss;
 
     ss <<
-      "% ==> msrHarmonyInterval::acceptIn ()" <<
-      std::endl;
+      "% ==> msrHarmonyInterval::acceptIn ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -2685,14 +2665,11 @@ void msrHarmonyInterval::acceptOut (basevisitor* v) {
     std::stringstream ss;
 
     ss <<
-      "% ==> msrHarmonyInterval::acceptOut ()" <<
-      std::endl;
+      "% ==> msrHarmonyInterval::acceptOut ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -3680,14 +3657,11 @@ msrHarmonyDegree::msrHarmonyDegree (
     ss <<
       "Creating harmony degree '" <<
       asString () <<
-      "', line " << inputLineNumber <<
-      std::endl;
+      "', line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }
@@ -3778,14 +3752,11 @@ void msrHarmonyDegree::acceptIn (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrHarmonyDegree::acceptIn ()" <<
-      std::endl;
+      "% ==> msrHarmonyDegree::acceptIn ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -3799,14 +3770,11 @@ void msrHarmonyDegree::acceptIn (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrHarmonyDegree::visitStart ()" <<
-            std::endl;
+            "% ==> Launching msrHarmonyDegree::visitStart ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
@@ -3820,14 +3788,11 @@ void msrHarmonyDegree::acceptOut (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrHarmonyDegree::acceptOut ()" <<
-      std::endl;
+      "% ==> msrHarmonyDegree::acceptOut ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -3841,14 +3806,11 @@ void msrHarmonyDegree::acceptOut (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrHarmonyDegree::visitEnd ()" <<
-            std::endl;
+            "% ==> Launching msrHarmonyDegree::visitEnd ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
@@ -3962,14 +3924,11 @@ msrHarmonyContents::msrHarmonyContents (
     ss <<
       "==> Creating harmonyContents '" <<
       harmonyContentsAsString () <<
-      "'" <<
-      std::endl;
+      "'";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -4187,14 +4146,11 @@ void msrHarmonyContents::acceptIn (basevisitor* v) {
     std::stringstream ss;
 
     ss <<
-      "% ==> msrHarmonyContents::acceptIn ()" <<
-      std::endl;
+      "% ==> msrHarmonyContents::acceptIn ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -4220,14 +4176,11 @@ void msrHarmonyContents::acceptOut (basevisitor* v) {
     std::stringstream ss;
 
     ss <<
-      "% ==> msrHarmonyContents::acceptOut ()" <<
-      std::endl;
+      "% ==> msrHarmonyContents::acceptOut ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -4465,14 +4418,11 @@ msrHarmony::msrHarmony (
 
     ss <<
       "Creating harmony " <<
-      asString () <<
-      std::endl;
+      asString ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }
@@ -4490,14 +4440,11 @@ S_msrHarmony msrHarmony::createHarmonyNewbornClone (
     ss <<
       "Creating a newborn clone of harmony " <<
       asShortString () <<
-      ", line " << fInputLineNumber <<
-      std::endl;
+      ", line " << fInputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -4546,14 +4493,11 @@ S_msrHarmony msrHarmony::createHarmonyDeepClone (
     ss <<
       "Creating a deep clone of harmony " <<
       asShortString () <<
-      ", line " << fInputLineNumber <<
-      std::endl;
+      ", line " << fInputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -4604,14 +4548,11 @@ void msrHarmony::setHarmonySoundingWholeNotes (
       asString () <<
       " to " <<
       wholeNotes.asString () <<
-      ", context: " << context <<
-      std::endl;
+      ", context: " << context;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -4631,14 +4572,11 @@ void msrHarmony::setHarmonyDisplayWholeNotes (
       asString () <<
       " to " <<
       wholeNotes.asString () <<
-      ", context: " << context <<
-      std::endl;
+      ", context: " << context;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -4687,14 +4625,11 @@ void msrHarmony::setHarmonyTupletFactor (
       asShortString () <<
       " to " <<
       tupletFactor.asString () <<
-      ", line " << fInputLineNumber <<
-      std::endl;
+      ", line " << fInputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -4711,14 +4646,11 @@ void msrHarmony::setHarmonyUpLinkToNote (
     ss <<
       "Setting the uplink to note of harmony " <<
       asString () <<
-      " to note " << note->asString () <<
-      std::endl;
+      " to note " << note->asString ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -4825,14 +4757,11 @@ void msrHarmony::setHarmonyFrame (const S_msrFrame& frame)
 
     ss <<
       "Setting harmony " << asShortString ()  <<
-      " frame to " << frame->asString () <<
-      std::endl;
+      " frame to " << frame->asString ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -4872,8 +4801,6 @@ void msrHarmony::setHarmonyFrame (const S_msrFrame& frame)
 //       gWaeHandler->waeTraceWithLocationDetails (
 //         __FILE__, __LINE__,
 //         ss.str (),
-//         gServiceRunData->getCurrentMeasureNumber (),
-//         gServiceRunData->getScoreMeasuresNumber ());
 //   }
 // #endif // MF_TRACE_IS_ENABLED
 //
@@ -4901,14 +4828,11 @@ void msrHarmony::acceptIn (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrHarmony::acceptIn ()" <<
-      std::endl;
+      "% ==> msrHarmony::acceptIn ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -4922,14 +4846,11 @@ void msrHarmony::acceptIn (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrHarmony::visitStart ()" <<
-            std::endl;
+            "% ==> Launching msrHarmony::visitStart ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
@@ -4943,14 +4864,11 @@ void msrHarmony::acceptOut (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrHarmony::acceptOut ()" <<
-      std::endl;
+      "% ==> msrHarmony::acceptOut ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -4964,14 +4882,11 @@ void msrHarmony::acceptOut (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrHarmony::visitEnd ()" <<
-            std::endl;
+            "% ==> Launching msrHarmony::visitEnd ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
@@ -5115,7 +5030,7 @@ std::string msrHarmony::asString () const
   // print the harmonies staff number
   ss <<
     ", fHarmoniesStaffNumber: ";
-  if (fHarmoniesStaffNumber == msrStaff::K_STAFF_NUMBER_UNKNOWN_)
+  if (fHarmoniesStaffNumber == K_STAFF_NUMBER_UNKNOWN_)
     ss << "[K_STAFF_NUMBER_UNKNOWN_]";
   else
     ss << fHarmoniesStaffNumber;
@@ -5349,7 +5264,7 @@ void msrHarmony::print (std::ostream& os) const
   os <<
     std::setw (fieldWidth) <<
     "fHarmoniesStaffNumber" << ": ";
-  if (fHarmoniesStaffNumber == msrStaff::K_STAFF_NUMBER_UNKNOWN_) {
+  if (fHarmoniesStaffNumber == K_STAFF_NUMBER_UNKNOWN_) {
     os << "[NONE]";
   }
   else {
@@ -6015,14 +5930,11 @@ msrHarmonyStructure::msrHarmonyStructure (
     ss <<
       "==> Creating harmony intervals '" <<
       harmonyStructureAsString () <<
-      "'" <<
-      std::endl;
+      "'";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }
@@ -6920,14 +6832,11 @@ void msrHarmonyStructure::acceptIn (basevisitor* v) {
     std::stringstream ss;
 
     ss <<
-      "% ==> msrHarmonyStructure::acceptIn ()" <<
-      std::endl;
+      "% ==> msrHarmonyStructure::acceptIn ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -6953,14 +6862,11 @@ void msrHarmonyStructure::acceptOut (basevisitor* v) {
     std::stringstream ss;
 
     ss <<
-      "% ==> msrHarmonyStructure::acceptOut ()" <<
-      std::endl;
+      "% ==> msrHarmonyStructure::acceptOut ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -7042,14 +6948,11 @@ S_msrHarmonyStructure msrHarmonyStructure::invertHarmonyStructure (int inversion
       "==> invertHarmonyStructure (), inversion: " <<
       inversion <<
       ", original harmonyStructureIntervalsSize: " <<
-      harmonyStructureIntervalsSize <<
-      std::endl;
+      harmonyStructureIntervalsSize;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -7077,8 +6980,6 @@ S_msrHarmonyStructure msrHarmonyStructure::invertHarmonyStructure (int inversion
         gWaeHandler->waeTraceWithLocationDetails (
           __FILE__, __LINE__,
           ss.str ());
-//           gServiceRunData->getCurrentMeasureNumber (),
-//           gServiceRunData->getScoreMeasuresNumber ());
       }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -7103,8 +7004,6 @@ S_msrHarmonyStructure msrHarmonyStructure::invertHarmonyStructure (int inversion
         gWaeHandler->waeTraceWithLocationDetails (
           __FILE__, __LINE__,
           ss.str ());
-//           gServiceRunData->getCurrentMeasureNumber (),
-//           gServiceRunData->getScoreMeasuresNumber ());
       }
 #endif // MF_TRACE_IS_ENABLED
     } // for
@@ -7135,8 +7034,6 @@ S_msrHarmonyStructure msrHarmonyStructure::invertHarmonyStructure (int inversion
         gWaeHandler->waeTraceWithLocationDetails (
           __FILE__, __LINE__,
           ss.str ());
-//           gServiceRunData->getCurrentMeasureNumber (),
-//           gServiceRunData->getScoreMeasuresNumber ());
       }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -7161,8 +7058,6 @@ S_msrHarmonyStructure msrHarmonyStructure::invertHarmonyStructure (int inversion
         gWaeHandler->waeTraceWithLocationDetails (
           __FILE__, __LINE__,
           ss.str ());
-//           gServiceRunData->getCurrentMeasureNumber (),
-//           gServiceRunData->getScoreMeasuresNumber ());
       }
 #endif // MF_TRACE_IS_ENABLED
     } // for

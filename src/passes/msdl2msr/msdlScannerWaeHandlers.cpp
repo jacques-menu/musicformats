@@ -92,7 +92,7 @@ void msdlScannerWaeHandlerEnglish::illegalCharacter (char theChar) const
 {
   gLog <<
     "### illegal character: " <<
-    "'" << theChar << "' ###" <<
+    '\'' << theChar << "' ###" <<
     std::endl;
 }
 
@@ -108,14 +108,14 @@ void msdlScannerWaeHandlerEnglish::digitExpectedAfterDecimalDot (char theChar) c
 {
   gLog <<
     "### a digit is expected after decimal dot, found: " <<
-    "'" << theChar << "' ###" <<
+    '\'' << theChar << "' ###" <<
     std::endl;
 }
 void msdlScannerWaeHandlerEnglish::digitExpectedInExponent (char theChar) const
 {
   gLog <<
     "### a digit is expected in exponent, found: " <<
-    "'" << theChar << "' " <<
+    '\'' << theChar << "' " <<
     std::endl;
 }
 
@@ -123,7 +123,7 @@ void msdlScannerWaeHandlerEnglish::illegalEscapedCharacterInString (char theChar
 {
   gLog <<
     "### illegal escaped character after '\': " <<
-    "'" << theChar << "' ###" <<
+    '\'' << theChar << "' ###" <<
     std::endl;
 }
 
@@ -205,7 +205,7 @@ void msdlScannerWaeHandlerFrench::illegalCharacter (char theChar) const
 {
   gLog <<
     "### caractère illégal: " <<
-    "'" << theChar << "' ###" <<
+    '\'' << theChar << "' ###" <<
     std::endl;
 }
 
@@ -221,14 +221,14 @@ void msdlScannerWaeHandlerFrench::digitExpectedAfterDecimalDot (char theChar) co
 {
   gLog <<
     "### un chiffre est attendu après un point décimal, trouvé: " <<
-    "'" << theChar << "' ###" <<
+    '\'' << theChar << "' ###" <<
     std::endl;
 }
 void msdlScannerWaeHandlerFrench::digitExpectedInExponent (char theChar) const
 {
   gLog <<
     "### un chiffre est attendu dans un exposant, trouvé: " <<
-    "'" << theChar << "' ###" <<
+    '\'' << theChar << "' ###" <<
     std::endl;
 }
 
@@ -236,7 +236,7 @@ void msdlScannerWaeHandlerFrench::illegalEscapedCharacterInString (char theChar)
 {
   gLog <<
     "### caractère d'échappement illégal après '\': " <<
-    "'" << theChar << "' ###" <<
+    '\'' << theChar << "' ###" <<
     std::endl;
 }
 
@@ -318,7 +318,7 @@ void msdlScannerWaeHandlerItalian::illegalCharacter (char theChar) const
 {
   gLog <<
     "### illegal character: " <<
-    "'" << theChar << "' ###" <<
+    '\'' << theChar << "' ###" <<
     std::endl;
 }
 
@@ -334,14 +334,14 @@ void msdlScannerWaeHandlerItalian::digitExpectedAfterDecimalDot (char theChar) c
 {
   gLog <<
     "### a digit is expected after decimal dot, found: " <<
-    "'" << theChar << "' ###" <<
+    '\'' << theChar << "' ###" <<
     std::endl;
 }
 void msdlScannerWaeHandlerItalian::digitExpectedInExponent (char theChar) const
 {
   gLog <<
     "### a digit is expected in exponent, found: " <<
-    "'" << theChar << "' " <<
+    '\'' << theChar << "' " <<
     std::endl;
 }
 
@@ -349,7 +349,7 @@ void msdlScannerWaeHandlerItalian::illegalEscapedCharacterInString (char theChar
 {
   gLog <<
     "### illegal escaped character after '\': " <<
-    "'" << theChar << "' ###" <<
+    '\'' << theChar << "' ###" <<
     std::endl;
 }
 
@@ -431,7 +431,7 @@ void msdlScannerWaeHandlerGerman::illegalCharacter (char theChar) const
 {
   gLog <<
     "### illegal character: " <<
-    "'" << theChar << "' ###" <<
+    '\'' << theChar << "' ###" <<
     std::endl;
 }
 
@@ -447,14 +447,14 @@ void msdlScannerWaeHandlerGerman::digitExpectedAfterDecimalDot (char theChar) co
 {
   gLog <<
     "### a digit is expected after decimal dot, found: " <<
-    "'" << theChar << "' ###" <<
+    '\'' << theChar << "' ###" <<
     std::endl;
 }
 void msdlScannerWaeHandlerGerman::digitExpectedInExponent (char theChar) const
 {
   gLog <<
     "### a digit is expected in exponent, found: " <<
-    "'" << theChar << "' " <<
+    '\'' << theChar << "' " <<
     std::endl;
 }
 
@@ -462,7 +462,7 @@ void msdlScannerWaeHandlerGerman::illegalEscapedCharacterInString (char theChar)
 {
   gLog <<
     "### illegal escaped character after '\': " <<
-    "'" << theChar << "' ###" <<
+    '\'' << theChar << "' ###" <<
     std::endl;
 }
 
@@ -545,7 +545,7 @@ void msdlScannerWaeHandlerSpanish::illegalCharacter (char theChar) const
 {
   gLog <<
     "### illegal character: " <<
-    "'" << theChar << "' ###" <<
+    '\'' << theChar << "' ###" <<
     std::endl;
 }
 
@@ -561,14 +561,14 @@ void msdlScannerWaeHandlerSpanish::digitExpectedAfterDecimalDot (char theChar) c
 {
   gLog <<
     "### a digit is expected after decimal dot, found: " <<
-    "'" << theChar << "' ###" <<
+    '\'' << theChar << "' ###" <<
     std::endl;
 }
 void msdlScannerWaeHandlerSpanish::digitExpectedInExponent (char theChar) const
 {
   gLog <<
     "### a digit is expected in exponent, found: " <<
-    "'" << theChar << "' " <<
+    '\'' << theChar << "' " <<
     std::endl;
 }
 
@@ -576,7 +576,7 @@ void msdlScannerWaeHandlerSpanish::illegalEscapedCharacterInString (char theChar
 {
   gLog <<
     "### illegal escaped character after '\': " <<
-    "'" << theChar << "' ###" <<
+    '\'' << theChar << "' ###" <<
     std::endl;
 }
 
@@ -659,7 +659,7 @@ void msdlScannerWaeHandlerDutch::illegalCharacter (char theChar) const
 {
   gLog <<
     "### illegal character: " <<
-    "'" << theChar << "' ###" <<
+    '\'' << theChar << "' ###" <<
     std::endl;
 }
 
@@ -675,14 +675,14 @@ void msdlScannerWaeHandlerDutch::digitExpectedAfterDecimalDot (char theChar) con
 {
   gLog <<
     "### a digit is expected after decimal dot, found: " <<
-    "'" << theChar << "' ###" <<
+    '\'' << theChar << "' ###" <<
     std::endl;
 }
 void msdlScannerWaeHandlerDutch::digitExpectedInExponent (char theChar) const
 {
   gLog <<
     "### a digit is expected in exponent, found: " <<
-    "'" << theChar << "' " <<
+    '\'' << theChar << "' " <<
     std::endl;
 }
 
@@ -690,7 +690,7 @@ void msdlScannerWaeHandlerDutch::illegalEscapedCharacterInString (char theChar) 
 {
   gLog <<
     "### illegal escaped character after '\': " <<
-    "'" << theChar << "' ###" <<
+    '\'' << theChar << "' ###" <<
     std::endl;
 }
 

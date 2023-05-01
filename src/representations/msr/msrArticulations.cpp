@@ -137,14 +137,11 @@ void msrArticulation::acceptIn (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrArticulation::acceptIn ()" <<
-      std::endl;
+      "% ==> msrArticulation::acceptIn ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -158,14 +155,11 @@ void msrArticulation::acceptIn (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrArticulation::visitStart ()" <<
-            std::endl;
+            "% ==> Launching msrArticulation::visitStart ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
@@ -179,14 +173,11 @@ void msrArticulation::acceptOut (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrArticulation::acceptOut ()" <<
-      std::endl;
+      "% ==> msrArticulation::acceptOut ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -200,14 +191,11 @@ void msrArticulation::acceptOut (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrArticulation::visitEnd ()" <<
-            std::endl;
+            "% ==> Launching msrArticulation::visitEnd ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
@@ -286,14 +274,11 @@ void msrFermata::acceptIn (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrFermata::acceptIn ()" <<
-      std::endl;
+      "% ==> msrFermata::acceptIn ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -307,14 +292,11 @@ void msrFermata::acceptIn (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrFermata::visitStart ()" <<
-            std::endl;
+            "% ==> Launching msrFermata::visitStart ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
@@ -328,14 +310,11 @@ void msrFermata::acceptOut (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrFermata::acceptOut ()" <<
-      std::endl;
+      "% ==> msrFermata::acceptOut ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -349,14 +328,11 @@ void msrFermata::acceptOut (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrFermata::visitEnd ()" <<
-            std::endl;
+            "% ==> Launching msrFermata::visitEnd ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
@@ -497,14 +473,11 @@ void msrArpeggiato::acceptIn (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrArpeggiato::acceptIn ()" <<
-      std::endl;
+      "% ==> msrArpeggiato::acceptIn ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -518,14 +491,11 @@ void msrArpeggiato::acceptIn (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrArpeggiato::visitStart ()" <<
-            std::endl;
+            "% ==> Launching msrArpeggiato::visitStart ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
@@ -539,14 +509,11 @@ void msrArpeggiato::acceptOut (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrArpeggiato::acceptOut ()" <<
-      std::endl;
+      "% ==> msrArpeggiato::acceptOut ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -560,14 +527,11 @@ void msrArpeggiato::acceptOut (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrArpeggiato::visitEnd ()" <<
-            std::endl;
+            "% ==> Launching msrArpeggiato::visitEnd ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
@@ -677,14 +641,11 @@ void msrNonArpeggiato::acceptIn (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrNonArpeggiato::acceptIn ()" <<
-      std::endl;
+      "% ==> msrNonArpeggiato::acceptIn ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -698,14 +659,11 @@ void msrNonArpeggiato::acceptIn (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrNonArpeggiato::visitStart ()" <<
-            std::endl;
+            "% ==> Launching msrNonArpeggiato::visitStart ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
@@ -719,14 +677,11 @@ void msrNonArpeggiato::acceptOut (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrNonArpeggiato::acceptOut ()" <<
-      std::endl;
+      "% ==> msrNonArpeggiato::acceptOut ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
   if (visitor<S_msrNonArpeggiato>*
@@ -739,14 +694,11 @@ void msrNonArpeggiato::acceptOut (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrNonArpeggiato::visitEnd ()" <<
-            std::endl;
+            "% ==> Launching msrNonArpeggiato::visitEnd ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);

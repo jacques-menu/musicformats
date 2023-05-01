@@ -56,8 +56,7 @@ S_mfcConverterComponent createMsr2guidoConverterComponent ()
       std::stringstream ss;
 
       ss <<
-        "Creating the Msr2guido component" <<
-        std::endl;
+        "Creating the Msr2guido component";
 
       gWaeHandler->waeTraceWithoutLocationDetails (
         __FILE__, __LINE__,

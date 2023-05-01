@@ -58,8 +58,7 @@ EXP S_mfcConverterComponent createMusicxml2musicxmlConverterComponent ()
       std::stringstream ss;
 
       ss <<
-        "Creating the musicxml2musicxml component" <<
-        std::endl;
+        "Creating the musicxml2musicxml component";
 
       gWaeHandler->waeTraceWithoutLocationDetails (
         __FILE__, __LINE__,

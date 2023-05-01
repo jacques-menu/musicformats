@@ -304,14 +304,11 @@ std::string msdlTokenKindAsMsdlString (
     ss <<
       "==> msdlTokenKindAsMsdlString()" <<
       ", tokenKind" << ": " << msdlTokenKindAsString (tokenKind) <<
-      ", languageKind: " << msdlKeywordsLanguageKindAsString (languageKind) <<
-      std::endl;
+      ", languageKind: " << msdlKeywordsLanguageKindAsString (languageKind);
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -718,14 +715,11 @@ S_msdlTokenKindsSet msdlTokenKindsSet::createClone ()
 
     ss <<
       "<== createClone()" <<
-      ", result:" << result->asString () <<
-      std::endl;
+      ", result:" << result->asString ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -919,14 +913,11 @@ EXP S_msdlTokenKindsSet operator+ (
 
     ss <<
       "<== S_msdlTokenKindsSet operator+()" <<
-      ", result:" << result->asString () <<
-      std::endl;
+      ", result:" << result->asString ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -949,14 +940,11 @@ EXP S_msdlTokenKindsSet operator+ (
 
     ss <<
       "<== S_msdlTokenKindsSet operator+()" <<
-      ", result:" << result->asString () <<
-      std::endl;
+      ", result:" << result->asString ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1346,7 +1334,7 @@ std::string msdlTokenDescription::asString () const
       break;
 
     case msdlTokenDescriptionKind::kTokenCharacter:
-      ss << "'" << fString << "'";
+      ss << '\'' << fString << "'";
       break;
 
     case msdlTokenDescriptionKind::kTokenString:
@@ -1379,7 +1367,7 @@ void msdlTokenDescription::print (std::ostream& os) const
       break;
 
     case msdlTokenDescriptionKind::kTokenCharacter:
-      os << "'" << fString << "'";
+      os << '\'' << fString << "'";
       break;
 
     case msdlTokenDescriptionKind::kTokenString:
@@ -1641,14 +1629,11 @@ std::string msdlToken::asMsdlString (
     ss <<
       "==> asMsdlString()" <<
       ", tokenKind" << ": " << msdlTokenKindAsString (fTokenKind) <<
-      ", languageKind: " << msdlKeywordsLanguageKindAsString (languageKind) <<
-      std::endl;
+      ", languageKind: " << msdlKeywordsLanguageKindAsString (languageKind);
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 

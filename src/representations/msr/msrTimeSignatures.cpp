@@ -175,14 +175,11 @@ msrTimeSignatureItem::msrTimeSignatureItem (
 
     ss <<
       "Creating time signature item" <<
-      ", line: " << inputLineNumber <<
-      std::endl;
+      ", line: " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }
@@ -235,7 +232,7 @@ void msrTimeSignatureItem::appendBeatsNumber (int beatsNumber)
       beatsNumber <<
       "' to time signature item '" <<
       asString () <<
-      "'" <<
+      '\'' <<
       std::endl;
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -256,7 +253,7 @@ void msrTimeSignatureItem::setTimeSignatureBeatValue (int timeSignatureBeatValue
       timeSignatureBeatValue <<
       "' in time signature item '" <<
       asString () <<
-      "'" <<
+      '\'' <<
       std::endl;
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -283,14 +280,11 @@ void msrTimeSignatureItem::acceptIn (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrTimeSignatureItem::acceptIn ()" <<
-      std::endl;
+      "% ==> msrTimeSignatureItem::acceptIn ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -304,14 +298,11 @@ void msrTimeSignatureItem::acceptIn (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrTimeSignatureItem::visitStart ()" <<
-            std::endl;
+            "% ==> Launching msrTimeSignatureItem::visitStart ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
@@ -325,14 +316,11 @@ void msrTimeSignatureItem::acceptOut (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrTimeSignatureItem::acceptOut ()" <<
-      std::endl;
+      "% ==> msrTimeSignatureItem::acceptOut ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -346,14 +334,11 @@ void msrTimeSignatureItem::acceptOut (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrTimeSignatureItem::visitEnd ()" <<
-            std::endl;
+            "% ==> Launching msrTimeSignatureItem::visitEnd ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
@@ -880,14 +865,11 @@ S_msrTimeSignature msrTimeSignature::createTimeFromString (
     ss <<
       "Creating time from string \"" <<
       timeString <<
-      "', line " << inputLineNumber <<
-      std::endl;
+      "', line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -907,14 +889,11 @@ S_msrTimeSignature msrTimeSignature::createTimeFromString (
 
     ss <<
       "regularExpression: " <<
-      regularExpression <<
-      std::endl;
+      regularExpression;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -977,14 +956,11 @@ S_msrTimeSignature msrTimeSignature::createTimeFromString (
 
       "beatsNotesDuration: \"" <<
       beatsNotesDuration <<
-      "\"" <<
-      std::endl;
+      "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1011,14 +987,11 @@ S_msrTimeSignature msrTimeSignature::createTimeFromString (
       integerBeatsNumber <<
       std::endl <<
       "integerValue: " <<
-      integerValue <<
-      std::endl;
+      integerValue;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1092,7 +1065,7 @@ void msrTimeSignature::appendTimeSignatureItem (
       timeSignatureItem->asString () <<
       "' to time '" <<
       "JMI" <<
-      "'" <<
+      '\'' <<
       std::endl;
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -1183,14 +1156,11 @@ void msrTimeSignature::acceptIn (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrTimeSignature::acceptIn ()" <<
-      std::endl;
+      "% ==> msrTimeSignature::acceptIn ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1204,14 +1174,11 @@ void msrTimeSignature::acceptIn (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrTimeSignature::visitStart ()" <<
-            std::endl;
+            "% ==> Launching msrTimeSignature::visitStart ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
@@ -1225,14 +1192,11 @@ void msrTimeSignature::acceptOut (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrTimeSignature::acceptOut ()" <<
-      std::endl;
+      "% ==> msrTimeSignature::acceptOut ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1246,14 +1210,11 @@ void msrTimeSignature::acceptOut (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrTimeSignature::visitEnd ()" <<
-            std::endl;
+            "% ==> Launching msrTimeSignature::visitEnd ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);

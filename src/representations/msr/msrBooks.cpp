@@ -92,14 +92,11 @@ S_msrBook msrBook::createBookNewbornClone ()
     std::stringstream ss;
 
     ss <<
-      "Creating a newborn clone of a score" <<
-      std::endl;
+      "Creating a newborn clone of a score";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -204,14 +201,11 @@ void msrBook::appendCreditToBook (
     ss <<
       "Appending credit '" <<
       credit->asString () <<
-      "' to score" <<
-      std::endl;
+      "' to score";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -405,14 +399,11 @@ void msrBook::acceptIn (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrBook::acceptIn ()" <<
-      std::endl;
+      "% ==> msrBook::acceptIn ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -426,14 +417,11 @@ void msrBook::acceptIn (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrBook::visitStart ()" <<
-            std::endl;
+            "% ==> Launching msrBook::visitStart ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
@@ -447,14 +435,11 @@ void msrBook::acceptOut (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrBook::acceptOut ()" <<
-      std::endl;
+      "% ==> msrBook::acceptOut ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -468,14 +453,11 @@ void msrBook::acceptOut (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrBook::visitEnd ()" <<
-            std::endl;
+            "% ==> Launching msrBook::visitEnd ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
@@ -489,14 +471,11 @@ void msrBook::browseData (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrBook::browseData ()" <<
-      std::endl;
+      "% ==> msrBook::browseData ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -561,14 +540,11 @@ void msrBook::browseData (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% <== msrBook::browseData ()" <<
-      std::endl;
+      "% <== msrBook::browseData ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }

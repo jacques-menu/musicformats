@@ -89,14 +89,11 @@ msrHumdrumScotKeyItem::msrHumdrumScotKeyItem (
 
     ss <<
       "Creating Humdrum/Scot key item" <<
-      ", line: " << inputLineNumber <<
-      std::endl;
+      ", line: " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -134,14 +131,11 @@ void msrHumdrumScotKeyItem::setKeyItemDiatonicPitchKind (
     ss <<
       "Setting Humdrum/Scot key item diatonic pitch to '" <<
       msrDiatonicPitchKindAsString (diatonicPitchKind) <<
-      "'" <<
-      std::endl;
+      "'";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -158,14 +152,11 @@ void msrHumdrumScotKeyItem::setKeyItemAlterationKind (
     ss <<
       "Setting Humdrum/Scot key item alteration to '" <<
       msrAlterationKindAsString (alterationKind) <<
-      "'" <<
-      std::endl;
+      "'";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -181,14 +172,11 @@ void msrHumdrumScotKeyItem::setKeyItemOctaveKind (msrOctaveKind keyOctaveKind)
     ss <<
       "Setting Humdrum/Scot key item octave to '" <<
       msrOctaveKindAsString (keyOctaveKind) <<
-      "'" <<
-      std::endl;
+      "'";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -202,14 +190,11 @@ void msrHumdrumScotKeyItem::acceptIn (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrHumdrumScotKeyItem::acceptIn ()" <<
-      std::endl;
+      "% ==> msrHumdrumScotKeyItem::acceptIn ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -223,14 +208,11 @@ void msrHumdrumScotKeyItem::acceptIn (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrHumdrumScotKeyItem::visitStart ()" <<
-            std::endl;
+            "% ==> Launching msrHumdrumScotKeyItem::visitStart ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
@@ -244,14 +226,11 @@ void msrHumdrumScotKeyItem::acceptOut (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrHumdrumScotKeyItem::acceptOut ()" <<
-      std::endl;
+      "% ==> msrHumdrumScotKeyItem::acceptOut ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -265,14 +244,11 @@ void msrHumdrumScotKeyItem::acceptOut (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrHumdrumScotKeyItem::visitEnd ()" <<
-            std::endl;
+            "% ==> Launching msrHumdrumScotKeyItem::visitEnd ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
@@ -453,7 +429,7 @@ msrKey::msrKey ( // for traditional keys
     ss <<
       "Creating traditional key '" <<
       this->asString () <<
-      "'" <<
+      '\'' <<
       std::endl;
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -478,7 +454,7 @@ msrKey::msrKey ( // for Humdrum/Scot keys
     ss <<
       "Creating Humdrum/Scot key '" <<
       this->asString () <<
-      "'" <<
+      '\'' <<
       std::endl;
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -586,7 +562,7 @@ void msrKey::appendHumdrumScotKeyItem (
       "Append item '" <<
       item->asString () <<
       "' to key '" <<
-      "'" <<
+      '\'' <<
       std::endl;
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -619,14 +595,11 @@ S_msrKey msrKey::createTraditionalKeyFromString (
     ss <<
       "Creating traditional key from string \"" <<
       keyString <<
-      "', line " << inputLineNumber <<
-      std::endl;
+      "', line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -644,14 +617,11 @@ S_msrKey msrKey::createTraditionalKeyFromString (
 
     ss <<
       "regularExpression: " <<
-      regularExpression <<
-      std::endl;
+      regularExpression;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -740,14 +710,11 @@ S_msrKey msrKey::createTraditionalKeyFromString (
       std::endl <<
       "keyModeKind: \"" <<
       keyModeKind <<
-      "\"" <<
-      std::endl;
+      "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -770,14 +737,11 @@ void msrKey::acceptIn (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrKey::acceptIn ()" <<
-      std::endl;
+      "% ==> msrKey::acceptIn ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -791,14 +755,11 @@ void msrKey::acceptIn (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrKey::visitStart ()" <<
-            std::endl;
+            "% ==> Launching msrKey::visitStart ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
@@ -812,14 +773,11 @@ void msrKey::acceptOut (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrKey::acceptOut ()" <<
-      std::endl;
+      "% ==> msrKey::acceptOut ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -833,14 +791,11 @@ void msrKey::acceptOut (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrKey::visitEnd ()" <<
-            std::endl;
+            "% ==> Launching msrKey::visitEnd ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);

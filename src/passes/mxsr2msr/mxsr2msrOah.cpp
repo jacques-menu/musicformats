@@ -87,8 +87,7 @@ void msrReplaceClefAtom::applyAtomWithValue (
     std::stringstream ss;
 
     ss <<
-      "==> oahAtom is of type 'msrReplaceClefAtom'" <<
-      std::endl;
+      "==> oahAtom is of type 'msrReplaceClefAtom'";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -104,8 +103,7 @@ void msrReplaceClefAtom::applyAtomWithValue (
     std::stringstream ss;
 
     ss <<
-      "--> theString = \"" << theString << "\", " <<
-      std::endl;
+      "--> theString = \"" << theString << "\", ";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -134,8 +132,7 @@ void msrReplaceClefAtom::applyAtomWithValue (
       "There are " << smSize << " matches" <<
       " for part transpose string '" << theString <<
       "' with std::regex '" << regularExpression <<
-      "'" <<
-      std::endl;
+      "'";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -175,8 +172,7 @@ void msrReplaceClefAtom::applyAtomWithValue (
 
     ss <<
       "--> originalClefName = \"" << originalClefName << "\", " <<
-      "--> destinationClefName = \"" << destinationClefName << "\"" <<
-      std::endl;
+      "--> destinationClefName = \"" << destinationClefName << "\"";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -229,8 +225,7 @@ void msrReplaceClefAtom::acceptIn (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> msrReplaceClefAtom::acceptIn ()" <<
-      std::endl;
+      ".\\\" ==> msrReplaceClefAtom::acceptIn ()";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -248,8 +243,7 @@ void msrReplaceClefAtom::acceptIn (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            ".\\\" ==> Launching msrReplaceClefAtom::visitStart ()" <<
-            std::endl;
+            ".\\\" ==> Launching msrReplaceClefAtom::visitStart ()";
 
           gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
@@ -267,8 +261,7 @@ void msrReplaceClefAtom::acceptOut (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> msrReplaceClefAtom::acceptOut ()" <<
-      std::endl;
+      ".\\\" ==> msrReplaceClefAtom::acceptOut ()";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -286,8 +279,7 @@ void msrReplaceClefAtom::acceptOut (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            ".\\\" ==> Launching msrReplaceClefAtom::visitEnd ()" <<
-            std::endl;
+            ".\\\" ==> Launching msrReplaceClefAtom::visitEnd ()";
 
           gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
@@ -305,8 +297,7 @@ void msrReplaceClefAtom::browseData (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> msrReplaceClefAtom::browseData ()" <<
-      std::endl;
+      ".\\\" ==> msrReplaceClefAtom::browseData ()";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -1646,8 +1637,7 @@ void mxsr2msrOahGroup::checkGroupOptionsConsistency ()
     ss <<
       "Checking the consistency of mxsr2msrOahGroup group \"" <<
       fGroupHeader <<
-      "\"" <<
-      std::endl;
+      "\"";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -2002,8 +1992,7 @@ void mxsr2msrOahGroup::acceptIn (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> mxsr2msrOahGroup::acceptIn ()" <<
-      std::endl;
+      ".\\\" ==> mxsr2msrOahGroup::acceptIn ()";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -2021,8 +2010,7 @@ void mxsr2msrOahGroup::acceptIn (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            ".\\\" ==> Launching mxsr2msrOahGroup::visitStart ()" <<
-            std::endl;
+            ".\\\" ==> Launching mxsr2msrOahGroup::visitStart ()";
 
           gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
@@ -2040,8 +2028,7 @@ void mxsr2msrOahGroup::acceptOut (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> mxsr2msrOahGroup::acceptOut ()" <<
-      std::endl;
+      ".\\\" ==> mxsr2msrOahGroup::acceptOut ()";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -2059,8 +2046,7 @@ void mxsr2msrOahGroup::acceptOut (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            ".\\\" ==> Launching mxsr2msrOahGroup::visitEnd ()" <<
-            std::endl;
+            ".\\\" ==> Launching mxsr2msrOahGroup::visitEnd ()";
 
           gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
@@ -2078,8 +2064,7 @@ void mxsr2msrOahGroup::browseData (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> mxsr2msrOahGroup::browseData ()" <<
-      std::endl;
+      ".\\\" ==> mxsr2msrOahGroup::browseData ()";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -2567,8 +2552,7 @@ S_mxsr2msrOahGroup createGlobalMxsr2msrOahGroup (
     std::stringstream ss;
 
     ss <<
-      "Creating global mxsr2msr OAH group" <<
-      std::endl;
+      "Creating global mxsr2msr OAH group";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,

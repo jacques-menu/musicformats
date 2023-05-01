@@ -125,21 +125,21 @@ class EXP msrMeasure : public msrSegmentElement
 
     // measure lengthes, in whole notes
 
-    void                  setFullMeasureWholeNotes (
+    void                  setFullMeasureCurrentWholeNotesDuration (
                             const msrWholeNotes& wholeNotes);
 
-    msrWholeNotes         getFullMeasureWholeNotes () const
-                              {  return fFullMeasureWholeNotes; }
+    msrWholeNotes         getFullMeasureCurrentWholeNotesDuration () const
+                              {  return fFullMeasureCurrentWholeNotesDuration; }
 
-    void                  setMeasureWholeNotes (
+    void                  setMeasureCurrentWholeNotesDuration (
                             int                  inputLineNumber,
                             const msrWholeNotes& wholeNotes);
-    void                  incrementMeasureWholeNotes (
+    void                  incrementMeasureCurrentWholeNotesDuration (
                             int                  inputLineNumber,
                             const msrWholeNotes& wholeNotesDelta);
 
-    msrWholeNotes         getMeasureWholeNotes () const
-                              { return fMeasureWholeNotes; }
+    msrWholeNotes         getMeasureCurrentWholeNotesDuration () const
+                              { return fMeasureCurrentWholeNotesDuration; }
 
     // measure kind
 
@@ -295,7 +295,7 @@ class EXP msrMeasure : public msrSegmentElement
 
     // lengthes
 
-    std::string           fullMeasureWholeNotesAsMsrString ();
+    std::string           fullMeasureCurrentWholeNotesDurationAsMsrString ();
 
     // backup and padding
 
@@ -354,7 +354,7 @@ class EXP msrMeasure : public msrSegmentElement
     void                  appendTimeSignatureToMeasure (
                             const S_msrTimeSignature& timeSignature);
 
-    void                  setFullMeasureWholeNotesFromTimeSignature (
+    void                  setFullMeasureCurrentWholeNotesDurationFromTimeSignature (
                             const S_msrTimeSignature& timeSignature);
 
     void                  appendTimeSignatureToMeasureClone (
@@ -440,8 +440,8 @@ class EXP msrMeasure : public msrSegmentElement
     // notes
 
     void                  appendNoteToMeasure (
-                            const S_msrNote& note,
-                            const msrWholeNotes&  partDrawingMeasurePosition);
+                            const S_msrNote&     note,
+                            const msrWholeNotes& partDrawingMeasurePosition);
 
     void                  appendNoteOrPaddingToMeasure (
                             const S_msrNote& note);
@@ -678,7 +678,7 @@ class EXP msrMeasure : public msrSegmentElement
 
     // measure lengthes, in whole notes
 
-    msrWholeNotes         fFullMeasureWholeNotes;
+    msrWholeNotes         fFullMeasureCurrentWholeNotesDuration;
                             // meaningfull only
                             // when there is a time signature,
                             // but not for cadenzas
@@ -706,11 +706,11 @@ class EXP msrMeasure : public msrSegmentElement
 
     // measure lengthes, in whole notes
 
-    msrWholeNotes         fMeasureWholeNotes;
+    msrWholeNotes         fMeasureCurrentWholeNotesDuration;
                             // this increases when musical elements
                             // are appended to the measure
 
-    std::string           measureWholeNotesAsMsrString ();
+    std::string           measureCurrentWholeNotesDurationAsMsrString ();
 
     // first measure in voice?
 

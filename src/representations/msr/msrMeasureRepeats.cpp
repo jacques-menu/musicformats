@@ -80,14 +80,11 @@ void msrMeasureRepeatElement::appendSegmentToMeasureRepeatElementsList ( // JMI 
       "Appending segment '" << segment <<
       "' to measureRepeat element elements list '" << asString () <<
       "' (" << context << ")" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -115,14 +112,11 @@ void msrMeasureRepeatElement::appendMeasureRepeatToMeasureRepeatElementsList (
       "Appending measureRepeat '" << measureRepeat <<
       "' to measureRepeat element elements list '" << asString () <<
       "' (" << context << ")" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -150,14 +144,11 @@ void msrMeasureRepeatElement::appendVoiceElementToMeasureRepeatElementsList (
       "Appending voice element '" << voiceElement <<
       "' to measureRepeat element elements list '" << asString () <<
       "' (" << context << ")" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -260,14 +251,11 @@ void msrMeasureRepeatElement::acceptIn (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrMeasureRepeatElement::acceptIn ()" <<
-      std::endl;
+      "% ==> msrMeasureRepeatElement::acceptIn ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -281,14 +269,11 @@ void msrMeasureRepeatElement::acceptIn (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrMeasureRepeatElement::visitStart ()" <<
-            std::endl;
+            "% ==> Launching msrMeasureRepeatElement::visitStart ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
@@ -302,14 +287,11 @@ void msrMeasureRepeatElement::acceptOut (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrMeasureRepeatElement::acceptOut ()" <<
-      std::endl;
+      "% ==> msrMeasureRepeatElement::acceptOut ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -323,14 +305,11 @@ void msrMeasureRepeatElement::acceptOut (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrMeasureRepeatElement::visitEnd ()" <<
-            std::endl;
+            "% ==> Launching msrMeasureRepeatElement::visitEnd ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
@@ -381,7 +360,7 @@ void msrMeasureRepeatElement::printFull (std::ostream& os) const
     "measureRepeat upLink: '" <<
     fMeasureRepeatElementUpLinkToMeasureRepeat->
       asShortString () <<
-      "'" <<
+      '\'' <<
     std::endl << std::endl;
 
   // print the elements
@@ -439,7 +418,7 @@ void msrMeasureRepeatElement::print (std::ostream& os) const
     "measureRepeat upLink: '" <<
     fMeasureRepeatElementUpLinkToMeasureRepeat->
       asShortString () <<
-      "'" <<
+      '\'' <<
     std::endl;
 * /
 
@@ -541,14 +520,11 @@ void msrMeasureRepeatPattern::setMeasureRepeatPatternSegment (
       mfSingularOrPlural (
         fetchMeasuresNumber (),
         "measure",
-        "measures") <<
-      std::endl;
+        "measures");
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -587,14 +563,11 @@ void msrMeasureRepeatPattern::acceptIn (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrMeasureRepeatPattern::acceptIn ()" <<
-      std::endl;
+      "% ==> msrMeasureRepeatPattern::acceptIn ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -608,14 +581,11 @@ void msrMeasureRepeatPattern::acceptIn (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrMeasureRepeatPattern::visitStart ()" <<
-            std::endl;
+            "% ==> Launching msrMeasureRepeatPattern::visitStart ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
@@ -629,14 +599,11 @@ void msrMeasureRepeatPattern::acceptOut (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrMeasureRepeatPattern::acceptOut ()" <<
-      std::endl;
+      "% ==> msrMeasureRepeatPattern::acceptOut ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -650,14 +617,11 @@ void msrMeasureRepeatPattern::acceptOut (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrMeasureRepeatPattern::visitEnd ()" <<
-            std::endl;
+            "% ==> Launching msrMeasureRepeatPattern::visitEnd ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
@@ -671,14 +635,11 @@ void msrMeasureRepeatPattern::browseData (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrMeasureRepeatPattern::browseData ()" <<
-      std::endl;
+      "% ==> msrMeasureRepeatPattern::browseData ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -798,14 +759,11 @@ void msrMeasureRepeatReplicas::setMeasureRepeatReplicasSegment (
       mfSingularOrPlural (
         fetchMeasuresNumber (),
         "measure",
-        "measures") <<
-      std::endl;
+        "measures");
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -844,14 +802,11 @@ void msrMeasureRepeatReplicas::acceptIn (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrMeasureRepeatReplicas::acceptIn ()" <<
-      std::endl;
+      "% ==> msrMeasureRepeatReplicas::acceptIn ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -865,14 +820,11 @@ void msrMeasureRepeatReplicas::acceptIn (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrMeasureRepeatReplicas::visitStart ()" <<
-            std::endl;
+            "% ==> Launching msrMeasureRepeatReplicas::visitStart ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
@@ -886,14 +838,11 @@ void msrMeasureRepeatReplicas::acceptOut (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrMeasureRepeatReplicas::acceptOut ()" <<
-      std::endl;
+      "% ==> msrMeasureRepeatReplicas::acceptOut ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -907,14 +856,11 @@ void msrMeasureRepeatReplicas::acceptOut (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrMeasureRepeatReplicas::visitEnd ()" <<
-            std::endl;
+            "% ==> Launching msrMeasureRepeatReplicas::visitEnd ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
@@ -928,14 +874,11 @@ void msrMeasureRepeatReplicas::browseData (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrMeasureRepeatReplicas::browseData ()" <<
-      std::endl;
+      "% ==> msrMeasureRepeatReplicas::browseData ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1075,14 +1018,11 @@ S_msrMeasureRepeat msrMeasureRepeat::createMeasureRepeatNewbornClone (
     ss <<
       "Creating a newborn clone of measures repeat '" <<
       asString () <<
-      "'" <<
-      std::endl;
+      "'";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1118,14 +1058,11 @@ void msrMeasureRepeat::setMeasureRepeatPattern (
         measureRepeatPattern->
           fetchMeasuresNumber (),
         "measure",
-        "measures") <<
-      std::endl;
+        "measures");
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1157,14 +1094,11 @@ void msrMeasureRepeat::setMeasureRepeatReplicas (
         measureRepeatReplicas->
           fetchMeasuresNumber (),
         "measure",
-        "measures") <<
-      std::endl;
+        "measures");
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1239,14 +1173,11 @@ void msrMeasureRepeat::acceptIn (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrMeasureRepeat::acceptIn ()" <<
-      std::endl;
+      "% ==> msrMeasureRepeat::acceptIn ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1260,14 +1191,11 @@ void msrMeasureRepeat::acceptIn (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrMeasureRepeat::visitStart ()" <<
-            std::endl;
+            "% ==> Launching msrMeasureRepeat::visitStart ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
@@ -1281,14 +1209,11 @@ void msrMeasureRepeat::acceptOut (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrMeasureRepeat::acceptOut ()" <<
-      std::endl;
+      "% ==> msrMeasureRepeat::acceptOut ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1302,14 +1227,11 @@ void msrMeasureRepeat::acceptOut (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrMeasureRepeat::visitEnd ()" <<
-            std::endl;
+            "% ==> Launching msrMeasureRepeat::visitEnd ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
@@ -1323,14 +1245,11 @@ void msrMeasureRepeat::browseData (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrMeasureRepeat::browseData ()" <<
-      std::endl;
+      "% ==> msrMeasureRepeat::browseData ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1359,14 +1278,11 @@ void msrMeasureRepeat::browseData (basevisitor* v)
       std::stringstream ss;
 
       ss <<
-        "% ==> visiting measures repeat replicas is inhibited" <<
-        std::endl;
+        "% ==> visiting measures repeat replicas is inhibited";
 
       gWaeHandler->waeTraceWithLocationDetails (
         __FILE__, __LINE__,
         ss.str ());
-//         gServiceRunData->getCurrentMeasureNumber (),
-//         gServiceRunData->getScoreMeasuresNumber ());
     }
 #endif // MF_TRACE_IS_ENABLED
   }

@@ -97,8 +97,7 @@ void crackVersionNumber ( // JMI ??? v0.9.66
       ss <<
         "--> generationNumberValue = \"" << generationNumberValue << "\", " <<
         "--> majorNumberValue = \"" << majorNumberValue << "\", " <<
-        "--> minorNumberValue = \"" << minorNumberValue << "\"" <<
-        std::endl;
+        "--> minorNumberValue = \"" << minorNumberValue << "\"";
 
       gWaeHandler->waeTraceWithoutLocationDetails (
         __FILE__, __LINE__,
@@ -134,7 +133,7 @@ void crackVersionNumber ( // JMI ??? v0.9.66
         "There are " << smSize << " matches" <<
         " for chord details std::string '" << theString <<
         "\" with std::regex '" << regularExpression <<
-        "'" <<
+        '\'' <<
         std::endl <<
         smSize << " elements: ";
 
@@ -367,8 +366,7 @@ mfcVersionNumber::mfcVersionNumber (
       ", majorNumber:" << majorNumber <<
       ", minorNumber:" << minorNumber <<
       ", patchNumber:" << patchNumber <<
-      ", preRelease:" << preRelease <<
-      std::endl;
+      ", preRelease:" << preRelease;
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -421,7 +419,7 @@ S_mfcVersionNumber mfcVersionNumber::createFromString (
       "There are " << smSize << " matches" <<
       " for version std::string '" << theString <<
       "\" with std::regex '" << regularExpression <<
-      "'" <<
+      '\'' <<
       std::endl <<
       smSize << " elements: ";
 
@@ -463,8 +461,7 @@ S_mfcVersionNumber mfcVersionNumber::createFromString (
         "--> majorNumberValue = \"" << majorNumberValue << "\", " <<
         "--> minorNumberValue = \"" << minorNumberValue << "\"" <<
         "--> patchNumberValue = \"" << patchNumberValue << "\"" <<
-        "--> preReleaseValue = \"" << preReleaseValue << "\"" <<
-        std::endl;
+        "--> preReleaseValue = \"" << preReleaseValue << "\"";
 
       gWaeHandler->waeTraceWithoutLocationDetails (
         __FILE__, __LINE__,
@@ -835,8 +832,7 @@ S_mfcVersionsHistory mfcVersionsHistory::create ()
     std::stringstream ss;
 
     ss <<
-      "Creating mfcVersionsHistory" <<
-      std::endl;
+      "Creating mfcVersionsHistory";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -858,8 +854,7 @@ mfcVersionsHistory::mfcVersionsHistory ()
     std::stringstream ss;
 
     ss <<
-      "Constructing mfcVersionsHistory" <<
-      std::endl;
+      "Constructing mfcVersionsHistory";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -881,8 +876,7 @@ void mfcVersionsHistory::appendVersionDescrToHistory (
     ss <<
       "Appending version " <<
       versionDescr <<
-      " to history" <<
-      std::endl;
+      " to history";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -973,8 +967,7 @@ S_mfcComponent mfcComponent::create (
 
     ss <<
       "Creating mfcComponent" <<
-      ", componentName: " << componentName <<
-      std::endl;
+      ", componentName: " << componentName;
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -1002,8 +995,7 @@ mfcComponent::mfcComponent (
     ss <<
       "Constructing mfcComponent \"" <<
       componentName <<
-      "\"" <<
-      std::endl;
+      "\"";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -1034,8 +1026,7 @@ void mfcComponent::appendVersionDescrToComponent (
       " to " <<
       mfcComponentKindAsString (fComponentKind) <<
       ' ' <<
-      fComponentName <<
-      std::endl;
+      fComponentName;
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -1151,8 +1142,7 @@ S_mfcOahComponent mfcOahComponent::create (
 
     ss <<
       "Creating mfcOahComponent" <<
-      ", formatName: " << formatName <<
-      std::endl;
+      ", formatName: " << formatName;
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -1180,8 +1170,7 @@ mfcOahComponent::mfcOahComponent (
     ss <<
       "Constructing mfcOahComponent \"" <<
       formatName <<
-      "\"" <<
-      std::endl;
+      "\"";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -1215,8 +1204,7 @@ S_mfcRepresentationComponent mfcRepresentationComponent::create (
 
     ss <<
       "Creating mfcRepresentationComponent" <<
-      ", formatName: " << formatName <<
-      std::endl;
+      ", formatName: " << formatName;
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -1244,8 +1232,7 @@ mfcRepresentationComponent::mfcRepresentationComponent (
     ss <<
       "Constructing mfcRepresentationComponent \"" <<
       formatName <<
-      "\"" <<
-      std::endl;
+      "\"";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -1279,8 +1266,7 @@ S_mfcPassComponent mfcPassComponent::create (
 
     ss <<
       "Creating mfcPassComponent" <<
-      ", passName: " << passName <<
-      std::endl;
+      ", passName: " << passName;
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -1308,8 +1294,7 @@ mfcPassComponent::mfcPassComponent (
     ss <<
       "Constructing mfcPassComponent \"" <<
       passName <<
-      "\"" <<
-      std::endl;
+      "\"";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -1384,8 +1369,7 @@ S_mfcMultiComponent mfcMultiComponent::create (
 
     ss <<
       "Creating mfcMultiComponent" <<
-      ", multiComponentName: " << multiComponentName <<
-      std::endl;
+      ", multiComponentName: " << multiComponentName;
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -1422,8 +1406,7 @@ mfcMultiComponent::mfcMultiComponent (
     ss <<
       "Constructing mfcMultiComponent \"" <<
       multiComponentName <<
-      "\"" <<
-      std::endl;
+      "\"";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -1459,8 +1442,7 @@ void mfcMultiComponent::appendRepresentationToMultiComponent (
       ' ' <<
       mfcComponentKindAsString (fComponentKind) <<
       ' ' <<
-      "\"" <<
-      std::endl;
+      "\"";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -1528,8 +1510,7 @@ void mfcMultiComponent::appendPassToMultiComponent (
     ss <<
       "Appending pass " <<
       pass <<
-      " to multi-component \"" << fComponentName << "\"" <<
-      std::endl;
+      " to multi-component \"" << fComponentName << "\"";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -2029,8 +2010,7 @@ S_mfcGeneratorComponent mfcGeneratorComponent::create (
 
     ss <<
       "Creating mfcGeneratorComponent" <<
-      ", generatorName: " << generatorName <<
-      std::endl;
+      ", generatorName: " << generatorName;
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -2066,8 +2046,7 @@ mfcGeneratorComponent::mfcGeneratorComponent (
     ss <<
       "Constructing mfcGeneratorComponent \"" <<
       generatorName <<
-      "\"" <<
-      std::endl;
+      "\"";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -2105,8 +2084,7 @@ S_mfcConverterComponent mfcConverterComponent::create (
 
     ss <<
       "Creating mfcConverterComponent" <<
-      ", converterName: " << converterName <<
-      std::endl;
+      ", converterName: " << converterName;
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -2142,8 +2120,7 @@ mfcConverterComponent::mfcConverterComponent (
     ss <<
       "Constructing mfcConverterComponent \"" <<
       converterName <<
-      "\"" <<
-      std::endl;
+      "\"";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -2181,8 +2158,7 @@ S_mfcLibraryComponent mfcLibraryComponent::create (
 
     ss <<
       "Creating mfcLibraryComponent" <<
-      ", libraryVersionsName: " << libraryVersionsName <<
-      std::endl;
+      ", libraryVersionsName: " << libraryVersionsName;
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -2218,8 +2194,7 @@ mfcLibraryComponent::mfcLibraryComponent (
     ss <<
       "Constructing mfcLibraryComponent \"" <<
       libraryVersionsName <<
-      "\"" <<
-      std::endl;
+      "\"";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -2246,8 +2221,7 @@ void mfcLibraryComponent::appendConverterToMultiComponent (
       ' ' <<
       mfcComponentKindAsString (fComponentKind) <<
       ' ' <<
-      "\"" <<
-      std::endl;
+      "\"";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,

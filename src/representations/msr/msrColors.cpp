@@ -73,14 +73,11 @@ msrColorRGB::msrColorRGB (
       "There are " << smSize << " matches" <<
       " for RGB color string '" << theString <<
       "' with std::regex '" << regularExpression <<
-      "'" <<
-      std::endl;
+      "'";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -118,14 +115,11 @@ msrColorRGB::msrColorRGB (
     ss <<
       "--> RString = \"" << RString << "\", " <<
       "--> GString = \"" << GString << "\"" <<
-      "--> BString = \"" << BString << "\"" <<
-      std::endl;
+      "--> BString = \"" << BString << "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -139,7 +133,7 @@ msrColorRGB::msrColorRGB (
     if (fR < 0.0 || fR > 1.0) {
       gLog <<
         "### ERROR: the R component " << fR <<
-        " is not in the [0.0..1.0] interval in RGB color '" << theString << "'" <<
+        " is not in the [0.0..1.0] interval in RGB color '" << theString << '\'' <<
         std::endl;
     }
   }
@@ -152,7 +146,7 @@ msrColorRGB::msrColorRGB (
     if (fG < 0.0 || fG > 1.0) {
       gLog <<
         "### ERROR: the G component " << fG <<
-        " is not in the [0.0..1.0] interval in RGB color '" << theString << "'" <<
+        " is not in the [0.0..1.0] interval in RGB color '" << theString << '\'' <<
         std::endl;
     }
   }
@@ -165,7 +159,7 @@ msrColorRGB::msrColorRGB (
     if (fB < 0.0 || fB > 1.0) {
       gLog <<
         "### ERROR: the B component " << fB <<
-        " is not in the [0.0..1.0] interval in RGB color '" << theString << "'" <<
+        " is not in the [0.0..1.0] interval in RGB color '" << theString << '\'' <<
         std::endl;
     }
   }

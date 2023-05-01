@@ -120,8 +120,7 @@ EXP int xml2brl (
 
     ss <<
       serviceName << " xml2brl()" <<
-      ", insiderOption: " << insiderOption <<
-      std::endl;
+      ", insiderOption: " << insiderOption;
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -234,8 +233,7 @@ EXP int xml2brl (
       "inputSourceName = \"" << inputSourceName << "\"" <<
       ", outputFileName = \"" << outputFileName << "\"" <<
       std::endl <<
-      separator <<
-      std::endl;
+      separator;
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -360,8 +358,7 @@ EXP int xml2brl (
     std::stringstream ss;
 
     ss <<
-      "The command line options and arguments have been analyzed" <<
-      std::endl;
+      "The command line options and arguments have been analyzed";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,

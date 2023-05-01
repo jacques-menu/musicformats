@@ -210,8 +210,7 @@ void initializeMusicFormatsLanguages ()
       std::stringstream ss;
 
       ss <<
-        "Initializing MusicFormats languages" <<
-        std::endl;
+        "Initializing MusicFormats languages";
 
       gWaeHandler->waeTraceWithoutLocationDetails (
         __FILE__, __LINE__,

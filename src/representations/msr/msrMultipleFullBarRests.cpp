@@ -101,14 +101,11 @@ S_msrMultipleFullBarRests msrMultipleFullBarRests::createMultipleFullBarRestsNew
     ss <<
       "Creating a newborn clone of multiple full-bar rests '" <<
       asString () <<
-      "'" <<
-      std::endl;
+      "'";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -141,7 +138,7 @@ msrWholeNotes msrMultipleFullBarRests::fetchMultipleFullBarRestsMeasureSoundingN
 
   for (S_msrMeasure measure : fFullBarRestsMeasuresList) {
     result +=
-      measure->getFullMeasureWholeNotes ();
+      measure->getFullMeasureCurrentWholeNotesDuration ();
   } // for
 
   return result;
@@ -157,14 +154,11 @@ void msrMultipleFullBarRests::setMultipleFullBarRestsNextMeasureNumber (
     ss <<
       "Setting multiple full-bar rests next measure number to '" <<
       "' " <<
-      nextMeasureNumber <<
-      std::endl;
+      nextMeasureNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -235,14 +229,11 @@ void msrMultipleFullBarRests::setMultipleFullBarRestsLastMeasurePuristMeasureNum
       "Setting multiple full-bar rests last measure purist number to '" <<
       "' " <<
       lastMeasuresPuristNumber <<
-      "', line " << inputLineNumber <<
-      std::endl;
+      "', line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -284,14 +275,11 @@ void msrMultipleFullBarRests::appendMeasureToMultipleFullBarRests (
       measure->asShortString () <<
       " to multiple full-bar rests " <<
       asShortString () <<
-      "', line " << fInputLineNumber <<
-      std::endl;
+      "', line " << fInputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -333,14 +321,11 @@ void msrMultipleFullBarRests::acceptIn (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrMultipleFullBarRests::acceptIn ()" <<
-      std::endl;
+      "% ==> msrMultipleFullBarRests::acceptIn ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -354,14 +339,11 @@ void msrMultipleFullBarRests::acceptIn (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrMultipleFullBarRests::visitStart ()" <<
-            std::endl;
+            "% ==> Launching msrMultipleFullBarRests::visitStart ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
@@ -375,14 +357,11 @@ void msrMultipleFullBarRests::acceptOut (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrMultipleFullBarRests::acceptOut ()" <<
-      std::endl;
+      "% ==> msrMultipleFullBarRests::acceptOut ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -396,14 +375,11 @@ void msrMultipleFullBarRests::acceptOut (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrMultipleFullBarRests::visitEnd ()" <<
-            std::endl;
+            "% ==> Launching msrMultipleFullBarRests::visitEnd ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
@@ -417,14 +393,11 @@ void msrMultipleFullBarRests::browseData (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrMultipleFullBarRests::browseData ()" <<
-      std::endl;
+      "% ==> msrMultipleFullBarRests::browseData ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -441,14 +414,11 @@ void msrMultipleFullBarRests::browseData (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% <== msrMultipleFullBarRests::browseData ()" <<
-      std::endl;
+      "% <== msrMultipleFullBarRests::browseData ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }
@@ -482,11 +452,11 @@ std::string msrMultipleFullBarRests::asString () const
 
     ", fMultipleFullBarRestsLastMeasurePuristNumber: '" <<
     fMultipleFullBarRestsLastMeasurePuristNumber <<
-    "'" <<
+    '\'' <<
 
     ", multipleFullBarRestsNextMeasureNumber: '" <<
     fMultipleFullBarRestsNextMeasureNumber <<
-    "'" <<
+    '\'' <<
 
     ", multipleFullBarRestsMeasureSoundingNotes: " <<
     fetchMultipleFullBarRestsMeasureSoundingNotes () <<
@@ -559,7 +529,7 @@ void msrMultipleFullBarRests::print (std::ostream& os) const
     std::setw (fieldWidth) <<
     "fMultipleFullBarRestsNextMeasureNumber" << " : '" <<
     fMultipleFullBarRestsNextMeasureNumber <<
-    "'" <<
+    '\'' <<
     std::endl <<
 
     std::setw (fieldWidth) <<

@@ -71,8 +71,7 @@ void translateLpsrToLilypond (
       gTab <<
       gLanguage->passIDKindAsString (passIDKind) << ": " << passDescription <<
       std::endl <<
-      separator <<
-      std::endl;
+      separator;
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -261,8 +260,7 @@ EXP void translateLpsrToLilypondWithHandler (
 
       ss <<
         std::endl <<
-        gLanguage->closingLilypondFile (outputFileName) <<
-        std::endl;
+        gLanguage->closingLilypondFile (outputFileName);
 
       gWaeHandler->waeTraceWithoutLocationDetails (
         __FILE__, __LINE__,

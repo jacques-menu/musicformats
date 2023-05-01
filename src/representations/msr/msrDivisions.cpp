@@ -56,14 +56,11 @@ S_msrDivisions msrDivisions::createDivisionsNewbornClone ()
     ss <<
       "Creating a newborn clone of divisions '" <<
       asString () <<
-      "'" <<
-      std::endl;
+      "'";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -104,14 +101,11 @@ void msrDivisions::initializeDivisions ()
     ss <<
       "Initializing divisions" <<
       ", divisionsPerQuarterNote: " << fDivisionsPerQuarterNote <<
-      ", line " << fInputLineNumber <<
-      std::endl;
+      ", line " << fInputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -292,14 +286,11 @@ std::string msrDivisions::divisionsAsMsrString (
       "inputLineNumber" << ": " << inputLineNumber <<
       std::endl <<
       gTab << std::setw (fieldWidth) <<
-      "divisions" << ": " << divisions <<
-      std::endl;
+      "divisions" << ": " << divisions;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -502,8 +493,6 @@ std::string msrDivisions::divisionsAsMsrString (
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -556,14 +545,11 @@ void msrDivisions::acceptIn (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrDivisions::acceptIn ()" <<
-      std::endl;
+      "% ==> msrDivisions::acceptIn ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -577,14 +563,11 @@ void msrDivisions::acceptIn (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrDivisions::visitStart ()" <<
-            std::endl;
+            "% ==> Launching msrDivisions::visitStart ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
@@ -598,14 +581,11 @@ void msrDivisions::acceptOut (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrDivisions::acceptOut ()" <<
-      std::endl;
+      "% ==> msrDivisions::acceptOut ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -619,14 +599,11 @@ void msrDivisions::acceptOut (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrDivisions::visitEnd ()" <<
-            std::endl;
+            "% ==> Launching msrDivisions::visitEnd ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);

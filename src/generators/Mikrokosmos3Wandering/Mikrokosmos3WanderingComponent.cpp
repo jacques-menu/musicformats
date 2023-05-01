@@ -88,8 +88,7 @@ S_mfcGeneratorComponent createMikrokosmos3WanderingGeneratorComponent ()
       std::stringstream ss;
 
       ss <<
-        "Crerating the Mikrokosmos3Wandering component" <<
-        std::endl;
+        "Crerating the Mikrokosmos3Wandering component";
 
       gWaeHandler->waeTraceWithoutLocationDetails (
         __FILE__, __LINE__,

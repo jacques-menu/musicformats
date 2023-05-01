@@ -137,14 +137,11 @@ S_msrScore msrScore::createScoreNewbornClone ()
     std::stringstream ss;
 
     ss <<
-      "Creating a newborn clone of a score" <<
-      std::endl;
+      "Creating a newborn clone of a score";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -253,14 +250,11 @@ void msrScore::appendCreditToScore (
     ss <<
       "Appending credit '" <<
       credit->asString () <<
-      "' to score" <<
-      std::endl;
+      "' to score";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -306,8 +300,6 @@ S_msrPart msrScore::fetchPartFromScoreByItsPartID (
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -373,14 +365,11 @@ void msrScore::acceptIn (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrScore::acceptIn ()" <<
-      std::endl;
+      "% ==> msrScore::acceptIn ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -394,14 +383,11 @@ void msrScore::acceptIn (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrScore::visitStart ()" <<
-            std::endl;
+            "% ==> Launching msrScore::visitStart ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
@@ -415,14 +401,11 @@ void msrScore::acceptOut (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrScore::acceptOut ()" <<
-      std::endl;
+      "% ==> msrScore::acceptOut ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -436,14 +419,11 @@ void msrScore::acceptOut (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrScore::visitEnd ()" <<
-            std::endl;
+            "% ==> Launching msrScore::visitEnd ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
@@ -457,14 +437,11 @@ void msrScore::browseData (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrScore::browseData ()" <<
-      std::endl;
+      "% ==> msrScore::browseData ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -529,14 +506,11 @@ void msrScore::browseData (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% <== msrScore::browseData ()" <<
-      std::endl;
+      "% <== msrScore::browseData ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }

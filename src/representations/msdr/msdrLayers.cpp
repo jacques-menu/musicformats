@@ -51,14 +51,11 @@ msdrLayer::msdrLayer (
     std::stringstream ss;
 
     ss <<
-      "Creating MSDR music \"" << asString () << "\"" <<
-      std::endl;
+      "Creating MSDR music \"" << asString () << "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -110,14 +107,11 @@ void msdrLayer::acceptIn (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msdrLayer::acceptIn ()" <<
-      std::endl;
+      "% ==> msdrLayer::acceptIn ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -131,14 +125,11 @@ void msdrLayer::acceptIn (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msdrLayer::visitStart ()" <<
-            std::endl;
+            "% ==> Launching msdrLayer::visitStart ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
@@ -152,14 +143,11 @@ void msdrLayer::acceptOut (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msdrLayer::acceptOut ()" <<
-      std::endl;
+      "% ==> msdrLayer::acceptOut ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -173,14 +161,11 @@ void msdrLayer::acceptOut (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msdrLayer::visitEnd ()" <<
-            std::endl;
+            "% ==> Launching msdrLayer::visitEnd ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
@@ -194,14 +179,11 @@ void msdrLayer::browseData (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msdrLayer::browseData ()" <<
-      std::endl;
+      "% ==> msdrLayer::browseData ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -246,14 +228,11 @@ void msdrLayer::browseData (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% <== msdrLayer::browseData ()" <<
-      std::endl;
+      "% <== msdrLayer::browseData ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
   */
 }

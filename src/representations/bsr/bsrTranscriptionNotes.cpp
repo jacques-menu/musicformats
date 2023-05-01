@@ -71,14 +71,11 @@ void bsrTranscriptionNotesElement::acceptIn (basevisitor* v)
 
     ss <<
       "% --> End visiting bsrTranscriptionNotesElement" <<
-      "% ==> bsrTranscriptionNotesElement::acceptIn ()" <<
-      std::endl;
+      "% ==> bsrTranscriptionNotesElement::acceptIn ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -92,14 +89,11 @@ void bsrTranscriptionNotesElement::acceptIn (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching bsrTranscriptionNotesElement::visitStart ()" <<
-            std::endl;
+            "% ==> Launching bsrTranscriptionNotesElement::visitStart ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
@@ -114,14 +108,11 @@ void bsrTranscriptionNotesElement::acceptOut (basevisitor* v)
 
     ss <<
       "% --> End visiting bsrTranscriptionNotesElement" <<
-      "% ==> bsrTranscriptionNotesElement::acceptOut ()" <<
-      std::endl;
+      "% ==> bsrTranscriptionNotesElement::acceptOut ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -135,14 +126,11 @@ void bsrTranscriptionNotesElement::acceptOut (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching bsrTranscriptionNotesElement::visitEnd ()" <<
-            std::endl;
+            "% ==> Launching bsrTranscriptionNotesElement::visitEnd ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
@@ -223,14 +211,11 @@ void bsrTranscriptionNotes::acceptIn (basevisitor* v)
 
     ss <<
       "% --> End visiting bsrTranscriptionNotesElement" <<
-      "% ==> bsrTranscriptionNotes::acceptIn ()" <<
-      std::endl;
+      "% ==> bsrTranscriptionNotes::acceptIn ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -244,14 +229,11 @@ void bsrTranscriptionNotes::acceptIn (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching bsrTranscriptionNotes::visitStart ()" <<
-            std::endl;
+            "% ==> Launching bsrTranscriptionNotes::visitStart ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
@@ -266,14 +248,11 @@ void bsrTranscriptionNotes::acceptOut (basevisitor* v)
 
     ss <<
       "% --> End visiting bsrTranscriptionNotesElement" <<
-      "% ==> bsrTranscriptionNotes::acceptOut ()" <<
-      std::endl;
+      "% ==> bsrTranscriptionNotes::acceptOut ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -287,14 +266,11 @@ void bsrTranscriptionNotes::acceptOut (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching bsrTranscriptionNotes::visitEnd ()" <<
-            std::endl;
+            "% ==> Launching bsrTranscriptionNotes::visitEnd ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);

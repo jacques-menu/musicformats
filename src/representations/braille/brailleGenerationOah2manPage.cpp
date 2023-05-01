@@ -49,14 +49,11 @@ void brailleGenerationOah2manPage::visitStart (S_brailleOutputKindAtom& elt)
     ss <<
       std::endl <<
       ".\\\" --> Start visiting brailleOutputKindAtom" <<
-      " \"" << elt->fetchNames () << "\"" <<
-      std::endl;
+      " \"" << elt->fetchNames () << "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -86,14 +83,11 @@ void brailleGenerationOah2manPage::visitEnd (S_brailleOutputKindAtom& elt)
     ss <<
       std::endl <<
       ".\\\" --> End visiting brailleOutputKindAtom" <<
-      " \"" << elt->fetchNames () << "\"" <<
-      std::endl;
+      " \"" << elt->fetchNames () << "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }
@@ -108,14 +102,11 @@ void brailleGenerationOah2manPage::visitStart (S_brailleUTFKindAtom& elt)
     ss <<
       std::endl <<
       ".\\\" --> Start visiting brailleUTFKindAtom" <<
-      " \"" << elt->fetchNames () << "\"" <<
-      std::endl;
+      " \"" << elt->fetchNames () << "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -145,14 +136,11 @@ void brailleGenerationOah2manPage::visitEnd (S_brailleUTFKindAtom& elt)
     ss <<
       std::endl <<
       ".\\\" --> End visiting brailleUTFKindAtom" <<
-      " \"" << elt->fetchNames () << "\"" <<
-      std::endl;
+      " \"" << elt->fetchNames () << "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }
@@ -167,14 +155,11 @@ void brailleGenerationOah2manPage::visitStart (S_brailleByteOrderingKindAtom& el
     ss <<
       std::endl <<
       ".\\\" --> Start visiting brailleByteOrderingKindAtom" <<
-      " \"" << elt->fetchNames () << "\"" <<
-      std::endl;
+      " \"" << elt->fetchNames () << "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -204,14 +189,11 @@ void brailleGenerationOah2manPage::visitEnd (S_brailleByteOrderingKindAtom& elt)
     ss <<
       std::endl <<
       ".\\\" --> End visiting brailleByteOrderingKindAtom" <<
-      " \"" << elt->fetchNames () << "\"" <<
-      std::endl;
+      " \"" << elt->fetchNames () << "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }

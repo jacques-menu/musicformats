@@ -66,8 +66,7 @@ void msdl2musicxmlManPageGenerateAtom::applyValueLessAtom (std::ostream& os)
     std::stringstream ss;
 
     ss <<
-      "==> option '" << fetchNames () << "' is a msdl2musicxmlManPageGenerateAtom" <<
-      std::endl;
+      "==> option '" << fetchNames () << "' is a msdl2musicxmlManPageGenerateAtom";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -85,8 +84,7 @@ void msdl2musicxmlManPageGenerateAtom::acceptIn (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> msdl2musicxmlManPageGenerateAtom::acceptIn ()" <<
-      std::endl;
+      ".\\\" ==> msdl2musicxmlManPageGenerateAtom::acceptIn ()";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -104,8 +102,7 @@ void msdl2musicxmlManPageGenerateAtom::acceptIn (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            ".\\\" ==> Launching msdl2musicxmlManPageGenerateAtom::visitStart ()" <<
-            std::endl;
+            ".\\\" ==> Launching msdl2musicxmlManPageGenerateAtom::visitStart ()";
 
           gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
@@ -123,8 +120,7 @@ void msdl2musicxmlManPageGenerateAtom::acceptOut (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> msdl2musicxmlManPageGenerateAtom::acceptOut ()" <<
-      std::endl;
+      ".\\\" ==> msdl2musicxmlManPageGenerateAtom::acceptOut ()";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -142,8 +138,7 @@ void msdl2musicxmlManPageGenerateAtom::acceptOut (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            ".\\\" ==> Launching msdl2musicxmlManPageGenerateAtom::visitEnd ()" <<
-            std::endl;
+            ".\\\" ==> Launching msdl2musicxmlManPageGenerateAtom::visitEnd ()";
 
           gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
@@ -161,8 +156,7 @@ void msdl2musicxmlManPageGenerateAtom::browseData (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> msdl2musicxmlManPageGenerateAtom::browseData ()" <<
-      std::endl;
+      ".\\\" ==> msdl2musicxmlManPageGenerateAtom::browseData ()";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -340,8 +334,7 @@ void msdl2musicxmlManPageOahGroup::acceptIn (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> msdl2musicxmlManPageOahGroup::acceptIn ()" <<
-      std::endl;
+      ".\\\" ==> msdl2musicxmlManPageOahGroup::acceptIn ()";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -359,8 +352,7 @@ void msdl2musicxmlManPageOahGroup::acceptIn (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            ".\\\" ==> Launching msdl2musicxmlManPageOahGroup::visitStart ()" <<
-            std::endl;
+            ".\\\" ==> Launching msdl2musicxmlManPageOahGroup::visitStart ()";
 
           gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
@@ -378,8 +370,7 @@ void msdl2musicxmlManPageOahGroup::acceptOut (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> msdl2musicxmlManPageOahGroup::acceptOut ()" <<
-      std::endl;
+      ".\\\" ==> msdl2musicxmlManPageOahGroup::acceptOut ()";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -397,8 +388,7 @@ void msdl2musicxmlManPageOahGroup::acceptOut (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            ".\\\" ==> Launching msdl2musicxmlManPageOahGroup::visitEnd ()" <<
-            std::endl;
+            ".\\\" ==> Launching msdl2musicxmlManPageOahGroup::visitEnd ()";
 
           gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
@@ -416,8 +406,7 @@ void msdl2musicxmlManPageOahGroup::browseData (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> msdl2musicxmlManPageOahGroup::browseData ()" <<
-      std::endl;
+      ".\\\" ==> msdl2musicxmlManPageOahGroup::browseData ()";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -461,8 +450,7 @@ S_msdl2musicxmlManPageOahGroup createGlobalMsdl2xmlManPageOahGroupHandler (
     std::stringstream ss;
 
     ss <<
-      "Creating global msdl2musicxmlManPage OAH group" <<
-      std::endl;
+      "Creating global msdl2musicxmlManPage OAH group";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,

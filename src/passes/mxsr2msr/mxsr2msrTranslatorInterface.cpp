@@ -80,8 +80,7 @@ void populateMsrSkeletonFromMxsr (
       gTab <<
       gLanguage->passIDKindAsString (passIDKind) << ": " << passDescription <<
       std::endl <<
-      separator <<
-      std::endl;
+      separator;
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,

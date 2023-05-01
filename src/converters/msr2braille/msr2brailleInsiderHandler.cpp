@@ -88,8 +88,7 @@ Usage: msr2braille [option]* [MusicXMLFile|-] [[option]*
     ss <<
       "Initializing msr2braille insider options handler \"" <<
       fHandlerHeader <<
-      "\"" <<
-      std::endl;
+      "\"";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -153,8 +152,7 @@ void msr2brailleInsiderHandler::createTheXml2braillePrefixes ()
     std::stringstream ss;
 
     ss <<
-      "Creating the msr2braille prefixes" <<
-      std::endl;
+      "Creating the msr2braille prefixes";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -176,8 +174,7 @@ void msr2brailleInsiderHandler::createTheXml2brailleOptionGroups (
     ss <<
       "Creating the msr2braille insider option groups" <<
       fHandlerHeader <<
-      "\"" <<
-      std::endl;
+      "\"";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -278,8 +275,7 @@ void msr2brailleInsiderHandler::checkOptionsAndArguments () const
     ss <<
       "checking options and arguments from argc/argv in \"" <<
       fHandlerHeader <<
-      "\"" <<
-      std::endl;
+      "\"";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -300,8 +296,7 @@ std::string msr2brailleInsiderHandler::fetchOutputFileNameFromTheOptions () cons
     ss <<
       "Fetching the output file name from the options in OAH handler \"" <<
       fHandlerHeader <<
-      "\"" <<
-      std::endl;
+      "\"";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -559,8 +554,7 @@ void msr2brailleInsiderOahGroup::acceptIn (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> msr2brailleInsiderOahGroup::acceptIn ()" <<
-      std::endl;
+      ".\\\" ==> msr2brailleInsiderOahGroup::acceptIn ()";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -578,8 +572,7 @@ void msr2brailleInsiderOahGroup::acceptIn (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            ".\\\" ==> Launching msr2brailleInsiderOahGroup::visitStart ()" <<
-            std::endl;
+            ".\\\" ==> Launching msr2brailleInsiderOahGroup::visitStart ()";
 
           gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
@@ -597,8 +590,7 @@ void msr2brailleInsiderOahGroup::acceptOut (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> msr2brailleInsiderOahGroup::acceptOut ()" <<
-      std::endl;
+      ".\\\" ==> msr2brailleInsiderOahGroup::acceptOut ()";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -616,8 +608,7 @@ void msr2brailleInsiderOahGroup::acceptOut (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            ".\\\" ==> Launching msr2brailleInsiderOahGroup::visitEnd ()" <<
-            std::endl;
+            ".\\\" ==> Launching msr2brailleInsiderOahGroup::visitEnd ()";
 
           gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
@@ -635,8 +626,7 @@ void msr2brailleInsiderOahGroup::browseData (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> msr2brailleInsiderOahGroup::browseData ()" <<
-      std::endl;
+      ".\\\" ==> msr2brailleInsiderOahGroup::browseData ()";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -745,8 +735,7 @@ void msr2brailleInsiderOahGroup::initializeXml2brailleInsiderOahGroup ()
     ss <<
       "Initializing \"" <<
       fGroupHeader <<
-      "\" group" <<
-      std::endl;
+      "\" group";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -796,8 +785,7 @@ S_msr2brailleInsiderOahGroup createGlobalMrailleGenerationOahGroup (
     std::stringstream ss;
 
     ss <<
-      "Creating global msr2braille OAH group" <<
-      std::endl;
+      "Creating global msr2braille OAH group";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,

@@ -257,7 +257,7 @@ if (false) // JMI
 
     if (fCurrentOctaveEntryReference) {
       gLog <<
-        "'" <<
+        '\'' <<
         fCurrentOctaveEntryReference->asString () <<
         "'";
     }
@@ -354,7 +354,7 @@ void lpsr2lilypondTranslator::setCurrentOctaveEntryReferenceFromTheLilypondOah (
 
     if (fCurrentOctaveEntryReference) {
       gLog <<
-        "'" <<
+        '\'' <<
         fCurrentOctaveEntryReference->asString () <<
         "'";
     }
@@ -683,8 +683,6 @@ std::string lpsr2lilypondTranslator::lilypondOctaveInRelativeEntryMode (
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fCurrentMsrScoreClone->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -719,8 +717,6 @@ std::string lpsr2lilypondTranslator::lilypondOctaveInRelativeEntryMode (
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fCurrentMsrScoreClone->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -763,14 +759,11 @@ std::string lpsr2lilypondTranslator::lilypondOctaveInFixedEntryMode (
       ", referenceAbsoluteOctave: " <<
       msrOctaveKindAsString (referenceAbsoluteOctave) <<
       ", referenceAbsoluteOctave: " <<
-      absoluteOctavesDifference <<
-      std::endl;
+      absoluteOctavesDifference;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fCurrentMsrScoreClone->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -927,8 +920,6 @@ std::string lpsr2lilypondTranslator::stringTuningAsLilypondString (
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fCurrentMsrScoreClone->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1039,14 +1030,11 @@ std::stringstream ss;
 
       std::setw (fieldWidth) <<
       "% line " <<
-      inputLineNumber <<
-      std::endl;
+      inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fCurrentMsrScoreClone->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1058,14 +1046,11 @@ std::stringstream ss;
           gLog <<
             "notePitchAsLilypondString() 2: fCurrentOctaveEntryReference is null" <<
             " upon note " << note->asString () <<
-            ", line " << inputLineNumber <<
-            std::endl;
+            ", line " << inputLineNumber;
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             fCurrentMeasureNumber,
-//             fCurrentMsrScoreClone->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1084,14 +1069,11 @@ std::stringstream ss;
             "notePitchAsLilypondString() 3: fCurrentOctaveEntryReference is '" <<
             fCurrentOctaveEntryReference->asString () <<
             "' upon note " << note->asString () <<
-            ", line " << inputLineNumber <<
-            std::endl;
+            ", line " << inputLineNumber;
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             fCurrentMeasureNumber,
-//             fCurrentMsrScoreClone->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1322,14 +1304,11 @@ std::string lpsr2lilypondTranslator::pitchedRestAsLilypondString (
 
       std::setw (fieldWidth) <<
       "% line: " <<
-      noteInputLineNumber <<
-      std::endl;
+      noteInputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fCurrentMsrScoreClone->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1637,14 +1616,11 @@ void lpsr2lilypondTranslator::generateStemIfNeededAndUpdateCurrentStemKind (
       ", stem: " <<
       stem->asShortString () <<
       ", fCurrentStemKind: " <<
-      msrStemKindAsString (fCurrentStemKind) <<
-      std::endl;
+      msrStemKindAsString (fCurrentStemKind);
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fCurrentMsrScoreClone->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1674,8 +1650,6 @@ void lpsr2lilypondTranslator::generateStemIfNeededAndUpdateCurrentStemKind (
         gWaeHandler->waeTraceWithLocationDetails (
           __FILE__, __LINE__,
           ss.str ());
-//           fCurrentMeasureNumber,
-//           fCurrentMsrScoreClone->getScoreMeasuresNumber ());
       }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -3431,14 +3405,11 @@ void lpsr2lilypondTranslator::generateNoteArticulation (
     ss <<
       "generateNoteArticulation()" <<
       ", articulation: " << articulation->asString () <<
-      ", line " << articulation->getInputLineNumber () <<
-      std::endl;
+      ", line " << articulation->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fCurrentMsrScoreClone->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -3695,14 +3666,11 @@ void lpsr2lilypondTranslator::generateChordArticulation (
     ss <<
       "generateChordArticulation()" <<
       ", articulation: " << articulation->asString () <<
-      ", line " << articulation->getInputLineNumber () <<
-      std::endl;
+      ", line " << articulation->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fCurrentMsrScoreClone->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -4329,14 +4297,11 @@ void lpsr2lilypondTranslator::generateCodeForSpannerBeforeNote (
       " before note " <<
       note->asString () <<
       ", line " <<
-      spanner->getInputLineNumber () <<
-      std::endl;
+      spanner->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fCurrentMsrScoreClone->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -4471,14 +4436,11 @@ void lpsr2lilypondTranslator::generateCodeForSpannerAfterNote (
       " after note " <<
       note->asString () <<
       ", line " <<
-      spanner->getInputLineNumber () <<
-      std::endl;
+      spanner->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fCurrentMsrScoreClone->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -4767,14 +4729,11 @@ std::string lpsr2lilypondTranslator::singleTremoloNotesDurationAsLilypondString 
       ", singleTremoloNoteNotesDurationKind: " <<
       msrNotesDurationKindAsString (singleTremoloNoteNotesDurationKind) <<
       ", durationToUse: " <<
-      durationToUse <<
-      std::endl;
+      durationToUse;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fCurrentMsrScoreClone->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -8508,7 +8467,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrPartGroupBlock& elt)
       ss <<
         "% --> Start visiting lpsrPartGroupBlock for '" <<
         partGroup->asShortString () <<
-        "'" <<
+        '\'' <<
         ", line " << elt->getInputLineNumber () <<
       std::endl;
 
@@ -9602,13 +9561,13 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrUseVoiceCommand& elt)
       break;
 
     case msrStaffKind::kStaffKindHarmonies:
-      staffContextName = "ChordNames2"; // JMI
-      voiceContextName = "???"; // JMI
+      staffContextName = "ChordNames"; // JMI v0.9.68
+      voiceContextName = "ChordNames???"; // JMI v0.9.68
       break;
 
     case msrStaffKind::kStaffKindFiguredBass:
       staffContextName = "FiguredBass";
-      voiceContextName = "???"; // JMI
+      voiceContextName = "FiguredVoice???"; // JMI v0.9.68
       break;
 
     case msrStaffKind::kStaffKindDrum:
@@ -9619,7 +9578,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrUseVoiceCommand& elt)
 
     case msrStaffKind::kStaffKindRythmic:
       staffContextName = "RhythmicStaff";
-      voiceContextName = "Voice";
+      voiceContextName = "RhythmicVoice";
         // no "RhythmicVoice" alias exists
       break;
   } // switch
@@ -9700,14 +9659,11 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrUseVoiceCommand& elt)
       std::endl <<
       "Considering the generation of a voice transposition for part \"" <<
       partName <<
-      "\"" <<
-      std::endl;
+      "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fCurrentMsrScoreClone->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -9776,14 +9732,11 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrUseVoiceCommand& elt)
         "\"" <<
         ", part ID \"" <<
         partID <<
-        "\"" <<
-        std::endl;
+        "\"";
 
       gWaeHandler->waeTraceWithLocationDetails (
         __FILE__, __LINE__,
         ss.str ());
-//         fCurrentMeasureNumber,
-//         fCurrentMsrScoreClone->getScoreMeasuresNumber ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -10102,14 +10055,14 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrChordNamesContext& elt)
   } // switch
 
   std::string
-    contextName =
-      elt->getContextName ();
+    contextAlphabeticName =
+      elt->getContextAlphabeticName ();
 
   fLilypondCodeStream <<
 //     "\\context " << // JMI ??? v0.9.66
     lpsrContextTypeKindAsLilypondString (
       elt->getContextTypeKind ()) <<
-    " = \"" << contextName << "\"" <<
+    " = \"" << contextAlphabeticName << "\"" <<
     std::endl;
 
 /* JMI
@@ -10135,7 +10088,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrChordNamesContext& elt)
       */
 
   fLilypondCodeStream <<
-    "\\" << contextName <<
+    "\\" << contextAlphabeticName <<
     std::endl << std::endl;
 }
 
@@ -10226,13 +10179,13 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrFiguredBassContext& elt)
   } // switch
 
   std::string
-    contextName =
-      elt->getContextName ();
+    contextAlphabeticName =
+      elt->getContextAlphabeticName ();
 
   fLilypondCodeStream <<
     lpsrContextTypeKindAsLilypondString (
       elt->getContextTypeKind ()) <<
-    " = \"" << contextName << "\"" <<
+    " = \"" << contextAlphabeticName << "\"" <<
     std::endl;
 
 /* JMI
@@ -10258,7 +10211,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrFiguredBassContext& elt)
   */
 
   fLilypondCodeStream <<
-    "\\" << contextName <<
+    "\\" << contextAlphabeticName <<
     std::endl << std::endl;
 }
 
@@ -11238,14 +11191,11 @@ void lpsr2lilypondTranslator::visitStart (S_msrPart& elt)
     ss <<
 //       std::endl <<
       "<!--=== part \"" << partCombinedName << "\"" <<
-      ", line " << elt->getInputLineNumber () << " ===-->" <<
-      std::endl;
+      ", line " << elt->getInputLineNumber () << " ===-->";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fCurrentMsrScoreClone->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -11537,14 +11487,11 @@ void lpsr2lilypondTranslator::visitStart (S_msrVoice& elt)
     ss <<
 //       std::endl <<
       "<!--=== voice \"" << elt->getVoiceAlphabeticName () << "\"" <<
-      ", line " << elt->getInputLineNumber () << " ===-->" <<
-      std::endl;
+      ", line " << elt->getInputLineNumber () << " ===-->";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fCurrentMsrScoreClone->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -11693,14 +11640,11 @@ void lpsr2lilypondTranslator::visitStart (S_msrVoice& elt)
       ss <<
         std::endl <<
         "Centering boxed LilyPond measure numbers" <<
-        ", line " << elt->getInputLineNumber () << " ===-->" <<
-        std::endl;
+        ", line " << elt->getInputLineNumber () << " ===-->";
 
       gWaeHandler->waeTraceWithLocationDetails (
         __FILE__, __LINE__,
         ss.str ());
-//         fCurrentMeasureNumber,
-//         fCurrentMsrScoreClone->getScoreMeasuresNumber ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -11912,7 +11856,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrVoiceStaffChange& elt)
 
       ss <<
         "% --> Start visiting msrVoiceStaffChange '" <<
-        elt->asString () << "'" <<
+        elt->asString () << '\'' <<
         ", line " << elt->getInputLineNumber () <<
       std::endl;
 
@@ -11987,7 +11931,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrHarmony& elt)
       ss <<
         "% --> Start visiting msrHarmony '" <<
         elt->asString () <<
-        "'" <<
+        '\'' <<
         ", fOnGoingNotesStack.size (): " <<
         fOnGoingNotesStack.size () <<
         ", fOnGoingChord: " <<
@@ -12017,14 +11961,11 @@ void lpsr2lilypondTranslator::visitStart (S_msrHarmony& elt)
       ss <<
         "%{ fOnGoingNotesStack.size () S_msrHarmony JMI " <<
         elt->asString () <<
-        " %}" <<
-        std::endl;
+        " %}";
 
       gWaeHandler->waeTraceWithLocationDetails (
         __FILE__, __LINE__,
         ss.str ());
-//         fCurrentMeasureNumber,
-//         fCurrentMsrScoreClone->getScoreMeasuresNumber ());
     }
 #endif // MF_TRACE_IS_ENABLED
 */
@@ -12118,7 +12059,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrFiguredBass& elt)
       ss <<
         "% --> Start visiting msrFiguredBass '" <<
         elt->asString () <<
-        "'" <<
+        '\'' <<
         ", fOnGoingNotesStack.size (): " <<
         fOnGoingNotesStack.size () <<
         ", fOnGoingChord: " <<
@@ -12214,7 +12155,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrBassFigure& elt)
       ss <<
         "% --> Start visiting msrBassFigure '" <<
         elt->asString () <<
-        "'" <<
+        '\'' <<
         ", line " << elt->getInputLineNumber () <<
       std::endl;
 
@@ -12348,7 +12289,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrFiguredBass& elt)
       ss <<
         "% --> End visiting msrFiguredBass '" <<
         elt->asString () <<
-        "'" <<
+        '\'' <<
         ", line " << inputLineNumber <<
         std::endl;
 
@@ -12416,7 +12357,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrSegment& elt)
 
       ss <<
         "%--> Start visiting msrSegment '" <<
-        elt->getSegmentAbsoluteNumber () << "'" <<
+        elt->getSegmentAbsoluteNumber () << '\'' <<
         std::endl;
 
       if (traceLpsrVisitors) {
@@ -12462,7 +12403,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrSegment& elt)
 
       ss <<
         "%--> End visiting msrSegment '" <<
-        elt->getSegmentAbsoluteNumber () << "'" <<
+        elt->getSegmentAbsoluteNumber () << '\'' <<
         std::endl;
 
       if (traceLpsrVisitors) {
@@ -12677,14 +12618,11 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
       ", measurePuristNumber: " << measurePuristNumber <<
       ", fOnGoingMultipleFullBarRests: " << fOnGoingMultipleFullBarRests <<
       ", line " << inputLineNumber <<
-      " ===-->" <<
-      std::endl;
+      " ===-->";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fCurrentMsrScoreClone->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -12813,7 +12751,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
           upbeatNotesDuration =
             wholeNotesAsLilypondString (
               inputLineNumber,
-              elt->getMeasureWholeNotes ());
+              elt->getMeasureCurrentWholeNotesDuration ());
 
         fLilypondCodeStream <<
           "\\partial " << upbeatNotesDuration <<
@@ -12832,7 +12770,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
           upbeatNotesDuration =
             wholeNotesAsLilypondString (
               inputLineNumber,
-              elt->getMeasureWholeNotes ());
+              elt->getMeasureCurrentWholeNotesDuration ());
 
         fLilypondCodeStream <<
           "\\partial " << upbeatNotesDuration <<
@@ -12851,7 +12789,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
           upbeatNotesDuration =
             wholeNotesAsLilypondString (
               inputLineNumber,
-              elt->getMeasureWholeNotes ());
+              elt->getMeasureCurrentWholeNotesDuration ());
 
         fLilypondCodeStream <<
           "\\partial " << upbeatNotesDuration <<
@@ -12867,17 +12805,17 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
     case msrMeasureKind::kMeasureKindIncompleteNextMeasureAfterHooklessEnding:
       {
         msrWholeNotes
-          measureWholeNotes =
-            elt->getMeasureWholeNotes ();
+          measureCurrentWholeNotesDuration =
+            elt->getMeasureCurrentWholeNotesDuration ();
 
         msrWholeNotes
-          fullMeasureWholeNotes =
-            elt->getFullMeasureWholeNotes ();
+          fullMeasureCurrentWholeNotesDuration =
+            elt->getFullMeasureCurrentWholeNotesDuration ();
 
         // we should set the score measure whole notes in this case
         mfRational
-          ratioToFullMeasureWholeNotes =
-            measureWholeNotes / fullMeasureWholeNotes;
+          ratioToFullMeasureCurrentWholeNotesDuration =
+            measureCurrentWholeNotesDuration / fullMeasureCurrentWholeNotesDuration;
 
 #ifdef MF_TRACE_IS_ENABLED
         if (gTraceOahGroup->getTraceMeasuresDetails ()) {
@@ -12890,21 +12828,21 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
             ", line: " << inputLineNumber <<
             std::endl <<
             std::setw (fieldWidth) <<
-            "% measureWholeNotes: " <<
-            measureWholeNotes.asString () <<
+            "% measureCurrentWholeNotesDuration: " <<
+            measureCurrentWholeNotesDuration.asString () <<
             std::endl <<
             std::setw (fieldWidth) <<
-            "% fullMeasureWholeNotes: " <<
-            fullMeasureWholeNotes.asString () <<
+            "% fullMeasureCurrentWholeNotesDuration: " <<
+            fullMeasureCurrentWholeNotesDuration.asString () <<
             std::endl <<
             std::setw (fieldWidth) <<
-            "% ratioToFullMeasureWholeNotes: " <<
-            ratioToFullMeasureWholeNotes.asString () <<
+            "% ratioToFullMeasureCurrentWholeNotesDuration: " <<
+            ratioToFullMeasureCurrentWholeNotesDuration.asString () <<
             std::endl << std::endl;
         }
 #endif // MF_TRACE_IS_ENABLED
 
-        if (ratioToFullMeasureWholeNotes == msrWholeNotes (1, 1)) {
+        if (ratioToFullMeasureCurrentWholeNotesDuration == msrWholeNotes (1, 1)) {
           std::stringstream ss;
 
           ss <<
@@ -12923,7 +12861,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
           /* JMI
           fLilypondCodeStream <<
             "\\set Score.measureLength = #(ly:make-moment " <<
-            measureWholeNotes.toString () <<
+            measureCurrentWholeNotesDuration.toString () <<
             ")" <<
             std::endl;
     */
@@ -12993,7 +12931,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
                 getStaffUpLinkToPart ();
 
         msrWholeNotes
-          measureWholeNotes =
+          measureCurrentWholeNotesDuration =
             measurePart->
               fetchPartMeasuresWholeNotessVectorAt (
                 inputLineNumber,
@@ -13005,21 +12943,21 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
           case msrVoiceKind::kVoiceKindRegular:
           case msrVoiceKind::kVoiceKindDynamics:
             fLilypondCodeStream <<
-              "s";
+              "R";
             break;
 
           case msrVoiceKind::kVoiceKindHarmonies:
           case msrVoiceKind::kVoiceKindFiguredBass:
             fLilypondCodeStream <<
-              "s";
+              "R";
             break;
         } // switch
 
-        // generate the duration of the skip
+        // generate the duration of the skip from the full measure whole notes JMI v0.9.68
         fLilypondCodeStream <<
           wholeNotesAsLilypondString (
             inputLineNumber,
-            measureWholeNotes);
+            elt->getFullMeasureCurrentWholeNotesDuration ());
 
         if (gGlobalLpsr2lilypondOahGroup->getInputLineNumbers ()) {
           // generate information and line number as a comment
@@ -13035,14 +12973,8 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
             " %{ kMeasureKindMusicallyEmpty %}";
         }
 
-        // generate a bar check if this makes the measure full
-        if (
-          measureWholeNotes
-            ==
-          elt->getFullMeasureWholeNotes ()
-        ) {
-          fLilypondCodeStream << " | " << std::endl;
-        }
+        // generate a bar check
+        fLilypondCodeStream << " | " << std::endl;
       }
       break;
   } // switch
@@ -13123,17 +13055,14 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMeasure& elt)
     ss <<
       ", fCurrentMeasureNumber \"" << fCurrentMeasureNumber << "\"" <<
       ", measureEndRegularKind: " << measureEndRegularKind <<
-      ", measurePuristNumber: " << measurePuristNumber << "'" <<
+      ", measurePuristNumber: " << measurePuristNumber << '\'' <<
       ", fOnGoingMultipleFullBarRests: " << fOnGoingMultipleFullBarRests <<
       ", line " << inputLineNumber <<
-      " ===-->" <<
-      std::endl;
+      " ===-->";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fCurrentMsrScoreClone->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -13148,14 +13077,11 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMeasure& elt)
         fPendingTrillSpannerForStop->getSpannerKind () <<
         " upon the end of measure " <<
         fCurrentMeasureNumber <<
-        ", line " << inputLineNumber <<
-        std::endl;
+        ", line " << inputLineNumber;
 
       gWaeHandler->waeTraceWithLocationDetails (
         __FILE__, __LINE__,
         ss.str ());
-//         fCurrentMeasureNumber,
-//         fCurrentMsrScoreClone->getScoreMeasuresNumber ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -13503,7 +13429,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrSyllable& elt)
       ss <<
         "% --> Start visiting msrSyllable '" <<
         elt->asString () <<
-        "'" <<
+        '\'' <<
         ", line " << elt->getInputLineNumber () <<
       std::endl;
 
@@ -13764,7 +13690,9 @@ void lpsr2lilypondTranslator::visitStart (S_msrSyllable& elt)
             case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsExplicit:
               // generate a lyric extender, i.e. a melisma, after this syllable ??? JMI
               fLilypondCodeStream <<
-                "__ ";
+                "__ %{foo 13770%} ";
+//               fLilypondCodeStream <<
+//                 "\\skip4 "; // JMI v0.9.68
               break;
           } // switch
 #ifdef MF_TRACE_IS_ENABLED
@@ -13846,7 +13774,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrSyllable& elt)
       ss <<
         "% --> End visiting msrSyllable '" <<
         elt->asString () <<
-        "'" <<
+        '\'' <<
         ", line " << elt->getInputLineNumber () <<
       std::endl;
 
@@ -13881,7 +13809,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrClefKeyTimeSignatureGroup& elt)
       ss <<
         "% --> Start visiting msrClefKeyTimeSignatureGroup '" <<
         elt->asString () <<
-        "'" <<
+        '\'' <<
         ", line " << elt->getInputLineNumber () <<
       std::endl;
 
@@ -13915,7 +13843,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrClefKeyTimeSignatureGroup& elt)
       ss <<
         "% --> End visiting msrClefKeyTimeSignatureGroup '" <<
         elt->asString () <<
-        "'" <<
+        '\'' <<
         ", line " << elt->getInputLineNumber () <<
       std::endl;
 
@@ -13950,7 +13878,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrClef& elt)
       ss <<
         "% --> Start visiting msrClef '" <<
         elt->asString () <<
-        "'" <<
+        '\'' <<
         ", line " << elt->getInputLineNumber () <<
       std::endl;
 
@@ -14134,7 +14062,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrClef& elt)
       ss <<
         "% --> End visiting msrClef '" <<
         elt->asString () <<
-        "'" <<
+        '\'' <<
         ", line " << elt->getInputLineNumber () <<
       std::endl;
 
@@ -14169,7 +14097,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrKey& elt)
       ss <<
         "% --> Start visiting msrKey '" <<
         elt->asString () <<
-        "'" <<
+        '\'' <<
         ", line " << elt->getInputLineNumber () <<
       std::endl;
 
@@ -17423,8 +17351,6 @@ void lpsr2lilypondTranslator::generateNoteBeams (
         gWaeHandler->waeTraceWithLocationDetails (
           __FILE__, __LINE__,
           ss.str ());
-//           fCurrentMeasureNumber,
-//           fCurrentMsrScoreClone->getScoreMeasuresNumber ());
       }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -17498,13 +17424,7 @@ void lpsr2lilypondTranslator::generateNoteSlurDirection (
   if (noteSlurs.size ()) {
     std::list<S_msrSlur>::const_iterator i;
 
-    for (
-      i=noteSlurs.begin ();
-      i!=noteSlurs.end ();
-      ++i
-    ) {
-      S_msrSlur slur = (*i);
-
+    for (S_msrSlur slur : noteSlurs) {
  #ifdef MF_TRACE_IS_ENABLED
       if (gTraceOahGroup->getTraceSlurs ()) {
         std::stringstream ss;
@@ -17519,8 +17439,6 @@ void lpsr2lilypondTranslator::generateNoteSlurDirection (
         gWaeHandler->waeTraceWithLocationDetails (
           __FILE__, __LINE__,
           ss.str ());
-//           fCurrentMeasureNumber,
-//           fCurrentMsrScoreClone->getScoreMeasuresNumber ());
       }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -17568,8 +17486,6 @@ void lpsr2lilypondTranslator::generateNoteSlurs (
         gWaeHandler->waeTraceWithLocationDetails (
           __FILE__, __LINE__,
           ss.str ());
-//           fCurrentMeasureNumber,
-//           fCurrentMsrScoreClone->getScoreMeasuresNumber ());
       }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -17597,10 +17513,10 @@ void lpsr2lilypondTranslator::generateNoteSlurs (
 #endif // MF_TRACE_IS_ENABLED
 
           if (noteSlursSize == 1) {
-            fLilypondCodeStream << "() ";
+            fLilypondCodeStream << "( "; // JMI v0.9.68
           }
           else {
-            fLilypondCodeStream << "\\=" << slur->getSlurNumber () << "() ";
+            fLilypondCodeStream << "\\=" << slur->getSlurNumber () << "( "; // JMI v0.9.68
           }
 
           if (gGlobalLpsr2lilypondOahGroup->getInputLineNumbers ()) {
@@ -18563,14 +18479,11 @@ void lpsr2lilypondTranslator::visitStart (S_msrNote& elt)
       fOnGoingChordGraceNotesGroupLink <<
       ", fOnGoingMultipleFullBarRests: " <<
       fOnGoingMultipleFullBarRests <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fCurrentMsrScoreClone->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -18840,6 +18753,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrNote& elt)
 
   // generate things after the note
   generateAfterNoteSpannersIfAny (elt);
+
   generateCodeRightAfterNote (elt);
 
   // has the note an octave shift up or down?
@@ -19116,14 +19030,8 @@ void lpsr2lilypondTranslator::generateNoteSlurLineTypes (
 
   if (noteSlurs.size ()) {
     std::list<S_msrSlur>::const_iterator i;
-    for (
-      i=noteSlurs.begin ();
-      i!=noteSlurs.end ();
-      ++i
-    ) {
-      S_msrSlur slur = (*i);
-
-      /*
+    for (S_msrSlur slur : noteSlurs) {
+      /* JMI v0.9.68
       \slurDashed, \slurDotted, \slurHalfDashed,
       \slurHalfSolid, \slurDashPattern, \slurSolid
       */
@@ -23605,7 +23513,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrRepeatEnding& elt)
     fLilypondCodeStream <<
       "% ===**** fRepeatDescrsStack.back (): '" <<
       fRepeatDescrsStack.back ()->asString () <<
-      "'" <<
+      '\'' <<
       std::endl;
 
       if (traceLpsrVisitors) {
@@ -24159,14 +24067,11 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMultipleFullBarRests& elt)
     ss <<
       std::endl <<
       "--> fRemainingMultipleFullBarRestsNumber: " <<
-      fRemainingMultipleFullBarRestsNumber <<
-      std::endl;
+      fRemainingMultipleFullBarRestsNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fCurrentMsrScoreClone->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -24182,14 +24087,11 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMultipleFullBarRests& elt)
     ss <<
       std::endl <<
       "--> multipleFullBarRestsMeasureSoundingNotes: " <<
-      multipleFullBarRestsMeasureSoundingNotes <<
-      std::endl;
+      multipleFullBarRestsMeasureSoundingNotes;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fCurrentMsrScoreClone->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -24208,14 +24110,11 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMultipleFullBarRests& elt)
     ss <<
       std::endl <<
       "--> fullBarRestsWholeNoteAsLilypondString: " <<
-      fullBarRestsWholeNoteAsLilypondString <<
-      std::endl;
+      fullBarRestsWholeNoteAsLilypondString;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       fCurrentMsrScoreClone->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 

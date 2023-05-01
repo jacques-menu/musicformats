@@ -50,14 +50,11 @@ void bsrElement::acceptIn (basevisitor* v)
 
     ss <<
       "% --> End visiting bsrTranscriptionNotesElement" <<
-      "% ==> bsrElement::acceptIn ()" <<
-      std::endl;
+      "% ==> bsrElement::acceptIn ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -71,14 +68,11 @@ void bsrElement::acceptIn (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching bsrElement::visitStart ()" <<
-            std::endl;
+            "% ==> Launching bsrElement::visitStart ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
@@ -93,14 +87,11 @@ void bsrElement::acceptOut (basevisitor* v)
 
     ss <<
       "% --> End visiting bsrTranscriptionNotesElement" <<
-      "% ==> bsrElement::acceptOut ()" <<
-      std::endl;
+      "% ==> bsrElement::acceptOut ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -114,14 +105,11 @@ void bsrElement::acceptOut (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching bsrElement::visitEnd ()" <<
-            std::endl;
+            "% ==> Launching bsrElement::visitEnd ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);

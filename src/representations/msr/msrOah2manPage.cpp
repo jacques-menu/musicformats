@@ -47,14 +47,11 @@ void msrOah2manPage::visitStart (S_msrRenamePartAtom& elt)
     ss <<
       std::endl <<
       ".\\\" --> Start visiting msrRenamePartAtom" <<
-      " \"" << elt->fetchNames () << "\"" <<
-      std::endl;
+      " \"" << elt->fetchNames () << "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 /*
@@ -85,14 +82,11 @@ void msrOah2manPage::visitEnd (S_msrRenamePartAtom& elt)
     ss <<
       std::endl <<
       ".\\\" --> End visiting msrRenamePartAtom" <<
-      " \"" << elt->fetchNames () << "\"" <<
-      std::endl;
+      " \"" << elt->fetchNames () << "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }
@@ -107,14 +101,11 @@ void msrOah2manPage::visitStart (S_msrIgnorePartAtom& elt)
     ss <<
       std::endl <<
       ".\\\" --> Start visiting msrIgnorePartAtom" <<
-      " \"" << elt->fetchNames () << "\"" <<
-      std::endl;
+      " \"" << elt->fetchNames () << "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 /*
@@ -145,14 +136,11 @@ void msrOah2manPage::visitEnd (S_msrIgnorePartAtom& elt)
     ss <<
       std::endl <<
       ".\\\" --> End visiting msrIgnorePartAtom" <<
-      " \"" << elt->fetchNames () << "\"" <<
-      std::endl;
+      " \"" << elt->fetchNames () << "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }
@@ -167,14 +155,11 @@ void msrOah2manPage::visitStart (S_msrKeepPartAtom& elt)
     ss <<
       std::endl <<
       ".\\\" --> Start visiting msrKeepPartAtom" <<
-      " \"" << elt->fetchNames () << "\"" <<
-      std::endl;
+      " \"" << elt->fetchNames () << "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 /*
@@ -205,14 +190,11 @@ void msrOah2manPage::visitEnd (S_msrKeepPartAtom& elt)
     ss <<
       std::endl <<
       ".\\\" --> End visiting msrKeepPartAtom" <<
-      " \"" << elt->fetchNames () << "\"" <<
-      std::endl;
+      " \"" << elt->fetchNames () << "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }
@@ -227,14 +209,11 @@ void msrOah2manPage::visitStart (S_msrPitchesLanguageAtom& elt)
     ss <<
       std::endl <<
       ".\\\" --> Start visiting msrPitchesLanguageAtom" <<
-      " \"" << elt->fetchNames () << "\"" <<
-      std::endl;
+      " \"" << elt->fetchNames () << "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 /*
@@ -265,14 +244,11 @@ void msrOah2manPage::visitEnd (S_msrPitchesLanguageAtom& elt)
     ss <<
       std::endl <<
       ".\\\" --> End visiting msrPitchesLanguageAtom" <<
-      " \"" << elt->fetchNames () << "\"" <<
-      std::endl;
+      " \"" << elt->fetchNames () << "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }

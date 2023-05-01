@@ -249,18 +249,19 @@ class EXP msrPart : public msrPartGroupElement
                           getPartStaveNumbersToStavesMap () const
                               { return fPartStaveNumbersToStavesMap; }
 
-    // part measure position
+    // part drawing measure position
 
     void                  setPartDrawingMeasurePosition (
-                            int             inputLineNumber,
+                            int                  inputLineNumber,
                             const msrWholeNotes& measurePosition);
 
     void                  incrementPartDrawingMeasurePosition (
-                            int             inputLineNumber,
-                            const msrWholeNotes& wholeNotes);
+                            int                  inputLineNumber,
+                            const msrWholeNotes& wholeNotesDelta);
+
     void                  decrementPartDrawingMeasurePosition (
-                            int             inputLineNumber,
-                            const msrWholeNotes& wholeNotes);
+                            int                  inputLineNumber,
+                            const msrWholeNotes& wholeNotesDelta);
 
     msrWholeNotes         getPartDrawingMeasurePosition () const
                               { return fPartDrawingMeasurePosition; }
@@ -550,12 +551,12 @@ class EXP msrPart : public msrPartGroupElement
                             const S_msrVoice&           graceNotesGroupOriginVoice,
                             const S_msrGraceNotesGroup& skipGraceNotesGroup);
 
-    // backup
-
-    void                  handleBackupInPart (
-                            int             inputLineNumber,
-                            const msrWholeNotes& backupStepLength);
-
+//     // backup
+//
+//     void                  handleBackupInPart (
+//                             int             inputLineNumber,
+//                             const msrWholeNotes& backupStepLength);
+//
   public:
 
     // visitors

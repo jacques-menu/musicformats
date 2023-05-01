@@ -105,14 +105,11 @@ void msrTie::acceptIn (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrTie::acceptIn ()" <<
-      std::endl;
+      "% ==> msrTie::acceptIn ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -126,14 +123,11 @@ void msrTie::acceptIn (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrTie::visitStart ()" <<
-            std::endl;
+            "% ==> Launching msrTie::visitStart ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
@@ -147,14 +141,11 @@ void msrTie::acceptOut (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrTie::acceptOut ()" <<
-      std::endl;
+      "% ==> msrTie::acceptOut ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -168,14 +159,11 @@ void msrTie::acceptOut (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrTie::visitEnd ()" <<
-            std::endl;
+            "% ==> Launching msrTie::visitEnd ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif        
         p->visitEnd (elem);

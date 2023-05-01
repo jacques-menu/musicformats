@@ -318,8 +318,7 @@ void mxsr2msrSkeletonBuilder::visitStart ( S_figured_bass& elt )
 		ss <<
       "--> Start visiting S_figured_bass" <<
       ", figuredBassVoicesCounter = " << fFiguredBassVoicesCounter <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -420,8 +419,7 @@ void mxsr2msrTranslator::visitStart ( S_figured_bass& elt )
 
 		ss <<
       "--> Start visiting S_figured_bass" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -492,8 +490,7 @@ void mxsr2msrTranslator::visitEnd ( S_figured_bass& elt )
 
 		ss <<
       "--> End visiting S_figured_bass" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -508,8 +505,7 @@ void mxsr2msrTranslator::visitEnd ( S_figured_bass& elt )
 
     ss <<
       "Creating a figured bass" <<
-      ", line " << inputLineNumber << ":" <<
-      std::endl;
+      ", line " << inputLineNumber << ":";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -708,7 +704,7 @@ void mxsr2msrTranslator::handlePendingFiguredBasses (
 %          harmony->asString () <<
 %          "' from note " << note->asString () <<
 %          " to chord '" << chord->asString () <<
-%          "'" <<
+%          '\'' <<
 %          std::endl;
 %
 %      gWaeHandler->waeTraceWithoutLocationDetails (
@@ -775,10 +771,9 @@ void msr2msrTranslator::visitStart (S_msrFiguredBass& elt)
     ss <<
       "--> Start visiting msrFiguredBass '" <<
       elt->asString () <<
-      "'" <<
+      '\'' <<
       ", fOnGoingFiguredBassVoice = " << fOnGoingFiguredBassVoice <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -851,9 +846,8 @@ void msr2msrTranslator::visitEnd (S_msrFiguredBass& elt)
     ss <<
       "--> End visiting msrFiguredBass '" <<
       elt->asString () <<
-      "'" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      '\'' <<
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -881,10 +875,9 @@ void msr2lpsrTranslator::visitStart (S_msrFiguredBass& elt)
     ss <<
       "--> Start visiting msrFiguredBass '" <<
       elt->asString () <<
-      "'" <<
+      '\'' <<
       ", fOnGoingFiguredBassVoice = " << fOnGoingFiguredBassVoice <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -957,9 +950,8 @@ void msr2lpsrTranslator::visitEnd (S_msrFiguredBass& elt)
     ss <<
       "--> End visiting msrFiguredBass '" <<
       elt->asString () <<
-      "'" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      '\'' <<
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -992,10 +984,9 @@ void msr2lpsrTranslator::visitStart (S_msrFiguredBass& elt)
     ss <<
       "--> Start visiting msrFiguredBass '" <<
       elt->asString () <<
-      "'" <<
+      '\'' <<
       ", fOnGoingFiguredBassVoice = " << fOnGoingFiguredBassVoice <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,

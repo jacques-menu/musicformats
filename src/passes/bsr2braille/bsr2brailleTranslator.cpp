@@ -56,14 +56,11 @@ bsr2brailleTranslator::bsr2brailleTranslator (
         gGlobalBrailleGenerationOahGroup->getBrailleOutputKind ()) <<
       ", gGlobalBrailleGenerationOahGroup->getByteOrderingKind (): " <<
       bsrByteOrderingKindAsString (
-        gGlobalBrailleGenerationOahGroup->getByteOrderingKind ()) <<
-      std::endl;
+        gGlobalBrailleGenerationOahGroup->getByteOrderingKind ());
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -154,14 +151,11 @@ void bsr2brailleTranslator::visitStart (S_bsrScore& elt)
     ss <<
       "% --> End visiting bsrTranscriptionNotesElement" <<
       "% --> Start visiting bsrScore" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }
@@ -175,14 +169,11 @@ void bsr2brailleTranslator::visitEnd (S_bsrScore& elt)
     ss <<
       "% --> End visiting bsrTranscriptionNotesElement" <<
       "% --> End visiting bsrScore" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }
@@ -197,14 +188,11 @@ void bsr2brailleTranslator::visitStart (S_bsrSpaces& elt)
     ss <<
       "% --> End visiting bsrTranscriptionNotesElement" <<
       "% --> Start visiting bsrSpaces" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -230,14 +218,11 @@ void bsr2brailleTranslator::visitEnd (S_bsrSpaces& elt)
     ss <<
       "% --> End visiting bsrTranscriptionNotesElement" <<
       "% --> End visiting bsrSpaces" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }
@@ -252,14 +237,11 @@ void bsr2brailleTranslator::visitStart (S_bsrBarLine& elt)
     ss <<
       "% --> End visiting bsrTranscriptionNotesElement" <<
       "% --> Start visiting bsrBarLine" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -277,14 +259,11 @@ void bsr2brailleTranslator::visitStart (S_bsrTranscriptionNotes& elt)
     ss <<
       "% --> End visiting bsrTranscriptionNotesElement" <<
       "% --> Start visiting S_bsrTranscriptionNotes" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }
@@ -298,14 +277,11 @@ void bsr2brailleTranslator::visitEnd (S_bsrTranscriptionNotes& elt)
     ss <<
       "% --> End visiting bsrTranscriptionNotesElement" <<
       "% --> End visiting S_bsrTranscriptionNotes" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }
@@ -320,14 +296,11 @@ void bsr2brailleTranslator::visitStart (S_bsrTranscriptionNotesElement& elt)
     ss <<
       "% --> End visiting bsrTranscriptionNotesElement" <<
       "% --> Start visiting bsrTranscriptionNotesElement" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -343,14 +316,11 @@ void bsr2brailleTranslator::visitEnd (S_bsrTranscriptionNotesElement& elt)
 
     ss <<
       "% --> End visiting bsrTranscriptionNotesElement" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }
@@ -366,15 +336,12 @@ void bsr2brailleTranslator::visitStart (S_bsrPage& elt)
       "% --> End visiting bsrTranscriptionNotesElement" <<
       "% --> Start visiting bsrPage '" <<
       elt->asString () <<
-      "'" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      '\'' <<
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }
@@ -389,15 +356,12 @@ void bsr2brailleTranslator::visitEnd (S_bsrPage& elt)
       "% --> End visiting bsrTranscriptionNotesElement" <<
       "% --> End visiting bsrPage '" <<
       elt->asString () <<
-      "'" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      '\'' <<
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -416,15 +380,12 @@ void bsr2brailleTranslator::visitStart (S_bsrPageElement& elt)
       "% --> End visiting bsrTranscriptionNotesElement" <<
       "% --> Start visiting bsrPageElement '" <<
       elt->asString () <<
-      "'" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      '\'' <<
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }
@@ -439,15 +400,12 @@ void bsr2brailleTranslator::visitEnd (S_bsrPageElement& elt)
       "% --> End visiting bsrTranscriptionNotesElement" <<
       "% --> End visiting bsrPageElement '" <<
       elt->asString () <<
-      "'" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      '\'' <<
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }
@@ -463,15 +421,12 @@ void bsr2brailleTranslator::visitStart (S_bsrPagination& elt)
       "% --> End visiting bsrTranscriptionNotesElement" <<
       "% --> Start visiting bsrPagination '" <<
       elt->asString () <<
-      "'" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      '\'' <<
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -489,15 +444,12 @@ void bsr2brailleTranslator::visitEnd (S_bsrPagination& elt)
       "% --> End visiting bsrTranscriptionNotesElement" <<
       "% --> End visiting bsrPagination '" <<
       elt->asString () <<
-      "'" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      '\'' <<
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }
@@ -513,15 +465,12 @@ void bsr2brailleTranslator::visitStart (S_bsrPageHeading& elt)
       "% --> End visiting bsrTranscriptionNotesElement" <<
       "% --> Start visiting bsrPageHeading '" <<
       elt->asString () <<
-      "'" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      '\'' <<
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -539,15 +488,12 @@ void bsr2brailleTranslator::visitEnd (S_bsrPageHeading& elt)
       "% --> End visiting bsrTranscriptionNotesElement" <<
       "% --> End visiting bsrPageHeading '" <<
       elt->asString () <<
-      "'" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      '\'' <<
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }
@@ -563,15 +509,12 @@ void bsr2brailleTranslator::visitStart (S_bsrMusicHeading& elt)
       "% --> End visiting bsrTranscriptionNotesElement" <<
       "% --> Start visiting bsrMusicHeading '" <<
       elt->asString () <<
-      "'" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      '\'' <<
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -609,15 +552,12 @@ void bsr2brailleTranslator::visitEnd (S_bsrMusicHeading& elt)
       "% --> End visiting bsrTranscriptionNotesElement" <<
       "% --> End visiting bsrMusicHeading '" <<
       elt->asString () <<
-      "'" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      '\'' <<
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -626,14 +566,11 @@ void bsr2brailleTranslator::visitEnd (S_bsrMusicHeading& elt)
     std::stringstream ss;
 
     ss <<
-      "Generating an EOL after S_bsrMusicHeading" <<
-      std::endl;
+      "Generating an EOL after S_bsrMusicHeading";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -653,15 +590,12 @@ void bsr2brailleTranslator::visitStart (S_bsrFootNotes& elt)
       "% --> End visiting bsrTranscriptionNotesElement" <<
       "% --> Start visiting bsrFootNotes '" <<
       elt->asString () <<
-      "'" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      '\'' <<
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -681,15 +615,12 @@ void bsr2brailleTranslator::visitEnd (S_bsrFootNotes& elt)
       "% --> End visiting bsrTranscriptionNotesElement" <<
       "% --> End visiting bsrFootNotes '" <<
       elt->asString () <<
-      "'" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      '\'' <<
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }
@@ -705,15 +636,12 @@ void bsr2brailleTranslator::visitStart (S_bsrLine& elt)
       "% --> End visiting bsrTranscriptionNotesElement" <<
       "% --> Start visiting bsrLine '" <<
       elt->asString () <<
-      "'" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      '\'' <<
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }
@@ -728,15 +656,12 @@ void bsr2brailleTranslator::visitEnd (S_bsrLine& elt)
       "% --> End visiting bsrTranscriptionNotesElement" <<
       "% --> End visiting bsrLine '" <<
       elt->asString () <<
-      "'" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      '\'' <<
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }
@@ -752,15 +677,12 @@ void bsr2brailleTranslator::visitStart (S_bsrLineContents& elt)
       "% --> End visiting bsrTranscriptionNotesElement" <<
       "% --> Start visiting bsrLineContents '" <<
       elt->asString () <<
-      "'" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      '\'' <<
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -778,15 +700,12 @@ void bsr2brailleTranslator::visitEnd (S_bsrLineContents& elt)
       "% --> End visiting bsrTranscriptionNotesElement" <<
       "% --> End visiting bsrLineContents '" <<
       elt->asString () <<
-      "'" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      '\'' <<
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -795,14 +714,11 @@ void bsr2brailleTranslator::visitEnd (S_bsrLineContents& elt)
     std::stringstream ss;
 
     ss <<
-      "Generating an EOL after S_bsrLineContents" <<
-      std::endl;
+      "Generating an EOL after S_bsrLineContents";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -825,15 +741,12 @@ void bsr2brailleTranslator::visitStart (S_bsrMeasure& elt)
       "% --> End visiting bsrTranscriptionNotesElement" <<
       "% --> Start visiting bsrMeasure '" <<
       elt->asString () <<
-      "'" <<
-      ", line " << fCurrentMeasureNumber <<
-      std::endl;
+      '\'' <<
+      ", line " << fCurrentMeasureNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }
@@ -848,15 +761,12 @@ void bsr2brailleTranslator::visitEnd (S_bsrMeasure& elt)
       "% --> End visiting bsrTranscriptionNotesElement" <<
       "% --> End visiting bsrMeasure '" <<
       elt->asString () <<
-      "'" <<
-      ", line " << fCurrentMeasureNumber <<
-      std::endl;
+      '\'' <<
+      ", line " << fCurrentMeasureNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }
@@ -872,15 +782,12 @@ void bsr2brailleTranslator::visitStart (S_bsrNumber& elt)
       "% --> End visiting bsrTranscriptionNotesElement" <<
       "% --> Start visiting bsrNumber '" <<
       elt->asString () <<
-      "'" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      '\'' <<
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -898,15 +805,12 @@ void bsr2brailleTranslator::visitEnd (S_bsrNumber& elt)
       "% --> End visiting bsrTranscriptionNotesElement" <<
       "% --> End visiting bsrNumber '" <<
       elt->asString () <<
-      "'" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      '\'' <<
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }
@@ -922,15 +826,12 @@ void bsr2brailleTranslator::visitStart (S_bsrWords& elt)
       "% --> End visiting bsrTranscriptionNotesElement" <<
       "% --> Start visiting bsrWords '" <<
       elt->asString () <<
-      "'" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      '\'' <<
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -948,15 +849,12 @@ void bsr2brailleTranslator::visitEnd (S_bsrWords& elt)
       "% --> End visiting bsrTranscriptionNotesElement" <<
       "% --> End visiting bsrWords '" <<
       elt->asString () <<
-      "'" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      '\'' <<
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }
@@ -972,15 +870,12 @@ void bsr2brailleTranslator::visitStart (S_bsrClef& elt)
       "% --> End visiting bsrTranscriptionNotesElement" <<
       "% --> Start visiting bsrClef '" <<
       elt->asString () <<
-      "'" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      '\'' <<
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -998,15 +893,12 @@ void bsr2brailleTranslator::visitEnd (S_bsrClef& elt)
       "% --> End visiting bsrTranscriptionNotesElement" <<
       "% --> End visiting bsrClef '" <<
       elt->asString () <<
-      "'" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      '\'' <<
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }
@@ -1022,15 +914,12 @@ void bsr2brailleTranslator::visitStart (S_bsrKey& elt)
       "% --> End visiting bsrTranscriptionNotesElement" <<
       "% --> Start visiting bsrKey '" <<
       elt->asString () <<
-      "'" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      '\'' <<
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1049,14 +938,11 @@ void bsr2brailleTranslator::visitEnd (S_bsrKey& elt)
       "% --> End visiting bsrKey '" <<
       elt->asString () <<
       "'"  <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }
@@ -1072,14 +958,11 @@ void bsr2brailleTranslator::visitStart (S_bsrTimeSignature& elt)
       "% --> End visiting bsrTranscriptionNotesElement" <<
       "% --> Start visiting bsrTimeSignature " <<
       elt->asString () <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1097,14 +980,11 @@ void bsr2brailleTranslator::visitEnd (S_bsrTimeSignature& elt)
       "% --> End visiting bsrTranscriptionNotesElement" <<
       "% --> End visiting bsrTimeSignature " <<
       elt->asString () <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }
@@ -1120,14 +1000,11 @@ void bsr2brailleTranslator::visitStart (S_bsrTempo& elt)
       "% --> End visiting bsrTranscriptionNotesElement" <<
       "% --> Start visiting bsrTempo " <<
       elt->asString () <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1145,14 +1022,11 @@ void bsr2brailleTranslator::visitEnd (S_bsrTempo& elt)
       "% --> End visiting bsrTranscriptionNotesElement" <<
       "% --> End visiting bsrTempo " <<
       elt->asString () <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }
@@ -1168,14 +1042,11 @@ void bsr2brailleTranslator::visitStart (S_bsrNote& elt)
       "% --> End visiting bsrTranscriptionNotesElement" <<
       "% --> Start visiting bsrNote " <<
       elt->asString () <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1193,14 +1064,11 @@ void bsr2brailleTranslator::visitEnd (S_bsrNote& elt)
       "% --> End visiting bsrTranscriptionNotesElement" <<
       "% --> End visiting bsrNote " <<
       elt->asString () <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       fCurrentMeasureNumber,
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }

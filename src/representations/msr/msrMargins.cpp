@@ -313,14 +313,11 @@ void msrMarginsGroup::acceptIn (basevisitor* v) {
     std::stringstream ss;
 
     ss <<
-      "% ==> msrMarginsGroup::acceptIn ()" <<
-      std::endl;
+      "% ==> msrMarginsGroup::acceptIn ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -346,14 +343,11 @@ void msrMarginsGroup::acceptOut (basevisitor* v) {
     std::stringstream ss;
 
     ss <<
-      "% ==> msrMarginsGroup::acceptOut ()" <<
-      std::endl;
+      "% ==> msrMarginsGroup::acceptOut ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 

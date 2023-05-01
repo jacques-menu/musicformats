@@ -198,16 +198,13 @@ msrPartGroup::msrPartGroup (
     ss <<
       "--------------------------------------------" <<
       std::endl <<
-      "Creating part group '" << fPartGroupNumber << "'" <<
+      "Creating part group '" << fPartGroupNumber << '\'' <<
       ", partGroupAbsoluteNumber: " << fPartGroupAbsoluteNumber <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }
@@ -279,16 +276,13 @@ msrPartGroup::msrPartGroup (
     ss <<
       "--------------------------------------------" <<
       std::endl <<
-      "Creating part group '" << fPartGroupNumber << "'" <<
+      "Creating part group '" << fPartGroupNumber << '\'' <<
       ", partGroupAbsoluteNumber: " << fPartGroupAbsoluteNumber <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }
@@ -308,14 +302,11 @@ S_msrPartGroup msrPartGroup::createPartGroupNewbornClone (
       "--------------------------------------------" <<
       std::endl <<
       "Creating a newborn clone part group " <<
-      getPartGroupCombinedName () <<
-      std::endl;
+      getPartGroupCombinedName ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -510,7 +501,7 @@ S_msrPart msrPartGroup::appendPartToPartGroupByItsPartID (
       part->getPartCombinedName () <<
       " to part group '" <<
       asString () <<
-      "'" <<
+      '\'' <<
       std::endl;
 
     gLog << this;
@@ -579,8 +570,6 @@ S_msrPart msrPartGroup::appendPartToPartGroupByItsPartID (
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -926,8 +915,6 @@ S_msrPart msrPartGroup::fetchPartFromPartGroupByItsPartID (
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1065,14 +1052,11 @@ void msrPartGroup::acceptIn (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrPartGroup::acceptIn ()" <<
-      std::endl;
+      "% ==> msrPartGroup::acceptIn ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1086,14 +1070,11 @@ void msrPartGroup::acceptIn (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrPartGroup::visitStart ()" <<
-            std::endl;
+            "% ==> Launching msrPartGroup::visitStart ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
@@ -1107,14 +1088,11 @@ void msrPartGroup::acceptOut (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrPartGroup::acceptOut ()" <<
-      std::endl;
+      "% ==> msrPartGroup::acceptOut ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1128,14 +1106,11 @@ void msrPartGroup::acceptOut (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrPartGroup::visitEnd ()" <<
-            std::endl;
+            "% ==> Launching msrPartGroup::visitEnd ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
@@ -1149,14 +1124,11 @@ void msrPartGroup::browseData (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrPartGroup::browseData ()" <<
-      std::endl;
+      "% ==> msrPartGroup::browseData ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1171,14 +1143,11 @@ void msrPartGroup::browseData (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% <== msrPartGroup::browseData ()" <<
-      std::endl;
+      "% <== msrPartGroup::browseData ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }

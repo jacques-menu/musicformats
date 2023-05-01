@@ -93,14 +93,11 @@ msrTransposition::msrTransposition (
     ss <<
       "Creating transpose '" <<
       asString () <<
-      "'" <<
-      std::endl;
+      "'";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }
@@ -166,14 +163,11 @@ void msrTransposition::acceptIn (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrTransposition::acceptIn ()" <<
-      std::endl;
+      "% ==> msrTransposition::acceptIn ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -187,14 +181,11 @@ void msrTransposition::acceptIn (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrTransposition::visitStart ()" <<
-            std::endl;
+            "% ==> Launching msrTransposition::visitStart ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
@@ -208,14 +199,11 @@ void msrTransposition::acceptOut (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrTransposition::acceptOut ()" <<
-      std::endl;
+      "% ==> msrTransposition::acceptOut ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -229,14 +217,11 @@ void msrTransposition::acceptOut (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrTransposition::visitEnd ()" <<
-            std::endl;
+            "% ==> Launching msrTransposition::visitEnd ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);

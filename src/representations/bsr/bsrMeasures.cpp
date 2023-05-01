@@ -61,14 +61,11 @@ bsrMeasure::bsrMeasure (
       "Creating bsrMeasure '" <<
       asString () <<
       "', line " <<
-      fInputLineNumber <<
-      std::endl;
+      fInputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }
@@ -84,14 +81,11 @@ S_bsrMeasure bsrMeasure::createMeasureNewbornClone ()
 
     ss <<
       "Creating a newborn clone of measure " <<
-      asString () <<
-      std::endl;
+      asString ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -124,14 +118,11 @@ void bsrMeasure::appendClefToMeasure (S_bsrClef clef)
       "Appending clef " <<
       clef->asShortString () <<
       " to measure " <<
-      asString () <<
-      std::endl;
+      asString ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -149,7 +140,7 @@ void bsrMeasure::appendBarLineToMeasure (S_bsrBarLine barLine)
       barLine->asShortString () <<
       " to measure '" <<
       asString () <<
-      "'" <<
+      '\'' <<
       std::endl;
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -166,7 +157,7 @@ void bsrMeasure::appendNumberToMeasure (S_bsrNumber number)
       number->asShortString () <<
       "' to measure '" <<
       asString () <<
-      "'" <<
+      '\'' <<
       std::endl;
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -183,7 +174,7 @@ void bsrMeasure::appendWordsToMeasure (S_bsrWords words)
       words->asShortString () <<
       "' to measure '" <<
       asString () <<
-      "'" <<
+      '\'' <<
       std::endl;
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -202,7 +193,7 @@ void bsrMeasure::appendNoteToMeasure (S_bsrNote note)
       note->asShortString () <<
       "' to measure '" <<
       asString () <<
-      "'" <<
+      '\'' <<
       std::endl;
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -221,7 +212,7 @@ void bsrMeasure::appendDynamicToMeasure (S_bsrDynamic dynamic)
       dynamic->asShortString () <<
       "' to measure '" <<
       asString () <<
-      "'" <<
+      '\'' <<
       std::endl;
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -261,14 +252,11 @@ void bsrMeasure::acceptIn (basevisitor* v)
 
     ss <<
       "% --> End visiting bsrTranscriptionNotesElement" <<
-      "% ==> bsrMeasure::acceptIn ()" <<
-      std::endl;
+      "% ==> bsrMeasure::acceptIn ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -282,14 +270,11 @@ void bsrMeasure::acceptIn (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching bsrMeasure::visitStart ()" <<
-            std::endl;
+            "% ==> Launching bsrMeasure::visitStart ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
@@ -304,14 +289,11 @@ void bsrMeasure::acceptOut (basevisitor* v)
 
     ss <<
       "% --> End visiting bsrTranscriptionNotesElement" <<
-      "% ==> bsrMeasure::acceptOut ()" <<
-      std::endl;
+      "% ==> bsrMeasure::acceptOut ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -325,14 +307,11 @@ void bsrMeasure::acceptOut (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching bsrMeasure::visitEnd ()" <<
-            std::endl;
+            "% ==> Launching bsrMeasure::visitEnd ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);

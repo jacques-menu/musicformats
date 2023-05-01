@@ -72,8 +72,7 @@ EXP mfMusicformatsErrorKind msrScore2musicxmlWithHandler (
     ss <<
       "Translating an MSR score to MusicXML in \"" <<
       handler->getHandlerHeader () <<
-      "\"" <<
-      std::endl;
+      "\"";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,

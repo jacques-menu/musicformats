@@ -157,14 +157,11 @@ S_msrStaffTuning msrStaffTuning::createStaffTuningNewbornClone ()
     ss <<
       "Creating a newborn clone of staff tuning '" <<
       asString () <<
-      "'" <<
-      std::endl;
+      "'";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -186,14 +183,11 @@ void msrStaffTuning::acceptIn (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrStaffTuning::acceptIn ()" <<
-      std::endl;
+      "% ==> msrStaffTuning::acceptIn ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -207,14 +201,11 @@ void msrStaffTuning::acceptIn (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrStaffTuning::visitStart ()" <<
-            std::endl;
+            "% ==> Launching msrStaffTuning::visitStart ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
@@ -228,14 +219,11 @@ void msrStaffTuning::acceptOut (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrStaffTuning::acceptOut ()" <<
-      std::endl;
+      "% ==> msrStaffTuning::acceptOut ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -249,14 +237,11 @@ void msrStaffTuning::acceptOut (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrStaffTuning::visitEnd ()" <<
-            std::endl;
+            "% ==> Launching msrStaffTuning::visitEnd ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
@@ -428,14 +413,11 @@ void msrStaffDetails::acceptIn (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrStaffDetails::acceptIn ()" <<
-      std::endl;
+      "% ==> msrStaffDetails::acceptIn ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -449,14 +431,11 @@ void msrStaffDetails::acceptIn (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrStaffDetails::visitStart ()" <<
-            std::endl;
+            "% ==> Launching msrStaffDetails::visitStart ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
@@ -470,14 +449,11 @@ void msrStaffDetails::acceptOut (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrStaffDetails::acceptOut ()" <<
-      std::endl;
+      "% ==> msrStaffDetails::acceptOut ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -491,14 +467,11 @@ void msrStaffDetails::acceptOut (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrStaffDetails::visitEnd ()" <<
-            std::endl;
+            "% ==> Launching msrStaffDetails::visitEnd ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);

@@ -61,8 +61,7 @@ The source code contains many instances of trace code, such as:
 #ifdef TRACE_OAH
   if (gTraceOah->fTraceVoices) {
     gLogOstream <<
-      "Creating voice \"" << asString () << "\"" <<
-      std::endl;
+      "Creating voice \"" << asString () << "\"";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,

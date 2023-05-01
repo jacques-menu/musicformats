@@ -159,8 +159,7 @@ void msr2msrTranslator::visitStart (S_msrClef& elt)
 
     ss <<
       "--> Start visiting msrClef" <<
-      ", line " << elt->getInputLineNumber () <<
-      std::endl;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,

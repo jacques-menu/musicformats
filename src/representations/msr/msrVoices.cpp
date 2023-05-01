@@ -16,6 +16,7 @@
 #include "mfStaticSettings.h"
 
 #include "mfAssert.h"
+#include "mfConstants.h"
 #include "mfServices.h"
 #include "mfStringsHandling.h"
 
@@ -247,11 +248,6 @@ std::ostream& operator << (std::ostream& os, const S_msrRepeatDescr& elt)
 }
 
 //______________________________________________________________________________
-// constants
-const int msrVoice::K_VOICE_NUMBER_UNKNOWN_                 = -96;
-const int msrVoice::K_VOICE_HARMONIES_VOICE_BASE_NUMBER    =  20;
-const int msrVoice::K_VOICE_FIGURED_BASS_VOICE_BASE_NUMBER =  40;
-
 S_msrVoice msrVoice::create (
   int               inputLineNumber,
   msrVoiceKind      voiceKind,
@@ -351,14 +347,11 @@ msrVoice::msrVoice (
     std::stringstream ss;
 
     ss <<
-      "Creating voice \"" << asString () << "\"" <<
-      std::endl;
+      "Creating voice \"" << asString () << "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }
@@ -387,14 +380,11 @@ msrVoice::msrVoice (
     std::stringstream ss;
 
     ss <<
-      "Creating voice \"" << asString () << "\"" <<
-      std::endl;
+      "Creating voice \"" << asString () << "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }
@@ -451,14 +441,11 @@ void msrVoice::setRegularVoiceStaffSequentialNumber (
     ss <<
       "Setting the regular voice staff sequential number of voice \"" <<
       fVoiceName <<
-      "\" to " << regularVoiceStaffSequentialNumber <<
-      std::endl;
+      "\" to " << regularVoiceStaffSequentialNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -478,14 +465,11 @@ void msrVoice::setVoiceNamesFromNumber (
       "Setting the names of '" <<
       msrVoiceKindAsString (fVoiceKind) <<
       "' voice from voice number '" << voiceNumber <<
-      "'" <<
-      std::endl;
+      "'";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -508,14 +492,20 @@ void msrVoice::setVoiceNamesFromNumber (
       fVoiceName =
         fVoiceUpLinkToStaff->getStaffName () +
         "_HARMONIES_Voice";
-      fVoiceAlphabeticName = fVoiceName;
+      fVoiceAlphabeticName =
+        fVoiceUpLinkToStaff->getStaffAlphabeticName () +
+        "_HARMONIES_Voice" +
+        mfInt2EnglishWord (voiceNumber);
       break;
 
     case msrVoiceKind::kVoiceKindFiguredBass:
       fVoiceName =
         fVoiceUpLinkToStaff->getStaffName () +
         "_FIGURED_BASS_Voice";
-      fVoiceAlphabeticName = fVoiceName;
+      fVoiceAlphabeticName =
+        fVoiceUpLinkToStaff->getStaffAlphabeticName () +
+        "_FIGURED_BASS_Voice" +
+        mfInt2EnglishWord (voiceNumber);
       break;
   } // switch
 
@@ -528,14 +518,11 @@ void msrVoice::setVoiceNamesFromNumber (
       fVoiceName <<
       "\" and " <<
       fVoiceAlphabeticName <<
-      "\"" <<
-      std::endl;
+      "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }
@@ -570,14 +557,11 @@ void msrVoice::initializeVoice (
       "Initializing voice \"" << fVoiceName <<
       "\" in staff \"" <<
       fVoiceUpLinkToStaff->getStaffName () <<
-      "\"" <<
-      std::endl;
+      "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -654,6 +638,11 @@ void msrVoice::initializeVoice (
   fVoiceSkipsCounter               = 0;
   fVoiceActualHarmoniesCounter     = 0;
   fVoiceActualFiguredBassesCounter = 0;
+
+  // set a default 4/4 time, since there can be none JMI v0.9.68
+  this->setVoiceCurrentTimeSignature (
+    msrTimeSignature::createFourQuartersTime (
+      0)); // inputLineNumber
 
   // regular measure ends detection
   fWholeNotesSinceLastRegularMeasureEnd = msrWholeNotes (0, 1);
@@ -736,14 +725,11 @@ void msrVoice::changeVoiceIdentity ( // after a deep clone is created
       "Changing the identity of voice \"" <<
       fVoiceName <<
       "\"" <<
-      ", number: " << voiceNumber <<
-      std::endl;
+      ", number: " << voiceNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -771,14 +757,11 @@ S_msrVoice msrVoice::createVoiceNewbornClone (
     ss <<
       "Creating a newborn clone of voice \"" <<
       fVoiceName <<
-      "\"" <<
-      std::endl;
+      "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -827,14 +810,11 @@ S_msrVoice msrVoice::createVoiceDeepClone (
       "\"" <<
       ", to be placed in containing staff \"" <<
       containingStaff->getStaffName () << "\"" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -859,14 +839,11 @@ S_msrVoice msrVoice::createVoiceDeepClone (
 
     gLog <<
       std::endl <<
-      "****" <<
-      std::endl;
+      "****";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -949,14 +926,11 @@ S_msrVoice msrVoice::createVoiceDeepClone (
         numberOfInitialElements <<
         " initial elements in voice \"" <<
         fVoiceName <<
-        "\"" <<
-        std::endl;
+        "\"";
 
       gWaeHandler->waeTraceWithLocationDetails (
         __FILE__, __LINE__,
         ss.str ());
-//         gServiceRunData->getCurrentMeasureNumber (),
-//         gServiceRunData->getScoreMeasuresNumber ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1015,14 +989,11 @@ S_msrVoice msrVoice::createVoiceDeepClone (
       ss <<
         "There are no initial elements in voice \"" <<
         fVoiceName <<
-        "\" to be deep copied" <<
-        std::endl;
+        "\" to be deep copied";
 
       gWaeHandler->waeTraceWithLocationDetails (
         __FILE__, __LINE__,
         ss.str ());
-//         gServiceRunData->getCurrentMeasureNumber (),
-//         gServiceRunData->getScoreMeasuresNumber ());
     }
 #endif // MF_TRACE_IS_ENABLED
   }
@@ -1047,14 +1018,11 @@ S_msrVoice msrVoice::createVoiceDeepClone (
       ss <<
         "There is no last segment in voice \"" <<
         fVoiceName <<
-        "\" to be deep copied" <<
-        std::endl;
+        "\" to be deep copied";
 
       gWaeHandler->waeTraceWithLocationDetails (
         __FILE__, __LINE__,
         ss.str ());
-//         gServiceRunData->getCurrentMeasureNumber (),
-//         gServiceRunData->getScoreMeasuresNumber ());
     }
 #endif // MF_TRACE_IS_ENABLED
   }
@@ -1092,14 +1060,11 @@ S_msrVoice msrVoice::createVoiceDeepClone (
       std::endl <<
       deepClone <<
       std::endl <<
-      "****" <<
-      std::endl;
+      "****";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1119,14 +1084,11 @@ void msrVoice::setVoiceLastSegmentInVoiceClone (
       "' as last segment in voice clone \"" <<
       fVoiceName <<
       "\"" <<
-      ", line " << segment->getInputLineNumber () <<
-      std::endl;
+      ", line " << segment->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1157,14 +1119,11 @@ void msrVoice::appendSegmentToVoiceClone ( //JMI unused ???
       segment->asString () <<
       "' to voice clone \"" <<
       fVoiceName <<
-      "\"" <<
-      std::endl;
+      "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1212,14 +1171,11 @@ void msrVoice::appendSegmentToVoiceClone ( //JMI unused ???
         segment->asShortString () <<
         "' becomes the new last segment in voice clone \"" <<
         fVoiceName <<
-        "\"" <<
-        std::endl;
+        "\"";
 
       gWaeHandler->waeTraceWithLocationDetails (
         __FILE__, __LINE__,
         ss.str ());
-//         gServiceRunData->getCurrentMeasureNumber (),
-//         gServiceRunData->getScoreMeasuresNumber ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1252,14 +1208,11 @@ void msrVoice::setVoiceLastAppendedMeasure (
     gLog <<
       " in voice " <<
       asString () <<
-      ", line " << fInputLineNumber <<
-      std::endl;
+      ", line " << fInputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1278,14 +1231,11 @@ void msrVoice::setNextMeasureNumberInVoice (
       "Setting next measure number to '" <<
       nextMeasureNumber <<
       ", in voice \"" << fVoiceName << "\"" <<
-      "', line " << inputLineNumber <<
-      std::endl;
+      "', line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1308,14 +1258,11 @@ void msrVoice::setNextMeasureNumberInVoice (
         ", fVoiceRemainingMultipleFullBarRests: " <<
         fVoiceRemainingMultipleFullBarRests <<
         "' in voice \"" <<
-        fVoiceName << "\"" <<
-        std::endl;
+        fVoiceName << "\"";
 
       gWaeHandler->waeTraceWithLocationDetails (
         __FILE__, __LINE__,
         ss.str ());
-//         gServiceRunData->getCurrentMeasureNumber (),
-//         gServiceRunData->getScoreMeasuresNumber ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1338,8 +1285,6 @@ void msrVoice::setNextMeasureNumberInVoice (
         gWaeHandler->waeTraceWithLocationDetails (
           __FILE__, __LINE__,
           ss.str ());
-//           gServiceRunData->getCurrentMeasureNumber (),
-//           gServiceRunData->getScoreMeasuresNumber ());
       }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1379,14 +1324,11 @@ void msrVoice::incrementVoiceCurrentMeasurePuristNumber (
       " to " <<
       fVoiceCurrentMeasurePuristNumber <<
       " (" << context << ")" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }
@@ -1402,14 +1344,11 @@ void msrVoice::setVoiceFirstMeasure (
       "Measure " <<
       measure->asShortString () <<
       " is the first measure in  voice \"" << fVoiceName << "\"" <<
-      "', line " << measure->getInputLineNumber () <<
-      std::endl;
+      "', line " << measure->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1428,14 +1367,11 @@ void msrVoice::appendMeasureCloneToVoiceClone (
       "Appending measure clone '" <<
       measureClone->asShortString () <<
       "' to voice '" << fVoiceName << "\"" <<
-      "', line " << inputLineNumber <<
-      std::endl;
+      "', line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1465,14 +1401,11 @@ void msrVoice::setWholeNotesSinceLastRegularMeasureEnd (
       wholeNotes.asString () <<
   // JMI    "' (" << context << ")" <<
       " in voice \"" << fVoiceName << "\"" <<
-      "', line " << inputLineNumber <<
-      std::endl;
+      "', line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1494,14 +1427,11 @@ void msrVoice::setCurrentVoiceRepeatPhaseKind (
         afterRepeatComponentPhaseKind) <<
  // JMI     "' (" << context << ")" <<
       " in voice \"" << fVoiceName << "\"" <<
-      "', line " << inputLineNumber <<
-      std::endl;
+      "', line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1586,14 +1516,11 @@ void msrVoice::createNewLastSegmentFromItsFirstMeasureForVoice (
       "' for voice \"" <<
       fVoiceName <<
       "\" (" << context << ")" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1642,14 +1569,11 @@ S_msrMeasure msrVoice::createAMeasureAndAppendItToVoice (
       "Creating measure '" <<
       measureNumber <<
       "' and appending it to voice \"" << fVoiceName << "\"" <<
-      "', line " << inputLineNumber <<
-      std::endl;
+      "', line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1698,14 +1622,11 @@ S_msrMeasure msrVoice::createAMeasureAndAppendItToVoice (
       "Creating a measure with number '" <<
       measureNumber <<
       "' in voice \"" << fVoiceName << "\"" <<
-      "', line " << inputLineNumber <<
-      std::endl;
+      "', line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1732,14 +1653,11 @@ S_msrMeasure msrVoice::createAMeasureAndAppendItToVoice (
       fVoiceCurrentMultipleFullBarRests->asString () <<
       "in voice \"" <<
       fVoiceName << "\"" <<
-      "', line " << inputLineNumber <<
-      std::endl;
+      "', line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1806,7 +1724,7 @@ S_msrVoice msrVoice::createRegularVoiceHarmoniesVoice (
 
   // create the voice harmonies voice
   int regularVoiceHarmoniesVoiceNumber =
-    msrVoice::K_VOICE_HARMONIES_VOICE_BASE_NUMBER + fVoiceNumber;
+    K_VOICE_HARMONIES_VOICE_BASE_NUMBER + fVoiceNumber;
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceHarmonies ()) {
@@ -1817,14 +1735,11 @@ S_msrVoice msrVoice::createRegularVoiceHarmoniesVoice (
       fVoiceName <<
       "\" with voice number " <<
       regularVoiceHarmoniesVoiceNumber <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1870,7 +1785,7 @@ S_msrVoice msrVoice::createRegularVoiceHarmoniesVoice (
 //
 //   // create the voice figured bass voice
 //   int regularVoiceFiguredBassVoiceNumber =
-//     msrVoice::K_VOICE_FIGURED_BASS_VOICE_BASE_NUMBER + fVoiceNumber;
+//     K_VOICE_FIGURED_BASS_VOICE_BASE_NUMBER + fVoiceNumber;
 //
 // #ifdef MF_TRACE_IS_ENABLED
 //   if (gTraceOahGroup->getTraceFiguredBasses ()) {
@@ -1955,14 +1870,11 @@ void msrVoice::addStanzaToVoice (const S_msrStanza& stanza)
     ss <<
       "Adding stanza " << stanza->getStanzaName () <<
       " (" << stanzaNumber <<
-      ") to voice \"" << fVoiceName << "\"" <<
-      std::endl;
+      ") to voice \"" << fVoiceName << "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1984,14 +1896,11 @@ void msrVoice::addStanzaToVoiceWithoutCatchUp (const S_msrStanza& stanza)
     ss <<
       "Adding stanza " << stanza->getStanzaName () <<
       " (" << stanzaNumber <<
-      ") to voice \"" << fVoiceName << "\"" <<
-      std::endl;
+      ") to voice \"" << fVoiceName << "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -2025,14 +1934,11 @@ S_msrStanza msrVoice::createStanzaInVoiceIfNotYetDone (
         ", name \"" << stanzaName << "\"" <<
         ", in voice \"" << fVoiceName << "\"" <<
         ", line " << inputLineNumber <<
-        ", fVoiceStanzasMap.size (): " << fVoiceStanzasMap.size () <<
-        std::endl;
+        ", fVoiceStanzasMap.size (): " << fVoiceStanzasMap.size ();
 
       gWaeHandler->waeTraceWithLocationDetails (
         __FILE__, __LINE__,
         ss.str ());
-//         gServiceRunData->getCurrentMeasureNumber (),
-//         gServiceRunData->getScoreMeasuresNumber ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -2124,14 +2030,11 @@ void msrVoice::appendMusicXMLPrintLayoutToVoice (
 
     ss <<
       "Appending print layout '" << musicXMLPrintLayout->asString () <<
-      "' to voice \"" << fVoiceName << "\"" <<
-      std::endl;
+      "' to voice \"" << fVoiceName << "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -2154,14 +2057,11 @@ void msrVoice::appendClefKeyTimeSignatureGroupToVoice  (
     ss <<
       "Appending clefKeyTimeSignatureGroup " <<
       clefKeyTimeSignatureGroup->asString () <<
-      " to voice \"" << fVoiceName << "\"" <<
-      std::endl;
+      " to voice \"" << fVoiceName << "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -2191,20 +2091,25 @@ void msrVoice::appendClefKeyTimeSignatureGroupToVoice  (
     this->setVoiceCurrentTimeSignature (timeSignatureToBeAdded);
   }
 
-  if (fMusicHasBeenInsertedInVoice) {
-    // append clefKeyTimeSignatureGroup to last segment
-    fVoiceLastSegment->
-      appendClefKeyTimeSignatureGroupToSegment (
-        clefKeyTimeSignatureGroup);
-  }
+//   if (fMusicHasBeenInsertedInVoice) {
+//     // append clefKeyTimeSignatureGroup to last segment
+//     fVoiceLastSegment->
+//       appendClefKeyTimeSignatureGroupToSegment (
+//         clefKeyTimeSignatureGroup);
+//   }
+//
+//   else {
+//     // moving clefKeyTimeSignatureGroups to the left, thus prepend to last segment
+//     fVoiceLastSegment->
+// //       prependClefKeyTimeSignatureGroupToSegment (clefKeyTimeSignatureGroup);
+//       appendClefKeyTimeSignatureGroupToSegment (
+//         clefKeyTimeSignatureGroup); // JMI v0.9.67
+//   }
 
-  else {
-    // moving clefKeyTimeSignatureGroups to the left, thus prepend to last segment
-    fVoiceLastSegment->
-//       prependClefKeyTimeSignatureGroupToSegment (clefKeyTimeSignatureGroup);
-      appendClefKeyTimeSignatureGroupToSegment (
-        clefKeyTimeSignatureGroup); // JMI v0.9.67
-  }
+  // append clefKeyTimeSignatureGroup to last segment
+  fVoiceLastSegment->
+    appendClefKeyTimeSignatureGroupToSegment (
+      clefKeyTimeSignatureGroup);
 
   --gIndenter;
 }
@@ -2224,8 +2129,6 @@ void msrVoice::appendClefKeyTimeSignatureGroupToVoice  (
 //     gWaeHandler->waeTraceWithLocationDetails (
 //       __FILE__, __LINE__,
 //       ss.str ());
-// //       gServiceRunData->getCurrentMeasureNumber (),
-// //       gServiceRunData->getScoreMeasuresNumber ());
 //   }
 // #endif // MF_TRACE_IS_ENABLED
 //
@@ -2265,8 +2168,6 @@ void msrVoice::appendClefKeyTimeSignatureGroupToVoice  (
 //     gWaeHandler->waeTraceWithLocationDetails (
 //       __FILE__, __LINE__,
 //       ss.str ());
-// //       gServiceRunData->getCurrentMeasureNumber (),
-// //       gServiceRunData->getScoreMeasuresNumber ());
 //   }
 // #endif // MF_TRACE_IS_ENABLED
 //
@@ -2304,8 +2205,6 @@ void msrVoice::appendClefKeyTimeSignatureGroupToVoice  (
 //     gWaeHandler->waeTraceWithLocationDetails (
 //       __FILE__, __LINE__,
 //       ss.str ());
-// //       gServiceRunData->getCurrentMeasureNumber (),
-// //       gServiceRunData->getScoreMeasuresNumber ());
 //   }
 // #endif // MF_TRACE_IS_ENABLED
 //
@@ -2330,14 +2229,11 @@ void msrVoice::appendTimeSignatureToVoiceClone (
 
     ss <<
       "Appending time signature " << timeSignature->asString () <<
-      " to voice clone \"" << fVoiceName << "\"" <<
-      std::endl;
+      " to voice clone \"" << fVoiceName << "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -2354,7 +2250,7 @@ void msrVoice::appendTimeSignatureToVoiceClone (
 }
 
 void msrVoice::insertHiddenMeasureAndBarLineInVoiceClone (
-  int             inputLineNumber,
+  int                  inputLineNumber,
   const msrWholeNotes& measurePosition)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -2365,14 +2261,11 @@ void msrVoice::insertHiddenMeasureAndBarLineInVoiceClone (
       "Inserting hidden measure and barLine at position " <<
       measurePosition.asString () <<
       "' to voice clone \"" << fVoiceName << "\"" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -2525,14 +2418,11 @@ void msrVoice::setVoiceShortestNoteWholeNotes (
         "The new shortest note wholeNotes in voice \"" <<
         fVoiceName <<
         "\" becomes " <<
-        wholeNotes.asString () <<
-        std::endl;
+        wholeNotes.asString ();
 
       gWaeHandler->waeTraceWithLocationDetails (
         __FILE__, __LINE__,
         ss.str ());
-//         gServiceRunData->getCurrentMeasureNumber (),
-//         gServiceRunData->getScoreMeasuresNumber ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -2550,14 +2440,11 @@ void msrVoice::setVoiceShortestNoteTupletFactor (
         "The new shortest note tuplet factor in part \"" <<
         fVoiceName <<
         "\" becomes " <<
-        noteTupletFactor <<
-        std::endl;
+        noteTupletFactor;
 
       gWaeHandler->waeTraceWithLocationDetails (
         __FILE__, __LINE__,
         ss.str ());
-//         gServiceRunData->getCurrentMeasureNumber (),
-//         gServiceRunData->getScoreMeasuresNumber ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -2612,14 +2499,11 @@ void msrVoice::registerShortestNoteInVoiceIfRelevant (const S_msrNote& note)
 
       ss <<
         "The new shortest note in voice \"" << fVoiceName << "\"" <<
-        " becomes " << note->asString () <<
-        std::endl;
+        " becomes " << note->asString ();
 
       gWaeHandler->waeTraceWithLocationDetails (
         __FILE__, __LINE__,
         ss.str ());
-//         gServiceRunData->getCurrentMeasureNumber (),
-//         gServiceRunData->getScoreMeasuresNumber ());
     }
 #endif // MF_TRACE_IS_ENABLED
   }
@@ -2665,14 +2549,11 @@ void msrVoice::appendHarmonyToVoice (
       "Appending harmony " << harmony->asString () <<
       " to voice \"" << fVoiceName << "\"" <<
       ", measurePositionToAppendAt: " << measurePositionToAppendAt <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -2735,14 +2616,11 @@ void msrVoice::appendHarmoniesListToVoice (
       fVoiceName <<
       "\"" <<
       ", measurePositionToAppendAt: " << measurePositionToAppendAt <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -2767,14 +2645,11 @@ void msrVoice::appendHarmonyToVoiceClone (
     ss <<
       "Appending harmony " << harmony->asString () <<
       " to voice clone \"" << fVoiceName << "\"" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -2827,14 +2702,11 @@ void msrVoice::appendFiguredBassToVoice (
     ss <<
       "Appending figured bass " << figuredBass->asString () <<
       " to voice \"" << fVoiceName << "\"" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -2901,14 +2773,11 @@ void msrVoice::appendFiguredBassesListToVoice (
       " to voice \"" << fVoiceName << "\"" <<
       "\"" <<
       ", measurePositionToAppendAt: " << measurePositionToAppendAt <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -2933,14 +2802,11 @@ void msrVoice::appendFiguredBassToVoiceClone (
     ss <<
       "Appending figured bass " << figuredBass->asString () <<
       " to voice clone \"" << fVoiceName << "\"" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -3000,8 +2866,6 @@ void msrVoice::appendFiguredBassToVoiceClone (
 //       gWaeHandler->waeTraceWithLocationDetails (
 //         __FILE__, __LINE__,
 //         ss.str (),
-//         gServiceRunData->getCurrentMeasureNumber (),
-//         gServiceRunData->getScoreMeasuresNumber ());
 //   }
 // #endif // MF_TRACE_IS_ENABLED
 //
@@ -3027,7 +2891,7 @@ void msrVoice::appendFiguredBassToVoiceClone (
 //       const S_msrStanza& stanza = thePair.second;
 //
 //       stanza->
-//         padUpToMeasureWholeNotesInStanza (
+//         padUpToMeasureCurrentWholeNotesDurationInStanza (
 //           inputLineNumber,
 //           wholeNotesMeasurePosition);
 //     } // for
@@ -3049,14 +2913,11 @@ void msrVoice::backupByWholeNotesStepLengthInVoice (
       backupTargetMeasurePosition.asString () <<
       "' whole notes step length in voice \"" <<
       fVoiceName <<
-      "\", line " << inputLineNumber <<
-      std::endl;
+      "\", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -3097,14 +2958,11 @@ void msrVoice::appendPaddingNoteToVoice (
       forwardStepLength <<
       ", to voice \"" <<
       fVoiceName <<
-      "\",line " << inputLineNumber <<
-      std::endl;
+      "\",line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -3116,7 +2974,7 @@ void msrVoice::appendPaddingNoteToVoice (
       inputLineNumber,
       forwardStepLength);
 
-  // account for padding note's wholeNotes in the part current measure position
+  // account for padding note's wholeNotes in the part drawing measure position
   fVoiceUpLinkToStaff->
     getStaffUpLinkToPart ()->
       incrementPartDrawingMeasurePosition (
@@ -3148,14 +3006,11 @@ void msrVoice::appendTranspositionToVoice (
     ss <<
       "Appending transposition '" <<
       transposition->asString () <<
-      "' to voice \"" << fVoiceName << "\"" <<
-      std::endl;
+      "' to voice \"" << fVoiceName << "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -3173,14 +3028,11 @@ void msrVoice::appendStaffDetailsToVoice (
     ss <<
       "Appending staff details '" <<
       staffDetails->asShortString () <<
-      "' to voice \"" << fVoiceName << "\"" <<
-      std::endl;
+      "' to voice \"" << fVoiceName << "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -3207,14 +3059,11 @@ void msrVoice::appendTempoToVoice (
       "Appending tempo " <<
       tempo->asShortString () <<
       " to voice \"" <<
-      fVoiceName << "\"" <<
-      std::endl;
+      fVoiceName << "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -3233,14 +3082,11 @@ void msrVoice::appendOctaveShiftToVoice (
       "Appending octave shift '" <<
       octaveShift->getOctaveShiftKind () <<
       "', size: " << octaveShift->getOctaveShiftSize () <<
-      "' to voice \"" << fVoiceName << "\"" <<
-      std::endl;
+      "' to voice \"" << fVoiceName << "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -3258,14 +3104,11 @@ void msrVoice::appendScordaturaToVoice (
     ss <<
       "Appending scordatura '" <<
       scordatura->asString () <<
-      "' to voice \"" << fVoiceName << "\"" <<
-      std::endl;
+      "' to voice \"" << fVoiceName << "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -3284,14 +3127,11 @@ void msrVoice::appendAccordionRegistrationToVoice (
     ss <<
       "Appending accordion registration '" <<
       accordionRegistration->asString () <<
-      "' to voice \"" << fVoiceName << "\"" <<
-      std::endl;
+      "' to voice \"" << fVoiceName << "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -3311,14 +3151,11 @@ void msrVoice::appendHarpPedalsTuningToVoice (
     ss <<
       "Appending harp pedals tuning '" <<
       harpPedalsTuning->asString () <<
-      "' to voice \"" << fVoiceName << "\"" <<
-      std::endl;
+      "' to voice \"" << fVoiceName << "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -3336,14 +3173,11 @@ void msrVoice::appendRehearsalMarkToVoice (
 
     ss <<
       "Appending rehearsalMark '" << rehearsalMark->getRehearsalMarkText () <<
-      "' to voice \"" << fVoiceName << "\"" <<
-      std::endl;
+      "' to voice \"" << fVoiceName << "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -3368,14 +3202,11 @@ void msrVoice::appendVoiceStaffChangeToVoice (
       voiceStaffChange->asString () <<
       " to voice " <<
       "\"" << fVoiceName << "\"" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -3402,14 +3233,11 @@ void msrVoice::appendNoteToVoice (const S_msrNote& note)
       "Appending note " <<
       note->asShortString () <<
       " to voice \"" << fVoiceName << "\"" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -3461,7 +3289,7 @@ void msrVoice::appendNoteToVoice (const S_msrNote& note)
   // register note as the last appended one into this voice
   fVoiceLastAppendedNote = note;
 
-  // account for note's wholeNotes in the part current measure position
+  // account for note's wholeNotes in the part drawing measure position
   part->
     incrementPartDrawingMeasurePosition (
       inputLineNumber,
@@ -3543,14 +3371,11 @@ void msrVoice::appendNoteToVoiceClone (const S_msrNote& note) {
       "Appending note '" <<
       note->asShortString () <<
       "' to voice clone \"" << fVoiceName << "\"" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -3637,14 +3462,11 @@ void msrVoice::appendDoubleTremoloToVoice (
     ss <<
       "Appending double tremolo '" <<
       doubleTremolo->asShortString () <<
-      "' to voice \"" << fVoiceName << "\"" <<
-      std::endl;
+      "' to voice \"" << fVoiceName << "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -3662,14 +3484,11 @@ void msrVoice::appendChordToVoice (const S_msrChord& chord)
 
     ss <<
       "Appending chord '" << chord->asString () <<
-      "' to voice \"" << fVoiceName << "\"" <<
-      std::endl;
+      "' to voice \"" << fVoiceName << "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -3677,7 +3496,7 @@ void msrVoice::appendChordToVoice (const S_msrChord& chord)
   fVoiceLastSegment->
     appendChordToSegment (chord);
 
-  // account for chord's wholeNotes in the part current measure position
+  // account for chord's wholeNotes in the part drawing measure position
   fVoiceUpLinkToStaff->
     getStaffUpLinkToPart ()->
       incrementPartDrawingMeasurePosition (
@@ -3734,14 +3553,11 @@ void msrVoice::appendTupletToVoice (const S_msrTuplet& tuplet)
 
     ss <<
       "Appending tuplet " << tuplet->asString () <<
-      " to voice \"" << fVoiceName << "\"" <<
-      std::endl;
+      " to voice \"" << fVoiceName << "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -3751,7 +3567,7 @@ void msrVoice::appendTupletToVoice (const S_msrTuplet& tuplet)
   fVoiceLastSegment->
     appendTupletToSegment (tuplet);
 
-  // account for tuplet's wholeNotes in the part's current measure position
+  // account for tuplet's wholeNotes in the part's drawing measure position
   fVoiceUpLinkToStaff->
     getStaffUpLinkToPart ()->
       incrementPartDrawingMeasurePosition (
@@ -3776,14 +3592,11 @@ void msrVoice::addGraceNotesGroupBeforeAheadOfVoiceIfNeeded (
     ss <<
       "Adding grace notes " <<
       graceNotesGroup->asString () <<
-      " ahead of voice \"" << fVoiceName << "\"" <<
-      std::endl;
+      " ahead of voice \"" << fVoiceName << "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -3841,14 +3654,11 @@ void msrVoice::addGraceNotesGroupBeforeAheadOfVoiceIfNeeded (
         "' to the first chord of voice \"" << fVoiceName <<
         "\", i.e. '" <<
         firstNoteShortcutUpLinkToChord->asShortString () <<
-        "'" <<
-        std::endl;
+        "'";
 
       gWaeHandler->waeTraceWithLocationDetails (
         __FILE__, __LINE__,
         ss.str ());
-//         gServiceRunData->getCurrentMeasureNumber (),
-//         gServiceRunData->getScoreMeasuresNumber ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -3885,14 +3695,11 @@ void msrVoice::addGraceNotesGroupBeforeAheadOfVoiceIfNeeded (
         "' to the first note of voice \"" << fVoiceName <<
         "\", i.e. '" <<
         voiceFirstNote->asShortString () <<
-        "'" <<
-        std::endl;
+        "'";
 
       gWaeHandler->waeTraceWithLocationDetails (
         __FILE__, __LINE__,
         ss.str ());
-//         gServiceRunData->getCurrentMeasureNumber (),
-//         gServiceRunData->getScoreMeasuresNumber ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -3914,14 +3721,11 @@ void msrVoice::appendAfterGraceNotesToVoice (
 
     ss <<
       "Appending after grace notes " << // JMI AfterGraceNotes <<
-      " to voice \"" << fVoiceName << "\"" <<
-      std::endl;
+      " to voice \"" << fVoiceName << "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -3940,14 +3744,11 @@ void msrVoice::prependAfterGraceNotesToVoice (
 
     ss <<
       "Prepending after grace notes " << // JMI AfterGraceNotes <<
-      " to voice \"" << fVoiceName << "\"" <<
-      std::endl;
+      " to voice \"" << fVoiceName << "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -3972,14 +3773,11 @@ void msrVoice::appendSyllableToVoice (
     ss <<
       "Appending syllable '" <<
       syllable->asString () <<
-      "' to voice \"" << fVoiceName << "\"" <<
-      std::endl;
+      "' to voice \"" << fVoiceName << "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -4009,14 +3807,11 @@ void msrVoice::appendBarCheckToVoice (
       barCheck->asString () <<
       " to voice \"" <<
       fVoiceName <<
-      "\"" <<
-      std::endl;
+      "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -4034,14 +3829,11 @@ void msrVoice::appendBarNumberCheckToVoice (
     ss <<
       "Appending barnumber check " <<
       barNumberCheck->asString () <<
-      " to voice \"" << fVoiceName <<  "\"" <<
-      std::endl;
+      " to voice \"" << fVoiceName <<  "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -4058,14 +3850,11 @@ void msrVoice::appendLineBreakToVoice  (
 
     ss <<
       "Appending line break '" << lineBreak->asString () <<
-      "' to voice \"" << fVoiceName << "\"" <<
-      std::endl;
+      "' to voice \"" << fVoiceName << "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -4093,14 +3882,11 @@ void msrVoice::appendPageBreakToVoice (
 
     ss <<
       "Appending page break '" << pageBreak->asString () <<
-      "' to voice \"" << fVoiceName << "\"" <<
-      std::endl;
+      "' to voice \"" << fVoiceName << "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -4121,8 +3907,6 @@ void msrVoice::appendPageBreakToVoice (
 //     gWaeHandler->waeTraceWithLocationDetails (
 //       __FILE__, __LINE__,
 //       ss.str ());
-// //       gServiceRunData->getCurrentMeasureNumber (),
-// //       gServiceRunData->getScoreMeasuresNumber ());
 //   }
 // #endif // MF_TRACE_IS_ENABLED
 //
@@ -4143,8 +3927,6 @@ void msrVoice::appendPageBreakToVoice (
 //     gWaeHandler->waeTraceWithLocationDetails (
 //       __FILE__, __LINE__,
 //       ss.str ());
-// //       gServiceRunData->getCurrentMeasureNumber (),
-// //       gServiceRunData->getScoreMeasuresNumber ());
 //   }
 // #endif // MF_TRACE_IS_ENABLED
 //
@@ -4230,14 +4012,11 @@ void msrVoice::pushRepeatOntoRepeatDescrsStack (
       "' onto the repeats stack in voice \"" <<
       fVoiceName <<
       "\"" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -4307,14 +4086,11 @@ void msrVoice::popRepeatFromRepeatDescrsStack (
       "' from the repeat stack in voice \"" <<
       fVoiceName <<
       "\" (" << context << ")" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -4653,14 +4429,11 @@ S_msrRepeat msrVoice::createARepeatAndStackIt (
       fVoiceName <<
       "\"" <<
       " (" << context << ")" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -4702,14 +4475,11 @@ S_msrRepeat msrVoice::createARepeatCloneAndStackIt (
       fVoiceName <<
       "\"" <<
       " (" << context << ")" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -4749,14 +4519,11 @@ void msrVoice::moveVoiceInitialElementsToRepeatCommonPart (
       repeatCommonPart->asShortString () <<
       "' (" << context << ")" <<
       "\"" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -4808,14 +4575,11 @@ void msrVoice::moveVoiceLastSegmentToRepeatCommonPart (
       "' in voice \"" <<
       fVoiceName <<
       "\"" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -4907,14 +4671,11 @@ void msrVoice::moveVoiceLastSegmentToRepeatEnding (
       "' in voice \"" <<
       fVoiceName <<
       "\"" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -4946,14 +4707,11 @@ void msrVoice::appendRepeatToInitialVoiceElements (
       "' to the initial elements in voice \"" <<
       fVoiceName <<
       "\" (" << context << ")" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -5023,14 +4781,11 @@ void msrVoice::appendMeasureRepeatToInitialVoiceElements (
       "' to the initial elements in voice \"" <<
       fVoiceName <<
       "\" (" << context << ")" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -5053,14 +4808,11 @@ void msrVoice::appendVoiceLastSegmentToInitialVoiceElements (
       "' to the initial elements in voice \"" <<
       fVoiceName <<
       "\" (" << context << ")" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -5095,8 +4847,6 @@ void msrVoice::moveVoiceLastSegmentToInitialVoiceElementsIfRelevant (
         gWaeHandler->waeTraceWithLocationDetails (
           __FILE__, __LINE__,
           ss.str ());
-//           gServiceRunData->getCurrentMeasureNumber (),
-//           gServiceRunData->getScoreMeasuresNumber ());
       }
 
       if (gTraceOahGroup->getTraceSegmentsDetails ()) {
@@ -5139,8 +4889,6 @@ void msrVoice::moveVoiceLastSegmentToInitialVoiceElementsIfRelevant (
         gWaeHandler->waeTraceWithLocationDetails (
           __FILE__, __LINE__,
           ss.str ());
-//           gServiceRunData->getCurrentMeasureNumber (),
-//           gServiceRunData->getScoreMeasuresNumber ());
       }
 #endif // MF_TRACE_IS_ENABLED
     }
@@ -5157,14 +4905,11 @@ void msrVoice::moveVoiceLastSegmentToInitialVoiceElementsIfRelevant (
         "' is null, not moved to the initial elements in voice \"" <<
         fVoiceName <<
         "\" (" << context << ")" <<
-        ", line " << inputLineNumber <<
-        std::endl;
+        ", line " << inputLineNumber;
 
       gWaeHandler->waeTraceWithLocationDetails (
         __FILE__, __LINE__,
         ss.str ());
-//         gServiceRunData->getCurrentMeasureNumber (),
-//         gServiceRunData->getScoreMeasuresNumber ());
     }
 #endif // MF_TRACE_IS_ENABLED
   }
@@ -5186,14 +4931,11 @@ void msrVoice::appendRepeatCloneToInitialVoiceElements (
       "' to the initial elements in voice \"" <<
       fVoiceName <<
       "\" (" << context << ")" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -5211,14 +4953,11 @@ void msrVoice::handleVoiceLevelRepeatStart (
     ss <<
       "Handling a voice-level repeat start in voice \"" <<
       fVoiceName <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -5272,20 +5011,20 @@ void msrVoice::handleVoiceLevelRepeatStart (
         // the last measure is not empty
 
         msrWholeNotes
-          measureWholeNotes =
-            lastMeasureInLastSegment->getMeasureWholeNotes ();
+          measureCurrentWholeNotesDuration =
+            lastMeasureInLastSegment->getMeasureCurrentWholeNotesDuration ();
 
         msrWholeNotes
-          fullMeasureWholeNotes =
-            lastMeasureInLastSegment->getFullMeasureWholeNotes ();
+          fullMeasureCurrentWholeNotesDuration =
+            lastMeasureInLastSegment->getFullMeasureCurrentWholeNotesDuration ();
 
         // is there a measure splitting?
         if ( // JMI better criterion???
-          measureWholeNotes.getNumerator () > 0
+          measureCurrentWholeNotesDuration.getNumerator () > 0
             &&
-          measureWholeNotes
+          measureCurrentWholeNotesDuration
             <
-          fullMeasureWholeNotes
+          fullMeasureCurrentWholeNotesDuration
         ) {
           // yes this measure is not yet complete and should be split
 #ifdef MF_TRACE_IS_ENABLED
@@ -5296,10 +5035,10 @@ void msrVoice::handleVoiceLevelRepeatStart (
               "' upon a repeat start in voice \"" <<
               fVoiceName <<
               "\"" <<
-              ", measureWholeNotes: " <<
-              measureWholeNotes.asString () <<
-              ", fullMeasureWholeNotes: " <<
-              fullMeasureWholeNotes.asString () <<
+              ", measureCurrentWholeNotesDuration: " <<
+              measureCurrentWholeNotesDuration.asString () <<
+              ", fullMeasureCurrentWholeNotesDuration: " <<
+              fullMeasureCurrentWholeNotesDuration.asString () <<
               ", line " << inputLineNumber <<
               std::endl;
           }
@@ -5368,14 +5107,11 @@ void msrVoice::handleVoiceLevelRepeatStart (
             fVoiceName <<
             "\"" <<
             " (voice level start)" <<
-            ", line " << inputLineNumber <<
-            std::endl;
+            ", line " << inputLineNumber;
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -5399,14 +5135,11 @@ void msrVoice::handleVoiceLevelRepeatStart (
           ss <<
             "Creating a new last segment with the first common part measure for voice \"" <<
             fVoiceName << "\"" <<
-            ", line " << inputLineNumber <<
-            std::endl;
+            ", line " << inputLineNumber;
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -5438,14 +5171,11 @@ void msrVoice::handleVoiceLevelRepeatStart (
       "Creating a repeat common part upon its start in voice \"" <<
       fVoiceName <<
       "\"" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -5487,14 +5217,11 @@ void msrVoice::handleNestedRepeatStartInVoice (
       "Handling a nested repeat start in voice \"" <<
       fVoiceName <<
       "\"" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -5518,14 +5245,11 @@ void msrVoice::handleRepeatStartInVoice (
       "Handling repeat start in voice \"" <<
       fVoiceName <<
       "\"" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -5582,14 +5306,11 @@ void msrVoice::handleVoiceLevelRepeatEndWithoutStart (
       "Handling a voice-level repeat end without start in voice \"" <<
       fVoiceName <<
       "\"" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -5609,14 +5330,11 @@ void msrVoice::handleVoiceLevelRepeatEndWithoutStart (
 
     ss <<
       "This repeat end without a start is at the voice-level" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -5629,14 +5347,11 @@ void msrVoice::handleVoiceLevelRepeatEndWithoutStart (
       "Creating a repeat upon its end in voice \"" <<
       fVoiceName <<
       "\"" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -5658,14 +5373,11 @@ void msrVoice::handleVoiceLevelRepeatEndWithoutStart (
       "Creating a repeat common part upon its end in voice \"" <<
       fVoiceName <<
       "\"" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -5711,14 +5423,11 @@ void msrVoice::handleVoiceLevelRepeatEndWithoutStart (
       "Appending the voice last segment in voice \"" <<
       fVoiceName <<
       "\" to the new voice-level repeat common part" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -5768,14 +5477,11 @@ void msrVoice::handleVoiceLevelContainingRepeatEndWithoutStart (
       "Handling a voice-level rcontaining epeat end without start in voice \"" <<
       fVoiceName <<
       "\"" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -5795,14 +5501,11 @@ void msrVoice::handleVoiceLevelContainingRepeatEndWithoutStart (
 
     ss <<
       "This repeat end without a start is at the voice-level" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -5815,14 +5518,11 @@ void msrVoice::handleVoiceLevelContainingRepeatEndWithoutStart (
       "Creating a repeat upon its end in voice \"" <<
       fVoiceName <<
       "\"" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -5844,14 +5544,11 @@ void msrVoice::handleVoiceLevelContainingRepeatEndWithoutStart (
       "Creating a repeat common part upon its end in voice \"" <<
       fVoiceName <<
       "\"" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -5908,14 +5605,11 @@ void msrVoice::handleVoiceLevelContainingRepeatEndWithoutStart (
       "Appending the voice last segment in voice \"" <<
       fVoiceName <<
       "\" to the new voice-level repeat common part" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -5967,14 +5661,11 @@ void msrVoice::handleVoiceLevelRepeatEndWithStart (
       "Handling a voice-level repeat end with start in voice \"" <<
       fVoiceName <<
       "\"" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -5992,14 +5683,11 @@ void msrVoice::handleVoiceLevelRepeatEndWithStart (
 
     ss <<
       "This repeat end with a start is at the voice-level" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -6041,14 +5729,11 @@ void msrVoice::handleVoiceLevelRepeatEndWithStart (
       "Creating a repeat common part upon repeat end in voice \"" <<
       fVoiceName <<
       "\"" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -6073,14 +5758,11 @@ void msrVoice::handleVoiceLevelRepeatEndWithStart (
       fVoiceName <<
       "\" to the current voice-level repeat common part" <<
       " and forget about it" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -6133,14 +5815,11 @@ void msrVoice::handleNestedRepeatEndInVoice (
       "Handling a nested repeat end in voice \"" <<
       fVoiceName <<
       "\"" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -6158,14 +5837,11 @@ void msrVoice::handleNestedRepeatEndInVoice (
 
     ss <<
       "This repeat is nested" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -6177,9 +5853,9 @@ void msrVoice::handleNestedRepeatEndInVoice (
 
   // is there a measure splitting?
   if (
-    voiceLastMeasure->getMeasureWholeNotes ()
+    voiceLastMeasure->getMeasureCurrentWholeNotesDuration ()
       ==
-    voiceLastMeasure->getFullMeasureWholeNotes ()
+    voiceLastMeasure->getFullMeasureCurrentWholeNotesDuration ()
   ) {
     // this measure is incomplete and should be split
 #ifdef MF_TRACE_IS_ENABLED
@@ -6192,14 +5868,11 @@ void msrVoice::handleNestedRepeatEndInVoice (
         "' upon a repeat end in voice \"" <<
         fVoiceName <<
         "\"" <<
-        ", line " << inputLineNumber <<
-        std::endl;
+        ", line " << inputLineNumber;
 
       gWaeHandler->waeTraceWithLocationDetails (
         __FILE__, __LINE__,
         ss.str ());
-//         gServiceRunData->getCurrentMeasureNumber (),
-//         gServiceRunData->getScoreMeasuresNumber ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -6344,14 +6017,11 @@ void msrVoice::handleVoiceLevelRepeatEndingStartWithoutExplicitStart (
       "Handling a voice-level repeat ending start without explicit start in voice \"" <<
       fVoiceName <<
       "\"" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -6400,14 +6070,11 @@ void msrVoice::handleVoiceLevelRepeatEndingStartWithoutExplicitStart (
         "Creating a repeat common part upon its end in voice \"" <<
         fVoiceName <<
         "\"" <<
-        ", line " << inputLineNumber <<
-        std::endl;
+        ", line " << inputLineNumber;
 
       gWaeHandler->waeTraceWithLocationDetails (
         __FILE__, __LINE__,
         ss.str ());
-//         gServiceRunData->getCurrentMeasureNumber (),
-//         gServiceRunData->getScoreMeasuresNumber ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -6431,14 +6098,11 @@ void msrVoice::handleVoiceLevelRepeatEndingStartWithoutExplicitStart (
       "Fetching the last measure in voice \"" <<
       fVoiceName <<
       "\"" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -6469,14 +6133,11 @@ void msrVoice::handleVoiceLevelRepeatEndingStartWithoutExplicitStart (
         fVoiceName <<
         "\"" <<
         " (voice level ending without explicit start)" <<
-        ", line " << inputLineNumber <<
-        std::endl;
+        ", line " << inputLineNumber;
 
       gWaeHandler->waeTraceWithLocationDetails (
         __FILE__, __LINE__,
         ss.str ());
-//         gServiceRunData->getCurrentMeasureNumber (),
-//         gServiceRunData->getScoreMeasuresNumber ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -6509,14 +6170,11 @@ void msrVoice::handleVoiceLevelRepeatEndingStartWithoutExplicitStart (
       ss <<
         "Creating a new last segment with the first ending measure for voice \"" <<
         fVoiceName << "\"" <<
-        ", line " << inputLineNumber <<
-        std::endl;
+        ", line " << inputLineNumber;
 
       gWaeHandler->waeTraceWithLocationDetails (
         __FILE__, __LINE__,
         ss.str ());
-//         gServiceRunData->getCurrentMeasureNumber (),
-//         gServiceRunData->getScoreMeasuresNumber ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -6543,14 +6201,11 @@ void msrVoice::handleVoiceLevelRepeatEndingStartWithoutExplicitStart (
       ss <<
         "Creating a new last segment for voice \"" <<
         fVoiceName << "\"" <<
-        ", line " << inputLineNumber <<
-        std::endl;
+        ", line " << inputLineNumber;
 
       gWaeHandler->waeTraceWithLocationDetails (
         __FILE__, __LINE__,
         ss.str ());
-//         gServiceRunData->getCurrentMeasureNumber (),
-//         gServiceRunData->getScoreMeasuresNumber ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -6586,14 +6241,11 @@ void msrVoice::handleVoiceLevelRepeatEndingStartWithExplicitStart (
       "Handling a voice-level repeat ending start with explicit start in voice \"" <<
       fVoiceName <<
       "\"" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -6638,14 +6290,11 @@ void msrVoice::handleVoiceLevelRepeatEndingStartWithExplicitStart (
       ", line " << inputLineNumber <<
       ", it is:" <<
       std::endl <<
-      lastMeasure->asShortString () <<
-      std::endl;
+      lastMeasure->asShortString ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -6669,14 +6318,11 @@ void msrVoice::handleVoiceLevelRepeatEndingStartWithExplicitStart (
         fVoiceName <<
         "\"" <<
         " (voice level ending with explicit start)" <<
-        ", line " << inputLineNumber <<
-        std::endl;
+        ", line " << inputLineNumber;
 
       gWaeHandler->waeTraceWithLocationDetails (
         __FILE__, __LINE__,
         ss.str ());
-//         gServiceRunData->getCurrentMeasureNumber (),
-//         gServiceRunData->getScoreMeasuresNumber ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -6709,14 +6355,11 @@ void msrVoice::handleVoiceLevelRepeatEndingStartWithExplicitStart (
       ss <<
         "Creating a new last segment with the first ending measure for voice \"" <<
         fVoiceName << "\"" <<
-        ", line " << inputLineNumber <<
-        std::endl;
+        ", line " << inputLineNumber;
 
       gWaeHandler->waeTraceWithLocationDetails (
         __FILE__, __LINE__,
         ss.str ());
-//         gServiceRunData->getCurrentMeasureNumber (),
-//         gServiceRunData->getScoreMeasuresNumber ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -6742,14 +6385,11 @@ void msrVoice::handleVoiceLevelRepeatEndingStartWithExplicitStart (
       ss <<
         "Creating a new last segment for voice \"" <<
         fVoiceName << "\"" <<
-        ", line " << inputLineNumber <<
-        std::endl;
+        ", line " << inputLineNumber;
 
       gWaeHandler->waeTraceWithLocationDetails (
         __FILE__, __LINE__,
         ss.str ());
-//         gServiceRunData->getCurrentMeasureNumber (),
-//         gServiceRunData->getScoreMeasuresNumber ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -6853,14 +6493,11 @@ void msrVoice::handleRepeatEndingStartInVoice (
       "Handling a repeat ending start in voice \"" <<
       fVoiceName <<
       "\"" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -6969,14 +6606,11 @@ void msrVoice::handleRepeatEndingStartInVoiceClone (
             "Handling a repeat ending upon its start in voice clone \"" <<
             fVoiceName <<
             "\"" <<
-            ", line " << inputLineNumber <<
-            std::endl;
+            ", line " << inputLineNumber;
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -7112,14 +6746,11 @@ void msrVoice::handleSegmentCloneEndInVoiceClone (
       segmentClone->asShortString () <<
       "' in voice clone \"" <<
       fVoiceName <<
-      "\"" <<
-      std::endl;
+      "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -7413,14 +7044,11 @@ void msrVoice::createMeasureRepeatFromItsFirstMeasures (
       mfSingularOrPlural (
         measureRepeatMeasuresNumber, "measure", "measures") <<
       " (to be repeated) from voice \"" <<
-      fVoiceName <<
-      std::endl;
+      fVoiceName;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -7464,14 +7092,11 @@ void msrVoice::createMeasureRepeatFromItsFirstMeasures (
     ss <<
       "Creating a measures repeat pattern in voice \"" <<
       fVoiceName <<
-      "\"" <<
-      std::endl;
+      "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -7500,14 +7125,11 @@ void msrVoice::createMeasureRepeatFromItsFirstMeasures (
     ss <<
       "Creating a new last segment with the first replica measure for voice \"" <<
       fVoiceName << "\"" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -7542,14 +7164,11 @@ void msrVoice::appendMultipleFullBarRestsToVoice (
       " to voice \"" <<
       fVoiceName <<
       "\"" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -7618,14 +7237,11 @@ void msrVoice::appendMeasureRepeatToVoice (
       "' to voice \"" <<
       fVoiceName <<
       "\"" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -7768,14 +7384,11 @@ void msrVoice::appendPendingMeasureRepeatToVoice (
 
     ss <<
       "Creating a measures repeat replicas contents for voice \"" <<
-      fVoiceName << "\" is:" <<
-      std::endl;
+      fVoiceName << "\" is:";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -7801,14 +7414,11 @@ void msrVoice::appendPendingMeasureRepeatToVoice (
     ss <<
       "Setting pending measures repeat replicas segment in voice \"" <<
       fVoiceName <<
-      "\"" <<
-      std::endl;
+      "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -7822,14 +7432,11 @@ void msrVoice::appendPendingMeasureRepeatToVoice (
 
     ss <<
       "Setting measures repeat segment to voice last segment for voice \"" <<
-      fVoiceName << "\"" <<
-      std::endl;
+      fVoiceName << "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -7855,14 +7462,11 @@ void msrVoice::appendPendingMeasureRepeatToVoice (
     ss <<
       "Creating a new last segment with the AAA measures repeat next measure for voice \"" <<
       fVoiceName << "\"" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -7936,14 +7540,11 @@ void msrVoice::createMeasureRepeatAndAppendItToVoiceClone (
             "Creating and appending a measures repeat in voice \"" <<
             fVoiceName <<
             "\"" <<
-            ", line " << inputLineNumber <<
-            std::endl;
+            ", line " << inputLineNumber;
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -7963,14 +7564,11 @@ void msrVoice::createMeasureRepeatAndAppendItToVoiceClone (
             "Creating a measures repeat pattern from current last segment in voice \"" <<
             fVoiceName <<
             "\"" <<
-            ", line " << inputLineNumber <<
-            std::endl;
+            ", line " << inputLineNumber;
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -7996,14 +7594,11 @@ void msrVoice::createMeasureRepeatAndAppendItToVoiceClone (
           ss <<
             "Setting repeat common part in voice \"" <<
             fVoiceName <<
-            "\"" <<
-            std::endl;
+            "\"";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -8019,14 +7614,11 @@ void msrVoice::createMeasureRepeatAndAppendItToVoiceClone (
           ss <<
             "Appending measures repeat to voice \"" <<
             fVoiceName <<
-            "\"" <<
-            std::endl;
+            "\"";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -8066,14 +7658,11 @@ void msrVoice::setVoiceContainsMultipleFullBarRests (
       fVoiceName <<
       "\"" <<
       ", line " << inputLineNumber <<
-      ", contains multiple full-bar rests" <<
-      std::endl;
+      ", contains multiple full-bar rests";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -8092,14 +7681,11 @@ void msrVoice::setVoiceContainsMeasureRepeats (
       fVoiceName <<
       "\"" <<
       ", line " << inputLineNumber <<
-      ", contains measure repeats" <<
-      std::endl;
+      ", contains measure repeats";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -8122,14 +7708,11 @@ void msrVoice::appendMultipleFullBarRestsToVoice (
       " to voice \"" <<
       fVoiceName <<
       "\"" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -8192,14 +7775,11 @@ void msrVoice::appendMultipleFullBarRestsToVoice (
             " in voice \"" <<
             fVoiceName <<
             "\"" <<
-            ", line " << inputLineNumber <<
-            std::endl;
+            ", line " << inputLineNumber;
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         fVoiceCurrentMultipleFullBarRests =
@@ -8218,14 +7798,11 @@ void msrVoice::appendMultipleFullBarRestsToVoice (
             " to the last segment of voice \"" <<
             fVoiceName <<
             "\"" <<
-            ", line " << inputLineNumber <<
-            std::endl;
+            ", line " << inputLineNumber;
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         fVoiceLastSegment->
@@ -8247,14 +7824,11 @@ void msrVoice::appendMultipleFullBarRestsToVoice (
             fVoiceCurrentMultipleFullBarRests->asString () <<
             " as waiting for its next measure number" <<
             " in voice \"" <<
-            fVoiceName << "\"" <<
-            std::endl;
+            fVoiceName << "\"";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         fVoiceMultipleFullBarRestsWaitingForItsNextMeasureNumber =
@@ -8268,14 +7842,11 @@ void msrVoice::appendMultipleFullBarRestsToVoice (
             "Setting fVoiceRemainingMultipleFullBarRests to '" <<
             multipleFullBarRestsMeasuresNumber <<
             "' in voice \"" <<
-            fVoiceName << "\"" <<
-            std::endl;
+            fVoiceName << "\"";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         fVoiceRemainingMultipleFullBarRests =
@@ -8365,7 +7936,7 @@ void msrVoice::replicateLastAppendedMeasureInVoice (
         lastAppendedMeasureClone->
           getMeasureOrdinalNumberInVoice (),
         lastAppendedMeasureClone->
-          getFullMeasureWholeNotes ()); // JMI
+          getFullMeasureCurrentWholeNotesDuration ()); // JMI
 
     // append it to the voice last segment
     fVoiceLastSegment->
@@ -8396,23 +7967,20 @@ void msrVoice::addEmptyMeasuresToVoice (
       " to voice \"" <<
       fVoiceName <<
       "\"" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
   // get the empty measure whole notes wholeNotes
   // JMI maybe not OK if first measure such as after a repeat segment???
   msrWholeNotes
-    emptyMeasureWholeNotes =
+    emptyMeasureCurrentWholeNotesDuration =
       fVoiceLastAppendedMeasure->
-        getFullMeasureWholeNotes ();
+        getFullMeasureCurrentWholeNotesDuration ();
 
   for (int i = 1; i <= emptyMeasuresNumber; ++i) {
     // create a measure
@@ -8426,14 +7994,11 @@ void msrVoice::addEmptyMeasuresToVoice (
       ", in voice \"" <<
       fVoiceName <<
       "\"" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -8454,8 +8019,8 @@ void msrVoice::addEmptyMeasuresToVoice (
 
   // set its whole notes wholeNotes
 //   emptyMeasure->
-//     setFullMeasureWholeNotes (
-//       emptyMeasureWholeNotes);
+//     setFullMeasureCurrentWholeNotesDuration (
+//       emptyMeasureCurrentWholeNotesDuration);
 
   // create a rest the whole empty measure long
   S_msrNote
@@ -8463,8 +8028,8 @@ void msrVoice::addEmptyMeasuresToVoice (
       msrNote::createRestNote (
         inputLineNumber,
         measureNumber,
-        emptyMeasureWholeNotes, // soundingWholeNotes
-        emptyMeasureWholeNotes, // displayWholeNotes
+        emptyMeasureCurrentWholeNotesDuration, // soundingWholeNotes
+        emptyMeasureCurrentWholeNotesDuration, // displayWholeNotes
         0); // dotsNumber
 
    wholeMeasureRestNote->
@@ -8489,14 +8054,11 @@ void msrVoice::addEmptyMeasuresToVoice (
       ", in voice \"" <<
       fVoiceName  <<
       "\"" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -8551,7 +8113,7 @@ void msrVoice::addEmptyMeasuresToVoice (
 //         fVoiceCurrentMultipleFullBarRests =
 //           msrMultipleFullBarRests::create (
 //             inputLineNumber,
-//             firstRestMeasure->getFullMeasureWholeNotes (),
+//             firstRestMeasure->getFullMeasureCurrentWholeNotesDuration (),
 //             multipleFullBarRestsMeasuresNumber,
 //             this);
 // */
@@ -8685,14 +8247,11 @@ void msrVoice::appendPendingMultipleFullBarRestsToVoice (
             " to the last segment of voice \"" <<
             fVoiceName <<
             "\"" <<
-            ", line " << inputLineNumber <<
-            std::endl;
+            ", line " << inputLineNumber;
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
 //        fVoiceLastSegment->
@@ -8737,14 +8296,11 @@ void msrVoice::handleMultipleFullBarRestsStartInVoiceClone (
     ss <<
       "Handling multiple full-bar rests start in voice clone \"" <<
       fVoiceName <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -8848,14 +8404,11 @@ void msrVoice::handleMultipleFullBarRestsEndInVoiceClone (
     ss <<
       "Handling multiple full-bar rests end in voice clone \"" <<
       fVoiceName <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -9016,14 +8569,11 @@ void msrVoice::appendRepeatCloneToVoiceClone (
       "Appending repeat clone '" <<
       repeatCLone->asString () <<
       "' to voice clone \"" <<
-      fVoiceName <<  "\"" <<
-      std::endl;
+      fVoiceName <<  "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -9059,14 +8609,11 @@ void msrVoice::appendRepeatCloneToVoiceClone (
           ss <<
             "Pushing repeat clone as the new current repeat in voice \"" <<
             fVoiceName <<
-            "\"" <<
-            std::endl;
+            "\"";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -9108,14 +8655,11 @@ void msrVoice::handleMeasureRepeatStartInVoiceClone (
       "Handling measures repeat start in voice clone \"" <<
       fVoiceName <<
       "\"" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -9197,14 +8741,11 @@ void msrVoice::handleMeasureRepeatEndInVoiceClone (
     ss <<
       "Handling measures repeat end in voice clone \"" <<
       fVoiceName <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -9273,14 +8814,11 @@ void msrVoice::handleMeasureRepeatPatternStartInVoiceClone (
     ss <<
       "Handling measures repeat start in voice clone \"" <<
       fVoiceName <<
-      "\", line " << inputLineNumber <<
-      std::endl;
+      "\", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -9319,14 +8857,11 @@ void msrVoice::handleMeasureRepeatPatternStartInVoiceClone (
       "Creating a measures repeat pattern upon its start in voice \"" <<
       fVoiceName <<
       "\"" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -9362,14 +8897,11 @@ void msrVoice::handleMeasureRepeatPatternEndInVoiceClone (
     ss <<
       "Handling measures repeat end in voice clone \"" <<
       fVoiceName <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -9434,14 +8966,11 @@ void msrVoice::handleMeasureRepeatReplicasStartInVoiceClone (
     ss <<
       "Handling measures repeat start in voice clone \"" <<
       fVoiceName <<
-      "\", line " << inputLineNumber <<
-      std::endl;
+      "\", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -9480,14 +9009,11 @@ void msrVoice::handleMeasureRepeatReplicasStartInVoiceClone (
       "Creating a measures repeat replicas upon its start in voice \"" <<
       fVoiceName <<
       "\"" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -9523,14 +9049,11 @@ void msrVoice::handleMeasureRepeatReplicasEndInVoiceClone (
     ss <<
       "Handling measures repeat end in voice clone \"" <<
       fVoiceName <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -9687,14 +9210,11 @@ void msrVoice::handleHookedRepeatEndingEndInVoice (
     ss <<
       "Handling a hooked repeat ending in voice \"" <<
       fVoiceName <<  "\"" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -9768,14 +9288,11 @@ void msrVoice::handleHookedRepeatEndingEndInVoice (
         repeatEndingKind) <<
       " repeat ending to current repeat in voice \"" <<
       fVoiceName <<
-      "\"" <<
-      std::endl;
+      "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -9883,14 +9400,11 @@ void msrVoice::handleHooklessRepeatEndingEndInVoice (
         repeatEndingKind) <<
       " repeat ending to current repeat in voice \"" <<
       fVoiceName <<
-      "\"" <<
-      std::endl;
+      "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -9944,10 +9458,9 @@ void msrVoice::handleHooklessRepeatEndingEndInVoice (
 }
 
 void msrVoice::handleRepeatEndingEndInVoice (
-  int                inputLineNumber,
-  const std::string& repeatEndingNumber, // may be "1, 2"
-  msrRepeatEndingKind
-                repeatEndingKind)
+  int                 inputLineNumber,
+  const std::string&  repeatEndingNumber, // may be "1, 2"
+  msrRepeatEndingKind repeatEndingKind)
 {
   switch (fVoiceKind) {
     case msrVoiceKind::kVoiceKindRegular:
@@ -9991,14 +9504,11 @@ void msrVoice::handleRepeatCommonPartStartInVoiceClone (
     ss <<
       "Handling a repeat common part start in voice clone \"" <<
       fVoiceName <<  "\"" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -10043,14 +9553,11 @@ void msrVoice::handleRepeatCommonPartStartInVoiceClone (
       "Creating a repeat common part upon its start in voice \"" <<
       fVoiceName <<
       "\"" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -10086,14 +9593,11 @@ void msrVoice::handleRepeatCommonPartEndInVoiceClone (
     ss <<
       "Handling a repeat common part end in voice clone \"" <<
       fVoiceName <<  "\"" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -10173,14 +9677,11 @@ void msrVoice::handleHookedRepeatEndingEndInVoiceClone (
     ss <<
       "Handling a hooked repeat ending in voice clone \"" <<
       fVoiceName <<  "\"" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -10271,14 +9772,11 @@ void msrVoice::handleHooklessRepeatEndingEndInVoiceClone (
     ss <<
       "Handling a hookless repeat ending in voice clone \"" <<
       fVoiceName <<  "\"" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -10353,10 +9851,9 @@ void msrVoice::handleHooklessRepeatEndingEndInVoiceClone (
 }
 
 void msrVoice::handleRepeatEndingEndInVoiceClone (
-  int                inputLineNumber,
-  const std::string& repeatEndingNumber, // may be "1, 2"
-  msrRepeatEndingKind
-            repeatEndingKind)
+  int                 inputLineNumber,
+  const std::string&  repeatEndingNumber, // may be "1, 2"
+  msrRepeatEndingKind repeatEndingKind)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceRepeats ()) {
@@ -10399,7 +9896,7 @@ void msrVoice::handleRepeatEndingEndInVoiceClone (
 }
 
 void msrVoice::handleRepeatStartInVoiceClone (
-  int         inputLineNumber,
+  int                inputLineNumber,
   const S_msrRepeat& repeat)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -10410,14 +9907,11 @@ void msrVoice::handleRepeatStartInVoiceClone (
       "Handling repeat start in voice clone \"" <<
       fVoiceName <<
       "\"" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -10481,8 +9975,6 @@ void msrVoice::handleRepeatStartInVoiceClone (
         gWaeHandler->waeTraceWithLocationDetails (
           __FILE__, __LINE__,
           ss.str ());
-//           gServiceRunData->getCurrentMeasureNumber (),
-//           gServiceRunData->getScoreMeasuresNumber ());
       }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -10517,14 +10009,11 @@ void msrVoice::handleRepeatEndInVoiceClone (
       "Handling a repeat end in voice clone \"" <<
       fVoiceName <<
       "\"" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -10663,23 +10152,20 @@ void msrVoice::appendMeasureRepeatReplicaToVoice (
           ss <<
             "Appending a measures repeat replica to voice \"" <<
             fVoiceName <<  "\"" <<
-            ", line " << inputLineNumber <<
-            std::endl;
+            ", line " << inputLineNumber;
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
 
         // fetch last measure's full measure whole notes
         /* JMI
-        int fullMeasureWholeNotes =
+        int fullMeasureCurrentWholeNotesDuration =
           fVoiceLastSegment->
             getSegmentElementsList ().back ()->
-              getFullMeasureWholeNotes ();
+              getFullMeasureCurrentWholeNotesDuration ();
               */
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -10728,14 +10214,11 @@ void msrVoice::appendMeasureRepeatReplicaToVoice (
           ss <<
             "Setting the measures repeat replica to current measures repeat BBB in voice \"" <<
             fVoiceName <<
-            "\"" <<
-            std::endl;
+            "\"";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -10785,14 +10268,11 @@ void msrVoice::appendMeasureRepeatToVoiceElementsList (
       measureRepeat->asString () <<
       "' to voice \"" <<
       fVoiceName <<
-      "\"," <<
-      std::endl;
+      "\",";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -10899,14 +10379,11 @@ void msrVoice::prependBarLineToVoice (
       "Prepending barLine '" <<
       barLine->asString () <<
       "' to voice \"" << fVoiceName << "\"" <<
-      ":" <<
-      std::endl;
+      ":";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -10929,14 +10406,11 @@ void msrVoice::appendBarLineToVoice (
       "Appending barLine " <<
       barLine->asString () <<
       " to voice \"" << fVoiceName << "\"" <<
-      ":" <<
-      std::endl;
+      ":";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -10962,14 +10436,11 @@ void msrVoice::appendSegnoToVoice (const S_msrSegno& segno)
     std::stringstream ss;
 
     ss <<
-      "Appending a segno to voice \"" << fVoiceName << "\"" <<
-      std::endl;
+      "Appending a segno to voice \"" << fVoiceName << "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -10992,14 +10463,11 @@ void msrVoice::appendCodaToVoice (const S_msrCoda& coda)
 
     ss <<
       "Appending a coda to voice \"" << fVoiceName << "\"" <<
-      ":" <<
-      std::endl;
+      ":";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -11022,14 +10490,11 @@ void msrVoice::appendEyeGlassesToVoice (
     std::stringstream ss;
 
     ss <<
-      "Appending a eyeGlasses to voice \"" << fVoiceName << "\"" <<
-      std::endl;
+      "Appending a eyeGlasses to voice \"" << fVoiceName << "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -11051,14 +10516,11 @@ void msrVoice::appendPedalToVoice (const S_msrPedal& pedal)
     std::stringstream ss;
 
     ss <<
-      "Appending a pedal to voice \"" << fVoiceName << "\"" <<
-      std::endl;
+      "Appending a pedal to voice \"" << fVoiceName << "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -11081,14 +10543,11 @@ void msrVoice::appendDampToVoice (
     std::stringstream ss;
 
     ss <<
-      "Appending a damp to voice \"" << fVoiceName << "\"" <<
-      std::endl;
+      "Appending a damp to voice \"" << fVoiceName << "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -11111,14 +10570,11 @@ void msrVoice::appendDampAllToVoice (
     std::stringstream ss;
 
     ss <<
-      "Appending a damp all to voice \"" << fVoiceName << "\"" <<
-      std::endl;
+      "Appending a damp all to voice \"" << fVoiceName << "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -11143,14 +10599,11 @@ S_msrElement msrVoice::removeLastElementFromVoice (  // JMI
 
     ss <<
       "Removing last note" <<
-      " from voice " << fVoiceName <<
-      std::endl;
+      " from voice " << fVoiceName;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -11161,7 +10614,7 @@ S_msrElement msrVoice::removeLastElementFromVoice (  // JMI
 */
 
 void msrVoice::removeNoteFromVoice (
-  int       inputLineNumber,
+  int              inputLineNumber,
   const S_msrNote& note)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -11171,14 +10624,11 @@ void msrVoice::removeNoteFromVoice (
     ss <<
       "Removing note '" <<
       note->asShortString () <<
-      "' from voice \"" << fVoiceName << "\"" <<
-      std::endl;
+      "' from voice \"" << fVoiceName << "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -11202,7 +10652,7 @@ void msrVoice::removeNoteFromVoice (
 }
 
 void msrVoice::removeElementFromVoice (
-  int          inputLineNumber,
+  int                 inputLineNumber,
   const S_msrElement& element)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -11212,14 +10662,11 @@ void msrVoice::removeElementFromVoice (
     ss <<
       "Removing element '" <<
       element->asShortString () <<
-      "' from voice \"" << fVoiceName << "\"" <<
-      std::endl;
+      "' from voice \"" << fVoiceName << "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -11243,14 +10690,11 @@ S_msrMeasure msrVoice::removeLastMeasureFromVoice (
     ss <<
       "Removing last measure from voice \"" <<
       fVoiceName <<
-      "\"" <<
-      std::endl;
+      "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -11379,14 +10823,11 @@ void msrVoice:: collectVoiceMeasuresIntoFlatList (
         "Collecting measures from the initial elements into voice \"" <<
         fVoiceName <<
         "s measures flat list" <<
-        ", line " << inputLineNumber <<
-        std::endl;
+        ", line " << inputLineNumber;
 
       gWaeHandler->waeTraceWithLocationDetails (
         __FILE__, __LINE__,
         ss.str ());
-//         gServiceRunData->getCurrentMeasureNumber (),
-//         gServiceRunData->getScoreMeasuresNumber ());
     }
 #endif // MF_TRACE_IS_ENABLED
   }
@@ -11401,14 +10842,11 @@ void msrVoice:: collectVoiceMeasuresIntoFlatList (
         "Collecting measures from the last segment into voice \"" <<
         fVoiceName <<
         "s measures flat list" <<
-        ", line " << inputLineNumber <<
-        std::endl;
+        ", line " << inputLineNumber;
 
       gWaeHandler->waeTraceWithLocationDetails (
         __FILE__, __LINE__,
         ss.str ());
-//         gServiceRunData->getCurrentMeasureNumber (),
-//         gServiceRunData->getScoreMeasuresNumber ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -11480,14 +10918,11 @@ void msrVoice::finalizeVoice (
       fVoiceName <<
       "\"" <<
       ", fVoiceShortestNoteWholeNotes: " << fVoiceShortestNoteWholeNotes.asString () <<
-      ", partShortestNoteWholeNotes: " << partShortestNoteWholeNotes.asString () <<
-      std::endl;
+      ", partShortestNoteWholeNotes: " << partShortestNoteWholeNotes.asString ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -11642,14 +11077,11 @@ void msrVoice::finalizeVoiceAndAllItsMeasures (
       fVoiceName <<
       "\"" <<
       ", fVoiceShortestNoteWholeNotes: " << fVoiceShortestNoteWholeNotes.asString () <<
-      ", partShortestNoteWholeNotes: " << partShortestNoteWholeNotes.asString () <<
-      std::endl;
+      ", partShortestNoteWholeNotes: " << partShortestNoteWholeNotes.asString ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -11755,14 +11187,11 @@ void msrVoice::finalizeVoiceAndAllItsMeasures (
     ss <<
       "Finalizing all the measures of voice \"" <<
       fVoiceName <<
-      "\", line " << inputLineNumber <<
-      std::endl;
+      "\", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -11790,14 +11219,11 @@ void msrVoice::checkBeamNumber (S_msrBeam beam, S_msrNote note)
       beam->asShortString () <<
       "' and note '" <<
       note->asString () <<
-      "', line " << inputLineNumber <<
-      std::endl;
+      "', line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -11947,14 +11373,11 @@ void msrVoice::acceptIn (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrVoice::acceptIn ()" <<
-      std::endl;
+      "% ==> msrVoice::acceptIn ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -11968,14 +11391,11 @@ void msrVoice::acceptIn (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrVoice::visitStart ()" <<
-            std::endl;
+            "% ==> Launching msrVoice::visitStart ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
@@ -11989,14 +11409,11 @@ void msrVoice::acceptOut (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrVoice::acceptOut ()" <<
-      std::endl;
+      "% ==> msrVoice::acceptOut ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -12010,14 +11427,11 @@ void msrVoice::acceptOut (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrVoice::visitEnd ()" <<
-            std::endl;
+            "% ==> Launching msrVoice::visitEnd ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
@@ -12031,14 +11445,11 @@ void msrVoice::browseData (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrVoice::browseData ()" <<
-      std::endl;
+      "% ==> msrVoice::browseData ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -12079,14 +11490,11 @@ void msrVoice::browseData (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% <== msrVoice::browseData ()" <<
-      std::endl;
+      "% <== msrVoice::browseData ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }
@@ -12400,7 +11808,7 @@ void msrVoice::printFull (std::ostream& os) const
     std::setw (fieldWidth) << "fVoiceFirstSegment" << ": ";
   if (fVoiceFirstSegment) {
     os <<
-      "'" <<
+      '\'' <<
       fVoiceFirstSegment->getSegmentAbsoluteNumber () <<
       "'";
     }
@@ -12415,7 +11823,7 @@ void msrVoice::printFull (std::ostream& os) const
     std::setw (fieldWidth) << "fVoiceLastAppendedMeasure" << ": ";
   if (fVoiceLastAppendedMeasure) {
     os <<
-      "'" <<
+      '\'' <<
       fVoiceLastAppendedMeasure->asShortString () <<
       "'";
     }
@@ -12430,7 +11838,7 @@ void msrVoice::printFull (std::ostream& os) const
     std::setw (fieldWidth) << "fVoiceFirstMeasure" << ": ";
   if (fVoiceFirstMeasure) {
     os <<
-      "'" <<
+      '\'' <<
       fVoiceFirstMeasure->asShortString () <<
       "'";
     }
@@ -12577,7 +11985,7 @@ void msrVoice::print (std::ostream& os) const
     fVoiceAlphabeticName <<
     "\", fVoiceNumber '" <<
     fVoiceNumber <<
-    "'" <<
+    '\'' <<
     ", line " << fInputLineNumber <<
     std::endl;
 

@@ -70,8 +70,7 @@ void translateMxsrToGuido (
       gTab <<
       gLanguage->passIDKindAsString (passIDKind) << ": " << passDescription <<
       std::endl <<
-      separator <<
-      std::endl;
+      separator;
 
     gWaeHandler->waeTraceToStream (
       err,
@@ -187,8 +186,7 @@ void translateMxsrToGuido (
     if (gTraceOah->fTracePasses) {
       err <<
         std::endl <<
-        gLanguage->closingGuidoFile (outputFileName) <<
-        std::endl;
+        gLanguage->closingGuidoFile (outputFileName);
 
       gWaeHandler->waeTraceWithoutLocationDetails (
         __FILE__, __LINE__,

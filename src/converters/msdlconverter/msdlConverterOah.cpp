@@ -92,8 +92,7 @@ void msdlConverterOahGroup::acceptIn (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> msdlConverterOahGroup::acceptIn ()" <<
-      std::endl;
+      ".\\\" ==> msdlConverterOahGroup::acceptIn ()";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -111,8 +110,7 @@ void msdlConverterOahGroup::acceptIn (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            ".\\\" ==> Launching msdlConverterOahGroup::visitStart ()" <<
-            std::endl;
+            ".\\\" ==> Launching msdlConverterOahGroup::visitStart ()";
 
           gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
@@ -130,8 +128,7 @@ void msdlConverterOahGroup::acceptOut (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> msdlConverterOahGroup::acceptOut ()" <<
-      std::endl;
+      ".\\\" ==> msdlConverterOahGroup::acceptOut ()";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -149,8 +146,7 @@ void msdlConverterOahGroup::acceptOut (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            ".\\\" ==> Launching msdlConverterOahGroup::visitEnd ()" <<
-            std::endl;
+            ".\\\" ==> Launching msdlConverterOahGroup::visitEnd ()";
 
           gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
@@ -168,8 +164,7 @@ void msdlConverterOahGroup::browseData (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> msdlConverterOahGroup::browseData ()" <<
-      std::endl;
+      ".\\\" ==> msdlConverterOahGroup::browseData ()";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -210,8 +205,7 @@ S_msdlConverterOahGroup createGlobalMsdlConverterOahGroup ()
     std::stringstream ss;
 
     ss <<
-      "Creating global msdlConverter OAH group" <<
-      std::endl;
+      "Creating global msdlConverter OAH group";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,

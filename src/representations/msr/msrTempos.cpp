@@ -81,14 +81,11 @@ void msrTempoNote::acceptIn (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrTempoNote::acceptIn ()" <<
-      std::endl;
+      "% ==> msrTempoNote::acceptIn ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -102,14 +99,11 @@ void msrTempoNote::acceptIn (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrTempoNote::visitStart ()" <<
-            std::endl;
+            "% ==> Launching msrTempoNote::visitStart ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
@@ -123,14 +117,11 @@ void msrTempoNote::acceptOut (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrTempoNote::acceptOut ()" <<
-      std::endl;
+      "% ==> msrTempoNote::acceptOut ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -144,14 +135,11 @@ void msrTempoNote::acceptOut (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrTempoNote::visitEnd ()" <<
-            std::endl;
+            "% ==> Launching msrTempoNote::visitEnd ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
@@ -294,14 +282,11 @@ msrTempoTuplet::msrTempoTuplet (
     ss <<
       "Creating tempo tuplet '" <<
       this->asString () <<
-      "'" <<
-      std::endl;
+      "'";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }
@@ -396,14 +381,11 @@ void msrTempoTuplet::addTempoNoteToTempoTuplet (S_msrTempoNote tempoNote)
       // the information is missing to display it the normal way JMI ???
       "' to tempoTuplet '" <<
       asString () <<
-      "'" <<
-      std::endl;
+      "'";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -432,14 +414,11 @@ void msrTempoTuplet::addTempoTupletToTempoTuplet (S_msrTempoTuplet tempoTuplet)
       tempoTuplet->asString () <<
       "' to tempoTuplet '" <<
       asString () <<
-      "'" <<
-      std::endl;
+      "'";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -480,14 +459,11 @@ void msrTempoTuplet::removeFirstNoteFromTempoTuplet (
       tempoNote->asShortString () <<
       "' from tempoTuplet '" <<
       asString () <<
-      "'" <<
-      std::endl;
+      "'";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -612,14 +588,11 @@ void msrTempoTuplet::acceptIn (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrTempoTuplet::acceptIn ()" <<
-      std::endl;
+      "% ==> msrTempoTuplet::acceptIn ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -633,14 +606,11 @@ void msrTempoTuplet::acceptIn (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrTempoTuplet::visitStart ()" <<
-            std::endl;
+            "% ==> Launching msrTempoTuplet::visitStart ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
@@ -654,14 +624,11 @@ void msrTempoTuplet::acceptOut (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrTempoTuplet::acceptOut ()" <<
-      std::endl;
+      "% ==> msrTempoTuplet::acceptOut ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -675,14 +642,11 @@ void msrTempoTuplet::acceptOut (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrTempoTuplet::visitEnd ()" <<
-            std::endl;
+            "% ==> Launching msrTempoTuplet::visitEnd ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
@@ -944,14 +908,11 @@ void msrTempoNotesRelationshipElements::addElementToTempoNotesRelationshipElemen
     ss <<
       "Adding element '" <<
       element->asString () <<
-      "' to tempo relationship" <<
-      std::endl;
+      "' to tempo relationship";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -965,14 +926,11 @@ void msrTempoNotesRelationshipElements::acceptIn (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrTempoNotesRelationshipElements::acceptIn ()" <<
-      std::endl;
+      "% ==> msrTempoNotesRelationshipElements::acceptIn ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -986,14 +944,11 @@ void msrTempoNotesRelationshipElements::acceptIn (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrTempoNotesRelationshipElements::visitStart ()" <<
-            std::endl;
+            "% ==> Launching msrTempoNotesRelationshipElements::visitStart ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
@@ -1007,14 +962,11 @@ void msrTempoNotesRelationshipElements::acceptOut (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrTempoNotesRelationshipElements::acceptOut ()" <<
-      std::endl;
+      "% ==> msrTempoNotesRelationshipElements::acceptOut ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1028,14 +980,11 @@ void msrTempoNotesRelationshipElements::acceptOut (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrTempoNotesRelationshipElements::visitEnd ()" <<
-            std::endl;
+            "% ==> Launching msrTempoNotesRelationshipElements::visitEnd ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
@@ -1472,14 +1421,11 @@ void msrTempo::acceptIn (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrTempo::acceptIn ()" <<
-      std::endl;
+      "% ==> msrTempo::acceptIn ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1493,14 +1439,11 @@ void msrTempo::acceptIn (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrTempo::visitStart ()" <<
-            std::endl;
+            "% ==> Launching msrTempo::visitStart ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
@@ -1514,14 +1457,11 @@ void msrTempo::acceptOut (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrTempo::acceptOut ()" <<
-      std::endl;
+      "% ==> msrTempo::acceptOut ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1535,14 +1475,11 @@ void msrTempo::acceptOut (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrTempo::visitEnd ()" <<
-            std::endl;
+            "% ==> Launching msrTempo::visitEnd ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);

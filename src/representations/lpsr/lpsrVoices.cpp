@@ -56,14 +56,11 @@ void lpsrUseVoiceCommand::acceptIn (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> lpsrUseVoiceCommand::acceptIn ()" <<
-      std::endl;
+      "% ==> lpsrUseVoiceCommand::acceptIn ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -77,14 +74,11 @@ void lpsrUseVoiceCommand::acceptIn (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching lpsrUseVoiceCommand::visitStart ()" <<
-            std::endl;
+            "% ==> Launching lpsrUseVoiceCommand::visitStart ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
@@ -98,14 +92,11 @@ void lpsrUseVoiceCommand::acceptOut (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> lpsrUseVoiceCommand::acceptOut ()" <<
-      std::endl;
+      "% ==> lpsrUseVoiceCommand::acceptOut ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -119,14 +110,11 @@ void lpsrUseVoiceCommand::acceptOut (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching lpsrUseVoiceCommand::visitEnd ()" <<
-            std::endl;
+            "% ==> Launching lpsrUseVoiceCommand::visitEnd ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);

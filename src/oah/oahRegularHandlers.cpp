@@ -66,8 +66,7 @@ oahRegularHandler::oahRegularHandler (
     ss <<
       "Creating the insider handler for \"" <<
       fHandlerHeader <<
-      "\"" <<
-      std::endl;
+      "\"";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -94,8 +93,7 @@ void oahRegularHandler::initializeOahRegularHandler ()
     ss <<
       "Initializing the regular handler \"" <<
       fHandlerHeader <<
-      "\"" <<
-      std::endl;
+      "\"";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -153,8 +151,7 @@ void oahRegularHandler::appendGroupToRegulalHandler (
       group->getGroupHeader () <<
       "\" to regular handler \"" <<
       fHandlerHeader <<
-      "\"" <<
-      std::endl;
+      "\"";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -198,8 +195,7 @@ void oahRegularHandler::prependGroupToRegularHandler (
       group->getGroupHeader () <<
       "\" to regular handler \"" <<
       fHandlerHeader <<
-      "\"" <<
-      std::endl;
+      "\"";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,

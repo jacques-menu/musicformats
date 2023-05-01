@@ -63,8 +63,7 @@ oahInsiderHandler::oahInsiderHandler (
     ss <<
       "Initializing \"" <<
       fHandlerHeader <<
-      "\" insider handler" <<
-      std::endl;
+      "\" insider handler";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,

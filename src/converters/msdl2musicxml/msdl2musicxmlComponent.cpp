@@ -53,8 +53,7 @@ S_mfcConverterComponent createMsdl2musicxmlConverterComponent ()
       std::stringstream ss;
 
       ss <<
-        "Creating the msdl2musicxml component" <<
-        std::endl;
+        "Creating the msdl2musicxml component";
 
       gWaeHandler->waeTraceWithoutLocationDetails (
         __FILE__, __LINE__,

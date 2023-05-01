@@ -177,14 +177,11 @@ void msrSlash::acceptIn (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrSlash::acceptIn ()" <<
-      std::endl;
+      "% ==> msrSlash::acceptIn ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -198,14 +195,11 @@ void msrSlash::acceptIn (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrSlash::visitStart ()" <<
-            std::endl;
+            "% ==> Launching msrSlash::visitStart ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
@@ -219,14 +213,11 @@ void msrSlash::acceptOut (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrSlash::acceptOut ()" <<
-      std::endl;
+      "% ==> msrSlash::acceptOut ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -240,14 +231,11 @@ void msrSlash::acceptOut (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrSlash::visitEnd ()" <<
-            std::endl;
+            "% ==> Launching msrSlash::visitEnd ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif        
         p->visitEnd (elem);

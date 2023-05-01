@@ -1370,7 +1370,7 @@ class EXP mxsr2msrTranslator :
 
     S_msrNote                 fCurrentNote;
 
-    int                       fPreviousNoteMusicXMLStaffNumber;
+    S_msrVoice                fCurrentNoteVoice;
 
     void                      populateCurrentNoteAndAppendItToCurrentRecipientVoice (
                                 int inputLineNumber);
@@ -1405,7 +1405,9 @@ class EXP mxsr2msrTranslator :
     // remain in the same voice, hence fCurrentRecipientVoice,
     // which doesnt change in case of a staff change
 
-    S_msrVoice                fCurrentRecipientVoice;
+//     S_msrVoice                fCurrentRecipientVoice;
+
+    int                       fPreviousNoteMusicXMLStaffNumber;
 
     msrStaffChangeKind        fCurrentStaffChangeKind;
     Bool                      fCurrentNoteIsCrossStaves;
@@ -2365,10 +2367,10 @@ class EXP mxsr2msrTranslator :
       each note therein however has an offset relative to
       the first note of the top-level tuplet, computed linearly long the way
     */
-    S_msrNote                 fCurrentTopLevelTupletFirstNote;
-    S_msrTuplet               fCurrentTopLevelTuplet;
+    S_msrNote                 fCurrentOuterMostTupletFirstNote;
+    S_msrTuplet               fCurrentOuterMostTuplet;
 
-    msrWholeNotes             fCurrentTopLevelTupletRelativeOffset;
+    msrWholeNotes             fCurrentOuterMostTupletRelativeOffset;
 
     std::list<S_msrTuplet>    fTupletsStack;
     void                      displayTupletsStack (
@@ -2384,7 +2386,8 @@ class EXP mxsr2msrTranslator :
                                 const S_msrNote& note);
 
     void                      finalizeTupletAndPopItFromTupletsStack (
-                                int inputLineNumber);
+                                int         inputLineNumber,
+                                std::string context);
 
     void                      handleTupletsPendingOnTupletsStack (
                                 int inputLineNumber);

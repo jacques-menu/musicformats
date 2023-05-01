@@ -497,14 +497,11 @@ std::string msdlKeywordKindAsMsdlString (
     ss <<
       "--> msdlKeywordKindAsMsdlString()" <<
       ", languageKind: " << msdlKeywordsLanguageKindAsString (languageKind) <<
-      ", keywordKind: \"" << msdlKeywordKindAsString (keywordKind) << "\"" <<
-      std::endl;
+      ", keywordKind: \"" << msdlKeywordKindAsString (keywordKind) << "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -562,14 +559,11 @@ std::string msdlKeywordKindAsMsdlString (
 
     ss <<
       "<-- msdlKeywordKindAsMsdlString()" <<
-      ", result: \"" << result << "\"" <<
-      std::endl;
+      ", result: \"" << result << "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -676,14 +670,11 @@ msdlKeywordKind msdlKeywordKindFromString (
     ss <<
       "--> msdlKeywordKindFromString()" <<
       ", languageKind: " << msdlKeywordsLanguageKindAsString (languageKind) <<
-      ", theString: \"" << theString << "\"" <<
-      std::endl;
+      ", theString: \"" << theString << "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -742,14 +733,11 @@ msdlKeywordKind msdlKeywordKindFromString (
     ss <<
       "<-- msdlKeywordKindFromString()" <<
       ", languageKind: " << msdlKeywordsLanguageKindAsString (languageKind) <<
-      ", result: \"" << msdlKeywordKindAsString (result) << "\"" <<
-      std::endl;
+      ", result: \"" << msdlKeywordKindAsString (result) << "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -851,14 +839,11 @@ void initializeMSDLKeywords ()
       std::stringstream ss;
 
       ss <<
-        "Initializing MSDL keywords" <<
-        std::endl;
+        "Initializing MSDL keywords";
 
       gWaeHandler->waeTraceWithLocationDetails (
         __FILE__, __LINE__,
         ss.str ());
-//         gServiceRunData->getCurrentMeasureNumber (),
-//         gServiceRunData->getScoreMeasuresNumber ());
     }
 #endif // MF_TRACE_IS_ENABLED
 

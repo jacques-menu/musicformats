@@ -94,8 +94,7 @@ void msr2brailleRegularHandler::createRegularHandlerGroups ()
     ss <<
       "Creating the regular handler groups for \"" <<
       fHandlerHeader <<
-      "\"" <<
-      std::endl;
+      "\"";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -164,8 +163,7 @@ void msr2brailleRegularHandler::createRegularHandlerGroups ()
     ss <<
       "All the regular handler groups for \"" <<
       fHandlerHeader <<
-      "\" have been created" <<
-      std::endl;
+      "\" have been created";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -1300,8 +1298,7 @@ void msr2brailleRegularHandler::checkOptionsAndArguments () const
     ss <<
       "checking options and arguments from argc/argv in \"" <<
       fHandlerHeader <<
-      "\"" <<
-      std::endl;
+      "\"";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,

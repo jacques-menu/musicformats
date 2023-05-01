@@ -91,14 +91,11 @@ void lpsrPitchesLanguageAtom::applyAtomWithValue (
     std::stringstream ss;
 
     ss <<
-      "==> oahAtom is of type 'lpsrPitchesLanguageAtom'" <<
-      std::endl;
+      "==> oahAtom is of type 'lpsrPitchesLanguageAtom'";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -110,14 +107,11 @@ void lpsrPitchesLanguageAtom::applyAtomWithValue (
     std::stringstream ss;
 
     ss <<
-      "==> oahAtom is of type 'lpsrPitchesLanguageAtom'" <<
-      std::endl;
+      "==> oahAtom is of type 'lpsrPitchesLanguageAtom'";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -163,14 +157,11 @@ void lpsrPitchesLanguageAtom::acceptIn (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> lpsrPitchesLanguageAtom::acceptIn ()" <<
-      std::endl;
+      ".\\\" ==> lpsrPitchesLanguageAtom::acceptIn ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -184,14 +175,11 @@ void lpsrPitchesLanguageAtom::acceptIn (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            ".\\\" ==> Launching lpsrPitchesLanguageAtom::visitStart ()" <<
-            std::endl;
+            ".\\\" ==> Launching lpsrPitchesLanguageAtom::visitStart ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
@@ -205,14 +193,11 @@ void lpsrPitchesLanguageAtom::acceptOut (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> lpsrPitchesLanguageAtom::acceptOut ()" <<
-      std::endl;
+      ".\\\" ==> lpsrPitchesLanguageAtom::acceptOut ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -226,14 +211,11 @@ void lpsrPitchesLanguageAtom::acceptOut (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            ".\\\" ==> Launching lpsrPitchesLanguageAtom::visitEnd ()" <<
-            std::endl;
+            ".\\\" ==> Launching lpsrPitchesLanguageAtom::visitEnd ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
@@ -247,14 +229,11 @@ void lpsrPitchesLanguageAtom::browseData (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> lpsrPitchesLanguageAtom::browseData ()" <<
-      std::endl;
+      ".\\\" ==> lpsrPitchesLanguageAtom::browseData ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }
@@ -394,14 +373,11 @@ void lpsrChordsLanguageAtom::applyAtomWithValue (
     std::stringstream ss;
 
     ss <<
-      "==> oahAtom is of type 'lpsrChordsLanguageAtom'" <<
-      std::endl;
+      "==> oahAtom is of type 'lpsrChordsLanguageAtom'";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -413,14 +389,11 @@ void lpsrChordsLanguageAtom::applyAtomWithValue (
     std::stringstream ss;
 
     ss <<
-      "==> oahAtom is of type 'lpsrChordsLanguageAtom'" <<
-      std::endl;
+      "==> oahAtom is of type 'lpsrChordsLanguageAtom'";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -464,14 +437,11 @@ void lpsrChordsLanguageAtom::acceptIn (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> lpsrChordsLanguageAtom::acceptIn ()" <<
-      std::endl;
+      ".\\\" ==> lpsrChordsLanguageAtom::acceptIn ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -485,14 +455,11 @@ void lpsrChordsLanguageAtom::acceptIn (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            ".\\\" ==> Launching lpsrChordsLanguageAtom::visitStart ()" <<
-            std::endl;
+            ".\\\" ==> Launching lpsrChordsLanguageAtom::visitStart ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
@@ -506,14 +473,11 @@ void lpsrChordsLanguageAtom::acceptOut (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> lpsrChordsLanguageAtom::acceptOut ()" <<
-      std::endl;
+      ".\\\" ==> lpsrChordsLanguageAtom::acceptOut ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -527,14 +491,11 @@ void lpsrChordsLanguageAtom::acceptOut (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            ".\\\" ==> Launching lpsrChordsLanguageAtom::visitEnd ()" <<
-            std::endl;
+            ".\\\" ==> Launching lpsrChordsLanguageAtom::visitEnd ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
@@ -548,14 +509,11 @@ void lpsrChordsLanguageAtom::browseData (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> lpsrChordsLanguageAtom::browseData ()" <<
-      std::endl;
+      ".\\\" ==> lpsrChordsLanguageAtom::browseData ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }
@@ -696,14 +654,11 @@ void lpsrStaffInstrumentNameAtom::applyAtomWithValue (
     std::stringstream ss;
 
     ss <<
-      "==> oahAtom is of type 'lpsrStaffInstrumentNameAtom'" <<
-      std::endl;
+      "==> oahAtom is of type 'lpsrStaffInstrumentNameAtom'";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -715,14 +670,11 @@ void lpsrStaffInstrumentNameAtom::applyAtomWithValue (
     std::stringstream ss;
 
     ss <<
-      "==> oahAtom is of type 'lpsrStaffInstrumentNameAtom'" <<
-      std::endl;
+      "==> oahAtom is of type 'lpsrStaffInstrumentNameAtom'";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -747,14 +699,11 @@ void lpsrStaffInstrumentNameAtom::applyAtomWithValue (
       "There are " << smSize << " matches" <<
       " for part rename string '" << theString <<
       "' with std::regex '" << regularExpression <<
-      "'" <<
-      std::endl;
+      "'";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -793,14 +742,11 @@ void lpsrStaffInstrumentNameAtom::applyAtomWithValue (
 
     ss <<
       "--> partName = \"" << partName << "\", " <<
-      "--> partInstrumentName = \"" << partInstrumentName << "\"" <<
-      std::endl;
+      "--> partInstrumentName = \"" << partInstrumentName << "\"";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -835,14 +781,11 @@ void lpsrStaffInstrumentNameAtom::acceptIn (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> lpsrStaffInstrumentNameAtom::acceptIn ()" <<
-      std::endl;
+      ".\\\" ==> lpsrStaffInstrumentNameAtom::acceptIn ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -856,14 +799,11 @@ void lpsrStaffInstrumentNameAtom::acceptIn (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            ".\\\" ==> Launching lpsrStaffInstrumentNameAtom::visitStart ()" <<
-            std::endl;
+            ".\\\" ==> Launching lpsrStaffInstrumentNameAtom::visitStart ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
@@ -877,14 +817,11 @@ void lpsrStaffInstrumentNameAtom::acceptOut (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> lpsrStaffInstrumentNameAtom::acceptOut ()" <<
-      std::endl;
+      ".\\\" ==> lpsrStaffInstrumentNameAtom::acceptOut ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -898,14 +835,11 @@ void lpsrStaffInstrumentNameAtom::acceptOut (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            ".\\\" ==> Launching lpsrStaffInstrumentNameAtom::visitEnd ()" <<
-            std::endl;
+            ".\\\" ==> Launching lpsrStaffInstrumentNameAtom::visitEnd ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
@@ -919,14 +853,11 @@ void lpsrStaffInstrumentNameAtom::browseData (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> lpsrStaffInstrumentNameAtom::browseData ()" <<
-      std::endl;
+      ".\\\" ==> lpsrStaffInstrumentNameAtom::browseData ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }
@@ -1140,14 +1071,11 @@ void lpsrTransposeAtom::applyAtomWithValue (
     std::stringstream ss;
 
     ss <<
-      "==> oahAtom is of type 'lpsrTransposeAtom'" <<
-      std::endl;
+      "==> oahAtom is of type 'lpsrTransposeAtom'";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1159,14 +1087,11 @@ void lpsrTransposeAtom::applyAtomWithValue (
     std::stringstream ss;
 
     ss <<
-      "==> oahAtom is of type 'lpsrTransposeAtom'" <<
-      std::endl;
+      "==> oahAtom is of type 'lpsrTransposeAtom'";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1191,14 +1116,11 @@ void lpsrTransposeAtom::acceptIn (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> lpsrTransposeAtom::acceptIn ()" <<
-      std::endl;
+      ".\\\" ==> lpsrTransposeAtom::acceptIn ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1212,14 +1134,11 @@ void lpsrTransposeAtom::acceptIn (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            ".\\\" ==> Launching lpsrTransposeAtom::visitStart ()" <<
-            std::endl;
+            ".\\\" ==> Launching lpsrTransposeAtom::visitStart ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
@@ -1233,14 +1152,11 @@ void lpsrTransposeAtom::acceptOut (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> lpsrTransposeAtom::acceptOut ()" <<
-      std::endl;
+      ".\\\" ==> lpsrTransposeAtom::acceptOut ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1254,14 +1170,11 @@ void lpsrTransposeAtom::acceptOut (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            ".\\\" ==> Launching lpsrTransposeAtom::visitEnd ()" <<
-            std::endl;
+            ".\\\" ==> Launching lpsrTransposeAtom::visitEnd ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
@@ -1275,14 +1188,11 @@ void lpsrTransposeAtom::browseData (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> lpsrTransposeAtom::browseData ()" <<
-      std::endl;
+      ".\\\" ==> lpsrTransposeAtom::browseData ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }
@@ -2271,14 +2181,11 @@ void lpsrOahGroup::acceptIn (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> lpsrOahGroup::acceptIn ()" <<
-      std::endl;
+      ".\\\" ==> lpsrOahGroup::acceptIn ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -2292,14 +2199,11 @@ void lpsrOahGroup::acceptIn (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            ".\\\" ==> Launching lpsrOahGroup::visitStart ()" <<
-            std::endl;
+            ".\\\" ==> Launching lpsrOahGroup::visitStart ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
@@ -2313,14 +2217,11 @@ void lpsrOahGroup::acceptOut (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> lpsrOahGroup::acceptOut ()" <<
-      std::endl;
+      ".\\\" ==> lpsrOahGroup::acceptOut ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -2334,14 +2235,11 @@ void lpsrOahGroup::acceptOut (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            ".\\\" ==> Launching lpsrOahGroup::visitEnd ()" <<
-            std::endl;
+            ".\\\" ==> Launching lpsrOahGroup::visitEnd ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
@@ -2355,14 +2253,11 @@ void lpsrOahGroup::browseData (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> lpsrOahGroup::browseData ()" <<
-      std::endl;
+      ".\\\" ==> lpsrOahGroup::browseData ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }
@@ -2651,14 +2546,11 @@ S_lpsrOahGroup createGlobalLpsrOahGroup ()
     std::stringstream ss;
 
     ss <<
-      "Creating global LPSR OAH group" <<
-      std::endl;
+      "Creating global LPSR OAH group";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 

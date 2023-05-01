@@ -132,8 +132,7 @@ EXP int mfsl (
 
     ss <<
       serviceName << " mfsl()" <<
-      ", insiderOption: " << insiderOption <<
-      std::endl;
+      ", insiderOption: " << insiderOption;
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -253,8 +252,7 @@ EXP int mfsl (
       "inputSourceName = \"" << inputSourceName << "\"" <<
       ", outputFileName = \"" << outputFileName << "\"" <<
       std::endl <<
-      separator <<
-      std::endl;
+      separator;
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -380,8 +378,7 @@ EXP int mfsl (
     std::stringstream ss;
 
     ss <<
-      "The command line options and arguments have been analyzed" <<
-      std::endl;
+      "The command line options and arguments have been analyzed";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,

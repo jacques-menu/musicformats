@@ -57,14 +57,11 @@ void lpsrComment::acceptIn (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> lpsrComment::acceptIn ()" <<
-      std::endl;
+      "% ==> lpsrComment::acceptIn ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -78,14 +75,11 @@ void lpsrComment::acceptIn (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching lpsrComment::visitStart ()" <<
-            std::endl;
+            "% ==> Launching lpsrComment::visitStart ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
@@ -99,14 +93,11 @@ void lpsrComment::acceptOut (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> lpsrComment::acceptOut ()" <<
-      std::endl;
+      "% ==> lpsrComment::acceptOut ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -120,14 +111,11 @@ void lpsrComment::acceptOut (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching lpsrComment::visitEnd ()" <<
-            std::endl;
+            "% ==> Launching lpsrComment::visitEnd ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);

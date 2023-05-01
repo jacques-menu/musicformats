@@ -485,14 +485,11 @@ msrSemiTonesPitchAndOctave::msrSemiTonesPitchAndOctave (
     ss <<
       "==> Creating pitch and octave '" <<
       asString () <<
-      "'" <<
-      std::endl;
+      "'";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }
@@ -538,7 +535,7 @@ S_msrSemiTonesPitchAndOctave msrSemiTonesPitchAndOctave::createFromString (
       "There are " << smSize << " matches" <<
       " for semitones pitch and octave string '" << theString <<
       "' with std::regex '" << regularExpression <<
-      "'" <<
+      '\'' <<
       std::endl <<
       smSize << " elements: ";
 
@@ -564,14 +561,11 @@ S_msrSemiTonesPitchAndOctave msrSemiTonesPitchAndOctave::createFromString (
 
       ss <<
         "--> pitch = \"" << pitch << "\", " <<
-        "--> octaveIndication = \"" << octaveIndication << "\"" <<
-        std::endl;
+        "--> octaveIndication = \"" << octaveIndication << "\"";
 
       gWaeHandler->waeTraceWithLocationDetails (
         __FILE__, __LINE__,
         ss.str ());
-//         gServiceRunData->getCurrentMeasureNumber (),
-//         gServiceRunData->getScoreMeasuresNumber ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -597,14 +591,11 @@ S_msrSemiTonesPitchAndOctave msrSemiTonesPitchAndOctave::createFromString (
         msrSemiTonesPitchKindAsString (
           semiTonesPitchKind) << "\", " <<
         "--> octaveKind: " <<
-        msrOctaveKindAsString (octaveKind) <<
-        std::endl;
+        msrOctaveKindAsString (octaveKind);
 
       gWaeHandler->waeTraceWithLocationDetails (
         __FILE__, __LINE__,
         ss.str ());
-//         gServiceRunData->getCurrentMeasureNumber (),
-//         gServiceRunData->getScoreMeasuresNumber ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -791,14 +782,11 @@ msrSemiTonesPitchAndAbsoluteOctave::msrSemiTonesPitchAndAbsoluteOctave (
     ss <<
       "==> Creating harmony item '" <<
       asString () <<
-      "'" <<
-      std::endl;
+      "'";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }
@@ -895,14 +883,11 @@ msrSemiTonesPitchAndRelativeOctave::msrSemiTonesPitchAndRelativeOctave (
     ss <<
       "==> Creating harmony item '" <<
       asString () <<
-      "'" <<
-      std::endl;
+      "'";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }
@@ -1000,14 +985,11 @@ msrQuarterTonesPitchAndOctave::msrQuarterTonesPitchAndOctave (
     ss <<
       "==> Creating pitch and octave '" <<
       asString () <<
-      "'" <<
-      std::endl;
+      "'";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }
@@ -1053,7 +1035,7 @@ S_msrQuarterTonesPitchAndOctave msrQuarterTonesPitchAndOctave::createFromString 
       "There are " << smSize << " matches" <<
       " for quartertones pitch and octave string '" << theString <<
       "' with std::regex '" << regularExpression <<
-      "'" <<
+      '\'' <<
       std::endl <<
       smSize << " elements: ";
 
@@ -1079,14 +1061,11 @@ S_msrQuarterTonesPitchAndOctave msrQuarterTonesPitchAndOctave::createFromString 
 
       ss <<
         "--> pitch = \"" << pitch << "\", " <<
-        "--> octaveIndication = \"" << octaveIndication << "\"" <<
-        std::endl;
+        "--> octaveIndication = \"" << octaveIndication << "\"";
 
       gWaeHandler->waeTraceWithLocationDetails (
         __FILE__, __LINE__,
         ss.str ());
-//         gServiceRunData->getCurrentMeasureNumber (),
-//         gServiceRunData->getScoreMeasuresNumber ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1114,14 +1093,11 @@ S_msrQuarterTonesPitchAndOctave msrQuarterTonesPitchAndOctave::createFromString 
           msrQuarterTonesPitchKindAsString (
             quarterTonesPitchKind) <<
         "\", " <<
-        "--> octaveKind: " << msrOctaveKindAsString (octaveKind) <<
-        std::endl;
+        "--> octaveKind: " << msrOctaveKindAsString (octaveKind);
 
       gWaeHandler->waeTraceWithLocationDetails (
         __FILE__, __LINE__,
         ss.str ());
-//         gServiceRunData->getCurrentMeasureNumber (),
-//         gServiceRunData->getScoreMeasuresNumber ());
     }
 #endif // MF_TRACE_IS_ENABLED
 

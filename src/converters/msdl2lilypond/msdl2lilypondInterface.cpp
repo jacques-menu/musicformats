@@ -360,8 +360,7 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
 
       ss <<
         std::endl <<
-        gLanguage->closingLilypondFile (outputFileName) <<
-        std::endl;
+        gLanguage->closingLilypondFile (outputFileName);
 
       gWaeHandler->waeTraceWithoutLocationDetails (
         __FILE__, __LINE__,
@@ -429,8 +428,7 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
 
     ss <<
       serviceName << " main()" <<
-      ", insiderOption: " << insiderOption <<
-      std::endl;
+      ", insiderOption: " << insiderOption;
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,

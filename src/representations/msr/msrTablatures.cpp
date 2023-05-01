@@ -78,14 +78,11 @@ msrFrameNote::msrFrameNote (
     ss <<
       "Creating frame note '" <<
       asString () <<
-      "'" <<
-      std::endl;
+      "'";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }
@@ -142,14 +139,11 @@ void msrFrameNote::acceptIn (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrFrameNote::acceptIn ()" <<
-      std::endl;
+      "% ==> msrFrameNote::acceptIn ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -163,14 +157,11 @@ void msrFrameNote::acceptIn (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrFrameNote::visitStart ()" <<
-            std::endl;
+            "% ==> Launching msrFrameNote::visitStart ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
@@ -184,14 +175,11 @@ void msrFrameNote::acceptOut (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrFrameNote::acceptOut ()" <<
-      std::endl;
+      "% ==> msrFrameNote::acceptOut ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -205,14 +193,11 @@ void msrFrameNote::acceptOut (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrFrameNote::visitEnd ()" <<
-            std::endl;
+            "% ==> Launching msrFrameNote::visitEnd ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif        
         p->visitEnd (elem);
@@ -301,14 +286,11 @@ msrFrame::msrFrame (
     ss <<
       "Creating frame '" <<
       asString () <<
-      "'" <<
-      std::endl;
+      "'";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }
@@ -425,14 +407,11 @@ void msrFrame::acceptIn (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrFrame::acceptIn ()" <<
-      std::endl;
+      "% ==> msrFrame::acceptIn ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -446,14 +425,11 @@ void msrFrame::acceptIn (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrFrame::visitStart ()" <<
-            std::endl;
+            "% ==> Launching msrFrame::visitStart ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
@@ -467,14 +443,11 @@ void msrFrame::acceptOut (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrFrame::acceptOut ()" <<
-      std::endl;
+      "% ==> msrFrame::acceptOut ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -488,14 +461,11 @@ void msrFrame::acceptOut (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrFrame::visitEnd ()" <<
-            std::endl;
+            "% ==> Launching msrFrame::visitEnd ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif        
         p->visitEnd (elem);

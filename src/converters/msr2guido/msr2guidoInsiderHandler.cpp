@@ -85,8 +85,7 @@ Usage: msr2guido [[option]* [MusicXMLFile|-] [[option]*
     ss <<
       "Initializing \"" <<
       fHandlerHeader <<
-      "\" regular options handler" <<
-      std::endl;
+      "\" regular options handler";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -146,8 +145,7 @@ void msr2guidoInsiderHandler::createTheMsr2guidoPrefixes ()
     ss <<
       "Creating the msr2guido prefixes in \"" <<
       fHandlerHeader <<
-      "\"" <<
-      std::endl;
+      "\"";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -169,8 +167,7 @@ void msr2guidoInsiderHandler::createTheMsr2guidoOptionGroups (
     ss <<
       "Creating the \"" <<
       fHandlerHeader <<
-      "\" insider option groups" <<
-      std::endl;
+      "\" insider option groups";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -248,8 +245,7 @@ void msr2guidoInsiderHandler::checkOptionsAndArguments () const
     ss <<
       "checking options and arguments from argc/argv in \"" <<
       fHandlerHeader <<
-      "\"" <<
-      std::endl;
+      "\"";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -270,8 +266,7 @@ std::string msr2guidoInsiderHandler::fetchOutputFileNameFromTheOptions () const
     ss <<
       "Fetching the output file name from the options in OAH handler \"" <<
       fHandlerHeader <<
-      "\"" <<
-      std::endl;
+      "\"";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -477,8 +472,7 @@ void msr2guidoInsiderOahGroup::acceptIn (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> msr2guidoInsiderOahGroup::acceptIn ()" <<
-      std::endl;
+      ".\\\" ==> msr2guidoInsiderOahGroup::acceptIn ()";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -496,8 +490,7 @@ void msr2guidoInsiderOahGroup::acceptIn (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            ".\\\" ==> Launching msr2guidoInsiderOahGroup::visitStart ()" <<
-            std::endl;
+            ".\\\" ==> Launching msr2guidoInsiderOahGroup::visitStart ()";
 
           gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
@@ -515,8 +508,7 @@ void msr2guidoInsiderOahGroup::acceptOut (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> msr2guidoInsiderOahGroup::acceptOut ()" <<
-      std::endl;
+      ".\\\" ==> msr2guidoInsiderOahGroup::acceptOut ()";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -534,8 +526,7 @@ void msr2guidoInsiderOahGroup::acceptOut (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            ".\\\" ==> Launching msr2guidoInsiderOahGroup::visitEnd ()" <<
-            std::endl;
+            ".\\\" ==> Launching msr2guidoInsiderOahGroup::visitEnd ()";
 
           gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
@@ -553,8 +544,7 @@ void msr2guidoInsiderOahGroup::browseData (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> msr2guidoInsiderOahGroup::browseData ()" <<
-      std::endl;
+      ".\\\" ==> msr2guidoInsiderOahGroup::browseData ()";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -722,8 +712,7 @@ S_msr2guidoInsiderOahGroup createGlobalMsr2guidoOahGroup ()
     std::stringstream ss;
 
     ss <<
-      "Creating global msr2guido OAH group" <<
-      std::endl;
+      "Creating global msr2guido OAH group";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,

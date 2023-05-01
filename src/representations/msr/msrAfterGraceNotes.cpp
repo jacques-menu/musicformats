@@ -85,14 +85,11 @@ S_msrAfterGraceNotesGroupContents msrAfterGraceNotesGroupContents::createAfterGr
     std::stringstream ss;
 
     ss <<
-      "Creating a newborn clone of after grace notes group" <<
-      std::endl;
+      "Creating a newborn clone of after grace notes group";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -132,14 +129,11 @@ void msrAfterGraceNotesGroupContents::acceptIn (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrAfterGraceNotesGroupContents::acceptIn ()" <<
-      std::endl;
+      "% ==> msrAfterGraceNotesGroupContents::acceptIn ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -153,14 +147,11 @@ void msrAfterGraceNotesGroupContents::acceptIn (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrAfterGraceNotesGroupContents::visitStart ()" <<
-            std::endl;
+            "% ==> Launching msrAfterGraceNotesGroupContents::visitStart ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
@@ -174,14 +165,11 @@ void msrAfterGraceNotesGroupContents::acceptOut (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrAfterGraceNotesGroupContents::acceptOut ()" <<
-      std::endl;
+      "% ==> msrAfterGraceNotesGroupContents::acceptOut ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -195,14 +183,11 @@ void msrAfterGraceNotesGroupContents::acceptOut (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrAfterGraceNotesGroupContents::visitEnd ()" <<
-            std::endl;
+            "% ==> Launching msrAfterGraceNotesGroupContents::visitEnd ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
@@ -370,14 +355,11 @@ S_msrAfterGraceNotesGroup msrAfterGraceNotesGroup::createAfterGraceNotesGroupNew
     ss <<
       "Creating a newborn clone of after grace notes group '" <<
       asShortString () <<
-      "'" <<
-      std::endl;
+      "'";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -420,14 +402,11 @@ void msrAfterGraceNotesGroup::acceptIn (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrAfterGraceNotesGroup::acceptIn ()" <<
-      std::endl;
+      "% ==> msrAfterGraceNotesGroup::acceptIn ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -441,14 +420,11 @@ void msrAfterGraceNotesGroup::acceptIn (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrAfterGraceNotesGroup::visitStart ()" <<
-            std::endl;
+            "% ==> Launching msrAfterGraceNotesGroup::visitStart ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
@@ -462,14 +438,11 @@ void msrAfterGraceNotesGroup::acceptOut (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrAfterGraceNotesGroup::acceptOut ()" <<
-      std::endl;
+      "% ==> msrAfterGraceNotesGroup::acceptOut ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -483,14 +456,11 @@ void msrAfterGraceNotesGroup::acceptOut (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrAfterGraceNotesGroup::visitEnd ()" <<
-            std::endl;
+            "% ==> Launching msrAfterGraceNotesGroup::visitEnd ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);

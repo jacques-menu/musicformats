@@ -93,14 +93,11 @@ void msdlKeywordsLanguageAtom::applyAtomWithValue (
     std::stringstream ss;
 
     ss <<
-      "==> oahAtom is of type 'msdlKeywordsLanguageAtom'" <<
-      std::endl;
+      "==> oahAtom is of type 'msdlKeywordsLanguageAtom'";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -112,14 +109,11 @@ void msdlKeywordsLanguageAtom::applyAtomWithValue (
     std::stringstream ss;
 
     ss <<
-      "==> oahAtom is of type 'msdlKeywordsLanguageAtom'" <<
-      std::endl;
+      "==> oahAtom is of type 'msdlKeywordsLanguageAtom'";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -163,14 +157,11 @@ void msdlKeywordsLanguageAtom::acceptIn (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> msdlKeywordsLanguageAtom::acceptIn ()" <<
-      std::endl;
+      ".\\\" ==> msdlKeywordsLanguageAtom::acceptIn ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -184,14 +175,11 @@ void msdlKeywordsLanguageAtom::acceptIn (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            ".\\\" ==> Launching msdlKeywordsLanguageAtom::visitStart ()" <<
-            std::endl;
+            ".\\\" ==> Launching msdlKeywordsLanguageAtom::visitStart ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
@@ -205,14 +193,11 @@ void msdlKeywordsLanguageAtom::acceptOut (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> msdlKeywordsLanguageAtom::acceptOut ()" <<
-      std::endl;
+      ".\\\" ==> msdlKeywordsLanguageAtom::acceptOut ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -226,14 +211,11 @@ void msdlKeywordsLanguageAtom::acceptOut (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            ".\\\" ==> Launching msdlKeywordsLanguageAtom::visitEnd ()" <<
-            std::endl;
+            ".\\\" ==> Launching msdlKeywordsLanguageAtom::visitEnd ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
@@ -247,14 +229,11 @@ void msdlKeywordsLanguageAtom::browseData (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> msdlKeywordsLanguageAtom::browseData ()" <<
-      std::endl;
+      ".\\\" ==> msdlKeywordsLanguageAtom::browseData ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }
@@ -449,14 +428,11 @@ void oahDisplayMsdlKeywordsInLanguageAtom::acceptIn (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> oahDisplayMsdlKeywordsInLanguageAtom::acceptIn ()" <<
-      std::endl;
+      ".\\\" ==> oahDisplayMsdlKeywordsInLanguageAtom::acceptIn ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -470,14 +446,11 @@ void oahDisplayMsdlKeywordsInLanguageAtom::acceptIn (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            ".\\\" ==> Launching oahDisplayMsdlKeywordsInLanguageAtom::visitStart ()" <<
-            std::endl;
+            ".\\\" ==> Launching oahDisplayMsdlKeywordsInLanguageAtom::visitStart ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
@@ -491,14 +464,11 @@ void oahDisplayMsdlKeywordsInLanguageAtom::acceptOut (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> oahDisplayMsdlKeywordsInLanguageAtom::acceptOut ()" <<
-      std::endl;
+      ".\\\" ==> oahDisplayMsdlKeywordsInLanguageAtom::acceptOut ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -512,14 +482,11 @@ void oahDisplayMsdlKeywordsInLanguageAtom::acceptOut (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            ".\\\" ==> Launching oahDisplayMsdlKeywordsInLanguageAtom::visitEnd ()" <<
-            std::endl;
+            ".\\\" ==> Launching oahDisplayMsdlKeywordsInLanguageAtom::visitEnd ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
@@ -533,14 +500,11 @@ void oahDisplayMsdlKeywordsInLanguageAtom::browseData (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> oahDisplayMsdlKeywordsInLanguageAtom::browseData ()" <<
-      std::endl;
+      ".\\\" ==> oahDisplayMsdlKeywordsInLanguageAtom::browseData ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }
@@ -697,14 +661,11 @@ void oahDisplayMsdlTokensInLanguageAtom::acceptIn (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> oahDisplayMsdlTokensInLanguageAtom::acceptIn ()" <<
-      std::endl;
+      ".\\\" ==> oahDisplayMsdlTokensInLanguageAtom::acceptIn ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -718,14 +679,11 @@ void oahDisplayMsdlTokensInLanguageAtom::acceptIn (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            ".\\\" ==> Launching oahDisplayMsdlTokensInLanguageAtom::visitStart ()" <<
-            std::endl;
+            ".\\\" ==> Launching oahDisplayMsdlTokensInLanguageAtom::visitStart ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
@@ -739,14 +697,11 @@ void oahDisplayMsdlTokensInLanguageAtom::acceptOut (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> oahDisplayMsdlTokensInLanguageAtom::acceptOut ()" <<
-      std::endl;
+      ".\\\" ==> oahDisplayMsdlTokensInLanguageAtom::acceptOut ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -760,14 +715,11 @@ void oahDisplayMsdlTokensInLanguageAtom::acceptOut (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            ".\\\" ==> Launching oahDisplayMsdlTokensInLanguageAtom::visitEnd ()" <<
-            std::endl;
+            ".\\\" ==> Launching oahDisplayMsdlTokensInLanguageAtom::visitEnd ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
@@ -781,14 +733,11 @@ void oahDisplayMsdlTokensInLanguageAtom::browseData (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> oahDisplayMsdlTokensInLanguageAtom::browseData ()" <<
-      std::endl;
+      ".\\\" ==> oahDisplayMsdlTokensInLanguageAtom::browseData ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }
@@ -893,14 +842,11 @@ void msdlCommentsTypeAtom::applyAtomWithValue (
     std::stringstream ss;
 
     ss <<
-      "==> oahAtom is of type 'msdlCommentsTypeAtom'" <<
-      std::endl;
+      "==> oahAtom is of type 'msdlCommentsTypeAtom'";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -912,14 +858,11 @@ void msdlCommentsTypeAtom::applyAtomWithValue (
     std::stringstream ss;
 
     ss <<
-      "==> oahAtom is of type 'msdlCommentsTypeAtom'" <<
-      std::endl;
+      "==> oahAtom is of type 'msdlCommentsTypeAtom'";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -963,14 +906,11 @@ void msdlCommentsTypeAtom::acceptIn (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> msdlCommentsTypeAtom::acceptIn ()" <<
-      std::endl;
+      ".\\\" ==> msdlCommentsTypeAtom::acceptIn ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -984,14 +924,11 @@ void msdlCommentsTypeAtom::acceptIn (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            ".\\\" ==> Launching msdlCommentsTypeAtom::visitStart ()" <<
-            std::endl;
+            ".\\\" ==> Launching msdlCommentsTypeAtom::visitStart ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
@@ -1005,14 +942,11 @@ void msdlCommentsTypeAtom::acceptOut (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> msdlCommentsTypeAtom::acceptOut ()" <<
-      std::endl;
+      ".\\\" ==> msdlCommentsTypeAtom::acceptOut ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1026,14 +960,11 @@ void msdlCommentsTypeAtom::acceptOut (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            ".\\\" ==> Launching msdlCommentsTypeAtom::visitEnd ()" <<
-            std::endl;
+            ".\\\" ==> Launching msdlCommentsTypeAtom::visitEnd ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
@@ -1047,14 +978,11 @@ void msdlCommentsTypeAtom::browseData (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> msdlCommentsTypeAtom::browseData ()" <<
-      std::endl;
+      ".\\\" ==> msdlCommentsTypeAtom::browseData ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }
@@ -1198,14 +1126,11 @@ void msdlUserLanguageAtom::applyAtomWithValue (
     std::stringstream ss;
 
     ss <<
-      "==> oahAtom is of type 'msdlUserLanguageAtom'" <<
-      std::endl;
+      "==> oahAtom is of type 'msdlUserLanguageAtom'";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1217,14 +1142,11 @@ void msdlUserLanguageAtom::applyAtomWithValue (
     std::stringstream ss;
 
     ss <<
-      "==> oahAtom is of type 'msdlUserLanguageAtom'" <<
-      std::endl;
+      "==> oahAtom is of type 'msdlUserLanguageAtom'";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1270,14 +1192,11 @@ void msdlUserLanguageAtom::acceptIn (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> msdlUserLanguageAtom::acceptIn ()" <<
-      std::endl;
+      ".\\\" ==> msdlUserLanguageAtom::acceptIn ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1291,14 +1210,11 @@ void msdlUserLanguageAtom::acceptIn (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            ".\\\" ==> Launching msdlUserLanguageAtom::visitStart ()" <<
-            std::endl;
+            ".\\\" ==> Launching msdlUserLanguageAtom::visitStart ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
@@ -1312,14 +1228,11 @@ void msdlUserLanguageAtom::acceptOut (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> msdlUserLanguageAtom::acceptOut ()" <<
-      std::endl;
+      ".\\\" ==> msdlUserLanguageAtom::acceptOut ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1333,14 +1246,11 @@ void msdlUserLanguageAtom::acceptOut (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            ".\\\" ==> Launching msdlUserLanguageAtom::visitEnd ()" <<
-            std::endl;
+            ".\\\" ==> Launching msdlUserLanguageAtom::visitEnd ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
@@ -1354,14 +1264,11 @@ void msdlUserLanguageAtom::browseData (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> msdlUserLanguageAtom::browseData ()" <<
-      std::endl;
+      ".\\\" ==> msdlUserLanguageAtom::browseData ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }
@@ -1508,14 +1415,11 @@ void msdlPitchesLanguageAtom::applyAtomWithValue (
     std::stringstream ss;
 
     ss <<
-      "==> oahAtom is of type 'msdlPitchesLanguageAtom'" <<
-      std::endl;
+      "==> oahAtom is of type 'msdlPitchesLanguageAtom'";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1527,14 +1431,11 @@ void msdlPitchesLanguageAtom::applyAtomWithValue (
     std::stringstream ss;
 
     ss <<
-      "==> oahAtom is of type 'msdlPitchesLanguageAtom'" <<
-      std::endl;
+      "==> oahAtom is of type 'msdlPitchesLanguageAtom'";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1580,14 +1481,11 @@ void msdlPitchesLanguageAtom::acceptIn (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> msdlPitchesLanguageAtom::acceptIn ()" <<
-      std::endl;
+      ".\\\" ==> msdlPitchesLanguageAtom::acceptIn ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1601,14 +1499,11 @@ void msdlPitchesLanguageAtom::acceptIn (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            ".\\\" ==> Launching msdlPitchesLanguageAtom::visitStart ()" <<
-            std::endl;
+            ".\\\" ==> Launching msdlPitchesLanguageAtom::visitStart ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
@@ -1622,14 +1517,11 @@ void msdlPitchesLanguageAtom::acceptOut (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> msdlPitchesLanguageAtom::acceptOut ()" <<
-      std::endl;
+      ".\\\" ==> msdlPitchesLanguageAtom::acceptOut ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1643,14 +1535,11 @@ void msdlPitchesLanguageAtom::acceptOut (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            ".\\\" ==> Launching msdlPitchesLanguageAtom::visitEnd ()" <<
-            std::endl;
+            ".\\\" ==> Launching msdlPitchesLanguageAtom::visitEnd ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
@@ -1664,14 +1553,11 @@ void msdlPitchesLanguageAtom::browseData (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> msdlPitchesLanguageAtom::browseData ()" <<
-      std::endl;
+      ".\\\" ==> msdlPitchesLanguageAtom::browseData ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }
@@ -2026,14 +1912,11 @@ void msdlInputOahGroup::acceptIn (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> msdlInputOahGroup::acceptIn ()" <<
-      std::endl;
+      ".\\\" ==> msdlInputOahGroup::acceptIn ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -2047,14 +1930,11 @@ void msdlInputOahGroup::acceptIn (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            ".\\\" ==> Launching msdlInputOahGroup::visitStart ()" <<
-            std::endl;
+            ".\\\" ==> Launching msdlInputOahGroup::visitStart ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
@@ -2068,14 +1948,11 @@ void msdlInputOahGroup::acceptOut (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> msdlInputOahGroup::acceptOut ()" <<
-      std::endl;
+      ".\\\" ==> msdlInputOahGroup::acceptOut ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -2089,14 +1966,11 @@ void msdlInputOahGroup::acceptOut (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            ".\\\" ==> Launching msdlInputOahGroup::visitEnd ()" <<
-            std::endl;
+            ".\\\" ==> Launching msdlInputOahGroup::visitEnd ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
@@ -2110,14 +1984,11 @@ void msdlInputOahGroup::browseData (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> msdlInputOahGroup::browseData ()" <<
-      std::endl;
+      ".\\\" ==> msdlInputOahGroup::browseData ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }
@@ -2194,14 +2065,11 @@ S_msdlInputOahGroup createGlobalMsdlInputOahGroup (
     std::stringstream ss;
 
     ss <<
-      "Creating global MSDR OAH group" <<
-      std::endl;
+      "Creating global MSDR OAH group";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 

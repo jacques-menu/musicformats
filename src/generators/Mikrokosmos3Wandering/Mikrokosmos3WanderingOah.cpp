@@ -207,8 +207,7 @@ void Mikrokosmos3WanderingOahGroup::acceptIn (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> Mikrokosmos3WanderingOahGroup::acceptIn ()" <<
-      std::endl;
+      ".\\\" ==> Mikrokosmos3WanderingOahGroup::acceptIn ()";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -226,8 +225,7 @@ void Mikrokosmos3WanderingOahGroup::acceptIn (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            ".\\\" ==> Launching Mikrokosmos3WanderingOahGroup::visitStart ()" <<
-            std::endl;
+            ".\\\" ==> Launching Mikrokosmos3WanderingOahGroup::visitStart ()";
 
           gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
@@ -245,8 +243,7 @@ void Mikrokosmos3WanderingOahGroup::acceptOut (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> Mikrokosmos3WanderingOahGroup::acceptOut ()" <<
-      std::endl;
+      ".\\\" ==> Mikrokosmos3WanderingOahGroup::acceptOut ()";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -264,8 +261,7 @@ void Mikrokosmos3WanderingOahGroup::acceptOut (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            ".\\\" ==> Launching Mikrokosmos3WanderingOahGroup::visitEnd ()" <<
-            std::endl;
+            ".\\\" ==> Launching Mikrokosmos3WanderingOahGroup::visitEnd ()";
 
           gWaeHandler->waeTraceWithoutLocationDetails (
             __FILE__, __LINE__,
@@ -283,8 +279,7 @@ void Mikrokosmos3WanderingOahGroup::browseData (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> Mikrokosmos3WanderingOahGroup::browseData ()" <<
-      std::endl;
+      ".\\\" ==> Mikrokosmos3WanderingOahGroup::browseData ()";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,
@@ -357,8 +352,7 @@ S_Mikrokosmos3WanderingOahGroup createGlobalMikrokosmos3WanderingOahGroup ()
     std::stringstream ss;
 
     ss <<
-      "Creating global Mikrokosmos3Wandering OAH group" <<
-      std::endl;
+      "Creating global Mikrokosmos3Wandering OAH group";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,

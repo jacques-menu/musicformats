@@ -28,8 +28,7 @@ S_mfcPassComponent createMxsr2guidoComponent ()
       std::stringstream ss;
 
       ss <<
-        "Initializing mxsr2guido pass component" <<
-        std::endl;
+        "Initializing mxsr2guido pass component";
 
       gWaeHandler->waeTraceWithoutLocationDetails (
         __FILE__, __LINE__,

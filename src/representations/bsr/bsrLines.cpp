@@ -67,14 +67,11 @@ bsrLine::bsrLine (
       "Creating bsrLine '" <<
       asString () <<
       "', line " <<
-      fInputLineNumber <<
-      std::endl;
+      fInputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }
@@ -90,14 +87,11 @@ S_bsrLine bsrLine::createLineNewbornClone ()
 
     ss <<
       "Creating a newborn clone of line " <<
-      asString () <<
-      std::endl;
+      asString ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -195,7 +189,7 @@ void bsrLine::appendSpacesToLine (S_bsrSpaces spaces)
       spaces->asShortString () <<
       "' to line '" <<
       asString () <<
-      "'" <<
+      '\'' <<
       std::endl;
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -233,7 +227,7 @@ void bsrLine::appendTimeSignatureToLine (S_bsrTimeSignature timeSignature)
       timeSignature->asShortString () <<
       " to line '" <<
       asString () <<
-      "'" <<
+      '\'' <<
       std::endl;
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -253,7 +247,7 @@ void bsrLine::insertTimeBeforeLastElementOfLine (S_bsrTimeSignature timeSignatur
       timeSignature->asShortString () <<
       "' before the last element of line '" <<
       asString () <<
-      "'" <<
+      '\'' <<
       std::endl;
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -290,7 +284,7 @@ void bsrLine::appendMeasureToLine (S_bsrMeasure measure)
       measure->asShortString () <<
       "' to line '" <<
       asString () <<
-      "'" <<
+      '\'' <<
       std::endl;
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -357,7 +351,7 @@ void bsrLine::appendNoteToLine (S_bsrNote note)
       note->asShortString () <<
       "' to line '" <<
       asString () <<
-      "'" <<
+      '\'' <<
       std::endl;
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -428,14 +422,11 @@ void bsrLine::acceptIn (basevisitor* v)
 
     ss <<
       "% --> End visiting bsrTranscriptionNotesElement" <<
-      "% ==> bsrLine::acceptIn ()" <<
-      std::endl;
+      "% ==> bsrLine::acceptIn ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -449,14 +440,11 @@ void bsrLine::acceptIn (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching bsrLine::visitStart ()" <<
-            std::endl;
+            "% ==> Launching bsrLine::visitStart ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
@@ -471,14 +459,11 @@ void bsrLine::acceptOut (basevisitor* v)
 
     ss <<
       "% --> End visiting bsrTranscriptionNotesElement" <<
-      "% ==> bsrLine::acceptOut ()" <<
-      std::endl;
+      "% ==> bsrLine::acceptOut ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -492,14 +477,11 @@ void bsrLine::acceptOut (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching bsrLine::visitEnd ()" <<
-            std::endl;
+            "% ==> Launching bsrLine::visitEnd ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);

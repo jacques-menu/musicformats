@@ -336,14 +336,11 @@ void lpsrPartBlock::appendChordNamesContextToPartBlock (
     ss <<
       "Sorting the voices in part block for part \"" <<
       fPart->getPartCombinedName () << "\"" <<
-      ", line " << inputLineNumber <<
-      std::endl;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -412,14 +409,11 @@ void lpsrPartBlock::acceptIn (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> lpsrPartBlock::acceptIn ()" <<
-      std::endl;
+      "% ==> lpsrPartBlock::acceptIn ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -433,14 +427,11 @@ void lpsrPartBlock::acceptIn (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching lpsrPartBlock::visitStart ()" <<
-            std::endl;
+            "% ==> Launching lpsrPartBlock::visitStart ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
@@ -454,14 +445,11 @@ void lpsrPartBlock::acceptOut (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> lpsrPartBlock::acceptOut ()" <<
-      std::endl;
+      "% ==> lpsrPartBlock::acceptOut ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -475,14 +463,11 @@ void lpsrPartBlock::acceptOut (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching lpsrPartBlock::visitEnd ()" <<
-            std::endl;
+            "% ==> Launching lpsrPartBlock::visitEnd ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);
@@ -496,14 +481,11 @@ void lpsrPartBlock::browseData (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> lpsrPartBlock::browseData ()" <<
-      std::endl;
+      "% ==> lpsrPartBlock::browseData ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -522,14 +504,11 @@ void lpsrPartBlock::browseData (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% <== lpsrPartBlock::browseData ()" <<
-      std::endl;
+      "% <== lpsrPartBlock::browseData ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }

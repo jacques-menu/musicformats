@@ -29,14 +29,11 @@ S_mfcRepresentationComponent getMsdrRepresentationComponent ()
       std::stringstream ss;
 
       ss <<
-        "Create the MSDR format component" <<
-        std::endl;
+        "Create the MSDR format component";
 
       gWaeHandler->waeTraceWithLocationDetails (
         __FILE__, __LINE__,
         ss.str ());
-//         gServiceRunData->getCurrentMeasureNumber (),
-//         gServiceRunData->getScoreMeasuresNumber ());
     }
 #endif // MF_TRACE_IS_ENABLED
 

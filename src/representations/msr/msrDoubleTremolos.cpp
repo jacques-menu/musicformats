@@ -168,14 +168,11 @@ S_msrDoubleTremolo msrDoubleTremolo::createDoubleTremoloNewbornClone (
     std::stringstream ss;
 
     ss <<
-      "Creating a newborn clone of a double tremolo" <<
-      std::endl;
+      "Creating a newborn clone of a double tremolo";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -346,14 +343,11 @@ void msrDoubleTremolo::setDoubleTremoloNoteFirstElement (const S_msrNote& note)
     ss <<
       "Setting note " << note->asShortString () <<
       " as first element of double tremolo " <<
-      asShortString () <<
-      std::endl;
+      asShortString ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -418,10 +412,10 @@ void msrDoubleTremolo::setDoubleTremoloNoteFirstElement (const S_msrNote& note)
       numberOfRepeatsAsRational <<
       std::endl <<
       "fDoubleTremoloSoundingWholeNotes: '" <<
-      fDoubleTremoloSoundingWholeNotes.asString () << "'" <<
+      fDoubleTremoloSoundingWholeNotes.asString () << '\'' <<
       std::endl <<
       "fDoubleTremoloElementsWholeNotes: '" <<
-      fDoubleTremoloElementsWholeNotes.asString () << "'" <<
+      fDoubleTremoloElementsWholeNotes.asString () << '\'' <<
       std::endl <<
       "line " << inputLineNumber;
 
@@ -443,17 +437,14 @@ void msrDoubleTremolo::setDoubleTremoloNoteFirstElement (const S_msrNote& note)
       "Setting notes double tremolo number of repeats to '" <<
       fDoubleTremoloNumberOfRepeats <<
       "', fDoubleTremoloSoundingWholeNotes: '" <<
-      fDoubleTremoloSoundingWholeNotes.asString () << "'" <<
+      fDoubleTremoloSoundingWholeNotes.asString () << '\'' <<
       ", fDoubleTremoloElementsWholeNotes: '" <<
-      fDoubleTremoloElementsWholeNotes.asString () << "'" <<
-      "', line " << inputLineNumber <<
-      std::endl;
+      fDoubleTremoloElementsWholeNotes.asString () << '\'' <<
+      "', line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 }
@@ -468,14 +459,11 @@ void msrDoubleTremolo::setDoubleTremoloNoteSecondElement (
     ss <<
       "Setting note " << note->asShortString () <<
       " as second element of double tremolo " <<
-      asShortString () <<
-      std::endl;
+      asShortString ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -513,15 +501,12 @@ void msrDoubleTremolo::setDoubleTremoloNoteSecondElement (
       "', doubleTremoloSoundingWholeNotes: '" <<
       fDoubleTremoloSoundingWholeNotes.asString () <<
       "', doubleTremoloElementsNotesDuration: '" <<
-      fDoubleTremoloElementsWholeNotes.asString () << "'" <<
-      "', line " << inputLineNumber <<
-      std::endl;
+      fDoubleTremoloElementsWholeNotes.asString () << '\'' <<
+      "', line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -571,14 +556,11 @@ void msrDoubleTremolo::setDoubleTremoloChordFirstElement (
     ss <<
       "Setting chord " << chord->asString () <<
       " as first element of double tremolo " <<
-      asShortString () <<
-      std::endl;
+      asShortString ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -646,14 +628,11 @@ void msrDoubleTremolo::setDoubleTremoloChordSecondElement (const S_msrChord& cho
     ss <<
       "Setting chord " << chord->asString () <<
       " as second element of double tremolo " <<
-      asShortString () <<
-      std::endl;
+      asShortString ();
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -718,14 +697,11 @@ void msrDoubleTremolo::acceptIn (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrDoubleTremolo::acceptIn ()" <<
-      std::endl;
+      "% ==> msrDoubleTremolo::acceptIn ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -739,14 +715,11 @@ void msrDoubleTremolo::acceptIn (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrDoubleTremolo::visitStart ()" <<
-            std::endl;
+            "% ==> Launching msrDoubleTremolo::visitStart ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
@@ -760,14 +733,11 @@ void msrDoubleTremolo::acceptOut (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrDoubleTremolo::acceptOut ()" <<
-      std::endl;
+      "% ==> msrDoubleTremolo::acceptOut ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -781,14 +751,11 @@ void msrDoubleTremolo::acceptOut (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrDoubleTremolo::visitEnd ()" <<
-            std::endl;
+            "% ==> Launching msrDoubleTremolo::visitEnd ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);

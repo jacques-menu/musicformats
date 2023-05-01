@@ -25,8 +25,7 @@ S_mfcPassComponent createMxsr2musicxmlComponent ()
     std::stringstream ss;
 
     ss <<
-      "Creating the mxsr2musicxml pass component" <<
-      std::endl;
+      "Creating the mxsr2musicxml pass component";
 
     gWaeHandler->waeTraceWithoutLocationDetails (
       __FILE__, __LINE__,

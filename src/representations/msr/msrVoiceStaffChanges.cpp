@@ -77,14 +77,11 @@ S_msrVoiceStaffChange msrVoiceStaffChange::createStaffChangeNewbornClone ()
     ss <<
       "Creating a newborn clone of voice staff change '" <<
       asString () <<
-      "'" <<
-      std::endl;
+      "'";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -135,14 +132,11 @@ void msrVoiceStaffChange::acceptIn (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrVoiceStaffChange::acceptIn ()" <<
-      std::endl;
+      "% ==> msrVoiceStaffChange::acceptIn ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -156,14 +150,11 @@ void msrVoiceStaffChange::acceptIn (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrVoiceStaffChange::visitStart ()" <<
-            std::endl;
+            "% ==> Launching msrVoiceStaffChange::visitStart ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitStart (elem);
@@ -177,14 +168,11 @@ void msrVoiceStaffChange::acceptOut (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% ==> msrVoiceStaffChange::acceptOut ()" <<
-      std::endl;
+      "% ==> msrVoiceStaffChange::acceptOut ()";
 
     gWaeHandler->waeTraceWithLocationDetails (
       __FILE__, __LINE__,
       ss.str ());
-//       gServiceRunData->getCurrentMeasureNumber (),
-//       gServiceRunData->getScoreMeasuresNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -198,14 +186,11 @@ void msrVoiceStaffChange::acceptOut (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrVoiceStaffChange::visitEnd ()" <<
-            std::endl;
+            "% ==> Launching msrVoiceStaffChange::visitEnd ()";
 
           gWaeHandler->waeTraceWithLocationDetails (
             __FILE__, __LINE__,
             ss.str ());
-//             gServiceRunData->getCurrentMeasureNumber (),
-//             gServiceRunData->getScoreMeasuresNumber ());
         }
 #endif // MF_TRACE_IS_ENABLED
         p->visitEnd (elem);

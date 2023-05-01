@@ -28,8 +28,7 @@ S_mfcPassComponent createMsr2msrComponent ()
       std::stringstream ss;
 
       ss <<
-        "Creating the msr2msr pass component" <<
-        std::endl;
+        "Creating the msr2msr pass component";
 
       gWaeHandler->waeTraceWithoutLocationDetails (
         __FILE__, __LINE__,
