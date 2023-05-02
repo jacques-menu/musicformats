@@ -670,8 +670,8 @@ std::string msrSyllableExtendTypeKindAsString (
     case msrSyllableExtendTypeKind::kSyllableExtendType_NONE:
       result = "kSyllableExtendType_NONE";
       break;
-    case msrSyllableExtendTypeKind::kSyllableExtendTypeEmpty:
-      result = "kSyllableExtendTypeEmpty";
+    case msrSyllableExtendTypeKind::kSyllableExtendTypeAbsent:
+      result = "kSyllableExtendTypeAbsent";
       break;
     case msrSyllableExtendTypeKind::kSyllableExtendTypeStart:
       result = "kSyllableExtendTypeStart";

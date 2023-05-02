@@ -2356,7 +2356,7 @@ class EXP mxsr2msrTranslator :
     /*
       the measure position of a harmony is that of the next note
       after it in the MusicXML data,
-      which can be the first note of a top-level tuplet
+      which can be the first note of a outermost tuplet
 
       we should memoize it because the latter note measure position
       will be known when the tuplet is appended to the current part,
@@ -2365,7 +2365,7 @@ class EXP mxsr2msrTranslator :
       the elements in a tuplet, including the nested ones,
       form a tree build along the way
       each note therein however has an offset relative to
-      the first note of the top-level tuplet, computed linearly long the way
+      the first note of the outermost tuplet, computed linearly long the way
     */
     S_msrNote                 fCurrentOuterMostTupletFirstNote;
     S_msrTuplet               fCurrentOuterMostTuplet;
@@ -2375,6 +2375,9 @@ class EXP mxsr2msrTranslator :
     std::list<S_msrTuplet>    fTupletsStack;
     void                      displayTupletsStack (
                                 const std::string& context);
+
+    // the tuplets stop are not always in first-in/first-out order, so:
+    std::set<int>             fPendingTupletsStopNumbersSet;
 
     Bool                      fCurrentATupletStopIsPending;
 
@@ -2391,6 +2394,10 @@ class EXP mxsr2msrTranslator :
 
     void                      handleTupletsPendingOnTupletsStack (
                                 int inputLineNumber);
+
+    void                      handleTupletStopNumbersForNote (
+                                int              inputLineNumber,
+                                const S_msrNote& note);
 
     // std::map<S_msrVoice, S_msrTuplet> seems buggy in g++ 4.9.x, so
     // we use a pair containing the staff and voice numbers:

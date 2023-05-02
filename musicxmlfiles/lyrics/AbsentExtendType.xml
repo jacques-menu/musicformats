@@ -2,7 +2,7 @@
 <!DOCTYPE score-partwise PUBLIC "-//Recordare//DTD MusicXML 2.0 Partwise//EN"
                                 "http://www.musicxml.org/dtds/partwise.dtd">
 <score-partwise version="2.0">
-  <movement-title>Empty Extend With Beams</movement-title>
+  <movement-title>Absent Extend</movement-title>
   <identification>
     <creator type="arranger">Y. Nagai</creator>
     <creator type="arranger">K. Kobatake</creator>
@@ -74,7 +74,7 @@ Transcribed into Finale music notation by Tom Potter, 2005.  See http://www.dais
 Lyrics added by Karen Tanaka and Michael Good, 2006. See http://www.recordare.com/</credit-words>
   </credit>
   <credit page="1">
-    <credit-words default-x="607" default-y="1395" font-size="24" font-weight="bold" halign="center" valign="top">Echigo-Jishi</credit-words>
+    <credit-words default-x="607" default-y="1395" font-size="24" font-weight="bold" halign="center" valign="top">Absent Extend Type</credit-words>
   </credit>
   <part-list>
     <score-part id="P1">

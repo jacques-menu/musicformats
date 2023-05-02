@@ -1103,7 +1103,8 @@ void mxsr2msrSkeletonBuilder::handlePartGroupStop (
 
     ss <<
       "no part group '" << fCurrentPartGroupNumber <<
-      "' has not been started, it cannot be stopped";
+      "' has been started, it cannot be stopped" <<
+      ", line " << inputLineNumber;
 
  // JMI   musicxmlError (
     musicxmlWarning (
@@ -1360,7 +1361,8 @@ void mxsr2msrSkeletonBuilder::doPartGroupsNestingAndPartsAllocation (
           part->getPartCombinedName () <<
           " to any part group " <<
           " at position " << k <<
-          ", since the stack is empty";
+          ", since the stack is empty"<<
+					", line " << inputLineNumber;
 
         musicxmlError (
           gServiceRunData->getInputSourceName (),
@@ -1417,7 +1419,8 @@ void mxsr2msrSkeletonBuilder::doPartGroupsNestingAndPartsAllocation (
               "Cannot 'stop' part group descr " <<
               partGroupDescr->getPartGroupDescrCombinedName () <<
               " at position " << k <<
-              ", since the stack is empty";
+              ", since the stack is empty"<<
+							", line " << inputLineNumber;
 
             musicxmlError (
               gServiceRunData->getInputSourceName (),
@@ -1560,7 +1563,8 @@ R"(Please contact the maintainers of MusicFormats (see option '-c, -contact'):
   or this MusicXML data is the first-ever real-world case
   of a score exhibiting overlapping part groups.)",
               std::regex ("EXECUTABLE"),
-              gOahOahGroup->getOahOahGroupServiceName ());
+              gOahOahGroup->getOahOahGroupServiceName ()) <<
+							", line " << inputLineNumber;
 
             musicxmlError (
               gServiceRunData->getInputSourceName (),
@@ -2147,7 +2151,8 @@ void mxsr2msrSkeletonBuilder::visitStart (S_creator& elt)
 
     ss <<
       "creator type \"" << creatorType <<
-      "\" is unknown";
+      "\" is unknown" <<
+      ", line " << inputLineNumber;
 
 // JMI    musicxmlError (
     musicxmlWarning (
@@ -2421,7 +2426,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_software& elt)
     musicxmlWarning (
       gServiceRunData->getInputSourceName (),
       inputLineNumber,
-      "<software /> contains 'Cubase'");
+      std::string ("<software /> contains 'Cubase'") + ", line " + std::to_string (inputLineNumber));
 
     // is the '-cubase' option set???
     if (gGlobalMxsr2msrOahGroup->getCubase ()) {
@@ -3098,7 +3103,8 @@ void mxsr2msrSkeletonBuilder::visitStart (S_part_group& elt)
     ss <<
       "unknown part group type \"" <<
       partGroupType <<
-      "\"";
+      "\""<<
+      ", line " << inputLineNumber;
 
     musicxmlError (
       gServiceRunData->getInputSourceName (),
@@ -3244,7 +3250,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_display_text& elt)
       gServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
-      "<display-text /> is out of context");
+      std::string ("<display-text /> is out of context") + ", line " + std::to_string (inputLineNumber));
   }
 }
 
@@ -3331,7 +3337,8 @@ void mxsr2msrSkeletonBuilder::visitStart (S_group_symbol& elt)
       std::stringstream ss;
 
       ss <<
-        "unknown part group symbol \"" + groupSymbol + "\"";
+        "unknown part group symbol \"" + groupSymbol + "\""<<
+				", line " << inputLineNumber;
 
       musicxmlError (
         gServiceRunData->getInputSourceName (),
@@ -3375,7 +3382,8 @@ void mxsr2msrSkeletonBuilder::visitStart (S_group_barline& elt)
     std::stringstream ss;
 
     ss <<
-      "unknown part group barLine \"" + groupBarLine + "\"";
+      "unknown part group barLine \"" + groupBarLine + "\""<<
+      ", line " << inputLineNumber;
 
     musicxmlError (
       gServiceRunData->getInputSourceName (),
@@ -3913,7 +3921,8 @@ void mxsr2msrSkeletonBuilder::visitStart (S_part& elt)
       ss <<
         "partID is empty, using '" <<
         fCurrentPartID <<
-        "' since it is the only part in the <part-list />";
+        "' since it is the only part in the <part-list />" <<
+				", line " << inputLineNumber;
 
       musicxmlWarning (
         gServiceRunData->getInputSourceName (),
@@ -3929,12 +3938,13 @@ void mxsr2msrSkeletonBuilder::visitStart (S_part& elt)
       ss <<
         "NO_ID_PART_" << fCurrentNoIDPartNumber;
 
-      ss >> fCurrentPartID;
+      ss >>
+      	fCurrentPartID;
 
       musicxmlWarning (
         gServiceRunData->getInputSourceName (),
         inputLineNumber,
-        "part 'id' is empty, creating one as '" + fCurrentPartID + "'");
+        "part 'id' is empty, creating one as '" + std::string (fCurrentPartID) + "'");
     }
   }
 
@@ -3950,7 +3960,8 @@ void mxsr2msrSkeletonBuilder::visitStart (S_part& elt)
     ss <<
       "part \"" <<
       fCurrentPartID <<
-      "\" is not known in the <part-list />";
+      "\" is not known in the <part-list />" <<
+      ", line " << inputLineNumber;
 
     musicxmlError (
       gServiceRunData->getInputSourceName (),
@@ -4045,7 +4056,8 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_part& elt)
       ss <<
         "part " << fCurrentPart->getPartCombinedName () <<
         " has " << fPartNumberOfMeasures <<
-        " measures while the other ones have " << fScoreMeasuresNumber;
+        " measures while the other ones have " << fScoreMeasuresNumber<<
+				", line " << inputLineNumber;
 
       musicxmlError (
         gServiceRunData->getInputSourceName (),
@@ -4548,7 +4560,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_lyric& elt)
       musicxmlWarning (
         gServiceRunData->getInputSourceName (),
         inputLineNumber,
-        "lyric number is empty, using \"1\" by default");
+        std::string ("lyric number is empty, using \"1\" by default") + ", line " + std::to_string (inputLineNumber));
 
       fCurrentStanzaNumber = "1";
     }
@@ -4592,7 +4604,8 @@ void mxsr2msrSkeletonBuilder::visitStart (S_lyric& elt)
         ss <<
           "lyric name is empty, using \"" <<
           msrStanza::K_STANZA_NAME_UNKNOWN_ <<
-          "\" by default";
+          "\" by default" <<
+					", line " << inputLineNumber;
 
         musicxmlWarning (
           gServiceRunData->getInputSourceName (),
