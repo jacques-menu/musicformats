@@ -13680,7 +13680,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrSyllable& elt)
 #endif // MF_TRACE_IS_ENABLED
           break;
 
-        case msrSyllableExtendTypeKind::kSyllableExtendTypeEmpty:
+        case msrSyllableExtendTypeKind::kSyllableExtendTypeAbsent:
           switch (gGlobalLpsr2lilypondOahGroup->getLyricsNotesDurationsKind ()) {
             case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsImplicit:
               // generate a lyric extender, i.e. a melisma, after this syllable
@@ -13698,7 +13698,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrSyllable& elt)
 #ifdef MF_TRACE_IS_ENABLED
           if (gTraceOahGroup->getTraceLyrics ()) {
             fLilypondCodeStream <<
-              "%{ kSyllableExtendTypeEmpty %} ";
+              "%{ kSyllableExtendTypeAbsent %} ";
           }
 #endif // MF_TRACE_IS_ENABLED
           break;

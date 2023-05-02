@@ -49,7 +49,7 @@ std::ostream& operator << (std::ostream& os, const msrSyllableKind& elt);
 
 enum class msrSyllableExtendTypeKind {
   kSyllableExtendType_NONE,
-  kSyllableExtendTypeEmpty,
+  kSyllableExtendTypeAbsent,
   kSyllableExtendTypeStart, kSyllableExtendTypeContinue, kSyllableExtendTypeStop
 };
 

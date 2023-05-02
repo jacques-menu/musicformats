@@ -7123,7 +7123,7 @@ void msr2mxsrTranslator:: appendNoteLyricsToNote (
           case msrSyllableExtendTypeKind::kSyllableExtendType_NONE:
             doCreateAnExtendElement = false;
             break;
-          case msrSyllableExtendTypeKind::kSyllableExtendTypeEmpty:
+          case msrSyllableExtendTypeKind::kSyllableExtendTypeAbsent:
             extendTypeString = "single";
             break;
           case msrSyllableExtendTypeKind::kSyllableExtendTypeStart:
