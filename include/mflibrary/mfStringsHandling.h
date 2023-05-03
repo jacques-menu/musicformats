@@ -255,7 +255,7 @@ char* mfCharStarCat (
   const size_t destinationSize);
 
 //______________________________________________________________________________
-std::string mfInt2EnglishWord (int n);
+std::string mfIntToEnglishWord (int n);
 
 //______________________________________________________________________________
 std::string mfStringNumbersToEnglishWords (std::string str);
