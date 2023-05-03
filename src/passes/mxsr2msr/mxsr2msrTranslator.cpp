@@ -2664,10 +2664,10 @@ void mxsr2msrTranslator::visitEnd (S_part& elt)
   // the elements pending since before the note if any
   // can now be appended to the latter's voice
   // prior to the note itself
-  attachPendingVoiceLevelElementsToVoice (
-    fCurrentNoteVoice);
+//   attachPendingVoiceLevelElementsToVoice (
+//     fCurrentNoteVoice);
 
-  attachPendingPartLevelElementsToPart (
+  attachPendingPartLevelElementsIfAnyToPart (
     fCurrentPart);
 
   // finalize the current part
@@ -6365,8 +6365,29 @@ void mxsr2msrTranslator::visitStart (S_metronome_beam& elt)
 void mxsr2msrTranslator::attachCurrentMetronomeBeamsToMetronomeNote (
   const S_msrTempoNote& tempoNote)
 {
-  // attach the current articulations if any to the note
-  if (fPendingMetronomeBeamsList.size ()) {
+  // attach the current articulations to the note
+#ifdef MF_TRACE_IS_ENABLED
+  if (
+    gTraceOahGroup->getTraceTempos ()
+      ||
+    gTraceOahGroup->getTraceBeams ()
+  ) {
+    std::stringstream ss;
+
+    ss <<
+      "Attaching current beams to tempoNote " <<
+      tempoNote->asString ();
+
+    gWaeHandler->waeTraceWithLocationDetails (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  while (fPendingMetronomeBeamsList.size ()) {
+    S_msrBeam
+      beam =
+        fPendingMetronomeBeamsList.front();
 
 #ifdef MF_TRACE_IS_ENABLED
     if (
@@ -6377,8 +6398,10 @@ void mxsr2msrTranslator::attachCurrentMetronomeBeamsToMetronomeNote (
       std::stringstream ss;
 
       ss <<
-        "Attaching current beams to tempoNote " <<
-        tempoNote->asString ();
+        "Attaching beam " <<
+        beam->asString () <<
+        " to tempoNote " << tempoNote->asString () <<
+        std::endl;
 
       gWaeHandler->waeTraceWithLocationDetails (
         __FILE__, __LINE__,
@@ -6386,38 +6409,12 @@ void mxsr2msrTranslator::attachCurrentMetronomeBeamsToMetronomeNote (
     }
 #endif // MF_TRACE_IS_ENABLED
 
-    while (fPendingMetronomeBeamsList.size ()) {
-      S_msrBeam
-        beam =
-          fPendingMetronomeBeamsList.front();
+    tempoNote->
+      appendBeamToTempoNote (beam);
 
-#ifdef MF_TRACE_IS_ENABLED
-      if (
-        gTraceOahGroup->getTraceTempos ()
-          ||
-        gTraceOahGroup->getTraceBeams ()
-      ) {
-        std::stringstream ss;
-
-        ss <<
-          "Attaching beam " <<
-          beam->asString () <<
-          " to tempoNote " << tempoNote->asString () <<
-          std::endl;
-
-        gWaeHandler->waeTraceWithLocationDetails (
-          __FILE__, __LINE__,
-          ss.str ());
-      }
-#endif // MF_TRACE_IS_ENABLED
-
-      tempoNote->
-        appendBeamToTempoNote (beam);
-
-      // forget about this articulation
-      fPendingMetronomeBeamsList.pop_front();
-    } // while
-  }
+    // forget about this articulation
+    fPendingMetronomeBeamsList.pop_front();
+  } // while
 }
 
 void mxsr2msrTranslator::visitEnd (S_metronome_note& elt)
@@ -9976,10 +9973,12 @@ void mxsr2msrTranslator::visitEnd (S_measure& elt)
 //       fCurrentATupletStopIsPending = false;
     }
 
-    // attach the spanners if any to the note
-    attachCurrentSpannersToNote (
-      noteToAttachTo,
-      "mxsr2msrTranslator::visitEnd (S_measure& elt)");
+    // attach the spanners to the note
+    if (fCurrentSpannersList.size ()) {
+      attachCurrentSpannersToNote (
+        noteToAttachTo,
+        "mxsr2msrTranslator::visitEnd (S_measure& elt)");
+    }
 
     // finalize current measure in the part,
     // to add skips if necessary and set measure kind
@@ -19127,8 +19126,9 @@ S_msrChord mxsr2msrTranslator::createChordFromItsFirstNote (
     setNoteKind (noteKind);
 
   // copy chordFirstNote's elements if any to the chord
-  copyNoteElementsToChord (
-    chordFirstNote, chord);
+  copyNoteElementsIfAnyToChord (
+    chordFirstNote,
+    chord);
 
   // get chordFirstNote's uplink to measure
   S_msrMeasure
@@ -20565,81 +20565,135 @@ void mxsr2msrTranslator::copyNoteHarmoniesToChord (
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::copyNoteElementsToChord (
+void mxsr2msrTranslator::copyNoteElementsIfAnyToChord (
   const S_msrNote&  note,
   const S_msrChord& chord)
 {
   // copy note's articulations if any to the chord
-  copyNoteArticulationsToChord (note, chord);
+  if (note->getNoteArticulations ().size ()) {
+    copyNoteArticulationsToChord (note, chord);
+  }
 
   // copy note's technicals if any to the chord
-  copyNoteTechnicalsToChord (note, chord);
-  copyNoteTechnicalWithIntegersToChord (note, chord);
-  copyNoteTechnicalWithFloatsToChord (note, chord);
-  copyNoteTechnicalWithStringsToChord (note, chord);
+  if (note->getNoteTechnicals ().size ()) {
+      copyNoteTechnicalsToChord (note, chord);
+  }
+  if (note->getNoteTechnicalWithIntegers ().size ()) {
+      copyNoteTechnicalWithIntegersToChord (note, chord);
+  }
+  if (note->getNoteTechnicalWithFloats ().size ()) {
+      copyNoteTechnicalWithFloatsToChord (note, chord);
+  }
+  if (note->getNoteTechnicalWithStrings ().size ()) {
+      copyNoteTechnicalWithStringsToChord (note, chord);
+  }
 
   // copy note's ornaments if any to the chord
-  copyNoteOrnamentsToChord (note, chord);
+  if (note->getNoteOrnaments ().size ()) {
+    copyNoteOrnamentsToChord (note, chord);
+  }
 
   // copy note's spanners if any to the chord
-  copyNoteSpannersToChord (note, chord);
+  if (note->getNoteSpanners ().size ()) {
+    copyNoteSpannersToChord (note, chord);
+  }
 
   // copy note's single tremolo if any to the chord
-  copyNoteSingleTremoloToChord (note, chord);
+  if (note->getNoteSingleTremolo ()) {
+    copyNoteSingleTremoloToChord (note, chord);
+  }
 
   // copy note's dynamics if any to the chord
-  copyNoteDynamicsToChord (note, chord);
+  if (note->getNoteDynamics ().size ()) {
+    copyNoteDynamicsToChord (note, chord);
+  }
 
   // copy note's other dynamics if any to the chord
-  copyNoteOtherDynamicsToChord (note, chord);
+  if (note->getNoteOtherDynamics ().size ()) {
+    copyNoteOtherDynamicsToChord (note, chord);
+  }
 
   // copy note's words if any to the chord
-  copyNoteWordsToChord (note, chord);
+  if (note->getNoteWords ().size ()) {
+    copyNoteWordsToChord (note, chord);
+  }
 
   // copy note's stem if any to the chord
-  copyNoteStemToChord (note, chord);
+  if (note->getNoteStem ()) {
+    copyNoteStemToChord (note, chord);
+  }
 
   // copy note's beams if any to the chord
 //  copyNoteBeamsToChord (note, chord);
-  appendNoteBeamsLinksToChord (note, chord);
+  if (note->getNoteBeams ().size ()) {
+    appendNoteBeamsLinksToChord (note, chord);
+  }
 
   // copy note's ties if any to the chord
-  copyNoteTieToChord (note, chord);
+  if (note->getNoteTie ()) {
+    copyNoteTieToChord (note, chord);
+  }
 
   // copy note's slurs if any to the chord
 // JMI  copyNoteSlursToChord (note, chord);
-  appendNoteSlursLinksToChord (note, chord);
+  if (note->getNoteSlurs ().size ()) {
+    appendNoteSlursLinksToChord (note, chord);
+  }
 
   // copy note's ligatures if any to the chord
-  copyNoteLigaturesToChord (note, chord);
+  if (note->getNoteLigatures ().size ()) {
+    copyNoteLigaturesToChord (note, chord);
+  }
 
   // copy note's pedals if any to the chord
-  copyNotePedalsToChord (note, chord);
+  if (note->getNotePedals ().size ()) {
+    copyNotePedalsToChord (note, chord);
+  }
 
   // copy note's slashes if any to the chord
-  copyNoteSlashesToChord (note, chord);
+  if (note->getNoteSlashes ().size ()) {
+    copyNoteSlashesToChord (note, chord);
+  }
 
   // copy note's wedges if any to the chord
-  copyNoteWedgesToChord (note, chord);
+  if (note->getNoteWedges ().size ()) {
+    copyNoteWedgesToChord (note, chord);
+  }
 
   // copy note's segnos if any to the chord
-  copyNoteSegnosToChord (note, chord);
+  if (note->getNoteSegnos ().size ()) {
+    copyNoteSegnosToChord (note, chord);
+  }
 
   // copy note's del segnos if any to the chord
-  copyNoteDalSegnosToChord (note, chord);
+  if (note->getNoteDalSegnos ().size ()) {
+    copyNoteDalSegnosToChord (note, chord);
+  }
 
   // copy note's codas if any to the chord
-  copyNoteCodasToChord (note, chord);
+  if (note->getNoteCodas ().size ()) {
+    copyNoteCodasToChord (note, chord);
+  }
 
   // copy note's octave shift if any to the chord
-  copyNoteOctaveShiftToChord (note, chord);
+  if (note->getNoteOctaveShift ()) {
+    copyNoteOctaveShiftToChord (note, chord);
+  }
 
   // copy note's grace notes groups if any to the chord
 //  copyNoteGraceNotesGroupsToChord (note, chord);
-  addNoteGraceNotesGroupsLinksToChord (note, chord);
+  if (
+    note->getNoteGraceNotesGroupBefore ()
+      ||
+    note->getNoteGraceNotesGroupAfter ()
+  ) {
+    addNoteGraceNotesGroupsLinksToChord (note, chord);
+  }
 
   // copy note's harmony if any to the chord
-  copyNoteHarmoniesToChord (note, chord);
+  if (note->getNoteHarmoniesList ().size ()) {
+    copyNoteHarmoniesToChord (note, chord);
+  }
 }
 
 //______________________________________________________________________________
@@ -21024,15 +21078,34 @@ void mxsr2msrTranslator::finalizeTupletAndPopItFromTupletsStack (
 void mxsr2msrTranslator::attachCurrentArticulationsToCurrentNote ()
 {
   // attach the current articulations if any to the fCurrentNote
-  if (fCurrentArticulations.size ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceArticulations ()) {
+    std::stringstream ss;
+
+    ss <<
+      "Attaching current articulations to note " <<
+      fCurrentNote->asString ();
+
+    gWaeHandler->waeTraceWithLocationDetails (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  while (fCurrentArticulations.size ()) {
+    S_msrArticulation
+      art =
+        fCurrentArticulations.front();
 
 #ifdef MF_TRACE_IS_ENABLED
-    if (gTraceOahGroup->getTraceArticulations ()) {
+    if (gTraceOahGroup->getTraceNotes ()) {
       std::stringstream ss;
 
       ss <<
-        "Attaching current articulations to note " <<
-        fCurrentNote->asString ();
+        "Attaching articulation " <<
+        art->getArticulationKind () <<
+        " to note " << fCurrentNote->asString () <<
+        std::endl;
 
       gWaeHandler->waeTraceWithLocationDetails (
         __FILE__, __LINE__,
@@ -21040,49 +21113,46 @@ void mxsr2msrTranslator::attachCurrentArticulationsToCurrentNote ()
     }
 #endif // MF_TRACE_IS_ENABLED
 
-    while (fCurrentArticulations.size ()) {
-      S_msrArticulation
-        art =
-          fCurrentArticulations.front();
+    fCurrentNote->
+      appendArticulationToNote (art);
 
-#ifdef MF_TRACE_IS_ENABLED
-      if (gTraceOahGroup->getTraceNotes ()) {
-        std::stringstream ss;
-
-        ss <<
-          "Attaching articulation " <<
-          art->getArticulationKind () <<
-          " to note " << fCurrentNote->asString () <<
-          std::endl;
-
-        gWaeHandler->waeTraceWithLocationDetails (
-          __FILE__, __LINE__,
-          ss.str ());
-      }
-#endif // MF_TRACE_IS_ENABLED
-
-      fCurrentNote->
-        appendArticulationToNote (art);
-
-      // forget about this articulation
-      fCurrentArticulations.pop_front();
-    } // while
-  }
+    // forget about this articulation
+    fCurrentArticulations.pop_front();
+  } // while
 }
 
 //______________________________________________________________________________
 void mxsr2msrTranslator::attachCurrentTechnicalsToCurrentNote ()
 {
-  // attach the current technicals if any to the note
-  if (fCurrentTechnicalsList.size ()) {
+  // attach the current technicals to the note
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceTechnicals ()) {
+    std::stringstream ss;
+
+    ss <<
+      "Attaching current technicals to note " <<
+      fCurrentNote->asString ();
+
+    gWaeHandler->waeTraceWithLocationDetails (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  while (fCurrentTechnicalsList.size ()) {
+    S_msrTechnical
+      tech =
+        fCurrentTechnicalsList.front();
 
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceTechnicals ()) {
       std::stringstream ss;
 
       ss <<
-        "Attaching current technicals to note " <<
-        fCurrentNote->asString ();
+        "Attaching technical " <<
+        tech->asString () <<
+        " to note " << fCurrentNote->asString () <<
+        std::endl;
 
       gWaeHandler->waeTraceWithLocationDetails (
         __FILE__, __LINE__,
@@ -21090,48 +21160,45 @@ void mxsr2msrTranslator::attachCurrentTechnicalsToCurrentNote ()
     }
 #endif // MF_TRACE_IS_ENABLED
 
-    while (fCurrentTechnicalsList.size ()) {
-      S_msrTechnical
-        tech =
-          fCurrentTechnicalsList.front();
+    fCurrentNote->appendTechnicalToNote (tech);
 
-#ifdef MF_TRACE_IS_ENABLED
-      if (gTraceOahGroup->getTraceTechnicals ()) {
-        std::stringstream ss;
-
-        ss <<
-          "Attaching technical " <<
-          tech->asString () <<
-          " to note " << fCurrentNote->asString () <<
-          std::endl;
-
-        gWaeHandler->waeTraceWithLocationDetails (
-          __FILE__, __LINE__,
-          ss.str ());
-      }
-#endif // MF_TRACE_IS_ENABLED
-
-      fCurrentNote->appendTechnicalToNote (tech);
-
-      // forget about this technical
-      fCurrentTechnicalsList.pop_front();
-    } // while
-  }
+    // forget about this technical
+    fCurrentTechnicalsList.pop_front();
+  } // while
 }
 
 //______________________________________________________________________________
 void mxsr2msrTranslator::attachCurrentTechnicalWithIntegersToCurrentNote ()
 {
-  // attach the current technicals if any to the note
-  if (fCurrentTechnicalWithIntegersList.size ()) {
+  // attach the current technicals to the note
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceTechnicals ()) {
+    std::stringstream ss;
+
+    ss <<
+      "Attaching current technical with integers to note " <<
+      fCurrentNote->asString ();
+
+    gWaeHandler->waeTraceWithLocationDetails (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  while (fCurrentTechnicalWithIntegersList.size ()) {
+    S_msrTechnicalWithInteger
+      tech =
+        fCurrentTechnicalWithIntegersList.front();
 
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceTechnicals ()) {
       std::stringstream ss;
 
       ss <<
-        "Attaching current technical with integers to note " <<
-        fCurrentNote->asString ();
+        "Attaching technical with integer " <<
+        tech->asString () <<
+        " to note " << fCurrentNote->asString () <<
+        std::endl;
 
       gWaeHandler->waeTraceWithLocationDetails (
         __FILE__, __LINE__,
@@ -21139,48 +21206,45 @@ void mxsr2msrTranslator::attachCurrentTechnicalWithIntegersToCurrentNote ()
     }
 #endif // MF_TRACE_IS_ENABLED
 
-    while (fCurrentTechnicalWithIntegersList.size ()) {
-      S_msrTechnicalWithInteger
-        tech =
-          fCurrentTechnicalWithIntegersList.front();
+    fCurrentNote->appendTechnicalWithIntegerToNote (tech);
 
-#ifdef MF_TRACE_IS_ENABLED
-      if (gTraceOahGroup->getTraceTechnicals ()) {
-        std::stringstream ss;
-
-        ss <<
-          "Attaching technical with integer " <<
-          tech->asString () <<
-          " to note " << fCurrentNote->asString () <<
-          std::endl;
-
-        gWaeHandler->waeTraceWithLocationDetails (
-          __FILE__, __LINE__,
-          ss.str ());
-      }
-#endif // MF_TRACE_IS_ENABLED
-
-      fCurrentNote->appendTechnicalWithIntegerToNote (tech);
-
-      // forget about this technical
-      fCurrentTechnicalWithIntegersList.pop_front();
-    } // while
-  }
+    // forget about this technical
+    fCurrentTechnicalWithIntegersList.pop_front();
+  } // while
 }
 
 //______________________________________________________________________________
 void mxsr2msrTranslator::attachCurrentTechnicalWithFloatsToCurrentNote ()
 {
-  // attach the current technicals if any to the note
-  if (fCurrentTechnicalWithFloatsList.size ()) {
+  // attach the current technicals to the note
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceTechnicals ()) {
+    std::stringstream ss;
+
+    ss <<
+      "Attaching current technical with floats to note " <<
+      fCurrentNote->asString ();
+
+    gWaeHandler->waeTraceWithLocationDetails (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  while (fCurrentTechnicalWithFloatsList.size ()) {
+    S_msrTechnicalWithFloat
+      tech =
+        fCurrentTechnicalWithFloatsList.front();
 
 #ifdef MF_TRACE_IS_ENABLED
-    if (gTraceOahGroup->getTraceTechnicals ()) {
+if (gTraceOahGroup->getTraceTechnicals ()) {
       std::stringstream ss;
 
       ss <<
-        "Attaching current technical with floats to note " <<
-        fCurrentNote->asString ();
+        "Attaching technical with integer " <<
+        tech->asString () <<
+        " to note " << fCurrentNote->asString () <<
+        std::endl;
 
       gWaeHandler->waeTraceWithLocationDetails (
         __FILE__, __LINE__,
@@ -21188,48 +21252,45 @@ void mxsr2msrTranslator::attachCurrentTechnicalWithFloatsToCurrentNote ()
     }
 #endif // MF_TRACE_IS_ENABLED
 
-    while (fCurrentTechnicalWithFloatsList.size ()) {
-      S_msrTechnicalWithFloat
-        tech =
-          fCurrentTechnicalWithFloatsList.front();
+    fCurrentNote->appendTechnicalWithFloatToNote (tech);
 
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceTechnicals ()) {
-        std::stringstream ss;
-
-        ss <<
-          "Attaching technical with integer " <<
-          tech->asString () <<
-          " to note " << fCurrentNote->asString () <<
-          std::endl;
-
-        gWaeHandler->waeTraceWithLocationDetails (
-          __FILE__, __LINE__,
-          ss.str ());
-      }
-#endif // MF_TRACE_IS_ENABLED
-
-      fCurrentNote->appendTechnicalWithFloatToNote (tech);
-
-      // forget about this technical
-      fCurrentTechnicalWithFloatsList.pop_front();
-    } // while
-  }
+    // forget about this technical
+    fCurrentTechnicalWithFloatsList.pop_front();
+  } // while
 }
 
 //______________________________________________________________________________
 void mxsr2msrTranslator::attachCurrentTechnicalWithStringsToCurrentNote ()
 {
-  // attach the current technicals if any to the note
-  if (fCurrentTechnicalWithStringsList.size ()) {
+  // attach the current technicals to the note
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceTechnicals ()) {
+    std::stringstream ss;
+
+    ss <<
+      "Attaching current technical with strings to note " <<
+      fCurrentNote->asString ();
+
+    gWaeHandler->waeTraceWithLocationDetails (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  while (fCurrentTechnicalWithStringsList.size ()) {
+    S_msrTechnicalWithString
+      tech =
+        fCurrentTechnicalWithStringsList.front();
 
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceTechnicals ()) {
       std::stringstream ss;
 
       ss <<
-        "Attaching current technical with strings to note " <<
-        fCurrentNote->asString ();
+        "Attaching technical with std::string " <<
+        tech->asString () <<
+        " to note " << fCurrentNote->asString () <<
+        std::endl;
 
       gWaeHandler->waeTraceWithLocationDetails (
         __FILE__, __LINE__,
@@ -21237,82 +21298,57 @@ void mxsr2msrTranslator::attachCurrentTechnicalWithStringsToCurrentNote ()
     }
 #endif // MF_TRACE_IS_ENABLED
 
-    while (fCurrentTechnicalWithStringsList.size ()) {
-      S_msrTechnicalWithString
-        tech =
-          fCurrentTechnicalWithStringsList.front();
+    fCurrentNote->appendTechnicalWithStringToNote (tech);
 
-#ifdef MF_TRACE_IS_ENABLED
-      if (gTraceOahGroup->getTraceTechnicals ()) {
-        std::stringstream ss;
-
-        ss <<
-          "Attaching technical with std::string " <<
-          tech->asString () <<
-          " to note " << fCurrentNote->asString () <<
-          std::endl;
-
-        gWaeHandler->waeTraceWithLocationDetails (
-          __FILE__, __LINE__,
-          ss.str ());
-      }
-#endif // MF_TRACE_IS_ENABLED
-
-      fCurrentNote->appendTechnicalWithStringToNote (tech);
-
-      // forget about this technical
-      fCurrentTechnicalWithStringsList.pop_front();
-    } // while
-  }
+    // forget about this technical
+    fCurrentTechnicalWithStringsList.pop_front();
+  } // while
 }
 
 //______________________________________________________________________________
 void mxsr2msrTranslator::attachCurrentOrnamentsToCurrentNote ()
 {
-  // attach the current ornaments if any to the note
-  if (fCurrentOrnamentsList.size ()) {
+  // attach the current ornaments to the note
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceOrnaments ()) {
+    std::stringstream ss;
+
+    ss <<
+      "Attaching current ornaments to note " <<
+      fCurrentNote->asString ();
+
+    gWaeHandler->waeTraceWithLocationDetails (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  while (fCurrentOrnamentsList.size ()) {
+    S_msrOrnament
+      ornament =
+        fCurrentOrnamentsList.front();
 
 #ifdef MF_TRACE_IS_ENABLED
-    if (gTraceOahGroup->getTraceOrnaments ()) {
+    if (gTraceOahGroup->getTraceNotes ()) {
       std::stringstream ss;
 
       ss <<
-        "Attaching current ornaments to note " <<
-        fCurrentNote->asString ();
+        "Attaching ornament " <<
+        msrOrnamentKindAsString (ornament->getOrnamentKind ()) <<
+        " to note " << fCurrentNote->asString () <<
+        std::endl;
 
-      gWaeHandler->waeTraceWithLocationDetails (
-        __FILE__, __LINE__,
-        ss.str ());
+    gWaeHandler->waeTraceWithLocationDetails (
+      __FILE__, __LINE__,
+      ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
-    while (fCurrentOrnamentsList.size ()) {
-      S_msrOrnament
-        ornament =
-          fCurrentOrnamentsList.front();
+    fCurrentNote->appendOrnamentToNote (ornament);
 
-#ifdef MF_TRACE_IS_ENABLED
-      if (gTraceOahGroup->getTraceNotes ()) {
-        std::stringstream ss;
-
-        ss <<
-          "Attaching ornament " <<
-          msrOrnamentKindAsString (ornament->getOrnamentKind ()) <<
-          " to note " << fCurrentNote->asString () <<
-          std::endl;
-
-      gWaeHandler->waeTraceWithLocationDetails (
-        __FILE__, __LINE__,
-        ss.str ());
-      }
-#endif // MF_TRACE_IS_ENABLED
-
-      fCurrentNote->appendOrnamentToNote (ornament);
-
-      // forget about this ornament
-      fCurrentOrnamentsList.pop_front();
-    } // while
-  }
+    // forget about this ornament
+    fCurrentOrnamentsList.pop_front();
+  } // while
 }
 
 //______________________________________________________________________________
@@ -21320,24 +21356,22 @@ void mxsr2msrTranslator::attachCurrentSpannersToNote (
   const S_msrNote&   note,
   const std::string& context)
 {
-  // attach the current spanners if any to the note
-  if (fCurrentSpannersList.size ()) {
-
+  // attach the current spanners to the note
 #ifdef MF_TRACE_IS_ENABLED
-    if (gTraceOahGroup->getTraceSpanners ()) {
-      std::stringstream ss;
+  if (gTraceOahGroup->getTraceSpanners ()) {
+    std::stringstream ss;
 
-      ss <<
-          "Attaching current spanners to note " <<
-          fCurrentNote->asString () <<
-          ", context: " << context <<
-          ", line " << fCurrentNote->getInputLineNumber () <<
-          std::endl;
+    ss <<
+        "Attaching current spanners to note " <<
+        fCurrentNote->asString () <<
+        ", context: " << context <<
+        ", line " << fCurrentNote->getInputLineNumber () <<
+        std::endl;
 
-      gWaeHandler->waeTraceWithLocationDetails (
-        __FILE__, __LINE__,
-        ss.str ());
-    }
+    gWaeHandler->waeTraceWithLocationDetails (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
 #endif // MF_TRACE_IS_ENABLED
 
 //     Bool doHandleSpanner (true);
@@ -21345,10 +21379,10 @@ void mxsr2msrTranslator::attachCurrentSpannersToNote (
 //
 //     S_msrSpanner delayedStopSpanner;
 
-    while (fCurrentSpannersList.size ()) {
-      S_msrSpanner
-        spanner =
-          fCurrentSpannersList.front();
+  while (fCurrentSpannersList.size ()) {
+    S_msrSpanner
+      spanner =
+        fCurrentSpannersList.front();
 
 //       switch (spanner->getSpannerKind ()) {
 //         case msrSpannerKind::kSpannerDashes: // JMI
@@ -21388,28 +21422,28 @@ void mxsr2msrTranslator::attachCurrentSpannersToNote (
 
 //       if (doHandleSpanner) {
 #ifdef MF_TRACE_IS_ENABLED
-        if (gTraceOahGroup->getTraceSpanners ()) {
-          std::stringstream ss;
+      if (gTraceOahGroup->getTraceSpanners ()) {
+        std::stringstream ss;
 
-          ss <<
-            "Attaching spanner " <<
-            spanner->asShortString () <<
-            " to note " << fCurrentNote->asString ();
+        ss <<
+          "Attaching spanner " <<
+          spanner->asShortString () <<
+          " to note " << fCurrentNote->asString ();
 
-          gWaeHandler->waeTraceWithLocationDetails (
-            __FILE__, __LINE__,
-            ss.str ());
-        }
+        gWaeHandler->waeTraceWithLocationDetails (
+          __FILE__, __LINE__,
+          ss.str ());
+      }
 #endif // MF_TRACE_IS_ENABLED
 
-        fCurrentNote->appendSpannerToNote (spanner);
+      fCurrentNote->appendSpannerToNote (spanner);
 
-        // set spanner note upLink
-        spanner->
-          setSpannerUpLinkToNote (note);
+      // set spanner note upLink
+      spanner->
+        setSpannerUpLinkToNote (note);
 
-        // forget about this spanner
-        fCurrentSpannersList.pop_front ();
+      // forget about this spanner
+      fCurrentSpannersList.pop_front ();
 //       }
 
 //       else { // check it is the same spanner kind JMI
@@ -21435,47 +21469,43 @@ void mxsr2msrTranslator::attachCurrentSpannersToNote (
 //         // forget about this spanner to avoid infinite loop
 //         fCurrentSpannersList.pop_front ();
 //       }
-    } // while
+  } // while
 
 //     // append delayed stop spanner if any again to the list
 //     if (delayedStopSpanner) {
 //       fCurrentSpannersList.push_back (
 //         delayedStopSpanner);
 //     }
-  }
 }
 
 //______________________________________________________________________________
 void mxsr2msrTranslator::attachCurrentSingleTremoloToCurrentNote ()
 {
-  // attach the current singleTremolo if any to the note
-  if (fCurrentSingleTremolo) {
-
+  // attach the current singleTremolo to the note
 #ifdef MF_TRACE_IS_ENABLED
-    if (gTraceOahGroup->getTraceNotes ()) {
-      std::stringstream ss;
+  if (gTraceOahGroup->getTraceNotes ()) {
+    std::stringstream ss;
 
-      ss <<
-        "Attaching current singleTremolo to note " <<
-        fCurrentNote->asString ();
+    ss <<
+      "Attaching current singleTremolo to note " <<
+      fCurrentNote->asString ();
 
-      gWaeHandler->waeTraceWithLocationDetails (
-        __FILE__, __LINE__,
-        ss.str ());
-    }
+    gWaeHandler->waeTraceWithLocationDetails (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
 #endif // MF_TRACE_IS_ENABLED
 
-    fCurrentNote->setNoteSingleTremolo (fCurrentSingleTremolo);
+  fCurrentNote->setNoteSingleTremolo (fCurrentSingleTremolo);
 
-    // set single tremolo graphic duration kind
-    fCurrentSingleTremolo->
-      setSingleTremoloGraphicNotesDurationKind (
-        fCurrentNote->
-          getNoteGraphicNotesDurationKind ());
+  // set single tremolo graphic duration kind
+  fCurrentSingleTremolo->
+    setSingleTremoloGraphicNotesDurationKind (
+      fCurrentNote->
+        getNoteGraphicNotesDurationKind ());
 
-    // forget about this single tremolo
-    fCurrentSingleTremolo = nullptr;
-  }
+  // forget about this single tremolo
+  fCurrentSingleTremolo = nullptr;
 }
 
 //______________________________________________________________________________
@@ -21606,946 +21636,631 @@ void mxsr2msrTranslator::attachPendingTemposToPart (
   const S_msrPart& part)
 {
   // attach the pending tempos if any to the voice
-  if (fPendingTemposList.size ()) {
 #ifdef MF_TRACE_IS_ENABLED
-    if (gTraceOahGroup->getTraceTempos ()) {
-      std::stringstream ss;
+  if (gTraceOahGroup->getTraceTempos ()) {
+    std::stringstream ss;
 
-      ss <<
-        "Attaching pending tempos to part \""  <<
-        part->getPartName () <<
-        "\"";
+    ss <<
+      "Attaching pending tempos to part \""  <<
+      part->getPartName () <<
+      "\"";
 
-      gWaeHandler->waeTraceWithLocationDetails (
-        __FILE__, __LINE__,
-        ss.str ());
-    }
+    gWaeHandler->waeTraceWithLocationDetails (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
 #endif // MF_TRACE_IS_ENABLED
 
-    while (fPendingTemposList.size ()) {
-      S_msrTempo
-        tempo =
-          fPendingTemposList.front ();
+  while (fPendingTemposList.size ()) {
+    S_msrTempo
+      tempo =
+        fPendingTemposList.front ();
 
-      part->
-        appendTempoToPart (tempo);
+    part->
+      appendTempoToPart (tempo);
 
-      fPendingTemposList.pop_front ();
-    } // while
-  }
+    fPendingTemposList.pop_front ();
+  } // while
 }
 
-void mxsr2msrTranslator::attachPendingBarLinesToVoice (
-  const S_msrVoice& voice)
-{
-  // attach the pending barlines if any to the voice
-  if (fPendingBarLinesList.size ()) {
-#ifdef MF_TRACE_IS_ENABLED
-    if (gTraceOahGroup->getTraceBarLines ()) {
-      std::stringstream ss;
-
-      ss <<
-        "Attaching pending barlines to voice \""  <<
-        voice->getVoiceName () <<
-        "\"";
-
-      gWaeHandler->waeTraceWithLocationDetails (
-        __FILE__, __LINE__,
-        ss.str ());
-    }
-#endif // MF_TRACE_IS_ENABLED
-
-    while (fPendingBarLinesList.size ()) {
-      S_msrBarLine
-        barLine =
-          fPendingBarLinesList.front ();
-
-//       fCurrentPart->
-//         appendBarLineToPart (barLine); // JMI ??? v0.9.63
-
-      voice->
-        appendBarLineToVoice (barLine); // JMIJMIJMI
-
-      fPendingBarLinesList.pop_front ();
-    } // while
-  }
-}
+// void mxsr2msrTranslator::attachPendingBarLinesToVoice (
+//   const S_msrVoice& voice)
+// {
+//   // attach the pending barlines if any to the voice
+//   if (fPendingBarLinesList.size ()) {
+// #ifdef MF_TRACE_IS_ENABLED
+//     if (gTraceOahGroup->getTraceBarLines ()) {
+//       std::stringstream ss;
+//
+//       ss <<
+//         "Attaching pending barlines to voice \""  <<
+//         voice->getVoiceName () <<
+//         "\"";
+//
+//       gWaeHandler->waeTraceWithLocationDetails (
+//         __FILE__, __LINE__,
+//         ss.str ());
+//     }
+// #endif // MF_TRACE_IS_ENABLED
+//
+//     while (fPendingBarLinesList.size ()) {
+//       S_msrBarLine
+//         barLine =
+//           fPendingBarLinesList.front ();
+//
+// //       fCurrentPart->
+// //         appendBarLineToPart (barLine); // JMI ??? v0.9.63
+//
+//       voice->
+//         appendBarLineToVoice (barLine); // JMIJMIJMI
+//
+//       fPendingBarLinesList.pop_front ();
+//     } // while
+//   }
+// }
 
 void mxsr2msrTranslator::attachPendingBarLinesToPart (
   const S_msrPart& part)
 {
   // attach the pending barlines if any to the voice
-  if (fPendingBarLinesList.size ()) {
 #ifdef MF_TRACE_IS_ENABLED
-    if (gTraceOahGroup->getTraceBarLines ()) {
-      std::stringstream ss;
+  if (gTraceOahGroup->getTraceBarLines ()) {
+    std::stringstream ss;
 
-      ss <<
-        "Attaching pending barlines to part \""  <<
-        part->getPartName () <<
-        "\"";
+    ss <<
+      "Attaching pending barlines to part \""  <<
+      part->getPartName () <<
+      "\"";
 
-      gWaeHandler->waeTraceWithLocationDetails (
-        __FILE__, __LINE__,
-        ss.str ());
-    }
+    gWaeHandler->waeTraceWithLocationDetails (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
 #endif // MF_TRACE_IS_ENABLED
 
-    while (fPendingBarLinesList.size ()) {
-      S_msrBarLine
-        barLine =
-          fPendingBarLinesList.front ();
+  while (fPendingBarLinesList.size ()) {
+    S_msrBarLine
+      barLine =
+        fPendingBarLinesList.front ();
 
 //       fCurrentPart->
 //         appendBarLineToPart (barLine); // JMI ??? v0.9.63
 
-      part->
-        appendBarLineToPart (barLine); // JMIJMIJMI
+    part->
+      appendBarLineToPart (barLine); // JMIJMIJMI
 
-      fPendingBarLinesList.pop_front ();
-    } // while
-  }
+    fPendingBarLinesList.pop_front ();
+  } // while
 }
 
-void mxsr2msrTranslator::attachPendingRehearsalMarksToVoice (
-  const S_msrVoice& voice)
-{
- // attach the pending rehearsals if any to the note
-  if (fPendingRehearsalMarksList.size ()) {
-#ifdef MF_TRACE_IS_ENABLED
-    if (gTraceOahGroup->getTraceRehearsalMarks ()) {
-      std::stringstream ss;
-
-      ss <<
-        "Attaching pending rehearsals to voice \""  <<
-        voice->getVoiceName () <<
-        "\"";
-
-      gWaeHandler->waeTraceWithLocationDetails (
-        __FILE__, __LINE__,
-        ss.str ());
-    }
-#endif // MF_TRACE_IS_ENABLED
-
-    while (fPendingRehearsalMarksList.size ()) {
-      S_msrRehearsalMark
-        rehearsalMark =
-          fPendingRehearsalMarksList.front ();
-
-      voice->
-        appendRehearsalMarkToVoice (rehearsalMark);
-
-      fPendingRehearsalMarksList.pop_front ();
-    } // while
-  }
-}
+// void mxsr2msrTranslator::attachPendingRehearsalMarksToVoice (
+//   const S_msrVoice& voice)
+// {
+//  // attach the pending rehearsals to the note
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gTraceOahGroup->getTraceRehearsalMarks ()) {
+//     std::stringstream ss;
+//
+//     ss <<
+//       "Attaching pending rehearsals to voice \""  <<
+//       voice->getVoiceName () <<
+//       "\"";
+//
+//     gWaeHandler->waeTraceWithLocationDetails (
+//       __FILE__, __LINE__,
+//       ss.str ());
+//   }
+// #endif // MF_TRACE_IS_ENABLED
+//
+//   while (fPendingRehearsalMarksList.size ()) {
+//     S_msrRehearsalMark
+//       rehearsalMark =
+//         fPendingRehearsalMarksList.front ();
+//
+//     voice->
+//       appendRehearsalMarkToVoice (rehearsalMark);
+//
+//     fPendingRehearsalMarksList.pop_front ();
+//   } // while
+// }
 
 void mxsr2msrTranslator::attachPendingRehearsalMarksToPart (
   const S_msrPart& part)
 {
- // attach the pending rehearsals if any to the note
-  if (fPendingRehearsalMarksList.size ()) {
+ // attach the pending rehearsals to the note
 #ifdef MF_TRACE_IS_ENABLED
-    if (gTraceOahGroup->getTraceRehearsalMarks ()) {
-      std::stringstream ss;
+  if (gTraceOahGroup->getTraceRehearsalMarks ()) {
+    std::stringstream ss;
 
-      ss <<
-        "Attaching pending rehearsals to part \""  <<
-        part->getPartName () <<
-        "\"";
+    ss <<
+      "Attaching pending rehearsals to part \""  <<
+      part->getPartName () <<
+      "\"";
 
-      gWaeHandler->waeTraceWithLocationDetails (
-        __FILE__, __LINE__,
-        ss.str ());
-    }
+    gWaeHandler->waeTraceWithLocationDetails (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
 #endif // MF_TRACE_IS_ENABLED
 
-    while (fPendingRehearsalMarksList.size ()) {
-      S_msrRehearsalMark
-        rehearsalMark =
-          fPendingRehearsalMarksList.front ();
+  while (fPendingRehearsalMarksList.size ()) {
+    S_msrRehearsalMark
+      rehearsalMark =
+        fPendingRehearsalMarksList.front ();
 
-      part->
-        appendRehearsalMarkToPart (rehearsalMark);
+    part->
+      appendRehearsalMarkToPart (rehearsalMark);
 
-      fPendingRehearsalMarksList.pop_front ();
-    } // while
-  }
+    fPendingRehearsalMarksList.pop_front ();
+  } // while
 }
 
-void mxsr2msrTranslator::attachLineBreaksToVoice (
-  const S_msrVoice& voice)
-{
- // attach the pending line breaks if any to the note
-  if (fPendingLineBreaksList.size ()) {
-#ifdef MF_TRACE_IS_ENABLED
-    if (gTraceOahGroup->getTraceLineBreaks ()) {
-      std::stringstream ss;
-
-      ss <<
-        "Attaching pending line breaks to voice \""  <<
-        voice->getVoiceName () <<
-        "\"";
-
-      gWaeHandler->waeTraceWithLocationDetails (
-        __FILE__, __LINE__,
-        ss.str ());
-    }
-#endif // MF_TRACE_IS_ENABLED
-
-    while (fPendingLineBreaksList.size ()) {
-      S_msrLineBreak
-        lineBreak =
-          fPendingLineBreaksList.front ();
-
-      // append it to the voice
-      voice->
-        appendLineBreakToVoice (lineBreak);
-
-      // remove it from the list
-      fPendingLineBreaksList.pop_front ();
-    } // while
-  }
-}
+// void mxsr2msrTranslator::attachLineBreaksToVoice (
+//   const S_msrVoice& voice)
+// {
+//  // attach the pending line breaks to the note
+// #ifdef MF_TRACE_IS_ENABLED
+//     if (gTraceOahGroup->getTraceLineBreaks ()) {
+//       std::stringstream ss;
+//
+//       ss <<
+//         "Attaching pending line breaks to voice \""  <<
+//         voice->getVoiceName () <<
+//         "\"";
+//
+//       gWaeHandler->waeTraceWithLocationDetails (
+//         __FILE__, __LINE__,
+//         ss.str ());
+//     }
+// #endif // MF_TRACE_IS_ENABLED
+//
+//     while (fPendingLineBreaksList.size ()) {
+//       S_msrLineBreak
+//         lineBreak =
+//           fPendingLineBreaksList.front ();
+//
+//       // append it to the voice
+//       voice->
+//         appendLineBreakToVoice (lineBreak);
+//
+//       // remove it from the list
+//       fPendingLineBreaksList.pop_front ();
+//     } // while
+// }
 
 void mxsr2msrTranslator::attachLineBreaksToPart (
   const S_msrPart& part)
 {
- // attach the pending line breaks if any to the note
-  if (fPendingLineBreaksList.size ()) {
+ // attach the pending line breaks to the note
 #ifdef MF_TRACE_IS_ENABLED
-    if (gTraceOahGroup->getTraceLineBreaks ()) {
-      std::stringstream ss;
+  if (gTraceOahGroup->getTraceLineBreaks ()) {
+    std::stringstream ss;
 
-      ss <<
-        "Attaching pending line breaks to part \""  <<
-        part->getPartName () <<
-        "\"";
+    ss <<
+      "Attaching pending line breaks to part \""  <<
+      part->getPartName () <<
+      "\"";
 
-      gWaeHandler->waeTraceWithLocationDetails (
-        __FILE__, __LINE__,
-        ss.str ());
-    }
+    gWaeHandler->waeTraceWithLocationDetails (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
 #endif // MF_TRACE_IS_ENABLED
 
-    while (fPendingLineBreaksList.size ()) {
-      S_msrLineBreak
-        lineBreak =
-          fPendingLineBreaksList.front ();
+  while (fPendingLineBreaksList.size ()) {
+    S_msrLineBreak
+      lineBreak =
+        fPendingLineBreaksList.front ();
 
-      // append it to the voice
-      part->
-        appendLineBreakToPart (lineBreak);
+    // append it to the voice
+    part->
+      appendLineBreakToPart (lineBreak);
 
-      // remove it from the list
-      fPendingLineBreaksList.pop_front ();
-    } // while
-  }
+    // remove it from the list
+    fPendingLineBreaksList.pop_front ();
+  } // while
 }
 
-void mxsr2msrTranslator::attachPageBreaksToVoice (
-  const S_msrVoice& voice)
-{
- // attach the pending page breaks if any to the note
-  if (fPendingPageBreaksList.size ()) {
-#ifdef MF_TRACE_IS_ENABLED
-    if (gTraceOahGroup->getTracePageBreaks ()) {
-      std::stringstream ss;
-
-      ss <<
-        "Attaching pending page breaks to voice \""  <<
-        voice->getVoiceName () <<
-        "\"";
-
-      gWaeHandler->waeTraceWithLocationDetails (
-        __FILE__, __LINE__,
-        ss.str ());
-    }
-#endif // MF_TRACE_IS_ENABLED
-
-    while (fPendingPageBreaksList.size ()) {
-      S_msrPageBreak
-        pageBreak =
-          fPendingPageBreaksList.front ();
-
-      // append it to the voice
-      voice->
-        appendPageBreakToVoice (pageBreak);
-
-      // remove it from the list
-      fPendingPageBreaksList.pop_front ();
-    } // while
-  }
-}
+// void mxsr2msrTranslator::attachPageBreaksToVoice (
+//   const S_msrVoice& voice)
+// {
+//  // attach the pending page breaks to the note
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gTraceOahGroup->getTracePageBreaks ()) {
+//     std::stringstream ss;
+//
+//     ss <<
+//       "Attaching pending page breaks to voice \""  <<
+//       voice->getVoiceName () <<
+//       "\"";
+//
+//     gWaeHandler->waeTraceWithLocationDetails (
+//       __FILE__, __LINE__,
+//       ss.str ());
+//   }
+// #endif // MF_TRACE_IS_ENABLED
+//
+//   while (fPendingPageBreaksList.size ()) {
+//     S_msrPageBreak
+//       pageBreak =
+//         fPendingPageBreaksList.front ();
+//
+//     // append it to the voice
+//     voice->
+//       appendPageBreakToVoice (pageBreak);
+//
+//     // remove it from the list
+//     fPendingPageBreaksList.pop_front ();
+//   } // while
+// }
 
 void mxsr2msrTranslator::attachPageBreaksToPart (
   const S_msrPart& part)
 {
- // attach the pending page breaks if any to the note
-  if (fPendingPageBreaksList.size ()) {
+ // attach the pending page breaks to the note
 #ifdef MF_TRACE_IS_ENABLED
-    if (gTraceOahGroup->getTracePageBreaks ()) {
-      std::stringstream ss;
+  if (gTraceOahGroup->getTracePageBreaks ()) {
+    std::stringstream ss;
 
-      ss <<
-        "Attaching pending page breaks to part \""  <<
-        part->getPartName () <<
-        "\"";
+    ss <<
+      "Attaching pending page breaks to part \""  <<
+      part->getPartName () <<
+      "\"";
 
-      gWaeHandler->waeTraceWithLocationDetails (
-        __FILE__, __LINE__,
-        ss.str ());
-    }
+    gWaeHandler->waeTraceWithLocationDetails (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
 #endif // MF_TRACE_IS_ENABLED
 
-    while (fPendingPageBreaksList.size ()) {
-      S_msrPageBreak
-        pageBreak =
-          fPendingPageBreaksList.front ();
+  while (fPendingPageBreaksList.size ()) {
+    S_msrPageBreak
+      pageBreak =
+        fPendingPageBreaksList.front ();
 
-      // append it to the voice
-      part->
-        appendPageBreakToPart (pageBreak);
+    // append it to the voice
+    part->
+      appendPageBreakToPart (pageBreak);
 
-      // remove it from the list
-      fPendingPageBreaksList.pop_front ();
-    } // while
-  }
+    // remove it from the list
+    fPendingPageBreaksList.pop_front ();
+  } // while
 }
 
 //______________________________________________________________________________
 void mxsr2msrTranslator::attachPendingSegnosToCurrentNote ()
 {
- // attach the pending segno if any to the note
-  if (fPendingSegnosList.size ()) {
+ // attach the pending segno to the note
 #ifdef MF_TRACE_IS_ENABLED
-    if (gTraceOahGroup->getTraceSegnos ()) {
-      std::stringstream ss;
+  if (gTraceOahGroup->getTraceSegnos ()) {
+    std::stringstream ss;
 
-      ss <<
-        "Attaching pending segno to note " <<
-        fCurrentNote->asString ();
+    ss <<
+      "Attaching pending segno to note " <<
+      fCurrentNote->asString ();
 
-      gWaeHandler->waeTraceWithLocationDetails (
-        __FILE__, __LINE__,
-        ss.str ());
-    }
+    gWaeHandler->waeTraceWithLocationDetails (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
 #endif // MF_TRACE_IS_ENABLED
 
-    while (fPendingSegnosList.size ()) {
-      S_msrSegno
-        segno =
-          fPendingSegnosList.front ();
+  while (fPendingSegnosList.size ()) {
+    S_msrSegno
+      segno =
+        fPendingSegnosList.front ();
 
-      fCurrentNote->appendSegnoToNote (segno);
+    fCurrentNote->appendSegnoToNote (segno);
 
-      fPendingSegnosList.pop_front ();
-    } // while
-  }
+    fPendingSegnosList.pop_front ();
+  } // while
 }
 
 //______________________________________________________________________________
 void mxsr2msrTranslator::attachPendingDalSegnosToCurrentNote ()
 {
- // attach the pending dal segno if any to the note
-  if (fPendingDalSegnosList.size ()) {
+ // attach the pending dal segno to the note
 #ifdef MF_TRACE_IS_ENABLED
-    if (gTraceOahGroup->getTraceDalSegnos ()) {
-      std::stringstream ss;
+  if (gTraceOahGroup->getTraceDalSegnos ()) {
+    std::stringstream ss;
 
-      ss <<
-        "Attaching pending dal segno to note " <<
-        fCurrentNote->asString ();
+    ss <<
+      "Attaching pending dal segno to note " <<
+      fCurrentNote->asString ();
 
-      gWaeHandler->waeTraceWithLocationDetails (
-        __FILE__, __LINE__,
-        ss.str ());
-    }
+    gWaeHandler->waeTraceWithLocationDetails (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
 #endif // MF_TRACE_IS_ENABLED
 
-    while (fPendingDalSegnosList.size ()) {
-      S_msrDalSegno
-        dalSegno =
-          fPendingDalSegnosList.front ();
+  while (fPendingDalSegnosList.size ()) {
+    S_msrDalSegno
+      dalSegno =
+        fPendingDalSegnosList.front ();
 
-      fCurrentNote->appendDalSegnoToNote (dalSegno);
+    fCurrentNote->appendDalSegnoToNote (dalSegno);
 
-      fPendingDalSegnosList.pop_front ();
-    } // while
-  }
+    fPendingDalSegnosList.pop_front ();
+  } // while
 }
 
 void mxsr2msrTranslator::attachPendingDalSegnosToChord (
   const S_msrChord& chord)
 {
  // attach the pending dal segno if any to the chord
-  if (fPendingDalSegnosList.size ()) {
 #ifdef MF_TRACE_IS_ENABLED
-    if (gTraceOahGroup->getTraceDalSegnos ()) {
-      std::stringstream ss;
+  if (gTraceOahGroup->getTraceDalSegnos ()) {
+    std::stringstream ss;
 
-      ss <<
-        "Attaching pending dal segno to chord " <<
-        chord->asString ();
+    ss <<
+      "Attaching pending dal segno to chord " <<
+      chord->asString ();
 
-      gWaeHandler->waeTraceWithLocationDetails (
-        __FILE__, __LINE__,
-        ss.str ());
-    }
+    gWaeHandler->waeTraceWithLocationDetails (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
 #endif // MF_TRACE_IS_ENABLED
 
-    while (fPendingDalSegnosList.size ()) {
-      S_msrDalSegno
-        dalSegno =
-          fPendingDalSegnosList.front ();
+  while (fPendingDalSegnosList.size ()) {
+    S_msrDalSegno
+      dalSegno =
+        fPendingDalSegnosList.front ();
 
-      chord->
-        appendDalSegnoToChord (dalSegno);
+    chord->
+      appendDalSegnoToChord (dalSegno);
 
-      fPendingDalSegnosList.pop_front ();
-    } // while
-  }
+    fPendingDalSegnosList.pop_front ();
+  } // while
 }
 
 //______________________________________________________________________________
 void mxsr2msrTranslator::attachPendingCodasToCurrentNote ()
 {
- // attach the pending coda if any to the note
-  if (fPendingCodasList.size ()) {
+ // attach the pending coda to the note
 #ifdef MF_TRACE_IS_ENABLED
-    if (gTraceOahGroup->getTraceCodas ()) {
-      std::stringstream ss;
+  if (gTraceOahGroup->getTraceCodas ()) {
+    std::stringstream ss;
 
-      ss <<
-        "Attaching pending codas to note " <<
-        fCurrentNote->asString ();
+    ss <<
+      "Attaching pending codas to note " <<
+      fCurrentNote->asString ();
 
-      gWaeHandler->waeTraceWithLocationDetails (
-        __FILE__, __LINE__,
-        ss.str ());
-    }
+    gWaeHandler->waeTraceWithLocationDetails (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
 #endif // MF_TRACE_IS_ENABLED
 
-    while (fPendingCodasList.size ()) {
-      S_msrCoda
-        coda =
-          fPendingCodasList.front ();
+  while (fPendingCodasList.size ()) {
+    S_msrCoda
+      coda =
+        fPendingCodasList.front ();
 
-      fCurrentNote->appendCodaToNote (coda);
+    fCurrentNote->appendCodaToNote (coda);
 
-      fPendingCodasList.pop_front ();
-    } // while
-  }
+    fPendingCodasList.pop_front ();
+  } // while
 }
 
 //______________________________________________________________________________
 void mxsr2msrTranslator::attachPendingCrescDecrescsToCurrentNote ()
 {
- // attach the pending crescDecresc if any to the note
-  if (fPendinCrescDecrescsList.size ()) {
+ // attach the pending crescDecresc to the note
 #ifdef MF_TRACE_IS_ENABLED
-    if (gTraceOahGroup->getTraceCrescDecrescs ()) {
-      std::stringstream ss;
+  if (gTraceOahGroup->getTraceCrescDecrescs ()) {
+    std::stringstream ss;
 
-      ss <<
-        "Attaching pending crescDecresc to note " <<
-        fCurrentNote->asString ();
+    ss <<
+      "Attaching pending crescDecresc to note " <<
+      fCurrentNote->asString ();
 
-      gWaeHandler->waeTraceWithLocationDetails (
-        __FILE__, __LINE__,
-        ss.str ());
-    }
+    gWaeHandler->waeTraceWithLocationDetails (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
 #endif // MF_TRACE_IS_ENABLED
 
-    while (fPendinCrescDecrescsList.size ()) {
-      S_msrCrescDecresc
-        crescDecresc =
-          fPendinCrescDecrescsList.front ();
+  while (fPendinCrescDecrescsList.size ()) {
+    S_msrCrescDecresc
+      crescDecresc =
+        fPendinCrescDecrescsList.front ();
 
-      fCurrentNote->appendCrescDecrescToNote (crescDecresc);
+    fCurrentNote->appendCrescDecrescToNote (crescDecresc);
 
-      fPendinCrescDecrescsList.pop_front ();
-    } // while
-  }
+    fPendinCrescDecrescsList.pop_front ();
+  } // while
 }
 
 //______________________________________________________________________________
 void mxsr2msrTranslator::attachPendingEyeGlassesToCurrentNote ()
 {
- // attach the pending eyeglasses if any to the note
-  if (fPendingEyeGlassesList.size ()) {
+ // attach the pending eyeglasses to the note
 #ifdef MF_TRACE_IS_ENABLED
-    if (gTraceOahGroup->getTraceEyeGlasses ()) {
-      std::stringstream ss;
+  if (gTraceOahGroup->getTraceEyeGlasses ()) {
+    std::stringstream ss;
 
-      ss <<
-        "Attaching pending eyeglasses to note " <<
-        fCurrentNote->asString ();
+    ss <<
+      "Attaching pending eyeglasses to note " <<
+      fCurrentNote->asString ();
 
-      gWaeHandler->waeTraceWithLocationDetails (
-        __FILE__, __LINE__,
-        ss.str ());
-    }
+    gWaeHandler->waeTraceWithLocationDetails (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
 #endif // MF_TRACE_IS_ENABLED
 
-    while (fPendingEyeGlassesList.size ()) {
-      S_msrEyeGlasses
-        eyeGlasses =
-          fPendingEyeGlassesList.front ();
+  while (fPendingEyeGlassesList.size ()) {
+    S_msrEyeGlasses
+      eyeGlasses =
+        fPendingEyeGlassesList.front ();
 
-      fCurrentNote->appendEyeGlassesToNote (eyeGlasses);
+    fCurrentNote->appendEyeGlassesToNote (eyeGlasses);
 
-      fPendingEyeGlassesList.pop_front ();
-    } // while
-  }
+    fPendingEyeGlassesList.pop_front ();
+  } // while
 }
 
 //______________________________________________________________________________
 void mxsr2msrTranslator::attachPendingDampsToCurrentNote ()
 {
- // attach the pending damps if any to the note
-  if (fPendingDampsList.size ()) {
+ // attach the pending damps to the note
 #ifdef MF_TRACE_IS_ENABLED
-    if (gTraceOahGroup->getTraceDamps ()) {
-      std::stringstream ss;
+  if (gTraceOahGroup->getTraceDamps ()) {
+    std::stringstream ss;
 
-      ss <<
-        "Attaching pending damps to note " <<
-        fCurrentNote->asString ();
+    ss <<
+      "Attaching pending damps to note " <<
+      fCurrentNote->asString ();
 
-      gWaeHandler->waeTraceWithLocationDetails (
-        __FILE__, __LINE__,
-        ss.str ());
-    }
+    gWaeHandler->waeTraceWithLocationDetails (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
 #endif // MF_TRACE_IS_ENABLED
 
-    while (fPendingDampsList.size ()) {
-      S_msrDamp
-        damp =
-          fPendingDampsList.front ();
+  while (fPendingDampsList.size ()) {
+    S_msrDamp
+      damp =
+        fPendingDampsList.front ();
 
-      fCurrentNote->appendDampToNote (damp);
+    fCurrentNote->appendDampToNote (damp);
 
-      fPendingDampsList.pop_front ();
-    } // while
-  }
+    fPendingDampsList.pop_front ();
+  } // while
 }
 
 //______________________________________________________________________________
 void mxsr2msrTranslator::attachPendingDampAllsToCurrentNote ()
 {
- // attach the pending damp alls if any to the note
-  if (fPendingDampAllsList.size ()) {
+ // attach the pending damp alls to the note
 #ifdef MF_TRACE_IS_ENABLED
-    if (gTraceOahGroup->getTraceDampAlls ()) {
-      std::stringstream ss;
+  if (gTraceOahGroup->getTraceDampAlls ()) {
+    std::stringstream ss;
 
-      ss <<
-        "Attaching pending damp alls to note " <<
-        fCurrentNote->asString ();
+    ss <<
+      "Attaching pending damp alls to note " <<
+      fCurrentNote->asString ();
 
-      gWaeHandler->waeTraceWithLocationDetails (
-        __FILE__, __LINE__,
-        ss.str ());
-    }
+    gWaeHandler->waeTraceWithLocationDetails (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
 #endif // MF_TRACE_IS_ENABLED
 
-    while (fPendingDampAllsList.size ()) {
-      S_msrDampAll
-        dampAll =
-          fPendingDampAllsList.front ();
+  while (fPendingDampAllsList.size ()) {
+    S_msrDampAll
+      dampAll =
+        fPendingDampAllsList.front ();
 
-      fCurrentNote->appendDampAllToNote (dampAll);
+    fCurrentNote->appendDampAllToNote (dampAll);
 
-      fPendingDampAllsList.pop_front ();
-    } // while
-  }
+    fPendingDampAllsList.pop_front ();
+  } // while
 }
 
 //______________________________________________________________________________
 void mxsr2msrTranslator::attachPendingOctaveShiftsToCurrentNote ()
 {
- // attach the pending octave shifts if any to the note
-  if (fPendingOctaveShiftsList.size ()) {
+ // attach the pending octave shifts to the note
 #ifdef MF_TRACE_IS_ENABLED
-    if (gTraceOahGroup->getTraceOctaveShifts ()) {
-      std::stringstream ss;
+  if (gTraceOahGroup->getTraceOctaveShifts ()) {
+    std::stringstream ss;
 
-      ss <<
-        "Attaching pending octave shifts to note " <<
-        fCurrentNote->asString ();
+    ss <<
+      "Attaching pending octave shifts to note " <<
+      fCurrentNote->asString ();
 
-      gWaeHandler->waeTraceWithLocationDetails (
-        __FILE__, __LINE__,
-        ss.str ());
-    }
+    gWaeHandler->waeTraceWithLocationDetails (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
 #endif // MF_TRACE_IS_ENABLED
 
-    while (fPendingOctaveShiftsList.size ()) {
-      S_msrOctaveShift
-        octaveShift =
-          fPendingOctaveShiftsList.front ();
+  while (fPendingOctaveShiftsList.size ()) {
+    S_msrOctaveShift
+      octaveShift =
+        fPendingOctaveShiftsList.front ();
 
-      fCurrentNote->setNoteOctaveShift (octaveShift);
+    fCurrentNote->setNoteOctaveShift (octaveShift);
 
-      fPendingOctaveShiftsList.pop_front ();
-    } // while
-  }
+    fPendingOctaveShiftsList.pop_front ();
+  } // while
 }
 
 //______________________________________________________________________________
 void mxsr2msrTranslator::attachPendingScordaturasToCurrentNote ()
 {
- // attach the pending scordatura if any to the note
-  if (fPendingScordaturasList.size ()) {
+ // attach the pending scordatura to the note
 #ifdef MF_TRACE_IS_ENABLED
-    if (gTraceOahGroup->getTraceScordaturas ()) {
-      std::stringstream ss;
+  if (gTraceOahGroup->getTraceScordaturas ()) {
+    std::stringstream ss;
 
-      ss <<
-        "Attaching pending scordaturas to note " <<
-        fCurrentNote->asString ();
+    ss <<
+      "Attaching pending scordaturas to note " <<
+      fCurrentNote->asString ();
 
-      gWaeHandler->waeTraceWithLocationDetails (
-        __FILE__, __LINE__,
-        ss.str ());
-    }
+    gWaeHandler->waeTraceWithLocationDetails (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
 #endif // MF_TRACE_IS_ENABLED
 
-    while (fPendingScordaturasList.size ()) {
-      S_msrScordatura
-        scordatura =
-          fPendingScordaturasList.front ();
+  while (fPendingScordaturasList.size ()) {
+    S_msrScordatura
+      scordatura =
+        fPendingScordaturasList.front ();
 
-      fCurrentNote->appendScordaturaToNote (scordatura);
+    fCurrentNote->appendScordaturaToNote (scordatura);
 
-      fPendingScordaturasList.pop_front ();
-    } // while
-  }
+    fPendingScordaturasList.pop_front ();
+  } // while
 }
 
 //______________________________________________________________________________
 void mxsr2msrTranslator::attachPendingDynamicsToCurrentNote ()
 {
- // attach the pending dynamics if any to the note
-  if (fPendingDynamicxList.size ()) {
-    Bool delayAttachment (false);
+ // attach the pending dynamics to the note
+  Bool delayAttachment (false);
 
 #ifdef MF_TRACE_IS_ENABLED
-    if (gTraceOahGroup->getTraceDynamics ()) {
-      std::stringstream ss;
+  if (gTraceOahGroup->getTraceDynamics ()) {
+    std::stringstream ss;
 
-      ss <<
-        "Attaching pending dynamics to note " <<
-        fCurrentNote->asString ();
+    ss <<
+      "Attaching pending dynamics to note " <<
+      fCurrentNote->asString ();
 
-      gWaeHandler->waeTraceWithLocationDetails (
-        __FILE__, __LINE__,
-        ss.str ());
-    }
-#endif // MF_TRACE_IS_ENABLED
-
-    if (fCurrentNoteIsARest) {
-      if (gGlobalMxsr2msrOahGroup->getDelayRestsDynamics ()) {
-        gLog <<
-          "Delaying dynamics attached to a rest until next note" <<
-          std::endl;
-
-        delayAttachment = true;
-      }
-
-      else {
-#ifdef MF_TRACE_IS_ENABLED
-       if (gTraceOahGroup->getTraceLyrics ()) {
-          std::stringstream ss;
-
-          int numberOfDynamics = fPendingDynamicxList.size ();
-
-          if (numberOfDynamics > 1) {
-            ss <<
-              "there are " << numberOfDynamics << " dynamics";
-          }
-          else {
-            ss <<
-              "there is 1 dynamics";
-          }
-          ss <<
-            " attached to a rest";
-
-          mxsr2msrWarningWithLocationDetails (
-            gServiceRunData->getInputSourceName (),
-            fCurrentNote->getInputLineNumber (),
-            ss.str ());
-        }
-#endif // MF_TRACE_IS_ENABLED
-      }
-    }
-
-    if (! delayAttachment) {
-      while (fPendingDynamicxList.size ()) {
-        S_msrDynamic
-          dynamics =
-            fPendingDynamicxList.front ();
-
-        fCurrentNote->appendDynamicToNote (dynamics);
-        fPendingDynamicxList.pop_front ();
-      } // while
-    }
+    gWaeHandler->waeTraceWithLocationDetails (
+      __FILE__, __LINE__,
+      ss.str ());
   }
-}
-
-//______________________________________________________________________________
-void mxsr2msrTranslator::attachPendingOtherDynamicsToCurrentNote ()
-{
- // attach the pending other dynamics if any to the note
-  if (fPendingOtherDynamicxList.size ()) {
-    Bool delayAttachment (false);
-
-#ifdef MF_TRACE_IS_ENABLED
-    if (gTraceOahGroup->getTraceDynamics ()) {
-      std::stringstream ss;
-
-      ss <<
-        "Attaching pending other dynamics to note " <<
-        fCurrentNote->asString ();
-
-      gWaeHandler->waeTraceWithLocationDetails (
-        __FILE__, __LINE__,
-        ss.str ());
-    }
 #endif // MF_TRACE_IS_ENABLED
 
-    if (fCurrentNoteIsARest) {
-      if (gGlobalMxsr2msrOahGroup->getDelayRestsDynamics ()) {
-        gLog <<
-          "Delaying dynamics attached to a rest until next note" <<
-          std::endl;
+  if (fCurrentNoteIsARest) {
+    if (gGlobalMxsr2msrOahGroup->getDelayRestsDynamics ()) {
+      gLog <<
+        "Delaying dynamics attached to a rest until next note" <<
+        std::endl;
 
-        delayAttachment = true;
-      }
+      delayAttachment = true;
+    }
 
-      else {
+    else {
 #ifdef MF_TRACE_IS_ENABLED
-        if (gTraceOahGroup->getTraceDynamics ()) {
-          std::stringstream ss;
-
-          int numberOfOtherDynamics = fPendingOtherDynamicxList.size ();
-
-          if (numberOfOtherDynamics > 1) {
-            ss <<
-              "there are " << numberOfOtherDynamics << " other dynamics";
-          }
-          else {
-            ss <<
-              "there is 1 other dynamics";
-          }
-          ss <<
-            " attached to a rest";
-
-          mxsr2msrWarningWithLocationDetails (
-            gServiceRunData->getInputSourceName (),
-            fCurrentNote->getInputLineNumber (),
-            ss.str ());
-        }
-#endif // MF_TRACE_IS_ENABLED
-      }
-    }
-
-    if (! delayAttachment) {
-      while (fPendingOtherDynamicxList.size ()) {
-        S_msrOtherDynamic
-          otherDynamic =
-            fPendingOtherDynamicxList.front ();
-
-        fCurrentNote->appendOtherDynamicToNote (otherDynamic);
-        fPendingOtherDynamicxList.pop_front ();
-      } // while
-    }
-  }
-}
-
-//______________________________________________________________________________
-void mxsr2msrTranslator::attachPendingWordsToCurrentNote ()
-{
-  // attach the pending words if any to the note
-  if (fPendingWordsList.size ()) {
-    Bool delayAttachment;
-
-#ifdef MF_TRACE_IS_ENABLED
-    if (gTraceOahGroup->getTraceWords ()) {
-      std::stringstream ss;
-
-      ss <<
-        "Attaching pending words to note " <<
-        fCurrentNote->asString ();
-
-      gWaeHandler->waeTraceWithLocationDetails (
-        __FILE__, __LINE__,
-        ss.str ());
-    }
-#endif // MF_TRACE_IS_ENABLED
-
-    if (fCurrentNoteIsARest) {
-      if (gGlobalMxsr2msrOahGroup->getDelayRestsWords ()) {
-        gLog <<
-          "Delaying word(s) attached to a rest until next note" <<
-          std::endl;
-
-        delayAttachment = true;
-      }
-
-      else {
-#ifdef MF_TRACE_IS_ENABLED
-        if (gTraceOahGroup->getTraceWords ()) {
-          std::stringstream ss;
-
-          int numberOfWords = fPendingWordsList.size ();
-
-          ss <<
-            mfSingularOrPluralWithoutNumber (
-              numberOfWords, "There is", "There are") <<
-            ' ' <<
-            numberOfWords <<
-            ' ' <<
-            mfSingularOrPluralWithoutNumber (
-              numberOfWords, "word", "words") <<
-            " attached to a rest";
-
-          mxsr2msrWarningWithLocationDetails (
-            gServiceRunData->getInputSourceName (),
-            fCurrentNote->getInputLineNumber (),
-            ss.str ());
-        }
-#endif // MF_TRACE_IS_ENABLED
-      }
-    }
-
-    if (! delayAttachment) {
-      while (fPendingWordsList.size ()) {
-        S_msrWords
-          words =
-            fPendingWordsList.front ();
-
-        fCurrentNote->appendWordsToNote (words);
-
-        fPendingWordsList.pop_front ();
-      } // while
-    }
-  }
-}
-
-//______________________________________________________________________________
-void mxsr2msrTranslator::attachPendingBeamsToCurrentNote ()
-{
-  // attach the pending beams if any to the note
-  if (fPendingBeamsList.size ()) {
-    Bool delayAttachment (false);
-
-#ifdef MF_TRACE_IS_ENABLED
-    if (gTraceOahGroup->getTraceBeams ()) {
-      std::stringstream ss;
-
-      ss <<
-        "Attaching pending beams to note " <<
-        fCurrentNote->asString ();
-
-      gWaeHandler->waeTraceWithLocationDetails (
-        __FILE__, __LINE__,
-        ss.str ());
-    }
-#endif // MF_TRACE_IS_ENABLED
-
-    if (fCurrentNoteIsARest) {
-      if (gGlobalMxsr2msrOahGroup->getDelayRestsBeams ()) {
-        gLog <<
-          "Delaying beam attached to a rest until next note" <<
-          std::endl;
-
-        delayAttachment = true;
-      }
-
-      else {
-#ifdef MF_TRACE_IS_ENABLED
-        if (gTraceOahGroup->getTraceBeams ()) {
-          std::stringstream ss;
-
-          int numberOfBeams = fPendingBeamsList.size ();
-
-          if (numberOfBeams > 1) {
-            ss <<
-              "there are " << numberOfBeams << " beams";
-          }
-          else {
-            ss <<
-              "there is 1 beam";
-          }
-          ss <<
-            " attached to a rest";
-
-          mxsr2msrWarningWithLocationDetails (
-            gServiceRunData->getInputSourceName (),
-            fCurrentNote->getInputLineNumber (),
-            ss.str ());
-        }
-#endif // MF_TRACE_IS_ENABLED
-      }
-    }
-
-    if (! delayAttachment) {
-      while (fPendingBeamsList.size ()) {
-        S_msrBeam
-          beam =
-            fPendingBeamsList.front ();
-
-        fCurrentNote->appendBeamToNote (beam);
-        fPendingBeamsList.pop_front ();
-      } // while
-    }
-  }
-}
-
-//______________________________________________________________________________
-void mxsr2msrTranslator::attachPendingSlursToCurrentNote ()
-{
-  // attach the pending slurs if any to the note
-  if (fPendingSlursList.size ()) {
-    Bool delayAttachment (false);
-
-#ifdef MF_TRACE_IS_ENABLED
-    if (gTraceOahGroup->getTraceSlurs ()) {
-      std::stringstream ss;
-
-      ss <<
-        "Attaching pending slurs to note " <<
-        fCurrentNote->asString ();
-
-      gWaeHandler->waeTraceWithLocationDetails (
-        __FILE__, __LINE__,
-        ss.str ());
-    }
-#endif // MF_TRACE_IS_ENABLED
-
-    if (fCurrentNoteIsARest) {
-      if (gGlobalMxsr2msrOahGroup->getDelayRestsSlurs ()) {
-        gLog <<
-          "Delaying slur attached to a rest until next note" <<
-          std::endl;
-
-        delayAttachment = true;
-      }
-
-      else {
+     if (gTraceOahGroup->getTraceLyrics ()) {
         std::stringstream ss;
 
-        int numberOfSlurs = fPendingSlursList.size ();
+        int numberOfDynamics = fPendingDynamicxList.size ();
 
-        if (numberOfSlurs > 1) {
+        if (numberOfDynamics > 1) {
           ss <<
-            "there are " << numberOfSlurs << " slurs";
+            "there are " << numberOfDynamics << " dynamics";
         }
         else {
           ss <<
-            "there is 1 slur";
+            "there is 1 dynamics";
         }
         ss <<
           " attached to a rest";
@@ -22555,18 +22270,287 @@ void mxsr2msrTranslator::attachPendingSlursToCurrentNote ()
           fCurrentNote->getInputLineNumber (),
           ss.str ());
       }
+#endif // MF_TRACE_IS_ENABLED
+    }
+  }
+
+  if (! delayAttachment) {
+    while (fPendingDynamicxList.size ()) {
+      S_msrDynamic
+        dynamics =
+          fPendingDynamicxList.front ();
+
+      fCurrentNote->appendDynamicToNote (dynamics);
+      fPendingDynamicxList.pop_front ();
+    } // while
+  }
+}
+
+//______________________________________________________________________________
+void mxsr2msrTranslator::attachPendingOtherDynamicsToCurrentNote ()
+{
+ // attach the pending other dynamics to the note
+  Bool delayAttachment (false);
+
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceDynamics ()) {
+    std::stringstream ss;
+
+    ss <<
+      "Attaching pending other dynamics to note " <<
+      fCurrentNote->asString ();
+
+    gWaeHandler->waeTraceWithLocationDetails (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  if (fCurrentNoteIsARest) {
+    if (gGlobalMxsr2msrOahGroup->getDelayRestsDynamics ()) {
+      gLog <<
+        "Delaying dynamics attached to a rest until next note" <<
+        std::endl;
+
+      delayAttachment = true;
     }
 
-    if (! delayAttachment) {
-      while (fPendingSlursList.size ()) {
-        S_msrSlur
-          slur =
-            fPendingSlursList.front ();
+    else {
+#ifdef MF_TRACE_IS_ENABLED
+      if (gTraceOahGroup->getTraceDynamics ()) {
+        std::stringstream ss;
 
-        fCurrentNote->appendSlurToNote (slur);
-        fPendingSlursList.pop_front ();
-      } // while
+        int numberOfOtherDynamics = fPendingOtherDynamicxList.size ();
+
+        if (numberOfOtherDynamics > 1) {
+          ss <<
+            "there are " << numberOfOtherDynamics << " other dynamics";
+        }
+        else {
+          ss <<
+            "there is 1 other dynamics";
+        }
+        ss <<
+          " attached to a rest";
+
+        mxsr2msrWarningWithLocationDetails (
+          gServiceRunData->getInputSourceName (),
+          fCurrentNote->getInputLineNumber (),
+          ss.str ());
+      }
+#endif // MF_TRACE_IS_ENABLED
     }
+  }
+
+  if (! delayAttachment) {
+    while (fPendingOtherDynamicxList.size ()) {
+      S_msrOtherDynamic
+        otherDynamic =
+          fPendingOtherDynamicxList.front ();
+
+      fCurrentNote->appendOtherDynamicToNote (otherDynamic);
+      fPendingOtherDynamicxList.pop_front ();
+    } // while
+  }
+}
+
+//______________________________________________________________________________
+void mxsr2msrTranslator::attachPendingWordsToCurrentNote ()
+{
+  // attach the pending words to the note
+  Bool delayAttachment;
+
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceWords ()) {
+    std::stringstream ss;
+
+    ss <<
+      "Attaching pending words to note " <<
+      fCurrentNote->asString ();
+
+    gWaeHandler->waeTraceWithLocationDetails (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  if (fCurrentNoteIsARest) {
+    if (gGlobalMxsr2msrOahGroup->getDelayRestsWords ()) {
+      gLog <<
+        "Delaying word(s) attached to a rest until next note" <<
+        std::endl;
+
+      delayAttachment = true;
+    }
+
+    else {
+#ifdef MF_TRACE_IS_ENABLED
+      if (gTraceOahGroup->getTraceWords ()) {
+        std::stringstream ss;
+
+        int numberOfWords = fPendingWordsList.size ();
+
+        ss <<
+          mfSingularOrPluralWithoutNumber (
+            numberOfWords, "There is", "There are") <<
+          ' ' <<
+          numberOfWords <<
+          ' ' <<
+          mfSingularOrPluralWithoutNumber (
+            numberOfWords, "word", "words") <<
+          " attached to a rest";
+
+        mxsr2msrWarningWithLocationDetails (
+          gServiceRunData->getInputSourceName (),
+          fCurrentNote->getInputLineNumber (),
+          ss.str ());
+      }
+#endif // MF_TRACE_IS_ENABLED
+    }
+  }
+
+  if (! delayAttachment) {
+    while (fPendingWordsList.size ()) {
+      S_msrWords
+        words =
+          fPendingWordsList.front ();
+
+      fCurrentNote->appendWordsToNote (words);
+
+      fPendingWordsList.pop_front ();
+    } // while
+  }
+}
+
+//______________________________________________________________________________
+void mxsr2msrTranslator::attachPendingBeamsToCurrentNote ()
+{
+  // attach the pending beams to the note
+  Bool delayAttachment (false);
+
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceBeams ()) {
+    std::stringstream ss;
+
+    ss <<
+      "Attaching pending beams to note " <<
+      fCurrentNote->asString ();
+
+    gWaeHandler->waeTraceWithLocationDetails (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  if (fCurrentNoteIsARest) {
+    if (gGlobalMxsr2msrOahGroup->getDelayRestsBeams ()) {
+      gLog <<
+        "Delaying beam attached to a rest until next note" <<
+        std::endl;
+
+      delayAttachment = true;
+    }
+
+    else {
+#ifdef MF_TRACE_IS_ENABLED
+      if (gTraceOahGroup->getTraceBeams ()) {
+        std::stringstream ss;
+
+        int numberOfBeams = fPendingBeamsList.size ();
+
+        if (numberOfBeams > 1) {
+          ss <<
+            "there are " << numberOfBeams << " beams";
+        }
+        else {
+          ss <<
+            "there is 1 beam";
+        }
+        ss <<
+          " attached to a rest";
+
+        mxsr2msrWarningWithLocationDetails (
+          gServiceRunData->getInputSourceName (),
+          fCurrentNote->getInputLineNumber (),
+          ss.str ());
+      }
+#endif // MF_TRACE_IS_ENABLED
+    }
+  }
+
+  if (! delayAttachment) {
+    while (fPendingBeamsList.size ()) {
+      S_msrBeam
+        beam =
+          fPendingBeamsList.front ();
+
+      fCurrentNote->appendBeamToNote (beam);
+      fPendingBeamsList.pop_front ();
+    } // while
+  }
+}
+
+//______________________________________________________________________________
+void mxsr2msrTranslator::attachPendingSlursToCurrentNote ()
+{
+  // attach the pending slurs to the note
+  Bool delayAttachment (false);
+
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceSlurs ()) {
+    std::stringstream ss;
+
+    ss <<
+      "Attaching pending slurs to note " <<
+      fCurrentNote->asString ();
+
+    gWaeHandler->waeTraceWithLocationDetails (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  if (fCurrentNoteIsARest) {
+    if (gGlobalMxsr2msrOahGroup->getDelayRestsSlurs ()) {
+      gLog <<
+        "Delaying slur attached to a rest until next note" <<
+        std::endl;
+
+      delayAttachment = true;
+    }
+
+    else {
+      std::stringstream ss;
+
+      int numberOfSlurs = fPendingSlursList.size ();
+
+      if (numberOfSlurs > 1) {
+        ss <<
+          "there are " << numberOfSlurs << " slurs";
+      }
+      else {
+        ss <<
+          "there is 1 slur";
+      }
+      ss <<
+        " attached to a rest";
+
+      mxsr2msrWarningWithLocationDetails (
+        gServiceRunData->getInputSourceName (),
+        fCurrentNote->getInputLineNumber (),
+        ss.str ());
+    }
+  }
+
+  if (! delayAttachment) {
+    while (fPendingSlursList.size ()) {
+      S_msrSlur
+        slur =
+          fPendingSlursList.front ();
+
+      fCurrentNote->appendSlurToNote (slur);
+      fPendingSlursList.pop_front ();
+    } // while
   }
 }
 
@@ -22576,120 +22560,119 @@ void mxsr2msrTranslator::attachPendingLigaturesToCurrentNote ()
   int numberOfLigatures =
     fPendingLigaturesList.size ();
 
-  // attach the pending ligatures if any to the note
-  if (numberOfLigatures) {
+  // attach the pending ligatures to the note
 #ifdef MF_TRACE_IS_ENABLED
-    if (gTraceOahGroup->getTraceLigatures ()) {
-      std::stringstream ss;
+  if (gTraceOahGroup->getTraceLigatures ()) {
+    std::stringstream ss;
 
-      ss <<
-        "Attaching " <<
-        mfSingularOrPlural (
-          numberOfLigatures,
-          "ligature", "ligatures") <<
-        " to note " <<
-        fCurrentNote->asString ();
+    ss <<
+      "Attaching " <<
+      mfSingularOrPlural (
+        numberOfLigatures,
+        "ligature", "ligatures") <<
+      " to note " <<
+      fCurrentNote->asString ();
 
-      gWaeHandler->waeTraceWithLocationDetails (
-        __FILE__, __LINE__,
-        ss.str ());
-    }
+    gWaeHandler->waeTraceWithLocationDetails (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
 #endif // MF_TRACE_IS_ENABLED
 
-    Bool delayAttachment (false);
+  Bool delayAttachment (false);
 
-    if (fCurrentNoteIsARest) {
-      if (gGlobalMxsr2msrOahGroup->getDelayRestsLigatures ()) {
-        gLog <<
-          "Delaying ligature attached to a rest until next note" <<
-          std::endl;
+  if (fCurrentNoteIsARest) {
+    if (gGlobalMxsr2msrOahGroup->getDelayRestsLigatures ()) {
+      gLog <<
+        "Delaying ligature attached to a rest until next note" <<
+        std::endl;
 
-        delayAttachment = true;
-      }
-
-      else {
-#ifdef MF_TRACE_IS_ENABLED
-        if (gTraceOahGroup->getTraceLigatures ()) {
-          std::stringstream ss;
-
-          ss <<
-            mfSingularOrPluralWithoutNumber (
-              numberOfLigatures,
-              "there is", "there are") <<
-              ' ' <<
-            numberOfLigatures <<
-              ' ' <<
-            mfSingularOrPluralWithoutNumber (
-              numberOfLigatures,
-              "ligature", "ligatures") <<
-            " attached to rest " <<
-            fCurrentNote->asShortString ();
-
-          mxsr2msrWarningWithLocationDetails (
-            gServiceRunData->getInputSourceName (),
-            fCurrentNote->getInputLineNumber (),
-            ss.str ());
-        }
-#endif // MF_TRACE_IS_ENABLED
-      }
+      delayAttachment = true;
     }
 
-    if (! delayAttachment) {
+    else {
 #ifdef MF_TRACE_IS_ENABLED
       if (gTraceOahGroup->getTraceLigatures ()) {
-          std::stringstream ss;
+        std::stringstream ss;
 
-          ss <<
-            mfSingularOrPluralWithoutNumber (
-              numberOfLigatures,
-              "there is", "there are") <<
-              ' ' <<
-            numberOfLigatures <<
-              ' ' <<
-              " pending " <<
-            mfSingularOrPluralWithoutNumber (
-              numberOfLigatures,
-              "ligature", "ligatures") <<
-            " attached to note " <<
-            fCurrentNote->asShortString ();
+        ss <<
+          mfSingularOrPluralWithoutNumber (
+            numberOfLigatures,
+            "there is", "there are") <<
+            ' ' <<
+          numberOfLigatures <<
+            ' ' <<
+          mfSingularOrPluralWithoutNumber (
+            numberOfLigatures,
+            "ligature", "ligatures") <<
+          " attached to rest " <<
+          fCurrentNote->asShortString ();
 
-          mxsr2msrWarningWithLocationDetails (
-            gServiceRunData->getInputSourceName (),
-            fCurrentNote->getInputLineNumber (),
-            ss.str ());
+        mxsr2msrWarningWithLocationDetails (
+          gServiceRunData->getInputSourceName (),
+          fCurrentNote->getInputLineNumber (),
+          ss.str ());
+      }
+#endif // MF_TRACE_IS_ENABLED
+    }
+  }
+
+  if (! delayAttachment) {
+#ifdef MF_TRACE_IS_ENABLED
+    if (gTraceOahGroup->getTraceLigatures ()) {
+        std::stringstream ss;
+
+        ss <<
+          mfSingularOrPluralWithoutNumber (
+            numberOfLigatures,
+            "there is", "there are") <<
+            ' ' <<
+          numberOfLigatures <<
+            ' ' <<
+            " pending " <<
+          mfSingularOrPluralWithoutNumber (
+            numberOfLigatures,
+            "ligature", "ligatures") <<
+          " attached to note " <<
+          fCurrentNote->asShortString ();
+
+        mxsr2msrWarningWithLocationDetails (
+          gServiceRunData->getInputSourceName (),
+          fCurrentNote->getInputLineNumber (),
+          ss.str ());
+    }
+#endif // MF_TRACE_IS_ENABLED
+
+    // append ligatures to note only if they belong to a suitable voice,
+    // i.e. above goes to voice 1 or 3, and below to voice 2 or 4
+
+    std::list<S_msrLigature>::iterator
+      iBegin = fPendingLigaturesList.begin (),
+      iEnd   = fPendingLigaturesList.end (),
+      i      = iBegin;
+    for ( ; ; ) {
+      S_msrLigature
+        ligature = (*i);
+
+#ifdef MF_TRACE_IS_ENABLED
+      if (gTraceOahGroup->getTraceLigatures ()) {
+        std::stringstream ss;
+
+        ss <<
+          "--> ligature: " <<
+          ligature->asString ();
+
+        gWaeHandler->waeTraceWithLocationDetails (
+          __FILE__, __LINE__,
+          ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
 
-      // append ligatures to note only if they belong to a suitable voice,
-      // i.e. above goes to voice 1 or 3, and below to voice 2 or 4
-
-      std::list<S_msrLigature>::iterator
-        iBegin = fPendingLigaturesList.begin (),
-        iEnd   = fPendingLigaturesList.end (),
-        i      = iBegin;
-      for ( ; ; ) {
-        S_msrLigature
-          ligature = (*i);
-
-#ifdef MF_TRACE_IS_ENABLED
-        if (gTraceOahGroup->getTraceLigatures ()) {
-          std::stringstream ss;
-
-          ss <<
-            "--> ligature: " <<
-            ligature->asString ();
-
-          gWaeHandler->waeTraceWithLocationDetails (
-            __FILE__, __LINE__,
-            ss.str ());
-        }
-#endif // MF_TRACE_IS_ENABLED
-
-        // fetch ligatures placement kind
-        msrPlacementKind
-          ligaturePlacementKind =
-            ligature->
-              getLigaturePlacementKind ();
+      // fetch ligatures placement kind
+      msrPlacementKind
+        ligaturePlacementKind =
+          ligature->
+            getLigaturePlacementKind ();
 
 //         // fetch note's measure JMI v0.9.63
 //         S_msrMeasure
@@ -22698,7 +22681,7 @@ void mxsr2msrTranslator::attachPendingLigaturesToCurrentNote ()
 //               getNoteUpLinkToMeasure ();
 //
 // #ifdef MF_SANITY_CHECKS_ARE_ENABLED
-  // sanity check
+// sanity check
 //         mfAssertWithLocationDetails (
 //           __FILE__, __LINE__,
 //           noteMeasure != nullptr,
@@ -22732,149 +22715,211 @@ void mxsr2msrTranslator::attachPendingLigaturesToCurrentNote ()
 //           "noteVoice is null",
 // #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
-        // handle ligature placement kind
-        switch (ligaturePlacementKind) {
-          case msrPlacementKind::kPlacement_UNKNOWN_:
-            // should not occur
-            break;
+      // handle ligature placement kind
+      switch (ligaturePlacementKind) {
+        case msrPlacementKind::kPlacement_UNKNOWN_:
+          // should not occur
+          break;
 
-          case msrPlacementKind::kPlacementAbove:
-          case msrPlacementKind::kPlacementBelow:
+        case msrPlacementKind::kPlacementAbove:
+        case msrPlacementKind::kPlacementBelow:
 #ifdef MF_TRACE_IS_ENABLED
-            if (gTraceOahGroup->getTraceLigatures ()) {
-              gLog <<
-                "Attaching pending ligature " <<
-                ligature->asString () <<
-                " to note " <<
-                fCurrentNote->asString () <<
+          if (gTraceOahGroup->getTraceLigatures ()) {
+            gLog <<
+              "Attaching pending ligature " <<
+              ligature->asString () <<
+              " to note " <<
+              fCurrentNote->asString () <<
 //                 " in voice \"" <<
 //                 noteVoice->getVoiceName () <<
 //                 "\"" <<
-                ", line " << ligature->getInputLineNumber () <<
-                std::endl;
-            }
+              ", line " << ligature->getInputLineNumber () <<
+              std::endl;
+          }
 #endif // MF_TRACE_IS_ENABLED
 
-            fCurrentNote->appendLigatureToNote (ligature);
-            break;
-        } // switch
+          fCurrentNote->appendLigatureToNote (ligature);
+          break;
+      } // switch
 
-        i = fPendingLigaturesList.erase (i);
+      i = fPendingLigaturesList.erase (i);
 
-        if (++i == iEnd) break;
-      } // for
-    }
+      if (++i == iEnd) break;
+    } // for
   }
 }
 
 //______________________________________________________________________________
 void mxsr2msrTranslator::attachPendingPedalsToCurrentNote ()
 {
-  // attach the pending pedals if any to the note
-  if (fPendingPedalsList.size ()) {
-    Bool delayAttachment (false);
+  // attach the pending pedals to the note
+  Bool delayAttachment (false);
 
 #ifdef MF_TRACE_IS_ENABLED
-    if (gTraceOahGroup->getTracePedals ()) {
-      std::stringstream ss;
+  if (gTraceOahGroup->getTracePedals ()) {
+    std::stringstream ss;
 
-      ss <<
-        "Attaching pending pedals to note " <<
-        fCurrentNote->asString ();
+    ss <<
+      "Attaching pending pedals to note " <<
+      fCurrentNote->asString ();
 
-      gWaeHandler->waeTraceWithLocationDetails (
-        __FILE__, __LINE__,
-        ss.str ());
-    }
+    gWaeHandler->waeTraceWithLocationDetails (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
 #endif // MF_TRACE_IS_ENABLED
 
-    if (fCurrentNoteIsARest) {
-      if (gGlobalMxsr2msrOahGroup->getDelayRestsPedals ()) {
-        gLog <<
-          "Delaying pedal attached to a rest until next note" <<
-          std::endl;
+  if (fCurrentNoteIsARest) {
+    if (gGlobalMxsr2msrOahGroup->getDelayRestsPedals ()) {
+      gLog <<
+        "Delaying pedal attached to a rest until next note" <<
+        std::endl;
 
-        delayAttachment = true;
-      }
+      delayAttachment = true;
+    }
 
-      else {
-        std::stringstream ss;
+    else {
+      std::stringstream ss;
 
-        int numberOfPedals = fPendingPedalsList.size ();
+      int numberOfPedals = fPendingPedalsList.size ();
 
-        if (numberOfPedals > 1) {
-          ss <<
-            "there are " << numberOfPedals << " pedals";
-        }
-        else {
-          ss <<
-            "there is 1 pedal";
-        }
+      if (numberOfPedals > 1) {
         ss <<
-          " attached to a rest";
-
-        mxsr2msrWarningWithLocationDetails (
-          gServiceRunData->getInputSourceName (),
-          fCurrentNote->getInputLineNumber (),
-          ss.str ());
+          "there are " << numberOfPedals << " pedals";
       }
-    }
+      else {
+        ss <<
+          "there is 1 pedal";
+      }
+      ss <<
+        " attached to a rest";
 
-    if (! delayAttachment) {
-      while (fPendingPedalsList.size ()) {
-        S_msrPedal
-          pedal =
-            fPendingPedalsList.front ();
-
-        fCurrentNote->appendPedalToNote (pedal);
-        fPendingPedalsList.pop_front ();
-      } // while
+      mxsr2msrWarningWithLocationDetails (
+        gServiceRunData->getInputSourceName (),
+        fCurrentNote->getInputLineNumber (),
+        ss.str ());
     }
+  }
+
+  if (! delayAttachment) {
+    while (fPendingPedalsList.size ()) {
+      S_msrPedal
+        pedal =
+          fPendingPedalsList.front ();
+
+      fCurrentNote->appendPedalToNote (pedal);
+      fPendingPedalsList.pop_front ();
+    } // while
   }
 }
 
 //______________________________________________________________________________
 void mxsr2msrTranslator::attachPendingSlashesToCurrentNote ()
 {
-  // attach the pending slashes if any to the note
-  if (fPendingSlashesList.size ()) {
-    Bool delayAttachment (false);
+  // attach the pending slashes to the note
+  Bool delayAttachment (false);
 
 #ifdef MF_TRACE_IS_ENABLED
-    if (gTraceOahGroup->getTraceSlashes ()) {
-      std::stringstream ss;
+  if (gTraceOahGroup->getTraceSlashes ()) {
+    std::stringstream ss;
 
-      ss <<
-        "Attaching pending slashes to note " <<
-        fCurrentNote->asString ();
+    ss <<
+      "Attaching pending slashes to note " <<
+      fCurrentNote->asString ();
 
-      gWaeHandler->waeTraceWithLocationDetails (
-        __FILE__, __LINE__,
-        ss.str ());
-    }
+    gWaeHandler->waeTraceWithLocationDetails (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
 #endif // MF_TRACE_IS_ENABLED
 
-    if (fCurrentNoteIsARest) {
-      if (gGlobalMxsr2msrOahGroup->getDelayRestsSlashes ()) {
-        gLog <<
-          "Delaying slash attached to a rest until next note" <<
-      std::endl;
+  if (fCurrentNoteIsARest) {
+    if (gGlobalMxsr2msrOahGroup->getDelayRestsSlashes ()) {
+      gLog <<
+        "Delaying slash attached to a rest until next note" <<
+    std::endl;
 
-        delayAttachment = true;
+      delayAttachment = true;
+    }
+
+    else {
+      std::stringstream ss;
+
+      int numberOfSlashes = fPendingSlashesList.size ();
+
+      if (numberOfSlashes > 1) {
+        ss <<
+          "there are " << numberOfSlashes << " slashes";
       }
-
       else {
+        ss <<
+          "there is 1 slash";
+      }
+      ss <<
+        " attached to a rest";
+
+      mxsr2msrWarningWithLocationDetails (
+        gServiceRunData->getInputSourceName (),
+        fCurrentNote->getInputLineNumber (),
+        ss.str ());
+    }
+  }
+
+  if (! delayAttachment) {
+    while (fPendingSlashesList.size ()) {
+      S_msrSlash
+        slash =
+          fPendingSlashesList.front ();
+
+      fCurrentNote->appendSlashToNote (slash);
+      fPendingSlashesList.pop_front ();
+    } // while
+  }
+}
+
+//______________________________________________________________________________
+void mxsr2msrTranslator::attachPendingWedgesToCurrentNote ()
+{
+  // attach the pending wedges to the note
+  Bool delayAttachment (false);
+
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceWedges ()) {
+    std::stringstream ss;
+
+    ss <<
+      "Attaching pending wedges to note " <<
+      fCurrentNote->asString ();
+
+    gWaeHandler->waeTraceWithLocationDetails (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  if (fCurrentNoteIsARest) {
+    if (gGlobalMxsr2msrOahGroup->getDelayRestsWedges ()) {
+      gLog <<
+        "Delaying wedge attached to a rest until next note" <<
+    std::endl;
+
+      delayAttachment = true;
+    }
+
+    else {
+#ifdef MF_TRACE_IS_ENABLED
+      if (gTraceOahGroup->getTraceWedges ()) {
         std::stringstream ss;
 
-        int numberOfSlashes = fPendingSlashesList.size ();
+        int numberOfWedges = fPendingWedgesList.size ();
 
-        if (numberOfSlashes > 1) {
+        if (numberOfWedges > 1) {
           ss <<
-            "there are " << numberOfSlashes << " slashes";
+            "there are " << numberOfWedges << " wedges";
         }
         else {
           ss <<
-            "there is 1 slash";
+            "there is 1 wedge";
         }
         ss <<
           " attached to a rest";
@@ -22884,364 +22929,299 @@ void mxsr2msrTranslator::attachPendingSlashesToCurrentNote ()
           fCurrentNote->getInputLineNumber (),
           ss.str ());
       }
-    }
-
-    if (! delayAttachment) {
-      while (fPendingSlashesList.size ()) {
-        S_msrSlash
-          slash =
-            fPendingSlashesList.front ();
-
-        fCurrentNote->appendSlashToNote (slash);
-        fPendingSlashesList.pop_front ();
-      } // while
+#endif // MF_TRACE_IS_ENABLED
     }
   }
-}
 
-//______________________________________________________________________________
-void mxsr2msrTranslator::attachPendingWedgesToCurrentNote ()
-{
-  // attach the pending wedges if any to the note
-  if (fPendingWedgesList.size ()) {
-    Bool delayAttachment (false);
+  if (! delayAttachment) {
+    while (fPendingWedgesList.size ()) {
+      S_msrWedge
+        wedge =
+          fPendingWedgesList.front ();
 
-#ifdef MF_TRACE_IS_ENABLED
-    if (gTraceOahGroup->getTraceWedges ()) {
-      std::stringstream ss;
-
-      ss <<
-        "Attaching pending wedges to note " <<
-        fCurrentNote->asString ();
-
-      gWaeHandler->waeTraceWithLocationDetails (
-        __FILE__, __LINE__,
-        ss.str ());
-    }
-#endif // MF_TRACE_IS_ENABLED
-
-    if (fCurrentNoteIsARest) {
-      if (gGlobalMxsr2msrOahGroup->getDelayRestsWedges ()) {
-        gLog <<
-          "Delaying wedge attached to a rest until next note" <<
-      std::endl;
-
-        delayAttachment = true;
-      }
-
-      else {
-#ifdef MF_TRACE_IS_ENABLED
-        if (gTraceOahGroup->getTraceWedges ()) {
-          std::stringstream ss;
-
-          int numberOfWedges = fPendingWedgesList.size ();
-
-          if (numberOfWedges > 1) {
-            ss <<
-              "there are " << numberOfWedges << " wedges";
-          }
-          else {
-            ss <<
-              "there is 1 wedge";
-          }
-          ss <<
-            " attached to a rest";
-
-          mxsr2msrWarningWithLocationDetails (
-            gServiceRunData->getInputSourceName (),
-            fCurrentNote->getInputLineNumber (),
-            ss.str ());
-        }
-#endif // MF_TRACE_IS_ENABLED
-      }
-    }
-
-    if (! delayAttachment) {
-      while (fPendingWedgesList.size ()) {
-        S_msrWedge
-          wedge =
-            fPendingWedgesList.front ();
-
-        fCurrentNote->appendWedgeToNote (wedge);
-        fPendingWedgesList.pop_front ();
-      } // while
-    }
+      fCurrentNote->appendWedgeToNote (wedge);
+      fPendingWedgesList.pop_front ();
+    } // while
   }
 }
 
 //______________________________________________________________________________
 void mxsr2msrTranslator::attachPendingGlissandosToCurrentNote ()
 {
- // attach the pending glissandos if any to the note
-  if (fPendingGlissandosList.size ()) {
+ // attach the pending glissandos to the note
 #ifdef MF_TRACE_IS_ENABLED
-    if (gTraceOahGroup->getTraceGlissandos ()) {
-      std::stringstream ss;
+  if (gTraceOahGroup->getTraceGlissandos ()) {
+    std::stringstream ss;
 
-      ss <<
-        "Attaching pending glissandos to note " <<
-        fCurrentNote->asString ();
+    ss <<
+      "Attaching pending glissandos to note " <<
+      fCurrentNote->asString ();
 
-      gWaeHandler->waeTraceWithLocationDetails (
-        __FILE__, __LINE__,
-        ss.str ());
-    }
-#endif // MF_TRACE_IS_ENABLED
-
-    while (fPendingGlissandosList.size ()) {
-      S_msrGlissando
-        glissando =
-          fPendingGlissandosList.front ();
-
-      fCurrentNote->appendGlissandoToNote (glissando);
-
-      // take care of no lyrics on kGlissandoTypeStop
-      switch (glissando->getGlissandoTypeKind ()) {
-        case msrGlissandoTypeKind::kGlissandoTypeNone:
-        case msrGlissandoTypeKind::kGlissandoTypeStart:
-          break;
-
-        case msrGlissandoTypeKind::kGlissandoTypeStop:
-          int inputLineNumber =
-            glissando->getInputLineNumber ();
-
-          // fetch the voice
-          S_msrVoice
-            voice =
-              fetchVoiceFromCurrentPart (
-                inputLineNumber,
-                fCurrentMusicXMLStaffNumber,
-                fCurrentMusicXMLVoiceNumber);
-
-          // get the voice's stanzas map
-          const std::map<std::string, S_msrStanza>&
-            voiceStanzasMap =
-              voice->
-                getVoiceStanzasMap ();
-
-#ifdef MF_TRACE_IS_ENABLED
-              if (gTraceOahGroup->getTraceGlissandos ()) {
-                gLog <<
-                  "--> attachPendingGlissandosToNote ()"
-                  ", voiceStanzasMap.size (): " <<
-                  voiceStanzasMap.size () <<
-                  ", fCurrentNoteHasLyrics: " <<
-                  fCurrentNoteHasLyrics <<
-                  ", line " << inputLineNumber <<
-                  std::endl;
-              }
-#endif // MF_TRACE_IS_ENABLED
-
-          if (voiceStanzasMap.size ()) {
-            // there are lyrics in this voice
-            /* JMI
-            if (! fCurrentNoteHasLyrics) {
-              // append a skip to lyrics the same duration as the note
-#ifdef MF_TRACE_IS_ENABLED
-              if (gTraceOahGroup->getTraceGlissandos ()) {
-                gLog <<
-                  "Attaching a skip syllable to note " <<
-                  fCurrentNote->asString () <<
-                  " that has a glissando stop and no lyrics " <<
-                  ", line " << inputLineNumber <<
-                  std::endl;
-              }
-#endif // MF_TRACE_IS_ENABLED
-
-              for (
-                std::map<std::string, S_msrStanza>::const_iterator i = voiceStanzasMap.begin ();
-                i != voiceStanzasMap.end ();
-                ++i
-              ) {
-                const S_msrStanza& stanza = (*i).second;
-                // create a skip syllable
-                S_msrSyllable
-                  syllable =
-                    msrSyllable::create (
-                      inputLineNumber,
-                      msrSyllableKind::kSyllableSkipRest,
-                      msrSyllableExtendTypeKind::kSyllableExtendType_NONE, // fCurrentSyllableExtendKind, // JMI v0.9.67
-                      fCurrentStanzaNumber,
-                      fCurrentNoteSoundingWholeNotesFromNotesDuration,
-                      stanza);
-
-                // append syllable to current note's syllables list
-                fCurrentNoteSyllables.push_back (
-                  syllable);
-
-                // append syllable to stanza
-                stanza->
-                  appendSyllableToStanza (syllable);
-              } // for
-
-              fASkipSyllableHasBeenGeneratedForcurrentNote = true;
-            }
-            */
-          }
-          break;
-      } // switch
-
-      fPendingGlissandosList.pop_front ();
-    } // while
+    gWaeHandler->waeTraceWithLocationDetails (
+      __FILE__, __LINE__,
+      ss.str ());
   }
+#endif // MF_TRACE_IS_ENABLED
+
+  while (fPendingGlissandosList.size ()) {
+    S_msrGlissando
+      glissando =
+        fPendingGlissandosList.front ();
+
+    fCurrentNote->appendGlissandoToNote (glissando);
+
+    // take care of no lyrics on kGlissandoTypeStop
+    switch (glissando->getGlissandoTypeKind ()) {
+      case msrGlissandoTypeKind::kGlissandoTypeNone:
+      case msrGlissandoTypeKind::kGlissandoTypeStart:
+        break;
+
+      case msrGlissandoTypeKind::kGlissandoTypeStop:
+        int inputLineNumber =
+          glissando->getInputLineNumber ();
+
+        // fetch the voice
+        S_msrVoice
+          voice =
+            fetchVoiceFromCurrentPart (
+              inputLineNumber,
+              fCurrentMusicXMLStaffNumber,
+              fCurrentMusicXMLVoiceNumber);
+
+        // get the voice's stanzas map
+        const std::map<std::string, S_msrStanza>&
+          voiceStanzasMap =
+            voice->
+              getVoiceStanzasMap ();
+
+#ifdef MF_TRACE_IS_ENABLED
+            if (gTraceOahGroup->getTraceGlissandos ()) {
+              gLog <<
+                "--> attachPendingGlissandosToNote ()"
+                ", voiceStanzasMap.size (): " <<
+                voiceStanzasMap.size () <<
+                ", fCurrentNoteHasLyrics: " <<
+                fCurrentNoteHasLyrics <<
+                ", line " << inputLineNumber <<
+                std::endl;
+            }
+#endif // MF_TRACE_IS_ENABLED
+
+        if (voiceStanzasMap.size ()) {
+          // there are lyrics in this voice
+          /* JMI
+          if (! fCurrentNoteHasLyrics) {
+            // append a skip to lyrics the same duration as the note
+#ifdef MF_TRACE_IS_ENABLED
+            if (gTraceOahGroup->getTraceGlissandos ()) {
+              gLog <<
+                "Attaching a skip syllable to note " <<
+                fCurrentNote->asString () <<
+                " that has a glissando stop and no lyrics " <<
+                ", line " << inputLineNumber <<
+                std::endl;
+            }
+#endif // MF_TRACE_IS_ENABLED
+
+            for (
+              std::map<std::string, S_msrStanza>::const_iterator i = voiceStanzasMap.begin ();
+              i != voiceStanzasMap.end ();
+              ++i
+            ) {
+              const S_msrStanza& stanza = (*i).second;
+              // create a skip syllable
+              S_msrSyllable
+                syllable =
+                  msrSyllable::create (
+                    inputLineNumber,
+                    msrSyllableKind::kSyllableSkipRest,
+                    msrSyllableExtendTypeKind::kSyllableExtendType_NONE, // fCurrentSyllableExtendKind, // JMI v0.9.67
+                    fCurrentStanzaNumber,
+                    fCurrentNoteSoundingWholeNotesFromNotesDuration,
+                    stanza);
+
+              // append syllable to current note's syllables list
+              fCurrentNoteSyllables.push_back (
+                syllable);
+
+              // append syllable to stanza
+              stanza->
+                appendSyllableToStanza (syllable);
+            } // for
+
+            fASkipSyllableHasBeenGeneratedForcurrentNote = true;
+          }
+          */
+        }
+        break;
+    } // switch
+
+    fPendingGlissandosList.pop_front ();
+  } // while
 }
 
 //______________________________________________________________________________
 void mxsr2msrTranslator::attachPendingSlidesToCurrentNote ()
 {
- // attach the pending slides if any to the note
-  if (fPendingSlidesList.size ()) {
+ // attach the pending slides to the note
 #ifdef MF_TRACE_IS_ENABLED
-    if (gTraceOahGroup->getTraceSlides ()) {
-      std::stringstream ss;
+  if (gTraceOahGroup->getTraceSlides ()) {
+    std::stringstream ss;
 
-      ss <<
-        "Attaching pending slides to note " <<
-        fCurrentNote->asString ();
+    ss <<
+      "Attaching pending slides to note " <<
+      fCurrentNote->asString ();
 
-      gWaeHandler->waeTraceWithLocationDetails (
-        __FILE__, __LINE__,
-        ss.str ());
-    }
-#endif // MF_TRACE_IS_ENABLED
-
-    while (fPendingSlidesList.size ()) {
-      S_msrSlide
-        slide =
-          fPendingSlidesList.front ();
-
-      fCurrentNote->appendSlideToNote (slide);
-
-      // take care of no lyrics on kSlideTypeStop
-      switch (slide->getSlideTypeKind ()) {
-        case msrSlideTypeKind::kSlideTypeNone:
-        case msrSlideTypeKind::kSlideTypeStart:
-          break;
-
-        case msrSlideTypeKind::kSlideTypeStop:
-          int inputLineNumber =
-            slide->getInputLineNumber ();
-
-          // fetch the voice
-          S_msrVoice
-            voice =
-              fetchVoiceFromCurrentPart (
-                inputLineNumber,
-                fCurrentMusicXMLStaffNumber,
-                fCurrentMusicXMLVoiceNumber);
-
-          // get the voice's stanzas map
-          const std::map<std::string, S_msrStanza>&
-            voiceStanzasMap =
-              voice->
-                getVoiceStanzasMap ();
-
-#ifdef MF_TRACE_IS_ENABLED
-              if (gTraceOahGroup->getTraceSlides ()) {
-                gLog <<
-                  "--> attachPendingSlidesToNote ()"
-                  ", voiceStanzasMap.size (): " <<
-                  voiceStanzasMap.size () <<
-                  ", fCurrentNoteHasLyrics: " <<
-                  fCurrentNoteHasLyrics <<
-                  ", line " << inputLineNumber <<
-                  std::endl;
-              }
-#endif // MF_TRACE_IS_ENABLED
-
-          if (voiceStanzasMap.size ()) {
-            // there are lyrics in this voice
-            /* JMI
-            if (! fCurrentNoteHasLyrics) {
-              // append a skip to lyrics the same duration as the note
-#ifdef MF_TRACE_IS_ENABLED
-              if (gTraceOahGroup->getTraceSlides ()) {
-                gLog <<
-                  "Attaching a skip syllable to note " <<
-                  fCurrentNote->asString () <<
-                  " that has a slide stop and no lyrics " <<
-                  ", line " << inputLineNumber <<
-                  std::endl;
-              }
-#endif // MF_TRACE_IS_ENABLED
-
-              for (
-                std::map<std::string, S_msrStanza>::const_iterator i = voiceStanzasMap.begin ();
-                i != voiceStanzasMap.end ();
-                ++i
-              ) {
-                const S_msrStanza& stanza = (*i).second;
-                // create a skip syllable
-                S_msrSyllable
-                  syllable =
-                    msrSyllable::create (
-                      inputLineNumber,
-                      msrSyllableKind::kSyllableSkipRest,
-                      msrSyllableExtendTypeKind::kSyllableExtendType_NONE, // fCurrentSyllableExtendKind, // JMI v0.9.67
-                      fCurrentStanzaNumber,
-                      fCurrentNoteSoundingWholeNotesFromNotesDuration,
-                      stanza);
-
-                // append syllable to current note's syllables list
-                fCurrentNoteSyllables.push_back (
-                  syllable);
-
-                // append syllable to stanza
-                stanza->
-                  appendSyllableToStanza (syllable);
-              } // for
-
-              fASkipSyllableHasBeenGeneratedForcurrentNote = true;
-            }
-            */
-          }
-          break;
-      } // switch
-
-      fPendingSlidesList.pop_front ();
-    } // while
+    gWaeHandler->waeTraceWithLocationDetails (
+      __FILE__, __LINE__,
+      ss.str ());
   }
+#endif // MF_TRACE_IS_ENABLED
+
+  while (fPendingSlidesList.size ()) {
+    S_msrSlide
+      slide =
+        fPendingSlidesList.front ();
+
+    fCurrentNote->appendSlideToNote (slide);
+
+    // take care of no lyrics on kSlideTypeStop
+    switch (slide->getSlideTypeKind ()) {
+      case msrSlideTypeKind::kSlideTypeNone:
+      case msrSlideTypeKind::kSlideTypeStart:
+        break;
+
+      case msrSlideTypeKind::kSlideTypeStop:
+        int inputLineNumber =
+          slide->getInputLineNumber ();
+
+        // fetch the voice
+        S_msrVoice
+          voice =
+            fetchVoiceFromCurrentPart (
+              inputLineNumber,
+              fCurrentMusicXMLStaffNumber,
+              fCurrentMusicXMLVoiceNumber);
+
+        // get the voice's stanzas map
+        const std::map<std::string, S_msrStanza>&
+          voiceStanzasMap =
+            voice->
+              getVoiceStanzasMap ();
+
+#ifdef MF_TRACE_IS_ENABLED
+            if (gTraceOahGroup->getTraceSlides ()) {
+              gLog <<
+                "--> attachPendingSlidesToNote ()"
+                ", voiceStanzasMap.size (): " <<
+                voiceStanzasMap.size () <<
+                ", fCurrentNoteHasLyrics: " <<
+                fCurrentNoteHasLyrics <<
+                ", line " << inputLineNumber <<
+                std::endl;
+            }
+#endif // MF_TRACE_IS_ENABLED
+
+        if (voiceStanzasMap.size ()) {
+          // there are lyrics in this voice
+          /* JMI
+          if (! fCurrentNoteHasLyrics) {
+            // append a skip to lyrics the same duration as the note
+#ifdef MF_TRACE_IS_ENABLED
+            if (gTraceOahGroup->getTraceSlides ()) {
+              gLog <<
+                "Attaching a skip syllable to note " <<
+                fCurrentNote->asString () <<
+                " that has a slide stop and no lyrics " <<
+                ", line " << inputLineNumber <<
+                std::endl;
+            }
+#endif // MF_TRACE_IS_ENABLED
+
+            for (
+              std::map<std::string, S_msrStanza>::const_iterator i = voiceStanzasMap.begin ();
+              i != voiceStanzasMap.end ();
+              ++i
+            ) {
+              const S_msrStanza& stanza = (*i).second;
+              // create a skip syllable
+              S_msrSyllable
+                syllable =
+                  msrSyllable::create (
+                    inputLineNumber,
+                    msrSyllableKind::kSyllableSkipRest,
+                    msrSyllableExtendTypeKind::kSyllableExtendType_NONE, // fCurrentSyllableExtendKind, // JMI v0.9.67
+                    fCurrentStanzaNumber,
+                    fCurrentNoteSoundingWholeNotesFromNotesDuration,
+                    stanza);
+
+              // append syllable to current note's syllables list
+              fCurrentNoteSyllables.push_back (
+                syllable);
+
+              // append syllable to stanza
+              stanza->
+                appendSyllableToStanza (syllable);
+            } // for
+
+            fASkipSyllableHasBeenGeneratedForcurrentNote = true;
+          }
+          */
+        }
+        break;
+    } // switch
+
+    fPendingSlidesList.pop_front ();
+  } // while
 }
 
-void mxsr2msrTranslator::attachPendingVoiceLevelElementsToVoice (
-  const S_msrVoice& voice)
-{
-//   JMI
-//   gLog <<
-//     "attachPendingVoiceLevelElementsToVoice()" <<
-//     ", fPendingTemposList.size (): " << fPendingTemposList.size () <<
-//     ", fPendingBarLinesList.size (): " << fPendingBarLinesList.size () <<
-//     ", fPendingLineBreaksList.size (): " << fPendingLineBreaksList.size () <<
-//     ", fPendingPageBreaksList.size (): " << fPendingPageBreaksList.size () <<
-//     std::endl;
-//     */
-//
-//   // the elements pending since before the note
-//   // can now be appended to the latter's voice
-//   // prior to the note itself
-//
-//   // attach pending rehearsals if any to voice
-//   attachPendingRehearsalMarksToVoice (voice);
-//
-//   // attach pending barlines if any to voice
-//   attachPendingBarLinesToVoice (voice);
-//
-//   // attach pending tempos if any to voice
-//   attachPendingTemposToVoice (voice);
-//
-//   // attach pending line breaks if any to voice
-//   attachLineBreaksToVoice (voice);
-//
-//   // attach pending page breaks if any to voice
-//   attachPageBreaksToVoice (voice);
-}
+// void mxsr2msrTranslator::attachPendingVoiceLevelElementsToVoice (
+//   const S_msrVoice& voice)
+// {
+// //   JMI
+// //   gLog <<
+// //     "attachPendingVoiceLevelElementsToVoice()" <<
+// //     ", fPendingTemposList.size (): " << fPendingTemposList.size () <<
+// //     ", fPendingBarLinesList.size (): " << fPendingBarLinesList.size () <<
+// //     ", fPendingLineBreaksList.size (): " << fPendingLineBreaksList.size () <<
+// //     ", fPendingPageBreaksList.size (): " << fPendingPageBreaksList.size () <<
+// //     std::endl;
+// //     */
+// //
+// //   // the elements pending since before the note
+// //   // can now be appended to the latter's voice
+// //   // prior to the note itself
+// //
+// //   // attach pending rehearsals if any to voice
+// //   if (fPendingRehearsalMarksList.size ()) {
+// //     attachPendingRehearsalMarksToVoice (voice);
+// //   }
+// //
+// //   // attach pending barlines if any to voice
+// //   if (fPendingBarLinesList.size ()) {
+// //    attachPendingBarLinesToVoice (voice);
+// //   }
+// //
+// //   // attach pending tempos if any to voice
+// //   attachPendingTemposToVoice (voice);
+// //
+// //   // attach pending line breaks if any to voice
+// //   if (fPendingLineBreaksList.size ()) {
+// //     attachLineBreaksToVoice (voice);
+// //   }
+// //
+// //   // attach pending page breaks if any to voice
+// //   if (fPendingPageBreaksList.size ()) {
+// //     attachPageBreaksToVoice (voice);
+// //   }
+// }
 
-void mxsr2msrTranslator::attachPendingPartLevelElementsToPart ( // JMI v0.9.63
+void mxsr2msrTranslator::attachPendingPartLevelElementsIfAnyToPart ( // JMI v0.9.63
   const S_msrPart& part)
 {
   /* JMI
   gLog <<
-    "attachPendingPartLevelElementsToPart()" <<
+    "attachPendingPartLevelElementsIfAnyToPart()" <<
     ", fPendingTemposList.size (): " << fPendingTemposList.size () <<
     ", fPendingBarLinesList.size (): " << fPendingBarLinesList.size () <<
     ", fPendingLineBreaksList.size (): " << fPendingLineBreaksList.size () <<
@@ -23254,80 +23234,128 @@ void mxsr2msrTranslator::attachPendingPartLevelElementsToPart ( // JMI v0.9.63
   // prior to the note itself
 
   // attach pending rehearsals if any to part
-  attachPendingRehearsalMarksToPart (part);
+  if (fPendingRehearsalMarksList.size ()) {
+    attachPendingRehearsalMarksToPart (part);
+  }
 
   // attach pending barlines if any to part
-  attachPendingBarLinesToPart (part);
+  if (fPendingBarLinesList.size ()) {
+    attachPendingBarLinesToPart (part);
+  }
 
   // attach pending tempos if any to part
-  attachPendingTemposToPart (part);
+  if (fPendingTemposList.size ()) {
+    attachPendingTemposToPart (part);
+  }
 
   // attach pending line breaks if any to part
-  attachLineBreaksToPart (part);
+  if (fPendingLineBreaksList.size ()) {
+    attachLineBreaksToPart (part);
+  }
 
   // attach pending page breaks if any to part
-  attachPageBreaksToPart (part);
+  if (fPendingPageBreaksList.size ()) {
+    attachPageBreaksToPart (part);
+  }
 }
 
 
-void mxsr2msrTranslator::attachPendingNoteLevelElementsToCurrentNote ()
+void mxsr2msrTranslator::attachPendingNoteLevelElementsIfAnyToCurrentNote ()
 {
   // attach the pending segnos, if any, to the note
-  attachPendingSegnosToCurrentNote ();
+  if (fPendingSegnosList.size ()) {
+    attachPendingSegnosToCurrentNote ();
+  }
 
   // attach the pending codas, if any, to the note
-  attachPendingCodasToCurrentNote ();
+  if (fPendingCodasList.size ()) {
+    attachPendingCodasToCurrentNote ();
+  }
 
   // attach the pending crescDecresc, if any, to the note
-  attachPendingCrescDecrescsToCurrentNote ();
+  if (fPendinCrescDecrescsList.size ()) {
+    attachPendingCrescDecrescsToCurrentNote ();
+  }
 
   // attach the pending eyeglasses, if any, to the note
-  attachPendingEyeGlassesToCurrentNote ();
+  if (fPendingEyeGlassesList.size ()) {
+    attachPendingEyeGlassesToCurrentNote ();
+  }
 
   // attach the pending damps, if any, to the note
-  attachPendingDampsToCurrentNote ();
+  if (fPendingDampsList.size ()) {
+    attachPendingDampsToCurrentNote ();
+  }
 
   // attach the pending damp alls, if any, to the note
-  attachPendingDampAllsToCurrentNote ();
+  if (fPendingDampAllsList.size ()) {
+    attachPendingDampAllsToCurrentNote ();
+  }
 
   // attach the pending scordaturas, if any, to the note
-  attachPendingScordaturasToCurrentNote ();
+  if (fPendingScordaturasList.size ()) {
+    attachPendingScordaturasToCurrentNote ();
+  }
 
   // attach the pending octave shifts, if any, to the note
-  attachPendingOctaveShiftsToCurrentNote ();
+  if (fPendingOctaveShiftsList.size ()) {
+    attachPendingOctaveShiftsToCurrentNote ();
+  }
 
   // attach the pending dynamics, if any, to the note
-  attachPendingDynamicsToCurrentNote ();
+  if (fPendingDynamicxList.size ()) {
+    attachPendingDynamicsToCurrentNote ();
+  }
 
   // attach the pending other dynamics, if any, to the note
-  attachPendingOtherDynamicsToCurrentNote ();
+  if (fPendingOtherDynamicxList.size ()) {
+    attachPendingOtherDynamicsToCurrentNote ();
+  }
 
   // attach the pending words, if any, to the note
-  attachPendingWordsToCurrentNote ();
+  if (fPendingWordsList.size ()) {
+    attachPendingWordsToCurrentNote ();
+  }
 
   // attach the pending beams, if any, to the note
-  attachPendingBeamsToCurrentNote ();
+  if (fPendingBeamsList.size ()) {
+    attachPendingBeamsToCurrentNote ();
+  }
 
   // attach the pending slurs, if any, to the note
-  attachPendingSlursToCurrentNote ();
+  if (fPendingSlursList.size ()) {
+    attachPendingSlursToCurrentNote ();
+  }
 
   // attach the pending ligatures, if any, to the note
-  attachPendingLigaturesToCurrentNote ();
+  if (fPendingLigaturesList.size ()) {
+    attachPendingLigaturesToCurrentNote ();
+  }
 
   // attach the pending pedals, if any, to the note
-  attachPendingPedalsToCurrentNote ();
+  if (fPendingPedalsList.size ()) {
+    attachPendingPedalsToCurrentNote ();
+  }
 
   // attach the pending slashes, if any, to the note
-  attachPendingSlashesToCurrentNote ();
+  if (fPendingSlashesList.size ()) {
+    attachPendingSlashesToCurrentNote ();
+  }
 
   // attach the pending wedges, if any, to the note
-  attachPendingWedgesToCurrentNote ();
+  if (fPendingWedgesList.size ()) {
+    attachPendingWedgesToCurrentNote ();
+  }
 
   // attach the pending glissandos, if any, to the note
-  attachPendingGlissandosToCurrentNote ();
+  if (fPendingGlissandosList.size ()) {
+    attachPendingGlissandosToCurrentNote ();
+  }
 
   // attach the pending slides, if any, to the note
-  attachPendingSlidesToCurrentNote ();
+  if (fPendingSlidesList.size ()) {
+    attachPendingSlidesToCurrentNote ();
+  }
 }
 
 //______________________________________________________________________________
@@ -23681,7 +23709,7 @@ void mxsr2msrTranslator::populateCurrentNoteBeforeItIsHandled (
   }
 
   // attach the regular pending elements (not dal segnos), if any, to fCurrentNote
-//   attachPendingNoteLevelElementsToCurrentNote (); would be too early ??? JMI
+//   attachPendingNoteLevelElementsIfAnyToCurrentNote (); would be too early ??? JMI
 
   fCurrentNote->
     setNoteAccidentalKind (
@@ -23777,24 +23805,40 @@ void mxsr2msrTranslator::populateCurrentNoteBeforeItIsHandled (
 */
 
   // attach the articulations if any to the note
-  attachCurrentArticulationsToCurrentNote ();
+  if (fCurrentArticulations.size ()) {
+    attachCurrentArticulationsToCurrentNote ();
+  }
 
   // attach the technicals if any to the note
-  attachCurrentTechnicalsToCurrentNote ();
-  attachCurrentTechnicalWithIntegersToCurrentNote ();
-  attachCurrentTechnicalWithFloatsToCurrentNote ();
-  attachCurrentTechnicalWithStringsToCurrentNote ();
+  if (fCurrentTechnicalsList.size ()) {
+    attachCurrentTechnicalsToCurrentNote ();
+  }
+  if (fCurrentTechnicalWithIntegersList.size ()) {
+    attachCurrentTechnicalWithIntegersToCurrentNote ();
+  }
+  if (fCurrentTechnicalWithFloatsList.size ()) {
+    attachCurrentTechnicalWithFloatsToCurrentNote ();
+  }
+  if (fCurrentTechnicalWithStringsList.size ()) {
+    attachCurrentTechnicalWithStringsToCurrentNote ();
+  }
 
   // attach the ornaments if any to the note
-  attachCurrentOrnamentsToCurrentNote ();
+  if (fCurrentOrnamentsList.size ()) {
+    attachCurrentOrnamentsToCurrentNote ();
+  }
 
-  // attach the spanners if any to the current note
-  attachCurrentSpannersToNote (
-  	fCurrentNote,
-    "populateCurrentNoteBeforeItIsHandled()");
+  // attach the spanners if any to the note
+  if (fCurrentSpannersList.size ()) {
+    attachCurrentSpannersToNote (
+      fCurrentNote,
+      "populateCurrentNoteBeforeItIsHandled()");
+  }
 
-  // attach the singleTremolo if any to the note
-  attachCurrentSingleTremoloToCurrentNote ();
+  // attach the singleTremolo to the note
+  if (fCurrentSingleTremolo) {
+    attachCurrentSingleTremoloToCurrentNote ();
+  }
 
   // handling the pending grace notes group if any
   if (fPendingGraceNotesGroup && ! fCurrentNoteIsAGraceNote) {
@@ -23824,7 +23868,7 @@ void mxsr2msrTranslator::populateCurrentNoteAfterItIsHandled (
 {
   // attach the regular pending elements (not dal segnos), if any, to fCurrentNote
   // only now because <lyric> follows <glissando> and <slide> in MusicXML JMI ???
-  attachPendingNoteLevelElementsToCurrentNote ();
+  attachPendingNoteLevelElementsIfAnyToCurrentNote ();
 }
 
 //______________________________________________________________________________
@@ -23968,9 +24012,11 @@ void mxsr2msrTranslator::populateCurrentNoteAndAppendItToCurrentRecipientVoice (
     // note/rest is a regular note or a member of grace notes
 
     // this terminates a tuplet if any
-    handlePendingTupletStopIfAny (
-    	inputLineNumber,
-    	fCurrentNote);
+    if (fPendingTupletsStopNumbersSet.size ()) {
+      handlePendingTupletStops (
+        inputLineNumber,
+        fCurrentNote);
+    }
 
     // handle it
     handleNonChordNorTupletNoteOrRest ();
@@ -24200,7 +24246,7 @@ void mxsr2msrTranslator::attachPendingGraceNotesGroupToNoteIfRelevant (
 //         fCurrentMusicXMLVoiceNumber);
 //
 //   // are there pending note level elements?
-//   attachPendingNoteLevelElementsToCurrentNote ( // JMI
+//   attachPendingNoteLevelElementsIfAnyToCurrentNote ( // JMI
 //     fCurrentNonGraceNote);
 //
 //   // is there a pending grace notes group?
@@ -24277,7 +24323,7 @@ void mxsr2msrTranslator::attachPendingGraceNotesGroupToNoteIfRelevant (
 //         fCurrentMusicXMLVoiceNumber);
 //
 //   // are there pending note level elements?
-//   attachPendingNoteLevelElementsToCurrentNote ( // JMI
+//   attachPendingNoteLevelElementsIfAnyToCurrentNote ( // JMI
 //     fCurrentNonGraceNote);
 //
 //   // is there a pending grace notes group?
@@ -24347,12 +24393,16 @@ void mxsr2msrTranslator::visitEnd (S_note& elt)
     if (
       S_msrNote note = dynamic_cast<msrNote*>(&(*fPreviousMeasureElement))
     ) {
-      attachPendingDalSegnosToCurrentNote ();
+      if (fPendingDalSegnosList.size ()) {
+        attachPendingDalSegnosToCurrentNote ();
+      }
     }
     else if (
       S_msrChord chord = dynamic_cast<msrChord*>(&(*fPreviousMeasureElement))
     ) {
-      attachPendingDalSegnosToChord (chord);
+      if (fPendingDalSegnosList.size ()) {
+        attachPendingDalSegnosToChord (chord);
+      }
     }
     else {
       // FOO JMI
@@ -24432,10 +24482,10 @@ void mxsr2msrTranslator::visitEnd (S_note& elt)
   // the elements pending since before the note if any
   // can now be appended to the latter's voice
   // prior to the note itself
-  attachPendingVoiceLevelElementsToVoice (
-    fCurrentNoteVoice);
+//   attachPendingVoiceLevelElementsToVoice (
+//     fCurrentNoteVoice);
 
-  attachPendingPartLevelElementsToPart (
+  attachPendingPartLevelElementsIfAnyToPart (
     fCurrentPart);
 
   ////////////////////////////////////////////////////////////////////
@@ -26659,8 +26709,9 @@ void mxsr2msrTranslator::handleNoteBelongingToAChord (
       fCurrentNoteVoice);
 
   // copy newChordNote's elements if any to the current chord
-  copyNoteElementsToChord (
-    newChordNote, fCurrentChord);
+  copyNoteElementsIfAnyToChord (
+    newChordNote,
+    fCurrentChord);
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceChordsDetails ()) {
@@ -26670,35 +26721,33 @@ void mxsr2msrTranslator::handleNoteBelongingToAChord (
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::handlePendingTupletStopIfAny (
+void mxsr2msrTranslator::handlePendingTupletStops (
   int              inputLineNumber,
   const S_msrNote& note)
 {
-  if (fPendingTupletsStopNumbersSet.size ()) {
-    // finalize the tuplet, only now
-    // in case the last element is a chord
+  // finalize the tuplet, only now
+  // in case the last element is a chord
 #ifdef MF_TRACE_IS_ENABLED
-    if (gTraceOahGroup->getTraceTuplets ()) {
-      std::stringstream ss;
+  if (gTraceOahGroup->getTraceTuplets ()) {
+    std::stringstream ss;
 
-      ss <<
-        "--> kTupletTypeStart: handling pending tuplet stop, note " <<
-        note->asShortString () <<
-        ", line " << inputLineNumber;
+    ss <<
+      "--> kTupletTypeStart: handling pending tuplet stop, note " <<
+      note->asShortString () <<
+      ", line " << inputLineNumber;
 
-      gWaeHandler->waeTraceWithLocationDetails (
-        __FILE__, __LINE__,
-        ss.str ());
-    }
+    gWaeHandler->waeTraceWithLocationDetails (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
 #endif // MF_TRACE_IS_ENABLED
 
-    finalizeTupletAndPopItFromTupletsStack ( // JMI v0.9.68
-      inputLineNumber,
-      "handlePendingTupletStopIfAny()");
+  finalizeTupletAndPopItFromTupletsStack ( // JMI v0.9.68
+    inputLineNumber,
+    "handlePendingTupletStops()");
 
-    // the tuplet stop is not to be handled later
-//     fCurrentATupletStopIsPending = false;
-  }
+  // the tuplet stop is not to be handled later
+  //     fCurrentATupletStopIsPending = false;
 }
 
 void mxsr2msrTranslator::handleNoteBelongingToATuplet (
@@ -26771,9 +26820,11 @@ void mxsr2msrTranslator::handleNoteBelongingToATuplet (
         }
 #endif // MF_TRACE_IS_ENABLED
 
-        handlePendingTupletStopIfAny (
-          inputLineNumber,
-          note);
+        if (fPendingTupletsStopNumbersSet.size ()) {
+          handlePendingTupletStops (
+            inputLineNumber,
+            note);
+        }
 
         /* JMI
         if (fPendingTupletsStopNumbersSet.size ()) {
@@ -26976,9 +27027,11 @@ void mxsr2msrTranslator::handleNoteBelongingToATuplet (
             {
               // nested tuplet:
               // finalize it before adding the note to the containing tuplet
-              handlePendingTupletStopIfAny (
-                inputLineNumber,
-                note);
+              if (fPendingTupletsStopNumbersSet.size ()) {
+                handlePendingTupletStops (
+                  inputLineNumber,
+                  note);
+              }
               /* JMI
               if (fPendingTupletsStopNumbersSet.size ()) {
                 // end of a tuplet forces handling of the pending one
@@ -27311,8 +27364,9 @@ void mxsr2msrTranslator::handleNoteBelongingToAChordInATuplet (
       fCurrentNoteVoice);
 
   // copy newChordNote's elements if any to the chord
-  copyNoteElementsToChord (
-    newChordNote, fCurrentChord);
+  copyNoteElementsIfAnyToChord (
+    newChordNote,
+    fCurrentChord);
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceChordsDetails ()) {
@@ -27504,8 +27558,9 @@ void mxsr2msrTranslator::handleNoteBelongingToAChordInAGraceNotesGroup (
       fCurrentNoteVoice);
 
   // copy newChordNote's elements if any to the chord
-  copyNoteElementsToChord (
-    newChordNote, fCurrentChord);
+  copyNoteElementsIfAnyToChord (
+    newChordNote,
+    fCurrentChord);
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceChordsDetails ()) {

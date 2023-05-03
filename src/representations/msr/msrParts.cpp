@@ -3288,7 +3288,7 @@ std::string msrPart::asString () const
     fPartAlphabeticName <<
     "\", fPartMsrName: " << fPartMsrName <<
     fPartName <<
-    "\", partAllStaves: " << fPartAllStavesList.size () <<
+    "\", fPartAllStavesList.size (): " << fPartAllStavesList.size () <<
     ", line " << fInputLineNumber;
 
   return ss.str ();

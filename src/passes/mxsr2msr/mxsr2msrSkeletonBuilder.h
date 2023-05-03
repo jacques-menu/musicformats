@@ -609,10 +609,13 @@ class EXP mxsr2msrSkeletonBuilder :
     // measures
     // ------------------------------------------------------
 
-    std::string               fCurrentMeasureNumber;
+    std::string           fCurrentMeasureNumber;
 
-    int                       fScoreMeasuresNumber;
-    int                       fPartNumberOfMeasures;
+    std::string           fScoreFirstMeasureNumber;
+    std::string           fScoreLastMeasureNumber;
+
+    int                   fScoreMeasuresNumber;
+    int                   fPartNumberOfMeasures;
 
 
     // print

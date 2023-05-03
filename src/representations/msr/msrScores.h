@@ -96,7 +96,7 @@ class EXP msrScore : public msrBookElement
                               { return fScoreUpLinkToBook; }
 
     // name
-    std::string           getScoreName () const
+    const std::string&    getScoreName () const
                               { return fScoreName; }
 
     // identification
@@ -176,18 +176,25 @@ class EXP msrScore : public msrBookElement
                               { return fCreditsList; }
 
     // measures
-    void                  setScoreMeasuresNumber (
-                            int scoreMeasuresNumber);
+    void                  setScoreFirstMeasureNumber (
+                            std::string measureNumber)
+                              {fScoreFirstMeasureNumber = measureNumber; }
 
-    int                   getScoreMeasuresNumber () const
-                              { return fScoreMeasuresNumber; }
+    const std::string&    getScoreFirstMeasureNumber () const
+                              { return fScoreFirstMeasureNumber; }
 
     void                  setScoreLastMeasureNumber (
                             std::string measureNumber)
                               {fScoreLastMeasureNumber = measureNumber; }
 
-    std::string           getScoreLastMeasureNumber () const
+    const std::string&   getScoreLastMeasureNumber () const
                               { return fScoreLastMeasureNumber; }
+
+    void                  setScoreMeasuresNumber (
+                            int scoreMeasuresNumber);
+
+    int                   getScoreMeasuresNumber () const
+                              { return fScoreMeasuresNumber; }
 
     void                  setStaffContainsMultipleFullBarRests (
                             Bool staffContainsMultipleFullBarRests)
@@ -391,12 +398,15 @@ class EXP msrScore : public msrBookElement
     S_msrAppearance       fAppearance;
 
     // credits
-    std::list<S_msrCredit>     fCreditsList;
+    std::list<S_msrCredit>
+                          fCreditsList;
 
     // part groups
-    std::set<S_msrPartGroup>   fScorePartGroupsSet;
+    std::set<S_msrPartGroup>
+                          fScorePartGroupsSet;
 
-    std::list<S_msrPartGroup>  fPartGroupsList;
+    std::list<S_msrPartGroup>
+                          fPartGroupsList;
 
     // master voice
 
@@ -405,8 +415,10 @@ class EXP msrScore : public msrBookElement
 
     // measures
 
-    int                   fScoreMeasuresNumber;
+    std::string           fScoreFirstMeasureNumber;
     std::string           fScoreLastMeasureNumber;
+
+    int                   fScoreMeasuresNumber;
 
     // multiple full-bar rests
 

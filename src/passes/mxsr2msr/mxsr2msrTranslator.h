@@ -1470,10 +1470,10 @@ class EXP mxsr2msrTranslator :
 
     Bool                      fOnGoingDirectionType;
 
-    void                      attachPendingVoiceLevelElementsToVoice ( // JMI v0.9.63
-                                const S_msrVoice& voice);
+//     void                      attachPendingVoiceLevelElementsToVoice ( // JMI UNUSED??? v0.9.68
+//                                 const S_msrVoice& voice);
 
-    void                      attachPendingPartLevelElementsToPart (
+    void                      attachPendingPartLevelElementsIfAnyToPart (
                                 const S_msrPart& part);
 
 
@@ -1484,17 +1484,17 @@ class EXP mxsr2msrTranslator :
     // in MusicXML, they precede the note and
     // may occur when no current voice exists
     std::list<S_msrRehearsalMark>
-                              fPendingRehearsalMarksList;
+                          fPendingRehearsalMarksList;
 
-    void                      attachPendingRehearsalMarksToVoice (
-                                const S_msrVoice& voice);
+//     void                  attachPendingRehearsalMarksToVoice ( JMI UNUSED??? v0.9.68
+//                             const S_msrVoice& voice);
 
-    void                      attachPendingRehearsalMarksToPart (
-                                const S_msrPart& part);
+    void                  attachPendingRehearsalMarksToPart (
+                            const S_msrPart& part);
 
-//     void                      convertWordsToRehearsalMark (
-//                                 int                inputLineNumber,
-//                                 const std::string& wordsValuee);
+//     void                  convertWordsToRehearsalMark (
+//                             int                inputLineNumber,
+//                             const std::string& wordsValuee);
 
 
     // segnos handling
@@ -1680,8 +1680,8 @@ class EXP mxsr2msrTranslator :
 
     std::list<S_msrLineBreak> fPendingLineBreaksList;
 
-    void                      attachLineBreaksToVoice (
-                                const S_msrVoice& voice);
+//     void                      attachLineBreaksToVoice ( //JMI UNUSED??? v0.9.68
+//                                 const S_msrVoice& voice);
 
     void                      attachLineBreaksToPart (
                                 const S_msrPart& part);
@@ -1692,8 +1692,8 @@ class EXP mxsr2msrTranslator :
 
     std::list<S_msrPageBreak> fPendingPageBreaksList;
 
-    void                      attachPageBreaksToVoice (
-                                const S_msrVoice& voice);
+//     void                      attachPageBreaksToVoice ( //JMI UNUSED??? v0.9.68
+//                                 const S_msrVoice& voice);
 
     void                      attachPageBreaksToPart (
                                 const S_msrPart& part);
@@ -1897,8 +1897,8 @@ class EXP mxsr2msrTranslator :
     // may occur when no current voice exists
     std::list<S_msrBarLine>   fPendingBarLinesList;
 
-    void                      attachPendingBarLinesToVoice (
-                                const S_msrVoice& voice);
+//     void                      attachPendingBarLinesToVoice ( // JMI UNUSED??? v0.9.68
+//                                 const S_msrVoice& voice);
 
     void                      attachPendingBarLinesToPart (
                                 const S_msrPart& part);
@@ -2075,7 +2075,7 @@ class EXP mxsr2msrTranslator :
     // attaching elements to notes
     // ------------------------------------------------------
 
-    void                      attachPendingNoteLevelElementsToCurrentNote ();
+    void                      attachPendingNoteLevelElementsIfAnyToCurrentNote ();
 
     void                      attachPendingDynamicsToCurrentNote ();
     void                      attachPendingOtherDynamicsToCurrentNote ();
@@ -2093,7 +2093,7 @@ class EXP mxsr2msrTranslator :
     // appending links to notes' elements to chords
     // ------------------------------------------------------
 
-    void                      copyNoteElementsToChord (
+    void                      copyNoteElementsIfAnyToChord (
                                 const S_msrNote&  note,
                                 const S_msrChord& chord);
 
@@ -2384,7 +2384,7 @@ class EXP mxsr2msrTranslator :
     void                      createAndPushTupletUponItsFirstNote (
 																const S_msrNote& firstNote);
 
-    void                      handlePendingTupletStopIfAny (
+    void                      handlePendingTupletStops (
                                 int              inputLineNumber,
                                 const S_msrNote& note);
 

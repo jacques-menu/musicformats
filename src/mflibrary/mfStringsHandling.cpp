@@ -287,7 +287,7 @@ char* mfCharStarCat (
 }
 
 //______________________________________________________________________________
-std::string mfInt2EnglishWord (int n)
+std::string mfIntToEnglishWord (int n)
 {
   if (n == -9) {
     assert (false); // JMI
@@ -305,9 +305,9 @@ std::string mfInt2EnglishWord (int n)
     int nModulo1000 = n % 1000;
 
     return
-      mfInt2EnglishWord (nDiv1000) +
+      mfIntToEnglishWord (nDiv1000) +
       "Thousand" +
-      mfInt2EnglishWord (nModulo1000);
+      mfIntToEnglishWord (nModulo1000);
   }
 
   else if (n >= 100) {
@@ -316,9 +316,9 @@ std::string mfInt2EnglishWord (int n)
     int nModulo100 = n % 100;
 
     return
-      mfInt2EnglishWord (nDiv100) +
+      mfIntToEnglishWord (nDiv100) +
       "HundredAnd" +
-      mfInt2EnglishWord (nModulo100);
+      mfIntToEnglishWord (nModulo100);
   }
 
   else {
@@ -415,7 +415,7 @@ std::string mfInt2EnglishWord (int n)
             ss << "Ninety";
             break;
         } // switch
-        ss << mfInt2EnglishWord (nModulo10);
+        ss << mfIntToEnglishWord (nModulo10);
       } // default
     } // switch
   }
@@ -471,7 +471,7 @@ std::string mfStringNumbersToEnglishWords (std::string theString)
 
       inputStream >> integerValue;
 
-      result += mfInt2EnglishWord (integerValue);
+      result += mfIntToEnglishWord (integerValue);
     }
     else {
       result += chunks[i];

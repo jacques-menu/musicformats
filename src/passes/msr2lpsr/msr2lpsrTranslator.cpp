@@ -2562,6 +2562,8 @@ void msr2lpsrTranslator::visitStart (S_msrVoice& elt)
           // create a FiguredBass context
           std::string voiceName =
             fCurrentVoiceOriginal->getVoiceName ();
+          std::string voiceAlphabeticName =
+            fCurrentVoiceOriginal->getVoiceAlphabeticName ();
 
           std::string partCombinedName =
             fCurrentVoiceOriginal->
@@ -2588,7 +2590,7 @@ void msr2lpsrTranslator::visitStart (S_msrVoice& elt)
               lpsrFiguredBassContext::create (
                 inputLineNumber,
                 lpsrContextUseExistingKind::kUseExistingContextNo, // default value JMI v0.9.64
-                voiceName,
+                voiceAlphabeticName,
                 fCurrentVoiceOriginal-> getVoiceUpLinkToStaff ());
 
           // append it to the current part block

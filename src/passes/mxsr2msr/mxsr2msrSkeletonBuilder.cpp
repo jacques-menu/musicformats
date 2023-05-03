@@ -25,6 +25,8 @@
 #include "mfServices.h"
 #include "mfStringsHandling.h"
 
+#include "msrMeasureConstants.h"
+
 #include "msr2summaryVisitor.h"
 
 #include "oahOah.h"
@@ -156,9 +158,6 @@ mxsr2msrSkeletonBuilder::mxsr2msrSkeletonBuilder ()
       K_MF_INPUT_LINE_UNKNOWN_,
       "msrScore::create()");
 
-  // score handling
-  fScoreMeasuresNumber = 0;
-
   // part groups handling
   fPartGroupsCounter = 0;
 //   fOnGoingPartGroupNameDisplay = false;
@@ -174,7 +173,12 @@ mxsr2msrSkeletonBuilder::mxsr2msrSkeletonBuilder ()
   // voice handling
   fCurrentVoiceMusicXMLNumber = -1;
 
-  // measures
+  // measures handling
+
+  fScoreFirstMeasureNumber = K_MEASURE_NUMBER_UNKNOWN_;
+  fScoreLastMeasureNumber = K_MEASURE_NUMBER_UNKNOWN_;
+
+  fScoreMeasuresNumber = 0;
   fPartNumberOfMeasures = 0;
 
   // lyrics handling
@@ -1877,15 +1881,33 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_score_partwise& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  // register the number of measures
+  // register the first and last measure numbers and measures number in the score JMI v0.9.68
+  fMsrScore->
+    setScoreFirstMeasureNumber (
+      fScoreFirstMeasureNumber);
+  fMsrScore->
+    setScoreLastMeasureNumber (
+      fScoreLastMeasureNumber);
+
   fMsrScore->
     setScoreMeasuresNumber (
       fScoreMeasuresNumber);
 
-  // register the last measure number
-  fMsrScore->
+  // register the first and last measure numbers and measures number in the service run data
+  S_mfServiceRunData
+    serviceRunData =
+      gServiceRunData;
+
+  serviceRunData->
+    setScoreFirstMeasureNumber (
+      fScoreFirstMeasureNumber);
+  serviceRunData->
     setScoreLastMeasureNumber (
-      fCurrentMeasureNumber);
+      fScoreLastMeasureNumber);
+
+  serviceRunData->
+    setScoreMeasuresNumber (
+      fScoreMeasuresNumber);
 
 /* JMI ??? THROW AWAY ???
   // fetch the identification from the credits if any
@@ -4305,7 +4327,12 @@ void mxsr2msrSkeletonBuilder::visitStart (S_measure& elt)
   // take this measure into account
   ++fPartNumberOfMeasures;
 
-  // register the current measure number in the service run data
+  if (fScoreFirstMeasureNumber == K_MEASURE_NUMBER_UNKNOWN_) { // JMI v0.9.68
+  	fScoreFirstMeasureNumber = fCurrentMeasureNumber;
+  }
+	fScoreLastMeasureNumber = fCurrentMeasureNumber;
+
+  // register the current measure number in the service run data for use by OAH
   S_mfServiceRunData
     serviceRunData =
       gServiceRunData;

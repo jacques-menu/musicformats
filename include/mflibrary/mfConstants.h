@@ -12,8 +12,9 @@
 #ifndef ___mfConstants___
 #define ___mfConstants___
 
-#include "exports.h"
+#include <string>
 
+#include "exports.h"
 
 
 namespace MusicFormats
@@ -25,20 +26,24 @@ namespace MusicFormats
 EXP extern const int K_MF_INPUT_LINE_UNKNOWN_;
 
 // staff numbers
-// ------------------------------------------------------
+//______________________________________________________________________________
 
 EXP extern const int K_STAFF_NUMBER_UNKNOWN_;
 
 // voice numbers
-// ------------------------------------------------------
+//______________________________________________________________________________
 
 EXP extern const int K_VOICE_NUMBER_UNKNOWN_;
 
 EXP extern const int K_VOICE_HARMONIES_VOICE_BASE_NUMBER;
 EXP extern const int K_VOICE_FIGURED_BASS_VOICE_BASE_NUMBER;
 
+// voice numbers and positions
+//______________________________________________________________________________
+extern const std::string K_MEASURE_NUMBER_UNKNOWN_;
+
 // names lists max length
-// ------------------------------------------------------
+//______________________________________________________________________________
 
 EXP extern const int K_MF_NAMES_LIST_MAX_LENGTH;
 

@@ -21,20 +21,24 @@ namespace MusicFormats
 const int K_MF_INPUT_LINE_UNKNOWN_ = 0;
 
 // staff numbers
-// ------------------------------------------------------
+//______________________________________________________________________________
 
 const int K_STAFF_NUMBER_UNKNOWN_ = -99;
 
 // voice numbers
-// ------------------------------------------------------
+//______________________________________________________________________________
 
 const int K_VOICE_NUMBER_UNKNOWN_ = -96;
 
 const int K_VOICE_HARMONIES_VOICE_BASE_NUMBER = 20;
 const int K_VOICE_FIGURED_BASS_VOICE_BASE_NUMBER = 40;
 
-// ------------------------------------------------------
+// measure numbers
+//______________________________________________________________________________
+const std::string K_MEASURE_NUMBER_UNKNOWN_ = "K_MEASURE_NUMBER_UNKNOWN_";
+
 // names lists max length
+//______________________________________________________________________________
 
 const int K_MF_NAMES_LIST_MAX_LENGTH = 50;
 
