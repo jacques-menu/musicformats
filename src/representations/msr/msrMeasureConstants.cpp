@@ -10,15 +10,13 @@
 */
 
 #include "msrMeasureConstants.h"
-#include "msrNotesDurations.h"
+// #include "msrNotesDurations.h"
 
 
 namespace MusicFormats
 {
 
 //______________________________________________________________________________
-const std::string K_MEASURE_NUMBER_UNKNOWN_ = "K_MEASURE_NUMBER_UNKNOWN_";
-
 const msrWholeNotes K_MEASURE_POSITION_UNKNOWN_ (
   msrWholeNotes::K_WHOLE_NOTES_NUMERATOR_UNKNOWN_, 1);
 

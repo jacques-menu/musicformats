@@ -121,13 +121,14 @@ void msrStaff::initializeStaff ()
       fStaffAlphabeticName =
         fStaffUpLinkToPart->getPartAlphabeticName () +
         "_Staff_" +
-        mfInt2EnglishWord (fStaffNumber);
+        mfIntToEnglishWord (fStaffNumber);
       break;
 
     case msrStaffKind::kStaffKindTablature:
       fStaffName =
         fStaffUpLinkToPart->getPartMsrName () +
         "_TABLATURE_Staff";
+
       fStaffAlphabeticName =
         fStaffUpLinkToPart->getPartAlphabeticName () +
         "_TABLATURE_Staff";
@@ -137,6 +138,7 @@ void msrStaff::initializeStaff ()
       fStaffName =
         fStaffUpLinkToPart->getPartMsrName () +
         "_HARMONIES_Staff";
+
       fStaffAlphabeticName =
         fStaffUpLinkToPart->getPartAlphabeticName () +
         "_HARMONIES_Staff";
@@ -146,6 +148,7 @@ void msrStaff::initializeStaff ()
       fStaffName =
         fStaffUpLinkToPart->getPartMsrName () +
         "_FIGURED_BASS_Staff";
+
       fStaffAlphabeticName =
         fStaffUpLinkToPart->getPartAlphabeticName () +
         "_FIGURED_BASS_Staff";
@@ -155,6 +158,7 @@ void msrStaff::initializeStaff ()
       fStaffName =
         fStaffUpLinkToPart->getPartMsrName () +
         "_DRUM_Staff";
+
       fStaffAlphabeticName =
         fStaffUpLinkToPart->getPartAlphabeticName () +
         "_DRUM_Staff";
@@ -164,6 +168,7 @@ void msrStaff::initializeStaff ()
       fStaffName =
         fStaffUpLinkToPart->getPartMsrName () +
         "_RYTHMIC_Staff";
+
       fStaffAlphabeticName =
         fStaffUpLinkToPart->getPartAlphabeticName () +
         "_RYTHMIC_Staff";

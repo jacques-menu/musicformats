@@ -920,7 +920,7 @@ void msdlParser::createPartIfNeeded (int inputLineNumber)
     ++fCurrentPartNumber;
 
     std::string partName =
-      "Part_" + mfInt2EnglishWord (fCurrentPartNumber);
+      "Part_" + mfIntToEnglishWord (fCurrentPartNumber);
 
     fCurrentPart =
       msrPart::create (

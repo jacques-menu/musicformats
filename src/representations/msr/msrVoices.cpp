@@ -479,10 +479,11 @@ void msrVoice::setVoiceNamesFromNumber (
         fVoiceUpLinkToStaff->getStaffName () +
         "_Voice_" +
         std::to_string (voiceNumber);
+
       fVoiceAlphabeticName =
         fVoiceUpLinkToStaff->getStaffAlphabeticName () +
         "_Voice_" +
-        mfInt2EnglishWord (voiceNumber);
+        mfIntToEnglishWord (voiceNumber);
       break;
 
     case msrVoiceKind::kVoiceKindDynamics:
@@ -492,20 +493,22 @@ void msrVoice::setVoiceNamesFromNumber (
       fVoiceName =
         fVoiceUpLinkToStaff->getStaffName () +
         "_HARMONIES_Voice";
+
       fVoiceAlphabeticName =
         fVoiceUpLinkToStaff->getStaffAlphabeticName () +
         "_HARMONIES_Voice" +
-        mfInt2EnglishWord (voiceNumber);
+        mfIntToEnglishWord (voiceNumber);
       break;
 
     case msrVoiceKind::kVoiceKindFiguredBass:
       fVoiceName =
         fVoiceUpLinkToStaff->getStaffName () +
         "_FIGURED_BASS_Voice";
+
       fVoiceAlphabeticName =
         fVoiceUpLinkToStaff->getStaffAlphabeticName () +
         "_FIGURED_BASS_Voice" +
-        mfInt2EnglishWord (voiceNumber);
+        mfIntToEnglishWord (voiceNumber);
       break;
   } // switch
 
