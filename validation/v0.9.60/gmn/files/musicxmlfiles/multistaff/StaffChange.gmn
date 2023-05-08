@@ -1,8 +1,0 @@
-(*
-  gmn code converted from '../files/musicxmlfiles/multistaff/StaffChange.xml'
-  using libmusicxml v.3.20
-  and the embedded xml2guido converter v.3.1
-*)
-{[ \staff<1> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"MusicXML Part"> \accol<id=0, range="1-2"> \barFormat<style= "system", range="1-2"> \bar<hidden="true"> 
-   (* meas. 1 *)  \clef<"g2"> \key<0> \meter<"C", autoBarlines="off", autoMeasuresNum="system"> \staff<2> \beamBegin:1 a0/8 \staff<1> e1/8 \staff<2> a0/8 \staff<1> e1/8 \beamEnd:1 \beamBegin:1 c2/8 e1/8 \staff<2> a0/8 b1/8 \beamEnd:1 ]
-  }

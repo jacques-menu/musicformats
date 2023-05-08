@@ -1,8 +1,0 @@
-(*
-  gmn code converted from '../files/musicxmlfiles/cubase/Extract_NR_01_XML_01.xml'
-  using libmusicxml v.3.20
-  and the embedded xml2guido converter v.3.1
-*)
-{[ \staff<1> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"Piccolo"> \accol<id=1,  range="1-2"> \barFormat<style= "system", range="1"> \bar<hidden="true"> 
-   (* meas. 1 *)  \clef<"g2"> \key<0> \meter<"4/4", autoBarlines="off", autoMeasuresNum="system"> \tempo<"Moderato   MM 1/4=90",fsize=18pt,fattrib="b", dy=3.4hs> \tempo<"Nr. I      Lasset die Bären erwachen",fsize=18pt,fattrib="b", dy=9hs> _/1 ]
-  }

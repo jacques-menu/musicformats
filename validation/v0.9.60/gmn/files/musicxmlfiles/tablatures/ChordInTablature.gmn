@@ -1,8 +1,0 @@
-(*
-  gmn code converted from '../files/musicxmlfiles/tablatures/ChordInTablature.xml'
-  using libmusicxml v.3.20
-  and the embedded xml2guido converter v.3.1
-*)
-{[ \staff<1> \set<autoHideTiedAccidentals="on"> \staffFormat<style="6-line"> \auto<autoInstrPos="on"> \instr<"Guitar 4"> \accol<id=1,  range="1-1"> \barFormat<style= "system",  range="1-1"> \bar<hidden="true"> 
-   (* meas. 1 *)  \clef<"TAB5"> \key<0> \stemsOff \beamsOff b0/8 \stemsOff \beamsOff {d/8, d-1/8  } _/4 _/2 ]
-  }

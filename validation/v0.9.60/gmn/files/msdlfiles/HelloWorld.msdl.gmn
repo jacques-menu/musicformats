@@ -1,8 +1,0 @@
-(*
-  gmn code converted from '../files/msdlfiles/HelloWorld.msdl.xml'
-  using libmusicxml v.3.20
-  and the embedded xml2guido converter v.3.1
-*)
-{[ \staff<1> \set<autoHideTiedAccidentals="on"> \title<""> \barFormat<style= "system", range="1"> \bar<hidden="true"> 
-   (* meas. 1 *)  \beamsOff c0/2.. \beamsOff d2/8 ]
-  }

@@ -1,8 +1,0 @@
-(*
-  gmn code converted from '../files/musicxmlfiles/unofficialtestsuite/13d-KeySignatures-Microtones.xml'
-  using libmusicxml v.3.20
-  and the embedded xml2guido converter v.3.1
-*)
-{[ \staff<1> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"MusicXML Part"> \barFormat<style= "system", range="1"> \bar<hidden="true"> 
-   (* meas. 1 *)  \clef<"g2"> \key<0> \meter<"2/4", autoBarlines="off", autoMeasuresNum="system"> \beamsOff c/2 ]
-  }
