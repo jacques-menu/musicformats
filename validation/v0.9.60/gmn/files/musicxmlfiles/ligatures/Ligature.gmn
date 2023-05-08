@@ -1,9 +1,0 @@
-(*
-  gmn code converted from '../files/musicxmlfiles/ligatures/Ligature.xml'
-  using libmusicxml v.3.20
-  and the embedded xml2guido converter v.3.1
-*)
-{[ \staff<1> \set<autoHideTiedAccidentals="on"> \title<"Ligature"> \composer<"Gilles Binchois", dy=4hs> \auto<autoInstrPos="on"> \instr<"Cantus"> \barFormat<style= "system", range="1"> \bar<hidden="true"> 
-   (* meas. 1 *)  \clef<"f4"> \key<-1> \meter<"3/4", autoBarlines="off", autoMeasuresNum="system"> \text<"(C.)", dx=-13hs, dy=15.8hs>( \stemsDown \beamsOff e/4)
- \stemsDown \beamsOff f/4. \stemsDown \beamsOff d/8 ]
-  }

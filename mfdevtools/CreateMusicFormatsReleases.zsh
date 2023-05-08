@@ -134,7 +134,7 @@ echo
 
 
 echo "----------------------------------------------"
-echo "==> create the realeases:"
+echo "==> create the releases:"
 echo "----------------------------------------------"
 echo
 
@@ -152,21 +152,21 @@ echo "----------------------------------------------"
 echo "==> MacOS:"
 echo "----------------------------------------------"
 echo
-ls -salht ${MF_RELEASES_DIR}/*macos*
+ls -salht ${MF_RELEASES_DIR}/musicformats-macos*
 echo
 
 echo "----------------------------------------------"
 echo "==> Ubuntu:"
 echo "----------------------------------------------"
 echo
-ls -salht ${MF_RELEASES_DIR}/*ubuntu*
+ls -salht ${MF_RELEASES_DIR}/musicformats-ubuntu*
 echo
 
 echo "----------------------------------------------"
 echo "==> Windows:"
 echo "----------------------------------------------"
 echo
-ls -salht ${MF_RELEASES_DIR}/*windows*
+ls -salht ${MF_RELEASES_DIR}/musicformats-windows*
 echo
 
 # set +x

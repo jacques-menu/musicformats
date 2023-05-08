@@ -1,9 +1,0 @@
-(*
-  gmn code converted from '../files/musicxmlfiles/2015_bana_braille/bana-1.8.1-2.xml'
-  using libmusicxml v.3.20
-  and the embedded xml2guido converter v.3.1
-*)
-{[ \staff<1> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"MusicXML Part"> \barFormat<style= "system", range="1"> \bar<hidden="true"> 
-   (* meas. 1 *)  \clef<"g2"> \key<0> \meter<"4/4", autoBarlines="off", autoMeasuresNum="system"> \beamsOff a/1 \bar 
-   (* meas. 2 *)  \meter<"3/2", autoBarlines="off", autoMeasuresNum="system"> \tempo<"", dy=4hs> \stemsUp \beamsOff g/2 \stemsUp \beamsOff f/2 \stemsUp \beamsOff e/2 ]
-  }
