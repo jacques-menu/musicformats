@@ -15,7 +15,7 @@
 
 #include "oah2manPage.h"
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 
 #include "oahOah.h"

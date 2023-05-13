@@ -12,7 +12,7 @@
 #ifndef ___musicxml2brailleManPageOah___
 #define ___musicxml2brailleManPageOah___
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "musicxml2brailleOah2manPage.h"
 

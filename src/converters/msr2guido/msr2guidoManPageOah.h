@@ -12,7 +12,7 @@
 #ifndef ___msr2guidoManPageOah___
 #define ___msr2guidoManPageOah___
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "oahVisitor.h"
 

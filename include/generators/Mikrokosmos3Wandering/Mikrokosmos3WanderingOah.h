@@ -12,7 +12,7 @@
 #ifndef ___Mikrokosmos3WanderingOah___
 #define ___Mikrokosmos3WanderingOah___
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "mfMultiGenerationOah.h"
 

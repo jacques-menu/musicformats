@@ -13,7 +13,7 @@
 
 #include "oahBasicOah2manPage.h"
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "mfServices.h"
 
@@ -49,7 +49,7 @@ void basicOah2manPage::visitStart (S_oahHandler& elt)
       ".\\\" --> Start visiting oahHandler" <<
       " \"" << elt->getHandlerHeader () << "\"";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -118,7 +118,7 @@ void basicOah2manPage::visitEnd (S_oahHandler& elt)
       ".\\\" --> End visiting oahHandler" <<
       " \"" << elt->getHandlerHeader () << "\"";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -137,7 +137,7 @@ void basicOah2manPage::visitStart (S_oahPrefix& elt)
       ".\\\" --> Start visiting oahPrefix" <<
       " \"" << elt->getPrefixName () << "\"";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -163,7 +163,7 @@ void basicOah2manPage::visitEnd (S_oahPrefix& elt)
       ".\\\" --> End visiting oahPrefix" <<
       " \"" << elt->getPrefixName () << "\"";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -182,7 +182,7 @@ void basicOah2manPage::visitStart (S_oahGroup& elt)
       ".\\\" --> Start visiting oahGroup" <<
       " \"" << elt->getGroupHeader () << "\"";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -212,7 +212,7 @@ void basicOah2manPage::visitEnd (S_oahGroup& elt)
       ".\\\" --> End visiting oahGroup" <<
       " \"" << elt->getGroupHeader () << "\"";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -231,7 +231,7 @@ void basicOah2manPage::visitStart (S_oahSubGroup& elt)
       ".\\\" --> Start visiting oahSubGroup" <<
       " \"" << elt->getSubGroupHeader () << "\"";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -265,7 +265,7 @@ void basicOah2manPage::visitEnd (S_oahSubGroup& elt)
       ".\\\" --> End visiting oahSubGroup" <<
       " \"" << elt->getSubGroupHeader () << "\"";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -284,7 +284,7 @@ void basicOah2manPage::visitStart (S_oahAtom& elt)
       ".\\\" --> Start visiting S_oahAtom" <<
       " \"" << elt->fetchNames () << "\"";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -302,7 +302,7 @@ void basicOah2manPage::visitEnd (S_oahAtom& elt)
       ".\\\" --> End visiting S_oahAtom" <<
       " \"" << elt->fetchNames () << "\"";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -323,7 +323,7 @@ void basicOah2manPage::visitStart (S_oahAtomStoringAValue& elt)
       '\'' <<
       " \"" << elt->fetchNames () << "\"";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -341,7 +341,7 @@ void basicOah2manPage::visitEnd (S_oahAtomStoringAValue& elt)
       ".\\\" --> End visiting oahAtomStoringAValue" <<
       " \"" << elt->fetchNames () << "\"";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -360,7 +360,7 @@ void basicOah2manPage::visitStart (S_oahValueLessAtomAlias& elt)
       ".\\\" --> Start visiting oahValueLessAtomAlias" <<
       " \"" << elt->fetchNames () << "\"";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -379,7 +379,7 @@ void basicOah2manPage::visitEnd (S_oahValueLessAtomAlias& elt)
       ".\\\" --> End visiting oahValueLessAtomAlias" <<
       " \"" << elt->fetchNames () << "\"";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -398,7 +398,7 @@ void basicOah2manPage::visitStart (S_oahOptionsUsageAtom& elt)
       ".\\\" --> Start visiting oahOptionsUsageAtom" <<
       " \"" << elt->fetchNames () << "\"";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -417,7 +417,7 @@ void basicOah2manPage::visitEnd (S_oahOptionsUsageAtom& elt)
       ".\\\" --> End visiting oahOptionsUsageAtom" <<
       " \"" << elt->fetchNames () << "\"";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -436,7 +436,7 @@ void basicOah2manPage::visitStart (S_oahHelpSummaryAtom& elt)
       ".\\\" --> Start visiting oahHelpSummaryAtom" <<
       " \"" << elt->fetchNames () << "\"";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -454,7 +454,7 @@ void basicOah2manPage::visitEnd (S_oahHelpSummaryAtom& elt)
       ".\\\" --> End visiting oahHelpSummaryAtom" <<
       " \"" << elt->fetchNames () << "\"";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -475,7 +475,7 @@ void basicOah2manPage::visitStart (S_oahOptionNameHelpAtom& elt)
       '\'' <<
       " \"" << elt->fetchNames () << "\"";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -493,7 +493,7 @@ void basicOah2manPage::visitEnd (S_oahOptionNameHelpAtom& elt)
       ".\\\" --> End visiting oahOptionNameHelpAtom" <<
       " \"" << elt->fetchNames () << "\"";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -514,7 +514,7 @@ void basicOah2manPage::visitStart (S_oahBooleanAtom& elt)
       '\'' <<
       " \"" << elt->fetchNames () << "\"";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -549,7 +549,7 @@ void basicOah2manPage::visitEnd (S_oahBooleanAtom& elt)
       ".\\\" --> End visiting oahBooleanAtom" <<
       " \"" << elt->fetchNames () << "\"";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -570,7 +570,7 @@ void basicOah2manPage::visitStart (S_oahTwoBooleansAtom& elt)
       '\'' <<
       " \"" << elt->fetchNames () << "\"";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -606,7 +606,7 @@ void basicOah2manPage::visitEnd (S_oahTwoBooleansAtom& elt)
       ".\\\" --> End visiting oahTwoBooleansAtom" <<
       " \"" << elt->fetchNames () << "\"";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -627,7 +627,7 @@ void basicOah2manPage::visitStart (S_oahThreeBooleansAtom& elt)
       '\'' <<
       " \"" << elt->fetchNames () << "\"";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -663,7 +663,7 @@ void basicOah2manPage::visitEnd (S_oahThreeBooleansAtom& elt)
       ".\\\" --> End visiting oahThreeBooleansAtom" <<
       " \"" << elt->fetchNames () << "\"";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -684,7 +684,7 @@ void basicOah2manPage::visitStart (S_oahCombinedBooleansAtom& elt)
       '\'' <<
       " \"" << elt->fetchNames () << "\"";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -702,7 +702,7 @@ void basicOah2manPage::visitEnd (S_oahCombinedBooleansAtom& elt)
       ".\\\" --> End visiting oahCombinedBooleansAtom" <<
       " \"" << elt->fetchNames () << "\"";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -723,7 +723,7 @@ void basicOah2manPage::visitStart (S_oahCommonPrefixBooleansAtom& elt)
       '\'' <<
       " \"" << elt->fetchNames () << "\"";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -741,7 +741,7 @@ void basicOah2manPage::visitEnd (S_oahCommonPrefixBooleansAtom& elt)
       ".\\\" --> End visiting oahCommonPrefixBooleansAtom" <<
       " \"" << elt->fetchNames () << "\"";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -762,7 +762,7 @@ void basicOah2manPage::visitStart (S_oahIntegerAtom& elt)
       '\'' <<
       " \"" << elt->fetchNames () << "\"";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -780,7 +780,7 @@ void basicOah2manPage::visitEnd (S_oahIntegerAtom& elt)
       ".\\\" --> End visiting oahIntegerAtom" <<
       " \"" << elt->fetchNames () << "\"";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -801,7 +801,7 @@ void basicOah2manPage::visitStart (S_oahTwoIntegersAtom& elt)
       '\'' <<
       " \"" << elt->fetchNames () << "\"";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -819,7 +819,7 @@ void basicOah2manPage::visitEnd (S_oahTwoIntegersAtom& elt)
       ".\\\" --> End visiting oahTwoIntegersAtom" <<
       " \"" << elt->fetchNames () << "\"";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -840,7 +840,7 @@ void basicOah2manPage::visitStart (S_oahFloatAtom& elt)
       '\'' <<
       " \"" << elt->fetchNames () << "\"";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -858,7 +858,7 @@ void basicOah2manPage::visitEnd (S_oahFloatAtom& elt)
       ".\\\" --> End visiting oahFloatAtom" <<
       " \"" << elt->fetchNames () << "\"";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -879,7 +879,7 @@ void basicOah2manPage::visitStart (S_oahStringAtom& elt)
       '\'' <<
       " \"" << elt->fetchNames () << "\"";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -897,7 +897,7 @@ void basicOah2manPage::visitEnd (S_oahStringAtom& elt)
       ".\\\" --> End visiting oahStringAtom" <<
       " \"" << elt->fetchNames () << "\"";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -918,7 +918,7 @@ void basicOah2manPage::visitStart (S_oahRationalAtom& elt)
       '\'' <<
       " \"" << elt->fetchNames () << "\"";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -936,7 +936,7 @@ void basicOah2manPage::visitEnd (S_oahRationalAtom& elt)
       ".\\\" --> End visiting oahRationalAtom" <<
       " \"" << elt->fetchNames () << "\"";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -957,7 +957,7 @@ void basicOah2manPage::visitStart (S_oahFactorizedStringAtom& elt)
       '\'' <<
       " \"" << elt->fetchNames () << "\"";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -975,7 +975,7 @@ void basicOah2manPage::visitEnd (S_oahFactorizedStringAtom& elt)
       ".\\\" --> End visiting oahFactorizedStringAtom" <<
       " \"" << elt->fetchNames () << "\"";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -996,7 +996,7 @@ void basicOah2manPage::visitStart (S_oahDefaultedStringAtom& elt)
       '\'' <<
       " \"" << elt->fetchNames () << "\"";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1016,7 +1016,7 @@ void basicOah2manPage::visitEnd (S_oahDefaultedStringAtom& elt)
       '\'' <<
       " \"" << elt->fetchNames () << "\"";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1038,7 +1038,7 @@ void basicOah2manPage::visitStart (S_oahNaturalNumbersSetElementAtom& elt)
       '\'' <<
       " \"" << elt->fetchNames () << "\"";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1056,7 +1056,7 @@ void basicOah2manPage::visitEnd (S_oahNaturalNumbersSetElementAtom& elt)
       ".\\\" --> End visiting oahNaturalNumbersSetElementAtom" <<
       " \"" << elt->fetchNames () << "\"";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1078,7 +1078,7 @@ void basicOah2manPage::visitStart (S_oahStringsSetElementAtom& elt)
       '\'' <<
       " \"" << elt->fetchNames () << "\"";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1096,7 +1096,7 @@ void basicOah2manPage::visitEnd (S_oahStringsSetElementAtom& elt)
       ".\\\" --> End visiting oahStringsSetElementAtom" <<
       " \"" << elt->fetchNames () << "\"";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1118,7 +1118,7 @@ void basicOah2manPage::visitStart (S_oahStringSetElementAtom& elt)
       '\'' <<
       " \"" << elt->fetchNames () << "\"";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1136,7 +1136,7 @@ void basicOah2manPage::visitEnd (S_oahStringSetElementAtom& elt)
       ".\\\" --> End visiting oahStringSetElementAtom" <<
       " \"" << elt->fetchNames () << "\"";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1157,7 +1157,7 @@ void basicOah2manPage::visitStart (S_oahColorRGBAtom& elt)
       '\'' <<
       " \"" << elt->fetchNames () << "\"";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1175,7 +1175,7 @@ void basicOah2manPage::visitEnd (S_oahColorRGBAtom& elt)
       ".\\\" --> End visiting oahColorRGBAtom" <<
       " \"" << elt->fetchNames () << "\"";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1196,7 +1196,7 @@ void basicOah2manPage::visitStart (S_oahStringAndIntegerAtom& elt)
       '\'' <<
       " \"" << elt->fetchNames () << "\"";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1214,7 +1214,7 @@ void basicOah2manPage::visitEnd (S_oahStringAndIntegerAtom& elt)
       ".\\\" --> End visiting oahStringAndIntegerAtom" <<
       " \"" << elt->fetchNames () << "\"";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1235,7 +1235,7 @@ void basicOah2manPage::visitStart (S_oahStringAndTwoIntegersAtom& elt)
       '\'' <<
       " \"" << elt->fetchNames () << "\"";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1253,7 +1253,7 @@ void basicOah2manPage::visitEnd (S_oahStringAndTwoIntegersAtom& elt)
       ".\\\" --> End visiting oahStringAndTwoIntegersAtom" <<
       " \"" << elt->fetchNames () << "\"";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }

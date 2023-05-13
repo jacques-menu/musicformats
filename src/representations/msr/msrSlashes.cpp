@@ -179,7 +179,7 @@ void msrSlash::acceptIn (basevisitor* v)
     ss <<
       "% ==> msrSlash::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -197,7 +197,7 @@ void msrSlash::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching msrSlash::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -215,7 +215,7 @@ void msrSlash::acceptOut (basevisitor* v)
     ss <<
       "% ==> msrSlash::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -233,7 +233,7 @@ void msrSlash::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching msrSlash::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }

@@ -12,7 +12,7 @@
 #ifndef ___mxsrOah___
 #define ___mxsrOah___
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "oahBasicTypes.h"
 

@@ -13,7 +13,7 @@
 
 #include "visitor.h"
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "mfAssert.h"
 #include "mfServices.h"
@@ -90,7 +90,7 @@ S_msrGraceNotesGroup msrGraceNotesGroup::createGraceNotesGroupNewbornClone ()
       "Creating a newborn clone of grace notes group " <<
       asShortString ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -171,7 +171,7 @@ S_msrGraceNotesGroup msrGraceNotesGroup::createSkipGraceNotesGroupClone ()
       "Creating a skip clone of grace notes group " <<
       asShortString ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -213,7 +213,7 @@ S_msrGraceNotesGroup msrGraceNotesGroup::createSkipGraceNotesGroupClone ()
           ", displayWholeNotes: " << note->getNoteDisplayWholeNotes () <<
           std::endl;
 
-        gWaeHandler->waeTraceWithLocationDetails (
+        gWaeHandler->waeTrace (
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -283,7 +283,7 @@ void msrGraceNotesGroup::appendNoteToGraceNotesGroup (const S_msrNote& note)
 //      fGraceNotesGroupUpLinkToVoice->getVoiceName () <<
 //      "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -316,7 +316,7 @@ void msrGraceNotesGroup::appendChordToGraceNotesGroup (const S_msrChord& chord)
 //      fGraceNotesGroupUpLinkToVoice->getVoiceName () <<
 //      "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -342,7 +342,7 @@ S_msrNote msrGraceNotesGroup::removeLastNoteFromGraceNotesGroup (
 //      fGraceNotesGroupUpLinkToVoice->getVoiceName () <<
 //      "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -365,7 +365,7 @@ S_msrNote msrGraceNotesGroup::removeLastNoteFromGraceNotesGroup (
       asString () <<
       "'";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -398,7 +398,7 @@ S_msrNote msrGraceNotesGroup::removeLastNoteFromGraceNotesGroup (
       result->asShortString () <<
       "'";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -422,7 +422,7 @@ void msrGraceNotesGroup::setGraceNotesGroupElementsMeasurePositions (
       " to " <<
       measurePosition.asString ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -509,7 +509,7 @@ void msrGraceNotesGroup::acceptIn (basevisitor* v)
     ss <<
       "% ==> msrGraceNotesGroup::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -527,7 +527,7 @@ void msrGraceNotesGroup::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching msrGraceNotesGroup::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -545,7 +545,7 @@ void msrGraceNotesGroup::acceptOut (basevisitor* v)
     ss <<
       "% ==> msrGraceNotesGroup::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -563,7 +563,7 @@ void msrGraceNotesGroup::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching msrGraceNotesGroup::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }

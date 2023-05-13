@@ -13,7 +13,7 @@
 
 #include "visitor.h"
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "mfAssert.h"
 
@@ -129,7 +129,7 @@ void lpsrPaper::acceptIn (basevisitor* v)
     ss <<
       "% ==> lpsrPaper::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -147,7 +147,7 @@ void lpsrPaper::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching lpsrPaper::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -165,7 +165,7 @@ void lpsrPaper::acceptOut (basevisitor* v)
     ss <<
       "% ==> lpsrPaper::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -183,7 +183,7 @@ void lpsrPaper::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching lpsrPaper::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -201,7 +201,7 @@ void lpsrPaper::browseData (basevisitor* v)
     ss <<
       "% ==> lpsrPaper::browseData ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -226,7 +226,7 @@ void lpsrPaper::browseData (basevisitor* v)
     ss <<
       "% <== lpsrPaper::browseData ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }

@@ -33,17 +33,15 @@ typedef SMARTP<mxsr2msrException> S_mxsr2msrException;
 //______________________________________________________________________________
 // warnings
 
-EXP void mxsr2msrWarning (
+EXP void mxsr2msrWarningWithoutInputLocation (
   const std::string& inputSourceName,
   int                inputLineNumber,
   const std::string& message);
 
-EXP void mxsr2msrWarningWithLocationDetails (
+EXP void mxsr2msrWarning (
   const std::string& inputSourceName,
   int                inputLineNumber,
   const std::string& message);
-//   const std::string  measureNumber,
-//   int                scoreMeasuresNumber);
 
 // internal warnings
 
@@ -51,13 +49,6 @@ EXP void mxsr2msrInternalWarning (
   const std::string& inputSourceName,
   int                inputLineNumber,
   const std::string& message);
-
-EXP void mxsr2msrInternalWarningWithLocationDetails (
-  const std::string& inputSourceName,
-  int                inputLineNumber,
-  const std::string& message);
-//   const std::string  measureNumber,
-//   int                scoreMeasuresNumber);
 
 // errors
 
@@ -68,15 +59,6 @@ EXP void mxsr2msrError (
   int                sourceCodeLineNumber,
   const std::string& message);
 
-EXP void mxsr2msrErrorWithLocationDetails (
-  const std::string& inputSourceName,
-  int                inputLineNumber,
-  const std::string& sourceCodeFileName,
-  int                sourceCodeLineNumber,
-  const std::string& message);
-//   const std::string  measureNumber,
-//   int                scoreMeasuresNumber);
-
 // internal errors
 
 EXP void mxsr2msrInternalError (
@@ -85,15 +67,6 @@ EXP void mxsr2msrInternalError (
   const std::string& sourceCodeFileName,
   int                sourceCodeLineNumber,
   const std::string& message);
-
-EXP void mxsr2msrInternalErrorWithLocationDetails (
-  const std::string& inputSourceName,
-  int                inputLineNumber,
-  const std::string& sourceCodeFileName,
-  int                sourceCodeLineNumber,
-  const std::string& message);
-//   const std::string  measureNumber,
-//   int                scoreMeasuresNumber);
 
 
 }

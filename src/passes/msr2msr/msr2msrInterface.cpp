@@ -11,7 +11,7 @@
 
 #include <iostream>
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "xml.h"
 #include "xmlfile.h"
@@ -88,7 +88,7 @@ S_msrScore translateMsrToMsr (
       std::endl <<
       separator;
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -224,7 +224,7 @@ S_msrScore translateMsrToMsrAlongPathToVoice (
       std::endl <<
       separator;
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }

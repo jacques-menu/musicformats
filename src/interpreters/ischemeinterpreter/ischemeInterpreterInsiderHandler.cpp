@@ -11,7 +11,7 @@
 
 #include <iomanip>      // setw, setprecision, ...
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "mfServices.h"
 #include "mfStringsHandling.h"

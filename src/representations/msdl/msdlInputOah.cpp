@@ -19,7 +19,7 @@
 
 #include "oahWae.h"
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "mfConstants.h"
 #include "mfStringsHandling.h"
@@ -95,7 +95,7 @@ void msdlKeywordsLanguageAtom::applyAtomWithValue (
     ss <<
       "==> oahAtom is of type 'msdlKeywordsLanguageAtom'";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -111,7 +111,7 @@ void msdlKeywordsLanguageAtom::applyAtomWithValue (
     ss <<
       "==> oahAtom is of type 'msdlKeywordsLanguageAtom'";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -159,7 +159,7 @@ void msdlKeywordsLanguageAtom::acceptIn (basevisitor* v)
     ss <<
       ".\\\" ==> msdlKeywordsLanguageAtom::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -177,7 +177,7 @@ void msdlKeywordsLanguageAtom::acceptIn (basevisitor* v)
           ss <<
             ".\\\" ==> Launching msdlKeywordsLanguageAtom::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -195,7 +195,7 @@ void msdlKeywordsLanguageAtom::acceptOut (basevisitor* v)
     ss <<
       ".\\\" ==> msdlKeywordsLanguageAtom::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -213,7 +213,7 @@ void msdlKeywordsLanguageAtom::acceptOut (basevisitor* v)
           ss <<
             ".\\\" ==> Launching msdlKeywordsLanguageAtom::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -231,7 +231,7 @@ void msdlKeywordsLanguageAtom::browseData (basevisitor* v)
     ss <<
       ".\\\" ==> msdlKeywordsLanguageAtom::browseData ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -430,7 +430,7 @@ void oahDisplayMsdlKeywordsInLanguageAtom::acceptIn (basevisitor* v)
     ss <<
       ".\\\" ==> oahDisplayMsdlKeywordsInLanguageAtom::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -448,7 +448,7 @@ void oahDisplayMsdlKeywordsInLanguageAtom::acceptIn (basevisitor* v)
           ss <<
             ".\\\" ==> Launching oahDisplayMsdlKeywordsInLanguageAtom::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -466,7 +466,7 @@ void oahDisplayMsdlKeywordsInLanguageAtom::acceptOut (basevisitor* v)
     ss <<
       ".\\\" ==> oahDisplayMsdlKeywordsInLanguageAtom::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -484,7 +484,7 @@ void oahDisplayMsdlKeywordsInLanguageAtom::acceptOut (basevisitor* v)
           ss <<
             ".\\\" ==> Launching oahDisplayMsdlKeywordsInLanguageAtom::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -502,7 +502,7 @@ void oahDisplayMsdlKeywordsInLanguageAtom::browseData (basevisitor* v)
     ss <<
       ".\\\" ==> oahDisplayMsdlKeywordsInLanguageAtom::browseData ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -663,7 +663,7 @@ void oahDisplayMsdlTokensInLanguageAtom::acceptIn (basevisitor* v)
     ss <<
       ".\\\" ==> oahDisplayMsdlTokensInLanguageAtom::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -681,7 +681,7 @@ void oahDisplayMsdlTokensInLanguageAtom::acceptIn (basevisitor* v)
           ss <<
             ".\\\" ==> Launching oahDisplayMsdlTokensInLanguageAtom::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -699,7 +699,7 @@ void oahDisplayMsdlTokensInLanguageAtom::acceptOut (basevisitor* v)
     ss <<
       ".\\\" ==> oahDisplayMsdlTokensInLanguageAtom::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -717,7 +717,7 @@ void oahDisplayMsdlTokensInLanguageAtom::acceptOut (basevisitor* v)
           ss <<
             ".\\\" ==> Launching oahDisplayMsdlTokensInLanguageAtom::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -735,7 +735,7 @@ void oahDisplayMsdlTokensInLanguageAtom::browseData (basevisitor* v)
     ss <<
       ".\\\" ==> oahDisplayMsdlTokensInLanguageAtom::browseData ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -844,7 +844,7 @@ void msdlCommentsTypeAtom::applyAtomWithValue (
     ss <<
       "==> oahAtom is of type 'msdlCommentsTypeAtom'";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -860,7 +860,7 @@ void msdlCommentsTypeAtom::applyAtomWithValue (
     ss <<
       "==> oahAtom is of type 'msdlCommentsTypeAtom'";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -908,7 +908,7 @@ void msdlCommentsTypeAtom::acceptIn (basevisitor* v)
     ss <<
       ".\\\" ==> msdlCommentsTypeAtom::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -926,7 +926,7 @@ void msdlCommentsTypeAtom::acceptIn (basevisitor* v)
           ss <<
             ".\\\" ==> Launching msdlCommentsTypeAtom::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -944,7 +944,7 @@ void msdlCommentsTypeAtom::acceptOut (basevisitor* v)
     ss <<
       ".\\\" ==> msdlCommentsTypeAtom::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -962,7 +962,7 @@ void msdlCommentsTypeAtom::acceptOut (basevisitor* v)
           ss <<
             ".\\\" ==> Launching msdlCommentsTypeAtom::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -980,7 +980,7 @@ void msdlCommentsTypeAtom::browseData (basevisitor* v)
     ss <<
       ".\\\" ==> msdlCommentsTypeAtom::browseData ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1128,7 +1128,7 @@ void msdlUserLanguageAtom::applyAtomWithValue (
     ss <<
       "==> oahAtom is of type 'msdlUserLanguageAtom'";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1144,7 +1144,7 @@ void msdlUserLanguageAtom::applyAtomWithValue (
     ss <<
       "==> oahAtom is of type 'msdlUserLanguageAtom'";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1194,7 +1194,7 @@ void msdlUserLanguageAtom::acceptIn (basevisitor* v)
     ss <<
       ".\\\" ==> msdlUserLanguageAtom::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1212,7 +1212,7 @@ void msdlUserLanguageAtom::acceptIn (basevisitor* v)
           ss <<
             ".\\\" ==> Launching msdlUserLanguageAtom::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -1230,7 +1230,7 @@ void msdlUserLanguageAtom::acceptOut (basevisitor* v)
     ss <<
       ".\\\" ==> msdlUserLanguageAtom::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1248,7 +1248,7 @@ void msdlUserLanguageAtom::acceptOut (basevisitor* v)
           ss <<
             ".\\\" ==> Launching msdlUserLanguageAtom::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -1266,7 +1266,7 @@ void msdlUserLanguageAtom::browseData (basevisitor* v)
     ss <<
       ".\\\" ==> msdlUserLanguageAtom::browseData ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1417,7 +1417,7 @@ void msdlPitchesLanguageAtom::applyAtomWithValue (
     ss <<
       "==> oahAtom is of type 'msdlPitchesLanguageAtom'";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1433,7 +1433,7 @@ void msdlPitchesLanguageAtom::applyAtomWithValue (
     ss <<
       "==> oahAtom is of type 'msdlPitchesLanguageAtom'";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1483,7 +1483,7 @@ void msdlPitchesLanguageAtom::acceptIn (basevisitor* v)
     ss <<
       ".\\\" ==> msdlPitchesLanguageAtom::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1501,7 +1501,7 @@ void msdlPitchesLanguageAtom::acceptIn (basevisitor* v)
           ss <<
             ".\\\" ==> Launching msdlPitchesLanguageAtom::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -1519,7 +1519,7 @@ void msdlPitchesLanguageAtom::acceptOut (basevisitor* v)
     ss <<
       ".\\\" ==> msdlPitchesLanguageAtom::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1537,7 +1537,7 @@ void msdlPitchesLanguageAtom::acceptOut (basevisitor* v)
           ss <<
             ".\\\" ==> Launching msdlPitchesLanguageAtom::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -1555,7 +1555,7 @@ void msdlPitchesLanguageAtom::browseData (basevisitor* v)
     ss <<
       ".\\\" ==> msdlPitchesLanguageAtom::browseData ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1914,7 +1914,7 @@ void msdlInputOahGroup::acceptIn (basevisitor* v)
     ss <<
       ".\\\" ==> msdlInputOahGroup::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1932,7 +1932,7 @@ void msdlInputOahGroup::acceptIn (basevisitor* v)
           ss <<
             ".\\\" ==> Launching msdlInputOahGroup::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -1950,7 +1950,7 @@ void msdlInputOahGroup::acceptOut (basevisitor* v)
     ss <<
       ".\\\" ==> msdlInputOahGroup::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1968,7 +1968,7 @@ void msdlInputOahGroup::acceptOut (basevisitor* v)
           ss <<
             ".\\\" ==> Launching msdlInputOahGroup::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -1986,7 +1986,7 @@ void msdlInputOahGroup::browseData (basevisitor* v)
     ss <<
       ".\\\" ==> msdlInputOahGroup::browseData ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2067,7 +2067,7 @@ S_msdlInputOahGroup createGlobalMsdlInputOahGroup (
     ss <<
       "Creating global MSDR OAH group";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }

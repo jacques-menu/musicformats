@@ -63,7 +63,7 @@ void msrWords::acceptIn (basevisitor* v)
     ss <<
       "% ==> msrWords::acceptIn ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -81,7 +81,7 @@ void msrWords::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching msrWords::visitStart ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -198,7 +198,7 @@ void mxsr2msrTranslator::visitStart ( S_millimeters& elt )
       "--> Start visiting S_millimeters" <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -217,7 +217,7 @@ void mxsr2msrTranslator::visitStart ( S_tenths& elt )
       "--> Start visiting S_tenths" <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -239,7 +239,7 @@ void mxsr2msrTranslator::visitEnd ( S_scaling& elt)
       "--> End visiting S_scaling" <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -259,7 +259,7 @@ void mxsr2msrTranslator::visitEnd ( S_scaling& elt)
       "There are " << fCurrentTenths <<
       " tenths for " <<  fCurrentMillimeters;
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -433,7 +433,7 @@ void msrNote::browseData (basevisitor* v)
           ss <<
             "% ==> visiting grace notes groups 'before' is inhibited";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -495,7 +495,7 @@ void msrStaff::browseData (basevisitor* v)
             voiceName <<
             "\"";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -671,7 +671,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrTuplet& elt)
 
     S_msrTuplet
       containingTuplet =
-        fOnGoingTupletsStack.top ();
+        fOnGoingTupletsStack.front ();
 
     // unapply containing tuplet factor,
     // i.e 3/2 inside 5/4 becomes 15/8 in MusicXML...

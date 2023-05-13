@@ -14,7 +14,7 @@
 #include "visitor.h"
 
 #include "mfAssert.h"
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 
 #include "msrNotesDurations.h"
@@ -69,7 +69,7 @@ msrSegmentElement::~msrSegmentElement ()
 //       "\"" <<
 //       std::endl;
 //
-//       gWaeHandler->waeTraceWithLocationDetails (
+//       gWaeHandler->waeTrace (
 //         __FILE__, __LINE__,
 //         ss.str (),
 //   }
@@ -95,7 +95,7 @@ void msrSegmentElement::acceptIn (basevisitor* v)
     ss <<
       "% ==> msrSegmentElement::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -113,7 +113,7 @@ void msrSegmentElement::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching msrSegmentElement::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -131,7 +131,7 @@ void msrSegmentElement::acceptOut (basevisitor* v)
     ss <<
       "% ==> msrSegmentElement::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -149,7 +149,7 @@ void msrSegmentElement::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching msrSegmentElement::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }

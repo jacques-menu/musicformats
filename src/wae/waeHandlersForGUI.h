@@ -68,7 +68,7 @@ class EXP waeHandlerForGUI : public waeHandler
                             int                sourceCodeLineNumber,
                             const std::string& message) override;
 
-    void                  waeErrorWithoutException (
+    void                  waeErrorWithoutExceptionWithInputLocation (
                             const std::string& context,
                             const std::string& inputSourceName,
                             int                inputLineNumber,
@@ -82,7 +82,7 @@ class EXP waeHandlerForGUI : public waeHandler
                             int                sourceCodeLineNumber,
                             const std::string& message) override;
 
-    void                  waeError (
+    void                  waeErrorWithInputLocation (
                             const std::string& context,
                             const std::string& inputSourceName,
                             int                inputLineNumber,
@@ -97,7 +97,7 @@ class EXP waeHandlerForGUI : public waeHandler
                             const std::string& message,
                             S_mfException      except) override;
 
-    void                  waeErrorWithException (
+    void                  waeErrorWithExceptionWithInputLocation (
                             const std::string& context,
                             const std::string& inputSourceName,
                             int                inputLineNumber,
@@ -107,7 +107,7 @@ class EXP waeHandlerForGUI : public waeHandler
                             S_mfException      except) override;
 
 
-    void                  waeInternalError (
+    void                  waeInternalErrorWithInputLocation (
                             const std::string& context,
                             const std::string& inputSourceName,
                             int                inputLineNumber,
@@ -115,7 +115,7 @@ class EXP waeHandlerForGUI : public waeHandler
                             int                sourceCodeLineNumber,
                             const std::string& message) override;
 
-    void                  waeInternalErrorWithException (
+    void                  waeInternalErrorWithExceptionWithInputLocation (
                             const std::string& context,
                             const std::string& inputSourceName,
                             int                inputLineNumber,

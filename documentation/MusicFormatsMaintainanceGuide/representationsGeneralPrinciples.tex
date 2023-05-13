@@ -132,7 +132,7 @@ void msr2lpsrTranslator::visitStart (S_msrBarLine& elt)
       "--> Start visiting msrBarLine" <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -160,7 +160,7 @@ S_msrTuplet msrTuplet::createTupletNewbornClone ()
       "Creating a newborn clone of tuplet " <<
       asString ();
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -196,7 +196,7 @@ void msr2lpsrTranslator::visitStart (S_msrTuplet& elt)
       "--> Start visiting msrTuplet" <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -217,13 +217,13 @@ void msr2lpsrTranslator::visitStart (S_msrTuplet& elt)
       tupletClone->asString () <<
       "' to tuplets stack";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  fTupletClonesStack.push (tupletClone);
+  fTupletClonesStack.push_front (tupletClone);
 
 	// is Scheme support needed?
   switch (elt->getTupletLineShapeKind ()) {
@@ -418,7 +418,7 @@ void msr2msrTranslator::visitStart (S_msrIdentification& elt)
       "--> Start visiting msrIdentification" <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -453,7 +453,7 @@ void msr2msrTranslator::visitEnd (S_msrIdentification& elt)
       "--> End visiting msrIdentification" <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -559,7 +559,7 @@ Usage:
     mfIndentedOStreamBuf     fIndentedStreamBuf;
 
 };
-typedef SMARTP<mfIndentedOstream> S_indentedOstream;
+typedef SMARTP<mfIndentedOstream> S_mfIndentedOstream;
 \end{lstlisting}
 
 

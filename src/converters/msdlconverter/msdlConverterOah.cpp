@@ -16,7 +16,7 @@
 // libmusicxml2
 #include "visitor.h"
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "mfMultiGenerationOah.h"
 
@@ -94,7 +94,7 @@ void msdlConverterOahGroup::acceptIn (basevisitor* v)
     ss <<
       ".\\\" ==> msdlConverterOahGroup::acceptIn ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -112,7 +112,7 @@ void msdlConverterOahGroup::acceptIn (basevisitor* v)
           ss <<
             ".\\\" ==> Launching msdlConverterOahGroup::visitStart ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -130,7 +130,7 @@ void msdlConverterOahGroup::acceptOut (basevisitor* v)
     ss <<
       ".\\\" ==> msdlConverterOahGroup::acceptOut ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -148,7 +148,7 @@ void msdlConverterOahGroup::acceptOut (basevisitor* v)
           ss <<
             ".\\\" ==> Launching msdlConverterOahGroup::visitEnd ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -166,7 +166,7 @@ void msdlConverterOahGroup::browseData (basevisitor* v)
     ss <<
       ".\\\" ==> msdlConverterOahGroup::browseData ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -207,7 +207,7 @@ S_msdlConverterOahGroup createGlobalMsdlConverterOahGroup ()
     ss <<
       "Creating global msdlConverter OAH group";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }

@@ -13,7 +13,7 @@
 
 #include "visitor.h"
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "mfAssert.h"
 #include "mfServices.h"
@@ -184,7 +184,7 @@ S_msrSyllable msrSyllable::createSyllableNewbornClone (
       asString () <<
       "'";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -242,7 +242,7 @@ S_msrSyllable msrSyllable::createSyllableDeepClone (
       asString () <<
       "'";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -329,7 +329,7 @@ void msrSyllable:: setSyllableNextMeasurePuristNumber (
       "Setting syllable next measure purist number to " <<
       fSyllableNextMeasurePuristNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -419,7 +419,7 @@ void msrSyllable::appendLyricTextToSyllable (const std::string& text)
       asString () <<
       "'";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -485,7 +485,7 @@ void msrSyllable::acceptIn (basevisitor* v)
     ss <<
       "% ==> msrSyllable::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -503,7 +503,7 @@ void msrSyllable::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching msrSyllable::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -521,7 +521,7 @@ void msrSyllable::acceptOut (basevisitor* v)
     ss <<
       "% ==> msrSyllable::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -539,7 +539,7 @@ void msrSyllable::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching msrSyllable::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -989,7 +989,7 @@ void msrStanza::initializeStanza ()
     ss <<
       "Initializing stanza " << getStanzaName ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -997,7 +997,7 @@ void msrStanza::initializeStanza ()
 
   fStanzaTextPresent = false;
 
-  fStanzaMeasureCurrentWholeNotesDuration = msrWholeNotes (0, 1);
+  fStanzaMeasureCurrentAccumulatedWholeNotesDuration = msrWholeNotes (0, 1);
 }
 
 msrStanza::~msrStanza ()
@@ -1017,7 +1017,7 @@ S_msrStanza msrStanza::createStanzaNewbornClone (
       containingVoice->getVoiceName () <<
       "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1073,7 +1073,7 @@ S_msrStanza msrStanza::createStanzaDeepClone (
       containingVoice->getVoiceName () <<
       "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1135,7 +1135,7 @@ void msrStanza::appendSyllableToStanza (
       "Appending syllable " << syllable->asString () <<
       " to stanza " << getStanzaName ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1186,7 +1186,7 @@ void msrStanza::appendSyllableToStanza (
           getSoundingWholeNotes ();
 
   // update the stanza's measure whole notes
-  fStanzaMeasureCurrentWholeNotesDuration +=syllableSoundingWholeNotes;
+  fStanzaMeasureCurrentAccumulatedWholeNotesDuration +=syllableSoundingWholeNotes;
   */
 }
 
@@ -1205,7 +1205,7 @@ void msrStanza::appendSyllableToStanza (
 //       ", line " << inputLineNumber <<
 //       std::endl;
 //
-//     gWaeHandler->waeTraceWithLocationDetails (
+//     gWaeHandler->waeTrace (
 //       __FILE__, __LINE__,
 //       ss.str ());
 //   }
@@ -1250,7 +1250,7 @@ void msrStanza::appendSyllableToStanza (
 //       ", line " << inputLineNumber <<
 //       std::endl;
 //
-//     gWaeHandler->waeTraceWithLocationDetails (
+//     gWaeHandler->waeTrace (
 //       __FILE__, __LINE__,
 //       ss.str ());
 //   }
@@ -1292,7 +1292,7 @@ S_msrSyllable msrStanza::appendMeasureEndSyllableToStanza (
       " to stanza " << getStanzaName () <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1317,7 +1317,7 @@ S_msrSyllable msrStanza::appendMeasureEndSyllableToStanza (
   appendSyllableToStanza (syllable);
 
   // reset measure whole notes
-  fStanzaMeasureCurrentWholeNotesDuration = msrWholeNotes (0, 1);
+  fStanzaMeasureCurrentAccumulatedWholeNotesDuration = msrWholeNotes (0, 1);
 
   --gIndenter;
 
@@ -1343,7 +1343,7 @@ S_msrSyllable msrStanza::appendMeasureEndSyllableToStanza (
 //       ", line " << inputLineNumber <<
 //       std::endl;
 //
-//     gWaeHandler->waeTraceWithLocationDetails (
+//     gWaeHandler->waeTrace (
 //       __FILE__, __LINE__,
 //       ss.str ());
 //   }
@@ -1387,7 +1387,7 @@ S_msrSyllable msrStanza::appendLineBreakSyllableToStanza (
       ", nextMeasurePuristNumber: " << nextMeasurePuristNumber <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1435,7 +1435,7 @@ S_msrSyllable msrStanza::appendPageBreakSyllableToStanza (
       ", nextMeasurePuristNumber: " << nextMeasurePuristNumber <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1469,7 +1469,7 @@ S_msrSyllable msrStanza::appendPageBreakSyllableToStanza (
   return syllable;
 }
 
-// void msrStanza::padUpToMeasureCurrentWholeNotesDurationInStanza (
+// void msrStanza::padUpToMeasureCurrentAccumulatedWholeNotesDurationInStanza (
 //   int                  inputLineNumber,
 //   const msrWholeNotes& wholeNotes)
 // {
@@ -1494,7 +1494,7 @@ void msrStanza::appendPaddingNoteToStanza (
       fStanzaUpLinkToVoice->getVoiceName () <<
       "\", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1516,7 +1516,7 @@ void msrStanza::acceptIn (basevisitor* v)
     ss <<
       "% ==> msrStanza::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1534,7 +1534,7 @@ void msrStanza::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching msrStanza::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -1552,7 +1552,7 @@ void msrStanza::acceptOut (basevisitor* v)
     ss <<
       "% ==> msrStanza::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1570,7 +1570,7 @@ void msrStanza::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching msrStanza::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -1588,7 +1588,7 @@ void msrStanza::browseData (basevisitor* v)
     ss <<
       "% ==> msrStanza::browseData ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1613,7 +1613,7 @@ void msrStanza::browseData (basevisitor* v)
     ss <<
       "% <== msrStanza::browseData ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }

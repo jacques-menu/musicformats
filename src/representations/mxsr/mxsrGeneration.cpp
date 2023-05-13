@@ -14,7 +14,7 @@
 #include "mxsrGeneration.h"
 #include "xmlvisitor.h"
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 
 namespace MusicFormats

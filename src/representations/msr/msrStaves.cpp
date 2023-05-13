@@ -13,7 +13,7 @@
 
 #include "visitor.h"
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "mfAssert.h"
 #include "mfConstants.h"
@@ -99,7 +99,7 @@ msrStaff::msrStaff (
       "\" in part " <<
       fStaffUpLinkToPart->getPartCombinedName ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -263,7 +263,7 @@ void msrStaff::initializeStaff ()
           fStaffUpLinkToPart->getPartCombinedName () <<
           std::endl;
 
-        gWaeHandler->waeTraceWithLocationDetails (
+        gWaeHandler->waeTrace (
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -296,7 +296,7 @@ void msrStaff::initializeStaff ()
           fStaffUpLinkToPart->getPartCombinedName () <<
           std::endl;
 
-        gWaeHandler->waeTraceWithLocationDetails (
+        gWaeHandler->waeTrace (
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -328,7 +328,7 @@ void msrStaff::initializeStaff ()
           fStaffUpLinkToPart->getPartCombinedName () <<
           std::endl;
 
-        gWaeHandler->waeTraceWithLocationDetails (
+        gWaeHandler->waeTrace (
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -369,7 +369,7 @@ S_msrStaff msrStaff::createStaffNewbornClone (
       fStaffName <<
       "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -480,7 +480,7 @@ void msrStaff::registerShortestNoteInStaffIfRelevant (const S_msrNote& note)
         "The new shortest note in staff \"" << fStaffName << "\"" <<
         " becomes " << note->asString ();
 
-      gWaeHandler->waeTraceWithLocationDetails (
+      gWaeHandler->waeTrace (
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -575,7 +575,7 @@ void msrStaff::createAMeasureAndAppendItToStaff (
       "' and appending it to staff \"" << fStaffName << "\"" <<
       "', line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -614,7 +614,7 @@ void msrStaff::setNextMeasureNumberInStaff (
       ", in staff \"" << fStaffName << "\"" <<
       "', line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -642,7 +642,7 @@ void msrStaff::setNextMeasureNumberInStaff (
         "', line " << inputLineNumber <<
         ", in voice \"" << voice->getVoiceName () << "\"";
 
-      gWaeHandler->waeTraceWithLocationDetails (
+      gWaeHandler->waeTrace (
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -679,7 +679,7 @@ S_msrVoice msrStaff::createRegularVoiceInStaffByItsNumber (
       currentMeasureNumber;
  // JMI     " in part " << fStaffUpLinkToPart->getPartCombinedName ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -781,7 +781,7 @@ S_msrVoice msrStaff::createRegularVoiceInStaffByItsNumber (
      // JMI     " in part " << fStaffUpLinkToPart->getPartCombinedName () <<
           std::endl;
 
-        gWaeHandler->waeTraceWithLocationDetails (
+        gWaeHandler->waeTrace (
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -805,7 +805,7 @@ S_msrVoice msrStaff::createRegularVoiceInStaffByItsNumber (
      // JMI     " in part " << fStaffUpLinkToPart->getPartCombinedName () <<
           std::endl;
 
-        gWaeHandler->waeTraceWithLocationDetails (
+        gWaeHandler->waeTrace (
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -859,7 +859,7 @@ void msrStaff::setStaffShortestNoteWholeNotes (
         "\" becomes " <<
         wholeNotes.asString ();
 
-      gWaeHandler->waeTraceWithLocationDetails (
+      gWaeHandler->waeTrace (
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -881,7 +881,7 @@ void msrStaff::setStaffShortestNoteTupletFactor (
         "\" becomes " <<
         noteTupletFactor;
 
-      gWaeHandler->waeTraceWithLocationDetails (
+      gWaeHandler->waeTrace (
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -901,7 +901,7 @@ void msrStaff::registerVoiceInStaffAllVoicesList (
       "Registering voice \"" << voice->getVoiceName () <<
       "\" in all voices list of staff " << fStaffName;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -995,7 +995,7 @@ void msrStaff::registerVoiceByItsNumber (
       ", by its number '" << voiceNumber <<
       "\" in staff " << fStaffName;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1038,7 +1038,7 @@ void msrStaff::registerVoiceByItsNumber (
           ", line " << inputLineNumber <<
           std::endl;
 
-        gWaeHandler->waeTraceWithLocationDetails (
+        gWaeHandler->waeTrace (
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -1063,7 +1063,7 @@ void msrStaff::registerVoiceByItsNumber (
           ", line " << inputLineNumber <<
           std::endl;
 
-        gWaeHandler->waeTraceWithLocationDetails (
+        gWaeHandler->waeTrace (
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -1099,7 +1099,7 @@ void msrStaff::registerRegularVoiceByItsNumber (
       fStaffRegularVoicesCounter <<
       "'";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1189,7 +1189,7 @@ void msrStaff::registerHarmoniesVoiceByItsNumber (
       fStaffUpLinkToPart->getPartCombinedName () <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1217,7 +1217,7 @@ void msrStaff::registerFiguredBassVoiceByItsNumber (
       fStaffUpLinkToPart->getPartCombinedName () <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1247,7 +1247,7 @@ S_msrVoice msrStaff::fetchRegularVoiceFromStaffByItsNumber (
       fStaffUpLinkToPart->getPartCombinedName () <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1276,7 +1276,7 @@ S_msrVoice msrStaff::fetchRegularVoiceFromStaffByItsNumber (
           '\'' <<
           std::endl;
 
-        gWaeHandler->waeTraceWithLocationDetails (
+        gWaeHandler->waeTrace (
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -1303,7 +1303,7 @@ void msrStaff::assignSequentialNumbersToRegularVoicesInStaff (
       "\"" <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1351,7 +1351,7 @@ void msrStaff::assignSequentialNumbersToRegularVoicesInStaff (
           "\"" <<
           std::endl;
 
-        gWaeHandler->waeTraceWithLocationDetails (
+        gWaeHandler->waeTrace (
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -1382,7 +1382,7 @@ S_msrVoice msrStaff::fetchFirstRegularVoiceFromStaff (
       fStaffUpLinkToPart->getPartCombinedName () <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1426,7 +1426,7 @@ S_msrVoice msrStaff::fetchFirstRegularVoiceFromStaff (
         "\" is " <<
         result->asShortString ();
 
-      gWaeHandler->waeTraceWithLocationDetails (
+      gWaeHandler->waeTrace (
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -1442,7 +1442,7 @@ S_msrVoice msrStaff::fetchFirstRegularVoiceFromStaff (
       result->getVoiceName () <<
       "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1475,7 +1475,7 @@ void msrStaff::registerVoiceInStaff (
       "\", line " << inputLineNumber;
 // JMI       " in part " << fStaffUpLinkToPart->getPartCombinedName ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1636,7 +1636,7 @@ void msrStaff::registerPartLevelVoiceInStaff (
       "\", line " << inputLineNumber;
 // JMI       " in part " << fStaffUpLinkToPart->getPartCombinedName ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1712,7 +1712,7 @@ void msrStaff::registerVoiceInStaffClone (
       "\", line " << inputLineNumber;
 // JMI       " in part " << fStaffUpLinkToPart->getPartCombinedName ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1795,7 +1795,7 @@ void msrStaff::registerVoiceInStaffClone (
 //       "\" in part " <<
 //       fStaffUpLinkToPart->getPartCombinedName ();
 //
-//     gWaeHandler->waeTraceWithLocationDetails (
+//     gWaeHandler->waeTrace (
 //       __FILE__, __LINE__,
 //       ss.str ());
 //   }
@@ -1842,7 +1842,7 @@ void msrStaff::registerVoiceInStaffClone (
 //         "\" in part " <<
 //         fStaffUpLinkToPart->getPartCombinedName ();
 //
-//       gWaeHandler->waeTraceWithLocationDetails (
+//       gWaeHandler->waeTrace (
 //         __FILE__, __LINE__,
 //         ss.str ());
 //     }
@@ -1868,7 +1868,7 @@ void msrStaff::appendClefToStaff  (
       "\" in part " <<
       fStaffUpLinkToPart->getPartCombinedName ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1950,7 +1950,7 @@ void msrStaff::appendKeyToStaff (
       "\" in part " <<
       fStaffUpLinkToPart->getPartCombinedName ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1984,7 +1984,7 @@ void msrStaff::appendKeyToStaff (
             "\" in part " <<
             fStaffUpLinkToPart->getPartCombinedName ();
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -2053,7 +2053,7 @@ void msrStaff::appendTimeSignatureToStaff (
       fStaffName <<
       "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2087,7 +2087,7 @@ void msrStaff::appendTimeSignatureToStaff (
             "\" in part " <<
             fStaffUpLinkToPart->getPartCombinedName ();
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -2156,7 +2156,7 @@ void msrStaff::appendClefKeyTimeSignatureGroupToStaffClone (
       "\" in part " <<
       fStaffUpLinkToPart->getPartCombinedName ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2191,7 +2191,7 @@ void msrStaff::appendClefKeyTimeSignatureGroupToStaffClone (
 //       fStaffUpLinkToPart->getPartCombinedName () <<
 //       std::endl;
 //
-//     gWaeHandler->waeTraceWithLocationDetails (
+//     gWaeHandler->waeTrace (
 //       __FILE__, __LINE__,
 //       ss.str ());
 //   }
@@ -2226,7 +2226,7 @@ void msrStaff::appendTempoToStaff (
       " to staff " <<
       fStaffName;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2251,7 +2251,7 @@ void msrStaff::appendRehearsalMarkToStaff (
       " to staff " <<
       fStaffName;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2276,7 +2276,7 @@ void msrStaff::appendLineBreakToStaff  (
       " to staff " <<
       fStaffName;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2301,7 +2301,7 @@ void msrStaff::appendPageBreakToStaff (
       " to staff " <<
       fStaffName;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2331,7 +2331,7 @@ void msrStaff::insertHiddenMeasureAndBarLineInStaffClone (
       fStaffUpLinkToPart->getPartCombinedName () <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2364,7 +2364,7 @@ void msrStaff::nestContentsIntoNewRepeatInStaff (
       "\" in part " <<
       fStaffUpLinkToPart->getPartCombinedName ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2392,7 +2392,7 @@ void msrStaff::handleRepeatStartInStaff (
       fStaffUpLinkToPart->getPartCombinedName () <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2425,7 +2425,7 @@ void msrStaff::handleRepeatEndInStaff (
       fStaffUpLinkToPart->getPartCombinedName () <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2458,7 +2458,7 @@ void msrStaff::handleRepeatEndingStartInStaff (
       fStaffUpLinkToPart->getPartCombinedName () <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2495,7 +2495,7 @@ void msrStaff::handleRepeatEndingEndInStaff (
       fStaffUpLinkToPart->getPartCombinedName () <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2531,7 +2531,7 @@ void msrStaff::finalizeRepeatEndInStaff (
       fStaffUpLinkToPart->getPartCombinedName () <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2566,7 +2566,7 @@ void msrStaff::createMeasureRepeatFromItsFirstMeasuresInStaff (
       "\" in part " <<
       fStaffUpLinkToPart->getPartCombinedName ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2594,7 +2594,7 @@ void msrStaff::appendPendingMeasureRepeatToStaff (
       "\" in part " <<
       fStaffUpLinkToPart->getPartCombinedName ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2625,7 +2625,7 @@ void msrStaff::appendMultipleFullBarRestsToStaff (
       fStaffUpLinkToPart->getPartCombinedName () <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2654,7 +2654,7 @@ void msrStaff::replicateLastAppendedMeasureInStaff (
       fStaffName <<
       "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2689,7 +2689,7 @@ void msrStaff::addEmptyMeasuresToStaff (
       fStaffUpLinkToPart->getPartCombinedName () <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2719,7 +2719,7 @@ void msrStaff::appendPendingMultipleFullBarRestsToStaff (
       "\" in part " <<
       fStaffUpLinkToPart->getPartCombinedName ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2747,7 +2747,7 @@ void msrStaff::appendMultipleFullBarRestsCloneToStaff (
       fStaffName <<
       "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2775,7 +2775,7 @@ void msrStaff::appendRepeatCloneToStaff (
       "\" in part " <<
       fStaffUpLinkToPart->getPartCombinedName ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2802,7 +2802,7 @@ void msrStaff::appendRepeatEndingCloneToStaff (
       fStaffUpLinkToPart->getPartCombinedName () <<
       ", line " << repeatEndingClone->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2833,7 +2833,7 @@ void msrStaff::appendBarLineToStaff (
       "\" in part " <<
       fStaffUpLinkToPart->getPartCombinedName ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2864,7 +2864,7 @@ void msrStaff::appendTranspositionToStaff (
       "\" in part " <<
       fStaffUpLinkToPart->getPartCombinedName ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2892,7 +2892,7 @@ void msrStaff::appendTranspositionToStaff (
           fStaffUpLinkToPart->getPartCombinedName () <<
           std::endl;
 
-        gWaeHandler->waeTraceWithLocationDetails (
+        gWaeHandler->waeTrace (
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -2926,7 +2926,7 @@ void msrStaff::appendStaffDetailsToStaff (
       "\" in part " <<
       fStaffUpLinkToPart->getPartCombinedName ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2969,7 +2969,7 @@ void msrStaff::appendStaffDetailsToStaff (
       "\" in part " <<
       fStaffUpLinkToPart->getPartCombinedName ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -3033,7 +3033,7 @@ void msrStaff::finalizeLastAppendedMeasureInStaff (
       fStaffName <<
       "\", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -3218,7 +3218,7 @@ void msrStaff::finalizeStaff (int inputLineNumber)
       fStaffName << "\"" <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -3236,7 +3236,7 @@ void msrStaff::finalizeStaff (int inputLineNumber)
       fStaffName << "\"" <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -3269,7 +3269,7 @@ void msrStaff::collectStaffMeasuresIntoFlatListsVector (
       "'s measures flat list vector" <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -3302,7 +3302,7 @@ void msrStaff::collectStaffMeasuresSlices (
         staffVoiceNumbersToAllVoicesMapSize, "voice", "voices") <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -3334,7 +3334,7 @@ void msrStaff::collectStaffMeasuresSlices (
         voice->getVoiceName () <<
         "\":";
 
-      gWaeHandler->waeTraceWithLocationDetails (
+      gWaeHandler->waeTrace (
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -3413,7 +3413,7 @@ void msrStaff::acceptIn (basevisitor* v)
     ss <<
       "% ==> msrStaff::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -3431,7 +3431,7 @@ void msrStaff::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching msrStaff::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -3449,7 +3449,7 @@ void msrStaff::acceptOut (basevisitor* v)
     ss <<
       "% ==> msrStaff::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -3467,7 +3467,7 @@ void msrStaff::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching msrStaff::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -3485,7 +3485,7 @@ void msrStaff::browseData (basevisitor* v)
     ss <<
       "% ==> msrStaff::browseData ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -3652,7 +3652,7 @@ void msrStaff::browseData (basevisitor* v)
             voiceName <<
             "\"";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -3668,7 +3668,7 @@ void msrStaff::browseData (basevisitor* v)
     ss <<
       "% <== msrStaff::browseData ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }

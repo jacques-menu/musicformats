@@ -16,7 +16,7 @@
 
 #include "mfConstants.h"
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "msdlEnumTypes.h"
 
@@ -303,7 +303,7 @@ void initializeMSDLBasicTypes ()
       ss <<
         "Initializing MSDL basic types handling";
 
-      gWaeHandler->waeTraceWithLocationDetails (
+      gWaeHandler->waeTrace (
         __FILE__, __LINE__,
         ss.str ());
     }

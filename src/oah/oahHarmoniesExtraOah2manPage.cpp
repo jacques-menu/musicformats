@@ -9,7 +9,7 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 
 #include <iomanip>      // std::setw, std::setprecision, ...
@@ -50,7 +50,7 @@ void harmoniesExtraOah2manPage::visitStart (S_extraDisplayAllHarmoniesStructures
       ".\\\" --> Start visiting extraDisplayAllHarmoniesStructuresAtom" <<
       " \"" << elt->fetchNames () << "\"";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -85,7 +85,7 @@ void harmoniesExtraOah2manPage::visitEnd (S_extraDisplayAllHarmoniesStructuresAt
       ".\\\" --> End visiting extraDisplayAllHarmoniesStructuresAtom" <<
       " \"" << elt->fetchNames () << "\"";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -104,7 +104,7 @@ void harmoniesExtraOah2manPage::visitStart (S_extraDisplayAllHarmoniesContentsAt
       ".\\\" --> Start visiting extraDisplayAllHarmoniesContentsAtom" <<
       " \"" << elt->fetchNames () << "\"";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -139,7 +139,7 @@ void harmoniesExtraOah2manPage::visitEnd (S_extraDisplayAllHarmoniesContentsAtom
       ".\\\" --> End visiting extraDisplayAllHarmoniesContentsAtom" <<
       " \"" << elt->fetchNames () << "\"";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -158,7 +158,7 @@ void harmoniesExtraOah2manPage::visitStart (S_extraDisplayHarmonyDetailsAtom& el
       ".\\\" --> Start visiting extraDisplayHarmonyDetailsAtom" <<
       " \"" << elt->fetchNames () << "\"";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -193,7 +193,7 @@ void harmoniesExtraOah2manPage::visitEnd (S_extraDisplayHarmonyDetailsAtom& elt)
       ".\\\" --> End visiting extraDisplayHarmonyDetailsAtom" <<
       " \"" << elt->fetchNames () << "\"";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -212,7 +212,7 @@ void harmoniesExtraOah2manPage::visitStart (S_extraDisplayHarmonyAnalysisAtom& e
       ".\\\" --> Start visiting extraDisplayHarmonyAnalysisAtom" <<
       " \"" << elt->fetchNames () << "\"";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -247,7 +247,7 @@ void harmoniesExtraOah2manPage::visitEnd (S_extraDisplayHarmonyAnalysisAtom& elt
       ".\\\" --> End visiting extraDisplayHarmonyAnalysisAtom" <<
       " \"" << elt->fetchNames () << "\"";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }

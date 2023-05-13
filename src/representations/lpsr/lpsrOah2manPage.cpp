@@ -13,7 +13,7 @@
 #include <cmath>
 #include <string>
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "lpsrOah2manPage.h"
 
@@ -50,7 +50,7 @@ void lpsrOah2manPage::visitStart (S_lpsrScoreOutputKindAtom& elt)
       ".\\\" --> Start visiting lpsrScoreOutputKindAtom" <<
       " \"" << elt->fetchNames () << "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -85,7 +85,7 @@ void lpsrOah2manPage::visitEnd (S_lpsrScoreOutputKindAtom& elt)
       ".\\\" --> End visiting lpsrScoreOutputKindAtom" <<
       " \"" << elt->fetchNames () << "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -105,7 +105,7 @@ void lpsrOah2manPage::visitStart (S_lpsrPitchesLanguageAtom& elt)
       ".\\\" --> Start visiting lpsrPitchesLanguageAtom" <<
       " \"" << elt->fetchNames () << "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -140,7 +140,7 @@ void lpsrOah2manPage::visitEnd (S_lpsrPitchesLanguageAtom& elt)
       ".\\\" --> End visiting lpsrPitchesLanguageAtom" <<
       " \"" << elt->fetchNames () << "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -159,7 +159,7 @@ void lpsrOah2manPage::visitStart (S_lpsrChordsLanguageAtom& elt)
       ".\\\" --> Start visiting lpsrChordsLanguageAtom" <<
       " \"" << elt->fetchNames () << "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -194,7 +194,7 @@ void lpsrOah2manPage::visitEnd (S_lpsrChordsLanguageAtom& elt)
       ".\\\" --> End visiting lpsrChordsLanguageAtom" <<
       " \"" << elt->fetchNames () << "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -213,7 +213,7 @@ void lpsrOah2manPage::visitStart (S_lpsrTransposeAtom& elt)
       ".\\\" --> Start visiting lpsrTransposeAtom" <<
       " \"" << elt->fetchNames () << "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -248,7 +248,7 @@ void lpsrOah2manPage::visitEnd (S_lpsrTransposeAtom& elt)
       ".\\\" --> End visiting lpsrTransposeAtom" <<
       " \"" << elt->fetchNames () << "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }

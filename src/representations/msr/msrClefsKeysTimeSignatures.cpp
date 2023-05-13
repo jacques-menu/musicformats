@@ -13,7 +13,7 @@
 #include <regex>
 // #include <sstream>
 //
-// #include "mfStaticSettings.h"
+// #include "mfPreprocessorSettings.h"
 //
 #include "visitor.h"
 //
@@ -251,7 +251,7 @@ msrClefKeyTimeSignatureGroup::msrClefKeyTimeSignatureGroup (
       ", groupInputLineNumber: " << groupInputLineNumber <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -271,7 +271,7 @@ S_msrClefKeyTimeSignatureGroup msrClefKeyTimeSignatureGroup::createClefKeyTimeSi
       "Creating a newborn clone of msrClefKeyTimeSignatureGroup " <<
       asString ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -347,7 +347,7 @@ void msrClefKeyTimeSignatureGroup::setClef (const S_msrClef& clef)
       "Setting the msrClefKeyTimeSignatureGroup clef to " <<
       clef->asString ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -387,7 +387,7 @@ void msrClefKeyTimeSignatureGroup::setKey (const S_msrKey& key)
       "Setting the msrClefKeyTimeSignatureGroup key to " <<
       key->asString ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -428,7 +428,7 @@ void msrClefKeyTimeSignatureGroup::setTimeSignature (
       "Setting the msrClefKeyTimeSignatureGroup time signature to " <<
       timeSignature->asString ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -459,7 +459,7 @@ void msrClefKeyTimeSignatureGroup::acceptIn (basevisitor* v)
     ss <<
       "% ==> msrClefKeyTimeSignatureGroup::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -477,7 +477,7 @@ void msrClefKeyTimeSignatureGroup::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching msrClefKeyTimeSignatureGroup::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -495,7 +495,7 @@ void msrClefKeyTimeSignatureGroup::acceptOut (basevisitor* v)
     ss <<
       "% ==> msrClefKeyTimeSignatureGroup::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -513,7 +513,7 @@ void msrClefKeyTimeSignatureGroup::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching msrClefKeyTimeSignatureGroup::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -531,7 +531,7 @@ void msrClefKeyTimeSignatureGroup::browseData (basevisitor* v)
     ss <<
       "% ==> msrClefKeyTimeSignatureGroup::browseData ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -545,7 +545,7 @@ void msrClefKeyTimeSignatureGroup::browseData (basevisitor* v)
       "--> msrClefKeyTimeSignatureGroup::browseData(),  this: " <<
       asString ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -562,7 +562,7 @@ void msrClefKeyTimeSignatureGroup::browseData (basevisitor* v)
           ", fGroupInputLineNumber: " << fGroupInputLineNumber <<
           ", line " << fInputLineNumber;
 
-        msrInternalErrorWithLocationDetails ( // JMI ???
+        msrInternalError ( // JMI ???
           gServiceRunData->getInputSourceName (),
           fInputLineNumber,
           __FILE__, __LINE__,

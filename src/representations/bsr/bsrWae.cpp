@@ -9,7 +9,7 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "mfIndentedTextOutput.h"
 
@@ -43,7 +43,7 @@ void bsrInternalError (
 {
   gIndenter.resetToZero ();
 
-  waeErrorWithoutException (
+  waeErrorWithoutExceptionWithInputLocation (
     "BSR INTERNAL",
     inputSourceName,
     inputLineNumber,

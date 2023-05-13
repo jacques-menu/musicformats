@@ -15,7 +15,7 @@
 #include "mfBool.h"
 #include "mfStringsHandling.h"
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "oahOah.h"
 

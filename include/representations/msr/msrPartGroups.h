@@ -28,7 +28,8 @@ namespace MusicFormats
 // data types
 
 enum class msrPartGroupImplicitKind { // an MSR concept, not present in MusicXML
-    kPartGroupImplicitYes, kPartGroupImplicitNo
+    kPartGroupImplicitOuterYes,
+    kPartGroupImplicitOuterNo
 };
 
 std::string msrPartGroupImplicitKindAsString (
@@ -108,15 +109,15 @@ class EXP msrPartGroup : public msrPartGroupElement
                             const S_msrPartGroup&    partGroupUpLinkToPartGroup,
                             const S_msrScore&        partGroupUpLinkToScore);
 
-    static SMARTP<msrPartGroup> createImplicitPartGroup (
-                            int                      partGroupNumber,
-                            int                      partGroupAbsoluteNumber,
-                            const std::string&       partGroupName,
-                            const std::string&       partGroupNameDisplayText,
-                            const std::string&       partGroupAccidentalText,
-                            const std::string&       partGroupAbbreviation,
-                            msrPartGroupBarLineKind  partGroupBarLineKind,
-                            const S_msrScore&        partGroupUpLinkToScore);
+    static SMARTP<msrPartGroup> createSelfContainedPartGroup (
+                            int                     partGroupNumber,
+                            int                     partGroupAbsoluteNumber,
+                            const std::string&      partGroupName,
+                            const std::string&      partGroupNameDisplayText,
+                            const std::string&      partGroupAccidentalText,
+                            const std::string&      partGroupAbbreviation,
+                            msrPartGroupBarLineKind partGroupBarLineKind,
+                            const S_msrScore&       partGroupUpLinkToScore);
 
     SMARTP<msrPartGroup> createPartGroupNewbornClone (
                             const S_msrPartGroup& partGroupClone,
@@ -127,12 +128,12 @@ class EXP msrPartGroup : public msrPartGroupElement
     // ------------------------------------------------------
 
     static SMARTP<msrPartGroup> create (
-                            int                      inputLineNumber,
-                            int                      partGroupNumber,
-                            int                      partGroupAbsoluteNumber,
-                            const std::string&       partGroupName,
-                            const S_msrPartGroup&    partGroupUpLinkToPartGroup,
-                            const S_msrScore&        partGroupUpLinkToScore);
+                            int                   inputLineNumber,
+                            int                   partGroupNumber,
+                            int                   partGroupAbsoluteNumber,
+                            const std::string&    partGroupName,
+                            const S_msrPartGroup& partGroupUpLinkToPartGroup,
+                            const S_msrScore&     partGroupUpLinkToScore);
 
   protected:
 
@@ -155,12 +156,12 @@ class EXP msrPartGroup : public msrPartGroupElement
                             const S_msrScore&        partGroupUpLinkToScore);
 
                           msrPartGroup (
-                            int                      inputLineNumber,
-                            int                      partGroupNumber,
-                            int                      partGroupAbsoluteNumber,
-                            const std::string&       partGroupName,
-                            const S_msrPartGroup&    partGroupUpLinkToPartGroup,
-                            const S_msrScore&        partGroupUpLinkToScore);
+                            int                   inputLineNumber,
+                            int                   partGroupNumber,
+                            int                   partGroupAbsoluteNumber,
+                            const std::string&    partGroupName,
+                            const S_msrPartGroup& partGroupUpLinkToPartGroup,
+                            const S_msrScore&     partGroupUpLinkToScore);
 
     virtual               ~msrPartGroup ();
 
@@ -171,11 +172,8 @@ class EXP msrPartGroup : public msrPartGroupElement
 
     // upLinks
     void                  setPartGroupUpLinkToPartGroup (
-                            const S_msrPartGroup& partGroup)
-                              {
-                                fPartGroupUpLinkToPartGroup =
-                                  partGroup;
-                              }
+                            int                   inputLineNumber,
+                            const S_msrPartGroup& containingPartGroup);
 
     S_msrPartGroup        getPartGroupUpLinkToPartGroup () const
                               { return fPartGroupUpLinkToPartGroup; }
@@ -271,10 +269,10 @@ class EXP msrPartGroup : public msrPartGroupElement
                             const S_msrPart& partToBeRemoved);
 
     void                  prependSubPartGroupToPartGroup (
-                            const S_msrPartGroup& partGroup);
+                            const S_msrPartGroup& subPartGroup);
 
     void                  appendSubPartGroupToPartGroup (
-                            const S_msrPartGroup& partGroup);
+                            const S_msrPartGroup& subPartGroup);
 
     S_msrPart             fetchPartFromPartGroupByItsPartID (
                             int                inputLineNumber,
@@ -326,8 +324,8 @@ class EXP msrPartGroup : public msrPartGroupElement
     // private services
     // ------------------------------------------------------
 
-    void                  checkPartGroupElement (
-                            const S_msrPartGroupElement& partGroupElement) const; // TEMP JMI v0.9.63
+//     void                  checkPartGroupElement (
+//                             const S_msrPartGroupElement& partGroupElement) const; // TEMP JMI v0.9.69
 
   private:
 

@@ -14,7 +14,7 @@
 
 #include <regex>
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "oahEarlyOptions.h"
 
@@ -68,7 +68,7 @@ void msr2guidoManPageGenerateAtom::applyValueLessAtom (std::ostream& os)
     ss <<
       "==> option '" << fetchNames () << "' is a msr2guidoManPageGenerateAtom";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -86,7 +86,7 @@ void msr2guidoManPageGenerateAtom::acceptIn (basevisitor* v)
     ss <<
       ".\\\" ==> msr2guidoManPageGenerateAtom::acceptIn ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -104,7 +104,7 @@ void msr2guidoManPageGenerateAtom::acceptIn (basevisitor* v)
           ss <<
             ".\\\" ==> Launching msr2guidoManPageGenerateAtom::visitStart ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -122,7 +122,7 @@ void msr2guidoManPageGenerateAtom::acceptOut (basevisitor* v)
     ss <<
       ".\\\" ==> msr2guidoManPageGenerateAtom::acceptOut ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -140,7 +140,7 @@ void msr2guidoManPageGenerateAtom::acceptOut (basevisitor* v)
           ss <<
             ".\\\" ==> Launching msr2guidoManPageGenerateAtom::visitEnd ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -158,7 +158,7 @@ void msr2guidoManPageGenerateAtom::browseData (basevisitor* v)
     ss <<
       ".\\\" ==> msr2guidoManPageGenerateAtom::browseData ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -336,7 +336,7 @@ void msr2guidoManPageOahGroup::acceptIn (basevisitor* v)
     ss <<
       ".\\\" ==> msr2guidoManPageOahGroup::acceptIn ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -354,7 +354,7 @@ void msr2guidoManPageOahGroup::acceptIn (basevisitor* v)
           ss <<
             ".\\\" ==> Launching msr2guidoManPageOahGroup::visitStart ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -372,7 +372,7 @@ void msr2guidoManPageOahGroup::acceptOut (basevisitor* v)
     ss <<
       ".\\\" ==> msr2guidoManPageOahGroup::acceptOut ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -390,7 +390,7 @@ void msr2guidoManPageOahGroup::acceptOut (basevisitor* v)
           ss <<
             ".\\\" ==> Launching msr2guidoManPageOahGroup::visitEnd ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -408,7 +408,7 @@ void msr2guidoManPageOahGroup::browseData (basevisitor* v)
     ss <<
       ".\\\" ==> msr2guidoManPageOahGroup::browseData ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -452,7 +452,7 @@ S_msr2guidoManPageOahGroup createGlobalMsr2guidoManPageOahGroupHandler (
     ss <<
       "Creating global msr2guidoManPage OAH group";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }

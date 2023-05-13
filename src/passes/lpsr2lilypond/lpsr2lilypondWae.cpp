@@ -50,7 +50,7 @@ void lpsr2lilypondError (
   int                sourceCodeLineNumber,
   const std::string& message)
 {
-  waeError (
+  waeErrorWithInputLocation (
     "lpsr2lilypond",
     inputSourceName,
     inputLineNumber,
@@ -75,7 +75,7 @@ void lpsr2lilypondInternalError (
   int                sourceCodeLineNumber,
   const std::string& message)
 {
-  waeInternalError (
+  waeInternalErrorWithInputLocation (
     "lpsr2lilypond",
     inputSourceName,
     inputLineNumber,

@@ -95,7 +95,7 @@ void lpsrParallelMusicBLock::acceptIn (basevisitor* v)
     ss <<
       "% ==> lpsrParallelMusicBLock::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -113,7 +113,7 @@ void lpsrParallelMusicBLock::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching lpsrParallelMusicBLock::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -131,7 +131,7 @@ void lpsrParallelMusicBLock::acceptOut (basevisitor* v)
     ss <<
       "% ==> lpsrParallelMusicBLock::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -149,7 +149,7 @@ void lpsrParallelMusicBLock::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching lpsrParallelMusicBLock::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -167,7 +167,7 @@ void lpsrParallelMusicBLock::browseData (basevisitor* v)
     ss <<
       "% ==> lpsrParallelMusicBLock::browseData ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -191,7 +191,7 @@ void lpsrParallelMusicBLock::browseData (basevisitor* v)
     ss <<
       "% <== lpsrParallelMusicBLock::browseData ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }

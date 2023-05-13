@@ -15,7 +15,7 @@
 
 #include "visitor.h"
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "mfAssert.h"
 
@@ -143,7 +143,7 @@ void msrCoda::acceptIn (basevisitor* v)
     ss <<
       "% ==> msrCoda::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -161,7 +161,7 @@ void msrCoda::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching msrCoda::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -179,7 +179,7 @@ void msrCoda::acceptOut (basevisitor* v)
     ss <<
       "% ==> msrCoda::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -197,7 +197,7 @@ void msrCoda::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching msrCoda::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }

@@ -9,7 +9,7 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "mfStringsHandling.h"
 #include "mfIndentedTextOutput.h"
@@ -83,7 +83,7 @@ void msr2bsrInternalError (
 {
   gIndenter.resetToZero ();
 
-  waeErrorWithoutException (
+  waeErrorWithoutExceptionWithInputLocation (
     "msr2bsr INTERNAL",
     inputSourceName,
     inputLineNumber,
@@ -118,7 +118,7 @@ void msr2bsrError (
   int                sourceCodeLineNumber,
   const std::string& message)
 {
-  waeError (
+  waeErrorWithInputLocation (
     "msr2bsr",
     inputSourceName,
     inputLineNumber,

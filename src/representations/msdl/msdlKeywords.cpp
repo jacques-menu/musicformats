@@ -14,7 +14,7 @@
 
 #include "msdlKeywords.h"
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "waeOah.h"
 
@@ -499,7 +499,7 @@ std::string msdlKeywordKindAsMsdlString (
       ", languageKind: " << msdlKeywordsLanguageKindAsString (languageKind) <<
       ", keywordKind: \"" << msdlKeywordKindAsString (keywordKind) << "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -561,7 +561,7 @@ std::string msdlKeywordKindAsMsdlString (
       "<-- msdlKeywordKindAsMsdlString()" <<
       ", result: \"" << result << "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -672,7 +672,7 @@ msdlKeywordKind msdlKeywordKindFromString (
       ", languageKind: " << msdlKeywordsLanguageKindAsString (languageKind) <<
       ", theString: \"" << theString << "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -735,7 +735,7 @@ msdlKeywordKind msdlKeywordKindFromString (
       ", languageKind: " << msdlKeywordsLanguageKindAsString (languageKind) <<
       ", result: \"" << msdlKeywordKindAsString (result) << "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -841,7 +841,7 @@ void initializeMSDLKeywords ()
       ss <<
         "Initializing MSDL keywords";
 
-      gWaeHandler->waeTraceWithLocationDetails (
+      gWaeHandler->waeTrace (
         __FILE__, __LINE__,
         ss.str ());
     }

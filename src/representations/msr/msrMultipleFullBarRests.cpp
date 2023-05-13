@@ -11,7 +11,7 @@
 
 #include "visitor.h"
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "mfAssert.h"
 #include "mfServices.h"
@@ -103,7 +103,7 @@ S_msrMultipleFullBarRests msrMultipleFullBarRests::createMultipleFullBarRestsNew
       asString () <<
       "'";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -138,7 +138,7 @@ msrWholeNotes msrMultipleFullBarRests::fetchMultipleFullBarRestsMeasureSoundingN
 
   for (S_msrMeasure measure : fFullBarRestsMeasuresList) {
     result +=
-      measure->getFullMeasureCurrentWholeNotesDuration ();
+      measure->getFullMeasureWholeNotesDuration ();
   } // for
 
   return result;
@@ -156,7 +156,7 @@ void msrMultipleFullBarRests::setMultipleFullBarRestsNextMeasureNumber (
       "' " <<
       nextMeasureNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -231,7 +231,7 @@ void msrMultipleFullBarRests::setMultipleFullBarRestsLastMeasurePuristMeasureNum
       lastMeasuresPuristNumber <<
       "', line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -277,7 +277,7 @@ void msrMultipleFullBarRests::appendMeasureToMultipleFullBarRests (
       asShortString () <<
       "', line " << fInputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -323,7 +323,7 @@ void msrMultipleFullBarRests::acceptIn (basevisitor* v)
     ss <<
       "% ==> msrMultipleFullBarRests::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -341,7 +341,7 @@ void msrMultipleFullBarRests::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching msrMultipleFullBarRests::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -359,7 +359,7 @@ void msrMultipleFullBarRests::acceptOut (basevisitor* v)
     ss <<
       "% ==> msrMultipleFullBarRests::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -377,7 +377,7 @@ void msrMultipleFullBarRests::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching msrMultipleFullBarRests::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -395,7 +395,7 @@ void msrMultipleFullBarRests::browseData (basevisitor* v)
     ss <<
       "% ==> msrMultipleFullBarRests::browseData ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -416,7 +416,7 @@ void msrMultipleFullBarRests::browseData (basevisitor* v)
     ss <<
       "% <== msrMultipleFullBarRests::browseData ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }

@@ -15,7 +15,7 @@
 
 #include "visitor.h"
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "mfAssert.h"
 #include "mfConstants.h"
@@ -80,7 +80,7 @@ void oahValueLessAtomAlias::applyValueLessAtom (std::ostream& os)
     ss <<
       "==> option '" << fetchNames () << "' is a oahValueLessAtomAlias";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -100,7 +100,7 @@ void oahValueLessAtomAlias::acceptIn (basevisitor* v)
     ss <<
       ".\\\" ==> oahValueLessAtomAlias::acceptIn ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -118,7 +118,7 @@ void oahValueLessAtomAlias::acceptIn (basevisitor* v)
           ss <<
             ".\\\" ==> Launching oahValueLessAtomAlias::visitStart ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -136,7 +136,7 @@ void oahValueLessAtomAlias::acceptOut (basevisitor* v)
     ss <<
       ".\\\" ==> oahValueLessAtomAlias::acceptOut ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -154,7 +154,7 @@ void oahValueLessAtomAlias::acceptOut (basevisitor* v)
           ss <<
             ".\\\" ==> Launching oahValueLessAtomAlias::visitEnd ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -172,7 +172,7 @@ void oahValueLessAtomAlias::browseData (basevisitor* v)
     ss <<
       ".\\\" ==> oahValueLessAtomAlias::browseData ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -269,7 +269,7 @@ void oahValueFittedAtomAlias::applyAtomWithValue (
       fetchNames () <<
       "' which is a oahOnOffAtom";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -288,7 +288,7 @@ void oahValueFittedAtomAlias::acceptIn (basevisitor* v)
     ss <<
       ".\\\" ==> oahValueFittedAtomAlias::acceptIn ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -306,7 +306,7 @@ void oahValueFittedAtomAlias::acceptIn (basevisitor* v)
           ss <<
             ".\\\" ==> Launching oahValueFittedAtomAlias::visitStart ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -324,7 +324,7 @@ void oahValueFittedAtomAlias::acceptOut (basevisitor* v)
     ss <<
       ".\\\" ==> oahValueFittedAtomAlias::acceptOut ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -342,7 +342,7 @@ void oahValueFittedAtomAlias::acceptOut (basevisitor* v)
           ss <<
             ".\\\" ==> Launching oahValueFittedAtomAlias::visitEnd ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -360,7 +360,7 @@ void oahValueFittedAtomAlias::browseData (basevisitor* v)
     ss <<
       ".\\\" ==> oahValueFittedAtomAlias::browseData ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -462,7 +462,7 @@ void oahMacroAtom::applyValueLessAtom (std::ostream& os)
     ss <<
       "==> option '" << fetchNames () << "' is a oahMacroAtom";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -487,7 +487,7 @@ void oahMacroAtom::acceptIn (basevisitor* v)
     ss <<
       ".\\\" ==> oahMacroAtom::acceptIn ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -505,7 +505,7 @@ void oahMacroAtom::acceptIn (basevisitor* v)
           ss <<
             ".\\\" ==> Launching oahMacroAtom::visitStart ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -523,7 +523,7 @@ void oahMacroAtom::acceptOut (basevisitor* v)
     ss <<
       ".\\\" ==> oahMacroAtom::acceptOut ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -541,7 +541,7 @@ void oahMacroAtom::acceptOut (basevisitor* v)
           ss <<
             ".\\\" ==> Launching oahMacroAtom::visitEnd ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -559,7 +559,7 @@ void oahMacroAtom::browseData (basevisitor* v)
     ss <<
       ".\\\" ==> oahMacroAtom::browseData ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -762,7 +762,7 @@ void oahOptionsUsageAtom::applyValueLessAtom (std::ostream& os)
       fetchNames () <<
       "' which is a oahOptionsUsageAtom";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -840,7 +840,7 @@ void oahOptionsUsageAtom::acceptIn (basevisitor* v)
     ss <<
       ".\\\" ==> oahOptionsUsageAtom::acceptIn ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -858,7 +858,7 @@ void oahOptionsUsageAtom::acceptIn (basevisitor* v)
           ss <<
             ".\\\" ==> Launching oahOptionsUsageAtom::visitStart ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -876,7 +876,7 @@ void oahOptionsUsageAtom::acceptOut (basevisitor* v)
     ss <<
       ".\\\" ==> oahOptionsUsageAtom::acceptOut ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -894,7 +894,7 @@ void oahOptionsUsageAtom::acceptOut (basevisitor* v)
           ss <<
             ".\\\" ==> Launching oahOptionsUsageAtom::visitEnd ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -912,7 +912,7 @@ void oahOptionsUsageAtom::browseData (basevisitor* v)
     ss <<
       ".\\\" ==> oahOptionsUsageAtom::browseData ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -990,7 +990,7 @@ void oahHelpAtom::applyValueLessAtom (std::ostream& os)
       fetchNames () <<
       "' which is a oahHelpAtom";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1017,7 +1017,7 @@ void oahHelpAtom::acceptIn (basevisitor* v)
     ss <<
       ".\\\" ==> oahHelpAtom::acceptIn ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1035,7 +1035,7 @@ void oahHelpAtom::acceptIn (basevisitor* v)
           ss <<
             ".\\\" ==> Launching oahHelpAtom::visitStart ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -1053,7 +1053,7 @@ void oahHelpAtom::acceptOut (basevisitor* v)
     ss <<
       ".\\\" ==> oahHelpAtom::acceptOut ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1071,7 +1071,7 @@ void oahHelpAtom::acceptOut (basevisitor* v)
           ss <<
             ".\\\" ==> Launching oahHelpAtom::visitEnd ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -1089,7 +1089,7 @@ void oahHelpAtom::browseData (basevisitor* v)
     ss <<
       ".\\\" ==> oahHelpAtom::browseData ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1174,7 +1174,7 @@ void oahHelpSummaryAtom::applyValueLessAtom (std::ostream& os)
       fetchNames () <<
       "' which is a oahHelpSummaryAtom";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1201,7 +1201,7 @@ void oahHelpSummaryAtom::acceptIn (basevisitor* v)
     ss <<
       ".\\\" ==> oahHelpSummaryAtom::acceptIn ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1219,7 +1219,7 @@ void oahHelpSummaryAtom::acceptIn (basevisitor* v)
           ss <<
             ".\\\" ==> Launching oahHelpSummaryAtom::visitStart ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -1237,7 +1237,7 @@ void oahHelpSummaryAtom::acceptOut (basevisitor* v)
     ss <<
       ".\\\" ==> oahHelpSummaryAtom::acceptOut ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1255,7 +1255,7 @@ void oahHelpSummaryAtom::acceptOut (basevisitor* v)
           ss <<
             ".\\\" ==> Launching oahHelpSummaryAtom::visitEnd ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -1273,7 +1273,7 @@ void oahHelpSummaryAtom::browseData (basevisitor* v)
     ss <<
       ".\\\" ==> oahHelpSummaryAtom::browseData ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1356,7 +1356,7 @@ void oahAboutAtom::applyValueLessAtom (std::ostream& os)
     ss <<
       "==> option '" << fetchNames () << "' is a oahAboutAtom";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1382,7 +1382,7 @@ void oahAboutAtom::acceptIn (basevisitor* v)
     ss <<
       ".\\\" ==> oahAboutAtom::acceptIn ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1400,7 +1400,7 @@ void oahAboutAtom::acceptIn (basevisitor* v)
           ss <<
             ".\\\" ==> Launching oahAboutAtom::visitStart ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -1418,7 +1418,7 @@ void oahAboutAtom::acceptOut (basevisitor* v)
     ss <<
       ".\\\" ==> oahAboutAtom::acceptOut ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1436,7 +1436,7 @@ void oahAboutAtom::acceptOut (basevisitor* v)
           ss <<
             ".\\\" ==> Launching oahAboutAtom::visitEnd ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -1454,7 +1454,7 @@ void oahAboutAtom::browseData (basevisitor* v)
     ss <<
       ".\\\" ==> oahAboutAtom::browseData ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1567,7 +1567,7 @@ void oahVersionAtom::applyValueLessAtom (std::ostream& os)
     ss <<
       "==> option '" << fetchNames () << "' is a oahVersionAtom";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1600,7 +1600,7 @@ void oahVersionAtom::acceptIn (basevisitor* v)
     ss <<
       ".\\\" ==> oahVersionAtom::acceptIn ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1618,7 +1618,7 @@ void oahVersionAtom::acceptIn (basevisitor* v)
           ss <<
             ".\\\" ==> Launching oahVersionAtom::visitStart ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -1636,7 +1636,7 @@ void oahVersionAtom::acceptOut (basevisitor* v)
     ss <<
       ".\\\" ==> oahVersionAtom::acceptOut ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1654,7 +1654,7 @@ void oahVersionAtom::acceptOut (basevisitor* v)
           ss <<
             ".\\\" ==> Launching oahVersionAtom::visitEnd ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -1672,7 +1672,7 @@ void oahVersionAtom::browseData (basevisitor* v)
     ss <<
       ".\\\" ==> oahVersionAtom::browseData ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1788,7 +1788,7 @@ void oahLibraryVersionAtom::applyValueLessAtom (std::ostream& os)
     ss <<
       "==> option '" << fetchNames () << "' is a oahLibraryVersionAtom";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1814,7 +1814,7 @@ void oahLibraryVersionAtom::acceptIn (basevisitor* v)
     ss <<
       ".\\\" ==> oahLibraryVersionAtom::acceptIn ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1832,7 +1832,7 @@ void oahLibraryVersionAtom::acceptIn (basevisitor* v)
           ss <<
             ".\\\" ==> Launching oahLibraryVersionAtom::visitStart ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -1850,7 +1850,7 @@ void oahLibraryVersionAtom::acceptOut (basevisitor* v)
     ss <<
       ".\\\" ==> oahLibraryVersionAtom::acceptOut ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1868,7 +1868,7 @@ void oahLibraryVersionAtom::acceptOut (basevisitor* v)
           ss <<
             ".\\\" ==> Launching oahLibraryVersionAtom::visitEnd ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -1886,7 +1886,7 @@ void oahLibraryVersionAtom::browseData (basevisitor* v)
     ss <<
       ".\\\" ==> oahLibraryVersionAtom::browseData ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1982,7 +1982,7 @@ void oahHistoryAtom::applyValueLessAtom (std::ostream& os)
     ss <<
       "==> option '" << fetchNames () << "' is a oahHistoryAtom";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2008,7 +2008,7 @@ void oahHistoryAtom::acceptIn (basevisitor* v)
     ss <<
       ".\\\" ==> oahHistoryAtom::acceptIn ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2026,7 +2026,7 @@ void oahHistoryAtom::acceptIn (basevisitor* v)
           ss <<
             ".\\\" ==> Launching oahHistoryAtom::visitStart ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -2044,7 +2044,7 @@ void oahHistoryAtom::acceptOut (basevisitor* v)
     ss <<
       ".\\\" ==> oahHistoryAtom::acceptOut ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2062,7 +2062,7 @@ void oahHistoryAtom::acceptOut (basevisitor* v)
           ss <<
             ".\\\" ==> Launching oahHistoryAtom::visitEnd ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -2080,7 +2080,7 @@ void oahHistoryAtom::browseData (basevisitor* v)
     ss <<
       ".\\\" ==> oahHistoryAtom::browseData ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2176,7 +2176,7 @@ void oahLibraryHistoryAtom::applyValueLessAtom (std::ostream& os)
     ss <<
       "==> option '" << fetchNames () << "' is a oahLibraryHistoryAtom";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2202,7 +2202,7 @@ void oahLibraryHistoryAtom::acceptIn (basevisitor* v)
     ss <<
       ".\\\" ==> oahLibraryHistoryAtom::acceptIn ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2220,7 +2220,7 @@ void oahLibraryHistoryAtom::acceptIn (basevisitor* v)
           ss <<
             ".\\\" ==> Launching oahLibraryHistoryAtom::visitStart ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -2238,7 +2238,7 @@ void oahLibraryHistoryAtom::acceptOut (basevisitor* v)
     ss <<
       ".\\\" ==> oahLibraryHistoryAtom::acceptOut ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2256,7 +2256,7 @@ void oahLibraryHistoryAtom::acceptOut (basevisitor* v)
           ss <<
             ".\\\" ==> Launching oahLibraryHistoryAtom::visitEnd ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -2274,7 +2274,7 @@ void oahLibraryHistoryAtom::browseData (basevisitor* v)
     ss <<
       ".\\\" ==> oahLibraryHistoryAtom::browseData ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2371,7 +2371,7 @@ void oahContactAtom::applyValueLessAtom (std::ostream& os)
     ss <<
       "==> option '" << fetchNames () << "' is a oahContactAtom";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2397,7 +2397,7 @@ void oahContactAtom::acceptIn (basevisitor* v)
     ss <<
       ".\\\" ==> oahContactAtom::acceptIn ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2415,7 +2415,7 @@ void oahContactAtom::acceptIn (basevisitor* v)
           ss <<
             ".\\\" ==> Launching oahContactAtom::visitStart ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -2433,7 +2433,7 @@ void oahContactAtom::acceptOut (basevisitor* v)
     ss <<
       ".\\\" ==> oahContactAtom::acceptOut ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2451,7 +2451,7 @@ void oahContactAtom::acceptOut (basevisitor* v)
           ss <<
             ".\\\" ==> Launching oahContactAtom::visitEnd ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -2469,7 +2469,7 @@ void oahContactAtom::browseData (basevisitor* v)
     ss <<
       ".\\\" ==> oahContactAtom::browseData ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2559,7 +2559,7 @@ void oahDisplayPrefixes::applyValueLessAtom (std::ostream& os)
     ss <<
       "==> option '" << fetchNames () << "' is a oahDisplayPrefixes";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2585,7 +2585,7 @@ void oahDisplayPrefixes::acceptIn (basevisitor* v)
     ss <<
       ".\\\" ==> oahDisplayPrefixes::acceptIn ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2603,7 +2603,7 @@ void oahDisplayPrefixes::acceptIn (basevisitor* v)
           ss <<
             ".\\\" ==> Launching oahDisplayPrefixes::visitStart ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -2621,7 +2621,7 @@ void oahDisplayPrefixes::acceptOut (basevisitor* v)
     ss <<
       ".\\\" ==> oahDisplayPrefixes::acceptOut ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2639,7 +2639,7 @@ void oahDisplayPrefixes::acceptOut (basevisitor* v)
           ss <<
             ".\\\" ==> Launching oahDisplayPrefixes::visitEnd ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -2657,7 +2657,7 @@ void oahDisplayPrefixes::browseData (basevisitor* v)
     ss <<
       ".\\\" ==> oahDisplayPrefixes::browseData ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2745,7 +2745,7 @@ void oahDisplaySingleCharacterOptions::applyValueLessAtom (std::ostream& os)
     ss <<
       "==> option '" << fetchNames () << "' is a oahDisplaySingleCharacterOptions";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2771,7 +2771,7 @@ void oahDisplaySingleCharacterOptions::acceptIn (basevisitor* v)
     ss <<
       ".\\\" ==> oahDisplaySingleCharacterOptions::acceptIn ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2789,7 +2789,7 @@ void oahDisplaySingleCharacterOptions::acceptIn (basevisitor* v)
           ss <<
             ".\\\" ==> Launching oahDisplaySingleCharacterOptions::visitStart ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -2807,7 +2807,7 @@ void oahDisplaySingleCharacterOptions::acceptOut (basevisitor* v)
     ss <<
       ".\\\" ==> oahDisplaySingleCharacterOptions::acceptOut ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2825,7 +2825,7 @@ void oahDisplaySingleCharacterOptions::acceptOut (basevisitor* v)
           ss <<
             ".\\\" ==> Launching oahDisplaySingleCharacterOptions::visitEnd ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -2843,7 +2843,7 @@ void oahDisplaySingleCharacterOptions::browseData (basevisitor* v)
     ss <<
       ".\\\" ==> oahDisplaySingleCharacterOptions::browseData ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2943,7 +2943,7 @@ void oahOnOffAtom::applyAtomWithValue (
       fetchNames () <<
       "' which is a oahOnOffAtom";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -3010,7 +3010,7 @@ void oahOnOffAtom::acceptIn (basevisitor* v)
     ss <<
       ".\\\" ==> oahOnOffAtom::acceptIn ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -3028,7 +3028,7 @@ void oahOnOffAtom::acceptIn (basevisitor* v)
           ss <<
             ".\\\" ==> Launching oahOnOffAtom::visitStart ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -3046,7 +3046,7 @@ void oahOnOffAtom::acceptOut (basevisitor* v)
     ss <<
       ".\\\" ==> oahOnOffAtom::acceptOut ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -3064,7 +3064,7 @@ void oahOnOffAtom::acceptOut (basevisitor* v)
           ss <<
             ".\\\" ==> Launching oahOnOffAtom::visitEnd ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -3082,7 +3082,7 @@ void oahOnOffAtom::browseData (basevisitor* v)
     ss <<
       ".\\\" ==> oahOnOffAtom::browseData ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -3207,7 +3207,7 @@ void oahBooleanAtom::applyValueLessAtom (std::ostream& os)
       fetchNames () <<
       "' which is a oahBooleanAtom";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -3253,7 +3253,7 @@ void oahBooleanAtom::acceptIn (basevisitor* v)
     ss <<
       ".\\\" ==> oahBooleanAtom::acceptIn ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -3271,7 +3271,7 @@ void oahBooleanAtom::acceptIn (basevisitor* v)
           ss <<
             ".\\\" ==> Launching oahBooleanAtom::visitStart ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -3289,7 +3289,7 @@ void oahBooleanAtom::acceptOut (basevisitor* v)
     ss <<
       ".\\\" ==> oahBooleanAtom::acceptOut ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -3307,7 +3307,7 @@ void oahBooleanAtom::acceptOut (basevisitor* v)
           ss <<
             ".\\\" ==> Launching oahBooleanAtom::visitEnd ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -3325,7 +3325,7 @@ void oahBooleanAtom::browseData (basevisitor* v)
     ss <<
       ".\\\" ==> oahBooleanAtom::browseData ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -3466,7 +3466,7 @@ void oahBooleanAtomWithTracePasses::acceptIn (basevisitor* v)
     ss <<
       ".\\\" ==> oahBooleanAtomWithTracePasses::acceptIn ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -3484,7 +3484,7 @@ void oahBooleanAtomWithTracePasses::acceptIn (basevisitor* v)
           ss <<
             ".\\\" ==> Launching oahBooleanAtomWithTracePasses::visitStart ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -3502,7 +3502,7 @@ void oahBooleanAtomWithTracePasses::acceptOut (basevisitor* v)
     ss <<
       ".\\\" ==> oahBooleanAtomWithTracePasses::acceptOut ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -3520,7 +3520,7 @@ void oahBooleanAtomWithTracePasses::acceptOut (basevisitor* v)
           ss <<
             ".\\\" ==> Launching oahBooleanAtomWithTracePasses::visitEnd ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -3538,7 +3538,7 @@ void oahBooleanAtomWithTracePasses::browseData (basevisitor* v)
     ss <<
       ".\\\" ==> oahBooleanAtomWithTracePasses::browseData ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -3666,7 +3666,7 @@ void oahTwoBooleansAtom::applyValueLessAtom (std::ostream& os)
       fetchNames () <<
       "' which is a oahTwoBooleansAtom";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -3690,7 +3690,7 @@ void oahTwoBooleansAtom::setTwoBooleansVariables (Bool value)
       value <<
       '\'';
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -3712,7 +3712,7 @@ void oahTwoBooleansAtom::acceptIn (basevisitor* v)
     ss <<
       ".\\\" ==> oahTwoBooleansAtom::acceptIn ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -3730,7 +3730,7 @@ void oahTwoBooleansAtom::acceptIn (basevisitor* v)
           ss <<
             ".\\\" ==> Launching oahTwoBooleansAtom::visitStart ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -3748,7 +3748,7 @@ void oahTwoBooleansAtom::acceptOut (basevisitor* v)
     ss <<
       ".\\\" ==> oahTwoBooleansAtom::acceptOut ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -3766,7 +3766,7 @@ void oahTwoBooleansAtom::acceptOut (basevisitor* v)
           ss <<
             ".\\\" ==> Launching oahTwoBooleansAtom::visitEnd ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -3784,7 +3784,7 @@ void oahTwoBooleansAtom::browseData (basevisitor* v)
     ss <<
       ".\\\" ==> oahTwoBooleansAtom::browseData ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -3938,7 +3938,7 @@ void oahTwoBooleansAtomWithTracePasses::acceptIn (basevisitor* v)
     ss <<
       ".\\\" ==> oahTwoBooleansAtomWithTracePasses::acceptIn ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -3956,7 +3956,7 @@ void oahTwoBooleansAtomWithTracePasses::acceptIn (basevisitor* v)
           ss <<
             ".\\\" ==> Launching oahTwoBooleansAtomWithTracePasses::visitStart ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -3974,7 +3974,7 @@ void oahTwoBooleansAtomWithTracePasses::acceptOut (basevisitor* v)
     ss <<
       ".\\\" ==> oahTwoBooleansAtomWithTracePasses::acceptOut ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -3992,7 +3992,7 @@ void oahTwoBooleansAtomWithTracePasses::acceptOut (basevisitor* v)
           ss <<
             ".\\\" ==> Launching oahTwoBooleansAtomWithTracePasses::visitEnd ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -4010,7 +4010,7 @@ void oahTwoBooleansAtomWithTracePasses::browseData (basevisitor* v)
     ss <<
       ".\\\" ==> oahTwoBooleansAtomWithTracePasses::browseData ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -4151,7 +4151,7 @@ void oahThreeBooleansAtom::applyValueLessAtom (std::ostream& os)
       fetchNames () <<
       "' which is a oahThreeBooleansAtom";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -4175,7 +4175,7 @@ void oahThreeBooleansAtom::setThreeBooleansVariables (Bool value)
       value <<
       '\'';
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -4198,7 +4198,7 @@ void oahThreeBooleansAtom::acceptIn (basevisitor* v)
     ss <<
       ".\\\" ==> oahThreeBooleansAtom::acceptIn ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -4216,7 +4216,7 @@ void oahThreeBooleansAtom::acceptIn (basevisitor* v)
           ss <<
             ".\\\" ==> Launching oahThreeBooleansAtom::visitStart ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -4234,7 +4234,7 @@ void oahThreeBooleansAtom::acceptOut (basevisitor* v)
     ss <<
       ".\\\" ==> oahThreeBooleansAtom::acceptOut ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -4252,7 +4252,7 @@ void oahThreeBooleansAtom::acceptOut (basevisitor* v)
           ss <<
             ".\\\" ==> Launching oahThreeBooleansAtom::visitEnd ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -4270,7 +4270,7 @@ void oahThreeBooleansAtom::browseData (basevisitor* v)
     ss <<
       ".\\\" ==> oahThreeBooleansAtom::browseData ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -4428,7 +4428,7 @@ void oahThreeBooleansAtomWithTracePasses::acceptIn (basevisitor* v)
     ss <<
       ".\\\" ==> oahThreeBooleansAtomWithTracePasses::acceptIn ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -4446,7 +4446,7 @@ void oahThreeBooleansAtomWithTracePasses::acceptIn (basevisitor* v)
           ss <<
             ".\\\" ==> Launching oahThreeBooleansAtomWithTracePasses::visitStart ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -4464,7 +4464,7 @@ void oahThreeBooleansAtomWithTracePasses::acceptOut (basevisitor* v)
     ss <<
       ".\\\" ==> oahThreeBooleansAtomWithTracePasses::acceptOut ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -4482,7 +4482,7 @@ void oahThreeBooleansAtomWithTracePasses::acceptOut (basevisitor* v)
           ss <<
             ".\\\" ==> Launching oahThreeBooleansAtomWithTracePasses::visitEnd ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -4500,7 +4500,7 @@ void oahThreeBooleansAtomWithTracePasses::browseData (basevisitor* v)
     ss <<
       ".\\\" ==> oahThreeBooleansAtomWithTracePasses::browseData ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -4697,7 +4697,7 @@ void oahCombinedBooleansAtom::setCombinedBooleanVariables (Bool value)
       value <<
       '\'';
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -4738,7 +4738,7 @@ void oahCombinedBooleansAtom::applyValueLessAtom (std::ostream& os)
       fetchNames () <<
       "' which is a oahCombinedBooleansAtom";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -4758,7 +4758,7 @@ void oahCombinedBooleansAtom::acceptIn (basevisitor* v)
     ss <<
       ".\\\" ==> oahCombinedBooleansAtom::acceptIn ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -4776,7 +4776,7 @@ void oahCombinedBooleansAtom::acceptIn (basevisitor* v)
           ss <<
             ".\\\" ==> Launching oahCombinedBooleansAtom::visitStart ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -4794,7 +4794,7 @@ void oahCombinedBooleansAtom::acceptOut (basevisitor* v)
     ss <<
       ".\\\" ==> oahCombinedBooleansAtom::acceptOut ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -4812,7 +4812,7 @@ void oahCombinedBooleansAtom::acceptOut (basevisitor* v)
           ss <<
             ".\\\" ==> Launching oahCombinedBooleansAtom::visitEnd ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -4830,7 +4830,7 @@ void oahCombinedBooleansAtom::browseData (basevisitor* v)
     ss <<
       ".\\\" ==> oahCombinedBooleansAtom::browseData ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -5173,7 +5173,7 @@ void oahIntegerAtom::setIntegerVariable (int value)
       value <<
       '\'';
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -5193,7 +5193,7 @@ void oahIntegerAtom::acceptIn (basevisitor* v)
     ss <<
       ".\\\" ==> oahIntegerAtom::acceptIn ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -5211,7 +5211,7 @@ void oahIntegerAtom::acceptIn (basevisitor* v)
           ss <<
             ".\\\" ==> Launching oahIntegerAtom::visitStart ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -5229,7 +5229,7 @@ void oahIntegerAtom::acceptOut (basevisitor* v)
     ss <<
       ".\\\" ==> oahIntegerAtom::acceptOut ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -5247,7 +5247,7 @@ void oahIntegerAtom::acceptOut (basevisitor* v)
           ss <<
             ".\\\" ==> Launching oahIntegerAtom::visitEnd ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -5265,7 +5265,7 @@ void oahIntegerAtom::browseData (basevisitor* v)
     ss <<
       ".\\\" ==> oahIntegerAtom::browseData ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -5482,7 +5482,7 @@ void oahTwoIntegersAtom::setIntegerVariable (int value)
       value <<
       '\'';
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -5502,7 +5502,7 @@ void oahTwoIntegersAtom::acceptIn (basevisitor* v)
     ss <<
       ".\\\" ==> oahTwoIntegersAtom::acceptIn ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -5520,7 +5520,7 @@ void oahTwoIntegersAtom::acceptIn (basevisitor* v)
           ss <<
             ".\\\" ==> Launching oahTwoIntegersAtom::visitStart ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -5538,7 +5538,7 @@ void oahTwoIntegersAtom::acceptOut (basevisitor* v)
     ss <<
       ".\\\" ==> oahTwoIntegersAtom::acceptOut ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -5556,7 +5556,7 @@ void oahTwoIntegersAtom::acceptOut (basevisitor* v)
           ss <<
             ".\\\" ==> Launching oahTwoIntegersAtom::visitEnd ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -5574,7 +5574,7 @@ void oahTwoIntegersAtom::browseData (basevisitor* v)
     ss <<
       ".\\\" ==> oahTwoIntegersAtom::browseData ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -5796,7 +5796,7 @@ void oahFloatAtom::setFloatVariable (float value)
       value <<
       '\'';
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -5816,7 +5816,7 @@ void oahFloatAtom::acceptIn (basevisitor* v)
     ss <<
       ".\\\" ==> oahFloatAtom::acceptIn ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -5834,7 +5834,7 @@ void oahFloatAtom::acceptIn (basevisitor* v)
           ss <<
             ".\\\" ==> Launching oahFloatAtom::visitStart ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -5852,7 +5852,7 @@ void oahFloatAtom::acceptOut (basevisitor* v)
     ss <<
       ".\\\" ==> oahFloatAtom::acceptOut ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -5870,7 +5870,7 @@ void oahFloatAtom::acceptOut (basevisitor* v)
           ss <<
             ".\\\" ==> Launching oahFloatAtom::visitEnd ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -5888,7 +5888,7 @@ void oahFloatAtom::browseData (basevisitor* v)
     ss <<
       ".\\\" ==> oahFloatAtom::browseData ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -6036,7 +6036,7 @@ void oahStringAtom::setStringVariable (const std::string& value)
      value <<
       "\"";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -6056,7 +6056,7 @@ void oahStringAtom::acceptIn (basevisitor* v)
     ss <<
       ".\\\" ==> oahStringAtom::acceptIn ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -6074,7 +6074,7 @@ void oahStringAtom::acceptIn (basevisitor* v)
           ss <<
             ".\\\" ==> Launching oahStringAtom::visitStart ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -6092,7 +6092,7 @@ void oahStringAtom::acceptOut (basevisitor* v)
     ss <<
       ".\\\" ==> oahStringAtom::acceptOut ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -6110,7 +6110,7 @@ void oahStringAtom::acceptOut (basevisitor* v)
           ss <<
             ".\\\" ==> Launching oahStringAtom::visitEnd ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -6128,7 +6128,7 @@ void oahStringAtom::browseData (basevisitor* v)
     ss <<
       ".\\\" ==> oahStringAtom::browseData ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -6391,7 +6391,7 @@ void oahFactorizedStringAtom::applyValueLessAtom (std::ostream& os) // JMI v0.9.
       fetchNames () <<
       "' which is a oahFactorizedStringAtom";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -6411,7 +6411,7 @@ void oahFactorizedStringAtom::acceptIn (basevisitor* v)
     ss <<
       ".\\\" ==> oahFactorizedStringAtom::acceptIn ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -6429,7 +6429,7 @@ void oahFactorizedStringAtom::acceptIn (basevisitor* v)
           ss <<
             ".\\\" ==> Launching oahFactorizedStringAtom::visitStart ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -6447,7 +6447,7 @@ void oahFactorizedStringAtom::acceptOut (basevisitor* v)
     ss <<
       ".\\\" ==> oahFactorizedStringAtom::acceptOut ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -6465,7 +6465,7 @@ void oahFactorizedStringAtom::acceptOut (basevisitor* v)
           ss <<
             ".\\\" ==> Launching oahFactorizedStringAtom::visitEnd ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -6483,7 +6483,7 @@ void oahFactorizedStringAtom::browseData (basevisitor* v)
     ss <<
       ".\\\" ==> oahFactorizedStringAtom::browseData ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -6710,7 +6710,7 @@ void oahDefaultedStringAtom::applyAtomWithValue (
       fetchNames () <<
       "' which is a oahDefaultedStringAtom";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -6730,7 +6730,7 @@ void oahDefaultedStringAtom::acceptIn (basevisitor* v)
     ss <<
       ".\\\" ==> oahDefaultedStringAtom::acceptIn ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -6748,7 +6748,7 @@ void oahDefaultedStringAtom::acceptIn (basevisitor* v)
           ss <<
             ".\\\" ==> Launching oahDefaultedStringAtom::visitStart ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -6770,7 +6770,7 @@ void oahDefaultedStringAtom::setStringVariable (const std::string& value)
      value <<
       "\"";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -6790,7 +6790,7 @@ void oahDefaultedStringAtom::acceptOut (basevisitor* v)
     ss <<
       ".\\\" ==> oahDefaultedStringAtom::acceptOut ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -6808,7 +6808,7 @@ void oahDefaultedStringAtom::acceptOut (basevisitor* v)
           ss <<
             ".\\\" ==> Launching oahDefaultedStringAtom::visitEnd ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -6826,7 +6826,7 @@ void oahDefaultedStringAtom::browseData (basevisitor* v)
     ss <<
       ".\\\" ==> oahDefaultedStringAtom::browseData ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -7236,7 +7236,7 @@ void oahCommonPrefixBooleansAtom::applyValueLessAtom (std::ostream& os)
       fetchNames () <<
       "' which is a oahCommonPrefixBooleansAtom";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -7256,7 +7256,7 @@ void oahCommonPrefixBooleansAtom::acceptIn (basevisitor* v)
     ss <<
       ".\\\" ==> oahCommonPrefixBooleansAtom::acceptIn ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -7274,7 +7274,7 @@ void oahCommonPrefixBooleansAtom::acceptIn (basevisitor* v)
           ss <<
             ".\\\" ==> Launching oahCommonPrefixBooleansAtom::visitStart ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -7292,7 +7292,7 @@ void oahCommonPrefixBooleansAtom::acceptOut (basevisitor* v)
     ss <<
       ".\\\" ==> oahCommonPrefixBooleansAtom::acceptOut ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -7310,7 +7310,7 @@ void oahCommonPrefixBooleansAtom::acceptOut (basevisitor* v)
           ss <<
             ".\\\" ==> Launching oahCommonPrefixBooleansAtom::visitEnd ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -7328,7 +7328,7 @@ void oahCommonPrefixBooleansAtom::browseData (basevisitor* v)
     ss <<
       ".\\\" ==> oahCommonPrefixBooleansAtom::browseData ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -7649,7 +7649,7 @@ void oahRegexAtom::applyAtomWithValue (
       fetchNames () <<
       "' which is a oahRegexAtom";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -7673,7 +7673,7 @@ void oahRegexAtom::acceptIn (basevisitor* v)
     ss <<
       ".\\\" ==> oahRegexAtom::acceptIn ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -7691,7 +7691,7 @@ void oahRegexAtom::acceptIn (basevisitor* v)
           ss <<
             ".\\\" ==> Launching oahRegexAtom::visitStart ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -7713,7 +7713,7 @@ void oahRegexAtom::setStringVariable (const std::string& value)
      value <<
       "\"";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -7733,7 +7733,7 @@ void oahRegexAtom::acceptOut (basevisitor* v)
     ss <<
       ".\\\" ==> oahRegexAtom::acceptOut ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -7751,7 +7751,7 @@ void oahRegexAtom::acceptOut (basevisitor* v)
           ss <<
             ".\\\" ==> Launching oahRegexAtom::visitEnd ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -7769,7 +7769,7 @@ void oahRegexAtom::browseData (basevisitor* v)
     ss <<
       ".\\\" ==> oahRegexAtom::browseData ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -7972,7 +7972,7 @@ void oahRationalAtom::applyAtomWithValue (
         "rationalValue: " <<
         rationalValue;
 
-      gWaeHandler->waeTraceWithoutLocationDetails (
+      gWaeHandler->waeTraceWithoutInputLocation (
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -8003,7 +8003,7 @@ void oahRationalAtom::acceptIn (basevisitor* v)
     ss <<
       ".\\\" ==> oahRationalAtom::acceptIn ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -8021,7 +8021,7 @@ void oahRationalAtom::acceptIn (basevisitor* v)
           ss <<
             ".\\\" ==> Launching oahRationalAtom::visitStart ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -8039,7 +8039,7 @@ void oahRationalAtom::acceptOut (basevisitor* v)
     ss <<
       ".\\\" ==> oahRationalAtom::acceptOut ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -8057,7 +8057,7 @@ void oahRationalAtom::acceptOut (basevisitor* v)
           ss <<
             ".\\\" ==> Launching oahRationalAtom::visitEnd ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -8075,7 +8075,7 @@ void oahRationalAtom::browseData (basevisitor* v)
     ss <<
       ".\\\" ==> oahRationalAtom::browseData ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -8224,7 +8224,7 @@ void oahNaturalNumbersSetElementAtom::acceptIn (basevisitor* v)
     ss <<
       ".\\\" ==> oahNaturalNumbersSetElementAtom::acceptIn ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -8242,7 +8242,7 @@ void oahNaturalNumbersSetElementAtom::acceptIn (basevisitor* v)
           ss <<
             ".\\\" ==> Launching oahNaturalNumbersSetElementAtom::visitStart ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -8260,7 +8260,7 @@ void oahNaturalNumbersSetElementAtom::acceptOut (basevisitor* v)
     ss <<
       ".\\\" ==> oahNaturalNumbersSetElementAtom::acceptOut ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -8278,7 +8278,7 @@ void oahNaturalNumbersSetElementAtom::acceptOut (basevisitor* v)
           ss <<
             ".\\\" ==> Launching oahNaturalNumbersSetElementAtom::visitEnd ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -8296,7 +8296,7 @@ void oahNaturalNumbersSetElementAtom::browseData (basevisitor* v)
     ss <<
       ".\\\" ==> oahNaturalNumbersSetElementAtom::browseData ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -8518,7 +8518,7 @@ void oahColorRGBAtom::acceptIn (basevisitor* v)
     ss <<
       ".\\\" ==> oahColorRGBAtom::acceptIn ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -8536,7 +8536,7 @@ void oahColorRGBAtom::acceptIn (basevisitor* v)
           ss <<
             ".\\\" ==> Launching oahColorRGBAtom::visitStart ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -8554,7 +8554,7 @@ void oahColorRGBAtom::acceptOut (basevisitor* v)
     ss <<
       ".\\\" ==> oahColorRGBAtom::acceptOut ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -8572,7 +8572,7 @@ void oahColorRGBAtom::acceptOut (basevisitor* v)
           ss <<
             ".\\\" ==> Launching oahColorRGBAtom::visitEnd ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -8590,7 +8590,7 @@ void oahColorRGBAtom::browseData (basevisitor* v)
     ss <<
       ".\\\" ==> oahColorRGBAtom::browseData ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -8742,7 +8742,7 @@ void oahIntSetElementAtom::applyAtomWithValue (
       "' of type 'oahIntSetElementAtom'" <<
       " with value \"" << theString << "\"";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -8808,7 +8808,7 @@ void oahIntSetElementAtom::applyAtomWithValue (
       "lilypondMeasureNumber: " <<
       lilypondMeasureNumber;
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -8828,7 +8828,7 @@ void oahIntSetElementAtom::acceptIn (basevisitor* v)
     ss <<
       ".\\\" ==> oahIntSetElementAtom::acceptIn ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -8846,7 +8846,7 @@ void oahIntSetElementAtom::acceptIn (basevisitor* v)
           ss <<
             ".\\\" ==> Launching oahIntSetElementAtom::visitStart ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -8864,7 +8864,7 @@ void oahIntSetElementAtom::acceptOut (basevisitor* v)
     ss <<
       ".\\\" ==> oahIntSetElementAtom::acceptOut ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -8882,7 +8882,7 @@ void oahIntSetElementAtom::acceptOut (basevisitor* v)
           ss <<
             ".\\\" ==> Launching oahIntSetElementAtom::visitEnd ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -8900,7 +8900,7 @@ void oahIntSetElementAtom::browseData (basevisitor* v)
     ss <<
       ".\\\" ==> oahIntSetElementAtom::browseData ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -9096,7 +9096,7 @@ void oahStringSetElementAtom::applyAtomWithValue (
     ss <<
       "==> oahAtom is of type 'oahStringSetElementAtom'";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -9113,7 +9113,7 @@ void oahStringSetElementAtom::applyAtomWithValue (
     ss <<
       "--> partName = \"" << partName << "\", ";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -9152,7 +9152,7 @@ void oahStringSetElementAtom::acceptIn (basevisitor* v)
     ss <<
       ".\\\" ==> oahStringSetElementAtom::acceptIn ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -9170,7 +9170,7 @@ void oahStringSetElementAtom::acceptIn (basevisitor* v)
           ss <<
             ".\\\" ==> Launching oahStringSetElementAtom::visitStart ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -9188,7 +9188,7 @@ void oahStringSetElementAtom::acceptOut (basevisitor* v)
     ss <<
       ".\\\" ==> oahStringSetElementAtom::acceptOut ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -9206,7 +9206,7 @@ void oahStringSetElementAtom::acceptOut (basevisitor* v)
           ss <<
             ".\\\" ==> Launching oahStringSetElementAtom::visitEnd ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -9224,7 +9224,7 @@ void oahStringSetElementAtom::browseData (basevisitor* v)
     ss <<
       ".\\\" ==> oahStringSetElementAtom::browseData ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -9420,7 +9420,7 @@ void oahStringToIntMapElementAtom::applyAtomWithValue (
     ss <<
       "==> oahAtom is of type 'oahStringToIntMapElementAtom'";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -9436,7 +9436,7 @@ void oahStringToIntMapElementAtom::applyAtomWithValue (
     ss <<
       "==> oahAtom is of type 'oahStringToIntMapElementAtom'";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -9517,7 +9517,7 @@ void oahStringToIntMapElementAtom::applyAtomWithValue (
       "lilypondMeasureNumber: " <<
       lilypondMeasureNumber;
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -9538,7 +9538,7 @@ void oahStringToIntMapElementAtom::acceptIn (basevisitor* v)
     ss <<
       ".\\\" ==> oahStringToIntMapElementAtom::acceptIn ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -9556,7 +9556,7 @@ void oahStringToIntMapElementAtom::acceptIn (basevisitor* v)
           ss <<
             ".\\\" ==> Launching oahStringToIntMapElementAtom::visitStart ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -9574,7 +9574,7 @@ void oahStringToIntMapElementAtom::acceptOut (basevisitor* v)
     ss <<
       ".\\\" ==> oahStringToIntMapElementAtom::acceptOut ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -9592,7 +9592,7 @@ void oahStringToIntMapElementAtom::acceptOut (basevisitor* v)
           ss <<
             ".\\\" ==> Launching oahStringToIntMapElementAtom::visitEnd ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -9610,7 +9610,7 @@ void oahStringToIntMapElementAtom::browseData (basevisitor* v)
     ss <<
       ".\\\" ==> oahStringToIntMapElementAtom::browseData ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -9812,7 +9812,7 @@ void oahStringToStringMapElementAtom::applyAtomWithValue (
     ss <<
       "==> oahAtom is of type 'oahStringToStringMapElementAtom'";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -9828,7 +9828,7 @@ void oahStringToStringMapElementAtom::applyAtomWithValue (
     ss <<
       "==> oahAtom is of type 'oahStringToStringMapElementAtom'";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -9904,7 +9904,7 @@ void oahStringToStringMapElementAtom::applyAtomWithValue (
       "value: " <<
       value;
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -9924,7 +9924,7 @@ void oahStringToStringMapElementAtom::acceptIn (basevisitor* v)
     ss <<
       ".\\\" ==> oahStringToStringMapElementAtom::acceptIn ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -9942,7 +9942,7 @@ void oahStringToStringMapElementAtom::acceptIn (basevisitor* v)
           ss <<
             ".\\\" ==> Launching oahStringToStringMapElementAtom::visitStart ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -9960,7 +9960,7 @@ void oahStringToStringMapElementAtom::acceptOut (basevisitor* v)
     ss <<
       ".\\\" ==> oahStringToStringMapElementAtom::acceptOut ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -9978,7 +9978,7 @@ void oahStringToStringMapElementAtom::acceptOut (basevisitor* v)
           ss <<
             ".\\\" ==> Launching oahStringToStringMapElementAtom::visitEnd ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -9996,7 +9996,7 @@ void oahStringToStringMapElementAtom::browseData (basevisitor* v)
     ss <<
       ".\\\" ==> oahStringToStringMapElementAtom::browseData ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -10203,7 +10203,7 @@ void oahStringToStringMultiMapElementAtom::applyAtomWithValue (
     ss <<
       "==> oahAtom is of type 'oahStringToStringMultiMapElementAtom'";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -10219,7 +10219,7 @@ void oahStringToStringMultiMapElementAtom::applyAtomWithValue (
     ss <<
       "==> oahAtom is of type 'oahStringToStringMultiMapElementAtom'";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -10295,7 +10295,7 @@ void oahStringToStringMultiMapElementAtom::applyAtomWithValue (
       "value: " <<
       value;
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -10316,7 +10316,7 @@ void oahStringToStringMultiMapElementAtom::acceptIn (basevisitor* v)
     ss <<
       ".\\\" ==> oahStringToStringMultiMapElementAtom::acceptIn ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -10334,7 +10334,7 @@ void oahStringToStringMultiMapElementAtom::acceptIn (basevisitor* v)
           ss <<
             ".\\\" ==> Launching oahStringToStringMultiMapElementAtom::visitStart ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -10352,7 +10352,7 @@ void oahStringToStringMultiMapElementAtom::acceptOut (basevisitor* v)
     ss <<
       ".\\\" ==> oahStringToStringMultiMapElementAtom::acceptOut ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -10370,7 +10370,7 @@ void oahStringToStringMultiMapElementAtom::acceptOut (basevisitor* v)
           ss <<
             ".\\\" ==> Launching oahStringToStringMultiMapElementAtom::visitEnd ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -10388,7 +10388,7 @@ void oahStringToStringMultiMapElementAtom::browseData (basevisitor* v)
     ss <<
       ".\\\" ==> oahStringToStringMultiMapElementAtom::browseData ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -10679,7 +10679,7 @@ void oahStringAndIntegerAtom::setIntegerVariable (int value)
       value <<
       '\'';
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -10703,7 +10703,7 @@ void oahStringAndIntegerAtom::setStringVariable (const std::string& value)
       value <<
       "\"";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -10723,7 +10723,7 @@ void oahStringAndIntegerAtom::acceptIn (basevisitor* v)
     ss <<
       ".\\\" ==> oahStringAndIntegerAtom::acceptIn ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -10741,7 +10741,7 @@ void oahStringAndIntegerAtom::acceptIn (basevisitor* v)
           ss <<
             ".\\\" ==> Launching oahStringAndIntegerAtom::visitStart ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -10759,7 +10759,7 @@ void oahStringAndIntegerAtom::acceptOut (basevisitor* v)
     ss <<
       ".\\\" ==> oahStringAndIntegerAtom::acceptOut ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -10777,7 +10777,7 @@ void oahStringAndIntegerAtom::acceptOut (basevisitor* v)
           ss <<
             ".\\\" ==> Launching oahStringAndIntegerAtom::visitEnd ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -10795,7 +10795,7 @@ void oahStringAndIntegerAtom::browseData (basevisitor* v)
     ss <<
       ".\\\" ==> oahStringAndIntegerAtom::browseData ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -11051,7 +11051,7 @@ void oahStringAndTwoIntegersAtom::setStringVariable (const std::string& value)
       value <<
       '\'';
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -11075,7 +11075,7 @@ void oahStringAndTwoIntegersAtom::setPrimaryIntegerVariable (int value)
       value <<
       '\'';
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -11099,7 +11099,7 @@ void oahStringAndTwoIntegersAtom::setSecondaryIntegerVariable (int value)
       value <<
       '\'';
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -11119,7 +11119,7 @@ void oahStringAndTwoIntegersAtom::acceptIn (basevisitor* v)
     ss <<
       ".\\\" ==> oahStringAndTwoIntegersAtom::acceptIn ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -11137,7 +11137,7 @@ void oahStringAndTwoIntegersAtom::acceptIn (basevisitor* v)
           ss <<
             ".\\\" ==> Launching oahStringAndTwoIntegersAtom::visitStart ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -11155,7 +11155,7 @@ void oahStringAndTwoIntegersAtom::acceptOut (basevisitor* v)
     ss <<
       ".\\\" ==> oahStringAndTwoIntegersAtom::acceptOut ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -11173,7 +11173,7 @@ void oahStringAndTwoIntegersAtom::acceptOut (basevisitor* v)
           ss <<
             ".\\\" ==> Launching oahStringAndTwoIntegersAtom::visitEnd ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -11191,7 +11191,7 @@ void oahStringAndTwoIntegersAtom::browseData (basevisitor* v)
     ss <<
       ".\\\" ==> oahStringAndTwoIntegersAtom::browseData ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -11361,7 +11361,7 @@ void oahLengthUnitKindAtom::applyAtomWithValue (
     ss <<
       "==> oahAtom is of type 'oahLengthUnitKindAtom'";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -11377,7 +11377,7 @@ void oahLengthUnitKindAtom::applyAtomWithValue (
     ss <<
       "==> oahAtom is of type 'oahLengthUnitKindAtom'";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -11427,7 +11427,7 @@ void oahLengthUnitKindAtom::acceptIn (basevisitor* v)
     ss <<
       ".\\\" ==> oahLengthUnitKindAtom::acceptIn ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -11445,7 +11445,7 @@ void oahLengthUnitKindAtom::acceptIn (basevisitor* v)
           ss <<
             ".\\\" ==> Launching oahLengthUnitKindAtom::visitStart ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -11463,7 +11463,7 @@ void oahLengthUnitKindAtom::acceptOut (basevisitor* v)
     ss <<
       ".\\\" ==> oahLengthUnitKindAtom::acceptOut ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -11481,7 +11481,7 @@ void oahLengthUnitKindAtom::acceptOut (basevisitor* v)
           ss <<
             ".\\\" ==> Launching oahLengthUnitKindAtom::visitEnd ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -11499,7 +11499,7 @@ void oahLengthUnitKindAtom::browseData (basevisitor* v)
     ss <<
       ".\\\" ==> oahLengthUnitKindAtom::browseData ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -11642,7 +11642,7 @@ void oahLengthAtom::applyAtomWithValue (
     ss <<
       "==> oahAtom is of type 'oahLengthAtom'";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -11756,7 +11756,7 @@ void oahLengthAtom::acceptIn (basevisitor* v)
     ss <<
       ".\\\" ==> oahLengthAtom::acceptIn ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -11774,7 +11774,7 @@ void oahLengthAtom::acceptIn (basevisitor* v)
           ss <<
             ".\\\" ==> Launching oahLengthAtom::visitStart ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -11792,7 +11792,7 @@ void oahLengthAtom::acceptOut (basevisitor* v)
     ss <<
       ".\\\" ==> oahLengthAtom::acceptOut ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -11810,7 +11810,7 @@ void oahLengthAtom::acceptOut (basevisitor* v)
           ss <<
             ".\\\" ==> Launching oahLengthAtom::visitEnd ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -11828,7 +11828,7 @@ void oahLengthAtom::browseData (basevisitor* v)
     ss <<
       ".\\\" ==> oahLengthAtom::browseData ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -11969,7 +11969,7 @@ void oahMidiTempoAtom::setMidiTempoVariable (
       "Setting midi tempo atom variable to " <<
       value.asString ();
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -11991,7 +11991,7 @@ void oahMidiTempoAtom::applyAtomWithValue (
     ss <<
       "==> oahAtom is of type 'oahMidiTempoAtom'";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -12007,7 +12007,7 @@ void oahMidiTempoAtom::applyAtomWithValue (
     ss <<
       "==> oahAtom is of type 'oahMidiTempoAtom'";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -12108,7 +12108,7 @@ void oahMidiTempoAtom::acceptIn (basevisitor* v)
     ss <<
       ".\\\" ==> oahMidiTempoAtom::acceptIn ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -12126,7 +12126,7 @@ void oahMidiTempoAtom::acceptIn (basevisitor* v)
           ss <<
             ".\\\" ==> Launching oahMidiTempoAtom::visitStart ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -12144,7 +12144,7 @@ void oahMidiTempoAtom::acceptOut (basevisitor* v)
     ss <<
       ".\\\" ==> oahMidiTempoAtom::acceptOut ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -12162,7 +12162,7 @@ void oahMidiTempoAtom::acceptOut (basevisitor* v)
           ss <<
             ".\\\" ==> Launching oahMidiTempoAtom::visitEnd ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -12180,7 +12180,7 @@ void oahMidiTempoAtom::browseData (basevisitor* v)
     ss <<
       ".\\\" ==> oahMidiTempoAtom::browseData ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -12331,7 +12331,7 @@ void oahOptionNameHelpAtom::applyAtomWithValue (
       fetchNames () <<
       "' which is a oahOptionNameHelpAtom";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -12362,7 +12362,7 @@ void oahOptionNameHelpAtom::acceptIn (basevisitor* v)
     ss <<
       ".\\\" ==> oahOptionNameHelpAtom::acceptIn ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -12380,7 +12380,7 @@ void oahOptionNameHelpAtom::acceptIn (basevisitor* v)
           ss <<
             ".\\\" ==> Launching oahOptionNameHelpAtom::visitStart ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -12398,7 +12398,7 @@ void oahOptionNameHelpAtom::acceptOut (basevisitor* v)
     ss <<
       ".\\\" ==> oahOptionNameHelpAtom::acceptOut ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -12416,7 +12416,7 @@ void oahOptionNameHelpAtom::acceptOut (basevisitor* v)
           ss <<
             ".\\\" ==> Launching oahOptionNameHelpAtom::visitEnd ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -12434,7 +12434,7 @@ void oahOptionNameHelpAtom::browseData (basevisitor* v)
     ss <<
       ".\\\" ==> oahOptionNameHelpAtom::browseData ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -12547,7 +12547,7 @@ void oahQueryOptionNameAtom::applyAtomWithValue (
       fetchNames () <<
       "' which is a oahQueryOptionNameAtom";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -12569,7 +12569,7 @@ void oahQueryOptionNameAtom::acceptIn (basevisitor* v)
     ss <<
       ".\\\" ==> oahQueryOptionNameAtom::acceptIn ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -12587,7 +12587,7 @@ void oahQueryOptionNameAtom::acceptIn (basevisitor* v)
           ss <<
             ".\\\" ==> Launching oahQueryOptionNameAtom::visitStart ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -12605,7 +12605,7 @@ void oahQueryOptionNameAtom::acceptOut (basevisitor* v)
     ss <<
       ".\\\" ==> oahQueryOptionNameAtom::acceptOut ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -12623,7 +12623,7 @@ void oahQueryOptionNameAtom::acceptOut (basevisitor* v)
           ss <<
             ".\\\" ==> Launching oahQueryOptionNameAtom::visitEnd ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -12641,7 +12641,7 @@ void oahQueryOptionNameAtom::browseData (basevisitor* v)
     ss <<
       ".\\\" ==> oahQueryOptionNameAtom::browseData ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -12825,7 +12825,7 @@ void oahFindStringAtom::applyAtomWithValue (
       fetchNames () <<
       "' which is a oahFindStringAtom";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -12939,7 +12939,7 @@ void oahFindStringAtom::acceptIn (basevisitor* v)
     ss <<
       ".\\\" ==> oahFindStringAtom::acceptIn ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -12957,7 +12957,7 @@ void oahFindStringAtom::acceptIn (basevisitor* v)
           ss <<
             ".\\\" ==> Launching oahFindStringAtom::visitStart ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -12975,7 +12975,7 @@ void oahFindStringAtom::acceptOut (basevisitor* v)
     ss <<
       ".\\\" ==> oahFindStringAtom::acceptOut ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -12993,7 +12993,7 @@ void oahFindStringAtom::acceptOut (basevisitor* v)
           ss <<
             ".\\\" ==> Launching oahFindStringAtom::visitEnd ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -13011,7 +13011,7 @@ void oahFindStringAtom::browseData (basevisitor* v)
     ss <<
       ".\\\" ==> oahFindStringAtom::browseData ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -13126,7 +13126,7 @@ void oahIncludeOptionsAndArgumentsFileAtom::applyAtomWithValue (
       fetchNames () <<
       "' which is a oahIncludeOptionsAndArgumentsFileAtom";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -13148,7 +13148,7 @@ void oahIncludeOptionsAndArgumentsFileAtom::acceptIn (basevisitor* v)
     ss <<
       ".\\\" ==> oahIncludeOptionsAndArgumentsFileAtom::acceptIn ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -13166,7 +13166,7 @@ void oahIncludeOptionsAndArgumentsFileAtom::acceptIn (basevisitor* v)
           ss <<
             ".\\\" ==> Launching oahIncludeOptionsAndArgumentsFileAtom::visitStart ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -13184,7 +13184,7 @@ void oahIncludeOptionsAndArgumentsFileAtom::acceptOut (basevisitor* v)
     ss <<
       ".\\\" ==> oahIncludeOptionsAndArgumentsFileAtom::acceptOut ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -13202,7 +13202,7 @@ void oahIncludeOptionsAndArgumentsFileAtom::acceptOut (basevisitor* v)
           ss <<
             ".\\\" ==> Launching oahIncludeOptionsAndArgumentsFileAtom::visitEnd ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -13220,7 +13220,7 @@ void oahIncludeOptionsAndArgumentsFileAtom::browseData (basevisitor* v)
     ss <<
       ".\\\" ==> oahIncludeOptionsAndArgumentsFileAtom::browseData ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }

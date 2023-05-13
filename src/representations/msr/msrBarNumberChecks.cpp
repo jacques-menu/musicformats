@@ -15,7 +15,7 @@
 
 #include "visitor.h"
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "mfAssert.h"
 
@@ -86,7 +86,7 @@ msrBarNumberCheck::msrBarNumberCheck (
       fNextBarPuristNumber <<
       "'";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -135,7 +135,7 @@ void msrBarNumberCheck::acceptIn (basevisitor* v)
     ss <<
       "% ==> msrBarNumberCheck::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -153,7 +153,7 @@ void msrBarNumberCheck::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching msrBarNumberCheck::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -171,7 +171,7 @@ void msrBarNumberCheck::acceptOut (basevisitor* v)
     ss <<
       "% ==> msrBarNumberCheck::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -189,7 +189,7 @@ void msrBarNumberCheck::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching msrBarNumberCheck::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }

@@ -31,7 +31,7 @@ S_mfcRepresentationComponent getMsdrRepresentationComponent ()
       ss <<
         "Create the MSDR format component";
 
-      gWaeHandler->waeTraceWithLocationDetails (
+      gWaeHandler->waeTrace (
         __FILE__, __LINE__,
         ss.str ());
     }

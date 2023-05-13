@@ -12,7 +12,7 @@
 #ifndef ___msdlScanner___
 #define ___msdlScanner___
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "smartpointer.h"
 

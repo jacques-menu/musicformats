@@ -325,7 +325,7 @@ void lilypondFixedOctaveEntryAtom::applyAtomWithValue (
     ss <<
       "==> oahAtom is of type 'lilypondFixedOctaveEntryAtom'";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -408,7 +408,7 @@ void oahIntegerAtom::setIntegerVariable (int value)
       value <<
       "'";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1852,7 +1852,7 @@ void oahHistoryAtom::applyValueLessAtom (std::ostream& os)
     ss <<
       "==> option '" << fetchNames () << "' is a oahHistoryAtom";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }

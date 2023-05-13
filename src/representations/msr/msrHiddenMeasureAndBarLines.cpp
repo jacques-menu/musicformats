@@ -15,7 +15,7 @@
 
 #include "visitor.h"
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "mfAssert.h"
 
@@ -46,7 +46,7 @@ S_msrHiddenMeasureAndBarLine msrHiddenMeasureAndBarLine::create (
       "Creating hiddenMeasureAndBarLine" <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -118,7 +118,7 @@ void msrHiddenMeasureAndBarLine::acceptIn (basevisitor* v)
     ss <<
       "% ==> msrHiddenMeasureAndBarLine::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -136,7 +136,7 @@ void msrHiddenMeasureAndBarLine::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching msrHiddenMeasureAndBarLine::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -154,7 +154,7 @@ void msrHiddenMeasureAndBarLine::acceptOut (basevisitor* v)
     ss <<
       "% ==> msrHiddenMeasureAndBarLine::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -172,7 +172,7 @@ void msrHiddenMeasureAndBarLine::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching msrHiddenMeasureAndBarLine::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }

@@ -73,7 +73,7 @@ void bsrTranscriptionNotesElement::acceptIn (basevisitor* v)
       "% --> End visiting bsrTranscriptionNotesElement" <<
       "% ==> bsrTranscriptionNotesElement::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -91,7 +91,7 @@ void bsrTranscriptionNotesElement::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching bsrTranscriptionNotesElement::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -110,7 +110,7 @@ void bsrTranscriptionNotesElement::acceptOut (basevisitor* v)
       "% --> End visiting bsrTranscriptionNotesElement" <<
       "% ==> bsrTranscriptionNotesElement::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -128,7 +128,7 @@ void bsrTranscriptionNotesElement::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching bsrTranscriptionNotesElement::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -213,7 +213,7 @@ void bsrTranscriptionNotes::acceptIn (basevisitor* v)
       "% --> End visiting bsrTranscriptionNotesElement" <<
       "% ==> bsrTranscriptionNotes::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -231,7 +231,7 @@ void bsrTranscriptionNotes::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching bsrTranscriptionNotes::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -250,7 +250,7 @@ void bsrTranscriptionNotes::acceptOut (basevisitor* v)
       "% --> End visiting bsrTranscriptionNotesElement" <<
       "% ==> bsrTranscriptionNotes::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -268,7 +268,7 @@ void bsrTranscriptionNotes::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching bsrTranscriptionNotes::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }

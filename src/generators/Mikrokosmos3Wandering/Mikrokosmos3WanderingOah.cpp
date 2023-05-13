@@ -18,7 +18,7 @@
 
 #include "oahWae.h"
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "oahOah.h"
 #include "msrOah.h"
@@ -209,7 +209,7 @@ void Mikrokosmos3WanderingOahGroup::acceptIn (basevisitor* v)
     ss <<
       ".\\\" ==> Mikrokosmos3WanderingOahGroup::acceptIn ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -227,7 +227,7 @@ void Mikrokosmos3WanderingOahGroup::acceptIn (basevisitor* v)
           ss <<
             ".\\\" ==> Launching Mikrokosmos3WanderingOahGroup::visitStart ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -245,7 +245,7 @@ void Mikrokosmos3WanderingOahGroup::acceptOut (basevisitor* v)
     ss <<
       ".\\\" ==> Mikrokosmos3WanderingOahGroup::acceptOut ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -263,7 +263,7 @@ void Mikrokosmos3WanderingOahGroup::acceptOut (basevisitor* v)
           ss <<
             ".\\\" ==> Launching Mikrokosmos3WanderingOahGroup::visitEnd ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -281,7 +281,7 @@ void Mikrokosmos3WanderingOahGroup::browseData (basevisitor* v)
     ss <<
       ".\\\" ==> Mikrokosmos3WanderingOahGroup::browseData ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -354,7 +354,7 @@ S_Mikrokosmos3WanderingOahGroup createGlobalMikrokosmos3WanderingOahGroup ()
     ss <<
       "Creating global Mikrokosmos3Wandering OAH group";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }

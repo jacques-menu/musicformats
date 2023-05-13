@@ -22,7 +22,7 @@
 #include "bsr2bsrWae.h"
 #include "bsr2brailleWae.h"
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "waeOah.h"
 
@@ -75,7 +75,7 @@ EXP mfMusicformatsErrorKind msrScore2brailleWithHandler (
       handler->getHandlerHeader () <<
       "\"";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -195,7 +195,7 @@ EXP mfMusicformatsErrorKind msrScore2brailleWithHandler (
           "\"" <<
           std::endl;
 
-//     gWaeHandler->waeTraceWithoutLocationDetails ( JMI v0.9.67
+//     gWaeHandler->waeTraceWithoutInputLocation ( JMI v0.9.67
 //       __FILE__, __LINE__,
 //       ss.str ());
       }
@@ -208,7 +208,7 @@ EXP mfMusicformatsErrorKind msrScore2brailleWithHandler (
           "xmlFile2braille() output goes to standard output" <<
           std::endl;
 
-//     gWaeHandler->waeTraceWithoutLocationDetails ( JMI v0.9.67
+//     gWaeHandler->waeTraceWithoutInputLocation ( JMI v0.9.67
 //       __FILE__, __LINE__,
 //       ss.str ());
       }
@@ -242,7 +242,7 @@ EXP mfMusicformatsErrorKind msrScore2brailleWithHandler (
           "\"" <<
           std::endl;
 
-//     gWaeHandler->waeTraceWithoutLocationDetails ( JMI v0.9.67
+//     gWaeHandler->waeTraceWithoutInputLocation ( JMI v0.9.67
 //       __FILE__, __LINE__,
 //       ss.str ());
       }
@@ -256,7 +256,7 @@ EXP mfMusicformatsErrorKind msrScore2brailleWithHandler (
           gLanguage->openingBrailleMusicFileForWriting (outputFileName) <<
           std::endl;
 
-//     gWaeHandler->waeTraceWithoutLocationDetails ( JMI v0.9.67
+//     gWaeHandler->waeTraceWithoutInputLocation ( JMI v0.9.67
 //       __FILE__, __LINE__,
 //       ss.str ());
       }
@@ -310,7 +310,7 @@ EXP mfMusicformatsErrorKind msrScore2brailleWithHandler (
           gLanguage->closingBrailleMusicFile (outputFileName) <<
           std::endl;
 
-        gWaeHandler->waeTraceWithoutLocationDetails (
+        gWaeHandler->waeTraceWithoutInputLocation (
           __FILE__, __LINE__,
           ss.str ());
       }

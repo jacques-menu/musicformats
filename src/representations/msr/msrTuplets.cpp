@@ -13,7 +13,7 @@
 
 #include "msrWae.h"
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "mfAssert.h"
 #include "mfServices.h"
@@ -136,7 +136,7 @@ msrTuplet::msrTuplet (
       "Creating tuplet " <<
       asString ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -156,7 +156,7 @@ S_msrTuplet msrTuplet::createTupletNewbornClone ()
       "Creating a newborn clone of tuplet " <<
       asString ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -276,7 +276,7 @@ void msrTuplet::setTupletUpLinkToMeasure (
 
     --gIndenter;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -306,7 +306,7 @@ void msrTuplet::appendNoteToTuplet (
       " to tuplet " <<
       asString ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -372,7 +372,7 @@ void msrTuplet::appendChordToTuplet (const S_msrChord& chord)
       " to tuplet " <<
       asString ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -417,7 +417,7 @@ void msrTuplet::appendTupletToTuplet (const S_msrTuplet& tuplet)
       " to tuplet " <<
       asString ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -462,7 +462,7 @@ void msrTuplet::appendTupletToTupletClone (const S_msrTuplet& tuplet)
       " to tuplet clone " <<
       asString ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -534,7 +534,7 @@ S_msrNote msrTuplet::removeFirstNoteFromTuplet (
       "Removing first note from tuplet " <<
       asString ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -645,7 +645,7 @@ S_msrNote msrTuplet::removeLastNoteFromTuplet (
       "Removing last note from tuplet " <<
       asString ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -712,7 +712,7 @@ S_msrNote msrTuplet::removeLastNoteFromTuplet (
       " turns out to be " <<
       result->asShortString ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -750,7 +750,7 @@ void msrTuplet::setMeasurePosition (
       context <<
       "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -781,7 +781,7 @@ void msrTuplet::setTupletMembersMeasurePositions (
       " to " <<
       measurePosition.asString ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -895,7 +895,7 @@ void msrTuplet::unapplySoundingFactorToTupletMembers (
 
     --gIndenter;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -931,7 +931,7 @@ void msrTuplet::finalizeTuplet (
       asString () <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -954,7 +954,7 @@ void msrTuplet::acceptIn (basevisitor* v)
     ss <<
       "% ==> msrTuplet::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -972,7 +972,7 @@ void msrTuplet::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching msrTuplet::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -990,7 +990,7 @@ void msrTuplet::acceptOut (basevisitor* v)
       ss <<
       "% ==> msrTuplet::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1008,7 +1008,7 @@ void msrTuplet::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching msrTuplet::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }

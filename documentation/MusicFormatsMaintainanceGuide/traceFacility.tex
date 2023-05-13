@@ -23,7 +23,7 @@ One can build the library with or without trace, which applies to the whole code
 \section{Activating the trace}
 % -------------------------------------------------------------------------
 
-Trace is controlled by {\tt MF_TRACE_IS_ENABLED}, defined or nor in \oah{mfStaticSettings.h}:
+Trace is controlled by {\tt MF_TRACE_IS_ENABLED}, defined or nor in \oah{mfPreprocessorSettings.h}:
 
 \begin{lstlisting}[language=CPlusPlus]
 #ifndef ___enableTraceIfDesired___
@@ -39,7 +39,7 @@ Trace is controlled by {\tt MF_TRACE_IS_ENABLED}, defined or nor in \oah{mfStati
 
 This file should be included when the trace facility is used:
 \begin{lstlisting}[language=CPlusPlus]
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 \end{lstlisting}
 
 The files \oahBoth{TraceOah} contain the options to the trace facility itself.

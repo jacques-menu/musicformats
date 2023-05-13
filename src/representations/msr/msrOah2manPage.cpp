@@ -13,7 +13,7 @@
 #include <cmath>
 #include <string>
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "msrOah2manPage.h"
 
@@ -49,7 +49,7 @@ void msrOah2manPage::visitStart (S_msrRenamePartAtom& elt)
       ".\\\" --> Start visiting msrRenamePartAtom" <<
       " \"" << elt->fetchNames () << "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -84,7 +84,7 @@ void msrOah2manPage::visitEnd (S_msrRenamePartAtom& elt)
       ".\\\" --> End visiting msrRenamePartAtom" <<
       " \"" << elt->fetchNames () << "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -103,7 +103,7 @@ void msrOah2manPage::visitStart (S_msrIgnorePartAtom& elt)
       ".\\\" --> Start visiting msrIgnorePartAtom" <<
       " \"" << elt->fetchNames () << "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -138,7 +138,7 @@ void msrOah2manPage::visitEnd (S_msrIgnorePartAtom& elt)
       ".\\\" --> End visiting msrIgnorePartAtom" <<
       " \"" << elt->fetchNames () << "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -157,7 +157,7 @@ void msrOah2manPage::visitStart (S_msrKeepPartAtom& elt)
       ".\\\" --> Start visiting msrKeepPartAtom" <<
       " \"" << elt->fetchNames () << "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -192,7 +192,7 @@ void msrOah2manPage::visitEnd (S_msrKeepPartAtom& elt)
       ".\\\" --> End visiting msrKeepPartAtom" <<
       " \"" << elt->fetchNames () << "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -211,7 +211,7 @@ void msrOah2manPage::visitStart (S_msrPitchesLanguageAtom& elt)
       ".\\\" --> Start visiting msrPitchesLanguageAtom" <<
       " \"" << elt->fetchNames () << "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -246,7 +246,7 @@ void msrOah2manPage::visitEnd (S_msrPitchesLanguageAtom& elt)
       ".\\\" --> End visiting msrPitchesLanguageAtom" <<
       " \"" << elt->fetchNames () << "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }

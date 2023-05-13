@@ -64,7 +64,7 @@ void bsr2bsrFinalizer::visitStart (S_bsrScore& elt)
       "% --> Start visiting bsrScore" <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -88,7 +88,7 @@ void bsr2bsrFinalizer::visitEnd (S_bsrScore& elt)
       "% --> End visiting bsrScore" <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -107,7 +107,7 @@ void bsr2bsrFinalizer::visitStart (S_bsrSpaces& elt)
       "% --> Start visiting bsrSpaces" <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -129,7 +129,7 @@ void bsr2bsrFinalizer::visitEnd (S_bsrSpaces& elt)
       "% --> End visiting bsrSpaces" <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -148,7 +148,7 @@ void bsr2bsrFinalizer::visitStart (S_bsrBarLine& elt)
       "% --> Start visiting bsrBarLine" <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -170,7 +170,7 @@ void bsr2bsrFinalizer::visitStart (S_bsrTranscriptionNotes& elt)
       "% --> Start visiting bsrTranscriptionNotes" <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -188,7 +188,7 @@ void bsr2bsrFinalizer::visitEnd (S_bsrTranscriptionNotes& elt)
       "% --> End visiting bsrTranscriptionNotes" <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -207,7 +207,7 @@ void bsr2bsrFinalizer::visitStart (S_bsrTranscriptionNotesElement& elt)
       "% --> Start visiting bsrTranscriptionNotesElement" <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -230,7 +230,7 @@ void bsr2bsrFinalizer::visitEnd (S_bsrTranscriptionNotesElement& elt)
       "% --> End visiting bsrTranscriptionNotesElement" <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -251,7 +251,7 @@ void bsr2bsrFinalizer::visitStart (S_bsrPage& elt)
       '\'' <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -276,7 +276,7 @@ void bsr2bsrFinalizer::visitEnd (S_bsrPage& elt)
       '\'' <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -297,7 +297,7 @@ void bsr2bsrFinalizer::visitStart (S_bsrPageHeading& elt)
       '\'' <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -324,7 +324,7 @@ void bsr2bsrFinalizer::visitEnd (S_bsrPageHeading& elt)
       '\'' <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -347,7 +347,7 @@ void bsr2bsrFinalizer::visitStart (S_bsrMusicHeading& elt)
       '\'' <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -374,7 +374,7 @@ void bsr2bsrFinalizer::visitEnd (S_bsrMusicHeading& elt)
       '\'' <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -397,7 +397,7 @@ void bsr2bsrFinalizer::visitStart (S_bsrFootNotes& elt)
       '\'' <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -424,7 +424,7 @@ void bsr2bsrFinalizer::visitEnd (S_bsrFootNotes& elt)
       '\'' <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -447,7 +447,7 @@ void bsr2bsrFinalizer::visitStart (S_bsrLine& elt)
       '\'' <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -472,7 +472,7 @@ void bsr2bsrFinalizer::visitEnd (S_bsrLine& elt)
       '\'' <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -493,7 +493,7 @@ void bsr2bsrFinalizer::visitStart (S_bsrLineContents& elt)
       '\'' <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -520,7 +520,7 @@ void bsr2bsrFinalizer::visitEnd (S_bsrLineContents& elt)
       '\'' <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -541,7 +541,7 @@ void bsr2bsrFinalizer::visitStart (S_bsrMeasure& elt)
       '\'' <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -570,7 +570,7 @@ void bsr2bsrFinalizer::visitEnd (S_bsrMeasure& elt)
       '\'' <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -591,7 +591,7 @@ void bsr2bsrFinalizer::visitStart (S_bsrNumber& elt)
       '\'' <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -614,7 +614,7 @@ void bsr2bsrFinalizer::visitEnd (S_bsrNumber& elt)
       '\'' <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -635,7 +635,7 @@ void bsr2bsrFinalizer::visitStart (S_bsrWords& elt)
       '\'' <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -658,7 +658,7 @@ void bsr2bsrFinalizer::visitEnd (S_bsrWords& elt)
       '\'' <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -679,7 +679,7 @@ void bsr2bsrFinalizer::visitStart (S_bsrClef& elt)
       '\'' <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -702,7 +702,7 @@ void bsr2bsrFinalizer::visitEnd (S_bsrClef& elt)
       '\'' <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -723,7 +723,7 @@ void bsr2bsrFinalizer::visitStart (S_bsrKey& elt)
       '\'' <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -752,7 +752,7 @@ void bsr2bsrFinalizer::visitEnd (S_bsrKey& elt)
       "'"  <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -772,7 +772,7 @@ void bsr2bsrFinalizer::visitStart (S_bsrTimeSignature& elt)
       elt->asString () <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -800,7 +800,7 @@ void bsr2bsrFinalizer::visitEnd (S_bsrTimeSignature& elt)
       elt->asString () <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -820,7 +820,7 @@ void bsr2bsrFinalizer::visitStart (S_bsrTempo& elt)
       elt->asString () <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -850,7 +850,7 @@ void bsr2bsrFinalizer::visitEnd (S_bsrTempo& elt)
       elt->asString () <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -870,7 +870,7 @@ void bsr2bsrFinalizer::visitStart (S_bsrNote& elt)
       elt->asString () <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -892,7 +892,7 @@ void bsr2bsrFinalizer::visitEnd (S_bsrNote& elt)
       elt->asString () <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }

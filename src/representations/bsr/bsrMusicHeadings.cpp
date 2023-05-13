@@ -95,7 +95,7 @@ void bsrMusicHeading::acceptIn (basevisitor* v)
       "% --> End visiting bsrTranscriptionNotesElement" <<
       "% ==> bsrMusicHeading::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -113,7 +113,7 @@ void bsrMusicHeading::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching bsrMusicHeading::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -132,7 +132,7 @@ void bsrMusicHeading::acceptOut (basevisitor* v)
       "% --> End visiting bsrTranscriptionNotesElement" <<
       "% ==> bsrMusicHeading::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -150,7 +150,7 @@ void bsrMusicHeading::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching bsrMusicHeading::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -169,7 +169,7 @@ void bsrMusicHeading::browseData (basevisitor* v)
       "% --> End visiting bsrTranscriptionNotesElement" <<
       "% ==> bsrScore::browseData ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -201,7 +201,7 @@ void bsrMusicHeading::browseData (basevisitor* v)
       "% --> End visiting bsrTranscriptionNotesElement" <<
       "% <== bsrScore::browseData ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }

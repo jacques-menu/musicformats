@@ -18,7 +18,7 @@
 #include "xml.h"
 #include "xmlfile.h"
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "mfAssert.h"
 #include "mfLibraryComponent.h"
@@ -121,7 +121,7 @@ int msr2mxsrTranslator::wholeNotesAsDivisions (
       durationAsRational <<
       "--> line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -468,7 +468,7 @@ void msr2mxsrTranslator::createMxmlAttributesElementAndAppendItToMeasure ()
     ss <<
       "--> createMxmlAttributesElementAndAppendItToMeasure() 1";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -630,7 +630,7 @@ void msr2mxsrTranslator::appendNoteToMeasure (
       ", note: " << mxmlelementAsString (note) <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -666,7 +666,7 @@ void msr2mxsrTranslator::appendOtherMusicXMLElementToMeasure (
       ", elem: " << mxmlelementAsString (elem) <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -799,7 +799,7 @@ void msr2mxsrTranslator::visitStart (S_msrScore& elt)
       "--> Start visiting msrScore" <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -890,7 +890,7 @@ void msr2mxsrTranslator::visitEnd (S_msrScore& elt)
       "--> End visiting msrScore" <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1065,7 +1065,7 @@ void msr2mxsrTranslator::visitStart (S_msrIdentification& elt)
       "--> Start visiting msrIdentification" <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1417,7 +1417,7 @@ void msr2mxsrTranslator::visitEnd (S_msrIdentification& elt)
       "--> End visiting msrIdentification" <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1472,7 +1472,7 @@ void msr2mxsrTranslator::visitStart (S_msrScaling& elt)
       "--> Start visiting msrScaling" <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1526,7 +1526,7 @@ void msr2mxsrTranslator::visitEnd (S_msrScaling& elt)
       "--> End visiting msrScaling" <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1544,7 +1544,7 @@ void msr2mxsrTranslator::visitStart (S_msrPageLayout& elt)
       "--> Start visiting msrPageLayout" <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1607,7 +1607,7 @@ void msr2mxsrTranslator::visitEnd (S_msrPageLayout& elt)
       "--> End visiting msrPageLayout" <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1625,7 +1625,7 @@ void msr2mxsrTranslator::visitStart (S_msrSystemLayout& elt)
       "--> Start visiting msrSystemLayout" <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1702,7 +1702,7 @@ void msr2mxsrTranslator::visitEnd (S_msrSystemLayout& elt)
       "--> End visiting msrSystemLayout" <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1720,7 +1720,7 @@ void msr2mxsrTranslator::visitStart (S_msrStaffLayout& elt)
       "--> Start visiting msrStaffLayout" <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1777,7 +1777,7 @@ void msr2mxsrTranslator::visitEnd (S_msrStaffLayout& elt)
       "--> End visiting msrStaffLayout" <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1795,7 +1795,7 @@ void msr2mxsrTranslator::visitStart (S_msrMeasureLayout& elt)
       "--> Start visiting msrMeasureLayout" <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1843,7 +1843,7 @@ void msr2mxsrTranslator::visitEnd (S_msrMeasureLayout& elt)
       "--> End visiting msrMeasureLayout" <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2208,7 +2208,7 @@ void msr2mxsrTranslator::visitStart (S_msrAppearance& elt)
       "--> Start visiting msrAppearance" <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2277,7 +2277,7 @@ void msr2mxsrTranslator::visitEnd (S_msrAppearance& elt)
       "--> End visiting msrAppearance" <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2295,7 +2295,7 @@ void msr2mxsrTranslator::visitStart (S_msrCredit& elt)
       "--> Start visiting msrCredit" <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2322,7 +2322,7 @@ void msr2mxsrTranslator::visitEnd (S_msrCredit& elt)
       "--> End visiting msrCredit" <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2342,7 +2342,7 @@ void msr2mxsrTranslator::visitStart (S_msrCreditWords& elt)
       "--> Start visiting msrCreditWords" <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2514,7 +2514,7 @@ void msr2mxsrTranslator::visitEnd (S_msrCreditWords& elt)
       "--> End visiting msrCreditWords" <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2536,18 +2536,18 @@ void msr2mxsrTranslator::visitStart (S_msrPartGroup& elt)
       elt->getPartGroupCombinedName () <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
   switch (elt->getPartGroupImplicitKind ()) {
-    case msrPartGroupImplicitKind::kPartGroupImplicitYes:
+    case msrPartGroupImplicitKind::kPartGroupImplicitOuterYes:
       // this is an MSR concept, ignore this part group
       break;
 
-    case msrPartGroupImplicitKind::kPartGroupImplicitNo:
+    case msrPartGroupImplicitKind::kPartGroupImplicitOuterNo:
       {
         if (gGlobalMsr2mxsrOahGroup->getMusicXMLComments ()) {
           // create a start comment
@@ -2649,7 +2649,7 @@ void msr2mxsrTranslator::visitStart (S_msrPartGroup& elt)
         fScorePartListElement->push (scorePartGroupElement);
 
         // push the part group element onto the stack
-        fPartGroupElementsStack.push (scorePartGroupElement);
+        fPartGroupElementsStack.push_front (scorePartGroupElement);
       }
       break;
   } // switch
@@ -2682,11 +2682,11 @@ void msr2mxsrTranslator::visitEnd (S_msrPartGroup& elt)
 #endif // MF_TRACE_IS_ENABLED
 
   switch (elt->getPartGroupImplicitKind ()) {
-    case msrPartGroupImplicitKind::kPartGroupImplicitYes:
+    case msrPartGroupImplicitKind::kPartGroupImplicitOuterYes:
       // this is an MSR concept, ignore this part group
       break;
 
-    case msrPartGroupImplicitKind::kPartGroupImplicitNo:
+    case msrPartGroupImplicitKind::kPartGroupImplicitOuterNo:
       {
         if (gGlobalMsr2mxsrOahGroup->getMusicXMLComments ()) {
           // create an end comment
@@ -2706,7 +2706,7 @@ void msr2mxsrTranslator::visitEnd (S_msrPartGroup& elt)
         // fetch the top-most part group element on the stack
         Sxmlelement
           partGroupElementsStackTop =
-            fPartGroupElementsStack.top ();
+            fPartGroupElementsStack.front ();
 
 /* JMI ???
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
@@ -2743,7 +2743,7 @@ void msr2mxsrTranslator::visitEnd (S_msrPartGroup& elt)
         fScorePartListElement->push (scorePartGroupElement);
 
         // pop the part group element from the stack
-        fPartGroupElementsStack.pop ();
+        fPartGroupElementsStack.pop_front ();
       }
       break;
   } // switch
@@ -2799,7 +2799,7 @@ if (false) // JMI
       "<!--=== part \"" << partCombinedName << "\"" <<
       ", line " << inputLineNumber << " ===-->";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2919,7 +2919,7 @@ if (false) // JMI
       "--> divisionsMultiplyingFactor: " <<
       fDivisionsMultiplyingFactor;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2972,7 +2972,7 @@ void msr2mxsrTranslator::visitEnd (S_msrPart& elt)
       elt->getPartCombinedName () <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -3132,7 +3132,7 @@ void msr2mxsrTranslator::visitEnd (S_msrStaff& elt)
       elt->getStaffName () << "\"" <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -3201,7 +3201,7 @@ void msr2mxsrTranslator::visitStart (S_msrVoice& elt)
       "<!--=== voice \"" << elt->getVoiceName () << "\"" <<
       ", line " << elt->getInputLineNumber () << " ===-->";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -3223,7 +3223,7 @@ void msr2mxsrTranslator::visitEnd (S_msrVoice& elt)
       elt->getVoiceName () << "\"" <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -3391,7 +3391,7 @@ void msr2mxsrTranslator::visitStart (S_msrMeasure& elt)
       ", line " << inputLineNumber <<
       " ===-->";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -3493,7 +3493,7 @@ if (false) { // JMI
         elt->getMeasurePuristNumber () <<
         "', line " << inputLineNumber;
 
-      gWaeHandler->waeTraceWithLocationDetails (
+      gWaeHandler->waeTrace (
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -3535,7 +3535,7 @@ void msr2mxsrTranslator::visitEnd (S_msrMeasure& elt)
       measurePuristNumber <<
       "', line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -3567,7 +3567,7 @@ void msr2mxsrTranslator::visitStart (S_msrMusicXMLPrintLayout& elt)
       "--> Start visiting msrMusicXMLPrintLayout '" <<
       "', line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -3584,7 +3584,7 @@ void msr2mxsrTranslator::visitStart (S_msrMusicXMLPrintLayout& elt)
       "\"" <<
       ", line " << inputLineNumber << " ===-->";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -3641,7 +3641,7 @@ void msr2mxsrTranslator::visitEnd (S_msrMusicXMLPrintLayout& elt)
       "--> End visiting msrMusicXMLPrintLayout '" <<
       "', line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -3665,7 +3665,7 @@ void msr2mxsrTranslator::visitStart (S_msrClef& elt)
       elt->asString () <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -4050,7 +4050,7 @@ void msr2mxsrTranslator::visitEnd (S_msrClef& elt)
       elt->asString () <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -4083,7 +4083,7 @@ void msr2mxsrTranslator::visitStart (S_msrKey& elt)
     gLog <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -4278,7 +4278,7 @@ void msr2mxsrTranslator::visitEnd (S_msrKey& elt)
       elt->asString () <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -4308,7 +4308,7 @@ void msr2mxsrTranslator::visitStart (S_msrTimeSignature& elt)
     gLog <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -4447,7 +4447,7 @@ void msr2mxsrTranslator::visitEnd (S_msrTimeSignature& elt)
       elt->asString () <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -4469,7 +4469,7 @@ void msr2mxsrTranslator::visitStart (S_msrTempo& elt)
       elt->asString () <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -4828,7 +4828,7 @@ void msr2mxsrTranslator::visitEnd (S_msrTempo& elt)
       "--> End visiting msrTempo" <<
       elt->asString ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -4849,7 +4849,7 @@ void msr2mxsrTranslator::visitStart (S_msrChord& elt)
       "--> Start visiting msrChord" <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -4890,7 +4890,7 @@ void msr2mxsrTranslator::visitEnd (S_msrChord& elt)
       "--> End visiting msrChord" <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -4935,7 +4935,7 @@ void msr2mxsrTranslator::visitStart (S_msrTuplet& elt)
       "--> Start visiting msrTuplet" <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -4973,7 +4973,7 @@ void msr2mxsrTranslator::visitEnd (S_msrTuplet& elt)
       "--> End visiting msrTuplet" <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -5010,7 +5010,7 @@ void msr2mxsrTranslator:: appendNoteWedges (
       "--> appendNoteWedges, theMsrNote: " <<
       theMsrNote->asShortString ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -5071,7 +5071,7 @@ void msr2mxsrTranslator::appendNoteDynamics (
       "--> appendNoteDynamics, theMsrNote: " <<
       theMsrNote->asShortString ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -5250,7 +5250,7 @@ void msr2mxsrTranslator::appendABackupToMeasure (
 
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -5347,7 +5347,7 @@ void msr2mxsrTranslator:: appendAForwardToMeasure (
       ", forwardNotesDurationDivisions: " << forwardNotesDurationDivisions <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -5447,7 +5447,7 @@ void msr2mxsrTranslator:: appendABackupOrForwardToMeasureIfNeeded (
     ss <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -5499,7 +5499,7 @@ void msr2mxsrTranslator:: appendABackupOrForwardToMeasureIfNeeded (
       ", previousMSRNoteVoiceNumber: " << previousMSRNoteVoiceNumber <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -5603,7 +5603,7 @@ void msr2mxsrTranslator:: populateNoteDirections (
       "--> populateNoteDirections, theMsrNote: " <<
       theMsrNote->asShortString ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -5640,7 +5640,7 @@ void msr2mxsrTranslator:: appendNoteOrnaments (
       "--> appendNoteOrnaments, theMsrNote: " <<
       theMsrNote->asShortString ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -5758,7 +5758,7 @@ void msr2mxsrTranslator:: appendNoteTechnicals (
       "--> appendNoteTechnicals, theMsrNote: " <<
       theMsrNote->asShortString ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -5867,7 +5867,7 @@ void msr2mxsrTranslator:: appendNoteTechnicalWithIntegers (
       "--> appendNoteTechnicalWithIntegers, theMsrNote: " <<
       theMsrNote->asShortString ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -5950,7 +5950,7 @@ void msr2mxsrTranslator:: appendNoteTechnicalWithFloats (
       "--> appendNoteTechnicalWithFloats, theMsrNote: " <<
       theMsrNote->asShortString ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -6023,7 +6023,7 @@ void msr2mxsrTranslator:: appendNoteTechnicalWithStrings (
       "--> appendNoteTechnicalWithStrings, theMsrNote: " <<
       theMsrNote->asShortString ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -6105,7 +6105,7 @@ void msr2mxsrTranslator:: appendNoteArticulations (
       "--> appendNoteArticulations, theMsrNote: " <<
       theMsrNote->asShortString ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -6253,7 +6253,7 @@ void msr2mxsrTranslator:: appendNoteTieIfAny (
       "--> appendNoteTieIfAny, theMsrNote: " <<
       theMsrNote->asShortString ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -6307,7 +6307,7 @@ void msr2mxsrTranslator:: appendNoteSlursIfAny (
       "--> appendNoteSlursIfAny, theMsrNote: " <<
       theMsrNote->asShortString ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -6395,7 +6395,7 @@ void msr2mxsrTranslator:: appendNoteTupletIfRelevant (
       "--> appendNoteTupletIfRelevant, theMsrNote: " <<
       theMsrNote->asShortString ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -6491,7 +6491,7 @@ void msr2mxsrTranslator:: appendNoteSpannersBeforeNote (
       "--> appendNoteSpannersBeforeNote, theMsrNote: " <<
       theMsrNote->asShortString ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -6603,7 +6603,7 @@ void msr2mxsrTranslator:: appendNoteSpannersAfterNote (
       "--> appendNoteSpannersAfterNote, theMsrNote: " <<
       theMsrNote->asShortString ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -6712,7 +6712,7 @@ void msr2mxsrTranslator:: appendStemToNote (
       "--> appendStemToNote, theMsrNote: " <<
       theMsrNote->asShortString ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -6761,7 +6761,7 @@ void msr2mxsrTranslator::appendBeamsToNote (
       "--> appendBeamsToNote, theMsrNote: " <<
       theMsrNote->asShortString ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -6832,7 +6832,7 @@ void msr2mxsrTranslator:: appendStaffToNoteIfRelevant (
       theMsrNote->asShortString () <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -6895,7 +6895,7 @@ void msr2mxsrTranslator::appendVoiceToNoteIfRelevant (
       theMsrNote->asShortString () <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -6952,7 +6952,7 @@ void msr2mxsrTranslator:: appendNoteNotationsToNote (
       "--> appendNoteNotationsToNote, theMsrNote: " <<
       theMsrNote->asShortString ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -7005,7 +7005,7 @@ void msr2mxsrTranslator:: appendNoteLyricsToNote (
       "--> appendNoteLyricsToNote, theMsrNote: " <<
       theMsrNote->asShortString ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -7175,7 +7175,7 @@ void msr2mxsrTranslator::appendBasicsToNote (
       theMsrNote->asShortString () <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -7219,7 +7219,7 @@ void msr2mxsrTranslator::appendBasicsToNote (
       "-->  noteDiatonicPitchKind: " <<
       msrDiatonicPitchKindAsString (noteDiatonicPitchKind);
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -7361,7 +7361,7 @@ void msr2mxsrTranslator::appendNotesDurationToNoteIfRelevant (
       theMsrNote->asShortString () <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -7394,7 +7394,7 @@ void msr2mxsrTranslator::appendNotesDurationToNoteIfRelevant (
       ", fDivisionsMultiplyingFactor: " << fDivisionsMultiplyingFactor <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -7460,7 +7460,7 @@ void msr2mxsrTranslator::appendNotesDurationToNoteIfRelevant (
         soundingNotesDurationAsRational <<
         "--> line " << inputLineNumber;
 
-      gWaeHandler->waeTraceWithLocationDetails (
+      gWaeHandler->waeTrace (
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -7495,7 +7495,7 @@ void msr2mxsrTranslator::appendNotesDurationToNoteIfRelevant (
         "--> appendNotesDurationToNoteIfRelevant(2): " <<
         theMsrNote;
 
-      gWaeHandler->waeTraceWithLocationDetails (
+      gWaeHandler->waeTrace (
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -7518,7 +7518,7 @@ void msr2mxsrTranslator::appendTimeModificationToNoteIfRelevant (
       theMsrNote->asShortString () <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -7597,7 +7597,7 @@ void msr2mxsrTranslator::appendMsrNoteToMesureIfRelevant (
       "--> appendMsrNoteToMesureIfRelevant, theMsrNote: " <<
       theMsrNote->asShortString ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -7735,7 +7735,7 @@ void msr2mxsrTranslator::appendMsrNoteToMesureIfRelevant (
         "-->  noteDotsNumber: " << noteDotsNumber <<
         "--> line " << inputLineNumber;
 
-      gWaeHandler->waeTraceWithLocationDetails (
+      gWaeHandler->waeTrace (
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -7844,7 +7844,7 @@ void msr2mxsrTranslator::visitStart (S_msrGraceNotesGroup& elt)
       "--> Start visiting msrGraceNotesGroup" <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -7880,7 +7880,7 @@ void msr2mxsrTranslator::visitEnd (S_msrGraceNotesGroup& elt)
       "--> End visiting msrGraceNotesGroup" <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -7994,7 +7994,7 @@ void msr2mxsrTranslator::visitEnd (S_msrNote& elt)
       elt->asString () <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -8062,7 +8062,7 @@ void msr2mxsrTranslator::visitEnd (S_msrNote& elt)
         " as previous note" <<
         ", line " << inputLineNumber;
 
-      gWaeHandler->waeTraceWithLocationDetails (
+      gWaeHandler->waeTrace (
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -8099,7 +8099,7 @@ void msr2mxsrTranslator::visitStart (S_msrBarLine& elt)
       "--> Start visiting msrBarLine" <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -8192,7 +8192,7 @@ void msr2mxsrTranslator::visitEnd (S_msrBarLine& elt)
       "--> End visiting msrBarLine" <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -8212,7 +8212,7 @@ void msr2mxsrTranslator::visitStart (S_msrStaffLinesNumber& elt)
       "--> Start visiting msrStaffLinesNumber" <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -8235,7 +8235,7 @@ void msr2mxsrTranslator::visitStart (S_msrStaffTuning& elt)
       "--> Start visiting msrStaffTuning" <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -8258,7 +8258,7 @@ void msr2mxsrTranslator::visitStart (S_msrStaffDetails& elt)
       "--> Start visiting msrStaffDetails" <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -8277,7 +8277,7 @@ void msr2mxsrTranslator::visitEnd (S_msrStaffDetails& elt)
       "--> End visiting msrStaffDetails" <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -8303,7 +8303,7 @@ void msr2mxsrTranslator::visitStart (S_msrVoiceStaffChange& elt)
       elt->asString () << '\'' <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -8336,7 +8336,7 @@ void msr2mxsrTranslator::visitStart (S_msrHarmony& elt)
       ", fOnGoingHarmony: " << fOnGoingHarmony <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -8427,7 +8427,7 @@ void msr2mxsrTranslator::visitStart (S_msrHarmonyDegree& elt)
       ", fOnGoingHarmony: " << fOnGoingHarmony <<
       "', line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -8451,7 +8451,7 @@ void msr2mxsrTranslator::visitEnd (S_msrHarmony& elt)
       '\'' <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -8474,7 +8474,7 @@ void msr2mxsrTranslator::visitStart (S_msrFrame& elt)
       '\'' <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -8515,7 +8515,7 @@ void msr2mxsrTranslator::visitStart (S_msrFiguredBass& elt)
       ", fOnGoingFiguredBassVoice: " << fOnGoingFiguredBassVoice <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -8578,7 +8578,7 @@ void msr2mxsrTranslator::visitStart (S_msrBassFigure& elt)
       '\'' <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -8602,7 +8602,7 @@ void msr2mxsrTranslator::visitEnd (S_msrFiguredBass& elt)
       '\'' <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -8626,7 +8626,7 @@ void msr2mxsrTranslator::visitStart (S_msrStanza& elt)
       "\"" <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -8669,7 +8669,7 @@ void msr2mxsrTranslator::visitEnd (S_msrStanza& elt)
       "\"" <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -8695,7 +8695,7 @@ void msr2mxsrTranslator::visitStart (S_msrSyllable& elt)
       "--> Start visiting msrSyllable" <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -8743,7 +8743,7 @@ void msr2mxsrTranslator::visitStart (S_msrSyllable& elt)
             '\'' <<
       // JMI      fCurrentSyllableClone->asString ();
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -8777,7 +8777,7 @@ void msr2mxsrTranslator::visitStart (S_msrSyllable& elt)
             fCurrentNonGraceNoteClone->asShortString () <<
             "'";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -8831,7 +8831,7 @@ void msr2mxsrTranslator::visitEnd (S_msrSyllable& elt)
       "--> End visiting msrSyllable" <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -8849,7 +8849,7 @@ void msr2mxsrTranslator::visitStart (S_msrTransposition& elt)
       "--> Start visiting msrTransposition" <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -8870,7 +8870,7 @@ void msr2mxsrTranslator::visitEnd (S_msrTransposition& elt)
       "--> End visiting msrTransposition" <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -8888,7 +8888,7 @@ void msr2mxsrTranslator::visitStart (S_msrRehearsalMark& elt)
       "--> Start visiting msrRehearsalMark" <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -8908,7 +8908,7 @@ void msr2mxsrTranslator::visitEnd (S_msrRehearsalMark& elt)
       "--> End visiting msrRehearsalMark" <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -8926,7 +8926,7 @@ void msr2mxsrTranslator::visitStart (S_msrFermata& elt)
       "--> Start visiting msrFermata" <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -8964,7 +8964,7 @@ void msr2mxsrTranslator::visitStart (S_msrArpeggiato& elt)
       "--> Start visiting msrArpeggiato" <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -9002,7 +9002,7 @@ void msr2mxsrTranslator::visitStart (S_msrNonArpeggiato& elt)
       "--> Start visiting msrNonArpeggiato" <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -9044,7 +9044,7 @@ void msr2mxsrTranslator::visitStart (S_msrTechnical& elt)
       "--> Start visiting msrTechnical" <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -9123,7 +9123,7 @@ void msr2mxsrTranslator::visitEnd (S_msrTechnical& elt)
       "--> End visiting msrTechnical" <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -9141,7 +9141,7 @@ void msr2mxsrTranslator::visitStart (S_msrTechnicalWithInteger& elt)
       "--> Start visiting msrTechnicalWithInteger" <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -9180,7 +9180,7 @@ void msr2mxsrTranslator::visitEnd (S_msrTechnicalWithInteger& elt)
       "--> End visiting msrTechnicalWithInteger" <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -9198,7 +9198,7 @@ void msr2mxsrTranslator::visitStart (S_msrTechnicalWithFloat& elt)
       "--> Start visiting msrTechnicalWithFloat" <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -9237,7 +9237,7 @@ void msr2mxsrTranslator::visitEnd (S_msrTechnicalWithFloat& elt)
       "--> End visiting msrTechnicalWithFloat" <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -9255,7 +9255,7 @@ void msr2mxsrTranslator::visitStart (S_msrTechnicalWithString& elt)
       "--> Start visiting msrTechnicalWithString" <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -9305,7 +9305,7 @@ void msr2mxsrTranslator::visitEnd (S_msrTechnicalWithString& elt)
       "--> End visiting msrTechnicalWithString" <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -9323,7 +9323,7 @@ void msr2mxsrTranslator::visitStart (S_msrOrnament& elt)
       "--> Start visiting msrOrnament" <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -9362,7 +9362,7 @@ void msr2mxsrTranslator::visitEnd (S_msrOrnament& elt)
       "--> End visiting msrOrnament" <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -9380,7 +9380,7 @@ void msr2mxsrTranslator::visitStart (S_msrGlissando& elt)
       "--> Start visiting msrGlissando" <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -9425,7 +9425,7 @@ void msr2mxsrTranslator::visitEnd (S_msrGlissando& elt)
       "--> End visiting msrGlissando" <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -9443,7 +9443,7 @@ void msr2mxsrTranslator::visitStart (S_msrSlide& elt)
       "--> Start visiting msrSlide" <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -9482,7 +9482,7 @@ void msr2mxsrTranslator::visitEnd (S_msrSlide& elt)
       "--> End visiting msrSlide" <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -9500,7 +9500,7 @@ void msr2mxsrTranslator::visitStart (S_msrSingleTremolo& elt)
       "--> Start visiting msrSingleTremolo" <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -9539,7 +9539,7 @@ void msr2mxsrTranslator::visitEnd (S_msrSingleTremolo& elt)
       "--> End visiting msrSingleTremolo" <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -9557,7 +9557,7 @@ void msr2mxsrTranslator::visitStart (S_msrDoubleTremolo& elt)
       "--> Start visiting msrDoubleTremolo" <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -9586,7 +9586,7 @@ void msr2mxsrTranslator::visitEnd (S_msrDoubleTremolo& elt)
       "--> End visiting msrSingleTremolo" <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -9614,7 +9614,7 @@ void msr2mxsrTranslator::visitStart (S_msrDynamic& elt)
       "--> Start visiting msrDynamic" <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -9681,7 +9681,7 @@ void msr2mxsrTranslator::visitEnd (S_msrDynamic& elt)
       "--> End visiting msrDynamic" <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -9699,7 +9699,7 @@ void msr2mxsrTranslator::visitStart (S_msrOtherDynamic& elt)
       "--> Start visiting msrOtherDynamic" <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -9742,7 +9742,7 @@ void msr2mxsrTranslator::visitEnd (S_msrOtherDynamic& elt)
       "--> End visiting msrOtherDynamic" <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -9763,7 +9763,7 @@ void msr2mxsrTranslator::visitStart (S_msrWords& elt)
       "--> Start visiting msrWords" <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -9790,7 +9790,7 @@ void msr2mxsrTranslator::visitStart (S_msrWords& elt)
           '\'' <<
           std::endl;
 
-        gWaeHandler->waeTraceWithLocationDetails (
+        gWaeHandler->waeTrace (
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -9823,7 +9823,7 @@ void msr2mxsrTranslator::visitStart (S_msrWords& elt)
           '\'' <<
           std::endl;
 
-        gWaeHandler->waeTraceWithLocationDetails (
+        gWaeHandler->waeTrace (
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -9876,7 +9876,7 @@ void msr2mxsrTranslator::visitStart (S_msrWords& elt)
             dalSegno->asShortString () <<
             "'";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -9933,7 +9933,7 @@ void msr2mxsrTranslator::visitEnd (S_msrWords& elt)
       "--> End visiting msrWords" <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -9951,7 +9951,7 @@ void msr2mxsrTranslator::visitStart (S_msrSlur& elt)
       "--> Start visiting msrSlur" <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -10012,7 +10012,7 @@ void msr2mxsrTranslator::visitEnd (S_msrSlur& elt)
       "--> End visiting msrSlur" <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -10030,7 +10030,7 @@ void msr2mxsrTranslator::visitStart (S_msrLigature& elt)
       "--> Start visiting msrLigature" <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -10069,7 +10069,7 @@ void msr2mxsrTranslator::visitEnd (S_msrLigature& elt)
       "--> End visiting msrLigature" <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -10087,7 +10087,7 @@ void msr2mxsrTranslator::visitStart (S_msrSlash& elt)
       "--> Start visiting msrSlash" <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -10127,7 +10127,7 @@ void msr2mxsrTranslator::visitStart (S_msrCrescDecresc& elt)
       "--> Start visiting msrCrescDecresc" <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -10166,7 +10166,7 @@ void msr2mxsrTranslator::visitEnd (S_msrCrescDecresc& elt)
       "--> End visiting msrCrescDecresc" <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -10184,7 +10184,7 @@ void msr2mxsrTranslator::visitStart (S_msrWedge& elt)
       "--> Start visiting msrWedge" <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -10223,7 +10223,7 @@ void msr2mxsrTranslator::visitEnd (S_msrWedge& elt)
       "--> End visiting msrWedge" <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -10241,7 +10241,7 @@ void msr2mxsrTranslator::visitStart (S_msrWedge& elt)
       "--> Start visiting msrWedge" <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -10280,7 +10280,7 @@ void msr2mxsrTranslator::visitEnd (S_msrWedge& elt)
       "--> End visiting msrWedge" <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -10301,7 +10301,7 @@ void msr2mxsrTranslator::visitStart (S_msrOctaveShift& elt)
       "--> Start visiting msrOctaveShift" <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -10340,7 +10340,7 @@ void msr2mxsrTranslator::visitEnd (S_msrOctaveShift& elt)
       "--> End visiting msrOctaveShift" <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -10358,7 +10358,7 @@ void msr2mxsrTranslator::visitStart (S_msrAccordionRegistration& elt)
       "--> Start visiting msrAccordionRegistration" <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -10384,7 +10384,7 @@ void msr2mxsrTranslator::visitStart (S_msrHarpPedalsTuning& elt)
       "--> Start visiting msrHarpPedalsTuning" <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -10406,7 +10406,7 @@ void msr2mxsrTranslator::visitStart (S_msrStem& elt)
       "--> Start visiting msrStem" <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -10445,7 +10445,7 @@ void msr2mxsrTranslator::visitEnd (S_msrStem& elt)
       "--> End visiting msrStem" <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -10467,7 +10467,7 @@ void msr2mxsrTranslator::visitStart (S_msrBeam& elt)
 // JMI      ", fOnGoingNonGraceNote: " << fOnGoingNonGraceNote <<
 // JMI      ", fOnGoingChord: " << fOnGoingChord;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -10501,7 +10501,7 @@ void msr2mxsrTranslator::visitEnd (S_msrBeam& elt)
       "--> End visiting msrBeam" <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -10519,7 +10519,7 @@ void msr2mxsrTranslator::visitStart (S_msrTie& elt)
       "--> Start visiting msrTie" <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -10558,7 +10558,7 @@ void msr2mxsrTranslator::visitEnd (S_msrTie& elt)
       "--> End visiting msrTie" <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -10576,7 +10576,7 @@ void msr2mxsrTranslator::visitStart (S_msrSegno& elt)
       "--> Start visiting msrSegno" <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -10620,7 +10620,7 @@ void msr2mxsrTranslator::visitStart (S_msrDalSegno& elt)
       "--> Start visiting msrDalSegno" <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -10661,7 +10661,7 @@ void msr2mxsrTranslator::visitStart (S_msrCoda& elt)
       "--> Start visiting msrCoda" <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -10703,7 +10703,7 @@ void msr2mxsrTranslator::visitStart (S_msrEyeGlasses& elt)
       "--> Start visiting eyeGlasses" <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -10723,7 +10723,7 @@ void msr2mxsrTranslator::visitStart (S_msrScordatura& elt)
       "--> Start visiting scordatura" <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -10743,7 +10743,7 @@ void msr2mxsrTranslator::visitStart (S_msrPedal& elt)
       "--> Start visiting pedal" <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -10763,7 +10763,7 @@ void msr2mxsrTranslator::visitStart (S_msrDamp& elt)
       "--> Start visiting damp" <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -10787,7 +10787,7 @@ void msr2mxsrTranslator::visitStart (S_msrDampAll& elt)
       "--> Start visiting dampAll" <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -10814,7 +10814,7 @@ void msr2mxsrTranslator::visitStart (S_msrBarCheck& elt)
       elt->getNextBarPuristNumber () <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -10834,7 +10834,7 @@ void msr2mxsrTranslator::visitEnd (S_msrBarCheck& elt)
       "--> End visiting msrBarCheck" <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -10852,7 +10852,7 @@ void msr2mxsrTranslator::visitStart (S_msrBarNumberCheck& elt)
       "--> Start visiting msrBarNumberCheck" <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -10872,7 +10872,7 @@ void msr2mxsrTranslator::visitEnd (S_msrBarNumberCheck& elt)
       "--> End visiting msrBarNumberCheck" <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -10890,7 +10890,7 @@ void msr2mxsrTranslator::visitStart (S_msrLineBreak& elt)
       "--> Start visiting msrLineBreak" <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -10910,7 +10910,7 @@ void msr2mxsrTranslator::visitEnd (S_msrLineBreak& elt)
       "--> End visiting msrLineBreak" <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -10928,7 +10928,7 @@ void msr2mxsrTranslator::visitStart (S_msrPageBreak& elt)
       "--> Start visiting msrPageBreak" <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -10948,7 +10948,7 @@ void msr2mxsrTranslator::visitEnd (S_msrPageBreak& elt)
       "--> End visiting msrPageBreak" <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -10969,7 +10969,7 @@ void msr2mxsrTranslator::visitStart (S_msrRepeat& elt)
       "--> Start visiting msrRepeat" <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -10984,7 +10984,7 @@ void msr2mxsrTranslator::visitStart (S_msrRepeat& elt)
       fCurrentVoiceClone->getVoiceName () <<
       "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -11009,7 +11009,7 @@ void msr2mxsrTranslator::visitEnd (S_msrRepeat& elt)
       "--> End visiting msrRepeat" <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -11026,7 +11026,7 @@ void msr2mxsrTranslator::visitEnd (S_msrRepeat& elt)
 //      fCurrentPartClone->getPartCombinedName () <<
       "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -11051,7 +11051,7 @@ void msr2mxsrTranslator::visitStart (S_msrRepeatCommonPart& elt)
       "--> Start visiting msrRepeatCommonPart" <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -11075,7 +11075,7 @@ void msr2mxsrTranslator::visitEnd (S_msrRepeatCommonPart& elt)
       "--> End visiting msrRepeatCommonPart" <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -11100,7 +11100,7 @@ void msr2mxsrTranslator::visitStart (S_msrRepeatEnding& elt)
       "--> Start visiting msrRepeatEnding" <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -11116,7 +11116,7 @@ void msr2mxsrTranslator::visitStart (S_msrRepeatEnding& elt)
       fCurrentVoiceClone->getVoiceName () <<
       "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -11142,7 +11142,7 @@ void msr2mxsrTranslator::visitEnd (S_msrRepeatEnding& elt)
       "--> End visiting msrRepeatEnding" <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -11158,7 +11158,7 @@ void msr2mxsrTranslator::visitEnd (S_msrRepeatEnding& elt)
       fCurrentVoiceClone->getVoiceName () <<
       "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -11185,7 +11185,7 @@ void msr2mxsrTranslator::visitStart (S_msrMultipleFullBarRests& elt)
       "--> Start visiting msrMultipleFullBarRests" <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -11202,7 +11202,7 @@ void msr2mxsrTranslator::visitStart (S_msrMultipleFullBarRests& elt)
       fCurrentVoiceClone->getVoiceName () <<
       "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -11227,7 +11227,7 @@ void msr2mxsrTranslator::visitEnd (S_msrMultipleFullBarRests& elt)
       "--> End visiting msrMultipleFullBarRests" <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -11244,7 +11244,7 @@ void msr2mxsrTranslator::visitEnd (S_msrMultipleFullBarRests& elt)
       fCurrentVoiceClone->getVoiceName () <<
       "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -11269,7 +11269,7 @@ void msr2mxsrTranslator::visitStart (S_msrMeasureRepeat& elt)
       "--> Start visiting msrMeasureRepeat" <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -11286,7 +11286,7 @@ void msr2mxsrTranslator::visitStart (S_msrMeasureRepeat& elt)
       fCurrentVoiceClone->getVoiceName () <<
       "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -11311,7 +11311,7 @@ void msr2mxsrTranslator::visitEnd (S_msrMeasureRepeat& elt)
       "--> End visiting msrMeasureRepeat" <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -11330,7 +11330,7 @@ void msr2mxsrTranslator::visitEnd (S_msrMeasureRepeat& elt)
       fCurrentVoiceClone->getVoiceName () <<
       "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -11346,7 +11346,7 @@ void msr2mxsrTranslator::visitEnd (S_msrMeasureRepeat& elt)
       fCurrentVoiceClone->getVoiceName () <<
       "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -11371,7 +11371,7 @@ void msr2mxsrTranslator::visitStart (S_msrMeasureRepeatPattern& elt)
       "--> Start visiting msrMeasureRepeatPattern" <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -11406,7 +11406,7 @@ void msr2mxsrTranslator::visitEnd (S_msrMeasureRepeatPattern& elt)
       "--> End visiting msrMeasureRepeatPattern" <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -11442,7 +11442,7 @@ void msr2mxsrTranslator::visitStart (S_msrMeasureRepeatReplicas& elt)
       "--> Start visiting msrMeasureRepeatReplicas" <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -11477,7 +11477,7 @@ void msr2mxsrTranslator::visitEnd (S_msrMeasureRepeatReplicas& elt)
       "--> End visiting S_msrMeasureRepeatReplicas" <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -11511,7 +11511,7 @@ void msr2mxsrTranslator::visitStart (S_msrMidiTempo& elt)
       "--> Start visiting msrMidiTempo" <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -11528,7 +11528,7 @@ void msr2mxsrTranslator::visitEnd (S_msrMidiTempo& elt)
       "--> End visiting msrMidiTempo" <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }

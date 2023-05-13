@@ -30,7 +30,7 @@
 #include "msr2mxsrWae.h"
 #include "mxsr2musicxmlWae.h"
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "mfStringsHandling.h"
 
@@ -94,7 +94,7 @@ static mfMusicformatsErrorKind xmlFile2musicxmlWithHandler (
       "<!-- ----------------------------------------------------------- -->" <<
       std::endl << std::endl;
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -146,7 +146,7 @@ static mfMusicformatsErrorKind xmlFile2musicxmlWithHandler (
 
   if (gGlobalXml2xmlInsiderOahGroup->getQuitAfterPass2a ()) {
 #ifdef MF_TRACE_IS_ENABLED
-    gWaeHandler->waeTraceToStream (
+    gWaeHandler->waeTraceToStreamWithoutInputLocation (
       err,
       __FILE__, __LINE__,
       gLanguage->quittingAfterPass (mfPassIDKind::kMfPassID_2a));
@@ -179,7 +179,7 @@ static mfMusicformatsErrorKind xmlFile2musicxmlWithHandler (
 
   if (gGlobalXml2xmlInsiderOahGroup->getQuitAfterPass2b ()) {
 #ifdef MF_TRACE_IS_ENABLED
-    gWaeHandler->waeTraceToStream (
+    gWaeHandler->waeTraceToStreamWithoutInputLocation (
       err,
       __FILE__, __LINE__,
       gLanguage->quittingAfterPass (mfPassIDKind::kMfPassID_2b));
@@ -216,7 +216,7 @@ static mfMusicformatsErrorKind xmlFile2musicxmlWithHandler (
 
   if (gGlobalXml2xmlInsiderOahGroup->getQuitAfterPass3 ()) {
 #ifdef MF_TRACE_IS_ENABLED
-    gWaeHandler->waeTraceToStream (
+    gWaeHandler->waeTraceToStreamWithoutInputLocation (
       err,
       __FILE__, __LINE__,
       gLanguage->quittingAfterPass (mfPassIDKind::kMfPassID_3));
@@ -352,7 +352,7 @@ static mfMusicformatsErrorKind xmlFile2musicxmlWithOptionsAndArguments (
       serviceName << " main()" <<
       ", insiderOption: " << insiderOption;
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }

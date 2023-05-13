@@ -13,7 +13,7 @@
 #include <iostream>
 #include <sstream>
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "mfServices.h"
 #include "mfStringsHandling.h"
@@ -147,7 +147,7 @@ std::string wholeNotesAsLilypondString (
       ", dotsNumber: " << dotsNumber <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -167,7 +167,7 @@ std::string wholeNotesAsLilypondString (
       "--> denominator: " << denominator <<
       std::endl << std::endl;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -233,10 +233,10 @@ std::string wholeNotesAsLilypondString (
       integralNumberOfWholeNotes.asString () <<
       std::endl << std::endl;
 
-//     gWaeHandler->waeTraceWithLocationDetails (
+//     gWaeHandler->waeTrace (
 //       __FILE__, __LINE__,
 //       ss.str (),
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -263,7 +263,7 @@ std::string wholeNotesAsLilypondString (
       "--> numeratorDots " << ": " << numeratorDots <<
       std::endl << std::endl;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -392,7 +392,7 @@ std::string wholeNotesAsLilypondString (
       denominatorNotesDurationLog <<
       std::endl << std::endl;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -411,7 +411,7 @@ std::string wholeNotesAsLilypondString (
         "--> integralNumberOfWholeNotes,"
         " bringing the faction to be less that 2";
 
-      gWaeHandler->waeTraceWithLocationDetails (
+      gWaeHandler->waeTrace (
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -453,7 +453,7 @@ std::string wholeNotesAsLilypondString (
       numeratorDots <<
       std::endl << std::endl;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -489,7 +489,7 @@ std::string wholeNotesAsLilypondString (
       ss <<
         "--> setting the multiplying factor";
 
-      gWaeHandler->waeTraceWithLocationDetails (
+      gWaeHandler->waeTrace (
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -557,7 +557,7 @@ std::string wholeNotesAsLilypondString (
       multiplyingFactor <<
       std::endl << std::endl;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -616,7 +616,7 @@ std::string wholeNotesAsLilypondString (
      ", result: \"" << result << "\"" <<
       ", numeratorDots" << ": " << numeratorDots;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }

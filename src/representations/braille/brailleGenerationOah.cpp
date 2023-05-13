@@ -17,7 +17,7 @@
 
 #include "oahWae.h"
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "mfOutputFileOah.h"
 #include "mfStringsHandling.h"
@@ -104,7 +104,7 @@ void brailleOutputKindAtom::setImplicitVariable (std::ostream& os)
       fetchNames () <<
       "; which is of type 'brailleOutputKindAtom'";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -136,7 +136,7 @@ void brailleOutputKindAtom::acceptIn (basevisitor* v)
     ss <<
       ".\\\" ==> brailleOutputKindAtom::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -154,7 +154,7 @@ void brailleOutputKindAtom::acceptIn (basevisitor* v)
           ss <<
             ".\\\" ==> Launching brailleOutputKindAtom::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -172,7 +172,7 @@ void brailleOutputKindAtom::acceptOut (basevisitor* v)
     ss <<
       ".\\\" ==> brailleOutputKindAtom::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -190,7 +190,7 @@ void brailleOutputKindAtom::acceptOut (basevisitor* v)
           ss <<
             ".\\\" ==> Launching brailleOutputKindAtom::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -208,7 +208,7 @@ void brailleOutputKindAtom::browseData (basevisitor* v)
     ss <<
       ".\\\" ==> brailleOutputKindAtom::browseData ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -360,7 +360,7 @@ void brailleUTFKindAtom::applyAtomWithValue (
       "==> handling atom '" << fetchNames () << "; which is of type 'brailleUTFKindAtom'" <<
       " with value \"" << theString << "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -402,7 +402,7 @@ void brailleUTFKindAtom::acceptIn (basevisitor* v)
     ss <<
       ".\\\" ==> brailleUTFKindAtom::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -420,7 +420,7 @@ void brailleUTFKindAtom::acceptIn (basevisitor* v)
           ss <<
             ".\\\" ==> Launching brailleUTFKindAtom::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -438,7 +438,7 @@ void brailleUTFKindAtom::acceptOut (basevisitor* v)
     ss <<
       ".\\\" ==> brailleUTFKindAtom::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -456,7 +456,7 @@ void brailleUTFKindAtom::acceptOut (basevisitor* v)
           ss <<
             ".\\\" ==> Launching brailleUTFKindAtom::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -474,7 +474,7 @@ void brailleUTFKindAtom::browseData (basevisitor* v)
     ss <<
       ".\\\" ==> brailleUTFKindAtom::browseData ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -620,7 +620,7 @@ void brailleByteOrderingKindAtom::applyAtomWithValue (
       "==> handling atom '" << fetchNames () << "; which is of type 'brailleByteOrderingKindAtom'" <<
       " with value \"" << theString << "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -662,7 +662,7 @@ void brailleByteOrderingKindAtom::acceptIn (basevisitor* v)
     ss <<
       ".\\\" ==> brailleByteOrderingKindAtom::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -680,7 +680,7 @@ void brailleByteOrderingKindAtom::acceptIn (basevisitor* v)
           ss <<
             ".\\\" ==> Launching brailleByteOrderingKindAtom::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -698,7 +698,7 @@ void brailleByteOrderingKindAtom::acceptOut (basevisitor* v)
     ss <<
       ".\\\" ==> brailleByteOrderingKindAtom::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -716,7 +716,7 @@ void brailleByteOrderingKindAtom::acceptOut (basevisitor* v)
           ss <<
             ".\\\" ==> Launching brailleByteOrderingKindAtom::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -734,7 +734,7 @@ void brailleByteOrderingKindAtom::browseData (basevisitor* v)
     ss <<
       ".\\\" ==> brailleByteOrderingKindAtom::browseData ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1156,7 +1156,7 @@ void brailleGenerationOahGroup::acceptIn (basevisitor* v)
     ss <<
       ".\\\" ==> brailleGenerationOahGroup::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1174,7 +1174,7 @@ void brailleGenerationOahGroup::acceptIn (basevisitor* v)
           ss <<
             ".\\\" ==> Launching brailleGenerationOahGroup::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -1192,7 +1192,7 @@ void brailleGenerationOahGroup::acceptOut (basevisitor* v)
     ss <<
       ".\\\" ==> brailleGenerationOahGroup::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1210,7 +1210,7 @@ void brailleGenerationOahGroup::acceptOut (basevisitor* v)
           ss <<
             ".\\\" ==> Launching brailleGenerationOahGroup::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -1228,7 +1228,7 @@ void brailleGenerationOahGroup::browseData (basevisitor* v)
     ss <<
       ".\\\" ==> brailleGenerationOahGroup::browseData ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1311,7 +1311,7 @@ S_brailleGenerationOahGroup createGlobalBrailleGenerationOahGroup ()
     ss <<
       "Creating global bsr2braille OAH group";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }

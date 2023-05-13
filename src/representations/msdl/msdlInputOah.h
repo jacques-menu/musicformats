@@ -17,7 +17,7 @@
 #include "msdlEnumTypes.h"
 #include "msdlKeywords.h"
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "oahAtomsCollection.h"
 

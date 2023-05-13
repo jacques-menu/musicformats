@@ -21,7 +21,7 @@
 
 #include "musicxml2mxsrWae.h"
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "mfServices.h"
 
@@ -505,7 +505,7 @@ void checkSXMLFile (
       encoding <<
       " encoding";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -546,7 +546,7 @@ SXMLFile createSXMLFileFromFile (
       std::endl <<
       separator;
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -562,7 +562,7 @@ SXMLFile createSXMLFileFromFile (
           "Reading MusicXML data from file \"" << outputFileName << "\"" <<
           std::endl;
 
-        gWaeHandler->waeTraceWithoutLocationDetails (
+        gWaeHandler->waeTraceWithoutInputLocation (
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -625,7 +625,7 @@ SXMLFile createSXMLFileFromFd (
       std::endl <<
       separator;
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -641,7 +641,7 @@ SXMLFile createSXMLFileFromFd (
           "Reading MusicXML data from file descriptor \"" << fd << "\"" <<
           std::endl;
 
-        gWaeHandler->waeTraceWithoutLocationDetails (
+        gWaeHandler->waeTraceWithoutInputLocation (
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -697,7 +697,7 @@ SXMLFile createSXMLFileFromString (
         std::endl <<
         "Reading MusicXML data from a string " << buffer.size () << " characters long";
 
-      gWaeHandler->waeTraceWithoutLocationDetails (
+      gWaeHandler->waeTraceWithoutInputLocation (
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -762,7 +762,7 @@ EXP Sxmlelement musicxmlFile2mxsr (
       std::endl <<
       separator;
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -871,7 +871,7 @@ EXP Sxmlelement musicxmlFd2mxsr (
       std::endl <<
       separator;
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1001,7 +1001,7 @@ EXP Sxmlelement musicxmlString2mxsr ( // JMI UNUSED SAX ???
       std::endl <<
       separator;
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1058,7 +1058,7 @@ Sxmlelement convertMusicXMLToMxsr ( // JMI UNUSED SAX ???
       std::endl <<
       separator;
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }

@@ -12,7 +12,7 @@
 #ifndef ___oah2manPage___
 #define ___oah2manPage___
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "oahVisitor.h"
 

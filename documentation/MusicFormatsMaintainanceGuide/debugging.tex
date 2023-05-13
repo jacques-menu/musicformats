@@ -9,7 +9,7 @@ Debugging \mf\ can be quite time-consuming. The trace options available have bee
 
 \Function{catchSignals} at the beginning of the \functionName {main} function can be commented out in order to run a service under a debugger.
 
-File \mflibrary{mfStaticSettings.h} contains:
+File \mflibrary{mfPreprocessorSettings.h} contains:
 \begin{lstlisting}[language=CPlusPlus]
 /*
   MusicFormats Library
@@ -22,8 +22,8 @@ File \mflibrary{mfStaticSettings.h} contains:
   https://github.com/jacques-menu/musicformats
 */
 
-#ifndef ___mfStaticSettings___
-#define ___mfStaticSettings___
+#ifndef ___mfPreprocessorSettings___
+#define ___mfPreprocessorSettings___
 
 /*
   This file groups several build-time setting that influence
@@ -59,7 +59,7 @@ File \mflibrary{mfStaticSettings.h} contains:
 #endif // MF_TRACE_IS_ENABLED
 
 
-#endif // ___mfStaticSettings___
+#endif // ___mfPreprocessorSettings___
 \end{lstlisting}
 
 
@@ -171,7 +171,7 @@ Process 28676 launched: '/Users/jacquesmenu/musicformats-git-dev/build/bin/xml2l
 
 Process 28676 stopped
 * thread #1, queue = 'com.apple.main-thread', stop reason = EXC_BAD_ACCESS (code=1, address=0x1)
-    frame #0: 0x00000001007b879a xml2ly`MusicFormats::msrPartGroup::print(this=0x0000600003e08100, os=0x000000010ca04650) const at msrPartGroups.cpp:1185:13
+    frame #0: 0x00000001007b879a xml2ly`MusicFormats::msrPartGroup::print (this=0x0000600003e08100, os=0x000000010ca04650) const at msrPartGroups.cpp:1185:13
    1182	      i      = iBegin;
    1183
    1184	    for ( ; ; ) {

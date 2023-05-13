@@ -59,7 +59,7 @@ S_mfcConverterComponent createMsdl2lilypondConverterComponent ()
       ss <<
         "Creating the msdl2lilypond component";
 
-      gWaeHandler->waeTraceWithoutLocationDetails (
+      gWaeHandler->waeTraceWithoutInputLocation (
         __FILE__, __LINE__,
         ss.str ());
     }

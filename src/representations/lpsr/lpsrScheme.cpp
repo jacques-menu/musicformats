@@ -124,7 +124,7 @@ void lpsrSchemeVariable::acceptIn (basevisitor* v)
     ss <<
       "% ==> lpsrSchemeVariable::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -142,7 +142,7 @@ void lpsrSchemeVariable::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching lpsrSchemeVariable::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -160,7 +160,7 @@ void lpsrSchemeVariable::acceptOut (basevisitor* v)
     ss <<
       "% ==> lpsrSchemeVariable::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -178,7 +178,7 @@ void lpsrSchemeVariable::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching lpsrSchemeVariable::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -287,7 +287,7 @@ void lpsrSchemeFunction::acceptIn (basevisitor* v)
     ss <<
       "% ==> lpsrSchemeFunction::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -305,7 +305,7 @@ void lpsrSchemeFunction::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching lpsrSchemeFunction::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -323,7 +323,7 @@ void lpsrSchemeFunction::acceptOut (basevisitor* v)
     ss <<
       "% ==> lpsrSchemeFunction::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -341,7 +341,7 @@ void lpsrSchemeFunction::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching lpsrSchemeFunction::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }

@@ -13,7 +13,7 @@
 
 #include "visitor.h"
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "mfAssert.h"
 #include "mfServices.h"
@@ -117,7 +117,7 @@ void msrMeasure::initializeMeasure ()
       "\"" <<
       ", line " << fInputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -148,7 +148,7 @@ void msrMeasure::initializeMeasure ()
         getStaffCurrentTimeSignature ();
 
   if (staffCurrentTimeSignature) {
-    setFullMeasureCurrentWholeNotesDurationFromTimeSignature (
+    setFullMeasureWholeNotesDurationFromTimeSignature (
       staffCurrentTimeSignature);
   }
 
@@ -169,7 +169,7 @@ void msrMeasure::initializeMeasure ()
 
   // measure whole notes duration
   // initialize measure whole notes
-  setMeasureCurrentWholeNotesDuration (
+  setMeasureCurrentAccumulatedWholeNotesDuration (
     fInputLineNumber,
     msrWholeNotes (0, 1)); // ready to receive the first note
 
@@ -287,7 +287,7 @@ S_msrMeasure msrMeasure::createMeasureNewbornClone (
       containingSegmentUpLinkToVoice->getVoiceName () <<
       "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -325,8 +325,8 @@ S_msrMeasure msrMeasure::createMeasureNewbornClone (
     fMeasureOrdinalNumberInVoice;
 
   // lengthes
-  newbornClone->fFullMeasureCurrentWholeNotesDuration =
-    fFullMeasureCurrentWholeNotesDuration;
+  newbornClone->fFullMeasureWholeNotesDuration =
+    fFullMeasureWholeNotesDuration;
 
   // measure purist number
   newbornClone->fMeasurePuristNumber = // JMI don't compute that again for clones ???
@@ -377,7 +377,7 @@ S_msrMeasure msrMeasure::createMeasureDeepClone (
       containingSegmentUpLinkToVoice->getVoiceName () <<
       "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -412,11 +412,11 @@ S_msrMeasure msrMeasure::createMeasureDeepClone (
     fMeasureDebugNumber;
 
   // measure lengthes, in whole notes
-  deepClone->fFullMeasureCurrentWholeNotesDuration =
-    fFullMeasureCurrentWholeNotesDuration;
+  deepClone->fFullMeasureWholeNotesDuration =
+    fFullMeasureWholeNotesDuration;
 
-  deepClone->fMeasureCurrentWholeNotesDuration = // JMI ???
-    fMeasureCurrentWholeNotesDuration;
+  deepClone->fMeasureCurrentAccumulatedWholeNotesDuration = // JMI ???
+    fMeasureCurrentAccumulatedWholeNotesDuration;
 
   // measure print layout, MusicXML specific
   deepClone->fMeasureMusicXMLPrintLayout =
@@ -469,7 +469,7 @@ S_msrMeasure msrMeasure::createMeasureDeepClone (
               getVoiceName () <<
         "\"";
 
-      gWaeHandler->waeTraceWithLocationDetails (
+      gWaeHandler->waeTrace (
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -516,7 +516,7 @@ S_msrMeasure msrMeasure::createMeasureDeepClone (
             "deep clone" <<
             ", line " << fInputLineNumber;
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -553,7 +553,7 @@ S_msrMeasure msrMeasure::createMeasureDeepClone (
             getVoiceName () <<
         "\"";
 
-      gWaeHandler->waeTraceWithLocationDetails (
+      gWaeHandler->waeTrace (
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -589,7 +589,7 @@ S_msrMeasure msrMeasure::createMeasureCopyWithNotesOnly (
       containingSegmentUpLinkToVoice->getVoiceName () <<
       "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -617,13 +617,13 @@ S_msrMeasure msrMeasure::createMeasureCopyWithNotesOnly (
       containingSegmentUpLinkToVoice->
         incrementVoiceCurrentMeasureOrdinalNumber ());
 
-/* JMI
+/* JMI v0.9.69
   // lengthes
-  measureCopy->fFullMeasureCurrentWholeNotesDuration =
-    fFullMeasureCurrentWholeNotesDuration;
+  measureCopy->fFullMeasureWholeNotesDuration =
+    fFullMeasureWholeNotesDuration;
 
-  measureCopy->fMeasureCurrentWholeNotesDuration =
-    fMeasureCurrentWholeNotesDuration;
+  measureCopy->fMeasureCurrentAccumulatedWholeNotesDuration =
+    fMeasureCurrentAccumulatedWholeNotesDuration;
 
   // measure kind
   measureCopy->fMeasureKind =
@@ -664,7 +664,7 @@ S_msrMeasure msrMeasure::createMeasureCopyWithNotesOnly (
               getVoiceName () <<
         "\"";
 
-      gWaeHandler->waeTraceWithLocationDetails (
+      gWaeHandler->waeTrace (
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -714,7 +714,7 @@ S_msrMeasure msrMeasure::createMeasureCopyWithNotesOnly (
             "deep clone" <<
             ", line " << fInputLineNumber;
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -753,7 +753,7 @@ S_msrMeasure msrMeasure::createMeasureCopyWithNotesOnly (
             getVoiceName () <<
         "\"";
 
-      gWaeHandler->waeTraceWithLocationDetails (
+      gWaeHandler->waeTrace (
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -781,7 +781,7 @@ void msrMeasure::setMeasureShortestNoteWholeNotes (
       " to " <<
       duration.asString ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -807,7 +807,7 @@ void msrMeasure::setMeasureShortestNoteTupletFactor (
       " to " <<
       noteTupletFactor.asString ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -838,7 +838,7 @@ void msrMeasure::setMeasureEndRegularKind (
         "\"" <<
         ", line " << fInputLineNumber;
 
-      gWaeHandler->waeTraceWithLocationDetails (
+      gWaeHandler->waeTrace (
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -868,7 +868,7 @@ void msrMeasure::setMeasureRepeatContextKind (
         "\"" <<
         ", line " << fInputLineNumber;
 
-      gWaeHandler->waeTraceWithLocationDetails (
+      gWaeHandler->waeTrace (
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -898,7 +898,7 @@ void msrMeasure::setMeasureNumber (
         "\"" <<
         ", line " << fInputLineNumber;
 
-      gWaeHandler->waeTraceWithLocationDetails (
+      gWaeHandler->waeTrace (
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -928,7 +928,7 @@ void msrMeasure::setMeasureOrdinalNumberInVoice (
         "\"" <<
         ", line " << fInputLineNumber;
 
-      gWaeHandler->waeTraceWithLocationDetails (
+      gWaeHandler->waeTrace (
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -958,7 +958,7 @@ void msrMeasure::setMeasurePuristNumber (
         "\"" <<
         ", line " << fInputLineNumber;
 
-      gWaeHandler->waeTraceWithLocationDetails (
+      gWaeHandler->waeTrace (
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -984,7 +984,7 @@ void msrMeasure::setMeasurePuristNumber (
 //         "\", line " << inputLineNumber <<
 //         std::endl;
 //
-//        gWaeHandler->waeTraceWithLocationDetails (
+//        gWaeHandler->waeTrace (
 //          __FILE__, __LINE__,
 //         ss.str (),
 //      }
@@ -1020,11 +1020,11 @@ void msrMeasure::appendMeasureElementToMeasure (
 //       fetchMeasureUpLinkToVoice ()-> JMI not yet set v0.9.66
 //         getVoiceName () <<
 //       "\"" <<
-      ", fMeasureCurrentWholeNotesDuration: " <<
-      fMeasureCurrentWholeNotesDuration.asString () <<
+      ", fMeasureCurrentAccumulatedWholeNotesDuration: " <<
+      fMeasureCurrentAccumulatedWholeNotesDuration.asString () <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1045,14 +1045,14 @@ void msrMeasure::appendMeasureElementToMeasure (
   elem->
     setMeasurePosition (
       this,
-      fMeasureCurrentWholeNotesDuration,
+      fMeasureCurrentAccumulatedWholeNotesDuration,
       "appendMeasureElementToMeasure()");
 
   // append elem to the measure elements list
   fMeasureElementsList.push_back (elem);
 
   // take elem's sounding whole notes into account
-  incrementMeasureCurrentWholeNotesDuration (
+  incrementMeasureCurrentAccumulatedWholeNotesDuration (
     inputLineNumber,
     elem->
       getSoundingWholeNotes ());
@@ -1078,11 +1078,11 @@ void msrMeasure::insertElementInMeasureBeforeIterator (
       fMeasureUpLinkToSegment->
         getSegmentUpLinkToVoice ()
           ->getVoiceName () <<
-      "\", measureCurrentWholeNotesDuration: " <<
-      fMeasureCurrentWholeNotesDuration.asString () <<
+      "\", measureCurrentAccumulatedWholeNotesDuration: " <<
+      fMeasureCurrentAccumulatedWholeNotesDuration.asString () <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1111,7 +1111,7 @@ void msrMeasure::insertElementInMeasureBeforeIterator (
   elem->
     setMeasurePosition (
       this,
-      fMeasureCurrentWholeNotesDuration,
+      fMeasureCurrentAccumulatedWholeNotesDuration,
       "insertElementInMeasureBeforeIterator()");
 
   // insert elem in the measure elements list before (*iter)
@@ -1119,7 +1119,7 @@ void msrMeasure::insertElementInMeasureBeforeIterator (
     iter, elem);
 
   // account for elem's duration in measure whole notes
-  incrementMeasureCurrentWholeNotesDuration (
+  incrementMeasureCurrentAccumulatedWholeNotesDuration (
     inputLineNumber,
     elem->
       getSoundingWholeNotes ());
@@ -1150,11 +1150,11 @@ void msrMeasure::appendElementAtTheEndOfMeasure (
           ->getVoiceName () <<
       "\", has measure position '" <<
       elem->getMeasurePosition () <<
-      ", fMeasureCurrentWholeNotesDuration: " <<
-      fMeasureCurrentWholeNotesDuration.asString () <<
+      ", fMeasureCurrentAccumulatedWholeNotesDuration: " <<
+      fMeasureCurrentAccumulatedWholeNotesDuration.asString () <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1180,7 +1180,7 @@ void msrMeasure::appendElementAtTheEndOfMeasure (
     ss << std::endl;
     --gIndenter;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
 
@@ -1199,7 +1199,7 @@ void msrMeasure::appendElementAtTheEndOfMeasure (
         "fMeasureElementsList is empty " <<
         ", inserting elem at the end";
 
-      gWaeHandler->waeTraceWithLocationDetails (
+      gWaeHandler->waeTrace (
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -1209,7 +1209,7 @@ void msrMeasure::appendElementAtTheEndOfMeasure (
 
     // take elem's sounding whole notes duration into account
     // could be done elsewhere ??? JMI
-    incrementMeasureCurrentWholeNotesDuration (
+    incrementMeasureCurrentAccumulatedWholeNotesDuration (
       inputLineNumber,
       elem->
         getSoundingWholeNotes ());
@@ -1229,7 +1229,7 @@ void msrMeasure::appendElementAtTheEndOfMeasure (
         ", lastMeasureElement: " <<
         lastMeasureElement;
 
-      gWaeHandler->waeTraceWithLocationDetails (
+      gWaeHandler->waeTrace (
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -1255,7 +1255,7 @@ void msrMeasure::appendElementAtTheEndOfMeasure (
             lastMeasureElement->asString () <<
             " is a final barLine, inserting elem before it";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -1293,7 +1293,7 @@ void msrMeasure::appendElementAtTheEndOfMeasure (
             lastMeasureElement->asString () <<
             " is a barLine, but not a final one, inserting elem after it";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -1318,7 +1318,7 @@ void msrMeasure::appendElementAtTheEndOfMeasure (
           " is no barLine, inserting elem after it" <<
           std::endl;
 
-        gWaeHandler->waeTraceWithLocationDetails (
+        gWaeHandler->waeTrace (
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -1376,11 +1376,11 @@ void msrMeasure::insertElementAtMeasurePosition (
       fMeasureUpLinkToSegment->
         getSegmentUpLinkToVoice ()
           ->getVoiceName () <<
-      "\", measureCurrentWholeNotesDuration: " <<
-      fMeasureCurrentWholeNotesDuration.asString () <<
+      "\", measureCurrentAccumulatedWholeNotesDuration: " <<
+      fMeasureCurrentAccumulatedWholeNotesDuration.asString () <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1423,12 +1423,12 @@ void msrMeasure::insertElementAtMeasurePosition (
           fMeasureUpLinkToSegment->
             getSegmentUpLinkToVoice ()
               ->getVoiceName () <<
-          "\", measureCurrentWholeNotesDuration: " <<
-          fMeasureCurrentWholeNotesDuration.asString () <<
+          "\", measureCurrentAccumulatedWholeNotesDuration: " <<
+          fMeasureCurrentAccumulatedWholeNotesDuration.asString () <<
           " since there's no element at this exact position " <<
           ", line " << inputLineNumber;
 
-        msrInternalErrorWithLocationDetails (
+        msrInternalError (
           gServiceRunData->getInputSourceName (),
           inputLineNumber,
           __FILE__, __LINE__,
@@ -1453,12 +1453,12 @@ void msrMeasure::insertElementAtMeasurePosition (
       fMeasureUpLinkToSegment->
         getSegmentUpLinkToVoice ()
           ->getVoiceName () <<
-      "\", measureCurrentWholeNotesDuration: " <<
-      fMeasureCurrentWholeNotesDuration.asString () <<
+      "\", measureCurrentAccumulatedWholeNotesDuration: " <<
+      fMeasureCurrentAccumulatedWholeNotesDuration.asString () <<
       " since it is empty" <<
       ", line " << inputLineNumber;
 
-    msrInternalErrorWithLocationDetails (
+    msrInternalError (
       gServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
@@ -1484,7 +1484,7 @@ void msrMeasure::insertElementAtMeasurePosition (
       "insertElementAtMeasurePosition()");
 
   // account for elem's duration in measure whole notes
-  incrementMeasureCurrentWholeNotesDuration (
+  incrementMeasureCurrentAccumulatedWholeNotesDuration (
     inputLineNumber,
     elem->
       getSoundingWholeNotes ());
@@ -1510,7 +1510,7 @@ void msrMeasure::setNextMeasureNumber (const std::string& nextMeasureNumber)
       */
       ", line " << fInputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1537,7 +1537,7 @@ void msrMeasure::setMeasureIsFirstInVoice ()
       fMeasureUpLinkToSegment-> asString () <<
       ", line " << fInputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1546,15 +1546,15 @@ void msrMeasure::setMeasureIsFirstInVoice ()
   fMeasureIsFirstInVoice = true;
 }
 
-std::string msrMeasure::fullMeasureCurrentWholeNotesDurationAsMsrString ()
+std::string msrMeasure::fullMeasureWholeNotesDurationAsMsrString ()
 {
   return
     wholeNotesAsMsrString (
       fInputLineNumber,
-      fFullMeasureCurrentWholeNotesDuration);
+      fFullMeasureWholeNotesDuration);
 }
 
-void msrMeasure::setFullMeasureCurrentWholeNotesDuration (
+void msrMeasure::setFullMeasureWholeNotesDuration (
   const msrWholeNotes& wholeNotes)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -1567,16 +1567,16 @@ void msrMeasure::setFullMeasureCurrentWholeNotesDuration (
       " to "  <<
       wholeNotes.asString ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  fFullMeasureCurrentWholeNotesDuration = wholeNotes;
+  fFullMeasureWholeNotesDuration = wholeNotes;
 }
 
-void msrMeasure::setMeasureCurrentWholeNotesDuration (
+void msrMeasure::setMeasureCurrentAccumulatedWholeNotesDuration (
   int                  inputLineNumber,
   const msrWholeNotes& wholeNotes)
 {
@@ -1600,17 +1600,17 @@ void msrMeasure::setMeasureCurrentWholeNotesDuration (
       "\"" <<
       "', line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
   // set measure whole notes
-  fMeasureCurrentWholeNotesDuration = wholeNotes;
+  fMeasureCurrentAccumulatedWholeNotesDuration = wholeNotes;
 }
 
-void msrMeasure::incrementMeasureCurrentWholeNotesDuration (
+void msrMeasure::incrementMeasureCurrentAccumulatedWholeNotesDuration (
   int                  inputLineNumber,
   const msrWholeNotes& wholeNotesDelta)
 {
@@ -1625,8 +1625,8 @@ void msrMeasure::incrementMeasureCurrentWholeNotesDuration (
 
   // compute the new measure whole notes duration
   msrWholeNotes
-    newMeasureCurrentWholeNotesDuration =
-      fMeasureCurrentWholeNotesDuration + wholeNotesDelta;
+    newMeasureCurrentAccumulatedWholeNotesDuration =
+      fMeasureCurrentAccumulatedWholeNotesDuration + wholeNotesDelta;
 
 #ifdef MF_TRACE_IS_ENABLED
   if (
@@ -1640,11 +1640,11 @@ void msrMeasure::incrementMeasureCurrentWholeNotesDuration (
       "Incrementing the measure whole notes duration of measure " <<
       this->asShortString () <<
       " from '"  <<
-      fMeasureCurrentWholeNotesDuration.asString () <<
+      fMeasureCurrentAccumulatedWholeNotesDuration.asString () <<
       "' by "  <<
       wholeNotesDelta.asString () <<
       " to " <<
-      newMeasureCurrentWholeNotesDuration.asString () <<
+      newMeasureCurrentAccumulatedWholeNotesDuration.asString () <<
       " in voice \"" <<
       fMeasureUpLinkToSegment->
         getSegmentUpLinkToVoice ()->
@@ -1652,24 +1652,24 @@ void msrMeasure::incrementMeasureCurrentWholeNotesDuration (
       "\"" <<
       "', line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
   // set new measure whole notes duration
-  setMeasureCurrentWholeNotesDuration (
+  setMeasureCurrentAccumulatedWholeNotesDuration (
     inputLineNumber,
-    newMeasureCurrentWholeNotesDuration);
+    newMeasureCurrentAccumulatedWholeNotesDuration);
 }
 
-std::string msrMeasure::measureCurrentWholeNotesDurationAsMsrString ()
+std::string msrMeasure::measureCurrentAccumulatedWholeNotesDurationAsMsrString ()
 {
   return
     wholeNotesAsMsrString (
       fInputLineNumber,
-      fMeasureCurrentWholeNotesDuration);
+      fMeasureCurrentAccumulatedWholeNotesDuration);
 }
 
 void msrMeasure::setMeasureKind (
@@ -1693,7 +1693,7 @@ void msrMeasure::setMeasureKind (
       "\"" <<
       ", line " << fInputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1753,7 +1753,7 @@ void msrMeasure::setMeasureKind (
           '\n';
         --gIndenter;
 
-        gWaeHandler->waeTraceWithLocationDetails (
+        gWaeHandler->waeTrace (
           __FILE__, __LINE__,
           iss.str ());
       }
@@ -1793,7 +1793,7 @@ void msrMeasure::setMeasureKind (
           '\n';
         --gIndenter;
 
-        gWaeHandler->waeTraceWithLocationDetails (
+        gWaeHandler->waeTrace (
           __FILE__, __LINE__,
           iss.str ());
       }
@@ -1821,7 +1821,7 @@ void msrMeasure::appendMusicXMLPrintLayoutToMeasure (
         getVoiceName () <<
       "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1855,7 +1855,7 @@ void msrMeasure::appendClefKeyTimeSignatureGroupToMeasure (
         getVoiceName () <<
       "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1883,7 +1883,7 @@ void msrMeasure::appendClefToMeasure (
         getVoiceName () <<
       "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1909,7 +1909,7 @@ void msrMeasure::appendKeyToMeasure (
         getVoiceName () <<
       "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1954,7 +1954,7 @@ void msrMeasure::appendTimeSignatureToMeasure (
           getVoiceName () <<
       "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1966,7 +1966,7 @@ void msrMeasure::appendTimeSignatureToMeasure (
   appendMeasureElementToMeasure (timeSignature);
 
   // set the measure whole notes per full measure
-  setFullMeasureCurrentWholeNotesDurationFromTimeSignature (
+  setFullMeasureWholeNotesDurationFromTimeSignature (
     timeSignature);
 
   --gIndenter;
@@ -2011,7 +2011,7 @@ void msrMeasure::appendTimeSignatureToMeasureClone (
       upLinkToVoice->getVoiceName () <<
       "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2041,7 +2041,7 @@ void msrMeasure::insertHiddenMeasureAndBarLineInMeasureClone (
 //      "\"" <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2063,7 +2063,7 @@ void msrMeasure::insertHiddenMeasureAndBarLineInMeasureClone (
     */
 }
 
-void msrMeasure::setFullMeasureCurrentWholeNotesDurationFromTimeSignature (
+void msrMeasure::setFullMeasureWholeNotesDurationFromTimeSignature (
   const S_msrTimeSignature& timeSignature)
 {
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
@@ -2094,7 +2094,7 @@ void msrMeasure::setFullMeasureCurrentWholeNotesDurationFromTimeSignature (
       "\"" <<
       ", line " << fInputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2144,14 +2144,14 @@ void msrMeasure::setFullMeasureCurrentWholeNotesDurationFromTimeSignature (
             "\"" <<
             ", line " << fInputLineNumber;
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
 
         // set full measure whole notes
-        setFullMeasureCurrentWholeNotesDuration (
+        setFullMeasureWholeNotesDuration (
           wholeNotesPerMeasure);
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -2167,10 +2167,10 @@ void msrMeasure::setFullMeasureCurrentWholeNotesDurationFromTimeSignature (
                 getVoiceName () <<
             "\"" <<
             " has " <<
-            fFullMeasureCurrentWholeNotesDuration.asString () <<
+            fFullMeasureWholeNotesDuration.asString () <<
             " full measure whole notes ";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -2197,7 +2197,7 @@ void msrMeasure::setFullMeasureCurrentWholeNotesDurationFromTimeSignature (
           " is senza misura" <<
           std::endl;
 
-        gWaeHandler->waeTraceWithLocationDetails (
+        gWaeHandler->waeTrace (
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -2205,7 +2205,7 @@ void msrMeasure::setFullMeasureCurrentWholeNotesDurationFromTimeSignature (
 
       setMeasureKind (msrMeasureKind::kMeasureKindCadenza);
 
-      setFullMeasureCurrentWholeNotesDuration (
+      setFullMeasureWholeNotesDuration (
         msrWholeNotes (INT_MAX, 1));
       break;
   } // switch
@@ -2235,7 +2235,7 @@ void msrMeasure::appendTranspositionToMeasure (
       voice->getVoiceName () <<
       "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2300,7 +2300,7 @@ void msrMeasure::appendBarLineToMeasure (
       voice->getVoiceName () <<
       "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2383,7 +2383,7 @@ void msrMeasure::appendNoteToMeasure (
     positionsDelta =
       partDrawingMeasurePosition
         -
-      fMeasureCurrentWholeNotesDuration;
+      fMeasureCurrentAccumulatedWholeNotesDuration;
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceNotes ()) {
@@ -2407,15 +2407,15 @@ void msrMeasure::appendNoteToMeasure (
       "\"" <<
       ", partDrawingMeasurePosition: " <<
       partDrawingMeasurePosition.asString () <<
-      ", fFullMeasureCurrentWholeNotesDuration: " <<
-      fFullMeasureCurrentWholeNotesDuration.asString () <<
-      ", fMeasureCurrentWholeNotesDuration: " <<
-      fMeasureCurrentWholeNotesDuration.asString () <<
+      ", fFullMeasureWholeNotesDuration: " <<
+      fFullMeasureWholeNotesDuration.asString () <<
+      ", fMeasureCurrentAccumulatedWholeNotesDuration: " <<
+      fMeasureCurrentAccumulatedWholeNotesDuration.asString () <<
       ", positionsDelta: " <<
       positionsDelta.asString () <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2458,8 +2458,8 @@ void msrMeasure::appendNoteToMeasure (
     ss <<
       "partDrawingMeasurePosition " <<
       partDrawingMeasurePosition.asString () <<
-      " is smaller than fMeasureCurrentWholeNotesDuration " <<
-      fMeasureCurrentWholeNotesDuration.asString () <<
+      " is smaller than fMeasureCurrentAccumulatedWholeNotesDuration " <<
+      fMeasureCurrentAccumulatedWholeNotesDuration.asString () <<
       " in measure " <<
       this->asShortString () <<
       ", cannot padup in voice \"" <<
@@ -2467,15 +2467,15 @@ void msrMeasure::appendNoteToMeasure (
         getSegmentUpLinkToVoice ()->
           getVoiceName () <<
       "\"" <<
-      ", fMeasureCurrentWholeNotesDuration: " <<
-      fMeasureCurrentWholeNotesDuration.asString () <<
+      ", fMeasureCurrentAccumulatedWholeNotesDuration: " <<
+      fMeasureCurrentAccumulatedWholeNotesDuration.asString () <<
       ", partDrawingMeasurePosition: " <<
       partDrawingMeasurePosition.asString () <<
       ", positionsDelta: " << positionsDelta <<
       ", line " << inputLineNumber;
 
-//     msrInternalErrorWithLocationDetails ( // JMI v0.9.68
-    msrInternalWarningWithLocationDetails (
+//     msrInternalError ( // JMI v0.9.68
+    msrInternalWarning (
       gServiceRunData->getInputSourceName (),
       inputLineNumber,
 //      __FILE__, __LINE__,
@@ -2490,7 +2490,12 @@ void msrMeasure::appendNoteToMeasure (
   // append note to measure
   appendNoteOrPaddingToMeasure (note);
 
-  // is note a multiple full-bar rest?
+  // determine whether the note occupies a full measure JMI v0.9.69
+  if (note->getSoundingWholeNotes () == fMeasureCurrentAccumulatedWholeNotesDuration)
+    note->
+      setNoteOccupiesAFullMeasure ();
+
+  // is note a multiple full-bar rest? JMI v0.9.69
   if (note->fetchNoteIsAFullNoteRest ()) {
     setMeasureIsAFullBarRest ();
   }
@@ -2556,12 +2561,12 @@ void msrMeasure::appendNoteOrPaddingToMeasure (
       " in voice \"" <<
        voice->getVoiceName () <<
       "\"" <<
-      ", measureCurrentWholeNotesDuration: " <<
-      fMeasureCurrentWholeNotesDuration.asString () <<
+      ", measureCurrentAccumulatedWholeNotesDuration: " <<
+      fMeasureCurrentAccumulatedWholeNotesDuration.asString () <<
       ", noteSoundingWholeNotes: " << noteSoundingWholeNotes.asString () <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2642,7 +2647,7 @@ void msrMeasure::accountForTupletMemberNoteNotesDurationInMeasure ( // JMI v0.9.
           getVoiceName () <<
       "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2652,7 +2657,7 @@ void msrMeasure::accountForTupletMemberNoteNotesDurationInMeasure ( // JMI v0.9.
   note->
     setMeasurePosition (
       this,
-      fMeasureCurrentWholeNotesDuration,
+      fMeasureCurrentAccumulatedWholeNotesDuration,
       "accountForTupletMemberNoteNotesDurationInMeasure()");
 
   // fetch note sounding whole notes
@@ -2664,7 +2669,7 @@ void msrMeasure::accountForTupletMemberNoteNotesDurationInMeasure ( // JMI v0.9.
   appendNoteToMeasureNotesFlatList (note);
 
   // account for note duration in measure whole notes
-  incrementMeasureCurrentWholeNotesDuration (
+  incrementMeasureCurrentAccumulatedWholeNotesDuration (
     inputLineNumber,
     noteSoundingWholeNotes);
 }
@@ -2689,7 +2694,7 @@ void msrMeasure::appendPaddingNoteAtTheEndOfMeasure (const S_msrNote& note)
       "\"" <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2758,7 +2763,7 @@ void msrMeasure::appendNoteToMeasureClone (const S_msrNote& note)
           getVoiceName () <<
       "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2783,7 +2788,7 @@ void msrMeasure::appendNoteToMeasureClone (const S_msrNote& note)
       setMeasureElementUpLinkToMeasure (this);
 
     // append the note to the measure elements list
-  // JMI  // only now to make it possible to remove it afterwards
+  // JMI  // only now to make it possible to remove it afterwards v0.9.69
     // if it happens to be the first note of a chord
     appendMeasureElementToMeasure (note);
 
@@ -2793,12 +2798,12 @@ void msrMeasure::appendNoteToMeasureClone (const S_msrNote& note)
         note->
           getSoundingWholeNotes ();
 
-  /* JMI
-    // determine whether the note occupies a full measure
-    if (noteSoundingWholeNotes == fFullMeasureCurrentWholeNotesDuration)
-      note->
-        setNoteOccupiesAFullMeasure ();
-      */
+  //* JMI v0.9.69
+//     // determine whether the note occupies a full measure
+//     if (noteSoundingWholeNotes == fFullMeasureWholeNotesDuration)
+//       note->
+//         setNoteOccupiesAFullMeasure ();
+    //  */
 
     // register note as the last one in this measure
     fMeasureLastHandledNote = note;
@@ -2831,7 +2836,7 @@ void msrMeasure::appendDoubleTremoloToMeasure (
           getVoiceName () <<
       "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2869,7 +2874,7 @@ void msrMeasure::appendChordToMeasure (const S_msrChord& chord)
           getVoiceName () <<
       "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2882,7 +2887,7 @@ void msrMeasure::appendChordToMeasure (const S_msrChord& chord)
 //   chord->
 //     setChordMeasurePosition (
 //       this,
-//       fMeasureCurrentWholeNotesDuration,
+//       fMeasureCurrentAccumulatedWholeNotesDuration,
 //       "msrMeasure::appendChordToMeasure (const S_msrChord& chord)");
 
   // append the chord to the measure elements list
@@ -2922,7 +2927,7 @@ void msrMeasure::appendTupletToMeasure (const S_msrTuplet& tuplet)
       "\"" <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2937,7 +2942,7 @@ void msrMeasure::appendTupletToMeasure (const S_msrTuplet& tuplet)
 //   tuplet->
 //     setTupletMeasurePosition (
 //       this,
-//       fMeasureCurrentWholeNotesDuration,
+//       fMeasureCurrentAccumulatedWholeNotesDuration,
 //       "msrMeasure::appendTupletToMeasure (const S_msrChord& chord)");
 
   // populate uplink to measure
@@ -2973,11 +2978,11 @@ void msrMeasure::appendHarmonyToMeasureWithoutPadUp (
       fMeasureUpLinkToSegment->
         getSegmentUpLinkToVoice ()->
           getVoiceName () <<
-      "\", measureCurrentWholeNotesDuration: " <<
-      fMeasureCurrentWholeNotesDuration.asString () <<
+      "\", measureCurrentAccumulatedWholeNotesDuration: " <<
+      fMeasureCurrentAccumulatedWholeNotesDuration.asString () <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -3013,12 +3018,12 @@ void msrMeasure::appendHarmonyToMeasure (
       fMeasureUpLinkToSegment->
         getSegmentUpLinkToVoice ()->
           getVoiceName () <<
-      "\", measureCurrentWholeNotesDuration: " <<
-      fMeasureCurrentWholeNotesDuration.asString () <<
+      "\", measureCurrentAccumulatedWholeNotesDuration: " <<
+      fMeasureCurrentAccumulatedWholeNotesDuration.asString () <<
       ", measurePositionToAppendAt: " << measurePositionToAppendAt <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -3067,12 +3072,12 @@ void msrMeasure::appendHarmoniesListToMeasure (
       fMeasureUpLinkToSegment->
         getSegmentUpLinkToVoice ()->
           getVoiceName () <<
-      "\", measureCurrentWholeNotesDuration: " <<
-      fMeasureCurrentWholeNotesDuration.asString () <<
+      "\", measureCurrentAccumulatedWholeNotesDuration: " <<
+      fMeasureCurrentAccumulatedWholeNotesDuration.asString () <<
       ", measurePositionToAppendAt: " << measurePositionToAppendAt <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -3116,11 +3121,11 @@ void msrMeasure::appendHarmonyToMeasureClone (
       fMeasureUpLinkToSegment->
         getSegmentUpLinkToVoice ()->
           getVoiceName () <<
-      "\", fMeasureCurrentWholeNotesDuration: " <<
-      fMeasureCurrentWholeNotesDuration.asString () <<
+      "\", fMeasureCurrentAccumulatedWholeNotesDuration: " <<
+      fMeasureCurrentAccumulatedWholeNotesDuration.asString () <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -3153,11 +3158,11 @@ void msrMeasure::appendFiguredBassToMeasureWithoutPadUp (
       fMeasureUpLinkToSegment->
         getSegmentUpLinkToVoice ()->
           getVoiceName () <<
-      "\", measureCurrentWholeNotesDuration: " <<
-      fMeasureCurrentWholeNotesDuration.asString () <<
+      "\", measureCurrentAccumulatedWholeNotesDuration: " <<
+      fMeasureCurrentAccumulatedWholeNotesDuration.asString () <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -3191,12 +3196,12 @@ void msrMeasure::appendFiguredBassToMeasure (
       fMeasureUpLinkToSegment->
         getSegmentUpLinkToVoice ()->
           getVoiceName () <<
-      "\", measureCurrentWholeNotesDuration: " <<
-      fMeasureCurrentWholeNotesDuration.asString () <<
+      "\", measureCurrentAccumulatedWholeNotesDuration: " <<
+      fMeasureCurrentAccumulatedWholeNotesDuration.asString () <<
       ", measurePositionToAppendAt: " << measurePositionToAppendAt <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -3236,12 +3241,12 @@ void msrMeasure::appendFiguredBassesListToMeasure (
       fMeasureUpLinkToSegment->
         getSegmentUpLinkToVoice ()->
           getVoiceName () <<
-      "\", measureCurrentWholeNotesDuration: " <<
-      fMeasureCurrentWholeNotesDuration.asString () <<
+      "\", measureCurrentAccumulatedWholeNotesDuration: " <<
+      fMeasureCurrentAccumulatedWholeNotesDuration.asString () <<
       ", measurePositionToAppendAt: " << measurePositionToAppendAt <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -3284,11 +3289,11 @@ void msrMeasure::appendFiguredBassToMeasureClone (
       fMeasureUpLinkToSegment->
         getSegmentUpLinkToVoice ()->
           getVoiceName () <<
-      "\", fMeasureCurrentWholeNotesDuration: " <<
-      fMeasureCurrentWholeNotesDuration.asString () <<
+      "\", fMeasureCurrentAccumulatedWholeNotesDuration: " <<
+      fMeasureCurrentAccumulatedWholeNotesDuration.asString () <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -3327,7 +3332,7 @@ S_msrNote msrMeasure::createPaddingSkipNoteForVoice (
       this->asShortString () <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -3371,7 +3376,7 @@ S_msrNote msrMeasure::createPaddingSkipNoteForVoice (
 //
 //     ss <<
 //       "Padding from measure whole notes '" <<
-//       fMeasureCurrentWholeNotesDuration.asString () <<
+//       fMeasureCurrentAccumulatedWholeNotesDuration.asString () <<
 //       "' to '" <<measurePositionToPadUpTo.asString () <<
 //       "' in measure " <<
 //       this->asShortString () <<
@@ -3392,13 +3397,13 @@ S_msrNote msrMeasure::createPaddingSkipNoteForVoice (
 //     "measurePositionToPadUpTo.getNumerator () is negative in padUpToMeasurePositionInMeasure()");
 // #endif // MF_SANITY_CHECKS_ARE_ENABLED
 //
-//   if (fMeasureCurrentWholeNotesDuration < measurePositionToPadUpTo) {
+//   if (fMeasureCurrentAccumulatedWholeNotesDuration < measurePositionToPadUpTo) {
 //     ++gIndenter;
 //
 //     // appending a padding rest or skip to this measure to reach measurePositionToPadUpTo
 //     msrWholeNotes
 //       missingNotesDuration =
-//         measurePositionToPadUpTo - fMeasureCurrentWholeNotesDuration;
+//         measurePositionToPadUpTo - fMeasureCurrentAccumulatedWholeNotesDuration;
 //
 //     // create a padding skip note
 //     S_msrNote
@@ -3416,7 +3421,7 @@ S_msrNote msrMeasure::createPaddingSkipNoteForVoice (
 //         "Appending skip " << paddingNote->asString () <<
 //         " (missingNotesDuration " << missingNotesDuration <<
 //         " whole notes) to skip from measure position " <<
-//         fMeasureCurrentWholeNotesDuration.asString () <<
+//         fMeasureCurrentAccumulatedWholeNotesDuration.asString () <<
 //         " to measure position '" <<measurePositionToPadUpTo.asString () << "'"
 //         " in measure " <<
 //         this->asShortString () <<
@@ -3442,14 +3447,14 @@ S_msrNote msrMeasure::createPaddingSkipNoteForVoice (
 //     --gIndenter;
 //   }
 //
-//   else if (fMeasureCurrentWholeNotesDuration == measurePositionToPadUpTo) {
+//   else if (fMeasureCurrentAccumulatedWholeNotesDuration == measurePositionToPadUpTo) {
 // #ifdef MF_TRACE_IS_ENABLED
 //     if (gTraceOahGroup->getTraceNotes ()) {
 //     std::stringstream ss;
 //
 //     ss <<
 //         "No need to pad from measure whole notes '" <<
-//         fMeasureCurrentWholeNotesDuration.asString () <<
+//         fMeasureCurrentAccumulatedWholeNotesDuration.asString () <<
 //         " to " <<
 //         measurePositionToPadUpTo.asString () <<
 //         " since they are equal in measure " <<
@@ -3472,7 +3477,7 @@ S_msrNote msrMeasure::createPaddingSkipNoteForVoice (
 //
 //     ss <<
 //         "Cannot pad from measure whole notes '" <<
-//         fMeasureCurrentWholeNotesDuration.asString () <<
+//         fMeasureCurrentAccumulatedWholeNotesDuration.asString () <<
 //         "' to '" <<
 //         measurePositionToPadUpTo <<
 //         "' since the former is larger than the latter in measure " <<
@@ -3531,7 +3536,7 @@ void msrMeasure::padUpToMeasurePosition (
       measureVoice->getVoiceName () <<
       "\", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -3547,11 +3552,11 @@ void msrMeasure::padUpToMeasurePosition (
 
   ++gIndenter;
 
-  if (fMeasureCurrentWholeNotesDuration < measurePositionToPadUpTo) {
+  if (fMeasureCurrentAccumulatedWholeNotesDuration < measurePositionToPadUpTo) {
     // appending a rest to this measure to reach measurePositionToPadUpTo
     msrWholeNotes
       missingNotesDuration =
-        measurePositionToPadUpTo - fMeasureCurrentWholeNotesDuration;
+        measurePositionToPadUpTo - fMeasureCurrentAccumulatedWholeNotesDuration;
 
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceMeasurePositions ()) {
@@ -3564,10 +3569,10 @@ void msrMeasure::padUpToMeasurePosition (
         " in voice \"" << measureVoice->getVoiceName () <<
         "\", measure: " <<
         this->asShortString () <<
-        ", measureCurrentWholeNotesDuration: " <<
-        fMeasureCurrentWholeNotesDuration.asString ();
+        ", measureCurrentAccumulatedWholeNotesDuration: " <<
+        fMeasureCurrentAccumulatedWholeNotesDuration.asString ();
 
-      gWaeHandler->waeTraceWithLocationDetails (
+      gWaeHandler->waeTrace (
         __FILE__, __LINE__,
         ss.str ());
    }
@@ -3591,10 +3596,10 @@ void msrMeasure::padUpToMeasurePosition (
         " to finalize \"" << measureVoice->getVoiceName () <<
         "\" measure: " <<
         this->asShortString () <<
-        ", measureCurrentWholeNotesDuration: " <<
-        fMeasureCurrentWholeNotesDuration.asString ();
+        ", measureCurrentAccumulatedWholeNotesDuration: " <<
+        fMeasureCurrentAccumulatedWholeNotesDuration.asString ();
 
-      gWaeHandler->waeTraceWithLocationDetails (
+      gWaeHandler->waeTrace (
         __FILE__, __LINE__,
         ss.str ());
    }
@@ -3635,7 +3640,7 @@ void msrMeasure::padUpToPositionAtTheEndOfTheMeasure (
 
     ss <<
       "Padding up from measure position " <<
-      fMeasureCurrentWholeNotesDuration.asString () <<
+      fMeasureCurrentAccumulatedWholeNotesDuration.asString () <<
       " to " <<
       measurePositionToPadUpTo.asString () <<
       " at the end of measure " <<
@@ -3647,7 +3652,7 @@ void msrMeasure::padUpToPositionAtTheEndOfTheMeasure (
       ", context: " << context <<
       "\", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -3663,11 +3668,11 @@ void msrMeasure::padUpToPositionAtTheEndOfTheMeasure (
 
   ++gIndenter;
 
-  if (fMeasureCurrentWholeNotesDuration < measurePositionToPadUpTo) {
+  if (fMeasureCurrentAccumulatedWholeNotesDuration < measurePositionToPadUpTo) {
     // appending a rest to this measure to reach measurePositionToPadUpTo
     msrWholeNotes
       missingNotesDuration =
-        measurePositionToPadUpTo - fMeasureCurrentWholeNotesDuration;
+        measurePositionToPadUpTo - fMeasureCurrentAccumulatedWholeNotesDuration;
 
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceMeasurePositions ()) {
@@ -3679,11 +3684,11 @@ void msrMeasure::padUpToPositionAtTheEndOfTheMeasure (
         " at the end of measure " <<
         this->asString () <<
         " in voice \"" << measureVoice->getVoiceName () << "\",  " <<
-        ", measureCurrentWholeNotesDuration: " <<
-        fMeasureCurrentWholeNotesDuration.asString () <<
+        ", measureCurrentAccumulatedWholeNotesDuration: " <<
+        fMeasureCurrentAccumulatedWholeNotesDuration.asString () <<
         ", line " << inputLineNumber;
 
-      gWaeHandler->waeTraceWithLocationDetails (
+      gWaeHandler->waeTrace (
         __FILE__, __LINE__,
         ss.str ());
    }
@@ -3718,10 +3723,10 @@ void msrMeasure::padUpToPositionAtTheEndOfTheMeasure (
         " to finalize \"" << measureVoice->getVoiceName () <<
         "\" measure: " <<
         this->asShortString () <<
-        " measureCurrentWholeNotesDuration: " <<
-        fMeasureCurrentWholeNotesDuration.asString ();
+        " measureCurrentAccumulatedWholeNotesDuration: " <<
+        fMeasureCurrentAccumulatedWholeNotesDuration.asString ();
 
-      gWaeHandler->waeTraceWithLocationDetails (
+      gWaeHandler->waeTrace (
         __FILE__, __LINE__,
         ss.str ());
    }
@@ -3736,14 +3741,14 @@ void msrMeasure::padUpToPositionAtTheEndOfTheMeasure (
     fMeasureContainsMusic = true;
   }
 
-  else if (fMeasureCurrentWholeNotesDuration > measurePositionToPadUpTo) {
+  else if (fMeasureCurrentAccumulatedWholeNotesDuration > measurePositionToPadUpTo) {
     std::stringstream ss;
 
     ss <<
       "cannot padup measure " <<
         this->asShortString () <<
       " from " <<
-      fMeasureCurrentWholeNotesDuration.asString () <<
+      fMeasureCurrentAccumulatedWholeNotesDuration.asString () <<
       " to " <<
       measurePositionToPadUpTo.asString () <<
       " in voice \"" <<
@@ -3751,8 +3756,8 @@ void msrMeasure::padUpToPositionAtTheEndOfTheMeasure (
       "\"," <<
       " since the latter has already been overtaken";
 
-    msrInternalErrorWithLocationDetails (
-//     msrInternalWarningWithLocationDetails ( // JMI v0.9.68
+    msrInternalError (
+//     msrInternalWarning ( // JMI v0.9.68
       gServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
@@ -3807,17 +3812,17 @@ void msrMeasure::backupByWholeNotesStepLengthInMeasure ( // JMI USELESS ??? v0.9
       backupTargetMeasurePosition.asString () <<
       "' whole notes step length in measure " <<
       this->asShortString () <<
-      ", measureCurrentWholeNotesDuration: '" <<
-      fMeasureCurrentWholeNotesDuration.asString () <<
-      ", fullMeasureCurrentWholeNotesDuration: '" <<
-      fFullMeasureCurrentWholeNotesDuration.asString () <<
+      ", measureCurrentAccumulatedWholeNotesDuration: '" <<
+      fMeasureCurrentAccumulatedWholeNotesDuration.asString () <<
+      ", fullMeasureWholeNotesDuration: '" <<
+      fFullMeasureWholeNotesDuration.asString () <<
       "' in segment " <<
       fMeasureUpLinkToSegment->getSegmentAbsoluteNumber () <<
       " in voice \"" <<
       measureVoice->getVoiceName () <<
       "\", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -3826,7 +3831,7 @@ void msrMeasure::backupByWholeNotesStepLengthInMeasure ( // JMI USELESS ??? v0.9
   // determine the measure position 'backupTargetMeasurePosition' backward
   msrWholeNotes
     measurePosition =
-      fFullMeasureCurrentWholeNotesDuration - backupTargetMeasurePosition;
+      fFullMeasureWholeNotesDuration - backupTargetMeasurePosition;
 
   // pad up to it
   padUpToMeasurePosition (
@@ -3852,7 +3857,7 @@ void msrMeasure::appendPaddingSkipNoteToMeasure (
       fMeasureUpLinkToSegment->getSegmentAbsoluteNumber () <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -3948,7 +3953,7 @@ void msrMeasure::appendStaffDetailsToMeasure (
           getVoiceName () <<
       "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -4009,7 +4014,7 @@ void msrMeasure::removeNoteFromMeasure (
       std::endl <<
       fMeasureLastHandledNote->asShortString ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -4025,9 +4030,9 @@ void msrMeasure::removeNoteFromMeasure (
       i = fMeasureElementsList.erase (i);
 
       // update measure whole notes
-      setMeasureCurrentWholeNotesDuration (
+      setMeasureCurrentAccumulatedWholeNotesDuration (
         inputLineNumber,
-        fMeasureCurrentWholeNotesDuration
+        fMeasureCurrentAccumulatedWholeNotesDuration
           -
         fMeasureLastHandledNote->getSoundingWholeNotes ());
 
@@ -4067,7 +4072,7 @@ void msrMeasure::removeNoteFromMeasure (
       "@@@@@@@@@@@@@@@@@" <<
       std::endl << std::endl;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -4085,7 +4090,7 @@ void msrMeasure::removeNoteFromMeasure (
     "\"," <<
     " since this note has not been found in fMeasureElementsList";
 
-  msrInternalErrorWithLocationDetails (
+  msrInternalError (
     gServiceRunData->getInputSourceName (),
     inputLineNumber,
     __FILE__, __LINE__,
@@ -4146,9 +4151,9 @@ void msrMeasure::removeElementFromMeasure (
       i = fMeasureElementsList.erase (i);
 
       // update measure whole notes
-      setMeasureCurrentWholeNotesDuration (
+      setMeasureCurrentAccumulatedWholeNotesDuration (
         inputLineNumber,
-        fMeasureCurrentWholeNotesDuration
+        fMeasureCurrentAccumulatedWholeNotesDuration
           -
         fMeasureLastHandledNote->getSoundingWholeNotes ());
 
@@ -4171,12 +4176,12 @@ void msrMeasure::removeElementFromMeasure (
     "\"," <<
     " since this element has not been found in fMeasureElementsList";
 
-//   msrInternalErrorWithLocationDetails (
+//   msrInternalError (
 //     gServiceRunData->getInputSourceName (),
 //     inputLineNumber,
 //     __FILE__, __LINE__,
 //     ss.str ());
-  mxsr2msrInternalErrorWithLocationDetails (
+  mxsr2msrInternalError (
     gServiceRunData->getInputSourceName (),
     inputLineNumber,
     __FILE__, __LINE__,
@@ -4196,7 +4201,7 @@ void msrMeasure::appendNoteToMeasureNotesFlatList (
       " to the notes flat list of measure " <<
       this->asShortString ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -4217,15 +4222,15 @@ void msrMeasure::determineMeasureKindAndPuristNumber (
       asShortString () <<
       "\" more than once";
 
-    msrInternalErrorWithLocationDetails (
+    msrInternalError (
       gServiceRunData->getInputSourceName (),
       fInputLineNumber,
       __FILE__, __LINE__,
       ss.str ());
 
 /*
- // JMI   msrInternalErrorWithLocationDetails (
-    msrInternalWarningWithLocationDetails (
+ // JMI   msrInternalError (
+    msrInternalWarning (
       gServiceRunData->getInputSourceName (),
       fInputLineNumber,
   //    __FILE__, __LINE__,
@@ -4261,7 +4266,7 @@ void msrMeasure::determineMeasureKindAndPuristNumber (
     newWholeNotesSinceLastRegularMeasureEnd =
       wholeNotesSinceLastRegularMeasureEnd
         +
-      fMeasureCurrentWholeNotesDuration;
+      fMeasureCurrentAccumulatedWholeNotesDuration;
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasures ()) {
@@ -4270,8 +4275,8 @@ void msrMeasure::determineMeasureKindAndPuristNumber (
     ss <<
       "Determining the measure kind and purist number of measure " <<
       this->asShortString () <<
-      ", fullMeasureCurrentWholeNotesDuration: " << fFullMeasureCurrentWholeNotesDuration.asString () <<
-      "', measureCurrentWholeNotesDuration: " << fMeasureCurrentWholeNotesDuration.asString () <<
+      ", fullMeasureWholeNotesDuration: " << fFullMeasureWholeNotesDuration.asString () <<
+      "', measureCurrentAccumulatedWholeNotesDuration: " << fMeasureCurrentAccumulatedWholeNotesDuration.asString () <<
       ", wholeNotesSinceLastRegularMeasureEnd: " << wholeNotesSinceLastRegularMeasureEnd <<
       ", newWholeNotesSinceLastRegularMeasureEnd: " << newWholeNotesSinceLastRegularMeasureEnd <<
       ", currentVoiceRepeatPhaseKind: " << currentVoiceRepeatPhaseKind <<
@@ -4301,27 +4306,27 @@ void msrMeasure::determineMeasureKindAndPuristNumber (
 
       ss <<
         "--> determineMeasureKindAndPuristNumber() 2" <<
-        ", fMeasureCurrentWholeNotesDuration: " <<
-        fMeasureCurrentWholeNotesDuration.asString () <<
-        ", fFullMeasureCurrentWholeNotesDuration: " <<
-        fFullMeasureCurrentWholeNotesDuration.asString () <<
+        ", fMeasureCurrentAccumulatedWholeNotesDuration: " <<
+        fMeasureCurrentAccumulatedWholeNotesDuration.asString () <<
+        ", fFullMeasureWholeNotesDuration: " <<
+        fFullMeasureWholeNotesDuration.asString () <<
         ", fMeasureEndRegularKind: " <<
         fMeasureEndRegularKind;
 
-      gWaeHandler->waeTraceWithLocationDetails (
+      gWaeHandler->waeTrace (
         __FILE__, __LINE__,
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
-  if (fMeasureCurrentWholeNotesDuration.getNumerator () == 0) {
+  if (fMeasureCurrentAccumulatedWholeNotesDuration.getNumerator () == 0) {
     // empty measure
       handleEmptyMeasure (
         inputLineNumber,
         voice);
  }
 
-  else if (fMeasureCurrentWholeNotesDuration == fFullMeasureCurrentWholeNotesDuration) {
+  else if (fMeasureCurrentAccumulatedWholeNotesDuration == fFullMeasureWholeNotesDuration) {
     // this is a regular measure
       handleRegularMeasure (
         inputLineNumber,
@@ -4338,7 +4343,7 @@ void msrMeasure::determineMeasureKindAndPuristNumber (
         newWholeNotesSinceLastRegularMeasureEnd);
 
     // set measure kind
-    if (fMeasureCurrentWholeNotesDuration < fFullMeasureCurrentWholeNotesDuration) {
+    if (fMeasureCurrentAccumulatedWholeNotesDuration < fFullMeasureWholeNotesDuration) {
       //  this is an incomplete measure
       handleIncompleteMeasure (
         inputLineNumber,
@@ -4347,7 +4352,7 @@ void msrMeasure::determineMeasureKindAndPuristNumber (
         newWholeNotesSinceLastRegularMeasureEnd);
     }
 
-    else { // fMeasureCurrentWholeNotesDuration > fFullMeasureCurrentWholeNotesDuration
+    else { // fMeasureCurrentAccumulatedWholeNotesDuration > fFullMeasureWholeNotesDuration
       // this is an overfull measure
       handleOverFullMeasure (
         inputLineNumber,
@@ -4396,7 +4401,7 @@ void msrMeasure::handleEmptyMeasure (
         "--> handleEmptyMeasure()" <<
         ", fMeasureEndRegularKind: " << fMeasureEndRegularKind;
 
-      gWaeHandler->waeTraceWithLocationDetails (
+      gWaeHandler->waeTrace (
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -4420,13 +4425,13 @@ void msrMeasure::handleEmptyMeasure (
       ", line " << inputLineNumber;
 
     if (false) // JMI v0.9.66
-      msrInternalErrorWithLocationDetails (
+      msrInternalError (
         gServiceRunData->getInputSourceName (),
         inputLineNumber,
         __FILE__, __LINE__,
         ss.str ());
     else
-      msrInternalWarningWithLocationDetails (
+      msrInternalWarning (
         gServiceRunData->getInputSourceName (),
         inputLineNumber,
         ss.str ());
@@ -4461,7 +4466,7 @@ void msrMeasure::handleRegularMeasure (
       "--> handleRegularMeasure()" <<
       ", fMeasureEndRegularKind: " << fMeasureEndRegularKind;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -4501,7 +4506,7 @@ void msrMeasure::handleIncompleteMeasure (
         "--> handleIncompleteMeasure() 1" <<
         ", fMeasureEndRegularKind: " << fMeasureEndRegularKind;
 
-      gWaeHandler->waeTraceWithLocationDetails (
+      gWaeHandler->waeTrace (
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -4526,7 +4531,7 @@ void msrMeasure::handleIncompleteMeasure (
       scoreMeasuresNumber <<
       std::endl;
 
-      gWaeHandler->waeTraceWithLocationDetails (
+      gWaeHandler->waeTrace (
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -4553,7 +4558,7 @@ void msrMeasure::handleIncompleteMeasure (
     // this is an incomplete measure within the voice
 
     if (
-      newWholeNotesSinceLastRegularMeasureEnd == fFullMeasureCurrentWholeNotesDuration
+      newWholeNotesSinceLastRegularMeasureEnd == fFullMeasureWholeNotesDuration
     ) {
       // this is a regular measure end
       setMeasureEndRegularKind (kMeasureEndRegularKindYes);
@@ -4596,8 +4601,8 @@ void msrMeasure::handleIncompleteMeasure (
             asShortString () <<
             ", line " << inputLineNumber;
 
-    // JMI      msrInternalErrorWithLocationDetails (
-          msrInternalWarningWithLocationDetails (
+    // JMI      msrInternalError (
+          msrInternalWarning (
             gServiceRunData->getInputSourceName (),
             inputLineNumber,
      //       __FILE__, __LINE__,
@@ -4674,7 +4679,7 @@ void msrMeasure::handleOverFullMeasure (
       "--> handleOverFullMeasure()" <<
       ", fMeasureEndRegularKind: " << fMeasureEndRegularKind;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -4750,7 +4755,7 @@ void msrMeasure::finalizeRegularMeasure (
       fMeasureOrdinalNumberInVoice <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -4765,12 +4770,12 @@ void msrMeasure::finalizeRegularMeasure (
     registerOrdinalMeasureNumberWholeNotes (
       inputLineNumber,
       fMeasureOrdinalNumberInVoice,
-      fMeasureCurrentWholeNotesDuration);
+      fMeasureCurrentAccumulatedWholeNotesDuration);
 
 
   // register this measures whole notes duration in the part measures vector
   msrWholeNotes
-    measureCurrentWholeNotesDurationFromPartMeasuresVector =
+    measureCurrentAccumulatedWholeNotesDurationFromPartMeasuresVector =
       regularPart->
         fetchPartMeasuresWholeNotessVectorAt (
           inputLineNumber,
@@ -4781,11 +4786,11 @@ void msrMeasure::finalizeRegularMeasure (
     std::stringstream ss;
 
     ss <<
-      "===> measureCurrentWholeNotesDurationFromPartMeasuresVector: " <<
-      measureCurrentWholeNotesDurationFromPartMeasuresVector <<
+      "===> measureCurrentAccumulatedWholeNotesDurationFromPartMeasuresVector: " <<
+      measureCurrentAccumulatedWholeNotesDurationFromPartMeasuresVector <<
       ", fMeasureOrdinalNumberInVoice: " << fMeasureOrdinalNumberInVoice;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -4804,7 +4809,7 @@ void msrMeasure::finalizeRegularMeasure (
 //* JMI v0.9.66 USELESS ??? harmonies problem
   padUpToPositionAtTheEndOfTheMeasure (
     inputLineNumber,
-    measureCurrentWholeNotesDurationFromPartMeasuresVector,
+    measureCurrentAccumulatedWholeNotesDurationFromPartMeasuresVector,
     "finalizeRegularMeasure()");
 //*/
 
@@ -4843,39 +4848,39 @@ void msrMeasure::finalizeRegularMeasure (
       break;
   } // switch
 
-  // is there a single note or rest occupying the full measure?
-  if (fMeasureLongestNote) {
-    if (
-      fMeasureLongestNote-> getSoundingWholeNotes ()
-        ==
-      fFullMeasureCurrentWholeNotesDuration
-    ) {
-#ifdef MF_TRACE_IS_ENABLED
-      if (gTraceOahGroup->getTraceMeasures ()) {
-        std::stringstream ss;
-
-        ss <<
-          "Note '" <<
-          fMeasureLongestNote->asShortString () <<
-          "' occupies measure " <<
-          this->asShortString () <<
-          " fully in segment '" <<
-          fMeasureUpLinkToSegment->getSegmentAbsoluteNumber () <<
-          "' in voice \"" <<
-          voice->getVoiceName () <<
-          "\", line " << inputLineNumber <<
-          std::endl;
-
-        gWaeHandler->waeTraceWithLocationDetails (
-          __FILE__, __LINE__,
-          ss.str ());
-      }
-#endif // MF_TRACE_IS_ENABLED
-
-      fMeasureLongestNote->
-        setNoteOccupiesAFullMeasure ();
-    }
-  }
+//   // is there a single note or rest occupying the full measure?
+//   if (fMeasureLongestNote) {
+//     if (
+//       fMeasureLongestNote-> getSoundingWholeNotes ()
+//         ==
+//       fFullMeasureWholeNotesDuration
+//     ) {
+// #ifdef MF_TRACE_IS_ENABLED
+//       if (gTraceOahGroup->getTraceMeasures ()) {
+//         std::stringstream ss;
+//
+//         ss <<
+//           "Note '" <<
+//           fMeasureLongestNote->asShortString () <<
+//           "' occupies measure " <<
+//           this->asShortString () <<
+//           " fully in segment '" <<
+//           fMeasureUpLinkToSegment->getSegmentAbsoluteNumber () <<
+//           "' in voice \"" <<
+//           voice->getVoiceName () <<
+//           "\", line " << inputLineNumber <<
+//           std::endl;
+//
+//         gWaeHandler->waeTrace (
+//           __FILE__, __LINE__,
+//           ss.str ());
+//       }
+// #endif // MF_TRACE_IS_ENABLED
+//
+//       fMeasureLongestNote->
+//         setNoteOccupiesAFullMeasure ();
+//     }
+//   }
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasuresDetails ()) {
@@ -4951,7 +4956,7 @@ void msrMeasure::finalizeRegularMeasure (
 //      measurePositionToPadUpTo.asString () <<
 //       std::endl;
 //
-//     gWaeHandler->waeTraceWithLocationDetails (
+//     gWaeHandler->waeTrace (
 //       __FILE__, __LINE__,
 //       ss.str (),
 //   }
@@ -4983,7 +4988,7 @@ void msrMeasure::finalizeRegularMeasure (
 //         "\", line " << inputLineNumber <<
 //         std::endl;
 //
-//       gWaeHandler->waeTraceWithLocationDetails (
+//       gWaeHandler->waeTrace (
 //         __FILE__, __LINE__,
 //         ss.str (),
 //     }
@@ -5103,7 +5108,7 @@ void msrMeasure::finalizeRegularMeasure (
 //
 //     --gIndenter;
 //
-//     gWaeHandler->waeTraceWithLocationDetails (
+//     gWaeHandler->waeTrace (
 //       __FILE__, __LINE__,
 //       iss.str (),
 //   }
@@ -5138,7 +5143,7 @@ void msrMeasure::finalizeRegularMeasure (
 //         "\", line " << inputLineNumber <<
 //         std::endl;
 //
-//       gWaeHandler->waeTraceWithLocationDetails (
+//       gWaeHandler->waeTrace (
 //         __FILE__, __LINE__,
 //         ss.str (),
 //     }
@@ -5179,7 +5184,7 @@ void msrMeasure::finalizeRegularMeasure (
 //         newPreviousHarmonyWholeNotes.asString () <<
 //         std::endl;
 //
-//       gWaeHandler->waeTraceWithLocationDetails (
+//       gWaeHandler->waeTrace (
 //         __FILE__, __LINE__,
 //         ss.str (),
 //     }
@@ -5213,7 +5218,7 @@ void msrMeasure::handleTheLastHarmonyInAHarmoniesMeasure (
       voice->getVoiceName () <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -5251,7 +5256,7 @@ void msrMeasure::handleTheLastHarmonyInAHarmoniesMeasure (
 //     measureOverflowWholeNotes =
 //       measurePositionFollowingCurrentHarmony
 //         -
-//       fFullMeasureCurrentWholeNotesDuration;
+//       fFullMeasureWholeNotesDuration;
 
   // fetch the harmonies voice
   S_msrVoice
@@ -5272,7 +5277,7 @@ void msrMeasure::handleTheLastHarmonyInAHarmoniesMeasure (
 
   // fetch the measure whole notes from the part measures fector
   msrWholeNotes
-    measureCurrentWholeNotesDurationFromPartMeasuresVector =
+    measureCurrentAccumulatedWholeNotesDurationFromPartMeasuresVector =
       harmoniesPart->
         fetchPartMeasuresWholeNotessVectorAt (
           inputLineNumber,
@@ -5281,7 +5286,7 @@ void msrMeasure::handleTheLastHarmonyInAHarmoniesMeasure (
   // compute the gap at the end of the measure if any
   msrWholeNotes
     gapAtTheEndOfTheMeasure =
-      measureCurrentWholeNotesDurationFromPartMeasuresVector
+      measureCurrentAccumulatedWholeNotesDurationFromPartMeasuresVector
         -
       measurePositionFollowingCurrentHarmony;
 
@@ -5339,8 +5344,8 @@ void msrMeasure::handleTheLastHarmonyInAHarmoniesMeasure (
       measurePositionFollowingCurrentHarmony <<
       '\n' <<
 
-      "fFullMeasureCurrentWholeNotesDuration: " <<
-      fFullMeasureCurrentWholeNotesDuration.asString () <<
+      "fFullMeasureWholeNotesDuration: " <<
+      fFullMeasureWholeNotesDuration.asString () <<
       '\n' <<
 
       "gapAtTheEndOfTheMeasure: " <<
@@ -5348,7 +5353,7 @@ void msrMeasure::handleTheLastHarmonyInAHarmoniesMeasure (
 
     --gIndenter;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       iss.str ());
   }
@@ -5377,7 +5382,7 @@ void msrMeasure::handleTheLastHarmonyInAHarmoniesMeasure (
         voice->getVoiceName () <<
         "\", line " << inputLineNumber;
 
-      gWaeHandler->waeTraceWithLocationDetails (
+      gWaeHandler->waeTrace (
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -5386,7 +5391,7 @@ void msrMeasure::handleTheLastHarmonyInAHarmoniesMeasure (
       // pad up to measurePositionToAppendAt
       padUpToMeasurePosition (
         inputLineNumber,
-        fFullMeasureCurrentWholeNotesDuration);
+        fFullMeasureWholeNotesDuration);
     }
 //   }
 
@@ -5400,8 +5405,8 @@ void msrMeasure::handleTheLastHarmonyInAHarmoniesMeasure (
       " overflows the current measure " <<
       asString ();
 
-    msrInternalWarningWithLocationDetails (
-//     msrInternalErrorWithLocationDetails (
+    msrInternalWarning (
+//     msrInternalError (
       gServiceRunData->getInputSourceName (),
       inputLineNumber,
 //       __FILE__, __LINE__,
@@ -5430,7 +5435,7 @@ void msrMeasure::handleTheLastHarmonyInAHarmoniesMeasure (
 //         "\", line " << inputLineNumber <<
 //         std::endl;
 //
-//       gWaeHandler->waeTraceWithLocationDetails (
+//       gWaeHandler->waeTrace (
 //         __FILE__, __LINE__,
 //         ss.str (),
 //     }
@@ -5444,7 +5449,7 @@ void msrMeasure::handleTheLastHarmonyInAHarmoniesMeasure (
 //         currentHarmony->asShortString () <<
 //         " to 0 : leaving it as it is";
 //
-//       msrInternalWarningWithLocationDetails
+//       msrInternalWarning
 //         gServiceRunData->getInputSourceName (),
 //         inputLineNumber,
 // //  JMI             __FILE__, __LINE__,
@@ -5475,7 +5480,7 @@ void msrMeasure::handleTheLastHarmonyInAHarmoniesMeasure (
         voice->getVoiceName () <<
         "\", line " << inputLineNumber;
 
-      gWaeHandler->waeTraceWithLocationDetails (
+      gWaeHandler->waeTrace (
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -5510,7 +5515,7 @@ void msrMeasure::finalizeTheHarmoniesInAHarmoniesMeasure (
       "\" (" << context << ")" <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -5543,7 +5548,7 @@ void msrMeasure::finalizeTheHarmoniesInAHarmoniesMeasure (
         "\" (" << context << ")" <<
         ", line " << inputLineNumber;
 
-      gWaeHandler->waeTraceWithLocationDetails (
+      gWaeHandler->waeTrace (
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -5587,7 +5592,7 @@ void msrMeasure::finalizeTheHarmoniesInAHarmoniesMeasure (
           ", line " << inputLineNumber <<
           std::endl;
 
-        gWaeHandler->waeTraceWithLocationDetails (
+        gWaeHandler->waeTrace (
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -5650,7 +5655,7 @@ void msrMeasure::finalizeTheHarmoniesInAHarmoniesMeasure (
                 note->asShortString () <<
                 std::endl;
 
-              msrInternalErrorWithLocationDetails (
+              msrInternalError (
                 gServiceRunData->getInputSourceName (),
                 inputLineNumber,
                 __FILE__, __LINE__,
@@ -5682,7 +5687,7 @@ void msrMeasure::finalizeTheHarmoniesInAHarmoniesMeasure (
           ", line " << inputLineNumber <<
           std::endl;
 
-        gWaeHandler->waeTraceWithLocationDetails (
+        gWaeHandler->waeTrace (
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -5713,7 +5718,7 @@ void msrMeasure::finalizeTheHarmoniesInAHarmoniesMeasure (
       }
 
       msrWholeNotes
-        measureCurrentWholeNotesDurationFromPartMeasuresVector =
+        measureCurrentAccumulatedWholeNotesDurationFromPartMeasuresVector =
           regularPart->
             fetchPartMeasuresWholeNotessVectorAt (
               inputLineNumber,
@@ -5724,12 +5729,12 @@ void msrMeasure::finalizeTheHarmoniesInAHarmoniesMeasure (
         std::stringstream ss;
 
         ss <<
-          "===> measureCurrentWholeNotesDurationFromPartMeasuresVector: " <<
-          measureCurrentWholeNotesDurationFromPartMeasuresVector <<
+          "===> measureCurrentAccumulatedWholeNotesDurationFromPartMeasuresVector: " <<
+          measureCurrentAccumulatedWholeNotesDurationFromPartMeasuresVector <<
           ", fMeasureOrdinalNumberInVoice: " << fMeasureOrdinalNumberInVoice <<
           std::endl;
 
-        gWaeHandler->waeTraceWithLocationDetails (
+        gWaeHandler->waeTrace (
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -5737,7 +5742,7 @@ void msrMeasure::finalizeTheHarmoniesInAHarmoniesMeasure (
 
       padUpToPositionAtTheEndOfTheMeasure ( // JMI ??? v0.9.67
         inputLineNumber,
-        measureCurrentWholeNotesDurationFromPartMeasuresVector,
+        measureCurrentAccumulatedWholeNotesDurationFromPartMeasuresVector,
         "finalizeTheHarmoniesInAHarmoniesMeasure()");
     }
 
@@ -5776,7 +5781,7 @@ void msrMeasure::finalizeTheHarmoniesInAHarmoniesMeasure (
 //       ", line " << inputLineNumber <<
 //       std::endl;
 //
-//     gWaeHandler->waeTraceWithLocationDetails (
+//     gWaeHandler->waeTrace (
 //       __FILE__, __LINE__,
 //       ss.str (),
 //   }
@@ -5823,7 +5828,7 @@ void msrMeasure::finalizeTheHarmoniesInAHarmoniesMeasure (
 //       currentHarmonyUpLinkToNoteMeasurePosition.asString () <<
 //       std::endl;
 //
-//     gWaeHandler->waeTraceWithLocationDetails (
+//     gWaeHandler->waeTrace (
 //       __FILE__, __LINE__,
 //       ss.str (),
 //   }
@@ -5884,7 +5889,7 @@ void msrMeasure::handleFirstFiguredBassInFiguredBassMeasure (
       ", previousFiguredBass is null, measurePositionToPadUpTo: " <<
       measurePositionToPadUpTo.asString ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -5915,7 +5920,7 @@ void msrMeasure::handleFirstFiguredBassInFiguredBassMeasure (
         voice->getVoiceName () <<
         "\", line " << inputLineNumber;
 
-      gWaeHandler->waeTraceWithLocationDetails (
+      gWaeHandler->waeTrace (
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -6000,7 +6005,7 @@ void msrMeasure::handleSubsequentFiguredBassInFiguredBassMeasure (
       ", measurePositionsDelta: " <<
       measurePositionsDelta;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -6020,7 +6025,7 @@ void msrMeasure::handleSubsequentFiguredBassInFiguredBassMeasure (
 //     skipNote->
 //       setMeasurePosition (
 //         this,
-//         fMeasureCurrentWholeNotesDuration,
+//         fMeasureCurrentAccumulatedWholeNotesDuration,
 //         "handleSubsequentFiguredBassInFiguredBassMeasure() 8");
 
     // insert skipNote before currentFiguredBass in the measure's elements list
@@ -6037,7 +6042,7 @@ void msrMeasure::handleSubsequentFiguredBassInFiguredBassMeasure (
         voice->getVoiceName () <<
         "\", line " << inputLineNumber;
 
-      gWaeHandler->waeTraceWithLocationDetails (
+      gWaeHandler->waeTrace (
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -6060,7 +6065,7 @@ void msrMeasure::handleSubsequentFiguredBassInFiguredBassMeasure (
       " overlaps current figured bass " <<
       currentFiguredBass->asString ();
 
-    msrInternalWarningWithLocationDetails (
+    msrInternalWarning (
       gServiceRunData->getInputSourceName (),
       inputLineNumber,
       ss.str ());
@@ -6087,7 +6092,7 @@ void msrMeasure::handleSubsequentFiguredBassInFiguredBassMeasure (
         voice->getVoiceName () <<
         "\", line " << inputLineNumber;
 
-      gWaeHandler->waeTraceWithLocationDetails (
+      gWaeHandler->waeTrace (
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -6101,7 +6106,7 @@ void msrMeasure::handleSubsequentFiguredBassInFiguredBassMeasure (
         previousFiguredBass->asShortString () <<
         " to 0 : leaving it as it is";
 
-      msrInternalWarningWithLocationDetails (
+      msrInternalWarning (
         gServiceRunData->getInputSourceName (),
         inputLineNumber,
 //  JMI             __FILE__, __LINE__,
@@ -6162,7 +6167,7 @@ void msrMeasure::handleTheLastFiguredBassInFiguredBassMeasure (
       std::endl;
     --gIndenter;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -6173,7 +6178,7 @@ void msrMeasure::handleTheLastFiguredBassInFiguredBassMeasure (
     measureOverflowWholeNotes =
       measurePositionFollowingCurrentFiguredBass
         -
-      fFullMeasureCurrentWholeNotesDuration;
+      fFullMeasureWholeNotesDuration;
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceHarmonies ()) {
@@ -6211,7 +6216,7 @@ void msrMeasure::handleTheLastFiguredBassInFiguredBassMeasure (
       ", measureOverflowWholeNotes: " <<
       measureOverflowWholeNotes.asString ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -6227,7 +6232,7 @@ void msrMeasure::handleTheLastFiguredBassInFiguredBassMeasure (
       " overflows the current measure " <<
       asString ();
 
-    msrInternalWarningWithLocationDetails (
+    msrInternalWarning (
       gServiceRunData->getInputSourceName (),
       inputLineNumber,
       ss.str ());
@@ -6254,7 +6259,7 @@ void msrMeasure::handleTheLastFiguredBassInFiguredBassMeasure (
         voice->getVoiceName () <<
         "\", line " << inputLineNumber;
 
-      gWaeHandler->waeTraceWithLocationDetails (
+      gWaeHandler->waeTrace (
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -6268,7 +6273,7 @@ void msrMeasure::handleTheLastFiguredBassInFiguredBassMeasure (
         currentFiguredBass->asShortString () <<
         " to 0 : leaving it as it is";
 
-      msrInternalWarningWithLocationDetails (
+      msrInternalWarning (
         gServiceRunData->getInputSourceName (),
         inputLineNumber,
 //  JMI             __FILE__, __LINE__,
@@ -6311,7 +6316,7 @@ void msrMeasure::finalizeTheFiguredBassesInAFiguredBassMeasure (
       "\" (" << context << ")" <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -6344,7 +6349,7 @@ void msrMeasure::finalizeTheFiguredBassesInAFiguredBassMeasure (
 //         ", line " << inputLineNumber <<
 //         std::endl;
 //
-//       gWaeHandler->waeTraceWithLocationDetails (
+//       gWaeHandler->waeTrace (
 //         __FILE__, __LINE__,
 //         ss.str (),
 //     }
@@ -6408,7 +6413,7 @@ void msrMeasure::finalizeTheFiguredBassesInAFiguredBassMeasure (
                 std::endl;
               --gIndenter;
 
-            gWaeHandler->waeTraceWithLocationDetails (
+            gWaeHandler->waeTrace (
               __FILE__, __LINE__,
               ss.str ());
           }
@@ -6455,7 +6460,7 @@ void msrMeasure::finalizeTheFiguredBassesInAFiguredBassMeasure (
               currentFiguredBassUpLinkToNoteMeasurePosition.asString () <<
               std::endl;
 
-            gWaeHandler->waeTraceWithLocationDetails (
+            gWaeHandler->waeTrace (
               __FILE__, __LINE__,
               ss.str ());
           }
@@ -6546,7 +6551,7 @@ void msrMeasure::finalizeHarmonyMeasure (
       "\" (" << context << ")" <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -6578,7 +6583,7 @@ void msrMeasure::finalizeHarmonyMeasure (
       ", harmoniesPartNumberOfMeasures: " <<
       harmoniesPartNumberOfMeasures;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -6591,16 +6596,16 @@ void msrMeasure::finalizeHarmonyMeasure (
 
   // fetch the measure whole notes from the part measures fector
   msrWholeNotes
-    measureCurrentWholeNotesDurationFromPartMeasuresVector =
+    measureCurrentAccumulatedWholeNotesDurationFromPartMeasuresVector =
       harmoniesPart->
         fetchPartMeasuresWholeNotessVectorAt (
           inputLineNumber,
           fMeasureOrdinalNumberInVoice - 1);
 
-  // pad the measure up to measureCurrentWholeNotesDurationFromPartMeasuresVector
+  // pad the measure up to measureCurrentAccumulatedWholeNotesDurationFromPartMeasuresVector
   padUpToPositionAtTheEndOfTheMeasure ( // JMI ??? v0.9.67
     inputLineNumber,
-    measureCurrentWholeNotesDurationFromPartMeasuresVector,
+    measureCurrentAccumulatedWholeNotesDurationFromPartMeasuresVector,
     "finalizeHarmonyMeasure()");
 
   // determine the measure kind and purist number
@@ -6655,7 +6660,7 @@ void msrMeasure::finalizeFiguredBassMeasure (
       "\" (" << context << ")" <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -6687,7 +6692,7 @@ void msrMeasure::finalizeFiguredBassMeasure (
       ", figuredBassPartNumberOfMeasures: " <<
       figuredBassPartNumberOfMeasures;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -6698,22 +6703,22 @@ void msrMeasure::finalizeFiguredBassMeasure (
 //     inputLineNumber,
 //     context);
 
-  // the measureCurrentWholeNotesDuration has to be computed
+  // the measureCurrentAccumulatedWholeNotesDuration has to be computed
   // only now because finalizeTheHarmoniesInAHarmoniesMeasure()
   // may have incremented a harmony sounding whole notes duration
   msrWholeNotes
-    measureCurrentWholeNotesDurationFromPartMeasuresVector =
+    measureCurrentAccumulatedWholeNotesDurationFromPartMeasuresVector =
       figuredBassPart->
         fetchPartMeasuresWholeNotessVectorAt (
           inputLineNumber,
           fMeasureOrdinalNumberInVoice - 1);
 
-  // pad the measure up to measureCurrentWholeNotesDurationFromPartMeasuresVector
+  // pad the measure up to measureCurrentAccumulatedWholeNotesDurationFromPartMeasuresVector
   // only if the measure doesn't contain any non-rest note,
   // otherwise the last figured bass element in the measure has already been extended to the end of the measure
   padUpToPositionAtTheEndOfTheMeasure ( // JMI ??? v0.9.67
     inputLineNumber,
-    measureCurrentWholeNotesDurationFromPartMeasuresVector,
+    measureCurrentAccumulatedWholeNotesDurationFromPartMeasuresVector,
     "finalizeFiguredBassMeasure()");
 
   // determine the measure kind and purist number
@@ -6775,13 +6780,13 @@ void msrMeasure::finalizeMeasure (
       ss << std::endl;
       --gIndenter;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
-    msrInternalWarningWithLocationDetails (
+    msrInternalWarning (
       gServiceRunData->getInputSourceName (),
       fInputLineNumber,
       ss.str ());
@@ -6810,7 +6815,7 @@ void msrMeasure::finalizeMeasure (
         ", lines " << inputLineNumber << " .. " << fMeasureEndInputLineNumber << // JMI
         std::endl;
 
-      gWaeHandler->waeTraceWithLocationDetails (
+      gWaeHandler->waeTrace (
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -6818,7 +6823,7 @@ void msrMeasure::finalizeMeasure (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasures ()) {
-    if (fMeasureCurrentWholeNotesDuration.getNumerator () == 0) {
+    if (fMeasureCurrentAccumulatedWholeNotesDuration.getNumerator () == 0) {
       std::stringstream ss;
 
       ss <<
@@ -6832,7 +6837,7 @@ void msrMeasure::finalizeMeasure (
         ", doesn't contain any music" <<
         std::endl;
 
-      msrWarningWithLocationDetails (
+      msrWarning (
         gServiceRunData->getInputSourceName (),
         inputLineNumber,
         ss.str ());
@@ -6921,7 +6926,7 @@ void msrMeasure::finalizeMeasureClone (
         ", lines " << inputLineNumber << " .. " << fMeasureEndInputLineNumber << // JMI
       std::endl;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -6929,7 +6934,7 @@ void msrMeasure::finalizeMeasureClone (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasures ()) {
-    if (fMeasureCurrentWholeNotesDuration.getNumerator () == 0) {
+    if (fMeasureCurrentAccumulatedWholeNotesDuration.getNumerator () == 0) {
       std::stringstream ss;
 
       ss <<
@@ -6943,7 +6948,7 @@ void msrMeasure::finalizeMeasureClone (
         ", doesn't contain any music" <<
         std::endl;
 
-      msrWarningWithLocationDetails (
+      msrWarning (
         gServiceRunData->getInputSourceName (),
         inputLineNumber,
         ss.str ());
@@ -6967,7 +6972,7 @@ void msrMeasure::finalizeMeasureClone (
       asShortString () <<
       "\" more than once";
 
-    msrInternalErrorWithLocationDetails (
+    msrInternalError (
       gServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
@@ -6984,12 +6989,12 @@ void msrMeasure::finalizeMeasureClone (
 
   if (! voiceCurrentTimeSignature) {
     // take the implicit 4/4 measure whole notes into account
-    setFullMeasureCurrentWholeNotesDuration (
+    setFullMeasureWholeNotesDuration (
       msrWholeNotes (1, 1));
   }
   else {
     // set the full length from time
-    setFullMeasureCurrentWholeNotesDurationFromTimeSignature (
+    setFullMeasureWholeNotesDurationFromTimeSignature (
       voiceCurrentTimeSignature);
   }
 
@@ -7021,7 +7026,7 @@ void msrMeasure::finalizeMeasureClone (
     registerOrdinalMeasureNumberWholeNotes (
       inputLineNumber,
       fMeasureOrdinalNumberInVoice,
-      fMeasureCurrentWholeNotesDuration);
+      fMeasureCurrentAccumulatedWholeNotesDuration);
 
   // determine the measure kind and purist number
   determineMeasureKindAndPuristNumber (
@@ -7059,14 +7064,14 @@ void msrMeasure::finalizeMeasureClone (
         voiceClone->getVoiceName () <<
         "', line " << inputLineNumber;
 
-   //   msrInternalErrorWithLocationDetails ( // JMI
-      msrInternalWarningWithLocationDetails (
+   //   msrInternalError ( // JMI
+      msrInternalWarning (
         gServiceRunData->getInputSourceName (),
         inputLineNumber,
    //      __FILE__, __LINE__,
         ss.str ());
 
-      if (fFullMeasureCurrentWholeNotesDuration.getNumerator () == 0) { // JMI
+      if (fFullMeasureWholeNotesDuration.getNumerator () == 0) { // JMI
         std::stringstream ss;
 
         ss <<
@@ -7075,8 +7080,8 @@ void msrMeasure::finalizeMeasureClone (
           "' full measure whole notes is 0" <<
           ", line " << inputLineNumber;
 
-     //   msrInternalErrorWithLocationDetails ( // JMI
-        msrInternalWarningWithLocationDetails (
+     //   msrInternalError ( // JMI
+        msrInternalWarning (
           gServiceRunData->getInputSourceName (),
           inputLineNumber,
      //      __FILE__, __LINE__,
@@ -7162,7 +7167,7 @@ void msrMeasure::acceptIn (basevisitor* v)
     ss <<
       "% ==> msrMeasure::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -7180,7 +7185,7 @@ void msrMeasure::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching msrMeasure::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -7198,7 +7203,7 @@ void msrMeasure::acceptOut (basevisitor* v)
     ss <<
       "% ==> msrMeasure::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -7216,7 +7221,7 @@ void msrMeasure::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching msrMeasure::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -7234,7 +7239,7 @@ void msrMeasure::browseData (basevisitor* v)
     ss <<
       "% ==> msrMeasure::browseData ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -7257,7 +7262,7 @@ void msrMeasure::browseData (basevisitor* v)
     ss <<
       "% <== msrMeasure::browseData ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -7367,10 +7372,10 @@ std::string msrMeasure::asShortString () const
     fMeasureDebugNumber <<
     */
 /* JMI
-    ", fMeasureCurrentWholeNotesDuration: " <<
-    fMeasureCurrentWholeNotesDuration.asString () <<
-    ", fFullMeasureCurrentWholeNotesDuration: " <<
-    fFullMeasureCurrentWholeNotesDuration.asString () <<
+    ", fMeasureCurrentAccumulatedWholeNotesDuration: " <<
+    fMeasureCurrentAccumulatedWholeNotesDuration.asString () <<
+    ", fFullMeasureWholeNotesDuration: " <<
+    fFullMeasureWholeNotesDuration.asString () <<
     */
     ", " <<
     mfSingularOrPlural (
@@ -7408,10 +7413,10 @@ std::string msrMeasure::asShortStringForMeasuresSlices () const
     fMeasurePuristNumber <<
     ", fMeasureDebugNumber: '" <<
     fMeasureDebugNumber <<
-    ", fMeasureCurrentWholeNotesDuration: " <<
-    fMeasureCurrentWholeNotesDuration.asString () <<
-    ", fFullMeasureCurrentWholeNotesDuration: " <<
-    fFullMeasureCurrentWholeNotesDuration.asString () <<
+    ", fMeasureCurrentAccumulatedWholeNotesDuration: " <<
+    fMeasureCurrentAccumulatedWholeNotesDuration.asString () <<
+    ", fFullMeasureWholeNotesDuration: " <<
+    fFullMeasureWholeNotesDuration.asString () <<
     ", ";
     mfSingularOrPlural (
       fMeasureElementsList.size (), "element", "elements") <<
@@ -7480,10 +7485,10 @@ std::string msrMeasure::asString () const
     fMeasurePuristNumber <<
     ", fMeasureDebugNumber: '" <<
     fMeasureDebugNumber <<
-    ", fMeasureCurrentWholeNotesDuration: " <<
-    fMeasureCurrentWholeNotesDuration.asString () <<
-    ", fFullMeasureCurrentWholeNotesDuration: " <<
-    fFullMeasureCurrentWholeNotesDuration.asString () <<
+    ", fMeasureCurrentAccumulatedWholeNotesDuration: " <<
+    fMeasureCurrentAccumulatedWholeNotesDuration.asString () <<
+    ", fFullMeasureWholeNotesDuration: " <<
+    fFullMeasureWholeNotesDuration.asString () <<
     ", " <<
     mfSingularOrPlural (
       fMeasureElementsList.size (), "element", "elements") <<
@@ -7530,19 +7535,19 @@ void msrMeasure::printFull (std::ostream& os) const
     ", " <<
     mfSingularOrPlural (
       fMeasureElementsList.size (), "element", "elements") <<
-    ", fMeasureCurrentWholeNotesDuration: " <<
-    fMeasureCurrentWholeNotesDuration.asString () <<
+    ", fMeasureCurrentAccumulatedWholeNotesDuration: " <<
+    fMeasureCurrentAccumulatedWholeNotesDuration.asString () <<
     ", line " << fInputLineNumber <<
     std::endl;
 
   ++gIndenter;
 
-  const int fieldWidth = 45;
+  const int fieldWidth = 46;
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fullMeasureCurrentWholeNotesDuration" << ": " <<
-    fFullMeasureCurrentWholeNotesDuration.asString () <<
+    "fullMeasureWholeNotesDuration" << ": " <<
+    fFullMeasureWholeNotesDuration.asString () <<
     std::endl <<
 
     std::setw (fieldWidth) <<
@@ -7652,12 +7657,12 @@ void msrMeasure::printFull (std::ostream& os) const
     /* JMI
 
     std::setw (fieldWidth) <<
-    "measureCurrentWholeNotesDurationAsMsrString" << ": " <<
-    measureCurrentWholeNotesDurationAsMsrString () <<
+    "measureCurrentAccumulatedWholeNotesDurationAsMsrString" << ": " <<
+    measureCurrentAccumulatedWholeNotesDurationAsMsrString () <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fullMeasureCurrentWholeNotesDurationAsMsrString" << ": " <<
-    fullMeasureCurrentWholeNotesDurationAsMsrString () <<
+    "fullMeasureWholeNotesDurationAsMsrString" << ": " <<
+    fullMeasureWholeNotesDurationAsMsrString () <<
     std::endl <<
       */
 
@@ -7807,14 +7812,14 @@ void msrMeasure::print (std::ostream& os) const
     ", " <<
     mfSingularOrPlural (
       fMeasureElementsList.size (), "element", "elements") <<
-    ", fMeasureCurrentWholeNotesDuration: " <<
-    fMeasureCurrentWholeNotesDuration.asString () <<
+    ", fMeasureCurrentAccumulatedWholeNotesDuration: " <<
+    fMeasureCurrentAccumulatedWholeNotesDuration.asString () <<
     ", line " << fInputLineNumber <<
     std::endl;
 
   ++gIndenter;
 
-  const int fieldWidth = 29;
+  const int fieldWidth = 37;
 
   os << std::left <<
     std::setw (fieldWidth) <<
@@ -7843,8 +7848,8 @@ void msrMeasure::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fullMeasureCurrentWholeNotesDuration" << ": " <<
-    fFullMeasureCurrentWholeNotesDuration.asString () <<
+    "fullMeasureWholeNotesDuration" << ": " <<
+    fFullMeasureWholeNotesDuration.asString () <<
     std::endl;
 
   size_t
@@ -7915,7 +7920,7 @@ std::ostream& operator << (std::ostream& os, const S_msrMeasure& elt)
 //     skipNote->
 //       setMeasurePosition (
 //         this,
-//         fMeasureCurrentWholeNotesDuration,
+//         fMeasureCurrentAccumulatedWholeNotesDuration,
 //         "handleASubsequentHarmonyInAHarmoniesMeasure() 2");
 //
 //     // insert skipNote before currentHarmony in the measure's elements list
@@ -7933,7 +7938,7 @@ std::ostream& operator << (std::ostream& os, const S_msrMeasure& elt)
 //         "\", line " << inputLineNumber <<
 //         std::endl;
 //
-//       gWaeHandler->waeTraceWithLocationDetails (
+//       gWaeHandler->waeTrace (
 //         __FILE__, __LINE__,
 //         ss.str ());
 //     }
@@ -7956,7 +7961,7 @@ std::ostream& operator << (std::ostream& os, const S_msrMeasure& elt)
 //       " overlaps current harmony " <<
 //       currentHarmony->asString ();
 //
-//     msrInternalWarningWithLocationDetails (
+//     msrInternalWarning (
 //       gServiceRunData->getInputSourceName (),
 //       inputLineNumber,
 //       ss.str (),
@@ -7984,7 +7989,7 @@ std::ostream& operator << (std::ostream& os, const S_msrMeasure& elt)
 //         "\", line " << inputLineNumber <<
 //         std::endl;
 //
-//       gWaeHandler->waeTraceWithLocationDetails (
+//       gWaeHandler->waeTrace (
 //         __FILE__, __LINE__,
 //         ss.str ());
 //     }
@@ -7998,7 +8003,7 @@ std::ostream& operator << (std::ostream& os, const S_msrMeasure& elt)
 //         previousHarmony->asShortString () <<
 //         " to 0 : leaving it as it is";
 //
-//       msrInternalWarningWithLocationDetails (
+//       msrInternalWarning (
 //         gServiceRunData->getInputSourceName (),
 //         inputLineNumber,
 // //  JMI             __FILE__, __LINE__,

@@ -13,7 +13,7 @@
 
 #include "visitor.h"
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "mfStringsHandling.h"
 
@@ -191,7 +191,7 @@ void msr2bsrOahGroup::acceptIn (basevisitor* v)
     ss <<
       ".\\\" ==> msr2bsrOahGroup::acceptIn ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -209,7 +209,7 @@ void msr2bsrOahGroup::acceptIn (basevisitor* v)
           ss <<
             ".\\\" ==> Launching msr2bsrOahGroup::visitStart ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -227,7 +227,7 @@ void msr2bsrOahGroup::acceptOut (basevisitor* v)
     ss <<
       ".\\\" ==> msr2bsrOahGroup::acceptOut ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -245,7 +245,7 @@ void msr2bsrOahGroup::acceptOut (basevisitor* v)
           ss <<
             ".\\\" ==> Launching msr2bsrOahGroup::visitEnd ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -263,7 +263,7 @@ void msr2bsrOahGroup::browseData (basevisitor* v)
     ss <<
       ".\\\" ==> msr2bsrOahGroup::browseData ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -349,7 +349,7 @@ S_msr2bsrOahGroup createGlobalMsr2bsrOahGroup ()
     ss <<
       "Creating global msr2bsr OAH group";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }

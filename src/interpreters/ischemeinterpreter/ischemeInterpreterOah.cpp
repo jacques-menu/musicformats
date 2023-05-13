@@ -100,7 +100,7 @@ R"(Write a trace of the iScheme tokens to standard error.)",
 
   fDisplayServiceAndInputAtom =
     oahBooleanAtom::create (
-      "display-service-and-input", "dtai",
+      "display-service-and-input", "dservandinput",
 R"(Write iScheme service and input analysis activity to standard output.)",
       "fDisplayServiceAndInput",
       fDisplayServiceAndInput);
@@ -126,7 +126,7 @@ R"(Write iScheme options analysis activity to standard output.)",
 R"(Analyze the iScheme script, but don't launch the service actually.
 This is useful to check the options gathered by the iScheme interpreter,
 and what command(s) would be launched.
-This option implies the '-display-service-and-input, -ttai' option.)",
+This option implies the '-display-service-and-input, -dsai' option.)",
         "fNoLaunch",
         fNoLaunch,
         fDisplayServiceAndInputAtom));

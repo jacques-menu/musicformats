@@ -12,7 +12,7 @@
 #ifndef ___msdl2brailleManPageOah___
 #define ___msdl2brailleManPageOah___
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "msdl2brailleOah2manPage.h"
 

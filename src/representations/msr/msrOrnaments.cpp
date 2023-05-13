@@ -63,7 +63,7 @@ void msrOrnament::acceptIn (basevisitor* v)
     ss <<
       "% ==> msrOrnament::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -81,7 +81,7 @@ void msrOrnament::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching msrOrnament::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -99,7 +99,7 @@ void msrOrnament::acceptOut (basevisitor* v)
     ss <<
       "% ==> msrOrnament::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -117,7 +117,7 @@ void msrOrnament::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching msrOrnament::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }

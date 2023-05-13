@@ -100,7 +100,7 @@ void msr2summaryVisitor::visitStart (S_msrScore& elt)
     ss <<
       "--> Start visiting msrScore";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -126,7 +126,7 @@ void msr2summaryVisitor::visitEnd (S_msrScore& elt)
     ss <<
       "--> End visiting msrScore";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -274,7 +274,7 @@ void msr2summaryVisitor::visitStart (S_msrPartGroup& elt)
     ss <<
       "--> Start visiting msrPartGroup";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -358,7 +358,7 @@ void msr2summaryVisitor::visitEnd (S_msrPartGroup& elt)
     ss <<
       "--> End visiting msrPartGroup";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -375,7 +375,7 @@ void msr2summaryVisitor::visitStart (S_msrPart& elt)
     ss <<
       "--> Start visiting msrPart";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -445,7 +445,7 @@ void msr2summaryVisitor::visitEnd (S_msrPart& elt)
     ss <<
       "--> End visiting msrPart";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -462,7 +462,7 @@ void msr2summaryVisitor::visitStart (S_msrStaff& elt)
     ss <<
       "--> Start visiting msrStaff";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -519,7 +519,7 @@ void msr2summaryVisitor::visitEnd (S_msrStaff& elt)
     ss <<
       "--> End visiting msrStaff";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -538,7 +538,7 @@ void msr2summaryVisitor::visitStart (S_msrVoice& elt)
     ss <<
       "--> Start visiting msrVoice";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -598,7 +598,7 @@ void msr2summaryVisitor::visitEnd (S_msrVoice& elt)
     ss <<
       "--> End visiting msrVoice";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -615,7 +615,7 @@ void msr2summaryVisitor::visitStart (S_msrStanza& elt)
     ss <<
       "--> Start visiting msrStanza";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -650,7 +650,7 @@ void msr2summaryVisitor::visitEnd (S_msrStanza& elt)
     ss <<
       "--> End visiting msrStanza";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -667,7 +667,7 @@ void msr2summaryVisitor::visitStart (S_msrSyllable& elt)
     ss <<
       "--> Start visiting msrSyllable";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -683,7 +683,7 @@ void msr2summaryVisitor::visitEnd (S_msrSyllable& elt)
     ss <<
       "--> End visiting msrSyllable";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -700,7 +700,7 @@ void msr2summaryVisitor::visitStart (S_msrClef& elt)
     ss <<
       "--> Start visiting msrClef";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -722,7 +722,7 @@ void msr2summaryVisitor::visitEnd (S_msrClef& elt)
     ss <<
       "--> End visiting msrClef";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -739,7 +739,7 @@ void msr2summaryVisitor::visitStart (S_msrKey& elt)
     ss <<
       "--> Start visiting msrKey";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -761,7 +761,7 @@ void msr2summaryVisitor::visitEnd (S_msrKey& elt)
     ss <<
       "--> End visiting msrKey";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -778,7 +778,7 @@ void msr2summaryVisitor::visitStart (S_msrTimeSignature& elt)
     ss <<
       "--> Start visiting msrTimeSignature";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -801,7 +801,7 @@ void msr2summaryVisitor::visitEnd (S_msrTimeSignature& elt)
       "--> End visiting msrTimeSignature" <<
     std::endl;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -819,7 +819,7 @@ void msr2summaryVisitor::visitStart (S_msrTempo& elt)
       "--> Start visiting msrTempo" <<
        std::endl;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -841,7 +841,7 @@ void msr2summaryVisitor::visitEnd (S_msrTempo& elt)
       "--> End visiting msrTempo" <<
     std::endl;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -858,7 +858,7 @@ void msr2summaryVisitor::visitStart (S_msrSegment& elt)
     ss <<
       "--> Start visiting msrSegment";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -874,7 +874,7 @@ void msr2summaryVisitor::visitEnd (S_msrSegment& elt)
     ss <<
       "--> End visiting msrSegment";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -891,7 +891,7 @@ void msr2summaryVisitor::visitStart (S_msrArticulation& elt)
     ss <<
       "--> Start visiting msrArticulation";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -907,7 +907,7 @@ void msr2summaryVisitor::visitEnd (S_msrArticulation& elt)
     ss <<
       "--> End visiting msrArticulation";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -924,7 +924,7 @@ void msr2summaryVisitor::visitStart (S_msrDynamic& elt)
     ss <<
       "--> Start visiting msrDynamic";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -940,7 +940,7 @@ void msr2summaryVisitor::visitEnd (S_msrDynamic& elt)
     ss <<
       "--> End visiting msrDynamic";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -957,7 +957,7 @@ void msr2summaryVisitor::visitStart (S_msrCrescDecresc& elt)
     ss <<
       "--> Start visiting msrCrescDecresc" << std::endl;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -973,7 +973,7 @@ void msr2summaryVisitor::visitEnd (S_msrCrescDecresc& elt)
     ss <<
       "--> End visiting msrCrescDecresc" << std::endl;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -990,7 +990,7 @@ void msr2summaryVisitor::visitStart (S_msrWedge& elt)
     ss <<
       "--> Start visiting msrWedge" << std::endl;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1006,7 +1006,7 @@ void msr2summaryVisitor::visitEnd (S_msrWedge& elt)
     ss <<
       "--> End visiting msrWedge" << std::endl;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1023,7 +1023,7 @@ void msr2summaryVisitor::visitStart (S_msrGraceNotesGroup& elt)
     ss <<
       "--> Start visiting msrGraceNotesGroup" << std::endl;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1039,7 +1039,7 @@ void msr2summaryVisitor::visitEnd (S_msrGraceNotesGroup& elt)
     ss <<
       "--> End visiting msrGraceNotesGroup" << std::endl;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1059,7 +1059,7 @@ void msr2summaryVisitor::visitStart (S_msrNote& elt)
         elt->getNoteKind ()) <<
       " msrNote";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1112,7 +1112,7 @@ void msr2summaryVisitor::visitEnd (S_msrNote& elt)
         elt->getNoteKind ()) <<
       " msrNote";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1155,7 +1155,7 @@ void msr2summaryVisitor::visitStart (S_msrStem& elt)
     ss <<
       "--> Start visiting msrStem" << std::endl;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1171,7 +1171,7 @@ void msr2summaryVisitor::visitEnd (S_msrStem& elt)
     ss <<
       "--> End visiting msrStem";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1188,7 +1188,7 @@ void msr2summaryVisitor::visitStart (S_msrBeam& elt)
     ss <<
       "--> Start visiting msrBeam" << std::endl;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1204,7 +1204,7 @@ void msr2summaryVisitor::visitEnd (S_msrBeam& elt)
     ss <<
       "--> End visiting msrBeam";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1221,7 +1221,7 @@ void msr2summaryVisitor::visitStart (S_msrChord& elt)
     ss <<
       "--> Start visiting msrChord";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1239,7 +1239,7 @@ void msr2summaryVisitor::visitEnd (S_msrChord& elt)
     ss <<
       "--> End visiting msrChord";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1256,7 +1256,7 @@ void msr2summaryVisitor::visitStart (S_msrTuplet& elt)
     ss <<
       "--> Start visiting msrTuplet";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1274,7 +1274,7 @@ void msr2summaryVisitor::visitEnd (S_msrTuplet& elt)
     ss <<
       "--> End visiting msrTuplet";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1291,7 +1291,7 @@ void msr2summaryVisitor::visitStart (S_msrSlur& elt)
     ss <<
       "--> Start visiting msrSlur";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1307,7 +1307,7 @@ void msr2summaryVisitor::visitEnd (S_msrSlur& elt)
     ss <<
       "--> End visiting msrSlur";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1324,7 +1324,7 @@ void msr2summaryVisitor::visitStart (S_msrBarLine& elt)
     ss <<
       "--> Start visiting msrBarLine";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1340,7 +1340,7 @@ void msr2summaryVisitor::visitEnd (S_msrBarLine& elt)
     ss <<
       "--> End visiting msrBarLine";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1357,7 +1357,7 @@ void msr2summaryVisitor::visitStart (S_msrBarNumberCheck& elt)
     ss <<
       "--> Start visiting msrBarNumberCheck";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1373,7 +1373,7 @@ void msr2summaryVisitor::visitEnd (S_msrBarNumberCheck& elt)
     ss <<
       "--> End visiting msrBarNumberCheck";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1390,7 +1390,7 @@ void msr2summaryVisitor::visitStart (S_msrLineBreak& elt)
     ss <<
       "--> Start visiting msrLineBreak";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1406,7 +1406,7 @@ void msr2summaryVisitor::visitEnd (S_msrLineBreak& elt)
     ss <<
       "--> End visiting msrLineBreak";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1423,7 +1423,7 @@ void msr2summaryVisitor::visitStart (S_msrRepeat& elt)
     ss <<
       "--> Start visiting msrRepeat";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1439,7 +1439,7 @@ void msr2summaryVisitor::visitEnd (S_msrRepeat& elt)
     ss <<
       "--> End visiting msrRepeat";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1456,7 +1456,7 @@ void msr2summaryVisitor::visitStart (S_msrScaling& elt)
     ss <<
       "--> Start visiting msrScaling";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1475,7 +1475,7 @@ void msr2summaryVisitor::visitEnd (S_msrScaling& elt)
     ss <<
       "--> End visiting msrScaling";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1492,7 +1492,7 @@ void msr2summaryVisitor::visitStart (S_msrPageLayout& elt)
     ss <<
       "--> Start visiting msrPageLayout";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1510,7 +1510,7 @@ void msr2summaryVisitor::visitEnd (S_msrPageLayout& elt)
     ss <<
       "--> End visiting msrPageLayout";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1527,7 +1527,7 @@ void msr2summaryVisitor::visitStart (S_msrMidiTempo& elt)
     ss <<
       "--> Start visiting msrMidiTempo";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1543,7 +1543,7 @@ void msr2summaryVisitor::visitEnd (S_msrMidiTempo& elt)
     ss <<
       "--> End visiting msrMidiTempo";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }

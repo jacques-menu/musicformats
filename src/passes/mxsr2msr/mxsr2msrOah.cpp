@@ -17,7 +17,7 @@
 
 #include "oahWae.h"
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "mfConstants.h"
 #include "mfStringsHandling.h"
@@ -89,7 +89,7 @@ void msrReplaceClefAtom::applyAtomWithValue (
     ss <<
       "==> oahAtom is of type 'msrReplaceClefAtom'";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -105,7 +105,7 @@ void msrReplaceClefAtom::applyAtomWithValue (
     ss <<
       "--> theString = \"" << theString << "\", ";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -134,7 +134,7 @@ void msrReplaceClefAtom::applyAtomWithValue (
       "' with std::regex '" << regularExpression <<
       "'";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -174,7 +174,7 @@ void msrReplaceClefAtom::applyAtomWithValue (
       "--> originalClefName = \"" << originalClefName << "\", " <<
       "--> destinationClefName = \"" << destinationClefName << "\"";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -227,7 +227,7 @@ void msrReplaceClefAtom::acceptIn (basevisitor* v)
     ss <<
       ".\\\" ==> msrReplaceClefAtom::acceptIn ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -245,7 +245,7 @@ void msrReplaceClefAtom::acceptIn (basevisitor* v)
           ss <<
             ".\\\" ==> Launching msrReplaceClefAtom::visitStart ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -263,7 +263,7 @@ void msrReplaceClefAtom::acceptOut (basevisitor* v)
     ss <<
       ".\\\" ==> msrReplaceClefAtom::acceptOut ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -281,7 +281,7 @@ void msrReplaceClefAtom::acceptOut (basevisitor* v)
           ss <<
             ".\\\" ==> Launching msrReplaceClefAtom::visitEnd ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -299,7 +299,7 @@ void msrReplaceClefAtom::browseData (basevisitor* v)
     ss <<
       ".\\\" ==> msrReplaceClefAtom::browseData ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1639,7 +1639,7 @@ void mxsr2msrOahGroup::checkGroupOptionsConsistency ()
       fGroupHeader <<
       "\"";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1994,7 +1994,7 @@ void mxsr2msrOahGroup::acceptIn (basevisitor* v)
     ss <<
       ".\\\" ==> mxsr2msrOahGroup::acceptIn ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2012,7 +2012,7 @@ void mxsr2msrOahGroup::acceptIn (basevisitor* v)
           ss <<
             ".\\\" ==> Launching mxsr2msrOahGroup::visitStart ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -2030,7 +2030,7 @@ void mxsr2msrOahGroup::acceptOut (basevisitor* v)
     ss <<
       ".\\\" ==> mxsr2msrOahGroup::acceptOut ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2048,7 +2048,7 @@ void mxsr2msrOahGroup::acceptOut (basevisitor* v)
           ss <<
             ".\\\" ==> Launching mxsr2msrOahGroup::visitEnd ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -2066,7 +2066,7 @@ void mxsr2msrOahGroup::browseData (basevisitor* v)
     ss <<
       ".\\\" ==> mxsr2msrOahGroup::browseData ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2554,7 +2554,7 @@ S_mxsr2msrOahGroup createGlobalMxsr2msrOahGroup (
     ss <<
       "Creating global mxsr2msr OAH group";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }

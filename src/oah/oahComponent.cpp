@@ -34,7 +34,7 @@ S_mfcOahComponent createOahComponent ()
       ss <<
         "Creating the OAH component";
 
-      gWaeHandler->waeTraceWithoutLocationDetails (
+      gWaeHandler->waeTraceWithoutInputLocation (
         __FILE__, __LINE__,
         ss.str ());
     }

@@ -18,7 +18,7 @@
 
 #include "msrWae.h"
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "oahOah.h"
 
@@ -94,7 +94,7 @@ S_msrBook msrBook::createBookNewbornClone ()
     ss <<
       "Creating a newborn clone of a score";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -203,7 +203,7 @@ void msrBook::appendCreditToBook (
       credit->asString () <<
       "' to score";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -401,7 +401,7 @@ void msrBook::acceptIn (basevisitor* v)
     ss <<
       "% ==> msrBook::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -419,7 +419,7 @@ void msrBook::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching msrBook::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -437,7 +437,7 @@ void msrBook::acceptOut (basevisitor* v)
     ss <<
       "% ==> msrBook::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -455,7 +455,7 @@ void msrBook::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching msrBook::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -473,7 +473,7 @@ void msrBook::browseData (basevisitor* v)
     ss <<
       "% ==> msrBook::browseData ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -542,7 +542,7 @@ void msrBook::browseData (basevisitor* v)
     ss <<
       "% <== msrBook::browseData ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -683,7 +683,7 @@ void msrBook::printFull (std::ostream& os) const
   }
   else {
     os <<
-      ": " << "[NONE]" <<
+      ": [EMPTY]" <<
       std::endl;
   }
   os << std::endl;
@@ -879,7 +879,7 @@ void msrBook::print (std::ostream& os) const
   }
   else {
     os <<
-      ": " << "[NONE]" <<
+      ": [EMPTY]" <<
       std::endl;
   }
   os << std::endl;

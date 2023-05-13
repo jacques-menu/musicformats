@@ -13,7 +13,7 @@
 
 #include "visitor.h"
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "mfAssert.h"
 #include "mfServices.h"
@@ -91,7 +91,7 @@ S_msrChord msrChord::create (
       ", chordGraphicNotesDuration: " <<
       msrNotesDurationKindAsString (chordGraphicNotesDurationKind);
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -124,7 +124,7 @@ S_msrChord msrChord::create (
       ", chordGraphicNotesDuration: " <<
       msrNotesDurationKindAsString (chordGraphicNotesDurationKind);
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -178,7 +178,7 @@ S_msrChord msrChord::createChordNewbornClone (
       asString () <<
       "'";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -330,7 +330,7 @@ void msrChord::setChordUpLinkToMeasure (
 
     --gIndenter;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -425,7 +425,7 @@ void msrChord::setChordDisplayWholeNotes (
       asString () <<
       "'";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -450,7 +450,7 @@ void msrChord::setChordGraceNotesGroupLinkBefore (
       chordChordGraceNotesGroupLinkBefore->asShortString () <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -476,7 +476,7 @@ void msrChord::setChordGraceNotesGroupLinkAfter (
       chordChordGraceNotesGroupLinkAfter->asShortString () <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -515,7 +515,7 @@ void msrChord::setMeasurePosition (
       context <<
       "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -547,7 +547,7 @@ void msrChord::setChordMembersMeasurePosition (
       measurePosition.asString () <<
       ", fChordNotesVector.size(): " << fChordNotesVector.size ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -604,7 +604,7 @@ void msrChord::addFirstNoteToChord (
       asString () <<
       "'";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -666,7 +666,7 @@ void msrChord::addAnotherNoteToChord (
       asString () <<
       "'";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -730,7 +730,7 @@ void msrChord::appendDalSegnoToChord (
       " to chord " <<
       asShortString ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -762,7 +762,7 @@ void msrChord::appendArticulationToChord (
       art->getArticulationKind () <<
       "' to chord";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -795,7 +795,7 @@ void msrChord::appendSpannerToChord (
       " to chord " <<
       asString ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -816,7 +816,7 @@ void msrChord::setChordSingleTremolo (
       trem->asString () <<
       "' to chord";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -853,7 +853,7 @@ void msrChord::appendTechnicalToChord (
       tech->asString () <<
       "' to chord";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -890,7 +890,7 @@ void msrChord::appendTechnicalWithIntegerToChord (
       tech->asString () <<
       "' to chord";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -927,7 +927,7 @@ void msrChord::appendTechnicalWithFloatToChord (
       tech->asString () <<
       "' to chord";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -964,7 +964,7 @@ void msrChord::appendTechnicalWithStringToChord (
       tech->asString () <<
       "' to chord";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -996,7 +996,7 @@ void msrChord::appendOrnamentToChord (
       msrOrnamentKindAsString (orn->getOrnamentKind ()) <<
       "' to chord";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1028,7 +1028,7 @@ void msrChord::appendGlissandoToChord (
       gliss->asString () <<
       "' to chord";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1064,7 +1064,7 @@ void msrChord::appendSlideToChord (
       slide->asString () <<
       "' to chord";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1084,7 +1084,7 @@ void msrChord::appendChordSlurLinkToChord (
       "Adding slur link '" << chordSlurLink->asString() <<
       "' to chord '" << asString () << "'";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1104,7 +1104,7 @@ void msrChord::appendStemToChord (
       "Adding stem '" << stem->asString() <<
       "' to chord '" << asString () << "'";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1151,7 +1151,7 @@ void msrChord::appendBeamToChord (const S_msrBeam& beam)
       beam->asString () <<
       "' to chord";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1172,7 +1172,7 @@ void msrChord::appendChordBeamLinkToChord (
       "Adding beam link '" << chordBeamLink->asString() <<
       "' to chord '" << asString () << "'";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1197,7 +1197,7 @@ void msrChord::finalizeChord (
       std::endl <<
       fMeasurePosition.asString ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1219,7 +1219,7 @@ void msrChord::acceptIn (basevisitor* v)
     ss <<
       "% ==> msrChord::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1237,7 +1237,7 @@ void msrChord::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching msrChord::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -1255,7 +1255,7 @@ void msrChord::acceptOut (basevisitor* v)
     ss <<
       "% ==> msrChord::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1273,7 +1273,7 @@ void msrChord::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching msrChord::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -1311,7 +1311,7 @@ void msrChord::browseData (basevisitor* v)
           "% ==> visiting grace notes groups 'before' is inhibited" <<
           std::endl;
 
-        gWaeHandler->waeTraceWithLocationDetails (
+        gWaeHandler->waeTrace (
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -1736,7 +1736,7 @@ void msrChord::printFull (std::ostream& os) const
     chordMeasureFullLength =
       fChordUpLinkToMeasure
         ? fChordUpLinkToMeasure->
-            getFullMeasureCurrentWholeNotesDuration ()
+            getFullMeasureWholeNotesDuration ()
         : msrWholeNotes (0, 1); // JMI
 
   os <<
@@ -2531,7 +2531,7 @@ void msrChord::print (std::ostream& os) const
     chordMeasureFullLength =
       fChordUpLinkToMeasure
         ? fChordUpLinkToMeasure->
-            getFullMeasureCurrentWholeNotesDuration ()
+            getFullMeasureWholeNotesDuration ()
         : msrWholeNotes (0, 1); // JMI
 
   os <<
@@ -3371,7 +3371,7 @@ S_msrChordBeamLink msrChordBeamLink::createBeamNewbornClone ()
       asShortString () <<
       "'";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -3406,7 +3406,7 @@ void msrChordBeamLink::acceptIn (basevisitor* v)
     ss <<
       "% ==> msrChordBeamLink::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -3424,7 +3424,7 @@ void msrChordBeamLink::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching msrChordBeamLink::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -3442,7 +3442,7 @@ void msrChordBeamLink::acceptOut (basevisitor* v)
     ss <<
       "% ==> msrChordBeamLink::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -3460,7 +3460,7 @@ void msrChordBeamLink::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching msrChordBeamLink::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -3628,7 +3628,7 @@ S_msrChordSlurLink msrChordSlurLink::createSlurNewbornClone ()
       asShortString () <<
       "'";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -3663,7 +3663,7 @@ void msrChordSlurLink::acceptIn (basevisitor* v)
     ss <<
       "% ==> msrChordSlurLink::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -3681,7 +3681,7 @@ void msrChordSlurLink::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching msrChordSlurLink::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -3699,7 +3699,7 @@ void msrChordSlurLink::acceptOut (basevisitor* v)
     ss <<
       "% ==> msrChordSlurLink::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -3717,7 +3717,7 @@ void msrChordSlurLink::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching msrChordSlurLink::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -3857,7 +3857,7 @@ S_msrChordGraceNotesGroupLink msrChordGraceNotesGroupLink::createChordGraceNotes
       asShortString () <<
       "'";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -3892,7 +3892,7 @@ void msrChordGraceNotesGroupLink::acceptIn (basevisitor* v)
     ss <<
       "% ==> msrChordGraceNotesGroupLink::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -3910,7 +3910,7 @@ void msrChordGraceNotesGroupLink::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching msrChordGraceNotesGroupLink::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -3928,7 +3928,7 @@ void msrChordGraceNotesGroupLink::acceptOut (basevisitor* v)
     ss <<
       "% ==> msrChordGraceNotesGroupLink::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -3946,7 +3946,7 @@ void msrChordGraceNotesGroupLink::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching msrChordGraceNotesGroupLink::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }

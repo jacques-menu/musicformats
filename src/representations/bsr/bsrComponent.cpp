@@ -34,7 +34,7 @@ S_mfcRepresentationComponent createBsrRepresentationComponent ()
       ss <<
         "Creating the BSR component";
 
-      gWaeHandler->waeTraceWithLocationDetails (
+      gWaeHandler->waeTrace (
         __FILE__, __LINE__,
         ss.str ());
     }

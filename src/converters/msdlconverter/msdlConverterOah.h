@@ -12,7 +12,7 @@
 #ifndef ___msdlConverterOah___
 #define ___msdlConverterOah___
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "msrGenerationBasicTypes.h"
 

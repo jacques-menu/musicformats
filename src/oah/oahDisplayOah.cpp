@@ -16,7 +16,7 @@
 
 #include "mfStringsHandling.h"
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "oahEarlyOptions.h"
 
@@ -177,7 +177,7 @@ void displayOahGroup::acceptIn (basevisitor* v)
     ss <<
       "% ==> displayOahGroup::acceptIn ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -195,7 +195,7 @@ void displayOahGroup::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching displayOahGroup::visitStart ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -213,7 +213,7 @@ void displayOahGroup::acceptOut (basevisitor* v)
     ss <<
       "% ==> displayOahGroup::acceptOut ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -231,7 +231,7 @@ void displayOahGroup::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching displayOahGroup::visitEnd ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -249,7 +249,7 @@ void displayOahGroup::browseData (basevisitor* v)
     ss <<
       "% ==> displayOahGroup::browseData ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -366,7 +366,7 @@ S_displayOahGroup createGlobalDisplayOahGroup ()
     ss <<
       "Creating global global OAH group";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }

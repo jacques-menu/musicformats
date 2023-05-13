@@ -39,7 +39,7 @@ void initializeBSR ()
       ss <<
         "Initializing BSR";
 
-      gWaeHandler->waeTraceWithLocationDetails (
+      gWaeHandler->waeTrace (
         __FILE__, __LINE__,
         ss.str ());
     }

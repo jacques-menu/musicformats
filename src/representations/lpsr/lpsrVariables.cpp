@@ -55,7 +55,7 @@ void lpsrVariableUseCommand::acceptIn (basevisitor* v)
     ss <<
       "% ==> lpsrVariableUseCommand::acceptIn()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -73,7 +73,7 @@ void lpsrVariableUseCommand::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching lpsrVariableUseCommand::visitStart()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -91,7 +91,7 @@ void lpsrVariableUseCommand::acceptOut (basevisitor* v)
     ss <<
       "% ==> lpsrVariableUseCommand::acceptOut()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -109,7 +109,7 @@ void lpsrVariableUseCommand::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching lpsrVariableUseCommand::visitEnd()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }

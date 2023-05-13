@@ -15,7 +15,7 @@
 
 #include "visitor.h"
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "mfAssert.h"
 
@@ -159,7 +159,7 @@ S_msrStaffTuning msrStaffTuning::createStaffTuningNewbornClone ()
       asString () <<
       "'";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -185,7 +185,7 @@ void msrStaffTuning::acceptIn (basevisitor* v)
     ss <<
       "% ==> msrStaffTuning::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -203,7 +203,7 @@ void msrStaffTuning::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching msrStaffTuning::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -221,7 +221,7 @@ void msrStaffTuning::acceptOut (basevisitor* v)
     ss <<
       "% ==> msrStaffTuning::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -239,7 +239,7 @@ void msrStaffTuning::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching msrStaffTuning::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -415,7 +415,7 @@ void msrStaffDetails::acceptIn (basevisitor* v)
     ss <<
       "% ==> msrStaffDetails::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -433,7 +433,7 @@ void msrStaffDetails::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching msrStaffDetails::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -451,7 +451,7 @@ void msrStaffDetails::acceptOut (basevisitor* v)
     ss <<
       "% ==> msrStaffDetails::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -469,7 +469,7 @@ void msrStaffDetails::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching msrStaffDetails::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }

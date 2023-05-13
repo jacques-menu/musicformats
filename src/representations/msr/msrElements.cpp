@@ -39,6 +39,16 @@ msrElement::msrElement (
 msrElement::~msrElement ()
 {}
 
+SMARTP<msrElement> msrElement::createNewbornClone ()
+{
+  return this;
+}
+
+SMARTP<msrElement> msrElement::createDeepClone ()
+{
+  return createNewbornClone ();
+}
+
 void msrElement::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -48,7 +58,7 @@ void msrElement::acceptIn (basevisitor* v)
     ss <<
       "% ==> msrElement::msrElement ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -66,7 +76,7 @@ void msrElement::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching msrElement::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -84,7 +94,7 @@ void msrElement::acceptOut (basevisitor* v)
     ss <<
       "% ==> msrElement::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -102,7 +112,7 @@ void msrElement::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching msrElement::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }

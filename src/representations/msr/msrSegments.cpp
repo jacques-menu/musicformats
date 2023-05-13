@@ -11,7 +11,7 @@
 
 #include "visitor.h"
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "mfAssert.h"
 #include "mfServices.h"
@@ -100,7 +100,7 @@ void msrSegment::initializeSegment ()
       fSegmentUpLinkToVoice->getVoiceName () <<
       "\", line " << fInputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -141,7 +141,7 @@ void msrSegment::setSegmentFirstMeasure (
       asString () <<
       ", line " << fInputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -177,7 +177,7 @@ void msrSegment::setSegmentLastMeasure (
       asString () <<
       ", line " << fInputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -249,7 +249,7 @@ S_msrSegment msrSegment::createSegmentNewbornClone (
       "Creating a newborn clone of segment " <<
       asString ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -289,7 +289,7 @@ S_msrSegment msrSegment::createSegmentDeepClone (
       "Creating a deep clone of segment " <<
       asString ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -329,7 +329,7 @@ S_msrSegment msrSegment::createSegmentDeepClone (
         segmentElementsListSize <<
         " measure elements in segment to be deep copied";
 
-      gWaeHandler->waeTraceWithLocationDetails (
+      gWaeHandler->waeTrace (
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -357,7 +357,7 @@ S_msrSegment msrSegment::createSegmentDeepClone (
       ss <<
         "There are no measures in segment to be deep copied";
 
-      gWaeHandler->waeTraceWithLocationDetails (
+      gWaeHandler->waeTrace (
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -389,7 +389,7 @@ void msrSegment::setSegmentShortestNoteWholeNotes (
       " to " <<
       wholeNotes.asString ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -415,7 +415,7 @@ void msrSegment::setSegmentShortestNoteTupletFactor (
       " to " <<
       noteTupletFactor;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -526,7 +526,7 @@ S_msrMeasure msrSegment::createAMeasureAndAppendItToSegment (
       "\"" <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -566,7 +566,7 @@ S_msrMeasure msrSegment::createAMeasureAndAppendItToSegment (
       measureFirstInSegmentKind <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -597,7 +597,7 @@ S_msrMeasure msrSegment::createAMeasureAndAppendItToSegment (
 //           getVoiceName () <<
 //       "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -637,7 +637,7 @@ void msrSegment::setNextMeasureNumberInSegment (
       "\"" <<
       "' line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -659,7 +659,7 @@ void msrSegment::setNextMeasureNumberInSegment (
         "\"" <<
         ", line " << inputLineNumber;
 
-      gWaeHandler->waeTraceWithLocationDetails (
+      gWaeHandler->waeTrace (
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -687,7 +687,7 @@ void msrSegment::appendMusicXMLPrintLayoutToSegment (
       fSegmentUpLinkToVoice->getVoiceName () <<
       "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -749,7 +749,7 @@ void msrSegment::appendClefKeyTimeSignatureGroupToSegment  (
       fSegmentUpLinkToVoice->getVoiceName () <<
       "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -812,7 +812,7 @@ void msrSegment::appendClefKeyTimeSignatureGroupToSegment  (
 //       "\"" <<
 //       std::endl;
 //
-//     gWaeHandler->waeTraceWithLocationDetails (
+//     gWaeHandler->waeTrace (
 //       __FILE__, __LINE__,
 //       ss.str ());
 //   }
@@ -874,7 +874,7 @@ void msrSegment::appendClefKeyTimeSignatureGroupToSegment  (
 //       "\"" <<
 //       std::endl;
 //
-//     gWaeHandler->waeTraceWithLocationDetails (
+//     gWaeHandler->waeTrace (
 //       __FILE__, __LINE__,
 //       ss.str ());
 //
@@ -994,14 +994,14 @@ void msrSegment::appendClefKeyTimeSignatureGroupToSegment  (
 //       "\"" <<
 //       "', line " << fInputLineNumber; // JMI v0.9.64
 //
-//     gWaeHandler->waeTraceWithLocationDetails (
+//     gWaeHandler->waeTrace (
 //       __FILE__, __LINE__,
 //       ss.str ());
 //
 //     gLog << "THIS:" << std::endl;
 //     gLog << "----------------------------" << std::endl;
 //     ++gIndenter;
-//     gLog << this;
+//     gLog << std::hex << std::showbase << this << std::dec; // JMI v0.9.69
 //     --gIndenter;
 //
 //     gLog << std::endl;
@@ -1058,7 +1058,7 @@ void msrSegment::appendClefKeyTimeSignatureGroupToSegment  (
 //     "\"" <<
 //       std::endl;
 //
-//     gWaeHandler->waeTraceWithLocationDetails (
+//     gWaeHandler->waeTrace (
 //       __FILE__, __LINE__,
 //       ss.str ());
 //   }
@@ -1104,7 +1104,7 @@ void msrSegment::appendClefKeyTimeSignatureGroupToSegment  (
 //       "\"" <<
 //       std::endl;
 //
-//     gWaeHandler->waeTraceWithLocationDetails (
+//     gWaeHandler->waeTrace (
 //       __FILE__, __LINE__,
 //       ss.str ());
 //   }
@@ -1148,7 +1148,7 @@ void msrSegment::appendTimeSignatureToSegmentClone (
       fSegmentUpLinkToVoice->getVoiceName () <<
       "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1186,7 +1186,7 @@ void msrSegment::insertHiddenMeasureAndBarLineInSegmentClone (
       "\"" <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1227,7 +1227,7 @@ void msrSegment::appendHarmonyToSegment (
       ", measurePositionToAppendAt: " << measurePositionToAppendAt <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1267,7 +1267,7 @@ void msrSegment::appendHarmoniesListToSegment (
       ", measurePositionToAppendAt: " << measurePositionToAppendAt <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1294,7 +1294,7 @@ void msrSegment::appendHarmonyToSegmentClone (const S_msrHarmony& harmony)
       fSegmentUpLinkToVoice->getVoiceName () <<
       "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1330,7 +1330,7 @@ void msrSegment::appendFiguredBassToSegment (
       ", measurePositionToAppendAt: " << measurePositionToAppendAt <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1374,7 +1374,7 @@ void msrSegment::appendFiguredBassesListToSegment (
       ", measurePositionToAppendAt: " << measurePositionToAppendAt <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1403,7 +1403,7 @@ void msrSegment::appendFiguredBassToSegmentClone (
       fSegmentUpLinkToVoice->getVoiceName () <<
       "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1433,7 +1433,7 @@ void msrSegment::appendSegnoToSegment (const S_msrSegno& segno)
       fSegmentUpLinkToVoice->getVoiceName () <<
       "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1467,7 +1467,7 @@ void msrSegment::appendCodaToSegment (const S_msrCoda& coda)
       fSegmentUpLinkToVoice->getVoiceName () <<
       "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1502,7 +1502,7 @@ void msrSegment::appendEyeGlassesToSegment (
       fSegmentUpLinkToVoice->getVoiceName () <<
       "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1536,7 +1536,7 @@ void msrSegment::appendPedalToSegment (const S_msrPedal& pedal)
       fSegmentUpLinkToVoice->getVoiceName () <<
       "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1571,7 +1571,7 @@ void msrSegment::appendDampToSegment (
       fSegmentUpLinkToVoice->getVoiceName () <<
       "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1606,7 +1606,7 @@ void msrSegment::appendDampAllToSegment (
       fSegmentUpLinkToVoice->getVoiceName () <<
       "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1641,7 +1641,7 @@ void msrSegment::appendTranspositionToSegment (
       fSegmentUpLinkToVoice->getVoiceName () <<
       "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1684,7 +1684,7 @@ void msrSegment::appendStaffDetailsToSegment (
       fSegmentUpLinkToVoice->getVoiceName () <<
       "\" line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1746,7 +1746,7 @@ void msrSegment::appendLineBreakToSegment (
       fSegmentUpLinkToVoice->getVoiceName () <<
       "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1781,7 +1781,7 @@ void msrSegment::appendPageBreakToSegment (
       fSegmentUpLinkToVoice->getVoiceName () <<
       "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1816,7 +1816,7 @@ void msrSegment::appendBarNumberCheckToSegment (
       fSegmentUpLinkToVoice->getVoiceName () <<
       "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1853,7 +1853,7 @@ void msrSegment::appendTempoToSegment (
       fSegmentUpLinkToVoice->getVoiceName () <<
       "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1888,7 +1888,7 @@ void msrSegment::appendRehearsalMarkToSegment (
       fSegmentUpLinkToVoice->getVoiceName () <<
       "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1924,7 +1924,7 @@ void msrSegment::appendOctaveShiftToSegment (
       fSegmentUpLinkToVoice->getVoiceName () <<
       "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1960,7 +1960,7 @@ void msrSegment::appendScordaturaToSegment (
       fSegmentUpLinkToVoice->getVoiceName () <<
       "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1997,7 +1997,7 @@ void msrSegment::appendAccordionRegistrationToSegment (
       fSegmentUpLinkToVoice->getVoiceName () <<
       "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2035,7 +2035,7 @@ void msrSegment::appendHarpPedalsTuningToSegment (
       fSegmentUpLinkToVoice->getVoiceName () <<
       "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2076,7 +2076,7 @@ void msrSegment::appendHarpPedalsTuningToSegment (
 //       "\", line " << inputLineNumber <<
 //       std::endl;
 //
-//       gWaeHandler->waeTraceWithLocationDetails (
+//       gWaeHandler->waeTrace (
 //         __FILE__, __LINE__,
 //         ss.str (),
 //   }
@@ -2153,7 +2153,7 @@ void msrSegment::backupByWholeNotesStepLengthInSegment (
       fSegmentUpLinkToVoice->getVoiceName () <<
       "\", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2188,7 +2188,7 @@ void msrSegment::appendPaddingNoteToSegment (
       fSegmentUpLinkToVoice->getVoiceName () <<
       "\", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2244,7 +2244,7 @@ void msrSegment::appendMeasureToSegment (const S_msrMeasure& measure)
       "\"" <<
       ", line " << measure->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2346,7 +2346,7 @@ void msrSegment::prependMeasureToSegment (const S_msrMeasure& measure)
       "\"," <<
       ", line " << measure->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2394,7 +2394,7 @@ void msrSegment::appendMultipleFullBarRestsToSegment (
       fSegmentUpLinkToVoice->getVoiceName () <<
       "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2418,7 +2418,7 @@ void msrSegment::prependBarLineToSegment (
       fSegmentUpLinkToVoice->getVoiceName () <<
       "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2453,7 +2453,7 @@ void msrSegment::appendBarLineToSegment (
       fSegmentUpLinkToVoice->getVoiceName () <<
       "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2488,7 +2488,7 @@ void msrSegment::appendBarCheckToSegment (
       fSegmentUpLinkToVoice->getVoiceName () <<
       "\",";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2517,7 +2517,7 @@ void msrSegment::appendVoiceStaffChangeToSegment (
       " to segment " << asString () <<
       ", line " << voiceStaffChange->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2585,7 +2585,7 @@ void msrSegment::appendDoubleTremoloToSegment ( // JMI
       fSegmentUpLinkToVoice->getVoiceName () <<
       "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2732,7 +2732,7 @@ void msrSegment::removeNoteFromSegment (
       " from segment " <<
       asString ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2782,7 +2782,7 @@ void msrSegment::removeElementFromSegment (
       " from segment '" <<
       asString ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2830,7 +2830,7 @@ S_msrMeasure msrSegment::fetchLastMeasureFromSegment (
       " (" << context << ")" <<
       "', line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2898,7 +2898,7 @@ S_msrMeasure msrSegment::removeLastMeasureFromSegment (
       "' (" << context << ")" <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2998,7 +2998,7 @@ S_msrMeasure msrSegment::removeLastMeasureFromSegment (
     gLog << "THIS:" << std::endl;
     gLog << "----------------------------" << std::endl;
     ++gIndenter;
-    gLog << this;
+    gLog << std::hex << std::showbase << this << std::dec; // JMI v0.9.69
     --gIndenter;
 
     gLog << std::endl;
@@ -3067,7 +3067,7 @@ void msrSegment::finalizeAllTheMeasuresOfSegment ( // superflous JMI ???
       fSegmentAbsoluteNumber <<
       "', line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -3091,7 +3091,7 @@ void msrSegment::acceptIn (basevisitor* v)
     ss <<
       "% ==> msrSegment::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -3109,7 +3109,7 @@ void msrSegment::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching msrSegment::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -3127,7 +3127,7 @@ void msrSegment::acceptOut (basevisitor* v)
     ss <<
       "% ==> msrSegment::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -3145,7 +3145,7 @@ void msrSegment::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching msrSegment::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -3163,7 +3163,7 @@ void msrSegment::browseData (basevisitor* v)
     ss <<
       "% ==> msrSegment::browseData ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -3182,7 +3182,7 @@ void msrSegment::browseData (basevisitor* v)
     ss <<
       "% <== msrSegment::browseData ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }

@@ -57,7 +57,7 @@ void lpsrLayout::acceptIn (basevisitor* v)
     ss <<
       "% ==> lpsrLayout::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -75,7 +75,7 @@ void lpsrLayout::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching lpsrLayout::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -93,7 +93,7 @@ void lpsrLayout::acceptOut (basevisitor* v)
     ss <<
       "% ==> lpsrLayout::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -111,7 +111,7 @@ void lpsrLayout::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching lpsrLayout::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }

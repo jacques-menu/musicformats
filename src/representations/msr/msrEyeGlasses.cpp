@@ -15,7 +15,7 @@
 
 #include "visitor.h"
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "mfAssert.h"
 
@@ -167,7 +167,7 @@ void msrEyeGlasses::acceptIn (basevisitor* v)
     ss <<
       "% ==> msrEyeGlasses::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -185,7 +185,7 @@ void msrEyeGlasses::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching msrEyeGlasses::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -203,7 +203,7 @@ void msrEyeGlasses::acceptOut (basevisitor* v)
     ss <<
       "% ==> msrEyeGlasses::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -221,7 +221,7 @@ void msrEyeGlasses::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching msrEyeGlasses::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }

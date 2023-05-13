@@ -11,7 +11,7 @@
 
 #include "visitor.h"
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "mfAssert.h"
 #include "mfLibraryComponent.h"
@@ -509,7 +509,7 @@ R"(
     ss <<
       "Including LilyJazz definition file '" << schemeModulesName << "'";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -562,7 +562,7 @@ R"(
     ss <<
       "Including Jianpu definition file '" << schemeModulesName << "'";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -614,7 +614,7 @@ R"(
     ss <<
       "Using Scheme modules '" << schemeModulesName << "'";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -681,7 +681,7 @@ R"(
     ss <<
       "Including Jianpu definition file '" << schemeModulesName << "'";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -748,7 +748,7 @@ tongue =
     ss <<
       "Creating Scheme function '" << schemeFunctionName << "'";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -809,7 +809,7 @@ editorialAccidental =
     ss <<
       "Creating Scheme function '" << schemeFunctionName << "'";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -867,7 +867,7 @@ ffffff = #(make-dynamic-script "ffffff")
     ss <<
       "Creating Scheme function '" << schemeFunctionName << "'";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -973,7 +973,7 @@ tupletsCurvedBrackets = {
     ss <<
       "Creating Scheme function '" << schemeFunctionName << "'";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1033,7 +1033,7 @@ after =
     ss <<
       "Creating Scheme function '" << schemeFunctionName << "'";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1151,7 +1151,7 @@ tempoNotesRelationship =
     ss <<
       "Creating Scheme function '" << schemeFunctionName << "'";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1349,7 +1349,7 @@ glissandoTextOff = \revert Glissando.stencil
     ss <<
       "Creating Scheme functions for '" << schemeFunctionName << "'";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1423,7 +1423,7 @@ otherDynamic =
     ss <<
       "Creating Scheme functions for '" << schemeFunctionName << "'";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1749,7 +1749,7 @@ schleifer =
     ss <<
       "Creating Scheme functions for '" << schemeFunctionName << "'";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1826,7 +1826,7 @@ scoopBelow = \once \override NoteHead #'stencil = #scoop-below-stencil
     ss <<
       "Creating Scheme functions for '" << schemeFunctionName << "'";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1894,7 +1894,7 @@ damp = \markup {
     ss <<
       "Creating Scheme function '" << schemeFunctionName << "'";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1956,7 +1956,7 @@ dampAll = \markup
     ss <<
       "Creating Scheme function '" << schemeFunctionName << "'";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2023,7 +2023,7 @@ whiteNoteHeads =
     ss <<
       "Creating Scheme function '" << schemeFunctionName << "'";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2083,7 +2083,7 @@ boxAroundNextBarNumber = {
     ss <<
       "Creating Scheme function '" << schemeFunctionName << "'";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2183,7 +2183,7 @@ R"(
     ss <<
       "Creating Scheme function '" << schemeFunctionName << "'";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2265,7 +2265,7 @@ R"(
     ss <<
       "Creating Scheme function '" << schemeFunctionName << "'";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2329,7 +2329,7 @@ R"(
     ss <<
       "Creating Scheme function '" << schemeFunctionName << "'";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2462,7 +2462,7 @@ R"(
     ss <<
       "Creating Scheme function '" << schemeFunctionName << "'";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2583,7 +2583,7 @@ R"(
     ss <<
       "Creating Scheme function '" << schemeFunctionName << "'";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2681,7 +2681,7 @@ R"(
     ss <<
       "Creating Scheme function '" << schemeFunctionName << "'";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2762,7 +2762,7 @@ R"(
     ss <<
       "Creating Scheme function '" << schemeFunctionName << "'";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2814,7 +2814,7 @@ R"(
     ss <<
       "Creating Scheme functions for '" << schemeFunctionName << "'";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2857,7 +2857,7 @@ R"(
     ss <<
       "Creating Scheme functions for '" << schemeFunctionName << "'";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2913,7 +2913,7 @@ void lpsrScore::acceptIn (basevisitor* v)
     ss <<
       "% ==> lpsrScore::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2931,7 +2931,7 @@ void lpsrScore::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching lpsrScore::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -2949,7 +2949,7 @@ void lpsrScore::acceptOut (basevisitor* v)
     ss <<
       "% ==> lpsrScore::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2967,7 +2967,7 @@ void lpsrScore::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching lpsrScore::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -2985,7 +2985,7 @@ void lpsrScore::browseData (basevisitor* v)
     ss <<
       "% ==> lpsrScore::browseData ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -3086,7 +3086,7 @@ void lpsrScore::browseData (basevisitor* v)
     ss <<
       "% <== lpsrScore::browseData ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }

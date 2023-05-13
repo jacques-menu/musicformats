@@ -9,7 +9,7 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "mfIndentedTextOutput.h"
 
@@ -44,7 +44,7 @@ EXP void msdlError (
   int                sourceCodeLineNumber,
   const std::string& message)
 {
-  waeError (
+  waeErrorWithInputLocation (
     "MSDL",
     inputSourceName,
     inputLineNumber,
@@ -68,7 +68,7 @@ EXP void msdlInternalError (
 {
   gIndenter.resetToZero ();
 
-  waeErrorWithoutException (
+  waeErrorWithoutExceptionWithInputLocation (
     "MSDL INTERNAL",
     inputSourceName,
     inputLineNumber,

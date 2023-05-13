@@ -11,7 +11,7 @@
 
 #include <iostream>
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "xml.h"
 #include "xmlfile.h"
@@ -82,7 +82,7 @@ S_bsrScore translateMsrToBsr (
       std::endl <<
       separator;
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }

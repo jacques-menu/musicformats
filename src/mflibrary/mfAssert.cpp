@@ -9,12 +9,13 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "mfExceptions.h"
 
 #include "mfAssert.h"
 #include "mfIndentedTextOutput.h"
+#include "mfServices.h"
 
 
 namespace MusicFormats
@@ -24,31 +25,6 @@ namespace MusicFormats
 // assert
 
 void mfAssert (
-  const std::string& sourceCodeFileName,
-  int                sourceCodeLineNumber,
-  Bool               condition,
-  const std::string& messageIfFalse)
-{
-  if (! condition) {
-    gIndenter.resetToZero ();
-
-    gLog <<
-      "#### mfAssert" <<
-      ", " << sourceCodeFileName << ":" << sourceCodeLineNumber <<
-      " -- " <<
-      messageIfFalse <<
-      " - quitting." <<
-      std::endl;
-
-#ifdef MF_ABORT_TO_DEBUG_ERRORS_IS_ENABLED
-  abort ();
-#endif // MF_ABORT_TO_DEBUG_ERRORS_IS_ENABLED
-
-    throw mfAssertException (messageIfFalse);
-  }
-}
-
-void mfAssertWithLocationDetails (
   const std::string& sourceCodeFileName,
   int                sourceCodeLineNumber,
   Bool               condition,
@@ -94,36 +70,7 @@ void mfAssertWithLocationDetails (
 
 //______________________________________________________________________________
 // assert with input location
-
 void mfAssertWithInputLocation (
-  const std::string& sourceCodeFileName,
-  int                sourceCodeLineNumber,
-  Bool               condition,
-  const std::string& inputSourceName,
-  int                inputLineNumber,
-  const std::string& messageIfFalse)
-{
-  if (! condition) {
-    gIndenter.resetToZero ();
-
-    gLog <<
-      "#### mfAssert" <<
-      ", " << inputSourceName << ":" << inputLineNumber <<
-      ", " << sourceCodeFileName << ":" << sourceCodeLineNumber <<
-      " -- " <<
-      messageIfFalse <<
-      " - quitting." <<
-      std::endl;
-
-#ifdef MF_ABORT_TO_DEBUG_ERRORS_IS_ENABLED
-  abort ();
-#endif // MF_ABORT_TO_DEBUG_ERRORS_IS_ENABLED
-
-    throw mfAssertException (messageIfFalse);
-  }
-}
-
-void mfAssertWithInputLocationWithLocationDetails (
   const std::string& sourceCodeFileName,
   int                sourceCodeLineNumber,
   Bool               condition,

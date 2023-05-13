@@ -17,7 +17,7 @@
 #include "mfServices.h"
 #include "mfStringsHandling.h"
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "msrArticulations.h"
 #include "msrGlissandos.h"

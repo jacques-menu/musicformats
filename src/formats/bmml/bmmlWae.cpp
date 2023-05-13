@@ -9,7 +9,7 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "mfIndentedTextOutput.h"
 
@@ -41,7 +41,7 @@ void bmmlError (
   int                sourceCodeLineNumber,
   const std::string& message)
 {
-  waeError (
+  waeErrorWithInputLocation (
     "BMML",
     inputSourceName,
     inputLineNumber,
@@ -65,7 +65,7 @@ void bmmlInternalError (
 {
   gIndenter.resetToZero ();
 
-  waeErrorWithoutException (
+  waeErrorWithoutExceptionWithInputLocation (
     "BMML INTERNAL",
     inputSourceName,
     inputLineNumber,

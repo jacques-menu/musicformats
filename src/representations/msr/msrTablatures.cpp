@@ -17,7 +17,7 @@
 
 #include "msrWae.h"
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "mfServices.h"
 
@@ -80,7 +80,7 @@ msrFrameNote::msrFrameNote (
       asString () <<
       "'";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -141,7 +141,7 @@ void msrFrameNote::acceptIn (basevisitor* v)
     ss <<
       "% ==> msrFrameNote::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -159,7 +159,7 @@ void msrFrameNote::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching msrFrameNote::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -177,7 +177,7 @@ void msrFrameNote::acceptOut (basevisitor* v)
     ss <<
       "% ==> msrFrameNote::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -195,11 +195,11 @@ void msrFrameNote::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching msrFrameNote::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif        
+#endif
         p->visitEnd (elem);
   }
 }
@@ -288,7 +288,7 @@ msrFrame::msrFrame (
       asString () <<
       "'";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -313,7 +313,7 @@ void msrFrame::appendFrameNoteToFrame (
       break;
 
     case msrBarreTypeKind::kBarreTypeStart:
-      fPendingBarreStartFrameNotes.push (
+      fPendingBarreStartFrameNotes.push_front (
         frameNote);
       break;
 
@@ -336,7 +336,7 @@ void msrFrame::appendFrameNoteToFrame (
         else {
           S_msrFrameNote
             pendingBarreStartFrameNotesTop =
-              fPendingBarreStartFrameNotes.top ();
+              fPendingBarreStartFrameNotes.front ();
 
           int
             barreStartFretNumber =
@@ -370,7 +370,7 @@ void msrFrame::appendFrameNoteToFrame (
                 getFrameNoteStringNumber (),
               barreStartFretNumber));
 
-          fPendingBarreStartFrameNotes.pop ();
+          fPendingBarreStartFrameNotes.pop_front ();
         }
       }
       break;
@@ -409,7 +409,7 @@ void msrFrame::acceptIn (basevisitor* v)
     ss <<
       "% ==> msrFrame::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -427,7 +427,7 @@ void msrFrame::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching msrFrame::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -445,7 +445,7 @@ void msrFrame::acceptOut (basevisitor* v)
     ss <<
       "% ==> msrFrame::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -463,11 +463,11 @@ void msrFrame::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching msrFrame::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif        
+#endif
         p->visitEnd (elem);
   }
 }

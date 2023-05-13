@@ -58,7 +58,7 @@ void lpsrUseVoiceCommand::acceptIn (basevisitor* v)
     ss <<
       "% ==> lpsrUseVoiceCommand::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -76,7 +76,7 @@ void lpsrUseVoiceCommand::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching lpsrUseVoiceCommand::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -94,7 +94,7 @@ void lpsrUseVoiceCommand::acceptOut (basevisitor* v)
     ss <<
       "% ==> lpsrUseVoiceCommand::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -112,7 +112,7 @@ void lpsrUseVoiceCommand::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching lpsrUseVoiceCommand::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }

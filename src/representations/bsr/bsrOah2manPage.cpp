@@ -15,7 +15,7 @@
 
 #include <regex>
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "bsrOah2manPage.h"
 
@@ -51,7 +51,7 @@ void bsrOah2manPage::visitStart (S_bsrFacSimileKindAtom& elt)
       ".\\\" --> Start visiting bsrFacSimileKindAtom" <<
       " \"" << elt->fetchNames () << "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -85,7 +85,7 @@ void bsrOah2manPage::visitEnd (S_bsrFacSimileKindAtom& elt)
       ".\\\" --> End visiting bsrFacSimileKindAtom" <<
       " \"" << elt->fetchNames () << "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -104,7 +104,7 @@ void bsrOah2manPage::visitStart (S_bsrTextsLanguageAtom& elt)
       ".\\\" --> Start visiting bsrTextsLanguageAtom" <<
       " \"" << elt->fetchNames () << "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -138,7 +138,7 @@ void bsrOah2manPage::visitEnd (S_bsrTextsLanguageAtom& elt)
       ".\\\" --> End visiting bsrTextsLanguageAtom" <<
       " \"" << elt->fetchNames () << "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }

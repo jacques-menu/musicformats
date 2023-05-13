@@ -315,7 +315,7 @@ void msrMarginsGroup::acceptIn (basevisitor* v) {
     ss <<
       "% ==> msrMarginsGroup::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -345,7 +345,7 @@ void msrMarginsGroup::acceptOut (basevisitor* v) {
     ss <<
       "% ==> msrMarginsGroup::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }

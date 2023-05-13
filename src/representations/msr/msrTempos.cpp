@@ -15,7 +15,7 @@
 
 #include "visitor.h"
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "mfAssert.h"
 #include "mfServices.h"
@@ -83,7 +83,7 @@ void msrTempoNote::acceptIn (basevisitor* v)
     ss <<
       "% ==> msrTempoNote::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -101,7 +101,7 @@ void msrTempoNote::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching msrTempoNote::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -119,7 +119,7 @@ void msrTempoNote::acceptOut (basevisitor* v)
     ss <<
       "% ==> msrTempoNote::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -137,7 +137,7 @@ void msrTempoNote::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching msrTempoNote::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -284,7 +284,7 @@ msrTempoTuplet::msrTempoTuplet (
       this->asString () <<
       "'";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -383,7 +383,7 @@ void msrTempoTuplet::addTempoNoteToTempoTuplet (S_msrTempoNote tempoNote)
       asString () <<
       "'";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -416,7 +416,7 @@ void msrTempoTuplet::addTempoTupletToTempoTuplet (S_msrTempoTuplet tempoTuplet)
       asString () <<
       "'";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -461,7 +461,7 @@ void msrTempoTuplet::removeFirstNoteFromTempoTuplet (
       asString () <<
       "'";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -590,7 +590,7 @@ void msrTempoTuplet::acceptIn (basevisitor* v)
     ss <<
       "% ==> msrTempoTuplet::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -608,7 +608,7 @@ void msrTempoTuplet::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching msrTempoTuplet::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -626,7 +626,7 @@ void msrTempoTuplet::acceptOut (basevisitor* v)
     ss <<
       "% ==> msrTempoTuplet::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -644,7 +644,7 @@ void msrTempoTuplet::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching msrTempoTuplet::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -910,7 +910,7 @@ void msrTempoNotesRelationshipElements::addElementToTempoNotesRelationshipElemen
       element->asString () <<
       "' to tempo relationship";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -928,7 +928,7 @@ void msrTempoNotesRelationshipElements::acceptIn (basevisitor* v)
     ss <<
       "% ==> msrTempoNotesRelationshipElements::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -946,7 +946,7 @@ void msrTempoNotesRelationshipElements::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching msrTempoNotesRelationshipElements::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -964,7 +964,7 @@ void msrTempoNotesRelationshipElements::acceptOut (basevisitor* v)
     ss <<
       "% ==> msrTempoNotesRelationshipElements::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -982,7 +982,7 @@ void msrTempoNotesRelationshipElements::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching msrTempoNotesRelationshipElements::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -1423,7 +1423,7 @@ void msrTempo::acceptIn (basevisitor* v)
     ss <<
       "% ==> msrTempo::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1441,7 +1441,7 @@ void msrTempo::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching msrTempo::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -1459,7 +1459,7 @@ void msrTempo::acceptOut (basevisitor* v)
     ss <<
       "% ==> msrTempo::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1477,7 +1477,7 @@ void msrTempo::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching msrTempo::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }

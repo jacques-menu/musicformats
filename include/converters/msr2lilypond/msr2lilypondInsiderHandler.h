@@ -12,7 +12,7 @@
 #ifndef ___msr2lilypondInsiderHandler___
 #define ___msr2lilypondInsiderHandler___
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "oahAtomsCollection.h"
 

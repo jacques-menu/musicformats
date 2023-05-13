@@ -235,7 +235,7 @@ void msrTechnical::acceptIn (basevisitor* v)
     ss <<
       "% ==> msrTechnical::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -253,7 +253,7 @@ void msrTechnical::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching msrTechnical::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -271,7 +271,7 @@ void msrTechnical::acceptOut (basevisitor* v)
     ss <<
       "% ==> msrTechnical::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -289,7 +289,7 @@ void msrTechnical::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching msrTechnical::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -373,7 +373,7 @@ void msrTechnicalWithInteger::acceptIn (basevisitor* v)
     ss <<
       "% ==> msrTechnicalWithInteger::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -391,7 +391,7 @@ void msrTechnicalWithInteger::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching msrTechnicalWithInteger::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -409,7 +409,7 @@ void msrTechnicalWithInteger::acceptOut (basevisitor* v)
     ss <<
       "% ==> msrTechnicalWithInteger::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -427,7 +427,7 @@ void msrTechnicalWithInteger::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching msrTechnicalWithInteger::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -534,7 +534,7 @@ void msrTechnicalWithFloat::acceptIn (basevisitor* v)
     ss <<
       "% ==> msrTechnicalWithFloat::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -552,7 +552,7 @@ void msrTechnicalWithFloat::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching msrTechnicalWithFloat::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -570,7 +570,7 @@ void msrTechnicalWithFloat::acceptOut (basevisitor* v)
     ss <<
       "% ==> msrTechnicalWithFloat::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -588,7 +588,7 @@ void msrTechnicalWithFloat::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching msrTechnicalWithFloat::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -701,7 +701,7 @@ void msrTechnicalWithString::acceptIn (basevisitor* v)
     ss <<
       "% ==> msrTechnicalWithString::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -719,7 +719,7 @@ void msrTechnicalWithString::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching msrTechnicalWithString::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -737,7 +737,7 @@ void msrTechnicalWithString::acceptOut (basevisitor* v)
     ss <<
       "% ==> msrTechnicalWithString::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -755,7 +755,7 @@ void msrTechnicalWithString::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching msrTechnicalWithString::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }

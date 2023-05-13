@@ -166,15 +166,15 @@ jacquesmenu@macmini: ~/musicformats-git-dev/mfslfiles > mfsl -query no-launch
           Analyze the MFSL script, but don't launch the service actually.
           This is useful to check the options gathered by the MFSL interpreter,
           and what command(s) would be launched.
-          This option implies the '-display-service-and-input, -ttai' option.
+          This option implies the '-display-service-and-input, -dservandinput' option.
 jacquesmenu@macmini: ~/musicformats-git-dev/mfslfiles >
 \end{lstlisting}
 
-The \optionNameBoth{display-service-and-input}{dtai} option itself has this effect:
+The \optionNameBoth{display-service-and-input}{dservandinput} option itself has this effect:
 \begin{lstlisting}[language=Terminal]
 jacquesmenu@macmini: ~/musicformats-git-dev/mfslfiles > mfsl -query display-service-and-input
 --- Help for atom "display-service-and-input" in subgroup "MFSL"
-    -display-service-and-input, -dtai
+    -display-service-and-input, -dservandinput
           Write MFSL service and input analysis activity to standard output.
 \end{lstlisting}
 
@@ -295,7 +295,7 @@ jacquesmenu@macmini: ~/musicformats-git-dev/mfslfiles > mfsl -help-user
     MFSL (-help-user, -hu):
       -display-tokens, -dtoks
             Write a trace of the MFSL tokens to standard error.
-      -display-service-and-input, -dtai
+      -display-service-and-input, -dservandinput
             Write MFSL service and input analysis activity to standard output.
       -display-options, -dopts
             Write MFSL options analysis activity to standard output.
@@ -309,7 +309,7 @@ jacquesmenu@macmini: ~/musicformats-git-dev/mfslfiles > mfsl -help-user
             Analyze the MFSL script, but don't launch the service actually.
             This is useful to check the options collected by the MFSL interpreter,
             and what command(s) would be launched.
-            This option implies the '-display-service-and-input, -ttai' option.
+            This option implies the '-display-service-and-input, -dservandinput' option.
 \end{lstlisting}
 
 The second group, diplayed by \optionBoth{help-maintainer}{hm}, if for the curious and the maintainers of \mf:

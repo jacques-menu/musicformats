@@ -249,7 +249,7 @@ S_msrDynamic msrDynamic::createDynamicFromString (
 //       "\", dynamicsMeasureNumber: '" << dynamicsMeasureNumber << JMI v0.9.67
       "', line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -285,7 +285,7 @@ void msrDynamic::acceptIn (basevisitor* v)
     ss <<
       "% ==> msrDynamic::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -303,7 +303,7 @@ void msrDynamic::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching msrDynamic::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -321,7 +321,7 @@ void msrDynamic::acceptOut (basevisitor* v)
     ss <<
       "% ==> msrDynamic::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -339,7 +339,7 @@ void msrDynamic::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching msrDynamic::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -413,7 +413,7 @@ void msrOtherDynamic::acceptIn (basevisitor* v)
     ss <<
       "% ==> msrOtherDynamic::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -431,7 +431,7 @@ void msrOtherDynamic::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching msrOtherDynamic::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -449,7 +449,7 @@ void msrOtherDynamic::acceptOut (basevisitor* v)
     ss <<
       "% ==> msrOtherDynamic::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -467,7 +467,7 @@ void msrOtherDynamic::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching msrOtherDynamic::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -569,7 +569,7 @@ void msrCrescDecresc::acceptIn (basevisitor* v)
     ss <<
       "% ==> msrCrescDecresc::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -587,7 +587,7 @@ void msrCrescDecresc::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching msrCrescDecresc::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -605,7 +605,7 @@ void msrCrescDecresc::acceptOut (basevisitor* v)
     ss <<
       "% ==> msrCrescDecresc::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -623,7 +623,7 @@ void msrCrescDecresc::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching msrCrescDecresc::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -755,7 +755,7 @@ void msrWedge::acceptIn (basevisitor* v)
     ss <<
       "% ==> msrWedge::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -773,7 +773,7 @@ void msrWedge::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching msrWedge::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -791,7 +791,7 @@ void msrWedge::acceptOut (basevisitor* v)
     ss <<
       "% ==> msrWedge::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -809,7 +809,7 @@ void msrWedge::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching msrWedge::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }

@@ -11,7 +11,7 @@
 
 #include <regex>
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "visitor.h"
 
@@ -354,7 +354,7 @@ void msrNote::initializeNote ()
 
     --gIndenter;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -412,7 +412,7 @@ void msrNote::setNoteUpLinkToMeasure (
 
     --gIndenter;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -563,7 +563,7 @@ S_msrVoice msrNote::fetchNoteUpLinkToVoice () const
       "--> fetchNoteUpLinkToVoice() for note: " <<
       asMinimalString ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -703,7 +703,7 @@ void msrNote::setNoteKind (msrNoteKind noteKind)
       " to " <<
       noteKind;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -733,7 +733,7 @@ S_msrNote msrNote::createNoteNewbornClone (
       containingPart->
         getPartCombinedName ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -943,7 +943,7 @@ S_msrNote msrNote::createNoteDeepClone (
         */
       std::endl;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1385,10 +1385,6 @@ S_msrNote msrNote::createNoteDeepClone (
     fVoicePosition =
       fVoicePosition;
 
-  deepClone->
-    fNoteOccupiesAFullMeasure =
-      fNoteOccupiesAFullMeasure;
-
   // note redundant information (for speed)
   // ------------------------------------------------------
 
@@ -1487,7 +1483,7 @@ S_msrNote msrNote::createRestNote (
       obj->asShortString () <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1543,7 +1539,7 @@ S_msrNote msrNote::createSkipNote (
       obj->asString () <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1599,7 +1595,7 @@ S_msrNote msrNote::createGraceSkipNote (
       obj->asString () <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1657,7 +1653,7 @@ S_msrNote msrNote::createRestNoteWithOctave (
       obj->asShortString () <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1715,7 +1711,7 @@ S_msrNote msrNote::createSkipNoteWithOctave (
       obj->asShortString () <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1774,7 +1770,7 @@ S_msrNote msrNote::createRegularNote (
       obj->asShortString () <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1804,7 +1800,7 @@ S_msrNote msrNote::createRestFromString (
       restMeasureNumber <<
       "', line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1828,7 +1824,7 @@ S_msrNote msrNote::createRestFromString (
       "regularExpression: " <<
       regularExpression;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1900,7 +1896,7 @@ S_msrNote msrNote::createRestFromString (
       "dotsNumber: " <<
       dotsNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1927,7 +1923,7 @@ S_msrNote msrNote::createRestFromString (
       "notesNotesDurationKindFromMslpString: " <<
       notesNotesDurationKindFromMslpString;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1965,7 +1961,7 @@ S_msrNote msrNote::createSkipFromString (
       skipMeasureNumber <<
       "', line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1989,7 +1985,7 @@ S_msrNote msrNote::createSkipFromString (
       "regularExpression: " <<
       regularExpression;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2061,7 +2057,7 @@ S_msrNote msrNote::createSkipFromString (
       "dotsNumber: " <<
       dotsNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2088,7 +2084,7 @@ S_msrNote msrNote::createSkipFromString (
       "notesNotesDurationKindFromMslpString: " <<
       notesNotesDurationKindFromMslpString;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2127,7 +2123,7 @@ S_msrNote msrNote::createNoteFromString (
       noteMeasureNumber <<
       "', line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2156,7 +2152,7 @@ S_msrNote msrNote::createNoteFromString (
       "regularExpression: " <<
       regularExpression;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2240,7 +2236,7 @@ S_msrNote msrNote::createNoteFromString (
       "dotsNumber: " <<
       dotsNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2288,7 +2284,7 @@ S_msrNote msrNote::createNoteFromString (
       "notesNotesDurationKindFromMslpString: " <<
       notesNotesDurationKindFromMslpString;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2365,7 +2361,7 @@ S_msrNote msrNote::createNoteFromSemiTonesPitchAndOctave (
       semiTonesPitchAndOctave->asString () <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2404,7 +2400,7 @@ void msrNote::setMeasurePosition (
       context <<
       "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2442,7 +2438,7 @@ void msrNote::setNoteAttachedElementsMeasurePosition (
       "setNoteAttachedElementsMeasurePosition(), fNoteHarmoniesList.size (): " <<
       fNoteHarmoniesList.size ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2469,7 +2465,7 @@ void msrNote::setNoteAttachedElementsMeasurePosition (
       "fNoteFiguredBassesList.size (): " <<
       fNoteFiguredBassesList.size ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2575,7 +2571,7 @@ void msrNote::setNoteBelongsToAChord ()
       " to belong to a chord"
       ", line " << fInputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2622,7 +2618,7 @@ void msrNote::determineTupletMemberSoundingFromDisplayWholeNotes (
       actualNotes << '/' << normalNotes <<
       "', line " << fInputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2645,7 +2641,7 @@ void msrNote::determineTupletMemberSoundingFromDisplayWholeNotes (
       "The result is: '" <<
       asShortString ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2665,7 +2661,7 @@ void msrNote::appendBeamToNote (
       " to note " <<
       asString ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2696,7 +2692,7 @@ void msrNote::appendArticulationToNote (
       " to note " <<
       asString ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2718,7 +2714,7 @@ void msrNote::appendSpannerToNote (
       " to note " <<
       asString ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2764,7 +2760,7 @@ void msrNote::appendTechnicalToNote (
       asString () <<
       ", line " << fInputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2788,7 +2784,7 @@ void msrNote::appendTechnicalWithIntegerToNote (
       asString () <<
       ", line " << fInputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2813,7 +2809,7 @@ void msrNote::appendTechnicalWithFloatToNote (
       asString () <<
       ", line " << fInputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2838,7 +2834,7 @@ void msrNote::appendTechnicalWithStringToNote (
       asString () <<
       ", line " << fInputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2862,7 +2858,7 @@ void msrNote::appendOrnamentToNote (
       " to note " <<
       asString ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2912,7 +2908,7 @@ void msrNote::appendGlissandoToNote (
       " to note " <<
       asString ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2935,7 +2931,7 @@ void msrNote::appendSlideToNote (
       " to note " <<
       asString ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2959,7 +2955,7 @@ void msrNote::setNoteGraceNotesGroupBefore (
       asString () <<
       ", line " << graceNotesGroupBefore->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2988,7 +2984,7 @@ void msrNote::setNoteGraceNotesGroupAfter (
       asString () <<
       ", line " << graceNotesGroupAfter->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -3015,7 +3011,7 @@ void msrNote::setNoteAfterGraceNotesGroup (S_msrGraceNotesGroup afterGraceNotesG
       "' to note '" << asShortString () <<
       "', line " << afterGraceNotesGroup->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -3040,7 +3036,7 @@ void msrNote::setNoteSingleTremolo (
       asString () <<
       "', line " << trem->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -3064,7 +3060,7 @@ void msrNote::appendDynamicToNote (
       asString () <<
       "', line " << dynamic->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -3095,7 +3091,7 @@ void msrNote::appendSlurToNote (
       "Adding slur '" << slur <<
       "' to note '" << asString () << "'";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -3115,7 +3111,7 @@ void msrNote::appendLigatureToNote (
       "Appending ligature " << ligature << " to note " << asString () <<
        std::endl;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -3159,7 +3155,7 @@ void msrNote::appendLigatureToNote (
           asShortString () <<
           std::endl;
 
-        gWaeHandler->waeTraceWithLocationDetails (
+        gWaeHandler->waeTrace (
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -3189,7 +3185,7 @@ void msrNote::appendPedalToNote (
       "Appending pedal " << pedal << " to note " << asString () <<
        std::endl;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -3231,7 +3227,7 @@ void msrNote::appendPedalToNote (
           asShortString () <<
           std::endl;
 
-        gWaeHandler->waeTraceWithLocationDetails (
+        gWaeHandler->waeTrace (
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -3262,7 +3258,7 @@ void msrNote::appendSlashToNote (
       " to note " <<
       asShortString ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -3302,7 +3298,7 @@ void msrNote::appendDalSegnoToNote (
       " to note " <<
       asShortString ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -3407,7 +3403,7 @@ void msrNote::appendScordaturaToNote (
 //       "\"" <<
 //       std::endl;
 
-//       gWaeHandler->waeTraceWithLocationDetails (
+//       gWaeHandler->waeTrace (
 //         __FILE__, __LINE__,
 //         ss.str (),
 //   }
@@ -3436,7 +3432,7 @@ S_msrDynamic msrNote::removeFirstDynamics () // JMI
       "Removing first dynamic from note '" <<
       asShortString ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -3466,7 +3462,7 @@ S_msrWedge msrNote::removeFirstWedge () // JMI
       "Removing first wedge from note '" <<
       asShortString ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -3498,7 +3494,7 @@ void msrNote::appendSyllableToNote (
       " to note " <<
       asString ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -3521,7 +3517,7 @@ void msrNote::appendHarmonyToNote (
       asString () <<
       ", line " << fInputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -3557,7 +3553,7 @@ void msrNote::appendHarmonyToNote (
 //       ", line " << fInputLineNumber <<
 //       std::endl;
 //
-//       gWaeHandler->waeTraceWithLocationDetails (
+//       gWaeHandler->waeTrace (
 //         __FILE__, __LINE__,
 //         ss.str (),
 //   }
@@ -3587,7 +3583,7 @@ void msrNote::acceptIn (basevisitor* v)
     ss <<
       "% ==> msrNote::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -3605,7 +3601,7 @@ void msrNote::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching msrNote::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -3623,7 +3619,7 @@ void msrNote::acceptOut (basevisitor* v)
     ss <<
       "% ==> msrNote::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -3641,7 +3637,7 @@ void msrNote::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching msrNote::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -3679,7 +3675,7 @@ void msrNote::browseData (basevisitor* v)
           ss <<
             "% ==> visiting grace notes groups 'before' is inhibited";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -4103,7 +4099,7 @@ void msrNote::browseData (basevisitor* v)
           ss <<
             "% ==> visiting grace notes groups 'after' is inhibited";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -5609,17 +5605,17 @@ std::string msrNote::noteEssentialsAsSting () const
 
 void msrNote::print (std::ostream& os) const
 {
-// 	os << "======> msrNote::print()" << std::endl;
+// 	os << "======> msrNote::print ()" << std::endl;
 
   os <<
     "[Note " <<
     noteEssentialsAsSting () <<
-    ", line " << fInputLineNumber <<
+//     ", line " << fInputLineNumber <<
     std::endl;
 
   ++gIndenter;
 
-  const int fieldWidth = 44;
+  const int fieldWidth = 30;
 
   // print measure position and sounding whole notes
   os << std::left <<
@@ -5630,6 +5626,10 @@ void msrNote::print (std::ostream& os) const
     std::setw (fieldWidth) <<
     "fSoundingWholeNotes" << ": " <<
     fSoundingWholeNotes.asString () <<
+    std::endl <<
+    std::setw (fieldWidth) <<
+    "fNoteOccupiesAFullMeasure" << ": " <<
+    fNoteOccupiesAFullMeasure <<
     std::endl;
 
   // print position from beginning of voice
@@ -6841,7 +6841,7 @@ void msrNote::printFull (std::ostream& os) const
       fNoteUpLinkToMeasure
         ?
           fNoteUpLinkToMeasure->
-            getFullMeasureCurrentWholeNotesDuration ()
+            getFullMeasureWholeNotesDuration ()
         : msrWholeNotes (0, 1); // JMI v0.9.67
 
   os << std::left <<
@@ -6869,13 +6869,6 @@ void msrNote::printFull (std::ostream& os) const
     std::setw (fieldWidth) <<
     "fNoteBelongsToATuplet" << ": " <<
     fNoteBelongsToATuplet <<
-    std::endl;
-
-  // note occupied a full measure?
-  os << std::left <<
-    std::setw (fieldWidth) <<
-    "fNoteOccupiesAFullMeasure" << ": " <<
-    fNoteOccupiesAFullMeasure <<
     std::endl;
 
   // multiple rest member?

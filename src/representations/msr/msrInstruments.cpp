@@ -17,7 +17,7 @@
 
 #include "msrWae.h"
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "mfAssert.h"
 #include "mfServices.h"
@@ -113,7 +113,7 @@ void msrStringTuning::acceptIn (basevisitor* v)
     ss <<
       "% ==> msrStringTuning::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -131,7 +131,7 @@ void msrStringTuning::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching msrStringTuning::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -149,7 +149,7 @@ void msrStringTuning::acceptOut (basevisitor* v)
     ss <<
       "% ==> msrStringTuning::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -167,7 +167,7 @@ void msrStringTuning::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching msrStringTuning::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -297,7 +297,7 @@ void msrScordatura::acceptIn (basevisitor* v)
     ss <<
       "% ==> msrScordatura::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -315,7 +315,7 @@ void msrScordatura::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching msrScordatura::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -333,7 +333,7 @@ void msrScordatura::acceptOut (basevisitor* v)
     ss <<
       "% ==> msrScordatura::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -351,7 +351,7 @@ void msrScordatura::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching msrScordatura::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -496,7 +496,7 @@ void msrAccordionRegistration::acceptIn (basevisitor* v)
     ss <<
       "% ==> msrAccordionRegistration::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -514,7 +514,7 @@ void msrAccordionRegistration::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching msrAccordionRegistration::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -532,7 +532,7 @@ void msrAccordionRegistration::acceptOut (basevisitor* v)
     ss <<
       "% ==> msrAccordionRegistration::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -550,7 +550,7 @@ void msrAccordionRegistration::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching msrAccordionRegistration::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -639,7 +639,7 @@ S_msrHarpPedalsTuning msrHarpPedalsTuning::createHarpPedalsTuningNewbornClone ()
       "Creating a newborn clone of a " <<
       asString ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -661,7 +661,7 @@ S_msrHarpPedalsTuning msrHarpPedalsTuning::createHarpPedalsTuningDeepClone ()
       "Creating a newborn clone of a " <<
       asString ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -743,7 +743,7 @@ void msrHarpPedalsTuning::acceptIn (basevisitor* v)
     ss <<
       "% ==> msrHarpPedalsTuning::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -761,7 +761,7 @@ void msrHarpPedalsTuning::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching msrHarpPedalsTuning::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -779,7 +779,7 @@ void msrHarpPedalsTuning::acceptOut (basevisitor* v)
     ss <<
       "% ==> msrHarpPedalsTuning::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -797,7 +797,7 @@ void msrHarpPedalsTuning::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching msrHarpPedalsTuning::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -991,7 +991,7 @@ void msrPedal::acceptIn (basevisitor* v)
     ss <<
       "% ==> msrPedal::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1009,7 +1009,7 @@ void msrPedal::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching msrPedal::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -1027,7 +1027,7 @@ void msrPedal::acceptOut (basevisitor* v)
     ss <<
       "% ==> msrPedal::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1045,7 +1045,7 @@ void msrPedal::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching msrPedal::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -1230,7 +1230,7 @@ void msrDamp::acceptIn (basevisitor* v)
     ss <<
       "% ==> msrDamp::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1248,7 +1248,7 @@ void msrDamp::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching msrDamp::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -1266,7 +1266,7 @@ void msrDamp::acceptOut (basevisitor* v)
     ss <<
       "% ==> msrDamp::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1284,7 +1284,7 @@ void msrDamp::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching msrDamp::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -1387,7 +1387,7 @@ void msrDampAll::acceptIn (basevisitor* v)
     ss <<
       "% ==> msrDampAll::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1405,7 +1405,7 @@ void msrDampAll::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching msrDampAll::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -1423,7 +1423,7 @@ void msrDampAll::acceptOut (basevisitor* v)
     ss <<
       "% ==> msrDampAll::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1441,7 +1441,7 @@ void msrDampAll::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching msrDampAll::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }

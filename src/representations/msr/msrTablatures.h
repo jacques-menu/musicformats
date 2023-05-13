@@ -273,7 +273,7 @@ class EXP msrFrame : public msrElement
 
     // a barre start remains pending
     // until the matching stop is appended to the frame
-    std::stack<S_msrFrameNote> fPendingBarreStartFrameNotes;
+    std::list<S_msrFrameNote> fPendingBarreStartFrameNotes;
 
     // optimizing computation
     Bool                  fFrameContainsFingerings;

@@ -11,7 +11,7 @@
 
 #include <fstream>      // std::ofstream, std::ofstream::open(), std::ofstream::close()
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "mfAssert.h"
 #include "mfTiming.h"
@@ -73,7 +73,7 @@ void translateLpsrToLilypond (
       std::endl <<
       separator;
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -135,7 +135,7 @@ EXP void translateLpsrToLilypondWithHandler (
       "\"" <<
       std::endl;
 
-//     gWaeHandler->waeTraceWithoutLocationDetails ( JMI v0.9.67
+//     gWaeHandler->waeTraceWithoutInputLocation ( JMI v0.9.67
 //       __FILE__, __LINE__,
 //       ss.str ());
   }
@@ -148,7 +148,7 @@ EXP void translateLpsrToLilypondWithHandler (
         "xmlFile2lilypond() output goes to standard output" <<
         std::endl;
 
-//     gWaeHandler->waeTraceWithoutLocationDetails ( JMI v0.9.67
+//     gWaeHandler->waeTraceWithoutInputLocation ( JMI v0.9.67
 //       __FILE__, __LINE__,
 //       ss.str ());
     }
@@ -190,7 +190,7 @@ EXP void translateLpsrToLilypondWithHandler (
         "\"" <<
         std::endl;
 
-//     gWaeHandler->waeTraceWithoutLocationDetails ( JMI v0.9.67
+//     gWaeHandler->waeTraceWithoutInputLocation ( JMI v0.9.67
 //       __FILE__, __LINE__,
 //       ss.str ());
     }
@@ -199,7 +199,7 @@ EXP void translateLpsrToLilypondWithHandler (
     // open output file
 #ifdef MF_TRACE_IS_ENABLED
     if (gEarlyOptions.getEarlyTracePasses ()) {
-      gWaeHandler->waeTraceToStream (
+      gWaeHandler->waeTraceToStreamWithoutInputLocation (
         err,
         __FILE__, __LINE__,
         gLanguage->openingLilypondFileForWriting (outputFileName));
@@ -262,7 +262,7 @@ EXP void translateLpsrToLilypondWithHandler (
         std::endl <<
         gLanguage->closingLilypondFile (outputFileName);
 
-      gWaeHandler->waeTraceWithoutLocationDetails (
+      gWaeHandler->waeTraceWithoutInputLocation (
         __FILE__, __LINE__,
         ss.str ());
     }

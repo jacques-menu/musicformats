@@ -69,7 +69,7 @@ void msrSingleTremolo::acceptIn (basevisitor* v)
     ss <<
       "% ==> msrSingleTremolo::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -87,7 +87,7 @@ void msrSingleTremolo::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching msrSingleTremolo::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -105,7 +105,7 @@ void msrSingleTremolo::acceptOut (basevisitor* v)
     ss <<
       "% ==> msrSingleTremolo::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -123,7 +123,7 @@ void msrSingleTremolo::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching msrSingleTremolo::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }

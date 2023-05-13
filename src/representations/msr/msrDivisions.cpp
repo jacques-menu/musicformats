@@ -58,7 +58,7 @@ S_msrDivisions msrDivisions::createDivisionsNewbornClone ()
       asString () <<
       "'";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -103,7 +103,7 @@ void msrDivisions::initializeDivisions ()
       ", divisionsPerQuarterNote: " << fDivisionsPerQuarterNote <<
       ", line " << fInputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -288,7 +288,7 @@ std::string msrDivisions::divisionsAsMsrString (
       gTab << std::setw (fieldWidth) <<
       "divisions" << ": " << divisions;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -490,7 +490,7 @@ std::string msrDivisions::divisionsAsMsrString (
       "<-- divisionsAsMsrString (): returns " << result <<
       std::endl << std::endl;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -547,7 +547,7 @@ void msrDivisions::acceptIn (basevisitor* v)
     ss <<
       "% ==> msrDivisions::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -565,7 +565,7 @@ void msrDivisions::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching msrDivisions::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -583,7 +583,7 @@ void msrDivisions::acceptOut (basevisitor* v)
     ss <<
       "% ==> msrDivisions::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -601,7 +601,7 @@ void msrDivisions::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching msrDivisions::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }

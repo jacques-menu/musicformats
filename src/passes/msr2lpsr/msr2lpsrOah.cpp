@@ -15,7 +15,7 @@
 
 #include "visitor.h"
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "mfConstants.h"
 #include "mfStringsHandling.h"
@@ -87,7 +87,7 @@ void msr2lpsrScoreOutputKindAtom::applyAtomWithValue (
     ss <<
       "==> oahAtom is of type 'msr2lpsrScoreOutputKindAtom'";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -103,7 +103,7 @@ void msr2lpsrScoreOutputKindAtom::applyAtomWithValue (
     ss <<
       "==> oahAtom is of type 'msr2lpsrScoreOutputKindAtom'";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -153,7 +153,7 @@ void msr2lpsrScoreOutputKindAtom::acceptIn (basevisitor* v)
     ss <<
       ".\\\" ==> msr2lpsrScoreOutputKindAtom::acceptIn ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -171,7 +171,7 @@ void msr2lpsrScoreOutputKindAtom::acceptIn (basevisitor* v)
           ss <<
             ".\\\" ==> Launching msr2lpsrScoreOutputKindAtom::visitStart ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -189,7 +189,7 @@ void msr2lpsrScoreOutputKindAtom::acceptOut (basevisitor* v)
     ss <<
       ".\\\" ==> msr2lpsrScoreOutputKindAtom::acceptOut ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -207,7 +207,7 @@ void msr2lpsrScoreOutputKindAtom::acceptOut (basevisitor* v)
           ss <<
             ".\\\" ==> Launching msr2lpsrScoreOutputKindAtom::visitEnd ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -225,7 +225,7 @@ void msr2lpsrScoreOutputKindAtom::browseData (basevisitor* v)
     ss <<
       ".\\\" ==> msr2lpsrScoreOutputKindAtom::browseData ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -491,7 +491,7 @@ void msr2lpsrOahGroup::acceptIn (basevisitor* v)
     ss <<
       ".\\\" ==> msr2lpsrOahGroup::acceptIn ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -509,7 +509,7 @@ void msr2lpsrOahGroup::acceptIn (basevisitor* v)
           ss <<
             ".\\\" ==> Launching msr2lpsrOahGroup::visitStart ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -527,7 +527,7 @@ void msr2lpsrOahGroup::acceptOut (basevisitor* v)
     ss <<
       ".\\\" ==> msr2lpsrOahGroup::acceptOut ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -545,7 +545,7 @@ void msr2lpsrOahGroup::acceptOut (basevisitor* v)
           ss <<
             ".\\\" ==> Launching msr2lpsrOahGroup::visitEnd ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -563,7 +563,7 @@ void msr2lpsrOahGroup::browseData (basevisitor* v)
     ss <<
       ".\\\" ==> msr2lpsrOahGroup::browseData ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -637,7 +637,7 @@ S_msr2lpsrOahGroup createGlobalMsr2lpsrOahGroup ()
     ss <<
       "Creating global msr2lpsr OAH group";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }

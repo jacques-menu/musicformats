@@ -15,7 +15,7 @@
 
 #include "visitor.h"
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "mfAssert.h"
 
@@ -141,7 +141,7 @@ void msrSegno::acceptIn (basevisitor* v)
     ss <<
       "% ==> msrSegno::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -159,7 +159,7 @@ void msrSegno::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching msrSegno::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -177,7 +177,7 @@ void msrSegno::acceptOut (basevisitor* v)
     ss <<
       "% ==> msrSegno::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -195,7 +195,7 @@ void msrSegno::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching msrSegno::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -328,7 +328,7 @@ void msrDalSegno::acceptIn (basevisitor* v)
     ss <<
       "% ==> msrDalSegno::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -346,7 +346,7 @@ void msrDalSegno::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching msrDalSegno::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -364,7 +364,7 @@ void msrDalSegno::acceptOut (basevisitor* v)
     ss <<
       "% ==> msrDalSegno::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -382,7 +382,7 @@ void msrDalSegno::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching msrDalSegno::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }

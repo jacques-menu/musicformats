@@ -16,7 +16,7 @@
 
 #include "bsrEnumTypes.h"
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "waeOah.h"
 

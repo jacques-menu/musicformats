@@ -34,7 +34,7 @@ S_mfcRepresentationComponent createLpsrRepresentationComponent ()
       ss <<
         "Creating the LPSR component";
 
-      gWaeHandler->waeTraceWithLocationDetails (
+      gWaeHandler->waeTrace (
         __FILE__, __LINE__,
         ss.str ());
     }
